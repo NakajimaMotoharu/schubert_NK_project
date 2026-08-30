@@ -68,9 +68,9 @@ program/characterization/
 | CHR-M05 | Music階層 | Category `曲`→`BGM`、section順、129件、非`曲`path/MB表示 | DOM/manifest |
 | CHR-M06 | Music pair | 正規化key、完全一致、距離2以下、順序、Main/Inst欠落placeholder | 正規化pair一覧 |
 | CHR-M07 | Music HTTP | Inlineの実MIME、download octet-stream、UTF-8名、Range/416 | HTTP header/hash |
-| CHR-L01 | Log | Current filter、日時降順、100件/page、detail項目、0件 | 正規化結果/DOM |
+| CHR-L01 | Log | Current filter、日時降順、100件/page、detail項目、0件、Web REQUESTのHTTP項目がWLGEVT01再送後も欠落・重複0 | 正規化結果/DOM/DB |
 | CHR-E01 | Error | 401/403/404/409/416/503の文言、秘密/path/exception非表示 | HTTP/DOM |
-| CHR-N01 | 新規機能 | USER/ADMIN menu差、User管理、質問/空回答/通知/取消/回答削除 | NK受入結果 |
+| CHR-N01 | 新規機能 | USER/ADMIN menu差、User管理、質問/空回答/通知/取消/回答削除、更新token同一payload replay・異payload拒否 | NK受入結果 |
 | CHR-O01 | Restart/cache | Session継続、no-store、Caddy/Web/MQ/API依存障害 | HTTP/運用log |
 
 ## 5. 正式差異一覧
