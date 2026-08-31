@@ -5,7 +5,7 @@
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
 hardening、timeout/readinessと検証方法を定める。
 
-- 状態: `確認待ち`。Artemis再配送はQA-041/UIC-001、容量はQA-042/UIC-002承認済み。DB backup role分離はQA-043/UIC-003待ち。その他は確定。
+- 状態: `確定`。Artemis再配送・容量とDB backup role分離はQA-041～043/UIC-001～003承認済み
 - 上位設計: UI 211～212、231、251～253
 - 関連RD: SYS-002～SYS-004、SYS-012～SYS-014、OPS-001～OPS-012、MON-001～MON-013、
   PER-001～PER-010、AVL-001～AVL-010
@@ -201,7 +201,7 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 
 ### 6.2 Roleごとのtimeout
 
-`schubert_backup`行と後続hba entryはQA-043/UIC-003承認時の候補であり、回答前にproductionへrenderしない。
+`schubert_backup`行と後続hba entryはQA-043/UIC-003承認済みのrelease値である。
 
 | Role | `statement_timeout` | `lock_timeout` | `idle_in_transaction_session_timeout` |
 |---|---:|---:|---:|
@@ -309,7 +309,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 - PostgreSQLの`trust`/MD5認証、remote hba、application superuser、Webへの業務schema grant。
 - Artemis redeliveryをQA-041/UIC-001承認値の1秒、5秒、25秒以外でrelease確定すること。
 - UIの用途別合計保存上限を`max-size-bytes`へ直接転記すること、全Address `BLOCK`へ戻すこと、QA-042承認値を無断変更すること。
-- QA-043未解決のまま`schubert_batch`へdump対象tableのSELECTを与える、または専用backup role案をrelease確定すること。
+- `schubert_batch`へdump対象tableのSELECTを与えること、`schubert_backup`へDML/DDL/SET ROLE/復号keyを与えること。
 
 ## 13. 更新履歴
 
@@ -323,3 +323,4 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 | 2026-08-31 | 横断監査でJVMのheap/direct/metaspace合計がMemoryMaxへ達していた値を是正し、process別native headroomを確保。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、Artemis再配送設定と実効delayを1秒、5秒、25秒へ確定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Artemisのmemory high-water、disk paging、page/disk full設定をrelease値へ確定。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、`schubert_backup`のtimeout/hbaとbatchとの権限分離をrelease値へ確定。 |

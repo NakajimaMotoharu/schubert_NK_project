@@ -125,7 +125,7 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | Credential ID | Consumer | 形式・rotation |
 |---|---|---|
 | `db-api`,`db-web`,`db-batch`,`db-migration` | 対応process | PostgreSQL SCRAM password、service別。`db-batch`はdumpへ使用しない |
-| `db-backup` | backup unit | QA-043承認時の`schubert_backup`専用SCRAM password。`schubert-backup` OS userだけへ配布 |
+| `db-backup` | backup unit | QA-043/UIC-003承認済みの`schubert_backup`専用SCRAM password。`schubert-backup` OS userだけへ配布 |
 | `mq-web`,`mq-api`,`mq-maintenance`,`mq-ops` | 対応process | Artemis credential、Address権限別 |
 | `web-session-aes-current/previous` | Web | AES-256-GCM、key version付き |
 | `web-revoke-aes-current/previous` | Web | Pending context revoke暗号、session keyと分離 |
@@ -311,3 +311,4 @@ security境界違反、backup/recovery不成立、公開TLS不能、停止枠内
 | 2026-08-31 | 横断監査でmigration DB role名をUI 212の`schubert_migration`に統一。 |
 | 2026-08-31 | 横断監査でWeb DB poolをUI 212の上限2へ修正し、Web revoke/API context/API InboxのAES keyを用途別に分離。 |
 | 2026-08-31 | DB dump credentialをbatch保守用から分離する`db-backup`候補をQA-043/UIC-003回答待ちで追加。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、`db-backup`を専用backup unitだけへ配布するcredentialとして確定。 |

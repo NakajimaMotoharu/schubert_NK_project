@@ -5,7 +5,7 @@
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
-- 状態: `確認待ち`。Broker再配送はQA-041/UIC-001、容量はQA-042/UIC-002承認済み。DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
+- 状態: `確定`。Broker再配送・容量とDB backup roleの権限oracleはQA-041～043/UIC-001～003承認済み
 - 上位設計: UI 213、221～254、261、264
 - 関連RD: TST-001～TST-005、TST-101～TST-103、T-001～T-004、PER-001～PER-010、AVL-003～AVL-010
 - 関連SS: 311～353、[355_Characterization Test実行準備・PG開始gate](<355_Characterization Test実行準備・PG開始gate.md>)
@@ -138,7 +138,8 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
 
 - Morning依存順、stop timeout、systemdの10分5回rate limit、Caddy 55160だけpublic、loopback portの非公開。
 - Backup復元を隔離DB→新instanceの順で実行し、schema/role/constraint/count/Queue整合、RPO/RTO 24時間を測定。
-- QA-043回答後の専用backup roleで3 schemaをdump/restoreでき、batch roleではdump/任意SELECT不可、backup roleではDML/SET ROLE/復号key取得不可であることを検証する。回答前のoracleは`PENDING_QA_043`。
+- QA-043/UIC-003承認済みの専用backup roleで3 schemaをdump/restoreでき、batch roleではdump/任意SELECT不可、
+  backup roleではDML/SET ROLE/復号key取得不可であることを一意なoracleとして検証する。
 - Asset master 59,627 file/19,240,707,190 byte、Scenario 262/99,661、audio 37,256、link 35,201、video 20、music 129をhash/count検証。
 - USERからADMIN/他人、直接Queue/DB/file/port、credentialのargv/env/log、CSP/CSRF/session改ざんを攻撃testする。
 - DEBUG→STANDARD切替で詳細metric componentを停止しても、systemd/journal/DB/Artemis/disk/最小healthが継続する。
@@ -183,8 +184,8 @@ PT開始は対象class/migration/configとreview、関連SS/test case、fixture�
 IT開始はPT必須case合格、同一release artifact、全componentのconfig/credential、障害注入・rollback手順を条件とする。
 
 PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、trace/coverage 100%、証跡のrelease commitひも付け、
-機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-043未解決中はbackup権限caseを
-`skipped`合格にせず、IT完了前に承認oracleへ固定する。Address容量/paging/full-policyはQA-042承認oracleを必須実行する。
+機密漏えい0、resource/restore実測値の設定manifest反映とする。Backup権限caseはQA-043承認oracle、
+Address容量/paging/full-policyはQA-042承認oracleを必須実行し、`skipped`を合格にしない。
 
 ## 9. SS設計判断
 
@@ -210,3 +211,4 @@ PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、t
 | 2026-08-31 | QA-043/UIC-003の専用backup role、batch/backup相互権限、dump/restoreのpending oracleを追加。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、再配送時系列oracleを1秒、5秒、25秒へ確定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Address別memory/page上限、page-full FAIL、disk-full BLOCKの容量oracleを確定。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、backup/batch role相互権限、3 schema dump/restore、復号key非配布oracleを確定。 |

@@ -10,7 +10,7 @@ Web/Caddy/API/Artemis/PostgreSQL/file/backup/batch/config/credentialの障害に
 - 関連SS: [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
   [341_朝batch・backup・削除・再実行設計](../340_batch・基盤/341_朝batch・backup・削除・再実行設計.md)、
   [351_Log・metric・alert・error code設計](<351_Log・metric・alert・error code設計.md>)
-- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041～QA-043、UIC-001～UIC-003。Backup role境界だけ確認中
+- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041～QA-043、UIC-001～UIC-003。全件承認反映済み
 
 自動復旧はprocess restart/outbox retry/JMS redeliveryの設計済み範囲だけ。DLQ再投入、DB restore、
 credential差替え、不明file削除、強制終了、public再開は運用者が証跡と対象を確認して行う。
@@ -124,7 +124,8 @@ DLQ/PENDING/ERROR/PROCESSING、最新/既存7世代backup、asset、DB/WAL/journ
 
 - Backup失敗はbusiness/technical data cleanupをskip、transfer cleanupとapplication起動は続行。失敗を無視成功化しない。
 - Root/permission/capacity/DB/pg_dump/list/hash/config encryption/atomic renameのerror codeで分類。既存7世代を保護。
-- `permission denied`は実効DB user、credential ID、dump対象schema/table grantを値非表示で確認する。QA-043回答前にbatch roleへSELECTを追加して復旧しない。
+- `permission denied`は実効DB user、credential ID、dump対象schema/table grantを値非表示で確認する。`schubert_batch`へSELECTを追加せず、
+  QA-043/UIC-003承認済みの`schubert_backup` grant/credential/unitを修復する。
 - 原因撤去後、新directoryで`backup`stepを再実行。同日成功をmanifest/DBで確認してから
   `morning-run --resume <runId>`で元cutoffのcleanupを再開。
 - Transfer root safety failureはapplicationを起動しない。Individual cleanup warningは容量と対象typeを調査後、同runで再実行。
@@ -205,3 +206,4 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 | 2026-08-31 | QA-043/UIC-003のbackup role/grant障害を値非表示で切り分け、batch roleへの緊急SELECT追加を禁止。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、Broker再配送の正常時系列を1秒、5秒、25秒へ固定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、memory high-water、paging、page-full FAIL、disk-full BLOCKの切り分けを確定。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、backup専用roleのgrant/credential障害復旧とbatch roleへのSELECT追加禁止を確定。 |

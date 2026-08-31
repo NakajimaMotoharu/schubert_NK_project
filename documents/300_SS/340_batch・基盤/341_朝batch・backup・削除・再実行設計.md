@@ -85,9 +85,9 @@ Artemis以降を開始しない。
 1. Backup rootをabsolute・real pathで検証し、`/`、home、asset/transfer/log/Artemis root自体または配下を拒否。
 2. `yyyyMMdd-HHmmss-<runId>.part`をmode 0700でCREATE_NEW。同一mountの確定先とする。
 3. Systemd credentialで渡された`.pgpass`を`PGPASSFILE`へ指定し、passwordをcommand line/environment実値へ出さない。
-4. QA-043承認時は`schubert-backup` OS userの固定unitから、`schubert_backup`専用credentialで
+4. QA-043/UIC-003承認済みの`schubert-backup` OS user固定unitから、`schubert_backup`専用credentialで
    `pg_dump --format=custom --no-owner --no-privileges --schema=schubert --schema=schubert_web_session --schema=schubert_meta --file=<part>/schubert_nk.dump schubert_nk`
-   を実行する。`schubert_batch` credentialでdumpしない。QA-043回答前はrelease command/roleを確定しない。
+   を実行する。`schubert_batch` credentialでdumpしない。
 5. Exit 0、file >0 byte、`pg_restore --list`成功、dump SHA-256を検証。
 6. DB/app/schema/OS/JDK/PG/Artemis version、開始/終了、file size/hashを`MANIFEST.json`へ記録。Secretなし。
 
@@ -235,3 +235,4 @@ Package名/versionと非秘密config hashは記録可。
 | 2026-08-31 | 計画停止、backup、cleanup、Expiry、readiness、resume・exit codeを詳細化。 |
 | 2026-08-31 | 横断監査でbatch cleanupを331のallowlist済みmaintenance function経由に固定し、文言誤りを修正。 |
 | 2026-08-31 | `pg_dump`用SELECTとbatch保守権限を分離する`schubert_backup`案をQA-043/UIC-003として保留。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、専用backup OS/DB role・credential・固定dump commandを確定。 |

@@ -144,7 +144,7 @@ HTTP content-type/size/method
 ## 10. DB・SQL・file
 
 - DB roleは331、Webはtechnical schemaだけ、application superuser/DDLなし。Loopback SCRAM、prepared/named parameter。
-  QA-043承認時はdump全SELECTを`schubert_backup`へ分離し、`schubert_batch`へ業務/technical table SELECTを与えない。
+  QA-043/UIC-003承認に基づきdump全SELECTを`schubert_backup`へ分離し、`schubert_batch`へ業務/technical table SELECTを与えない。
 - Dynamic table/column/orderはenum allowlistから固定fragment。任意入力のschema/table/SQL挿入、native query logを禁止。
 - Owner predicateはSQL内、論理削除predicateはRepository共通・負test必須。Constraint名→domain errorはallowlist。
 - Fileはlogical ID→API descriptor→Web secure open。`SecureDirectoryStream`/NOFOLLOW、root配下通常file、size/hash/MIME、権限を毎回検証。
@@ -233,3 +233,4 @@ Critical DB audit INSERT失敗は対応業務transactionをrollback。Web REQUES
 | 2026-08-31 | 横断監査でPasswordの取扱いをUI 222/225/234/236に合わせ、非trim・NFC後の文字/byte・末尾space検査へ統一。 |
 | 2026-08-31 | Password hashを最大256 byte全長に対応する`{pbkdf2-v1}`へ是正し、世代IDとparameterを固定。 |
 | 2026-08-31 | Dump用DB role/credential分離案と権限負testをQA-043/UIC-003回答待ちで追加。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用role/credentialとbatch roleの相互権限拒否を確定。 |

@@ -8,8 +8,7 @@
 - 上位設計: UI 261、263～265
 - 関連RD: SYS-011、SCP-004～SCP-005、TST-001～TST-005、TST-101～TST-103、SCM-001～SCM-006、T-001～T-005
 - 関連SS: 301、311～355、[361_RD・UI・SSトレーサビリティ](361_RD・UI・SSトレーサビリティ.md)
-- 現在のblocker: QA-043/UIC-003の`pg_dump`用DB role分離だけ。QA-041/UIC-001のArtemis再配送と
-  QA-042/UIC-002のAddress容量・paging/full policyは解決済み。RD変更/RDFはなし
+- QA/UIC blocker: なし。QA-041～043/UIC-001～003は承認・正本反映済み、RD変更/RDFはなし
 - 工程実施gate: 355のCHR-G01～G06は未実施。最初のNK production codeより前にtest toolingとして実施する
 
 ## 2. 無断変更禁止のbaseline
@@ -33,8 +32,8 @@
 
 | Gate | 現在状態 | 開始条件 |
 |---|---|---|
-| SS正本 | 301～364作成・監査済、364の正式完了判定は保留 | QA/UIC回答反映後に363を再監査し、364を完了へ更新 |
-| QA/UIC | QA-043/UIC-003回答待ち。QA-041～042/UIC-001～002は反映済み | 残る承認内容をUI 212/251、331/341～343/352～354、台帳へ一貫反映 |
+| SS正本 | 301～364作成・横断監査済、364の正式完了判定は完了 | 確定正本をbaselineとして維持 |
+| QA/UIC | QA-001～043解決、UIC-001～003完了 | 承認済み設計とtest oracleを維持 |
 | RDF | 0件 | 未処理RDF 0を維持 |
 | Characterization | 設計済、artifact/baseline未実施 | 355 CHR-G01～G06を全部PASS、baseline commitをproductionと分離 |
 | Git | Local `main`が正、meaningful commitで管理 | Clean worktree、gate commit特定、remoteはなくても開始可 |
@@ -45,7 +44,7 @@ NK production class、DDL、Flyway migration、production Caddy/systemd/Artemis�
 
 ### 3.2 Production PGの開始判定
 
-`SS監査合格`、`QA-043/UIC-003解決`、`CHR-G01～G06合格commit`、`未処理RDF/UIC/重大QA 0`を全て満たした後、
+`SS監査合格`、`QA-001～043解決・UIC-001～003完了`、`CHR-G01～G06合格commit`、`未処理RDF/UIC/重大QA 0`を全て満たした後、
 開始判定者・日時・baseline/gate commit・対象release branchを記録する。SCM-006/T-005のGitHub remote作成待ちは
 local Git/review/backupが有効なら開始blockerではない。
 
@@ -130,7 +129,7 @@ PT exit達成、同一release artifact、実Java 25/Caddy/Artemis/PostgreSQL 18/
 6. Path/Range/media 20 stream、Scenario 48MB、transfer/Queue/disk/memory容量境界。QA-042/UIC-002承認済みのAddress memory/page/page-full/disk-fullを実効configで検証。
 7. 同時10名、p95 2.5秒、MQ待ち2.0秒、16GB/256GB budget、RPO/RTO 24時間。
 8. USER/ADMIN/owner、CSRF/CSP/session/key、MQ ACL/DB grant/public port、secret/canary。
-9. QA-043承認後の専用backup roleで3 schemaをdump/restoreし、batch/backup roleの相互権限とkey非配布を負testする。
+9. QA-043承認済みの専用backup roleで3 schemaをdump/restoreし、batch/backup roleの相互権限とkey非配布を負testする。
 
 ### 7.3 Exit
 
@@ -185,13 +184,13 @@ code bugへRDF/UICを乱用しない。Oracle/baselineだけを先に変更し�
 - Question/answer/notificationのcascade delete、backup失敗時cleanup、DLQ/Expiry/journal/WAL/file rootの直接削除。
 - Security testのための認可/CSRF/暗号/redaction無効化、default/admin backdoor、secretのGit/env/argv/log/report格納。
 - Characterization baseline/DIFをNK結果へ追従、failed/flaky/skippedを合格、current source/masterを書換えてbaseline取得。
-- QA-043未解決内容のrelease確定、QA-041～042承認値からの無断変更、上位不整合を914だけで処理、またはSS自己修正を過去に遡って914へ登録。
+- QA-041～043承認値からの無断変更、上位不整合を914だけで処理、またはSS自己修正を過去に遡って914へ登録。
 
 ## 12. 開始判定checklist
 
-- [ ] 363横断監査の必須項目が合格し、364のSS完了判定が成立。
-- [ ] QA-043/UIC-003を解決し、911/913、UI 212/251、331/341～343/352～354/361/363/364を一貫更新。
-- [ ] 未解決の重大QA、RDF、UICが0。
+- [x] 363横断監査の必須項目が合格し、364のSS完了判定が成立。
+- [x] QA-043/UIC-003を解決し、911/913、UI 212/251、331/341～343/352～354/361/363/364を一貫更新。
+- [x] 未解決の重大QA、RDF、UICが0。
 - [ ] CHR-G01～G06のcurrent baseline commitとreview recordが存在。
 - [ ] Git worktree clean、対象branch/release/gate commit、toolchain/environment、credential責任者が記録済み。
 - [ ] PG責任範囲、PT/IT環境、変更管理、禁止事項を担当者が確認。
@@ -206,3 +205,4 @@ code bugへRDF/UICを乱用しない。Oracle/baselineだけを先に変更し�
 | 2026-09-01 | 未回答QA/UIC 3件を正式なPG開始blockerとして再確認し、関連正本・試験の反映先を同期。 |
 | 2026-09-01 | QA-041/UIC-001承認済みの再配送値1/5/25秒をIT oracleへ固定し、残るPG開始blockerをQA-042～043/UIC-002～003へ更新。 |
 | 2026-09-01 | QA-042/UIC-002承認済みのArtemis容量・paging値をIT oracleへ固定し、残るPG開始blockerをQA-043/UIC-003へ更新。 |
+| 2026-09-01 | QA-043/UIC-003承認済みの専用backup role・credentialをIT oracleへ固定。QA/UIC blockerを解消し、production PGの残条件をCHR-G01～G06などの実行gateへ更新。 |

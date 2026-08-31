@@ -54,13 +54,13 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 | `schubert_migration` | yes | `nk_owner`への限定`SET ROLE`、migration時のみcredential配布 | 常時service利用 |
 | `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE | Web schema、DDL、role変更 |
 | `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionのEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
-| `schubert_backup` | yes | QA-043承認時、dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
+| `schubert_backup` | yes | Dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
 | `schubert_web_session` | yes | 同名schemaの3 tableだけDML | `schubert`のUSAGE/SELECTを含む全権限 |
 | `schubert_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
 
 - Default privilegeもownerで明示grantし、`PUBLIC`へのtable/sequence/function権限を与えない。
 - `schubert_ops_ro`は基底tableではなくsecurity-barrier viewを読む。本文、ciphertext、hash、IPはviewから除外する。
-- QA-043/UIC-003回答までは`schubert_backup`をrelease確定しない。承認時は`schubert-nk-backup.service`専用credentialとし、
+- QA-043/UIC-003承認に基づき、`schubert_backup`は`schubert-nk-backup.service`専用credentialとし、
   `schubert`、`schubert_web_session`、`schubert_meta`のdump対象objectへ明示grantする。`pg_read_all_data`やowner membershipは与えない。
 - Backup roleはSELECTできるためciphertext自体は取得可能だが、AES keyを一切配布せず不透明dataとして保全する。
   対話利用をDB権限だけで禁止できるとは記述せず、専用OS user、credential mode、固定unit、監査で補強する。
@@ -355,3 +355,4 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 2026-08-31 | 横断監査で全RequestのInbox HMACをNNとし、state/result/response snapshotのNULL組合せCHECKを追加。 |
 | 2026-08-31 | 横断監査でLoginのUUID sessionとbigint業務参照を分離し、Inbox result referenceの型別排他的CHECKを追加。 |
 | 2026-08-31 | 横断監査で`pg_dump`のSELECT要件とbatchのciphertext閲覧禁止が両立しないため、専用`schubert_backup` role案をQA-043/UIC-003として保留。 |
+| 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用`schubert_backup`と通常保守用`schubert_batch`のrole/grantを確定。 |
