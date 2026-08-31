@@ -5,7 +5,7 @@
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
 hardening、timeout/readinessと検証方法を定める。
 
-- 状態: `確認待ち`。Artemis再配送はQA-041/UIC-001承認済み。Artemis容量はQA-042/UIC-002、DB backup role分離はQA-043/UIC-003待ち。その他は確定。
+- 状態: `確認待ち`。Artemis再配送はQA-041/UIC-001、容量はQA-042/UIC-002承認済み。DB backup role分離はQA-043/UIC-003待ち。その他は確定。
 - 上位設計: UI 211～212、231、251～253
 - 関連RD: SYS-002～SYS-004、SYS-012～SYS-014、OPS-001～OPS-012、MON-001～MON-013、
   PER-001～PER-010、AVL-001～AVL-010
@@ -235,7 +235,8 @@ host   all          all                                   ::/0          reject
 - Instance root `/var/lib/schubert-nk/artemis`は`schubert-artemis` 0700、journal/paging/large messageは別subdirectory。
 - systemd `MemoryMax=2G`、JVM heap 1G/direct 256M/metaspace 192M、native headroom 576M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 5/600s、
   `TimeoutStartSec=120s`、`TimeoutStopSec=60s`、`SendSIGKILL=no`。
-- `global-max-messages=50000`、`max-disk-usage=90`、NIO File Journal、auto create/delete false。`global-max-size`、Address full/paging/page limitは321 §5.3のQA-042保留値を正とする。
+- `global-max-messages=50000`、`global-max-size=512MiB`、`max-disk-usage=90`、NIO File Journal、auto create/delete false。
+  Address full/paging/page limitは321 §5.3のQA-042/UIC-002承認値を正とする。
 - CredentialはJAAS/propertiesへhashとして格納、LoadCredentialから起動時にservice private runtimeへrender。
   Plain passwordを`broker.xml`、unit、argv、Gitへ置かない。
 
@@ -245,12 +246,11 @@ host   all          all                                   ::/0          reject
 `max-redelivery-delay=30000`とし、実効delayを第1=1秒、第2=5秒、第3=25秒に固定する。Rendered `broker.xml`の
 schema validationとIT時系列で321 §5.4との一致を確認する。
 
-### 7.2 QA-042保留値
+### 7.2 容量確定値（QA-042/UIC-002）
 
-UI 231のQueue保持容量を`max-size-bytes`にそのまま設定し、全Addressを`BLOCK`にする値は、heap 1GiB/
-systemd 2GiBのresource budgetで実行可能な設定ではない。321 §5.3のUIC-002案は`global-max-size=512MiB`、
+UI 231の合計保存上限をmemory＋disk pagingで実現する。321 §5.3に従い、`global-max-size=512MiB`、
 Address memory high-water合計448MiB、`PAGE`、Address別page limit、page-full `FAIL`、disk-full `BLOCK`とする。
-QA-042回答前にrendered `broker.xml`の容量関連値をrelease確定しない。
+Rendered `broker.xml`はAddress別6組のbyte/件数上限、合計4.75GiB、page size 8MiB、read page 16MiB/100件を検証する。
 
 ## 8. Resource・disk合計・実測gates
 
@@ -290,7 +290,7 @@ security/port/root/schema/protocolの差異はreadiness false。自動で未承�
 - [PostgreSQL 18 connections and authentication](https://www.postgresql.org/docs/18/runtime-config-connection.html)
 - [Artemis Address Settings](https://artemis.apache.org/components/artemis/documentation/latest/address-settings.html)
 
-Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで再確認する。QA-042/UIC-002案を採用する場合のArtemisは
+Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで再確認する。QA-042/UIC-002承認設定のArtemisは
 `page-limit-*`とAddress別`disk-full-policy`を両方備える2.50.0以上を起動前gateとする。
 
 ## 11. SS設計判断
@@ -308,7 +308,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 - Systemdを迂回した`java -jar`・broker・batchの手動常用起動。Stop timeout時の自動SIGKILL。
 - PostgreSQLの`trust`/MD5認証、remote hba、application superuser、Webへの業務schema grant。
 - Artemis redeliveryをQA-041/UIC-001承認値の1秒、5秒、25秒以外でrelease確定すること。
-- QA-042未解決のままUIのQueue容量を`max-size-bytes`/全Address `BLOCK`としてrelease確定すること。
+- UIの用途別合計保存上限を`max-size-bytes`へ直接転記すること、全Address `BLOCK`へ戻すこと、QA-042承認値を無断変更すること。
 - QA-043未解決のまま`schubert_batch`へdump対象tableのSELECTを与える、または専用backup role案をrelease確定すること。
 
 ## 13. 更新履歴
@@ -322,3 +322,4 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 | 2026-08-31 | `pg_dump`用の`schubert_backup` role候補をtimeout/`pg_hba.conf`へ反映し、QA-043/UIC-003回答待ちとした。 |
 | 2026-08-31 | 横断監査でJVMのheap/direct/metaspace合計がMemoryMaxへ達していた値を是正し、process別native headroomを確保。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、Artemis再配送設定と実効delayを1秒、5秒、25秒へ確定。 |
+| 2026-09-01 | QA-042/UIC-002承認を反映し、Artemisのmemory high-water、disk paging、page/disk full設定をrelease値へ確定。 |

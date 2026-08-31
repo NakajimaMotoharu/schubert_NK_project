@@ -156,7 +156,7 @@ Metricは`nk_`接頭辞、counterは`_total`、byteは`_bytes`、時間は`_seco
 | `nk_mq_messages_total` | counter | direction,address,layout,outcome | Send/receive/ACK/retry/DLQ |
 | `nk_mq_processing_duration_seconds` | histogram | flow,layout,outcome | MQ/API時間budget |
 | `nk_mq_queue_messages`,`nk_mq_queue_bytes` | gauge | queue | Artemis滞留 |
-| `nk_mq_address_memory_bytes`,`nk_mq_address_paged_bytes` | gauge | address | Memory high-waterとpage limit、QA-042承認値と照合 |
+| `nk_mq_address_memory_bytes`,`nk_mq_address_paged_bytes` | gauge | address | QA-042/UIC-002承認済みのAddress別memory high-waterとpage limitに照合 |
 | `nk_mq_paging_active`,`nk_mq_page_files` | gauge | address | PAGE開始・page growth・page-full予兆 |
 | `nk_mq_redeliveries_total` | counter | queue,delivery_count | Redelivery回数。時系列oracleはQA-041/UIC-001承認値の1秒、5秒、25秒 |
 | `nk_outbox_rows` | gauge | store,status | API/Web outbox件数 |
@@ -197,8 +197,9 @@ Username、IP、request/message/correlation/token/receipt/media ID、path、exce
 Alertは同一condition/serviceで1 eventをopenし、継続中はcount/lastSeenを更新。Warningは5分正常、criticalは
 10分正常＋原因撤去確認でclose。初期の外部通知先は要件外のため、local status/journal/管理者SSH確認を正とする。
 
-Queueのbyte/percentage alertの分母と、paging/page-full到達時の新規受付制御はQA-042/UIC-002の承認値で固定する。
-回答前にUI Queue容量を`max-size-bytes`とみなしたpercentageをproduction alertにしない。件数thresholdとDLQ 1件alertは引き続き有効とする。
+Queueのbyte/percentage alertの分母は321 §5.2の用途別合計保存上限、paging開始は§5.3のmemory high-water、
+page-fullはAddress別disk paging上限とする。Page-full時は明示errorを9001へ変換し、filesystem 90%ではproducer BLOCK/readiness false。
+件数thresholdとDLQ 1件alertも併用する。
 
 ## 8. DEBUG/STANDARD
 
@@ -250,3 +251,4 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 |---|---|
 | 2026-08-31 | Structured log、action/error/metric catalog、alert、mode、retentionを詳細化。 |
 | 2026-08-31 | 横断監査でQA-042/UIC-002のpaging/address memory metricと、容量率alertのpending oracleを追加。 |
+| 2026-09-01 | QA-042/UIC-002承認を反映し、Queue容量率、paging開始、page-full、disk-fullのalert分母と動作を確定。 |

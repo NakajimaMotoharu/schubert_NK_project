@@ -5,7 +5,7 @@
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
-- 状態: `確認待ち`。Broker再配送はQA-041/UIC-001承認済み。Broker容量はQA-042/UIC-002、DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
+- 状態: `確認待ち`。Broker再配送はQA-041/UIC-001、容量はQA-042/UIC-002承認済み。DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
 - 上位設計: UI 213、221～254、261、264
 - 関連RD: TST-001～TST-005、TST-101～TST-103、T-001～T-004、PER-001～PER-010、AVL-003～AVL-010
 - 関連SS: 311～353、[355_Characterization Test実行準備・PG開始gate](<355_Characterization Test実行準備・PG開始gate.md>)
@@ -131,7 +131,8 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
   許容差は計測開始点とscheduler精度を含めてIT環境で事前定義し、順序と設定値そのものを緩和しない。
 - 恒久protocol errorは初回でDLQ・ACK・nonzero exit、DB不能の最終再配送はDLQとjob整合runbookを実行する。
 - DLQ/Expiryのbody非表示、browse権限、個別replay、同Message ID Inbox replay、自動purgeなしを確認する。
-- Addressのメモリ高水位、page上限、page-full時、disk-full時の合否oracleはQA-042回答で一意に固定する。回答前は`PENDING_QA_042`とし、`BLOCK`または`PAGE`のいずれかを無断で合格oracleにしない。
+- 321 §5.3のAddress別memory high-waterでPAGE開始、byte/件数page limitでFAIL＋9001、filesystem 90%でBLOCK＋readiness false、
+  復旧後outbox retry・message欠落0をQA-042/UIC-002承認済みの一意なoracleとする。
 
 ### 5.4 IT-OPS・RESTORE・SECURITY
 
@@ -150,7 +151,7 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
 | Search worst、Log 100、新規一覧50、Scenario 10,000 | Query ID・plan・pool・heap・wire/file上限内 |
 | 20 media stream/Range 1MiB | 同時数上限、Range開始、FD/thread/direct memory、他画面p95への影響 |
 | Async/Web log Queue 70/90%、transfer 3.5/4.5GB | Warning/critical、新規受付9001、既受付・証跡を失わない |
-| 16GB memory・256GB disk budget | Systemd MemoryMax、PG/Artemis/JVM/direct/journal/paging/backup合計が上限内。ArtemisはQA-042承認後のmemory/page/page-full/disk-full policyを実効値で検証 |
+| 16GB memory・256GB disk budget | Systemd MemoryMax、PG/Artemis/JVM/direct/journal/paging/backup合計が上限内。ArtemisはQA-042/UIC-002承認済みのmemory/page/page-full/disk-full policyを実効値で検証 |
 
 ## 6. Test data・fixture
 
@@ -182,8 +183,8 @@ PT開始は対象class/migration/configとreview、関連SS/test case、fixture�
 IT開始はPT必須case合格、同一release artifact、全componentのconfig/credential、障害注入・rollback手順を条件とする。
 
 PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、trace/coverage 100%、証跡のrelease commitひも付け、
-機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-042～QA-043未解決中は
-Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず、IT完了前に承認oracleへ固定する。
+機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-043未解決中はbackup権限caseを
+`skipped`合格にせず、IT完了前に承認oracleへ固定する。Address容量/paging/full-policyはQA-042承認oracleを必須実行する。
 
 ## 9. SS設計判断
 
@@ -208,3 +209,4 @@ Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず�
 | 2026-08-31 | 横断監査でPassword試験をNFC・256 byte全長を扱う`pbkdf2-v1`へ統一し、QA-042/UIC-002のArtemis容量・paging pending oracleを追加。 |
 | 2026-08-31 | QA-043/UIC-003の専用backup role、batch/backup相互権限、dump/restoreのpending oracleを追加。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、再配送時系列oracleを1秒、5秒、25秒へ確定。 |
+| 2026-09-01 | QA-042/UIC-002承認を反映し、Address別memory/page上限、page-full FAIL、disk-full BLOCKの容量oracleを確定。 |

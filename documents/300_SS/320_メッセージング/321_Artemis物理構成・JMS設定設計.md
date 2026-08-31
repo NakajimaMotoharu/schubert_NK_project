@@ -4,7 +4,7 @@
 
 Apache ActiveMQ ArtemisのBroker物理設定、Address/Queue、security、journal/paging、JMS transaction、consumer、DLQ/Expiry、再配送を定める。
 
-- 状態: `確認待ち`。再配送第3間隔はQA-041/UIC-001承認済み。Address容量・paging/full policyはUIC-002/QA-042回答待ち。その他は設計確定可能
+- 状態: `確定`。再配送はQA-041/UIC-001、Address容量・paging/full policyはQA-042/UIC-002承認済み
 - 関連UI: 212～213、231、233、251～253
 - 関連RD: MQ-001～013、MQ-040～045、PER-005、PER-010、MON-005、T-001、T-003～004
 - 関連QA/RDF/UIC: QA-017、021、027、036、QA-041～QA-042、RDFなし、UIC-001～UIC-002
@@ -36,7 +36,7 @@ fsync・broker restartを実測し、上位性能未達の場合だけASYNCIOを
 | `journal-pool-files` | 20 | 200MiB事前pool、実測後上限内調整 |
 | `journal-compact-min-files` | 10 | 小file増加抑止 |
 | `journal-compact-percentage` | 30 | reclaim閾値 |
-| `global-max-size` | 未確定（従来案1GiB、UIC-002案512MiB） | JVM heap 1GiBとAddress memory high-waterの整合をQA-042承認後に固定 |
+| `global-max-size` | 512MiB | JVM heap 1GiB内でAddress memory high-water合計448MiBを包含 |
 | `global-max-messages` | 50,000 | UI全Queue件数上限41,000件に運用余裕 |
 | `max-disk-usage` | 90 | 90%でproducer block/readiness false |
 | `disk-scan-period` | 5,000ms | Disk枯渇検知 |
@@ -75,27 +75,26 @@ Requestの`JMSReplyTo`は事前定義`nk.sync.reply.web`だけを許可する。
 - `expiry-address=nk.expiry`
 - `auto-create-dead-letter-resources=false`、`auto-create-expiry-resources=false`
 - `auto-create-addresses/queues=false`、`auto-delete-addresses/queues=false`
-- `address-full-policy`はQA-042回答前にrelease値を確定しない。UI現行値は`BLOCK`、UIC-002候補は`PAGE`
-- `disk-full-policy=BLOCK`。`page-size-bytes`はUIC-002承認時に8MiB、それ以外は承認内容で再設計
+- `address-full-policy=PAGE`、`page-full-policy=FAIL`（QA-042/UIC-002承認済み）
+- `disk-full-policy=BLOCK`、`page-size-bytes=8MiB`
 - `redelivery-collision-avoidance-factor=0.0`
 - `enable-metrics=true`、`enable-ingress-timestamp=true`
 
 ### 5.2 容量
 
-| Match | UI Queue容量 | UI件数上限 | UI現行full policy | Warning/Critical |
+| Match | 合計保存上限 | 合計件数上限 | Full policy | Warning/Critical |
 |---|---:|---:|---:|---|
-| `nk.sync.request` | 256MiB | 500 | Producer BLOCK | 250/450件、70/90% |
-| `nk.sync.reply.web` | 256MiB | 500 | Producer BLOCK | 250/450件、70/90% |
-| `nk.async.work` | 1GiB | 10,000 | Producer BLOCK | 5,000/9,000件、70/90% |
-| `nk.web.log` | 256MiB | 10,000 | Producer BLOCK | 5,000/9,000件、70/90% |
-| `nk.dead.letter` | 2GiB | 10,000 | Producer BLOCK | 1件/増加継続 |
-| `nk.expiry` | 1GiB | 10,000 | Producer BLOCK | 1,000/5,000件、70/90% |
+| `nk.sync.request` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |
+| `nk.sync.reply.web` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |
+| `nk.async.work` | 1GiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |
+| `nk.web.log` | 256MiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |
+| `nk.dead.letter` | 2GiB | 10,000 | PAGE→上限FAIL | 1件/増加継続 |
+| `nk.expiry` | 1GiB | 10,000 | PAGE→上限FAIL | 1,000/5,000件、70/90% |
 
-本表はUI 231の保持目標であり、`max-size-*`の実行可能な割当表ではない。`max-size-bytes`/
-`global-max-size`はmemory使用の高水位で、`BLOCK`は超過後をpagingせずproducerを停止する。そのため従来値ではDLQ 2GiB/
-Expiry 1GiBとheap 1GiBを同時に満たせず、QA-042回答前に本表のbyte値を`max-size-bytes`へ転記しない。
+本表はUI 231の用途別合計保存上限であり、memory high-waterとdisk paging上限の合計で実現する。Byte値を
+`max-size-bytes`へ直接転記しない。6 Address合計は4.75GiBで、Broker journal/pagingのdisk budget 10GiB内に置く。
 
-### 5.3 UIC-002提案値（QA-042回答待ち）
+### 5.3 QA-042/UIC-002承認値
 
 | Match | Memory high-water (`max-size-bytes` / `max-size-messages`) | Paging store上限 (`page-limit-bytes` / `page-limit-messages`) | 合計上限 |
 |---|---:|---:|---:|
@@ -106,7 +105,7 @@ Expiry 1GiBとheap 1GiBを同時に満たせず、QA-042回答前に本表のbyt
 | `nk.dead.letter` | 128MiB / 1,000 | 1,920MiB / 9,000 | 2GiB / 10,000 |
 | `nk.expiry` | 64MiB / 1,000 | 960MiB / 9,000 | 1GiB / 10,000 |
 
-UIC-002案は`global-max-size=512MiB`、Address byte high-water合計448MiB、`page-size-bytes=8MiB`、
+承認値は`global-max-size=512MiB`、Address byte high-water合計448MiB、`page-size-bytes=8MiB`、
 `address-full-policy=PAGE`、`page-full-policy=FAIL`、`disk-full-policy=BLOCK`とする。High-water到達後は永続pageへ退避し、
 byteまたは件数page limitでproducerに明示例外を返し、沈黙破棄しない。Web/APIは新規受付を`9001`へ変換し、
 Outboxは残してretryする。Filesystem 90%ではAddress個別上限と別に新規producerをBLOCKし、readiness falseとする。
@@ -117,10 +116,9 @@ Outboxは残してretryする。Filesystem 90%ではAddress個別上限と別に
 Journal/page metadata、配送中message、consumer buffer等のoverheadはこの業務message容量に含めず、10GiBのBroker disk budgetと
 1GiB heap内でIT実測する。
 
-上記はUI変更承認前の提案である。承認後にUI 231/253、broker config、監視・runbook・容量testを同時更新する。
 `DROP`はAddress/page/diskのいずれにも使用せず、DLQ/Expiryの自動削除も行わない。
-UIC-002案は`page-limit-*`を備えるArtemis 2.28.0以上、かつAddress別`disk-full-policy`を備える2.50.0以上を前提とする。
-導入時の最新安定版でXML schema/config validationを行い、2.50.0未満では本案を実装開始しない。
+本設定は`page-limit-*`を備えるArtemis 2.28.0以上、かつAddress別`disk-full-policy`を備える2.50.0以上を前提とする。
+導入時の最新安定版でXML schema/config validationを行い、2.50.0未満では実装開始しない。
 
 ### 5.4 再配送（QA-041/UIC-001反映済み）
 
@@ -248,3 +246,4 @@ consumer count、address bytes、paging、journal sync、connection countを取�
 | 2026-08-31 | Broker/Address/Queue/JMS/security/journal設計を作成。再配送第3間隔はUIC-001/QA-041回答待ち。 |
 | 2026-08-31 | 横断監査でUI容量を`max-size-*`とみなすBLOCK設計のJVM不整合をUIC-002/QA-042へ起票し、PAGE・memory high-water・page limit案を提示。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、再配送設定と実効test oracleを1秒、5秒、25秒へ確定。 |
+| 2026-09-01 | QA-042/UIC-002承認を反映し、用途別合計保存上限を維持したmemory high-water・disk paging・page/disk full設定を確定。 |
