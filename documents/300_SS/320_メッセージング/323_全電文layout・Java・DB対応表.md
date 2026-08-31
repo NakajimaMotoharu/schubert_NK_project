@@ -1,0 +1,184 @@
+# 全電文layout・Java・DB対応表
+
+## 1. 目的・追跡
+
+UI 233で確定した64 layoutをJava record、処理class、PostgreSQL型/table、validation・変換規則へ割り当てる。Byte位置・長さ・必須条件は
+UI 232～236を変更せず正とし、本書は実装境界を追加する。
+
+- 関連UI: 232～236、241～242、261 SS-001/004～006/013
+- 関連RD: MQ-014～045、MSG-001～011、DAT-004～011、FUN-001～013
+- 関連QA/RDF/UIC: QA-017～020、025～032、034～040、RDFなし、UICなし
+
+## 2. 共通Java/DB変換
+
+| Wire/semantic | Java protocol | Domain/Application | PostgreSQL | Validation・変換 |
+|---|---|---|---|---|
+| N12 ID | `long`＋`*Id` wrapper | `long` | `bigint` | 0/1～999999999999、identity MAXVALUE/CK |
+| N9 count/version/size | `long` | `long` | `bigint` | field別上限、version 0～999999999 |
+| N6 page/count | `int` | `int` | `integer`/算出値 | 0～999999、pageは1以上 |
+| N3/N4 order/count | `int` | `int` | `smallint`/`integer` | field別範囲 |
+| N17 timestamp | `Instant` | `Instant` | `timestamptz` | WireはAsia/Tokyo17桁、DB/JVMはinstant |
+| X timestamp17 | `Optional<Instant>` | nullable `Instant` | nullable `timestamptz` | 全space=null、値ありはstrict parse |
+| UUID36 | `UUID` | `UUID` | `uuid` | lowercase canonical wire |
+| Context64 | Redacted wrapper | `AuthenticationContext` | raw非保存、hash`char(64)`/cipher`bytea` | 64 lowercase hex、constant-time lookup |
+| SHA-256 64 | `Sha256Hex` | 同左 | `char(64)` | lowercase hex |
+| X enum | Java enum | domain enum | `varchar`＋CHECK | Allowlist、未知値拒否 |
+| X text | `String` | String/value object | text/varchar/char | NFC、octet上限、control/末尾space |
+| B | boolean | boolean | boolean | 0/1、error filler spaceは未設定 |
+| Relative path | `RelativePath` | logical path | text | 絶対/`.`/`..`/空segment/backslash/NUL拒否 |
+| Display path | `DisplayPath` | 表示専用 | text | NFC/sanitize/escape、OS解決禁止 |
+
+Protocol recordは`dev.codex.schubert.nk.protocol.layout.*`、handlerは`dev.codex.schubert.nk.api.dispatch.handler.*`、Web mapperは
+`dev.codex.schubert.nk.web.mapper.*`へ置く。Table欄の`—`は永続DB fieldを持たない算出/固定値を示す。
+
+## 3. 認証・Scenario 16 layout
+
+| Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
+|---|---|---|---|---|
+| `LGNREQ01` 384/0/0/640 | `LoginRequestData` | `LoginHandler` -> `AuthenticationService.authenticate` | `app_users`, `login_ip_attempts`, `auth_sessions`; username text、IP inet | Context space、password redacted、UI 234 §3、FUN-001/MQ-021 |
+| `LGNRSP01` 432/0/0/688 | `LoginResponseData` | `LoginResponseFactory` | auth session raw復号結果、user role | Code別presence、retry 0～900、header context space |
+| `LOGREQ01` 0/0/0/256 | `LogoutRequestData`（singleton） | `LogoutHandler` -> `AuthSessionService.revoke` | `auth_sessions.context_hash` | Header context必須、UI 234 §4、AUT-004 |
+| `LOGRSP01` 24/0/0/280 | `LogoutResponseData` | `LogoutResponseFactory` | `revoked_at timestamptz` | 0000/0200で日時必須 |
+| `GAMREQ01` 0/0/0/256 | `GameListRequestData` | `GameListHandler` | — | Context必須 |
+| `GAMRSP01` 9/272/10/2,985 | `GameListResponseData` / `GameRecord` | `ScenarioQueryService.findGames` | `games`: smallint/text/display_order | Count一致、code/title/order、UI 234 §5 |
+| `SPKREQ01` 12/0/0/268 | `SpeakerListRequestData` | `SpeakerListHandler` | `games.code` | Game optional allowlist |
+| `SPKRSP01` 9/152/500/76,265 | `SpeakerListResponseData` / `SpeakerRecord` | `ScenarioQueryService.findSpeakers` | `speakers.id/name`、COUNT entry | Count desc/name asc、UI 234 §6 |
+| `SRCREQ01` 672/0/0/928 | `ScenarioSearchRequestData` | `ScenarioSearchHandler` | Query parameterへmap | Page=1..999999、size=100、全条件allowlist |
+| `SRCRSP01` 48/5,584/100/558,704 | `PagedResponseData` / `ScenarioSearchRecord` | `ScenarioQueryService.search` | `script_entries/files/games/speakers/audio`; bigint/text/boolean | display_order、代表voice最小order、UI 234 §7/FUN-003 |
+| `RTEREQ01` 12/0/0/268 | `RouteListRequestData` | `RouteListHandler` | `games.code` | Game必須 |
+| `RTERSP01` 9/72/50/3,865 | `RouteListResponseData` / `RouteRecord` | `ScenarioQueryService.findRoutes` | section prefix算出、COUNT files | Prefix asc、固定route map、UI 234 §8 |
+| `SCFREQ01` 14/0/0/270 | `ScenarioFileListRequestData` | `ScenarioFileListHandler` | game/prefix query | Game/prefix必須 |
+| `SCFRSP01` 88/800/500/400,344 | `ScenarioFileListResponseData` / `ScenarioFileRecord` | `ScenarioQueryService.findFiles` | `script_files`、entry COUNT | Display title fallback、display_order、UI 234 §9 |
+| `SCNREQ01` 12/0/0/268 | `ScenarioDetailRequestData` | `ScenarioDetailHandler` | `script_files.id` | ID 1以上 |
+| `SCNRSP01` 1,728/4,800/200/961,984 | `ScenarioDetailResponseData` / `ScenarioEntryRecord` | `ScenarioQueryService.findScenario`、`LargeResultWriter` | entries/audio links、transfer file descriptor | I/F排他、file mode最大10,000/48MB、UI 234 §10/FUN-004～005 |
+
+## 4. Media・Log 18 layout
+
+| Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
+|---|---|---|---|---|
+| `AUDREQ01` 16/0/0/272 | `AudioDescriptorRequestData` | `AudioDescriptorHandler` | `audio_files.id` | disposition I/A |
+| `AUDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeAudio` | audio path/name/size/hash/container | Root/size/hash/MIME、UI 235 §2～3/FUN-005 |
+| `ANMREQ01` 0/0/0/256 | `AnimationMenuRequestData` | `AnimationMenuHandler` | — | Context必須 |
+| `ANMRSP01` 16/0/0/272 | `AnimationMenuResponseData` | `MediaQueryService.animationCounts` | `media_assets` aggregate | 15/4/1/20 current baseline、UI 235 §4 |
+| `ANLREQ01` 16/0/0/272 | `AnimationListRequestData` | `AnimationListHandler` | media category | MAIN/OVA |
+| `ANLRSP01` 8/928/50/46,664 | `AnimationListResponseData` / `AnimationRecord` | `MediaQueryService.findAnimation` | `media_assets`: logical_id/text/size/parent/order | Parent/category整合、UI 235 §5 |
+| `VIDREQ01` 64/0/0/320 | `VideoDescriptorRequestData` | `VideoDescriptorHandler` | logical_id | 223の20 ID allowlist/DB存在 |
+| `VIDRSP01` 1,808/0/0/2,064 | `VideoDescriptorResponseData` | `MediaQueryService.describeVideo` | `media_assets`＋file metadata | MEDIA1024＋title/category/display path、UI 235 §6/FUN-006 |
+| `MCTREQ01` 0/0/0/256 | `MusicCategoryRequestData` | `MusicCategoryHandler` | — | Context必須 |
+| `MCTRSP01` 8/72/20/1,704 | `MusicCategoryResponseData` / `MusicCategoryRecord` | `MediaQueryService.findMusicCategories` | media_assets aggregate | 曲/BGM/名称順、UI 235 §7 |
+| `MCSREQ01` 64/0/0/320 | `MusicSectionRequestData` | `MusicSectionHandler` | category text | 返却master値と一致 |
+| `MCSRSP01` 8/136/100/13,864 | `MusicSectionResponseData` / `MusicSectionRecord` | `MediaQueryService.findMusicSections` | category/section aggregate | Section順、UI 235 §8 |
+| `MTRREQ01` 192/0/0/448 | `MusicTrackRequestData` | `MusicTrackHandler` | category/section text | DB存在・組合せ |
+| `MTRRSP01` 16/1,312/200/262,672 | `MusicTrackResponseData` / `MusicTrackRecord` | `MediaQueryService.findMusicTracks` | `media_assets`: pair_key/role/order | Pair role M/I/N、順序、UI 235 §9/FUN-007 |
+| `MEDREQ01` 72/0/0/328 | `MusicDescriptorRequestData` | `MusicDescriptorHandler` | logical_id/disposition | I/A |
+| `MEDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeMusic` | media_assets metadata | MIME allowlist、UI 235 §10 |
+| `LGSREQ01` 656/0/0/912 | `LogSearchRequestData` | `LogSearchHandler` | app_logs query | ADMIN、31日、size100、UI 235 §11/FUN-008 |
+| `LGSRSP01` 48/2,088/100/209,104 | `PagedResponseData` / `LogRecord` | `LogQueryService.search` | `app_logs`: bigint/timestamptz/jsonb/inet text projection | 日時/id desc、秘密値なし |
+
+## 5. User管理 14 layout
+
+| Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
+|---|---|---|---|---|
+| `USRREQ01` 96/0/0/352 | `UserSearchRequestData` | `UserSearchHandler` | app_users filters | ADMIN、page size50 |
+| `USRRSP01` 48/168/50/8,704 | `PagedResponseData` / `UserRecord` | `UserQueryService.search` | app_users＋active session count | username asc、state導出、UI 236 §3 |
+| `UCRREQ01` 372/0/0/628 | `UserCreateRequestData` | `UserCreateHandler` | app_users INSERT、request_inbox | Password redacted/HMAC、token、ADMIN、UI 236 §4 |
+| `UCRRSP01` 24/0/0/280 | `UserMutationResponseData` | `UserCommandService.create` | user id/version | 0000/0200同profile |
+| `UDTREQ01` 12/0/0/268 | `UserDetailRequestData` | `UserDetailHandler` | app_users.id | ADMIN |
+| `UDTRSP01` 320/0/0/576 | `UserDetailResponseData` | `UserQueryService.detail` | app_users、auth_sessions count、actor join | Nullable日時、SYSTEM fallback、UI 236 §5 |
+| `USTREQ01` 60/0/0/316 | `UserStatusRequestData` | `UserStatusHandler` | app_users UPDATE、session revoke、inbox | target/version/token、自己/ADMIN保護 |
+| `USTRSP01` 24/0/0/280 | `UserMutationResponseData` | `UserCommandService.changeStatus` | user id/version | 0105はerror filler |
+| `URLREQ01` 68/0/0/324 | `UserRoleRequestData` | `UserRoleHandler` | app_users role UPDATE/revoke | role enum、active ADMIN lock |
+| `URLRSP01` 24/0/0/280 | `UserMutationResponseData` | `UserCommandService.changeRole` | user id/version | 0000/0200 |
+| `UPWREQ01` 324/0/0/580 | `PasswordResetRequestData` | `PasswordResetHandler` | password_hash UPDATE、session revoke、inbox HMAC | Password非保存、policy/token/version |
+| `UPWRSP01` 24/0/0/280 | `UserMutationResponseData` | `UserCommandService.resetPassword` | user id/version | 0000/0200 |
+| `ULKREQ01` 60/0/0/316 | `UserUnlockRequestData` | `UserUnlockHandler` | app_users/login counter UPDATE | token/version、非lockは0200 |
+| `ULKRSP01` 24/0/0/280 | `UserMutationResponseData` | `UserCommandService.unlock` | user id/version | 0000/0200 |
+
+## 6. 質問・通知・回答 14 layout
+
+| Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
+|---|---|---|---|---|
+| `QSBREQ01` 4,144/0/0/4,400 | `QuestionSubmitRequestData` | `QuestionSubmitHandler` | questions/jobs/notifications/outbox/inbox INSERT | A区分、本文1～4096、token、UI 236 §7/QST-001～003 |
+| `QSBRSP01` 64/0/0/320 | `QuestionSubmitResponseData` | `QuestionCommandService.submit` | receipt char26、question id、submitted_at | Outbox SENT後、0000/0200 |
+| `NTSREQ01` 64/0/0/320 | `NotificationSearchRequestData` | `NotificationSearchHandler` | notifications owner query | 本人、366日、size50 |
+| `NTSRSP01` 48/624/50/31,504 | `PagedResponseData` / `NotificationRecord` | `NotificationQueryService.search` | notifications/questions | State/type整合、deleted summary、UI 236 §8 |
+| `NTDREQ01` 12/0/0/268 | `NotificationDetailRequestData` | `NotificationDetailHandler` | notification id | Owner predicate |
+| `NTDRSP01` 8,896/0/0/9,152 | `NotificationDetailResponseData` | `NotificationQueryService.detail` | notifications/jobs/questions/answers | State日時/本文presence、deleted本文space、UI 236 §9 |
+| `NTCREQ01` 48/0/0/304 | `NotificationCancelRequestData` | `NotificationCancelHandler` | jobs/notifications UPDATE、inbox | Owner、RECEIVED CAS、token |
+| `NTCRSP01` 32/0/0/288 | `NotificationCancelResponseData` | `QuestionCommandService.cancel` | state/cancelled_at | 0000/0200/0107 profile、UI 236 §10 |
+| `QSSREQ01` 384/0/0/640 | `QuestionSearchRequestData` | `QuestionSearchHandler` | questions/answers owner query | USER username space、ADMIN optional、366日 |
+| `QSSRSP01` 48/672/50/33,904 | `PagedResponseData` / `QuestionSummaryRecord` | `QuestionQueryService.search` | questions/users/answers/jobs | deleted=false、submitted/id desc、UI 236 §11 |
+| `QSDREQ01` 12/0/0/268 | `QuestionDetailRequestData` | `QuestionDetailHandler` | question id | USER owner/ADMIN |
+| `QSDRSP01` 8,352/0/0/8,608 | `QuestionDetailResponseData` | `QuestionQueryService.detail` | questions/users/answers/jobs | deleted 0104、answer state/presence、UI 236 §12 |
+| `QDLREQ01` 48/0/0/304 | `QuestionDeleteRequestData` | `QuestionDeleteHandler` | questions/answers UPDATE、inbox | Owner/ADMIN、token、UI 236 §13 |
+| `QDLRSP01` 24/0/0/280 | `QuestionDeleteResponseData` | `QuestionCommandService.logicalDelete` | deleted_at timestamptz | 0000/0200、notification不変 |
+
+## 7. 内部event 2 layout
+
+| Layout (data/record/max/total) | Java data | Listener/service | DB source/target | Validation/trace |
+|---|---|---|---|---|
+| `QWKREQ01` 64/0/0/320 | `QuestionWorkData` | `QuestionWorkListener` -> `QuestionWorkerService` | questions/jobs/notifications/answers | E/I、context space、DB再取得、TTLなし、UI 236 §14/ASY-002 |
+| `WLGEVT01` 2,080/0/0/2,336 | `WebLogEventData` | `WebLogListener` -> `WebLogIngestService` | `app_logs.source_message_id` UK INSERT | E/I、context space、producer role、本文/query/cookieなし、UI 235 §12/MON-003 |
+
+本書のlayout行数は64件でなければならない。PG/CIではbacktick内8文字layout IDを抽出し、重複0、UI 233の集合と完全一致を検査する。
+
+## 8. Paged response mapping
+
+`PagedResponseData`はSRCRSP01/LGSRSP01/USRRSP01/NTSRSP01/QSSRSP01で再利用するが、layoutごとのdata lengthは全て48であることを
+registryで別definitionとして保持する。DB query結果から次をchecked arithmeticで算出する。
+
+```text
+totalPages = max(1, ceil(totalCount / pageSize))
+effectivePage = min(max(requestPage,1), totalPages)
+first = totalCount == 0 ? 0 : (effectivePage-1)*pageSize+1
+last  = min(effectivePage*pageSize,totalCount)
+```
+
+Total countがpage size別のUI上限を超える場合はrecordを一部返さず`9001`。
+
+## 9. Operation fingerprint対象
+
+| Layout | Owner | Target canonical | Payload canonical（token/reserved除外） |
+|---|---|---|---|
+| UCRREQ01 | actor user ID | `NEW_USER:<username_key>` | username original/key、password value、role、enabled |
+| USTREQ01 | actor | `USER:<id>` | enabled、expected version |
+| URLREQ01 | actor | `USER:<id>` | new role、expected version |
+| UPWREQ01 | actor | `USER:<id>` | new password、expected version |
+| ULKREQ01 | actor | `USER:<id>` | expected version |
+| QSBREQ01 | actor | `QUESTION:NEW` | question NFC bytes |
+| NTCREQ01 | actor | `NOTIFICATION:<id>` | target ID |
+| QDLREQ01 | actor | `QUESTION:<id>` | target ID |
+
+Fingerprintは324のlength-prefixed canonical HMACを使用する。Password/質問本文の平文・単純hashをDBへ保存しない。
+
+## 10. DB rowとwire recordの分離
+
+- RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
+- Protocol mapperはdomainからwire fieldへ変換する。SQL projectionをwire位置順へ直接`Object[]` mappingしない。
+- Display pathとstorage pathは異なるvalue objectとし、compiler上相互代入できない型にする。
+- Error responseは成功domain objectのdummy値を生成せず、`ErrorResponseFactory`がlayoutのerror filler/profileを構築する。
+- `0200`はresult referenceから成功domain objectを再構成し、0000と同じmapperを使用する。
+
+## 11. Trace完了条件
+
+| 確認 | 完了条件 |
+|---|---|
+| Layout集合 | UI 233 64 = Java registry 64 = 本書64、ID重複0 |
+| 長さ | 全layoutで256+data+record×max=最大長、1,000,000以下 |
+| Field | UI 234～236全fieldがJava component/validatorへ1:1 |
+| DB | 永続fieldが331 columnまたは算出根拠へ対応、型範囲がwire内 |
+| Handler | Q layout 31＋E layout 2がhandler/listenerへ一意、S layoutはresponse mapperへ一意 |
+| Security | Role/owner/context条件がWeb/API両層へ対応 |
+
+## 12. SS設計判断
+
+| ID | 判断 | 根拠・理由 | 後続影響 |
+|---|---|---|---|
+| SS-D-019 | Protocol record名をlayoutの業務名＋Request/Response/Data/Recordで統一する | 64 layoutの検索性とQ/S誤使用防止 | Java registry/catalog naming check |
+| SS-D-020 | Storage pathとDisplay pathを別Java value objectにする | UI 237/242、file解決への表示値混入を型で防ぐ | Mapper/ArchUnit/file security PT |
+
+## 13. 更新履歴
+
+| 日付 | 内容 |
+|---|---|
+| 2026-08-31 | 全64 layoutのJava class、handler/service、DB型・table、validation対応を初版作成。 |

@@ -1,0 +1,184 @@
+# モジュール・package・class責務設計
+
+## 1. 目的・追跡
+
+Web Java、API Java、batch、固定長共通部品のMaven module、package、主要class、責務および依存禁止を定める。
+
+- 関連UI: 211～213、221～237、241～243、251～253、261 SS-001/007～013
+- 関連RD: SYS-002、SYS-005～011、MQ-001～045、DAT-001～011、OPS-001～005
+- 関連QA/RDF/UIC: QA-001～040、RDFなし、UICなし
+
+## 2. Maven module
+
+| Module/artifact | 実行形態 | 責務 | 依存可能 | 依存禁止 |
+|---|---|---|---|---|
+| `schubert-nk-protocol` | Library jar | 256 byte header、64 layout record、codec、NFC/byte検査、共通result/error、descriptor model | Java標準API、test時だけJUnit | Spring MVC、JMS、JDBC、DB entity、HTTP model |
+| `schubert-nk-web` | Executable jar | MVC/Thymeleaf、HTTP validation、Spring Security、暗号化HTTP session、JMS request/reply、file配信、Web log outbox | protocol、Spring Web/Security/JMS/JDBC | 業務schema repository、業務状態更新、API module |
+| `schubert-nk-api` | Executable jar | 固定長request Consumer、認証・認可、application service、PostgreSQL業務schema、outbox/inbox、async worker | protocol、Spring JMS/JDBC/Security crypto | MVC/Thymeleaf、Browser response、Web technical table更新 |
+| `schubert-nk-batch` | Executable jar/oneshot | Backup検証、business/technical cleanup、transfer cleanup、Expiry保守、run記録 | Spring JDBC、PostgreSQL/Artemis管理client | HTTP公開、業務Consumer、任意table/Queue操作 |
+| Root project | Aggregator | Maven Wrapper、Java 25 toolchain、dependency/version、品質plugin | 上記module | Production sourceの直置き |
+
+Group IDは`dev.codex.schubert`、Java package rootは`dev.codex.schubert.nk`とする。Java module systemの`module-info.java`は
+Spring reflectionとの運用複雑性を避け初期releaseでは使用しない。Mavenのmodule依存とArchUnitで境界を検査する。
+
+## 3. 共通依存規則
+
+```text
+schubert-nk-web   ─┐
+                   ├──> schubert-nk-protocol
+schubert-nk-api   ─┘
+
+schubert-nk-batch      （protocolへ依存しない。Expiry message本文をdecodeするDLQ整合toolだけは
+                         protocolを明示dependencyとして利用可）
+```
+
+- WebとAPIは互いにcompile/runtime依存しない。
+- Protocolは外部frameworkから独立させ、同一jar hashをWeb/APIで使用する。
+- HTTP form/view model、DB row/entity、固定長layout recordは別classとし、mapperで変換する。
+- `controller -> web application facade -> messaging adapter -> protocol`の向きだけを許可する。
+- APIは`messaging adapter -> application service -> domain/persistence/file adapter`の向きとし、repositoryから上位層を呼ばない。
+- Batchはallowlist済みrepository/functionとOS command adapterだけを使用し、API serviceを流用して公開処理を起動しない。
+
+## 4. `schubert-nk-protocol`
+
+### 4.1 Package
+
+| Package | 主要class | 責務 |
+|---|---|---|
+| `.protocol.header` | `CommonHeader`, `MessageKind`, `InteractionKind`, `ResultCode` | 共通headerの型安全な表現 |
+| `.protocol.layout` | `LayoutId`, `LayoutDefinition`, `LayoutRegistry`, `LayoutPayload` | Layout ID/version、data/record長、最大件数、Q/S/E制約 |
+| `.protocol.layout.auth` | `LoginRequest/Response`, `LogoutRequest/Response` | IF-001/002のlayout record |
+| `.protocol.layout.scenario` | `Game*`, `Speaker*`, `Scenario*`, `Route*`, `ScenarioFile*` | IF-003～008 |
+| `.protocol.layout.media` | `Audio*`, `Animation*`, `Music*`, `MediaDescriptor` | IF-009～016 |
+| `.protocol.layout.log` | `LogSearch*`, `WebLogEvent` | IF-017、IF-I02 |
+| `.protocol.layout.admin` | `User*` | IF-018～024 |
+| `.protocol.layout.question` | `Question*`, `Notification*`, `QuestionWork` | IF-025～031、IF-I01 |
+| `.protocol.codec` | `FixedWidthEncoder`, `FixedWidthDecoder`, `HeaderCodec`, `PayloadCodec`, `FieldCodec` | byte列との相互変換 |
+| `.protocol.validation` | `ProtocolValidator`, `FieldValidator`, `Utf8Validator`, `LayoutValidationException` | 構造・型・必須・許容値の受信前検査 |
+| `.protocol.file` | `LargeResultDescriptor`, `LargeResultRecordCodec`, `MediaDescriptorValidator` | Transfer/media descriptorの構造検査 |
+| `.protocol.time` | `JstWireTimestamp` | 17桁JST日時のparse/format |
+
+`LayoutPayload`はsealed interfaceとし、各data/recordをJava `record`で定義する。Record constructorはnull、range、enumを検査するが、
+encode後byte長は`FieldCodec`を正とする。`LayoutRegistry`は64 layoutを起動時に登録し、ID重複、長さ式、最大body 1,000,000 byteを
+検査する。
+
+### 4.2 Codec class
+
+| Class.method | 引数 | 戻り値 | 例外 |
+|---|---|---|---|
+| `FixedWidthEncoder.encode` | `WireMessage<? extends LayoutPayload>` | `byte[]` | `MessageEncodingException` |
+| `FixedWidthDecoder.decode` | `byte[]`, expected direction | `WireMessage<?>` | `PermanentProtocolException` |
+| `HeaderCodec.peek` | 256 byte以上のbody | `CommonHeader` | `PermanentProtocolException` |
+| `FieldCodec.encodeText` | value、field definition | 規定長`byte[]` | `FieldEncodingException` |
+| `FieldCodec.decodeText` | field slice、definition | `String`/empty | `PermanentProtocolException` |
+| `ProtocolValidator.validateTransport` | decoded message、JMS property snapshot | `void` | `PermanentProtocolException` |
+
+JMS classはprotocol moduleへ渡さず、Web/API adapterが必要propertyを`TransportMetadata`へ写して検証する。
+
+## 5. `schubert-nk-web`
+
+### 5.1 Package
+
+| Package | 主要class | 責務 |
+|---|---|---|
+| `.web.bootstrap` | `WebApplication`, `StartupInvariantValidator` | 起動、layout/root/Queue/session設定検査 |
+| `.web.config` | `WebMvcConfig`, `SecurityConfig`, `JmsClientConfig`, `WebProperties` | Framework wiringと外部設定束縛 |
+| `.web.controller` | `LoginController`, `MenuController`, `ScenarioController`, `MediaController`, `AnimationController`, `MusicController`, `LogController`, `UserAdminController`, `QuestionController`, `NotificationController`, `ErrorController` | HTTP endpoint、form binding、view選択 |
+| `.web.form` | 画面別`*Form`、`*SearchForm` | HTTP入力とfield error。MQ recordを保持しない |
+| `.web.view` | 画面別`*ViewModel`、`PageViewModel`, `FlashMessage` | Template表示専用model |
+| `.web.mapper` | `ScenarioWebMapper`, `AdminWebMapper`, `QuestionWebMapper` | Form/viewとprotocol recordの変換 |
+| `.web.messaging` | `JmsRequestReplyClient`, `ReplyCorrelationRegistry`, `WireMessageFactory`, `ResponseMapper` | Persistent送信、2秒待機、相関、response検証 |
+| `.web.security` | `MqAuthenticationProvider`, `AuthenticationContext`, `ApiAuthorizationFailureHandler`, `TrustedClientAddressResolver` | Login MQ認証、context保持、Web側role/owner gate |
+| `.web.session` | `EncryptedWebSessionRepository`, `SessionAttributeCodec`, `PendingRevocationRepository`, `ContextRevocationRetrier` | Technical schemaだけを使う暗号化session/Logout再試行 |
+| `.web.operation` | `OperationTokenService`, `OperationTokenStore` | UUID発行、用途別最大10件、PRG/timeout時のtoken保持 |
+| `.web.media` | `DescriptorFileResolver`, `MediaRangeService`, `LargeResultReader`, `ContentDispositionFactory` | Root/path/hash/Range/file配信 |
+| `.web.logging` | `HttpRequestLoggingFilter`, `WebLogOutboxRepository`, `WebLogDispatcher`, `RedactionPolicy` | Local JSON＋WLGEVT01 outbox |
+| `.web.error` | `GlobalWebExceptionHandler`, `ProblemViewFactory` | 400/401/403/404/409/416/503の共通表示 |
+
+### 5.2 Controller依存禁止
+
+ControllerはJDBC、JMS template、filesystem APIを直接呼ばない。Controllerからは画面単位facadeを呼び、facadeがmapperと
+`JmsRequestReplyClient`を組み合わせる。Media endpointもdescriptor取得をAPIへ要求後、`MediaRangeService`へ委譲する。
+
+## 6. `schubert-nk-api`
+
+### 6.1 Package
+
+| Package | 主要class | 責務 |
+|---|---|---|
+| `.api.bootstrap` | `ApiApplication`, `StartupInvariantValidator` | 起動、migration/version/root/codec整合検査 |
+| `.api.config` | `ApiJmsConfig`, `DataSourceConfig`, `SecurityCryptoConfig`, `ApiProperties` | Consumer、pool、credential、設定 |
+| `.api.messaging.inbound` | `SyncRequestListener`, `QuestionWorkListener`, `WebLogListener`, `InboundMessageGuard` | Queue受信、property/body検査、delivery count分類 |
+| `.api.messaging.outbound` | `ReplySender`, `DlqSender`, `OutboxDispatcher`, `JmsMessageFactory` | Reply/internal work/DLQ送信 |
+| `.api.dispatch` | `RequestDispatcher`, `LayoutHandlerRegistry`, `LayoutHandler<Q,S>` | Request layoutからhandlerへ型安全にdispatch |
+| `.api.security` | `AuthenticationService`, `AuthenticationContextVerifier`, `AuthorizationService`, `LoginAttemptRepository` | Password、session、role/owner、lock |
+| `.api.application.scenario` | `ScenarioQueryService`, `MediaQueryService` | 現行検索・階層・descriptor query |
+| `.api.application.admin` | `UserQueryService`, `UserCommandService` | User管理と自己保護 |
+| `.api.application.question` | `QuestionCommandService`, `NotificationQueryService`, `QuestionQueryService`, `QuestionWorkerService`, `AnswerProvider` | 質問、通知、取消、回答、STUB |
+| `.api.application.log` | `LogQueryService`, `WebLogIngestService`, `AuditLogService` | Log検索、WLGEVT01投影、critical audit |
+| `.api.idempotency` | `InboxCoordinator`, `OperationFingerprintService`, `ReplayResponseFactory` | Message/token重複、HMAC、結果再構成 |
+| `.api.domain` | `AsyncJobState`, `Role`, `AccountStatus`, `NotificationType`, domain result | 業務状態・遷移。Framework annotationを含めない |
+| `.api.persistence` | 画面/aggregate別`*Repository`、`*RowMapper` | Parameterized SQL、row mapping、lock |
+| `.api.file` | `AssetResolver`, `MediaDescriptorFactory`, `LargeResultWriter`, `FileIntegrityVerifier` | Logical IDから許可root内fileを解決 |
+| `.api.error` | `ApiExceptionMapper`, `RetryClassifier`, `FatalProtocolHandler` | Result code、一時/恒久分類、DLQ後exit |
+
+### 6.2 Handler規約
+
+`LayoutHandler<Q,S>`は`LayoutId requestLayout()`、`Class<Q> requestType()`、`S handle(RequestContext,Q)`だけを公開する。
+Dispatcherは認証・inbox処理後にhandlerを呼ぶ。HandlerはJMS ACK/send、HTTP、templateを扱わない。
+
+`RequestContext`はmessage/correlation/request ID、actor user ID/username/role、受信日時、delivery countを保持するが、raw認証context、
+password、全bodyを保持・`toString`出力しない。
+
+## 7. `schubert-nk-batch`
+
+| Package | 主要class | 責務 |
+|---|---|---|
+| `.batch.bootstrap` | `BatchApplication`, `BatchCommandRouter` | `backup`、`cleanup`、`morning-run`等のcommand選択 |
+| `.batch.lock` | `MaintenanceLock`, `BatchRunLeaseRepository` | OS lock＋DB run一意性 |
+| `.batch.backup` | `PostgresBackupService`, `ConfigBackupService`, `BackupManifestService`, `BackupVerifier`, `GenerationPruner` | `.part`生成、検証、7世代 |
+| `.batch.cleanup` | `BusinessDataCleanupService`, `TechnicalDataCleanupService`, `TransferCleanupService` | Backup gate付きDELETE、root安全検査 |
+| `.batch.mq` | `ArtemisReadinessClient`, `ExpiryCleanupService` | 限定credentialによる7日超Expiry削除 |
+| `.batch.repository` | `BatchRunRepository`, `CleanupRepository` | Allowlist SQL/function、件数証跡 |
+| `.batch.logging` | `BatchEventLogger`, `CommandRedactor` | BATCH JSON/DB log、secret除外 |
+
+`ProcessBuilder`へ渡すcommand/argumentは固定allowlistで組み立て、shell文字列連結を行わない。削除serviceは設定root自体を削除せず、
+`SecureDirectoryStream`または同等のsymlink非追従検査を使用する。
+
+## 8. Application共通例外
+
+例外classは各moduleの`.error`へ置き、protocol moduleがWeb/API例外へ依存しない。
+
+| 分類 | 例外 | 処理 |
+|---|---|---|
+| HTTP validation | `WebValidationException` | 同一画面field error |
+| 業務 | `BusinessRuleException(resultCode)` | Transaction rollback要否を個別指定し、固定長error response |
+| 認証・認可 | `AuthenticationContextException` / `AccessDeniedException` | `0102`/`0103`、deny closed |
+| 対象なし・競合 | `NotFoundException` / `ConflictException` | `0104`/`0105` |
+| 一時基盤 | `TemporaryInfrastructureException` | rollback、最大3回再配送 |
+| 容量 | `CapacityExceededException` | `9001`、受付/生成停止 |
+| 恒久protocol | `PermanentProtocolException` | 業務未実行、DLQ、非zero終了 |
+| 起動不変条件 | `StartupInvariantException` | readiness false、process起動失敗 |
+
+## 9. SS設計判断
+
+| ID | 判断 | 根拠・理由 | 後続影響 |
+|---|---|---|---|
+| SS-D-001 | Web/API/batch/protocolの4 moduleとする | UI 211/251、RD SYS-011。朝batchをAPI停止中に安全に実行し、protocolをframework非依存にする | PGでMaven reactor/ArchUnit、PTで禁止依存test |
+| SS-D-002 | Package rootを`dev.codex.schubert.nk`とする | 現行`dev.codex.schubert`との由来を保ち、NKをnamespace分離 | Artifact/class名、log service名へ反映 |
+| SS-D-003 | HTTP model、wire record、DB row/domainを分離する | UI 211 §5、RDの境界分離。秘密値の意図しないserialize/logを防止 | Mapper PTと全layout対応表323を必須化 |
+
+## 10. 実装禁止事項
+
+- Web moduleへの`schubert`業務schema権限または業務repository追加。
+- Protocol moduleへのSpring/JMS/JDBC/Java serialization依存。
+- Controller/Listener内へのSQL、path連結、業務transaction実装。
+- API moduleからBrowserへ直接HTTP待受・HTML応答。
+- Batch credentialによる任意SQL、任意Queue purge、DLQ自動削除。
+- DTO/entityの`toString`へpassword、context、question/answer本文を含めること。
+
+## 11. 更新履歴
+
+| 日付 | 内容 |
+|---|---|
+| 2026-08-31 | Module、package、主要class、依存規則を初版作成。 |
