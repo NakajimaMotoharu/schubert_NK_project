@@ -9,6 +9,7 @@ version付きmigrationへ転記できる粒度で定める。本書はDDL実装�
   [242_主要テーブル・制約設計](../../200_UI/240_データ/242_主要テーブル・制約設計.md)
 - 関連RD: DAT-001～DAT-011、AUT-001～AUT-004、ASY-001～ASY-009、QST-007～QST-010、
   BAK-001～BAK-008、MIG-001～MIG-008
+- 関連QA/RDF/UIC: QA-010、QA-013～QA-014、QA-024、QA-034～QA-040、QA-043、RDFなし、UIC-003
 - 関連SS: [323_全電文layout・Java・DB対応表](../320_メッセージング/323_全電文layout・Java・DB対応表.md)、
   [324_Outbox・Inbox・冪等性・再送設計](../320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md)
 
@@ -50,15 +51,37 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 | Role | LOGIN | 権限 | 禁止 |
 |---|---:|---|---|
 | `nk_owner` | no | Schema/object owner。Migrationから`SET ROLE` | Service login |
-| `nk_migration` | yes | `nk_owner`への限定`SET ROLE`、migration時のみcredential配布 | 常時service利用 |
-| `nk_api` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE | Web schema、DDL、role変更 |
-| `nk_batch` | yes | `schubert`のbackup/cleanup/migration validation用DML、読取 | DDL、Web session attribute復号 |
-| `nk_web` | yes | `schubert_web_session`の3 tableだけDML | `schubert`のUSAGE/SELECTを含む全権限 |
-| `nk_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
+| `schubert_migration` | yes | `nk_owner`への限定`SET ROLE`、migration時のみcredential配布 | 常時service利用 |
+| `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE | Web schema、DDL、role変更 |
+| `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionのEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
+| `schubert_backup` | yes | QA-043承認時、dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
+| `schubert_web_session` | yes | 同名schemaの3 tableだけDML | `schubert`のUSAGE/SELECTを含む全権限 |
+| `schubert_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
 
 - Default privilegeもownerで明示grantし、`PUBLIC`へのtable/sequence/function権限を与えない。
-- `nk_ops_ro`は基底tableではなくsecurity-barrier viewを読む。本文、ciphertext、hash、IPはviewから除外する。
-- API/batch用functionを`SECURITY DEFINER`にしない。必要な管理操作はserviceがtransactionと監査logを制御する。
+- `schubert_ops_ro`は基底tableではなくsecurity-barrier viewを読む。本文、ciphertext、hash、IPはviewから除外する。
+- QA-043/UIC-003回答までは`schubert_backup`をrelease確定しない。承認時は`schubert-nk-backup.service`専用credentialとし、
+  `schubert`、`schubert_web_session`、`schubert_meta`のdump対象objectへ明示grantする。`pg_read_all_data`やowner membershipは与えない。
+- Backup roleはSELECTできるためciphertext自体は取得可能だが、AES keyを一切配布せず不透明dataとして保全する。
+  対話利用をDB権限だけで禁止できるとは記述せず、専用OS user、credential mode、固定unit、監査で補強する。
+
+### 3.3 Batch maintenance function
+
+`schubert_batch`の削除権限は、次の定型functionのEXECUTEだけに限定する。
+
+| Function | 対象 | 主な引数 / 戻り値 |
+|---|---|---|
+| `schubert.maintenance_cleanup_notifications` | Notification | `run_id uuid, cutoff timestamptz, limit integer` / 対象・削除・skip件数 |
+| `schubert.maintenance_cleanup_questions` | Question/Answer | 同上 / 集約別件数 |
+| `schubert.maintenance_cleanup_sessions` | API/Web technical session | 同上 / schema別件数 |
+| `schubert.maintenance_cleanup_message_stores` | Inbox/Outbox | 同上 / table別件数 |
+| `schubert.maintenance_cleanup_logs` | App log | 同上 / 削除・hold skip件数 |
+| `schubert.maintenance_cleanup_batch_runs` | Batch run | 同上 / 削除・調査中skip件数 |
+
+Function ownerは`nk_owner`、`SECURITY DEFINER`、function固有の`SET search_path = pg_catalog, schubert, schubert_web_session`とする。
+Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当日backup gate・advisory lock/run IDをfunction内で再検証する。
+`REVOKE ALL ON FUNCTION ... FROM PUBLIC`後、完全signature単位で`schubert_batch`にEXECUTEをgrantする。返却は件数と理由codeだけとし、
+本文・ciphertext・pathを返さない。`batch_runs`記録とchunk transactionは341/332に従い、その他tableの直接DML grantは0とする。
 
 ## 4. Account・Session
 
@@ -106,24 +129,27 @@ Index: `ix_auth_sessions_user_active(user_id,last_accessed_at desc,id) where rev
 
 ### 4.3 `schubert.login_ip_attempts`
 
-`client_address inet PK`、`failed_count integer not null check 0..5`、`window_started_at timestamptz not null`、
+`client_address inet PK`、`failed_count integer not null check 0..10`、`window_started_at timestamptz not null`、
 `locked_until timestamptz null`、`updated_at timestamptz not null`。Cleanup indexは`ix_login_ip_attempts_updated_at(updated_at)`。
 
 ## 5. Scenario・Media master
 
 | Table | Columnと制約 | Index・FK | 関連UI/RD |
 |---|---|---|---|
-| `games` | `id smallint PK check 1..2`、`code varchar(16) UK check NUKITASHI1/2`、`title text NN check 1..128 byte`、`display_order smallint NN UK check 1..2`、`created_at timestamptz NN` | 2件の初期dataをmigrationで固定 | UI 223/242、DAT-006 |
-| `script_files` | `id bigint identity PK`、`game_id smallint NN`、`display_order bigint NN check 1..N12`、`storage_relative_path text NN`、`display_path text NN`、`file_name text NN`、`section_code varchar(64)`、`chapter_title text`、`sha256 char(64) NN`、`byte_size bigint NN check >=0`、`created_at NN` | FK game RESTRICT、UK `(game_id,storage_relative_path)` / `(game_id,display_order)` / `(id,game_id)`、index chapter/title trgm | UI 223/242/243、DAT-003～006 |
-| `speakers` | `id bigint identity PK`、`game_id smallint NN`、`name text NN`、`normalized_name text NN`、`is_protagonist boolean NN default false`、`notes text`、`created_at NN` | FK game RESTRICT、UK `(game_id,normalized_name)` / `(id,game_id)`、trgm name | UI 223/242、FUN-004 |
-| `script_entries` | `id bigint identity PK`、`game_id smallint NN`、`script_file_id bigint NN`、`display_order bigint NN UK`、`entry_index integer NN check >=0`、`line_number integer check >=1`、`entry_type varchar(9) NN`、`speaker_id bigint`、`speaker_label text`、`body text NN check octet<=4096`、`body_search text generated always as (lower(body)) stored`、`raw_block text NN`、`created_at NN` | 複合FK file/game CASCADE、speaker/game RESTRICT、UK `(script_file_id,entry_index)` / `(id,game_id)`、GIN body_search gin_trgm_ops、speaker/display_order | UI 223/242、FUN-003～005 |
-| `audio_files` | `id bigint identity PK`、`game_id smallint NN`、`storage_relative_path/display_path/file_name/basename text NN`、`audio_role varchar(8) NN`、`container varchar(16)`、`duration_ms bigint check >=0`、`byte_size bigint NN check >0`、`sha256 char(64) NN`、`created_at NN` | FK game RESTRICT、UK `(game_id,storage_relative_path)` / `(id,game_id)`、basename index | UI 223/242/243、FUN-005 |
-| `entry_audio_links` | `entry_id bigint`、`audio_file_id bigint`、`game_id smallint`、`link_type varchar(5) check voice/se/bgm/other`、`display_order smallint check 1..999`、`created_at NN`、PK `(entry_id,audio_file_id,link_type)` | 複合FK entry/game CASCADE、audio/game RESTRICT、UK `(entry_id,link_type,display_order)`、index audio ID。Deferred constraint triggerで1 entry/type 999件以下 | UI 242、DAT-006 |
-| `media_assets` | `id bigint identity PK`、`logical_id varchar(64) UK`、`media_type varchar(8) check VIDEO/MUSIC`、`title/category text NN`、`section text`、`storage_relative_path/display_path/file_name text NN`、`byte_size bigint check >0`、`sha256 char(64)`、`mime_type varchar(64)`、`parent_logical_id varchar(64)`、`pair_key text`、`pair_role char(1)`、`display_order integer check >=1`、`created_at NN` | Self FK parent logical ID RESTRICT、UK `(media_type,storage_relative_path)`、index `(media_type,category,section,display_order,id)` | UI 223/242/243、FUN-006～007 |
+| `games` | `id smallint PK check 1..2`、`code varchar(16) UK check NUKITASHI1/2`、`title text NN check octet_length 1..256`、`display_order smallint NN UK check 1..2`、`created_at timestamptz NN` | 2件の初期dataをmigrationで固定 | UI 223/242、DAT-006 |
+| `script_files` | `id bigint identity PK`、`game_id smallint NN`、`display_order bigint NN check 1..N12`、`storage_relative_path text NN check 1..512 byte`、`display_path text NN check 1..512 byte`、`file_name text NN check 1..256 byte`、`section_code varchar(64)`、`chapter_title text check <=256 byte`、`sha256 char(64) NN`、`byte_size bigint NN check >=0`、`created_at NN` | FK game RESTRICT、UK `(game_id,storage_relative_path)` / `(game_id,display_order)` / `(id,game_id)`、index chapter/title trgm | UI 223/242/243、DAT-003～006 |
+| `speakers` | `id bigint identity PK`、`game_id smallint NN`、`name text NN check 1..128 byte`、`normalized_name text NN check 1..128 byte`、`is_protagonist boolean NN default false`、`notes text`、`created_at NN` | FK game RESTRICT、UK `(game_id,normalized_name)` / `(id,game_id)`、trgm name | UI 223/242、FUN-004 |
+| `script_entries` | `id bigint identity PK`、`game_id smallint NN`、`script_file_id bigint NN`、`display_order bigint NN UK`、`entry_index integer NN check >=0`、`line_number integer check >=1`、`entry_type varchar(9) NN`、`speaker_id bigint`、`speaker_label text check <=128 byte`、`body text NN check octet<=4096`、`body_search text generated always as (lower(body)) stored`、`raw_block text NN`、`created_at NN` | 複合FK file/game CASCADE、speaker/game RESTRICT、UK `(script_file_id,entry_index)` / `(id,game_id)`、GIN body_search gin_trgm_ops、speaker/display_order | UI 223/242、FUN-003～005 |
+| `audio_files` | `id bigint identity PK`、`game_id smallint NN`、`storage_relative_path/display_path text NN check 1..512 byte`、`file_name text NN check 1..256 byte`、`basename text NN check 1..255 byte`、`audio_role varchar(8) NN`、`container varchar(16)`、`duration_ms bigint check >=0`、`byte_size bigint NN check >0`、`sha256 char(64) NN`、`created_at NN` | FK game RESTRICT、UK `(game_id,storage_relative_path)` / `(id,game_id)`、basename index | UI 223/242/243、FUN-005 |
+| `entry_audio_links` | `entry_id bigint NN`、`audio_file_id bigint NN`、`game_id smallint NN`、`link_type varchar(5) NN check voice/se/bgm/other`、`display_order smallint NN check 1..999`、`created_at NN`、PK `(entry_id,audio_file_id,link_type)` | 複合FK entry/game CASCADE、audio/game RESTRICT、UK `(entry_id,link_type,display_order)`、index audio ID。Deferred constraint triggerで1 entry/type 999件以下 | UI 242、DAT-006 |
+| `media_assets` | `id bigint identity PK`、`logical_id varchar(64) NN UK`、`media_type varchar(8) NN check VIDEO/MUSIC`、`title text NN check 1..256 byte`、`category text NN check 1..64 byte`、`section text check <=128 byte`、`storage_relative_path/display_path text NN check 1..512 byte`、`file_name text NN check 1..256 byte`、`byte_size bigint NN check >0`、`sha256 char(64) NN`、`mime_type varchar(64) NN`、`parent_logical_id varchar(64)`、`pair_key text check <=256 byte`、`pair_role char(1)`、`display_order integer NN check 1..9999`、`created_at NN` | Self FK parent logical ID RESTRICT、UK `(media_type,storage_relative_path)`、index `(media_type,category,section,display_order,id)` | UI 223/242/243、FUN-006～007 |
 
 `script_entries` CHECKは`dialogue`なら`speaker_id is not null`、`narration`なら`speaker_id is null`を保護する。
-Storage/display pathのsegment検査はJava/migrationで実施し、DBではNUL禁止、octet上限1..1024、
+Storage/display pathのsegment検査はJava/migrationで実施し、DBではNUL禁止、octet上限1..512。実storage pathの1 segment/basenameはOS適合上1..255 byte、電文・表示・download用`file_name`は1..256 byteとし、両者を混同しない。
 `storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)'`を最低限のCHECKとする。
+
+`media_assets`は`pair_role is null or pair_role in ('M','I','N')`をCHECKする。VIDEOは`pair_key/pair_role`=
+NULL、MUSICのM/Iは両方NNかつ`pair_key` 1～256 byte、Nは`pair_key` NULLとする複合CHECKでpairの半端状態を拒否する。
 
 ## 6. Question・Answer・非同期・通知
 
@@ -159,7 +185,7 @@ GIN `body gin_trgm_ops where is_deleted=false`、`ix_questions_deleted(deleted_a
 `state varchar(12) NN check (RECEIVED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、
 `message_id uuid NN UK`、`correlation_id uuid NN`、`processing_message_id uuid UK null`、
 `received_at/state_changed_at timestamptz NN`、`started_at/completed_at/error_at/cancelled_at timestamptz null`、
-`retry_count integer NN default 0 check 0..3`、`last_error_code varchar(16)`、`last_error_message varchar(256)`、
+`retry_count integer NN default 0 check 0..3`、`last_error_code varchar(64)`、`last_error_message varchar(256)`、
 `version bigint NN default 0 check 0..999999999`。
 
 Index: `ix_async_jobs_fifo(state,received_at,id)`、`ix_async_jobs_state_changed(state,state_changed_at,id)`、
@@ -170,8 +196,10 @@ Message IDであり、redelivery時の同一work識別に使う。
 
 `id bigint identity PK`、`job_id bigint NN UK FK async_jobs RESTRICT`、`question_id bigint NN FK questions RESTRICT`、
 `owner_user_id bigint NN FK app_users RESTRICT`、`notification_type varchar(12) NN check ACCEPTED/COMPLETED/ERROR`、
-`state varchar(12) NN`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(256)`、
+`state varchar(12) NN check (ACCEPTED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(512)`、
 `created_at/updated_at timestamptz NN`。
+
+`error_code`は351 §5.3の5値だけ、ERROR時はcode/messageともNN、他stateでは両方NULLのCHECKとする。
 
 Index: `ix_notifications_owner(owner_user_id,state_changed_at desc,id desc)`、
 `ix_notifications_cleanup(state,state_changed_at,id)`。Manual delete columnは設けない。Jobとnotificationのstate同期は必ず同一transactionで更新する。
@@ -187,11 +215,12 @@ Index: `ix_notifications_owner(owner_user_id,state_changed_at desc,id desc)`、
 | `request_layout_id`,`request_version` | char(8),char(3) | yes | format CHECK |
 | `owner_user_id` | bigint | no | FK app_users RESTRICT、Login前NULL |
 | `operation_token` | uuid | no | owner scope partial UK |
-| `request_fingerprint_hmac` | char(64) | no | lower hex CHECK |
-| `fingerprint_key_version` | varchar(16) | no | HMACがあればNN |
+| `request_fingerprint_hmac` | char(64) | yes | 全Requestのcanonical HMAC、lower hex CHECK |
+| `fingerprint_key_version` | varchar(16) | yes | HMAC key ID、current/previous allowlist |
 | `processing_state` | varchar(12) | yes | PROCESSING/COMPLETED/ERROR |
-| `result_ref_type` | varchar(16) | no | USER/QUESTION/JOB/FILE/NONE |
-| `result_ref_id` | bigint | no | Generic FKにせずserviceでtype検証 |
+| `result_ref_type` | varchar(16) | no | NONE/AUTH_SESSION/USER/QUESTION/JOB/SCENARIO_FILE |
+| `result_ref_id` | bigint | no | USER/QUESTION/JOB/SCENARIO_FILE用。Generic FKにせずserviceでtype検証 |
+| `result_ref_uuid` | uuid | no | AUTH_SESSION用。`auth_sessions.id`をserviceで検証 |
 | `response_layout_id`,`response_version` | char(8),char(3) | no | ペアNULL CHECK |
 | `response_body_encrypted` | bytea | no | Replayに必要な場合だけ |
 | `response_key_version` | varchar(16) | no | ciphertextとペア |
@@ -201,13 +230,19 @@ Index: partial UK `uq_request_inbox_operation(owner_user_id,operation_token) whe
 `ix_request_inbox_expires(expires_at)`、`ix_request_inbox_correlation(correlation_id)`。Loginのoperation tokenはowner未確定のため
 `owner_user_id` NULLのpartial UK対象外とし、Message IDでだけ冪等化する。
 
+- `owner_user_id is null` は`LGNREQ01`だけ、その他RequestはNN。`operation_token is not null`は323 §9の更新layoutだけとする。
+- PROCESSINGは`completed_at/result_ref_type/result_ref_id/result_ref_uuid/response_layout_id/response_version/response_body_encrypted/response_key_version`を全てNULL。
+- COMPLETED/ERRORは`completed_at`、response layout/version、`result_ref_type`をNN。`NONE`は両ref NULL、`AUTH_SESSION`はUUIDだけNN、
+  `USER/QUESTION/JOB/SCENARIO_FILE`はbigint IDだけNNとする排他的CHECKを設ける。SCENARIO_FILEのIDは再生成元`script_files.id`である。
+- Response snapshotは`response_body_encrypted`/`response_key_version`の両方NULLまたは両方NN。Password/context等を含む再構成不可結果はsnapshotを必須とし、平文保存しない。
+
 ### 7.2 `schubert.mq_outbox`
 
 `id bigint identity PK`、`message_id uuid NN UK`、`correlation_id uuid NN`、`destination varchar(32) NN`、
 `layout_id char(8) NN`、`layout_version char(3) NN`、`body bytea NN`、
 `status varchar(8) NN check PENDING/SENT/ERROR`、`attempt_count integer NN default 0 check 0..100`、
 `next_attempt_at timestamptz NN`、`lease_owner varchar(64)`、`lease_until timestamptz`、
-`created_at timestamptz NN`、`sent_at timestamptz`、`last_error_code varchar(16)`、`last_error_detail varchar(256)`。
+`created_at timestamptz NN`、`sent_at timestamptz`、`last_error_code varchar(64)`、`last_error_detail varchar(256)`。
 
 Destination CHECKは`nk.async.work` / `nk.dead.letter`のallowlist。Indexは
 `ix_mq_outbox_dispatch(status,next_attempt_at,id)`とpartial `ix_mq_outbox_lease(lease_until) where status='PENDING'`。
@@ -220,8 +255,15 @@ Lease pairは両方NULLまたは両方NNとする。
 `id bigint identity PK`、`logged_at timestamptz NN`、`service varchar(8) NN`、`category varchar(8) NN`、
 `level varchar(5) NN`、`action varchar(64) NN`、`message varchar(512) NN`、`request_id uuid`、`message_id uuid`、
 `correlation_id uuid`、`source_message_id uuid UK null`、`actor_user_id bigint null FK app_users RESTRICT`、`actor_username varchar(64)`、
-`http_method varchar(8)`、`request_uri varchar(1024)`、`status_code smallint check 100..599`、`remote_address inet`、
+`http_method varchar(8)`、`request_uri varchar(256)`、`status_code smallint check 100..599`、`remote_address inet`、
 `duration_ms bigint check >=0`、`details jsonb NN default '{}'::jsonb`。
+
+`service`は`WEB/API/BATCH/BROKER/DB/CADDY`、`category`は`REQUEST/ACTION/SECURITY/MQ/SYSTEM/BATCH`、
+`level`は`TRACE/DEBUG/INFO/WARN/ERROR`のCHECKとする。
+`details` top-level keyも351のevent catalogで定義した値だけをapplication validatorで受け付ける。
+
+`request_uri`は`octet_length <= 256`、`details`はserialized UTF-8 1,024 byte以内をCHECK/投影前validatorで保護し、
+WLGEVT01およびLGSRSP01へ暗黙truncateなしで変換可能にする。
 
 Partitionは初期releaseで使わず、indexを`logged_at desc`、`(category,logged_at desc)`、`correlation_id`、`message_id`、
 GIN `message gin_trgm_ops`に限定する。容量実測がthresholdを超えた後のpartition導入は別migrationとし、SSで無断変更しない。
@@ -231,7 +273,7 @@ GIN `message gin_trgm_ops`に限定する。容量実測がthresholdを超えた
 `id bigint identity PK`、`run_id uuid NN`、`business_date date NN`、`step varchar(32) NN`、`attempt smallint NN check 1..99`、
 `started_at timestamptz NN`、`ended_at timestamptz`、`status varchar(10) NN check RUNNING/SUCCESS/WARNING/FAILED/SKIPPED`、
 `target_count/success_count/failure_count bigint NN default 0 check >=0`、`byte_count bigint NN default 0 check >=0`、
-`error_code varchar(16)`、`error_summary varchar(512)`。
+`error_code varchar(64)`、`error_summary varchar(512)`。
 
 UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS'`、index `(run_id,step)`、
 `(status,started_at desc)`。同一stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
@@ -247,7 +289,7 @@ UK `(business_date,step,attempt)`、partial UK `(business_date,step) where statu
 ### 9.2 `schubert_web_session.pending_context_revocations`
 
 `id uuid PK`、`context_ciphertext bytea NN`、`key_version varchar(16) NN`、`requested_at timestamptz NN`、
-`attempt_count integer NN default 0 check 0..100`、`next_attempt_at/expires_at timestamptz NN`、`last_error_code varchar(16)`、
+`attempt_count integer NN default 0 check 0..100`、`next_attempt_at/expires_at timestamptz NN`、`last_error_code varchar(64)`、
 `lease_owner varchar(64)`、`lease_until timestamptz`。Index `(next_attempt_at,requested_at)`、`expires_at`。
 
 ### 9.3 `schubert_web_session.web_log_outbox`
@@ -255,7 +297,7 @@ UK `(business_date,step,attempt)`、partial UK `(business_date,step) where statu
 `id bigint identity PK`、`message_id uuid NN UK`、`correlation_id uuid NN`、`layout_id char(8) NN check WLGEVT01`、
 `layout_version char(3) NN`、`payload_ciphertext bytea NN`、`key_version varchar(16) NN`、
 `status varchar(8) NN check PENDING/SENT/ERROR`、`attempt_count integer NN default 0`、`next_attempt_at timestamptz NN`、
-`created_at timestamptz NN`、`sent_at timestamptz`、`last_error_code varchar(16)`、`lease_owner varchar(64)`、`lease_until timestamptz`。
+`created_at timestamptz NN`、`sent_at timestamptz`、`last_error_code varchar(64)`、`lease_owner varchar(64)`、`lease_until timestamptz`。
 Index `(status,next_attempt_at,id)`、SENT cleanup用`sent_at where status='SENT'`。
 
 ## 10. FK・ON DELETE・constraint名
@@ -303,3 +345,13 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | UI 241/242を物理schema、型、制約、index、role/grantへ具体化。 |
+| 2026-08-31 | 横断監査でIP lock 10回と整合するよう`login_ip_attempts.failed_count`を0..10へ是正。 |
+| 2026-08-31 | 横断監査で内部error code 64 byteと通知用16 byte code/message 512 byteを物理型・CHECKへ反映。 |
+| 2026-08-31 | 横断監査でLog path/detailsをUI 235の256/1,024 byteに統一。 |
+| 2026-08-31 | 横断監査でmasterのpath/file/title/category/section等をUI 234/235のwire byte上限へ統一。 |
+| 2026-08-31 | 横断監査でDB service role名をUI 212の`schubert_*`名に統一（MQの`nk_*` userと分離）。 |
+| 2026-08-31 | 横断監査でbatch権限をUI 212のallowlist保守function方式へ修正し、固定search_path・PUBLIC revoke・直接DML禁止を具体化。 |
+| 2026-08-31 | 横断監査でmetadata file名256 byteとstorage segment 255 byteを分離し、link/media/notification/logのNN・state・複合CHECKを補強。 |
+| 2026-08-31 | 横断監査で全RequestのInbox HMACをNNとし、state/result/response snapshotのNULL組合せCHECKを追加。 |
+| 2026-08-31 | 横断監査でLoginのUUID sessionとbigint業務参照を分離し、Inbox result referenceの型別排他的CHECKを追加。 |
+| 2026-08-31 | 横断監査で`pg_dump`のSELECT要件とbatchのciphertext閲覧禁止が両立しないため、専用`schubert_backup` role案をQA-043/UIC-003として保留。 |

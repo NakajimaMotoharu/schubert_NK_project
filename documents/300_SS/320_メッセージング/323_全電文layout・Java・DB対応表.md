@@ -136,10 +136,11 @@ last  = min(effectivePage*pageSize,totalCount)
 
 Total countがpage size別のUI上限を超える場合はrecordを一部返さず`9001`。
 
-## 9. Operation fingerprint対象
+## 9. Inbox・operation fingerprint対象
 
 | Layout | Owner | Target canonical | Payload canonical（token/reserved除外） |
 |---|---|---|---|
+| LGNREQ01 | `ANONYMOUS` | `LOGIN:<username_key>:<canonical client IP>` | NFC username、NFC password、canonical client IP |
 | UCRREQ01 | actor user ID | `NEW_USER:<username_key>` | username original/key、password value、role、enabled |
 | USTREQ01 | actor | `USER:<id>` | enabled、expected version |
 | URLREQ01 | actor | `USER:<id>` | new role、expected version |
@@ -149,7 +150,8 @@ Total countがpage size別のUI上限を超える場合はrecordを一部返さ�
 | NTCREQ01 | actor | `NOTIFICATION:<id>` | target ID |
 | QDLREQ01 | actor | `QUESTION:<id>` | target ID |
 
-Fingerprintは324のlength-prefixed canonical HMACを使用する。Password/質問本文の平文・単純hashをDBへ保存しない。
+Fingerprintは324のlength-prefixed canonical HMACを使用する。LGNREQ01はoperation tokenなしでMessage ID再配送の同一性検査に使う。
+Password/質問本文の平文・単純hashをDBへ保存しない。
 
 ## 10. DB rowとwire recordの分離
 
@@ -182,3 +184,4 @@ Fingerprintは324のlength-prefixed canonical HMACを使用する。Password/質
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | 全64 layoutのJava class、handler/service、DB型・table、validation対応を初版作成。 |
+| 2026-08-31 | 横断監査でLGNREQ01の匿名Inbox HMAC対象を追加し、失敗counterの再配送二重更新を防止。 |

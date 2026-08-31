@@ -85,7 +85,8 @@ Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model
 ### 7.1 論理検証
 
 - Relative pathはNFC、`/`だけをseparatorとする。空、先頭`/`、NUL/control文字、backslash、drive/UNC形式を禁止。
-- `.` / `..` / 空segment、末尾slash、二重slash、1,024 UTF-8 byte超過を禁止。Transferは2 segmentに固定。
+- `.` / `..` / 空segment、末尾slash、二重slashを禁止。Asset relative pathは512 UTF-8 byte以下、
+  Transferは256 ASCII byte以下・2 segmentに固定する。Storage pathの各実file segmentは255 UTF-8 byte以下。
 - Assetの許可先頭は`scenario/`、`video/`、`music/`。Descriptorのmedia typeと先頭が対応しなければ拒否。
 - Display pathはfile解決に使わず、HTML escape後の表示だけ。
 
@@ -117,14 +118,15 @@ API/MQ/file integrity障害は503。内部理由をBrowserへ区別表示しな�
 |---|---|---|
 | `/audio/{id}` | inline | 200/206/416、検証済み`audio/ogg`等、`Accept-Ranges: bytes` |
 | `/audio/{id}/download` | attachment | Rangeを採用せず200全長、`application/octet-stream` |
-| `/animation/{id}/media` | inline | 200/206/416、allowlist `video/mp4` |
-| `/music/{id}/media` | inline | 200/206/416、metadataと一致するallowlist audio MIME |
-| `/music/{id}/download` | attachment | Rangeを採用せず200全長、`application/octet-stream` |
+| `/animation/media/{id}` | inline | 200/206/416、allowlist `video/mp4` |
+| `/music/media/{id}` | inline | 200/206/416、metadataと一致するallowlist audio MIME |
+| `/music/download/{id}` | attachment | Rangeを採用せず200全長、`application/octet-stream` |
 
 全media responseに`X-Content-Type-Options: nosniff`、`Cache-Control: private, no-store`、`Content-Length`を設定する。
 `ETag`、`Last-Modified`、public cacheは初期releaseで使わず、conditional GETは200で応答する。
 
-File nameはNFC、1～255 UTF-8 byte、CR/LF/NUL/quote/slash/backslash/control文字禁止。
+Descriptorの表示/download file nameはNFC、1～256 UTF-8 byte、CR/LF/NUL/quote/slash/backslash/control文字禁止。
+これはstorage pathの実segment名（255 byte以下）と別metadataであり、OS path解決に使わない。
 `Content-Disposition` attachmentはASCII fallbackを安全な`download.bin`等にし、
 `filename*=UTF-8''<RFC 5987 percent-encoded>`を使う。Header valueにraw file nameを連結しない。
 
@@ -240,3 +242,5 @@ Metric labelにpath、file名、user ID、media IDを設定しない。Type、st
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Large-result、secure path、media認可、Range、朝削除の詳細を作成。 |
+| 2026-08-31 | 横断監査でmedia endpoint pathをUI 221/SS 313と同一の外部URLへ統一。 |
+| 2026-08-31 | 横断監査でAsset 512/Transfer 256 byteのpath上限と、wire表示file name 256 byteをUI 235/237に統一。 |

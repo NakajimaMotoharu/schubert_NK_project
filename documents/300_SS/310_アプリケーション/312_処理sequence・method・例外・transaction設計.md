@@ -30,7 +30,7 @@ Controller
        -> wait reply
   -> API SyncRequestListener
        -> InboundMessageGuard（property/header/length/layout）
-       -> AuthenticationContextVerifier
+       -> Login以外: AuthenticationContextVerifier
        -> InboxCoordinator.execute()
             -> LayoutHandler.handle()
                  -> @Transactional ApplicationService
@@ -66,6 +66,10 @@ Webはtimeout時に自動再送しない。参照GETは利用者の再操作で�
 JMS sessionは`SESSION_TRANSACTED`とし、`Message.acknowledge()`は呼ばない。`session.commit()`が受信ACKとreply sendを同時確定する。
 UIの「manual ACK」は、framework自動ACKではなくlistenerがJMS commit時点を制御する意味として実装する。
 
+`LGNREQ01`は認証contextを持たないため、恒久protocol検証後に匿名InboxをMessage IDで先に開始する。
+Username・client address・NFC後passwordのexternal-key HMACを照合し、Inbox、失敗counter、auth session、暗号化response
+snapshotを同一PostgreSQL transactionで確定する。これによりDB commit後のJMS再配送で失敗counterやsessionを二重更新しない。
+
 ### 3.4 Crash matrix
 
 | Crash point | DB | Reply/JMS ACK | Recovery |
@@ -89,7 +93,8 @@ UIの「manual ACK」は、framework自動ACKではなくlistenerがJMS commit�
 | `MqAuthenticationProvider.authenticate` | Spring authentication token | authenticated principal | `0101`は同一message、`0106`はRetry-After、`9000`は503 |
 
 Password `char[]`はencode照合直後にzero fillする。Login Message ID重複時は`auth_sessions.created_message_id`から暗号化raw contextを復号し、
-同じ成功結果を返す。認証失敗responseへpassword/username存在情報を返さない。
+同じ成功結果を返す。認証失敗/lockは`request_inbox`の暗号化response snapshotを返し、counterを再更新しない。
+認証失敗responseへpassword/username存在情報を返さない。
 
 ### 4.2 Logout
 
@@ -111,7 +116,8 @@ Password `char[]`はencode照合直後にzero fillする。Login Message ID重�
 | `LogQueryService.search` | ADMIN context、filters | `PageResult<LogItem>` | read-only、roleをservice先頭で再検証 |
 
 Scenario large-resultはDB cursor/rowをfileへ書く間に長時間transactionを保持しない。必要な表示snapshotをread-only transaction内で
-最大10,000件へmaterializeし、commit後にfile生成する。上限超過は`9001`、途中I/O失敗は`.part`を残して503とし朝清掃する。
+最大10,000件へmaterializeし、commit後にfile生成する。上限超過は`9001`、途中I/O失敗は`.part`を即時best-effort削除し、
+削除できない場合だけ朝清掃に残し503とする。
 
 ## 6. User管理更新
 
@@ -260,3 +266,4 @@ Exception messageを利用者へ直接表示しない。Result code、error/acti
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | 主要sequence、method契約、transaction/crash matrixを初版作成。 |
+| 2026-08-31 | 横断監査でLogin失敗counterを含む匿名Inbox transactionとlarge-result中間file清掃を整合。 |

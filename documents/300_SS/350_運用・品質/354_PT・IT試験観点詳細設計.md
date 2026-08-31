@@ -5,11 +5,11 @@
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
-- 状態: `確認待ち`。Broker再配送第3間隔のoracleだけQA-041/UIC-001回答待ち、その他は確定
+- 状態: `確認待ち`。BrokerはQA-041/UIC-001・QA-042/UIC-002、DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
 - 上位設計: UI 213、221～254、261、264
 - 関連RD: TST-001～TST-005、TST-101～TST-103、T-001～T-004、PER-001～PER-010、AVL-003～AVL-010
 - 関連SS: 311～353、[355_Characterization Test実行準備・PG開始gate](<355_Characterization Test実行準備・PG開始gate.md>)
-- 関連QA/RDF/UIC: QA-001～QA-041、RDFなし、UIC-001
+- 関連QA/RDF/UIC: QA-001～QA-043、RDFなし、UIC-001～UIC-003
 
 ## 2. 試験階層・環境
 
@@ -52,7 +52,8 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 
 ### 4.2 PT-AUTH（SS 314・352）
 
-- Username NFC/trim/lowercase key、Login password 0/1/256/257 byte、作成password 11/12/128/129文字、Argon2id parameter/rehash、存在/不存在timingの統計的差。
+- Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
+  PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。
 - Session 1/2/3件、最古revoke、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。
 - CSRF欠落/不一致/別session/再利用、SavedRequestのsafe GETとexternal/POST拒否、Logout POST、cache/header。
@@ -130,11 +131,13 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
   回答前は`PENDING_QA_041`とし、25秒または30秒を無断で合格oracleにしない。
 - 恒久protocol errorは初回でDLQ・ACK・nonzero exit、DB不能の最終再配送はDLQとjob整合runbookを実行する。
 - DLQ/Expiryのbody非表示、browse権限、個別replay、同Message ID Inbox replay、自動purgeなしを確認する。
+- Addressのメモリ高水位、page上限、page-full時、disk-full時の合否oracleはQA-042回答で一意に固定する。回答前は`PENDING_QA_042`とし、`BLOCK`または`PAGE`のいずれかを無断で合格oracleにしない。
 
 ### 5.4 IT-OPS・RESTORE・SECURITY
 
 - Morning依存順、stop timeout、systemdの10分5回rate limit、Caddy 55160だけpublic、loopback portの非公開。
 - Backup復元を隔離DB→新instanceの順で実行し、schema/role/constraint/count/Queue整合、RPO/RTO 24時間を測定。
+- QA-043回答後の専用backup roleで3 schemaをdump/restoreでき、batch roleではdump/任意SELECT不可、backup roleではDML/SET ROLE/復号key取得不可であることを検証する。回答前のoracleは`PENDING_QA_043`。
 - Asset master 59,627 file/19,240,707,190 byte、Scenario 262/99,661、audio 37,256、link 35,201、video 20、music 129をhash/count検証。
 - USERからADMIN/他人、直接Queue/DB/file/port、credentialのargv/env/log、CSP/CSRF/session改ざんを攻撃testする。
 - DEBUG→STANDARD切替で詳細metric componentを停止しても、systemd/journal/DB/Artemis/disk/最小healthが継続する。
@@ -147,7 +150,7 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
 | Search worst、Log 100、新規一覧50、Scenario 10,000 | Query ID・plan・pool・heap・wire/file上限内 |
 | 20 media stream/Range 1MiB | 同時数上限、Range開始、FD/thread/direct memory、他画面p95への影響 |
 | Async/Web log Queue 70/90%、transfer 3.5/4.5GB | Warning/critical、新規受付9001、既受付・証跡を失わない |
-| 16GB memory・256GB disk budget | Systemd MemoryMax、PG/Artemis/JVM/direct/journal/paging/backup合計が上限内 |
+| 16GB memory・256GB disk budget | Systemd MemoryMax、PG/Artemis/JVM/direct/journal/paging/backup合計が上限内。ArtemisはQA-042承認後のmemory/page/page-full/disk-full policyを実効値で検証 |
 
 ## 6. Test data・fixture
 
@@ -179,8 +182,8 @@ PT開始は対象class/migration/configとreview、関連SS/test case、fixture�
 IT開始はPT必須case合格、同一release artifact、全componentのconfig/credential、障害注入・rollback手順を条件とする。
 
 PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、trace/coverage 100%、証跡のrelease commitひも付け、
-機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-041未解決中は再配送間隔caseを
-`skipped`合格にせず、IT完了前に承認oracleへ固定する。
+機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-041～QA-043未解決中は再配送間隔、
+Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず、IT完了前に承認oracleへ固定する。
 
 ## 9. SS設計判断
 
@@ -202,3 +205,5 @@ PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、t
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | PT/ITの分岐・境界・異常・競合・再送・性能・復旧と証跡/gateを詳細化。 |
+| 2026-08-31 | 横断監査でPassword試験をNFC・256 byte全長を扱う`pbkdf2-v1`へ統一し、QA-042/UIC-002のArtemis容量・paging pending oracleを追加。 |
+| 2026-08-31 | QA-043/UIC-003の専用backup role、batch/backup相互権限、dump/restoreのpending oracleを追加。 |

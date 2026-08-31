@@ -10,7 +10,7 @@ Web/Caddy/API/Artemis/PostgreSQL/file/backup/batch/config/credentialの障害に
 - 関連SS: [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
   [341_朝batch・backup・削除・再実行設計](../340_batch・基盤/341_朝batch・backup・削除・再実行設計.md)、
   [351_Log・metric・alert・error code設計](<351_Log・metric・alert・error code設計.md>)
-- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041/UIC-001はBroker再配送期待値のみ確認中
+- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041～QA-043、UIC-001～UIC-003。Broker設定とbackup role境界を確認中
 
 自動復旧はprocess restart/outbox retry/JMS redeliveryの設計済み範囲だけ。DLQ再投入、DB restore、
 credential差替え、不明file削除、強制終了、public再開は運用者が証跡と対象を確認して行う。
@@ -61,6 +61,8 @@ Password、token、body、secret、physical path全文はincident記録に含め
 
 - Unit/exit、bind 61616/8161、journal load/sync、disk/inode、Address/Queue/consumer/message/delivering/scheduled、DLQ/Expiry、config/security driftを確認。
 - QA-041解決まで再配送第3間隔の25/30秒差をbroker故障と誤判定しない。実効configとQA状態を併記。
+- QA-042解決までAddressの`BLOCK`/`PAGE`、memory high-water、page limit/page-full値の差を無断で故障復旧に使用しない。実効config、
+  address memory/page byte/page file、global memory、filesystem率を同時に保全する。
 - Caddy/Web/APIを停止または非公開にし、producer/consumer I/Oを止める。
 - Disk不足ならRB-006。Config driftならvalidated `broker.xml`/credentialへ戻し、journal fileを直接編集/削除しない。
 - Clean restartし、journalの回復、全6 Address/Queue/durable/routing/security、duplicate cache、disk、consumer 0時の件数を確認。
@@ -113,7 +115,7 @@ Login request DLQはpasswordを含む可能性がある。Bodyをterminal/ticket
 | Filesystem 80% | Warning | directory別容量、growth rate、backup/log/transfer/Artemis/DBをread-only調査 |
 | 90% | Critical | Large-result・質問新規を9001、95%は入口停止 |
 | JVM OOM/MemoryMax | Process exit/restart | Leak/入力/同時数/metricを分析、heap dump自動生成なし |
-| Queue full/block | Producer timeout/9001/outbox retry | Consumer/依存復旧、message削除なし |
+| Queue high-water/page-full/block | QA-042承認済みpolicyによるpagingまたはproducer例外/timeout、9001、outbox retry | Consumer/依存復旧、message削除なし。Memory/page/diskを分けて診断 |
 
 削除は保持期間済み・正規root・通常file/row・backup gate・対象IDをread-onlyで確定したものだけ。
 DLQ/PENDING/ERROR/PROCESSING、最新/既存7世代backup、asset、DB/WAL/journal、transfer root自体を直接削除しない。
@@ -122,6 +124,7 @@ DLQ/PENDING/ERROR/PROCESSING、最新/既存7世代backup、asset、DB/WAL/journ
 
 - Backup失敗はbusiness/technical data cleanupをskip、transfer cleanupとapplication起動は続行。失敗を無視成功化しない。
 - Root/permission/capacity/DB/pg_dump/list/hash/config encryption/atomic renameのerror codeで分類。既存7世代を保護。
+- `permission denied`は実効DB user、credential ID、dump対象schema/table grantを値非表示で確認する。QA-043回答前にbatch roleへSELECTを追加して復旧しない。
 - 原因撤去後、新directoryで`backup`stepを再実行。同日成功をmanifest/DBで確認してから
   `morning-run --resume <runId>`で元cutoffのcleanupを再開。
 - Transfer root safety failureはapplicationを起動しない。Individual cleanup warningは容量と対象typeを調査後、同runで再実行。
@@ -198,3 +201,5 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Component、DLQ、DB restore、resource、backup、file、credential、drift/disasterの復旧手順を作成。 |
+| 2026-08-31 | 横断監査でQA-042/UIC-002を追跡し、Artemis memory/page/disk容量故障の証跡と切り分けを追加。 |
+| 2026-08-31 | QA-043/UIC-003のbackup role/grant障害を値非表示で切り分け、batch roleへの緊急SELECT追加を禁止。 |

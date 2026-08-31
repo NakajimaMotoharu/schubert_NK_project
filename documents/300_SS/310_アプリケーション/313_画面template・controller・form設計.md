@@ -82,23 +82,24 @@ inline event handler、外部CDNを使用しない。TemplateはView Modelだけ
 | 016 | GET `/admin/users/new` | `admin/user-new.html` | `UserAdminController.newForm(Model)` | `UserCreateForm` | なし | ADMIN |
 | 016 | POST `/admin/users/new` | redirect/再表示 | `UserAdminController.create(UserCreateForm,BindingResult)` | `UserCreateForm` | IF-019 | ADMIN、token |
 | 017 | GET `/admin/users/{id}` | `admin/user-detail.html` | `UserAdminController.detail(long,Model)` | `UserDetailViewModel`＋操作別form | IF-020 | ADMIN |
-| 017 | POST `/admin/users/{id}/status` | redirect/409 | `UserAdminController.changeStatus(...)` | `UserStatusForm` | IF-021 | ADMIN、token/version |
-| 017 | POST `/admin/users/{id}/role` | redirect/409 | `UserAdminController.changeRole(...)` | `UserRoleForm` | IF-022 | ADMIN、token/version |
-| 017 | POST `/admin/users/{id}/password` | redirect/再表示 | `UserAdminController.resetPassword(...)` | `PasswordResetForm` | IF-023 | ADMIN、token/version |
-| 017 | POST `/admin/users/{id}/unlock` | redirect/409 | `UserAdminController.unlock(...)` | `UserUnlockForm` | IF-024 | ADMIN、token/version |
+| 017 | POST `/admin/users/{id}` + `operation=STATUS` | redirect/409 | `UserAdminController.changeStatus(...)` | `UserStatusForm` | IF-021 | ADMIN、token/version |
+| 017 | POST `/admin/users/{id}` + `operation=ROLE` | redirect/409 | `UserAdminController.changeRole(...)` | `UserRoleForm` | IF-022 | ADMIN、token/version |
+| 017 | POST `/admin/users/{id}` + `operation=PASSWORD` | redirect/再表示 | `UserAdminController.resetPassword(...)` | `PasswordResetForm` | IF-023 | ADMIN、token/version |
+| 017 | POST `/admin/users/{id}` + `operation=UNLOCK` | redirect/409 | `UserAdminController.unlock(...)` | `UserUnlockForm` | IF-024 | ADMIN、token/version |
 | 018 | GET `/questions/new` | `questions/new.html` | `QuestionController.newForm(Model)` | `QuestionSubmitForm` | なし | USER/ADMIN、QST-001 |
 | 018 | POST `/questions/new` | redirect/再表示 | `QuestionController.submit(...)` | `QuestionSubmitForm` | IF-025 | USER/ADMIN、token |
 | 019 | GET `/questions/accepted/{receiptId}` | `questions/accepted.html` | `QuestionController.accepted(ReceiptId,Model)` | `QuestionAcceptedViewModel` | 保存済みIF-025結果 | Owner、QST-002 |
 | 020 | GET `/notifications` | `notifications/list.html` | `NotificationController.list(NotificationSearchForm,Model)` | `NotificationSearchForm` / `NotificationListViewModel` | IF-026 | 本人だけ、NTF-001 |
 | 021 | GET `/notifications/{id}` | `notifications/detail.html` | `NotificationController.detail(long,Model)` | `NotificationDetailViewModel`＋`CancelForm` | IF-027 | 本人だけ |
-| 021 | POST `/notifications/{id}/cancel` | redirect/最新表示 | `NotificationController.cancel(...)` | `CancelForm` | IF-028 | 本人、RECEIVED、token |
+| 021 | POST `/notifications/{id}` + `operation=CANCEL` | redirect/最新表示 | `NotificationController.cancel(...)` | `CancelForm` | IF-028 | 本人、RECEIVED、token |
 | 022 | GET `/questions` | `questions/list.html` | `QuestionController.list(QuestionSearchForm,Model)` | `QuestionSearchForm` / `QuestionListViewModel` | IF-029 | USER本人/ADMIN全件 |
 | 023 | GET `/questions/{id}` | `questions/detail.html` | `QuestionController.detail(long,Model)` | `QuestionDetailViewModel`＋`QuestionDeleteForm` | IF-030 | Owner/ADMIN |
-| 023 | POST `/questions/{id}/delete` | redirect | `QuestionController.delete(...)` | `QuestionDeleteForm` | IF-031 | Owner/ADMIN、token |
+| 023 | POST `/questions/{id}` + `operation=DELETE` | redirect | `QuestionController.delete(...)` | `QuestionDeleteForm` | IF-031 | Owner/ADMIN、token |
 | 090 | GET `/error` | `error/error.html` | `ErrorController.error(HttpServletRequest,Model)` | `ErrorViewModel` | なし | 全scope、TST-002 |
 
-PathはUI 221の既存URLを維持する。UI 221でSCR-017/021/023をGET/POST同一URLと表現しているが、詳細実装では操作別POST pathへ分ける。
-画面遷移・利用者操作は不変であり、URL bookmarkは受入条件外である。
+PathはUI 221のURLをGET/POSTとも維持する。SCR-017は同一POST pathにhidden `operation`を付与し、
+`@PostMapping(params="operation=STATUS")`等のallowlistで操作別handler/form validationへ分岐する。SCR-021/023も同じ。
+Operation欠落・複数・未知値はMQ送信前に400とし、form actionとpath IDはCharacterization Testで比較する。
 
 ## 5. Form validation
 
@@ -205,7 +206,7 @@ Templateは0件時に`該当するデータはありません`を表示し、pag
 | ID | 判断 | 根拠・理由 | 後続影響 |
 |---|---|---|---|
 | SS-D-007 | 現行14 template名を維持し、新規画面だけsubdirectory化する | UI 221～223、264。比較とCSS移植を容易にする | CHR DOM/screenshot selectorを安定化 |
-| SS-D-008 | SCR-017/021/023の更新POSTを操作別subpathへ分離する | CSRF/認可/validation handlerを明確化。利用者操作・外部仕様は不変 | Characterizationはform actionの許容差異としてDIF-015範囲を確認 |
+| SS-D-008 | SCR-017/021/023はUI 221の同一GET/POST URLを維持し、hidden operationとrequest-param allowlistでhandlerを分離する | 外部URLを変更せず、CSRF/認可/validationを操作別に明確化 | Form action/operation正負PT、CHRでURL比較 |
 | SS-D-009 | Templateへprotocol/DB objectを直接渡さない | Storage path/秘密値の誤露出防止 | Mapper PT、ArchUnit/template model review |
 
 ## 12. 更新履歴
@@ -213,3 +214,4 @@ Templateは0件時に`該当するデータはありません`を表示し、pag
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | 全画面・endpointのtemplate/controller/form/validation/表示制御を初版作成。 |
+| 2026-08-31 | 横断監査でUI 221のPOST URL維持とhidden operation分岐へ是正。 |

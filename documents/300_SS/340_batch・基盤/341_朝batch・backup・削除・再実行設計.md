@@ -9,7 +9,7 @@ transfer/Expiry清掃、依存順起動、失敗時の継続/打切り、二重�
 - 関連RD: AVL-001～AVL-010、OPS-001～OPS-017、BAK-001～BAK-008、BKO-001～BKO-008
 - 関連SS: [332_SQL・transaction・lock・削除設計](../330_データ・ファイル/332_SQL・transaction・lock・削除設計.md)、
   [333_大容量結果file・media・Range配信設計](../330_データ・ファイル/333_大容量結果file・media・Range配信設計.md)
-- 関連QA: QA-013、QA-014、QA-024、QA-029、QA-033、QA-038～QA-040。RDF/UICなし
+- 関連QA/RDF/UIC: QA-013、QA-014、QA-024、QA-029、QA-033、QA-038～QA-040、QA-043、RDFなし、UIC-003
 
 ## 2. Unit・step構成
 
@@ -65,7 +65,7 @@ PostgreSQL readiness
  -> BACKUP_DB + BACKUP_CONFIG
  -> CLEAN_BUSINESS   (backup successのみ、failureはSKIPPED)
  -> CLEAN_TECHNICAL  (backup successのみ)
- -> CLEAN_TRANSFER   (backup成否にかからず、root safety必須)
+ -> CLEAN_TRANSFER   (backup成否にかかわらず、root safety必須)
  -> Artemis readiness
  -> CLEAN_EXPIRY
  -> API readiness
@@ -85,14 +85,16 @@ Artemis以降を開始しない。
 1. Backup rootをabsolute・real pathで検証し、`/`、home、asset/transfer/log/Artemis root自体または配下を拒否。
 2. `yyyyMMdd-HHmmss-<runId>.part`をmode 0700でCREATE_NEW。同一mountの確定先とする。
 3. Systemd credentialで渡された`.pgpass`を`PGPASSFILE`へ指定し、passwordをcommand line/environment実値へ出さない。
-4. `pg_dump --format=custom --no-owner --no-privileges --file=<part>/schubert_nk.dump schubert_nk`。Backup roleは読取専用。
+4. QA-043承認時は`schubert-backup` OS userの固定unitから、`schubert_backup`専用credentialで
+   `pg_dump --format=custom --no-owner --no-privileges --schema=schubert --schema=schubert_web_session --schema=schubert_meta --file=<part>/schubert_nk.dump schubert_nk`
+   を実行する。`schubert_batch` credentialでdumpしない。QA-043回答前はrelease command/roleを確定しない。
 5. Exit 0、file >0 byte、`pg_restore --list`成功、dump SHA-256を検証。
 6. DB/app/schema/OS/JDK/PG/Artemis version、開始/終了、file size/hashを`MANIFEST.json`へ記録。Secretなし。
 
 ### 6.2 Config・credential backup
 
 - `/etc/schubert-nk`の非秘密configはroot所有のtar、path traversal/symlinkを入れず`config.tar`へ固定。
-- Credential directoryはrootが専用allowlistだけ読み、recovery用公開keyのみをhostに置い、
+- Credential directoryはrootが専用allowlistだけ読み、recovery用公開keyのみをhostに置き、
   `age` recipient暗号化の`credentials.tar.age`へする。復号private keyは当該server/backupに置かない。
 - Archive中のfilename/permission一覧は機密扱いとし、暗号文本だけのhash/sizeをmanifestへ出す。
 
@@ -125,7 +127,8 @@ backup/restore手順の変更・rehearsalなしに行わない。
 | `CLEAN_LOG` | 90日超、security hold除外 | 10,000 | Chunk単位再開 |
 | `CLEAN_BATCH_RUN` | 400日超、RUNNING/FAILED調査中除外 | 1,000 | 証跡保護を優先しskip |
 
-SQL、lock、delete順は332 §11を正とする。各chunk commit後にcountを更新する。
+SQL、lock、delete順は332 §11を正とする。Batch roleは基底tableを直接DELETEせず、331 §3.3のallowlist済み
+maintenance functionを呼び出す。各chunk commit後にcountを更新する。
 Process kill後は未削除rowだけ残り、同cutoff再実行で0件/残件を冪等処理する。
 
 ## 8. Transfer cleanup
@@ -136,13 +139,13 @@ Process kill後は未削除rowだけ残り、同cutoff再実行で0件/残件を
 | 拡張子 | 処理 | 理由 |
 |---|---|---|
 | `.part` | cutoff前なら削除 | 中間file |
-| `.ready` | cutoff前なら削除 | 取得成否にかからず次回朝削除 |
-| 不明file/symlink/device/socket | 削除ずWARNING | 誤削除/攻撃防止 |
+| `.ready` | cutoff前なら削除 | 取得成否にかかわらず次回朝削除 |
+| 不明file/symlink/device/socket | 削除せずWARNING | 誤削除/攻撃防止 |
 | root/日付directory | rootは不変、空の正規日付dirだけ削除 | 広範囲削除防止 |
 
 ## 9. Artemis Expiry cleanup
 
-1. Broker readinessと`nk.expiry.queue` healthを確認。`nk_mq_maintenance`のLoadCredentialで管理APIへloopback接続。
+1. Broker readinessと`nk.expiry.q` healthを確認。`nk_mq_maintenance`のLoadCredentialで管理APIへloopback接続。
 2. Brokerが保持するexpiry timestampが`run_started_at - 7 days`より前のmessageをselectorでcount/byte見積り。
 3. Count/byte/cutoffを記録した後、同selectorをArtemis management operationでpurge。Queue/journal fileをOSから削除しない。
 4. 実行後countで削除差分を照合。DLQは対象にしない。
@@ -172,7 +175,7 @@ Readinessは認証情報・Queue内容・DBデータをbodyへ返さない。Cad
 | `expiry-cleanup --run-id` | Artemis UP、API停止 | 同cutoff selectorの残件だけpurge |
 
 新しい日時でresume対象を再計算しない。別日へ進む場合は新run ID/business dateを作る。
-Manual commandもsystemd transient scopeまたは対応oneshoot unitを通し、root shellでJava/SQL/scriptを直接実行しない。
+Manual commandもsystemd transient scopeまたは対応oneshot unitを通し、root shellでJava/SQL/scriptを直接実行しない。
 
 ## 12. Exit code・終了判定
 
@@ -202,6 +205,7 @@ Package名/versionと非秘密config hashは記録可。
 - Timer、手動、二重起動、OS lock/DB lock、step中process kill、reboot不成立。
 - Caddy/Web/API/Artemis/PostgreSQL各stop timeout、transaction rollback/requeue、自動SIGKILLなし。
 - `pg_dump`非0、0 byte、list不正、hash不一致、config暗号失敗、rename失敗、容量不足。
+- Backup専用role以外でのdump、dump roleのDML/SET ROLE/復号key取得、backup unit外からのcredential利用を負の試験にする。
 - Backup成功/失敗分岐、7/8世代、既存世代保護、別test DBへのrestore。
 - Notification全5state/cutoff境界、Question FK競合、chunk間kill/resume、保持対象外。
 - Transfer root誤り、symlink/device/unknown file、個別失敗、root自体の保護。
@@ -229,3 +233,5 @@ Package名/versionと非秘密config hashは記録可。
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | 計画停止、backup、cleanup、Expiry、readiness、resume・exit codeを詳細化。 |
+| 2026-08-31 | 横断監査でbatch cleanupを331のallowlist済みmaintenance function経由に固定し、文言誤りを修正。 |
+| 2026-08-31 | `pg_dump`用SELECTとbatch保守権限を分離する`schubert_backup`案をQA-043/UIC-003として保留。 |

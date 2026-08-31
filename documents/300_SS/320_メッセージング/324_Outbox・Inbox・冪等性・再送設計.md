@@ -16,11 +16,11 @@ Message ID、operation token、HMAC fingerprint、request inbox、API/Web outbox
 | 業務Message ID | 1 wire message | Transport再配送は同一、利用者再操作は新規可 | `request_inbox.message_id`、event/work UK |
 | Correlation ID | Request/response/後続event関係 | Response/workで元requestを参照 | Header/JMS/log |
 | Operation token | 1 Browser論理更新 | Timeout再操作だけ同一 | Owner scope unique index＋業務UK |
-| Payload fingerprint | Tokenの対象/layout/payload拘束 | Key rotation version付き | HMAC-SHA-256 |
+| Request/payload fingerprint | 全RequestのMessage ID、更新tokenの対象/layout/payload拘束 | Key rotation version付き | HMAC-SHA-256 |
 | Business UK | Question token、answer question、event source ID等 | 永続 | 業務table/DB constraint |
 
-Message IDだけではBrowser timeout後の新Message IDを結び付けられないため更新layoutはoperation tokenを併用する。Tokenだけではpayload差替えを
-検知できないためHMACを併用する。Artemis duplicate detectionは補助であり、DB一意制約を省略しない。
+Message IDだけでは同ID・異bodyやBrowser timeout後の新Message IDを安全に判別できない。全RequestにHMAC fingerprintを付け、
+更新layoutはoperation tokenも併用する。Artemis duplicate detectionは補助であり、DB一意制約を省略しない。
 
 ## 3. Canonical fingerprint
 
@@ -42,7 +42,8 @@ repeat in layout-defined order:
   LP(canonical field bytes)
 ```
 
-Operation token、header ID/time/context、reserved、CSRF、paddingはpayloadへ含めない。Target/payloadのlayout別定義は323 §9を正とする。
+Operation token、header ID/time/context、reserved、CSRF、paddingはpayloadへ含めない。全Requestはdecode後のlayout定義順に全有効fieldをcanonical化する。
+323 §9の更新/Login layoutは記載のtarget/payloadを正とし、その他は`REQUEST:<layout-id>`をtargetとする。
 Password・質問本文もHMAC入力には含めるが、平文/単純SHA-256/canonical bytesをDB/logへ保存せず、計算後bufferをzero fillする。
 
 ### 3.2 HMAC
@@ -67,6 +68,7 @@ new ----> PROCESSING ----------+----> COMPLETED
 ## 5. Inbox取得algorithm
 
 `InboxCoordinator.begin(RequestIdentity identity, Fingerprint fp)`は認証後、業務処理と同じDB transactionで次を行う。
+`LGNREQ01`だけは認証contextがないため、protocol検証後・password照合前に`AnonymousInboxCoordinator`で同じalgorithmを開始する。
 
 1. Message IDでrowを検索し`FOR UPDATE`する。
 2. 存在する場合、layout/correlation/owner/fingerprintを比較する。不一致はMessage ID再利用の恒久整合errorとして処理し、保存結果を返さない。
@@ -75,22 +77,23 @@ new ----> PROCESSING ----------+----> COMPLETED
 5. 該当なしならPROCESSING rowをINSERTする。並行unique違反は1回だけ既存row再読へ戻る。
 6. Handler結果とcritical auditを確定し、result reference/response snapshot、response layout、completed_at/expires_at、stateを更新する。
 
-Login前はowner NULLであり、Message IDだけを一意keyとする。Login成功replayは`auth_sessions.created_message_id`、認証失敗は暗号化済みerror
-response snapshotを使用する。Owner NULL＋operation tokenのpartial uniqueは作らない。
+Login前はowner NULLであり、Message IDだけを一意keyとする。同一Message IDでは323 §9の匿名HMACも一致必須とする。
+Login成功replayは`auth_sessions.created_message_id`、認証失敗は暗号化済みerror response snapshotを使用する。
+Inbox・User/IP counter・auth session・snapshotは同一transactionでcommitする。Owner NULL＋operation tokenのpartial uniqueは作らない。
 
 ## 6. Response保存・再構成
 
 | 処理 | 保存方式 | Replay |
 |---|---|---|
-| Login成功 | `result_ref=AUTH_SESSION` | auth session ciphertextを復号し同context/expiryを返す |
+| Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id` | auth session ciphertextを復号し同context/expiryを返す |
 | Login失敗/lock | 暗号化response snapshot | 同result/retry情報を返す |
 | 参照/list/detail | 暗号化・圧縮済みfixed response body | Header Message/Correlation/sentAtを新response用に再構築しpayloadをdecode/encode |
 | User更新 | `result_ref=USER`＋version/result | 現在値が進んでいても当該操作の保存versionを0200で返す |
 | Question受付 | `result_ref=QUESTION` | receipt/question/submittedを業務rowから0200で返す。Outbox SENTも再確認 |
 | Cancel/delete | `result_ref=JOB/QUESTION`＋確定日時 | 同じstate/deleted_atを0200 |
-| Scenario file mode | `result_ref=SCENARIO_FILE`＋descriptor | `.ready`存在時は同descriptor。朝削除後はmaster snapshotから新fileを再生成 |
+| Scenario file mode | `result_ref=SCENARIO_FILE`＋`result_ref_id=script_files.id`＋descriptor | `.ready`存在時は同descriptor。朝削除後は同じmaster file snapshotから新fileを再生成 |
 
-SnapshotはZstandard等の新規native依存を避け、JDK `Deflater` level 3で圧縮後、API inbox AES-256-GCM keyで暗号化する。AADはMessage ID、
+SnapshotはZstandard等の新規native依存を避け、JDK `Deflater` level 3で圧縮後、`api-inbox-response-aes` AES-256-GCM keyで暗号化する。AADはMessage ID、
 response layout/version、owner ID。最大平文1,000,000 byte、最大暗号文1,050,000 byteをCHECK/guardする。圧縮bombを避けdecode時に期待平文上限を設定する。
 
 Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせ、result codeを`0200`とする。
@@ -219,3 +222,6 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Inbox/outbox、HMAC canonical、replay、lease、crash recoveryを初版作成。 |
+| 2026-08-31 | 横断監査でLGNREQ01の認証前Inbox、HMAC、失敗counter/sessionの同一transaction境界を明記。 |
+| 2026-08-31 | 横断監査でHMAC fingerprintを全Requestに必須化し、Inbox response暗号key名をcredential catalogに同期。 |
+| 2026-08-31 | 横断監査でLogin UUIDと業務bigintをInbox result referenceで型別に分離し、Scenario再生成元IDを明記。 |

@@ -11,7 +11,7 @@ Browser/Caddy/Web/Artemis/API/PostgreSQL/file/systemdの信頼境界ごとに、
 - 関連SS: [314_認証・認可・session・CSRF実装設計](../310_アプリケーション/314_認証・認可・session・CSRF実装設計.md)、
   [322_固定長電文codec実装設計](../320_メッセージング/322_固定長電文codec実装設計.md)、
   [333_大容量結果file・media・Range配信設計](../330_データ・ファイル/333_大容量結果file・media・Range配信設計.md)
-- 関連QA: QA-006～QA-007、QA-017～QA-023、QA-030、QA-040。RDF/UICなし
+- 関連QA/RDF/UIC: QA-006～QA-007、QA-017～QA-023、QA-030、QA-040、QA-043、RDFなし、UIC-003
 
 ## 2. Trust boundary・deny default
 
@@ -57,11 +57,11 @@ Static CSS/JS/fontもextensionではなく正規resource path allowlist。他は
 | 項目 | 実装規約 |
 |---|---|
 | Username | NFC→前後trim→Unicode lowercase比較key、displayはNFC、1～64 UTF-8 byte |
-| Password input | Login 1～256 UTF-8 byte、作成12～128文字、NUL/control禁止、正規化しない |
-| Hash | Spring `DelegatingPasswordEncoder`の`{bcrypt}`、cost 12、平文/可逆暗号/独自salt保存なし |
-| Timing | User不存在でも固定dummy bcrypt照合、外部message/statusは同一 |
+| Password input | 自動trimは行わず、入力値をNFC化後に検査。Loginは1～256 UTF-8 byte、作成/resetは12～128文字かつ256 byte以下。NUL/control文字と末尾ASCII spaceを禁止 |
+| Hash | Spring `DelegatingPasswordEncoder`の`{pbkdf2-v1}`。PBKDF2-HMAC-SHA256、salt 16 byte、310,000 iteration、derived key 256 bit、hex出力。平文/可逆暗号/独自pre-hash保存なし |
+| Timing | User不存在でも現行IDと同一parameterの固定dummy PBKDF2 hashを照合し、外部message/statusは同一 |
 | Memory | HTTP Stringへ長期保持せず`char[]`/限定buffer、照合/HMAC後zero fill、log/debugger出力なし |
-| Rehash | Login成功時にencoderがupgrade必要なら同一transactionで再hash、監査にはalgorithm IDだけ |
+| Rehash | Login成功時にencoder IDが旧世代なら同一transactionで再hash。Parameter変更は新IDとして登録し、監査にはalgorithm IDだけ |
 | Lock | User 5回/IP 10回、15分窓・15分lock、DB row lock、API再起動でclearしない |
 
 Password resetは新password hash更新と対象auth session全revokeを同一transaction。
@@ -144,6 +144,7 @@ HTTP content-type/size/method
 ## 10. DB・SQL・file
 
 - DB roleは331、Webはtechnical schemaだけ、application superuser/DDLなし。Loopback SCRAM、prepared/named parameter。
+  QA-043承認時はdump全SELECTを`schubert_backup`へ分離し、`schubert_batch`へ業務/technical table SELECTを与えない。
 - Dynamic table/column/orderはenum allowlistから固定fragment。任意入力のschema/table/SQL挿入、native query logを禁止。
 - Owner predicateはSQL内、論理削除predicateはRepository共通・負test必須。Constraint名→domain errorはallowlist。
 - Fileはlogical ID→API descriptor→Web secure open。`SecureDirectoryStream`/NOFOLLOW、root配下通常file、size/hash/MIME、権限を毎回検証。
@@ -206,6 +207,7 @@ Critical DB audit INSERT失敗は対応業務transactionをrollback。Web REQUES
 - Path traversal、all symlink segment、hard link、TOCTOU、MIME/file name、Range overflow、Caddy direct file不可。
 - MQ user別send/consume/manageの負test、dynamic Queue/ObjectMessage、DLQ body非出力、protocol exit/restart。
 - Secret permission/symlink/argv/env/log/Actuator漏えい、key rotation/tag改ざん、backup encrypted archive復号権限。
+- `db-backup`をbackup unit以外から取得できないこと、`schubert_backup`のDML/SET ROLE/AES key取得拒否、`schubert_batch`のdump/任意SELECT拒否。
 
 ## 15. SS設計判断
 
@@ -228,3 +230,6 @@ Critical DB audit INSERT失敗は対応業務transactionをrollback。Web REQUES
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Trust boundary、Spring Security、crypto/credential、入出力、MQ/DB/file、監査を詳細化。 |
+| 2026-08-31 | 横断監査でPasswordの取扱いをUI 222/225/234/236に合わせ、非trim・NFC後の文字/byte・末尾space検査へ統一。 |
+| 2026-08-31 | Password hashを最大256 byte全長に対応する`{pbkdf2-v1}`へ是正し、世代IDとparameterを固定。 |
+| 2026-08-31 | Dump用DB role/credential分離案と権限負testをQA-043/UIC-003回答待ちで追加。 |

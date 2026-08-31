@@ -8,7 +8,7 @@ Source/release/config/credential/data/log/runtimeの配置、環境差分、設�
 - 上位設計: UI 243、251、253～254、261、264
 - 関連RD: SCP-002～SCP-005、MIG-DAT-001～MIG-DAT-008、MIG-001～MIG-008、SCM-001～SCM-006、
   FIL-001～FIL-005、TST-001～TST-005
-- 関連QA: QA-007、QA-012～QA-016、QA-022、QA-024。RDF/UICなし
+- 関連QA/RDF/UIC: QA-007、QA-012～QA-016、QA-022、QA-024、QA-043、RDFなし、UIC-003
 - 関連SS: [331_DB物理・DDL・index・権限設計](../330_データ・ファイル/331_DB物理・DDL・index・権限設計.md)、
   [342_Caddy・systemd・PostgreSQL・Java設定設計](342_Caddy・systemd・PostgreSQL・Java設定設計.md)
 
@@ -100,7 +100,7 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | `nk.api.async-consumers` | `1` | 固定、変更禁止 |
 | `nk.db.url` | `jdbc:postgresql://127.0.0.1:5432/schubert_nk` | Loopback、parameter allowlist |
 | `nk.db.pool.api.max/min` | `8` / `2` | UI 253 |
-| `nk.db.pool.web.max/min` | `4` / `1` | Technical schema専用 |
+| `nk.db.pool.web.max/min` | `2` / `1` | UI 212の初期上限2、Technical schema専用 |
 | `nk.db.connect-timeout` | `3s` | UI 212 |
 | `nk.api.storage.asset-root` | `/srv/schubert-nk/data/assets` | read-only |
 | `nk.api.storage.transfer-root` | `/srv/schubert-nk/data/transfer` | write、secure root |
@@ -124,16 +124,19 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 
 | Credential ID | Consumer | 形式・rotation |
 |---|---|---|
-| `db-api`,`db-web`,`db-batch`,`db-migration` | 対応process | PostgreSQL SCRAM password、service別 |
+| `db-api`,`db-web`,`db-batch`,`db-migration` | 対応process | PostgreSQL SCRAM password、service別。`db-batch`はdumpへ使用しない |
+| `db-backup` | backup unit | QA-043承認時の`schubert_backup`専用SCRAM password。`schubert-backup` OS userだけへ配布 |
 | `mq-web`,`mq-api`,`mq-maintenance`,`mq-ops` | 対応process | Artemis credential、Address権限別 |
-| `session-aes-current/previous` | Web | AES-256-GCM、key version付き |
-| `api-inbox-aes-current/previous` | API | Response/context暗号、key version付き |
+| `web-session-aes-current/previous` | Web | AES-256-GCM、key version付き |
+| `web-revoke-aes-current/previous` | Web | Pending context revoke暗号、session keyと分離 |
+| `api-context-aes-current/previous` | API | `auth_sessions.context_ciphertext`暗号、key version付き |
+| `api-inbox-response-aes-current/previous` | API | Inbox replay response暗号、context keyと分離 |
 | `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |
 | `web-log-aes-current/previous` | Web/API ingest | Technical outbox暗号 |
-| `backup-age-recipient` | batch | 公開keyのみserver保持、private keyはoffline |
+| `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |
 | Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |
 
-Credential値は最位32 byteのCSPRNG、ID/versionと有効日だけmanifestに記録。Rotationは「previousを配備→current切替→
+Symmetric keyは最低32 byte、自動生成passwordは最低32 byte相当のCSPRNG出力とし、ID/versionと有効日だけmanifestに記録。Rotationは「previousを配備→current切替→
 旧ciphertext/HMAC保持期間の読取確認→previous除去」の順。Unknown key versionはdeny closed、運用介入とする。
 
 ## 7. 環境差分
@@ -165,7 +168,7 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 ### 8.2 Bootstrap account
 
 - 現行`user_pass.txt`を移行せず、初期ADMINを安全なoneshot `schubert-nk-bootstrap-admin.service`で1件作成。
-- Username/passwordはsystemd credentialから読み、passwordは画面と同じvalidation、bcrypt cost 12、平文はmemory使用後zero。
+- Username/passwordはsystemd credentialから読み、passwordは画面と同じvalidation、`{pbkdf2-v1}`でhash化し、平文はmemory使用後zero。
 - `app_users` 0件の場合だけ実行、複数回/既存Userありは無変更でexit 20。固定default passwordなし。
 - 作成後に別sessionでLogin・password変更・ADMIN権限を確認。Bootstrap credential sourceは承認済み手順で無効化/削除。
 
@@ -173,7 +176,7 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 
 ### 9.1 責務分離
 
-- Migration実行は`nk_migration`が`nk_owner`へ限定SET ROLEするoneshot。API/Web起動時にmigrate/repair/cleanしない。
+- Migration実行は`schubert_migration`が`nk_owner`へ限定SET ROLEするoneshot。API/Web起動時にmigrate/repair/cleanしない。
 - History tableは`schubert_meta.flyway_schema_history`、`validateOnMigrate=true`、`outOfOrder=false`、
   `baselineOnMigrate=false`、`cleanDisabled=true`。Migration checksum変更をrepairで隠さない。
 - Application起動はmanifestのexpected schema version/checksumとDB historyをread-only検査し、不一致はreadiness false。
@@ -278,19 +281,19 @@ security境界違反、backup/recovery不成立、公開TLS不能、停止枠内
 ## 14. PT・IT・Rehearsal
 
 - Configの未知/重複/範囲外/missing secret、root/port重複、effective hash drift、production profileのdebug設定。
-- Clean OSでdirectory/owner/mode/systemd credential/release配置を再現、serviceごとの読書き権限負test。
+- Clean OSでdirectory/owner/mode/systemd credential/release配置を再現、serviceごとの読み書き権限負test。
 - Flyway validate/migrate/checksum mismatch/out-of-order/partial failure、applicationの自動DDL禁止、旧/new releaseのschema compatibility。
 - Current full inventory、不正path/symlink/hash、件数差、ID再採番/display order、再実行、staging失敗・容量・中断。
 - Release current切替直前/直後のkill、migration後旧app、backup restore、NK可変data保全、current公開への切戻し。
-- 最位1回の全量rehearsalで所要時間、disk peak、停止枠、判定時刻を実測しrunbookに固定。
+- 最低1回の全量rehearsalで所要時間、disk peak、停止枠、判定時刻を実測しrunbookに固定。
 
 ## 15. SS設計判断
 
 | ID | 判断 | 根拠・理由 | 後続影響 |
 |---|---|---|---|
 | SS-D-039 | Config優先順をjar default→common→service→env→credentialに固定し、unknown keyを起動失敗 | 環境差分とsecret分離を再現可能にし、typo黙認を防ぐ | ConfigurationProperties/schema test |
-| SS-D-040 | Flywayはapplication起動時validateのみ、migrateは専用oneshot、clean/repairは自動禁止 | 起動中DDL・checksum改ざを防ぎ、rollback判定を明示 | Migration pipeline/IT/runbook |
-| SS-D-041 | Current/NK切替し中の一般更新を最終Goまで許可しない | 二重更新・自動マージ不能なNK質問/account差分を防止 | Cutover運用・ST acceptance |
+| SS-D-040 | Flywayはapplication起動時validateのみ、migrateは専用oneshot、clean/repairは自動禁止 | 起動中DDL・checksum改ざんを防ぎ、rollback判定を明示 | Migration pipeline/IT/runbook |
+| SS-D-041 | Current/NK切替中の一般更新を最終Goまで許可しない | 二重更新・自動マージ不能なNK質問/account差分を防止 | Cutover運用・ST acceptance |
 
 ## 16. 禁止事項
 
@@ -305,3 +308,6 @@ security境界違反、backup/recovery不成立、公開TLS不能、停止枠内
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Directory/config/credential/initial data/Flyway/current migration/cutover/rollbackを詳細化。 |
+| 2026-08-31 | 横断監査でmigration DB role名をUI 212の`schubert_migration`に統一。 |
+| 2026-08-31 | 横断監査でWeb DB poolをUI 212の上限2へ修正し、Web revoke/API context/API InboxのAES keyを用途別に分離。 |
+| 2026-08-31 | DB dump credentialをbatch保守用から分離する`db-backup`候補をQA-043/UIC-003回答待ちで追加。 |

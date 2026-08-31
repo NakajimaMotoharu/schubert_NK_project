@@ -10,7 +10,7 @@ metric名・label、warning/critical条件、DEBUG/STANDARD監視mode、保持�
 - 関連SS: [312_処理sequence・method・例外・transaction設計](../310_アプリケーション/312_処理sequence・method・例外・transaction設計.md)、
   [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
   [341_朝batch・backup・削除・再実行設計](../340_batch・基盤/341_朝batch・backup・削除・再実行設計.md)
-- 関連QA: QA-011、QA-021、QA-027。RDF/UICなし
+- 関連QA/RDF/UIC: QA-011、QA-021、QA-027、QA-042、RDFなし、UIC-002
 
 ## 2. Log channel・正本
 
@@ -50,14 +50,14 @@ REQUESTの形成はresponse status/elapsed確定後に行い、local JSON出力�
 | `errorCode` | 64 ASCII | optional | §5 internal catalog |
 | `elapsedMs` | 0..N12 | optional | Monotonic clockで計測 |
 | `deliveryCount` | 1..4 | optional | JMSXDeliveryCount |
-| `details` | object, serialized 2,048 byte以内 | optional | Key allowlist、nest 2層まで |
+| `details` | object, serialized 1,024 UTF-8 byte以内 | optional | Key allowlist、nest 2層まで。WLGEVT01/LGSRSP01と同上限 |
 
 StringはNFC、CR/LF/TAB/Unicode line separatorをASCII spaceへ変換、上限でcode-point境界truncateし
 `truncated=true`をdetailsへ設定。JSON encoderを使い、message patternへ利用者入力を連結しない。
 
 ### 3.2 HTTP field
 
-`httpMethod` 8 ASCII、`path` 1,024 byte、`status` 100..599、`responseBytes` N12、`userAgentFamily` 32 byte。
+`httpMethod` 8 ASCII、`path` 256 UTF-8 byte、`status` 100..599、`responseBytes` N12、`userAgentFamily` 32 byte。
 `path`はquery/fragmentを除いたroute templateまたは正規pathで、任意query値を保存しない。
 Cookie/Authorization/CSRF/Referer全文/request・response bodyをdetailsへ入れない。
 
@@ -130,6 +130,21 @@ Permanent protocol errorは信頼できるresponseを返さずDLQとprocess exit
 Exception class→error code→wire result/HTTPの mappingはexhaustive switchとし、unknownは`SYSTEM_UNEXPECTED`/9000。
 DB constraint/SQL/path/exception messageを利用者responseに直接設定しない。
 
+### 5.3 非同期通知用error code
+
+NTDRSP01の16 byte Error codeは内部64 byte codeを直接出さず、次の安定allowlistへmapする。
+
+| Notification code（16 ASCII以内） | 主な内部code群 | 利用者向けmessage |
+|---|---|---|
+| `PROCESS_FAILED` | `SYSTEM_UNEXPECTED`、分類不能な最終失敗 | 処理に失敗。通知/質問IDと共に管理者へ連絡 |
+| `SYSTEM_UNAVAIL` | MQ/DB/file一時障害の再配送上限 | 一時障害で処理できなかったことを案内 |
+| `RESOURCE_LIMIT` | Memory/disk/Queue/file容量上限 | 容量制限による失敗と再操作案内 |
+| `DATA_INTEGRITY` | File/hash/DB整合性異常 | 対象dataの整合性確認中であることを案内 |
+| `PROTOCOL_ERROR` | Fixed message/version/layout恒久error | 処理不能と管理者連絡を案内 |
+
+`notifications.error_code`/NTDRSP01はこの値だけ、`async_jobs.last_error_code`やlog/outbox/batchは
+内部64 byte codeを保持する。利用者向けerror messageは512 byte以内の定型文とし、exception文を複製しない。
+
 ## 6. Metric catalog
 
 Metricは`nk_`接頭辞、counterは`_total`、byteは`_bytes`、時間は`_seconds`。
@@ -141,6 +156,8 @@ Metricは`nk_`接頭辞、counterは`_total`、byteは`_bytes`、時間は`_seco
 | `nk_mq_messages_total` | counter | direction,address,layout,outcome | Send/receive/ACK/retry/DLQ |
 | `nk_mq_processing_duration_seconds` | histogram | flow,layout,outcome | MQ/API時間budget |
 | `nk_mq_queue_messages`,`nk_mq_queue_bytes` | gauge | queue | Artemis滞留 |
+| `nk_mq_address_memory_bytes`,`nk_mq_address_paged_bytes` | gauge | address | Memory high-waterとpage limit、QA-042承認値と照合 |
+| `nk_mq_paging_active`,`nk_mq_page_files` | gauge | address | PAGE開始・page growth・page-full予兆 |
 | `nk_mq_redeliveries_total` | counter | queue,delivery_count | Redelivery・QA-041期待値とは分離 |
 | `nk_outbox_rows` | gauge | store,status | API/Web outbox件数 |
 | `nk_outbox_oldest_seconds` | gauge | store,status | 滞留時間 |
@@ -179,6 +196,9 @@ Username、IP、request/message/correlation/token/receipt/media ID、path、exce
 
 Alertは同一condition/serviceで1 eventをopenし、継続中はcount/lastSeenを更新。Warningは5分正常、criticalは
 10分正常＋原因撤去確認でclose。初期の外部通知先は要件外のため、local status/journal/管理者SSH確認を正とする。
+
+Queueのbyte/percentage alertの分母と、paging/page-full到達時の新規受付制御はQA-042/UIC-002の承認値で固定する。
+回答前にUI Queue容量を`max-size-bytes`とみなしたpercentageをproduction alertにしない。件数thresholdとDLQ 1件alertは引き続き有効とする。
 
 ## 8. DEBUG/STANDARD
 
@@ -229,3 +249,4 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Structured log、action/error/metric catalog、alert、mode、retentionを詳細化。 |
+| 2026-08-31 | 横断監査でQA-042/UIC-002のpaging/address memory metricと、容量率alertのpending oracleを追加。 |

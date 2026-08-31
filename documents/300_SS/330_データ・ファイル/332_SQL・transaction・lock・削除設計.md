@@ -30,8 +30,9 @@ API requestごとに`SET LOCAL application_name`を変更せず、pool設定のs
 
 ## 3. Page・並び順・query構築
 
-- 画面page sizeは100件固定。`page` 1未満は1、最終page超過は最終pageへ補正する。0件時はpage=1/totalPages=1。
-- 画面互換のためpage番号式を使い、`offset = (page - 1) * 100`。同一主sort keyの末尾にstable IDを必ず付ける。
+- Scenario検索・Logは100件、User・通知・質問回答は50件とし、UI 222～225の機能別page sizeを変更しない。
+  `page` 1未満は1、最終page超過は最終pageへ補正し、0件時はpage=1/totalPages=1。
+- 画面互換のためpage番号式を使い、`offset = (page - 1) * pageSize`。同一主sort keyの末尾にstable IDを必ず付ける。
 - Count SQLとlist SQLは同じpredicate builder/parameter objectから生成し、所有者・論理削除条件の漏れを防ぐ。
 - Dynamic sort columnはenum→SQL fragmentのallowlistだけ。利用者入力のcolumn/directionをそのまま挿入しない。
 - `ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
@@ -78,7 +79,7 @@ Game、speaker、fileの不整合組合せは0件とし、別gameのspeaker/file
 
 1. `username_key`でUserを取得し、存在すれば`FOR UPDATE`。
 2. IP rowは`INSERT ... ON CONFLICT (client_address) DO NOTHING`後、`FOR UPDATE`。Lock順は常にUser→IPとする。
-3. User不存在でもdummy bcrypt hashを必ず照合し、IP counterを更新する。
+3. User不存在でも現行encoding IDと同一parameterの固定dummy PBKDF2 hashを必ず照合し、IP counterを更新する。
 4. 成功時は両counter/window/lockをclearし、auth sessionをINSERT。User sessionを`FOR UPDATE`で
    `last_accessed_at,id`順に取得し、3件目以降の古いactive rowをREPLACED revoke。
 5. 失敗時は15分窓の開始時を確定し、5回到達で`locked_until=:now+15min`。Username存在有無でresult文言を変えない。
@@ -341,3 +342,4 @@ operation tokenによる再操作またはJMS redeliveryで整合を保つ。
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Query、scope、transaction、lock、outbox lease、朝の削除SQLを具体化。 |
+| 2026-08-31 | 横断監査でpage sizeをUIの100/50件に機能別統一し、offsetを`pageSize`基準へ是正。 |

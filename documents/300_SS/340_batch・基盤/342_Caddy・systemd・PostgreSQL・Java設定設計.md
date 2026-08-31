@@ -5,11 +5,11 @@
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
 hardening、timeout/readinessと検証方法を定める。
 
-- 状態: `確認待ち`。本書のArtemis再配送第3間隔のみQA-041/UIC-001待ち。その他は確定。
+- 状態: `確認待ち`。ArtemisはQA-041/UIC-001・QA-042/UIC-002、DB backup role分離はQA-043/UIC-003待ち。その他は確定。
 - 上位設計: UI 211～212、231、251～253
 - 関連RD: SYS-002～SYS-004、SYS-012～SYS-014、OPS-001～OPS-012、MON-001～MON-013、
   PER-001～PER-010、AVL-001～AVL-010
-- 関連QA/RDF/UIC: QA-007、QA-010～QA-011、QA-016、QA-021～QA-022、QA-027、QA-029、QA-041、RDFなし、UIC-001
+- 関連QA/RDF/UIC: QA-007、QA-010～QA-011、QA-016、QA-021～QA-022、QA-027、QA-029、QA-041～QA-043、RDFなし、UIC-001～UIC-003
 - 関連SS: [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
   [341_朝batch・backup・削除・再実行設計](341_朝batch・backup・削除・再実行設計.md)
 
@@ -69,7 +69,7 @@ https://<GLOBAL_IP>:55160 {
 - `file_server`、asset/transfer root、Caddyの直接media配信を定義しない。
 - Caddyは外部から受けた`Forwarded`/`X-Forwarded-*`を信用せず、直接peerから再構成する。前段proxyなしのため
   `trusted_proxies`を設定しない。Webはremote addressがloopbackの場合だけCaddy headerを採用。
-- CSPはnonceを持つapplication responseごとにWebが設定し、Caddyで静的CSPへ上書きしない。
+- CSPは352 §7.2のfixed allowlistをWebが設定し、Caddyで上書きしない。Inline script/styleを許容しないためnonceも使用しない。
 - Access logはJSON、path/status/duration/bytes/remote IP/request IDだけ。Cookie、Authorization、query string、request/response bodyを
   filter除外する。Filter非対応の導入minorではaccess logを最小化し、Web WLGEVT01を業務監査正本とする。
 
@@ -137,15 +137,17 @@ Missした05:00をboot時に即実行してreboot loopを起こさない。Miss�
 
 ### 5.1 Resource
 
-| Process | Heap | Direct/Metaspace | systemd `MemoryMax` | Thread/pool |
-|---|---:|---:|---:|---|
-| Web | `-Xms512m -Xmx1024m` | Direct 256m, Metaspace 256m | 1536M | HTTP 16/max32、MQ wait 12/max20 |
-| API | `-Xms768m -Xmx1536m` | Direct 256m, Metaspace 256m | 2048M | Sync consumer 4/max8、async 1、DB pool 8 |
-| Batch | `-Xms256m -Xmx1024m` | Direct 128m, Metaspace 256m | 1536M | DB connection 1、step worker 1 |
-| Artemis | `-Xms1024m -Xmx1024m` | Direct 512m | 2048M | 321のbroker thread/config |
+| Process | Heap | Direct/Metaspace上限 | systemd `MemoryMax` | Native headroom | Thread/pool |
+|---|---:|---:|---:|---:|---|
+| Web | `-Xms384m -Xmx768m` | 128m / 192m | 1536M | 448m | HTTP 16/max32、MQ wait 12/max20 |
+| API | `-Xms512m -Xmx1024m` | 256m / 256m | 2048M | 512m | Sync consumer 4/max8、async 1、DB pool 8 |
+| Batch | `-Xms256m -Xmx768m` | 128m / 192m | 1536M | 448m | DB connection 1、step worker 1 |
+| Artemis | `-Xms768m -Xmx1024m` | 256m / 192m | 2048M | 576m | 321のbroker thread/config |
 
 Web/API共通: `-Dfile.encoding=UTF-8`、`-Duser.timezone=UTC`、`-XX:+ExitOnOutOfMemoryError`、
-`-XX:MaxDirectMemorySize=<table>`、`-XX:MaxMetaspaceSize=256m`、`-Xlog:gc*=info:stdout:time,uptime,level,tags`。
+`-XX:MaxDirectMemorySize=<table>`、`-XX:MaxMetaspaceSize=<table>`、`-XX:ReservedCodeCacheSize=128m`、
+`-Xlog:gc*=info:stdout:time,uptime,level,tags`。Native headroomはcode cache 128m、thread stack、GC/JIT/JNI、NIO、launcher/OS allocationを含み、
+同時最大時にも`MemoryMax`との差を0にしない。
 Heap dump自動出力は無効のままとし、機密値を含むdumpを通常log rootへ作らない。
 
 ITはRSS/heap/direct/metaspace/thread/GC pauseを実測し、上位16GB配分内だけで調整する。メモリ上限を広げる場合、
@@ -162,7 +164,7 @@ PostgreSQL/Artemis/OS/headroomの合計16GB以内を同時更新する。
 | Health details | loopbackでも`never`、component statusはlog/metric | 同じ |
 | HTTP threads | 16 initial/max32、queue 32 | management最小 |
 | Graceful shutdown | enabled、phase timeout 30s | enabled、phase timeout 60s |
-| DB pool | Web technical max 4/min 1、connect 3s | max 8/min 2、connect 3s |
+| DB pool | Web technical max 2/min 1、connect 3s | max 8/min 2、connect 3s |
 | JMS request wait | 2s、semaphore 12/max20 | Listener 4/max8、async 1 |
 
 Actuatorはloopbackのみで、environment/configprops/heapdump/loggers/shutdownをexposeしない。`info`はrelease commit、
@@ -176,7 +178,7 @@ app/config/schema/protocol versionだけ。Secret/path/account/Queue bodyを出�
 |---|---:|---|
 | `listen_addresses` | `127.0.0.1,::1` | Loopback専用 |
 | `port` | 5432 | UI default |
-| `max_connections` | 40 | API 8＋Web 4＋batch/migration/ops＋余裕 |
+| `max_connections` | 40 | API 8＋Web 2＋batch/migration/ops＋管理・復旧余裕 |
 | `shared_buffers` | 2GB | 16GB host/PG 4GB budgetの初期値 |
 | `effective_cache_size` | 6GB | OS cacheを含むplanner hint、allocationではない |
 | `work_mem` | 8MB | 同時sort/hashの倍率消費をbound |
@@ -199,13 +201,16 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 
 ### 6.2 Roleごとのtimeout
 
+`schubert_backup`行と後続hba entryはQA-043/UIC-003承認時の候補であり、回答前にproductionへrenderしない。
+
 | Role | `statement_timeout` | `lock_timeout` | `idle_in_transaction_session_timeout` |
 |---|---:|---:|---:|
-| `nk_api` | 1500ms | 500ms | 15s |
-| `nk_web` | 1500ms | 500ms | 15s |
-| `nk_batch` | 30min | 5s | 60s |
-| `nk_migration` | 30min | 5s | 60s |
-| `nk_ops_ro` | 10s | 1s | 15s |
+| `schubert_app` | 1500ms | 500ms | 15s |
+| `schubert_web_session` | 1500ms | 500ms | 15s |
+| `schubert_batch` | 30min | 5s | 60s |
+| `schubert_backup` | 30min | 5s | 60s |
+| `schubert_migration` | 30min | 5s | 60s |
+| `schubert_ops_ro` | 10s | 1s | 15s |
 
 Long-running migrationは個別migrationで`SET LOCAL`し、roleの無制限化をしない。
 
@@ -213,24 +218,24 @@ Long-running migrationは個別migrationで`SET LOCAL`し、roleの無制限化�
 
 ```text
 local  all          postgres                              peer
-host   schubert_nk  nk_api,nk_web,nk_batch,nk_ops_ro     127.0.0.1/32  scram-sha-256
-host   schubert_nk  nk_api,nk_web,nk_batch,nk_ops_ro     ::1/128       scram-sha-256
-host   schubert_nk  nk_migration                          127.0.0.1/32  scram-sha-256
-host   schubert_nk  nk_migration                          ::1/128       scram-sha-256
+host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_backup,schubert_ops_ro  127.0.0.1/32  scram-sha-256
+host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_backup,schubert_ops_ro  ::1/128       scram-sha-256
+host   schubert_nk  schubert_migration                    127.0.0.1/32  scram-sha-256
+host   schubert_nk  schubert_migration                    ::1/128       scram-sha-256
 host   all          all                                   0.0.0.0/0     reject
 host   all          all                                   ::/0          reject
 ```
 
-実際のhbaはroleごと1行へ分割してreview可能にする。`nk_web`のhba接続を許しても、
+実際のhbaはroleごと1行へ分割してreview可能にする。`schubert_web_session`のhba接続を許しても、
 331のgrantで業務schemaは不可。Remote CIDR、trust、password、md5を追加しない。
 
 ## 7. Artemis process・config
 
 - `broker.xml`、Address/Queue/security/JMS値は321を正とする。Acceptors 61616/console 8161はloopbackだけ。
 - Instance root `/var/lib/schubert-nk/artemis`は`schubert-artemis` 0700、journal/paging/large messageは別subdirectory。
-- systemd `MemoryMax=2G`、JVM heap 1G/direct 512M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 5/600s、
+- systemd `MemoryMax=2G`、JVM heap 1G/direct 256M/metaspace 192M、native headroom 576M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 5/600s、
   `TimeoutStartSec=120s`、`TimeoutStopSec=60s`、`SendSIGKILL=no`。
-- `global-max-size=1GiB`、`global-max-messages=50000`、`max-disk-usage=90`、NIO File Journal、auto create/delete false。
+- `global-max-messages=50000`、`max-disk-usage=90`、NIO File Journal、auto create/delete false。`global-max-size`、Address full/paging/page limitは321 §5.3のQA-042保留値を正とする。
 - CredentialはJAAS/propertiesへhashとして格納、LoadCredentialから起動時にservice private runtimeへrender。
   Plain passwordを`broker.xml`、unit、argv、Gitへ置かない。
 
@@ -238,6 +243,13 @@ host   all          all                                   ::/0          reject
 
 `max-delivery-attempts=4`、第1=1秒・第2=5秒は確定。第3はUI 231の30秒とArtemis標準倍率式の25秒のいずれかが
 QA-041回答まで未確定である。回答前にrendered `broker.xml`の当該値をrelease確定しない。
+
+### 7.2 QA-042保留値
+
+UI 231のQueue保持容量を`max-size-bytes`にそのまま設定し、全Addressを`BLOCK`にする値は、heap 1GiB/
+systemd 2GiBのresource budgetで実行可能な設定ではない。321 §5.3のUIC-002案は`global-max-size=512MiB`、
+Address memory high-water合計448MiB、`PAGE`、Address別page limit、page-full `FAIL`、disk-full `BLOCK`とする。
+QA-042回答前にrendered `broker.xml`の容量関連値をrelease確定しない。
 
 ## 8. Resource・disk合計・実測gates
 
@@ -277,7 +289,8 @@ security/port/root/schema/protocolの差異はreadiness false。自動で未承�
 - [PostgreSQL 18 connections and authentication](https://www.postgresql.org/docs/18/runtime-config-connection.html)
 - [Artemis Address Settings](https://artemis.apache.org/components/artemis/documentation/latest/address-settings.html)
 
-Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで再確認する。
+Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで再確認する。QA-042/UIC-002案を採用する場合のArtemisは
+`page-limit-*`とAddress別`disk-full-policy`を両方備える2.50.0以上を起動前gateとする。
 
 ## 11. SS設計判断
 
@@ -294,9 +307,16 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 - Systemdを迂回した`java -jar`・broker・batchの手動常用起動。Stop timeout時の自動SIGKILL。
 - PostgreSQLの`trust`/MD5認証、remote hba、application superuser、Webへの業務schema grant。
 - QA-041未解決のままArtemis redelivery第3期待値をrelease確定すること。
+- QA-042未解決のままUIのQueue容量を`max-size-bytes`/全Address `BLOCK`としてrelease確定すること。
+- QA-043未解決のまま`schubert_batch`へdump対象tableのSELECTを与える、または専用backup role案をrelease確定すること。
 
 ## 13. 更新履歴
 
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Caddy/systemd/JVM/PostgreSQL/Artemisの初期値、hardening、validationを作成。 |
+| 2026-08-31 | 横断監査でPostgreSQL role名をUI 212の`schubert_*`に統一。 |
+| 2026-08-31 | 横断監査でCSPをnonceなし・same-origin外部asset方式へ統一。 |
+| 2026-08-31 | 横断監査でWeb DB poolをUI 212の上限2へ修正し、Artemis容量設定をQA-042/UIC-002保留として追加。 |
+| 2026-08-31 | `pg_dump`用の`schubert_backup` role候補をtimeout/`pg_hba.conf`へ反映し、QA-043/UIC-003回答待ちとした。 |
+| 2026-08-31 | 横断監査でJVMのheap/direct/metaspace合計がMemoryMaxへ達していた値を是正し、process別native headroomを確保。 |

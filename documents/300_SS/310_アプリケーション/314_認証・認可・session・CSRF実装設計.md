@@ -45,9 +45,14 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 
 ### 4.1 保存・照合
 
-- `DelegatingPasswordEncoder`形式を必須とし、初期encoding IDは`bcrypt`、cost 12とする。
-- Hash文字列は`{bcrypt}` prefix付きで保存する。平文、可逆暗号、単純hashを保存しない。
-- Java 25/本番CPUでcost 12のLogin照合p95を計測し、500msを超える場合はsecurity review付きでcostを下げず、まずCPU/time budgetを見直す。
+- `DelegatingPasswordEncoder`形式を必須とし、初期encoding IDは世代固定の`pbkdf2-v1`とする。
+- `pbkdf2-v1`はSpring Securityの`Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8()`相当、すなわち
+  PBKDF2-HMAC-SHA256、salt 16 byte、310,000 iteration、derived key 256 bit、additional secret空、
+  `setEncodeHashAsBase64(false)`で固定する。
+- Hash文字列は`{pbkdf2-v1}` prefix付きで保存する。salt＋derived keyのhex出力96文字とprefixを含めても
+  `password_hash`の255 byte以内である。平文、可逆暗号、単純hash、独自pre-hashを保存しない。
+- Java 25/本番CPUでLogin照合p95を計測し、目標0.5～1.0秒から外れる場合はsecurity reviewを行う。Parameterを変える場合は
+  同一IDの意味を変えず`pbkdf2-v2`等の新IDを追加し、旧IDも照合mapへ保持する。
 - 将来encoding IDを変更した場合、Login成功時に`upgradeEncoding`で新hashへtransactional rehashする。
 - Password入力はNFC後12～128文字、256 byte以下、usernameとcase-insensitive同一禁止、末尾ASCII space/control文字禁止。
 - 文字種組合せは強制しない。初期releaseでは外部由来common-password listを採用しない。長さ、rate limit、hashを正とし、
@@ -65,7 +70,7 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 | Step | 処理 |
 |---:|---|
 | 1 | Client addressを`inet`へparse。Caddy検証済み以外はrequest拒否 |
-| 2 | `login_ip_attempts`をUPSERT後`FOR UPDATE`、username_key一致userを`FOR UPDATE` |
+| 2 | username_key一致userがあれば先に`FOR UPDATE`、次に`login_ip_attempts`をUPSERT後`FOR UPDATE`。全LoginでUser→IPのlock順を統一 |
 | 3 | IP/userの`locked_until > now`を確認。Lockならhash照合せず`0106` |
 | 4 | Account ACTIVEならconstant-work password照合。不存在/disabledも利用者messageは共通 |
 | 5a | 成功: user/IP counter/window/lockをclear、last_login更新、session発行 |
@@ -93,7 +98,7 @@ Remaining attemptsは存在推測を避け通常認証失敗では0とし、運�
 | Lifetime | 8時間idle。`last_accessed_at`更新時に`expires_at=now+8時間`へ延長 |
 | Concurrent | Userごと有効最大2。3件目は`last_accessed_at,id`最古をrevoke |
 
-UIはidle 8時間を固定する。絶対24時間上限は盗難tokenの無期限延長を防ぐSS内security具体化であり、再Loginを求めるだけで業務仕様を変えない。
+UIで確定したidle 8時間だけを適用する。未承認の絶対lifetimeを追加しない。
 
 ### 6.2 Request検証
 
@@ -102,7 +107,7 @@ UIはidle 8時間を固定する。絶対24時間上限は盗難tokenの無期�
 1. 64 lowercase hexを検査し、constant-timeでhash keyを検索する。
 2. `revoked=false`、`expires_at>now`、account ACTIVEを検査する。
 3. DBの最新role/usernameを`AuthenticatedActor`へ設定し、wire/HTTP roleを信用しない。
-4. `last_accessed_at`とidle `expires_at`を、前回更新から5分以上経過時だけ更新してwrite負荷を抑える。
+4. 認証済みrequestごとに`last_accessed_at=:now`、`expires_at=:now+8h`を更新し、idle 8時間を短縮しない。
 5. 機能role/ownerはApplication Serviceでも対象rowと照合する。
 
 失効・期限切れは`0102`、DB障害はdeny closedで`9000`。Raw/hash/ciphertextをlogしない。
@@ -216,7 +221,7 @@ Username不存在は内部reason codeを権限制限logへ記録できるが、�
 
 | ID | 判断 | 根拠・理由 | 後続影響 |
 |---|---|---|---|
-| SS-D-010 | Password hashは`{bcrypt}` cost 12を初期値とする | UI 226、少人数/Java標準運用、Delegating形式で将来upgrade可能 | PGでbenchmark、PTでhash/rehash/redaction |
+| SS-D-010 | Password hashは`{pbkdf2-v1}`（PBKDF2-HMAC-SHA256、salt 16 byte、310,000 iteration、256 bit）を初期値とする | UI 225/226の最大256 byteを全長で処理し、Java標準JCAとDelegating形式で世代管理できる | PGでbenchmark、PTで256 byte全長差・hash/rehash/redaction |
 | SS-D-011 | 初期releaseではcommon-password listを採用しない | UI 225がSS判断。出典/version未管理の拒否挙動を追加せず、12文字・rate limit・hashを適用 | 将来採用はlist/version/差異を変更管理 |
 | SS-D-012 | Custom encrypted Spring Session repositoryを使用する | UI 226が任意Java serialization禁止・allowlist/AES-GCMを要求 | Session repository/crypto PTが必須 |
 
@@ -234,3 +239,4 @@ Username不存在は内部reason codeを権限制限logへ記録できるが、�
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | 認証、session、CSRF、認可、暗号・rotationを初版作成。 |
+| 2026-08-31 | 横断監査でLogin lock順をUser→IPに統一し、UIにない絶対24時間上限を削除。Idle更新を毎requestに統一。 |
