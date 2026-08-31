@@ -1,0 +1,12 @@
+version: 1
+target: current
+accounts: external-credential-reference
+database: isolated-characterization-database
+master: read-only-current-master
+locale: ja-JP
+timezone: Asia/Tokyo
+clock: report-normalized
+cleanup:
+  - truncate-test-app-logs
+  - restart-current-app-between-runs
+  - keep-current-source-and-master-unchanged

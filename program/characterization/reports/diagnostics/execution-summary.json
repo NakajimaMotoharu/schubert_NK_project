@@ -1,0 +1,27 @@
+{
+  "status": "BLOCKED_PENDING_QA_044",
+  "sourceVerification": "PASS",
+  "preflight": "PASS",
+  "caseResult": {
+    "total": 24,
+    "passed": 23,
+    "failed": 1,
+    "failedCase": "CHR-A02"
+  },
+  "observation": {
+    "configuredMaximumSessions": 2,
+    "loginCount": 3,
+    "activeOldestToNewest": [true, true, true],
+    "redirectsOldestToNewest": ["/", "/", "/"]
+  },
+  "cause": "Current SecurityConfig declares maximumSessions(2), but no HttpSessionEventPublisher is registered for session lifecycle integration.",
+  "upperDesignIssue": "UIC-004",
+  "confirmation": "QA-044",
+  "testQualityChanges": [
+    "Use the current Caddy forwarded host and port header contract.",
+    "Assert all three concurrent session states instead of checking only one URL.",
+    "Assert the five visible menu cards including the log inquiry card.",
+    "Assert animation main rows 11 plus subtracks 4 equals logical count 15.",
+    "Record the saved-request redirect after current process restart."
+  ]
+}
