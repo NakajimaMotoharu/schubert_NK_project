@@ -48,7 +48,7 @@ https://<GLOBAL_IP>:55160 {
         Strict-Transport-Security "max-age=31536000"
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
-        Referrer-Policy "no-referrer"
+        Referrer-Policy "same-origin"
         -Server
     }
 
@@ -108,7 +108,7 @@ target全体を止めず、cleanupが削除skipを記録した上で後続する
 | `LoadCredential` | DB/MQ/AES/HMAC secretを個別file | Secretをenv/argv/Gitへ出さない |
 | `UMask` | `0027` | 新規fileのgroup以外読取禁止 |
 | `Restart` | `on-failure`, `RestartSec=5s` | Process/protocol異常復旧 |
-| Start limit | interval 300s, burst 3 | Poison/config errorのrestart loop停止 |
+| Start limit | interval 600s, burst 5 | Poison/config errorのrestart loop停止。UI 252と一致 |
 | `TimeoutStartSec` | 120s | readinessは別poll、起動hangのbound |
 | `TimeoutStopSec` | Web 30s/API 60s | UI 251のgraceful上限 |
 | `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |
@@ -228,7 +228,7 @@ host   all          all                                   ::/0          reject
 
 - `broker.xml`、Address/Queue/security/JMS値は321を正とする。Acceptors 61616/console 8161はloopbackだけ。
 - Instance root `/var/lib/schubert-nk/artemis`は`schubert-artemis` 0700、journal/paging/large messageは別subdirectory。
-- systemd `MemoryMax=2G`、JVM heap 1G/direct 512M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 3/300s、
+- systemd `MemoryMax=2G`、JVM heap 1G/direct 512M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 5/600s、
   `TimeoutStartSec=120s`、`TimeoutStopSec=60s`、`SendSIGKILL=no`。
 - `global-max-size=1GiB`、`global-max-messages=50000`、`max-disk-usage=90`、NIO File Journal、auto create/delete false。
 - CredentialはJAAS/propertiesへhashとして格納、LoadCredentialから起動時にservice private runtimeへrender。
@@ -285,7 +285,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 |---|---|---|---|
 | SS-D-036 | Web/API management portを8081/8091に分け、API main HTTPを無効化 | UI 211の非公開Actuator、APIのBrowser直接応答禁止を強制 | Port/firewall/readiness IT |
 | SS-D-037 | PostgreSQL初期値をshared buffers 2GB、max connections 40、role別timeoutに固定 | 16GB hostでwork memoryの乗算増加とpool上限をbound | Query plan/負荷実測で調整証跡 |
-| SS-D-038 | Java OOM時はprocess exit、heap dump自動生成なし、systemdは3回/5分でrestart抑止 | 復旧と機密保護、restart loop防止を両立 | OOM/limit IT、runbook、metric |
+| SS-D-038 | Java OOM時はprocess exit、heap dump自動生成なし、systemdは5回/10分でrestart抑止 | UI 252の値で、復旧と機密保護、restart loop防止を両立 | OOM/limit IT、runbook、metric |
 
 ## 12. 禁止事項
 

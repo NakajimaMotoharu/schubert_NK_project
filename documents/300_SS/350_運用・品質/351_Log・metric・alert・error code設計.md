@@ -1,0 +1,231 @@
+# Log・metric・alert・error code設計
+
+## 1. 目的・追跡
+
+WebからAPI/DB/MQ/file/batchまでを追跡するstructured log、監査event/action、機密除外、error code、
+metric名・label、warning/critical条件、DEBUG/STANDARD監視mode、保持を定める。
+
+- 上位設計: UI 225、231、235、241～243、252～253
+- 関連RD: FUN-008、MON-001～MON-013、PER-007～PER-008、AVL-009～AVL-010、OPS-005
+- 関連SS: [312_処理sequence・method・例外・transaction設計](../310_アプリケーション/312_処理sequence・method・例外・transaction設計.md)、
+  [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
+  [341_朝batch・backup・削除・再実行設計](../340_batch・基盤/341_朝batch・backup・削除・再実行設計.md)
+- 関連QA: QA-011、QA-021、QA-027。RDF/UICなし
+
+## 2. Log channel・正本
+
+| Category | Producer | Local | DB/Queue | 正本・失敗時 |
+|---|---|---|---|---|
+| `REQUEST` | Web HTTP filter | JSON 1 event/lineまたはjournald | `web_log_outbox`→`WLGEVT01`→`app_logs` | Localを原始証跡、DBをLog画面正本。投影失敗でHTTP結果を変更しない |
+| `ACTION` | Web/API | JSON/journal | Critical eventはAPI transaction内`app_logs` | DB監査が正本、失敗は業務transaction rollback |
+| `SECURITY` | Web/API | JSON/journal | API DB audit | Login/認可/管理/削除はDB正本 |
+| `MQ` | Web/API/Artemis | JSON/journal | 重大eventはDB | Message/correlation/transportで追跡、bodyなし |
+| `SYSTEM` | 全component | journald | 必要な重大eventはDB | Process/config/resource/health |
+| `BATCH` | Morning/batch | JSON/journal | `batch_runs`＋`app_logs` | `batch_runs`がstep結果正本 |
+
+REQUESTの形成はresponse status/elapsed確定後に行い、local JSON出力とtechnical outbox INSERTへ同じ
+`eventMessageId`を使う。APIは`app_logs.source_message_id` UKで重複を捨てる。LocalとDBの差はmessage IDで照合可能にする。
+
+## 3. JSON event schema
+
+### 3.1 共通field
+
+| Field | 型/上限 | 必須 | 規則 |
+|---|---|---:|---|
+| `timestamp` | UTC ISO-8601 millis | yes | Event確定時、DBはtimestamptz |
+| `level` | TRACE/DEBUG/INFO/WARN/ERROR | yes | FATALはERROR＋`processExit=true` |
+| `service` | WEB/API/BATCH/BROKER/DB/CADDY | yes | 低cardinality enum |
+| `appVersion`,`configVersion` | 64 byte | yes | Release manifestと一致 |
+| `category` | REQUEST/ACTION/SECURITY/MQ/SYSTEM/BATCH | yes | UI 252 |
+| `action` | 64 ASCII | yes | §4 catalogのみ |
+| `outcome` | SUCCESS/FAILURE/DENIED/RETRY/SKIPPED/UNKNOWN | yes | Errorでも判定不能を成功にしない |
+| `requestId` | UUID | conditional | HTTP request単位 |
+| `messageId`,`correlationId` | UUID | conditional | Wire業務ID |
+| `jmsMessageId` | 128 byte | optional | Transport ID、metric label禁止 |
+| `receiptId` | 26 ASCII | optional | 質問受付、権限制限logだけ |
+| `actorUsername` | 64 UTF-8 byte | optional | NFC、control除外、Login失敗は最小限 |
+| `actorRole` | USER/ADMIN | optional | API contextから決定 |
+| `remoteAddress` | canonical IP | optional | Caddy信頼済み値、metric label禁止 |
+| `resultCode` | 4 ASCII | optional | 電文responseだけ |
+| `errorCode` | 64 ASCII | optional | §5 internal catalog |
+| `elapsedMs` | 0..N12 | optional | Monotonic clockで計測 |
+| `deliveryCount` | 1..4 | optional | JMSXDeliveryCount |
+| `details` | object, serialized 2,048 byte以内 | optional | Key allowlist、nest 2層まで |
+
+StringはNFC、CR/LF/TAB/Unicode line separatorをASCII spaceへ変換、上限でcode-point境界truncateし
+`truncated=true`をdetailsへ設定。JSON encoderを使い、message patternへ利用者入力を連結しない。
+
+### 3.2 HTTP field
+
+`httpMethod` 8 ASCII、`path` 1,024 byte、`status` 100..599、`responseBytes` N12、`userAgentFamily` 32 byte。
+`path`はquery/fragmentを除いたroute templateまたは正規pathで、任意query値を保存しない。
+Cookie/Authorization/CSRF/Referer全文/request・response bodyをdetailsへ入れない。
+
+## 4. Action catalog
+
+| Action | Category | 発火・必須context |
+|---|---|---|
+| `HTTP_REQUEST_COMPLETED` | REQUEST | request ID、method/path/status/elapsed |
+| `LOGIN_SUCCEEDED`,`LOGIN_FAILED`,`LOGIN_LOCKED` | SECURITY | request ID、remote IP、user有無を外部へ出さないreason code |
+| `LOGOUT_SUCCEEDED`,`LOGOUT_REVOCATION_QUEUED` | SECURITY | actor、request/message ID、raw contextなし |
+| `SESSION_REVOKED`,`SESSION_EXPIRED`,`SESSION_DECRYPT_FAILED` | SECURITY | reason、session ID/hashなし |
+| `AUTHORIZATION_DENIED`,`OWNER_SCOPE_DENIED` | SECURITY | actor、route/layout、target type、target ID最小限 |
+| `USER_CREATED`,`USER_STATUS_CHANGED`,`USER_ROLE_CHANGED` | ACTION/SECURITY | actor/target username、before/after、tokenなし |
+| `USER_PASSWORD_RESET`,`USER_UNLOCKED` | SECURITY | actor/target、password/hashなし |
+| `SCENARIO_SEARCHED`,`SCENARIO_VIEWED` | ACTION | 条件は種別/件数だけ、keyword/bodyなし |
+| `MEDIA_STREAMED`,`MEDIA_DOWNLOADED`,`MEDIA_RANGE_REJECTED` | ACTION | media type、logical ID、status/bytes、pathなし |
+| `QUESTION_SUBMITTED`,`QUESTION_CANCELLED`,`QUESTION_DELETE_MARKED` | ACTION | receipt/job/question ID、actor、state、本文なし |
+| `QUESTION_PROCESSING_STARTED`,`QUESTION_COMPLETED`,`QUESTION_FAILED` | ACTION | receipt/job/message ID、state/error code、回答なし |
+| `MESSAGE_SENT`,`MESSAGE_RECEIVED`,`MESSAGE_ACKED`,`MESSAGE_REDELIVERED` | MQ | address/layout/IDs/count/bytes |
+| `MESSAGE_EXPIRED`,`MESSAGE_DLQ_ROUTED`,`MESSAGE_REPLAYED` | MQ | original address/queue、IDs、approval reference |
+| `PROTOCOL_REJECTED`,`CORRELATION_REJECTED` | MQ/SYSTEM | layout/version/length step、body dumpなし |
+| `OUTBOX_CLAIMED`,`OUTBOX_SENT`,`OUTBOX_RETRY`,`INBOX_REPLAYED` | MQ | type/count/age/attempt、token/HMACなし |
+| `SERVICE_STARTED`,`SERVICE_READY`,`SERVICE_STOPPED`,`SERVICE_EXITED` | SYSTEM | version、exit code、duration/reason |
+| `CONFIG_DRIFT_DETECTED`,`RESOURCE_LIMIT_REACHED`,`INTEGRITY_FAILED` | SYSTEM | config area/resource/error code、secret/pathなし |
+| `BATCH_STEP_STARTED`,`BATCH_STEP_COMPLETED`,`BACKUP_VALIDATED` | BATCH | run/step/attempt/count/byte/status |
+| `CLEANUP_SKIPPED`,`CLEANUP_COMPLETED`,`RESTORE_VERIFIED` | BATCH | gate/reason/count/duration |
+
+Action名追加は351とLog画面filter/testを同時更新する。フリーテキストactionを許さない。
+
+## 5. Result・internal error catalog
+
+### 5.1 Wire result（上位確定）
+
+| Result | HTTP | 利用者・再試行 | Log level/category |
+|---|---:|---|---|
+| `0000` | 200/302 | 新規成功 | INFO/ACTION |
+| `0100` | 400 | Field error、修正後再送 | INFO/REQUEST |
+| `0101` | 401 | 認証失敗、存在有無を区別しない | WARN/SECURITY |
+| `0102` | 401 | HTTP session破棄、Loginへ | INFO/SECURITY |
+| `0103` | 403 | 認可拒否、自動再試行なし | WARN/SECURITY |
+| `0104` | 404 | 非scope/不存在を区別しない | INFO/WARN |
+| `0105` | 409 | 最新再表示・新token | INFO、HMAC不一致はWARN/SECURITY |
+| `0106` | 429相当 | Lock残時間を案内 | WARN/SECURITY |
+| `0107` | 409 | 取消不可・最新状態表示 | INFO/ACTION |
+| `0200` | 200/302 | 冪等成功、保存済み結果 | INFO/ACTION |
+| `9000` | 503 | 一時障害、再操作案内 | ERROR/SYSTEMまたはMQ |
+| `9001` | 503 | 容量/resource上限、新規受付停止 | ERROR/SYSTEM、alert |
+
+Permanent protocol errorは信頼できるresponseを返さずDLQとprocess exitのためwire resultなし。
+
+### 5.2 Internal error群
+
+| Prefix/例 | 分類 | Wire/action |
+|---|---|---|
+| `AUTH_INVALID`,`AUTH_LOCKED`,`AUTH_SESSION_INVALID` | 認証 | 0101/0106/0102、秘密なし |
+| `AUTHZ_ROLE_DENIED`,`AUTHZ_OWNER_DENIED` | 認可 | 0103/0104、SECURITY |
+| `VALIDATION_FIELD`,`STATE_CONFLICT`,`CANCEL_NOT_ALLOWED` | 業務 | 0100/0105/0107 |
+| `MQ_CONNECT_TIMEOUT`,`MQ_REPLY_TIMEOUT`,`MQ_SEND_BLOCKED` | 一時MQ | 9000/9001、retry/alert |
+| `MQ_PROTOCOL_LENGTH`,`MQ_PROTOCOL_UTF8`,`MQ_PROTOCOL_LAYOUT` | 恒久protocol | DLQ＋exit、responseなし |
+| `MQ_CORRELATION_MISMATCH`,`MQ_DELIVERY_EXHAUSTED`,`MQ_DLQ_SEND_FAILED` | MQ整合 | DLQ/exit/runbook、critical |
+| `DB_CONNECT`,`DB_TIMEOUT`,`DB_DEADLOCK` | 一時DB | 9000またはJMS rollback |
+| `DB_SCHEMA_MISMATCH`,`DB_CONSTRAINT_UNEXPECTED`,`DB_GRANT_INVALID` | 起動/整合 | readiness false、critical |
+| `FILE_DESCRIPTOR_INVALID`,`FILE_PATH_REJECTED` | 恒久/攻撃 | 404/503、SECURITYは連続時 |
+| `FILE_INTEGRITY_MISMATCH`,`FILE_IO`,`FILE_CAPACITY` | File障害 | 503/9000/9001、配信停止 |
+| `BACKUP_COMMAND`,`BACKUP_INTEGRITY`,`BACKUP_CAPACITY` | Backup | Business cleanup skip、warning/critical |
+| `CLEANUP_SAFETY_GATE`,`CLEANUP_PARTIAL`,`EXPIRY_MAINTENANCE` | Batch | 後続停止またはwarningは341に従う |
+| `CONFIG_INVALID`,`CONFIG_DRIFT`,`SECRET_MISSING`,`SECRET_KEY_VERSION` | Config/security | 起動失敗/deny closed |
+| `RESOURCE_MEMORY`,`RESOURCE_DISK`,`RESOURCE_QUEUE`,`RESOURCE_THREAD` | 容量 | 9001/new work停止、critical |
+
+Exception class→error code→wire result/HTTPの mappingはexhaustive switchとし、unknownは`SYSTEM_UNEXPECTED`/9000。
+DB constraint/SQL/path/exception messageを利用者responseに直接設定しない。
+
+## 6. Metric catalog
+
+Metricは`nk_`接頭辞、counterは`_total`、byteは`_bytes`、時間は`_seconds`。
+
+| Metric | Type | Label allowlist | 目的 |
+|---|---|---|---|
+| `nk_http_requests_total` | counter | service,route,method,status_class | HTTP結果、route templateのみ |
+| `nk_http_request_duration_seconds` | histogram | service,route | p50/p95/p99、bucket .05/.1/.25/.5/1/1.5/2/2.5/5 |
+| `nk_mq_messages_total` | counter | direction,address,layout,outcome | Send/receive/ACK/retry/DLQ |
+| `nk_mq_processing_duration_seconds` | histogram | flow,layout,outcome | MQ/API時間budget |
+| `nk_mq_queue_messages`,`nk_mq_queue_bytes` | gauge | queue | Artemis滞留 |
+| `nk_mq_redeliveries_total` | counter | queue,delivery_count | Redelivery・QA-041期待値とは分離 |
+| `nk_outbox_rows` | gauge | store,status | API/Web outbox件数 |
+| `nk_outbox_oldest_seconds` | gauge | store,status | 滞留時間 |
+| `nk_inbox_replays_total` | counter | layout,result | Message/token replay |
+| `nk_operation_token_mismatch_total` | counter | operation | HMAC不一致、actor/token labelなし |
+| `nk_async_jobs` | gauge | state | RECEIVED～CANCELLED |
+| `nk_db_pool_connections` | gauge | service,state | active/idle/pending/max |
+| `nk_db_query_duration_seconds` | histogram | query_id,outcome | SQL本文なし |
+| `nk_file_transfer_files`,`nk_file_transfer_bytes` | gauge | suffix | transfer容量 |
+| `nk_media_streams` | gauge | media_type | 同時stream |
+| `nk_media_bytes_total` | counter | media_type,mode,status | Inline/download/Range |
+| `nk_integrity_failures_total` | counter | area,step | Hash/path/config異常 |
+| `nk_batch_runs_total` | counter | step,status | Morning/backup/cleanup |
+| `nk_batch_last_success_timestamp_seconds` | gauge | step | 未実行・連続失敗 |
+| `nk_process_restarts_total` | counter | service,reason | Systemd/Java異常 |
+
+JVM/GC/thread、Hikari、process/host/disk、PostgreSQL、Artemisは製品exporter/Micrometer標準metricを使う。
+Username、IP、request/message/correlation/token/receipt/media ID、path、exception messageはlabel禁止。
+
+## 7. Alert condition
+
+| Alert | Warning | Critical | 自動制御/一次対応 |
+|---|---|---|---|
+| Filesystem | >=80% 5min | >=90% 1min | Large-result新規停止、95%は入口停止検討 |
+| Transfer | >=3.5GBまたは5,000 | >=4.5GBまたは9,000 | 新規file modeを9001、朝清掃調査 |
+| Async Queue | >=5,000または70% | >=9,000または90% | 新規質問受付を9001、既受付は削除しない |
+| Web log Queue/outbox | >=5,000または最古5min | >=9,000または最古30min | Local JSON継続、dispatcher/ingestor復旧 |
+| DLQ | >=1 | 増加または未調査 | 自動再投入/削除なし、353 |
+| Expiry | >=1,000 | >=5,000 | Morning selector purge、criticalはAPI起動停止 |
+| DB pool | >=80% 5min | pending/timeout 1件 | Slow query/pool leak調査 |
+| JVM heap | >=75% 10min | >=90%またはOOM | OOMはexit/restart、heap dumpなし |
+| Sync p95 | >2.0s 5min | >2.5s 5min | Error率と区間別を確認 |
+| Backup | 05:00 run後当日SUCCESSなし | 2回連続失敗 | Business cleanup skip、容量/権限/DBを復旧 |
+| Restart | 1回 | 10分に5回・rate limit | Unit failed、message/error ID調査 |
+| Integrity/config | 1回 | 常にcritical | 配信/readiness停止、自動修復なし |
+
+Alertは同一condition/serviceで1 eventをopenし、継続中はcount/lastSeenを更新。Warningは5分正常、criticalは
+10分正常＋原因撤去確認でclose。初期の外部通知先は要件外のため、local status/journal/管理者SSH確認を正とする。
+
+## 8. DEBUG/STANDARD
+
+| 項目 | DEBUG（PG/PT/IT） | STANDARD（ST/本番） |
+|---|---|---|
+| Actuator detailed metric | enabled、loopback | 非公開の最小healthのみ |
+| Prometheus/Grafana/exporter | enabled | service停止・scrape無効 |
+| Retention/cap | 15日/5GB | 詳細metric保存なし |
+| JVM app log level | 別keyで必要時DEBUG | INFO |
+| Redaction | 同一・緩和不可 | 同一 |
+
+`nk.monitoring.mode`とsystemdの監視target状態をstatus checkが照合。Mode切替はapplication rebuildなし、
+service daemon-reload/restartが必要な場合は計画停止内に行う。
+
+## 9. Retention・rotation・access
+
+- Journald/file log: 100MB＋14世代を目安、service合計5GB、file 0640、ops read。OS journald合計もUI 253の10GB内。
+- `app_logs`: 90日、backup成功後chunk削除。Security hold対象は明示ID/期限で除外。
+- `batch_runs`: 400日、RUNNING/FAILED調査中は削除禁止。DEBUG metric: 15日/5GB。
+- Log画面はADMINだけ、ops read viewは本文/ciphertext/hash/IP等を除外。OS logはservice group/運用者だけ。
+
+## 10. Test・quality gate
+
+1. 全action/error/metricがcatalog外値を受け付けないこと。JSON schemaとDB column長の照合。
+2. Password、hash、raw/hash/ciphertext context、cookie、CSRF、HMAC/AES key、質問/回答、fixed body、absolute pathのcanary検索が0。
+3. Web local JSON→outbox→WLGEVT01→DBの停止/再送/重複、source message IDで欠落/重複0。
+4. Metric cardinalityの利用者数/要求数比例増加がないこと、label禁止値が0。
+5. 全warning/criticalの境界値直前/到達/回復、抑止・起動gate、alert closeを検証。
+6. DEBUG→STANDARD切替で詳細service/scrape停止、最小health/systemd/journal/Artemis/DB/disk継続。
+
+## 11. SS設計判断
+
+| ID | 判断 | 根拠・理由 | 後続影響 |
+|---|---|---|---|
+| SS-D-042 | Log action/error/metric labelをcatalog allowlistにし、未知値をフリー文字列で出さない | 追跡性、redaction、metric cardinalityを機械検査可能にする | Enum/schema/log contract PT |
+| SS-D-043 | PostgreSQL slow SQL本文ではなく`query_id`＋duration metricで性能を追跡 | Bind値の質問/passwordがlogへ漏れるriskを防止 | Repository query ID、PT/IT plan証跡 |
+| SS-D-044 | Alertをcondition/service単位のopen eventとし、重複発報ではなくcount/lastSeenを更新 | 外部通知なしの初期構成でも調査可能な証跡を残す | Status/runbook/alert state PT |
+
+## 12. 禁止事項
+
+- DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
+- Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
+- REQUEST投影失敗で利用者の成功responseを503へ変更、またはcritical auditをbest-effort投影だけにすること。
+- DLQ/integrity/secret/config drift alertを自動close、調査なしにmessage/file/configを削除/修復。
+
+## 13. 更新履歴
+
+| 日付 | 内容 |
+|---|---|
+| 2026-08-31 | Structured log、action/error/metric catalog、alert、mode、retentionを詳細化。 |
