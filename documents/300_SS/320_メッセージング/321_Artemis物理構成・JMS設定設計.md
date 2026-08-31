@@ -4,7 +4,7 @@
 
 Apache ActiveMQ ArtemisのBroker物理設定、Address/Queue、security、journal/paging、JMS transaction、consumer、DLQ/Expiry、再配送を定める。
 
-- 状態: `確認待ち`。再配送第3間隔はUIC-001/QA-041、Address容量・paging/full policyはUIC-002/QA-042回答待ち。その他は設計確定可能
+- 状態: `確認待ち`。再配送第3間隔はQA-041/UIC-001承認済み。Address容量・paging/full policyはUIC-002/QA-042回答待ち。その他は設計確定可能
 - 関連UI: 212～213、231、233、251～253
 - 関連RD: MQ-001～013、MQ-040～045、PER-005、PER-010、MON-005、T-001、T-003～004
 - 関連QA/RDF/UIC: QA-017、021、027、036、QA-041～QA-042、RDFなし、UIC-001～UIC-002
@@ -122,18 +122,18 @@ Journal/page metadata、配送中message、consumer buffer等のoverheadはこ�
 UIC-002案は`page-limit-*`を備えるArtemis 2.28.0以上、かつAddress別`disk-full-policy`を備える2.50.0以上を前提とする。
 導入時の最新安定版でXML schema/config validationを行い、2.50.0未満では本案を実装開始しない。
 
-### 5.4 再配送（QA-041）
+### 5.4 再配送（QA-041/UIC-001反映済み）
 
-| 設定 | 確定部分 | 回答待ち部分 |
-|---|---|---|
-| `max-delivery-attempts` | 4（初回＋再配送3回） | なし |
-| `redelivery-delay` | 1,000ms | なし |
-| `redelivery-delay-multiplier` | UIC-001案は5.0 | QA-041 |
-| `max-redelivery-delay` | 30,000ms | QA-041 |
-| 実効delay | 第1=1秒、第2=5秒 | 標準倍率式では第3=25秒。UI記載30秒との修正可否 |
+| 設定 | 値 | 実効動作 |
+|---|---:|---|
+| `max-delivery-attempts` | 4 | 初回＋再配送3回。4回目の失敗後にDLQへroute |
+| `redelivery-delay` | 1,000ms | 第1再配送は1秒後 |
+| `redelivery-delay-multiplier` | 5.0 | 次回delayを前回の5倍にする |
+| `max-redelivery-delay` | 30,000ms | delay上限。3回の範囲ではcapへ到達しない |
+| 実効delay | 1秒、5秒、25秒 | QA-041承認済みの一意なrelease/test oracle |
 
-QA-041が承認された場合は1/5/25秒を採用する。否認された場合は標準設定だけでは成立しないため、custom broker plugin等の追加設計を
-再提示し、321/342/354とUI 231を承認内容に合わせて更新する。回答前にUI正本を変更しない。
+UI 231 §8はQA-041/UIC-001に基づき同値へ修正済みである。Application outboxの再送scheduleとは別のBroker再配送値であり、
+`broker.xml`、設定test、IT時系列、監視/runbookの全てで1/5/25秒を使用する。
 
 ## 6. JMS connection factory
 
@@ -247,3 +247,4 @@ consumer count、address bytes、paging、journal sync、connection countを取�
 |---|---|
 | 2026-08-31 | Broker/Address/Queue/JMS/security/journal設計を作成。再配送第3間隔はUIC-001/QA-041回答待ち。 |
 | 2026-08-31 | 横断監査でUI容量を`max-size-*`とみなすBLOCK設計のJVM不整合をUIC-002/QA-042へ起票し、PAGE・memory high-water・page limit案を提示。 |
+| 2026-09-01 | QA-041/UIC-001承認を反映し、再配送設定と実効test oracleを1秒、5秒、25秒へ確定。 |

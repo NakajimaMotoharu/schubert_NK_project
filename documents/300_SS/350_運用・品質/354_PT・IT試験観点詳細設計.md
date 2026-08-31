@@ -5,7 +5,7 @@
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
-- 状態: `確認待ち`。BrokerはQA-041/UIC-001・QA-042/UIC-002、DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
+- 状態: `確認待ち`。Broker再配送はQA-041/UIC-001承認済み。Broker容量はQA-042/UIC-002、DB backup roleの権限oracleはQA-043/UIC-003回答待ち。その他は確定
 - 上位設計: UI 213、221～254、261、264
 - 関連RD: TST-001～TST-005、TST-101～TST-103、T-001～T-004、PER-001～PER-010、AVL-003～AVL-010
 - 関連SS: 311～353、[355_Characterization Test実行準備・PG開始gate](<355_Characterization Test実行準備・PG開始gate.md>)
@@ -127,8 +127,8 @@ Broker/API/Web/PostgreSQLの単体・組合せ停止、Broker reboot、API resta
 ### 5.3 IT-ASYNC・DLQ
 
 - Consumerを必ず1とし、同時投入順/FIFO、処理中の後続停止、business timeoutなし、空回答STUBを確認する。
-- Temporary errorは初回＋3再配送。第1=1秒、第2=5秒、第3はQA-041の承認値をtest profileの一意値にする。
-  回答前は`PENDING_QA_041`とし、25秒または30秒を無断で合格oracleにしない。
+- Temporary errorは初回＋3再配送。第1=1秒、第2=5秒、第3=25秒をQA-041/UIC-001承認済みの一意なtest oracleとする。
+  許容差は計測開始点とscheduler精度を含めてIT環境で事前定義し、順序と設定値そのものを緩和しない。
 - 恒久protocol errorは初回でDLQ・ACK・nonzero exit、DB不能の最終再配送はDLQとjob整合runbookを実行する。
 - DLQ/Expiryのbody非表示、browse権限、個別replay、同Message ID Inbox replay、自動purgeなしを確認する。
 - Addressのメモリ高水位、page上限、page-full時、disk-full時の合否oracleはQA-042回答で一意に固定する。回答前は`PENDING_QA_042`とし、`BLOCK`または`PAGE`のいずれかを無断で合格oracleにしない。
@@ -182,7 +182,7 @@ PT開始は対象class/migration/configとreview、関連SS/test case、fixture�
 IT開始はPT必須case合格、同一release artifact、全componentのconfig/credential、障害注入・rollback手順を条件とする。
 
 PT/IT完了は必須caseのfailed/flaky/skipped/not-run 0、重大不具合0、trace/coverage 100%、証跡のrelease commitひも付け、
-機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-041～QA-043未解決中は再配送間隔、
+機密漏えい0、resource/restore実測値の設定manifest反映とする。QA-042～QA-043未解決中は
 Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず、IT完了前に承認oracleへ固定する。
 
 ## 9. SS設計判断
@@ -191,7 +191,7 @@ Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず�
 |---|---|---|---|
 | SS-D-051 | DB/MQ/file依存のcomponent PTとITは実PostgreSQL/Artemis/file systemで合格判定 | T-001/T-004、dialect・lock・journal・pathの代替実装差を見逃さない | Test environment/container/OS fixture |
 | SS-D-052 | Crash pointを名前付きfailpointでDB/JMS/outboxの境界ごとに試験 | 時間依存でなく再現し、処理結果を一意に検証 | PGのfailpointは試験build限定、IT証跡 |
-| SS-D-053 | QA-041未回答の第3再配送間隔をparameterized pending oracleとし、いずれも仮合格しない | UI正本を無断変更せず、その他の試験設計を完了可能にする | QA回答後321/342/354/test dataを同時更新 |
+| SS-D-053 | Broker再配送oracleをQA-041/UIC-001承認済みの1秒、5秒、25秒へ固定 | Artemis標準倍率式とUI 231を一致させ、releaseごとの任意値化を防ぐ | 321/342/353/354/test dataを同値維持 |
 
 ## 10. 禁止事項
 
@@ -207,3 +207,4 @@ Address容量/paging/full-policy、backup権限caseを`skipped`合格にせず�
 | 2026-08-31 | PT/ITの分岐・境界・異常・競合・再送・性能・復旧と証跡/gateを詳細化。 |
 | 2026-08-31 | 横断監査でPassword試験をNFC・256 byte全長を扱う`pbkdf2-v1`へ統一し、QA-042/UIC-002のArtemis容量・paging pending oracleを追加。 |
 | 2026-08-31 | QA-043/UIC-003の専用backup role、batch/backup相互権限、dump/restoreのpending oracleを追加。 |
+| 2026-09-01 | QA-041/UIC-001承認を反映し、再配送時系列oracleを1秒、5秒、25秒へ確定。 |

@@ -158,7 +158,7 @@ Metricは`nk_`接頭辞、counterは`_total`、byteは`_bytes`、時間は`_seco
 | `nk_mq_queue_messages`,`nk_mq_queue_bytes` | gauge | queue | Artemis滞留 |
 | `nk_mq_address_memory_bytes`,`nk_mq_address_paged_bytes` | gauge | address | Memory high-waterとpage limit、QA-042承認値と照合 |
 | `nk_mq_paging_active`,`nk_mq_page_files` | gauge | address | PAGE開始・page growth・page-full予兆 |
-| `nk_mq_redeliveries_total` | counter | queue,delivery_count | Redelivery・QA-041期待値とは分離 |
+| `nk_mq_redeliveries_total` | counter | queue,delivery_count | Redelivery回数。時系列oracleはQA-041/UIC-001承認値の1秒、5秒、25秒 |
 | `nk_outbox_rows` | gauge | store,status | API/Web outbox件数 |
 | `nk_outbox_oldest_seconds` | gauge | store,status | 滞留時間 |
 | `nk_inbox_replays_total` | counter | layout,result | Message/token replay |

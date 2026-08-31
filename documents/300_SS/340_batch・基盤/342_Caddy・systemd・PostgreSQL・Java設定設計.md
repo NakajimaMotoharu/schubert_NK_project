@@ -5,7 +5,7 @@
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
 hardening、timeout/readinessと検証方法を定める。
 
-- 状態: `確認待ち`。ArtemisはQA-041/UIC-001・QA-042/UIC-002、DB backup role分離はQA-043/UIC-003待ち。その他は確定。
+- 状態: `確認待ち`。Artemis再配送はQA-041/UIC-001承認済み。Artemis容量はQA-042/UIC-002、DB backup role分離はQA-043/UIC-003待ち。その他は確定。
 - 上位設計: UI 211～212、231、251～253
 - 関連RD: SYS-002～SYS-004、SYS-012～SYS-014、OPS-001～OPS-012、MON-001～MON-013、
   PER-001～PER-010、AVL-001～AVL-010
@@ -239,10 +239,11 @@ host   all          all                                   ::/0          reject
 - CredentialはJAAS/propertiesへhashとして格納、LoadCredentialから起動時にservice private runtimeへrender。
   Plain passwordを`broker.xml`、unit、argv、Gitへ置かない。
 
-### 7.1 QA-041保留値
+### 7.1 再配送確定値（QA-041/UIC-001）
 
-`max-delivery-attempts=4`、第1=1秒・第2=5秒は確定。第3はUI 231の30秒とArtemis標準倍率式の25秒のいずれかが
-QA-041回答まで未確定である。回答前にrendered `broker.xml`の当該値をrelease確定しない。
+`max-delivery-attempts=4`、`redelivery-delay=1000`、`redelivery-delay-multiplier=5.0`、
+`max-redelivery-delay=30000`とし、実効delayを第1=1秒、第2=5秒、第3=25秒に固定する。Rendered `broker.xml`の
+schema validationとIT時系列で321 §5.4との一致を確認する。
 
 ### 7.2 QA-042保留値
 
@@ -306,7 +307,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 - Secretのunit `Environment=`/argv・Caddyfile/broker.xml/application YAML/Gitへの平文格納。
 - Systemdを迂回した`java -jar`・broker・batchの手動常用起動。Stop timeout時の自動SIGKILL。
 - PostgreSQLの`trust`/MD5認証、remote hba、application superuser、Webへの業務schema grant。
-- QA-041未解決のままArtemis redelivery第3期待値をrelease確定すること。
+- Artemis redeliveryをQA-041/UIC-001承認値の1秒、5秒、25秒以外でrelease確定すること。
 - QA-042未解決のままUIのQueue容量を`max-size-bytes`/全Address `BLOCK`としてrelease確定すること。
 - QA-043未解決のまま`schubert_batch`へdump対象tableのSELECTを与える、または専用backup role案をrelease確定すること。
 
@@ -320,3 +321,4 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 | 2026-08-31 | 横断監査でWeb DB poolをUI 212の上限2へ修正し、Artemis容量設定をQA-042/UIC-002保留として追加。 |
 | 2026-08-31 | `pg_dump`用の`schubert_backup` role候補をtimeout/`pg_hba.conf`へ反映し、QA-043/UIC-003回答待ちとした。 |
 | 2026-08-31 | 横断監査でJVMのheap/direct/metaspace合計がMemoryMaxへ達していた値を是正し、process別native headroomを確保。 |
+| 2026-09-01 | QA-041/UIC-001承認を反映し、Artemis再配送設定と実効delayを1秒、5秒、25秒へ確定。 |

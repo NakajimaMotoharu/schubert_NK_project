@@ -160,7 +160,7 @@ Claim transactionはここでcommitし、JMS send中にDB row lockを持たな�
 ### 7.2 再送schedule
 
 - Application outbox: 1秒、5秒、30秒、1分、以降5分cap。Jitterは±10%だが、初回2秒内の受付確認用sendには入れない。
-- Broker redeliveryは321とQA-041/UIC-001の確定値を正とし、本application scheduleと混同しない。
+- Broker redeliveryは321のQA-041/UIC-001承認済み値（1秒、5秒、25秒）を正とし、本application scheduleと混同しない。
 - Attempt数上限で自動破棄しない。10回または30分でcritical alert、運用者が原因を解消する。
 
 Web log/revocation outboxも同じclaim形とし、schema/table名と保持仕様だけ変える。

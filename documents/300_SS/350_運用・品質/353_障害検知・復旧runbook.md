@@ -10,7 +10,7 @@ Web/Caddy/API/Artemis/PostgreSQL/file/backup/batch/config/credentialの障害に
 - 関連SS: [321_Artemis物理構成・JMS設定設計](../320_メッセージング/321_Artemis物理構成・JMS設定設計.md)、
   [341_朝batch・backup・削除・再実行設計](../340_batch・基盤/341_朝batch・backup・削除・再実行設計.md)、
   [351_Log・metric・alert・error code設計](<351_Log・metric・alert・error code設計.md>)
-- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041～QA-043、UIC-001～UIC-003。Broker設定とbackup role境界を確認中
+- 関連QA/RDF/UIC: QA-021、QA-027、QA-029、QA-033、QA-038～QA-039、QA-041～QA-043、UIC-001～UIC-003。Broker容量とbackup role境界を確認中
 
 自動復旧はprocess restart/outbox retry/JMS redeliveryの設計済み範囲だけ。DLQ再投入、DB restore、
 credential差替え、不明file削除、強制終了、public再開は運用者が証跡と対象を確認して行う。
@@ -60,7 +60,7 @@ Password、token、body、secret、physical path全文はincident記録に含め
 ## 6. RB-003 Artemis/Broker障害
 
 - Unit/exit、bind 61616/8161、journal load/sync、disk/inode、Address/Queue/consumer/message/delivering/scheduled、DLQ/Expiry、config/security driftを確認。
-- QA-041解決まで再配送第3間隔の25/30秒差をbroker故障と誤判定しない。実効configとQA状態を併記。
+- 再配送はQA-041/UIC-001承認値の1秒、5秒、25秒を正常値とする。実効configまたは観測時系列が異なる場合はconfig driftとして扱う。
 - QA-042解決までAddressの`BLOCK`/`PAGE`、memory high-water、page limit/page-full値の差を無断で故障復旧に使用しない。実効config、
   address memory/page byte/page file、global memory、filesystem率を同時に保全する。
 - Caddy/Web/APIを停止または非公開にし、producer/consumer I/Oを止める。
@@ -203,3 +203,4 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 | 2026-08-31 | Component、DLQ、DB restore、resource、backup、file、credential、drift/disasterの復旧手順を作成。 |
 | 2026-08-31 | 横断監査でQA-042/UIC-002を追跡し、Artemis memory/page/disk容量故障の証跡と切り分けを追加。 |
 | 2026-08-31 | QA-043/UIC-003のbackup role/grant障害を値非表示で切り分け、batch roleへの緊急SELECT追加を禁止。 |
+| 2026-09-01 | QA-041/UIC-001承認を反映し、Broker再配送の正常時系列を1秒、5秒、25秒へ固定。 |
