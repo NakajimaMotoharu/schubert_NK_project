@@ -112,6 +112,21 @@ Hard link対策としてasset/transfer filesystemの書込権限を専用account
 DescriptorはHTTP session cacheの権限正本にせず、各GETでAPIへ照会する。ID不存在・非scopeは404、
 API/MQ/file integrity障害は503。内部理由をBrowserへ区別表示しない。
 
+MEDIA1024の許可MIMEとstorage file拡張子は次の完全一致allowlistとする。大文字小文字や別名を推測して受理せず、DB/manifest、descriptor、
+拡張子の組合せが不一致なら配信しない。これはSSC-004により、UI 221/223/235/237の現行互換規則を実装可能な値へ具体化したものである。
+
+| 種別 | Storage拡張子 | Descriptor MIME | Disposition |
+|---|---|---|---|
+| Audio（IF-009） | `.ogg` | `audio/ogg` | `I` / `A` |
+| Video（IF-012） | `.mp4` | `video/mp4` | `I`のみ |
+| Music（IF-016） | `.m4a` | `audio/mp4` | `I` / `A` |
+| Music（IF-016） | `.mp3` | `audio/mpeg` | `I` / `A` |
+| Music（IF-016） | `.ogg` | `audio/ogg` | `I` / `A` |
+| Music（IF-016） | `.wav` | `audio/wav` | `I` / `A` |
+| Music（IF-016） | `.flac` | `audio/flac` | `I` / `A` |
+
+Attachment時もdescriptorには実体の上表MIMEを設定し、HTTP応答だけを`application/octet-stream`へ固定する。
+
 ## 9. Endpoint・HTTP header
 
 | Endpoint系 | Mode | Status/header |

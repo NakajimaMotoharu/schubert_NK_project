@@ -57,13 +57,13 @@ Protocol recordは`dev.codex.schubert.nk.protocol.layout.*`、handlerは`dev.cod
 | Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
 |---|---|---|---|---|
 | `AUDREQ01` 16/0/0/272 | `AudioDescriptorRequestData` | `AudioDescriptorHandler` | `audio_files.id` | disposition I/A |
-| `AUDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeAudio` | audio path/name/size/hash/container | Root/size/hash/MIME、UI 235 §2～3/FUN-005 |
+| `AUDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeAudio` | audio path/name/size/hash/container | Root/size/hash、`.ogg`=`audio/ogg`、UI 235 §2～3/FUN-005、SSC-004 |
 | `ANMREQ01` 0/0/0/256 | `AnimationMenuRequestData` | `AnimationMenuHandler` | — | Context必須 |
 | `ANMRSP01` 16/0/0/272 | `AnimationMenuResponseData` | `MediaQueryService.animationCounts` | `media_assets` aggregate | 15/4/1/20 current baseline、UI 235 §4 |
 | `ANLREQ01` 16/0/0/272 | `AnimationListRequestData` | `AnimationListHandler` | media category | MAIN/OVA |
 | `ANLRSP01` 8/928/50/46,664 | `AnimationListResponseData` / `AnimationRecord` | `MediaQueryService.findAnimation` | `media_assets`: logical_id/text/size/parent/order | Parent/category整合、UI 235 §5 |
 | `VIDREQ01` 64/0/0/320 | `VideoDescriptorRequestData` | `VideoDescriptorHandler` | logical_id | 223の20 ID allowlist/DB存在 |
-| `VIDRSP01` 1,808/0/0/2,064 | `VideoDescriptorResponseData` | `MediaQueryService.describeVideo` | `media_assets`＋file metadata | MEDIA1024＋title/category/display path、UI 235 §6/FUN-006 |
+| `VIDRSP01` 1,808/0/0/2,064 | `VideoDescriptorResponseData` | `MediaQueryService.describeVideo` | `media_assets`＋file metadata | MEDIA1024 `.mp4`=`video/mp4`＋title/category/display path、UI 235 §6/FUN-006、SSC-004 |
 | `MCTREQ01` 0/0/0/256 | `MusicCategoryRequestData` | `MusicCategoryHandler` | — | Context必須 |
 | `MCTRSP01` 8/72/20/1,704 | `MusicCategoryResponseData` / `MusicCategoryRecord` | `MediaQueryService.findMusicCategories` | media_assets aggregate | 曲/BGM/名称順、UI 235 §7 |
 | `MCSREQ01` 64/0/0/320 | `MusicSectionRequestData` | `MusicSectionHandler` | category text | 返却master値と一致 |
@@ -71,7 +71,7 @@ Protocol recordは`dev.codex.schubert.nk.protocol.layout.*`、handlerは`dev.cod
 | `MTRREQ01` 192/0/0/448 | `MusicTrackRequestData` | `MusicTrackHandler` | category/section text | DB存在・組合せ |
 | `MTRRSP01` 16/1,312/200/262,672 | `MusicTrackResponseData` / `MusicTrackRecord` | `MediaQueryService.findMusicTracks` | `media_assets`: pair_key/role/order | Pair role M/I/N、順序、UI 235 §9/FUN-007 |
 | `MEDREQ01` 72/0/0/328 | `MusicDescriptorRequestData` | `MusicDescriptorHandler` | logical_id/disposition | I/A |
-| `MEDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeMusic` | media_assets metadata | MIME allowlist、UI 235 §10 |
+| `MEDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeMusic` | media_assets metadata | `.m4a/.mp3/.ogg/.wav/.flac`と`audio/mp4,mpeg,ogg,wav,flac`の完全一致、UI 235 §10、SSC-004 |
 | `LGSREQ01` 656/0/0/912 | `LogSearchRequestData` | `LogSearchHandler` | app_logs query | ADMIN、31日、size100、UI 235 §11/FUN-008 |
 | `LGSRSP01` 48/2,088/100/209,104 | `PagedResponseData` / `LogRecord` | `LogQueryService.search` | `app_logs`: bigint/timestamptz/jsonb/inet text projection | 日時/id desc、秘密値なし |
 
