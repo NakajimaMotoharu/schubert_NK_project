@@ -29,6 +29,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -455,6 +459,32 @@ class GateCliTest {
     assertTrue(GateCli.containsAny(binary, List.of("match")));
   }
 
+  @Test
+  void atomicJsonWriterRejectsConcurrentUseOfTheSameOutput() throws Exception {
+    Path output = temporaryDirectory.resolve("atomic/concurrent.json");
+    CountDownLatch serializationStarted = new CountDownLatch(1);
+    CountDownLatch releaseSerialization = new CountDownLatch(1);
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      var first =
+          executor.submit(
+              (Callable<Void>)
+                  () -> {
+                    GateCli.writeJson(
+                        output, new BlockingValue(serializationStarted, releaseSerialization));
+                    return null;
+                  });
+      assertTrue(serializationStarted.await(5, TimeUnit.SECONDS));
+      assertThrows(
+          IllegalStateException.class,
+          () -> GateCli.writeJson(output, Map.of("value", "second")));
+      releaseSerialization.countDown();
+      first.get(5, TimeUnit.SECONDS);
+    }
+    assertEquals("first", JSON.readTree(output.toFile()).path("value").asText());
+    assertFalse(Files.exists(output.resolveSibling("concurrent.json.part")));
+    assertThrows(IllegalArgumentException.class, () -> GateCli.writeJson(null, Map.of()));
+  }
+
   private void assertPortFailure(
       PreflightFixture fixture, int appPort, int proxyPort, String name) throws Exception {
     Map<String, String> properties = new LinkedHashMap<>(fixture.properties());
@@ -646,4 +676,14 @@ class GateCliTest {
       Path currentRoot,
       Path usersFile,
       Map<String, String> properties) {}
+
+  private record BlockingValue(CountDownLatch started, CountDownLatch release) {
+    public String getValue() throws InterruptedException {
+      started.countDown();
+      if (!release.await(5, TimeUnit.SECONDS)) {
+        throw new IllegalStateException("serialization barrier timed out");
+      }
+      return "first";
+    }
+  }
 }

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public final class GateCli {
@@ -31,6 +32,7 @@ public final class GateCli {
           .enable(SerializationFeature.INDENT_OUTPUT)
           .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
   private static final HexFormat HEX = HexFormat.of();
+  private static final Set<Path> ACTIVE_OUTPUTS = ConcurrentHashMap.newKeySet();
 
   private GateCli() {}
 
@@ -468,11 +470,28 @@ public final class GateCli {
     return HEX.formatHex(digest.digest());
   }
 
-  private static void writeJson(Path output, Object value) throws IOException {
-    Files.createDirectories(output.toAbsolutePath().normalize().getParent());
-    Path temporary = output.resolveSibling(output.getFileName() + ".part");
-    JSON.writeValue(temporary.toFile(), value);
-    Files.move(temporary, output, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+  static void writeJson(Path output, Object value) throws IOException {
+    if (output == null) throw new IllegalArgumentException("output is required");
+    Path normalized = output.toAbsolutePath().normalize();
+    if (!ACTIVE_OUTPUTS.add(normalized)) {
+      throw new IllegalStateException("concurrent write to the same output is not allowed: " + normalized);
+    }
+    Path temporary = normalized.resolveSibling(normalized.getFileName() + ".part");
+    try {
+      Files.createDirectories(normalized.getParent());
+      JSON.writeValue(temporary.toFile(), value);
+      Files.move(
+          temporary,
+          normalized,
+          StandardCopyOption.REPLACE_EXISTING,
+          StandardCopyOption.ATOMIC_MOVE);
+    } finally {
+      try {
+        Files.deleteIfExists(temporary);
+      } finally {
+        ACTIVE_OUTPUTS.remove(normalized);
+      }
+    }
   }
 
   record TreeStats(long fileCount, long bytes, List<String> symlinks) {}

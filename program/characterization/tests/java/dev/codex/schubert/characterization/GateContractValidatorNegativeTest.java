@@ -16,6 +16,8 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /** Negative fixtures for BUG-001/YKT-001. Program: NK-CHR-001. */
 class GateContractValidatorNegativeTest {
@@ -256,6 +258,20 @@ class GateContractValidatorNegativeTest {
         "run1_SUPPLEMENTAL_EVIDENCE:CHR-A02:ip-limit-observed-not-hardcoded",
         "run1_SUPPLEMENTAL:CHR-A03:unsafe-post-denied",
         "run1_SUPPLEMENTAL_EVIDENCE:CHR-A03:unsafe-post-denied");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"FAIL", "FAILED", "FLAKY", "SKIP", "SKIPPED", "DISABLED", "NOT_RUN"})
+  void rejectsEveryNonPassExecutionStatus(String rejectedStatus) throws Exception {
+    Fixture fixture = fixture("rejected-status-" + rejectedStatus.toLowerCase(java.util.Locale.ROOT));
+    fixture.mutateRun(
+        false,
+        "artifacts/CHR-A02.json",
+        root -> root.put("status", rejectedStatus));
+    assertFailures(
+        fixture.validate(),
+        "run2_STATUS:CHR-A02",
+        "run2_REJECTED_STATUS:CHR-A02");
   }
 
   @Test
