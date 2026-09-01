@@ -42,8 +42,8 @@ class GateContractTest {
       assertFalse(item.path("field").asText().contains("*"));
       assertFalse(item.path("cases").isEmpty());
     }
-    assertEquals(15, ids.size());
-    for (int index = 1; index <= 15; index++) {
+    assertEquals(16, ids.size());
+    for (int index = 1; index <= 16; index++) {
       assertTrue(ids.contains("DIF-%03d".formatted(index)));
     }
   }

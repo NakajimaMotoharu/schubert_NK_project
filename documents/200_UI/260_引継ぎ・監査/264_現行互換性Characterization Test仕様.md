@@ -6,6 +6,7 @@
 同じtestで比較する。意図的差異は本書の差異一覧だけを許容し、未登録差異は不具合とする。
 
 関連RD: SCP-001、SCP-004、TST-001～TST-005、TST-103、MIG-002、MIG-006。
+関連QA/RDF/UIC: QA-044、RDFなし、UIC-004。
 
 本書のtest case設計と静的baselineはUI工程で作成済み。実行可能test artifactと現行実行baselineは、基本設計でprogram実装を
 行わない方針に従い未作成であり、最初のNK production code着手前の必須gateとする。これは要件未確定ではなく工程実施状態である。
@@ -49,9 +50,9 @@ program/characterization/
 | Case | 対象 | Current baseline・比較内容 | 証跡 |
 |---|---|---|---|
 | CHR-A01 | Login表示 | Username autofocus/autocomplete、password autocomplete、CSRF、error/lock/logout message、password非再表示 | DOM/header |
-| CHR-A02 | Login制御 | User 5回、IP 10回、15分lock、成功clear、最大2 session、最古失効 | HTTP/監査結果 |
+| CHR-A02 | Login制御 | User 5回、IP 10回、15分lock、成功clear。現行は設定と異なり3 sessionとも継続（DIF-016）、NKは最大2 session・最古失効 | HTTP/監査結果 |
 | CHR-A03 | Logout・期限 | POST logout、302、期限切れGET/POST、保存済みsafe GET復帰 | HTTP遷移 |
-| CHR-U01 | Menu | 2列card、現行4機能のtitle/順、top bar、responsive 1列 | DOM/PNG |
+| CHR-U01 | Menu | 2列card、現行の業務4機能＋Log照会の5 cardのtitle/順、top bar、responsive 1列 | DOM/PNG |
 | CHR-U02 | 共通style | 色、幅、見出し、nav、focus、0件、error表示 | DOM/PNG |
 | CHR-S01 | 検索条件 | 本文/game/speaker/章/type/voiceの単独・AND、trim、大文字小文字 | 正規化結果 |
 | CHR-S02 | Speaker候補 | Game変更、出現数降順、同数名前昇順、JavaScript無効時submit | DOM/結果 |
@@ -62,7 +63,7 @@ program/characterization/
 | CHR-S07 | Scenario明細 | 前後file、entry順、anchor highlight、speaker/narration、本文 | DOM |
 | CHR-S08 | Scenario audio | Audio有無、複数voiceのgroup化、inline player、DL file名 | DOM/HTTP |
 | CHR-M01 | Audio HTTP | Inline/downloadのstatus、MIME、disposition、404 | HTTP header/body長 |
-| CHR-M02 | Animation menu/list | Main/SUBTRACK 15、OVA 4、opening 1、223の20 ID/title/path/order/pair | DOM/manifest |
+| CHR-M02 | Animation menu/list | Main 11＋SUBTRACK 4の15、OVA 4、opening 1、223の20 ID/title/path/order/pair | DOM/manifest |
 | CHR-M03 | Animation watch | Opening/各ID直リンク、title/category/display path、戻り先、16:9 player | DOM/PNG |
 | CHR-M04 | Video Range | 200、206、最初のRange、1MiB上限、suffix、416、Content-Range | HTTP header/hash |
 | CHR-M05 | Music階層 | Category `曲`→`BGM`、section順、129件、非`曲`path/MB表示 | DOM/manifest |
@@ -92,6 +93,7 @@ program/characterization/
 | DIF-013 | Inline onchange | CSP適合のsame-origin外部JS、無効時button | Security、TST-002 | 見える操作は維持 | CHR-S02 | UI設計決定 |
 | DIF-014 | Web process内session | 暗号化永続session、再起動継続 | AVL-003、OPS-006 | 計画再起動後も継続可能 | CHR-O01 | UI設計決定 |
 | DIF-015 | 現行URL | 受入条件外。ただし既存path継続 | TST-005 | 初期releaseで変更なし | 全HTTP case | RD確定 |
+| DIF-016 | 同一accountの3件目Login後も3 sessionすべて利用可能 | 最大2 session、3件目で最古sessionをrevoke | 現行のsession lifecycle連携不備を既知不具合として修正、AUT-004、QA-044/UIC-004 | 3台目Login時に最古sessionがLogin画面へ戻る | CHR-A02 | 承認済み |
 
 `UI設計決定`はRD範囲内の軽微な具体化であり、STで受入確認する。期待値変更または新たな利用者差異が判明した場合は、無断で
 追加せずQA/RDFB適用要否を判定し、本表、test oracle、関連設計を同時更新する。
@@ -107,3 +109,9 @@ program/characterization/
 
 Current側の実行不能やsourceと実動の差（例: CSPとinline handler）を発見した場合は、実動結果をbaselineとし、NKで修正するなら
 新しい差異IDと理由・影響を登録する。Source記述だけでbrowser挙動を推測して合格扱いにしない。
+
+## 7. 更新履歴
+
+| 日付 | 内容 |
+|---|---|
+| 2026-09-01 | QA-044/UIC-004の承認に基づき、現行の同時session上限不具合を`DIF-016`として登録し、CHR-A02のCurrent/NK oracleを分離。 |

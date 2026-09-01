@@ -112,19 +112,21 @@ class CurrentCharacterizationTest {
         sessionRedirects.add(page.url().replace(environment.baseUrl(), ""));
       }
       assertEquals(
-          List.of(false, true, true),
+          List.of(true, true, true),
           sessionActive,
-          "maximumSessions(2) observation; redirects=" + sessionRedirects);
+          "DIF-016 current observation; redirects=" + sessionRedirects);
       sink.write("CHR-A02", map(
           "userFailureLimit", 5,
           "ipFailureLimit", 10,
           "lockMinutes", 15,
           "successClearsPriorFailures", true,
           "lockedRedirect", "/login?locked",
-          "maximumSessions", 2,
-          "oldestSessionInvalidated", true,
+          "configuredMaximumSessions", 2,
+          "observedActiveSessionCount", 3,
+          "oldestSessionInvalidated", false,
           "sessionActiveOldestToNewest", sessionActive,
           "sessionRedirectsOldestToNewest", sessionRedirects,
+          "knownDifference", "DIF-016",
           "credentialValuesRecorded", false));
     } finally {
       sessions.forEach(BrowserContext::close);

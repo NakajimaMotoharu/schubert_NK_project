@@ -42,7 +42,7 @@ public final class GateCli {
       case "preflight" -> preflight(pathProperty("chr.projectRoot"), output(args, 1));
       case "compare-current" -> compareCurrent(Path.of(args[1]), Path.of(args[2]), Path.of(args[3]));
       case "report" -> report(pathProperty("chr.projectRoot"), Path.of(args[1]), Path.of(args[2]), Path.of(args[3]), Path.of(args[4]));
-      case "promote-current" -> promoteCurrent(Path.of(args[1]), Path.of(args[2]));
+      case "promote-current" -> promoteCurrent(pathProperty("chr.projectRoot"), Path.of(args[1]), Path.of(args[2]));
       default -> throw new IllegalArgumentException("unknown command: " + args[0]);
     }
   }
@@ -216,7 +216,20 @@ public final class GateCli {
     if (!firstCases.equals(expectedCases)) failures.add("run1 case coverage is not 24/24");
     if (!secondCases.equals(expectedCases)) failures.add("run2 case coverage is not 24/24");
     if (!"PASS".equals(compare.path("status").asText())) failures.add("run2 is not zero-diff");
-    if (dif.path("differences").size() != 15) failures.add("DIF catalog is not 15/15");
+    if (dif.path("differences").size() != 16) failures.add("DIF catalog is not 16/16");
+    JsonNode preflight = readOptional(projectRoot.resolve("program/characterization/reports/preflight.json"));
+    JsonNode sourceVerification = readOptional(projectRoot.resolve("program/characterization/reports/source-verification.json"));
+    JsonNode baselineManifest = readOptional(projectRoot.resolve("program/characterization/baseline/current/manifest.json"));
+    List<String> baselineCases = caseIds(projectRoot.resolve("program/characterization/baseline/current/artifacts"));
+    boolean preflightPassed = "PASS".equals(preflight.path("status").asText());
+    boolean sourcePassed = "PASS".equals(sourceVerification.path("status").asText());
+    boolean baselinePassed = baselineCases.equals(expectedCases)
+        && "current".equals(baselineManifest.path("target").asText())
+        && baselineManifest.path("caseCount").asInt() == expectedCases.size()
+        && baselineManifest.path("differenceCount").asInt() == dif.path("differences").size();
+    if (!preflightPassed) failures.add("preflight report is not PASS");
+    if (!sourcePassed) failures.add("original source verification is not PASS");
+    if (!baselinePassed) failures.add("promoted current baseline is incomplete");
     List<String> secretHits = secretScan(projectRoot, pathProperty("chr.usersFile"));
     if (!secretHits.isEmpty()) failures.add("secret scan found prohibited values");
 
@@ -227,16 +240,16 @@ public final class GateCli {
     result.put("currentApplicable", "23/23 PASS");
     result.put("nkOnlyMetadata", "CHR-N01 PASS");
     result.put("repeatComparison", compare.path("status").asText());
-    result.put("differenceCatalog", "DIF-001..015");
+    result.put("differenceCatalog", "DIF-001..016");
     result.put("secretScanHits", secretHits.size());
     result.put("failures", failures);
     result.put("gates", Map.of(
-        "CHR-G01", "PASS",
+        "CHR-G01", preflightPassed ? "PASS" : "FAIL",
         "CHR-G02", failures.stream().noneMatch(x -> x.contains("coverage")) ? "PASS" : "FAIL",
         "CHR-G03", "PASS".equals(compare.path("status").asText()) ? "PASS" : "FAIL",
-        "CHR-G04", "PASS_PENDING_GATE_COMMIT",
-        "CHR-G05", dif.path("differences").size() == 15 ? "PASS" : "FAIL",
-        "CHR-G06", secretHits.isEmpty() ? "PASS_PENDING_ORIGINAL_RECHECK" : "FAIL"));
+        "CHR-G04", baselinePassed && sourcePassed ? "PASS" : "FAIL",
+        "CHR-G05", dif.path("differences").size() == 16 ? "PASS" : "FAIL",
+        "CHR-G06", secretHits.isEmpty() && sourcePassed ? "PASS" : "FAIL"));
     writeJson(output, result);
     if (!failures.isEmpty()) {
       throw new IllegalStateException("gate report failed: " + failures);
@@ -263,7 +276,11 @@ public final class GateCli {
     return hits;
   }
 
-  private static void promoteCurrent(Path sourceRun, Path baseline) throws IOException {
+  private static JsonNode readOptional(Path path) throws IOException {
+    return Files.isRegularFile(path) ? JSON.readTree(path.toFile()) : JSON.createObjectNode();
+  }
+
+  private static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
     if (Files.exists(baseline)) {
       try (Stream<Path> contents = Files.list(baseline)) {
         if (contents.findAny().isPresent()) {
@@ -273,6 +290,21 @@ public final class GateCli {
     }
     copyTree(sourceRun.resolve("artifacts"), baseline.resolve("artifacts"));
     copyTree(sourceRun.resolve("screenshots"), baseline.resolve("screenshots"));
+    JsonNode expected = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/fixtures/expected.json").toFile());
+    JsonNode differences = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/cases/dif-allowlist.json").toFile());
+    Map<String, Object> manifest = new LinkedHashMap<>();
+    manifest.put("schemaVersion", 1);
+    manifest.put("target", "current");
+    manifest.put("sourceRun", sourceRun.getFileName().toString());
+    manifest.put("caseCount", caseIds(sourceRun.resolve("artifacts")).size());
+    manifest.put("screenshotFileCount", regularFiles(sourceRun.resolve("screenshots"), path -> true).size());
+    manifest.put("differenceCount", differences.path("differences").size());
+    manifest.put("sourceAggregateSha256", expected.path("sourceAggregateSha256").asText());
+    manifest.put("documentAggregateSha256", expected.path("documentAggregateSha256").asText());
+    manifest.put("masterFileCount", expected.path("masterFileCount").asLong());
+    manifest.put("masterBytes", expected.path("masterBytes").asLong());
+    manifest.put("gateCommit", "commit-containing-this-manifest");
+    writeJson(baseline.resolve("manifest.json"), manifest);
   }
 
   private static void copyTree(Path source, Path destination) throws IOException {
