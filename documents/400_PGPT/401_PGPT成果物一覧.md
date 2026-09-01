@@ -1,0 +1,53 @@
+# PGPT成果物一覧・進捗
+
+## 1. 位置づけ
+
+本ディレクトリをschubert NK再構築projectの製造・単体テスト（PGPT）工程における文書最正本とする。外部仕様の最正本は`documents/100_RD`、`documents/200_UI`、実装・試験詳細の最正本は`documents/300_SS`であり、本工程の文書・code・test・evidenceはそれらを変更せず具体化する。
+
+開始基準は`main`のSS最終commit `749a777`、Characterization baseline/gate commit `843de94`、CHR-G01～G06全件PASS、QA-001～044解決、UIC-001～004完了、RDF/SSC 0件である。PG開始時精査でQA-045/UIC-005、SSC-001～003、BUG-001/YKT-001を起票した。
+
+## 2. 成果物一覧
+
+| 文書 | 目的 | 状態 | 更新条件 |
+|---|---|---|---|
+| [411_コーディング規約](410_工程標準/411_コーディング規約.md) | Java 25実装・test共通規約 | 確定 | 規約変更時 |
+| [421_開発環境・toolchain構築記録](420_環境/421_開発環境・toolchain構築記録.md) | version、入手元、設定、再現手順 | 作成中 | tool導入・更新時 |
+| [431_Module・Program一覧](430_構成・追跡/431_Module・Program一覧.md) | Module/programとRD/UI/SS/PTの追跡 | 作成中 | program/test追加時 |
+| [441_実装判断記録](440_判断/441_実装判断記録.md) | SSより詳細な内部判断 | 作成中 | 判断確定時 |
+| [451_Build・静的解析・coverage方針](450_品質/451_Build・静的解析・coverage方針.md) | 品質gateと実行方法 | 確定 | gate変更時 |
+| [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 未着手 | PG gate完了時 |
+| [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 未着手 | PT gate完了時 |
+| [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 未着手 | 全gate完了時 |
+| [464_IT・ST引継ぎ事項](460_完了報告/464_IT・ST引継ぎ事項.md) | Linux server後続工程への引継ぎ | 作成中 | 未実測値・制約判明時 |
+| [915_障害表](../900_OTHER/910_台帳/915_障害表.md) | 実装済み処理の仕様違反管理 | 運用中 | 障害発見前に起票 |
+| [916_横展開管理台帳](../900_OTHER/910_台帳/916_横展開管理台帳.md) | 共通原因の全対象確認 | 運用中 | 横展開対象判明時 |
+
+Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Program-ID>/`を最正本とし、Test IDでcode・仕様・結果・manifestを一意に結ぶ。
+
+## 3. 工程進捗
+
+| Workstream | 状態 | 完了条件 | 現在値 |
+|---|---|---|---|
+| 開始時確認 | 完了 | status/branch/commit/remote/既存変更確認 | `main`/`749a777`、clean、既存remoteなし。指定URLを`origin`へ設定 |
+| Remote整合 | 阻害中 | fetchでremote履歴との一致を確認 | private GitHubのcredentialが本環境になく認証前で停止。force pushは実施しない |
+| 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
+| 工程基盤 | 実施中 | 規約、toolchain、品質方針、915/916確定 | 台帳初版、rootless JDK/Maven構築済み |
+| Characterization是正 | 調査中 | BUG-001/YKT-001再試験PASS | 設計に対するgate実装不足を修正前起票 |
+| PG | 未着手 | 全program実装、build/static analysis/関連CHR PASS | 0% |
+| PT | 未着手 | 全PT PASS、line/method/class/branch 100%、skip等0 | 0% |
+| PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
+
+## 4. 進捗更新規則
+
+- PGとPTはprogram単位で同時に進め、production codeだけが未試験の状態をdevへ取り込まない。
+- `Failed`、`flaky`、`skipped`、`not-run`はPASSへ算入しない。
+- 上位仕様の確認・変更は911～914の分類に従い、台帳登録前に質問やoracle変更を行わない。
+- 実装済み処理の仕様違反は修正前に915、共通原因または予防確認は916へ起票する。
+- Current baselineはread-onlyとし、NK結果へ合わせて更新しない。
+- IT/STは本工程の完了宣言対象外とする。
+
+## 5. 更新履歴
+
+| 日付 | 内容 |
+|---|---|
+| 2026-09-01 | PGPT工程開始。開始基準、成果物構成、初期進捗を登録。 |
