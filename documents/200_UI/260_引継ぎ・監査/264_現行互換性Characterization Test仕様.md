@@ -102,7 +102,7 @@ program/characterization/
 | Gate | 条件 | 現在状態 |
 |---|---|---|
 | UI完了 | Case、差異、静的baseline、後続責務が確定 | 作成済み、263監査対象 |
-| PG開始 | Executable artifact作成、current全case成功、baseline commit、差異review | 2026-09-01 PASS。CHR-G01～G06全件PASS |
+| PG開始 | Executable artifact作成、current全case成功、baseline commit、差異review | 2026-09-01 PASS。CHR-G01～G06全件PASS、gate commit `843de94` |
 | ST完了 | 同じartifactをNKへ実行し、登録差異以外一致、新規機能case合格 | 後続 |
 | Release | 未承認差異0、重大未実施0、証跡version固定 | 後続 |
 

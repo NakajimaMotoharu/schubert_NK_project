@@ -185,6 +185,7 @@ CHR-G01～G06を1つでも満たさないcommitへNK production source・DDL・p
 | Repeat comparison | 26 artifact（24 JSON＋2 PNG）を比較しmissing/extra/changedすべて0 |
 | Difference/security | DIF-001～016の16/16整合、秘密情報・`JSESSIONID`の証跡hit 0 |
 | Gate | CHR-G01～G06全件PASS、failure 0 |
+| Baseline/gate commit | `843de94`。NK production実装と分離 |
 | 実行環境 | OpenJDK 25.0.4、Maven 3.9.12、Playwright Java 1.55.0/Chromium build 1187、Caddy 2.6.2、PostgreSQL 18隔離DB |
 
 正式証跡は[gate report](../../../program/characterization/reports/gate-report.json)、[2回比較](../../../program/characterization/reports/current-repeat-comparison.json)、[baseline manifest](../../../program/characterization/baseline/current/manifest.json)を正とする。Playwrightはhost package名の警告を出力したが、pinned Chromiumの起動、DOM/HTTP/PNG取得、2回差分0まで実行済みである。

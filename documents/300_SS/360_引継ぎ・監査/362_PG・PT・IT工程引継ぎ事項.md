@@ -35,7 +35,7 @@
 | SS正本 | 301～364作成・横断監査済、364の正式完了判定は完了 | 確定正本をbaselineとして維持 |
 | QA/UIC | QA-001～044解決、UIC-001～004完了 | 承認済み設計とtest oracleを維持 |
 | RDF | 0件 | 未処理RDF 0を維持 |
-| Characterization | Artifact/baseline作成済、Current 23/23 PASS×2、差分0、CHR-G01～G06 PASS | Baseline/gate commitをproductionと分離して維持 |
+| Characterization | Artifact/baseline作成済、Current 23/23 PASS×2、差分0、CHR-G01～G06 PASS、gate commit `843de94` | Baseline/gate commitをproductionと分離して維持 |
 | Git | Local `main`が正、meaningful commitで管理 | Clean worktree、gate commit特定、remoteはなくても開始可 |
 | Environment | 設計値確定、minor/patch未実測 | Java 25/PostgreSQL 18/Artemis/Caddyの導入可能性とtoolchainを記録 |
 
