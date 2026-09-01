@@ -226,7 +226,18 @@ public final class GateCli {
     boolean baselinePassed = baselineCases.equals(expectedCases)
         && "current".equals(baselineManifest.path("target").asText())
         && baselineManifest.path("caseCount").asInt() == expectedCases.size()
-        && baselineManifest.path("differenceCount").asInt() == dif.path("differences").size();
+        && baselineManifest.path("differenceCount").asInt() == dif.path("differences").size()
+        && !baselineManifest.path("environment").path("javaVersion").asText().isBlank()
+        && baselineManifest.path("environment").path("browserRevision").asInt() > 0
+        && baselineManifest.path("sourceAggregateSha256").asText()
+            .equals(sourceVerification.path("sourceAggregateSha256").asText())
+        && baselineManifest.path("documentAggregateSha256").asText()
+            .equals(sourceVerification.path("documentAggregateSha256").asText())
+        && baselineManifest.path("masterFileCount").asLong()
+            == sourceVerification.path("masterFileCount").asLong()
+        && baselineManifest.path("masterBytes").asLong()
+            == sourceVerification.path("masterBytes").asLong()
+        && "commit-containing-this-manifest".equals(baselineManifest.path("gateCommit").asText());
     if (!preflightPassed) failures.add("preflight report is not PASS");
     if (!sourcePassed) failures.add("original source verification is not PASS");
     if (!baselinePassed) failures.add("promoted current baseline is incomplete");
@@ -267,13 +278,28 @@ public final class GateCli {
       if (!Files.exists(root)) continue;
       for (Path file : regularFiles(root, path -> true)) {
         if (Files.size(file) > 10 * 1024 * 1024) continue;
-        String text = Files.readString(file, StandardCharsets.UTF_8);
-        if (values.stream().anyMatch(text::contains) || text.contains("JSESSIONID=")) {
+        if (containsAny(file, values) || containsAny(file, List.of("JSESSIONID="))) {
           hits.add(projectRoot.relativize(file).toString());
         }
       }
     }
     return hits;
+  }
+
+  static boolean containsAny(Path file, List<String> values) throws IOException {
+    byte[] content = Files.readAllBytes(file);
+    for (String value : values) {
+      byte[] target = value.getBytes(StandardCharsets.UTF_8);
+      if (target.length == 0 || target.length > content.length) continue;
+      outer:
+      for (int start = 0; start <= content.length - target.length; start++) {
+        for (int index = 0; index < target.length; index++) {
+          if (content[start + index] != target[index]) continue outer;
+        }
+        return true;
+      }
+    }
+    return false;
   }
 
   private static JsonNode readOptional(Path path) throws IOException {
@@ -292,8 +318,9 @@ public final class GateCli {
     copyTree(sourceRun.resolve("screenshots"), baseline.resolve("screenshots"));
     JsonNode expected = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/fixtures/expected.json").toFile());
     JsonNode differences = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/cases/dif-allowlist.json").toFile());
+    JsonNode browser = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/browser/manifest.json").toFile());
     Map<String, Object> manifest = new LinkedHashMap<>();
-    manifest.put("schemaVersion", 1);
+    manifest.put("schemaVersion", 2);
     manifest.put("target", "current");
     manifest.put("sourceRun", sourceRun.getFileName().toString());
     manifest.put("caseCount", caseIds(sourceRun.resolve("artifacts")).size());
@@ -303,6 +330,14 @@ public final class GateCli {
     manifest.put("documentAggregateSha256", expected.path("documentAggregateSha256").asText());
     manifest.put("masterFileCount", expected.path("masterFileCount").asLong());
     manifest.put("masterBytes", expected.path("masterBytes").asLong());
+    manifest.put("environment", Map.of(
+        "javaVersion", System.getProperty("java.version"),
+        "javaVendor", System.getProperty("java.vendor"),
+        "playwrightJava", browser.path("playwrightJava").asText(),
+        "browser", browser.path("browser").asText(),
+        "browserRevision", browser.path("browserRevision").asInt(),
+        "locale", browser.path("locale").asText(),
+        "timezone", browser.path("timezone").asText()));
     manifest.put("gateCommit", "commit-containing-this-manifest");
     writeJson(baseline.resolve("manifest.json"), manifest);
   }

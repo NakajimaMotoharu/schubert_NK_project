@@ -7,12 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class GateContractTest {
   private static final ObjectMapper JSON = new ObjectMapper();
@@ -60,12 +62,30 @@ class GateContractTest {
   }
 
   @Test
+  void browserManifestPinsExecutableRevisionAndLocale() throws Exception {
+    JsonNode browser = resource("browser/manifest.json");
+    assertEquals("chromium", browser.path("browser").asText());
+    assertEquals(1187, browser.path("browserRevision").asInt());
+    assertEquals("ja-JP", browser.path("locale").asText());
+    assertEquals("Asia/Tokyo", browser.path("timezone").asText());
+  }
+
+  @Test
   void caddyFixturePreservesAllForwardedRequestHeaders() {
     String config = CharacterizationEnvironment.renderCaddyConfig(55162, 46962, Path.of("fixture-caddy-data"));
     assertTrue(config.contains("header_up X-Real-IP {remote_host}"));
     assertTrue(config.contains("header_up X-Forwarded-Host {hostport}"));
     assertTrue(config.contains("header_up X-Forwarded-Port {port}"));
     assertTrue(config.contains("header_up X-Forwarded-Proto https"));
+  }
+
+  @Test
+  void secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(@TempDir Path temporaryDirectory) throws Exception {
+    Path binary = temporaryDirectory.resolve("evidence.png");
+    Files.write(binary, new byte[] {(byte) 0x89, 0x50, 0x4e, 0x47, (byte) 0xff, 0x00});
+    assertFalse(GateCli.containsAny(binary, List.of("test-secret")));
+    Files.write(binary, "prefix-test-secret-suffix".getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    assertTrue(GateCli.containsAny(binary, List.of("test-secret")));
   }
 
   private static JsonNode resource(String name) throws Exception {

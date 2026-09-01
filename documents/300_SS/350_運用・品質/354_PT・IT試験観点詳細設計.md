@@ -5,11 +5,11 @@
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
-- 状態: `確定`。Broker再配送・容量とDB backup roleの権限oracleはQA-041～043/UIC-001～003承認済み
+- 状態: `確定`。Broker再配送・容量、DB backup roleの権限、session同時上限oracleはQA-041～044/UIC-001～004承認済み
 - 上位設計: UI 213、221～254、261、264
 - 関連RD: TST-001～TST-005、TST-101～TST-103、T-001～T-004、PER-001～PER-010、AVL-003～AVL-010
 - 関連SS: 311～353、[355_Characterization Test実行準備・PG開始gate](<355_Characterization Test実行準備・PG開始gate.md>)
-- 関連QA/RDF/UIC: QA-001～QA-043、RDFなし、UIC-001～UIC-003
+- 関連QA/RDF/UIC: QA-001～QA-044、RDFなし、UIC-001～UIC-004
 
 ## 2. 試験階層・環境
 
@@ -55,7 +55,7 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 - Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
   PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。
-- Session 1/2/3件、最古revoke、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。
+- Session 1/2/3件、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。Current Characterizationの3件継続は`DIF-016`のみのoracleとし、NK PTは3件目Login後を`[最古=revoke、残り2件=active]`で必ず合否判定する。
 - CSRF欠落/不一致/別session/再利用、SavedRequestのsafe GETとexternal/POST拒否、Logout POST、cache/header。
 - USER/ADMINの全route/layout、owner/他人/不存在の404/403使い分け、Web/API二重検証、Web業務schema grant 0。
 
@@ -212,3 +212,4 @@ Address容量/paging/full-policyはQA-042承認oracleを必須実行し、`skipp
 | 2026-09-01 | QA-041/UIC-001承認を反映し、再配送時系列oracleを1秒、5秒、25秒へ確定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Address別memory/page上限、page-full FAIL、disk-full BLOCKの容量oracleを確定。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、backup/batch role相互権限、3 schema dump/restore、復号key非配布oracleを確定。 |
+| 2026-09-01 | QA-044/UIC-004を反映。Currentの3 session継続とNKの最大2・最古revokeを分離し、NK PTの3件競合oracleを固定。 |

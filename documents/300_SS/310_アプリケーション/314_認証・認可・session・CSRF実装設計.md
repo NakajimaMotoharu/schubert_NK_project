@@ -6,7 +6,7 @@ Login、Logout、password、失敗lock、HTTP/API session、認証context、CSRF
 
 - 関連UI: 211～212、221～226、232、234、241～242、251～253
 - 関連RD: FUN-001、FUN-009、AUT-001～004、MQ-004、MQ-021、MQ-030、MQ-036、MON-004、OPS-005
-- 関連QA/RDF/UIC: QA-002、006、017～021、023、030、040、RDFなし、UICなし
+- 関連QA/RDF/UIC: QA-002、006、017～021、023、030、040、044、RDFなし、UIC-004
 
 ## 2. 認証component
 
@@ -99,6 +99,8 @@ Remaining attemptsは存在推測を避け通常認証失敗では0とし、運�
 | Concurrent | Userごと有効最大2。3件目は`last_accessed_at,id`最古をrevoke |
 
 UIで確定したidle 8時間だけを適用する。未承認の絶対lifetimeを追加しない。
+
+QA-044/UIC-004で確定したとおり、現行は設定と異なり3 sessionがすべて継続するが、これは既知不具合`DIF-016`である。NKではこの挙動を再現せず、Login成功transaction内で同一userの有効sessionをlockし、上記の最大2件・最古revokeを強制する。
 
 ### 6.2 Request検証
 
@@ -240,3 +242,4 @@ Username不存在は内部reason codeを権限制限logへ記録できるが、�
 |---|---|
 | 2026-08-31 | 認証、session、CSRF、認可、暗号・rotationを初版作成。 |
 | 2026-08-31 | 横断監査でLogin lock順をUser→IPに統一し、UIにない絶対24時間上限を削除。Idle更新を毎requestに統一。 |
+| 2026-09-01 | QA-044/UIC-004を反映。現行の3 session継続を`DIF-016`とし、NKはtransactionで最大2 session・最古revokeを必須とするoracleを固定。 |

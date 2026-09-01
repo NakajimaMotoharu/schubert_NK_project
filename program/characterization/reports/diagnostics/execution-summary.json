@@ -17,11 +17,22 @@
   "cause": "Current SecurityConfig declares maximumSessions(2), but no HttpSessionEventPublisher is registered for session lifecycle integration.",
   "upperDesignIssue": "UIC-004",
   "confirmation": "QA-044",
+  "resolution": {
+    "knownDifference": "DIF-016",
+    "finalRuns": [
+      "ss-gate-20260901-01",
+      "ss-gate-20260901-02"
+    ],
+    "currentApplicable": "23/23 PASS in each run",
+    "repeatComparison": "PASS with zero changed, missing, or extra artifacts",
+    "finalGate": "CHR-G01..G06 PASS"
+  },
   "testQualityChanges": [
     "Use the current Caddy forwarded host and port header contract.",
     "Assert all three concurrent session states instead of checking only one URL.",
     "Assert the five visible menu cards including the log inquiry card.",
     "Assert animation main rows 11 plus subtracks 4 equals logical count 15.",
-    "Record the saved-request redirect after current process restart."
+    "Record the saved-request redirect after current process restart.",
+    "Scan text and binary evidence as raw bytes and regression-test invalid UTF-8 input."
   ]
 }

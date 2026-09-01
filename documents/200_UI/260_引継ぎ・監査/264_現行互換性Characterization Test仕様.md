@@ -8,8 +8,7 @@
 関連RD: SCP-001、SCP-004、TST-001～TST-005、TST-103、MIG-002、MIG-006。
 関連QA/RDF/UIC: QA-044、RDFなし、UIC-004。
 
-本書のtest case設計と静的baselineはUI工程で作成済み。実行可能test artifactと現行実行baselineは、基本設計でprogram実装を
-行わない方針に従い未作成であり、最初のNK production code着手前の必須gateとする。これは要件未確定ではなく工程実施状態である。
+本書のtest case設計と静的baselineはUI工程で作成済み。実行可能test artifactと現行実行baselineは、2026-09-01にNK production codeから分離した`program/characterization`として作成・実行済みである。Current適用23 caseは全PASS、CHR-N01 metadataはPASS、同一条件の2回目は差分0であり、production PG開始gateを合格した。
 
 ## 2. 現行baseline識別
 
@@ -28,7 +27,7 @@
 
 ## 3. Test artifact・証跡
 
-PG着手前にNK repository内へ次を作成し、現行で全case成功後にbaseline commitを付ける。
+NK repository内へ次を作成し、現行で全case成功後にbaseline commitを付ける。2026-09-01に実行済みである。
 
 ```text
 program/characterization/
@@ -103,7 +102,7 @@ program/characterization/
 | Gate | 条件 | 現在状態 |
 |---|---|---|
 | UI完了 | Case、差異、静的baseline、後続責務が確定 | 作成済み、263監査対象 |
-| PG開始 | Executable artifact作成、current全case成功、baseline commit、差異review | 未実施。PG着手前必須 |
+| PG開始 | Executable artifact作成、current全case成功、baseline commit、差異review | 2026-09-01 PASS。CHR-G01～G06全件PASS |
 | ST完了 | 同じartifactをNKへ実行し、登録差異以外一致、新規機能case合格 | 後続 |
 | Release | 未承認差異0、重大未実施0、証跡version固定 | 後続 |
 
@@ -115,3 +114,4 @@ Current側の実行不能やsourceと実動の差（例: CSPとinline handler）
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | QA-044/UIC-004の承認に基づき、現行の同時session上限不具合を`DIF-016`として登録し、CHR-A02のCurrent/NK oracleを分離。 |
+| 2026-09-01 | Executable artifactでCurrentを2回実行し、適用23/23 PASS、catalog 24/24、2回差分0、DIF-001～016整合、秘密情報hit 0、CHR-G01～G06 PASSを確認しbaselineへ昇格。 |

@@ -3,16 +3,15 @@
 ## 1. 目的・位置づけ
 
 現行schubertの実動を利用者向け互換性のbaselineとして機械取得・比較できるよう、test harness、fixture、
-normalizer、oracle、証跡、差異管理、PG開始gateの実装仕様を定める。本SS工程ではtest codeやbaselineを作成・実行せず、
-最初のNK production code着手前に後続工程が完了すべき実行gateを固定する。
+normalizer、oracle、証跡、差異管理、PG開始gateの実装仕様を定める。設計確定後、利用者指示により本仕様のtest artifactをNK production codeと分離して作成・実行し、最初のNK production code着手前gateを完了した。
 
-- 状態: `確定`。Executable artifact/current baselineは工程実施待ちであり、要件未確定ではない
+- 状態: `確定・実行済み`。Executable artifact/current baselineを作成し、CHR-G01～G06は全件PASS
 - 上位設計: UI 221～226、254、261、263～265
 - 関連RD: SCP-001、SCP-004、MIG-002、MIG-006、TST-001～TST-005、TST-103
 - 関連SS: [313_画面template・controller・form設計](../310_アプリケーション/313_画面template・controller・form設計.md)、
   [333_大容量結果file・media・Range配信設計](../330_データ・ファイル/333_大容量結果file・media・Range配信設計.md)、
   [354_PT・IT試験観点詳細設計](354_PT・IT試験観点詳細設計.md)
-- 関連QA/RDF/UIC: QA-015、RDF/UICなし
+- 関連QA/RDF/UIC: QA-015、044、RDFなし、UIC-004
 
 ## 2. 固定baseline識別
 
@@ -35,28 +34,27 @@ PG開始gateはUI 264の次の識別値を入力にする。実行開始時に�
 
 ## 3. Artifact構成
 
-PG開始gateでNK repositoryへ次を実装する。production moduleとは分離したtest artifactとする。
+NK repositoryへ次を実装済みである。production moduleとは分離したtest artifactとする。
 
 ```text
 program/characterization/
   pom.xml                         # Java 25、JUnit 5、Playwright Java、version固定
+  src/main/java/...               # preflight/source検証/比較/report/baseline昇格CLI
   tests/java/...                  # case/runner/adapter/normalizer/assertion
   tests/resources/
     cases/                        # CHR case定義、DIF allowlist、schema
     browser/                      # viewport/font/locale定義
+    fixtures/expected.json        # ID非依存の順序・件数・manifest
   fixtures/
     manifest.yaml                 # 機密を含まないlogical fixture
-    expected/                     # ID非依存の順序・件数・manifest
   baseline/current/
     manifest.json                 # source/hash/environment/case/artifact version
-    http/                         # 正規化status/header/body hash
-    dom/                          # semantic DOM JSON/snapshot
-    data/                         # 正規化result/DB assertion
+    artifacts/                    # 24 caseの正規化JSON/HTTP/DOM/data assertion
     screenshots/                  # 固定条件PNG
-    media/                        # Range別header/length/SHA-256
   reports/
     current/<run-id>/             # 実行report、diff、redacted log index
-    nk/<run-id>/
+    gate-report.json              # CHR-G01～G06集約判定
+  run-gate.sh                     # 上書き禁止のcommand entrypoint
 ```
 
 Repository rootのMaven WrapperとJava toolchainを使い、dependency/plugin/browser binary/fontをversion/hash manifestで固定する。
@@ -76,7 +74,7 @@ CSS selectorの存在だけで判定せず、表示文字、順序、操作後UR
 | Evidence root | yes | Repository内reportsの対象run-id。既存baseline上書き禁止 |
 
 Command contractは`verify-source`、`preflight`、`capture-current`、`compare-current`、
-`compare-nk`、`report`を独立taskにする。`capture-current`は新しいstaging runだけへ出力し、
+`report`、`promote-current`を独立taskにする。NK比較taskはNK実装時に同じrunnerへ追加する。`capture-current`は新しいstaging runだけへ出力し、
 reviewなしで`baseline/current`を上書きしない。
 
 ## 5. Case catalog・適用性
@@ -124,12 +122,12 @@ TLS警告のtest回避はcurrent/NKの内部証明書に限定し、hostname・�
 
 表示文字・error文言、title/label/順序/件数/page/link先、role別要素、form name/method/action/autocomplete/autofocus、
 status/redirect、Content-Type/Disposition/Length/Range、security/cache headerの存在・値、media byte hash、
-取消・削除・通知stateは正規化しない。Current/NKの相違は必ずDIF-001～015へ帰属させる。
+取消・削除・通知stateは正規化しない。Current/NKの相違は必ずDIF-001～016へ帰属させる。
 
 ## 8. 比較oracle・DIF適用
 
 1. Currentで正規化artifactを取得し、同一currentへ再実行して0 diffを確認する。
-2. NKは原則baseline完全一致。UI 264のDIF-001～015に記載したcase・項目・NK期待値だけを許容する。
+2. NKは原則baseline完全一致。UI 264のDIF-001～016に記載したcase・項目・NK期待値だけを許容する。
 3. DIFは包括wildcardでDOM/page全体を除外せず、JSON Pointer、semantic element key、header名、before/afterまで指定する。
 4. 未登録diff、未使用DIF、対象case外のDIF、過度なnormalizationはgate失敗とする。
 
@@ -140,7 +138,7 @@ Current sourceと実動が異なる場合は実動証跡をbaselineにする。N
 
 | Case | Driver・入力 | Oracle・証跡 |
 |---|---|---|
-| A01～A03 | Browser/HTTP、専用account、制御clock、restart | DOM、cookie/header、redirect、lock/session/audit、password非再表示 |
+| A01～A03 | Browser/HTTP、専用account、制御clock、restart | DOM、cookie/header、redirect、lock/session/audit、password非再表示。A02のCurrent 3 session継続はDIF-016、NKは最古revoke |
 | U01～U02 | Desktop/mobile、keyboard、JS on/off | Card/title/order/nav/focus/empty/error、semantic DOM/PNG |
 | S01～S08 | Query単独/AND/boundary、game/route/file/entry/audio | Logical content/display path/order/page/count、ID非依存JSON/DOM/HTTP |
 | M01～M07 | 全logical media ID、inline/download、Range境界 | 20/129/pair/order/path、status/header/body length/chunk SHA-256/416 |
@@ -171,16 +169,30 @@ Current環境の破壊、source/master変更、証跡容量不足、credential�
 | CHR-G02 | Current適用caseが全PASS、N01は`NK_ONLY` schema PASS | JUnit/report、case coverage 24/24 |
 | CHR-G03 | 同一Currentの2回目が0 diff、flaky/skipped/not-run 0 | Run 2件のcomparison report |
 | CHR-G04 | Baseline、source/document/master hash、environment、reportが同一commit | `baseline/current/manifest.json`、Git commit |
-| CHR-G05 | DIF-001～015だけが機械読取可能で、未登録・過度除外0 | DIF schema/unused/coverage report |
+| CHR-G05 | DIF-001～016だけが機械読取可能で、未登録・過度除外0 | DIF schema/unused/coverage report |
 | CHR-G06 | Source/master原本非変更、機密値非収録、review承認 | Git diff、canary/secret scan、review record |
 
 CHR-G01～G06を1つでも満たさないcommitへNK production source・DDL・production configを追加しない。Gate commitは
 `Characterization baseline`と識別し、その次のcommit以降だけをNK production実装とする。
 
+### 11.1 2026-09-01実行結果
+
+| 項目 | 結果 |
+|---|---|
+| Source/document/master照合 | PASS。Source 59件、document 18件、master 59,627件/19,240,707,190 byte、symlink 0、集約hash一致 |
+| Preflight | PASS。Credential 0600、loopback allowlist、証跡空き20GiB以上 |
+| Run | `ss-gate-20260901-01`と`ss-gate-20260901-02`。各Current適用23/23 PASS、CHR-N01 metadata PASS、catalog 24/24 |
+| Repeat comparison | 26 artifact（24 JSON＋2 PNG）を比較しmissing/extra/changedすべて0 |
+| Difference/security | DIF-001～016の16/16整合、秘密情報・`JSESSIONID`の証跡hit 0 |
+| Gate | CHR-G01～G06全件PASS、failure 0 |
+| 実行環境 | OpenJDK 25.0.4、Maven 3.9.12、Playwright Java 1.55.0/Chromium build 1187、Caddy 2.6.2、PostgreSQL 18隔離DB |
+
+正式証跡は[gate report](../../../program/characterization/reports/gate-report.json)、[2回比較](../../../program/characterization/reports/current-repeat-comparison.json)、[baseline manifest](../../../program/characterization/baseline/current/manifest.json)を正とする。Playwrightはhost package名の警告を出力したが、pinned Chromiumの起動、DOM/HTTP/PNG取得、2回差分0まで実行済みである。
+
 ## 12. NK比較・差異受入
 
 - 同じharness/browser/font/fixture schemaを使い、testをNKに便宜的にforkしない。Target adapter差はbase URLと証跡取得だけ。
-- DIF-001～015適用後、Current適用caseの未承認diff 0、CHR-N01 PASS、機密漏えい0をST gateとする。
+- DIF-001～016適用後、Current適用caseの未承認diff 0、CHR-N01 PASS、機密漏えい0をST gateとする。
 - Production変更は影響caseを先に追加・細分化する。Baseline期待値をNK結果へ合わせて書き換えない。
 - 新しい利用者差異はQA/RDF/UIC/後続変更管理、DIF追加、UI/SS/test横断更新、承認後だけ許容する。
 
@@ -204,3 +216,4 @@ CHR-G01～G06を1つでも満たさないcommitへNK production source・DDL・p
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Harness構成、baseline/normalization/DIF契約、実行手順、PG開始gateを詳細化。 |
+| 2026-09-01 | QA-044/UIC-004に基づき`DIF-016`を追加。Executable artifactを作成しCurrentを2回実行、差分0・秘密情報hit 0・CHR-G01～G06全PASSを確認しbaselineへ昇格。Binary証跡も検査できるようsecret scanを強化し、回帰testを追加。 |
