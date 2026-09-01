@@ -81,6 +81,12 @@ class LayoutFieldCatalogTest {
         () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "1", "X", "Z", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
+        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "384", "X", "F", "fixed"), registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> LayoutFieldCatalog.parse(row("WLGEVT01", "DATA", "Other", "1", "2080", "X", "F", "fixed"), registry));
+    assertThrows(
+        LayoutValidationException.class,
         () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "x", "1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,

@@ -474,6 +474,7 @@ public final class LayoutFieldCatalog {
       int length = parsePositiveInt(cells[4], "field length");
       WireType wireType = parseWireType(cells[5]);
       Presence presence = parsePresence(cells[6]);
+      validateFixedField(layout.id(), name, presence);
       Padding padding = paddingFor(wireType);
       FieldDefinition<?> field =
           new FieldDefinition<>(
@@ -554,6 +555,14 @@ public final class LayoutFieldCatalog {
       case NUMERIC -> Padding.ZERO_LEFT;
       case BOOLEAN -> Padding.NONE;
     };
+  }
+
+  private static void validateFixedField(LayoutId layoutId, String name, Presence presence) {
+    if (presence == Presence.FIXED
+        && !name.equals("Reserved")
+        && !(layoutId.value().equals("WLGEVT01") && name.equals("Log type"))) {
+      throw new LayoutValidationException("unknown fixed payload field");
+    }
   }
 
   private static Class<?> javaTypeFor(WireType type) {
