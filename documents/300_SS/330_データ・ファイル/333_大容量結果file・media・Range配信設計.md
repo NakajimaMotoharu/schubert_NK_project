@@ -30,8 +30,8 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | `LargeResultReader.readScenario` | descriptor | `List<ScenarioRecord>` | descriptor/path/size/hash/record完全検証、最大10,000件 |
 | `StoragePathPolicy.parseRelative` | root kind、wire relative path | `ValidatedRelativePath` | NFC、segment、suffix、depth、UUID検証 |
 | `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | `SecureDirectoryStream`でNOFOLLOW segment walk、通常file検証 |
-| `MediaDescriptorService.issue` | actor context、media type/logical ID、mode | signed descriptor | API側のrole/DB metadata/manifest検証 |
-| `MediaDeliveryService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の署名・path・size・MIME再検証、stream |
+| `MediaQueryService.describeAudio/describeVideo/describeMusic` | actor context、media type/logical ID、mode | signed descriptor | API側のrole/DB metadata/manifest検証。311/323のAPI責務名へ統一 |
+| `MediaRangeService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の署名・path・size・MIME再検証、stream。311のWeb責務名へ統一 |
 | `HttpByteRangeParser.parseFirst` | Range header、file size | `Full/Partial/Unsatisfiable` | 最初のrangeだけ解析、1MiB cap |
 | `TransferCleanupService.clean` | run cutoff | `CleanupResult` | app停止/batch lock必須、非follow walk、対象別計数 |
 
@@ -244,3 +244,4 @@ Metric labelにpath、file名、user ID、media IDを設定しない。Type、st
 | 2026-08-31 | Large-result、secure path、media認可、Range、朝削除の詳細を作成。 |
 | 2026-08-31 | 横断監査でmedia endpoint pathをUI 221/SS 313と同一の外部URLへ統一。 |
 | 2026-08-31 | 横断監査でAsset 512/Transfer 256 byteのpath上限と、wire表示file name 256 byteをUI 235/237に統一。 |
+| 2026-09-01 | SSC-003によりAPI descriptor発行を`MediaQueryService`、Web Range配信を`MediaRangeService`へ統一し、311/323との委譲関係を明確化。 |

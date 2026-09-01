@@ -54,10 +54,10 @@ local Git/review/backupが有効なら開始blockerではない。
 
 | Module | 主SS | 必須成果物 |
 |---|---|---|
-| `nk-common-codec` | 311、322～323 | 64 layout record/codec/schema/golden vector、共通error/value |
-| `nk-api` | 311～312、314、321、324、331～333、352 | Consumer/application/repository/outbox/inbox/file/security |
-| `nk-web` | 311～314、321、324、333、351～352 | Controller/form/template/view/session/JMS client/log outbox |
-| `nk-batch` | 311、331～332、341、343、351～353 | Morning/backup/cleanup/migration verify/status |
+| `schubert-nk-protocol` | 311、322～323 | 64 layout record/codec/schema/golden vector、共通error/value |
+| `schubert-nk-api` | 311～312、314、321、324、331～333、352 | Consumer/application/repository/outbox/inbox/file/security |
+| `schubert-nk-web` | 311～314、321、324、333、351～352 | Controller/form/template/view/session/JMS client/log outbox |
+| `schubert-nk-batch` | 311、331～332、341、343、351～353 | Morning/backup/cleanup/migration verify/status |
 | `program/characterization` | 355 | Current/NK共通harness、baseline、DIF/report |
 | Infrastructure | 321、331、342～343 | Flyway SQL、Caddy/systemd/Artemis/PostgreSQL設定雛形、manifest |
 
@@ -208,3 +208,4 @@ code bugへRDF/UICを乱用しない。Oracle/baselineだけを先に変更し�
 | 2026-09-01 | QA-042/UIC-002承認済みのArtemis容量・paging値をIT oracleへ固定し、残るPG開始blockerをQA-043/UIC-003へ更新。 |
 | 2026-09-01 | QA-043/UIC-003承認済みの専用backup role・credentialをIT oracleへ固定。QA/UIC blockerを解消し、production PGの残条件をCHR-G01～G06などの実行gateへ更新。 |
 | 2026-09-01 | QA-044/UIC-004と`DIF-016`を反映。Characterizationを2回実行してCurrent 23/23 PASS、2回差分0、秘密情報hit 0、CHR-G01～G06全PASSを確認し、production PG開始の技術gateを解消。 |
+| 2026-09-01 | SSC-001により§4.1のmodule名を311/343の正式artifact名へ統一。 |

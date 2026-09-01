@@ -67,7 +67,7 @@ encode後byte長は`FieldCodec`を正とする。`LayoutRegistry`は64 layoutを
 | Class.method | 引数 | 戻り値 | 例外 |
 |---|---|---|---|
 | `FixedWidthEncoder.encode` | `WireMessage<? extends LayoutPayload>` | `byte[]` | `MessageEncodingException` |
-| `FixedWidthDecoder.decode` | `byte[]`, expected direction | `WireMessage<?>` | `PermanentProtocolException` |
+| `FixedWidthDecoder.decode` | `byte[]`, `TransportMetadata`, `ExpectedRoute` | `WireMessage<?>` | `PermanentProtocolException` |
 | `HeaderCodec.peek` | 256 byte以上のbody | `CommonHeader` | `PermanentProtocolException` |
 | `FieldCodec.encodeText` | value、field definition | 規定長`byte[]` | `FieldEncodingException` |
 | `FieldCodec.decodeText` | field slice、definition | `String`/empty | `PermanentProtocolException` |
@@ -182,3 +182,4 @@ password、全bodyを保持・`toString`出力しない。
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Module、package、主要class、依存規則を初版作成。 |
+| 2026-09-01 | SSC-002により`FixedWidthDecoder.decode`を322 §5の完全なtransport/route検査署名へ統一。 |
