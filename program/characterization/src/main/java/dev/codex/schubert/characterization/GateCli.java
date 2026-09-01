@@ -22,14 +22,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public final class GateCli {
+  private static final int EXPECTED_REPEAT_FILE_COUNT = 28;
   private static final ObjectMapper JSON =
       new ObjectMapper()
           .enable(SerializationFeature.INDENT_OUTPUT)
           .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
   private static final HexFormat HEX = HexFormat.of();
+  private static final Set<Path> ACTIVE_OUTPUTS = ConcurrentHashMap.newKeySet();
 
   private GateCli() {}
 
@@ -40,11 +43,19 @@ public final class GateCli {
     switch (args[0]) {
       case "verify-source" -> verifySource(pathProperty("chr.projectRoot"), pathProperty("chr.currentRoot"), output(args, 1));
       case "preflight" -> preflight(pathProperty("chr.projectRoot"), output(args, 1));
-      case "compare-current" -> compareCurrent(Path.of(args[1]), Path.of(args[2]), Path.of(args[3]));
-      case "report" -> report(pathProperty("chr.projectRoot"), Path.of(args[1]), Path.of(args[2]), Path.of(args[3]), Path.of(args[4]));
-      case "promote-current" -> promoteCurrent(pathProperty("chr.projectRoot"), Path.of(args[1]), Path.of(args[2]));
+      case "compare-current" -> compareCurrent(argument(args, 1, "first run"), argument(args, 2, "second run"), output(args, 3));
+      case "compare-nk" -> compareNk(pathProperty("chr.projectRoot"), argument(args, 1, "current artifacts"), argument(args, 2, "NK artifacts"), argument(args, 3, "DIF observations"), output(args, 4));
+      case "report" -> report(pathProperty("chr.projectRoot"), argument(args, 1, "first run"), argument(args, 2, "second run"), argument(args, 3, "comparison"), output(args, 4));
+      case "promote-current" -> promoteCurrent(pathProperty("chr.projectRoot"), argument(args, 1, "source run"), argument(args, 2, "baseline"));
       default -> throw new IllegalArgumentException("unknown command: " + args[0]);
     }
+  }
+
+  private static Path argument(String[] args, int index, String label) {
+    if (args.length <= index) {
+      throw new IllegalArgumentException(label + " path is required");
+    }
+    return Path.of(args[index]).toAbsolutePath().normalize();
   }
 
   private static Path output(String[] args, int index) {
@@ -62,7 +73,7 @@ public final class GateCli {
     return Path.of(value).toAbsolutePath().normalize();
   }
 
-  private static void verifySource(Path projectRoot, Path currentRoot, Path output) throws Exception {
+  static void verifySource(Path projectRoot, Path currentRoot, Path output) throws Exception {
     JsonNode expected = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/fixtures/expected.json").toFile());
     List<Path> sourceFiles = regularFiles(currentRoot.resolve("program/app/src"), path -> true);
     sourceFiles.add(currentRoot.resolve("program/database/schema.sql"));
@@ -106,7 +117,7 @@ public final class GateCli {
     }
   }
 
-  private static void preflight(Path projectRoot, Path output) throws Exception {
+  static void preflight(Path projectRoot, Path output) throws Exception {
     Path currentRoot = pathProperty("chr.currentRoot");
     Path currentJar = pathProperty("chr.currentJar");
     Path assetRoot = pathProperty("chr.assetRoot");
@@ -114,7 +125,13 @@ public final class GateCli {
     Path javaExecutable = pathProperty("chr.javaExecutable");
     Path caddyExecutable = pathProperty("chr.caddyExecutable");
     Path runtimeRoot = pathProperty("chr.runtimeRoot");
+    Path pgCtl = pathProperty("chr.pgCtl");
+    Path pgData = pathProperty("chr.pgData");
+    Path pgLog = pathProperty("chr.pgLog");
+    Path pgSocket = pathProperty("chr.pgSocket");
     Files.createDirectories(runtimeRoot);
+    Files.createDirectories(pgLog.getParent());
+    Files.createDirectories(pgSocket);
 
     List<String> failures = new ArrayList<>();
     requireFile(currentJar, "currentJar", failures);
@@ -122,6 +139,8 @@ public final class GateCli {
     requireFile(usersFile, "usersFile", failures);
     requireFile(javaExecutable, "javaExecutable", failures);
     requireFile(caddyExecutable, "caddyExecutable", failures);
+    requireFile(pgCtl, "pgCtl", failures);
+    requireDirectory(pgData, "pgData", failures);
     if (!currentRoot.resolve("program/app/src").toRealPath().startsWith(currentRoot.toRealPath())) {
       failures.add("current source root escapes currentRoot");
     }
@@ -151,6 +170,8 @@ public final class GateCli {
     result.put("hostAllowlist", List.of("localhost", "127.0.0.1"));
     result.put("projectRoot", projectRoot.toString());
     result.put("runtimeRoot", runtimeRoot.toString());
+    result.put("postgresControl", pgCtl.toString());
+    result.put("postgresData", pgData.toString());
     writeJson(output, result);
     if (!failures.isEmpty()) {
       throw new IllegalStateException("preflight failed: " + failures);
@@ -170,19 +191,17 @@ public final class GateCli {
   }
 
   private static boolean isOwnerOnly(Path path) throws IOException {
-    try {
-      Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(path);
-      return permissions.equals(Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE));
-    } catch (UnsupportedOperationException ignored) {
-      return false;
-    }
+    Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(path);
+    return permissions.equals(Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE));
   }
 
-  private static void compareCurrent(Path first, Path second, Path output) throws Exception {
+  static void compareCurrent(Path first, Path second, Path output) throws Exception {
     Map<String, String> firstFiles = fileHashes(first.resolve("artifacts"));
     firstFiles.putAll(prefixed("screenshots/", fileHashes(first.resolve("screenshots"))));
+    addRunReportHashes(first, firstFiles);
     Map<String, String> secondFiles = fileHashes(second.resolve("artifacts"));
     secondFiles.putAll(prefixed("screenshots/", fileHashes(second.resolve("screenshots"))));
+    addRunReportHashes(second, secondFiles);
     List<String> missing = firstFiles.keySet().stream().filter(key -> !secondFiles.containsKey(key)).toList();
     List<String> extra = secondFiles.keySet().stream().filter(key -> !firstFiles.containsKey(key)).toList();
     List<String> changed = firstFiles.keySet().stream()
@@ -190,7 +209,14 @@ public final class GateCli {
         .filter(key -> !firstFiles.get(key).equals(secondFiles.get(key)))
         .toList();
     Map<String, Object> result = new LinkedHashMap<>();
-    result.put("status", missing.isEmpty() && extra.isEmpty() && changed.isEmpty() ? "PASS" : "FAIL");
+    boolean complete =
+        firstFiles.size() == EXPECTED_REPEAT_FILE_COUNT
+            & secondFiles.size() == EXPECTED_REPEAT_FILE_COUNT;
+    boolean unchanged = missing.isEmpty() & extra.isEmpty() & changed.isEmpty();
+    result.put(
+        "status",
+        complete & unchanged ? "PASS" : "FAIL");
+    result.put("expectedFileCount", EXPECTED_REPEAT_FILE_COUNT);
     result.put("firstFileCount", firstFiles.size());
     result.put("secondFileCount", secondFiles.size());
     result.put("missing", missing);
@@ -202,72 +228,75 @@ public final class GateCli {
     }
   }
 
-  private static void report(Path projectRoot, Path first, Path second, Path comparison, Path output) throws Exception {
-    JsonNode catalog = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/cases/catalog.json").toFile());
-    JsonNode dif = JSON.readTree(projectRoot.resolve("program/characterization/tests/resources/cases/dif-allowlist.json").toFile());
-    JsonNode compare = JSON.readTree(comparison.toFile());
-    List<String> expectedCases = new ArrayList<>();
-    for (JsonNode item : catalog.path("cases")) {
-      expectedCases.add(item.path("id").asText());
+  static void compareNk(
+      Path projectRoot,
+      Path currentArtifacts,
+      Path nkArtifacts,
+      Path observations,
+      Path output) throws Exception {
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(projectRoot, currentArtifacts, nkArtifacts, observations);
+    writeJson(output, result);
+    if (!result.passed()) {
+      throw new IllegalStateException("NK artifact comparison failed: " + result.failures());
     }
-    List<String> firstCases = caseIds(first.resolve("artifacts"));
-    List<String> secondCases = caseIds(second.resolve("artifacts"));
-    List<String> failures = new ArrayList<>();
-    if (!firstCases.equals(expectedCases)) failures.add("run1 case coverage is not 24/24");
-    if (!secondCases.equals(expectedCases)) failures.add("run2 case coverage is not 24/24");
-    if (!"PASS".equals(compare.path("status").asText())) failures.add("run2 is not zero-diff");
-    if (dif.path("differences").size() != 16) failures.add("DIF catalog is not 16/16");
-    JsonNode preflight = readOptional(projectRoot.resolve("program/characterization/reports/preflight.json"));
-    JsonNode sourceVerification = readOptional(projectRoot.resolve("program/characterization/reports/source-verification.json"));
-    JsonNode baselineManifest = readOptional(projectRoot.resolve("program/characterization/baseline/current/manifest.json"));
-    List<String> baselineCases = caseIds(projectRoot.resolve("program/characterization/baseline/current/artifacts"));
-    boolean preflightPassed = "PASS".equals(preflight.path("status").asText());
-    boolean sourcePassed = "PASS".equals(sourceVerification.path("status").asText());
-    boolean baselinePassed = baselineCases.equals(expectedCases)
-        && "current".equals(baselineManifest.path("target").asText())
-        && baselineManifest.path("caseCount").asInt() == expectedCases.size()
-        && baselineManifest.path("differenceCount").asInt() == dif.path("differences").size()
-        && !baselineManifest.path("environment").path("javaVersion").asText().isBlank()
-        && baselineManifest.path("environment").path("browserRevision").asInt() > 0
-        && baselineManifest.path("sourceAggregateSha256").asText()
-            .equals(sourceVerification.path("sourceAggregateSha256").asText())
-        && baselineManifest.path("documentAggregateSha256").asText()
-            .equals(sourceVerification.path("documentAggregateSha256").asText())
-        && baselineManifest.path("masterFileCount").asLong()
-            == sourceVerification.path("masterFileCount").asLong()
-        && baselineManifest.path("masterBytes").asLong()
-            == sourceVerification.path("masterBytes").asLong()
-        && "commit-containing-this-manifest".equals(baselineManifest.path("gateCommit").asText());
-    if (!preflightPassed) failures.add("preflight report is not PASS");
-    if (!sourcePassed) failures.add("original source verification is not PASS");
-    if (!baselinePassed) failures.add("promoted current baseline is incomplete");
+  }
+
+  private static void addRunReportHashes(Path run, Map<String, String> hashes) throws Exception {
+    for (String name : List.of("inventory.json", "supplemental.json")) {
+      Path report = run.resolve(name);
+      if (Files.isRegularFile(report, LinkOption.NOFOLLOW_LINKS)) {
+        hashes.put(name, sha256(report));
+      }
+    }
+  }
+
+  static void report(Path projectRoot, Path first, Path second, Path comparison, Path output) throws Exception {
+    JsonNode compare = JSON.readTree(comparison.toFile());
+    GateContractValidator.ValidationResult validation =
+        GateContractValidator.validate(projectRoot, first, second, comparison);
+    List<String> failures = new ArrayList<>(validation.failures());
     List<String> secretHits = secretScan(projectRoot, pathProperty("chr.usersFile"));
-    if (!secretHits.isEmpty()) failures.add("secret scan found prohibited values");
+    if (!secretHits.isEmpty()) failures.add("SECRET_SCAN");
+
+    boolean g01 = noneMatch(validation.failures(), "CONTRACT_", "SCHEMA_", "CATALOG_", "BROWSER_", "REQ_", "PREFLIGHT_");
+    boolean g02 = noneMatch(validation.failures(), "run1_", "run2_");
+    boolean g03 = noneMatch(validation.failures(), "COMPARE_", "INVENTORY_REPEAT_DIFF");
+    boolean g04 = noneMatch(validation.failures(), "SOURCE_", "run1_INVENTORY_", "run2_INVENTORY_", "BASELINE_", "REVIEW_");
+    boolean g05 = noneMatch(validation.failures(), "DIF_", "DIF-");
+    boolean g06 = secretHits.isEmpty()
+        && noneMatch(validation.failures(), "SOURCE_", "BASELINE_", "REVIEW_");
 
     Map<String, Object> result = new LinkedHashMap<>();
     result.put("status", failures.isEmpty() ? "PASS" : "FAIL");
     result.put("generatedAt", Instant.now().toString());
-    result.put("caseCoverage", "24/24");
-    result.put("currentApplicable", "23/23 PASS");
-    result.put("nkOnlyMetadata", "CHR-N01 PASS");
+    result.put("caseCoverage", g02 ? "24/24 PASS" : "FAIL");
+    result.put("currentApplicable", g02 ? "23/23 PASS" : "FAIL");
+    result.put("nkOnlyMetadata", g02 ? "CHR-N01 PASS" : "FAIL");
     result.put("repeatComparison", compare.path("status").asText());
     result.put("differenceCatalog", "DIF-001..016");
     result.put("secretScanHits", secretHits.size());
+    result.put("contractMetrics", validation.metrics());
     result.put("failures", failures);
     result.put("gates", Map.of(
-        "CHR-G01", preflightPassed ? "PASS" : "FAIL",
-        "CHR-G02", failures.stream().noneMatch(x -> x.contains("coverage")) ? "PASS" : "FAIL",
-        "CHR-G03", "PASS".equals(compare.path("status").asText()) ? "PASS" : "FAIL",
-        "CHR-G04", baselinePassed && sourcePassed ? "PASS" : "FAIL",
-        "CHR-G05", dif.path("differences").size() == 16 ? "PASS" : "FAIL",
-        "CHR-G06", secretHits.isEmpty() && sourcePassed ? "PASS" : "FAIL"));
+        "CHR-G01", g01 ? "PASS" : "FAIL",
+        "CHR-G02", g02 ? "PASS" : "FAIL",
+        "CHR-G03", g03 ? "PASS" : "FAIL",
+        "CHR-G04", g04 ? "PASS" : "FAIL",
+        "CHR-G05", g05 ? "PASS" : "FAIL",
+        "CHR-G06", g06 ? "PASS" : "FAIL"));
     writeJson(output, result);
     if (!failures.isEmpty()) {
       throw new IllegalStateException("gate report failed: " + failures);
     }
   }
 
-  private static List<String> secretScan(Path projectRoot, Path usersFile) throws IOException {
+  private static boolean noneMatch(List<String> failures, String... prefixes) {
+    return failures.stream()
+        .noneMatch(failure -> java.util.Arrays.stream(prefixes).anyMatch(failure::startsWith));
+  }
+
+  static List<String> secretScan(Path projectRoot, Path usersFile) throws IOException {
     List<String> values = Files.readAllLines(usersFile, StandardCharsets.UTF_8).stream()
         .filter(line -> line.startsWith("user=") || line.startsWith("pass="))
         .map(line -> line.substring(line.indexOf('=') + 1))
@@ -302,11 +331,11 @@ public final class GateCli {
     return false;
   }
 
-  private static JsonNode readOptional(Path path) throws IOException {
-    return Files.isRegularFile(path) ? JSON.readTree(path.toFile()) : JSON.createObjectNode();
-  }
-
-  private static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
+  static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
+    String gateCommit = System.getProperty("chr.gateCommit", "");
+    if (!gateCommit.matches("[0-9a-f]{7,40}")) {
+      throw new IllegalArgumentException("chr.gateCommit must be a 7 to 40 character lowercase Git commit");
+    }
     if (Files.exists(baseline)) {
       try (Stream<Path> contents = Files.list(baseline)) {
         if (contents.findAny().isPresent()) {
@@ -338,21 +367,24 @@ public final class GateCli {
         "browserRevision", browser.path("browserRevision").asInt(),
         "locale", browser.path("locale").asText(),
         "timezone", browser.path("timezone").asText()));
-    manifest.put("gateCommit", "commit-containing-this-manifest");
+    manifest.put("gateCommit", gateCommit);
     writeJson(baseline.resolve("manifest.json"), manifest);
   }
 
   private static void copyTree(Path source, Path destination) throws IOException {
     try (Stream<Path> paths = Files.walk(source)) {
       for (Path path : paths.sorted().toList()) {
+        if (Files.isSymbolicLink(path)) {
+          throw new IOException("symbolic link is not allowed in baseline source: " + path);
+        }
         Path target = destination.resolve(source.relativize(path).toString());
-        if (Files.isDirectory(path)) Files.createDirectories(target);
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) Files.createDirectories(target);
         else Files.copy(path, target, StandardCopyOption.COPY_ATTRIBUTES);
       }
     }
   }
 
-  private static List<String> caseIds(Path artifactRoot) throws IOException {
+  static List<String> caseIds(Path artifactRoot) throws IOException {
     if (!Files.isDirectory(artifactRoot)) return List.of();
     try (Stream<Path> files = Files.list(artifactRoot)) {
       return files.filter(path -> path.getFileName().toString().matches("CHR-[A-Z][0-9]{2}\\.json"))
@@ -374,7 +406,7 @@ public final class GateCli {
     return result;
   }
 
-  private static Map<String, String> fileHashes(Path root) throws Exception {
+  static Map<String, String> fileHashes(Path root) throws Exception {
     Map<String, String> result = new TreeMap<>();
     if (!Files.isDirectory(root)) return result;
     for (Path file : regularFiles(root, path -> true)) {
@@ -383,7 +415,7 @@ public final class GateCli {
     return result;
   }
 
-  private static List<Path> regularFiles(Path root, java.util.function.Predicate<Path> filter) throws IOException {
+  static List<Path> regularFiles(Path root, java.util.function.Predicate<Path> filter) throws IOException {
     if (!Files.isDirectory(root)) return new ArrayList<>();
     try (Stream<Path> paths = Files.walk(root)) {
       return new ArrayList<>(paths
@@ -393,7 +425,7 @@ public final class GateCli {
     }
   }
 
-  private static TreeStats treeStats(Path root) throws IOException {
+  static TreeStats treeStats(Path root) throws IOException {
     long files = 0;
     long bytes = 0;
     List<String> symlinks = new ArrayList<>();
@@ -432,18 +464,35 @@ public final class GateCli {
     try (var input = Files.newInputStream(file)) {
       byte[] buffer = new byte[1024 * 1024];
       for (int read; (read = input.read(buffer)) >= 0; ) {
-        if (read > 0) digest.update(buffer, 0, read);
+        digest.update(buffer, 0, read);
       }
     }
     return HEX.formatHex(digest.digest());
   }
 
-  private static void writeJson(Path output, Object value) throws IOException {
-    Files.createDirectories(output.toAbsolutePath().normalize().getParent());
-    Path temporary = output.resolveSibling(output.getFileName() + ".part");
-    JSON.writeValue(temporary.toFile(), value);
-    Files.move(temporary, output, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+  static void writeJson(Path output, Object value) throws IOException {
+    if (output == null) throw new IllegalArgumentException("output is required");
+    Path normalized = output.toAbsolutePath().normalize();
+    if (!ACTIVE_OUTPUTS.add(normalized)) {
+      throw new IllegalStateException("concurrent write to the same output is not allowed: " + normalized);
+    }
+    Path temporary = normalized.resolveSibling(normalized.getFileName() + ".part");
+    try {
+      Files.createDirectories(normalized.getParent());
+      JSON.writeValue(temporary.toFile(), value);
+      Files.move(
+          temporary,
+          normalized,
+          StandardCopyOption.REPLACE_EXISTING,
+          StandardCopyOption.ATOMIC_MOVE);
+    } finally {
+      try {
+        Files.deleteIfExists(temporary);
+      } finally {
+        ACTIVE_OUTPUTS.remove(normalized);
+      }
+    }
   }
 
-  private record TreeStats(long fileCount, long bytes, List<String> symlinks) {}
+  record TreeStats(long fileCount, long bytes, List<String> symlinks) {}
 }

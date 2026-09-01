@@ -38,7 +38,7 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 017 / `NK-BAT-001` | Morning lock/backup/business/technical/transfer/expiry | OPS-009～017、BAK/BKO/AVL | 251～252 | 331、341～343、353 | `017_NK-BAT-001` | O01 | 未着手 |
 | 018 / `NK-OPS-001` | Caddy/systemd/PostgreSQL/Artemis/Java/config/log/metric/security | SYS/ENV/PER/AVL/OPS/MON | 211～212、231、243、251～253 | 321、342～343、351～353 | `018_NK-OPS-001` | L/E/O | 未着手 |
 | 019 / `NK-MIG-001` | Migration/manifest/initial data/cutover/cutback | MIG/MIG-DAT/FIL/SCM | 243、254 | 331、343、353 | `019_NK-MIG-001` | S/M/O | 未着手 |
-| 020 / `NK-CHR-001` | Shared case runner、Current/NK adapter、semantic comparator、gate | SCP-004、TST-001～005 | 223、264 | 354～355 | `020_NK-CHR-001` | 全24 | BUG-001対応中 |
+| 020 / `NK-CHR-001` | Shared case runner、Current/NK adapter、semantic comparator、gate | SCP-004、TST-001～005 | 223、264 | 354～355 | `020_NK-CHR-001` | 全24 | PG/PT完了（41/41、coverage全100%） |
 
 ## 4. Trace gate
 
@@ -52,3 +52,4 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | 4 production module、deployment/migration、Characterizationと20 Programを登録。 |
+| 2026-09-02 | NK-CHR-001のPG/PT完了、BUG-001/YKT-001再試験・evidenceを反映。 |

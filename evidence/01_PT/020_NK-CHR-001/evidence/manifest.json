@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "programId": "NK-CHR-001",
+  "runId": "PT-CHR-20260902-01",
+  "executedAt": "2026-09-02T05:39:57+09:00",
+  "timezone": "Asia/Tokyo",
+  "os": "Ubuntu 26.04.1 LTS / Linux 7.0.0-30-generic x86_64",
+  "jdk": "OpenJDK 25.0.4+7",
+  "maven": "Apache Maven 3.9.12",
+  "jacoco": "0.8.15",
+  "branch": "dev-characterization-gate",
+  "targetCommit": "57f9ac2b31f85e72ad4e7369f20c3fd993383832",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 MAVEN_USER_HOME=/home/mini/codex/project1/work/toolchain/m2 ./mvnw -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl program/characterization clean verify",
+  "exitCode": 0,
+  "expected": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "coverage": {
+      "line": "100%",
+      "method": "100%",
+      "class": "100%",
+      "branch": "100%"
+    },
+    "currentRuns": [
+      "pgpt-gate-20260901-05",
+      "pgpt-gate-20260901-06"
+    ],
+    "repeatChanged": 0,
+    "secretHits": 0
+  },
+  "actual": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "disabled": 0,
+    "notRun": 0,
+    "coverage": {
+      "line": {
+        "covered": 985,
+        "missed": 0,
+        "ratio": "100%"
+      },
+      "method": {
+        "covered": 131,
+        "missed": 0,
+        "ratio": "100%"
+      },
+      "class": {
+        "covered": 8,
+        "missed": 0,
+        "ratio": "100%"
+      },
+      "branch": {
+        "covered": 531,
+        "missed": 0,
+        "ratio": "100%"
+      }
+    },
+    "currentApplicable": "23/23 PASS",
+    "nkOnlyMetadata": "CHR-N01 PASS",
+    "catalog": "24/24 PASS",
+    "repeatFiles": "28/28 PASS",
+    "repeatChanged": 0,
+    "secretHits": 0
+  },
+  "related": {
+    "bugs": [
+      "BUG-001"
+    ],
+    "horizontalDeployment": [
+      "YKT-001"
+    ],
+    "qa": [
+      "QA-045 (DIF-001 CHR-A01 scope pending; unchanged)"
+    ],
+    "rdf": [],
+    "uic": [
+      "UIC-005 (pending; unchanged)"
+    ],
+    "ssc": []
+  },
+  "redaction": {
+    "rawCredential": false,
+    "rawPassword": false,
+    "rawToken": false,
+    "rawSession": false,
+    "privateKey": false
+  },
+  "coverageEvidenceNote": "Machine-readable CSV/XML only; source-embedded HTML excluded because it reproduces the secret-scan test canary literal.",
+  "checksumManifest": "checksums.sha256",
+  "checksumManifestSha256": "3e3a4593489fb0caae9c1b0ffaa2e127b90e138a705b46810e3c4aa8f013740f",
+  "files": [
+    {
+      "sha256": "62bfa6d8b15d411a063267ee0b4f2d987013b4bababec330c63635f941a1bcd3",
+      "path": "coverage/jacoco.csv"
+    },
+    {
+      "sha256": "28762e94600684029ef09bb65a8cb97f9e895ad14cc36a5a03d846b1fceb99fb",
+      "path": "coverage/jacoco.xml"
+    },
+    {
+      "sha256": "18f5d037c08d2d5f2258cd4eb75a18c808f33aa38df8b4405809908514c84d4c",
+      "path": "logs/clean-verify.log"
+    },
+    {
+      "sha256": "0f44f809c192a887f2a839b0d940ba7573fb4e521f9d6f50019e48a45998765e",
+      "path": "logs/environment.txt"
+    },
+    {
+      "sha256": "400d66ca5a9d7b233615d3e04eec4d7f72e6f1f96fe3b40667f617b6c202ff16",
+      "path": "logs/failed-run-summary.md"
+    },
+    {
+      "sha256": "7a99d4d8770f1001afb283d1c0f19370da75b3f90181d7ffcad5df6295eccf63",
+      "path": "output/TEST-dev.codex.schubert.characterization.ArtifactComparatorTest.xml"
+    },
+    {
+      "sha256": "009f4d50918a328116f0580e97f3c679f5deb72bbb5a0b3d472c09db7abc6993",
+      "path": "output/TEST-dev.codex.schubert.characterization.GateCliTest.xml"
+    },
+    {
+      "sha256": "8928f677cbef9efb66855aa6825eae697db0a05308b04f26179ec8c390b8801f",
+      "path": "output/TEST-dev.codex.schubert.characterization.GateContractTest.xml"
+    },
+    {
+      "sha256": "a3b6aa8e4366eeab918c7fb5049422c7308d0dad70f4fd9ce88337b48b0f20c4",
+      "path": "output/TEST-dev.codex.schubert.characterization.GateContractValidatorNegativeTest.xml"
+    },
+    {
+      "sha256": "20f3d3877dd21bc7818d0e05d2ddad97e23bc486f4a53b8f919da97d6f9a0888",
+      "path": "output/TEST-dev.codex.schubert.characterization.TargetAdapterTest.xml"
+    },
+    {
+      "sha256": "2b21bf8f1229c84bf3c0522ba31a8a7f88fe2191d9a610c8b7a8a7e689460503",
+      "path": "output/current-repeat-comparison.json"
+    },
+    {
+      "sha256": "88584d240b5be8447787bac00de37dd413670ab879638dd355bc68b72d09ff09",
+      "path": "output/dev.codex.schubert.characterization.ArtifactComparatorTest.txt"
+    },
+    {
+      "sha256": "14baf02f115c272b3ad8e4f407f3e140e19a05a713752b2a97ece2aed8d434c3",
+      "path": "output/dev.codex.schubert.characterization.GateCliTest.txt"
+    },
+    {
+      "sha256": "3f0df2867f4790e8acb47d71e110fc139e614cf5c0dd1125fb8cacdfff486799",
+      "path": "output/dev.codex.schubert.characterization.GateContractTest.txt"
+    },
+    {
+      "sha256": "1b8921e46c9f4f01d7df9a28c5a9a277e2eecbbd4cfe371a5fbd76464de49513",
+      "path": "output/dev.codex.schubert.characterization.GateContractValidatorNegativeTest.txt"
+    },
+    {
+      "sha256": "c8347e09195342fbe7ed67b52b5551decd3c587df7dcc6455ac2669e4d718234",
+      "path": "output/dev.codex.schubert.characterization.TargetAdapterTest.txt"
+    },
+    {
+      "sha256": "5bad5851a1f92b7d33cf82aebe9666e5d54fc9371d09a89872a9c6a899ea016f",
+      "path": "output/gate-report.json"
+    }
+  ]
+}

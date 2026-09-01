@@ -31,10 +31,10 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 開始時確認 | 完了 | status/branch/commit/remote/既存変更確認 | `main`/`749a777`、clean、既存remoteなし。指定URLを`origin`へ設定 |
 | Remote整合 | 阻害中 | fetchでremote履歴との一致を確認 | private GitHubのcredentialが本環境になく認証前で停止。force pushは実施しない |
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
-| 工程基盤 | 実施中 | 規約、toolchain、品質方針、915/916確定 | 台帳初版、rootless JDK/Maven構築済み |
-| Characterization是正 | 調査中 | BUG-001/YKT-001再試験PASS | 設計に対するgate実装不足を修正前起票 |
-| PG | 未着手 | 全program実装、build/static analysis/関連CHR PASS | 0% |
-| PT | 未着手 | 全PT PASS、line/method/class/branch 100%、skip等0 | 0% |
+| 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
+| Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 1/20 Program（NK-CHR-001）完了。Production moduleは次着手 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 1/20 Program完了、41 PT PASS |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -51,3 +51,4 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | PGPT工程開始。開始基準、成果物構成、初期進捗を登録。 |
+| 2026-09-02 | Characterization是正とNK-CHR-001 PG/PTを完了。Production module着手gateを再確立。 |

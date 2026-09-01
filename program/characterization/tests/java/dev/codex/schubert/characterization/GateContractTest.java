@@ -88,6 +88,21 @@ class GateContractTest {
     assertTrue(GateCli.containsAny(binary, List.of("test-secret")));
   }
 
+  @Test
+  void strengthenedGateContractAcceptsTwoCompleteRepeatableRuns() throws Exception {
+    Path projectRoot = Path.of(System.getProperty("chr.unitProjectRoot"));
+    Path currentReports = projectRoot.resolve("program/characterization/reports/current");
+    GateContractValidator.ValidationResult result =
+        GateContractValidator.validate(
+            projectRoot,
+            currentReports.resolve("pgpt-gate-20260901-05"),
+            currentReports.resolve("pgpt-gate-20260901-06"),
+            projectRoot.resolve("program/characterization/reports/current-repeat-comparison.json"));
+    assertTrue(result.passed(), () -> "unexpected failures: " + result.failures());
+    assertEquals(24, result.metrics().get("caseCount"));
+    assertEquals(0, result.metrics().get("failureCount"));
+  }
+
   private static JsonNode resource(String name) throws Exception {
     try (InputStream input = GateContractTest.class.getClassLoader().getResourceAsStream(name)) {
       if (input == null) throw new IllegalStateException("resource missing: " + name);
