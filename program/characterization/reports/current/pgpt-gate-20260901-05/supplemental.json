@@ -1,0 +1,187 @@
+{
+  "checks" : {
+    "CHR-A02" : {
+      "ip-limit-observed-not-hardcoded" : {
+        "evidence" : {
+          "distinctUsernames" : 10,
+          "observation" : "HTTP login attempts through Caddy",
+          "tenthFailureRedirect" : "/login?locked"
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-A03" : {
+      "expired-session-redirect" : {
+        "evidence" : {
+          "expiryTrigger" : "current in-memory session invalidated by application restart",
+          "protectedPath" : "/search",
+          "redirect" : "/login"
+        },
+        "status" : "PASS"
+      },
+      "unsafe-post-denied" : {
+        "evidence" : {
+          "operation" : "POST /logout without CSRF",
+          "status" : 403
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-E01" : {
+      "http-409" : {
+        "evidence" : {
+          "currentArchitecture" : "no operation-token conflict endpoint",
+          "nkRequirement" : "409 for same token with different payload"
+        },
+        "status" : "NK_ONLY"
+      },
+      "http-416" : {
+        "evidence" : {
+          "currentContentRange" : "bytes 999999999999-84084291/84084292",
+          "currentStatus" : 500,
+          "knownDifference" : "DIF-012",
+          "nkExpectedStatus" : 416,
+          "sourceCase" : "CHR-M04"
+        },
+        "status" : "PASS"
+      },
+      "http-503" : {
+        "evidence" : {
+          "currentDependencyStatus" : 502,
+          "dependency" : "Caddy to stopped current application",
+          "sourceCase" : "CHR-O01"
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-L01" : {
+      "web-log-outbox-retry" : {
+        "evidence" : {
+          "currentArchitecture" : "direct current-process database logging",
+          "nkRequirement" : "Web log outbox retry with Broker/API outage"
+        },
+        "status" : "NK_ONLY"
+      }
+    },
+    "CHR-M04" : {
+      "multi-range-first" : {
+        "evidence" : {
+          "bodyBytes" : 10,
+          "contentRange" : "bytes 0-9/84084292",
+          "request" : "bytes=0-9,20-29",
+          "status" : 206
+        },
+        "status" : "PASS"
+      },
+      "no-range-200" : {
+        "evidence" : {
+          "acceptRanges" : "bytes",
+          "contentLength" : "84084292",
+          "status" : 200
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-O01" : {
+      "caddy-app-dependency" : {
+        "evidence" : {
+          "caddyStatusWhileAppStopped" : 502,
+          "dependency" : "current application"
+        },
+        "status" : "PASS"
+      },
+      "database-dependency" : {
+        "evidence" : {
+          "dependency" : "PostgreSQL",
+          "outageInjection" : "controlled PostgreSQL fast stop/start",
+          "postRecoveryLogicalGameCount" : 2,
+          "statusWhileStopped" : 500
+        },
+        "status" : "PASS"
+      },
+      "mq-api-dependency" : {
+        "evidence" : {
+          "currentArchitecture" : "no Artemis/API split",
+          "nkRequirement" : "MQ and API outage matrix"
+        },
+        "status" : "NK_ONLY"
+      }
+    },
+    "CHR-S01" : {
+      "individual-and-combined-filters" : {
+        "evidence" : {
+          "combined" : {
+            "databaseCount" : 16043,
+            "pageCount" : 100
+          },
+          "entryType" : {
+            "databaseCount" : 58935,
+            "pageCount" : 100,
+            "path" : "/search?entry_type=dialogue"
+          },
+          "game" : {
+            "databaseCount" : 49120,
+            "pageCount" : 100,
+            "path" : "/search?game=NUKITASHI1"
+          },
+          "voice" : {
+            "databaseCount" : 35201,
+            "pageCount" : 100,
+            "path" : "/search?voice=with"
+          }
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-S05" : {
+      "unclassified-route-fallback" : {
+        "evidence" : {
+          "fallbackLabel" : "未分類",
+          "fixture" : "temporary logical prefix absent from route-name map",
+          "game" : "NUKITASHI2",
+          "matchedRouteCount" : 1
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-S07" : {
+      "anchor-highlight" : {
+        "evidence" : {
+          "backgroundColor" : "rgb(255, 248, 216)",
+          "borderStyle" : "solid",
+          "fragmentPresent" : true,
+          "source" : "first voiced search result",
+          "targetCount" : 1
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-S08" : {
+      "multiple-voice-fixture" : {
+        "evidence" : {
+          "currentObservation" : "body repeats per voice (DIF-009)",
+          "fixture" : "temporary second voice link on a logical entry",
+          "linkedVoiceCount" : 2,
+          "renderedAudioPlayers" : 2,
+          "renderedBodies" : 2,
+          "renderedEntryRows" : 2
+        },
+        "status" : "PASS"
+      }
+    },
+    "CHR-U02" : {
+      "common-color-error-empty-style" : {
+        "evidence" : {
+          "bodyColor" : "rgb(32, 33, 36)",
+          "emptyContainerDisplay" : "grid",
+          "emptyText" : "",
+          "errorBackground" : "rgb(253, 236, 236)",
+          "errorColor" : "rgb(138, 28, 28)",
+          "fontStatus" : "loaded"
+        },
+        "status" : "PASS"
+      }
+    }
+  },
+  "schemaVersion" : 1
+}

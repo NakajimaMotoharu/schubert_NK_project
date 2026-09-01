@@ -33,9 +33,25 @@ final class ArtifactSink {
     record.put("caseId", caseId);
     record.put("status", "PASS");
     record.putAll(evidence);
-    Path target = outputRoot.resolve("artifacts").resolve(caseId + ".json");
+    writeJson(outputRoot.resolve("artifacts").resolve(caseId + ".json"), record);
+  }
+
+  void writeSupplemental(Map<String, ?> checks) throws IOException {
+    writeJson(
+        outputRoot.resolve("supplemental.json"),
+        Map.of("schemaVersion", 1, "checks", checks));
+  }
+
+  void writeInventory(Map<String, ?> values) throws IOException {
+    Map<String, Object> record = new TreeMap<>();
+    record.put("status", "PASS");
+    record.putAll(values);
+    writeJson(outputRoot.resolve("inventory.json"), record);
+  }
+
+  private static void writeJson(Path target, Object value) throws IOException {
     Path temporary = target.resolveSibling(target.getFileName() + ".part");
-    JSON.writeValue(temporary.toFile(), record);
+    JSON.writeValue(temporary.toFile(), value);
     Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
   }
 

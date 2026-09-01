@@ -19,6 +19,8 @@
     <playwright.version>1.55.0</playwright.version>
     <jackson.version>2.19.2</jackson.version>
     <postgresql.version>42.7.7</postgresql.version>
+    <jacoco.version>0.8.15</jacoco.version>
+    <characterization.excludedGroups>current-characterization</characterization.excludedGroups>
   </properties>
 
   <dependencies>
@@ -59,6 +61,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.0</version>
+        <configuration>
+          <showWarnings>true</showWarnings>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -66,12 +75,14 @@
         <version>3.5.4</version>
         <configuration>
           <failIfNoTests>true</failIfNoTests>
+          <excludedGroups>${characterization.excludedGroups}</excludedGroups>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
           <systemPropertyVariables>
-            <file.encoding>UTF-8</file.encoding>
             <user.language>ja</user.language>
             <user.country>JP</user.country>
             <user.timezone>Asia/Tokyo</user.timezone>
+            <chr.unitProjectRoot>${maven.multiModuleProjectDirectory}</chr.unitProjectRoot>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -79,6 +90,62 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-coverage-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>coverage-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>coverage-check</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>LINE</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.0</minimum>
+                    </limit>
+                    <limit>
+                      <counter>BRANCH</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.0</minimum>
+                    </limit>
+                    <limit>
+                      <counter>METHOD</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.0</minimum>
+                    </limit>
+                    <limit>
+                      <counter>CLASS</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.0</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

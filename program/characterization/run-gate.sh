@@ -10,6 +10,7 @@ WORK_ROOT="${CHR_WORK_ROOT:-$BASE_ROOT/work}"
 TOOLS_ROOT="${CHR_TOOLS_ROOT:-$WORK_ROOT/characterization-tools}"
 RUNTIME_BASE="${CHR_RUNTIME_BASE:-$WORK_ROOT/characterization-runtime}"
 REPORT_BASE="${CHR_REPORT_BASE:-$SCRIPT_DIR/reports/current}"
+NK_REPORT_BASE="${CHR_NK_REPORT_BASE:-$SCRIPT_DIR/reports/nk}"
 BASELINE_ROOT="${CHR_BASELINE_ROOT:-$SCRIPT_DIR/baseline/current}"
 
 JAVA_HOME="${JAVA_HOME:-$TOOLS_ROOT/root/usr/lib/jvm/java-25-openjdk-amd64}"
@@ -22,6 +23,10 @@ DB_URL="${CHR_DB_URL:-jdbc:postgresql://127.0.0.1:55432/scenario_search_chr}"
 DB_USER="${CHR_DB_USER:-scenario_app}"
 APP_PORT="${CHR_APP_PORT:-46962}"
 PROXY_PORT="${CHR_PROXY_PORT:-55162}"
+PG_CTL="${CHR_PG_CTL:-$TOOLS_ROOT/root/usr/lib/postgresql/18/bin/pg_ctl}"
+PG_DATA="${CHR_PG_DATA:-$RUNTIME_BASE/pgdata}"
+PG_LOG="${CHR_PG_LOG:-$RUNTIME_BASE/logs/postgresql.log}"
+PG_SOCKET="${CHR_PG_SOCKET:-$RUNTIME_BASE/pgsocket}"
 
 if [[ -x "$TOOLS_ROOT/apache-maven-3.9.12/bin/mvn" ]]; then
   MAVEN="$TOOLS_ROOT/apache-maven-3.9.12/bin/mvn"
@@ -33,6 +38,7 @@ export JAVA_HOME
 export PATH="$JAVA_HOME/bin:$PATH"
 export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-$TOOLS_ROOT/playwright-browsers}"
 export PLAYWRIGHT_HOST_PLATFORM_OVERRIDE="${PLAYWRIGHT_HOST_PLATFORM_OVERRIDE:-ubuntu24.04-x64}"
+export LD_LIBRARY_PATH="$TOOLS_ROOT/root/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export MAVEN_OPTS="${MAVEN_OPTS:-} -Djavax.net.ssl.trustStore=$TOOLS_ROOT/root/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12"
 
 MAVEN_COMMON=(
@@ -51,6 +57,10 @@ MAVEN_COMMON=(
   "-Dchr.dbUser=$DB_USER"
   "-Dchr.appPort=$APP_PORT"
   "-Dchr.proxyPort=$PROXY_PORT"
+  "-Dchr.pgCtl=$PG_CTL"
+  "-Dchr.pgData=$PG_DATA"
+  "-Dchr.pgLog=$PG_LOG"
+  "-Dchr.pgSocket=$PG_SOCKET"
 )
 
 usage() {
@@ -58,6 +68,7 @@ usage() {
     "Usage: $0 verify-source|preflight|install-browser" \
     "       $0 capture-current <run-id>" \
     "       $0 compare-current <first-run-id> <second-run-id>" \
+    "       $0 compare-nk <nk-run-id> <dif-observations.json>" \
     "       $0 report <first-run-id> <second-run-id>" \
     "       $0 promote-current <run-id>"
 }
@@ -106,6 +117,7 @@ case "$command_name" in
     "$MAVEN" "${MAVEN_COMMON[@]}" \
       "-Dchr.runtimeRoot=$runtime_root" \
       "-Dchr.output=$output_root" \
+      -Dcharacterization.excludedGroups= \
       -Dtest=GateContractTest,CurrentCharacterizationTest \
       test
     ;;
@@ -115,6 +127,12 @@ case "$command_name" in
     mkdir -p "$SCRIPT_DIR/reports"
     run_cli "compare-current $REPORT_BASE/$first_id $REPORT_BASE/$second_id $SCRIPT_DIR/reports/current-repeat-comparison.json"
     ;;
+  compare-nk)
+    nk_run_id="${2:?NK run-id is required}"
+    observations_file="${3:?DIF observation file is required}"
+    mkdir -p "$SCRIPT_DIR/reports"
+    run_cli "compare-nk $BASELINE_ROOT/artifacts $NK_REPORT_BASE/$nk_run_id/artifacts $observations_file $SCRIPT_DIR/reports/nk-comparison.json"
+    ;;
   report)
     first_id="${2:?first-run-id is required}"
     second_id="${3:?second-run-id is required}"
@@ -122,7 +140,13 @@ case "$command_name" in
     ;;
   promote-current)
     run_id="${2:?run-id is required}"
-    run_cli "promote-current $REPORT_BASE/$run_id $BASELINE_ROOT"
+    gate_commit="${CHR_GATE_COMMIT:?CHR_GATE_COMMIT is required for baseline promotion}"
+    "$MAVEN" "${MAVEN_COMMON[@]}" \
+      "-Dchr.gateCommit=$gate_commit" \
+      -Dexec.mainClass=dev.codex.schubert.characterization.GateCli \
+      -Dexec.classpathScope=compile \
+      "-Dexec.args=promote-current $REPORT_BASE/$run_id $BASELINE_ROOT" \
+      exec:java
     ;;
   *)
     usage >&2
