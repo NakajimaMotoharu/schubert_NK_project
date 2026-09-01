@@ -185,3 +185,4 @@ Password/質問本文の平文・単純hashをDBへ保存しない。
 |---|---|
 | 2026-08-31 | 全64 layoutのJava class、handler/service、DB型・table、validation対応を初版作成。 |
 | 2026-08-31 | 横断監査でLGNREQ01の匿名Inbox HMAC対象を追加し、失敗counterの再配送二重更新を防止。 |
+| 2026-09-02 | SSC-004によりMEDIA1024のAudio/Video/Music拡張子・MIME完全一致allowlistを固定。 |

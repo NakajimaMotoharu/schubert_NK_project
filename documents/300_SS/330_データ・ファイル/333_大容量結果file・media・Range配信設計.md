@@ -260,3 +260,4 @@ Metric labelにpath、file名、user ID、media IDを設定しない。Type、st
 | 2026-08-31 | 横断監査でmedia endpoint pathをUI 221/SS 313と同一の外部URLへ統一。 |
 | 2026-08-31 | 横断監査でAsset 512/Transfer 256 byteのpath上限と、wire表示file name 256 byteをUI 235/237に統一。 |
 | 2026-09-01 | SSC-003によりAPI descriptor発行を`MediaQueryService`、Web Range配信を`MediaRangeService`へ統一し、311/323との委譲関係を明確化。 |
+| 2026-09-02 | SSC-004によりmedia descriptorの7拡張子/MIME組合せとHTTP attachment専用`application/octet-stream`を固定。 |

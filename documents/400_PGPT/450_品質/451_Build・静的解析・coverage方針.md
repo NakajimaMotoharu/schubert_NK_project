@@ -31,6 +31,8 @@ Java release 25、UTF-8、`ja-JP`、`Asia/Tokyo`を固定する。Dependency/plu
 | Shell | ShellCheck error/warning 0、秘密値表示0 |
 | Secret scan | Credential/password/raw token/session/cookie/key/DB dump/master実体 hit 0 |
 
+Protocol moduleは2026-09-02時点でCompiler `-Xlint:all -Werror`、JSpecify 1.0.0、SpotBugs 4.10.4.0 Max/Low、JaCoCo 0.8.15を`verify`へ導入済みである。JSpecifyはnull契約の表明であり、それ単独をnull dataflow解析PASSとはみなさない。後続moduleの実装開始前にNullAway相当をparent gateに追加する。
+
 ## 4. Coverage
 
 - 対象は`src`配下production Javaの全class/method/branch/line。JaCoCo reportとcheck ruleをmodule/aggregate双方へ固定する。
@@ -55,3 +57,4 @@ Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、�
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | Build・静的解析・coverage・NPE・evidence gate初版を確定。 |
+| 2026-09-02 | Protocolのcompiler/JSpecify/SpotBugs/JaCoCo実績と、JSpecify単独でnull dataflow PASSとしない判定を追記。 |
