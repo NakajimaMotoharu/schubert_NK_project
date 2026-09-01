@@ -8,7 +8,7 @@ public final class LayoutValidationException extends IllegalArgumentException {
     super(message);
   }
 
-  public LayoutValidationException(String message, ArithmeticException cause) {
+  public LayoutValidationException(String message, RuntimeException cause) {
     super(message, cause);
   }
 }
