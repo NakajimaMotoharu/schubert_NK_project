@@ -1,9 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "runId": "PT-PRO-20260902-01",
+  "runId": "PT-PRO-20260902-02",
+  "previousRunId": "PT-PRO-20260902-01",
   "programId": "NK-PRO-001",
-  "executedAt": "2026-09-02T06:21:55+09:00",
-  "completedAt": "2026-09-02T06:22:04+09:00",
+  "executedAt": "2026-09-02T06:50:32+09:00",
+  "completedAt": "2026-09-02T06:50:41+09:00",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS",
     "kernel": "7.0.0-30-generic x86_64",
@@ -14,14 +15,19 @@
     "spotbugsPlugin": "4.10.4.0"
   },
   "branch": "dev-protocol-codec",
-  "commit": "3bcfa5a1632ef8500250a2252336e9d6bf4dfe16",
+  "commit": "e67b5495aef02bc237482c84f27c0f1620910476",
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 MAVEN_USER_HOME=/home/mini/codex/project1/work/toolchain/m2 ./mvnw -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-protocol -am clean verify",
   "exitCode": 0,
   "result": "PASS_MILESTONE_PROGRAM_INCOMPLETE",
-  "tests": {"program": 9, "module": 33, "failures": 0, "errors": 0, "skipped": 0, "flaky": 0, "disabled": 0, "notRun": 0},
-  "coverage": {"line": {"covered": 914, "missed": 0}, "method": {"covered": 156, "missed": 0}, "class": {"covered": 37, "missed": 0}, "branch": {"covered": 466, "missed": 0}},
+  "tests": {"program": 12, "module": 43, "failures": 0, "errors": 0, "skipped": 0, "flaky": 0, "disabled": 0, "notRun": 0},
+  "coverage": {"line": {"covered": 1208, "missed": 0}, "method": {"covered": 213, "missed": 0}, "class": {"covered": 47, "missed": 0}, "branch": {"covered": 623, "missed": 0}},
   "staticAnalysis": {"compilerWarnings": 0, "spotbugsBugInstances": 0, "spotbugsErrors": 0},
-  "relatedBugs": ["BUG-002"],
+  "relatedBugs": ["BUG-002", "BUG-003"],
   "relatedSsc": [],
+  "fixtures": {
+    "layoutsUi233Sha256": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "fieldsUi234To236Sha256": "b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b"
+  },
+  "artifact": {"jarSha256": "d1316addb000436f2bce941e00e7df1ce3de047b6ab3d860bd0561108731d658"},
   "redaction": "synthetic public test values only; no credential, password, raw session, cookie, token, or secret key"
 }

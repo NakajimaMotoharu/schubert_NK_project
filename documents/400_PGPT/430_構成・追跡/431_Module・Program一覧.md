@@ -19,8 +19,8 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 | No. / Program ID | Module・主class/resource | 関連RD | 関連UI | 関連SS | PT directory | CHR | 状態 |
 |---|---|---|---|---|---|---|---|
-| 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011 | 232～236 | 311、322～323 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT中（中間gate 9件PASS。UI 234～236 field catalog/value未実装） |
-| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT中（中間gate 12件PASS。typed 64 payload/golden未実施） |
+| 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011 | 232～236 | 311、322～323 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT中（中間gate 12件PASS、389 field catalog完了。semantic/名前付きrecord未実装） |
+| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT中（中間gate 19件PASS、64 layout field/error codec完了。名前付きrecord/semantic/golden未実施） |
 | 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（12/12、coverage全100%、SpotBugs 0） |
 | 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | 未着手 |
 | 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | 未着手 |
@@ -54,3 +54,4 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-01 | 4 production module、deployment/migration、Characterizationと20 Programを登録。 |
 | 2026-09-02 | NK-CHR-001のPG/PT完了、BUG-001/YKT-001再試験・evidenceを反映。 |
 | 2026-09-02 | Protocol基盤の中間gateとNK-PRO-003完了を反映。NK-PRO-001/002の未実装範囲を明記。 |
+| 2026-09-02 | UI 234～236の389 field catalog、64 layout success/error field codec、BUG-003/YKT-003再試験を中間gateへ反映。 |
