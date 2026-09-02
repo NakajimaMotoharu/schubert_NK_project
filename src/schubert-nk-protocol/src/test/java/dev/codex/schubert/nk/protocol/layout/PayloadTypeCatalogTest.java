@@ -6,16 +6,52 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class PayloadTypeCatalogTest {
+  @Test
+  void explicitCatalogMatchesIndependentSs323NamedTypeFixture() throws IOException {
+    int rowCount = 0;
+    try (BufferedReader reader =
+        new BufferedReader(
+            new InputStreamReader(
+                Objects.requireNonNull(
+                    getClass().getResourceAsStream("/protocol/named-types-ss323.tsv")),
+                StandardCharsets.UTF_8))) {
+      for (String line; (line = reader.readLine()) != null; ) {
+        if (line.startsWith("#")) {
+          continue;
+        }
+        String[] columns = line.split("\\t", -1);
+        assertEquals(3, columns.length, line);
+        LayoutId layoutId = new LayoutId(columns[0]);
+        assertEquals(
+            columns[1], PayloadTypeCatalog.dataType(layoutId).getSimpleName(), columns[0]);
+        Optional<Class<? extends PayloadRecord>> recordType =
+            PayloadTypeCatalog.recordType(layoutId);
+        if (columns[2].equals("-")) {
+          assertTrue(recordType.isEmpty(), columns[0]);
+        } else {
+          assertEquals(columns[2], recordType.orElseThrow().getSimpleName(), columns[0]);
+        }
+        rowCount++;
+      }
+    }
+    assertEquals(64, rowCount);
+  }
+
   @Test
   void allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes() {
     Set<Class<?>> namedTypes = new HashSet<>();
