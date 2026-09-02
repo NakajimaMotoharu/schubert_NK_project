@@ -6,6 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.messaging.guard.GuardedJmsMessage;
+import dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuard;
+import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriter;
+import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
+import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
+import dev.codex.schubert.nk.protocol.codec.TransportBodyType;
+import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
@@ -15,8 +25,11 @@ import jakarta.jms.Queue;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
@@ -89,6 +102,140 @@ final class ArtemisFileJournalTest {
       assertDelayBetween(receivedAt, 1, 4_000, 8_000);
       assertDelayBetween(receivedAt, 2, 20_000, 30_000);
       receiveDlqBodyAndNoDuplicate();
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-005 persistent request properties, TTL and body pass the production guard")
+  void requestPropertiesTtlAndBodyRoundTripThroughActualBroker(@TempDir Path root)
+      throws Exception {
+    Configuration configuration = isolatedProductionConfiguration(root);
+    EmbeddedActiveMQ broker = start(configuration);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      Queue requestAddress = new ActiveMQQueue("nk.sync.request::nk.sync.request.q");
+      BytesMessage outbound = context.createBytesMessage();
+      outbound.writeBytes(GOLDEN_BODY);
+      outbound.setJMSCorrelationID("00000000-0000-0000-0000-000000000002");
+      outbound.setJMSReplyTo(new ActiveMQQueue("nk.sync.reply.web"));
+      outbound.setStringProperty("NKMessageID", "00000000-0000-0000-0000-000000000001");
+      outbound.setStringProperty("NKLayoutID", "LOGREQ01");
+      outbound.setStringProperty("NKProtocolVersion", "001");
+      long sentBefore = System.currentTimeMillis();
+      context
+          .createProducer()
+          .setDeliveryMode(DeliveryMode.PERSISTENT)
+          .setTimeToLive(5_000)
+          .send(requestAddress, outbound);
+
+      try (JMSConsumer consumer =
+          context.createConsumer(
+              new ActiveMQQueue("nk.sync.request::nk.sync.request.q"))) {
+        Message received = consumer.receive(5_000);
+        assertNotNull(received);
+        GuardedJmsMessage guarded =
+            new JmsMessageGuard()
+                .read(
+                    received,
+                    new ExpectedRoute(
+                        MessageKind.REQUEST,
+                        InteractionKind.SYNCHRONOUS,
+                        "nk.sync.request",
+                        Optional.of("nk.sync.reply.web"),
+                        true));
+        assertArrayEquals(GOLDEN_BODY, guarded.body());
+        assertTrue(guarded.metadata().expirationEpochMillis() >= sentBefore + 4_000);
+        assertTrue(guarded.metadata().expirationEpochMillis() <= sentBefore + 6_000);
+        assertEquals(DeliveryMode.PERSISTENT, guarded.metadata().deliveryMode());
+        assertEquals(1, guarded.metadata().deliveryCount());
+      }
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-007 transacted send/receive is controlled only by rollback and commit")
+  void transactedSendAndReceiveRespectRollbackAndCommit(@TempDir Path root) throws Exception {
+    Configuration configuration = isolatedProductionConfiguration(root);
+    EmbeddedActiveMQ broker = start(configuration);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.SESSION_TRANSACTED)) {
+      Queue work = new ActiveMQQueue("nk.async.work::nk.async.work.q");
+      BytesMessage rolledBack = context.createBytesMessage();
+      rolledBack.writeBytes(new byte[] {0x11});
+      context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).send(work, rolledBack);
+      context.rollback();
+
+      try (JMSConsumer consumer = context.createConsumer(work)) {
+        assertNull(consumer.receive(500));
+        BytesMessage committed = context.createBytesMessage();
+        committed.writeBytes(new byte[] {0x22});
+        context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).send(work, committed);
+        context.commit();
+
+        Message first = consumer.receive(5_000);
+        assertNotNull(first);
+        assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
+        context.rollback();
+        Message redelivered = consumer.receive(3_000);
+        assertNotNull(redelivered);
+        assertEquals(2, redelivered.getIntProperty("JMSXDeliveryCount"));
+        context.commit();
+        assertNull(consumer.receive(500));
+      }
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-009 fatal DLQ message round-trips body and bounded metadata")
+  void fatalDlqMessageRoundTripsThroughActualBroker(@TempDir Path root) throws Exception {
+    Configuration configuration = isolatedProductionConfiguration(root);
+    EmbeddedActiveMQ broker = start(configuration);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      GuardedJmsMessage source =
+          new GuardedJmsMessage(
+              GOLDEN_BODY,
+              new TransportMetadata(
+                  TransportBodyType.BYTES,
+                  "ID:provider-1",
+                  UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                  Optional.of("nk.sync.reply.web"),
+                  1_000,
+                  DeliveryMode.PERSISTENT,
+                  4,
+                  UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                  new LayoutId("LOGREQ01"),
+                  "001",
+                  "nk.sync.request"));
+      BytesMessage dlq =
+          FatalDlqMessageWriter.INSTANCE.create(
+              context,
+              source,
+              new FatalDlqMetadata(
+                  "PROTOCOL_INVALID",
+                  FatalDlqMetadata.DetectedBy.API_SYNC,
+                  Instant.parse("2026-09-03T00:00:00Z")));
+      Queue destination = new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q");
+      context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).send(destination, dlq);
+
+      try (JMSConsumer consumer = context.createConsumer(destination)) {
+        BytesMessage received = (BytesMessage) consumer.receive(5_000);
+        assertNotNull(received);
+        byte[] body = new byte[Math.toIntExact(received.getBodyLength())];
+        received.readBytes(body);
+        assertArrayEquals(GOLDEN_BODY, body);
+        assertEquals("nk.sync.request", received.getStringProperty("_AMQ_ORIG_ADDRESS"));
+        assertEquals("nk.sync.request.q", received.getStringProperty("_AMQ_ORIG_QUEUE"));
+        assertEquals("PROTOCOL_INVALID", received.getStringProperty("NKErrorCode"));
+        assertEquals("API_SYNC", received.getStringProperty("NKDetectedBy"));
+        assertEquals(4, received.getIntProperty("NKDeliveryCount"));
+      }
     } finally {
       broker.stop();
     }

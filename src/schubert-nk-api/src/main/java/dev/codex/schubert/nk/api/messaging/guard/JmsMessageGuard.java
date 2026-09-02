@@ -87,10 +87,19 @@ public final class JmsMessageGuard {
       throw rejection("transport destination is not a permanent Artemis destination");
     }
     String address = artemisDestination.getAddress();
-    if (address == null || address.isBlank() || address.contains("::")) {
-      throw rejection("transport destination address is missing or queue-qualified");
+    if (address == null || address.isBlank()) {
+      throw rejection("transport destination address is missing");
     }
-    return address;
+    int separator = address.indexOf("::");
+    if (separator < 0) {
+      return address;
+    }
+    String unqualified = address.substring(0, separator);
+    String queue = address.substring(separator + 2);
+    if (unqualified.isBlank() || !queue.equals(unqualified + ".q")) {
+      throw rejection("queue-qualified destination is outside the approved topology");
+    }
+    return unqualified;
   }
 
   private static int requiredDeliveryCount(Message message) throws JMSException {

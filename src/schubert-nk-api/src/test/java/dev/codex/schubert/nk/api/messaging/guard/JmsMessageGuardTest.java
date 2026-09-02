@@ -82,18 +82,28 @@ final class JmsMessageGuardTest {
   }
 
   @Test
-  void destinationMustBePermanentArtemisUnqualifiedAndExact() {
+  void destinationMustBePermanentArtemisUnqualifiedAndExact() throws Exception {
     Destination foreign = new Destination() {};
     assertRejected(with(validRequest(), "destination", foreign), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "destination", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "destination", new ActiveMQQueue()), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "destination", new ActiveMQQueue(" ")), REQUEST_ROUTE);
+    Map<String, Object> qualified =
+        with(
+            validRequest(),
+            "destination",
+            new ActiveMQQueue("nk.sync.request::nk.sync.request.q"));
+    assertEquals(
+        "nk.sync.request",
+        GUARD.read(bytesMessage(qualified), REQUEST_ROUTE).metadata().destinationAddress());
     assertRejected(
         with(
             validRequest(),
             "destination",
-            new ActiveMQQueue("nk.sync.request::nk.sync.request.q")),
+            new ActiveMQQueue("nk.sync.request::unapproved.q")),
         REQUEST_ROUTE);
+    assertRejected(
+        with(validRequest(), "destination", new ActiveMQQueue("::unapproved.q")), REQUEST_ROUTE);
     assertRejected(
         with(validRequest(), "destination", new ActiveMQQueue("nk.async.work")), REQUEST_ROUTE);
   }
