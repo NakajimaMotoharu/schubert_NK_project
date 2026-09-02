@@ -33,8 +33,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 2/20 Program（NK-CHR-001、NK-PRO-003）完了。NK-PRO-001/002は中間gate PASSで継続中 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 2/20 Program完了。Characterization 41件、Protocol 48件PASS。NK-PRO-001/002中間gate更新 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 2/20 Program（NK-CHR-001、NK-PRO-003）完了。NK-PRO-001/002はsemantic型付け中間gate PASSで継続中 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 2/20 Program完了。Characterization 41件、Protocol 52件PASS、Protocol 4指標100%。NK-PRO-001/002中間gate更新 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -55,3 +55,4 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-02 | Protocol基盤33件の中間gateをPASSし、NK-PRO-003をPG/PT完了。NK-PRO-001/002は未実装範囲を残し継続。 |
 | 2026-09-02 | Protocol 43 PT、389 field catalog、64 layout success/error codecの中間gateをPASS。BUG-003/YKT-003を修正・再試験。 |
 | 2026-09-02 | Protocol 48 PT、SS 323の69 named record・64明示mapper・独立型fixtureの中間gateをPASS。 |
+| 2026-09-02 | Protocol 52 PT、日時/UUID/context/SHA/path semantic型の中間gateをPASS。BUG-004/YKT-004を修正し、全reactor非回帰を確認。 |
