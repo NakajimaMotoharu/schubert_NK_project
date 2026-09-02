@@ -256,11 +256,14 @@ Lease pairは両方NULLまたは両方NNとする。
 `level varchar(5) NN`、`action varchar(64) NN`、`message varchar(512) NN`、`request_id uuid`、`message_id uuid`、
 `correlation_id uuid`、`source_message_id uuid UK null`、`actor_user_id bigint null FK app_users RESTRICT`、`actor_username varchar(64)`、
 `http_method varchar(8)`、`request_uri varchar(256)`、`status_code smallint check 100..599`、`remote_address inet`、
-`duration_ms bigint check >=0`、`details jsonb NN default '{}'::jsonb`。
+`duration_ms bigint check >=0`、`security_hold_until timestamptz null`、`details jsonb NN default '{}'::jsonb`。
 
 `service`は`WEB/API/BATCH/BROKER/DB/CADDY`、`category`は`REQUEST/ACTION/SECURITY/MQ/SYSTEM/BATCH`、
 `level`は`TRACE/DEBUG/INFO/WARN/ERROR`のCHECKとする。
 `details` top-level keyも351のevent catalogで定義した値だけをapplication validatorで受け付ける。
+`security_hold_until`は`category='SECURITY'`の行だけに設定可能とするCHECKで保護し、
+Security holdの対象IDは`app_logs.id`、保全中は`security_hold_until > cleanup cutoff`とする。
+期限未設定または期限到達後は通常の90日削除対象とし、ops viewへは同列を投影しない。
 
 `request_uri`は`octet_length <= 256`、`details`はserialized UTF-8 1,024 byte以内をCHECK/投影前validatorで保護し、
 WLGEVT01およびLGSRSP01へ暗黙truncateなしで変換可能にする。
@@ -356,3 +359,4 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 2026-08-31 | 横断監査でLoginのUUID sessionとbigint業務参照を分離し、Inbox result referenceの型別排他的CHECKを追加。 |
 | 2026-08-31 | 横断監査で`pg_dump`のSELECT要件とbatchのciphertext閲覧禁止が両立しないため、専用`schubert_backup` role案をQA-043/UIC-003として保留。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用`schubert_backup`と通常保守用`schubert_batch`のrole/grantを確定。 |
+| 2026-09-03 | SSC-005を反映し、`app_logs.security_hold_until`とcategory制約、cutoff判定、ops非公開を確定。 |

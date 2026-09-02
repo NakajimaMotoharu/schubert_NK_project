@@ -217,7 +217,9 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 ## 9. Retention・rotation・access
 
 - Journald/file log: 100MB＋14世代を目安、service合計5GB、file 0640、ops read。OS journald合計もUI 253の10GB内。
-- `app_logs`: 90日、backup成功後chunk削除。Security hold対象は明示ID/期限で除外。
+- `app_logs`: 90日、backup成功後chunk削除。Security holdの明示IDは`app_logs.id`、期限は
+  `security_hold_until`とし、`category='SECURITY' and security_hold_until > cleanup cutoff`だけを除外する。
+  期限未設定/到達後は通常保持に戻し、保持期限自体はLog画面/ops viewに表示しない。
 - `batch_runs`: 400日、RUNNING/FAILED調査中は削除禁止。DEBUG metric: 15日/5GB。
 - Log画面はADMINだけ、ops read viewは本文/ciphertext/hash/IP等を除外。OS logはservice group/運用者だけ。
 
@@ -252,3 +254,4 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 | 2026-08-31 | Structured log、action/error/metric catalog、alert、mode、retentionを詳細化。 |
 | 2026-08-31 | 横断監査でQA-042/UIC-002のpaging/address memory metricと、容量率alertのpending oracleを追加。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Queue容量率、paging開始、page-full、disk-fullのalert分母と動作を確定。 |
+| 2026-09-03 | SSC-005を反映し、Security holdのID/期限、対象category、非公開条件を具体化。 |

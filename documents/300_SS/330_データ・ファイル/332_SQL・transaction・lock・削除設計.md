@@ -280,7 +280,9 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
 1. Expired/revoked `auth_sessions`、expired `login_ip_attempts`、expired Web HTTP session。
 2. SENTかつsent_atから7日超のAPI/Web outbox。PENDING/ERROR/lease中は対象外。
 3. 参照Inboxはcompleted後24時間、更新Inboxは7日。PROCESSING、decrypt/error中、result ref不整合は対象外。
-4. App logは90日の保持別定義に従いchunk削除。Security保全中の対象は除外。
+4. App logは90日の保持別定義に従い、`logged_at < :log_cutoff`の行を時刻/ID順に最大10,000件lockする。
+   `security_hold_until > :log_cutoff`は保全中としてskip、NULLまたは`<= :log_cutoff`は期限到達として削除する。
+   target/deleted/skippedは同lock対象chunkで集計し、保全行の存在を成功件数に隠さない。
 
 ## 12. Deadlock・競合防止
 
@@ -343,3 +345,4 @@ operation tokenによる再操作またはJMS redeliveryで整合を保つ。
 |---|---|
 | 2026-08-31 | Query、scope、transaction、lock、outbox lease、朝の削除SQLを具体化。 |
 | 2026-08-31 | 横断監査でpage sizeをUIの100/50件に機能別統一し、offsetを`pageSize`基準へ是正。 |
+| 2026-09-03 | SSC-005を反映し、Security log holdのcutoff判定とtarget/deleted/skipped集計を具体化。 |

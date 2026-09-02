@@ -27,6 +27,9 @@ Tool version、入手元、hash、設定、commandを固定し、secretを含め
 | JSpecify | 1.0.0 | Maven Central `org.jspecify:jspecify` | Protocol production packageを`@NullMarked`、必要境界を`@Nullable` | Compile、null negative PT |
 | JaCoCo | 0.8.15 | Maven Central `org.jacoco:jacoco-maven-plugin` | Protocol `verify`で4指標100%をPOM gate化 | line 3357/3357、method 730/730、class 156/156、branch 976/976 |
 | SpotBugs Maven Plugin | 4.10.4.0 | Maven Central `com.github.spotbugs:spotbugs-maven-plugin` | Protocol `verify`、Max/Low、error時FAIL、XML出力 | BUG-002検出・修正後bug/error 0 |
+| PostgreSQL | 18.6 (`18.6-0ubuntu0.26.04.1`) | Ubuntu 26.04 `resolute-updates/main`の`postgresql-18`、`postgresql-client-18`、`libpq5` deb | `work/characterization-tools/root/usr`へrootless展開。Testごとに`target`下へ`initdb`し、loopbackの自動選択portと合成fixtureだけを使用 | Flyway V001～V005、21 table、role/grant/constraint/functionのPT 15件PASS |
+| Flyway | 13.4.0 | Maven Central `org.flywaydb:flyway-core` / `flyway-database-postgresql` | API PT scopeにversion固定。`schubert_meta.flyway_schema_history`、`initSql=SET ROLE nk_owner`、validate on、out-of-order/baseline off、clean disabled | 初回5 migration、再実行0、checksum drift拒否、並行実行直列化 |
+| PostgreSQL JDBC | 42.7.13 | Maven Central `org.postgresql:postgresql` | API PT scopeにversion固定、PostgreSQL 18へのJDBC検査に使用 | catalog/SQLSTATE/role権限PT PASS |
 | Python | 3.14.4 | OS既存 | SS 323 named recordのversion管理済み再現生成scriptと検証補助に限定。通常のsource編集には使用しない | `python3 --version`、69 record/64 mappingの再生成hash一致 |
 | jq | OS既存 | Ubuntu package | PATH | 最終gateでversion記録 |
 | unzip/sha256sum | OS既存 | Ubuntu package/coreutils | PATH | command存在確認済み |
@@ -57,13 +60,30 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 7. Repository rootで`./mvnw -version`を実行し、Maven 3.9.12とJava 25.0.4を確認する。
 8. Maven commandへ`-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository`を指定し、`./mvnw --no-transfer-progress clean verify`でdependency/pluginをpinされたPOMから取得する。
 
+### 5.1 PostgreSQL/Flyway PTの再現
+
+1. Ubuntu package metadataで`postgresql-18=18.6-0ubuntu0.26.04.1`、`postgresql-client-18`、`libpq5`を固定し、
+   `apt-get download`後に`dpkg-deb -x`で`work/characterization-tools/root`へ展開する。
+2. Deb SHA-256は順に`0536716204dee9152dee758c252936ba41c93b7330395f8abb0c5b86558aa658`、
+   `c46d1ace8f7d84a9648c63b566fff799b7ee3281db46ef6e7b99baf0fd7bd2e4`、
+   `7e9199f54290b04a28e9f136207624ca30b0988d613159977fd84e8b4467e0a4`と照合する。
+3. Test launcherは`LD_LIBRARY_PATH=<root>/usr/lib/x86_64-linux-gnu:<root>/usr/lib/postgresql/18/lib`、
+   `initdb -L <root>/usr/share/postgresql/18`、PostgreSQL起動時の`extension_control_path`と
+   `dynamic_library_path`を同rootに固定する。Clusterはmodule `target`下、Unix socketはpath長制約を避けて`/tmp`、TCPはloopback限定とする。
+4. POM固定JARのSHA-256はFlyway core
+   `e6147827cb883a8bb359231202e8d0d32e0f8e905caf0e20d2890e36dcd12251`、PostgreSQL database plugin
+   `1219a89b93fe5dc74ddec8271d810136751820d5bc2a880e51f6ff21e02d66ac`、pgJDBC
+   `6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93`とする。
+5. Repository rootでAPI moduleと依存moduleに対する`clean verify`を実行する。Test用`trust`認証は
+   loopbackの破棄可能clusterと合成fixtureに限定し、production設定雛形へは転用しない。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |
 |---|---|---|
-| PostgreSQL | 18。Rootless展開または実PostgreSQL test runtimeを用い、DDL/Flyway・role/grantのPTを実施 | 未着手 |
+| PostgreSQL | 18.6をrootless展開し、実PostgreSQL test runtimeでDDL/Flyway・role/grantのPTを実施 | 完了 |
 | Artemis | POM固定versionのembedded brokerとproduction `broker.xml` schema検査を併用 | 未着手 |
-| JDBC/Flyway | Maven Centralのversion固定artifact | 未着手 |
+| JDBC/Flyway | Flyway 13.4.0、PostgreSQL JDBC 42.7.13をMaven Central artifactで固定 | 完了 |
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
 | Secret scan | Tracked/untracked対象のpattern・entropy・known secret detectorをsanitized report化 | 未着手 |
 
@@ -78,3 +98,4 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 2026-09-02 | Semantic型追加後のProtocol 52 PT、production 125 class、coverage 4指標100%、SpotBugs 0を同一toolchainで再確認。 |
 | 2026-09-02 | ID/enum/X numeric/range型追加後のProtocol 56 PT、production 155 class、coverage 4指標100%、SpotBugs 0をrun 06で再確認。 |
 | 2026-09-02 | Layout semantic/golden追加後のProtocol 67 PT、production 156 class、coverage 4指標100%、SpotBugs 0をRun 08で再確認。専用Maven local repository指定を省いたRun 07はoffline依存解決前に失敗し、PASSへ算入しない。 |
+| 2026-09-03 | Ubuntu公式PostgreSQL 18.6をrootless展開し、Flyway 13.4.0、PostgreSQL JDBC 42.7.13と隔離clusterによるNK-DAT-001 PTを導入。 |

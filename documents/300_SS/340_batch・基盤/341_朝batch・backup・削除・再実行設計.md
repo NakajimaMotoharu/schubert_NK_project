@@ -124,7 +124,7 @@ backup/restore手順の変更・rehearsalなしに行わない。
 | `CLEAN_QUESTION` | 論理削除済み＋notification不存在 | 1,000 | FK競合はskip/warning、他DB異常はFAILED |
 | `CLEAN_SESSION` | UI 251の失効/期限条件 | 1,000 | Failed tableを記録しtechnical後続は独立 |
 | `CLEAN_INBOX_OUTBOX` | expires/SENT+7日、PROCESSING/PENDING/ERROR除外 | 1,000 | 異常rowを削除せずalert |
-| `CLEAN_LOG` | 90日超、security hold除外 | 10,000 | Chunk単位再開 |
+| `CLEAN_LOG` | 90日超。`security_hold_until > log cutoff`は除外、NULL/期限到達は削除 | 10,000 | Chunk単位再開、hold件数をskipped記録 |
 | `CLEAN_BATCH_RUN` | 400日超、RUNNING/FAILED調査中除外 | 1,000 | 証跡保護を優先しskip |
 
 SQL、lock、delete順は332 §11を正とする。Batch roleは基底tableを直接DELETEせず、331 §3.3のallowlist済み
@@ -236,3 +236,4 @@ Package名/versionと非秘密config hashは記録可。
 | 2026-08-31 | 横断監査でbatch cleanupを331のallowlist済みmaintenance function経由に固定し、文言誤りを修正。 |
 | 2026-08-31 | `pg_dump`用SELECTとbatch保守権限を分離する`schubert_backup`案をQA-043/UIC-003として保留。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、専用backup OS/DB role・credential・固定dump commandを確定。 |
+| 2026-09-03 | SSC-005を反映し、CLEAN_LOGのSecurity hold期限判定とskipped記録を確定。 |
