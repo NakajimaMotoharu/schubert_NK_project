@@ -169,6 +169,14 @@ final class DatabaseMigrationTest {
     @Order(4)
     @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
     void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
+        assertEquals("145|23|30|21|1", queryString(ADMIN,
+                "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
+                        + "count(*) filter(where contype='u')||'|'||count(*) filter(where contype='p')||'|'||"
+                        + "count(*) filter(where contype='t') from pg_constraint c join pg_namespace n "
+                        + "on n.oid=c.connamespace where n.nspname in ('schubert','schubert_web_session')"));
+        assertEquals(0L, queryLong(ADMIN,
+                "select count(*) from pg_constraint c join pg_namespace n on n.oid=c.connamespace "
+                        + "where n.nspname in ('schubert','schubert_web_session') and not c.convalidated"));
         long unnamed = queryLong(ADMIN,
                 "select count(*) from pg_constraint c join pg_namespace n on n.oid=c.connamespace "
                         + "where n.nspname in ('schubert','schubert_web_session') "
