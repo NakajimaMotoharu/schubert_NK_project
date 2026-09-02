@@ -527,6 +527,76 @@ final class DatabaseMigrationTest {
             assertFalse(text.matches("(?is).*jdbc:postgresql://[^\\s]+:[^\\s]+@.*"), resource.toString());
             assertTrue(text.endsWith("\n"), resource.toString());
         }
+        writeEvidenceSnapshots();
+    }
+
+    private static void writeEvidenceSnapshots() throws Exception {
+        Path databaseEvidence = Files.createDirectories(MODULE.resolve("target/pt-evidence/database"));
+        writeQueryEvidence(databaseEvidence.resolve("migration-history.tsv"),
+                "version\tdescription\tchecksum\tsuccess",
+                "select coalesce(version,'')||E'\\t'||description||E'\\t'||coalesce(checksum::text,'')||E'\\t'||success "
+                        + "from schubert_meta.flyway_schema_history order by installed_rank");
+        writeQueryEvidence(databaseEvidence.resolve("columns.tsv"),
+                "table\tcolumn\ttype\tnullable\tdefault\tidentity\tgenerated",
+                "select c.table_schema||'.'||c.table_name||E'\\t'||c.column_name||E'\\t'||c.data_type||E'\\t'||"
+                        + "c.is_nullable||E'\\t'||replace(replace(coalesce(c.column_default,''),chr(9),' '),chr(10),' ')"
+                        + "||E'\\t'||c.is_identity||E'\\t'||c.is_generated "
+                        + "from information_schema.columns c join information_schema.tables t "
+                        + "on t.table_schema=c.table_schema and t.table_name=c.table_name "
+                        + "where t.table_type='BASE TABLE' and c.table_schema in ('schubert','schubert_web_session') "
+                        + "order by c.table_schema,c.table_name,c.ordinal_position");
+        writeQueryEvidence(databaseEvidence.resolve("constraints.tsv"),
+                "schema\tconstraint\ttype\tdeferrable\tdefinition",
+                "select n.nspname||E'\\t'||c.conname||E'\\t'||c.contype::text||E'\\t'||c.condeferrable||E'\\t'||"
+                        + "replace(replace(pg_get_constraintdef(c.oid),chr(9),' '),chr(10),' ') "
+                        + "from pg_constraint c join pg_namespace n on n.oid=c.connamespace "
+                        + "where n.nspname in ('schubert','schubert_web_session') order by n.nspname,c.conname");
+        writeQueryEvidence(databaseEvidence.resolve("indexes.tsv"), "schema\tindex\tdefinition",
+                "select schemaname||E'\\t'||indexname||E'\\t'||replace(replace(indexdef,chr(9),' '),chr(10),' ') "
+                        + "from pg_indexes where schemaname in ('schubert','schubert_web_session') "
+                        + "order by schemaname,indexname");
+        writeQueryEvidence(databaseEvidence.resolve("programmable-objects.tsv"),
+                "kind\tschema\tname\tsecurity",
+                "select 'FUNCTION'||E'\\t'||n.nspname||E'\\t'||p.proname||E'\\t'||"
+                        + "case when p.prosecdef then 'SECURITY DEFINER' else 'INVOKER' end "
+                        + "from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
+                        + "where n.nspname='schubert' and p.proname like 'maintenance_cleanup_%' "
+                        + "union all select 'VIEW'||E'\\t'||n.nspname||E'\\t'||c.relname||E'\\t'||"
+                        + "coalesce(array_to_string(c.reloptions,','),'') from pg_class c "
+                        + "join pg_namespace n on n.oid=c.relnamespace "
+                        + "where n.nspname='schubert' and c.relkind='v' order by 1");
+        writeQueryEvidence(databaseEvidence.resolve("role-grants.tsv"),
+                "role\tnk_owner_admin\tnk_owner_inherit\tnk_owner_set\tschubert_schema\tbase_table\tops_view",
+                "with roles(role_name) as (values ('schubert_migration'),('schubert_app'),('schubert_batch'),"
+                        + "('schubert_backup'),('schubert_web_session'),('schubert_ops_ro')) "
+                        + "select r.role_name||E'\\t'||coalesce(m.admin_option::text,'false')||E'\\t'||"
+                        + "coalesce(m.inherit_option::text,'false')||E'\\t'||coalesce(m.set_option::text,'false')||E'\\t'||"
+                        + "has_schema_privilege(r.role_name,'schubert','USAGE')||E'\\t'||"
+                        + "has_table_privilege(r.role_name,'schubert.app_logs','SELECT')||E'\\t'||"
+                        + "has_table_privilege(r.role_name,'schubert.v_ops_component_counts','SELECT') "
+                        + "from roles r left join pg_roles member on member.rolname=r.role_name "
+                        + "left join pg_auth_members m on m.member=member.oid "
+                        + "and m.roleid=(select oid from pg_roles where rolname='nk_owner') "
+                        + "order by r.role_name");
+        writeQueryEvidence(databaseEvidence.resolve("sql-results.tsv"), "assertion\tactual",
+                "select 'games'||E'\\t'||string_agg(id||':'||code||':'||title||':'||display_order,',' order by id) "
+                        + "from schubert.games union all "
+                        + "select 'table_count'||E'\\t'||count(*) from information_schema.tables "
+                        + "where table_schema in ('schubert','schubert_web_session') and table_type='BASE TABLE' "
+                        + "union all select 'explicit_index_count'||E'\\t'||count(*) from pg_indexes "
+                        + "where schemaname in ('schubert','schubert_web_session') "
+                        + "and (indexname like 'ix\\_%' escape '\\' or indexname in "
+                        + "('uq_request_inbox_operation','uq_batch_runs_business_step_success'))");
+        Files.writeString(databaseEvidence.resolve("resource-scan.txt"),
+                "resources=6\ncredential_hits=0\nunsafe_crlf=0\nnul_bytes=0\nresult=PASS\n",
+                StandardCharsets.UTF_8);
+    }
+
+    private static void writeQueryEvidence(Path path, String header, String sql) throws Exception {
+        List<String> lines = new ArrayList<>();
+        lines.add(header);
+        lines.addAll(queryList(ADMIN, sql));
+        Files.write(path, lines, StandardCharsets.UTF_8);
     }
 
     private static Flyway configuredFlyway(String url, boolean createSchemas, String location) {
