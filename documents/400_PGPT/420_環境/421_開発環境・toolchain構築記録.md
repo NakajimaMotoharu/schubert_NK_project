@@ -30,6 +30,7 @@ Tool version、入手元、hash、設定、commandを固定し、secretを含め
 | PostgreSQL | 18.6 (`18.6-0ubuntu0.26.04.1`) | Ubuntu 26.04 `resolute-updates/main`の`postgresql-18`、`postgresql-client-18`、`libpq5` deb | `work/characterization-tools/root/usr`へrootless展開。Testごとに`target`下へ`initdb`し、loopbackの自動選択portと合成fixtureだけを使用 | Flyway V001～V005、21 table、role/grant/constraint/functionのPT 15件PASS |
 | Flyway | 13.4.0 | Maven Central `org.flywaydb:flyway-core` / `flyway-database-postgresql` | API PT scopeにversion固定。`schubert_meta.flyway_schema_history`、`initSql=SET ROLE nk_owner`、validate on、out-of-order/baseline off、clean disabled | 初回5 migration、再実行0、checksum drift拒否、並行実行直列化 |
 | PostgreSQL JDBC | 42.7.13 | Maven Central `org.postgresql:postgresql` | API PT scopeにversion固定、PostgreSQL 18へのJDBC検査に使用 | catalog/SQLSTATE/role権限PT PASS |
+| Apache Artemis | 2.56.0 | Apache Artemis公式配布とMaven Central `org.apache.artemis` | Binaryは`work/toolchain/artemis`へ展開。API POMでJakarta clientをproduction、server/Jakarta serverをPT scopeに固定 | Java 25で`artemis version`、archive SHA-512照合、HMAC/Outbox中間gate 26 PT PASS |
 | Python | 3.14.4 | OS既存 | SS 323 named recordのversion管理済み再現生成scriptと検証補助に限定。通常のsource編集には使用しない | `python3 --version`、69 record/64 mappingの再生成hash一致 |
 | jq | OS既存 | Ubuntu package | PATH | 最終gateでversion記録 |
 | unzip/sha256sum | OS既存 | Ubuntu package/coreutils | PATH | command存在確認済み |
@@ -77,12 +78,25 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 5. Repository rootでAPI moduleと依存moduleに対する`clean verify`を実行する。Test用`trust`認証は
    loopbackの破棄可能clusterと合成fixtureに限定し、production設定雛形へは転用しない。
 
+### 5.2 Artemis/JMS PTの再現
+
+1. `https://downloads.apache.org/artemis/artemis/2.56.0/apache-artemis-2.56.0-bin.tar.gz`と公式`.sha512`を取得し、
+   SHA-512 `441ad38aa1b0526e5709edf43542039f016669d24134056613e4cbafdf6b101e5351f79f7ee190b43fc8031f6ec596a5fd075490dcee4d3eb3a88d8ed2cfc01b`
+   を照合する（SHA-256 `df469079b6388c8c6276197388a0f5ee0d64d0ca42d7f0e2ca5e392e21b955de`）。
+2. `work/toolchain/artemis/apache-artemis-2.56.0`へ展開し、JDK 25.0.4の`JAVA_HOME`/`PATH`で`bin/artemis version`を実行する。
+3. Maven artifact SHA-256は`artemis-jakarta-client`
+   `89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6`、`artemis-server`
+   `4bc0bb2d74e340fbb54d84121f2c52708e00bdad0a84751b9bd4f4b21e03c358`、`artemis-jakarta-server`
+   `27353ffe275980135c63b81e5497403a29cf843fd2e484536ac521b4ad03cb3e`と照合する。
+4. Broker component PTはmodule `target` 下の隔離File Journal、loopback自動選択port、合成credential/dataだけを使い、
+   production credentialとCurrent dataを読まない。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |
 |---|---|---|
 | PostgreSQL | 18.6をrootless展開し、実PostgreSQL test runtimeでDDL/Flyway・role/grantのPTを実施 | 完了 |
-| Artemis | POM固定versionのembedded brokerとproduction `broker.xml` schema検査を併用 | 未着手 |
+| Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み・component PT実装中 |
 | JDBC/Flyway | Flyway 13.4.0、PostgreSQL JDBC 42.7.13をMaven Central artifactで固定 | 完了 |
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
 | Secret scan | Tracked/untracked対象のpattern・entropy・known secret detectorをsanitized report化 | 未着手 |
@@ -99,3 +113,4 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 2026-09-02 | ID/enum/X numeric/range型追加後のProtocol 56 PT、production 155 class、coverage 4指標100%、SpotBugs 0をrun 06で再確認。 |
 | 2026-09-02 | Layout semantic/golden追加後のProtocol 67 PT、production 156 class、coverage 4指標100%、SpotBugs 0をRun 08で再確認。専用Maven local repository指定を省いたRun 07はoffline依存解決前に失敗し、PASSへ算入しない。 |
 | 2026-09-03 | Ubuntu公式PostgreSQL 18.6をrootless展開し、Flyway 13.4.0、PostgreSQL JDBC 42.7.13と隔離clusterによるNK-DAT-001 PTを導入。 |
+| 2026-09-03 | Apache Artemis公式2.56.0のarchive/hashとMaven client/server artifactを固定し、Java 25の実File Journal component PT用toolchainを導入。 |
