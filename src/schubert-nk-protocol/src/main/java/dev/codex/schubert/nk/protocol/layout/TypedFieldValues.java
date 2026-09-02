@@ -2,8 +2,10 @@ package dev.codex.schubert.nk.protocol.layout;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId;
 import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import dev.codex.schubert.nk.protocol.layout.semantic.WireEnum;
 import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;
 import java.time.Instant;
 import java.util.Locale;
@@ -11,12 +13,16 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.LongFunction;
+import java.util.regex.Pattern;
 
 /**
  * Type-safe bridge used by generated named records; it never infers component order.
  * Trace: NK-PRO-001, SS 323 sections 2/10, PT-PRO-001-T02/T03.
  */
 public final class TypedFieldValues {
+  private static final Pattern OPTIONAL_ID = Pattern.compile("[0-9]{1,12}");
+
   private TypedFieldValues() {}
 
   public static FieldValue.Text requiredText(FieldValueSet fields, String name) {
@@ -62,12 +68,46 @@ public final class TypedFieldValues {
     return requiredNumeric(fields, name).value();
   }
 
+  public static int requiredInt(FieldValueSet fields, String name) {
+    try {
+      return Math.toIntExact(requiredLong(fields, name));
+    } catch (ArithmeticException exception) {
+      throw new LayoutValidationException("typed integer field is out of range: " + name, exception);
+    }
+  }
+
   public static boolean requiredBoolean(FieldValueSet fields, String name) {
     return requiredFlag(fields, name).value();
   }
 
   public static Optional<String> optionalString(FieldValueSet fields, String name) {
     return optionalText(fields, name).map(FieldValue.Text::value);
+  }
+
+  public static <T extends ProtocolId> T requiredId(
+      FieldValueSet fields, String name, LongFunction<T> factory) {
+    Objects.requireNonNull(factory, "factory");
+    return semanticId(name, requiredLong(fields, name), factory);
+  }
+
+  public static <T extends ProtocolId> Optional<T> optionalId(
+      FieldValueSet fields, String name, LongFunction<T> factory) {
+    Objects.requireNonNull(factory, "factory");
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, text -> factory.apply(parseOptionalId(text))));
+  }
+
+  public static <E extends Enum<E> & WireEnum> E requiredEnum(
+      FieldValueSet fields, String name, Class<E> type) {
+    Objects.requireNonNull(type, "type");
+    return semantic(name, requiredString(fields, name), value -> enumConstant(type, value));
+  }
+
+  public static <E extends Enum<E> & WireEnum> Optional<E> optionalEnum(
+      FieldValueSet fields, String name, Class<E> type) {
+    Objects.requireNonNull(type, "type");
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, wire -> enumConstant(type, wire)));
   }
 
   public static Instant requiredInstant(FieldValueSet fields, String name) {
@@ -131,6 +171,28 @@ public final class TypedFieldValues {
 
   public static FieldValue flag(boolean value) {
     return new FieldValue.Flag(value);
+  }
+
+  public static FieldValue id(ProtocolId value) {
+    return numeric(Objects.requireNonNull(value, "value").value());
+  }
+
+  public static FieldValue optionalIdValue(Optional<? extends ProtocolId> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(identifier -> new FieldValue.Text(Long.toString(identifier.value())))
+        .orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue enumValue(WireEnum value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalEnumValue(Optional<? extends WireEnum> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(item -> new FieldValue.Text(item.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue optionalStringValue(Optional<String> value) {
@@ -217,6 +279,32 @@ public final class TypedFieldValues {
       throw new IllegalArgumentException("UUID is not lowercase canonical form");
     }
     return uuid;
+  }
+
+  private static long parseOptionalId(String value) {
+    if (!OPTIONAL_ID.matcher(value).matches()) {
+      throw new IllegalArgumentException("optional protocol ID must contain 1 to 12 ASCII digits");
+    }
+    return Long.parseLong(value);
+  }
+
+  private static <E extends Enum<E> & WireEnum> E enumConstant(Class<E> type, String wire) {
+    for (E candidate : type.getEnumConstants()) {
+      if (candidate.wireValue().equals(wire)) {
+        return candidate;
+      }
+    }
+    throw new IllegalArgumentException("wire enum value is not allowlisted");
+  }
+
+  private static <T extends ProtocolId> T semanticId(
+      String name, long value, LongFunction<T> factory) {
+    try {
+      return factory.apply(value);
+    } catch (IllegalArgumentException exception) {
+      throw new LayoutValidationException(
+          "typed field has an invalid semantic value: " + name, exception);
+    }
   }
 
   private static <T> T semantic(String name, String value, Function<String, T> factory) {

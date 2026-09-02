@@ -3,9 +3,12 @@ package dev.codex.schubert.nk.protocol.layout.media;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType;
 import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import dev.codex.schubert.nk.protocol.layout.semantic.VideoCategory;
 import java.util.Map;
 import java.util.Objects;
 
@@ -15,10 +18,10 @@ public record VideoDescriptorResponseData(String mediaLogicalId,
     String fileName,
     long fileByteLength,
     Sha256Hex sha256,
-    String mimeType,
-    String contentDisposition,
+    MediaMimeType mimeType,
+    ContentDisposition contentDisposition,
     String title,
-    String category,
+    VideoCategory category,
     DisplayPath displayPath) implements PayloadData {
   public VideoDescriptorResponseData {
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
@@ -39,10 +42,10 @@ public record VideoDescriptorResponseData(String mediaLogicalId,
         TypedFieldValues.requiredString(fields, "File name"),
         TypedFieldValues.requiredLong(fields, "File byte長"),
         TypedFieldValues.requiredSha256(fields, "SHA-256"),
-        TypedFieldValues.requiredString(fields, "MIME type"),
-        TypedFieldValues.requiredString(fields, "Content disposition"),
+        TypedFieldValues.requiredEnum(fields, "MIME type", MediaMimeType.class),
+        TypedFieldValues.requiredEnum(fields, "Content disposition", ContentDisposition.class),
         TypedFieldValues.requiredString(fields, "Title"),
-        TypedFieldValues.requiredString(fields, "Category"),
+        TypedFieldValues.requiredEnum(fields, "Category", VideoCategory.class),
         TypedFieldValues.requiredDisplayPath(fields, "Display path"));
   }
 
@@ -55,10 +58,10 @@ public record VideoDescriptorResponseData(String mediaLogicalId,
             Map.entry("File name", TypedFieldValues.text(fileName)),
             Map.entry("File byte長", TypedFieldValues.numeric(fileByteLength)),
             Map.entry("SHA-256", TypedFieldValues.sha256(sha256)),
-            Map.entry("MIME type", TypedFieldValues.text(mimeType)),
-            Map.entry("Content disposition", TypedFieldValues.text(contentDisposition)),
+            Map.entry("MIME type", TypedFieldValues.enumValue(mimeType)),
+            Map.entry("Content disposition", TypedFieldValues.enumValue(contentDisposition)),
             Map.entry("Title", TypedFieldValues.text(title)),
-            Map.entry("Category", TypedFieldValues.text(category)),
+            Map.entry("Category", TypedFieldValues.enumValue(category)),
             Map.entry("Display path", TypedFieldValues.displayPath(displayPath))));
   }
 

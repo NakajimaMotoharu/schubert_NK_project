@@ -3,16 +3,21 @@ package dev.codex.schubert.nk.protocol.layout.question;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationErrorCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts NTDRSP01. */
-public record NotificationDetailResponseData(long notificationId,
+public record NotificationDetailResponseData(NotificationId notificationId,
     String receiptId,
-    String notificationType,
-    String internalState,
+    NotificationType notificationType,
+    NotificationState internalState,
     Instant submittedAt,
     Optional<Instant> processingStartedAt,
     Optional<Instant> processingCompletedAt,
@@ -21,10 +26,11 @@ public record NotificationDetailResponseData(long notificationId,
     boolean questionDeleted,
     Optional<String> questionText,
     Optional<String> answerText,
-    Optional<String> errorCode,
+    Optional<NotificationErrorCode> errorCode,
     Optional<String> userFacingError,
-    Optional<String> questionId) implements PayloadData {
+    Optional<QuestionId> questionId) implements PayloadData {
   public NotificationDetailResponseData {
+    Objects.requireNonNull(notificationId, "notificationId");
     Objects.requireNonNull(receiptId, "receiptId");
     Objects.requireNonNull(notificationType, "notificationType");
     Objects.requireNonNull(internalState, "internalState");
@@ -42,10 +48,10 @@ public record NotificationDetailResponseData(long notificationId,
 
   public static NotificationDetailResponseData from(FieldValueSet fields) {
     return new NotificationDetailResponseData(
-        TypedFieldValues.requiredLong(fields, "Notification ID"),
+        TypedFieldValues.requiredId(fields, "Notification ID", NotificationId::new),
         TypedFieldValues.requiredString(fields, "受付ID"),
-        TypedFieldValues.requiredString(fields, "通知区分"),
-        TypedFieldValues.requiredString(fields, "内部状態"),
+        TypedFieldValues.requiredEnum(fields, "通知区分", NotificationType.class),
+        TypedFieldValues.requiredEnum(fields, "内部状態", NotificationState.class),
         TypedFieldValues.requiredInstant(fields, "受付日時"),
         TypedFieldValues.optionalInstant(fields, "処理開始日時"),
         TypedFieldValues.optionalInstant(fields, "処理完了日時"),
@@ -54,19 +60,19 @@ public record NotificationDetailResponseData(long notificationId,
         TypedFieldValues.requiredBoolean(fields, "質問削除済み"),
         TypedFieldValues.optionalString(fields, "質問本文"),
         TypedFieldValues.optionalString(fields, "回答本文"),
-        TypedFieldValues.optionalString(fields, "Error code"),
+        TypedFieldValues.optionalEnum(fields, "Error code", NotificationErrorCode.class),
         TypedFieldValues.optionalString(fields, "利用者向けerror"),
-        TypedFieldValues.optionalString(fields, "Question ID"));
+        TypedFieldValues.optionalId(fields, "Question ID", QuestionId::new));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("Notification ID", TypedFieldValues.numeric(notificationId)),
+            Map.entry("Notification ID", TypedFieldValues.id(notificationId)),
             Map.entry("受付ID", TypedFieldValues.text(receiptId)),
-            Map.entry("通知区分", TypedFieldValues.text(notificationType)),
-            Map.entry("内部状態", TypedFieldValues.text(internalState)),
+            Map.entry("通知区分", TypedFieldValues.enumValue(notificationType)),
+            Map.entry("内部状態", TypedFieldValues.enumValue(internalState)),
             Map.entry("受付日時", TypedFieldValues.instant(submittedAt)),
             Map.entry("処理開始日時", TypedFieldValues.optionalInstantValue(processingStartedAt)),
             Map.entry("処理完了日時", TypedFieldValues.optionalInstantValue(processingCompletedAt)),
@@ -75,9 +81,9 @@ public record NotificationDetailResponseData(long notificationId,
             Map.entry("質問削除済み", TypedFieldValues.flag(questionDeleted)),
             Map.entry("質問本文", TypedFieldValues.optionalStringValue(questionText)),
             Map.entry("回答本文", TypedFieldValues.optionalStringValue(answerText)),
-            Map.entry("Error code", TypedFieldValues.optionalStringValue(errorCode)),
+            Map.entry("Error code", TypedFieldValues.optionalEnumValue(errorCode)),
             Map.entry("利用者向けerror", TypedFieldValues.optionalStringValue(userFacingError)),
-            Map.entry("Question ID", TypedFieldValues.optionalStringValue(questionId))));
+            Map.entry("Question ID", TypedFieldValues.optionalIdValue(questionId))));
   }
 
   @Override

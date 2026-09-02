@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.protocol.layout.media;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType;
 import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import java.util.Map;
@@ -14,8 +16,8 @@ public record MediaDescriptorData(String mediaLogicalId,
     String fileName,
     long fileByteLength,
     Sha256Hex sha256,
-    String mimeType,
-    String contentDisposition) implements PayloadData {
+    MediaMimeType mimeType,
+    ContentDisposition contentDisposition) implements PayloadData {
   public MediaDescriptorData {
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
     Objects.requireNonNull(storageRelativePath, "storageRelativePath");
@@ -32,8 +34,8 @@ public record MediaDescriptorData(String mediaLogicalId,
         TypedFieldValues.requiredString(fields, "File name"),
         TypedFieldValues.requiredLong(fields, "File byte長"),
         TypedFieldValues.requiredSha256(fields, "SHA-256"),
-        TypedFieldValues.requiredString(fields, "MIME type"),
-        TypedFieldValues.requiredString(fields, "Content disposition"));
+        TypedFieldValues.requiredEnum(fields, "MIME type", MediaMimeType.class),
+        TypedFieldValues.requiredEnum(fields, "Content disposition", ContentDisposition.class));
   }
 
   @Override
@@ -45,8 +47,8 @@ public record MediaDescriptorData(String mediaLogicalId,
             Map.entry("File name", TypedFieldValues.text(fileName)),
             Map.entry("File byte長", TypedFieldValues.numeric(fileByteLength)),
             Map.entry("SHA-256", TypedFieldValues.sha256(sha256)),
-            Map.entry("MIME type", TypedFieldValues.text(mimeType)),
-            Map.entry("Content disposition", TypedFieldValues.text(contentDisposition))));
+            Map.entry("MIME type", TypedFieldValues.enumValue(mimeType)),
+            Map.entry("Content disposition", TypedFieldValues.enumValue(contentDisposition))));
   }
 
   @Override

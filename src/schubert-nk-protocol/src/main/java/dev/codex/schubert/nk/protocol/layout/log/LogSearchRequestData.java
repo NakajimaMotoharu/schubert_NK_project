@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.protocol.layout.log;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
@@ -10,14 +12,14 @@ import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts LGSREQ01. */
 public record LogSearchRequestData(Optional<String> keyword,
-    Optional<String> logType,
+    Optional<LogType> logType,
     Optional<String> action,
     Optional<String> path,
-    Optional<String> level,
+    Optional<LogLevel> level,
     Optional<Instant> fromAt,
     Optional<Instant> toAt,
-    long page,
-    long pageSize) implements PayloadData {
+    int page,
+    int pageSize) implements PayloadData {
   public LogSearchRequestData {
     Objects.requireNonNull(keyword, "keyword");
     Objects.requireNonNull(logType, "logType");
@@ -31,14 +33,14 @@ public record LogSearchRequestData(Optional<String> keyword,
   public static LogSearchRequestData from(FieldValueSet fields) {
     return new LogSearchRequestData(
         TypedFieldValues.optionalString(fields, "Keyword"),
-        TypedFieldValues.optionalString(fields, "Log type"),
+        TypedFieldValues.optionalEnum(fields, "Log type", LogType.class),
         TypedFieldValues.optionalString(fields, "Action"),
         TypedFieldValues.optionalString(fields, "Path"),
-        TypedFieldValues.optionalString(fields, "Level"),
+        TypedFieldValues.optionalEnum(fields, "Level", LogLevel.class),
         TypedFieldValues.optionalInstant(fields, "From日時"),
         TypedFieldValues.optionalInstant(fields, "To日時"),
-        TypedFieldValues.requiredLong(fields, "Page"),
-        TypedFieldValues.requiredLong(fields, "Page size"));
+        TypedFieldValues.requiredInt(fields, "Page"),
+        TypedFieldValues.requiredInt(fields, "Page size"));
   }
 
   @Override
@@ -46,10 +48,10 @@ public record LogSearchRequestData(Optional<String> keyword,
     return new FieldValueSet(
         Map.ofEntries(
             Map.entry("Keyword", TypedFieldValues.optionalStringValue(keyword)),
-            Map.entry("Log type", TypedFieldValues.optionalStringValue(logType)),
+            Map.entry("Log type", TypedFieldValues.optionalEnumValue(logType)),
             Map.entry("Action", TypedFieldValues.optionalStringValue(action)),
             Map.entry("Path", TypedFieldValues.optionalStringValue(path)),
-            Map.entry("Level", TypedFieldValues.optionalStringValue(level)),
+            Map.entry("Level", TypedFieldValues.optionalEnumValue(level)),
             Map.entry("From日時", TypedFieldValues.optionalInstantValue(fromAt)),
             Map.entry("To日時", TypedFieldValues.optionalInstantValue(toAt)),
             Map.entry("Page", TypedFieldValues.numeric(page)),

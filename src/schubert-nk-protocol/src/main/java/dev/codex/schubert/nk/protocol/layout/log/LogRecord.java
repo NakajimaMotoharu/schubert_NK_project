@@ -3,6 +3,9 @@ package dev.codex.schubert.nk.protocol.layout.log;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogId;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
@@ -10,10 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts LGSRSP01. */
-public record LogRecord(long logId,
+public record LogRecord(LogId logId,
     Instant occurredAt,
-    String logType,
-    String level,
+    LogType logType,
+    LogLevel level,
     Optional<String> action,
     String message,
     Optional<UUID> httpRequestId,
@@ -26,6 +29,7 @@ public record LogRecord(long logId,
     Optional<String> remoteAddress,
     Optional<String> details) implements PayloadRecord {
   public LogRecord {
+    Objects.requireNonNull(logId, "logId");
     Objects.requireNonNull(occurredAt, "occurredAt");
     Objects.requireNonNull(logType, "logType");
     Objects.requireNonNull(level, "level");
@@ -44,10 +48,10 @@ public record LogRecord(long logId,
 
   public static LogRecord from(FieldValueSet fields) {
     return new LogRecord(
-        TypedFieldValues.requiredLong(fields, "Log ID"),
+        TypedFieldValues.requiredId(fields, "Log ID", LogId::new),
         TypedFieldValues.requiredInstant(fields, "発生日時"),
-        TypedFieldValues.requiredString(fields, "Log type"),
-        TypedFieldValues.requiredString(fields, "Level"),
+        TypedFieldValues.requiredEnum(fields, "Log type", LogType.class),
+        TypedFieldValues.requiredEnum(fields, "Level", LogLevel.class),
         TypedFieldValues.optionalString(fields, "Action"),
         TypedFieldValues.requiredString(fields, "Message"),
         TypedFieldValues.optionalUuid(fields, "HTTP request ID"),
@@ -65,10 +69,10 @@ public record LogRecord(long logId,
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("Log ID", TypedFieldValues.numeric(logId)),
+            Map.entry("Log ID", TypedFieldValues.id(logId)),
             Map.entry("発生日時", TypedFieldValues.instant(occurredAt)),
-            Map.entry("Log type", TypedFieldValues.text(logType)),
-            Map.entry("Level", TypedFieldValues.text(level)),
+            Map.entry("Log type", TypedFieldValues.enumValue(logType)),
+            Map.entry("Level", TypedFieldValues.enumValue(level)),
             Map.entry("Action", TypedFieldValues.optionalStringValue(action)),
             Map.entry("Message", TypedFieldValues.text(message)),
             Map.entry("HTTP request ID", TypedFieldValues.optionalUuidValue(httpRequestId)),

@@ -6,13 +6,13 @@ import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
 /** Generated named wire record. Trace: SS 323; layouts ANLRSP01. */
-public record AnimationListResponseData(long totalCount) implements PayloadData {
+public record AnimationListResponseData(int totalCount) implements PayloadData {
   public AnimationListResponseData {
   }
 
   public static AnimationListResponseData from(FieldValueSet fields) {
     return new AnimationListResponseData(
-        TypedFieldValues.requiredLong(fields, "Total count"));
+        TypedFieldValues.requiredInt(fields, "Total count"));
   }
 
   @Override

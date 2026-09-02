@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts MCSRSP01. */
 public record MusicSectionRecord(String section,
-    long trackCount) implements PayloadRecord {
+    int trackCount) implements PayloadRecord {
   public MusicSectionRecord {
     Objects.requireNonNull(section, "section");
   }
@@ -16,7 +16,7 @@ public record MusicSectionRecord(String section,
   public static MusicSectionRecord from(FieldValueSet fields) {
     return new MusicSectionRecord(
         TypedFieldValues.requiredString(fields, "Section"),
-        TypedFieldValues.requiredLong(fields, "Track件数"));
+        TypedFieldValues.requiredInt(fields, "Track件数"));
   }
 
   @Override

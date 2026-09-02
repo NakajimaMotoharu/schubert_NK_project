@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.protocol.layout.admin;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import java.util.UUID;
 /** Generated named wire record. Trace: SS 323; layouts UCRREQ01. */
 public record UserCreateRequestData(String username,
     String initialPassword,
-    String role,
+    UserRole role,
     boolean enabled,
     UUID operationToken) implements PayloadData {
   public UserCreateRequestData {
@@ -24,7 +25,7 @@ public record UserCreateRequestData(String username,
     return new UserCreateRequestData(
         TypedFieldValues.requiredString(fields, "Username"),
         TypedFieldValues.requiredString(fields, "Initial Password"),
-        TypedFieldValues.requiredString(fields, "Role"),
+        TypedFieldValues.requiredEnum(fields, "Role", UserRole.class),
         TypedFieldValues.requiredBoolean(fields, "Enabled"),
         TypedFieldValues.requiredUuid(fields, "Operation token"));
   }
@@ -35,7 +36,7 @@ public record UserCreateRequestData(String username,
         Map.ofEntries(
             Map.entry("Username", TypedFieldValues.text(username)),
             Map.entry("Initial Password", TypedFieldValues.text(initialPassword)),
-            Map.entry("Role", TypedFieldValues.text(role)),
+            Map.entry("Role", TypedFieldValues.enumValue(role)),
             Map.entry("Enabled", TypedFieldValues.flag(enabled)),
             Map.entry("Operation token", TypedFieldValues.uuid(operationToken))));
   }

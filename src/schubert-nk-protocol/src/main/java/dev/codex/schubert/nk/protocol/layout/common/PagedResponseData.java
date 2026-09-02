@@ -6,10 +6,10 @@ import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
 /** Generated named wire record. Trace: SS 323; layouts SRCRSP01, LGSRSP01, USRRSP01, NTSRSP01, QSSRSP01. */
-public record PagedResponseData(long effectivePage,
-    long pageSize,
+public record PagedResponseData(int effectivePage,
+    int pageSize,
     long totalCount,
-    long totalPages,
+    int totalPages,
     long firstResult,
     long lastResult) implements PayloadData {
   public PagedResponseData {
@@ -17,10 +17,10 @@ public record PagedResponseData(long effectivePage,
 
   public static PagedResponseData from(FieldValueSet fields) {
     return new PagedResponseData(
-        TypedFieldValues.requiredLong(fields, "Effective page"),
-        TypedFieldValues.requiredLong(fields, "Page size"),
+        TypedFieldValues.requiredInt(fields, "Effective page"),
+        TypedFieldValues.requiredInt(fields, "Page size"),
         TypedFieldValues.requiredLong(fields, "Total count"),
-        TypedFieldValues.requiredLong(fields, "Total pages"),
+        TypedFieldValues.requiredInt(fields, "Total pages"),
         TypedFieldValues.requiredLong(fields, "First result"),
         TypedFieldValues.requiredLong(fields, "Last result"));
   }

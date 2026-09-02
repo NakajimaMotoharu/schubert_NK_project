@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.protocol.layout.log;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts WLGEVT01. */
 public record WebLogEventData(Instant occurredAt,
-    String level,
+    LogLevel level,
     Optional<String> action,
     String message,
     UUID httpRequestId,
@@ -21,7 +23,7 @@ public record WebLogEventData(Instant occurredAt,
     String elapsedMs,
     String remoteAddress,
     Optional<String> username,
-    Optional<String> role,
+    Optional<UserRole> role,
     Optional<String> details) implements PayloadData {
   public WebLogEventData {
     Objects.requireNonNull(occurredAt, "occurredAt");
@@ -42,7 +44,7 @@ public record WebLogEventData(Instant occurredAt,
   public static WebLogEventData from(FieldValueSet fields) {
     return new WebLogEventData(
         TypedFieldValues.requiredInstant(fields, "発生日時"),
-        TypedFieldValues.requiredString(fields, "Level"),
+        TypedFieldValues.requiredEnum(fields, "Level", LogLevel.class),
         TypedFieldValues.optionalString(fields, "Action"),
         TypedFieldValues.requiredString(fields, "Message"),
         TypedFieldValues.requiredUuid(fields, "HTTP request ID"),
@@ -52,7 +54,7 @@ public record WebLogEventData(Instant occurredAt,
         TypedFieldValues.requiredString(fields, "Elapsed ms"),
         TypedFieldValues.requiredString(fields, "Remote address"),
         TypedFieldValues.optionalString(fields, "Username"),
-        TypedFieldValues.optionalString(fields, "Role"),
+        TypedFieldValues.optionalEnum(fields, "Role", UserRole.class),
         TypedFieldValues.optionalString(fields, "Details"));
   }
 
@@ -61,7 +63,7 @@ public record WebLogEventData(Instant occurredAt,
     return new FieldValueSet(
         Map.ofEntries(
             Map.entry("発生日時", TypedFieldValues.instant(occurredAt)),
-            Map.entry("Level", TypedFieldValues.text(level)),
+            Map.entry("Level", TypedFieldValues.enumValue(level)),
             Map.entry("Action", TypedFieldValues.optionalStringValue(action)),
             Map.entry("Message", TypedFieldValues.text(message)),
             Map.entry("HTTP request ID", TypedFieldValues.uuid(httpRequestId)),
@@ -71,7 +73,7 @@ public record WebLogEventData(Instant occurredAt,
             Map.entry("Elapsed ms", TypedFieldValues.text(elapsedMs)),
             Map.entry("Remote address", TypedFieldValues.text(remoteAddress)),
             Map.entry("Username", TypedFieldValues.optionalStringValue(username)),
-            Map.entry("Role", TypedFieldValues.optionalStringValue(role)),
+            Map.entry("Role", TypedFieldValues.optionalEnumValue(role)),
             Map.entry("Details", TypedFieldValues.optionalStringValue(details))));
   }
 

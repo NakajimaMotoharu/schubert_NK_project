@@ -6,19 +6,19 @@ import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
 /** Generated named wire record. Trace: SS 323; layouts ANMRSP01. */
-public record AnimationMenuResponseData(long mainSubtrackCount,
-    long ovaCount,
+public record AnimationMenuResponseData(int mainSubtrackCount,
+    int ovaCount,
     boolean openingPresent,
-    long totalFileCount) implements PayloadData {
+    int totalFileCount) implements PayloadData {
   public AnimationMenuResponseData {
   }
 
   public static AnimationMenuResponseData from(FieldValueSet fields) {
     return new AnimationMenuResponseData(
-        TypedFieldValues.requiredLong(fields, "Main/SUBTRACK件数"),
-        TypedFieldValues.requiredLong(fields, "OVA件数"),
+        TypedFieldValues.requiredInt(fields, "Main/SUBTRACK件数"),
+        TypedFieldValues.requiredInt(fields, "OVA件数"),
         TypedFieldValues.requiredBoolean(fields, "Opening有無"),
-        TypedFieldValues.requiredLong(fields, "総file件数"));
+        TypedFieldValues.requiredInt(fields, "総file件数"));
   }
 
   @Override

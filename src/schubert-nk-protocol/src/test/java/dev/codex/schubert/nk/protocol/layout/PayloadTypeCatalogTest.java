@@ -22,6 +22,18 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class PayloadTypeCatalogTest {
+  private static final Set<String> N12_ID_FIELDS =
+      Set.of(
+          "Async job ID",
+          "Audio ID",
+          "Entry ID",
+          "Log ID",
+          "Notification ID",
+          "Question ID",
+          "Script file ID",
+          "Speaker ID",
+          "User ID");
+
   @Test
   void explicitCatalogMatchesIndependentSs323NamedTypeFixture() throws IOException {
     int rowCount = 0;
@@ -234,7 +246,9 @@ class PayloadTypeCatalogTest {
                     new FieldValue.Numeric(
                         field.length() == JstWireTimestamp.WIRE_LENGTH
                             ? 20260902123456789L
-                            : 0);
+                            : field.length() == 12 && N12_ID_FIELDS.contains(field.name())
+                                ? 1
+                                : 0);
                 case BOOLEAN -> new FieldValue.Flag(false);
               }
               : FieldValue.Unset.INSTANCE;
@@ -250,6 +264,22 @@ class PayloadTypeCatalogTest {
     if (field.length() == 36) {
       return "123e4567-e89b-12d3-a456-426614174000";
     }
-    return "A";
+    return switch (field.name()) {
+      case "Content disposition", "Disposition", "Delivery mode" -> "I";
+      case "Pair role" -> "N";
+      case "Role", "New role" -> "USER";
+      case "Level" -> "INFO";
+      case "Log type" -> "ACTION";
+      case "State" -> "ACTIVE";
+      case "内部状態" -> "RECEIVED";
+      case "回答状態" -> "ANSWERED";
+      case "通知区分" -> "ACCEPTED";
+      case "Entry type" -> "dialogue";
+      case "Game code" -> "NUKITASHI1";
+      case "MIME type" -> "audio/ogg";
+      case "Category" ->
+          field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
+      default -> "A";
+    };
   }
 }

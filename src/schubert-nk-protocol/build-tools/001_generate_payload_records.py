@@ -160,9 +160,61 @@ for layout, (data_class, record_class) in layout_types.items():
             class_specs[class_name] = (package, kind, fields, [layout])
 
 
-def semantic_kind(label: str, wire: str, length: int) -> str:
+ID_TYPES = {
+    "Async job ID": "AsyncJobId",
+    "Audio ID": "AudioId",
+    "Entry ID": "EntryId",
+    "Log ID": "LogId",
+    "Notification ID": "NotificationId",
+    "Question ID": "QuestionId",
+    "Script file ID": "ScriptFileId",
+    "Previous file ID": "ScriptFileId",
+    "Next file ID": "ScriptFileId",
+    "Speaker ID": "SpeakerId",
+    "User ID": "UserId",
+}
+
+
+def enum_type(label: str, rule: str) -> str | None:
+    direct = {
+        "Game code": "GameCode",
+        "Content disposition": "ContentDisposition",
+        "Disposition": "ContentDisposition",
+        "Delivery mode": "DeliveryMode",
+        "Pair role": "PairRole",
+        "Voice条件": "VoiceCondition",
+        "Role": "UserRole",
+        "New role": "UserRole",
+        "Level": "LogLevel",
+        "Log type": "LogType",
+        "State": "UserState",
+        "内部状態": "NotificationState",
+        "更新後状態": "NotificationState",
+        "回答状態": "AnswerState",
+        "通知区分": "NotificationType",
+        "Entry type": "EntryType",
+        "MIME type": "MediaMimeType",
+        "Error code": "NotificationErrorCode",
+    }
+    if label in direct:
+        return direct[label]
+    normalized_rule = rule.replace("`", "")
+    if label == "Category" and normalized_rule == "MAIN/OVA":
+        return "AnimationListCategory"
+    if label == "Category" and normalized_rule == "MAIN/SUBTRACK/OVA":
+        return "AnimationCategory"
+    if label == "Category" and normalized_rule == "MAIN/SUBTRACK/OVA/OPENING":
+        return "VideoCategory"
+    return None
+
+
+def semantic_kind(label: str, wire: str, length: int, rule: str) -> str:
     if wire == "N":
-        return "instant" if length == 17 else "long"
+        if length == 17:
+            return "instant"
+        if length == 12 and label in ID_TYPES:
+            return f"id:{ID_TYPES[label]}"
+        return "int" if length <= 8 else "long"
     if wire == "B":
         return "boolean"
     if label == "認証context ID":
@@ -177,11 +229,17 @@ def semantic_kind(label: str, wire: str, length: int) -> str:
         return "uuid"
     if length == 17:
         return "instant"
+    if length == 12 and label in ID_TYPES:
+        return f"id:{ID_TYPES[label]}"
+    semantic_enum = enum_type(label, rule)
+    if semantic_enum is not None:
+        return f"enum:{semantic_enum}"
     return "string"
 
 
 JAVA_TYPES = {
     "string": "String",
+    "int": "int",
     "long": "long",
     "boolean": "boolean",
     "instant": "Instant",
@@ -193,13 +251,27 @@ JAVA_TYPES = {
 }
 
 
+def base_java_type(kind: str) -> str:
+    if kind.startswith(("id:", "enum:")):
+        return kind.split(":", 1)[1]
+    return JAVA_TYPES[kind]
+
+
 def java_type(kind: str, presence: str) -> str:
-    base = JAVA_TYPES[kind]
+    base = base_java_type(kind)
     return f"Optional<{base}>" if presence in {"C", "O"} else base
 
 
 def from_expression(label: str, kind: str, presence: str) -> str:
     escaped = label.replace("\\", "\\\\").replace('"', '\\"')
+    if kind.startswith("id:"):
+        type_name = base_java_type(kind)
+        method = "optionalId" if presence in {"C", "O"} else "requiredId"
+        return f'TypedFieldValues.{method}(fields, "{escaped}", {type_name}::new)'
+    if kind.startswith("enum:"):
+        type_name = base_java_type(kind)
+        method = "optionalEnum" if presence in {"C", "O"} else "requiredEnum"
+        return f'TypedFieldValues.{method}(fields, "{escaped}", {type_name}.class)'
     if presence in {"C", "O"}:
         method = {
             "string": "optionalString",
@@ -213,6 +285,7 @@ def from_expression(label: str, kind: str, presence: str) -> str:
         return f'TypedFieldValues.{method}(fields, "{escaped}")'
     method = {
         "string": "requiredString",
+        "int": "requiredInt",
         "long": "requiredLong",
         "boolean": "requiredBoolean",
         "instant": "requiredInstant",
@@ -225,6 +298,12 @@ def from_expression(label: str, kind: str, presence: str) -> str:
 
 
 def field_expression(name: str, kind: str, presence: str) -> str:
+    if kind.startswith("id:"):
+        method = "optionalIdValue" if presence in {"C", "O"} else "id"
+        return f"TypedFieldValues.{method}({name})"
+    if kind.startswith("enum:"):
+        method = "optionalEnumValue" if presence in {"C", "O"} else "enumValue"
+        return f"TypedFieldValues.{method}({name})"
     if presence in {"C", "O"}:
         method = {
             "string": "optionalStringValue",
@@ -238,6 +317,7 @@ def field_expression(name: str, kind: str, presence: str) -> str:
     else:
         method = {
             "string": "text",
+            "int": "numeric",
             "long": "numeric",
             "boolean": "flag",
             "instant": "instant",
@@ -251,15 +331,18 @@ def field_expression(name: str, kind: str, presence: str) -> str:
 
 for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
     components = [
-        (component_name(label), label, semantic_kind(label, wire, length), presence)
-        for label, wire, presence, length, _rule in fields
+        (component_name(label), label, semantic_kind(label, wire, length, rule), presence)
+        for label, wire, presence, length, rule in fields
     ]
     names = [component[0] for component in components]
     if len(names) != len(set(names)):
         raise SystemExit(f"duplicate Java component in {class_name}: {names}")
     optional_used = any(presence in {"C", "O"} for _, _, _, presence in components)
     component_kinds = {component_kind for _, _, component_kind, _ in components}
-    reference_used = any(component_kind not in {"long", "boolean"} for component_kind in component_kinds)
+    reference_used = any(
+        component_kind not in {"int", "long", "boolean"}
+        for component_kind in component_kinds
+    )
     imports = [
         "import dev.codex.schubert.nk.protocol.layout.FieldValueSet;",
         f"import dev.codex.schubert.nk.protocol.layout.{kind};",
@@ -283,6 +366,14 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;")
     if "displayPath" in component_kinds:
         imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;")
+    for semantic_type in sorted(
+        base_java_type(component_kind)
+        for component_kind in component_kinds
+        if component_kind.startswith(("id:", "enum:"))
+    ):
+        imports.append(
+            f"import dev.codex.schubert.nk.protocol.layout.semantic.{semantic_type};"
+        )
     component_text = ",\n    ".join(
         f"{java_type(component_kind, presence)} {name}"
         for name, _label, component_kind, presence in components
@@ -299,7 +390,7 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
     if components:
         lines.extend([f"  public {class_name} {{"])
         for name, _label, component_kind, _presence in components:
-            if component_kind not in {"long", "boolean"}:
+            if component_kind not in {"int", "long", "boolean"}:
                 lines.append(f'    Objects.requireNonNull({name}, "{name}");')
         lines.append("  }")
     lines.extend(["", f"  public static {class_name} from(FieldValueSet fields) {{"])

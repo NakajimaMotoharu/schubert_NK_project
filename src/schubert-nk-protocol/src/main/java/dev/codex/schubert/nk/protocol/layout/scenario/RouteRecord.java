@@ -7,18 +7,18 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts RTERSP01. */
-public record RouteRecord(long prefix,
+public record RouteRecord(int prefix,
     String routeName,
-    long fileCount) implements PayloadRecord {
+    int fileCount) implements PayloadRecord {
   public RouteRecord {
     Objects.requireNonNull(routeName, "routeName");
   }
 
   public static RouteRecord from(FieldValueSet fields) {
     return new RouteRecord(
-        TypedFieldValues.requiredLong(fields, "Prefix"),
+        TypedFieldValues.requiredInt(fields, "Prefix"),
         TypedFieldValues.requiredString(fields, "Route名"),
-        TypedFieldValues.requiredLong(fields, "File件数"));
+        TypedFieldValues.requiredInt(fields, "File件数"));
   }
 
   @Override

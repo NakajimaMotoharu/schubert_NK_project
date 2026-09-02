@@ -3,21 +3,23 @@ package dev.codex.schubert.nk.protocol.layout.admin;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts ULKREQ01. */
-public record UserUnlockRequestData(long userId,
+public record UserUnlockRequestData(UserId userId,
     long expectedVersion,
     UUID operationToken) implements PayloadData {
   public UserUnlockRequestData {
+    Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(operationToken, "operationToken");
   }
 
   public static UserUnlockRequestData from(FieldValueSet fields) {
     return new UserUnlockRequestData(
-        TypedFieldValues.requiredLong(fields, "User ID"),
+        TypedFieldValues.requiredId(fields, "User ID", UserId::new),
         TypedFieldValues.requiredLong(fields, "Expected version"),
         TypedFieldValues.requiredUuid(fields, "Operation token"));
   }
@@ -26,7 +28,7 @@ public record UserUnlockRequestData(long userId,
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("User ID", TypedFieldValues.numeric(userId)),
+            Map.entry("User ID", TypedFieldValues.id(userId)),
             Map.entry("Expected version", TypedFieldValues.numeric(expectedVersion)),
             Map.entry("Operation token", TypedFieldValues.uuid(operationToken))));
   }

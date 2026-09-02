@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts MCTRSP01. */
 public record MusicCategoryRecord(String category,
-    long trackCount) implements PayloadRecord {
+    int trackCount) implements PayloadRecord {
   public MusicCategoryRecord {
     Objects.requireNonNull(category, "category");
   }
@@ -16,7 +16,7 @@ public record MusicCategoryRecord(String category,
   public static MusicCategoryRecord from(FieldValueSet fields) {
     return new MusicCategoryRecord(
         TypedFieldValues.requiredString(fields, "Category"),
-        TypedFieldValues.requiredLong(fields, "Track件数"));
+        TypedFieldValues.requiredInt(fields, "Track件数"));
   }
 
   @Override

@@ -6,13 +6,13 @@ import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
 /** Generated named wire record. Trace: SS 323; layouts MCTRSP01. */
-public record MusicCategoryResponseData(long totalCount) implements PayloadData {
+public record MusicCategoryResponseData(int totalCount) implements PayloadData {
   public MusicCategoryResponseData {
   }
 
   public static MusicCategoryResponseData from(FieldValueSet fields) {
     return new MusicCategoryResponseData(
-        TypedFieldValues.requiredLong(fields, "Total count"));
+        TypedFieldValues.requiredInt(fields, "Total count"));
   }
 
   @Override

@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,8 +17,8 @@ public record MusicTrackRecord(String trackId,
     DisplayPath displayPath,
     long fileByteLength,
     Optional<String> pairKey,
-    String pairRole,
-    long displayOrder) implements PayloadRecord {
+    PairRole pairRole,
+    int displayOrder) implements PayloadRecord {
   public MusicTrackRecord {
     Objects.requireNonNull(trackId, "trackId");
     Objects.requireNonNull(title, "title");
@@ -37,8 +38,8 @@ public record MusicTrackRecord(String trackId,
         TypedFieldValues.requiredDisplayPath(fields, "Display path"),
         TypedFieldValues.requiredLong(fields, "File byte長"),
         TypedFieldValues.optionalString(fields, "Pair key"),
-        TypedFieldValues.requiredString(fields, "Pair role"),
-        TypedFieldValues.requiredLong(fields, "Display order"));
+        TypedFieldValues.requiredEnum(fields, "Pair role", PairRole.class),
+        TypedFieldValues.requiredInt(fields, "Display order"));
   }
 
   @Override
@@ -52,7 +53,7 @@ public record MusicTrackRecord(String trackId,
             Map.entry("Display path", TypedFieldValues.displayPath(displayPath)),
             Map.entry("File byte長", TypedFieldValues.numeric(fileByteLength)),
             Map.entry("Pair key", TypedFieldValues.optionalStringValue(pairKey)),
-            Map.entry("Pair role", TypedFieldValues.text(pairRole)),
+            Map.entry("Pair role", TypedFieldValues.enumValue(pairRole)),
             Map.entry("Display order", TypedFieldValues.numeric(displayOrder))));
   }
 
