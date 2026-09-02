@@ -1,0 +1,407 @@
+schema	constraint	type	deferrable	definition
+schubert	answers_answered_at_not_null	n	false	NOT NULL answered_at
+schubert	answers_body_not_null	n	false	NOT NULL body
+schubert	answers_created_at_not_null	n	false	NOT NULL created_at
+schubert	answers_id_not_null	n	false	NOT NULL id
+schubert	answers_is_deleted_not_null	n	false	NOT NULL is_deleted
+schubert	answers_provider_type_not_null	n	false	NOT NULL provider_type
+schubert	answers_question_id_not_null	n	false	NOT NULL question_id
+schubert	answers_updated_at_not_null	n	false	NOT NULL updated_at
+schubert	app_logs_action_not_null	n	false	NOT NULL action
+schubert	app_logs_category_not_null	n	false	NOT NULL category
+schubert	app_logs_details_not_null	n	false	NOT NULL details
+schubert	app_logs_id_not_null	n	false	NOT NULL id
+schubert	app_logs_level_not_null	n	false	NOT NULL level
+schubert	app_logs_logged_at_not_null	n	false	NOT NULL logged_at
+schubert	app_logs_message_not_null	n	false	NOT NULL message
+schubert	app_logs_service_not_null	n	false	NOT NULL service
+schubert	app_users_created_at_not_null	n	false	NOT NULL created_at
+schubert	app_users_failed_count_not_null	n	false	NOT NULL failed_count
+schubert	app_users_id_not_null	n	false	NOT NULL id
+schubert	app_users_password_changed_at_not_null	n	false	NOT NULL password_changed_at
+schubert	app_users_password_hash_not_null	n	false	NOT NULL password_hash
+schubert	app_users_role_not_null	n	false	NOT NULL role
+schubert	app_users_status_not_null	n	false	NOT NULL status
+schubert	app_users_updated_at_not_null	n	false	NOT NULL updated_at
+schubert	app_users_username_key_not_null	n	false	NOT NULL username_key
+schubert	app_users_username_not_null	n	false	NOT NULL username
+schubert	app_users_version_not_null	n	false	NOT NULL version
+schubert	async_jobs_correlation_id_not_null	n	false	NOT NULL correlation_id
+schubert	async_jobs_id_not_null	n	false	NOT NULL id
+schubert	async_jobs_message_id_not_null	n	false	NOT NULL message_id
+schubert	async_jobs_owner_user_id_not_null	n	false	NOT NULL owner_user_id
+schubert	async_jobs_question_id_not_null	n	false	NOT NULL question_id
+schubert	async_jobs_received_at_not_null	n	false	NOT NULL received_at
+schubert	async_jobs_retry_count_not_null	n	false	NOT NULL retry_count
+schubert	async_jobs_state_changed_at_not_null	n	false	NOT NULL state_changed_at
+schubert	async_jobs_state_not_null	n	false	NOT NULL state
+schubert	async_jobs_version_not_null	n	false	NOT NULL version
+schubert	audio_files_audio_role_not_null	n	false	NOT NULL audio_role
+schubert	audio_files_basename_not_null	n	false	NOT NULL basename
+schubert	audio_files_byte_size_not_null	n	false	NOT NULL byte_size
+schubert	audio_files_created_at_not_null	n	false	NOT NULL created_at
+schubert	audio_files_display_path_not_null	n	false	NOT NULL display_path
+schubert	audio_files_file_name_not_null	n	false	NOT NULL file_name
+schubert	audio_files_game_id_not_null	n	false	NOT NULL game_id
+schubert	audio_files_id_not_null	n	false	NOT NULL id
+schubert	audio_files_sha256_not_null	n	false	NOT NULL sha256
+schubert	audio_files_storage_relative_path_not_null	n	false	NOT NULL storage_relative_path
+schubert	auth_sessions_client_address_not_null	n	false	NOT NULL client_address
+schubert	auth_sessions_context_ciphertext_not_null	n	false	NOT NULL context_ciphertext
+schubert	auth_sessions_context_hash_not_null	n	false	NOT NULL context_hash
+schubert	auth_sessions_created_message_id_not_null	n	false	NOT NULL created_message_id
+schubert	auth_sessions_expires_at_not_null	n	false	NOT NULL expires_at
+schubert	auth_sessions_id_not_null	n	false	NOT NULL id
+schubert	auth_sessions_issued_at_not_null	n	false	NOT NULL issued_at
+schubert	auth_sessions_key_version_not_null	n	false	NOT NULL key_version
+schubert	auth_sessions_last_accessed_at_not_null	n	false	NOT NULL last_accessed_at
+schubert	auth_sessions_revoked_not_null	n	false	NOT NULL revoked
+schubert	auth_sessions_user_id_not_null	n	false	NOT NULL user_id
+schubert	batch_runs_attempt_not_null	n	false	NOT NULL attempt
+schubert	batch_runs_business_date_not_null	n	false	NOT NULL business_date
+schubert	batch_runs_byte_count_not_null	n	false	NOT NULL byte_count
+schubert	batch_runs_failure_count_not_null	n	false	NOT NULL failure_count
+schubert	batch_runs_id_not_null	n	false	NOT NULL id
+schubert	batch_runs_run_id_not_null	n	false	NOT NULL run_id
+schubert	batch_runs_started_at_not_null	n	false	NOT NULL started_at
+schubert	batch_runs_status_not_null	n	false	NOT NULL status
+schubert	batch_runs_step_not_null	n	false	NOT NULL step
+schubert	batch_runs_success_count_not_null	n	false	NOT NULL success_count
+schubert	batch_runs_target_count_not_null	n	false	NOT NULL target_count
+schubert	ck_answers_body_bytes	c	false	CHECK (((octet_length(body) >= 0) AND (octet_length(body) <= 4096)))
+schubert	ck_answers_delete_triple	c	false	CHECK ((((NOT is_deleted) AND (deleted_at IS NULL) AND (deleted_by IS NULL)) OR (is_deleted AND (deleted_at IS NOT NULL) AND (deleted_by IS NOT NULL))))
+schubert	ck_answers_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_answers_provider_type	c	false	CHECK (((provider_type)::text = ANY ((ARRAY['STUB'::character varying, 'EXTERNAL_AI'::character varying])::text[])))
+schubert	ck_app_logs_action_bytes	c	false	CHECK (((octet_length((action)::text) >= 1) AND (octet_length((action)::text) <= 64)))
+schubert	ck_app_logs_category	c	false	CHECK (((category)::text = ANY ((ARRAY['REQUEST'::character varying, 'ACTION'::character varying, 'SECURITY'::character varying, 'MQ'::character varying, 'SYSTEM'::character varying, 'BATCH'::character varying])::text[])))
+schubert	ck_app_logs_details_bytes	c	false	CHECK ((octet_length((details)::text) <= 1024))
+schubert	ck_app_logs_details_object	c	false	CHECK ((jsonb_typeof(details) = 'object'::text))
+schubert	ck_app_logs_duration_ms	c	false	CHECK (((duration_ms IS NULL) OR ((duration_ms >= 0) AND (duration_ms <= 999999999))))
+schubert	ck_app_logs_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_app_logs_level	c	false	CHECK (((level)::text = ANY ((ARRAY['TRACE'::character varying, 'DEBUG'::character varying, 'INFO'::character varying, 'WARN'::character varying, 'ERROR'::character varying])::text[])))
+schubert	ck_app_logs_message_bytes	c	false	CHECK (((octet_length((message)::text) >= 1) AND (octet_length((message)::text) <= 512)))
+schubert	ck_app_logs_request_uri_bytes	c	false	CHECK (((request_uri IS NULL) OR (octet_length((request_uri)::text) <= 256)))
+schubert	ck_app_logs_security_hold	c	false	CHECK (((security_hold_until IS NULL) OR ((category)::text = 'SECURITY'::text)))
+schubert	ck_app_logs_service	c	false	CHECK (((service)::text = ANY ((ARRAY['WEB'::character varying, 'API'::character varying, 'BATCH'::character varying, 'BROKER'::character varying, 'DB'::character varying, 'CADDY'::character varying])::text[])))
+schubert	ck_app_logs_status_code	c	false	CHECK (((status_code IS NULL) OR ((status_code >= 100) AND (status_code <= 599))))
+schubert	ck_app_users_failed_count	c	false	CHECK (((failed_count >= 0) AND (failed_count <= 5)))
+schubert	ck_app_users_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_app_users_password_hash_bytes	c	false	CHECK (((octet_length(password_hash) >= 1) AND (octet_length(password_hash) <= 255)))
+schubert	ck_app_users_role	c	false	CHECK (((role)::text = ANY ((ARRAY['USER'::character varying, 'ADMIN'::character varying])::text[])))
+schubert	ck_app_users_status	c	false	CHECK (((status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'DISABLED'::character varying])::text[])))
+schubert	ck_app_users_username_bytes	c	false	CHECK (((octet_length(username) >= 1) AND (octet_length(username) <= 64)))
+schubert	ck_app_users_username_key_bytes	c	false	CHECK (((octet_length(username_key) >= 1) AND (octet_length(username_key) <= 64)))
+schubert	ck_app_users_version_n9	c	false	CHECK (((version >= 0) AND (version <= 999999999)))
+schubert	ck_async_jobs_error_pair	c	false	CHECK (((((state)::text = 'ERROR'::text) AND (last_error_code IS NOT NULL) AND (last_error_message IS NOT NULL)) OR (((state)::text <> 'ERROR'::text) AND (last_error_code IS NULL) AND (last_error_message IS NULL))))
+schubert	ck_async_jobs_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_async_jobs_retry_count	c	false	CHECK (((retry_count >= 0) AND (retry_count <= 3)))
+schubert	ck_async_jobs_state	c	false	CHECK (((state)::text = ANY ((ARRAY['RECEIVED'::character varying, 'PROCESSING'::character varying, 'COMPLETED'::character varying, 'ERROR'::character varying, 'CANCELLED'::character varying])::text[])))
+schubert	ck_async_jobs_state_times	c	false	CHECK (((((state)::text = 'RECEIVED'::text) AND (started_at IS NULL) AND (completed_at IS NULL) AND (error_at IS NULL) AND (cancelled_at IS NULL) AND (processing_message_id IS NULL)) OR (((state)::text = 'PROCESSING'::text) AND (started_at IS NOT NULL) AND (completed_at IS NULL) AND (error_at IS NULL) AND (cancelled_at IS NULL) AND (processing_message_id IS NOT NULL)) OR (((state)::text = 'COMPLETED'::text) AND (started_at IS NOT NULL) AND (completed_at IS NOT NULL) AND (error_at IS NULL) AND (cancelled_at IS NULL) AND (processing_message_id IS NOT NULL)) OR (((state)::text = 'ERROR'::text) AND (started_at IS NOT NULL) AND (completed_at IS NULL) AND (error_at IS NOT NULL) AND (cancelled_at IS NULL) AND (processing_message_id IS NOT NULL)) OR (((state)::text = 'CANCELLED'::text) AND (started_at IS NULL) AND (completed_at IS NULL) AND (error_at IS NULL) AND (cancelled_at IS NOT NULL) AND (processing_message_id IS NULL))))
+schubert	ck_async_jobs_time_order	c	false	CHECK (((received_at <= state_changed_at) AND ((started_at IS NULL) OR (received_at <= started_at)) AND ((completed_at IS NULL) OR (started_at <= completed_at)) AND ((error_at IS NULL) OR (started_at <= error_at)) AND ((cancelled_at IS NULL) OR (received_at <= cancelled_at))))
+schubert	ck_async_jobs_version_n9	c	false	CHECK (((version >= 0) AND (version <= 999999999)))
+schubert	ck_audio_files_audio_role_bytes	c	false	CHECK (((octet_length((audio_role)::text) >= 1) AND (octet_length((audio_role)::text) <= 8)))
+schubert	ck_audio_files_basename_bytes	c	false	CHECK (((octet_length(basename) >= 1) AND (octet_length(basename) <= 255)))
+schubert	ck_audio_files_byte_size	c	false	CHECK (((byte_size >= 1) AND (byte_size <= '999999999999'::bigint)))
+schubert	ck_audio_files_display_path_bytes	c	false	CHECK (((octet_length(display_path) >= 1) AND (octet_length(display_path) <= 512)))
+schubert	ck_audio_files_duration_ms	c	false	CHECK (((duration_ms IS NULL) OR ((duration_ms >= 0) AND (duration_ms <= '999999999999'::bigint))))
+schubert	ck_audio_files_file_name_bytes	c	false	CHECK (((octet_length(file_name) >= 1) AND (octet_length(file_name) <= 256)))
+schubert	ck_audio_files_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_audio_files_sha256	c	false	CHECK ((sha256 ~ '^[0-9a-f]{64}$'::text))
+schubert	ck_audio_files_storage_path_bytes	c	false	CHECK (((octet_length(storage_relative_path) >= 1) AND (octet_length(storage_relative_path) <= 512)))
+schubert	ck_audio_files_storage_path_safe	c	false	CHECK ((storage_relative_path !~ '(^/|\\|(^|/)\.\.?(/|$)|//)'::text))
+schubert	ck_auth_sessions_context_ciphertext	c	false	CHECK ((octet_length(context_ciphertext) > 28))
+schubert	ck_auth_sessions_context_hash	c	false	CHECK ((context_hash ~ '^[0-9a-f]{64}$'::text))
+schubert	ck_auth_sessions_key_version	c	false	CHECK (((key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))
+schubert	ck_auth_sessions_revocation	c	false	CHECK ((((NOT revoked) AND (revoked_at IS NULL) AND (revoke_reason IS NULL)) OR (revoked AND (revoked_at IS NOT NULL) AND ((revoke_reason)::text = ANY ((ARRAY['LOGOUT'::character varying, 'DISABLED'::character varying, 'PASSWORD_RESET'::character varying, 'ADMIN'::character varying, 'EXPIRED'::character varying, 'REPLACED'::character varying])::text[])))))
+schubert	ck_auth_sessions_time_order	c	false	CHECK (((issued_at <= last_accessed_at) AND (last_accessed_at <= expires_at)))
+schubert	ck_batch_runs_attempt	c	false	CHECK (((attempt >= 1) AND (attempt <= 99)))
+schubert	ck_batch_runs_counts	c	false	CHECK (((target_count >= 0) AND (success_count >= 0) AND (failure_count >= 0) AND (byte_count >= 0)))
+schubert	ck_batch_runs_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_batch_runs_status	c	false	CHECK (((status)::text = ANY ((ARRAY['RUNNING'::character varying, 'SUCCESS'::character varying, 'WARNING'::character varying, 'FAILED'::character varying, 'SKIPPED'::character varying])::text[])))
+schubert	ck_batch_runs_time_order	c	false	CHECK (((ended_at IS NULL) OR (started_at <= ended_at)))
+schubert	ck_entry_audio_links_display_order	c	false	CHECK (((display_order >= 1) AND (display_order <= 999)))
+schubert	ck_entry_audio_links_entry_type_limit	t	true	TRIGGER DEFERRABLE INITIALLY DEFERRED
+schubert	ck_entry_audio_links_link_type	c	false	CHECK (((link_type)::text = ANY ((ARRAY['voice'::character varying, 'se'::character varying, 'bgm'::character varying, 'other'::character varying])::text[])))
+schubert	ck_games_code	c	false	CHECK (((code)::text = ANY ((ARRAY['NUKITASHI1'::character varying, 'NUKITASHI2'::character varying])::text[])))
+schubert	ck_games_display_order	c	false	CHECK (((display_order >= 1) AND (display_order <= 2)))
+schubert	ck_games_id	c	false	CHECK (((id >= 1) AND (id <= 2)))
+schubert	ck_games_title_bytes	c	false	CHECK (((octet_length(title) >= 1) AND (octet_length(title) <= 256)))
+schubert	ck_login_ip_attempts_failed_count	c	false	CHECK (((failed_count >= 0) AND (failed_count <= 10)))
+schubert	ck_media_assets_byte_size	c	false	CHECK (((byte_size >= 1) AND (byte_size <= '999999999999'::bigint)))
+schubert	ck_media_assets_category_bytes	c	false	CHECK (((octet_length(category) >= 1) AND (octet_length(category) <= 64)))
+schubert	ck_media_assets_display_order	c	false	CHECK (((display_order >= 1) AND (display_order <= 9999)))
+schubert	ck_media_assets_display_path_bytes	c	false	CHECK (((octet_length(display_path) >= 1) AND (octet_length(display_path) <= 512)))
+schubert	ck_media_assets_file_name_bytes	c	false	CHECK (((octet_length(file_name) >= 1) AND (octet_length(file_name) <= 256)))
+schubert	ck_media_assets_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_media_assets_logical_id_bytes	c	false	CHECK (((octet_length((logical_id)::text) >= 1) AND (octet_length((logical_id)::text) <= 64)))
+schubert	ck_media_assets_media_type	c	false	CHECK (((media_type)::text = ANY ((ARRAY['VIDEO'::character varying, 'MUSIC'::character varying])::text[])))
+schubert	ck_media_assets_mime_type	c	false	CHECK (((mime_type)::text = ANY ((ARRAY['video/mp4'::character varying, 'audio/mp4'::character varying, 'audio/mpeg'::character varying, 'audio/ogg'::character varying, 'audio/wav'::character varying, 'audio/flac'::character varying])::text[])))
+schubert	ck_media_assets_pair	c	false	CHECK (((((media_type)::text = 'VIDEO'::text) AND (pair_key IS NULL) AND (pair_role IS NULL)) OR (((media_type)::text = 'MUSIC'::text) AND (((pair_role = ANY (ARRAY['M'::bpchar, 'I'::bpchar])) AND ((octet_length(pair_key) >= 1) AND (octet_length(pair_key) <= 256))) OR ((pair_role = 'N'::bpchar) AND (pair_key IS NULL))))))
+schubert	ck_media_assets_section_bytes	c	false	CHECK (((section IS NULL) OR (octet_length(section) <= 128)))
+schubert	ck_media_assets_sha256	c	false	CHECK ((sha256 ~ '^[0-9a-f]{64}$'::text))
+schubert	ck_media_assets_storage_path_bytes	c	false	CHECK (((octet_length(storage_relative_path) >= 1) AND (octet_length(storage_relative_path) <= 512)))
+schubert	ck_media_assets_storage_path_safe	c	false	CHECK ((storage_relative_path !~ '(^/|\\|(^|/)\.\.?(/|$)|//)'::text))
+schubert	ck_media_assets_title_bytes	c	false	CHECK (((octet_length(title) >= 1) AND (octet_length(title) <= 256)))
+schubert	ck_mq_outbox_attempt_count	c	false	CHECK (((attempt_count >= 0) AND (attempt_count <= 100)))
+schubert	ck_mq_outbox_destination	c	false	CHECK (((destination)::text = ANY ((ARRAY['nk.async.work'::character varying, 'nk.dead.letter'::character varying])::text[])))
+schubert	ck_mq_outbox_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_mq_outbox_layout_id	c	false	CHECK ((layout_id ~ '^[A-Z0-9]{8}$'::text))
+schubert	ck_mq_outbox_layout_version	c	false	CHECK ((layout_version ~ '^[0-9]{3}$'::text))
+schubert	ck_mq_outbox_lease_pair	c	false	CHECK ((((lease_owner IS NULL) AND (lease_until IS NULL)) OR ((lease_owner IS NOT NULL) AND (lease_until IS NOT NULL))))
+schubert	ck_mq_outbox_sent_at	c	false	CHECK ((((status)::text = 'SENT'::text) = (sent_at IS NOT NULL)))
+schubert	ck_mq_outbox_status	c	false	CHECK (((status)::text = ANY ((ARRAY['PENDING'::character varying, 'SENT'::character varying, 'ERROR'::character varying])::text[])))
+schubert	ck_notifications_error	c	false	CHECK (((((state)::text = 'ERROR'::text) AND ((error_code)::text = ANY ((ARRAY['PROCESS_FAILED'::character varying, 'SYSTEM_UNAVAIL'::character varying, 'RESOURCE_LIMIT'::character varying, 'DATA_INTEGRITY'::character varying, 'PROTOCOL_ERROR'::character varying])::text[])) AND (error_message IS NOT NULL)) OR (((state)::text <> 'ERROR'::text) AND (error_code IS NULL) AND (error_message IS NULL))))
+schubert	ck_notifications_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_notifications_notification_type	c	false	CHECK (((notification_type)::text = ANY ((ARRAY['ACCEPTED'::character varying, 'COMPLETED'::character varying, 'ERROR'::character varying])::text[])))
+schubert	ck_notifications_state	c	false	CHECK (((state)::text = ANY ((ARRAY['ACCEPTED'::character varying, 'PROCESSING'::character varying, 'COMPLETED'::character varying, 'ERROR'::character varying, 'CANCELLED'::character varying])::text[])))
+schubert	ck_notifications_time_order	c	false	CHECK ((accepted_at <= state_changed_at))
+schubert	ck_questions_body_bytes	c	false	CHECK (((octet_length(body) >= 1) AND (octet_length(body) <= 4096)))
+schubert	ck_questions_delete_triple	c	false	CHECK ((((NOT is_deleted) AND (deleted_at IS NULL) AND (deleted_by IS NULL)) OR (is_deleted AND (deleted_at IS NOT NULL) AND (deleted_by IS NOT NULL))))
+schubert	ck_questions_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_questions_receipt_id	c	false	CHECK ((receipt_id ~ '^[0-9A-HJKMNP-TV-Z]{26}$'::text))
+schubert	ck_questions_version_n9	c	false	CHECK (((version >= 0) AND (version <= 999999999)))
+schubert	ck_request_inbox_fingerprint	c	false	CHECK ((request_fingerprint_hmac ~ '^[0-9a-f]{64}$'::text))
+schubert	ck_request_inbox_fingerprint_key_version	c	false	CHECK (((fingerprint_key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))
+schubert	ck_request_inbox_operation_token	c	false	CHECK ((((request_layout_id = ANY (ARRAY['UCRREQ01'::bpchar, 'USTREQ01'::bpchar, 'URLREQ01'::bpchar, 'UPWREQ01'::bpchar, 'ULKREQ01'::bpchar, 'QSBREQ01'::bpchar, 'NTCREQ01'::bpchar, 'QDLREQ01'::bpchar])) AND (operation_token IS NOT NULL)) OR ((request_layout_id <> ALL (ARRAY['UCRREQ01'::bpchar, 'USTREQ01'::bpchar, 'URLREQ01'::bpchar, 'UPWREQ01'::bpchar, 'ULKREQ01'::bpchar, 'QSBREQ01'::bpchar, 'NTCREQ01'::bpchar, 'QDLREQ01'::bpchar])) AND (operation_token IS NULL))))
+schubert	ck_request_inbox_owner	c	false	CHECK ((((request_layout_id = 'LGNREQ01'::bpchar) AND (owner_user_id IS NULL)) OR ((request_layout_id <> 'LGNREQ01'::bpchar) AND (owner_user_id IS NOT NULL))))
+schubert	ck_request_inbox_processing_state	c	false	CHECK (((processing_state)::text = ANY ((ARRAY['PROCESSING'::character varying, 'COMPLETED'::character varying, 'ERROR'::character varying])::text[])))
+schubert	ck_request_inbox_request_layout_id	c	false	CHECK ((request_layout_id ~ '^[A-Z0-9]{8}$'::text))
+schubert	ck_request_inbox_request_version	c	false	CHECK ((request_version ~ '^[0-9]{3}$'::text))
+schubert	ck_request_inbox_response_layout_id	c	false	CHECK (((response_layout_id IS NULL) OR (response_layout_id ~ '^[A-Z0-9]{8}$'::text)))
+schubert	ck_request_inbox_response_pair	c	false	CHECK ((((response_layout_id IS NULL) AND (response_version IS NULL)) OR ((response_layout_id IS NOT NULL) AND (response_version IS NOT NULL))))
+schubert	ck_request_inbox_response_snapshot_pair	c	false	CHECK ((((response_body_encrypted IS NULL) AND (response_key_version IS NULL)) OR ((response_body_encrypted IS NOT NULL) AND (octet_length(response_body_encrypted) > 28) AND ((response_key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))))
+schubert	ck_request_inbox_response_version	c	false	CHECK (((response_version IS NULL) OR (response_version ~ '^[0-9]{3}$'::text)))
+schubert	ck_request_inbox_result_reference	c	false	CHECK ((((result_ref_type IS NULL) AND (result_ref_id IS NULL) AND (result_ref_uuid IS NULL)) OR (((result_ref_type)::text = 'NONE'::text) AND (result_ref_id IS NULL) AND (result_ref_uuid IS NULL)) OR (((result_ref_type)::text = 'AUTH_SESSION'::text) AND (result_ref_id IS NULL) AND (result_ref_uuid IS NOT NULL)) OR (((result_ref_type)::text = ANY ((ARRAY['USER'::character varying, 'QUESTION'::character varying, 'JOB'::character varying, 'SCENARIO_FILE'::character varying])::text[])) AND ((result_ref_id >= 1) AND (result_ref_id <= '999999999999'::bigint)) AND (result_ref_uuid IS NULL))))
+schubert	ck_request_inbox_state_fields	c	false	CHECK (((((processing_state)::text = 'PROCESSING'::text) AND (completed_at IS NULL) AND (result_ref_type IS NULL) AND (result_ref_id IS NULL) AND (result_ref_uuid IS NULL) AND (response_layout_id IS NULL) AND (response_version IS NULL) AND (response_body_encrypted IS NULL) AND (response_key_version IS NULL)) OR (((processing_state)::text = ANY ((ARRAY['COMPLETED'::character varying, 'ERROR'::character varying])::text[])) AND (completed_at IS NOT NULL) AND (result_ref_type IS NOT NULL) AND (response_layout_id IS NOT NULL) AND (response_version IS NOT NULL))))
+schubert	ck_request_inbox_time_order	c	false	CHECK (((created_at < expires_at) AND ((completed_at IS NULL) OR (created_at <= completed_at))))
+schubert	ck_script_entries_body_bytes	c	false	CHECK (((octet_length(body) >= 1) AND (octet_length(body) <= 4096)))
+schubert	ck_script_entries_display_order_n12	c	false	CHECK (((display_order >= 1) AND (display_order <= '999999999999'::bigint)))
+schubert	ck_script_entries_entry_index	c	false	CHECK ((entry_index >= 0))
+schubert	ck_script_entries_entry_type	c	false	CHECK (((entry_type)::text = ANY ((ARRAY['dialogue'::character varying, 'narration'::character varying])::text[])))
+schubert	ck_script_entries_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_script_entries_line_number	c	false	CHECK (((line_number IS NULL) OR (line_number >= 1)))
+schubert	ck_script_entries_speaker_by_type	c	false	CHECK (((((entry_type)::text = 'dialogue'::text) AND (speaker_id IS NOT NULL)) OR (((entry_type)::text = 'narration'::text) AND (speaker_id IS NULL))))
+schubert	ck_script_entries_speaker_label_bytes	c	false	CHECK (((speaker_label IS NULL) OR (octet_length(speaker_label) <= 128)))
+schubert	ck_script_files_byte_size	c	false	CHECK (((byte_size >= 0) AND (byte_size <= '999999999999'::bigint)))
+schubert	ck_script_files_chapter_title_bytes	c	false	CHECK (((chapter_title IS NULL) OR (octet_length(chapter_title) <= 256)))
+schubert	ck_script_files_display_order_n12	c	false	CHECK (((display_order >= 1) AND (display_order <= '999999999999'::bigint)))
+schubert	ck_script_files_display_path_bytes	c	false	CHECK (((octet_length(display_path) >= 1) AND (octet_length(display_path) <= 512)))
+schubert	ck_script_files_file_name_bytes	c	false	CHECK (((octet_length(file_name) >= 1) AND (octet_length(file_name) <= 256)))
+schubert	ck_script_files_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_script_files_sha256	c	false	CHECK ((sha256 ~ '^[0-9a-f]{64}$'::text))
+schubert	ck_script_files_storage_path_bytes	c	false	CHECK (((octet_length(storage_relative_path) >= 1) AND (octet_length(storage_relative_path) <= 512)))
+schubert	ck_script_files_storage_path_safe	c	false	CHECK ((storage_relative_path !~ '(^/|\\|(^|/)\.\.?(/|$)|//)'::text))
+schubert	ck_speakers_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert	ck_speakers_name_bytes	c	false	CHECK (((octet_length(name) >= 1) AND (octet_length(name) <= 128)))
+schubert	ck_speakers_normalized_name_bytes	c	false	CHECK (((octet_length(normalized_name) >= 1) AND (octet_length(normalized_name) <= 128)))
+schubert	entry_audio_links_audio_file_id_not_null	n	false	NOT NULL audio_file_id
+schubert	entry_audio_links_created_at_not_null	n	false	NOT NULL created_at
+schubert	entry_audio_links_display_order_not_null	n	false	NOT NULL display_order
+schubert	entry_audio_links_entry_id_not_null	n	false	NOT NULL entry_id
+schubert	entry_audio_links_game_id_not_null	n	false	NOT NULL game_id
+schubert	entry_audio_links_link_type_not_null	n	false	NOT NULL link_type
+schubert	fk_answers_app_users_deleted_by	f	false	FOREIGN KEY (deleted_by) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_answers_questions_question_id	f	false	FOREIGN KEY (question_id) REFERENCES schubert.questions(id) ON DELETE CASCADE
+schubert	fk_app_logs_app_users_actor_user_id	f	false	FOREIGN KEY (actor_user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_app_users_app_users_created_by	f	false	FOREIGN KEY (created_by) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_app_users_app_users_updated_by	f	false	FOREIGN KEY (updated_by) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_async_jobs_app_users_owner_user_id	f	false	FOREIGN KEY (owner_user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_async_jobs_questions_question_id	f	false	FOREIGN KEY (question_id) REFERENCES schubert.questions(id) ON DELETE CASCADE
+schubert	fk_audio_files_games_game_id	f	false	FOREIGN KEY (game_id) REFERENCES schubert.games(id) ON DELETE RESTRICT
+schubert	fk_auth_sessions_app_users_user_id	f	false	FOREIGN KEY (user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_entry_audio_links_audio_files_audio_game	f	false	FOREIGN KEY (audio_file_id, game_id) REFERENCES schubert.audio_files(id, game_id) ON DELETE RESTRICT
+schubert	fk_entry_audio_links_script_entries_entry_game	f	false	FOREIGN KEY (entry_id, game_id) REFERENCES schubert.script_entries(id, game_id) ON DELETE CASCADE
+schubert	fk_media_assets_media_assets_parent_logical_id	f	false	FOREIGN KEY (parent_logical_id) REFERENCES schubert.media_assets(logical_id) ON DELETE RESTRICT
+schubert	fk_notifications_app_users_owner_user_id	f	false	FOREIGN KEY (owner_user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_notifications_async_jobs_job_id	f	false	FOREIGN KEY (job_id) REFERENCES schubert.async_jobs(id) ON DELETE RESTRICT
+schubert	fk_notifications_questions_question_id	f	false	FOREIGN KEY (question_id) REFERENCES schubert.questions(id) ON DELETE RESTRICT
+schubert	fk_questions_app_users_deleted_by	f	false	FOREIGN KEY (deleted_by) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_questions_app_users_owner_user_id	f	false	FOREIGN KEY (owner_user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_request_inbox_app_users_owner_user_id	f	false	FOREIGN KEY (owner_user_id) REFERENCES schubert.app_users(id) ON DELETE RESTRICT
+schubert	fk_script_entries_games_game_id	f	false	FOREIGN KEY (game_id) REFERENCES schubert.games(id) ON DELETE RESTRICT
+schubert	fk_script_entries_script_files_file_game	f	false	FOREIGN KEY (script_file_id, game_id) REFERENCES schubert.script_files(id, game_id) ON DELETE CASCADE
+schubert	fk_script_entries_speakers_speaker_game	f	false	FOREIGN KEY (speaker_id, game_id) REFERENCES schubert.speakers(id, game_id) ON DELETE RESTRICT
+schubert	fk_script_files_games_game_id	f	false	FOREIGN KEY (game_id) REFERENCES schubert.games(id) ON DELETE RESTRICT
+schubert	fk_speakers_games_game_id	f	false	FOREIGN KEY (game_id) REFERENCES schubert.games(id) ON DELETE RESTRICT
+schubert	games_code_not_null	n	false	NOT NULL code
+schubert	games_created_at_not_null	n	false	NOT NULL created_at
+schubert	games_display_order_not_null	n	false	NOT NULL display_order
+schubert	games_id_not_null	n	false	NOT NULL id
+schubert	games_title_not_null	n	false	NOT NULL title
+schubert	login_ip_attempts_client_address_not_null	n	false	NOT NULL client_address
+schubert	login_ip_attempts_failed_count_not_null	n	false	NOT NULL failed_count
+schubert	login_ip_attempts_updated_at_not_null	n	false	NOT NULL updated_at
+schubert	login_ip_attempts_window_started_at_not_null	n	false	NOT NULL window_started_at
+schubert	media_assets_byte_size_not_null	n	false	NOT NULL byte_size
+schubert	media_assets_category_not_null	n	false	NOT NULL category
+schubert	media_assets_created_at_not_null	n	false	NOT NULL created_at
+schubert	media_assets_display_order_not_null	n	false	NOT NULL display_order
+schubert	media_assets_display_path_not_null	n	false	NOT NULL display_path
+schubert	media_assets_file_name_not_null	n	false	NOT NULL file_name
+schubert	media_assets_id_not_null	n	false	NOT NULL id
+schubert	media_assets_logical_id_not_null	n	false	NOT NULL logical_id
+schubert	media_assets_media_type_not_null	n	false	NOT NULL media_type
+schubert	media_assets_mime_type_not_null	n	false	NOT NULL mime_type
+schubert	media_assets_sha256_not_null	n	false	NOT NULL sha256
+schubert	media_assets_storage_relative_path_not_null	n	false	NOT NULL storage_relative_path
+schubert	media_assets_title_not_null	n	false	NOT NULL title
+schubert	mq_outbox_attempt_count_not_null	n	false	NOT NULL attempt_count
+schubert	mq_outbox_body_not_null	n	false	NOT NULL body
+schubert	mq_outbox_correlation_id_not_null	n	false	NOT NULL correlation_id
+schubert	mq_outbox_created_at_not_null	n	false	NOT NULL created_at
+schubert	mq_outbox_destination_not_null	n	false	NOT NULL destination
+schubert	mq_outbox_id_not_null	n	false	NOT NULL id
+schubert	mq_outbox_layout_id_not_null	n	false	NOT NULL layout_id
+schubert	mq_outbox_layout_version_not_null	n	false	NOT NULL layout_version
+schubert	mq_outbox_message_id_not_null	n	false	NOT NULL message_id
+schubert	mq_outbox_next_attempt_at_not_null	n	false	NOT NULL next_attempt_at
+schubert	mq_outbox_status_not_null	n	false	NOT NULL status
+schubert	notifications_accepted_at_not_null	n	false	NOT NULL accepted_at
+schubert	notifications_created_at_not_null	n	false	NOT NULL created_at
+schubert	notifications_id_not_null	n	false	NOT NULL id
+schubert	notifications_job_id_not_null	n	false	NOT NULL job_id
+schubert	notifications_notification_type_not_null	n	false	NOT NULL notification_type
+schubert	notifications_owner_user_id_not_null	n	false	NOT NULL owner_user_id
+schubert	notifications_question_id_not_null	n	false	NOT NULL question_id
+schubert	notifications_state_changed_at_not_null	n	false	NOT NULL state_changed_at
+schubert	notifications_state_not_null	n	false	NOT NULL state
+schubert	notifications_updated_at_not_null	n	false	NOT NULL updated_at
+schubert	pk_answers	p	false	PRIMARY KEY (id)
+schubert	pk_app_logs	p	false	PRIMARY KEY (id)
+schubert	pk_app_users	p	false	PRIMARY KEY (id)
+schubert	pk_async_jobs	p	false	PRIMARY KEY (id)
+schubert	pk_audio_files	p	false	PRIMARY KEY (id)
+schubert	pk_auth_sessions	p	false	PRIMARY KEY (id)
+schubert	pk_batch_runs	p	false	PRIMARY KEY (id)
+schubert	pk_entry_audio_links	p	false	PRIMARY KEY (entry_id, audio_file_id, link_type)
+schubert	pk_games	p	false	PRIMARY KEY (id)
+schubert	pk_login_ip_attempts	p	false	PRIMARY KEY (client_address)
+schubert	pk_media_assets	p	false	PRIMARY KEY (id)
+schubert	pk_mq_outbox	p	false	PRIMARY KEY (id)
+schubert	pk_notifications	p	false	PRIMARY KEY (id)
+schubert	pk_questions	p	false	PRIMARY KEY (id)
+schubert	pk_request_inbox	p	false	PRIMARY KEY (message_id)
+schubert	pk_script_entries	p	false	PRIMARY KEY (id)
+schubert	pk_script_files	p	false	PRIMARY KEY (id)
+schubert	pk_speakers	p	false	PRIMARY KEY (id)
+schubert	questions_body_not_null	n	false	NOT NULL body
+schubert	questions_id_not_null	n	false	NOT NULL id
+schubert	questions_is_deleted_not_null	n	false	NOT NULL is_deleted
+schubert	questions_operation_token_not_null	n	false	NOT NULL operation_token
+schubert	questions_owner_user_id_not_null	n	false	NOT NULL owner_user_id
+schubert	questions_receipt_id_not_null	n	false	NOT NULL receipt_id
+schubert	questions_submitted_at_not_null	n	false	NOT NULL submitted_at
+schubert	questions_version_not_null	n	false	NOT NULL version
+schubert	request_inbox_correlation_id_not_null	n	false	NOT NULL correlation_id
+schubert	request_inbox_created_at_not_null	n	false	NOT NULL created_at
+schubert	request_inbox_expires_at_not_null	n	false	NOT NULL expires_at
+schubert	request_inbox_fingerprint_key_version_not_null	n	false	NOT NULL fingerprint_key_version
+schubert	request_inbox_message_id_not_null	n	false	NOT NULL message_id
+schubert	request_inbox_processing_state_not_null	n	false	NOT NULL processing_state
+schubert	request_inbox_request_fingerprint_hmac_not_null	n	false	NOT NULL request_fingerprint_hmac
+schubert	request_inbox_request_layout_id_not_null	n	false	NOT NULL request_layout_id
+schubert	request_inbox_request_version_not_null	n	false	NOT NULL request_version
+schubert	script_entries_body_not_null	n	false	NOT NULL body
+schubert	script_entries_created_at_not_null	n	false	NOT NULL created_at
+schubert	script_entries_display_order_not_null	n	false	NOT NULL display_order
+schubert	script_entries_entry_index_not_null	n	false	NOT NULL entry_index
+schubert	script_entries_entry_type_not_null	n	false	NOT NULL entry_type
+schubert	script_entries_game_id_not_null	n	false	NOT NULL game_id
+schubert	script_entries_id_not_null	n	false	NOT NULL id
+schubert	script_entries_raw_block_not_null	n	false	NOT NULL raw_block
+schubert	script_entries_script_file_id_not_null	n	false	NOT NULL script_file_id
+schubert	script_files_byte_size_not_null	n	false	NOT NULL byte_size
+schubert	script_files_created_at_not_null	n	false	NOT NULL created_at
+schubert	script_files_display_order_not_null	n	false	NOT NULL display_order
+schubert	script_files_display_path_not_null	n	false	NOT NULL display_path
+schubert	script_files_file_name_not_null	n	false	NOT NULL file_name
+schubert	script_files_game_id_not_null	n	false	NOT NULL game_id
+schubert	script_files_id_not_null	n	false	NOT NULL id
+schubert	script_files_sha256_not_null	n	false	NOT NULL sha256
+schubert	script_files_storage_relative_path_not_null	n	false	NOT NULL storage_relative_path
+schubert	speakers_created_at_not_null	n	false	NOT NULL created_at
+schubert	speakers_game_id_not_null	n	false	NOT NULL game_id
+schubert	speakers_id_not_null	n	false	NOT NULL id
+schubert	speakers_is_protagonist_not_null	n	false	NOT NULL is_protagonist
+schubert	speakers_name_not_null	n	false	NOT NULL name
+schubert	speakers_normalized_name_not_null	n	false	NOT NULL normalized_name
+schubert	uq_answers_question_id	u	false	UNIQUE (question_id)
+schubert	uq_app_logs_source_message_id	u	false	UNIQUE (source_message_id)
+schubert	uq_app_users_username_key	u	false	UNIQUE (username_key)
+schubert	uq_async_jobs_message_id	u	false	UNIQUE (message_id)
+schubert	uq_async_jobs_processing_message_id	u	false	UNIQUE (processing_message_id)
+schubert	uq_async_jobs_question_id	u	false	UNIQUE (question_id)
+schubert	uq_audio_files_game_storage_path	u	false	UNIQUE (game_id, storage_relative_path)
+schubert	uq_audio_files_id_game	u	false	UNIQUE (id, game_id)
+schubert	uq_auth_sessions_context_hash	u	false	UNIQUE (context_hash)
+schubert	uq_auth_sessions_created_message_id	u	false	UNIQUE (created_message_id)
+schubert	uq_batch_runs_business_step_attempt	u	false	UNIQUE (business_date, step, attempt)
+schubert	uq_entry_audio_links_entry_type_order	u	false	UNIQUE (entry_id, link_type, display_order)
+schubert	uq_games_code	u	false	UNIQUE (code)
+schubert	uq_games_display_order	u	false	UNIQUE (display_order)
+schubert	uq_media_assets_logical_id	u	false	UNIQUE (logical_id)
+schubert	uq_media_assets_type_storage_path	u	false	UNIQUE (media_type, storage_relative_path)
+schubert	uq_mq_outbox_message_id	u	false	UNIQUE (message_id)
+schubert	uq_notifications_job_id	u	false	UNIQUE (job_id)
+schubert	uq_questions_owner_operation	u	false	UNIQUE (owner_user_id, operation_token)
+schubert	uq_questions_receipt_id	u	false	UNIQUE (receipt_id)
+schubert	uq_script_entries_display_order	u	false	UNIQUE (display_order)
+schubert	uq_script_entries_file_entry_index	u	false	UNIQUE (script_file_id, entry_index)
+schubert	uq_script_entries_id_game	u	false	UNIQUE (id, game_id)
+schubert	uq_script_files_game_display_order	u	false	UNIQUE (game_id, display_order)
+schubert	uq_script_files_game_storage_path	u	false	UNIQUE (game_id, storage_relative_path)
+schubert	uq_script_files_id_game	u	false	UNIQUE (id, game_id)
+schubert	uq_speakers_game_normalized_name	u	false	UNIQUE (game_id, normalized_name)
+schubert	uq_speakers_id_game	u	false	UNIQUE (id, game_id)
+schubert_web_session	ck_pending_context_revocations_attempt_count	c	false	CHECK (((attempt_count >= 0) AND (attempt_count <= 100)))
+schubert_web_session	ck_pending_context_revocations_ciphertext	c	false	CHECK ((octet_length(context_ciphertext) > 28))
+schubert_web_session	ck_pending_context_revocations_key_version	c	false	CHECK (((key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))
+schubert_web_session	ck_pending_context_revocations_lease_pair	c	false	CHECK ((((lease_owner IS NULL) AND (lease_until IS NULL)) OR ((lease_owner IS NOT NULL) AND (lease_until IS NOT NULL))))
+schubert_web_session	ck_pending_context_revocations_time_order	c	false	CHECK (((requested_at <= next_attempt_at) AND (requested_at < expires_at)))
+schubert_web_session	ck_web_http_sessions_attributes_ciphertext	c	false	CHECK ((octet_length(attributes_ciphertext) > 28))
+schubert_web_session	ck_web_http_sessions_key_version	c	false	CHECK (((key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))
+schubert_web_session	ck_web_http_sessions_max_inactive	c	false	CHECK (((max_inactive_seconds >= 1) AND (max_inactive_seconds <= 28800)))
+schubert_web_session	ck_web_http_sessions_session_id_hash	c	false	CHECK ((session_id_hash ~ '^[0-9a-f]{64}$'::text))
+schubert_web_session	ck_web_http_sessions_time_order	c	false	CHECK (((created_at <= last_accessed_at) AND (last_accessed_at <= expires_at)))
+schubert_web_session	ck_web_http_sessions_version_n9	c	false	CHECK (((version >= 0) AND (version <= 999999999)))
+schubert_web_session	ck_web_log_outbox_attempt_count	c	false	CHECK (((attempt_count >= 0) AND (attempt_count <= 100)))
+schubert_web_session	ck_web_log_outbox_id_n12	c	false	CHECK (((id >= 1) AND (id <= '999999999999'::bigint)))
+schubert_web_session	ck_web_log_outbox_key_version	c	false	CHECK (((key_version)::text ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$'::text))
+schubert_web_session	ck_web_log_outbox_layout_id	c	false	CHECK ((layout_id = 'WLGEVT01'::bpchar))
+schubert_web_session	ck_web_log_outbox_layout_version	c	false	CHECK ((layout_version ~ '^[0-9]{3}$'::text))
+schubert_web_session	ck_web_log_outbox_lease_pair	c	false	CHECK ((((lease_owner IS NULL) AND (lease_until IS NULL)) OR ((lease_owner IS NOT NULL) AND (lease_until IS NOT NULL))))
+schubert_web_session	ck_web_log_outbox_payload_ciphertext	c	false	CHECK ((octet_length(payload_ciphertext) > 28))
+schubert_web_session	ck_web_log_outbox_sent_at	c	false	CHECK ((((status)::text = 'SENT'::text) = (sent_at IS NOT NULL)))
+schubert_web_session	ck_web_log_outbox_status	c	false	CHECK (((status)::text = ANY ((ARRAY['PENDING'::character varying, 'SENT'::character varying, 'ERROR'::character varying])::text[])))
+schubert_web_session	pending_context_revocations_attempt_count_not_null	n	false	NOT NULL attempt_count
+schubert_web_session	pending_context_revocations_context_ciphertext_not_null	n	false	NOT NULL context_ciphertext
+schubert_web_session	pending_context_revocations_expires_at_not_null	n	false	NOT NULL expires_at
+schubert_web_session	pending_context_revocations_id_not_null	n	false	NOT NULL id
+schubert_web_session	pending_context_revocations_key_version_not_null	n	false	NOT NULL key_version
+schubert_web_session	pending_context_revocations_next_attempt_at_not_null	n	false	NOT NULL next_attempt_at
+schubert_web_session	pending_context_revocations_requested_at_not_null	n	false	NOT NULL requested_at
+schubert_web_session	pk_pending_context_revocations	p	false	PRIMARY KEY (id)
+schubert_web_session	pk_web_http_sessions	p	false	PRIMARY KEY (id)
+schubert_web_session	pk_web_log_outbox	p	false	PRIMARY KEY (id)
+schubert_web_session	uq_web_http_sessions_session_id_hash	u	false	UNIQUE (session_id_hash)
+schubert_web_session	uq_web_log_outbox_message_id	u	false	UNIQUE (message_id)
+schubert_web_session	web_http_sessions_attributes_ciphertext_not_null	n	false	NOT NULL attributes_ciphertext
+schubert_web_session	web_http_sessions_created_at_not_null	n	false	NOT NULL created_at
+schubert_web_session	web_http_sessions_expires_at_not_null	n	false	NOT NULL expires_at
+schubert_web_session	web_http_sessions_id_not_null	n	false	NOT NULL id
+schubert_web_session	web_http_sessions_key_version_not_null	n	false	NOT NULL key_version
+schubert_web_session	web_http_sessions_last_accessed_at_not_null	n	false	NOT NULL last_accessed_at
+schubert_web_session	web_http_sessions_max_inactive_seconds_not_null	n	false	NOT NULL max_inactive_seconds
+schubert_web_session	web_http_sessions_session_id_hash_not_null	n	false	NOT NULL session_id_hash
+schubert_web_session	web_http_sessions_version_not_null	n	false	NOT NULL version
+schubert_web_session	web_log_outbox_attempt_count_not_null	n	false	NOT NULL attempt_count
+schubert_web_session	web_log_outbox_correlation_id_not_null	n	false	NOT NULL correlation_id
+schubert_web_session	web_log_outbox_created_at_not_null	n	false	NOT NULL created_at
+schubert_web_session	web_log_outbox_id_not_null	n	false	NOT NULL id
+schubert_web_session	web_log_outbox_key_version_not_null	n	false	NOT NULL key_version
+schubert_web_session	web_log_outbox_layout_id_not_null	n	false	NOT NULL layout_id
+schubert_web_session	web_log_outbox_layout_version_not_null	n	false	NOT NULL layout_version
+schubert_web_session	web_log_outbox_message_id_not_null	n	false	NOT NULL message_id
+schubert_web_session	web_log_outbox_next_attempt_at_not_null	n	false	NOT NULL next_attempt_at
+schubert_web_session	web_log_outbox_payload_ciphertext_not_null	n	false	NOT NULL payload_ciphertext
+schubert_web_session	web_log_outbox_status_not_null	n	false	NOT NULL status

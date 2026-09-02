@@ -1,0 +1,9 @@
+kind	schema	name	security
+FUNCTION	schubert	maintenance_cleanup_batch_runs	SECURITY DEFINER
+FUNCTION	schubert	maintenance_cleanup_logs	SECURITY DEFINER
+FUNCTION	schubert	maintenance_cleanup_message_stores	SECURITY DEFINER
+FUNCTION	schubert	maintenance_cleanup_notifications	SECURITY DEFINER
+FUNCTION	schubert	maintenance_cleanup_questions	SECURITY DEFINER
+FUNCTION	schubert	maintenance_cleanup_sessions	SECURITY DEFINER
+VIEW	schubert	v_ops_component_counts	security_barrier=true
+VIEW	schubert	v_ops_recent_events	security_barrier=true
