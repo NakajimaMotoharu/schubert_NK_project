@@ -28,6 +28,8 @@ public record LogSearchRequestData(Optional<String> keyword,
     Objects.requireNonNull(level, "level");
     Objects.requireNonNull(fromAt, "fromAt");
     Objects.requireNonNull(toAt, "toAt");
+    TypedFieldValues.requireUnsignedRange("page", page, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
   }
 
   public static LogSearchRequestData from(FieldValueSet fields) {

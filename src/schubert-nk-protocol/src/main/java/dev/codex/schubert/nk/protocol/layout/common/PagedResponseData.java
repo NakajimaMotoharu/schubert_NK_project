@@ -13,6 +13,12 @@ public record PagedResponseData(int effectivePage,
     long firstResult,
     long lastResult) implements PayloadData {
   public PagedResponseData {
+    TypedFieldValues.requireUnsignedRange("effectivePage", effectivePage, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
+    TypedFieldValues.requireUnsignedRange("totalCount", totalCount, 9);
+    TypedFieldValues.requireUnsignedRange("totalPages", totalPages, 6);
+    TypedFieldValues.requireUnsignedRange("firstResult", firstResult, 9);
+    TypedFieldValues.requireUnsignedRange("lastResult", lastResult, 9);
   }
 
   public static PagedResponseData from(FieldValueSet fields) {

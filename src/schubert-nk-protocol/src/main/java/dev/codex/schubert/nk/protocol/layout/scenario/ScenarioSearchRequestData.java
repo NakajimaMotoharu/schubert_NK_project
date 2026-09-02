@@ -26,6 +26,8 @@ public record ScenarioSearchRequestData(Optional<String> bodyKeyword,
     Objects.requireNonNull(chapterTitle, "chapterTitle");
     Objects.requireNonNull(entryType, "entryType");
     Objects.requireNonNull(voiceCondition, "voiceCondition");
+    TypedFieldValues.requireUnsignedRange("page", page, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
   }
 
   public static ScenarioSearchRequestData from(FieldValueSet fields) {

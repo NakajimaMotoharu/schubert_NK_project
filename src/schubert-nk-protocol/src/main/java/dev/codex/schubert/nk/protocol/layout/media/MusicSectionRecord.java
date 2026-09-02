@@ -11,6 +11,7 @@ public record MusicSectionRecord(String section,
     int trackCount) implements PayloadRecord {
   public MusicSectionRecord {
     Objects.requireNonNull(section, "section");
+    TypedFieldValues.requireUnsignedRange("trackCount", trackCount, 6);
   }
 
   public static MusicSectionRecord from(FieldValueSet fields) {

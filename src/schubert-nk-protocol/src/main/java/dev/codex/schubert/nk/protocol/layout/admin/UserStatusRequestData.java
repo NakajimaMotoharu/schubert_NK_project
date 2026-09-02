@@ -15,6 +15,7 @@ public record UserStatusRequestData(UserId userId,
     UUID operationToken) implements PayloadData {
   public UserStatusRequestData {
     Objects.requireNonNull(userId, "userId");
+    TypedFieldValues.requireUnsignedRange("expectedVersion", expectedVersion, 9);
     Objects.requireNonNull(operationToken, "operationToken");
   }
 

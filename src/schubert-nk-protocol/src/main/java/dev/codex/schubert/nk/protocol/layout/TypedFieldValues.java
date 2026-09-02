@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.protocol.layout;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId;
 import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
@@ -76,6 +78,20 @@ public final class TypedFieldValues {
     }
   }
 
+  public static void requireUnsignedRange(String name, long value, int digits) {
+    Objects.requireNonNull(name, "name");
+    if (digits < 1 || digits > 18) {
+      throw new IllegalArgumentException("numeric digit count must be between 1 and 18");
+    }
+    long maximum = 0;
+    for (int index = 0; index < digits; index++) {
+      maximum = maximum * 10 + 9;
+    }
+    if (value < 0 || value > maximum) {
+      throw new LayoutValidationException("typed numeric field is out of range: " + name);
+    }
+  }
+
   public static boolean requiredBoolean(FieldValueSet fields, String name) {
     return requiredFlag(fields, name).value();
   }
@@ -108,6 +124,26 @@ public final class TypedFieldValues {
     Objects.requireNonNull(type, "type");
     return optionalString(fields, name)
         .map(value -> semantic(name, value, wire -> enumConstant(type, wire)));
+  }
+
+  public static HttpStatusCode requiredHttpStatusCode(FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), HttpStatusCode::parse);
+  }
+
+  public static Optional<HttpStatusCode> optionalHttpStatusCode(
+      FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, HttpStatusCode::parse));
+  }
+
+  public static ElapsedMilliseconds requiredElapsedMilliseconds(
+      FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), ElapsedMilliseconds::parse);
+  }
+
+  public static Optional<ElapsedMilliseconds> optionalElapsedMilliseconds(
+      FieldValueSet fields, String name) {
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, ElapsedMilliseconds::parse));
   }
 
   public static Instant requiredInstant(FieldValueSet fields, String name) {
@@ -192,6 +228,29 @@ public final class TypedFieldValues {
     Objects.requireNonNull(value, "value");
     return value
         .<FieldValue>map(item -> new FieldValue.Text(item.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue httpStatusCode(HttpStatusCode value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalHttpStatusCodeValue(Optional<HttpStatusCode> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(status -> new FieldValue.Text(status.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue elapsedMilliseconds(ElapsedMilliseconds value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalElapsedMillisecondsValue(
+      Optional<ElapsedMilliseconds> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(elapsed -> new FieldValue.Text(elapsed.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 

@@ -277,6 +277,8 @@ class PayloadTypeCatalogTest {
       case "Entry type" -> "dialogue";
       case "Game code" -> "NUKITASHI1";
       case "MIME type" -> "audio/ogg";
+      case "HTTP status" -> "200";
+      case "Elapsed ms" -> "0";
       case "Category" ->
           field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
       default -> "A";

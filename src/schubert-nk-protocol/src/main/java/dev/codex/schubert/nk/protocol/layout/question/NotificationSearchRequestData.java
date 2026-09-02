@@ -19,6 +19,8 @@ public record NotificationSearchRequestData(Optional<NotificationType> notificat
     Objects.requireNonNull(notificationType, "notificationType");
     Objects.requireNonNull(submittedFrom, "submittedFrom");
     Objects.requireNonNull(submittedTo, "submittedTo");
+    TypedFieldValues.requireUnsignedRange("page", page, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
   }
 
   public static NotificationSearchRequestData from(FieldValueSet fields) {

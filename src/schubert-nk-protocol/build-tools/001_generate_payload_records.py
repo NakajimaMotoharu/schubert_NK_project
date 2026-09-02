@@ -217,6 +217,10 @@ def semantic_kind(label: str, wire: str, length: int, rule: str) -> str:
         return "int" if length <= 8 else "long"
     if wire == "B":
         return "boolean"
+    if label == "HTTP status":
+        return "httpStatusCode"
+    if label == "Elapsed ms":
+        return "elapsedMilliseconds"
     if label == "認証context ID":
         return "authenticationContext"
     if "SHA-256" in label:
@@ -248,6 +252,8 @@ JAVA_TYPES = {
     "sha256": "Sha256Hex",
     "relativePath": "RelativePath",
     "displayPath": "DisplayPath",
+    "httpStatusCode": "HttpStatusCode",
+    "elapsedMilliseconds": "ElapsedMilliseconds",
 }
 
 
@@ -281,6 +287,8 @@ def from_expression(label: str, kind: str, presence: str) -> str:
             "sha256": "optionalSha256",
             "relativePath": "optionalRelativePath",
             "displayPath": "optionalDisplayPath",
+            "httpStatusCode": "optionalHttpStatusCode",
+            "elapsedMilliseconds": "optionalElapsedMilliseconds",
         }[kind]
         return f'TypedFieldValues.{method}(fields, "{escaped}")'
     method = {
@@ -293,6 +301,8 @@ def from_expression(label: str, kind: str, presence: str) -> str:
         "sha256": "requiredSha256",
         "relativePath": "requiredRelativePath",
         "displayPath": "requiredDisplayPath",
+        "httpStatusCode": "requiredHttpStatusCode",
+        "elapsedMilliseconds": "requiredElapsedMilliseconds",
     }[kind]
     return f'TypedFieldValues.{method}(fields, "{escaped}")'
 
@@ -313,6 +323,8 @@ def field_expression(name: str, kind: str, presence: str) -> str:
             "sha256": "optionalSha256Value",
             "relativePath": "optionalRelativePathValue",
             "displayPath": "optionalDisplayPathValue",
+            "httpStatusCode": "optionalHttpStatusCodeValue",
+            "elapsedMilliseconds": "optionalElapsedMillisecondsValue",
         }[kind]
     else:
         method = {
@@ -325,20 +337,22 @@ def field_expression(name: str, kind: str, presence: str) -> str:
             "sha256": "sha256",
             "relativePath": "relativePath",
             "displayPath": "displayPath",
+            "httpStatusCode": "httpStatusCode",
+            "elapsedMilliseconds": "elapsedMilliseconds",
         }[kind]
     return f"TypedFieldValues.{method}({name})"
 
 
 for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
     components = [
-        (component_name(label), label, semantic_kind(label, wire, length, rule), presence)
+        (component_name(label), label, semantic_kind(label, wire, length, rule), presence, length)
         for label, wire, presence, length, rule in fields
     ]
     names = [component[0] for component in components]
     if len(names) != len(set(names)):
         raise SystemExit(f"duplicate Java component in {class_name}: {names}")
-    optional_used = any(presence in {"C", "O"} for _, _, _, presence in components)
-    component_kinds = {component_kind for _, _, component_kind, _ in components}
+    optional_used = any(presence in {"C", "O"} for _, _, _, presence, _ in components)
+    component_kinds = {component_kind for _, _, component_kind, _, _ in components}
     reference_used = any(
         component_kind not in {"int", "long", "boolean"}
         for component_kind in component_kinds
@@ -366,6 +380,10 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;")
     if "displayPath" in component_kinds:
         imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;")
+    if "httpStatusCode" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;")
+    if "elapsedMilliseconds" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;")
     for semantic_type in sorted(
         base_java_type(component_kind)
         for component_kind in component_kinds
@@ -376,7 +394,7 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         )
     component_text = ",\n    ".join(
         f"{java_type(component_kind, presence)} {name}"
-        for name, _label, component_kind, presence in components
+        for name, _label, component_kind, presence, _length in components
     )
     declaration = f"public record {class_name}({component_text}) implements {kind}" if components else f"public record {class_name}() implements {kind}"
     lines = [
@@ -389,9 +407,13 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
     ]
     if components:
         lines.extend([f"  public {class_name} {{"])
-        for name, _label, component_kind, _presence in components:
+        for name, _label, component_kind, _presence, length in components:
             if component_kind not in {"int", "long", "boolean"}:
                 lines.append(f'    Objects.requireNonNull({name}, "{name}");')
+            if component_kind in {"int", "long"}:
+                lines.append(
+                    f'    TypedFieldValues.requireUnsignedRange("{name}", {name}, {length});'
+                )
         lines.append("  }")
     lines.extend(["", f"  public static {class_name} from(FieldValueSet fields) {{"])
     if components:
@@ -399,7 +421,7 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         lines.append(
             ",\n".join(
                 "        " + from_expression(label, component_kind, presence)
-                for _name, label, component_kind, presence in components
+                for _name, label, component_kind, presence, _length in components
             )
             + ");"
         )
@@ -410,7 +432,7 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         lines.append("    return new FieldValueSet(")
         lines.append("        Map.ofEntries(")
         entries = []
-        for name, label, component_kind, presence in components:
+        for name, label, component_kind, presence, _length in components:
             escaped = label.replace("\\", "\\\\").replace('"', '\\"')
             entries.append(
                 f'            Map.entry("{escaped}", {field_expression(name, component_kind, presence)})'

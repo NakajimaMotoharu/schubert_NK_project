@@ -25,8 +25,10 @@ public record MusicTrackRecord(String trackId,
     Objects.requireNonNull(category, "category");
     Objects.requireNonNull(section, "section");
     Objects.requireNonNull(displayPath, "displayPath");
+    TypedFieldValues.requireUnsignedRange("fileByteLength", fileByteLength, 12);
     Objects.requireNonNull(pairKey, "pairKey");
     Objects.requireNonNull(pairRole, "pairRole");
+    TypedFieldValues.requireUnsignedRange("displayOrder", displayOrder, 4);
   }
 
   public static MusicTrackRecord from(FieldValueSet fields) {

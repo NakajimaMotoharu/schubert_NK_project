@@ -14,6 +14,7 @@ public record SpeakerRecord(SpeakerId speakerId,
   public SpeakerRecord {
     Objects.requireNonNull(speakerId, "speakerId");
     Objects.requireNonNull(speakerName, "speakerName");
+    TypedFieldValues.requireUnsignedRange("occurrenceCount", occurrenceCount, 9);
   }
 
   public static SpeakerRecord from(FieldValueSet fields) {

@@ -12,6 +12,7 @@ public record ScenarioFileListRequestData(GameCode gameCode,
     int prefix) implements PayloadData {
   public ScenarioFileListRequestData {
     Objects.requireNonNull(gameCode, "gameCode");
+    TypedFieldValues.requireUnsignedRange("prefix", prefix, 2);
   }
 
   public static ScenarioFileListRequestData from(FieldValueSet fields) {

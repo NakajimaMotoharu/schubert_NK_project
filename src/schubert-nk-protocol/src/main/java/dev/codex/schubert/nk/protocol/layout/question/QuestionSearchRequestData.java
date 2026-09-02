@@ -23,6 +23,8 @@ public record QuestionSearchRequestData(Optional<String> keyword,
     Objects.requireNonNull(answerState, "answerState");
     Objects.requireNonNull(submittedFrom, "submittedFrom");
     Objects.requireNonNull(submittedTo, "submittedTo");
+    TypedFieldValues.requireUnsignedRange("page", page, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
   }
 
   public static QuestionSearchRequestData from(FieldValueSet fields) {

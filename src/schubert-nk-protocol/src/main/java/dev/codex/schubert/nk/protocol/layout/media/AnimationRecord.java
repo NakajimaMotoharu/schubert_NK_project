@@ -22,7 +22,9 @@ public record AnimationRecord(String videoId,
     Objects.requireNonNull(title, "title");
     Objects.requireNonNull(category, "category");
     Objects.requireNonNull(displayPath, "displayPath");
+    TypedFieldValues.requireUnsignedRange("fileByteLength", fileByteLength, 12);
     Objects.requireNonNull(parentMainId, "parentMainId");
+    TypedFieldValues.requireUnsignedRange("displayOrder", displayOrder, 4);
   }
 
   public static AnimationRecord from(FieldValueSet fields) {

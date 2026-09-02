@@ -27,6 +27,7 @@ public record VideoDescriptorResponseData(String mediaLogicalId,
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
     Objects.requireNonNull(storageRelativePath, "storageRelativePath");
     Objects.requireNonNull(fileName, "fileName");
+    TypedFieldValues.requireUnsignedRange("fileByteLength", fileByteLength, 12);
     Objects.requireNonNull(sha256, "sha256");
     Objects.requireNonNull(mimeType, "mimeType");
     Objects.requireNonNull(contentDisposition, "contentDisposition");

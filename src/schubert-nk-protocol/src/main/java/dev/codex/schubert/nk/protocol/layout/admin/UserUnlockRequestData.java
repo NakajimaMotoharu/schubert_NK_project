@@ -14,6 +14,7 @@ public record UserUnlockRequestData(UserId userId,
     UUID operationToken) implements PayloadData {
   public UserUnlockRequestData {
     Objects.requireNonNull(userId, "userId");
+    TypedFieldValues.requireUnsignedRange("expectedVersion", expectedVersion, 9);
     Objects.requireNonNull(operationToken, "operationToken");
   }
 

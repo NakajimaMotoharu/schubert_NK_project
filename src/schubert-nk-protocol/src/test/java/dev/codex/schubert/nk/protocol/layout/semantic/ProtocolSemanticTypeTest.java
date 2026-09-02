@@ -152,6 +152,79 @@ class ProtocolSemanticTypeTest {
     assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalEnumValue(null));
   }
 
+  @Test
+  void xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues() {
+    FieldValueSet status = values(new FieldValue.Text("200"));
+    FieldValueSet elapsed = values(new FieldValue.Text("999999999"));
+    FieldValueSet unset = values(FieldValue.Unset.INSTANCE);
+
+    assertEquals(new HttpStatusCode(200), TypedFieldValues.requiredHttpStatusCode(status, "value"));
+    assertEquals(
+        Optional.of(new HttpStatusCode(200)),
+        TypedFieldValues.optionalHttpStatusCode(status, "value"));
+    assertEquals(
+        Optional.empty(), TypedFieldValues.optionalHttpStatusCode(unset, "value"));
+    assertEquals(
+        new ElapsedMilliseconds(999_999_999),
+        TypedFieldValues.requiredElapsedMilliseconds(elapsed, "value"));
+    assertEquals(
+        Optional.of(new ElapsedMilliseconds(999_999_999)),
+        TypedFieldValues.optionalElapsedMilliseconds(elapsed, "value"));
+    assertEquals(
+        Optional.empty(), TypedFieldValues.optionalElapsedMilliseconds(unset, "value"));
+    assertEquals(
+        new FieldValue.Text("200"), TypedFieldValues.httpStatusCode(new HttpStatusCode(200)));
+    assertEquals(
+        new FieldValue.Text("200"),
+        TypedFieldValues.optionalHttpStatusCodeValue(Optional.of(new HttpStatusCode(200))));
+    assertEquals(
+        FieldValue.Unset.INSTANCE,
+        TypedFieldValues.optionalHttpStatusCodeValue(Optional.empty()));
+    assertEquals(
+        new FieldValue.Text("0"),
+        TypedFieldValues.elapsedMilliseconds(new ElapsedMilliseconds(0)));
+    assertEquals(
+        new FieldValue.Text("0"),
+        TypedFieldValues.optionalElapsedMillisecondsValue(
+            Optional.of(new ElapsedMilliseconds(0))));
+    assertEquals(
+        FieldValue.Unset.INSTANCE,
+        TypedFieldValues.optionalElapsedMillisecondsValue(Optional.empty()));
+
+    TypedFieldValues.requireUnsignedRange("value", 0, 1);
+    TypedFieldValues.requireUnsignedRange("value", 999_999_999_999L, 12);
+    assertThrows(
+        LayoutValidationException.class,
+        () -> TypedFieldValues.requireUnsignedRange("value", -1, 1));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> TypedFieldValues.requireUnsignedRange("value", 1_000, 3));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> TypedFieldValues.requireUnsignedRange("value", 0, 0));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> TypedFieldValues.requireUnsignedRange("value", 0, 19));
+    assertThrows(
+        NullPointerException.class,
+        () -> TypedFieldValues.requireUnsignedRange(null, 0, 1));
+
+    assertThrows(IllegalArgumentException.class, () -> new HttpStatusCode(99));
+    assertThrows(IllegalArgumentException.class, () -> new HttpStatusCode(600));
+    assertThrows(IllegalArgumentException.class, () -> HttpStatusCode.parse("20A"));
+    assertThrows(NullPointerException.class, () -> HttpStatusCode.parse(null));
+    assertThrows(IllegalArgumentException.class, () -> new ElapsedMilliseconds(-1));
+    assertThrows(IllegalArgumentException.class, () -> new ElapsedMilliseconds(1_000_000_000));
+    assertThrows(IllegalArgumentException.class, () -> ElapsedMilliseconds.parse("0000000000"));
+    assertThrows(NullPointerException.class, () -> ElapsedMilliseconds.parse(null));
+    assertThrows(NullPointerException.class, () -> TypedFieldValues.httpStatusCode(null));
+    assertThrows(
+        NullPointerException.class, () -> TypedFieldValues.optionalHttpStatusCodeValue(null));
+    assertThrows(NullPointerException.class, () -> TypedFieldValues.elapsedMilliseconds(null));
+    assertThrows(
+        NullPointerException.class, () -> TypedFieldValues.optionalElapsedMillisecondsValue(null));
+  }
+
   private static FieldValueSet values(FieldValue value) {
     return new FieldValueSet(Map.of("value", value));
   }

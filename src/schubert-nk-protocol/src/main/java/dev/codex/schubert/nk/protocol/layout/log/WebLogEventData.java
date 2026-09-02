@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.protocol.layout.log;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.time.Instant;
@@ -19,8 +21,8 @@ public record WebLogEventData(Instant occurredAt,
     UUID httpRequestId,
     String httpMethod,
     String path,
-    String httpStatus,
-    String elapsedMs,
+    HttpStatusCode httpStatus,
+    ElapsedMilliseconds elapsedMs,
     String remoteAddress,
     Optional<String> username,
     Optional<UserRole> role,
@@ -50,8 +52,8 @@ public record WebLogEventData(Instant occurredAt,
         TypedFieldValues.requiredUuid(fields, "HTTP request ID"),
         TypedFieldValues.requiredString(fields, "HTTP method"),
         TypedFieldValues.requiredString(fields, "Path"),
-        TypedFieldValues.requiredString(fields, "HTTP status"),
-        TypedFieldValues.requiredString(fields, "Elapsed ms"),
+        TypedFieldValues.requiredHttpStatusCode(fields, "HTTP status"),
+        TypedFieldValues.requiredElapsedMilliseconds(fields, "Elapsed ms"),
         TypedFieldValues.requiredString(fields, "Remote address"),
         TypedFieldValues.optionalString(fields, "Username"),
         TypedFieldValues.optionalEnum(fields, "Role", UserRole.class),
@@ -69,8 +71,8 @@ public record WebLogEventData(Instant occurredAt,
             Map.entry("HTTP request ID", TypedFieldValues.uuid(httpRequestId)),
             Map.entry("HTTP method", TypedFieldValues.text(httpMethod)),
             Map.entry("Path", TypedFieldValues.text(path)),
-            Map.entry("HTTP status", TypedFieldValues.text(httpStatus)),
-            Map.entry("Elapsed ms", TypedFieldValues.text(elapsedMs)),
+            Map.entry("HTTP status", TypedFieldValues.httpStatusCode(httpStatus)),
+            Map.entry("Elapsed ms", TypedFieldValues.elapsedMilliseconds(elapsedMs)),
             Map.entry("Remote address", TypedFieldValues.text(remoteAddress)),
             Map.entry("Username", TypedFieldValues.optionalStringValue(username)),
             Map.entry("Role", TypedFieldValues.optionalEnumValue(role)),

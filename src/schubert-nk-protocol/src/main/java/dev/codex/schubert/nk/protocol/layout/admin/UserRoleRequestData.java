@@ -17,6 +17,7 @@ public record UserRoleRequestData(UserId userId,
   public UserRoleRequestData {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(newRole, "newRole");
+    TypedFieldValues.requireUnsignedRange("expectedVersion", expectedVersion, 9);
     Objects.requireNonNull(operationToken, "operationToken");
   }
 

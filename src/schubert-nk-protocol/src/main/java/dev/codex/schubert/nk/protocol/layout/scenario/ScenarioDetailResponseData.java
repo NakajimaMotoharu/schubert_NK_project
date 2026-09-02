@@ -42,7 +42,10 @@ public record ScenarioDetailResponseData(ScriptFileId scriptFileId,
     Objects.requireNonNull(deliveryMode, "deliveryMode");
     Objects.requireNonNull(fileId, "fileId");
     Objects.requireNonNull(fileRelativePath, "fileRelativePath");
+    TypedFieldValues.requireUnsignedRange("fileByteLength", fileByteLength, 12);
     Objects.requireNonNull(fileSha256, "fileSha256");
+    TypedFieldValues.requireUnsignedRange("fileRecordLength", fileRecordLength, 6);
+    TypedFieldValues.requireUnsignedRange("fileRecordCount", fileRecordCount, 9);
   }
 
   public static ScenarioDetailResponseData from(FieldValueSet fields) {

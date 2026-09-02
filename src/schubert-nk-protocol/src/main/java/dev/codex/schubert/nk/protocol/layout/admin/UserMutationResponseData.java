@@ -12,6 +12,7 @@ public record UserMutationResponseData(UserId userId,
     long updatedVersion) implements PayloadData {
   public UserMutationResponseData {
     Objects.requireNonNull(userId, "userId");
+    TypedFieldValues.requireUnsignedRange("updatedVersion", updatedVersion, 9);
   }
 
   public static UserMutationResponseData from(FieldValueSet fields) {

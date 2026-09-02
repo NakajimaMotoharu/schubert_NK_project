@@ -19,6 +19,8 @@ public record UserSearchRequestData(Optional<String> usernamePrefix,
     Objects.requireNonNull(usernamePrefix, "usernamePrefix");
     Objects.requireNonNull(role, "role");
     Objects.requireNonNull(state, "state");
+    TypedFieldValues.requireUnsignedRange("page", page, 6);
+    TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);
   }
 
   public static UserSearchRequestData from(FieldValueSet fields) {

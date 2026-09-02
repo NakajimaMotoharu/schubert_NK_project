@@ -25,6 +25,8 @@ public record LoginResponseData(Optional<String> username,
     Objects.requireNonNull(authenticationContextId, "authenticationContextId");
     Objects.requireNonNull(issuedAt, "issuedAt");
     Objects.requireNonNull(expiresAt, "expiresAt");
+    TypedFieldValues.requireUnsignedRange("retryAfterSeconds", retryAfterSeconds, 6);
+    TypedFieldValues.requireUnsignedRange("remainingAttempts", remainingAttempts, 3);
     Objects.requireNonNull(userMessage, "userMessage");
   }
 

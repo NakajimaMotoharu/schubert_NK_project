@@ -17,6 +17,7 @@ public record ScenarioFileRecord(ScriptFileId scriptFileId,
     Objects.requireNonNull(scriptFileId, "scriptFileId");
     Objects.requireNonNull(displayTitle, "displayTitle");
     Objects.requireNonNull(displayPath, "displayPath");
+    TypedFieldValues.requireUnsignedRange("entryCount", entryCount, 6);
   }
 
   public static ScenarioFileRecord from(FieldValueSet fields) {

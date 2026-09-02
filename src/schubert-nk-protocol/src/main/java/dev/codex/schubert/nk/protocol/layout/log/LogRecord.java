@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.protocol.layout.log;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogId;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
@@ -24,8 +26,8 @@ public record LogRecord(LogId logId,
     Optional<UUID> correlationId,
     Optional<String> httpMethod,
     Optional<String> path,
-    Optional<String> httpStatus,
-    Optional<String> elapsedMs,
+    Optional<HttpStatusCode> httpStatus,
+    Optional<ElapsedMilliseconds> elapsedMs,
     Optional<String> remoteAddress,
     Optional<String> details) implements PayloadRecord {
   public LogRecord {
@@ -59,8 +61,8 @@ public record LogRecord(LogId logId,
         TypedFieldValues.optionalUuid(fields, "Correlation ID"),
         TypedFieldValues.optionalString(fields, "HTTP method"),
         TypedFieldValues.optionalString(fields, "Path"),
-        TypedFieldValues.optionalString(fields, "HTTP status"),
-        TypedFieldValues.optionalString(fields, "Elapsed ms"),
+        TypedFieldValues.optionalHttpStatusCode(fields, "HTTP status"),
+        TypedFieldValues.optionalElapsedMilliseconds(fields, "Elapsed ms"),
         TypedFieldValues.optionalString(fields, "Remote address"),
         TypedFieldValues.optionalString(fields, "Details"));
   }
@@ -80,8 +82,8 @@ public record LogRecord(LogId logId,
             Map.entry("Correlation ID", TypedFieldValues.optionalUuidValue(correlationId)),
             Map.entry("HTTP method", TypedFieldValues.optionalStringValue(httpMethod)),
             Map.entry("Path", TypedFieldValues.optionalStringValue(path)),
-            Map.entry("HTTP status", TypedFieldValues.optionalStringValue(httpStatus)),
-            Map.entry("Elapsed ms", TypedFieldValues.optionalStringValue(elapsedMs)),
+            Map.entry("HTTP status", TypedFieldValues.optionalHttpStatusCodeValue(httpStatus)),
+            Map.entry("Elapsed ms", TypedFieldValues.optionalElapsedMillisecondsValue(elapsedMs)),
             Map.entry("Remote address", TypedFieldValues.optionalStringValue(remoteAddress)),
             Map.entry("Details", TypedFieldValues.optionalStringValue(details))));
   }

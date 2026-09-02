@@ -11,7 +11,9 @@ public record RouteRecord(int prefix,
     String routeName,
     int fileCount) implements PayloadRecord {
   public RouteRecord {
+    TypedFieldValues.requireUnsignedRange("prefix", prefix, 2);
     Objects.requireNonNull(routeName, "routeName");
+    TypedFieldValues.requireUnsignedRange("fileCount", fileCount, 6);
   }
 
   public static RouteRecord from(FieldValueSet fields) {

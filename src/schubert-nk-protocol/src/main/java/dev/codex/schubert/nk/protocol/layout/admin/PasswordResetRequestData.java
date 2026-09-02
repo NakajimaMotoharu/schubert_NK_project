@@ -16,6 +16,7 @@ public record PasswordResetRequestData(UserId userId,
   public PasswordResetRequestData {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(newPassword, "newPassword");
+    TypedFieldValues.requireUnsignedRange("expectedVersion", expectedVersion, 9);
     Objects.requireNonNull(operationToken, "operationToken");
   }
 

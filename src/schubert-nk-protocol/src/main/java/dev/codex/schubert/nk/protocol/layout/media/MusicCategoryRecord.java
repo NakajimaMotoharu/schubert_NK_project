@@ -11,6 +11,7 @@ public record MusicCategoryRecord(String category,
     int trackCount) implements PayloadRecord {
   public MusicCategoryRecord {
     Objects.requireNonNull(category, "category");
+    TypedFieldValues.requireUnsignedRange("trackCount", trackCount, 6);
   }
 
   public static MusicCategoryRecord from(FieldValueSet fields) {

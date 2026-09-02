@@ -31,6 +31,7 @@ public record ScenarioSearchRecord(EntryId entryId,
     Objects.requireNonNull(scriptFileId, "scriptFileId");
     Objects.requireNonNull(gameCode, "gameCode");
     Objects.requireNonNull(chapterTitle, "chapterTitle");
+    TypedFieldValues.requireUnsignedRange("lineNumber", lineNumber, 8);
     Objects.requireNonNull(entryType, "entryType");
     Objects.requireNonNull(speakerName, "speakerName");
     Objects.requireNonNull(bodyText, "bodyText");

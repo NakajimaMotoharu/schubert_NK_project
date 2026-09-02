@@ -30,6 +30,7 @@ public record UserRecord(UserId userId,
     Objects.requireNonNull(lastLogin, "lastLogin");
     Objects.requireNonNull(createdAt, "createdAt");
     Objects.requireNonNull(updatedAt, "updatedAt");
+    TypedFieldValues.requireUnsignedRange("version", version, 9);
   }
 
   public static UserRecord from(FieldValueSet fields) {

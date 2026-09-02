@@ -8,6 +8,7 @@ import java.util.Map;
 /** Generated named wire record. Trace: SS 323; layouts ANLRSP01. */
 public record AnimationListResponseData(int totalCount) implements PayloadData {
   public AnimationListResponseData {
+    TypedFieldValues.requireUnsignedRange("totalCount", totalCount, 6);
   }
 
   public static AnimationListResponseData from(FieldValueSet fields) {

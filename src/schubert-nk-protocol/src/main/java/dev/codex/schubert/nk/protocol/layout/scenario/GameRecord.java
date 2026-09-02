@@ -14,6 +14,7 @@ public record GameRecord(GameCode gameCode,
   public GameRecord {
     Objects.requireNonNull(gameCode, "gameCode");
     Objects.requireNonNull(title, "title");
+    TypedFieldValues.requireUnsignedRange("displayOrder", displayOrder, 3);
   }
 
   public static GameRecord from(FieldValueSet fields) {

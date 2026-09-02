@@ -11,6 +11,9 @@ public record AnimationMenuResponseData(int mainSubtrackCount,
     boolean openingPresent,
     int totalFileCount) implements PayloadData {
   public AnimationMenuResponseData {
+    TypedFieldValues.requireUnsignedRange("mainSubtrackCount", mainSubtrackCount, 3);
+    TypedFieldValues.requireUnsignedRange("ovaCount", ovaCount, 3);
+    TypedFieldValues.requireUnsignedRange("totalFileCount", totalFileCount, 3);
   }
 
   public static AnimationMenuResponseData from(FieldValueSet fields) {

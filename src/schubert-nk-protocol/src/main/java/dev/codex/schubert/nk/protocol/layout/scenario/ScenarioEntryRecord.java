@@ -23,9 +23,12 @@ public record ScenarioEntryRecord(EntryId entryId,
     Optional<DisplayPath> audioDisplayPath) implements PayloadRecord {
   public ScenarioEntryRecord {
     Objects.requireNonNull(entryId, "entryId");
+    TypedFieldValues.requireUnsignedRange("entrySequence", entrySequence, 6);
+    TypedFieldValues.requireUnsignedRange("lineNumber", lineNumber, 8);
     Objects.requireNonNull(entryType, "entryType");
     Objects.requireNonNull(speakerName, "speakerName");
     Objects.requireNonNull(bodyText, "bodyText");
+    TypedFieldValues.requireUnsignedRange("audioSequence", audioSequence, 3);
     Objects.requireNonNull(audioId, "audioId");
     Objects.requireNonNull(audioDisplayPath, "audioDisplayPath");
   }

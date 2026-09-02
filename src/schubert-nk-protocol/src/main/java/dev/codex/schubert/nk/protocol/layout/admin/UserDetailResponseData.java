@@ -35,6 +35,8 @@ public record UserDetailResponseData(UserId userId,
     Objects.requireNonNull(passwordChangedAt, "passwordChangedAt");
     Objects.requireNonNull(createdAt, "createdAt");
     Objects.requireNonNull(updatedAt, "updatedAt");
+    TypedFieldValues.requireUnsignedRange("activeSessionCount", activeSessionCount, 3);
+    TypedFieldValues.requireUnsignedRange("version", version, 9);
     Objects.requireNonNull(createdBy, "createdBy");
     Objects.requireNonNull(updatedBy, "updatedBy");
   }

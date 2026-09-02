@@ -8,6 +8,7 @@ import java.util.Map;
 /** Generated named wire record. Trace: SS 323; layouts MCSRSP01. */
 public record MusicSectionResponseData(int totalCount) implements PayloadData {
   public MusicSectionResponseData {
+    TypedFieldValues.requireUnsignedRange("totalCount", totalCount, 6);
   }
 
   public static MusicSectionResponseData from(FieldValueSet fields) {

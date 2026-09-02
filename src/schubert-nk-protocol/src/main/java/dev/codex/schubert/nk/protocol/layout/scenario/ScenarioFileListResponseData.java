@@ -14,7 +14,9 @@ public record ScenarioFileListResponseData(GameCode gameCode,
     long totalCount) implements PayloadData {
   public ScenarioFileListResponseData {
     Objects.requireNonNull(gameCode, "gameCode");
+    TypedFieldValues.requireUnsignedRange("prefix", prefix, 2);
     Objects.requireNonNull(routeName, "routeName");
+    TypedFieldValues.requireUnsignedRange("totalCount", totalCount, 9);
   }
 
   public static ScenarioFileListResponseData from(FieldValueSet fields) {
