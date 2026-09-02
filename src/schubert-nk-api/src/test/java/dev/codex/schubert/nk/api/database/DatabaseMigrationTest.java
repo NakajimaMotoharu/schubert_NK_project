@@ -63,6 +63,13 @@ final class DatabaseMigrationTest {
     private static final String CIPHER = "decode('" + "00".repeat(29) + "','hex')";
     private static final String UUID_1 = "00000000-0000-0000-0000-000000000001";
     private static final String UUID_2 = "00000000-0000-0000-0000-000000000002";
+    private static final Map<String, Integer> CLEANUP_FUNCTION_LIMITS = Map.of(
+            "maintenance_cleanup_notifications", 1000,
+            "maintenance_cleanup_questions", 1000,
+            "maintenance_cleanup_sessions", 1000,
+            "maintenance_cleanup_message_stores", 10000,
+            "maintenance_cleanup_logs", 10000,
+            "maintenance_cleanup_batch_runs", 1000);
     private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
 
     private static Path pgRoot;
@@ -372,10 +379,7 @@ final class DatabaseMigrationTest {
                         + "'search_path=pg_catalog, schubert, schubert_web_session'"));
         assertFalse(queryBoolean(ADMIN,
                 "select has_function_privilege('public','schubert.maintenance_cleanup_logs(uuid,timestamptz,integer)','EXECUTE')"));
-        assertEquals("BACKUP_GATE", queryString("schubert_batch",
-                "select reason_code from schubert.maintenance_cleanup_logs('" + UUID_1 + "','" + FIXED_TIME + "',1)"));
-        assertSqlState("schubert_batch", "22023",
-                "select * from schubert.maintenance_cleanup_logs('" + UUID_1 + "','" + FIXED_TIME + "',0)");
+        assertCleanupFunctionGuards();
 
         try (Connection connection = connection(ADMIN)) {
             connection.setAutoCommit(false);
@@ -435,8 +439,161 @@ final class DatabaseMigrationTest {
             assertEquals(1L, queryLong(connection,
                     "select count(*) from schubert_web_session.web_http_sessions where id="
                             + "'00000000-0000-0000-0000-000000000804'"));
+            verifyNotificationAndQuestionCleanup(connection);
+            verifyMessageStoreCleanup(connection);
+            verifyBatchRunCleanup(connection);
             connection.rollback();
         }
+    }
+
+    private static void assertCleanupFunctionGuards() throws SQLException {
+        for (Map.Entry<String, Integer> cleanup : CLEANUP_FUNCTION_LIMITS.entrySet()) {
+            String function = "schubert." + cleanup.getKey();
+            assertEquals("BACKUP_GATE", queryString("schubert_batch",
+                    "select reason_code from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',1)"));
+            assertSqlState("schubert_batch", "22023",
+                    "select * from " + function + "(null,'" + FIXED_TIME + "',1)");
+            assertSqlState("schubert_batch", "22023",
+                    "select * from " + function + "('" + UUID_1 + "',null,1)");
+            assertSqlState("schubert_batch", "22023",
+                    "select * from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',0)");
+            assertSqlState("schubert_batch", "22023",
+                    "select * from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',"
+                            + (cleanup.getValue() + 1) + ")");
+        }
+        try (Connection holder = connection(ADMIN)) {
+            holder.setAutoCommit(false);
+            execute(holder, "select pg_advisory_xact_lock(71419602)");
+            for (String cleanup : CLEANUP_FUNCTION_LIMITS.keySet()) {
+                assertEquals("LOCK_BUSY", queryString("schubert_batch",
+                        "select reason_code from schubert." + cleanup + "('" + UUID_1 + "','"
+                                + FIXED_TIME + "',1)"));
+            }
+            holder.rollback();
+        }
+    }
+
+    private static void verifyNotificationAndQuestionCleanup(Connection connection) throws SQLException {
+        execute(connection,
+                "insert into schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at) "
+                        + "select g,lpad(g::text,26,'0'),801,'public cleanup question',"
+                        + "('00000000-0000-0000-0000-'||lpad(g::text,12,'0'))::uuid,'2026-08-30 00:00:00+00' "
+                        + "from generate_series(901,904) g");
+        execute(connection,
+                "insert into schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,"
+                        + "received_at,state_changed_at) select g,g,801,'RECEIVED',"
+                        + "('00000000-0000-0000-0001-'||lpad(g::text,12,'0'))::uuid,"
+                        + "('00000000-0000-0000-0002-'||lpad(g::text,12,'0'))::uuid,"
+                        + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00' "
+                        + "from generate_series(901,904) g");
+        execute(connection,
+                "insert into schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,"
+                        + "accepted_at,state_changed_at,error_code,error_message,created_at,updated_at) values"
+                        + "(901,901,901,801,'ACCEPTED','CANCELLED','2026-08-30 00:00:00+00',"
+                        + "'2026-09-01 00:00:00+00',null,null,'2026-08-30 00:00:00+00','2026-09-01 00:00:00+00'),"
+                        + "(902,902,902,801,'COMPLETED','COMPLETED','2026-08-30 00:00:00+00',"
+                        + "'2026-09-01 00:00:00+00',null,null,'2026-08-30 00:00:00+00','2026-09-01 00:00:00+00'),"
+                        + "(903,903,903,801,'ERROR','ERROR','2026-08-30 00:00:00+00',"
+                        + "'2026-09-01 00:00:00+00','PROCESS_FAILED','public test error',"
+                        + "'2026-08-30 00:00:00+00','2026-09-01 00:00:00+00'),"
+                        + "(904,904,904,801,'COMPLETED','COMPLETED','2026-09-01 00:00:00+00',"
+                        + "'2026-09-01 12:00:00+00',null,null,'2026-09-01 00:00:00+00','2026-09-01 12:00:00+00')");
+        execute(connection, "set role schubert_batch");
+        assertEquals("3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_notifications", FIXED_TIME, 10));
+        execute(connection, "reset role");
+        assertEquals(1L, queryLong(connection, "select count(*) from schubert.notifications where id between 901 and 904"));
+
+        execute(connection,
+                "insert into schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at,is_deleted,"
+                        + "deleted_at,deleted_by) select g,lpad(g::text,26,'0'),801,'public aggregate cleanup',"
+                        + "('00000000-0000-0000-0003-'||lpad(g::text,12,'0'))::uuid,'2026-08-30 00:00:00+00',"
+                        + "g<>913,case when g<>913 then '2026-08-31 00:00:00+00'::timestamptz else null end,"
+                        + "case when g<>913 then 801 else null end from generate_series(911,913) g");
+        execute(connection,
+                "insert into schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,"
+                        + "received_at,state_changed_at) values(912,912,801,'RECEIVED',"
+                        + "'00000000-0000-0000-0004-000000000912','00000000-0000-0000-0005-000000000912',"
+                        + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00')");
+        execute(connection,
+                "insert into schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,"
+                        + "accepted_at,state_changed_at,created_at,updated_at) values(912,912,912,801,'ACCEPTED','ACCEPTED',"
+                        + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00',"
+                        + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00')");
+        execute(connection, "set role schubert_batch");
+        assertEquals("1|1|0|OK", cleanupResult(connection, "maintenance_cleanup_questions", FIXED_TIME, 10));
+        execute(connection, "reset role");
+        assertEquals(List.of("912", "913"), queryList(connection,
+                "select id::text from schubert.questions where id between 911 and 913 order by id"));
+    }
+
+    private static void verifyMessageStoreCleanup(Connection connection) throws SQLException {
+        execute(connection,
+                "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,"
+                        + "request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,"
+                        + "response_layout_id,response_version,created_at,completed_at,expires_at) values"
+                        + "('00000000-0000-0000-0006-000000000001','00000000-0000-0000-0006-000000000002',"
+                        + "'LGNREQ01','001','" + HASH + "','key-1','COMPLETED','NONE','LGNRSP01','001',"
+                        + "'2026-08-29 00:00:00+00','2026-08-29 00:00:01+00','2026-08-31 00:00:00+00'),"
+                        + "('00000000-0000-0000-0006-000000000003','00000000-0000-0000-0006-000000000004',"
+                        + "'LGNREQ01','001','" + "f".repeat(64) + "','key-1','PROCESSING',null,null,null,"
+                        + "'2026-08-29 00:00:00+00',null,'2026-08-31 00:00:00+00')");
+        execute(connection,
+                "insert into schubert.mq_outbox(id,message_id,correlation_id,destination,layout_id,layout_version,body,"
+                        + "status,next_attempt_at,created_at,sent_at) values"
+                        + "(921,'00000000-0000-0000-0007-000000000001','00000000-0000-0000-0007-000000000002',"
+                        + "'nk.async.work','QWKREQ01','001',decode('00','hex'),'SENT','2026-08-29 00:00:00+00',"
+                        + "'2026-08-29 00:00:00+00','2026-08-31 00:00:00+00'),"
+                        + "(922,'00000000-0000-0000-0007-000000000003','00000000-0000-0000-0007-000000000004',"
+                        + "'nk.async.work','QWKREQ01','001',decode('00','hex'),'PENDING','2026-08-29 00:00:00+00',"
+                        + "'2026-08-29 00:00:00+00',null)");
+        execute(connection,
+                "insert into schubert_web_session.web_log_outbox(id,message_id,correlation_id,layout_id,layout_version,"
+                        + "payload_ciphertext,key_version,status,next_attempt_at,created_at,sent_at) values"
+                        + "(923,'00000000-0000-0000-0008-000000000001','00000000-0000-0000-0008-000000000002',"
+                        + "'WLGEVT01','001'," + CIPHER + ",'key-1','SENT','2026-08-29 00:00:00+00',"
+                        + "'2026-08-29 00:00:00+00','2026-08-31 00:00:00+00'),"
+                        + "(924,'00000000-0000-0000-0008-000000000003','00000000-0000-0000-0008-000000000004',"
+                        + "'WLGEVT01','001'," + CIPHER + ",'key-1','ERROR','2026-08-29 00:00:00+00',"
+                        + "'2026-08-29 00:00:00+00',null)");
+        execute(connection, "set role schubert_batch");
+        assertEquals("3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_message_stores", FIXED_TIME, 10));
+        execute(connection, "reset role");
+        assertEquals(1L, queryLong(connection,
+                "select count(*) from schubert.request_inbox where message_id in "
+                        + "('00000000-0000-0000-0006-000000000001','00000000-0000-0000-0006-000000000003')"));
+        assertEquals(1L, queryLong(connection, "select count(*) from schubert.mq_outbox where id in (921,922)"));
+        assertEquals(1L, queryLong(connection,
+                "select count(*) from schubert_web_session.web_log_outbox where id in (923,924)"));
+    }
+
+    private static void verifyBatchRunCleanup(Connection connection) throws SQLException {
+        execute(connection,
+                "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status) values"
+                        + "(931,'00000000-0000-0000-0009-000000000001','2024-01-01','OLD_SUCCESS',1,"
+                        + "'2024-01-01 00:00:00+00','2024-01-01 00:01:00+00','SUCCESS'),"
+                        + "(932,'00000000-0000-0000-0009-000000000002','2024-01-01','OLD_WARNING',1,"
+                        + "'2024-01-01 00:00:00+00','2024-01-01 00:01:00+00','WARNING'),"
+                        + "(933,'00000000-0000-0000-0009-000000000003','2024-01-01','OLD_SKIPPED',1,"
+                        + "'2024-01-01 00:00:00+00','2024-01-01 00:01:00+00','SKIPPED'),"
+                        + "(934,'00000000-0000-0000-0009-000000000004','2024-01-01','OLD_FAILED',1,"
+                        + "'2024-01-01 00:00:00+00','2024-01-01 00:01:00+00','FAILED'),"
+                        + "(935,'00000000-0000-0000-0009-000000000005','2024-01-01','OLD_RUNNING',1,"
+                        + "'2024-01-01 00:00:00+00',null,'RUNNING'),"
+                        + "(936,'00000000-0000-0000-0009-000000000006','2026-01-01','RECENT_SUCCESS',1,"
+                        + "'2026-01-01 00:00:00+00','2026-01-01 00:01:00+00','SUCCESS')");
+        execute(connection, "set role schubert_batch");
+        assertEquals("3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_batch_runs",
+                "2025-01-01 00:00:00+00", 10));
+        execute(connection, "reset role");
+        assertEquals(List.of("934", "935", "936"), queryList(connection,
+                "select id::text from schubert.batch_runs where id between 931 and 936 order by id"));
+    }
+
+    private static String cleanupResult(Connection connection, String function, String cutoff, int limit)
+            throws SQLException {
+        return queryString(connection,
+                "select target_count||'|'||deleted_count||'|'||skipped_count||'|'||reason_code from schubert."
+                        + function + "('" + UUID_2 + "','" + cutoff + "'," + limit + ")");
     }
 
     @Test
@@ -754,8 +911,13 @@ final class DatabaseMigrationTest {
     }
 
     private static List<String> queryList(String role, String sql) throws SQLException {
-        try (Connection connection = connection(role); Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(sql)) {
+        try (Connection connection = connection(role)) {
+            return queryList(connection, sql);
+        }
+    }
+
+    private static List<String> queryList(Connection connection, String sql) throws SQLException {
+        try (Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery(sql)) {
             List<String> values = new ArrayList<>();
             while (result.next()) {
                 values.add(result.getString(1));
