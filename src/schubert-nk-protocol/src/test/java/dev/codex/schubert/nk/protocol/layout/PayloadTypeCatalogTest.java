@@ -71,12 +71,13 @@ class PayloadTypeCatalogTest {
     int layoutsWithRecords = 0;
 
     for (LayoutFields layout : LayoutFieldCatalog.standard().all()) {
+      int recordCount = layout.recordFields().isEmpty() ? 0 : 1;
       List<FieldValueSet> records =
           layout.recordFields().isEmpty()
               ? List.of()
-              : List.of(minimumValues(layout.recordFields()));
+              : List.of(minimumValues(layout, true, recordCount));
       PayloadValues values =
-          new PayloadValues(layout.id(), minimumValues(layout.dataFields()), records);
+          new PayloadValues(layout.id(), minimumValues(layout, false, recordCount), records);
 
       TypedPayloadValues typed = PayloadTypeCatalog.decode(values);
       assertEquals(values, PayloadTypeCatalog.encode(typed), layout.id().value());
@@ -227,12 +228,29 @@ class PayloadTypeCatalogTest {
   private static TypedPayloadValues typedMinimum(String layoutId, boolean withRecord) {
     LayoutFields layout = LayoutFieldCatalog.standard().require(layoutId);
     List<FieldValueSet> records =
-        withRecord ? List.of(minimumValues(layout.recordFields())) : List.of();
+        withRecord ? List.of(minimumValues(layout, true, 1)) : List.of();
     return PayloadTypeCatalog.decode(
-        new PayloadValues(layout.id(), minimumValues(layout.dataFields()), records));
+        new PayloadValues(
+            layout.id(), minimumValues(layout, false, records.size()), records));
   }
 
-  private static FieldValueSet minimumValues(List<FieldDefinition<?>> fields) {
+  static PayloadValues validPayload(String layoutId, int recordCount) {
+    LayoutFields layout = LayoutFieldCatalog.standard().require(layoutId);
+    if (recordCount < 0 || (recordCount > 0 && layout.recordFields().isEmpty())) {
+      throw new IllegalArgumentException("invalid fixture record count");
+    }
+    List<FieldValueSet> records =
+        java.util.stream.IntStream.range(0, recordCount)
+            .mapToObj(index -> minimumValues(layout, true, recordCount))
+            .toList();
+    return new PayloadValues(
+        layout.id(), minimumValues(layout, false, recordCount), records);
+  }
+
+  private static FieldValueSet minimumValues(
+      LayoutFields layout, boolean recordArea, int recordCount) {
+    List<FieldDefinition<?>> fields =
+        recordArea ? layout.recordFields() : layout.dataFields();
     LinkedHashMap<String, FieldValue> values = new LinkedHashMap<>();
     for (FieldDefinition<?> field : fields) {
       if (field.presence() == Presence.FIXED) {
@@ -240,24 +258,77 @@ class PayloadTypeCatalogTest {
       }
       FieldValue value =
           field.presence() == Presence.MANDATORY
-              ? switch (field.wireType()) {
-                case TEXT -> new FieldValue.Text(minimumText(field));
-                case NUMERIC ->
-                    new FieldValue.Numeric(
-                        field.length() == JstWireTimestamp.WIRE_LENGTH
-                            ? 20260902123456789L
-                            : field.length() == 12 && N12_ID_FIELDS.contains(field.name())
-                                ? 1
-                                : 0);
-                case BOOLEAN -> new FieldValue.Flag(false);
-              }
-              : FieldValue.Unset.INSTANCE;
+              ? minimumRequiredValue(layout.id().value(), field, recordCount)
+              : conditionalValue(layout.id().value(), field);
       values.put(field.name(), value);
     }
     return new FieldValueSet(values);
   }
 
-  private static String minimumText(FieldDefinition<?> field) {
+  private static FieldValue minimumRequiredValue(
+      String layoutId, FieldDefinition<?> field, int recordCount) {
+    return switch (field.wireType()) {
+      case TEXT -> new FieldValue.Text(minimumText(layoutId, field));
+      case NUMERIC ->
+          new FieldValue.Numeric(minimumNumeric(layoutId, field, recordCount));
+      case BOOLEAN -> new FieldValue.Flag(false);
+    };
+  }
+
+  private static long minimumNumeric(
+      String layoutId, FieldDefinition<?> field, int recordCount) {
+    if (field.length() == JstWireTimestamp.WIRE_LENGTH) {
+      return 20260902123456789L;
+    }
+    if (field.length() == 12 && N12_ID_FIELDS.contains(field.name())) {
+      return 1;
+    }
+    return switch (field.name()) {
+      case "Page", "Effective page", "Line番号", "Entry sequence", "File件数",
+          "出現件数" -> 1;
+      case "File byte長" -> layoutId.equals("SCNRSP01") ? 0 : 1;
+      case "Page size" ->
+          Set.of("USRREQ01", "USRRSP01", "NTSREQ01", "NTSRSP01", "QSSREQ01", "QSSRSP01")
+                  .contains(layoutId)
+              ? 50
+              : 100;
+      case "Total count" -> recordCount;
+      case "Total pages" -> 1;
+      case "First result", "Last result" -> recordCount;
+      default -> 0;
+    };
+  }
+
+  private static FieldValue conditionalValue(String layoutId, FieldDefinition<?> field) {
+    String name = field.name();
+    if (layoutId.equals("LGNRSP01")) {
+      return switch (name) {
+        case "Username" -> new FieldValue.Text("user");
+        case "Role" -> new FieldValue.Text("USER");
+        case "認証context ID" -> new FieldValue.Text("a".repeat(64));
+        case "発行日時" -> new FieldValue.Text("20260902123456789");
+        case "期限日時" -> new FieldValue.Text("20260902133456789");
+        default -> FieldValue.Unset.INSTANCE;
+      };
+    }
+    if (layoutId.equals("NTDRSP01")) {
+      return switch (name) {
+        case "質問本文" -> new FieldValue.Text("A");
+        case "Question ID" -> new FieldValue.Text("1");
+        default -> FieldValue.Unset.INSTANCE;
+      };
+    }
+    if (layoutId.equals("NTCRSP01")) {
+      return switch (name) {
+        case "更新後状態" -> new FieldValue.Text("CANCELLED");
+        case "取消日時" -> new FieldValue.Text("20260902123456789");
+        default -> FieldValue.Unset.INSTANCE;
+      };
+    }
+    return FieldValue.Unset.INSTANCE;
+  }
+
+  private static String minimumText(String layoutId, FieldDefinition<?> field) {
     if (field.name().contains("SHA-256")) {
       return "a".repeat(64);
     }
@@ -265,6 +336,11 @@ class PayloadTypeCatalogTest {
       return "123e4567-e89b-12d3-a456-426614174000";
     }
     return switch (field.name()) {
+      case "Username" -> "user";
+      case "Password" -> "PublicTestPassword";
+      case "Initial Password", "New Password" -> "PublicTest12";
+      case "Client address", "Remote address" -> "127.0.0.1";
+      case "受付ID" -> "01HABCDEFGJKMNPQRSTVWXYZ01";
       case "Content disposition", "Disposition", "Delivery mode" -> "I";
       case "Pair role" -> "N";
       case "Role", "New role" -> "USER";
@@ -272,16 +348,18 @@ class PayloadTypeCatalogTest {
       case "Log type" -> "ACTION";
       case "State" -> "ACTIVE";
       case "内部状態" -> "RECEIVED";
-      case "回答状態" -> "ANSWERED";
+      case "回答状態" -> "UNANSWERED";
       case "通知区分" -> "ACCEPTED";
       case "Entry type" -> "dialogue";
       case "Game code" -> "NUKITASHI1";
       case "MIME type" -> "audio/ogg";
       case "HTTP status" -> "200";
       case "Elapsed ms" -> "0";
+      case "HTTP method" -> "GET";
+      case "Path" -> "/safe";
       case "Category" ->
           field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
-      default -> "A";
+      default -> layoutId.equals("WLGEVT01") && field.name().equals("Message") ? "safe" : "A";
     };
   }
 }

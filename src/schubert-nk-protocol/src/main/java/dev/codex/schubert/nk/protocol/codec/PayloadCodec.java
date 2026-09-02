@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.protocol.codec;
 
+import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.FieldDefinition;
 import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
@@ -33,6 +34,17 @@ public final class PayloadCodec {
   }
 
   public FixedPayload encode(PayloadValues values, boolean errorProfile) {
+    return encode(values, errorProfile, null);
+  }
+
+  /** Encodes a response using the result-code profile, including layout-specific error fields. */
+  public FixedPayload encode(PayloadValues values, ResultCode resultCode) {
+    Objects.requireNonNull(resultCode, "resultCode");
+    return encode(values, !resultCode.usesSuccessProfile(), resultCode);
+  }
+
+  private FixedPayload encode(
+      PayloadValues values, boolean errorProfile, ResultCode resultCode) {
     Objects.requireNonNull(values, "values");
     LayoutFields fields = catalog.require(values.layoutId());
     if (errorProfile && !values.records().isEmpty()) {
@@ -41,16 +53,37 @@ public final class PayloadCodec {
     if (values.records().size() > fields.layout().maximumRecordCount()) {
       throw new MessageEncodingException("payload record count exceeds its layout limit");
     }
-    byte[] data = encodeArea(values.data(), fields.dataFields(), errorProfile);
+    validateErrorOverrideForEncode(
+        values.layoutId(), values.data(), errorProfile, resultCode);
+    byte[] data =
+        encodeArea(
+            values.data(), fields.dataFields(), errorProfile, values.layoutId(), resultCode);
     ArrayList<byte[]> records = new ArrayList<>(values.records().size());
     for (FieldValueSet record : values.records()) {
-      records.add(encodeArea(record, fields.recordFields(), errorProfile));
+      records.add(
+          encodeArea(record, fields.recordFields(), errorProfile, values.layoutId(), resultCode));
     }
     return new FixedPayload(data, fields.layout().recordLength(), records);
   }
 
   public PayloadValues decode(
       LayoutId layoutId, byte[] data, List<byte[]> records, boolean errorProfile) {
+    return decode(layoutId, data, records, errorProfile, null);
+  }
+
+  /** Decodes a response using the result-code profile, including layout-specific error fields. */
+  public PayloadValues decode(
+      LayoutId layoutId, byte[] data, List<byte[]> records, ResultCode resultCode) {
+    Objects.requireNonNull(resultCode, "resultCode");
+    return decode(layoutId, data, records, !resultCode.usesSuccessProfile(), resultCode);
+  }
+
+  private PayloadValues decode(
+      LayoutId layoutId,
+      byte[] data,
+      List<byte[]> records,
+      boolean errorProfile,
+      ResultCode resultCode) {
     Objects.requireNonNull(layoutId, "layoutId");
     Objects.requireNonNull(data, "data");
     Objects.requireNonNull(records, "records");
@@ -64,32 +97,45 @@ public final class PayloadCodec {
     if (records.size() > fields.layout().maximumRecordCount()) {
       throw new PermanentProtocolException("payload record count exceeds its layout limit");
     }
-    FieldValueSet decodedData = decodeArea(data, fields.dataFields(), errorProfile);
+    FieldValueSet decodedData =
+        decodeArea(data, fields.dataFields(), errorProfile, layoutId, resultCode);
     ArrayList<FieldValueSet> decodedRecords = new ArrayList<>(records.size());
     for (byte[] record : records) {
       Objects.requireNonNull(record, "record");
       if (record.length != fields.layout().recordLength()) {
         throw new PermanentProtocolException("payload record length differs from its layout");
       }
-      decodedRecords.add(decodeArea(record, fields.recordFields(), errorProfile));
+      decodedRecords.add(
+          decodeArea(record, fields.recordFields(), errorProfile, layoutId, resultCode));
     }
+    validateErrorOverride(layoutId, decodedData, errorProfile, resultCode);
     return new PayloadValues(layoutId, decodedData, decodedRecords);
   }
 
   private static byte[] encodeArea(
-      FieldValueSet values, List<FieldDefinition<?>> fields, boolean errorProfile) {
+      FieldValueSet values,
+      List<FieldDefinition<?>> fields,
+      boolean errorProfile,
+      LayoutId layoutId,
+      ResultCode resultCode) {
     validateNames(values, fields);
     int length = fields.isEmpty() ? 0 : fields.getLast().end();
     byte[] encoded = new byte[length];
     for (FieldDefinition<?> field : fields) {
-      byte[] fieldBytes = encodeField(field, values.getOrUnset(field.name()), errorProfile);
+      boolean useErrorFiller =
+          errorProfile && !isErrorOverride(layoutId, resultCode, field.name());
+      byte[] fieldBytes = encodeField(field, values.getOrUnset(field.name()), useErrorFiller);
       System.arraycopy(fieldBytes, 0, encoded, field.start() - 1, field.length());
     }
     return encoded;
   }
 
   private static FieldValueSet decodeArea(
-      byte[] encoded, List<FieldDefinition<?>> fields, boolean errorProfile) {
+      byte[] encoded,
+      List<FieldDefinition<?>> fields,
+      boolean errorProfile,
+      LayoutId layoutId,
+      ResultCode resultCode) {
     Map<String, FieldValue> values = new LinkedHashMap<>();
     for (FieldDefinition<?> field : fields) {
       byte[] fieldBytes =
@@ -97,7 +143,9 @@ public final class PayloadCodec {
       if (field.presence() == Presence.FIXED) {
         validateFixed(field, fieldBytes);
       } else {
-        values.put(field.name(), decodeField(field, fieldBytes, errorProfile));
+        boolean useErrorFiller =
+            errorProfile && !isErrorOverride(layoutId, resultCode, field.name());
+        values.put(field.name(), decodeField(field, fieldBytes, useErrorFiller));
       }
     }
     return new FieldValueSet(values);
@@ -207,6 +255,49 @@ public final class PayloadCodec {
 
   private static String fixedText(FieldDefinition<?> field) {
     return field.name().equals("Log type") ? "REQUEST" : null;
+  }
+
+  private static boolean isErrorOverride(
+      LayoutId layoutId, ResultCode resultCode, String fieldName) {
+    return resultCode == ResultCode.NOT_CANCELLABLE
+        && layoutId.value().equals("NTCRSP01")
+        && fieldName.equals("更新後状態");
+  }
+
+  private static void validateErrorOverride(
+      LayoutId layoutId,
+      FieldValueSet data,
+      boolean errorProfile,
+      ResultCode resultCode) {
+    if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
+      return;
+    }
+    FieldValue value = data.getOrUnset("更新後状態");
+    if (!(value instanceof FieldValue.Text text)
+        || !(text.value().equals("PROCESSING")
+            || text.value().equals("COMPLETED")
+            || text.value().equals("ERROR"))) {
+      throw new PermanentProtocolException(
+          "notification cancellation conflict contains an invalid latest state");
+    }
+  }
+
+  private static void validateErrorOverrideForEncode(
+      LayoutId layoutId,
+      FieldValueSet data,
+      boolean errorProfile,
+      ResultCode resultCode) {
+    if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
+      return;
+    }
+    FieldValue value = data.getOrUnset("更新後状態");
+    if (!(value instanceof FieldValue.Text text)
+        || !(text.value().equals("PROCESSING")
+            || text.value().equals("COMPLETED")
+            || text.value().equals("ERROR"))) {
+      throw new MessageEncodingException(
+          "notification cancellation conflict contains an invalid latest state");
+    }
   }
 
   static long maximumForDigits(int length) {

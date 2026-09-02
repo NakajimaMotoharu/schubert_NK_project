@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.FieldDefinition;
 import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
@@ -72,6 +73,125 @@ class PayloadCodecTest {
               .allMatch(field -> decoded.data().getOrUnset(field.name()) == FieldValue.Unset.INSTANCE));
     }
     assertEquals(31, responses);
+  }
+
+  @Test
+  void resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState() {
+    PayloadCodec codec = PayloadCodec.standard();
+    LayoutId layoutId = new LayoutId("NTCRSP01");
+    PayloadValues conflict =
+        new PayloadValues(
+            layoutId,
+            new FieldValueSet(
+                Map.of(
+                    "更新後状態", new FieldValue.Text("PROCESSING"),
+                    "取消日時", FieldValue.Unset.INSTANCE)),
+            List.of());
+
+    FixedPayload encoded = codec.encode(conflict, ResultCode.NOT_CANCELLABLE);
+    assertArrayEquals(
+        "PROCESSING                      ".getBytes(StandardCharsets.US_ASCII),
+        encoded.copyData());
+    assertEquals(
+        conflict,
+        codec.decode(
+            layoutId,
+            encoded.copyData(),
+            encoded.copyRecords(),
+            ResultCode.NOT_CANCELLABLE));
+    for (String state : List.of("COMPLETED", "ERROR")) {
+      PayloadValues stateValue =
+          new PayloadValues(
+              layoutId,
+              new FieldValueSet(
+                  Map.of(
+                      "更新後状態", new FieldValue.Text(state),
+                      "取消日時", FieldValue.Unset.INSTANCE)),
+              List.of());
+      FixedPayload statePayload = codec.encode(stateValue, ResultCode.NOT_CANCELLABLE);
+      assertEquals(
+          stateValue,
+          codec.decode(
+              layoutId,
+              statePayload.copyData(),
+              List.of(),
+              ResultCode.NOT_CANCELLABLE));
+    }
+
+    PayloadValues blank = new PayloadValues(layoutId, FieldValueSet.empty(), List.of());
+    assertTrue(
+        codec.decode(
+                layoutId,
+                codec.encode(blank, ResultCode.NOT_FOUND).copyData(),
+                List.of(),
+                ResultCode.NOT_FOUND)
+            .data()
+            .names()
+            .stream()
+            .allMatch(
+                name ->
+                    codec.decode(
+                            layoutId,
+                            codec.encode(blank, ResultCode.NOT_FOUND).copyData(),
+                            List.of(),
+                            ResultCode.NOT_FOUND)
+                        .data()
+                        .getOrUnset(name)
+                        == FieldValue.Unset.INSTANCE));
+    PayloadValues success =
+        new PayloadValues(
+            layoutId,
+            new FieldValueSet(
+                Map.of(
+                    "更新後状態", new FieldValue.Text("CANCELLED"),
+                    "取消日時", new FieldValue.Text("20260902123456789"))),
+            List.of());
+    assertEquals(
+        success,
+        codec.decode(
+            layoutId,
+            codec.encode(success, ResultCode.SUCCESS).copyData(),
+            List.of(),
+            ResultCode.SUCCESS));
+
+    assertThrows(NullPointerException.class, () -> codec.encode(conflict, (ResultCode) null));
+    assertThrows(
+        NullPointerException.class,
+        () -> codec.decode(layoutId, encoded.copyData(), List.of(), (ResultCode) null));
+    assertThrows(
+        MessageEncodingException.class,
+        () -> codec.encode(blank, ResultCode.NOT_CANCELLABLE));
+    codec.encode(
+        new PayloadValues(new LayoutId("LGNRSP01"), FieldValueSet.empty(), List.of()),
+        ResultCode.NOT_CANCELLABLE);
+    assertThrows(
+        MessageEncodingException.class,
+        () ->
+            codec.encode(
+                new PayloadValues(
+                    layoutId,
+                    new FieldValueSet(
+                        Map.of("更新後状態", new FieldValue.Text("RECEIVED"))),
+                    List.of()),
+                ResultCode.NOT_CANCELLABLE));
+    for (String invalid : List.of("RECEIVED", "CANCELLED", "UNKNOWN")) {
+      byte[] corrupted = encoded.copyData();
+      Arrays.fill(corrupted, 0, 12, (byte) ' ');
+      System.arraycopy(
+          invalid.getBytes(StandardCharsets.US_ASCII), 0, corrupted, 0, invalid.length());
+      assertThrows(
+          PermanentProtocolException.class,
+          () ->
+              codec.decode(
+                  layoutId, corrupted, List.of(), ResultCode.NOT_CANCELLABLE));
+    }
+    byte[] missingState = encoded.copyData();
+    Arrays.fill(missingState, 0, 12, (byte) ' ');
+    assertThrows(
+        PermanentProtocolException.class,
+        () ->
+            codec.decode(
+                layoutId, missingState, List.of(), ResultCode.NOT_CANCELLABLE));
   }
 
   @Test

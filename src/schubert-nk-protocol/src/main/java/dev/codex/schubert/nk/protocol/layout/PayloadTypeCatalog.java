@@ -152,7 +152,9 @@ public final class PayloadTypeCatalog {
     Mapping mapping = require(values.layoutId());
     PayloadData data = mapping.dataDecoder().apply(values.data());
     List<PayloadRecord> records = decodeRecords(values, mapping.recordMapping());
-    return new TypedPayloadValues(values.layoutId(), data, records);
+    TypedPayloadValues typed = new TypedPayloadValues(values.layoutId(), data, records);
+    PayloadSemanticValidator.validate(typed);
+    return typed;
   }
 
   public static PayloadValues encode(TypedPayloadValues values) {
@@ -162,6 +164,7 @@ public final class PayloadTypeCatalog {
       throw new LayoutValidationException("named data type does not match layout");
     }
     validateRecordTypes(values.records(), mapping.recordMapping());
+    PayloadSemanticValidator.validate(values);
     List<FieldValueSet> records =
         values.records().stream().map(PayloadRecord::fields).toList();
     return new PayloadValues(values.layoutId(), values.data().fields(), records);
