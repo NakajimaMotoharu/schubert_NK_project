@@ -33,8 +33,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 5/20 Program（NK-CHR-001、NK-PRO-001～003、NK-DAT-001）完了。次はNK-MSG-001/002をPG/PT並行実施 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 5/20 Program完了。Characterization 41件、Protocol 67件、DB 15件PASS。Protocol 4指標100%、DB migration/object/function branch matrix 100% |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 5/20 Program完了。`dev-messaging`でNK-MSG-001/002をPG/PT並行実施中 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 5/20 Program完了。Characterization 41件、Protocol 67件、DB 15件PASS。PT-JMS-001～012、PT-IDEM-001～015を仕様化済み |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -59,3 +59,4 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-02 | Protocol 56 PT、N12 ID、primitive数値、X numeric、18 wire enumを含むSS 323共通Java型を完了し、NK-PRO-001をPG/PT完了。 |
 | 2026-09-02 | Protocol 67 PT、layout相関、NTCRSP01/0107個別field、64 layout min/max/error golden、最大record・並行試験を完了し、NK-PRO-002をPG/PT完了。 |
 | 2026-09-03 | PostgreSQL 18.6/Flyway V001～V005、21 table、constraint/index/role/grant/view、6 maintenance functionとPT-DB-001～015を完了し、NK-DAT-001をPG/PT完了。SSC-005のSecurity hold物理化を含む。 |
+| 2026-09-03 | `dev-data-schema`をlocal `dev`へno-ff統合。GitHub credential不在でpushは継続阻害中。`dev-messaging`を作成し、NK-MSG-001/002のPT仕様と実装を開始。 |
