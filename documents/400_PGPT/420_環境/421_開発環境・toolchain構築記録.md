@@ -30,7 +30,7 @@ Tool version、入手元、hash、設定、commandを固定し、secretを含め
 | PostgreSQL | 18.6 (`18.6-0ubuntu0.26.04.1`) | Ubuntu 26.04 `resolute-updates/main`の`postgresql-18`、`postgresql-client-18`、`libpq5` deb | `work/characterization-tools/root/usr`へrootless展開。Testごとに`target`下へ`initdb`し、loopbackの自動選択portと合成fixtureだけを使用 | Flyway V001～V005、21 table、role/grant/constraint/functionのPT 15件PASS |
 | Flyway | 13.4.0 | Maven Central `org.flywaydb:flyway-core` / `flyway-database-postgresql` | API PT scopeにversion固定。`schubert_meta.flyway_schema_history`、`initSql=SET ROLE nk_owner`、validate on、out-of-order/baseline off、clean disabled | 初回5 migration、再実行0、checksum drift拒否、並行実行直列化 |
 | PostgreSQL JDBC | 42.7.13 | Maven Central `org.postgresql:postgresql` | API PT scopeにversion固定、PostgreSQL 18へのJDBC検査に使用 | catalog/SQLSTATE/role権限PT PASS |
-| Apache Artemis | 2.56.0 | Apache Artemis公式配布とMaven Central `org.apache.artemis` | Binaryは`work/toolchain/artemis`へ展開。API POMでJakarta clientをproduction、server/Jakarta serverをPT scopeに固定 | Java 25で`artemis version`、archive SHA-512照合、HMAC/Outbox中間gate 26 PT PASS |
+| Apache Artemis | 2.56.0 | Apache Artemis公式配布とMaven Central `org.apache.artemis` | Binaryは`work/toolchain/artemis`へ展開。API/Web POMでJakarta clientをproduction、APIのserver/Jakarta serverをPT scopeに固定 | Java 25で`artemis version`、archive SHA-512照合、実NIO File Journalの再起動・duplicate・1/5/25秒再配送・transaction・DLQ component PT PASS |
 | Python | 3.14.4 | OS既存 | SS 323 named recordのversion管理済み再現生成scriptと検証補助に限定。通常のsource編集には使用しない | `python3 --version`、69 record/64 mappingの再生成hash一致 |
 | jq | OS既存 | Ubuntu package | PATH | 最終gateでversion記録 |
 | unzip/sha256sum | OS既存 | Ubuntu package/coreutils | PATH | command存在確認済み |
@@ -96,7 +96,7 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 対象 | 方針 | 状態 |
 |---|---|---|
 | PostgreSQL | 18.6をrootless展開し、実PostgreSQL test runtimeでDDL/Flyway・role/grantのPTを実施 | 完了 |
-| Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み・component PT実装中 |
+| Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み。NK-MSG-001 component PTは部分完了、credential別ACL/全route/Expiryを継続 |
 | JDBC/Flyway | Flyway 13.4.0、PostgreSQL JDBC 42.7.13をMaven Central artifactで固定 | 完了 |
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
 | Secret scan | Tracked/untracked対象のpattern・entropy・known secret detectorをsanitized report化 | 未着手 |
@@ -114,3 +114,4 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 2026-09-02 | Layout semantic/golden追加後のProtocol 67 PT、production 156 class、coverage 4指標100%、SpotBugs 0をRun 08で再確認。専用Maven local repository指定を省いたRun 07はoffline依存解決前に失敗し、PASSへ算入しない。 |
 | 2026-09-03 | Ubuntu公式PostgreSQL 18.6をrootless展開し、Flyway 13.4.0、PostgreSQL JDBC 42.7.13と隔離clusterによるNK-DAT-001 PTを導入。 |
 | 2026-09-03 | Apache Artemis公式2.56.0のarchive/hashとMaven client/server artifactを固定し、Java 25の実File Journal component PT用toolchainを導入。 |
+| 2026-09-03 | Production broker.xml、NIO File Journal再起動・duplicate cache・1/5/25秒再配送・JMS transaction/DLQ、API/Web moduleのcoverage/SpotBugs中間gateを確認。 |
