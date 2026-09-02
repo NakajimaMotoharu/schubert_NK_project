@@ -1,0 +1,258 @@
+table	column	type	nullable	default	identity	generated
+schubert.answers	id	bigint	NO		YES	NEVER
+schubert.answers	question_id	bigint	NO		NO	NEVER
+schubert.answers	body	text	NO		NO	NEVER
+schubert.answers	answered_at	timestamp with time zone	NO		NO	NEVER
+schubert.answers	provider_type	character varying	NO		NO	NEVER
+schubert.answers	is_deleted	boolean	NO	false	NO	NEVER
+schubert.answers	deleted_at	timestamp with time zone	YES		NO	NEVER
+schubert.answers	deleted_by	bigint	YES		NO	NEVER
+schubert.answers	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.answers	updated_at	timestamp with time zone	NO		NO	NEVER
+schubert.app_logs	id	bigint	NO		YES	NEVER
+schubert.app_logs	logged_at	timestamp with time zone	NO		NO	NEVER
+schubert.app_logs	service	character varying	NO		NO	NEVER
+schubert.app_logs	category	character varying	NO		NO	NEVER
+schubert.app_logs	level	character varying	NO		NO	NEVER
+schubert.app_logs	action	character varying	NO		NO	NEVER
+schubert.app_logs	message	character varying	NO		NO	NEVER
+schubert.app_logs	request_id	uuid	YES		NO	NEVER
+schubert.app_logs	message_id	uuid	YES		NO	NEVER
+schubert.app_logs	correlation_id	uuid	YES		NO	NEVER
+schubert.app_logs	source_message_id	uuid	YES		NO	NEVER
+schubert.app_logs	actor_user_id	bigint	YES		NO	NEVER
+schubert.app_logs	actor_username	character varying	YES		NO	NEVER
+schubert.app_logs	http_method	character varying	YES		NO	NEVER
+schubert.app_logs	request_uri	character varying	YES		NO	NEVER
+schubert.app_logs	status_code	smallint	YES		NO	NEVER
+schubert.app_logs	remote_address	inet	YES		NO	NEVER
+schubert.app_logs	duration_ms	bigint	YES		NO	NEVER
+schubert.app_logs	security_hold_until	timestamp with time zone	YES		NO	NEVER
+schubert.app_logs	details	jsonb	NO	'{}'::jsonb	NO	NEVER
+schubert.app_users	id	bigint	NO		YES	NEVER
+schubert.app_users	username	text	NO		NO	NEVER
+schubert.app_users	username_key	text	NO		NO	NEVER
+schubert.app_users	password_hash	text	NO		NO	NEVER
+schubert.app_users	role	character varying	NO		NO	NEVER
+schubert.app_users	status	character varying	NO		NO	NEVER
+schubert.app_users	failed_count	integer	NO	0	NO	NEVER
+schubert.app_users	failure_window_started_at	timestamp with time zone	YES		NO	NEVER
+schubert.app_users	locked_until	timestamp with time zone	YES		NO	NEVER
+schubert.app_users	last_login_at	timestamp with time zone	YES		NO	NEVER
+schubert.app_users	password_changed_at	timestamp with time zone	NO		NO	NEVER
+schubert.app_users	version	bigint	NO	0	NO	NEVER
+schubert.app_users	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.app_users	updated_at	timestamp with time zone	NO		NO	NEVER
+schubert.app_users	created_by	bigint	YES		NO	NEVER
+schubert.app_users	updated_by	bigint	YES		NO	NEVER
+schubert.async_jobs	id	bigint	NO		YES	NEVER
+schubert.async_jobs	question_id	bigint	NO		NO	NEVER
+schubert.async_jobs	owner_user_id	bigint	NO		NO	NEVER
+schubert.async_jobs	state	character varying	NO		NO	NEVER
+schubert.async_jobs	message_id	uuid	NO		NO	NEVER
+schubert.async_jobs	correlation_id	uuid	NO		NO	NEVER
+schubert.async_jobs	processing_message_id	uuid	YES		NO	NEVER
+schubert.async_jobs	received_at	timestamp with time zone	NO		NO	NEVER
+schubert.async_jobs	state_changed_at	timestamp with time zone	NO		NO	NEVER
+schubert.async_jobs	started_at	timestamp with time zone	YES		NO	NEVER
+schubert.async_jobs	completed_at	timestamp with time zone	YES		NO	NEVER
+schubert.async_jobs	error_at	timestamp with time zone	YES		NO	NEVER
+schubert.async_jobs	cancelled_at	timestamp with time zone	YES		NO	NEVER
+schubert.async_jobs	retry_count	integer	NO	0	NO	NEVER
+schubert.async_jobs	last_error_code	character varying	YES		NO	NEVER
+schubert.async_jobs	last_error_message	character varying	YES		NO	NEVER
+schubert.async_jobs	version	bigint	NO	0	NO	NEVER
+schubert.audio_files	id	bigint	NO		YES	NEVER
+schubert.audio_files	game_id	smallint	NO		NO	NEVER
+schubert.audio_files	storage_relative_path	text	NO		NO	NEVER
+schubert.audio_files	display_path	text	NO		NO	NEVER
+schubert.audio_files	file_name	text	NO		NO	NEVER
+schubert.audio_files	basename	text	NO		NO	NEVER
+schubert.audio_files	audio_role	character varying	NO		NO	NEVER
+schubert.audio_files	container	character varying	YES		NO	NEVER
+schubert.audio_files	duration_ms	bigint	YES		NO	NEVER
+schubert.audio_files	byte_size	bigint	NO		NO	NEVER
+schubert.audio_files	sha256	character	NO		NO	NEVER
+schubert.audio_files	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.auth_sessions	id	uuid	NO		NO	NEVER
+schubert.auth_sessions	user_id	bigint	NO		NO	NEVER
+schubert.auth_sessions	context_hash	character	NO		NO	NEVER
+schubert.auth_sessions	context_ciphertext	bytea	NO		NO	NEVER
+schubert.auth_sessions	key_version	character varying	NO		NO	NEVER
+schubert.auth_sessions	issued_at	timestamp with time zone	NO		NO	NEVER
+schubert.auth_sessions	last_accessed_at	timestamp with time zone	NO		NO	NEVER
+schubert.auth_sessions	expires_at	timestamp with time zone	NO		NO	NEVER
+schubert.auth_sessions	revoked	boolean	NO	false	NO	NEVER
+schubert.auth_sessions	revoked_at	timestamp with time zone	YES		NO	NEVER
+schubert.auth_sessions	revoke_reason	character varying	YES		NO	NEVER
+schubert.auth_sessions	client_address	inet	NO		NO	NEVER
+schubert.auth_sessions	created_message_id	uuid	NO		NO	NEVER
+schubert.batch_runs	id	bigint	NO		YES	NEVER
+schubert.batch_runs	run_id	uuid	NO		NO	NEVER
+schubert.batch_runs	business_date	date	NO		NO	NEVER
+schubert.batch_runs	step	character varying	NO		NO	NEVER
+schubert.batch_runs	attempt	smallint	NO		NO	NEVER
+schubert.batch_runs	started_at	timestamp with time zone	NO		NO	NEVER
+schubert.batch_runs	ended_at	timestamp with time zone	YES		NO	NEVER
+schubert.batch_runs	status	character varying	NO		NO	NEVER
+schubert.batch_runs	target_count	bigint	NO	0	NO	NEVER
+schubert.batch_runs	success_count	bigint	NO	0	NO	NEVER
+schubert.batch_runs	failure_count	bigint	NO	0	NO	NEVER
+schubert.batch_runs	byte_count	bigint	NO	0	NO	NEVER
+schubert.batch_runs	error_code	character varying	YES		NO	NEVER
+schubert.batch_runs	error_summary	character varying	YES		NO	NEVER
+schubert.entry_audio_links	entry_id	bigint	NO		NO	NEVER
+schubert.entry_audio_links	audio_file_id	bigint	NO		NO	NEVER
+schubert.entry_audio_links	game_id	smallint	NO		NO	NEVER
+schubert.entry_audio_links	link_type	character varying	NO		NO	NEVER
+schubert.entry_audio_links	display_order	smallint	NO		NO	NEVER
+schubert.entry_audio_links	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.games	id	smallint	NO		NO	NEVER
+schubert.games	code	character varying	NO		NO	NEVER
+schubert.games	title	text	NO		NO	NEVER
+schubert.games	display_order	smallint	NO		NO	NEVER
+schubert.games	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.login_ip_attempts	client_address	inet	NO		NO	NEVER
+schubert.login_ip_attempts	failed_count	integer	NO		NO	NEVER
+schubert.login_ip_attempts	window_started_at	timestamp with time zone	NO		NO	NEVER
+schubert.login_ip_attempts	locked_until	timestamp with time zone	YES		NO	NEVER
+schubert.login_ip_attempts	updated_at	timestamp with time zone	NO		NO	NEVER
+schubert.media_assets	id	bigint	NO		YES	NEVER
+schubert.media_assets	logical_id	character varying	NO		NO	NEVER
+schubert.media_assets	media_type	character varying	NO		NO	NEVER
+schubert.media_assets	title	text	NO		NO	NEVER
+schubert.media_assets	category	text	NO		NO	NEVER
+schubert.media_assets	section	text	YES		NO	NEVER
+schubert.media_assets	storage_relative_path	text	NO		NO	NEVER
+schubert.media_assets	display_path	text	NO		NO	NEVER
+schubert.media_assets	file_name	text	NO		NO	NEVER
+schubert.media_assets	byte_size	bigint	NO		NO	NEVER
+schubert.media_assets	sha256	character	NO		NO	NEVER
+schubert.media_assets	mime_type	character varying	NO		NO	NEVER
+schubert.media_assets	parent_logical_id	character varying	YES		NO	NEVER
+schubert.media_assets	pair_key	text	YES		NO	NEVER
+schubert.media_assets	pair_role	character	YES		NO	NEVER
+schubert.media_assets	display_order	integer	NO		NO	NEVER
+schubert.media_assets	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.mq_outbox	id	bigint	NO		YES	NEVER
+schubert.mq_outbox	message_id	uuid	NO		NO	NEVER
+schubert.mq_outbox	correlation_id	uuid	NO		NO	NEVER
+schubert.mq_outbox	destination	character varying	NO		NO	NEVER
+schubert.mq_outbox	layout_id	character	NO		NO	NEVER
+schubert.mq_outbox	layout_version	character	NO		NO	NEVER
+schubert.mq_outbox	body	bytea	NO		NO	NEVER
+schubert.mq_outbox	status	character varying	NO		NO	NEVER
+schubert.mq_outbox	attempt_count	integer	NO	0	NO	NEVER
+schubert.mq_outbox	next_attempt_at	timestamp with time zone	NO		NO	NEVER
+schubert.mq_outbox	lease_owner	character varying	YES		NO	NEVER
+schubert.mq_outbox	lease_until	timestamp with time zone	YES		NO	NEVER
+schubert.mq_outbox	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.mq_outbox	sent_at	timestamp with time zone	YES		NO	NEVER
+schubert.mq_outbox	last_error_code	character varying	YES		NO	NEVER
+schubert.mq_outbox	last_error_detail	character varying	YES		NO	NEVER
+schubert.notifications	id	bigint	NO		YES	NEVER
+schubert.notifications	job_id	bigint	NO		NO	NEVER
+schubert.notifications	question_id	bigint	NO		NO	NEVER
+schubert.notifications	owner_user_id	bigint	NO		NO	NEVER
+schubert.notifications	notification_type	character varying	NO		NO	NEVER
+schubert.notifications	state	character varying	NO		NO	NEVER
+schubert.notifications	accepted_at	timestamp with time zone	NO		NO	NEVER
+schubert.notifications	state_changed_at	timestamp with time zone	NO		NO	NEVER
+schubert.notifications	error_code	character varying	YES		NO	NEVER
+schubert.notifications	error_message	character varying	YES		NO	NEVER
+schubert.notifications	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.notifications	updated_at	timestamp with time zone	NO		NO	NEVER
+schubert.questions	id	bigint	NO		YES	NEVER
+schubert.questions	receipt_id	character	NO		NO	NEVER
+schubert.questions	owner_user_id	bigint	NO		NO	NEVER
+schubert.questions	body	text	NO		NO	NEVER
+schubert.questions	operation_token	uuid	NO		NO	NEVER
+schubert.questions	submitted_at	timestamp with time zone	NO		NO	NEVER
+schubert.questions	is_deleted	boolean	NO	false	NO	NEVER
+schubert.questions	deleted_at	timestamp with time zone	YES		NO	NEVER
+schubert.questions	deleted_by	bigint	YES		NO	NEVER
+schubert.questions	version	bigint	NO	0	NO	NEVER
+schubert.request_inbox	message_id	uuid	NO		NO	NEVER
+schubert.request_inbox	correlation_id	uuid	NO		NO	NEVER
+schubert.request_inbox	request_layout_id	character	NO		NO	NEVER
+schubert.request_inbox	request_version	character	NO		NO	NEVER
+schubert.request_inbox	owner_user_id	bigint	YES		NO	NEVER
+schubert.request_inbox	operation_token	uuid	YES		NO	NEVER
+schubert.request_inbox	request_fingerprint_hmac	character	NO		NO	NEVER
+schubert.request_inbox	fingerprint_key_version	character varying	NO		NO	NEVER
+schubert.request_inbox	processing_state	character varying	NO		NO	NEVER
+schubert.request_inbox	result_ref_type	character varying	YES		NO	NEVER
+schubert.request_inbox	result_ref_id	bigint	YES		NO	NEVER
+schubert.request_inbox	result_ref_uuid	uuid	YES		NO	NEVER
+schubert.request_inbox	response_layout_id	character	YES		NO	NEVER
+schubert.request_inbox	response_version	character	YES		NO	NEVER
+schubert.request_inbox	response_body_encrypted	bytea	YES		NO	NEVER
+schubert.request_inbox	response_key_version	character varying	YES		NO	NEVER
+schubert.request_inbox	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.request_inbox	completed_at	timestamp with time zone	YES		NO	NEVER
+schubert.request_inbox	expires_at	timestamp with time zone	NO		NO	NEVER
+schubert.script_entries	id	bigint	NO		YES	NEVER
+schubert.script_entries	game_id	smallint	NO		NO	NEVER
+schubert.script_entries	script_file_id	bigint	NO		NO	NEVER
+schubert.script_entries	display_order	bigint	NO		NO	NEVER
+schubert.script_entries	entry_index	integer	NO		NO	NEVER
+schubert.script_entries	line_number	integer	YES		NO	NEVER
+schubert.script_entries	entry_type	character varying	NO		NO	NEVER
+schubert.script_entries	speaker_id	bigint	YES		NO	NEVER
+schubert.script_entries	speaker_label	text	YES		NO	NEVER
+schubert.script_entries	body	text	NO		NO	NEVER
+schubert.script_entries	body_search	text	YES		NO	ALWAYS
+schubert.script_entries	raw_block	text	NO		NO	NEVER
+schubert.script_entries	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.script_files	id	bigint	NO		YES	NEVER
+schubert.script_files	game_id	smallint	NO		NO	NEVER
+schubert.script_files	display_order	bigint	NO		NO	NEVER
+schubert.script_files	storage_relative_path	text	NO		NO	NEVER
+schubert.script_files	display_path	text	NO		NO	NEVER
+schubert.script_files	file_name	text	NO		NO	NEVER
+schubert.script_files	section_code	character varying	YES		NO	NEVER
+schubert.script_files	chapter_title	text	YES		NO	NEVER
+schubert.script_files	sha256	character	NO		NO	NEVER
+schubert.script_files	byte_size	bigint	NO		NO	NEVER
+schubert.script_files	created_at	timestamp with time zone	NO		NO	NEVER
+schubert.speakers	id	bigint	NO		YES	NEVER
+schubert.speakers	game_id	smallint	NO		NO	NEVER
+schubert.speakers	name	text	NO		NO	NEVER
+schubert.speakers	normalized_name	text	NO		NO	NEVER
+schubert.speakers	is_protagonist	boolean	NO	false	NO	NEVER
+schubert.speakers	notes	text	YES		NO	NEVER
+schubert.speakers	created_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	id	uuid	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	context_ciphertext	bytea	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	key_version	character varying	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	requested_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	attempt_count	integer	NO	0	NO	NEVER
+schubert_web_session.pending_context_revocations	next_attempt_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	expires_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.pending_context_revocations	last_error_code	character varying	YES		NO	NEVER
+schubert_web_session.pending_context_revocations	lease_owner	character varying	YES		NO	NEVER
+schubert_web_session.pending_context_revocations	lease_until	timestamp with time zone	YES		NO	NEVER
+schubert_web_session.web_http_sessions	id	uuid	NO		NO	NEVER
+schubert_web_session.web_http_sessions	session_id_hash	character	NO		NO	NEVER
+schubert_web_session.web_http_sessions	attributes_ciphertext	bytea	NO		NO	NEVER
+schubert_web_session.web_http_sessions	key_version	character varying	NO		NO	NEVER
+schubert_web_session.web_http_sessions	created_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.web_http_sessions	last_accessed_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.web_http_sessions	expires_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.web_http_sessions	max_inactive_seconds	integer	NO		NO	NEVER
+schubert_web_session.web_http_sessions	version	bigint	NO	0	NO	NEVER
+schubert_web_session.web_log_outbox	id	bigint	NO		YES	NEVER
+schubert_web_session.web_log_outbox	message_id	uuid	NO		NO	NEVER
+schubert_web_session.web_log_outbox	correlation_id	uuid	NO		NO	NEVER
+schubert_web_session.web_log_outbox	layout_id	character	NO		NO	NEVER
+schubert_web_session.web_log_outbox	layout_version	character	NO		NO	NEVER
+schubert_web_session.web_log_outbox	payload_ciphertext	bytea	NO		NO	NEVER
+schubert_web_session.web_log_outbox	key_version	character varying	NO		NO	NEVER
+schubert_web_session.web_log_outbox	status	character varying	NO		NO	NEVER
+schubert_web_session.web_log_outbox	attempt_count	integer	NO	0	NO	NEVER
+schubert_web_session.web_log_outbox	next_attempt_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.web_log_outbox	created_at	timestamp with time zone	NO		NO	NEVER
+schubert_web_session.web_log_outbox	sent_at	timestamp with time zone	YES		NO	NEVER
+schubert_web_session.web_log_outbox	last_error_code	character varying	YES		NO	NEVER
+schubert_web_session.web_log_outbox	lease_owner	character varying	YES		NO	NEVER
+schubert_web_session.web_log_outbox	lease_until	timestamp with time zone	YES		NO	NEVER

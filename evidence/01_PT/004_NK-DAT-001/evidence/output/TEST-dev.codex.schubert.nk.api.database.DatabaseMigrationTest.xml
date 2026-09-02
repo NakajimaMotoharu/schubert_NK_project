@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="3.489" tests="15" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/test-classes:/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/classes:/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter/5.13.4/junit-jupiter-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-params/5.13.4/junit-jupiter-params-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-engine/5.13.4/junit-jupiter-engine-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/platform/junit-platform-engine/1.13.4/junit-platform-engine-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-databind/3.1.5/jackson-databind-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-core/3.1.5/jackson-core-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-postgresql/13.4.0/flyway-database-postgresql-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-cockroachdb/13.4.0/flyway-database-cockroachdb-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value="Asia/Tokyo"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="JP"/>
+    <property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+    <property name="sun.java.command" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/surefire/surefirebooter-20260903003253133_6.jar /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/surefire 2026-09-03T00-32-43_751-jvmRun1 surefire-20260903003253133_4tmp surefire_1-20260903003253133_5tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/test-classes:/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/classes:/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter/5.13.4/junit-jupiter-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-params/5.13.4/junit-jupiter-params-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/jupiter/junit-jupiter-engine/5.13.4/junit-jupiter-engine-5.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/junit/platform/junit-platform-engine/1.13.4/junit-platform-engine-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-databind/3.1.5/jackson-databind-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-core/3.1.5/jackson-core-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-postgresql/13.4.0/flyway-database-postgresql-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-cockroachdb/13.4.0/flyway-database-cockroachdb-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/mini"/>
+    <property name="user.language" value="ja"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-07-21"/>
+    <property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/surefire/surefirebooter-20260903003253133_6.jar"/>
+    <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+    <property name="user.name" value="mini"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="7.0.0-30-generic"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/mini/codex/project1/work/toolchain/m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="25.0.4"/>
+    <property name="user.dir" value="/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="/home/mini/codex/project1/work/toolchain/m2/repository"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="migrationsAreVersionedValidatedAndIdempotent" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.126">
+    <system-err><![CDATA[Sep 03, 2026 12:32:54 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.database.base.Schema create
+INFO: Creating schema "schubert_meta" ...
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory create
+INFO: Creating Schema History table "schubert_meta"."flyway_schema_history" ...
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "schubert_meta": null
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "001 - schemas and extension"
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.proprietaryStubs.ErrorOverridesSupportStub printWarning
+WARNING: DB: no privileges could be revoked for "public" (SQL State: 01006 - Error Code: 0)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "002 - account session and master tables"
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "003 - business message log and web tables"
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "004 - indexes and initial data"
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "005 - gin functions views and grants"
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Successfully applied 5 migrations to schema "schubert_meta", now at version v005 (execution time 00:00.125s)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 6 migrations (execution time 00:00.008s)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 6 migrations (execution time 00:00.004s)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "schubert_meta": 005
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "schubert_meta" is up to date. No migration necessary.
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:54 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+]]></system-err>
+  </testcase>
+  <testcase name="schemasExtensionAndTablesMatchTheIndependentCatalog" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.018"/>
+  <testcase name="tableColumnsAndIdentityColumnsMatchTheIndependentMatrix" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.064"/>
+  <testcase name="constraintsForeignKeysAndDeferredTriggerAreComplete" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.031"/>
+  <testcase name="explicitIndexesMatchTheIndependentSet" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.018"/>
+  <testcase name="identitySequencesHaveTheN12LimitAndDoNotCycle" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.014"/>
+  <testcase name="scalarAndPathBoundariesRejectInvalidRows" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.017"/>
+  <testcase name="stateTimeAndNullCorrelationsAreEnforced" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.019"/>
+  <testcase name="compositeGameForeignKeysAndDeleteActionsAreEnforced" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.029"/>
+  <testcase name="entryAudioLinkUpperBoundaryAndDeferredTriggerAreEffective" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.148"/>
+  <testcase name="initialDataViewsAndFunctionsMatchTheSecurityContract" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.234"/>
+  <testcase name="serviceRoleGrantsDenyCrossBoundaryAccess" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.066"/>
+  <testcase name="checksumDriftIsDetectedAndDestructiveFlywayOperationsAreDisabled" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.053">
+    <system-err><![CDATA[Sep 03, 2026 12:32:55 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+]]></system-err>
+  </testcase>
+  <testcase name="concurrentInitialMigrationProducesOneHistory" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="1.109">
+    <system-err><![CDATA[Sep 03, 2026 12:32:55 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.FlywayExecutor init
+INFO: Database: ******** (PostgreSQL 18.6)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory allAppliedMigrations
+INFO: Schema history table "schubert_meta"."flyway_schema_history" does not exist yet
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 5 migrations (execution time 00:00.004s)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory allAppliedMigrations
+INFO: Schema history table "schubert_meta"."flyway_schema_history" does not exist yet
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 5 migrations (execution time 00:00.003s)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory create
+INFO: Creating Schema History table "schubert_meta"."flyway_schema_history" ...
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "schubert_meta": << Empty Schema >>
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "001 - schemas and extension"
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.proprietaryStubs.ErrorOverridesSupportStub printWarning
+WARNING: DB: no privileges could be revoked for "public" (SQL State: 01006 - Error Code: 0)
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "002 - account session and master tables"
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "003 - business message log and web tables"
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "004 - indexes and initial data"
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "schubert_meta" to version "005 - gin functions views and grants"
+Sep 03, 2026 12:32:55 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Successfully applied 5 migrations to schema "schubert_meta", now at version v005 (execution time 00:00.105s)
+Sep 03, 2026 12:32:56 AM org.flywaydb.core.internal.util.DeprecationUtils printDeprecationNotice
+WARNING: initSql is deprecated and will be removed in a future release. Please use 'afterConnect' callback instead
+Sep 03, 2026 12:32:56 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "schubert_meta": 005
+Sep 03, 2026 12:32:56 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "schubert_meta" is up to date. No migration necessary.
+]]></system-err>
+  </testcase>
+  <testcase name="sqlResourcesContainNoCredentialOrUnsafeBytes" classname="dev.codex.schubert.nk.api.database.DatabaseMigrationTest" time="0.095"/>
+</testsuite>
