@@ -114,8 +114,9 @@ DB transactionとJMSをXAで結合しない。Inbox replayによりDB先commit�
 
 ### 8.1 Row
 
-331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationはenum
-`ASYNC_WORK`/`DLQ`だけを保存し、実Address文字列を利用者入力から設定しない。
+331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationは
+物理Address `nk.async.work`/`nk.dead.letter`だけを保存する。Javaは閉じた`OutboxDestination`
+（`ASYNC_WORK`/`DLQ`）からこの2値へのみ変換し、実Address文字列を利用者入力から設定しない。
 
 ### 8.2 State
 
@@ -225,3 +226,4 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 | 2026-08-31 | 横断監査でLGNREQ01の認証前Inbox、HMAC、失敗counter/sessionの同一transaction境界を明記。 |
 | 2026-08-31 | 横断監査でHMAC fingerprintを全Requestに必須化し、Inbox response暗号key名をcredential catalogに同期。 |
 | 2026-08-31 | 横断監査でLogin UUIDと業務bigintをInbox result referenceで型別に分離し、Scenario再生成元IDを明記。 |
+| 2026-09-03 | SSC-006によりOutbox destinationの保存値をUI 242/SS 331/DDLの物理Address allowlistへ統一。 |
