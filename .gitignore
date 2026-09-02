@@ -12,6 +12,10 @@ runtime/
 *.key
 *.pem
 
+# Sanitized PT build logs are versioned evidence. Runtime logs remain ignored.
+!evidence/01_PT/*/evidence/logs/
+!evidence/01_PT/*/evidence/logs/PT-*-build.log
+
 # IDE and OS files
 .idea/
 .vscode/

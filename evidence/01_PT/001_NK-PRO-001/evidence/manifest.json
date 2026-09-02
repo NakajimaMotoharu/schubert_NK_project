@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "PT-PRO-20260902-06",
+  "previousRunId": "PT-PRO-20260902-05",
+  "programId": "NK-PRO-001",
+  "executedAt": "2026-09-02T18:27:19+09:00",
+  "completedAt": "2026-09-02T18:27:32+09:00",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "kernel": "7.0.0-30-generic x86_64",
+    "jdk": "OpenJDK 25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0"
+  },
+  "branch": "dev-protocol-codec",
+  "commit": "f519ba318c258b08982dc09e04dbc088e439bc83",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 MAVEN_USER_HOME=/home/mini/codex/project1/work/toolchain/m2 ./mvnw -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-protocol -am clean verify",
+  "exitCode": 0,
+  "reactorVerification": {"executedAt": "2026-09-02T18:27:42+09:00", "completedAt": "2026-09-02T18:27:58+09:00", "command": "./mvnw -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify", "exitCode": 0, "characterizationTests": 41, "protocolTests": 56, "failures": 0, "errors": 0, "skipped": 0},
+  "result": "PASS",
+  "tests": {"program": 25, "module": 56, "failures": 0, "errors": 0, "skipped": 0, "flaky": 0, "disabled": 0, "notRun": 0},
+  "coverage": {"line": {"covered": 3009, "missed": 0}, "method": {"covered": 685, "missed": 0}, "class": {"covered": 155, "missed": 0}, "branch": {"covered": 739, "missed": 0}},
+  "staticAnalysis": {"compilerWarnings": 0, "spotbugsBugInstances": 0, "spotbugsErrors": 0},
+  "relatedBugs": ["BUG-002", "BUG-003", "BUG-004"],
+  "relatedYkt": ["YKT-002", "YKT-003", "YKT-004"],
+  "relatedSsc": ["SSC-004"],
+  "fixtures": {
+    "layoutsUi233Sha256": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "fieldsUi234To236Sha256": "b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b",
+    "namedTypesSs323Sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+  },
+  "artifact": {"jarSha256": "c78dfc9c067d230e60e58be2b074ada613332febe10302a1edd7774f6e259a0b"},
+  "redaction": "synthetic public test values only; no credential, password, raw session, cookie, token, or secret key"
+}
