@@ -19,8 +19,8 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 | No. / Program ID | Module・主class/resource | 関連RD | 関連UI | 関連SS | PT directory | CHR | 状態 |
 |---|---|---|---|---|---|---|---|
-| 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006 | 232～237、243 | 311、322～323、333 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT中（中間gate 21件PASS、389 field catalog・69 named record・64明示mapper、日時/UUID/context/SHA/path型完了。ID/int/enum型未実装） |
-| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT中（中間gate 24件PASS、64 layout field/error codec・named/semantic mapper完了。layout semantic/cross-field/golden未実施） |
+| 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006 | 232～237、243 | 311、322～323、333 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT完了（25/25、389 field・69 named record・64明示mapper・SS 323共通Java型、coverage全100%、SpotBugs 0） |
+| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT中（中間gate 24件PASS、module 56件PASS。field/error codec・named/semantic mapper完了、layout semantic/cross-field/golden未実施） |
 | 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（12/12、coverage全100%、SpotBugs 0） |
 | 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | 未着手 |
 | 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | 未着手 |
@@ -57,3 +57,4 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-02 | UI 234～236の389 field catalog、64 layout success/error field codec、BUG-003/YKT-003再試験を中間gateへ反映。 |
 | 2026-09-02 | SS 323の69 named record、64件の明示mapper、独立class名fixtureを中間gateへ反映。 |
 | 2026-09-02 | SS 323の日時/UUID/context/SHA/path semantic型、BUG-004/YKT-004再試験、Protocol 52 PTを中間gateへ反映。 |
+| 2026-09-02 | SS 323のN12 ID、primitive数値、X numeric、全wire enumとconstructor invariantを完了し、NK-PRO-001をPG/PT完了。 |
