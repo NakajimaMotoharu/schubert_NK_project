@@ -1,27 +1,28 @@
 package dev.codex.schubert.nk.protocol.layout.log;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts WLGEVT01. */
-public record WebLogEventData(FieldValue.Numeric occurredAt,
-    FieldValue.Text level,
-    Optional<FieldValue.Text> action,
-    FieldValue.Text message,
-    FieldValue.Text httpRequestId,
-    FieldValue.Text httpMethod,
-    FieldValue.Text path,
-    FieldValue.Text httpStatus,
-    FieldValue.Text elapsedMs,
-    FieldValue.Text remoteAddress,
-    Optional<FieldValue.Text> username,
-    Optional<FieldValue.Text> role,
-    Optional<FieldValue.Text> details) implements PayloadData {
+public record WebLogEventData(Instant occurredAt,
+    String level,
+    Optional<String> action,
+    String message,
+    UUID httpRequestId,
+    String httpMethod,
+    String path,
+    String httpStatus,
+    String elapsedMs,
+    String remoteAddress,
+    Optional<String> username,
+    Optional<String> role,
+    Optional<String> details) implements PayloadData {
   public WebLogEventData {
     Objects.requireNonNull(occurredAt, "occurredAt");
     Objects.requireNonNull(level, "level");
@@ -40,37 +41,42 @@ public record WebLogEventData(FieldValue.Numeric occurredAt,
 
   public static WebLogEventData from(FieldValueSet fields) {
     return new WebLogEventData(
-        TypedFieldValues.requiredNumeric(fields, "発生日時"),
-        TypedFieldValues.requiredText(fields, "Level"),
-        TypedFieldValues.optionalText(fields, "Action"),
-        TypedFieldValues.requiredText(fields, "Message"),
-        TypedFieldValues.requiredText(fields, "HTTP request ID"),
-        TypedFieldValues.requiredText(fields, "HTTP method"),
-        TypedFieldValues.requiredText(fields, "Path"),
-        TypedFieldValues.requiredText(fields, "HTTP status"),
-        TypedFieldValues.requiredText(fields, "Elapsed ms"),
-        TypedFieldValues.requiredText(fields, "Remote address"),
-        TypedFieldValues.optionalText(fields, "Username"),
-        TypedFieldValues.optionalText(fields, "Role"),
-        TypedFieldValues.optionalText(fields, "Details"));
+        TypedFieldValues.requiredInstant(fields, "発生日時"),
+        TypedFieldValues.requiredString(fields, "Level"),
+        TypedFieldValues.optionalString(fields, "Action"),
+        TypedFieldValues.requiredString(fields, "Message"),
+        TypedFieldValues.requiredUuid(fields, "HTTP request ID"),
+        TypedFieldValues.requiredString(fields, "HTTP method"),
+        TypedFieldValues.requiredString(fields, "Path"),
+        TypedFieldValues.requiredString(fields, "HTTP status"),
+        TypedFieldValues.requiredString(fields, "Elapsed ms"),
+        TypedFieldValues.requiredString(fields, "Remote address"),
+        TypedFieldValues.optionalString(fields, "Username"),
+        TypedFieldValues.optionalString(fields, "Role"),
+        TypedFieldValues.optionalString(fields, "Details"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("発生日時", occurredAt),
-            Map.entry("Level", level),
-            Map.entry("Action", TypedFieldValues.orUnset(action)),
-            Map.entry("Message", message),
-            Map.entry("HTTP request ID", httpRequestId),
-            Map.entry("HTTP method", httpMethod),
-            Map.entry("Path", path),
-            Map.entry("HTTP status", httpStatus),
-            Map.entry("Elapsed ms", elapsedMs),
-            Map.entry("Remote address", remoteAddress),
-            Map.entry("Username", TypedFieldValues.orUnset(username)),
-            Map.entry("Role", TypedFieldValues.orUnset(role)),
-            Map.entry("Details", TypedFieldValues.orUnset(details))));
+            Map.entry("発生日時", TypedFieldValues.instant(occurredAt)),
+            Map.entry("Level", TypedFieldValues.text(level)),
+            Map.entry("Action", TypedFieldValues.optionalStringValue(action)),
+            Map.entry("Message", TypedFieldValues.text(message)),
+            Map.entry("HTTP request ID", TypedFieldValues.uuid(httpRequestId)),
+            Map.entry("HTTP method", TypedFieldValues.text(httpMethod)),
+            Map.entry("Path", TypedFieldValues.text(path)),
+            Map.entry("HTTP status", TypedFieldValues.text(httpStatus)),
+            Map.entry("Elapsed ms", TypedFieldValues.text(elapsedMs)),
+            Map.entry("Remote address", TypedFieldValues.text(remoteAddress)),
+            Map.entry("Username", TypedFieldValues.optionalStringValue(username)),
+            Map.entry("Role", TypedFieldValues.optionalStringValue(role)),
+            Map.entry("Details", TypedFieldValues.optionalStringValue(details))));
+  }
+
+  @Override
+  public String toString() {
+    return "WebLogEventData[REDACTED]";
   }
 }

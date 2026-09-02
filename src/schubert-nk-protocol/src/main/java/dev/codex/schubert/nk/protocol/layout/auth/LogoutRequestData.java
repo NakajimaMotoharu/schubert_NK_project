@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.protocol.layout.auth;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
@@ -16,5 +15,10 @@ public record LogoutRequestData() implements PayloadData {
   @Override
   public FieldValueSet fields() {
     return FieldValueSet.empty();
+  }
+
+  @Override
+  public String toString() {
+    return "LogoutRequestData[REDACTED]";
   }
 }

@@ -1,23 +1,23 @@
 package dev.codex.schubert.nk.protocol.layout.log;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts LGSREQ01. */
-public record LogSearchRequestData(Optional<FieldValue.Text> keyword,
-    Optional<FieldValue.Text> logType,
-    Optional<FieldValue.Text> action,
-    Optional<FieldValue.Text> path,
-    Optional<FieldValue.Text> level,
-    Optional<FieldValue.Text> fromAt,
-    Optional<FieldValue.Text> toAt,
-    FieldValue.Numeric page,
-    FieldValue.Numeric pageSize) implements PayloadData {
+public record LogSearchRequestData(Optional<String> keyword,
+    Optional<String> logType,
+    Optional<String> action,
+    Optional<String> path,
+    Optional<String> level,
+    Optional<Instant> fromAt,
+    Optional<Instant> toAt,
+    long page,
+    long pageSize) implements PayloadData {
   public LogSearchRequestData {
     Objects.requireNonNull(keyword, "keyword");
     Objects.requireNonNull(logType, "logType");
@@ -26,35 +26,38 @@ public record LogSearchRequestData(Optional<FieldValue.Text> keyword,
     Objects.requireNonNull(level, "level");
     Objects.requireNonNull(fromAt, "fromAt");
     Objects.requireNonNull(toAt, "toAt");
-    Objects.requireNonNull(page, "page");
-    Objects.requireNonNull(pageSize, "pageSize");
   }
 
   public static LogSearchRequestData from(FieldValueSet fields) {
     return new LogSearchRequestData(
-        TypedFieldValues.optionalText(fields, "Keyword"),
-        TypedFieldValues.optionalText(fields, "Log type"),
-        TypedFieldValues.optionalText(fields, "Action"),
-        TypedFieldValues.optionalText(fields, "Path"),
-        TypedFieldValues.optionalText(fields, "Level"),
-        TypedFieldValues.optionalText(fields, "From日時"),
-        TypedFieldValues.optionalText(fields, "To日時"),
-        TypedFieldValues.requiredNumeric(fields, "Page"),
-        TypedFieldValues.requiredNumeric(fields, "Page size"));
+        TypedFieldValues.optionalString(fields, "Keyword"),
+        TypedFieldValues.optionalString(fields, "Log type"),
+        TypedFieldValues.optionalString(fields, "Action"),
+        TypedFieldValues.optionalString(fields, "Path"),
+        TypedFieldValues.optionalString(fields, "Level"),
+        TypedFieldValues.optionalInstant(fields, "From日時"),
+        TypedFieldValues.optionalInstant(fields, "To日時"),
+        TypedFieldValues.requiredLong(fields, "Page"),
+        TypedFieldValues.requiredLong(fields, "Page size"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("Keyword", TypedFieldValues.orUnset(keyword)),
-            Map.entry("Log type", TypedFieldValues.orUnset(logType)),
-            Map.entry("Action", TypedFieldValues.orUnset(action)),
-            Map.entry("Path", TypedFieldValues.orUnset(path)),
-            Map.entry("Level", TypedFieldValues.orUnset(level)),
-            Map.entry("From日時", TypedFieldValues.orUnset(fromAt)),
-            Map.entry("To日時", TypedFieldValues.orUnset(toAt)),
-            Map.entry("Page", page),
-            Map.entry("Page size", pageSize)));
+            Map.entry("Keyword", TypedFieldValues.optionalStringValue(keyword)),
+            Map.entry("Log type", TypedFieldValues.optionalStringValue(logType)),
+            Map.entry("Action", TypedFieldValues.optionalStringValue(action)),
+            Map.entry("Path", TypedFieldValues.optionalStringValue(path)),
+            Map.entry("Level", TypedFieldValues.optionalStringValue(level)),
+            Map.entry("From日時", TypedFieldValues.optionalInstantValue(fromAt)),
+            Map.entry("To日時", TypedFieldValues.optionalInstantValue(toAt)),
+            Map.entry("Page", TypedFieldValues.numeric(page)),
+            Map.entry("Page size", TypedFieldValues.numeric(pageSize))));
+  }
+
+  @Override
+  public String toString() {
+    return "LogSearchRequestData[REDACTED]";
   }
 }

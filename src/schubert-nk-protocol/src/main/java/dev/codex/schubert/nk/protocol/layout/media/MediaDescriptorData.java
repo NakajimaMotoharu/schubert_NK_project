@@ -1,25 +1,25 @@
 package dev.codex.schubert.nk.protocol.layout.media;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts AUDRSP01, MEDRSP01. */
-public record MediaDescriptorData(FieldValue.Text mediaLogicalId,
-    FieldValue.Text storageRelativePath,
-    FieldValue.Text fileName,
-    FieldValue.Numeric fileByteLength,
-    FieldValue.Text sha256,
-    FieldValue.Text mimeType,
-    FieldValue.Text contentDisposition) implements PayloadData {
+public record MediaDescriptorData(String mediaLogicalId,
+    RelativePath storageRelativePath,
+    String fileName,
+    long fileByteLength,
+    Sha256Hex sha256,
+    String mimeType,
+    String contentDisposition) implements PayloadData {
   public MediaDescriptorData {
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
     Objects.requireNonNull(storageRelativePath, "storageRelativePath");
     Objects.requireNonNull(fileName, "fileName");
-    Objects.requireNonNull(fileByteLength, "fileByteLength");
     Objects.requireNonNull(sha256, "sha256");
     Objects.requireNonNull(mimeType, "mimeType");
     Objects.requireNonNull(contentDisposition, "contentDisposition");
@@ -27,25 +27,30 @@ public record MediaDescriptorData(FieldValue.Text mediaLogicalId,
 
   public static MediaDescriptorData from(FieldValueSet fields) {
     return new MediaDescriptorData(
-        TypedFieldValues.requiredText(fields, "Media logical ID"),
-        TypedFieldValues.requiredText(fields, "Storage relative path"),
-        TypedFieldValues.requiredText(fields, "File name"),
-        TypedFieldValues.requiredNumeric(fields, "File byte長"),
-        TypedFieldValues.requiredText(fields, "SHA-256"),
-        TypedFieldValues.requiredText(fields, "MIME type"),
-        TypedFieldValues.requiredText(fields, "Content disposition"));
+        TypedFieldValues.requiredString(fields, "Media logical ID"),
+        TypedFieldValues.requiredRelativePath(fields, "Storage relative path"),
+        TypedFieldValues.requiredString(fields, "File name"),
+        TypedFieldValues.requiredLong(fields, "File byte長"),
+        TypedFieldValues.requiredSha256(fields, "SHA-256"),
+        TypedFieldValues.requiredString(fields, "MIME type"),
+        TypedFieldValues.requiredString(fields, "Content disposition"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("Media logical ID", mediaLogicalId),
-            Map.entry("Storage relative path", storageRelativePath),
-            Map.entry("File name", fileName),
-            Map.entry("File byte長", fileByteLength),
-            Map.entry("SHA-256", sha256),
-            Map.entry("MIME type", mimeType),
-            Map.entry("Content disposition", contentDisposition)));
+            Map.entry("Media logical ID", TypedFieldValues.text(mediaLogicalId)),
+            Map.entry("Storage relative path", TypedFieldValues.relativePath(storageRelativePath)),
+            Map.entry("File name", TypedFieldValues.text(fileName)),
+            Map.entry("File byte長", TypedFieldValues.numeric(fileByteLength)),
+            Map.entry("SHA-256", TypedFieldValues.sha256(sha256)),
+            Map.entry("MIME type", TypedFieldValues.text(mimeType)),
+            Map.entry("Content disposition", TypedFieldValues.text(contentDisposition))));
+  }
+
+  @Override
+  public String toString() {
+    return "MediaDescriptorData[REDACTED]";
   }
 }

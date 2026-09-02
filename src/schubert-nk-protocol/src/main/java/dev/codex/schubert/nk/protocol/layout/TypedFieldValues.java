@@ -1,9 +1,21 @@
 package dev.codex.schubert.nk.protocol.layout;
 
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;
+import java.time.Instant;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Function;
 
-/** Type-safe bridge used by generated named records; it never infers component order. */
+/**
+ * Type-safe bridge used by generated named records; it never infers component order.
+ * Trace: NK-PRO-001, SS 323 sections 2/10, PT-PRO-001-T02/T03.
+ */
 public final class TypedFieldValues {
   private TypedFieldValues() {}
 
@@ -42,9 +54,144 @@ public final class TypedFieldValues {
     throw wrongType(name);
   }
 
+  public static String requiredString(FieldValueSet fields, String name) {
+    return requiredText(fields, name).value();
+  }
+
+  public static long requiredLong(FieldValueSet fields, String name) {
+    return requiredNumeric(fields, name).value();
+  }
+
+  public static boolean requiredBoolean(FieldValueSet fields, String name) {
+    return requiredFlag(fields, name).value();
+  }
+
+  public static Optional<String> optionalString(FieldValueSet fields, String name) {
+    return optionalText(fields, name).map(FieldValue.Text::value);
+  }
+
+  public static Instant requiredInstant(FieldValueSet fields, String name) {
+    String wire = String.format(Locale.ROOT, "%017d", requiredLong(fields, name));
+    return semantic(name, wire, JstWireTimestamp::parse);
+  }
+
+  public static Optional<Instant> optionalInstant(FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, JstWireTimestamp::parse));
+  }
+
+  public static UUID requiredUuid(FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), TypedFieldValues::canonicalUuid);
+  }
+
+  public static Optional<UUID> optionalUuid(FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, TypedFieldValues::canonicalUuid));
+  }
+
+  public static Optional<AuthenticationContext> optionalAuthenticationContext(
+      FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, AuthenticationContext::of));
+  }
+
+  public static Sha256Hex requiredSha256(FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), Sha256Hex::of);
+  }
+
+  public static Optional<Sha256Hex> optionalSha256(FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, Sha256Hex::of));
+  }
+
+  public static RelativePath requiredRelativePath(FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), RelativePath::of);
+  }
+
+  public static Optional<RelativePath> optionalRelativePath(FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, RelativePath::of));
+  }
+
+  public static DisplayPath requiredDisplayPath(FieldValueSet fields, String name) {
+    return semantic(name, requiredString(fields, name), DisplayPath::of);
+  }
+
+  public static Optional<DisplayPath> optionalDisplayPath(FieldValueSet fields, String name) {
+    return optionalString(fields, name).map(value -> semantic(name, value, DisplayPath::of));
+  }
+
   public static FieldValue orUnset(Optional<FieldValue.Text> value) {
     Objects.requireNonNull(value, "value");
     return value.<FieldValue>map(text -> text).orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue text(String value) {
+    return new FieldValue.Text(Objects.requireNonNull(value, "value"));
+  }
+
+  public static FieldValue numeric(long value) {
+    return new FieldValue.Numeric(value);
+  }
+
+  public static FieldValue flag(boolean value) {
+    return new FieldValue.Flag(value);
+  }
+
+  public static FieldValue optionalStringValue(Optional<String> value) {
+    Objects.requireNonNull(value, "value");
+    return value.<FieldValue>map(FieldValue.Text::new).orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue instant(Instant value) {
+    Objects.requireNonNull(value, "value");
+    return new FieldValue.Numeric(Long.parseLong(JstWireTimestamp.format(value)));
+  }
+
+  public static FieldValue optionalInstantValue(Optional<Instant> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(instant -> new FieldValue.Text(JstWireTimestamp.format(instant)))
+        .orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue uuid(UUID value) {
+    return text(Objects.requireNonNull(value, "value").toString());
+  }
+
+  public static FieldValue optionalUuidValue(Optional<UUID> value) {
+    Objects.requireNonNull(value, "value");
+    return value.<FieldValue>map(uuid -> new FieldValue.Text(uuid.toString())).orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue optionalAuthenticationContextValue(
+      Optional<AuthenticationContext> value) {
+    Objects.requireNonNull(value, "value");
+    return value
+        .<FieldValue>map(context -> new FieldValue.Text(context.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue sha256(Sha256Hex value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalSha256Value(Optional<Sha256Hex> value) {
+    Objects.requireNonNull(value, "value");
+    return value.<FieldValue>map(sha -> new FieldValue.Text(sha.wireValue())).orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue relativePath(RelativePath value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalRelativePathValue(Optional<RelativePath> value) {
+    Objects.requireNonNull(value, "value");
+    return value.<FieldValue>map(path -> new FieldValue.Text(path.wireValue())).orElse(FieldValue.Unset.INSTANCE);
+  }
+
+  public static FieldValue displayPath(DisplayPath value) {
+    return text(Objects.requireNonNull(value, "value").wireValue());
+  }
+
+  public static FieldValue optionalDisplayPathValue(Optional<DisplayPath> value) {
+    Objects.requireNonNull(value, "value");
+    return value.<FieldValue>map(path -> new FieldValue.Text(path.wireValue())).orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static void requireEmpty(FieldValueSet fields) {
@@ -62,5 +209,21 @@ public final class TypedFieldValues {
 
   private static LayoutValidationException wrongType(String name) {
     return new LayoutValidationException("typed field has the wrong value kind: " + name);
+  }
+
+  private static UUID canonicalUuid(String value) {
+    UUID uuid = UUID.fromString(value);
+    if (!uuid.toString().equals(value)) {
+      throw new IllegalArgumentException("UUID is not lowercase canonical form");
+    }
+    return uuid;
+  }
+
+  private static <T> T semantic(String name, String value, Function<String, T> factory) {
+    try {
+      return factory.apply(value);
+    } catch (IllegalArgumentException exception) {
+      throw new LayoutValidationException("typed field has an invalid semantic value: " + name, exception);
+    }
   }
 }

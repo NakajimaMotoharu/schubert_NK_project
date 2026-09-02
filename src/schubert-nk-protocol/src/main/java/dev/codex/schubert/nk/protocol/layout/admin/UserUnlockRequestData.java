@@ -1,35 +1,38 @@
 package dev.codex.schubert.nk.protocol.layout.admin;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts ULKREQ01. */
-public record UserUnlockRequestData(FieldValue.Numeric userId,
-    FieldValue.Numeric expectedVersion,
-    FieldValue.Text operationToken) implements PayloadData {
+public record UserUnlockRequestData(long userId,
+    long expectedVersion,
+    UUID operationToken) implements PayloadData {
   public UserUnlockRequestData {
-    Objects.requireNonNull(userId, "userId");
-    Objects.requireNonNull(expectedVersion, "expectedVersion");
     Objects.requireNonNull(operationToken, "operationToken");
   }
 
   public static UserUnlockRequestData from(FieldValueSet fields) {
     return new UserUnlockRequestData(
-        TypedFieldValues.requiredNumeric(fields, "User ID"),
-        TypedFieldValues.requiredNumeric(fields, "Expected version"),
-        TypedFieldValues.requiredText(fields, "Operation token"));
+        TypedFieldValues.requiredLong(fields, "User ID"),
+        TypedFieldValues.requiredLong(fields, "Expected version"),
+        TypedFieldValues.requiredUuid(fields, "Operation token"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("User ID", userId),
-            Map.entry("Expected version", expectedVersion),
-            Map.entry("Operation token", operationToken)));
+            Map.entry("User ID", TypedFieldValues.numeric(userId)),
+            Map.entry("Expected version", TypedFieldValues.numeric(expectedVersion)),
+            Map.entry("Operation token", TypedFieldValues.uuid(operationToken))));
+  }
+
+  @Override
+  public String toString() {
+    return "UserUnlockRequestData[REDACTED]";
   }
 }

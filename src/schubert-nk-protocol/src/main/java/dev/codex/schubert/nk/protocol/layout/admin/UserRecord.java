@@ -1,25 +1,24 @@
 package dev.codex.schubert.nk.protocol.layout.admin;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts USRRSP01. */
-public record UserRecord(FieldValue.Numeric userId,
-    FieldValue.Text username,
-    FieldValue.Text role,
-    FieldValue.Text state,
-    Optional<FieldValue.Text> lockedUntil,
-    Optional<FieldValue.Text> lastLogin,
-    FieldValue.Numeric createdAt,
-    FieldValue.Numeric updatedAt,
-    FieldValue.Numeric version) implements PayloadRecord {
+public record UserRecord(long userId,
+    String username,
+    String role,
+    String state,
+    Optional<Instant> lockedUntil,
+    Optional<Instant> lastLogin,
+    Instant createdAt,
+    Instant updatedAt,
+    long version) implements PayloadRecord {
   public UserRecord {
-    Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(role, "role");
     Objects.requireNonNull(state, "state");
@@ -27,34 +26,38 @@ public record UserRecord(FieldValue.Numeric userId,
     Objects.requireNonNull(lastLogin, "lastLogin");
     Objects.requireNonNull(createdAt, "createdAt");
     Objects.requireNonNull(updatedAt, "updatedAt");
-    Objects.requireNonNull(version, "version");
   }
 
   public static UserRecord from(FieldValueSet fields) {
     return new UserRecord(
-        TypedFieldValues.requiredNumeric(fields, "User ID"),
-        TypedFieldValues.requiredText(fields, "Username"),
-        TypedFieldValues.requiredText(fields, "Role"),
-        TypedFieldValues.requiredText(fields, "State"),
-        TypedFieldValues.optionalText(fields, "Locked until"),
-        TypedFieldValues.optionalText(fields, "Last Login"),
-        TypedFieldValues.requiredNumeric(fields, "Created at"),
-        TypedFieldValues.requiredNumeric(fields, "Updated at"),
-        TypedFieldValues.requiredNumeric(fields, "Version"));
+        TypedFieldValues.requiredLong(fields, "User ID"),
+        TypedFieldValues.requiredString(fields, "Username"),
+        TypedFieldValues.requiredString(fields, "Role"),
+        TypedFieldValues.requiredString(fields, "State"),
+        TypedFieldValues.optionalInstant(fields, "Locked until"),
+        TypedFieldValues.optionalInstant(fields, "Last Login"),
+        TypedFieldValues.requiredInstant(fields, "Created at"),
+        TypedFieldValues.requiredInstant(fields, "Updated at"),
+        TypedFieldValues.requiredLong(fields, "Version"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("User ID", userId),
-            Map.entry("Username", username),
-            Map.entry("Role", role),
-            Map.entry("State", state),
-            Map.entry("Locked until", TypedFieldValues.orUnset(lockedUntil)),
-            Map.entry("Last Login", TypedFieldValues.orUnset(lastLogin)),
-            Map.entry("Created at", createdAt),
-            Map.entry("Updated at", updatedAt),
-            Map.entry("Version", version)));
+            Map.entry("User ID", TypedFieldValues.numeric(userId)),
+            Map.entry("Username", TypedFieldValues.text(username)),
+            Map.entry("Role", TypedFieldValues.text(role)),
+            Map.entry("State", TypedFieldValues.text(state)),
+            Map.entry("Locked until", TypedFieldValues.optionalInstantValue(lockedUntil)),
+            Map.entry("Last Login", TypedFieldValues.optionalInstantValue(lastLogin)),
+            Map.entry("Created at", TypedFieldValues.instant(createdAt)),
+            Map.entry("Updated at", TypedFieldValues.instant(updatedAt)),
+            Map.entry("Version", TypedFieldValues.numeric(version))));
+  }
+
+  @Override
+  public String toString() {
+    return "UserRecord[REDACTED]";
   }
 }

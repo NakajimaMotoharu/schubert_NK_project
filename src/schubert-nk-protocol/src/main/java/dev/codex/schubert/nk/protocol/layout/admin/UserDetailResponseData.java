@@ -1,29 +1,28 @@
 package dev.codex.schubert.nk.protocol.layout.admin;
 
-import dev.codex.schubert.nk.protocol.layout.FieldValue;
 import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
+import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts UDTRSP01. */
-public record UserDetailResponseData(FieldValue.Numeric userId,
-    FieldValue.Text username,
-    FieldValue.Text role,
-    FieldValue.Text state,
-    Optional<FieldValue.Text> lockedUntil,
-    Optional<FieldValue.Text> lastLogin,
-    FieldValue.Numeric passwordChangedAt,
-    FieldValue.Numeric createdAt,
-    FieldValue.Numeric updatedAt,
-    FieldValue.Numeric activeSessionCount,
-    FieldValue.Numeric version,
-    FieldValue.Text createdBy,
-    FieldValue.Text updatedBy) implements PayloadData {
+public record UserDetailResponseData(long userId,
+    String username,
+    String role,
+    String state,
+    Optional<Instant> lockedUntil,
+    Optional<Instant> lastLogin,
+    Instant passwordChangedAt,
+    Instant createdAt,
+    Instant updatedAt,
+    long activeSessionCount,
+    long version,
+    String createdBy,
+    String updatedBy) implements PayloadData {
   public UserDetailResponseData {
-    Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(role, "role");
     Objects.requireNonNull(state, "state");
@@ -32,45 +31,48 @@ public record UserDetailResponseData(FieldValue.Numeric userId,
     Objects.requireNonNull(passwordChangedAt, "passwordChangedAt");
     Objects.requireNonNull(createdAt, "createdAt");
     Objects.requireNonNull(updatedAt, "updatedAt");
-    Objects.requireNonNull(activeSessionCount, "activeSessionCount");
-    Objects.requireNonNull(version, "version");
     Objects.requireNonNull(createdBy, "createdBy");
     Objects.requireNonNull(updatedBy, "updatedBy");
   }
 
   public static UserDetailResponseData from(FieldValueSet fields) {
     return new UserDetailResponseData(
-        TypedFieldValues.requiredNumeric(fields, "User ID"),
-        TypedFieldValues.requiredText(fields, "Username"),
-        TypedFieldValues.requiredText(fields, "Role"),
-        TypedFieldValues.requiredText(fields, "State"),
-        TypedFieldValues.optionalText(fields, "Locked until"),
-        TypedFieldValues.optionalText(fields, "Last Login"),
-        TypedFieldValues.requiredNumeric(fields, "Password changed at"),
-        TypedFieldValues.requiredNumeric(fields, "Created at"),
-        TypedFieldValues.requiredNumeric(fields, "Updated at"),
-        TypedFieldValues.requiredNumeric(fields, "Active session数"),
-        TypedFieldValues.requiredNumeric(fields, "Version"),
-        TypedFieldValues.requiredText(fields, "Created by"),
-        TypedFieldValues.requiredText(fields, "Updated by"));
+        TypedFieldValues.requiredLong(fields, "User ID"),
+        TypedFieldValues.requiredString(fields, "Username"),
+        TypedFieldValues.requiredString(fields, "Role"),
+        TypedFieldValues.requiredString(fields, "State"),
+        TypedFieldValues.optionalInstant(fields, "Locked until"),
+        TypedFieldValues.optionalInstant(fields, "Last Login"),
+        TypedFieldValues.requiredInstant(fields, "Password changed at"),
+        TypedFieldValues.requiredInstant(fields, "Created at"),
+        TypedFieldValues.requiredInstant(fields, "Updated at"),
+        TypedFieldValues.requiredLong(fields, "Active session数"),
+        TypedFieldValues.requiredLong(fields, "Version"),
+        TypedFieldValues.requiredString(fields, "Created by"),
+        TypedFieldValues.requiredString(fields, "Updated by"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
         Map.ofEntries(
-            Map.entry("User ID", userId),
-            Map.entry("Username", username),
-            Map.entry("Role", role),
-            Map.entry("State", state),
-            Map.entry("Locked until", TypedFieldValues.orUnset(lockedUntil)),
-            Map.entry("Last Login", TypedFieldValues.orUnset(lastLogin)),
-            Map.entry("Password changed at", passwordChangedAt),
-            Map.entry("Created at", createdAt),
-            Map.entry("Updated at", updatedAt),
-            Map.entry("Active session数", activeSessionCount),
-            Map.entry("Version", version),
-            Map.entry("Created by", createdBy),
-            Map.entry("Updated by", updatedBy)));
+            Map.entry("User ID", TypedFieldValues.numeric(userId)),
+            Map.entry("Username", TypedFieldValues.text(username)),
+            Map.entry("Role", TypedFieldValues.text(role)),
+            Map.entry("State", TypedFieldValues.text(state)),
+            Map.entry("Locked until", TypedFieldValues.optionalInstantValue(lockedUntil)),
+            Map.entry("Last Login", TypedFieldValues.optionalInstantValue(lastLogin)),
+            Map.entry("Password changed at", TypedFieldValues.instant(passwordChangedAt)),
+            Map.entry("Created at", TypedFieldValues.instant(createdAt)),
+            Map.entry("Updated at", TypedFieldValues.instant(updatedAt)),
+            Map.entry("Active session数", TypedFieldValues.numeric(activeSessionCount)),
+            Map.entry("Version", TypedFieldValues.numeric(version)),
+            Map.entry("Created by", TypedFieldValues.text(createdBy)),
+            Map.entry("Updated by", TypedFieldValues.text(updatedBy))));
+  }
+
+  @Override
+  public String toString() {
+    return "UserDetailResponseData[REDACTED]";
   }
 }

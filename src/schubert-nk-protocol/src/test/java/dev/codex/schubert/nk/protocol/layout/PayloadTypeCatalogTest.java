@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -68,6 +69,10 @@ class PayloadTypeCatalogTest {
       TypedPayloadValues typed = PayloadTypeCatalog.decode(values);
       assertEquals(values, PayloadTypeCatalog.encode(typed), layout.id().value());
       assertSame(PayloadTypeCatalog.dataType(layout.id()), typed.data().getClass());
+      assertEquals(
+          typed.data().getClass().getSimpleName() + "[REDACTED]",
+          typed.data().toString(),
+          layout.id().value());
       namedTypes.add(typed.data().getClass());
 
       Optional<Class<? extends PayloadRecord>> recordType =
@@ -79,6 +84,10 @@ class PayloadTypeCatalogTest {
         layoutsWithRecords++;
         assertTrue(recordType.isPresent(), layout.id().value());
         assertSame(recordType.orElseThrow(), typed.records().getFirst().getClass());
+        assertEquals(
+            typed.records().getFirst().getClass().getSimpleName() + "[REDACTED]",
+            typed.records().getFirst().toString(),
+            layout.id().value());
         namedTypes.add(typed.records().getFirst().getClass());
       }
       assertFalse(typed.toString().contains("FieldValue"));
@@ -220,13 +229,27 @@ class PayloadTypeCatalogTest {
       FieldValue value =
           field.presence() == Presence.MANDATORY
               ? switch (field.wireType()) {
-                case TEXT -> new FieldValue.Text("A");
-                case NUMERIC -> new FieldValue.Numeric(0);
+                case TEXT -> new FieldValue.Text(minimumText(field));
+                case NUMERIC ->
+                    new FieldValue.Numeric(
+                        field.length() == JstWireTimestamp.WIRE_LENGTH
+                            ? 20260902123456789L
+                            : 0);
                 case BOOLEAN -> new FieldValue.Flag(false);
               }
               : FieldValue.Unset.INSTANCE;
       values.put(field.name(), value);
     }
     return new FieldValueSet(values);
+  }
+
+  private static String minimumText(FieldDefinition<?> field) {
+    if (field.name().contains("SHA-256")) {
+      return "a".repeat(64);
+    }
+    if (field.length() == 36) {
+      return "123e4567-e89b-12d3-a456-426614174000";
+    }
+    return "A";
   }
 }

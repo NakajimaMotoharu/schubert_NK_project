@@ -118,13 +118,13 @@ def package_for(layout: str, class_name: str) -> str:
     raise ValueError(f"unknown layout package: {layout}")
 
 
-fields_by_area: dict[tuple[str, str], list[tuple[str, str, str]]] = defaultdict(list)
+fields_by_area: dict[tuple[str, str], list[tuple[str, str, str, int, str]]] = defaultdict(list)
 for line in FIELDS.read_text(encoding="utf-8").splitlines():
     if not line or line.startswith("#"):
         continue
-    layout, area, label, _start, _length, wire, presence, _rule = line.split("\t")
+    layout, area, label, _start, length, wire, presence, rule = line.split("\t")
     if presence != "F":
-        fields_by_area[(layout, area)].append((label, wire, presence))
+        fields_by_area[(layout, area)].append((label, wire, presence, int(length), rule))
 
 layout_types: dict[str, tuple[str, str | None]] = {}
 for line in SS323.read_text(encoding="utf-8").splitlines():
@@ -139,7 +139,9 @@ for line in SS323.read_text(encoding="utf-8").splitlines():
 if len(layout_types) != 64:
     raise SystemExit(f"expected 64 layout type rows, got {len(layout_types)}")
 
-class_specs: dict[str, tuple[str, str, list[tuple[str, str, str]], list[str]]] = {}
+class_specs: dict[
+    str, tuple[str, str, list[tuple[str, str, str, int, str]], list[str]]
+] = {}
 for layout, (data_class, record_class) in layout_types.items():
     for class_name, area, kind in [
         (data_class, "DATA", "PayloadData"),
@@ -158,44 +160,132 @@ for layout, (data_class, record_class) in layout_types.items():
             class_specs[class_name] = (package, kind, fields, [layout])
 
 
-def java_type(wire: str, presence: str) -> str:
-    if presence in {"C", "O"}:
-        if wire != "X":
-            raise ValueError("only optional X fields are supported by the approved UI")
-        return "Optional<FieldValue.Text>"
-    return {"X": "FieldValue.Text", "N": "FieldValue.Numeric", "B": "FieldValue.Flag"}[wire]
+def semantic_kind(label: str, wire: str, length: int) -> str:
+    if wire == "N":
+        return "instant" if length == 17 else "long"
+    if wire == "B":
+        return "boolean"
+    if label == "認証context ID":
+        return "authenticationContext"
+    if "SHA-256" in label:
+        return "sha256"
+    if "relative path" in label.lower():
+        return "relativePath"
+    if label in {"Display path", "Script display path", "Audio display path"}:
+        return "displayPath"
+    if length == 36:
+        return "uuid"
+    if length == 17:
+        return "instant"
+    return "string"
 
 
-def from_expression(label: str, wire: str, presence: str) -> str:
+JAVA_TYPES = {
+    "string": "String",
+    "long": "long",
+    "boolean": "boolean",
+    "instant": "Instant",
+    "uuid": "UUID",
+    "authenticationContext": "AuthenticationContext",
+    "sha256": "Sha256Hex",
+    "relativePath": "RelativePath",
+    "displayPath": "DisplayPath",
+}
+
+
+def java_type(kind: str, presence: str) -> str:
+    base = JAVA_TYPES[kind]
+    return f"Optional<{base}>" if presence in {"C", "O"} else base
+
+
+def from_expression(label: str, kind: str, presence: str) -> str:
     escaped = label.replace("\\", "\\\\").replace('"', '\\"')
     if presence in {"C", "O"}:
-        return f'TypedFieldValues.optionalText(fields, "{escaped}")'
-    method = {"X": "requiredText", "N": "requiredNumeric", "B": "requiredFlag"}[wire]
+        method = {
+            "string": "optionalString",
+            "instant": "optionalInstant",
+            "uuid": "optionalUuid",
+            "authenticationContext": "optionalAuthenticationContext",
+            "sha256": "optionalSha256",
+            "relativePath": "optionalRelativePath",
+            "displayPath": "optionalDisplayPath",
+        }[kind]
+        return f'TypedFieldValues.{method}(fields, "{escaped}")'
+    method = {
+        "string": "requiredString",
+        "long": "requiredLong",
+        "boolean": "requiredBoolean",
+        "instant": "requiredInstant",
+        "uuid": "requiredUuid",
+        "sha256": "requiredSha256",
+        "relativePath": "requiredRelativePath",
+        "displayPath": "requiredDisplayPath",
+    }[kind]
     return f'TypedFieldValues.{method}(fields, "{escaped}")'
 
 
-def field_expression(name: str, presence: str) -> str:
-    return f"TypedFieldValues.orUnset({name})" if presence in {"C", "O"} else name
+def field_expression(name: str, kind: str, presence: str) -> str:
+    if presence in {"C", "O"}:
+        method = {
+            "string": "optionalStringValue",
+            "instant": "optionalInstantValue",
+            "uuid": "optionalUuidValue",
+            "authenticationContext": "optionalAuthenticationContextValue",
+            "sha256": "optionalSha256Value",
+            "relativePath": "optionalRelativePathValue",
+            "displayPath": "optionalDisplayPathValue",
+        }[kind]
+    else:
+        method = {
+            "string": "text",
+            "long": "numeric",
+            "boolean": "flag",
+            "instant": "instant",
+            "uuid": "uuid",
+            "sha256": "sha256",
+            "relativePath": "relativePath",
+            "displayPath": "displayPath",
+        }[kind]
+    return f"TypedFieldValues.{method}({name})"
 
 
 for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
-    components = [(component_name(label), label, wire, presence) for label, wire, presence in fields]
+    components = [
+        (component_name(label), label, semantic_kind(label, wire, length), presence)
+        for label, wire, presence, length, _rule in fields
+    ]
     names = [component[0] for component in components]
     if len(names) != len(set(names)):
         raise SystemExit(f"duplicate Java component in {class_name}: {names}")
     optional_used = any(presence in {"C", "O"} for _, _, _, presence in components)
+    component_kinds = {component_kind for _, _, component_kind, _ in components}
+    reference_used = any(component_kind not in {"long", "boolean"} for component_kind in component_kinds)
     imports = [
-        "import dev.codex.schubert.nk.protocol.layout.FieldValue;",
         "import dev.codex.schubert.nk.protocol.layout.FieldValueSet;",
         f"import dev.codex.schubert.nk.protocol.layout.{kind};",
         "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;",
     ]
     if components:
-        imports.extend(["import java.util.Map;", "import java.util.Objects;"])
+        imports.append("import java.util.Map;")
+    if reference_used:
+        imports.append("import java.util.Objects;")
     if optional_used:
         imports.append("import java.util.Optional;")
+    if "instant" in component_kinds:
+        imports.append("import java.time.Instant;")
+    if "uuid" in component_kinds:
+        imports.append("import java.util.UUID;")
+    if "authenticationContext" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.header.AuthenticationContext;")
+    if "sha256" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;")
+    if "relativePath" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;")
+    if "displayPath" in component_kinds:
+        imports.append("import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;")
     component_text = ",\n    ".join(
-        f"{java_type(wire, presence)} {name}" for name, _label, wire, presence in components
+        f"{java_type(component_kind, presence)} {name}"
+        for name, _label, component_kind, presence in components
     )
     declaration = f"public record {class_name}({component_text}) implements {kind}" if components else f"public record {class_name}() implements {kind}"
     lines = [
@@ -208,16 +298,17 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
     ]
     if components:
         lines.extend([f"  public {class_name} {{"])
-        for name, _label, _wire, _presence in components:
-            lines.append(f'    Objects.requireNonNull({name}, "{name}");')
+        for name, _label, component_kind, _presence in components:
+            if component_kind not in {"long", "boolean"}:
+                lines.append(f'    Objects.requireNonNull({name}, "{name}");')
         lines.append("  }")
     lines.extend(["", f"  public static {class_name} from(FieldValueSet fields) {{"])
     if components:
         lines.append(f"    return new {class_name}(")
         lines.append(
             ",\n".join(
-                "        " + from_expression(label, wire, presence)
-                for _name, label, wire, presence in components
+                "        " + from_expression(label, component_kind, presence)
+                for _name, label, component_kind, presence in components
             )
             + ");"
         )
@@ -228,15 +319,26 @@ for class_name, (package, kind, fields, layouts) in sorted(class_specs.items()):
         lines.append("    return new FieldValueSet(")
         lines.append("        Map.ofEntries(")
         entries = []
-        for name, label, _wire, presence in components:
+        for name, label, component_kind, presence in components:
             escaped = label.replace("\\", "\\\\").replace('"', '\\"')
             entries.append(
-                f'            Map.entry("{escaped}", {field_expression(name, presence)})'
+                f'            Map.entry("{escaped}", {field_expression(name, component_kind, presence)})'
             )
         lines.append(",\n".join(entries) + "));")
     else:
         lines.append("    return FieldValueSet.empty();")
-    lines.extend(["  }", "}", ""])
+    lines.extend(
+        [
+            "  }",
+            "",
+            "  @Override",
+            "  public String toString() {",
+            f'    return "{class_name}[REDACTED]";',
+            "  }",
+            "}",
+            "",
+        ]
+    )
     directory = JAVA_ROOT / package
     directory.mkdir(parents=True, exist_ok=True)
     (directory / f"{class_name}.java").write_text("\n".join(lines), encoding="utf-8")
