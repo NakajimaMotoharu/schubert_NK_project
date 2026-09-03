@@ -1,0 +1,434 @@
+package dev.codex.schubert.nk.api.messaging.config;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.api.messaging.guard.GuardedJmsMessage;
+import dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuard;
+import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
+import dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import jakarta.jms.BytesMessage;
+import jakarta.jms.DeliveryMode;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSException;
+import jakarta.jms.MapMessage;
+import jakarta.jms.Message;
+import jakarta.jms.ObjectMessage;
+import jakarta.jms.Queue;
+import jakarta.jms.TextMessage;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import org.apache.activemq.artemis.core.config.Configuration;
+import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
+import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** PT-JMS-005/006 actual-provider transport matrix with independent SS 321/322 bytes. */
+final class ArtemisTransportContractTest {
+  private static final UUID MESSAGE_ID =
+      UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID CORRELATION_ID =
+      UUID.fromString("00000000-0000-0000-0000-000000000002");
+  private static final JmsMessageGuard GUARD = new JmsMessageGuard();
+
+  @Test
+  @DisplayName("PT-JMS-005 request, reply, work and log use exact persistent transport contracts")
+  void allFourApplicationRoutesRoundTripAndDecode(@TempDir Path root) throws Exception {
+    List<RouteVector> routes =
+        List.of(
+            new RouteVector(
+                "nk.sync.request",
+                "LOGREQ01",
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                'Q',
+                'S',
+                0,
+                5_000,
+                Optional.of("nk.sync.reply.web")),
+            new RouteVector(
+                "nk.sync.reply.web",
+                "LOGRSP01",
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                'S',
+                'S',
+                24,
+                10_000,
+                Optional.empty()),
+            new RouteVector(
+                "nk.async.work",
+                "QWKREQ01",
+                MessageKind.EVENT,
+                InteractionKind.INTERNAL,
+                'E',
+                'I',
+                64,
+                0,
+                Optional.empty()),
+            new RouteVector(
+                "nk.web.log",
+                "WLGEVT01",
+                MessageKind.EVENT,
+                InteractionKind.INTERNAL,
+                'E',
+                'I',
+                2_080,
+                0,
+                Optional.empty()));
+
+    EmbeddedActiveMQ broker = start(root);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      for (RouteVector vector : routes) {
+        byte[] body = independentWire(vector);
+        BytesMessage outbound = context.createBytesMessage();
+        outbound.writeBytes(body);
+        setIdentity(outbound, vector.layoutId(), vector.correlationId());
+        vector
+            .replyTo()
+            .ifPresent(address -> setReplyTo(outbound, new ActiveMQQueue(address)));
+
+        long beforeSend = System.currentTimeMillis();
+        Message received =
+            roundTrip(
+                context,
+                vector.address(),
+                outbound,
+                DeliveryMode.PERSISTENT,
+                vector.timeToLiveMillis());
+        ExpectedRoute route = vector.expectedRoute();
+        GuardedJmsMessage guarded = GUARD.read(received, route);
+        var decoded = FixedWidthDecoder.standard().decode(guarded.body(), guarded.metadata(), route);
+
+        assertArrayEquals(body, guarded.body());
+        assertEquals(vector.layoutId(), decoded.header().layoutId().value());
+        assertEquals(vector.messageKind(), decoded.header().messageKind());
+        assertEquals(vector.interactionKind(), decoded.header().interactionKind());
+        assertEquals(MESSAGE_ID, decoded.header().messageId());
+        assertEquals(vector.correlationId(), decoded.header().correlationId());
+        assertEquals(DeliveryMode.PERSISTENT, guarded.metadata().deliveryMode());
+        assertEquals(vector.address(), guarded.metadata().destinationAddress());
+        if (vector.timeToLiveMillis() == 0) {
+          assertEquals(0L, guarded.metadata().expirationEpochMillis());
+        } else {
+          long expiration = guarded.metadata().expirationEpochMillis();
+          assertTrue(expiration >= beforeSend + vector.timeToLiveMillis() - 500);
+          assertTrue(expiration <= beforeSend + vector.timeToLiveMillis() + 2_000);
+        }
+      }
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-006 actual providers, limits, values, mode and reply-to deny closed")
+  void actualProviderAndMetadataViolationsAreRejectedBeforeBusinessHandling(@TempDir Path root)
+      throws Exception {
+    RouteVector request =
+        new RouteVector(
+            "nk.sync.request",
+            "LOGREQ01",
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            'Q',
+            'S',
+            0,
+            5_000,
+            Optional.of("nk.sync.reply.web"));
+    ExpectedRoute route = request.expectedRoute();
+    byte[] validBody = independentWire(request);
+
+    EmbeddedActiveMQ broker = start(root);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      TextMessage text = context.createTextMessage("synthetic non-business text");
+      MapMessage map = context.createMapMessage();
+      map.setString("synthetic", "non-business-map");
+      ObjectMessage object = context.createObjectMessage("synthetic non-business object");
+      for (Message wrongType : List.of(text, map, object)) {
+        setRequestIdentity(wrongType, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+        Message received =
+            roundTrip(
+                context,
+                request.address(),
+                wrongType,
+                DeliveryMode.PERSISTENT,
+                request.timeToLiveMillis());
+        assertThrows(PermanentProtocolException.class, () -> GUARD.read(received, route));
+      }
+
+      BytesMessage maximum = bytes(context, new byte[1_000_000]);
+      setIdentity(maximum, "QWKREQ01", CORRELATION_ID);
+      ExpectedRoute workRoute =
+          new ExpectedRoute(
+              MessageKind.EVENT,
+              InteractionKind.INTERNAL,
+              "nk.async.work",
+              Optional.empty(),
+              false);
+      GuardedJmsMessage acceptedMaximum =
+          guardRoundTrip(
+              context, "nk.async.work", maximum, DeliveryMode.PERSISTENT, 0, workRoute);
+      assertEquals(1_000_000, acceptedMaximum.body().length);
+
+      BytesMessage excessive = bytes(context, new byte[1_000_001]);
+      setIdentity(excessive, "QWKREQ01", CORRELATION_ID);
+      assertThrows(
+          PermanentProtocolException.class,
+          () ->
+              guardRoundTrip(
+                  context,
+                  "nk.async.work",
+                  excessive,
+                  DeliveryMode.PERSISTENT,
+                  0,
+                  workRoute));
+
+      BytesMessage shortBody = bytes(context, new byte[255]);
+      setRequestIdentity(shortBody, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      assertDecodeRejected(
+          roundTrip(
+              context,
+              request.address(),
+              shortBody,
+              DeliveryMode.PERSISTENT,
+              request.timeToLiveMillis()),
+          route);
+
+      BytesMessage nonPersistent = bytes(context, validBody);
+      setRequestIdentity(nonPersistent, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      assertDecodeRejected(
+          roundTrip(
+              context,
+              request.address(),
+              nonPersistent,
+              DeliveryMode.NON_PERSISTENT,
+              request.timeToLiveMillis()),
+          route);
+
+      BytesMessage missingLayout = bytes(context, validBody);
+      missingLayout.setJMSCorrelationID(MESSAGE_ID.toString());
+      missingLayout.setJMSReplyTo(new ActiveMQQueue("nk.sync.reply.web"));
+      missingLayout.setStringProperty("NKMessageID", MESSAGE_ID.toString());
+      missingLayout.setStringProperty("NKProtocolVersion", "001");
+      Message missingReceived =
+          roundTrip(
+              context,
+              request.address(),
+              missingLayout,
+              DeliveryMode.PERSISTENT,
+              request.timeToLiveMillis());
+      assertThrows(PermanentProtocolException.class, () -> GUARD.read(missingReceived, route));
+
+      BytesMessage unknownLayout = bytes(context, validBody);
+      setRequestIdentity(unknownLayout, "ZZZREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      assertDecodeRejected(
+          roundTrip(
+              context,
+              request.address(),
+              unknownLayout,
+              DeliveryMode.PERSISTENT,
+              request.timeToLiveMillis()),
+          route);
+
+      BytesMessage unknownProtocol = bytes(context, validBody);
+      setRequestIdentity(unknownProtocol, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      unknownProtocol.setStringProperty("NKProtocolVersion", "999");
+      assertDecodeRejected(
+          roundTrip(
+              context,
+              request.address(),
+              unknownProtocol,
+              DeliveryMode.PERSISTENT,
+              request.timeToLiveMillis()),
+          route);
+
+      BytesMessage dynamicReply = bytes(context, validBody);
+      setRequestIdentity(dynamicReply, "LOGREQ01", new ActiveMQQueue("nk.unapproved.reply"));
+      Message dynamicReceived =
+          roundTrip(
+              context,
+              request.address(),
+              dynamicReply,
+              DeliveryMode.PERSISTENT,
+              request.timeToLiveMillis());
+      assertThrows(PermanentProtocolException.class, () -> GUARD.read(dynamicReceived, route));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  private static void assertDecodeRejected(Message received, ExpectedRoute route) throws Exception {
+    GuardedJmsMessage guarded = GUARD.read(received, route);
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(guarded.body(), guarded.metadata(), route));
+  }
+
+  private static Message roundTrip(
+      JMSContext context, String address, Message outbound, int deliveryMode, long timeToLive)
+      throws JMSException {
+    Queue destination = new ActiveMQQueue(address + "::" + address + ".q");
+    try (JMSConsumer consumer = context.createConsumer(destination)) {
+      context
+          .createProducer()
+          .setDeliveryMode(deliveryMode)
+          .setTimeToLive(timeToLive)
+          .send(destination, outbound);
+      Message received = consumer.receive(10_000);
+      assertNotNull(received);
+      return received;
+    }
+  }
+
+  private static GuardedJmsMessage guardRoundTrip(
+      JMSContext context,
+      String address,
+      Message outbound,
+      int deliveryMode,
+      long timeToLive,
+      ExpectedRoute route)
+      throws JMSException {
+    Queue destination = new ActiveMQQueue(address + "::" + address + ".q");
+    try (JMSConsumer consumer = context.createConsumer(destination)) {
+      context
+          .createProducer()
+          .setDeliveryMode(deliveryMode)
+          .setTimeToLive(timeToLive)
+          .send(destination, outbound);
+      Message received = consumer.receive(10_000);
+      assertNotNull(received);
+      return GUARD.read(received, route);
+    }
+  }
+
+  private static BytesMessage bytes(JMSContext context, byte[] body) throws JMSException {
+    BytesMessage message = context.createBytesMessage();
+    message.writeBytes(body);
+    return message;
+  }
+
+  private static void setRequestIdentity(
+      Message message, String layoutId, Queue replyTo) throws JMSException {
+    setIdentity(message, layoutId, MESSAGE_ID);
+    message.setJMSReplyTo(replyTo);
+  }
+
+  private static void setIdentity(Message message, String layoutId, UUID correlationId)
+      throws JMSException {
+    message.setJMSCorrelationID(correlationId.toString());
+    message.setStringProperty("NKMessageID", MESSAGE_ID.toString());
+    message.setStringProperty("NKLayoutID", layoutId);
+    message.setStringProperty("NKProtocolVersion", "001");
+  }
+
+  private static void setReplyTo(Message message, Queue replyTo) {
+    try {
+      message.setJMSReplyTo(replyTo);
+    } catch (JMSException exception) {
+      throw new IllegalStateException("synthetic reply-to could not be set", exception);
+    }
+  }
+
+  private static byte[] independentWire(RouteVector vector) {
+    int totalLength = 256 + vector.dataLength();
+    byte[] body = new byte[totalLength];
+    Arrays.fill(body, (byte) ' ');
+    ascii(body, 0, "SCHBNK01");
+    ascii(body, 8, "001");
+    ascii(body, 11, vector.layoutId());
+    ascii(body, 19, "001");
+    body[22] = (byte) vector.messageKindWire();
+    body[23] = (byte) vector.interactionKindWire();
+    ascii(body, 24, MESSAGE_ID.toString());
+    ascii(body, 60, vector.correlationId().toString());
+    ascii(body, 96, "20260903120000000");
+    if (vector.messageKind() != MessageKind.EVENT) {
+      ascii(body, 113, "a".repeat(64));
+    }
+    ascii(body, 177, "0256");
+    ascii(body, 181, sixDigits(vector.dataLength()));
+    ascii(body, 187, "000000");
+    ascii(body, 193, "000000");
+    ascii(body, 199, nineDigits(totalLength));
+    if (vector.messageKind() == MessageKind.RESPONSE) {
+      ascii(body, 208, "0000");
+    }
+    return body;
+  }
+
+  private static String sixDigits(int value) {
+    return String.format(Locale.ROOT, "%06d", value);
+  }
+
+  private static String nineDigits(int value) {
+    return String.format(Locale.ROOT, "%09d", value);
+  }
+
+  private static void ascii(byte[] target, int offset, String value) {
+    byte[] source = value.getBytes(StandardCharsets.US_ASCII);
+    System.arraycopy(source, 0, target, offset, source.length);
+  }
+
+  private static EmbeddedActiveMQ start(Path root) throws Exception {
+    Path template = Path.of(System.getProperty("broker.template"));
+    Configuration configuration;
+    try (InputStream input = Files.newInputStream(template)) {
+      configuration = new FileConfigurationParser().parseMainConfig(input);
+    }
+    configuration
+        .setPagingDirectory(root.resolve("paging").toString())
+        .setBindingsDirectory(root.resolve("bindings").toString())
+        .setJournalDirectory(root.resolve("journal").toString())
+        .setLargeMessagesDirectory(root.resolve("large-messages").toString())
+        .setSecurityEnabled(false)
+        .clearAcceptorConfigurations()
+        .addAcceptorConfiguration("component", "vm://0");
+    return new EmbeddedActiveMQ().setConfiguration(configuration).start();
+  }
+
+  private record RouteVector(
+      String address,
+      String layoutId,
+      MessageKind messageKind,
+      InteractionKind interactionKind,
+      char messageKindWire,
+      char interactionKindWire,
+      int dataLength,
+      long timeToLiveMillis,
+      Optional<String> replyTo) {
+
+    private UUID correlationId() {
+      return messageKind == MessageKind.REQUEST ? MESSAGE_ID : CORRELATION_ID;
+    }
+
+    private ExpectedRoute expectedRoute() {
+      return new ExpectedRoute(
+          messageKind,
+          interactionKind,
+          address,
+          replyTo,
+          timeToLiveMillis > 0);
+    }
+  }
+}

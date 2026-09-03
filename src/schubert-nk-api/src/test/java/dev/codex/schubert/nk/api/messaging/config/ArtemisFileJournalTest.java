@@ -22,11 +22,13 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.Message;
 import jakarta.jms.Queue;
+import jakarta.jms.QueueBrowser;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,6 +47,8 @@ final class ArtemisFileJournalTest {
     0x53, 0x43, 0x48, 0x55, 0x42, 0x45, 0x52, 0x54, 0x2d, 0x4e, 0x4b
   };
   private static final String DUPLICATE_ID = "pt-jms-010-duplicate-001";
+  private static final byte[] DLQ_BODY = {0x44, 0x4c, 0x51};
+  private static final byte[] EXPIRY_BODY = {0x45, 0x58, 0x50};
 
   @Test
   @DisplayName("PT-JMS-010 persistent BytesMessage and duplicate ID survive File Journal restart")
@@ -62,6 +66,41 @@ final class ArtemisFileJournalTest {
     broker = start(configuration);
     try {
       receiveOnePersistentMessageAndNoDuplicate();
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-010 DLQ and Expiry remain durable and unpurged across restart")
+  void persistentDlqAndExpirySurviveRestartWithoutPurge(@TempDir Path root) throws Exception {
+    Configuration configuration = isolatedProductionConfiguration(root);
+    EmbeddedActiveMQ broker = start(configuration);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      sendPersistent(context, "nk.dead.letter", DLQ_BODY, 0);
+      sendPersistent(context, "nk.sync.request", EXPIRY_BODY, 100);
+      Thread.sleep(250);
+
+      Queue request = new ActiveMQQueue("nk.sync.request::nk.sync.request.q");
+      try (JMSConsumer consumer = context.createConsumer(request)) {
+        assertNull(consumer.receive(1_000));
+      }
+      assertEquals(1, browseCount(context, "nk.dead.letter"));
+      assertEquals(1, browseCount(context, "nk.expiry"));
+    } finally {
+      broker.stop();
+    }
+
+    broker = start(configuration);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+      assertEquals(1, browseCount(context, "nk.dead.letter"));
+      assertEquals(1, browseCount(context, "nk.expiry"));
+      assertArrayEquals(DLQ_BODY, receiveBody(context, "nk.dead.letter"));
+      assertArrayEquals(EXPIRY_BODY, receiveBody(context, "nk.expiry"));
+      assertEquals(0, browseCount(context, "nk.dead.letter"));
+      assertEquals(0, browseCount(context, "nk.expiry"));
     } finally {
       broker.stop();
     }
@@ -304,6 +343,42 @@ final class ArtemisFileJournalTest {
       received.readBytes(body);
       assertArrayEquals(GOLDEN_BODY, body);
       assertNull(consumer.receive(500));
+    }
+  }
+
+  private static void sendPersistent(
+      JMSContext context, String address, byte[] body, long timeToLive) throws Exception {
+    BytesMessage message = context.createBytesMessage();
+    message.writeBytes(body);
+    context
+        .createProducer()
+        .setDeliveryMode(DeliveryMode.PERSISTENT)
+        .setTimeToLive(timeToLive)
+        .send(new ActiveMQQueue(address + "::" + address + ".q"), message);
+  }
+
+  private static int browseCount(JMSContext context, String address) throws Exception {
+    Queue queue = new ActiveMQQueue(address + "::" + address + ".q");
+    int count = 0;
+    try (QueueBrowser browser = context.createBrowser(queue)) {
+      Enumeration<?> messages = browser.getEnumeration();
+      while (messages.hasMoreElements()) {
+        messages.nextElement();
+        count++;
+      }
+    }
+    return count;
+  }
+
+  private static byte[] receiveBody(JMSContext context, String address) throws Exception {
+    Queue queue = new ActiveMQQueue(address + "::" + address + ".q");
+    try (JMSConsumer consumer = context.createConsumer(queue)) {
+      BytesMessage message = (BytesMessage) consumer.receive(5_000);
+      assertNotNull(message);
+      byte[] body = new byte[Math.toIntExact(message.getBodyLength())];
+      message.readBytes(body);
+      assertNull(consumer.receive(500));
+      return body;
     }
   }
 
