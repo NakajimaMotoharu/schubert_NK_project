@@ -187,6 +187,23 @@ final class ArtemisTransportContractTest {
           Optional.of("nk.sync.reply.web"),
           route);
 
+      ExpectedRoute replyRoute =
+          new ExpectedRoute(
+              MessageKind.RESPONSE,
+              InteractionKind.SYNCHRONOUS,
+              "nk.sync.reply.web",
+              Optional.empty(),
+              true);
+      assertRouteBodyLimit(
+          context,
+          "nk.sync.reply.web",
+          "LOGRSP01",
+          CORRELATION_ID,
+          1_000_000,
+          10_000,
+          Optional.empty(),
+          replyRoute);
+
       ExpectedRoute workRoute =
           new ExpectedRoute(
               MessageKind.EVENT,
