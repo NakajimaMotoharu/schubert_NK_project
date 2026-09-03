@@ -132,7 +132,7 @@ final class ArtemisBrokerConfigurationTest {
   }
 
   @Test
-  @DisplayName("PT-JMS-004 ACL matrix denies every unlisted operation and role")
+  @DisplayName("PT-JMS-002 ACL matrix denies every unlisted operation and role")
   void securityRolesMatchTheIndependentAclMatrix() {
     Map<String, Set<String>> expected = new LinkedHashMap<>();
     expected.put("nk.sync.request", Set.of("nk_web:S", "nk_api:C", "nk_ops:B"));
