@@ -44,6 +44,18 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.artemis</groupId>
+      <artifactId>artemis-server</artifactId>
+      <version>${artemis.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.artemis</groupId>
+      <artifactId>artemis-jakarta-server</artifactId>
+      <version>${artemis.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -124,6 +136,7 @@
             <user.language>ja</user.language>
             <user.country>JP</user.country>
             <user.timezone>Asia/Tokyo</user.timezone>
+            <broker.template>${maven.multiModuleProjectDirectory}/src/deployment/artemis/etc/broker.xml</broker.template>
           </systemPropertyVariables>
         </configuration>
       </plugin>
