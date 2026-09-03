@@ -96,7 +96,7 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 対象 | 方針 | 状態 |
 |---|---|---|
 | PostgreSQL | 18.6をrootless展開し、実PostgreSQL test runtimeでDDL/Flyway・role/grantのPTを実施 | 完了 |
-| Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み。NK-MSG-001 component PTは部分完了、credential別ACL/全route/Expiryを継続 |
+| Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み。実ACL 90組合せ、全route/provider負値、Expiry/DLQ再起動保持までcomponent PT完了。Application adapterを継続 |
 | JDBC/Flyway | Flyway 13.4.0、PostgreSQL JDBC 42.7.13をMaven Central artifactで固定 | 完了 |
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
 | Secret scan | Tracked/untracked対象のpattern・entropy・known secret detectorをsanitized report化 | 未着手 |
@@ -115,3 +115,4 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | 2026-09-03 | Ubuntu公式PostgreSQL 18.6をrootless展開し、Flyway 13.4.0、PostgreSQL JDBC 42.7.13と隔離clusterによるNK-DAT-001 PTを導入。 |
 | 2026-09-03 | Apache Artemis公式2.56.0のarchive/hashとMaven client/server artifactを固定し、Java 25の実File Journal component PT用toolchainを導入。 |
 | 2026-09-03 | Production broker.xml、NIO File Journal再起動・duplicate cache・1/5/25秒再配送・JMS transaction/DLQ、API/Web moduleのcoverage/SpotBugs中間gateを確認。 |
+| 2026-09-03 | `ActiveMQBasicSecurityManager`の実行時UUID credentialでrole/address/operation ACLを検証。値は一時directoryだけに保持し、source/reportへ保存しない。 |
