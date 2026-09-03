@@ -33,8 +33,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 5/20 Program完了。`dev-messaging`でbroker/JMS guard/factory/DLQ、Web相関registry、HMAC/Outbox policyを実装済み。NK-MSG-001/002は未完了 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 5/20 Program完了。中間gateはAPI 46件・Web 5件PASS、両module 4 coverage指標100%、SpotBugs 0。PT-JMSは6件PASS・5件部分・1件未実施のためProgram合格へ未算入 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 5/20 Program完了。`dev-messaging`でbroker/JMS guard/factory/DLQ、Web相関registry/request-reply client、HMAC/Outbox policyを実装済み。NK-MSG-001/002は未完了 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 5/20 Program完了。中間gateはAPI 46件・Web 13件PASS、両module 4 coverage指標100%、SpotBugs 0。PT-JMSは7件PASS・4件部分・1件未実施のためProgram合格へ未算入 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -61,3 +61,4 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-03 | PostgreSQL 18.6/Flyway V001～V005、21 table、constraint/index/role/grant/view、6 maintenance functionとPT-DB-001～015を完了し、NK-DAT-001をPG/PT完了。SSC-005のSecurity hold物理化を含む。 |
 | 2026-09-03 | `dev-data-schema`をlocal `dev`へno-ff統合。GitHub credential不在でpushは継続阻害中。`dev-messaging`を作成し、NK-MSG-001/002のPT仕様と実装を開始。 |
 | 2026-09-03 | Production `broker.xml`、実NIO File Journal/restart/redelivery/transaction PT、JMS guard/factory/DLQ、Web module相関registryを中間実装。API 46件・Web 5件、coverage全100%、SpotBugs 0を確認したが未実施caseを残しProgram完了とはしていない。 |
+| 2026-09-03 | Web request/reply clientの12並行wait、13件目拒否、timeout/interrupt/send失敗cleanupを実装・試験し、Web中間gateを13件へ更新。 |
