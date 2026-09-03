@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.layout.LayoutDefinition;
+import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.JMSException;
 import java.time.Clock;
 import java.time.Duration;
@@ -108,7 +109,7 @@ public final class JmsRequestReplyClient {
 
   private static void validateRequest(byte[] body, Duration timeout) {
     if (body.length < LayoutDefinition.HEADER_LENGTH
-        || body.length > LayoutDefinition.MAXIMUM_BODY_LENGTH) {
+        || body.length > BrokerTopology.SYNC_REQUEST.maximumBodyLength()) {
       throw new IllegalArgumentException("encoded JMS request body length is outside its range");
     }
     if (timeout.isZero() || timeout.isNegative() || timeout.compareTo(MAXIMUM_WAIT) > 0) {

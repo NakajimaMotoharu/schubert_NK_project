@@ -180,6 +180,16 @@ class MessageCodecTest {
     assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(null, metadata, route));
     assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(new byte[255], metadata, route));
     assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(new byte[1_000_001], metadata, route));
+    ExpectedRoute workRoute =
+        new ExpectedRoute(
+            MessageKind.EVENT,
+            InteractionKind.INTERNAL,
+            "nk.async.work",
+            Optional.empty(),
+            false);
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(new byte[1_001], metadata, workRoute));
     byte[] extra = Arrays.copyOf(body, body.length + 1);
     assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(extra, metadata, route));
 

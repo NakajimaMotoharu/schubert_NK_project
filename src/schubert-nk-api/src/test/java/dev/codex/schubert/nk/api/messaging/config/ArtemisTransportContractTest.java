@@ -177,8 +177,16 @@ final class ArtemisTransportContractTest {
         assertThrows(PermanentProtocolException.class, () -> GUARD.read(received, route));
       }
 
-      BytesMessage maximum = bytes(context, new byte[1_000_000]);
-      setIdentity(maximum, "QWKREQ01", CORRELATION_ID);
+      assertRouteBodyLimit(
+          context,
+          request.address(),
+          "LOGREQ01",
+          MESSAGE_ID,
+          1_000_000,
+          5_000,
+          Optional.of("nk.sync.reply.web"),
+          route);
+
       ExpectedRoute workRoute =
           new ExpectedRoute(
               MessageKind.EVENT,
@@ -186,23 +194,32 @@ final class ArtemisTransportContractTest {
               "nk.async.work",
               Optional.empty(),
               false);
-      GuardedJmsMessage acceptedMaximum =
-          guardRoundTrip(
-              context, "nk.async.work", maximum, DeliveryMode.PERSISTENT, 0, workRoute);
-      assertEquals(1_000_000, acceptedMaximum.body().length);
+      assertRouteBodyLimit(
+          context,
+          "nk.async.work",
+          "QWKREQ01",
+          CORRELATION_ID,
+          1_000,
+          0,
+          Optional.empty(),
+          workRoute);
 
-      BytesMessage excessive = bytes(context, new byte[1_000_001]);
-      setIdentity(excessive, "QWKREQ01", CORRELATION_ID);
-      assertThrows(
-          PermanentProtocolException.class,
-          () ->
-              guardRoundTrip(
-                  context,
-                  "nk.async.work",
-                  excessive,
-                  DeliveryMode.PERSISTENT,
-                  0,
-                  workRoute));
+      ExpectedRoute webLogRoute =
+          new ExpectedRoute(
+              MessageKind.EVENT,
+              InteractionKind.INTERNAL,
+              "nk.web.log",
+              Optional.empty(),
+              false);
+      assertRouteBodyLimit(
+          context,
+          "nk.web.log",
+          "WLGEVT01",
+          CORRELATION_ID,
+          10_000,
+          0,
+          Optional.empty(),
+          webLogRoute);
 
       BytesMessage shortBody = bytes(context, new byte[255]);
       setRequestIdentity(shortBody, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
@@ -283,6 +300,48 @@ final class ArtemisTransportContractTest {
     assertThrows(
         PermanentProtocolException.class,
         () -> FixedWidthDecoder.standard().decode(guarded.body(), guarded.metadata(), route));
+  }
+
+  private static void assertRouteBodyLimit(
+      JMSContext context,
+      String address,
+      String layoutId,
+      UUID correlationId,
+      int maximumLength,
+      long timeToLive,
+      Optional<String> replyTo,
+      ExpectedRoute route)
+      throws Exception {
+    BytesMessage maximum = bytes(context, new byte[maximumLength]);
+    setIdentity(maximum, layoutId, correlationId);
+    if (replyTo.isPresent()) {
+      maximum.setJMSReplyTo(new ActiveMQQueue(replyTo.orElseThrow()));
+    }
+    GuardedJmsMessage accepted =
+        guardRoundTrip(
+            context,
+            address,
+            maximum,
+            DeliveryMode.PERSISTENT,
+            timeToLive,
+            route);
+    assertEquals(maximumLength, accepted.body().length);
+
+    BytesMessage excessive = bytes(context, new byte[maximumLength + 1]);
+    setIdentity(excessive, layoutId, correlationId);
+    if (replyTo.isPresent()) {
+      excessive.setJMSReplyTo(new ActiveMQQueue(replyTo.orElseThrow()));
+    }
+    assertThrows(
+        PermanentProtocolException.class,
+        () ->
+            guardRoundTrip(
+                context,
+                address,
+                excessive,
+                DeliveryMode.PERSISTENT,
+                timeToLive,
+                route));
   }
 
   private static Message roundTrip(

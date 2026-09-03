@@ -4,8 +4,8 @@ import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.codec.TransportBodyType;
 import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
-import dev.codex.schubert.nk.protocol.layout.LayoutDefinition;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.Destination;
 import jakarta.jms.JMSException;
@@ -36,8 +36,10 @@ public final class JmsMessageGuard {
       throw rejection("transport body is not a BytesMessage");
     }
 
+    int maximumBodyLength =
+        BrokerTopology.requireAddress(route.destinationAddress()).maximumBodyLength();
     long bodyLength = bytesMessage.getBodyLength();
-    if (bodyLength < 0 || bodyLength > LayoutDefinition.MAXIMUM_BODY_LENGTH) {
+    if (bodyLength < 0 || bodyLength > maximumBodyLength) {
       throw rejection("transport body length is outside the fixed-width limit");
     }
     byte[] body = bytesMessage.getBody(byte[].class);

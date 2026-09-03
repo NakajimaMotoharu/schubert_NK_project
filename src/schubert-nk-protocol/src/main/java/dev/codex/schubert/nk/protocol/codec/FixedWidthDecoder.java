@@ -5,6 +5,7 @@ import dev.codex.schubert.nk.protocol.layout.FixedPayload;
 import dev.codex.schubert.nk.protocol.layout.LayoutDefinition;
 import dev.codex.schubert.nk.protocol.layout.LayoutRegistry;
 import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +36,10 @@ public final class FixedWidthDecoder {
     if (body.length < LayoutDefinition.HEADER_LENGTH) {
       throw new PermanentProtocolException("message body is shorter than the common header");
     }
-    if (body.length > LayoutDefinition.MAXIMUM_BODY_LENGTH) {
-      throw new PermanentProtocolException("message body exceeds the maximum length");
+    int routeMaximum =
+        BrokerTopology.requireAddress(route.destinationAddress()).maximumBodyLength();
+    if (body.length > routeMaximum) {
+      throw new PermanentProtocolException("message body exceeds the route maximum length");
     }
     CommonHeader header = headerCodec.peek(body);
     ProtocolValidator.validateTransport(header, metadata, route);
