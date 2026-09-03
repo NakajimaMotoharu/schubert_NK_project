@@ -2,7 +2,6 @@ package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.api.messaging.guard.GuardedJmsMessage;
 import dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuard;
-import dev.codex.schubert.nk.api.messaging.outbound.DlqSender;
 import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.api.messaging.outbound.ReplySender;
 import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
@@ -40,7 +39,6 @@ public final class SyncRequestListener {
   private final JmsMessageGuard guard = new JmsMessageGuard();
   private final FixedWidthDecoder decoder = FixedWidthDecoder.standard();
   private final ReplySender replies = new ReplySender();
-  private final DlqSender dlq = new DlqSender();
 
   public SyncRequestListener(SyncRequestProcessor processor, Clock clock) {
     this.processor = Objects.requireNonNull(processor, "processor");
@@ -62,40 +60,17 @@ public final class SyncRequestListener {
       replies.send(context, encodedReply);
       context.commit();
     } catch (PermanentProtocolException protocolFailure) {
-      isolateFatal(context, message, protocolFailure);
+      InboundTransactions.isolateFatal(
+          context,
+          message,
+          BrokerTopology.SYNC_REQUEST,
+          FatalDlqMetadata.DetectedBy.API_SYNC,
+          clock,
+          protocolFailure);
       throw new CommittedFatalInboundException(protocolFailure);
     } catch (JMSException | RuntimeException failure) {
-      rollbackAfterFailure(context, failure);
+      InboundTransactions.rollbackAfterFailure(context, failure);
       throw failure;
-    }
-  }
-
-  private void isolateFatal(
-      JMSContext context, Message message, PermanentProtocolException protocolFailure)
-      throws JMSException {
-    try {
-      FatalDlqMetadata fatal =
-          new FatalDlqMetadata(
-              "PROTOCOL_INVALID",
-              FatalDlqMetadata.DetectedBy.API_SYNC,
-              clock.instant());
-      dlq.sendUntrusted(context, message, BrokerTopology.SYNC_REQUEST, fatal);
-      context.commit();
-    } catch (JMSException | RuntimeException isolationFailure) {
-      rollbackAfterFailure(context, isolationFailure);
-      isolationFailure.addSuppressed(protocolFailure);
-      if (isolationFailure instanceof JMSException jmsFailure) {
-        throw jmsFailure;
-      }
-      throw isolationFailure;
-    }
-  }
-
-  private static void rollbackAfterFailure(JMSContext context, Throwable failure) {
-    try {
-      context.rollback();
-    } catch (RuntimeException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
     }
   }
 }
