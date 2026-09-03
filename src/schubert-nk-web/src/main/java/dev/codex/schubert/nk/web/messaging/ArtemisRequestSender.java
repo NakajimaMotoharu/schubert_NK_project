@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
@@ -14,9 +15,8 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 
 /** Production Web request adapter for the closed Artemis request/reply topology. */
 public final class ArtemisRequestSender implements JmsRequestSender {
-  public static final long REQUEST_TIME_TO_LIVE_MILLIS = 5_000;
-  private static final String REQUEST_FQQN = "nk.sync.request::nk.sync.request.q";
-  private static final String REPLY_ADDRESS = "nk.sync.reply.web";
+  public static final long REQUEST_TIME_TO_LIVE_MILLIS =
+      BrokerTopology.SYNC_REQUEST.timeToLiveMillis();
 
   private final JmsContextFactory contexts;
 
@@ -45,7 +45,7 @@ public final class ArtemisRequestSender implements JmsRequestSender {
         BytesMessage request = context.createBytesMessage();
         request.writeBytes(encodedBody);
         request.setJMSCorrelationID(correlationId.toString());
-        request.setJMSReplyTo(new ActiveMQQueue(REPLY_ADDRESS));
+        request.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.address()));
         request.setStringProperty("NKMessageID", header.messageId().toString());
         request.setStringProperty("NKLayoutID", header.layoutId().value());
         request.setStringProperty("NKProtocolVersion", "001");
@@ -53,7 +53,9 @@ public final class ArtemisRequestSender implements JmsRequestSender {
             .createProducer()
             .setDeliveryMode(DeliveryMode.PERSISTENT)
             .setTimeToLive(REQUEST_TIME_TO_LIVE_MILLIS)
-            .send(new ActiveMQQueue(REQUEST_FQQN), request);
+            .send(
+                new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()),
+                request);
         context.commit();
       } catch (JMSException | RuntimeException exception) {
         rollbackAfterFailure(context, exception);
