@@ -23,7 +23,7 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT完了（35/35、64 layout相関・min/max/error golden・0107個別field・最大record・並行性、module coverage全100%、SpotBugs 0） |
 | 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（12/12、coverage全100%、SpotBugs 0） |
 | 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | PG/PT完了（15/15、migration 5/5、SQL object/function branch matrix 100%、実PostgreSQL 18.6、SSC-005反映）。DDL単体はHTTP出力なし、A/S/M/L/N/OのNK実画面比較は各依存Programで実施 |
-| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | PG/PT実施中（broker/JMS guard/factory、Web相関registry/request-reply client/request sender、API Reply/DLQ senderを実装。API 52・Web 16 PTの中間gateとcoverage全100%/SpotBugs 0を確認。PT-JMS 11 PASS・1未実施。Consumer adapterは継続） |
+| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | PG/PT実施中（broker/JMS guard/factory、Web request/reply client・送受信/DLQ隔離、API Reply/DLQ senderを実装。API 52・Web 27 PTの中間gateとcoverage全100%/SpotBugs 0を確認。PT-JMS 11 PASS・1未実施。API inbound consumerは継続） |
 | 006 / `NK-MSG-002` | Inbox/Outbox/replay/retry/log outbox | ASY-001～009、MQ-006～010 | 213、231～236、241 | 312、324、332 | `006_NK-MSG-002` | L/N/O | PG/PT実施中（PT-IDEM-001～015仕様化済み） |
 | 007 / `NK-AUT-001` | Authentication/attempt/session/context/owner/role | FUN-001/009、AUT-001～004 | 225～226、234、241 | 312、314、331～332 | `007_NK-AUT-001` | A01～A03/U02/O01 | 未着手 |
 | 008 / `NK-SCN-001` | Scenario/game/speaker/route/file/detail query | FUN-003～005 | 223～224、234 | 312～313、323、332 | `008_NK-SCN-001` | S01～S08 | 未着手 |
@@ -66,3 +66,4 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-03 | NK-MSG-001のWeb request/reply client、12並行wait・13件目拒否・全終了経路cleanupをPT-JMS-008へ反映。 |
 | 2026-09-03 | NK-MSG-001の実ACL 90組合せ、全4 route/provider負値、DLQ/Expiry再起動保持、production request senderを反映。PT-JMSは11 PASS・1未実施。 |
 | 2026-09-03 | NK-MSG-001のAPI Reply/DLQ sender、caller所有transactionのcommit/rollback実brokerPTを反映。API中間gateを52件へ更新。 |
+| 2026-09-03 | NK-MSG-001のWeb reply decoder/consumer、active/late ACK、body/type不変DLQ隔離、隔離失敗rollbackを反映。Web中間gateを27件へ更新。 |
