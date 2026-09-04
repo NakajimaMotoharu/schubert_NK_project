@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-007/008 independent AES-GCM, bound, tamper and compression-bomb vectors. */
 final class ResponseSnapshotCodecTest {
+  private static final byte[] NKENC1 = "NKENC1".getBytes(StandardCharsets.US_ASCII);
+  private static final byte FORMAT_VERSION = 1;
   private static final UUID MESSAGE_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000007");
   private static final ResponseSnapshotIdentity IDENTITY =
@@ -44,10 +46,21 @@ final class ResponseSnapshotCodecTest {
       EncryptedResponseSnapshot actual = codec.encrypt(IDENTITY, callerPlaintext);
       byte[] independent =
           storedCiphertext(
-              CURRENT_KEY, NONCE, independentAad(IDENTITY), independentCompress(plaintext));
+              "k2",
+              CURRENT_KEY,
+              NONCE,
+              independentAad(IDENTITY, "k2"),
+              independentCompress(plaintext));
 
       assertEquals("k2", actual.keyVersion());
       assertArrayEquals(independent, actual.ciphertext());
+      assertArrayEquals(NKENC1, Arrays.copyOfRange(actual.ciphertext(), 0, NKENC1.length));
+      assertEquals(FORMAT_VERSION, actual.ciphertext()[6]);
+      assertEquals(2, actual.ciphertext()[7]);
+      assertArrayEquals(
+          "k2".getBytes(StandardCharsets.US_ASCII),
+          Arrays.copyOfRange(actual.ciphertext(), 8, 10));
+      assertArrayEquals(NONCE, Arrays.copyOfRange(actual.ciphertext(), 10, 22));
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, actual));
       assertArrayEquals(plaintext, callerPlaintext);
       assertArrayEquals(CURRENT_KEY, callerKey);
@@ -112,8 +125,34 @@ final class ResponseSnapshotCodecTest {
       EncryptedResponseSnapshot unknown =
           new EncryptedResponseSnapshot("k0", current.ciphertext());
       assertReason(
-          ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
+          ResponseSnapshotException.Reason.SNAPSHOT_INVALID,
           () -> codec.decrypt(IDENTITY, unknown));
+
+      byte[] unknownKeyEnvelope = current.ciphertext();
+      unknownKeyEnvelope[9] = '0';
+      assertReason(
+          ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
+          () ->
+              codec.decrypt(
+                  IDENTITY, new EncryptedResponseSnapshot("k0", unknownKeyEnvelope)));
+
+      byte[] wrongMagic = current.ciphertext();
+      wrongMagic[0] ^= 1;
+      assertInvalidEnvelope(codec, wrongMagic);
+      byte[] wrongFormat = current.ciphertext();
+      wrongFormat[6] = 2;
+      assertInvalidEnvelope(codec, wrongFormat);
+      byte[] zeroKeyLength = current.ciphertext();
+      zeroKeyLength[7] = 0;
+      assertInvalidEnvelope(codec, zeroKeyLength);
+      byte[] oversizedKeyLength = current.ciphertext();
+      oversizedKeyLength[7] = 17;
+      assertInvalidEnvelope(codec, oversizedKeyLength);
+      byte[] invalidKeyId = current.ciphertext();
+      invalidKeyId[8] = ' ';
+      assertInvalidEnvelope(codec, invalidKeyId);
+      assertInvalidEnvelope(codec, Arrays.copyOf(current.ciphertext(), 36));
+      assertInvalidEnvelope(codec, Arrays.copyOf(current.ciphertext(), 37));
 
       byte[] tampered = current.ciphertext();
       tampered[tampered.length - 1] ^= 1;
@@ -298,6 +337,12 @@ final class ResponseSnapshotCodecTest {
         () -> codec.decrypt(IDENTITY, snapshot));
   }
 
+  private static void assertInvalidEnvelope(ResponseSnapshotCodec codec, byte[] envelope) {
+    assertReason(
+        ResponseSnapshotException.Reason.SNAPSHOT_INVALID,
+        () -> codec.decrypt(IDENTITY, new EncryptedResponseSnapshot("k2", envelope)));
+  }
+
   private static void assertReason(
       ResponseSnapshotException.Reason expected, ThrowingOperation operation) {
     ResponseSnapshotException failure =
@@ -310,10 +355,12 @@ final class ResponseSnapshotCodecTest {
       String version, byte[] key, ResponseSnapshotIdentity identity, byte[] compressed)
       throws Exception {
     return new EncryptedResponseSnapshot(
-        version, storedCiphertext(key, NONCE, independentAad(identity), compressed));
+        version,
+        storedCiphertext(version, key, NONCE, independentAad(identity, version), compressed));
   }
 
-  private static byte[] storedCiphertext(byte[] key, byte[] nonce, byte[] aad, byte[] compressed)
+  private static byte[] storedCiphertext(
+      String keyVersion, byte[] key, byte[] nonce, byte[] aad, byte[] compressed)
       throws Exception {
     Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
     cipher.init(
@@ -322,25 +369,58 @@ final class ResponseSnapshotCodecTest {
         new GCMParameterSpec(128, nonce));
     cipher.updateAAD(aad);
     byte[] encrypted = cipher.doFinal(compressed);
-    byte[] stored = Arrays.copyOf(nonce, nonce.length + encrypted.length);
-    System.arraycopy(encrypted, 0, stored, nonce.length, encrypted.length);
-    return stored;
+    byte[] keyId = keyVersion.getBytes(StandardCharsets.US_ASCII);
+    return ByteBuffer.allocate(NKENC1.length + 2 + keyId.length + nonce.length + encrypted.length)
+        .put(NKENC1)
+        .put(FORMAT_VERSION)
+        .put((byte) keyId.length)
+        .put(keyId)
+        .put(nonce)
+        .put(encrypted)
+        .array();
   }
 
-  private static byte[] independentAad(ResponseSnapshotIdentity identity) {
-    byte[] magic = "SCHUBERT-NK-SNAPSHOT1".getBytes(StandardCharsets.US_ASCII);
+  private static byte[] independentAad(ResponseSnapshotIdentity identity, String keyVersion) {
+    byte[] purpose = "api-inbox-response".getBytes(StandardCharsets.US_ASCII);
+    byte[] table = "schubert.request_inbox".getBytes(StandardCharsets.US_ASCII);
+    byte[] messageId =
+        ByteBuffer.allocate(16)
+            .putLong(identity.requestMessageId().getMostSignificantBits())
+            .putLong(identity.requestMessageId().getLeastSignificantBits())
+            .array();
+    byte[] format = new byte[] {FORMAT_VERSION};
+    byte[] keyId = keyVersion.getBytes(StandardCharsets.US_ASCII);
     byte[] layout = identity.responseLayoutId().getBytes(StandardCharsets.US_ASCII);
     byte[] version = identity.responseVersion().getBytes(StandardCharsets.US_ASCII);
+    byte[] owner =
+        identity.ownerUserId().isPresent()
+            ? ByteBuffer.allocate(Long.BYTES).putLong(identity.ownerUserId().getAsLong()).array()
+            : new byte[0];
     ByteBuffer buffer =
-        ByteBuffer.allocate(magic.length + 16 + layout.length + version.length + 1 + Long.BYTES);
-    buffer.put(magic);
-    buffer.putLong(identity.requestMessageId().getMostSignificantBits());
-    buffer.putLong(identity.requestMessageId().getLeastSignificantBits());
-    buffer.put(layout);
-    buffer.put(version);
-    buffer.put((byte) (identity.ownerUserId().isPresent() ? 1 : 0));
-    buffer.putLong(identity.ownerUserId().orElse(0));
+        ByteBuffer.allocate(
+            8 * Integer.BYTES
+                + purpose.length
+                + table.length
+                + messageId.length
+                + format.length
+                + keyId.length
+                + layout.length
+                + version.length
+                + owner.length);
+    putLengthPrefixed(buffer, purpose);
+    putLengthPrefixed(buffer, table);
+    putLengthPrefixed(buffer, messageId);
+    putLengthPrefixed(buffer, format);
+    putLengthPrefixed(buffer, keyId);
+    putLengthPrefixed(buffer, layout);
+    putLengthPrefixed(buffer, version);
+    putLengthPrefixed(buffer, owner);
     return buffer.array();
+  }
+
+  private static void putLengthPrefixed(ByteBuffer buffer, byte[] value) {
+    buffer.putInt(value.length);
+    buffer.put(value);
   }
 
   private static byte[] independentCompress(byte[] plaintext) throws Exception {

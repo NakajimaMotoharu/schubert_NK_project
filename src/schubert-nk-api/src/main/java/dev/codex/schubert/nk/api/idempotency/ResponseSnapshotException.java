@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Bounded response snapshot failure without plaintext or key material.
  *
- * <p>Trace: DAT-009, SS 324 §6/§15 and PT-IDEM-008.
+ * <p>Trace: DAT-009, SS 324 §6/§15, SS 352 §11.2 and PT-IDEM-008.
  */
 public final class ResponseSnapshotException extends RuntimeException {
   private static final long serialVersionUID = 1L;

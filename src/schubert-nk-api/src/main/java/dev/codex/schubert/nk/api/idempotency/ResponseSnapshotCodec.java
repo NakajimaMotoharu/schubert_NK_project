@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.api.idempotency;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -17,13 +19,18 @@ import org.jspecify.annotations.Nullable;
 /**
  * JDK Deflater level 3 plus AES-256-GCM response snapshot codec.
  *
- * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15 and PT-IDEM-007/008.
+ * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15, SS 352 §11.2 and PT-IDEM-007/008.
  */
 public final class ResponseSnapshotCodec implements AutoCloseable {
   public static final int MAXIMUM_PLAINTEXT_BYTES = 1_000_000;
+  private static final byte[] ENVELOPE_MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
+  private static final byte ENVELOPE_FORMAT_VERSION = 1;
   private static final int AES_KEY_BYTES = 32;
   private static final int NONCE_BYTES = 12;
+  private static final int GCM_TAG_BYTES = 16;
   private static final int GCM_TAG_BITS = 128;
+  private static final int ENVELOPE_FIXED_BYTES = ENVELOPE_MAGIC.length + 2 + NONCE_BYTES;
+  private static final int MINIMUM_ENVELOPE_BYTES = ENVELOPE_FIXED_BYTES + 1 + GCM_TAG_BYTES;
   private static final int BUFFER_BYTES = 8192;
 
   private final String currentVersion;
@@ -71,7 +78,10 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
 
     byte[] compressed = compress(plaintext);
     byte[] nonce = new byte[NONCE_BYTES];
-    byte[] aad = identity.aad();
+    byte[] keyId = currentVersion.getBytes(StandardCharsets.US_ASCII);
+    byte[] aad = identity.aad(ENVELOPE_FORMAT_VERSION, currentVersion);
+    byte[] encrypted = null;
+    byte[] stored = null;
     secureRandom.nextBytes(nonce);
     try {
       Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
@@ -80,11 +90,16 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
           new SecretKeySpec(currentKey, "AES"),
           new GCMParameterSpec(GCM_TAG_BITS, nonce));
       cipher.updateAAD(aad);
-      byte[] encrypted = cipher.doFinal(compressed);
-      byte[] stored = new byte[nonce.length + encrypted.length];
-      System.arraycopy(nonce, 0, stored, 0, nonce.length);
-      System.arraycopy(encrypted, 0, stored, nonce.length, encrypted.length);
-      Arrays.fill(encrypted, (byte) 0);
+      encrypted = cipher.doFinal(compressed);
+      stored =
+          ByteBuffer.allocate(ENVELOPE_FIXED_BYTES + keyId.length + encrypted.length)
+              .put(ENVELOPE_MAGIC)
+              .put(ENVELOPE_FORMAT_VERSION)
+              .put((byte) keyId.length)
+              .put(keyId)
+              .put(nonce)
+              .put(encrypted)
+              .array();
       return new EncryptedResponseSnapshot(currentVersion, stored);
     } catch (GeneralSecurityException exception) {
       throw new ResponseSnapshotException(
@@ -95,6 +110,12 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
       Arrays.fill(compressed, (byte) 0);
       Arrays.fill(nonce, (byte) 0);
       Arrays.fill(aad, (byte) 0);
+      if (encrypted != null) {
+        Arrays.fill(encrypted, (byte) 0);
+      }
+      if (stored != null) {
+        Arrays.fill(stored, (byte) 0);
+      }
     }
   }
 
@@ -102,19 +123,50 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     ensureOpen();
     Objects.requireNonNull(identity, "identity");
     Objects.requireNonNull(snapshot, "snapshot");
-    byte[] key =
-        selectKey(snapshot.keyVersion())
-            .orElseThrow(
-                () ->
-                    new ResponseSnapshotException(
-                        ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
-                        "response snapshot key version is unavailable"));
     byte[] stored = snapshot.ciphertext();
-    byte[] nonce = Arrays.copyOfRange(stored, 0, NONCE_BYTES);
-    byte[] encrypted = Arrays.copyOfRange(stored, NONCE_BYTES, stored.length);
-    byte[] aad = identity.aad();
+    byte[] nonce = null;
+    byte[] encrypted = null;
+    byte[] aad = null;
     byte[] compressed = null;
     try {
+      if (stored.length < MINIMUM_ENVELOPE_BYTES
+          || !Arrays.equals(
+              stored,
+              0,
+              ENVELOPE_MAGIC.length,
+              ENVELOPE_MAGIC,
+              0,
+              ENVELOPE_MAGIC.length)) {
+        throw invalidSnapshot("response snapshot envelope is invalid", null);
+      }
+      if (stored[ENVELOPE_MAGIC.length] != ENVELOPE_FORMAT_VERSION) {
+        throw invalidSnapshot("response snapshot format version is invalid", null);
+      }
+      int keyIdLength = Byte.toUnsignedInt(stored[ENVELOPE_MAGIC.length + 1]);
+      int nonceOffset = ENVELOPE_MAGIC.length + 2 + keyIdLength;
+      int encryptedOffset = nonceOffset + NONCE_BYTES;
+      if (keyIdLength < 1
+          || keyIdLength > 16
+          || stored.length < encryptedOffset + GCM_TAG_BYTES) {
+        throw invalidSnapshot("response snapshot envelope length is invalid", null);
+      }
+      String envelopeKeyVersion =
+          new String(
+              stored, ENVELOPE_MAGIC.length + 2, keyIdLength, StandardCharsets.US_ASCII);
+      if (!envelopeKeyVersion.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")
+          || !snapshot.keyVersion().equals(envelopeKeyVersion)) {
+        throw invalidSnapshot("response snapshot key version is invalid", null);
+      }
+      byte[] key =
+          selectKey(envelopeKeyVersion)
+              .orElseThrow(
+                  () ->
+                      new ResponseSnapshotException(
+                          ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
+                          "response snapshot key version is unavailable"));
+      nonce = Arrays.copyOfRange(stored, nonceOffset, encryptedOffset);
+      encrypted = Arrays.copyOfRange(stored, encryptedOffset, stored.length);
+      aad = identity.aad(ENVELOPE_FORMAT_VERSION, envelopeKeyVersion);
       Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
       cipher.init(
           Cipher.DECRYPT_MODE,
@@ -130,9 +182,15 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
           exception);
     } finally {
       Arrays.fill(stored, (byte) 0);
-      Arrays.fill(nonce, (byte) 0);
-      Arrays.fill(encrypted, (byte) 0);
-      Arrays.fill(aad, (byte) 0);
+      if (nonce != null) {
+        Arrays.fill(nonce, (byte) 0);
+      }
+      if (encrypted != null) {
+        Arrays.fill(encrypted, (byte) 0);
+      }
+      if (aad != null) {
+        Arrays.fill(aad, (byte) 0);
+      }
       if (compressed != null) {
         Arrays.fill(compressed, (byte) 0);
       }

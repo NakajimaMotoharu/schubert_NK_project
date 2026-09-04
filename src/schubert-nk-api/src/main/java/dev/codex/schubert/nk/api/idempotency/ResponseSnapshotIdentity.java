@@ -9,15 +9,17 @@ import java.util.UUID;
 /**
  * AES-GCM AAD identity for an Inbox response snapshot.
  *
- * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15 and PT-IDEM-007/008.
+ * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15, SS 352 §11.2 and PT-IDEM-007/008.
  */
 public record ResponseSnapshotIdentity(
     UUID requestMessageId,
     String responseLayoutId,
     String responseVersion,
     OptionalLong ownerUserId) {
-  private static final byte[] AAD_MAGIC =
-      "SCHUBERT-NK-SNAPSHOT1".getBytes(StandardCharsets.US_ASCII);
+  private static final byte[] AAD_PURPOSE =
+      "api-inbox-response".getBytes(StandardCharsets.US_ASCII);
+  private static final byte[] AAD_TABLE =
+      "schubert.request_inbox".getBytes(StandardCharsets.US_ASCII);
   private static final long MAXIMUM_OWNER_ID = 999_999_999_999L;
 
   public ResponseSnapshotIdentity {
@@ -49,19 +51,43 @@ public record ResponseSnapshotIdentity(
         requestMessageId, responseLayoutId, responseVersion, OptionalLong.empty());
   }
 
-  byte[] aad() {
+  byte[] aad(byte formatVersion, String keyVersion) {
+    Objects.requireNonNull(keyVersion, "keyVersion");
     byte[] layout = responseLayoutId.getBytes(StandardCharsets.US_ASCII);
     byte[] version = responseVersion.getBytes(StandardCharsets.US_ASCII);
+    byte[] keyId = keyVersion.getBytes(StandardCharsets.US_ASCII);
+    int ownerLength = ownerUserId.isPresent() ? Long.BYTES : 0;
     ByteBuffer buffer =
-        ByteBuffer.allocate(AAD_MAGIC.length + 16 + layout.length + version.length + 1 + Long.BYTES);
-    buffer.put(AAD_MAGIC);
+        ByteBuffer.allocate(
+            8 * Integer.BYTES
+                + AAD_PURPOSE.length
+                + AAD_TABLE.length
+                + 16
+                + 1
+                + keyId.length
+                + layout.length
+                + version.length
+                + ownerLength);
+    putLengthPrefixed(buffer, AAD_PURPOSE);
+    putLengthPrefixed(buffer, AAD_TABLE);
+    buffer.putInt(16);
     buffer.putLong(requestMessageId.getMostSignificantBits());
     buffer.putLong(requestMessageId.getLeastSignificantBits());
-    buffer.put(layout);
-    buffer.put(version);
-    buffer.put((byte) (ownerUserId.isPresent() ? 1 : 0));
-    buffer.putLong(ownerUserId.orElse(0));
+    buffer.putInt(1);
+    buffer.put(formatVersion);
+    putLengthPrefixed(buffer, keyId);
+    putLengthPrefixed(buffer, layout);
+    putLengthPrefixed(buffer, version);
+    buffer.putInt(ownerLength);
+    if (ownerUserId.isPresent()) {
+      buffer.putLong(ownerUserId.getAsLong());
+    }
     return buffer.array();
+  }
+
+  private static void putLengthPrefixed(ByteBuffer buffer, byte[] value) {
+    buffer.putInt(value.length);
+    buffer.put(value);
   }
 
   @Override

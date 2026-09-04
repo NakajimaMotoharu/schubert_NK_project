@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Versioned redacted Inbox response ciphertext.
  *
- * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15 and PT-IDEM-007/008.
+ * <p>Trace: DAT-009, UI 241/242, SS 324 §6/§15, SS 352 §11.2 and PT-IDEM-007/008.
  */
 public record EncryptedResponseSnapshot(String keyVersion, byte[] ciphertext) {
   public static final int MINIMUM_CIPHERTEXT_BYTES = 29;
