@@ -39,16 +39,22 @@ public final class FingerprintKeyRing implements AutoCloseable {
   }
 
   public boolean matches(Fingerprint stored, CanonicalRequest request) {
+    return verify(stored, request) == FingerprintVerification.MATCH;
+  }
+
+  public FingerprintVerification verify(Fingerprint stored, CanonicalRequest request) {
     ensureOpen();
     Objects.requireNonNull(stored, "stored");
     Objects.requireNonNull(request, "request");
     Optional<byte[]> selected = select(stored.keyVersion());
     if (selected.isEmpty()) {
-      return false;
+      return FingerprintVerification.KEY_UNAVAILABLE;
     }
     byte[] actual = OperationFingerprint.INSTANCE.calculate(request, selected.orElseThrow());
     try {
-      return MessageDigest.isEqual(stored.digest(), actual);
+      return MessageDigest.isEqual(stored.digest(), actual)
+          ? FingerprintVerification.MATCH
+          : FingerprintVerification.MISMATCH;
     } finally {
       Arrays.fill(actual, (byte) 0);
     }

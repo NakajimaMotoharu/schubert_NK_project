@@ -27,6 +27,12 @@ class FingerprintKeyRingTest {
       changed[0] ^= 1;
 
       assertEquals("k2", currentFingerprint.keyVersion());
+      assertEquals(FingerprintVerification.MATCH, ring.verify(currentFingerprint, request));
+      assertEquals(FingerprintVerification.MATCH, ring.verify(previousFingerprint, request));
+      assertEquals(FingerprintVerification.KEY_UNAVAILABLE, ring.verify(unknown, request));
+      assertEquals(
+          FingerprintVerification.MISMATCH,
+          ring.verify(new Fingerprint("k2", changed), request));
       assertTrue(ring.matches(currentFingerprint, request));
       assertTrue(ring.matches(previousFingerprint, request));
       assertFalse(ring.matches(unknown, request));
@@ -69,13 +75,16 @@ class FingerprintKeyRingTest {
 
     FingerprintKeyRing noPrevious = new FingerprintKeyRing("v1", key, null, null);
     assertThrows(NullPointerException.class, () -> noPrevious.matches(null, request("t")));
+    assertThrows(NullPointerException.class, () -> noPrevious.verify(null, request("t")));
     Fingerprint valid = noPrevious.calculate(request("t"));
     assertThrows(NullPointerException.class, () -> noPrevious.matches(valid, null));
+    assertThrows(NullPointerException.class, () -> noPrevious.verify(valid, null));
     assertFalse(noPrevious.matches(new Fingerprint("v0", valid.digest()), request("t")));
     noPrevious.close();
     noPrevious.close();
     assertThrows(IllegalStateException.class, () -> noPrevious.calculate(request("t")));
     assertThrows(IllegalStateException.class, () -> noPrevious.matches(valid, request("t")));
+    assertThrows(IllegalStateException.class, () -> noPrevious.verify(valid, request("t")));
   }
 
   private static CanonicalRequest request(String target) {
