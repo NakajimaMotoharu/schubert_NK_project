@@ -29,12 +29,12 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | Workstream | 状態 | 完了条件 | 現在値 |
 |---|---|---|---|
 | 開始時確認 | 完了 | status/branch/commit/remote/既存変更確認 | `main`/`749a777`、clean、既存remoteなし。指定URLを`origin`へ設定 |
-| Remote整合 | 阻害中 | fetchでremote履歴との一致を確認 | private GitHubのcredentialが本環境になく認証前で停止。force pushは実施しない |
+| Remote整合 | 完了 | fetchでremote履歴との一致を確認し、通常push | 2026-09-04にGitHub認証を確認。空remoteへ`main`、`dev`、既存feature branchをforceなしでpush済み |
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 5/20 Program完了。`dev-messaging`でbroker/JMS guard/factory/DLQ、Web request/reply client・送受信/DLQ隔離、API Reply/DLQ sender、HMAC/Outbox policyを実装済み。NK-MSG-001/002は未完了 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 5/20 Program完了。中間gateはAPI 52件・Web 27件PASS、両module 4 coverage指標100%、SpotBugs 0。PT-JMSは11件PASS・1件未実施で、API inbound consumerも残るためProgram合格へ未算入 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了。NK-MSG-001のbroker/JMS/Web request-reply/API listener・Reply/DLQを完了。NK-MSG-002はHMAC/Outbox policyまで実装し継続中 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。NK-MSG-001はPT-JMS 12/12、関連JUnit 65/65、全reactor 199/199 PASS、Program production 4 coverage指標100%、SpotBugs/secret hit 0 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -65,3 +65,5 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-03 | 実Artemis ACL 90組合せ、全route/provider負値、DLQ/Expiry再起動保持、production request senderを追加。API 50件・Web 16件とcoverage全100%/SpotBugs 0を確認。 |
 | 2026-09-03 | API Reply/DLQ senderをlistener所有transactionへ実装し、commit前不可視・rollback・commitとproperty/body契約を実brokerで確認。API 52件、coverage全100%、SpotBugs 0。 |
 | 2026-09-03 | Web reply decoder/consumerとbody/type不変DLQ隔離を実装。active/late ACK、恒久不正commit後fatal、隔離失敗rollbackを実broker/negative PTで確認し、Web 27件・coverage全100%・SpotBugs 0。 |
+| 2026-09-04 | GitHub認証復旧後、空remoteへ`main`、`dev`、全既存feature branchをforceなしでpush。remote阻害を解消。 |
+| 2026-09-04 | NK-MSG-001最終run `PT-JMS-20260904-01`を実施。PT-JMS 12/12、関連JUnit 65/65、全reactor 199/199、coverage全100%、SpotBugs/secret/CRLF/NUL/skip等0でPG/PT完了。 |

@@ -99,7 +99,7 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 | Artemis | POM固定2.56.0のFile Journal brokerとproduction `broker.xml` schema/config検査を併用 | 導入済み。実ACL 90組合せ、全route/provider負値、Expiry/DLQ再起動保持までcomponent PT完了。Application adapterを継続 |
 | JDBC/Flyway | Flyway 13.4.0、PostgreSQL JDBC 42.7.13をMaven Central artifactで固定 | 完了 |
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
-| Secret scan | Tracked/untracked対象のpattern・entropy・known secret detectorをsanitized report化 | 未着手 |
+| Secret scan | Program対象source/config/test/reportをcredential/private key/token、raw body marker、CRLF/NUL、disabled/flaky/skipped/not-runと併せてscanしsanitized report化 | 実施中（NK-MSG-001でpattern/known-marker scanを導入しhit 0。全repositoryのentropy scanは総合gateで実施） |
 
 ## 7. 更新履歴
 
