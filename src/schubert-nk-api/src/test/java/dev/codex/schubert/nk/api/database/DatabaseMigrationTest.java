@@ -253,7 +253,7 @@ final class DatabaseMigrationTest {
 
     @Test
     @Order(8)
-    @DisplayName("PT-DB-008 state/time/null and Security hold correlations")
+    @DisplayName("PT-DB-008/PT-IDEM-007-008 state, null and snapshot bounds")
     void stateTimeAndNullCorrelationsAreEnforced() throws SQLException {
         try (Connection connection = connection(ADMIN)) {
             connection.setAutoCommit(false);
@@ -277,6 +277,18 @@ final class DatabaseMigrationTest {
                             + "request_fingerprint_hmac,fingerprint_key_version,processing_state,created_at,completed_at,expires_at) values('"
                             + UUID_1 + "','" + UUID_2 + "','LGNREQ01','001','" + HASH + "','key-1','PROCESSING','"
                             + FIXED_TIME + "','" + FIXED_TIME + "','2026-09-03 00:00:00+00')");
+            execute(connection, completedSnapshotInboxInsert(
+                    "00000000-0000-0000-0000-000000000003",
+                    "00000000-0000-0000-0000-000000000004", 29));
+            assertRejects(connection, "23514", completedSnapshotInboxInsert(
+                    "00000000-0000-0000-0000-000000000005",
+                    "00000000-0000-0000-0000-000000000006", 28));
+            execute(connection, completedSnapshotInboxInsert(
+                    "00000000-0000-0000-0000-000000000007",
+                    "00000000-0000-0000-0000-000000000008", 1_050_000));
+            assertRejects(connection, "23514", completedSnapshotInboxInsert(
+                    "00000000-0000-0000-0000-000000000009",
+                    "00000000-0000-0000-0000-000000000010", 1_050_001));
             assertRejects(connection, "23514",
                     "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,"
                             + "next_attempt_at,lease_owner,created_at) values('" + UUID_1 + "','" + UUID_2
@@ -861,6 +873,16 @@ final class DatabaseMigrationTest {
         SQLException error = assertThrows(SQLException.class, () -> execute(connection, sql));
         assertEquals(sqlState, error.getSQLState());
         connection.rollback(savepoint);
+    }
+
+    private static String completedSnapshotInboxInsert(String messageId, String correlationId, int ciphertextBytes) {
+        return "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,"
+                + "request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,"
+                + "response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at) values('"
+                + messageId + "','" + correlationId + "','LGNREQ01','001','" + HASH
+                + "','key-1','COMPLETED','NONE','LGNRSP01','001',decode(repeat('00',"
+                + ciphertextBytes + "),'hex'),'key-1','" + FIXED_TIME + "','" + FIXED_TIME
+                + "','2026-09-03 00:00:00+00')";
     }
 
     private static void assertSqlState(String role, String sqlState, String sql) {
