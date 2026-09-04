@@ -2,7 +2,9 @@ Test_ID	Status	JUnit_methods	Independent_oracle	Evidence
 PT-IDEM-001	PASS	OperationFingerprintTest subset	NKOP1 U32 big-endian vector	TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml
 PT-IDEM-002	PASS	OperationFingerprintTest subset	Unicode/null/order HMAC vector	TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml
 PT-IDEM-003	PASS	FingerprintKeyRingTest 3	current/previous/unknown fixed key-version matrix	TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml
+PT-IDEM-004	PASS	InboxModelTest + JdbcInboxCoordinatorTest	explicit message identity/HMAC/DB after-condition matrix	inbox-independent-oracle.tsv; inbox-replay-results.tsv; JUnit XML
+PT-IDEM-005	PASS	JdbcInboxCoordinatorTest	owner/token partial-UK, terminal/PROCESSING state matrix	inbox-independent-oracle.tsv; inbox-replay-results.tsv; JUnit XML
+PT-IDEM-006	PASS	JdbcInboxCoordinatorTest	real PostgreSQL transaction after-conditions and controlled race points	inbox-transaction-failpoints.md; JUnit XML
 PT-IDEM-007	PASS	ResponseSnapshotCodecTest subset + DatabaseMigrationTest boundary	NKENC1/JCA/Deflater/AAD vector; DB after-condition	response-snapshot-oracle.tsv; snapshot-boundary-results.tsv
 PT-IDEM-008	PASS	ResponseSnapshotCodecTest subset + DatabaseMigrationTest boundary	mutation/null/bomb/size negative matrix	TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml
-PT-IDEM-004..006	NOT_RUN	0	not implemented	Not counted as PASS
 PT-IDEM-009..015	NOT_RUN	0	not implemented	Not counted as PASS

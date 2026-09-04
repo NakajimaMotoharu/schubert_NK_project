@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "runId": "PT-IDEM-20260904-01",
+  "runId": "PT-IDEM-20260905-01",
   "programId": "NK-MSG-002",
-  "scope": "implemented-scope intermediate gate; Program remains in progress",
-  "executedAt": "2026-09-04T22:12:55+09:00",
-  "completedAt": "2026-09-04T22:14:06+09:00",
+  "scope": "implemented-scope intermediate gate; PT-IDEM-001 through PT-IDEM-008 only; Program remains in progress",
+  "executedAt": "2026-09-05T06:03:10+09:00",
+  "completedAt": "2026-09-05T06:04:23+09:00",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS / Linux 7.0.0-30-generic x86_64",
     "jdk": "OpenJDK 25.0.4+7",
@@ -16,45 +16,49 @@
     "spotbugsPlugin": "4.10.4.0"
   },
   "branch": "dev-messaging",
-  "targetCommit": "50d0a9134a0c0c772a8b0b4404155a37eb56a812",
-  "implementationCommits": ["dcc90fe", "50d0a91"],
+  "targetCommit": "0f1b381a7e8277857802ef6ebb23a827d7b8235c",
+  "implementationCommits": ["dcc90fe", "50d0a91", "0f1b381"],
   "qualityLedgerCommits": ["a4cd40c", "5248acd"],
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am clean verify",
   "exitCode": 0,
   "result": "PASS_IMPLEMENTED_SCOPE_PROGRAM_IN_PROGRESS",
-  "testIdsPassed": ["PT-IDEM-001", "PT-IDEM-002", "PT-IDEM-003", "PT-IDEM-007", "PT-IDEM-008"],
+  "testIdsPassed": [
+    "PT-IDEM-001", "PT-IDEM-002", "PT-IDEM-003", "PT-IDEM-004",
+    "PT-IDEM-005", "PT-IDEM-006", "PT-IDEM-007", "PT-IDEM-008"
+  ],
   "testIdsNotRun": [
-    "PT-IDEM-004", "PT-IDEM-005", "PT-IDEM-006", "PT-IDEM-009", "PT-IDEM-010",
-    "PT-IDEM-011", "PT-IDEM-012", "PT-IDEM-013", "PT-IDEM-014", "PT-IDEM-015"
+    "PT-IDEM-009", "PT-IDEM-010", "PT-IDEM-011", "PT-IDEM-012",
+    "PT-IDEM-013", "PT-IDEM-014", "PT-IDEM-015"
   ],
   "tests": {
-    "implementedScopeJUnitMethods": 15,
-    "apiJUnitMethods": 68,
+    "implementedScopeJUnitMethods": 26,
+    "apiJUnitMethods": 79,
     "protocolJUnitMethods": 69,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
     "flaky": 0,
     "disabled": 0,
+    "notRun": 7,
     "notRunCountedAsPass": 0,
     "nonQualifyingRuns": "excluded; see logs/non-qualifying-runs.md"
   },
   "coverage": {
-    "apiClasses": "28/28",
-    "apiInstructions": "2819/2819",
-    "apiBranches": "247/247",
-    "apiLines": "684/684",
-    "apiMethods": "111/111",
+    "apiClasses": "40/40",
+    "apiInstructions": "4037/4037",
+    "apiBranches": "355/355",
+    "apiLines": "953/953",
+    "apiMethods": "153/153",
     "protocolClasses": "157/157",
     "protocolInstructions": "17231/17231",
     "protocolBranches": "982/982",
     "protocolLines": "3384/3384",
     "protocolMethods": "739/739",
-    "responseSnapshotClasses": "5/5",
-    "responseSnapshotInstructions": "937/937",
-    "responseSnapshotBranches": "90/90",
-    "responseSnapshotLines": "222/222",
-    "responseSnapshotMethods": "28/28",
+    "inboxRelatedClasses": "13/13",
+    "inboxRelatedInstructions": "1407/1407",
+    "inboxRelatedBranches": "136/136",
+    "inboxRelatedLines": "313/313",
+    "inboxRelatedMethods": "50/50",
     "ratio": "100%"
   },
   "staticAnalysis": {
@@ -65,30 +69,44 @@
     "crlfFiles": 0,
     "nulFiles": 0
   },
+  "databaseAssertions": {
+    "engine": "PostgreSQL 18.6",
+    "schema": "Flyway V001-V005 production resources",
+    "messageIdRace": "real SQLSTATE 23505 then one savepoint reread",
+    "ownerTokenRace": "real partial unique SQLSTATE 23505 then one savepoint reread",
+    "rollbackAfterConditions": "Inbox 0 and audit 0",
+    "commitAfterConditions": "Inbox 1 and audit 1; replay handler 0"
+  },
   "characterization": {
     "currentBaselineChanged": false,
-    "nkHttpComparison": "not applicable to the standalone snapshot codec/DDL slice; replay HTTP behavior remains assigned to PT-IDEM-004..006 and dependent service Characterization"
+    "nkHttpComparison": "not applicable to the standalone JDBC Inbox coordinator slice; HTTP result-code mapping and live service comparison remain assigned to dependent service Programs"
   },
   "relatedBugs": ["BUG-007", "BUG-008"],
   "relatedYktOpen": ["YKT-007", "YKT-008"],
   "relatedSsc": [],
   "redaction": "synthetic fixtures and bounded metadata only; no credential, password, raw session, cookie, token, secret key, response ciphertext, fixed-width business body, production master payload or DB dump",
   "files": [
-    {"sha256": "a3b9e4af075d99bb5922aed659db6e465c67955a84f6704ca5e841f605af3597", "path": "coverage/api-jacoco.csv"},
+    {"sha256": "4153d0915e4ae809550cc9446957a3aaa7e2f871d31468d4adfa3bd1e6dcf4da", "path": "coverage/api-jacoco.csv"},
     {"sha256": "85ff63a6da7f823bf6c51f106dc44cce81c30bd2495c622a29eb23f6434fbe98", "path": "coverage/protocol-jacoco.csv"},
+    {"sha256": "d28f0732ef927e3d22c6f47ba007cb6fcf7187c1c2e472bdaba938bf0d6017c8", "path": "database/inbox-replay-results.tsv"},
     {"sha256": "2d2b2ef4b1daa9bb25a20ae1ae0cd91214dacd20e4ee52ad8d290698662eaf32", "path": "database/snapshot-boundary-results.tsv"},
+    {"sha256": "f8285a6b9c25c60abb0402e04165fb9c8d42b401cd553ad29ddde21e5dd8f6b4", "path": "input/inbox-independent-oracle.tsv"},
     {"sha256": "bcef5db48933759bf0a47d37234c29cbaaa25ed495df1d00d31bca46bd4b6edc", "path": "input/response-snapshot-oracle.tsv"},
     {"sha256": "baa31f206ed34b2ba6f4f0918707c58eb5e37ba3eca163e2bd376bb554815d9d", "path": "logs/BUG-007-reproduction.md"},
     {"sha256": "fc203271397d6297e9d66889177555f54aefb0f8efbe4b94baf9f38031136572", "path": "logs/BUG-008-reproduction.md"},
     {"sha256": "3692000e346d526710d287af567486267346923c5224980f560fd278f44fdbb8", "path": "logs/PT-IDEM-20260904-01-run-summary.txt"},
-    {"sha256": "c6b5a0e858d3a7dd890f4594b07283324e341d9a66f477c2819ddfbb89d25f57", "path": "logs/non-qualifying-runs.md"},
-    {"sha256": "37d40f73683032f1a844c5b6e6445deaeedfd64a11afbf6a522f60e526d40b69", "path": "logs/secret-scan.txt"},
-    {"sha256": "b0aff5251ea525ff0e232a95db7afc578a1177efe6fd53a3f97694a34bfd4bcc", "path": "output/PT-IDEM-result-matrix.tsv"},
-    {"sha256": "c3e8246d5ab4cea9496346e1da8302c99b4e0567cbbcef480784a38becab9cc2", "path": "output/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml"},
-    {"sha256": "da7707ec84ed693b411f6be5798d7b2fbe695eac27a290f1e302363cce8d42d2", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml"},
-    {"sha256": "644ab9354f61b31193eefadedfc37b3dd307791c22f16bdf0c3fe6949ff97e1d", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml"},
-    {"sha256": "15db3ab3067280c11b15d2ee0e800733253ffe69e808c992f953b3d94736097e", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml"},
-    {"sha256": "c0022cbb2edd0c55e7c0602a2eb2bb283a56f72d060065f8aed46f83aa9621fc", "path": "output/api-spotbugs.xml"},
-    {"sha256": "3f222eb34e68c542fb917435aefee5c3d8e16ef28d9ccc491bb7329aba444667", "path": "output/protocol-spotbugs.xml"}
+    {"sha256": "5815de75fef49b982b029f6666f50d622ef0e7f2fbb1f396b47a598dc4e53562", "path": "logs/PT-IDEM-20260905-01-run-summary.txt"},
+    {"sha256": "ff8acc2f7e2e11e487b27b6d7907e741cf1763b1025a457a13a68430ca2ca947", "path": "logs/inbox-transaction-failpoints.md"},
+    {"sha256": "51f5e32420aae1b3c1d2fc69edde007f3b0e8addaffb5f19a11aa3fe0439fe12", "path": "logs/non-qualifying-runs.md"},
+    {"sha256": "8e2f59e25b684f3c0fed006bedf6653493c007a1fd0fa754887042cdd48dd895", "path": "logs/secret-scan.txt"},
+    {"sha256": "2b13b73e66f60418444df39e324fca07e15f5c2bb58e10f1cdcbff498b2f3e15", "path": "output/PT-IDEM-result-matrix.tsv"},
+    {"sha256": "e56caa596cc2b46c419336804da93fcacd30a6e35ba8da32a2ad96dc2cb63f67", "path": "output/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml"},
+    {"sha256": "cc0a3316d6c29cd08c069e4046579a45b6720e76712eae0e50d6759210d75b2a", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml"},
+    {"sha256": "73e4007f070e9f69b2a537a67c743798cffad31e7279b2a48f35f203c2438a76", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml"},
+    {"sha256": "a0746ba971ab0656bb7ae284fb301b7c8c545e90ffd377f1e2c6a091c7a3663c", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml"},
+    {"sha256": "1daacbfcc0acf7b2bc809f1c9a4d5f10747bf3cb2cc430bb549806b7a8b60002", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml"},
+    {"sha256": "9e83bad8e32c10ea75ac8947c6df29fd0071349bb53bd1b67f789568ea183da0", "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml"},
+    {"sha256": "554a9cbcba76cb72afb4f6d99ccb25083e1893bd7cc8b7d9da267c8758b70b80", "path": "output/api-spotbugs.xml"},
+    {"sha256": "cb5b113979a80d8609727b02b912463760b81fb5fa3a523478004617452f9ae2", "path": "output/protocol-spotbugs.xml"}
   ]
 }

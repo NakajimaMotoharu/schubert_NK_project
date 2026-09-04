@@ -33,8 +33,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了。NK-MSG-001を完了。NK-MSG-002はHMAC/key rotation、Outbox policy、Response snapshot圧縮/AES-GCM/`NKENC1`/AAD/DB上限まで実装し継続中 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。NK-MSG-001完了。NK-MSG-002はPT-IDEM-001～003/007～008の中間RunでProtocol 69/API 68 PASS、coverage全100%、SpotBugs/secret hit 0。未実装10 Test IDはPASSへ未算入 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了。NK-MSG-001を完了。NK-MSG-002はHMAC/key rotation、Inbox同一transaction/replay/競合、Outbox policy、Response snapshot圧縮/AES-GCM/`NKENC1`/AAD/DB上限まで実装し継続中 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。NK-MSG-001完了。NK-MSG-002はPT-IDEM-001～008の中間RunでProtocol 69/API 79 PASS、coverage全100%、SpotBugs/secret hit 0。未実装7 Test IDはPASSへ未算入 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -68,3 +68,4 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-04 | GitHub認証復旧後、空remoteへ`main`、`dev`、全既存feature branchをforceなしでpush。remote阻害を解消。 |
 | 2026-09-04 | NK-MSG-001最終run `PT-JMS-20260904-01`を実施。PT-JMS 12/12、関連JUnit 65/65、全reactor 199/199、coverage全100%、SpotBugs/secret/CRLF/NUL/skip等0でPG/PT完了。 |
 | 2026-09-04 | NK-MSG-002のResponse snapshot圧縮/AES-GCM/`NKENC1`/AAD/key rotation、平文・暗号文上限と圧縮bomb防御を中間実装。BUG-007/008を修正し、Protocol 69件・API 68件、coverage全100%、SpotBugs 0を確認。 |
+| 2026-09-05 | NK-MSG-002のInbox coordinator、Message ID/owner-token/HMAC replay、caller所有transaction・savepoint競合回復を実装。PT-IDEM-001～008をProtocol 69件・API 79件、coverage全100%、SpotBugs 0で中間PASS。 |
