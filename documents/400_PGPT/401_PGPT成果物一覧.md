@@ -34,7 +34,7 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
 | PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了。NK-MSG-001を完了。NK-MSG-002はHMAC/key rotation、Outbox policy、Response snapshot圧縮/AES-GCM/`NKENC1`/AAD/DB上限まで実装し継続中 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。NK-MSG-001はPT-JMS 12/12、関連JUnit 65/65、全reactor 199/199 PASS、Program production 4 coverage指標100%、SpotBugs/secret hit 0 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。NK-MSG-001完了。NK-MSG-002はPT-IDEM-001～003/007～008の中間RunでProtocol 69/API 68 PASS、coverage全100%、SpotBugs/secret hit 0。未実装10 Test IDはPASSへ未算入 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
