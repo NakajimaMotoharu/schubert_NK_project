@@ -1,18 +1,26 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
 import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
+import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.layout.LayoutDefinition;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 
-/** Validates and commits one persistent outbox message in a local JMS transaction. */
+/**
+ * Validates and commits one persistent outbox message in a local JMS transaction.
+ * Trace: NK-MSG-002; RD MQ-006/MQ-008; UI 242; SS 323/324 section 8; PT-IDEM-010/011.
+ */
 public final class OutboxJmsSender {
   public void send(TransactedJmsContextProvider contextProvider, OutboxEntry entry)
       throws OutboxSendException {
@@ -61,9 +69,10 @@ public final class OutboxJmsSender {
   }
 
   static void validateWireIdentity(OutboxEntry entry) {
+    byte[] body = entry.body();
     final CommonHeader header;
     try {
-      header = HeaderCodec.standard().peek(entry.body());
+      header = HeaderCodec.standard().peek(body);
     } catch (RuntimeException exception) {
       throw new OutboxIntegrityException("outbox wire body failed fixed-width validation", exception);
     }
@@ -72,10 +81,24 @@ public final class OutboxJmsSender {
         || !header.correlationId().equals(entry.correlationId())
         || !header.layoutId().value().equals(entry.layoutId())
         || !String.format(Locale.ROOT, "%03d", header.layoutVersion()).equals(entry.layoutVersion())
-        || header.totalLength() != entry.body().length
-        || entry.body().length > target.maximumBodyLength()
+        || header.totalLength() != body.length
+        || body.length > target.maximumBodyLength()
         || !entry.layoutId().equals("QWKREQ01")) {
       throw new OutboxIntegrityException("outbox row and wire identity disagree");
+    }
+    // BUG-010: QWKREQ01 has one 64-byte data area and no records (SS 323).
+    // Header identity alone does not establish required fields, numeric IDs or receipt syntax.
+    try {
+      // PayloadTypeCatalog also applies the layout's intrinsic semantic constraints.
+      PayloadTypeCatalog.decode(
+          PayloadCodec.standard()
+              .decode(
+                  header.layoutId(),
+                  Arrays.copyOfRange(body, LayoutDefinition.HEADER_LENGTH, body.length),
+                  List.of(),
+                  false));
+    } catch (RuntimeException exception) {
+      throw new OutboxIntegrityException("outbox payload failed fixed-width validation", exception);
     }
   }
 

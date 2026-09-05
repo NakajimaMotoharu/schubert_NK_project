@@ -32,8 +32,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,6 +45,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
@@ -62,6 +66,7 @@ final class OutboxDispatcherTest {
   private static final String MIGRATION = "schubert_migration";
   private static final String APP = "schubert_app";
   private static final Instant NOW = Instant.parse("2026-09-05T00:00:00Z");
+  private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
   private static final UUID MESSAGE = UUID.fromString("81000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION =
       UUID.fromString("82000000-0000-0000-0000-000000000001");
@@ -139,9 +144,162 @@ final class OutboxDispatcherTest {
   }
 
   @Test
+  void resultTimesFollowTheObservedJmsFailureAndCommitAfterElapsedSendTime(
+      @TempDir Path root) throws Exception {
+    EmbeddedActiveMQ broker = startBroker(root);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
+      JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 100);
+      long id = enqueue(repository, MESSAGE, NOW);
+      AtomicReference<Instant> observedTime = new AtomicReference<>(NOW);
+      Clock clock = observingClock(observedTime);
+      OutboxDispatcher failedSend =
+          new OutboxDispatcher(
+              OutboxDispatcherTest::appConnection,
+              () -> {
+                observedTime.set(Instant.parse("2026-09-05T00:00:03Z"));
+                return failingJmsContext(false);
+              },
+              repository,
+              new OutboxJmsSender(),
+              clock);
+      assertEquals(new OutboxDispatchReport(1, 0, 1, 0), failedSend.dispatch("slow-send", 1));
+      assertEquals("ERROR", text(id, "status"));
+      assertEquals("1", text(id, "attempt_count"));
+      // Independent oracle: failure at 00:00:03 + first base 1s + 10% = 00:00:04.100.
+      assertEquals(
+          Instant.parse("2026-09-05T00:00:04.100Z"), timestamp(id, "next_attempt_at"));
+      assertNull(textNullable(id, "sent_at"));
+      assertNull(work.receive(250));
+
+      observedTime.set(Instant.parse("2026-09-05T00:00:04.099Z"));
+      assertEquals(new OutboxDispatchReport(0, 0, 0, 0), failedSend.dispatch("too-early", 1));
+      observedTime.set(Instant.parse("2026-09-05T00:00:04.100Z"));
+      AtomicInteger commits = new AtomicInteger();
+      OutboxDispatcher successfulRetry =
+          new OutboxDispatcher(
+              OutboxDispatcherTest::appConnection,
+              () ->
+                  afterCommit(
+                      factory.createContext(JMSContext.SESSION_TRANSACTED),
+                      () -> observedTime.set(Instant.parse("2026-09-05T00:00:07.100Z")),
+                      commits),
+              repository,
+              new OutboxJmsSender(),
+              clock);
+      assertEquals(
+          new OutboxDispatchReport(1, 1, 0, 0), successfulRetry.dispatch("slow-success", 1));
+      assertEquals(1, commits.get());
+      assertEquals("SENT", text(id, "status"));
+      assertEquals(Instant.parse("2026-09-05T00:00:07.100Z"), timestamp(id, "sent_at"));
+      assertNull(textNullable(id, "lease_owner"));
+      assertNull(textNullable(id, "last_error_code"));
+      assertMessage(assertInstanceOf(BytesMessage.class, work.receive(5_000)), MESSAGE,
+          eventWire(MESSAGE, CORRELATION));
+      assertNull(work.receive(250));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  void initialReceiptSendKeepsItsExactDueTimeWithoutSamplingRetryJitter(
+      @TempDir Path root) throws Exception {
+    EmbeddedActiveMQ broker = startBroker(root);
+    AtomicInteger jitterCalls = new AtomicInteger();
+    JdbcOutboxRepository repository =
+        new JdbcOutboxRepository(
+            () -> {
+              jitterCalls.incrementAndGet();
+              throw new AssertionError("initial receipt send must not sample retry jitter");
+            });
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
+      long id =
+          enqueue(repository, new OutboxRequest(MESSAGE, CORRELATION,
+              OutboxDestination.ASYNC_WORK, "QWKREQ01", "001",
+              eventWire(MESSAGE, CORRELATION), NOW, NOW));
+      assertEquals(NOW, timestamp(id, "next_attempt_at"));
+      OutboxDispatcher dispatcher =
+          dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
+      assertEquals(new OutboxDispatchReport(1, 1, 0, 0), dispatcher.dispatch("receipt", 1));
+      assertEquals(0, jitterCalls.get());
+      assertEquals(NOW, timestamp(id, "sent_at"));
+      assertInstanceOf(BytesMessage.class, work.receive(5_000));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  void retryJitterReachesTheDatabaseAtEveryBaseAndContinuesAtTheAttemptCap()
+      throws Exception {
+    assertThrows(NullPointerException.class, () -> new JdbcOutboxRepository(null));
+    int[] previousAttempts = {0, 1, 2, 3, 4, 99, 100};
+    int[] persistedAttempts = {1, 2, 3, 4, 5, 100, 100};
+    long[][] expectedMillis = {
+      {900, 1_000, 1_100}, {4_500, 5_000, 5_500}, {27_000, 30_000, 33_000},
+      {54_000, 60_000, 66_000}, {270_000, 300_000, 330_000},
+      {270_000, 300_000, 330_000}, {270_000, 300_000, 330_000}
+    };
+    int[] jitter = {-100, 0, 100};
+    for (int attempt = 0; attempt < previousAttempts.length; attempt++) {
+      for (int boundary = 0; boundary < jitter.length; boundary++) {
+        int injectedJitter = jitter[boundary];
+        JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> injectedJitter);
+        long id = enqueue(repository, uuid(1_500 + attempt * 3L + boundary), NOW);
+        executeApp("update schubert.mq_outbox set attempt_count=" + previousAttempts[attempt]
+            + " where id=" + id);
+        try (Connection connection = transaction()) {
+          OutboxEntry claimed = repository.claim(connection, "jitter", NOW, 1).getFirst();
+          assertEquals(id, claimed.id());
+          assertTrue(repository.markFailure(connection, claimed, NOW, "JMS_FAIL", "redacted"));
+          connection.commit();
+        }
+        assertEquals(Integer.toString(persistedAttempts[attempt]), text(id, "attempt_count"));
+        assertEquals(NOW.plusMillis(expectedMillis[attempt][boundary]),
+            timestamp(id, "next_attempt_at"));
+        assertEquals("ERROR", text(id, "status"));
+      }
+    }
+    JdbcOutboxRepository randomRepository = new JdbcOutboxRepository();
+    long randomId = enqueue(randomRepository, uuid(1_600), NOW);
+    try (Connection connection = transaction()) {
+      OutboxEntry claimed = randomRepository.claim(connection, "random-jitter", NOW, 1).getFirst();
+      assertEquals(randomId, claimed.id());
+      assertTrue(randomRepository.markFailure(connection, claimed, NOW, "JMS_FAIL", "redacted"));
+      connection.commit();
+    }
+    Instant randomDue = timestamp(randomId, "next_attempt_at");
+    assertFalse(randomDue.isBefore(Instant.parse("2026-09-05T00:00:00.900Z")));
+    assertFalse(randomDue.isAfter(Instant.parse("2026-09-05T00:00:01.100Z")));
+  }
+
+  private static Clock observingClock(AtomicReference<Instant> observedTime) {
+    return new Clock() {
+      @Override
+      public ZoneId getZone() {
+        return ZoneOffset.UTC;
+      }
+
+      @Override
+      public Clock withZone(ZoneId zone) {
+        return Clock.fixed(instant(), zone);
+      }
+
+      @Override
+      public Instant instant() {
+        return observedTime.get();
+      }
+    };
+  }
+
+  @Test
   void claimsOnlyDueExpiredRowsWithTenSecondLeaseLimitAndNoDispatcherOverlap()
       throws Exception {
-    JdbcOutboxRepository repository = new JdbcOutboxRepository();
+    JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
     long duePending = enqueue(repository, uuid(1), NOW.minusSeconds(2));
     long dueError = enqueue(repository, uuid(2), NOW.minusSeconds(1));
     long future = enqueue(repository, uuid(3), NOW.plusSeconds(1));
@@ -186,7 +344,7 @@ final class OutboxDispatcherTest {
 
   @Test
   void markSentAndFailureRequireLeaseAndUseExactBoundedRetryState() throws Exception {
-    JdbcOutboxRepository repository = new JdbcOutboxRepository();
+    JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
     long id = enqueue(repository, MESSAGE, NOW);
     OutboxEntry claimed;
     try (Connection connection = transaction()) {
@@ -239,15 +397,15 @@ final class OutboxDispatcherTest {
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer work = observer.createConsumer(queue("nk.async.work"));
         JMSConsumer dlq = observer.createConsumer(queue("nk.dead.letter"))) {
-      JdbcOutboxRepository repository = new JdbcOutboxRepository();
+      JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
       enqueue(repository, request(MESSAGE, OutboxDestination.ASYNC_WORK, eventWire(MESSAGE, CORRELATION)));
       UUID dlqId = uuid(700);
       enqueue(repository, request(dlqId, OutboxDestination.DLQ, eventWire(dlqId, CORRELATION)));
       OutboxDispatcher dispatcher =
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
-      OutboxDispatchReport report = dispatcher.dispatch("worker-send", NOW, 100);
+      OutboxDispatchReport report = dispatcher.dispatch("worker-send", 100);
       assertEquals(new OutboxDispatchReport(2, 2, 0, 0), report);
-      assertEquals(new OutboxDispatchReport(0, 0, 0, 0), dispatcher.dispatch("worker-empty", NOW, 100));
+      assertEquals(new OutboxDispatchReport(0, 0, 0, 0), dispatcher.dispatch("worker-empty", 100));
 
       BytesMessage workMessage = assertInstanceOf(BytesMessage.class, work.receive(5_000));
       BytesMessage dlqMessage = assertInstanceOf(BytesMessage.class, dlq.receive(5_000));
@@ -270,12 +428,12 @@ final class OutboxDispatcherTest {
                   () -> lease(crashRow, "worker-recovery", NOW.minusSeconds(1)),
                   commits);
       OutboxDispatchReport crash =
-          dispatcher(repository, crashAfterSend).dispatch("worker-crash", NOW, 1);
+          dispatcher(repository, crashAfterSend).dispatch("worker-crash", 1);
       assertEquals(new OutboxDispatchReport(1, 0, 0, 1), crash);
       assertEquals(1, commits.get());
       OutboxDispatchReport recovered =
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
-              .dispatch("worker-recovery", NOW, 1);
+              .dispatch("worker-recovery", 1);
       assertEquals(new OutboxDispatchReport(1, 1, 0, 0), recovered);
       BytesMessage one = assertInstanceOf(BytesMessage.class, work.receive(5_000));
       assertEquals(crashId.toString(), one.getStringProperty("_AMQ_DUPL_ID"));
@@ -297,8 +455,8 @@ final class OutboxDispatcherTest {
                       : commitFailureConnection(appConnection(), false),
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
               repository,
-              new OutboxJmsSender());
-      assertThrows(SQLException.class, () -> markCommitFailure.dispatch("worker-mark", NOW, 1));
+              new OutboxJmsSender(), CLOCK);
+      assertThrows(SQLException.class, () -> markCommitFailure.dispatch("worker-mark", 1));
       assertEquals("PENDING", text(markRow, "status"));
       assertInstanceOf(BytesMessage.class, work.receive(5_000));
 
@@ -327,11 +485,11 @@ final class OutboxDispatcherTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
-      JdbcOutboxRepository repository = new JdbcOutboxRepository();
+      JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
       long jmsFailure = enqueue(repository, MESSAGE, NOW);
       OutboxDispatcher broken = dispatcher(repository, () -> failingJmsContext(false));
       assertEquals(
-          new OutboxDispatchReport(1, 0, 1, 0), broken.dispatch("worker-jms", NOW, 1));
+          new OutboxDispatchReport(1, 0, 1, 0), broken.dispatch("worker-jms", 1));
       assertEquals("JMS_SEND_FAILURE", text(jmsFailure, "last_error_code"));
       assertEquals("outbox send was not confirmed", text(jmsFailure, "last_error_detail"));
       assertFalse(text(jmsFailure, "last_error_detail").contains(MESSAGE.toString()));
@@ -348,7 +506,7 @@ final class OutboxDispatcherTest {
               });
       assertEquals(
           new OutboxDispatchReport(1, 0, 0, 1),
-          leaseLost.dispatch("worker-stolen", NOW, 1));
+          leaseLost.dispatch("worker-stolen", 1));
       assertEquals("other-worker", text(stolen, "lease_owner"));
 
       resetDatabase();
@@ -362,9 +520,9 @@ final class OutboxDispatcherTest {
                       : commitFailureConnection(appConnection(), false),
               () -> failingJmsContext(false),
               repository,
-              new OutboxJmsSender());
+              new OutboxJmsSender(), CLOCK);
       assertThrows(
-          SQLException.class, () -> retryCommitFailure.dispatch("worker-retry-mark", NOW, 1));
+          SQLException.class, () -> retryCommitFailure.dispatch("worker-retry-mark", 1));
 
       resetDatabase();
       byte[] damaged = eventWire(MESSAGE, CORRELATION);
@@ -377,7 +535,7 @@ final class OutboxDispatcherTest {
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
       assertEquals(
           new OutboxDispatchReport(1, 0, 1, 0),
-          dispatcher.dispatch("worker-integrity", NOW, 1));
+          dispatcher.dispatch("worker-integrity", 1));
       assertEquals("OUTBOX_INTEGRITY", text(integrity, "last_error_code"));
       assertNull(work.receive(250));
     } finally {
@@ -388,7 +546,7 @@ final class OutboxDispatcherTest {
   @Test
   void publicBoundariesRejectNullModesBoundsErrorsAndEveryWireIdentityMutation()
       throws Exception {
-    JdbcOutboxRepository repository = new JdbcOutboxRepository();
+    JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
     OutboxRequest request =
         request(MESSAGE, OutboxDestination.ASYNC_WORK, eventWire(MESSAGE, CORRELATION));
     assertThrows(NullPointerException.class, () -> repository.enqueue(null, request));
@@ -484,13 +642,13 @@ final class OutboxDispatcherTest {
       connection.rollback();
     }
 
-    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(null, () -> jmsContext(0), repository, sender));
-    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, null, repository, sender));
-    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, () -> jmsContext(0), null, sender));
-    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, () -> jmsContext(0), repository, null));
+    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(null, () -> jmsContext(0), repository, sender, CLOCK));
+    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, null, repository, sender, CLOCK));
+    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, () -> jmsContext(0), null, sender, CLOCK));
+    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, () -> jmsContext(0), repository, null, CLOCK));
     OutboxDispatcher dispatcher = dispatcher(repository, () -> jmsContext(JMSContext.SESSION_TRANSACTED));
-    assertThrows(NullPointerException.class, () -> dispatcher.dispatch(null, NOW, 1));
-    assertThrows(NullPointerException.class, () -> dispatcher.dispatch("w", null, 1));
+    assertThrows(NullPointerException.class, () -> dispatcher.dispatch(null, 1));
+    assertThrows(NullPointerException.class, () -> new OutboxDispatcher(OutboxDispatcherTest::appConnection, () -> jmsContext(0), repository, sender, null));
     assertThrows(
         NullPointerException.class,
         () ->
@@ -498,8 +656,8 @@ final class OutboxDispatcherTest {
                     () -> null,
                     () -> jmsContext(JMSContext.SESSION_TRANSACTED),
                     repository,
-                    sender)
-                .dispatch("w", NOW, 1));
+                    sender, CLOCK)
+                .dispatch("w", 1));
     SQLException setupFailure =
         assertThrows(
             SQLException.class,
@@ -508,8 +666,8 @@ final class OutboxDispatcherTest {
                         OutboxDispatcherTest::setAutoCommitAndCloseFailure,
                         () -> jmsContext(JMSContext.SESSION_TRANSACTED),
                         repository,
-                        sender)
-                    .dispatch("w", NOW, 1));
+                        sender, CLOCK)
+                    .dispatch("w", 1));
     assertEquals(1, setupFailure.getSuppressed().length);
     assertEquals("synthetic setup failure", setupFailure.getMessage());
     Connection closeNormally = appConnection();
@@ -526,8 +684,8 @@ final class OutboxDispatcherTest {
                         () -> commitFailureConnection(appConnection(), false),
                         () -> jmsContext(JMSContext.SESSION_TRANSACTED),
                         repository,
-                        sender)
-                    .dispatch("worker-claim-failure", NOW, 1));
+                        sender, CLOCK)
+                    .dispatch("worker-claim-failure", 1));
     assertEquals("synthetic commit failure", claimFailure.getMessage());
     SQLException rollbackFailure =
         assertThrows(
@@ -537,15 +695,55 @@ final class OutboxDispatcherTest {
                         () -> commitFailureConnection(appConnection(), true),
                         () -> jmsContext(JMSContext.SESSION_TRANSACTED),
                         repository,
-                        sender)
-                    .dispatch("worker-rollback-failure", NOW, 1));
+                        sender, CLOCK)
+                    .dispatch("worker-rollback-failure", 1));
     assertEquals(1, rollbackFailure.getSuppressed().length);
+  }
+
+  @Test
+  void persistedQwkPayloadIsFullyDecodedBeforeOpeningJms() {
+    // PT-IDEM-011 / BUG-010: expected offsets and values come directly from SS 323.
+    OutboxEntry valid = sample();
+    byte[] golden = valid.body();
+    assertEquals(320, golden.length);
+    assertEquals("01ARZ3NDEKTSV4RRFFQ69G5FAV", new String(golden, 256, 26, StandardCharsets.US_ASCII));
+    assertEquals("000000000001000000000002", new String(golden, 282, 24, StandardCharsets.US_ASCII));
+    assertEquals(" ".repeat(14), new String(golden, 306, 14, StandardCharsets.US_ASCII));
+    OutboxJmsSender.validateWireIdentity(valid);
+    List<byte[]> invalid = new ArrayList<>();
+    byte[] blank = golden.clone();
+    Arrays.fill(blank, 256, 320, (byte) ' ');
+    invalid.add(blank);
+    for (int offset : new int[] {256, 282, 294}) {
+      byte[] missing = golden.clone();
+      Arrays.fill(missing, offset, offset + (offset == 256 ? 26 : 12), (byte) ' ');
+      invalid.add(missing);
+    }
+    for (int offset : new int[] {282, 294}) {
+      byte[] zeroId = golden.clone();
+      ascii(zeroId, offset, "000000000000");
+      invalid.add(zeroId);
+      byte[] nonNumeric = golden.clone();
+      nonNumeric[offset] = 'X';
+      invalid.add(nonNumeric);
+    }
+    for (int[] mutation : new int[][] {{256, 'I'}, {256, 0}, {256, 0xff}, {256, '\n'}, {306, 'X'}, {319, 0}}) {
+      byte[] altered = golden.clone();
+      altered[mutation[0]] = (byte) mutation[1];
+      invalid.add(altered);
+    }
+    for (OutboxDestination destination : OutboxDestination.values()) {
+      for (byte[] body : invalid) {
+        assertIntegrity(new OutboxJmsSender(),
+            withIdentity(valid, MESSAGE, CORRELATION, "QWKREQ01", "001", body, destination));
+      }
+    }
   }
 
   private static OutboxDispatcher dispatcher(
       JdbcOutboxRepository repository, TransactedJmsContextProvider jms) {
     return new OutboxDispatcher(
-        OutboxDispatcherTest::appConnection, jms, repository, new OutboxJmsSender());
+        OutboxDispatcherTest::appConnection, jms, repository, new OutboxJmsSender(), CLOCK);
   }
 
   private static long enqueue(JdbcOutboxRepository repository, UUID message, Instant due)
@@ -639,9 +837,14 @@ final class OutboxDispatcherTest {
   }
 
   private static void assertIntegrity(OutboxJmsSender sender, OutboxEntry entry) {
+    AtomicInteger opened = new AtomicInteger();
     assertThrows(
         OutboxIntegrityException.class,
-        () -> sender.send(() -> jmsContext(JMSContext.SESSION_TRANSACTED), entry));
+        () -> sender.send(() -> {
+          opened.incrementAndGet();
+          return jmsContext(JMSContext.SESSION_TRANSACTED);
+        }, entry));
+    assertEquals(0, opened.get(), "invalid persisted wire must fail before JMS context acquisition");
   }
 
   private static boolean disjoint(List<OutboxEntry> first, List<OutboxEntry> second) {
@@ -878,7 +1081,12 @@ final class OutboxDispatcherTest {
   }
 
   private static byte[] eventWire(UUID message, UUID correlation) {
-    return wire("QWKREQ01", message, correlation, 64, 0, 0, false);
+    byte[] body = wire("QWKREQ01", message, correlation, 64, 0, 0, false);
+    // Independent SS 323 QWKREQ01 oracle: data offsets 0/26/38/50, lengths 26/12/12/14.
+    ascii(body, 256, "01ARZ3NDEKTSV4RRFFQ69G5FAV");
+    ascii(body, 282, "000000000001");
+    ascii(body, 294, "000000000002");
+    return body;
   }
 
   private static byte[] largeWire() {

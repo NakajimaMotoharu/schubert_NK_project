@@ -36,9 +36,38 @@ class OutboxPolicyTest {
     Instant failedAt = Instant.parse("2026-09-03T00:00:00Z");
     assertEquals(
         Instant.parse("2026-09-03T00:00:30Z"),
-        OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 3));
+        OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 3, 0));
     assertThrows(
         NullPointerException.class,
-        () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(null, 1));
+        () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(null, 1, 0));
+  }
+
+  @Test
+  void retryJitterUsesIndependentExactBoundaryVectorsAfterCappingTheBase() {
+    Instant failedAt = Instant.parse("2026-09-05T00:00:03Z");
+    int[] attempts = {1, 2, 3, 4, 5, 100};
+    long[] lowerMillis = {900, 4_500, 27_000, 54_000, 270_000, 270_000};
+    long[] middleMillis = {1_000, 5_000, 30_000, 60_000, 300_000, 300_000};
+    long[] upperMillis = {1_100, 5_500, 33_000, 66_000, 330_000, 330_000};
+    for (int index = 0; index < attempts.length; index++) {
+      assertEquals(
+          failedAt.plusMillis(lowerMillis[index]),
+          OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, attempts[index], -100));
+      assertEquals(
+          failedAt.plusMillis(middleMillis[index]),
+          OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, attempts[index], 0));
+      assertEquals(
+          failedAt.plusMillis(upperMillis[index]),
+          OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, attempts[index], 100));
+    }
+    assertEquals(
+        Instant.parse("2026-09-05T00:00:04.001Z"),
+        OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 1, 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 1, -101));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 1, 101));
   }
 }

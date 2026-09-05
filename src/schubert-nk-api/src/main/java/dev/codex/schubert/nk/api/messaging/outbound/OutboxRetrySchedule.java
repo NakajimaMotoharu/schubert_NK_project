@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
 
-/** SS 324 §8.3 application-level outbox retry schedule. */
+/** SS 324 §8.3 / SS 332 §7.2 retry base and bounded jitter; PT-IDEM-010, BUG-012. */
 public enum OutboxRetrySchedule {
   INSTANCE;
 
@@ -21,8 +21,18 @@ public enum OutboxRetrySchedule {
     };
   }
 
-  public Instant nextAttemptAt(Instant failedAt, int attemptCount) {
+  /**
+   * Schedules a failed attempt from its observed failure time using an injected jitter in permille.
+   *
+   * <p>The base delay is capped at 300 seconds before applying ±100 permille (±10%). Initial receipt
+   * sends use their enqueue time directly; only failed attempts call this retry policy.
+   */
+  public Instant nextAttemptAt(Instant failedAt, int attemptCount, int jitterPermille) {
     Objects.requireNonNull(failedAt, "failedAt");
-    return failedAt.plus(delayAfterFailure(attemptCount));
+    if (jitterPermille < -100 || jitterPermille > 100) {
+      throw new IllegalArgumentException("retry jitter must be between -100 and 100 permille");
+    }
+    long baseMillis = delayAfterFailure(attemptCount).toMillis();
+    return failedAt.plusMillis(baseMillis + baseMillis * jitterPermille / 1_000);
   }
 }

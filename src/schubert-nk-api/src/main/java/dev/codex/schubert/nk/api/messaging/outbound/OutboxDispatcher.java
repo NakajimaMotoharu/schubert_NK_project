@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.outbound;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -16,22 +17,25 @@ public final class OutboxDispatcher {
   private final TransactedJmsContextProvider contextProvider;
   private final JdbcOutboxRepository repository;
   private final OutboxJmsSender sender;
+  private final Clock clock;
 
   public OutboxDispatcher(
       SqlConnectionProvider connectionProvider,
       TransactedJmsContextProvider contextProvider,
       JdbcOutboxRepository repository,
-      OutboxJmsSender sender) {
+      OutboxJmsSender sender,
+      Clock clock) {
     this.connectionProvider = Objects.requireNonNull(connectionProvider, "connectionProvider");
     this.contextProvider = Objects.requireNonNull(contextProvider, "contextProvider");
     this.repository = Objects.requireNonNull(repository, "repository");
     this.sender = Objects.requireNonNull(sender, "sender");
+    this.clock = Objects.requireNonNull(clock, "clock");
   }
 
-  public OutboxDispatchReport dispatch(String worker, Instant now, int limit) throws SQLException {
+  /** Samples claim and each send-result time separately; trace: PT-IDEM-010, BUG-011. */
+  public OutboxDispatchReport dispatch(String worker, int limit) throws SQLException {
     OutboxEntry.requireLeaseOwner(worker);
-    Objects.requireNonNull(now, "now");
-    List<OutboxEntry> entries = claim(worker, now, limit);
+    List<OutboxEntry> entries = claim(worker, clock.instant(), limit);
     int sent = 0;
     int failed = 0;
     int leaseLost = 0;
@@ -39,14 +43,14 @@ public final class OutboxDispatcher {
       try {
         sender.send(contextProvider, entry);
       } catch (OutboxSendException | RuntimeException exception) {
-        if (markFailure(entry, now, failureCode(exception))) {
+        if (markFailure(entry, clock.instant(), failureCode(exception))) {
           failed++;
         } else {
           leaseLost++;
         }
         continue;
       }
-      if (markSent(entry, now)) {
+      if (markSent(entry, clock.instant())) {
         sent++;
       } else {
         leaseLost++;

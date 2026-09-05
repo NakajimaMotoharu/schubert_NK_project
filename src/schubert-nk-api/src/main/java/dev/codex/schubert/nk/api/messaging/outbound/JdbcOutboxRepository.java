@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.IntSupplier;
 
 /**
  * PostgreSQL application-outbox repository using SS 332's SKIP LOCKED claim contract.
@@ -19,6 +21,18 @@ import java.util.UUID;
  * NK-MSG-002; RD ASY-001/MQ-006; UI 213/241/242; SS 324 section 8 and 332 section 7.
  */
 public final class JdbcOutboxRepository {
+  private final IntSupplier jitterPermille;
+
+  /** Uses independently sampled application retry jitter in the inclusive range ±10%. */
+  public JdbcOutboxRepository() {
+    this(() -> ThreadLocalRandom.current().nextInt(-100, 101));
+  }
+
+  /** Injects retry jitter in permille for deterministic scheduling tests (SS 332 §7.2). */
+  public JdbcOutboxRepository(IntSupplier jitterPermille) {
+    this.jitterPermille = Objects.requireNonNull(jitterPermille, "jitterPermille");
+  }
+
   private static final String CLAIM_SQL =
       "with due as (select id from schubert.mq_outbox "
           + "where status in ('PENDING','ERROR') and next_attempt_at<=? "
@@ -111,7 +125,9 @@ public final class JdbcOutboxRepository {
     String code = requireError(errorCode, 64, "errorCode");
     String detail = requireError(errorDetail, 256, "errorDetail");
     int nextAttempt = Math.min(entry.attemptCount() + 1, 100);
-    Instant dueAt = OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, nextAttempt);
+    Instant dueAt =
+        OutboxRetrySchedule.INSTANCE.nextAttemptAt(
+            failedAt, nextAttempt, jitterPermille.getAsInt());
     String sql =
         "update schubert.mq_outbox set status='ERROR',attempt_count=?,next_attempt_at=?,"
             + "lease_owner=null,lease_until=null,sent_at=null,last_error_code=?,"
