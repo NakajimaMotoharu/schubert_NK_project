@@ -14,4 +14,10 @@
 | Inbox初回coverage | line 936/956、branch 358/370 | PostgreSQL一意競合・terminal update消失の制御caseを追加し全分岐化。PASS算入外 |
 | JaCoCo CLI直接実行 | `rules`引数なしで非0 | Lifecycle外の診断commandでありtest結果ではない。PASS算入外 |
 
-最新Formal runはtarget commit `0f1b381`のclean verifyだけで実装済み範囲を判定し、failure/error/skipped/flaky/disabledを0としている。PT-IDEM-009～015は未実装・未実行でありPASSへ算入していない。
+| Outbox初期TDD（2026-09-05） | serialVersionUID、proxy例外、fixture表示順/PG timestamp丸め、未網羅分岐を調整 | 初期未完成testのred→green。最初の実装済みstatic違反はBUG-009へ別途起票。PASS算入外 |
+| Outbox中間Run `PT-IDEM-20260905-02` | target `80d6ea0`、Protocol 69/API 88、coverage 4指標100%、SpotBugs 0 | 後続独立レビューでBUG-010～012を発見。PT-IDEM-010/011およびProgram完了のPASSへ算入しない |
+| 再開初回precheck（2026-09-06） | 追加時刻testのhelper未作成でtestCompile failure | 未完成testの補完。既存NULL確認helperへ接続し、PASS算入外 |
+| 実行環境precheck（2026-09-06） | sandboxがloopback socketを拒否しPostgreSQL test setup error、Web reactor未実行 | test権限を明示して制限外で再実行。製品障害ではなく環境制限。PASS算入外 |
+| Web log初回TDD（2026-09-06） | Web 35件中failure 1。独立AAD field長合計が126、実ASCIIは127 | table名は20+1+14=35 byteでありfixtureの34を訂正。production AAD/期待wire値は変更しない。PASS算入外 |
+
+最新の正式実行は`manifest.json`でtarget commitと対象Test IDを固定する。未実装・未実行・部分実施のTest IDはProgram全体のPASSへ算入しない。
