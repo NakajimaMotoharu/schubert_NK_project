@@ -143,6 +143,7 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 ## 9. Web `web_log_outbox`
 
 - HTTP response確定後のWLGEVT01 payloadをWeb log AES-GCM keyで暗号化して保存する。
+- Web dispatcherがlocal outboxを復号し、WLGEVT01のheader/field/semanticを完全decodeして保存rowのMessage ID/Correlation/layout/versionとの一致を検査後、SS 323の固定長平文電文を送信する。暗号鍵とWeb table accessはWebだけが持ち、API ingestは受信電文の検査と冪等INSERTを行う（SSC-007）。
 - Message ID UK、Correlation、layout/version、status/attempt/next/lease、created/sentを持つ。
 - Dispatcher algorithm/backoffはAPI outboxと同じ。HTTP request threadはsendを待たない。
 - API `app_logs.source_message_id` UKが最終重複防止。DuplicateはINSERTせずJMS ACKする。

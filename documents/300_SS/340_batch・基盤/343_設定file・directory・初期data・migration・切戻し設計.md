@@ -132,7 +132,7 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | `api-context-aes-current/previous` | API | `auth_sessions.context_ciphertext`暗号、key version付き |
 | `api-inbox-response-aes-current/previous` | API | Inbox replay response暗号、context keyと分離 |
 | `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |
-| `web-log-aes-current/previous` | Web/API ingest | Technical outbox暗号 |
+| `web-log-aes-current/previous` | Webのみ | Technical outbox保存・復号。API ingestへ配布しない（SSC-007） |
 | `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |
 | Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |
 
