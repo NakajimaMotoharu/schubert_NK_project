@@ -24,6 +24,24 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.13</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>13.4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+      <version>13.4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>dev.codex.schubert</groupId>
       <artifactId>schubert-nk-protocol</artifactId>
       <version>${project.version}</version>
@@ -133,6 +151,7 @@
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
           <systemPropertyVariables>
+            <nk.pt.repository>${maven.multiModuleProjectDirectory}</nk.pt.repository>
             <user.language>ja</user.language>
             <user.country>JP</user.country>
             <user.timezone>Asia/Tokyo</user.timezone>
