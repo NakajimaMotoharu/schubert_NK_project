@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0",
-  "runId": "PT-IDEM-20260906-02",
+  "runId": "PT-IDEM-20260907-01",
   "programId": "NK-MSG-002",
-  "scope": "PT-IDEM-001..009 and 011 passed; 010 transport/retry and 012 encryption/Web SQL repository portions only; Program remains in progress",
-  "executedAt": "2026-09-06T07:12:44+09:00",
-  "completedAt": "2026-09-06T07:14:19+09:00",
+  "scope": "PT-IDEM-001..009 and 011 passed; 010 transport/retry and 012 encrypted Web outbox/dispatcher portions only; Program remains in progress",
+  "executedAt": "2026-09-07T00:02:17+09:00",
+  "completedAt": "2026-09-07T00:03:52+09:00",
   "environment": {
-    "os": "Ubuntu 26.04.1 LTS / Linux 7.0.0-30-generic x86_64",
+    "os": "Ubuntu 26.04.1 LTS / Linux 7.0.0-31-generic x86_64",
     "jdk": "OpenJDK 25.0.4+7",
     "maven": "3.9.12",
     "postgresql": "18.6 rootless PT cluster",
@@ -16,7 +16,7 @@
     "spotbugsPlugin": "4.10.4.0"
   },
   "branch": "dev-messaging",
-  "targetCommit": "b13cd49784bf8994016a560760a8d49d4c7d6b32",
+  "targetCommit": "aceac18af8490b421d84ab3a93ea17d49fc679cb",
   "implementationCommits": [
     "dcc90fe",
     "50d0a91",
@@ -24,12 +24,14 @@
     "80d6ea0",
     "342c41b",
     "3fcf754",
-    "b13cd49"
+    "b13cd49",
+    "aceac18"
   ],
   "qualityLedgerCommits": [
     "a4cd40c",
     "5248acd",
-    "e335864"
+    "e335864",
+    "e3211a5"
   ],
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "exitCode": 0,
@@ -54,7 +56,7 @@
   "tests": {
     "apiJUnitMethods": 93,
     "protocolJUnitMethods": 69,
-    "webJUnitMethods": 39,
+    "webJUnitMethods": 48,
     "characterizationJUnitMethods": 41,
     "failures": 0,
     "errors": 0,
@@ -122,27 +124,27 @@
     "web": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 2461
+        "covered": 2884
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 211
+        "covered": 247
       },
       "LINE": {
         "missed": 0,
-        "covered": 591
+        "covered": 696
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 204
+        "covered": 236
       },
       "METHOD": {
         "missed": 0,
-        "covered": 97
+        "covered": 111
       },
       "CLASS": {
         "missed": 0,
-        "covered": 18
+        "covered": 22
       }
     },
     "ratio": "100% on each recorded counter; no exclusions"
@@ -175,13 +177,12 @@
     "BUG-009",
     "BUG-010",
     "BUG-011",
-    "BUG-012"
+    "BUG-012",
+    "BUG-013"
   ],
   "relatedYktOpen": [
     "YKT-007",
-    "YKT-008",
-    "YKT-009",
-    "YKT-010"
+    "YKT-008"
   ],
   "relatedSsc": [
     "SSC-007"
@@ -197,7 +198,7 @@
       "path": "coverage/protocol-jacoco.csv"
     },
     {
-      "sha256": "ddcdcb42b5efa7d0a80e4f0f0539fde3385c41f99c2648e8c72034d2cc2524fd",
+      "sha256": "1c832167b7e2230834dab0a1f5f96916faf6468a1b91f2496e8ea4d1b36961e9",
       "path": "coverage/web-jacoco.csv"
     },
     {
@@ -233,6 +234,10 @@
       "path": "logs/BUG-010-012-reproduction.md"
     },
     {
+      "sha256": "b14c758105b90faa197346b44822c90854fec3a77fec9d49f2bb6933396b1c8b",
+      "path": "logs/BUG-013-reproduction.md"
+    },
+    {
       "sha256": "3692000e346d526710d287af567486267346923c5224980f560fd278f44fdbb8",
       "path": "logs/PT-IDEM-20260904-01-run-summary.txt"
     },
@@ -249,11 +254,15 @@
       "path": "logs/PT-IDEM-20260906-02-run-summary.json"
     },
     {
+      "sha256": "a29dd001ed1f50b4dc29402cc3753ddcd6cda054f1ae9b01dcbcf6cf380bb1e1",
+      "path": "logs/PT-IDEM-20260907-01-run-summary.json"
+    },
+    {
       "sha256": "ff8acc2f7e2e11e487b27b6d7907e741cf1763b1025a457a13a68430ca2ca947",
       "path": "logs/inbox-transaction-failpoints.md"
     },
     {
-      "sha256": "77362d4c4ad98531deb52bf268e4d512704ff19bb70c8567d420430d0cb894c4",
+      "sha256": "b65498892b8613719519dabcae9e5e91ad1e31337cca35f1d3e727e9db1b312d",
       "path": "logs/non-qualifying-runs.md"
     },
     {
@@ -261,7 +270,7 @@
       "path": "logs/outbox-and-web-log-scope.md"
     },
     {
-      "sha256": "f11aa2dc5f3afbcec1a7b7d57f3fc2093d51bb2d4789f7ba1a9384e51e1d3363",
+      "sha256": "b6c31545e55a1151c858ce78a1218ab79e9db67a41fad3adf157f255ebdd2e6f",
       "path": "logs/secret-scan.txt"
     },
     {
@@ -269,51 +278,63 @@
       "path": "logs/web-log-database-scope.md"
     },
     {
-      "sha256": "d8659038f4bd172b6e73d2cba7986878979ad7505eae245f594f68d76537ff7f",
+      "sha256": "f5c1054ebb1e0c4fb81080ad86a2f5957cd1ad69a4fbb17d86fbb658e5523b91",
+      "path": "logs/web-log-dispatch-scope.md"
+    },
+    {
+      "sha256": "870a95292727f158c586a0e6454f6c9d4e3566576312ebf7256b78bc0252c4b2",
       "path": "output/PT-IDEM-result-matrix.tsv"
     },
     {
-      "sha256": "ec706091bccee326a554f8a894931221de47d45524c9b47edb96b6971cd84f53",
+      "sha256": "53ab2a40401d99420bb39a0b9458335ee046b6109f38d5e4004d1c71a5b5d8ce",
       "path": "output/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml"
     },
     {
-      "sha256": "30a5c3352454518dd4067cd885b7a4e07f32a8467fa9cc0eb5de7d42dd045b9d",
+      "sha256": "d759e20483c7932bebea20bcd21a6da8d6a8eeaaaf86619b14bb2593f24dbea3",
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml"
     },
     {
-      "sha256": "ebb3fefe4fd50e5667e241539bd291b995fab23cd34d7bc27d5dbe8529214e5f",
+      "sha256": "723d2b397a5708c710a4aa64b0c80dc459f9ed972a81e3539d3f294f659cd6b0",
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml"
     },
     {
-      "sha256": "be4c20a9cb001b597aa0a15230f89914c120d413040fd93ab264b747fad581a8",
+      "sha256": "3b87dd97d2c09f19dafdf1e7adde528ef416147f9fb64ab45d000a6354e7613d",
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml"
     },
     {
-      "sha256": "017deb13c4f6c6e9a4de98c5b1e33410a2625265eb1432d5ee81b70340251d3c",
+      "sha256": "e6702ee7533f1c1174b49a7086e2c5da3e9d12ff1496e52c775c803f7137d1a6",
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml"
     },
     {
-      "sha256": "dda222101fd9de785d4dea5acee3e9d0a19688d7ebfc250410eb11527db13230",
+      "sha256": "6388f21402290864e677401b74c3b52b1c0ce82e7f087c56a16e04ec7946da5f",
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml"
     },
     {
-      "sha256": "e50367375f841e92b483e774c6ea9a731485a84a056ce4172bca44326723c08b",
+      "sha256": "6535369ecea14ee3821e81204af371283b3b5bc2b90f78c566d3050927c101b7",
       "path": "output/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml"
     },
     {
-      "sha256": "085d7f6094e48356a6344ee49aec8c3c63008aa7e12c35cc48f418884cf65de3",
+      "sha256": "100125a506740de62beea0197ac7f1aa52b46e24b41a831dd769b514be584ade",
       "path": "output/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml"
     },
     {
-      "sha256": "7a518a6b85c204aa77ec6a9e3b77a3cc645af59f27d5aff1cd0f8981978b28c9",
+      "sha256": "d7078c0599050e6cfeb80491b50a62909fab1544f31f4232bd756d231e4cb650",
       "path": "output/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml"
     },
     {
-      "sha256": "d60796ff9660d96a322086fd85992aabcc1ea4a97ab7d06f95814c8cb87c1d52",
+      "sha256": "495d2e3a3b57b8f6cccc15178714b97c51973aadeddce460fbc0f1f25339c6f3",
+      "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml"
+    },
+    {
+      "sha256": "e6f2b03087a92b4d19799bfc2c155e4edc2e49939d15b25139e1021a4612c0f1",
+      "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml"
+    },
+    {
+      "sha256": "b5b8f34f989d49071093459d9216edbff15421ce2622bb1d173f7491391b743f",
       "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml"
     },
     {
-      "sha256": "32ec65f817b67ea6d08821b4bcaf827e1f2ce6c1953a8ac039d755ea0c3a5182",
+      "sha256": "b03626968239eb686919e0c201bbc0ba649e3ba3c028e572ffe8cbe025a60846",
       "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml"
     },
     {
@@ -331,6 +352,11 @@
   ],
   "testIdsPartial": {
     "PT-IDEM-010": "DB/JMS sender, retry, lease/crash/broker duplicate passed; consumer business-result UK remains",
-    "PT-IDEM-012": "Web encrypted payload codec and Web-only SQL repository; dispatcher/ingest and HTTP response boundary remain"
-  }
+    "PT-IDEM-012": "Web encrypted payload codec, SQL repository, authenticated JMS sender and short-transaction dispatcher passed; API ingest and HTTP response boundary remain"
+  },
+  "relatedYktClosedThisRun": [
+    "YKT-009",
+    "YKT-010",
+    "YKT-011"
+  ]
 }

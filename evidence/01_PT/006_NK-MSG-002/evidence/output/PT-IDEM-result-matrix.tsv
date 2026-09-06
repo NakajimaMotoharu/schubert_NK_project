@@ -10,7 +10,7 @@ PT-IDEM-008	PASS	ResponseSnapshotCodecTest subset + DatabaseMigrationTest bounda
 PT-IDEM-009	PASS	OutboxDispatcherTest.claimsOnlyDueExpiredRowsWithTenSecondLeaseLimitAndNoDispatcherOverlap	SS332 max100, lease10s, strict expiry, SKIP LOCKED	TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml
 PT-IDEM-010	PARTIAL	OutboxDispatcherTest retry/commit/crash methods; OutboxPolicyTest	SS324/332 DB result times, fixed retry boundary matrix, broker duplicate; consumer business UK remains	outbox-and-web-log-scope.md; JUnit XML
 PT-IDEM-011	PASS	OutboxDispatcherTest.publicBoundariesRejectNullModesBoundsErrorsAndEveryWireIdentityMutation; persistedQwkPayloadIsFullyDecodedBeforeOpeningJms	SS323 independent QWK field offsets and 14 mutations across 2 destinations	TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml
-PT-IDEM-012	PARTIAL	WebLogPayloadCodecTest 8; WebLogOutboxRepositoryTest 4	SS323/352 crypto vector and SS324/331/332 real DB after-conditions; dispatcher/ingest remain	web-log-database-scope.md; WebLogPayloadCodecTest.xml; WebLogOutboxRepositoryTest.xml
+PT-IDEM-012	PARTIAL	WebLogPayloadCodecTest 8; WebLogOutboxRepositoryTest 4; WebLogMessageSenderTest 4; WebLogDispatcherTest 5	SS323/352 vector, SS324/331/332 DB result times, transport, lease/crash; API ingest/HTTP projection remain	web-log-database-scope.md; web-log-dispatch-scope.md; Web logging JUnit XML
 PT-IDEM-013	NOT_RUN	0	SS324 read24h/update7d/SENT7d	Not counted as PASS
 PT-IDEM-014	NOT_RUN	0	100 concurrent full workflow and DB/JMS recovery	Not counted as PASS
 PT-IDEM-015	NOT_RUN	0	Final full Program scan gate not yet eligible	Slice scan separately recorded, not Program PASS

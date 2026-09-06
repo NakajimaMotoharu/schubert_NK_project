@@ -33,8 +33,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了（30%）。NK-MSG-002継続中。Inbox/HMAC/snapshot、API Outbox claim/send/mark・完全電文検査・Clock/jitter、Web log暗号codec/専用DB repositoryまで実装。Web dispatcher/ingest・cleanup・業務冪等性stressは残作業。 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。Run `PT-IDEM-20260906-02`全242件PASS（Protocol69/API93/Web39/CHR41）、全Java coverage100%、SpotBugs0。PT-IDEM-001～009/011 PASS、010/012部分、013～015未実施。共通NullAway/format gate残あり。 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 6/20 Program完了（30%）。NK-MSG-002継続中。Inbox/HMAC/snapshot、API Outbox claim/send/mark・完全電文検査・Clock/jitter、Web log暗号codec/専用DB repository/送信dispatcherまで実装。API ingest・cleanup・業務冪等性stressは残作業。 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 6/20 Program完了。Run `PT-IDEM-20260907-01`全251件PASS（Protocol69/API93/Web48/CHR41）、全Java coverage100%、SpotBugs0。PT-IDEM-001～009/011 PASS、010/012部分、013～015未実施。共通NullAway/format gate残あり。 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
@@ -50,6 +50,7 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 
 | 日付 | 内容 |
 |---|---|
+| 2026-09-07 | Web log sender/dispatcherと追加9試験を実装、正式Run PT-IDEM-20260907-01全251件成功・coverage100%・SpotBugs0。BUG-013修正、YKT-009～011完了。NK-MSG-002はAPI ingest/HTTP投影等を残し継続、完了率6/20=30%据置。 |
 | 2026-09-01 | PGPT工程開始。開始基準、成果物構成、初期進捗を登録。 |
 | 2026-09-02 | Characterization是正とNK-CHR-001 PG/PTを完了。Production module着手gateを再確立。 |
 | 2026-09-02 | Protocol基盤33件の中間gateをPASSし、NK-PRO-003をPG/PT完了。NK-PRO-001/002は未実装範囲を残し継続。 |
