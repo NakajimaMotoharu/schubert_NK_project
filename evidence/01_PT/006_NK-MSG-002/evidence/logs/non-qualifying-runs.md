@@ -21,3 +21,6 @@
 | Web log初回TDD（2026-09-06） | Web 35件中failure 1。独立AAD field長合計が126、実ASCIIは127 | table名は20+1+14=35 byteでありfixtureの34を訂正。production AAD/期待wire値は変更しない。PASS算入外 |
 
 最新の正式実行は`manifest.json`でtarget commitと対象Test IDを固定する。未実装・未実行・部分実施のTest IDはProgram全体のPASSへ算入しない。
+
+| Web sender初期TDD | test identityをUUID下位bitのdecimal12/15で生成し、SS goldenのhex12/15と不一致 | 固定UUID文字列を明示して試験fixtureを是正。既存codecのrow一致検査が正常に拒否したもので、production oracle変更や製品障害ではない。旧失敗runはPASS算入外 |
+| Web sender再開precheck | Protocol69/Web43成功、coverage全100%、SpotBugs0 | 部分reactorの開発確認。正式全体runと別管理し、Program完了へは算入しない |

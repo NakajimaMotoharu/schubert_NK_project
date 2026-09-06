@@ -363,7 +363,7 @@ final class WebLogPayloadCodecTest {
   }
 
   /** Golden UI 232 header and UI 235 data offsets; no production encoder builds the oracle. */
-  private static byte[] goldenWire() {
+  static byte[] goldenWire() {
     byte[] wire = new byte[2_336];
     Arrays.fill(wire, (byte) ' ');
     ascii(wire, 0, "SCHBNK01001WLGEVT01001EI");
