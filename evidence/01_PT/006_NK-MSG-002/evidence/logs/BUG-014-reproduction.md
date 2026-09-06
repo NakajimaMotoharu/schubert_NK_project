@@ -6,3 +6,4 @@
 - Inbox predicateはPROCESSING以外とexpiresだけで、SSが削除禁止とするdecrypt/整合error・result reference不整合を識別しない。
 - DB dump・row本文・credentialは取得していない。ここに記した日時/件数は既存合成fixtureの定数である。
 - 既存DDL/PTの変更前にBUG-014/YKT-012を起票した。正本の保持仕様やCurrent baselineは変更しない。追加migration/境界PTと後続Batchの保護検証を完了するまで本件およびPGPTを完了扱いしない。
+- 実PG再現（2026-09-07 08:02:21 JST終了、base865b2b7＋新規回帰test、Maven exit1）: `MessageStoreCleanupTest.sentRowsYoungerThanSevenDaysMustRemain` は独立期待`0|0|0|OK`に対して実際`2|2|0|OK`。run=2026-09-07、送信=09-05のAPI/Web各1件が削除された。合格算入外。
