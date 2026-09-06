@@ -91,6 +91,13 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 4. Broker component PTはmodule `target` 下の隔離File Journal、loopback自動選択port、合成credential/dataだけを使い、
    production credentialとCurrent dataを読まない。
 
+### 5.1 API REQUEST Details JSON parser（2026-09-07）
+
+- Maven Centralの`com.google.code.gson:gson:2.14.0`をAPI production dependencyとして明示固定する。既存Flyway依存で取得済みの同versionを利用し、別parserやnative libraryは追加しない。
+- 入手元: `https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar`。JAR SHA-256: `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f`。
+- `JsonReader`を`Strictness.STRICT`/nesting limit 2で使い、重複keyと型・値のallowlistはAPIで別途検査する。反射による任意class deserializeを行わない。SS351 §3.3/SSC-008、PT-IDEM-012を参照。
+- 再現: 上記固定JDK/Maven/local repositoryでroot `./mvnw --no-transfer-progress clean verify`（初回取得後は`-o`）。`RequestLogDetailsTest`がstrict JSON/重複/型/byte上限を確認する。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |

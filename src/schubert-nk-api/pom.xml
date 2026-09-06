@@ -26,6 +26,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.14.0</version>
+    </dependency>
+    <dependency>
       <groupId>dev.codex.schubert</groupId>
       <artifactId>schubert-nk-protocol</artifactId>
       <version>${project.version}</version>
@@ -153,6 +158,7 @@
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
           <systemPropertyVariables>
+            <nk.pt.repository>${maven.multiModuleProjectDirectory}</nk.pt.repository>
             <user.language>ja</user.language>
             <user.country>JP</user.country>
             <user.timezone>Asia/Tokyo</user.timezone>
