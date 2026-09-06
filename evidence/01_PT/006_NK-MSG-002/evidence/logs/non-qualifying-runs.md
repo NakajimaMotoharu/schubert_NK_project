@@ -24,3 +24,5 @@
 
 | Web sender初期TDD | test identityをUUID下位bitのdecimal12/15で生成し、SS goldenのhex12/15と不一致 | 固定UUID文字列を明示して試験fixtureを是正。既存codecのrow一致検査が正常に拒否したもので、production oracle変更や製品障害ではない。旧失敗runはPASS算入外 |
 | Web sender再開precheck | Protocol69/Web43成功、coverage全100%、SpotBugs0 | 部分reactorの開発確認。正式全体runと別管理し、Program完了へは算入しない |
+| API ingest初期TDD（2026-09-07） | test選択でProtocolのno-tests拒否、LayoutRegistry require署名不足、HTTP methodの不正fixture、別layout fixtureが先にheader検査で拒否されcoverage1分岐不足 | test methodはlowercaseで既存SS format違反を検査する。別layoutは長さもそのlayoutへ合わせ、API route拒否を直接検査。STRICT JSONのroot後検査と共通semantic Path検査は既存契約に委譲し重複分岐を作らない。PASS算入外 |
+| API ingest precheck | Protocol69/API100成功、Java coverage100%、SpotBugs0 | 部分reactorの開発確認。正式全体Run02は別記録。cleanup既存oracleのBUG-014/015はPASSへ算入しない |
