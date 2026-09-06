@@ -147,6 +147,7 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 - Message ID UK、Correlation、layout/version、status/attempt/next/lease、created/sentを持つ。
 - Dispatcher algorithm/backoffはAPI outboxと同じ。HTTP request threadはsendを待たない。
 - API `app_logs.source_message_id` UKが最終重複防止。DuplicateはINSERTせずJMS ACKする。
+- APIは351 §3.3のREQUEST action/Details/表示metadataの正規化を適用し、DB INSERT/duplicate transaction確定後だけlistenerへ正常復帰する（SSC-008）。
 - PENDING/ERRORの本文を管理画面へ表示せず、件数・最古時刻・error codeだけ監視する。
 
 ## 10. Internal work冪等性
