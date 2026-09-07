@@ -46,21 +46,38 @@ final class LoginAttemptStateTest {
         new LoginAttemptState(LoginAttemptKind.USER, 1, Optional.of(START), Optional.empty());
     assertEquals(2, state.afterFailure(END.minusNanos(1)).failedCount());
     LoginAttemptState at = state.afterFailure(END);
-    assertEquals(1, at.failedCount());
-    assertEquals(Optional.of(END), at.windowStartedAt());
+    assertEquals(2, at.failedCount());
+    assertEquals(Optional.of(START), at.windowStartedAt());
     assertEquals(1, state.afterFailure(END.plusNanos(1)).failedCount());
     LoginAttemptState locked =
         new LoginAttemptState(LoginAttemptKind.USER, 5, Optional.of(START), Optional.of(END));
     assertTrue(locked.isLocked(END.minusNanos(1)));
     assertFalse(locked.isLocked(END));
     assertFalse(locked.isLocked(END.plusNanos(1)));
-    assertEquals(1, locked.afterFailure(END).failedCount());
+    assertEquals(5, locked.afterFailure(END).failedCount());
+    assertEquals(
+        Optional.of(Instant.parse("2026-09-07T00:30:00Z")), locked.afterFailure(END).lockedUntil());
     assertEquals(0, locked.retryAfterSeconds(END));
     assertEquals(0, locked.retryAfterSeconds(END.plusNanos(1)));
     // SQL count may remain saturated after lock clear; never exceeds the DDL count bound.
     LoginAttemptState saturated =
         new LoginAttemptState(LoginAttemptKind.IP, 10, Optional.of(START), Optional.empty());
     assertEquals(10, saturated.afterFailure(START.plusSeconds(1)).failedCount());
+  }
+
+  @Test
+  void currentObservedWindowEndpointVectorAppliesToUserAndIp() {
+    // Independent Current fixed-Clock probe: one failure then threshold-1 at end +/- 1ns.
+    // BUG-021/SSC-009 expected [true, true, false], not computed by production policy.
+    for (LoginAttemptKind kind : LoginAttemptKind.values()) {
+      int additional = kind == LoginAttemptKind.USER ? 4 : 9;
+      for (long offset : new long[] {-1, 0, 1}) {
+        LoginAttemptState state = LoginAttemptState.empty(kind).afterFailure(START);
+        Instant at = END.plusNanos(offset);
+        for (int i = 0; i < additional; i++) state = state.afterFailure(at);
+        assertEquals(offset <= 0, state.isLocked(at));
+      }
+    }
   }
 
   @Test

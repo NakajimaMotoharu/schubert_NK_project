@@ -58,7 +58,7 @@ public record LoginAttemptState(
 
   /**
    * A locked request does not extend the lock or increment counters. A 15-minute window is
-   * half-open.
+   * inclusive at its end for Current compatibility (SSC-009/BUG-021); lock expiry remains strict.
    */
   public LoginAttemptState afterFailure(Instant now) {
     if (isLocked(now)) {
@@ -68,7 +68,7 @@ public record LoginAttemptState(
       throw new IllegalArgumentException("login observation precedes its persisted failure window");
     }
     boolean sameWindow =
-        windowStartedAt.isPresent() && now.isBefore(windowStartedAt.orElseThrow().plus(WINDOW));
+        windowStartedAt.isPresent() && !now.isAfter(windowStartedAt.orElseThrow().plus(WINDOW));
     int nextCount = sameWindow ? Math.min(kind.threshold(), failedCount + 1) : 1;
     Instant nextWindow = sameWindow ? windowStartedAt.orElseThrow() : now;
     Optional<Instant> nextLock =

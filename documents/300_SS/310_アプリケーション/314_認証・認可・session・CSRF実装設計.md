@@ -79,6 +79,12 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 
 User不存在でもIP制御と同程度の処理経路を取り、timing/responseで存在を開示しない。DB/MQ timeoutは`9000`であり失敗counterを増やさない。
 
+#### 5.1.1 失敗窓とlockの境界（SSC-009）
+
+現行互換を維持し、USER/IPとも`now > window_started_at + 15分`のstrict超過で窓外resetする。終了時刻の一致は旧窓へ加算する。窓の開始が未設定なら初回count=1とする。これは`locked_until > now`のlock有効性とは別条件であり、lock終了一致では照合を許可する。その照合が失敗して旧窓の閾値へ到達した場合は新たな15分lockを設定する。失敗回数が閾値へ到達した当該要求から`0106`を返し、次の要求までlock表示を遅らせない。
+
+根拠はUI226/234の15分窓・閾値と未承認差分禁止、現行`LoginAttemptService.isExpired/recordFailure`および`LoginAuthenticationFailureHandler`。BUG-021/YKT-018の固定Clock比較で終了±1ns/一致を検証する。DB精度では±1μs/一致を検証し、Current baselineとDIF allowlistは変更しない。
+
 ### 5.2 Retry-After
 
 APIは`retry_after_seconds = ceil(locked_until-now)`を0～900で返す。WebはHTTP `Retry-After`を設定し待機messageを表示する。

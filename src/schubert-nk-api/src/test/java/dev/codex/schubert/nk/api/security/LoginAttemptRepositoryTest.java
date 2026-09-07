@@ -139,7 +139,7 @@ final class LoginAttemptRepositoryTest {
       seed();
       fail("login-user", NOW);
       fail("login-user", NOW.plusNanos(offset));
-      int expected = offset < 900_000_000_000L ? 2 : 1;
+      int expected = offset <= 900_000_000_000L ? 2 : 1; // Current endpoint, SSC-009/BUG-021.
       assertEquals(expected, scalar("select failed_count from schubert.app_users where id=7"));
       assertEquals(expected, scalar("select failed_count from schubert.login_ip_attempts"));
       assertEquals(

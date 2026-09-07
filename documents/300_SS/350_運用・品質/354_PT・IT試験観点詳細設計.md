@@ -55,6 +55,7 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 - Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
   PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。
+- SSC-009/BUG-021: failure窓は終了一致を旧窓に含め、strict超過だけreset。初回1失敗＋終了時刻で4失敗のUSERはlock、終了+1nsなら非lockをCurrent/NK独立比較する。IPは初回1＋9失敗で同境界を検証する。lock有効性自体は終了一致でfalseのまま、DBではμs境界を照合する。
 - Session 1/2/3件、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。Current Characterizationの3件継続は`DIF-016`のみのoracleとし、NK PTは3件目Login後を`[最古=revoke、残り2件=active]`で必ず合否判定する。
 - CSRF欠落/不一致/別session/再利用、SavedRequestのsafe GETとexternal/POST拒否、Logout POST、cache/header。
 - USER/ADMINの全route/layout、owner/他人/不存在の404/403使い分け、Web/API二重検証、Web業務schema grant 0。

@@ -94,7 +94,7 @@ def main():
                            "PT-AUT-008": "actor/role/owner policy matrix only; database revocation/predicates/HTTP remain"},
         "testIdsNotRun": ["PT-AUT-004", "PT-AUT-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedBug": ["BUG-020"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017"], "relatedSsc": [],
+        "relatedBug": ["BUG-020", "BUG-021"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018"], "relatedSsc": ["SSC-009"],
         "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw_log).hexdigest(),
         "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",
