@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.security;
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -18,16 +19,17 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
- * Session issuance only; the authenticated Login/Inbox caller owns transaction and audit. Trace:
- * NK-AUT-001, AUT-001..004, DIF-016; UI226; SS312 §4/314 §6/332 §5; PT-AUT-005-I/006.
+ * Session issuance with atomic replacement audit; the authenticated Login/Inbox caller owns
+ * transaction. Trace: NK-AUT-001, AUT-001..004, DIF-016; UI226; SS312 §4/314 §6/332 §5;
+ * PT-AUT-005-I/006.
  */
 public final class AuthSessionService {
   private static final String LOCK_USER =
       "select status from schubert.app_users where id=? for update";
   private static final String INSERT =
       "insert into schubert.auth_sessions "
-          + "(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,"
-          + "expires_at,client_address,created_message_id) values(?,?,?,?,?,?,?,?,cast(? as inet),?)";
+          + "(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
+          + " values(?,?,?,?,?,?,?,?,cast(? as inet),?)";
   private static final String LOCK_ACTIVE =
       "select id from schubert.auth_sessions where user_id=? and not revoked and expires_at>? "
           + "order by last_accessed_at,id for update";
@@ -38,6 +40,7 @@ public final class AuthSessionService {
   private final AuthContextCodec codec;
   private final SecureRandom random;
   private final Supplier<UUID> ids;
+  private final SessionAuditWriter audit = new SessionAuditWriter();
 
   public AuthSessionService(ContextHash hashes, AuthContextCodec codec) {
     this(hashes, codec, new SecureRandom(), UUID::randomUUID);
@@ -53,10 +56,16 @@ public final class AuthSessionService {
 
   /** Caller must rollback on failure; duplicate Message IDs must take the Inbox replay path. */
   public IssuedContext issue(
-      Connection connection, long userId, InetAddress client, UUID messageId, Instant now) {
+      Connection connection,
+      long userId,
+      InetAddress client,
+      UUID messageId,
+      UUID correlationId,
+      Instant now) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(client, "client");
     Objects.requireNonNull(messageId, "messageId");
+    Objects.requireNonNull(correlationId, "correlationId");
     Objects.requireNonNull(now, "now");
     if (userId < 1 || userId > 999_999_999_999L) {
       throw new IllegalArgumentException("session owner is outside N12");
@@ -119,6 +128,16 @@ public final class AuthSessionService {
             throw new SQLException("session replacement changed during issue", "40001");
           }
         }
+        audit.write(
+            connection,
+            userId,
+            userId,
+            client,
+            messageId,
+            correlationId,
+            issuedAt,
+            SessionRevocationReason.REPLACED,
+            ResultCode.SUCCESS);
       }
       return new IssuedContext(identity, raw, issuedAt, expiresAt);
     } catch (SQLException failure) {

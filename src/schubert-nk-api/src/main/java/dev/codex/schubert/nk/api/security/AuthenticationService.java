@@ -81,6 +81,7 @@ public final class AuthenticationService {
                   locked.account().orElseThrow().identity().userId(),
                   client,
                   messageId,
+                  correlationId,
                   at);
           result = new LoginResult.Success(locked.account().orElseThrow().identity(), issued);
           reason = LoginAuditReason.SUCCEEDED;

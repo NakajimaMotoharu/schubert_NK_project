@@ -49,7 +49,9 @@ final class LoginAttemptRepositoryTest {
     execute("delete from schubert.login_ip_attempts");
     execute("delete from schubert.app_users");
     execute(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values"
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " values"
             + "(7,'Login-User','login-user','unusable-fixture-hash','USER','ACTIVE','2026-09-08','2026-09-08','2026-09-08'),"
             + "(8,'Other-User','other-user','unusable-fixture-hash','ADMIN','DISABLED','2026-09-08','2026-09-08','2026-09-08')");
   }
@@ -127,11 +129,13 @@ final class LoginAttemptRepositoryTest {
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.app_users where id=7 and failed_count=0 and failure_window_started_at is null and locked_until is null"));
+            "select count(*) from schubert.app_users where id=7 and failed_count=0 and"
+                + " failure_window_started_at is null and locked_until is null"));
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.login_ip_attempts where failed_count=0 and locked_until is null"));
+            "select count(*) from schubert.login_ip_attempts where failed_count=0 and locked_until"
+                + " is null"));
     assertTimestamp("app_users", "last_login_at", "id=7", "2026-09-08T00:15:01Z");
     assertTimestamp("login_ip_attempts", "window_started_at", "true", "2026-09-08T00:15:01Z");
     assertTimestamp("login_ip_attempts", "updated_at", "true", "2026-09-08T00:15:01Z");
@@ -166,11 +170,13 @@ final class LoginAttemptRepositoryTest {
     assertEquals(
         2,
         scalar(
-            "select count(*) from schubert.app_users where failed_count=5 and locked_until='2026-09-08T00:15:00Z'"));
+            "select count(*) from schubert.app_users where failed_count=5 and"
+                + " locked_until='2026-09-08T00:15:00Z'"));
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.login_ip_attempts where failed_count=10 and locked_until='2026-09-08T00:15:00Z'"));
+            "select count(*) from schubert.login_ip_attempts where failed_count=10 and"
+                + " locked_until='2026-09-08T00:15:00Z'"));
     try (Connection connection = database.transaction()) {
       var locked =
           repository.lockForAttempt(connection, "login-user", client, NOW.plusSeconds(901));

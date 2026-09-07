@@ -18,8 +18,8 @@ import java.util.UUID;
  */
 public final class AuthenticationContextVerifier {
   private static final String LOCK_USER =
-      "select u.id from schubert.app_users u "
-          + "join schubert.auth_sessions s on s.user_id=u.id where s.context_hash=? for update of u";
+      "select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id where"
+          + " s.context_hash=? for update of u";
   private static final String READ_SESSION =
       "select s.id,s.user_id,u.username,u.role,u.status,"
           + "s.revoked,s.expires_at from schubert.auth_sessions s "

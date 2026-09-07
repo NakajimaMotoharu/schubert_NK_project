@@ -41,9 +41,9 @@ public final class LoginAuditWriter {
             .replaceAll("[\\r\\n\\t\\u2028\\u2029]", " ");
     try (var statement =
         connection.prepareStatement(
-            "insert into schubert.app_logs "
-                + "(logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,actor_username,remote_address,details) "
-                + "values(?,'API','SECURITY',?,?,?,?,?,?,?,cast(? as inet),cast(? as jsonb))")) {
+            "insert into schubert.app_logs"
+                + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,actor_username,remote_address,details)"
+                + " values(?,'API','SECURITY',?,?,?,?,?,?,?,cast(? as inet),cast(? as jsonb))")) {
       statement.setTimestamp(1, Timestamp.from(now));
       statement.setString(2, success ? "INFO" : "WARN");
       statement.setString(3, action);

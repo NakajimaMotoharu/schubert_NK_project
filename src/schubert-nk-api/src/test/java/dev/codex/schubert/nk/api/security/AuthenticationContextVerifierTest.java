@@ -51,11 +51,13 @@ final class AuthenticationContextVerifierTest {
     execute("delete from schubert.auth_sessions");
     execute("delete from schubert.app_users");
     execute(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) "
-            + "values(7,'verifier-user','verifier-user','unusable-fixture-hash','USER','ACTIVE','2026-09-07','2026-09-07','2026-09-07')");
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " values(7,'verifier-user','verifier-user','unusable-fixture-hash','USER','ACTIVE','2026-09-07','2026-09-07','2026-09-07')");
     execute(
-        "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id) "
-            + "values('a1000000-0000-0000-0000-000000000001',7,'ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb',"
+        "insert into"
+            + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
+            + " values('a1000000-0000-0000-0000-000000000001',7,'ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb',"
             + "decode(repeat('00',29),'hex'),'fixture','2026-09-07T00:00:00Z','2026-09-07T00:00:00Z','2026-09-07T08:00:00Z','127.0.0.1','a2000000-0000-0000-0000-000000000001')");
   }
 
@@ -101,7 +103,8 @@ final class AuthenticationContextVerifierTest {
       switch (scenario) {
         case "revoked" ->
             execute(
-                "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-07T00:30:00Z',revoke_reason='LOGOUT'");
+                "update schubert.auth_sessions set"
+                    + " revoked=true,revoked_at='2026-09-07T00:30:00Z',revoke_reason='LOGOUT'");
         case "equalExpiry" ->
             execute("update schubert.auth_sessions set expires_at='2026-09-07T01:00:00Z'");
         case "pastExpiry" ->

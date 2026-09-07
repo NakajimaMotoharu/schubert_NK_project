@@ -85,7 +85,9 @@ final class AuthenticationServiceTest {
     try (Connection connection = database.api();
         var statement =
             connection.prepareStatement(
-                "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(7,'Login-User','login-user',?,'USER','ACTIVE','2026-09-08','2026-09-08','2026-09-08')")) {
+                "insert into"
+                    + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+                    + " values(7,'Login-User','login-user',?,'USER','ACTIVE','2026-09-08','2026-09-08','2026-09-08')")) {
       statement.setString(1, fixtureHash);
       statement.executeUpdate();
     }
@@ -95,9 +97,13 @@ final class AuthenticationServiceTest {
   void realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically() throws Exception {
     var service = realService();
     execute(
-        "update schubert.app_users set role='ADMIN',failed_count=2,failure_window_started_at='2026-09-07T23:59:00Z' where id=7");
+        "update schubert.app_users set"
+            + " role='ADMIN',failed_count=2,failure_window_started_at='2026-09-07T23:59:00Z' where"
+            + " id=7");
     execute(
-        "insert into schubert.login_ip_attempts(client_address,failed_count,window_started_at,updated_at) values('127.0.0.1',2,'2026-09-07T23:59:00Z','2026-09-07T23:59:00Z')");
+        "insert into"
+            + " schubert.login_ip_attempts(client_address,failed_count,window_started_at,updated_at)"
+            + " values('127.0.0.1',2,'2026-09-07T23:59:00Z','2026-09-07T23:59:00Z')");
     UUID message = UUID.randomUUID(), correlation = UUID.randomUUID();
     try (Connection connection = database.transaction()) {
       char[] password = password();
@@ -126,15 +132,21 @@ final class AuthenticationServiceTest {
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.app_users where failed_count=0 and failure_window_started_at is null and locked_until is null and last_login_at='2026-09-08T00:00:00Z'"));
+            "select count(*) from schubert.app_users where failed_count=0 and"
+                + " failure_window_started_at is null and locked_until is null and"
+                + " last_login_at='2026-09-08T00:00:00Z'"));
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.login_ip_attempts where failed_count=0 and locked_until is null and window_started_at='2026-09-08T00:00:00Z'"));
+            "select count(*) from schubert.login_ip_attempts where failed_count=0 and locked_until"
+                + " is null and window_started_at='2026-09-08T00:00:00Z'"));
     assertEquals(
         1,
         scalar(
-            "select count(*) from schubert.app_logs where service='API' and category='SECURITY' and level='INFO' and action='LOGIN_SUCCEEDED' and message='LOGIN_SUCCEEDED' and actor_user_id=7 and actor_username='login-user' and remote_address='127.0.0.1' and request_id is null and source_message_id is null and details='{"
+            "select count(*) from schubert.app_logs where service='API' and category='SECURITY' and"
+                + " level='INFO' and action='LOGIN_SUCCEEDED' and message='LOGIN_SUCCEEDED' and"
+                + " actor_user_id=7 and actor_username='login-user' and remote_address='127.0.0.1'"
+                + " and request_id is null and source_message_id is null and details='{"
                 + "\"resultCode\":\"0000\",\"reason\":\"SUCCEEDED\",\"retryAfterSeconds\":0,\"outcome\":\"SUCCESS\"}'::jsonb"));
     try (Connection connection = database.api();
         var statement = connection.createStatement();
@@ -178,7 +190,9 @@ final class AuthenticationServiceTest {
       assertEquals(
           1,
           scalar(
-              "select count(*) from schubert.app_logs where action='LOGIN_FAILED' and level='WARN' and actor_user_id is null and details->>'resultCode'='0101' and details->>'outcome'='DENIED'"));
+              "select count(*) from schubert.app_logs where action='LOGIN_FAILED' and level='WARN'"
+                  + " and actor_user_id is null and details->>'resultCode'='0101' and"
+                  + " details->>'outcome'='DENIED'"));
     }
     seed();
     var alwaysTrue = checked((raw, stored) -> true);
@@ -235,7 +249,8 @@ final class AuthenticationServiceTest {
     assertEquals(0, scalar("select failed_count from schubert.app_users"));
     // Two locks: select the later deadline, then ceil fractional microsecond and cap at 900.
     execute(
-        "update schubert.app_users set failed_count=5,failure_window_started_at='2026-09-08T00:00:00Z',locked_until='2026-09-08T00:20:00Z'");
+        "update schubert.app_users set"
+            + " failed_count=5,failure_window_started_at='2026-09-08T00:00:00Z',locked_until='2026-09-08T00:20:00Z'");
     assertEquals(900, call(service, "login-user", password(), NOW).retryAfterSeconds());
     execute("update schubert.app_users set locked_until='2026-09-08T00:00:01.000001Z'");
     execute("update schubert.login_ip_attempts set locked_until='2026-09-08T00:00:01Z'");
@@ -382,7 +397,8 @@ final class AuthenticationServiceTest {
     assertEquals(5, scalar("select failed_count from schubert.app_users"));
     assertEquals(5, scalar("select failed_count from schubert.login_ip_attempts"));
     assertEquals(32, scalar("select count(*) from schubert.app_logs where action like 'LOGIN_%'"));
-    assertEquals(10, scalar("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
+    assertEquals(
+        10, scalar("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
     assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
   }
 

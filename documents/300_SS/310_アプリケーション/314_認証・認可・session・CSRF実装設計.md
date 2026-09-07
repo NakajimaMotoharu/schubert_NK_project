@@ -120,6 +120,10 @@ QA-044/UIC-004で確定したとおり、現行は設定と異なり3 sessionが
 
 失効・期限切れは`0102`、DB障害はdeny closedで`9000`。Raw/hash/ciphertextをlogしない。
 
+### 6.3 Logout・管理失効（SSC-011）
+
+LOGREQ01だけは312 §4.2の失効専用lookupとし、通常のactive verifierによる先行拒否をしない。User→session lock、既失効なら元のrevoked_at/0200、未失効の有効contextだけLOGOUT/0000。idleを延長せず、既失効への再要求は時刻/reasonを上書きしない。管理の全失効はADMIN認可済みのcaller transaction内でtarget Userをlock後、未失効sessionを全件対象とし、DISABLED/PASSWORD_RESET/ADMINの閉じたreasonを保存する。更新数0でも既失効rowの時刻は維持する。更新と監査の途中失敗はcallerが全rollbackする。
+
 ## 7. HTTP session
 
 ### 7.1 Cookie/session ID
@@ -219,11 +223,13 @@ next attempt/expiry、error codeだけを保存する。Backoffは5秒、30秒�
 | Event | 必須field | 禁止field |
 |---|---|---|
 | Login success/failure/lock | request ID、username入力のbounded識別、remote、reason code、result | Password、hash、context |
-| Session issue/revoke/expiry | actor、session internal UUID、reason、時刻 | raw/hash/ciphertext |
+| Session issue/revoke/expiry | actor/対象user、message/correlation、reason、時刻 | session ID/internal UUID/raw/hash/ciphertext |
 | CSRF/authorization deny | actor optional、method/path、request ID、rule ID | CSRF token、query値 |
 | User status/role/password | actor/target、before/after（password除外）、token fingerprint ID | Password/hash/token raw |
 
 Username不存在は内部reason codeを権限制限logへ記録できるが、利用者messageとmetric labelでは区別しない。
+
+SSC-010: Session識別子の機密除外は351 §4を正とする。Login発行はLOGIN_SUCCEEDED、最大2件制御の各REPLACEDはSESSION_REVOKEDを同じtransactionで保存する。Logout/管理全失効もSESSION_REVOKEDと閉じたreason、結果codeで記録し、失効日時はDB列に保持する。新規失効1行につき監査1行、冪等Logout要求は0200監査1行（Inbox再送は元結果のみで重複監査しない）。監査失敗時にsessionだけcommitすることは禁止する。
 
 ## 13. SS設計判断
 

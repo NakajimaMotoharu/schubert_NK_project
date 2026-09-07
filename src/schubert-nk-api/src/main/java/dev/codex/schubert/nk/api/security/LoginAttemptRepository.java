@@ -21,18 +21,23 @@ import java.util.Optional;
  */
 public final class LoginAttemptRepository {
   private static final String USER =
-      "select id,username,role,status,password_hash,failed_count,failure_window_started_at,locked_until "
-          + "from schubert.app_users where username_key=? for update";
+      "select"
+          + " id,username,role,status,password_hash,failed_count,failure_window_started_at,locked_until"
+          + " from schubert.app_users where username_key=? for update";
   private static final String CREATE_IP =
-      "insert into schubert.login_ip_attempts "
-          + "(client_address,failed_count,window_started_at,updated_at) values(cast(? as inet),0,?,?) on conflict(client_address) do nothing";
+      "insert into schubert.login_ip_attempts"
+          + " (client_address,failed_count,window_started_at,updated_at) values(cast(? as"
+          + " inet),0,?,?) on conflict(client_address) do nothing";
   private static final String IP =
-      "select failed_count,window_started_at,locked_until from schubert.login_ip_attempts where client_address=cast(? as inet) for update";
+      "select failed_count,window_started_at,locked_until from schubert.login_ip_attempts where"
+          + " client_address=cast(? as inet) for update";
   private static final String UPDATE_USER =
       "update schubert.app_users set failed_count=?,failure_window_started_at=?,locked_until=?,"
           + "last_login_at=case when ? then ? else last_login_at end where id=?";
   private static final String UPDATE_IP =
-      "update schubert.login_ip_attempts set failed_count=?,window_started_at=?,locked_until=?,updated_at=? where client_address=cast(? as inet)";
+      "update schubert.login_ip_attempts set"
+          + " failed_count=?,window_started_at=?,locked_until=?,updated_at=? where"
+          + " client_address=cast(? as inet)";
 
   /** Username key has already undergone the UI226 normalization; this layer owns no password. */
   public LockedLoginAttempt lockForAttempt(

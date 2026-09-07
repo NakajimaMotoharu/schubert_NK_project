@@ -30,7 +30,7 @@ Controller
        -> wait reply
   -> API SyncRequestListener
        -> InboundMessageGuard（property/header/length/layout）
-       -> Login以外: AuthenticationContextVerifier
+       -> Login: 匿名Inbox、Logout: 失効専用lookup（§4.2）、その他: AuthenticationContextVerifier
        -> InboxCoordinator.execute()
             -> LayoutHandler.handle()
                  -> @Transactional ApplicationService
@@ -104,6 +104,8 @@ Password `char[]`はencode照合直後にzero fillする。Login Message ID重�
 4. MQ/API障害時もWeb sessionを破棄し、暗号化contextを`pending_context_revocations`へ保存してrecovery taskが再送する。
 
 `ContextRevocationRetrier.retryDue(Instant now, int limit)`はdue rowを`FOR UPDATE SKIP LOCKED`で最大100件取得し、成功またはAPI expiry確認後だけ削除する。
+
+SSC-011: LOGREQ01は通常のactive context verifierを前置しない。失効専用serviceが同じraw hashでUser→sessionの順にlockし、既失効ならaccount状態/期限に関係なく元の失効時刻と0200だけを返す。この経路からactorを業務認可へ渡さず、idle延長もしない。未失効はaccount ACTIVEかつexpires_at>nowだけをLOGOUTへ更新し0000、未知/期限切れ/無効accountは0102、DB障害は9000。初回・冪等成功の監査もcaller transactionに参加する。
 
 ## 5. 参照・検索処理
 
