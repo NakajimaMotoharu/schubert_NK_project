@@ -37,7 +37,7 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 工程基盤 | 整備中 | 規約、toolchain、全品質gate、915/916確定 | rootless JDK/Maven、台帳、compiler/coverage/SpotBugs/NullAway稼働。Enforcer/formatは検証済み、PMD等の残gateを追加予定。文書上の方針確定だけで全gate完了とはしない |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
 | PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 確定完了5/20（25%、工数換算ではない）。NK-DAT-001はBUG-014により再確認中。NK-MSG-002のHTTP/Inbox保護/業務stressと、NK-AUT-001のInbox/管理command/expiry・Web recovery/HTTP/CHR接続が残る。Login、Logout冪等成功、管理session全失効とcritical監査を実DBで確認した。 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20（BUG-023再試験で復帰）。Run PT-AUT-20260908-07全318件成功（Protocol72/API157/Web48/CHR41）、Java coverage100%、SpotBugs/NullAway0、Enforcer/format PASS。Auth51件は実Login/Logout/管理失効/監査/rollback/競合を含む。BUG-022～025/SSC-010～012直接対応完了、YKT-022完了、YKT-019/021後続対象は継続。BUG-014 Inbox保護、Auth Inbox/expiry・Web recovery、残業務・PMD等の全体gateは未完了。 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20（BUG-023再試験で復帰）。Run PT-AUT-20260908-08全323件成功（Protocol72/API162/Web48/CHR41）、Java coverage100%、SpotBugs/NullAway0、Enforcer/format PASS。Auth56件は実Login/Logout/管理失効/監査/rollback/競合を含む。Login replay保存/再構成を追加。BUG-022～026/SSC-010～013直接対応完了、YKT-022/023完了、YKT-019/021後続対象は継続。BUG-014 Inbox保護、Auth Inbox/expiry・Web recovery、残業務・PMD等の全体gateは未完了。 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
