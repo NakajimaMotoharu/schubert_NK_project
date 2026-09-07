@@ -114,6 +114,8 @@ target全体を止めず、cleanupが削除skipを記録した上で後続する
 | `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |
 | `LimitNOFILE` | 65536 | MQ/DB/media FD、leak監視 |
 
+SSC-020: APIのUser/primary Groupはschubert-api専用を維持し、Transfer読取group schubert-webをSupplementaryGroupsへ追加する。Asset用のschubert-readと同様、共有対象は承認済みdataだけであり、Web/APIのcredentialやprivate runtime fileをgroup-readableへ変更しない。APIが作った新規日付directory/partに限り、保持inodeへgroup=schubert-webと0750/0640を明示設定して検証する。既存root/childの所有者・mode不一致は起動/処理失敗とし、applicationが修正しない。Provisioningと起動probeでgroup membership・新規作成権限を検証する。
+
 ### 4.3 Hardening
 
 Web/API/batchは`NoNewPrivileges=true`、`PrivateTmp=true`、`PrivateDevices=true`、`ProtectSystem=strict`、

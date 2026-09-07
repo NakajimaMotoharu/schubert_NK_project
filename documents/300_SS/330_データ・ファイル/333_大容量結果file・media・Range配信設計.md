@@ -55,8 +55,8 @@ SSC-017によりUI223/234に合わせ`entry_index,display_order,id`から採番�
 ## 5. Large-result生成algorithm
 
 1. Record listを最大10,000件へboundし、codecで1件ずつ4,800 byteにencodeできることをI/O前に検証する。
-2. JSTの生成日`yyyyMMdd`をdirectory名とし、設定root直下の日付directoryだけをpermission 0750で作る。
-3. CSPRNG UUIDで`<uuid>.part`を`CREATE_NEW,WRITE,NOFOLLOW_LINKS`でopen。Collision時は最大3回新UUID、超過は異常。
+2. JSTの生成日`yyyyMMdd`をdirectory名とし、設定root直下の日付directoryだけをpermission 0750で作る。SSC-020: 新規作成した保持inodeだけへschubert-web group/modeを確定しdirectory fsync。既存dateは所有者/group/modeを検査するだけで修正しない。
+3. CSPRNG UUIDで`<uuid>.part`を`CREATE_NEW,WRITE,NOFOLLOW_LINKS`でopen。Collision時は最大3回新UUID（初回＋再試行3回まで）、超過は異常。新規保持partだけへschubert-web group/0640を確定してからwriteする。
 4. 64KiB以下のbufferでrecordを順番writeし、同時にSHA-256とwritten byte数を更新する。
 5. `FileChannel.force(true)`、close、実size、`recordLength * count`、digestを照合する。
 6. 同directoryの`<uuid>.ready`へatomic・no-replace公開する。SSC-019により保持済みdirectory FD相対のLinux `renameat2(RENAME_NOREPLACE)`を使用する。Java `Files.move(ATOMIC_MOVE)`は既存target置換が実装依存なので代替しない。Directoryもfsyncする。

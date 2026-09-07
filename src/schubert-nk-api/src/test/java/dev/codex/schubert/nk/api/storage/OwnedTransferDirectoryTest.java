@@ -79,6 +79,7 @@ class OwnedTransferDirectoryTest {
     try (parent) {
       assertThrows(NullPointerException.class, () -> parent.createPart(null, path -> Boolean.TRUE));
       assertThrows(NullPointerException.class, () -> parent.createPart(ID, null));
+      assertThrows(NullPointerException.class, () -> parent.openDate(DATE, null));
       for (int mode = 0; mode < 3; mode++) {
         int fault = mode;
         failure(
@@ -298,6 +299,8 @@ class OwnedTransferDirectoryTest {
                   assertArrayEquals(
                       new byte[] {1, 2, 3},
                       child.atPartHandle(ID, OwnedTransferDirectoryTest::readHeld));
+                  child.deletePart(ID);
+                  assertEquals(Boolean.TRUE, child.createPart(ID, handle -> Boolean.TRUE));
                   child.deletePart(ID);
                   child.close();
                   return 0;

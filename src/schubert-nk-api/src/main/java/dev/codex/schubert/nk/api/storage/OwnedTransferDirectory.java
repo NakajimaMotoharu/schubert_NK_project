@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -23,7 +24,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
 
   @FunctionalInterface
   interface FileOperation<T> {
-    T execute(Path capabilityPath) throws IOException;
+    T execute(Path capabilityPath) throws IOException, NoSuchAlgorithmException;
   }
 
   private OwnedTransferDirectory(DirectoryCalls calls, int descriptor) {
@@ -54,23 +55,41 @@ final class OwnedTransferDirectory implements AutoCloseable {
 
   /** New or existing date child, never follows a symlink; child owns an independent FD. */
   OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
+    return openDate(date, handle -> Boolean.TRUE);
+  }
+
+  /** Initialize only the directory this call created; never repairs an existing date. */
+  OwnedTransferDirectory openDate(LocalDate date, FileOperation<Boolean> initialize)
+      throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(date, "date");
+      Objects.requireNonNull(initialize, "initialize");
       requireOpen();
       if (date.getYear() < 1 || date.getYear() > 9999) {
         throw new IllegalArgumentException("invalid transfer date");
       }
       String name = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+      boolean created;
       try {
         calls.createDirectory(descriptor, name);
         calls.sync(descriptor);
+        created = true;
       } catch (StorageIoException ex) {
         if (ex.reason() != StorageIoException.Reason.COLLISION) {
           throw ex;
         }
         // EEXIST proves no type/ownership: openDirectory still performs O_DIRECTORY|O_NOFOLLOW.
+        created = false;
       }
-      return new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
+      try (var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name))) {
+        if (created) {
+          child.atDirectory(initialize);
+          calls.sync(child.descriptor);
+        }
+        var result = new OwnedTransferDirectory(calls, child.descriptor);
+        child.descriptor = -1;
+        return result;
+      }
     }
   }
 
@@ -155,7 +174,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
       throw new StorageIoException(StorageIoException.Reason.COLLISION);
     } catch (NoSuchFileException ex) {
       throw new StorageIoException(StorageIoException.Reason.MISSING);
-    } catch (IOException ex) {
+    } catch (IOException | NoSuchAlgorithmException ex) {
       throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
   }

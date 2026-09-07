@@ -29,6 +29,7 @@ Source/release/config/credential/data/log/runtimeの配置、環境差分、設�
 | `/srv/schubert-nk/staging/<run-id>` | migration user 0700 | 移行中asset/manifest、対象run限定 | Go/切戻し完了まで隔離 |
 
 Directoryはprovisioningで明示作成し、application起動時に不明rootを自動作成/chmodしない。
+SSC-020: Transfer rootはschubert-api:schubert-web 0750を維持する。APIは専用primary group＋schubert-web supplementary membershipで、新規作成した保持inodeだけをchgrpし、date0750/part0640へ確定する。既存date/part/readyのmode/groupを補正して受理しない。API/Web credentialとprivate runtimeの600境界を維持し、共有group追加を秘密fileの公開理由にしない。
 Asset/transfer/backup/log/Artemis/stagingを同一または相互配下、またはsymlink接続しない。
 
 ## 3. Release package構成
