@@ -7,8 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts MTRREQ01. */
-public record MusicTrackRequestData(String category,
-    String section) implements PayloadData {
+public record MusicTrackRequestData(String category, String section) implements PayloadData {
   public MusicTrackRequestData {
     Objects.requireNonNull(category, "category");
     Objects.requireNonNull(section, "section");

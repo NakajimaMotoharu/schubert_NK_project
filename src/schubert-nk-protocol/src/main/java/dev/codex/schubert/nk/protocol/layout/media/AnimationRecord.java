@@ -10,13 +10,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts ANLRSP01. */
-public record AnimationRecord(String videoId,
+public record AnimationRecord(
+    String videoId,
     String title,
     AnimationCategory category,
     DisplayPath displayPath,
     long fileByteLength,
     Optional<String> parentMainId,
-    int displayOrder) implements PayloadRecord {
+    int displayOrder)
+    implements PayloadRecord {
   public AnimationRecord {
     Objects.requireNonNull(videoId, "videoId");
     Objects.requireNonNull(title, "title");

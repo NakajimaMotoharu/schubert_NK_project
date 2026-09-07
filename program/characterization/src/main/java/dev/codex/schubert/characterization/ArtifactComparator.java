@@ -53,7 +53,10 @@ public final class ArtifactComparator {
     Set<String> expectedCases = strings(catalog.path("cases"), "id");
     require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);
     for (JsonNode item : catalog.path("cases")) {
-      require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + item.path("id").asText(), failures);
+      require(
+          "RUN".equals(item.path("nk").asText()),
+          "CATALOG_NK:" + item.path("id").asText(),
+          failures);
     }
 
     Map<String, Path> currentFiles = artifactFiles(currentArtifacts, failures, "CURRENT");
@@ -71,7 +74,8 @@ public final class ArtifactComparator {
       JsonNode nk = JSON.readTree(nkFiles.get(caseId).toFile());
       currentByCase.put(caseId, current);
       nkByCase.put(caseId, nk);
-      require(caseId.equals(current.path("caseId").asText()), "CURRENT_CASE_ID:" + caseId, failures);
+      require(
+          caseId.equals(current.path("caseId").asText()), "CURRENT_CASE_ID:" + caseId, failures);
       require(caseId.equals(nk.path("caseId").asText()), "NK_CASE_ID:" + caseId, failures);
       require("PASS".equals(current.path("status").asText()), "CURRENT_STATUS:" + caseId, failures);
       require("PASS".equals(nk.path("status").asText()), "NK_STATUS:" + caseId, failures);
@@ -102,13 +106,24 @@ public final class ArtifactComparator {
       String pointer = observation.path("jsonPointer").asText();
       String observationKey = id + ":" + caseId + ":" + pointer;
       boolean valid = true;
-      valid &= require(observationKeys.add(observationKey), "OBSERVATION_DUPLICATE:" + observationKey, failures);
+      valid &=
+          require(
+              observationKeys.add(observationKey),
+              "OBSERVATION_DUPLICATE:" + observationKey,
+              failures);
       JsonNode rule = rules.get(id);
       valid &= require(rule != null, "OBSERVATION_UNKNOWN_DIF:" + id, failures);
-      valid &= require(expectedCases.contains(caseId), "OBSERVATION_UNKNOWN_CASE:" + caseId, failures);
+      valid &=
+          require(expectedCases.contains(caseId), "OBSERVATION_UNKNOWN_CASE:" + caseId, failures);
       valid &= require(validPointer(pointer), "OBSERVATION_POINTER:" + observationKey, failures);
-      valid &= require(observation.has("expectedCurrent"), "OBSERVATION_CURRENT_MISSING:" + observationKey, failures);
-      valid &= require(observation.has("expectedNk"), "OBSERVATION_NK_MISSING:" + observationKey, failures);
+      valid &=
+          require(
+              observation.has("expectedCurrent"),
+              "OBSERVATION_CURRENT_MISSING:" + observationKey,
+              failures);
+      valid &=
+          require(
+              observation.has("expectedNk"), "OBSERVATION_NK_MISSING:" + observationKey, failures);
       boolean comparable =
           rule != null
               & currentByCase.containsKey(caseId)
@@ -117,18 +132,51 @@ public final class ArtifactComparator {
       if (!comparable) {
         continue;
       }
-      valid &= require(strings(rule.path("cases")).contains(caseId), "OBSERVATION_CASE_SCOPE:" + observationKey, failures);
-      valid &= require(field.equals(rule.path("field").asText()), "OBSERVATION_FIELD:" + observationKey, failures);
-      valid &= require(mode.equals(rule.path("mode").asText()) && MODES.contains(mode), "OBSERVATION_MODE:" + observationKey, failures);
-      valid &= require(selectorType.equals(rule.path("selectorType").asText()), "OBSERVATION_SELECTOR_TYPE:" + observationKey, failures);
-      valid &= require(strings(rule.path("selectors")).contains(selector), "OBSERVATION_SELECTOR:" + observationKey, failures);
+      valid &=
+          require(
+              strings(rule.path("cases")).contains(caseId),
+              "OBSERVATION_CASE_SCOPE:" + observationKey,
+              failures);
+      valid &=
+          require(
+              field.equals(rule.path("field").asText()),
+              "OBSERVATION_FIELD:" + observationKey,
+              failures);
+      valid &=
+          require(
+              mode.equals(rule.path("mode").asText()) && MODES.contains(mode),
+              "OBSERVATION_MODE:" + observationKey,
+              failures);
+      valid &=
+          require(
+              selectorType.equals(rule.path("selectorType").asText()),
+              "OBSERVATION_SELECTOR_TYPE:" + observationKey,
+              failures);
+      valid &=
+          require(
+              strings(rule.path("selectors")).contains(selector),
+              "OBSERVATION_SELECTOR:" + observationKey,
+              failures);
 
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
-      valid &= require(!actualCurrent.isMissingNode(), "OBSERVATION_CURRENT_POINTER:" + observationKey, failures);
-      valid &= require(!actualNk.isMissingNode(), "OBSERVATION_NK_POINTER:" + observationKey, failures);
-      valid &= require(actualCurrent.equals(observation.path("expectedCurrent")), "OBSERVATION_CURRENT_VALUE:" + observationKey, failures);
-      valid &= require(actualNk.equals(observation.path("expectedNk")), "OBSERVATION_NK_VALUE:" + observationKey, failures);
+      valid &=
+          require(
+              !actualCurrent.isMissingNode(),
+              "OBSERVATION_CURRENT_POINTER:" + observationKey,
+              failures);
+      valid &=
+          require(!actualNk.isMissingNode(), "OBSERVATION_NK_POINTER:" + observationKey, failures);
+      valid &=
+          require(
+              actualCurrent.equals(observation.path("expectedCurrent")),
+              "OBSERVATION_CURRENT_VALUE:" + observationKey,
+              failures);
+      valid &=
+          require(
+              actualNk.equals(observation.path("expectedNk")),
+              "OBSERVATION_NK_VALUE:" + observationKey,
+              failures);
 
       String differenceKey = key(caseId, pointer);
       boolean changed = rawDifferences.contains(differenceKey);
@@ -136,7 +184,11 @@ public final class ArtifactComparator {
         valid &= require(changed, "OBSERVATION_DIFFERENCE_REQUIRED:" + observationKey, failures);
       }
       if (changed) {
-        valid &= require(claimedDifferences.add(differenceKey), "OBSERVATION_OVERLAP:" + differenceKey, failures);
+        valid &=
+            require(
+                claimedDifferences.add(differenceKey),
+                "OBSERVATION_OVERLAP:" + differenceKey,
+                failures);
       }
       if (valid) usedRules.add(id);
     }
@@ -163,8 +215,8 @@ public final class ArtifactComparator {
     if (value == null) throw new IllegalArgumentException(label + " is required");
   }
 
-  private static Map<String, Path> artifactFiles(
-      Path root, List<String> failures, String target) throws IOException {
+  private static Map<String, Path> artifactFiles(Path root, List<String> failures, String target)
+      throws IOException {
     Map<String, Path> files = new TreeMap<>();
     try (Stream<Path> paths = Files.list(root)) {
       for (Path path : paths.toList()) {
@@ -191,11 +243,7 @@ public final class ArtifactComparator {
   }
 
   private static void collectDifferences(
-      String caseId,
-      String pointer,
-      JsonNode current,
-      JsonNode nk,
-      Set<String> differences) {
+      String caseId, String pointer, JsonNode current, JsonNode nk, Set<String> differences) {
     if (current.equals(nk)) return;
     if (current.isObject() && nk.isObject()) {
       Set<String> names = new TreeSet<>();
@@ -215,11 +263,7 @@ public final class ArtifactComparator {
       int size = Math.max(current.size(), nk.size());
       for (int index = 0; index < size; index++) {
         collectDifferences(
-            caseId,
-            pointer + "/" + index,
-            current.path(index),
-            nk.path(index),
-            differences);
+            caseId, pointer + "/" + index, current.path(index), nk.path(index), differences);
       }
       return;
     }

@@ -14,15 +14,13 @@ public record LogoutResponseData(Instant sessionRevokedAt) implements PayloadDat
   }
 
   public static LogoutResponseData from(FieldValueSet fields) {
-    return new LogoutResponseData(
-        TypedFieldValues.requiredInstant(fields, "Session失効日時"));
+    return new LogoutResponseData(TypedFieldValues.requiredInstant(fields, "Session失効日時"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Session失効日時", TypedFieldValues.instant(sessionRevokedAt))));
+        Map.ofEntries(Map.entry("Session失効日時", TypedFieldValues.instant(sessionRevokedAt))));
   }
 
   @Override

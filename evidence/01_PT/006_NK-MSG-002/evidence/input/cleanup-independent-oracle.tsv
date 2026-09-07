@@ -1,0 +1,5 @@
+Test_ID	Method	Input	Independent_expected	Source
+PT-IDEM-013	cleanupNullLimitsAreAlwaysRejected	SQL NULL p_limit in all six maintenance functions	SQLSTATE 22023 in all six; no unlimited DELETE	SS341 section7; BUG-015
+PT-IDEM-013	sentRowsYoungerThanSevenDaysMustRemain	API and Web SENT 2 days before 2026-09-07T00:00:00Z	delete0; remaining2	SS324 section12; SS332 section11.4; BUG-014
+PT-IDEM-013	sevenDayAndLeaseBoundariesPreserveProtectedRows	SENT 7-day boundary plus/minus1us; lease run-anchor plus/minus1us; PENDING/ERROR	per schema retain IDs2,3,5,6,7,8; total delete4; rerun delete0	SS324 section12; SS332 section11.4
+PT-IDEM-013	chunkLimitRollbackAndLockedRowsAreSafe	chunk1; lock API id1; old SENT API id2 and Web id3	rollback restores3; commits remove API2 then Web3; locked API1 remains until unlock; repeated run0	SS341 section7; SS332 SKIP LOCKED

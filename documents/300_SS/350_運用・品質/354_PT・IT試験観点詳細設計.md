@@ -2,6 +2,10 @@
 
 ## 1. 目的・状態・追跡
 
+SSC-014: Username表示64byteと比較key96byteを分離し、U+0130×32/NFC/trim/Locale.ROOT/ギリシャ語文脈を独立literalで確認。旧64byte CHECKでの拒否を再現し、append-only V007で95/96受理・97/空/NULL拒否・UK維持・既存値非変更・Login audit64byteを検証する。表示/wireを拡張せず全scalarのUTF-8 lower最大3/2をJDK更新guardにする。
+
+SSC-013: Login snapshotは独立UI232/234の688byteで検証する。成功AUTH_SESSION＋snapshot/0200、失敗ERROR/NONE/元0101・0106、初回role/期限の凍結、DB参照/AAD/hash/発行時刻不整合、key rotation/改ざん/NULL/SQL故障/100並行を含む。再送でsession/counter/監査の再更新なし。新Headerのbyte23はS（応答）、24はS（同期）をUI表から独立配置する。
+
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
@@ -47,6 +51,7 @@ redactionを無効化しない。
 | PT-CODEC-S-* | NFC前/後、日本語・surrogate・combining mark、byte上限-1/上限/上限+1 | Code-point境界でpadding、切断・暗黙truncateなし |
 | PT-CODEC-P-* | Space/zero padding、sign/decimal禁止、control/NUL、invalid UTF-8、unknown enum | Decode/encode双方で一意error step/code |
 | PT-CODEC-E-* | Error response filler、record count 0、body不足/過剰、上限1,000,000 byte | Result-code profileに従い、不正bodyはDLQ/process exit引継ぎ |
+| PT-CODEC-AUTHERR-* | LGNRSP01/0106 retry0/1/900/901、message256/257byte、秘密field filler、他error retry0、31response全error組合せ | UI234独立432byte vectorとUI写しTSVで全byte検証。NTC0107例外維持、blank goldenだけでは代替しない（SSC-012/BUG-023） |
 
 Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、decode recordを保存する。
 
@@ -55,9 +60,14 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 - Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
   PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。
+- SSC-009/BUG-021: failure窓は終了一致を旧窓に含め、strict超過だけreset。初回1失敗＋終了時刻で4失敗のUSERはlock、終了+1nsなら非lockをCurrent/NK独立比較する。IPは初回1＋9失敗で同境界を検証する。lock有効性自体は終了一致でfalseのまま、DBではμs境界を照合する。
 - Session 1/2/3件、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。Current Characterizationの3件継続は`DIF-016`のみのoracleとし、NK PTは3件目Login後を`[最古=revoke、残り2件=active]`で必ず合否判定する。
 - CSRF欠落/不一致/別session/再利用、SavedRequestのsafe GETとexternal/POST拒否、Logout POST、cache/header。
 - USER/ADMINの全route/layout、owner/他人/不存在の404/403使い分け、Web/API二重検証、Web業務schema grant 0。
+
+SSC-015: Logoutはknown contextのowner lookupからInboxへ入り、同Message再送で失効/監査の追加0、別Messageの既失効0200で元時刻/監査1を確認する。Snapshot/AUTH_SESSION/owner/hash/失効日時の不整合と鍵/DB故障はdeny closed。Known ownerの0102は元error維持、unknown contextはInbox0、通常業務のactor発行/idle延長0。LOGREQにない現在client IPを過去Login IPから補わず、失効監査SQL NULLとLogin/REPLACEDの当該IP維持を負/正常testする。
+
+SSC-016: 固定Clockだけでなく受信→業務入口→Inbox完了→reply構築を各1秒進めるClockで検証する。業務row/critical auditは同時刻、Inbox expiresはcompleted+24h/7d、wire headerは構築時刻、replay DATAは元業務時刻・headerだけ更新、保存期限不変を独立Instant/byteで確認する。
 
 ### 4.3 PT-IDEM・STATE（SS 312・324・332）
 

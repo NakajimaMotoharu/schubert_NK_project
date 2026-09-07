@@ -1,0 +1,14 @@
+Test_ID	Case	Expected	Actual	Result
+PT-IDEM-004	same_message_same_body	REPLAY / handler 0 / Inbox 1	REPLAY / handler 0 / Inbox 1	PASS
+PT-IDEM-004	message_identity_mutations	correlation/layout/version/owner/token all rejected	6 mutation paths rejected; saved result not returned	PASS
+PT-IDEM-004	message_payload_mutation	MESSAGE_ID_REUSE	MESSAGE_ID_REUSE	PASS
+PT-IDEM-004	previous_and_unknown_HMAC_key	previous replay; unknown deny closed	previous replay; unknown FINGERPRINT_KEY_UNAVAILABLE	PASS
+PT-IDEM-005	new_message_same_token_same_HMAC	REPLAY / handler 0	REPLAY / handler 0	PASS
+PT-IDEM-005	new_message_same_token_changed_payload	OPERATION_TOKEN_REUSE	OPERATION_TOKEN_REUSE	PASS
+PT-IDEM-005	PROCESSING_message_and_token	IN_PROGRESS / handler 0	IN_PROGRESS / handler 0	PASS
+PT-IDEM-005	terminal_result_unions	COMPLETED/ERROR and NONE/AUTH_SESSION/QUESTION round-trip	exact state/reference/snapshot presence round-trip	PASS
+PT-IDEM-006	handler_failure_rollback	Inbox 0 / audit 0	Inbox 0 / audit 0	PASS
+PT-IDEM-006	caller_rollback_after_completion	Inbox 0 / audit 0	Inbox 0 / audit 0	PASS
+PT-IDEM-006	caller_commit	Inbox 1 / audit 1	Inbox 1 / audit 1	PASS
+PT-IDEM-006	message_and_token_concurrent_unique_race	one row; reread once; IN_PROGRESS	one row; reread once; IN_PROGRESS	PASS
+PT-IDEM-006	autocommit_null_time_FK_and_disappeared_row	bounded deny closed	TRANSACTION_REQUIRED/NPE/STATE_CORRUPT/SQLSTATE 23503	PASS

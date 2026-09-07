@@ -9,10 +9,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts USTREQ01. */
-public record UserStatusRequestData(UserId userId,
-    boolean enabled,
-    long expectedVersion,
-    UUID operationToken) implements PayloadData {
+public record UserStatusRequestData(
+    UserId userId, boolean enabled, long expectedVersion, UUID operationToken)
+    implements PayloadData {
   public UserStatusRequestData {
     Objects.requireNonNull(userId, "userId");
     TypedFieldValues.requireUnsignedRange("expectedVersion", expectedVersion, 9);

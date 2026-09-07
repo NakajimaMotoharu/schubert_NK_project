@@ -14,7 +14,6 @@ import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.FixedPayload;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
-import dev.codex.schubert.nk.protocol.layout.LayoutRegistry;
 import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
 import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.nio.charset.StandardCharsets;
@@ -29,7 +28,8 @@ import org.junit.jupiter.api.Test;
 
 class MessageCodecTest {
   private static final UUID MESSAGE_ID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
-  private static final UUID CORRELATION_ID = UUID.fromString("223e4567-e89b-12d3-a456-426614174000");
+  private static final UUID CORRELATION_ID =
+      UUID.fromString("223e4567-e89b-12d3-a456-426614174000");
   private static final Instant SENT_AT = Instant.parse("2026-09-02T03:34:56.789Z");
   private static final AuthenticationContext CONTEXT = AuthenticationContext.of("a".repeat(64));
 
@@ -58,7 +58,8 @@ class MessageCodecTest {
     assertThrows(NullPointerException.class, () -> new HeaderCodec(null));
     assertThrows(NullPointerException.class, () -> HeaderCodec.standard().encode(null));
     assertThrows(PermanentProtocolException.class, () -> HeaderCodec.standard().peek(null));
-    assertThrows(PermanentProtocolException.class, () -> HeaderCodec.standard().peek(new byte[255]));
+    assertThrows(
+        PermanentProtocolException.class, () -> HeaderCodec.standard().peek(new byte[255]));
   }
 
   @Test
@@ -96,18 +97,32 @@ class MessageCodecTest {
     corrupt(login, bytes -> ascii(bytes, 208, "0000"));
     corrupt(login, bytes -> bytes[212] = 'X');
 
-    byte[] response = HeaderCodec.standard().encode(responseHeader("GAMRSP01", 9, 272, 0, ResultCode.NOT_FOUND));
+    byte[] response =
+        HeaderCodec.standard().encode(responseHeader("GAMRSP01", 9, 272, 0, ResultCode.NOT_FOUND));
     corrupt(response, bytes -> ascii(bytes, 208, "9999"));
     corrupt(response, bytes -> Arrays.fill(bytes, 208, 212, (byte) ' '));
     corrupt(response, bytes -> ascii(bytes, 193, "000001"));
 
     CommonHeader unknownHeader =
         new CommonHeader(
-            "SCHBNK01", 1, new LayoutId("ABCREQ01"), 1,
-            MessageKind.REQUEST, InteractionKind.SYNCHRONOUS,
-            MESSAGE_ID, MESSAGE_ID, SENT_AT, Optional.of(CONTEXT),
-            256, 0, 0, 0, 256, Optional.empty());
-    assertThrows(MessageEncodingException.class, () -> HeaderCodec.standard().encode(unknownHeader));
+            "SCHBNK01",
+            1,
+            new LayoutId("ABCREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            MESSAGE_ID,
+            MESSAGE_ID,
+            SENT_AT,
+            Optional.of(CONTEXT),
+            256,
+            0,
+            0,
+            0,
+            256,
+            Optional.empty());
+    assertThrows(
+        MessageEncodingException.class, () -> HeaderCodec.standard().encode(unknownHeader));
   }
 
   @Test
@@ -136,11 +151,14 @@ class MessageCodecTest {
     assertFalse(payload.toString().contains("[1, 2]"));
     assertThrows(NullPointerException.class, () -> new FixedPayload(null, 0, List.of()));
     assertThrows(NullPointerException.class, () -> new FixedPayload(new byte[0], 0, null));
-    assertThrows(LayoutValidationException.class, () -> new FixedPayload(new byte[0], -1, List.of()));
+    assertThrows(
+        LayoutValidationException.class, () -> new FixedPayload(new byte[0], -1, List.of()));
     ArrayList<byte[]> withNull = new ArrayList<>();
     withNull.add(null);
     assertThrows(NullPointerException.class, () -> new FixedPayload(new byte[0], 0, withNull));
-    assertThrows(LayoutValidationException.class, () -> new FixedPayload(new byte[0], 2, List.of(new byte[1])));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new FixedPayload(new byte[0], 2, List.of(new byte[1])));
 
     CommonHeader valid = responseHeader("GAMRSP01", 9, 272, 1, ResultCode.SUCCESS);
     FixedPayload validPayload = new FixedPayload(new byte[9], 272, List.of(new byte[272]));
@@ -148,9 +166,15 @@ class MessageCodecTest {
     assertEquals(valid, message.header());
     assertThrows(NullPointerException.class, () -> new WireMessage<>(null, validPayload));
     assertThrows(NullPointerException.class, () -> new WireMessage<>(valid, null));
-    assertThrows(LayoutValidationException.class, () -> new WireMessage<>(valid, new FixedPayload(new byte[8], 272, List.of(new byte[272]))));
-    assertThrows(LayoutValidationException.class, () -> new WireMessage<>(valid, new FixedPayload(new byte[9], 271, List.of(new byte[271]))));
-    assertThrows(LayoutValidationException.class, () -> new WireMessage<>(valid, new FixedPayload(new byte[9], 272, List.of())));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(valid, new FixedPayload(new byte[8], 272, List.of(new byte[272]))));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(valid, new FixedPayload(new byte[9], 271, List.of(new byte[271]))));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(valid, new FixedPayload(new byte[9], 272, List.of())));
   }
 
   @Test
@@ -162,11 +186,25 @@ class MessageCodecTest {
     Arrays.fill(data, (byte) ' ');
     byte[] record = new byte[272];
     Arrays.fill(record, (byte) ' ');
-    WireMessage<FixedPayload> message = new WireMessage<>(header, new FixedPayload(data, 272, List.of(record)));
+    WireMessage<FixedPayload> message =
+        new WireMessage<>(header, new FixedPayload(data, 272, List.of(record)));
     FixedWidthEncoder encoder = FixedWidthEncoder.standard();
     byte[] body = encoder.encode(message);
-    TransportMetadata metadata = metadata(header, TransportBodyType.BYTES, 2, Optional.empty(), 1_800_000_000_000L, "nk.sync.reply.web");
-    ExpectedRoute route = new ExpectedRoute(MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, "nk.sync.reply.web", Optional.empty(), true);
+    TransportMetadata metadata =
+        metadata(
+            header,
+            TransportBodyType.BYTES,
+            2,
+            Optional.empty(),
+            1_800_000_000_000L,
+            "nk.sync.reply.web");
+    ExpectedRoute route =
+        new ExpectedRoute(
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            "nk.sync.reply.web",
+            Optional.empty(),
+            true);
     WireMessage<FixedPayload> decoded = FixedWidthDecoder.standard().decode(body, metadata, route);
     assertEquals(header, decoded.header());
     assertArrayEquals(data, decoded.payload().copyData());
@@ -175,69 +213,361 @@ class MessageCodecTest {
     assertThrows(NullPointerException.class, () -> new FixedWidthEncoder(null));
     assertThrows(NullPointerException.class, () -> new FixedWidthDecoder(null));
     assertThrows(NullPointerException.class, () -> encoder.encode(null));
-    assertThrows(NullPointerException.class, () -> FixedWidthDecoder.standard().decode(body, null, route));
-    assertThrows(NullPointerException.class, () -> FixedWidthDecoder.standard().decode(body, metadata, null));
-    assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(null, metadata, route));
-    assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(new byte[255], metadata, route));
-    assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(new byte[1_000_001], metadata, route));
+    assertThrows(
+        NullPointerException.class, () -> FixedWidthDecoder.standard().decode(body, null, route));
+    assertThrows(
+        NullPointerException.class,
+        () -> FixedWidthDecoder.standard().decode(body, metadata, null));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(null, metadata, route));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(new byte[255], metadata, route));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(new byte[1_000_001], metadata, route));
+    ExpectedRoute workRoute =
+        new ExpectedRoute(
+            MessageKind.EVENT, InteractionKind.INTERNAL, "nk.async.work", Optional.empty(), false);
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(new byte[1_001], metadata, workRoute));
     byte[] extra = Arrays.copyOf(body, body.length + 1);
-    assertThrows(PermanentProtocolException.class, () -> FixedWidthDecoder.standard().decode(extra, metadata, route));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FixedWidthDecoder.standard().decode(extra, metadata, route));
 
     CommonHeader unknownHeader =
-        new CommonHeader("SCHBNK01", 1, new LayoutId("ABCREQ01"), 1,
-            MessageKind.REQUEST, InteractionKind.SYNCHRONOUS,
-            MESSAGE_ID, MESSAGE_ID, SENT_AT, Optional.of(CONTEXT),
-            256, 0, 0, 0, 256, Optional.empty());
+        new CommonHeader(
+            "SCHBNK01",
+            1,
+            new LayoutId("ABCREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            MESSAGE_ID,
+            MESSAGE_ID,
+            SENT_AT,
+            Optional.of(CONTEXT),
+            256,
+            0,
+            0,
+            0,
+            256,
+            Optional.empty());
     assertThrows(
         MessageEncodingException.class,
-        () -> encoder.encode(new WireMessage<>(unknownHeader, new FixedPayload(new byte[0], 0, List.of()))));
+        () ->
+            encoder.encode(
+                new WireMessage<>(unknownHeader, new FixedPayload(new byte[0], 0, List.of()))));
   }
 
   @Test
   void transportAndRouteContractsRejectEveryMismatch() {
     CommonHeader request = regularRequestHeader();
-    TransportMetadata valid = metadata(request, TransportBodyType.BYTES, 2, Optional.of("nk.sync.reply.web"), 1_800_000_000_000L, "nk.sync.request");
-    ExpectedRoute route = new ExpectedRoute(MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, "nk.sync.request", Optional.of("nk.sync.reply.web"), true);
+    TransportMetadata valid =
+        metadata(
+            request,
+            TransportBodyType.BYTES,
+            2,
+            Optional.of("nk.sync.reply.web"),
+            1_800_000_000_000L,
+            "nk.sync.request");
+    ExpectedRoute route =
+        new ExpectedRoute(
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            "nk.sync.request",
+            Optional.of("nk.sync.reply.web"),
+            true);
     ProtocolValidator.validateTransport(request, valid, route);
     assertEquals(4, TransportBodyType.values().length);
     assertEquals(TransportBodyType.BYTES, TransportBodyType.valueOf("BYTES"));
-    assertThrows(NullPointerException.class, () -> ProtocolValidator.validateTransport(null, valid, route));
-    assertThrows(NullPointerException.class, () -> ProtocolValidator.validateTransport(request, null, route));
-    assertThrows(NullPointerException.class, () -> ProtocolValidator.validateTransport(request, valid, null));
-    invalidTransport(request, route, metadata(request, TransportBodyType.TEXT, 2, Optional.of("nk.sync.reply.web"), 1, "nk.sync.request"));
-    invalidTransport(request, route, metadata(request, TransportBodyType.BYTES, 1, Optional.of("nk.sync.reply.web"), 1, "nk.sync.request"));
-    invalidTransport(request, route, new TransportMetadata(TransportBodyType.BYTES, "ID:1", request.correlationId(), Optional.of("nk.sync.reply.web"), 1, 2, 1, request.messageId(), request.layoutId(), "002", "nk.sync.request"));
-    invalidTransport(request, route, new TransportMetadata(TransportBodyType.BYTES, "ID:1", request.correlationId(), Optional.of("nk.sync.reply.web"), 1, 2, 1, CORRELATION_ID, request.layoutId(), "001", "nk.sync.request"));
-    invalidTransport(request, route, new TransportMetadata(TransportBodyType.BYTES, "ID:1", request.correlationId(), Optional.of("nk.sync.reply.web"), 1, 2, 1, request.messageId(), new LayoutId("GAMREQ01"), "001", "nk.sync.request"));
-    invalidTransport(request, route, new TransportMetadata(TransportBodyType.BYTES, "ID:1", CORRELATION_ID, Optional.of("nk.sync.reply.web"), 1, 2, 1, request.messageId(), request.layoutId(), "001", "nk.sync.request"));
-    invalidTransport(request, new ExpectedRoute(MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, "nk.sync.request", Optional.empty(), true), valid);
-    invalidTransport(request, new ExpectedRoute(MessageKind.REQUEST, InteractionKind.ASYNC_ACCEPTANCE, "nk.sync.request", Optional.of("nk.sync.reply.web"), true), valid);
-    invalidTransport(request, route, metadata(request, TransportBodyType.BYTES, 2, Optional.of("nk.sync.reply.web"), 1, "wrong"));
-    invalidTransport(request, route, metadata(request, TransportBodyType.BYTES, 2, Optional.of("wrong"), 1, "nk.sync.request"));
-    invalidTransport(request, route, metadata(request, TransportBodyType.BYTES, 2, Optional.of("nk.sync.reply.web"), 0, "nk.sync.request"));
+    assertThrows(
+        NullPointerException.class, () -> ProtocolValidator.validateTransport(null, valid, route));
+    assertThrows(
+        NullPointerException.class,
+        () -> ProtocolValidator.validateTransport(request, null, route));
+    assertThrows(
+        NullPointerException.class,
+        () -> ProtocolValidator.validateTransport(request, valid, null));
+    invalidTransport(
+        request,
+        route,
+        metadata(
+            request,
+            TransportBodyType.TEXT,
+            2,
+            Optional.of("nk.sync.reply.web"),
+            1,
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        metadata(
+            request,
+            TransportBodyType.BYTES,
+            1,
+            Optional.of("nk.sync.reply.web"),
+            1,
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        new TransportMetadata(
+            TransportBodyType.BYTES,
+            "ID:1",
+            request.correlationId(),
+            Optional.of("nk.sync.reply.web"),
+            1,
+            2,
+            1,
+            request.messageId(),
+            request.layoutId(),
+            "002",
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        new TransportMetadata(
+            TransportBodyType.BYTES,
+            "ID:1",
+            request.correlationId(),
+            Optional.of("nk.sync.reply.web"),
+            1,
+            2,
+            1,
+            CORRELATION_ID,
+            request.layoutId(),
+            "001",
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        new TransportMetadata(
+            TransportBodyType.BYTES,
+            "ID:1",
+            request.correlationId(),
+            Optional.of("nk.sync.reply.web"),
+            1,
+            2,
+            1,
+            request.messageId(),
+            new LayoutId("GAMREQ01"),
+            "001",
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        new TransportMetadata(
+            TransportBodyType.BYTES,
+            "ID:1",
+            CORRELATION_ID,
+            Optional.of("nk.sync.reply.web"),
+            1,
+            2,
+            1,
+            request.messageId(),
+            request.layoutId(),
+            "001",
+            "nk.sync.request"));
+    invalidTransport(
+        request,
+        new ExpectedRoute(
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            "nk.sync.request",
+            Optional.empty(),
+            true),
+        valid);
+    invalidTransport(
+        request,
+        new ExpectedRoute(
+            MessageKind.REQUEST,
+            InteractionKind.ASYNC_ACCEPTANCE,
+            "nk.sync.request",
+            Optional.of("nk.sync.reply.web"),
+            true),
+        valid);
+    invalidTransport(
+        request,
+        route,
+        metadata(
+            request, TransportBodyType.BYTES, 2, Optional.of("nk.sync.reply.web"), 1, "wrong"));
+    invalidTransport(
+        request,
+        route,
+        metadata(request, TransportBodyType.BYTES, 2, Optional.of("wrong"), 1, "nk.sync.request"));
+    invalidTransport(
+        request,
+        route,
+        metadata(
+            request,
+            TransportBodyType.BYTES,
+            2,
+            Optional.of("nk.sync.reply.web"),
+            0,
+            "nk.sync.request"));
   }
 
   @Test
   void metadataAndExpectedRouteEstablishNullAndRangeContracts() {
     CommonHeader request = regularRequestHeader();
-    TransportMetadata valid = metadata(request, TransportBodyType.BYTES, 2, Optional.of("reply"), 1, "destination");
+    TransportMetadata valid =
+        metadata(request, TransportBodyType.BYTES, 2, Optional.of("reply"), 1, "destination");
     assertEquals(1, valid.deliveryCount());
-    assertThrows(IllegalArgumentException.class, () -> metadata(request, TransportBodyType.BYTES, 2, Optional.of("reply"), -1, "destination"));
-    assertThrows(IllegalArgumentException.class, () -> new TransportMetadata(TransportBodyType.BYTES, "ID", request.correlationId(), Optional.of("reply"), 1, 2, 0, request.messageId(), request.layoutId(), "001", "destination"));
-    assertThrows(IllegalArgumentException.class, () -> new TransportMetadata(TransportBodyType.BYTES, " ", request.correlationId(), Optional.of("reply"), 1, 2, 1, request.messageId(), request.layoutId(), "001", "destination"));
-    assertThrows(IllegalArgumentException.class, () -> new TransportMetadata(TransportBodyType.BYTES, "ID", request.correlationId(), Optional.of(" "), 1, 2, 1, request.messageId(), request.layoutId(), "001", "destination"));
-    assertThrows(IllegalArgumentException.class, () -> new TransportMetadata(TransportBodyType.BYTES, "ID", request.correlationId(), Optional.of("reply"), 1, 2, 1, request.messageId(), request.layoutId(), " ", "destination"));
-    assertThrows(IllegalArgumentException.class, () -> new TransportMetadata(TransportBodyType.BYTES, "ID", request.correlationId(), Optional.of("reply"), 1, 2, 1, request.messageId(), request.layoutId(), "001", " "));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            metadata(request, TransportBodyType.BYTES, 2, Optional.of("reply"), -1, "destination"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new TransportMetadata(
+                TransportBodyType.BYTES,
+                "ID",
+                request.correlationId(),
+                Optional.of("reply"),
+                1,
+                2,
+                0,
+                request.messageId(),
+                request.layoutId(),
+                "001",
+                "destination"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new TransportMetadata(
+                TransportBodyType.BYTES,
+                " ",
+                request.correlationId(),
+                Optional.of("reply"),
+                1,
+                2,
+                1,
+                request.messageId(),
+                request.layoutId(),
+                "001",
+                "destination"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new TransportMetadata(
+                TransportBodyType.BYTES,
+                "ID",
+                request.correlationId(),
+                Optional.of(" "),
+                1,
+                2,
+                1,
+                request.messageId(),
+                request.layoutId(),
+                "001",
+                "destination"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new TransportMetadata(
+                TransportBodyType.BYTES,
+                "ID",
+                request.correlationId(),
+                Optional.of("reply"),
+                1,
+                2,
+                1,
+                request.messageId(),
+                request.layoutId(),
+                " ",
+                "destination"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new TransportMetadata(
+                TransportBodyType.BYTES,
+                "ID",
+                request.correlationId(),
+                Optional.of("reply"),
+                1,
+                2,
+                1,
+                request.messageId(),
+                request.layoutId(),
+                "001",
+                " "));
 
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, " ", Optional.of("reply"), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, "destination", Optional.of(" "), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.EVENT, InteractionKind.SYNCHRONOUS, "destination", Optional.empty(), false));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.REQUEST, InteractionKind.INTERNAL, "destination", Optional.of("reply"), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, "destination", Optional.empty(), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, "destination", Optional.of("reply"), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.EVENT, InteractionKind.INTERNAL, "destination", Optional.empty(), true));
-    assertThrows(IllegalArgumentException.class, () -> new ExpectedRoute(MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, "destination", Optional.empty(), false));
-    ExpectedRoute event = new ExpectedRoute(MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, " ", Optional.of("reply"), true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                "destination",
+                Optional.of(" "),
+                true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.EVENT,
+                InteractionKind.SYNCHRONOUS,
+                "destination",
+                Optional.empty(),
+                false));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.REQUEST,
+                InteractionKind.INTERNAL,
+                "destination",
+                Optional.of("reply"),
+                true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                "destination",
+                Optional.empty(),
+                true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                "destination",
+                Optional.of("reply"),
+                true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.EVENT,
+                InteractionKind.INTERNAL,
+                "destination",
+                Optional.empty(),
+                true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ExpectedRoute(
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                "destination",
+                Optional.empty(),
+                false));
+    ExpectedRoute event =
+        new ExpectedRoute(
+            MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
     assertFalse(event.expirationRequired());
   }
 
@@ -247,38 +577,92 @@ class MessageCodecTest {
     assertThrows(PermanentProtocolException.class, () -> HeaderCodec.standard().peek(copy));
   }
 
-  private static void invalidTransport(CommonHeader header, ExpectedRoute route, TransportMetadata metadata) {
-    assertThrows(PermanentProtocolException.class, () -> ProtocolValidator.validateTransport(header, metadata, route));
+  private static void invalidTransport(
+      CommonHeader header, ExpectedRoute route, TransportMetadata metadata) {
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> ProtocolValidator.validateTransport(header, metadata, route));
   }
 
   private static CommonHeader requestHeader(String id, int dataLength) {
-    return new CommonHeader("SCHBNK01", 1, new LayoutId(id), 1,
-        MessageKind.REQUEST, InteractionKind.SYNCHRONOUS,
-        MESSAGE_ID, MESSAGE_ID, SENT_AT, Optional.empty(),
-        256, dataLength, 0, 0, 256 + dataLength, Optional.empty());
+    return new CommonHeader(
+        "SCHBNK01",
+        1,
+        new LayoutId(id),
+        1,
+        MessageKind.REQUEST,
+        InteractionKind.SYNCHRONOUS,
+        MESSAGE_ID,
+        MESSAGE_ID,
+        SENT_AT,
+        Optional.empty(),
+        256,
+        dataLength,
+        0,
+        0,
+        256 + dataLength,
+        Optional.empty());
   }
 
   private static CommonHeader regularRequestHeader() {
-    return new CommonHeader("SCHBNK01", 1, new LayoutId("LOGREQ01"), 1,
-        MessageKind.REQUEST, InteractionKind.SYNCHRONOUS,
-        MESSAGE_ID, MESSAGE_ID, SENT_AT, Optional.of(CONTEXT),
-        256, 0, 0, 0, 256, Optional.empty());
+    return new CommonHeader(
+        "SCHBNK01",
+        1,
+        new LayoutId("LOGREQ01"),
+        1,
+        MessageKind.REQUEST,
+        InteractionKind.SYNCHRONOUS,
+        MESSAGE_ID,
+        MESSAGE_ID,
+        SENT_AT,
+        Optional.of(CONTEXT),
+        256,
+        0,
+        0,
+        0,
+        256,
+        Optional.empty());
   }
 
   private static CommonHeader responseHeader(
       String id, int dataLength, int recordLength, int recordCount, ResultCode code) {
-    return new CommonHeader("SCHBNK01", 1, new LayoutId(id), 1,
-        MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS,
-        MESSAGE_ID, CORRELATION_ID, SENT_AT, Optional.of(CONTEXT),
-        256, dataLength, recordLength, recordCount,
-        256 + dataLength + recordLength * recordCount, Optional.of(code));
+    return new CommonHeader(
+        "SCHBNK01",
+        1,
+        new LayoutId(id),
+        1,
+        MessageKind.RESPONSE,
+        InteractionKind.SYNCHRONOUS,
+        MESSAGE_ID,
+        CORRELATION_ID,
+        SENT_AT,
+        Optional.of(CONTEXT),
+        256,
+        dataLength,
+        recordLength,
+        recordCount,
+        256 + dataLength + recordLength * recordCount,
+        Optional.of(code));
   }
 
   private static CommonHeader eventHeader() {
-    return new CommonHeader("SCHBNK01", 1, new LayoutId("WLGEVT01"), 1,
-        MessageKind.EVENT, InteractionKind.INTERNAL,
-        MESSAGE_ID, CORRELATION_ID, SENT_AT, Optional.empty(),
-        256, 2_080, 0, 0, 2_336, Optional.empty());
+    return new CommonHeader(
+        "SCHBNK01",
+        1,
+        new LayoutId("WLGEVT01"),
+        1,
+        MessageKind.EVENT,
+        InteractionKind.INTERNAL,
+        MESSAGE_ID,
+        CORRELATION_ID,
+        SENT_AT,
+        Optional.empty(),
+        256,
+        2_080,
+        0,
+        0,
+        2_336,
+        Optional.empty());
   }
 
   private static TransportMetadata metadata(
@@ -289,8 +673,17 @@ class MessageCodecTest {
       long expiration,
       String destination) {
     return new TransportMetadata(
-        bodyType, "ID:test", header.correlationId(), replyTo, expiration,
-        deliveryMode, 1, header.messageId(), header.layoutId(), "001", destination);
+        bodyType,
+        "ID:test",
+        header.correlationId(),
+        replyTo,
+        expiration,
+        deliveryMode,
+        1,
+        header.messageId(),
+        header.layoutId(),
+        "001",
+        destination);
   }
 
   private static void ascii(byte[] target, int offset, String value) {

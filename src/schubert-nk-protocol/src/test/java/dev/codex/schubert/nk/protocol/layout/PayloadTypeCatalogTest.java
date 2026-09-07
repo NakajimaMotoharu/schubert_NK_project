@@ -50,8 +50,7 @@ class PayloadTypeCatalogTest {
         String[] columns = line.split("\\t", -1);
         assertEquals(3, columns.length, line);
         LayoutId layoutId = new LayoutId(columns[0]);
-        assertEquals(
-            columns[1], PayloadTypeCatalog.dataType(layoutId).getSimpleName(), columns[0]);
+        assertEquals(columns[1], PayloadTypeCatalog.dataType(layoutId).getSimpleName(), columns[0]);
         Optional<Class<? extends PayloadRecord>> recordType =
             PayloadTypeCatalog.recordType(layoutId);
         if (columns[2].equals("-")) {
@@ -133,15 +132,10 @@ class PayloadTypeCatalogTest {
   @Test
   void catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes() {
     LayoutId unknown = new LayoutId("ZZZREQ01");
-    PayloadValues unknownValues =
-        new PayloadValues(unknown, FieldValueSet.empty(), List.of());
+    PayloadValues unknownValues = new PayloadValues(unknown, FieldValueSet.empty(), List.of());
     assertThrows(UnsupportedLayoutException.class, () -> PayloadTypeCatalog.decode(unknownValues));
-    assertThrows(
-        UnsupportedLayoutException.class,
-        () -> PayloadTypeCatalog.dataType(unknown));
-    assertThrows(
-        UnsupportedLayoutException.class,
-        () -> PayloadTypeCatalog.recordType(unknown));
+    assertThrows(UnsupportedLayoutException.class, () -> PayloadTypeCatalog.dataType(unknown));
+    assertThrows(UnsupportedLayoutException.class, () -> PayloadTypeCatalog.recordType(unknown));
 
     TypedPayloadValues logout = typedMinimum("LOGREQ01", false);
     assertThrows(
@@ -168,7 +162,9 @@ class PayloadTypeCatalogTest {
         () ->
             PayloadTypeCatalog.decode(
                 new PayloadValues(
-                    logout.layoutId(), logout.data().fields(), List.of(game.records().getFirst().fields()))));
+                    logout.layoutId(),
+                    logout.data().fields(),
+                    List.of(game.records().getFirst().fields()))));
   }
 
   @Test
@@ -183,20 +179,18 @@ class PayloadTypeCatalogTest {
     assertEquals(
         Optional.of(new FieldValue.Text("safe")), TypedFieldValues.optionalText(text, "value"));
     assertSame(FieldValue.Unset.INSTANCE, TypedFieldValues.orUnset(Optional.empty()));
-    assertEquals(new FieldValue.Text("safe"), TypedFieldValues.orUnset(Optional.of(new FieldValue.Text("safe"))));
+    assertEquals(
+        new FieldValue.Text("safe"),
+        TypedFieldValues.orUnset(Optional.of(new FieldValue.Text("safe"))));
 
     assertThrows(
-        LayoutValidationException.class,
-        () -> TypedFieldValues.requiredText(numeric, "value"));
+        LayoutValidationException.class, () -> TypedFieldValues.requiredText(numeric, "value"));
     assertThrows(
-        LayoutValidationException.class,
-        () -> TypedFieldValues.requiredNumeric(flag, "value"));
+        LayoutValidationException.class, () -> TypedFieldValues.requiredNumeric(flag, "value"));
     assertThrows(
-        LayoutValidationException.class,
-        () -> TypedFieldValues.requiredFlag(text, "value"));
+        LayoutValidationException.class, () -> TypedFieldValues.requiredFlag(text, "value"));
     assertThrows(
-        LayoutValidationException.class,
-        () -> TypedFieldValues.optionalText(numeric, "value"));
+        LayoutValidationException.class, () -> TypedFieldValues.optionalText(numeric, "value"));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.requiredText(null, "value"));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.requiredText(text, null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.orUnset(null));
@@ -206,8 +200,7 @@ class PayloadTypeCatalogTest {
 
     TypedPayloadValues logout = typedMinimum("LOGREQ01", false);
     assertThrows(
-        NullPointerException.class,
-        () -> new TypedPayloadValues(null, logout.data(), List.of()));
+        NullPointerException.class, () -> new TypedPayloadValues(null, logout.data(), List.of()));
     assertThrows(
         NullPointerException.class,
         () -> new TypedPayloadValues(logout.layoutId(), null, List.of()));
@@ -227,11 +220,9 @@ class PayloadTypeCatalogTest {
 
   private static TypedPayloadValues typedMinimum(String layoutId, boolean withRecord) {
     LayoutFields layout = LayoutFieldCatalog.standard().require(layoutId);
-    List<FieldValueSet> records =
-        withRecord ? List.of(minimumValues(layout, true, 1)) : List.of();
+    List<FieldValueSet> records = withRecord ? List.of(minimumValues(layout, true, 1)) : List.of();
     return PayloadTypeCatalog.decode(
-        new PayloadValues(
-            layout.id(), minimumValues(layout, false, records.size()), records));
+        new PayloadValues(layout.id(), minimumValues(layout, false, records.size()), records));
   }
 
   static PayloadValues validPayload(String layoutId, int recordCount) {
@@ -243,14 +234,12 @@ class PayloadTypeCatalogTest {
         java.util.stream.IntStream.range(0, recordCount)
             .mapToObj(index -> minimumValues(layout, true, recordCount))
             .toList();
-    return new PayloadValues(
-        layout.id(), minimumValues(layout, false, recordCount), records);
+    return new PayloadValues(layout.id(), minimumValues(layout, false, recordCount), records);
   }
 
   private static FieldValueSet minimumValues(
       LayoutFields layout, boolean recordArea, int recordCount) {
-    List<FieldDefinition<?>> fields =
-        recordArea ? layout.recordFields() : layout.dataFields();
+    List<FieldDefinition<?>> fields = recordArea ? layout.recordFields() : layout.dataFields();
     LinkedHashMap<String, FieldValue> values = new LinkedHashMap<>();
     for (FieldDefinition<?> field : fields) {
       if (field.presence() == Presence.FIXED) {
@@ -269,14 +258,12 @@ class PayloadTypeCatalogTest {
       String layoutId, FieldDefinition<?> field, int recordCount) {
     return switch (field.wireType()) {
       case TEXT -> new FieldValue.Text(minimumText(layoutId, field));
-      case NUMERIC ->
-          new FieldValue.Numeric(minimumNumeric(layoutId, field, recordCount));
+      case NUMERIC -> new FieldValue.Numeric(minimumNumeric(layoutId, field, recordCount));
       case BOOLEAN -> new FieldValue.Flag(false);
     };
   }
 
-  private static long minimumNumeric(
-      String layoutId, FieldDefinition<?> field, int recordCount) {
+  private static long minimumNumeric(String layoutId, FieldDefinition<?> field, int recordCount) {
     if (field.length() == JstWireTimestamp.WIRE_LENGTH) {
       return 20260902123456789L;
     }
@@ -284,8 +271,7 @@ class PayloadTypeCatalogTest {
       return 1;
     }
     return switch (field.name()) {
-      case "Page", "Effective page", "Line番号", "Entry sequence", "File件数",
-          "出現件数" -> 1;
+      case "Page", "Effective page", "Line番号", "Entry sequence", "File件数", "出現件数" -> 1;
       case "File byte長" -> layoutId.equals("SCNRSP01") ? 0 : 1;
       case "Page size" ->
           Set.of("USRREQ01", "USRRSP01", "NTSREQ01", "NTSRSP01", "QSSREQ01", "QSSRSP01")
@@ -357,8 +343,7 @@ class PayloadTypeCatalogTest {
       case "Elapsed ms" -> "0";
       case "HTTP method" -> "GET";
       case "Path" -> "/safe";
-      case "Category" ->
-          field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
+      case "Category" -> field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
       default -> layoutId.equals("WLGEVT01") && field.name().equals("Message") ? "safe" : "A";
     };
   }

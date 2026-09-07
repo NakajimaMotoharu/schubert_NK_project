@@ -12,15 +12,13 @@ public record SpeakerListResponseData(long totalCount) implements PayloadData {
   }
 
   public static SpeakerListResponseData from(FieldValueSet fields) {
-    return new SpeakerListResponseData(
-        TypedFieldValues.requiredLong(fields, "Total count"));
+    return new SpeakerListResponseData(TypedFieldValues.requiredLong(fields, "Total count"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
+        Map.ofEntries(Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
   }
 
   @Override

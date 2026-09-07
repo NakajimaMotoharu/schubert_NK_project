@@ -9,9 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts QWKREQ01. */
-public record QuestionWorkData(String receiptId,
-    QuestionId questionId,
-    AsyncJobId asyncJobId) implements PayloadData {
+public record QuestionWorkData(String receiptId, QuestionId questionId, AsyncJobId asyncJobId)
+    implements PayloadData {
   public QuestionWorkData {
     Objects.requireNonNull(receiptId, "receiptId");
     Objects.requireNonNull(questionId, "questionId");

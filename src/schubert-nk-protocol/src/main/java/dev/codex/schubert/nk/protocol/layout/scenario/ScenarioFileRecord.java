@@ -9,10 +9,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts SCFRSP01. */
-public record ScenarioFileRecord(ScriptFileId scriptFileId,
-    String displayTitle,
-    DisplayPath displayPath,
-    int entryCount) implements PayloadRecord {
+public record ScenarioFileRecord(
+    ScriptFileId scriptFileId, String displayTitle, DisplayPath displayPath, int entryCount)
+    implements PayloadRecord {
   public ScenarioFileRecord {
     Objects.requireNonNull(scriptFileId, "scriptFileId");
     Objects.requireNonNull(displayTitle, "displayTitle");

@@ -19,7 +19,7 @@ Outbox lease、論理・物理削除の順序を定める。SQL文の実装は�
 | Isolation | 既定`READ COMMITTED`。個別の一貫性はrow/advisory lock、CAS、UKで保護 |
 | Read-only | 参照serviceは`readOnly=true`。大容量file出力へDB transactionを持ち出さない |
 | Command | Inbox INSERT～業務更新～critical audit～Inbox完了を1 transactionで確定 |
-| 時刻 | Service入口で`Clock.instant()`を1回取得し、同一transactionの全日時にbind |
+| 時刻 | SSC-016: 単一業務操作のservice入口で`Clock.instant()`を1回取得し、その業務状態更新とcritical auditへ同じInstantをbind。受信時刻、Inbox完了（324の保持起点）、response header構築、transaction外Outbox送信確認/失敗は別stageの時刻として区別する |
 | Timeout | API同期command 1,500ms、query 1,500ms、batch step 30min、lock timeout API 500ms/batch 5s |
 | Retry | DB deadlock/serializationをlistener内で自動loopしない。RollbackしJMS redelivery/inboxへ委ねる |
 | Rollback | Checked business errorは予期responseをInbox ERRORでcommit、DB/MQ/I/O例外はtransaction rollback |

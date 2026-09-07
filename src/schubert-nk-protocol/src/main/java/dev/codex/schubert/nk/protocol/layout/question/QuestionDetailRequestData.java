@@ -21,8 +21,7 @@ public record QuestionDetailRequestData(QuestionId questionId) implements Payloa
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Question ID", TypedFieldValues.id(questionId))));
+        Map.ofEntries(Map.entry("Question ID", TypedFieldValues.id(questionId))));
   }
 
   @Override

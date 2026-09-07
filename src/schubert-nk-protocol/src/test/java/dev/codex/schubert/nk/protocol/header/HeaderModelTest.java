@@ -73,12 +73,66 @@ class HeaderModelTest {
 
   @Test
   void validHeadersCoverRequestResponseErrorAndEventProfiles() {
-    CommonHeader loginRequest = header("LGNREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 384, 0, 0, Optional.empty(), Optional.empty());
-    CommonHeader loginResponse = header("LGNRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 432, 0, 0, Optional.empty(), Optional.of(ResultCode.SUCCESS));
-    CommonHeader ordinaryRequest = header("LOGREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0, Optional.of(CONTEXT), Optional.empty());
-    CommonHeader ordinaryResponse = header("GAMRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 9, 272, 1, Optional.of(CONTEXT), Optional.of(ResultCode.IDEMPOTENT_SUCCESS));
-    CommonHeader errorResponse = header("GAMRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 9, 272, 0, Optional.of(CONTEXT), Optional.of(ResultCode.NOT_FOUND));
-    CommonHeader event = header("WLGEVT01", MessageKind.EVENT, InteractionKind.INTERNAL, 2_080, 0, 0, Optional.empty(), Optional.empty());
+    CommonHeader loginRequest =
+        header(
+            "LGNREQ01",
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            384,
+            0,
+            0,
+            Optional.empty(),
+            Optional.empty());
+    CommonHeader loginResponse =
+        header(
+            "LGNRSP01",
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            432,
+            0,
+            0,
+            Optional.empty(),
+            Optional.of(ResultCode.SUCCESS));
+    CommonHeader ordinaryRequest =
+        header(
+            "LOGREQ01",
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            0,
+            0,
+            0,
+            Optional.of(CONTEXT),
+            Optional.empty());
+    CommonHeader ordinaryResponse =
+        header(
+            "GAMRSP01",
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            9,
+            272,
+            1,
+            Optional.of(CONTEXT),
+            Optional.of(ResultCode.IDEMPOTENT_SUCCESS));
+    CommonHeader errorResponse =
+        header(
+            "GAMRSP01",
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            9,
+            272,
+            0,
+            Optional.of(CONTEXT),
+            Optional.of(ResultCode.NOT_FOUND));
+    CommonHeader event =
+        header(
+            "WLGEVT01",
+            MessageKind.EVENT,
+            InteractionKind.INTERNAL,
+            2_080,
+            0,
+            0,
+            Optional.empty(),
+            Optional.empty());
 
     loginRequest.validateAgainst(LayoutRegistry.standard().require("LGNREQ01", 1));
     loginResponse.validateAgainst(LayoutRegistry.standard().require("LGNRSP01", 1));
@@ -106,30 +160,122 @@ class HeaderModelTest {
     assertInvalid(base().recordLength(0).recordCount(1));
     assertInvalid(base().totalLength(999));
     assertInvalid(base().sentAt(Instant.parse("2026-09-02T03:34:56.789001Z")));
-    assertInvalid(base().kind(MessageKind.EVENT).interaction(InteractionKind.SYNCHRONOUS).context(Optional.empty()));
+    assertInvalid(
+        base()
+            .kind(MessageKind.EVENT)
+            .interaction(InteractionKind.SYNCHRONOUS)
+            .context(Optional.empty()));
     assertInvalid(base().kind(MessageKind.REQUEST).interaction(InteractionKind.INTERNAL));
     assertInvalid(base().correlationId(OTHER_ID));
     assertInvalid(base().kind(MessageKind.RESPONSE).result(Optional.empty()));
     assertInvalid(base().result(Optional.of(ResultCode.SUCCESS)));
-    assertInvalid(base().kind(MessageKind.RESPONSE).correlationId(OTHER_ID).recordLength(1).recordCount(1).dataLength(0).totalLength(257).result(Optional.of(ResultCode.NOT_FOUND)));
-    assertInvalid(base().layoutId("LGNREQ01").dataLength(384).totalLength(640).context(Optional.of(CONTEXT)));
+    assertInvalid(
+        base()
+            .kind(MessageKind.RESPONSE)
+            .correlationId(OTHER_ID)
+            .recordLength(1)
+            .recordCount(1)
+            .dataLength(0)
+            .totalLength(257)
+            .result(Optional.of(ResultCode.NOT_FOUND)));
+    assertInvalid(
+        base().layoutId("LGNREQ01").dataLength(384).totalLength(640).context(Optional.of(CONTEXT)));
     assertInvalid(base().context(Optional.empty()));
-    assertInvalid(base().kind(MessageKind.EVENT).interaction(InteractionKind.INTERNAL).layoutId("WLGEVT01").dataLength(2_080).totalLength(2_336).context(Optional.of(CONTEXT)));
+    assertInvalid(
+        base()
+            .kind(MessageKind.EVENT)
+            .interaction(InteractionKind.INTERNAL)
+            .layoutId("WLGEVT01")
+            .dataLength(2_080)
+            .totalLength(2_336)
+            .context(Optional.of(CONTEXT)));
     assertInvalid(base().dataLength(999_999).totalLength(1_000_255));
     assertInvalid(base().dataLength(0).recordLength(999_999).recordCount(999_999).totalLength(256));
   }
 
   @Test
   void headerValidateAgainstRejectsEachMetadataMismatch() {
-    CommonHeader header = header("LOGREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0, Optional.of(CONTEXT), Optional.empty());
+    CommonHeader header =
+        header(
+            "LOGREQ01",
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            0,
+            0,
+            0,
+            Optional.of(CONTEXT),
+            Optional.empty());
     assertThrows(NullPointerException.class, () -> header.validateAgainst(null));
-    assertMismatch(header, new LayoutDefinition(new LayoutId("GAMREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0));
-    assertMismatch(header, new LayoutDefinition(new LayoutId("LOGREQ01"), 1, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 0, 0));
-    assertMismatch(header, new LayoutDefinition(new LayoutId("LOGREQ01"), 1, MessageKind.REQUEST, InteractionKind.ASYNC_ACCEPTANCE, 0, 0, 0));
-    assertMismatch(header, new LayoutDefinition(new LayoutId("LOGREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 1, 0, 0));
-    assertMismatch(header, new LayoutDefinition(new LayoutId("LOGREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 1, 1));
-    CommonHeader response = header("GAMRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 9, 272, 2, Optional.of(CONTEXT), Optional.of(ResultCode.SUCCESS));
-    assertMismatch(response, new LayoutDefinition(new LayoutId("GAMRSP01"), 1, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 9, 272, 1));
+    assertMismatch(
+        header,
+        new LayoutDefinition(
+            new LayoutId("GAMREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            0,
+            0,
+            0));
+    assertMismatch(
+        header,
+        new LayoutDefinition(
+            new LayoutId("LOGREQ01"),
+            1,
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            0,
+            0,
+            0));
+    assertMismatch(
+        header,
+        new LayoutDefinition(
+            new LayoutId("LOGREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.ASYNC_ACCEPTANCE,
+            0,
+            0,
+            0));
+    assertMismatch(
+        header,
+        new LayoutDefinition(
+            new LayoutId("LOGREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            1,
+            0,
+            0));
+    assertMismatch(
+        header,
+        new LayoutDefinition(
+            new LayoutId("LOGREQ01"),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.SYNCHRONOUS,
+            0,
+            1,
+            1));
+    CommonHeader response =
+        header(
+            "GAMRSP01",
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            9,
+            272,
+            2,
+            Optional.of(CONTEXT),
+            Optional.of(ResultCode.SUCCESS));
+    assertMismatch(
+        response,
+        new LayoutDefinition(
+            new LayoutId("GAMRSP01"),
+            1,
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            9,
+            272,
+            1));
   }
 
   private static void assertMismatch(CommonHeader header, LayoutDefinition definition) {
@@ -190,21 +336,80 @@ class HeaderModelTest {
     private int totalLength = 256;
     private Optional<ResultCode> result = Optional.empty();
 
-    HeaderBuilder protocol(String value) { protocol = value; return this; }
-    HeaderBuilder headerVersion(int value) { headerVersion = value; return this; }
-    HeaderBuilder layoutId(String value) { layoutId = value; return this; }
-    HeaderBuilder layoutVersion(int value) { layoutVersion = value; return this; }
-    HeaderBuilder kind(MessageKind value) { kind = value; return this; }
-    HeaderBuilder interaction(InteractionKind value) { interaction = value; return this; }
-    HeaderBuilder correlationId(UUID value) { correlationId = value; return this; }
-    HeaderBuilder sentAt(Instant value) { sentAt = value; return this; }
-    HeaderBuilder context(Optional<AuthenticationContext> value) { context = value; return this; }
-    HeaderBuilder headerLength(int value) { headerLength = value; return this; }
-    HeaderBuilder dataLength(int value) { dataLength = value; return this; }
-    HeaderBuilder recordLength(int value) { recordLength = value; return this; }
-    HeaderBuilder recordCount(int value) { recordCount = value; return this; }
-    HeaderBuilder totalLength(int value) { totalLength = value; return this; }
-    HeaderBuilder result(Optional<ResultCode> value) { result = value; return this; }
+    HeaderBuilder protocol(String value) {
+      protocol = value;
+      return this;
+    }
+
+    HeaderBuilder headerVersion(int value) {
+      headerVersion = value;
+      return this;
+    }
+
+    HeaderBuilder layoutId(String value) {
+      layoutId = value;
+      return this;
+    }
+
+    HeaderBuilder layoutVersion(int value) {
+      layoutVersion = value;
+      return this;
+    }
+
+    HeaderBuilder kind(MessageKind value) {
+      kind = value;
+      return this;
+    }
+
+    HeaderBuilder interaction(InteractionKind value) {
+      interaction = value;
+      return this;
+    }
+
+    HeaderBuilder correlationId(UUID value) {
+      correlationId = value;
+      return this;
+    }
+
+    HeaderBuilder sentAt(Instant value) {
+      sentAt = value;
+      return this;
+    }
+
+    HeaderBuilder context(Optional<AuthenticationContext> value) {
+      context = value;
+      return this;
+    }
+
+    HeaderBuilder headerLength(int value) {
+      headerLength = value;
+      return this;
+    }
+
+    HeaderBuilder dataLength(int value) {
+      dataLength = value;
+      return this;
+    }
+
+    HeaderBuilder recordLength(int value) {
+      recordLength = value;
+      return this;
+    }
+
+    HeaderBuilder recordCount(int value) {
+      recordCount = value;
+      return this;
+    }
+
+    HeaderBuilder totalLength(int value) {
+      totalLength = value;
+      return this;
+    }
+
+    HeaderBuilder result(Optional<ResultCode> value) {
+      result = value;
+      return this;
+    }
 
     CommonHeader build() {
       return new CommonHeader(

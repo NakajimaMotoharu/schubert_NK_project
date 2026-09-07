@@ -91,7 +91,7 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 |---|---|---:|---|
 | `id` | bigint identity | yes | PK、1..999999999999 |
 | `username` | text | yes | `octet_length` 1..64 |
-| `username_key` | text | yes | UK、`octet_length` 1..64 |
+| `username_key` | text | yes | UK、`octet_length` 1..96。表示usernameのNFC/trim/Locale.ROOT lowercase比較keyはbyte増幅し得る（SSC-014） |
 | `password_hash` | text | yes | 1..255 byte |
 | `role` | varchar(5) | yes | CHECK USER/ADMIN |
 | `status` | varchar(8) | yes | CHECK ACTIVE/DISABLED |

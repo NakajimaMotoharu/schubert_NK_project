@@ -21,8 +21,7 @@ public record AnimationListRequestData(AnimationListCategory category) implement
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Category", TypedFieldValues.enumValue(category))));
+        Map.ofEntries(Map.entry("Category", TypedFieldValues.enumValue(category))));
   }
 
   @Override

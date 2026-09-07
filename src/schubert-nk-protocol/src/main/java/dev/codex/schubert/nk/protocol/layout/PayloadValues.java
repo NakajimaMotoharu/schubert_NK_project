@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 /** Typed field values for one complete payload. */
-public record PayloadValues(
-    LayoutId layoutId, FieldValueSet data, List<FieldValueSet> records) {
+public record PayloadValues(LayoutId layoutId, FieldValueSet data, List<FieldValueSet> records) {
   public PayloadValues {
     Objects.requireNonNull(layoutId, "layoutId");
     Objects.requireNonNull(data, "data");

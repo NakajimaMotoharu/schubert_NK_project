@@ -35,21 +35,66 @@ class LargeResultRecordCodecTest {
     assertEquals(hash(record((byte) 1)), descriptor.sha256());
     assertTrue(descriptor.toString().contains("relativePath=REDACTED"));
     assertFalse(descriptor.toString().contains(PATH));
-    assertThrows(NullPointerException.class, () -> new LargeResultDescriptor(null, PATH, 4_800, "0".repeat(64), 1));
-    assertThrows(NullPointerException.class, () -> new LargeResultDescriptor(FILE_ID, null, 4_800, "0".repeat(64), 1));
-    assertThrows(NullPointerException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 4_800, null, 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 0, "0".repeat(64), 0));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 48_004_800, "0".repeat(64), 10_001));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 4_799, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 4_800, "A".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "x".repeat(257), 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "20260902/" + FILE_ID + ".ready\u0000", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "20260902/" + FILE_ID + ".réady", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "/20260902/" + FILE_ID + ".ready", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "20260230/" + FILE_ID + ".ready", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "20260902/223e4567-e89b-12d3-a456-426614174000.ready", 4_800, "0".repeat(64), 1));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultDescriptor(FILE_ID, "20260902/" + FILE_ID + ".part", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        NullPointerException.class,
+        () -> new LargeResultDescriptor(null, PATH, 4_800, "0".repeat(64), 1));
+    assertThrows(
+        NullPointerException.class,
+        () -> new LargeResultDescriptor(FILE_ID, null, 4_800, "0".repeat(64), 1));
+    assertThrows(
+        NullPointerException.class, () -> new LargeResultDescriptor(FILE_ID, PATH, 4_800, null, 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, PATH, 0, "0".repeat(64), 0));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, PATH, 48_004_800, "0".repeat(64), 10_001));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, PATH, 4_799, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, PATH, 4_800, "A".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, "", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new LargeResultDescriptor(FILE_ID, "x".repeat(257), 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID, "20260902/" + FILE_ID + ".ready\u0000", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID, "20260902/" + FILE_ID + ".réady", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID, "/20260902/" + FILE_ID + ".ready", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID, "20260230/" + FILE_ID + ".ready", 4_800, "0".repeat(64), 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID,
+                "20260902/223e4567-e89b-12d3-a456-426614174000.ready",
+                4_800,
+                "0".repeat(64),
+                1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new LargeResultDescriptor(
+                FILE_ID, "20260902/" + FILE_ID + ".part", 4_800, "0".repeat(64), 1));
   }
 
   @Test
@@ -85,8 +130,7 @@ class LargeResultRecordCodecTest {
     LargeResultContent content =
         LargeResultRecordCodec.write(
             output,
-            java.util.Collections.nCopies(
-                LargeResultDescriptor.MAXIMUM_RECORD_COUNT, zeroRecord));
+            java.util.Collections.nCopies(LargeResultDescriptor.MAXIMUM_RECORD_COUNT, zeroRecord));
     assertEquals(LargeResultDescriptor.MAXIMUM_BYTE_LENGTH, output.count);
     assertEquals(LargeResultDescriptor.MAXIMUM_BYTE_LENGTH, content.byteLength());
     assertEquals(expectedHash, content.sha256());
@@ -109,19 +153,41 @@ class LargeResultRecordCodecTest {
   @Test
   void writeRejectsNullCountLengthAndIoFailure() {
     byte[] valid = record((byte) 1);
-    assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.write(null, List.of(valid)));
-    assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), null));
-    assertThrows(IllegalArgumentException.class, () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), List.of()));
-    assertThrows(IllegalArgumentException.class, () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), java.util.Collections.nCopies(10_001, valid)));
+    assertThrows(
+        NullPointerException.class, () -> LargeResultRecordCodec.write(null, List.of(valid)));
+    assertThrows(
+        NullPointerException.class,
+        () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            LargeResultRecordCodec.write(
+                new ByteArrayOutputStream(), java.util.Collections.nCopies(10_001, valid)));
     ArrayList<byte[]> withNull = new ArrayList<>();
     withNull.add(null);
-    assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), withNull));
-    assertThrows(IllegalArgumentException.class, () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), List.of(new byte[4_799])));
-    OutputStream broken = new OutputStream() {
-      @Override public void write(int value) throws IOException { throw new IOException("test"); }
-      @Override public void write(byte[] value) throws IOException { throw new IOException("test"); }
-    };
-    assertThrows(LargeResultIoException.class, () -> LargeResultRecordCodec.write(broken, List.of(valid)));
+    assertThrows(
+        NullPointerException.class,
+        () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), withNull));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), List.of(new byte[4_799])));
+    OutputStream broken =
+        new OutputStream() {
+          @Override
+          public void write(int value) throws IOException {
+            throw new IOException("test");
+          }
+
+          @Override
+          public void write(byte[] value) throws IOException {
+            throw new IOException("test");
+          }
+        };
+    assertThrows(
+        LargeResultIoException.class, () -> LargeResultRecordCodec.write(broken, List.of(valid)));
   }
 
   @Test
@@ -129,23 +195,51 @@ class LargeResultRecordCodecTest {
     byte[] record = record((byte) 3);
     LargeResultDescriptor valid = descriptor(1, hash(record));
     assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.decode(null, valid));
-    assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), null));
-    assertThrows(PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(Arrays.copyOf(record, 4_799)), valid));
+    assertThrows(
+        NullPointerException.class,
+        () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), null));
+    assertThrows(
+        PermanentProtocolException.class,
+        () ->
+            LargeResultRecordCodec.decode(
+                new ByteArrayInputStream(Arrays.copyOf(record, 4_799)), valid));
     byte[] extra = Arrays.copyOf(record, 4_801);
-    assertThrows(PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(extra), valid));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(extra), valid));
     LargeResultDescriptor wrongHash = descriptor(1, "0".repeat(64));
-    assertThrows(PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), wrongHash));
-    InputStream broken = new InputStream() {
-      @Override public int read() throws IOException { throw new IOException("test"); }
-      @Override public int read(byte[] value, int offset, int length) throws IOException { throw new IOException("test"); }
-    };
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), wrongHash));
+    InputStream broken =
+        new InputStream() {
+          @Override
+          public int read() throws IOException {
+            throw new IOException("test");
+          }
+
+          @Override
+          public int read(byte[] value, int offset, int length) throws IOException {
+            throw new IOException("test");
+          }
+        };
     assertThrows(LargeResultIoException.class, () -> LargeResultRecordCodec.decode(broken, valid));
-    InputStream zeroThenEof = new InputStream() {
-      @Override public int read() { return -1; }
-      @Override public int read(byte[] value, int offset, int length) { return 0; }
-    };
-    assertThrows(PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(zeroThenEof, valid));
-    assertThrows(IllegalStateException.class, () -> LargeResultRecordCodec.digestFor("not-an-algorithm"));
+    InputStream zeroThenEof =
+        new InputStream() {
+          @Override
+          public int read() {
+            return -1;
+          }
+
+          @Override
+          public int read(byte[] value, int offset, int length) {
+            return 0;
+          }
+        };
+    assertThrows(
+        PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(zeroThenEof, valid));
+    assertThrows(
+        IllegalStateException.class, () -> LargeResultRecordCodec.digestFor("not-an-algorithm"));
   }
 
   @Test
@@ -154,9 +248,11 @@ class LargeResultRecordCodecTest {
     assertEquals(hash, new LargeResultContent(1, 4_800, hash).sha256());
     assertThrows(NullPointerException.class, () -> new LargeResultContent(1, 4_800, null));
     assertThrows(IllegalArgumentException.class, () -> new LargeResultContent(0, 0, hash));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultContent(10_001, 48_004_800, hash));
+    assertThrows(
+        IllegalArgumentException.class, () -> new LargeResultContent(10_001, 48_004_800, hash));
     assertThrows(IllegalArgumentException.class, () -> new LargeResultContent(1, 4_799, hash));
-    assertThrows(IllegalArgumentException.class, () -> new LargeResultContent(1, 4_800, "x".repeat(64)));
+    assertThrows(
+        IllegalArgumentException.class, () -> new LargeResultContent(1, 4_800, "x".repeat(64)));
   }
 
   private static LargeResultDescriptor descriptor(int count, String hash) {

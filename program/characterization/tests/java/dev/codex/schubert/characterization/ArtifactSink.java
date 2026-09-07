@@ -38,8 +38,7 @@ final class ArtifactSink {
 
   void writeSupplemental(Map<String, ?> checks) throws IOException {
     writeJson(
-        outputRoot.resolve("supplemental.json"),
-        Map.of("schemaVersion", 1, "checks", checks));
+        outputRoot.resolve("supplemental.json"), Map.of("schemaVersion", 1, "checks", checks));
   }
 
   void writeInventory(Map<String, ?> values) throws IOException {
@@ -52,7 +51,8 @@ final class ArtifactSink {
   private static void writeJson(Path target, Object value) throws IOException {
     Path temporary = target.resolveSibling(target.getFileName() + ".part");
     JSON.writeValue(temporary.toFile(), value);
-    Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+    Files.move(
+        temporary, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
   }
 
   static String sha256(byte[] bytes) throws Exception {

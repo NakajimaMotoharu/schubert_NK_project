@@ -1,0 +1,16 @@
+Test_ID	Section	Offset_or_order	Length	Independent_expected	Source
+PT-IDEM-007	NKENC1	0	6	ASCII NKENC1	SS 352 11.2
+PT-IDEM-007	NKENC1	6	1	format version 1	SS 352 11.2
+PT-IDEM-007	NKENC1	7	1	key ID byte length 1..16	SS 352 11.2
+PT-IDEM-007	NKENC1	8	variable	ASCII key ID	SS 352 11.2
+PT-IDEM-007	NKENC1	after-key-id	12	fixed test nonce; production CSPRNG	SS 352 11.2
+PT-IDEM-007	NKENC1	final	16	AES-GCM authentication tag	SS 352 11.2
+PT-IDEM-007	AAD	1	U32+bytes	purpose api-inbox-response	SS 352 11.2
+PT-IDEM-007	AAD	2	U32+bytes	table schubert.request_inbox	SS 352 11.2
+PT-IDEM-007	AAD	3	U32+16	request Message UUID bytes	SS 324 6; SS 352 11.2
+PT-IDEM-007	AAD	4	U32+1	format version	SS 352 11.2
+PT-IDEM-007	AAD	5	U32+bytes	key ID	SS 352 11.2
+PT-IDEM-007	AAD	6	U32+8	response layout ID	SS 324 6
+PT-IDEM-007	AAD	7	U32+3	response version	SS 324 6
+PT-IDEM-007	AAD	8	U32+0_or_8	anonymous empty or owner N12 as signed big-endian long	SS 324 6
+PT-IDEM-007	Compression	before-encryption	variable	JDK Deflater level 3 independent DeflaterOutputStream	SS 324 6

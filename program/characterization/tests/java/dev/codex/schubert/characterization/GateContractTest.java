@@ -72,7 +72,8 @@ class GateContractTest {
 
   @Test
   void caddyFixturePreservesAllForwardedRequestHeaders() {
-    String config = CharacterizationEnvironment.renderCaddyConfig(55162, 46962, Path.of("fixture-caddy-data"));
+    String config =
+        CharacterizationEnvironment.renderCaddyConfig(55162, 46962, Path.of("fixture-caddy-data"));
     assertTrue(config.contains("header_up X-Real-IP {remote_host}"));
     assertTrue(config.contains("header_up X-Forwarded-Host {hostport}"));
     assertTrue(config.contains("header_up X-Forwarded-Port {port}"));
@@ -80,11 +81,13 @@ class GateContractTest {
   }
 
   @Test
-  void secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(@TempDir Path temporaryDirectory) throws Exception {
+  void secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(@TempDir Path temporaryDirectory)
+      throws Exception {
     Path binary = temporaryDirectory.resolve("evidence.png");
     Files.write(binary, new byte[] {(byte) 0x89, 0x50, 0x4e, 0x47, (byte) 0xff, 0x00});
     assertFalse(GateCli.containsAny(binary, List.of("test-secret")));
-    Files.write(binary, "prefix-test-secret-suffix".getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    Files.write(
+        binary, "prefix-test-secret-suffix".getBytes(java.nio.charset.StandardCharsets.UTF_8));
     assertTrue(GateCli.containsAny(binary, List.of("test-secret")));
   }
 

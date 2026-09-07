@@ -16,8 +16,6 @@ import com.microsoft.playwright.options.ColorScheme;
 import com.microsoft.playwright.options.ReducedMotion;
 import com.microsoft.playwright.options.RequestOptions;
 import com.microsoft.playwright.options.WaitUntilState;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -55,13 +53,18 @@ class CurrentCharacterizationTest {
   static void stopEnvironment() throws Exception {
     try {
       if (environment != null && sink != null) {
-        sink.writeInventory(map(
-            "scenarioFileCount", environment.queryLong("SELECT count(*) FROM scenario.script_files"),
-            "scenarioEntryCount", environment.queryLong("SELECT count(*) FROM scenario.script_entries"),
-            "audioMetadataCount", environment.queryLong("SELECT count(*) FROM scenario.audio_files"),
-            "audioLinkCount", environment.queryLong("SELECT count(*) FROM scenario.entry_audio_links"),
-            "videoCount", logicalVideoCount,
-            "musicCount", logicalMusicCount));
+        sink.writeInventory(
+            map(
+                "scenarioFileCount",
+                    environment.queryLong("SELECT count(*) FROM scenario.script_files"),
+                "scenarioEntryCount",
+                    environment.queryLong("SELECT count(*) FROM scenario.script_entries"),
+                "audioMetadataCount",
+                    environment.queryLong("SELECT count(*) FROM scenario.audio_files"),
+                "audioLinkCount",
+                    environment.queryLong("SELECT count(*) FROM scenario.entry_audio_links"),
+                "videoCount", logicalVideoCount,
+                "musicCount", logicalMusicCount));
         sink.writeSupplemental(SUPPLEMENTAL);
       }
     } finally {
@@ -86,15 +89,17 @@ class CurrentCharacterizationTest {
       assertEquals("current-password", password.getAttribute("autocomplete"));
       assertEquals("", password.inputValue());
       assertEquals(1, csrf.count());
-      sink.write("CHR-A01", map(
-          "statusCode", response.status(),
-          "title", page.title(),
-          "usernameAutocomplete", username.getAttribute("autocomplete"),
-          "usernameAutofocus", true,
-          "passwordAutocomplete", password.getAttribute("autocomplete"),
-          "passwordValue", "",
-          "csrf", "<TOKEN>",
-          "securityHeaders", securityHeaders(response)));
+      sink.write(
+          "CHR-A01",
+          map(
+              "statusCode", response.status(),
+              "title", page.title(),
+              "usernameAutocomplete", username.getAttribute("autocomplete"),
+              "usernameAutofocus", true,
+              "passwordAutocomplete", password.getAttribute("autocomplete"),
+              "passwordValue", "",
+              "csrf", "<TOKEN>",
+              "securityHeaders", securityHeaders(response)));
     }
   }
 
@@ -135,19 +140,33 @@ class CurrentCharacterizationTest {
           List.of(true, true, true),
           sessionActive,
           "DIF-016 current observation; redirects=" + sessionRedirects);
-      sink.write("CHR-A02", map(
-          "userFailureLimit", 5,
-          "ipFailureLimit", 10,
-          "lockMinutes", 15,
-          "successClearsPriorFailures", true,
-          "lockedRedirect", "/login?locked",
-          "configuredMaximumSessions", 2,
-          "observedActiveSessionCount", 3,
-          "oldestSessionInvalidated", false,
-          "sessionActiveOldestToNewest", sessionActive,
-          "sessionRedirectsOldestToNewest", sessionRedirects,
-          "knownDifference", "DIF-016",
-          "credentialValuesRecorded", false));
+      sink.write(
+          "CHR-A02",
+          map(
+              "userFailureLimit",
+              5,
+              "ipFailureLimit",
+              10,
+              "lockMinutes",
+              15,
+              "successClearsPriorFailures",
+              true,
+              "lockedRedirect",
+              "/login?locked",
+              "configuredMaximumSessions",
+              2,
+              "observedActiveSessionCount",
+              3,
+              "oldestSessionInvalidated",
+              false,
+              "sessionActiveOldestToNewest",
+              sessionActive,
+              "sessionRedirectsOldestToNewest",
+              sessionRedirects,
+              "knownDifference",
+              "DIF-016",
+              "credentialValuesRecorded",
+              false));
     } finally {
       sessions.forEach(BrowserContext::close);
     }
@@ -176,7 +195,10 @@ class CurrentCharacterizationTest {
     int missingCsrfStatus;
     try (BrowserContext context = context(false)) {
       Page page = login(context, environment.secondaryCredential());
-      APIResponse noCsrf = context.request().post(environment.baseUrl() + "/logout", RequestOptions.create().setMaxRedirects(0));
+      APIResponse noCsrf =
+          context
+              .request()
+              .post(environment.baseUrl() + "/logout", RequestOptions.create().setMaxRedirects(0));
       assertEquals(403, noCsrf.status());
       missingCsrfStatus = noCsrf.status();
       page.navigate(environment.baseUrl() + "/");
@@ -185,12 +207,14 @@ class CurrentCharacterizationTest {
       assertTrue(page.url().contains("/login?logout"));
       page.navigate(environment.baseUrl() + "/search");
       assertTrue(page.url().contains("/login"));
-      sink.write("CHR-A03", map(
-          "logoutMethod", "POST",
-          "missingCsrfStatus", noCsrf.status(),
-          "logoutRedirect", "/login?logout",
-          "protectedGetAfterLogout", "/login",
-          "sessionTimeout", "8h"));
+      sink.write(
+          "CHR-A03",
+          map(
+              "logoutMethod", "POST",
+              "missingCsrfStatus", noCsrf.status(),
+              "logoutRedirect", "/login?logout",
+              "protectedGetAfterLogout", "/login",
+              "sessionTimeout", "8h"));
     }
     recordSupplemental(
         "CHR-A03",
@@ -226,24 +250,38 @@ class CurrentCharacterizationTest {
       desktopCards = texts(page.locator("nav.menu-grid a.menu-item strong"));
       assertEquals(List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "ログ照会"), desktopCards);
       Path path = sink.screenshot("CHR-U01", "desktop");
-      desktopScreenshot = page.screenshot(new Page.ScreenshotOptions().setPath(path).setFullPage(true));
+      desktopScreenshot =
+          page.screenshot(new Page.ScreenshotOptions().setPath(path).setFullPage(true));
     }
     int mobileColumns;
     byte[] mobileScreenshot;
     try (BrowserContext context = mobileContext()) {
       Page page = login(context, environment.secondaryCredential());
-      mobileColumns = ((Number) page.locator("nav.menu-grid").evaluate("e => getComputedStyle(e).gridTemplateColumns.split(' ').length")).intValue();
+      mobileColumns =
+          ((Number)
+                  page.locator("nav.menu-grid")
+                      .evaluate("e => getComputedStyle(e).gridTemplateColumns.split(' ').length"))
+              .intValue();
       Path path = sink.screenshot("CHR-U01", "mobile");
-      mobileScreenshot = page.screenshot(new Page.ScreenshotOptions().setPath(path).setFullPage(true));
+      mobileScreenshot =
+          page.screenshot(new Page.ScreenshotOptions().setPath(path).setFullPage(true));
     }
     assertEquals(1, mobileColumns);
-    sink.write("CHR-U01", map(
-        "brand", "schubert",
-        "cards", desktopCards,
-        "desktopColumns", 2,
-        "mobileColumns", mobileColumns,
-        "desktopScreenshotSha256", ArtifactSink.sha256(desktopScreenshot),
-        "mobileScreenshotSha256", ArtifactSink.sha256(mobileScreenshot)));
+    sink.write(
+        "CHR-U01",
+        map(
+            "brand",
+            "schubert",
+            "cards",
+            desktopCards,
+            "desktopColumns",
+            2,
+            "mobileColumns",
+            mobileColumns,
+            "desktopScreenshotSha256",
+            ArtifactSink.sha256(desktopScreenshot),
+            "mobileScreenshotSha256",
+            ArtifactSink.sha256(mobileScreenshot)));
   }
 
   @Test
@@ -260,22 +298,23 @@ class CurrentCharacterizationTest {
       }
       page.navigate(environment.baseUrl() + "/search");
       page.locator("input[name=q]").focus();
-      String focusOutline = (String) page.locator("input[name=q]").evaluate("e => getComputedStyle(e).outlineStyle");
-      String bodyColor =
-          (String) page.locator("body").evaluate("e => getComputedStyle(e).color");
+      String focusOutline =
+          (String) page.locator("input[name=q]").evaluate("e => getComputedStyle(e).outlineStyle");
+      String bodyColor = (String) page.locator("body").evaluate("e => getComputedStyle(e).color");
       String fontStatus =
-          (String)
-              page.evaluate("() => document.fonts.ready.then(() => document.fonts.status)");
+          (String) page.evaluate("() => document.fonts.ready.then(() => document.fonts.status)");
       page.navigate(environment.baseUrl() + "/search?q=__CHARACTERIZATION_NO_MATCH__");
       String emptyText = ArtifactSink.compact(page.locator("section.results").innerText());
       String emptyDisplay =
           (String) page.locator("section.results").evaluate("e => getComputedStyle(e).display");
-      sink.write("CHR-U02", map(
-          "titles", titles,
-          "navLinkCounts", navCounts,
-          "focusOutlineStyle", focusOutline,
-          "stylesheet", "/styles.css",
-          "language", "ja"));
+      sink.write(
+          "CHR-U02",
+          map(
+              "titles", titles,
+              "navLinkCounts", navCounts,
+              "focusOutlineStyle", focusOutline,
+              "stylesheet", "/styles.css",
+              "language", "ja"));
       try (BrowserContext anonymous = context(false)) {
         Page errorPage = anonymous.newPage();
         errorPage.navigate(environment.baseUrl() + "/login?error");
@@ -313,9 +352,12 @@ class CurrentCharacterizationTest {
   void chrS01SearchFilters() throws Exception {
     try (BrowserContext context = context(false)) {
       Page page = login(context, environment.secondaryCredential());
-      page.navigate(environment.baseUrl() + "/search?game=NUKITASHI1&entry_type=dialogue&voice=with");
+      page.navigate(
+          environment.baseUrl() + "/search?game=NUKITASHI1&entry_type=dialogue&voice=with");
       int resultCount = page.locator("article.result").count();
-      long databaseCount = environment.queryLong("SELECT count(*) FROM scenario.script_entries e JOIN scenario.games g ON g.id=e.game_id WHERE g.code='NUKITASHI1' AND e.entry_type='dialogue' AND e.has_voice");
+      long databaseCount =
+          environment.queryLong(
+              "SELECT count(*) FROM scenario.script_entries e JOIN scenario.games g ON g.id=e.game_id WHERE g.code='NUKITASHI1' AND e.entry_type='dialogue' AND e.has_voice");
       assertEquals((int) Math.min(100, databaseCount), resultCount);
       Map<String, Object> filterObservations = new TreeMap<>();
       observeSearchCount(
@@ -337,19 +379,21 @@ class CurrentCharacterizationTest {
           "voice",
           filterObservations);
       filterObservations.put(
-          "combined",
-          map("databaseCount", databaseCount, "pageCount", resultCount));
-      recordSupplemental(
+          "combined", map("databaseCount", databaseCount, "pageCount", resultCount));
+      recordSupplemental("CHR-S01", "individual-and-combined-filters", "PASS", filterObservations);
+      sink.write(
           "CHR-S01",
-          "individual-and-combined-filters",
-          "PASS",
-          filterObservations);
-      sink.write("CHR-S01", map(
-          "filters", map("game", "NUKITASHI1", "entryType", "dialogue", "voice", "with"),
-          "totalCount", databaseCount,
-          "pageResultCount", resultCount,
-          "firstResults", firstTexts(page.locator("article.result"), 5),
-          "pageSize", 100));
+          map(
+              "filters",
+              map("game", "NUKITASHI1", "entryType", "dialogue", "voice", "with"),
+              "totalCount",
+              databaseCount,
+              "pageResultCount",
+              resultCount,
+              "firstResults",
+              firstTexts(page.locator("article.result"), 5),
+              "pageSize",
+              100));
     }
   }
 
@@ -372,11 +416,17 @@ class CurrentCharacterizationTest {
       submitButtons = page.locator("form.filters button[type=submit]").count();
     }
     assertEquals(1, submitButtons);
-    sink.write("CHR-S02", map(
-        "speakerOptionCount", speakers.size(),
-        "firstSpeakerOptions", speakers.stream().limit(10).toList(),
-        "gameOnchange", onchange,
-        "javascriptDisabledSubmitButton", true));
+    sink.write(
+        "CHR-S02",
+        map(
+            "speakerOptionCount",
+            speakers.size(),
+            "firstSpeakerOptions",
+            speakers.stream().limit(10).toList(),
+            "gameOnchange",
+            onchange,
+            "javascriptDisabledSubmitButton",
+            true));
   }
 
   @Test
@@ -392,13 +442,15 @@ class CurrentCharacterizationTest {
       List<String> finalRows = firstTexts(page.locator("article.result"), 5);
       assertTrue(pageZero.contains("page 1 of"));
       assertFalse(finalRows.isEmpty());
-      sink.write("CHR-S03", map(
-          "pageZeroNormalized", pageZero,
-          "firstPageRows", firstPage,
-          "overPageNormalized", finalPage,
-          "finalPageRows", finalRows,
-          "negativeAndZeroPolicy", "page 1",
-          "overPolicy", "last page"));
+      sink.write(
+          "CHR-S03",
+          map(
+              "pageZeroNormalized", pageZero,
+              "firstPageRows", firstPage,
+              "overPageNormalized", finalPage,
+              "finalPageRows", finalRows,
+              "negativeAndZeroPolicy", "page 1",
+              "overPolicy", "last page"));
     }
   }
 
@@ -412,10 +464,13 @@ class CurrentCharacterizationTest {
       int pagination = page.locator("nav.pagination").count();
       assertEquals(0, results);
       assertEquals(0, pagination);
-      sink.write("CHR-S04", map(
-          "resultCount", results,
-          "paginationCount", pagination,
-          "emptyVisibleText", ArtifactSink.compact(page.locator("section.results").innerText())));
+      sink.write(
+          "CHR-S04",
+          map(
+              "resultCount", results,
+              "paginationCount", pagination,
+              "emptyVisibleText",
+                  ArtifactSink.compact(page.locator("section.results").innerText())));
     }
   }
 
@@ -431,7 +486,9 @@ class CurrentCharacterizationTest {
       List<String> n1Routes = texts(page.locator("a.scenario-link"));
       page.navigate(environment.baseUrl() + "/scenarios/NUKITASHI2");
       List<String> n2Routes = texts(page.locator("a.scenario-link"));
-      sink.write("CHR-S05", map("games", games, "nukitashi1Routes", n1Routes, "nukitashi2Routes", n2Routes));
+      sink.write(
+          "CHR-S05",
+          map("games", games, "nukitashi1Routes", n1Routes, "nukitashi2Routes", n2Routes));
       long fixtureId = environment.createUnclassifiedRouteFixture();
       try {
         page.navigate(environment.baseUrl() + "/scenarios/NUKITASHI2");
@@ -463,11 +520,13 @@ class CurrentCharacterizationTest {
       page.navigate(environment.baseUrl() + "/scenarios/NUKITASHI1/01");
       List<String> files = texts(page.locator("a.scenario-link"));
       assertFalse(files.isEmpty());
-      sink.write("CHR-S06", map(
-          "route", "NUKITASHI1/01",
-          "fileCount", files.size(),
-          "firstFiles", files.stream().limit(10).toList(),
-          "firstHrefs", firstAttributes(page.locator("a.scenario-link"), "href", 10)));
+      sink.write(
+          "CHR-S06",
+          map(
+              "route", "NUKITASHI1/01",
+              "fileCount", files.size(),
+              "firstFiles", files.stream().limit(10).toList(),
+              "firstHrefs", firstAttributes(page.locator("a.scenario-link"), "href", 10)));
     }
   }
 
@@ -481,12 +540,14 @@ class CurrentCharacterizationTest {
       page.navigate(environment.baseUrl() + href);
       List<String> entries = firstTexts(page.locator("article.script-entry"), 8);
       assertFalse(entries.isEmpty());
-      sink.write("CHR-S07", map(
-          "title", page.locator("h1").innerText(),
-          "displayPath", page.locator(".subtitle").innerText(),
-          "entryCount", page.locator("article.script-entry").count(),
-          "firstEntries", entries,
-          "navigation", texts(page.locator("nav.scenario-nav").first().locator("a,span"))));
+      sink.write(
+          "CHR-S07",
+          map(
+              "title", page.locator("h1").innerText(),
+              "displayPath", page.locator(".subtitle").innerText(),
+              "entryCount", page.locator("article.script-entry").count(),
+              "firstEntries", entries,
+              "navigation", texts(page.locator("nav.scenario-nav").first().locator("a,span"))));
       page.navigate(environment.baseUrl() + "/search?voice=with");
       String anchoredHref =
           page.locator("a.scenario-open[href*='#entry-']").first().getAttribute("href");
@@ -496,8 +557,7 @@ class CurrentCharacterizationTest {
       assertTrue(target.count() >= 1);
       String background =
           (String) target.first().evaluate("e => getComputedStyle(e).backgroundColor");
-      String border =
-          (String) target.first().evaluate("e => getComputedStyle(e).borderTopStyle");
+      String border = (String) target.first().evaluate("e => getComputedStyle(e).borderTopStyle");
       assertFalse(background.isBlank());
       assertEquals("solid", border);
       recordSupplemental(
@@ -505,18 +565,25 @@ class CurrentCharacterizationTest {
           "anchor-highlight",
           "PASS",
           map(
-              "source", "first voiced search result",
-              "fragmentPresent", true,
-              "targetCount", target.count(),
-              "backgroundColor", background,
-              "borderStyle", border));
+              "source",
+              "first voiced search result",
+              "fragmentPresent",
+              true,
+              "targetCount",
+              target.count(),
+              "backgroundColor",
+              background,
+              "borderStyle",
+              border));
     }
   }
 
   @Test
   @Order(13)
   void chrS08ScenarioAudioGrouping() throws Exception {
-    long fileId = environment.queryLong("SELECT e.script_file_id FROM scenario.script_entries e JOIN scenario.entry_audio_links l ON l.entry_id=e.id ORDER BY e.script_file_id,e.entry_index LIMIT 1");
+    long fileId =
+        environment.queryLong(
+            "SELECT e.script_file_id FROM scenario.script_entries e JOIN scenario.entry_audio_links l ON l.entry_id=e.id ORDER BY e.script_file_id,e.entry_index LIMIT 1");
     try (BrowserContext context = context(false)) {
       Page page = login(context, environment.secondaryCredential());
       page.navigate(environment.baseUrl() + "/scenarios/" + fileId);
@@ -525,13 +592,21 @@ class CurrentCharacterizationTest {
       int bodies = page.locator("article.script-entry > p").count();
       assertTrue(audioPlayers > 0);
       assertEquals(entries, bodies);
-      sink.write("CHR-S08", map(
-          "logicalFile", "first-file-with-audio",
-          "entryCount", entries,
-          "bodyCount", bodies,
-          "audioPlayerCount", audioPlayers,
-          "downloadLinkCount", page.locator("article.script-entry a.download").count(),
-          "bodyOncePerRenderedEntry", true));
+      sink.write(
+          "CHR-S08",
+          map(
+              "logicalFile",
+              "first-file-with-audio",
+              "entryCount",
+              entries,
+              "bodyCount",
+              bodies,
+              "audioPlayerCount",
+              audioPlayers,
+              "downloadLinkCount",
+              page.locator("article.script-entry a.download").count(),
+              "bodyOncePerRenderedEntry",
+              true));
 
       CharacterizationEnvironment.MultipleVoiceFixture fixture =
           environment.createMultipleVoiceFixture();
@@ -561,12 +636,18 @@ class CurrentCharacterizationTest {
             "multiple-voice-fixture",
             "PASS",
             map(
-                "fixture", "temporary second voice link on a logical entry",
-                "linkedVoiceCount", 2,
-                "renderedEntryRows", renderedRows,
-                "renderedBodies", renderedBodies,
-                "renderedAudioPlayers", renderedAudio,
-                "currentObservation", "body repeats per voice (DIF-009)"));
+                "fixture",
+                "temporary second voice link on a logical entry",
+                "linkedVoiceCount",
+                2,
+                "renderedEntryRows",
+                renderedRows,
+                "renderedBodies",
+                renderedBodies,
+                "renderedAudioPlayers",
+                renderedAudio,
+                "currentObservation",
+                "body repeats per voice (DIF-009)"));
       } finally {
         environment.deleteMultipleVoiceFixture(fixture);
       }
@@ -579,15 +660,18 @@ class CurrentCharacterizationTest {
     long audioId = environment.queryLong("SELECT id FROM scenario.audio_files ORDER BY id LIMIT 1");
     try (BrowserContext context = loggedInContext()) {
       APIResponse inline = context.request().get(environment.baseUrl() + "/audio/" + audioId);
-      APIResponse download = context.request().get(environment.baseUrl() + "/audio/" + audioId + "/download");
+      APIResponse download =
+          context.request().get(environment.baseUrl() + "/audio/" + audioId + "/download");
       APIResponse missing = context.request().get(environment.baseUrl() + "/audio/999999999999");
       assertEquals(200, inline.status());
       assertEquals(200, download.status());
       assertEquals(404, missing.status());
-      sink.write("CHR-M01", map(
-          "inline", responseSummary(inline, true),
-          "download", responseSummary(download, true),
-          "missingStatus", missing.status()));
+      sink.write(
+          "CHR-M01",
+          map(
+              "inline", responseSummary(inline, true),
+              "download", responseSummary(download, true),
+              "missingStatus", missing.status()));
     }
   }
 
@@ -605,15 +689,25 @@ class CurrentCharacterizationTest {
       assertEquals(15, main.size() + subtracks);
       assertEquals(4, ova.size());
       logicalVideoCount = 20;
-      sink.write("CHR-M02", map(
-          "mainRows", main,
-          "mainCount", main.size(),
-          "subtrackCount", subtracks,
-          "mainAndSubtrackCount", main.size() + subtracks,
-          "ova", ova,
-          "ovaCount", ova.size(),
-          "openingCount", 1,
-          "logicalVideoCount", 20));
+      sink.write(
+          "CHR-M02",
+          map(
+              "mainRows",
+              main,
+              "mainCount",
+              main.size(),
+              "subtrackCount",
+              subtracks,
+              "mainAndSubtrackCount",
+              main.size() + subtracks,
+              "ova",
+              ova,
+              "ovaCount",
+              ova.size(),
+              "openingCount",
+              1,
+              "logicalVideoCount",
+              20));
     }
   }
 
@@ -627,13 +721,16 @@ class CurrentCharacterizationTest {
       page.navigate(environment.baseUrl() + "/animation/main");
       String href = page.locator("a.animation-main-link").first().getAttribute("href");
       page.navigate(environment.baseUrl() + href);
-      String aspectRatio = (String) page.locator("video").evaluate("e => getComputedStyle(e).aspectRatio");
-      sink.write("CHR-M03", map(
-          "opening", opening,
-          "firstMainTitle", page.locator("h1").innerText(),
-          "categoryPath", page.locator(".subtitle").innerText(),
-          "backLinks", texts(page.locator("nav.nav-links a")),
-          "aspectRatio", aspectRatio));
+      String aspectRatio =
+          (String) page.locator("video").evaluate("e => getComputedStyle(e).aspectRatio");
+      sink.write(
+          "CHR-M03",
+          map(
+              "opening", opening,
+              "firstMainTitle", page.locator("h1").innerText(),
+              "categoryPath", page.locator(".subtitle").innerText(),
+              "backLinks", texts(page.locator("nav.nav-links a")),
+              "aspectRatio", aspectRatio));
     }
   }
 
@@ -646,11 +743,26 @@ class CurrentCharacterizationTest {
       String media = page.locator("video").getAttribute("src");
       APIRequestContext request = context.request();
       APIResponse full = request.get(environment.baseUrl() + media);
-      APIResponse first = request.get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=0-1023"));
-      APIResponse capped = request.get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=0-2097151"));
-      APIResponse suffix = request.get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=-1024"));
-      APIResponse multiple = request.get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=0-9,20-29"));
-      APIResponse invalid = request.get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=999999999999-"));
+      APIResponse first =
+          request.get(
+              environment.baseUrl() + media,
+              RequestOptions.create().setHeader("Range", "bytes=0-1023"));
+      APIResponse capped =
+          request.get(
+              environment.baseUrl() + media,
+              RequestOptions.create().setHeader("Range", "bytes=0-2097151"));
+      APIResponse suffix =
+          request.get(
+              environment.baseUrl() + media,
+              RequestOptions.create().setHeader("Range", "bytes=-1024"));
+      APIResponse multiple =
+          request.get(
+              environment.baseUrl() + media,
+              RequestOptions.create().setHeader("Range", "bytes=0-9,20-29"));
+      APIResponse invalid =
+          request.get(
+              environment.baseUrl() + media,
+              RequestOptions.create().setHeader("Range", "bytes=999999999999-"));
       assertEquals(200, full.status());
       assertEquals(206, first.status());
       assertEquals(1024, first.body().length);
@@ -671,26 +783,37 @@ class CurrentCharacterizationTest {
           "multi-range-first",
           "PASS",
           map(
-              "request", "bytes=0-9,20-29",
-              "status", multiple.status(),
-              "bodyBytes", multiple.body().length,
-              "contentRange", header(multiple, "content-range")));
+              "request",
+              "bytes=0-9,20-29",
+              "status",
+              multiple.status(),
+              "bodyBytes",
+              multiple.body().length,
+              "contentRange",
+              header(multiple, "content-range")));
       recordSupplemental(
           "CHR-E01",
           "http-416",
           "PASS",
           map(
-              "sourceCase", "CHR-M04",
-              "currentStatus", invalid.status(),
-              "currentContentRange", header(invalid, "content-range"),
-              "nkExpectedStatus", 416,
-              "knownDifference", "DIF-012"));
-      sink.write("CHR-M04", map(
-          "firstRange", responseSummary(first, true),
-          "cappedRange", responseSummary(capped, true),
-          "suffixRange", responseSummary(suffix, true),
-          "invalidRange", responseSummary(invalid, false),
-          "maximumChunkBytes", 1048576));
+              "sourceCase",
+              "CHR-M04",
+              "currentStatus",
+              invalid.status(),
+              "currentContentRange",
+              header(invalid, "content-range"),
+              "nkExpectedStatus",
+              416,
+              "knownDifference",
+              "DIF-012"));
+      sink.write(
+          "CHR-M04",
+          map(
+              "firstRange", responseSummary(first, true),
+              "cappedRange", responseSummary(capped, true),
+              "suffixRange", responseSummary(suffix, true),
+              "invalidRange", responseSummary(invalid, false),
+              "maximumChunkBytes", 1048576));
     }
   }
 
@@ -713,7 +836,9 @@ class CurrentCharacterizationTest {
       }
       assertEquals(129, totalTracks);
       logicalMusicCount = totalTracks;
-      sink.write("CHR-M05", map("categories", categories, "sections", sections, "trackCount", totalTracks));
+      sink.write(
+          "CHR-M05",
+          map("categories", categories, "sections", sections, "trackCount", totalTracks));
     }
   }
 
@@ -734,11 +859,13 @@ class CurrentCharacterizationTest {
         instrumentalPlayers += page.locator(".song-player:has-text('インスト')").count();
       }
       assertFalse(pairs.isEmpty());
-      sink.write("CHR-M06", map(
-          "pairCount", pairs.size(),
-          "pairs", pairs,
-          "mainPlayerCount", mainPlayers,
-          "instrumentalPlayerCount", instrumentalPlayers));
+      sink.write(
+          "CHR-M06",
+          map(
+              "pairCount", pairs.size(),
+              "pairs", pairs,
+              "mainPlayerCount", mainPlayers,
+              "instrumentalPlayerCount", instrumentalPlayers));
     }
   }
 
@@ -752,15 +879,27 @@ class CurrentCharacterizationTest {
       page.navigate(environment.baseUrl() + section);
       String media = page.locator("audio").first().getAttribute("src");
       String download = page.locator("a.download").first().getAttribute("href");
-      APIResponse range = context.request().get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=0-1023"));
-      APIResponse invalid = context.request().get(environment.baseUrl() + media, RequestOptions.create().setHeader("Range", "bytes=999999999999-"));
+      APIResponse range =
+          context
+              .request()
+              .get(
+                  environment.baseUrl() + media,
+                  RequestOptions.create().setHeader("Range", "bytes=0-1023"));
+      APIResponse invalid =
+          context
+              .request()
+              .get(
+                  environment.baseUrl() + media,
+                  RequestOptions.create().setHeader("Range", "bytes=999999999999-"));
       APIResponse attachment = context.request().get(environment.baseUrl() + download);
       assertEquals(206, range.status());
       assertTrue(header(attachment, "content-disposition").contains("filename*=UTF-8''"));
-      sink.write("CHR-M07", map(
-          "range", responseSummary(range, true),
-          "invalidRange", responseSummary(invalid, false),
-          "download", responseSummary(attachment, false)));
+      sink.write(
+          "CHR-M07",
+          map(
+              "range", responseSummary(range, true),
+              "invalidRange", responseSummary(invalid, false),
+              "download", responseSummary(attachment, false)));
     }
   }
 
@@ -772,7 +911,8 @@ class CurrentCharacterizationTest {
       Page page = login(context, environment.secondaryCredential());
       page.navigate(environment.baseUrl() + "/search?q=%E6%84%9B");
       page.navigate(environment.baseUrl() + "/logs?log_type=ACTION&page=1");
-      List<String> actions = queryStrings("SELECT coalesce(action,'') FROM scenario.app_logs ORDER BY id");
+      List<String> actions =
+          queryStrings("SELECT coalesce(action,'') FROM scenario.app_logs ORDER BY id");
       List<String> types = queryStrings("SELECT log_type FROM scenario.app_logs ORDER BY id");
       int displayed = page.locator("article.log-row").count();
       assertFalse(actions.isEmpty());
@@ -783,13 +923,21 @@ class CurrentCharacterizationTest {
           map(
               "currentArchitecture", "direct current-process database logging",
               "nkRequirement", "Web log outbox retry with Broker/API outage"));
-      sink.write("CHR-L01", map(
-          "databaseActions", actions,
-          "databaseTypes", types,
-          "displayedRows", displayed,
-          "pageSize", 100,
-          "sort", "logged_at desc,id desc",
-          "detailsElements", page.locator("article.log-row details.log-details").count()));
+      sink.write(
+          "CHR-L01",
+          map(
+              "databaseActions",
+              actions,
+              "databaseTypes",
+              types,
+              "displayedRows",
+              displayed,
+              "pageSize",
+              100,
+              "sort",
+              "logged_at desc,id desc",
+              "detailsElements",
+              page.locator("article.log-row details.log-details").count()));
     }
   }
 
@@ -798,12 +946,19 @@ class CurrentCharacterizationTest {
   void chrE01ErrorsDoNotLeakSecrets() throws Exception {
     int unauthenticated;
     try (BrowserContext anonymous = context(false)) {
-      APIResponse response = anonymous.request().get(environment.baseUrl() + "/search", RequestOptions.create().setMaxRedirects(0));
+      APIResponse response =
+          anonymous
+              .request()
+              .get(environment.baseUrl() + "/search", RequestOptions.create().setMaxRedirects(0));
       unauthenticated = response.status();
     }
     try (BrowserContext context = loggedInContext()) {
-      APIResponse forbidden = context.request().post(environment.baseUrl() + "/logout", RequestOptions.create().setMaxRedirects(0));
-      APIResponse missing = context.request().get(environment.baseUrl() + "/scenarios/999999999999");
+      APIResponse forbidden =
+          context
+              .request()
+              .post(environment.baseUrl() + "/logout", RequestOptions.create().setMaxRedirects(0));
+      APIResponse missing =
+          context.request().get(environment.baseUrl() + "/scenarios/999999999999");
       String body = missing.text();
       for (CharacterizationEnvironment.Credential credential : environment.credentials()) {
         assertFalse(body.contains(credential.username()));
@@ -818,25 +973,36 @@ class CurrentCharacterizationTest {
           map(
               "currentArchitecture", "no operation-token conflict endpoint",
               "nkRequirement", "409 for same token with different payload"));
-      sink.write("CHR-E01", map(
-          "unauthenticatedStatus", unauthenticated,
-          "csrfFailureStatus", forbidden.status(),
-          "notFoundStatus", missing.status(),
-          "conflictStatus", "NOT_APPLICABLE_CURRENT",
-          "secretLeak", false,
-          "absolutePathLeak", false,
-          "exceptionClassLeak", false));
+      sink.write(
+          "CHR-E01",
+          map(
+              "unauthenticatedStatus",
+              unauthenticated,
+              "csrfFailureStatus",
+              forbidden.status(),
+              "notFoundStatus",
+              missing.status(),
+              "conflictStatus",
+              "NOT_APPLICABLE_CURRENT",
+              "secretLeak",
+              false,
+              "absolutePathLeak",
+              false,
+              "exceptionClassLeak",
+              false));
     }
   }
 
   @Test
   @Order(23)
   void chrN01NkOnlyMetadata() throws Exception {
-    sink.write("CHR-N01", map(
-        "currentApplicability", "NK_ONLY",
-        "currentExecution", "METADATA_SCHEMA_PASS",
-        "nkApplicability", "RUN",
-        "treatedAsSkipped", false));
+    sink.write(
+        "CHR-N01",
+        map(
+            "currentApplicability", "NK_ONLY",
+            "currentExecution", "METADATA_SCHEMA_PASS",
+            "nkApplicability", "RUN",
+            "treatedAsSkipped", false));
   }
 
   @Test
@@ -847,14 +1013,19 @@ class CurrentCharacterizationTest {
       Response before = page.navigate(environment.baseUrl() + "/");
       String cacheControl = header(before, "cache-control");
       environment.stopAppForDependencyTest();
-      APIResponse unavailable = context.request().get(environment.baseUrl() + "/login", RequestOptions.create().setMaxRedirects(0));
+      APIResponse unavailable =
+          context
+              .request()
+              .get(environment.baseUrl() + "/login", RequestOptions.create().setMaxRedirects(0));
       recordSupplemental(
           "CHR-O01",
           "caddy-app-dependency",
           "PASS",
           map(
-              "dependency", "current application",
-              "caddyStatusWhileAppStopped", unavailable.status()));
+              "dependency",
+              "current application",
+              "caddyStatusWhileAppStopped",
+              unavailable.status()));
       recordSupplemental(
           "CHR-E01",
           "http-503",
@@ -875,9 +1046,7 @@ class CurrentCharacterizationTest {
         Response databaseUnavailable =
             page.navigate(
                 environment.baseUrl() + "/search",
-                new Page.NavigateOptions()
-                    .setWaitUntil(WaitUntilState.COMMIT)
-                    .setTimeout(60_000));
+                new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT).setTimeout(60_000));
         assertNotNull(databaseUnavailable);
         databaseUnavailableStatus = databaseUnavailable.status();
         assertTrue(databaseUnavailableStatus >= 500 && databaseUnavailableStatus <= 599);
@@ -891,10 +1060,14 @@ class CurrentCharacterizationTest {
           "database-dependency",
           "PASS",
           map(
-              "dependency", "PostgreSQL",
-              "statusWhileStopped", databaseUnavailableStatus,
-              "postRecoveryLogicalGameCount", databaseProbe,
-              "outageInjection", "controlled PostgreSQL fast stop/start"));
+              "dependency",
+              "PostgreSQL",
+              "statusWhileStopped",
+              databaseUnavailableStatus,
+              "postRecoveryLogicalGameCount",
+              databaseProbe,
+              "outageInjection",
+              "controlled PostgreSQL fast stop/start"));
       recordSupplemental(
           "CHR-O01",
           "mq-api-dependency",
@@ -902,13 +1075,21 @@ class CurrentCharacterizationTest {
           map(
               "currentArchitecture", "no Artemis/API split",
               "nkRequirement", "MQ and API outage matrix"));
-      sink.write("CHR-O01", map(
-          "cacheControl", cacheControl,
-          "dependencyFailureStatus", unavailable.status(),
-          "sessionAfterRestart", "redirect-login",
-          "sessionInvalidated", true,
-          "loginSavedRequestRedirect", "/?continue",
-          "recoveryStatus", 200));
+      sink.write(
+          "CHR-O01",
+          map(
+              "cacheControl",
+              cacheControl,
+              "dependencyFailureStatus",
+              unavailable.status(),
+              "sessionAfterRestart",
+              "redirect-login",
+              "sessionInvalidated",
+              true,
+              "loginSavedRequestRedirect",
+              "/?continue",
+              "recoveryStatus",
+              200));
     }
   }
 
@@ -919,37 +1100,43 @@ class CurrentCharacterizationTest {
   }
 
   private static BrowserContext context(boolean javaScriptDisabled) {
-    return environment.browser().newContext(
-        new Browser.NewContextOptions()
-            .setIgnoreHTTPSErrors(true)
-            .setViewportSize(1366, 768)
-            .setDeviceScaleFactor(1)
-            .setLocale("ja-JP")
-            .setTimezoneId("Asia/Tokyo")
-            .setColorScheme(ColorScheme.LIGHT)
-            .setReducedMotion(ReducedMotion.REDUCE)
-            .setJavaScriptEnabled(!javaScriptDisabled));
+    return environment
+        .browser()
+        .newContext(
+            new Browser.NewContextOptions()
+                .setIgnoreHTTPSErrors(true)
+                .setViewportSize(1366, 768)
+                .setDeviceScaleFactor(1)
+                .setLocale("ja-JP")
+                .setTimezoneId("Asia/Tokyo")
+                .setColorScheme(ColorScheme.LIGHT)
+                .setReducedMotion(ReducedMotion.REDUCE)
+                .setJavaScriptEnabled(!javaScriptDisabled));
   }
 
   private static BrowserContext mobileContext() {
-    return environment.browser().newContext(
-        new Browser.NewContextOptions()
-            .setIgnoreHTTPSErrors(true)
-            .setViewportSize(390, 844)
-            .setDeviceScaleFactor(1)
-            .setLocale("ja-JP")
-            .setTimezoneId("Asia/Tokyo")
-            .setColorScheme(ColorScheme.LIGHT)
-            .setReducedMotion(ReducedMotion.REDUCE));
+    return environment
+        .browser()
+        .newContext(
+            new Browser.NewContextOptions()
+                .setIgnoreHTTPSErrors(true)
+                .setViewportSize(390, 844)
+                .setDeviceScaleFactor(1)
+                .setLocale("ja-JP")
+                .setTimezoneId("Asia/Tokyo")
+                .setColorScheme(ColorScheme.LIGHT)
+                .setReducedMotion(ReducedMotion.REDUCE));
   }
 
-  private static Page login(BrowserContext context, CharacterizationEnvironment.Credential credential) {
+  private static Page login(
+      BrowserContext context, CharacterizationEnvironment.Credential credential) {
     Page page = submitLogin(context, credential);
     assertEquals(environment.baseUrl() + "/", page.url());
     return page;
   }
 
-  private static Page submitLogin(BrowserContext context, CharacterizationEnvironment.Credential credential) {
+  private static Page submitLogin(
+      BrowserContext context, CharacterizationEnvironment.Credential credential) {
     Page page = context.newPage();
     page.navigate(environment.baseUrl() + "/login");
     page.locator("input[name=username]").fill(credential.username());
@@ -973,14 +1160,22 @@ class CurrentCharacterizationTest {
 
   private static Map<String, String> securityHeaders(Response response) {
     Map<String, String> result = new LinkedHashMap<>();
-    for (String name : List.of("strict-transport-security", "x-content-type-options", "x-frame-options", "referrer-policy", "permissions-policy", "content-security-policy")) {
+    for (String name :
+        List.of(
+            "strict-transport-security",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy",
+            "content-security-policy")) {
       result.put(name, header(response, name));
     }
     result.put("server", header(response, "server").isEmpty() ? "ABSENT" : "PRESENT");
     return result;
   }
 
-  private static Map<String, Object> responseSummary(APIResponse response, boolean includeBodyHash) throws Exception {
+  private static Map<String, Object> responseSummary(APIResponse response, boolean includeBodyHash)
+      throws Exception {
     Map<String, Object> summary = new LinkedHashMap<>();
     summary.put("status", response.status());
     summary.put("contentType", header(response, "content-type"));
@@ -1023,18 +1218,16 @@ class CurrentCharacterizationTest {
 
   private static List<String> queryStrings(String sql) throws Exception {
     List<String> result = new ArrayList<>();
-    try (Connection connection = environment.database(); Statement statement = connection.createStatement(); ResultSet rows = statement.executeQuery(sql)) {
+    try (Connection connection = environment.database();
+        Statement statement = connection.createStatement();
+        ResultSet rows = statement.executeQuery(sql)) {
       while (rows.next()) result.add(rows.getString(1));
     }
     return result;
   }
 
   private static void observeSearchCount(
-      Page page,
-      String path,
-      String sql,
-      String label,
-      Map<String, Object> observations)
+      Page page, String path, String sql, String label, Map<String, Object> observations)
       throws Exception {
     page.navigate(environment.baseUrl() + path);
     int pageCount = page.locator("article.result").count();
@@ -1063,8 +1256,10 @@ class CurrentCharacterizationTest {
     if (pairs.length % 2 != 0) throw new IllegalArgumentException("map requires key/value pairs");
     Map<K, V> result = new LinkedHashMap<>();
     for (int index = 0; index < pairs.length; index += 2) {
-      @SuppressWarnings("unchecked") K key = (K) pairs[index];
-      @SuppressWarnings("unchecked") V value = (V) pairs[index + 1];
+      @SuppressWarnings("unchecked")
+      K key = (K) pairs[index];
+      @SuppressWarnings("unchecked")
+      V value = (V) pairs[index + 1];
       result.put(key, value);
     }
     return result;
@@ -1072,7 +1267,8 @@ class CurrentCharacterizationTest {
 
   private static String requiredProperty(String name) {
     String value = System.getProperty(name);
-    if (value == null || value.isBlank()) throw new IllegalArgumentException("missing property: " + name);
+    if (value == null || value.isBlank())
+      throw new IllegalArgumentException("missing property: " + name);
     return value;
   }
 }

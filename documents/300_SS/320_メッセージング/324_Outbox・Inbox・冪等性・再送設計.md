@@ -85,7 +85,7 @@ Inbox・User/IP counter・auth session・snapshotは同一transactionでcommit�
 
 | 処理 | 保存方式 | Replay |
 |---|---|---|
-| Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id` | auth session ciphertextを復号し同context/expiryを返す |
+| Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id`＋初回fixed responseの暗号化snapshot（331 §7.1） | session ciphertextとsnapshotを検査し同context/初回expiry・role/usernameを返す（SSC-013） |
 | Login失敗/lock | 暗号化response snapshot | 同result/retry情報を返す |
 | 参照/list/detail | 暗号化・圧縮済みfixed response body | Header Message/Correlation/sentAtを新response用に再構築しpayloadをdecode/encode |
 | User更新 | `result_ref=USER`＋version/result | 現在値が進んでいても当該操作の保存versionを0200で返す |
@@ -96,8 +96,22 @@ Inbox・User/IP counter・auth session・snapshotは同一transactionでcommit�
 SnapshotはZstandard等の新規native依存を避け、JDK `Deflater` level 3で圧縮後、`api-inbox-response-aes` AES-256-GCM keyで暗号化する。AADはMessage ID、
 response layout/version、owner ID。最大平文1,000,000 byte、最大暗号文1,050,000 byteをCHECK/guardする。圧縮bombを避けdecode時に期待平文上限を設定する。
 
-Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせ、result codeを`0200`とする。
+Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせる。保存済み成功だけresult codeを`0200`とし、確定業務errorは元のerror result/retry/messageを維持する（SSC-013、UI232 §7の0200は成功profile）。
 保存済みbodyをbyte単位でそのまま返して古いheader/correlationを混入させない。
+
+### 6.1 Login replayの凍結・整合検証（SSC-013）
+
+成功も失敗も初回688byte LGNRSP01/001を上記snapshotへ保存する。成功はAUTH_SESSION参照を併記、失敗はNONE。成功の発行時username/role/発行日時/初回8h期限はsnapshotを正とし、現在のuser情報やidle延長後のexpires_atから推測しない。Header/全DATA byte/成功semantic、保存Message相関・layout/version・Inbox state/result/refの組合せを検証する。成功snapshotはauth_sessionsの参照UUID/created_message_id、AADのuser/session、復号context/hash、immutable issued_atと初回8h期限に一致必須。不在・不整合・unknown key・復号不能は9000/運用errorとし保存結果を成功推測しない。
+
+再送は元結果の提示だけであり、新session発行、idle延長、失効解除、password再照合、counter/audit再更新を行わない。後で失効・期限切れ・権限変更されていても元結果を変更せず、通常の認証context検証は現在DB状態を正として拒否/認可する。Web sessionや現在権限をsnapshotだけから認証済みとみなしてはならない。初回0000/確定0101/0106の保存、成功0200・失敗元codeでの新Header再構築を独立byte oracleで検証する。
+
+### 6.2 Logout Inbox（SSC-015）
+
+LOGREQ01はprotocol検証後、raw hashに一致するsessionのUserを先にlockし、Inbox owner用user IDだけを取得する。未失効/既失効/期限切れ/account状態から業務actorを発行せず、このlookupでidle延長/監査/失効更新を行わない。不明contextは0102でInboxを新規保存しない。Known contextはowner付きInboxを開始し、NEWのhandlerだけ312 §4.2の失効専用serviceを呼ぶ。これにより同Message ID再配送の監査重複を防ぐ。別Messageの既失効要求は元revoked_at/0200と当該要求の監査を確定する。
+
+HMACは§3の全Request規約どおりowner decimal、LOGREQ01/001、target `REQUEST:LOGREQ01`、DATA field 0件、tokenなし。header contextはHMACへ混入しない。同一ownerの同Message再送は元操作結果を提示し、別contextを追加失効しない。owner不一致/同ID異metadataは既定の恒久整合error。保持は更新requestとして完了+7日。
+
+初回0000/0200はCOMPLETED、AUTH_SESSION参照UUIDと280byte LOGRSP01暗号化snapshotを既存列へ併記する。既知ownerの0102はERROR/NONE＋snapshot。AADはrequest Message ID/layout/version/owner。Replayはheader/280byte/全DATA semantic/相関・state/refの組合せを検証する。成功では保存header contextのhash、session UUID/owner、revoked=true、元revoked_at（wireはmillis）を参照へ照合し、不在/不整合/鍵不明/復号不能は9000の一時基盤型とする。失敗は0102だけを保持し、後の状態で成功へ置換しない。新response headerのMessage ID/sentAt、再送request Message IDへのcorrelation、当該requestのcontextを設定し、成功だけ0200へ統一する。新たな失効、idle延長、権限付与はしない。
 
 ## 7. Inbox transaction/crash
 
@@ -114,8 +128,9 @@ DB transactionとJMSをXAで結合しない。Inbox replayによりDB先commit�
 
 ### 8.1 Row
 
-331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationはenum
-`ASYNC_WORK`/`DLQ`だけを保存し、実Address文字列を利用者入力から設定しない。
+331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationは
+物理Address `nk.async.work`/`nk.dead.letter`だけを保存する。Javaは閉じた`OutboxDestination`
+（`ASYNC_WORK`/`DLQ`）からこの2値へのみ変換し、実Address文字列を利用者入力から設定しない。
 
 ### 8.2 State
 
@@ -142,9 +157,11 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 ## 9. Web `web_log_outbox`
 
 - HTTP response確定後のWLGEVT01 payloadをWeb log AES-GCM keyで暗号化して保存する。
+- Web dispatcherがlocal outboxを復号し、WLGEVT01のheader/field/semanticを完全decodeして保存rowのMessage ID/Correlation/layout/versionとの一致を検査後、SS 323の固定長平文電文を送信する。暗号鍵とWeb table accessはWebだけが持ち、API ingestは受信電文の検査と冪等INSERTを行う（SSC-007）。
 - Message ID UK、Correlation、layout/version、status/attempt/next/lease、created/sentを持つ。
 - Dispatcher algorithm/backoffはAPI outboxと同じ。HTTP request threadはsendを待たない。
 - API `app_logs.source_message_id` UKが最終重複防止。DuplicateはINSERTせずJMS ACKする。
+- APIは351 §3.3のREQUEST action/Details/表示metadataの正規化を適用し、DB INSERT/duplicate transaction確定後だけlistenerへ正常復帰する（SSC-008）。
 - PENDING/ERRORの本文を管理画面へ表示せず、件数・最古時刻・error codeだけ監視する。
 
 ## 10. Internal work冪等性
@@ -225,3 +242,4 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 | 2026-08-31 | 横断監査でLGNREQ01の認証前Inbox、HMAC、失敗counter/sessionの同一transaction境界を明記。 |
 | 2026-08-31 | 横断監査でHMAC fingerprintを全Requestに必須化し、Inbox response暗号key名をcredential catalogに同期。 |
 | 2026-08-31 | 横断監査でLogin UUIDと業務bigintをInbox result referenceで型別に分離し、Scenario再生成元IDを明記。 |
+| 2026-09-03 | SSC-006によりOutbox destinationの保存値をUI 242/SS 331/DDLの物理Address allowlistへ統一。 |

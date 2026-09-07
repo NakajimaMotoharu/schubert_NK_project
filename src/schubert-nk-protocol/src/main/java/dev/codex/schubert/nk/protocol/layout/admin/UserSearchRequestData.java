@@ -10,11 +10,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts USRREQ01. */
-public record UserSearchRequestData(Optional<String> usernamePrefix,
+public record UserSearchRequestData(
+    Optional<String> usernamePrefix,
     Optional<UserRole> role,
     Optional<UserState> state,
     int page,
-    int pageSize) implements PayloadData {
+    int pageSize)
+    implements PayloadData {
   public UserSearchRequestData {
     Objects.requireNonNull(usernamePrefix, "usernamePrefix");
     Objects.requireNonNull(role, "role");

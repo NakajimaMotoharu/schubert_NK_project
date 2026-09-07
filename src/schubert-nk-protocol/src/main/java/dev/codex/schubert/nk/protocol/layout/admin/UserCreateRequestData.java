@@ -9,11 +9,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts UCRREQ01. */
-public record UserCreateRequestData(String username,
-    String initialPassword,
-    UserRole role,
-    boolean enabled,
-    UUID operationToken) implements PayloadData {
+public record UserCreateRequestData(
+    String username, String initialPassword, UserRole role, boolean enabled, UUID operationToken)
+    implements PayloadData {
   public UserCreateRequestData {
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(initialPassword, "initialPassword");

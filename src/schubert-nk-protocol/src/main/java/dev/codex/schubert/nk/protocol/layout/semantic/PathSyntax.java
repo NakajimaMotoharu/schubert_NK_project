@@ -8,8 +8,7 @@ import java.util.regex.Pattern;
  */
 final class PathSyntax {
   private static final Pattern WINDOWS_DRIVE_PREFIX = Pattern.compile("^[A-Za-z]:");
-  private static final Pattern PARENT_SEGMENT =
-      Pattern.compile("(?:^|[/\\\\])\\.\\.(?:$|[/\\\\])");
+  private static final Pattern PARENT_SEGMENT = Pattern.compile("(?:^|[/\\\\])\\.\\.(?:$|[/\\\\])");
 
   private PathSyntax() {}
 

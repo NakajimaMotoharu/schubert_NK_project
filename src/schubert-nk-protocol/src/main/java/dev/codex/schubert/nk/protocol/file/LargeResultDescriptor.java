@@ -17,7 +17,8 @@ public final class LargeResultDescriptor {
 
   private static final Pattern HASH = Pattern.compile("[0-9a-f]{64}");
   private static final Pattern PATH =
-      Pattern.compile("([0-9]{8})/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\\.ready");
+      Pattern.compile(
+          "([0-9]{8})/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\\.ready");
   private static final DateTimeFormatter DATE =
       DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(ResolverStyle.STRICT);
 
@@ -37,7 +38,8 @@ public final class LargeResultDescriptor {
     }
     long expectedByteLength = Math.multiplyExact(RECORD_LENGTH, (long) recordCount);
     if (byteLength != expectedByteLength) {
-      throw new IllegalArgumentException("large-result byte length differs from record length times count");
+      throw new IllegalArgumentException(
+          "large-result byte length differs from record length times count");
     }
     if (!HASH.matcher(sha256).matches()) {
       throw new IllegalArgumentException("large-result SHA-256 must be lowercase hexadecimal");
@@ -92,11 +94,13 @@ public final class LargeResultDescriptor {
       Matcher matcher = PATH.matcher(relativePath);
       if (matcher.matches()) {
         try {
-          LocalDate.parse(matcher.group(1), DATE);
+          // The matched canonical pattern has a mandatory date capture (BUG-016/YKT-013).
+          LocalDate.parse(Objects.requireNonNull(matcher.group(1), "canonical date"), DATE);
         } catch (DateTimeException exception) {
-          throw new IllegalArgumentException("large-result path contains an invalid JST date", exception);
+          throw new IllegalArgumentException(
+              "large-result path contains an invalid JST date", exception);
         }
-        if (matcher.group(2).equals(fileId.toString())) {
+        if (fileId.toString().equals(matcher.group(2))) {
           return;
         }
       }
