@@ -74,6 +74,15 @@ final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /** Inspect this held directory, not its replaceable configured path; never export the path. */
+  <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(operation, "operation");
+      requireOpen();
+      return execute(Path.of("/proc/self/fd", Integer.toString(descriptor)), operation);
+    }
+  }
+
   <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       return atFile(id, ".part", operation);

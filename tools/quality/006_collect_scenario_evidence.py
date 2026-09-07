@@ -100,6 +100,7 @@ def main():
         "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
                                   "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03",
                                   "PT-SCN-008-A01", "PT-SCN-008-A02", "PT-SCN-008-A03", "PT-SCN-008-A04",
+                                  "PT-SCN-008-A05", "PT-SCN-008-A06",
                                   "PT-SCN-008-R01", "PT-SCN-008-R02", "PT-SCN-008-R03",
                                   "PT-SCN-008-C01", "PT-SCN-008-C02", "PT-SCN-008-C03"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04", "PT-SCN-009"],
