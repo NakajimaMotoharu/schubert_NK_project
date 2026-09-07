@@ -123,7 +123,22 @@ final class OwnedTransferDirectory implements AutoCloseable {
     Objects.requireNonNull(id, "id");
     Objects.requireNonNull(operation, "operation");
     requireOpen();
-    try (EntryHandle entry = new EntryHandle(calls, calls.openEntry(descriptor, id + suffix))) {
+    return withEntry(calls.openEntry(descriptor, id + suffix), operation);
+  }
+
+  /** CREATE_NEW and own the actual inode before starting any writer callback. */
+  <T> T createPart(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(id, "id");
+      Objects.requireNonNull(operation, "operation");
+      requireOpen();
+      return withEntry(calls.createFile(descriptor, id + ".part"), operation);
+    }
+  }
+
+  private <T> T withEntry(int ownedDescriptor, FileOperation<T> operation)
+      throws StorageIoException {
+    try (EntryHandle entry = new EntryHandle(calls, ownedDescriptor)) {
       return execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation);
     } catch (StorageIoException ex) {
       // A close failure makes the operation uncertain. Never leak an original/suppressed path.

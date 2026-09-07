@@ -37,6 +37,20 @@ public final class PayloadCodec {
     return encode(values, errorProfile, Optional.empty());
   }
 
+  /**
+   * Encode one normal record without inventing a DATA/header or applying inline count limits.
+   * Caller validates whole-list sequence semantics separately. SS322/333; PT-SCN-008-W03.
+   */
+  public byte[] encodeRecord(LayoutId layoutId, FieldValueSet record) {
+    Objects.requireNonNull(layoutId, "layoutId");
+    Objects.requireNonNull(record, "record");
+    LayoutFields fields = catalog.require(layoutId);
+    if (fields.layout().recordLength() == 0) {
+      throw new MessageEncodingException("layout has no record area");
+    }
+    return encodeArea(record, fields.recordFields(), false, layoutId, Optional.empty());
+  }
+
   /** Encodes a response using the result-code profile, including layout-specific error fields. */
   public FixedPayload encode(PayloadValues values, ResultCode resultCode) {
     Objects.requireNonNull(resultCode, "resultCode");

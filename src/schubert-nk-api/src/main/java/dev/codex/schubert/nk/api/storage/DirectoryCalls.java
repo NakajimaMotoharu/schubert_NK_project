@@ -11,6 +11,9 @@ interface DirectoryCalls {
    */
   int openEntry(int parent, String name) throws StorageIoException;
 
+  /** Atomically create and own a new 0640 file; never opens/replaces an existing name. */
+  int createFile(int parent, String name) throws StorageIoException;
+
   void createDirectory(int parent, String name) throws StorageIoException;
 
   void publish(int directory, String part, String ready) throws StorageIoException;

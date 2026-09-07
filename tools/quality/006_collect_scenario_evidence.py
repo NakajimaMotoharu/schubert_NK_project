@@ -53,7 +53,8 @@ def main():
             count += len(cases)
             scenario = (".api.persistence.Scenario" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
-                        or ".api.storage." in suite.get("name", ""))
+                        or ".api.storage." in suite.get("name", "")
+                        or ".protocol.codec.ScenarioRecordEncodingTest" in suite.get("name", ""))
             selected = cases if scenario else [c for c in cases if c.get("name", "").startswith("bug036")]
             if selected:
                 clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -102,7 +103,9 @@ def main():
                                   "PT-SCN-008-A01", "PT-SCN-008-A02", "PT-SCN-008-A03", "PT-SCN-008-A04",
                                   "PT-SCN-008-A05", "PT-SCN-008-A06",
                                   "PT-SCN-008-R01", "PT-SCN-008-R02", "PT-SCN-008-R03",
-                                  "PT-SCN-008-C01", "PT-SCN-008-C02", "PT-SCN-008-C03"],
+                                  "PT-SCN-008-C01", "PT-SCN-008-C02", "PT-SCN-008-C03",
+                                  "PT-SCN-008-W01", "PT-SCN-008-W02", "PT-SCN-008-W03",
+                                  "PT-SCN-008-W04", "PT-SCN-008-W05", "PT-SCN-008-W06"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
         "relatedSsc": ["SSC-017", "SSC-018", "SSC-019"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],

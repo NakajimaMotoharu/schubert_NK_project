@@ -28,6 +28,81 @@ class OwnedTransferDirectoryTest {
   @TempDir Path root;
 
   @Test
+  void w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    try (var parent = OwnedTransferDirectory.open(calls, root);
+        var child = parent.openDate(DATE)) {
+      Path part = root.resolve("20260908/" + ID + ".part");
+      Path retained = root.resolve("retained");
+      StorageIdentity expected = identity(root);
+      assertEquals(
+          Boolean.TRUE,
+          child.createPart(
+              ID,
+              handle -> {
+                assertEquals(3, calls.live.size());
+                assertEquals(0100640, Files.getAttribute(handle, "unix:mode"));
+                assertEquals(0L, Files.getAttribute(handle, "unix:size"));
+                Files.move(part, retained);
+                Files.write(part, new byte[] {9}, StandardOpenOption.CREATE_NEW);
+                Files.setPosixFilePermissions(handle, PosixFilePermissions.fromString("rw-r-----"));
+                Files.setAttribute(
+                    handle,
+                    "posix:group",
+                    Files.readAttributes(root, java.nio.file.attribute.PosixFileAttributes.class)
+                        .group());
+                try (var stream = FileChannel.open(handle, StandardOpenOption.WRITE)) {
+                  assertEquals(3, stream.write(ByteBuffer.wrap(new byte[] {1, 2, 3})));
+                  stream.force(true);
+                }
+                StorageAttributeGuard.file(
+                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), expected, 3);
+                return Boolean.TRUE;
+              }));
+      assertEquals(2, calls.live.size());
+      assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(retained));
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(part));
+      AtomicBoolean callback = new AtomicBoolean();
+      failure(
+          StorageIoException.Reason.COLLISION,
+          () -> child.createPart(ID, handle -> callback.getAndSet(true)));
+      assertFalse(callback.get());
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(part));
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    var parent = OwnedTransferDirectory.open(calls, root);
+    try (parent) {
+      assertThrows(NullPointerException.class, () -> parent.createPart(null, path -> Boolean.TRUE));
+      assertThrows(NullPointerException.class, () -> parent.createPart(ID, null));
+      for (int mode = 0; mode < 3; mode++) {
+        int fault = mode;
+        failure(
+            StorageIoException.Reason.UNAVAILABLE,
+            () ->
+                parent.createPart(
+                    ID,
+                    handle -> {
+                      calls.failClose = fault != 0;
+                      if (fault != 1) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                      return Boolean.TRUE;
+                    }));
+        assertEquals(1, calls.live.size());
+        assertTrue(Files.exists(root.resolve(ID + ".part")));
+        assertEquals(0L, Files.size(root.resolve(ID + ".part")));
+        parent.deletePart(ID);
+      }
+    }
+    failure(
+        StorageIoException.Reason.UNAVAILABLE, () -> parent.createPart(ID, path -> Boolean.TRUE));
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
   void a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes() throws Exception {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
@@ -517,6 +592,13 @@ class OwnedTransferDirectoryTest {
     @Override
     public int openEntry(int parent, String name) throws StorageIoException {
       int fd = delegate.openEntry(parent, name);
+      assertTrue(live.add(fd));
+      return fd;
+    }
+
+    @Override
+    public int createFile(int parent, String name) throws StorageIoException {
+      int fd = delegate.createFile(parent, name);
       assertTrue(live.add(fd));
       return fd;
     }

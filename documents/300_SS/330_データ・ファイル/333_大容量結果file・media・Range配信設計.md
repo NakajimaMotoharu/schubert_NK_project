@@ -110,6 +110,8 @@ Linux/glibc、native access、procfs、必要attribute、directory fsync、同fi
 
 Writerのsize/hash再検証では、名前の事前検査とFileChannel openの間の差替えを避けるため、FD相対openat(O_PATH/O_NOFOLLOW/O_CLOEXEC)でentry inodeを先に保持する。O_PATHはsymlink自身も保持できるので、own FDのprocfs magic link経由で得たUnix属性の通常file0640・owner/group・nlink=1・sizeを確認するまでread channelを開かない。確認後も同じ保持inodeのprocfs handleからだけreadし、元entry名は再解決しない。Symlink/device/socketは属性段階で拒否する。Scoped entry FDはcallback完了/例外で必ずcloseし、複合I/O/close故障は外部pathを含まない一時障害へ再構成する。
 
+SSC-019/PG-D-059補足: partの初回作成もopenatのO_CREAT/O_EXCL/O_WRONLY/O_NOFOLLOW/O_CLOEXEC・0640で行い、CREATE_NEW時点からそのinode FDを保持する。生成後の名前再解決からmode/groupの変更先や書込み先を決めない。FileChannelは保持FDのprocfs capabilityから開き、channel/native FDの双方を明示closeする。全件byte配列を準備せず、PayloadCodecの単一record encodeを共用し、全件sequence検証と1件ずつの事前byte検査後、4,800byteずつ再encode/writeする。Data/headerを捏造してfile recordをencodeしない。
+
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。

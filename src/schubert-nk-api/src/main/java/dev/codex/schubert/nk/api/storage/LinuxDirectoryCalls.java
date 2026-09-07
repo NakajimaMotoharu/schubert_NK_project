@@ -22,6 +22,7 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
   private static final int AT_FDCWD = -100;
   private static final int DIRECTORY_FLAGS = 0x10000 | 0x20000 | 0x80000;
   private static final int ENTRY_FLAGS = 0x200000 | 0x20000 | 0x80000;
+  private static final int CREATE_FLAGS = 0x1 | 0x40 | 0x80 | 0x20000 | 0x80000;
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO_OFFSET =
       STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
@@ -175,10 +176,19 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
     return open(parent, segment(name), ENTRY_FLAGS);
   }
 
+  @Override
+  public int createFile(int parent, String name) throws StorageIoException {
+    return open(parent, segment(name), CREATE_FLAGS, 0640);
+  }
+
   private int open(int parent, String name, int flags) throws StorageIoException {
+    return open(parent, name, flags, 0);
+  }
+
+  private int open(int parent, String name, int flags, int mode) throws StorageIoException {
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      return check(open.call(state, parent, arena.allocateFrom(name), flags, 0), state);
+      return check(open.call(state, parent, arena.allocateFrom(name), flags, mode), state);
     }
   }
 
