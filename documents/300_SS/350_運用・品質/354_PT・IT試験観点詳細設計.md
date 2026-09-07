@@ -67,6 +67,8 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 
 SSC-015: Logoutはknown contextのowner lookupからInboxへ入り、同Message再送で失効/監査の追加0、別Messageの既失効0200で元時刻/監査1を確認する。Snapshot/AUTH_SESSION/owner/hash/失効日時の不整合と鍵/DB故障はdeny closed。Known ownerの0102は元error維持、unknown contextはInbox0、通常業務のactor発行/idle延長0。LOGREQにない現在client IPを過去Login IPから補わず、失効監査SQL NULLとLogin/REPLACEDの当該IP維持を負/正常testする。
 
+SSC-016: 固定Clockだけでなく受信→業務入口→Inbox完了→reply構築を各1秒進めるClockで検証する。業務row/critical auditは同時刻、Inbox expiresはcompleted+24h/7d、wire headerは構築時刻、replay DATAは元業務時刻・headerだけ更新、保存期限不変を独立Instant/byteで確認する。
+
 ### 4.3 PT-IDEM・STATE（SS 312・324・332）
 
 | 入力 | 期待 |
