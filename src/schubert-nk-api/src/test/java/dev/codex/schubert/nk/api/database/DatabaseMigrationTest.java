@@ -67,7 +67,7 @@ final class DatabaseMigrationTest {
             "maintenance_cleanup_notifications", 1000,
             "maintenance_cleanup_questions", 1000,
             "maintenance_cleanup_sessions", 1000,
-            "maintenance_cleanup_message_stores", 10000,
+            "maintenance_cleanup_message_stores", 1000,
             "maintenance_cleanup_logs", 10000,
             "maintenance_cleanup_batch_runs", 1000);
     private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
@@ -111,9 +111,9 @@ final class DatabaseMigrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("PT-DB-001 V001-V005 migrate, validate and idempotent rerun")
+    @DisplayName("PT-DB-001 V001-V006 migrate, validate and idempotent rerun")
     void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
-        assertEquals(5, firstMigration.migrationsExecuted);
+        assertEquals(6, firstMigration.migrationsExecuted);
         assertTrue(flyway.validateWithResult().validationSuccessful);
         assertEquals(0, flyway.migrate().migrationsExecuted);
         List<String> applied = Arrays.stream(flyway.info().applied())
@@ -121,7 +121,7 @@ final class DatabaseMigrationTest {
                 .filter(Objects::nonNull)
                 .map(version -> version.getVersion())
                 .toList();
-        assertEquals(List.of("001", "002", "003", "004", "005"), applied);
+        assertEquals(List.of("001", "002", "003", "004", "005", "006"), applied);
         assertEquals(0L, queryLong(ADMIN,
                 "select count(*) from schubert_meta.flyway_schema_history where success = false"));
         assertEquals("nk_owner", queryString(ADMIN,
@@ -576,13 +576,14 @@ final class DatabaseMigrationTest {
                         + "'WLGEVT01','001'," + CIPHER + ",'key-1','ERROR','2026-08-29 00:00:00+00',"
                         + "'2026-08-29 00:00:00+00',null)");
         execute(connection, "set role schubert_batch");
-        assertEquals("3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_message_stores", FIXED_TIME, 10));
+        // BUG-014: two-day-old SENT rows are retained; only the expired Inbox row is removed.
+        assertEquals("1|1|0|OK", cleanupResult(connection, "maintenance_cleanup_message_stores", FIXED_TIME, 10));
         execute(connection, "reset role");
         assertEquals(1L, queryLong(connection,
                 "select count(*) from schubert.request_inbox where message_id in "
                         + "('00000000-0000-0000-0006-000000000001','00000000-0000-0000-0006-000000000003')"));
-        assertEquals(1L, queryLong(connection, "select count(*) from schubert.mq_outbox where id in (921,922)"));
-        assertEquals(1L, queryLong(connection,
+        assertEquals(2L, queryLong(connection, "select count(*) from schubert.mq_outbox where id in (921,922)"));
+        assertEquals(2L, queryLong(connection,
                 "select count(*) from schubert_web_session.web_log_outbox where id in (923,924)"));
     }
 
@@ -677,9 +678,9 @@ final class DatabaseMigrationTest {
         try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
             Future<Integer> first = executor.submit(migrate);
             Future<Integer> second = executor.submit(migrate);
-            assertEquals(5, first.get() + second.get());
+            assertEquals(6, first.get() + second.get());
         }
-        assertEquals(5L, queryLong(ADMIN, parallelUrl,
+        assertEquals(6L, queryLong(ADMIN, parallelUrl,
                 "select count(*) from schubert_meta.flyway_schema_history where success"));
         assertEquals(21L, queryLong(ADMIN, parallelUrl,
                 "select count(*) from information_schema.tables where table_schema in ('schubert','schubert_web_session') "
@@ -694,7 +695,7 @@ final class DatabaseMigrationTest {
         try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
             paths.filter(Files::isRegularFile).forEach(resources::add);
         }
-        assertEquals(6, resources.size());
+        assertEquals(7, resources.size());
         for (Path resource : resources) {
             byte[] bytes = Files.readAllBytes(resource);
             String text = new String(bytes, StandardCharsets.UTF_8);

@@ -62,6 +62,70 @@ final class MessageStoreCleanupTest {
     }
   }
 
+  @Test
+  void sevenDayAndLeaseBoundariesPreserveProtectedRows() throws SQLException {
+    try (var connection = database.admin()) {
+      backup(connection);
+      for (boolean web : List.of(false, true)) {
+        Instant boundary = CUTOFF.minusSeconds(604800);
+        outbox(connection, web, 1, "SENT", boundary.minusNanos(1000), null);
+        outbox(connection, web, 2, "SENT", boundary, null);
+        outbox(connection, web, 3, "SENT", boundary.plusNanos(1000), null);
+        outbox(connection, web, 4, "SENT", boundary.minusNanos(1000), CUTOFF.minusNanos(1000));
+        outbox(connection, web, 5, "SENT", boundary.minusNanos(1000), CUTOFF);
+        outbox(connection, web, 6, "SENT", boundary.minusNanos(1000), CUTOFF.plusNanos(1000));
+        outbox(connection, web, 7, "PENDING", null, null);
+        outbox(connection, web, 8, "ERROR", null, CUTOFF.minusNanos(1000));
+      }
+      assertEquals("4|4|0|OK", cleanup(connection, 1000));
+      for (String table : List.of("schubert.mq_outbox", "schubert_web_session.web_log_outbox")) {
+        try (var statement = connection.createStatement(); var result = statement.executeQuery("select id from " + table + " order by id")) {
+          var ids = new java.util.ArrayList<Long>();
+          while (result.next()) { ids.add(result.getLong(1)); }
+          assertEquals(List.of(2L, 3L, 5L, 6L, 7L, 8L), ids);
+        }
+      }
+      assertEquals("0|0|0|OK", cleanup(connection, 1000));
+      assertEquals(12, rows(connection));
+    }
+  }
+
+  @Test
+  void chunkLimitRollbackAndLockedRowsAreSafe() throws SQLException {
+    try (var connection = database.admin(); var locked = database.admin()) {
+      backup(connection);
+      outbox(connection, false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+      outbox(connection, false, 2, "SENT", CUTOFF.minusSeconds(604801), null);
+      outbox(connection, true, 3, "SENT", CUTOFF.minusSeconds(604801), null);
+      locked.setAutoCommit(false);
+      try (var statement = locked.createStatement(); var result = statement.executeQuery("select id from schubert.mq_outbox where id=1 for update")) {
+        assertTrue(result.next()); assertEquals(1L, result.getLong(1));
+      }
+      connection.setAutoCommit(false);
+      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      assertEquals(2, rows(connection));
+      connection.rollback();
+      assertEquals(3, rows(connection));
+      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      connection.commit();
+      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      connection.commit();
+      assertEquals("0|0|0|OK", cleanup(connection, 1));
+      connection.commit();
+      assertEquals(1, rows(connection));
+      locked.rollback();
+      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      connection.commit();
+      assertEquals(0, rows(connection));
+      assertEquals("0|0|0|OK", cleanup(connection, 1));
+      connection.commit();
+      connection.setAutoCommit(true);
+      for (int invalid : new int[] {0, 1001}) {
+        assertEquals("22023", assertThrows(SQLException.class, () -> cleanup(connection, invalid)).getSQLState());
+      }
+    }
+  }
+
   private static void backup(Connection connection) throws SQLException {
     try (var statement = connection.prepareStatement(
         "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) "
