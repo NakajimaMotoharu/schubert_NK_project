@@ -2,12 +2,22 @@ package dev.codex.schubert.nk.api.security;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.dispatch.JdbcSyncRequestProcessor;
 import dev.codex.schubert.nk.api.domain.Role;
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
+import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.header.*;
 import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import jakarta.jms.BytesMessage;
+import jakarta.jms.DeliveryMode;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.Message;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +25,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -34,6 +45,12 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.sql.DataSource;
+import org.apache.activemq.artemis.core.config.Configuration;
+import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
+import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
@@ -442,6 +459,338 @@ final class LoginInboxServiceTest {
     }
     assertEffects(0, 0, 0);
     assertArrayEquals(new char[PASSWORD.length()], observedPassword.get());
+  }
+
+  @Test
+  void jdbcOwnerCommitsOnlyCompleteBusinessResults() throws Exception {
+    for (boolean valid : new boolean[] {true, false}) {
+      seed();
+      String password = valid ? PASSWORD : "synthetic-wrong";
+      String initial = valid ? "0000" : "0101", repeated = valid ? "0200" : "0101";
+      var connection = database.api();
+      var processor =
+          new JdbcSyncRequestProcessor(
+              source(() -> connection),
+              (c, request, received) -> {
+                assertFalse(c.getAutoCommit());
+                assertEquals(NOW, received);
+                byte[] response = service(NOW).execute(c, request, received);
+                assertEffects(0, 0, 0);
+                return response;
+              },
+              Clock.fixed(NOW, ZoneOffset.UTC));
+      var input = request("利用者", password, "127.0.0.1", REQUEST);
+      assertArrayEquals(
+          expected(initial, new UUID(0, 1000), FIRST_STAMP, 0), processor.process(input));
+      assertTrue(connection.isClosed());
+      assertEffects(1, valid ? 1 : 0, 1);
+      assertEquals(valid ? 0 : 1, scalar("select failed_count from schubert.app_users"));
+      assertArrayEquals(
+          expected(repeated, new UUID(0, 1001), LATER_STAMP, 0),
+          processor(NOW.plusSeconds(60)).process(input));
+      assertEquals(1, passwordChecks.get());
+      assertEffects(1, valid ? 1 : 0, 1);
+    }
+  }
+
+  @Test
+  void jdbcLifecycleFaultsRemainRetryableAndRedacted() throws Exception {
+    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    for (String point :
+        List.of(
+            "open",
+            "begin",
+            "handler-sql",
+            "handler-runtime",
+            "handler-null",
+            "commit-before",
+            "commit-after",
+            "close",
+            "rollback",
+            "rollback-close",
+            "connection-null")) {
+      seed();
+      var commits = new AtomicInteger();
+      var rollbacks = new AtomicInteger();
+      var closes = new AtomicInteger();
+      var connection = new AtomicReference<Connection>();
+      DataSource provider =
+          source(
+              () -> {
+                if (point.equals("open")) throw new SQLException("synthetic-sensitive-connect");
+                if (point.equals("connection-null")) return null;
+                Connection opened = database.api();
+                connection.set(opened);
+                return lifecycle(opened, point, commits, rollbacks, closes);
+              });
+      var processor =
+          new JdbcSyncRequestProcessor(
+              provider,
+              (c, request, received) -> {
+                byte[] result = service(NOW).execute(c, request, received);
+                if (point.equals("handler-runtime"))
+                  throw new IllegalStateException("synthetic-sensitive-application");
+                if (point.equals("handler-null")) return null;
+                if (point.equals("handler-sql") || point.startsWith("rollback"))
+                  throw new SQLException("synthetic-sensitive-handler");
+                return result;
+              },
+              Clock.fixed(NOW, ZoneOffset.UTC));
+      assertTemporary(() -> processor.process(input));
+      boolean committed = point.equals("commit-after") || point.equals("close");
+      assertEffects(committed ? 1 : 0, committed ? 1 : 0, committed ? 1 : 0);
+      boolean opened = !point.equals("open") && !point.equals("connection-null");
+      assertEquals(opened ? 1 : 0, closes.get());
+      if (opened) assertTrue(connection.get().isClosed());
+      assertEquals(
+          List.of("commit-before", "commit-after", "close").contains(point) ? 1 : 0, commits.get());
+      assertEquals(
+          opened && !point.equals("begin") && !point.equals("close") ? 1 : 0, rollbacks.get());
+      if (observedPassword.get() != null)
+        assertArrayEquals(new char[PASSWORD.length()], observedPassword.get());
+      int checksBeforeRetry = passwordChecks.get();
+      byte[] retry = processor(NOW).process(input);
+      assertEquals(committed ? "0200" : "0000", text(retry, 208, 4));
+      assertEffects(1, 1, 1);
+      assertEquals(checksBeforeRetry + (committed ? 0 : 1), passwordChecks.get());
+    }
+    var source = source(database::api);
+    var login = service(NOW);
+    var clock = Clock.fixed(NOW, ZoneOffset.UTC);
+    assertThrows(
+        NullPointerException.class,
+        () -> new JdbcSyncRequestProcessor(null, login::execute, clock));
+    assertThrows(
+        NullPointerException.class, () -> new JdbcSyncRequestProcessor(source, null, clock));
+    assertThrows(
+        NullPointerException.class,
+        () -> new JdbcSyncRequestProcessor(source, login::execute, null));
+    assertThrows(NullPointerException.class, () -> processor(NOW).process(null));
+  }
+
+  @Test
+  void permanentProtocolNeedsConfirmedRollbackAndClose() throws Exception {
+    var input = request("利用者", PASSWORD, "localhost", REQUEST);
+    for (String point : List.of("none", "rollback", "close", "rollback-close")) {
+      var commits = new AtomicInteger();
+      var rollbacks = new AtomicInteger();
+      var closes = new AtomicInteger();
+      var connection = database.api();
+      var processor =
+          new JdbcSyncRequestProcessor(
+              source(() -> lifecycle(connection, point, commits, rollbacks, closes)),
+              service(NOW)::execute,
+              Clock.fixed(NOW, ZoneOffset.UTC));
+      if (point.equals("none")) {
+        var error = assertThrows(PermanentProtocolException.class, () -> processor.process(input));
+        assertEquals("request transaction rejected invalid protocol", error.getMessage());
+        assertNull(error.getCause());
+        assertEquals(0, error.getSuppressed().length);
+      } else assertTemporary(() -> processor.process(input));
+      assertTrue(connection.isClosed());
+      assertEquals(0, commits.get());
+      assertEquals(1, rollbacks.get());
+      assertEquals(1, closes.get());
+      assertEffects(0, 0, 0);
+      assertEquals(0, passwordChecks.get());
+    }
+  }
+
+  @Test
+  void brokerRedeliveryReplaysCommittedLoginWithoutDuplicateEffects(@TempDir Path brokerRoot)
+      throws Exception {
+    Configuration configuration;
+    try (var file = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+      configuration = new FileConfigurationParser().parseMainConfig(file);
+    }
+    configuration
+        .setPagingDirectory(brokerRoot.resolve("paging").toString())
+        .setBindingsDirectory(brokerRoot.resolve("bindings").toString())
+        .setJournalDirectory(brokerRoot.resolve("journal").toString())
+        .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
+        .setSecurityEnabled(false)
+        .clearAcceptorConfigurations()
+        .addAcceptorConfiguration("component", "vm://0");
+    var broker = new EmbeddedActiveMQ().setConfiguration(configuration).start();
+    var requestQueue = new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue());
+    var replyQueue = new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue());
+    var clock = Clock.fixed(NOW, ZoneOffset.UTC);
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var receiver = factory.createContext(JMSContext.SESSION_TRANSACTED);
+        var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var requests = receiver.createConsumer(requestQueue);
+        var replies = observer.createConsumer(replyQueue)) {
+      for (String point : List.of("createProducer", "commit")) {
+        seed();
+        var listener = new SyncRequestListener(processor(NOW), clock);
+        var failing =
+            (JMSContext)
+                Proxy.newProxyInstance(
+                    JMSContext.class.getClassLoader(),
+                    new Class<?>[] {JMSContext.class},
+                    (p, m, a) -> {
+                      if (m.getName().equals(point)) {
+                        assertEffects(1, 1, 1); // Independent connection: DB already committed.
+                        throw new JMSRuntimeException("synthetic transport boundary failure");
+                      }
+                      return invoke(receiver, m, a);
+                    });
+        sendLogin(producer, requestQueue);
+        Message first = requests.receive(5000);
+        assertNotNull(first);
+        assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
+        assertThrows(JMSRuntimeException.class, () -> listener.onMessage(failing, first));
+        assertNull(replies.receive(250));
+        assertEffects(1, 1, 1);
+        assertEquals(1, passwordChecks.get());
+        Message retry = requests.receive(5000);
+        assertNotNull(retry);
+        assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
+        listener.onMessage(receiver, retry);
+        assertReply(replies.receive(5000), "0200", new UUID(0, 1001));
+        assertEffects(1, 1, 1);
+        assertEquals(1, passwordChecks.get());
+        // Independent second send, not broker redelivery and no duplicate-cache property.
+        sendLogin(producer, requestQueue);
+        Message duplicate = requests.receive(5000);
+        assertNotNull(duplicate);
+        assertEquals(1, duplicate.getIntProperty("JMSXDeliveryCount"));
+        listener.onMessage(receiver, duplicate);
+        assertReply(replies.receive(5000), "0200", new UUID(0, 1002));
+        assertEffects(1, 1, 1);
+        assertEquals(1, passwordChecks.get());
+        assertNull(requests.receive(250));
+      }
+      seed();
+      var unavailable =
+          new SyncRequestListener(
+              new JdbcSyncRequestProcessor(
+                  source(
+                      () -> {
+                        throw new SQLException("synthetic-sensitive-outage");
+                      }),
+                  service(NOW)::execute,
+                  clock),
+              clock);
+      sendLogin(producer, requestQueue);
+      Message beforeDb = requests.receive(5000);
+      assertNotNull(beforeDb);
+      assertTemporary(() -> unavailable.onMessage(receiver, beforeDb));
+      assertEffects(0, 0, 0);
+      assertEquals(0, passwordChecks.get());
+      assertNull(replies.receive(250));
+      Message retry = requests.receive(5000);
+      assertNotNull(retry);
+      assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
+      new SyncRequestListener(processor(NOW), clock).onMessage(receiver, retry);
+      assertReply(replies.receive(5000), "0000", new UUID(0, 1000));
+      assertEffects(1, 1, 1);
+      assertEquals(1, passwordChecks.get());
+      assertNull(requests.receive(250));
+      assertNull(replies.receive(250));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  private static void sendLogin(JMSContext context, ActiveMQQueue queue) throws JMSException {
+    // Independent UI232 header plus UI234 DATA offsets; no production encoder constructs input.
+    byte[] body = new byte[640];
+    Arrays.fill(body, (byte) ' ');
+    put(body, 0, "SCHBNK01001LGNREQ01001QS");
+    put(body, 24, REQUEST.toString());
+    put(body, 60, REQUEST.toString());
+    put(body, 96, FIRST_STAMP);
+    put(body, 177, "0256000384000000000000000000640");
+    put(body, 256, "利用者");
+    put(body, 320, PASSWORD);
+    put(body, 576, "127.0.0.1");
+    var message = context.createBytesMessage();
+    message.writeBytes(body);
+    message.setJMSCorrelationID(REQUEST.toString());
+    message.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue()));
+    message.setStringProperty("NKMessageID", REQUEST.toString());
+    message.setStringProperty("NKLayoutID", "LGNREQ01");
+    message.setStringProperty("NKProtocolVersion", "001");
+    context
+        .createProducer()
+        .setDeliveryMode(DeliveryMode.PERSISTENT)
+        .setTimeToLive(5000)
+        .send(queue, message);
+    Arrays.fill(body, (byte) 0);
+  }
+
+  private static void assertReply(Message received, String code, UUID id) throws JMSException {
+    var response = assertInstanceOf(BytesMessage.class, received);
+    assertEquals(688, response.getBodyLength());
+    byte[] body = new byte[688];
+    assertEquals(688, response.readBytes(body));
+    assertArrayEquals(expected(code, id, FIRST_STAMP, 0), body);
+    assertEquals(REQUEST.toString(), response.getJMSCorrelationID());
+    assertEquals(id.toString(), response.getStringProperty("NKMessageID"));
+    assertEquals("LGNRSP01", response.getStringProperty("NKLayoutID"));
+    assertEquals("001", response.getStringProperty("NKProtocolVersion"));
+    assertEquals(DeliveryMode.PERSISTENT, response.getJMSDeliveryMode());
+    Arrays.fill(body, (byte) 0);
+  }
+
+  private JdbcSyncRequestProcessor processor(Instant at) {
+    return new JdbcSyncRequestProcessor(
+        source(database::api), service(at)::execute, Clock.fixed(at, ZoneOffset.UTC));
+  }
+
+  private static void assertTemporary(Executable action) {
+    var error = assertThrows(TemporaryInfrastructureException.class, action);
+    assertEquals("request transaction is unavailable", error.getMessage());
+    assertNull(error.getCause());
+    assertEquals(0, error.getSuppressed().length);
+  }
+
+  private static DataSource source(SqlOpen provider) {
+    return (DataSource)
+        Proxy.newProxyInstance(
+            DataSource.class.getClassLoader(),
+            new Class<?>[] {DataSource.class},
+            (p, m, a) -> {
+              if (m.getName().equals("getConnection")) return provider.open();
+              throw new UnsupportedOperationException(m.getName());
+            });
+  }
+
+  @FunctionalInterface
+  private interface SqlOpen {
+    Connection open() throws SQLException;
+  }
+
+  private static Connection lifecycle(
+      Connection connection,
+      String point,
+      AtomicInteger commits,
+      AtomicInteger rollbacks,
+      AtomicInteger closes) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (p, m, a) -> {
+              String operation = m.getName();
+              if (operation.equals("setAutoCommit") && point.equals("begin"))
+                throw new SQLException("synthetic-sensitive-begin");
+              if (operation.equals("commit")) {
+                commits.incrementAndGet();
+                if (point.equals("commit-before"))
+                  throw new SQLException("synthetic-sensitive-commit");
+              }
+              if (operation.equals("rollback")) rollbacks.incrementAndGet();
+              if (operation.equals("close")) closes.incrementAndGet();
+              Object result = invoke(connection, m, a);
+              if ((operation.equals("commit") && point.equals("commit-after"))
+                  || (operation.equals("rollback") && point.startsWith("rollback"))
+                  || (operation.equals("close") && point.endsWith("close")))
+                throw new SQLException("synthetic-sensitive-lifecycle");
+              return result;
+            });
   }
 
   private AuthenticationService authentication() {
