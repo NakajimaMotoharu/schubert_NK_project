@@ -28,6 +28,61 @@ class OwnedTransferDirectoryTest {
   @TempDir Path root;
 
   @Test
+  void rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation() throws Exception {
+    Path date = Files.createDirectory(root.resolve("20260908"));
+    write(date.resolve(ID + ".ready"));
+    Path outside = Files.createDirectory(root.resolve("outside"));
+    Files.write(outside.resolve(ID + ".ready"), new byte[] {9});
+    var before = Files.readAttributes(date, "unix:owner,group,mode,nlink");
+    FaultCalls calls = new FaultCalls();
+    calls.readOnly = true;
+    var parent = OwnedTransferDirectory.open(calls, root);
+    try (var child = parent.openExistingDate(DATE)) {
+      parent.close();
+      assertEquals(1, calls.live.size());
+      Files.move(date, root.resolve("retained-date"));
+      Files.createSymbolicLink(date, outside);
+      assertEquals(
+          before, child.atDirectory(p -> Files.readAttributes(p, "unix:owner,group,mode,nlink")));
+      assertArrayEquals(
+          new byte[] {1, 2, 3}, child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(outside.resolve(ID + ".ready")));
+      assertTrue(Files.isSymbolicLink(date));
+    } finally {
+      parent.close();
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    calls.readOnly = true;
+    var parent = OwnedTransferDirectory.open(calls, root);
+    try (parent) {
+      assertThrows(NullPointerException.class, () -> parent.openExistingDate(null));
+      for (int year : new int[] {0, 10000}) {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> parent.openExistingDate(LocalDate.of(year, 1, 1)));
+      }
+      failure(StorageIoException.Reason.MISSING, () -> parent.openExistingDate(DATE));
+      Path date = root.resolve("20260908");
+      assertFalse(Files.exists(date));
+      Files.write(date, new byte[] {9});
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingDate(DATE));
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(date));
+      Files.delete(date);
+      Files.createSymbolicLink(date, root);
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingDate(DATE));
+      assertTrue(Files.isSymbolicLink(date));
+      assertEquals(1, calls.live.size());
+    }
+    failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingDate(DATE));
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
   void w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite() throws Exception {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
@@ -283,6 +338,16 @@ class OwnedTransferDirectoryTest {
       OwnedTransferDirectory child;
       synchronized (parent) {
         child = executor.submit(() -> parent.openDate(DATE)).get(5, TimeUnit.SECONDS);
+        assertEquals(
+            Boolean.TRUE,
+            executor
+                .submit(
+                    () -> {
+                      try (var existing = parent.openExistingDate(DATE)) {
+                        return existing.atDirectory(path -> Files.isDirectory(path));
+                      }
+                    })
+                .get(5, TimeUnit.SECONDS));
       }
       synchronized (child) {
         executor
@@ -570,7 +635,7 @@ class OwnedTransferDirectoryTest {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> live = new HashSet<>();
     int closes;
-    boolean failClose, failCreate, failSync;
+    boolean failClose, failCreate, failSync, readOnly;
 
     @Override
     public int openRoot() throws StorageIoException {
@@ -588,6 +653,7 @@ class OwnedTransferDirectoryTest {
 
     @Override
     public void createDirectory(int parent, String name) throws StorageIoException {
+      assertFalse(readOnly, "reader attempted mkdir");
       if (failCreate) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       delegate.createDirectory(parent, name);
     }
@@ -601,6 +667,7 @@ class OwnedTransferDirectoryTest {
 
     @Override
     public int createFile(int parent, String name) throws StorageIoException {
+      assertFalse(readOnly, "reader attempted create");
       int fd = delegate.createFile(parent, name);
       assertTrue(live.add(fd));
       return fd;
@@ -608,16 +675,19 @@ class OwnedTransferDirectoryTest {
 
     @Override
     public void publish(int directory, String part, String ready) throws StorageIoException {
+      assertFalse(readOnly, "reader attempted rename");
       delegate.publish(directory, part, ready);
     }
 
     @Override
     public void unlink(int directory, String name) throws StorageIoException {
+      assertFalse(readOnly, "reader attempted unlink");
       delegate.unlink(directory, name);
     }
 
     @Override
     public void sync(int directory) throws StorageIoException {
+      assertFalse(readOnly, "reader attempted fsync");
       if (failSync) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       delegate.sync(directory);
     }

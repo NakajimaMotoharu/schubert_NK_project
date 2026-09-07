@@ -51,6 +51,23 @@ public final class PayloadCodec {
     return encodeArea(record, fields.recordFields(), false, layoutId, Optional.empty());
   }
 
+  /**
+   * Decode one normal record without fabricating DATA/header. Caller checks file integrity and
+   * whole-list sequence separately. SS322/333; PT-SCN-008-RD02.
+   */
+  public FieldValueSet decodeRecord(LayoutId layoutId, byte[] record) {
+    Objects.requireNonNull(layoutId, "layoutId");
+    Objects.requireNonNull(record, "record");
+    LayoutFields fields = catalog.require(layoutId);
+    if (fields.layout().recordLength() == 0) {
+      throw new PermanentProtocolException("layout has no record area");
+    }
+    if (record.length != fields.layout().recordLength()) {
+      throw new PermanentProtocolException("payload record length differs from its layout");
+    }
+    return decodeArea(record, fields.recordFields(), false, layoutId, Optional.empty());
+  }
+
   /** Encodes a response using the result-code profile, including layout-specific error fields. */
   public FixedPayload encode(PayloadValues values, ResultCode resultCode) {
     Objects.requireNonNull(resultCode, "resultCode");

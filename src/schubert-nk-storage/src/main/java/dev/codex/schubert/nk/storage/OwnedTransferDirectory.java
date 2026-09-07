@@ -55,6 +55,21 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /**
+   * Existing child only; reader never creates, initializes, syncs or repairs a date. RD01/SS333.
+   */
+  public OwnedTransferDirectory openExistingDate(LocalDate date) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(date, "date");
+      requireOpen();
+      if (date.getYear() < 1 || date.getYear() > 9999) {
+        throw new IllegalArgumentException("invalid transfer date");
+      }
+      return new OwnedTransferDirectory(
+          calls, calls.openDirectory(descriptor, date.format(DateTimeFormatter.BASIC_ISO_DATE)));
+    }
+  }
+
   /** New or existing date child, never follows a symlink; child owns an independent FD. */
   public OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
     return openDate(date, handle -> Boolean.TRUE);
