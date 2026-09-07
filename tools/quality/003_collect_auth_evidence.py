@@ -88,7 +88,7 @@ def main():
         "modules": modules, "authenticationMethods": auth_methods,
         "testIdsPassed": ["PT-AUT-001", "PT-AUT-002"],
         "testIdsPartial": {"PT-AUT-003": "immutable counter/window/retry policy only; SQL/restart/transaction remain",
-                           "PT-AUT-005": "ASCII SHA256 lookup hash and startup/concurrency contracts only; context issuance/encryption/replay remain",
+                           "PT-AUT-005": "ASCII SHA256 and AES-GCM envelope/AAD/rotation/tamper/parallel contracts passed; session issuance/replay remain",
                            "PT-AUT-007": "real PostgreSQL verifier/idle/role/state/rollback/concurrency/faults passed; dispatcher/wire error mapping remains",
                            "PT-AUT-008": "actor/role/owner policy matrix only; database revocation/predicates/HTTP remain"},
         "testIdsNotRun": ["PT-AUT-004", "PT-AUT-006", "PT-AUT-009"],
@@ -97,7 +97,7 @@ def main():
         "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw_log).hexdigest(),
         "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",
-        "expectations": "007 PT specification; literal Unicode/Instant/authorization matrix and independent JCA PBKDF2. No production function constructs expected values.",
+        "expectations": "007 PT specification; literal Unicode/Instant/authorization matrix, independent JCA PBKDF2/AES-GCM and DataOutputStream envelope/AAD, independently calculated SHA256 vectors. No production function constructs expected values.",
     }
     (evidence / "logs" / (args.run_id + "-summary.json")).write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
