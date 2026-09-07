@@ -1,0 +1,79 @@
+{
+  "testId": "PT-AUT-003-05",
+  "bug": "BUG-021",
+  "ssc": "SSC-009",
+  "ykt": "YKT-018",
+  "startedAt": "2026-09-07T15:33:36.342038+00:00",
+  "completedAt": "2026-09-07T15:33:36.802000+00:00",
+  "status": "FAIL",
+  "exitCode": 2,
+  "compileCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "-cp",
+    "/home/mini/codex/project1/schubert_project/program/app/target/classes:/home/mini/codex/project1/work/pgpt-window-negative-qRcQTp/classes",
+    "-d",
+    "/home/mini/codex/project1/work/login-window-htebnsjw",
+    "/home/mini/codex/project1/schubert_NK_project/tools/quality/login-boundary-probe/dev/codex/schubert/security/CurrentWindowBoundaryProbe.java"
+  ],
+  "runCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/login-window-htebnsjw:/home/mini/codex/project1/schubert_project/program/app/target/classes:/home/mini/codex/project1/work/pgpt-window-negative-qRcQTp/classes",
+    "dev.codex.schubert.security.CurrentWindowBoundaryProbe"
+  ],
+  "jdk": "openjdk 25.0.4 2026-07-21",
+  "branch": "dev-authentication",
+  "commit": "26cbacfc55bf568c4ab58646cf95bca8dda49f62",
+  "sourceDirty": false,
+  "inputSha256": {
+    "/home/mini/codex/project1/schubert_project/program/app/src/main/java/dev/codex/schubert/security/LoginAttemptService.java": "15f8d1517cbfbe4ed907044d108b12fe7bcab4460592ca7da4b067243ecf54ee",
+    "/home/mini/codex/project1/schubert_project/program/app/target/classes/dev/codex/schubert/security/LoginAttemptService$AttemptState.class": "ac4c5bd28d88df3eb42c255fea8e14cdebdce697fe1c21b9f8acbffbd88a27c5",
+    "/home/mini/codex/project1/schubert_project/program/app/target/classes/dev/codex/schubert/security/LoginAttemptService$LockStatus.class": "c703bb04ad86fb897c2f89dc63be7f35491a1fa8b6fd10b86f183822e42db2e4",
+    "/home/mini/codex/project1/schubert_project/program/app/target/classes/dev/codex/schubert/security/LoginAttemptService.class": "8d73c1d6513b1205cd5d4657782fe726371eaf2a04ee8971331ebe496695c582",
+    "/home/mini/codex/project1/work/pgpt-window-negative-qRcQTp/classes/dev/codex/schubert/nk/api/security/LoginAttemptState.class": "3572f2dcc6e432ec051635f530070f40cfb062266e76b2966abd04f2724d9505",
+    "/home/mini/codex/project1/work/pgpt-window-negative-qRcQTp/classes/dev/codex/schubert/nk/api/security/LoginAttemptKind.class": "1df76306a0a9d9b5379aa4fe098706ca38dcfbc007c4d6544509cc27c47e53cd"
+  },
+  "probeSha256": "82180a51b672389ae28bab5c14bac8c5ff7eb4139d9447ed918cceb4c3afba69",
+  "inputsUnchanged": true,
+  "cases": [
+    {
+      "kind": "USER",
+      "offsetNanos": -1,
+      "currentLocked": true,
+      "nkLocked": true
+    },
+    {
+      "kind": "USER",
+      "offsetNanos": 0,
+      "currentLocked": true,
+      "nkLocked": false
+    },
+    {
+      "kind": "USER",
+      "offsetNanos": 1,
+      "currentLocked": false,
+      "nkLocked": false
+    },
+    {
+      "kind": "IP",
+      "offsetNanos": -1,
+      "currentLocked": true,
+      "nkLocked": true
+    },
+    {
+      "kind": "IP",
+      "offsetNanos": 0,
+      "currentLocked": true,
+      "nkLocked": false
+    },
+    {
+      "kind": "IP",
+      "offsetNanos": 1,
+      "currentLocked": false,
+      "nkLocked": false
+    }
+  ],
+  "mismatches": 2,
+  "baselineWritten": false,
+  "sensitiveValuesRecorded": false
+}
