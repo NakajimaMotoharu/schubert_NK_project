@@ -24,6 +24,28 @@ class LargeResultRecordCodecTest {
   private static final UUID FILE_ID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
   private static final String PATH = "20260902/123e4567-e89b-12d3-a456-426614174000.ready";
 
+  /**
+   * PT-PRO-003-H01 / BUG-034: independent JCA digest, every byte-position tamper, no timing test.
+   */
+  @Test
+  void verificationRejectsAllThirtyTwoDigestBytePositions() throws Exception {
+    byte[] record = record((byte) 0x22);
+    byte[] expected = MessageDigest.getInstance("SHA-256").digest(record);
+    assertArrayEquals(
+        record,
+        LargeResultRecordCodec.decode(
+                new ByteArrayInputStream(record), descriptor(1, HexFormat.of().formatHex(expected)))
+            .getFirst());
+    for (int i = 0; i < 32; i++) {
+      byte[] changed = expected.clone();
+      changed[i] ^= 1;
+      LargeResultDescriptor wrong = descriptor(1, HexFormat.of().formatHex(changed));
+      assertThrows(
+          PermanentProtocolException.class,
+          () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), wrong));
+    }
+  }
+
   @Test
   void descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation() {
     LargeResultDescriptor descriptor = descriptor(1, hash(record((byte) 1)));
