@@ -132,6 +132,113 @@ final class JdbcInboxCoordinatorTest {
   }
 
   @Test
+  void completionRetentionStartsAtCompletionAndReplayNeverExtendsIt() throws Exception {
+    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+      var coordinator = new JdbcInboxCoordinator(keys);
+      for (long seconds : new long[] {86400, 604800}) {
+        for (var state : InboxCompletionState.values()) {
+          for (Duration processing :
+              List.of(
+                  Duration.ZERO,
+                  Duration.ofSeconds(1),
+                  Duration.ofDays(2),
+                  Duration.ofNanos(1000))) {
+            UUID message = UUID.randomUUID();
+            boolean update = seconds == 604800;
+            var request =
+                new InboxRequest(
+                    message,
+                    message,
+                    OptionalLong.of(101),
+                    update ? Optional.of(UUID.randomUUID()) : Optional.empty(),
+                    canonical(101, update ? "QSBREQ01" : "GAMREQ01", "001", "retention"),
+                    RECEIVED,
+                    RECEIVED.plusSeconds(seconds));
+            Instant finished = RECEIVED.plus(processing);
+            var completion =
+                new InboxCompletion(
+                    state,
+                    InboxResultReference.none(),
+                    update ? "QSBRSP01" : "GAMRSP01",
+                    "001",
+                    Optional.empty(),
+                    finished);
+            try (Connection connection = transaction()) {
+              assertEquals(
+                  InboxExecutionStatus.EXECUTED,
+                  coordinator.execute(connection, request, ignored -> completion).status());
+              assertEquals(finished.plusSeconds(seconds), storedExpiry(connection, message));
+              connection.rollback();
+              assertEquals(
+                  InboxExecutionStatus.EXECUTED,
+                  coordinator.execute(connection, request, ignored -> completion).status());
+              connection.commit();
+              var later =
+                  new InboxRequest(
+                      message,
+                      message,
+                      request.ownerUserId(),
+                      request.operationToken(),
+                      request.canonicalRequest(),
+                      RECEIVED.plusSeconds(3600),
+                      RECEIVED.plusSeconds(seconds + 3600));
+              assertEquals(
+                  InboxExecutionStatus.REPLAY,
+                  coordinator
+                      .execute(
+                          connection,
+                          later,
+                          ignored -> {
+                            throw new AssertionError("replay executed handler");
+                          })
+                      .status());
+              assertEquals(finished.plusSeconds(seconds), storedExpiry(connection, message));
+              if (update) {
+                UUID another = UUID.randomUUID();
+                var tokenReplay =
+                    new InboxRequest(
+                        another,
+                        another,
+                        request.ownerUserId(),
+                        request.operationToken(),
+                        request.canonicalRequest(),
+                        later.receivedAt(),
+                        later.expiresAt());
+                assertEquals(
+                    InboxExecutionStatus.REPLAY,
+                    coordinator
+                        .execute(
+                            connection,
+                            tokenReplay,
+                            ignored -> {
+                              throw new AssertionError("token replay executed handler");
+                            })
+                        .status());
+                assertEquals(finished.plusSeconds(seconds), storedExpiry(connection, message));
+              }
+              connection.commit();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private static Instant storedExpiry(Connection connection, UUID message) throws SQLException {
+    try (var statement =
+        connection.prepareStatement(
+            "select expires_at from schubert.request_inbox where message_id=?")) {
+      statement.setObject(1, message);
+      try (var row = statement.executeQuery()) {
+        assertTrue(row.next());
+        Instant value = row.getTimestamp(1).toInstant();
+        assertFalse(row.next());
+        return value;
+      }
+    }
+  }
+
+  @Test
   void sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected() throws Exception {
     InboxRequest original =
         tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
