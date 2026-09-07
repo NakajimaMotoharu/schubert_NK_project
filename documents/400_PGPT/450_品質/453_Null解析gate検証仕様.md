@@ -41,4 +41,4 @@ Command（共通JAVA_HOME/Maven cache設定は421を参照）:
 
 ## 4. 状態
 
-仕様確定、gate導入・検証中。実行結果を得るまではPASSを宣言しない。Canaryの初回未実装failureはTDD。既存productionへの仕様違反指摘は修正前に915/916へ登録する。
+Null gate導入・検証PASS。commit `18b426f`、Run PT-IDEM-20260907-04全263件成功・coverage100%/SpotBugs0。QLT-NULL-01..05は2026-09-07 22:38:04～22:38:15 JSTに独立実行しpositive exit0、negative exit1・4診断すべて一致。証跡は`evidence/01_PT/006_NK-MSG-002/evidence/quality/null-canary-results.json`、PT-QUALITY-002は同ProgramのRequiredColumnTest XMLとmanifest。BUG-016/YKT-013完了。後続のformat/PMD等およびPGPT全体の完了を意味しない。
