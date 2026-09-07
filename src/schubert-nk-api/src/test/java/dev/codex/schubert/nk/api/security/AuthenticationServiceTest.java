@@ -216,6 +216,96 @@ final class AuthenticationServiceTest {
   }
 
   @Test
+  void unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay() throws Exception {
+    // PT-AUT-NAME-004: independent literals, old CHECK reproduction, append-only V007, real Login.
+    String display = "\u0130".repeat(32), comparison = "i\u0307".repeat(32);
+    try (Connection c = database.admin();
+        var s = c.createStatement()) {
+      c.setAutoCommit(false);
+      s.execute("set role nk_owner");
+      s.execute("alter table schubert.app_users drop constraint ck_app_users_username_key_bytes");
+      s.execute(
+          "alter table schubert.app_users add constraint ck_app_users_username_key_bytes check (octet_length(username_key) between 1 and 64)");
+      var before = c.setSavepoint();
+      try (var update =
+          c.prepareStatement(
+              "update schubert.app_users set username=?,username_key=? where id=7")) {
+        update.setString(1, display);
+        update.setString(2, comparison);
+        assertEquals(
+            "23514", assertThrows(SQLException.class, update::executeUpdate).getSQLState());
+        c.rollback(before);
+        String migration =
+            java.nio.file.Files.readString(
+                Path.of(System.getProperty("nk.pt.repository"))
+                    .resolve(
+                        "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql"));
+        s.execute(migration);
+        assertEquals(1, update.executeUpdate());
+        update.setString(2, "a".repeat(95));
+        assertEquals(1, update.executeUpdate());
+        update.setString(2, comparison);
+        assertEquals(1, update.executeUpdate());
+        for (String invalid : List.of("", "a".repeat(97))) {
+          var boundary = c.setSavepoint();
+          update.setString(2, invalid);
+          assertEquals(
+              "23514", assertThrows(SQLException.class, update::executeUpdate).getSQLState());
+          c.rollback(boundary);
+        }
+        var boundary = c.setSavepoint();
+        update.setString(1, "a".repeat(65));
+        update.setString(2, "valid");
+        assertEquals(
+            "23514", assertThrows(SQLException.class, update::executeUpdate).getSQLState());
+        c.rollback(boundary);
+        boundary = c.setSavepoint();
+        update.setString(1, display);
+        update.setNull(2, java.sql.Types.VARCHAR);
+        assertEquals(
+            "23502", assertThrows(SQLException.class, update::executeUpdate).getSQLState());
+        c.rollback(boundary);
+      }
+      var duplicate = c.setSavepoint();
+      assertEquals(
+          "23505",
+          assertThrows(
+                  SQLException.class,
+                  () ->
+                      s.executeUpdate(
+                          "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+                              + " select 8,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at from schubert.app_users where id=7"))
+              .getSQLState());
+      c.rollback(duplicate);
+      c.commit();
+    }
+    var accepted =
+        assertInstanceOf(LoginResult.Success.class, call(realService(), display, password(), NOW));
+    assertEquals(display, accepted.actor().username());
+    assertEquals(7, accepted.actor().userId());
+    assertEquals(
+        ResultCode.AUTHENTICATION_FAILED,
+        call(realService(), display, "synthetic-wrong".toCharArray(), NOW).resultCode());
+    try (Connection c = database.api();
+        var s = c.createStatement();
+        var rows =
+            s.executeQuery(
+                "select actor_username,octet_length(actor_username),"
+                    + "(select octet_length(username_key) from schubert.app_users where id=7) from schubert.app_logs order by id")) {
+      int count = 0;
+      while (rows.next()) {
+        assertEquals(display, rows.getString(1));
+        assertEquals(64, rows.getInt(2));
+        assertEquals(96, rows.getInt(3));
+        count++;
+      }
+      assertEquals(2, count);
+    }
+    assertEquals(1, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(1, scalar("select failed_count from schubert.app_users where id=7"));
+  }
+
+  @Test
   void thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend() throws Exception {
     var calls = new AtomicInteger();
     var service =

@@ -2,6 +2,8 @@
 
 ## 1. 目的・状態・追跡
 
+SSC-014: Username表示64byteと比較key96byteを分離し、U+0130×32/NFC/trim/Locale.ROOT/ギリシャ語文脈を独立literalで確認。旧64byte CHECKでの拒否を再現し、append-only V007で95/96受理・97/空/NULL拒否・UK維持・既存値非変更・Login audit64byteを検証する。表示/wireを拡張せず全scalarのUTF-8 lower最大3/2をJDK更新guardにする。
+
 SSC-013: Login snapshotは独立UI232/234の688byteで検証する。成功AUTH_SESSION＋snapshot/0200、失敗ERROR/NONE/元0101・0106、初回role/期限の凍結、DB参照/AAD/hash/発行時刻不整合、key rotation/改ざん/NULL/SQL故障/100並行を含む。再送でsession/counter/監査の再更新なし。新Headerのbyte23はS（応答）、24はS（同期）をUI表から独立配置する。
 
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、

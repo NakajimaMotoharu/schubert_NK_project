@@ -43,12 +43,13 @@ public final class AuthenticationService {
   }
 
   /**
-   * Wire validation and UI226 username normalization precede this method. Consumes password on all
-   * exits, including lock/DB failure. Caller commits the result/Inbox or rolls back on exception.
+   * Wire validation precedes this method; username is display input, not its comparison key. UI226
+   * normalization preserves the audit name separately (SSC-014). Consumes password on all exits,
+   * including lock/DB failure. Caller commits the result/Inbox or rolls back on exception.
    */
   public LoginResult authenticate(
       Connection connection,
-      String usernameKey,
+      String username,
       char[] password,
       InetAddress client,
       UUID messageId,
@@ -57,12 +58,12 @@ public final class AuthenticationService {
     Objects.requireNonNull(password, "password");
     try {
       Objects.requireNonNull(connection, "connection");
-      Objects.requireNonNull(usernameKey, "usernameKey");
+      var name = new LoginUsername(username);
       Objects.requireNonNull(client, "client");
       Objects.requireNonNull(messageId, "messageId");
       Objects.requireNonNull(correlationId, "correlationId");
       Instant at = Objects.requireNonNull(now, "now").truncatedTo(ChronoUnit.MICROS);
-      LockedLoginAttempt locked = attempts.lockForAttempt(connection, usernameKey, client, at);
+      LockedLoginAttempt locked = attempts.lockForAttempt(connection, name.key(), client, at);
       int retry = retry(locked, at, false);
       LoginResult result;
       LoginAuditReason reason;
@@ -99,7 +100,7 @@ public final class AuthenticationService {
                       : LoginAuditReason.NO_ACCOUNT;
         }
       }
-      audit.write(connection, result, reason, usernameKey, client, messageId, correlationId, at);
+      audit.write(connection, result, reason, name.value(), client, messageId, correlationId, at);
       return result;
     } catch (SQLException
         | IllegalArgumentException

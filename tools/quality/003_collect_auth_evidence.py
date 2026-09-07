@@ -95,10 +95,11 @@ def main():
                            "PT-AUT-008": "actor/role/owner policy and real DB Logout/idempotency/admin all-revocation/audit/fault/concurrency passed; management command/predicates/Inbox/HTTP remain"},
         "testIdsNotRun": ["PT-AUT-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024", "BUG-026"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021", "YKT-023"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012", "SSC-013"],
+        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024", "BUG-026", "BUG-028"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021", "YKT-023", "YKT-025"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012", "SSC-013", "SSC-014"],
         "additionalTests": {
             "PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; dispatcher/Inbox/HTTP connection remains",
-            "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation passed; anonymous HMAC/Inbox/application transaction connection remains"},
+            "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation passed; anonymous HMAC/Inbox/application transaction connection remains",
+            "PT-AUT-NAME-001..004": "64-byte display and 96-byte Locale.ROOT comparison key, independent Unicode literals/scalar expansion bound, old CHECK rejection to V007 upgrade, database bounds/UK/NULL and real Login with 64-byte audit passed; User management adoption remains"},
         "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw_log).hexdigest(),
         "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",

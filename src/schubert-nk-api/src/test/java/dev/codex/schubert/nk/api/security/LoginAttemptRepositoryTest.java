@@ -310,7 +310,7 @@ final class LoginAttemptRepositoryTest {
       assertThrows(
           NullPointerException.class,
           () -> repository.lockForAttempt(connection, "x", client, null));
-      for (String key : List.of("", "a".repeat(65)))
+      for (String key : List.of("", "a".repeat(97)))
         assertThrows(
             IllegalArgumentException.class,
             () -> repository.lockForAttempt(connection, key, client, NOW));
@@ -320,7 +320,7 @@ final class LoginAttemptRepositoryTest {
       assertThrows(
           NullPointerException.class, () -> repository.recordSuccess(connection, locked, null));
       assertTrue(
-          repository.lockForAttempt(connection, "a".repeat(64), client, NOW).account().isEmpty());
+          repository.lockForAttempt(connection, "a".repeat(96), client, NOW).account().isEmpty());
       connection.rollback();
     }
     assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));

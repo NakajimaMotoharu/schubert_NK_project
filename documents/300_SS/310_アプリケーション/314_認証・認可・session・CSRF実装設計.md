@@ -65,6 +65,8 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 
 ## 5. Login失敗・lock
 
+SSC-014: Usernameの表示入力はNFC/trim後1..64 UTF-8 byte、比較keyはLocale.ROOT lowercaseで生成しDB上限96byteとする（331）。U+0130×32は表示64byte/key96byteとなるため、比較keyのbyte数を表示制約へ代用しない。Login照合はkey、監査は元の正規化表示入力を使用し、wire/auditの64byteを維持する。User作成も同じ正規化factoryを使用する。JDK更新時はUnicode scalarの最大増幅3/2と文脈依存lowercaseを回帰する。
+
 SSC-013: 同Message ID再送は324 §6.1の匿名Inbox保存結果を返し、以下のpassword照合/counter/発行を再実行しない。成功は初回応答snapshotとAUTH_SESSION参照の整合検査後0200、失敗は初回result/retryを維持。Replayはactive認証・権限付与・idle延長ではない。
 
 ### 5.1 API transaction

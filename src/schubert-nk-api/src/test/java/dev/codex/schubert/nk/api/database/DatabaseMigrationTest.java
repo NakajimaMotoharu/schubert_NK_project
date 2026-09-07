@@ -134,9 +134,9 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("PT-DB-001 V001-V006 migrate, validate and idempotent rerun")
+  @DisplayName("PT-DB-001 V001-V007 migrate, validate and idempotent rerun")
   void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
-    assertEquals(6, firstMigration.migrationsExecuted);
+    assertEquals(7, firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
     assertEquals(0, flyway.migrate().migrationsExecuted);
     List<String> applied =
@@ -145,7 +145,7 @@ final class DatabaseMigrationTest {
             .filter(Objects::nonNull)
             .map(version -> version.getVersion())
             .toList();
-    assertEquals(List.of("001", "002", "003", "004", "005", "006"), applied);
+    assertEquals(List.of("001", "002", "003", "004", "005", "006", "007"), applied);
     assertEquals(
         0L,
         queryLong(
@@ -1021,10 +1021,10 @@ final class DatabaseMigrationTest {
     try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
       Future<Integer> first = executor.submit(migrate);
       Future<Integer> second = executor.submit(migrate);
-      assertEquals(6, first.get() + second.get());
+      assertEquals(7, first.get() + second.get());
     }
     assertEquals(
-        6L,
+        7L,
         queryLong(
             ADMIN,
             parallelUrl,
@@ -1046,7 +1046,20 @@ final class DatabaseMigrationTest {
     try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
       paths.filter(Files::isRegularFile).forEach(resources::add);
     }
-    assertEquals(7, resources.size());
+    // Approved append-only inventory; adding V007 does not relax the secret/byte scan.
+    assertEquals(
+        java.util.Set.of(
+            "migration/V001__schemas_and_extension.sql",
+            "migration/V002__account_session_and_master_tables.sql",
+            "migration/V003__business_message_log_and_web_tables.sql",
+            "migration/V004__indexes_and_initial_data.sql",
+            "migration/V005__gin_functions_views_and_grants.sql",
+            "migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
+            "migration/V007__username_comparison_key_expansion.sql",
+            "provisioning/001_roles.sql"),
+        resources.stream()
+            .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
+            .collect(java.util.stream.Collectors.toSet()));
     for (Path resource : resources) {
       byte[] bytes = Files.readAllBytes(resource);
       String text = new String(bytes, StandardCharsets.UTF_8);
