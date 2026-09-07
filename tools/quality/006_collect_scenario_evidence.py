@@ -86,16 +86,17 @@ def main():
                         "postgresql": "18.6", "artemis": "2.56.0"},
         "modules": modules, "scenarioMethods": methods,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
-                           "PT-SCN-005", "PT-SCN-006", "PT-SCN-007"],
-        "testIdsNotRun": ["PT-SCN-008", "PT-SCN-009"],
+                           "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008"],
+        "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04"],
+        "testIdsNotRun": ["PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033"],
-        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029"],
+        "relatedSsc": ["SSC-017", "SSC-018"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035"],
+        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
         "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Production is not used to generate expected values.",
-        "scope": "Read-only repository components only. Full authentication/Inbox/dispatcher, detail/file, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
+        "scope": "Read-only repository and validated detail snapshot: global navigation, Current speaker/title projection, all voice sequences, 0/200/201/10000/10001 expanded rows and null/SQL/compound-close faults. Full authentication/Inbox/dispatcher, actual file lifecycle, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
     }
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

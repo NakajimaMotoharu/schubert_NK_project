@@ -122,8 +122,7 @@ public final class ScenarioRepository {
         connection,
         actor,
         """
-        select f.id,coalesce(nullif(f.chapter_title,''),nullif(f.section_code,''),f.file_name) as title,
-               f.display_path,count(e.id) as entries
+        select f.id,f.chapter_title,f.section_code,f.file_name,f.display_path,count(e.id) as entries
           from schubert.script_files f join schubert.games g on g.id=f.game_id
           left join schubert.script_entries e on e.script_file_id=f.id
          where g.code=? and left(f.section_code,2)=?
@@ -142,7 +141,7 @@ public final class ScenarioRepository {
         r ->
             new ScenarioFileRecord(
                 new ScriptFileId(number(r, "id")),
-                required(r, "title"),
+                title(r, ""),
                 DisplayPath.of(required(r, "display_path")),
                 integer(r, "entries")));
   }
@@ -197,16 +196,17 @@ public final class ScenarioRepository {
           select total,greatest(1,(total+99)/100) as pages,
                  least(cast(? as bigint),greatest(1,(total+99)/100)) as effective from totals)
         select p.total,p.pages,p.effective,x.id,x.script_file_id,x.code,x.chapter_title,
-               x.line_number,x.entry_type,x.speaker_label,x.body,x.display_path,
+               x.line_number,x.entry_type,x.speaker_name,x.body,x.display_path,
                a.audio_file_id,a.audio_path
           from page p left join lateral (
             select z.id,e.script_file_id,g.code,f.chapter_title,e.line_number,e.entry_type,
-                   e.speaker_label,e.body,f.display_path,z.display_order
+                   sp.name as speaker_name,e.body,f.display_path,z.display_order
               from (select id,display_order from filtered order by display_order,id
                     limit 100 offset (p.effective-1)*100) z
               join schubert.script_entries e on e.id=z.id
               join schubert.script_files f on f.id=e.script_file_id
               join schubert.games g on g.id=e.game_id
+              left join schubert.speakers sp on sp.id=e.speaker_id
           ) x on true left join lateral (
             select l.audio_file_id,af.display_path as audio_path
               from schubert.entry_audio_links l join schubert.audio_files af on af.id=l.audio_file_id
@@ -248,6 +248,114 @@ public final class ScenarioRepository {
     }
   }
 
+  /**
+   * PT-SCN-008-D01..004: one snapshot for global navigation, ordered entries and all voice rows.
+   * Missing file returns empty (service maps 0104). More than 10000 expanded rows fails 9001.
+   * Caller commits/releases the read transaction before any transfer-file writer is invoked.
+   */
+  public Optional<ScenarioDetailSnapshot> detail(
+      Connection connection, AuthenticatedActor actor, ScenarioDetailRequestData request) {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, "request");
+    String sql =
+        """
+        with files as (
+          select f.id,g.code,f.chapter_title,f.section_code,f.file_name,f.display_path,
+            lag(f.id) over w as previous_id,lead(f.id) over w as next_id,
+            lag(f.chapter_title) over w as previous_chapter_title,
+            lag(f.section_code) over w as previous_section_code,
+            lag(f.file_name) over w as previous_file_name,
+            lead(f.chapter_title) over w as next_chapter_title,
+            lead(f.section_code) over w as next_section_code,
+            lead(f.file_name) over w as next_file_name
+          from schubert.script_files f join schubert.games g on g.id=f.game_id
+          window w as (order by g.display_order,f.display_order,f.id)
+        ), entries as (
+          select e.id,e.line_number,e.entry_type,s.name as speaker_name,e.body,
+            row_number() over(order by e.entry_index,e.display_order,e.id) as sequence
+          from schubert.script_entries e left join schubert.speakers s on s.id=e.speaker_id
+          where e.script_file_id=?
+        )
+        select f.id as file_id,f.code,f.chapter_title,f.section_code,f.file_name,f.display_path,
+          f.previous_id,f.next_id,f.previous_chapter_title,f.previous_section_code,f.previous_file_name,
+          f.next_chapter_title,f.next_section_code,f.next_file_name,
+          e.id,e.sequence,e.line_number,e.entry_type,e.speaker_name,e.body,
+          a.audio_file_id,a.audio_path,a.audio_sequence
+        from files f left join entries e on true left join lateral (
+          select l.audio_file_id,af.display_path as audio_path,
+            row_number() over(order by l.display_order,l.audio_file_id) as audio_sequence
+          from schubert.entry_audio_links l join schubert.audio_files af on af.id=l.audio_file_id
+          where l.entry_id=e.id and l.link_type='voice'
+        ) a on true where f.id=? order by e.sequence,a.audio_sequence limit 10001
+        """;
+    try {
+      requireReadTransaction(connection);
+      try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setLong(1, request.scriptFileId().value());
+        statement.setLong(2, request.scriptFileId().value());
+        try (ResultSet result = statement.executeQuery()) {
+          Optional<ScenarioDetailSnapshot> snapshot = Optional.empty();
+          if (result.next()) {
+            Optional<ScriptFileId> previous =
+                Optional.ofNullable(result.getObject("previous_id", Long.class))
+                    .map(ScriptFileId::new);
+            Optional<ScriptFileId> next =
+                Optional.ofNullable(result.getObject("next_id", Long.class)).map(ScriptFileId::new);
+            ScenarioDetailResponseData metadata =
+                new ScenarioDetailResponseData(
+                    new ScriptFileId(number(result, "file_id")),
+                    game(required(result, "code")),
+                    title(result, ""),
+                    DisplayPath.of(required(result, "display_path")),
+                    previous,
+                    previous.isPresent()
+                        ? Optional.of(title(result, "previous_"))
+                        : Optional.empty(),
+                    next,
+                    next.isPresent() ? Optional.of(title(result, "next_")) : Optional.empty(),
+                    DeliveryMode.INLINE,
+                    Optional.empty(),
+                    Optional.empty(),
+                    0,
+                    Optional.empty(),
+                    0,
+                    0);
+            List<ScenarioEntryRecord> records = new ArrayList<>();
+            do {
+              if (result.getObject("id") != null) {
+                if (records.size() == 10000) throw new ScenarioQueryException(true);
+                Optional<AudioId> audio =
+                    Optional.ofNullable(result.getObject("audio_file_id", Long.class))
+                        .map(AudioId::new);
+                records.add(
+                    new ScenarioEntryRecord(
+                        new EntryId(number(result, "id")),
+                        integer(result, "sequence"),
+                        integer(result, "line_number"),
+                        entryType(required(result, "entry_type")),
+                        Optional.ofNullable(result.getString("speaker_name")),
+                        required(result, "body"),
+                        audio.isPresent() ? integer(result, "audio_sequence") : 0,
+                        audio,
+                        Optional.ofNullable(result.getString("audio_path")).map(DisplayPath::of)));
+              }
+            } while (result.next());
+            snapshot = Optional.of(new ScenarioDetailSnapshot(metadata, records));
+          }
+          return snapshot;
+        }
+      }
+    } catch (ScenarioQueryException failure) {
+      throw new ScenarioQueryException(failure.getSuppressed().length == 0);
+    } catch (SQLException
+        | IllegalArgumentException
+        | IllegalStateException
+        | ArithmeticException failure) {
+      throw new ScenarioQueryException(false);
+    }
+  }
+
   private static ScenarioSearchRecord searchRecord(ResultSet r) throws SQLException {
     Optional<AudioId> audio =
         Optional.ofNullable(r.getObject("audio_file_id", Long.class)).map(AudioId::new);
@@ -257,12 +365,8 @@ public final class ScenarioRepository {
         game(required(r, "code")),
         Optional.ofNullable(r.getString("chapter_title")),
         integer(r, "line_number"),
-        switch (required(r, "entry_type")) {
-          case "dialogue" -> EntryType.DIALOGUE;
-          case "narration" -> EntryType.NARRATION;
-          default -> throw new SQLException("invalid entry metadata");
-        },
-        Optional.ofNullable(r.getString("speaker_label")),
+        entryType(required(r, "entry_type")),
+        Optional.ofNullable(r.getString("speaker_name")),
         required(r, "body"),
         audio.isPresent(),
         audio,
@@ -320,6 +424,15 @@ public final class ScenarioRepository {
     return values;
   }
 
+  /** BUG-035/SSC-018: preserve Current's isBlank semantics, not SQL empty-string-only fallback. */
+  private static String title(ResultSet result, String prefix) throws SQLException {
+    String chapter = result.getString(prefix + "chapter_title");
+    if (chapter != null && !chapter.isBlank()) return chapter;
+    String section = result.getString(prefix + "section_code");
+    if (section != null && !section.isBlank()) return section;
+    return required(result, prefix + "file_name");
+  }
+
   private static String required(ResultSet result, String column) throws SQLException {
     String value = result.getString(column);
     if (value == null) throw new SQLException("required scenario text is missing");
@@ -335,6 +448,14 @@ public final class ScenarioRepository {
 
   private static int integer(ResultSet result, String column) throws SQLException {
     return Math.toIntExact(number(result, column));
+  }
+
+  private static EntryType entryType(String code) throws SQLException {
+    return switch (code) {
+      case "dialogue" -> EntryType.DIALOGUE;
+      case "narration" -> EntryType.NARRATION;
+      default -> throw new SQLException("invalid entry metadata");
+    };
   }
 
   private static GameCode game(String code) throws SQLException {

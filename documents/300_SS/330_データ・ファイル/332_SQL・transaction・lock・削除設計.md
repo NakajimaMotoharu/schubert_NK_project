@@ -56,6 +56,8 @@ SSC-017: UI223/234の実際の要求は本文/game/話者名/章/type/voice/page
 
 Listは`e.display_order,e.id`順、100件。複数voiceは最小link `display_order,audio_file_id`の1件だけを代表音声にし、countはentry単位。UI234 PAGED48の99,999,900件を超えれば9001。必須line NULL/0、未知enum等は架空値へ補完せず一時整合異常9000、移行検証でも検出する。
 
+SSC-018: 検索/明細で表示するSpeaker名はCurrentと同じFK先`speakers.name`（地の文は未設定）とし、保持用`script_entries.speaker_label`へ置換しない。File/current/前後の表示titleはCurrent `ScriptFileSummary.displayTitle`と同じくchapter、section、file名の順にJava `isBlank()`でない最初の値を使う。NULL/空文字だけをSQL `coalesce/nullif`で処理するとASCII/Unicode空白で結果が変わるため、snapshot row mappingで明示判定する。選んだ非blank値を勝手にtrim/加工せずwire不適合metadataは移行検証へ返す。
+
 ### 4.2 Scenario file/detail（IF-003/004）
 
 - File一覧はgame/prefixで絞り`f.display_order,f.id`順、titleはchapter/section/file名の最初の非空値。前後fileは全gameの`g.display_order,f.display_order,f.id`順。

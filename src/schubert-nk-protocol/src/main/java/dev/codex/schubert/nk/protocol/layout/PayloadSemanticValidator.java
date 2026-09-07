@@ -197,7 +197,12 @@ public final class PayloadSemanticValidator {
         "large-result byte length differs from record length times count");
   }
 
-  private static void validateScenarioSequence(List<FieldValueSet> records) {
+  /**
+   * Shared inline/file sequence contract; field bytes are checked separately by PayloadCodec.
+   * Trace: NK-PRO-002/NK-SCN-001; UI234 §10, SS333; PG-D-054; PT-SCN-008-D02/004.
+   */
+  public static void validateScenarioSequence(List<FieldValueSet> records) {
+    records = List.copyOf(records);
     Set<Long> seenEntryIds = new HashSet<>();
     long previousEntryId = -1;
     long previousEntrySequence = 0;

@@ -87,6 +87,7 @@ SSC-016: 固定Clockだけでなく受信→業務入口→Inbox完了→reply�
 - N12/N9の0/上限/上限+1、UTF-8 byte上限、timestamptz境界、logical delete/version、sequenceのmigration後値。
 - 検索条件の単独/AND/escape、大小文字、sort tie、0/-1/1/最終/超過page、0/50/100/101件。
 - SSC-017: ScenarioはCurrentのLIKE/ILIKE wildcard/escape解釈を独立fixtureで維持する。話者名同名集計（gameあり/なし）、6条件の同一statement count/page、代表voiceと非voice、file title/順序、Entry indexからのsequenceと展開後200/201/10000/10001 record、必須DB NULLの非補完を検証する。
+- SSC-018: FK先Speaker名と保持labelが異なるfixture、NULL/空/ASCIIspace/Unicode blankのchapter/sectionでCurrent由来表示期待値を照合する。検索/明細speaker、一覧/現file/前後titleを全て対象とする。
 - Query IDごとのindex利用候補、statement timeout、N+1不発生、ADMIN/USER/technical/migration roleの正負grant。
 - Optimistic version 2更新、`FOR UPDATE SKIP LOCKED`複数dispatcher、deadlock/timeout/connection切断のrollbackとretry範囲。
 

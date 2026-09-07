@@ -224,7 +224,8 @@ final class ScenarioRepositoryTest {
       put(record, 36, "Chapter A");
       put(record, 292, numeric(8, 11));
       put(record, 300, "dialogue");
-      put(record, 310, "Alice label");
+      // BUG-035: Current displays the joined speaker name, never the retained source label.
+      put(record, 310, "Alice");
       put(record, 438, "Alpha 100% x_y \\ tail");
       put(record, 4534, "1");
       put(record, 4535, "800");
@@ -324,11 +325,7 @@ final class ScenarioRepositoryTest {
     closed.close();
     failure(() -> REPOSITORY.games(closed, USER), ResultCode.TEMPORARY_FAILURE);
     for (String assignment :
-        List.of(
-            "line_number=null",
-            "line_number=100000000",
-            "body=E'bad\\nbody'",
-            "speaker_label=E'bad\\tname'")) {
+        List.of("line_number=null", "line_number=100000000", "body=E'bad\\nbody'")) {
       sql("update schubert.script_entries set " + assignment + " where id=200");
       try (Connection c = read()) {
         failure(
@@ -615,6 +612,350 @@ final class ScenarioRepositoryTest {
       assertEquals(4, r.getInt("entries"));
       assertEquals(0, r.getInt("sessions"));
     }
+  }
+
+  @Test
+  void ptScn008D01NavigationAndBlankTitlesFollowCurrentDisplayContract() throws Exception {
+    for (String blank : Arrays.asList(null, "", "  ", "\u2003", "\n\t")) {
+      try (Connection c = database.admin();
+          PreparedStatement s =
+              c.prepareStatement("update schubert.script_files set chapter_title=? where id=30")) {
+        s.setString(1, blank);
+        s.executeUpdate();
+      }
+      try (Connection c = read()) {
+        assertPayload(
+            REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)),
+            fileData("NUKITASHI1", 1, "共通ルート", 1),
+            List.of(fileRecord(30, "01_A", 2)));
+        ScenarioDetailSnapshot first =
+            REPOSITORY
+                .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
+                .orElseThrow();
+        assertEquals("01_A", first.metadata().displayTitle());
+        assertTrue(first.metadata().previousFileId().isEmpty());
+        assertEquals(10, first.metadata().nextFileId().orElseThrow().value());
+        assertEquals("02_B", first.metadata().nextTitle().orElseThrow());
+        ScenarioDetailSnapshot middle =
+            REPOSITORY
+                .detail(c, ADMIN, new ScenarioDetailRequestData(new ScriptFileId(10)))
+                .orElseThrow();
+        assertEquals(30, middle.metadata().previousFileId().orElseThrow().value());
+        assertEquals("01_A", middle.metadata().previousTitle().orElseThrow());
+        assertEquals(20, middle.metadata().nextFileId().orElseThrow().value());
+        assertEquals("chapter B", middle.metadata().nextTitle().orElseThrow());
+        ScenarioDetailSnapshot last =
+            REPOSITORY
+                .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(20)))
+                .orElseThrow();
+        assertEquals(10, last.metadata().previousFileId().orElseThrow().value());
+        assertTrue(last.metadata().nextFileId().isEmpty());
+      }
+    }
+    for (String blank : Arrays.asList(null, "", "  ", "\u2003")) {
+      try (Connection c = database.admin();
+          PreparedStatement s =
+              c.prepareStatement(
+                  "update schubert.script_files set chapter_title=null,section_code=? where id=10")) {
+        s.setString(1, blank);
+        s.executeUpdate();
+      }
+      try (Connection c = read()) {
+        assertEquals(
+            "f10.ks",
+            REPOSITORY
+                .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(10)))
+                .orElseThrow()
+                .metadata()
+                .displayTitle());
+        assertEquals(
+            "f10.ks",
+            REPOSITORY
+                .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
+                .orElseThrow()
+                .metadata()
+                .nextTitle()
+                .orElseThrow());
+        assertEquals(
+            "f10.ks",
+            REPOSITORY
+                .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(20)))
+                .orElseThrow()
+                .metadata()
+                .previousTitle()
+                .orElseThrow());
+      }
+    }
+    file(5, 1, 3, "03_Z", null);
+    try (Connection c = read()) {
+      ScenarioDetailSnapshot empty =
+          REPOSITORY
+              .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(5)))
+              .orElseThrow();
+      assertTrue(empty.records().isEmpty());
+      assertEquals(DeliveryMode.INLINE, empty.metadata().deliveryMode());
+      assertTrue(
+          REPOSITORY
+              .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(9999)))
+              .isEmpty());
+    }
+  }
+
+  @Test
+  void ptScn008D02AllVoiceRowsAndDataHaveIndependentByteOffsets() throws Exception {
+    try (Connection c = read()) {
+      ScenarioDetailSnapshot snapshot =
+          REPOSITORY
+              .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
+              .orElseThrow();
+      byte[] metadata = blank(1728);
+      put(metadata, 0, numeric(12, 30));
+      put(metadata, 12, "NUKITASHI1");
+      put(metadata, 24, "Chapter A");
+      put(metadata, 280, "script/f30.ks");
+      put(metadata, 1060, "10");
+      put(metadata, 1072, "02_B");
+      put(metadata, 1328, "I");
+      put(metadata, 1621, numeric(12, 0));
+      put(metadata, 1697, numeric(6, 0));
+      put(metadata, 1703, numeric(9, 0));
+      List<byte[]> records =
+          List.of(
+              detailRecord(100, 1, 11, "dialogue", "Alice", "Alpha 100% x_y \\ tail", 1, 800),
+              detailRecord(100, 1, 11, "dialogue", "Alice", "Alpha 100% x_y \\ tail", 2, 700),
+              detailRecord(200, 2, 22, "dialogue", "Bob", "Beta O'Reilly", 0, 0));
+      assertPayload(
+          new TypedPayloadValues(
+              new LayoutId("SCNRSP01"), snapshot.metadata(), new ArrayList<>(snapshot.records())),
+          metadata,
+          records);
+      assertThrows(UnsupportedOperationException.class, () -> snapshot.records().clear());
+      assertEquals("ScenarioDetailSnapshot[recordCount=3]", snapshot.toString());
+      assertFalse(c.isClosed());
+      assertFalse(c.getAutoCommit());
+      assertTrue(c.isReadOnly());
+      ScenarioDetailSnapshot narration =
+          REPOSITORY
+              .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(10)))
+              .orElseThrow();
+      assertArrayEquals(
+          detailRecord(300, 1, 33, "narration", "", "alpha xy", 0, 0),
+          rawDetail(narration.metadata(), narration.records().getFirst()));
+    }
+    sql("update schubert.script_entries set speaker_label=E'ignored\\tlabel' where id=100");
+    try (Connection c = read()) {
+      assertEquals(
+          "Alice",
+          ((ScenarioSearchRecord)
+                  REPOSITORY
+                      .search(c, USER, request("\\%", "", "", "", "", "", 1))
+                      .records()
+                      .getFirst())
+              .speakerName()
+              .orElseThrow());
+    }
+    sql("update schubert.speakers set name=E'invalid\\tname' where id=1");
+    try (Connection c = read()) {
+      failure(
+          () -> REPOSITORY.search(c, USER, request("\\%", "", "", "", "", "", 1)),
+          ResultCode.TEMPORARY_FAILURE);
+      failure(
+          () -> REPOSITORY.detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30))),
+          ResultCode.TEMPORARY_FAILURE);
+    }
+  }
+
+  @Test
+  void ptScn008D03CountsExpandedRecordsAndBoundsSnapshotBeforeFileIo() throws Exception {
+    for (int count : new int[] {0, 1, 200, 201, 10000, 10001}) {
+      seedDetailEntries(count);
+      try (Connection c = read()) {
+        if (count == 10001) {
+          failure(
+              () -> REPOSITORY.detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30))),
+              ResultCode.RESOURCE_LIMIT);
+        } else {
+          ScenarioDetailSnapshot snapshot =
+              REPOSITORY
+                  .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
+                  .orElseThrow();
+          assertEquals(count, snapshot.records().size());
+          assertEquals(DeliveryMode.INLINE, snapshot.metadata().deliveryMode());
+          assertEquals(
+              0,
+              snapshot.metadata().fileRecordCount()); // Snapshot metadata is not a file response.
+          if (count > 0) {
+            assertEquals(count, snapshot.records().getLast().entrySequence());
+            assertArrayEquals(
+                detailRecord(count, count, count, "narration", "", "row", 0, 0),
+                rawDetail(snapshot.metadata(), snapshot.records().getLast()));
+          }
+        }
+      }
+    }
+    seedDetailEntries(1);
+    sql("truncate schubert.audio_files cascade");
+    sql(
+        """
+        insert into schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,
+          audio_role,byte_size,sha256,created_at)
+        select 10000+i,1,'scenario/a'||i||'.ogg','voice/a'||(10000+i)||'.ogg','a'||i||'.ogg','a'||i,
+          'voice',1,repeat('a',64),'2026-09-01Z' from generate_series(1,999) i;
+        insert into schubert.entry_audio_links(entry_id,audio_file_id,game_id,link_type,display_order,created_at)
+        select 1,10000+i,1,'voice',i,'2026-09-01Z' from generate_series(1,999) i
+        """);
+    try (Connection c = read()) {
+      ScenarioDetailSnapshot snapshot =
+          REPOSITORY
+              .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
+              .orElseThrow();
+      assertEquals(999, snapshot.records().size());
+      assertEquals(1, snapshot.records().getLast().entrySequence());
+      assertArrayEquals(
+          detailRecord(1, 1, 1, "narration", "", "row", 999, 10999),
+          rawDetail(snapshot.metadata(), snapshot.records().getLast()));
+    }
+  }
+
+  @Test
+  void ptScn008D04NullMetadataSqlAndCompoundCloseFaultsStayBounded() throws Exception {
+    try (Connection c = read()) {
+      ScenarioDetailRequestData request = new ScenarioDetailRequestData(new ScriptFileId(30));
+      assertThrows(NullPointerException.class, () -> REPOSITORY.detail(null, USER, request));
+      assertThrows(NullPointerException.class, () -> REPOSITORY.detail(c, null, request));
+      assertThrows(NullPointerException.class, () -> REPOSITORY.detail(c, USER, null));
+      for (String method :
+          List.of(
+              "prepareStatement",
+              "setLong",
+              "executeQuery",
+              "next",
+              "getObject",
+              "getLong",
+              "getString",
+              "close")) {
+        Connection broken =
+            intercept(
+                c,
+                (target, m, args) -> {
+                  if (m.getName().equals(method)) {
+                    if (method.equals("close")) invoke(target, m, args);
+                    throw new SQLException("synthetic SQL must not escape");
+                  }
+                  return invoke(target, m, args);
+                });
+        failure(() -> REPOSITORY.detail(broken, USER, request), ResultCode.TEMPORARY_FAILURE);
+      }
+      ScenarioDetailSnapshot valid = REPOSITORY.detail(c, USER, request).orElseThrow();
+      assertThrows(NullPointerException.class, () -> new ScenarioDetailSnapshot(null, List.of()));
+      assertThrows(
+          NullPointerException.class, () -> new ScenarioDetailSnapshot(valid.metadata(), null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new ScenarioDetailSnapshot(
+                  valid.metadata(), Arrays.asList((ScenarioEntryRecord) null)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new ScenarioDetailSnapshot(
+                  valid.metadata(), Collections.nCopies(10001, valid.records().getFirst())));
+      ScenarioDetailResponseData file =
+          new ScenarioDetailResponseData(
+              new ScriptFileId(30),
+              G1,
+              "title",
+              DisplayPath.of("script/f30.ks"),
+              Optional.empty(),
+              Optional.empty(),
+              Optional.empty(),
+              Optional.empty(),
+              DeliveryMode.FILE,
+              Optional.empty(),
+              Optional.empty(),
+              0,
+              Optional.empty(),
+              0,
+              0);
+      assertThrows(
+          IllegalArgumentException.class, () -> new ScenarioDetailSnapshot(file, List.of()));
+      assertThrows(
+          NullPointerException.class,
+          () -> PayloadSemanticValidator.validateScenarioSequence(null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              PayloadSemanticValidator.validateScenarioSequence(
+                  Arrays.asList((FieldValueSet) null)));
+    }
+    sql("update schubert.script_entries set line_number=null where id=100");
+    try (Connection c = read()) {
+      failure(
+          () -> REPOSITORY.detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30))),
+          ResultCode.TEMPORARY_FAILURE);
+    }
+    seedDetailEntries(10001);
+    try (Connection c = read()) {
+      Connection broken =
+          intercept(
+              c,
+              (target, m, args) -> {
+                if (m.getName().equals("close")) {
+                  invoke(target, m, args);
+                  throw new SQLException("synthetic SQL must not escape");
+                }
+                return invoke(target, m, args);
+              });
+      failure(
+          () ->
+              REPOSITORY.detail(broken, USER, new ScenarioDetailRequestData(new ScriptFileId(30))),
+          ResultCode.TEMPORARY_FAILURE);
+    }
+  }
+
+  private static void seedDetailEntries(int count) throws SQLException {
+    sql("truncate schubert.script_entries cascade");
+    sql(
+        """
+        insert into schubert.script_entries(id,game_id,script_file_id,display_order,entry_index,
+          line_number,entry_type,body,raw_block,created_at)
+        select i,1,30,i,i-1,i,'narration','row','synthetic','2026-09-01Z' from generate_series(1,%d) i
+        """
+            .formatted(count));
+  }
+
+  private static byte[] rawDetail(ScenarioDetailResponseData metadata, ScenarioEntryRecord record) {
+    return PayloadCodec.standard()
+        .encode(
+            new PayloadValues(
+                new LayoutId("SCNRSP01"), metadata.fields(), List.of(record.fields())),
+            false)
+        .copyRecords()
+        .getFirst();
+  }
+
+  private static byte[] detailRecord(
+      long id,
+      int sequence,
+      int line,
+      String type,
+      String speaker,
+      String body,
+      int audioSequence,
+      long audio) {
+    byte[] r = blank(4800);
+    put(r, 0, numeric(12, id));
+    put(r, 12, numeric(6, sequence));
+    put(r, 18, numeric(8, line));
+    put(r, 26, type);
+    put(r, 36, speaker);
+    put(r, 164, body);
+    put(r, 4260, numeric(3, audioSequence));
+    if (audio != 0) {
+      put(r, 4263, Long.toString(audio));
+      put(r, 4275, "voice/a" + audio + ".ogg");
+    }
+    return r;
   }
 
   private static Connection intercept(Connection connection, Interceptor action) {
