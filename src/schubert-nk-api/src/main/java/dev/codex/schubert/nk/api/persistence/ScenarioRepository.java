@@ -153,6 +153,17 @@ public final class ScenarioRepository {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(request, "request");
+    // BUG-032: UI223 normalization precedes wire-size/padding checks; receiver codec stays strict.
+    request =
+        new ScenarioSearchRequestData(
+            text(request.bodyKeyword()),
+            request.gameCode(),
+            text(request.speakerName()),
+            text(request.chapterTitle()),
+            request.entryType(),
+            request.voiceCondition(),
+            request.page(),
+            request.pageSize());
     // Validate the request wire contract before any database access. Web page normalization is
     // separate.
     validate(new TypedPayloadValues(new LayoutId("SRCREQ01"), request, List.of()));
@@ -177,8 +188,7 @@ public final class ScenarioRepository {
     String sql =
         """
         with filtered as materialized (
-          select e.id,e.script_file_id,g.code,f.chapter_title,e.line_number,e.entry_type,
-                 e.speaker_label,e.body,f.display_path,e.display_order
+          select e.id,e.display_order
         """
             + FROM
             + predicate
@@ -190,9 +200,13 @@ public final class ScenarioRepository {
                x.line_number,x.entry_type,x.speaker_label,x.body,x.display_path,
                a.audio_file_id,a.audio_path
           from page p left join lateral (
-            select z.id,z.script_file_id,z.code,z.chapter_title,z.line_number,z.entry_type,
-                   z.speaker_label,z.body,z.display_path,z.display_order
-              from filtered z order by z.display_order,z.id limit 100 offset (p.effective-1)*100
+            select z.id,e.script_file_id,g.code,f.chapter_title,e.line_number,e.entry_type,
+                   e.speaker_label,e.body,f.display_path,z.display_order
+              from (select id,display_order from filtered order by display_order,id
+                    limit 100 offset (p.effective-1)*100) z
+              join schubert.script_entries e on e.id=z.id
+              join schubert.script_files f on f.id=e.script_file_id
+              join schubert.games g on g.id=e.game_id
           ) x on true left join lateral (
             select l.audio_file_id,af.display_path as audio_path
               from schubert.entry_audio_links l join schubert.audio_files af on af.id=l.audio_file_id
@@ -223,6 +237,9 @@ public final class ScenarioRepository {
                   records));
         }
       }
+    } catch (ScenarioQueryException failure) {
+      // BUG-031: a close failure can attach raw SQL to the resource-scope capacity exception.
+      throw new ScenarioQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
@@ -278,6 +295,8 @@ public final class ScenarioRepository {
       }
       return validate(
           new TypedPayloadValues(new LayoutId(layout), data.apply(records.size()), records));
+    } catch (ScenarioQueryException failure) {
+      throw new ScenarioQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException

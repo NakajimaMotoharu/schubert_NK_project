@@ -7,3 +7,5 @@
 - BUG-033: 最大pageのcountだけを模擬しrecordを4件のままにした不正fixture。正しいProtocol相関検査を緩めず、100entryを事前造成し正当な最大境界へ修正する。
 
 探索02/03は選択testによりProtocolの必須test数が0となってbuild停止し、Scenarioを未実施。POMの必須checkを緩めず、探索04では選択にFieldCodecTestを含めた。正式runは無選択root clean verifyで全件実行する。
+
+探索05でScenario11/FieldCodec5成功。coverage探索も新query classの全counter missed0。ただし選択runであり正式全体gate/Program完了へ算入しない。追加で3文字条件NFC/trim/byte、100並行読込・master/session不変を試験する。検索SQLは同一statementのままmaterialized中間集合をID/表示順だけにし、最大100件の本文/metadataはpage確定後に投影する。全文を全一致行ぶん中間保存する必要がなく、期待値/検索条件/順序を変更しない（PG-D-053のquery詳細化）。

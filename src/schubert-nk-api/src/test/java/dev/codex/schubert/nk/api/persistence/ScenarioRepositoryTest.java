@@ -498,6 +498,14 @@ final class ScenarioRepositoryTest {
       failure(
           () -> REPOSITORY.search(capacity, USER, request("", "", "", "", "", "", 1)),
           ResultCode.RESOURCE_LIMIT);
+      // BUG-033: a full last page requires 100 actual projected records, not just count metadata.
+      sql(
+          """
+          insert into schubert.script_entries(id,game_id,script_file_id,display_order,entry_index,
+            line_number,entry_type,body,raw_block,created_at)
+          select 1000+i,1,30,1000+i,1000+i,i,'narration','row'||i,'synthetic','2026-09-01Z'
+            from generate_series(1,96) i
+          """);
       Connection maximum =
           intercept(
               c,
@@ -518,6 +526,8 @@ final class ScenarioRepositoryTest {
 
   @Test
   void ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql() throws Exception {
+    sql("truncate schubert.script_files cascade");
+    for (int i = 0; i < 51; i++) file(i + 1, 1, i + 1, String.format(Locale.ROOT, "%02d", i), null);
     try (Connection c = read()) {
       Connection broken =
           intercept(
@@ -532,6 +542,9 @@ final class ScenarioRepositoryTest {
               });
       failure(
           () -> REPOSITORY.search(broken, USER, request("", "", "", "", "", "", 1)),
+          ResultCode.TEMPORARY_FAILURE);
+      failure(
+          () -> REPOSITORY.routes(broken, USER, new RouteListRequestData(G1)),
           ResultCode.TEMPORARY_FAILURE);
     }
   }
@@ -552,6 +565,55 @@ final class ScenarioRepositoryTest {
       assertFalse(r.wasNull());
       assertEquals(0, r.getLong("n"));
       assertTrue(r.wasNull());
+    }
+  }
+
+  @Test
+  void ptScn005ThreeTextInputsNormalizeBeforeByteChecks() throws Exception {
+    sql("update schubert.speakers set name='ガ' where id=1");
+    sql("update schubert.script_files set chapter_title='ガ' where id=30");
+    sql("update schubert.script_entries set body='ガ' where id=100");
+    try (Connection c = read()) {
+      assertIds(c, request(" カ\u3099 ", "", " カ\u3099 ", " カ\u3099 ", "", "", 1), 100);
+      assertIds(c, request(" ".repeat(300) + "ガ" + " ".repeat(300), "", "", "", "", "", 1), 100);
+      assertIds(c, request("", "", " ".repeat(300) + "ガ ", "", "", "", 1), 100);
+      assertIds(c, request("", "", "", " ".repeat(300) + "ガ ", "", "", 1), 200, 100);
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> REPOSITORY.search(c, USER, request("", "", "x".repeat(129), "", "", "", 1)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> REPOSITORY.search(c, USER, request("", "", "", "x".repeat(257), "", "", 1)));
+    }
+  }
+
+  @Test
+  void ptScn005ParallelReadsKeepOrderAndDoNotWriteMasterOrSessions() throws Exception {
+    try (var executor = java.util.concurrent.Executors.newFixedThreadPool(16)) {
+      List<java.util.concurrent.Callable<List<Long>>> work = new ArrayList<>();
+      for (int i = 0; i < 100; i++)
+        work.add(
+            () -> {
+              try (Connection c = read()) {
+                return REPOSITORY
+                    .search(c, USER, request("alpha", "", "", "", "", "", 1))
+                    .records()
+                    .stream()
+                    .map(r -> ((ScenarioSearchRecord) r).entryId().value())
+                    .toList();
+              }
+            });
+      for (var future : executor.invokeAll(work))
+        assertEquals(List.of(300L, 100L, 400L), future.get());
+    }
+    try (Connection c = database.admin();
+        Statement s = c.createStatement();
+        ResultSet r =
+            s.executeQuery(
+                "select (select count(*) from schubert.script_entries) entries,(select count(*) from schubert.auth_sessions) sessions")) {
+      assertTrue(r.next());
+      assertEquals(4, r.getInt("entries"));
+      assertEquals(0, r.getInt("sessions"));
     }
   }
 
