@@ -81,46 +81,53 @@ public final class LoginInboxService {
     } catch (IllegalArgumentException invalid) {
       throw new PermanentProtocolException("login request fields are invalid");
     }
-    try (var canonical = canonical(name, password, client)) {
-      UUID message = request.header().messageId();
-      UUID response = Objects.requireNonNull(responseIds.get(), "response ID");
-      Instant received = receivedAt.truncatedTo(ChronoUnit.MICROS);
-      // Login updates counters/session/audit: seven-day update retention, despite having no token.
-      var identity =
-          new InboxRequest(
-              message,
-              request.header().correlationId(),
-              OptionalLong.empty(),
-              Optional.empty(),
-              canonical,
-              received,
-              received.plusSeconds(604800));
-      var execution =
-          inbox.execute(
-              connection,
-              identity,
-              transaction -> {
-                LoginResult result =
-                    authentication.authenticate(
-                        transaction,
-                        name.value(),
-                        password,
-                        client,
-                        message,
-                        request.header().correlationId(),
-                        clock.instant());
-                return responses.capture(result, message, response, clock.instant());
-              });
-      if (execution.status() == InboxExecutionStatus.IN_PROGRESS) {
-        return responses.temporaryFailure(message, response, clock.instant());
+    try {
+      // Factory always creates an owned non-null value; close is a non-throwing array wipe.
+      var canonical = canonical(name, password, client);
+      try {
+        UUID message = request.header().messageId();
+        UUID response = Objects.requireNonNull(responseIds.get(), "response ID");
+        Instant received = receivedAt.truncatedTo(ChronoUnit.MICROS);
+        // Login updates counters/session/audit: seven-day update retention, despite having no
+        // token.
+        var identity =
+            new InboxRequest(
+                message,
+                request.header().correlationId(),
+                OptionalLong.empty(),
+                Optional.empty(),
+                canonical,
+                received,
+                received.plusSeconds(604800));
+        var execution =
+            inbox.execute(
+                connection,
+                identity,
+                transaction -> {
+                  LoginResult result =
+                      authentication.authenticate(
+                          transaction,
+                          name.value(),
+                          password,
+                          client,
+                          message,
+                          request.header().correlationId(),
+                          clock.instant());
+                  return responses.capture(result, message, response, clock.instant());
+                });
+        if (execution.status() == InboxExecutionStatus.IN_PROGRESS) {
+          return responses.temporaryFailure(message, response, clock.instant());
+        }
+        return responses.restore(
+            connection,
+            execution.completion().orElseThrow(),
+            message,
+            response,
+            clock.instant(),
+            execution.status() == InboxExecutionStatus.REPLAY);
+      } finally {
+        canonical.close();
       }
-      return responses.restore(
-          connection,
-          execution.completion().orElseThrow(),
-          message,
-          response,
-          clock.instant(),
-          execution.status() == InboxExecutionStatus.REPLAY);
     } catch (InboxException failure) {
       if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {
         throw new PermanentProtocolException(

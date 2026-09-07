@@ -176,7 +176,9 @@ final class LoginInboxServiceTest {
       }
     }
     seed();
-    call(service(NOW), request("利用者", "cafe\u0301", "2001:db8::1", REQUEST), NOW.minusSeconds(1));
+    var normalizedAtSender = request("利用者", "cafe\u0301", "2001:db8::1", REQUEST);
+    assertEquals("café", text(normalizedAtSender.payload().copyData(), 64, 5));
+    call(service(NOW), normalizedAtSender, NOW.minusSeconds(1));
     byte[] same = call(service(NOW), request("利用者", "café", "2001:0db8:0:0:0:0:0:1", REQUEST), NOW);
     assertEquals("0101", text(same, 208, 4));
     assertEquals(1, passwordChecks.get());
@@ -391,6 +393,18 @@ final class LoginInboxServiceTest {
                   c,
                   new WireMessage<>(input.header(), new FixedPayload(invalidUtf8, 0, List.of())),
                   NOW));
+      // Raw non-NFC receiver bytes remain invalid; never normalize these in the receiver fixture.
+      for (int offset : new int[] {0, 64}) {
+        byte[] nonCanonical = input.payload().copyData();
+        Arrays.fill(nonCanonical, offset, offset == 0 ? 64 : 320, (byte) ' ');
+        put(nonCanonical, offset, "cafe\u0301");
+        assertPermanent(
+            () ->
+                service.execute(
+                    c,
+                    new WireMessage<>(input.header(), new FixedPayload(nonCanonical, 0, List.of())),
+                    NOW));
+      }
       var wrongHeader =
           new CommonHeader(
               "SCHBNK01",
@@ -475,8 +489,9 @@ final class LoginInboxServiceTest {
       String name, String password, String ip, UUID id) {
     byte[] data = new byte[384];
     Arrays.fill(data, (byte) ' ');
-    put(data, 0, name);
-    put(data, 64, password);
+    // Independent sender-stage fixture: SS322 requires NFC before putting bytes on the wire.
+    put(data, 0, java.text.Normalizer.normalize(name, java.text.Normalizer.Form.NFC));
+    put(data, 64, java.text.Normalizer.normalize(password, java.text.Normalizer.Form.NFC));
     put(data, 320, ip);
     var header =
         new CommonHeader(
