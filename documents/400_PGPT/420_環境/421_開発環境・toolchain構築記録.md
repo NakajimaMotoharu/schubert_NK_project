@@ -128,6 +128,14 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 python3 tools/qual
 
 比較器は70 fileの一致に加え、隔離catalogに1行の差を与えた場合の拒否を確認する。再生成一致は機能期待値の証明と混同せず、固定長golden・semantic negative PTを併用する（BUG-017～019、YKT-014～016、PG-D-030/031）。
 
+### 5.3 API password encoding（2026-09-07）
+
+- Spring Security crypto 7.1.1をAPIだけへcompile dependency追加。Maven Central metadataの2026-08-20更新における最新正式版（7.2.0-M1は採用しない）。
+- 入手元: `https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar`。SHA-256 `6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403`。
+- 公式実装確認: [Pbkdf2PasswordEncoder 7.1.1](https://github.com/spring-projects/spring-security/blob/7.1.1/crypto/src/main/java/org/springframework/security/crypto/password/Pbkdf2PasswordEncoder.java)、[DelegatingPasswordEncoder API](https://docs.spring.io/spring-security/reference/api/java/org/springframework/security/crypto/password/DelegatingPasswordEncoder.html)。SS314のPBKDF2-HMAC-SHA256/310000/16byte salt/256bit、hex、additional secret空を固定する。
+- 再現は既定JDK/Mavenのroot clean verify。初回依存解決はoffline指定を外す。Production CPU上p95は後続Linux IT/ST測定として残し、このPCの速度を理由にID/parameterを変更しない。
+- `-Xlint:all -Werror`はcrypto単体jarの`org.springframework.lang.Contract`欠落を検出した。Spring Security7.1.1の[公式version catalog](https://github.com/spring-projects/spring-security/blob/7.1.1/gradle/libs.versions.toml)と同じSpring core7.0.9を明示依存として追加し、warning抑止はしない。`https://repo.maven.apache.org/maven2/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar`、SHA-256 `5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36`。Mavenのfork診断が省略されたため`-X`で生成されたtarget/javac.shを同一引数で実行して原因を特定した。初回失敗は合格に算入しない。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |
