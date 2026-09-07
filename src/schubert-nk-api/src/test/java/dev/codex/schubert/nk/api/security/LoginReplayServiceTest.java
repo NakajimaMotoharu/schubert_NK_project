@@ -437,7 +437,7 @@ final class LoginReplayServiceTest {
     }
   }
 
-  private static byte[] golden(Role role, String code, UUID responseId, String sent, int retry) {
+  static byte[] golden(Role role, String code, UUID responseId, String sent, int retry) {
     byte[] body = new byte[688];
     Arrays.fill(body, (byte) ' ');
     // UI232 §3 fields 1..6: response=S, synchronous=S (BUG-026/YKT-023).

@@ -55,6 +55,19 @@ public final class LoginReplayService {
     this.hashes = Objects.requireNonNull(hashes, "hashes");
   }
 
+  /** Non-persisted PROCESSING/temporary response; UI222/234, PT-AUT-INBOX-003/006. */
+  public byte[] temporaryFailure(UUID requestId, UUID responseId, Instant sentAt) {
+    Objects.requireNonNull(requestId, "requestId");
+    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(sentAt, "sentAt");
+    return wire(
+        new AuthenticationResponseMapper().temporaryLoginFailure(),
+        ResultCode.TEMPORARY_FAILURE,
+        requestId,
+        responseId,
+        sentAt);
+  }
+
   /** Captures only deterministic Login results. Caller stores this with session/counters/audit. */
   public InboxCompletion capture(
       LoginResult result, UUID requestId, UUID responseId, Instant completedAt) {
