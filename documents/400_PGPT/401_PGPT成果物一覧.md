@@ -36,8 +36,8 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
 | 工程基盤 | 整備中 | 規約、toolchain、全品質gate、915/916確定 | rootless JDK/Maven、台帳、compiler/coverage/SpotBugs/NullAway稼働。Enforcer/format/PMD等の親gateを追加検証中。文書上の方針確定だけで全gate完了とはしない |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
-| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 確定完了5/20（25%）、NK-DAT-001はBUG-014/015で完了判定再確認中（従来6/20=30%）。NK-MSG-002はAPI log ingestまで実装。HTTP投影・cleanup・業務冪等性stress等は残作業。 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-IDEM-20260907-04全263件成功（Protocol69/API105/Web48/CHR41）、Java coverage100%、SpotBugs0。NullAway/JDKモデルと独立canaryを導入しBUG-015/016完了。BUG-014のInbox保護、PT-IDEM-010/012/013部分・014/015未完。Enforcer/format/PMD等は確認中。 |
+| PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 確定完了5/20（25%、工数換算ではない）。NK-DAT-001はBUG-014により再確認中。NK-MSG-002のHTTP/Inbox保護/業務stressと、NK-AUT-001の実DB Login/context/sessionが残る。Auth Password/失敗window/role・owner policyを追加。 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-AUT-20260907-01全275件成功（Protocol69/API117/Web48/CHR41）、Java coverage100%、SpotBugs/NullAway0、Enforcer/format PASS。Auth12件はPassword/lock/認可policyだけ。BUG-014 Inbox保護、Auth実Login/session、残業務・PMD等の全体gateは未完了。 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
