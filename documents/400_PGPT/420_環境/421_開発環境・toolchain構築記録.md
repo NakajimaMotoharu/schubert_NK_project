@@ -37,6 +37,14 @@ Tool version、入手元、hash、設定、commandを固定し、secretを含め
 
 DownloadしたdebとMaven cacheは作業領域だけに保持する。Evidence manifestへpackage versionとbinary SHA-256を記録し、Gitにはdownload binaryを含めない。
 
+### 3.1 Null dataflow解析（2026-09-07）
+
+NullAway 0.14.1（SHA-256 `a74a5fb5a047537a4bdc362f9c1821279d7122d9d36aa2e6a72b79832fab7e4d`）とError Prone core 2.50.0（`40a88d3ea732fac3a57ae0e2b27f1729ce76cc41857bcd63d5845e79eae5f72e`）をMaven Centralから取得し、parent POMのannotationProcessorPathsへversion固定した。Production runtime依存へは追加しない。
+
+[Error Prone公式Maven導入手順](https://errorprone.info/docs/installation)、[NullAway設定](https://github.com/uber/NullAway/wiki/Configuration)に従い、forked javac、必要なcompiler module exports/opens、JSpecifyModeとJSpecifyJDKModelsを設定する。JDKモデルは0.14系の実験的機能であるため、単に有効化するだけでなく、453の独立canaryでnullableなcollection要素・引数・戻り値・dereferenceを検出できることを検証する。新moduleにも同じ親設定を継承する。
+
+初回はonlineの`./mvnw --no-transfer-progress compile`で固定依存を取得し、以後`-o`で再現する。Maven cache/JAVA_HOMEは以下と同じ。canaryは`JAVA_HOME=... python3 tools/quality/001_verify_null_contracts.py --maven-repository <cache>/repository --output <sanitized-evidence-directory>`で実行する。NullAwayの指摘を抑止・対象除外で回避しない。
+
 ## 4. 実行環境変数
 
 ```sh

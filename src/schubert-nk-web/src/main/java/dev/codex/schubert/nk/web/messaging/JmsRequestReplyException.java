@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.web.messaging;
 
+import org.jspecify.annotations.Nullable;
+
 /** Bounded non-secret Web temporary failure raised before an HTTP result is selected. */
 public final class JmsRequestReplyException extends RuntimeException {
   private static final long serialVersionUID = 1L;
@@ -11,7 +13,7 @@ public final class JmsRequestReplyException extends RuntimeException {
     this.reason = reason;
   }
 
-  JmsRequestReplyException(Reason reason, String message, Throwable cause) {
+  JmsRequestReplyException(Reason reason, String message, @Nullable Throwable cause) {
     super(message, cause);
     this.reason = reason;
   }

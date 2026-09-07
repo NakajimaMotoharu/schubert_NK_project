@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.protocol.layout.semantic;
 
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 import java.util.regex.Pattern;
 
 /**
@@ -28,7 +29,7 @@ public final class Sha256Hex {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     return other instanceof Sha256Hex sha256 && value.equals(sha256.value);
   }
 

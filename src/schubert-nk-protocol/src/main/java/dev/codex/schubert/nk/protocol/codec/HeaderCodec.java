@@ -75,7 +75,7 @@ public final class HeaderCodec {
     }
   }
 
-  public CommonHeader peek(@Nullable byte[] body) {
+  public CommonHeader peek(byte @Nullable [] body) {
     if (body == null) {
       throw new PermanentProtocolException("message body is null");
     }

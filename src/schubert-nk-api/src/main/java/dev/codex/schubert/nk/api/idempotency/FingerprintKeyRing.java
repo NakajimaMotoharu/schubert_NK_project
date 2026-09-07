@@ -65,7 +65,8 @@ public final class FingerprintKeyRing implements AutoCloseable {
       return Optional.of(currentKey);
     }
     if (previousVersion != null && previousVersion.equals(version)) {
-      return Optional.of(previousKey);
+      // BUG-016/YKT-013: constructor establishes the version/key pair invariant.
+      return Optional.of(Objects.requireNonNull(previousKey, "paired previous key"));
     }
     return Optional.empty();
   }

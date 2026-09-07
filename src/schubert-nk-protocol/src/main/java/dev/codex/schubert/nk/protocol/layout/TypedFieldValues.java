@@ -348,7 +348,8 @@ public final class TypedFieldValues {
   }
 
   private static <E extends Enum<E> & WireEnum> E enumConstant(Class<E> type, String wire) {
-    for (E candidate : type.getEnumConstants()) {
+    // E extends Enum<E>: null is impossible for the closed enum catalog (BUG-016/YKT-013).
+    for (E candidate : Objects.requireNonNull(type.getEnumConstants(), "enum constants")) {
       if (candidate.wireValue().equals(wire)) {
         return candidate;
       }

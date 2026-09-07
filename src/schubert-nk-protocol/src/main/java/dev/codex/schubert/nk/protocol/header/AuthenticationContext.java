@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.protocol.header;
 
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 import java.util.regex.Pattern;
 
 /** Redacted 64-byte authentication context. Trace: NK-PRO-001, UI 232 §3, SS 323 §2. */
@@ -26,7 +27,7 @@ public final class AuthenticationContext {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     return other instanceof AuthenticationContext context && wireValue.equals(context.wireValue);
   }
 

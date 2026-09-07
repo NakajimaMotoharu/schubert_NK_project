@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.protocol.layout.semantic;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Root-relative logical path; it is data only and never performs file-system resolution.
@@ -48,7 +49,7 @@ public final class RelativePath {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     return other instanceof RelativePath path && value.equals(path.value);
   }
 

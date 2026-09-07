@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import org.jspecify.annotations.Nullable;
 
 /** NKOP1 length-prefixed canonical HMAC. Trace: NK-MSG-002, SS 324 §3. */
 public enum OperationFingerprint {
@@ -60,7 +61,7 @@ public enum OperationFingerprint {
     output.writeBytes(encoded);
   }
 
-  private static void writeValue(ByteArrayOutputStream output, byte[] value) {
+  private static void writeValue(ByteArrayOutputStream output, byte @Nullable [] value) {
     if (value == null) {
       writeLength(output, NULL_LENGTH);
     } else {

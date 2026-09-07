@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 import java.util.Set;
 
 /** Immutable named field values for one data or record area. */
@@ -42,7 +43,7 @@ public final class FieldValueSet {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     return this == other
         || (other instanceof FieldValueSet that && values.equals(that.values));
   }

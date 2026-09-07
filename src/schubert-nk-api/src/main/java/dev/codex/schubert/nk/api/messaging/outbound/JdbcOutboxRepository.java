@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -149,17 +151,17 @@ public final class JdbcOutboxRepository {
     try {
       return new OutboxEntry(
           result.getLong("id"),
-          result.getObject("message_id", UUID.class),
-          result.getObject("correlation_id", UUID.class),
-          OutboxDestination.fromAddress(result.getString("destination")),
-          result.getString("layout_id"),
-          result.getString("layout_version"),
-          result.getBytes("body"),
+          requireValue(result.getObject("message_id", UUID.class)),
+          requireValue(result.getObject("correlation_id", UUID.class)),
+          OutboxDestination.fromAddress(requireValue(result.getString("destination"))),
+          requireValue(result.getString("layout_id")),
+          requireValue(result.getString("layout_version")),
+          requireValue(result.getBytes("body")),
           result.getInt("attempt_count"),
-          result.getTimestamp("next_attempt_at").toInstant(),
-          result.getTimestamp("created_at").toInstant(),
-          result.getString("lease_owner"),
-          result.getTimestamp("lease_until").toInstant());
+          requireValue(result.getTimestamp("next_attempt_at")).toInstant(),
+          requireValue(result.getTimestamp("created_at")).toInstant(),
+          requireValue(result.getString("lease_owner")),
+          requireValue(result.getTimestamp("lease_until")).toInstant());
     } catch (IllegalArgumentException exception) {
       throw new OutboxIntegrityException(
           "outbox row violates its bounded storage contract", exception);

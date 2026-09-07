@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.protocol.layout.semantic;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 
 /**
  * NFC display-only path that must never be passed to a file-system resolver.
@@ -35,7 +36,7 @@ public final class DisplayPath {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     return other instanceof DisplayPath path && value.equals(path.value);
   }
 

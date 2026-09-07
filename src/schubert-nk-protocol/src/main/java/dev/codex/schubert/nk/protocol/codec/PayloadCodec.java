@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /** Catalog-driven X/N/B payload codec. Trace: NK-PRO-002, UI 234-236, SS 322 §4-§6. */
 public final class PayloadCodec {
@@ -34,17 +35,17 @@ public final class PayloadCodec {
   }
 
   public FixedPayload encode(PayloadValues values, boolean errorProfile) {
-    return encode(values, errorProfile, null);
+    return encode(values, errorProfile, Optional.empty());
   }
 
   /** Encodes a response using the result-code profile, including layout-specific error fields. */
   public FixedPayload encode(PayloadValues values, ResultCode resultCode) {
     Objects.requireNonNull(resultCode, "resultCode");
-    return encode(values, !resultCode.usesSuccessProfile(), resultCode);
+    return encode(values, !resultCode.usesSuccessProfile(), Optional.of(resultCode));
   }
 
   private FixedPayload encode(
-      PayloadValues values, boolean errorProfile, ResultCode resultCode) {
+      PayloadValues values, boolean errorProfile, Optional<ResultCode> resultCode) {
     Objects.requireNonNull(values, "values");
     LayoutFields fields = catalog.require(values.layoutId());
     if (errorProfile && !values.records().isEmpty()) {
@@ -68,14 +69,14 @@ public final class PayloadCodec {
 
   public PayloadValues decode(
       LayoutId layoutId, byte[] data, List<byte[]> records, boolean errorProfile) {
-    return decode(layoutId, data, records, errorProfile, null);
+    return decode(layoutId, data, records, errorProfile, Optional.empty());
   }
 
   /** Decodes a response using the result-code profile, including layout-specific error fields. */
   public PayloadValues decode(
       LayoutId layoutId, byte[] data, List<byte[]> records, ResultCode resultCode) {
     Objects.requireNonNull(resultCode, "resultCode");
-    return decode(layoutId, data, records, !resultCode.usesSuccessProfile(), resultCode);
+    return decode(layoutId, data, records, !resultCode.usesSuccessProfile(), Optional.of(resultCode));
   }
 
   private PayloadValues decode(
@@ -83,7 +84,7 @@ public final class PayloadCodec {
       byte[] data,
       List<byte[]> records,
       boolean errorProfile,
-      ResultCode resultCode) {
+      Optional<ResultCode> resultCode) {
     Objects.requireNonNull(layoutId, "layoutId");
     Objects.requireNonNull(data, "data");
     Objects.requireNonNull(records, "records");
@@ -117,7 +118,7 @@ public final class PayloadCodec {
       List<FieldDefinition<?>> fields,
       boolean errorProfile,
       LayoutId layoutId,
-      ResultCode resultCode) {
+      Optional<ResultCode> resultCode) {
     validateNames(values, fields);
     int length = fields.isEmpty() ? 0 : fields.getLast().end();
     byte[] encoded = new byte[length];
@@ -135,7 +136,7 @@ public final class PayloadCodec {
       List<FieldDefinition<?>> fields,
       boolean errorProfile,
       LayoutId layoutId,
-      ResultCode resultCode) {
+      Optional<ResultCode> resultCode) {
     Map<String, FieldValue> values = new LinkedHashMap<>();
     for (FieldDefinition<?> field : fields) {
       byte[] fieldBytes =
@@ -154,9 +155,9 @@ public final class PayloadCodec {
   private static void validateNames(
       FieldValueSet values, List<FieldDefinition<?>> fields) {
     for (String name : values.names()) {
-      FieldDefinition<?> matching =
-          fields.stream().filter(field -> field.name().equals(name)).findFirst().orElse(null);
-      if (matching == null || matching.presence() == Presence.FIXED) {
+      Optional<FieldDefinition<?>> matching =
+          fields.stream().filter(field -> field.name().equals(name)).findFirst();
+      if (matching.isEmpty() || matching.orElseThrow().presence() == Presence.FIXED) {
         throw new MessageEncodingException("payload contains an unknown or fixed field value");
       }
     }
@@ -165,8 +166,8 @@ public final class PayloadCodec {
   private static byte[] encodeField(
       FieldDefinition<?> field, FieldValue value, boolean errorProfile) {
     if (field.presence() == Presence.FIXED) {
-      String fixedText = fixedText(field);
-      return FieldCodec.encodeText(fixedText, field.length(), fixedText != null);
+      Optional<String> fixedText = fixedText(field);
+      return FieldCodec.encodeText(fixedText.orElse(null), field.length(), fixedText.isPresent());
     }
     if (errorProfile) {
       return errorFiller(field);
@@ -242,24 +243,24 @@ public final class PayloadCodec {
   }
 
   private static void validateFixed(FieldDefinition<?> field, byte[] encoded) {
-    String fixedText = fixedText(field);
-    if (fixedText == null) {
+    Optional<String> fixedText = fixedText(field);
+    if (fixedText.isEmpty()) {
       FieldCodec.requireSpaces(encoded);
       return;
     }
     String actual = FieldCodec.decodeText(encoded, true).orElseThrow();
-    if (!actual.equals(fixedText)) {
+    if (!actual.equals(fixedText.orElseThrow())) {
       throw new PermanentProtocolException("fixed payload field has an unexpected value");
     }
   }
 
-  private static String fixedText(FieldDefinition<?> field) {
-    return field.name().equals("Log type") ? "REQUEST" : null;
+  private static Optional<String> fixedText(FieldDefinition<?> field) {
+    return field.name().equals("Log type") ? Optional.of("REQUEST") : Optional.empty();
   }
 
   private static boolean isErrorOverride(
-      LayoutId layoutId, ResultCode resultCode, String fieldName) {
-    return resultCode == ResultCode.NOT_CANCELLABLE
+      LayoutId layoutId, Optional<ResultCode> resultCode, String fieldName) {
+    return resultCode.equals(Optional.of(ResultCode.NOT_CANCELLABLE))
         && layoutId.value().equals("NTCRSP01")
         && fieldName.equals("更新後状態");
   }
@@ -268,7 +269,7 @@ public final class PayloadCodec {
       LayoutId layoutId,
       FieldValueSet data,
       boolean errorProfile,
-      ResultCode resultCode) {
+      Optional<ResultCode> resultCode) {
     if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
       return;
     }
@@ -286,7 +287,7 @@ public final class PayloadCodec {
       LayoutId layoutId,
       FieldValueSet data,
       boolean errorProfile,
-      ResultCode resultCode) {
+      Optional<ResultCode> resultCode) {
     if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
       return;
     }

@@ -27,7 +27,7 @@ public final class FixedWidthDecoder {
   }
 
   public WireMessage<FixedPayload> decode(
-      @Nullable byte[] body, TransportMetadata metadata, ExpectedRoute route) {
+      byte @Nullable [] body, TransportMetadata metadata, ExpectedRoute route) {
     Objects.requireNonNull(metadata, "metadata");
     Objects.requireNonNull(route, "route");
     if (body == null) {

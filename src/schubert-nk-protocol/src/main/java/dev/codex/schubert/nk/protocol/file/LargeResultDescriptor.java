@@ -92,11 +92,12 @@ public final class LargeResultDescriptor {
       Matcher matcher = PATH.matcher(relativePath);
       if (matcher.matches()) {
         try {
-          LocalDate.parse(matcher.group(1), DATE);
+          // The matched canonical pattern has a mandatory date capture (BUG-016/YKT-013).
+          LocalDate.parse(Objects.requireNonNull(matcher.group(1), "canonical date"), DATE);
         } catch (DateTimeException exception) {
           throw new IllegalArgumentException("large-result path contains an invalid JST date", exception);
         }
-        if (matcher.group(2).equals(fileId.toString())) {
+        if (fileId.toString().equals(matcher.group(2))) {
           return;
         }
       }

@@ -152,7 +152,8 @@ public final class WebLogPayloadCodec implements AutoCloseable {
       return currentKey;
     }
     if (previousVersion != null && previousVersion.equals(version)) {
-      return previousKey;
+      // BUG-016/YKT-013: constructor rejects every unpaired version/key configuration.
+      return Objects.requireNonNull(previousKey, "paired previous key");
     }
     throw new WebLogPayloadException(WebLogPayloadException.Reason.KEY_UNAVAILABLE);
   }

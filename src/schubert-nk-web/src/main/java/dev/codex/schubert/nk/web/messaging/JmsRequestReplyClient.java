@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Bounded synchronous Web request/reply wait coordinator; it never retries a request automatically.
@@ -123,7 +124,7 @@ public final class JmsRequestReplyClient {
   }
 
   private static JmsRequestReplyException failure(
-      JmsRequestReplyException.Reason reason, String message, Throwable cause) {
+      JmsRequestReplyException.Reason reason, String message, @Nullable Throwable cause) {
     return new JmsRequestReplyException(reason, message, cause);
   }
 }

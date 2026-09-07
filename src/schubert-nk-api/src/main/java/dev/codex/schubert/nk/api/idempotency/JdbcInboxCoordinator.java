@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.idempotency;
 
+import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -149,15 +151,15 @@ public final class JdbcInboxCoordinator {
     Optional<UUID> token = Optional.ofNullable(result.getObject("operation_token", UUID.class));
     Fingerprint fingerprint =
         new Fingerprint(
-            result.getString("fingerprint_key_version"),
-            HexFormat.of().parseHex(result.getString("request_fingerprint_hmac")));
-    String processingState = result.getString("processing_state");
+            requireValue(result.getString("fingerprint_key_version")),
+            HexFormat.of().parseHex(requireValue(result.getString("request_fingerprint_hmac"))));
+    String processingState = requireValue(result.getString("processing_state"));
     Optional<InboxCompletion> completion =
         processingState.equals("PROCESSING") ? Optional.empty() : Optional.of(readCompletion(result));
     return new StoredRow(
-        result.getObject("correlation_id", UUID.class),
-        result.getString("request_layout_id"),
-        result.getString("request_version"),
+        requireValue(result.getObject("correlation_id", UUID.class)),
+        requireValue(result.getString("request_layout_id")),
+        requireValue(result.getString("request_version")),
         owner,
         token,
         fingerprint,
@@ -166,9 +168,9 @@ public final class JdbcInboxCoordinator {
   }
 
   private static InboxCompletion readCompletion(ResultSet result) throws SQLException {
-    InboxCompletionState state = InboxCompletionState.valueOf(result.getString("processing_state"));
+    InboxCompletionState state = InboxCompletionState.valueOf(requireValue(result.getString("processing_state")));
     InboxResultReferenceType referenceType =
-        InboxResultReferenceType.valueOf(result.getString("result_ref_type"));
+        InboxResultReferenceType.valueOf(requireValue(result.getString("result_ref_type")));
     InboxResultReference reference =
         new InboxResultReference(
             referenceType,
@@ -179,14 +181,14 @@ public final class JdbcInboxCoordinator {
         ciphertext == null
             ? Optional.empty()
             : Optional.of(
-                new EncryptedResponseSnapshot(result.getString("response_key_version"), ciphertext));
+                new EncryptedResponseSnapshot(requireValue(result.getString("response_key_version")), ciphertext));
     return new InboxCompletion(
         state,
         reference,
-        result.getString("response_layout_id"),
-        result.getString("response_version"),
+        requireValue(result.getString("response_layout_id")),
+        requireValue(result.getString("response_version")),
         snapshot,
-        result.getTimestamp("completed_at").toInstant());
+        requireValue(result.getTimestamp("completed_at")).toInstant());
   }
 
   private static OptionalLong optionalLong(ResultSet result, String column) throws SQLException {
