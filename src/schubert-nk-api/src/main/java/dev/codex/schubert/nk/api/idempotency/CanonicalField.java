@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.idempotency;
 
+import java.util.Arrays;
 import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
@@ -8,7 +9,8 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Trace: NK-MSG-002, SS 324 §3, PT-IDEM-001/002.
  */
-public record CanonicalField(String name, String typeVersion, byte @Nullable [] value) {
+public record CanonicalField(String name, String typeVersion, byte @Nullable [] value)
+    implements AutoCloseable {
   public CanonicalField {
     Objects.requireNonNull(name, "name");
     Objects.requireNonNull(typeVersion, "typeVersion");
@@ -26,5 +28,11 @@ public record CanonicalField(String name, String typeVersion, byte @Nullable [] 
   @Override
   public String toString() {
     return "CanonicalField[name=" + name + ", typeVersion=" + typeVersion + ", value=<redacted>]";
+  }
+
+  /** Terminal owner cleanup; do not use this field in a new fingerprint after close. BUG-027. */
+  @Override
+  public void close() {
+    if (value != null) Arrays.fill(value, (byte) 0);
   }
 }

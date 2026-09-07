@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.api.idempotency;
 
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
@@ -203,11 +202,9 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
   private static byte[] compress(byte[] plaintext) {
     Deflater deflater = new Deflater(3);
     byte[] buffer = new byte[BUFFER_BYTES];
-    try {
+    try (var output = new WipingByteArrayOutputStream()) {
       deflater.setInput(plaintext);
       deflater.finish();
-      ByteArrayOutputStream output =
-          new ByteArrayOutputStream(Math.min(plaintext.length, BUFFER_BYTES));
       while (!deflater.finished()) {
         int count = deflater.deflate(buffer);
         output.write(buffer, 0, count);
@@ -222,10 +219,8 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
   private static byte[] decompress(byte[] compressed) {
     Inflater inflater = new Inflater();
     byte[] buffer = new byte[BUFFER_BYTES];
-    try {
+    try (var output = new WipingByteArrayOutputStream()) {
       inflater.setInput(compressed);
-      ByteArrayOutputStream output =
-          new ByteArrayOutputStream(Math.min(compressed.length, BUFFER_BYTES));
       while (!inflater.finished()) {
         int count = inflater.inflate(buffer);
         if (count == 0) {

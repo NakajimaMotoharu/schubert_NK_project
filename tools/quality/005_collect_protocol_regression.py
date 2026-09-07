@@ -70,11 +70,11 @@ def main():
     summary.update(programId=args.program, kind="FULL_REACTOR_COMPONENT_REGRESSION",
                    programStatus="REGRESSION_PASS" if protocol else "IN_PROGRESS",
                    moduleId=module, moduleMethods=methods,
-                   testIds=["PT-CODEC-AUTHERR-001", "PT-CODEC-AUTHERR-002", "PT-CODEC-AUTHERR-003"] if protocol else ["PT-IDEM-013-R01"],
-                   relatedBug=["BUG-023"] if protocol else ["BUG-025", "BUG-014"],
-                   relatedYkt=["YKT-020"] if protocol else ["YKT-022", "YKT-012"],
+                   testIds=["PT-CODEC-AUTHERR-001", "PT-CODEC-AUTHERR-002", "PT-CODEC-AUTHERR-003"] if protocol else ["PT-IDEM-013-R01", "PT-IDEM-WIPE-001", "PT-IDEM-WIPE-002", "PT-IDEM-WIPE-003"],
+                   relatedBug=["BUG-023"] if protocol else ["BUG-025", "BUG-027", "BUG-014"],
+                   relatedYkt=["YKT-020"] if protocol else ["YKT-022", "YKT-024", "YKT-012"],
                    relatedSsc=["SSC-012"] if protocol else [],
-                   expectation="002 independent UI234 byte/TSV oracle; 006 independent completion/TTL SQL postconditions. Other programs and PGPT remain incomplete.",
+                   expectation="002 independent UI234 byte/TSV oracle; 006 independent completion/TTL SQL postconditions, synthetic zeroized backing arrays, independent JCA/DataOutputStream and OpenSSL HMAC vectors. Other programs and PGPT remain incomplete.",
                    previousEvidenceRun=old_id if old_id != args.run_id else old.get("previousEvidenceRun"),
                    notRunCountedAsPass=0)
     (evidence / "logs" / (args.run_id + "-summary.json")).write_text(

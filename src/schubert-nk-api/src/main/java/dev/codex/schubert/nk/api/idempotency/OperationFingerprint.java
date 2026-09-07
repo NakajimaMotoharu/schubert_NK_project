@@ -39,35 +39,43 @@ public enum OperationFingerprint {
 
   byte[] canonicalBytes(CanonicalRequest request) {
     Objects.requireNonNull(request, "request");
-    ByteArrayOutputStream output = new ByteArrayOutputStream();
-    output.writeBytes(MAGIC);
-    writeText(output, request.ownerScope());
-    writeText(output, request.layoutId());
-    writeText(output, request.layoutVersion());
-    writeText(output, request.target());
-    writeLength(output, request.fields().size());
-    for (CanonicalField field : request.fields()) {
-      writeText(output, field.name());
-      writeText(output, field.typeVersion());
-      writeValue(output, field.value());
+    try (var output = new WipingByteArrayOutputStream()) {
+      output.writeBytes(MAGIC);
+      writeText(output, request.ownerScope());
+      writeText(output, request.layoutId());
+      writeText(output, request.layoutVersion());
+      writeText(output, request.target());
+      writeLength(output, request.fields().size());
+      for (CanonicalField field : request.fields()) {
+        writeText(output, field.name());
+        writeText(output, field.typeVersion());
+        writeValue(output, field.value());
+      }
+      return output.toByteArray();
     }
-    return output.toByteArray();
   }
 
   private static void writeText(ByteArrayOutputStream output, String value) {
     byte[] encoded =
         Normalizer.normalize(value, Normalizer.Form.NFC).getBytes(StandardCharsets.UTF_8);
-    writeLength(output, encoded.length);
-    output.writeBytes(encoded);
+    try {
+      writeLength(output, encoded.length);
+      output.writeBytes(encoded);
+    } finally {
+      Arrays.fill(encoded, (byte) 0);
+    }
   }
 
   private static void writeValue(ByteArrayOutputStream output, byte @Nullable [] value) {
     if (value == null) {
       writeLength(output, NULL_LENGTH);
     } else {
-      writeLength(output, value.length);
-      output.writeBytes(value);
-      Arrays.fill(value, (byte) 0);
+      try {
+        writeLength(output, value.length);
+        output.writeBytes(value);
+      } finally {
+        Arrays.fill(value, (byte) 0);
+      }
     }
   }
 
