@@ -6,6 +6,8 @@ Tool version、入手元、hash、設定、commandを固定し、secretを含め
 
 ## 2. 開始時環境
 
+PG-D-058/PT-SCN-20260908-08のFS条件: 本機`df -T /tmp /home/mini/codex/project1/work`では/tmp=tmpfs、project/work=ext4。TransferRootInspectionの初期対応FSはext4のみ。正常系の実root fixtureはJUnit 5.13.4 TempDirFactoryでAPI module `target`内へ一意の一時directoryを絶対pathで作成し、JUnitが試験後に回収する。tmpfs/未知FSを正常系として受理する設定変更は行わない。Serverも起動前にfilesystem typeとnative no-replace/fsync適合を確認する。追加tool導入・OS mount変更なし。
+
 | 項目 | 値 |
 |---|---|
 | 確認日時 | 2026-09-01 JST |
