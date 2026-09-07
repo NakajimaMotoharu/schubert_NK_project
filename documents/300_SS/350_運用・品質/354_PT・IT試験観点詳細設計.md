@@ -95,6 +95,7 @@ SSC-016: 固定Clockだけでなく受信→業務入口→Inbox完了→reply�
 
 - Empty/absolute/`..`/separator違い/NUL/Unicode欺瞞・各segment symlink・root symlink・hard link・open前後差替えを拒否する。
 - Descriptorのsize/hash/MIME/suffix/owner/layoutを1項目ずつ改ざん、`.part`、欠落、短い/過剰file、atomic rename失敗。
+- SSC-019: API writerの実libc openat/mkdirat/renameat2(NO_REPLACE)/unlinkat/fsync/closeについて成功・errno・同名100並行を確認する。Root/date差替え後も保持FD先だけを操作し、callback中のclose/reuseを防ぎ、途中open/close故障で所有FDを残さない。Java ATOMIC_MOVEの既存target置換を許容しない。Root admission/permission/nlink/readinessとwriter全体の故障試験は、この低level試験だけで完了にしない。
 - Scenario 200/201/10,000/10,001 recordと48,000,000 byte、transfer 5GB/5,000/9,000件境界、朝削除cutoff。
 - Rangeなし、`0-0`、`0-1048575`、1MiB超、open-ended、suffix 1/total/total+1、複数・不正・overflow、416と`bytes */total`。
 - Inline/downloadのMIME/Content-Disposition UTF-8、HEAD、If-Range非対応の扱い、owner違反の非存在同一応答。

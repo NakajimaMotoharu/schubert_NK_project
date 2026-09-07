@@ -1,0 +1,19 @@
+package dev.codex.schubert.nk.api.storage;
+
+/** Owned directory FD operations; names are single segments. SS333 §7.3; PT-SCN-008-F01..F03. */
+interface DirectoryCalls {
+  int openRoot() throws StorageIoException;
+
+  int openDirectory(int parent, String name) throws StorageIoException;
+
+  void createDirectory(int parent, String name) throws StorageIoException;
+
+  void publish(int directory, String part, String ready) throws StorageIoException;
+
+  void unlink(int directory, String name) throws StorageIoException;
+
+  void sync(int directory) throws StorageIoException;
+
+  /** Consumes the FD even on failure; callers must not retry close after possible FD reuse. */
+  void close(int directory) throws StorageIoException;
+}

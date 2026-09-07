@@ -136,6 +136,12 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 python3 tools/qual
 - 再現は既定JDK/Mavenのroot clean verify。初回依存解決はoffline指定を外す。Production CPU上p95は後続Linux IT/ST測定として残し、このPCの速度を理由にID/parameterを変更しない。
 - `-Xlint:all -Werror`はcrypto単体jarの`org.springframework.lang.Contract`欠落を検出した。Spring Security7.1.1の[公式version catalog](https://github.com/spring-projects/spring-security/blob/7.1.1/gradle/libs.versions.toml)と同じSpring core7.0.9を明示依存として追加し、warning抑止はしない。`https://repo.maven.apache.org/maven2/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar`、SHA-256 `5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36`。Mavenのfork診断が省略されたため`-X`で生成されたtarget/javac.shを同一引数で実行して原因を特定した。初回失敗は合格に算入しない。
 
+### 5.4 API native filesystem port（SSC-019、2026-09-08）
+
+既存JDK25.0.4の公開FFMと本機Linux libcを使用し、新規JNI library/JDK internal APIは導入しない。API Surefireは既存JaCoCo argLineを保持して`--enable-native-access=ALL-UNNAMED`を追加する。API実起動にも同flagが必要（SS342）。初回compileはjavacのrestricted-call注意を-Werrorで検出し、失敗を合格へ数えない。仕様上必要なLinker.downcallHandleの一箇所だけ、PG-D-055/SSC-019・担当NK-SCN-001 PG・PG gate/JDK/ABI更新ごとの再審査を隣接記録した`@SuppressWarnings("restricted")`で明示承認する。Package/file全体の抑止やcoverage除外はない。
+
+libc symbol署名とABIは固定し、openatのvariadic境界とerrno captureを明示する。本機PTはLinux amd64で実施し、Linux aarch64は同定数の対象ABIだが実行適合は配備機のreadiness/ITで要確認。OS/CPU/symbol不一致は停止し、非atomic・上書きrenameへfallbackしない。再現は既定root clean verify、合成fixture以外を操作しない。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |

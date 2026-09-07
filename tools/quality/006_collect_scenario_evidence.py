@@ -51,7 +51,8 @@ def main():
                 if any(child.tag not in ("system-out", "system-err") for child in case):
                     raise SystemExit("failure/rerun/flaky/skipped test is not certifiable")
             count += len(cases)
-            if ".api.persistence.Scenario" in suite.get("name", ""):
+            if (".api.persistence.Scenario" in suite.get("name", "")
+                    or ".api.storage." in suite.get("name", "")):
                 clean = ET.Element("testsuite", {k: suite.get(k) for k in
                                                 ("name", "time", "tests", "errors", "failures", "skipped")})
                 for case in cases:
@@ -83,20 +84,23 @@ def main():
         "startedAt": read(".started"), "completedAt": read(".completed"), "exitCode": 0,
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",
-                        "postgresql": "18.6", "artemis": "2.56.0"},
+                        "postgresql": "18.6", "artemis": "2.56.0",
+                        "libc": subprocess.check_output(["getconf", "GNU_LIBC_VERSION"], text=True).strip(),
+                        "apiNativeAccess": "ALL-UNNAMED; public Java25 FFM; SSC-019"},
         "modules": modules, "scenarioMethods": methods,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
                            "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008"],
-        "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04"],
-        "testIdsNotRun": ["PT-SCN-009"],
+        "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
+                                  "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03"],
+        "testIdsNotRun": ["PT-SCN-008-F02-ADMIT", "PT-SCN-008-F04", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035"],
         "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
-        "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Production is not used to generate expected values.",
-        "scope": "Read-only repository and validated detail snapshot: global navigation, Current speaker/title projection, all voice sequences, 0/200/201/10000/10001 expanded rows and null/SQL/compound-close faults. Full authentication/Inbox/dispatcher, actual file lifecycle, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
+        "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
+        "scope": "Read-only queries/detail snapshot plus API native directory capability core. Root/FS/permission/nlink admission, full writer/reader lifecycle, authentication/Inbox/dispatcher, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
     }
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
