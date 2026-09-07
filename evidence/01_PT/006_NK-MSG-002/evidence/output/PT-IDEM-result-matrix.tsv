@@ -11,6 +11,6 @@ PT-IDEM-009	PASS	OutboxDispatcherTest.claimsOnlyDueExpiredRowsWithTenSecondLease
 PT-IDEM-010	PARTIAL	OutboxDispatcherTest retry/commit/crash methods; OutboxPolicyTest	SS324/332 DB result times, fixed retry boundary matrix, broker duplicate; consumer business UK remains	outbox-and-web-log-scope.md; JUnit XML
 PT-IDEM-011	PASS	OutboxDispatcherTest.publicBoundariesRejectNullModesBoundsErrorsAndEveryWireIdentityMutation; persistedQwkPayloadIsFullyDecodedBeforeOpeningJms	SS323 independent QWK field offsets and 14 mutations across 2 destinations	TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml
 PT-IDEM-012	PARTIAL	Web codec 8; repository 4; sender 4; dispatcher 5; API details 2; ingest 5	SS323/352 vector, SS351 literal JSON, SS331 SQL columns, real DB/JMS ACK crash and 100 duplicates; HTTP projection remains	api-log-ingestion-scope.md; API/Web logging JUnit XML
-PT-IDEM-013	NOT_RUN	0	SS324 read24h/update7d/SENT7d	Not counted as PASS
+PT-IDEM-013	PARTIAL	MessageStoreCleanupTest 4 + DatabaseMigrationTest 15	SS324/332/341 SENT7d strict lease expiry chunk and six-function NULL; Inbox protection remains	cleanup-independent-oracle.tsv; MessageStoreCleanupTest XML; BUG-014/015
 PT-IDEM-014	NOT_RUN	0	100 concurrent full workflow and DB/JMS recovery	Not counted as PASS
 PT-IDEM-015	NOT_RUN	0	Final full Program scan gate not yet eligible	Slice scan separately recorded, not Program PASS
