@@ -85,7 +85,7 @@ Inbox・User/IP counter・auth session・snapshotは同一transactionでcommit�
 
 | 処理 | 保存方式 | Replay |
 |---|---|---|
-| Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id` | auth session ciphertextを復号し同context/expiryを返す |
+| Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id`＋初回fixed responseの暗号化snapshot（331 §7.1） | session ciphertextとsnapshotを検査し同context/初回expiry・role/usernameを返す（SSC-013） |
 | Login失敗/lock | 暗号化response snapshot | 同result/retry情報を返す |
 | 参照/list/detail | 暗号化・圧縮済みfixed response body | Header Message/Correlation/sentAtを新response用に再構築しpayloadをdecode/encode |
 | User更新 | `result_ref=USER`＋version/result | 現在値が進んでいても当該操作の保存versionを0200で返す |
@@ -96,8 +96,14 @@ Inbox・User/IP counter・auth session・snapshotは同一transactionでcommit�
 SnapshotはZstandard等の新規native依存を避け、JDK `Deflater` level 3で圧縮後、`api-inbox-response-aes` AES-256-GCM keyで暗号化する。AADはMessage ID、
 response layout/version、owner ID。最大平文1,000,000 byte、最大暗号文1,050,000 byteをCHECK/guardする。圧縮bombを避けdecode時に期待平文上限を設定する。
 
-Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせ、result codeを`0200`とする。
+Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせる。保存済み成功だけresult codeを`0200`とし、確定業務errorは元のerror result/retry/messageを維持する（SSC-013、UI232 §7の0200は成功profile）。
 保存済みbodyをbyte単位でそのまま返して古いheader/correlationを混入させない。
+
+### 6.1 Login replayの凍結・整合検証（SSC-013）
+
+成功も失敗も初回688byte LGNRSP01/001を上記snapshotへ保存する。成功はAUTH_SESSION参照を併記、失敗はNONE。成功の発行時username/role/発行日時/初回8h期限はsnapshotを正とし、現在のuser情報やidle延長後のexpires_atから推測しない。Header/全DATA byte/成功semantic、保存Message相関・layout/version・Inbox state/result/refの組合せを検証する。成功snapshotはauth_sessionsの参照UUID/created_message_id、AADのuser/session、復号context/hash、immutable issued_atと初回8h期限に一致必須。不在・不整合・unknown key・復号不能は9000/運用errorとし保存結果を成功推測しない。
+
+再送は元結果の提示だけであり、新session発行、idle延長、失効解除、password再照合、counter/audit再更新を行わない。後で失効・期限切れ・権限変更されていても元結果を変更せず、通常の認証context検証は現在DB状態を正として拒否/認可する。Web sessionや現在権限をsnapshotだけから認証済みとみなしてはならない。初回0000/確定0101/0106の保存、成功0200・失敗元codeでの新Header再構築を独立byte oracleで検証する。
 
 ## 7. Inbox transaction/crash
 
