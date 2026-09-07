@@ -120,6 +120,7 @@ ControllerはJDBC、JMS template、filesystem APIを直接呼ばない。Control
 | `.api.domain` | `AsyncJobState`, `Role`, `AccountStatus`, `NotificationType`, domain result | 業務状態・遷移。Framework annotationを含めない |
 | `.api.persistence` | 画面/aggregate別`*Repository`、`*RowMapper` | Parameterized SQL、row mapping、lock |
 | `.api.file` | `AssetResolver`, `MediaDescriptorFactory`, `LargeResultWriter`, `FileIntegrityVerifier` | Logical IDから許可root内fileを解決 |
+| `.api.storage` | `LinuxDirectoryCalls`, `OwnedTransferDirectory`, `StorageAttributeGuard`, `TransferCapacity` | SSC-019のAPI内部filesystem capability/属性/予約会計。`.api.file`の下位技術部品で、Controller/DB/JMS/HTTPへ依存しない |
 | `.api.error` | `ApiExceptionMapper`, `RetryClassifier`, `FatalProtocolHandler` | Result code、一時/恒久分類、DLQ後exit |
 
 ### 6.2 Handler規約
