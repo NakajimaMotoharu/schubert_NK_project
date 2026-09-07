@@ -1,10 +1,10 @@
 {
-  "runId": "PT-SCN-20260908-02",
+  "runId": "PT-SCN-20260908-03",
   "programId": "NK-PRO-003",
-  "targetCommit": "747d3a099462695ae228a96d427abcadcb727038",
+  "targetCommit": "9769bac7b05b1f7117f97c59b87e26230ec0f5de",
   "branch": "dev-scenario",
-  "startedAt": "2026-09-08T04:10:25+09:00",
-  "completedAt": "2026-09-08T04:12:45+09:00",
+  "startedAt": "2026-09-08T04:24:26+09:00",
+  "completedAt": "2026-09-08T04:26:49+09:00",
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
     "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
@@ -17,7 +17,7 @@
   "result": "PASS_PROGRAM_COMPLETE",
   "tests": {
     "program": 13,
-    "reactor": 363
+    "reactor": 367
   },
   "methods": [
     "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
@@ -39,7 +39,7 @@
     "coverage": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 17300
+        "covered": 17303
       },
       "BRANCH": {
         "missed": 0,
@@ -47,7 +47,7 @@
       },
       "LINE": {
         "missed": 0,
-        "covered": 3442
+        "covered": 3443
       },
       "COMPLEXITY": {
         "missed": 0,
@@ -81,17 +81,17 @@
   "expected": "Independent JCA 32-byte digest; valid record accepted; each of 32 digest-byte mutations rejected. Compiled verification invokes MessageDigest.isEqual, with no String.equals callsite.",
   "actual": "PASS",
   "bytecodeSha256": "b0959724c410655cee66ab5e439b5d63972aad30ab5376dfd128455e7b5011d8",
-  "rawLogSha256": "17f8632419f9472a70d6258bba126547ccb92786c4043267f29a3f9bf6fddff6",
+  "rawLogSha256": "7b07c160a2138e72bebe0f3633888b8ee084cbce97f528fee328ff108c9d8f93",
   "redaction": "JUnit names/counters only, no properties/stdout/stderr; public synthetic bytes, no secrets or master content.",
   "scope": "NK-PRO-003 codec/timestamp/descriptor only; Scenario application/file lifecycle/HTTP/IT/ST remain incomplete.",
   "files": [
     {
       "path": "coverage/jacoco.csv",
-      "sha256": "489518aeba6456bfc36a0d27c5025e0cf792531007ad76c7b1bbc7ffe9f6ce26"
+      "sha256": "ccf19f4e9d02389df73cb2a8010aa57d63635d906aeb4992819484ef594c83af"
     },
     {
       "path": "coverage/jacoco.xml",
-      "sha256": "98ea834d0c3247a8eb772e9dea2530e5406ca63f2c46ad6ee4af0ea31cc676d3"
+      "sha256": "883899ec9b6e808708830b93dfc45fea52c27daaa7e39f4a67db3de121ccc787"
     },
     {
       "path": "logs/PT-PRO-20260902-01-build.log",
@@ -102,24 +102,32 @@
       "sha256": "e1286aba5b15ca2d249c731c462c5a11dd56d0488dbc68d88cf0c2857d54a974"
     },
     {
+      "path": "logs/PT-SCN-20260908-02-manifest.json",
+      "sha256": "e44b9bc1e50ea9d2aea8fb04870c9bffa3922552a5d8242f55798a56e382053c"
+    },
+    {
       "path": "logs/PT-SCN-20260908-02-summary.json",
       "sha256": "34a1ff1b10a4b2bced0a3e135cc5afc121f368c1151a0e4948c692e469b8bfce"
     },
     {
+      "path": "logs/PT-SCN-20260908-03-summary.json",
+      "sha256": "e5fe7f98d446d87d7fd27442de8c4d3cd16f379d569af7f8ea4894d5e6f04868"
+    },
+    {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
-      "sha256": "637a8014f6ff62fed0ddc334b9159a5b0140ff9a74de7c4de9aeb53afd2cd161"
+      "sha256": "eaa6d5e4d73b561d30b261307bccc37724c7035a0225fd19d224a2c519398395"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
-      "sha256": "7d9a2b5e59fa6e25385b9ea8c2a7617b8fd26a6f58c7429ebe41f7309599d852"
+      "sha256": "9b3da60f5f65dc6e759fc5b02fea8e28653f1cf0c483e9448bedb22eb5e7d547"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
-      "sha256": "eed7eea9f1110e934a6bf9f7b3fead81477b8a7306b0a79ae5bd7575c84605e3"
+      "sha256": "24eeb3719486c8b9010b60a52982d9d51e8c91c551f064f6c9b251a77f8b9514"
     },
     {
       "path": "output/spotbugs.xml",
-      "sha256": "a9b570387f55d6a1f6f5e492ff7b94f4e4cf5410e2d12746545846cdc8c62813"
+      "sha256": "e6805beda974b6f4b12af217d4f3bbfcfd664012bb183e651da487acdd000778"
     }
   ]
 }
