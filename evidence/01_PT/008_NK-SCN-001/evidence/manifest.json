@@ -1,10 +1,10 @@
 {
-  "runId": "PT-SCN-20260908-01",
+  "runId": "PT-SCN-20260908-02",
   "programId": "NK-SCN-001",
-  "targetCommit": "903be3c5d8e2f41fcab4a2ed8b1ed6fe78d5dacc",
+  "targetCommit": "747d3a099462695ae228a96d427abcadcb727038",
   "branch": "dev-scenario",
-  "startedAt": "2026-09-08T04:02:30+09:00",
-  "completedAt": "2026-09-08T04:04:51+09:00",
+  "startedAt": "2026-09-08T04:10:25+09:00",
+  "completedAt": "2026-09-08T04:12:45+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -46,7 +46,7 @@
       "spotbugs": "not configured for characterization runner"
     },
     "protocol": {
-      "tests": 72,
+      "tests": 73,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
@@ -193,7 +193,7 @@
     "YKT-029"
   ],
   "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
-  "rawLogSha256": "eacc657bc9411a564627edf36ebb4aff9e20ea7e654f3d38c5f8010b93bab106",
+  "rawLogSha256": "17f8632419f9472a70d6258bba126547ccb92786c4043267f29a3f9bf6fddff6",
   "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
   "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Production is not used to generate expected values.",
   "scope": "Read-only repository components only. Full authentication/Inbox/dispatcher, detail/file, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
@@ -223,12 +223,16 @@
       "sha256": "ef51f89a1c84e06650c1937c5fd27712f9af1431d891022b8df10556f8fa3de8"
     },
     {
+      "path": "logs/PT-SCN-20260908-02-summary.json",
+      "sha256": "c7870e7d53e51d5bbb99907c7460daac79fc439971b01a19f87c7859e1a68cfc"
+    },
+    {
       "path": "logs/query-boundary-failures.md",
       "sha256": "4ad6b7995b7b61dc42857428ddb42d01f60695681c2b5b4a89c04bc776f3e77a"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
-      "sha256": "a85c9c2a05c1ba31e3ef8cee4ce7ca747ebe7f04d74892816e15276a0b8e1794"
+      "sha256": "5b5d8dbc2c0251706448b078f7dc1fc6b89d8e24a1d4bf156a66a00c6c3a150e"
     }
   ]
 }
