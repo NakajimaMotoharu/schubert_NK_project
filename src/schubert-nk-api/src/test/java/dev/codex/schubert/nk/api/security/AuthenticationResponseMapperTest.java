@@ -64,6 +64,19 @@ final class AuthenticationResponseMapperTest {
     byte[] expected = "20260908100203456       ".getBytes(StandardCharsets.US_ASCII);
     for (ResultCode code : List.of(ResultCode.SUCCESS, ResultCode.IDEMPOTENT_SUCCESS))
       assertPayload(expected, mapper.logout(new RevokedContext(IDENTITY, AT, code)));
+    for (var boundary :
+        java.util.Map.of(
+                "2026-09-08T01:02:03.999999Z", "20260908100203999",
+                "2026-09-08T01:02:04.000000Z", "20260908100204000",
+                "2026-09-08T01:02:04.000001Z", "20260908100204000")
+            .entrySet()) {
+      var result =
+          new RevokedContext(IDENTITY, Instant.parse(boundary.getKey()), ResultCode.SUCCESS);
+      assertPayload(
+          (boundary.getValue() + "       ").getBytes(StandardCharsets.US_ASCII),
+          mapper.logout(result));
+      assertEquals(Instant.parse(boundary.getKey()), result.revokedAt());
+    }
     assertThrows(NullPointerException.class, () -> mapper.login(null));
     assertThrows(NullPointerException.class, () -> mapper.logout(null));
     try (var executor = Executors.newFixedThreadPool(16)) {

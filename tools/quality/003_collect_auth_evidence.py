@@ -95,7 +95,7 @@ def main():
                            "PT-AUT-008": "actor/role/owner policy and real DB Logout/idempotency/admin all-revocation/audit/fault/concurrency passed; management command/predicates/Inbox/HTTP remain"},
         "testIdsNotRun": ["PT-AUT-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012"],
+        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012"],
         "additionalTests": {"PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; full header/dispatcher/Inbox/HTTP connection remains"},
         "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw_log).hexdigest(),

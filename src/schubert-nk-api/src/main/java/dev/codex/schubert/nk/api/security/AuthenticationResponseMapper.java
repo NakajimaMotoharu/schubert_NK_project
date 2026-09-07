@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.auth.LoginResponseData;
 import dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -35,8 +36,8 @@ public final class AuthenticationResponseMapper {
               Optional.of(success.actor().username()),
               Optional.of(success.actor().role() == Role.ADMIN ? UserRole.ADMIN : UserRole.USER),
               Optional.of(success.issued().context()),
-              Optional.of(success.issued().issuedAt()),
-              Optional.of(success.issued().expiresAt()),
+              Optional.of(success.issued().issuedAt().truncatedTo(ChronoUnit.MILLIS)),
+              Optional.of(success.issued().expiresAt().truncatedTo(ChronoUnit.MILLIS)),
               0,
               0,
               Optional.empty());
@@ -63,7 +64,9 @@ public final class AuthenticationResponseMapper {
         .encode(
             PayloadTypeCatalog.encode(
                 new TypedPayloadValues(
-                    LOGOUT, new LogoutResponseData(result.revokedAt()), List.of())),
+                    LOGOUT,
+                    new LogoutResponseData(result.revokedAt().truncatedTo(ChronoUnit.MILLIS)),
+                    List.of())),
             result.resultCode());
   }
 
