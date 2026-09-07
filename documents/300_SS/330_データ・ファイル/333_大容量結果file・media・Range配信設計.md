@@ -59,7 +59,7 @@ SSC-017によりUI223/234に合わせ`entry_index,display_order,id`から採番�
 3. CSPRNG UUIDで`<uuid>.part`を`CREATE_NEW,WRITE,NOFOLLOW_LINKS`でopen。Collision時は最大3回新UUID、超過は異常。
 4. 64KiB以下のbufferでrecordを順番writeし、同時にSHA-256とwritten byte数を更新する。
 5. `FileChannel.force(true)`、close、実size、`recordLength * count`、digestを照合する。
-6. 同directoryの`<uuid>.ready`へ`ATOMIC_MOVE`。Overwrite optionを付けない。Directoryもfsync可能な実装でsyncする。
+6. 同directoryの`<uuid>.ready`へatomic・no-replace公開する。SSC-019により保持済みdirectory FD相対のLinux `renameat2(RENAME_NOREPLACE)`を使用する。Java `Files.move(ATOMIC_MOVE)`は既存target置換が実装依存なので代替しない。Directoryもfsyncする。
 7. Ready fileをNOFOLLOWで開き直し、file ID/path/size/hash/record length/countからdescriptorを生成する。
 
 Encode/write/moveの失敗は`.part`を即時best-effort削除するが、削除失敗を元例外で隠さない。
@@ -99,6 +99,14 @@ Linuxの`SecureDirectoryStream<Path>`を必須前提とし、root directory hand
 
 Hard link対策としてasset/transfer filesystemの書込権限を専用accountに限定し、Unix `nlink=1`を対応環境で検査する。
 不明なfile store/attributeはdeny closed。
+
+### 7.3 API writerのdirectory capability（SSC-019）
+
+ReaderのSecureDirectoryStream必須条件は維持する。Writerのmkdir/非上書きatomic公開はJava25の公開FFMからLinux libcのopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ぶ限定portで実現する。Preview、JDK internal API、private FDのreflection、shell subprocessを使用しない。Rootは`/`から全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、起動時の所有者/permission/非重複検査後も自分で取得したdirectory FDを保持する。
+
+日付directory作成とUUID entry操作はそのFD相対だけで行う。FileChannelでのCREATE_NEW/read/attribute取得に必要なpathは、自processが保持中のFDを指すkernel procfs `/proc/self/fd/<owned fd>/<validated generated name>`に限定する。利用者pathや置換可能な元root pathを再解決しない。FDは操作中close/reuseされない寿命管理を行い、close失敗時に同じ番号を再closeしない。File名の最終symlinkは常にNOFOLLOWで拒否し、nlink=1等の既存検査を省略しない。
+
+Linux/glibc、native access、procfs、必要attribute、directory fsync、同filesystemのRENAME_NOREPLACEが揃わない場合はreadiness false。未検証network filesystemは使用しない。Root作成/chmod、check-then-move、hard-link公開、通常renameへのfallbackは禁止する。JVM設定と実機適合試験は342/354へ追跡する。
 
 ## 8. Media認可・descriptor
 
