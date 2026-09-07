@@ -40,6 +40,7 @@ releases/<version>/
   api/schubert-nk-api.jar
   batch/schubert-nk-batch.jar
   lib/schubert-nk-protocol.jar
+  lib/schubert-nk-storage.jar
   db/migration/V*.sql
   config/templates/*.yml
   config/caddy/Caddyfile.template
@@ -56,6 +57,7 @@ releases/<version>/
 
 `RELEASE-MANIFEST.json`はapp/protocol/schema/config version、Git commit/tag、JDK/build tool/dependency/BOM、OS対応、
 全artifact hashを持つ。Release directory全fileを検証後にread-onlyにし、稼働中の上書きを禁止。
+SSC-021のstorage version/hashもmanifestへ記載し、Web/API（batch使用時も）で同一artifactを使用する。Executable内へ同梱する場合もSBOM/hashの一致を検査し、異なるnative能力実装を混在させない。
 
 ## 4. Config file・設定sourceの優先順
 

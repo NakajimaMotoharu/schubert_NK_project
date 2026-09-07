@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.List;
  * Lexical deployment roots only; does not grant access or certify actual inodes/mounts. NK-SCN-001;
  * RD FIL-001..009; UI243; SS333 §2/343 §2; PG-D-058; PT-SCN-008-A05.
  */
-record StorageRootLayout(
+public record StorageRootLayout(
     Path asset, Path transfer, Path backup, Path log, Path artemis, Path staging) {
-  StorageRootLayout {
+  public StorageRootLayout {
     List<Path> roots = List.of(asset, transfer, backup, log, artemis, staging);
     for (Path root : roots) {
       if (!root.isAbsolute() || root.getNameCount() == 0 || !root.equals(root.normalize())) {

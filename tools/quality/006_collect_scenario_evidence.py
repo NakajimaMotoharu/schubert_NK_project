@@ -33,8 +33,10 @@ def main():
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     modules, methods, regressions = {}, [], []
+    current_reports = set()
     for module, directory in (("characterization", "program/characterization"),
                               ("protocol", "src/schubert-nk-protocol"),
+                              ("storage", "src/schubert-nk-storage"),
                               ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web")):
         target = repo / directory / "target"
         reports = sorted((target / "surefire-reports").glob("TEST-*.xml"))
@@ -54,9 +56,11 @@ def main():
             scenario = (".api.persistence.Scenario" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
                         or ".api.storage." in suite.get("name", "")
+                        or ".nk.storage." in suite.get("name", "")
                         or ".protocol.codec.ScenarioRecordEncodingTest" in suite.get("name", ""))
             selected = cases if scenario else [c for c in cases if c.get("name", "").startswith("bug036")]
             if selected:
+                current_reports.add(report.name)
                 clean = ET.Element("testsuite", {k: suite.get(k) for k in
                                                 ("name", "time", "tests", "errors", "failures", "skipped")})
                 clean.set("tests", str(len(selected)))
@@ -86,6 +90,15 @@ def main():
         raise SystemExit("missing Scenario tests")
     if len(regressions) != 3 or not any("#bug036" in m for m in methods):
         raise SystemExit("missing cross-program monitor regression")
+    # Preserve historical package names, but do not mix them into current output.
+    for report in sorted((evidence / "output").glob("TEST-*.xml")):
+        if report.name not in current_reports:
+            archive = evidence / "logs" / (run + "-superseded-junit")
+            archive.mkdir(exist_ok=True)
+            destination = archive / report.name
+            if destination.exists():
+                raise SystemExit("refusing to overwrite archived JUnit evidence")
+            report.rename(destination)
     manifest = {
         "runId": run, "programId": "NK-SCN-001", "targetCommit": commit,
         "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
@@ -94,7 +107,7 @@ def main():
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",
                         "postgresql": "18.6", "artemis": "2.56.0",
                         "libc": subprocess.check_output(["getconf", "GNU_LIBC_VERSION"], text=True).strip(),
-                        "apiNativeAccess": "ALL-UNNAMED; public Java25 FFM; SSC-019"},
+                        "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"},
         "modules": modules, "scenarioMethods": methods, "crossProgramRegressionMethods": regressions,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
                            "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008", "PT-SCN-008-F04"],
@@ -106,10 +119,11 @@ def main():
                                   "PT-SCN-008-C01", "PT-SCN-008-C02", "PT-SCN-008-C03",
                                   "PT-SCN-008-W01", "PT-SCN-008-W02", "PT-SCN-008-W03",
                                   "PT-SCN-008-W04", "PT-SCN-008-W05", "PT-SCN-008-W06",
-                                  "PT-SCN-008-W07", "PT-SCN-008-W08", "PT-SCN-008-W09", "PT-SCN-008-W10"],
+                                  "PT-SCN-008-W07", "PT-SCN-008-W08", "PT-SCN-008-W09", "PT-SCN-008-W10",
+                                  "PT-SCN-008-LIB01"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
         "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),

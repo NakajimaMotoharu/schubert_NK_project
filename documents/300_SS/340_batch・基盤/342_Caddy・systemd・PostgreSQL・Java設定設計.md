@@ -155,7 +155,7 @@ Heap dump自動出力は無効のままとし、機密値を含むdumpを通常l
 ITはRSS/heap/direct/metaspace/thread/GC pauseを実測し、上位16GB配分内だけで調整する。メモリ上限を広げる場合、
 PostgreSQL/Artemis/OS/headroomの合計16GB以内を同時更新する。
 
-APIのTransfer writerはSSC-019によりJava25公開FFMの限定native portを使用する。Classpath起動のAPIだけに`--enable-native-access=ALL-UNNAMED`を明示し、JPMS化する場合は該当module名へ限定する。Native accessは権限分離の代替ではない。Linux/glibc・procfs self FD・renameat2 no-replace・directory fsyncをreadinessで検証し、不成立時は起動成功としない。Systemdの既存hardeningを外さず、実機ITで同設定下のFD相対操作を確認する。
+SSC-019/021によりTransfer writer/Readerはshared storageのJava25公開FFM限定native portを使用する。Classpath起動のAPI/Web（storageを使用するbatchも）へ`--enable-native-access=ALL-UNNAMED`を明示し、JPMS化する場合は該当module名へ限定する。Native accessはOS権限分離の代替ではない。Linux/glibc・procfs self FD・必要attributeを共通readinessで、renameat2 no-replace・directory fsyncをwriterのreadinessで検証し、不成立時は起動成功としない。Systemdの既存hardeningを外さず、実機ITでWeb read-only/API限定writeのFD相対操作を確認する。
 
 ### 5.2 Spring主要値
 

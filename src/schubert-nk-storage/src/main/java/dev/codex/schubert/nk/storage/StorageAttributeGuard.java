@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.UserPrincipal;
@@ -10,17 +10,18 @@ import java.util.Objects;
  * NK-SCN-001; RD FIL-001..009; UI237/243; SS333 §2/7 and 343 §2; PT-SCN-008-A02/A03. A valid
  * attribute map is not root admission, authorization, descriptor/hash verification or I/O.
  */
-final class StorageAttributeGuard {
+public final class StorageAttributeGuard {
   private StorageAttributeGuard() {}
 
-  static void directory(Map<String, Object> attributes, StorageIdentity identity)
+  public static void directory(Map<String, Object> attributes, StorageIdentity identity)
       throws StorageIoException {
     requireOwnership(attributes, identity);
     require(integer(attributes, "mode") == 040750);
     require(integer(attributes, "nlink") >= 1);
   }
 
-  static void file(Map<String, Object> attributes, StorageIdentity identity, long expectedSize)
+  public static void file(
+      Map<String, Object> attributes, StorageIdentity identity, long expectedSize)
       throws StorageIoException {
     Objects.requireNonNull(attributes, "attributes");
     Objects.requireNonNull(identity, "identity");

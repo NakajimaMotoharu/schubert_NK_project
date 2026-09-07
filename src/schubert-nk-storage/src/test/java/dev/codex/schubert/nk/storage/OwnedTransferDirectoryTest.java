@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

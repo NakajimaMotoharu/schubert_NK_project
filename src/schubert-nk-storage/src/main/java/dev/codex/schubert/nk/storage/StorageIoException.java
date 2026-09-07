@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -15,7 +15,7 @@ public final class StorageIoException extends IOException {
 
   private final Reason reason;
 
-  StorageIoException(Reason reason) {
+  public StorageIoException(Reason reason) {
     super("transfer storage operation failed");
     this.reason = Objects.requireNonNull(reason, "reason");
   }

@@ -29,7 +29,7 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | `LargeResultWriter.writeScenario` | immutable record list、`Instant`、`UUID` | `LargeResultDescriptor` | 4,800 byte record、part/ready、hash/fsync/atomic move |
 | `LargeResultReader.readScenario` | descriptor | `List<ScenarioRecord>` | descriptor/path/size/hash/record完全検証、最大10,000件 |
 | `StoragePathPolicy.parseRelative` | root kind、wire relative path | `ValidatedRelativePath` | NFC、segment、suffix、depth、UUID検証 |
-| `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | `SecureDirectoryStream`でNOFOLLOW segment walk、通常file検証 |
+| `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | SSC-021の共有native保持root/inodeでNOFOLLOW segment walk、同一inodeの通常file/nlink等を検証後read |
 | `MediaQueryService.describeAudio/describeVideo/describeMusic` | actor context、media type/logical ID、mode | signed descriptor | API側のrole/DB metadata/manifest検証。311/323のAPI責務名へ統一 |
 | `MediaRangeService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の署名・path・size・MIME再検証、stream。311のWeb責務名へ統一 |
 | `HttpByteRangeParser.parseFirst` | Range header、file size | `Full/Partial/Unsatisfiable` | 最初のrangeだけ解析、1MiB cap |
@@ -92,17 +92,16 @@ Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model
 
 ### 7.2 OS・TOCTOU対策
 
-Linuxの`SecureDirectoryStream<Path>`を必須前提とし、root directory handleから各segmentを
-`NOFOLLOW_LINKS`で相対openする。最終entryは`BasicFileAttributes` namespaceでregular file、size、file keyを検査し、
-同じdirectory handleからchannelをopenする。SecureDirectoryStream非対応filesystemは起動不可とし、
-`normalize().startsWith(root)`だけのfallbackを実装しない。
+SSC-021: Readerも共有storage libraryの保持rootから全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、最終entryをO_PATH/O_NOFOLLOW/O_CLOEXECで保持する。自分が保持しているinodeのprocfs handleでUnix通常file/owner/group/mode/nlink/sizeを確認した後にだけ、その同じinodeからread channelを開く。SDSの名前属性検査と後のchannel openを同一inodeと推測しない。公開FileChannel/PosixFileAttributesはnlink取得APIを持たないため、private FD reflectionや元pathの再解決へfallbackしない。
+
+SDS利用可能性の既存起動検査も維持し、unknown filesystem/providerは拒否する。実file openは上記native inode保持へ統一する。Readerは既存childのread-only openだけを呼び、mkdir/CREATE_NEW/chmod/chgrp/rename/deleteは呼ばない。OSのWeb read-only mount/permissionも別に必須とし、共通libraryの存在をwrite権限付与と解釈しない。`normalize().startsWith(root)`だけのfallbackは禁止する。
 
 Hard link対策としてasset/transfer filesystemの書込権限を専用accountに限定し、Unix `nlink=1`を対応環境で検査する。
 不明なfile store/attributeはdeny closed。
 
 ### 7.3 API writerのdirectory capability（SSC-019）
 
-ReaderのSecureDirectoryStream必須条件は維持する。Writerのmkdir/非上書きatomic公開はJava25の公開FFMからLinux libcのopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ぶ限定portで実現する。Preview、JDK internal API、private FDのreflection、shell subprocessを使用しない。Rootは`/`から全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、起動時の所有者/permission/非重複検査後も自分で取得したdirectory FDを保持する。
+SSC-021でReaderも同じ低位能力を共有する。Writerのmkdir/非上書きatomic公開はJava25の公開FFMからLinux libcのopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ぶ限定portで実現する。Preview、JDK internal API、private FDのreflection、shell subprocessを使用しない。Rootは`/`から全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、起動時の所有者/permission/非重複検査後も自分で取得したdirectory FDを保持する。
 
 日付directory作成とUUID entry操作はそのFD相対だけで行う。FileChannelでのCREATE_NEW/read/attribute取得に必要なpathは、自processが保持中のFDを指すkernel procfs `/proc/self/fd/<owned fd>/<validated generated name>`に限定する。利用者pathや置換可能な元root pathを再解決しない。FDは操作中close/reuseされない寿命管理を行い、close失敗時に同じ番号を再closeしない。File名の最終symlinkは常にNOFOLLOWで拒否し、nlink=1等の既存検査を省略しない。
 

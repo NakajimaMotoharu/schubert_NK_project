@@ -8,9 +8,10 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 | Module | Production path | 責務 | 許可依存 | 主SS |
 |---|---|---|---|---|
+| `schubert-nk-storage` | `src/schubert-nk-storage` | SSC-021: 保持directory/inode、Linux native、OS属性/root配置。既存NK-SCN-001の低位能力を抽出（Program母数不変） | JDK/JSpecifyのみ、Protocol/業務module依存なし | 311、333、342、343 |
 | `schubert-nk-protocol` | `src/schubert-nk-protocol` | 256-byte header、64 layout、value object、codec、error | JDK/JSpecifyのみ | 311、322、323 |
-| `schubert-nk-api` | `src/schubert-nk-api` | JMS consumer、業務service、DB/file、Inbox/Outbox | protocol | 311、312、321、324、331～333 |
-| `schubert-nk-web` | `src/schubert-nk-web` | Login/session/CSRF、controller/form/template、JMS client、Range | protocol | 311～314、321、333 |
+| `schubert-nk-api` | `src/schubert-nk-api` | JMS consumer、業務service、DB/file、Inbox/Outbox | protocol、storage（file adapterのみ） | 311、312、321、324、331～333 |
+| `schubert-nk-web` | `src/schubert-nk-web` | Login/session/CSRF、controller/form/template、JMS client、Range | protocol、storage（file adapterのみ） | 311～314、321、333 |
 | `schubert-nk-batch` | `src/schubert-nk-batch` | 朝batch、backup、削除、再実行 | 原則JDK、限定protocol | 311、341 |
 | deployment/migration | `src/deployment`、`src/migration` | Caddy/systemd/PostgreSQL/Artemis/Java設定、移行・切戻し | Artifact公開契約 | 331、342、343、351～353 |
 | NK Characterization adapter | `program/characterization` | Current baselineを変更しないNK比較 | Production HTTP公開契約 | 355 |

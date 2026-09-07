@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
 import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;

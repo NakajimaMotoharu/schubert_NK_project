@@ -24,6 +24,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>dev.codex.schubert</groupId>
+      <artifactId>schubert-nk-storage</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.7.13</version>
@@ -149,7 +154,7 @@
         <configuration>
           <failIfNoTests>true</failIfNoTests>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
-          <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
+          <argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</argLine>
           <systemPropertyVariables>
             <nk.pt.repository>${maven.multiModuleProjectDirectory}</nk.pt.repository>
             <user.language>ja</user.language>

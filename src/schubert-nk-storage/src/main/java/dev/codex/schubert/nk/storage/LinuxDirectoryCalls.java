@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.lang.foreign.Arena;
 import java.lang.foreign.FunctionDescriptor;
@@ -14,10 +14,10 @@ import java.util.Set;
 
 /**
  * Linux libc port using public Java25 FFM, never reflection/internal APIs or fallback rename.
- * NK-SCN-001; RD FIL-001..009; UI237; SS333 §7.3/342; SSC-019; PT-SCN-008-F01/F03. Package-private:
- * only owned capabilities may expose filesystem operations to services.
+ * NK-SCN-001; RD FIL-001..009; UI237; SS333 §7.3/342; SSC-019; PT-SCN-008-F01/F03. File-adapter
+ * SPI: only owned capabilities may expose filesystem operations to services.
  */
-final class LinuxDirectoryCalls implements DirectoryCalls {
+public final class LinuxDirectoryCalls implements DirectoryCalls {
   // Linux x86-64/AArch64 ABI constants, not portable POSIX guesses. See PG-D-055.
   private static final int AT_FDCWD = -100;
   private static final int DIRECTORY_FLAGS = 0x10000 | 0x20000 | 0x80000;
@@ -34,7 +34,8 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
   private final FdCall close;
 
   // Public SAM signatures allow the JDK's checked MethodHandle adapter, avoiding broad Throwable
-  // catches. This enclosing class remains package-private. No user-supplied native symbol is used.
+  // catches. Construction/binding remain controlled by the factory. No user-supplied native symbol
+  // is used.
   public interface OpenCall {
     int call(MemorySegment state, int directory, MemorySegment name, int flags, int mode);
   }
@@ -61,7 +62,7 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
     int call(MemorySegment state, int directory);
   }
 
-  static LinuxDirectoryCalls create() {
+  public static LinuxDirectoryCalls create() {
     return create(
         Objects.requireNonNull(System.getProperty("os.name"), "os.name"),
         Objects.requireNonNull(System.getProperty("os.arch"), "os.arch"),

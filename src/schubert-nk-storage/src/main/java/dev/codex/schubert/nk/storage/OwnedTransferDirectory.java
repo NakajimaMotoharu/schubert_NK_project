@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -11,19 +11,20 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * API writer's owned directory capability; path replacement never redirects an operation.
- * NK-SCN-001; RD FIL-001..009; UI237; SS333 §7.3; SSC-019; PT-SCN-008-F02. Package-only callbacks
- * must finish all path operations before returning; never export their path. Root
- * ownership/permission/filesystem readiness admission is a separate, mandatory caller gate.
+ * Shared file-adapter directory capability; path replacement never redirects an operation.
+ * NK-SCN-001; RD FIL-001..009; UI237; SS333 §7.3; SSC-019/021; PT-SCN-008-F02/LIB01.
+ * File-adapter-only callbacks must finish all path operations before returning; never export their
+ * path. Root ownership/permission/filesystem readiness admission is a separate, mandatory caller
+ * gate.
  */
-final class OwnedTransferDirectory implements AutoCloseable {
+public final class OwnedTransferDirectory implements AutoCloseable {
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
   private final Object stateLock = new Object();
   private final DirectoryCalls calls;
   private int descriptor;
 
   @FunctionalInterface
-  interface FileOperation<T> {
+  public interface FileOperation<T> {
     T execute(Path capabilityPath) throws IOException, NoSuchAlgorithmException;
   }
 
@@ -33,7 +34,8 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Open every absolute path segment NOFOLLOW; never creates or chmods the configured root. */
-  static OwnedTransferDirectory open(DirectoryCalls calls, Path root) throws StorageIoException {
+  public static OwnedTransferDirectory open(DirectoryCalls calls, Path root)
+      throws StorageIoException {
     Objects.requireNonNull(calls, "calls");
     Objects.requireNonNull(root, "root");
     if (!root.isAbsolute() || root.getNameCount() == 0 || !root.equals(root.normalize())) {
@@ -54,12 +56,12 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** New or existing date child, never follows a symlink; child owns an independent FD. */
-  OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
+  public OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
     return openDate(date, handle -> Boolean.TRUE);
   }
 
   /** Initialize only the directory this call created; never repairs an existing date. */
-  OwnedTransferDirectory openDate(LocalDate date, FileOperation<Boolean> initialize)
+  public OwnedTransferDirectory openDate(LocalDate date, FileOperation<Boolean> initialize)
       throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(date, "date");
@@ -94,7 +96,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Inspect this held directory, not its replaceable configured path; never export the path. */
-  <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
+  public <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(operation, "operation");
       requireOpen();
@@ -102,13 +104,13 @@ final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
-  <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
+  public <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       return atFile(id, ".part", operation);
     }
   }
 
-  <T> T atReady(UUID id, FileOperation<T> operation) throws StorageIoException {
+  public <T> T atReady(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       return atFile(id, ".ready", operation);
     }
@@ -124,14 +126,14 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Hold the part inode; caller must validate its Unix attributes before any read. */
-  <T> T atPartHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
+  public <T> T atPartHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       return atHandle(id, ".part", operation);
     }
   }
 
   /** Hold the ready inode; a replaced name cannot redirect the scoped capability. */
-  <T> T atReadyHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
+  public <T> T atReadyHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       return atHandle(id, ".ready", operation);
     }
@@ -146,7 +148,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** CREATE_NEW and own the actual inode before starting any writer callback. */
-  <T> T createPart(UUID id, FileOperation<T> operation) throws StorageIoException {
+  public <T> T createPart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       Objects.requireNonNull(operation, "operation");
@@ -196,7 +198,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Atomic no-replace publication, then directory durability; never unlinks ready on failure. */
-  void publish(UUID id) throws StorageIoException {
+  public void publish(UUID id) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       requireOpen();
@@ -206,7 +208,7 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Only a writer-owned part may be removed; no ready/root/directory deletion API exists. */
-  void deletePart(UUID id) throws StorageIoException {
+  public void deletePart(UUID id) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       requireOpen();

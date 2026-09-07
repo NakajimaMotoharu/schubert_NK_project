@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.storage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.protocol.file.LargeResultContent;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;

@@ -1,5 +1,9 @@
 package dev.codex.schubert.nk.api.storage;
 
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageAttributeGuard;
+import dev.codex.schubert.nk.storage.StorageIdentity;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;

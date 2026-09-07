@@ -1,10 +1,10 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 import java.util.Objects;
 
 /** Configured OS identities, never an application user. SS333 §2/343 §2; PT-SCN-008-A01. */
-record StorageIdentity(String owner, String group) {
-  StorageIdentity {
+public record StorageIdentity(String owner, String group) {
+  public StorageIdentity {
     validate(owner);
     validate(group);
   }

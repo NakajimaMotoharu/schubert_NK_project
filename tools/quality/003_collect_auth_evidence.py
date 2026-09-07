@@ -36,6 +36,7 @@ def main():
     auth_methods = []
     for module, directory in (("characterization", "program/characterization"),
                               ("protocol", "src/schubert-nk-protocol"),
+                              ("storage", "src/schubert-nk-storage"),
                               ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web")):
         target = repo / directory / "target"
         reports = sorted((target / "surefire-reports").glob("TEST-*.xml"))

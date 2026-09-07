@@ -1,7 +1,7 @@
-package dev.codex.schubert.nk.api.storage;
+package dev.codex.schubert.nk.storage;
 
 /** Owned directory FD operations; names are single segments. SS333 §7.3; PT-SCN-008-F01..F03. */
-interface DirectoryCalls {
+public interface DirectoryCalls {
   int openRoot() throws StorageIoException;
 
   int openDirectory(int parent, String name) throws StorageIoException;
