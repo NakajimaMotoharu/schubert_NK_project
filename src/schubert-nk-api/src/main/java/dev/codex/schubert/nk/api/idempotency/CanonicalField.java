@@ -12,8 +12,7 @@ public record CanonicalField(String name, String typeVersion, byte @Nullable [] 
   public CanonicalField {
     Objects.requireNonNull(name, "name");
     Objects.requireNonNull(typeVersion, "typeVersion");
-    if (!name.matches("[A-Za-z0-9._-]{1,64}")
-        || !typeVersion.matches("[A-Za-z0-9._-]{1,32}")) {
+    if (!name.matches("[A-Za-z0-9._-]{1,64}") || !typeVersion.matches("[A-Za-z0-9._-]{1,32}")) {
       throw new IllegalArgumentException("canonical field metadata is invalid");
     }
     value = value == null ? null : value.clone();

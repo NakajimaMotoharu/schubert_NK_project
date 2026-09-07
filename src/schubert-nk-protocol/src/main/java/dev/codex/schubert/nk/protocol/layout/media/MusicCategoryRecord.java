@@ -7,8 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts MCTRSP01. */
-public record MusicCategoryRecord(String category,
-    int trackCount) implements PayloadRecord {
+public record MusicCategoryRecord(String category, int trackCount) implements PayloadRecord {
   public MusicCategoryRecord {
     Objects.requireNonNull(category, "category");
     TypedFieldValues.requireUnsignedRange("trackCount", trackCount, 6);

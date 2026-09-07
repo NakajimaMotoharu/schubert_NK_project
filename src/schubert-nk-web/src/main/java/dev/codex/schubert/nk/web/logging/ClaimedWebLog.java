@@ -4,14 +4,18 @@ import java.time.Instant;
 import java.util.Objects;
 
 /**
- * Immutable, encrypted Web-owned outbox lease; no business-schema data is accessible here.
- * Trace: NK-MSG-002; RD MON-003/MQ-008; UI 242; SS 324 section 9/331 section 9.3;
- * PT-IDEM-012.
+ * Immutable, encrypted Web-owned outbox lease; no business-schema data is accessible here. Trace:
+ * NK-MSG-002; RD MON-003/MQ-008; UI 242; SS 324 section 9/331 section 9.3; PT-IDEM-012.
  */
 public record ClaimedWebLog(
-    long id, WebLogPayloadIdentity identity, EncryptedWebLogPayload payload,
-    int attemptCount, Instant nextAttemptAt, Instant createdAt,
-    String leaseOwner, Instant leaseUntil) {
+    long id,
+    WebLogPayloadIdentity identity,
+    EncryptedWebLogPayload payload,
+    int attemptCount,
+    Instant nextAttemptAt,
+    Instant createdAt,
+    String leaseOwner,
+    Instant leaseUntil) {
   public ClaimedWebLog {
     if (id < 1 || id > 999_999_999_999L) {
       throw new IllegalArgumentException("web log row ID is outside N12");

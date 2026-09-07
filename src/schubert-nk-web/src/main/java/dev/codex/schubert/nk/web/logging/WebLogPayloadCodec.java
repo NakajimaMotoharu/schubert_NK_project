@@ -21,9 +21,9 @@ import org.jspecify.annotations.Nullable;
 /**
  * Web-only NKENC1 AES-256-GCM storage of one complete, validated WLGEVT01 message.
  *
- * <p>Trace: NK-MSG-002; RD MON-003; UI 233/235 §12/242; SS 324 §9, 352 §11.2;
- * PT-IDEM-012/015. The dispatcher decrypts before sending the 2336-byte fixed-length message.
- * Operations and close serialize key/nonce access; caller arrays are never retained or erased.
+ * <p>Trace: NK-MSG-002; RD MON-003; UI 233/235 §12/242; SS 324 §9, 352 §11.2; PT-IDEM-012/015. The
+ * dispatcher decrypts before sending the 2336-byte fixed-length message. Operations and close
+ * serialize key/nonce access; caller arrays are never retained or erased.
  */
 public final class WebLogPayloadCodec implements AutoCloseable {
   public static final int PLAINTEXT_BYTES = 2_336;
@@ -40,16 +40,23 @@ public final class WebLogPayloadCodec implements AutoCloseable {
   private final SecureRandom random;
   private boolean closed;
 
-  /** Configures current writes and optional previous reads; keys must be 32 bytes and IDs distinct. */
+  /**
+   * Configures current writes and optional previous reads; keys must be 32 bytes and IDs distinct.
+   */
   public WebLogPayloadCodec(
-      String currentVersion, byte[] currentKey,
-      @Nullable String previousVersion, byte @Nullable [] previousKey) {
+      String currentVersion,
+      byte[] currentKey,
+      @Nullable String previousVersion,
+      byte @Nullable [] previousKey) {
     this(currentVersion, currentKey, previousVersion, previousKey, new SecureRandom());
   }
 
   WebLogPayloadCodec(
-      String currentVersion, byte[] currentKey,
-      @Nullable String previousVersion, byte @Nullable [] previousKey, SecureRandom random) {
+      String currentVersion,
+      byte[] currentKey,
+      @Nullable String previousVersion,
+      byte @Nullable [] previousKey,
+      SecureRandom random) {
     this.currentVersion = requireVersion(currentVersion);
     this.currentKey = requireKey(currentKey);
     if ((previousVersion == null) != (previousKey == null)) {
@@ -78,14 +85,22 @@ public final class WebLogPayloadCodec implements AutoCloseable {
       validatePlaintext(identity, candidate);
       random.nextBytes(nonce);
       Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-      cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(currentKey, "AES"),
+      cipher.init(
+          Cipher.ENCRYPT_MODE,
+          new SecretKeySpec(currentKey, "AES"),
           new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
       cipher.updateAAD(aad);
       encrypted = cipher.doFinal(candidate);
       byte[] keyId = currentVersion.getBytes(StandardCharsets.US_ASCII);
-      stored = ByteBuffer.allocate(PREFIX_BYTES + keyId.length + NONCE_BYTES + encrypted.length)
-          .put(MAGIC).put((byte) 1).put((byte) keyId.length).put(keyId).put(nonce).put(encrypted)
-          .array();
+      stored =
+          ByteBuffer.allocate(PREFIX_BYTES + keyId.length + NONCE_BYTES + encrypted.length)
+              .put(MAGIC)
+              .put((byte) 1)
+              .put((byte) keyId.length)
+              .put(keyId)
+              .put(nonce)
+              .put(encrypted)
+              .array();
       return new EncryptedWebLogPayload(currentVersion, stored);
     } catch (GeneralSecurityException exception) {
       throw new WebLogPayloadException(WebLogPayloadException.Reason.CRYPTO_UNAVAILABLE);
@@ -131,7 +146,9 @@ public final class WebLogPayloadCodec implements AutoCloseable {
       nonce = Arrays.copyOfRange(stored, nonceOffset, cipherOffset);
       aad = identity.aad(version);
       Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-      cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key, "AES"),
+      cipher.init(
+          Cipher.DECRYPT_MODE,
+          new SecretKeySpec(key, "AES"),
           new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
       cipher.updateAAD(aad);
       plaintext = cipher.doFinal(stored, cipherOffset, stored.length - cipherOffset);
@@ -169,8 +186,13 @@ public final class WebLogPayloadCodec implements AutoCloseable {
           || !header.correlationId().equals(identity.correlationId())) {
         throw invalidPayload();
       }
-      PayloadTypeCatalog.decode(PayloadCodec.standard().decode(
-          header.layoutId(), Arrays.copyOfRange(plaintext, 256, PLAINTEXT_BYTES), List.of(), false));
+      PayloadTypeCatalog.decode(
+          PayloadCodec.standard()
+              .decode(
+                  header.layoutId(),
+                  Arrays.copyOfRange(plaintext, 256, PLAINTEXT_BYTES),
+                  List.of(),
+                  false));
     } catch (PermanentProtocolException | LayoutValidationException exception) {
       throw invalidPayload();
     }

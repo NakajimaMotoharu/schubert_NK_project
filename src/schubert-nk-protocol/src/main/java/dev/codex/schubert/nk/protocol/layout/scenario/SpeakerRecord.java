@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts SPKRSP01. */
-public record SpeakerRecord(SpeakerId speakerId,
-    String speakerName,
-    long occurrenceCount) implements PayloadRecord {
+public record SpeakerRecord(SpeakerId speakerId, String speakerName, long occurrenceCount)
+    implements PayloadRecord {
   public SpeakerRecord {
     Objects.requireNonNull(speakerId, "speakerId");
     Objects.requireNonNull(speakerName, "speakerName");

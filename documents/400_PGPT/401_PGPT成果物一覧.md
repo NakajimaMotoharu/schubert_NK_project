@@ -16,7 +16,8 @@
 | [441_実装判断記録](440_判断/441_実装判断記録.md) | SSより詳細な内部判断 | 作成中 | 判断確定時 |
 | [451_Build・静的解析・coverage方針](450_品質/451_Build・静的解析・coverage方針.md) | 品質gateと実行方法 | 確定 | gate変更時 |
 | [452_継続走行・再走管理](450_品質/452_継続走行・再走管理.md) | 長時間走行の依存関係・行き詰まり・再走条件 | 運用中 | 走行状態・再走対象の変更時 |
-| [453_Null解析gate検証仕様](450_品質/453_Null解析gate検証仕様.md) | 解析器の負canary・JDBC NULL境界 | 検証中 | null gate設定・結果の変更時 |
+| [453_Null解析gate検証仕様](450_品質/453_Null解析gate検証仕様.md) | 解析器の負canary・JDBC NULL境界 | 検証済み | null gate設定・結果の変更時 |
+| [454_Build契約・整形・再生成gate検証仕様](450_品質/454_Build契約・整形・再生成gate検証仕様.md) | 固定整形・依存収束・70生成fileの再現 | 検証中 | Build/生成toolの変更時 |
 | [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 未着手 | PG gate完了時 |
 | [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 未着手 | PT gate完了時 |
 | [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 未着手 | 全gate完了時 |
@@ -33,10 +34,10 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 開始時確認 | 完了 | status/branch/commit/remote/既存変更確認 | `main`/`749a777`、clean、既存remoteなし。指定URLを`origin`へ設定 |
 | Remote整合 | 完了 | fetchでremote履歴との一致を確認し、通常push | 2026-09-04にGitHub認証を確認。空remoteへ`main`、`dev`、既存feature branchをforceなしでpush済み |
 | 上位資料精査 | 完了 | RD/UI/SS全資料と台帳・baselineの追跡完了 | RD 16、UI 29、SS 24文書とCurrent/CHRを横断確認 |
-| 工程基盤 | 完了 | 規約、toolchain、品質方針、915/916確定 | rootless JDK/Maven、台帳、品質gate構築済み |
+| 工程基盤 | 整備中 | 規約、toolchain、全品質gate、915/916確定 | rootless JDK/Maven、台帳、compiler/coverage/SpotBugs/NullAway稼働。Enforcer/format/PMD等の親gateを追加検証中。文書上の方針確定だけで全gate完了とはしない |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
 | PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 確定完了5/20（25%）、NK-DAT-001はBUG-014/015で完了判定再確認中（従来6/20=30%）。NK-MSG-002はAPI log ingestまで実装。HTTP投影・cleanup・業務冪等性stress等は残作業。 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-IDEM-20260907-02全258件成功（Protocol69/API100/Web48/CHR41）、Java coverage100%、SpotBugs0。ただしSQL cleanup oracle不足のBUG-014/015は未解決、PT-IDEM-010/012部分・013～015未完。NullAway/format gate残。 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-IDEM-20260907-04全263件成功（Protocol69/API105/Web48/CHR41）、Java coverage100%、SpotBugs0。NullAway/JDKモデルと独立canaryを導入しBUG-015/016完了。BUG-014のInbox保護、PT-IDEM-010/012/013部分・014/015未完。Enforcer/format/PMD等は確認中。 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則

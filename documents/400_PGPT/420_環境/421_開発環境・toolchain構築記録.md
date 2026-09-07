@@ -106,6 +106,28 @@ Secret、DB password、JMS credentialはこのblockやrepository内env fileへ�
 - `JsonReader`を`Strictness.STRICT`/nesting limit 2で使い、重複keyと型・値のallowlistはAPIで別途検査する。反射による任意class deserializeを行わない。SS351 §3.3/SSC-008、PT-IDEM-012を参照。
 - 再現: 上記固定JDK/Maven/local repositoryでroot `./mvnw --no-transfer-progress clean verify`（初回取得後は`-o`）。`RequestLogDetailsTest`がstrict JSON/重複/型/byte上限を確認する。
 
+### 5.2 Build契約・固定整形・生成再現（2026-09-07）
+
+全artifactはMaven Central `https://repo.maven.apache.org/maven2/`から取得する。version rangeでの取得を行わない。
+
+| Artifact / repository内path | version | JAR SHA-256 |
+|---|---|---|
+| org/apache/maven/plugins/maven-enforcer-plugin | 3.6.3 | `32347686c513894a2fae96eeb11527883f47b8957850d793ea833646ad954dca` |
+| com/diffplug/spotless/spotless-maven-plugin | 3.10.2 | `5a8264cb01785dc2fb55cef96e31bc9f98a300a27e237b2d86c4c9fc6d770ea6` |
+| com/google/googlejavaformat/google-java-format（all-deps classifier） | 1.36.1 | `25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4` |
+| org/slf4j/slf4j-api | 2.0.18 | `44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55` |
+
+親POMのvalidateでEnforcer（JDK25、Maven3.9.12以上4未満、dependencyConvergence）とSpotless checkを必須化。整形は`./mvnw spotless:apply`、確認は`./mvnw clean verify`。通常と同じJAVA_HOME/Maven local repositoryを指定する。再生成は次の隔離検査を使用し、productionやgoldenを上書きしない。
+
+```sh
+JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 python3 tools/quality/002_verify_generation.py \
+  --formatter /home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar \
+  --work-dir /home/mini/codex/project1/work \
+  --output /home/mini/codex/project1/work/generation-results.json
+```
+
+比較器は70 fileの一致に加え、隔離catalogに1行の差を与えた場合の拒否を確認する。再生成一致は機能期待値の証明と混同せず、固定長golden・semantic negative PTを併用する（BUG-017～019、YKT-014～016、PG-D-030/031）。
+
 ## 6. 導入予定・工程内service
 
 | 対象 | 方針 | 状態 |

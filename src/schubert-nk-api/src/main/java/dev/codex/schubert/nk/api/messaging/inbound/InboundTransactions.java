@@ -12,8 +12,8 @@ import java.time.Clock;
 /**
  * Shared API-local fatal isolation and rollback mechanics for transacted listeners.
  *
- * <p>Trace: NK-MSG-001; RD MQ-008/MQ-010; UI 231/251; SS 312 section 9 and 321
- * section 7; PT-JMS-006/007/009.
+ * <p>Trace: NK-MSG-001; RD MQ-008/MQ-010; UI 231/251; SS 312 section 9 and 321 section 7;
+ * PT-JMS-006/007/009.
  */
 enum InboundTransactions {
   ;

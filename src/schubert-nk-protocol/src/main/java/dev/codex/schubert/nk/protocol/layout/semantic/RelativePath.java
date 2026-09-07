@@ -6,8 +6,8 @@ import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Root-relative logical path; it is data only and never performs file-system resolution.
- * Trace: NK-PRO-001, UI 243, SS 323/333, PT-PRO-001-T03, BUG-004/YKT-004.
+ * Root-relative logical path; it is data only and never performs file-system resolution. Trace:
+ * NK-PRO-001, UI 243, SS 323/333, PT-PRO-001-T03, BUG-004/YKT-004.
  */
 public final class RelativePath {
   private static final int MAXIMUM_WIRE_BYTES = 512;

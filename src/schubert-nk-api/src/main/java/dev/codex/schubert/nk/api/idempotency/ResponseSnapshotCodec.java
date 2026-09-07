@@ -131,12 +131,7 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     try {
       if (stored.length < MINIMUM_ENVELOPE_BYTES
           || !Arrays.equals(
-              stored,
-              0,
-              ENVELOPE_MAGIC.length,
-              ENVELOPE_MAGIC,
-              0,
-              ENVELOPE_MAGIC.length)) {
+              stored, 0, ENVELOPE_MAGIC.length, ENVELOPE_MAGIC, 0, ENVELOPE_MAGIC.length)) {
         throw invalidSnapshot("response snapshot envelope is invalid", null);
       }
       if (stored[ENVELOPE_MAGIC.length] != ENVELOPE_FORMAT_VERSION) {
@@ -145,14 +140,11 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
       int keyIdLength = Byte.toUnsignedInt(stored[ENVELOPE_MAGIC.length + 1]);
       int nonceOffset = ENVELOPE_MAGIC.length + 2 + keyIdLength;
       int encryptedOffset = nonceOffset + NONCE_BYTES;
-      if (keyIdLength < 1
-          || keyIdLength > 16
-          || stored.length < encryptedOffset + GCM_TAG_BYTES) {
+      if (keyIdLength < 1 || keyIdLength > 16 || stored.length < encryptedOffset + GCM_TAG_BYTES) {
         throw invalidSnapshot("response snapshot envelope length is invalid", null);
       }
       String envelopeKeyVersion =
-          new String(
-              stored, ENVELOPE_MAGIC.length + 2, keyIdLength, StandardCharsets.US_ASCII);
+          new String(stored, ENVELOPE_MAGIC.length + 2, keyIdLength, StandardCharsets.US_ASCII);
       if (!envelopeKeyVersion.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")
           || !snapshot.keyVersion().equals(envelopeKeyVersion)) {
         throw invalidSnapshot("response snapshot key version is invalid", null);
@@ -214,7 +206,8 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     try {
       deflater.setInput(plaintext);
       deflater.finish();
-      ByteArrayOutputStream output = new ByteArrayOutputStream(Math.min(plaintext.length, BUFFER_BYTES));
+      ByteArrayOutputStream output =
+          new ByteArrayOutputStream(Math.min(plaintext.length, BUFFER_BYTES));
       while (!deflater.finished()) {
         int count = deflater.deflate(buffer);
         output.write(buffer, 0, count);
@@ -231,7 +224,8 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     byte[] buffer = new byte[BUFFER_BYTES];
     try {
       inflater.setInput(compressed);
-      ByteArrayOutputStream output = new ByteArrayOutputStream(Math.min(compressed.length, BUFFER_BYTES));
+      ByteArrayOutputStream output =
+          new ByteArrayOutputStream(Math.min(compressed.length, BUFFER_BYTES));
       while (!inflater.finished()) {
         int count = inflater.inflate(buffer);
         if (count == 0) {
@@ -257,7 +251,8 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     }
   }
 
-  private static ResponseSnapshotException invalidSnapshot(String message, @Nullable Throwable cause) {
+  private static ResponseSnapshotException invalidSnapshot(
+      String message, @Nullable Throwable cause) {
     return cause == null
         ? new ResponseSnapshotException(ResponseSnapshotException.Reason.SNAPSHOT_INVALID, message)
         : new ResponseSnapshotException(

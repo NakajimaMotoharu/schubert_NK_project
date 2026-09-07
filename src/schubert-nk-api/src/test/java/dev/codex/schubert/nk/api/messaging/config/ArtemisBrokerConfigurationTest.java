@@ -31,8 +31,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Artemis 2.56 production-template component PT.
  *
- * <p>Trace: RD MQ-001..013/MQ-040..045; UI 231; SS 321; PT-JMS-001..004/010.
- * Every expected topology, limit and ACL in this test is a literal oracle independent from the XML.
+ * <p>Trace: RD MQ-001..013/MQ-040..045; UI 231; SS 321; PT-JMS-001..004/010. Every expected
+ * topology, limit and ACL in this test is a literal oracle independent from the XML.
  */
 final class ArtemisBrokerConfigurationTest {
   private static final long MIB = 1024L * 1024L;
@@ -128,7 +128,8 @@ final class ArtemisBrokerConfigurationTest {
 
     assertEquals(ADDRESSES, configuration.getAddressSettings().keySet());
     expected.forEach(
-        (address, capacity) -> assertAddressPolicy(configuration.getAddressSettings().get(address), capacity));
+        (address, capacity) ->
+            assertAddressPolicy(configuration.getAddressSettings().get(address), capacity));
   }
 
   @Test

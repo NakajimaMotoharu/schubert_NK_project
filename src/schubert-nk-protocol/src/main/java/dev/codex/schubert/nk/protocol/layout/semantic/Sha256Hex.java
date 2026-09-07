@@ -1,12 +1,12 @@
 package dev.codex.schubert.nk.protocol.layout.semantic;
 
 import java.util.Objects;
-import org.jspecify.annotations.Nullable;
 import java.util.regex.Pattern;
+import org.jspecify.annotations.Nullable;
 
 /**
- * Lowercase SHA-256 hexadecimal value whose textual rendering is always redacted.
- * Trace: NK-PRO-001, SS 323 section 2, PT-PRO-001-T03.
+ * Lowercase SHA-256 hexadecimal value whose textual rendering is always redacted. Trace:
+ * NK-PRO-001, SS 323 section 2, PT-PRO-001-T03.
  */
 public final class Sha256Hex {
   private static final Pattern FORMAT = Pattern.compile("[0-9a-f]{64}");

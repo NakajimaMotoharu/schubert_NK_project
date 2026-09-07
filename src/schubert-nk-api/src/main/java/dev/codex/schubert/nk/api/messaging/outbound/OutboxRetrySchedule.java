@@ -24,8 +24,8 @@ public enum OutboxRetrySchedule {
   /**
    * Schedules a failed attempt from its observed failure time using an injected jitter in permille.
    *
-   * <p>The base delay is capped at 300 seconds before applying ±100 permille (±10%). Initial receipt
-   * sends use their enqueue time directly; only failed attempts call this retry policy.
+   * <p>The base delay is capped at 300 seconds before applying ±100 permille (±10%). Initial
+   * receipt sends use their enqueue time directly; only failed attempts call this retry policy.
    */
   public Instant nextAttemptAt(Instant failedAt, int attemptCount, int jitterPermille) {
     Objects.requireNonNull(failedAt, "failedAt");

@@ -23,8 +23,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Copies and validates one untrusted Web reply before correlation dispatch.
  *
- * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005/MQ-008; UI 231; SS 321 sections 8-9 and
- * 322 section 5.
+ * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005/MQ-008; UI 231; SS 321 sections 8-9 and 322 section 5.
  */
 public final class JmsReplyDecoder {
   private static final String PROPERTY_MESSAGE_ID = "NKMessageID";

@@ -11,8 +11,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 /**
  * Sends a reply in the listener-owned local JMS transaction without committing it.
  *
- * <p>Trace: NK-MSG-001; RD MQ-003/MQ-008; UI 212/231; SS 312 section 3 and 321
- * sections 7-8.
+ * <p>Trace: NK-MSG-001; RD MQ-003/MQ-008; UI 212/231; SS 312 section 3 and 321 sections 7-8.
  */
 public final class ReplySender {
   /** Stages one persistent reply; the listener commits it together with the request ACK. */

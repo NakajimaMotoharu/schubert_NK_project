@@ -28,14 +28,12 @@ import org.junit.jupiter.api.Test;
 final class ResponseSnapshotCodecTest {
   private static final byte[] NKENC1 = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   private static final byte FORMAT_VERSION = 1;
-  private static final UUID MESSAGE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000007");
+  private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000007");
   private static final ResponseSnapshotIdentity IDENTITY =
       ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 7);
   private static final byte[] CURRENT_KEY = sequence(0);
   private static final byte[] PREVIOUS_KEY = sequence(32);
-  private static final byte[] NONCE =
-      new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+  private static final byte[] NONCE = new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
   @Test
   void fixedNonceCiphertextMatchesIndependentCompressionAndAadVector() throws Exception {
@@ -58,8 +56,7 @@ final class ResponseSnapshotCodecTest {
       assertEquals(FORMAT_VERSION, actual.ciphertext()[6]);
       assertEquals(2, actual.ciphertext()[7]);
       assertArrayEquals(
-          "k2".getBytes(StandardCharsets.US_ASCII),
-          Arrays.copyOfRange(actual.ciphertext(), 8, 10));
+          "k2".getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(actual.ciphertext(), 8, 10));
       assertArrayEquals(NONCE, Arrays.copyOfRange(actual.ciphertext(), 10, 22));
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, actual));
       assertArrayEquals(plaintext, callerPlaintext);
@@ -77,7 +74,8 @@ final class ResponseSnapshotCodecTest {
     try (ResponseSnapshotCodec productionConstructor =
         new ResponseSnapshotCodec("k2", CURRENT_KEY, null, null)) {
       EncryptedResponseSnapshot snapshot =
-          productionConstructor.encrypt(ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", "001"), new byte[0]);
+          productionConstructor.encrypt(
+              ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", "001"), new byte[0]);
       assertArrayEquals(
           new byte[0],
           productionConstructor.decrypt(
@@ -97,14 +95,16 @@ final class ResponseSnapshotCodecTest {
       assertArrayEquals(maximum, codec.decrypt(IDENTITY, encryptedMaximum));
       assertThrows(
           IllegalArgumentException.class,
-          () -> codec.encrypt(IDENTITY, new byte[ResponseSnapshotCodec.MAXIMUM_PLAINTEXT_BYTES + 1]));
+          () ->
+              codec.encrypt(IDENTITY, new byte[ResponseSnapshotCodec.MAXIMUM_PLAINTEXT_BYTES + 1]));
     }
 
-    new EncryptedResponseSnapshot("v1", new byte[EncryptedResponseSnapshot.MINIMUM_CIPHERTEXT_BYTES]);
-    new EncryptedResponseSnapshot("v1", new byte[EncryptedResponseSnapshot.MAXIMUM_CIPHERTEXT_BYTES]);
+    new EncryptedResponseSnapshot(
+        "v1", new byte[EncryptedResponseSnapshot.MINIMUM_CIPHERTEXT_BYTES]);
+    new EncryptedResponseSnapshot(
+        "v1", new byte[EncryptedResponseSnapshot.MAXIMUM_CIPHERTEXT_BYTES]);
     assertThrows(
-        IllegalArgumentException.class,
-        () -> new EncryptedResponseSnapshot("v1", new byte[28]));
+        IllegalArgumentException.class, () -> new EncryptedResponseSnapshot("v1", new byte[28]));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -122,8 +122,7 @@ final class ResponseSnapshotCodecTest {
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, current));
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, previous));
 
-      EncryptedResponseSnapshot unknown =
-          new EncryptedResponseSnapshot("k0", current.ciphertext());
+      EncryptedResponseSnapshot unknown = new EncryptedResponseSnapshot("k0", current.ciphertext());
       assertReason(
           ResponseSnapshotException.Reason.SNAPSHOT_INVALID,
           () -> codec.decrypt(IDENTITY, unknown));
@@ -132,9 +131,7 @@ final class ResponseSnapshotCodecTest {
       unknownKeyEnvelope[9] = '0';
       assertReason(
           ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
-          () ->
-              codec.decrypt(
-                  IDENTITY, new EncryptedResponseSnapshot("k0", unknownKeyEnvelope)));
+          () -> codec.decrypt(IDENTITY, new EncryptedResponseSnapshot("k0", unknownKeyEnvelope)));
 
       byte[] wrongMagic = current.ciphertext();
       wrongMagic[0] ^= 1;
@@ -166,23 +163,16 @@ final class ResponseSnapshotCodecTest {
           ResponseSnapshotIdentity.authenticated(
               UUID.fromString("00000000-0000-0000-0000-000000000008"), "LOGRSP01", "001", 7));
       assertInvalidAad(
-          codec,
-          current,
-          ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSTRSP01", "001", 7));
+          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSTRSP01", "001", 7));
       assertInvalidAad(
-          codec,
-          current,
-          ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "002", 7));
+          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "002", 7));
       assertInvalidAad(
-          codec,
-          current,
-          ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 8));
+          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 8));
       assertInvalidAad(
           codec, current, ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LOGRSP01", "001"));
     }
 
-    try (ResponseSnapshotCodec codecWithoutRotation =
-        fixedCodec("k2", CURRENT_KEY, null, null)) {
+    try (ResponseSnapshotCodec codecWithoutRotation = fixedCodec("k2", CURRENT_KEY, null, null)) {
       EncryptedResponseSnapshot unavailablePrevious =
           independentSnapshot("k1", PREVIOUS_KEY, IDENTITY, independentCompress(plaintext));
       assertReason(
@@ -192,8 +182,7 @@ final class ResponseSnapshotCodecTest {
   }
 
   @Test
-  void malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected()
-      throws Exception {
+  void malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected() throws Exception {
     try (ResponseSnapshotCodec codec = fixedCodec("k2", CURRENT_KEY, null, null)) {
       assertInvalidCompressed(codec, new byte[] {1, 2, 3, 4});
 
@@ -205,9 +194,7 @@ final class ResponseSnapshotCodecTest {
 
       assertInvalidCompressed(codec, independentCompressWithDictionary(new byte[] {1, 2, 3}));
       assertInvalidCompressed(
-          codec,
-          independentCompress(
-              new byte[ResponseSnapshotCodec.MAXIMUM_PLAINTEXT_BYTES + 1]));
+          codec, independentCompress(new byte[ResponseSnapshotCodec.MAXIMUM_PLAINTEXT_BYTES + 1]));
     }
   }
 
@@ -240,18 +227,17 @@ final class ResponseSnapshotCodecTest {
             ResponseSnapshotIdentity.authenticated(
                 MESSAGE_ID, "LOGRSP01", "001", 1_000_000_000_000L));
 
-    assertThrows(NullPointerException.class, () -> new EncryptedResponseSnapshot(null, new byte[29]));
+    assertThrows(
+        NullPointerException.class, () -> new EncryptedResponseSnapshot(null, new byte[29]));
     assertThrows(NullPointerException.class, () -> new EncryptedResponseSnapshot("v1", null));
     assertThrows(
         IllegalArgumentException.class,
         () -> new EncryptedResponseSnapshot("bad version", new byte[29]));
 
     assertThrows(
-        NullPointerException.class,
-        () -> new ResponseSnapshotCodec(null, CURRENT_KEY, null, null));
+        NullPointerException.class, () -> new ResponseSnapshotCodec(null, CURRENT_KEY, null, null));
     assertThrows(
-        NullPointerException.class,
-        () -> new ResponseSnapshotCodec("k2", null, null, null));
+        NullPointerException.class, () -> new ResponseSnapshotCodec("k2", null, null, null));
     assertThrows(
         IllegalArgumentException.class,
         () -> new ResponseSnapshotCodec("bad version", CURRENT_KEY, null, null));
@@ -307,16 +293,9 @@ final class ResponseSnapshotCodecTest {
   }
 
   private static ResponseSnapshotCodec fixedCodec(
-      String currentVersion,
-      byte[] currentKey,
-      String previousVersion,
-      byte[] previousKey) {
+      String currentVersion, byte[] currentKey, String previousVersion, byte[] previousKey) {
     return new ResponseSnapshotCodec(
-        currentVersion,
-        currentKey,
-        previousVersion,
-        previousKey,
-        new FixedSecureRandom(NONCE));
+        currentVersion, currentKey, previousVersion, previousKey, new FixedSecureRandom(NONCE));
   }
 
   private static void assertInvalidAad(
@@ -324,8 +303,7 @@ final class ResponseSnapshotCodecTest {
       EncryptedResponseSnapshot snapshot,
       ResponseSnapshotIdentity changed) {
     assertReason(
-        ResponseSnapshotException.Reason.SNAPSHOT_INVALID,
-        () -> codec.decrypt(changed, snapshot));
+        ResponseSnapshotException.Reason.SNAPSHOT_INVALID, () -> codec.decrypt(changed, snapshot));
   }
 
   private static void assertInvalidCompressed(ResponseSnapshotCodec codec, byte[] compressed)
@@ -333,8 +311,7 @@ final class ResponseSnapshotCodecTest {
     EncryptedResponseSnapshot snapshot =
         independentSnapshot("k2", CURRENT_KEY, IDENTITY, compressed);
     assertReason(
-        ResponseSnapshotException.Reason.SNAPSHOT_INVALID,
-        () -> codec.decrypt(IDENTITY, snapshot));
+        ResponseSnapshotException.Reason.SNAPSHOT_INVALID, () -> codec.decrypt(IDENTITY, snapshot));
   }
 
   private static void assertInvalidEnvelope(ResponseSnapshotCodec codec, byte[] envelope) {
@@ -360,13 +337,10 @@ final class ResponseSnapshotCodecTest {
   }
 
   private static byte[] storedCiphertext(
-      String keyVersion, byte[] key, byte[] nonce, byte[] aad, byte[] compressed)
-      throws Exception {
+      String keyVersion, byte[] key, byte[] nonce, byte[] aad, byte[] compressed) throws Exception {
     Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
     cipher.init(
-        Cipher.ENCRYPT_MODE,
-        new SecretKeySpec(key, "AES"),
-        new GCMParameterSpec(128, nonce));
+        Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "AES"), new GCMParameterSpec(128, nonce));
     cipher.updateAAD(aad);
     byte[] encrypted = cipher.doFinal(compressed);
     byte[] keyId = keyVersion.getBytes(StandardCharsets.US_ASCII);

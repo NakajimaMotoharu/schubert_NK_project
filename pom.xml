@@ -16,6 +16,17 @@
     <nullaway.version>0.14.1</nullaway.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- BUG-018/YKT-015: retain Artemis 2.56.0's already resolved logging API version. -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.18</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <modules>
     <module>program/characterization</module>
     <module>src/schubert-nk-protocol</module>
@@ -25,6 +36,41 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.3</version>
+        <executions>
+          <execution>
+            <id>toolchain-and-dependency-contract</id>
+            <goals><goal>enforce</goal></goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion><version>[25,26)</version></requireJavaVersion>
+                <requireMavenVersion><version>[3.9.12,4)</version></requireMavenVersion>
+                <dependencyConvergence/>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>3.10.2</version>
+        <configuration>
+          <java>
+            <googleJavaFormat><version>1.36.1</version></googleJavaFormat>
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>java-format-contract</id>
+            <phase>validate</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

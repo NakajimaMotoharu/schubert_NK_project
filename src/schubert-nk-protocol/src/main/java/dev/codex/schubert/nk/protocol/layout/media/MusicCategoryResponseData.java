@@ -12,15 +12,13 @@ public record MusicCategoryResponseData(int totalCount) implements PayloadData {
   }
 
   public static MusicCategoryResponseData from(FieldValueSet fields) {
-    return new MusicCategoryResponseData(
-        TypedFieldValues.requiredInt(fields, "Total count"));
+    return new MusicCategoryResponseData(TypedFieldValues.requiredInt(fields, "Total count"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
+        Map.ofEntries(Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
   }
 
   @Override

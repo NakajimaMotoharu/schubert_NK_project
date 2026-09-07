@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 /** PT-IDEM-009/011 null, bounds, defensive-copy, and redaction contract. */
 final class OutboxModelTest {
   private static final UUID MESSAGE = UUID.fromString("71000000-0000-0000-0000-000000000001");
-  private static final UUID CORRELATION =
-      UUID.fromString("72000000-0000-0000-0000-000000000001");
+  private static final UUID CORRELATION = UUID.fromString("72000000-0000-0000-0000-000000000001");
   private static final Instant NOW = Instant.parse("2026-09-05T00:00:00Z");
 
   @Test
@@ -43,28 +42,36 @@ final class OutboxModelTest {
 
   @Test
   void entryRejectsEveryInvalidBoundaryAndNull() {
-    assertThrows(IllegalArgumentException.class, () -> entry(0, 0, "QWKREQ01", "001", bytes(), "w"));
+    assertThrows(
+        IllegalArgumentException.class, () -> entry(0, 0, "QWKREQ01", "001", bytes(), "w"));
     assertThrows(
         IllegalArgumentException.class,
         () -> entry(1_000_000_000_000L, 0, "QWKREQ01", "001", bytes(), "w"));
-    assertThrows(IllegalArgumentException.class, () -> entry(1, -1, "QWKREQ01", "001", bytes(), "w"));
-    assertThrows(IllegalArgumentException.class, () -> entry(1, 101, "QWKREQ01", "001", bytes(), "w"));
-    assertThrows(NullPointerException.class, () -> entry(null, CORRELATION, OutboxDestination.ASYNC_WORK));
-    assertThrows(NullPointerException.class, () -> entry(MESSAGE, null, OutboxDestination.ASYNC_WORK));
+    assertThrows(
+        IllegalArgumentException.class, () -> entry(1, -1, "QWKREQ01", "001", bytes(), "w"));
+    assertThrows(
+        IllegalArgumentException.class, () -> entry(1, 101, "QWKREQ01", "001", bytes(), "w"));
+    assertThrows(
+        NullPointerException.class, () -> entry(null, CORRELATION, OutboxDestination.ASYNC_WORK));
+    assertThrows(
+        NullPointerException.class, () -> entry(MESSAGE, null, OutboxDestination.ASYNC_WORK));
     assertThrows(NullPointerException.class, () -> entry(MESSAGE, CORRELATION, null));
     assertThrows(NullPointerException.class, () -> entry(1, 0, null, "001", bytes(), "w"));
-    assertThrows(IllegalArgumentException.class, () -> entry(1, 0, "lower001", "001", bytes(), "w"));
+    assertThrows(
+        IllegalArgumentException.class, () -> entry(1, 0, "lower001", "001", bytes(), "w"));
     assertThrows(NullPointerException.class, () -> entry(1, 0, "QWKREQ01", null, bytes(), "w"));
-    assertThrows(IllegalArgumentException.class, () -> entry(1, 0, "QWKREQ01", "01A", bytes(), "w"));
+    assertThrows(
+        IllegalArgumentException.class, () -> entry(1, 0, "QWKREQ01", "01A", bytes(), "w"));
     assertThrows(NullPointerException.class, () -> entry(1, 0, "QWKREQ01", "001", null, "w"));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> entry(1, 0, "QWKREQ01", "001", new byte[0], "w"));
-    assertThrows(NullPointerException.class, () -> entryWithTimes(null, NOW.minusSeconds(1), "w", NOW));
+        IllegalArgumentException.class, () -> entry(1, 0, "QWKREQ01", "001", new byte[0], "w"));
+    assertThrows(
+        NullPointerException.class, () -> entryWithTimes(null, NOW.minusSeconds(1), "w", NOW));
     assertThrows(NullPointerException.class, () -> entryWithTimes(NOW, null, "w", NOW));
     assertThrows(NullPointerException.class, () -> entryWithTimes(NOW, NOW, null, NOW));
     assertThrows(IllegalArgumentException.class, () -> entryWithTimes(NOW, NOW, " ", NOW));
-    assertThrows(IllegalArgumentException.class, () -> entryWithTimes(NOW, NOW, "x".repeat(65), NOW));
+    assertThrows(
+        IllegalArgumentException.class, () -> entryWithTimes(NOW, NOW, "x".repeat(65), NOW));
     assertThrows(NullPointerException.class, () -> entryWithTimes(NOW, NOW, "w", null));
   }
 
@@ -85,17 +92,122 @@ final class OutboxModelTest {
     assertEquals(NOW.minusSeconds(1), request.createdAt());
     assertTrue(request.toString().contains("body=<redacted>"));
 
-    assertThrows(NullPointerException.class, () -> request(null, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, null, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, null, "QWKREQ01", "001", bytes(), NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, null, "001", bytes(), NOW, NOW));
-    assertThrows(IllegalArgumentException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "BAD", "001", bytes(), NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", null, bytes(), NOW, NOW));
-    assertThrows(IllegalArgumentException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "1", bytes(), NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", null, NOW, NOW));
-    assertThrows(IllegalArgumentException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", new byte[0], NOW, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), null, NOW));
-    assertThrows(NullPointerException.class, () -> request(MESSAGE, CORRELATION, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), NOW, null));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                null,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "001",
+                bytes(),
+                NOW,
+                NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE, null, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), NOW, NOW));
+    assertThrows(
+        NullPointerException.class,
+        () -> request(MESSAGE, CORRELATION, null, "QWKREQ01", "001", bytes(), NOW, NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                null,
+                "001",
+                bytes(),
+                NOW,
+                NOW));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "BAD",
+                "001",
+                bytes(),
+                NOW,
+                NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                null,
+                bytes(),
+                NOW,
+                NOW));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "1",
+                bytes(),
+                NOW,
+                NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "001",
+                null,
+                NOW,
+                NOW));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "001",
+                new byte[0],
+                NOW,
+                NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "001",
+                bytes(),
+                null,
+                NOW));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                OutboxDestination.ASYNC_WORK,
+                "QWKREQ01",
+                "001",
+                bytes(),
+                NOW,
+                null));
   }
 
   @Test

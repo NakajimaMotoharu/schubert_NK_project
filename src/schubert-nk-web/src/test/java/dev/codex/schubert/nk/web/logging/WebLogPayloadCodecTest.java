@@ -35,7 +35,8 @@ import org.junit.jupiter.api.Test;
 final class WebLogPayloadCodecTest {
   private static final UUID MESSAGE = UUID.fromString("00000000-0000-0000-0000-000000000012");
   private static final UUID CORRELATION = UUID.fromString("00000000-0000-0000-0000-000000000015");
-  private static final WebLogPayloadIdentity IDENTITY = new WebLogPayloadIdentity(MESSAGE, CORRELATION);
+  private static final WebLogPayloadIdentity IDENTITY =
+      new WebLogPayloadIdentity(MESSAGE, CORRELATION);
   private static final byte[] CURRENT = sequence(32, 0);
   private static final byte[] PREVIOUS = sequence(32, 32);
   private static final byte[] NONCE = sequence(12, 64);
@@ -48,7 +49,8 @@ final class WebLogPayloadCodecTest {
       Arrays.fill(sourceKey, (byte) 0);
       byte[] input = plaintext.clone();
       EncryptedWebLogPayload encrypted = codec.encrypt(IDENTITY, input);
-      byte[] expected = independentEnvelope("v2", CURRENT, independentAad(IDENTITY, "v2"), plaintext);
+      byte[] expected =
+          independentEnvelope("v2", CURRENT, independentAad(IDENTITY, "v2"), plaintext);
       assertArrayEquals(independentAad(IDENTITY, "v2"), IDENTITY.aad("v2"));
       assertArrayEquals(expected, encrypted.ciphertext());
       assertArrayEquals(plaintext, input);
@@ -77,13 +79,16 @@ final class WebLogPayloadCodecTest {
       EncryptedWebLogPayload previous = independentPayload("v1", PREVIOUS, plaintext);
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, previous));
       assertEquals("v2", codec.encrypt(IDENTITY, plaintext).keyVersion());
-      assertReason(WebLogPayloadException.Reason.KEY_UNAVAILABLE,
+      assertReason(
+          WebLogPayloadException.Reason.KEY_UNAVAILABLE,
           () -> codec.decrypt(IDENTITY, independentPayload("v0", PREVIOUS, plaintext)));
-      assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
+      assertReason(
+          WebLogPayloadException.Reason.PAYLOAD_INVALID,
           () -> codec.decrypt(IDENTITY, new EncryptedWebLogPayload("v2", previous.ciphertext())));
     }
     try (WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null)) {
-      assertReason(WebLogPayloadException.Reason.KEY_UNAVAILABLE,
+      assertReason(
+          WebLogPayloadException.Reason.KEY_UNAVAILABLE,
           () -> codec.decrypt(IDENTITY, independentPayload("v1", PREVIOUS, plaintext)));
     }
     for (String version : List.of("a", "a1234567890._-AB")) {
@@ -128,10 +133,12 @@ final class WebLogPayloadCodecTest {
   void everyAadFieldMutationAndCrossRowMoveFailAuthenticationBeforeAnyPlaintext() throws Exception {
     try (WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, "v1", PREVIOUS)) {
       EncryptedWebLogPayload valid = codec.encrypt(IDENTITY, goldenWire());
-      for (WebLogPayloadIdentity other : List.of(
-          new WebLogPayloadIdentity(CORRELATION, CORRELATION),
-          new WebLogPayloadIdentity(MESSAGE, MESSAGE))) {
-        assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID, () -> codec.decrypt(other, valid));
+      for (WebLogPayloadIdentity other :
+          List.of(
+              new WebLogPayloadIdentity(CORRELATION, CORRELATION),
+              new WebLogPayloadIdentity(MESSAGE, MESSAGE))) {
+        assertReason(
+            WebLogPayloadException.Reason.PAYLOAD_INVALID, () -> codec.decrypt(other, valid));
       }
       // Separate mutations cover purpose, table, message ID, correlation ID, format, key ID,
       // layout, layout version and each corresponding length prefix.
@@ -143,10 +150,11 @@ final class WebLogPayloadCodecTest {
         for (int index : new int[] {offset + 3, offset + 4}) {
           byte[] altered = originalAad.clone();
           altered[index] ^= 1;
-          EncryptedWebLogPayload forged = new EncryptedWebLogPayload("v2",
-              independentEnvelope("v2", CURRENT, altered, goldenWire()));
-          assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
-              () -> codec.decrypt(IDENTITY, forged));
+          EncryptedWebLogPayload forged =
+              new EncryptedWebLogPayload(
+                  "v2", independentEnvelope("v2", CURRENT, altered, goldenWire()));
+          assertReason(
+              WebLogPayloadException.Reason.PAYLOAD_INVALID, () -> codec.decrypt(IDENTITY, forged));
         }
         offset += Integer.BYTES + length;
       }
@@ -160,9 +168,11 @@ final class WebLogPayloadCodecTest {
     try (WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null)) {
       for (int length : new int[] {0, 2_080, 2_335, 2_337}) {
         byte[] candidate = Arrays.copyOf(goldenWire(), length);
-        assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
+        assertReason(
+            WebLogPayloadException.Reason.PAYLOAD_INVALID,
             () -> codec.encrypt(IDENTITY, candidate));
-        assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
+        assertReason(
+            WebLogPayloadException.Reason.PAYLOAD_INVALID,
             () -> codec.decrypt(IDENTITY, independentPayload("v2", CURRENT, candidate)));
       }
       List<byte[]> invalidWires = new ArrayList<>();
@@ -205,9 +215,10 @@ final class WebLogPayloadCodecTest {
       reserved[2_335] = 'X';
       invalidWires.add(reserved);
       for (byte[] invalid : invalidWires) {
-        assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
-            () -> codec.encrypt(IDENTITY, invalid));
-        assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
+        assertReason(
+            WebLogPayloadException.Reason.PAYLOAD_INVALID, () -> codec.encrypt(IDENTITY, invalid));
+        assertReason(
+            WebLogPayloadException.Reason.PAYLOAD_INVALID,
             () -> codec.decrypt(IDENTITY, independentPayload("v2", CURRENT, invalid)));
       }
     }
@@ -222,37 +233,42 @@ final class WebLogPayloadCodecTest {
     assertThrows(NullPointerException.class, () -> new EncryptedWebLogPayload(null, new byte[29]));
     assertThrows(NullPointerException.class, () -> new EncryptedWebLogPayload("v2", null));
     for (String version : List.of("", " ", "bad id", "日本語", "v12345678901234567")) {
-      assertThrows(IllegalArgumentException.class,
-          () -> new EncryptedWebLogPayload(version, new byte[29]));
-      assertThrows(IllegalArgumentException.class,
+      assertThrows(
+          IllegalArgumentException.class, () -> new EncryptedWebLogPayload(version, new byte[29]));
+      assertThrows(
+          IllegalArgumentException.class,
           () -> new WebLogPayloadCodec(version, CURRENT, null, null));
-      assertThrows(IllegalArgumentException.class,
+      assertThrows(
+          IllegalArgumentException.class,
           () -> new WebLogPayloadCodec("v2", CURRENT, version, PREVIOUS));
     }
     for (int length : new int[] {0, 28, 2_389}) {
-      assertThrows(IllegalArgumentException.class,
-          () -> new EncryptedWebLogPayload("v2", new byte[length]));
+      assertThrows(
+          IllegalArgumentException.class, () -> new EncryptedWebLogPayload("v2", new byte[length]));
     }
     assertEquals(29, new EncryptedWebLogPayload("v2", new byte[29]).ciphertext().length);
     assertEquals(2_388, new EncryptedWebLogPayload("v2", new byte[2_388]).ciphertext().length);
-    assertThrows(NullPointerException.class,
-        () -> new WebLogPayloadCodec(null, CURRENT, null, null));
-    assertThrows(NullPointerException.class,
-        () -> new WebLogPayloadCodec("v2", null, null, null));
+    assertThrows(
+        NullPointerException.class, () -> new WebLogPayloadCodec(null, CURRENT, null, null));
+    assertThrows(NullPointerException.class, () -> new WebLogPayloadCodec("v2", null, null, null));
     for (int length : new int[] {0, 31, 33}) {
-      assertThrows(IllegalArgumentException.class,
+      assertThrows(
+          IllegalArgumentException.class,
           () -> new WebLogPayloadCodec("v2", new byte[length], null, null));
-      assertThrows(IllegalArgumentException.class,
+      assertThrows(
+          IllegalArgumentException.class,
           () -> new WebLogPayloadCodec("v2", CURRENT, "v1", new byte[length]));
     }
-    assertThrows(IllegalArgumentException.class,
-        () -> new WebLogPayloadCodec("v2", CURRENT, "v1", null));
-    assertThrows(IllegalArgumentException.class,
+    assertThrows(
+        IllegalArgumentException.class, () -> new WebLogPayloadCodec("v2", CURRENT, "v1", null));
+    assertThrows(
+        IllegalArgumentException.class,
         () -> new WebLogPayloadCodec("v2", CURRENT, null, PREVIOUS));
-    assertThrows(IllegalArgumentException.class,
+    assertThrows(
+        IllegalArgumentException.class,
         () -> new WebLogPayloadCodec("v2", CURRENT, "v2", PREVIOUS));
-    assertThrows(NullPointerException.class,
-        () -> new WebLogPayloadCodec("v2", CURRENT, null, null, null));
+    assertThrows(
+        NullPointerException.class, () -> new WebLogPayloadCodec("v2", CURRENT, null, null, null));
     WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null);
     EncryptedWebLogPayload encrypted = codec.encrypt(IDENTITY, goldenWire());
     assertThrows(NullPointerException.class, () -> codec.encrypt(null, goldenWire()));
@@ -276,8 +292,9 @@ final class WebLogPayloadCodecTest {
       HashSet<String> nonces = new HashSet<>();
       for (var future : executor.invokeAll(jobs)) {
         EncryptedWebLogPayload encrypted = future.get();
-        assertTrue(nonces.add(HexFormat.of().formatHex(
-            Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
+        assertTrue(
+            nonces.add(
+                HexFormat.of().formatHex(Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
         assertArrayEquals(goldenWire(), codec.decrypt(IDENTITY, encrypted));
       }
       assertEquals(100, nonces.size());
@@ -292,17 +309,19 @@ final class WebLogPayloadCodecTest {
     assertTrue(position > 0);
     Security.removeProvider("SunJCE");
     try (WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null)) {
-      assertReason(WebLogPayloadException.Reason.CRYPTO_UNAVAILABLE,
+      assertReason(
+          WebLogPayloadException.Reason.CRYPTO_UNAVAILABLE,
           () -> codec.encrypt(IDENTITY, goldenWire()));
-      assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
-          () -> codec.decrypt(IDENTITY, payload));
+      assertReason(
+          WebLogPayloadException.Reason.PAYLOAD_INVALID, () -> codec.decrypt(IDENTITY, payload));
     } finally {
       assertNotEquals(-1, Security.insertProviderAt(provider, position));
     }
   }
 
   private static void assertInvalid(WebLogPayloadCodec codec, byte[] bytes) {
-    assertReason(WebLogPayloadException.Reason.PAYLOAD_INVALID,
+    assertReason(
+        WebLogPayloadException.Reason.PAYLOAD_INVALID,
         () -> codec.decrypt(IDENTITY, new EncryptedWebLogPayload("v2", bytes)));
   }
 
@@ -317,20 +336,21 @@ final class WebLogPayloadCodecTest {
 
   private static WebLogPayloadCodec fixedCodec(
       String currentVersion, byte[] currentKey, String previousVersion, byte[] previousKey) {
-    return new WebLogPayloadCodec(currentVersion, currentKey, previousVersion, previousKey,
-        new FixedNonceRandom());
+    return new WebLogPayloadCodec(
+        currentVersion, currentKey, previousVersion, previousKey, new FixedNonceRandom());
   }
 
   private static EncryptedWebLogPayload independentPayload(String version, byte[] key, byte[] plain)
       throws Exception {
-    return new EncryptedWebLogPayload(version,
-        independentEnvelope(version, key, independentAad(IDENTITY, version), plain));
+    return new EncryptedWebLogPayload(
+        version, independentEnvelope(version, key, independentAad(IDENTITY, version), plain));
   }
 
-  private static byte[] independentEnvelope(String version, byte[] key, byte[] aad, byte[] plaintext)
-      throws Exception {
+  private static byte[] independentEnvelope(
+      String version, byte[] key, byte[] aad, byte[] plaintext) throws Exception {
     Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-    cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "AES"), new GCMParameterSpec(128, NONCE));
+    cipher.init(
+        Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "AES"), new GCMParameterSpec(128, NONCE));
     cipher.updateAAD(aad);
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     output.write("NKENC1".getBytes(StandardCharsets.US_ASCII));
@@ -346,15 +366,16 @@ final class WebLogPayloadCodecTest {
       throws Exception {
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     try (DataOutputStream data = new DataOutputStream(output)) {
-      for (byte[] field : List.of(
-          "web-log-outbox".getBytes(StandardCharsets.US_ASCII),
-          "schubert_web_session.web_log_outbox".getBytes(StandardCharsets.US_ASCII),
-          HexFormat.of().parseHex(identity.messageId().toString().replace("-", "")),
-          HexFormat.of().parseHex(identity.correlationId().toString().replace("-", "")),
-          new byte[] {1},
-          version.getBytes(StandardCharsets.US_ASCII),
-          "WLGEVT01".getBytes(StandardCharsets.US_ASCII),
-          "001".getBytes(StandardCharsets.US_ASCII))) {
+      for (byte[] field :
+          List.of(
+              "web-log-outbox".getBytes(StandardCharsets.US_ASCII),
+              "schubert_web_session.web_log_outbox".getBytes(StandardCharsets.US_ASCII),
+              HexFormat.of().parseHex(identity.messageId().toString().replace("-", "")),
+              HexFormat.of().parseHex(identity.correlationId().toString().replace("-", "")),
+              new byte[] {1},
+              version.getBytes(StandardCharsets.US_ASCII),
+              "WLGEVT01".getBytes(StandardCharsets.US_ASCII),
+              "001".getBytes(StandardCharsets.US_ASCII))) {
         data.writeInt(field.length);
         data.write(field);
       }

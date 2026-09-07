@@ -18,8 +18,8 @@ import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 
 /**
- * Validates and commits one persistent outbox message in a local JMS transaction.
- * Trace: NK-MSG-002; RD MQ-006/MQ-008; UI 242; SS 323/324 section 8; PT-IDEM-010/011.
+ * Validates and commits one persistent outbox message in a local JMS transaction. Trace:
+ * NK-MSG-002; RD MQ-006/MQ-008; UI 242; SS 323/324 section 8; PT-IDEM-010/011.
  */
 public final class OutboxJmsSender {
   public void send(TransactedJmsContextProvider contextProvider, OutboxEntry entry)
@@ -74,7 +74,8 @@ public final class OutboxJmsSender {
     try {
       header = HeaderCodec.standard().peek(body);
     } catch (RuntimeException exception) {
-      throw new OutboxIntegrityException("outbox wire body failed fixed-width validation", exception);
+      throw new OutboxIntegrityException(
+          "outbox wire body failed fixed-width validation", exception);
     }
     BrokerTopology target = target(entry.destination());
     if (!header.messageId().equals(entry.messageId())

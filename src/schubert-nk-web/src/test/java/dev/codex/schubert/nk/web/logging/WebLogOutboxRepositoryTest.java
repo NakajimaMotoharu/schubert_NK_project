@@ -6,8 +6,8 @@ import java.lang.reflect.Proxy;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
@@ -24,7 +24,8 @@ import org.junit.jupiter.api.io.TempDir;
 final class WebLogOutboxRepositoryTest {
   private static final Instant NOW = Instant.parse("2026-09-06T00:00:00Z");
   private static final UUID CORRELATION = new UUID(4, 5);
-  private static final EncryptedWebLogPayload PAYLOAD = new EncryptedWebLogPayload("test", new byte[64]);
+  private static final EncryptedWebLogPayload PAYLOAD =
+      new EncryptedWebLogPayload("test", new byte[64]);
   private static WebLogDatabaseFixture db;
 
   @BeforeAll
@@ -45,7 +46,8 @@ final class WebLogOutboxRepositoryTest {
   }
 
   @Test
-  void encryptedInsertIsCallerAtomicDuplicateRetainsFirstAndWebCannotReachBusiness() throws Exception {
+  void encryptedInsertIsCallerAtomicDuplicateRetainsFirstAndWebCannotReachBusiness()
+      throws Exception {
     WebLogOutboxRepository repository = new WebLogOutboxRepository(() -> 0);
     WebLogPayloadIdentity identity = identity(1);
     try (Connection connection = db.transaction()) {
@@ -56,7 +58,12 @@ final class WebLogOutboxRepositoryTest {
     assertEquals(0, count());
     try (Connection connection = db.transaction()) {
       assertTrue(repository.enqueue(connection, identity, PAYLOAD, NOW));
-      assertFalse(repository.enqueue(connection, identity, new EncryptedWebLogPayload("changed", new byte[65]), NOW.plusSeconds(4)));
+      assertFalse(
+          repository.enqueue(
+              connection,
+              identity,
+              new EncryptedWebLogPayload("changed", new byte[65]),
+              NOW.plusSeconds(4)));
       connection.commit();
     }
     assertEquals(1, count());
@@ -73,9 +80,11 @@ final class WebLogOutboxRepositoryTest {
       assertEquals("ClaimedWebLog[identity/payload/lease=<redacted>]", row.toString());
       connection.rollback();
     }
-    try (Connection connection = db.web(); var statement = connection.createStatement()) {
-      SQLException denied = assertThrows(SQLException.class,
-          () -> statement.executeQuery("select id from schubert.app_logs"));
+    try (Connection connection = db.web();
+        var statement = connection.createStatement()) {
+      SQLException denied =
+          assertThrows(
+              SQLException.class, () -> statement.executeQuery("select id from schubert.app_logs"));
       assertEquals("42501", denied.getSQLState());
     }
   }
@@ -86,8 +95,12 @@ final class WebLogOutboxRepositoryTest {
     insert(1, NOW);
     insert(2, NOW);
     insert(3, NOW.plusMillis(1));
-    update("update schubert_web_session.web_log_outbox set lease_owner='busy',lease_until=timestamp with time zone '2026-09-06 00:00:00Z' where message_id='" + identity(2).messageId() + "'");
-    try (Connection first = db.transaction(); Connection second = db.transaction()) {
+    update(
+        "update schubert_web_session.web_log_outbox set lease_owner='busy',lease_until=timestamp with time zone '2026-09-06 00:00:00Z' where message_id='"
+            + identity(2).messageId()
+            + "'");
+    try (Connection first = db.transaction();
+        Connection second = db.transaction()) {
       List<ClaimedWebLog> one = repository.claim(first, "first", NOW, 100);
       assertEquals(List.of(identity(1)), one.stream().map(ClaimedWebLog::identity).toList());
       assertTrue(repository.claim(second, "second", NOW, 100).isEmpty());
@@ -97,19 +110,26 @@ final class WebLogOutboxRepositoryTest {
     }
     try (Connection connection = db.transaction()) {
       List<ClaimedWebLog> rows = repository.claim(connection, "expiry", NOW.plusMillis(1), 100);
-      assertEquals(List.of(identity(2), identity(3)), rows.stream().map(ClaimedWebLog::identity).toList());
+      assertEquals(
+          List.of(identity(2), identity(3)), rows.stream().map(ClaimedWebLog::identity).toList());
       connection.rollback();
     }
     db.reset();
     for (int id = 1; id <= 102; id++) {
       insert(id, NOW);
     }
-    try (Connection first = db.transaction(); Connection second = db.transaction()) {
+    try (Connection first = db.transaction();
+        Connection second = db.transaction()) {
       List<ClaimedWebLog> hundred = repository.claim(first, "first", NOW, 100);
       List<ClaimedWebLog> two = repository.claim(second, "second", NOW, 100);
       assertEquals(100, hundred.size());
       assertEquals(2, two.size());
-      assertEquals(102, java.util.stream.Stream.concat(hundred.stream(), two.stream()).map(ClaimedWebLog::id).distinct().count());
+      assertEquals(
+          102,
+          java.util.stream.Stream.concat(hundred.stream(), two.stream())
+              .map(ClaimedWebLog::id)
+              .distinct()
+              .count());
       assertThrows(UnsupportedOperationException.class, () -> hundred.add(two.getFirst()));
       first.rollback();
       second.rollback();
@@ -117,10 +137,18 @@ final class WebLogOutboxRepositoryTest {
   }
 
   @Test
-  void resultUpdatesProtectOwnerAndPersistExactJitterAllStagesIncludingAttemptCap() throws Exception {
-    long[][] expected = {{900,1000,1100},{4500,5000,5500},{27000,30000,33000},
-        {54000,60000,66000},{270000,300000,330000},{270000,300000,330000},{270000,300000,330000}};
-    int[] attempts = {0,1,2,3,4,99,100};
+  void resultUpdatesProtectOwnerAndPersistExactJitterAllStagesIncludingAttemptCap()
+      throws Exception {
+    long[][] expected = {
+      {900, 1000, 1100},
+      {4500, 5000, 5500},
+      {27000, 30000, 33000},
+      {54000, 60000, 66000},
+      {270000, 300000, 330000},
+      {270000, 300000, 330000},
+      {270000, 300000, 330000}
+    };
+    int[] attempts = {0, 1, 2, 3, 4, 99, 100};
     for (int index = 0; index < attempts.length; index++) {
       for (int boundary = 0; boundary < 3; boundary++) {
         db.reset();
@@ -136,12 +164,16 @@ final class WebLogOutboxRepositoryTest {
           assertTrue(repository.markFailure(connection, row, NOW.plusSeconds(3), "JMS_FAILURE"));
           connection.commit();
         }
-        try (Connection connection = db.web(); var statement = connection.createStatement();
-            var rows = statement.executeQuery("select status,attempt_count,next_attempt_at,lease_owner,lease_until,sent_at,last_error_code from schubert_web_session.web_log_outbox")) {
+        try (Connection connection = db.web();
+            var statement = connection.createStatement();
+            var rows =
+                statement.executeQuery(
+                    "select status,attempt_count,next_attempt_at,lease_owner,lease_until,sent_at,last_error_code from schubert_web_session.web_log_outbox")) {
           assertTrue(rows.next());
           assertEquals("ERROR", rows.getString(1));
           assertEquals(Math.min(100, attempts[index] + 1), rows.getInt(2));
-          assertEquals(NOW.plusMillis(3000 + expected[index][boundary]), rows.getTimestamp(3).toInstant());
+          assertEquals(
+              NOW.plusMillis(3000 + expected[index][boundary]), rows.getTimestamp(3).toInstant());
           assertNull(rows.getString(4));
           assertNull(rows.getTimestamp(5));
           assertNull(rows.getTimestamp(6));
@@ -172,77 +204,135 @@ final class WebLogOutboxRepositoryTest {
   void nullInvalidDatabaseRowsAndBoundsFailClosedWithoutNpeRecovery() throws Exception {
     WebLogOutboxRepository repository = new WebLogOutboxRepository(() -> 0);
     assertThrows(NullPointerException.class, () -> new WebLogOutboxRepository(null));
-    assertThrows(NullPointerException.class, () -> repository.enqueue(null, identity(1), PAYLOAD, NOW));
+    assertThrows(
+        NullPointerException.class, () -> repository.enqueue(null, identity(1), PAYLOAD, NOW));
     try (Connection auto = db.web()) {
       assertThrows(IllegalStateException.class, () -> repository.claim(auto, "w", NOW, 1));
     }
     insert(1, NOW);
     try (Connection connection = db.transaction()) {
       ClaimedWebLog row = repository.claim(connection, "worker", NOW, 1).getFirst();
-      assertThrows(NullPointerException.class, () -> repository.enqueue(connection, null, PAYLOAD, NOW));
-      assertThrows(NullPointerException.class, () -> repository.enqueue(connection, identity(2), null, NOW));
-      assertThrows(NullPointerException.class, () -> repository.enqueue(connection, identity(2), PAYLOAD, null));
+      assertThrows(
+          NullPointerException.class, () -> repository.enqueue(connection, null, PAYLOAD, NOW));
+      assertThrows(
+          NullPointerException.class, () -> repository.enqueue(connection, identity(2), null, NOW));
+      assertThrows(
+          NullPointerException.class,
+          () -> repository.enqueue(connection, identity(2), PAYLOAD, null));
       assertThrows(NullPointerException.class, () -> repository.claim(connection, null, NOW, 1));
       assertThrows(NullPointerException.class, () -> repository.claim(connection, "w", null, 1));
       for (String worker : List.of("", " ", "bad\nowner", "x".repeat(65))) {
-        assertThrows(IllegalArgumentException.class, () -> repository.claim(connection, worker, NOW, 1));
+        assertThrows(
+            IllegalArgumentException.class, () -> repository.claim(connection, worker, NOW, 1));
       }
       for (int limit : new int[] {0, 101}) {
-        assertThrows(IllegalArgumentException.class, () -> repository.claim(connection, "w", NOW, limit));
+        assertThrows(
+            IllegalArgumentException.class, () -> repository.claim(connection, "w", NOW, limit));
       }
       assertThrows(NullPointerException.class, () -> repository.markSent(connection, null, NOW));
       assertThrows(NullPointerException.class, () -> repository.markSent(connection, row, null));
-      assertThrows(NullPointerException.class, () -> repository.markFailure(connection, null, NOW, "X"));
-      assertThrows(NullPointerException.class, () -> repository.markFailure(connection, row, null, "X"));
-      assertThrows(NullPointerException.class, () -> repository.markFailure(connection, row, NOW, null));
+      assertThrows(
+          NullPointerException.class, () -> repository.markFailure(connection, null, NOW, "X"));
+      assertThrows(
+          NullPointerException.class, () -> repository.markFailure(connection, row, null, "X"));
+      assertThrows(
+          NullPointerException.class, () -> repository.markFailure(connection, row, NOW, null));
       for (String error : List.of("", " ", "X\n", "x".repeat(65))) {
-        assertThrows(IllegalArgumentException.class, () -> repository.markFailure(connection, row, NOW, error));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> repository.markFailure(connection, row, NOW, error));
       }
       for (int jitter : new int[] {-101, 101}) {
-        assertThrows(IllegalArgumentException.class, () -> new WebLogOutboxRepository(() -> jitter).markFailure(connection, row, NOW, "X"));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new WebLogOutboxRepository(() -> jitter).markFailure(connection, row, NOW, "X"));
       }
       assertEquals("worker", ClaimedWebLog.requireWorker("worker"));
       for (long id : new long[] {0, 1_000_000_000_000L}) {
-        assertThrows(IllegalArgumentException.class, () -> model(id, 0, row.identity(), row.payload(), NOW, NOW, "w", NOW));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> model(id, 0, row.identity(), row.payload(), NOW, NOW, "w", NOW));
       }
-      assertEquals(999_999_999_999L, model(999_999_999_999L, 100, row.identity(), row.payload(), NOW, NOW, "x".repeat(64), NOW).id());
+      assertEquals(
+          999_999_999_999L,
+          model(999_999_999_999L, 100, row.identity(), row.payload(), NOW, NOW, "x".repeat(64), NOW)
+              .id());
       for (int attempt : new int[] {-1, 101}) {
-        assertThrows(IllegalArgumentException.class, () -> model(1, attempt, row.identity(), row.payload(), NOW, NOW, "w", NOW));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> model(1, attempt, row.identity(), row.payload(), NOW, NOW, "w", NOW));
       }
-      assertThrows(NullPointerException.class, () -> model(1, 0, null, PAYLOAD, NOW, NOW, "w", NOW));
-      assertThrows(NullPointerException.class, () -> model(1, 0, identity(1), null, NOW, NOW, "w", NOW));
-      assertThrows(NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, null, NOW, "w", NOW));
-      assertThrows(NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, NOW, null, "w", NOW));
-      assertThrows(NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, NOW, NOW, "w", null));
+      assertThrows(
+          NullPointerException.class, () -> model(1, 0, null, PAYLOAD, NOW, NOW, "w", NOW));
+      assertThrows(
+          NullPointerException.class, () -> model(1, 0, identity(1), null, NOW, NOW, "w", NOW));
+      assertThrows(
+          NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, null, NOW, "w", NOW));
+      assertThrows(
+          NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, NOW, null, "w", NOW));
+      assertThrows(
+          NullPointerException.class, () -> model(1, 0, identity(1), PAYLOAD, NOW, NOW, "w", null));
       connection.rollback();
     }
-    Map<String,Object> fields = new HashMap<>(Map.ofEntries(
-        Map.entry("id",1L), Map.entry("message_id",identity(1).messageId()), Map.entry("correlation_id",CORRELATION),
-        Map.entry("layout_id","WLGEVT01"), Map.entry("layout_version","001"), Map.entry("key_version","test"),
-        Map.entry("payload_ciphertext",new byte[64]), Map.entry("attempt_count",0), Map.entry("next_attempt_at",Timestamp.from(NOW)),
-        Map.entry("created_at",Timestamp.from(NOW)), Map.entry("lease_owner","worker"), Map.entry("lease_until",Timestamp.from(NOW.plusSeconds(10)))));
+    Map<String, Object> fields =
+        new HashMap<>(
+            Map.ofEntries(
+                Map.entry("id", 1L),
+                Map.entry("message_id", identity(1).messageId()),
+                Map.entry("correlation_id", CORRELATION),
+                Map.entry("layout_id", "WLGEVT01"),
+                Map.entry("layout_version", "001"),
+                Map.entry("key_version", "test"),
+                Map.entry("payload_ciphertext", new byte[64]),
+                Map.entry("attempt_count", 0),
+                Map.entry("next_attempt_at", Timestamp.from(NOW)),
+                Map.entry("created_at", Timestamp.from(NOW)),
+                Map.entry("lease_owner", "worker"),
+                Map.entry("lease_until", Timestamp.from(NOW.plusSeconds(10)))));
     assertEquals(1, WebLogOutboxRepository.read(result(fields)).id());
     for (String column : fields.keySet()) {
-      Map<String,Object> altered = new HashMap<>(fields);
+      Map<String, Object> altered = new HashMap<>(fields);
       altered.put(column, null);
-      assertThrows(SQLDataException.class, () -> WebLogOutboxRepository.read(result(altered)), column);
+      assertThrows(
+          SQLDataException.class, () -> WebLogOutboxRepository.read(result(altered)), column);
     }
     fields.put("layout_id", "QWKREQ01");
-    assertEquals("22000", assertThrows(SQLDataException.class, () -> WebLogOutboxRepository.read(result(fields))).getSQLState());
+    assertEquals(
+        "22000",
+        assertThrows(SQLDataException.class, () -> WebLogOutboxRepository.read(result(fields)))
+            .getSQLState());
   }
 
-  private static ClaimedWebLog model(long id, int count, WebLogPayloadIdentity identity,
-      EncryptedWebLogPayload payload, Instant due, Instant created, String owner, Instant until) {
+  private static ClaimedWebLog model(
+      long id,
+      int count,
+      WebLogPayloadIdentity identity,
+      EncryptedWebLogPayload payload,
+      Instant due,
+      Instant created,
+      String owner,
+      Instant until) {
     return new ClaimedWebLog(id, identity, payload, count, due, created, owner, until);
   }
 
   private static ClaimedWebLog withOwner(ClaimedWebLog row, String owner) {
-    return model(row.id(), row.attemptCount(), row.identity(), row.payload(), row.nextAttemptAt(), row.createdAt(), owner, row.leaseUntil());
+    return model(
+        row.id(),
+        row.attemptCount(),
+        row.identity(),
+        row.payload(),
+        row.nextAttemptAt(),
+        row.createdAt(),
+        owner,
+        row.leaseUntil());
   }
 
-  private static ResultSet result(Map<String,Object> fields) {
-    return (ResultSet) Proxy.newProxyInstance(ResultSet.class.getClassLoader(), new Class<?>[]{ResultSet.class},
-        (proxy, method, arguments) -> fields.get((String) arguments[0]));
+  private static ResultSet result(Map<String, Object> fields) {
+    return (ResultSet)
+        Proxy.newProxyInstance(
+            ResultSet.class.getClassLoader(),
+            new Class<?>[] {ResultSet.class},
+            (proxy, method, arguments) -> fields.get((String) arguments[0]));
   }
 
   private static WebLogPayloadIdentity identity(long id) {
@@ -251,28 +341,35 @@ final class WebLogOutboxRepositoryTest {
 
   private static void insert(long id, Instant due) throws SQLException {
     try (Connection connection = db.transaction()) {
-      assertTrue(new WebLogOutboxRepository(() -> 0).enqueue(connection, identity(id), PAYLOAD, due));
+      assertTrue(
+          new WebLogOutboxRepository(() -> 0).enqueue(connection, identity(id), PAYLOAD, due));
       connection.commit();
     }
   }
 
   private static void update(String sql) throws SQLException {
-    try (Connection connection = db.web(); var statement = connection.createStatement()) {
+    try (Connection connection = db.web();
+        var statement = connection.createStatement()) {
       statement.executeUpdate(sql);
     }
   }
 
   private static long count() throws SQLException {
-    try (Connection connection = db.web(); var statement = connection.createStatement();
-        var result = statement.executeQuery("select count(*) from schubert_web_session.web_log_outbox")) {
+    try (Connection connection = db.web();
+        var statement = connection.createStatement();
+        var result =
+            statement.executeQuery("select count(*) from schubert_web_session.web_log_outbox")) {
       assertTrue(result.next());
       return result.getLong(1);
     }
   }
 
   private static String scalar(String column) throws SQLException {
-    try (Connection connection = db.web(); var statement = connection.createStatement();
-        var result = statement.executeQuery("select " + column + "::text from schubert_web_session.web_log_outbox")) {
+    try (Connection connection = db.web();
+        var statement = connection.createStatement();
+        var result =
+            statement.executeQuery(
+                "select " + column + "::text from schubert_web_session.web_log_outbox")) {
       assertTrue(result.next());
       return result.getString(1);
     }

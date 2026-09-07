@@ -11,7 +11,6 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.Presence;
-import dev.codex.schubert.nk.protocol.layout.WireType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -54,11 +53,9 @@ public final class PayloadCodec {
     if (values.records().size() > fields.layout().maximumRecordCount()) {
       throw new MessageEncodingException("payload record count exceeds its layout limit");
     }
-    validateErrorOverrideForEncode(
-        values.layoutId(), values.data(), errorProfile, resultCode);
+    validateErrorOverrideForEncode(values.layoutId(), values.data(), errorProfile, resultCode);
     byte[] data =
-        encodeArea(
-            values.data(), fields.dataFields(), errorProfile, values.layoutId(), resultCode);
+        encodeArea(values.data(), fields.dataFields(), errorProfile, values.layoutId(), resultCode);
     ArrayList<byte[]> records = new ArrayList<>(values.records().size());
     for (FieldValueSet record : values.records()) {
       records.add(
@@ -76,7 +73,8 @@ public final class PayloadCodec {
   public PayloadValues decode(
       LayoutId layoutId, byte[] data, List<byte[]> records, ResultCode resultCode) {
     Objects.requireNonNull(resultCode, "resultCode");
-    return decode(layoutId, data, records, !resultCode.usesSuccessProfile(), Optional.of(resultCode));
+    return decode(
+        layoutId, data, records, !resultCode.usesSuccessProfile(), Optional.of(resultCode));
   }
 
   private PayloadValues decode(
@@ -123,8 +121,7 @@ public final class PayloadCodec {
     int length = fields.isEmpty() ? 0 : fields.getLast().end();
     byte[] encoded = new byte[length];
     for (FieldDefinition<?> field : fields) {
-      boolean useErrorFiller =
-          errorProfile && !isErrorOverride(layoutId, resultCode, field.name());
+      boolean useErrorFiller = errorProfile && !isErrorOverride(layoutId, resultCode, field.name());
       byte[] fieldBytes = encodeField(field, values.getOrUnset(field.name()), useErrorFiller);
       System.arraycopy(fieldBytes, 0, encoded, field.start() - 1, field.length());
     }
@@ -152,8 +149,7 @@ public final class PayloadCodec {
     return new FieldValueSet(values);
   }
 
-  private static void validateNames(
-      FieldValueSet values, List<FieldDefinition<?>> fields) {
+  private static void validateNames(FieldValueSet values, List<FieldDefinition<?>> fields) {
     for (String name : values.names()) {
       Optional<FieldDefinition<?>> matching =
           fields.stream().filter(field -> field.name().equals(name)).findFirst();
@@ -183,13 +179,15 @@ public final class PayloadCodec {
         if (!(value instanceof FieldValue.Text text)) {
           throw new MessageEncodingException("text payload field has the wrong Java type");
         }
-        yield FieldCodec.encodeText(text.value(), field.length(), field.presence() == Presence.MANDATORY);
+        yield FieldCodec.encodeText(
+            text.value(), field.length(), field.presence() == Presence.MANDATORY);
       }
       case NUMERIC -> {
         if (!(value instanceof FieldValue.Numeric numeric)) {
           throw new MessageEncodingException("numeric payload field has the wrong Java type");
         }
-        yield FieldCodec.encodeNumeric(numeric.value(), field.length(), 0, maximumForDigits(field.length()));
+        yield FieldCodec.encodeNumeric(
+            numeric.value(), field.length(), 0, maximumForDigits(field.length()));
       }
       case BOOLEAN -> {
         if (!(value instanceof FieldValue.Flag flag)) {
@@ -214,15 +212,15 @@ public final class PayloadCodec {
       case NUMERIC ->
           new FieldValue.Numeric(
               FieldCodec.decodeNumeric(encoded, 0, maximumForDigits(field.length())));
-      case BOOLEAN ->
-          new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
+      case BOOLEAN -> new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
     };
   }
 
   private static byte[] errorFiller(FieldDefinition<?> field) {
     return switch (field.wireType()) {
       case TEXT -> FieldCodec.encodeText(null, field.length(), false);
-      case NUMERIC -> FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
+      case NUMERIC ->
+          FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
       case BOOLEAN -> FieldCodec.encodeBoolean(null, true);
     };
   }

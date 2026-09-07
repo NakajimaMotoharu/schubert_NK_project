@@ -15,7 +15,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -82,9 +81,10 @@ final class GateContractValidator {
     metrics.put("caseCount", caseOrder.size());
     metrics.put("currentApplicableCount", contract.path("currentApplicableCount").asInt());
     metrics.put("differenceCount", differences.path("differences").size());
-    metrics.put("baselineFileCount", regularFiles(
-            projectRoot.resolve("program/characterization/baseline/current"), path -> true)
-        .size());
+    metrics.put(
+        "baselineFileCount",
+        regularFiles(projectRoot.resolve("program/characterization/baseline/current"), path -> true)
+            .size());
     metrics.put("failureCount", failures.size());
     return new ValidationResult(List.copyOf(failures), Map.copyOf(metrics));
   }
@@ -117,8 +117,7 @@ final class GateContractValidator {
   private static void validateSchema(JsonNode schema, List<String> failures) {
     require(schema.isObject(), "SCHEMA_NOT_OBJECT", failures);
     require(
-        "https://json-schema.org/draft/2020-12/schema"
-            .equals(schema.path("$schema").asText()),
+        "https://json-schema.org/draft/2020-12/schema".equals(schema.path("$schema").asText()),
         "SCHEMA_DRAFT",
         failures);
     require("object".equals(schema.path("type").asText()), "SCHEMA_ROOT_TYPE", failures);
@@ -151,9 +150,11 @@ final class GateContractValidator {
         failures.add("CATALOG_DUPLICATE:" + id);
       }
       require(id.matches("CHR-[A-Z][0-9]{2}"), "CATALOG_ID:" + id, failures);
-      require(expectedGroup(id).equals(item.path("group").asText()), "CATALOG_GROUP:" + id, failures);
+      require(
+          expectedGroup(id).equals(item.path("group").asText()), "CATALOG_GROUP:" + id, failures);
       String expectedCurrent = "CHR-N01".equals(id) ? "NK_ONLY" : "RUN";
-      require(expectedCurrent.equals(item.path("current").asText()), "CATALOG_CURRENT:" + id, failures);
+      require(
+          expectedCurrent.equals(item.path("current").asText()), "CATALOG_CURRENT:" + id, failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedOrder.equals(actualOrder), "CATALOG_ORDER", failures);
@@ -176,8 +177,7 @@ final class GateContractValidator {
     };
   }
 
-  private static void validateBrowser(
-      JsonNode browser, JsonNode expected, List<String> failures) {
+  private static void validateBrowser(JsonNode browser, JsonNode expected, List<String> failures) {
     require(
         expected.path("playwrightJava").asText().equals(browser.path("playwrightJava").asText()),
         "BROWSER_PLAYWRIGHT",
@@ -304,31 +304,38 @@ final class GateContractValidator {
     }
     JsonNode supplemental = requirements.path("supplementalChecks");
     require(supplemental.isObject(), "REQ_SUPPLEMENTAL_NOT_OBJECT", failures);
-    supplemental.properties().forEach(
-        entry -> {
-          require(expectedCases.contains(entry.getKey()), "REQ_SUPPLEMENTAL_CASE:" + entry.getKey(), failures);
-          List<String> checks = strings(entry.getValue());
-          require(!checks.isEmpty(), "REQ_SUPPLEMENTAL_EMPTY:" + entry.getKey(), failures);
-          require(
-              new HashSet<>(checks).size() == checks.size(),
-              "REQ_SUPPLEMENTAL_DUPLICATE:" + entry.getKey(),
-              failures);
-        });
+    supplemental
+        .properties()
+        .forEach(
+            entry -> {
+              require(
+                  expectedCases.contains(entry.getKey()),
+                  "REQ_SUPPLEMENTAL_CASE:" + entry.getKey(),
+                  failures);
+              List<String> checks = strings(entry.getValue());
+              require(!checks.isEmpty(), "REQ_SUPPLEMENTAL_EMPTY:" + entry.getKey(), failures);
+              require(
+                  new HashSet<>(checks).size() == checks.size(),
+                  "REQ_SUPPLEMENTAL_DUPLICATE:" + entry.getKey(),
+                  failures);
+            });
     JsonNode nkOnly = requirements.path("nkOnlySupplementalChecks");
     require(nkOnly.isObject(), "REQ_NK_ONLY_NOT_OBJECT", failures);
-    nkOnly.properties().forEach(
-        entry -> {
-          require(
-              expectedCases.contains(entry.getKey()),
-              "REQ_NK_ONLY_CASE:" + entry.getKey(),
-              failures);
-          for (String check : strings(entry.getValue())) {
-            require(
-                strings(supplemental.path(entry.getKey())).contains(check),
-                "REQ_NK_ONLY_UNKNOWN:" + entry.getKey() + ":" + check,
-                failures);
-          }
-        });
+    nkOnly
+        .properties()
+        .forEach(
+            entry -> {
+              require(
+                  expectedCases.contains(entry.getKey()),
+                  "REQ_NK_ONLY_CASE:" + entry.getKey(),
+                  failures);
+              for (String check : strings(entry.getValue())) {
+                require(
+                    strings(supplemental.path(entry.getKey())).contains(check),
+                    "REQ_NK_ONLY_UNKNOWN:" + entry.getKey() + ":" + check,
+                    failures);
+              }
+            });
   }
 
   private static void validateRun(
@@ -356,7 +363,10 @@ final class GateContractValidator {
       require("PASS".equals(status), label + "_STATUS:" + caseId, failures);
       require(!rejected.contains(status), label + "_REJECTED_STATUS:" + caseId, failures);
       for (String key : strings(requirements.path("requirements").path(caseId))) {
-        require(item.has(key) && !item.path(key).isNull(), label + "_KEY:" + caseId + ":" + key, failures);
+        require(
+            item.has(key) && !item.path(key).isNull(),
+            label + "_KEY:" + caseId + ":" + key,
+            failures);
       }
     }
     Path screenshots = runRoot.resolve("screenshots");
@@ -394,33 +404,45 @@ final class GateContractValidator {
   private static void validateSupplemental(
       Path report, JsonNode requirements, String label, List<String> failures) throws IOException {
     JsonNode checks = readOptional(report).path("checks");
-    requirements.path("supplementalChecks").properties().forEach(
-        entry -> {
-          for (String check : strings(entry.getValue())) {
-            JsonNode result = checks.path(entry.getKey()).path(check);
-            String value = result.path("status").asText();
-            boolean nkOnlyAllowed =
-                strings(requirements.path("nkOnlySupplementalChecks").path(entry.getKey()))
-                    .contains(check);
-            require(
-                "PASS".equals(value) || (nkOnlyAllowed && "NK_ONLY".equals(value)),
-                label + "_SUPPLEMENTAL:" + entry.getKey() + ":" + check,
-                failures);
-            require(
-                result.path("evidence").isObject() && !result.path("evidence").isEmpty(),
-                label + "_SUPPLEMENTAL_EVIDENCE:" + entry.getKey() + ":" + check,
-                failures);
-          }
-        });
+    requirements
+        .path("supplementalChecks")
+        .properties()
+        .forEach(
+            entry -> {
+              for (String check : strings(entry.getValue())) {
+                JsonNode result = checks.path(entry.getKey()).path(check);
+                String value = result.path("status").asText();
+                boolean nkOnlyAllowed =
+                    strings(requirements.path("nkOnlySupplementalChecks").path(entry.getKey()))
+                        .contains(check);
+                require(
+                    "PASS".equals(value) || (nkOnlyAllowed && "NK_ONLY".equals(value)),
+                    label + "_SUPPLEMENTAL:" + entry.getKey() + ":" + check,
+                    failures);
+                require(
+                    result.path("evidence").isObject() && !result.path("evidence").isEmpty(),
+                    label + "_SUPPLEMENTAL_EVIDENCE:" + entry.getKey() + ":" + check,
+                    failures);
+              }
+            });
   }
 
   private static void validateComparison(JsonNode comparison, List<String> failures) {
     require("PASS".equals(comparison.path("status").asText()), "COMPARE_STATUS", failures);
     require(comparison.path("firstFileCount").asInt(-1) == 28, "COMPARE_FIRST_COUNT", failures);
     require(comparison.path("secondFileCount").asInt(-1) == 28, "COMPARE_SECOND_COUNT", failures);
-    require(comparison.path("missing").isArray() && comparison.path("missing").isEmpty(), "COMPARE_MISSING", failures);
-    require(comparison.path("extra").isArray() && comparison.path("extra").isEmpty(), "COMPARE_EXTRA", failures);
-    require(comparison.path("changed").isArray() && comparison.path("changed").isEmpty(), "COMPARE_CHANGED", failures);
+    require(
+        comparison.path("missing").isArray() && comparison.path("missing").isEmpty(),
+        "COMPARE_MISSING",
+        failures);
+    require(
+        comparison.path("extra").isArray() && comparison.path("extra").isEmpty(),
+        "COMPARE_EXTRA",
+        failures);
+    require(
+        comparison.path("changed").isArray() && comparison.path("changed").isEmpty(),
+        "COMPARE_CHANGED",
+        failures);
   }
 
   private static void validateSource(
@@ -473,23 +495,30 @@ final class GateContractValidator {
         preflight.path("failures").isArray() && preflight.path("failures").isEmpty(),
         "PREFLIGHT_FAILURES",
         failures);
-    require("0600".equals(preflight.path("credentialPermission").asText()), "PREFLIGHT_CREDENTIAL", failures);
+    require(
+        "0600".equals(preflight.path("credentialPermission").asText()),
+        "PREFLIGHT_CREDENTIAL",
+        failures);
     require(
         strings(preflight.path("hostAllowlist")).equals(List.of("localhost", "127.0.0.1")),
         "PREFLIGHT_HOSTS",
         failures);
-    require(preflight.path("freeBytes").asLong() >= 20L * 1024 * 1024 * 1024, "PREFLIGHT_DISK", failures);
+    require(
+        preflight.path("freeBytes").asLong() >= 20L * 1024 * 1024 * 1024,
+        "PREFLIGHT_DISK",
+        failures);
   }
 
   private static void validateReview(
       JsonNode review, String baselineCommit, List<String> failures) {
     require("APPROVED".equals(review.path("status").asText()), "REVIEW_STATUS", failures);
     require(
-        baselineCommit.equals(review.path("baselineCommit").asText()),
-        "REVIEW_COMMIT",
-        failures);
+        baselineCommit.equals(review.path("baselineCommit").asText()), "REVIEW_COMMIT", failures);
     require(!review.path("reviewerRole").asText().isBlank(), "REVIEW_ROLE", failures);
-    require(review.path("evidence").isArray() && review.path("evidence").size() >= 3, "REVIEW_EVIDENCE", failures);
+    require(
+        review.path("evidence").isArray() && review.path("evidence").size() >= 3,
+        "REVIEW_EVIDENCE",
+        failures);
     JsonNode checks = review.path("checks");
     for (String name :
         List.of(
@@ -515,21 +544,25 @@ final class GateContractValidator {
       throws Exception {
     require("current".equals(manifest.path("target").asText()), "BASELINE_TARGET", failures);
     require(manifest.path("caseCount").asInt(-1) == 24, "BASELINE_CASE_COUNT", failures);
-    require(manifest.path("screenshotFileCount").asInt(-1) == 2, "BASELINE_SCREENSHOT_COUNT", failures);
+    require(
+        manifest.path("screenshotFileCount").asInt(-1) == 2, "BASELINE_SCREENSHOT_COUNT", failures);
     require(manifest.path("differenceCount").asInt(-1) == 16, "BASELINE_DIF_COUNT", failures);
     require(
-        manifest.path("sourceAggregateSha256").asText()
+        manifest
+            .path("sourceAggregateSha256")
+            .asText()
             .equals(sourceReport.path("sourceAggregateSha256").asText()),
         "BASELINE_SOURCE_HASH",
         failures);
     require(
-        manifest.path("documentAggregateSha256").asText()
+        manifest
+            .path("documentAggregateSha256")
+            .asText()
             .equals(sourceReport.path("documentAggregateSha256").asText()),
         "BASELINE_DOCUMENT_HASH",
         failures);
     require(
-        manifest.path("masterFileCount").asLong()
-            == sourceReport.path("masterFileCount").asLong(),
+        manifest.path("masterFileCount").asLong() == sourceReport.path("masterFileCount").asLong(),
         "BASELINE_MASTER_COUNT",
         failures);
     require(
@@ -558,8 +591,7 @@ final class GateContractValidator {
         "BASELINE_FILE_COUNT",
         failures);
     require(
-        aggregateHash(projectRoot, files)
-            .equals(contract.path("baselineAggregateSha256").asText()),
+        aggregateHash(projectRoot, files).equals(contract.path("baselineAggregateSha256").asText()),
         "BASELINE_TREE_HASH",
         failures);
     String gateCommit = manifest.path("gateCommit").asText();

@@ -12,7 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts SCNRSP01. */
-public record ScenarioEntryRecord(EntryId entryId,
+public record ScenarioEntryRecord(
+    EntryId entryId,
     int entrySequence,
     int lineNumber,
     EntryType entryType,
@@ -20,7 +21,8 @@ public record ScenarioEntryRecord(EntryId entryId,
     String bodyText,
     int audioSequence,
     Optional<AudioId> audioId,
-    Optional<DisplayPath> audioDisplayPath) implements PayloadRecord {
+    Optional<DisplayPath> audioDisplayPath)
+    implements PayloadRecord {
   public ScenarioEntryRecord {
     Objects.requireNonNull(entryId, "entryId");
     TypedFieldValues.requireUnsignedRange("entrySequence", entrySequence, 6);
@@ -58,7 +60,9 @@ public record ScenarioEntryRecord(EntryId entryId,
             Map.entry("本文", TypedFieldValues.text(bodyText)),
             Map.entry("Audio sequence", TypedFieldValues.numeric(audioSequence)),
             Map.entry("Audio ID", TypedFieldValues.optionalIdValue(audioId)),
-            Map.entry("Audio display path", TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));
+            Map.entry(
+                "Audio display path",
+                TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));
   }
 
   @Override

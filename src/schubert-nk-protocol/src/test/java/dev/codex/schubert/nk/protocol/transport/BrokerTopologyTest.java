@@ -28,9 +28,7 @@ final class BrokerTopologyTest {
       assertEquals(vector.constant(), actual.name());
       assertEquals(vector.address(), actual.address());
       assertEquals(vector.address() + ".q", actual.queue());
-      assertEquals(
-          vector.address() + "::" + vector.address() + ".q",
-          actual.fullyQualifiedQueue());
+      assertEquals(vector.address() + "::" + vector.address() + ".q", actual.fullyQualifiedQueue());
       assertEquals(vector.maximumBodyLength(), actual.maximumBodyLength());
       assertEquals(vector.timeToLiveMillis(), actual.timeToLiveMillis());
       assertEquals(vector.timeToLiveMillis() > 0, actual.expirationRequired());
@@ -44,11 +42,9 @@ final class BrokerTopologyTest {
   void nullUnknownAndNearMatchAddressesAreDenied() {
     assertThrows(NullPointerException.class, () -> BrokerTopology.requireAddress(null));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> BrokerTopology.requireAddress("nk.sync.request.q"));
+        IllegalArgumentException.class, () -> BrokerTopology.requireAddress("nk.sync.request.q"));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> BrokerTopology.requireAddress("nk.sync.request "));
+        IllegalArgumentException.class, () -> BrokerTopology.requireAddress("nk.sync.request "));
   }
 
   private record Vector(

@@ -89,8 +89,7 @@ public final class OutboxDispatcher {
     try (Connection connection = transaction()) {
       try {
         boolean marked =
-            repository.markFailure(
-                connection, entry, now, code, "outbox send was not confirmed");
+            repository.markFailure(connection, entry, now, code, "outbox send was not confirmed");
         connection.commit();
         return marked;
       } catch (SQLException | RuntimeException exception) {
@@ -120,9 +119,7 @@ public final class OutboxDispatcher {
   }
 
   private static String failureCode(Throwable exception) {
-    return exception instanceof OutboxIntegrityException
-        ? "OUTBOX_INTEGRITY"
-        : "JMS_SEND_FAILURE";
+    return exception instanceof OutboxIntegrityException ? "OUTBOX_INTEGRITY" : "JMS_SEND_FAILURE";
   }
 
   private static void rollback(Connection connection, Throwable failure) {

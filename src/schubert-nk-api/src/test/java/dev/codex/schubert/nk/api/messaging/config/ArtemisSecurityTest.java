@@ -76,17 +76,18 @@ final class ArtemisSecurityTest {
     oracle.put(
         "nk_mq_maintenance",
         Set.of(
-            permission(Operation.CONSUME, "nk.expiry"),
-            permission(Operation.BROWSE, "nk.expiry")));
+            permission(Operation.CONSUME, "nk.expiry"), permission(Operation.BROWSE, "nk.expiry")));
     oracle.put("nk_unprivileged", Set.of());
 
     Map<String, String> ephemeralCredentials = new LinkedHashMap<>();
-    oracle.keySet().forEach(
-        role -> {
-          String user = "pt_" + role;
-          String credential = UUID.randomUUID().toString();
-          ephemeralCredentials.put(user, credential);
-        });
+    oracle
+        .keySet()
+        .forEach(
+            role -> {
+              String user = "pt_" + role;
+              String credential = UUID.randomUUID().toString();
+              ephemeralCredentials.put(user, credential);
+            });
 
     Configuration configuration = isolatedProductionConfiguration(root);
     String bootstrapUser = "pt_nk_web";
@@ -150,8 +151,7 @@ final class ArtemisSecurityTest {
               factory.createContext(
                   "pt_unknown", UUID.randomUUID().toString(), JMSContext.AUTO_ACKNOWLEDGE));
       assertThrows(
-          JMSRuntimeException.class,
-          () -> factory.createContext(JMSContext.AUTO_ACKNOWLEDGE));
+          JMSRuntimeException.class, () -> factory.createContext(JMSContext.AUTO_ACKNOWLEDGE));
     } finally {
       broker.stop();
       ephemeralCredentials.clear();

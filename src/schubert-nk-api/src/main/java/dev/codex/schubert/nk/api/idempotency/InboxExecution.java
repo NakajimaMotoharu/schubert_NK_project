@@ -16,7 +16,8 @@ public record InboxExecution(InboxExecutionStatus status, Optional<InboxCompleti
 
   public static InboxExecution executed(InboxCompletion completion) {
     return new InboxExecution(
-        InboxExecutionStatus.EXECUTED, Optional.of(Objects.requireNonNull(completion, "completion")));
+        InboxExecutionStatus.EXECUTED,
+        Optional.of(Objects.requireNonNull(completion, "completion")));
   }
 
   public static InboxExecution replay(InboxCompletion completion) {

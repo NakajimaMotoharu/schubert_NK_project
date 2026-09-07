@@ -31,14 +31,12 @@ final class ReplyCorrelationRegistryTest {
   void registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel() {
     ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry(2);
     PendingReply first = registry.register(ID_1, DEADLINE, NOW).orElseThrow();
-    assertThrows(
-        IllegalStateException.class, () -> registry.register(ID_1, DEADLINE, NOW));
+    assertThrows(IllegalStateException.class, () -> registry.register(ID_1, DEADLINE, NOW));
     registry.register(ID_2, DEADLINE, NOW).orElseThrow();
 
     assertEquals(2, registry.pendingCount());
     assertTrue(registry.register(ID_3, DEADLINE, NOW).isEmpty());
-    assertThrows(
-        IllegalStateException.class, () -> registry.register(ID_1, DEADLINE, NOW));
+    assertThrows(IllegalStateException.class, () -> registry.register(ID_1, DEADLINE, NOW));
     assertTrue(registry.cancel(ID_1));
     assertEquals(1, registry.pendingCount());
     assertTrue(registry.register(ID_3, DEADLINE, NOW).isPresent());
@@ -59,8 +57,7 @@ final class ReplyCorrelationRegistryTest {
 
     assertEquals(ID_1, pending.correlationId());
     assertEquals(DEADLINE, pending.deadline());
-    assertArrayEquals(
-        new byte[] {1, 2, 3}, pending.completion().toCompletableFuture().join());
+    assertArrayEquals(new byte[] {1, 2, 3}, pending.completion().toCompletableFuture().join());
     assertEquals(0, registry.pendingCount());
     assertFalse(registry.complete(ID_1, new byte[0], NOW));
     assertEquals(1L, registry.lateResponseCount());
@@ -133,8 +130,7 @@ final class ReplyCorrelationRegistryTest {
   private static void assertExceptional(PendingReply pending, Class<? extends Throwable> cause) {
     RuntimeException exception =
         assertThrows(
-            RuntimeException.class,
-            () -> pending.completion().toCompletableFuture().join());
+            RuntimeException.class, () -> pending.completion().toCompletableFuture().join());
     Throwable actual = exception instanceof CompletionException ? exception.getCause() : exception;
     assertTrue(cause.isInstance(actual));
   }

@@ -15,8 +15,8 @@ import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.MapMessage;
 import jakarta.jms.Message;
@@ -43,8 +43,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006 actual-provider transport matrix with independent SS 321/322 bytes. */
 final class ArtemisTransportContractTest {
-  private static final UUID MESSAGE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final JmsMessageGuard GUARD = new JmsMessageGuard();
@@ -103,9 +102,7 @@ final class ArtemisTransportContractTest {
         BytesMessage outbound = context.createBytesMessage();
         outbound.writeBytes(body);
         setIdentity(outbound, vector.layoutId(), vector.correlationId());
-        vector
-            .replyTo()
-            .ifPresent(address -> setReplyTo(outbound, new ActiveMQQueue(address)));
+        vector.replyTo().ifPresent(address -> setReplyTo(outbound, new ActiveMQQueue(address)));
 
         long beforeSend = System.currentTimeMillis();
         Message received =
@@ -117,7 +114,8 @@ final class ArtemisTransportContractTest {
                 vector.timeToLiveMillis());
         ExpectedRoute route = vector.expectedRoute();
         GuardedJmsMessage guarded = GUARD.read(received, route);
-        var decoded = FixedWidthDecoder.standard().decode(guarded.body(), guarded.metadata(), route);
+        var decoded =
+            FixedWidthDecoder.standard().decode(guarded.body(), guarded.metadata(), route);
 
         assertArrayEquals(body, guarded.body());
         assertEquals(vector.layoutId(), decoded.header().layoutId().value());
@@ -223,11 +221,7 @@ final class ArtemisTransportContractTest {
 
       ExpectedRoute webLogRoute =
           new ExpectedRoute(
-              MessageKind.EVENT,
-              InteractionKind.INTERNAL,
-              "nk.web.log",
-              Optional.empty(),
-              false);
+              MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
       assertRouteBodyLimit(
           context,
           "nk.web.log",
@@ -335,13 +329,7 @@ final class ArtemisTransportContractTest {
       maximum.setJMSReplyTo(new ActiveMQQueue(replyTo.orElseThrow()));
     }
     GuardedJmsMessage accepted =
-        guardRoundTrip(
-            context,
-            address,
-            maximum,
-            DeliveryMode.PERSISTENT,
-            timeToLive,
-            route);
+        guardRoundTrip(context, address, maximum, DeliveryMode.PERSISTENT, timeToLive, route);
     assertEquals(maximumLength, accepted.body().length);
 
     BytesMessage excessive = bytes(context, new byte[maximumLength + 1]);
@@ -353,12 +341,7 @@ final class ArtemisTransportContractTest {
         PermanentProtocolException.class,
         () ->
             guardRoundTrip(
-                context,
-                address,
-                excessive,
-                DeliveryMode.PERSISTENT,
-                timeToLive,
-                route));
+                context, address, excessive, DeliveryMode.PERSISTENT, timeToLive, route));
   }
 
   private static Message roundTrip(
@@ -404,8 +387,8 @@ final class ArtemisTransportContractTest {
     return message;
   }
 
-  private static void setRequestIdentity(
-      Message message, String layoutId, Queue replyTo) throws JMSException {
+  private static void setRequestIdentity(Message message, String layoutId, Queue replyTo)
+      throws JMSException {
     setIdentity(message, layoutId, MESSAGE_ID);
     message.setJMSReplyTo(replyTo);
   }
@@ -500,11 +483,7 @@ final class ArtemisTransportContractTest {
 
     private ExpectedRoute expectedRoute() {
       return new ExpectedRoute(
-          messageKind,
-          interactionKind,
-          address,
-          replyTo,
-          timeToLiveMillis > 0);
+          messageKind, interactionKind, address, replyTo, timeToLiveMillis > 0);
     }
   }
 }

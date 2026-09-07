@@ -37,11 +37,7 @@ final class JmsMessageGuardTest {
           true);
   private static final ExpectedRoute EVENT_ROUTE =
       new ExpectedRoute(
-          MessageKind.EVENT,
-          InteractionKind.INTERNAL,
-          "nk.web.log",
-          Optional.empty(),
-          false);
+          MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
 
   @Test
   void validBytesMessageProducesAnImmutableRedactedSnapshot() throws Exception {
@@ -64,9 +60,7 @@ final class JmsMessageGuardTest {
   @Test
   void nullAndNonBytesMessagesAreDeniedBeforeBodyAccess() {
     assertThrows(NullPointerException.class, () -> GUARD.read(null, REQUEST_ROUTE));
-    assertThrows(
-        NullPointerException.class,
-        () -> GUARD.read(bytesMessage(validRequest()), null));
+    assertThrows(NullPointerException.class, () -> GUARD.read(bytesMessage(validRequest()), null));
     Message text = proxy(TextMessage.class, validRequest());
     assertThrows(PermanentProtocolException.class, () -> GUARD.read(text, REQUEST_ROUTE));
   }
@@ -85,22 +79,18 @@ final class JmsMessageGuardTest {
   void destinationMustBePermanentArtemisUnqualifiedAndExact() throws Exception {
     Destination foreign = new Destination() {};
     assertRejected(with(validRequest(), "destination", foreign), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "destination", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
+    assertRejected(
+        with(validRequest(), "destination", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "destination", new ActiveMQQueue()), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "destination", new ActiveMQQueue(" ")), REQUEST_ROUTE);
     Map<String, Object> qualified =
         with(
-            validRequest(),
-            "destination",
-            new ActiveMQQueue("nk.sync.request::nk.sync.request.q"));
+            validRequest(), "destination", new ActiveMQQueue("nk.sync.request::nk.sync.request.q"));
     assertEquals(
         "nk.sync.request",
         GUARD.read(bytesMessage(qualified), REQUEST_ROUTE).metadata().destinationAddress());
     assertRejected(
-        with(
-            validRequest(),
-            "destination",
-            new ActiveMQQueue("nk.sync.request::unapproved.q")),
+        with(validRequest(), "destination", new ActiveMQQueue("nk.sync.request::unapproved.q")),
         REQUEST_ROUTE);
     assertRejected(
         with(validRequest(), "destination", new ActiveMQQueue("::unapproved.q")), REQUEST_ROUTE);
@@ -111,18 +101,14 @@ final class JmsMessageGuardTest {
   @Test
   void replyToMustMatchPresenceAndPermanentAllowlistedAddress() throws Exception {
     assertRejected(with(validRequest(), "replyTo", null), REQUEST_ROUTE);
-    assertRejected(
-        with(validRequest(), "replyTo", new Destination() {}), REQUEST_ROUTE);
-    assertRejected(
-        with(validRequest(), "replyTo", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
-    assertRejected(
-        with(validRequest(), "replyTo", new ActiveMQQueue("nk.expiry")), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), "replyTo", new Destination() {}), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), "replyTo", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), "replyTo", new ActiveMQQueue("nk.expiry")), REQUEST_ROUTE);
 
     Map<String, Object> event = validEvent();
     GuardedJmsMessage guarded = GUARD.read(bytesMessage(event), EVENT_ROUTE);
     assertEquals(Optional.empty(), guarded.metadata().replyToAddress());
-    assertRejected(
-        with(event, "replyTo", new ActiveMQQueue("nk.sync.reply.web")), EVENT_ROUTE);
+    assertRejected(with(event, "replyTo", new ActiveMQQueue("nk.sync.reply.web")), EVENT_ROUTE);
   }
 
   @Test
@@ -173,8 +159,7 @@ final class JmsMessageGuardTest {
     return values;
   }
 
-  private static Map<String, Object> with(
-      Map<String, Object> source, String name, Object value) {
+  private static Map<String, Object> with(Map<String, Object> source, String name, Object value) {
     Map<String, Object> copy = new HashMap<>(source);
     copy.put(name, value);
     return copy;

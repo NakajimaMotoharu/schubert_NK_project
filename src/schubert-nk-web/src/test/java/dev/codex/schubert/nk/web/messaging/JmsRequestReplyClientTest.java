@@ -29,8 +29,7 @@ import org.junit.jupiter.api.Test;
 /** PT-JMS-008 client concurrency, timeout and mandatory cleanup matrix. */
 final class JmsRequestReplyClientTest {
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
-  private static final UUID ID_1 =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID ID_1 = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
   @Test
   void exchangeRegistersBeforeOneSendAndReturnsDefensiveReply() throws Exception {
@@ -135,10 +134,7 @@ final class JmsRequestReplyClientTest {
             () -> {
               try {
                 client.exchange(
-                    ID_1,
-                    request(),
-                    Duration.ofSeconds(2),
-                    (id, body) -> sent.countDown());
+                    ID_1, request(), Duration.ofSeconds(2), (id, body) -> sent.countDown());
               } catch (JMSException impossible) {
                 throw new AssertionError(impossible);
               } catch (JmsRequestReplyException exception) {
@@ -208,8 +204,7 @@ final class JmsRequestReplyClientTest {
     JmsRequestReplyClient defaults = new JmsRequestReplyClient();
     assertEquals(0, defaults.pendingCount());
     assertThrows(
-        NullPointerException.class,
-        () -> new JmsRequestReplyClient(null, Clock.systemUTC(), 1));
+        NullPointerException.class, () -> new JmsRequestReplyClient(null, Clock.systemUTC(), 1));
     assertThrows(
         NullPointerException.class,
         () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), null, 1));
@@ -228,9 +223,7 @@ final class JmsRequestReplyClientTest {
     assertThrows(
         NullPointerException.class,
         () -> client.exchange(ID_1, null, Duration.ofSeconds(1), sender));
-    assertThrows(
-        NullPointerException.class,
-        () -> client.exchange(ID_1, request(), null, sender));
+    assertThrows(NullPointerException.class, () -> client.exchange(ID_1, request(), null, sender));
     assertThrows(
         NullPointerException.class,
         () -> client.exchange(ID_1, request(), Duration.ofSeconds(1), null));
@@ -248,12 +241,9 @@ final class JmsRequestReplyClientTest {
         () -> client.exchange(ID_1, request(), Duration.ofNanos(-1), sender));
     assertThrows(
         IllegalArgumentException.class,
-        () ->
-            client.exchange(
-                ID_1, request(), Duration.ofSeconds(2).plusNanos(1), sender));
+        () -> client.exchange(ID_1, request(), Duration.ofSeconds(2).plusNanos(1), sender));
     assertArrayEquals(
-        new byte[] {1},
-        client.exchange(ID_1, request(), Duration.ofNanos(1), sender));
+        new byte[] {1}, client.exchange(ID_1, request(), Duration.ofNanos(1), sender));
     assertArrayEquals(
         new byte[] {1}, client.exchange(ID_1, request(), Duration.ofSeconds(2), sender));
     assertThrows(NullPointerException.class, () -> client.onReply(null, new byte[0]));
@@ -279,8 +269,7 @@ final class JmsRequestReplyClientTest {
   }
 
   private static JmsRequestReplyClient client(Clock clock, int maximumConcurrent) {
-    return new JmsRequestReplyClient(
-        new ReplyCorrelationRegistry(), clock, maximumConcurrent);
+    return new JmsRequestReplyClient(new ReplyCorrelationRegistry(), clock, maximumConcurrent);
   }
 
   private static byte[] request() {

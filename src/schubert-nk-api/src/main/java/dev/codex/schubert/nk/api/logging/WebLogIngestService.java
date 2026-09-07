@@ -18,10 +18,9 @@ import java.util.Objects;
 import javax.sql.DataSource;
 
 /**
- * Commits API log projection before returning to the JMS ACK owner.
- * Trace: NK-MSG-002; RD MON-003/MON-004/MQ-008; UI235/252; SS312 section 11,
- * SS324 section 9, SS331/351; SSC-008; PT-IDEM-012.
- * No Web DB/key access. Username/Role are display metadata, never authorization.
+ * Commits API log projection before returning to the JMS ACK owner. Trace: NK-MSG-002; RD
+ * MON-003/MON-004/MQ-008; UI235/252; SS312 section 11, SS324 section 9, SS331/351; SSC-008;
+ * PT-IDEM-012. No Web DB/key access. Username/Role are display metadata, never authorization.
  */
 public final class WebLogIngestService implements InternalEventProcessor {
   private final DataSource database;
@@ -45,7 +44,8 @@ public final class WebLogIngestService implements InternalEventProcessor {
     } catch (IllegalArgumentException invalidAddress) {
       throw new PermanentProtocolException("REQUEST log IP literal is invalid");
     }
-    try (Connection connection = Objects.requireNonNull(database.getConnection(), "JDBC connection")) {
+    try (Connection connection =
+        Objects.requireNonNull(database.getConnection(), "JDBC connection")) {
       connection.setAutoCommit(false);
       try {
         boolean inserted = insert(connection, event, data, details, address);
@@ -72,28 +72,47 @@ public final class WebLogIngestService implements InternalEventProcessor {
     }
     WebLogEventData data;
     try {
-      event.header().validateAgainst(LayoutRegistry.standard().require(
-          event.header().layoutId(), event.header().layoutVersion()));
-      data = (WebLogEventData) PayloadTypeCatalog.decode(PayloadCodec.standard().decode(
-          event.header().layoutId(), event.payload().copyData(), event.payload().copyRecords(), false)).data();
+      event
+          .header()
+          .validateAgainst(
+              LayoutRegistry.standard()
+                  .require(event.header().layoutId(), event.header().layoutVersion()));
+      data =
+          (WebLogEventData)
+              PayloadTypeCatalog.decode(
+                      PayloadCodec.standard()
+                          .decode(
+                              event.header().layoutId(),
+                              event.payload().copyData(),
+                              event.payload().copyRecords(),
+                              false))
+                  .data();
     } catch (LayoutValidationException failure) {
       throw new PermanentProtocolException("REQUEST log payload semantics are invalid");
     }
     if (!data.action().orElse("HTTP_REQUEST_COMPLETED").equals("HTTP_REQUEST_COMPLETED")
-        || data.path().startsWith("//") || data.path().contains("#") || data.remoteAddress().contains("%")) {
+        || data.path().startsWith("//")
+        || data.path().contains("#")
+        || data.remoteAddress().contains("%")) {
       throw new PermanentProtocolException("REQUEST log metadata violate the projection contract");
     }
     return data;
   }
 
-  private static boolean insert(Connection connection, WireMessage<FixedPayload> event,
-      WebLogEventData data, String details, String address) throws SQLException {
-    try (var statement = connection.prepareStatement(
-        "insert into schubert.app_logs (logged_at,service,category,level,action,message,request_id,"
-            + "message_id,correlation_id,source_message_id,actor_username,http_method,request_uri,"
-            + "status_code,remote_address,duration_ms,details) "
-            + "values(?,'WEB','REQUEST',?,'HTTP_REQUEST_COMPLETED',?,?,?,?,?,?,?,?,?,cast(? as inet),?,cast(? as jsonb)) "
-            + "on conflict(source_message_id) do nothing")) {
+  private static boolean insert(
+      Connection connection,
+      WireMessage<FixedPayload> event,
+      WebLogEventData data,
+      String details,
+      String address)
+      throws SQLException {
+    try (var statement =
+        connection.prepareStatement(
+            "insert into schubert.app_logs (logged_at,service,category,level,action,message,request_id,"
+                + "message_id,correlation_id,source_message_id,actor_username,http_method,request_uri,"
+                + "status_code,remote_address,duration_ms,details) "
+                + "values(?,'WEB','REQUEST',?,'HTTP_REQUEST_COMPLETED',?,?,?,?,?,?,?,?,?,cast(? as inet),?,cast(? as jsonb)) "
+                + "on conflict(source_message_id) do nothing")) {
       statement.setTimestamp(1, Timestamp.from(data.occurredAt()));
       statement.setString(2, data.level().name());
       statement.setString(3, data.message());

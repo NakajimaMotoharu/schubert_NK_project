@@ -53,19 +53,20 @@ class ProtocolSemanticTypeTest {
     assertEquals(Optional.empty(), TypedFieldValues.optionalId(unset, "value", UserId::new));
     assertEquals(new FieldValue.Numeric(42), TypedFieldValues.id(new UserId(42)));
     assertEquals(
-        new FieldValue.Text("42"),
-        TypedFieldValues.optionalIdValue(Optional.of(new UserId(42))));
+        new FieldValue.Text("42"), TypedFieldValues.optionalIdValue(Optional.of(new UserId(42))));
     assertEquals(FieldValue.Unset.INSTANCE, TypedFieldValues.optionalIdValue(Optional.empty()));
 
     assertThrows(
         LayoutValidationException.class,
-        () -> TypedFieldValues.requiredInt(values(new FieldValue.Numeric(Long.MAX_VALUE)), "value"));
+        () ->
+            TypedFieldValues.requiredInt(values(new FieldValue.Numeric(Long.MAX_VALUE)), "value"));
     assertThrows(
         LayoutValidationException.class,
         () -> TypedFieldValues.requiredId(values(new FieldValue.Numeric(0)), "value", UserId::new));
     assertThrows(
         LayoutValidationException.class,
-        () -> TypedFieldValues.optionalId(values(new FieldValue.Text("ABC")), "value", UserId::new));
+        () ->
+            TypedFieldValues.optionalId(values(new FieldValue.Text("ABC")), "value", UserId::new));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -77,8 +78,7 @@ class ProtocolSemanticTypeTest {
             TypedFieldValues.optionalId(
                 values(new FieldValue.Text("1234567890123")), "value", UserId::new));
     assertThrows(
-        NullPointerException.class,
-        () -> TypedFieldValues.requiredId(identifier, "value", null));
+        NullPointerException.class, () -> TypedFieldValues.requiredId(identifier, "value", null));
     assertThrows(
         NullPointerException.class,
         () -> TypedFieldValues.optionalId(optionalIdentifier, "value", null));
@@ -118,14 +118,11 @@ class ProtocolSemanticTypeTest {
     FieldValueSet unset = values(FieldValue.Unset.INSTANCE);
     assertEquals(LogType.BATCH, TypedFieldValues.requiredEnum(batch, "value", LogType.class));
     assertEquals(
-        Optional.of(UserRole.USER),
-        TypedFieldValues.optionalEnum(user, "value", UserRole.class));
+        Optional.of(UserRole.USER), TypedFieldValues.optionalEnum(user, "value", UserRole.class));
     assertEquals(
         Optional.of(NotificationErrorCode.PROTOCOL_ERROR),
         TypedFieldValues.optionalEnum(
-            values(new FieldValue.Text("PROTOCOL_ERROR")),
-            "value",
-            NotificationErrorCode.class));
+            values(new FieldValue.Text("PROTOCOL_ERROR")), "value", NotificationErrorCode.class));
     assertEquals(Optional.empty(), TypedFieldValues.optionalEnum(unset, "value", UserRole.class));
     assertEquals(
         new FieldValue.Text("ADMIN"),
@@ -143,11 +140,9 @@ class ProtocolSemanticTypeTest {
             TypedFieldValues.optionalEnum(
                 values(new FieldValue.Text("UNKNOWN")), "value", UserRole.class));
     assertThrows(
-        NullPointerException.class,
-        () -> TypedFieldValues.requiredEnum(batch, "value", null));
+        NullPointerException.class, () -> TypedFieldValues.requiredEnum(batch, "value", null));
     assertThrows(
-        NullPointerException.class,
-        () -> TypedFieldValues.optionalEnum(user, "value", null));
+        NullPointerException.class, () -> TypedFieldValues.optionalEnum(user, "value", null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.enumValue(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalEnumValue(null));
   }
@@ -162,31 +157,26 @@ class ProtocolSemanticTypeTest {
     assertEquals(
         Optional.of(new HttpStatusCode(200)),
         TypedFieldValues.optionalHttpStatusCode(status, "value"));
-    assertEquals(
-        Optional.empty(), TypedFieldValues.optionalHttpStatusCode(unset, "value"));
+    assertEquals(Optional.empty(), TypedFieldValues.optionalHttpStatusCode(unset, "value"));
     assertEquals(
         new ElapsedMilliseconds(999_999_999),
         TypedFieldValues.requiredElapsedMilliseconds(elapsed, "value"));
     assertEquals(
         Optional.of(new ElapsedMilliseconds(999_999_999)),
         TypedFieldValues.optionalElapsedMilliseconds(elapsed, "value"));
-    assertEquals(
-        Optional.empty(), TypedFieldValues.optionalElapsedMilliseconds(unset, "value"));
+    assertEquals(Optional.empty(), TypedFieldValues.optionalElapsedMilliseconds(unset, "value"));
     assertEquals(
         new FieldValue.Text("200"), TypedFieldValues.httpStatusCode(new HttpStatusCode(200)));
     assertEquals(
         new FieldValue.Text("200"),
         TypedFieldValues.optionalHttpStatusCodeValue(Optional.of(new HttpStatusCode(200))));
     assertEquals(
-        FieldValue.Unset.INSTANCE,
-        TypedFieldValues.optionalHttpStatusCodeValue(Optional.empty()));
+        FieldValue.Unset.INSTANCE, TypedFieldValues.optionalHttpStatusCodeValue(Optional.empty()));
+    assertEquals(
+        new FieldValue.Text("0"), TypedFieldValues.elapsedMilliseconds(new ElapsedMilliseconds(0)));
     assertEquals(
         new FieldValue.Text("0"),
-        TypedFieldValues.elapsedMilliseconds(new ElapsedMilliseconds(0)));
-    assertEquals(
-        new FieldValue.Text("0"),
-        TypedFieldValues.optionalElapsedMillisecondsValue(
-            Optional.of(new ElapsedMilliseconds(0))));
+        TypedFieldValues.optionalElapsedMillisecondsValue(Optional.of(new ElapsedMilliseconds(0))));
     assertEquals(
         FieldValue.Unset.INSTANCE,
         TypedFieldValues.optionalElapsedMillisecondsValue(Optional.empty()));
@@ -200,14 +190,12 @@ class ProtocolSemanticTypeTest {
         LayoutValidationException.class,
         () -> TypedFieldValues.requireUnsignedRange("value", 1_000, 3));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> TypedFieldValues.requireUnsignedRange("value", 0, 0));
+        IllegalArgumentException.class, () -> TypedFieldValues.requireUnsignedRange("value", 0, 0));
     assertThrows(
         IllegalArgumentException.class,
         () -> TypedFieldValues.requireUnsignedRange("value", 0, 19));
     assertThrows(
-        NullPointerException.class,
-        () -> TypedFieldValues.requireUnsignedRange(null, 0, 1));
+        NullPointerException.class, () -> TypedFieldValues.requireUnsignedRange(null, 0, 1));
 
     assertThrows(IllegalArgumentException.class, () -> new HttpStatusCode(99));
     assertThrows(IllegalArgumentException.class, () -> new HttpStatusCode(600));

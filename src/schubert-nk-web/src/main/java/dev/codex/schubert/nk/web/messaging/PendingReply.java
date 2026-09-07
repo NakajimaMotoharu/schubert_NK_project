@@ -40,6 +40,10 @@ public final class PendingReply {
 
   @Override
   public String toString() {
-    return "PendingReply[correlationId=" + correlationId + ", deadline=" + deadline + ", body=<redacted>]";
+    return "PendingReply[correlationId="
+        + correlationId
+        + ", deadline="
+        + deadline
+        + ", body=<redacted>]";
   }
 }

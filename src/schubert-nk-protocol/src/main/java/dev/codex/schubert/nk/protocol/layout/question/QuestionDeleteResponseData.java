@@ -14,15 +14,12 @@ public record QuestionDeleteResponseData(Instant deletedAt) implements PayloadDa
   }
 
   public static QuestionDeleteResponseData from(FieldValueSet fields) {
-    return new QuestionDeleteResponseData(
-        TypedFieldValues.requiredInstant(fields, "削除日時"));
+    return new QuestionDeleteResponseData(TypedFieldValues.requiredInstant(fields, "削除日時"));
   }
 
   @Override
   public FieldValueSet fields() {
-    return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("削除日時", TypedFieldValues.instant(deletedAt))));
+    return new FieldValueSet(Map.ofEntries(Map.entry("削除日時", TypedFieldValues.instant(deletedAt))));
   }
 
   @Override

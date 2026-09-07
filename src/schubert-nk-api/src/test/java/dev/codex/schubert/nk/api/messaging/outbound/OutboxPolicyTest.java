@@ -16,7 +16,8 @@ class OutboxPolicyTest {
     assertEquals(OutboxDestination.ASYNC_WORK, OutboxDestination.fromAddress("nk.async.work"));
     assertEquals(OutboxDestination.DLQ, OutboxDestination.fromAddress("nk.dead.letter"));
     assertThrows(NullPointerException.class, () -> OutboxDestination.fromAddress(null));
-    assertThrows(IllegalArgumentException.class, () -> OutboxDestination.fromAddress("nk.sync.request"));
+    assertThrows(
+        IllegalArgumentException.class, () -> OutboxDestination.fromAddress("nk.sync.request"));
   }
 
   @Test
@@ -27,8 +28,10 @@ class OutboxPolicyTest {
     assertEquals(Duration.ofMinutes(1), OutboxRetrySchedule.INSTANCE.delayAfterFailure(4));
     assertEquals(Duration.ofMinutes(5), OutboxRetrySchedule.INSTANCE.delayAfterFailure(5));
     assertEquals(Duration.ofMinutes(5), OutboxRetrySchedule.INSTANCE.delayAfterFailure(100));
-    assertThrows(IllegalArgumentException.class, () -> OutboxRetrySchedule.INSTANCE.delayAfterFailure(0));
-    assertThrows(IllegalArgumentException.class, () -> OutboxRetrySchedule.INSTANCE.delayAfterFailure(101));
+    assertThrows(
+        IllegalArgumentException.class, () -> OutboxRetrySchedule.INSTANCE.delayAfterFailure(0));
+    assertThrows(
+        IllegalArgumentException.class, () -> OutboxRetrySchedule.INSTANCE.delayAfterFailure(101));
   }
 
   @Test
@@ -38,8 +41,7 @@ class OutboxPolicyTest {
         Instant.parse("2026-09-03T00:00:30Z"),
         OutboxRetrySchedule.INSTANCE.nextAttemptAt(failedAt, 3, 0));
     assertThrows(
-        NullPointerException.class,
-        () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(null, 1, 0));
+        NullPointerException.class, () -> OutboxRetrySchedule.INSTANCE.nextAttemptAt(null, 1, 0));
   }
 
   @Test

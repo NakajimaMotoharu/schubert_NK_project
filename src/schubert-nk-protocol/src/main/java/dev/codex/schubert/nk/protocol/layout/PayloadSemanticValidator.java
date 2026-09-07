@@ -13,8 +13,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Intrinsic layout and cross-field validation performed after named-type conversion.
- * Trace: NK-PRO-002, UI 234-236, SS 322 sections 5 and 9.
+ * Intrinsic layout and cross-field validation performed after named-type conversion. Trace:
+ * NK-PRO-002, UI 234-236, SS 322 sections 5 and 9.
  */
 public final class PayloadSemanticValidator {
   private static final Pattern USERNAME = Pattern.compile("[A-Za-z0-9._-]+");
@@ -61,7 +61,8 @@ public final class PayloadSemanticValidator {
       validatePaged(data, records.size());
     }
     if (RECORD_COUNT_LAYOUTS.contains(layoutId)) {
-      requireEqual(numeric(data, "Total count"), records.size(), "total count differs from record count");
+      requireEqual(
+          numeric(data, "Total count"), records.size(), "total count differs from record count");
     }
 
     switch (layoutId) {
@@ -86,7 +87,8 @@ public final class PayloadSemanticValidator {
       }
       case "UCRREQ01" -> validateUserCreation(data);
       case "UDTRSP01" ->
-          requireRange(numeric(data, "Active session数"), 0, 2, "active session count is outside 0..2");
+          requireRange(
+              numeric(data, "Active session数"), 0, 2, "active session count is outside 0..2");
       case "UPWREQ01" -> validatePassword(text(data, "New Password"), Optional.empty());
       case "NTSREQ01", "QSSREQ01" -> {
         requirePositive(data, "Page");
@@ -108,7 +110,8 @@ public final class PayloadSemanticValidator {
 
   private static void validateLoginRequest(FieldValueSet data) {
     String username = text(data, "Username");
-    require(!username.isBlank() && username.equals(username.trim()), "login username is not trimmed");
+    require(
+        !username.isBlank() && username.equals(username.trim()), "login username is not trimmed");
     String password = text(data, "Password");
     require(!password.isEmpty(), "login password is empty");
     require(!password.endsWith(" "), "login password has a trailing ASCII space");
@@ -150,7 +153,8 @@ public final class PayloadSemanticValidator {
     long expectedLast = Math.min(effectivePage * pageSize, totalCount);
     requireEqual(firstResult, expectedFirst, "first result is arithmetically inconsistent");
     requireEqual(lastResult, expectedLast, "last result is arithmetically inconsistent");
-    requireEqual(recordCount, expectedLast - expectedFirst + 1, "page record count is inconsistent");
+    requireEqual(
+        recordCount, expectedLast - expectedFirst + 1, "page record count is inconsistent");
   }
 
   private static void validateScenarioSearchRecords(List<FieldValueSet> records) {
@@ -158,14 +162,12 @@ public final class PayloadSemanticValidator {
       requirePositive(record, "Line番号");
       boolean audio = flag(record, "Audio有無");
       require(
-          present(record, "Audio ID") == audio
-              && present(record, "Audio display path") == audio,
+          present(record, "Audio ID") == audio && present(record, "Audio display path") == audio,
           "scenario search audio fields disagree with its flag");
     }
   }
 
-  private static void validateScenarioDetail(
-      FieldValueSet data, List<FieldValueSet> records) {
+  private static void validateScenarioDetail(FieldValueSet data, List<FieldValueSet> records) {
     requirePaired(data, "Previous file ID", "Previous title");
     requirePaired(data, "Next file ID", "Next title");
     String mode = text(data, "Delivery mode");
@@ -190,7 +192,8 @@ public final class PayloadSemanticValidator {
     long count = numeric(data, "File record件数");
     requireRange(count, 1, 10_000, "large-result record count is outside 1..10000");
     requireEqual(
-        numeric(data, "File byte長"), Math.multiplyExact(4_800, count),
+        numeric(data, "File byte長"),
+        Math.multiplyExact(4_800, count),
         "large-result byte length differs from record length times count");
   }
 
@@ -221,7 +224,8 @@ public final class PayloadSemanticValidator {
       } else {
         require(seenEntryIds.add(entryId), "entry ID reappears after another entry");
         requireEqual(entrySequence, previousEntrySequence + 1, "entry sequence is not consecutive");
-        require(audioSequence == 0 || audioSequence == 1, "new entry audio sequence must be 0 or 1");
+        require(
+            audioSequence == 0 || audioSequence == 1, "new entry audio sequence must be 0 or 1");
       }
       previousEntryId = entryId;
       previousEntrySequence = entrySequence;
@@ -325,7 +329,9 @@ public final class PayloadSemanticValidator {
       require(errorFields, "ERROR notification does not contain both error fields");
     }
     if (!state.equals("ERROR")) {
-      require(!present(data, "Error code") && !present(data, "利用者向けerror"), "non-error notification contains error fields");
+      require(
+          !present(data, "Error code") && !present(data, "利用者向けerror"),
+          "non-error notification contains error fields");
     }
     boolean deleted = flag(data, "質問削除済み");
     require(
@@ -337,7 +343,8 @@ public final class PayloadSemanticValidator {
   }
 
   private static void validateCancellationSuccess(FieldValueSet data) {
-    require(text(data, "更新後状態").equals("CANCELLED"), "successful cancellation state is not CANCELLED");
+    require(
+        text(data, "更新後状態").equals("CANCELLED"), "successful cancellation state is not CANCELLED");
     requirePresent(data, "取消日時");
   }
 
@@ -370,9 +377,11 @@ public final class PayloadSemanticValidator {
   }
 
   private static void validateWebLog(FieldValueSet data) {
-    require(HTTP_METHOD.matcher(text(data, "HTTP method")).matches(), "HTTP method format is invalid");
+    require(
+        HTTP_METHOD.matcher(text(data, "HTTP method")).matches(), "HTTP method format is invalid");
     String path = text(data, "Path");
-    require(path.startsWith("/") && path.indexOf('?') < 0, "web log path is not a query-free URI path");
+    require(
+        path.startsWith("/") && path.indexOf('?') < 0, "web log path is not a query-free URI path");
   }
 
   private static void validateAscending(
@@ -392,7 +401,9 @@ public final class PayloadSemanticValidator {
   }
 
   private static void requirePaired(FieldValueSet fields, String first, String second) {
-    require(present(fields, first) == present(fields, second), first + " and " + second + " must be paired");
+    require(
+        present(fields, first) == present(fields, second),
+        first + " and " + second + " must be paired");
   }
 
   private static void requirePresent(FieldValueSet fields, String name) {
@@ -412,7 +423,8 @@ public final class PayloadSemanticValidator {
     if (value instanceof FieldValue.Numeric numeric) {
       return numeric.value();
     }
-    throw new LayoutValidationException("layout semantic violation: numeric field is unavailable: " + name);
+    throw new LayoutValidationException(
+        "layout semantic violation: numeric field is unavailable: " + name);
   }
 
   private static String text(FieldValueSet fields, String name) {
@@ -420,7 +432,8 @@ public final class PayloadSemanticValidator {
     if (value instanceof FieldValue.Text text) {
       return text.value();
     }
-    throw new LayoutValidationException("layout semantic violation: text field is unavailable: " + name);
+    throw new LayoutValidationException(
+        "layout semantic violation: text field is unavailable: " + name);
   }
 
   private static boolean flag(FieldValueSet fields, String name) {
@@ -428,7 +441,8 @@ public final class PayloadSemanticValidator {
     if (value instanceof FieldValue.Flag flag) {
       return flag.value();
     }
-    throw new LayoutValidationException("layout semantic violation: boolean field is unavailable: " + name);
+    throw new LayoutValidationException(
+        "layout semantic violation: boolean field is unavailable: " + name);
   }
 
   private static Optional<Instant> optionalInstant(FieldValueSet fields, String name) {
@@ -439,7 +453,8 @@ public final class PayloadSemanticValidator {
     if (value instanceof FieldValue.Text text) {
       return Optional.of(JstWireTimestamp.parse(text.value()));
     }
-    throw new LayoutValidationException("layout semantic violation: timestamp field has the wrong type: " + name);
+    throw new LayoutValidationException(
+        "layout semantic violation: timestamp field has the wrong type: " + name);
   }
 
   private static void requireEqual(long actual, long expected, String message) {

@@ -33,8 +33,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006 production request sender transaction and transport tests. */
 final class ArtemisRequestSenderTest {
-  private static final UUID MESSAGE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
   @Test
   @DisplayName("PT-JMS-005 production sender commits exact persistent request properties")
@@ -43,13 +42,13 @@ final class ArtemisRequestSenderTest {
     EmbeddedActiveMQ broker = start(root);
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0")) {
       ArtemisRequestSender sender =
-          new ArtemisRequestSender(
-              () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
+          new ArtemisRequestSender(() -> factory.createContext(JMSContext.SESSION_TRANSACTED));
       long beforeSend = System.currentTimeMillis();
       sender.send(MESSAGE_ID, expectedBody);
 
-      Queue requestQueue = new org.apache.activemq.artemis.jms.client.ActiveMQQueue(
-          "nk.sync.request::nk.sync.request.q");
+      Queue requestQueue =
+          new org.apache.activemq.artemis.jms.client.ActiveMQQueue(
+              "nk.sync.request::nk.sync.request.q");
       try (JMSContext receive = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
           var consumer = receive.createConsumer(requestQueue)) {
         BytesMessage actual = (BytesMessage) consumer.receive(5_000);
@@ -59,8 +58,7 @@ final class ArtemisRequestSenderTest {
         assertArrayEquals(expectedBody, actualBody);
         assertEquals(MESSAGE_ID.toString(), actual.getJMSCorrelationID());
         assertEquals(
-            "nk.sync.reply.web",
-            ((ActiveMQDestination) actual.getJMSReplyTo()).getAddress());
+            "nk.sync.reply.web", ((ActiveMQDestination) actual.getJMSReplyTo()).getAddress());
         assertEquals(MESSAGE_ID.toString(), actual.getStringProperty("NKMessageID"));
         assertEquals("LOGREQ01", actual.getStringProperty("NKLayoutID"));
         assertEquals("001", actual.getStringProperty("NKProtocolVersion"));
@@ -92,15 +90,12 @@ final class ArtemisRequestSenderTest {
     assertThrows(NullPointerException.class, () -> unopened.send(MESSAGE_ID, null));
     assertFalse(opened.get());
 
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> unopened.send(new UUID(0, 2), request));
+    assertThrows(IllegalArgumentException.class, () -> unopened.send(new UUID(0, 2), request));
     assertThrows(
         IllegalArgumentException.class,
         () -> unopened.send(MESSAGE_ID, Arrays.copyOf(request, request.length + 1)));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> unopened.send(MESSAGE_ID, independentResponseWire()));
+        IllegalArgumentException.class, () -> unopened.send(MESSAGE_ID, independentResponseWire()));
     assertThrows(
         IllegalArgumentException.class,
         () -> unopened.send(MESSAGE_ID, independentAsyncRequestWire()));
@@ -115,8 +110,7 @@ final class ArtemisRequestSenderTest {
   }
 
   @Test
-  void checkedAndRuntimeProviderFailuresRollbackAndPreserveThePrimaryFailure()
-      throws Exception {
+  void checkedAndRuntimeProviderFailuresRollbackAndPreserveThePrimaryFailure() throws Exception {
     byte[] request = independentRequestWire();
     AtomicBoolean checkedRollback = new AtomicBoolean();
     JMSException checked = new JMSException("synthetic-write-failure");
@@ -140,7 +134,8 @@ final class ArtemisRequestSenderTest {
                         failingMessage,
                         "rollback",
                         checkedRollback)));
-    assertEquals(checked, assertThrows(JMSException.class, () -> checkedSender.send(MESSAGE_ID, request)));
+    assertEquals(
+        checked, assertThrows(JMSException.class, () -> checkedSender.send(MESSAGE_ID, request)));
     assertTrue(checkedRollback.get());
 
     JMSRuntimeException runtime = new JMSRuntimeException("synthetic-provider-failure");
@@ -242,12 +237,7 @@ final class ArtemisRequestSenderTest {
 
   private static byte[] independentResponseWire() {
     return independentWire(
-        'S',
-        'S',
-        "LOGRSP01",
-        UUID.fromString("00000000-0000-0000-0000-000000000002"),
-        24,
-        true);
+        'S', 'S', "LOGRSP01", UUID.fromString("00000000-0000-0000-0000-000000000002"), 24, true);
   }
 
   private static byte[] independentAsyncRequestWire() {
@@ -292,8 +282,7 @@ final class ArtemisRequestSenderTest {
 
   private static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
-    try (InputStream input =
-        Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);
     }
     configuration

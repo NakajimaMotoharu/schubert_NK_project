@@ -16,9 +16,9 @@ import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 
 /**
- * Authenticates Web-local storage before committing one persistent WLGEVT01 message.
- * Trace: NK-MSG-002; RD MON-003/MQ-008; UI 231/242; SS 324 section 9, SSC-007;
- * PT-IDEM-012, YKT-009. Does not open a database transaction or access API keys/tables.
+ * Authenticates Web-local storage before committing one persistent WLGEVT01 message. Trace:
+ * NK-MSG-002; RD MON-003/MQ-008; UI 231/242; SS 324 section 9, SSC-007; PT-IDEM-012, YKT-009. Does
+ * not open a database transaction or access API keys/tables.
  */
 public final class WebLogMessageSender {
   private final WebLogPayloadCodec codec;
@@ -45,7 +45,10 @@ public final class WebLogMessageSender {
         message.setStringProperty("NKLayoutID", "WLGEVT01");
         message.setStringProperty("NKProtocolVersion", "001");
         message.setStringProperty("_AMQ_DUPL_ID", row.identity().messageId().toString());
-        context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).setTimeToLive(0)
+        context
+            .createProducer()
+            .setDeliveryMode(DeliveryMode.PERSISTENT)
+            .setTimeToLive(0)
             .send(new ActiveMQQueue(BrokerTopology.WEB_LOG.fullyQualifiedQueue()), message);
       } catch (JMSException | RuntimeException failure) {
         rollback(context, failure);
@@ -76,7 +79,9 @@ public final class WebLogMessageSender {
     }
   }
 
-  /** Handles the provider's cause/linked-exception graph, including cycles, without text matching. */
+  /**
+   * Handles the provider's cause/linked-exception graph, including cycles, without text matching.
+   */
   static boolean duplicateConfirmed(Throwable failure) {
     Objects.requireNonNull(failure, "failure");
     ArrayDeque<Throwable> pending = new ArrayDeque<>();

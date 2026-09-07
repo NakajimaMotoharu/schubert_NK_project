@@ -53,9 +53,7 @@ public final class ArtemisRequestSender implements JmsRequestSender {
             .createProducer()
             .setDeliveryMode(DeliveryMode.PERSISTENT)
             .setTimeToLive(REQUEST_TIME_TO_LIVE_MILLIS)
-            .send(
-                new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()),
-                request);
+            .send(new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()), request);
         context.commit();
       } catch (JMSException | RuntimeException exception) {
         rollbackAfterFailure(context, exception);

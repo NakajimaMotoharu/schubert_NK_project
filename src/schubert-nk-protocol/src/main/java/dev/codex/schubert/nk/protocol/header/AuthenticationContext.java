@@ -1,8 +1,8 @@
 package dev.codex.schubert.nk.protocol.header;
 
 import java.util.Objects;
-import org.jspecify.annotations.Nullable;
 import java.util.regex.Pattern;
+import org.jspecify.annotations.Nullable;
 
 /** Redacted 64-byte authentication context. Trace: NK-PRO-001, UI 232 §3, SS 323 §2. */
 public final class AuthenticationContext {
@@ -16,7 +16,8 @@ public final class AuthenticationContext {
   public static AuthenticationContext of(String wireValue) {
     Objects.requireNonNull(wireValue, "wireValue");
     if (!FORMAT.matcher(wireValue).matches()) {
-      throw new IllegalArgumentException("authentication context must be 64 lowercase hexadecimal bytes");
+      throw new IllegalArgumentException(
+          "authentication context must be 64 lowercase hexadecimal bytes");
     }
     return new AuthenticationContext(wireValue);
   }

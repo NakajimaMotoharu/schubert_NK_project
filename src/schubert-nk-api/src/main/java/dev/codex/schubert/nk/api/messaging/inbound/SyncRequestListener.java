@@ -22,8 +22,8 @@ import java.util.Optional;
 /**
  * Owns synchronous API request validation, dispatch, reply stage and local JMS commit.
  *
- * <p>Trace: NK-MSG-001; RD MQ-003/MQ-006/MQ-008; UI 212/231; SS 312 section 3.3
- * and 321 sections 7-8.
+ * <p>Trace: NK-MSG-001; RD MQ-003/MQ-006/MQ-008; UI 212/231; SS 312 section 3.3 and 321 sections
+ * 7-8.
  */
 public final class SyncRequestListener {
   private static final ExpectedRoute REQUEST_ROUTE =

@@ -20,8 +20,7 @@ class FingerprintKeyRingTest {
     try (FingerprintKeyRing ring = new FingerprintKeyRing("k2", current, "k1", previous)) {
       Fingerprint currentFingerprint = ring.calculate(request);
       Fingerprint previousFingerprint =
-          new Fingerprint(
-              "k1", OperationFingerprint.INSTANCE.calculate(request, previous));
+          new Fingerprint("k1", OperationFingerprint.INSTANCE.calculate(request, previous));
       Fingerprint unknown = new Fingerprint("k0", currentFingerprint.digest());
       byte[] changed = currentFingerprint.digest();
       changed[0] ^= 1;
@@ -31,8 +30,7 @@ class FingerprintKeyRingTest {
       assertEquals(FingerprintVerification.MATCH, ring.verify(previousFingerprint, request));
       assertEquals(FingerprintVerification.KEY_UNAVAILABLE, ring.verify(unknown, request));
       assertEquals(
-          FingerprintVerification.MISMATCH,
-          ring.verify(new Fingerprint("k2", changed), request));
+          FingerprintVerification.MISMATCH, ring.verify(new Fingerprint("k2", changed), request));
       assertTrue(ring.matches(currentFingerprint, request));
       assertTrue(ring.matches(previousFingerprint, request));
       assertFalse(ring.matches(unknown, request));
@@ -56,7 +54,8 @@ class FingerprintKeyRingTest {
     assertArrayEquals(arrayWithFirst((byte) 7), fingerprint.digest());
     assertThrows(NullPointerException.class, () -> new Fingerprint(null, new byte[32]));
     assertThrows(NullPointerException.class, () -> new Fingerprint("v1", null));
-    assertThrows(IllegalArgumentException.class, () -> new Fingerprint("bad version", new byte[32]));
+    assertThrows(
+        IllegalArgumentException.class, () -> new Fingerprint("bad version", new byte[32]));
     assertThrows(IllegalArgumentException.class, () -> new Fingerprint("v1", new byte[31]));
   }
 
@@ -65,13 +64,24 @@ class FingerprintKeyRingTest {
     byte[] key = key((byte) 3);
     assertThrows(NullPointerException.class, () -> new FingerprintKeyRing(null, key, null, null));
     assertThrows(NullPointerException.class, () -> new FingerprintKeyRing("v1", null, null, null));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("bad version", key, null, null));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", new byte[31], null, null));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "v0", null));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, null, key));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "bad version", key));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "v0", new byte[31]));
-    assertThrows(IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "v1", key));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FingerprintKeyRing("bad version", key, null, null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FingerprintKeyRing("v1", new byte[31], null, null));
+    assertThrows(
+        IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "v0", null));
+    assertThrows(
+        IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, null, key));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FingerprintKeyRing("v1", key, "bad version", key));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FingerprintKeyRing("v1", key, "v0", new byte[31]));
+    assertThrows(
+        IllegalArgumentException.class, () -> new FingerprintKeyRing("v1", key, "v1", key));
 
     FingerprintKeyRing noPrevious = new FingerprintKeyRing("v1", key, null, null);
     assertThrows(NullPointerException.class, () -> noPrevious.matches(null, request("t")));

@@ -21,8 +21,7 @@ public record NotificationDetailRequestData(NotificationId notificationId) imple
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Notification ID", TypedFieldValues.id(notificationId))));
+        Map.ofEntries(Map.entry("Notification ID", TypedFieldValues.id(notificationId))));
   }
 
   @Override

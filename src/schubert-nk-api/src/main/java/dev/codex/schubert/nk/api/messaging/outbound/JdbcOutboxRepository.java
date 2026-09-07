@@ -70,8 +70,8 @@ public final class JdbcOutboxRepository {
     }
   }
 
-  public List<OutboxEntry> claim(
-      Connection connection, String leaseOwner, Instant now, int limit) throws SQLException {
+  public List<OutboxEntry> claim(Connection connection, String leaseOwner, Instant now, int limit)
+      throws SQLException {
     requireTransaction(connection);
     String owner = OutboxEntry.requireLeaseOwner(leaseOwner);
     Objects.requireNonNull(now, "now");

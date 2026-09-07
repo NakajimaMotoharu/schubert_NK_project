@@ -3,6 +3,10 @@
 
 Run from the repository root:
   python3 src/schubert-nk-protocol/build-tools/001_generate_payload_records.py
+  ./mvnw -pl src/schubert-nk-protocol spotless:apply
+
+Use --output-root PATH for isolated regeneration. Apply the pinned Google Java Format 1.36.1
+before comparing bytes (PG-D-030 / BUG-017 / YKT-014). Fixed-width oracle files are read-only.
 
 The generator never edits RD/UI/SS or the fixture. Generated records explicitly map every
 non-fixed component in wire order and do not use reflection at runtime.
@@ -10,6 +14,7 @@ non-fixed component in wire order and do not use reflection at runtime.
 
 from __future__ import annotations
 
+import argparse
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -22,6 +27,12 @@ JAVA_ROOT = (
     ROOT
     / "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout"
 )
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output-root", type=Path, help="isolated output directory for layout Java files")
+arguments = parser.parse_args()
+if arguments.output_root is not None:
+    JAVA_ROOT = arguments.output_root.resolve()
 
 
 NON_ASCII_NAMES = {
@@ -502,7 +513,9 @@ catalog_lines.extend(
         "    Mapping mapping = require(values.layoutId());",
         "    PayloadData data = mapping.dataDecoder().apply(values.data());",
         "    List<PayloadRecord> records = decodeRecords(values, mapping.recordMapping());",
-        "    return new TypedPayloadValues(values.layoutId(), data, records);",
+        "    TypedPayloadValues typed = new TypedPayloadValues(values.layoutId(), data, records);",
+        "    PayloadSemanticValidator.validate(typed);",
+        "    return typed;",
         "  }",
         "",
         "  public static PayloadValues encode(TypedPayloadValues values) {",
@@ -512,6 +525,7 @@ catalog_lines.extend(
         "      throw new LayoutValidationException(\"named data type does not match layout\");",
         "    }",
         "    validateRecordTypes(values.records(), mapping.recordMapping());",
+        "    PayloadSemanticValidator.validate(values);",
         "    List<FieldValueSet> records =",
         "        values.records().stream().map(PayloadRecord::fields).toList();",
         "    return new PayloadValues(values.layoutId(), values.data().fields(), records);",

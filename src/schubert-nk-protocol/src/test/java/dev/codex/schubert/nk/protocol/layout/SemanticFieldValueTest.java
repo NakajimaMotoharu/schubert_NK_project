@@ -57,8 +57,7 @@ class SemanticFieldValueTest {
     assertEquals(
         Optional.of(authentication),
         TypedFieldValues.optionalAuthenticationContext(fields, "authentication"));
-    assertEquals(
-        Optional.empty(), TypedFieldValues.optionalAuthenticationContext(fields, "unset"));
+    assertEquals(Optional.empty(), TypedFieldValues.optionalAuthenticationContext(fields, "unset"));
 
     Sha256Hex sha256 = Sha256Hex.of(HEX_A);
     RelativePath relativePath = RelativePath.of("scenario/game/file.txt");
@@ -71,8 +70,7 @@ class SemanticFieldValueTest {
         Optional.of(relativePath), TypedFieldValues.optionalRelativePath(fields, "relative"));
     assertEquals(Optional.empty(), TypedFieldValues.optionalRelativePath(fields, "unset"));
     assertEquals(displayPath, TypedFieldValues.requiredDisplayPath(fields, "display"));
-    assertEquals(
-        Optional.of(displayPath), TypedFieldValues.optionalDisplayPath(fields, "display"));
+    assertEquals(Optional.of(displayPath), TypedFieldValues.optionalDisplayPath(fields, "display"));
     assertEquals(Optional.empty(), TypedFieldValues.optionalDisplayPath(fields, "unset"));
 
     assertEquals(new FieldValue.Text("safe"), TypedFieldValues.text("safe"));
@@ -81,15 +79,16 @@ class SemanticFieldValueTest {
     assertEquals(
         new FieldValue.Text("safe"), TypedFieldValues.optionalStringValue(Optional.of("safe")));
     assertEquals(FieldValue.Unset.INSTANCE, TypedFieldValues.optionalStringValue(Optional.empty()));
-    assertEquals(
-        new FieldValue.Numeric(20260902123456789L), TypedFieldValues.instant(INSTANT));
+    assertEquals(new FieldValue.Numeric(20260902123456789L), TypedFieldValues.instant(INSTANT));
     assertEquals(
         new FieldValue.Text(WIRE_TIME),
         TypedFieldValues.optionalInstantValue(Optional.of(INSTANT)));
-    assertEquals(FieldValue.Unset.INSTANCE, TypedFieldValues.optionalInstantValue(Optional.empty()));
+    assertEquals(
+        FieldValue.Unset.INSTANCE, TypedFieldValues.optionalInstantValue(Optional.empty()));
     assertEquals(new FieldValue.Text(UUID_TEXT), TypedFieldValues.uuid(UUID_VALUE));
     assertEquals(
-        new FieldValue.Text(UUID_TEXT), TypedFieldValues.optionalUuidValue(Optional.of(UUID_VALUE)));
+        new FieldValue.Text(UUID_TEXT),
+        TypedFieldValues.optionalUuidValue(Optional.of(UUID_VALUE)));
     assertEquals(FieldValue.Unset.INSTANCE, TypedFieldValues.optionalUuidValue(Optional.empty()));
     assertEquals(
         new FieldValue.Text(HEX_A),
@@ -99,18 +98,15 @@ class SemanticFieldValueTest {
         TypedFieldValues.optionalAuthenticationContextValue(Optional.empty()));
     assertEquals(new FieldValue.Text(HEX_A), TypedFieldValues.sha256(sha256));
     assertEquals(
-        new FieldValue.Text(HEX_A),
-        TypedFieldValues.optionalSha256Value(Optional.of(sha256)));
+        new FieldValue.Text(HEX_A), TypedFieldValues.optionalSha256Value(Optional.of(sha256)));
     assertEquals(FieldValue.Unset.INSTANCE, TypedFieldValues.optionalSha256Value(Optional.empty()));
     assertEquals(
-        new FieldValue.Text("scenario/game/file.txt"),
-        TypedFieldValues.relativePath(relativePath));
+        new FieldValue.Text("scenario/game/file.txt"), TypedFieldValues.relativePath(relativePath));
     assertEquals(
         new FieldValue.Text("scenario/game/file.txt"),
         TypedFieldValues.optionalRelativePathValue(Optional.of(relativePath)));
     assertEquals(
-        FieldValue.Unset.INSTANCE,
-        TypedFieldValues.optionalRelativePathValue(Optional.empty()));
+        FieldValue.Unset.INSTANCE, TypedFieldValues.optionalRelativePathValue(Optional.empty()));
     assertEquals(new FieldValue.Text("表示/台本"), TypedFieldValues.displayPath(displayPath));
     assertEquals(
         new FieldValue.Text("表示/台本"),
@@ -140,8 +136,7 @@ class SemanticFieldValueTest {
     assertSemanticFailure(
         () -> TypedFieldValues.requiredSha256(fields(new FieldValue.Text("invalid")), "value"));
     assertSemanticFailure(
-        () ->
-            TypedFieldValues.optionalSha256(fields(new FieldValue.Text("invalid")), "value"));
+        () -> TypedFieldValues.optionalSha256(fields(new FieldValue.Text("invalid")), "value"));
     assertSemanticFailure(
         () ->
             TypedFieldValues.requiredRelativePath(
@@ -223,11 +218,13 @@ class SemanticFieldValueTest {
     assertThrows(NullPointerException.class, () -> TypedFieldValues.uuid(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalUuidValue(null));
     assertThrows(
-        NullPointerException.class, () -> TypedFieldValues.optionalAuthenticationContextValue(null));
+        NullPointerException.class,
+        () -> TypedFieldValues.optionalAuthenticationContextValue(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.sha256(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalSha256Value(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.relativePath(null));
-    assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalRelativePathValue(null));
+    assertThrows(
+        NullPointerException.class, () -> TypedFieldValues.optionalRelativePathValue(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.displayPath(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.optionalDisplayPathValue(null));
   }

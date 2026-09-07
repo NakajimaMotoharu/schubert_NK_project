@@ -39,7 +39,8 @@ class OperationFingerprintTest {
     CanonicalRequest request = goldenRequest();
     byte[] key = HEX.parseHex("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f");
 
-    assertEquals(GOLDEN_CANONICAL, HEX.formatHex(OperationFingerprint.INSTANCE.canonicalBytes(request)));
+    assertEquals(
+        GOLDEN_CANONICAL, HEX.formatHex(OperationFingerprint.INSTANCE.canonicalBytes(request)));
     assertEquals(GOLDEN_HMAC, HEX.formatHex(OperationFingerprint.INSTANCE.calculate(request, key)));
     assertEquals(
         "CanonicalRequest[layoutId=QSTREQ01, layoutVersion=001, owner/target/fields=<redacted>]",
@@ -67,7 +68,11 @@ class OperationFingerprintTest {
             "7", "QSTREQ01", "001", "QUESTION:7", List.of(new CanonicalField("v", "X1", null)));
     CanonicalRequest emptyValue =
         new CanonicalRequest(
-            "7", "QSTREQ01", "001", "QUESTION:7", List.of(new CanonicalField("v", "X1", new byte[0])));
+            "7",
+            "QSTREQ01",
+            "001",
+            "QUESTION:7",
+            List.of(new CanonicalField("v", "X1", new byte[0])));
 
     assertArrayEquals(
         OperationFingerprint.INSTANCE.canonicalBytes(nfd),
@@ -102,22 +107,48 @@ class OperationFingerprintTest {
     assertThrows(NullPointerException.class, () -> new CanonicalField("v", null, null));
     assertThrows(IllegalArgumentException.class, () -> new CanonicalField("", "X1", null));
     assertThrows(IllegalArgumentException.class, () -> new CanonicalField("v", "?", null));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest(null, "QSTREQ01", "001", "t", List.of()));
-    assertThrows(IllegalArgumentException.class, () -> new CanonicalRequest("", "QSTREQ01", "001", "t", List.of()));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", null, List.of()));
-    assertThrows(IllegalArgumentException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", "", List.of()));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest("7", null, "001", "t", List.of()));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", null, "t", List.of()));
-    assertThrows(IllegalArgumentException.class, () -> new CanonicalRequest("7", "short", "001", "t", List.of()));
-    assertThrows(IllegalArgumentException.class, () -> new CanonicalRequest("7", "QSTREQ01", "v1", "t", List.of()));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", "t", null));
-    assertThrows(NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", "t", java.util.Arrays.asList((CanonicalField) null)));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CanonicalRequest(null, "QSTREQ01", "001", "t", List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CanonicalRequest("", "QSTREQ01", "001", "t", List.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CanonicalRequest("7", "QSTREQ01", "001", null, List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CanonicalRequest("7", "QSTREQ01", "001", "", List.of()));
+    assertThrows(
+        NullPointerException.class, () -> new CanonicalRequest("7", null, "001", "t", List.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CanonicalRequest("7", "QSTREQ01", null, "t", List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CanonicalRequest("7", "short", "001", "t", List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CanonicalRequest("7", "QSTREQ01", "v1", "t", List.of()));
+    assertThrows(
+        NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", "t", null));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new CanonicalRequest(
+                "7", "QSTREQ01", "001", "t", java.util.Arrays.asList((CanonicalField) null)));
 
     CanonicalRequest request = goldenRequest();
-    assertThrows(NullPointerException.class, () -> OperationFingerprint.INSTANCE.calculate(null, new byte[32]));
-    assertThrows(NullPointerException.class, () -> OperationFingerprint.INSTANCE.calculate(request, null));
-    assertThrows(IllegalArgumentException.class, () -> OperationFingerprint.INSTANCE.calculate(request, new byte[31]));
-    assertThrows(NullPointerException.class, () -> OperationFingerprint.INSTANCE.canonicalBytes(null));
+    assertThrows(
+        NullPointerException.class,
+        () -> OperationFingerprint.INSTANCE.calculate(null, new byte[32]));
+    assertThrows(
+        NullPointerException.class, () -> OperationFingerprint.INSTANCE.calculate(request, null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> OperationFingerprint.INSTANCE.calculate(request, new byte[31]));
+    assertThrows(
+        NullPointerException.class, () -> OperationFingerprint.INSTANCE.canonicalBytes(null));
   }
 
   @Test

@@ -13,18 +13,19 @@ import org.junit.jupiter.api.Test;
 /** PT-IDEM-004..006 boundary, null-contract and redaction tests for Inbox value objects. */
 class InboxModelTest {
   private static final UUID MESSAGE = UUID.fromString("10000000-0000-0000-0000-000000000001");
-  private static final UUID CORRELATION =
-      UUID.fromString("20000000-0000-0000-0000-000000000001");
+  private static final UUID CORRELATION = UUID.fromString("20000000-0000-0000-0000-000000000001");
   private static final UUID TOKEN = UUID.fromString("30000000-0000-0000-0000-000000000001");
-  private static final UUID RESULT_UUID =
-      UUID.fromString("40000000-0000-0000-0000-000000000001");
+  private static final UUID RESULT_UUID = UUID.fromString("40000000-0000-0000-0000-000000000001");
   private static final Instant RECEIVED = Instant.parse("2026-09-05T00:00:00Z");
   private static final Instant EXPIRES = Instant.parse("2026-09-12T00:00:00Z");
 
   @Test
   void requestAcceptsAnonymousAuthenticatedAndEveryTokenLayout() {
     InboxRequest anonymous =
-        request(OptionalLong.empty(), Optional.empty(), canonical("ANONYMOUS", "LGNREQ01", "001", "login"));
+        request(
+            OptionalLong.empty(),
+            Optional.empty(),
+            canonical("ANONYMOUS", "LGNREQ01", "001", "login"));
     InboxRequest read =
         request(OptionalLong.of(7), Optional.empty(), canonical("7", "QSTREQ01", "001", "read"));
 
@@ -42,10 +43,7 @@ class InboxModelTest {
             "QDLREQ01")) {
       assertEquals(
           Optional.of(TOKEN),
-          request(
-                  OptionalLong.of(7),
-                  Optional.of(TOKEN),
-                  canonical("7", layout, "001", "update"))
+          request(OptionalLong.of(7), Optional.of(TOKEN), canonical("7", layout, "001", "update"))
               .operationToken());
     }
     assertEquals(
@@ -59,34 +57,73 @@ class InboxModelTest {
     CanonicalRequest read = canonical("7", "QSTREQ01", "001", "read");
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(null, CORRELATION, OptionalLong.empty(), Optional.empty(), login, RECEIVED, EXPIRES));
+        () ->
+            new InboxRequest(
+                null,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                login,
+                RECEIVED,
+                EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, null, OptionalLong.empty(), Optional.empty(), login, RECEIVED, EXPIRES));
+        () ->
+            new InboxRequest(
+                MESSAGE, null, OptionalLong.empty(), Optional.empty(), login, RECEIVED, EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, null, Optional.empty(), login, RECEIVED, EXPIRES));
+        () ->
+            new InboxRequest(
+                MESSAGE, CORRELATION, null, Optional.empty(), login, RECEIVED, EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), null, login, RECEIVED, EXPIRES));
+        () ->
+            new InboxRequest(
+                MESSAGE, CORRELATION, OptionalLong.empty(), null, login, RECEIVED, EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), Optional.empty(), null, RECEIVED, EXPIRES));
+        () ->
+            new InboxRequest(
+                MESSAGE,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                null,
+                RECEIVED,
+                EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), Optional.empty(), login, null, EXPIRES));
+        () ->
+            new InboxRequest(
+                MESSAGE,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                login,
+                null,
+                EXPIRES));
     assertThrows(
         NullPointerException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), Optional.empty(), login, RECEIVED, null));
+        () ->
+            new InboxRequest(
+                MESSAGE,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                login,
+                RECEIVED,
+                null));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> request(OptionalLong.of(7), Optional.empty(), login));
+        IllegalArgumentException.class, () -> request(OptionalLong.of(7), Optional.empty(), login));
     assertThrows(
         IllegalArgumentException.class,
         () -> request(OptionalLong.empty(), Optional.empty(), read));
     assertThrows(
         IllegalArgumentException.class,
-        () -> request(OptionalLong.of(0), Optional.empty(), canonical("0", "QSTREQ01", "001", "read")));
+        () ->
+            request(
+                OptionalLong.of(0), Optional.empty(), canonical("0", "QSTREQ01", "001", "read")));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -96,19 +133,39 @@ class InboxModelTest {
                 canonical("1000000000000", "QSTREQ01", "001", "read")));
     assertThrows(
         IllegalArgumentException.class,
-        () -> request(OptionalLong.of(7), Optional.empty(), canonical("8", "QSTREQ01", "001", "read")));
+        () ->
+            request(
+                OptionalLong.of(7), Optional.empty(), canonical("8", "QSTREQ01", "001", "read")));
     assertThrows(
         IllegalArgumentException.class,
-        () -> request(OptionalLong.of(7), Optional.empty(), canonical("7", "QSBREQ01", "001", "write")));
+        () ->
+            request(
+                OptionalLong.of(7), Optional.empty(), canonical("7", "QSBREQ01", "001", "write")));
     assertThrows(
         IllegalArgumentException.class,
         () -> request(OptionalLong.of(7), Optional.of(TOKEN), read));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), Optional.empty(), login, RECEIVED, RECEIVED));
+        () ->
+            new InboxRequest(
+                MESSAGE,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                login,
+                RECEIVED,
+                RECEIVED));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InboxRequest(MESSAGE, CORRELATION, OptionalLong.empty(), Optional.empty(), login, EXPIRES, RECEIVED));
+        () ->
+            new InboxRequest(
+                MESSAGE,
+                CORRELATION,
+                OptionalLong.empty(),
+                Optional.empty(),
+                login,
+                EXPIRES,
+                RECEIVED));
   }
 
   @Test
@@ -121,7 +178,9 @@ class InboxModelTest {
             InboxResultReferenceType.QUESTION,
             InboxResultReferenceType.JOB,
             InboxResultReferenceType.SCENARIO_FILE)) {
-      assertEquals(OptionalLong.of(999_999_999_999L), InboxResultReference.numeric(type, 999_999_999_999L).numericId());
+      assertEquals(
+          OptionalLong.of(999_999_999_999L),
+          InboxResultReference.numeric(type, 999_999_999_999L).numericId());
     }
     assertEquals(
         "InboxResultReference[type=NONE, value=<redacted>]",
@@ -138,13 +197,18 @@ class InboxModelTest {
         NullPointerException.class,
         () -> new InboxResultReference(InboxResultReferenceType.NONE, OptionalLong.empty(), null));
     assertInvalidReference(InboxResultReferenceType.NONE, OptionalLong.of(1), Optional.empty());
-    assertInvalidReference(InboxResultReferenceType.NONE, OptionalLong.empty(), Optional.of(RESULT_UUID));
-    assertInvalidReference(InboxResultReferenceType.AUTH_SESSION, OptionalLong.of(1), Optional.of(RESULT_UUID));
-    assertInvalidReference(InboxResultReferenceType.AUTH_SESSION, OptionalLong.empty(), Optional.empty());
+    assertInvalidReference(
+        InboxResultReferenceType.NONE, OptionalLong.empty(), Optional.of(RESULT_UUID));
+    assertInvalidReference(
+        InboxResultReferenceType.AUTH_SESSION, OptionalLong.of(1), Optional.of(RESULT_UUID));
+    assertInvalidReference(
+        InboxResultReferenceType.AUTH_SESSION, OptionalLong.empty(), Optional.empty());
     assertInvalidReference(InboxResultReferenceType.USER, OptionalLong.empty(), Optional.empty());
     assertInvalidReference(InboxResultReferenceType.USER, OptionalLong.of(0), Optional.empty());
-    assertInvalidReference(InboxResultReferenceType.USER, OptionalLong.of(1_000_000_000_000L), Optional.empty());
-    assertInvalidReference(InboxResultReferenceType.USER, OptionalLong.of(1), Optional.of(RESULT_UUID));
+    assertInvalidReference(
+        InboxResultReferenceType.USER, OptionalLong.of(1_000_000_000_000L), Optional.empty());
+    assertInvalidReference(
+        InboxResultReferenceType.USER, OptionalLong.of(1), Optional.of(RESULT_UUID));
   }
 
   @Test
@@ -164,7 +228,9 @@ class InboxModelTest {
     assertThrows(NullPointerException.class, () -> InboxExecution.executed(null));
     assertThrows(NullPointerException.class, () -> InboxExecution.replay(null));
     assertThrows(NullPointerException.class, () -> new InboxExecution(null, Optional.empty()));
-    assertThrows(NullPointerException.class, () -> new InboxExecution(InboxExecutionStatus.IN_PROGRESS, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new InboxExecution(InboxExecutionStatus.IN_PROGRESS, null));
     assertThrows(
         IllegalArgumentException.class,
         () -> new InboxExecution(InboxExecutionStatus.EXECUTED, Optional.empty()));
@@ -172,18 +238,58 @@ class InboxModelTest {
         IllegalArgumentException.class,
         () -> new InboxExecution(InboxExecutionStatus.IN_PROGRESS, Optional.of(completion)));
 
-    assertCompletionNull(null, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), RECEIVED);
-    assertCompletionNull(InboxCompletionState.COMPLETED, null, "QSTRSP01", "001", Optional.empty(), RECEIVED);
-    assertCompletionNull(InboxCompletionState.COMPLETED, InboxResultReference.none(), null, "001", Optional.empty(), RECEIVED);
-    assertCompletionNull(InboxCompletionState.COMPLETED, InboxResultReference.none(), "QSTRSP01", null, Optional.empty(), RECEIVED);
-    assertCompletionNull(InboxCompletionState.COMPLETED, InboxResultReference.none(), "QSTRSP01", "001", null, RECEIVED);
-    assertCompletionNull(InboxCompletionState.COMPLETED, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), null);
+    assertCompletionNull(
+        null, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED, null, "QSTRSP01", "001", Optional.empty(), RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED,
+        InboxResultReference.none(),
+        null,
+        "001",
+        Optional.empty(),
+        RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED,
+        InboxResultReference.none(),
+        "QSTRSP01",
+        null,
+        Optional.empty(),
+        RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED,
+        InboxResultReference.none(),
+        "QSTRSP01",
+        "001",
+        null,
+        RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED,
+        InboxResultReference.none(),
+        "QSTRSP01",
+        "001",
+        Optional.empty(),
+        null);
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InboxCompletion(InboxCompletionState.COMPLETED, InboxResultReference.none(), "bad", "001", Optional.empty(), RECEIVED));
+        () ->
+            new InboxCompletion(
+                InboxCompletionState.COMPLETED,
+                InboxResultReference.none(),
+                "bad",
+                "001",
+                Optional.empty(),
+                RECEIVED));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InboxCompletion(InboxCompletionState.COMPLETED, InboxResultReference.none(), "QSTRSP01", "bad", Optional.empty(), RECEIVED));
+        () ->
+            new InboxCompletion(
+                InboxCompletionState.COMPLETED,
+                InboxResultReference.none(),
+                "QSTRSP01",
+                "bad",
+                Optional.empty(),
+                RECEIVED));
   }
 
   @Test
@@ -198,7 +304,8 @@ class InboxModelTest {
 
   private static InboxRequest request(
       OptionalLong owner, Optional<UUID> token, CanonicalRequest canonicalRequest) {
-    return new InboxRequest(MESSAGE, CORRELATION, owner, token, canonicalRequest, RECEIVED, EXPIRES);
+    return new InboxRequest(
+        MESSAGE, CORRELATION, owner, token, canonicalRequest, RECEIVED, EXPIRES);
   }
 
   private static CanonicalRequest canonical(
@@ -208,12 +315,7 @@ class InboxModelTest {
 
   private static InboxCompletion completion(InboxCompletionState state) {
     return new InboxCompletion(
-        state,
-        InboxResultReference.none(),
-        "QSTRSP01",
-        "001",
-        Optional.empty(),
-        RECEIVED);
+        state, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), RECEIVED);
   }
 
   private static void assertInvalidReference(

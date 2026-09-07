@@ -18,8 +18,8 @@ import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
 import jakarta.jms.Message;
 import jakarta.jms.Queue;
 import jakarta.jms.QueueBrowser;
@@ -170,8 +170,7 @@ final class ArtemisFileJournalTest {
           .send(requestAddress, outbound);
 
       try (JMSConsumer consumer =
-          context.createConsumer(
-              new ActiveMQQueue("nk.sync.request::nk.sync.request.q"))) {
+          context.createConsumer(new ActiveMQQueue("nk.sync.request::nk.sync.request.q"))) {
         Message received = consumer.receive(5_000);
         assertNotNull(received);
         GuardedJmsMessage guarded =
@@ -321,8 +320,7 @@ final class ArtemisFileJournalTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer consumer =
-            context.createConsumer(
-                new ActiveMQQueue("nk.async.work::nk.async.work.q"))) {
+            context.createConsumer(new ActiveMQQueue("nk.async.work::nk.async.work.q"))) {
       BytesMessage received = (BytesMessage) consumer.receive(5_000);
       byte[] body = new byte[Math.toIntExact(received.getBodyLength())];
       received.readBytes(body);
@@ -335,8 +333,7 @@ final class ArtemisFileJournalTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer consumer =
-            context.createConsumer(
-                new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
+            context.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
       BytesMessage received = (BytesMessage) consumer.receive(5_000);
       assertNotNull(received);
       byte[] body = new byte[Math.toIntExact(received.getBodyLength())];

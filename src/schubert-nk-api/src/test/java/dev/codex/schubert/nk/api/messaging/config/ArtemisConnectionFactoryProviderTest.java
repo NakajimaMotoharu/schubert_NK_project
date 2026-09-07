@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Test;
 final class ArtemisConnectionFactoryProviderTest {
   @Test
   void commonConnectionAndReconnectPolicyIsExactAndCredentialFree() {
-    try (ActiveMQConnectionFactory factory = create(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC)) {
+    try (ActiveMQConnectionFactory factory =
+        create(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC)) {
       assertFalse(factory.isHA());
       assertEquals(2_000L, factory.getCallTimeout());
       assertEquals(10_000L, factory.getClientFailureCheckPeriod());
@@ -55,8 +56,7 @@ final class ArtemisConnectionFactoryProviderTest {
     assertWindow(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, 0);
     assertWindow(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, 65_536);
     assertThrows(
-        NullPointerException.class,
-        () -> ArtemisConnectionFactoryProvider.INSTANCE.create(null));
+        NullPointerException.class, () -> ArtemisConnectionFactoryProvider.INSTANCE.create(null));
   }
 
   private static ActiveMQConnectionFactory create(

@@ -48,8 +48,7 @@ final class JdbcInboxCoordinatorTest {
   private static final Instant COMPLETED = Instant.parse("2026-09-05T00:00:01Z");
   private static final Instant EXPIRES = Instant.parse("2026-09-12T00:00:00Z");
   private static final UUID MESSAGE = UUID.fromString("51000000-0000-0000-0000-000000000001");
-  private static final UUID CORRELATION =
-      UUID.fromString("52000000-0000-0000-0000-000000000001");
+  private static final UUID CORRELATION = UUID.fromString("52000000-0000-0000-0000-000000000001");
   private static final UUID TOKEN = UUID.fromString("53000000-0000-0000-0000-000000000001");
   private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
 
@@ -122,7 +121,8 @@ final class JdbcInboxCoordinatorTest {
 
   @BeforeEach
   void resetDatabase() throws SQLException {
-    try (Connection connection = appConnection(); Statement statement = connection.createStatement()) {
+    try (Connection connection = appConnection();
+        Statement statement = connection.createStatement()) {
       statement.executeUpdate("delete from schubert.request_inbox");
       statement.executeUpdate("delete from schubert.app_logs");
       statement.executeUpdate("delete from schubert.app_users");
@@ -133,7 +133,8 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected() throws Exception {
-    InboxRequest original = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    InboxRequest original =
+        tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
     byte[] previousKey = key((byte) 11);
     try (FingerprintKeyRing originalKeys = new FingerprintKeyRing("fp1", previousKey, null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(originalKeys);
@@ -178,8 +179,7 @@ final class JdbcInboxCoordinatorTest {
       assertEquals(1, count("schubert.app_logs"));
 
       assertMessageReuse(
-          coordinator,
-          tokenRequest(MESSAGE, uuid(2), 101, TOKEN, "question", "QSBREQ01", "001"));
+          coordinator, tokenRequest(MESSAGE, uuid(2), 101, TOKEN, "question", "QSBREQ01", "001"));
       assertMessageReuse(
           coordinator,
           tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "USTREQ01", "001"));
@@ -195,17 +195,10 @@ final class JdbcInboxCoordinatorTest {
       assertMessageReuse(
           coordinator,
           tokenRequest(
-              MESSAGE,
-              CORRELATION,
-              101,
-              TOKEN,
-              "sensitive-target-7f3c",
-              "QSBREQ01",
-              "001"));
+              MESSAGE, CORRELATION, 101, TOKEN, "sensitive-target-7f3c", "QSBREQ01", "001"));
     }
 
-    try (FingerprintKeyRing unavailable =
-        new FingerprintKeyRing("fp2", currentKey, null, null)) {
+    try (FingerprintKeyRing unavailable = new FingerprintKeyRing("fp2", currentKey, null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(unavailable);
       try (Connection connection = transaction()) {
         InboxException exception =
@@ -220,7 +213,8 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing() throws Exception {
-    InboxRequest original = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    InboxRequest original =
+        tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
     try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 21), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       try (Connection connection = transaction()) {
@@ -230,7 +224,8 @@ final class JdbcInboxCoordinatorTest {
         connection.commit();
       }
 
-      InboxRequest retry = tokenRequest(uuid(10), uuid(11), 101, TOKEN, "question", "QSBREQ01", "001");
+      InboxRequest retry =
+          tokenRequest(uuid(10), uuid(11), 101, TOKEN, "question", "QSBREQ01", "001");
       try (Connection connection = transaction()) {
         InboxExecution replay =
             coordinator.execute(
@@ -245,7 +240,8 @@ final class JdbcInboxCoordinatorTest {
         connection.commit();
       }
 
-      InboxRequest changed = tokenRequest(uuid(12), uuid(13), 101, TOKEN, "changed", "QSBREQ01", "001");
+      InboxRequest changed =
+          tokenRequest(uuid(12), uuid(13), 101, TOKEN, "changed", "QSBREQ01", "001");
       try (Connection connection = transaction()) {
         InboxException exception =
             assertThrows(
@@ -274,7 +270,9 @@ final class JdbcInboxCoordinatorTest {
       try (Connection connection = transaction()) {
         assertEquals(
             InboxExecutionStatus.IN_PROGRESS,
-            coordinator.execute(connection, processingRetry, ignored -> numericCompletion()).status());
+            coordinator
+                .execute(connection, processingRetry, ignored -> numericCompletion())
+                .status());
         connection.commit();
       }
     }
@@ -409,7 +407,8 @@ final class JdbcInboxCoordinatorTest {
         assertThrows(
             NullPointerException.class,
             () -> coordinator.execute(connection, null, ignored -> noSnapshotCompletion()));
-        assertThrows(NullPointerException.class, () -> coordinator.execute(connection, request, null));
+        assertThrows(
+            NullPointerException.class, () -> coordinator.execute(connection, request, null));
         connection.rollback();
       }
       try (Connection connection = transaction()) {
@@ -441,7 +440,9 @@ final class JdbcInboxCoordinatorTest {
         SQLException exception =
             assertThrows(
                 SQLException.class,
-                () -> coordinator.execute(connection, missingOwner, ignored -> noSnapshotCompletion()));
+                () ->
+                    coordinator.execute(
+                        connection, missingOwner, ignored -> noSnapshotCompletion()));
         assertEquals("23503", exception.getSQLState());
         connection.rollback();
       }
@@ -524,8 +525,7 @@ final class JdbcInboxCoordinatorTest {
         intercepted.rollback();
       }
 
-      InboxRequest vanished =
-          authenticatedRequest(uuid(67), uuid(68), 101, "QSTREQ01", "vanished");
+      InboxRequest vanished = authenticatedRequest(uuid(67), uuid(68), 101, "QSTREQ01", "vanished");
       try (Connection connection = transaction()) {
         InboxException exception =
             assertThrows(
@@ -603,7 +603,8 @@ final class JdbcInboxCoordinatorTest {
         EXPIRES);
   }
 
-  private static CanonicalRequest canonical(long owner, String layout, String version, String target) {
+  private static CanonicalRequest canonical(
+      long owner, String layout, String version, String target) {
     return new CanonicalRequest(Long.toString(owner), layout, version, target, List.of());
   }
 
@@ -738,7 +739,8 @@ final class JdbcInboxCoordinatorTest {
   }
 
   private static void executeApp(String sql) throws SQLException {
-    try (Connection connection = appConnection(); Statement statement = connection.createStatement()) {
+    try (Connection connection = appConnection();
+        Statement statement = connection.createStatement()) {
       statement.execute(sql);
     }
   }
@@ -810,7 +812,8 @@ final class JdbcInboxCoordinatorTest {
   private static void run(String... command) throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder(command);
     builder.redirectErrorStream(true);
-    builder.redirectOutput(ProcessBuilder.Redirect.appendTo(clusterRoot.resolve("process.log").toFile()));
+    builder.redirectOutput(
+        ProcessBuilder.Redirect.appendTo(clusterRoot.resolve("process.log").toFile()));
     builder
         .environment()
         .put(

@@ -9,8 +9,8 @@ import java.util.Objects;
 /**
  * Validates and correlates one reply under a caller-owned, transacted consumer context.
  *
- * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005/MQ-008; UI 212/231; SS 312 section 3.2
- * and 321 sections 7/9.
+ * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005/MQ-008; UI 212/231; SS 312 section 3.2 and 321 sections
+ * 7/9.
  */
 public final class ArtemisReplyConsumer {
   private final JmsRequestReplyClient client;
@@ -18,9 +18,7 @@ public final class ArtemisReplyConsumer {
   private final ArtemisReplyDlqSender fatalSender;
 
   public ArtemisReplyConsumer(
-      JmsRequestReplyClient client,
-      JmsReplyDecoder decoder,
-      ArtemisReplyDlqSender fatalSender) {
+      JmsRequestReplyClient client, JmsReplyDecoder decoder, ArtemisReplyDlqSender fatalSender) {
     this.client = Objects.requireNonNull(client, "client");
     this.decoder = Objects.requireNonNull(decoder, "decoder");
     this.fatalSender = Objects.requireNonNull(fatalSender, "fatalSender");

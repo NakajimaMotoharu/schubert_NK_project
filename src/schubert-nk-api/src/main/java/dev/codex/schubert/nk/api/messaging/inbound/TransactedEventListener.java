@@ -21,8 +21,8 @@ import java.util.Optional;
 /**
  * Common transaction boundary for the single-threaded internal event consumers.
  *
- * <p>Trace: NK-MSG-001; RD MQ-006～010; UI 213/231; SS 312 sections 8-9 and 321
- * sections 6-8; PT-JMS-005～007/009.
+ * <p>Trace: NK-MSG-001; RD MQ-006～010; UI 213/231; SS 312 sections 8-9 and 321 sections 6-8;
+ * PT-JMS-005～007/009.
  */
 final class TransactedEventListener {
   private final BrokerTopology destination;

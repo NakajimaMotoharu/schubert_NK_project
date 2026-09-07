@@ -13,8 +13,8 @@ import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.Destination;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
@@ -44,25 +44,20 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-006/007/008/009 reply consumer transaction, late and fatal isolation matrix. */
 final class ArtemisReplyConsumerTest {
-  private static final UUID REQUEST_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
-  private static final UUID RESPONSE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000002");
+  private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
 
   @Test
   @DisplayName("PT-JMS-007/008 valid active and late replies commit exactly once")
-  void validActiveAndLateRepliesAreCommittedAfterValidation(@TempDir Path root)
-      throws Exception {
+  void validActiveAndLateRepliesAreCommittedAfterValidation(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext receiver = factory.createContext(JMSContext.SESSION_TRANSACTED);
-        JMSConsumer replyQueue =
-            receiver.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB))) {
+        JMSConsumer replyQueue = receiver.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB))) {
       ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry();
-      PendingReply pending =
-          registry.register(REQUEST_ID, NOW.plusSeconds(2), NOW).orElseThrow();
+      PendingReply pending = registry.register(REQUEST_ID, NOW.plusSeconds(2), NOW).orElseThrow();
       ArtemisReplyConsumer consumer = consumer(registry);
       byte[] body = responseWire();
 
@@ -89,8 +84,7 @@ final class ArtemisReplyConsumerTest {
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext receiver = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer replyQueue =
-            receiver.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
+        JMSConsumer replyQueue = receiver.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
         JMSConsumer dlqQueue = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       TextMessage invalid = producer.createTextMessage("opaque synthetic invalid body");
       invalid.setJMSCorrelationID("not-a-uuid");
@@ -110,8 +104,7 @@ final class ArtemisReplyConsumerTest {
               CommittedFatalReplyException.class,
               () -> consumer.onMessage(receiver, required(replyQueue.receive(5_000))));
       assertNotNull(failure.getCause());
-      assertEquals(
-          "invalid JMS reply was committed to the fatal DLQ", failure.getMessage());
+      assertEquals("invalid JMS reply was committed to the fatal DLQ", failure.getMessage());
       assertNull(replyQueue.receive(250));
 
       TextMessage isolated = assertInstanceOf(TextMessage.class, dlqQueue.receive(5_000));
@@ -140,14 +133,10 @@ final class ArtemisReplyConsumerTest {
         new JmsRequestReplyClient(
             new ReplyCorrelationRegistry(), Clock.fixed(NOW, ZoneOffset.UTC), 1);
     JmsReplyDecoder decoder = new JmsReplyDecoder();
-    ArtemisReplyDlqSender sender =
-        new ArtemisReplyDlqSender(Clock.fixed(NOW, ZoneOffset.UTC));
-    assertThrows(
-        NullPointerException.class, () -> new ArtemisReplyConsumer(null, decoder, sender));
-    assertThrows(
-        NullPointerException.class, () -> new ArtemisReplyConsumer(client, null, sender));
-    assertThrows(
-        NullPointerException.class, () -> new ArtemisReplyConsumer(client, decoder, null));
+    ArtemisReplyDlqSender sender = new ArtemisReplyDlqSender(Clock.fixed(NOW, ZoneOffset.UTC));
+    assertThrows(NullPointerException.class, () -> new ArtemisReplyConsumer(null, decoder, sender));
+    assertThrows(NullPointerException.class, () -> new ArtemisReplyConsumer(client, null, sender));
+    assertThrows(NullPointerException.class, () -> new ArtemisReplyConsumer(client, decoder, null));
     assertThrows(NullPointerException.class, () -> new ArtemisReplyDlqSender(null));
 
     ArtemisReplyConsumer consumer = new ArtemisReplyConsumer(client, decoder, sender);
@@ -164,19 +153,16 @@ final class ArtemisReplyConsumerTest {
         NullPointerException.class,
         () -> sender.send(context(JMSContext.SESSION_TRANSACTED), null));
     assertThrows(
-        IllegalStateException.class,
-        () -> sender.send(context(JMSContext.AUTO_ACKNOWLEDGE), text));
+        IllegalStateException.class, () -> sender.send(context(JMSContext.AUTO_ACKNOWLEDGE), text));
   }
 
   @Test
   void dlqMetadataUsesOnlyBoundedIdentifiersAndSafeDeliveryCount() throws Exception {
-    ArtemisReplyDlqSender sender =
-        new ArtemisReplyDlqSender(Clock.fixed(NOW, ZoneOffset.UTC));
+    ArtemisReplyDlqSender sender = new ArtemisReplyDlqSender(Clock.fixed(NOW, ZoneOffset.UTC));
     ContextState context = new ContextState();
 
     MessageState valid =
-        messageState(
-            "ID:provider-1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 2);
+        messageState("ID:provider-1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 2);
     sender.send(context.proxy(), valid.message);
     assertEquals("ID:provider-1", valid.strings.get("NKOriginalTransportID"));
     assertEquals(RESPONSE_ID.toString(), valid.strings.get("NKMessageID"));
@@ -198,16 +184,11 @@ final class ArtemisReplyConsumerTest {
 
     MessageState uppercase =
         messageState(
-            "ID:1",
-            "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
-            REQUEST_ID.toString(),
-            "LOGRSP01",
-            1);
+            "ID:1", "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", REQUEST_ID.toString(), "LOGRSP01", 1);
     sender.send(context.proxy(), uppercase.message);
     assertEquals("UNAVAILABLE", uppercase.strings.get("NKMessageID"));
 
-    MessageState malformed =
-        messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
+    MessageState malformed = messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
     sender.send(context.proxy(), malformed.message);
     assertEquals("UNAVAILABLE", malformed.strings.get("NKMessageID"));
     assertEquals("UNAVAILABLE", malformed.strings.get("NKCorrelationID"));
@@ -215,8 +196,7 @@ final class ArtemisReplyConsumerTest {
     assertEquals(1, malformed.integers.get("NKDeliveryCount"));
 
     MessageState zero =
-        messageState(
-            "ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 0);
+        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 0);
     sender.send(context.proxy(), zero.message);
     assertEquals(1, zero.integers.get("NKDeliveryCount"));
   }
@@ -272,8 +252,7 @@ final class ArtemisReplyConsumerTest {
     ArtemisReplyConsumer consumer = consumer(new ReplyCorrelationRegistry());
 
     MessageState checkedMessage =
-        messageState(
-            "ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
     JMSException checked = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = checked;
     ContextState checkedContext = new ContextState();
@@ -285,11 +264,11 @@ final class ArtemisReplyConsumerTest {
     assertEquals(1, checkedContext.rollbacks);
     assertTrue(
         Arrays.stream(checkedObserved.getSuppressed())
-            .anyMatch(dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
+            .anyMatch(
+                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
 
     MessageState commitMessage =
-        messageState(
-            "ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
     ContextState commitContext = new ContextState();
     JMSRuntimeException runtime = new JMSRuntimeException("synthetic-DLQ-commit-failure");
     commitContext.commitFailure = runtime;
@@ -301,7 +280,8 @@ final class ArtemisReplyConsumerTest {
     assertEquals(1, commitContext.rollbacks);
     assertTrue(
         Arrays.stream(runtimeObserved.getSuppressed())
-            .anyMatch(dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
+            .anyMatch(
+                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
   }
 
   private static ArtemisReplyConsumer consumer(ReplyCorrelationRegistry registry) {
@@ -320,8 +300,7 @@ final class ArtemisReplyConsumerTest {
   private static void assertSanitizedTransport(
       ArtemisReplyDlqSender sender, ContextState context, String transportId) throws Exception {
     MessageState state =
-        messageState(
-            transportId, RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState(transportId, RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
     sender.send(context.proxy(), state.message);
     assertEquals("UNAVAILABLE", state.strings.get("NKOriginalTransportID"));
   }
@@ -617,8 +596,7 @@ final class ArtemisReplyConsumerTest {
 
   private static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
-    try (InputStream input =
-        Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);
     }
     configuration

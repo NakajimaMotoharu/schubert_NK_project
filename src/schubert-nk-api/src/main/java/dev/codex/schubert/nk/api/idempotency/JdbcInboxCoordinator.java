@@ -18,8 +18,7 @@ import java.util.UUID;
 /**
  * PostgreSQL Inbox coordinator that never owns, commits or rolls back the caller transaction.
  *
- * <p>Trace: NK-MSG-002, RD MQ-006..010/FUN-103..105, UI 241/242, SS 324 §4..§7,
- * PT-IDEM-004..006.
+ * <p>Trace: NK-MSG-002, RD MQ-006..010/FUN-103..105, UI 241/242, SS 324 §4..§7, PT-IDEM-004..006.
  */
 public final class JdbcInboxCoordinator {
   private static final String SELECT_COLUMNS =
@@ -155,7 +154,9 @@ public final class JdbcInboxCoordinator {
             HexFormat.of().parseHex(requireValue(result.getString("request_fingerprint_hmac"))));
     String processingState = requireValue(result.getString("processing_state"));
     Optional<InboxCompletion> completion =
-        processingState.equals("PROCESSING") ? Optional.empty() : Optional.of(readCompletion(result));
+        processingState.equals("PROCESSING")
+            ? Optional.empty()
+            : Optional.of(readCompletion(result));
     return new StoredRow(
         requireValue(result.getObject("correlation_id", UUID.class)),
         requireValue(result.getString("request_layout_id")),
@@ -168,7 +169,8 @@ public final class JdbcInboxCoordinator {
   }
 
   private static InboxCompletion readCompletion(ResultSet result) throws SQLException {
-    InboxCompletionState state = InboxCompletionState.valueOf(requireValue(result.getString("processing_state")));
+    InboxCompletionState state =
+        InboxCompletionState.valueOf(requireValue(result.getString("processing_state")));
     InboxResultReferenceType referenceType =
         InboxResultReferenceType.valueOf(requireValue(result.getString("result_ref_type")));
     InboxResultReference reference =
@@ -181,7 +183,8 @@ public final class JdbcInboxCoordinator {
         ciphertext == null
             ? Optional.empty()
             : Optional.of(
-                new EncryptedResponseSnapshot(requireValue(result.getString("response_key_version")), ciphertext));
+                new EncryptedResponseSnapshot(
+                    requireValue(result.getString("response_key_version")), ciphertext));
     return new InboxCompletion(
         state,
         reference,
@@ -213,8 +216,8 @@ public final class JdbcInboxCoordinator {
     }
   }
 
-  private static void complete(
-      Connection connection, UUID messageId, InboxCompletion completion) throws SQLException {
+  private static void complete(Connection connection, UUID messageId, InboxCompletion completion)
+      throws SQLException {
     try (PreparedStatement statement = connection.prepareStatement(COMPLETE)) {
       statement.setString(1, completion.state().name());
       InboxResultReference reference = completion.resultReference();
@@ -241,7 +244,8 @@ public final class JdbcInboxCoordinator {
     }
   }
 
-  private void validateMessageIdentity(StoredRow stored, InboxRequest request) throws InboxException {
+  private void validateMessageIdentity(StoredRow stored, InboxRequest request)
+      throws InboxException {
     boolean sameIdentity =
         stored.correlationId().equals(request.correlationId())
             && stored.layoutId().equals(request.canonicalRequest().layoutId())
@@ -260,7 +264,8 @@ public final class JdbcInboxCoordinator {
         "Message ID was reused with a different request payload");
   }
 
-  private void validateTokenFingerprint(StoredRow stored, InboxRequest request) throws InboxException {
+  private void validateTokenFingerprint(StoredRow stored, InboxRequest request)
+      throws InboxException {
     validateFingerprint(
         stored.fingerprint(),
         request.canonicalRequest(),

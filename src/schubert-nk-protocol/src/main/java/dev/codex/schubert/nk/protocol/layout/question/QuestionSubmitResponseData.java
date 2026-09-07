@@ -9,9 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts QSBRSP01. */
-public record QuestionSubmitResponseData(String receiptId,
-    QuestionId questionId,
-    Instant submittedAt) implements PayloadData {
+public record QuestionSubmitResponseData(
+    String receiptId, QuestionId questionId, Instant submittedAt) implements PayloadData {
   public QuestionSubmitResponseData {
     Objects.requireNonNull(receiptId, "receiptId");
     Objects.requireNonNull(questionId, "questionId");

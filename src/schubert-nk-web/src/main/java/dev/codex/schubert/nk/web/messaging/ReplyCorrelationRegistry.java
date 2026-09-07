@@ -78,7 +78,9 @@ public final class ReplyCorrelationRegistry {
     return true;
   }
 
-  /** Removes a due waiter. Calling before its deadline or after another terminal action is a no-op. */
+  /**
+   * Removes a due waiter. Calling before its deadline or after another terminal action is a no-op.
+   */
   public boolean expire(UUID correlationId, Instant now) {
     Objects.requireNonNull(correlationId, "correlationId");
     Objects.requireNonNull(now, "now");

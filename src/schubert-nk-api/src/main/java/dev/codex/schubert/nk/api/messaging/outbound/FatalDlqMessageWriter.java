@@ -12,8 +12,8 @@ public enum FatalDlqMessageWriter {
   INSTANCE;
 
   /** Caller sends the result persistently to the fixed DLQ in the same transacted session. */
-  public BytesMessage create(
-      JMSContext context, GuardedJmsMessage rejected, FatalDlqMetadata fatal) throws JMSException {
+  public BytesMessage create(JMSContext context, GuardedJmsMessage rejected, FatalDlqMetadata fatal)
+      throws JMSException {
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(rejected, "rejected");
     Objects.requireNonNull(fatal, "fatal");

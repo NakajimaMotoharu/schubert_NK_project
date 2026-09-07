@@ -85,6 +85,7 @@ final class RequestLogDetails {
   }
 
   private static PermanentProtocolException invalid() {
-    return new PermanentProtocolException("REQUEST log details violate the safe projection contract");
+    return new PermanentProtocolException(
+        "REQUEST log details violate the safe projection contract");
   }
 }

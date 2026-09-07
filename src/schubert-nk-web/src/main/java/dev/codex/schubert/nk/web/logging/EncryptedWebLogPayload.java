@@ -5,8 +5,8 @@ import java.util.Objects;
 /**
  * Defensive database ciphertext plus the independently stored key version.
  *
- * <p>Trace: NK-MSG-002; RD MON-003; UI 242; SS 331 §9.3/352 §11.2; PT-IDEM-012/015.
- * The database minimum is not a claim that the envelope is authentic; the codec verifies it.
+ * <p>Trace: NK-MSG-002; RD MON-003; UI 242; SS 331 §9.3/352 §11.2; PT-IDEM-012/015. The database
+ * minimum is not a claim that the envelope is authentic; the codec verifies it.
  */
 public record EncryptedWebLogPayload(String keyVersion, byte[] ciphertext) {
   public static final int MINIMUM_CIPHERTEXT_BYTES = 29;

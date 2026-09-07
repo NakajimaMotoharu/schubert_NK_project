@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts GAMRSP01. */
-public record GameRecord(GameCode gameCode,
-    String title,
-    int displayOrder) implements PayloadRecord {
+public record GameRecord(GameCode gameCode, String title, int displayOrder)
+    implements PayloadRecord {
   public GameRecord {
     Objects.requireNonNull(gameCode, "gameCode");
     Objects.requireNonNull(title, "title");

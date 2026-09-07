@@ -10,8 +10,8 @@ import java.time.Clock;
 /**
  * Transacted single-consumer listener for best-effort Web request log projection.
  *
- * <p>Trace: NK-MSG-001; RD MQ-006～010/MON-005; UI 212/231/251; SS 312 section 11
- * and 321 section 6; PT-JMS-005/007.
+ * <p>Trace: NK-MSG-001; RD MQ-006～010/MON-005; UI 212/231/251; SS 312 section 11 and 321 section 6;
+ * PT-JMS-005/007.
  */
 public final class WebLogListener {
   private final TransactedEventListener delegate;
@@ -19,10 +19,7 @@ public final class WebLogListener {
   public WebLogListener(InternalEventProcessor processor, Clock clock) {
     delegate =
         new TransactedEventListener(
-            BrokerTopology.WEB_LOG,
-            FatalDlqMetadata.DetectedBy.API_WEB_LOG,
-            processor,
-            clock);
+            BrokerTopology.WEB_LOG, FatalDlqMetadata.DetectedBy.API_WEB_LOG, processor, clock);
   }
 
   public void onMessage(JMSContext context, Message message) throws JMSException {

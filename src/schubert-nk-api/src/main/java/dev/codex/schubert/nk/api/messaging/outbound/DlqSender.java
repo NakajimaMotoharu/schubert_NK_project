@@ -16,8 +16,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Stages a body-preserving fatal message in the fixed DLQ within the receiver transaction.
  *
- * <p>Trace: NK-MSG-001; RD MQ-008/MQ-010; UI 231/251; SS 312 sections 3/9 and 321
- * sections 7/11.
+ * <p>Trace: NK-MSG-001; RD MQ-008/MQ-010; UI 231/251; SS 312 sections 3/9 and 321 sections 7/11.
  */
 public final class DlqSender {
   private static final String UNAVAILABLE = "UNAVAILABLE";
@@ -42,8 +41,8 @@ public final class DlqSender {
   }
 
   /**
-   * Stages an untrusted original message without reading or changing its body/JMS type.
-   * Arbitrary properties are replaced by the bounded SS 321 section 11 allowlist.
+   * Stages an untrusted original message without reading or changing its body/JMS type. Arbitrary
+   * properties are replaced by the bounded SS 321 section 11 allowlist.
    */
   public void sendUntrusted(
       JMSContext context,

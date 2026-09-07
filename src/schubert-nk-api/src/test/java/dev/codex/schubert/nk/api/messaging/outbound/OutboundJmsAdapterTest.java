@@ -17,9 +17,8 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
-import jakarta.jms.Message;
+import jakarta.jms.JMSContext;
 import jakarta.jms.Queue;
 import java.io.InputStream;
 import java.lang.reflect.Proxy;
@@ -34,7 +33,6 @@ import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
-import org.apache.activemq.artemis.jms.client.ActiveMQDestination;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,10 +40,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/007/009 production Reply/DLQ adapters and listener-owned transaction. */
 final class OutboundJmsAdapterTest {
-  private static final UUID REQUEST_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
-  private static final UUID RESPONSE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000002");
+  private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant DETECTED_AT = Instant.parse("2026-09-03T00:00:00Z");
 
   @Test
@@ -55,13 +51,10 @@ final class OutboundJmsAdapterTest {
     byte[] replyBody = responseWire('S', "LOGRSP01", 24);
     byte[] rejectedBody = requestWire();
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory connectionFactory =
-            new ActiveMQConnectionFactory("vm://0");
-        JMSContext transaction =
-            connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);
+    try (ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext transaction = connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer replyConsumer =
-            observer.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
+        JMSConsumer replyConsumer = observer.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
         JMSConsumer dlqConsumer = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       ReplySender replySender = new ReplySender();
       long beforeReply = System.currentTimeMillis();
@@ -137,31 +130,25 @@ final class OutboundJmsAdapterTest {
     assertThrows(NullPointerException.class, () -> dlqSender.send(transacted, null, fatal));
     assertThrows(NullPointerException.class, () -> dlqSender.send(transacted, rejected, null));
     assertThrows(
-        IllegalStateException.class,
-        () -> dlqSender.send(autoAcknowledge, rejected, fatal));
+        IllegalStateException.class, () -> dlqSender.send(autoAcknowledge, rejected, fatal));
 
     assertThrows(
-        NullPointerException.class,
-        () -> JmsMessageFactory.INSTANCE.createReply(null, reply));
+        NullPointerException.class, () -> JmsMessageFactory.INSTANCE.createReply(null, reply));
     assertThrows(
-        NullPointerException.class,
-        () -> JmsMessageFactory.INSTANCE.createReply(transacted, null));
+        NullPointerException.class, () -> JmsMessageFactory.INSTANCE.createReply(transacted, null));
     assertThrows(
         PermanentProtocolException.class,
         () -> JmsMessageFactory.INSTANCE.createReply(transacted, new byte[0]));
     assertThrows(
         IllegalArgumentException.class,
-        () ->
-            JmsMessageFactory.INSTANCE.createReply(
-                transacted, Arrays.copyOf(reply, 1_000_001)));
+        () -> JmsMessageFactory.INSTANCE.createReply(transacted, Arrays.copyOf(reply, 1_000_001)));
     assertThrows(
         IllegalArgumentException.class,
         () -> JmsMessageFactory.INSTANCE.createReply(transacted, requestWire()));
     assertThrows(
         IllegalArgumentException.class,
         () ->
-            JmsMessageFactory.INSTANCE.createReply(
-                transacted, responseWire('A', "QSBRSP01", 64)));
+            JmsMessageFactory.INSTANCE.createReply(transacted, responseWire('A', "QSBRSP01", 64)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -267,8 +254,7 @@ final class OutboundJmsAdapterTest {
 
   private static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
-    try (InputStream input =
-        Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);
     }
     configuration

@@ -8,8 +8,8 @@ import java.util.UUID;
 /**
  * Logical row and correlation binding for an encrypted WLGEVT01 event.
  *
- * <p>Trace: NK-MSG-002; RD MON-003; UI 235 §12/242; SS 324 §9, 352 §11.2;
- * PT-IDEM-012/015. The unique Message ID identifies the row before its identity PK is allocated.
+ * <p>Trace: NK-MSG-002; RD MON-003; UI 235 §12/242; SS 324 §9, 352 §11.2; PT-IDEM-012/015. The
+ * unique Message ID identifies the row before its identity PK is allocated.
  */
 public record WebLogPayloadIdentity(UUID messageId, UUID correlationId) {
   public WebLogPayloadIdentity {

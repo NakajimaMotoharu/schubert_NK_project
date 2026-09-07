@@ -6,8 +6,8 @@ import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
- * NFC display-only path that must never be passed to a file-system resolver.
- * Trace: NK-PRO-001, UI 243, SS 323/333, PT-PRO-001-T03, BUG-004/YKT-004.
+ * NFC display-only path that must never be passed to a file-system resolver. Trace: NK-PRO-001, UI
+ * 243, SS 323/333, PT-PRO-001-T03, BUG-004/YKT-004.
  */
 public final class DisplayPath {
   private static final int MAXIMUM_WIRE_BYTES = 512;

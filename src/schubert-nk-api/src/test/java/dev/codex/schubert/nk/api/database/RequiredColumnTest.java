@@ -21,8 +21,8 @@ final class RequiredColumnTest {
     assertSame(text, RequiredColumn.requireValue(text));
     assertSame(time, RequiredColumn.requireValue(time));
     assertSame(bytes, RequiredColumn.requireValue(bytes));
-    SQLDataException failure = assertThrows(SQLDataException.class,
-        () -> RequiredColumn.requireValue(null));
+    SQLDataException failure =
+        assertThrows(SQLDataException.class, () -> RequiredColumn.requireValue(null));
     assertEquals("22004", failure.getSQLState());
     assertEquals("required database value is missing", failure.getMessage());
     assertNull(failure.getCause());

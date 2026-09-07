@@ -2,8 +2,8 @@ package dev.codex.schubert.nk.web.logging;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import java.util.function.IntSupplier;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Web technical-schema persistence, with all transaction decisions owned by the caller.
- * Trace: NK-MSG-002; RD MON-003/MQ-008; UI 242; SS 324 section 9/332 section 7;
- * PT-IDEM-012. Never accesses schubert business tables or accepts plaintext for storage.
+ * Web technical-schema persistence, with all transaction decisions owned by the caller. Trace:
+ * NK-MSG-002; RD MON-003/MQ-008; UI 242; SS 324 section 9/332 section 7; PT-IDEM-012. Never
+ * accesses schubert business tables or accepts plaintext for storage.
  */
 public final class WebLogOutboxRepository {
   private final IntSupplier jitterPermille;
@@ -33,18 +33,22 @@ public final class WebLogOutboxRepository {
 
   /** Inserts an already authenticated local event once; duplicate IDs retain the first row. */
   public boolean enqueue(
-      Connection connection, WebLogPayloadIdentity identity,
-      EncryptedWebLogPayload payload, Instant now) throws SQLException {
+      Connection connection,
+      WebLogPayloadIdentity identity,
+      EncryptedWebLogPayload payload,
+      Instant now)
+      throws SQLException {
     requireTransaction(connection);
     Objects.requireNonNull(identity, "identity");
     Objects.requireNonNull(payload, "payload");
     Objects.requireNonNull(now, "now");
-    try (var statement = connection.prepareStatement(
-        "insert into schubert_web_session.web_log_outbox "
-            + "(message_id,correlation_id,layout_id,layout_version,payload_ciphertext,key_version,"
-            + "status,attempt_count,next_attempt_at,created_at) "
-            + "values(?,?,'WLGEVT01','001',?,?,'PENDING',0,?,?) "
-            + "on conflict(message_id) do nothing")) {
+    try (var statement =
+        connection.prepareStatement(
+            "insert into schubert_web_session.web_log_outbox "
+                + "(message_id,correlation_id,layout_id,layout_version,payload_ciphertext,key_version,"
+                + "status,attempt_count,next_attempt_at,created_at) "
+                + "values(?,?,'WLGEVT01','001',?,?,'PENDING',0,?,?) "
+                + "on conflict(message_id) do nothing")) {
       statement.setObject(1, identity.messageId());
       statement.setObject(2, identity.correlationId());
       statement.setBytes(3, payload.ciphertext());
@@ -56,22 +60,23 @@ public final class WebLogOutboxRepository {
   }
 
   /** Claims up to 100 due rows with a 10-second lease; commit before any remote I/O. */
-  public List<ClaimedWebLog> claim(
-      Connection connection, String worker, Instant now, int limit) throws SQLException {
+  public List<ClaimedWebLog> claim(Connection connection, String worker, Instant now, int limit)
+      throws SQLException {
     requireTransaction(connection);
     ClaimedWebLog.requireWorker(worker);
     Objects.requireNonNull(now, "now");
     if (limit < 1 || limit > 100) {
       throw new IllegalArgumentException("web log claim limit is outside 1..100");
     }
-    String sql = "with due as (select id from schubert_web_session.web_log_outbox "
-        + "where status in ('PENDING','ERROR') and next_attempt_at<=? "
-        + "and (lease_until is null or lease_until<?) order by next_attempt_at,id "
-        + "for update skip locked limit ?) update schubert_web_session.web_log_outbox o "
-        + "set lease_owner=?,lease_until=? from due where o.id=due.id "
-        + "returning o.id,o.message_id,o.correlation_id,o.layout_id,o.layout_version,"
-        + "o.payload_ciphertext,o.key_version,o.attempt_count,o.next_attempt_at,o.created_at,"
-        + "o.lease_owner,o.lease_until";
+    String sql =
+        "with due as (select id from schubert_web_session.web_log_outbox "
+            + "where status in ('PENDING','ERROR') and next_attempt_at<=? "
+            + "and (lease_until is null or lease_until<?) order by next_attempt_at,id "
+            + "for update skip locked limit ?) update schubert_web_session.web_log_outbox o "
+            + "set lease_owner=?,lease_until=? from due where o.id=due.id "
+            + "returning o.id,o.message_id,o.correlation_id,o.layout_id,o.layout_version,"
+            + "o.payload_ciphertext,o.key_version,o.attempt_count,o.next_attempt_at,o.created_at,"
+            + "o.lease_owner,o.lease_until";
     try (var statement = connection.prepareStatement(sql)) {
       statement.setTimestamp(1, Timestamp.from(now));
       statement.setTimestamp(2, Timestamp.from(now));
@@ -83,7 +88,9 @@ public final class WebLogOutboxRepository {
         while (result.next()) {
           rows.add(read(result));
         }
-        rows.sort(Comparator.comparing(ClaimedWebLog::nextAttemptAt).thenComparingLong(ClaimedWebLog::id));
+        rows.sort(
+            Comparator.comparing(ClaimedWebLog::nextAttemptAt)
+                .thenComparingLong(ClaimedWebLog::id));
         return List.copyOf(rows);
       }
     }
@@ -95,10 +102,11 @@ public final class WebLogOutboxRepository {
     requireTransaction(connection);
     Objects.requireNonNull(row, "row");
     Objects.requireNonNull(confirmedAt, "confirmedAt");
-    try (var statement = connection.prepareStatement(
-        "update schubert_web_session.web_log_outbox set status='SENT',sent_at=?,"
-            + "lease_owner=null,lease_until=null,last_error_code=null "
-            + "where id=? and lease_owner=? and status in ('PENDING','ERROR')")) {
+    try (var statement =
+        connection.prepareStatement(
+            "update schubert_web_session.web_log_outbox set status='SENT',sent_at=?,"
+                + "lease_owner=null,lease_until=null,last_error_code=null "
+                + "where id=? and lease_owner=? and status in ('PENDING','ERROR')")) {
       statement.setTimestamp(1, Timestamp.from(confirmedAt));
       statement.setLong(2, row.id());
       statement.setString(3, row.leaseOwner());
@@ -122,18 +130,20 @@ public final class WebLogOutboxRepository {
     if (jitter < -100 || jitter > 100) {
       throw new IllegalArgumentException("web log retry jitter is outside +/-10 percent");
     }
-    long baseMillis = switch (attempt) {
-      case 1 -> 1_000L;
-      case 2 -> 5_000L;
-      case 3 -> 30_000L;
-      case 4 -> 60_000L;
-      default -> 300_000L;
-    };
+    long baseMillis =
+        switch (attempt) {
+          case 1 -> 1_000L;
+          case 2 -> 5_000L;
+          case 3 -> 30_000L;
+          case 4 -> 60_000L;
+          default -> 300_000L;
+        };
     Instant due = failedAt.plusMillis(baseMillis + baseMillis * jitter / 1_000);
-    try (var statement = connection.prepareStatement(
-        "update schubert_web_session.web_log_outbox set status='ERROR',attempt_count=?,"
-            + "next_attempt_at=?,sent_at=null,lease_owner=null,lease_until=null,last_error_code=? "
-            + "where id=? and lease_owner=? and attempt_count=? and status in ('PENDING','ERROR')")) {
+    try (var statement =
+        connection.prepareStatement(
+            "update schubert_web_session.web_log_outbox set status='ERROR',attempt_count=?,"
+                + "next_attempt_at=?,sent_at=null,lease_owner=null,lease_until=null,last_error_code=? "
+                + "where id=? and lease_owner=? and attempt_count=? and status in ('PENDING','ERROR')")) {
       statement.setInt(1, attempt);
       statement.setTimestamp(2, Timestamp.from(due));
       statement.setString(3, errorCode);
@@ -151,9 +161,11 @@ public final class WebLogOutboxRepository {
     }
     return new ClaimedWebLog(
         required(result.getObject("id", Long.class)),
-        new WebLogPayloadIdentity(required(result.getObject("message_id", UUID.class)),
+        new WebLogPayloadIdentity(
+            required(result.getObject("message_id", UUID.class)),
             required(result.getObject("correlation_id", UUID.class))),
-        new EncryptedWebLogPayload(required(result.getString("key_version")),
+        new EncryptedWebLogPayload(
+            required(result.getString("key_version")),
             required(result.getBytes("payload_ciphertext"))),
         required(result.getObject("attempt_count", Integer.class)),
         required(result.getTimestamp("next_attempt_at")).toInstant(),

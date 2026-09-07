@@ -21,8 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-009 body invariance, exact metadata allowlist, bounds and null contracts. */
 final class FatalDlqMessageWriterTest {
-  private static final UUID MESSAGE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant DETECTED_AT = Instant.parse("2026-09-03T00:00:00Z");
@@ -34,11 +33,9 @@ final class FatalDlqMessageWriterTest {
     GuardedJmsMessage rejected = rejected(sourceBody, "ID:provider-1");
     sourceBody[0] = 9;
     FatalDlqMetadata fatal =
-        new FatalDlqMetadata(
-            "PROTOCOL_INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT);
+        new FatalDlqMetadata("PROTOCOL_INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT);
 
-    BytesMessage result =
-        FatalDlqMessageWriter.INSTANCE.create(context(capture), rejected, fatal);
+    BytesMessage result = FatalDlqMessageWriter.INSTANCE.create(context(capture), rejected, fatal);
 
     assertEquals(capture.message, result);
     assertArrayEquals(new byte[] {1, 2, 3}, capture.body);
@@ -66,25 +63,51 @@ final class FatalDlqMessageWriterTest {
         new FatalDlqMetadata("INVALID", FatalDlqMetadata.DetectedBy.WEB_REPLY, DETECTED_AT);
     JMSContext context = context(new Capture());
     GuardedJmsMessage rejected = rejected(new byte[0], "ID:1");
-    assertThrows(NullPointerException.class, () -> FatalDlqMessageWriter.INSTANCE.create(null, rejected, valid));
-    assertThrows(NullPointerException.class, () -> FatalDlqMessageWriter.INSTANCE.create(context, null, valid));
-    assertThrows(NullPointerException.class, () -> FatalDlqMessageWriter.INSTANCE.create(context, rejected, null));
-    assertThrows(NullPointerException.class, () -> new FatalDlqMetadata(null, FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
-    assertThrows(NullPointerException.class, () -> new FatalDlqMetadata("INVALID", null, DETECTED_AT));
-    assertThrows(NullPointerException.class, () -> new FatalDlqMetadata("INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, null));
-    assertThrows(IllegalArgumentException.class, () -> new FatalDlqMetadata("", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
-    assertThrows(IllegalArgumentException.class, () -> new FatalDlqMetadata("1BAD", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
-    assertThrows(IllegalArgumentException.class, () -> new FatalDlqMetadata("lower", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
-    assertThrows(IllegalArgumentException.class, () -> new FatalDlqMetadata("A".repeat(33), FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
+    assertThrows(
+        NullPointerException.class,
+        () -> FatalDlqMessageWriter.INSTANCE.create(null, rejected, valid));
+    assertThrows(
+        NullPointerException.class,
+        () -> FatalDlqMessageWriter.INSTANCE.create(context, null, valid));
+    assertThrows(
+        NullPointerException.class,
+        () -> FatalDlqMessageWriter.INSTANCE.create(context, rejected, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new FatalDlqMetadata(null, FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
+    assertThrows(
+        NullPointerException.class, () -> new FatalDlqMetadata("INVALID", null, DETECTED_AT));
+    assertThrows(
+        NullPointerException.class,
+        () -> new FatalDlqMetadata("INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, null));
     assertThrows(
         IllegalArgumentException.class,
-        () -> FatalDlqMessageWriter.INSTANCE.create(context, rejected(new byte[0], "A".repeat(129)), valid));
+        () -> new FatalDlqMetadata("", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
     assertThrows(
         IllegalArgumentException.class,
-        () -> FatalDlqMessageWriter.INSTANCE.create(context, rejected(new byte[0], "ID:\n1"), valid));
+        () -> new FatalDlqMetadata("1BAD", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
     assertThrows(
         IllegalArgumentException.class,
-        () -> FatalDlqMessageWriter.INSTANCE.create(context, rejected(new byte[0], "ID:\u00e9"), valid));
+        () -> new FatalDlqMetadata("lower", FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new FatalDlqMetadata(
+                "A".repeat(33), FatalDlqMetadata.DetectedBy.API_SYNC, DETECTED_AT));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            FatalDlqMessageWriter.INSTANCE.create(
+                context, rejected(new byte[0], "A".repeat(129)), valid));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            FatalDlqMessageWriter.INSTANCE.create(context, rejected(new byte[0], "ID:\n1"), valid));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            FatalDlqMessageWriter.INSTANCE.create(
+                context, rejected(new byte[0], "ID:\u00e9"), valid));
   }
 
   @Test
@@ -155,8 +178,7 @@ final class FatalDlqMessageWriterTest {
   }
 
   private static <T> T proxy(Class<T> type, java.lang.reflect.InvocationHandler handler) {
-    return type.cast(
-        Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
+    return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
   }
 
   private static final class Capture {

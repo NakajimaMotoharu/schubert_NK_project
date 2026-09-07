@@ -19,8 +19,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * Copies and validates untrusted Artemis/JMS metadata before fixed-width decoding.
  *
- * <p>Trace: NK-MSG-001; RD MQ-003/MQ-008/MQ-040..045; UI 231; SS 321 §4/§8.
- * Rejection messages never contain a body, credential, session, property value or transport ID.
+ * <p>Trace: NK-MSG-001; RD MQ-003/MQ-008/MQ-040..045; UI 231; SS 321 §4/§8. Rejection messages
+ * never contain a body, credential, session, property value or transport ID.
  */
 public final class JmsMessageGuard {
   private static final String PROPERTY_MESSAGE_ID = "NKMessageID";

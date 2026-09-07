@@ -10,10 +10,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts URLREQ01. */
-public record UserRoleRequestData(UserId userId,
-    UserRole newRole,
-    long expectedVersion,
-    UUID operationToken) implements PayloadData {
+public record UserRoleRequestData(
+    UserId userId, UserRole newRole, long expectedVersion, UUID operationToken)
+    implements PayloadData {
   public UserRoleRequestData {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(newRole, "newRole");

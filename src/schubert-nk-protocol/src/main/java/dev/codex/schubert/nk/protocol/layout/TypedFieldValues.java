@@ -19,8 +19,8 @@ import java.util.function.LongFunction;
 import java.util.regex.Pattern;
 
 /**
- * Type-safe bridge used by generated named records; it never infers component order.
- * Trace: NK-PRO-001, SS 323 sections 2/10, PT-PRO-001-T02/T03.
+ * Type-safe bridge used by generated named records; it never infers component order. Trace:
+ * NK-PRO-001, SS 323 sections 2/10, PT-PRO-001-T02/T03.
  */
 public final class TypedFieldValues {
   private static final Pattern OPTIONAL_ID = Pattern.compile("[0-9]{1,12}");
@@ -74,7 +74,8 @@ public final class TypedFieldValues {
     try {
       return Math.toIntExact(requiredLong(fields, name));
     } catch (ArithmeticException exception) {
-      throw new LayoutValidationException("typed integer field is out of range: " + name, exception);
+      throw new LayoutValidationException(
+          "typed integer field is out of range: " + name, exception);
     }
   }
 
@@ -130,13 +131,11 @@ public final class TypedFieldValues {
     return semantic(name, requiredString(fields, name), HttpStatusCode::parse);
   }
 
-  public static Optional<HttpStatusCode> optionalHttpStatusCode(
-      FieldValueSet fields, String name) {
+  public static Optional<HttpStatusCode> optionalHttpStatusCode(FieldValueSet fields, String name) {
     return optionalString(fields, name).map(value -> semantic(name, value, HttpStatusCode::parse));
   }
 
-  public static ElapsedMilliseconds requiredElapsedMilliseconds(
-      FieldValueSet fields, String name) {
+  public static ElapsedMilliseconds requiredElapsedMilliseconds(FieldValueSet fields, String name) {
     return semantic(name, requiredString(fields, name), ElapsedMilliseconds::parse);
   }
 
@@ -152,7 +151,8 @@ public final class TypedFieldValues {
   }
 
   public static Optional<Instant> optionalInstant(FieldValueSet fields, String name) {
-    return optionalString(fields, name).map(value -> semantic(name, value, JstWireTimestamp::parse));
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, JstWireTimestamp::parse));
   }
 
   public static UUID requiredUuid(FieldValueSet fields, String name) {
@@ -160,12 +160,14 @@ public final class TypedFieldValues {
   }
 
   public static Optional<UUID> optionalUuid(FieldValueSet fields, String name) {
-    return optionalString(fields, name).map(value -> semantic(name, value, TypedFieldValues::canonicalUuid));
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, TypedFieldValues::canonicalUuid));
   }
 
   public static Optional<AuthenticationContext> optionalAuthenticationContext(
       FieldValueSet fields, String name) {
-    return optionalString(fields, name).map(value -> semantic(name, value, AuthenticationContext::of));
+    return optionalString(fields, name)
+        .map(value -> semantic(name, value, AuthenticationContext::of));
   }
 
   public static Sha256Hex requiredSha256(FieldValueSet fields, String name) {
@@ -246,8 +248,7 @@ public final class TypedFieldValues {
     return text(Objects.requireNonNull(value, "value").wireValue());
   }
 
-  public static FieldValue optionalElapsedMillisecondsValue(
-      Optional<ElapsedMilliseconds> value) {
+  public static FieldValue optionalElapsedMillisecondsValue(Optional<ElapsedMilliseconds> value) {
     Objects.requireNonNull(value, "value");
     return value
         .<FieldValue>map(elapsed -> new FieldValue.Text(elapsed.wireValue()))
@@ -277,7 +278,9 @@ public final class TypedFieldValues {
 
   public static FieldValue optionalUuidValue(Optional<UUID> value) {
     Objects.requireNonNull(value, "value");
-    return value.<FieldValue>map(uuid -> new FieldValue.Text(uuid.toString())).orElse(FieldValue.Unset.INSTANCE);
+    return value
+        .<FieldValue>map(uuid -> new FieldValue.Text(uuid.toString()))
+        .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue optionalAuthenticationContextValue(
@@ -294,7 +297,9 @@ public final class TypedFieldValues {
 
   public static FieldValue optionalSha256Value(Optional<Sha256Hex> value) {
     Objects.requireNonNull(value, "value");
-    return value.<FieldValue>map(sha -> new FieldValue.Text(sha.wireValue())).orElse(FieldValue.Unset.INSTANCE);
+    return value
+        .<FieldValue>map(sha -> new FieldValue.Text(sha.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue relativePath(RelativePath value) {
@@ -303,7 +308,9 @@ public final class TypedFieldValues {
 
   public static FieldValue optionalRelativePathValue(Optional<RelativePath> value) {
     Objects.requireNonNull(value, "value");
-    return value.<FieldValue>map(path -> new FieldValue.Text(path.wireValue())).orElse(FieldValue.Unset.INSTANCE);
+    return value
+        .<FieldValue>map(path -> new FieldValue.Text(path.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue displayPath(DisplayPath value) {
@@ -312,7 +319,9 @@ public final class TypedFieldValues {
 
   public static FieldValue optionalDisplayPathValue(Optional<DisplayPath> value) {
     Objects.requireNonNull(value, "value");
-    return value.<FieldValue>map(path -> new FieldValue.Text(path.wireValue())).orElse(FieldValue.Unset.INSTANCE);
+    return value
+        .<FieldValue>map(path -> new FieldValue.Text(path.wireValue()))
+        .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static void requireEmpty(FieldValueSet fields) {
@@ -371,7 +380,8 @@ public final class TypedFieldValues {
     try {
       return factory.apply(value);
     } catch (IllegalArgumentException exception) {
-      throw new LayoutValidationException("typed field has an invalid semantic value: " + name, exception);
+      throw new LayoutValidationException(
+          "typed field has an invalid semantic value: " + name, exception);
     }
   }
 }

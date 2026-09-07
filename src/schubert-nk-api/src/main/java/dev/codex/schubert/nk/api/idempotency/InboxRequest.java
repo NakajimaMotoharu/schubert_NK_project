@@ -48,7 +48,8 @@ public record InboxRequest(
         && (ownerUserId.getAsLong() < 1 || ownerUserId.getAsLong() > MAXIMUM_OWNER_ID)) {
       throw new IllegalArgumentException("ownerUserId is outside N12");
     }
-    String expectedScope = ownerUserId.isPresent() ? Long.toString(ownerUserId.getAsLong()) : "ANONYMOUS";
+    String expectedScope =
+        ownerUserId.isPresent() ? Long.toString(ownerUserId.getAsLong()) : "ANONYMOUS";
     if (!canonicalRequest.ownerScope().equals(expectedScope)) {
       throw new IllegalArgumentException("canonical owner scope does not match Inbox owner");
     }

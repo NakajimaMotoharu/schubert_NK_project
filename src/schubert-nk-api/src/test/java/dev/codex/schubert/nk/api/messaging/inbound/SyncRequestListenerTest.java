@@ -10,14 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.messaging.outbound.DlqSender;
+import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.Destination;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
@@ -38,8 +40,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import dev.codex.schubert.nk.api.messaging.outbound.DlqSender;
-import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
@@ -51,24 +51,20 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006/007/009 synchronous API listener transaction matrix. */
 final class SyncRequestListenerTest {
-  private static final UUID REQUEST_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000001");
-  private static final UUID RESPONSE_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000002");
+  private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+  private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
 
   @Test
   @DisplayName("PT-JMS-005/007 request ACK and reply become visible in one caller commit")
-  void validRequestDispatchesAndCommitsReplyWithOriginalAck(@TempDir Path root)
-      throws Exception {
+  void validRequestDispatchesAndCommitsReplyWithOriginalAck(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer requests =
-            listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
+        JMSConsumer requests = listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
         JMSConsumer replies = observer.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB))) {
       byte[] requestBody = requestWire();
       byte[] responseBody = responseWire();
@@ -109,8 +105,7 @@ final class SyncRequestListenerTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
-        JMSConsumer requests =
-            listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST))) {
+        JMSConsumer requests = listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST))) {
       IllegalStateException failure = new IllegalStateException("synthetic temporary failure");
       SyncRequestListener listener =
           new SyncRequestListener(
@@ -124,8 +119,7 @@ final class SyncRequestListenerTest {
       assertSame(
           failure,
           assertThrows(
-              IllegalStateException.class,
-              () -> listener.onMessage(listenerContext, first)));
+              IllegalStateException.class, () -> listener.onMessage(listenerContext, first)));
 
       Message redelivered = required(requests.receive(3_000));
       assertEquals(2, redelivered.getIntProperty("JMSXDeliveryCount"));
@@ -143,8 +137,7 @@ final class SyncRequestListenerTest {
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer requests =
-            listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
+        JMSConsumer requests = listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
         JMSConsumer dlq = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       TextMessage invalid = producer.createTextMessage("opaque synthetic invalid request");
       invalid.setJMSCorrelationID("invalid-correlation");
@@ -198,8 +191,7 @@ final class SyncRequestListenerTest {
   void constructorAndListenerBoundaryDenyNullAndWrongSessionMode() {
     SyncRequestProcessor processor = ignored -> responseWire();
     assertThrows(NullPointerException.class, () -> new SyncRequestListener(null, CLOCK));
-    assertThrows(
-        NullPointerException.class, () -> new SyncRequestListener(processor, null));
+    assertThrows(NullPointerException.class, () -> new SyncRequestListener(processor, null));
     SyncRequestListener listener = new SyncRequestListener(processor, CLOCK);
     Message message = textMessage();
     assertThrows(NullPointerException.class, () -> listener.onMessage(null, message));
@@ -215,12 +207,10 @@ final class SyncRequestListenerTest {
   void rawDlqSenderAllowsOnlyApplicationSourceAndBoundedMetadata() throws Exception {
     DlqSender sender = new DlqSender();
     FatalDlqMetadata fatal =
-        new FatalDlqMetadata(
-            "PROTOCOL_INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, NOW);
+        new FatalDlqMetadata("PROTOCOL_INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, NOW);
     ContextState context = new ContextState();
     MessageState valid =
-        messageState(
-            "ID:provider-1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 2);
+        messageState("ID:provider-1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 2);
 
     sender.sendUntrusted(context.proxy(), valid.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals("ID:provider-1", valid.strings.get("NKOriginalTransportID"));
@@ -265,9 +255,7 @@ final class SyncRequestListenerTest {
                 context.proxy(), valid.message, BrokerTopology.DEAD_LETTER, fatal));
     assertThrows(
         IllegalArgumentException.class,
-        () ->
-            sender.sendUntrusted(
-                context.proxy(), valid.message, BrokerTopology.EXPIRY, fatal));
+        () -> sender.sendUntrusted(context.proxy(), valid.message, BrokerTopology.EXPIRY, fatal));
 
     assertSanitizedTransport(sender, context, fatal, null);
     assertSanitizedTransport(sender, context, fatal, " ");
@@ -277,16 +265,11 @@ final class SyncRequestListenerTest {
 
     MessageState uppercase =
         messageState(
-            "ID:1",
-            "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
-            REQUEST_ID.toString(),
-            "LOGREQ01",
-            1);
+            "ID:1", "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", REQUEST_ID.toString(), "LOGREQ01", 1);
     sender.sendUntrusted(context.proxy(), uppercase.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals("UNAVAILABLE", uppercase.strings.get("NKMessageID"));
 
-    MessageState malformed =
-        messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
+    MessageState malformed = messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
     sender.sendUntrusted(context.proxy(), malformed.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals("UNAVAILABLE", malformed.strings.get("NKMessageID"));
     assertEquals("UNAVAILABLE", malformed.strings.get("NKCorrelationID"));
@@ -294,8 +277,7 @@ final class SyncRequestListenerTest {
     assertEquals(1, malformed.integers.get("NKDeliveryCount"));
 
     MessageState zero =
-        messageState(
-            "ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 0);
+        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 0);
     sender.sendUntrusted(context.proxy(), zero.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals(1, zero.integers.get("NKDeliveryCount"));
   }
@@ -318,44 +300,36 @@ final class SyncRequestListenerTest {
     JMSRuntimeException rollbackFailure = new JMSRuntimeException("synthetic-rollback-failure");
     checkedIsolationContext.rollbackFailure = rollbackFailure;
     MessageState checkedMessage =
-        messageState(
-            "ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
     JMSException isolationFailure = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = isolationFailure;
     JMSException checkedObserved =
         assertThrows(
             JMSException.class,
-            () ->
-                listener.onMessage(
-                    checkedIsolationContext.proxy(), checkedMessage.message));
+            () -> listener.onMessage(checkedIsolationContext.proxy(), checkedMessage.message));
     assertSame(isolationFailure, checkedObserved);
     assertEquals(1, checkedIsolationContext.rollbacks);
     assertTrue(
         Arrays.stream(checkedObserved.getSuppressed())
             .anyMatch(
-                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class
-                    ::isInstance));
+                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
     assertTrue(Arrays.asList(checkedObserved.getSuppressed()).contains(rollbackFailure));
 
     ContextState commitIsolationContext = new ContextState();
     JMSRuntimeException commitFailure = new JMSRuntimeException("synthetic-DLQ-commit-failure");
     commitIsolationContext.commitFailure = commitFailure;
     MessageState commitMessage =
-        messageState(
-            "ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
     JMSRuntimeException runtimeObserved =
         assertThrows(
             JMSRuntimeException.class,
-            () ->
-                listener.onMessage(
-                    commitIsolationContext.proxy(), commitMessage.message));
+            () -> listener.onMessage(commitIsolationContext.proxy(), commitMessage.message));
     assertSame(commitFailure, runtimeObserved);
     assertEquals(1, commitIsolationContext.rollbacks);
     assertTrue(
         Arrays.stream(runtimeObserved.getSuppressed())
             .anyMatch(
-                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class
-                    ::isInstance));
+                dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
   }
 
   private static Message required(Message message) {
@@ -364,14 +338,10 @@ final class SyncRequestListenerTest {
   }
 
   private static void assertSanitizedTransport(
-      DlqSender sender,
-      ContextState context,
-      FatalDlqMetadata fatal,
-      String transportId)
+      DlqSender sender, ContextState context, FatalDlqMetadata fatal, String transportId)
       throws Exception {
     MessageState state =
-        messageState(
-            transportId, REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState(transportId, REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
     sender.sendUntrusted(context.proxy(), state.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals("UNAVAILABLE", state.strings.get("NKOriginalTransportID"));
   }
@@ -639,8 +609,7 @@ final class SyncRequestListenerTest {
 
   private static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
-    try (InputStream input =
-        Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);
     }
     configuration

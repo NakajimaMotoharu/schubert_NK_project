@@ -14,8 +14,8 @@ import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
-import jakarta.jms.JMSContext;
 import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
 import jakarta.jms.Message;
 import jakarta.jms.Queue;
 import jakarta.jms.TextMessage;
@@ -42,8 +42,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006/007/009 async-work and Web-log listener route matrix. */
 final class InternalEventListenerTest {
-  private static final UUID EVENT_ID =
-      UUID.fromString("00000000-0000-0000-0000-000000000003");
+  private static final UUID EVENT_ID = UUID.fromString("00000000-0000-0000-0000-000000000003");
   private static final UUID CORRELATION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
@@ -56,8 +55,7 @@ final class InternalEventListenerTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
-        JMSConsumer workQueue =
-            listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK));
+        JMSConsumer workQueue = listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK));
         JMSConsumer logQueue = listenerContext.createConsumer(queue(BrokerTopology.WEB_LOG))) {
       AtomicInteger workCount = new AtomicInteger();
       AtomicInteger logCount = new AtomicInteger();
@@ -101,8 +99,7 @@ final class InternalEventListenerTest {
     try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
-        JMSConsumer workQueue =
-            listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK))) {
+        JMSConsumer workQueue = listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK))) {
       IllegalStateException failure = new IllegalStateException("synthetic worker failure");
       QuestionWorkListener listener =
           new QuestionWorkListener(
@@ -116,8 +113,7 @@ final class InternalEventListenerTest {
       assertSame(
           failure,
           assertThrows(
-              IllegalStateException.class,
-              () -> listener.onMessage(listenerContext, first)));
+              IllegalStateException.class, () -> listener.onMessage(listenerContext, first)));
 
       Message redelivered = required(workQueue.receive(3_000));
       assertEquals(2, redelivered.getIntProperty("JMSXDeliveryCount"));
@@ -148,8 +144,7 @@ final class InternalEventListenerTest {
           .setTimeToLive(0)
           .send(queue(BrokerTopology.WEB_LOG), invalid);
       AtomicBoolean processed = new AtomicBoolean();
-      WebLogListener listener =
-          new WebLogListener(ignored -> processed.set(true), CLOCK);
+      WebLogListener listener = new WebLogListener(ignored -> processed.set(true), CLOCK);
 
       CommittedFatalInboundException failure =
           assertThrows(
@@ -184,9 +179,7 @@ final class InternalEventListenerTest {
                 null, FatalDlqMetadata.DetectedBy.API_WORK, processor, CLOCK));
     assertThrows(
         NullPointerException.class,
-        () ->
-            new TransactedEventListener(
-                BrokerTopology.ASYNC_WORK, null, processor, CLOCK));
+        () -> new TransactedEventListener(BrokerTopology.ASYNC_WORK, null, processor, CLOCK));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -216,8 +209,8 @@ final class InternalEventListenerTest {
     return new ActiveMQQueue(destination.fullyQualifiedQueue());
   }
 
-  private static void sendEvent(
-      JMSContext context, BrokerTopology destination, byte[] body) throws Exception {
+  private static void sendEvent(JMSContext context, BrokerTopology destination, byte[] body)
+      throws Exception {
     BytesMessage event = context.createBytesMessage();
     event.writeBytes(body);
     event.setJMSCorrelationID(CORRELATION_ID.toString());
@@ -290,8 +283,7 @@ final class InternalEventListenerTest {
 
   private static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
-    try (InputStream input =
-        Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);
     }
     configuration

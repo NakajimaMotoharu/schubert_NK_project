@@ -41,8 +41,7 @@ final class JmsReplyDecoderTest {
     assertTrue(reply.toString().contains("body=<redacted>"));
     assertThrows(NullPointerException.class, () -> new ValidatedReply(null, new byte[0]));
     assertThrows(
-        NullPointerException.class,
-        () -> new ValidatedReply(UUID.fromString(REQUEST_ID), null));
+        NullPointerException.class, () -> new ValidatedReply(UUID.fromString(REQUEST_ID), null));
   }
 
   @Test
@@ -66,8 +65,7 @@ final class JmsReplyDecoderTest {
   void destinationMustBeThePermanentApprovedAddressWithoutReplyTo() throws Exception {
     Destination foreign = new Destination() {};
     assertRejected(bytesMessage(with(validReply(), "destination", foreign)));
-    assertRejected(
-        bytesMessage(with(validReply(), "destination", new ActiveMQTemporaryQueue())));
+    assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQTemporaryQueue())));
     assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQQueue())));
     assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQQueue(" "))));
     assertEquals(
@@ -78,8 +76,7 @@ final class JmsReplyDecoderTest {
                     with(
                         validReply(),
                         "destination",
-                        new ActiveMQQueue(
-                            "nk.sync.reply.web::nk.sync.reply.web.q"))))
+                        new ActiveMQQueue("nk.sync.reply.web::nk.sync.reply.web.q"))))
             .correlationId());
     assertRejected(
         bytesMessage(
@@ -88,13 +85,11 @@ final class JmsReplyDecoderTest {
                 "destination",
                 new ActiveMQQueue("nk.sync.reply.web::unapproved.q"))));
     assertRejected(
-        bytesMessage(
-            with(validReply(), "destination", new ActiveMQQueue("::unapproved.q"))));
+        bytesMessage(with(validReply(), "destination", new ActiveMQQueue("::unapproved.q"))));
     assertRejected(
         bytesMessage(with(validReply(), "destination", new ActiveMQQueue("nk.async.work"))));
     assertRejected(
-        bytesMessage(
-            with(validReply(), "replyTo", new ActiveMQQueue("nk.sync.reply.web"))));
+        bytesMessage(with(validReply(), "replyTo", new ActiveMQQueue("nk.sync.reply.web"))));
   }
 
   @Test
@@ -143,8 +138,7 @@ final class JmsReplyDecoderTest {
     return values;
   }
 
-  private static Map<String, Object> with(
-      Map<String, Object> source, String name, Object value) {
+  private static Map<String, Object> with(Map<String, Object> source, String name, Object value) {
     Map<String, Object> copy = new HashMap<>(source);
     copy.put(name, value);
     return copy;
