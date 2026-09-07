@@ -50,7 +50,7 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | Path | `yyyyMMdd/<lowercase UUID>.ready`、wire上256 byte以下 |
 
 Record数取得とsnapshot取得は332のread-only transaction内、file I/Oはcommit後。Record順は
-`script_entries.display_order,id`、同entryのaudioはlink `display_order,audio_file_id`で固定する。
+SSC-017によりUI223/234に合わせ`entry_index,display_order,id`から採番したEntry sequence、同entryのaudioはlink `display_order,audio_file_id`から採番したAudio sequenceで固定する。閾値は音声展開後record数であり、DB IDの大小を表示順と取り違えない。
 
 ## 5. Large-result生成algorithm
 
@@ -75,7 +75,7 @@ Webは電文decode後、以下の順を変えずに検証する。最初の不�
 4. Secure resolverによるroot配下の通常file、symlink/hard-link攻撃の防止、設定root外でないこと。
 5. Open後attributeのsizeとdescriptor size、SHA-256。
 6. 4,800 byteごとに完全readし、各recordの固定長・NFC・充填・項目上限をcodecでdecode。末尾余り0。
-7. Decode数=count、Entry/display orderが非減少、record重複がないこと。
+7. Decode数=count、Entry sequence/Audio sequenceの組が正順、record重複がないこと。同Entry sequenceのEntry ID/本文等は一致し、IDの大小自体は順序条件にしない（SSC-017）。
 
 Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model相当へboundし、file全byteを1配列へ読まない。
 不合格は`FILE_DESCRIPTOR_INVALID` / `FILE_INTEGRITY_MISMATCH`の分類で503、request ID/file ID/検証stepだけlogへ出す。

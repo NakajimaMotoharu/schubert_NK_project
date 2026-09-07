@@ -35,41 +35,37 @@ API requestごとに`SET LOCAL application_name`を変更せず、pool設定のs
 - 画面互換のためpage番号式を使い、`offset = (page - 1) * pageSize`。同一主sort keyの末尾にstable IDを必ず付ける。
 - Count SQLとlist SQLは同じpredicate builder/parameter objectから生成し、所有者・論理削除条件の漏れを防ぐ。
 - Dynamic sort columnはenum→SQL fragmentのallowlistだけ。利用者入力のcolumn/directionをそのまま挿入しない。
-- `ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
+- Scenario以外の新規queryでは`ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
 
 ## 4. Scenario・Speaker・Media query
 
 ### 4.1 Scenario search（IF-005）
 
-```sql
-select e.id, e.display_order, e.entry_type, e.speaker_label, e.body,
-       f.id as script_file_id, f.display_path, f.chapter_title,
-       exists (
-         select 1 from schubert.entry_audio_links l
-          where l.entry_id = e.id and l.link_type = 'voice'
-       ) as has_voice
-  from schubert.script_entries e
-  join schubert.script_files f on f.id = e.script_file_id
- where (:game_id is null or e.game_id = :game_id)
-   and (:keyword = '' or e.body_search like :escaped_pattern escape '\\')
-   and (:speaker_id is null or e.speaker_id = :speaker_id)
-   and (:script_file_id is null or e.script_file_id = :script_file_id)
- order by e.display_order asc, e.id asc
- limit 100 offset :offset;
-```
+SSC-017: UI223/234の実際の要求は本文/game/話者名/章/type/voice/pageであり、speaker ID/file IDへ置換しない。下記predicateの必要なものだけをallowlist fragmentから構築し、値は全てprepared statementへbindする。Countとlistは同じfilterから一つのSQL statement snapshotで得る（CTE＋lateral等）。通常READ COMMITTEDの別statement間でcount/listをずらさない。
 
-Countは同predicateの`count(*)`。Keyword空の場合は`OR`をSQLに残さずnamed-query branchでpredicateそのものを除く。
-Game、speaker、fileの不整合組合せは0件とし、別gameのspeaker/fileへ広がらない。
+| 条件 | Predicate・bind |
+|---|---|
+| 本文 | `e.body_search LIKE ?`、NFC/trim後の`%keyword.toLowerCase(Locale.ROOT)%` |
+| Game | `g.code = ?`、指定code |
+| Speaker | `s.name = ?`、名前完全一致。任意gameとの不一致は0件 |
+| 章 | `f.chapter_title ILIKE ?`、`%chapter%` |
+| Type | `e.entry_type = ?`、dialogue/narration |
+| Voice | `EXISTS/NOT EXISTS`したvoice link。se/bgm/otherは対象外 |
+
+本文/章の`%/_/backslash`はCurrent RepositoryのPostgreSQL LIKE pattern解釈を維持する。literal化は未承認の検索結果変更になるため行わない。値bindによるSQL injection防御とpattern解釈は別問題である。空条件はpredicate自体を除く。
+
+Listは`e.display_order,e.id`順、100件。複数voiceは最小link `display_order,audio_file_id`の1件だけを代表音声にし、countはentry単位。UI234 PAGED48の99,999,900件を超えれば9001。必須line NULL/0、未知enum等は架空値へ補完せず一時整合異常9000、移行検証でも検出する。
 
 ### 4.2 Scenario file/detail（IF-003/004）
 
-- File/detailは`script_file_id`/`entry_id`によるPK lookup後、`display_order,id`順で一括取得。
-- 200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
+- File一覧はgame/prefixで絞り`f.display_order,f.id`順、titleはchapter/section/file名の最初の非空値。前後fileは全gameの`g.display_order,f.display_order,f.id`順。
+- Detailはfile PK lookup後、UI223に従い`entry_index,display_order,id`順へ1開始Entry sequenceを割当て、同entryのvoice linkを`display_order,audio_file_id`順へ1開始Audio sequenceで展開する。音声なしはAudio sequence0の1record。
+- 閾値はentry数ではなく音声展開後のrecord数。200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
 - 最大10,000件をJavaのimmutable snapshotへ取得しcommitした後、`.part`へ固定長recordを書く。超過は`9001`。
 
 ### 4.3 Speaker/Media
 
-- Speaker一覧はgame scopeのentry数`count(e.id)` desc、`normalized_name`、`s.id`順。Narration用NULLは一覧に出さない。
+- Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。
 - Audioはentry→link `display_order`→audio ID順、Video/MusicはUI 223のdefined category/section/display orderを維持。
 - Descriptor queryは`storage_relative_path`をWeb画面に返さず、署名対象のlogical ID/size/hash/MIME/file nameだけ投影する。
 
