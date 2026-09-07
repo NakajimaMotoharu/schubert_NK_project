@@ -21,6 +21,7 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
   // Linux x86-64/AArch64 ABI constants, not portable POSIX guesses. See PG-D-055.
   private static final int AT_FDCWD = -100;
   private static final int DIRECTORY_FLAGS = 0x10000 | 0x20000 | 0x80000;
+  private static final int ENTRY_FLAGS = 0x200000 | 0x20000 | 0x80000;
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO_OFFSET =
       STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
@@ -161,18 +162,23 @@ final class LinuxDirectoryCalls implements DirectoryCalls {
 
   @Override
   public int openRoot() throws StorageIoException {
-    return open(AT_FDCWD, "/");
+    return open(AT_FDCWD, "/", DIRECTORY_FLAGS);
   }
 
   @Override
   public int openDirectory(int parent, String name) throws StorageIoException {
-    return open(parent, segment(name));
+    return open(parent, segment(name), DIRECTORY_FLAGS);
   }
 
-  private int open(int parent, String name) throws StorageIoException {
+  @Override
+  public int openEntry(int parent, String name) throws StorageIoException {
+    return open(parent, segment(name), ENTRY_FLAGS);
+  }
+
+  private int open(int parent, String name, int flags) throws StorageIoException {
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      return check(open.call(state, parent, arena.allocateFrom(name), DIRECTORY_FLAGS, 0), state);
+      return check(open.call(state, parent, arena.allocateFrom(name), flags, 0), state);
     }
   }
 

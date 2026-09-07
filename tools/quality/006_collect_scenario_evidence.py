@@ -97,8 +97,9 @@ def main():
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
                            "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008"],
         "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
-                                  "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03"],
-        "testIdsNotRun": ["PT-SCN-008-F02-ADMIT", "PT-SCN-008-F04", "PT-SCN-009"],
+                                  "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03",
+                                  "PT-SCN-008-A01", "PT-SCN-008-A02", "PT-SCN-008-A03", "PT-SCN-008-A04"],
+        "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
         "relatedSsc": ["SSC-017", "SSC-018", "SSC-019"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
         "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032"],
@@ -106,7 +107,7 @@ def main():
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
         "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
-        "scope": "Read-only queries/detail snapshot plus API native directory capability core. Root/FS/permission/nlink admission, full writer/reader lifecycle, authentication/Inbox/dispatcher, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
+        "scope": "Read-only queries/detail plus native directory/entry inode capabilities and strict owner/group/mode/nlink/size attribute guards, with real name replacement/symlink/hard-link/compound-close tests. Complete root nonoverlap/FS/readiness admission, writer/reader lifecycle, authentication/Inbox/dispatcher, Web/HTTP and CHR remain untested and unimplemented as tracked in 431/008.",
     }
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

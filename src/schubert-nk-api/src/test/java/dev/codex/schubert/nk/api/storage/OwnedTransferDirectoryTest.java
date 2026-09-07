@@ -28,6 +28,178 @@ class OwnedTransferDirectoryTest {
   @TempDir Path root;
 
   @Test
+  void a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    try (var parent = OwnedTransferDirectory.open(calls, root);
+        var child = parent.openDate(DATE)) {
+      StorageIdentity identity = identity(root);
+      child.atPart(ID, OwnedTransferDirectoryTest::write);
+      Path part = root.resolve("20260908/" + ID + ".part");
+      assertArrayEquals(
+          new byte[] {1, 2, 3},
+          child.atPartHandle(
+              ID,
+              handle -> {
+                assertEquals(3, calls.live.size());
+                Files.move(part, root.resolve("retained-part"));
+                Files.write(part, new byte[] {9}, StandardOpenOption.CREATE_NEW);
+                StorageAttributeGuard.file(
+                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), identity, 3);
+                return readHeld(handle);
+              }));
+      assertEquals(2, calls.live.size());
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(part));
+      child.deletePart(ID);
+      child.atPart(ID, OwnedTransferDirectoryTest::write);
+      child.publish(ID);
+      Path ready = root.resolve("20260908/" + ID + ".ready");
+      Path outside =
+          Files.write(root.resolve("outside"), new byte[] {8}, StandardOpenOption.CREATE_NEW);
+      assertArrayEquals(
+          new byte[] {1, 2, 3},
+          child.atReadyHandle(
+              ID,
+              handle -> {
+                Files.move(ready, root.resolve("retained-ready"));
+                Files.createSymbolicLink(ready, outside);
+                StorageAttributeGuard.file(
+                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), identity, 3);
+                return readHeld(handle);
+              }));
+      assertEquals(2, calls.live.size());
+      assertTrue(Files.isSymbolicLink(ready));
+      assertArrayEquals(new byte[] {8}, Files.readAllBytes(outside));
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    try (var parent = OwnedTransferDirectory.open(calls, root);
+        var child = parent.openDate(DATE)) {
+      StorageIdentity identity = identity(root);
+      Path outside = root.resolve("outside");
+      write(outside);
+      Path ready = root.resolve("20260908/" + ID + ".ready");
+      Files.createSymbolicLink(ready, outside);
+      AtomicBoolean readAttempted = new AtomicBoolean();
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atReadyHandle(
+                  ID,
+                  handle -> {
+                    assertEquals(
+                        0120000, ((Integer) Files.getAttribute(handle, "unix:mode")) & 0170000);
+                    StorageAttributeGuard.file(
+                        Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"),
+                        identity,
+                        3);
+                    readAttempted.set(true);
+                    return readHeld(handle);
+                  }));
+      assertFalse(readAttempted.get());
+      Files.createLink(root.resolve("20260908/" + ID + ".part"), outside);
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atPartHandle(
+                  ID,
+                  handle -> {
+                    assertEquals(2, Files.getAttribute(handle, "unix:nlink"));
+                    StorageAttributeGuard.file(
+                        Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"),
+                        identity,
+                        3);
+                    readAttempted.set(true);
+                    return readHeld(handle);
+                  }));
+      assertFalse(readAttempted.get());
+      assertEquals(2, calls.live.size());
+      assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(outside));
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    var parent = OwnedTransferDirectory.open(calls, root);
+    try (var child = parent.openDate(DATE)) {
+      assertThrows(
+          NullPointerException.class,
+          () -> child.atPartHandle(null, OwnedTransferDirectoryTest::readHeld));
+      assertThrows(NullPointerException.class, () -> child.atReadyHandle(ID, null));
+      failure(
+          StorageIoException.Reason.MISSING,
+          () -> child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
+      child.atPart(ID, OwnedTransferDirectoryTest::write);
+      failure(
+          StorageIoException.Reason.COLLISION,
+          () ->
+              child.atPartHandle(
+                  ID,
+                  path -> {
+                    throw new java.nio.file.FileAlreadyExistsException("SYNTHETIC_PRIVATE_PATH");
+                  }));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atPartHandle(
+                  ID,
+                  path -> {
+                    calls.failClose = true;
+                    throw new java.nio.file.FileAlreadyExistsException("SYNTHETIC_PRIVATE_PATH");
+                  }));
+      assertEquals(2, calls.live.size());
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atPartHandle(
+                  ID,
+                  path -> {
+                    calls.failClose = true;
+                    return readHeld(path);
+                  }));
+      assertEquals(2, calls.live.size());
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atPartHandle(
+                  ID,
+                  path -> {
+                    throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                  }));
+      assertEquals(2, calls.live.size());
+    } finally {
+      parent.close();
+    }
+    failure(
+        StorageIoException.Reason.UNAVAILABLE,
+        () -> parent.atPartHandle(ID, OwnedTransferDirectoryTest::readHeld));
+    failure(
+        StorageIoException.Reason.UNAVAILABLE,
+        () -> parent.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
+    assertTrue(calls.live.isEmpty());
+  }
+
+  private static StorageIdentity identity(Path directory) throws IOException {
+    var attrs = Files.readAttributes(directory, java.nio.file.attribute.PosixFileAttributes.class);
+    return new StorageIdentity(attrs.owner().getName(), attrs.group().getName());
+  }
+
+  /** Intentional follow of kernel-owned O_PATH FD, never a caller-supplied symlink. */
+  private static byte[] readHeld(Path handle) throws IOException {
+    try (FileChannel channel = FileChannel.open(handle, StandardOpenOption.READ)) {
+      ByteBuffer bytes = ByteBuffer.allocate(3);
+      while (bytes.hasRemaining()) assertTrue(channel.read(bytes) > 0);
+      assertEquals(3L, channel.size());
+      return bytes.array();
+    }
+  }
+
+  @Test
   void bug036CallerMonitorCannotBlockAnyDirectoryOperation() throws Exception {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
@@ -43,8 +215,14 @@ class OwnedTransferDirectoryTest {
                   assertEquals(3L, child.atPart(ID, OwnedTransferDirectoryTest::write));
                   child.publish(ID);
                   assertArrayEquals(
+                      new byte[] {1, 2, 3},
+                      child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
+                  assertArrayEquals(
                       new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
                   child.atPart(ID, OwnedTransferDirectoryTest::write);
+                  assertArrayEquals(
+                      new byte[] {1, 2, 3},
+                      child.atPartHandle(ID, OwnedTransferDirectoryTest::readHeld));
                   child.deletePart(ID);
                   child.close();
                   return 0;
@@ -334,6 +512,13 @@ class OwnedTransferDirectoryTest {
     public void createDirectory(int parent, String name) throws StorageIoException {
       if (failCreate) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       delegate.createDirectory(parent, name);
+    }
+
+    @Override
+    public int openEntry(int parent, String name) throws StorageIoException {
+      int fd = delegate.openEntry(parent, name);
+      assertTrue(live.add(fd));
+      return fd;
     }
 
     @Override

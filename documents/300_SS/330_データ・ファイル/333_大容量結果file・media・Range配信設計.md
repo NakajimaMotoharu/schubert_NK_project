@@ -108,6 +108,8 @@ ReaderのSecureDirectoryStream必須条件は維持する。Writerのmkdir/非�
 
 Linux/glibc、native access、procfs、必要attribute、directory fsync、同filesystemのRENAME_NOREPLACEが揃わない場合はreadiness false。未検証network filesystemは使用しない。Root作成/chmod、check-then-move、hard-link公開、通常renameへのfallbackは禁止する。JVM設定と実機適合試験は342/354へ追跡する。
 
+Writerのsize/hash再検証では、名前の事前検査とFileChannel openの間の差替えを避けるため、FD相対openat(O_PATH/O_NOFOLLOW/O_CLOEXEC)でentry inodeを先に保持する。O_PATHはsymlink自身も保持できるので、own FDのprocfs magic link経由で得たUnix属性の通常file0640・owner/group・nlink=1・sizeを確認するまでread channelを開かない。確認後も同じ保持inodeのprocfs handleからだけreadし、元entry名は再解決しない。Symlink/device/socketは属性段階で拒否する。Scoped entry FDはcallback完了/例外で必ずcloseし、複合I/O/close故障は外部pathを含まない一時障害へ再構成する。
+
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。

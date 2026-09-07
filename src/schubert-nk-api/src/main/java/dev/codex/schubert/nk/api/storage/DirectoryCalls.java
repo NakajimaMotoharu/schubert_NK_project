@@ -6,6 +6,11 @@ interface DirectoryCalls {
 
   int openDirectory(int parent, String name) throws StorageIoException;
 
+  /**
+   * O_PATH inode capability, including symlink itself; validate type before any actual file I/O.
+   */
+  int openEntry(int parent, String name) throws StorageIoException;
+
   void createDirectory(int parent, String name) throws StorageIoException;
 
   void publish(int directory, String part, String ready) throws StorageIoException;

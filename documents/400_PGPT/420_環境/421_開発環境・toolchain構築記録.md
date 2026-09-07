@@ -144,6 +144,8 @@ libc symbol署名とABIは固定し、openatのvariadic境界とerrno captureを
 
 ## 6. 導入予定・工程内service
 
+Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
+
 | 対象 | 方針 | 状態 |
 |---|---|---|
 | PostgreSQL | 18.6をrootless展開し、実PostgreSQL test runtimeでDDL/Flyway・role/grantのPTを実施 | 完了 |

@@ -72,12 +72,15 @@ class LinuxDirectoryCallsTest {
     DirectoryCalls calls = LinuxDirectoryCalls.create();
     for (String name : List.of("", ".", "..", "a/b", "a\0b", "/")) {
       assertThrows(IllegalArgumentException.class, () -> calls.openDirectory(-1, name));
+      assertThrows(IllegalArgumentException.class, () -> calls.openEntry(-1, name));
       assertThrows(IllegalArgumentException.class, () -> calls.createDirectory(-1, name));
       assertThrows(IllegalArgumentException.class, () -> calls.publish(-1, name, "ready"));
       assertThrows(IllegalArgumentException.class, () -> calls.publish(-1, "part", name));
       assertThrows(IllegalArgumentException.class, () -> calls.unlink(-1, name));
     }
     assertThrows(NullPointerException.class, () -> calls.openDirectory(-1, null));
+    assertThrows(NullPointerException.class, () -> calls.openEntry(-1, null));
+    assertFailure(StorageIoException.Reason.UNAVAILABLE, () -> calls.openEntry(-1, "entry"));
     assertThrows(NullPointerException.class, () -> calls.createDirectory(-1, null));
     assertThrows(NullPointerException.class, () -> calls.publish(-1, null, "ready"));
     assertThrows(NullPointerException.class, () -> calls.publish(-1, "part", null));

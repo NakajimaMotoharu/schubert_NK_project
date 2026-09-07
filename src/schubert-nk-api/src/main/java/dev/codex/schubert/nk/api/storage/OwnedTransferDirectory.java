@@ -92,6 +92,39 @@ final class OwnedTransferDirectory implements AutoCloseable {
     Objects.requireNonNull(operation, "operation");
     requireOpen();
     Path capability = Path.of("/proc/self/fd", Integer.toString(descriptor), id + suffix);
+    return execute(capability, operation);
+  }
+
+  /** Hold the part inode; caller must validate its Unix attributes before any read. */
+  <T> T atPartHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      return atHandle(id, ".part", operation);
+    }
+  }
+
+  /** Hold the ready inode; a replaced name cannot redirect the scoped capability. */
+  <T> T atReadyHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      return atHandle(id, ".ready", operation);
+    }
+  }
+
+  private <T> T atHandle(UUID id, String suffix, FileOperation<T> operation)
+      throws StorageIoException {
+    Objects.requireNonNull(id, "id");
+    Objects.requireNonNull(operation, "operation");
+    requireOpen();
+    try (EntryHandle entry = new EntryHandle(calls, calls.openEntry(descriptor, id + suffix))) {
+      return execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation);
+    } catch (StorageIoException ex) {
+      // A close failure makes the operation uncertain. Never leak an original/suppressed path.
+      throw new StorageIoException(
+          ex.getSuppressed().length == 0 ? ex.reason() : StorageIoException.Reason.UNAVAILABLE);
+    }
+  }
+
+  private static <T> T execute(Path capability, FileOperation<T> operation)
+      throws StorageIoException {
     try {
       return operation.execute(capability);
     } catch (FileAlreadyExistsException ex) {
@@ -100,6 +133,22 @@ final class OwnedTransferDirectory implements AutoCloseable {
       throw new StorageIoException(StorageIoException.Reason.MISSING);
     } catch (IOException ex) {
       throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+    }
+  }
+
+  /** Operation-local only, never returned or shared; one lexical close consumes the native FD. */
+  private static final class EntryHandle implements AutoCloseable {
+    private final DirectoryCalls calls;
+    private final int descriptor;
+
+    private EntryHandle(DirectoryCalls calls, int descriptor) {
+      this.calls = calls;
+      this.descriptor = descriptor;
+    }
+
+    @Override
+    public void close() throws StorageIoException {
+      calls.close(descriptor);
     }
   }
 
