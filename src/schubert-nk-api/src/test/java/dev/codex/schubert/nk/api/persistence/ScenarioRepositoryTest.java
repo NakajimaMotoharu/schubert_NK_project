@@ -346,6 +346,235 @@ final class ScenarioRepositoryTest {
     }
   }
 
+  @Test
+  void ptScn002004CapacityLimitsNeverReturnTruncatedSuccess() throws Exception {
+    sql("truncate schubert.speakers,schubert.script_entries cascade");
+    sql(
+        """
+        insert into schubert.speakers(id,game_id,name,normalized_name,created_at)
+        select i,1,'speaker'||lpad(i::text,3,'0'),'s'||i,'2026-09-01Z' from generate_series(1,500) i;
+        insert into schubert.script_entries(id,game_id,script_file_id,display_order,entry_index,
+          line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at)
+        select i,1,30,i,i-1,i,'dialogue',i,'speaker'||lpad(i::text,3,'0'),'body','synthetic','2026-09-01Z'
+          from generate_series(1,500) i
+        """);
+    try (Connection c = read()) {
+      TypedPayloadValues values =
+          REPOSITORY.speakers(c, USER, new SpeakerListRequestData(Optional.empty()));
+      assertEquals(500, values.records().size());
+      assertArrayEquals(speaker(1, "speaker001", 1), encoded(values).copyRecords().getFirst());
+      assertArrayEquals(speaker(500, "speaker500", 1), encoded(values).copyRecords().getLast());
+    }
+    sql(
+        "insert into schubert.speakers(id,game_id,name,normalized_name,created_at) values(501,1,'speaker501','s501','2026-09-01Z')");
+    entry(501, 1, 30, 501, 500, 501, 501, "speaker501", "body");
+    try (Connection c = read()) {
+      failure(
+          () -> REPOSITORY.speakers(c, USER, new SpeakerListRequestData(Optional.empty())),
+          ResultCode.RESOURCE_LIMIT);
+    }
+    sql("truncate schubert.script_files cascade");
+    sql(
+        """
+        insert into schubert.script_files(id,game_id,display_order,storage_relative_path,display_path,
+          file_name,section_code,chapter_title,sha256,byte_size,created_at)
+        select i,1,i,'scenario/f'||i||'.ks','script/f'||i||'.ks','f'||i||'.ks','01_'||i,null,repeat('a',64),1,'2026-09-01Z'
+          from generate_series(1,500) i
+        """);
+    try (Connection c = read()) {
+      assertEquals(
+          500, REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)).records().size());
+    }
+    file(501, 1, 501, "01_501", null);
+    try (Connection c = read()) {
+      failure(
+          () -> REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)),
+          ResultCode.RESOURCE_LIMIT);
+    }
+    sql("truncate schubert.script_files cascade");
+    for (int i = 0; i < 50; i++) file(i + 1, 1, i + 1, String.format(Locale.ROOT, "%02d", i), null);
+    try (Connection c = read()) {
+      assertEquals(50, REPOSITORY.routes(c, USER, new RouteListRequestData(G1)).records().size());
+    }
+    file(51, 1, 51, "50", null);
+    try (Connection c = read()) {
+      failure(
+          () -> REPOSITORY.routes(c, USER, new RouteListRequestData(G1)),
+          ResultCode.RESOURCE_LIMIT);
+    }
+  }
+
+  @Test
+  void ptScn006007AggregateAndMetadataFaultsAreBounded() throws Exception {
+    try (Connection c = read()) {
+      for (String method :
+          List.of(
+              "getAutoCommit",
+              "isReadOnly",
+              "prepareStatement",
+              "setString",
+              "executeQuery",
+              "next",
+              "getLong",
+              "getString",
+              "wasNull",
+              "close")) {
+        AtomicInteger hits = new AtomicInteger();
+        Connection broken =
+            intercept(
+                c,
+                (target, m, args) -> {
+                  if (m.getName().equals(method)) {
+                    hits.incrementAndGet();
+                    if (method.equals("close")) invoke(target, m, args);
+                    throw new SQLException("synthetic SQL must not escape", "08006");
+                  }
+                  return invoke(target, m, args);
+                });
+        failure(
+            () -> REPOSITORY.files(broken, USER, new ScenarioFileListRequestData(G1, 1)),
+            ResultCode.TEMPORARY_FAILURE);
+        failure(
+            () -> REPOSITORY.search(broken, USER, request("alpha", "", "", "", "", "", 1)),
+            ResultCode.TEMPORARY_FAILURE);
+        assertTrue(hits.get() > 0, method);
+      }
+      for (String field : List.of("code", "title")) {
+        Connection nullText =
+            intercept(
+                c,
+                (target, m, args) ->
+                    m.getName().equals("getString") && args[0].equals(field)
+                        ? null
+                        : invoke(target, m, args));
+        failure(() -> REPOSITORY.games(nullText, USER), ResultCode.TEMPORARY_FAILURE);
+      }
+      Connection unknownGame =
+          intercept(
+              c,
+              (target, m, args) ->
+                  m.getName().equals("getString") && args[0].equals("code")
+                      ? "UNKNOWN"
+                      : invoke(target, m, args));
+      failure(() -> REPOSITORY.games(unknownGame, USER), ResultCode.TEMPORARY_FAILURE);
+      Connection nullNumber =
+          intercept(
+              c,
+              (target, m, args) -> m.getName().equals("wasNull") ? true : invoke(target, m, args));
+      failure(() -> REPOSITORY.games(nullNumber, USER), ResultCode.TEMPORARY_FAILURE);
+      Connection overflow =
+          intercept(
+              c,
+              (target, m, args) ->
+                  m.getName().equals("getLong") && args[0].equals("entries")
+                      ? 2147483648L
+                      : invoke(target, m, args));
+      failure(
+          () -> REPOSITORY.files(overflow, USER, new ScenarioFileListRequestData(G1, 1)),
+          ResultCode.TEMPORARY_FAILURE);
+      Connection missingAggregate =
+          intercept(
+              c, (target, m, args) -> m.getName().equals("next") ? false : invoke(target, m, args));
+      failure(
+          () -> REPOSITORY.search(missingAggregate, USER, request("", "", "", "", "", "", 1)),
+          ResultCode.TEMPORARY_FAILURE);
+      Connection unknownType =
+          intercept(
+              c,
+              (target, m, args) ->
+                  m.getName().equals("getString") && args[0].equals("entry_type")
+                      ? "UNKNOWN"
+                      : invoke(target, m, args));
+      failure(
+          () -> REPOSITORY.search(unknownType, USER, request("", "", "", "", "", "", 1)),
+          ResultCode.TEMPORARY_FAILURE);
+      Connection capacity =
+          intercept(
+              c,
+              (target, m, args) ->
+                  m.getName().equals("getLong") && args[0].equals("total")
+                      ? 99999901L
+                      : invoke(target, m, args));
+      failure(
+          () -> REPOSITORY.search(capacity, USER, request("", "", "", "", "", "", 1)),
+          ResultCode.RESOURCE_LIMIT);
+      Connection maximum =
+          intercept(
+              c,
+              (target, m, args) ->
+                  m.getName().equals("getLong")
+                      ? switch (args[0].toString()) {
+                        case "total" -> 99999900L;
+                        case "pages", "effective" -> 999999L;
+                        default -> invoke(target, m, args);
+                      }
+                      : invoke(target, m, args));
+      TypedPayloadValues max =
+          REPOSITORY.search(maximum, USER, request("", "", "", "", "", "", 999999));
+      assertArrayEquals(
+          page(999999, 99999900, 999999, 99999801, 99999900), encoded(max).copyData());
+    }
+  }
+
+  @Test
+  void ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql() throws Exception {
+    try (Connection c = read()) {
+      Connection broken =
+          intercept(
+              c,
+              (target, m, args) -> {
+                if (m.getName().equals("getLong") && args[0].equals("total")) return 99999901L;
+                if (m.getName().equals("close")) {
+                  invoke(target, m, args);
+                  throw new SQLException("synthetic SQL must not escape");
+                }
+                return invoke(target, m, args);
+              });
+      failure(
+          () -> REPOSITORY.search(broken, USER, request("", "", "", "", "", "", 1)),
+          ResultCode.TEMPORARY_FAILURE);
+    }
+  }
+
+  @Test
+  void ptScn007JdbcIntegerWideningKeepsSqlNullDistinct() throws Exception {
+    try (Connection c = read();
+        Statement s = c.createStatement();
+        ResultSet r =
+            s.executeQuery("select 7::smallint a,11::integer b,13::bigint c,null::integer n")) {
+      assertTrue(r.next());
+      for (String field : List.of("a", "b"))
+        assertThrows(SQLException.class, () -> r.getObject(field, Long.class));
+      assertEquals(13L, r.getObject("c", Long.class));
+      assertEquals(7, r.getLong("a"));
+      assertFalse(r.wasNull());
+      assertEquals(11, r.getLong("b"));
+      assertFalse(r.wasNull());
+      assertEquals(0, r.getLong("n"));
+      assertTrue(r.wasNull());
+    }
+  }
+
+  private static Connection intercept(Connection connection, Interceptor action) {
+    return wrap(
+        Connection.class,
+        connection,
+        (target, m, args) -> {
+          Object result = action.invoke(target, m, args);
+          if (result instanceof PreparedStatement statement)
+            return wrap(
+                PreparedStatement.class,
+                statement,
+                (t, method, a) -> {
+                  Object value = action.invoke(t, method, a);
+                  return value instanceof ResultSet rows
+                      ? wrap(ResultSet.class, rows, action)
+                      : value;
+                });
+          return result;
+        });
+  }
+
   private static ScenarioSearchRequestData request(
       String q, String game, String speaker, String chapter, String type, String voice, int page) {
     return new ScenarioSearchRequestData(

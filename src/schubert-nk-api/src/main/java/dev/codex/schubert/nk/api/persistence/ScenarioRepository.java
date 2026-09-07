@@ -308,8 +308,9 @@ public final class ScenarioRepository {
   }
 
   private static long number(ResultSet result, String column) throws SQLException {
-    Long value = result.getObject(column, Long.class);
-    if (value == null) throw new SQLException("required scenario number is missing");
+    // BUG-030/YKT-027: getObject(Long.class) only accepts PostgreSQL bigint, not int2/int4.
+    long value = result.getLong(column);
+    if (result.wasNull()) throw new SQLException("required scenario number is missing");
     return value;
   }
 
