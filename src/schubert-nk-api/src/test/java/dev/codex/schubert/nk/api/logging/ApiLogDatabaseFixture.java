@@ -15,12 +15,12 @@ import java.time.Duration;
 import org.flywaydb.core.Flyway;
 
 /** Isolated PostgreSQL 18 with production Flyway scripts; never connects to deployed data. */
-final class ApiLogDatabaseFixture {
+public final class ApiLogDatabaseFixture {
   private final Path root;
   private final Path pg;
   private final String url;
 
-  ApiLogDatabaseFixture(Path root) throws Exception {
+  public ApiLogDatabaseFixture(Path root) throws Exception {
     this.root = root;
     String configured = System.getenv("SCHUBERT_PG_ROOT");
     pg =
@@ -76,17 +76,17 @@ final class ApiLogDatabaseFixture {
         .migrate();
   }
 
-  Connection api() throws SQLException {
+  public Connection api() throws SQLException {
     return DriverManager.getConnection(url, "schubert_app", "");
   }
 
-  Connection transaction() throws SQLException {
+  public Connection transaction() throws SQLException {
     Connection connection = api();
     connection.setAutoCommit(false);
     return connection;
   }
 
-  Connection admin() throws SQLException {
+  public Connection admin() throws SQLException {
     return DriverManager.getConnection(url, "pgpt_admin", "");
   }
 
@@ -115,7 +115,7 @@ final class ApiLogDatabaseFixture {
     assertEquals(0, process.exitValue(), "PostgreSQL fixture command failed");
   }
 
-  void stop() throws IOException, InterruptedException {
+  public void stop() throws IOException, InterruptedException {
     run("pg_ctl", "-D", root.resolve("data").toString(), "stop", "-m", "fast");
   }
 }
