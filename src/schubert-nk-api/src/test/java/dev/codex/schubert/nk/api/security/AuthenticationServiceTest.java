@@ -381,7 +381,8 @@ final class AuthenticationServiceTest {
     }
     assertEquals(5, scalar("select failed_count from schubert.app_users"));
     assertEquals(5, scalar("select failed_count from schubert.login_ip_attempts"));
-    assertEquals(32, scalar("select count(*) from schubert.app_logs"));
+    assertEquals(32, scalar("select count(*) from schubert.app_logs where action like 'LOGIN_%'"));
+    assertEquals(10, scalar("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
     assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
   }
 
