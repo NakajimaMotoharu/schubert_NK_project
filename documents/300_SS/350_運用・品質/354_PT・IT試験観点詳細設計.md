@@ -57,6 +57,8 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 
 ### 4.2 PT-AUTH（SS 314・352）
 
+SSC-023: PT-AUT-007-R01～R04で事前確認の実PostgreSQL read-only、User/session row lock非取得、idle/transaction所有の不変、全認証拒否・NULL/未知role/JDBC複合故障、100並行、事前確認後の失効を最終verifyが拒否することを確認する。段階serviceのInbox/file再送gateは別途必要。
+
 - Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
   PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。

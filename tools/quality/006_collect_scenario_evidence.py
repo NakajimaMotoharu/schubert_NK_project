@@ -54,6 +54,7 @@ def main():
                     raise SystemExit("failure/rerun/flaky/skipped test is not certifiable")
             count += len(cases)
             scenario = (".api.persistence.Scenario" in suite.get("name", "")
+                        or ".api.security.AuthenticationContextVerifierTest" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
                         or ".api.storage." in suite.get("name", "")
                         or ".nk.storage." in suite.get("name", "")
@@ -124,10 +125,11 @@ def main():
                                   "PT-SCN-008-LIB01", "PT-SCN-008-RD01", "PT-SCN-008-RD02",
                                   "PT-SCN-008-RD03", "PT-SCN-008-RD04", "PT-SCN-008-RD05",
                                   "PT-SCN-008-U01", "PT-SCN-008-U02", "PT-SCN-008-U03",
-                                  "PT-SCN-008-P01", "PT-SCN-008-P02", "PT-SCN-008-P03"],
+                                  "PT-SCN-008-P01", "PT-SCN-008-P02", "PT-SCN-008-P03",
+                                  "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022", "SSC-023"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
         "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),

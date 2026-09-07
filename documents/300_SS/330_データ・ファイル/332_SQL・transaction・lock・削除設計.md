@@ -65,6 +65,8 @@ SSC-018: 検索/明細で表示するSpeaker名はCurrentと同じFK先`speakers
 - 閾値はentry数ではなく音声展開後のrecord数。200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
 - 最大10,000件をJavaのimmutable snapshotへ取得しcommitした後、`.part`へ固定長recordを書く。超過は`9001`。
 
+SSC-023: snapshot前の認証事前確認は312 §3.3.1のread-only JOIN SELECTで行い、User/sessionをlockせずidleも更新しない。READ COMMITTEDの参照結果を将来の認証保証にせず、file I/O後の最終write transactionで現在の認証/認可を再確認する。既存の通常認証verifyをread-onlyへ置換しない。
+
 ### 4.3 Speaker/Media
 
 - Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。

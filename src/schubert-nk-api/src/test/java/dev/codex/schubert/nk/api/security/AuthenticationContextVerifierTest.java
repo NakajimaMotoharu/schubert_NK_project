@@ -233,6 +233,186 @@ final class AuthenticationContextVerifierTest {
     assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
   }
 
+  @Test
+  void readOnlyPreflightReturnsCurrentActorWithoutTouchOrTransactionOwnership() throws Exception {
+    for (Role role : List.of(Role.USER, Role.ADMIN)) {
+      execute("update schubert.app_users set role='" + role.name() + "'");
+      List<String> sql = new ArrayList<>();
+      try (Connection connection = database.transaction()) {
+        connection.setReadOnly(true);
+        assertEquals(
+            new AuthenticatedActor(7, "verifier-user", role),
+            verifier.inspectReadOnly(intercept(connection, "observe", sql), RAW, NOW));
+        assertFalse(connection.isClosed());
+        assertFalse(connection.getAutoCommit());
+        try (var statement = connection.createStatement();
+            var row = statement.executeQuery("show transaction_read_only")) {
+          assertTrue(row.next());
+          assertEquals("on", row.getString(1));
+        }
+        assertEquals(1, sql.size());
+        assertEquals(
+            "select s.id,s.user_id,u.username,u.role,u.status,s.revoked,s.expires_at from"
+                + " schubert.auth_sessions s join schubert.app_users u on u.id=s.user_id where"
+                + " s.context_hash=?",
+            sql.getFirst());
+        connection.commit();
+      }
+      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+    }
+  }
+
+  @Test
+  void readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled() throws Exception {
+    for (String scenario : List.of("unknown", "revoked", "equalExpiry", "pastExpiry", "disabled")) {
+      seed();
+      switch (scenario) {
+        case "revoked" ->
+            execute(
+                "update schubert.auth_sessions set"
+                    + " revoked=true,revoked_at='2026-09-07T00:30:00Z',revoke_reason='LOGOUT'");
+        case "equalExpiry" ->
+            execute("update schubert.auth_sessions set expires_at='2026-09-07T01:00:00Z'");
+        case "pastExpiry" ->
+            execute("update schubert.auth_sessions set expires_at='2026-09-07T00:59:59.999999Z'");
+        case "disabled" -> execute("update schubert.app_users set status='DISABLED'");
+        default -> {}
+      }
+      try (Connection connection = database.transaction()) {
+        connection.setReadOnly(true);
+        AuthenticationContext raw =
+            scenario.equals("unknown") ? AuthenticationContext.of("b".repeat(64)) : RAW;
+        AuthenticationContextException error =
+            assertThrows(
+                AuthenticationContextException.class,
+                () -> verifier.inspectReadOnly(connection, raw, NOW));
+        assertEquals("authentication context is not valid", error.getMessage());
+        assertNull(error.getCause());
+        assertEquals(0, error.getSuppressed().length);
+        connection.commit();
+      }
+      try (Connection connection = database.api();
+          var statement = connection.createStatement();
+          var row = statement.executeQuery("select last_accessed_at from schubert.auth_sessions")) {
+        assertTrue(row.next());
+        assertEquals(Instant.parse("2026-09-07T00:00:00Z"), row.getTimestamp(1).toInstant());
+      }
+    }
+  }
+
+  @Test
+  void readOnlyPreflightBoundsNullContractsAndJdbcFailures() throws Exception {
+    assertThrows(NullPointerException.class, () -> verifier.inspectReadOnly(null, RAW, NOW));
+    try (Connection connection = database.api()) {
+      assertThrows(
+          NullPointerException.class, () -> verifier.inspectReadOnly(connection, null, NOW));
+      assertThrows(
+          NullPointerException.class, () -> verifier.inspectReadOnly(connection, RAW, null));
+      assertInfrastructure(() -> verifier.inspectReadOnly(connection, RAW, NOW));
+      connection.setAutoCommit(false);
+      assertInfrastructure(() -> verifier.inspectReadOnly(connection, RAW, NOW));
+    }
+    for (String point :
+        List.of(
+            "getAutoCommit",
+            "isReadOnly",
+            "prepareStatement",
+            "setString",
+            "executeQuery",
+            "getTimestamp",
+            "rowClose",
+            "statementClose",
+            "null:revoked",
+            "null:expires_at",
+            "null:status",
+            "null:id",
+            "null:user_id",
+            "null:username",
+            "null:role",
+            "unknownRole")) {
+      try (Connection connection = database.transaction()) {
+        connection.setReadOnly(true);
+        assertInfrastructure(
+            () ->
+                verifier.inspectReadOnly(
+                    intercept(connection, point, new ArrayList<>()), RAW, NOW));
+        assertFalse(connection.isClosed());
+        assertFalse(connection.getAutoCommit());
+        connection.rollback();
+      }
+    }
+    for (String point : List.of("rowClose", "statementClose")) {
+      try (Connection connection = database.transaction()) {
+        connection.setReadOnly(true);
+        assertInfrastructure(
+            () ->
+                verifier.inspectReadOnly(
+                    intercept(connection, point, new ArrayList<>()),
+                    AuthenticationContext.of("b".repeat(64)),
+                    NOW));
+        connection.rollback();
+      }
+    }
+    try (Connection connection = database.transaction()) {
+      connection.setReadOnly(true);
+      assertThrows(
+          AuthenticationContextException.class,
+          () ->
+              verifier.inspectReadOnly(
+                  intercept(connection, "missingSession", new ArrayList<>()), RAW, NOW));
+      connection.rollback();
+    }
+    assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+  }
+
+  @Test
+  void readOnlyPreflightDoesNotWaitForRowLocksAndCannotAuthorizeAfterRevocation() throws Exception {
+    try (Connection locked = database.transaction();
+        var statement = locked.createStatement()) {
+      try (var row = statement.executeQuery("select id from schubert.app_users for update")) {
+        assertTrue(row.next());
+      }
+      try (var row = statement.executeQuery("select id from schubert.auth_sessions for update")) {
+        assertTrue(row.next());
+      }
+      try (var executor = Executors.newFixedThreadPool(16)) {
+        var results = new ArrayList<Future<AuthenticatedActor>>();
+        for (int i = 0; i < 100; i++) {
+          results.add(
+              executor.submit(
+                  () -> {
+                    try (Connection connection = database.transaction()) {
+                      connection.setReadOnly(true);
+                      try (var timeout = connection.createStatement()) {
+                        timeout.execute("set local statement_timeout='500ms'");
+                      }
+                      AuthenticatedActor actor = verifier.inspectReadOnly(connection, RAW, NOW);
+                      connection.commit();
+                      return actor;
+                    }
+                  }));
+        }
+        for (var result : results) {
+          assertEquals(new AuthenticatedActor(7, "verifier-user", Role.USER), result.get());
+        }
+      }
+      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertEquals(
+          1,
+          statement.executeUpdate(
+              "update schubert.auth_sessions set revoked=true,"
+                  + "revoked_at='2026-09-07T01:00:01Z',revoke_reason='LOGOUT'"));
+      locked.commit();
+    }
+    try (Connection connection = database.transaction()) {
+      assertThrows(
+          AuthenticationContextException.class,
+          () -> verifier.verify(connection, RAW, NOW.plusSeconds(2)));
+      connection.rollback();
+    }
+    assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+  }
+
   private static void assertInfrastructure(org.junit.jupiter.api.function.Executable operation) {
     AuthenticationInfrastructureException error =
         assertThrows(AuthenticationInfrastructureException.class, operation);
@@ -291,7 +471,7 @@ final class AuthenticationContextVerifierTest {
                             (rp, rm, ra) -> {
                               if (rm.getName().equals(point))
                                 throw new SQLException("synthetic-sensitive-provider-text");
-                              if (stage == 2) {
+                              if (sql.get(stage - 1).startsWith("select s.id,")) {
                                 if (point.equals("missingSession") && rm.getName().equals("next"))
                                   return false;
                                 if (point.startsWith("null:")

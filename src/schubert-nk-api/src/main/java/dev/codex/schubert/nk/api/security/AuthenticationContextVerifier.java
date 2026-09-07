@@ -23,7 +23,8 @@ public final class AuthenticationContextVerifier {
   private static final String READ_SESSION =
       "select s.id,s.user_id,u.username,u.role,u.status,"
           + "s.revoked,s.expires_at from schubert.auth_sessions s "
-          + "join schubert.app_users u on u.id=s.user_id where s.context_hash=? for update of s";
+          + "join schubert.app_users u on u.id=s.user_id where s.context_hash=?";
+  private static final String LOCK_SESSION = READ_SESSION + " for update of s";
   private static final String TOUCH =
       "update schubert.auth_sessions "
           + "set last_accessed_at=greatest(last_accessed_at,?),"
@@ -53,37 +54,16 @@ public final class AuthenticationContextVerifier {
           }
         }
       }
-      UUID sessionId;
-      AuthenticatedActor actor;
-      try (var statement = connection.prepareStatement(READ_SESSION)) {
-        statement.setString(1, hash);
-        try (ResultSet row = statement.executeQuery()) {
-          if (!row.next()) {
-            throw new AuthenticationContextException();
-          }
-          boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
-          Instant expires = requireValue(row.getTimestamp("expires_at")).toInstant();
-          String status = requireValue(row.getString("status"));
-          if (revoked || !expires.isAfter(now) || !status.equals("ACTIVE")) {
-            throw new AuthenticationContextException();
-          }
-          sessionId = requireValue(row.getObject("id", UUID.class));
-          actor =
-              new AuthenticatedActor(
-                  requireValue(row.getObject("user_id", Long.class)),
-                  requireValue(row.getString("username")),
-                  readRole(requireValue(row.getString("role"))));
-        }
-      }
+      VerifiedSession session = readSession(connection, LOCK_SESSION, hash, now);
       try (var statement = connection.prepareStatement(TOUCH)) {
         statement.setTimestamp(1, Timestamp.from(now));
         statement.setTimestamp(2, Timestamp.from(now));
-        statement.setObject(3, sessionId);
+        statement.setObject(3, session.id());
         if (statement.executeUpdate() != 1) {
           throw new SQLException("authentication session changed during verification", "40001");
         }
       }
-      return actor;
+      return session.actor();
     } catch (SQLException failure) {
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
@@ -94,6 +74,59 @@ public final class AuthenticationContextVerifier {
       throw new AuthenticationContextException();
     }
   }
+
+  /**
+   * Snapshot preflight only: no locks, idle touch or caller transaction ownership. Requires
+   * explicit read-only transaction; final write stage must reauthenticate with verify using a fresh
+   * time. Trace: NK-AUT-001/NK-SCN-001, AUT-001..004; UI226/237; SS312 §3.3.1/332 §4.2;
+   * SSC-023/PT-AUT-007-R01..R04. Not a reusable authorization grant.
+   */
+  public AuthenticatedActor inspectReadOnly(
+      Connection connection, AuthenticationContext raw, Instant now) {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(raw, "raw");
+    Objects.requireNonNull(now, "now");
+    try {
+      if (connection.getAutoCommit() || !connection.isReadOnly()) {
+        throw new SQLException("authentication preflight requires read-only transaction", "25000");
+      }
+      return readSession(connection, READ_SESSION, hashes.calculate(raw), now).actor();
+    } catch (SQLException failure) {
+      throw new AuthenticationInfrastructureException();
+    } catch (AuthenticationContextException failure) {
+      if (failure.getSuppressed().length != 0) {
+        throw new AuthenticationInfrastructureException();
+      }
+      throw new AuthenticationContextException();
+    }
+  }
+
+  private static VerifiedSession readSession(
+      Connection connection, String sql, String hash, Instant now) throws SQLException {
+    try (var statement = connection.prepareStatement(sql)) {
+      statement.setString(1, hash);
+      try (ResultSet row = statement.executeQuery()) {
+        if (!row.next()) {
+          throw new AuthenticationContextException();
+        }
+        boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
+        Instant expires = requireValue(row.getTimestamp("expires_at")).toInstant();
+        String status = requireValue(row.getString("status"));
+        if (revoked || !expires.isAfter(now) || !status.equals("ACTIVE")) {
+          throw new AuthenticationContextException();
+        }
+        UUID sessionId = requireValue(row.getObject("id", UUID.class));
+        AuthenticatedActor actor =
+            new AuthenticatedActor(
+                requireValue(row.getObject("user_id", Long.class)),
+                requireValue(row.getString("username")),
+                readRole(requireValue(row.getString("role"))));
+        return new VerifiedSession(sessionId, actor);
+      }
+    }
+  }
+
+  private record VerifiedSession(UUID id, AuthenticatedActor actor) {}
 
   private static Role readRole(String role) throws SQLException {
     return switch (role) {

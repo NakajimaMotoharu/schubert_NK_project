@@ -70,6 +70,12 @@ UIの「manual ACK」は、framework自動ACKではなくlistenerがJMS commit�
 Username・client address・NFC後passwordのexternal-key HMACを照合し、Inbox、失敗counter、auth session、暗号化response
 snapshotを同一PostgreSQL transactionで確定する。これによりDB commit後のJMS再配送で失敗counterやsessionを二重更新しない。
 
+#### 3.3.1 Scenario認証事前確認（SSC-023）
+
+`AuthenticationContextVerifier.inspectReadOnly(connection, context, now)`は、caller所有の明示read-only transactionでDBのsession/Userを1つのJOIN SELECTにより参照する。未知context、revoked、expires_at <= now、非ACTIVEを0102、必須列NULL/未知role/JDBC故障を9000型として拒否する。通常`verify`と同じrow判定を使うが、FOR UPDATE、idle延長、commit/rollback/connection closeは行わない。autoCommitまたはreadOnly=falseを拒否する。
+
+このactorは参照snapshot取得前の事前確認だけであり、通常requestの最終認証や永続的な権限証明の代替ではない。333のfile I/O前にsnapshot transactionをcommitし、I/O後の最終短write transactionでは新しいstage時刻で通常`verify`を実行し、現在のowner/roleを再検証してからInbox/responseを確定する。途中の失効/期限切れ/無効化を事前actorで迂回しない。File I/O中のrow lock/DB transaction保持は禁止する。最終Inbox・再送・file再生成を含むservice接続は独立したPT gateとする。
+
 ### 3.4 Crash matrix
 
 | Crash point | DB | Reply/JMS ACK | Recovery |

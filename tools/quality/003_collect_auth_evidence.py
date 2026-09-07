@@ -15,7 +15,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
     args = parser.parse_args()
-    if not args.run_id.startswith("PT-AUT-") or not all(c.isalnum() or c == "-" for c in args.run_id):
+    if not args.run_id.startswith(("PT-AUT-", "PT-SCN-")) or not all(c.isalnum() or c == "-" for c in args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
     evidence = repo / "evidence/01_PT/007_NK-AUT-001/evidence"
@@ -87,7 +87,7 @@ def main():
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",
                         "springSecurityCrypto": "7.1.1", "springCore": "7.0.9"},
         "modules": modules, "authenticationMethods": auth_methods,
-        "testIdsPassed": ["PT-AUT-001", "PT-AUT-002"],
+        "testIdsPassed": ["PT-AUT-001", "PT-AUT-002", "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04"],
         "testIdsPartial": {"PT-AUT-003": "policy, persisted User/IP counters and Login hash-skip/threshold/audit plus anonymous Inbox/JDBC/JMS replay passed; full dispatcher/bootstrap/HTTP connection remains",
                            "PT-AUT-004": "real PBKDF2 Login/counter/session/critical-audit and anonymous HMAC/Inbox transaction, dummy work, fault rollback, 100 concurrent redeliveries and actual JDBC/JMS commit boundaries passed; full dispatcher/bootstrap/HTTP connection remains",
                            "PT-AUT-005": "ASCII SHA256, AES-GCM, Login issuance and immutable Inbox replay passed; Web recovery and expiry orchestration remain",
