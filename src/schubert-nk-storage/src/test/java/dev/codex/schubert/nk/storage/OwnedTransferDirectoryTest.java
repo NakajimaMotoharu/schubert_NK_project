@@ -367,7 +367,9 @@ class OwnedTransferDirectoryTest {
                   child.deletePart(ID);
                   assertEquals(Boolean.TRUE, child.createPart(ID, handle -> Boolean.TRUE));
                   child.deletePart(ID);
+                  child.sync();
                   child.close();
+                  failure(StorageIoException.Reason.UNAVAILABLE, child::sync);
                   return 0;
                 })
             .get(5, TimeUnit.SECONDS);

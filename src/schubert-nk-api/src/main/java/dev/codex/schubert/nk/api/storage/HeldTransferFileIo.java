@@ -32,7 +32,7 @@ final class HeldTransferFileIo implements TransferFileIo {
   public LargeResultContent writePart(Path handle, ScenarioRecordStream prepared)
       throws IOException, NoSuchAlgorithmException {
     Objects.requireNonNull(prepared, "prepared");
-    initialize(handle, "rw-r-----");
+    initializePart(handle);
     LargeResultContent content;
     try (var channel = FileChannel.open(handle, StandardOpenOption.WRITE)) {
       content = prepared.write(channel);
@@ -53,6 +53,11 @@ final class HeldTransferFileIo implements TransferFileIo {
     try (var channel = FileChannel.open(handle, StandardOpenOption.READ)) {
       TransferContentVerifier.verify(channel, content);
     }
+  }
+
+  /** Only the fresh inode returned by CREATE_NEW may be initialized. SSC-020/022. */
+  void initializePart(Path handle) throws IOException {
+    initialize(handle, "rw-r-----");
   }
 
   private void initialize(Path handle, String permissions) throws IOException {

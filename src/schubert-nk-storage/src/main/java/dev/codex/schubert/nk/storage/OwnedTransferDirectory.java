@@ -222,12 +222,26 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
-  /** Only a writer-owned part may be removed; no ready/root/directory deletion API exists. */
+  /**
+   * Only writer-owned part cleanup; ordinary callers never delete ready/root/directory. SSC-022's
+   * exclusive diagnostic cleanup is a separate scoped file-adapter policy.
+   */
   public void deletePart(UUID id) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       requireOpen();
       calls.unlink(descriptor, id + ".part");
+    }
+  }
+
+  /**
+   * Durability barrier for owned startup-probe cleanup; never a reader operation. SS333 §7.4;
+   * SSC-022; PT-SCN-008-P01/P03 and BUG-036 monitor regression.
+   */
+  public void sync() throws StorageIoException {
+    synchronized (stateLock) {
+      requireOpen();
+      calls.sync(descriptor);
     }
   }
 

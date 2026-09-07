@@ -111,6 +111,16 @@ Writerのsize/hash再検証では、名前の事前検査とFileChannel openの�
 
 SSC-019/PG-D-059補足: partの初回作成もopenatのO_CREAT/O_EXCL/O_WRONLY/O_NOFOLLOW/O_CLOEXEC・0640で行い、CREATE_NEW時点からそのinode FDを保持する。生成後の名前再解決からmode/groupの変更先や書込み先を決めない。FileChannelは保持FDのprocfs capabilityから開き、channel/native FDの双方を明示closeする。全件byte配列を準備せず、PayloadCodecの単一record encodeを共用し、全件sequence検証と1件ずつの事前byte検査後、4,800byteずつ再encode/writeする。Data/headerを捏造してfile recordをencodeしない。
 
+### 7.4 起動時の診断専用probe（SSC-022）
+
+業務producer/HTTP受付前かつ他writer/batch停止のexclusive startup区間で、実Transfer filesystemの新規group/mode設定、file force、directory fsync、atomic no-replaceを検査する。Rootは自動作成/chmodしない。診断日付はJST正規date、新規dateだけをSSC-020の属性へ確定し、既存dateは検査だけとする。
+
+CSPRNG UUIDの診断partをCREATE_NEWで保持し、秘密を含まない4800byte固定pattern Aを書いてforce/属性/独立hashを検証、readyへnative no-replace公開する。同UUIDの新しい診断partに異なるpattern Bを書き、readyへの二度目の公開がCOLLISIONとなりA/B双方のbyteが保たれることを検査する。通常rename/置換へのfallbackはない。Probeのfileは業務結果ではなく、descriptor/Inbox/業務message/HTTPへ返さない。
+
+ProbeはCREATE_NEW成功で所有を確認したpartと、公開成功を確認した**自分の診断readyだけ**をその保持dateから清掃し、directory fsyncする。Ready清掃前に保持inodeの属性とdiagnostic A hashを再確認し、変質/検査不能なら保全する。既存衝突先、所有不明entry、公開結果不確定のreadyは削除しない。清掃失敗/close失敗/不確定公開は起動不合格とし、全体scan/ready成功へ算入しない。残った診断entryは既存の次回朝清掃/運用調査対象とする。新規empty dateは無断削除しない。
+
+この限定された起動診断の清掃を、通常writer/readerや業務ready削除へ流用しない。通常のlarge-result lifecycleは従来どおり次回朝batchへ委ねる。Probe成功後の完全scanだけで容量を初期化し、single-instance/exclusive保証・full root検査・service readinessへの結線を別途検証する。
+
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。
