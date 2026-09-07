@@ -22,6 +22,44 @@ class StorageAttributeGuardTest {
   @TempDir Path root;
 
   @Test
+  void u01SizeAccountingIncludesEmptyPartialPartsButReadyRequiresWholeRecords() throws Exception {
+    Map<String, Object> attrs = file();
+    for (long size : new long[] {0, 1, 4799, 4800, 48_000_000}) {
+      attrs.put("size", size);
+      assertEquals(size, StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
+    }
+    for (long size : new long[] {4800, 9600, 48_000_000}) {
+      attrs.put("size", size);
+      assertEquals(size, StorageAttributeGuard.transferSize(attrs, IDENTITY, true));
+    }
+    for (long size : new long[] {0, 1, 4799, 4801, 47_999_999}) {
+      attrs.put("size", size);
+      reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, true));
+    }
+  }
+
+  @Test
+  void u02AccountingRejectsUnknownSizeBoundsAndInvalidOwnershipOrLinkAttributes() {
+    assertThrows(
+        NullPointerException.class,
+        () -> StorageAttributeGuard.transferSize(null, IDENTITY, false));
+    assertThrows(
+        NullPointerException.class, () -> StorageAttributeGuard.transferSize(file(), null, false));
+    Map<String, Object> attrs = file();
+    attrs.remove("size");
+    reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
+    for (Object invalid : new Object[] {null, "0", 0, -1L, 48_000_001L, Long.MAX_VALUE}) {
+      attrs.put("size", invalid);
+      reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
+    }
+    for (String name : List.of("owner", "group", "mode", "nlink")) {
+      Map<String, Object> invalid = file();
+      invalid.remove(name);
+      reject(() -> StorageAttributeGuard.transferSize(invalid, IDENTITY, false));
+    }
+  }
+
+  @Test
   void a01NullInvalidAndBoundaryOsIdentityNamesAreExplicit() {
     for (String name : List.of("mini", "_service", "a".repeat(32), "service-01", "service_01")) {
       StorageIdentity identity = new StorageIdentity(name, name);

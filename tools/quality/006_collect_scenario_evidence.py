@@ -122,7 +122,8 @@ def main():
                                   "PT-SCN-008-W04", "PT-SCN-008-W05", "PT-SCN-008-W06",
                                   "PT-SCN-008-W07", "PT-SCN-008-W08", "PT-SCN-008-W09", "PT-SCN-008-W10",
                                   "PT-SCN-008-LIB01", "PT-SCN-008-RD01", "PT-SCN-008-RD02",
-                                  "PT-SCN-008-RD03", "PT-SCN-008-RD04", "PT-SCN-008-RD05"],
+                                  "PT-SCN-008-RD03", "PT-SCN-008-RD04", "PT-SCN-008-RD05",
+                                  "PT-SCN-008-U01", "PT-SCN-008-U02", "PT-SCN-008-U03"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
         "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
@@ -131,7 +132,7 @@ def main():
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
         "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
-        "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Full root/atomic startup probe/readiness and scan initialization, service registration/staged authentication Inbox, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
+        "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. Full root/atomic startup probe/readiness and scan-to-service initialization, service registration/staged authentication Inbox, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
     }
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

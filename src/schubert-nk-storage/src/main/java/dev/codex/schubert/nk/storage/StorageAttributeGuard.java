@@ -28,11 +28,34 @@ public final class StorageAttributeGuard {
     if (expectedSize < 1 || expectedSize > 48_000_000L) {
       throw new IllegalArgumentException("invalid transfer file size");
     }
+    requireRegularFile(attributes, identity);
+    Object size = attributes.get("size");
+    require(size instanceof Long value && value == expectedSize);
+  }
+
+  /**
+   * Startup accounting includes incomplete/empty parts; never grants read/use of their content.
+   * U01/U02.
+   */
+  public static long transferSize(
+      Map<String, Object> attributes, StorageIdentity identity, boolean ready)
+      throws StorageIoException {
+    requireRegularFile(attributes, identity);
+    Object size = attributes.get("size");
+    if (!(size instanceof Long bytes) || bytes < 0 || bytes > 48_000_000L) {
+      throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+    }
+    if (ready && (bytes == 0 || bytes % 4800 != 0)) {
+      throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+    }
+    return bytes;
+  }
+
+  private static void requireRegularFile(Map<String, Object> attributes, StorageIdentity identity)
+      throws StorageIoException {
     requireOwnership(attributes, identity);
     require(integer(attributes, "mode") == 0100640);
     require(integer(attributes, "nlink") == 1);
-    Object size = attributes.get("size");
-    require(size instanceof Long value && value == expectedSize);
   }
 
   private static void requireOwnership(Map<String, Object> attributes, StorageIdentity identity)
