@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -34,7 +35,7 @@ public final class AuthSessionRevocationService {
   public RevokedContext logout(
       Connection connection,
       AuthenticationContext raw,
-      InetAddress client,
+      Optional<InetAddress> client,
       UUID messageId,
       UUID correlationId,
       Instant now) {
@@ -111,7 +112,7 @@ public final class AuthSessionRevocationService {
       AuthenticatedActor administrator,
       long targetUserId,
       SessionRevocationReason reason,
-      InetAddress client,
+      Optional<InetAddress> client,
       UUID messageId,
       UUID correlationId,
       Instant now) {
@@ -165,7 +166,11 @@ public final class AuthSessionRevocationService {
   }
 
   private static Instant arguments(
-      Connection connection, InetAddress client, UUID message, UUID correlation, Instant now) {
+      Connection connection,
+      Optional<InetAddress> client,
+      UUID message,
+      UUID correlation,
+      Instant now) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(client, "client");
     Objects.requireNonNull(message, "message");

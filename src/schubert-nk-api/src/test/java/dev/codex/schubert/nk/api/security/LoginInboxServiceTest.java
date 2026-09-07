@@ -462,6 +462,69 @@ final class LoginInboxServiceTest {
   }
 
   @Test
+  void movingClockSeparatesBusinessCompletionAndReplyTimes() throws Exception {
+    var ticks = new AtomicInteger();
+    var clock =
+        new Clock() {
+          @Override
+          public java.time.ZoneId getZone() {
+            return ZoneOffset.UTC;
+          }
+
+          @Override
+          public Clock withZone(java.time.ZoneId zone) {
+            throw new UnsupportedOperationException("fixed fixture zone");
+          }
+
+          @Override
+          public Instant instant() {
+            return NOW.plusSeconds(ticks.incrementAndGet());
+          }
+        };
+    var service =
+        new LoginInboxService(
+            new JdbcInboxCoordinator(keys),
+            authentication(),
+            responses(),
+            clock,
+            () -> new UUID(0, ids.getAndIncrement()));
+    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    byte[] expected =
+        LoginReplayServiceTest.golden(Role.USER, "0000", new UUID(0, 1000), "20260908100206456", 0);
+    put(expected, 389, "20260908100204456");
+    put(expected, 406, "20260908180204456");
+    assertArrayEquals(expected, call(service, input, NOW));
+    assertEquals(3, ticks.get());
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.auth_sessions where issued_at='2026-09-08T01:02:04.456789Z' and last_accessed_at=issued_at and expires_at='2026-09-08T09:02:04.456789Z'"));
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.app_users where last_login_at='2026-09-08T01:02:04.456789Z'"));
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.app_logs where logged_at='2026-09-08T01:02:04.456789Z'"));
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.request_inbox where created_at='2026-09-08T01:02:03.456789Z' and completed_at='2026-09-08T01:02:05.456789Z' and expires_at='2026-09-15T01:02:05.456789Z'"));
+    put(expected, 24, new UUID(0, 1001).toString());
+    put(expected, 96, "20260908100207456");
+    put(expected, 208, "0200");
+    assertArrayEquals(expected, call(service, input, NOW.plusSeconds(60)));
+    assertEquals(4, ticks.get());
+    assertEquals(1, passwordChecks.get());
+    assertEffects(1, 1, 1);
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.request_inbox where expires_at='2026-09-15T01:02:05.456789Z'"));
+  }
+
+  @Test
   void jdbcOwnerCommitsOnlyCompleteBusinessResults() throws Exception {
     for (boolean valid : new boolean[] {true, false}) {
       seed();

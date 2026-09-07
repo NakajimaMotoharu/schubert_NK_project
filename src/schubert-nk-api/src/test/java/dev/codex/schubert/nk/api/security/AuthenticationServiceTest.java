@@ -469,6 +469,11 @@ final class AuthenticationServiceTest {
                 + "' and revoked and revoke_reason='REPLACED'"));
     assertEquals(
         3, scalar("select count(*) from schubert.app_logs where action='LOGIN_SUCCEEDED'"));
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.app_logs where action='SESSION_REVOKED'"
+                + " and remote_address='127.0.0.1'::inet and details->>'reason'='REPLACED'"));
     seed();
     try (var executor = Executors.newFixedThreadPool(8)) {
       var successes = new ArrayList<Future<LoginResult>>();

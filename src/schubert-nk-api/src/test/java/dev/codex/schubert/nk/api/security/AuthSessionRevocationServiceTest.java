@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -38,7 +39,7 @@ final class AuthSessionRevocationServiceTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static AuthSessionRevocationService service;
-  private static InetAddress client;
+  private static Optional<InetAddress> client;
   private static final AuthenticationContext RAW = AuthenticationContext.of("a".repeat(64));
   private static final Instant NOW = Instant.parse("2026-09-08T01:00:00Z");
   private static final UUID MESSAGE = UUID.fromString("c1000000-0000-0000-0000-000000000001");
@@ -51,7 +52,7 @@ final class AuthSessionRevocationServiceTest {
   static void start() throws Exception {
     database = new ApiLogDatabaseFixture(root);
     service = new AuthSessionRevocationService(new ContextHash());
-    client = InetAddress.getByAddress(new byte[] {127, 0, 0, 1});
+    client = Optional.of(InetAddress.getByAddress(new byte[] {127, 0, 0, 1}));
   }
 
   @AfterAll
@@ -145,6 +146,40 @@ final class AuthSessionRevocationServiceTest {
   }
 
   @Test
+  void absentRequestIpIsNotReplacedByLoginAddress() throws Exception {
+    try (Connection connection = database.transaction()) {
+      service.logout(connection, RAW, Optional.empty(), MESSAGE, CORRELATION, NOW);
+      connection.commit();
+      assertEquals(1, count("select count(*) from schubert.app_logs where remote_address is null"));
+      service.logout(connection, RAW, client, UUID.randomUUID(), CORRELATION, NOW.plusSeconds(1));
+      connection.commit();
+      assertEquals(
+          1,
+          count("select count(*) from schubert.app_logs where remote_address='127.0.0.1'::inet"));
+      assertEquals(1, count("select count(*) from schubert.app_logs where remote_address is null"));
+    }
+    for (var reason :
+        List.of(
+            SessionRevocationReason.ADMIN,
+            SessionRevocationReason.DISABLED,
+            SessionRevocationReason.PASSWORD_RESET)) {
+      seed();
+      try (Connection connection = database.transaction()) {
+        assertEquals(
+            1,
+            service.revokeAll(
+                connection, ADMIN, 7, reason, Optional.empty(), MESSAGE, CORRELATION, NOW));
+        connection.commit();
+      }
+      assertEquals(1, count("select count(*) from schubert.app_logs where remote_address is null"));
+      assertEquals(
+          1, count("select count(*) from schubert.auth_sessions where user_id=7 and revoked"));
+      assertEquals(
+          0, count("select count(*) from schubert.app_logs where remote_address is not null"));
+    }
+  }
+
+  @Test
   void adminReasonsRevokeOnlyTargetAndPreserveExistingRevocations() throws Exception {
     for (var reason :
         List.of(
@@ -221,7 +256,8 @@ final class AuthSessionRevocationServiceTest {
               executor.submit(
                   () -> {
                     try (Connection connection = database.transaction()) {
-                      issuer.issue(connection, 7, client, UUID.randomUUID(), CORRELATION, NOW);
+                      issuer.issue(
+                          connection, 7, client.orElseThrow(), UUID.randomUUID(), CORRELATION, NOW);
                       connection.commit();
                       return true;
                     }

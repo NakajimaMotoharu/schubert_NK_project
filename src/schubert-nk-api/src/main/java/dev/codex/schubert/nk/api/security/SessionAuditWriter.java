@@ -6,7 +6,9 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -18,7 +20,7 @@ public final class SessionAuditWriter {
       Connection connection,
       long actorId,
       long targetId,
-      InetAddress client,
+      Optional<InetAddress> client,
       UUID messageId,
       UUID correlationId,
       Instant at,
@@ -39,7 +41,8 @@ public final class SessionAuditWriter {
       statement.setObject(2, messageId);
       statement.setObject(3, correlationId);
       statement.setLong(4, actorId);
-      statement.setString(5, client.getHostAddress());
+      if (client.isPresent()) statement.setString(5, client.orElseThrow().getHostAddress());
+      else statement.setNull(5, Types.VARCHAR);
       statement.setString(6, details.toString());
       if (statement.executeUpdate() != 1)
         throw new SQLException("critical session audit did not create one row", "40001");

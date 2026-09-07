@@ -132,7 +132,7 @@ public final class AuthSessionService {
             connection,
             userId,
             userId,
-            client,
+            java.util.Optional.of(client),
             messageId,
             correlationId,
             issuedAt,
