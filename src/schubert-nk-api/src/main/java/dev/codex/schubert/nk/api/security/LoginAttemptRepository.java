@@ -96,7 +96,7 @@ public final class LoginAttemptRepository {
                   requireValue(row.getObject("failed_count", Integer.class)),
                   Optional.of(requireValue(row.getTimestamp("window_started_at")).toInstant()),
                   optionalInstant(row, "locked_until"));
-          return new LockedLoginAttempt(client, account, state);
+          return new LockedLoginAttempt(client.getHostAddress(), account, state);
         }
       }
     } catch (SQLException | IllegalArgumentException failure) {
@@ -142,7 +142,7 @@ public final class LoginAttemptRepository {
         statement.setTimestamp(2, Timestamp.from(state.windowStartedAt().orElse(now)));
         setInstant(statement, 3, state.lockedUntil());
         statement.setTimestamp(4, Timestamp.from(now));
-        statement.setString(5, locked.client().getHostAddress());
+        statement.setString(5, locked.clientAddress());
         if (statement.executeUpdate() != 1)
           throw new SQLException("login IP update count differs", "40001");
       }

@@ -68,7 +68,7 @@ final class LoginAttemptRepositoryTest {
       assertEquals(0, account.attempts().failedCount());
       assertEquals(0, locked.ip().failedCount());
       assertEquals(Optional.of(NOW), locked.ip().windowStartedAt());
-      assertEquals(client, locked.client());
+      assertEquals("127.0.0.1", locked.clientAddress());
       assertEquals("LoginAccount[REDACTED]", account.toString());
       assertEquals("LockedLoginAttempt[REDACTED]", locked.toString());
       repository.recordFailure(connection, locked, NOW);
@@ -269,13 +269,26 @@ final class LoginAttemptRepositoryTest {
     assertThrows(IllegalArgumentException.class, () -> new LoginAccount(actor, true, "hash", ip));
     assertThrows(
         NullPointerException.class, () -> new LockedLoginAttempt(null, Optional.empty(), ip));
-    assertThrows(NullPointerException.class, () -> new LockedLoginAttempt(client, null, ip));
+    assertThrows(NullPointerException.class, () -> new LockedLoginAttempt("127.0.0.1", null, ip));
     assertThrows(
-        NullPointerException.class, () -> new LockedLoginAttempt(client, Optional.empty(), null));
+        NullPointerException.class,
+        () -> new LockedLoginAttempt("127.0.0.1", Optional.empty(), null));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new LockedLoginAttempt(client, Optional.empty(), user));
-    var locked = new LockedLoginAttempt(client, Optional.empty(), ip);
+        () -> new LockedLoginAttempt("127.0.0.1", Optional.empty(), user));
+    var locked = new LockedLoginAttempt("127.0.0.1", Optional.empty(), ip);
+    assertEquals(
+        "0:0:0:0:0:0:0:1", new LockedLoginAttempt("::1", Optional.empty(), ip).clientAddress());
+    for (String invalid : List.of("", "localhost", "127.0.0.999", "fe80::1%1", "127.0.0.1\n")) {
+      var error =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> new LockedLoginAttempt(invalid, Optional.empty(), ip));
+      assertNull(error.getCause());
+      assertTrue(
+          error.getMessage().equals("login IP literal is invalid")
+              || error.getMessage().equals("login IP scope is invalid"));
+    }
     try (Connection connection = database.api()) {
       assertInfrastructure(() -> repository.lockForAttempt(connection, "login-user", client, NOW));
       assertInfrastructure(() -> repository.recordFailure(connection, locked, NOW));
