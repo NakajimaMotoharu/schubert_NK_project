@@ -47,6 +47,7 @@ redactionを無効化しない。
 | PT-CODEC-S-* | NFC前/後、日本語・surrogate・combining mark、byte上限-1/上限/上限+1 | Code-point境界でpadding、切断・暗黙truncateなし |
 | PT-CODEC-P-* | Space/zero padding、sign/decimal禁止、control/NUL、invalid UTF-8、unknown enum | Decode/encode双方で一意error step/code |
 | PT-CODEC-E-* | Error response filler、record count 0、body不足/過剰、上限1,000,000 byte | Result-code profileに従い、不正bodyはDLQ/process exit引継ぎ |
+| PT-CODEC-AUTHERR-* | LGNRSP01/0106 retry0/1/900/901、message256/257byte、秘密field filler、他error retry0、31response全error組合せ | UI234独立432byte vectorとUI写しTSVで全byte検証。NTC0107例外維持、blank goldenだけでは代替しない（SSC-012/BUG-023） |
 
 Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、decode recordを保存する。
 

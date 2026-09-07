@@ -258,6 +258,11 @@ public final class PayloadCodec {
 
   private static boolean isErrorOverride(
       LayoutId layoutId, Optional<ResultCode> resultCode, String fieldName) {
+    // Both callers invoke this only inside an error-profile path; no second profile inference.
+    if (layoutId.value().equals("LGNRSP01") && resultCode.isPresent()) {
+      return fieldName.equals("利用者message")
+          || (fieldName.equals("Retry after秒") && resultCode.orElseThrow() == ResultCode.LOCKED);
+    }
     return resultCode.equals(Optional.of(ResultCode.NOT_CANCELLABLE))
         && layoutId.value().equals("NTCRSP01")
         && fieldName.equals("更新後状態");
@@ -268,6 +273,18 @@ public final class PayloadCodec {
       FieldValueSet data,
       boolean errorProfile,
       Optional<ResultCode> resultCode) {
+    if (errorProfile && layoutId.value().equals("LGNRSP01") && resultCode.isPresent()) {
+      FieldValue retry = data.getOrUnset("Retry after秒");
+      if (resultCode.orElseThrow() == ResultCode.LOCKED) {
+        if (!(retry instanceof FieldValue.Numeric value)
+            || value.value() < 0
+            || value.value() > 900)
+          throw new PermanentProtocolException("login lock retry is outside 0..900");
+      } else if (retry != FieldValue.Unset.INSTANCE
+          && (!(retry instanceof FieldValue.Numeric value) || value.value() != 0)) {
+        throw new PermanentProtocolException("non-lock login error contains a retry delay");
+      }
+    }
     if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
       return;
     }
@@ -286,16 +303,10 @@ public final class PayloadCodec {
       FieldValueSet data,
       boolean errorProfile,
       Optional<ResultCode> resultCode) {
-    if (!errorProfile || !isErrorOverride(layoutId, resultCode, "更新後状態")) {
-      return;
-    }
-    FieldValue value = data.getOrUnset("更新後状態");
-    if (!(value instanceof FieldValue.Text text)
-        || !(text.value().equals("PROCESSING")
-            || text.value().equals("COMPLETED")
-            || text.value().equals("ERROR"))) {
-      throw new MessageEncodingException(
-          "notification cancellation conflict contains an invalid latest state");
+    try {
+      validateErrorOverride(layoutId, data, errorProfile, resultCode);
+    } catch (PermanentProtocolException failure) {
+      throw new MessageEncodingException("response contains invalid individual error fields");
     }
   }
 

@@ -120,6 +120,15 @@ final class AuthenticationServiceTest {
       assertEquals(NOW, accepted.issued().issuedAt());
       assertEquals(Instant.parse("2026-09-08T08:00:00Z"), accepted.issued().expiresAt());
       assertEquals("LoginSuccess[REDACTED]", accepted.toString());
+      byte[] wire = new AuthenticationResponseMapper().login(accepted).copyData();
+      assertEquals(
+          "Login-User" + " ".repeat(54) + "ADMIN",
+          new String(wire, 0, 69, java.nio.charset.StandardCharsets.UTF_8));
+      assertEquals(
+          "2026090809000000020260908170000000",
+          new String(wire, 133, 34, java.nio.charset.StandardCharsets.US_ASCII));
+      assertEquals(
+          "000000000", new String(wire, 167, 9, java.nio.charset.StandardCharsets.US_ASCII));
       assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
       assertEquals(0, scalar("select count(*) from schubert.app_logs"));
       assertEquals(2, scalar("select failed_count from schubert.app_users"));
