@@ -1,9 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite name="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="3.161" tests="6" errors="0" failures="0" skipped="0">
-  <testcase name="failuresAndLocksReplayWithoutRehashingOrIncrementingCounters" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.614" />
-  <testcase name="wireInputNullNfcIpAndClockBoundariesAreValidatedBeforeMutation" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.137" />
-  <testcase name="databaseAndAuditFailpointsRollbackAllEffectsAndConsumeSecrets" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.82" />
-  <testcase name="processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.139" />
-  <testcase name="successfulLoginAndReplayShareOneAtomicInboxTransaction" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.233" />
+<testsuite name="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="11.144" tests="10" errors="0" failures="0" skipped="0">
+  <testcase name="failuresAndLocksReplayWithoutRehashingOrIncrementingCounters" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.655" />
+  <testcase name="wireInputNullNfcIpAndClockBoundariesAreValidatedBeforeMutation" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.145" />
+  <testcase name="databaseAndAuditFailpointsRollbackAllEffectsAndConsumeSecrets" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.841" />
+  <testcase name="jdbcLifecycleFaultsRemainRetryableAndRedacted" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="1.83" />
+  <testcase name="processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.138" />
+  <testcase name="successfulLoginAndReplayShareOneAtomicInboxTransaction" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.227" />
+  <testcase name="jdbcOwnerCommitsOnlyCompleteBusinessResults" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.303" />
   <testcase name="concurrentRedeliveryCreatesOneSessionAndOneAudit" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.407" />
+  <testcase name="permanentProtocolNeedsConfirmedRollbackAndClose" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="0.089" />
+  <testcase name="brokerRedeliveryReplaysCommittedLoginWithoutDuplicateEffects(Path)" classname="dev.codex.schubert.nk.api.security.LoginInboxServiceTest" time="5.702" />
 </testsuite>
