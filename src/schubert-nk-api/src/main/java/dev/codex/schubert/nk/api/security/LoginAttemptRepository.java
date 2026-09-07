@@ -1,0 +1,170 @@
+package dev.codex.schubert.nk.api.security;
+
+import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+
+import dev.codex.schubert.nk.api.domain.Role;
+import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.Optional;
+
+/**
+ * Persisted rate-limit rows, User -> IP lock order and caller transaction only. NK-AUT-001;
+ * AUT-001; UI226 §4; SS312 §4/314 §5/331 §4/332 §5; PT-AUT-003-D01..05.
+ */
+public final class LoginAttemptRepository {
+  private static final String USER =
+      "select id,username,role,status,password_hash,failed_count,failure_window_started_at,locked_until "
+          + "from schubert.app_users where username_key=? for update";
+  private static final String CREATE_IP =
+      "insert into schubert.login_ip_attempts "
+          + "(client_address,failed_count,window_started_at,updated_at) values(cast(? as inet),0,?,?) on conflict(client_address) do nothing";
+  private static final String IP =
+      "select failed_count,window_started_at,locked_until from schubert.login_ip_attempts where client_address=cast(? as inet) for update";
+  private static final String UPDATE_USER =
+      "update schubert.app_users set failed_count=?,failure_window_started_at=?,locked_until=?,"
+          + "last_login_at=case when ? then ? else last_login_at end where id=?";
+  private static final String UPDATE_IP =
+      "update schubert.login_ip_attempts set failed_count=?,window_started_at=?,locked_until=?,updated_at=? where client_address=cast(? as inet)";
+
+  /** Username key has already undergone the UI226 normalization; this layer owns no password. */
+  public LockedLoginAttempt lockForAttempt(
+      Connection connection, String usernameKey, InetAddress client, Instant now) {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(usernameKey, "usernameKey");
+    Objects.requireNonNull(client, "client");
+    Objects.requireNonNull(now, "now");
+    int bytes = usernameKey.getBytes(StandardCharsets.UTF_8).length;
+    if (bytes < 1 || bytes > 64)
+      throw new IllegalArgumentException("username key length is invalid");
+    try {
+      requireTransaction(connection);
+      Optional<LoginAccount> account = Optional.empty();
+      try (var statement = connection.prepareStatement(USER)) {
+        statement.setString(1, usernameKey);
+        try (var row = statement.executeQuery()) {
+          if (row.next()) {
+            Role role =
+                switch (requireValue(row.getString("role"))) {
+                  case "USER" -> Role.USER;
+                  case "ADMIN" -> Role.ADMIN;
+                  default -> throw new SQLException("invalid persisted role", "22000");
+                };
+            boolean active =
+                switch (requireValue(row.getString("status"))) {
+                  case "ACTIVE" -> true;
+                  case "DISABLED" -> false;
+                  default -> throw new SQLException("invalid persisted status", "22000");
+                };
+            account =
+                Optional.of(
+                    new LoginAccount(
+                        new AuthenticatedActor(
+                            requireValue(row.getObject("id", Long.class)),
+                            requireValue(row.getString("username")),
+                            role),
+                        active,
+                        requireValue(row.getString("password_hash")),
+                        new LoginAttemptState(
+                            LoginAttemptKind.USER,
+                            requireValue(row.getObject("failed_count", Integer.class)),
+                            optionalInstant(row, "failure_window_started_at"),
+                            optionalInstant(row, "locked_until"))));
+          }
+        }
+      }
+      try (var statement = connection.prepareStatement(CREATE_IP)) {
+        statement.setString(1, client.getHostAddress());
+        statement.setTimestamp(2, Timestamp.from(now));
+        statement.setTimestamp(3, Timestamp.from(now));
+        statement.executeUpdate();
+      }
+      try (var statement = connection.prepareStatement(IP)) {
+        statement.setString(1, client.getHostAddress());
+        try (var row = statement.executeQuery()) {
+          if (!row.next()) throw new SQLException("login IP row is missing", "40001");
+          var state =
+              new LoginAttemptState(
+                  LoginAttemptKind.IP,
+                  requireValue(row.getObject("failed_count", Integer.class)),
+                  Optional.of(requireValue(row.getTimestamp("window_started_at")).toInstant()),
+                  optionalInstant(row, "locked_until"));
+          return new LockedLoginAttempt(client, account, state);
+        }
+      }
+    } catch (SQLException | IllegalArgumentException failure) {
+      throw new AuthenticationInfrastructureException();
+    }
+  }
+
+  /** Use the locked snapshot once before committing; a later attempt must lock/read again. */
+  public void recordFailure(Connection connection, LockedLoginAttempt locked, Instant now) {
+    record(connection, locked, now, false);
+  }
+
+  /** Account/IP counters and Login time are part of the session/Inbox/audit transaction. */
+  public void recordSuccess(Connection connection, LockedLoginAttempt locked, Instant now) {
+    record(connection, locked, now, true);
+  }
+
+  private static void record(
+      Connection connection, LockedLoginAttempt locked, Instant now, boolean success) {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(locked, "locked");
+    Objects.requireNonNull(now, "now");
+    try {
+      requireTransaction(connection);
+      if (locked.account().isPresent()) {
+        var account = locked.account().orElseThrow();
+        var state =
+            success ? account.attempts().afterSuccess() : account.attempts().afterFailure(now);
+        try (var statement = connection.prepareStatement(UPDATE_USER)) {
+          statement.setInt(1, state.failedCount());
+          setInstant(statement, 2, state.windowStartedAt());
+          setInstant(statement, 3, state.lockedUntil());
+          statement.setBoolean(4, success);
+          statement.setTimestamp(5, Timestamp.from(now));
+          statement.setLong(6, account.identity().userId());
+          if (statement.executeUpdate() != 1)
+            throw new SQLException("login user update count differs", "40001");
+        }
+      }
+      var state = success ? locked.ip().afterSuccess() : locked.ip().afterFailure(now);
+      try (var statement = connection.prepareStatement(UPDATE_IP)) {
+        statement.setInt(1, state.failedCount());
+        statement.setTimestamp(2, Timestamp.from(state.windowStartedAt().orElse(now)));
+        setInstant(statement, 3, state.lockedUntil());
+        statement.setTimestamp(4, Timestamp.from(now));
+        statement.setString(5, locked.client().getHostAddress());
+        if (statement.executeUpdate() != 1)
+          throw new SQLException("login IP update count differs", "40001");
+      }
+    } catch (SQLException | IllegalArgumentException failure) {
+      throw new AuthenticationInfrastructureException();
+    }
+  }
+
+  private static void requireTransaction(Connection connection) throws SQLException {
+    if (connection.getAutoCommit())
+      throw new SQLException("login requires an explicit transaction", "25000");
+  }
+
+  private static Optional<Instant> optionalInstant(ResultSet row, String column)
+      throws SQLException {
+    Timestamp value = row.getTimestamp(column);
+    return value == null ? Optional.empty() : Optional.of(value.toInstant());
+  }
+
+  private static void setInstant(PreparedStatement statement, int index, Optional<Instant> value)
+      throws SQLException {
+    if (value.isPresent()) statement.setTimestamp(index, Timestamp.from(value.orElseThrow()));
+    else statement.setNull(index, Types.TIMESTAMP_WITH_TIMEZONE);
+  }
+}

@@ -10,4 +10,6 @@
 
 | 2026-09-07 23:57:22終了 / /tmp/pgpt-auth-session-full01.log | test compile失敗、合格算入0 | 新規session PTの閉鎖済みcodec fixtureでtry-with-resources変数へ明示closeしたためjavac lintが拒否。fixtureを最初にcloseしてから渡す形に変更し、Werrorは維持。期限境界fixtureも各発行時点のactive状態を明示して組み立てた |
 
-新規機能の初回TDD・依存構築段階の失敗であり、既存実装の仕様違反を成功へ置換したものではない。Failed/skipped/not-runを合格件数へ含めない。
+| 2026-09-08 00:09:44終了 / /tmp/pgpt-auth-counter-full01.log | SpotBugs2件、build失敗、合格算入0 | Counter新規5 PTとAPI coverage100%後、LockedLoginAttemptのInetAddress保存/公開をEI_EXPOSE_REP/REP2で検出。BUG-020/YKT-017を修正前起票。Webは未実施で合格に含めない |
+
+初回TDD・依存構築失敗はBUG扱いしないが、実装済みmodelの静的契約不適合はBUG-020へ登録した。Failed/skipped/not-runを合格件数へ含めない。
