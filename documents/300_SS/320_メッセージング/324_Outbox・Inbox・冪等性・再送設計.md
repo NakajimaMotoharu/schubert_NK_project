@@ -105,6 +105,14 @@ Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation I
 
 再送は元結果の提示だけであり、新session発行、idle延長、失効解除、password再照合、counter/audit再更新を行わない。後で失効・期限切れ・権限変更されていても元結果を変更せず、通常の認証context検証は現在DB状態を正として拒否/認可する。Web sessionや現在権限をsnapshotだけから認証済みとみなしてはならない。初回0000/確定0101/0106の保存、成功0200・失敗元codeでの新Header再構築を独立byte oracleで検証する。
 
+### 6.2 Logout Inbox（SSC-015）
+
+LOGREQ01はprotocol検証後、raw hashに一致するsessionのUserを先にlockし、Inbox owner用user IDだけを取得する。未失効/既失効/期限切れ/account状態から業務actorを発行せず、このlookupでidle延長/監査/失効更新を行わない。不明contextは0102でInboxを新規保存しない。Known contextはowner付きInboxを開始し、NEWのhandlerだけ312 §4.2の失効専用serviceを呼ぶ。これにより同Message ID再配送の監査重複を防ぐ。別Messageの既失効要求は元revoked_at/0200と当該要求の監査を確定する。
+
+HMACは§3の全Request規約どおりowner decimal、LOGREQ01/001、target `REQUEST:LOGREQ01`、DATA field 0件、tokenなし。header contextはHMACへ混入しない。同一ownerの同Message再送は元操作結果を提示し、別contextを追加失効しない。owner不一致/同ID異metadataは既定の恒久整合error。保持は更新requestとして完了+7日。
+
+初回0000/0200はCOMPLETED、AUTH_SESSION参照UUIDと280byte LOGRSP01暗号化snapshotを既存列へ併記する。既知ownerの0102はERROR/NONE＋snapshot。AADはrequest Message ID/layout/version/owner。Replayはheader/280byte/全DATA semantic/相関・state/refの組合せを検証する。成功では保存header contextのhash、session UUID/owner、revoked=true、元revoked_at（wireはmillis）を参照へ照合し、不在/不整合/鍵不明/復号不能は9000の一時基盤型とする。失敗は0102だけを保持し、後の状態で成功へ置換しない。新response headerのMessage ID/sentAt、再送request Message IDへのcorrelation、当該requestのcontextを設定し、成功だけ0200へ統一する。新たな失効、idle延長、権限付与はしない。
+
 ## 7. Inbox transaction/crash
 
 | Crash | 状態 | Recovery |

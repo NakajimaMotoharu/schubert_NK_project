@@ -128,6 +128,8 @@ QA-044/UIC-004で確定したとおり、現行は設定と異なり3 sessionが
 
 LOGREQ01だけは312 §4.2の失効専用lookupとし、通常のactive verifierによる先行拒否をしない。User→session lock、既失効なら元のrevoked_at/0200、未失効の有効contextだけLOGOUT/0000。idleを延長せず、既失効への再要求は時刻/reasonを上書きしない。管理の全失効はADMIN認可済みのcaller transaction内でtarget Userをlock後、未失効sessionを全件対象とし、DISABLED/PASSWORD_RESET/ADMINの閉じたreasonを保存する。更新数0でも既失効rowの時刻は維持する。更新と監査の途中失敗はcallerが全rollbackする。
 
+SSC-015: Logoutのowner付きInboxと保存snapshot/元失効参照は324 §6.2を正とする。Wireにclient IPがないLogout/管理失効ではAPI監査remote_addressをSQL NULLとし、Login時の過去IPやloopbackを現在のremoteとして捏造しない。Loginとそれに伴うREPLACEDは当該Loginの検証済みIPを保存する。remoteは351 §3.1の任意項目であり、HTTP側の現在IPはWeb REQUEST/SECURITY logの責務とする。いずれもsession識別子を監査へ出さない。
+
 ## 7. HTTP session
 
 ### 7.1 Cookie/session ID
