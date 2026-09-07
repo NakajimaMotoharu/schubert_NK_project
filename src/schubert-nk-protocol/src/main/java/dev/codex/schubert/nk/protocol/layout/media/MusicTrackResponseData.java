@@ -12,15 +12,13 @@ public record MusicTrackResponseData(long totalCount) implements PayloadData {
   }
 
   public static MusicTrackResponseData from(FieldValueSet fields) {
-    return new MusicTrackResponseData(
-        TypedFieldValues.requiredLong(fields, "Total count"));
+    return new MusicTrackResponseData(TypedFieldValues.requiredLong(fields, "Total count"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
+        Map.ofEntries(Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
   }
 
   @Override

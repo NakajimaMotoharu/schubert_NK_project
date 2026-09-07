@@ -11,7 +11,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts LGSREQ01. */
-public record LogSearchRequestData(Optional<String> keyword,
+public record LogSearchRequestData(
+    Optional<String> keyword,
     Optional<LogType> logType,
     Optional<String> action,
     Optional<String> path,
@@ -19,7 +20,8 @@ public record LogSearchRequestData(Optional<String> keyword,
     Optional<Instant> fromAt,
     Optional<Instant> toAt,
     int page,
-    int pageSize) implements PayloadData {
+    int pageSize)
+    implements PayloadData {
   public LogSearchRequestData {
     Objects.requireNonNull(keyword, "keyword");
     Objects.requireNonNull(logType, "logType");

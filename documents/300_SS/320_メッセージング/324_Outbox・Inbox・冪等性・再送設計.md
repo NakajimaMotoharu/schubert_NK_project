@@ -114,8 +114,9 @@ DB transactionとJMSをXAで結合しない。Inbox replayによりDB先commit�
 
 ### 8.1 Row
 
-331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationはenum
-`ASYNC_WORK`/`DLQ`だけを保存し、実Address文字列を利用者入力から設定しない。
+331の物理DDLではUI 242の項目に加え、`lease_owner varchar(64)`、`lease_until timestamptz`を持つ。Destinationは
+物理Address `nk.async.work`/`nk.dead.letter`だけを保存する。Javaは閉じた`OutboxDestination`
+（`ASYNC_WORK`/`DLQ`）からこの2値へのみ変換し、実Address文字列を利用者入力から設定しない。
 
 ### 8.2 State
 
@@ -142,9 +143,11 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 ## 9. Web `web_log_outbox`
 
 - HTTP response確定後のWLGEVT01 payloadをWeb log AES-GCM keyで暗号化して保存する。
+- Web dispatcherがlocal outboxを復号し、WLGEVT01のheader/field/semanticを完全decodeして保存rowのMessage ID/Correlation/layout/versionとの一致を検査後、SS 323の固定長平文電文を送信する。暗号鍵とWeb table accessはWebだけが持ち、API ingestは受信電文の検査と冪等INSERTを行う（SSC-007）。
 - Message ID UK、Correlation、layout/version、status/attempt/next/lease、created/sentを持つ。
 - Dispatcher algorithm/backoffはAPI outboxと同じ。HTTP request threadはsendを待たない。
 - API `app_logs.source_message_id` UKが最終重複防止。DuplicateはINSERTせずJMS ACKする。
+- APIは351 §3.3のREQUEST action/Details/表示metadataの正規化を適用し、DB INSERT/duplicate transaction確定後だけlistenerへ正常復帰する（SSC-008）。
 - PENDING/ERRORの本文を管理画面へ表示せず、件数・最古時刻・error codeだけ監視する。
 
 ## 10. Internal work冪等性
@@ -225,3 +228,4 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 | 2026-08-31 | 横断監査でLGNREQ01の認証前Inbox、HMAC、失敗counter/sessionの同一transaction境界を明記。 |
 | 2026-08-31 | 横断監査でHMAC fingerprintを全Requestに必須化し、Inbox response暗号key名をcredential catalogに同期。 |
 | 2026-08-31 | 横断監査でLogin UUIDと業務bigintをInbox result referenceで型別に分離し、Scenario再生成元IDを明記。 |
+| 2026-09-03 | SSC-006によりOutbox destinationの保存値をUI 242/SS 331/DDLの物理Address allowlistへ統一。 |

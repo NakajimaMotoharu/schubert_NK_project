@@ -11,13 +11,15 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts AUDRSP01, MEDRSP01. */
-public record MediaDescriptorData(String mediaLogicalId,
+public record MediaDescriptorData(
+    String mediaLogicalId,
     RelativePath storageRelativePath,
     String fileName,
     long fileByteLength,
     Sha256Hex sha256,
     MediaMimeType mimeType,
-    ContentDisposition contentDisposition) implements PayloadData {
+    ContentDisposition contentDisposition)
+    implements PayloadData {
   public MediaDescriptorData {
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
     Objects.requireNonNull(storageRelativePath, "storageRelativePath");

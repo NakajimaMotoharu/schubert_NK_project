@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts QDLREQ01. */
-public record QuestionDeleteRequestData(QuestionId questionId,
-    UUID operationToken) implements PayloadData {
+public record QuestionDeleteRequestData(QuestionId questionId, UUID operationToken)
+    implements PayloadData {
   public QuestionDeleteRequestData {
     Objects.requireNonNull(questionId, "questionId");
     Objects.requireNonNull(operationToken, "operationToken");

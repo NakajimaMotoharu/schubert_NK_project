@@ -1,0 +1,7 @@
+address	message_kind	interaction_kind	layout	maximum_body_bytes	ttl_ms	reply_to	persistent
+nk.sync.request	REQUEST	SYNCHRONOUS	LOGREQ01	1000000	5000	nk.sync.reply.web	true
+nk.sync.reply.web	RESPONSE	SYNCHRONOUS	LOGRSP01	1000000	10000	-	true
+nk.async.work	EVENT	INTERNAL	QWKREQ01	1000	0	-	true
+nk.web.log	EVENT	INTERNAL	WLGEVT01	10000	0	-	true
+nk.dead.letter	DLQ	INTERNAL	original	1000000	0	-	true
+nk.expiry	EXPIRY	INTERNAL	original	1000000	0	-	true

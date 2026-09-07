@@ -86,8 +86,7 @@ public final class TargetAdapter {
   }
 
   public URI endpoint(String applicationPath) {
-    if (applicationPath == null
-        || !applicationPath.startsWith("/")) {
+    if (applicationPath == null || !applicationPath.startsWith("/")) {
       throw new IllegalArgumentException("application path must be an absolute same-origin path");
     }
     URI reference = URI.create(applicationPath);

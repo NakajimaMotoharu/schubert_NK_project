@@ -8,10 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts SCFRSP01. */
-public record ScenarioFileListResponseData(GameCode gameCode,
-    int prefix,
-    String routeName,
-    long totalCount) implements PayloadData {
+public record ScenarioFileListResponseData(
+    GameCode gameCode, int prefix, String routeName, long totalCount) implements PayloadData {
   public ScenarioFileListResponseData {
     Objects.requireNonNull(gameCode, "gameCode");
     TypedFieldValues.requireUnsignedRange("prefix", prefix, 2);

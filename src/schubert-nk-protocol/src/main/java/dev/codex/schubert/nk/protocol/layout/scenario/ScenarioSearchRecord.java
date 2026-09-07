@@ -14,7 +14,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts SRCRSP01. */
-public record ScenarioSearchRecord(EntryId entryId,
+public record ScenarioSearchRecord(
+    EntryId entryId,
     ScriptFileId scriptFileId,
     GameCode gameCode,
     Optional<String> chapterTitle,
@@ -25,7 +26,8 @@ public record ScenarioSearchRecord(EntryId entryId,
     boolean audioPresent,
     Optional<AudioId> audioId,
     DisplayPath scriptDisplayPath,
-    Optional<DisplayPath> audioDisplayPath) implements PayloadRecord {
+    Optional<DisplayPath> audioDisplayPath)
+    implements PayloadRecord {
   public ScenarioSearchRecord {
     Objects.requireNonNull(entryId, "entryId");
     Objects.requireNonNull(scriptFileId, "scriptFileId");
@@ -71,7 +73,9 @@ public record ScenarioSearchRecord(EntryId entryId,
             Map.entry("Audio有無", TypedFieldValues.flag(audioPresent)),
             Map.entry("Audio ID", TypedFieldValues.optionalIdValue(audioId)),
             Map.entry("Script display path", TypedFieldValues.displayPath(scriptDisplayPath)),
-            Map.entry("Audio display path", TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));
+            Map.entry(
+                "Audio display path",
+                TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));
   }
 
   @Override

@@ -1,0 +1,13 @@
+test_id	result	qualifying_evidence	verified_actual
+PT-JMS-001	PASS	ArtemisBrokerConfigurationTest	NIO persistent File Journal; global 512 MiB/50000; disk 90%; duplicate cache 20000
+PT-JMS-002	PASS	ArtemisBrokerConfigurationTest;ArtemisSecurityTest;BrokerTopologyTest	6 durable ANYCAST queues; 90 actual role/address/operation combinations; dynamic creation denied
+PT-JMS-003	PASS	ArtemisBrokerConfigurationTest	6 address capacity/page/full/read-page policies equal independent matrix
+PT-JMS-004	PASS	ArtemisFileJournalTest	delivery count 1,2,3,4; 1/5/25 second bounded redelivery; fourth rollback routed to DLQ
+PT-JMS-005	PASS	ArtemisTransportContractTest;ArtemisFileJournalTest;ArtemisRequestSenderTest;SyncRequestListenerTest	request/reply/work/log persistent BytesMessage; TTL 5000/10000/0/0; decoded wire and metadata equal golden route vectors
+PT-JMS-006	PASS	JmsMessageGuardTest;ArtemisTransportContractTest;JmsReplyDecoderTest	wrong providers, limits, properties, modes and destinations rejected before business processing
+PT-JMS-007	PASS	ArtemisFileJournalTest;OutboundJmsAdapterTest;SyncRequestListenerTest;InternalEventListenerTest;ArtemisReplyConsumerTest	caller-owned SESSION_TRANSACTED commit/rollback atomically controls send, ACK, reply and fatal DLQ
+PT-JMS-008	PASS	ReplyCorrelationRegistryTest;JmsRequestReplyClientTest;ArtemisReplyConsumerTest	12 waits accepted; thirteenth rejected; duplicate/late/timeout/send failure cleaned; one winner among 100 concurrent completions
+PT-JMS-009	PASS	FatalDlqMessageWriterTest;OutboundJmsAdapterTest;SyncRequestListenerTest;ArtemisReplyConsumerTest	body/type preserved; arbitrary properties removed; bounded safe metadata only; isolation failure rolls back
+PT-JMS-010	PASS	ArtemisFileJournalTest	persistent body, duplicate cache, DLQ and Expiry survive File Journal restart without purge
+PT-JMS-011	PASS	ArtemisConnectionFactoryProviderTest	connect/call/failure/retry/reconnect/window/block-on-durable-send values equal SS 321 oracle
+PT-JMS-012	PASS	secret-scan.txt	credential/private key/token/raw marker/CRLF/NUL/disabled/flaky/skipped/not-run and SpotBugs hits all zero

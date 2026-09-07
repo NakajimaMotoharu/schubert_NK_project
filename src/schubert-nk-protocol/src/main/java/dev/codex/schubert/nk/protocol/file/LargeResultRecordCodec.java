@@ -37,7 +37,8 @@ public final class LargeResultRecordCodec {
     } catch (IOException exception) {
       throw new LargeResultIoException("large-result write failed", exception);
     }
-    return new LargeResultContent(records.size(), byteLength, HexFormat.of().formatHex(digest.digest()));
+    return new LargeResultContent(
+        records.size(), byteLength, HexFormat.of().formatHex(digest.digest()));
   }
 
   public static List<byte[]> decode(InputStream input, LargeResultDescriptor descriptor) {

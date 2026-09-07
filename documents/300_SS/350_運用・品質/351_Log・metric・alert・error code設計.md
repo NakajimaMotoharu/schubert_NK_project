@@ -61,6 +61,23 @@ StringはNFC、CR/LF/TAB/Unicode line separatorをASCII spaceへ変換、上限�
 `path`はquery/fragmentを除いたroute templateまたは正規pathで、任意query値を保存しない。
 Cookie/Authorization/CSRF/Referer全文/request・response bodyをdetailsへ入れない。
 
+### 3.3 REQUEST投影の内部正規化（SSC-008）
+
+WLGEVT01はUI235のREQUEST専用eventであり、Web producerはAction=`HTTP_REQUEST_COMPLETED`を設定する。Wireで任意Actionが省略された場合も、APIは既知のREQUEST種別から同値を補ってDBの必須Actionへ保存する。他categoryのactionをREQUESTとして受理しない。これはlayout/必須区分の変更ではなく取込み時の正規化である。
+
+Detailsのwire入力は省略またはstrict JSON objectとし、次のkeyだけを許可する。重複key、未知key、null、末尾別document、コメント、型不一致を恒久不正としてDB接続前に拒否する。空objectは有効。Wire最大1,024 byteとDB JSONB表示最大1,024 byteの両方を維持する。
+
+| Key | 型・値 | 根拠 |
+|---|---|---|
+| responseBytes | 整数0～999999999999（指数・小数・符号なし） | §3.2 HTTP byte数 |
+| userAgentFamily | 1～32 ASCIIの英数/space/`.`/`_`/`-`によるfamily名 | §3.2。Producerは解析済みfamilyを生成しraw User-Agentを複製しない |
+| truncated | boolean | §3.1の安全な上限処理の有無 |
+| projectionStatus | `PENDING`または`FAILED` | 312 §11のlocal/outbox投影状態。MQ送信の確定を意味しない |
+
+API保存時はwire Roleがある場合だけdetailsに`actorRole=USER/ADMIN`を追加する。このkeyをwire Detailsから受け付けず、独立Role fieldを正とする。Usernameは`actor_username`、HTTP request IDは`request_id`、event Message IDは`message_id/source_message_id`、Correlation IDは`correlation_id`へ保存する。表示metadataから業務user IDを逆引きせず、`actor_user_id`はNULLとする。Webによるmetadataを認証・認可の根拠にしない。
+
+DB INSERTとsource UKの重複判定を同じ短transactionで確定し、その後にJMS ACKをcommitする。DB失敗時はJMS rollback、DB確定後ACK前の停止は再配送でINSERT 0/既存行不変を確認してACKする。Broker duplicate cacheのhit/missにかかわらずDB UKを最終正本とする。
+
 ## 4. Action catalog
 
 | Action | Category | 発火・必須context |

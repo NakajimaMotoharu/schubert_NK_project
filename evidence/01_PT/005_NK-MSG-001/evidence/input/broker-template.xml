@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NK-MSG-001 production template. Trace: RD MQ-001..013/MQ-040..045,
+  UI 231, SS 321, PT-JMS-001..004/010. Credential values live outside Git.
+-->
+<configuration xmlns="urn:activemq"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
+  <core xmlns="urn:activemq:core">
+    <name>schubert-nk-broker</name>
+    <persistence-enabled>true</persistence-enabled>
+    <graceful-shutdown-enabled>true</graceful-shutdown-enabled>
+    <graceful-shutdown-timeout>60000</graceful-shutdown-timeout>
+    <resolve-protocols>false</resolve-protocols>
+    <journal-type>NIO</journal-type>
+    <paging-directory>data/paging</paging-directory>
+    <bindings-directory>data/bindings</bindings-directory>
+    <journal-directory>data/journal</journal-directory>
+    <large-messages-directory>data/large-messages</large-messages-directory>
+    <journal-datasync>true</journal-datasync>
+    <journal-file-size>10MiB</journal-file-size>
+    <journal-min-files>4</journal-min-files>
+    <journal-pool-files>20</journal-pool-files>
+    <journal-compact-percentage>30</journal-compact-percentage>
+    <journal-compact-min-files>10</journal-compact-min-files>
+    <global-max-messages>50000</global-max-messages>
+    <global-max-size>512MiB</global-max-size>
+    <max-disk-usage>90</max-disk-usage>
+    <disk-scan-period>5000</disk-scan-period>
+    <id-cache-size>20000</id-cache-size>
+    <persist-id-cache>true</persist-id-cache>
+
+    <acceptors>
+      <acceptor name="core">tcp://127.0.0.1:61616?protocols=CORE</acceptor>
+    </acceptors>
+
+    <security-settings>
+      <security-setting match="nk.sync.request">
+        <permission type="send" roles="nk_web"/>
+        <permission type="consume" roles="nk_api"/>
+        <permission type="browse" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="nk.sync.reply.web">
+        <permission type="consume" roles="nk_web"/>
+        <permission type="send" roles="nk_api"/>
+        <permission type="browse" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="nk.async.work">
+        <permission type="send" roles="nk_api,nk_ops"/>
+        <permission type="consume" roles="nk_api"/>
+        <permission type="browse" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="nk.web.log">
+        <permission type="send" roles="nk_web"/>
+        <permission type="consume" roles="nk_api"/>
+        <permission type="browse" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="nk.dead.letter">
+        <permission type="send" roles="nk_web,nk_api"/>
+        <permission type="consume" roles="nk_ops"/>
+        <permission type="browse" roles="nk_ops"/>
+        <permission type="manage" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="nk.expiry">
+        <permission type="consume" roles="nk_mq_maintenance,nk_ops"/>
+        <permission type="browse" roles="nk_mq_maintenance,nk_ops"/>
+        <permission type="manage" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="activemq.management.#">
+        <permission type="manage" roles="nk_ops"/>
+        <permission type="send" roles="nk_ops"/>
+        <permission type="consume" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="#"/>
+    </security-settings>
+
+    <address-settings>
+      <address-setting match="nk.sync.request">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>32MiB</max-size-bytes>
+        <max-size-messages>50</max-size-messages>
+        <page-limit-bytes>224MiB</page-limit-bytes>
+        <page-limit-messages>450</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+      <address-setting match="nk.sync.reply.web">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>32MiB</max-size-bytes>
+        <max-size-messages>50</max-size-messages>
+        <page-limit-bytes>224MiB</page-limit-bytes>
+        <page-limit-messages>450</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+      <address-setting match="nk.async.work">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>128MiB</max-size-bytes>
+        <max-size-messages>1000</max-size-messages>
+        <page-limit-bytes>896MiB</page-limit-bytes>
+        <page-limit-messages>9000</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+      <address-setting match="nk.web.log">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>64MiB</max-size-bytes>
+        <max-size-messages>1000</max-size-messages>
+        <page-limit-bytes>192MiB</page-limit-bytes>
+        <page-limit-messages>9000</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+      <address-setting match="nk.dead.letter">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>128MiB</max-size-bytes>
+        <max-size-messages>1000</max-size-messages>
+        <page-limit-bytes>1920MiB</page-limit-bytes>
+        <page-limit-messages>9000</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+      <address-setting match="nk.expiry">
+        <dead-letter-address>nk.dead.letter</dead-letter-address>
+        <expiry-address>nk.expiry</expiry-address>
+        <redelivery-delay>1000</redelivery-delay>
+        <redelivery-delay-multiplier>5.0</redelivery-delay-multiplier>
+        <redelivery-collision-avoidance-factor>0.0</redelivery-collision-avoidance-factor>
+        <max-redelivery-delay>30000</max-redelivery-delay>
+        <max-delivery-attempts>4</max-delivery-attempts>
+        <max-size-bytes>64MiB</max-size-bytes>
+        <max-size-messages>1000</max-size-messages>
+        <page-limit-bytes>960MiB</page-limit-bytes>
+        <page-limit-messages>9000</page-limit-messages>
+        <page-size-bytes>8MiB</page-size-bytes>
+        <max-read-page-messages>100</max-read-page-messages>
+        <max-read-page-bytes>16MiB</max-read-page-bytes>
+        <address-full-policy>PAGE</address-full-policy>
+        <disk-full-policy>BLOCK</disk-full-policy>
+        <page-full-policy>FAIL</page-full-policy>
+        <auto-create-queues>false</auto-create-queues>
+        <auto-delete-queues>false</auto-delete-queues>
+        <auto-delete-created-queues>false</auto-delete-created-queues>
+        <auto-create-addresses>false</auto-create-addresses>
+        <auto-delete-addresses>false</auto-delete-addresses>
+        <auto-create-dead-letter-resources>false</auto-create-dead-letter-resources>
+        <auto-create-expiry-resources>false</auto-create-expiry-resources>
+        <enable-metrics>true</enable-metrics>
+        <enable-ingress-timestamp>true</enable-ingress-timestamp>
+      </address-setting>
+    </address-settings>
+
+    <addresses>
+      <address name="nk.sync.request">
+        <anycast><queue name="nk.sync.request.q"/></anycast>
+      </address>
+      <address name="nk.sync.reply.web">
+        <anycast><queue name="nk.sync.reply.web.q"/></anycast>
+      </address>
+      <address name="nk.async.work">
+        <anycast><queue name="nk.async.work.q"/></anycast>
+      </address>
+      <address name="nk.web.log">
+        <anycast><queue name="nk.web.log.q"/></anycast>
+      </address>
+      <address name="nk.dead.letter">
+        <anycast><queue name="nk.dead.letter.q"/></anycast>
+      </address>
+      <address name="nk.expiry">
+        <anycast><queue name="nk.expiry.q"/></anycast>
+      </address>
+    </addresses>
+  </core>
+</configuration>

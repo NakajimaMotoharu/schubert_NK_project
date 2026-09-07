@@ -12,7 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts UDTRSP01. */
-public record UserDetailResponseData(UserId userId,
+public record UserDetailResponseData(
+    UserId userId,
     String username,
     UserRole role,
     UserState state,
@@ -24,7 +25,8 @@ public record UserDetailResponseData(UserId userId,
     int activeSessionCount,
     long version,
     String createdBy,
-    String updatedBy) implements PayloadData {
+    String updatedBy)
+    implements PayloadData {
   public UserDetailResponseData {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(username, "username");

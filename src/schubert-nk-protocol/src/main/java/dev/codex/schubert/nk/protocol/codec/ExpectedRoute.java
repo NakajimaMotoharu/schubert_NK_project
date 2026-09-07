@@ -18,8 +18,7 @@ public record ExpectedRoute(
     Objects.requireNonNull(interactionKind, "interactionKind");
     Objects.requireNonNull(destinationAddress, "destinationAddress");
     Objects.requireNonNull(requiredReplyToAddress, "requiredReplyToAddress");
-    if (destinationAddress.isBlank()
-        || requiredReplyToAddress.stream().anyMatch(String::isBlank)) {
+    if (destinationAddress.isBlank() || requiredReplyToAddress.stream().anyMatch(String::isBlank)) {
       throw new IllegalArgumentException("expected route addresses must not be blank");
     }
     if ((messageKind == MessageKind.EVENT) != (interactionKind == InteractionKind.INTERNAL)) {
@@ -29,7 +28,8 @@ public record ExpectedRoute(
       throw new IllegalArgumentException("only a request route has a required reply address");
     }
     if ((messageKind == MessageKind.EVENT) == expirationRequired) {
-      throw new IllegalArgumentException("events have no expiration; request/reply routes require it");
+      throw new IllegalArgumentException(
+          "events have no expiration; request/reply routes require it");
     }
   }
 }

@@ -22,9 +22,9 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006 | 232～237、243 | 311、322～323、333 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT完了（25/25、389 field・69 named record・64明示mapper・SS 323共通Java型、coverage全100%、SpotBugs 0） |
 | 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT完了（35/35、64 layout相関・min/max/error golden・0107個別field・最大record・並行性、module coverage全100%、SpotBugs 0） |
 | 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（12/12、coverage全100%、SpotBugs 0） |
-| 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | PG/PT完了（15/15、migration 5/5、SQL object/function branch matrix 100%、実PostgreSQL 18.6、SSC-005反映）。DDL単体はHTTP出力なし、A/S/M/L/N/OのNK実画面比較は各依存Programで実施 |
-| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | 未着手 |
-| 006 / `NK-MSG-002` | Inbox/Outbox/replay/retry/log outbox | ASY-001～009、MQ-006～010 | 213、231～236、241 | 312、324、332 | `006_NK-MSG-002` | L/N/O | 未着手 |
+| 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | 完了判定再確認中（既存15 PTは成功するがBUG-014/015でcleanupの保持・lease・NULL guard不足を検出。YKT-012とPT-IDEM-013で再試験。従来完了から一旦除外） |
+| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | **PG/PT完了**（`PT-JMS-20260904-01`。12/12 case、関連JUnit 65/65、全reactor 199/199 PASS。28 production class、instruction/branch/line/method各100%、SpotBugs/secret hit 0） |
+| 006 / `NK-MSG-002` | Inbox/Outbox/replay/retry/log outbox | ASY-001～009、MQ-006～010 | 213、231～236、241 | 312、324、332 | `006_NK-MSG-002` | L/N/O | 実施中（PT-IDEM-001～009/011 PASS、010/012部分、013～015未実施。Run20260907-02 Protocol69/API100/Web48、全coverage100%、SpotBugs0。API ingestまで試験済み、HTTP投影/cleanup/stress等は未完了。BUG-014/015対応中） |
 | 007 / `NK-AUT-001` | Authentication/attempt/session/context/owner/role | FUN-001/009、AUT-001～004 | 225～226、234、241 | 312、314、331～332 | `007_NK-AUT-001` | A01～A03/U02/O01 | 未着手 |
 | 008 / `NK-SCN-001` | Scenario/game/speaker/route/file/detail query | FUN-003～005 | 223～224、234 | 312～313、323、332 | `008_NK-SCN-001` | S01～S08 | 未着手 |
 | 009 / `NK-MED-001` | Audio/animation/music descriptor/query/file/Range | FUN-005～007、FIL/PER | 223、235、237 | 312～313、323、333 | `009_NK-MED-001` | M01～M07 | 未着手 |
@@ -61,3 +61,11 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-02 | SS 322 §8/§9のresult profile・layout相関、64 layout独立golden、最大record・並行性を完了し、NK-PRO-002をPG/PT完了。 |
 | 2026-09-02 | NK-DAT-001の実PostgreSQL 18/Flywayを用いるPT-DB-001～015を仕様化し、PG/PT実施中へ更新。 |
 | 2026-09-03 | NK-DAT-001のFlyway/DDL、Security hold、role/grant、6 maintenance functionの全guard/正常分岐、実DB証跡を確定しPG/PT完了。 |
+| 2026-09-03 | NK-MSG-001/002のprogram別PT仕様を確定し、Artemis/JMSとInbox/OutboxのPG/PT並行実施を開始。 |
+| 2026-09-03 | NK-MSG-001のbroker/JMS境界とWeb相関registryの中間gateを反映。未完了caseを明示しProgram完了判定は保留。 |
+| 2026-09-03 | NK-MSG-001のWeb request/reply client、12並行wait・13件目拒否・全終了経路cleanupをPT-JMS-008へ反映。 |
+| 2026-09-03 | NK-MSG-001の実ACL 90組合せ、全4 route/provider負値、DLQ/Expiry再起動保持、production request senderを反映。PT-JMSは11 PASS・1未実施。 |
+| 2026-09-03 | NK-MSG-001のAPI Reply/DLQ sender、caller所有transactionのcommit/rollback実brokerPTを反映。API中間gateを52件へ更新。 |
+| 2026-09-03 | NK-MSG-001のWeb reply decoder/consumer、active/late ACK、body/type不変DLQ隔離、隔離失敗rollbackを反映。Web中間gateを27件へ更新。 |
+| 2026-09-04 | NK-MSG-001のAPI sync/work/log listenerを含む最終reactor runとPT-JMS-012 scanを完了。sanitized evidence/manifest/hashを固定し、ProgramをPG/PT完了へ更新。 |
+| 2026-09-05 | NK-MSG-002の`JdbcInboxCoordinator`とrequest/completion/result model、PT-IDEM-004～006の実PostgreSQL transaction/replay/競合証跡を反映。PT-IDEM-001～008を中間PASSとし、未実施009～015を明示。 |
