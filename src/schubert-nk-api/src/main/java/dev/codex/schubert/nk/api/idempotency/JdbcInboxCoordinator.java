@@ -40,7 +40,9 @@ public final class JdbcInboxCoordinator {
   private static final String COMPLETE =
       "update schubert.request_inbox set processing_state=?,result_ref_type=?,result_ref_id=?,"
           + "result_ref_uuid=?,response_layout_id=?,response_version=?,response_body_encrypted=?,"
-          + "response_key_version=?,completed_at=? where message_id=? and processing_state='PROCESSING'";
+          + "response_key_version=?,completed_at=?,"
+          + "expires_at=expires_at+(cast(? as timestamptz)-created_at) "
+          + "where message_id=? and processing_state='PROCESSING'";
 
   private final FingerprintKeyRing fingerprints;
 
@@ -235,7 +237,10 @@ public final class JdbcInboxCoordinator {
         statement.setNull(8, Types.VARCHAR);
       }
       statement.setTimestamp(9, Timestamp.from(completion.completedAt()));
-      statement.setObject(10, messageId);
+      // Preserve the configured retention duration, but start it at completion (SS324 §12).
+      // Replay bypasses this transition, so repeated delivery cannot prolong retention.
+      statement.setTimestamp(10, Timestamp.from(completion.completedAt()));
+      statement.setObject(11, messageId);
       if (statement.executeUpdate() != 1) {
         throw failure(
             InboxException.Reason.STATE_CORRUPT,

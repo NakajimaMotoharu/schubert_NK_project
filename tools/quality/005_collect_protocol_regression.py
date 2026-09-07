@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bind a protocol regression package to the already validated full-reactor authentication run."""
+"""Bind protocol or messaging regressions to an already validated full-reactor authentication run."""
 
 import argparse
 import hashlib
@@ -13,6 +13,7 @@ import xml.etree.ElementTree as ET
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
+    parser.add_argument("--program", choices=("NK-PRO-002", "NK-MSG-002"), default="NK-PRO-002")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[2]
     auth = repo / "evidence/01_PT/007_NK-AUT-001/evidence/manifest.json"
@@ -22,7 +23,10 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", validated["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"],
                    cwd=repo, check=True, stdout=subprocess.DEVNULL)
-    evidence = repo / "evidence/01_PT/002_NK-PRO-002/evidence"
+    protocol = args.program == "NK-PRO-002"
+    module = "protocol" if protocol else "api"
+    directory = "002_NK-PRO-002" if protocol else "006_NK-MSG-002"
+    evidence = repo / "evidence/01_PT" / directory / "evidence"
     old = json.loads((evidence / "manifest.json").read_text())
     old_id = old["runId"]
     if not all(c.isalnum() or c == "-" for c in old_id):
@@ -30,7 +34,7 @@ def main():
     history = evidence / "logs" / (old_id + "-manifest.json")
     if old_id != args.run_id and not history.exists():
         shutil.copyfile(evidence / "manifest.json", history)
-    target = repo / "src/schubert-nk-protocol/target"
+    target = repo / ("src/schubert-nk-" + module) / "target"
     methods = []
     count = 0
     for report in sorted((target / "surefire-reports").glob("TEST-*.xml")):
@@ -51,10 +55,10 @@ def main():
         ET.indent(clean)
         ET.ElementTree(clean).write(evidence / "output" / report.name,
                                    encoding="UTF-8", xml_declaration=True)
-    if count != validated["modules"]["protocol"]["tests"]:
+    if count != validated["modules"][module]["tests"]:
         raise SystemExit("protocol reports do not match the validated reactor run")
     (evidence / "coverage").mkdir(exist_ok=True)
-    shutil.copyfile(target / "site/jacoco/jacoco.csv", evidence / "coverage/protocol-jacoco.csv")
+    shutil.copyfile(target / "site/jacoco/jacoco.csv", evidence / "coverage" / (module + "-jacoco.csv"))
     static = ET.parse(target / "spotbugsXml.xml").getroot()
     if static.findall("BugInstance") or int(static.find("Errors").get("errors", "0")):
         raise SystemExit("protocol static analysis not clean")
@@ -63,12 +67,16 @@ def main():
     summary = {key: validated[key] for key in
                ("runId", "targetCommit", "branch", "startedAt", "completedAt", "exitCode",
                 "command", "environment", "modules", "rawLogSha256", "redaction")}
-    summary.update(programId="NK-PRO-002", kind="FULL_REACTOR_PROTOCOL_REGRESSION",
-                   programStatus="REGRESSION_PASS", protocolMethods=methods,
-                   testIds=["PT-CODEC-AUTHERR-001", "PT-CODEC-AUTHERR-002", "PT-CODEC-AUTHERR-003"],
-                   relatedBug=["BUG-023"], relatedYkt=["YKT-020"], relatedSsc=["SSC-012"],
-                   expectation="002 PT specification; independent UI234 byte vectors and unchanged UI fixture TSV. Other programs and PGPT remain incomplete.",
-                   previousCompletionRun="PT-PRO-20260902-08", notRunCountedAsPass=0)
+    summary.update(programId=args.program, kind="FULL_REACTOR_COMPONENT_REGRESSION",
+                   programStatus="REGRESSION_PASS" if protocol else "IN_PROGRESS",
+                   moduleId=module, moduleMethods=methods,
+                   testIds=["PT-CODEC-AUTHERR-001", "PT-CODEC-AUTHERR-002", "PT-CODEC-AUTHERR-003"] if protocol else ["PT-IDEM-013-R01"],
+                   relatedBug=["BUG-023"] if protocol else ["BUG-025", "BUG-014"],
+                   relatedYkt=["YKT-020"] if protocol else ["YKT-022", "YKT-012"],
+                   relatedSsc=["SSC-012"] if protocol else [],
+                   expectation="002 independent UI234 byte/TSV oracle; 006 independent completion/TTL SQL postconditions. Other programs and PGPT remain incomplete.",
+                   previousEvidenceRun=old_id if old_id != args.run_id else old.get("previousEvidenceRun"),
+                   notRunCountedAsPass=0)
     (evidence / "logs" / (args.run_id + "-summary.json")).write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n")
     summary["files"] = [{"path": str(path.relative_to(evidence)),
@@ -79,7 +87,7 @@ def main():
     (evidence / "checksums.sha256").write_text("".join(
         hashlib.sha256(path.read_bytes()).hexdigest() + "  " + str(path.relative_to(evidence)) + "\n"
         for path in sorted(evidence.rglob("*")) if path.is_file() and path.name != "checksums.sha256"))
-    print(json.dumps({"runId": args.run_id, "protocolTests": count, "status": "REGRESSION_PASS"}))
+    print(json.dumps({"runId": args.run_id, module + "Tests": count, "status": "REGRESSION_PASS"}))
 
 
 if __name__ == "__main__":
