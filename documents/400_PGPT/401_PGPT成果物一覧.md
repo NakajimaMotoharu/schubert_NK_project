@@ -37,7 +37,7 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 工程基盤 | 整備中 | 規約、toolchain、全品質gate、915/916確定 | rootless JDK/Maven、台帳、compiler/coverage/SpotBugs/NullAway稼働。Enforcer/format/PMD等の親gateを追加検証中。文書上の方針確定だけで全gate完了とはしない |
 | Characterization是正 | 完了 | BUG-001/YKT-001再試験PASS | commit `8cfaa9b`/`57f9ac2`、41/41、coverage全100%、run 05/06・G01～G06 PASS |
 | PG | 実施中 | 全program実装、build/static analysis/関連CHR PASS | 確定完了5/20（25%、工数換算ではない）。NK-DAT-001はBUG-014により再確認中。NK-MSG-002のHTTP/Inbox保護/業務stressと、NK-AUT-001の実DB Login/context/sessionが残る。Auth Password/失敗window/role・owner policyを追加。 |
-| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-AUT-20260907-02全283件成功（Protocol69/API125/Web48/CHR41）、Java coverage100%、SpotBugs/NullAway0、Enforcer/format PASS。Auth20件はPassword/lock/認可policyと実DB context検証まで。BUG-014 Inbox保護、Auth実Login/session、残業務・PMD等の全体gateは未完了。 |
+| PT | 実施中 | 全PT PASS、line/method/class/branch 100%、skip等0 | 確定完了5/20。Run PT-AUT-20260907-03全289件成功（Protocol69/API131/Web48/CHR41）、Java coverage100%、SpotBugs/NullAway0、Enforcer/format PASS。Auth26件はPassword/lock/認可policy・実DB context検証・AES-GCMまで。BUG-014 Inbox保護、Auth実Login/session、残業務・PMD等の全体gateは未完了。 |
 | PGPT完了 | 未着手 | 451の全gate PASS、worktree clean、push/PR済み | 未判定 |
 
 ## 4. 進捗更新規則
