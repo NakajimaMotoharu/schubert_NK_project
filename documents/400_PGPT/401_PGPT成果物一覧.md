@@ -73,3 +73,7 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 | 2026-09-04 | NK-MSG-001最終run `PT-JMS-20260904-01`を実施。PT-JMS 12/12、関連JUnit 65/65、全reactor 199/199、coverage全100%、SpotBugs/secret/CRLF/NUL/skip等0でPG/PT完了。 |
 | 2026-09-04 | NK-MSG-002のResponse snapshot圧縮/AES-GCM/`NKENC1`/AAD/key rotation、平文・暗号文上限と圧縮bomb防御を中間実装。BUG-007/008を修正し、Protocol 69件・API 68件、coverage全100%、SpotBugs 0を確認。 |
 | 2026-09-05 | NK-MSG-002のInbox coordinator、Message ID/owner-token/HMAC replay、caller所有transaction・savepoint競合回復を実装。PT-IDEM-001～008をProtocol 69件・API 79件、coverage全100%、SpotBugs 0で中間PASS。 |
+
+## 2026-09-08 電文接続監査の再判定
+
+BUG-023/SSC-012（Login error field欠落）発見によりNK-PRO-002を一時保留。現在の確定完了は4/20（20%、工数換算ではない）。過去runの成功実績は保持するが、修正前のblank error goldenだけで当該仕様を満たすとは判断しない。正式再試験後に再判定する。
