@@ -440,11 +440,21 @@ final class LoginReplayServiceTest {
   private static byte[] golden(Role role, String code, UUID responseId, String sent, int retry) {
     byte[] body = new byte[688];
     Arrays.fill(body, (byte) ' ');
-    put(body, 0, "SCHBNK01001LGNRSP01001RS");
+    // UI232 §3 fields 1..6: response=S, synchronous=S (BUG-026/YKT-023).
+    put(body, 0, "SCHBNK01");
+    put(body, 8, "001");
+    put(body, 11, "LGNRSP01");
+    put(body, 19, "001");
+    put(body, 22, "S");
+    put(body, 23, "S");
     put(body, 24, responseId.toString());
     put(body, 60, REQUEST.toString());
     put(body, 96, sent);
-    put(body, 177, "0256000432000000000000000000688");
+    put(body, 177, "0256");
+    put(body, 181, "000432");
+    put(body, 187, "000000");
+    put(body, 193, "000000");
+    put(body, 199, "000000688");
     put(body, 208, code);
     put(body, 423, retry == 0 ? "000000000" : retry == 1 ? "000001000" : "000900000");
     if (code.equals("0000") || code.equals("0200")) {

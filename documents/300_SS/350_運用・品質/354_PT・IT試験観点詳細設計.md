@@ -2,6 +2,8 @@
 
 ## 1. 目的・状態・追跡
 
+SSC-013: Login snapshotは独立UI232/234の688byteで検証する。成功AUTH_SESSION＋snapshot/0200、失敗ERROR/NONE/元0101・0106、初回role/期限の凍結、DB参照/AAD/hash/発行時刻不整合、key rotation/改ざん/NULL/SQL故障/100並行を含む。再送でsession/counter/監査の再更新なし。新Headerのbyte23はS（応答）、24はS（同期）をUI表から独立配置する。
+
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
