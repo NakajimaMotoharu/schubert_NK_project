@@ -33,6 +33,8 @@ public final class WebLogPayloadCodec implements AutoCloseable {
   private static final int PREFIX_BYTES = 8;
   private static final int MINIMUM_ENVELOPE_BYTES = 37;
 
+  // BUG-036/YKT-032: callers must not own the key/nonce/close synchronization monitor.
+  private final Object stateLock = new Object();
   private final String currentVersion;
   private final byte[] currentKey;
   private final @Nullable String previousVersion;
@@ -71,96 +73,98 @@ public final class WebLogPayloadCodec implements AutoCloseable {
   }
 
   /** Validates identity and wire content, then encrypts with the current key and a new nonce. */
-  public synchronized EncryptedWebLogPayload encrypt(
-      WebLogPayloadIdentity identity, byte[] plaintext) {
-    ensureOpen();
-    Objects.requireNonNull(identity, "identity");
-    Objects.requireNonNull(plaintext, "plaintext");
-    byte[] candidate = plaintext.clone();
-    byte[] nonce = new byte[NONCE_BYTES];
-    byte[] aad = identity.aad(currentVersion);
-    byte[] encrypted = new byte[0];
-    byte[] stored = new byte[0];
-    try {
-      validatePlaintext(identity, candidate);
-      random.nextBytes(nonce);
-      Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-      cipher.init(
-          Cipher.ENCRYPT_MODE,
-          new SecretKeySpec(currentKey, "AES"),
-          new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
-      cipher.updateAAD(aad);
-      encrypted = cipher.doFinal(candidate);
-      byte[] keyId = currentVersion.getBytes(StandardCharsets.US_ASCII);
-      stored =
-          ByteBuffer.allocate(PREFIX_BYTES + keyId.length + NONCE_BYTES + encrypted.length)
-              .put(MAGIC)
-              .put((byte) 1)
-              .put((byte) keyId.length)
-              .put(keyId)
-              .put(nonce)
-              .put(encrypted)
-              .array();
-      return new EncryptedWebLogPayload(currentVersion, stored);
-    } catch (GeneralSecurityException exception) {
-      throw new WebLogPayloadException(WebLogPayloadException.Reason.CRYPTO_UNAVAILABLE);
-    } finally {
-      Arrays.fill(candidate, (byte) 0);
-      Arrays.fill(nonce, (byte) 0);
-      Arrays.fill(aad, (byte) 0);
-      Arrays.fill(encrypted, (byte) 0);
-      Arrays.fill(stored, (byte) 0);
+  public EncryptedWebLogPayload encrypt(WebLogPayloadIdentity identity, byte[] plaintext) {
+    synchronized (stateLock) {
+      ensureOpen();
+      Objects.requireNonNull(identity, "identity");
+      Objects.requireNonNull(plaintext, "plaintext");
+      byte[] candidate = plaintext.clone();
+      byte[] nonce = new byte[NONCE_BYTES];
+      byte[] aad = identity.aad(currentVersion);
+      byte[] encrypted = new byte[0];
+      byte[] stored = new byte[0];
+      try {
+        validatePlaintext(identity, candidate);
+        random.nextBytes(nonce);
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(
+            Cipher.ENCRYPT_MODE,
+            new SecretKeySpec(currentKey, "AES"),
+            new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
+        cipher.updateAAD(aad);
+        encrypted = cipher.doFinal(candidate);
+        byte[] keyId = currentVersion.getBytes(StandardCharsets.US_ASCII);
+        stored =
+            ByteBuffer.allocate(PREFIX_BYTES + keyId.length + NONCE_BYTES + encrypted.length)
+                .put(MAGIC)
+                .put((byte) 1)
+                .put((byte) keyId.length)
+                .put(keyId)
+                .put(nonce)
+                .put(encrypted)
+                .array();
+        return new EncryptedWebLogPayload(currentVersion, stored);
+      } catch (GeneralSecurityException exception) {
+        throw new WebLogPayloadException(WebLogPayloadException.Reason.CRYPTO_UNAVAILABLE);
+      } finally {
+        Arrays.fill(candidate, (byte) 0);
+        Arrays.fill(nonce, (byte) 0);
+        Arrays.fill(aad, (byte) 0);
+        Arrays.fill(encrypted, (byte) 0);
+        Arrays.fill(stored, (byte) 0);
+      }
     }
   }
 
   /** Authenticates envelope/row identity before releasing an exact, validated WLGEVT01 copy. */
-  public synchronized byte[] decrypt(
-      WebLogPayloadIdentity identity, EncryptedWebLogPayload payload) {
-    ensureOpen();
-    Objects.requireNonNull(identity, "identity");
-    Objects.requireNonNull(payload, "payload");
-    byte[] stored = payload.ciphertext();
-    byte[] nonce = new byte[0];
-    byte[] aad = new byte[0];
-    byte[] plaintext = new byte[0];
-    try {
-      if (stored.length < MINIMUM_ENVELOPE_BYTES
-          || !Arrays.equals(stored, 0, MAGIC.length, MAGIC, 0, MAGIC.length)) {
+  public byte[] decrypt(WebLogPayloadIdentity identity, EncryptedWebLogPayload payload) {
+    synchronized (stateLock) {
+      ensureOpen();
+      Objects.requireNonNull(identity, "identity");
+      Objects.requireNonNull(payload, "payload");
+      byte[] stored = payload.ciphertext();
+      byte[] nonce = new byte[0];
+      byte[] aad = new byte[0];
+      byte[] plaintext = new byte[0];
+      try {
+        if (stored.length < MINIMUM_ENVELOPE_BYTES
+            || !Arrays.equals(stored, 0, MAGIC.length, MAGIC, 0, MAGIC.length)) {
+          throw invalidPayload();
+        }
+        if (stored[6] != 1) {
+          throw invalidPayload();
+        }
+        int keyLength = Byte.toUnsignedInt(stored[7]);
+        int nonceOffset = PREFIX_BYTES + keyLength;
+        int cipherOffset = nonceOffset + NONCE_BYTES;
+        if (keyLength < 1 || keyLength > 16 || stored.length < cipherOffset + TAG_BYTES) {
+          throw invalidPayload();
+        }
+        String version = new String(stored, PREFIX_BYTES, keyLength, StandardCharsets.US_ASCII);
+        if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")
+            || !payload.keyVersion().equals(version)) {
+          throw invalidPayload();
+        }
+        byte[] key = selectKey(version);
+        nonce = Arrays.copyOfRange(stored, nonceOffset, cipherOffset);
+        aad = identity.aad(version);
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(
+            Cipher.DECRYPT_MODE,
+            new SecretKeySpec(key, "AES"),
+            new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
+        cipher.updateAAD(aad);
+        plaintext = cipher.doFinal(stored, cipherOffset, stored.length - cipherOffset);
+        validatePlaintext(identity, plaintext);
+        return plaintext.clone();
+      } catch (GeneralSecurityException exception) {
         throw invalidPayload();
+      } finally {
+        Arrays.fill(stored, (byte) 0);
+        Arrays.fill(nonce, (byte) 0);
+        Arrays.fill(aad, (byte) 0);
+        Arrays.fill(plaintext, (byte) 0);
       }
-      if (stored[6] != 1) {
-        throw invalidPayload();
-      }
-      int keyLength = Byte.toUnsignedInt(stored[7]);
-      int nonceOffset = PREFIX_BYTES + keyLength;
-      int cipherOffset = nonceOffset + NONCE_BYTES;
-      if (keyLength < 1 || keyLength > 16 || stored.length < cipherOffset + TAG_BYTES) {
-        throw invalidPayload();
-      }
-      String version = new String(stored, PREFIX_BYTES, keyLength, StandardCharsets.US_ASCII);
-      if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")
-          || !payload.keyVersion().equals(version)) {
-        throw invalidPayload();
-      }
-      byte[] key = selectKey(version);
-      nonce = Arrays.copyOfRange(stored, nonceOffset, cipherOffset);
-      aad = identity.aad(version);
-      Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-      cipher.init(
-          Cipher.DECRYPT_MODE,
-          new SecretKeySpec(key, "AES"),
-          new GCMParameterSpec(TAG_BYTES * Byte.SIZE, nonce));
-      cipher.updateAAD(aad);
-      plaintext = cipher.doFinal(stored, cipherOffset, stored.length - cipherOffset);
-      validatePlaintext(identity, plaintext);
-      return plaintext.clone();
-    } catch (GeneralSecurityException exception) {
-      throw invalidPayload();
-    } finally {
-      Arrays.fill(stored, (byte) 0);
-      Arrays.fill(nonce, (byte) 0);
-      Arrays.fill(aad, (byte) 0);
-      Arrays.fill(plaintext, (byte) 0);
     }
   }
 
@@ -226,11 +230,13 @@ public final class WebLogPayloadCodec implements AutoCloseable {
 
   /** Erases owned key copies; repeated close is safe and all later operations fail closed. */
   @Override
-  public synchronized void close() {
-    Arrays.fill(currentKey, (byte) 0);
-    if (previousKey != null) {
-      Arrays.fill(previousKey, (byte) 0);
+  public void close() {
+    synchronized (stateLock) {
+      Arrays.fill(currentKey, (byte) 0);
+      if (previousKey != null) {
+        Arrays.fill(previousKey, (byte) 0);
+      }
+      closed = true;
     }
-    closed = true;
   }
 }

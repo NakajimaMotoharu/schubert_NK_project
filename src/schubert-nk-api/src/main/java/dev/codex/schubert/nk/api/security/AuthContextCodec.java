@@ -21,6 +21,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class AuthContextCodec implements AutoCloseable {
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
+  // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
+  private final Object stateLock = new Object();
   private final String currentVersion;
   private final Map<String, byte[]> keys;
   private final SecureRandom random;
@@ -64,88 +66,91 @@ public final class AuthContextCodec implements AutoCloseable {
     keys = Map.copyOf(copies);
   }
 
-  public synchronized EncryptedAuthContext encrypt(
-      AuthContextIdentity identity, AuthenticationContext raw) {
-    ensureOpen();
-    Objects.requireNonNull(identity, "identity");
-    Objects.requireNonNull(raw, "raw");
-    byte[] plaintext = raw.wireValue().getBytes(StandardCharsets.US_ASCII);
-    byte[] nonce = new byte[12];
-    try {
-      random.nextBytes(nonce);
-      byte[] encrypted =
-          crypt(
-              Cipher.ENCRYPT_MODE,
-              key(currentVersion),
-              nonce,
-              identity.aad(currentVersion),
-              plaintext);
+  public EncryptedAuthContext encrypt(AuthContextIdentity identity, AuthenticationContext raw) {
+    synchronized (stateLock) {
+      ensureOpen();
+      Objects.requireNonNull(identity, "identity");
+      Objects.requireNonNull(raw, "raw");
+      byte[] plaintext = raw.wireValue().getBytes(StandardCharsets.US_ASCII);
+      byte[] nonce = new byte[12];
       try {
-        byte[] id = currentVersion.getBytes(StandardCharsets.US_ASCII);
-        byte[] stored =
-            ByteBuffer.allocate(20 + id.length + encrypted.length)
-                .put(MAGIC)
-                .put((byte) 1)
-                .put((byte) id.length)
-                .put(id)
-                .put(nonce)
-                .put(encrypted)
-                .array();
+        random.nextBytes(nonce);
+        byte[] encrypted =
+            crypt(
+                Cipher.ENCRYPT_MODE,
+                key(currentVersion),
+                nonce,
+                identity.aad(currentVersion),
+                plaintext);
         try {
-          return new EncryptedAuthContext(currentVersion, stored);
+          byte[] id = currentVersion.getBytes(StandardCharsets.US_ASCII);
+          byte[] stored =
+              ByteBuffer.allocate(20 + id.length + encrypted.length)
+                  .put(MAGIC)
+                  .put((byte) 1)
+                  .put((byte) id.length)
+                  .put(id)
+                  .put(nonce)
+                  .put(encrypted)
+                  .array();
+          try {
+            return new EncryptedAuthContext(currentVersion, stored);
+          } finally {
+            Arrays.fill(stored, (byte) 0);
+          }
         } finally {
-          Arrays.fill(stored, (byte) 0);
+          Arrays.fill(encrypted, (byte) 0);
         }
+      } catch (GeneralSecurityException failure) {
+        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE);
       } finally {
-        Arrays.fill(encrypted, (byte) 0);
+        Arrays.fill(plaintext, (byte) 0);
+        Arrays.fill(nonce, (byte) 0);
       }
-    } catch (GeneralSecurityException failure) {
-      throw new AuthContextCryptoException(AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE);
-    } finally {
-      Arrays.fill(plaintext, (byte) 0);
-      Arrays.fill(nonce, (byte) 0);
     }
   }
 
-  public synchronized AuthenticationContext decrypt(
+  public AuthenticationContext decrypt(
       AuthContextIdentity identity, EncryptedAuthContext storedContext) {
-    ensureOpen();
-    Objects.requireNonNull(identity, "identity");
-    Objects.requireNonNull(storedContext, "storedContext");
-    byte[] stored = storedContext.ciphertext();
-    try {
-      if (!Arrays.equals(stored, 0, 6, MAGIC, 0, 6) || stored[6] != 1) {
-        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
-      }
-      int idLength = Byte.toUnsignedInt(stored[7]);
-      if (idLength < 1 || idLength > 16 || stored.length != 100 + idLength) {
-        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
-      }
-      String version = new String(stored, 8, idLength, StandardCharsets.US_ASCII);
-      if (!storedContext.keyVersion().equals(version)) {
-        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
-      }
-      byte[] selected = key(version);
-      byte[] nonce = Arrays.copyOfRange(stored, 8 + idLength, 20 + idLength);
-      byte[] encrypted = Arrays.copyOfRange(stored, 20 + idLength, stored.length);
+    synchronized (stateLock) {
+      ensureOpen();
+      Objects.requireNonNull(identity, "identity");
+      Objects.requireNonNull(storedContext, "storedContext");
+      byte[] stored = storedContext.ciphertext();
       try {
-        byte[] plaintext =
-            crypt(Cipher.DECRYPT_MODE, selected, nonce, identity.aad(version), encrypted);
-        try {
-          return AuthenticationContext.of(new String(plaintext, StandardCharsets.US_ASCII));
-        } finally {
-          Arrays.fill(plaintext, (byte) 0);
+        if (!Arrays.equals(stored, 0, 6, MAGIC, 0, 6) || stored[6] != 1) {
+          throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
         }
+        int idLength = Byte.toUnsignedInt(stored[7]);
+        if (idLength < 1 || idLength > 16 || stored.length != 100 + idLength) {
+          throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
+        }
+        String version = new String(stored, 8, idLength, StandardCharsets.US_ASCII);
+        if (!storedContext.keyVersion().equals(version)) {
+          throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
+        }
+        byte[] selected = key(version);
+        byte[] nonce = Arrays.copyOfRange(stored, 8 + idLength, 20 + idLength);
+        byte[] encrypted = Arrays.copyOfRange(stored, 20 + idLength, stored.length);
+        try {
+          byte[] plaintext =
+              crypt(Cipher.DECRYPT_MODE, selected, nonce, identity.aad(version), encrypted);
+          try {
+            return AuthenticationContext.of(new String(plaintext, StandardCharsets.US_ASCII));
+          } finally {
+            Arrays.fill(plaintext, (byte) 0);
+          }
+        } finally {
+          Arrays.fill(nonce, (byte) 0);
+          Arrays.fill(encrypted, (byte) 0);
+        }
+      } catch (BadPaddingException | IllegalArgumentException failure) {
+        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
+      } catch (GeneralSecurityException failure) {
+        throw new AuthContextCryptoException(AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE);
       } finally {
-        Arrays.fill(nonce, (byte) 0);
-        Arrays.fill(encrypted, (byte) 0);
+        Arrays.fill(stored, (byte) 0);
       }
-    } catch (BadPaddingException | IllegalArgumentException failure) {
-      throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
-    } catch (GeneralSecurityException failure) {
-      throw new AuthContextCryptoException(AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE);
-    } finally {
-      Arrays.fill(stored, (byte) 0);
     }
   }
 
@@ -181,8 +186,10 @@ public final class AuthContextCodec implements AutoCloseable {
   }
 
   @Override
-  public synchronized void close() {
-    for (byte[] key : keys.values()) Arrays.fill(key, (byte) 0);
-    closed = true;
+  public void close() {
+    synchronized (stateLock) {
+      for (byte[] key : keys.values()) Arrays.fill(key, (byte) 0);
+      closed = true;
+    }
   }
 }

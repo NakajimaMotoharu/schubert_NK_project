@@ -31,6 +31,31 @@ final class AuthContextCodecTest {
   private static final AuthenticationContext RAW = AuthenticationContext.of("a".repeat(64));
 
   @Test
+  void bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose() throws Exception {
+    byte[] expected =
+        independentEnvelope(
+            "v1", key(0), IDENTITY, RAW.wireValue().getBytes(StandardCharsets.US_ASCII));
+    var codec = new AuthContextCodec("v1", key(0), null, null, new FixedNonce());
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      synchronized (codec) {
+        executor
+            .submit(
+                () -> {
+                  assertArrayEquals(expected, codec.encrypt(IDENTITY, RAW).ciphertext());
+                  assertEquals(
+                      RAW, codec.decrypt(IDENTITY, new EncryptedAuthContext("v1", expected)));
+                  codec.close();
+                  assertThrows(IllegalStateException.class, () -> codec.encrypt(IDENTITY, RAW));
+                  return 0;
+                })
+            .get(5, java.util.concurrent.TimeUnit.SECONDS);
+      }
+    } finally {
+      codec.close();
+    }
+  }
+
+  @Test
   void independentEnvelopeAadAndDefensiveCopiesMatchExactly() throws Exception {
     byte[] key = key(0);
     byte[] expected =

@@ -16,6 +16,8 @@ import java.util.UUID;
  * ownership/permission/filesystem readiness admission is a separate, mandatory caller gate.
  */
 final class OwnedTransferDirectory implements AutoCloseable {
+  // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
+  private final Object stateLock = new Object();
   private final DirectoryCalls calls;
   private int descriptor;
 
@@ -51,31 +53,37 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** New or existing date child, never follows a symlink; child owns an independent FD. */
-  synchronized OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
-    Objects.requireNonNull(date, "date");
-    requireOpen();
-    if (date.getYear() < 1 || date.getYear() > 9999) {
-      throw new IllegalArgumentException("invalid transfer date");
-    }
-    String name = date.format(DateTimeFormatter.BASIC_ISO_DATE);
-    try {
-      calls.createDirectory(descriptor, name);
-      calls.sync(descriptor);
-    } catch (StorageIoException ex) {
-      if (ex.reason() != StorageIoException.Reason.COLLISION) {
-        throw ex;
+  OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(date, "date");
+      requireOpen();
+      if (date.getYear() < 1 || date.getYear() > 9999) {
+        throw new IllegalArgumentException("invalid transfer date");
       }
-      // EEXIST proves no type/ownership: openDirectory still performs O_DIRECTORY|O_NOFOLLOW.
+      String name = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+      try {
+        calls.createDirectory(descriptor, name);
+        calls.sync(descriptor);
+      } catch (StorageIoException ex) {
+        if (ex.reason() != StorageIoException.Reason.COLLISION) {
+          throw ex;
+        }
+        // EEXIST proves no type/ownership: openDirectory still performs O_DIRECTORY|O_NOFOLLOW.
+      }
+      return new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
     }
-    return new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
   }
 
-  synchronized <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
-    return atFile(id, ".part", operation);
+  <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      return atFile(id, ".part", operation);
+    }
   }
 
-  synchronized <T> T atReady(UUID id, FileOperation<T> operation) throws StorageIoException {
-    return atFile(id, ".ready", operation);
+  <T> T atReady(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      return atFile(id, ".ready", operation);
+    }
   }
 
   private <T> T atFile(UUID id, String suffix, FileOperation<T> operation)
@@ -96,18 +104,22 @@ final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /** Atomic no-replace publication, then directory durability; never unlinks ready on failure. */
-  synchronized void publish(UUID id) throws StorageIoException {
-    Objects.requireNonNull(id, "id");
-    requireOpen();
-    calls.publish(descriptor, id + ".part", id + ".ready");
-    calls.sync(descriptor);
+  void publish(UUID id) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(id, "id");
+      requireOpen();
+      calls.publish(descriptor, id + ".part", id + ".ready");
+      calls.sync(descriptor);
+    }
   }
 
   /** Only a writer-owned part may be removed; no ready/root/directory deletion API exists. */
-  synchronized void deletePart(UUID id) throws StorageIoException {
-    Objects.requireNonNull(id, "id");
-    requireOpen();
-    calls.unlink(descriptor, id + ".part");
+  void deletePart(UUID id) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(id, "id");
+      requireOpen();
+      calls.unlink(descriptor, id + ".part");
+    }
   }
 
   private void requireOpen() throws StorageIoException {
@@ -118,11 +130,13 @@ final class OwnedTransferDirectory implements AutoCloseable {
 
   /** Consume ownership before close: even an interrupted/failed close must not reuse the FD. */
   @Override
-  public synchronized void close() throws StorageIoException {
-    if (descriptor >= 0) {
-      int previous = descriptor;
-      descriptor = -1;
-      calls.close(previous);
+  public void close() throws StorageIoException {
+    synchronized (stateLock) {
+      if (descriptor >= 0) {
+        int previous = descriptor;
+        descriptor = -1;
+        calls.close(previous);
+      }
     }
   }
 }

@@ -18,6 +18,20 @@ import org.junit.jupiter.api.parallel.Isolated;
 @Isolated("Temporarily remove JCA providers to verify fail-closed startup")
 final class ContextHashTest {
   @Test
+  void bug036CallerMonitorCannotBlockSharedDigest() throws Exception {
+    ContextHash hashes = new ContextHash();
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      synchronized (hashes) {
+        assertEquals(
+            "ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb",
+            executor
+                .submit(() -> hashes.calculate(AuthenticationContext.of("a".repeat(64))))
+                .get(5, java.util.concurrent.TimeUnit.SECONDS));
+      }
+    }
+  }
+
+  @Test
   void asciiVectorsAndConcurrentCallsDoNotShareDigestState() throws Exception {
     ContextHash hashes = new ContextHash();
     String[] expected = {

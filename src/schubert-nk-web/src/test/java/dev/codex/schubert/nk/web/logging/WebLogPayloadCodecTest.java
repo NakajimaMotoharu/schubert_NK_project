@@ -42,6 +42,32 @@ final class WebLogPayloadCodecTest {
   private static final byte[] NONCE = sequence(12, 64);
 
   @Test
+  void bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose() throws Exception {
+    byte[] plaintext = goldenWire();
+    byte[] expected = independentEnvelope("v2", CURRENT, independentAad(IDENTITY, "v2"), plaintext);
+    WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null);
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      synchronized (codec) {
+        executor
+            .submit(
+                () -> {
+                  assertArrayEquals(expected, codec.encrypt(IDENTITY, plaintext).ciphertext());
+                  assertArrayEquals(
+                      plaintext,
+                      codec.decrypt(IDENTITY, new EncryptedWebLogPayload("v2", expected)));
+                  codec.close();
+                  assertThrows(
+                      IllegalStateException.class, () -> codec.encrypt(IDENTITY, plaintext));
+                  return 0;
+                })
+            .get(5, java.util.concurrent.TimeUnit.SECONDS);
+      }
+    } finally {
+      codec.close();
+    }
+  }
+
+  @Test
   void canonicalAadAndFullEnvelopeMatchIndependentVectorAndCopiesAreDefensive() throws Exception {
     byte[] plaintext = goldenWire();
     byte[] sourceKey = CURRENT.clone();

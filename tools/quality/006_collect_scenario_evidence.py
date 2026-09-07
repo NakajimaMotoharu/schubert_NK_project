@@ -32,7 +32,7 @@ def main():
         raise SystemExit("build log is not successful")
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
-    modules, methods = {}, []
+    modules, methods, regressions = {}, [], []
     for module, directory in (("characterization", "program/characterization"),
                               ("protocol", "src/schubert-nk-protocol"),
                               ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web")):
@@ -51,14 +51,18 @@ def main():
                 if any(child.tag not in ("system-out", "system-err") for child in case):
                     raise SystemExit("failure/rerun/flaky/skipped test is not certifiable")
             count += len(cases)
-            if (".api.persistence.Scenario" in suite.get("name", "")
-                    or ".api.storage." in suite.get("name", "")):
+            scenario = (".api.persistence.Scenario" in suite.get("name", "")
+                        or ".api.storage." in suite.get("name", ""))
+            selected = cases if scenario else [c for c in cases if c.get("name", "").startswith("bug036")]
+            if selected:
                 clean = ET.Element("testsuite", {k: suite.get(k) for k in
                                                 ("name", "time", "tests", "errors", "failures", "skipped")})
-                for case in cases:
+                clean.set("tests", str(len(selected)))
+                clean.set("time", str(sum(float(c.get("time", "0")) for c in selected)))
+                for case in selected:
                     attrs = {k: case.get(k) for k in ("name", "classname", "time")}
                     ET.SubElement(clean, "testcase", attrs)
-                    methods.append(attrs["classname"] + "#" + attrs["name"])
+                    (methods if scenario else regressions).append(attrs["classname"] + "#" + attrs["name"])
                 ET.indent(clean)
                 ET.ElementTree(clean).write(evidence / "output" / report.name,
                                             encoding="UTF-8", xml_declaration=True)
@@ -78,6 +82,8 @@ def main():
         modules[module] = {"tests": count, "coverage": counters, "spotbugs": static}
     if not methods:
         raise SystemExit("missing Scenario tests")
+    if len(regressions) != 3 or not any("#bug036" in m for m in methods):
+        raise SystemExit("missing cross-program monitor regression")
     manifest = {
         "runId": run, "programId": "NK-SCN-001", "targetCommit": commit,
         "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
@@ -87,15 +93,15 @@ def main():
                         "postgresql": "18.6", "artemis": "2.56.0",
                         "libc": subprocess.check_output(["getconf", "GNU_LIBC_VERSION"], text=True).strip(),
                         "apiNativeAccess": "ALL-UNNAMED; public Java25 FFM; SSC-019"},
-        "modules": modules, "scenarioMethods": methods,
+        "modules": modules, "scenarioMethods": methods, "crossProgramRegressionMethods": regressions,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
                            "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008"],
         "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
                                   "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT", "PT-SCN-008-F04", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035"],
-        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036"],
+        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",

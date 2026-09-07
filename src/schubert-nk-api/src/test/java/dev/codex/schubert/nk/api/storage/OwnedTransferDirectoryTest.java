@@ -28,6 +28,34 @@ class OwnedTransferDirectoryTest {
   @TempDir Path root;
 
   @Test
+  void bug036CallerMonitorCannotBlockAnyDirectoryOperation() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    try (var parent = OwnedTransferDirectory.open(calls, root);
+        var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      OwnedTransferDirectory child;
+      synchronized (parent) {
+        child = executor.submit(() -> parent.openDate(DATE)).get(5, TimeUnit.SECONDS);
+      }
+      synchronized (child) {
+        executor
+            .submit(
+                () -> {
+                  assertEquals(3L, child.atPart(ID, OwnedTransferDirectoryTest::write));
+                  child.publish(ID);
+                  assertArrayEquals(
+                      new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
+                  child.atPart(ID, OwnedTransferDirectoryTest::write);
+                  child.deletePart(ID);
+                  child.close();
+                  return 0;
+                })
+            .get(5, TimeUnit.SECONDS);
+      }
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
   void f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup() throws Exception {
     FaultCalls calls = new FaultCalls();
     Path trusted = Files.createDirectory(root.resolve("trusted"));
