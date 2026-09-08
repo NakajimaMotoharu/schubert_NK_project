@@ -192,9 +192,9 @@ PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaint
 
 #### 7.2.3 Technical rowの低位store（SSC-040）
 
-`JdbcWebSessionStore`は331 §9.1の10列だけへaccessし、callerの非autoCommit/readOnly=false Connectionを借用する。Connectionのcommit/rollback/closeを所有しない。Statement/ResultSetは各methodで必ずcloseし、SQL/型/NULL/不正row/resource失敗は診断内容を保持しない固定例外。Raw Cookie ID/属性JSONを保存するmethodは作らず、暗号文/key ID型だけをbindする。
+`JdbcWebSessionStore`は331 §9.1の9列だけへaccessし、callerの非autoCommit/readOnly=false Connectionを借用する。Connectionのcommit/rollback/closeを所有しない。Statement/ResultSetは各methodで必ずcloseし、SQL/型/NULL/不正row/resource失敗は診断内容を保持しない固定例外。Raw Cookie ID/属性JSONを保存するmethodは作らず、暗号文/key ID型だけをbindする。
 
-- `findLocked(hash)`: explicit10列＋`WHERE session_id_hash=? FOR UPDATE`。0件はOptional.empty、重複/SQL NULL/DDL値不整合は拒否。期限や暗号正当性をこの低位readで認可しない。
+- `findLocked(hash)`: explicit9列＋`WHERE session_id_hash=? FOR UPDATE`。0件はOptional.empty、重複/SQL NULL/DDL値不整合は拒否。期限や暗号正当性をこの低位readで認可しない。
 - `insert(row)`: 新規version0、更新数1だけ。UPSERTしない。
 - `replace(original,replacement)`: identity(PK/hash/created_at)同一、versionが正確に+1。PK/hash/created_at/元versionをWHEREへbindし、ciphertext/key ID/last access/expiry/max inactive/versionだけ更新。0件はfalse、1件true、その他拒否。
 - `delete(identity,version)`: PK/hash/created_at/元versionに一致するrowだけ削除。0件false/1件true、その他拒否。
