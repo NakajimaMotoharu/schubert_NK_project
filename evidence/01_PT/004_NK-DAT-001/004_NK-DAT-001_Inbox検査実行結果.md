@@ -25,3 +25,9 @@ PG-D-119の構造検査8caseは探索成功。正式clean gate・証跡収集前
 | 時刻 | wire millisecondと保存microsecondの精度変換を区別。同millisのμs違いを正常、隣接millisを異常。PT005 |
 
 正式全回帰と証跡が揃うまでBUG-075/YKT-067は再試験待ち。BUG-014/YKT-012はSQL/参照/起動まで継続。
+
+## 4. 正式01の制限と再試験
+
+PT-ADM-20260909-01（source 5e418c70）は全798件成功、全module build/coverage/静的解析PASS。構造8件も成功したが、BUG-076のcross-manifest参照不備により新004のtrace gateは非合格。生成manifestのscopeResultは構造試験だけを表し、全品質gateの合格として使用しない。
+Web collector015はPT-WEB prefix専用のため当該run IDを受理せず、旧Web証跡を更新していない。次回は全collector共通のPT-WEB prefixでclean実行する。未収集を合格へ加算しない。
+BUG-076の修正前起票は391ea854。相対参照を実pathから計算し、出力前に参照先の同一性・存在・hashを検査する。017の独立fixtureで正しい3段pathを受理、誤った4段/別file/改ざんhash/不存在/範囲外参照を拒否する。再試験後に正式runとhashを固定する。

@@ -7,10 +7,24 @@ Raw JUnit properties, stdout, stderr and ciphertext are never copied.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+
+
+def validate_trace(out, manifest, certified):
+    """Reject missing, redirected or stale links before declaring the slice certified."""
+    linked = out / manifest["fullReactorManifest"]
+    if (linked.resolve() != certified.resolve() or not linked.is_file()
+            or hashlib.sha256(linked.read_bytes()).hexdigest() != manifest["fullReactorManifestSha256"]):
+        raise ValueError("invalid full reactor evidence reference")
+    for entry in manifest["files"]:
+        item = out / entry["path"]
+        if (not item.resolve().is_relative_to(out.resolve()) or not item.is_file()
+                or hashlib.sha256(item.read_bytes()).hexdigest() != entry["sha256"]):
+            raise ValueError("invalid local evidence reference")
 
 
 def main():
@@ -64,7 +78,7 @@ def main():
         "exitCode": 0, "scopeResult": "PASS_STRUCTURE_ONLY", "programStatus": "IN_PROGRESS",
         "startedAt": Path("/tmp", run + ".started").read_text().strip(),
         "completedAt": Path("/tmp", run + ".completed").read_text().strip(),
-        "fullReactorManifest": "../../../../008_NK-SCN-001/evidence/manifest.json",
+        "fullReactorManifest": os.path.relpath(certified, out),
         "fullReactorManifestSha256": hashlib.sha256(certified.read_bytes()).hexdigest(),
         "environment": {"os": "Ubuntu 26.04.1 LTS x86_64", "java": "25.0.4+7", "maven": "3.9.12",
                         "junit": "5.13.4", "jacoco": "0.8.15", "spotbugsPlugin": "4.10.4.0"},
@@ -75,9 +89,10 @@ def main():
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written SS234 wire. No credential or ciphertext saved.",
         "oracle": "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation.",
         "remaining": "DB references, expiry/backup/lock/deletion, least-privilege SQL and oneshot wiring NOT certified.",
-        "related": ["QA-046", "UIC-006", "SSC-049", "BUG-014", "YKT-012", "BUG-075", "YKT-067"],
+        "related": ["QA-046", "UIC-006", "SSC-049", "BUG-014", "YKT-012", "BUG-075", "YKT-067", "BUG-076", "YKT-068"],
         "files": [{"path": "results.xml", "sha256": hashlib.sha256((out / "results.xml").read_bytes()).hexdigest()}]
     }
+    validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(
         hashlib.sha256((out / name).read_bytes()).hexdigest() + "  " + name + "\n"
