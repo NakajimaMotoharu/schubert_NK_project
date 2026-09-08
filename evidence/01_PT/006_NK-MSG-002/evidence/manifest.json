@@ -1,9 +1,9 @@
 {
-  "runId": "PT-MED-20260908-06",
-  "targetCommit": "279f72798abfbfe5d2db7e30f0d4a2dc46c2eebb",
+  "runId": "PT-MED-20260908-07",
+  "targetCommit": "2a0939a7962e93f89c7541d6f5dfb6de6520601a",
   "branch": "dev-media",
-  "startedAt": "2026-09-08T12:52:59+09:00",
-  "completedAt": "2026-09-08T12:56:03+09:00",
+  "startedAt": "2026-09-08T13:05:36+09:00",
+  "completedAt": "2026-09-08T13:08:38+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 292,
+      "tests": 296,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 17343
+          "covered": 17704
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1300
+          "covered": 1324
         },
         "LINE": {
           "missed": 0,
-          "covered": 3930
+          "covered": 4011
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1266
+          "covered": 1297
         },
         "METHOD": {
           "missed": 0,
-          "covered": 601
+          "covered": 611
         },
         "CLASS": {
           "missed": 0,
-          "covered": 131
+          "covered": 133
         }
       },
       "spotbugs": {
@@ -183,7 +183,7 @@
       }
     }
   },
-  "rawLogSha256": "448f803e7ef02ebcd7886baf16e00a9f772cf7089354a031ff41d7480d93c269",
+  "rawLogSha256": "9ba2aee47679214cabd6674aca76cc9270a96363a47b748ed3b562160b18a44b",
   "programId": "NK-MSG-002",
   "programStatus": "IN_PROGRESS",
   "result": "REGRESSION_SLICE_PASS",
@@ -234,7 +234,7 @@
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "a1e76615c612923b48b5815622419044d2ac424454b38cffbcd4a67ed39abfb7"
+      "sha256": "e4fbc3cf0a1b029c45fa0e965d115231640dc1e50da5860f69295697b83d8ae0"
     },
     {
       "path": "coverage/characterization-jacoco.csv",
@@ -437,8 +437,16 @@
       "sha256": "5a1aff6e5f66585f1f70e66fc45af4dc6320d47f7776d9b25caa3af882ea0351"
     },
     {
+      "path": "logs/PT-MED-20260908-06-manifest.json",
+      "sha256": "2e121f36c895feae50da8115abed74ed161ac19d3192c4ba127613123f0e407e"
+    },
+    {
       "path": "logs/PT-MED-20260908-06-summary.json",
       "sha256": "dc1476d21bad4c812464bcc6e8d2171031fdc739a7826abb8e3c09a3565fbb04"
+    },
+    {
+      "path": "logs/PT-MED-20260908-07-summary.json",
+      "sha256": "063bddc236fbdde1c6630adbc4326542b1b9afffbd64646fdf52c7c6d4f907d3"
     },
     {
       "path": "logs/PT-SCN-20260908-16-manifest.json",
@@ -542,11 +550,11 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-      "sha256": "edcf43350baadb29c0ec0c0a33c6bb068eea0084ce0852313f3e3c6d095ea7e9"
+      "sha256": "c9ac8c53219520421006cf2ca9a5c6651d34dd94fe9c041c579f8b7edfd5aff0"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
-      "sha256": "03ba4fe8d4b66cb9d7c07d6c9d0cc72d3f4a32078a40afe3c610bc8f9953142f"
+      "sha256": "446d9b123da5fdbb78b6992e246e3fb91d7c6474b5a6699d15baf3757c805a7e"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
