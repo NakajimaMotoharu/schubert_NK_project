@@ -1,5 +1,7 @@
 # User照会request / snapshot 探索・障害監査
 
+正式再試験: PT-ADM-20260908-09、source b59a5dc7259c0da1635f96e3af1947b475e02b31、17:48:28～17:52:16 JST、exit0。全599件（API368）/Admin47、全module全coverage100%、NullAway/format/Enforcer PASS、SpotBugs0。BUG050/051・YKT045/046の全対象再試験PASS。詳細Test ID/環境/command/期待・実際/path/hashはmanifest。
+
 2026-09-08 JST、dev-admin。Java25.0.4、Maven3.9.12、既存隔離PostgreSQL18.6/Flyway、合成fixtureのみ。ProductionはUserQueryRequest/UserQueryReplayService、PT-ADM-040～047。探索は正式合格に加算せず、下記raw logは/tmpのみ、hashとsanitized分類を保存する。
 
 Command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am -Dtest=FieldCodecTest,OwnedTransferDirectoryTest,UserQueryRequestTest,UserQueryReplayServiceTest test org.jacoco:jacoco-maven-plugin:0.8.15:report`
