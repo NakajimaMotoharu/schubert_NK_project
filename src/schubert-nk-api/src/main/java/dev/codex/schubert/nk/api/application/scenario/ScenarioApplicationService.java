@@ -5,10 +5,12 @@ import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.ScenarioFileInspector;
 import dev.codex.schubert.nk.api.file.ScenarioFilePublisher;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionConsistency;
 import dev.codex.schubert.nk.api.idempotency.InboxException;
 import dev.codex.schubert.nk.api.idempotency.InboxExecutionStatus;
 import dev.codex.schubert.nk.api.idempotency.InboxRequest;
 import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.MessageStageGuard;
 import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor;
 import dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshot;
 import dev.codex.schubert.nk.api.persistence.ScenarioQueryException;
@@ -23,13 +25,11 @@ import dev.codex.schubert.nk.protocol.layout.FixedPayload;
 import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.io.IOException;
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -54,7 +54,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
   private final ScenarioFileInspector inspector;
   private final Clock clock;
   private final Supplier<UUID> identifiers;
-  private final ScenarioMessageGuard guard = new ScenarioMessageGuard();
+  private final MessageStageGuard guard = new MessageStageGuard();
 
   public ScenarioApplicationService(
       DataSource database,
@@ -245,7 +245,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
           execution.status()
               == (replay ? InboxExecutionStatus.REPLAY : InboxExecutionStatus.EXECUTED));
       if (prepared instanceof Replay saved) {
-        require(sameSaved(saved.completion(), completion));
+        require(InboxCompletionConsistency.sameSaved(saved.completion(), completion));
         if (saved.replacement().isPresent()) {
           InboxCompletion replacement =
               responses.replaceFile(request, actor, completion, saved.replacement().orElseThrow());
@@ -272,24 +272,6 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
         canonical,
         received,
         received.plusSeconds(86400));
-  }
-
-  private static boolean sameSaved(InboxCompletion expected, InboxCompletion current) {
-    if (expected.state() != current.state()
-        || !expected.resultReference().equals(current.resultReference())
-        || !expected.responseLayoutId().equals(current.responseLayoutId())
-        || !expected.responseVersion().equals(current.responseVersion())
-        || !expected.completedAt().equals(current.completedAt())) return false;
-    var a = expected.responseSnapshot().orElseThrow(TemporaryInfrastructureException::new);
-    var b = current.responseSnapshot().orElseThrow(TemporaryInfrastructureException::new);
-    if (!a.keyVersion().equals(b.keyVersion())) return false;
-    byte[] left = a.ciphertext(), right = b.ciphertext();
-    try {
-      return MessageDigest.isEqual(left, right);
-    } finally {
-      Arrays.fill(left, (byte) 0);
-      Arrays.fill(right, (byte) 0);
-    }
   }
 
   private <T> T transaction(boolean readOnly, SqlOperation<T> operation) {

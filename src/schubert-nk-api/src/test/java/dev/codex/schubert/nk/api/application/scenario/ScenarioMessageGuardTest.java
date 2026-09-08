@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.application.scenario;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
+import dev.codex.schubert.nk.api.idempotency.MessageStageGuard;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 final class ScenarioMessageGuardTest {
   @Test
   void sameMessageAndHashCollisionSerializeButNeverShareResults() throws Exception {
-    var guard = new ScenarioMessageGuard();
+    var guard = new MessageStageGuard();
     UUID message = new UUID(0, 1);
     assertThrows(NullPointerException.class, () -> guard.execute(null, () -> 1));
     assertThrows(NullPointerException.class, () -> guard.execute(message, null));
@@ -80,7 +81,7 @@ final class ScenarioMessageGuardTest {
 
   @Test
   void differentStripesRunTogetherAndCallerMonitorDoesNotBlock() throws Exception {
-    var guard = new ScenarioMessageGuard();
+    var guard = new MessageStageGuard();
     try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {
       var allEntered = new CountDownLatch(8);
       var release = new CountDownLatch(1);
@@ -114,7 +115,7 @@ final class ScenarioMessageGuardTest {
 
   @Test
   void interruptAndCallbackFailuresReleaseOnlyOwnedLocks() throws Exception {
-    var guard = new ScenarioMessageGuard();
+    var guard = new MessageStageGuard();
     UUID message = new UUID(0, 1);
     try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {
       var held = new CountDownLatch(1);
