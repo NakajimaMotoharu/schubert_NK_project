@@ -23,4 +23,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 ## 正式gateと残件
 
-PT-WEB-20260908-08を予定。探索coverageは累積であり正式clean verifyが最終判定。最終Security chain/MQ認証/custom Login strategy/Logout revoke・queue/本番redacting監査403 handler/全画面/起動とlogger固定/実NK CHRは未完了。特にCsrfFilter loggerをWARN以上へ固定、secret-bearing拒否例外のmessage/causeを表示しないこと、null-saveをLogout coordination後だけ使うことを継続gateとする。PT callbackは固定403とcall countだけの代替であり、実監査完了を偽らない。IT/ST完了ではない。
+正式PT-WEB-20260908-08、source22c40bdb9871629d5d0aa2757f275a886e2b65f8、21:39:46～21:44:10 JST、exit0。全678件（Protocol80/Storage34/API394/Web129/CHR41）、新4件を含むWeb53件PASS。全5対象module line/method/class/branch各100%、NullAway/Enforcer/format PASS、SpotBugs0、新BUGなし。002/manifest/checksumsで実行環境・Test ID・hashを追跡。最終Security chain/MQ認証/custom Login strategy/Logout revoke・queue/本番redacting監査403 handler/全画面/起動とlogger固定/実NK CHRは未完了。特にCsrfFilter loggerをWARN以上へ固定、secret-bearing拒否例外のmessage/causeを表示しないこと、null-saveをLogout coordination後だけ使うことを継続gateとする。PT callbackは固定403とcall countだけの代替であり、実監査完了を偽らない。IT/ST完了ではない。
