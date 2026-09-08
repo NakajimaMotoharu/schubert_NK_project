@@ -2,6 +2,8 @@
 
 ## 1. 目的・追跡
 
+SSC-027具体化: `.api.application.scenario.ScenarioApplicationService`がSyncRequestProcessorとして内部段階処理を所有する。process/decode/guard→inspect（非更新認証/Inbox/query）→prepare（DB外file）→complete（再認証/通常Inbox/必要時descriptor暗号置換）→commit/close後replyの順。Private sealed Work/Preparedで新規query・確定error・既存snapshotを区別し、repository/storage実装を同classへ複製しない。JMS send/ACKは既存SyncRequestListener、root/鍵closeは起動所有者。single-instance/full root/readinessを実装するまで本番dispatcherへ登録しない。PT-SCN-009-T01～T07。
+
 Web Java、API Java、batch、固定長共通部品のMaven module、package、主要class、責務および依存禁止を定める。
 
 - 関連UI: 211～213、221～237、241～243、251～253、261 SS-001/007～013

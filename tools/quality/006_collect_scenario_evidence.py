@@ -104,6 +104,13 @@ def main():
                 raise SystemExit("refusing to overwrite archived JUnit evidence")
             report.rename(destination)
     required_methods = {
+        "PT-SCN-009-T01": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
+        "PT-SCN-009-T02": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
+        "PT-SCN-009-T03": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
+        "PT-SCN-009-T04": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#oneHundredSameMessagesGenerateOnceAndFinalAuthenticationWins",
+        "PT-SCN-009-T05": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#failuresAtEveryTransactionFileClockAndIdentityBoundaryNeverClaimSuccess",
+        "PT-SCN-009-T06": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#brokerSendAndAckFailuresReplayOneCommittedResult",
+        "PT-SCN-009-T07": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes",
         "PT-IDEM-SR01": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
         "PT-IDEM-SR02": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
         "PT-IDEM-SR03": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
@@ -131,7 +138,7 @@ def main():
                         "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"},
         "modules": modules, "scenarioMethods": methods, "testIdMethods": required_methods, "crossProgramRegressionMethods": regressions,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
-                           "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008", "PT-SCN-008-F04"],
+                           "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008", "PT-SCN-008-F04", "PT-SCN-009"],
         "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
                                   "PT-SCN-008-F01", "PT-SCN-008-F02-CORE", "PT-SCN-008-F03",
                                   "PT-SCN-008-A01", "PT-SCN-008-A02", "PT-SCN-008-A03", "PT-SCN-008-A04",
@@ -148,20 +155,21 @@ def main():
                                   "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04",
                                   "PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04",
                                   "PT-IDEM-SR01", "PT-IDEM-SR02", "PT-IDEM-SR03",
+                                  "PT-SCN-009-T01", "PT-SCN-009-T02", "PT-SCN-009-T03", "PT-SCN-009-T04", "PT-SCN-009-T05", "PT-SCN-009-T06", "PT-SCN-009-T07",
                                   "PT-SCN-009-Q01", "PT-SCN-009-Q02", "PT-SCN-009-Q03", "PT-SCN-009-Q04",
                                   "PT-SCN-009-S01", "PT-SCN-009-S02", "PT-SCN-009-S03", "PT-SCN-009-S04", "PT-SCN-009-S05", "PT-SCN-009-S06",
                                   "PT-SCN-009-G01", "PT-SCN-009-G02", "PT-SCN-009-G03",
                                   "PT-SCN-009-F01", "PT-SCN-009-F02", "PT-SCN-009-F03",
                                   "PT-SCN-009-V01", "PT-SCN-009-V02", "PT-SCN-009-V03"],
-        "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS", "PT-SCN-009"],
+        "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022", "SSC-023", "SSC-024", "SSC-025", "SSC-026", "SSC-027"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036", "BUG-037"],
-        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032", "YKT-033"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022", "SSC-023", "SSC-024", "SSC-025", "SSC-026", "SSC-027"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036", "BUG-037", "BUG-038"],
+        "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032", "YKT-033", "YKT-034"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),
         "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
         "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
-        "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. An internal exclusive-startup diagnostic probe now verifies real A/B file force/hash/group, no-replace collision and directory fsync; only confirmed diagnostic artifacts are cleaned, while uncertain/changed ready files or cleanup failures remain failed startup evidence. Full root/exclusive startup composition/readiness and scan-to-service initialization, service registration/staged authentication Inbox, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
+        "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. An internal exclusive-startup diagnostic probe now verifies real A/B file force/hash/group, no-replace collision and directory fsync; only confirmed diagnostic artifacts are cleaned, while uncertain/changed ready files or cleanup failures remain failed startup evidence. Internal staged Scenario service now connects read-only authentication/Inbox/query, DB-free file work and freshly authenticated final Inbox commit/close before reply. T01-T05 use explicit publisher/inspector doubles; T06 connects real PostgreSQL/Artemis send/ACK failures; T07 connects real retained-inode writer/inspector and PostgreSQL with independent 201/10000-record bytes/hash and ready preservation. Full root/exclusive startup composition/readiness and scan-to-service initialization, production registration, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
     }
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
