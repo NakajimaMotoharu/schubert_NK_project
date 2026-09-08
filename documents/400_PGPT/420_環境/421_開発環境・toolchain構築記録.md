@@ -154,6 +154,12 @@ libc symbol署名とABIは固定し、openatのvariadic境界とerrno captureを
 
 Session属性JSONにはAPI側で既に固定導入済みのGson2.14.0をWebへcompile依存追加。入手元はMaven Central `com/google/code/gson/gson/2.14.0/gson-2.14.0.jar`、SHA256 `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f`。既存local cacheを使用し、他依存versionは変更しない。2026-09-08 19:32:03、完全修飾`org.apache.maven.plugins:maven-dependency-plugin:3.9.0:tree -Dincludes=com.google.code.gson:gson`のoffline Web reactor出力でcompile2.14.0を確認。command/log hashは015/evidence/logs/attributes-exploration.md。streaming Strictness.STRICT/型・重複key・nesting/byte境界を独立7PT、初回8PTはJDKのみ。Spring framework配線完了と混同しない。
 
+### 5.6 Spring Session API実体確認（2026-09-08、dependency追加前）
+
+Maven Centralの`org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1-sources.jar`をwgetで`/tmp/schubert-spring-session-core-4.1.1-sources.jar`へ取得、SHA256 `d75a8e9c32c2357255971a4cd9330f463e0e5e2ac26e7024bd4a7785606f0bad`。`unzip -p`でSession/SessionRepository/SessionRepositoryFilterを読み、Javadoc404を回避した。これは調査sourceで、Web runtime dependency追加/起動済みとはしない。
+
+SessionRepositoryはcreate/save/findById(nullable)/deleteById、saveはvoid。SessionはchangeSessionId、nullable属性read、null値setでremove、creation/last access/max idle/isExpiredを持つ。Filterはrequest読取時にInstant.nowでlast accessを設定し、response commit前にrepository.saveを呼ぶ。従ってadapterではDB microsecond精度への明示変換と、削除済rowのstale saveを新規insertへ化けさせない制御が必要。Libraryの任意Object属性をそのままserializationせず、SS314の閉schemaへ明示projectionする。実装・接続PTは後続。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
