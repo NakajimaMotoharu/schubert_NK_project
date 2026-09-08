@@ -1,9 +1,9 @@
 {
-  "runId": "PT-ADM-20260908-12",
-  "targetCommit": "7e9fed465bc1f52859f7d24330cea742a81a94cf",
+  "runId": "PT-ADM-20260908-13",
+  "targetCommit": "945d310e0ea88952a44a4a18f7261df392846858",
   "branch": "dev-admin",
-  "startedAt": "2026-09-08T18:47:14+09:00",
-  "completedAt": "2026-09-08T18:51:15+09:00",
+  "startedAt": "2026-09-08T18:59:32+09:00",
+  "completedAt": "2026-09-08T19:03:44+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 387,
+      "tests": 394,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 26880
+          "covered": 27785
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 2060
+          "covered": 2124
         },
         "LINE": {
           "missed": 0,
-          "covered": 5942
+          "covered": 6126
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1966
+          "covered": 2027
         },
         "METHOD": {
           "missed": 0,
-          "covered": 896
+          "covered": 922
         },
         "CLASS": {
           "missed": 0,
-          "covered": 188
+          "covered": 198
         }
       },
       "spotbugs": {
@@ -183,7 +183,7 @@
       }
     }
   },
-  "rawLogSha256": "8b2e66b2f7c85f4329271f8b88d9fd6061584e1f672b41fd32035343a4ee3784",
+  "rawLogSha256": "54ec31939264d405bec5384954a086428b08ddf4638b0b5e4ffbd05b9b9e055b",
   "programId": "NK-MSG-002",
   "programStatus": "IN_PROGRESS",
   "result": "REGRESSION_SLICE_PASS",
@@ -254,7 +254,7 @@
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "3ba8975a79e1ebe403719892f7586f0d5e4a86fda1a66d50609b506fb192c8b5"
+      "sha256": "f9bccda479042e3c65deb21c6f98d7a100e63e4d17cd3c2aaac8ae869bc1aeeb"
     },
     {
       "path": "coverage/characterization-jacoco.csv",
@@ -413,8 +413,16 @@
       "sha256": "159a5185c46f705adc65df8f8253435b2f194503240dcd834bced2c0decf0d66"
     },
     {
+      "path": "logs/PT-ADM-20260908-12-manifest.json",
+      "sha256": "faa3c41e25ec1803262f8d9cbb4cffdbad5729306f9f54b84204eb8c5d53aadb"
+    },
+    {
       "path": "logs/PT-ADM-20260908-12-summary.json",
       "sha256": "5b231d4e85ea43463aee3482f76814f6fb8db50ab6834367cba7217ae7142da6"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-13-summary.json",
+      "sha256": "357328ee315fdcbd7f9ee448ac4f88939314404eab5bffdb27285e630bde6847"
     },
     {
       "path": "logs/PT-AUT-20260908-07-manifest.json",
@@ -690,7 +698,7 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
-      "sha256": "457a1f484f6ef0e02ed974b316f528ad716dba43862943356c49bcaecb515833"
+      "sha256": "4ae7fc067ef7fc5ceb7ea1a8cdb6e95bfee39f13a7ffd060c8fa2b0559ce07c7"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
@@ -702,11 +710,11 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-      "sha256": "a8cf691f68ceac0c5f10e39a5bbe6522101d605c5337adb508fb4d3d859936cc"
+      "sha256": "77aabf5af4aef82b3284160ab1e509b27bcd318fb14bde7c0e1abbc869027131"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
-      "sha256": "d290e785c08733bb08d849cafb86e2463efb0116479ec9275b483604be2ac374"
+      "sha256": "33be3b940cc3854672a01de9939e290ed5a9ca5e579d7d20063840702e0cfc21"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",

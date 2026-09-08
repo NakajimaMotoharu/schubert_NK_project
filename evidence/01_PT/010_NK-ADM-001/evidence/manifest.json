@@ -1,9 +1,9 @@
 {
-  "runId": "PT-ADM-20260908-12",
-  "targetCommit": "7e9fed465bc1f52859f7d24330cea742a81a94cf",
+  "runId": "PT-ADM-20260908-13",
+  "targetCommit": "945d310e0ea88952a44a4a18f7261df392846858",
   "branch": "dev-admin",
-  "startedAt": "2026-09-08T18:47:14+09:00",
-  "completedAt": "2026-09-08T18:51:15+09:00",
+  "startedAt": "2026-09-08T18:59:32+09:00",
+  "completedAt": "2026-09-08T19:03:44+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 387,
+      "tests": 394,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 26880
+          "covered": 27785
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 2060
+          "covered": 2124
         },
         "LINE": {
           "missed": 0,
-          "covered": 5942
+          "covered": 6126
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1966
+          "covered": 2027
         },
         "METHOD": {
           "missed": 0,
-          "covered": 896
+          "covered": 922
         },
         "CLASS": {
           "missed": 0,
-          "covered": 188
+          "covered": 198
         }
       },
       "spotbugs": {
@@ -183,12 +183,12 @@
       }
     }
   },
-  "rawLogSha256": "8b2e66b2f7c85f4329271f8b88d9fd6061584e1f672b41fd32035343a4ee3784",
+  "rawLogSha256": "54ec31939264d405bec5384954a086428b08ddf4638b0b5e4ffbd05b9b9e055b",
   "programId": "NK-ADM-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
-    "program": 66,
-    "reactor": 618
+    "program": 73,
+    "reactor": 625
   },
   "testIdMethods": {
     "PT-ADM-001": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
@@ -256,7 +256,14 @@
     "PT-ADM-063": "dev.codex.schubert.nk.api.application.log.LogRequestTest#adm063ConcurrentCanonicalBuffersRemainIndependent",
     "PT-ADM-064": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm064FrozenRecordsAndCapacityRebuildExactReplies",
     "PT-ADM-065": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm065CorruptSnapshotsAndPublicBoundariesFailClosed",
-    "PT-ADM-066": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm066ConcurrentSnapshotsDoNotShareBodiesOrHeaders"
+    "PT-ADM-066": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm066ConcurrentSnapshotsDoNotShareBodiesOrHeaders",
+    "PT-ADM-067": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm067QueriesCommitFrozenRecordsAndFullRetention",
+    "PT-ADM-068": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm068BothStagesRecheckIdentityRoleAndAuditDenials",
+    "PT-ADM-069": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm069DatabaseCryptoAndResourceFailuresRollbackSafely",
+    "PT-ADM-070": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm070ConcurrentQueriesUseOnlyTheWinningSnapshot",
+    "PT-ADM-071": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm071SavedRowsCannotDisappearOrChangeBetweenStages",
+    "PT-ADM-072": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm072BrokerFailuresReplayOneCommittedLogResult",
+    "PT-ADM-073": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm073PublicBoundariesAndAuditAllowlistAreExplicit"
   },
   "methods": [
     "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
@@ -324,10 +331,18 @@
     "dev.codex.schubert.nk.api.application.log.LogRequestTest#adm061CanonicalPreservesEveryOriginalFilterAndDate",
     "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm065CorruptSnapshotsAndPublicBoundariesFailClosed",
     "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm066ConcurrentSnapshotsDoNotShareBodiesOrHeaders",
-    "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm064FrozenRecordsAndCapacityRebuildExactReplies"
+    "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest#adm064FrozenRecordsAndCapacityRebuildExactReplies",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm072BrokerFailuresReplayOneCommittedLogResult",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm067QueriesCommitFrozenRecordsAndFullRetention",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm073PublicBoundariesAndAuditAllowlistAreExplicit",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm071SavedRowsCannotDisappearOrChangeBetweenStages",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm068BothStagesRecheckIdentityRoleAndAuditDenials",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm070ConcurrentQueriesUseOnlyTheWinningSnapshot",
+    "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest#adm069DatabaseCryptoAndResourceFailuresRollbackSafely"
   ],
   "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
   "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
+  "logApplication": "PT-ADM-067..073 / PG-D-092: actual PostgreSQL read-only current ADMIN/query-or-verified-snapshot followed by fresh identity/role/owner and short Inbox/critical-audit write transaction, with JDBC close between stages and before wire/JMS. Independent UI235 whole-wire/JCE/LP-HMAC/SQL assertions: zero/one/100 rows, last-page clamp, filters, completed_at+24h and NONE, persistent9001, frozen0000/replay0200 after Log changes; replay audit is visible to a new broad search but never appended to old snapshots. Nonpersistent0102/0103 with current-actor-only closed LOG audit, canonical/owner mismatch audited then permanent rejection. 100 same/different messages and conflicting query/owner races, PROCESSING, disappeared/modified snapshots, every JDBC stage, rollback/audit/clock/UUID/crypto and committed-but-unsent boundary fail closed. Real Artemis send/ACK/DB faults redeliver count2, one Inbox, exact body/properties and DLQ/drain. Constructor/null, ownership, audit allowlist/bytes and standard UUID covered. No new defect observed; global registration/HTTP/startup/actual NK CHR and IT/ST remain incomplete.",
   "logRequestReplay": "PT-ADM-061..066 / SSC037 / PG-D-091: strict LGS656 and one decoded value for original nine-field HMAC and real ADMIN read-only query. Independent NULL LP/JCE, all128 optional-presence combinations, UTF8/NFC/case/leading-space/literal filter and UTC T1 timestamp identity, N6/pageSize100. Independent UI235 header256/PAGED48/LOG2088 full wire and JCE/Deflater envelope, zero/one/100 records and all optional fields, initial0000/replay0200, persistent9001 only/NONE and completion microseconds. Authenticated corrupt header/record/page/state/ref/time/layout/version/AAD/owner/key/cipher, public NULL/scope/role/closed-key failures reject. 100 independent canonical buffers zero on close and 100 independent full encrypted snapshots/replies. BUG054 authorization negative-oracle corrected, YKT049 query contracts reviewed and retested. Current authentication, 24-hour DB retention, Inbox/audit/JMS outer application and HTTP remain pending, not waived.",
   "logQuery": "PT-ADM-055..060 / PG-D-090 / SSC036: actual PostgreSQL app_logs projection, current verified ADMIN required and caller read-only ownership. One fixed-column/predicate count/list statement, 100 rows/page and occurredAt/id descending, capacity99999900, independent literal2088-byte records and exact optional/status/elapsed/UUID/inet/JSONB fields. Keyword in message/details, escaped literal path, category/action/level predicates; UI-approved INFO/WARN/ERROR subset consistently excludes but never deletes diagnostic TRACE/DEBUG. Optional date endpoints, inclusive DB microseconds, <=31 days when both present, wire-only millisecond truncation. Null/unknown/invalid/overflow/JDBC/close/aggregate faults fixed and 100 reads while writer locks held. BUG052 explicit-column SQL and BUG053 trailing-padding oracle corrected; no extra projection or wire enum changes. Request/replay/outer transaction/HTTP remain pending.",
   "queryApplication": "PT-ADM-048..054 / PG-D-089: actual PostgreSQL read-only preflight/query or verified frozen response, then fresh current identity/ADMIN/owner verification and short write Inbox/critical-audit transaction. Connection closes between stages and before wire/JMS. Independent wire and SQL retention completed_at+24h, 0000/0200, persistent0104/9001 and nonpersistent0102/0103; original body/version/expiry survive current User changes. Same-Message query/owner mismatch audits and DLQs, 100 same/different Message and conflicting-query/owner races use the DB winner only. Lost/changed encrypted snapshot or keys fail closed. DB/open/NULL/prepare/close/commit/rollback/audit/clock/UUID/crypto failures include committed-but-unsent retry. Real Artemis send/ACK faults redeliver with deliveryCount2 and one Inbox; exact broker body/properties/queue drain. No global dispatcher, HTTP or startup registration claim.",
@@ -379,11 +394,11 @@
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "3ba8975a79e1ebe403719892f7586f0d5e4a86fda1a66d50609b506fb192c8b5"
+      "sha256": "f9bccda479042e3c65deb21c6f98d7a100e63e4d17cd3c2aaac8ae869bc1aeeb"
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "fb7c9faf44c298c40507b33b24ef1b36f9b187bc88f1c0997eae83f8f02d1de6"
+      "sha256": "30f2782cdcc4ad4f23013569d1c727d1292e2fda66d024a69de109cc930646d7"
     },
     {
       "path": "logs/BUG-045-YKT-040.md",
@@ -446,6 +461,10 @@
       "sha256": "2cdf9da30f080614f4847b5d1cdef03006edccfca8c014a691e1991732d12b32"
     },
     {
+      "path": "logs/PT-ADM-20260908-13-summary.json",
+      "sha256": "5457fd691042a4ba1b5c9c51af8e68a5eec02346160ce0e983aba6acad3f39a5"
+    },
+    {
       "path": "logs/application-exploration.md",
       "sha256": "3f91b346aac5c7f3afee7f9923faf903a885a36c9892e9e268a3364f1ae87a08"
     },
@@ -456,6 +475,10 @@
     {
       "path": "logs/command-exploration.md",
       "sha256": "c4af4ed4f466fee72432dd3160e4ec381d0cb2b12ab4bc8d1536e869c8093c49"
+    },
+    {
+      "path": "logs/log-application-exploration.md",
+      "sha256": "39c32c440ad33ec40deefcde1f6da7672e97a69702fef56f235b3f7ae6c64d75"
     },
     {
       "path": "logs/log-query-exploration.md",
@@ -487,51 +510,55 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
-      "sha256": "fa5b4d9e6f8e65d6f339eb406c2e46255788dad84b010ec52f72f82eec667c1f"
+      "sha256": "3e1e4b107a2401229a92ccd6de6adff92bb4dab563838bda74835b1920f6d4de"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
-      "sha256": "37816ddb0bab008526e1466f456327f4eb950610d5e4ecb57528977d95bd6f0d"
+      "sha256": "0c186fb97d73aca030d7422c000a9278da06091a2a553f670d4054cdee67cdc9"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
-      "sha256": "70ec7bd94460edb58298f834771c3efe0530c859d7d4cd9e1bde274823b17993"
+      "sha256": "7b1ccb9f34bc5b4f549b3ba1dfb45d26096324704bfeb5c3866b79c89b4a1885"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
-      "sha256": "1da467472faee310a362f7dab34925c569a9c9d02bc18191a752019693874d08"
+      "sha256": "edf451bbbc45f17451cbe8d17c12fd347277acbc135375675c6495af609c58b3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
-      "sha256": "ff70d4d80dd0dda844eb4961136d541139758023845014d886ce23ef42ff8222"
+      "sha256": "aca1d70e424d2915bc961f09bb9360f836a40ca4b0f87e76b2a31e63574647d2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
-      "sha256": "c94bf5116cc0edd37ddaf1ed6518fbdcb79ffd5d26ad0dc35a00b8c19deb48bf"
+      "sha256": "c56a229da944a80d9e73ad15695b52fe3aceaa9b81cec58dc7a90d6863b36f5d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
-      "sha256": "1fa29972eb06178a4110c4801b9bbd766995c7eff83777ba14617e68dfeafc16"
+      "sha256": "b7ae79a74321a4c25ea94e666b20e65f1897f7554be1ff712f1366e103eca460"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "8744aa86b1c55229595788a60d7809d4d505a08854977564ef76914a7952e9a5"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
-      "sha256": "c472005066a75455eec580d8b581f02da8e2c9a6a7f37c17572a494a895c6ab1"
+      "sha256": "f8e53a8372bcc8f7146ff3a10a625bed61d6d6be0a10a8d3898d82e97ceaaa71"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
-      "sha256": "add0c38697ae277d378055b246c6b12c90fa3a34d5b25fe90ccc1b0667a85114"
+      "sha256": "9211429541581b3707922788232b8faded935e979a3adf89affc845ff5c41995"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
-      "sha256": "ee88eea723bd1da172b41ece4c03b102692d80abc628a1ad24cb464e3a5f5c96"
+      "sha256": "74d978a9318446ea82176dbcd14541844460ea4639efdd853b21ae232496bdb6"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
-      "sha256": "86004878f3ab4ba0401609e610b7844e711fa7487014a6b1d6245452ef4c07a6"
+      "sha256": "b398cf9e680392ab57331e8e50bb438fd5a357566ff1b1989ca1b2d50012bff8"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
-      "sha256": "dfeb93de81ce0ed489415d07c301ed17c61fd58eb570687fe37c214e8cae4286"
+      "sha256": "f8e2435bdb2c1695cad55573782c2030d0053f740e0a44b7366a156736bb5bef"
     }
   ]
 }
