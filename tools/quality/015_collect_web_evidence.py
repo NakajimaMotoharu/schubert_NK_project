@@ -43,6 +43,15 @@ def main():
             (13, "web013UnicodeSavedTargetsAndTokenPurposesPreserveMeaning"),
             (14, "web014IndependentDecodeAcceptsOrderButRejectsInvalidValues"),
             (15, "web015ConcurrentAttributesHaveNoCrossSessionState")),
+        "dev.codex.schubert.nk.web.session.SessionPayloadCodecTest": (
+            (16, "web016IndependentEnvelopeAndDefensiveOwnership"),
+            (17, "web017CurrentPreviousAndUnknownKeyFailClosed"),
+            (18, "web018EnvelopeAndEveryAadFieldMutationReject"),
+            (19, "web019AuthenticatedInvalidJsonAndSizeBoundariesReject"),
+            (20, "web020NullConfigurationIdentityAndClosedLifetime"),
+            (21, "web021ConcurrentNonceAndCallerMonitorIsolation"),
+            (22, "web022ProviderAndRandomFailuresAreRedacted"),
+            (23, "web023RotationKeysAndCloseAreSerialized")),
     }
     methods, reports = [], {}
     for classname, cases in groups.items():
@@ -83,8 +92,9 @@ def main():
         "inputAndExpected": "PT-WEB-001..008 / PG-D-093: synthetic 32-byte zero/sequence/FF CSPRNG data with independent Python base64/hashlib fixed vectors; canonical unpadded43-character base64url and raw-ASCII SHA256 lookup, temporary random/decode/hash arrays erased. Null/length/alphabet/padding/unused-bits negatives, provider failure and100 concurrent random IDs/per-call hashes. Explicit GET URL strings preserve path/query/Unicode and valid query escapes with no trim/decode; reject schemes/authority/fragment/malformed/control/dot-segments/encoded path delimiters and nonGET. Exact2047/2048/2049 UTF8-byte, malformed surrogate and100 independent query cases. toString and validation errors contain no values.",
         "actual": "All mapped independent assertion sets passed; no failed/skipped/flaky/not-run counted",
         "sessionSchemaExpected": "PT-WEB-009..015 / SSC-038 / PG-D-094: independently handwritten UTF8 JSON for anonymous/authenticated all-or-none principal, every optional combination, USER/ADMIN, ordered0/1/10 purpose-tagged UUIDs, canonical UTC timestamps, NFC64byte usernames, csrf64..128 and saved GET2048byte. Reject missing/duplicate/unknown/null/wrong types, invalid UTF8/BOM/trailing documents, noncanonical UUID/time and over16384byte/deep inputs. Immutable values/collection copies, fixed redacted exceptions without parser cause/suppressed and100 concurrent inputs. BUG-055 malformed loginAt/issuedAt reproduction followed by explicit DateTimeException conversion and regression.",
-        "scope": "Web value and closed JSON boundaries only. Session encryption/repository/fixation/CSRF/security/SavedRequest route allowlist/HTTP/startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
-        "relatedBug": ["BUG-055"], "relatedSsc": ["SSC-038"], "relatedYkt": ["YKT-050"],
+        "sessionEncryptionExpected": "PT-WEB-016..023 / SSC-039 / PG-D-095: independently handcrafted JSON/DataOutputStream seven-field LP AAD and JCE AES256-GCM full NKENC1 envelopes. DB UUID/hash/created_at microseconds bind row; every AAD field and envelope/nonce/tag/body mutation rejects. Current writes/previous reads/unknown key and DB-vs-envelope version mismatch, defensive key/ciphertext copies, nonce erasure, valid16384byte JSON and16436byte envelope limits, authenticated bad JSON/UTF8 reject. Null/config/closed negatives;100 distinct concurrent nonces and attributes; caller-monitor isolation; fixed provider/random failures with no diagnostic cause/suppressed; latch-controlled close serialization and restart/rotation.",
+        "scope": "Web value, closed JSON and session encryption boundaries only. Session repository/invalidation/rotation persistence/fixation/CSRF/security/SavedRequest route allowlist/HTTP/startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
+        "relatedBug": ["BUG-055"], "relatedSsc": ["SSC-038", "SSC-039"], "relatedYkt": ["YKT-050"],
         "notRunCountedAsPass": 0,
         "redaction": "Only allowlisted method names/timing/counters/coverage and metadata. No JVM properties/stdout/stderr, raw cookie/session/context/token/key or database dump.",
     })
