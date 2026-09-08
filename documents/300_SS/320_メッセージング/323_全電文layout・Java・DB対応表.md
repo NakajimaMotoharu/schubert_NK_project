@@ -199,7 +199,9 @@ Ownerは現在API認証actor user IDの十進、version001。Targetは§9どお�
 
 User IDはtargetへ含まれ、§9のpayload表どおり重複fieldを追加しない。Operation tokenはInboxの別keyとして返し、header ID/time/context/CSRF/reserved/paddingとともにcanonical fieldへ混入しない。全5layoutをallowlistし、headerのlayout/version/direction/body長、actual DATA/records、typed semanticを検証してから内部値を作る。同じ内部値からSSC-031 preludeのmutation/targetとUserCommandServiceの入力を生成する。これは認証許可・Inbox NEW判定ではなく、callerが先にそれらを実行する。
 
-Passwordは操作scope内だけの所有char bufferに切り離す。業務commandへは消費される別配列を渡す。CanonicalRequestも独立の所有bufferとして返し、callerが全照合後にcloseする。Request.closeで自分のpasswordをzero fillし、close後のcanonical/command等の再利用を拒否する。wire decodeの一時byteもfinallyで消去、Password/raw token/contextをtoString/log/例外に含めない。Password policy不成立の0100、Username重複の0105（UI236 §4.2）をdecode都合で変更しない。PG-D-084/PT-ADM-024～027で独立LP/JCE-HMAC/手組byte/実PG dispatch/negative/100独立操作を検証し、外側replay/JMS/HTTPは別gateとして継続する。
+Passwordは操作scope内だけの所有char bufferに切り離す。業務commandへは消費される別配列を渡す。CanonicalRequestも独立の所有bufferとして返し、callerが全照合後にcloseする。Request.closeで自分のpasswordをzero fillし、close後のcanonical/command等の再利用を拒否する。wire decodeの一時byteもfinallyで消去、Password/raw token/contextをtoString/log/例外に含めない。
+
+BUG-048/YKT-043の境界明確化: 有効UCR wireのUsernameはUI236 §4.1のASCII allowlistに従い、先頭spaceやslashを許可しない。原値/keyの区別は`New`/`NEW`など有効なcase差で検証する。NFC・byte幅・文字/Password長等のwire semantic不正は既存Protocolの恒久拒否規則を維持する。Web/formと内部commandの防御validationをwireへそのまま持ち込まない。DB依存のUPW target username/password一致はwireだけで判定不能なのでcommand0100、Username重複は0105（UI236 §4.2）。この区別は既存外部仕様/codecを変更するものではない。PG-D-084/PT-ADM-024～027で独立LP/JCE-HMAC/手組byte/実PG dispatch/negative/100独立操作を検証し、外側replay/JMS/HTTPは別gateとして継続する。
 
 ## 10. DB rowとwire recordの分離
 

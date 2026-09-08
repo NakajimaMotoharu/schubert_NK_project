@@ -58,8 +58,16 @@ def main():
         "adm023ResultAndAuditProjectionsContainOnlyApprovedFields",
     ]
     expected.update({f"PT-ADM-{i:03d}": commands + "#" + name for i, name in enumerate(command_names, 14)})
+    requests = "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest"
+    request_names = [
+        "adm024DecodeAndCanonicalMatchIndependentWireAndHmac",
+        "adm025DispatchUsesTheSameDecodedFieldsInRealTransactions",
+        "adm026MalformedNullAndClosedRequestsFailWithoutSecretLeak",
+        "adm027ConcurrentIndependentRequestsNeverShareIdentityOrBuffers",
+    ]
+    expected.update({f"PT-ADM-{i:03d}": requests + "#" + name for i, name in enumerate(request_names, 24)})
     methods, reports = [], {}
-    for classname in (prefix, authentication, commands):
+    for classname in (prefix, authentication, commands, requests):
         report = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + classname + ".xml")
         suite = ET.parse(report).getroot()
         cases = suite.findall("testcase")
@@ -97,7 +105,8 @@ def main():
         "scope": "UserQueryRepository search/detail, redacted query exception, SSC031 administrative authentication prelude, and definite UserCommandService mutations/critical audit/session revocation in a caller-owned transaction. Outer Inbox/HMAC/replay/denial audit registration, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
         "administrativeAuthentication": "PT-ADM-008..013 / SSC-031 / PG-D-082: actual candidate owner lookup, required-only advisory71419601, ordered User union locks, session owner recheck and normal current ADMIN authentication/idle touch. All mutation kinds, reciprocal target and reducing/nonreducing overlap, changed current role/revocation/expiry/owner, independent NOWAIT/advisory/SQL time postconditions, null/row/JDBC/close/clock failures with caller rollback, 100 concurrent authentications. Candidate lookup never authorizes. Full command/Inbox registration remains pending; SSC031 is not closed by this component alone.",
         "administrativeCommands": "PT-ADM-014..023 / PG-D-083: actual PG/Flyway/grants and SSC031 prelude; ASCII username NFC/trim and independent JCA PBKDF2 with parsed stored salt, explicit USRMUT24 golden bytes. Create/status/role/password/unlock SQL postconditions, version/sequence limits and duplicate savepoint recovery, exact microsecond lock/no-op rules, all unrevoked sessions including expired, before/after allowlist audit and partial audit/revocation rollback. Public JDBC fault projections assert fail-closed null/unknown/count/row/resource contracts without private reflection. Password arrays zeroed on success/denial/boundary/encoding faults. 100 same-version contenders, reciprocal ADMIN reduction and 100 distinct targets assert serialized membership/version/audit results. Full message dispatcher/Inbox/HMAC/HTTP registration is still pending.",
-        "relatedBug": ["BUG-045", "BUG-046", "BUG-047"], "relatedSsc": ["SSC-031"], "relatedYkt": ["YKT-040", "YKT-041", "YKT-042"],
+        "mutationRequests": "PT-ADM-024..027 / SSC032 / PG-D-084: independent UI236 byte-offset input and hand-written LP/JCE HMAC expected fields for all five layouts, seven prelude kinds, N12/N9 bounds, independent role/enabled pairs, original-case/key binding, password NFC/256 bytes, separate token/header identity. Same decoded fields drive actual prelude/command/SQL postconditions. Strict wire errors remain protocol errors; database-dependent password/username conflict remains business0100 and duplicate name0105 (BUG048 oracle boundary correction). Independent canonical/request ownership, readOnly command failure, public close and direct test-only security observation of zeroed private buffer, closed-use denial, 100 independent concurrent operations. No private method invocation or coverage-only reflection; no production secret accessor added. Outer Inbox/replay/JMS/HTTP remains pending.",
+        "relatedBug": ["BUG-045", "BUG-046", "BUG-047", "BUG-048"], "relatedSsc": ["SSC-031", "SSC-032"], "relatedYkt": ["YKT-040", "YKT-041", "YKT-042", "YKT-043"],
         "preventionReferences": ["BUG-030/YKT-027 numeric null", "BUG-031/YKT-028 suppressed close redaction", "BUG-044/YKT-039 timestamp Instant oracle"],
         "notRunCountedAsPass": 0,
         "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr, provider row dumps, raw identifiers or credentials.",
