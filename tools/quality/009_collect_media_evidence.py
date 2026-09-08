@@ -32,6 +32,13 @@ def main():
         "PT-MED-005": prefix + "ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
         "PT-MED-006": prefix + "MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
         "PT-MED-007": prefix + "MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer",
+        "PT-MED-026": prefix + "DescriptorFileResolverTest#med026ApprovedAssetsUseVerifiedRetainedReadOnlyChannels",
+        "PT-MED-027": prefix + "MediaRangeServiceTest#med027GetStatusHeadersAndBytesMatchLiteralIntervals",
+        "PT-MED-028": prefix + "MediaRangeServiceTest#med028HeadAndDownloadNeverApplyForbiddenBodyOrRange",
+        "PT-MED-029": prefix + "MediaRangeServiceTest#med029DescriptorBindingRejectsBeforeFileAndPermit",
+        "PT-MED-030": prefix + "MediaRangeServiceTest#med030TwentyStreamsRejectTwentyFirstAndRecoverAllPermits",
+        "PT-MED-031": prefix + "MediaRangeServiceTest#med031IoFailuresReleasePermitsWithoutSecondResponse",
+        "PT-MED-032": prefix + "MediaRangeServiceTest#med032OneHundredCallsHaveIndependentPositionsAndHeaders",
     }
     query = "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#"
     expected.update({
@@ -97,9 +104,9 @@ def main():
     manifest.update({
         "programId": "NK-MED-001", "programStatus": "IN_PROGRESS",
         "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
-        "testIdMethods": expected, "methods": methods, "actual": "All twenty-five independent assertion sets passed",
+        "testIdMethods": expected, "methods": methods, "actual": f"All {len(methods)} mapped independent assertion sets passed",
         "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
-        "scope": "Pure Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared read-only Asset child/entry and complete segment walk/Unix/size-before-after/scoped-channel capabilities only; not authenticated HTTP delivery or a manifest/hash check. Auth/Inbox/manifest/descriptor-to-file adapter/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected. A validated DB projection must not authorize a file response without physical and manifest verification. Selected eight Storage methods overlap Scenario's module regression and are not additive to reactor count.",
+        "scope": "Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared complete retained segment walk/Unix/size-before-after/scoped-channel, Web descriptor-file adapter and internal response-port delivery of 200/206/416/HEAD/download with 20 immediate permits and request binding. Explicit header maps and exact independently patterned body slices, latch-held 20/21 rejection and all-permit recovery, redacted I/O failures/no second response and 100 independent deliveries passed. This is not a registered/authenticated HTTP endpoint or manifest/hash check. Auth/Inbox/manifest/MQ-to-HTTP connection/full startup/client-abort classification/actual NK CHR remain unimplemented or unconnected. Selected eight Storage methods overlap Scenario's module regression and are not additive to reactor count.",
         "relatedBug": [], "relatedSsc": ["SSC-028"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
