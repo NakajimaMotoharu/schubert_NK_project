@@ -34,11 +34,12 @@ class WebSecurityAuditTest {
       {"LOGIN_LOCKED", "LOCKED", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "CSRF", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "ROLE", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "PROXY", "DENIED", "WARN"}
+      {"AUTHORIZATION_DENIED", "PROXY", "DENIED", "WARN"},
+      {"AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", "WARN"}
     };
     for (int i = 0; i < Event.values().length; i++) {
       Event event = Event.values()[i];
-      boolean hasActor = i == 0 || i >= 3;
+      boolean hasActor = i == 0 || (i >= 3 && i <= 5);
       audit.record(
           ID,
           event,
@@ -159,7 +160,8 @@ class WebSecurityAuditTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> audit.record(ID, Event.LOGIN_SUCCEEDED, IP, Optional.empty(), 0, Route.LOGIN));
-    for (Event event : List.of(Event.LOGIN_FAILED, Event.LOGIN_LOCKED))
+    for (Event event :
+        List.of(Event.LOGIN_FAILED, Event.LOGIN_LOCKED, Event.AUTHENTICATION_REQUIRED))
       assertThrows(
           IllegalArgumentException.class, () -> audit.record(ID, event, IP, ACTOR, 0, Route.LOGIN));
     for (Event event : List.of(Event.LOGIN_SUCCEEDED, Event.LOGIN_FAILED, Event.LOGIN_LOCKED)) {

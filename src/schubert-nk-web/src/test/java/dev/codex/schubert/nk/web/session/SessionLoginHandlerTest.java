@@ -599,7 +599,7 @@ class SessionLoginHandlerTest {
     }
   }
 
-  private static final class Log implements Logger {
+  static final class Log implements Logger {
     final List<JsonObject> events = new CopyOnWriteArrayList<>();
     boolean fail;
 

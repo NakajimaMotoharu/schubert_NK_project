@@ -41,7 +41,8 @@ public final class WebSecurityAudit {
     LOGIN_LOCKED("LOGIN_LOCKED", "LOCKED", "DENIED", Level.WARNING),
     CSRF_DENIED("AUTHORIZATION_DENIED", "CSRF", "DENIED", Level.WARNING),
     ROLE_DENIED("AUTHORIZATION_DENIED", "ROLE", "DENIED", Level.WARNING),
-    PROXY_DENIED("AUTHORIZATION_DENIED", "PROXY", "DENIED", Level.WARNING);
+    PROXY_DENIED("AUTHORIZATION_DENIED", "PROXY", "DENIED", Level.WARNING),
+    AUTHENTICATION_REQUIRED("AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", Level.WARNING);
 
     private final String action;
     private final String reason;
@@ -93,6 +94,7 @@ public final class WebSecurityAudit {
         || retryAfterSeconds > 900
         || (event != Event.LOGIN_LOCKED && retryAfterSeconds != 0)
         || (event == Event.LOGIN_SUCCEEDED && actor.isEmpty())
+        || (event == Event.AUTHENTICATION_REQUIRED && actor.isPresent())
         || ((event == Event.LOGIN_FAILED || event == Event.LOGIN_LOCKED) && actor.isPresent())
         || (LOGIN.contains(event) && remoteAddress.isEmpty())
         || (LOGIN.contains(event) && route != Route.LOGIN))
