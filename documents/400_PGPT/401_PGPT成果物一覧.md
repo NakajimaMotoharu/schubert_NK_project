@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-最新確定: 正式PT-WEB-20260908-14、source 57efcbbc8f5c11f6140c63a0f23cdba18c48c2b5、dev-web、2026-09-08 23:38:50～23:43:21 JST。全714件（Protocol80/Storage34/API394/Web165/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web89件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。Caddy client・Login form・実CSRF/認証/session filter接続と100実session並行の8件を追加PASS、BUG-066/YKT-058再試験完了。CHR41はrunner単体試験であり実NK互換gateではない。最終Security chain・Logout revoke queue・本番監査403 handler/logger固定/全画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件（Logout期限を調査中）。以下は履歴。
+最新確定: 正式PT-WEB-20260908-14、source 57efcbbc8f5c11f6140c63a0f23cdba18c48c2b5、dev-web、2026-09-08 23:38:50～23:43:21 JST。全714件（Protocol80/Storage34/API394/Web165/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web89件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。Caddy client・Login form・実CSRF/認証/session filter接続と100実session並行の8件を追加PASS、BUG-066/YKT-058再試験完了。CHR41はrunner単体試験であり実NK互換gateではない。最終Security chain・Logout revoke queue・本番監査403 handler/logger固定/全画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計。未実装を合格算入しない）。以下は履歴。
 
 最新確定: 正式PT-ADM-20260908-04、source 1f1d321ad40bd7ba5f8461e5954e94e7ac6142d3、dev-admin、2026-09-08 15:59:29～16:03:00 JST。全571件（Protocol80/Storage34/API340/Web76/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Admin23、Media61、Scenario151/Auth91等は重複する内数。User作成/状態/role/password/unlock、実PG監査・全session失効・故障rollback・独立PBKDF2/USRMUT24・並行raceを追加PASS。BUG-045～047/YKT-040～042は再試験完了。正式03は静的解析失敗で非合格。SSC-031の外側Inbox接続とSSC-032の新規canonical接続、HTTP/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。以下は履歴。
 
@@ -56,6 +56,7 @@
 | [452_継続走行・再走管理](450_品質/452_継続走行・再走管理.md) | 長時間走行の依存関係・行き詰まり・再走条件 | 運用中 | 走行状態・再走対象の変更時 |
 | [453_Null解析gate検証仕様](450_品質/453_Null解析gate検証仕様.md) | 解析器の負canary・JDBC NULL境界 | 検証済み | null gate設定・結果の変更時 |
 | [454_Build契約・整形・再生成gate検証仕様](450_品質/454_Build契約・整形・再生成gate検証仕様.md) | 固定整形・依存収束・70生成fileの再現 | 検証中 | Build/生成toolの変更時 |
+| [455_再走論点_RERUN-001_Logout期限](450_品質/455_再走論点_RERUN-001_Logout期限.md) | Logout queue削除期限の設計論点・再走条件 | 再走待ち/SSC-045 | 安全性の証明・再試験時 |
 | [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 未着手 | PG gate完了時 |
 | [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 未着手 | PT gate完了時 |
 | [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 未着手 | 全gate完了時 |
