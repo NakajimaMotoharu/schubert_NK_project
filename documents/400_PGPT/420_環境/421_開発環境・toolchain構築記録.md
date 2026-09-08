@@ -177,6 +177,24 @@ Web moduleへ以下を導入。取得元はMaven Centralの`https://repo.maven.a
 
 導入再現は既存JAVA_HOME/local repository指定でWeb reactorのonline compileを一回実行し、以後`-o`。`org.apache.maven.plugins:maven-dependency-plugin:3.9.0:tree`をWeb reactorへoffline実行、2026-09-08 21:19:35 JST exit0、`/tmp/PT-WEB-spring-dependencies-01.log` SHA256 `063eed991f99cae20506b510358c0e6024dfe6d71a49980f3fde4636783bfafa`。依存source/binary/license metadataは配布元artifactで確認可能、Gitへvendor copyはしない。探索初回失敗は合格へ算入せず、015 spring-session-exploration.mdへ記録する。
 
+### 5.8 Spring Security CSRF接続（2026-09-08）
+
+Webへspring-security-web7.1.1をcompile追加。API既存crypto7.1.1/Framework7.0.9と同じ系列。取得元はMaven Central `https://repo.maven.apache.org/maven2/`＋artifact path/version/artifact-version.jar。CsrfFilter/Repository/RequestHandlerとCsrfConfigurerのrelease sourceを確認した。
+
+| artifact path | version/scope | JAR SHA256 |
+|---|---|---|
+| org/springframework/security/spring-security-web | 7.1.1 compile | dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3 |
+| org/springframework/security/spring-security-core | 7.1.1 transitive compile | 98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd |
+| io/micrometer/micrometer-observation | 1.17.1 Web compile | eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71 |
+| io/micrometer/micrometer-commons | 1.17.1 Web compile | f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd |
+| io/micrometer/micrometer-core | 1.17.1 Web test | 9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56 |
+
+Security core POMがobservation1.17.1、Frameworkが1.16.7を要求し初回Enforcerは混在を拒否した。Webの3artifactをSecurityの1.17.1へ明示収束、既存broker用coreもWeb testだけ同patchへ揃えた。他module/JUnit/Artemis/Netty/versionは不変更。途中1.17.0候補compileも成功したがSecurity POMのpatchに合わせて不採用とし、正式試験には含めない。Enforcer/NullAway/format/coverageを無効化しない。
+
+release sourceは `/tmp/schubert-spring-security-web-7.1.1-sources.jar` SHA256 `eb520d0386c0119d903baa915dd6999c7361cbdd779b9b698e5a369b58fd6606`、config source `2674581781d685573d067733d75ddc9cf378785c47ea45e59f04b31275a3b4e9`。vendor copyはGitへ入れない。CSRFの標準constant-time比較、request attribute handler、null-save契約、CsrfConfigurer.sessionAuthenticationStrategyの正規差替え点をPG-D-100へ反映。CsrfFilter DEBUGのfull URL診断とsecret-bearing拒否例外を本番log/HTTPへ出さない設定・handler接続は継続作業。
+
+再現は既存JAVA_HOME/local repository指定のonline Web compile後offline運用。完全修飾dependency:treeを2026-09-08 21:37:36 JSTにexit0、`/tmp/PT-WEB-csrf-filter-dependencies-01.log` SHA256 `3a656edb3d7a56d12b7fbd122ee008b1d76ff8a4752d6f275bae44cf067e5790`。探索command/hashは015 csrf-filter-exploration.md。Security chain全体や実API認証の完了ではない。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
