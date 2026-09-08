@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
@@ -25,13 +27,18 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -656,6 +663,322 @@ final class JdbcInboxCoordinatorTest {
     }
   }
 
+  @Test
+  void readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing() throws Exception {
+    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+      var coordinator = new JdbcInboxCoordinator(keys);
+      try (Connection connection = transaction()) {
+        connection.setReadOnly(true);
+        assertTrue(coordinator.inspectMessage(connection, request).isEmpty());
+        assertEquals(0, count("schubert.request_inbox"));
+        assertFalse(connection.getAutoCommit());
+        assertFalse(connection.isClosed());
+        try (var statement = connection.createStatement();
+            var row = statement.executeQuery("show transaction_read_only")) {
+          assertTrue(row.next());
+          assertEquals("on", row.getString(1));
+        }
+        connection.commit();
+      }
+      for (String state : List.of("COMPLETED", "ERROR", "PROCESSING")) {
+        executeApp("delete from schubert.request_inbox");
+        insertReadOnlyFixture(request, state);
+        try (Connection connection = transaction()) {
+          connection.setReadOnly(true);
+          InboxExecution result = coordinator.inspectMessage(connection, request).orElseThrow();
+          if (state.equals("PROCESSING")) {
+            assertEquals(InboxExecutionStatus.IN_PROGRESS, result.status());
+            assertTrue(result.completion().isEmpty());
+          } else {
+            assertEquals(InboxExecutionStatus.REPLAY, result.status());
+            InboxCompletion saved = result.completion().orElseThrow();
+            assertEquals(state, saved.state().name());
+            assertEquals(InboxResultReferenceType.NONE, saved.resultReference().type());
+            assertTrue(saved.resultReference().numericId().isEmpty());
+            assertTrue(saved.resultReference().uuid().isEmpty());
+            assertEquals("QSBRSP01", saved.responseLayoutId());
+            assertEquals("001", saved.responseVersion());
+            assertEquals(COMPLETED, saved.completedAt());
+            assertEquals("snapshot1", saved.responseSnapshot().orElseThrow().keyVersion());
+            assertArrayEquals(new byte[29], saved.responseSnapshot().orElseThrow().ciphertext());
+          }
+          var another =
+              tokenRequest(uuid(400), CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+          assertTrue(coordinator.inspectMessage(connection, another).isEmpty());
+          assertEquals(EXPIRES, storedExpiry(connection, MESSAGE));
+          connection.commit();
+        }
+        assertEquals(1, count("schubert.request_inbox"));
+        assertEquals(0, count("schubert.app_logs"));
+      }
+      executeApp("delete from schubert.request_inbox");
+      var reference = authenticatedRequest(MESSAGE, CORRELATION, 101, "GAMREQ01", "question");
+      insertReadOnlyFixture(reference, "COMPLETED");
+      try (Connection connection = transaction()) {
+        connection.setReadOnly(true);
+        assertEquals(
+            InboxExecutionStatus.REPLAY,
+            coordinator.inspectMessage(connection, reference).orElseThrow().status());
+        connection.commit();
+      }
+    }
+  }
+
+  @Test
+  void readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks() throws Exception {
+    var original = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    insertReadOnlyFixture(original, "COMPLETED");
+    try (var keys = new FingerprintKeyRing("fp2", key((byte) 12), "fp1", key((byte) 11))) {
+      var coordinator = new JdbcInboxCoordinator(keys);
+      try (Connection connection = transaction()) {
+        connection.setReadOnly(true);
+        assertEquals(
+            InboxExecutionStatus.REPLAY,
+            coordinator.inspectMessage(connection, original).orElseThrow().status());
+        for (var changed :
+            List.of(
+                tokenRequest(MESSAGE, uuid(401), 101, TOKEN, "question", "QSBREQ01", "001"),
+                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "USTREQ01", "001"),
+                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "002"),
+                tokenRequest(MESSAGE, CORRELATION, 102, TOKEN, "question", "QSBREQ01", "001"),
+                tokenRequest(MESSAGE, CORRELATION, 101, uuid(402), "question", "QSBREQ01", "001"),
+                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "changed", "QSBREQ01", "001"))) {
+          var failure =
+              assertThrows(
+                  InboxException.class, () -> coordinator.inspectMessage(connection, changed));
+          assertEquals(InboxException.Reason.MESSAGE_ID_REUSE, failure.reason());
+        }
+        try (var canonical =
+            new CanonicalRequest(
+                "101",
+                "QSBREQ01",
+                "001",
+                "question",
+                List.of(new CanonicalField("body", "UTF8-v1", new byte[] {65})))) {
+          var changed =
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.of(101),
+                  Optional.of(TOKEN),
+                  canonical,
+                  RECEIVED,
+                  EXPIRES);
+          assertEquals(
+              InboxException.Reason.MESSAGE_ID_REUSE,
+              assertThrows(
+                      InboxException.class, () -> coordinator.inspectMessage(connection, changed))
+                  .reason());
+        }
+        connection.commit();
+      }
+    }
+    try (var keys = new FingerprintKeyRing("fp2", key((byte) 12), null, null);
+        Connection connection = transaction()) {
+      connection.setReadOnly(true);
+      var coordinator = new JdbcInboxCoordinator(keys);
+      var failure =
+          assertThrows(
+              InboxException.class, () -> coordinator.inspectMessage(connection, original));
+      assertEquals(InboxException.Reason.FINGERPRINT_KEY_UNAVAILABLE, failure.reason());
+      connection.rollback();
+    }
+  }
+
+  @Test
+  void readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults() throws Exception {
+    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    insertReadOnlyFixture(request, "COMPLETED");
+    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+      var coordinator = new JdbcInboxCoordinator(keys);
+      assertThrows(NullPointerException.class, () -> coordinator.inspectMessage(null, request));
+      try (Connection connection = appConnection()) {
+        assertThrows(
+            NullPointerException.class, () -> coordinator.inspectMessage(connection, null));
+        assertEquals(
+            InboxException.Reason.TRANSACTION_REQUIRED,
+            assertThrows(
+                    InboxException.class, () -> coordinator.inspectMessage(connection, request))
+                .reason());
+        connection.setAutoCommit(false);
+        assertEquals(
+            InboxException.Reason.TRANSACTION_REQUIRED,
+            assertThrows(
+                    InboxException.class, () -> coordinator.inspectMessage(connection, request))
+                .reason());
+      }
+      for (String fault :
+          List.of(
+              "getAutoCommit",
+              "isReadOnly",
+              "prepareStatement",
+              "setObject",
+              "executeQuery",
+              "next",
+              "getTimestamp",
+              "rowClose",
+              "statementClose",
+              "null:correlation_id",
+              "null:request_layout_id",
+              "null:request_version",
+              "null:fingerprint_key_version",
+              "null:request_fingerprint_hmac",
+              "null:processing_state",
+              "null:result_ref_type",
+              "null:response_layout_id",
+              "null:response_version",
+              "null:completed_at")) {
+        try (Connection connection = transaction()) {
+          connection.setReadOnly(true);
+          assertThrows(
+              SQLException.class,
+              () -> coordinator.inspectMessage(readOnlyFault(connection, fault), request));
+          assertFalse(connection.isClosed());
+          assertFalse(connection.getAutoCommit());
+          connection.rollback();
+        }
+      }
+      try (Connection connection = transaction()) {
+        connection.setReadOnly(true);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> coordinator.inspectMessage(readOnlyFault(connection, "unknownState"), request));
+        connection.rollback();
+      }
+      assertEquals(1, count("schubert.request_inbox"));
+    }
+  }
+
+  @Test
+  void readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked() throws Exception {
+    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+    insertReadOnlyFixture(request, "COMPLETED");
+    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null);
+        Connection locked = transaction();
+        var statement = locked.createStatement()) {
+      try (var row =
+          statement.executeQuery("select message_id from schubert.request_inbox for update")) {
+        assertTrue(row.next());
+      }
+      var coordinator = new JdbcInboxCoordinator(keys);
+      try (var executor = Executors.newFixedThreadPool(16)) {
+        var results = new ArrayList<Future<InboxExecution>>();
+        for (int i = 0; i < 100; i++) {
+          results.add(
+              executor.submit(
+                  () -> {
+                    try (Connection connection = transaction()) {
+                      connection.setReadOnly(true);
+                      try (var timeout = connection.createStatement()) {
+                        timeout.execute("set local statement_timeout='500ms'");
+                      }
+                      var result = coordinator.inspectMessage(connection, request).orElseThrow();
+                      connection.commit();
+                      return result;
+                    }
+                  }));
+        }
+        for (var result : results) {
+          assertEquals(InboxExecutionStatus.REPLAY, result.get().status());
+          assertArrayEquals(
+              new byte[29],
+              result
+                  .get()
+                  .completion()
+                  .orElseThrow()
+                  .responseSnapshot()
+                  .orElseThrow()
+                  .ciphertext());
+        }
+      }
+      assertEquals(EXPIRES, storedExpiry(locked, MESSAGE));
+      locked.rollback();
+    }
+    assertEquals(1, count("schubert.request_inbox"));
+  }
+
+  private static void insertReadOnlyFixture(InboxRequest request, String state) throws Exception {
+    // Independent SS324 LP/HMAC oracle; no production canonical encoder or fingerprint method.
+    var bytes = new ByteArrayOutputStream();
+    try (var out = new DataOutputStream(bytes)) {
+      out.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
+      String layout = request.operationToken().isPresent() ? "QSBREQ01" : "GAMREQ01";
+      for (String value : List.of("101", layout, "001", "question")) {
+        byte[] encoded = value.getBytes(StandardCharsets.UTF_8);
+        out.writeInt(encoded.length);
+        out.write(encoded);
+      }
+      out.writeInt(0);
+    }
+    var mac = Mac.getInstance("HmacSHA256");
+    mac.init(new SecretKeySpec(key((byte) 11), "HmacSHA256"));
+    try (Connection connection = transaction()) {
+      insertProcessing(
+          connection, request, new Fingerprint("fp1", mac.doFinal(bytes.toByteArray())));
+      if (!state.equals("PROCESSING")) {
+        try (var statement =
+            connection.prepareStatement(
+                "update schubert.request_inbox set processing_state=?,result_ref_type='NONE',"
+                    + "response_layout_id='QSBRSP01',response_version='001',"
+                    + "response_body_encrypted=decode(repeat('00',29),'hex'),"
+                    + "response_key_version='snapshot1',completed_at='2026-09-05T00:00:01Z' where message_id=?")) {
+          statement.setString(1, state);
+          statement.setObject(2, request.messageId());
+          assertEquals(1, statement.executeUpdate());
+        }
+      }
+      // PROCESSING fixture intentionally represents a pre-existing anomaly, never production flow.
+      connection.commit();
+    }
+  }
+
+  private static Connection readOnlyFault(Connection real, String fault) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (proxy, method, arguments) -> {
+              if (method.getName().equals(fault))
+                throw new SQLException("synthetic-provider-fault");
+              Object result = invoke(real, method, arguments);
+              if (method.getName().equals("prepareStatement")) {
+                assertTrue(((String) arguments[0]).endsWith("where message_id=?"));
+                return Proxy.newProxyInstance(
+                    PreparedStatement.class.getClassLoader(),
+                    new Class<?>[] {PreparedStatement.class},
+                    (sp, sm, sa) -> {
+                      if (sm.getName().equals(fault))
+                        throw new SQLException("synthetic-provider-fault");
+                      Object sr = invoke(result, sm, sa);
+                      if (sm.getName().equals("close") && fault.equals("statementClose"))
+                        throw new SQLException("synthetic-close-fault");
+                      if (sm.getName().equals("executeQuery")) {
+                        return Proxy.newProxyInstance(
+                            ResultSet.class.getClassLoader(),
+                            new Class<?>[] {ResultSet.class},
+                            (rp, rm, ra) -> {
+                              if (rm.getName().equals(fault))
+                                throw new SQLException("synthetic-provider-fault");
+                              if (fault.startsWith("null:")
+                                  && ra != null
+                                  && fault.substring(5).equals(ra[0])) return null;
+                              if (fault.equals("unknownState")
+                                  && rm.getName().equals("getString")
+                                  && ra[0].equals("processing_state")) return "UNKNOWN";
+                              Object rr = invoke(sr, rm, ra);
+                              if (rm.getName().equals("close") && fault.equals("rowClose"))
+                                throw new SQLException("synthetic-close-fault");
+                              return rr;
+                            });
+                      }
+                      return sr;
+                    });
+              }
+              return result;
+            });
+  }
+
   private static void assertMessageReuse(JdbcInboxCoordinator coordinator, InboxRequest changed)
       throws SQLException {
     try (Connection connection = transaction()) {
@@ -758,7 +1081,7 @@ final class JdbcInboxCoordinatorTest {
       statement.setString(3, request.canonicalRequest().layoutId());
       statement.setString(4, request.canonicalRequest().layoutVersion());
       statement.setLong(5, request.ownerUserId().orElseThrow());
-      statement.setObject(6, request.operationToken().orElseThrow());
+      statement.setObject(6, request.operationToken().orElse(null));
       statement.setString(7, HexFormat.of().formatHex(fingerprint.digest()));
       statement.setString(8, fingerprint.keyVersion());
       statement.setTimestamp(9, Timestamp.from(request.receivedAt()));

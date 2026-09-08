@@ -81,6 +81,12 @@ Login前はowner NULLであり、Message IDだけを一意keyとする。同一M
 Login成功replayは`auth_sessions.created_message_id`、認証失敗は暗号化済みerror response snapshotを使用する。
 Inbox・User/IP counter・auth session・snapshotは同一transactionでcommitする。Owner NULL＋operation tokenのpartial uniqueは作らない。
 
+### 5.1 非更新Message参照（SSC-024）
+
+`JdbcInboxCoordinator.inspectMessage(connection, request)`は、callerが認証/ownerを確定した後、明示read-only transaction内でMessage IDだけを1 SELECTする。FOR UPDATE、INSERT、operation token検索、handler実行、保持期限更新、commit/rollback/connection closeを行わない。autoCommitまたはreadOnly=falseをTRANSACTION_REQUIREDで拒否する。
+
+不在はOptional.empty、存在時は通常executeと共通のrow reader・layout/version/correlation/owner/token/HMAC照合を行い、一致した保存COMPLETED/ERRORだけREPLAY、PROCESSINGはIN_PROGRESSを返す。NULL/不正state/unknown key/照合不一致を成功へ補完しない。これはMessage参照snapshotであって新規受付の予約/lockではない。別Messageの同operation tokenを検索して確定扱いせず、最終write transactionでは通常executeの一意制約/再照合を必須とする。Scenarioはこの参照結果を復号・整合検証してから既存descriptorの再利用を判断し、file I/Oへread-only transactionを持ち出さない。
+
 ## 6. Response保存・再構成
 
 | 処理 | 保存方式 | Replay |

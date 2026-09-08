@@ -40,6 +40,8 @@ redactionを無効化しない。
 - 確率・競合caseは少なくとも100回反復と一意seed再現を行い、失敗回のseed/event IDを保存する。
 - 合格はassertion数0ではなく、対象分岐・上下限・異常codeの要求coverage 100%をmatrixで証明する。
 
+SSC-024: PT-IDEM-RO01～RO04はread-only Message snapshotと通常Inboxの照合共通性を確認する。不在を予約とみなさず、別Message同tokenを拾わず、保持期限/状態/row数非更新、row lock非取得、100並行、全identity/HMAC/key/NULL/JDBC故障を拒否する。最終writeのUK/再照合と復号・業務参照検査を省略しない。
+
 ## 4. PT詳細観点
 
 ### 4.1 PT-CODEC（SS 322・323）

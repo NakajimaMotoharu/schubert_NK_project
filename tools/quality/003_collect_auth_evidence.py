@@ -96,7 +96,7 @@ def main():
                            "PT-AUT-008": "actor/role/owner policy, real DB Logout owner Inbox/frozen replay/idempotency/admin all-revocation/audit/fault/concurrency and absent remote IP contract passed; management command/predicates/full dispatcher/HTTP remain"},
         "testIdsNotRun": ["PT-AUT-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024", "BUG-026", "BUG-027", "BUG-028", "BUG-029"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021", "YKT-023", "YKT-024", "YKT-025", "YKT-026"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012", "SSC-013", "SSC-014", "SSC-015", "SSC-016"],
+        "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024", "BUG-026", "BUG-027", "BUG-028", "BUG-029"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021", "YKT-023", "YKT-024", "YKT-025", "YKT-026"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012", "SSC-013", "SSC-014", "SSC-015", "SSC-016", "SSC-023"],
         "additionalTests": {
             "PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; dispatcher/Inbox/HTTP connection remains",
             "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation and anonymous HMAC/Inbox/application transaction passed; JMS/HTTP connection remains",

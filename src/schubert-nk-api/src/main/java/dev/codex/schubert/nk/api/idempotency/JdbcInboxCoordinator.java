@@ -27,7 +27,7 @@ public final class JdbcInboxCoordinator {
           + "result_ref_id,result_ref_uuid,response_layout_id,response_version,"
           + "response_body_encrypted,response_key_version,completed_at";
   private static final String SELECT_BY_MESSAGE =
-      "select " + SELECT_COLUMNS + " from schubert.request_inbox where message_id=? for update";
+      "select " + SELECT_COLUMNS + " from schubert.request_inbox where message_id=?";
   private static final String SELECT_BY_TOKEN =
       "select "
           + SELECT_COLUMNS
@@ -124,9 +124,37 @@ public final class JdbcInboxCoordinator {
     return InboxExecution.executed(completion);
   }
 
+  /**
+   * Non-mutating Message-only snapshot after caller authentication. Absence grants no processing
+   * lease and does not search another Message's operation token. Caller must use execute in the
+   * final write transaction and validate/decrypt replay content separately. Does not own caller TX.
+   * Trace: NK-MSG-002/NK-SCN-001, MQ-006..010; UI237/241/242; SS324 §5.1;
+   * SSC-024/PT-IDEM-RO01..RO04.
+   */
+  public Optional<InboxExecution> inspectMessage(Connection connection, InboxRequest request)
+      throws SQLException {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(request, "request");
+    if (connection.getAutoCommit() || !connection.isReadOnly()) {
+      throw failure(
+          InboxException.Reason.TRANSACTION_REQUIRED,
+          "Inbox inspection requires a caller-owned read-only transaction");
+    }
+    Optional<StoredRow> stored;
+    try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MESSAGE)) {
+      statement.setObject(1, request.messageId());
+      stored = selectOne(statement);
+    }
+    if (stored.isEmpty()) return Optional.empty();
+    StoredRow row = stored.orElseThrow();
+    validateMessageIdentity(row, request);
+    return Optional.of(existing(row));
+  }
+
   private Optional<StoredRow> selectByMessage(Connection connection, UUID messageId)
       throws SQLException {
-    try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MESSAGE)) {
+    try (PreparedStatement statement =
+        connection.prepareStatement(SELECT_BY_MESSAGE + " for update")) {
       statement.setObject(1, messageId);
       return selectOne(statement);
     }
