@@ -40,4 +40,4 @@ de9b73fで修正前起票。全対象の修正または非該当根拠と独立�
 
 ## 正式gate
 
-次のroot clean verify/全7collectorで確定予定。最終HTTP handler/監査/logger固定/entrypoint/URL role/全request Caddy・encoding・security header、Logout/全画面/実API/JMS/実NK CHR、IT/STは未完了。
+正式PT-WEB-20260908-14、source57efcbbc8f5c11f6140c63a0f23cdba18c48c2b5、23:38:50～23:43:21 JST。root clean verify全714件（Protocol80/Storage34/API394/Web165/CHR41）、Web001～089、failed/error/skipped0、5対象module line/method/class/branch100%、NullAway/Enforcer/format PASS・SpotBugs0、全7collector成功。BUG066/YKT058の全対象再試験完了。CHR41はrunner単体試験で実NK互換ではない。最終HTTP handler/監査/logger固定/entrypoint/URL role/全request Caddy・encoding・security header、Logout/全画面/実API/JMS/実NK CHR、IT/STは未完了。
