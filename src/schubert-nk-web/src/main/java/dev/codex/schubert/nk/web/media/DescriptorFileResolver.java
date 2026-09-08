@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * File adapter for already authenticated/HMAC-verified descriptors, not an authorization gate.
+ * File adapter after API authentication and verified MQ/request binding, not an authorization gate.
  * NK-MED-001; FIL-006/007; UI237/243; SS311/333; PG-D-075; PT-MED-026. Caller owns admitted root.
  */
 public final class DescriptorFileResolver implements MediaRangeService.FileSource {

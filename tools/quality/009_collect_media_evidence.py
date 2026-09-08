@@ -39,6 +39,10 @@ def main():
         "PT-MED-030": prefix + "MediaRangeServiceTest#med030TwentyStreamsRejectTwentyFirstAndRecoverAllPermits",
         "PT-MED-031": prefix + "MediaRangeServiceTest#med031IoFailuresReleasePermitsWithoutSecondResponse",
         "PT-MED-032": prefix + "MediaRangeServiceTest#med032OneHundredCallsHaveIndependentPositionsAndHeaders",
+        "PT-MED-037": prefix + "MediaResponseDecoderTest#med037ThreeRequestsBindAllApprovedSuccessfulDescriptors",
+        "PT-MED-038": prefix + "MediaResponseDecoderTest#med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors",
+        "PT-MED-039": prefix + "MediaResponseDecoderTest#med039MalformedAndMismatchedRepliesNeverAuthorizeFiles",
+        "PT-MED-040": prefix + "MediaResponseDecoderTest#med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
     }
     query = "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#"
     expected.update({
@@ -116,7 +120,8 @@ def main():
         "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
         "scope": "Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared complete retained segment walk/Unix/size-before-after/scoped-channel, Web descriptor-file adapter and internal response-port delivery of 200/206/416/HEAD/download with 20 immediate permits and request binding. Explicit header maps and exact independently patterned body slices, latch-held 20/21 rejection and all-permit recovery, redacted I/O failures/no second response and 100 independent deliveries passed. This is not a registered/authenticated HTTP endpoint or manifest/hash check. Auth/Inbox/manifest/MQ-to-HTTP connection/full startup/client-abort classification/actual NK CHR remain unimplemented or unconnected. Selected eight Storage methods overlap Scenario's module regression and are not additive to reactor count.",
         "requestIdentity": "SSC-029 all eight UI235 literal request vectors, explicit ordered field names/type-version and independent LP/JCA HMAC; direct dispatch through the same decoded values to all eight real PostgreSQL queries; CanonicalField factory NFC/copy/zero and Scenario existing canonical regressions. Final authentication/Inbox/response capture is still separate.",
-        "relatedBug": [], "relatedSsc": ["SSC-028", "SSC-029"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
+        "responseVerification": "SSC-030: manually assembled UI232/235 header/DATA bytes for all seven formats, both success profiles and all error fillers. Original request layout/correlation, constant-time 64-byte context and type/ID/disposition binding, invalid data/length/UTF8/NFC/video fields and 100 concurrent decodes passed. No separate response MAC/key/property exists in the approved protocol; API request HMAC and Web transport/request binding remain distinct responsibilities. Actual API/MQ/HTTP registration is pending.",
+        "relatedBug": [], "relatedSsc": ["SSC-028", "SSC-029", "SSC-030"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
