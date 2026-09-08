@@ -10,4 +10,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 6明示public URLだけ匿名で通過、ADMIN9URL/業務22URL/未知static/suffix等とUSER/ADMIN/anonymousの独立matrixを検査。9種不正pathとTRACEはfirewall拒否、encoded通常文字のadmin/logsはROLE_ADMINのまま。REQUEST/ERROR/ASYNC/FORWARD/INCLUDE全5dispatcher、100並行・下流0/1回・ThreadLocal clearを確認。Header/form/queryでroleを与えても権限値に採用しない。
 
-探索中の新障害なし。正式runの全module gate/collector後に確定する。Login案内/403 view/監査handler/最終chain/runtime・IT/ST・実NK Characterizationは未実施。
+後続のSS352 §3.1再照合で、Login匿名公開はGET/POSTなのに本探索のfactory/oracleが全method許可だったことを発見し、BUG-072/YKT-064を修正前起票した。探索01とrun07の機械的成功は、この設計不整合の合格根拠にしない。上位正本を変えず、明示method×path×dispatcher期待を修正し再試験する。Login案内/403 view/監査handler/最終chain/runtime・IT/ST・実NK Characterizationは未実施。
