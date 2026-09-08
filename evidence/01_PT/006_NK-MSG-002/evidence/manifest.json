@@ -1,9 +1,9 @@
 {
-  "runId": "PT-ADM-20260908-05",
-  "targetCommit": "10e08836025a10529bd7f89a53cf1564c9e6bbaa",
+  "runId": "PT-ADM-20260908-06",
+  "targetCommit": "a4420e52419a410f4bff9f8a6d3405c8f7865cee",
   "branch": "dev-admin",
-  "startedAt": "2026-09-08T16:22:25+09:00",
-  "completedAt": "2026-09-08T16:26:01+09:00",
+  "startedAt": "2026-09-08T16:42:51+09:00",
+  "completedAt": "2026-09-08T16:46:26+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 344,
+      "tests": 348,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 22455
+          "covered": 22513
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1739
+          "covered": 1741
         },
         "LINE": {
           "missed": 0,
-          "covered": 5003
+          "covered": 5012
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1663
+          "covered": 1667
         },
         "METHOD": {
           "missed": 0,
-          "covered": 760
+          "covered": 763
         },
         "CLASS": {
           "missed": 0,
-          "covered": 162
+          "covered": 163
         }
       },
       "spotbugs": {
@@ -183,13 +183,14 @@
       }
     }
   },
-  "rawLogSha256": "0c1380daea7b15e4bb87f408a8d166e1c1a8ff54c75d3c4780f79917262d0585",
+  "rawLogSha256": "8c82ebede9c3b4174c4ca44d6d4f76ce77a266c2d062c08c6a0c488efb3b6131",
   "programId": "NK-MSG-002",
   "programStatus": "IN_PROGRESS",
   "result": "REGRESSION_SLICE_PASS",
   "currentReports": [
     "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-    "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml"
+    "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+    "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml"
   ],
   "methods": [
     "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked",
@@ -205,12 +206,20 @@
     "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks",
     "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
     "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
-    "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime"
+    "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage"
   ],
   "testIdMethods": {
     "PT-IDEM-SR01": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
     "PT-IDEM-SR02": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
-    "PT-IDEM-SR03": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings"
+    "PT-IDEM-SR03": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
+    "PT-IDEM-B01": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+    "PT-IDEM-B02": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+    "PT-IDEM-B03": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+    "PT-IDEM-B04": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement"
   },
   "testIdsPassed": [
     "PT-IDEM-RO01",
@@ -219,22 +228,28 @@
     "PT-IDEM-RO04",
     "PT-IDEM-SR01",
     "PT-IDEM-SR02",
-    "PT-IDEM-SR03"
+    "PT-IDEM-SR03",
+    "PT-IDEM-B01",
+    "PT-IDEM-B02",
+    "PT-IDEM-B03",
+    "PT-IDEM-B04"
   ],
   "relatedSsc": [
     "SSC-024",
-    "SSC-027"
+    "SSC-027",
+    "SSC-033"
   ],
   "relatedBug": [],
   "notRunCountedAsPass": 0,
   "expectations": "Independent SS324 LP/JCE-HMAC plus production-DDL SQL fixtures; literal state, metadata, 29-byte storage-only ciphertext, count and retention. Missing returns empty, identity/body/key mismatches reject, and 100 read-only lookups succeed while another transaction holds the Inbox row lock. No production method generates expected HMAC or stored fixture.",
   "replacementExpectations": "Real PostgreSQL row lock and caller commit/rollback; exactly one of two concurrent old-snapshot replacements commits. Only ciphertext/key change; all 17 metadata columns including original completion/24h expiry stay equal. Independent LP/JCE-HMAC and SQL fixture, all metadata/cipher positions/missing/identity/null/JDBC faults; temporary bind arrays zeroed. Synthetic 29-byte ciphertext is storage-only, not a decryption oracle.",
-  "scope": "Current reports cover coordinator regression (11 methods) and Scenario-only snapshot replacement (3 methods). Other retained output belongs to historical runs and is not counted as newly certified program completion. Response decryption/reference validity, staged service/file replay, HTTP, cleanup protection BUG-014 and other NK-MSG-002 gates remain incomplete.",
+  "boundExpectations": "Independent SS324 LP/JCE-HMAC, literal 24-byte body and SQL PK/count/time expectations. Source PK is original for same-Message and different-Message same-token replay; original AES-GCM AAD decrypts while retry ID fails. Real unique races reread original PROCESSING source, 100 concurrent distinct Messages produce one execution/row/source. NULL/wrong PK, JDBC query/close, unknown key and HMAC mismatch reject. Legacy execute/one-query read-only inspect and Scenario snapshot replacement preserve metadata/retention and caller transaction ownership. Bound metadata grants no authorization.",
+  "scope": "Current reports cover coordinator regression (11 methods), Scenario-only snapshot replacement (3 methods) and saved-Message binding (4 methods). Other retained output belongs to historical runs and is not counted as newly certified program completion. User application replay/reference validation, HTTP, cleanup protection BUG-014 and other NK-MSG-002 gates remain incomplete.",
   "redaction": "Copied hash-verified sanitized JUnit metadata only; no properties, stdout, provider text, secrets or master content.",
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "a8b16d30df3673773054cfb098b577d93bd656cf73644e16376a79a713709565"
+      "sha256": "04c74dd187b9fec0e8e6502256adaebf7258863c215ff372d8ac23c38ee42475"
     },
     {
       "path": "coverage/characterization-jacoco.csv",
@@ -309,6 +324,10 @@
       "sha256": "c6c4ea2a16f66fe416a51b77e9fcae7444f6014dd729cfe4711705b43a1c97ea"
     },
     {
+      "path": "logs/BUG-049-YKT-044.md",
+      "sha256": "ea98984c1122b1f629d400e5079ee63e5471055b0fa10e518edb28bc296a2d4e"
+    },
+    {
       "path": "logs/PT-ADM-20260908-01-manifest.json",
       "sha256": "4cee6839ae6b4c6d2fa3f5fef7dca477362ab12408117f7cd6290d45a8e2c94b"
     },
@@ -333,8 +352,16 @@
       "sha256": "724b583ba70e2b2ec8cff54d08696beb87c20081708d71691e2d5f3d62165e66"
     },
     {
+      "path": "logs/PT-ADM-20260908-05-manifest.json",
+      "sha256": "d39b2a89514cf23ded70437119f8192605162325c43e66a76ed6d4d9d4b4a320"
+    },
+    {
       "path": "logs/PT-ADM-20260908-05-summary.json",
       "sha256": "c07a21ab34ae1f33d1cad562b11d0d85d3efaaa4a12600e0fbc693e025f41f89"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-06-summary.json",
+      "sha256": "4bfab7c48b72abd066857caa11fdd3e1b61e25403da76691a7c11b6b4240c12c"
     },
     {
       "path": "logs/PT-AUT-20260908-07-manifest.json",
@@ -569,6 +596,10 @@
       "sha256": "276b18712c352daf9080ca070b20c4fb58cb2457b842e128f11e06f43eeedbc4"
     },
     {
+      "path": "logs/bound-exploration.md",
+      "sha256": "2c02829b01e708c80ff4ae241e1fc716e5c244d3799020c128f2c8fb26f54323"
+    },
+    {
       "path": "logs/inbox-transaction-failpoints.md",
       "sha256": "ff8acc2f7e2e11e487b27b6d7907e741cf1763b1025a457a13a68430ca2ca947"
     },
@@ -605,6 +636,10 @@
       "sha256": "ad81b59d9db022a87834203aab8a7be4c58cf6d881f5849b2f4b6fd767872788"
     },
     {
+      "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "20d4fa17ce900b19f3bed55c12dc222c19752cc61a90fc7719aa4cfe32963129"
+    },
+    {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
       "sha256": "9c1187db3b90b0859259e68d60f01c09d88962f9842337c17284ed5ef9561e7b"
     },
@@ -614,11 +649,11 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-      "sha256": "1cc34970b3c811d6c022e7abc915900c9ad7754b89c2fea443415200f1742ca8"
+      "sha256": "0a44356304404466838026d2841c5ed5f32b1c94818653a03a400a0c9e6ababd"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
-      "sha256": "8c3759893568f85145ff00c1569a3b16fce45dc28b4c13dad8e88eac7ba5d3e4"
+      "sha256": "e6f2fd5242e2bc892146ecbbfca34ab326de6c7e2509574ce12af3b2f9ee9334"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
