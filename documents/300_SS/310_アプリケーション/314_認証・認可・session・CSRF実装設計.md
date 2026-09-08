@@ -190,6 +190,17 @@ Plaintextは16KiB以下・JSON nesting最大3（root→array→token object）�
 
 PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaintext16384byte、最大envelope16436byte。Currentだけwrite、current/previousだけread。復号後は7.2.1閉schemaを検査して属性valueだけを返す。異常時の失効/監査はrepository/HTTP接続側、暗号部品は固定理由codeの例外で平文を返さない。暗号鍵はWeb session専用で、API context/Web log/revoke keyと共用しない。
 
+#### 7.2.3 Technical rowの低位store（SSC-040）
+
+`JdbcWebSessionStore`は331 §9.1の10列だけへaccessし、callerの非autoCommit/readOnly=false Connectionを借用する。Connectionのcommit/rollback/closeを所有しない。Statement/ResultSetは各methodで必ずcloseし、SQL/型/NULL/不正row/resource失敗は診断内容を保持しない固定例外。Raw Cookie ID/属性JSONを保存するmethodは作らず、暗号文/key ID型だけをbindする。
+
+- `findLocked(hash)`: explicit10列＋`WHERE session_id_hash=? FOR UPDATE`。0件はOptional.empty、重複/SQL NULL/DDL値不整合は拒否。期限や暗号正当性をこの低位readで認可しない。
+- `insert(row)`: 新規version0、更新数1だけ。UPSERTしない。
+- `replace(original,replacement)`: identity(PK/hash/created_at)同一、versionが正確に+1。PK/hash/created_at/元versionをWHEREへbindし、ciphertext/key ID/last access/expiry/max inactive/versionだけ更新。0件はfalse、1件true、その他拒否。
+- `delete(identity,version)`: PK/hash/created_at/元versionに一致するrowだけ削除。0件false/1件true、その他拒否。
+
+不変rowはcreated/last access/expiryがmicrosecond精度、created<=last<=expiry、max inactive1..28800、version0..999999999、ciphertextの許可範囲を検証する。上限versionへの+1は拒否する。外側lifecycleがlock下で期限/暗号を検証し、8h idle延長とdirty属性mergeを行う。削除済rowへの古いHTTP saveを新規INSERTへ置換しない。Fixation旧削除＋新INSERTは同一短transaction、JMS/HTTP処理はDB lockを保持せず実行する。低位storeの合格はSpring Session/失効/並行merge完了ではない。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
