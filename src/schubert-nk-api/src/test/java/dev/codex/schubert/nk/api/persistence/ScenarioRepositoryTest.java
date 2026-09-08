@@ -2,6 +2,9 @@ package dev.codex.schubert.nk.api.persistence;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.application.scenario.ScenarioQuerySnapshot;
+import dev.codex.schubert.nk.api.application.scenario.ScenarioRequest;
+import dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
@@ -104,6 +107,84 @@ final class ScenarioRepositoryTest {
     }
     sql(
         "insert into schubert.games values(1,'NUKITASHI1','NUKITASHI1',1,'2026-09-01Z'),(2,'NUKITASHI2','NUKITASHI2',2,'2026-09-01Z')");
+  }
+
+  @Test
+  void ptScn009AllRequestRoutesUseIndependentDatabaseOutcomes() throws Exception {
+    try (Connection c = read()) {
+      var games =
+          (ScenarioQuerySnapshot.Inline)
+              ScenarioRequest.decode(ScenarioRequestFixture.message("GAMREQ01", new byte[0]))
+                  .query(REPOSITORY, c, USER);
+      assertPayload(
+          games.value(),
+          numeric(9, 2),
+          List.of(game("NUKITASHI1", "NUKITASHI1", 1), game("NUKITASHI2", "NUKITASHI2", 2)));
+      var speakers =
+          (ScenarioQuerySnapshot.Inline)
+              ScenarioRequest.decode(
+                      ScenarioRequestFixture.message("SPKREQ01", ScenarioRequestFixture.spaces(12)))
+                  .query(REPOSITORY, c, USER);
+      assertPayload(
+          speakers.value(), numeric(9, 2), List.of(speaker(1, "Alice", 2), speaker(2, "Bob", 1)));
+      byte[] game = ScenarioRequestFixture.spaces(12);
+      ScenarioRequestFixture.put(game, 0, "NUKITASHI1");
+      var routes =
+          (ScenarioQuerySnapshot.Inline)
+              ScenarioRequest.decode(ScenarioRequestFixture.message("RTEREQ01", game))
+                  .query(REPOSITORY, c, USER);
+      assertPayload(
+          routes.value(), numeric(9, 2), List.of(route(1, "共通ルート", 1), route(2, "奈々瀬ルート", 1)));
+      byte[] files = ScenarioRequestFixture.spaces(14);
+      ScenarioRequestFixture.put(files, 0, "NUKITASHI1");
+      ScenarioRequestFixture.put(files, 12, "01");
+      var fileList =
+          (ScenarioQuerySnapshot.Inline)
+              ScenarioRequest.decode(ScenarioRequestFixture.message("SCFREQ01", files))
+                  .query(REPOSITORY, c, USER);
+      assertPayload(
+          fileList.value(),
+          fileData("NUKITASHI1", 1, "共通ルート", 1),
+          List.of(fileRecord(30, "Chapter A", 2)));
+      var search =
+          (ScenarioQuerySnapshot.Inline)
+              ScenarioRequest.decode(
+                      ScenarioRequestFixture.message("SRCREQ01", ScenarioRequestFixture.search()))
+                  .query(REPOSITORY, c, USER);
+      assertEquals(
+          List.of(200L, 300L, 100L, 400L),
+          search.value().records().stream()
+              .map(r -> ((ScenarioSearchRecord) r).entryId().value())
+              .toList());
+      var detail =
+          (ScenarioQuerySnapshot.Detail)
+              ScenarioRequest.decode(
+                      ScenarioRequestFixture.message(
+                          "SCNREQ01", "000000000030".getBytes(StandardCharsets.US_ASCII)))
+                  .query(REPOSITORY, c, USER);
+      var snapshot = detail.value().orElseThrow();
+      assertEquals(30, snapshot.metadata().scriptFileId().value());
+      assertEquals(
+          List.of(100L, 100L, 200L),
+          snapshot.records().stream().map(r -> r.entryId().value()).toList());
+      assertEquals(
+          List.of(1, 1, 2),
+          snapshot.records().stream().map(ScenarioEntryRecord::entrySequence).toList());
+      assertEquals(
+          List.of(Optional.of(new AudioId(800)), Optional.of(new AudioId(700)), Optional.empty()),
+          snapshot.records().stream().map(ScenarioEntryRecord::audioId).toList());
+      var missing =
+          (ScenarioQuerySnapshot.Detail)
+              ScenarioRequest.decode(
+                      ScenarioRequestFixture.message(
+                          "SCNREQ01", "000000009999".getBytes(StandardCharsets.US_ASCII)))
+                  .query(REPOSITORY, c, ADMIN);
+      assertTrue(missing.value().isEmpty());
+      assertFalse(c.isClosed());
+      assertFalse(c.getAutoCommit());
+      assertTrue(c.isReadOnly());
+      c.commit();
+    }
   }
 
   @Test

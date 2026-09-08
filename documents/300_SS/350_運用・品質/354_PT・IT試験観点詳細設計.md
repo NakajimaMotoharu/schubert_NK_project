@@ -44,6 +44,8 @@ SSC-024: PT-IDEM-RO01～RO04はread-only Message snapshotと通常Inboxの照合
 
 ## 4. PT詳細観点
 
+SSC-025: PT-SCN-009-Q01～Q04で6 requestのUI234手組DATA、SS323 §9.1の全field順/ASCII名/type/LP null/数値/HMAC、keywordとquery正規化の分離、null/未知/UTF8/NFC/境界、実DB6分岐とDetail不在・entry/audio順を確認する。Header/meta変更をpayload HMACへ混入させず、同じdecoded値をSQLへ渡す。Request振分け部品は最終response/Inbox/file再送の完了には算入しない。
+
 ### 4.1 PT-CODEC（SS 322・323）
 
 | ID群 | 必須観点 | 期待 |
