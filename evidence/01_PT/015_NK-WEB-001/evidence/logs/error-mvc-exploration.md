@@ -1,6 +1,6 @@
 # 共通error・内部dispatch探索記録
 
-正式認定: 未実施。探索成功をProgram完了へ算入しない。正式全回帰後にsource/日時/coverageを追記する。
+正式認定: PT-WEB-20260909-11、source bfce8d28321df733f1f01b7403ace5f2b4ea72ab、2026-09-09 03:09:24～03:14:09 JST、全782/Web157 PASS、全line/method/class/branch100%、NullAway/format/Enforcer PASS、SpotBugs0。BUG-074/YKT-066/SSC-047の再試験・全対象確認を完了。詳細はmanifest.json。Program全体は継続する。
 
 NK-WEB-001/SCR-090、PT-WEB-148～157、PG-D-116、SSC-047、BUG-074/YKT-066。関連FUN-001/002/AUT-001～004/TST-001～005/MON-004、UI221/222/226、SS313/314/351/352。toolchainは421 §5.9～5.10、独立期待・fixtureは001 §14.12。
 
