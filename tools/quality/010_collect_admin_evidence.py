@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Map executed Admin PT methods to a verified, unchanged full-reactor source commit."""
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import xml.etree.ElementTree as ET
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("run_id")
+    run = parser.parse_args().run_id
+    if not run.startswith("PT-ADM-") or not all(c.isalnum() or c == "-" for c in run):
+        raise SystemExit("invalid run ID")
+    repo = Path(__file__).resolve().parents[2]
+    verified = json.loads((repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json").read_text())
+    if verified["runId"] != run or verified["exitCode"] != 0:
+        raise SystemExit("collect the matching verified full reactor first")
+    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
+                    "program/characterization", "tools/quality"], cwd=repo, check=True,
+                   stdout=subprocess.DEVNULL)
+    prefix = "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest"
+    names = [
+        "adm001SearchFiltersLiteralPrefixesAndStablePages",
+        "adm002DetailProjectsActorsTimesAndActiveSessions",
+        "adm003DisabledAndLockBoundariesUseOneFixedInstant",
+        "adm004AuthorizationNullAndInputContractsRejectBeforeSql",
+        "adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+        "adm006CapacityAndPageMetadataRejectTruncation",
+        "adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
+    ]
+    expected = {f"PT-ADM-{i:03d}": prefix + "#" + name for i, name in enumerate(names, 1)}
+    report = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + prefix + ".xml")
+    suite = ET.parse(report).getroot()
+    cases = suite.findall("testcase")
+    if any(int(suite.get(key, "0")) for key in ("errors", "failures", "skipped")) or len(cases) != len(names):
+        raise SystemExit("nonpassing/incomplete Admin PT")
+    if int(suite.get("tests", "0")) != len(cases):
+        raise SystemExit("inconsistent Admin test count")
+    methods = []
+    clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
+    for case in cases:
+        if any(child.tag not in ("system-out", "system-err") for child in case):
+            raise SystemExit("failed/skipped/flaky/rerun Admin case")
+        attributes = {key: case.get(key) for key in ("name", "classname", "time")}
+        methods.append(attributes["classname"] + "#" + attributes["name"])
+        ET.SubElement(clean, "testcase", attributes)
+    if set(methods) != set(expected.values()) or len(methods) != len(expected):
+        raise SystemExit("Admin Test IDs do not exactly cover executed methods")
+    evidence = repo / "evidence/01_PT/010_NK-ADM-001/evidence"
+    for name in ("logs", "output", "coverage"):
+        (evidence / name).mkdir(parents=True, exist_ok=True)
+    ET.indent(clean)
+    ET.ElementTree(clean).write(evidence / "output" / report.name, encoding="UTF-8", xml_declaration=True)
+    for suffix in ("csv", "xml"):
+        shutil.copyfile(repo / "src/schubert-nk-api/target/site/jacoco" / ("jacoco." + suffix),
+                        evidence / "coverage" / ("api-jacoco." + suffix))
+    manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
+                                              "exitCode", "command", "environment", "modules", "rawLogSha256")}
+    manifest.update({
+        "programId": "NK-ADM-001", "programStatus": "IN_PROGRESS",
+        "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
+        "testIdMethods": expected, "methods": methods,
+        "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
+        "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
+        "scope": "UserQueryRepository search/detail and redacted exception only. Current authentication, command/Inbox/HMAC/critical audit/session revoke, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
+        "relatedBug": [], "relatedSsc": [],
+        "preventionReferences": ["BUG-030/YKT-027 numeric null", "BUG-031/YKT-028 suppressed close redaction", "BUG-044/YKT-039 timestamp Instant oracle"],
+        "notRunCountedAsPass": 0,
+        "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr, provider row dumps, raw identifiers or credentials.",
+    })
+    (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+                         for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
+    (evidence / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    (evidence / "checksums.sha256").write_text("".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  " + str(p.relative_to(evidence)) + "\n"
+                                                     for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
+    print(json.dumps({"runId": run, "tests": len(methods), "status": "SLICE_PASS / PROGRAM_IN_PROGRESS"}))
+
+
+if __name__ == "__main__":
+    main()
