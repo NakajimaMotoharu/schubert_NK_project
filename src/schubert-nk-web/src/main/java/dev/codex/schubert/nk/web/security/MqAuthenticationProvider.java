@@ -3,14 +3,12 @@ package dev.codex.schubert.nk.web.security;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 /**
  * API-only authentication with consumed credentials and current-context verification for0200. No
@@ -53,10 +51,7 @@ public final class MqAuthenticationProvider implements AuthenticationProvider {
               data.role().orElseThrow(),
               context,
               data.issuedAt().orElseThrow());
-      return UsernamePasswordAuthenticationToken.authenticated(
-          principal,
-          null,
-          List.of(new SimpleGrantedAuthority("ROLE_" + principal.role().wireValue())));
+      return ClosedWebAuthentication.authenticated(principal);
     } catch (MqLoginExchangeException failure) {
       if (failure.reason() == MqLoginExchangeException.Reason.INVALID_INPUT) throw badCredentials();
       throw unavailable();
