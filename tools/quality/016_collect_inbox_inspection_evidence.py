@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect only the eight Inbox structure PT from a previously certified full reactor.
+"""Collect eight structure or eight auth-reference PT from a certified full reactor.
 
 NK-DAT-001; PG-D-119; QA-046/SSC-049; no declaration of DB cleanup completion.
 Raw JUnit properties, stdout, stderr and ciphertext are never copied.
@@ -30,7 +30,9 @@ def validate_trace(out, manifest, certified):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
-    run = parser.parse_args().run_id
+    parser.add_argument("--authentication", action="store_true")
+    args = parser.parse_args()
+    run = args.run_id
     if not re.fullmatch(r"PT-(ADM|WEB|SCN|MED)-[A-Za-z0-9-]+", run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
@@ -42,12 +44,18 @@ def main():
                     "src", "pom.xml", "program/characterization", "tools/quality"],
                    cwd=repo, check=True, stdout=subprocess.DEVNULL)
     target = repo / "src/schubert-nk-api/target"
-    class_name = "dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest"
+    subject = "AuthenticationInboxInspector" if args.authentication else "InboxResponseInspector"
+    class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     suite = ET.parse(target / "surefire-reports" / ("TEST-" + class_name + ".xml")).getroot()
     names = ["validSuccessAndErrorProfiles", "headerAndMetadataMismatchesReject",
              "payloadEncodingAndSemanticFaultsReject", "cryptographicDamageAndMissingSnapshotReject",
              "exactLengthsAndTimestampPrecision", "nullContractsFailBeforeValidation",
              "concurrentInspectionsDoNotShareState", "databaseReferenceIsNotCertifiedByStructure"]
+    if args.authentication:
+        names = ["loginOriginalAndLaterAccountState", "logoutOwnerAndRevokedReference",
+                 "deterministicErrorReferences", "missingAndInconsistentLoginRows",
+                 "identityStructureAndNullContracts", "databaseFaultsAndTransactionOwnership",
+                 "keyRotationAndClosedLifetimes", "concurrentReferencesDoNotCross"]
     cases = suite.findall("testcase")
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
@@ -56,7 +64,7 @@ def main():
         raise SystemExit("missing, nonpassing or noncanonical tests")
     coverage_xml = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
-               if c.get("name") == "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector"]
+               if c.get("name") == "dev/codex/schubert/nk/api/maintenance/" + subject]
     if len(classes) != 1:
         raise SystemExit("missing inspection class coverage")
     counters = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
@@ -64,7 +72,8 @@ def main():
     if (not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
             or any(v["missed"] or not v["covered"] for v in counters.values())):
         raise SystemExit("inspection coverage below 100 percent")
-    out = repo / "evidence/01_PT/004_NK-DAT-001/evidence/inbox-inspection"
+    folder = "authentication-inspection" if args.authentication else "inbox-inspection"
+    out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
                                     ("name", "tests", "failures", "errors", "skipped", "time")})
@@ -75,7 +84,9 @@ def main():
     manifest = {
         "runId": run, "programId": "NK-DAT-001", "targetCommit": base["targetCommit"],
         "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
-        "exitCode": 0, "scopeResult": "PASS_STRUCTURE_ONLY", "programStatus": "IN_PROGRESS",
+        "exitCode": 0,
+        "scopeResult": "PASS_AUTH_REFERENCES_ONLY" if args.authentication else "PASS_STRUCTURE_ONLY",
+        "programStatus": "IN_PROGRESS",
         "startedAt": Path("/tmp", run + ".started").read_text().strip(),
         "completedAt": Path("/tmp", run + ".completed").read_text().strip(),
         "fullReactorManifest": os.path.relpath(certified, out),
@@ -85,19 +96,22 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 1)},
-        "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written SS234 wire. No credential or ciphertext saved.",
-        "oracle": "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation.",
-        "remaining": "DB references, expiry/backup/lock/deletion, least-privilege SQL and oneshot wiring NOT certified.",
+                                         "result": "PASS"} for i, name in enumerate(names, 9 if args.authentication else 1)},
+        "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
+        "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
+                   if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
+        "remaining": "Complete DB references, expiry/backup/lock/deletion, least-privilege SQL and oneshot wiring NOT certified.",
         "related": ["QA-046", "UIC-006", "SSC-049", "BUG-014", "YKT-012", "BUG-075", "YKT-067", "BUG-076", "YKT-068"],
         "files": [{"path": "results.xml", "sha256": hashlib.sha256((out / "results.xml").read_bytes()).hexdigest()}]
     }
+    if args.authentication:
+        manifest["related"] += ["PG-D-120", "BUG-077", "BUG-078", "YKT-069"]
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(
         hashlib.sha256((out / name).read_bytes()).hexdigest() + "  " + name + "\n"
         for name in ("results.xml", "manifest.json")))
-    print(json.dumps({"runId": run, "structureTests": 8, "coverage": counters, "programComplete": False}))
+    print(json.dumps({"runId": run, "subject": subject, "inspectionTests": 8, "coverage": counters, "programComplete": False}))
 
 
 if __name__ == "__main__":
