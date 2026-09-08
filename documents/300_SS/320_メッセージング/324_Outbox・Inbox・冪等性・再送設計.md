@@ -252,6 +252,14 @@ UIC-006の検査processは、(1) 暗号snapshot・固定長構造、(2) DB owner
 
 このtrueはDB参照の実在・整合、期限到達、削除許可を意味しない。後続のDB参照検査/競合保護/保守function/起動が完了するまでBUG-014は未完了。対応Test IDはPT-DB-INBOX-001～008、PG-D-119。
 
+### 12.2 認証結果参照の削除前照合（SSC-049/QA-046）
+
+`AuthenticationInboxInspector.isConsistent(connection, identity, completion)` は12.1の全構造検査を必須前段とし、LGNRSP01/LOGRSP01だけを扱う。Loginは匿名AAD、Logoutはowner付きAADを必須とし、他layoutやowner形態不一致をfalseとする。callerの明示transaction（autocommit=false）を要求し、commit/rollback/close/row lockを代行しない。
+
+Loginは6.1の`LoginReplayService.restore`、Logoutは6.2の`LogoutReplayService.restore`の既存read-only整合検証を共用する。Logoutの保存header contextは元sessionとのhash照合のためだけに使い、通常認証を呼び出さない。復元wireは外へ返さず即時消去する。SQL/暗号/参照不備はfalse、呼出しnullは契約違反。Login後のusername/role/status/idle期限変更は過去の成功を改ざんとみなさず、session不在・immutable参照/context不整合は保持する。Logoutはowner/UUID/hash/失効状態/失効時刻を照合する。
+
+この部品は鍵/参照検査だけであり、後続の限定DB functionが同transactionでInbox・参照をlockするまで削除許可にはしない。正常/破損、owner/Message、DB欠落/故障、null、並行、鍵世代、DB非更新はPT-DB-INBOX-009～016へ追跡する。非認証layoutの検査と削除function/oneshotは別の未完了gateである。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
