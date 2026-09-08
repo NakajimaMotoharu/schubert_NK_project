@@ -133,6 +133,14 @@ SSC-031（管理更新の認証前lock prelude）: UCR/UST/URL/UPW/ULKは通常v
 
 ### 6.1 Method
 
+SSC-034（拒否監査のidentity境界）: `AdminCommandAuthenticator.verifyIdentity`はSSC-031の候補lookup/必要advisory/User昇順/session再照合/通常verifyを同じcaller write transaction内で完了し、最新DB identityを返す。候補IDのまま返さず、USERをADMIN許可にしない。旧verifyはこのidentity取得後に既存ADMIN認可を行う互換wrapperとする。
+
+`UserMutationApplicationService`はidentity取得後にADMINを判定し、USERなら351のAUTHORIZATION_DENIED/SECURITY（actor/role/layout/最小target/result0103）を同transactionへ記録してcommitし、Inbox/業務へ入らない。認証失効0102はactorを推測せず欠落として最小拒否監査し、Inbox/業務へ入らない。拒否監査INSERT/close/commit不成立を拒否完了にせず9000型で再試行対象とする。
+
+ADMINは7日保持のowner/token/HMAC Inboxから新規だけUserCommandServiceへ入り、User/全session失効/critical audit/暗号結果を一括commitする。保存replayはPG-D-086のref/version/暗号検証を同transactionで完了し、INBOX_REPLAYED監査を追加する。Token payload不一致は既存結果を返さず0105/SECURITY WARNを記録し新Inboxを作らない。同Message異identityはPROTOCOL_REJECTED監査を確定してから恒久protocol拒否を通知する。DB/監査異常は全rollback、一度commit済みの結果はJMS reply/send/ACK失敗後も再更新しない。
+
+ResponseはDB commitとConnection closeが正常完了した後だけ新ID/correlation/context/時刻で構築する。User更新/確定業務error以外の0102/0103/異token0105はresponse snapshotへ保存せず、再受信時に最新認証/HMACを再評価する。外側JMS listenerがreply送信とACKを所有し、このserviceはJMSをcommitしない。HTTP・全layout登録/起動・IT/STは別gate。
+
 | Method | Command | 成功結果 | Lock/監査 |
 |---|---|---|---|
 | `UserCommandService.create` | username、password、role、enabled、token | ID/version | username UK、operation HMAC、ACTION/SECURITY |
