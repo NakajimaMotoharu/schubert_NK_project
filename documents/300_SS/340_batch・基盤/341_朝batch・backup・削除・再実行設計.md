@@ -135,6 +135,8 @@ Process kill後は未削除rowだけ残り、同cutoff再実行で0件/残件を
 
 UIC-006の検査をbackup成功後のcleanup内部で実施する。通常API/Web inactive条件、固定run/cutoff、backup gateを維持する。検査中はHTTP/JMS Consumerを生成せず、DB snapshot/参照の検査だけを行う。batchのadvisory lockを別connectionから二重取得して自己deadlockさせないよう、検証・削除chunkのconnection/lock所有者を実装前に明示する。検査前後のlock断絶や他runの結果流用を許可しない。異常行は削除せず固定理由・件数だけを返し、暗号文・平文・鍵をbatchへ渡さない。SQL/権限/oneshot wiringのPT完了まで本stepを完了扱いしない。
 
+SSC-049/PG-D-122のlock所有: 親batchはOS flockを保守全体で保持する。検査を開始する前に前段transactionを完了しDB session advisory lockを解放し、専用processが自身のDB transactionで71419602を取得してから候補を検査する。検査・DELETE・commitの間にlockを渡さない。親はprocess終了後にDB advisoryを再取得して後続へ進む。引渡し区間に別DB主体がlockを取得した場合、検査側/親の再取得失敗は失敗として停止し、検査未実施を成功にしない。OS lockを放す実装や、検証済結果を別transactionへ渡す実装は不可。実oneshot/異常終了の試験は後続gateとし、SQL単体PTで実運用結線完了とはしない。
+
 ## 8. Transfer cleanup
 
 333 §12のsecure directory walkを使い、backup失敗時も実行する。Root正常で個別file削除失敗はWARNINGとし

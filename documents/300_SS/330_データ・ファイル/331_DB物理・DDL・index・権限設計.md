@@ -101,6 +101,16 @@ callerの明示transaction中に構造/認証参照検査を行い、終了ま�
 
 BUG-080/YKT-071: backup判定はFOR SHAREした同一query結果のstep集合だけを使う。別statementのEXISTSで新しいSUCCESSを追加採用しない。lock待ち中に別backupが完了した場合は当該snapshotでは55000として保持し、次transactionで両行を取得し直す。[PostgreSQL 18 row locks](https://www.postgresql.org/docs/18/explicit-locking.html)のtransaction寿命とREAD COMMITTEDを前提に、PT021で実DBのlock待ちを観測してsnapshot境界を固定する。単に存在検索が成功しただけでlock取得とみなさない。
 
+### 3.5 認証Inboxの条件付き削除（SSC-049/QA-046、PG-D-122）
+
+V009をappend-only追加し、`maintenance_delete_auth_inbox(run_id uuid, cutoff timestamptz, message_id uuid, expected_xact text, expected_response_sha256 bytea) RETURNS boolean`だけを検査roleへEXECUTE許可する。nk_owner/SECURITY DEFINER、固定search_path/UTC、PUBLIC・他service roleのEXECUTE禁止、直接DML禁止を維持する。
+
+callerは3.4の候補取得時に同じSQLから`pg_current_xact_id()::text`と`sha256(response_body_encrypted)`を内部に保持する。検査成功後、同一所有transaction・同じrun/cutoffでだけ削除関数を呼ぶ。関数はNULL/非有限cutoff/非decimal transaction ID/32byte以外のhashを22023、transaction ID不一致をfalseとして拒否する。その後71419602と同一locked queryによるbackup gateを再確認し、Message一致・暗号文SHA-256一致・完了state・LGNREQ01/LGNRSP01またはLOGREQ01/LOGRSP01・両version001・tokenなし・owner形態・NONE/AUTH_SESSION参照形態・有限日時・created<=completed・expires>=completed+168時間・expires<cutoffを全て満たす1行だけ削除する。実削除1=true、非該当/既削除=false。固定run/cutoffはprocessの不変run recordを使用し、関数へ別日時を差替えない。
+
+SQL自体はAES/HMAC検証器ではない。専用processが検証前にこの関数を呼ばないこと、候補/参照/backupのlockを検証開始からcommitまで保持することをJavaの所有境界とPTで保証する。transaction IDはtop-level IDでSAVEPOINT rollbackの証明にはならないため、所有serviceは新規connectionを外へ公開せずSAVEPOINT/外部callback/途中commitを使用しない。検査credentialを奪った任意SQL主体への暗号証明をこの関数が提供するとは主張しない。V001～008は変更しない。V006の汎用Inbox削除の置換と全layout結線は別の残件であり本追加だけでBUG-014を完了にしない。
+
+対応PT-DB-INBOX-025～032はSQLの全引数/条件/権限/lock/再実行・正常削除のmatrix。Javaの検査接続は別PTで認証の正常/不整合/故障/並行を検証する。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

@@ -260,6 +260,14 @@ Loginは6.1の`LoginReplayService.restore`、Logoutは6.2の`LogoutReplayService
 
 この部品は鍵/参照検査だけであり、後続の限定DB functionが同transactionでInbox・参照をlockするまで削除許可にはしない。正常/破損、owner/Message、DB欠落/故障、null、並行、鍵世代、DB非更新はPT-DB-INBOX-009～016へ追跡する。非認証layoutの検査と削除function/oneshotは別の未完了gateである。
 
+### 12.3 検査から削除までの所有境界（SSC-049/QA-046、PG-D-122）
+
+非公開の認証Inbox保守serviceは専用roleのfresh connectionと明示transactionを一操作内で所有する。固定run/cutoff、UUID昇順cursorから1候補を取得・lockし、canonical route/version/owner/token、期限、既知fingerprint key version、12.1/12.2の構造と参照を検査してから331 §3.5の条件付き削除を呼ぶ。SAVEPOINT、connectionの外部公開、remote I/O、外部callback、検査と削除の間のcommit/rollbackは禁止。snapshot/context鍵はprocess寿命中不変とし、終了までclose/rotationを競合させない。
+
+元requestのpassword/canonical平文は保存しないため過去のHMAC再計算は行わない。保存HMACの形式と既知versionを検査し、snapshot AAD/headerと業務参照の整合を証明範囲とする。HMAC秘密keyを検査主体へ配布せず、読取り可能versionの非秘密allowlistだけを使用する。未知versionは保持する。
+
+不整合は保護して次のcursorへ進めるが、SQL/commit/close故障は固定の非秘密運用失敗とし正常終了にしない。commit成否不明時は既削除の可能性を記録し、同じrun/cutoffで冪等再走する。rollbackで不明commitを取り消せたとは扱わない。正常削除の成功結果はcommit・resource終了後だけ返す。外へ出す診断は固定理由と件数のみ。参照sessionが既にcleanup済みなら保持するという現行保護条件と朝batch順序を変更しない。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
