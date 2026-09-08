@@ -81,7 +81,15 @@ class WebAuthorizationFilterTest {
         var request = request(method, path);
         request.addHeader("role", "ADMIN");
         request.addParameter("role", "ADMIN");
-        assertEquals(1, invoke(filter, request));
+        // SS352 §3.1 explicit method table; the initial all-method oracle was BUG-072.
+        boolean allowed =
+            path.equals("/login")
+                ? method.equals("GET") || method.equals("POST")
+                : method.equals("GET") || method.equals("HEAD");
+        if (allowed) assertEquals(1, invoke(filter, request));
+        else
+          assertThrows(
+              AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, request));
         assertNull(SecurityContextHolder.getContext().getAuthentication());
       }
     }
@@ -172,6 +180,22 @@ class WebAuthorizationFilterTest {
     var query = request("GET", "/search");
     query.setQueryString("path=/admin/users&role=ADMIN");
     assertEquals(1, invoke(filter, query));
+    SecurityContextHolder.clearContext();
+    for (DispatcherType dispatcher : DispatcherType.values()) {
+      for (String method : List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+        var error = request(method, "/error");
+        error.setDispatcherType(dispatcher);
+        if (dispatcher == DispatcherType.ERROR || method.equals("GET") || method.equals("HEAD"))
+          assertEquals(1, invoke(filter, error));
+        else
+          assertThrows(
+              AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, error));
+        var secret = request(method, "/admin/users");
+        secret.setDispatcherType(dispatcher);
+        assertThrows(
+            AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, secret));
+      }
+    }
   }
 
   @Test
