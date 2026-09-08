@@ -12,15 +12,13 @@ public record AnimationListResponseData(int totalCount) implements PayloadData {
   }
 
   public static AnimationListResponseData from(FieldValueSet fields) {
-    return new AnimationListResponseData(
-        TypedFieldValues.requiredInt(fields, "Total count"));
+    return new AnimationListResponseData(TypedFieldValues.requiredInt(fields, "Total count"));
   }
 
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
+        Map.ofEntries(Map.entry("Total count", TypedFieldValues.numeric(totalCount))));
   }
 
   @Override

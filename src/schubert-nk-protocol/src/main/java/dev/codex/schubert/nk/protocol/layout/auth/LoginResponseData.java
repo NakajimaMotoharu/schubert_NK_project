@@ -11,14 +11,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts LGNRSP01. */
-public record LoginResponseData(Optional<String> username,
+public record LoginResponseData(
+    Optional<String> username,
     Optional<UserRole> role,
     Optional<AuthenticationContext> authenticationContextId,
     Optional<Instant> issuedAt,
     Optional<Instant> expiresAt,
     int retryAfterSeconds,
     int remainingAttempts,
-    Optional<String> userMessage) implements PayloadData {
+    Optional<String> userMessage)
+    implements PayloadData {
   public LoginResponseData {
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(role, "role");
@@ -48,7 +50,9 @@ public record LoginResponseData(Optional<String> username,
         Map.ofEntries(
             Map.entry("Username", TypedFieldValues.optionalStringValue(username)),
             Map.entry("Role", TypedFieldValues.optionalEnumValue(role)),
-            Map.entry("認証context ID", TypedFieldValues.optionalAuthenticationContextValue(authenticationContextId)),
+            Map.entry(
+                "認証context ID",
+                TypedFieldValues.optionalAuthenticationContextValue(authenticationContextId)),
             Map.entry("発行日時", TypedFieldValues.optionalInstantValue(issuedAt)),
             Map.entry("期限日時", TypedFieldValues.optionalInstantValue(expiresAt)),
             Map.entry("Retry after秒", TypedFieldValues.numeric(retryAfterSeconds)),

@@ -183,7 +183,8 @@ CREATE TABLE schubert.request_inbox (
         OR (response_layout_id IS NOT NULL AND response_version IS NOT NULL)),
     CONSTRAINT ck_request_inbox_response_snapshot_pair CHECK (
         (response_body_encrypted IS NULL AND response_key_version IS NULL)
-        OR (response_body_encrypted IS NOT NULL AND octet_length(response_body_encrypted) > 28
+        OR (response_body_encrypted IS NOT NULL
+            AND octet_length(response_body_encrypted) BETWEEN 29 AND 1050000
             AND response_key_version ~ '^[A-Za-z0-9][A-Za-z0-9._-]{0,15}$')),
     CONSTRAINT ck_request_inbox_result_reference CHECK (
         (result_ref_type IS NULL AND result_ref_id IS NULL AND result_ref_uuid IS NULL)

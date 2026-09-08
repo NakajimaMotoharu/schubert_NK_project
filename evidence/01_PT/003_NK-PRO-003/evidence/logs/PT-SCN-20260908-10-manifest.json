@@ -1,0 +1,183 @@
+{
+  "runId": "PT-SCN-20260908-10",
+  "programId": "NK-PRO-003",
+  "targetCommit": "97c7ddde6ad17c66dbeebac8d110a863c8ca32d9",
+  "branch": "dev-scenario",
+  "startedAt": "2026-09-08T06:59:07+09:00",
+  "completedAt": "2026-09-08T07:01:37+09:00",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "apiNativeAccess": "ALL-UNNAMED; public Java25 FFM; SSC-019"
+  },
+  "exitCode": 0,
+  "result": "PASS_PROGRAM_COMPLETE",
+  "tests": {
+    "program": 13,
+    "reactor": 419
+  },
+  "methods": [
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#decodeRejectsTruncationExtraHashAndIoFailure",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writeRejectsNullCountLengthAndIoFailure",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#verificationRejectsAllThirtyTwoDigestBytePositions",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#contentMetadataRejectsInvalidValues",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#constructorRejectsNullComponents",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#acceptsExactlySevenSsc004ExtensionMimePairs",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#dispositionMapsOnlyIAndA",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsEveryMimeCrossProductAndVideoAttachment",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#formatsAndParsesStrictJstMilliseconds"
+  ],
+  "module": {
+    "tests": 74,
+    "coverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17333
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1000
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3449
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1267
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 740
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 157
+      }
+    },
+    "spotbugs": {
+      "tool": "SpotBugs 4.10.4.0",
+      "violations": 0,
+      "errors": 0
+    }
+  },
+  "relatedBugs": [
+    "BUG-034"
+  ],
+  "relatedYkt": [
+    "YKT-030"
+  ],
+  "relatedSsc": [
+    "SSC-004"
+  ],
+  "testId": "PT-PRO-003-H01 plus full existing NK-PRO-003 regression",
+  "expected": "Independent JCA 32-byte digest; valid record accepted; each of 32 digest-byte mutations rejected. Compiled verification invokes MessageDigest.isEqual, with no String.equals callsite.",
+  "actual": "PASS",
+  "bytecodeSha256": "b0959724c410655cee66ab5e439b5d63972aad30ab5376dfd128455e7b5011d8",
+  "rawLogSha256": "af1c28aa95f46761e8234fb378b20087765981b0fcf99a5207968c844de672cd",
+  "redaction": "JUnit names/counters only, no properties/stdout/stderr; public synthetic bytes, no secrets or master content.",
+  "scope": "NK-PRO-003 codec/timestamp/descriptor only; Scenario application/file lifecycle/HTTP/IT/ST remain incomplete.",
+  "files": [
+    {
+      "path": "coverage/jacoco.csv",
+      "sha256": "ec72ff84154265a700b00eb1eeb32ff4d5217f2443af6721450193a1657e0d94"
+    },
+    {
+      "path": "coverage/jacoco.xml",
+      "sha256": "100cfbe30fb9cd9b01c743b972d2616bcf947014b88fb466889e3442d8f4bfbe"
+    },
+    {
+      "path": "logs/PT-PRO-20260902-01-build.log",
+      "sha256": "3cfed00a1c29847681a4ea7e2fb40fb3a8e898008be3526d72d3f7e59187d233"
+    },
+    {
+      "path": "logs/PT-PRO-20260902-01-manifest.json",
+      "sha256": "e1286aba5b15ca2d249c731c462c5a11dd56d0488dbc68d88cf0c2857d54a974"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-02-manifest.json",
+      "sha256": "e44b9bc1e50ea9d2aea8fb04870c9bffa3922552a5d8242f55798a56e382053c"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-02-summary.json",
+      "sha256": "34a1ff1b10a4b2bced0a3e135cc5afc121f368c1151a0e4948c692e469b8bfce"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-03-manifest.json",
+      "sha256": "0b6c6a6eeb5771836780b2951f11da4cd3f754eb85173a8e1d9b911bc2d95114"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-03-summary.json",
+      "sha256": "e5fe7f98d446d87d7fd27442de8c4d3cd16f379d569af7f8ea4894d5e6f04868"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-05-manifest.json",
+      "sha256": "17b4c32c7d9d1bcd2060c1879205b0f4cddb4896dda15c4425485cb59f5ee466"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-05-summary.json",
+      "sha256": "01b23d52843a94a22688031b7a22ac342afa4793ed0bfbc7dd5f20a4dc963522"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-06-manifest.json",
+      "sha256": "a01e8c36e77100055a7682f0cb7dd36a6a24ef7cc12b564e4c7ece6fa7db3d72"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-06-summary.json",
+      "sha256": "6925360e3e3fe8b1107a6aed982eb7f55e1cfb416d85e5f58a0a0ede5662e380"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-07-manifest.json",
+      "sha256": "054f2df03fa61eb1df689f0652d783df72995bd4d58538fc155e9f22ee2a3ba6"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-07-summary.json",
+      "sha256": "a43b923d6b7df7f8271f13beab4a4665fb9909b629add9cc24f813a2cc774c44"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-08-manifest.json",
+      "sha256": "71e5aca2ef0b81d964523489a5f25158d3cce97404f441998d89b32e37eaf233"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-08-summary.json",
+      "sha256": "51cfb37f5d7f41d3d1702ed5224041f7197dcd8891206234c5abb74453ae3269"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-09-manifest.json",
+      "sha256": "764ea416ae1a860c0c95b4b3e4b5e1cf2a73f6eb7c24f68f2d346364780a4685"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-09-summary.json",
+      "sha256": "f88847af73567b9f77120422b8e6443b5bf19fe552b091781eb291d6d65e6ff7"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-10-summary.json",
+      "sha256": "824e4e89deddb60e2e08e0ad55c584855bd4e7170c29fb9c3f1c04df60203e44"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "86ae6d6150386bb23d13cbbdf6ce6af8d6dae3b1dd6dfcf39f31435fe1a42ecc"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "e7c7d31c4379a6bb2655d5543aeb473b3a7d8bed46abaf16f0bbc2efa3d18934"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "88e4531a4e23ca891e66a2fbdaf2494a6ce28fc41e1aef0a658314b53cd760be"
+    },
+    {
+      "path": "output/spotbugs.xml",
+      "sha256": "ec7ddfc9d51d5046c23533bc786543e5e60b13729d8f8b9b2f4b5eadcce2c58d"
+    }
+  ]
+}

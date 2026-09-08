@@ -11,13 +11,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts QSSRSP01. */
-public record QuestionSummaryRecord(QuestionId questionId,
+public record QuestionSummaryRecord(
+    QuestionId questionId,
     String receiptId,
     String username,
     String questionSummary,
     AnswerState answerState,
     Instant submittedAt,
-    Optional<Instant> answeredAt) implements PayloadRecord {
+    Optional<Instant> answeredAt)
+    implements PayloadRecord {
   public QuestionSummaryRecord {
     Objects.requireNonNull(questionId, "questionId");
     Objects.requireNonNull(receiptId, "receiptId");

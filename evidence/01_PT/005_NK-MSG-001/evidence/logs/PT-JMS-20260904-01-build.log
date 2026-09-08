@@ -1,0 +1,357 @@
+Script started on 2026-09-04 21:29:47+09:00 [COMMAND="env JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify" <not executed on terminal>]
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] schubert-nk                                                        [pom]
+[INFO] Schubert Characterization Test                                     [jar]
+[INFO] Schubert NK Protocol                                               [jar]
+[INFO] Schubert NK API                                                    [jar]
+[INFO] Schubert NK Web                                                    [jar]
+[INFO]
+[INFO] -------------------< dev.codex.schubert:schubert-nk >-------------------
+[INFO] Building schubert-nk 0.1.0-SNAPSHOT                                [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ schubert-nk ---
+[INFO]
+[INFO] ------------< dev.codex.schubert:schubert-characterization >------------
+[INFO] Building Schubert Characterization Test 0.1.0-SNAPSHOT             [2/5]
+[INFO]   from program/characterization/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ schubert-characterization ---
+[INFO] Deleting /home/mini/codex/project1/schubert_NK_project/program/characterization/target
+[INFO]
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-characterization ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/schubert_NK_project/program/characterization/target/jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-characterization ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/schubert_NK_project/program/characterization/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-characterization ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ schubert-characterization ---
+[INFO] Copying 7 resources from tests/resources to target/test-classes
+[INFO]
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ schubert-characterization ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.4:test (default-test) @ schubert-characterization ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running dev.codex.schubert.characterization.GateContractTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.747 s -- in dev.codex.schubert.characterization.GateContractTest
+[INFO] Running dev.codex.schubert.characterization.GateCliTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.407 s -- in dev.codex.schubert.characterization.GateCliTest
+[INFO] Running dev.codex.schubert.characterization.TargetAdapterTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in dev.codex.schubert.characterization.TargetAdapterTest
+[INFO] Running dev.codex.schubert.characterization.GateContractValidatorNegativeTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.512 s -- in dev.codex.schubert.characterization.GateContractValidatorNegativeTest
+[INFO] Running dev.codex.schubert.characterization.ArtifactComparatorTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in dev.codex.schubert.characterization.ArtifactComparatorTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ schubert-characterization ---
+[INFO] Building jar: /home/mini/codex/project1/schubert_NK_project/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- jacoco:0.8.15:report (coverage-report) @ schubert-characterization ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/program/characterization/target/jacoco.exec
+[INFO] Analyzed bundle 'Schubert Characterization Test' with 8 classes
+[INFO]
+[INFO] --- jacoco:0.8.15:check (coverage-check) @ schubert-characterization ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/program/characterization/target/jacoco.exec
+[INFO] Analyzed bundle 'schubert-characterization' with 8 classes
+[INFO] All coverage checks have been met.
+[INFO]
+[INFO] --------------< dev.codex.schubert:schubert-nk-protocol >---------------
+[INFO] Building Schubert NK Protocol 0.1.0-SNAPSHOT                       [3/5]
+[INFO]   from src/schubert-nk-protocol/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ schubert-nk-protocol ---
+[INFO] Deleting /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target
+[INFO]
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-protocol ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-protocol ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-protocol ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 163 source files with javac [debug release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ schubert-nk-protocol ---
+[INFO] Copying 4 resources from src/test/resources to target/test-classes
+[INFO]
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ schubert-nk-protocol ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [debug release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.4:test (default-test) @ schubert-nk-protocol ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running dev.codex.schubert.nk.protocol.time.JstWireTimestampTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in dev.codex.schubert.nk.protocol.time.JstWireTimestampTest
+[INFO] Running dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest
+[INFO] Running dev.codex.schubert.nk.protocol.header.HeaderModelTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in dev.codex.schubert.nk.protocol.header.HeaderModelTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.140 s -- in dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest
+[INFO] Running dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest
+[INFO] Running dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.326 s -- in dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest
+[INFO] Running dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest
+[INFO] Running dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.090 s -- in dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest
+[INFO] Running dev.codex.schubert.nk.protocol.codec.FieldCodecTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in dev.codex.schubert.nk.protocol.codec.FieldCodecTest
+[INFO] Running dev.codex.schubert.nk.protocol.codec.MessageCodecTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in dev.codex.schubert.nk.protocol.codec.MessageCodecTest
+[INFO] Running dev.codex.schubert.nk.protocol.codec.PayloadCodecTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in dev.codex.schubert.nk.protocol.codec.PayloadCodecTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 69, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ schubert-nk-protocol ---
+[INFO] Building jar: /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- jacoco:0.8.15:report (coverage-report) @ schubert-nk-protocol ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/jacoco.exec
+[INFO] Analyzed bundle 'Schubert NK Protocol' with 157 classes
+[INFO]
+[INFO] --- jacoco:0.8.15:check (coverage-check) @ schubert-nk-protocol ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-protocol/target/jacoco.exec
+[INFO] Analyzed bundle 'schubert-nk-protocol' with 157 classes
+[INFO] All coverage checks have been met.
+[INFO]
+[INFO] >>> spotbugs:4.10.4.0:check (static-analysis) > :spotbugs @ schubert-nk-protocol >>>
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ schubert-nk-protocol ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO]
+[INFO] <<< spotbugs:4.10.4.0:check (static-analysis) < :spotbugs @ schubert-nk-protocol <<<
+[INFO]
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:check (static-analysis) @ schubert-nk-protocol ---
+[INFO] BugInstance size is 0
+[INFO] Error size is 0
+[INFO] No errors/warnings found
+[INFO]
+[INFO] -----------------< dev.codex.schubert:schubert-nk-api >-----------------
+[INFO] Building Schubert NK API 0.1.0-SNAPSHOT                            [4/5]
+[INFO]   from src/schubert-nk-api/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ schubert-nk-api ---
+[INFO] Deleting /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target
+[INFO]
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-api ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-api ---
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 28 source files with javac [debug release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ schubert-nk-api ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ schubert-nk-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 14 source files with javac [debug release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.4:test (default-test) @ schubert-nk-api ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.132 s -- in dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest
+[INFO] Running dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest
+[INFO] Running dev.codex.schubert.nk.api.database.DatabaseMigrationTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.340 s -- in dev.codex.schubert.nk.api.database.DatabaseMigrationTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::allocateMemory has been called by io.netty.util.internal.PlatformDependent0$2 (file:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar)
+WARNING: Please consider reporting this to the maintainers of class io.netty.util.internal.PlatformDependent0$2
+WARNING: sun.misc.Unsafe::allocateMemory will be removed in a future release
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.614 s -- in dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.669 s -- in dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.40 s -- in dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.076 s -- in dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.746 s -- in dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.076 s -- in dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest
+[INFO] Running dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 62, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ schubert-nk-api ---
+[INFO] Building jar: /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- jacoco:0.8.15:report (coverage-report) @ schubert-nk-api ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/jacoco.exec
+[INFO] Analyzed bundle 'Schubert NK API' with 23 classes
+[INFO]
+[INFO] --- jacoco:0.8.15:check (coverage-check) @ schubert-nk-api ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-api/target/jacoco.exec
+[INFO] Analyzed bundle 'schubert-nk-api' with 23 classes
+[INFO] All coverage checks have been met.
+[INFO]
+[INFO] >>> spotbugs:4.10.4.0:check (static-analysis) > :spotbugs @ schubert-nk-api >>>
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ schubert-nk-api ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO]
+[INFO] <<< spotbugs:4.10.4.0:check (static-analysis) < :spotbugs @ schubert-nk-api <<<
+[INFO]
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:check (static-analysis) @ schubert-nk-api ---
+[INFO] BugInstance size is 0
+[INFO] Error size is 0
+[INFO] No errors/warnings found
+[INFO]
+[INFO] -----------------< dev.codex.schubert:schubert-nk-web >-----------------
+[INFO] Building Schubert NK Web 0.1.0-SNAPSHOT                            [5/5]
+[INFO]   from src/schubert-nk-web/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ schubert-nk-web ---
+[INFO] Deleting /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/target
+[INFO]
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-web ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/target/jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-web ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-web ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 13 source files with javac [debug release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ schubert-nk-web ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ schubert-nk-web ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.4:test (default-test) @ schubert-nk-web ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.156 s -- in dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest
+[INFO] Running dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest
+[INFO] Running dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::allocateMemory has been called by io.netty.util.internal.PlatformDependent0$2 (file:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar)
+WARNING: Please consider reporting this to the maintainers of class io.netty.util.internal.PlatformDependent0$2
+WARNING: sun.misc.Unsafe::allocateMemory will be removed in a future release
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.445 s -- in dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest
+[INFO] Running dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest
+[INFO] Running dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s -- in dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ schubert-nk-web ---
+[INFO] Building jar: /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- jacoco:0.8.15:report (coverage-report) @ schubert-nk-web ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/target/jacoco.exec
+[INFO] Analyzed bundle 'Schubert NK Web' with 11 classes
+[INFO]
+[INFO] --- jacoco:0.8.15:check (coverage-check) @ schubert-nk-web ---
+[INFO] Loading execution data file /home/mini/codex/project1/schubert_NK_project/src/schubert-nk-web/target/jacoco.exec
+[INFO] Analyzed bundle 'schubert-nk-web' with 11 classes
+[INFO] All coverage checks have been met.
+[INFO]
+[INFO] >>> spotbugs:4.10.4.0:check (static-analysis) > :spotbugs @ schubert-nk-web >>>
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ schubert-nk-web ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO]
+[INFO] <<< spotbugs:4.10.4.0:check (static-analysis) < :spotbugs @ schubert-nk-web <<<
+[INFO]
+[INFO]
+[INFO] --- spotbugs:4.10.4.0:check (static-analysis) @ schubert-nk-web ---
+[INFO] BugInstance size is 0
+[INFO] Error size is 0
+[INFO] No errors/warnings found
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for schubert-nk 0.1.0-SNAPSHOT:
+[INFO]
+[INFO] schubert-nk ........................................ SUCCESS [  0.145 s]
+[INFO] Schubert Characterization Test ..................... SUCCESS [  5.559 s]
+[INFO] Schubert NK Protocol ............................... SUCCESS [ 10.887 s]
+[INFO] Schubert NK API .................................... SUCCESS [ 55.782 s]
+[INFO] Schubert NK Web .................................... SUCCESS [  7.830 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:20 min
+[INFO] Finished at: 2026-09-04T21:31:09+09:00
+[INFO] ------------------------------------------------------------------------
+
+Script done on 2026-09-04 21:31:09+09:00 [COMMAND_EXIT_CODE="0"]

@@ -15,7 +15,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts LGSRSP01. */
-public record LogRecord(LogId logId,
+public record LogRecord(
+    LogId logId,
     Instant occurredAt,
     LogType logType,
     LogLevel level,
@@ -29,7 +30,8 @@ public record LogRecord(LogId logId,
     Optional<HttpStatusCode> httpStatus,
     Optional<ElapsedMilliseconds> elapsedMs,
     Optional<String> remoteAddress,
-    Optional<String> details) implements PayloadRecord {
+    Optional<String> details)
+    implements PayloadRecord {
   public LogRecord {
     Objects.requireNonNull(logId, "logId");
     Objects.requireNonNull(occurredAt, "occurredAt");

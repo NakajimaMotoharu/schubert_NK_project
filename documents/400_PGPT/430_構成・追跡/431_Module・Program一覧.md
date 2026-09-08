@@ -1,5 +1,11 @@
 # Module・Program一覧
 
+最新確定: 正式PT-SCN-20260908-23、source e6b4368407043850f0d11a8227d5577977f4868c、2026-09-08 11:46:25～11:49:26 JST、全487件（Protocol80/Storage26/API282/Web58/CHR41）。failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 Scenario143/Auth85/coordinator11/置換3/PRO00317は重複する内数であり全体へ加算しない。確定5/20=25%、SSC-023/024の段階接続を確認。SSC-027の内部serviceはPASS、本番起動/登録は別残件。 以下は履歴。
+
+2026-09-08 11:46 暫定判定: BUG-040/YKT-036のstorage拡張子検証漏れを修正前起票し、NK-PRO-003完了を再試験まで保留。確定4/20（20%、工数換算ではない）。正式22は全486件/coverage100%/静的解析0だったが、collectorのTest ID完全名誤りBUG-041で収集未完了。以下の過去完了表示を現在判定としない。BUG-038/039の再試験と併せ、source/collectorを固定した正式23へ進む。
+
+最新: 正式`PT-SCN-20260908-20`、source `e9d89e5a339320cc57dd7f50b9bb40810edd2a43`、dev-scenario、2026-09-08 11:02:42～11:05:27 JST。全479件（Protocol79/Storage26/API275/Web58/CHR41）、Scenario関連136/Auth85/coordinator11/置換3（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 NK-MSG-002のPT-IDEM-SR01～SR03でrow lock・旧暗号一致・2列限定置換/他17列不変を確認。NK-SCN-001の最終段階serviceを次に接続する。確定5/20=25%、Program残件とQA-045承認依存は継続。
+
 ## 1. 管理規則
 
 Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`PT-AUTH-*`等）をprefixとしてProgram内で欠番なく採番する。Class/method、resource、DDL、設定、test、evidenceをProgram IDで束ね、RD要件ID・UI文書・SS文書へforward/reverse traceする。正式module名はSS 311を正とする。
@@ -8,9 +14,10 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 | Module | Production path | 責務 | 許可依存 | 主SS |
 |---|---|---|---|---|
+| `schubert-nk-storage` | `src/schubert-nk-storage` | SSC-021: 保持directory/inode、Linux native、OS属性/root配置。既存NK-SCN-001の低位能力を抽出（Program母数不変） | JDK/JSpecifyのみ、Protocol/業務module依存なし | 311、333、342、343 |
 | `schubert-nk-protocol` | `src/schubert-nk-protocol` | 256-byte header、64 layout、value object、codec、error | JDK/JSpecifyのみ | 311、322、323 |
-| `schubert-nk-api` | `src/schubert-nk-api` | JMS consumer、業務service、DB/file、Inbox/Outbox | protocol | 311、312、321、324、331～333 |
-| `schubert-nk-web` | `src/schubert-nk-web` | Login/session/CSRF、controller/form/template、JMS client、Range | protocol | 311～314、321、333 |
+| `schubert-nk-api` | `src/schubert-nk-api` | JMS consumer、業務service、DB/file、Inbox/Outbox | protocol、storage（file adapterのみ） | 311、312、321、324、331～333 |
+| `schubert-nk-web` | `src/schubert-nk-web` | Login/session/CSRF、controller/form/template、JMS client、Range | protocol、storage（file adapterのみ） | 311～314、321、333 |
 | `schubert-nk-batch` | `src/schubert-nk-batch` | 朝batch、backup、削除、再実行 | 原則JDK、限定protocol | 311、341 |
 | deployment/migration | `src/deployment`、`src/migration` | Caddy/systemd/PostgreSQL/Artemis/Java設定、移行・切戻し | Artifact公開契約 | 331、342、343、351～353 |
 | NK Characterization adapter | `program/characterization` | Current baselineを変更しないNK比較 | Production HTTP公開契約 | 355 |
@@ -20,13 +27,13 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | No. / Program ID | Module・主class/resource | 関連RD | 関連UI | 関連SS | PT directory | CHR | 状態 |
 |---|---|---|---|---|---|---|---|
 | 001 / `NK-PRO-001` | Header/field/value/catalog | MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006 | 232～237、243 | 311、322～323、333 | `001_NK-PRO-001` | A/S/M/L/E/N | PG/PT完了（25/25、389 field・69 named record・64明示mapper・SS 323共通Java型、coverage全100%、SpotBugs 0） |
-| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT完了（35/35、64 layout相関・min/max/error golden・0107個別field・最大record・並行性、module coverage全100%、SpotBugs 0） |
-| 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（12/12、coverage全100%、SpotBugs 0） |
-| 004 / `NK-DAT-001` | Flyway V001～V005、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | PG/PT完了（15/15、migration 5/5、SQL object/function branch matrix 100%、実PostgreSQL 18.6、SSC-005反映）。DDL単体はHTTP出力なし、A/S/M/L/N/OのNK実画面比較は各依存Programで実施 |
-| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | 未着手 |
-| 006 / `NK-MSG-002` | Inbox/Outbox/replay/retry/log outbox | ASY-001～009、MQ-006～010 | 213、231～236、241 | 312、324、332 | `006_NK-MSG-002` | L/N/O | 未着手 |
-| 007 / `NK-AUT-001` | Authentication/attempt/session/context/owner/role | FUN-001/009、AUT-001～004 | 225～226、234、241 | 312、314、331～332 | `007_NK-AUT-001` | A01～A03/U02/O01 | 未着手 |
-| 008 / `NK-SCN-001` | Scenario/game/speaker/route/file/detail query | FUN-003～005 | 223～224、234 | 312～313、323、332 | `008_NK-SCN-001` | S01～S08 | 未着手 |
+| 002 / `NK-PRO-002` | FixedWidthEncoder/Decoder、64 payload | MQ-014～045、MSG/MSG-F | 233～236 | 322～324 | `002_NK-PRO-002` | A/S/M/L/N | PG/PT完了（BUG-023/SSC-012の再試験で復帰。Run PT-AUT-20260908-06全317件/Protocol72、独立Login error3 PT・31response全error matrix、全coverage100%、SpotBugs0） |
+| 003 / `NK-PRO-003` | Large-result codec、JST timestamp、descriptor validation | MQ-035/039～041、FIL-001～009 | 232、237 | 322～323、333 | `003_NK-PRO-003` | S/M/O | PG/PT完了（BUG-037/YKT-033再試験復帰、PT-SCN-20260908-23全487件/Program17/Protocol80、全coverage100%・静的解析0。32byte constant-time照合・32位置改変拒否） |
+| 004 / `NK-DAT-001` | Flyway V001～V007、21 table、index/constraint/role/grant | DAT-001～011、BAK/MIG-DAT | 241～242、251、254 | 331～332、343 | `004_NK-DAT-001` | A/S/M/L/N/O | 完了判定再確認中（15 PTとV006 cleanup再試験は成功しBUG-015は完了。BUG-014 Inbox保護/YKT-012は未完了。従来完了から一旦除外） |
+| 005 / `NK-MSG-001` | Artemis設定、JMS request/reply/correlation | MQ-001～013/040～045 | 212～213、231 | 312、321 | `005_NK-MSG-001` | A/S/M/L/E/O | **PG/PT完了**（`PT-JMS-20260904-01`。12/12 case、関連JUnit 65/65、全reactor 199/199 PASS。28 production class、instruction/branch/line/method各100%、SpotBugs/secret hit 0） |
+| 006 / `NK-MSG-002` | Inbox/Outbox/replay/retry/log outbox | ASY-001～009、MQ-006～010 | 213、231～236、241 | 312、324、332 | `006_NK-MSG-002` | L/N/O | 実施中（PT-IDEM-001～009/011 PASS、010/012/013部分、014/015未実施。006証跡PT-AUT-20260908-13全349件/API188、全coverage100%、SpotBugs/NullAway0。API ingest、Outbox保持/NULL、format/Enforcer再生成まで試験済み。BUG-027 secret buffer消去・BUG-025完了起点保持とreplay期限不変を確認。HTTP投影/Inbox保護/stress未完了、BUG-014継続・015完了） |
+| 007 / `NK-AUT-001` | Authentication/attempt/session/context/owner/role | FUN-001/009、AUT-001～004 | 225～226、234、241 | 312、314、331～332 | `007_NK-AUT-001` | A01～A03/U02/O01 | PG/PT実施中（PT-SCN-20260908-23全487件/Auth85。Login/Logout冪等/管理全失効/監査/rollback/競合/応答DATA mapper/暗号化Login replay/参照整合・不変 PASS。BUG-022～029/SSC-010～016直接対応完了、64byte表示/96byte比較key・V007・audit分離を確認。匿名Login Inbox/JDBC・実JMS再配送、owner付きLogout Inbox/100同時再配送、任意監査IP・stage時計進行はPASS。SSC-023のread-only認証事前確認（非更新/行lock非取得/100並行/失効再検証）PASS。全layout dispatcher・起動/管理command/expiry・Web recovery/HTTP/CHR接続は未完了） |
+| 008 / `NK-SCN-001` | Scenario query/detail・API native directory | FUN-003～005、FIL-001～009 | 223～224、234、237 | 312～313、323、332～333、342 | `008_NK-SCN-001` | S01～S08 | PG/PT実施中（PT-SCN-20260908-23全487件/Scenario関連143成功、全coverage100%、静的解析0。5 query＋detailの独立byte/Current表示/前後/全voice/10000上限/NULL/SQL故障/100並行を確認。BUG-030～035、YKT-027/028/030/031、SSC-018完了。Native no-replace/100並行・保持FD寿命/差替え・BUG-036/YKT-032再試験PASS。保持inode・owner/group/mode/nlink/size・複合I/O故障はPASS。I/F応答投影と容量予約/100並行はPASS。Root論理非重複/保持属性・ext4/SDS検査は部品PASS。CREATE_NEW/属性設定/最大48MB write・hash/再試行/公開・清掃/100並行と容量の内部writer接続PASS。Web内部read-only readerの最大48MB/100並行・属性/hash二段検証・途中改変/リンク/close故障拒否PASS。起動前metadata scan・0byte part算入・複数dateを跨ぐ9000/10000/10001件境界・列挙/close/差替え故障拒否PASS。自作診断fileの起動probe（force/group/hash/no-replace/fsync/所有別清掃・不確定ready保全）PASS。SSC-026の6response保存/再送部品（独立byte/暗号・改変拒否・100並行）PASS。SSC-027 guard/実ready完全性・不在検査/元content再生成/descriptorだけの暗号置換は内部10追加PT PASS。T01～T07の段階認証/Inbox/実DB-file-JMS・100同時/原本再生成接続PASS。全root実体/exclusive起動結線/readiness・scan-to-service初期化・本番service登録・HTTP/実NK CHR未完了、SSC-017/019・YKT-029継続） |
 | 009 / `NK-MED-001` | Audio/animation/music descriptor/query/file/Range | FUN-005～007、FIL/PER | 223、235、237 | 312～313、323、333 | `009_NK-MED-001` | M01～M07 | 未着手 |
 | 010 / `NK-ADM-001` | User query/create/status/role/password/unlock | FUN-009、AUT-001～003 | 225、236、242 | 312～314、323、332 | `010_NK-ADM-001` | N01 | 未着手 |
 | 011 / `NK-QST-001` | Question submit/token/HMAC/receipt | FUN-010/101～107、QST-001～004 | 224、236 | 312～314、324、332 | `011_NK-QST-001` | N01 | 未着手 |
@@ -61,3 +68,11 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-02 | SS 322 §8/§9のresult profile・layout相関、64 layout独立golden、最大record・並行性を完了し、NK-PRO-002をPG/PT完了。 |
 | 2026-09-02 | NK-DAT-001の実PostgreSQL 18/Flywayを用いるPT-DB-001～015を仕様化し、PG/PT実施中へ更新。 |
 | 2026-09-03 | NK-DAT-001のFlyway/DDL、Security hold、role/grant、6 maintenance functionの全guard/正常分岐、実DB証跡を確定しPG/PT完了。 |
+| 2026-09-03 | NK-MSG-001/002のprogram別PT仕様を確定し、Artemis/JMSとInbox/OutboxのPG/PT並行実施を開始。 |
+| 2026-09-03 | NK-MSG-001のbroker/JMS境界とWeb相関registryの中間gateを反映。未完了caseを明示しProgram完了判定は保留。 |
+| 2026-09-03 | NK-MSG-001のWeb request/reply client、12並行wait・13件目拒否・全終了経路cleanupをPT-JMS-008へ反映。 |
+| 2026-09-03 | NK-MSG-001の実ACL 90組合せ、全4 route/provider負値、DLQ/Expiry再起動保持、production request senderを反映。PT-JMSは11 PASS・1未実施。 |
+| 2026-09-03 | NK-MSG-001のAPI Reply/DLQ sender、caller所有transactionのcommit/rollback実brokerPTを反映。API中間gateを52件へ更新。 |
+| 2026-09-03 | NK-MSG-001のWeb reply decoder/consumer、active/late ACK、body/type不変DLQ隔離、隔離失敗rollbackを反映。Web中間gateを27件へ更新。 |
+| 2026-09-04 | NK-MSG-001のAPI sync/work/log listenerを含む最終reactor runとPT-JMS-012 scanを完了。sanitized evidence/manifest/hashを固定し、ProgramをPG/PT完了へ更新。 |
+| 2026-09-05 | NK-MSG-002の`JdbcInboxCoordinator`とrequest/completion/result model、PT-IDEM-004～006の実PostgreSQL transaction/replay/競合証跡を反映。PT-IDEM-001～008を中間PASSとし、未実施009～015を明示。 |

@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts MEDREQ01. */
-public record MusicDescriptorRequestData(String trackId,
-    ContentDisposition disposition) implements PayloadData {
+public record MusicDescriptorRequestData(String trackId, ContentDisposition disposition)
+    implements PayloadData {
   public MusicDescriptorRequestData {
     Objects.requireNonNull(trackId, "trackId");
     Objects.requireNonNull(disposition, "disposition");

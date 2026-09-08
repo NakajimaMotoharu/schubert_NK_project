@@ -33,8 +33,7 @@ import org.junit.jupiter.api.Test;
 
 class PayloadGoldenVectorTest {
   @Test
-  void allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()
-      throws IOException {
+  void allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes() throws IOException {
     Map<String, GoldenHashes> golden = readGoldenHashes();
     PayloadCodec codec = PayloadCodec.standard();
     int responseCount = 0;
@@ -57,8 +56,7 @@ class PayloadGoldenVectorTest {
           layout.id().value());
       assertEquals(
           new PayloadValues(layout.id(), minimumData, minimumRecords),
-          codec.decode(
-              layout.id(), minimum.copyData(), minimum.copyRecords(), false),
+          codec.decode(layout.id(), minimum.copyData(), minimum.copyRecords(), false),
           layout.id().value());
 
       FieldValueSet maximumData = boundaryValues(layout.dataFields(), true);
@@ -75,15 +73,13 @@ class PayloadGoldenVectorTest {
           layout.id().value());
       assertEquals(
           new PayloadValues(layout.id(), maximumData, maximumRecords),
-          codec.decode(
-              layout.id(), maximum.copyData(), maximum.copyRecords(), false),
+          codec.decode(layout.id(), maximum.copyData(), maximum.copyRecords(), false),
           layout.id().value());
 
       if (layout.layout().messageKind() == MessageKind.RESPONSE) {
         responseCount++;
         FixedPayload error =
-            codec.encode(
-                new PayloadValues(layout.id(), FieldValueSet.empty(), List.of()), true);
+            codec.encode(new PayloadValues(layout.id(), FieldValueSet.empty(), List.of()), true);
         assertEquals(expected.errorData(), sha256(error.copyData()), layout.id().value());
         codec.decode(layout.id(), error.copyData(), List.of(), true);
       } else {
@@ -109,8 +105,7 @@ class PayloadGoldenVectorTest {
       List<FieldValueSet> records = Collections.nCopies(count, record);
       FixedPayload encoded =
           codec.encode(
-              new PayloadValues(
-                  layout.id(), boundaryValues(layout.dataFields(), false), records),
+              new PayloadValues(layout.id(), boundaryValues(layout.dataFields(), false), records),
               false);
       assertEquals(count, encoded.recordCount(), layout.id().value());
       assertEquals(
@@ -119,8 +114,8 @@ class PayloadGoldenVectorTest {
           layout.id().value());
       assertEquals(
           count,
-          codec.decode(
-                  layout.id(), encoded.copyData(), encoded.copyRecords(), false)
+          codec
+              .decode(layout.id(), encoded.copyData(), encoded.copyRecords(), false)
               .records()
               .size(),
           layout.id().value());
@@ -157,8 +152,7 @@ class PayloadGoldenVectorTest {
     assertSame(codec, PayloadCodec.standard());
   }
 
-  private static FieldValueSet boundaryValues(
-      List<FieldDefinition<?>> fields, boolean maximum) {
+  private static FieldValueSet boundaryValues(List<FieldDefinition<?>> fields, boolean maximum) {
     LinkedHashMap<String, FieldValue> values = new LinkedHashMap<>();
     for (FieldDefinition<?> field : fields) {
       if (field.presence() == Presence.FIXED) {
@@ -170,8 +164,7 @@ class PayloadGoldenVectorTest {
       } else {
         value =
             switch (field.wireType()) {
-              case TEXT ->
-                  new FieldValue.Text(maximum ? "Z".repeat(field.length()) : "A");
+              case TEXT -> new FieldValue.Text(maximum ? "Z".repeat(field.length()) : "A");
               case NUMERIC ->
                   new FieldValue.Numeric(
                       maximum ? PayloadCodec.maximumForDigits(field.length()) : 0);
@@ -201,8 +194,7 @@ class PayloadGoldenVectorTest {
         assertNull(
             result.put(
                 columns[0],
-                new GoldenHashes(
-                    columns[1], columns[2], columns[3], columns[4], columns[5])),
+                new GoldenHashes(columns[1], columns[2], columns[3], columns[4], columns[5])),
             columns[0]);
       }
     }

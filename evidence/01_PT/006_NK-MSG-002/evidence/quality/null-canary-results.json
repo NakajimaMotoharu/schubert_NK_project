@@ -1,0 +1,69 @@
+{
+  "testId": "PT-QUALITY-001",
+  "targetCommit": "8350b519f3c251f1c52266707d49efea5968f962",
+  "startedAt": "2026-09-07T13:52:55.630443+00:00",
+  "completedAt": "2026-09-07T13:53:08.174028+00:00",
+  "javaHome": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+  "sourceSha256": {
+    "pom.xml": "0dfdbe925862a01d56cf8ce1ab3217a2d5502ce70b29a98e459b9b9e00ec9f49",
+    "tools/quality/null-contracts/pom.xml": "9f2b16b3dce303906e7378a87139aebe11f150e1655159f94dc739eb14d82543",
+    "tools/quality/null-contracts/fixtures/invalid/InvalidContracts.java": "8b63e1d14b390989770b37b0123aceee6dd44ab364caff148f793ebabfc8a55e",
+    "tools/quality/null-contracts/fixtures/valid/ValidContracts.java": "56dc1e1cbfd40fee8e280c425409fdf785593e708dea316e6669693e20af7a3f"
+  },
+  "sourceUnchanged": true,
+  "expectedOracle": "453_Null解析gate検証仕様.md QLT-NULL-01..05",
+  "results": [
+    {
+      "fixture": "valid",
+      "command": [
+        "/home/mini/codex/project1/schubert_NK_project/mvnw",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "tools/quality/null-contracts/pom.xml",
+        "-Dcanary.source=fixtures/valid",
+        "clean",
+        "compile"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "nullAwayDiagnostics": [],
+      "expectedDiagnosticMatches": [],
+      "status": "PASS",
+      "rawLogSha256": "75daaedb68c67e479cd7c1bfe9fe2d83f1ac5f32d0b6cf03940d358c73ac440e"
+    },
+    {
+      "fixture": "invalid",
+      "command": [
+        "/home/mini/codex/project1/schubert_NK_project/mvnw",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "tools/quality/null-contracts/pom.xml",
+        "-Dcanary.source=fixtures/invalid",
+        "clean",
+        "compile"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "nullAwayDiagnostics": [
+        "dereferenced expression 'value' is @Nullable",
+        "dereferenced expression 'values.getFirst()' is @Nullable",
+        "passing @Nullable parameter 'null' where @NonNull is required",
+        "returning @Nullable expression from method with @NonNull return type"
+      ],
+      "expectedDiagnosticMatches": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "status": "PASS",
+      "rawLogSha256": "d5408cb9cc97584df37a2196bb12f2bd57cc6c08c51349462d5d0e1a2c0f556c"
+    }
+  ],
+  "status": "PASS",
+  "redaction": "Only fixed canary diagnostics and execution metadata are retained."
+}

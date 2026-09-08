@@ -63,9 +63,7 @@ class TargetAdapterTest {
         "https://localhost:55162/search?game=NUKITASHI1#entry-1",
         current.endpoint("/search?game=NUKITASHI1#entry-1").toString());
     assertEquals(
-        reports
-            .resolve("current/run-01/artifacts/CHR-A01.json")
-            .toAbsolutePath(),
+        reports.resolve("current/run-01/artifacts/CHR-A01.json").toAbsolutePath(),
         current.caseArtifact("CHR-A01"));
   }
 
@@ -101,11 +99,7 @@ class TargetAdapterTest {
     }
     assertCreateFails("current", "https://localhost", reports, reports, hosts);
     assertCreateFails(
-        "current",
-        "https://localhost",
-        reports,
-        temporaryDirectory.resolve("outside"),
-        hosts);
+        "current", "https://localhost", reports, temporaryDirectory.resolve("outside"), hosts);
     Files.createDirectories(evidence);
     assertCreateFails("current", "https://localhost", reports, evidence, hosts);
 
@@ -127,11 +121,7 @@ class TargetAdapterTest {
             Set.of("localhost"));
     TargetAdapter nk =
         TargetAdapter.create(
-            "nk",
-            "https://localhost",
-            reports,
-            reports.resolve("nk/run"),
-            Set.of("localhost"));
+            "nk", "https://localhost", reports, reports.resolve("nk/run"), Set.of("localhost"));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint(null));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint("relative"));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint("//external.example/path"));
@@ -158,12 +148,12 @@ class TargetAdapterTest {
     ObjectNode currentNkOnlyWrongCase = original.deepCopy();
     ((ObjectNode) cases(currentNkOnlyWrongCase).get(0)).put("current", "NK_ONLY");
     assertThrows(
-        IllegalArgumentException.class,
-        () -> current.executableCaseIds(currentNkOnlyWrongCase));
+        IllegalArgumentException.class, () -> current.executableCaseIds(currentNkOnlyWrongCase));
 
     ObjectNode currentN01Unknown = original.deepCopy();
     ((ObjectNode) cases(currentN01Unknown).get(22)).put("current", "SKIP");
-    assertThrows(IllegalArgumentException.class, () -> current.executableCaseIds(currentN01Unknown));
+    assertThrows(
+        IllegalArgumentException.class, () -> current.executableCaseIds(currentN01Unknown));
 
     ObjectNode nkUnknown = original.deepCopy();
     ((ObjectNode) cases(nkUnknown).get(0)).put("nk", "NK_ONLY");
@@ -187,11 +177,7 @@ class TargetAdapterTest {
   }
 
   private static void assertCreateFails(
-      String target,
-      String baseUrl,
-      Path reports,
-      Path evidence,
-      Set<String> hosts) {
+      String target, String baseUrl, Path reports, Path evidence, Set<String> hosts) {
     assertThrows(
         IllegalArgumentException.class,
         () -> TargetAdapter.create(target, baseUrl, reports, evidence, hosts));

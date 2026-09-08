@@ -77,9 +77,7 @@ public final class LayoutRegistry {
             ? MessageKind.EVENT
             : id.substring(3, 6).equals("REQ")
                 ? MessageKind.REQUEST
-                : id.substring(3, 6).equals("RSP")
-                    ? MessageKind.RESPONSE
-                    : null;
+                : id.substring(3, 6).equals("RSP") ? MessageKind.RESPONSE : null;
     if (expected == null || definition.messageKind() != expected) {
       throw new LayoutValidationException("layout ID and message kind disagree");
     }
@@ -115,7 +113,14 @@ public final class LayoutRegistry {
         d("SCFREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 14, 0, 0, 270),
         d("SCFRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 88, 800, 500, 400_344),
         d("SCNREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 12, 0, 0, 268),
-        d("SCNRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 1_728, 4_800, 200, 961_984),
+        d(
+            "SCNRSP01",
+            MessageKind.RESPONSE,
+            InteractionKind.SYNCHRONOUS,
+            1_728,
+            4_800,
+            200,
+            961_984),
         d("AUDREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 16, 0, 0, 272),
         d("AUDRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 1_024, 0, 0, 1_280),
         d("ANMREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0, 256),

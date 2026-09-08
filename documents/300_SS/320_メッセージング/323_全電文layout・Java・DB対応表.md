@@ -153,6 +153,21 @@ Total countがpage size別のUI上限を超える場合はrecordを一部返さ�
 Fingerprintは324のlength-prefixed canonical HMACを使用する。LGNREQ01はoperation tokenなしでMessage ID再配送の同一性検査に使う。
 Password/質問本文の平文・単純hashをDBへ保存しない。
 
+### 9.1 Scenario参照要求canonical（SSC-025）
+
+OwnerはAPI認証actorのuser ID十進、targetは`REQUEST:<request layout ID>`、versionは001、operation tokenなし。decode済みの全有効fieldを次の順でNKOP1へ格納する。`X1`はNFC UTF-8（enumはwire値）、`N1`はpadding/signなしASCII十進。Optional未設定はLP length 0xFFFFFFFF、空byteとは区別する。検索実行用のtrim/lowercaseやpage補正をHMAC入力へ先取りせず、受けた有効field自体を拘束する。Header/context/message/correlation/sentAt、reserved、paddingはfieldに含めない。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| GAMREQ01 | 0 fields |
+| SPKREQ01 | gameCode/X1（optional） |
+| RTEREQ01 | gameCode/X1 |
+| SCFREQ01 | gameCode/X1、prefix/N1 |
+| SCNREQ01 | scriptFileId/N1 |
+| SRCREQ01 | bodyKeyword/X1、gameCode/X1、speakerName/X1、chapterTitle/X1、entryType/X1、voiceCondition/X1（以上optional）、page/N1、pageSize/N1 |
+
+`ScenarioRequest.decode`は6 request layoutをallowlistし、共通header/layoutとfixed DATA/semanticを検証した後だけ内部値を生成する。これを同じrequestのcanonicalとread-only Repository振分けへ用い、別modelのfield落ち/順序ずれを防ぐ。Detailはimmutable snapshot（不在Optionalを含む）を返し、file I/Oは行わない。Response作成、認証、Inbox確定、JMS、transaction所有は外側serviceの責務。GAM/SPK/RTE/SCF/SRCは即時projection、SCNはdetail候補を区別する。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。

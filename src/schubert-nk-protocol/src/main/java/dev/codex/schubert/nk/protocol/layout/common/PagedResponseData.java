@@ -5,13 +5,18 @@ import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
-/** Generated named wire record. Trace: SS 323; layouts SRCRSP01, LGSRSP01, USRRSP01, NTSRSP01, QSSRSP01. */
-public record PagedResponseData(int effectivePage,
+/**
+ * Generated named wire record. Trace: SS 323; layouts SRCRSP01, LGSRSP01, USRRSP01, NTSRSP01,
+ * QSSRSP01.
+ */
+public record PagedResponseData(
+    int effectivePage,
     int pageSize,
     long totalCount,
     int totalPages,
     long firstResult,
-    long lastResult) implements PayloadData {
+    long lastResult)
+    implements PayloadData {
   public PagedResponseData {
     TypedFieldValues.requireUnsignedRange("effectivePage", effectivePage, 6);
     TypedFieldValues.requireUnsignedRange("pageSize", pageSize, 3);

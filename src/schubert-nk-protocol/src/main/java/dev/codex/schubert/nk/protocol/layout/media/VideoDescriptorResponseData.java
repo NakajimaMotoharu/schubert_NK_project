@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts VIDRSP01. */
-public record VideoDescriptorResponseData(String mediaLogicalId,
+public record VideoDescriptorResponseData(
+    String mediaLogicalId,
     RelativePath storageRelativePath,
     String fileName,
     long fileByteLength,
@@ -22,7 +23,8 @@ public record VideoDescriptorResponseData(String mediaLogicalId,
     ContentDisposition contentDisposition,
     String title,
     VideoCategory category,
-    DisplayPath displayPath) implements PayloadData {
+    DisplayPath displayPath)
+    implements PayloadData {
   public VideoDescriptorResponseData {
     Objects.requireNonNull(mediaLogicalId, "mediaLogicalId");
     Objects.requireNonNull(storageRelativePath, "storageRelativePath");

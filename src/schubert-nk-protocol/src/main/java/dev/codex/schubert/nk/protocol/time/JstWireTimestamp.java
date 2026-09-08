@@ -24,7 +24,16 @@ public final class JstWireTimestamp {
     if (instant.getNano() % 1_000_000 != 0) {
       throw new IllegalArgumentException("wire timestamp requires millisecond precision");
     }
-    return FORMATTER.format(instant.atZone(JAPAN));
+    try {
+      String value = FORMATTER.format(instant.atZone(JAPAN));
+      if (!DIGITS.matcher(value).matches()) {
+        throw new IllegalArgumentException("wire timestamp must fit exactly 17 ASCII digits");
+      }
+      return value;
+    } catch (DateTimeException failure) {
+      // BUG-037/YKT-033: never expose an expanded year or provider range exception to the sender.
+      throw new IllegalArgumentException("wire timestamp is outside the representable range");
+    }
   }
 
   public static Instant parse(String value) {

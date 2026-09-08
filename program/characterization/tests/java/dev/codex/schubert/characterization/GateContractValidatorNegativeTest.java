@@ -190,8 +190,7 @@ class GateContractValidatorNegativeTest {
           ObjectNode supplemental = object(root, "supplementalChecks");
           supplemental.set("CHR-A02", JSON.createArrayNode());
           supplemental.set(
-              "CHR-A03",
-              JSON.valueToTree(List.of("unsafe-post-denied", "unsafe-post-denied")));
+              "CHR-A03", JSON.valueToTree(List.of("unsafe-post-denied", "unsafe-post-denied")));
           supplemental.set("CHR-Z99", JSON.valueToTree(List.of("unknown")));
           ObjectNode nkOnly = object(root, "nkOnlySupplementalChecks");
           nkOnly.set("CHR-Z99", JSON.valueToTree(List.of("unknown")));
@@ -263,15 +262,10 @@ class GateContractValidatorNegativeTest {
   @ParameterizedTest
   @ValueSource(strings = {"FAIL", "FAILED", "FLAKY", "SKIP", "SKIPPED", "DISABLED", "NOT_RUN"})
   void rejectsEveryNonPassExecutionStatus(String rejectedStatus) throws Exception {
-    Fixture fixture = fixture("rejected-status-" + rejectedStatus.toLowerCase(java.util.Locale.ROOT));
-    fixture.mutateRun(
-        false,
-        "artifacts/CHR-A02.json",
-        root -> root.put("status", rejectedStatus));
-    assertFailures(
-        fixture.validate(),
-        "run2_STATUS:CHR-A02",
-        "run2_REJECTED_STATUS:CHR-A02");
+    Fixture fixture =
+        fixture("rejected-status-" + rejectedStatus.toLowerCase(java.util.Locale.ROOT));
+    fixture.mutateRun(false, "artifacts/CHR-A02.json", root -> root.put("status", rejectedStatus));
+    assertFailures(fixture.validate(), "run2_STATUS:CHR-A02", "run2_REJECTED_STATUS:CHR-A02");
   }
 
   @Test
@@ -343,7 +337,9 @@ class GateContractValidatorNegativeTest {
           root.put("baselineCommit", "bad");
           root.put("reviewerRole", "");
           root.put("evidence", "not-array");
-          object(root, "checks").properties().forEach(entry -> ((ObjectNode) root.path("checks")).put(entry.getKey(), false));
+          object(root, "checks")
+              .properties()
+              .forEach(entry -> ((ObjectNode) root.path("checks")).put(entry.getKey(), false));
         });
     assertFailures(
         fixture.validate(),

@@ -10,13 +10,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts QSSREQ01. */
-public record QuestionSearchRequestData(Optional<String> keyword,
+public record QuestionSearchRequestData(
+    Optional<String> keyword,
     Optional<String> username,
     Optional<AnswerState> answerState,
     Optional<Instant> submittedFrom,
     Optional<Instant> submittedTo,
     int page,
-    int pageSize) implements PayloadData {
+    int pageSize)
+    implements PayloadData {
   public QuestionSearchRequestData {
     Objects.requireNonNull(keyword, "keyword");
     Objects.requireNonNull(username, "username");

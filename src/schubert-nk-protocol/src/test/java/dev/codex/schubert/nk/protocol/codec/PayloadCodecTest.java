@@ -70,7 +70,8 @@ class PayloadCodecTest {
       assertTrue(
           layout.dataFields().stream()
               .filter(field -> field.presence() != Presence.FIXED)
-              .allMatch(field -> decoded.data().getOrUnset(field.name()) == FieldValue.Unset.INSTANCE));
+              .allMatch(
+                  field -> decoded.data().getOrUnset(field.name()) == FieldValue.Unset.INSTANCE));
     }
     assertEquals(31, responses);
   }
@@ -84,43 +85,33 @@ class PayloadCodecTest {
             layoutId,
             new FieldValueSet(
                 Map.of(
-                    "更新後状態", new FieldValue.Text("PROCESSING"),
-                    "取消日時", FieldValue.Unset.INSTANCE)),
+                    "更新後状態", new FieldValue.Text("PROCESSING"), "取消日時", FieldValue.Unset.INSTANCE)),
             List.of());
 
     FixedPayload encoded = codec.encode(conflict, ResultCode.NOT_CANCELLABLE);
     assertArrayEquals(
-        "PROCESSING                      ".getBytes(StandardCharsets.US_ASCII),
-        encoded.copyData());
+        "PROCESSING                      ".getBytes(StandardCharsets.US_ASCII), encoded.copyData());
     assertEquals(
         conflict,
         codec.decode(
-            layoutId,
-            encoded.copyData(),
-            encoded.copyRecords(),
-            ResultCode.NOT_CANCELLABLE));
+            layoutId, encoded.copyData(), encoded.copyRecords(), ResultCode.NOT_CANCELLABLE));
     for (String state : List.of("COMPLETED", "ERROR")) {
       PayloadValues stateValue =
           new PayloadValues(
               layoutId,
               new FieldValueSet(
-                  Map.of(
-                      "更新後状態", new FieldValue.Text(state),
-                      "取消日時", FieldValue.Unset.INSTANCE)),
+                  Map.of("更新後状態", new FieldValue.Text(state), "取消日時", FieldValue.Unset.INSTANCE)),
               List.of());
       FixedPayload statePayload = codec.encode(stateValue, ResultCode.NOT_CANCELLABLE);
       assertEquals(
           stateValue,
-          codec.decode(
-              layoutId,
-              statePayload.copyData(),
-              List.of(),
-              ResultCode.NOT_CANCELLABLE));
+          codec.decode(layoutId, statePayload.copyData(), List.of(), ResultCode.NOT_CANCELLABLE));
     }
 
     PayloadValues blank = new PayloadValues(layoutId, FieldValueSet.empty(), List.of());
     assertTrue(
-        codec.decode(
+        codec
+            .decode(
                 layoutId,
                 codec.encode(blank, ResultCode.NOT_FOUND).copyData(),
                 List.of(),
@@ -130,13 +121,14 @@ class PayloadCodecTest {
             .stream()
             .allMatch(
                 name ->
-                    codec.decode(
-                            layoutId,
-                            codec.encode(blank, ResultCode.NOT_FOUND).copyData(),
-                            List.of(),
-                            ResultCode.NOT_FOUND)
-                        .data()
-                        .getOrUnset(name)
+                    codec
+                            .decode(
+                                layoutId,
+                                codec.encode(blank, ResultCode.NOT_FOUND).copyData(),
+                                List.of(),
+                                ResultCode.NOT_FOUND)
+                            .data()
+                            .getOrUnset(name)
                         == FieldValue.Unset.INSTANCE));
     PayloadValues success =
         new PayloadValues(
@@ -159,8 +151,7 @@ class PayloadCodecTest {
         NullPointerException.class,
         () -> codec.decode(layoutId, encoded.copyData(), List.of(), (ResultCode) null));
     assertThrows(
-        MessageEncodingException.class,
-        () -> codec.encode(blank, ResultCode.NOT_CANCELLABLE));
+        MessageEncodingException.class, () -> codec.encode(blank, ResultCode.NOT_CANCELLABLE));
     codec.encode(
         new PayloadValues(new LayoutId("LGNRSP01"), FieldValueSet.empty(), List.of()),
         ResultCode.NOT_CANCELLABLE);
@@ -170,8 +161,7 @@ class PayloadCodecTest {
             codec.encode(
                 new PayloadValues(
                     layoutId,
-                    new FieldValueSet(
-                        Map.of("更新後状態", new FieldValue.Text("RECEIVED"))),
+                    new FieldValueSet(Map.of("更新後状態", new FieldValue.Text("RECEIVED"))),
                     List.of()),
                 ResultCode.NOT_CANCELLABLE));
     for (String invalid : List.of("RECEIVED", "CANCELLED", "UNKNOWN")) {
@@ -181,17 +171,13 @@ class PayloadCodecTest {
           invalid.getBytes(StandardCharsets.US_ASCII), 0, corrupted, 0, invalid.length());
       assertThrows(
           PermanentProtocolException.class,
-          () ->
-              codec.decode(
-                  layoutId, corrupted, List.of(), ResultCode.NOT_CANCELLABLE));
+          () -> codec.decode(layoutId, corrupted, List.of(), ResultCode.NOT_CANCELLABLE));
     }
     byte[] missingState = encoded.copyData();
     Arrays.fill(missingState, 0, 12, (byte) ' ');
     assertThrows(
         PermanentProtocolException.class,
-        () ->
-            codec.decode(
-                layoutId, missingState, List.of(), ResultCode.NOT_CANCELLABLE));
+        () -> codec.decode(layoutId, missingState, List.of(), ResultCode.NOT_CANCELLABLE));
   }
 
   @Test
@@ -204,21 +190,21 @@ class PayloadCodecTest {
                 "Password", new FieldValue.Text("PublicTestPassword"),
                 "Client address", new FieldValue.Text("127.0.0.1")));
     byte[] loginData =
-        codec.encode(new PayloadValues(new LayoutId("LGNREQ01"), login, List.of()), false)
+        codec
+            .encode(new PayloadValues(new LayoutId("LGNREQ01"), login, List.of()), false)
             .copyData();
     byte[] expected = new byte[384];
     Arrays.fill(expected, (byte) ' ');
     System.arraycopy("user".getBytes(StandardCharsets.UTF_8), 0, expected, 0, 4);
-    System.arraycopy(
-        "PublicTestPassword".getBytes(StandardCharsets.UTF_8), 0, expected, 64, 18);
+    System.arraycopy("PublicTestPassword".getBytes(StandardCharsets.UTF_8), 0, expected, 64, 18);
     System.arraycopy("127.0.0.1".getBytes(StandardCharsets.US_ASCII), 0, expected, 320, 9);
     assertArrayEquals(expected, loginData);
 
     LayoutFields event = LayoutFieldCatalog.standard().require("WLGEVT01");
     byte[] eventData =
-        codec.encode(
-                new PayloadValues(event.id(), minimumValues(event.dataFields()), List.of()),
-                false)
+        codec
+            .encode(
+                new PayloadValues(event.id(), minimumValues(event.dataFields()), List.of()), false)
             .copyData();
     byte[] fixed = Arrays.copyOfRange(eventData, 17, 33);
     byte[] expectedFixed = new byte[16];
@@ -251,7 +237,10 @@ class PayloadCodecTest {
                 false));
     assertThrows(
         MessageEncodingException.class,
-        () -> codec.encode(new PayloadValues(new LayoutId("LGNREQ01"), FieldValueSet.empty(), List.of()), false));
+        () ->
+            codec.encode(
+                new PayloadValues(new LayoutId("LGNREQ01"), FieldValueSet.empty(), List.of()),
+                false));
     assertThrows(
         MessageEncodingException.class,
         () ->
@@ -308,9 +297,14 @@ class PayloadCodecTest {
   @Test
   void decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers() {
     PayloadCodec codec = PayloadCodec.standard();
-    assertThrows(NullPointerException.class, () -> codec.decode(null, new byte[0], List.of(), false));
-    assertThrows(NullPointerException.class, () -> codec.decode(new LayoutId("LOGREQ01"), null, List.of(), false));
-    assertThrows(NullPointerException.class, () -> codec.decode(new LayoutId("LOGREQ01"), new byte[0], null, false));
+    assertThrows(
+        NullPointerException.class, () -> codec.decode(null, new byte[0], List.of(), false));
+    assertThrows(
+        NullPointerException.class,
+        () -> codec.decode(new LayoutId("LOGREQ01"), null, List.of(), false));
+    assertThrows(
+        NullPointerException.class,
+        () -> codec.decode(new LayoutId("LOGREQ01"), new byte[0], null, false));
     assertThrows(
         PermanentProtocolException.class,
         () -> codec.decode(new LayoutId("LGNREQ01"), new byte[383], List.of(), false));
@@ -319,7 +313,12 @@ class PayloadCodecTest {
         () -> codec.decode(new LayoutId("GAMRSP01"), new byte[9], List.of(new byte[272]), true));
     assertThrows(
         PermanentProtocolException.class,
-        () -> codec.decode(new LayoutId("GAMRSP01"), new byte[9], Collections.nCopies(11, new byte[272]), false));
+        () ->
+            codec.decode(
+                new LayoutId("GAMRSP01"),
+                new byte[9],
+                Collections.nCopies(11, new byte[272]),
+                false));
     assertThrows(
         NullPointerException.class,
         () ->
@@ -338,7 +337,8 @@ class PayloadCodecTest {
                 false));
 
     byte[] login =
-        codec.encode(
+        codec
+            .encode(
                 new PayloadValues(
                     new LayoutId("LGNREQ01"),
                     new FieldValueSet(
@@ -356,7 +356,9 @@ class PayloadCodecTest {
 
     LayoutFields event = LayoutFieldCatalog.standard().require("WLGEVT01");
     byte[] eventData =
-        codec.encode(new PayloadValues(event.id(), minimumValues(event.dataFields()), List.of()), false)
+        codec
+            .encode(
+                new PayloadValues(event.id(), minimumValues(event.dataFields()), List.of()), false)
             .copyData();
     eventData[17] = 'X';
     assertThrows(
@@ -384,9 +386,7 @@ class PayloadCodecTest {
     LinkedHashMap<String, FieldValue> nullValue = new LinkedHashMap<>();
     nullValue.put("name", null);
     assertThrows(NullPointerException.class, () -> new FieldValueSet(nullValue));
-    assertThrows(
-        LayoutValidationException.class,
-        () -> new FieldValueSet(Map.of(" ", secret)));
+    assertThrows(LayoutValidationException.class, () -> new FieldValueSet(Map.of(" ", secret)));
 
     FieldValueSet values = new FieldValueSet(Map.of("safeName", secret));
     assertEquals(1, values.size());
@@ -403,8 +403,12 @@ class PayloadCodecTest {
     assertEquals(values.hashCode(), new FieldValueSet(Map.of("safeName", secret)).hashCode());
 
     assertThrows(NullPointerException.class, () -> new PayloadValues(null, values, List.of()));
-    assertThrows(NullPointerException.class, () -> new PayloadValues(new LayoutId("LOGREQ01"), null, List.of()));
-    assertThrows(NullPointerException.class, () -> new PayloadValues(new LayoutId("LOGREQ01"), values, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new PayloadValues(new LayoutId("LOGREQ01"), null, List.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new PayloadValues(new LayoutId("LOGREQ01"), values, null));
     ArrayList<FieldValueSet> nullRecord = new ArrayList<>();
     nullRecord.add(null);
     assertThrows(
@@ -463,8 +467,6 @@ class PayloadCodecTest {
     byte[] data =
         codec.encode(new PayloadValues(id, FieldValueSet.empty(), List.of()), true).copyData();
     data[offset] = badValue;
-    assertThrows(
-        PermanentProtocolException.class,
-        () -> codec.decode(id, data, List.of(), true));
+    assertThrows(PermanentProtocolException.class, () -> codec.decode(id, data, List.of(), true));
   }
 }

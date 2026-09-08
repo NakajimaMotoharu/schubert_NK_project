@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts NTCREQ01. */
-public record NotificationCancelRequestData(NotificationId notificationId,
-    UUID operationToken) implements PayloadData {
+public record NotificationCancelRequestData(NotificationId notificationId, UUID operationToken)
+    implements PayloadData {
   public NotificationCancelRequestData {
     Objects.requireNonNull(notificationId, "notificationId");
     Objects.requireNonNull(operationToken, "operationToken");

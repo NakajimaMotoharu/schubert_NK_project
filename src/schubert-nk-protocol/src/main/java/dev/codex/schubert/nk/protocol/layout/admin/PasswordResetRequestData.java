@@ -9,10 +9,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts UPWREQ01. */
-public record PasswordResetRequestData(UserId userId,
-    String newPassword,
-    long expectedVersion,
-    UUID operationToken) implements PayloadData {
+public record PasswordResetRequestData(
+    UserId userId, String newPassword, long expectedVersion, UUID operationToken)
+    implements PayloadData {
   public PasswordResetRequestData {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(newPassword, "newPassword");

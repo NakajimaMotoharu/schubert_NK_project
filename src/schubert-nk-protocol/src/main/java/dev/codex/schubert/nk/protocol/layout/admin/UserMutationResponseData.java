@@ -7,9 +7,11 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import java.util.Map;
 import java.util.Objects;
 
-/** Generated named wire record. Trace: SS 323; layouts UCRRSP01, USTRSP01, URLRSP01, UPWRSP01, ULKRSP01. */
-public record UserMutationResponseData(UserId userId,
-    long updatedVersion) implements PayloadData {
+/**
+ * Generated named wire record. Trace: SS 323; layouts UCRRSP01, USTRSP01, URLRSP01, UPWRSP01,
+ * ULKRSP01.
+ */
+public record UserMutationResponseData(UserId userId, long updatedVersion) implements PayloadData {
   public UserMutationResponseData {
     Objects.requireNonNull(userId, "userId");
     TypedFieldValues.requireUnsignedRange("updatedVersion", updatedVersion, 9);

@@ -6,10 +6,9 @@ import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;
 import java.util.Map;
 
 /** Generated named wire record. Trace: SS 323; layouts ANMRSP01. */
-public record AnimationMenuResponseData(int mainSubtrackCount,
-    int ovaCount,
-    boolean openingPresent,
-    int totalFileCount) implements PayloadData {
+public record AnimationMenuResponseData(
+    int mainSubtrackCount, int ovaCount, boolean openingPresent, int totalFileCount)
+    implements PayloadData {
   public AnimationMenuResponseData {
     TypedFieldValues.requireUnsignedRange("mainSubtrackCount", mainSubtrackCount, 3);
     TypedFieldValues.requireUnsignedRange("ovaCount", ovaCount, 3);

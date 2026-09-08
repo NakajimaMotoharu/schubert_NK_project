@@ -31,7 +31,7 @@ Java release 25、UTF-8、`ja-JP`、`Asia/Tokyo`を固定する。Dependency/plu
 | Shell | ShellCheck error/warning 0、秘密値表示0 |
 | Secret scan | Credential/password/raw token/session/cookie/key/DB dump/master実体 hit 0 |
 
-Protocol moduleは2026-09-02時点でCompiler `-Xlint:all -Werror`、JSpecify 1.0.0、SpotBugs 4.10.4.0 Max/Low、JaCoCo 0.8.15を`verify`へ導入済みである。JSpecifyはnull契約の表明であり、それ単独をnull dataflow解析PASSとはみなさない。後続moduleの実装開始前にNullAway相当をparent gateに追加する。
+Compiler `-Xlint:all -Werror`、JSpecify1.0.0、SpotBugs4.10.4.0 Max/Low、JaCoCo0.8.15に加え、2026-09-07に親default-compileへNullAway0.14.1/Error Prone2.50.0を導入した。全NK production packageをJSpecifyMode/JSpecifyJDKModelsで解析し、生成recordの除外なし。JSpecifyの注釈だけを解析PASSとみなさない。453のpositive/4 negative canaryと全263 PTのRun PT-IDEM-20260907-04でBUG-016/YKT-013を完了。新moduleにも親gateを継承する。Enforcer/format/PMD等は引き続き検証し、全品質gate完了とはまだ宣言しない。
 
 ## 4. Coverage
 

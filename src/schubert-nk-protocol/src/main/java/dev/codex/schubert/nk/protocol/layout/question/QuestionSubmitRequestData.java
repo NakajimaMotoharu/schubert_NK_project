@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts QSBREQ01. */
-public record QuestionSubmitRequestData(String questionText,
-    UUID operationToken) implements PayloadData {
+public record QuestionSubmitRequestData(String questionText, UUID operationToken)
+    implements PayloadData {
   public QuestionSubmitRequestData {
     Objects.requireNonNull(questionText, "questionText");
     Objects.requireNonNull(operationToken, "operationToken");

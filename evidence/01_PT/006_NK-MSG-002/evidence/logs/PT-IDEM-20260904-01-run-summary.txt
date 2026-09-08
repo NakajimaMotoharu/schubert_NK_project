@@ -1,0 +1,17 @@
+Run ID: PT-IDEM-20260904-01
+Program: NK-MSG-002 (implemented-scope intermediate gate)
+Started: 2026-09-04T22:12:55+09:00
+Completed: 2026-09-04T22:14:06+09:00
+Branch: dev-messaging
+Target commit: 50d0a9134a0c0c772a8b0b4404155a37eb56a812
+Command: JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am clean verify
+Exit code: 0
+Protocol tests: 69, failures 0, errors 0, skipped 0
+API tests: 68, failures 0, errors 0, skipped 0
+Protocol coverage: class 157/157, instruction 17231/17231, branch 982/982, line 3384/3384, method 739/739
+API coverage: class 28/28, instruction 2819/2819, branch 247/247, line 684/684, method 111/111
+Response snapshot coverage: class 5/5, instruction 937/937, branch 90/90, line 222/222, method 28/28
+SpotBugs: Protocol bug/error 0; API bug/error 0
+Compiler diagnostics: 0
+Runtime note: Artemis/Netty emitted the existing JDK terminal-deprecation warning for sun.misc.Unsafe; test result and production compile were unaffected.
+Verdict: PASS_IMPLEMENTED_SCOPE; NK-MSG-002 remains in progress.

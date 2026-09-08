@@ -11,14 +11,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts SRCREQ01. */
-public record ScenarioSearchRequestData(Optional<String> bodyKeyword,
+public record ScenarioSearchRequestData(
+    Optional<String> bodyKeyword,
     Optional<GameCode> gameCode,
     Optional<String> speakerName,
     Optional<String> chapterTitle,
     Optional<EntryType> entryType,
     Optional<VoiceCondition> voiceCondition,
     int page,
-    int pageSize) implements PayloadData {
+    int pageSize)
+    implements PayloadData {
   public ScenarioSearchRequestData {
     Objects.requireNonNull(bodyKeyword, "bodyKeyword");
     Objects.requireNonNull(gameCode, "gameCode");
