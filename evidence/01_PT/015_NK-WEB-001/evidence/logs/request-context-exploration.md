@@ -32,4 +32,4 @@ PT105の直接handler状態確認には公開MockHttpSessionを使うが、暗�
 
 ## 正式gate
 
-次のroot clean verify/全7collectorで確定予定。RERUN-001/SSC-045は独立したLogout期限論点として455で管理する。
+正式PT-WEB-20260909-03、sourced95ce812c1bd0a2958236de45daeb72c8e15f158、00:37:38～00:42:19 JST。全733件（Protocol80/Storage34/API394/Web184/CHR41）、Web001～108、failed/error/skipped0、5対象module line/method/class/branch100%、NullAway/Enforcer/format PASS・SpotBugs0。全7collector成功、BUG069/YKT061全対象再試験完了。実container/最終配線/実NK CHRは別gate。RERUN-001/SSC-045は独立したLogout期限論点として455で管理する。
