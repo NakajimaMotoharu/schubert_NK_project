@@ -100,6 +100,8 @@ User不存在でもIP制御と同程度の処理経路を取り、timing/respons
 APIは`retry_after_seconds = ceil(locked_until-now)`を0～900で返す。WebはHTTP `Retry-After`を設定し待機messageを表示する。
 Remaining attemptsは存在推測を避け通常認証失敗では0とし、運用logだけ内部counterを保持する。
 
+SSC-046: Form Loginの失敗/lockは351 §5.1の補足どおり現行302 `/login?error`または`/login?locked`を維持し、lockのRetry-AfterはAPI確定値だけを使用する。Webで失敗counter/lock時刻を再計算しない。成功handlerはcustom fixation後の永続principal同値を検査し、閉SavedRequestまたは`/`へ302する。汎用Spring認証例外のsession保存やURL session rewritingを使用しない。Login画面の残時間表示への引渡しはUI226の表示条件を満たす別controller接続gateであり、handler単体のRetry-After成功だけで画面完了としない。
+
 ## 6. API認証context
 
 ### 6.1 発行・保存
