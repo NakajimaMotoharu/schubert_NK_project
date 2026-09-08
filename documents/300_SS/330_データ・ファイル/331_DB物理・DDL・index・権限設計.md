@@ -99,6 +99,8 @@ UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。�
 `processing_state IN (COMPLETED,ERROR)`、LGN/LOG response、`expires_at < cutoff`、`message_id > after`の候補をMessage PK昇順で1行だけFOR UPDATEし、AUTH_SESSION参照があれば当該auth_sessionsをFOR SHAREする。全Inbox列は既存composite型で検査processだけへ返す（SQLは明示列）。snapshot/参照欠落はJava検査で保持し、SQL単体で復号・整合合格としない。直接base table SELECTも不要。
 callerの明示transaction中に構造/認証参照検査を行い、終了までlockを保持する。autocommit呼出しで返った行を将来のlock保証に使わない。最終DELETE/非認証候補/固定runの再実行状態/oneshotは別の未完了gateで、候補取得functionの実装だけでBUG-014を完了にしない。
 
+BUG-080/YKT-071: backup判定はFOR SHAREした同一query結果のstep集合だけを使う。別statementのEXISTSで新しいSUCCESSを追加採用しない。lock待ち中に別backupが完了した場合は当該snapshotでは55000として保持し、次transactionで両行を取得し直す。[PostgreSQL 18 row locks](https://www.postgresql.org/docs/18/explicit-locking.html)のtransaction寿命とREAD COMMITTEDを前提に、PT021で実DBのlock待ちを観測してsnapshot境界を固定する。単に存在検索が成功しただけでlock取得とみなさない。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

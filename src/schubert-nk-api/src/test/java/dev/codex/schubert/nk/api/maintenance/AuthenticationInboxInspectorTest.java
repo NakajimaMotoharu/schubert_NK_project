@@ -427,7 +427,8 @@ final class AuthenticationInboxInspectorTest {
         .array();
   }
 
-  private static final class Fixture implements AutoCloseable {
+  // Shared independent wire/JCE input fixture for limited-role SQL PT017..024.
+  static final class Fixture implements AutoCloseable {
     final byte[] key = random(32), contextKey = random(32);
     final String raw = HexFormat.of().formatHex(random(32));
     final ResponseSnapshotCodec snapshots = new ResponseSnapshotCodec("s1", key, null, null);

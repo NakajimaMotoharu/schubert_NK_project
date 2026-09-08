@@ -134,9 +134,9 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("PT-DB-001 V001-V007 migrate, validate and idempotent rerun")
+  @DisplayName("PT-DB-001 V001-V008 migrate, validate and idempotent rerun")
   void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
-    assertEquals(7, firstMigration.migrationsExecuted);
+    assertEquals(8, firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
     assertEquals(0, flyway.migrate().migrationsExecuted);
     List<String> applied =
@@ -145,7 +145,7 @@ final class DatabaseMigrationTest {
             .filter(Objects::nonNull)
             .map(version -> version.getVersion())
             .toList();
-    assertEquals(List.of("001", "002", "003", "004", "005", "006", "007"), applied);
+    assertEquals(List.of("001", "002", "003", "004", "005", "006", "007", "008"), applied);
     assertEquals(
         0L,
         queryLong(
@@ -1021,10 +1021,10 @@ final class DatabaseMigrationTest {
     try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
       Future<Integer> first = executor.submit(migrate);
       Future<Integer> second = executor.submit(migrate);
-      assertEquals(7, first.get() + second.get());
+      assertEquals(8, first.get() + second.get());
     }
     assertEquals(
-        7L,
+        8L,
         queryLong(
             ADMIN,
             parallelUrl,
@@ -1046,7 +1046,7 @@ final class DatabaseMigrationTest {
     try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
       paths.filter(Files::isRegularFile).forEach(resources::add);
     }
-    // Approved append-only inventory; adding V007 does not relax the secret/byte scan.
+    // QA-046/SSC-049 append-only V008 inventory; secret/byte scan remains unchanged.
     assertEquals(
         java.util.Set.of(
             "migration/V001__schemas_and_extension.sql",
@@ -1056,6 +1056,7 @@ final class DatabaseMigrationTest {
             "migration/V005__gin_functions_views_and_grants.sql",
             "migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
             "migration/V007__username_comparison_key_expansion.sql",
+            "migration/V008__auth_inbox_inspection_boundary.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

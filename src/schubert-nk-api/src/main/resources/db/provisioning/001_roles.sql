@@ -24,6 +24,10 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_catalog.pg_roles WHERE rolname = 'schubert_ops_ro') THEN
         CREATE ROLE schubert_ops_ro LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
     END IF;
+    -- QA-046/SSC-049, PG-D-121, PT-DB-INBOX-017/022: no owner membership or broad data role.
+    IF NOT EXISTS (SELECT 1 FROM pg_catalog.pg_roles WHERE rolname = 'schubert_inbox_inspector') THEN
+        CREATE ROLE schubert_inbox_inspector LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+    END IF;
 END
 $roles$;
 
@@ -35,6 +39,9 @@ ALTER ROLE schubert_batch SET search_path = schubert, pg_catalog;
 ALTER ROLE schubert_backup SET search_path = schubert, schubert_web_session, schubert_meta, pg_catalog;
 ALTER ROLE schubert_web_session SET search_path = schubert_web_session, pg_catalog;
 ALTER ROLE schubert_ops_ro SET search_path = schubert, pg_catalog;
+ALTER ROLE schubert_inbox_inspector SET search_path = schubert, pg_catalog;
+ALTER ROLE schubert_inbox_inspector SET lock_timeout = '5s';
+ALTER ROLE schubert_inbox_inspector SET statement_timeout = '30s';
 
 DO $database_grants$
 DECLARE
@@ -43,7 +50,7 @@ BEGIN
     EXECUTE pg_catalog.format('REVOKE CREATE ON DATABASE %I FROM PUBLIC', database_name);
     EXECUTE pg_catalog.format('GRANT CREATE, CONNECT ON DATABASE %I TO nk_owner', database_name);
     EXECUTE pg_catalog.format(
-        'GRANT CONNECT ON DATABASE %I TO schubert_migration, schubert_app, schubert_batch, schubert_backup, schubert_web_session, schubert_ops_ro',
+        'GRANT CONNECT ON DATABASE %I TO schubert_migration, schubert_app, schubert_batch, schubert_backup, schubert_web_session, schubert_ops_ro, schubert_inbox_inspector',
         database_name);
     EXECUTE pg_catalog.format('ALTER DATABASE %I SET timezone TO %L', database_name, 'UTC');
 END
