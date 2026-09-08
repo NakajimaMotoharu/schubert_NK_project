@@ -174,6 +174,22 @@ UTF-8 JSON objectとし、`formatVersion`（数値の整数表記1）と`operati
 
 Plaintextは16KiB以下・JSON nesting最大3（root→array→token object）とする。この内部上限は許可field全最大値を包含することをPTで証明し、上位input上限を狭めない。復号/schema不正は外側repositoryが失効させる。平文codec部品はDB保存・認証・CSRF照合を行わず、永続化は必ず352のNKENC1/AES-GCM、session ID hash＋created_atに結合したAADを通す。
 
+#### 7.2.2 Session NKENC1のAAD（SSC-039）
+
+352 §11.2の共通NKENC1を使い、JSONは圧縮しない。AADは下記7fieldへ各々unsigned lengthの32bit big-endian prefixを付けて連結する。Callerはcreated_atをDBのmicrosecond精度へ事前確定し、codecはsub-microsecond入力を拒否して暗黙丸めをしない。
+
+| 順序 | field | byte表現 |
+|---:|---|---|
+| 1 | purpose | ASCII `web-session` |
+| 2 | table | ASCII `schubert_web_session.web_http_sessions` |
+| 3 | id | UUIDのmost/least significant longをbig-endianで16byte |
+| 4 | session_id_hash | lowercase hex ASCII64byte、raw Cookie IDではない |
+| 5 | created_at | signed epoch seconds 64bit＋nano-of-second 32bitをbig-endian、計12byte |
+| 6 | format | byte1個の値1 |
+| 7 | key ID | 1～16 ASCII、DB key_versionとenvelope内IDに一致 |
+
+PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaintext16384byte、最大envelope16436byte。Currentだけwrite、current/previousだけread。復号後は7.2.1閉schemaを検査して属性valueだけを返す。異常時の失効/監査はrepository/HTTP接続側、暗号部品は固定理由codeの例外で平文を返さない。暗号鍵はWeb session専用で、API context/Web log/revoke keyと共用しない。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
