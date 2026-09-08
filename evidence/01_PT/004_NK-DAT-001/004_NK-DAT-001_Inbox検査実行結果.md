@@ -2,7 +2,7 @@
 
 ## 1. 現状
 
-PG-D-119の構造検査8caseは探索成功。正式clean gate・証跡収集前でありProgram全体の完了ではない。sourcecommit/正式日時は確定後に記録する。
+PG-D-119の構造検査8caseは正式PT-WEB-20260909-13で成功。source e00e1855f8e818f04b3ba8a18605710969bfe7c7、2026-09-09 07:36:25～07:41:29 JST、dev-foundation、exit0。全798件（Protocol80/Storage34/API402/Web241/CHR41）成功、failure/error/skipped0。対象5moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。8collector成功と全checksum照合を確認。Program全体の完了ではない。
 対象は003のPT-DB-INBOX-001～008。DB参照・backup/期限・削除transaction・権限・oneshotは未実施であり合格へ算入しない。
 
 ## 2. 探索履歴
@@ -24,10 +24,22 @@ PG-D-119の構造検査8caseは探索成功。正式clean gate・証跡収集前
 | owner/message | N3と混同しない。identityのN12/UUIDとAAD照合。未知ownerに認証を与えない。PT002/007/008 |
 | 時刻 | wire millisecondと保存microsecondの精度変換を区別。同millisのμs違いを正常、隣接millisを異常。PT005 |
 
-正式全回帰と証跡が揃うまでBUG-075/YKT-067は再試験待ち。BUG-014/YKT-012はSQL/参照/起動まで継続。
+BUG-075/YKT-067は上記正式全回帰で再試験完了。BUG-014/YKT-012はSQL/参照/起動まで継続。
 
 ## 4. 正式01の制限と再試験
 
 PT-ADM-20260909-01（source 5e418c70）は全798件成功、全module build/coverage/静的解析PASS。構造8件も成功したが、BUG-076のcross-manifest参照不備により新004のtrace gateは非合格。生成manifestのscopeResultは構造試験だけを表し、全品質gateの合格として使用しない。
 Web collector015はPT-WEB prefix専用のため当該run IDを受理せず、旧Web証跡を更新していない。次回は全collector共通のPT-WEB prefixでclean実行する。未収集を合格へ加算しない。
 BUG-076の修正前起票は391ea854。相対参照を実pathから計算し、出力前に参照先の同一性・存在・hashを検査する。017の独立fixtureで正しい3段pathを受理、誤った4段/別file/改ざんhash/不存在/範囲外参照を拒否する。再試験後に正式runとhashを固定する。
+
+## 5. BUG-076/YKT-068再試験証跡
+
+修正e00e1855、正式PT-WEB-20260909-13の全8collector成功。017の独立path/hash負canaryは2026-09-09 07:42 JST頃exit0、1 test/0 failure。006を最初に収集し、他7collectorは同run/sourceの008manifestを照合してから実結果を収集した。
+004の新nested manifestは `../../../008_NK-SCN-001/evidence/manifest.json` に解決し、参照hashと実file SHA-256一致をcollector内で確認。全manifestのfilesは当該directory基準、003/006/007/008/009/010/015と新004の全checksumsを `sha256sum --check --quiet checksums.sha256` で照合しexit0。旧004のhistorical DB証跡は別実行であり新規Java8件の全体完了へ流用しない。
+
+| 証跡path（本directory基準） | SHA-256 |
+|---|---|
+| evidence/inbox-inspection/manifest.json | 4d1d67d7ed9aef8e378bbad283d562fdbc75a4a26e31a7cd9ae17a1c08fa6fdf |
+| ../008_NK-SCN-001/evidence/manifest.json | 60377a907dd261b745e51948731977a5c85de708394dd26cb542731363b9a063 |
+
+BUG-076/YKT-068は本再試験で完了。Production構造期待値の変更なし。認証参照PT009～016は別005/006で管理し、この798件へ未実施分を加算しない。
