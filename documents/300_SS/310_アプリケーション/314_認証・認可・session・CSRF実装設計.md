@@ -41,6 +41,12 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 
 `ROLE_` prefixはWeb framework内部だけとし、wire/DBのroleは`USER`/`ADMIN`を正とする。
 
+### 3.1 Login providerと再送時の現在認証（SSC-043）
+
+SSC-043（§3のprovider詳細）: MqAuthenticationProviderは未認証のusername/消費char[]/trusted Caddy由来numeric IPだけを入力とし、IF-001の0000または現在context確認済み0200だけからROLE_USER/ROLE_ADMINと閉SessionPrincipalを返す。0101/入力不正、0106、9000を混同しない。0106の後段表示へ渡す追加値は0..900秒のみ。失敗例外へpassword/元cause/wire本文を保存しない。全終了でchar[]をzeroしinput tokenのcredentials参照を外す。Session保存はcustom fixation strategyの短transactionへ分離する。
+
+Login replay0200の現在context確認は324 §6.1を具体化し、新UUIDの既存IF-003 GAMREQ01を1回実行する。APIの通常context検証とgame readが成功した応答だけを認め、0102は未認証、その他error/timeout/不正応答は一時障害にする。Responseの相関/context/layout/総長/DATA/record全検査を必須とし、取得したgame内容を画面やcacheへ流用しない。これはLogin再送/新session発行ではなく、既存保護readによる最新認証確認である。role/status/password変更の既定全session失効を維持し、以後の業務API再認証も省略しない。元snapshotの初回expiresAtを現在idle期限と混同せず、現在有効性はAPIを正とする。Wire/DDL/外部画面仕様は不変更。
+
 ## 4. Password
 
 ### 4.1 保存・照合

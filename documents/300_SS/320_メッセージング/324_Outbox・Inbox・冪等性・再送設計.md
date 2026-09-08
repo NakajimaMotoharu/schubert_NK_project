@@ -119,6 +119,8 @@ Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation I
 
 再送は元結果の提示だけであり、新session発行、idle延長、失効解除、password再照合、counter/audit再更新を行わない。後で失効・期限切れ・権限変更されていても元結果を変更せず、通常の認証context検証は現在DB状態を正として拒否/認可する。Web sessionや現在権限をsnapshotだけから認証済みとみなしてはならない。初回0000/確定0101/0106の保存、成功0200・失敗元codeでの新Header再構築を独立byte oracleで検証する。
 
+SSC-043: Webの0200受信後の現在認証確認は314 §3.1を正とする。新Message IDの既存IF-003を通常API認証へ通し、成功応答を全検証してから元Login snapshotをWebの早期principalへ投影する。Login再送・session新規発行・元snapshotの書換えではない。0102/一時障害/不正応答時はWeb認証を付与せず、probe後の各業務API認証も維持する。
+
 ### 6.2 Logout Inbox（SSC-015）
 
 LOGREQ01はprotocol検証後、raw hashに一致するsessionのUserを先にlockし、Inbox owner用user IDだけを取得する。未失効/既失効/期限切れ/account状態から業務actorを発行せず、このlookupでidle延長/監査/失効更新を行わない。不明contextは0102でInboxを新規保存しない。Known contextはowner付きInboxを開始し、NEWのhandlerだけ312 §4.2の失効専用serviceを呼ぶ。これにより同Message ID再配送の監査重複を防ぐ。別Messageの既失効要求は元revoked_at/0200と当該要求の監査を確定する。
