@@ -50,7 +50,7 @@ BUG-061はUI234初回code一覧だけを採り、UI232共通0200とSS324 §6.1/S
 | JmsReplyDecoder | 個別code allowlistなし、共通headerのResultCodeを検査。既存validReplyProducesAnImmutableRedactedResultへ0200 byte保持の追加assert、全5件を再試験 |
 | MqAuthenticationProvider（未実装） | Replyだけでsession/principalを発行しない。本clientにはHTTP/DB/Session依存なし。SS324 §6.1の現在context確認前の0200 grant禁止を後続実装gateへ残す。未実装対象を完了とはしない |
 
-YKT-055は既存全対象の正式再試験後に完了可。YKT-056はprovider残gateを含むため対応中を継続する。
+Web10時点でYKT-055は既存全対象の正式再試験後に完了、YKT-056はprovider残gateを含むため対応中。後続Web11/sourceb295b31でprovider/probe新8件と全692件を再試験しYKT-056を完了した。残対象の修正・独立再発防止PT・全API非回帰はprovider-exploration.mdを参照。
 
 ## BUG-062 静的解析とIP契約
 

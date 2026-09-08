@@ -27,4 +27,4 @@ Providerは0000のUSER/ADMINまたは0200＋正常probeだけを認証済Spring 
 
 ## 正式gate
 
-未実施。新8件/全coverage/静的解析/全既存API回帰を正式run・全7collector・manifest/hashで確定後、SSC-043/YKT-056の当該provider範囲を完了する。最終chain/HTTP handler/fixation保存/Caddy trust/全layout登録・API実起動/実NK CHR、IT/STは未完了。
+正式PT-WEB-20260908-11、sourceb295b3153056a6dc87eb6c76052e725dfc44f395、22:33:30～22:37:56 JST、exit0。全692件（Protocol80/Storage34/API394/Web143/CHR41）、Web67件、新8件を含めfailed/error/skipped0。全5対象module line/method/class/branch各100%、NullAway/Enforcer/format PASS、SpotBugs0。全7collector/manifest/hash更新。SSC-043/YKT-056の当該provider範囲と全既存API認証・管理失効非回帰を完了、新BUGなし。最終chain/HTTP handler/fixation保存/Caddy trust/全layout登録・API実起動/実NK CHR、IT/STは未完了。
