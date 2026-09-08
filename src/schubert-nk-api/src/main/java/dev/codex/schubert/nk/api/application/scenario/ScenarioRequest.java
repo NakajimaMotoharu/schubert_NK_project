@@ -10,9 +10,7 @@ import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.scenario.*;
 import dev.codex.schubert.nk.protocol.layout.semantic.WireEnum;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
-import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -173,20 +171,11 @@ public final class ScenarioRequest {
 
   private static CanonicalField text(String name, Optional<String> value) {
     if (value.isEmpty()) return new CanonicalField(name, "X1", null);
-    return field(name, "X1", Normalizer.normalize(value.orElseThrow(), Normalizer.Form.NFC));
+    return CanonicalField.text(name, value.orElseThrow());
   }
 
   private static CanonicalField number(String name, long value) {
-    return field(name, "N1", Long.toString(value));
-  }
-
-  private static CanonicalField field(String name, String type, String value) {
-    byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
-    try {
-      return new CanonicalField(name, type, bytes);
-    } finally {
-      Arrays.fill(bytes, (byte) 0);
-    }
+    return CanonicalField.number(name, value);
   }
 
   @Override

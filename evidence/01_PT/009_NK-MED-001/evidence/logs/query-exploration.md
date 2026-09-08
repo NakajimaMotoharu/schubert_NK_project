@@ -1,5 +1,7 @@
 # Media query 探索記録
 
+Request探索01（13:03:51 JST）: 新規PT-MED-033のtry-with-resources内で明示closeを行い、testCompileが-Xlint/-Werrorで拒否した。製品コード変更・warning抑止をせず、試験のclose後assertを字句scopeの後へ移す。未完の初回試験記述でBUG対象外、実行されていない試験をPASSへ算入しない。探索02（13:04:36 JST）ではAPI選択17件（新規MediaRequest3、MediaRepository11、ScenarioRequest3）全成功。正式全体試験へ進む。
+
 PG-D-071/PT-MED-008～014。2026-09-08、d986d3e基準を含むdev-media/f253e81上の新規未commit query/test、実PG18.6/本番Flyway・合成metadataのみ。
 
 探索01: 新7method中6成功/1失敗、nullContractsAndJdbcMetadataFailuresRemainRedactedの最終fixture。Menu SQLはcount列だけを返すのに、testが未取得category文字列へNULLを注入しており、実際のDB読取は変化していなかった。期待「必須SQL NULL拒否」は維持し、集計numeric列のwasNullへ注入位置を修正する。Productionの変更なし、未実装初回fixtureの誤りでBUG起票対象ではない。失敗を合格へ算入しない。再現rawlogはwork外/tmp/PT-MED-query-explore-20260908-01.log、正式証跡にはproperties/stdout/SQL値を保存しない。

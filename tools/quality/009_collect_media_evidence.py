@@ -52,6 +52,13 @@ def main():
         "PT-MED-015": query + "audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats",
         "PT-MED-016": query + "videoMetadataIncludesOpeningAndDisplayFields",
         "PT-MED-017": query + "descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing",
+        "PT-MED-036": query + "med036DecodedRequestsDispatchAllEightStoredQueries",
+    })
+    request = "dev.codex.schubert.nk.api.application.media.MediaRequestTest#"
+    expected.update({
+        "PT-MED-033": request + "med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
+        "PT-MED-034": request + "med034EightLayoutsHaveIndependentCanonicalFingerprints",
+        "PT-MED-035": request + "med035MalformedNullAndUnknownRequestsNeverReachQueries",
     })
     storage = "dev.codex.schubert.nk.storage."
     storage_cases = {
@@ -68,6 +75,7 @@ def main():
     methods, clean_reports = [], {}
     reports = list((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml"))
     reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml"))
+    reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml"))
     reports.extend((repo / "src/schubert-nk-storage/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.storage.*.xml"))
     for report in sorted(reports):
         suite = ET.parse(report).getroot()
@@ -107,7 +115,8 @@ def main():
         "testIdMethods": expected, "methods": methods, "actual": f"All {len(methods)} mapped independent assertion sets passed",
         "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
         "scope": "Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared complete retained segment walk/Unix/size-before-after/scoped-channel, Web descriptor-file adapter and internal response-port delivery of 200/206/416/HEAD/download with 20 immediate permits and request binding. Explicit header maps and exact independently patterned body slices, latch-held 20/21 rejection and all-permit recovery, redacted I/O failures/no second response and 100 independent deliveries passed. This is not a registered/authenticated HTTP endpoint or manifest/hash check. Auth/Inbox/manifest/MQ-to-HTTP connection/full startup/client-abort classification/actual NK CHR remain unimplemented or unconnected. Selected eight Storage methods overlap Scenario's module regression and are not additive to reactor count.",
-        "relatedBug": [], "relatedSsc": ["SSC-028"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
+        "requestIdentity": "SSC-029 all eight UI235 literal request vectors, explicit ordered field names/type-version and independent LP/JCA HMAC; direct dispatch through the same decoded values to all eight real PostgreSQL queries; CanonicalField factory NFC/copy/zero and Scenario existing canonical regressions. Final authentication/Inbox/response capture is still separate.",
+        "relatedBug": [], "relatedSsc": ["SSC-028", "SSC-029"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

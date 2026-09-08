@@ -48,6 +48,97 @@ class MediaRepositoryTest {
     sql("truncate schubert.media_assets,schubert.audio_files cascade");
   }
 
+  @Test
+  void med036DecodedRequestsDispatchAllEightStoredQueries() throws Exception {
+    audio();
+    videos();
+    asset(100, "MUSIC", "music-0", "Track", "BGM", "ゲーム", null, null, "N", 1);
+    try (var c = read()) {
+      for (String layout :
+          List.of(
+              "AUDREQ01",
+              "ANMREQ01",
+              "ANLREQ01",
+              "VIDREQ01",
+              "MCTREQ01",
+              "MCSREQ01",
+              "MTRREQ01",
+              "MEDREQ01")) {
+        var request =
+            dev.codex.schubert.nk.api.application.media.MediaRequest.decode(
+                dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message(
+                    layout,
+                    dev.codex.schubert.nk.api.application.media.MediaRequestFixture.data(layout)));
+        var result = request.query(QUERIES, c, USER).orElseThrow();
+        assertEquals(layout.replace("REQ", "RSP"), result.layoutId().value());
+        switch (layout) {
+          case "AUDREQ01" ->
+              assertWire(
+                  result,
+                  descriptorBytes(
+                      "700", "scenario/G/audio/700.ogg", "Audio nice.ogg", "audio/ogg", "A"),
+                  List.of());
+          case "ANMREQ01" ->
+              assertWire(result, "0030011005      ".getBytes(StandardCharsets.US_ASCII), List.of());
+          case "ANLREQ01" ->
+              assertWire(
+                  result,
+                  count(8, 6, 3),
+                  List.of(
+                      animation("main-z", "First", "MAIN", "v/30.mp4", null, 1),
+                      animation("main-a", "Second", "MAIN", "v/10.mp4", null, 2),
+                      animation("sub", "Sub", "SUBTRACK", "v/20.mp4", "main-z", 3)));
+          case "VIDREQ01" -> {
+            byte[] expected = blank(1808);
+            System.arraycopy(
+                descriptorBytes("opening", "video/50.mp4", "file.mp4", "video/mp4", "I"),
+                0,
+                expected,
+                0,
+                1024);
+            put(expected, 1024, "Opening");
+            put(expected, 1280, "OPENING");
+            put(expected, 1296, "v/50.mp4");
+            assertWire(result, expected, List.of());
+          }
+          case "MCTREQ01" -> assertWire(result, count(8, 6, 1), List.of(group(72, 64, "BGM", 1)));
+          case "MCSREQ01" -> assertWire(result, count(8, 6, 1), List.of(group(136, 128, "ゲーム", 1)));
+          case "MTRREQ01" ->
+              assertWire(
+                  result,
+                  count(16, 9, 1),
+                  List.of(track("music-0", "Track", "BGM", "ゲーム", "v/100.ogg", null, "N", 1)));
+          case "MEDREQ01" ->
+              assertWire(
+                  result,
+                  descriptorBytes("music-0", "music/100.ogg", "file.ogg", "audio/ogg", "A"),
+                  List.of());
+          default -> fail("unexpected query");
+        }
+        assertTrue(c.isReadOnly());
+        assertFalse(c.getAutoCommit());
+        assertFalse(c.isClosed());
+      }
+      for (String layout : List.of("AUDREQ01", "VIDREQ01", "MEDREQ01")) {
+        byte[] data = dev.codex.schubert.nk.api.application.media.MediaRequestFixture.data(layout);
+        if (layout.equals("AUDREQ01")) put(data, 0, "000000000701");
+        else put(data, 0, "missing");
+        var request =
+            dev.codex.schubert.nk.api.application.media.MediaRequest.decode(
+                dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message(
+                    layout, data));
+        assertTrue(request.query(QUERIES, c, ADMIN).isEmpty());
+      }
+    }
+    try (var invalid = database.api()) {
+      var request =
+          dev.codex.schubert.nk.api.application.media.MediaRequest.decode(
+              dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message(
+                  "MCTREQ01", new byte[0]));
+      failure(ResultCode.TEMPORARY_FAILURE, () -> request.query(QUERIES, invalid, USER));
+    }
+  }
+
   /** PT-MED-015: UI235 independent MEDIA1024 for Audio and five Music formats, both modes. */
   @Test
   void audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats() throws Exception {

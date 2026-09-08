@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.idempotency;
 
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.Objects;
 import org.jspecify.annotations.Nullable;
@@ -23,6 +25,26 @@ public record CanonicalField(String name, String typeVersion, byte @Nullable [] 
   @Override
   public byte @Nullable [] value() {
     return value == null ? null : value.clone();
+  }
+
+  /** Required NFC UTF-8 X1 field. SSC-025/029; PT-MED-033/034 and Scenario Q01..Q04. */
+  public static CanonicalField text(String name, String value) {
+    Objects.requireNonNull(value, "value");
+    return encoded(name, "X1", Normalizer.normalize(value, Normalizer.Form.NFC));
+  }
+
+  /** Required N1 decimal field, without wire padding. Same trace as text(). */
+  public static CanonicalField number(String name, long value) {
+    return encoded(name, "N1", Long.toString(value));
+  }
+
+  private static CanonicalField encoded(String name, String type, String value) {
+    byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+    try {
+      return new CanonicalField(name, type, bytes);
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
   }
 
   @Override
