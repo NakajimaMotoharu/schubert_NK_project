@@ -21,4 +21,6 @@ BUG-070はproxy拒否のsendErrorを除き、403を設定して監査後return�
 
 正式run04（source3cd44d2、01:00:53～01:05:25 JST）は全737件・全coverage100%・静的解析0/exit0。ただし015 collectorで新4Test methodの(Path)署名欠落により厳密一致検査が停止した（BUG-071/YKT-063、修正前起票）。先行6collectorは収集成功。run04だけをWeb全証跡完了とはしない。新4mappingに実JUnit署名を明記し、既存108・集合/件数一致検査を維持したまま、修正collectorを含むsourceを新runへ固定して再実行する。
 
+正式run05（source1640ca74b8a45deaa137e557640e7ec257a82058、01:06:53～01:11:22 JST）は全737件・全coverage100%・静的解析0/exit0。7collector成功、Web112methodの厳密集合/件数一致、新4実HTTP再試験成功。BUG070/071・YKT062/063の修正/非該当根拠/再発防止assertを確認して完了。詳細環境・原本log hash・全counterはmanifest.json。
+
 探索は全coverage/全module/正式gateを代替しない。全MVC・実TLS/Caddy・production bootstrap・NK Characterization・IT/STは未実施。

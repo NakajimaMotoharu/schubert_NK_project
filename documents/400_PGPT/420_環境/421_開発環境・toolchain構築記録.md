@@ -216,6 +216,8 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -N -Dmaven.
 
 依存取得は2026-09-09 00:39:53 JST成功。正式PT-WEB-20260909-03の実行中はsrc/POM/collectorを固定し、取得だけを行った。組込みPTはloopbackのみ・ephemeral port・JUnit所有temporary directory・明示close、合成Servlet/DB/監査だけとする。TLS/Caddyは本番と同じbackend境界を模擬し、証明書/実serverのIT/ST合格と混同しない。
 
+導入確認: 正式PT-WEB-20260909-05（source1640ca7）で全737件/全coverage100%/静的解析0、PT109のServlet API resource1件・native session0を確認した。単一Tomcat providerへの置換とloopback実HTTP4件のPG/PT導入は完了。本番bootstrap/TLS/CaddyのIT/STは未実施。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
