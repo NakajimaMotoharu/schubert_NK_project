@@ -253,6 +253,9 @@ class UserQueryApplicationServiceTest {
       assertEquals(
           Set.of("layout", "reason", "targetType", "outcome", "actorRole", "step"), json.keySet());
       assertFalse(details.contains("synthetic-private-search"));
+      // YKT-060: denial audit retains independent UI236 route/type, not only a request ID.
+      assertEquals("USRREQ01", json.get("layout").getAsString());
+      assertEquals("USER", json.get("targetType").getAsString());
       assertEquals("USER", json.get("actorRole").getAsString());
       assertTrue(details.getBytes(StandardCharsets.UTF_8).length <= 1024);
     }

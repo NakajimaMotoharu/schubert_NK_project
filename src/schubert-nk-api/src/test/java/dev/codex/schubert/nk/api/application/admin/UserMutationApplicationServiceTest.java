@@ -111,6 +111,9 @@ class UserMutationApplicationServiceTest {
             1,
             h.scalar(
                 "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and category='SECURITY'"));
+        // YKT-060: fixed request layout/type survive every denied admission path.
+        assertEquals("USTREQ01", h.text("select details->>'layout' from schubert.app_logs"));
+        assertEquals("USER", h.text("select details->>'targetType' from schubert.app_logs"));
         assertEquals(
             code.equals("0103") ? 1 : 0,
             h.scalar("select count(actor_user_id) from schubert.app_logs"));
