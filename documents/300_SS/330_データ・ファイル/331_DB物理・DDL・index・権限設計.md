@@ -85,7 +85,19 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 
 ### 3.4 Inbox検査用最小権限（SSC-049/QA-046）
 
-UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。必要なInbox snapshot/参照先の読取りと固定保守functionだけを許可し、任意DML/DDL、他roleへのSET ROLE、Web session/schema、password hashの読取りを許可しない。batchの現行権限は増やさない。詳細signature/列grantは実装前に本書へ追記し、既存migrationは変更せずappend-onlyで反映する。暗号検査部品のtrueだけでSQL DELETEしてはならない。参照・期限・backup・競合保護の検査も必要である。
+UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。必要なInbox snapshot/参照先の読取りと固定保守functionだけを許可し、任意DML/DDL、他roleへのSET ROLE、Web session/schema、password hashの読取りを許可しない。batchの現行権限は増やさない。既存migrationは変更せずappend-onlyで反映する。暗号検査部品のtrueだけでSQL DELETEしてはならない。参照・期限・backup・競合保護の検査も必要である。
+
+最初の認証参照検査用DB境界はPG-D-121/PT-DB-INBOX-017～024に対応する。`schubert_inbox_inspector`はLOGIN、NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS、owner membershipなし。CONNECT/USAGE schubertと次の権限だけを追加する。credentialは検査process専用で、本番値はGitへ置かない。
+
+| Object | 検査roleの許可 | 禁止/限定 |
+|---|---|---|
+| `maintenance_next_auth_inbox(uuid,timestamptz,uuid)` | EXECUTE。run_id、固定cutoff、after_message_id（最初はNULL） | PUBLIC/app/batch/Web/backup/opsへEXECUTEしない。最大1行、LGN/LOG応答だけ |
+| `auth_sessions` | SELECT列: id,user_id,created_message_id,context_hash,context_ciphertext,key_version,issued_at,revoked,revoked_at | 任意DML/DDLなし。expires_at/last_accessed_at/client_address等の不要列を追加しない |
+| `request_inbox`基底table、app_users/password、Web schema | 直接権限なし | Inboxは候補functionだけから読む。認証user/password queryは呼ばない |
+
+候補functionはnk_owner所有/SECURITY DEFINER、固定search_pathとUTCを設定。run_id/cutoff必須、無限cutoff拒否、advisory xact lock 71419602取得、同run・cutoffのJST business_dateのDB/config backup SUCCESS（ended_at必須）を確認してbackup行をID昇順FOR SHARE。未達は固定SQLSTATE 22023/55P03/55000で失敗し秘密値を例外へ出さない。
+`processing_state IN (COMPLETED,ERROR)`、LGN/LOG response、`expires_at < cutoff`、`message_id > after`の候補をMessage PK昇順で1行だけFOR UPDATEし、AUTH_SESSION参照があれば当該auth_sessionsをFOR SHAREする。全Inbox列は既存composite型で検査processだけへ返す（SQLは明示列）。snapshot/参照欠落はJava検査で保持し、SQL単体で復号・整合合格としない。直接base table SELECTも不要。
+callerの明示transaction中に構造/認証参照検査を行い、終了までlockを保持する。autocommit呼出しで返った行を将来のlock保証に使わない。最終DELETE/非認証候補/固定runの再実行状態/oneshotは別の未完了gateで、候補取得functionの実装だけでBUG-014を完了にしない。
 
 ## 4. Account・Session
 
