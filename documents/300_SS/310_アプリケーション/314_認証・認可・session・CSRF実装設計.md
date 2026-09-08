@@ -201,6 +201,24 @@ PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaint
 
 不変rowはcreated/last access/expiryがmicrosecond精度、created<=last<=expiry、max inactive1..28800、version0..999999999、ciphertextの許可範囲を検証する。上限versionへの+1は拒否する。外側lifecycleがlock下で期限/暗号を検証し、8h idle延長とdirty属性mergeを行う。削除済rowへの古いHTTP saveを新規INSERTへ置換しない。Fixation旧削除＋新INSERTは同一短transaction、JMS/HTTP処理はDB lockを保持せず実行する。低位storeの合格はSpring Session/失効/並行merge完了ではない。
 
+#### 7.2.4 暗号lifecycle service（SSC-041）
+
+`EncryptedWebSessionRepository`はSpring Session adapterの委譲先として、DataSource/Clock/CSPRNG/UUID供給と専用SessionPayloadCodecを使用し、以下を短いWeb technical transactionだけで行う。JMS/HTTPやAPI password照合をtransactionへ入れない。
+
+| operation | 契約 |
+|---|---|
+| create | 匿名principal・新CSRF・空SavedRequest/tokenで即時暗号化保存。新Cookie ID/DB UUID、idle8h |
+| find | hash row lock後、現時刻をmicrosecond化してexpiry確認。一致/超過は削除、復号/schema不正も削除して不在。正常だけidle延長/current再暗号化して返す |
+| mutate | 現在rowをlock/復号/期限検証後、現在属性へのpure callbackを適用。principal/CSRF変更は禁止、null結果/不変制約違反はrollback。SavedRequest/tokenの古い全snapshot上書きを行わない |
+| authenticate | API認証済principalを受け、new Cookie/DB UUID/CSRFへfixation。UI226どおりSavedRequest/未完了tokenを含むallowlistを保持、旧削除＋新INSERTをatomic化。発行値衝突はrollback |
+| invalidate | hash限定DELETEをcommit。破損rowでもlocal失効可能。API revoke/queue/監査・HTTP Cookie失効は外側 |
+
+構造/NULL/型不正rowを表す`InvalidSessionRowException`を固定`SessionStoreException`のsubtypeとして区別し、失効用hash限定DELETEをstoreへ追加する。Row不正・復号不正・期限切れは削除commit後だけ不在を返す。DB接続/SQL/resource/暗号write故障はrollbackして固定障害、cause/suppressed診断を利用者へ返さない。
+
+Idle延長はmax(現在時刻,既存last access)＋row max inactiveを用い、Clock後退で期限を縮めず絶対lifetimeを追加しない。新規/認証時は8h固定。version上限999999999の次はCookie/CSRF/created_at/属性を維持し、DB UUIDだけ新規発行して同hashの新row/version0へatomic置換、新PK AADで再暗号化する。旧PKのCASを成功させずABAを防ぐ。UUID衝突・想定外0件・commit/close故障は不成功で、呼出側が未確定成功を利用者へ表示しない。
+
+本serviceはframework/監査handlerの実装完了ではない。Operation tokenの用途/完了/timeout handlerは最大10件を保ち、未完了tokenを実装都合で破棄しない。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
