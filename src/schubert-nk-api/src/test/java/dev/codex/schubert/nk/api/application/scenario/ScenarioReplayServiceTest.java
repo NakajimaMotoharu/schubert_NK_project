@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.protocol.file.LargeResultDescriptor;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData;
@@ -528,6 +529,66 @@ final class ScenarioReplayServiceTest {
       assertArrayEquals(original, completion.responseSnapshot().orElseThrow().ciphertext());
       assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), completion.completedAt());
       assertEquals(InboxResultReference.none(), completion.resultReference());
+    }
+  }
+
+  /** PT-SCN-009-S06: only descriptor UUID/path changes, not the captured header or lifetime. */
+  @Test
+  void regeneratedDescriptorKeepsOriginalHeaderResultAndCompletionTime() throws Exception {
+    try (var codec = codec()) {
+      var service = new ScenarioReplayService(codec);
+      var request = request("SCN");
+      var original =
+          service.captureSuccess(request, ACTOR, typed("SCN", true, 201), RESPONSE, COMPLETED);
+      byte[] oldCiphertext = original.responseSnapshot().orElseThrow().ciphertext();
+      var replacement =
+          new LargeResultDescriptor(NEXT, "20260909/" + NEXT + ".ready", 964800, HASH, 201);
+      var updated = service.replaceFile(newContext(request), ACTOR, original, replacement);
+      byte[] expected =
+          wire(
+              "SCN",
+              request.header().messageId(),
+              RESPONSE,
+              "20260908090001123",
+              "b".repeat(64),
+              "0000",
+              true,
+              201);
+      put(expected, 256 + 1329, NEXT.toString());
+      put(expected, 256 + 1365, "20260909/" + NEXT + ".ready");
+      assertArrayEquals(expected, decrypt(request, updated.responseSnapshot().orElseThrow()));
+      assertArrayEquals(oldCiphertext, original.responseSnapshot().orElseThrow().ciphertext());
+      assertEquals(original.completedAt(), updated.completedAt());
+      assertEquals(original.state(), updated.state());
+      assertEquals(original.resultReference(), updated.resultReference());
+      assertEquals("SCNRSP01", updated.responseLayoutId());
+      assertEquals("001", updated.responseVersion());
+      var saved = service.read(request, ACTOR, updated);
+      assertEquals(NEXT, saved.descriptor().orElseThrow().fileId());
+      put(expected, 24, NEXT.toString());
+      put(expected, 96, "20260908090002789");
+      put(expected, 208, "0200");
+      assertArrayEquals(expected, service.reply(saved, request, ACTOR, NEXT, SENT, true));
+      assertThrows(
+          NullPointerException.class,
+          () -> service.replaceFile(null, ACTOR, original, replacement));
+      assertThrows(
+          NullPointerException.class,
+          () -> service.replaceFile(request, null, original, replacement));
+      assertThrows(
+          NullPointerException.class, () -> service.replaceFile(request, ACTOR, null, replacement));
+      assertThrows(
+          NullPointerException.class, () -> service.replaceFile(request, ACTOR, original, null));
+      denied(() -> service.replaceFile(request, OTHER, original, replacement));
+      for (var wrong :
+          List.of(
+              new LargeResultDescriptor(NEXT, "20260909/" + NEXT + ".ready", 4800, HASH, 1),
+              new LargeResultDescriptor(
+                  NEXT, "20260909/" + NEXT + ".ready", 964800, "0".repeat(64), 201)))
+        denied(() -> service.replaceFile(request, ACTOR, original, wrong));
+      var inline =
+          service.captureSuccess(request, ACTOR, typed("SCN", false, 0), RESPONSE, COMPLETED);
+      denied(() -> service.replaceFile(request, ACTOR, inline, replacement));
     }
   }
 

@@ -80,6 +80,14 @@ Webは電文decode後、以下の順を変えずに検証する。最初の不�
 Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model相当へboundし、file全byteを1配列へ読まない。
 不合格は`FILE_DESCRIPTOR_INVALID` / `FILE_INTEGRITY_MISMATCH`の分類で503、request ID/file ID/検証stepだけlogへ出す。
 
+### 6.1 APIの再送file確認と再生成（SSC-027）
+
+APIはcaller所有の保持Transfer rootを検査後、既存dateとready inodeをNOFOLLOWで開き、通常file/owner/group/mode/nlink/size、4800byteずつのexact EOF/hash、読取後属性を照合する。ここでの確認は物理完全性であり、record decode/View Model生成はWeb readerの責務として維持する。通常の検証はfile/directoryを作成・初期化・変更・削除しない。
+
+MISSINGを返せるのはroot検査成功後の既存date open、またはdate属性成功後でready inode取得前のnative ENOENTだけ。保持inode callback内のNoSuchFile、root/属性/hash/crypto/権限/close/不明I/OはUNAVAILABLEとし、不在へ補完しない。Close失敗を伴う不在は再生成候補にしない。FD番号の再利用と所有を混同せず、callbackのresource所有範囲を字句的に限定する。
+
+不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。
+
 ## 7. Path検証の実装規約
 
 ### 7.1 論理検証

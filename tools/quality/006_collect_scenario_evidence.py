@@ -102,6 +102,20 @@ def main():
             if destination.exists():
                 raise SystemExit("refusing to overwrite archived JUnit evidence")
             report.rename(destination)
+    required_methods = {
+        "PT-SCN-009-G01": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#sameMessageAndHashCollisionSerializeButNeverShareResults",
+        "PT-SCN-009-G02": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#differentStripesRunTogetherAndCallerMonitorDoesNotBlock",
+        "PT-SCN-009-G03": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#interruptAndCallbackFailuresReleaseOnlyOwnedLocks",
+        "PT-SCN-009-F01": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#originalContentRegeneratesAtAllFileBoundaries",
+        "PT-SCN-009-F02": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#changedMasterAndUnexpectedPublishedContentAreRejected",
+        "PT-SCN-009-F03": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#nullErrorsAndProviderFailuresPreserveBoundaries",
+        "PT-SCN-009-V01": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#realReadyFilesMissingNamesAndConcurrentReadsStayReadOnly",
+        "PT-SCN-009-V02": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#presentButInvalidFilesAreNeverDeclaredMissing",
+        "PT-SCN-009-V03": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#nullNativeCallbackAndCloseFailuresNeverBecomeAbsence",
+        "PT-SCN-009-S06": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#regeneratedDescriptorKeepsOriginalHeaderResultAndCompletionTime",
+    }
+    if not set(required_methods.values()).issubset(set(methods)):
+        raise SystemExit("missing required Scenario lifecycle Test ID/method evidence")
     manifest = {
         "runId": run, "programId": "NK-SCN-001", "targetCommit": commit,
         "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
@@ -111,7 +125,7 @@ def main():
                         "postgresql": "18.6", "artemis": "2.56.0",
                         "libc": subprocess.check_output(["getconf", "GNU_LIBC_VERSION"], text=True).strip(),
                         "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"},
-        "modules": modules, "scenarioMethods": methods, "crossProgramRegressionMethods": regressions,
+        "modules": modules, "scenarioMethods": methods, "testIdMethods": required_methods, "crossProgramRegressionMethods": regressions,
         "testIdsPartial": ["PT-SCN-001", "PT-SCN-002", "PT-SCN-003", "PT-SCN-004",
                            "PT-SCN-005", "PT-SCN-006", "PT-SCN-007", "PT-SCN-008", "PT-SCN-008-F04"],
         "additionalTestsPassed": ["PT-SCN-008-D01", "PT-SCN-008-D02", "PT-SCN-008-D03", "PT-SCN-008-D04",
@@ -130,10 +144,13 @@ def main():
                                   "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04",
                                   "PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04",
                                   "PT-SCN-009-Q01", "PT-SCN-009-Q02", "PT-SCN-009-Q03", "PT-SCN-009-Q04",
-                                  "PT-SCN-009-S01", "PT-SCN-009-S02", "PT-SCN-009-S03", "PT-SCN-009-S04", "PT-SCN-009-S05"],
+                                  "PT-SCN-009-S01", "PT-SCN-009-S02", "PT-SCN-009-S03", "PT-SCN-009-S04", "PT-SCN-009-S05", "PT-SCN-009-S06",
+                                  "PT-SCN-009-G01", "PT-SCN-009-G02", "PT-SCN-009-G03",
+                                  "PT-SCN-009-F01", "PT-SCN-009-F02", "PT-SCN-009-F03",
+                                  "PT-SCN-009-V01", "PT-SCN-009-V02", "PT-SCN-009-V03"],
         "testIdsNotRun": ["PT-SCN-008-F02-ADMIT-ROOT", "PT-SCN-008-F04-READINESS", "PT-SCN-009"],
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
-        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022", "SSC-023", "SSC-024", "SSC-025", "SSC-026"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036", "BUG-037"],
+        "relatedSsc": ["SSC-017", "SSC-018", "SSC-019", "SSC-020", "SSC-021", "SSC-022", "SSC-023", "SSC-024", "SSC-025", "SSC-026", "SSC-027"], "relatedBug": ["BUG-030", "BUG-031", "BUG-032", "BUG-033", "BUG-035", "BUG-036", "BUG-037"],
         "relatedYkt": ["YKT-027", "YKT-028", "YKT-029", "YKT-031", "YKT-032", "YKT-033"],
         "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
         "rawLogSha256": hashlib.sha256(raw).hexdigest(),

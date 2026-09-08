@@ -28,6 +28,7 @@ public final class ScenarioReplayService {
   /** The opaque result binds payload to its verified snapshot identity, never an auth principal. */
   public static final class Snapshot {
     private final ResponseSnapshotIdentity identity;
+    private final CommonHeader header;
     private final PayloadValues values;
     private final ResultCode code;
     private final Optional<ScenarioDetailResponseData> detail;
@@ -35,11 +36,13 @@ public final class ScenarioReplayService {
 
     private Snapshot(
         ResponseSnapshotIdentity identity,
+        CommonHeader header,
         PayloadValues values,
         ResultCode code,
         Optional<ScenarioDetailResponseData> detail,
         Optional<LargeResultDescriptor> descriptor) {
       this.identity = identity;
+      this.header = header;
       this.values = values;
       this.code = code;
       this.detail = detail;
@@ -166,11 +169,54 @@ public final class ScenarioReplayService {
                   : Optional.empty();
           Optional<LargeResultDescriptor> descriptor = descriptor(detail);
           require(completion.resultReference().equals(reference(detail, descriptor)));
-          return new Snapshot(identity, values, code, detail, descriptor);
+          return new Snapshot(identity, header, values, code, detail, descriptor);
         } finally {
           Arrays.fill(data, (byte) 0);
           records.forEach(record -> Arrays.fill(record, (byte) 0));
         }
+      } finally {
+        Arrays.fill(body, (byte) 0);
+      }
+    } catch (ResponseSnapshotException
+        | PermanentProtocolException
+        | IllegalArgumentException
+        | IllegalStateException failure) {
+      throw new TemporaryInfrastructureException();
+    }
+  }
+
+  /**
+   * Change only the verified F descriptor, retaining original header/state/reference/time. SS324
+   * §7.1/SSC-027/PT-SCN-009-S06. Caller owns final row lock/CAS and physical verification.
+   */
+  public InboxCompletion replaceFile(
+      ScenarioRequest request,
+      AuthenticatedActor actor,
+      InboxCompletion original,
+      LargeResultDescriptor replacement) {
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(original, "original");
+    Objects.requireNonNull(replacement, "replacement");
+    try {
+      Snapshot saved = read(request, actor, original);
+      require(
+          ScenarioFileRegenerator.sameContent(
+              saved.descriptor.orElseThrow(IllegalArgumentException::new), replacement));
+      TypedPayloadValues typed =
+          ScenarioDetailDelivery.fileResponse(
+              saved.detail.orElseThrow(IllegalArgumentException::new), replacement);
+      FixedPayload payload =
+          PayloadCodec.standard().encode(PayloadTypeCatalog.encode(typed), ResultCode.SUCCESS);
+      byte[] body = FixedWidthEncoder.standard().encode(new WireMessage<>(saved.header, payload));
+      try {
+        return new InboxCompletion(
+            original.state(),
+            original.resultReference(),
+            original.responseLayoutId(),
+            original.responseVersion(),
+            Optional.of(snapshots.encrypt(saved.identity, body)),
+            original.completedAt());
       } finally {
         Arrays.fill(body, (byte) 0);
       }

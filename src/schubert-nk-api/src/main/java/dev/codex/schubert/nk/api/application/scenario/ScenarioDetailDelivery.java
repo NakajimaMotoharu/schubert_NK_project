@@ -42,7 +42,14 @@ public final class ScenarioDetailDelivery {
     if (file.recordCount() != snapshot.records().size()) {
       throw new IllegalStateException("published scenario record count differs from snapshot");
     }
-    ScenarioDetailResponseData base = snapshot.metadata();
+    return fileResponse(snapshot.metadata(), file);
+  }
+
+  /** Descriptor projection also used by verified replay regeneration; never generates a file. */
+  static TypedPayloadValues fileResponse(
+      ScenarioDetailResponseData base, LargeResultDescriptor file) {
+    Objects.requireNonNull(base, "base");
+    Objects.requireNonNull(file, "file");
     ScenarioDetailResponseData metadata =
         new ScenarioDetailResponseData(
             base.scriptFileId(),

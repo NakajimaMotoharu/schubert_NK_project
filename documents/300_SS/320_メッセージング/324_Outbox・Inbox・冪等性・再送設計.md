@@ -142,6 +142,20 @@ SCN成功の現在Script file IDは要求IDに一致する。FはSCENARIO_FILE�
 
 DB transactionとJMSをXAで結合しない。Inbox replayによりDB先commitを安全にする。
 
+### 7.1 Scenario段階処理と同Message排他（SSC-027）
+
+単一API process・単一service instanceを起動契約とする。同Messageのsnapshot取得～file生成/検証～最終DB確定は同一private lockで直列化する。UUID hash下位8bitを使う固定256本のfair ReentrantLockを所有し、動的なMessage履歴/cache/認証情報を保持しない。異なるMessageのhash衝突は処理を直列化するだけで結果を共有しない。待機中はDB connection/transactionを取得せず、業務timeoutを追加しない。Interruptは状態を復元して一時基盤型へ返し、未取得lockをunlockしない。Callback失敗/nullでも取得lockを必ず解放する。外部から取得できるthis/class monitorに依存しない。
+
+このlockはDB冪等性の代替でも複数JVM分散lockでもない。受付開始前のsingle-instance/full root gateが未完了の間は内部部品として扱い、本番dispatcherへ登録しない。新たなPG session advisory lease/追加DB connectionは導入せず、既存pool上限8とREAD COMMITTEDを維持する。
+
+1. Read-only transactionで現在contextを非更新検査し、owner付きcanonical/HMACでMessage Inboxを参照。既存結果は§6.3で復号/整合検査し、新規だけquery snapshotを取得する。全query結果をimmutableへ切り離し、commitとconnection closeを確認してから次段階へ進む。
+2. DB外で必要なfileを生成/検証。既存Fは物理完全性確認が成功した時だけ同descriptorを再利用。MISSINGだけ再生成候補とし、属性/hash/リンク/不明I/Oは再生成で隠さず失敗とする。再生成用DB snapshotもread-onlyで取得・終了後に使い、元metadataとrecord count/hashが一致することを生成前に確認する。既存結果が失われた場合は別結果へ補完しない。
+3. 最終write transactionで新しい時刻の通常verify（User→session lock/idle touch）を行い、事前ownerとの一致を確認してから通常Inbox executeへ接続。DBのUK/identity/HMACと保存結果を再検査する。初回COMPLETED/ERRORの保存を確定し、file I/O/JMSをこのtransactionへ持ち込まない。
+4. 朝削除後のF再生成では、最終認証と元Inboxのrow lock/identity/旧snapshot一致を確認してdescriptorを含む暗号snapshotだけ置換する。Message/owner/canonical/state/result reference/初回completed_at/expires_atは不変。競合・不一致はrollbackし、新readyを勝手に削除しない。物理内容が不一致のfileを置換で正当化しない。
+5. 最終commitとconnection close成功後に新headerで応答を再構築し、JMS所有者へ返す。認証失効は非保存0102、確定0104/9001は保存ERROR、一時障害は固定一時型とする。Rollback/commit/close/clock/UUID/鍵の不確定を成功にせず、原因・suppressed・bodyを外へ返さない。保存済み成功だけ再送0200。失敗後のreadyは次回朝清掃まで保全する。
+
+独立PTはMessage衝突/100再送/interrupt/lock寿命、段階時刻、DB connection・row lock非保持中のfile I/O、owner/role/失効再確認、Inbox24h保持、元結果再生成とdescriptor置換、JDBC/鍵/file/JMS故障後条件を区別する。最終serviceの未接続箇所は合格へ算入しない。
+
 ## 8. API `mq_outbox`
 
 ### 8.1 Row
