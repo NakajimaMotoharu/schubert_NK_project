@@ -238,9 +238,9 @@ class EmbeddedWebSecurityTest {
     }
   }
 
-  private static final class Server implements AutoCloseable {
+  static final class Server implements AutoCloseable {
     final Tomcat tomcat = new Tomcat();
-    final Fixture f = new Fixture(db);
+    final Fixture f;
     final Context context;
     final Log log = new Log();
     final AtomicInteger ids = new AtomicInteger();
@@ -260,6 +260,16 @@ class EmbeddedWebSecurityTest {
     }
 
     Server(Path root, boolean secureRandom) throws Exception {
+      this(root, secureRandom, db, Optional.empty());
+    }
+
+    Server(
+        Path root,
+        boolean secureRandom,
+        WebLogDatabaseFixture database,
+        Optional<MqAuthenticationProvider> provider)
+        throws Exception {
+      f = new Fixture(Objects.requireNonNull(database));
       f.clock.value = Instant.now();
       tomcat.setBaseDir(root.toString());
       tomcat.setPort(0);
@@ -279,20 +289,33 @@ class EmbeddedWebSecurityTest {
                   f.source, f.codec, f.clock, new java.security.SecureRandom(), UUID::randomUUID)
               : f.repository;
       var adapter = new SpringEncryptedSessionRepository(repository, f.clock);
-      List<Filter> filters =
-          List.of(
-              new WebSecurityHeaderFilterFactory().create(),
-              new CaddyTransportContextFilter(
-                  () -> new UUID(0, ids.incrementAndGet()),
-                  new CaddyClientAddressResolver(),
-                  audit),
-              new CharacterEncodingFilter("UTF-8", true, false),
-              new WebSessionFilterFactory().create(adapter),
-              new SecurityContextHolderFilter(
-                  new EncryptedSessionSecurityContextRepository(adapter)),
-              new WebCsrfFilterFactory()
-                  .create(
-                      new EncryptedSessionCsrfTokenRepository(), new WebCsrfDeniedHandler(audit)));
+      List<Filter> filters;
+      if (provider.isPresent()) {
+        filters =
+            List.of(
+                new WebSecurityFilterFactory()
+                    .create(
+                        adapter,
+                        provider.orElseThrow(),
+                        audit,
+                        () -> new UUID(0, ids.incrementAndGet())));
+      } else {
+        filters =
+            List.of(
+                new WebSecurityHeaderFilterFactory().create(),
+                new CaddyTransportContextFilter(
+                    () -> new UUID(0, ids.incrementAndGet()),
+                    new CaddyClientAddressResolver(),
+                    audit),
+                new CharacterEncodingFilter("UTF-8", true, false),
+                new WebSessionFilterFactory().create(adapter),
+                new SecurityContextHolderFilter(
+                    new EncryptedSessionSecurityContextRepository(adapter)),
+                new WebCsrfFilterFactory()
+                    .create(
+                        new EncryptedSessionCsrfTokenRepository(),
+                        new WebCsrfDeniedHandler(audit)));
+      }
       for (int i = 0; i < filters.size(); i++) {
         var definition = new FilterDef();
         definition.setFilterName("filter" + i);
@@ -313,6 +336,55 @@ class EmbeddedWebSecurityTest {
                 @Override
                 protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
+                  if (request.getRequestURI().equals("/fixture-principal")) {
+                    var principal = request.getUserPrincipal();
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response
+                        .getWriter()
+                        .write(principal == null ? "ANONYMOUS" : principal.getName());
+                    return;
+                  }
+                  if (request.getRequestURI().equals("/fixture-programmatic")) {
+                    var principal = request.getUserPrincipal();
+                    var session = request.getSession(false);
+                    assertNotNull(session);
+                    var csrf = session.getAttribute("csrfToken");
+                    for (ServletException denied :
+                        List.of(
+                            assertThrows(
+                                ServletException.class, () -> request.authenticate(response)),
+                            assertThrows(
+                                ServletException.class,
+                                () ->
+                                    request.login(
+                                        "private-user-canary", "private-password-canary")),
+                            assertThrows(ServletException.class, request::logout))) {
+                      assertEquals(
+                          "programmatic authentication is prohibited", denied.getMessage());
+                      assertNull(denied.getCause());
+                    }
+                    assertSame(principal, request.getUserPrincipal());
+                    assertSame(session, request.getSession(false));
+                    assertEquals(csrf, session.getAttribute("csrfToken"));
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response
+                        .getWriter()
+                        .write(
+                            request.getRemoteUser()
+                                + ":"
+                                + request.getAuthType()
+                                + ":"
+                                + request.isUserInRole("USER")
+                                + ":"
+                                + request.isUserInRole("ADMIN")
+                                + ":"
+                                + request.isUserInRole("ROLE_USER")
+                                + ":"
+                                + request.isUserInRole("ROLE_ADMIN")
+                                + ":"
+                                + request.isUserInRole(null));
+                    return;
+                  }
                   var token = (CsrfToken) request.getAttribute("_csrf");
                   response.setContentType("text/plain;charset=UTF-8");
                   response.getWriter().write("TOKEN:" + token.getToken());
@@ -400,7 +472,7 @@ class EmbeddedWebSecurityTest {
     }
   }
 
-  private static final class Log implements Logger {
+  static final class Log implements Logger {
     final List<JsonObject> events = new CopyOnWriteArrayList<>();
 
     @Override
