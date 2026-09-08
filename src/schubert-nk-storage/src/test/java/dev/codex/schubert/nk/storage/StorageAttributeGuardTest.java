@@ -22,6 +22,54 @@ class StorageAttributeGuardTest {
   @TempDir Path root;
 
   @Test
+  void med020LargeAssetSizesKeepTransferLimitAndUnixGuards() throws Exception {
+    Map<String, Object> attrs = file();
+    for (long size : new long[] {1, 48_000_000, 48_000_001, 999_999_999_999L, Long.MAX_VALUE}) {
+      attrs.put("size", size);
+      StorageAttributeGuard.existingFile(attrs, IDENTITY, size);
+      reject(() -> StorageAttributeGuard.existingFile(attrs, IDENTITY, size == 1 ? 2 : 1));
+      if (size > 48_000_000) {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> StorageAttributeGuard.file(attrs, IDENTITY, size));
+      }
+    }
+    for (long size : new long[] {0, -1, Long.MIN_VALUE}) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> StorageAttributeGuard.existingFile(attrs, IDENTITY, size));
+    }
+    assertThrows(
+        NullPointerException.class, () -> StorageAttributeGuard.existingFile(null, IDENTITY, 3));
+    assertThrows(
+        NullPointerException.class, () -> StorageAttributeGuard.existingFile(attrs, null, 3));
+    for (String key : List.of("owner", "group", "mode", "nlink", "size")) {
+      Map<String, Object> invalid = file();
+      invalid.remove(key);
+      reject(() -> StorageAttributeGuard.existingFile(invalid, IDENTITY, 3));
+      for (Object value : new Object[] {null, "invalid", -1, -1L}) {
+        invalid.put(key, value);
+        reject(() -> StorageAttributeGuard.existingFile(invalid, IDENTITY, 3));
+      }
+    }
+    // Typed but incorrect fields must not pass the shared guard either.
+    Map<String, Object> wrong = file();
+    wrong.put("owner", (UserPrincipal) () -> "other");
+    reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
+    wrong.put("owner", (UserPrincipal) IDENTITY::owner);
+    wrong.put("group", (GroupPrincipal) () -> "other");
+    reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
+    wrong.put("group", (GroupPrincipal) IDENTITY::group);
+    for (int mode : new int[] {040640, 0120640, 0100644, 0104640}) {
+      wrong.put("mode", mode);
+      reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
+    }
+    wrong.put("mode", 0100640);
+    wrong.put("nlink", 2);
+    reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
+  }
+
+  @Test
   void u01SizeAccountingIncludesEmptyPartialPartsButReadyRequiresWholeRecords() throws Exception {
     Map<String, Object> attrs = file();
     for (long size : new long[] {0, 1, 4799, 4800, 48_000_000}) {

@@ -28,6 +28,118 @@ class OwnedTransferDirectoryTest {
   @TempDir Path root;
 
   @Test
+  void med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes() throws Exception {
+    Path directory = Files.createDirectory(root.resolve("音楽 folder"));
+    Path asset = directory.resolve("音源 name.ogg");
+    write(asset);
+    Path outside = Files.createDirectory(root.resolve("outside"));
+    Files.write(outside.resolve("音源 name.ogg"), new byte[] {9});
+    FaultCalls calls = new FaultCalls();
+    calls.readOnly = true;
+    var parent = OwnedTransferDirectory.open(calls, root);
+    StorageIdentity expected = identity(root);
+    try (var child = parent.openExistingChild("音楽 folder")) {
+      parent.close();
+      assertEquals(1, calls.live.size());
+      Path retained = root.resolve("retained");
+      Files.move(directory, retained);
+      Files.createSymbolicLink(directory, outside);
+      assertArrayEquals(
+          new byte[] {1, 2, 3},
+          child.atExistingEntryHandle(
+              "音源 name.ogg",
+              handle -> {
+                assertEquals(2, calls.live.size());
+                Files.move(retained.resolve("音源 name.ogg"), retained.resolve("saved.ogg"));
+                Files.createSymbolicLink(
+                    retained.resolve("音源 name.ogg"), outside.resolve("音源 name.ogg"));
+                StorageAttributeGuard.existingFile(
+                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), expected, 3);
+                return readHeld(handle);
+              }));
+      assertEquals(1, calls.live.size());
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(outside.resolve("音源 name.ogg")));
+      assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(retained.resolve("saved.ogg")));
+    } finally {
+      parent.close();
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership() throws Exception {
+    FaultCalls calls = new FaultCalls();
+    calls.readOnly = true;
+    var parent = OwnedTransferDirectory.open(calls, root);
+    try (parent) {
+      assertThrows(NullPointerException.class, () -> parent.openExistingChild(null));
+      assertThrows(
+          NullPointerException.class,
+          () -> parent.atExistingEntryHandle(null, OwnedTransferDirectoryTest::readHeld));
+      assertThrows(NullPointerException.class, () -> parent.atExistingEntryHandle("asset", null));
+      for (String name : new String[] {"", ".", "..", "a/b", "a\0b"}) {
+        assertThrows(IllegalArgumentException.class, () -> parent.openExistingChild(name));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> parent.atExistingEntryHandle(name, OwnedTransferDirectoryTest::readHeld));
+      }
+      failure(StorageIoException.Reason.MISSING, () -> parent.openExistingChild("missing"));
+      failure(
+          StorageIoException.Reason.MISSING,
+          () -> parent.atExistingEntryHandle("missing", p -> fail("missing entry callback")));
+      assertFalse(Files.exists(root.resolve("missing")));
+      write(root.resolve("asset"));
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("asset"));
+      Files.createSymbolicLink(root.resolve("link"), root.resolve("asset"));
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("link"));
+      StorageIdentity expected = identity(root);
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              parent.atExistingEntryHandle(
+                  "link",
+                  p -> {
+                    StorageAttributeGuard.existingFile(
+                        Files.readAttributes(p, "unix:owner,group,mode,nlink,size"), expected, 3);
+                    return fail("symlink content read");
+                  }));
+      for (boolean closeFailure : new boolean[] {false, true}) {
+        int before = calls.closes;
+        failure(
+            StorageIoException.Reason.UNAVAILABLE,
+            () ->
+                parent.atExistingEntryHandle(
+                    "asset",
+                    p -> {
+                      calls.failClose = closeFailure;
+                      throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                    }));
+        assertEquals(before + 1, calls.closes);
+        assertEquals(1, calls.live.size());
+      }
+      int before = calls.closes;
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              parent.atExistingEntryHandle(
+                  "asset",
+                  p -> {
+                    calls.failClose = true;
+                    return readHeld(p);
+                  }));
+      assertEquals(before + 1, calls.closes);
+      assertEquals(1, calls.live.size());
+      assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve("asset")));
+      assertTrue(Files.isSymbolicLink(root.resolve("link")));
+    }
+    failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("asset"));
+    failure(
+        StorageIoException.Reason.UNAVAILABLE,
+        () -> parent.atExistingEntryHandle("asset", OwnedTransferDirectoryTest::readHeld));
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
   void rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation() throws Exception {
     Path date = Files.createDirectory(root.resolve("20260908"));
     write(date.resolve(ID + ".ready"));

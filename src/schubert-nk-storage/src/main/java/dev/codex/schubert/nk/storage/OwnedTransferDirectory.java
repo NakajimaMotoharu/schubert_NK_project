@@ -70,6 +70,40 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /** Existing Asset child only. NK-MED-001; UI237/243; SS333; SSC-028; PT-MED-018/019. */
+  public OwnedTransferDirectory openExistingChild(String name) throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(name);
+      requireOpen();
+      return new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
+    }
+  }
+
+  /**
+   * Hold an existing Asset inode without following its final symlink. The callback must validate
+   * its Unix type/attributes before reading, finish all I/O here and never export the capability.
+   */
+  public <T> T atExistingEntryHandle(String name, FileOperation<T> operation)
+      throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(name);
+      Objects.requireNonNull(operation, "operation");
+      requireOpen();
+      return withEntry(calls.openEntry(descriptor, name), operation);
+    }
+  }
+
+  private static void requireSegment(String name) {
+    Objects.requireNonNull(name, "name");
+    if (name.isEmpty()
+        || name.equals(".")
+        || name.equals("..")
+        || name.indexOf('/') >= 0
+        || name.indexOf('\0') >= 0) {
+      throw new IllegalArgumentException("invalid storage segment");
+    }
+  }
+
   /** New or existing date child, never follows a symlink; child owns an independent FD. */
   public OwnedTransferDirectory openDate(LocalDate date) throws StorageIoException {
     return openDate(date, handle -> Boolean.TRUE);

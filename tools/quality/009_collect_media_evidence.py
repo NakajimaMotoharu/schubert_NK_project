@@ -46,15 +46,28 @@ def main():
         "PT-MED-016": query + "videoMetadataIncludesOpeningAndDisplayFields",
         "PT-MED-017": query + "descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing",
     })
+    storage = "dev.codex.schubert.nk.storage."
+    storage_cases = {
+        "PT-MED-018": storage + "OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+        "PT-MED-019": storage + "OwnedTransferDirectoryTest#med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+        "PT-MED-020": storage + "StorageAttributeGuardTest#med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
+    }
+    expected.update(storage_cases)
     methods, clean_reports = [], {}
     reports = list((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml"))
     reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml"))
+    reports.extend((repo / "src/schubert-nk-storage/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.storage.*.xml"))
     for report in sorted(reports):
         suite = ET.parse(report).getroot()
         cases = suite.findall("testcase")
         if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")) or len(cases) != int(suite.get("tests")):
             raise SystemExit("nonpassing/inconsistent media suite")
+        if suite.get("name", "").startswith(storage):
+            cases = [case for case in cases if case.get("classname", "") + "#" + case.get("name", "") in storage_cases.values()]
+            if not cases:
+                continue
         clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
+        clean.set("tests", str(len(cases)))
         for case in cases:
             if any(child.tag not in ("system-out", "system-err") for child in case):
                 raise SystemExit("failed/skipped/flaky/rerun media case")
@@ -70,7 +83,7 @@ def main():
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name, report in clean_reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
-    for module, directory in (("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"), ("protocol", "src/schubert-nk-protocol")):
+    for module, directory in (("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"), ("protocol", "src/schubert-nk-protocol"), ("storage", "src/schubert-nk-storage")):
         for suffix in ("csv", "xml"):
             shutil.copyfile(repo / directory / "target/site/jacoco" / ("jacoco." + suffix),
                             evidence / "coverage" / (module + "-jacoco." + suffix))
@@ -79,10 +92,10 @@ def main():
     manifest.update({
         "programId": "NK-MED-001", "programStatus": "IN_PROGRESS",
         "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
-        "testIdMethods": expected, "methods": methods, "actual": "All seventeen independent assertion sets passed",
-        "inputAndExpected": "001 PT specification and targetCommit's four named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. Production is never used to generate expected values.",
-        "scope": "Pure Range/header/bounded copy, five menu/list and three descriptor DB metadata queries only; not authenticated HTTP delivery or a manifest/file-integrity check. Auth/Inbox/manifest/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected. A validated DB projection must not authorize a file response without physical and manifest verification.",
-        "relatedBug": [], "relatedSsc": [], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
+        "testIdMethods": expected, "methods": methods, "actual": "All twenty independent assertion sets passed",
+        "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
+        "scope": "Pure Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared read-only Asset child/entry capability and size/Unix guards only; not authenticated HTTP delivery or a manifest/file-integrity check. Auth/Inbox/manifest/secure complete asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected. A validated DB projection must not authorize a file response without physical and manifest verification. Selected three Storage methods overlap Scenario's module regression and are not additive to reactor count.",
+        "relatedBug": [], "relatedSsc": ["SSC-028"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

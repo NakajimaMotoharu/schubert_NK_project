@@ -28,6 +28,21 @@ public final class StorageAttributeGuard {
     if (expectedSize < 1 || expectedSize > 48_000_000L) {
       throw new IllegalArgumentException("invalid transfer file size");
     }
+    existingFile(attributes, identity, expectedSize);
+  }
+
+  /**
+   * Shared positive-size Asset guard. Media callers separately enforce their N12 descriptor cap;
+   * Transfer callers retain file()'s 48MB cap. SSC-028; PT-MED-020; UI237/243; SS333.
+   */
+  public static void existingFile(
+      Map<String, Object> attributes, StorageIdentity identity, long expectedSize)
+      throws StorageIoException {
+    Objects.requireNonNull(attributes, "attributes");
+    Objects.requireNonNull(identity, "identity");
+    if (expectedSize < 1) {
+      throw new IllegalArgumentException("invalid existing file size");
+    }
     requireRegularFile(attributes, identity);
     Object size = attributes.get("size");
     require(size instanceof Long value && value == expectedSize);
