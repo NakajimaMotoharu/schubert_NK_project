@@ -64,6 +64,14 @@ def main():
         "PT-MED-034": request + "med034EightLayoutsHaveIndependentCanonicalFingerprints",
         "PT-MED-035": request + "med035MalformedNullAndUnknownRequestsNeverReachQueries",
     })
+    replay = "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#"
+    expected.update({
+        "PT-MED-050": replay + "med050EightSuccessLayoutsPreserveLiteralWireAndEncryptedIdentity",
+        "PT-MED-051": replay + "med051DefiniteErrorsKeepCodesAndNeverInventDescriptors",
+        "PT-MED-052": replay + "med052AuthenticatedCorruptionAndRequestMixupsFailClosed",
+        "PT-MED-053": replay + "med053NullKeyAndClockBoundariesRemainRedacted",
+        "PT-MED-054": replay + "med054ConcurrentSnapshotsRemainImmutableAndRequestBound",
+    })
     storage = "dev.codex.schubert.nk.storage."
     storage_cases = {
         "PT-MED-018": storage + "OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
@@ -92,6 +100,7 @@ def main():
     reports = list((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml"))
     reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml"))
     reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml"))
+    reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml"))
     reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-" + asset + "*.xml"))
     reports.extend((repo / "src/schubert-nk-storage/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.storage.*.xml"))
     for report in sorted(reports):
@@ -135,7 +144,8 @@ def main():
         "requestIdentity": "SSC-029 all eight UI235 literal request vectors, explicit ordered field names/type-version and independent LP/JCA HMAC; direct dispatch through the same decoded values to all eight real PostgreSQL queries; CanonicalField factory NFC/copy/zero and Scenario existing canonical regressions. Final authentication/Inbox/response capture is still separate.",
         "responseVerification": "SSC-030: manually assembled UI232/235 header/DATA bytes for all seven formats, both success profiles and all error fillers. Original request layout/correlation, constant-time 64-byte context and type/ID/disposition binding, invalid data/length/UTF8/NFC/video fields and 100 concurrent decodes passed. No separate response MAC/key/property exists in the approved protocol; API request HMAC and Web transport/request binding remain distinct responsibilities. Actual API/MQ/HTTP registration is pending.",
         "assetIntegrity": "PG-D-078 / PT-MED-041..049: strict immutable checksum subset, SHA256(abc) literal, seven formats, NFC/512-byte/255-byte bounds, 59627 synthetic entries, malformed UTF8/byte-vs-character regression, exact count/duplicate/hash64-position/IO rejection. Real retained manifests and asset abc files with Unix guards, name replacement, symlink/hardlink/size and before/after/open/read/close failures, native FD ownership/no write/repair and 100 concurrent inspections passed. No real master contents committed. This completes the manifest/file adapter slice, not its startup/API/Inbox registration; full migration metadata and content-hash inventory remain separate.",
-        "relatedBug": ["BUG-042"], "relatedSsc": ["SSC-028", "SSC-029", "SSC-030"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest", "BUG-042/YKT-037 in logs/BUG-042-YKT-037.md"],
+        "frozenReplay": "PG-D-079 / PT-MED-050..054: all eight captured responses compare to manually assembled UI232/235 bytes after independent JCE/AAD decryption, list zero/one/max and seven formats/I-A. Successful replay alone is 0200 with a new header/current context; definite errors preserve code/NONE reference. Authenticated semantic corruption, owner/message/layout/data binding, missing/unknown/closed keys, clock/null and 100 concurrent snapshots reject unsafe results. The codec is caller-owned. Current authentication/Inbox HMAC/DB transaction/file verification/JMS registration remain separate application-stage gates.",
+        "relatedBug": ["BUG-042", "BUG-043"], "relatedSsc": ["SSC-028", "SSC-029", "SSC-030"], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest", "BUG-042/YKT-037 in logs/BUG-042-YKT-037.md", "BUG-043/YKT-038 in logs/BUG-043-YKT-038.md"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

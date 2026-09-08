@@ -9,6 +9,9 @@ import dev.codex.schubert.nk.api.persistence.MediaRepository;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.file.ContentDisposition;
+import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
+import dev.codex.schubert.nk.protocol.file.MediaType;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.media.*;
@@ -84,6 +87,51 @@ public final class MediaRequest {
 
   public LayoutId responseLayoutId() {
     return new LayoutId(values.layoutId().value().replace("REQ", "RSP"));
+  }
+
+  /** SS324/333; PT-MED-050..053. Only these requests can have a definite missing asset. */
+  public boolean descriptorRequest() {
+    return kind == Kind.AUDIO || kind == Kind.VIDEO || kind == Kind.MUSIC;
+  }
+
+  /** Bind successful metadata to this decoded request; not a manifest/physical/auth gate. */
+  public Optional<MediaDescriptor> descriptor(TypedPayloadValues response) {
+    Objects.requireNonNull(response, "response");
+    if (!response.layoutId().equals(responseLayoutId()))
+      throw new IllegalArgumentException("media response layout mismatch");
+    if (!descriptorRequest()) return Optional.empty();
+    var data = MediaDescriptorData.from(response.data().fields());
+    MediaType type;
+    String id;
+    ContentDisposition disposition;
+    if (kind == Kind.AUDIO) {
+      var request = (AudioDescriptorRequestData) values.data();
+      type = MediaType.AUDIO;
+      id = Long.toString(request.audioId().value());
+      disposition = ContentDisposition.valueOf(request.disposition().name());
+    } else if (kind == Kind.VIDEO) {
+      type = MediaType.VIDEO;
+      id = ((VideoDescriptorRequestData) values.data()).videoId();
+      disposition = ContentDisposition.INLINE;
+    } else {
+      var request = (MusicDescriptorRequestData) values.data();
+      type = MediaType.MUSIC;
+      id = request.trackId();
+      disposition = ContentDisposition.valueOf(request.disposition().name());
+    }
+    var descriptor =
+        new MediaDescriptor(
+            type,
+            data.mediaLogicalId(),
+            data.storageRelativePath().wireValue(),
+            data.fileName(),
+            data.fileByteLength(),
+            data.sha256().wireValue(),
+            data.mimeType().wireValue(),
+            ContentDisposition.valueOf(data.contentDisposition().name()));
+    if (!descriptor.logicalId().equals(id) || descriptor.disposition() != disposition)
+      throw new IllegalArgumentException("media response request mismatch");
+    return Optional.of(descriptor);
   }
 
   public CanonicalRequest canonical(AuthenticatedActor actor) {
