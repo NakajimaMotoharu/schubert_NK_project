@@ -1,5 +1,7 @@
 # SSC-027 段階Scenario serviceのPG/PT
 
+正式再試験完了: 正式PT-SCN-20260908-23、source e6b4368407043850f0d11a8227d5577977f4868c、2026-09-08 11:46:25～11:49:26 JST、全487件（Protocol80/Storage26/API282/Web58/CHR41）。failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 T01～T07正式成功。実PG/JMS再送、DB-free file区間、fresh final認証/owner拒否、100同時、実writer/inspector201/10000件全byte/hash、再生成/24h保持/ready保全を確認。full startup/単一instance/本番登録/readiness/HTTP/実NK CHRは未完了。
+
 関連: SSC-023/024/027、PG-D-069、BUG-038/YKT-034、PT-SCN-009-T01～T07。正式source/run/環境/command/exit/全module counters/証跡hashはmanifest・002へ固定する。探索成功を正式PASSに加算しない。
 
 対象はScenarioApplicationServiceのprocess/run/inspect/prepare/complete/identity/sameSaved/transaction/owner/requireとprivate型、既存auth/query/Inbox/replay/file/JMSの接続。T01は6要求と空/missing、T02はSpeaker501/明細0/200/201/10000/10001/file quota、T03は元結果再生成、T04は100同Message/現在認証、T05は全NULL/JDBC/clock/UUID/key/identity/late replay/PROCESSING/metadata境界。実SQL後条件、手組UI232/234 bytes、test側LP/JCE/AESによる保存snapshot復号が期待値である。

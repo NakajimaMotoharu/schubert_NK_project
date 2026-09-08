@@ -1,5 +1,7 @@
 # BUG-041 修正前記録
 
+正式再試験完了: 正式PT-SCN-20260908-23、source e6b4368407043850f0d11a8227d5577977f4868c、2026-09-08 11:46:25～11:49:26 JST、全487件（Protocol80/Storage26/API282/Web58/CHR41）。failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 collector006はScenario143件とT06/T07(Path)を含む全required完全名を厳密照合し成功。003/007/008も成功。正式22の途中生成物を今回全reports/coverage/manifest/hashへ更新し、22を今回の対象commitへ混同しない。
+
 2026-09-08、source9790151、正式PT-SCN-20260908-22は全486件/coverage100%/SpotBugs0、終了11:43:07 JST。collector006実行はcode1 `missing required Scenario lifecycle Test ID/method evidence`。manifestは前の正式20のまま。途中生成outputを正式収集完了とは扱わない。
 
 JUnitの実名は `brokerSendAndAckFailuresReplayOneCommittedResult(Path)` と `realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes(Path)`。required_methodsのT06/T07で `(Path)` を欠落していた。全tools/qualityのrequired_methods/testIdMethodsを検索し、この厳密照合は006だけ。他のcollectorは実JUnitからmethod名を採取するため非該当、共通原因対象複数なしで新規YKT不要。
