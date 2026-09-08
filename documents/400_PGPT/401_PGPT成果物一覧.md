@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-08 11:46 暫定判定: BUG-040/YKT-036のstorage拡張子検証漏れを修正前起票し、NK-PRO-003完了を再試験まで保留。確定4/20（20%、工数換算ではない）。正式22は全486件/coverage100%/静的解析0だったが、collectorのTest ID完全名誤りBUG-041で収集未完了。以下の過去完了表示を現在判定としない。BUG-038/039の再試験と併せ、source/collectorを固定した正式23へ進む。
+
 最新: 正式`PT-SCN-20260908-20`、source `e9d89e5a339320cc57dd7f50b9bb40810edd2a43`、dev-scenario、2026-09-08 11:02:42～11:05:27 JST。全479件（Protocol79/Storage26/API275/Web58/CHR41）、Scenario関連136/Auth85/coordinator11/置換3（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 SSC-027のsnapshot置換SQLも内部PG/PT完了。確定5/20=25%（工数換算なし）。段階service/実writer・JMS接続、full startup/readiness、HTTP/実NK CHR等は未完了。
 
 最新判定（2026-09-08 10:43）: BUG-037/YKT-033を正式再試験完了しNK-PRO-003復帰、確定5/20=25%（Program数比、工数換算なし）。正式`PT-SCN-20260908-19`、source `e46555c4dbfa5449e06f4c871b2aaa7fc4ec493a`、dev-scenario、2026-09-08 10:40:52～10:43:33 JST。全476件（Protocol79/Storage26/API272/Web58/CHR41）、Scenario関連133/Auth85/coordinator11（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 SSC-026保存・再送部品完了。SSC-027のguard/実ready検査/元content再生成・descriptor置換の内部10追加PTもPASS、最終DB接続は継続。段階service/実file再生成/起動/HTTP/CHR等は継続。

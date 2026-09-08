@@ -66,6 +66,10 @@ public final class MediaDescriptorValidator {
 
   private static void validateMime(MediaDescriptor descriptor) {
     String extension = extension(descriptor.fileName());
+    // BUG-040/YKT-036: display metadata must not hide a different storage format.
+    if (!extension.equals(extension(descriptor.storageRelativePath()))) {
+      throw new IllegalArgumentException("media storage and display extensions differ");
+    }
     String expectedMime =
         switch (descriptor.mediaType()) {
           case AUDIO -> extension.equals(".ogg") ? "audio/ogg" : null;

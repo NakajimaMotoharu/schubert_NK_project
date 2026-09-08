@@ -86,6 +86,54 @@ class MediaDescriptorValidatorTest {
     assertThrows(IllegalArgumentException.class, () -> ContentDisposition.fromWire("inline"));
   }
 
+  /** PT-PRO-003-M03; independent SS333 §8 allowlist; BUG-040/YKT-036. */
+  @Test
+  void bug040StorageExtensionCannotBeHiddenByDisplayMetadata() {
+    String[][] pairs = {
+      {"AUDIO", "scenario/", ".ogg", "audio/ogg"},
+      {"VIDEO", "video/", ".mp4", "video/mp4"},
+      {"MUSIC", "music/", ".m4a", "audio/mp4"},
+      {"MUSIC", "music/", ".mp3", "audio/mpeg"},
+      {"MUSIC", "music/", ".ogg", "audio/ogg"},
+      {"MUSIC", "music/", ".wav", "audio/wav"},
+      {"MUSIC", "music/", ".flac", "audio/flac"}
+    };
+    for (String[] pair : pairs) {
+      var type = MediaType.valueOf(pair[0]);
+      String prefix = pair[1], extension = pair[2], mime = pair[3];
+      var valid =
+          media(
+              type,
+              prefix + "stored" + extension,
+              "表示名" + extension,
+              mime,
+              ContentDisposition.INLINE);
+      assertEquals(prefix + "stored" + extension, valid.storageRelativePath());
+      assertEquals("表示名" + extension, valid.fileName());
+      for (String badExtension :
+          List.of(
+              "",
+              ".bin",
+              extension.toUpperCase(java.util.Locale.ROOT),
+              extension.equals(".mp4") ? ".ogg" : ".mp4",
+              extension + ".bin")) {
+        var failure =
+            assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                    media(
+                        type,
+                        prefix + "stored" + badExtension,
+                        "表示名" + extension,
+                        mime,
+                        ContentDisposition.INLINE));
+        assertFalse(failure.getMessage().contains("stored"));
+        assertEquals(null, failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+      }
+    }
+  }
+
   @Test
   void rejectsNonCanonicalTextPathsNamesSizesAndHashes() {
     assertInvalid(
