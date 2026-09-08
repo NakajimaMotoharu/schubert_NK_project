@@ -1,5 +1,7 @@
 # User照会application PG/PT探索
 
+正式再試験: PT-ADM-20260908-10、source954759239473e64d629df12a548ab3bd459b5636、18:07:31～18:11:38 JST、exit0。全606件（API375）/Admin54、全module全coverage100%、NullAway/format/Enforcer PASS、SpotBugs0、failed/error/skipped0。公開test helperが返す独立JCE-HMACを保存DB値へ照合する追加assertを含めPASS。詳細はmanifest/Test ID/環境/command/expected/actual/path/hash。新規Production障害なし。
+
 PG-D-089/PT-ADM-048～054、dev-admin、2026-09-08 JST。実PG/Flyway、既存toolchain、合成fixtureのみ。正式合格はroot clean verifyとmanifest採取後に確定する。
 
 Command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am -Dtest=FieldCodecTest,OwnedTransferDirectoryTest,UserQueryApplicationServiceTest test org.jacoco:jacoco-maven-plugin:0.8.15:report`
