@@ -39,6 +39,11 @@ final class JmsReplyDecoderTest {
     assertEquals(UUID.fromString(REQUEST_ID), reply.correlationId());
     assertArrayEquals(responseWire(), reply.body());
     assertTrue(reply.toString().contains("body=<redacted>"));
+    // YKT-056: transport decoding preserves the common 0200 profile; only the domain decides grant.
+    Map<String, Object> replayValues = validReply();
+    byte[] replayBody = (byte[]) replayValues.get("body");
+    System.arraycopy("0200".getBytes(StandardCharsets.US_ASCII), 0, replayBody, 208, 4);
+    assertArrayEquals(replayBody, DECODER.decode(bytesMessage(replayValues)).body());
     assertThrows(NullPointerException.class, () -> new ValidatedReply(null, new byte[0]));
     assertThrows(
         NullPointerException.class, () -> new ValidatedReply(UUID.fromString(REQUEST_ID), null));
