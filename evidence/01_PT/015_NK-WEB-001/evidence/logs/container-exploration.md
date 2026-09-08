@@ -19,4 +19,6 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 BUG-070はproxy拒否のsendErrorを除き、403を設定して監査後return。PT110は不正proxyの監査1件/UUID1/DB0/error servlet0を確認し、信頼済CSRFのerror servlet1・元ID一致・監査1件も確認。全2sendError候補のうち残したCSRFはPT109/110/112で実際にerror viewへ到達する非該当根拠を検証済み。PT104は削除したsendErrorの人工故障から、実際に呼ぶsetStatusの公開故障へ差し替え（status設定自体が失敗したのでMock初期200が残るが、例外は伝播し下流0）。HTTPの独立403/監査oracleは変更しない。
 
+正式run04（source3cd44d2、01:00:53～01:05:25 JST）は全737件・全coverage100%・静的解析0/exit0。ただし015 collectorで新4Test methodの(Path)署名欠落により厳密一致検査が停止した（BUG-071/YKT-063、修正前起票）。先行6collectorは収集成功。run04だけをWeb全証跡完了とはしない。新4mappingに実JUnit署名を明記し、既存108・集合/件数一致検査を維持したまま、修正collectorを含むsourceを新runへ固定して再実行する。
+
 探索は全coverage/全module/正式gateを代替しない。全MVC・実TLS/Caddy・production bootstrap・NK Characterization・IT/STは未実施。

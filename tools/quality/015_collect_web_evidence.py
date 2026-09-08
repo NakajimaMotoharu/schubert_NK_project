@@ -152,10 +152,10 @@ def main():
             (107, "web107DeniedHandlerNullContextAndLoggerFaultsNeverGrant"),
             (108, "web108ConcurrentSecurityRequestsDoNotShareContextOrAudit")),
         "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest": (
-            (109, "web109RealHttpSessionCsrfAndHeadersMatchContract"),
-            (110, "web110RealErrorDispatchIsBoundedAndRedacted"),
-            (111, "web111RealFormParameterMergingRejectsUnknownAndQueryCredentials"),
-            (112, "web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate")),
+            (109, "web109RealHttpSessionCsrfAndHeadersMatchContract(Path)"),
+            (110, "web110RealErrorDispatchIsBoundedAndRedacted(Path)"),
+            (111, "web111RealFormParameterMergingRejectsUnknownAndQueryCredentials(Path)"),
+            (112, "web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate(Path)")),
     }
     methods, reports = [], {}
     for classname, cases in groups.items():
