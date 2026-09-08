@@ -37,4 +37,4 @@ BUG063/YKT057は8826908、064/065は8c196eeで修正前起票。Unknown stored�
 
 ## 正式gate
 
-次のroot clean verify/全7collectorで確定予定。最終EntryPoint/Login success/failure handler/全chain/実API/JMS/画面/実NK CHRは未実装・非合格、IT/ST完了を主張しない。
+正式PT-WEB-20260908-13、source973dc978c22c1ad41067dc86635ba66bfe971957、23:16:38～23:21:12 JST、exit0。全706件（Protocol80/Storage34/API394/Web157/CHR41）、Web81件。failed/error/skipped0、全5対象module line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。全7collector/manifest/hash更新、BUG063～065/YKT057当該範囲完了。最終EntryPoint/Login success/failure handler/全chain/実API/JMS/画面/実NK CHRは未完了、IT/ST完了を主張しない。

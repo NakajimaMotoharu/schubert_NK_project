@@ -1,0 +1,345 @@
+{
+  "runId": "PT-WEB-20260908-13",
+  "targetCommit": "973dc978c22c1ad41067dc86635ba66bfe971957",
+  "branch": "dev-web",
+  "startedAt": "2026-09-08T23:16:38+09:00",
+  "completedAt": "2026-09-08T23:21:12+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 34,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1716
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 125
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 343
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 134
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 71
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 10
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 394,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 27785
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2124
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6126
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2027
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 922
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 198
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 157,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9772
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 821
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2233
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 788
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 371
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 79
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "9d6a39e807e8e722e0cdc6f99211085e2bf051a448fd2ba9ae978b1c75942bf3",
+  "programId": "NK-MED-001",
+  "programStatus": "IN_PROGRESS",
+  "tests": {
+    "program": 61,
+    "reactor": 706
+  },
+  "testIdMethods": {
+    "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "PT-MED-002": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "PT-MED-003": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "PT-MED-004": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "PT-MED-005": "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "PT-MED-006": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "PT-MED-007": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer",
+    "PT-MED-026": "dev.codex.schubert.nk.web.media.DescriptorFileResolverTest#med026ApprovedAssetsUseVerifiedRetainedReadOnlyChannels",
+    "PT-MED-027": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med027GetStatusHeadersAndBytesMatchLiteralIntervals",
+    "PT-MED-028": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med028HeadAndDownloadNeverApplyForbiddenBodyOrRange",
+    "PT-MED-029": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med029DescriptorBindingRejectsBeforeFileAndPermit",
+    "PT-MED-030": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med030TwentyStreamsRejectTwentyFirstAndRecoverAllPermits",
+    "PT-MED-031": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med031IoFailuresReleasePermitsWithoutSecondResponse",
+    "PT-MED-032": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med032OneHundredCallsHaveIndependentPositionsAndHeaders",
+    "PT-MED-037": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med037ThreeRequestsBindAllApprovedSuccessfulDescriptors",
+    "PT-MED-038": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors",
+    "PT-MED-039": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med039MalformedAndMismatchedRepliesNeverAuthorizeFiles",
+    "PT-MED-040": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+    "PT-MED-008": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationMenuCountsStoredCategoriesWithoutFilesystem",
+    "PT-MED-009": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationRowsPreserveParentAndDisplayOrder",
+    "PT-MED-010": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicGroupsUseApprovedCategoryAndSectionOrder",
+    "PT-MED-011": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicTracksReadFrozenPairsAndLogicalIdTies",
+    "PT-MED-012": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#everyListCapacityRejectsTruncationAndCloseDowngrades",
+    "PT-MED-013": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#nullContractsAndJdbcMetadataFailuresRemainRedacted",
+    "PT-MED-014": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#concurrentReadersNeverMutateOrAcquireRowLocks",
+    "PT-MED-015": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats",
+    "PT-MED-016": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#videoMetadataIncludesOpeningAndDisplayFields",
+    "PT-MED-017": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing",
+    "PT-MED-036": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#med036DecodedRequestsDispatchAllEightStoredQueries",
+    "PT-MED-033": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
+    "PT-MED-034": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med034EightLayoutsHaveIndependentCanonicalFingerprints",
+    "PT-MED-035": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med035MalformedNullAndUnknownRequestsNeverReachQueries",
+    "PT-MED-050": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med050EightSuccessLayoutsPreserveLiteralWireAndEncryptedIdentity",
+    "PT-MED-051": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med051DefiniteErrorsKeepCodesAndNeverInventDescriptors",
+    "PT-MED-052": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med052AuthenticatedCorruptionAndRequestMixupsFailClosed",
+    "PT-MED-053": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med053NullKeyAndClockBoundariesRemainRedacted",
+    "PT-MED-054": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med054ConcurrentSnapshotsRemainImmutableAndRequestBound",
+    "PT-MED-055": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med055EightQueriesCommitThenReplayFrozenBytes",
+    "PT-MED-056": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med056DefiniteMissingAndLimitsPersistWithoutInventedFiles",
+    "PT-MED-057": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med057PhysicalStageHasNoDatabaseLocksAndRechecksIdentity",
+    "PT-MED-058": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med058ConcurrentDuplicateAndChangedRequestsKeepInboxIdentity",
+    "PT-MED-059": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med059JdbcKeyClockAndResourceFaultsRemainRecoverable",
+    "PT-MED-060": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med060BrokerRedeliverySendsOnlyAfterDatabaseCompletion",
+    "PT-MED-061": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med061NullAndSharedStageContractsPreserveScenarioBehavior",
+    "PT-MED-018": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+    "PT-MED-019": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+    "PT-MED-020": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
+    "PT-MED-021": "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med021NestedAndLargeAssetsReadExactBytesAndCloseChannels",
+    "PT-MED-022": "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med022NullSizeAndSegmentContractsFailBeforeContentRead",
+    "PT-MED-023": "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med023LinksMissingAndWrongUnixAttributesNeverExposeContent",
+    "PT-MED-024": "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned",
+    "PT-MED-025": "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med025ConcurrentAndReplacedNamesRetainIndependentInodes",
+    "PT-MED-041": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med041LiteralManifestsPreserveApprovedPathsAndHashes",
+    "PT-MED-042": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med042MalformedAndMismatchedCountsNeverPublishPartialCatalog",
+    "PT-MED-043": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med043PartialReadsIoFailuresAndHashMismatchesRemainRedacted",
+    "PT-MED-044": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med044ConcurrentMatchesOwnImmutableInput",
+    "PT-MED-045": "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest#med045HeldManifestLoadsWithoutReopeningOrMutatingNames",
+    "PT-MED-046": "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest#med046NullLinksAttributesAndIoFaultsFailClosed",
+    "PT-MED-047": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med047ApprovedFilesRequireManifestAndExactPhysicalSize",
+    "PT-MED-048": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med048MissingHashPathsAndPhysicalFaultsNeverBecomeNotFound",
+    "PT-MED-049": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med049ConcurrentInspectionsRetainRootOwnership"
+  },
+  "methods": [
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med060BrokerRedeliverySendsOnlyAfterDatabaseCompletion",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med061NullAndSharedStageContractsPreserveScenarioBehavior",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med059JdbcKeyClockAndResourceFaultsRemainRecoverable",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med058ConcurrentDuplicateAndChangedRequestsKeepInboxIdentity",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med056DefiniteMissingAndLimitsPersistWithoutInventedFiles",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med055EightQueriesCommitThenReplayFrozenBytes",
+    "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest#med057PhysicalStageHasNoDatabaseLocksAndRechecksIdentity",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med050EightSuccessLayoutsPreserveLiteralWireAndEncryptedIdentity",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med054ConcurrentSnapshotsRemainImmutableAndRequestBound",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med052AuthenticatedCorruptionAndRequestMixupsFailClosed",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med053NullKeyAndClockBoundariesRemainRedacted",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med051DefiniteErrorsKeepCodesAndNeverInventDescriptors",
+    "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med035MalformedNullAndUnknownRequestsNeverReachQueries",
+    "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
+    "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med034EightLayoutsHaveIndependentCanonicalFingerprints",
+    "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med044ConcurrentMatchesOwnImmutableInput",
+    "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med042MalformedAndMismatchedCountsNeverPublishPartialCatalog",
+    "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med041LiteralManifestsPreserveApprovedPathsAndHashes",
+    "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest#med043PartialReadsIoFailuresAndHashMismatchesRemainRedacted",
+    "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest#med045HeldManifestLoadsWithoutReopeningOrMutatingNames",
+    "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest#med046NullLinksAttributesAndIoFaultsFailClosed",
+    "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med048MissingHashPathsAndPhysicalFaultsNeverBecomeNotFound",
+    "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med049ConcurrentInspectionsRetainRootOwnership",
+    "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med047ApprovedFilesRequireManifestAndExactPhysicalSize",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicTracksReadFrozenPairsAndLogicalIdTies",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationRowsPreserveParentAndDisplayOrder",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationMenuCountsStoredCategoriesWithoutFilesystem",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#concurrentReadersNeverMutateOrAcquireRowLocks",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#everyListCapacityRejectsTruncationAndCloseDowngrades",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#nullContractsAndJdbcMetadataFailuresRemainRedacted",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#videoMetadataIncludesOpeningAndDisplayFields",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicGroupsUseApprovedCategoryAndSectionOrder",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#med036DecodedRequestsDispatchAllEightStoredQueries",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med025ConcurrentAndReplacedNamesRetainIndependentInodes",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med022NullSizeAndSegmentContractsFailBeforeContentRead",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med021NestedAndLargeAssetsReadExactBytesAndCloseChannels",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med023LinksMissingAndWrongUnixAttributesNeverExposeContent",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
+    "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "dev.codex.schubert.nk.web.media.DescriptorFileResolverTest#med026ApprovedAssetsUseVerifiedRetainedReadOnlyChannels",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med032OneHundredCallsHaveIndependentPositionsAndHeaders",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med029DescriptorBindingRejectsBeforeFileAndPermit",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med031IoFailuresReleasePermitsWithoutSecondResponse",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med030TwentyStreamsRejectTwentyFirstAndRecoverAllPermits",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med027GetStatusHeadersAndBytesMatchLiteralIntervals",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest#med028HeadAndDownloadNeverApplyForbiddenBodyOrRange",
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors",
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med039MalformedAndMismatchedRepliesNeverAuthorizeFiles",
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med037ThreeRequestsBindAllApprovedSuccessfulDescriptors"
+  ],
+  "actual": "All 61 mapped independent assertion sets passed",
+  "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
+  "scope": "Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared retained segment walk/Unix/size-before-after/scoped-channel, Web descriptor-file adapter and internal response-port delivery of 200/206/416/HEAD/download with 20 immediate permits and request binding. Explicit header maps and exact independent body slices, latch-held 20/21 rejection and recovery, redacted I/O failures/no second response and 100 deliveries passed. Manifest/file, response snapshot and API staged authentication/Inbox/JMS are certified in the fields below. Registered authenticated HTTP, full startup, client-abort classification and actual NK CHR remain unconnected. Selected eight Storage methods overlap Scenario regression and are not additive to reactor count.",
+  "requestIdentity": "SSC-029 all eight UI235 literal request vectors, explicit ordered field names/type-version and independent LP/JCA HMAC; direct dispatch through the same decoded values to all eight real PostgreSQL queries; CanonicalField factory NFC/copy/zero and Scenario existing canonical regressions. Final authentication/Inbox/response capture is certified separately by applicationStage.",
+  "responseVerification": "SSC-030: manually assembled UI232/235 header/DATA bytes for all seven formats, both success profiles and all error fillers. Original request layout/correlation, constant-time 64-byte context and type/ID/disposition binding, invalid data/length/UTF8/NFC/video fields and 100 concurrent decodes passed. No separate response MAC/key/property exists in the approved protocol; API request HMAC and Web transport/request binding remain distinct responsibilities. Actual API/MQ/HTTP registration is pending.",
+  "assetIntegrity": "PG-D-078 / PT-MED-041..049: strict immutable checksum subset, SHA256(abc) literal, seven formats, NFC/512-byte/255-byte bounds, 59627 synthetic entries, malformed UTF8/byte-vs-character regression, exact count/duplicate/hash64-position/IO rejection. Real retained manifests and asset abc files with Unix guards, name replacement, symlink/hardlink/size and before/after/open/read/close failures, native FD ownership/no write/repair and 100 concurrent inspections passed. No real master contents committed. This completes the manifest/file adapter slice, not its startup/API/Inbox registration; full migration metadata and content-hash inventory remain separate.",
+  "frozenReplay": "PG-D-079 / PT-MED-050..054: all eight captured responses compare to manually assembled UI232/235 bytes after independent JCE/AAD decryption, list zero/one/max and seven formats/I-A. Successful replay alone is 0200 with a new header/current context; definite errors preserve code/NONE reference. Authenticated semantic corruption, owner/message/layout/data binding, missing/unknown/closed keys, clock/null and 100 concurrent snapshots reject unsafe results. The codec is caller-owned. Current authentication/Inbox HMAC/DB transaction/file verification and component JMS boundaries are certified separately by applicationStage; production registration is pending.",
+  "applicationStage": "PG-D-080 / PT-MED-055..061: actual PostgreSQL read-only inspect/query -> no-live-JDBC retained physical file check -> current authentication/owner/Inbox write transaction -> reply/JMS commit. All eight independent wire vectors, frozen errors/successes, 24h Instant deadline and UTC/JST regression, missing/hash/mode/revocation/expiry/owner changes, 100 same-message retries, changed ID identity/interrupts, JDBC/key/clock/UUID/snapshot failures and uncertain commit recovery. Actual embedded Artemis send/commit failures redeliver and compare literal reply bytes/properties with one unchanged Inbox. Shared guard/consistency preserve Scenario regression. This is component PT with a controlled in-VM broker, not authenticated HTTP/startup registration or IT/ST.",
+  "relatedBug": [
+    "BUG-042",
+    "BUG-043",
+    "BUG-044"
+  ],
+  "relatedSsc": [
+    "SSC-028",
+    "SSC-029",
+    "SSC-030"
+  ],
+  "crossProgramRegressions": [
+    "BUG-040/YKT-036 in 003 manifest",
+    "BUG-042/YKT-037 in logs/BUG-042-YKT-037.md",
+    "BUG-043/YKT-038 in logs/BUG-043-YKT-038.md",
+    "BUG-044/YKT-039 in logs/BUG-044-YKT-039.md"
+  ],
+  "notRunCountedAsPass": 0,
+  "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content."
+}
