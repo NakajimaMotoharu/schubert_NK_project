@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- NK-WEB-001/SCR-090; TST/MON; UI221/222; SS313/314/352; SSC-047/PG-D-116/PT-WEB-148..157. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('エラー - schubert NK')}"></head>
+  <body>
+    <main class="page">
+      <th:block th:if="${page.topBar.isPresent()}">
+        <header th:replace="~{fragments/layout :: topbar(${page.topBar.orElseThrow()})}"></header>
+      </th:block>
+      <header class="topbar" th:unless="${page.topBar.isPresent()}">
+        <h1>schubert NK</h1>
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a th:href="@{/}">メニュー</a>
+          <a th:href="@{/login}">ログイン</a>
+        </nav>
+      </header>
+      <section class="error-panel" aria-labelledby="error-title" role="alert">
+        <h2 id="error-title">エラー</h2>
+        <p class="error-status" th:text="${page.status}"></p>
+        <p class="error-message" th:text="${page.message}"></p>
+        <p>お問い合わせ番号: <span class="request-id" th:text="${page.requestId}"></span></p>
+      </section>
+    </main>
+  </body>
+</html>

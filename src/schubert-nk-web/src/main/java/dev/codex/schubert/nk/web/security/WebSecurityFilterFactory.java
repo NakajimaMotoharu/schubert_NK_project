@@ -22,7 +22,7 @@ import org.springframework.web.filter.CompositeFilter;
  * One business security chain with explicit dependencies, not a production server/bootstrap.
  * Downstream MVC/Logout/API expiry and runtime logger policy remain application responsibilities.
  * NK-WEB-001; FUN-001..013/AUT-001..004/MON-004; UI221/226; SS311/313/314/342/351/352;
- * PG-D-113/114/PT-WEB-131..141; BUG-073/YKT-065.
+ * PG-D-113/114/116/PT-WEB-131..157; SSC-047; BUG-073/074/YKT-065/066.
  */
 public final class WebSecurityFilterFactory {
   public Filter create(
@@ -55,8 +55,12 @@ public final class WebSecurityFilterFactory {
                         new MqLoginFailureHandler(audit)),
                 new RequestCacheAwareFilter(cache),
                 new ClosedServletSecurityFilter(),
+                new WebDisplayContextFilter(),
                 new WebAccessExceptionFilterFactory().create(access),
                 new WebAuthorizationFilterFactory().create()));
+    var errors = new CompositeFilter();
+    errors.setFilters(
+        List.of(new CharacterEncodingFilter("UTF-8", true, true), new WebErrorDispatchFilter()));
     var security = new FilterChainProxy(chain);
     security.setFirewall(new StrictHttpFirewall());
     security.setRequestRejectedHandler(new HttpStatusRequestRejectedHandler(400));
@@ -65,7 +69,8 @@ public final class WebSecurityFilterFactory {
         List.of(
             new WebSecurityHeaderFilterFactory().create(),
             new CaddyTransportContextFilter(ids, new CaddyClientAddressResolver(), audit),
-            security));
+            new WebInfrastructureFailureFilter(),
+            new InternalErrorDispatchRouter(security, errors)));
     return composite;
   }
 }

@@ -49,7 +49,7 @@ Login replay0200の現在context確認は324 §6.1を具体化し、新UUIDの�
 
 ### 3.2 内部error dispatchと依存障害（SSC-047）
 
-UI221/222のMQ/DB一時障害503共通errorを、失敗したsession/DB/keyへ再依存せず表示する。FilterChainProxyの先頭chainは、実containerのDispatcherType.ERRORと正規化path `/error`のANDだけに一致し、UTF8と解決済表示snapshot/CSRFの再投影だけを行う。外側Caddy検証・request UUID・security headerとStrictHttpFirewallは両chainへ共通適用する。通常REQUESTの`/error`、外部POST/PUT、ASYNC/FORWARD、ERRORの別URLはbusiness chainを通り、認証・CSRF・URL roleを省略しない。HTTP header/query/attributeの偽dispatcher値を許可条件へ使わない。
+UI221/222のMQ/DB一時障害503共通errorを、失敗したsession/DB/keyへ再依存せず表示する。BUG-074/YKT-066の是正として、InternalErrorDispatchRouterを単一business FilterChainProxyの手前へ置く。実containerのDispatcherType.ERRORかつrequest URI exact `/error`だけを、UTF8と解決済表示snapshot/CSRF再投影の非業務filterへ渡す。外側Caddy検証・server request UUID・security headerは共通必須。StrictHttpFirewallは通常business要求の必須検査として維持し、拒否済み元method/headerを内部error表示へ再適用しない。通常REQUESTの`/error`、外部POST/PUT、ASYNC/FORWARD、ERRORの別URLはbusiness chainを通り、認証・CSRF・URL roleを省略しない。HTTP header/query/attributeの偽dispatcher値を許可条件へ使わない。両分岐の終了でSecurityContextをclearし、内部error branchの表示以外のhandler/JMS/DB/更新への利用を禁止する。
 
 通常chainで閉principalを復元した後、要求内の表示用TopBar（brand/username/roleだけ）と解決済CSRFのimmutable snapshotを取得できる。これはrequest scopeだけ、閉session JSON/DBへ属性を追加しない。Error chainはこの表示snapshotだけを使い、HttpSession/getUserPrincipal/SecurityContextの再読、DB/JMS、CSRF再生成を行わない。取得前に障害となった要求は匿名error表示とし、認証済みと推測しない。API0102等の明示失効時にはsnapshot/CSRF表示をclearする責務を後続handlerへ持たせる。raw認証context/password/session IDはsnapshot/modelへ入れず、CSRFは正規POST formのhidden inputだけに使用する。
 

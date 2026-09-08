@@ -35,6 +35,8 @@ public final class WebCsrfDeniedHandler implements AccessDeniedHandler {
     var actor =
         ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());
     response.setStatus(403);
+    // SSC-047/PG-D-116/PT-WEB-155: keep only already resolved display data for error rendering.
+    WebDisplayContext.captureDenied(request, actor);
     audit.record(
         context.requestId(),
         Event.CSRF_DENIED,

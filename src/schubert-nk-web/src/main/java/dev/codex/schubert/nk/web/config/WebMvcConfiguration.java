@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.web.config;
 
+import dev.codex.schubert.nk.web.controller.ErrorController;
 import dev.codex.schubert.nk.web.controller.MenuController;
+import dev.codex.schubert.nk.web.error.ProblemViewFactory;
 import java.util.Objects;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +19,22 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  * Explicit MVC/template composition, not the production bootstrap or all endpoint registration.
- * NK-WEB-001; FUN-002/SYS-006/TST-001..005; UI222/223; SS311/313/352; PG-D-115/PT-WEB-142..147.
+ * NK-WEB-001; FUN-002/SYS-006/TST-001..005; UI222/223; SS311/313/352;
+ * PG-D-115/116/PT-WEB-142..157/SSC-047.
  */
 @Configuration(proxyBeanMethods = false)
 @EnableWebMvc
 public class WebMvcConfiguration implements WebMvcConfigurer {
+  @Bean
+  public ProblemViewFactory problemViewFactory() {
+    return new ProblemViewFactory();
+  }
+
+  @Bean
+  public ErrorController errorController(ProblemViewFactory factory) {
+    return new ErrorController(factory);
+  }
+
   @Bean
   public MenuController menuController() {
     return new MenuController();
@@ -58,7 +71,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     resolver.setCharacterEncoding("UTF-8");
     resolver.setContentType("text/html;charset=UTF-8");
     resolver.setForceContentType(true);
-    resolver.setViewNames(new String[] {"menu"});
+    resolver.setViewNames(new String[] {"menu", "error/error"});
     resolver.setAlwaysProcessRedirectAndForward(false);
     resolver.setProducePartialOutputWhileProcessing(false);
     return resolver;

@@ -52,7 +52,7 @@ Static CSS/JS/fontもextensionではなく正規resource path allowlist。他は
 - Java serialization、request/form/body/password、任意class名を保存しない。Deserializeはversion付きの固定JSON/CBOR schemaへbound。
 - Idle 8時間、同一account 2 session。Web/APIのどちらか一方が無効・復号不能なら両方を無効扱いしLoginへ。
 
-SSC-047: 314 §3.2の内部ERROR+/error専用chainは表示だけで、外部REQUEST/ASYNC/FORWARDや別pathの認証除外に使用しない。Caddy/header/UUID/firewallは共通のまま、エラー表示でDB/JMS/sessionを再読しない。表示snapshotは要求内のみの閉TopBar＋解決済CSRF、失効時clear、秘密値のDOM data属性/診断出力禁止を維持する。通常POST/login/logout/管理/媒体の認証・CSRF・API最新role/owner検証を緩和しない。
+SSC-047/BUG-074: 314 §3.2の内部ERROR+/error専用非業務branchは表示だけで、外部REQUEST/ASYNC/FORWARDや別pathの認証除外に使用しない。Caddy/header/server UUIDは共通必須、通常要求の単一business FilterChainProxy/StrictHttpFirewallは維持する。元method/headerのfirewall拒否を内部errorへ反復せず、DB/JMS/sessionを再読しない。表示snapshotは要求内のみの閉TopBar＋解決済CSRF、失効時clear、秘密値のDOM data属性/診断出力禁止を維持する。通常POST/login/logout/管理/媒体の認証・CSRF・API最新role/owner検証を緩和しない。
 
 ## 4. Authentication・Password
 

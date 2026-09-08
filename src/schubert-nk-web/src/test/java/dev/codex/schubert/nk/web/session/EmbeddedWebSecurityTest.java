@@ -247,6 +247,7 @@ class EmbeddedWebSecurityTest {
     final AtomicInteger errorCalls = new AtomicInteger();
     final AtomicInteger posts = new AtomicInteger();
     final AtomicInteger converted = new AtomicInteger();
+    volatile boolean breakDatabaseBeforeError;
     final List<UUID> errorIds = new CopyOnWriteArrayList<>();
     final HttpClient client =
         HttpClient.newBuilder()
@@ -279,6 +280,18 @@ class EmbeddedWebSecurityTest {
         Optional<MqAuthenticationProvider> provider,
         boolean menuMvc)
         throws Exception {
+      this(root, secureRandom, database, provider, menuMvc, false);
+    }
+
+    Server(
+        Path root,
+        boolean secureRandom,
+        WebLogDatabaseFixture database,
+        Optional<MqAuthenticationProvider> provider,
+        boolean menuMvc,
+        boolean errorMvc)
+        throws Exception {
+      assertFalse(errorMvc && !menuMvc);
       f = new Fixture(Objects.requireNonNull(database));
       f.clock.value = Instant.now();
       tomcat.setBaseDir(root.toString());
@@ -345,7 +358,14 @@ class EmbeddedWebSecurityTest {
               new HttpServlet() {
                 @Override
                 protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
+                    throws IOException, ServletException {
+                  if (request.getRequestURI().equals("/fixture-error")) {
+                    if (breakDatabaseBeforeError) f.failure = "open";
+                    int status = Integer.parseInt(request.getParameter("status"));
+                    if (status == 500) throw new ServletException("private-exception-canary");
+                    response.sendError(status, "private-message-canary");
+                    return;
+                  }
                   if (request.getRequestURI().equals("/fixture-principal")) {
                     var principal = request.getUserPrincipal();
                     response.setContentType("text/plain;charset=UTF-8");
@@ -424,6 +444,7 @@ class EmbeddedWebSecurityTest {
               })
           .setAsyncSupported(true);
       context.addServletMapping(menuMvc ? "/login" : "/*", "fixture");
+      if (errorMvc) context.addServletMapping("/fixture-error", "fixture");
       if (menuMvc) {
         var mvc =
             new org.springframework.web.context.support.AnnotationConfigWebApplicationContext();
@@ -436,22 +457,27 @@ class EmbeddedWebSecurityTest {
         // views.
         context.addServletMapping("/", "mvc");
       }
-      Tomcat.addServlet(
-              context,
-              "error",
-              new HttpServlet() {
-                @Override
-                protected void service(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                  errorCalls.incrementAndGet();
-                  errorIds.add(WebRequestContext.require(request).requestId());
-                  response.setContentType("text/plain;charset=UTF-8");
-                  response.getWriter().write("error:" + response.getStatus());
-                }
-              })
-          .setAsyncSupported(true);
-      context.addServletMapping("/error", "error");
-      for (int status : new int[] {400, 403, 500, 503}) {
+      if (!errorMvc) {
+        Tomcat.addServlet(
+                context,
+                "error",
+                new HttpServlet() {
+                  @Override
+                  protected void service(HttpServletRequest request, HttpServletResponse response)
+                      throws IOException {
+                    errorCalls.incrementAndGet();
+                    errorIds.add(WebRequestContext.require(request).requestId());
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.getWriter().write("error:" + response.getStatus());
+                  }
+                })
+            .setAsyncSupported(true);
+        context.addServletMapping("/error", "error");
+      }
+      for (int status :
+          errorMvc
+              ? new int[] {400, 401, 403, 404, 405, 409, 416, 429, 500, 503}
+              : new int[] {400, 403, 500, 503}) {
         var page = new ErrorPage();
         page.setErrorCode(status);
         page.setLocation("/error");

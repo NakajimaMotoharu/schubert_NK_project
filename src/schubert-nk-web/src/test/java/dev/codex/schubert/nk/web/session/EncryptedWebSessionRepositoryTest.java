@@ -734,7 +734,8 @@ class EncryptedWebSessionRepositoryTest {
     final AtomicInteger live = new AtomicInteger(),
         commits = new AtomicInteger(),
         rollbacks = new AtomicInteger();
-    String failure = "", nullColumn = "";
+    volatile String failure = "";
+    String nullColumn = "";
     Integer deleteCount, updateCount;
     boolean nullConnection, hit, rollbackFailure, rollbackHit;
     final DataSource source =
