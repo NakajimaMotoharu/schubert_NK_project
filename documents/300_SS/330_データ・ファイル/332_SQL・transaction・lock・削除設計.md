@@ -39,6 +39,8 @@ API requestごとに`SET LOCAL application_name`を変更せず、pool設定のs
 
 ## 4. Scenario・Speaker・Media query
 
+SSC-036、Log query SQL補足: UI225 §2/235 §11のLog検索・LGSRSP01の許可levelはINFO/WARN/ERRORである。app_logsに診断TRACE/DEBUGが存在してもwire enumの拡張・INFOへの置換をせず、表示用count/listの共通predicateへ`level IN ('INFO','WARN','ERROR')`を必ず適用する。明示Level条件はこの集合内で追加する。診断rowを削除・改変しない。空filterは画面が扱う全3levelを意味し、診断だけなら0件/page1となる。表示対象とtotal/pageの不一致、診断rowによる応答全体9000を起こさない。UI235のFrom/Toはoptionalのまま。§13の「日付条件必須」は計測caseであり、未指定/片側指定をAPIで拒否・期間補完する意味ではない。PG-D-090/PT-ADM-055～060で実DB混在・診断のみ・全filter・wire/count/list・無更新を確認する。
+
 ### 4.1 Scenario search（IF-005）
 
 SSC-017: UI223/234の実際の要求は本文/game/話者名/章/type/voice/pageであり、speaker ID/file IDへ置換しない。下記predicateの必要なものだけをallowlist fragmentから構築し、値は全てprepared statementへbindする。Countとlistは同じfilterから一つのSQL statement snapshotで得る（CTE＋lateral等）。通常READ COMMITTEDの別statement間でcount/listをずらさない。
