@@ -257,17 +257,18 @@ class WebRequestSecurityTest {
                     })));
     var bad = untouched();
     bad.setRemoteAddr("203.0.113.9");
-    var sendFailure = new IOException("synthetic send failure");
+    var statusFailure = new IllegalStateException("synthetic status failure");
     var broken =
         new MockHttpServletResponse() {
           @Override
-          public void sendError(int status) throws IOException {
-            throw sendFailure;
+          public void setStatus(int status) {
+            throw statusFailure;
           }
         };
     assertSame(
-        sendFailure, assertThrows(IOException.class, () -> filter.doFilter(bad, broken, never)));
-    assertEquals(403, broken.getStatus());
+        statusFailure,
+        assertThrows(IllegalStateException.class, () -> filter.doFilter(bad, broken, never)));
+    assertEquals(200, broken.getStatus());
     log.fail = true;
     var failedResponse = new MockHttpServletResponse();
     assertThrows(IllegalStateException.class, () -> filter.doFilter(bad, failedResponse, never));

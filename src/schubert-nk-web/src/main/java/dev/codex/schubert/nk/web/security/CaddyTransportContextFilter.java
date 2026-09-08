@@ -57,7 +57,9 @@ public final class CaddyTransportContextFilter implements Filter {
       result.setStatus(403);
       audit.record(
           requestId, Event.PROXY_DENIED, Optional.empty(), Optional.empty(), 0, Route.ALL_WEB);
-      result.sendError(403);
+      // BUG-070/YKT-062/PT-WEB-110: no trusted context exists on this rejection path.
+      // sendError redispatches through this guard and duplicates identity/audit. End here;
+      // trusted CSRF failures still dispatch to their error view in WebCsrfDeniedHandler.
       return;
     }
     var context =

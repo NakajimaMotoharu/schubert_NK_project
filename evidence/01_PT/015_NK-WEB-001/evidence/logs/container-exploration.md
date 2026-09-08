@@ -15,4 +15,8 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 全production sendError検索はCaddyTransportContextFilterとWebCsrfDeniedHandlerの2箇所。前者は信頼context未確立の拒否にERROR再dispatchを発生させるため修正対象。後者は信頼済contextを保持するCSRF拒否なのでerror画面へのdispatchが必要で非該当候補。PT110の同一ID/件数とPT109/112の実HTTP回帰で確認してからYKTを完了する。
 
+探索03は同commandのtest選択へWebRequestSecurityTestを追加し、末尾にorg.jacoco:jacoco-maven-plugin:0.8.15:reportとcom.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:checkを追加。2026-09-09 00:59:52 JST、exit0、Web12件（新4＋既存8）/Protocol5/Storage16成功、SpotBugs0、NullAway/format/Enforcer成功。原本/tmp/PT-WEB-container-20260909-explore-03.log SHA256 acb5607c2edbc68a462843c2722e2058c8c0727d32ac8f2d39697fa2e285df2c。
+
+BUG-070はproxy拒否のsendErrorを除き、403を設定して監査後return。PT110は不正proxyの監査1件/UUID1/DB0/error servlet0を確認し、信頼済CSRFのerror servlet1・元ID一致・監査1件も確認。全2sendError候補のうち残したCSRFはPT109/110/112で実際にerror viewへ到達する非該当根拠を検証済み。PT104は削除したsendErrorの人工故障から、実際に呼ぶsetStatusの公開故障へ差し替え（status設定自体が失敗したのでMock初期200が残るが、例外は伝播し下流0）。HTTPの独立403/監査oracleは変更しない。
+
 探索は全coverage/全module/正式gateを代替しない。全MVC・実TLS/Caddy・production bootstrap・NK Characterization・IT/STは未実施。

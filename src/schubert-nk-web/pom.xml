@@ -69,9 +69,10 @@
       <version>7.0.9</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.1.0</version>
+      <!-- PG-D-109/421 §5.9: patched container is the single Servlet 6.1 API provider. -->
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
+      <version>11.0.25</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
