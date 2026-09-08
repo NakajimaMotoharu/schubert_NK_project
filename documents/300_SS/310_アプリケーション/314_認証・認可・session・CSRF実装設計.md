@@ -28,7 +28,7 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 
 ## 3. Spring Security filter chain
 
-初期構成は単一`SecurityFilterChain`とし、順序を固定する。
+通常要求は単一business `SecurityFilterChain`とし、順序を固定する。SSC-047として、container内部の`DispatcherType.ERROR`かつ`/error`だけは、その手前の非業務error chainへ限定分離する（§3.2）。
 
 1. Forwarded headerはCaddyからのloopback接続だけを採用し、外部値を上書き済みとする。
 2. Request ID/filter、security header、session repositoryを適用する。
@@ -46,6 +46,14 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 SSC-043（§3のprovider詳細）: MqAuthenticationProviderは未認証のusername/消費char[]/trusted Caddy由来numeric IPだけを入力とし、IF-001の0000または現在context確認済み0200だけからROLE_USER/ROLE_ADMINと閉SessionPrincipalを返す。0101/入力不正、0106、9000を混同しない。0106の後段表示へ渡す追加値は0..900秒のみ。失敗例外へpassword/元cause/wire本文を保存しない。全終了でchar[]をzeroしinput tokenのcredentials参照を外す。Session保存はcustom fixation strategyの短transactionへ分離する。
 
 Login replay0200の現在context確認は324 §6.1を具体化し、新UUIDの既存IF-003 GAMREQ01を1回実行する。APIの通常context検証とgame readが成功した応答だけを認め、0102は未認証、その他error/timeout/不正応答は一時障害にする。Responseの相関/context/layout/総長/DATA/record全検査を必須とし、取得したgame内容を画面やcacheへ流用しない。これはLogin再送/新session発行ではなく、既存保護readによる最新認証確認である。role/status/password変更の既定全session失効を維持し、以後の業務API再認証も省略しない。元snapshotの初回expiresAtを現在idle期限と混同せず、現在有効性はAPIを正とする。Wire/DDL/外部画面仕様は不変更。
+
+### 3.2 内部error dispatchと依存障害（SSC-047）
+
+UI221/222のMQ/DB一時障害503共通errorを、失敗したsession/DB/keyへ再依存せず表示する。FilterChainProxyの先頭chainは、実containerのDispatcherType.ERRORと正規化path `/error`のANDだけに一致し、UTF8と解決済表示snapshot/CSRFの再投影だけを行う。外側Caddy検証・request UUID・security headerとStrictHttpFirewallは両chainへ共通適用する。通常REQUESTの`/error`、外部POST/PUT、ASYNC/FORWARD、ERRORの別URLはbusiness chainを通り、認証・CSRF・URL roleを省略しない。HTTP header/query/attributeの偽dispatcher値を許可条件へ使わない。
+
+通常chainで閉principalを復元した後、要求内の表示用TopBar（brand/username/roleだけ）と解決済CSRFのimmutable snapshotを取得できる。これはrequest scopeだけ、閉session JSON/DBへ属性を追加しない。Error chainはこの表示snapshotだけを使い、HttpSession/getUserPrincipal/SecurityContextの再読、DB/JMS、CSRF再生成を行わない。取得前に障害となった要求は匿名error表示とし、認証済みと推測しない。API0102等の明示失効時にはsnapshot/CSRF表示をclearする責務を後続handlerへ持たせる。raw認証context/password/session IDはsnapshot/modelへ入れず、CSRFは正規POST formのhidden inputだけに使用する。
+
+session repositoryの固定SessionStoreExceptionは外側境界で未commit応答を503 sendErrorへ変換する。すでにcommit済み、またはerror dispatch自体の失敗は再dispatchせず不成功として伝播する。NPE/任意RuntimeExceptionをcatchして成功へ変換せず、containerが未commitの未知障害をerror dispatchした場合は安全な503画面へ分類する。Proxy不正は既存BUG070方針どおり403空bodyで終端しerror chainへ入れない。
 
 ## 4. Password
 

@@ -193,6 +193,8 @@ Templateは0件時に`該当するデータはありません`を表示し、pag
 | `9000/9001` | 503 | 再操作案内、request ID |
 | Invalid Range | 416 | bodyに内部pathなし |
 
+SSC-047（SCR-090具体化）: ErrorController/ProblemViewFactoryはserver Request ID、containerのERROR_STATUS_CODE、要求内の表示専用snapshotだけからErrorViewModelを作る。ERROR_EXCEPTION、ERROR_MESSAGE、ERROR_REQUEST_URI、query、raw request/session/DBを参照しない。400/401/403/404/409/416/429/503は固定表示、500/未知statusは503へ分類、error属性なしの直接GET /errorは404とする。response statusとModelを一致させ、利用者文言はUI222の既定403/404/409/503を維持する。認証済みsnapshotがある場合だけusername/role/Logout＋解決済hidden CSRF、ない場合はMenu/Login案内を表示する。通常画面から使う認証失効handlerはsnapshotの破棄も行う。
+
 ## 10. Accessibility・security
 
 - `lang=ja`、一意な`title`、見出し階層、landmark、label/id、validation summary anchorを必須とする。
