@@ -2,7 +2,7 @@
 
 ## 1. 状態
 
-PG-D-120/005仕様のPT-DB-INBOX-009～016は探索8件成功、failure/error/skipped0。追加AuthenticationInboxInspectorのline35/method2/class1/branch12すべてmissed0（instruction144/complexity8もmissed0）、SpotBugs0、NullAway/Enforcer/format PASS。正式clean回帰/収集前でProgram全体未完了。既存構造8件の正式結果は004を参照する。
+PG-D-120/005仕様のPT-DB-INBOX-009～016は正式PT-WEB-20260909-14で8件成功、failure/error/skipped0。source 5cb8f4329067806c98b4f09a92abbeae5ed4e5cc、dev-foundation、2026-09-09 07:53:30～07:58:34 JST、exit0。全806件（Protocol80/Storage34/API410/Web241/CHR41）成功、全5moduleのline/method/class/branch100%、SpotBugs0、NullAway/Enforcer/format PASS。追加classはline35/method2/class1/branch12すべてmissed0。8collectorの9scope（016の構造/認証を別収集）と全checksum確認成功。Program全体は未完了。
 
 ## 2. 探索履歴（全てdev-foundation、正式source固定前）
 
@@ -25,4 +25,4 @@ PG-D-120/005仕様のPT-DB-INBOX-009～016は探索8件成功、failure/error/sk
 | Logout N17 revoked | 成功時固定JST、error時17桁zero。spaceの不正fixtureを独立negativeへ追加。owner/UUID/hash/失効false/±1msも拒否 |
 | null/JDBC/鍵/並行 | caller null、autocommit/closed connection/SQL例外、鍵previous/wrong/unknown/close、100並行の正常/不整合。session時間/失効状態/監査数/入力暗号byteが不変。proxyがcommit/rollback/closeを禁止 |
 
-正式回帰後、`evidence/authentication-inspection/manifest.json`/`results.xml`/`checksums.sha256`へrun/commit/環境/期待根拠/実結果/coverage/Test ID/hashを固定する。BUG-077/078/YKT-069は正式再試験待ち。DB削除/lock/最小role/oneshot/非認証参照は未実施でBUG-014/YKT-012/UIC-006/SSC-049を完了にしない。
+`evidence/authentication-inspection/manifest.json`/`results.xml`/`checksums.sha256`へrun/commit/環境/期待根拠/実結果/coverage/Test ID/hashを固定済み。manifest SHA-256: `322328253d6e6459180b2e56dbe4d7428520df4eb472099cfc4d009669821e54`。BUG-077/078/YKT-069は5cb8f432修正と本正式回帰で完了。DB削除/lock/最小role/oneshot/非認証参照は本806件に含めず、BUG-014/YKT-012/UIC-006/SSC-049を完了にしない。
