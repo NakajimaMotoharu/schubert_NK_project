@@ -719,7 +719,7 @@ class SessionSecurityContextTest {
   }
 
   /** Independent UI232/234 offset oracle. Synthetic in-memory wire only, never evidence body. */
-  private static byte[] reply(UUID id, String layout, String code, String apiContext) {
+  static byte[] reply(UUID id, String layout, String code, String apiContext) {
     boolean login = layout.equals("LGNRSP01");
     byte[] wire = new byte[login ? 688 : 265];
     Arrays.fill(wire, (byte) ' ');
@@ -742,7 +742,7 @@ class SessionSecurityContextTest {
     return wire;
   }
 
-  private static void put(byte[] wire, int offset, String value) {
+  static void put(byte[] wire, int offset, String value) {
     byte[] text = value.getBytes(StandardCharsets.UTF_8);
     System.arraycopy(text, 0, wire, offset, text.length);
   }
