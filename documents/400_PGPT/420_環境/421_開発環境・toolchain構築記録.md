@@ -152,7 +152,7 @@ libc symbol署名とABIは固定し、openatのvariadic境界とerrno captureを
 
 [Spring Session公式API説明](https://docs.spring.io/spring-session/reference/api.html)のcustom SessionRepository＋SessionRepositoryFilter/HttpSession接続を参考にし、標準Jdbc repository/Java serializationは採用しない。公式ページからの4.1.1 Javadoc linkは404のため、必要なsignatureはMaven release source jarで確認する方針。本機curlコマンド未導入だがwgetが利用でき、調査継続可能。環境blocker/高推論再走対象ではない。
 
-Session属性JSONにはAPI側で既に固定導入済みのGson2.14.0をWebへ追加する予定。streaming Strictness.STRICT/型・重複key・nesting/byte境界を独立PTする。WebSessionId/SavedRequestTargetの初回8PTはJDKだけで実施し、framework配線完了と混同しない。導入時のartifact hash/依存tree・commandは後続記録へ追加する。
+Session属性JSONにはAPI側で既に固定導入済みのGson2.14.0をWebへcompile依存追加。入手元はMaven Central `com/google/code/gson/gson/2.14.0/gson-2.14.0.jar`、SHA256 `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f`。既存local cacheを使用し、他依存versionは変更しない。2026-09-08 19:32:03、完全修飾`org.apache.maven.plugins:maven-dependency-plugin:3.9.0:tree -Dincludes=com.google.code.gson:gson`のoffline Web reactor出力でcompile2.14.0を確認。command/log hashは015/evidence/logs/attributes-exploration.md。streaming Strictness.STRICT/型・重複key・nesting/byte境界を独立7PT、初回8PTはJDKのみ。Spring framework配線完了と混同しない。
 
 ## 6. 導入予定・工程内service
 

@@ -35,6 +35,14 @@ def main():
             (6, "web006ExternalMalformedAndStateChangingTargetsReject"),
             (7, "web007Utf8LimitAndUnicodeBoundariesAreExact"),
             (8, "web008ConcurrentTargetsRemainIndependent")),
+        "dev.codex.schubert.nk.web.session.SessionAttributeCodecTest": (
+            (9, "web009AnonymousAndAuthenticatedGoldenJson"),
+            (10, "web010PrincipalTokenAndCollectionInvariantsFailFast"),
+            (11, "web011UnknownDuplicateNullAndTypesNeverDeserialize"),
+            (12, "web012MalformedUtf8AndBoundedDocumentsRejectSafely"),
+            (13, "web013UnicodeSavedTargetsAndTokenPurposesPreserveMeaning"),
+            (14, "web014IndependentDecodeAcceptsOrderButRejectsInvalidValues"),
+            (15, "web015ConcurrentAttributesHaveNoCrossSessionState")),
     }
     methods, reports = [], {}
     for classname, cases in groups.items():
@@ -74,8 +82,9 @@ def main():
         "testIdMethods": expected, "methods": methods,
         "inputAndExpected": "PT-WEB-001..008 / PG-D-093: synthetic 32-byte zero/sequence/FF CSPRNG data with independent Python base64/hashlib fixed vectors; canonical unpadded43-character base64url and raw-ASCII SHA256 lookup, temporary random/decode/hash arrays erased. Null/length/alphabet/padding/unused-bits negatives, provider failure and100 concurrent random IDs/per-call hashes. Explicit GET URL strings preserve path/query/Unicode and valid query escapes with no trim/decode; reject schemes/authority/fragment/malformed/control/dot-segments/encoded path delimiters and nonGET. Exact2047/2048/2049 UTF8-byte, malformed surrogate and100 independent query cases. toString and validation errors contain no values.",
         "actual": "All mapped independent assertion sets passed; no failed/skipped/flaky/not-run counted",
-        "scope": "Web value boundary only. Session encryption/JSON/repository/fixation/CSRF/security/SavedRequest route allowlist/HTTP/startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
-        "relatedBug": [], "relatedSsc": [], "relatedYkt": [],
+        "sessionSchemaExpected": "PT-WEB-009..015 / SSC-038 / PG-D-094: independently handwritten UTF8 JSON for anonymous/authenticated all-or-none principal, every optional combination, USER/ADMIN, ordered0/1/10 purpose-tagged UUIDs, canonical UTC timestamps, NFC64byte usernames, csrf64..128 and saved GET2048byte. Reject missing/duplicate/unknown/null/wrong types, invalid UTF8/BOM/trailing documents, noncanonical UUID/time and over16384byte/deep inputs. Immutable values/collection copies, fixed redacted exceptions without parser cause/suppressed and100 concurrent inputs. BUG-055 malformed loginAt/issuedAt reproduction followed by explicit DateTimeException conversion and regression.",
+        "scope": "Web value and closed JSON boundaries only. Session encryption/repository/fixation/CSRF/security/SavedRequest route allowlist/HTTP/startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
+        "relatedBug": ["BUG-055"], "relatedSsc": ["SSC-038"], "relatedYkt": ["YKT-050"],
         "notRunCountedAsPass": 0,
         "redaction": "Only allowlisted method names/timing/counters/coverage and metadata. No JVM properties/stdout/stderr, raw cookie/session/context/token/key or database dump.",
     })
