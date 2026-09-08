@@ -219,6 +219,23 @@ Idle延長はmax(現在時刻,既存last access)＋row max inactiveを用い、C
 
 本serviceはframework/監査handlerの実装完了ではない。Operation tokenの用途/完了/timeout handlerは最大10件を保ち、未完了tokenを実装都合で破棄しない。
 
+#### 7.2.5 Spring Session adapter（SSC-042）
+
+SpringEncryptedSessionRepositoryはSpring Session4.1.1 SessionRepository、SpringWebSessionはSessionを実装し、標準SessionRepositoryFilterへ接続する。汎用Jdbc repository/Java serializationは使わない。HttpSession属性は次の閉projectionだけ。JSONへ新field/class名を追加しない。
+
+| 属性 | Java公開型 | 更新契約 |
+|---|---|---|
+| principal | SessionPrincipal（認証4fieldの集合） | API認証済み結果だけを内部handlerがsetし、authenticateで即時fixation。HTTP parameter binding禁止。存在するprincipalのnull除去は不可、Logoutはsession invalidate |
+| csrfToken | String | 同値setだけ許可。再発行はcreate/fixation/changeSessionId。存在する値のnull除去は禁止 |
+| savedRequest | Stringのsafe GET path/query | safe GET validation後にこの属性だけ短transactionで更新。nullは除去 |
+| operationTokens | immutable List of SessionOperationToken | request snapshotに対する追加/削除deltaを現在DB listへ適用、別requestの変更保持。同UUIDの用途/時刻変更拒否、最大10、nullはsnapshot上の項目の削除 |
+
+未知readはnull、未知write/型不正は固定診断で拒否。標準SecurityContext/DefaultSavedRequest/例外objectは保存しない。後続SecurityContextRepository/RequestCache/CSRF handlerを閉projectionへ接続する。generic getAttributeの型castはframework contractに必要なmethod一箇所だけのunchecked抑止とし、理由・Test IDを隣接記録する。
+
+create/find/setはlifecycleへ即時委譲、saveも現在hashを再検査し、削除/期限切れは固定障害で新規INSERTしない。Session objectは発行元repositoryにだけsaveできる。private lockで同wrapper snapshotを保護する。setLastAccessedTimeはserver内のInstantをµs化し、lock下のexpiry判定後、現在Clock/既存last/指定時刻の最大へtouchする。外部HTTPから日時をbindしない。setMaxInactiveIntervalは既存確定値と同値だけ許可する。
+
+changeSessionIdは既存principalを維持したrotateとして、fresh Cookie/DB UUID/CSRF、SavedRequest/token移管、旧削除＋新作成を短atomic TXで行う。API認証済み新principalを受けるauthenticateと分け、匿名sessionを認証済みにしない。CookieのSecure/HttpOnly/SameSite=Lax/Path=/、URL ID非使用、8h idleはUI226のまま。Mock Servlet＋実DBのfilter PTはHTTP adapter単体であり、全Security chain/画面/起動/実NK CHRとは別gate。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
