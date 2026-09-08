@@ -2,7 +2,7 @@
 
 ## 1. 対象・現在状態
 
-PG-D-122、V009、009仕様PT-DB-INBOX-025～032。新規の条件付き削除SQLで、既存V001～008は不変更。探索成功、正式全回帰・証跡未確定。SQLは暗号検証を行わず、Java接続・全layout・oneshot・BUG-014全体は未完了。
+PG-D-122、V009、009仕様PT-DB-INBOX-025～032を正式PT-WEB-20260909-16で確定。新規の条件付き削除SQLで、既存V001～008は不変更。SQLは暗号検証を行わず、Java接続・全layout・oneshot・BUG-014全体は未完了。
 
 ## 2. 探索履歴・障害
 
@@ -26,4 +26,6 @@ Command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -
 
 ## 4. 正式証跡
 
-正式run/source/環境/command/時刻/終了code/全回帰/SQL matrix/関連BUG/hashは全体gate成功後、`evidence/deletion-sql/manifest.json`と本節へ確定する。未実行/failed/skipped/flakyは合格に算入しない。
+正式PT-WEB-20260909-16/source2f375c92、dev-foundation、2026-09-09 08:55:19 JST終了、exit0。新8件を含む全822件（Protocol80/Storage34/API426/Web241/CHR41）成功、failed/error/skipped0、全5moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。8collector・11scopeのchecksums全一致・trace正負canary成功、Current baseline843de94/V001～008差分0、秘密pattern検出0。
+
+`evidence/deletion-sql/manifest.json` SHA-256 `1f10264619a37654ec15ba74fff50d169a33f872ab028941daabd0acdace5481`。実行日時/OS/JDK/tool/source/command/SQL matrix/独立oracle/全Test ID実結果/関連BUG・SSC/全体manifestへのhash検証済リンクとV009 source hashを保存。BUG-081～083/YKT-072～074は本正式再試験で完了。追加探索session64595/08:49:14 JSTも31件PASS、backup途中追加を55000で拒否し、同TXの暗号文変更後はfalse、rollbackで復元した。SQL単体を暗号/参照の証明として扱わない。
