@@ -1,5 +1,7 @@
 # 単一security chain探索・BUG-073再現記録
 
+正式認定: PT-WEB-20260909-09、source a157d2630c75ad97d0c9400f1706a8f350545bf4、2026-09-09 02:09:01～02:13:42 JST、全766/Web141 PASS、全line/method/class/branch100%、NullAway/format/Enforcer PASS、SpotBugs0。BUG-073/YKT-065を再試験完了とした。詳細は同directory上位のmanifest.json。
+
 Program NK-WEB-001、PT-WEB-131～141、PG-D-113/114、BUG-073/YKT-065。OS/JDK/toolchainは421、独立fixtureと期待値は本Program単体テスト仕様書を参照する。以下は正式clean gate前の探索であり、Program完了/本番起動/IT/STの証跡とはしない。
 
 | Run | 終了日時（JST） | 結果 | 非格納raw log SHA-256 |
