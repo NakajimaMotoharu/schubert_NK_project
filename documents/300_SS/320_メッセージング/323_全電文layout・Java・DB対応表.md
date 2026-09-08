@@ -185,6 +185,22 @@ OwnerはAPI認証actor user ID十進、targetは`REQUEST:<request layout ID>`、
 
 `MediaRequest.decode`は8 requestをallowlistし共通header/固定DATA/semanticを検証。同じ内部値からcanonicalとMediaRepositoryの8 read-only queryへ振り分ける。通常一覧は存在するTypedPayload、3 descriptorだけ実ID不在をOptional.emptyとし、DB整合/上限/基盤障害を不存在へ補完しない。DB descriptorはまだmanifest/物理確認を通しておらず配信許可ではない。認証・Inbox/response snapshot、transaction/物理I/O/JMS所有は外側serviceに残す。
 
+### 9.3 User管理更新要求canonical（SSC-032）
+
+Ownerは現在API認証actor user IDの十進、version001。Targetは§9どおりUCRだけ`NEW_USER:<username_key>`、他は`USER:<id>`。Username keyは既存LoginUsernameのNFC/trim/Locale.ROOT lowercase規則。Payloadのusernameはdecode後NFC原値を拘束し、業務検索・作成用trimを先取りしない。`X1`はNFC UTF-8、`N1`はpadding/signなしASCII十進、`B1`はASCII `0`または`1`の1byte。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| UCRREQ01 | username/X1、usernameKey/X1、password/X1、role/X1、enabled/B1 |
+| USTREQ01 | enabled/B1、expectedVersion/N1 |
+| URLREQ01 | role/X1、expectedVersion/N1 |
+| UPWREQ01 | password/X1、expectedVersion/N1 |
+| ULKREQ01 | expectedVersion/N1 |
+
+User IDはtargetへ含まれ、§9のpayload表どおり重複fieldを追加しない。Operation tokenはInboxの別keyとして返し、header ID/time/context/CSRF/reserved/paddingとともにcanonical fieldへ混入しない。全5layoutをallowlistし、headerのlayout/version/direction/body長、actual DATA/records、typed semanticを検証してから内部値を作る。同じ内部値からSSC-031 preludeのmutation/targetとUserCommandServiceの入力を生成する。これは認証許可・Inbox NEW判定ではなく、callerが先にそれらを実行する。
+
+Passwordは操作scope内だけの所有char bufferに切り離す。業務commandへは消費される別配列を渡す。CanonicalRequestも独立の所有bufferとして返し、callerが全照合後にcloseする。Request.closeで自分のpasswordをzero fillし、close後のcanonical/command等の再利用を拒否する。wire decodeの一時byteもfinallyで消去、Password/raw token/contextをtoString/log/例外に含めない。Password policy不成立の0100、Username重複の0105（UI236 §4.2）をdecode都合で変更しない。PG-D-084/PT-ADM-024～027で独立LP/JCE-HMAC/手組byte/実PG dispatch/negative/100独立操作を検証し、外側replay/JMS/HTTPは別gateとして継続する。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
