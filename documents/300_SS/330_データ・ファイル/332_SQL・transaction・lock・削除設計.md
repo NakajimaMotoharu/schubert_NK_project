@@ -291,7 +291,7 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
 | 処理 | Lock順 |
 |---|---|
 | Login | User → IP attempt → auth sessionsの時刻/ID順 |
-| User管理 | ADMIN advisory lock（必要時）→ target user ID → auth sessions ID順 |
+| User管理更新（SSC-031） | context owner候補の非locking lookup → ADMIN advisory lock（減員し得る時だけ）→ actor/target/必要active ADMINのUser ID昇順 → context session owner再照合lock＋通常verify/ADMIN認可 → Inbox → command対象session ID順/監査 |
 | Question submit | Inbox/token → question → job → notification → outbox（新規INSERTのみ） |
 | Cancel/worker | job ID → notification ID → answer（完了時） |
 | Logical delete | Inbox/token → question ID → answer question ID → audit |
@@ -299,6 +299,8 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
 
 DB deadlockが発生した場合は一時障害としtransaction全体をrollbackする。UI更新を内部で再試行せず、
 operation tokenによる再操作またはJMS redeliveryで整合を保つ。
+
+SSC-031のUser集合はactor候補/targetと、減員時だけrole=ADMINかつstatus=ACTIVEの全rowをORで選び、ORDER BY id FOR UPDATEで同時に取得する。通常verifyでactorを先に単独lockしてからadvisory/別targetへ進むことは禁止する。Session ownerを再照合する前の候補lookupは許可判定ではない。preludeとverify/Inbox/commandの間でcommit/closeしない。ADMIN減員以外へ71419601を無条件適用せず、固定keyの用途を拡大しない。直接command部品PTはcallerがこの順序を満たすfixtureとし、本番登録は実preludeとの接続・相互更新/再送PT後だけ許可する。
 
 ## 13. Query plan・性能確認
 

@@ -1,0 +1,245 @@
+{
+  "runId": "PT-ADM-20260908-01",
+  "targetCommit": "9cbdfa1ae9dfda67557f48405c55a6a019294b71",
+  "branch": "dev-admin",
+  "startedAt": "2026-09-08T14:58:00+09:00",
+  "completedAt": "2026-09-08T15:01:23+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 34,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1716
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 125
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 343
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 134
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 71
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 10
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 324,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 20121
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1508
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4533
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1472
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 693
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 151
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 76,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4155
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 353
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1002
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 329
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 150
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 38
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "614362fb3cdf1222f695396f35ee729989e78545c2a0ea3845e6404704655eb9",
+  "programId": "NK-ADM-001",
+  "programStatus": "IN_PROGRESS",
+  "tests": {
+    "program": 7,
+    "reactor": 555
+  },
+  "testIdMethods": {
+    "PT-ADM-001": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
+    "PT-ADM-002": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm002DetailProjectsActorsTimesAndActiveSessions",
+    "PT-ADM-003": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm003DisabledAndLockBoundariesUseOneFixedInstant",
+    "PT-ADM-004": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm004AuthorizationNullAndInputContractsRejectBeforeSql",
+    "PT-ADM-005": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+    "PT-ADM-006": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm006CapacityAndPageMetadataRejectTruncation",
+    "PT-ADM-007": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock"
+  },
+  "methods": [
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm003DisabledAndLockBoundariesUseOneFixedInstant",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm006CapacityAndPageMetadataRejectTruncation",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm002DetailProjectsActorsTimesAndActiveSessions",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm004AuthorizationNullAndInputContractsRejectBeforeSql"
+  ],
+  "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
+  "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
+  "scope": "UserQueryRepository search/detail and redacted exception only. Current authentication, command/Inbox/HMAC/critical audit/session revoke, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
+  "relatedBug": [],
+  "relatedSsc": [],
+  "preventionReferences": [
+    "BUG-030/YKT-027 numeric null",
+    "BUG-031/YKT-028 suppressed close redaction",
+    "BUG-044/YKT-039 timestamp Instant oracle"
+  ],
+  "notRunCountedAsPass": 0,
+  "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr, provider row dumps, raw identifiers or credentials.",
+  "files": [
+    {
+      "path": "coverage/api-jacoco.csv",
+      "sha256": "ce4372a74988bdf9c83703940b43d2ef97f21358f404b4625192e182275c08f7"
+    },
+    {
+      "path": "coverage/api-jacoco.xml",
+      "sha256": "4cab17998789dee63ad296747afbfb9603ee23a55b3e36f133eb2e2ef6306a8d"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-01-summary.json",
+      "sha256": "206b2a4aa49cfa6077fb596092f2466b027d50ad0c353eab1666782236036624"
+    },
+    {
+      "path": "logs/query-exploration.md",
+      "sha256": "1bc6e80e15a0e8234a7744aaef2f5acaa2d037a92e28ebfbe16621c6b47c7992"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "5f7a314fbac59a356a7b8e331070aa56acfca0b8ed449c2e355bb58a7b3d0e9b"
+    }
+  ]
+}

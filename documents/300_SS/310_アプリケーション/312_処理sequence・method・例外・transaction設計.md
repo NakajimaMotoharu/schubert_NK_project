@@ -129,6 +129,8 @@ Scenario large-resultはDB cursor/rowをfileへ書く間に長時間transaction�
 
 ## 6. User管理更新
 
+SSC-031（管理更新の認証前lock prelude）: UCR/UST/URL/UPW/ULKは通常verifyを最初に呼ばない。context hashの候補user IDを非lockingでlookupし、減員し得るUST無効化/URL USER化だけadvisory 71419601を取得する。その後、候補actor、target（作成はなし）、減員時の全active ADMINを一つのSELECTでUser ID昇順FOR UPDATEする。当該context sessionをlockし、ownerが候補と同じことを確認してから通常verify（有効性/最新role/idle更新）とADMIN認可を実施し、続いてInbox/業務commandへ入る。候補lookupだけを認証許可にしない。Owner変化/不整合はrollbackする。すべて同じcaller write transactionであり、取得済みactor/targetをcommandが再lockしても順序を逆転しない。UCRは既存actorを先にlockし新UserをINSERTする。非管理・参照requestの既存verify順は変更しない。
+
 ### 6.1 Method
 
 | Method | Command | 成功結果 | Lock/監査 |

@@ -196,6 +196,8 @@ Web sessionで関連付けて保存せず、APIのHMAC fingerprintを正とす�
 
 ### 9.2 Matrix
 
+SSC-031: User管理更新では312 §6/332 §12の認証前lock preludeを適用する。非lockingで見つけたcontext ownerは候補に過ぎず、User群昇順lock後にsession ownerをlock下で再照合し、通常verifyと最新ADMIN認可を必ず行う。Raw context/候補IDをログや利用者応答へ出さない。単一transactionの通常verifyによるidle延長とcommand/critical audit/Inboxのatomicityを維持し、事前lookupやWeb roleで認可を代替しない。
+
 | 操作 | USER | ADMIN | API条件 |
 |---|:---:|:---:|---|
 | Scenario/audio/video/music | ○ | ○ | 有効context |
