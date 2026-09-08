@@ -100,6 +100,10 @@ MISSINGを返せるのはroot検査成功後の既存date open、またはdate�
 
 ### 7.2 OS・TOCTOU対策
 
+SSC-028: Asset adapterは共通`OwnedTransferDirectory`の既存保持能力へ追加する`openExistingChild(singleSegment)`と`atExistingEntryHandle(singleSegment, callback)`を用い、事前に検証済みRelativePathをsegmentごとに辿る。これらはopenだけでmkdir/属性変更/rename/deleteをしない。名称は単一segment、空/`.`/`..`/slash/NULを能力境界でも拒否する。Native実装の複製や元path再解決を行わない。Childは独立FDを所有し親の名前差替え/closeに影響されず、entry callback完了時だけ所有FDをcloseする。Read channelをcallback外へ持ち出さない。
+
+保持Unix通常file/owner/group/mode0640/nlink1/size一致の共通`existingFile`照合は正のlong sizeを扱う。Media callerは先にMEDIA1024のN12上限を検証し、Transfer専用`file`入口は従来の1～48,000,000byteを検査した上で共通照合へ委譲する。MediaをTransferの48MB上限に誤って制限せず、逆にTransferの上限を緩和しない。属性照合はmanifest/hash/readiness/認証の代替ではない。
+
 SSC-021: Readerも共有storage libraryの保持rootから全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、最終entryをO_PATH/O_NOFOLLOW/O_CLOEXECで保持する。自分が保持しているinodeのprocfs handleでUnix通常file/owner/group/mode/nlink/sizeを確認した後にだけ、その同じinodeからread channelを開く。SDSの名前属性検査と後のchannel openを同一inodeと推測しない。公開FileChannel/PosixFileAttributesはnlink取得APIを持たないため、private FD reflectionや元pathの再解決へfallbackしない。
 
 SDS利用可能性の既存起動検査も維持し、unknown filesystem/providerは拒否する。実file openは上記native inode保持へ統一する。Readerは既存childのread-only openだけを呼び、mkdir/CREATE_NEW/chmod/chgrp/rename/deleteは呼ばない。OSのWeb read-only mount/permissionも別に必須とし、共通libraryの存在をwrite権限付与と解釈しない。`normalize().startsWith(root)`だけのfallbackは禁止する。
