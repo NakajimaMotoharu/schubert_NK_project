@@ -195,6 +195,27 @@ release sourceは `/tmp/schubert-spring-security-web-7.1.1-sources.jar` SHA256 `
 
 再現は既存JAVA_HOME/local repository指定のonline Web compile後offline運用。完全修飾dependency:treeを2026-09-08 21:37:36 JSTにexit0、`/tmp/PT-WEB-csrf-filter-dependencies-01.log` SHA256 `3a656edb3d7a56d12b7fbd122ee008b1d76ff8a4752d6f275bae44cf067e5790`。探索command/hashは015 csrf-filter-exploration.md。Security chain全体や実API認証の完了ではない。
 
+### 5.9 Embedded Servlet container（2026-09-09、PG-D-109）
+
+実HTTP/ERROR dispatchのPG/PT向けにApache Tomcat embed core **11.0.25**を採用する。5.5のBoot BOM調査時候補11.0.24は本projectへまだ導入していなかった。[Apache公式security情報](https://tomcat.apache.org/security-11.html)を再確認し、11.0.24までに影響するHTTP/2資源漏れや認証/認可関連修正を含む11.0.25へ固定する。未導入候補の選定更新であり、既存toolの無検証置換やSS外部仕様変更ではない。配備直前にもsecurity公告を再確認する。
+
+[Apache公式embedded Tomcat API](https://tomcat.apache.org/tomcat-11.0-doc/api/org/apache/catalina/startup/Tomcat.html)と、[固定release POM](https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.pom)、同release sourceを照合。`addContext`によるprogrammatic contextではdefault servlet/JSP/WebSocketを自動公開しない。CoreがServlet6.1 APIを含むため、Webのstandalone jakarta.servlet-api6.1.0依存はcoreへ置換して二重class提供を避ける予定。他module/Spring7.0.9/Security7.1.1/Session4.1.1/Artemis2.56.0を変更しない。全PT・依存収束・classpath・静的解析を再検証するまで導入完了とはしない。
+
+| Artifact | SHA256 |
+|---|---|
+| tomcat-embed-core-11.0.25.jar | 282b65b9fe43647b1459c0df11101f8599a58de5832075acff485c3705ba4894 |
+| tomcat-annotations-api-11.0.25.jar（coreのcompile依存） | d32cc2aad115b27456ce075b2167b3d549aa9ca75439d67f6a60bcc057d7212d |
+| tomcat-embed-core-11.0.25.pom | 1dcba0b0070ad6a999dc07c82f2b692f449c29d47a05d77813ab5a72283ddf52 |
+| tomcat-embed-core-11.0.25-sources.jar | 1d2ec2c563194f0b768be5a34979ce14eb2dde4f9e866f954c19dfbdcb46b9bc |
+
+取得元はMaven Centralのorg/apache/tomcat配下。Binaryは既存work/toolchain/m2/repositoryに配置。source/POM調査copyは/tmp/schubert-tomcat-embed-core-11.0.25-*、秘密情報なし。再現:
+
+```sh
+JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -N -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress org.apache.maven.plugins:maven-dependency-plugin:3.9.0:get -Dartifact=org.apache.tomcat.embed:tomcat-embed-core:11.0.25 -Dtransitive=true
+```
+
+依存取得は2026-09-09 00:39:53 JST成功。正式PT-WEB-20260909-03の実行中はsrc/POM/collectorを固定し、取得だけを行った。組込みPTはloopbackのみ・ephemeral port・JUnit所有temporary directory・明示close、合成Servlet/DB/監査だけとする。TLS/Caddyは本番と同じbackend境界を模擬し、証明書/実serverのIT/ST合格と混同しない。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
