@@ -1,5 +1,7 @@
 # Menu・MVC/Thymeleaf探索記録
 
+正式認定: PT-WEB-20260909-10、source 2123e1809753b1df23b50bb6b4fc5475660c91c3、2026-09-09 02:25:46～02:30:28 JST、全772/Web147 PASS、全line/method/class/branch100%、NullAway/format/Enforcer PASS、SpotBugs0。詳細はmanifest.json。PG-D-115のMenu/MVC接続範囲のみ確定し、Program全体は継続する。
+
 NK-WEB-001、PT-WEB-142～147、PG-D-115。関連FUN-002/AUT-001～003/SYS-006/TST-001～005、UI221～223/226、SS311/313/314/352。toolchain導入元/version/hashは421 §5.10、入力/独立期待は001 §14.11。
 
 | Run | 終了日時（JST） | 結果 | 非格納raw log SHA-256 |
