@@ -145,7 +145,9 @@ public final class MqLoginClient {
       CommonHeader header, String username, char[] password, String address) {
     try {
       // ofLiteral never performs DNS; preserve the trusted text rather than invent another IP.
-      InetAddress.ofLiteral(address);
+      // BUG-062: the DB inet/LoginInbox contract excludes scoped IPv6, even when JDK parses it.
+      if (InetAddress.ofLiteral(address).getHostAddress().contains("%"))
+        throw new IllegalArgumentException("login IP scope is invalid");
       String normalized = Normalizer.normalize(CharBuffer.wrap(password), Normalizer.Form.NFC);
       PayloadValues values =
           PayloadTypeCatalog.encode(

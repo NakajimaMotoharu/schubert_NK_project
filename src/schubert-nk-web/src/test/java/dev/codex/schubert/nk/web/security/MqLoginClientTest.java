@@ -150,8 +150,15 @@ final class MqLoginClientTest {
         List.of("", "p ", "p\n", "\ud800", "\udc00", "x".repeat(257), "é".repeat(129)))
       invalid(service, "alice", password, "::1");
     for (String address :
-        List.of("", "localhost", "example.invalid", "1.2.3.999", "127.0.0.1:80", "::xyz"))
-      invalid(service, "alice", "p", address);
+        List.of(
+            "",
+            "localhost",
+            "example.invalid",
+            "1.2.3.999",
+            "127.0.0.1:80",
+            "::xyz",
+            "fe80::1%1",
+            "[fe80::1%1]")) invalid(service, "alice", "p", address);
     assertEquals(0, sent.get());
     assertEquals(0, client.pendingCount());
     MqLoginExchangeException fixed =
