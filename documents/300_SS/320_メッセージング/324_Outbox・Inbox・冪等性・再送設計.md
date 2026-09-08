@@ -89,6 +89,14 @@ Inbox・User/IP counter・auth session・snapshotは同一transactionでcommit�
 
 ## 6. Response保存・再構成
 
+### 保存元Message binding（SSC-033）
+
+`JdbcInboxCoordinator.executeBound`は既存executeと同じ認証後・caller write transaction内のMessage/token検索、HMAC照合、一意制約競合再読、handler実行を用い、`BoundInboxExecution(sourceMessageId, execution)`を返す。新規EXECUTEDのsourceは受付Message ID、既存REPLAY/IN_PROGRESSのsourceは検証した取得rowのmessage_id。sourceを新request IDやtokenから推測しない。SELECTへ既存PK列を追加するだけでDDL/外部wire/retention変更はない。
+
+Message検索はrowのmessage_id自体も要求IDに一致必須。Token検索は既定owner/token/HMAC確認を維持し、同tokenの別Messageへ新Inbox rowやaliasを作らない。source必須NULL/不一致は基盤/整合不成立でcaller rollbackし、元の保存snapshotを別要求へ付け替えない。旧`execute`は新内部algorithmのexecutionを返す互換API、`inspectMessage`は従来どおりMessage-only/read-onlyの戻り値を維持する。追加lookup・DB connection・commit/rollback/close所有は増やさない。
+
+暗号replay側はsourceMessageIdをResponseSnapshotIdentityのAADへ使用し、保存header correlationもsourceに一致を確認する。利用者へ送る新headerのcorrelationは現在request Message IDとし、owner/layout/target/payload同一性、最新認証、保存body/ref/versionの検証を省略しない。Bound値それ自体を認証許可や暗号完全性の証明にしない。PT-IDEM-B01～B04で初回/同Message/別Message同token、競合INSERT再読、PROCESSING、NULL/誤PK/SQL fault、実AADでの復号、100並行と既存全API互換を検証する。
+
 | 処理 | 保存方式 | Replay |
 |---|---|---|
 | Login成功 | `result_ref=AUTH_SESSION`＋`result_ref_uuid=auth_sessions.id`＋初回fixed responseの暗号化snapshot（331 §7.1） | session ciphertextとsnapshotを検査し同context/初回expiry・role/usernameを返す（SSC-013） |
