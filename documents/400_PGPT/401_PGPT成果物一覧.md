@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+最新確定: 正式PT-MED-20260908-06、source 279f72798abfbfe5d2db7e30f0d4a2dc46c2eebb、dev-media、2026-09-08 12:52:59～12:56:03 JST。全519件（Protocol80/Storage34/API292/Web72/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media32件、Scenario151等は重複する内数。Web descriptor-file接続と内部Response portの200/206/416・HEAD/download・20/21枠/故障解放/100並行を追加PASS。manifest/API認証Inbox/MQ-実HTTP接続・client abort分類/起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
+
 最新確定: 正式PT-MED-20260908-05、source 6c9c4bcf6a75315cb174cd46c68a03bb6eedf081、dev-media、2026-09-08 12:43:33～12:46:37 JST。全512件（Protocol80/Storage34/API292/Web65/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media25件（Storage8を含む）、Scenario151等は重複する内数。保持全segment/前後Unix属性・size/256階層/48MB超/100並行/故障の低位file accessを追加PASS。manifest/API認証Inbox/Web descriptor・20permit/HTTP/起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
 
 最新確定: 正式PT-MED-20260908-04、source 46c09773eb5a994dd1f6f7d37dbd6051fa91eac7、dev-media、2026-09-08 12:35:32～12:38:36 JST。全507件（Protocol80/Storage29/API292/Web65/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media20件、Scenario146件等は重複する内数。SSC-028の保持child/entry・正サイズ属性共通化3PTを完了。Asset全walk/manifest/認証Inbox/20permit/HTTP/起動/実NK CHRは継続。確定5/20=25%（件数比・工数換算なし）。詳細はmanifest、以下は履歴。
