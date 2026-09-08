@@ -1,0 +1,16 @@
+<!doctype html>
+<!-- NK-WEB-001/SCR-002; FUN-002; UI223; SS313; PG-D-115/PT-WEB-142..147. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head(${page.topBar.brand})}"></head>
+  <body>
+    <main class="page">
+      <header th:replace="~{fragments/layout :: topbar(${page.topBar})}"></header>
+      <nav class="menu-grid" aria-label="main menu">
+        <a class="menu-item" th:each="card : ${page.cards}" th:href="@{${card.href}}">
+          <strong th:text="${card.title}"></strong>
+          <span th:text="${card.description}"></span>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

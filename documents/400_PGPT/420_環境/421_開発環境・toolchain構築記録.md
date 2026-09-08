@@ -218,6 +218,25 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -N -Dmaven.
 
 導入確認: 正式PT-WEB-20260909-05（source1640ca7）で全737件/全coverage100%/静的解析0、PT109のServlet API resource1件・native session0を確認した。単一Tomcat providerへの置換とloopback実HTTP4件のPG/PT導入は完了。本番bootstrap/TLS/CaddyのIT/STは未実施。
 
+### 5.10 MVC・Thymeleaf・DOM PT（PG-D-115）
+
+2026-09-09、WebだけへSpring MVC7.0.9/Thymeleaf3.1.5.RELEASE、test-only Jsoup1.23.2を追加。既存Framework7.0.9/Security7.1.1/Session4.1.1/Tomcat11.0.25/SLF4J2.0.18を維持し、BOMの一括適用やlogging backendの変更はしない。[Thymeleaf公式Spring integration](https://www.thymeleaf.org/doc/tutorials/3.1/thymeleafspring.html)と[release POM](https://repo.maven.apache.org/maven2/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.pom)を確認し、Spring6 integration artifactのprovided/optional Spring依存は既存7.0.9を使用する。Boot4.1.1公式BOMの同組合せと整合する。任意のOGNLを追加しない。Jsoup versionはMaven Central公式metadataのrelease1.23.2を確認した。
+
+取得元は`https://repo.maven.apache.org/maven2/`＋artifact path＋version/artifact-version.jar。依存・sourceは外部toolchain/tmpに保持し、Gitへvendor copyしない。
+
+| Artifact path | Version/scope | SHA-256 |
+|---|---|---|
+| org/springframework/spring-webmvc | 7.0.9 compile | 8f114c1461692c5e534e82b27de23b7fb23370db8dee7ce0c92d5106906c9555 |
+| org/thymeleaf/thymeleaf-spring6 | 3.1.5.RELEASE compile | fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b |
+| org/thymeleaf/thymeleaf | 3.1.5.RELEASE transitive compile | 4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2 |
+| org/attoparser/attoparser | 2.0.7.RELEASE transitive compile | 75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476 |
+| org/unbescape/unbescape | 1.1.6.RELEASE transitive compile | 597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c |
+| org/jsoup/jsoup | 1.23.2 test | e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003 |
+
+release source（同URLの`-sources.jar`）: Spring MVC7.0.9 SHA256 `c22ef47b861c6b9dffc9c57e425fe3f7391171b75dda4de11597b36cd306d39f`、Thymeleaf Spring6 3.1.5 SHA256 `935872ace7a59657bb84a8510252c98fd96cae4df7800df6706a6f79055d03df`。Servlet integrationは既存Security7.1.1 sourceのCsrfRequestDataValueProcessorも確認する。
+
+再現: repo root、既存JAVA_HOME/local repository指定で`./mvnw -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-web -am test-compile`を一回online実行。2026-09-09 02:15:57 JST exit0、raw log（非格納）SHA256 `53c61e92d0cc751b4538d282f37d1af24d21bc6690793ddcd93fc001e2761a6b`。以後`-o`。同条件の`org.apache.maven.plugins:maven-dependency-plugin:3.9.0:tree`は02:22:21 JST exit0、SHA256 `1cdbe2b2eb1117d2a3aaaced86cc76d93ccb51e6e87df78a093dbefa1b8306c3`。新推移依存は表のparser/escapeだけ、Enforcer一意性を維持。MVC/Menu PT結果は015のmenu-mvc-exploration.md/正式manifestへ記録する。全画面/本番bootstrap/Log backend固定/IT/STの完了を意味しない。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。

@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- NK-WEB-001; FUN-002/AUT-001..003; UI222/223; SS313/352; PG-D-115/PT-WEB-142..147. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">schubert NK</title>
+    <link rel="stylesheet" th:href="@{/css/schubert.css}">
+  </head>
+  <body>
+    <header class="topbar" th:fragment="topbar(topbar)">
+      <h1 th:text="${topbar.brand}">schubert NK</h1>
+      <div class="topbar-actions">
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a th:href="@{/}">メニュー</a>
+          <a th:href="@{/notifications}">通知</a>
+        </nav>
+        <span class="login-user" th:text="${topbar.username}"></span>
+        <span class="login-role" th:text="${topbar.role}"></span>
+        <form class="logout-form" th:action="@{/logout}" method="post">
+          <button type="submit">ログアウト</button>
+        </form>
+      </div>
+    </header>
+  </body>
+</html>

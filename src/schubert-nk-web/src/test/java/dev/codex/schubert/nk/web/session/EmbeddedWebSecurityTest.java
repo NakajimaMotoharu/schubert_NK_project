@@ -269,6 +269,16 @@ class EmbeddedWebSecurityTest {
         WebLogDatabaseFixture database,
         Optional<MqAuthenticationProvider> provider)
         throws Exception {
+      this(root, secureRandom, database, provider, false);
+    }
+
+    Server(
+        Path root,
+        boolean secureRandom,
+        WebLogDatabaseFixture database,
+        Optional<MqAuthenticationProvider> provider,
+        boolean menuMvc)
+        throws Exception {
       f = new Fixture(Objects.requireNonNull(database));
       f.clock.value = Instant.now();
       tomcat.setBaseDir(root.toString());
@@ -413,7 +423,19 @@ class EmbeddedWebSecurityTest {
                 }
               })
           .setAsyncSupported(true);
-      context.addServletMapping("/*", "fixture");
+      context.addServletMapping(menuMvc ? "/login" : "/*", "fixture");
+      if (menuMvc) {
+        var mvc =
+            new org.springframework.web.context.support.AnnotationConfigWebApplicationContext();
+        mvc.register(dev.codex.schubert.nk.web.config.WebMvcConfiguration.class);
+        var dispatcher = new org.springframework.web.servlet.DispatcherServlet(mvc);
+        var wrapper = Tomcat.addServlet(context, "mvc", dispatcher);
+        wrapper.setLoadOnStartup(1);
+        wrapper.setAsyncSupported(true);
+        // Menu/assets use real MVC; Login and error are explicit test fixtures, not production
+        // views.
+        context.addServletMapping("/", "mvc");
+      }
       Tomcat.addServlet(
               context,
               "error",
