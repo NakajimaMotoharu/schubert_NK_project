@@ -46,6 +46,18 @@ def main():
             or set(replacement_methods) != set(replacement_ids.values())):
         raise SystemExit("missing or nonpassing replacement regression")
     evidence = repo / "evidence/01_PT/006_NK-MSG-002/evidence"
+    bound_relative = "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml"
+    bound_report = source / bound_relative
+    bound_hash = next(f["sha256"] for f in validated["files"] if f["path"] == bound_relative)
+    if hashlib.sha256(bound_report.read_bytes()).hexdigest() != bound_hash:
+        raise SystemExit("certified bound execution report hash differs")
+    bound_suite = ET.parse(bound_report).getroot()
+    bound_methods = [c.get("classname") + "#" + c.get("name") for c in bound_suite.findall("testcase")]
+    bound_ids = {k: v for k, v in validated["testIdMethods"].items() if k.startswith("PT-IDEM-B")}
+    if (any(int(bound_suite.get(k, "0")) for k in ("errors", "failures", "skipped"))
+            or len(bound_methods) != 4 or len(bound_ids) != 4
+            or set(bound_methods) != set(bound_ids.values())):
+        raise SystemExit("missing or nonpassing bound execution regression")
     old = json.loads((evidence / "manifest.json").read_text())
     old_id = old["runId"]
     if not all(c.isalnum() or c == "-" for c in old_id):
@@ -55,6 +67,7 @@ def main():
         shutil.copyfile(evidence / "manifest.json", history)
     shutil.copyfile(report, evidence / relative)
     shutil.copyfile(replacement_report, evidence / replacement_relative)
+    shutil.copyfile(bound_report, evidence / bound_relative)
     for module in validated["modules"]:
         shutil.copyfile(source / "coverage" / (module + "-jacoco.csv"),
                         evidence / "coverage" / (module + "-jacoco.csv"))
@@ -62,13 +75,14 @@ def main():
                                         "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
         "programId": "NK-MSG-002", "programStatus": "IN_PROGRESS", "result": "REGRESSION_SLICE_PASS",
-        "currentReports": [relative, replacement_relative], "methods": methods + replacement_methods,
-        "testIdMethods": replacement_ids,
-        "testIdsPassed": ["PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04", "PT-IDEM-SR01", "PT-IDEM-SR02", "PT-IDEM-SR03"],
-        "relatedSsc": ["SSC-024", "SSC-027"], "relatedBug": [], "notRunCountedAsPass": 0,
+        "currentReports": [relative, replacement_relative, bound_relative], "methods": methods + replacement_methods + bound_methods,
+        "testIdMethods": replacement_ids | bound_ids,
+        "testIdsPassed": ["PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04", "PT-IDEM-SR01", "PT-IDEM-SR02", "PT-IDEM-SR03"] + list(bound_ids),
+        "relatedSsc": ["SSC-024", "SSC-027", "SSC-033"], "relatedBug": [], "notRunCountedAsPass": 0,
         "expectations": "Independent SS324 LP/JCE-HMAC plus production-DDL SQL fixtures; literal state, metadata, 29-byte storage-only ciphertext, count and retention. Missing returns empty, identity/body/key mismatches reject, and 100 read-only lookups succeed while another transaction holds the Inbox row lock. No production method generates expected HMAC or stored fixture.",
         "replacementExpectations": "Real PostgreSQL row lock and caller commit/rollback; exactly one of two concurrent old-snapshot replacements commits. Only ciphertext/key change; all 17 metadata columns including original completion/24h expiry stay equal. Independent LP/JCE-HMAC and SQL fixture, all metadata/cipher positions/missing/identity/null/JDBC faults; temporary bind arrays zeroed. Synthetic 29-byte ciphertext is storage-only, not a decryption oracle.",
-        "scope": "Current reports cover coordinator regression (11 methods) and Scenario-only snapshot replacement (3 methods). Other retained output belongs to historical runs and is not counted as newly certified program completion. Response decryption/reference validity, staged service/file replay, HTTP, cleanup protection BUG-014 and other NK-MSG-002 gates remain incomplete.",
+        "boundExpectations": "Independent SS324 LP/JCE-HMAC, literal 24-byte body and SQL PK/count/time expectations. Source PK is original for same-Message and different-Message same-token replay; original AES-GCM AAD decrypts while retry ID fails. Real unique races reread original PROCESSING source, 100 concurrent distinct Messages produce one execution/row/source. NULL/wrong PK, JDBC query/close, unknown key and HMAC mismatch reject. Legacy execute/one-query read-only inspect and Scenario snapshot replacement preserve metadata/retention and caller transaction ownership. Bound metadata grants no authorization.",
+        "scope": "Current reports cover coordinator regression (11 methods), Scenario-only snapshot replacement (3 methods) and saved-Message binding (4 methods). Other retained output belongs to historical runs and is not counted as newly certified program completion. User application replay/reference validation, HTTP, cleanup protection BUG-014 and other NK-MSG-002 gates remain incomplete.",
         "redaction": "Copied hash-verified sanitized JUnit metadata only; no properties, stdout, provider text, secrets or master content.",
     })
     (evidence / "logs" / (args.run_id + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
@@ -77,7 +91,7 @@ def main():
     (evidence / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (evidence / "checksums.sha256").write_text("".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  " + str(p.relative_to(evidence)) + "\n"
                                                      for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
-    print(json.dumps({"runId": args.run_id, "coordinatorTests": len(methods), "replacementTests": len(replacement_methods), "status": "REGRESSION_SLICE_PASS"}))
+    print(json.dumps({"runId": args.run_id, "coordinatorTests": len(methods), "replacementTests": len(replacement_methods), "boundTests": len(bound_methods), "status": "REGRESSION_SLICE_PASS"}))
 
 
 if __name__ == "__main__":

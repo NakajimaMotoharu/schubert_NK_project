@@ -27,7 +27,7 @@ public final class JdbcInboxCoordinator {
       "correlation_id,request_layout_id,request_version,owner_user_id,operation_token,"
           + "request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,"
           + "result_ref_id,result_ref_uuid,response_layout_id,response_version,"
-          + "response_body_encrypted,response_key_version,completed_at";
+          + "response_body_encrypted,response_key_version,completed_at,message_id";
   private static final String SELECT_BY_MESSAGE =
       "select " + SELECT_COLUMNS + " from schubert.request_inbox where message_id=?";
   private static final String SELECT_BY_TOKEN =
@@ -58,6 +58,15 @@ public final class JdbcInboxCoordinator {
 
   public InboxExecution execute(Connection connection, InboxRequest request, InboxHandler handler)
       throws SQLException {
+    return executeBound(connection, request, handler).execution();
+  }
+
+  /**
+   * Same algorithm with the actual saved Message PK for token replay AAD. No extra lookup or
+   * transaction ownership. SSC-033/PG-D-085; PT-IDEM-B01..B04.
+   */
+  public BoundInboxExecution executeBound(
+      Connection connection, InboxRequest request, InboxHandler handler) throws SQLException {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(handler, "handler");
@@ -127,7 +136,7 @@ public final class JdbcInboxCoordinator {
           "Inbox completion time precedes the request receipt time");
     }
     complete(connection, request.messageId(), completion);
-    return InboxExecution.executed(completion);
+    return new BoundInboxExecution(request.messageId(), InboxExecution.executed(completion));
   }
 
   /**
@@ -154,7 +163,7 @@ public final class JdbcInboxCoordinator {
     if (stored.isEmpty()) return Optional.empty();
     StoredRow row = stored.orElseThrow();
     validateMessageIdentity(row, request);
-    return Optional.of(existing(row));
+    return Optional.of(existing(row).execution());
   }
 
   /**
@@ -276,6 +285,7 @@ public final class JdbcInboxCoordinator {
             ? Optional.empty()
             : Optional.of(readCompletion(result));
     return new StoredRow(
+        requireValue(result.getObject("message_id", UUID.class)),
         requireValue(result.getObject("correlation_id", UUID.class)),
         requireValue(result.getString("request_layout_id")),
         requireValue(result.getString("request_version")),
@@ -368,7 +378,8 @@ public final class JdbcInboxCoordinator {
   private void validateMessageIdentity(StoredRow stored, InboxRequest request)
       throws InboxException {
     boolean sameIdentity =
-        stored.correlationId().equals(request.correlationId())
+        stored.messageId().equals(request.messageId())
+            && stored.correlationId().equals(request.correlationId())
             && stored.layoutId().equals(request.canonicalRequest().layoutId())
             && stored.layoutVersion().equals(request.canonicalRequest().layoutVersion())
             && stored.ownerUserId().equals(request.ownerUserId())
@@ -412,11 +423,12 @@ public final class JdbcInboxCoordinator {
         "Stored Inbox fingerprint key version is unavailable");
   }
 
-  private static InboxExecution existing(StoredRow row) throws InboxException {
+  private static BoundInboxExecution existing(StoredRow row) throws InboxException {
     if (row.processingState().equals("PROCESSING")) {
-      return InboxExecution.inProgress();
+      return new BoundInboxExecution(row.messageId(), InboxExecution.inProgress());
     }
-    return InboxExecution.replay(row.completion().orElseThrow());
+    return new BoundInboxExecution(
+        row.messageId(), InboxExecution.replay(row.completion().orElseThrow()));
   }
 
   private static void setOptionalLong(
@@ -442,6 +454,7 @@ public final class JdbcInboxCoordinator {
   }
 
   private record StoredRow(
+      UUID messageId,
       UUID correlationId,
       String layoutId,
       String layoutVersion,

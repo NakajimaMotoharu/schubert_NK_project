@@ -56,6 +56,7 @@ def main():
             scenario = (".api.persistence.Scenario" in suite.get("name", "")
                         or ".api.security.AuthenticationContextVerifierTest" in suite.get("name", "")
                         or ".api.idempotency.JdbcInboxCoordinatorTest" in suite.get("name", "")
+                        or ".api.idempotency.BoundInboxExecutionTest" in suite.get("name", "")
                         or ".api.idempotency.JdbcScenarioSnapshotReplacementTest" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
                         or ".api.storage." in suite.get("name", "")
@@ -104,6 +105,10 @@ def main():
                 raise SystemExit("refusing to overwrite archived JUnit evidence")
             report.rename(destination)
     required_methods = {
+        "PT-IDEM-B01": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+        "PT-IDEM-B02": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+        "PT-IDEM-B03": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+        "PT-IDEM-B04": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement",
         "PT-SCN-009-T01": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
         "PT-SCN-009-T02": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
         "PT-SCN-009-T03": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
@@ -155,6 +160,7 @@ def main():
                                   "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04",
                                   "PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04",
                                   "PT-IDEM-SR01", "PT-IDEM-SR02", "PT-IDEM-SR03",
+                                  "PT-IDEM-B01", "PT-IDEM-B02", "PT-IDEM-B03", "PT-IDEM-B04",
                                   "PT-SCN-009-T01", "PT-SCN-009-T02", "PT-SCN-009-T03", "PT-SCN-009-T04", "PT-SCN-009-T05", "PT-SCN-009-T06", "PT-SCN-009-T07",
                                   "PT-SCN-009-Q01", "PT-SCN-009-Q02", "PT-SCN-009-Q03", "PT-SCN-009-Q04",
                                   "PT-SCN-009-S01", "PT-SCN-009-S02", "PT-SCN-009-S03", "PT-SCN-009-S04", "PT-SCN-009-S05", "PT-SCN-009-S06",
