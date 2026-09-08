@@ -1,0 +1,883 @@
+{
+  "runId": "PT-ADM-20260908-13",
+  "programId": "NK-SCN-001",
+  "targetCommit": "945d310e0ea88952a44a4a18f7261df392846858",
+  "branch": "dev-admin",
+  "startedAt": "2026-09-08T18:59:32+09:00",
+  "completedAt": "2026-09-08T19:03:44+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 34,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1716
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 125
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 343
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 134
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 71
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 10
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 394,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 27785
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2124
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6126
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2027
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 922
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 198
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 76,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4155
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 353
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1002
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 329
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 150
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 38
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "scenarioMethods": [
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts",
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med025ConcurrentAndReplacedNamesRetainIndependentInodes",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med022NullSizeAndSegmentContractsFailBeforeContentRead",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med021NestedAndLargeAssetsReadExactBytesAndCloseChannels",
+    "dev.codex.schubert.nk.storage.ExistingFileAccessTest#med023LinksMissingAndWrongUnixAttributesNeverExposeContent",
+    "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets",
+    "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f01NativeOperationsPreserveExistingTargetsAndBoundAllErrors",
+    "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f01RejectsNullNamesTraversalUnknownAbiAndMissingSymbols",
+    "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f03OneOf100ConcurrentPublishersWinsWithoutReplacingWinner",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#bug036CallerMonitorCannotBlockAnyDirectoryOperation",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02ExistingDateIndependentChildLifetimeAndSafeIoFailures",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02RejectsNullRelativeRootDotSegmentsAndInvalidDates",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight",
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#a02FileRequiresOneLinkExactBytesAnd0640WithoutSpecialBits",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#u02AccountingRejectsUnknownSizeBoundsAndInvalidOwnershipOrLinkAttributes",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#u01SizeAccountingIncludesEmptyPartialPartsButReadyRequiresWholeRecords",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#a03ActualFileSymlinkHardLinkWrongPermissionAndOwnerRemainUntouched",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#a01NullInvalidAndBoundaryOsIdentityNamesAreExplicit",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#a02DirectoryTypePermissionsOwnershipAndMissingAttributesFailClosed",
+    "dev.codex.schubert.nk.storage.StorageRootLayoutTest#a05EveryPairRejectsEqualAndBothAncestorDirectionsWithoutStringPrefixConfusion",
+    "dev.codex.schubert.nk.storage.StorageRootLayoutTest#a05AllSixPathsRemainDistinctAndNeverLeakInDisplay",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#brokerSendAndAckFailuresReplayOneCommittedResult(Path)",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes(Path)",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#oneHundredSameMessagesGenerateOnceAndFinalAuthenticationWins",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#failuresAtEveryTransactionFileClockAndIdentityBoundaryNeverClaimSuccess",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest#r02Above200PublishesOnceAndProjectsEveryFileDescriptorField",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest#r01ZeroThrough200RecordsStayInlineAndNeverPublish",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest#r03NullPortFailureAndMismatchedDescriptorNeverFallbackOrRegenerate",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#changedMasterAndUnexpectedPublishedContentAreRejected",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#nullErrorsAndProviderFailuresPreserveBoundaries",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#originalContentRegeneratesAtAllFileBoundaries",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#interruptAndCallbackFailuresReleaseOnlyOwnedLocks",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#sameMessageAndHashCollisionSerializeButNeverShareResults",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#differentStripesRunTogetherAndCallerMonitorDoesNotBlock",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#fileMetadataAndDefiniteErrorsKeepExactReferencesAndCodes",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#sixResponsesAndInlineMaximumMatchIndependentWireAndCrypto",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#authenticatedTamperingAndIdentityMixupsAreNeverReplayed",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#oneHundredConcurrentRebuildsDoNotMutateFrozenResults",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#regeneratedDescriptorKeepsOriginalHeaderResultAndCompletionTime",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#nullInvalidCaptureAndClosedKeysPreserveBoundaries",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest#optionalAndNumericBoundariesPreserveFieldPresenceAndRequestValues",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest#sixLayoutsHaveIndependentCanonicalVectors",
+    "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest#malformedNullAndOutcomeBoundariesNeverBecomeQueries",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+    "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#completionRetentionStartsAtCompletionAndReplayNeverExtendsIt",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks",
+    "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
+    "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
+    "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005ThreeTextInputsNormalizeBeforeByteChecks",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn003EveryRouteMapAndUnknownPrefixHaveIndependentBytes",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn006007AggregateAndMetadataFaultsAreBounded",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn001GamesHaveIndependentBytesAndDoNotOwnTransaction",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn009AllRequestRoutesUseIndependentDatabaseOutcomes",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn002SpeakerAggregationIsByNameAndScopedBeforeCounting",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D02AllVoiceRowsAndDataHaveIndependentByteOffsets",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005ParallelReadsKeepOrderAndDoNotWriteMasterOrSessions",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn004FilesUseDisplayOrderTitleAndEntryNotAudioCount",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007NullReadonlyAndRequiredMetadataNeverBecomeSuccess",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D04NullMetadataSqlAndCompoundCloseFaultsStayBounded",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn002004CapacityLimitsNeverReturnTruncatedSuccess",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005SixFiltersWildcardsAndRepresentativeVoiceAreIndependent",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D03CountsExpandedRecordsAndBoundsSnapshotBeforeFileIo",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn006PagesAreClippedWithOneStatementAndEmptyIsOnePage",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D01NavigationAndBlankTitlesFollowCurrentDisplayContract",
+    "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007JdbcIntegerWideningKeepsSqlNullDistinct",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#currentDatabaseActorAndIdleUpdateUseCallerTransactionWithoutShortening",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#concurrentVerificationsSerializeUserThenSessionAndRemainUsable",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlNullAndUnknownRoleNeverBecomeAValidActor",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#unknownRevokedExpiredAndDisabledAllDenyWithoutTouch",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlFaultsAndSuppressedCloseErrorsAreBoundedAndDoNotCommit",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#nullAndAutocommitBoundariesRejectBeforeModifyingState",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightDoesNotWaitForRowLocksAndCannotAuthorizeAfterRevocation",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightBoundsNullContractsAndJdbcFailures",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightReturnsCurrentActorWithoutTouchOrTransactionOwnership",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w07GoldenFilesHaveJstDateExactDescriptorAndNewOnlySharedGroupPermissions",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w09UnconfirmedCleanupAndPublishedFailuresRetainFullQuotaAndNeverDeleteReady",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w08PartAndReadyCollisionsRetryThreeTimesWithoutDeletingExistingBytes",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w09PrepublicationFailuresCleanOnlyOwnedPartAndReleaseReservation",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w08NullBoundsAndCapacityRejectBeforeCreatingFiles",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w07ExistingDateIsValidatedNotRepairedAndDateBoundaryUsesJst",
+    "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest#w10ConcurrentDefaultCsprngPublishersHaveDistinctFilesAndExactSharedAccounting",
+    "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#presentButInvalidFilesAreNeverDeclaredMissing",
+    "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#nullNativeCallbackAndCloseFailuresNeverBecomeAbsence",
+    "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#realReadyFilesMissingNamesAndConcurrentReadsStayReadOnly",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c02InFlightAdmissionCanReachCriticalButNeverExhaustTheFiveGbDesignBudget",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c01EveryByteAndFileAlertBoundaryMatchesFixedThresholds",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c02RetainAndReleaseAreExactlyOnceIncludingUndeletedPartialFile",
+    "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest#w06ActualOne201And10000RecordFilesMatchIndependentLengthAndHash",
+    "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest#w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected",
+    "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest#w06NullEarlyEofZeroExtraBytesIoClosedAndAmbiguousEofFailWithoutClosing",
+    "dev.codex.schubert.nk.api.storage.TransferRootInspectionTest#a06NullClosedWrongOwnerGroupAndPermissionNeverModifyRoot",
+    "dev.codex.schubert.nk.api.storage.TransferRootInspectionTest#a06HeldRootRemainsOriginalWhenConfiguredPathIsReplacedBySymlink",
+    "dev.codex.schubert.nk.api.storage.TransferRootInspectionTest#a06OnlyProvenWritableExt4AndSecureDirectoryProviderAreAccepted",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p02ExistingPartReadyAndUnexpectedSecondPartAreNeverDeletedAsProbeOwnership",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p03UncertainPublicationChangedReadyAndCleanupFailuresPreserveOnlyRequiredEvidence",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p02NullInvalidDateClosedAndWrongAttributesNeverRepairConfiguredRoots",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p03CreateWritePublishVerifyAndCloseFaultsFailEvenWhenOwnedFilesCanBeCleaned",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p01ColdAndExistingDateUseActualPatternsGroupsNoReplaceAndLeaveOnlyEmptyDates",
+    "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest#p03NewDateInitializationAndSyncFailureCannotBecomeSuccessfulReadiness",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u03EnumerationOpenIteratorCloseAndNativeCloseFaultsNeverReturnPartialUsage",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u03RetainedDateSurvivesReplacementDuringEnumerationWithoutFollowingTheNewSymlink",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u02NullClosedUnknownDateAndNoncanonicalEntriesAreRejectedWithoutRepair",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u01EmptyAnd9000And10000AreCompleteBut10001NeverReturnsPartialCounts",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u02HeldMetadataRejectsWrongModesLinksAndInvalidReadySizeWithoutDeleting",
+    "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest#u01LiteralSizesAcrossDatesAndReplacedRootInitializeCapacityWithoutWriting",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest#rd05BadHashRecordAndNativeCloseFailuresReturnOnlyFixedClassificationAndReleaseFds",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest#rd05OneHundredConcurrentReadersHaveIndependentChannelsAndNeverModifyTheSharedReadyFile",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest#rd05NullClosedAndWrongOwnershipModeAndSizeAreDeniedWithoutRepair",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest#rd05SymlinkHardLinkDirectoryMissingAndUnlinkedHeldInodeAreDeniedAndNeverDeleted",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest#rd05ReadOnlyFileAdapterReturnsVerifiedRecordsWithoutChangingFileOrOwningRoot",
+    "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest#rd04ValidHashesDoNotPermitInvalidBytesOrSequenceAndBadHashPrecedesDecode",
+    "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest#rd04ZeroProgressReadSeekFailuresAndContentChangedAfterFirstHashAreRejected",
+    "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest#rd03GoldenRecordsThrough48000000BytesHaveBoundedBuffersAndImmutableOrderedValues",
+    "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest#rd04NullNonfreshClosedAndExactLengthHashFailuresNeverCloseCallerChannel"
+  ],
+  "testIdMethods": {
+    "PT-IDEM-B01": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+    "PT-IDEM-B02": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+    "PT-IDEM-B03": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+    "PT-IDEM-B04": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement",
+    "PT-SCN-009-T01": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
+    "PT-SCN-009-T02": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
+    "PT-SCN-009-T03": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
+    "PT-SCN-009-T04": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#oneHundredSameMessagesGenerateOnceAndFinalAuthenticationWins",
+    "PT-SCN-009-T05": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#failuresAtEveryTransactionFileClockAndIdentityBoundaryNeverClaimSuccess",
+    "PT-SCN-009-T06": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#brokerSendAndAckFailuresReplayOneCommittedResult(Path)",
+    "PT-SCN-009-T07": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes(Path)",
+    "PT-IDEM-SR01": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
+    "PT-IDEM-SR02": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
+    "PT-IDEM-SR03": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
+    "PT-SCN-009-G01": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#sameMessageAndHashCollisionSerializeButNeverShareResults",
+    "PT-SCN-009-G02": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#differentStripesRunTogetherAndCallerMonitorDoesNotBlock",
+    "PT-SCN-009-G03": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#interruptAndCallbackFailuresReleaseOnlyOwnedLocks",
+    "PT-SCN-009-F01": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#originalContentRegeneratesAtAllFileBoundaries",
+    "PT-SCN-009-F02": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#changedMasterAndUnexpectedPublishedContentAreRejected",
+    "PT-SCN-009-F03": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest#nullErrorsAndProviderFailuresPreserveBoundaries",
+    "PT-SCN-009-V01": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#realReadyFilesMissingNamesAndConcurrentReadsStayReadOnly",
+    "PT-SCN-009-V02": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#presentButInvalidFilesAreNeverDeclaredMissing",
+    "PT-SCN-009-V03": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest#nullNativeCallbackAndCloseFailuresNeverBecomeAbsence",
+    "PT-SCN-009-S06": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest#regeneratedDescriptorKeepsOriginalHeaderResultAndCompletionTime"
+  },
+  "crossProgramRegressionMethods": [
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#bug036CallerMonitorCannotBlockSharedDigest",
+    "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest#bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose"
+  ],
+  "testIdsPartial": [
+    "PT-SCN-001",
+    "PT-SCN-002",
+    "PT-SCN-003",
+    "PT-SCN-004",
+    "PT-SCN-005",
+    "PT-SCN-006",
+    "PT-SCN-007",
+    "PT-SCN-008",
+    "PT-SCN-008-F04",
+    "PT-SCN-009"
+  ],
+  "additionalTestsPassed": [
+    "PT-SCN-008-D01",
+    "PT-SCN-008-D02",
+    "PT-SCN-008-D03",
+    "PT-SCN-008-D04",
+    "PT-SCN-008-F01",
+    "PT-SCN-008-F02-CORE",
+    "PT-SCN-008-F03",
+    "PT-SCN-008-A01",
+    "PT-SCN-008-A02",
+    "PT-SCN-008-A03",
+    "PT-SCN-008-A04",
+    "PT-SCN-008-A05",
+    "PT-SCN-008-A06",
+    "PT-SCN-008-R01",
+    "PT-SCN-008-R02",
+    "PT-SCN-008-R03",
+    "PT-SCN-008-C01",
+    "PT-SCN-008-C02",
+    "PT-SCN-008-C03",
+    "PT-SCN-008-W01",
+    "PT-SCN-008-W02",
+    "PT-SCN-008-W03",
+    "PT-SCN-008-W04",
+    "PT-SCN-008-W05",
+    "PT-SCN-008-W06",
+    "PT-SCN-008-W07",
+    "PT-SCN-008-W08",
+    "PT-SCN-008-W09",
+    "PT-SCN-008-W10",
+    "PT-SCN-008-LIB01",
+    "PT-SCN-008-RD01",
+    "PT-SCN-008-RD02",
+    "PT-SCN-008-RD03",
+    "PT-SCN-008-RD04",
+    "PT-SCN-008-RD05",
+    "PT-SCN-008-U01",
+    "PT-SCN-008-U02",
+    "PT-SCN-008-U03",
+    "PT-SCN-008-P01",
+    "PT-SCN-008-P02",
+    "PT-SCN-008-P03",
+    "PT-AUT-007-R01",
+    "PT-AUT-007-R02",
+    "PT-AUT-007-R03",
+    "PT-AUT-007-R04",
+    "PT-IDEM-RO01",
+    "PT-IDEM-RO02",
+    "PT-IDEM-RO03",
+    "PT-IDEM-RO04",
+    "PT-IDEM-SR01",
+    "PT-IDEM-SR02",
+    "PT-IDEM-SR03",
+    "PT-IDEM-B01",
+    "PT-IDEM-B02",
+    "PT-IDEM-B03",
+    "PT-IDEM-B04",
+    "PT-SCN-009-T01",
+    "PT-SCN-009-T02",
+    "PT-SCN-009-T03",
+    "PT-SCN-009-T04",
+    "PT-SCN-009-T05",
+    "PT-SCN-009-T06",
+    "PT-SCN-009-T07",
+    "PT-SCN-009-Q01",
+    "PT-SCN-009-Q02",
+    "PT-SCN-009-Q03",
+    "PT-SCN-009-Q04",
+    "PT-SCN-009-S01",
+    "PT-SCN-009-S02",
+    "PT-SCN-009-S03",
+    "PT-SCN-009-S04",
+    "PT-SCN-009-S05",
+    "PT-SCN-009-S06",
+    "PT-SCN-009-G01",
+    "PT-SCN-009-G02",
+    "PT-SCN-009-G03",
+    "PT-SCN-009-F01",
+    "PT-SCN-009-F02",
+    "PT-SCN-009-F03",
+    "PT-SCN-009-V01",
+    "PT-SCN-009-V02",
+    "PT-SCN-009-V03"
+  ],
+  "testIdsNotRun": [
+    "PT-SCN-008-F02-ADMIT-ROOT",
+    "PT-SCN-008-F04-READINESS"
+  ],
+  "programStatus": "IN_PROGRESS",
+  "notRunCountedAsPass": 0,
+  "relatedSsc": [
+    "SSC-017",
+    "SSC-018",
+    "SSC-019",
+    "SSC-020",
+    "SSC-021",
+    "SSC-022",
+    "SSC-023",
+    "SSC-024",
+    "SSC-025",
+    "SSC-026",
+    "SSC-027"
+  ],
+  "relatedBug": [
+    "BUG-030",
+    "BUG-031",
+    "BUG-032",
+    "BUG-033",
+    "BUG-035",
+    "BUG-036",
+    "BUG-037",
+    "BUG-038",
+    "BUG-039",
+    "BUG-041"
+  ],
+  "relatedYkt": [
+    "YKT-027",
+    "YKT-028",
+    "YKT-029",
+    "YKT-031",
+    "YKT-032",
+    "YKT-033",
+    "YKT-034",
+    "YKT-035"
+  ],
+  "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
+  "rawLogSha256": "54ec31939264d405bec5384954a086428b08ddf4638b0b5e4ffbd05b9b9e055b",
+  "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
+  "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
+  "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. An internal exclusive-startup diagnostic probe now verifies real A/B file force/hash/group, no-replace collision and directory fsync; only confirmed diagnostic artifacts are cleaned, while uncertain/changed ready files or cleanup failures remain failed startup evidence. Internal staged Scenario service now connects read-only authentication/Inbox/query, DB-free file work and freshly authenticated final Inbox commit/close before reply. T01-T05 use explicit publisher/inspector doubles; T06 connects real PostgreSQL/Artemis send/ACK failures; T07 connects real retained-inode writer/inspector and PostgreSQL with independent 201/10000-record bytes/hash and ready preservation. Full root/exclusive startup composition/readiness and scan-to-service initialization, production registration, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
+  "files": [
+    {
+      "path": "coverage/api-jacoco.csv",
+      "sha256": "f9bccda479042e3c65deb21c6f98d7a100e63e4d17cd3c2aaac8ae869bc1aeeb"
+    },
+    {
+      "path": "coverage/characterization-jacoco.csv",
+      "sha256": "1d6b89462d14b3e330d237666f4e0ac9651e5d87beaab331e31b9abc465e1396"
+    },
+    {
+      "path": "coverage/protocol-jacoco.csv",
+      "sha256": "3396a1da06f2c8f63d7acf422544d9ad6493ce1ed71528a54b6f95d119ad9606"
+    },
+    {
+      "path": "coverage/storage-jacoco.csv",
+      "sha256": "b582b8f46e93ce0d197aa50dc7528b45011c32b47ecef687477af7f2620ec16b"
+    },
+    {
+      "path": "coverage/web-jacoco.csv",
+      "sha256": "3405ee4eff2346db9331020af29ed30c6a5baff1cf1d4eb6b2136e453492c916"
+    },
+    {
+      "path": "logs/BUG-030-YKT-027.md",
+      "sha256": "9345797f4e4a38ee417084a839cb7d1b00af9ab8cbf663d17bc38f1714414245"
+    },
+    {
+      "path": "logs/BUG-036-YKT-032.md",
+      "sha256": "19b3ae6034e7c99feab6a9c04ddf6802e27cb0ac03eff0d7d88711c236660db4"
+    },
+    {
+      "path": "logs/BUG-038-YKT-034.md",
+      "sha256": "d522ca374f444fa3207b9118101b4a6d2d001f639a4c1761aa5f08456f9e6463"
+    },
+    {
+      "path": "logs/BUG-039-YKT-035.md",
+      "sha256": "de6a5af5f20643d43167f17ffe1780eee1598a23672bb252fb3ebfdaf19e699b"
+    },
+    {
+      "path": "logs/BUG-041-collector.md",
+      "sha256": "d6d5217f07d55d3a6faef3ce0b8fe67db5c9db5a478d61f29410fc56b2df050b"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-01-summary.json",
+      "sha256": "7d9ad933a0c3c23cd05baed6b995e624d67bc46968e8f4bb265ef604910396dd"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-02-summary.json",
+      "sha256": "1b2d2e4f94d6bb20d869b86a8fba03a959d93c39d46a6e276891dc1db3f62250"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-04-summary.json",
+      "sha256": "204244d9aec713244435281c9456e2563d39fff003ddad3222d93812308d7fce"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-05-summary.json",
+      "sha256": "4d47fb13488f69cd971af923d3a4092e4565d76c5e5de68ba3ff80cf1f975e3b"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-06-summary.json",
+      "sha256": "d7e506ddf3dac32205796dcfb5ad837c7448ebf0f6b52144b929d0b15eac800c"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-07-summary.json",
+      "sha256": "110f1f290092c9c46ed7a9829d824b2ca4f5dbd34fbb02c16854519658dc1ba4"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-08-summary.json",
+      "sha256": "466ef9df1b51e4d5cc3c4991d1f1bcb7188a4d4ec9f1bffbe10b79b00ca238f0"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-09-summary.json",
+      "sha256": "a9af152601b1fa4141079f817cec00bf58936c2eaf09a0df2344f14794d14e91"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-10-summary.json",
+      "sha256": "24485b2813c6e25ea9bffebddf3ea7b606aa022079488e2338306d1692fa2df5"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-11-summary.json",
+      "sha256": "82738cae4fa92a8e9971282c64e37ace2ef9941b0c6d61ebf2fb1d4eb454b650"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-12-summary.json",
+      "sha256": "49db42a22373b1161c0f4261b7126d8d36e923296860314679d856bb4a0b3c0e"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-13-summary.json",
+      "sha256": "7671ed6f9becd8983025ffba98c947eff6dac69ab70f9b1a469629d57feddf79"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-summary.json",
+      "sha256": "0ba5cc00257d21aeca960a7894fdd2851d293cfed53bb64681d34cd168bd961b"
+    },
+    {
+      "path": "logs/PT-MED-20260908-02-summary.json",
+      "sha256": "b43710be3673afa571a19a6862d1f98ec67813c844526dad9594756936f986af"
+    },
+    {
+      "path": "logs/PT-MED-20260908-03-summary.json",
+      "sha256": "e8dc32b04bf447a01383bc8e64980bc1ea4a6d27db6f5aad10f5f6dfa680123c"
+    },
+    {
+      "path": "logs/PT-MED-20260908-04-summary.json",
+      "sha256": "85ac450f8e8f6fc2daa7d285fed9ad416398b7f940dd00d69940a00279599c32"
+    },
+    {
+      "path": "logs/PT-MED-20260908-05-summary.json",
+      "sha256": "c715a4c2891940cc67ec74a4ee522294b371de8d610e2397e502f0126d9ac236"
+    },
+    {
+      "path": "logs/PT-MED-20260908-06-summary.json",
+      "sha256": "f78e76756a91759073fd79d06e88fc4bc976271e9027ddba97a52222d18839cc"
+    },
+    {
+      "path": "logs/PT-MED-20260908-07-summary.json",
+      "sha256": "e4eb185da79e63a92559ae2ebc66a51e27ea41edc50e916c3f2809b17eabe1e3"
+    },
+    {
+      "path": "logs/PT-MED-20260908-08-summary.json",
+      "sha256": "b3edb9edbaac76d3a2f4e855326ccc7a6d3e4d1ee878d25d0372f5b78d718589"
+    },
+    {
+      "path": "logs/PT-MED-20260908-09-summary.json",
+      "sha256": "30a22223fd4870daf71c449cfdda819f80eed1b5b0a573689cc2fb21d79f34df"
+    },
+    {
+      "path": "logs/PT-MED-20260908-10-summary.json",
+      "sha256": "832d826dc88ccc3f287a498443ad50874db27d16fb89e7376e9ab33c336a227d"
+    },
+    {
+      "path": "logs/PT-MED-20260908-11-summary.json",
+      "sha256": "8f6bf7cf0afaf67a34a5ea785407b70eb6a87d9e2d1ac5669aa67ac63c5cb88a"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-01-summary.json",
+      "sha256": "ef51f89a1c84e06650c1937c5fd27712f9af1431d891022b8df10556f8fa3de8"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-02-summary.json",
+      "sha256": "c7870e7d53e51d5bbb99907c7460daac79fc439971b01a19f87c7859e1a68cfc"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-03-summary.json",
+      "sha256": "097faa235e31b4945233ef31a98aee74da1d238b6a0095e519cceef99b395ab1"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-05-summary.json",
+      "sha256": "dbd76046445d265ee788af32357b0d30f67ba2366a0b68efdae7470273926087"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-06-summary.json",
+      "sha256": "959ee568eceb3a134f494874c6a874052f67df92912dd02ea9af303a57895acb"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-07-summary.json",
+      "sha256": "d31da5d49df492bf94d8bbae8f89abede9f58e7f531e12c98c6d9b237c1dcfca"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-08-summary.json",
+      "sha256": "abec5643834285bb7d0f3bfd4ee4ca62ca5c3a13d8f7ee6e5724f712d21abf13"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-09-summary.json",
+      "sha256": "8dfc77846d822d071560796df69c7f5e105e10d3d3514fa9ffb728198fe72109"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-10-summary.json",
+      "sha256": "299e220c5391aada855f5b09e7211cfb6c46c8fc39f791e6f8ff8d3886f9093f"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-summary.json",
+      "sha256": "980966a2836017a1bde49f0c483428f189614d72d04cbf3348906ef2dd67b84a"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-superseded-junit/TEST-dev.codex.schubert.nk.api.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "6f0e5137da928ba2af996a1f25453288c654cc56be0c4bba85ee174c7fbcbd4c"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-superseded-junit/TEST-dev.codex.schubert.nk.api.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "21e3f7a1391aa16c0eb81443424060251c3941d6e509923a269ad60d7975eb0c"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-superseded-junit/TEST-dev.codex.schubert.nk.api.storage.StorageAttributeGuardTest.xml",
+      "sha256": "ff1bd36ce1c513cc4fcb5b00695c93a89db1d98b7c14e4d1e1a48c1e23c05ec8"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-superseded-junit/TEST-dev.codex.schubert.nk.api.storage.StorageRootLayoutTest.xml",
+      "sha256": "ad2195302108a72932c0dd22c7eef28d1b0396b9f805dcc6e06a7cec25f38509"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-12-summary.json",
+      "sha256": "49ae9d312a7c1ef0b1654fd91558774038fa80701eec87f64d5bc060ff28a194"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-13-summary.json",
+      "sha256": "268ebd7986b4f7b3fa56485c4c21a5cf16d7a85c2207542a5c1c88cad09e8fc0"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-14-summary.json",
+      "sha256": "191c75cc100197378b0e64d911c495990e88da2a91b35571bb250c89a685721d"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-15-summary.json",
+      "sha256": "9381fca7153b89ba21305a2549bfb16567a539608792ff8a153b3491871d7b70"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-16-summary.json",
+      "sha256": "d105752b32f8b53cf3ac8cda01800e55408c41bf750b2d5271743fa68d1a46f5"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-17-summary.json",
+      "sha256": "ac23851e9f02a4cf5809c876100afd1b2f8819fcc1f2a2a16e869fc1723dae43"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-18-summary.json",
+      "sha256": "d78c704875a400300f61a056fb8cb98942b88d72733e77be35d35d167c05aaa0"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-19-summary.json",
+      "sha256": "7cd4532a6ef3af63b79a7ea365baeb3d8418d596a5c477ede4085fea6916bba9"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-20-summary.json",
+      "sha256": "c69a5a36690782b577de928b0430c777a72e06171291ad65f5a87bd5fde1d599"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-23-summary.json",
+      "sha256": "64d1348ef05956aa3fb151114baf8e16bb66302261651de9cdf2b1f5d00cad10"
+    },
+    {
+      "path": "logs/SSC-027-internal-regeneration.md",
+      "sha256": "053d080f5817671c27930cecfad798b8573d8333ceb500e44cb7c8190ca4ddbb"
+    },
+    {
+      "path": "logs/SSC-027-staged-service.md",
+      "sha256": "44e1ad607dcac71329dc889f18b839620abb002d7a4bf8b0d0743a5dcc261b17"
+    },
+    {
+      "path": "logs/display-projection-audit.md",
+      "sha256": "ebb1d5cc13968d6513cefb181ed83de8bb6814805590ffcb8e06e6eb4aafd949"
+    },
+    {
+      "path": "logs/query-boundary-failures.md",
+      "sha256": "4ad6b7995b7b61dc42857428ddb42d01f60695681c2b5b4a89c04bc776f3e77a"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "04398fa27411ca62873d97eb67207c31586423b0f7ab03a30b9df0234331f749"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "a9c502417537f06106cc71d52233ecdffcf672ee02af56515919d9d86431c0a7"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "8f71547d24c695a9a241ecc26e9f605eb392b665b4efa4a8275b25bfb0406c68"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "618f5c92670f5b222cdb03a5404e5bb01190b1ab9ed765484b5b92fd5a0e877e"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "c984efc6ad640121a000f88477584356e143265d433e74dfdf49c5156157b701"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "90e262768be13baba466dc66036f1dd8fc00f4d0ad61d9be1812e963109aad5f"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "4ae7fc067ef7fc5ceb7ea1a8cdb6e95bfee39f13a7ffd060c8fa2b0559ce07c7"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "77aabf5af4aef82b3284160ab1e509b27bcd318fb14bde7c0e1abbc869027131"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "33be3b940cc3854672a01de9939e290ed5a9ca5e579d7d20063840702e0cfc21"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "7fe21207628d9043fc5598c0fe0043ac34cb6760f47545ebdb3d5ea3d9af3f92"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "89f49f89388e46710028aa3bb0380ffdedb00c1bf4a73283b9c7f7bb9295d9c6"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "e14aa31d75cd76f84581d0daf95314b8122a9ace8cbfe184d4e9d17e88a51546"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "ce38e58ed90594dd959ce6c243fb2aad5dc113ea12389bfe14d763d2f34ba860"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "15c903eaf5bd1f2850fc1bb53df57d3dc4a3d838e902fcb5e3ab36583bf2d98f"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "d09ce402d9bd63558a43e3ff55565124a265868d8f1eee161f340f05a434d449"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "fbe6e130077144fc29ff36b9d532da76d6aad090b46beee014353ee887febe30"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "13f9d7311974eefc890fe56cc4793be347edff4940460ae9bec0596d34c974d0"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "b36473f1049deccba18d3a88b928bf2ed6f71091a252234b215eedb32261b65d"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "7142830a09fff7ebf3632936b065c63aa7705871803775271724bfccb774d58f"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "89fda0028e83c4b67c20e4a4bdf62eadffa2d0017268dd1833d0c29e364af15f"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "c3bc45f978d10295e179ed807839fe702b28169b8f0886f5ca5f7d5f975e42b1"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "d0a956ed9df8d2ea0b872c2764bcadfd7031d44558653f75f0bcd4a0a2e98c27"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "05ba967a920ef3dea4f94e8685f522de15f63e2b4025f502b4c4f924869433b7"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "0ff3e37ea7446563f78b86b009d0d273e2ad259f73e2520e5b9ec6f86e4dbb65"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "6cd1b2bccbabeb781bb52715109c955e1a23324bc72058215ade165e803af636"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "df2c62b885c334ad6c007b83618c51841dbce6ac67c618c8be01ea137ac54fa8"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "e7b4e3121942ae56977d4aa98366642a7ca8be0d61b633ad57e3445889168c25"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "5d545bcda2a79587d591a15a2341bde06a479170010a540c92011f14f510bca2"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "70e4cc5be10f10c17ab5a8ac8932d8b752263410d22cc25740b2e9e29ef06a01"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "87925a9f93def5921e9228325aa38d5343553db808029779b57c024e5a8cacba"
+    }
+  ]
+}

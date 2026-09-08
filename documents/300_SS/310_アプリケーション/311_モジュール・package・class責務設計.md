@@ -1,6 +1,10 @@
 # モジュール・package・class責務設計
 
+SSC-028: Shared storageの既存保持directory/inodeへ、Asset adapter向け既存child/entryのread-only能力と正サイズfile属性照合を追加する。Transfer専用UUID/date/48MB入口は維持し、API/Webのnative実装複製やProtocolからfile I/Oを行わない。詳細はSS333 §7.2、PG-D-073/PT-MED-018～020。
+
 ## 1. 目的・追跡
+
+SSC-027具体化: `.api.application.scenario.ScenarioApplicationService`がSyncRequestProcessorとして内部段階処理を所有する。process/decode/guard→inspect（非更新認証/Inbox/query）→prepare（DB外file）→complete（再認証/通常Inbox/必要時descriptor暗号置換）→commit/close後replyの順。Private sealed Work/Preparedで新規query・確定error・既存snapshotを区別し、repository/storage実装を同classへ複製しない。JMS send/ACKは既存SyncRequestListener、root/鍵closeは起動所有者。single-instance/full root/readinessを実装するまで本番dispatcherへ登録しない。PT-SCN-009-T01～T07。
 
 Web Java、API Java、batch、固定長共通部品のMaven module、package、主要class、責務および依存禁止を定める。
 
@@ -13,8 +17,9 @@ Web Java、API Java、batch、固定長共通部品のMaven module、package、�
 | Module/artifact | 実行形態 | 責務 | 依存可能 | 依存禁止 |
 |---|---|---|---|---|
 | `schubert-nk-protocol` | Library jar | 256 byte header、64 layout record、codec、NFC/byte検査、共通result/error、descriptor model | Java標準API、test時だけJUnit | Spring MVC、JMS、JDBC、DB entity、HTTP model |
-| `schubert-nk-web` | Executable jar | MVC/Thymeleaf、HTTP validation、Spring Security、暗号化HTTP session、JMS request/reply、file配信、Web log outbox | protocol、Spring Web/Security/JMS/JDBC | 業務schema repository、業務状態更新、API module |
-| `schubert-nk-api` | Executable jar | 固定長request Consumer、認証・認可、application service、PostgreSQL業務schema、outbox/inbox、async worker | protocol、Spring JMS/JDBC/Security crypto | MVC/Thymeleaf、Browser response、Web technical table更新 |
+| `schubert-nk-storage`（SSC-021） | Library jar | Linux保持directory/inode、NOFOLLOW・非上書き公開、OS属性/root配置の低位契約 | Java25標準NIO/FFM、null annotation、testだけJUnit | Protocol業務model、Spring/JMS/JDBC、HTTP/DB model、認証・Inbox・quota業務 |
+| `schubert-nk-web` | Executable jar | MVC/Thymeleaf、HTTP validation、Spring Security、暗号化HTTP session、JMS request/reply、file配信、Web log outbox | protocol/storage、Spring Web/Security/JMS/JDBC | 業務schema repository、業務状態更新、API module |
+| `schubert-nk-api` | Executable jar | 固定長request Consumer、認証・認可、application service、PostgreSQL業務schema、outbox/inbox、async worker | protocol/storage、Spring JMS/JDBC/Security crypto | MVC/Thymeleaf、Browser response、Web technical table更新 |
 | `schubert-nk-batch` | Executable jar/oneshot | Backup検証、business/technical cleanup、transfer cleanup、Expiry保守、run記録 | Spring JDBC、PostgreSQL/Artemis管理client | HTTP公開、業務Consumer、任意table/Queue操作 |
 | Root project | Aggregator | Maven Wrapper、Java 25 toolchain、dependency/version、品質plugin | 上記module | Production sourceの直置き |
 
@@ -33,11 +38,16 @@ schubert-nk-batch      （protocolへ依存しない。Expiry message本文をde
 ```
 
 - WebとAPIは互いにcompile/runtime依存しない。
+- SSC-021: Web/API/batchのfile adapterだけがstorage libraryへ依存可能。Controller、application/domain、Protocolからstorageへの依存を禁止する。API/Web間のclass複製やProtocolへfilesystem実装を移す方法は採らない。既存API `.api.storage`から純粋な低位7classを`.storage`へ移し、業務writer/record codec接続/quota/readiness wiringはAPIへ残す。Native SPIのFD整数を公開service/HTTP/DB/電文/ログへ渡さない。
 - Protocolは外部frameworkから独立させ、同一jar hashをWeb/APIで使用する。
 - HTTP form/view model、DB row/entity、固定長layout recordは別classとし、mapperで変換する。
 - `controller -> web application facade -> messaging adapter -> protocol`の向きだけを許可する。
 - APIは`messaging adapter -> application service -> domain/persistence/file adapter`の向きとし、repositoryから上位層を呼ばない。
 - Batchはallowlist済みrepository/functionとOS command adapterだけを使用し、API serviceを流用して公開処理を起動しない。
+
+SSC-021の依存補足: Web/APIはprotocolとstorageをそれぞれ参照し、両libraryは互いにも依存しない。Batchは承認済み保守file操作に限りstorageを使用できる。Executable process数、HTTP/JMS経路、業務DB権限は変更しない。
+
+Storage package `.storage`はDirectoryCalls/LinuxDirectoryCalls、OwnedTransferDirectory、StorageIoException、StorageIdentity、StorageAttributeGuard、StorageRootLayoutを持つ。Class/operationはfile adapterから使える公開契約へ限定して可視化し、native symbol binding・entry FD実装・状態lockをprivateに保つ。必要なnative accessは利用processへ明示設定し、起動時にfail closedで検証する。
 
 ## 4. `schubert-nk-protocol`
 
@@ -120,6 +130,7 @@ ControllerはJDBC、JMS template、filesystem APIを直接呼ばない。Control
 | `.api.domain` | `AsyncJobState`, `Role`, `AccountStatus`, `NotificationType`, domain result | 業務状態・遷移。Framework annotationを含めない |
 | `.api.persistence` | 画面/aggregate別`*Repository`、`*RowMapper` | Parameterized SQL、row mapping、lock |
 | `.api.file` | `AssetResolver`, `MediaDescriptorFactory`, `LargeResultWriter`, `FileIntegrityVerifier` | Logical IDから許可root内fileを解決 |
+| `.api.storage` | `LinuxDirectoryCalls`, `OwnedTransferDirectory`, `StorageAttributeGuard`, `TransferCapacity` | SSC-019のAPI内部filesystem capability/属性/予約会計。`.api.file`の下位技術部品で、Controller/DB/JMS/HTTPへ依存しない |
 | `.api.error` | `ApiExceptionMapper`, `RetryClassifier`, `FatalProtocolHandler` | Result code、一時/恒久分類、DLQ後exit |
 
 ### 6.2 Handler規約

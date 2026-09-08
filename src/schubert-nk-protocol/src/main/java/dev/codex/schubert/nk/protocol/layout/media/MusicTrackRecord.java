@@ -10,7 +10,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts MTRRSP01. */
-public record MusicTrackRecord(String trackId,
+public record MusicTrackRecord(
+    String trackId,
     String title,
     String category,
     String section,
@@ -18,7 +19,8 @@ public record MusicTrackRecord(String trackId,
     long fileByteLength,
     Optional<String> pairKey,
     PairRole pairRole,
-    int displayOrder) implements PayloadRecord {
+    int displayOrder)
+    implements PayloadRecord {
   public MusicTrackRecord {
     Objects.requireNonNull(trackId, "trackId");
     Objects.requireNonNull(title, "title");

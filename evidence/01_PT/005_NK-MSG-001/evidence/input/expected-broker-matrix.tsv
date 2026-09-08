@@ -1,0 +1,7 @@
+address	queue	max_size_mib	max_messages	page_limit_mib	page_limit_messages	allowed_roles	redelivery_ms	max_attempts
+nk.sync.request	nk.sync.request.q	32	50	224	450	nk_web:S;nk_api:C;nk_ops:B	1000,5000,25000	4
+nk.sync.reply.web	nk.sync.reply.web.q	32	50	224	450	nk_web:C;nk_api:S;nk_ops:B	1000,5000,25000	4
+nk.async.work	nk.async.work.q	128	1000	896	9000	nk_api:CS;nk_ops:BS	1000,5000,25000	4
+nk.web.log	nk.web.log.q	64	1000	192	9000	nk_web:S;nk_api:C;nk_ops:B	1000,5000,25000	4
+nk.dead.letter	nk.dead.letter.q	128	1000	1920	9000	nk_web:S;nk_api:S;nk_ops:BCM	1000,5000,25000	4
+nk.expiry	nk.expiry.q	64	1000	960	9000	nk_mq_maintenance:BC;nk_ops:BCM	1000,5000,25000	4

@@ -29,6 +29,7 @@ Source/release/config/credential/data/log/runtimeの配置、環境差分、設�
 | `/srv/schubert-nk/staging/<run-id>` | migration user 0700 | 移行中asset/manifest、対象run限定 | Go/切戻し完了まで隔離 |
 
 Directoryはprovisioningで明示作成し、application起動時に不明rootを自動作成/chmodしない。
+SSC-020: Transfer rootはschubert-api:schubert-web 0750を維持する。APIは専用primary group＋schubert-web supplementary membershipで、新規作成した保持inodeだけをchgrpし、date0750/part0640へ確定する。既存date/part/readyのmode/groupを補正して受理しない。API/Web credentialとprivate runtimeの600境界を維持し、共有group追加を秘密fileの公開理由にしない。
 Asset/transfer/backup/log/Artemis/stagingを同一または相互配下、またはsymlink接続しない。
 
 ## 3. Release package構成
@@ -39,6 +40,7 @@ releases/<version>/
   api/schubert-nk-api.jar
   batch/schubert-nk-batch.jar
   lib/schubert-nk-protocol.jar
+  lib/schubert-nk-storage.jar
   db/migration/V*.sql
   config/templates/*.yml
   config/caddy/Caddyfile.template
@@ -55,6 +57,7 @@ releases/<version>/
 
 `RELEASE-MANIFEST.json`はapp/protocol/schema/config version、Git commit/tag、JDK/build tool/dependency/BOM、OS対応、
 全artifact hashを持つ。Release directory全fileを検証後にread-onlyにし、稼働中の上書きを禁止。
+SSC-021のstorage version/hashもmanifestへ記載し、Web/API（batch使用時も）で同一artifactを使用する。Executable内へ同梱する場合もSBOM/hashの一致を検査し、異なるnative能力実装を混在させない。
 
 ## 4. Config file・設定sourceの優先順
 
@@ -132,7 +135,7 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | `api-context-aes-current/previous` | API | `auth_sessions.context_ciphertext`暗号、key version付き |
 | `api-inbox-response-aes-current/previous` | API | Inbox replay response暗号、context keyと分離 |
 | `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |
-| `web-log-aes-current/previous` | Web/API ingest | Technical outbox暗号 |
+| `web-log-aes-current/previous` | Webのみ | Technical outbox保存・復号。API ingestへ配布しない（SSC-007） |
 | `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |
 | Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |
 

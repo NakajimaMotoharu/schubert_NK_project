@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts AUDREQ01. */
-public record AudioDescriptorRequestData(AudioId audioId,
-    ContentDisposition disposition) implements PayloadData {
+public record AudioDescriptorRequestData(AudioId audioId, ContentDisposition disposition)
+    implements PayloadData {
   public AudioDescriptorRequestData {
     Objects.requireNonNull(audioId, "audioId");
     Objects.requireNonNull(disposition, "disposition");

@@ -21,8 +21,7 @@ public record RouteListRequestData(GameCode gameCode) implements PayloadData {
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Game code", TypedFieldValues.enumValue(gameCode))));
+        Map.ofEntries(Map.entry("Game code", TypedFieldValues.enumValue(gameCode))));
   }
 
   @Override

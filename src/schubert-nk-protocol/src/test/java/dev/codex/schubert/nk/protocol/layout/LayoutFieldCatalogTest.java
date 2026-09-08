@@ -25,16 +25,14 @@ class LayoutFieldCatalogTest {
     assertEquals(389, catalog.fieldCount());
     assertEquals(expected, catalog.tsvRows());
     assertEquals(
-        expected,
-        LayoutFieldCatalog.parse(" \n" + fixture, LayoutRegistry.standard()).tsvRows());
+        expected, LayoutFieldCatalog.parse(" \n" + fixture, LayoutRegistry.standard()).tsvRows());
     assertEquals(
         4,
         catalog.all().stream()
             .filter(fields -> fields.dataFields().isEmpty() && fields.recordFields().isEmpty())
             .count());
     assertEquals("LGNREQ01", catalog.require("LGNREQ01").id().value());
-    assertEquals(
-        "WLGEVT01", catalog.require(new LayoutId("WLGEVT01")).id().value());
+    assertEquals("WLGEVT01", catalog.require(new LayoutId("WLGEVT01")).id().value());
     assertThrows(UnsupportedLayoutException.class, () -> catalog.require("ZZZREQ01"));
     assertThrows(NullPointerException.class, () -> catalog.require((String) null));
     assertThrows(NullPointerException.class, () -> catalog.require((LayoutId) null));
@@ -43,19 +41,32 @@ class LayoutFieldCatalogTest {
 
     List<FieldDefinition<?>> fields =
         catalog.all().stream()
-            .flatMap(layout ->
-                java.util.stream.Stream.concat(
-                    layout.dataFields().stream(), layout.recordFields().stream()))
+            .flatMap(
+                layout ->
+                    java.util.stream.Stream.concat(
+                        layout.dataFields().stream(), layout.recordFields().stream()))
             .toList();
     assertSame(
         String.class,
-        fields.stream().filter(field -> field.wireType() == WireType.TEXT).findFirst().orElseThrow().javaType());
+        fields.stream()
+            .filter(field -> field.wireType() == WireType.TEXT)
+            .findFirst()
+            .orElseThrow()
+            .javaType());
     assertSame(
         Long.class,
-        fields.stream().filter(field -> field.wireType() == WireType.NUMERIC).findFirst().orElseThrow().javaType());
+        fields.stream()
+            .filter(field -> field.wireType() == WireType.NUMERIC)
+            .findFirst()
+            .orElseThrow()
+            .javaType());
     assertSame(
         Boolean.class,
-        fields.stream().filter(field -> field.wireType() == WireType.BOOLEAN).findFirst().orElseThrow().javaType());
+        fields.stream()
+            .filter(field -> field.wireType() == WireType.BOOLEAN)
+            .findFirst()
+            .orElseThrow()
+            .javaType());
   }
 
   @Test
@@ -69,37 +80,59 @@ class LayoutFieldCatalogTest {
         () -> LayoutFieldCatalog.parse("LGNREQ01\tDATA\ttoo-few", registry));
     assertThrows(
         UnsupportedLayoutException.class,
-        () -> LayoutFieldCatalog.parse(row("ZZZREQ01", "DATA", "Name", "1", "1", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("ZZZREQ01", "DATA", "Name", "1", "1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "HEADER", "Name", "1", "1", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "HEADER", "Name", "1", "1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "1", "Z", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "1", "1", "Z", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "1", "X", "Z", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "1", "1", "X", "Z", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "384", "X", "F", "fixed"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "1", "384", "X", "F", "fixed"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("WLGEVT01", "DATA", "Other", "1", "2080", "X", "F", "fixed"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("WLGEVT01", "DATA", "Other", "1", "2080", "X", "F", "fixed"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "x", "1", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "x", "1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "0", "1", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "0", "1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "-1", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "1", "-1", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "", "1", "384", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "", "1", "384", "X", "M", "rule"), registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "1", "384", "X", "M", " "), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "1", "384", "X", "M", " "), registry));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -109,20 +142,16 @@ class LayoutFieldCatalogTest {
                 registry));
     assertThrows(
         LayoutValidationException.class,
-        () -> LayoutFieldCatalog.parse(row("LGNREQ01", "DATA", "Name", "2", "383", "X", "M", "rule"), registry));
+        () ->
+            LayoutFieldCatalog.parse(
+                row("LGNREQ01", "DATA", "Name", "2", "383", "X", "M", "rule"), registry));
   }
 
   @Test
   void layoutFieldsRejectWrongAreaGapLengthAndNull() {
     LayoutDefinition layout =
         new LayoutDefinition(
-            new LayoutId("ABCREQ01"),
-            1,
-            MessageKind.REQUEST,
-            InteractionKind.SYNCHRONOUS,
-            1,
-            0,
-            0);
+            new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 1, 0, 0);
     FieldDefinition<String> valid = field(FieldArea.DATA, 1, 1);
     LayoutFields fields = new LayoutFields(layout, List.of(valid), List.of());
     assertEquals("ABCREQ01", fields.id().value());
@@ -149,7 +178,7 @@ class LayoutFieldCatalogTest {
 
   private static String fixture() throws Exception {
     try (var input =
-            LayoutFieldCatalogTest.class.getResourceAsStream("/protocol/fields-ui234-236.tsv")) {
+        LayoutFieldCatalogTest.class.getResourceAsStream("/protocol/fields-ui234-236.tsv")) {
       if (input == null) {
         throw new AssertionError("field fixture missing");
       }

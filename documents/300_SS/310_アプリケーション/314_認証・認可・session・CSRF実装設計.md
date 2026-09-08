@@ -65,6 +65,10 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 
 ## 5. Login失敗・lock
 
+SSC-014: Usernameの表示入力はNFC/trim後1..64 UTF-8 byte、比較keyはLocale.ROOT lowercaseで生成しDB上限96byteとする（331）。U+0130×32は表示64byte/key96byteとなるため、比較keyのbyte数を表示制約へ代用しない。Login照合はkey、監査は元の正規化表示入力を使用し、wire/auditの64byteを維持する。User作成も同じ正規化factoryを使用する。JDK更新時はUnicode scalarの最大増幅3/2と文脈依存lowercaseを回帰する。
+
+SSC-013: 同Message ID再送は324 §6.1の匿名Inbox保存結果を返し、以下のpassword照合/counter/発行を再実行しない。成功は初回応答snapshotとAUTH_SESSION参照の整合検査後0200、失敗は初回result/retryを維持。Replayはactive認証・権限付与・idle延長ではない。
+
 ### 5.1 API transaction
 
 | Step | 処理 |
@@ -78,6 +82,12 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 | 6 | SECURITY auditを同transactionで保存してcommit |
 
 User不存在でもIP制御と同程度の処理経路を取り、timing/responseで存在を開示しない。DB/MQ timeoutは`9000`であり失敗counterを増やさない。
+
+#### 5.1.1 失敗窓とlockの境界（SSC-009）
+
+現行互換を維持し、USER/IPとも`now > window_started_at + 15分`のstrict超過で窓外resetする。終了時刻の一致は旧窓へ加算する。窓の開始が未設定なら初回count=1とする。これは`locked_until > now`のlock有効性とは別条件であり、lock終了一致では照合を許可する。その照合が失敗して旧窓の閾値へ到達した場合は新たな15分lockを設定する。失敗回数が閾値へ到達した当該要求から`0106`を返し、次の要求までlock表示を遅らせない。
+
+根拠はUI226/234の15分窓・閾値と未承認差分禁止、現行`LoginAttemptService.isExpired/recordFailure`および`LoginAuthenticationFailureHandler`。BUG-021/YKT-018の固定Clock比較で終了±1ns/一致を検証する。DB精度では±1μs/一致を検証し、Current baselineとDIF allowlistは変更しない。
 
 ### 5.2 Retry-After
 
@@ -113,6 +123,12 @@ QA-044/UIC-004で確定したとおり、現行は設定と異なり3 sessionが
 5. 機能role/ownerはApplication Serviceでも対象rowと照合する。
 
 失効・期限切れは`0102`、DB障害はdeny closedで`9000`。Raw/hash/ciphertextをlogしない。
+
+### 6.3 Logout・管理失効（SSC-011）
+
+LOGREQ01だけは312 §4.2の失効専用lookupとし、通常のactive verifierによる先行拒否をしない。User→session lock、既失効なら元のrevoked_at/0200、未失効の有効contextだけLOGOUT/0000。idleを延長せず、既失効への再要求は時刻/reasonを上書きしない。管理の全失効はADMIN認可済みのcaller transaction内でtarget Userをlock後、未失効sessionを全件対象とし、DISABLED/PASSWORD_RESET/ADMINの閉じたreasonを保存する。更新数0でも既失効rowの時刻は維持する。更新と監査の途中失敗はcallerが全rollbackする。
+
+SSC-015: Logoutのowner付きInboxと保存snapshot/元失効参照は324 §6.2を正とする。Wireにclient IPがないLogout/管理失効ではAPI監査remote_addressをSQL NULLとし、Login時の過去IPやloopbackを現在のremoteとして捏造しない。Loginとそれに伴うREPLACEDは当該Loginの検証済みIPを保存する。remoteは351 §3.1の任意項目であり、HTTP側の現在IPはWeb REQUEST/SECURITY logの責務とする。いずれもsession識別子を監査へ出さない。
 
 ## 7. HTTP session
 
@@ -180,6 +196,8 @@ Web sessionで関連付けて保存せず、APIのHMAC fingerprintを正とす�
 
 ### 9.2 Matrix
 
+SSC-031: User管理更新では312 §6/332 §12の認証前lock preludeを適用する。非lockingで見つけたcontext ownerは候補に過ぎず、User群昇順lock後にsession ownerをlock下で再照合し、通常verifyと最新ADMIN認可を必ず行う。Raw context/候補IDをログや利用者応答へ出さない。単一transactionの通常verifyによるidle延長とcommand/critical audit/Inboxのatomicityを維持し、事前lookupやWeb roleで認可を代替しない。
+
 | 操作 | USER | ADMIN | API条件 |
 |---|:---:|:---:|---|
 | Scenario/audio/video/music | ○ | ○ | 有効context |
@@ -213,11 +231,13 @@ next attempt/expiry、error codeだけを保存する。Backoffは5秒、30秒�
 | Event | 必須field | 禁止field |
 |---|---|---|
 | Login success/failure/lock | request ID、username入力のbounded識別、remote、reason code、result | Password、hash、context |
-| Session issue/revoke/expiry | actor、session internal UUID、reason、時刻 | raw/hash/ciphertext |
+| Session issue/revoke/expiry | actor/対象user、message/correlation、reason、時刻 | session ID/internal UUID/raw/hash/ciphertext |
 | CSRF/authorization deny | actor optional、method/path、request ID、rule ID | CSRF token、query値 |
 | User status/role/password | actor/target、before/after（password除外）、token fingerprint ID | Password/hash/token raw |
 
 Username不存在は内部reason codeを権限制限logへ記録できるが、利用者messageとmetric labelでは区別しない。
+
+SSC-010: Session識別子の機密除外は351 §4を正とする。Login発行はLOGIN_SUCCEEDED、最大2件制御の各REPLACEDはSESSION_REVOKEDを同じtransactionで保存する。Logout/管理全失効もSESSION_REVOKEDと閉じたreason、結果codeで記録し、失効日時はDB列に保持する。新規失効1行につき監査1行、冪等Logout要求は0200監査1行（Inbox再送は元結果のみで重複監査しない）。監査失敗時にsessionだけcommitすることは禁止する。
 
 ## 13. SS設計判断
 

@@ -51,9 +51,12 @@ public record CommonHeader(
     if (headerLength != LayoutDefinition.HEADER_LENGTH) {
       throw new LayoutValidationException("header length must be 256 bytes");
     }
-    if (dataLength < 0 || dataLength > 999_999
-        || recordLength < 0 || recordLength > 999_999
-        || recordCount < 0 || recordCount > 999_999) {
+    if (dataLength < 0
+        || dataLength > 999_999
+        || recordLength < 0
+        || recordLength > 999_999
+        || recordCount < 0
+        || recordCount > 999_999) {
       throw new LayoutValidationException("declared length/count is outside its six-digit range");
     }
     if (recordLength == 0 && recordCount != 0) {
@@ -88,9 +91,10 @@ public record CommonHeader(
   private static int calculateTotal(int dataLength, int recordLength, int recordCount) {
     final int total;
     try {
-      total = Math.addExact(
-          LayoutDefinition.HEADER_LENGTH,
-          Math.addExact(dataLength, Math.multiplyExact(recordLength, recordCount)));
+      total =
+          Math.addExact(
+              LayoutDefinition.HEADER_LENGTH,
+              Math.addExact(dataLength, Math.multiplyExact(recordLength, recordCount)));
     } catch (ArithmeticException exception) {
       throw new LayoutValidationException("header length calculation overflow", exception);
     }
@@ -125,15 +129,14 @@ public record CommonHeader(
   }
 
   private static void validateAuthentication(
-      LayoutId layoutId,
-      MessageKind kind,
-      Optional<AuthenticationContext> authenticationContext) {
+      LayoutId layoutId, MessageKind kind, Optional<AuthenticationContext> authenticationContext) {
     boolean mustBeAbsent =
         kind == MessageKind.EVENT
             || layoutId.value().equals("LGNREQ01")
             || layoutId.value().equals("LGNRSP01");
     if (mustBeAbsent == authenticationContext.isPresent()) {
-      throw new LayoutValidationException("authentication context presence violates the layout profile");
+      throw new LayoutValidationException(
+          "authentication context presence violates the layout profile");
     }
   }
 

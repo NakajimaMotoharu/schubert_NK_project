@@ -30,7 +30,7 @@ Controller
        -> wait reply
   -> API SyncRequestListener
        -> InboundMessageGuard（property/header/length/layout）
-       -> Login以外: AuthenticationContextVerifier
+       -> Login: 匿名Inbox、Logout: 失効専用lookup（§4.2）、その他: AuthenticationContextVerifier
        -> InboxCoordinator.execute()
             -> LayoutHandler.handle()
                  -> @Transactional ApplicationService
@@ -70,6 +70,12 @@ UIの「manual ACK」は、framework自動ACKではなくlistenerがJMS commit�
 Username・client address・NFC後passwordのexternal-key HMACを照合し、Inbox、失敗counter、auth session、暗号化response
 snapshotを同一PostgreSQL transactionで確定する。これによりDB commit後のJMS再配送で失敗counterやsessionを二重更新しない。
 
+#### 3.3.1 Scenario認証事前確認（SSC-023）
+
+`AuthenticationContextVerifier.inspectReadOnly(connection, context, now)`は、caller所有の明示read-only transactionでDBのsession/Userを1つのJOIN SELECTにより参照する。未知context、revoked、expires_at <= now、非ACTIVEを0102、必須列NULL/未知role/JDBC故障を9000型として拒否する。通常`verify`と同じrow判定を使うが、FOR UPDATE、idle延長、commit/rollback/connection closeは行わない。autoCommitまたはreadOnly=falseを拒否する。
+
+このactorは参照snapshot取得前の事前確認だけであり、通常requestの最終認証や永続的な権限証明の代替ではない。333のfile I/O前にsnapshot transactionをcommitし、I/O後の最終短write transactionでは新しいstage時刻で通常`verify`を実行し、現在のowner/roleを再検証してからInbox/responseを確定する。途中の失効/期限切れ/無効化を事前actorで迂回しない。File I/O中のrow lock/DB transaction保持は禁止する。最終Inbox・再送・file再生成を含むservice接続は独立したPT gateとする。
+
 ### 3.4 Crash matrix
 
 | Crash point | DB | Reply/JMS ACK | Recovery |
@@ -105,6 +111,8 @@ Password `char[]`はencode照合直後にzero fillする。Login Message ID重�
 
 `ContextRevocationRetrier.retryDue(Instant now, int limit)`はdue rowを`FOR UPDATE SKIP LOCKED`で最大100件取得し、成功またはAPI expiry確認後だけ削除する。
 
+SSC-011: LOGREQ01は通常のactive context verifierを前置しない。失効専用serviceが同じraw hashでUser→sessionの順にlockし、既失効ならaccount状態/期限に関係なく元の失効時刻と0200だけを返す。この経路からactorを業務認可へ渡さず、idle延長もしない。未失効はaccount ACTIVEかつexpires_at>nowだけをLOGOUTへ更新し0000、未知/期限切れ/無効accountは0102、DB障害は9000。初回・冪等成功の監査もcaller transactionに参加する。
+
 ## 5. 参照・検索処理
 
 | Service.method | 入力 | 戻り値 | Transaction/例外 |
@@ -121,7 +129,17 @@ Scenario large-resultはDB cursor/rowをfileへ書く間に長時間transaction�
 
 ## 6. User管理更新
 
+SSC-031（管理更新の認証前lock prelude）: UCR/UST/URL/UPW/ULKは通常verifyを最初に呼ばない。context hashの候補user IDを非lockingでlookupし、減員し得るUST無効化/URL USER化だけadvisory 71419601を取得する。その後、候補actor、target（作成はなし）、減員時の全active ADMINを一つのSELECTでUser ID昇順FOR UPDATEする。当該context sessionをlockし、ownerが候補と同じことを確認してから通常verify（有効性/最新role/idle更新）とADMIN認可を実施し、続いてInbox/業務commandへ入る。候補lookupだけを認証許可にしない。Owner変化/不整合はrollbackする。すべて同じcaller write transactionであり、取得済みactor/targetをcommandが再lockしても順序を逆転しない。UCRは既存actorを先にlockし新UserをINSERTする。非管理・参照requestの既存verify順は変更しない。
+
 ### 6.1 Method
+
+SSC-034（拒否監査のidentity境界）: `AdminCommandAuthenticator.verifyIdentity`はSSC-031の候補lookup/必要advisory/User昇順/session再照合/通常verifyを同じcaller write transaction内で完了し、最新DB identityを返す。候補IDのまま返さず、USERをADMIN許可にしない。旧verifyはこのidentity取得後に既存ADMIN認可を行う互換wrapperとする。
+
+`UserMutationApplicationService`はidentity取得後にADMINを判定し、USERなら351のAUTHORIZATION_DENIED/SECURITY（actor/role/layout/最小target/result0103）を同transactionへ記録してcommitし、Inbox/業務へ入らない。認証失効0102はactorを推測せず欠落として最小拒否監査し、Inbox/業務へ入らない。拒否監査INSERT/close/commit不成立を拒否完了にせず9000型で再試行対象とする。
+
+ADMINは7日保持のowner/token/HMAC Inboxから新規だけUserCommandServiceへ入り、User/全session失効/critical audit/暗号結果を一括commitする。保存replayはPG-D-086のref/version/暗号検証を同transactionで完了し、INBOX_REPLAYED監査を追加する。Token payload不一致は既存結果を返さず0105/SECURITY WARNを記録し新Inboxを作らない。同Message異identityはPROTOCOL_REJECTED監査を確定してから恒久protocol拒否を通知する。DB/監査異常は全rollback、一度commit済みの結果はJMS reply/send/ACK失敗後も再更新しない。
+
+ResponseはDB commitとConnection closeが正常完了した後だけ新ID/correlation/context/時刻で構築する。User更新/確定業務error以外の0102/0103/異token0105はresponse snapshotへ保存せず、再受信時に最新認証/HMACを再評価する。外側JMS listenerがreply送信とACKを所有し、このserviceはJMSをcommitしない。HTTP・全layout登録/起動・IT/STは別gate。
 
 | Method | Command | 成功結果 | Lock/監査 |
 |---|---|---|---|

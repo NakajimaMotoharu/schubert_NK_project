@@ -10,8 +10,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts NTCRSP01. */
-public record NotificationCancelResponseData(Optional<NotificationState> updatedState,
-    Optional<Instant> cancelledAt) implements PayloadData {
+public record NotificationCancelResponseData(
+    Optional<NotificationState> updatedState, Optional<Instant> cancelledAt)
+    implements PayloadData {
   public NotificationCancelResponseData {
     Objects.requireNonNull(updatedState, "updatedState");
     Objects.requireNonNull(cancelledAt, "cancelledAt");

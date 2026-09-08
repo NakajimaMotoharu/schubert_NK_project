@@ -7,9 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts LGNREQ01. */
-public record LoginRequestData(String username,
-    String password,
-    String clientAddress) implements PayloadData {
+public record LoginRequestData(String username, String password, String clientAddress)
+    implements PayloadData {
   public LoginRequestData {
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(password, "password");

@@ -1,0 +1,280 @@
+{
+  "runId": "PT-ADM-20260908-05",
+  "targetCommit": "10e08836025a10529bd7f89a53cf1564c9e6bbaa",
+  "branch": "dev-admin",
+  "startedAt": "2026-09-08T16:22:25+09:00",
+  "completedAt": "2026-09-08T16:26:01+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 34,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1716
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 125
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 343
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 134
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 71
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 10
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 344,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 22455
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1739
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5003
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1663
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 760
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 162
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 76,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4155
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 353
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1002
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 329
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 150
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 38
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "0c1380daea7b15e4bb87f408a8d166e1c1a8ff54c75d3c4780f79917262d0585",
+  "programId": "NK-ADM-001",
+  "programStatus": "IN_PROGRESS",
+  "tests": {
+    "program": 27,
+    "reactor": 575
+  },
+  "testIdMethods": {
+    "PT-ADM-001": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
+    "PT-ADM-002": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm002DetailProjectsActorsTimesAndActiveSessions",
+    "PT-ADM-003": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm003DisabledAndLockBoundariesUseOneFixedInstant",
+    "PT-ADM-004": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm004AuthorizationNullAndInputContractsRejectBeforeSql",
+    "PT-ADM-005": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+    "PT-ADM-006": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm006CapacityAndPageMetadataRejectTruncation",
+    "PT-ADM-007": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
+    "PT-ADM-008": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+    "PT-ADM-009": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+    "PT-ADM-010": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+    "PT-ADM-011": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
+    "PT-ADM-012": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+    "PT-ADM-013": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    "PT-ADM-014": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm014CreateNormalizesAsciiUsersAndIndependentlyVerifiesPassword",
+    "PT-ADM-015": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm015StatusChangesAtomicallyRevokeSessions",
+    "PT-ADM-016": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm016RoleChangesProtectSelfAndLastActiveAdmin",
+    "PT-ADM-017": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm017PasswordResetConsumesSecretsAndRevokesEverySession",
+    "PT-ADM-018": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm018UnlockUsesExactExpiryAndNoopVersionRules",
+    "PT-ADM-019": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm019ExpectedVersionDuplicateAndCapacityAreBusinessResults",
+    "PT-ADM-020": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm020SqlRevocationAndAuditFailuresRollbackTogether",
+    "PT-ADM-021": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm021NullPolicyAndHashFailuresAlwaysErasePasswords",
+    "PT-ADM-022": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm022ConcurrentMutationsPreserveAdminAndVersionInvariants",
+    "PT-ADM-023": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm023ResultAndAuditProjectionsContainOnlyApprovedFields",
+    "PT-ADM-024": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm024DecodeAndCanonicalMatchIndependentWireAndHmac",
+    "PT-ADM-025": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm025DispatchUsesTheSameDecodedFieldsInRealTransactions",
+    "PT-ADM-026": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm026MalformedNullAndClosedRequestsFailWithoutSecretLeak",
+    "PT-ADM-027": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm027ConcurrentIndependentRequestsNeverShareIdentityOrBuffers"
+  },
+  "methods": [
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm003DisabledAndLockBoundariesUseOneFixedInstant",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm006CapacityAndPageMetadataRejectTruncation",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm002DetailProjectsActorsTimesAndActiveSessions",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm004AuthorizationNullAndInputContractsRejectBeforeSql",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm015StatusChangesAtomicallyRevokeSessions",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm014CreateNormalizesAsciiUsersAndIndependentlyVerifiesPassword",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm020SqlRevocationAndAuditFailuresRollbackTogether",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm023ResultAndAuditProjectionsContainOnlyApprovedFields",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm021NullPolicyAndHashFailuresAlwaysErasePasswords",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm018UnlockUsesExactExpiryAndNoopVersionRules",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm017PasswordResetConsumesSecretsAndRevokesEverySession",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm019ExpectedVersionDuplicateAndCapacityAreBusinessResults",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm016RoleChangesProtectSelfAndLastActiveAdmin",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm022ConcurrentMutationsPreserveAdminAndVersionInvariants",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm024DecodeAndCanonicalMatchIndependentWireAndHmac",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm027ConcurrentIndependentRequestsNeverShareIdentityOrBuffers",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm026MalformedNullAndClosedRequestsFailWithoutSecretLeak",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm025DispatchUsesTheSameDecodedFieldsInRealTransactions"
+  ],
+  "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
+  "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
+  "scope": "UserQueryRepository search/detail, redacted query exception, SSC031 administrative authentication prelude, and definite UserCommandService mutations/critical audit/session revocation in a caller-owned transaction. Outer Inbox/HMAC/replay/denial audit registration, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
+  "administrativeAuthentication": "PT-ADM-008..013 / SSC-031 / PG-D-082: actual candidate owner lookup, required-only advisory71419601, ordered User union locks, session owner recheck and normal current ADMIN authentication/idle touch. All mutation kinds, reciprocal target and reducing/nonreducing overlap, changed current role/revocation/expiry/owner, independent NOWAIT/advisory/SQL time postconditions, null/row/JDBC/close/clock failures with caller rollback, 100 concurrent authentications. Candidate lookup never authorizes. Full command/Inbox registration remains pending; SSC031 is not closed by this component alone.",
+  "administrativeCommands": "PT-ADM-014..023 / PG-D-083: actual PG/Flyway/grants and SSC031 prelude; ASCII username NFC/trim and independent JCA PBKDF2 with parsed stored salt, explicit USRMUT24 golden bytes. Create/status/role/password/unlock SQL postconditions, version/sequence limits and duplicate savepoint recovery, exact microsecond lock/no-op rules, all unrevoked sessions including expired, before/after allowlist audit and partial audit/revocation rollback. Public JDBC fault projections assert fail-closed null/unknown/count/row/resource contracts without private reflection. Password arrays zeroed on success/denial/boundary/encoding faults. 100 same-version contenders, reciprocal ADMIN reduction and 100 distinct targets assert serialized membership/version/audit results. Full message dispatcher/Inbox/HMAC/HTTP registration is still pending.",
+  "mutationRequests": "PT-ADM-024..027 / SSC032 / PG-D-084: independent UI236 byte-offset input and hand-written LP/JCE HMAC expected fields for all five layouts, seven prelude kinds, N12/N9 bounds, independent role/enabled pairs, original-case/key binding, password NFC/256 bytes, separate token/header identity. Same decoded fields drive actual prelude/command/SQL postconditions. Strict wire errors remain protocol errors; database-dependent password/username conflict remains business0100 and duplicate name0105 (BUG048 oracle boundary correction). Independent canonical/request ownership, readOnly command failure, public close and direct test-only security observation of zeroed private buffer, closed-use denial, 100 independent concurrent operations. No private method invocation or coverage-only reflection; no production secret accessor added. Outer Inbox/replay/JMS/HTTP remains pending.",
+  "relatedBug": [
+    "BUG-045",
+    "BUG-046",
+    "BUG-047",
+    "BUG-048"
+  ],
+  "relatedSsc": [
+    "SSC-031",
+    "SSC-032"
+  ],
+  "relatedYkt": [
+    "YKT-040",
+    "YKT-041",
+    "YKT-042",
+    "YKT-043"
+  ],
+  "preventionReferences": [
+    "BUG-030/YKT-027 numeric null",
+    "BUG-031/YKT-028 suppressed close redaction",
+    "BUG-044/YKT-039 timestamp Instant oracle"
+  ],
+  "notRunCountedAsPass": 0,
+  "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr, provider row dumps, raw identifiers or credentials."
+}

@@ -59,12 +59,17 @@ public final class MediaDescriptorValidator {
         || fileName.indexOf('\\') >= 0
         || fileName.indexOf('"') >= 0
         || fileName.indexOf('\'') >= 0) {
-      throw new IllegalArgumentException("media file name contains a forbidden header/path character");
+      throw new IllegalArgumentException(
+          "media file name contains a forbidden header/path character");
     }
   }
 
   private static void validateMime(MediaDescriptor descriptor) {
     String extension = extension(descriptor.fileName());
+    // BUG-040/YKT-036: display metadata must not hide a different storage format.
+    if (!extension.equals(extension(descriptor.storageRelativePath()))) {
+      throw new IllegalArgumentException("media storage and display extensions differ");
+    }
     String expectedMime =
         switch (descriptor.mediaType()) {
           case AUDIO -> extension.equals(".ogg") ? "audio/ogg" : null;
@@ -100,7 +105,8 @@ public final class MediaDescriptorValidator {
         || !Normalizer.isNormalized(value, Normalizer.Form.NFC)
         || value.getBytes(StandardCharsets.UTF_8).length > maximumBytes
         || value.endsWith(" ")) {
-      throw new IllegalArgumentException(fieldName + " is empty, non-canonical, or over its byte limit");
+      throw new IllegalArgumentException(
+          fieldName + " is empty, non-canonical, or over its byte limit");
     }
     for (int index = 0; index < value.length(); index++) {
       char character = value.charAt(index);

@@ -83,21 +83,26 @@ final class CharacterizationEnvironment implements AutoCloseable {
   }
 
   long queryLong(String sql) throws Exception {
-    try (Connection connection = database(); Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery(sql)) {
+    try (Connection connection = database();
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(sql)) {
       if (!result.next()) throw new IllegalStateException("query returned no row");
       return result.getLong(1);
     }
   }
 
   String queryString(String sql) throws Exception {
-    try (Connection connection = database(); Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery(sql)) {
+    try (Connection connection = database();
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(sql)) {
       if (!result.next()) throw new IllegalStateException("query returned no row");
       return result.getString(1);
     }
   }
 
   void resetLogs() throws Exception {
-    try (Connection connection = database(); Statement statement = connection.createStatement()) {
+    try (Connection connection = database();
+        Statement statement = connection.createStatement()) {
       statement.execute("TRUNCATE TABLE scenario.app_logs RESTART IDENTITY");
     }
   }
@@ -143,11 +148,13 @@ final class CharacterizationEnvironment implements AutoCloseable {
             + " (entry_id,audio_file_id,link_type,reference_text,reference_line_number)"
             + " SELECT c.id,a.id,'voice','characterization fixture',0 FROM chosen c,candidate_audio a"
             + " RETURNING entry_id,audio_file_id";
-    try (Connection connection = database(); Statement statement = connection.createStatement()) {
+    try (Connection connection = database();
+        Statement statement = connection.createStatement()) {
       long entryId;
       long audioId;
       try (ResultSet result = statement.executeQuery(sql)) {
-        if (!result.next()) throw new IllegalStateException("multiple voice fixture insert returned no row");
+        if (!result.next())
+          throw new IllegalStateException("multiple voice fixture insert returned no row");
         entryId = result.getLong(1);
         audioId = result.getLong(2);
       }
@@ -172,7 +179,8 @@ final class CharacterizationEnvironment implements AutoCloseable {
       statement.setLong(1, fixture.entryId());
       statement.setLong(2, fixture.audioId());
       if (statement.executeUpdate() != 1) {
-        throw new IllegalStateException("multiple voice fixture cleanup affected an unexpected row count");
+        throw new IllegalStateException(
+            "multiple voice fixture cleanup affected an unexpected row count");
       }
     }
   }
@@ -207,8 +215,7 @@ final class CharacterizationEnvironment implements AutoCloseable {
       return;
     }
     Files.createDirectories(pgSocket);
-    String options =
-        "-p " + databasePort() + " -h 127.0.0.1 -k " + pgSocket;
+    String options = "-p " + databasePort() + " -h 127.0.0.1 -k " + pgSocket;
     runPostgresControl("start", List.of("-l", pgLog.toString(), "-o", options));
     waitPortOpen(databasePort(), Duration.ofSeconds(30));
     databaseStopped = false;
@@ -237,7 +244,9 @@ final class CharacterizationEnvironment implements AutoCloseable {
     environment.put("ASSET_ROOT", assetRoot.toString());
     environment.put("USERS_FILE", usersFile.toString());
     environment.put("LOG_FILE", runtimeRoot.resolve("logs/schubert.log").toString());
-    builder.redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.appendTo(log.toFile()));
+    builder
+        .redirectErrorStream(true)
+        .redirectOutput(ProcessBuilder.Redirect.appendTo(log.toFile()));
     app = builder.start();
     waitPortOpen(appPort, Duration.ofSeconds(60), app, log);
   }
@@ -246,11 +255,20 @@ final class CharacterizationEnvironment implements AutoCloseable {
     Path config = runtimeRoot.resolve("Caddyfile");
     String text = renderCaddyConfig(proxyPort, appPort, runtimeRoot.resolve("caddy-data"));
     Files.writeString(config, text, StandardCharsets.UTF_8);
-    ProcessBuilder builder = new ProcessBuilder(caddyExecutable.toString(), "run", "--config", config.toString(), "--adapter", "caddyfile");
+    ProcessBuilder builder =
+        new ProcessBuilder(
+            caddyExecutable.toString(),
+            "run",
+            "--config",
+            config.toString(),
+            "--adapter",
+            "caddyfile");
     builder.environment().put("XDG_DATA_HOME", runtimeRoot.resolve("caddy-data").toString());
     builder.environment().put("XDG_CONFIG_HOME", runtimeRoot.resolve("caddy-config").toString());
     Path log = runtimeRoot.resolve("logs/caddy.log");
-    builder.redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.appendTo(log.toFile()));
+    builder
+        .redirectErrorStream(true)
+        .redirectOutput(ProcessBuilder.Redirect.appendTo(log.toFile()));
     caddy = builder.start();
     waitPortOpen(proxyPort, Duration.ofSeconds(30), caddy, log);
   }
@@ -282,21 +300,25 @@ final class CharacterizationEnvironment implements AutoCloseable {
             header_up X-Forwarded-Proto https
           }
         }
-        """.formatted(proxyPort + 10000, storageRoot, proxyPort, appPort);
+        """
+        .formatted(proxyPort + 10000, storageRoot, proxyPort, appPort);
   }
 
   private void verifyCredentialPermission() throws IOException {
     Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(usersFile);
-    Set<PosixFilePermission> required = Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE);
+    Set<PosixFilePermission> required =
+        Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE);
     if (!permissions.equals(required)) {
       throw new IllegalStateException("credential reference must be 0600");
     }
   }
 
-  private static void waitPortOpen(int port, Duration timeout, Process process, Path log) throws Exception {
+  private static void waitPortOpen(int port, Duration timeout, Process process, Path log)
+      throws Exception {
     long deadline = System.nanoTime() + timeout.toNanos();
     while (System.nanoTime() < deadline) {
-      if (!process.isAlive()) throw new IllegalStateException("process exited during startup; see " + log);
+      if (!process.isAlive())
+        throw new IllegalStateException("process exited during startup; see " + log);
       try (Socket socket = new Socket()) {
         socket.connect(new InetSocketAddress("127.0.0.1", port), 250);
         return;
@@ -345,12 +367,28 @@ final class CharacterizationEnvironment implements AutoCloseable {
   @Override
   public void close() {
     Exception failure = null;
-    failure = cleanup(failure, () -> { if (databaseStopped) startDatabaseAfterDependencyTest(); });
-    failure = cleanup(failure, () -> { if (browser != null) browser.close(); });
-    failure = cleanup(failure, () -> { if (playwright != null) playwright.close(); });
+    failure =
+        cleanup(
+            failure,
+            () -> {
+              if (databaseStopped) startDatabaseAfterDependencyTest();
+            });
+    failure =
+        cleanup(
+            failure,
+            () -> {
+              if (browser != null) browser.close();
+            });
+    failure =
+        cleanup(
+            failure,
+            () -> {
+              if (playwright != null) playwright.close();
+            });
     failure = cleanup(failure, () -> stopProcess(caddy));
     failure = cleanup(failure, () -> stopProcess(app));
-    if (failure != null) throw new IllegalStateException("characterization cleanup failed", failure);
+    if (failure != null)
+      throw new IllegalStateException("characterization cleanup failed", failure);
   }
 
   private static Exception cleanup(Exception previous, CheckedCleanup action) {
@@ -421,7 +459,8 @@ final class CharacterizationEnvironment implements AutoCloseable {
 
   private static String requiredProperty(String name) {
     String value = System.getProperty(name);
-    if (value == null || value.isBlank()) throw new IllegalArgumentException("missing property: " + name);
+    if (value == null || value.isBlank())
+      throw new IllegalArgumentException("missing property: " + name);
     return value;
   }
 

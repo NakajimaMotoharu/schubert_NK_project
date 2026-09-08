@@ -114,6 +114,8 @@ target全体を止めず、cleanupが削除skipを記録した上で後続する
 | `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |
 | `LimitNOFILE` | 65536 | MQ/DB/media FD、leak監視 |
 
+SSC-020: APIのUser/primary Groupはschubert-api専用を維持し、Transfer読取group schubert-webをSupplementaryGroupsへ追加する。Asset用のschubert-readと同様、共有対象は承認済みdataだけであり、Web/APIのcredentialやprivate runtime fileをgroup-readableへ変更しない。APIが作った新規日付directory/partに限り、保持inodeへgroup=schubert-webと0750/0640を明示設定して検証する。既存root/childの所有者・mode不一致は起動/処理失敗とし、applicationが修正しない。Provisioningと起動probeでgroup membership・新規作成権限を検証する。
+
 ### 4.3 Hardening
 
 Web/API/batchは`NoNewPrivileges=true`、`PrivateTmp=true`、`PrivateDevices=true`、`ProtectSystem=strict`、
@@ -152,6 +154,10 @@ Heap dump自動出力は無効のままとし、機密値を含むdumpを通常l
 
 ITはRSS/heap/direct/metaspace/thread/GC pauseを実測し、上位16GB配分内だけで調整する。メモリ上限を広げる場合、
 PostgreSQL/Artemis/OS/headroomの合計16GB以内を同時更新する。
+
+SSC-019/021によりTransfer writer/Readerはshared storageのJava25公開FFM限定native portを使用する。Classpath起動のAPI/Web（storageを使用するbatchも）へ`--enable-native-access=ALL-UNNAMED`を明示し、JPMS化する場合は該当module名へ限定する。Native accessはOS権限分離の代替ではない。Linux/glibc・procfs self FD・必要attributeを共通readinessで、renameat2 no-replace・directory fsyncをwriterのreadinessで検証し、不成立時は起動成功としない。Systemdの既存hardeningを外さず、実機ITでWeb read-only/API限定writeのFD相対操作を確認する。
+
+SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前のexclusive startupで所有済診断fileだけを検査・清掃し、失敗/不確定公開/cleanup failureでreadinessを成功にしない。通常業務ready非削除、Web read-only、hardeningは維持する。
 
 ### 5.2 Spring主要値
 

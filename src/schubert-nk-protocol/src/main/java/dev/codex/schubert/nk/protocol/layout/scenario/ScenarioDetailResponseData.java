@@ -15,7 +15,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts SCNRSP01. */
-public record ScenarioDetailResponseData(ScriptFileId scriptFileId,
+public record ScenarioDetailResponseData(
+    ScriptFileId scriptFileId,
     GameCode gameCode,
     String displayTitle,
     DisplayPath displayPath,
@@ -29,7 +30,8 @@ public record ScenarioDetailResponseData(ScriptFileId scriptFileId,
     long fileByteLength,
     Optional<Sha256Hex> fileSha256,
     int fileRecordLength,
-    long fileRecordCount) implements PayloadData {
+    long fileRecordCount)
+    implements PayloadData {
   public ScenarioDetailResponseData {
     Objects.requireNonNull(scriptFileId, "scriptFileId");
     Objects.requireNonNull(gameCode, "gameCode");
@@ -81,7 +83,8 @@ public record ScenarioDetailResponseData(ScriptFileId scriptFileId,
             Map.entry("Next title", TypedFieldValues.optionalStringValue(nextTitle)),
             Map.entry("Delivery mode", TypedFieldValues.enumValue(deliveryMode)),
             Map.entry("File ID", TypedFieldValues.optionalUuidValue(fileId)),
-            Map.entry("File relative path", TypedFieldValues.optionalRelativePathValue(fileRelativePath)),
+            Map.entry(
+                "File relative path", TypedFieldValues.optionalRelativePathValue(fileRelativePath)),
             Map.entry("File byte長", TypedFieldValues.numeric(fileByteLength)),
             Map.entry("File SHA-256", TypedFieldValues.optionalSha256Value(fileSha256)),
             Map.entry("File record長", TypedFieldValues.numeric(fileRecordLength)),

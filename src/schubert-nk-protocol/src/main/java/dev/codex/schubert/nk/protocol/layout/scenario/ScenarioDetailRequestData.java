@@ -21,8 +21,7 @@ public record ScenarioDetailRequestData(ScriptFileId scriptFileId) implements Pa
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Script file ID", TypedFieldValues.id(scriptFileId))));
+        Map.ofEntries(Map.entry("Script file ID", TypedFieldValues.id(scriptFileId))));
   }
 
   @Override

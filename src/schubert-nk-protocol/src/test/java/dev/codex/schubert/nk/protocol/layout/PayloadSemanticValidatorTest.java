@@ -23,11 +23,7 @@ class PayloadSemanticValidatorTest {
     assertValid(valid("SRCRSP01", 1));
     assertInvalid(withData(valid("SRCRSP01", 1), "Effective page", n(0)));
     assertInvalid(withData(valid("SRCRSP01", 1), "Total pages", n(2)));
-    assertInvalid(
-        withData(
-            valid("SRCRSP01", 1),
-            "Effective page", n(2),
-            "Total pages", n(1)));
+    assertInvalid(withData(valid("SRCRSP01", 1), "Effective page", n(2), "Total pages", n(1)));
     assertInvalid(withData(valid("SRCRSP01", 0), "First result", n(1)));
     assertInvalid(withData(valid("SRCRSP01", 0), "Last result", n(1)));
     assertInvalid(withRecords(valid("SRCRSP01", 0), valid("SRCRSP01", 1).records()));
@@ -46,19 +42,17 @@ class PayloadSemanticValidatorTest {
 
     assertInvalid(withRecord(valid("SRCRSP01", 1), 0, "Line番号", n(0)));
     assertInvalid(withRecord(valid("SRCRSP01", 1), 0, "Audio ID", t("1")));
-    assertInvalid(
-        withRecord(
-            valid("SRCRSP01", 1),
-            0,
-            "Audio有無", b(true),
-            "Audio ID", t("1")));
+    assertInvalid(withRecord(valid("SRCRSP01", 1), 0, "Audio有無", b(true), "Audio ID", t("1")));
     PayloadValues audioSearch =
         withRecord(
             valid("SRCRSP01", 1),
             0,
-            "Audio有無", b(true),
-            "Audio ID", t("1"),
-            "Audio display path", t("audio/file.ogg"));
+            "Audio有無",
+            b(true),
+            "Audio ID",
+            t("1"),
+            "Audio display path",
+            t("audio/file.ogg"));
     assertValid(audioSearch);
 
     assertInvalid(withRecord(valid("RTERSP01", 1), 0, "File件数", n(0)));
@@ -86,9 +80,11 @@ class PayloadSemanticValidatorTest {
     assertInvalid(withData(inline, "File byte長", n(1)));
     assertInvalid(withData(inline, "File record長", n(4_800)));
     assertInvalid(withData(inline, "File record件数", n(1)));
-    assertInvalid(withRecords(inline, java.util.Collections.nCopies(201, inline.records().getFirst())));
+    assertInvalid(
+        withRecords(inline, java.util.Collections.nCopies(201, inline.records().getFirst())));
 
-    PayloadValues secondEntry = withRecords(inline, List.of(inline.records().getFirst(), inline.records().getFirst()));
+    PayloadValues secondEntry =
+        withRecords(inline, List.of(inline.records().getFirst(), inline.records().getFirst()));
     secondEntry = withRecord(secondEntry, 1, "Entry ID", n(2), "Entry sequence", n(2));
     assertValid(secondEntry);
     assertInvalid(withRecord(secondEntry, 1, "Entry sequence", n(1)));
@@ -100,9 +96,12 @@ class PayloadSemanticValidatorTest {
         withRecord(
             inline,
             0,
-            "Audio sequence", n(0),
-            "Audio ID", t("1"),
-            "Audio display path", t("audio/one.ogg")));
+            "Audio sequence",
+            n(0),
+            "Audio ID",
+            t("1"),
+            "Audio display path",
+            t("audio/one.ogg")));
 
     PayloadValues noAudioRepeated =
         withRecords(inline, List.of(inline.records().getFirst(), inline.records().getFirst()));
@@ -112,23 +111,39 @@ class PayloadSemanticValidatorTest {
         withRecord(
             inline,
             0,
-            "Audio sequence", n(1),
-            "Audio ID", t("1"),
-            "Audio display path", t("audio/one.ogg"));
+            "Audio sequence",
+            n(1),
+            "Audio ID",
+            t("1"),
+            "Audio display path",
+            t("audio/one.ogg"));
     PayloadValues sameEntry =
-        withRecords(firstAudio, List.of(firstAudio.records().getFirst(), firstAudio.records().getFirst()));
+        withRecords(
+            firstAudio, List.of(firstAudio.records().getFirst(), firstAudio.records().getFirst()));
     sameEntry =
         withRecord(
             sameEntry,
             1,
-            "Audio sequence", n(2),
-            "Audio ID", t("2"),
-            "Audio display path", t("audio/two.ogg"));
+            "Audio sequence",
+            n(2),
+            "Audio ID",
+            t("2"),
+            "Audio display path",
+            t("audio/two.ogg"));
     assertValid(sameEntry);
     assertInvalid(withRecord(sameEntry, 1, "Entry sequence", n(2)));
     assertInvalid(withRecord(sameEntry, 1, "Audio sequence", n(3)));
     assertInvalid(withRecord(sameEntry, 1, "本文", t("different")));
-    assertInvalid(withRecord(secondEntry, 1, "Audio sequence", n(2), "Audio ID", t("2"), "Audio display path", t("audio/two.ogg")));
+    assertInvalid(
+        withRecord(
+            secondEntry,
+            1,
+            "Audio sequence",
+            n(2),
+            "Audio ID",
+            t("2"),
+            "Audio display path",
+            t("audio/two.ogg")));
 
     PayloadValues repeatedEntry =
         withRecords(
@@ -143,13 +158,20 @@ class PayloadSemanticValidatorTest {
     PayloadValues file =
         withData(
             valid("SCNRSP01", 0),
-            "Delivery mode", t("F"),
-            "File ID", t("123e4567-e89b-12d3-a456-426614174000"),
-            "File relative path", t("transfer/result.bin"),
-            "File byte長", n(4_800),
-            "File SHA-256", t("a".repeat(64)),
-            "File record長", n(4_800),
-            "File record件数", n(1));
+            "Delivery mode",
+            t("F"),
+            "File ID",
+            t("123e4567-e89b-12d3-a456-426614174000"),
+            "File relative path",
+            t("transfer/result.bin"),
+            "File byte長",
+            n(4_800),
+            "File SHA-256",
+            t("a".repeat(64)),
+            "File record長",
+            n(4_800),
+            "File record件数",
+            n(1));
     assertValid(file);
     assertInvalid(withRecords(file, inline.records()));
     assertInvalid(withData(file, "File ID", u()));
@@ -169,28 +191,24 @@ class PayloadSemanticValidatorTest {
     assertValid(
         withData(
             valid("ANMRSP01", 0),
-            "Main/SUBTRACK件数", n(1),
-            "OVA件数", n(2),
-            "Opening有無", b(true),
-            "総file件数", n(4)));
+            "Main/SUBTRACK件数",
+            n(1),
+            "OVA件数",
+            n(2),
+            "Opening有無",
+            b(true),
+            "総file件数",
+            n(4)));
 
     assertInvalid(withRecord(valid("ANLRSP01", 1), 0, "File byte長", n(0)));
     assertInvalid(withRecord(valid("ANLRSP01", 1), 0, "Parent main ID", t("main")));
     assertValid(
         withRecord(
-            valid("ANLRSP01", 1),
-            0,
-            "Category", t("SUBTRACK"),
-            "Parent main ID", t("main")));
+            valid("ANLRSP01", 1), 0, "Category", t("SUBTRACK"), "Parent main ID", t("main")));
 
     assertInvalid(withRecord(valid("MTRRSP01", 1), 0, "File byte長", n(0)));
     assertInvalid(withRecord(valid("MTRRSP01", 1), 0, "Pair key", t("pair")));
-    assertValid(
-        withRecord(
-            valid("MTRRSP01", 1),
-            0,
-            "Pair role", t("M"),
-            "Pair key", t("pair")));
+    assertValid(withRecord(valid("MTRRSP01", 1), 0, "Pair role", t("M"), "Pair key", t("pair")));
   }
 
   @Test
@@ -217,8 +235,10 @@ class PayloadSemanticValidatorTest {
     assertInvalid(
         withData(
             valid("UCRREQ01", 0),
-            "Username", t("sameusername"),
-            "Initial Password", t("SAMEUSERNAME")));
+            "Username",
+            t("sameusername"),
+            "Initial Password",
+            t("SAMEUSERNAME")));
     assertInvalid(withData(valid("UPWREQ01", 0), "New Password", t("short")));
     assertInvalid(withData(valid("UPWREQ01", 0), "New Password", t("PublicTest12 ")));
     assertInvalid(withData(valid("UDTRSP01", 0), "Active session数", n(3)));
@@ -228,8 +248,10 @@ class PayloadSemanticValidatorTest {
     assertInvalid(
         withData(
             valid("LGSREQ01", 0),
-            "From日時", t("20260101000000000"),
-            "To日時", t("20260202000000000")));
+            "From日時",
+            t("20260101000000000"),
+            "To日時",
+            t("20260202000000000")));
     assertValid(withData(valid("NTSREQ01", 0), "受付日時From", t(TIME)));
   }
 
@@ -239,71 +261,62 @@ class PayloadSemanticValidatorTest {
     assertValid(received);
     assertInvalid(withData(received, "処理開始日時", t(TIME)));
 
-    PayloadValues processing =
-        withData(received, "内部状態", t("PROCESSING"), "処理開始日時", t(TIME));
+    PayloadValues processing = withData(received, "内部状態", t("PROCESSING"), "処理開始日時", t(TIME));
     assertValid(processing);
     assertInvalid(withData(processing, "処理完了日時", t(LATER)));
 
     PayloadValues completed =
         withData(
             received,
-            "内部状態", t("COMPLETED"),
-            "通知区分", t("COMPLETED"),
-            "処理開始日時", t(TIME),
-            "処理完了日時", t(LATER));
+            "内部状態",
+            t("COMPLETED"),
+            "通知区分",
+            t("COMPLETED"),
+            "処理開始日時",
+            t(TIME),
+            "処理完了日時",
+            t(LATER));
     assertValid(completed);
     assertInvalid(withData(completed, "Error日時", t(LATER)));
 
     PayloadValues failed =
         withData(
             received,
-            "内部状態", t("ERROR"),
-            "通知区分", t("ERROR"),
-            "処理開始日時", t(TIME),
-            "Error日時", t(LATER),
-            "Error code", t("PROCESS_FAILED"),
-            "利用者向けerror", t("safe error"));
+            "内部状態",
+            t("ERROR"),
+            "通知区分",
+            t("ERROR"),
+            "処理開始日時",
+            t(TIME),
+            "Error日時",
+            t(LATER),
+            "Error code",
+            t("PROCESS_FAILED"),
+            "利用者向けerror",
+            t("safe error"));
     assertValid(failed);
     assertInvalid(withData(failed, "Error code", u()));
     assertInvalid(withData(failed, "通知区分", t("ACCEPTED")));
 
-    PayloadValues cancelled =
-        withData(received, "内部状態", t("CANCELLED"), "取消日時", t(TIME));
+    PayloadValues cancelled = withData(received, "内部状態", t("CANCELLED"), "取消日時", t(TIME));
     assertValid(cancelled);
     assertInvalid(withData(cancelled, "処理開始日時", t(TIME)));
     assertInvalid(withData(received, "Error code", t("PROCESS_FAILED")));
     assertInvalid(withData(received, "利用者向けerror", t("safe error")));
     assertInvalid(withData(received, "質問削除済み", b(true)));
-    assertInvalid(
-        withData(
-            received,
-            "質問削除済み", b(true),
-            "質問本文", u()));
-    assertValid(
-        withData(
-            received,
-            "質問削除済み", b(true),
-            "質問本文", u(),
-            "Question ID", u()));
+    assertInvalid(withData(received, "質問削除済み", b(true), "質問本文", u()));
+    assertValid(withData(received, "質問削除済み", b(true), "質問本文", u(), "Question ID", u()));
     assertInvalid(withData(received, "回答本文", t("answer")));
 
     assertInvalid(withData(valid("NTCRSP01", 0), "更新後状態", t("PROCESSING")));
     assertInvalid(withData(valid("NTCRSP01", 0), "取消日時", u()));
 
     assertInvalid(withRecord(valid("QSSRSP01", 1), 0, "回答日時", t(TIME)));
-    assertValid(
-        withRecord(
-            valid("QSSRSP01", 1),
-            0,
-            "回答状態", t("ANSWERED"),
-            "回答日時", t(TIME)));
+    assertValid(withRecord(valid("QSSRSP01", 1), 0, "回答状態", t("ANSWERED"), "回答日時", t(TIME)));
     assertInvalid(withData(valid("QSDRSP01", 0), "回答日時", t(TIME)));
     assertValid(
         withData(
-            valid("QSDRSP01", 0),
-            "回答状態", t("ANSWERED"),
-            "回答本文", t("answer"),
-            "回答日時", t(TIME)));
+            valid("QSDRSP01", 0), "回答状態", t("ANSWERED"), "回答本文", t("answer"), "回答日時", t(TIME)));
     assertInvalid(withData(valid("QSDRSP01", 0), "回答本文", t("answer")));
     assertInvalid(withData(received, "受付ID", t("INVALID")));
   }
@@ -320,8 +333,7 @@ class PayloadSemanticValidatorTest {
     assertInvalid(withData(valid("WLGEVT01", 0), "Path", t("/safe?q=secret")));
     assertThrows(NullPointerException.class, () -> PayloadSemanticValidator.validate(null));
 
-    PayloadData wrongNumeric =
-        () -> new FieldValueSet(Map.of("Page size", t("50")));
+    PayloadData wrongNumeric = () -> new FieldValueSet(Map.of("Page size", t("50")));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -384,15 +396,13 @@ class PayloadSemanticValidatorTest {
         source.layoutId(), replace(source.data(), replacements), source.records());
   }
 
-  private static PayloadValues withRecord(
-      PayloadValues source, int index, Object... replacements) {
+  private static PayloadValues withRecord(PayloadValues source, int index, Object... replacements) {
     ArrayList<FieldValueSet> records = new ArrayList<>(source.records());
     records.set(index, replace(records.get(index), replacements));
     return new PayloadValues(source.layoutId(), source.data(), records);
   }
 
-  private static PayloadValues withRecords(
-      PayloadValues source, List<FieldValueSet> records) {
+  private static PayloadValues withRecords(PayloadValues source, List<FieldValueSet> records) {
     return new PayloadValues(source.layoutId(), source.data(), records);
   }
 

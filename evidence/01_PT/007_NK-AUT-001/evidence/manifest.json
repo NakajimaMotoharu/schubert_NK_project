@@ -1,0 +1,670 @@
+{
+  "runId": "PT-ADM-20260908-13",
+  "programId": "NK-AUT-001",
+  "targetCommit": "945d310e0ea88952a44a4a18f7261df392846858",
+  "branch": "dev-admin",
+  "startedAt": "2026-09-08T18:59:32+09:00",
+  "completedAt": "2026-09-08T19:03:44+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "springSecurityCrypto": "7.1.1",
+    "springCore": "7.0.9"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 34,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1716
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 125
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 343
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 134
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 71
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 10
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 394,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 27785
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2124
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6126
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2027
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 922
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 198
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 76,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4155
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 353
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1002
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 329
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 150
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 38
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "authenticationMethods": [
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#currentPreviousAndEveryIdentityBindingFailClosedOnMismatch",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#lengthVersionKeyAndNullInvariantsIncludeBothEndpointsAndClose",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#jcaUnavailabilityIsTypedAndProvidersAreRestored",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#envelopeMutationsAndAuthenticatedNonContextPlaintextAreRejected",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#independentEnvelopeAadAndDefensiveCopiesMatchExactly",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#concurrentEncryptionHasDistinctNoncesAndCorrectRowBinding",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#faultsNullRowsAndAuditFailuresRollbackWithoutLeakingData",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#absentRequestIpIsNotReplacedByLoginAddress",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#adminReasonsRevokeOnlyTargetAndPreserveExistingRevocations",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#logoutAndRepeatedLogoutKeepOriginalTimeWithoutExtendingIdle",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#concurrentLogoutAndIssuanceSerializeWithoutLostRevocation",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#missingDisabledDuplicateAndDatabaseFaultsRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#thirdSessionRevokesOldestAccessAndUuidTieOnly",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#oneHundredConcurrentIssuesKeepOnlyTwoActive",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#constructorsNullBoundsAndUnavailableCryptoFailBeforeCommit",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#replacementAuditIsAtomicBoundedAndCarriesRequestIdentity",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#issuancePersistsOnlyHashAndBoundCipherInCallerTransaction",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#currentDatabaseActorAndIdleUpdateUseCallerTransactionWithoutShortening",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#concurrentVerificationsSerializeUserThenSessionAndRemainUsable",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlNullAndUnknownRoleNeverBecomeAValidActor",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#unknownRevokedExpiredAndDisabledAllDenyWithoutTouch",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlFaultsAndSuppressedCloseErrorsAreBoundedAndDoNotCommit",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#nullAndAutocommitBoundariesRejectBeforeModifyingState",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightDoesNotWaitForRowLocksAndCannotAuthorizeAfterRevocation",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightBoundsNullContractsAndJdbcFailures",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightReturnsCurrentActorWithoutTouchOrTransactionOwnership",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#failuresLocksAndInfrastructureNeverExposeIdentity",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#logoutNullAndBoundaryResultsPreserveTheOriginalInstant",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#loginSuccessMatchesIndependentUserAndAdminByteVectors",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#actorOwnerAndErrorNullInvariantsFailAtBoundaries",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#literalOwnerAndAdminMatrixNeverExposesOtherNotifications",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#asciiVectorsAndConcurrentCallsDoNotShareDigestState",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#bug036CallerMonitorCannotBlockSharedDigest",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#unavailableMandatoryDigestPreventsStartupAndRestoresProviders",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#thresholdsWindowsLocksAndSuccessHaveLiteralSqlPostconditions",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#knownAndUnknownUsersLockUserBeforeIpAndPersistAcrossConnections",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#jdbcNullUnknownEnumAndFaultsFailClosedWithoutProviderData",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#modelAndMethodNullBoundsDoNotInventPersistedState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#fifteenMinuteWindowAndLockBoundariesAreIndependent",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#nullMalformedAndClockRegressionCannotInventAValidState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#exactUserAndIpThresholdsLockWithoutExtensionThenSuccessClears",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#retryAfterCeilsAndCapsUsingLiteralSeconds",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#currentObservedWindowEndpointVectorAppliesToUserAndIp",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#failuresAndLocksReplayWithoutRehashingOrIncrementingCounters",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#wireInputNullNfcIpAndClockBoundariesAreValidatedBeforeMutation",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#databaseAndAuditFailpointsRollbackAllEffectsAndConsumeSecrets",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcLifecycleFaultsRemainRetryableAndRedacted",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#successfulLoginAndReplayShareOneAtomicInboxTransaction",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#movingClockSeparatesBusinessCompletionAndReplyTimes",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcOwnerCommitsOnlyCompleteBusinessResults",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#concurrentRedeliveryCreatesOneSessionAndOneAudit",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#permanentProtocolNeedsConfirmedRollbackAndClose",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#brokerRedeliveryReplaysCommittedLoginWithoutDuplicateEffects(Path)",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#tamperedMetadataWireAndSessionReferencesFailClosed",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#failureSnapshotKeepsOriginalCodeRetryAndMessage",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#successSnapshotFreezesOriginalFieldsAndRebuildsOnlyResponseHeader",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#jdbcNullFaultsAndInvalidArgumentsNeverLeakOrMutate",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#concurrentReplayAndKeyRotationPreserveExactData",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#normalizesNfcTrimAndLocaleIndependentKeyWithoutChangingDisplay",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#java25ScalarLowercaseExpansionFitsTheIndependentNinetySixByteBound",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#displayBoundaryNullBlankControlAndSurrogateContractsAreExplicit",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#initialReplayAndNewMessageKeepOneOriginalRevocation",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#concurrentRedeliveryRevokesAndAuditsOnce",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#invalidAndExpiredContextsNeverGainAuthority",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#nullAndWireBoundariesAreRejected",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#jdbcAndCryptoFaultsRollBackEveryEffect",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#movingClockKeepsRevocationAndAuditTogetherButExpiresFromCompletion",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#savedMetadataCiphertextAndReferencesFailClosed",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#fixedSaltIndependentPbkdf2VectorAndNfcMatch",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#encodeUsesFreshSaltAndFull256BytePassword",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#invalidStoredGenerationAndInputsAreBoundedAndConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#nfcSupplementaryAndUsernameComparisonUseExplicitValues",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#loginAndCreationBoundariesDifferAndInputsAreConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#malformedControlAndNullContractsRejectWithoutRetainingInput"
+  ],
+  "testIdsPassed": [
+    "PT-AUT-001",
+    "PT-AUT-002",
+    "PT-AUT-007-R01",
+    "PT-AUT-007-R02",
+    "PT-AUT-007-R03",
+    "PT-AUT-007-R04"
+  ],
+  "testIdsPartial": {
+    "PT-AUT-003": "policy, persisted User/IP counters and Login hash-skip/threshold/audit plus anonymous Inbox/JDBC/JMS replay passed; full dispatcher/bootstrap/HTTP connection remains",
+    "PT-AUT-004": "real PBKDF2 Login/counter/session/critical-audit and anonymous HMAC/Inbox transaction, dummy work, fault rollback, 100 concurrent redeliveries and actual JDBC/JMS commit boundaries passed; full dispatcher/bootstrap/HTTP connection remains",
+    "PT-AUT-005": "ASCII SHA256, AES-GCM, Login issuance and immutable Inbox replay passed; Web recovery and expiry orchestration remain",
+    "PT-AUT-006": "session issuance/oldest replacement/tie/expiry/100 requests and real Login transaction, atomic replacement audit and fault rollback passed; wire and CHR connection remains",
+    "PT-AUT-007": "real PostgreSQL verifier/idle/role/state/rollback/concurrency/faults passed; dispatcher/wire error mapping remains",
+    "PT-AUT-008": "actor/role/owner policy, real DB Logout owner Inbox/frozen replay/idempotency/admin all-revocation/audit/fault/concurrency and absent remote IP contract passed; management command/predicates/full dispatcher/HTTP remain"
+  },
+  "testIdsNotRun": [
+    "PT-AUT-009"
+  ],
+  "programStatus": "IN_PROGRESS",
+  "notRunCountedAsPass": 0,
+  "relatedBug": [
+    "BUG-020",
+    "BUG-021",
+    "BUG-022",
+    "BUG-023",
+    "BUG-024",
+    "BUG-026",
+    "BUG-027",
+    "BUG-028",
+    "BUG-029"
+  ],
+  "relatedYkt": [
+    "YKT-007",
+    "YKT-008",
+    "YKT-017",
+    "YKT-018",
+    "YKT-019",
+    "YKT-020",
+    "YKT-021",
+    "YKT-023",
+    "YKT-024",
+    "YKT-025",
+    "YKT-026"
+  ],
+  "relatedSsc": [
+    "SSC-009",
+    "SSC-010",
+    "SSC-011",
+    "SSC-012",
+    "SSC-013",
+    "SSC-014",
+    "SSC-015",
+    "SSC-016",
+    "SSC-023"
+  ],
+  "additionalTests": {
+    "PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; dispatcher/Inbox/HTTP connection remains",
+    "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation and anonymous HMAC/Inbox/application transaction passed; JMS/HTTP connection remains",
+    "PT-AUT-INBOX-001..006": "Real PostgreSQL anonymous Login Inbox with independent wire/LP-HMAC/PBKDF2/SQL expectations: atomic commit/rollback, 7-day completion retention, original failure/lock replay, identity conflict, 100 deliveries -> 1 session/1 audit, key/JDBC failures, owned-secret cleanup and distinct sender-NFC/receiver-NFD boundaries passed",
+    "PT-AUT-TX-001..004": "JDBC owner commits success and definite business errors before JMS reply/ACK; acquisition/begin/handler/commit-before/commit-after/close/rollback/null/permanent-plus-cleanup fault matrix is redacted and retryable as specified. Actual isolated Artemis redelivery after reply-send/ACK failure and independent cache-miss send produce one session/audit/Inbox with original DATA; DB outage redelivers before any effects. OS process kill/reboot belongs to later IT",
+    "PT-AUT-LOGOUT-INBOX-001..006": "Known-context owner-only lookup, atomic Logout/Inbox/audit, immutable 280-byte snapshot and AUTH_SESSION reference, same-message 100 concurrent replays with one audit, new-message idempotent audit, unknown/expired/disabled context, owner mismatch, ciphertext/header/ref/hash/time/NULL/JDBC/key tampering and rollback passed; never grants a principal or extends idle",
+    "PT-AUT-AUDIT-IP-001": "Unavailable current IP on Logout/admin revocation is SQL NULL, not prior Login IP or loopback; explicit IP remains canonical, actual Login/REPLACED retains current IP, null Optional is rejected",
+    "PT-AUT-CLOCK-001..002": "Independent moving-clock SQL/byte oracle: business state and audit at t+1, Inbox completion at t+2 and expiry t+2+7 days, initial header at t+3, replay header at t+4 with original DATA and unchanged retention/audit",
+    "PT-AUT-NAME-001..004": "64-byte display and 96-byte Locale.ROOT comparison key, independent Unicode literals/scalar expansion bound, old CHECK rejection to V007 upgrade, database bounds/UK/NULL and real Login with 64-byte audit passed; User management adoption remains"
+  },
+  "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
+  "rawLogSha256": "54ec31939264d405bec5384954a086428b08ddf4638b0b5e4ffbd05b9b9e055b",
+  "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",
+  "expectations": "007 PT specification; literal Unicode/Instant/authorization matrix, independent JCA PBKDF2/AES-GCM and DataOutputStream envelope/AAD, independently calculated SHA256 vectors. No production function constructs expected values.",
+  "files": [
+    {
+      "path": "coverage/api-jacoco.csv",
+      "sha256": "f9bccda479042e3c65deb21c6f98d7a100e63e4d17cd3c2aaac8ae869bc1aeeb"
+    },
+    {
+      "path": "coverage/characterization-jacoco.csv",
+      "sha256": "1d6b89462d14b3e330d237666f4e0ac9651e5d87beaab331e31b9abc465e1396"
+    },
+    {
+      "path": "coverage/protocol-jacoco.csv",
+      "sha256": "3396a1da06f2c8f63d7acf422544d9ad6493ce1ed71528a54b6f95d119ad9606"
+    },
+    {
+      "path": "coverage/storage-jacoco.csv",
+      "sha256": "b582b8f46e93ce0d197aa50dc7528b45011c32b47ecef687477af7f2620ec16b"
+    },
+    {
+      "path": "coverage/web-jacoco.csv",
+      "sha256": "3405ee4eff2346db9331020af29ed30c6a5baff1cf1d4eb6b2136e453492c916"
+    },
+    {
+      "path": "logs/BUG-020-YKT-017.md",
+      "sha256": "071c92bcb4aa9a27fa32ad7210828c9da120115a2889077bb50b45d9f7fd4e50"
+    },
+    {
+      "path": "logs/BUG-021-YKT-018.md",
+      "sha256": "16b95adebca77d161f2b7143279d091c828133250a47bec07f1e310baf564aec"
+    },
+    {
+      "path": "logs/BUG-021-current-nk-comparison.json",
+      "sha256": "c4c7b737cd262571dbb48f6ff9363236c3ead2f1a11a33a96b1c1707c2209d92"
+    },
+    {
+      "path": "logs/BUG-021-negative-probe.json",
+      "sha256": "f1d4a6e43af6fd6f03641cb60752e08610d47deed0e612b40e16f09e34d93941"
+    },
+    {
+      "path": "logs/BUG-022-YKT-019.md",
+      "sha256": "d2805dd039cdde1ca93fd3d8ba95276b25838a54ef7a94944d09612768c19c5e"
+    },
+    {
+      "path": "logs/BUG-024-YKT-021.md",
+      "sha256": "a81031297466b9eb5aa8441d00ac6574a87671ead1e5f573f325d4f3b6029dc0"
+    },
+    {
+      "path": "logs/BUG-026-YKT-023.md",
+      "sha256": "717a95a4d4cd4b02d881ead4ec15a5354445c171b46dcd258592ee1cf79a4d60"
+    },
+    {
+      "path": "logs/BUG-028-YKT-025.md",
+      "sha256": "85574e57677c2065bcb237e6a7c3cec1a791226d2579b3651b186cfed9db0278"
+    },
+    {
+      "path": "logs/BUG-029-YKT-026.md",
+      "sha256": "9d6ffecd2266cc812fb7ef28bd0086544c037f5d20afa49f9e4f0aa911dce7ae"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-01-summary.json",
+      "sha256": "89d49d9a93ae93729da621078b5094bf62d7336ffe4d8cbbf54dbe90d493e1cb"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-02-summary.json",
+      "sha256": "12edb4a2cc3800ddf694d926cccdf40741ea07b235db45a4e9c9197f401fcd06"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-04-summary.json",
+      "sha256": "63a74eaf3f25df2bbbdc8e46e72f1d24c0e56ec3a6e9d86651f052af40908b01"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-05-summary.json",
+      "sha256": "684180e73afbf92d8f9e0f5a6cb1bc77ca22e785b4213bab32e07f97b3dee74f"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-06-summary.json",
+      "sha256": "b8aaf4d812c97af4b5eaeea0370963bcb346e81724d003e2eb00d0937f27e78d"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-07-summary.json",
+      "sha256": "5bc4a6c109103367ad3ae168d588e63473a4b6ee8214932f0aacbac5010c8c25"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-08-summary.json",
+      "sha256": "ef37313b64a129b13fb798b52230f523385a8d3c6ee5d3aa811648986a41d186"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-09-summary.json",
+      "sha256": "181f01d3052c5cd270660756bdfe8c9a2b0134ca9ee1085b2f1b7d133a53e55d"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-10-summary.json",
+      "sha256": "225a62025f7256985029145a7d9abc760d7ce528df3fde601e7baf7f9a3e2d17"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-11-summary.json",
+      "sha256": "40c475ed7893436f6a1d78d9fb82875c2d3f57661754f521112b98377286197e"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-12-summary.json",
+      "sha256": "863ae550bdafd245ce46e54484991e94f70c17c941b8845b5a9635dfe5d2b27a"
+    },
+    {
+      "path": "logs/PT-ADM-20260908-13-summary.json",
+      "sha256": "cfd6b1afa2c72024accf6185b34c88b3012be54b2708169757261098332461a5"
+    },
+    {
+      "path": "logs/PT-AUT-20260907-01-summary.json",
+      "sha256": "2be52788e058e753c91f1ce8fac893d7df91e2b6e92e13f312f8e6397c426511"
+    },
+    {
+      "path": "logs/PT-AUT-20260907-02-summary.json",
+      "sha256": "ff8c418d90da30ec0582f7e2a47076e063726f69e5966f6cbb59a7cd4242d90d"
+    },
+    {
+      "path": "logs/PT-AUT-20260907-03-summary.json",
+      "sha256": "d66902515cc852f5f1082996e11cdf409de5dd31c15c891e3e3d3558f740eb1f"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-01-summary.json",
+      "sha256": "e6fd0269977cb8b1f17bd69f676e501a98ddc00f793e44a3eef82c9f6d5aed35"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-02-summary.json",
+      "sha256": "dd905171c2d521b5b7ddf73554e813b0a87897efe19c9bc42e6b01d6a31678a2"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-03-summary.json",
+      "sha256": "7a092a6da0e8fdfe7a1f471be8cfce5171cf841aeff1bc1ac956de93655fc878"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-04-summary.json",
+      "sha256": "3f8f243905c771fb2c34f4c3fa34a5a41516e353523ecebeb0c32a74963288d2"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-05-summary.json",
+      "sha256": "c2342f6717e279c01448d59cecaee7dd2843b126fd09cdbb9bb1018bd79dd09f"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-06-summary.json",
+      "sha256": "8a239de2447551c74926ac2031f1b38323a6847b451ea523188af538b47272b7"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-07-summary.json",
+      "sha256": "85fae6d38f5475e62a6573dd11112392efb45e35658aa54dd8015f649d097a4e"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-08-summary.json",
+      "sha256": "ff7e1e3243781be8a942f405bf9d13a2029c05fc87a475339266eb4012503cfb"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-09-summary.json",
+      "sha256": "a2b7b1a08fbcf7d96e048a9067b165cf68e74e71a02a7a1c27b1d6ae35fadad7"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-10-summary.json",
+      "sha256": "4187bd09aac6210cd1b229ec8b866f22bcc1e8c1a810b9231aff007d7a76fece"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-11-summary.json",
+      "sha256": "b31dd4c1a7d4a15f96db94132454b462eaeef320adc3fa1370786d503357edbb"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-12-summary.json",
+      "sha256": "8ffee3422c2111cf4ef056fce053765ac9c4eccbcc322a71395f90deb852066c"
+    },
+    {
+      "path": "logs/PT-AUT-20260908-13-summary.json",
+      "sha256": "a45d4bd5ce9f16799d53421f8d77feca7a2162ee2de666f9ef2b00f1b737a14d"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-summary.json",
+      "sha256": "803183e6d3b50a5c70a837cbdad9c0d8fa9987cf27150eae5107e56e25794a21"
+    },
+    {
+      "path": "logs/PT-MED-20260908-02-summary.json",
+      "sha256": "8229f315b4c1f1867ca3c85430f57c8c12c49af3964b29aeffadee633f6d724d"
+    },
+    {
+      "path": "logs/PT-MED-20260908-03-summary.json",
+      "sha256": "35aaf45138df69794b937b0640f05e1a251ab14f74c76fbaf39b7a80a57d1189"
+    },
+    {
+      "path": "logs/PT-MED-20260908-04-summary.json",
+      "sha256": "75d4d4ca8990e0da6a5a85155d78ca563a1bd63d941c4f36a1cc356dd9b678e6"
+    },
+    {
+      "path": "logs/PT-MED-20260908-05-summary.json",
+      "sha256": "6ce32bff465fad23bbefaecc6c0941a2a20053697d80d2159184a819b727cb58"
+    },
+    {
+      "path": "logs/PT-MED-20260908-06-summary.json",
+      "sha256": "d9a7b72d033ebd874e872324b3615538701a306b79d47c6c2c23ea40f02f155e"
+    },
+    {
+      "path": "logs/PT-MED-20260908-07-summary.json",
+      "sha256": "e5578df99f5fea4cdb355beb6da23262339f7030032682d7f76a3fd67349ffb4"
+    },
+    {
+      "path": "logs/PT-MED-20260908-08-summary.json",
+      "sha256": "0ffa7044da2587b15e58d7328ff569842a9a680dc73d7f2b05690055ec461b87"
+    },
+    {
+      "path": "logs/PT-MED-20260908-09-summary.json",
+      "sha256": "8392e4dfcf607d42e546634d118ba89248c1883ddecaf8a3ea68cdd5903e4d36"
+    },
+    {
+      "path": "logs/PT-MED-20260908-10-summary.json",
+      "sha256": "9044108cd570b8a078b7025ff207237c82706660ac5ad5b89a8f927b851b40c7"
+    },
+    {
+      "path": "logs/PT-MED-20260908-11-summary.json",
+      "sha256": "91571ae2856c34dc50f05bb057c3b17de5a249a73fdb169d60a283d467cc5235"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-15-summary.json",
+      "sha256": "c40e7722c81e0b58f679ff6ef24f9d30fcfd8f199e42d25856cea416d8656c9a"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-16-summary.json",
+      "sha256": "a62572d634b5e9f41045869ea1d97013c1098a88cd6672a7bdfa299ccf2b94b6"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-17-summary.json",
+      "sha256": "23095bf6667cfc87f44b569309162df93f1d830a7565297158835b9fb77dd295"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-18-summary.json",
+      "sha256": "09d33cf1ee5fdc225b091aa6355fe0fbfbc3a55090315dfd529a36cf225cdd35"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-19-summary.json",
+      "sha256": "6331a751b20b101057e1cd214992e46fde335ea50d0206ec3b253d6a04310ba2"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-20-summary.json",
+      "sha256": "4347c89d6f51e83b162f127d0ca4b7b2320e8e94dba41a08cf5e4277695f04c3"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-23-summary.json",
+      "sha256": "8ed22ae9eb7862be9bd6595949c98283b52bf1f5a2c9214a613bc35b71f4b0a3"
+    },
+    {
+      "path": "logs/login-jdbc-jms-boundaries.md",
+      "sha256": "5f13352e715a1960c5635bdec4c011ff1919008f3498a444d679587379f156ae"
+    },
+    {
+      "path": "logs/logout-inbox-and-stage-times.md",
+      "sha256": "a2c5145c0e656865c0bfaccb229e8668e9438706bf716ea27d50483563e3f58b"
+    },
+    {
+      "path": "logs/non-qualifying-runs.md",
+      "sha256": "db3dee49a4aa9441a7e6174cbf7875b424e7f5f4f93adfa5e8c5066ce87322d9"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "f8e2435bdb2c1695cad55573782c2030d0053f740e0a44b7366a156736bb5bef"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "47cd4ea8fb10184d2d4de2f82f147cb679c58d59211ac41bb27fbf2e57fdff27"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "8a60c9004bd013fd6e3190b0f63def29dcb22069a36cdd9d1eee39b0ec49ec35"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "91cb7f3ea053dd59003d1071afe1fe94075e74b27bfbcae0ade774b49e3fee82"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "f866d195c3a06f8aba287923d0c1dee16ff1c48973342e2b507e5634e6f45561"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "14e933443902d3a40fb42704223ef3bf8c352d74643fbb42954b1b7440adbd08"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "dfa17b48dfe1c276a579178ad2df7acf5806f32111515246888b9ac6dc097970"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "978e6d3415d7fdecbc5e113bfed88c31cff9845154fd1830513fca38bd0749d8"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "5ea46223c4177dbb45f115fb6957da560895f08ef7fceb3b74c7bcee561da21d"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "47f695ee7c9d18fbc35b00cb6d616220b5cfe9e07212c650fdca03313f9b3ea4"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "62dbd4fb6bf06e91ed9c50359182139656d0afe8253e0c85ff873fb440487082"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "f006656385c15dad6b78436bd5b6f5364966cbbd3f09beb3935cf4fc2917b207"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "9eeec31d43644040f8a1bd7144667f494827ea0ff038fa84f6d5e80ac23c7c70"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "f46899ef3708a81efc12948c228b41c2bef06c14594be5ac1f0c52ef2810c793"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "d7a0c8cf9df85d2ba55328298733e630ef1a91bc3bd82436a2eb86eb676e8593"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "57d7c73d99b33e322336fbf320aabd52a9c724752670abe2b192b8418deff678"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "ef38be844a8f433f4ba480e9a3635124b31029ccbdd9b759ec67da3819c3ffa3"
+    }
+  ]
+}

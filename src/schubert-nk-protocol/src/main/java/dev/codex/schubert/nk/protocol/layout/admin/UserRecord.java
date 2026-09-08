@@ -12,7 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts USRRSP01. */
-public record UserRecord(UserId userId,
+public record UserRecord(
+    UserId userId,
     String username,
     UserRole role,
     UserState state,
@@ -20,7 +21,8 @@ public record UserRecord(UserId userId,
     Optional<Instant> lastLogin,
     Instant createdAt,
     Instant updatedAt,
-    long version) implements PayloadRecord {
+    long version)
+    implements PayloadRecord {
   public UserRecord {
     Objects.requireNonNull(userId, "userId");
     Objects.requireNonNull(username, "username");

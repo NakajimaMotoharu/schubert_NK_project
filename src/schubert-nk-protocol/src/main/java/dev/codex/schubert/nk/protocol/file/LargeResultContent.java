@@ -9,7 +9,8 @@ public record LargeResultContent(int recordCount, long byteLength, String sha256
 
   public LargeResultContent {
     Objects.requireNonNull(sha256, "sha256");
-    if (recordCount < 1 || recordCount > LargeResultDescriptor.MAXIMUM_RECORD_COUNT
+    if (recordCount < 1
+        || recordCount > LargeResultDescriptor.MAXIMUM_RECORD_COUNT
         || byteLength != (long) LargeResultDescriptor.RECORD_LENGTH * recordCount
         || !HASH.matcher(sha256).matches()) {
       throw new IllegalArgumentException("large-result content metadata is invalid");

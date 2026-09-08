@@ -1,0 +1,301 @@
+package dev.codex.schubert.nk.api.application.log;
+
+import dev.codex.schubert.nk.api.application.log.LogQueryAuditWriter.Event;
+import dev.codex.schubert.nk.api.domain.Role;
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
+import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor;
+import dev.codex.schubert.nk.api.persistence.LogQueryException;
+import dev.codex.schubert.nk.api.persistence.LogQueryRepository;
+import dev.codex.schubert.nk.api.security.*;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.UUID;
+import java.util.function.Supplier;
+import javax.sql.DataSource;
+
+/**
+ * Read-only Log snapshot then current identity/ADMIN/Inbox/audit write transaction.
+ * NK-ADM-001/NK-MSG-002/NK-AUT-001; FUN-008/AUT-002/003/MQ-006..010/MON-004;
+ * UI225/226/232/235/241/242; SS312/314/323 §9.5/324/332/351/352; PG-D-092/PT-ADM-067..073. Owns
+ * JDBC transactions, not JMS, caller keys, HTTP or startup registration.
+ */
+public final class LogQueryApplicationService implements SyncRequestProcessor {
+  private final DataSource database;
+  private final AuthenticationContextVerifier authentication;
+  private final LogQueryRepository queries;
+  private final JdbcInboxCoordinator inbox;
+  private final LogReplayService responses;
+  private final Clock clock;
+  private final Supplier<UUID> identifiers;
+  private final LogQueryAuditWriter audit = new LogQueryAuditWriter();
+
+  public LogQueryApplicationService(
+      DataSource database,
+      AuthenticationContextVerifier authentication,
+      LogQueryRepository queries,
+      JdbcInboxCoordinator inbox,
+      LogReplayService responses,
+      Clock clock) {
+    this(database, authentication, queries, inbox, responses, clock, UUID::randomUUID);
+  }
+
+  LogQueryApplicationService(
+      DataSource database,
+      AuthenticationContextVerifier authentication,
+      LogQueryRepository queries,
+      JdbcInboxCoordinator inbox,
+      LogReplayService responses,
+      Clock clock,
+      Supplier<UUID> identifiers) {
+    this.database = Objects.requireNonNull(database, "database");
+    this.authentication = Objects.requireNonNull(authentication, "authentication");
+    this.queries = Objects.requireNonNull(queries, "queries");
+    this.inbox = Objects.requireNonNull(inbox, "inbox");
+    this.responses = Objects.requireNonNull(responses, "responses");
+    this.clock = Objects.requireNonNull(clock, "clock");
+    this.identifiers = Objects.requireNonNull(identifiers, "identifiers");
+  }
+
+  @Override
+  public byte[] process(WireMessage<FixedPayload> message) {
+    Objects.requireNonNull(message, "message");
+    var request = LogRequest.decode(message);
+    try {
+      Instant received = clock.instant().truncatedTo(ChronoUnit.MICROS);
+      Stage stage = transaction(true, c -> inspect(c, request, received));
+      Outcome outcome = transaction(false, c -> complete(c, request, stage, received));
+      return switch (outcome) {
+        case Completed result ->
+            responses.reply(
+                result.snapshot(),
+                request,
+                result.actor(),
+                identifiers.get(),
+                clock.instant(),
+                result.replay());
+        case Rejected result ->
+            responses.failure(request, result.code(), identifiers.get(), clock.instant());
+        case InvalidMessage ignored ->
+            throw new PermanentProtocolException(
+                "log query identity differs from its saved request");
+      };
+    } catch (PermanentProtocolException failure) {
+      throw failure;
+    } catch (RuntimeException failure) {
+      throw new TemporaryInfrastructureException();
+    }
+  }
+
+  private Stage inspect(Connection connection, LogRequest request, Instant received)
+      throws SQLException {
+    AuthenticatedActor actor;
+    try {
+      actor =
+          authentication.inspectReadOnly(
+              connection, request.header().authenticationContext().orElseThrow(), clock.instant());
+    } catch (AuthenticationContextException failure) {
+      return new Rejected(ResultCode.SESSION_INVALID);
+    }
+    if (actor.role() != Role.ADMIN) return new Rejected(ResultCode.FORBIDDEN);
+    var canonical = request.canonical(actor);
+    try {
+      Optional<InboxExecution> stored;
+      try {
+        stored = inbox.inspectMessage(connection, identity(request, actor, canonical, received));
+      } catch (InboxException failure) {
+        if (messageMismatch(failure)) return new Mismatch(actor);
+        throw failure;
+      }
+      if (stored.isPresent()) {
+        var execution = stored.orElseThrow();
+        require(execution.status() == InboxExecutionStatus.REPLAY);
+        var completion = execution.completion().orElseThrow(TemporaryInfrastructureException::new);
+        responses.read(request, actor, completion);
+        return new Ready(actor, new Saved(completion));
+      }
+      try {
+        return new Ready(actor, new Success(request.query(queries, connection, actor)));
+      } catch (LogQueryException failure) {
+        if (failure.resultCode() != ResultCode.RESOURCE_LIMIT) throw failure;
+        return new Ready(actor, new Failure(ResultCode.RESOURCE_LIMIT));
+      }
+    } finally {
+      canonical.close();
+    }
+  }
+
+  private Outcome complete(Connection connection, LogRequest request, Stage stage, Instant received)
+      throws SQLException {
+    AuthenticatedActor actor;
+    try {
+      actor =
+          authentication.verify(
+              connection, request.header().authenticationContext().orElseThrow(), clock.instant());
+    } catch (AuthenticationContextException failure) {
+      return reject(connection, request, Optional.empty(), ResultCode.SESSION_INVALID);
+    }
+    if (actor.role() != Role.ADMIN)
+      return reject(connection, request, Optional.of(actor), ResultCode.FORBIDDEN);
+    if (stage instanceof VerifiedStage verified && verified.actor().userId() != actor.userId())
+      return reject(connection, request, Optional.empty(), ResultCode.SESSION_INVALID);
+    return switch (stage) {
+      case Rejected denied ->
+          reject(
+              connection,
+              request,
+              denied.code() == ResultCode.SESSION_INVALID ? Optional.empty() : Optional.of(actor),
+              denied.code());
+      case Mismatch ignored -> invalid(connection, request, actor);
+      case Ready ready -> persist(connection, request, actor, ready.prepared(), received);
+    };
+  }
+
+  private Outcome persist(
+      Connection connection,
+      LogRequest request,
+      AuthenticatedActor actor,
+      Prepared prepared,
+      Instant received)
+      throws SQLException {
+    var canonical = request.canonical(actor);
+    try {
+      InboxExecution execution;
+      try {
+        execution =
+            inbox.execute(
+                connection,
+                identity(request, actor, canonical, received),
+                ignored ->
+                    switch (prepared) {
+                      case Success value ->
+                          responses.captureSuccess(
+                              request, actor, value.value(), identifiers.get(), clock.instant());
+                      case Failure value ->
+                          responses.captureFailure(
+                              request, actor, value.code(), identifiers.get(), clock.instant());
+                      case Saved ignoredSaved -> throw new TemporaryInfrastructureException();
+                    });
+      } catch (InboxException failure) {
+        if (messageMismatch(failure)) return invalid(connection, request, actor);
+        throw failure;
+      }
+      var completion = execution.completion().orElseThrow(TemporaryInfrastructureException::new);
+      if (prepared instanceof Saved saved)
+        require(InboxCompletionConsistency.sameSaved(saved.completion(), completion));
+      boolean replay = execution.status() == InboxExecutionStatus.REPLAY;
+      var snapshot = responses.read(request, actor, completion);
+      if (replay)
+        audit.write(connection, Optional.of(actor), request, Event.REPLAY, clock.instant());
+      return new Completed(actor, snapshot, replay);
+    } finally {
+      canonical.close();
+    }
+  }
+
+  private Rejected reject(
+      Connection connection,
+      LogRequest request,
+      Optional<AuthenticatedActor> actor,
+      ResultCode code)
+      throws SQLException {
+    audit.write(
+        connection,
+        actor,
+        request,
+        code == ResultCode.SESSION_INVALID ? Event.SESSION_INVALID : Event.ROLE_DENIED,
+        clock.instant());
+    return new Rejected(code);
+  }
+
+  private InvalidMessage invalid(
+      Connection connection, LogRequest request, AuthenticatedActor actor) throws SQLException {
+    audit.write(connection, Optional.of(actor), request, Event.MESSAGE_MISMATCH, clock.instant());
+    return new InvalidMessage();
+  }
+
+  private static boolean messageMismatch(InboxException failure) {
+    return failure.getSuppressed().length == 0
+        && failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE;
+  }
+
+  private static InboxRequest identity(
+      LogRequest request, AuthenticatedActor actor, CanonicalRequest canonical, Instant received) {
+    return new InboxRequest(
+        request.header().messageId(),
+        request.header().correlationId(),
+        OptionalLong.of(actor.userId()),
+        Optional.empty(),
+        canonical,
+        received,
+        received.plusSeconds(86400));
+  }
+
+  private <T> T transaction(boolean readOnly, SqlOperation<T> operation) {
+    try (Connection connection =
+        Objects.requireNonNull(database.getConnection(), "JDBC connection")) {
+      connection.setAutoCommit(false);
+      connection.setReadOnly(readOnly);
+      try {
+        T value = operation.run(connection);
+        connection.commit();
+        return value;
+      } catch (SQLException | RuntimeException failure) {
+        try {
+          connection.rollback();
+        } catch (SQLException rollbackFailure) {
+          failure.addSuppressed(rollbackFailure);
+        }
+        throw failure;
+      }
+    } catch (SQLException | RuntimeException failure) {
+      throw new TemporaryInfrastructureException();
+    }
+  }
+
+  private static void require(boolean valid) {
+    if (!valid) throw new TemporaryInfrastructureException();
+  }
+
+  @FunctionalInterface
+  private interface SqlOperation<T> {
+    T run(Connection connection) throws SQLException;
+  }
+
+  private sealed interface Stage permits Rejected, VerifiedStage {}
+
+  private sealed interface VerifiedStage extends Stage permits Ready, Mismatch {
+    AuthenticatedActor actor();
+  }
+
+  private record Ready(AuthenticatedActor actor, Prepared prepared) implements VerifiedStage {}
+
+  private record Mismatch(AuthenticatedActor actor) implements VerifiedStage {}
+
+  private sealed interface Prepared permits Success, Failure, Saved {}
+
+  private record Success(TypedPayloadValues value) implements Prepared {}
+
+  private record Failure(ResultCode code) implements Prepared {}
+
+  private record Saved(InboxCompletion completion) implements Prepared {}
+
+  private sealed interface Outcome permits Rejected, InvalidMessage, Completed {}
+
+  private record Rejected(ResultCode code) implements Stage, Outcome {}
+
+  private record InvalidMessage() implements Outcome {}
+
+  private record Completed(
+      AuthenticatedActor actor, LogReplayService.Snapshot snapshot, boolean replay)
+      implements Outcome {}
+}

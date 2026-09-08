@@ -49,19 +49,20 @@ public record LayoutDefinition(
     validateDeclaredLength("recordLength", recordLength);
     validateDeclaredLength("maximumRecordCount", maximumRecordCount);
     if ((recordLength == 0) != (maximumRecordCount == 0)) {
-      throw new LayoutValidationException("record length and maximum count must both be zero or non-zero");
+      throw new LayoutValidationException(
+          "record length and maximum count must both be zero or non-zero");
     }
     int calculated = calculateMaximumTotal(dataLength, recordLength, maximumRecordCount);
     if (maximumTotalLength != calculated) {
-      throw new LayoutValidationException("maximum total length does not match the checked length formula");
+      throw new LayoutValidationException(
+          "maximum total length does not match the checked length formula");
     }
-    if (messageKind == MessageKind.EVENT
-        && interactionKind != InteractionKind.INTERNAL) {
+    if (messageKind == MessageKind.EVENT && interactionKind != InteractionKind.INTERNAL) {
       throw new LayoutValidationException("event layout must use internal interaction");
     }
-    if (messageKind != MessageKind.EVENT
-        && interactionKind == InteractionKind.INTERNAL) {
-      throw new LayoutValidationException("request/response layout cannot use internal interaction");
+    if (messageKind != MessageKind.EVENT && interactionKind == InteractionKind.INTERNAL) {
+      throw new LayoutValidationException(
+          "request/response layout cannot use internal interaction");
     }
   }
 
@@ -84,7 +85,10 @@ public record LayoutDefinition(
     validateDeclaredLength("recordCount", recordCount);
     final int total;
     try {
-      total = Math.addExact(HEADER_LENGTH, Math.addExact(dataLength, Math.multiplyExact(recordLength, recordCount)));
+      total =
+          Math.addExact(
+              HEADER_LENGTH,
+              Math.addExact(dataLength, Math.multiplyExact(recordLength, recordCount)));
     } catch (ArithmeticException exception) {
       throw new LayoutValidationException("layout length calculation overflow", exception);
     }

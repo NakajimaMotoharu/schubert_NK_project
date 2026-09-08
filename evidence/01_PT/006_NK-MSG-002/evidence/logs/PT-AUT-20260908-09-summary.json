@@ -1,0 +1,343 @@
+{
+  "runId": "PT-AUT-20260908-09",
+  "targetCommit": "09a8a9be068b4829615373200d344da9b9925cd8",
+  "branch": "dev-authentication",
+  "startedAt": "2026-09-08T02:18:52+09:00",
+  "completedAt": "2026-09-08T02:20:55+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "springSecurityCrypto": "7.1.1",
+    "springCore": "7.0.9"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 72,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17300
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 998
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3442
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1265
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 739
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 165,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9837
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 829
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2279
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 764
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 344
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 86
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 48,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2887
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 247
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 716
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 236
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 111
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 22
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "499461f41c0c1b50170ea1bada998c71bfc73d709305bf65d8949602fa2ea5de",
+  "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",
+  "programId": "NK-MSG-002",
+  "kind": "FULL_REACTOR_COMPONENT_REGRESSION",
+  "programStatus": "IN_PROGRESS",
+  "moduleId": "api",
+  "moduleMethods": [
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#migrationsAreVersionedValidatedAndIdempotent",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#schemasExtensionAndTablesMatchTheIndependentCatalog",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#tableColumnsAndIdentityColumnsMatchTheIndependentMatrix",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#constraintsForeignKeysAndDeferredTriggerAreComplete",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#explicitIndexesMatchTheIndependentSet",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#identitySequencesHaveTheN12LimitAndDoNotCycle",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#scalarAndPathBoundariesRejectInvalidRows",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#stateTimeAndNullCorrelationsAreEnforced",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#compositeGameForeignKeysAndDeleteActionsAreEnforced",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#entryAudioLinkUpperBoundaryAndDeferredTriggerAreEffective",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#initialDataViewsAndFunctionsMatchTheSecurityContract",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#serviceRoleGrantsDenyCrossBoundaryAccess",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#checksumDriftIsDetectedAndDestructiveFlywayOperationsAreDisabled",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#concurrentInitialMigrationProducesOneHistory",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#sqlResourcesContainNoCredentialOrUnsafeBytes",
+    "dev.codex.schubert.nk.api.database.RequiredColumnTest#requiredValuesRetainIdentityAndNullFailsWithSqlState",
+    "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest#currentAndPreviousKeysVerifyWhileUnknownAndTamperedDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest#keyRingInvariantsNullContractsAndCloseAreEnforced",
+    "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest#fingerprintDefensivelyCopiesAndValidates",
+    "dev.codex.schubert.nk.api.idempotency.InboxModelTest#requestAcceptsAnonymousAuthenticatedAndEveryTokenLayout",
+    "dev.codex.schubert.nk.api.idempotency.InboxModelTest#completionAndExecutionValidateMetadataPresenceAndRedact",
+    "dev.codex.schubert.nk.api.idempotency.InboxModelTest#requestRejectsNullsScopeTokenOwnerAndTimeViolations",
+    "dev.codex.schubert.nk.api.idempotency.InboxModelTest#resultReferencesEnforcePhysicalReferenceUnion",
+    "dev.codex.schubert.nk.api.idempotency.InboxModelTest#inboxExceptionUsesBoundedReasonAndSqlState",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#completionRetentionStartsAtCompletionAndReplayNeverExtendsIt",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest#transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest#goldenCanonicalAndHmacMatchIndependentOpenSslVector",
+    "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest#canonicalModelsDefensivelyCopyAndRedact",
+    "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest#unavailableHmacProviderProducesTypedStartupFailure",
+    "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest#nfcNormalizationAndNullEmptyDistinctionAreStable",
+    "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest#invalidModelsAndFingerprintArgumentsAreRejected",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#currentPreviousUnknownTamperAndEveryAadMutationDenyClosed",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#identitySnapshotKeyAndLifecycleContractsRejectNullAndInvalidValues",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#fixedNonceCiphertextMatchesIndependentCompressionAndAadVector",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#unavailableAesProviderProducesTypedBoundedFailure",
+    "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest#zeroAndMaximumPlaintextRoundTripAndEveryLengthBoundaryIsGuarded",
+    "dev.codex.schubert.nk.api.idempotency.SecretBufferTest#requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint",
+    "dev.codex.schubert.nk.api.idempotency.SecretBufferTest#streamBoundsAndExceptionalExitWipeAllOwnedCapacity",
+    "dev.codex.schubert.nk.api.idempotency.SecretBufferTest#supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose",
+    "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest#cleanupNullLimitsAreAlwaysRejected",
+    "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest#sevenDayAndLeaseBoundariesPreserveProtectedRows",
+    "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest#chunkLimitRollbackAndLockedRowsAreSafe",
+    "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest#sentRowsYoungerThanSevenDaysMustRemain",
+    "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected",
+    "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson",
+    "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest#transactionFailuresNeverReportSuccessAndAlwaysReleaseConnection",
+    "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest#projectsExplicitColumnsAndDuplicateKeepsFirstRow",
+    "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest#optionalFieldsIpv6AndConcurrentDuplicateAreSafe",
+    "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest#databaseCommitSurvivesAckFailureAndBrokerCacheMiss(Path)",
+    "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest#invalidWireAndNullNeverAcquireDatabase",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest#globalBrokerAndJournalSettingsMatchTheIndependentOracle",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest#addressPoliciesMatchTheIndependentCapacityMatrix",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest#securityRolesMatchTheIndependentAclMatrix",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest#topologyAndTransportAreClosedToTheApprovedSet",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest#commonConnectionAndReconnectPolicyIsExactAndCredentialFree",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest#consumerWindowProfilesAreOneMibZeroAndSixtyFourKib",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#persistentMessageAndDuplicateCacheSurviveRestart(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#fatalDlqMessageRoundTripsThroughActualBroker(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#rollbackUsesApprovedTimelineAndFourthFailureRoutesToDlq(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#transactedSendAndReceiveRespectRollbackAndCommit(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#persistentDlqAndExpirySurviveRestartWithoutPurge(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest#requestPropertiesTtlAndBodyRoundTripThroughActualBroker(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest#actualBrokerEnforcesEveryRoleAddressAndOperationCombination(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest#allFourApplicationRoutesRoundTripAndDecode(Path)",
+    "dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest#actualProviderAndMetadataViolationsAreRejectedBeforeBusinessHandling(Path)",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#validBytesMessageProducesAnImmutableRedactedSnapshot",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#destinationMustBePermanentArtemisUnqualifiedAndExact",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+    "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest#requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest#invalidWebLogIsCommittedToDlqAndSignalsFatal(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest#eventProcessorFailureRollsBackForRedelivery(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest#bothInternalEventRoutesProcessAndCommit(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest#eventListenerConstructorsAndBoundariesDenyInvalidInputs",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#validRequestDispatchesAndCommitsReplyWithOriginalAck(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#processorFailureRollsBackAndRequestIsRedelivered(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#invalidRequestIsSanitizedAckedAndCommittedToDlq(Path)",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#constructorAndListenerBoundaryDenyNullAndWrongSessionMode",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#rawDlqSenderAllowsOnlyApplicationSourceAndBoundedMetadata",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest#readAndFatalIsolationFailuresRollbackAndRetainPrimaryCause",
+    "dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest#writerCopiesBodyAndOnlyApprovedBoundedMetadata",
+    "dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest#enumsExposeTheClosedWriterAndDetectedBySets",
+    "dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest#metadataAndWriterContractsDenyNullAndUnboundedValues",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest#actualBrokerPreservesReplyAndDlqPropertiesAcrossRollbackAndCommit(Path)",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest#outboundFactoriesRejectNullWrongModeAndEveryReplyIdentityMismatch",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#dispatcherTurnsJmsAndStoredWireFailuresIntoRedactedRetryWithoutSend(Path)",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#publicBoundariesRejectNullModesBoundsErrorsAndEveryWireIdentityMutation",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#initialReceiptSendKeepsItsExactDueTimeWithoutSamplingRetryJitter(Path)",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#markSentAndFailureRequireLeaseAndUseExactBoundedRetryState",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#retryJitterReachesTheDatabaseAtEveryBaseAndContinuesAtTheAttemptCap",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#dispatcherPersistsBothDestinationsAndArtemisSuppressesSendMarkCrashDuplicate(Path)",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#claimsOnlyDueExpiredRowsWithTenSecondLeaseLimitAndNoDispatcherOverlap",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#resultTimesFollowTheObservedJmsFailureAndCommitAfterElapsedSendTime(Path)",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#persistedQwkPayloadIsFullyDecodedBeforeOpeningJms",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest#entryOwnsBodyExposesEveryFieldAndRedactsText",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest#entryRejectsEveryInvalidBoundaryAndNull",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest#requestOwnsBodyExposesEveryFieldAndRejectsEveryInvalidValue",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest#reportAndIntegrityExceptionsCoverEveryInvariant",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest#nextAttemptIsCalculatedFromExplicitFailureTime",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest#destinationMappingIsClosedToTwoPhysicalAddresses",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest#retryJitterUsesIndependentExactBoundaryVectorsAfterCappingTheBase",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest#retryScheduleUsesOneFiveThirtySixtyAndFiveMinuteCap",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#currentPreviousAndEveryIdentityBindingFailClosedOnMismatch",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#lengthVersionKeyAndNullInvariantsIncludeBothEndpointsAndClose",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#jcaUnavailabilityIsTypedAndProvidersAreRestored",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#envelopeMutationsAndAuthenticatedNonContextPlaintextAreRejected",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#independentEnvelopeAadAndDefensiveCopiesMatchExactly",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#concurrentEncryptionHasDistinctNoncesAndCorrectRowBinding",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#faultsNullRowsAndAuditFailuresRollbackWithoutLeakingData",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#adminReasonsRevokeOnlyTargetAndPreserveExistingRevocations",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#logoutAndRepeatedLogoutKeepOriginalTimeWithoutExtendingIdle",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#concurrentLogoutAndIssuanceSerializeWithoutLostRevocation",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#missingDisabledDuplicateAndDatabaseFaultsRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#thirdSessionRevokesOldestAccessAndUuidTieOnly",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#oneHundredConcurrentIssuesKeepOnlyTwoActive",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#constructorsNullBoundsAndUnavailableCryptoFailBeforeCommit",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#replacementAuditIsAtomicBoundedAndCarriesRequestIdentity",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#issuancePersistsOnlyHashAndBoundCipherInCallerTransaction",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#currentDatabaseActorAndIdleUpdateUseCallerTransactionWithoutShortening",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#concurrentVerificationsSerializeUserThenSessionAndRemainUsable",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlNullAndUnknownRoleNeverBecomeAValidActor",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#unknownRevokedExpiredAndDisabledAllDenyWithoutTouch",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlFaultsAndSuppressedCloseErrorsAreBoundedAndDoNotCommit",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#nullAndAutocommitBoundariesRejectBeforeModifyingState",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#failuresLocksAndInfrastructureNeverExposeIdentity",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#logoutNullAndBoundaryResultsPreserveTheOriginalInstant",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#loginSuccessMatchesIndependentUserAndAdminByteVectors",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#actorOwnerAndErrorNullInvariantsFailAtBoundaries",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#literalOwnerAndAdminMatrixNeverExposesOtherNotifications",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#asciiVectorsAndConcurrentCallsDoNotShareDigestState",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#unavailableMandatoryDigestPreventsStartupAndRestoresProviders",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#thresholdsWindowsLocksAndSuccessHaveLiteralSqlPostconditions",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#knownAndUnknownUsersLockUserBeforeIpAndPersistAcrossConnections",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#jdbcNullUnknownEnumAndFaultsFailClosedWithoutProviderData",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#modelAndMethodNullBoundsDoNotInventPersistedState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#fifteenMinuteWindowAndLockBoundariesAreIndependent",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#nullMalformedAndClockRegressionCannotInventAValidState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#exactUserAndIpThresholdsLockWithoutExtensionThenSuccessClears",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#retryAfterCeilsAndCapsUsingLiteralSeconds",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#currentObservedWindowEndpointVectorAppliesToUserAndIp",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#tamperedMetadataWireAndSessionReferencesFailClosed",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#failureSnapshotKeepsOriginalCodeRetryAndMessage",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#successSnapshotFreezesOriginalFieldsAndRebuildsOnlyResponseHeader",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#jdbcNullFaultsAndInvalidArgumentsNeverLeakOrMutate",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#concurrentReplayAndKeyRotationPreserveExactData",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#fixedSaltIndependentPbkdf2VectorAndNfcMatch",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#encodeUsesFreshSaltAndFull256BytePassword",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#invalidStoredGenerationAndInputsAreBoundedAndConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#nfcSupplementaryAndUsernameComparisonUseExplicitValues",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#loginAndCreationBoundariesDifferAndInputsAreConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#malformedControlAndNullContractsRejectWithoutRetainingInput"
+  ],
+  "testIds": [
+    "PT-IDEM-013-R01",
+    "PT-IDEM-WIPE-001",
+    "PT-IDEM-WIPE-002",
+    "PT-IDEM-WIPE-003"
+  ],
+  "relatedBug": [
+    "BUG-025",
+    "BUG-027",
+    "BUG-014"
+  ],
+  "relatedYkt": [
+    "YKT-022",
+    "YKT-024",
+    "YKT-012"
+  ],
+  "relatedSsc": [],
+  "expectation": "002 independent UI234 byte/TSV oracle; 006 independent completion/TTL SQL postconditions, synthetic zeroized backing arrays, independent JCA/DataOutputStream and OpenSSL HMAC vectors. Other programs and PGPT remain incomplete.",
+  "previousEvidenceRun": "PT-AUT-20260908-07",
+  "notRunCountedAsPass": 0
+}
