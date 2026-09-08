@@ -113,8 +113,35 @@ public final class EncryptedWebSessionRepository {
    * Caller supplies the API-authenticated principal; this is fixation, not password authentication.
    */
   public Optional<WebSessionSnapshot> authenticate(WebSessionId id, SessionPrincipal principal) {
-    String hash = hash(id);
     Objects.requireNonNull(principal, "principal");
+    return reidentify(id, attributes -> Optional.of(principal));
+  }
+
+  /** SSC-042/PT-WEB-044: changes ID and CSRF without granting a new principal. */
+  public Optional<WebSessionSnapshot> rotate(WebSessionId id) {
+    return reidentify(id, SessionAttributes::principal);
+  }
+
+  /** SSC-042/PT-WEB-044: server/framework time only, never an HTTP-bound field. */
+  public Optional<WebSessionSnapshot> touch(WebSessionId id, Instant accessedAt) {
+    String hash = hash(id);
+    Instant requested =
+        Objects.requireNonNull(accessedAt, "accessedAt").truncatedTo(ChronoUnit.MICROS);
+    return transaction(
+        connection -> {
+          var loaded = load(connection, hash);
+          if (loaded.isEmpty()) return Optional.empty();
+          var current = loaded.orElseThrow();
+          Instant access = requested.isAfter(current.now()) ? requested : current.now();
+          var row = write(connection, current.row(), current.attributes(), access);
+          return Optional.of(new WebSessionSnapshot(id, row, current.attributes()));
+        });
+  }
+
+  private Optional<WebSessionSnapshot> reidentify(
+      WebSessionId id,
+      java.util.function.Function<SessionAttributes, Optional<SessionPrincipal>> principal) {
+    String hash = hash(id);
     return transaction(
         connection -> {
           var loaded = load(connection, hash);
@@ -132,7 +159,7 @@ public final class EncryptedWebSessionRepository {
                   .orElse(false));
           var attributes =
               new SessionAttributes(
-                  Optional.of(principal),
+                  principal.apply(current.attributes()),
                   Optional.of(newCsrf),
                   current.attributes().savedRequest(),
                   current.attributes().operationTokens());

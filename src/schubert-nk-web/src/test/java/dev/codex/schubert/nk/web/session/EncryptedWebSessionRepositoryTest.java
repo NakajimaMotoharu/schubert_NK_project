@@ -716,7 +716,17 @@ class EncryptedWebSessionRepositoryTest {
     assertEquals(0, error.getSuppressed().length);
   }
 
-  private static final class Fixture implements AutoCloseable {
+  static final class Fixture implements AutoCloseable {
+    private final WebLogDatabaseFixture database;
+
+    Fixture() {
+      this(db);
+    }
+
+    Fixture(WebLogDatabaseFixture database) {
+      this.database = database;
+    }
+
     final SessionPayloadCodec codec = new SessionPayloadCodec("v2", new byte[32], null, null);
     final MutableClock clock = new MutableClock();
     final SequenceRandom random = new SequenceRandom();
@@ -741,11 +751,15 @@ class EncryptedWebSessionRepositoryTest {
                   }
                   if (nullConnection) return null;
                   live.incrementAndGet();
-                  return wrap(Connection.class, db.web(), "connection", "");
+                  return wrap(Connection.class, openDatabase(), "connection", "");
                 }));
     final EncryptedWebSessionRepository repository =
         new EncryptedWebSessionRepository(
             source, codec, clock, random, () -> new java.util.UUID(0, ids.incrementAndGet()));
+
+    private Connection openDatabase() throws Exception {
+      return database.web();
+    }
 
     private <T> T wrap(Class<T> type, T target, String kind, String sql) {
       return type.cast(
@@ -797,7 +811,7 @@ class EncryptedWebSessionRepositoryTest {
     }
   }
 
-  private static final class MutableClock extends Clock {
+  static final class MutableClock extends Clock {
     Instant value = NOW;
 
     @Override
@@ -816,7 +830,7 @@ class EncryptedWebSessionRepositoryTest {
     }
   }
 
-  private static final class SequenceRandom extends SecureRandom {
+  static final class SequenceRandom extends SecureRandom {
     private static final long serialVersionUID = 1L;
     final AtomicInteger sequence = new AtomicInteger();
     Integer fixed;

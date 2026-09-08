@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 public final class SavedRequestTarget {
   private static final Pattern ENCODED_PATH_DELIMITER =
       Pattern.compile("%(?:2e|2f|5c)", Pattern.CASE_INSENSITIVE);
+  // BUG-059/YKT-054/PT-WEB-006/045: URI.normalize retains leading parent segments.
+  private static final Pattern DOT_SEGMENT = Pattern.compile("(?:^|/)\\.{1,2}(?:/|$)");
   private final String location;
 
   private SavedRequestTarget(String location) {
@@ -39,6 +41,7 @@ public final class SavedRequestTarget {
     require(!uri.isAbsolute());
     require(path.startsWith("/") && !target.startsWith("//"));
     require(uri.getRawFragment() == null);
+    require(!DOT_SEGMENT.matcher(path).find());
     require(path.equals(uri.normalize().getRawPath()));
     require(!ENCODED_PATH_DELIMITER.matcher(path).find());
     return new SavedRequestTarget(target);

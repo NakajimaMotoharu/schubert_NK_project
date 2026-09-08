@@ -287,6 +287,8 @@ class SessionAttributeCodecTest {
     for (String bad : List.of("b".repeat(63), "B".repeat(64), "g".repeat(64)))
       invalid(full.replace(CONTEXT, bad));
     invalid(full.replace("/logs", "https://external.test/"));
+    for (String path : List.of("/../logs", "/..", "/../../logs", "/./logs"))
+      invalid(full.replace("/logs", path));
     invalid(full.replace("QSBREQ01", "LGSREQ01"));
     invalid(full.replace(CSRF, "c".repeat(63)));
     invalid(full.replace("reader", "a".repeat(65)));

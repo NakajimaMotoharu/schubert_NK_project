@@ -160,6 +160,23 @@ Maven Centralの`org/springframework/session/spring-session-core/4.1.1/spring-se
 
 SessionRepositoryはcreate/save/findById(nullable)/deleteById、saveはvoid。SessionはchangeSessionId、nullable属性read、null値setでremove、creation/last access/max idle/isExpiredを持つ。Filterはrequest読取時にInstant.nowでlast accessを設定し、response commit前にrepository.saveを呼ぶ。従ってadapterではDB microsecond精度への明示変換と、削除済rowのstale saveを新規insertへ化けさせない制御が必要。Libraryの任意Object属性をそのままserializationせず、SS314の閉schemaへ明示projectionする。実装・接続PTは後続。
 
+### 5.7 Spring Session/Servlet接続用の固定依存（2026-09-08）
+
+Web moduleへ以下を導入。取得元はMaven Centralの`https://repo.maven.apache.org/maven2/`＋表artifact path＋version/artifact-version.jar。公開[Spring Session API](https://docs.spring.io/spring-session/reference/api.html)と5.6のrelease sourceに基づき、標準SessionRepositoryFilterをcustom encrypted repositoryへ接続する。Boot server/Security chain全体の起動完了ではない。
+
+| artifact path | version/scope | JAR SHA256 |
+|---|---|---|
+| org/springframework/session/spring-session-core | 4.1.1 compile | 01b836bfcc5b64f7039c3430980878112a10db5066eda4274a1d3eb874e49733 |
+| org/springframework/spring-web | 7.0.9 compile | 941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302 |
+| jakarta/servlet/jakarta.servlet-api | 6.1.0 compile | 8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4 |
+| org/springframework/spring-test | 7.0.9 test | 6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc |
+| commons-logging/commons-logging | 1.4.0 Web runtimeへ収束 | d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc |
+| org/jspecify/jspecify | 1.0.1 Web runtimeへ収束 | 070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66 |
+
+初回compileはEnforcer dependency convergenceがcommons-logging1.4.0/1.3.5、JSpecify1.0.1/1.0.0の混在を拒否。WebだけのdependencyManagementへ上位patchを明示固定し、ruleを無効化しない。Protocol/Storage/APIの既存宣言は不変更、Web実行classpathでは同artifactの一意versionへ収束する。JSpecify4 annotationのjavap公開signatureは1.0.0と1.0.1で差分0（2026-09-08確認）、NullAway/compileを再実施。JUnit5.13.4/Artemis2.56.0/Netty4.1.137.Finalは維持。Spring beans/core7.0.9、observation/commons1.16.7はspring-webの推移依存、既存broker test側micrometer-core1.17.0はtest scopeのまま。全BOMによる一括上書きはしない。
+
+導入再現は既存JAVA_HOME/local repository指定でWeb reactorのonline compileを一回実行し、以後`-o`。`org.apache.maven.plugins:maven-dependency-plugin:3.9.0:tree`をWeb reactorへoffline実行、2026-09-08 21:19:35 JST exit0、`/tmp/PT-WEB-spring-dependencies-01.log` SHA256 `063eed991f99cae20506b510358c0e6024dfe6d71a49980f3fde4636783bfafa`。依存source/binary/license metadataは配布元artifactで確認可能、Gitへvendor copyはしない。探索初回失敗は合格へ算入せず、015 spring-session-exploration.mdへ記録する。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。
