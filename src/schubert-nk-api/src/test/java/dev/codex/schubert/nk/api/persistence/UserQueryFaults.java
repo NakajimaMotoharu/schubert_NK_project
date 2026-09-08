@@ -68,7 +68,7 @@ final class UserQueryFaults {
               if (name.equals("wasNull") && altered[0]) return wasNull[0];
               if (name.startsWith("get")
                   && a != null
-                  && a.length == 1
+                  && (a.length == 1 || (name.equals("getObject") && a.length == 2))
                   && a[0] instanceof String column) {
                 altered[0] =
                     columns.containsKey(column) && (changedRow == 0 || changedRow == row[0]);
