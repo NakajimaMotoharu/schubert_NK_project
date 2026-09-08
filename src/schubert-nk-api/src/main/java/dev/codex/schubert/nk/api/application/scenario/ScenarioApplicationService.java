@@ -40,7 +40,7 @@ import javax.sql.DataSource;
 /**
  * Internal staged Scenario processor; register only after single-instance/full storage startup.
  * NK-SCN-001/NK-MSG-002/NK-AUT-001; FUN-003..005/MQ-006..010/AUT-001..004/DAT-009; UI234/237/241;
- * SS312/324 §7.1/332 §4.2/333; SSC-027/PT-SCN-009-T01..T06. Owns JDBC transactions, never JMS,
+ * SS312/324 §7.1/332 §4.2/333; SSC-027/PT-SCN-009-T01..T07. Owns JDBC transactions, never JMS,
  * ready deletion, provider keys or storage root lifetime.
  */
 public final class ScenarioApplicationService implements SyncRequestProcessor {
@@ -128,7 +128,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
           identifiers.get(),
           clock.instant(),
           completed.replay());
-    } catch (AuthenticationContextException | OwnerChanged denied) {
+    } catch (AccessRejected denied) {
       return responses.failure(
           request, ResultCode.SESSION_INVALID, identifiers.get(), clock.instant());
     } catch (IOException failure) {
@@ -309,9 +309,10 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
         }
         throw failure;
       }
-    } catch (AuthenticationContextException | OwnerChanged failure) {
+    } catch (AuthenticationContextException | AccessRejected failure) {
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
-      throw failure;
+      // BUG-039: fixed internal boundary, never the multi-catch common RuntimeException type.
+      throw new AccessRejected();
     } catch (InboxException failure) {
       if (failure.getSuppressed().length == 0
           && failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)
@@ -324,7 +325,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
   }
 
   private static void owner(AuthenticatedActor before, AuthenticatedActor current) {
-    if (before.userId() != current.userId()) throw new OwnerChanged();
+    if (before.userId() != current.userId()) throw new AccessRejected();
   }
 
   private static void require(boolean valid) {
@@ -357,7 +358,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
   private record Completed(
       AuthenticatedActor actor, ScenarioReplayService.Snapshot snapshot, boolean replay) {}
 
-  private static final class OwnerChanged extends RuntimeException {
+  private static final class AccessRejected extends RuntimeException {
     private static final long serialVersionUID = 1L;
   }
 }

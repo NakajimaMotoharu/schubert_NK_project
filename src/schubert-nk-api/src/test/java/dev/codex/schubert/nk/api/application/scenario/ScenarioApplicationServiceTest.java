@@ -250,7 +250,8 @@ final class ScenarioApplicationServiceTest {
       assertArrayEquals(
           golden("SCN", newContext, h, "0200", true, 201, 102), h.service.process(newContext));
     }
-    for (String change : List.of("revoked", "owner", "role", "expiry", "regenerationOwner")) {
+    for (String change :
+        List.of("revoked", "owner", "ownerClose", "role", "expiry", "regenerationOwner")) {
       seed();
       master(201);
       try (var h = new Harness()) {
@@ -266,14 +267,23 @@ final class ScenarioApplicationServiceTest {
                   case "revoked" ->
                       sql(
                           "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:01:01Z',revoke_reason='LOGOUT'");
-                  case "owner" -> sql("update schubert.auth_sessions set user_id=102");
+                  case "owner", "ownerClose" -> {
+                    sql("update schubert.auth_sessions set user_id=102");
+                    if (change.equals("ownerClose")) {
+                      h.fault = "close";
+                      h.faultConnection = 2;
+                    }
+                  }
                   case "role" -> sql("update schubert.app_users set role='ADMIN' where id=101");
                   case "expiry" -> h.now.set(Instant.parse("2026-09-08T08:00:00Z"));
                   default -> throw new AssertionError(change);
                 }
               };
-        byte[] actual = h.service.process(request);
-        assertEquals(change.equals("role") ? "0000" : "0102", ascii(actual, 208, 4));
+        if (change.equals("ownerClose")) temporary(() -> h.service.process(request));
+        else {
+          byte[] actual = h.service.process(request);
+          assertEquals(change.equals("role") ? "0000" : "0102", ascii(actual, 208, 4));
+        }
         assertEquals(
             change.equals("role") || change.equals("regenerationOwner") ? 1 : 0,
             count("schubert.request_inbox"));
