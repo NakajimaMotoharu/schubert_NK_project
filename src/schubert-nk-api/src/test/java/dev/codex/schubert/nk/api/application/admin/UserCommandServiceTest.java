@@ -353,8 +353,22 @@ class UserCommandServiceTest {
             OptionalLong.of(3),
             (c, a) -> service.changeStatus(c, a, TARGET, true, 999_999_999, META)),
         ResultCode.RESOURCE_LIMIT);
-    for (String name :
-        List.of("u1", " U1 ", "", " ", "é", "bad/name", "a".repeat(65), "line\nname")) {
+    // BUG-046: UI236 §4.2 is the independent oracle, not the production result or field UI.
+    for (String name : List.of("u1", "U1", " U1 ")) {
+      char[] input = PASSWORD.toCharArray();
+      denied(
+          run(
+              Mutation.CREATE,
+              OptionalLong.empty(),
+              (c, a) -> service.create(c, a, name, input, UserRole.USER, true, META)),
+          ResultCode.CONFLICT);
+      erased(input);
+    }
+    assertEquals(
+        3,
+        count(
+            "select count(*) from schubert.app_logs where action='USER_CREATED' and details->>'outcome'='DENIED' and details->>'resultCode'='0105'"));
+    for (String name : List.of("", " ", "é", "bad/name", "a".repeat(65), "line\nname")) {
       char[] input = PASSWORD.toCharArray();
       denied(
           run(

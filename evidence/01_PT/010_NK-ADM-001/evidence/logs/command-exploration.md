@@ -11,6 +11,9 @@
 | command-03 | 15:43:17 | 0／command10件PASS | 防御的DB count/重複row/監査上限/SQL2200H＋close/savepoint故障/conditional0を追加、新規全coverage100% |
 | command-04 | 15:44:49 | 1／10件中1失敗 | coverage以外の追加RETURNING ID負例でBUG-045検出。修正前05ac5da起票。合格に算入しない |
 | command-05 | 15:46:34 | 0／command10＋query7件PASS | BUG-045修正、RETURNING NULL/0/N12超過・MIN/MAX時刻、同型SELECT UserId例外の横展開再試験。新規全coverage100% |
+| formal03（非合格） | 15:53:49 | 1／API静的解析1件、Web未実行 | source9be9af5。BUG-046 oracle問題が判明済み、さらにBUG-047 fixed SQLのSpotBugs失敗。正式合格manifestは更新しない |
+| command-06-before | 15:56:32 | 1／command1件FAIL | BUG-046のUI236独立oracle訂正、旧Productionが0100を返してexpected0105に失敗。error/skip0 |
+| command-07 | 15:57:59 | 0／command10件PASS | BUG-046 duplicateだけ0105へ修正、BUG-047四種SQLを固定literal化。全他mapping/rollback/並行/新規coverage100%。正式gate待ち |
 
 Failed/flaky/skipped/not-runは合格に含めない。Secret/provider/SQL result dumpなし。正式runまでProgram進捗と確定561件の最新gateを更新しない。
 
@@ -23,3 +26,6 @@ Raw log SHA256（raw実体は/tmpのみ）:
 | command-03 | a681cb9f4149305b7e7f9982352972133bad5e01a5f4683b4efe43ead2f12f09 |
 | command-04 | 69ccacbdd4e614278d6ff4e5ca3bb1f0ff7d579d49f6112ee2926856a0f648c6 |
 | command-05 | e8d3a94e028def365db22ffe1d49faea4bc0ee95ba48c2dca2d75c823144543e |
+| formal03 | 56ab8888abc0d54edd0ec4703b4eb648f191e98163af97a67aa5f6e374f3c920 |
+| command-06-before | 76d1a86ed8e864c1a83ecf2479d0b23686153153d5648f012a50a90a2e77f029 |
+| command-07 | d65acdfb7643645741977f909c1f63695c5d8ec83f78cf369806523e4b8762fc |

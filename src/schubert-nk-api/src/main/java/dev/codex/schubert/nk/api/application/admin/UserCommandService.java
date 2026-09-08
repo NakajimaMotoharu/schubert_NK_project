@@ -112,7 +112,7 @@ public final class UserCommandService {
             }
             c.releaseSavepoint(savepoint);
             if (created.isEmpty())
-              return rejected(ResultCode.VALIDATION_ERROR, Optional.empty(), Optional.empty());
+              return rejected(ResultCode.CONFLICT, Optional.empty(), Optional.empty());
             State after =
                 read(c, created.orElseThrow())
                     .orElseThrow(() -> new SQLException("created user is missing"));
@@ -248,19 +248,23 @@ public final class UserCommandService {
               && (!next.enabled() || next.role() != UserRole.ADMIN)
               && activeAdmins(c) <= 1)
             return rejected(ResultCode.CONFLICT, Optional.of(id), stored);
-          String assignment =
-              switch (kind) {
-                case ENABLE, DISABLE -> "status=?";
-                case PROMOTE, DEMOTE -> "role=?";
-                case RESET_PASSWORD -> "password_hash=?,password_changed_at=?";
-                case UNLOCK -> "failed_count=0,failure_window_started_at=null,locked_until=null";
-              };
           int changed;
+          // BUG-047: whole statements are fixed literals; all external values remain bind-only.
           try (var s =
-              c.prepareStatement(
-                  "update schubert.app_users set "
-                      + assignment
-                      + ",version=version+1,updated_at=?,updated_by=? where id=? and version=?")) {
+              switch (kind) {
+                case ENABLE, DISABLE ->
+                    c.prepareStatement(
+                        "update schubert.app_users set status=?,version=version+1,updated_at=?,updated_by=? where id=? and version=?");
+                case PROMOTE, DEMOTE ->
+                    c.prepareStatement(
+                        "update schubert.app_users set role=?,version=version+1,updated_at=?,updated_by=? where id=? and version=?");
+                case RESET_PASSWORD ->
+                    c.prepareStatement(
+                        "update schubert.app_users set password_hash=?,password_changed_at=?,version=version+1,updated_at=?,updated_by=? where id=? and version=?");
+                case UNLOCK ->
+                    c.prepareStatement(
+                        "update schubert.app_users set failed_count=0,failure_window_started_at=null,locked_until=null,version=version+1,updated_at=?,updated_by=? where id=? and version=?");
+              }) {
             int p = 1;
             switch (kind) {
               case ENABLE, DISABLE -> s.setString(p++, next.enabled() ? "ACTIVE" : "DISABLED");
