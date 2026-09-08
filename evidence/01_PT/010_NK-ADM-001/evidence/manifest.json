@@ -1,9 +1,9 @@
 {
-  "runId": "PT-ADM-20260908-02",
-  "targetCommit": "c828f77ec11b1b0727724050323700c19b04dc76",
+  "runId": "PT-ADM-20260908-04",
+  "targetCommit": "1f1d321ad40bd7ba5f8461e5954e94e7ac6142d3",
   "branch": "dev-admin",
-  "startedAt": "2026-09-08T15:13:34+09:00",
-  "completedAt": "2026-09-08T15:16:56+09:00",
+  "startedAt": "2026-09-08T15:59:29+09:00",
+  "completedAt": "2026-09-08T16:03:00+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 330,
+      "tests": 340,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 20468
+          "covered": 21927
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1556
+          "covered": 1703
         },
         "LINE": {
           "missed": 0,
-          "covered": 4604
+          "covered": 4880
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1504
+          "covered": 1627
         },
         "METHOD": {
           "missed": 0,
-          "covered": 701
+          "covered": 747
         },
         "CLASS": {
           "missed": 0,
-          "covered": 153
+          "covered": 161
         }
       },
       "spotbugs": {
@@ -183,12 +183,12 @@
       }
     }
   },
-  "rawLogSha256": "b97fd9de85856aad94d3fd00da0e26da4caa9c3b42e7d63647f5b143afdf17e5",
+  "rawLogSha256": "d56d3cbb5070c11d0a4bef6abe74d8ee3809d87baffa1abf04546e668da64b4e",
   "programId": "NK-ADM-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
-    "program": 13,
-    "reactor": 561
+    "program": 23,
+    "reactor": 571
   },
   "testIdMethods": {
     "PT-ADM-001": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
@@ -203,7 +203,17 @@
     "PT-ADM-010": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
     "PT-ADM-011": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
     "PT-ADM-012": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
-    "PT-ADM-013": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState"
+    "PT-ADM-013": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    "PT-ADM-014": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm014CreateNormalizesAsciiUsersAndIndependentlyVerifiesPassword",
+    "PT-ADM-015": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm015StatusChangesAtomicallyRevokeSessions",
+    "PT-ADM-016": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm016RoleChangesProtectSelfAndLastActiveAdmin",
+    "PT-ADM-017": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm017PasswordResetConsumesSecretsAndRevokesEverySession",
+    "PT-ADM-018": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm018UnlockUsesExactExpiryAndNoopVersionRules",
+    "PT-ADM-019": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm019ExpectedVersionDuplicateAndCapacityAreBusinessResults",
+    "PT-ADM-020": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm020SqlRevocationAndAuditFailuresRollbackTogether",
+    "PT-ADM-021": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm021NullPolicyAndHashFailuresAlwaysErasePasswords",
+    "PT-ADM-022": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm022ConcurrentMutationsPreserveAdminAndVersionInvariants",
+    "PT-ADM-023": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm023ResultAndAuditProjectionsContainOnlyApprovedFields"
   },
   "methods": [
     "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
@@ -218,15 +228,35 @@
     "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
     "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
     "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
-    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize"
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm015StatusChangesAtomicallyRevokeSessions",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm014CreateNormalizesAsciiUsersAndIndependentlyVerifiesPassword",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm020SqlRevocationAndAuditFailuresRollbackTogether",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm023ResultAndAuditProjectionsContainOnlyApprovedFields",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm021NullPolicyAndHashFailuresAlwaysErasePasswords",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm018UnlockUsesExactExpiryAndNoopVersionRules",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm017PasswordResetConsumesSecretsAndRevokesEverySession",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm019ExpectedVersionDuplicateAndCapacityAreBusinessResults",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm016RoleChangesProtectSelfAndLastActiveAdmin",
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm022ConcurrentMutationsPreserveAdminAndVersionInvariants"
   ],
   "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
   "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
-  "scope": "UserQueryRepository search/detail, redacted query exception, and SSC031 administrative authentication prelude. Command/Inbox/HMAC/critical audit/session revocation connection, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
+  "scope": "UserQueryRepository search/detail, redacted query exception, SSC031 administrative authentication prelude, and definite UserCommandService mutations/critical audit/session revocation in a caller-owned transaction. Outer Inbox/HMAC/replay/denial audit registration, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
   "administrativeAuthentication": "PT-ADM-008..013 / SSC-031 / PG-D-082: actual candidate owner lookup, required-only advisory71419601, ordered User union locks, session owner recheck and normal current ADMIN authentication/idle touch. All mutation kinds, reciprocal target and reducing/nonreducing overlap, changed current role/revocation/expiry/owner, independent NOWAIT/advisory/SQL time postconditions, null/row/JDBC/close/clock failures with caller rollback, 100 concurrent authentications. Candidate lookup never authorizes. Full command/Inbox registration remains pending; SSC031 is not closed by this component alone.",
-  "relatedBug": [],
+  "administrativeCommands": "PT-ADM-014..023 / PG-D-083: actual PG/Flyway/grants and SSC031 prelude; ASCII username NFC/trim and independent JCA PBKDF2 with parsed stored salt, explicit USRMUT24 golden bytes. Create/status/role/password/unlock SQL postconditions, version/sequence limits and duplicate savepoint recovery, exact microsecond lock/no-op rules, all unrevoked sessions including expired, before/after allowlist audit and partial audit/revocation rollback. Public JDBC fault projections assert fail-closed null/unknown/count/row/resource contracts without private reflection. Password arrays zeroed on success/denial/boundary/encoding faults. 100 same-version contenders, reciprocal ADMIN reduction and 100 distinct targets assert serialized membership/version/audit results. Full message dispatcher/Inbox/HMAC/HTTP registration is still pending.",
+  "relatedBug": [
+    "BUG-045",
+    "BUG-046",
+    "BUG-047"
+  ],
   "relatedSsc": [
     "SSC-031"
+  ],
+  "relatedYkt": [
+    "YKT-040",
+    "YKT-041",
+    "YKT-042"
   ],
   "preventionReferences": [
     "BUG-030/YKT-027 numeric null",
@@ -238,11 +268,23 @@
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "c5d1ba408a13e4dc7e4deb62b736d9dd89e2d26bde83a3ced011647f11adb998"
+      "sha256": "1cf81b8537825eb910d82c0e8233af9af62d5f8ad9729daaf53f118a9b08bc19"
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "053483edf7efef46502e5c2f6a0d3fdf27a892a0381d94cfc76b8986dc46e91c"
+      "sha256": "a888887a2521462cc8e2e12daf0a542e98c570e6d372a5b85649878598e04125"
+    },
+    {
+      "path": "logs/BUG-045-YKT-040.md",
+      "sha256": "6f334236e595fa3364e995c1e83a540d06567cb6ad6bdc13b9833668871bf0db"
+    },
+    {
+      "path": "logs/BUG-046-YKT-041.md",
+      "sha256": "d5ddbef035f4bd1f130f6eaca3b05fd60fcc3dd52b1376d67494a83476324676"
+    },
+    {
+      "path": "logs/BUG-047-YKT-042.md",
+      "sha256": "3d5218b750c9c46afa0d0403b43ea34fcb803ed41d24ea882bcbac9eb085649d"
     },
     {
       "path": "logs/PT-ADM-20260908-01-summary.json",
@@ -253,20 +295,32 @@
       "sha256": "9eb2d5d62cce9e495692764d03dcd1555348e20b7fbbfb0fec5be5e404493fd1"
     },
     {
+      "path": "logs/PT-ADM-20260908-04-summary.json",
+      "sha256": "3722490abea2ad196cfb6ada6dac94c014dedeb236d33611785ae450e3bf774d"
+    },
+    {
       "path": "logs/auth-prelude-exploration.md",
       "sha256": "daa4bbf59c76f36cceb960459da69b86c3a0e811d8a1193e7624e949c97658f0"
+    },
+    {
+      "path": "logs/command-exploration.md",
+      "sha256": "c4af4ed4f466fee72432dd3160e4ec381d0cb2b12ab4bc8d1536e869c8093c49"
     },
     {
       "path": "logs/query-exploration.md",
       "sha256": "1bc6e80e15a0e8234a7744aaef2f5acaa2d037a92e28ebfbe16621c6b47c7992"
     },
     {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "3e6e4562194305b91b1e2c93f8eee52dcf209215bd59f39cf7f9d2c9f15c5644"
+    },
+    {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
-      "sha256": "e6588f3f0905b7f42f6578439ea4c2e3695ab4a0cb4f88d781198a8e1413c023"
+      "sha256": "809ca881c65ddabb8f8d92011429ae853cc5fc74b14db5f36980c66a4123a23f"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
-      "sha256": "428860cb3eda841f0409cd8acd5e2a7e704770cb76525a634fc349d82e9354fe"
+      "sha256": "aff49ad9b44298c37a44fb15d3b9a3532d3b471eed698bc3996d1d022f221cc2"
     }
   ]
 }
