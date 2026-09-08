@@ -34,28 +34,41 @@ def main():
         "adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
     ]
     expected = {f"PT-ADM-{i:03d}": prefix + "#" + name for i, name in enumerate(names, 1)}
-    report = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + prefix + ".xml")
-    suite = ET.parse(report).getroot()
-    cases = suite.findall("testcase")
-    if any(int(suite.get(key, "0")) for key in ("errors", "failures", "skipped")) or len(cases) != len(names):
-        raise SystemExit("nonpassing/incomplete Admin PT")
-    if int(suite.get("tests", "0")) != len(cases):
-        raise SystemExit("inconsistent Admin test count")
-    methods = []
-    clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
-    for case in cases:
-        if any(child.tag not in ("system-out", "system-err") for child in case):
-            raise SystemExit("failed/skipped/flaky/rerun Admin case")
-        attributes = {key: case.get(key) for key in ("name", "classname", "time")}
-        methods.append(attributes["classname"] + "#" + attributes["name"])
-        ET.SubElement(clean, "testcase", attributes)
+    authentication = "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest"
+    authentication_names = [
+        "adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+        "adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+        "adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+        "adm011NullTargetsAndWriteTransactionContractsFailClosed",
+        "adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+        "adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    ]
+    expected.update({f"PT-ADM-{i:03d}": authentication + "#" + name for i, name in enumerate(authentication_names, 8)})
+    methods, reports = [], {}
+    for classname in (prefix, authentication):
+        report = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + classname + ".xml")
+        suite = ET.parse(report).getroot()
+        cases = suite.findall("testcase")
+        if any(int(suite.get(key, "0")) for key in ("errors", "failures", "skipped")):
+            raise SystemExit("nonpassing Admin PT")
+        if int(suite.get("tests", "0")) != len(cases):
+            raise SystemExit("inconsistent Admin test count")
+        clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
+        for case in cases:
+            if any(child.tag not in ("system-out", "system-err") for child in case):
+                raise SystemExit("failed/skipped/flaky/rerun Admin case")
+            attributes = {key: case.get(key) for key in ("name", "classname", "time")}
+            methods.append(attributes["classname"] + "#" + attributes["name"])
+            ET.SubElement(clean, "testcase", attributes)
+        ET.indent(clean)
+        reports[report.name] = ET.ElementTree(clean)
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Admin Test IDs do not exactly cover executed methods")
     evidence = repo / "evidence/01_PT/010_NK-ADM-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
-    ET.indent(clean)
-    ET.ElementTree(clean).write(evidence / "output" / report.name, encoding="UTF-8", xml_declaration=True)
+    for name, report in reports.items():
+        report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-api/target/site/jacoco" / ("jacoco." + suffix),
                         evidence / "coverage" / ("api-jacoco." + suffix))
@@ -67,8 +80,9 @@ def main():
         "testIdMethods": expected, "methods": methods,
         "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
         "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
-        "scope": "UserQueryRepository search/detail and redacted exception only. Current authentication, command/Inbox/HMAC/critical audit/session revoke, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
-        "relatedBug": [], "relatedSsc": [],
+        "scope": "UserQueryRepository search/detail, redacted query exception, and SSC031 administrative authentication prelude. Command/Inbox/HMAC/critical audit/session revocation connection, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",
+        "administrativeAuthentication": "PT-ADM-008..013 / SSC-031 / PG-D-082: actual candidate owner lookup, required-only advisory71419601, ordered User union locks, session owner recheck and normal current ADMIN authentication/idle touch. All mutation kinds, reciprocal target and reducing/nonreducing overlap, changed current role/revocation/expiry/owner, independent NOWAIT/advisory/SQL time postconditions, null/row/JDBC/close/clock failures with caller rollback, 100 concurrent authentications. Candidate lookup never authorizes. Full command/Inbox registration remains pending; SSC031 is not closed by this component alone.",
+        "relatedBug": [], "relatedSsc": ["SSC-031"],
         "preventionReferences": ["BUG-030/YKT-027 numeric null", "BUG-031/YKT-028 suppressed close redaction", "BUG-044/YKT-039 timestamp Instant oracle"],
         "notRunCountedAsPass": 0,
         "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr, provider row dumps, raw identifiers or credentials.",
