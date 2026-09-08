@@ -156,6 +156,8 @@ DB transactionとJMSをXAで結合しない。Inbox replayによりDB先commit�
 
 独立PTはMessage衝突/100再送/interrupt/lock寿命、段階時刻、DB connection・row lock非保持中のfile I/O、owner/role/失効再確認、Inbox24h保持、元結果再生成とdescriptor置換、JDBC/鍵/file/JMS故障後条件を区別する。最終serviceの未接続箇所は合格へ算入しない。
 
+SSC-027のDB置換境界: `JdbcInboxCoordinator.replaceScenarioSnapshot`はcaller-owned writable transactionを要求し、SCNREQ01/001→SCNRSP01/001、COMPLETED/SCENARIO_FILEに限定する。`FOR UPDATE`後の共通identity/HMAC検査に加え、expected/current/replacementのstate/ref/layout/version/completed_at、expected/currentのkey versionと暗号byte全体を照合する。更新は`response_body_encrypted`と`response_key_version`だけで、件数は厳密1。Bind用一時byteは成功/例外とも消去し、callerのcommit/rollback/closeを代行しない。復号/物理fileの検証と認証は段階service責務であり、このDB部品だけで保証したとはしない。PT-IDEM-SR01～SR03の独立SQL/JCE-HMAC・競合・故障後条件へ追跡する。
+
 ## 8. API `mq_outbox`
 
 ### 8.1 Row

@@ -56,6 +56,7 @@ def main():
             scenario = (".api.persistence.Scenario" in suite.get("name", "")
                         or ".api.security.AuthenticationContextVerifierTest" in suite.get("name", "")
                         or ".api.idempotency.JdbcInboxCoordinatorTest" in suite.get("name", "")
+                        or ".api.idempotency.JdbcScenarioSnapshotReplacementTest" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
                         or ".api.storage." in suite.get("name", "")
                         or ".nk.storage." in suite.get("name", "")
@@ -103,6 +104,9 @@ def main():
                 raise SystemExit("refusing to overwrite archived JUnit evidence")
             report.rename(destination)
     required_methods = {
+        "PT-IDEM-SR01": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime",
+        "PT-IDEM-SR02": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
+        "PT-IDEM-SR03": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
         "PT-SCN-009-G01": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#sameMessageAndHashCollisionSerializeButNeverShareResults",
         "PT-SCN-009-G02": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#differentStripesRunTogetherAndCallerMonitorDoesNotBlock",
         "PT-SCN-009-G03": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest#interruptAndCallbackFailuresReleaseOnlyOwnedLocks",
@@ -143,6 +147,7 @@ def main():
                                   "PT-SCN-008-P01", "PT-SCN-008-P02", "PT-SCN-008-P03",
                                   "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04",
                                   "PT-IDEM-RO01", "PT-IDEM-RO02", "PT-IDEM-RO03", "PT-IDEM-RO04",
+                                  "PT-IDEM-SR01", "PT-IDEM-SR02", "PT-IDEM-SR03",
                                   "PT-SCN-009-Q01", "PT-SCN-009-Q02", "PT-SCN-009-Q03", "PT-SCN-009-Q04",
                                   "PT-SCN-009-S01", "PT-SCN-009-S02", "PT-SCN-009-S03", "PT-SCN-009-S04", "PT-SCN-009-S05", "PT-SCN-009-S06",
                                   "PT-SCN-009-G01", "PT-SCN-009-G02", "PT-SCN-009-G03",

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.idempotency;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.Objects;
 import java.util.Optional;
@@ -43,6 +45,10 @@ public final class JdbcInboxCoordinator {
           + "response_key_version=?,completed_at=?,"
           + "expires_at=expires_at+(cast(? as timestamptz)-created_at) "
           + "where message_id=? and processing_state='PROCESSING'";
+
+  private static final String REPLACE_SCENARIO_SNAPSHOT =
+      "update schubert.request_inbox set response_body_encrypted=?,response_key_version=? "
+          + "where message_id=? and processing_state='COMPLETED'";
 
   private final FingerprintKeyRing fingerprints;
 
@@ -149,6 +155,88 @@ public final class JdbcInboxCoordinator {
     StoredRow row = stored.orElseThrow();
     validateMessageIdentity(row, request);
     return Optional.of(existing(row));
+  }
+
+  /**
+   * Replace only an already verified regenerated F snapshot after caller's fresh authentication.
+   * Row lock, identity and exact old snapshot are required; no completion/expiry/ref update.
+   * NK-MSG-002/NK-SCN-001; MQ-006..010/DAT-009; UI237/241/242; SS324 §7.1/333 §6.1;
+   * SSC-027/PT-IDEM-SR01..SR03. Caller owns crypto/file validation and commit/rollback/close.
+   */
+  public void replaceScenarioSnapshot(
+      Connection connection,
+      InboxRequest request,
+      InboxCompletion expected,
+      InboxCompletion replacement)
+      throws SQLException {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(expected, "expected");
+    Objects.requireNonNull(replacement, "replacement");
+    if (connection.getAutoCommit() || connection.isReadOnly())
+      throw failure(
+          InboxException.Reason.TRANSACTION_REQUIRED,
+          "Scenario replacement requires writable transaction");
+    requireReplacement(request.canonicalRequest().layoutId().equals("SCNREQ01"));
+    requireReplacement(request.canonicalRequest().layoutVersion().equals("001"));
+    requireReplacement(expected.state() == InboxCompletionState.COMPLETED);
+    requireReplacement(expected.resultReference().type() == InboxResultReferenceType.SCENARIO_FILE);
+    requireReplacement(expected.responseLayoutId().equals("SCNRSP01"));
+    requireReplacement(expected.responseVersion().equals("001"));
+    requireReplacement(expected.responseSnapshot().isPresent());
+    requireReplacement(replacement.responseSnapshot().isPresent());
+    requireReplacement(sameCompletionMetadata(expected, replacement));
+    StoredRow row =
+        selectByMessage(connection, request.messageId())
+            .orElseThrow(
+                () ->
+                    failure(
+                        InboxException.Reason.STATE_CORRUPT, "Scenario Inbox result is missing"));
+    validateMessageIdentity(row, request);
+    requireReplacement(row.processingState().equals("COMPLETED"));
+    InboxCompletion current = row.completion().orElseThrow();
+    requireReplacement(sameCompletionMetadata(expected, current));
+    requireReplacement(current.responseSnapshot().isPresent());
+    requireReplacement(
+        sameCiphertext(
+            expected.responseSnapshot().orElseThrow(), current.responseSnapshot().orElseThrow()));
+    EncryptedResponseSnapshot encrypted = replacement.responseSnapshot().orElseThrow();
+    byte[] body = encrypted.ciphertext();
+    try (var statement = connection.prepareStatement(REPLACE_SCENARIO_SNAPSHOT)) {
+      statement.setBytes(1, body);
+      statement.setString(2, encrypted.keyVersion());
+      statement.setObject(3, request.messageId());
+      if (statement.executeUpdate() != 1)
+        throw new SQLException("Scenario Inbox replacement was not applied", "40001");
+    } finally {
+      Arrays.fill(body, (byte) 0);
+    }
+  }
+
+  private static boolean sameCompletionMetadata(InboxCompletion left, InboxCompletion right) {
+    return left.state() == right.state()
+        && left.resultReference().equals(right.resultReference())
+        && left.responseLayoutId().equals(right.responseLayoutId())
+        && left.responseVersion().equals(right.responseVersion())
+        && left.completedAt().equals(right.completedAt());
+  }
+
+  private static boolean sameCiphertext(
+      EncryptedResponseSnapshot left, EncryptedResponseSnapshot right) {
+    if (!left.keyVersion().equals(right.keyVersion())) return false;
+    byte[] a = left.ciphertext(), b = right.ciphertext();
+    try {
+      return MessageDigest.isEqual(a, b);
+    } finally {
+      Arrays.fill(a, (byte) 0);
+      Arrays.fill(b, (byte) 0);
+    }
+  }
+
+  private static void requireReplacement(boolean valid) throws InboxException {
+    if (!valid)
+      throw failure(
+          InboxException.Reason.STATE_CORRUPT, "Scenario Inbox result changed or is invalid");
   }
 
   private Optional<StoredRow> selectByMessage(Connection connection, UUID messageId)

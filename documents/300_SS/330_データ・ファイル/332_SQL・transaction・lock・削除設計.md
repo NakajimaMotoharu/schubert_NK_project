@@ -67,6 +67,8 @@ SSC-018: 検索/明細で表示するSpeaker名はCurrentと同じFK先`speakers
 
 SSC-023: snapshot前の認証事前確認は312 §3.3.1のread-only JOIN SELECTで行い、User/sessionをlockせずidleも更新しない。READ COMMITTEDの参照結果を将来の認証保証にせず、file I/O後の最終write transactionで現在の認証/認可を再確認する。既存の通常認証verifyをread-onlyへ置換しない。
 
+SSC-027補足（4.2のScenario再生成）: 最終write transactionで324 §7.1のrow lock/owner/HMAC/旧snapshot一致を確認してから、`update schubert.request_inbox set response_body_encrypted=?,response_key_version=? where message_id=? and processing_state='COMPLETED'`を実行する。SQL後条件は更新1件、他17列（初回completed_at/expires_atを含む）不変。失敗はcaller rollback、commit確認後にのみ応答する。PT-IDEM-SR01～SR03で本番DDL/限定app roleの実PostgreSQLにより検査する。
+
 ### 4.3 Speaker/Media
 
 - Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。
