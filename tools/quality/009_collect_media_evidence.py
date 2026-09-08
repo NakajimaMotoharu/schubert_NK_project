@@ -33,8 +33,20 @@ def main():
         "PT-MED-006": prefix + "MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
         "PT-MED-007": prefix + "MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer",
     }
+    query = "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#"
+    expected.update({
+        "PT-MED-008": query + "animationMenuCountsStoredCategoriesWithoutFilesystem",
+        "PT-MED-009": query + "animationRowsPreserveParentAndDisplayOrder",
+        "PT-MED-010": query + "musicGroupsUseApprovedCategoryAndSectionOrder",
+        "PT-MED-011": query + "musicTracksReadFrozenPairsAndLogicalIdTies",
+        "PT-MED-012": query + "everyListCapacityRejectsTruncationAndCloseDowngrades",
+        "PT-MED-013": query + "nullContractsAndJdbcMetadataFailuresRemainRedacted",
+        "PT-MED-014": query + "concurrentReadersNeverMutateOrAcquireRowLocks",
+    })
     methods, clean_reports = [], {}
-    for report in sorted((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml")):
+    reports = list((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml"))
+    reports.extend((repo / "src/schubert-nk-api/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml"))
+    for report in sorted(reports):
         suite = ET.parse(report).getroot()
         cases = suite.findall("testcase")
         if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")) or len(cases) != int(suite.get("tests")):
@@ -55,7 +67,7 @@ def main():
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name, report in clean_reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
-    for module, directory in (("web", "src/schubert-nk-web"), ("protocol", "src/schubert-nk-protocol")):
+    for module, directory in (("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"), ("protocol", "src/schubert-nk-protocol")):
         for suffix in ("csv", "xml"):
             shutil.copyfile(repo / directory / "target/site/jacoco" / ("jacoco." + suffix),
                             evidence / "coverage" / (module + "-jacoco." + suffix))
@@ -64,9 +76,9 @@ def main():
     manifest.update({
         "programId": "NK-MED-001", "programStatus": "IN_PROGRESS",
         "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
-        "testIdMethods": expected, "methods": methods, "actual": "All seven independent assertion sets passed",
-        "inputAndExpected": "001 PT specification and targetCommit's three named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices. Production is never used to generate expected values.",
-        "scope": "Pure Range selection/header factory and bounded copy only; not an authenticated HTTP delivery or a manifest/file-integrity check. Query/descriptor/auth/Inbox/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected.",
+        "testIdMethods": expected, "methods": methods, "actual": "All fourteen independent assertion sets passed",
+        "inputAndExpected": "001 PT specification and targetCommit's four named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC rows and independent UI235 16/8/928/72/136/1312-byte data/record vectors for all five queries, bounded count and immutable/read-only/fault postconditions. Production is never used to generate expected values.",
+        "scope": "Pure Range/header/bounded copy and five stored media menu/list queries only; not authenticated HTTP delivery or a manifest/file-integrity check. Three descriptor queries/auth/Inbox/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected.",
         "relatedBug": [], "relatedSsc": [], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })
