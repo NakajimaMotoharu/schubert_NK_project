@@ -119,6 +119,18 @@ HMACは§3の全Request規約どおりowner decimal、LOGREQ01/001、target `REQ
 
 初回0000/0200はCOMPLETED、AUTH_SESSION参照UUIDと280byte LOGRSP01暗号化snapshotを既存列へ併記する。既知ownerの0102はERROR/NONE＋snapshot。AADはrequest Message ID/layout/version/owner。Replayはheader/280byte/全DATA semantic/相関・state/refの組合せを検証する。成功では保存header contextのhash、session UUID/owner、revoked=true、元revoked_at（wireはmillis）を参照へ照合し、不在/不整合/鍵不明/復号不能は9000の一時基盤型とする。失敗は0102だけを保持し、後の状態で成功へ置換しない。新response headerのMessage ID/sentAt、再送request Message IDへのcorrelation、当該requestのcontextを設定し、成功だけ0200へ統一する。新たな失効、idle延長、権限付与はしない。
 
+### 6.3 Scenario保存結果の検証（SSC-026）
+
+GAM/SPK/RTE/SCF/SRC/SCN responseは初回fixed header+DATA+recordsを§6の既存AES snapshotへ保存する。AADは要求Message ID/対応response layout/001/認証owner。初回成功0000はCOMPLETED、確定9001（容量上限）とSCNの0104（対象不在）はERROR。0102/9000は非保存の応答とし、失効/一時障害を成功snapshotへ変換しない。正常responseは要求と対応するlayout必須。
+
+SCN成功の現在Script file IDは要求IDに一致する。FはSCENARIO_FILE数値参照＝そのScript file ID、Iおよび他query/ERRORはNONE。Record数/順序・I/F排他・descriptor各fieldは既存codec/typed semanticで再検証する。暗号化body内のcapture headerは完了stage時刻のmillis、DB completed_atは同stageのmicrosとして保存し、読取時に同一millisを確認する。利用者へ返すheaderは別の送信stage時刻へ再構築する。
+
+読取はsnapshot/AAD/key/復号に加え、全header、actual total length、要求Message相関、対応layout/version、全DATA/record semantic、初回codeとInbox state/ref、完了時刻、SCN要求IDと参照を確認する。不在/不整合/未定義値は一時基盤型9000でdeny closed、平文/原因/suppressed情報は返さない。未検証snapshotからquery結果や認証actorを作らない。
+
+再構築は再検証済みactorのownerと現在要求のsnapshot identityが一致必須。保存payloadは変えず、response Message ID/sentAt/current request contextを新しいheaderへ設定し、Correlation IDはrequest Message IDとする。成功のreplayだけ0200、ERRORは元0104/9001。旧header contextを認証に使わない。復号buffer/一時DATA/recordsは使い終わりに消去する。
+
+この部品はDB/file/JMS I/Oを所有しない。Fの物理存在/属性/hash確認、朝削除後の元master snapshot照合・再生成・Inbox descriptor置換、最終write transaction/再送/送信は別gate。復号済みdescriptorだけで物理file確認を完了扱いしない。
+
 ## 7. Inbox transaction/crash
 
 | Crash | 状態 | Recovery |

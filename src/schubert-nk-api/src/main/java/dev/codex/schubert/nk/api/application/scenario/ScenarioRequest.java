@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.api.persistence.ScenarioRepository;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.scenario.*;
 import dev.codex.schubert.nk.protocol.layout.semantic.WireEnum;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 /**
  * One validated Scenario request shared by HMAC construction and read-only query dispatch.
@@ -34,10 +36,12 @@ public final class ScenarioRequest {
 
   private final Kind kind;
   private final TypedPayloadValues values;
+  private final CommonHeader header;
 
-  private ScenarioRequest(Kind kind, TypedPayloadValues values) {
+  private ScenarioRequest(Kind kind, TypedPayloadValues values, CommonHeader header) {
     this.kind = kind;
     this.values = values;
+    this.header = header;
   }
 
   /**
@@ -65,13 +69,30 @@ public final class ScenarioRequest {
             PayloadTypeCatalog.decode(
                 PayloadCodec.standard()
                     .decode(request.header().layoutId(), data, List.of(), false));
-        return new ScenarioRequest(kind, values);
+        return new ScenarioRequest(kind, values, request.header());
       } finally {
         Arrays.fill(data, (byte) 0);
       }
     } catch (PermanentProtocolException | IllegalArgumentException failure) {
       throw new PermanentProtocolException("scenario request is invalid");
     }
+  }
+
+  /** Validated immutable header; never log its context. SS324 §6.3, PT-SCN-009-S01..S05. */
+  public CommonHeader header() {
+    return header;
+  }
+
+  /** The six allowlisted request IDs all use the corresponding RSP01 suffix. */
+  public LayoutId responseLayoutId() {
+    return new LayoutId(values.layoutId().value().replace("REQ", "RSP"));
+  }
+
+  /** Present only for the detail request; binds response metadata/result reference to input. */
+  public OptionalLong scriptFileId() {
+    return kind == Kind.DETAIL
+        ? OptionalLong.of(((ScenarioDetailRequestData) values.data()).scriptFileId().value())
+        : OptionalLong.empty();
   }
 
   /** Actor must come from API verification; caller closes the returned secret-bearing fields. */
