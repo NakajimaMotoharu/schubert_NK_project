@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+最新確定: 正式PT-MED-20260908-11、source 34ba78f138fd1e1db0cca48501f9b787ff4c526e、dev-media、2026-09-08（開始終了日時はmanifest）。全548件（Protocol80/Storage34/API317/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media61件（他Programと重複する内数）。8queryの認証/Inbox→DB外の実file→最新認証/確定→実JMS送信・ACK、100同一Message再送と障害回復を追加PASS。BUG-044/YKT-039の時刻oracle再試験完了。Web session/security・HTTP/画面/起動登録/実NK CHRは残件。確定5/20=25%（Program件数比、工数換算なし）、明確な行き詰まり0件。SS362順でUser管理APIのPG/PTへ進む。以下は履歴。
+
 最新確定: 正式PT-MED-20260908-10、source 9b152e0797948d1f346855bf5441164a46804618、dev-media、2026-09-08 13:58:53～14:01:59 JST。全541件（Protocol80/Storage34/API310/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media54件（他Programと重複する内数）。全8応答snapshot/独立JCEと手組wire/改変拒否/100並行を追加PASS、BUG-043/YKT-038のBerror oracle是正・再試験完了。実認証Inbox/file/JMS段階接続・HTTP/起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
 
 最新確定: 正式PT-MED-20260908-09、source c5de0e44d433180680c0c87b1c32612d7b37060e、dev-media、2026-09-08 13:43:18～13:46:23 JST。全536件（Protocol80/Storage34/API305/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media49件、Scenario151等は重複する内数。checksum manifest/実保持asset metadata・59,627合成件数・異常/100並行を追加PASS、BUG-042/YKT-037再試験完了。認証Inbox/応答snapshot/実HTTP・起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
