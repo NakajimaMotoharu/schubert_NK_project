@@ -14,4 +14,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 PT120はfixation確定後のLocation設定故障で成功UIを返さず、旧rowなし・新row1・新principal・再Loginなしを確認。HTTP障害を既に確定したDB transactionのrollbackと捏造しない。再読取/handler再試行でもsession ID/CSRFを再発行しない。
 
-新障害は検出されていない。全module正式coverage/証跡収集後にSSC-046を完了する。Login viewの残時間引渡し、全URL chain/logger/共通error view、実runtime/IT/ST/実NK Characterizationは未実施。
+正式PT-WEB-20260909-06（source80d9d25911131ceb09ce5fae7704d1b799236664、01:15:19～01:19:48 JST）で全745件・全5module coverage4指標100%、静的解析0、7collector収集成功。新8件を含むWeb120method完全一致を確認し、SSC-046を完了。環境・command・原本log hash・全counterはmanifest.json。新障害は検出されていない。Login viewの残時間引渡し、全URL chain/logger/共通error view、実runtime/IT/ST/実NK Characterizationは未実施。

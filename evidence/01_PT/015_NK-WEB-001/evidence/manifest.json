@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260909-05",
-  "targetCommit": "1640ca74b8a45deaa137e557640e7ec257a82058",
+  "runId": "PT-WEB-20260909-06",
+  "targetCommit": "80d9d25911131ceb09ce5fae7704d1b799236664",
   "branch": "dev-web",
-  "startedAt": "2026-09-09T01:06:53+09:00",
-  "completedAt": "2026-09-09T01:11:22+09:00",
+  "startedAt": "2026-09-09T01:15:19+09:00",
+  "completedAt": "2026-09-09T01:19:48+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -149,31 +149,31 @@
       }
     },
     "web": {
-      "tests": 188,
+      "tests": 196,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 10860
+          "covered": 11056
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 933
+          "covered": 943
         },
         "LINE": {
           "missed": 0,
-          "covered": 2471
+          "covered": 2525
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 884
+          "covered": 893
         },
         "METHOD": {
           "missed": 0,
-          "covered": 411
+          "covered": 415
         },
         "CLASS": {
           "missed": 0,
-          "covered": 93
+          "covered": 95
         }
       },
       "spotbugs": {
@@ -183,7 +183,7 @@
       }
     }
   },
-  "rawLogSha256": "bce0e0d4c67024623910da776a74b40877c7c0bf2408a9e505e29d422ef4a489",
+  "rawLogSha256": "51b451dc5ad5f20947e938b111750752286b0c6073995cd66f9013ff37b4dc86",
   "frameworkVersions": {
     "springSession": "4.1.1",
     "springWeb": "7.0.9",
@@ -199,8 +199,8 @@
   "programId": "NK-WEB-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
-    "program": 112,
-    "reactor": 737
+    "program": 120,
+    "reactor": 745
   },
   "testIdMethods": {
     "PT-WEB-001": "dev.codex.schubert.nk.web.session.WebSessionIdTest#web001CanonicalIdsAndIndependentHashes",
@@ -314,7 +314,15 @@
     "PT-WEB-109": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web109RealHttpSessionCsrfAndHeadersMatchContract(Path)",
     "PT-WEB-110": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web110RealErrorDispatchIsBoundedAndRedacted(Path)",
     "PT-WEB-111": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web111RealFormParameterMergingRejectsUnknownAndQueryCredentials(Path)",
-    "PT-WEB-112": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate(Path)"
+    "PT-WEB-112": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate(Path)",
+    "PT-WEB-113": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web113SuccessRedirectsOnlyToClosedSavedGet",
+    "PT-WEB-114": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web114SuccessRejectsUnpersistedOrInvalidIdentity",
+    "PT-WEB-115": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web115FailureAndLockPreserveCurrentRedirectContract",
+    "PT-WEB-116": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web116InputServiceAndUnknownFailuresStayDistinct",
+    "PT-WEB-117": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web117HandlerNullAndPublicFaultsNeverPretendSuccess",
+    "PT-WEB-118": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web118ActualLoginFilterUsesProductionHandlers",
+    "PT-WEB-119": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web119ConcurrentHandlerCallsKeepOutcomesSeparate",
+    "PT-WEB-120": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web120SuccessResponseFailureDoesNotInventRollback"
   },
   "methods": [
     "dev.codex.schubert.nk.web.session.WebSessionIdTest#web003GenerationOwnsAndErasesRandomBuffers",
@@ -428,14 +436,22 @@
     "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web109RealHttpSessionCsrfAndHeadersMatchContract(Path)",
     "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web111RealFormParameterMergingRejectsUnknownAndQueryCredentials(Path)",
     "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web110RealErrorDispatchIsBoundedAndRedacted(Path)",
-    "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate(Path)"
+    "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest#web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate(Path)",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web117HandlerNullAndPublicFaultsNeverPretendSuccess",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web114SuccessRejectsUnpersistedOrInvalidIdentity",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web119ConcurrentHandlerCallsKeepOutcomesSeparate",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web115FailureAndLockPreserveCurrentRedirectContract",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web118ActualLoginFilterUsesProductionHandlers",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web116InputServiceAndUnknownFailuresStayDistinct",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web113SuccessRedirectsOnlyToClosedSavedGet",
+    "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest#web120SuccessResponseFailureDoesNotInventRollback"
   ],
   "inputAndExpected": "PT-WEB-001..008 / PG-D-093: synthetic 32-byte zero/sequence/FF CSPRNG data with independent Python base64/hashlib fixed vectors; canonical unpadded43-character base64url and raw-ASCII SHA256 lookup, temporary random/decode/hash arrays erased. Null/length/alphabet/padding/unused-bits negatives, provider failure and100 concurrent random IDs/per-call hashes. Explicit GET URL strings preserve path/query/Unicode and valid query escapes with no trim/decode; reject schemes/authority/fragment/malformed/control/dot-segments/encoded path delimiters and nonGET. Exact2047/2048/2049 UTF8-byte, malformed surrogate and100 independent query cases. toString and validation errors contain no values.",
   "actual": "All mapped independent assertion sets passed; no failed/skipped/flaky/not-run counted",
   "sessionSchemaExpected": "PT-WEB-009..015 / SSC-038 / PG-D-094: independently handwritten UTF8 JSON for anonymous/authenticated all-or-none principal, every optional combination, USER/ADMIN, ordered0/1/10 purpose-tagged UUIDs, canonical UTC timestamps, NFC64byte usernames, csrf64..128 and saved GET2048byte. Reject missing/duplicate/unknown/null/wrong types, invalid UTF8/BOM/trailing documents, noncanonical UUID/time and over16384byte/deep inputs. Immutable values/collection copies, fixed redacted exceptions without parser cause/suppressed and100 concurrent inputs. BUG-055 malformed loginAt/issuedAt reproduction followed by explicit DateTimeException conversion and regression.",
   "sessionEncryptionExpected": "PT-WEB-016..023 / SSC-039 / PG-D-095: independently handcrafted JSON/DataOutputStream seven-field LP AAD and JCE AES256-GCM full NKENC1 envelopes. DB UUID/hash/created_at microseconds bind row; every AAD field and envelope/nonce/tag/body mutation rejects. Current writes/previous reads/unknown key and DB-vs-envelope version mismatch, defensive key/ciphertext copies, nonce erasure, valid16384byte JSON and16436byte envelope limits, authenticated bad JSON/UTF8 reject. Null/config/closed negatives;100 distinct concurrent nonces and attributes; caller-monitor isolation; fixed provider/random failures with no diagnostic cause/suppressed; latch-controlled close serialization and restart/rotation.",
   "sessionStoreExpected": "PT-WEB-024..031 / SSC-040 / PG-D-096 / BUG-056 / YKT-051: isolated PostgreSQL18 with production Flyway/grants, independent nine-column metadata/SQL afterconditions, every ciphertext/key/time/TTL/version update field changed, row identity and expected-version predicates. Caller-owned read/write transactions, rollback/atomic old-delete and new-insert, stale CAS false and no resurrection. Web business-schema denial and all nine SQL NULL/DDL constraints; public null/time/precision/TTL/version limits; every JDBC operation/resource failure with fixed redacted exception. Invalid row/duplicate/null resource and non-unit update counts reject.100 row-locked updates retain all versions and CAS race has one winner. No production SQL/schema expectation is used as oracle.",
-  "scope": "Web values/JSON/crypto/store/lifecycle/Spring Session, actual CsrfFilter/Holder/AuthenticationProcessingFilter, closed context/custom fixation/screen-only SavedRequest, Caddy numeric client resolver/form converter connected on Mock Servlet and loopback Tomcat11.0.25 plus isolated PostgreSQL; provider/current-context probe uses independent wire replies. Final production HTTP handlers/audit/logger policy/entrypoint/role and all-request forwarded-origin/header configuration/API revoke queue/screens/actual API and JMS startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
+  "scope": "Web values/JSON/crypto/store/lifecycle/Spring Session, actual CsrfFilter/Holder/AuthenticationProcessingFilter, closed context/custom fixation/screen-only SavedRequest, Caddy numeric client resolver/form converter connected on Mock Servlet and loopback Tomcat11.0.25 plus isolated PostgreSQL; provider/current-context probe uses independent wire replies. Remaining denial/logout HTTP handlers, full audit/logger policy/entrypoint/role and all-request forwarded-origin/header configuration/API revoke queue/screens/actual API and JMS startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
   "requestContextExpected": "PT-WEB-101..108 / PG-D-108 / BUG-069 / YKT-061: server-generated UUID and validated Caddy numeric client in immutable request attribute, ignore external request ID, no new response header; redispatch preserves existing identity but revalidates transport/client. Invalid proxy stops before body/session/business and emits closed local PROXY denial/403 without untrusted IP/actor. Production CSRF denied handler ignores exception/parameters, preserves session/CSRF and writes CSRF local audit/403. Actual encrypted PostgreSQL Spring Session/Holder/CsrfFilter chain covers anonymous/USER/ADMIN valid-invalid CSRF, independent token and status/audit values; null/type/UUID/attribute/logger/response faults and100 concurrent request identities. Real container ERROR dispatch is additionally verified by PT109..112; final Host/origin, WARN logger config and full authorization remain separate gates.",
   "securityAuditExpected": "PT-WEB-095..100 / PG-D-107 / BUG-068 / YKT-060: closed six event catalog and Route enum, exact SS351 JSON key/value with route and HTTP_REQUEST targetType, UTC millis/config versions, only known principal username/role and trusted canonical IP; Login failures omit attempted username. No raw request/URL/query/body/context/Throwable input, lock0..900 only, all null/metadata/clock/logger faults, Unicode/escaping, 100 concurrent independent logger strings. API existing denial layout/targetType nonregression adds fixed DB assertions; no change to API source/oracles. Local logger PT does not certify HTTP wiring/backend or replace critical API DB audit.",
   "headerExpected": "PT-WEB-091..094 / PG-D-106: independent SS352 seven fixed header values, all status/method/HTML/error/media/static, overwrite conflicting/duplicate values with one safe value, no-store. Real deferred HeaderWriterFilter writes before error/redirect/flush/stream and writer close, after reset and exceptional exit. Public response faults propagate, null fails fast, no request-derived values, 100 concurrent independent responses. Mock Servlet PT, not deployed Caddy/server verification.",
@@ -450,6 +466,7 @@
   "sessionLifecycleExpected": "PT-WEB-036..043 / SSC-041 / PG-D-098 / BUG-057 / YKT-052: isolated production-DDL PostgreSQL with independently constructed JSON/AAD/AES vectors and SQL afterconditions. Microsecond8h idle boundaries/backward clock/restart/key rotation; expiry/corrupt tag/key/schema/NULL invalidate only their row with mandatory deletion verified. Pure current-state mutation preserves principal and CSRF, max10 tokens; atomic Login fixation preserves SavedRequest/tokens even with previously absent CSRF; Cookie/UUID/CSRF and neighbour UUID collisions rollback. Version999999999 rollover preserves Cookie and attributes, renews DB UUID and rejects old-PK CAS. All lifecycle JDBC/resource/commit/rollback/close/random/crypto/config faults return fixed errors; postcommit close may commit and retry checks actual state, never assumes rollback.100 concurrent counter changes,10 concurrent token adds/removes and invalidate races retain state without resurrection. Constructor/API null contracts and no provider cause/suppressed disclosure.",
   "csrfValueExpected": "PT-WEB-032..035 / PG-D-097:32 CSPRNG bytes to independent fixed64hex vector and provider-failure buffer erasure. All persisted lengths64..128 with explicit same/different first/middle/last/length booleans; nullable submitted missing is false and malformed tokens reject. Valid secrets compare via MessageDigest.isEqual over fixed129byte length-plus-padding arrays, then erase.100 unique concurrent generated tokens and shared immutable matching; toString/cause/suppressed redacted. Value only, no claim of POST/filter/403/session wiring completion.",
   "relatedBug": [
+    "BUG-071",
     "BUG-070",
     "BUG-069",
     "BUG-068",
@@ -468,6 +485,7 @@
     "BUG-066"
   ],
   "relatedSsc": [
+    "SSC-046",
     "SSC-038",
     "SSC-039",
     "SSC-040",
@@ -477,6 +495,7 @@
     "SSC-044"
   ],
   "relatedYkt": [
+    "YKT-063",
     "YKT-062",
     "YKT-061",
     "YKT-060",
@@ -492,16 +511,17 @@
     "YKT-058"
   ],
   "notRunCountedAsPass": 0,
+  "loginHandlerExpected": "PT-WEB-113..120 / PG-D-110 / SSC-046: persisted closed identity equality before local LOGIN_SUCCEEDED and302 to closed saved GET or root. No target/Referer or URL session rewriting. Current-compatible bad-credential302/login?error and lock302/login?locked with API retry0..900; form400/proxy403/service-storage-unknown503 stay distinct and do not increment Web counters. No diagnostic getters/form values/session creation on failure. Actual PostgreSQL Session/Holder/CSRF/provider/fixation chain with independent0000/0200/0101/0106/9000/transport-fault wire fixtures;100 parallel result/audit isolation, public null/attribute/logger/response faults, committed session remains confirmed after response failure without extra fixation or API Login. Full MVC/runtime chain and remaining-lock-time view are not certified here.",
   "embeddedHttpExpected": "PT-WEB-109..112 / PG-D-109 / BUG-070 / YKT-062: single Servlet API provider, real loopback Tomcat11.0.25 GET and POST with encrypted PostgreSQL Spring Session, independent Cookie/security headers/CSRF/form merge/status and error body. Native sessions and JSESSIONID absent. Untrusted proxy terminates403 with one audit/UUID and no session/error servlet; trusted CSRF uses one audit and original request ID on ERROR dispatch.100 independent sessions, cookies, CSRF and audit IDs remain separate under8 workers; all temporary HTTP resources close. Synthetic terminal/error servlets, not full MVC/production bootstrap/IT/ST.",
   "redaction": "Only allowlisted method names/timing/counters/coverage and metadata. No JVM properties/stdout/stderr, raw cookie/session/context/token/key or database dump.",
   "files": [
     {
       "path": "coverage/web-jacoco.csv",
-      "sha256": "ac41c7019e6a37bcb3e401c3e6528b5773f4a41e6299047c92070905dfbebe49"
+      "sha256": "a468fb99f8b61a61c9cb504a73d820164c547fbfb58caf12008e15a50afe0823"
     },
     {
       "path": "coverage/web-jacoco.xml",
-      "sha256": "b1f97442da35ed598442a63424873a4292e4489814ecf1333e1ff22d7cc8e1c3"
+      "sha256": "1de32e06c85ea1f1614a3bb81e102f6c8cfeb859092f8f3bc86e5dd4be4be59e"
     },
     {
       "path": "logs/PT-WEB-20260908-01-summary.json",
@@ -572,6 +592,10 @@
       "sha256": "a7be7840c772f09eede4903132136fef165df5e8ce02f752e61a6d3dc4455e7c"
     },
     {
+      "path": "logs/PT-WEB-20260909-06-summary.json",
+      "sha256": "f4149f0763d1eab05adae86eaae1f71ace04e22cc2b76ebe7c02f2911d4e7a0f"
+    },
+    {
       "path": "logs/attributes-exploration.md",
       "sha256": "8fbcbec08c8c9e3cb7af4e3192767b4adb190d6faefeb33a2709b99d137fd782"
     },
@@ -616,6 +640,10 @@
       "sha256": "9f9017a243479873021b4f0870a23aa161bf702223c5cd4c6717903e5147ddda"
     },
     {
+      "path": "logs/login-handler-exploration.md",
+      "sha256": "bcb86aaeb8dc1797b2fb7c5357aa9b610dd0b8d51f763e5024341755c37d2ac3"
+    },
+    {
       "path": "logs/provider-exploration.md",
       "sha256": "c0b004389221b797a958567fc3d431062b889beab53f5f146cfdb6dbd140679d"
     },
@@ -641,79 +669,83 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
-      "sha256": "d6847cc405a949defc5dd9c305eeb8ee6bd8f3d95c061a0fb16e075aa854507c"
+      "sha256": "345bc6ea0e40edae8773d4f4adf0e9d9cb6700ca5d002e5b76d58d1a0ce6db7d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
-      "sha256": "9718935fc6128c77a39dff9668b8050dcac3ec64d6a2b39e680c730dc6ab5ea1"
+      "sha256": "ea82eb7a178f7dd1743d0cdc307ff158a87d42a1a99d04983649a6e95c1bdf01"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
-      "sha256": "481b56fcc6764baceb75c7d38778214e44f6ff29d25c90dd148b8f340142d6b0"
+      "sha256": "fe83d19a551de8dc9d403b85a8351d8e8a1b1253d0f0a0868961a791cdbade56"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
-      "sha256": "050a66436a8bf4c40812980273e8fe9284bfa7468506721848e3d6401dc6aebd"
+      "sha256": "cf6ec7caaf372a790c4379429bb28193086d3aaf656c4b350e0ebb697ebb5ec2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
-      "sha256": "e3c6cfc9965ad1d06e6400efc662b161650d667ebab3fc57fd03af526cbd8d4e"
+      "sha256": "05e93b0a07d538c9f94d8038a5f4d4453163567dae5f2647035d17481b2704af"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
-      "sha256": "3201cc8044caf7613a915ea3ea1f3b06325cebc12b0394cdc728aa30ddccfbcb"
+      "sha256": "1533370c929a7093ea80c9a4b2618d6b732d1305dc2aa3e1df83160ed275ad32"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
-      "sha256": "2b98804f1d6693f2acfe0e4493ae29cb8d0afa92820c061194ada53c9b31dac5"
+      "sha256": "bc9db2ddba7a709dfb6305d1bcf94de50362a5bfe47cab915707acef1b447ce7"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
-      "sha256": "566a3ffba9cfa371b19b67349dada20b4d2daed1df133bc0d0352923429f8dda"
+      "sha256": "d056cccb89d6891d9275388f381a879aa980ed4b5d03b6ea11c63d63d67ce6f3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
-      "sha256": "874f90567005b681a5ebd1fe4faa29d9a8f2cb44686cefdd1bc18a1e7a5d519b"
+      "sha256": "7c6a6c268125437e50534241de5a82016e9649095cb773b8562cd6eadf92ab1f"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
-      "sha256": "ff028d7c7774a650a7a5c7a4518d42281e9b82d259060ab13b18fc5c55f2c066"
+      "sha256": "064296c16fc5988a7ee4a1d60fd08352b0e083abd6b2678599ed62ecc10c94e3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
-      "sha256": "bec44e3acd098300dc20409d13ede518b3ce8d378a6bb6578872651fcb170ce6"
+      "sha256": "48169f191f426c01fef96457284383eee07e10d88cebdab9a17c22258d7d1f48"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
-      "sha256": "57ceb16f3a18b0ca08388e30944e33dd1bcd4bc0c6018d0fe2305a93006cd109"
+      "sha256": "f4c7c98ac19edffed119c516c55335422815707b158247dbb9987283dfba827b"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "daef51c6033c37c3298782036f0b997de3b6a8ab519620c9495914e7562b485d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
-      "sha256": "f3a5bc3e0e05bdb43412b8f56790ec318ee40611843f9de10d5997c744d04807"
+      "sha256": "c9b610069cfe95bc45575bc13c7c14eb2d64820698ab83d51804d2dafb2af54e"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
-      "sha256": "ca37c31f4da1666a01b3af41f673085705d0f60fc9f83349889321f62e1363c1"
+      "sha256": "db39df1f395b808d9aaa7d36b85f090151d22fbb3c60d3b83fd8777d32b1e990"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
-      "sha256": "5ed22ed19c47334879b0a1812f87b9aa53ce32049bd929a24e40baf0b28a5863"
+      "sha256": "666a4aa91940e558139a1286a91d4e34bf30d5e9974c25fbe272b8cb2c5dae19"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
-      "sha256": "6a9afeed539cf89b51fb300b70041b45b264c6ff45eab56652faa37e530dd73f"
+      "sha256": "7f55d449bc9d1f64c4e58a3877322340db9060382045456c4898b0296f3ab702"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
-      "sha256": "a65789033f08d6f7b24a105fbfbd05626820b75aca1ae8c9f0018489425d2902"
+      "sha256": "3a17670f8aa69f36617983049b1f6f9ed133ad581fc4dac0e9b3e462ad783c8c"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
-      "sha256": "5c20dcdf7632e0d61ee22c6a29cd9ef54c2c214137dfd166cb40f6bb821a1c6f"
+      "sha256": "8fbaab48fe02892ab859353fc798b5822c60319f93d0fe09ebf341f7c5da37fc"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
-      "sha256": "1a42e85b9f5b8dcd0db4e9550763b73e5a8c47164bf680bec24c70916579a2db"
+      "sha256": "1af1c0441b08be267d70797d53e295ee07610cc813490e4eba9ac5ef9d8db306"
     }
   ]
 }
