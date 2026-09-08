@@ -28,28 +28,155 @@ class ArtifactComparatorTest {
       Path.of(System.getProperty("chr.unitProjectRoot")).toAbsolutePath().normalize();
   private static final List<String> CASE_IDS =
       List.of(
-          "CHR-A01", "CHR-A02", "CHR-A03", "CHR-U01", "CHR-U02", "CHR-S01",
-          "CHR-S02", "CHR-S03", "CHR-S04", "CHR-S05", "CHR-S06", "CHR-S07",
-          "CHR-S08", "CHR-M01", "CHR-M02", "CHR-M03", "CHR-M04", "CHR-M05",
-          "CHR-M06", "CHR-M07", "CHR-L01", "CHR-E01", "CHR-N01", "CHR-O01");
+          "CHR-A01", "CHR-A02", "CHR-A03", "CHR-U01", "CHR-U02", "CHR-S01", "CHR-S02", "CHR-S03",
+          "CHR-S04", "CHR-S05", "CHR-S06", "CHR-S07", "CHR-S08", "CHR-M01", "CHR-M02", "CHR-M03",
+          "CHR-M04", "CHR-M05", "CHR-M06", "CHR-M07", "CHR-L01", "CHR-E01", "CHR-N01", "CHR-O01");
   private static final List<Oracle> ORACLES =
       List.of(
-          new Oracle("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "schubert", "schubert NK"),
-          new Oracle("DIF-002", "CHR-L01", "authorization.log", "difference", "semantic", "authorization.log", "AUTHENTICATED", "ADMIN"),
-          new Oracle("DIF-003", "CHR-U01", "menu.cards", "difference", "semantic", "menu.cards", "4 legacy plus log", "legacy plus question notification answer and admin user"),
-          new Oracle("DIF-004", "CHR-A01", "authentication.backend", "difference", "semantic", "authentication.backend", "file/in-process", "PostgreSQL/MQ USER ADMIN"),
-          new Oracle("DIF-005", "CHR-E01", "error.presentation", "difference", "semantic", "error.presentation", "spring/default mixed", "common style and recovery guidance"),
-          new Oracle("DIF-006", "CHR-S01", "input.byteLimit", "difference", "semantic", "input.byteLimit", "mostly implicit", "fixed-wire explicit"),
-          new Oracle("DIF-007", "CHR-U02", "topbar.identity", "difference", "semantic", "topbar.identity", "partial", "username role logout"),
-          new Oracle("DIF-008", "CHR-S04", "empty.message", "difference", "semantic", "empty.message", "may be blank", "該当するデータはありません"),
-          new Oracle("DIF-009", "CHR-S08", "voice.grouping", "difference", "semantic", "voice.grouping", "body may repeat", "one body per entry"),
-          new Oracle("DIF-010", "CHR-L01", "log.filters", "difference", "semantic", "log.filters", "limited", "WARN date MQ SYSTEM BATCH"),
-          new Oracle("DIF-011", "CHR-O01", "cache.control", "required", "header", "cache-control", "no-store", "no-store"),
-          new Oracle("DIF-012", "CHR-M04", "invalid.range", "difference", "header", "content-range", "baseline capture", "416 with total Content-Range"),
-          new Oracle("DIF-013", "CHR-S02", "game.change", "difference", "semantic", "game.change", "inline onchange", "external same-origin JS plus button"),
-          new Oracle("DIF-014", "CHR-O01", "session.restart", "difference", "semantic", "session.restart", "in-memory invalidated", "encrypted persistent continuation"),
-          new Oracle("DIF-015", "CHR-A01", "http.path", "contract", "semantic", "http.path", "/same-path", "/same-path"),
-          new Oracle("DIF-016", "CHR-A02", "session.concurrentLimit", "difference", "semantic", "session.concurrentLimit", "three observed sessions remain active despite configured maximum 2", "maximum 2; third login revokes oldest"));
+          new Oracle(
+              "DIF-001",
+              "CHR-U01",
+              "brand",
+              "difference",
+              "semantic",
+              "brand",
+              "schubert",
+              "schubert NK"),
+          new Oracle(
+              "DIF-002",
+              "CHR-L01",
+              "authorization.log",
+              "difference",
+              "semantic",
+              "authorization.log",
+              "AUTHENTICATED",
+              "ADMIN"),
+          new Oracle(
+              "DIF-003",
+              "CHR-U01",
+              "menu.cards",
+              "difference",
+              "semantic",
+              "menu.cards",
+              "4 legacy plus log",
+              "legacy plus question notification answer and admin user"),
+          new Oracle(
+              "DIF-004",
+              "CHR-A01",
+              "authentication.backend",
+              "difference",
+              "semantic",
+              "authentication.backend",
+              "file/in-process",
+              "PostgreSQL/MQ USER ADMIN"),
+          new Oracle(
+              "DIF-005",
+              "CHR-E01",
+              "error.presentation",
+              "difference",
+              "semantic",
+              "error.presentation",
+              "spring/default mixed",
+              "common style and recovery guidance"),
+          new Oracle(
+              "DIF-006",
+              "CHR-S01",
+              "input.byteLimit",
+              "difference",
+              "semantic",
+              "input.byteLimit",
+              "mostly implicit",
+              "fixed-wire explicit"),
+          new Oracle(
+              "DIF-007",
+              "CHR-U02",
+              "topbar.identity",
+              "difference",
+              "semantic",
+              "topbar.identity",
+              "partial",
+              "username role logout"),
+          new Oracle(
+              "DIF-008",
+              "CHR-S04",
+              "empty.message",
+              "difference",
+              "semantic",
+              "empty.message",
+              "may be blank",
+              "該当するデータはありません"),
+          new Oracle(
+              "DIF-009",
+              "CHR-S08",
+              "voice.grouping",
+              "difference",
+              "semantic",
+              "voice.grouping",
+              "body may repeat",
+              "one body per entry"),
+          new Oracle(
+              "DIF-010",
+              "CHR-L01",
+              "log.filters",
+              "difference",
+              "semantic",
+              "log.filters",
+              "limited",
+              "WARN date MQ SYSTEM BATCH"),
+          new Oracle(
+              "DIF-011",
+              "CHR-O01",
+              "cache.control",
+              "required",
+              "header",
+              "cache-control",
+              "no-store",
+              "no-store"),
+          new Oracle(
+              "DIF-012",
+              "CHR-M04",
+              "invalid.range",
+              "difference",
+              "header",
+              "content-range",
+              "baseline capture",
+              "416 with total Content-Range"),
+          new Oracle(
+              "DIF-013",
+              "CHR-S02",
+              "game.change",
+              "difference",
+              "semantic",
+              "game.change",
+              "inline onchange",
+              "external same-origin JS plus button"),
+          new Oracle(
+              "DIF-014",
+              "CHR-O01",
+              "session.restart",
+              "difference",
+              "semantic",
+              "session.restart",
+              "in-memory invalidated",
+              "encrypted persistent continuation"),
+          new Oracle(
+              "DIF-015",
+              "CHR-A01",
+              "http.path",
+              "contract",
+              "semantic",
+              "http.path",
+              "/same-path",
+              "/same-path"),
+          new Oracle(
+              "DIF-016",
+              "CHR-A02",
+              "session.concurrentLimit",
+              "difference",
+              "semantic",
+              "session.concurrentLimit",
+              "three observed sessions remain active despite configured maximum 2",
+              "maximum 2; third login revokes oldest"));
 
   @TempDir Path temporaryDirectory;
 
@@ -100,13 +227,19 @@ class ArtifactComparatorTest {
     Fixture fixture = fixture("input-boundary");
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(null, fixture.current(), fixture.nk(), fixture.observations()));
+        () ->
+            ArtifactComparator.compare(
+                null, fixture.current(), fixture.nk(), fixture.observations()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(fixture.project(), null, fixture.nk(), fixture.observations()));
+        () ->
+            ArtifactComparator.compare(
+                fixture.project(), null, fixture.nk(), fixture.observations()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(fixture.project(), fixture.current(), null, fixture.observations()));
+        () ->
+            ArtifactComparator.compare(
+                fixture.project(), fixture.current(), null, fixture.observations()));
     assertThrows(
         IllegalArgumentException.class,
         () -> ArtifactComparator.compare(fixture.project(), fixture.current(), fixture.nk(), null));
@@ -115,13 +248,19 @@ class ArtifactComparatorTest {
     Path directory = Files.createDirectories(temporaryDirectory.resolve("directory"));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(fixture.project(), regular, fixture.nk(), fixture.observations()));
+        () ->
+            ArtifactComparator.compare(
+                fixture.project(), regular, fixture.nk(), fixture.observations()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(fixture.project(), fixture.current(), regular, fixture.observations()));
+        () ->
+            ArtifactComparator.compare(
+                fixture.project(), fixture.current(), regular, fixture.observations()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ArtifactComparator.compare(fixture.project(), fixture.current(), fixture.nk(), directory));
+        () ->
+            ArtifactComparator.compare(
+                fixture.project(), fixture.current(), fixture.nk(), directory));
   }
 
   @Test
@@ -135,11 +274,14 @@ class ArtifactComparatorTest {
           ((ObjectNode) cases.get(1)).put("id", "CHR-A01");
         });
     mutate(
-        fixture.project().resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
+        fixture
+            .project()
+            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
         root -> ((ArrayNode) root.path("differences")).remove(15));
     Files.delete(fixture.current().resolve("CHR-A01.json"));
     Files.delete(fixture.nk().resolve("CHR-M04.json"));
-    write(fixture.current().resolve("CHR-X99.json"), "{\"caseId\":\"CHR-X99\",\"status\":\"PASS\"}");
+    write(
+        fixture.current().resolve("CHR-X99.json"), "{\"caseId\":\"CHR-X99\",\"status\":\"PASS\"}");
     write(fixture.nk().resolve("CHR-Y99.json"), "{\"caseId\":\"CHR-Y99\",\"status\":\"PASS\"}");
     Files.createSymbolicLink(
         fixture.current().resolve("linked.json"), fixture.current().resolve("CHR-A03.json"));
@@ -220,20 +362,110 @@ class ArtifactComparatorTest {
     ObjectNode positive = (ObjectNode) observations.get(0);
     observations.add(positive.deepCopy());
 
-    observations.add(observation("DIF-X99", "CHR-U01", "brand", "difference", "semantic", "brand", "/dif/DIF-001", "schubert", "schubert NK"));
-    observations.add(observation("DIF-001", "CHR-Z99", "brand", "difference", "semantic", "brand", "/dif/DIF-001", "schubert", "schubert NK"));
-    observations.add(observation("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "relative", "schubert", "schubert NK"));
-    observations.add(observation("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "/*", "schubert", "schubert NK"));
-    observations.add(observation("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "/a..b", "schubert", "schubert NK"));
-    observations.add(observation("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "/", "schubert", "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-X99",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/dif/DIF-001",
+            "schubert",
+            "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-Z99",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/dif/DIF-001",
+            "schubert",
+            "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "relative",
+            "schubert",
+            "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/*",
+            "schubert",
+            "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/a..b",
+            "schubert",
+            "schubert NK"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/",
+            "schubert",
+            "schubert NK"));
 
-    ObjectNode missingExpected = observation("DIF-002", "CHR-L01", "authorization.log", "difference", "semantic", "authorization.log", "/dif/DIF-002", "AUTHENTICATED", "ADMIN");
+    ObjectNode missingExpected =
+        observation(
+            "DIF-002",
+            "CHR-L01",
+            "authorization.log",
+            "difference",
+            "semantic",
+            "authorization.log",
+            "/dif/DIF-002",
+            "AUTHENTICATED",
+            "ADMIN");
     missingExpected.remove("expectedCurrent");
     missingExpected.remove("expectedNk");
     observations.add(missingExpected);
 
-    observations.add(observation("DIF-001", "CHR-A01", "wrong-field", "contract", "header", "wrong-selector", "/missing", "wrong-current", "wrong-nk"));
-    observations.add(observation("DIF-001", "CHR-U01", "brand", "difference", "semantic", "brand", "/missing", "wrong-current", "wrong-nk"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-A01",
+            "wrong-field",
+            "contract",
+            "header",
+            "wrong-selector",
+            "/missing",
+            "wrong-current",
+            "wrong-nk"));
+    observations.add(
+        observation(
+            "DIF-001",
+            "CHR-U01",
+            "brand",
+            "difference",
+            "semantic",
+            "brand",
+            "/missing",
+            "wrong-current",
+            "wrong-nk"));
 
     ObjectNode currentA01 = objectFile(fixture.current().resolve("CHR-A01.json"));
     ObjectNode nkA01 = objectFile(fixture.nk().resolve("CHR-A01.json"));
@@ -243,13 +475,55 @@ class ArtifactComparatorTest {
     nkA01.put("shared", "nk");
     writeJson(fixture.current().resolve("CHR-A01.json"), currentA01);
     writeJson(fixture.nk().resolve("CHR-A01.json"), nkA01);
-    observations.add(observation("DIF-004", "CHR-A01", "authentication.backend", "difference", "semantic", "authentication.backend", "/same", "same", "same"));
-    observations.add(observation("DIF-004", "CHR-A01", "authentication.backend", "difference", "semantic", "authentication.backend", "/shared", "current", "nk"));
-    observations.add(observation("DIF-015", "CHR-A01", "http.path", "contract", "semantic", "http.path", "/shared", "current", "nk"));
+    observations.add(
+        observation(
+            "DIF-004",
+            "CHR-A01",
+            "authentication.backend",
+            "difference",
+            "semantic",
+            "authentication.backend",
+            "/same",
+            "same",
+            "same"));
+    observations.add(
+        observation(
+            "DIF-004",
+            "CHR-A01",
+            "authentication.backend",
+            "difference",
+            "semantic",
+            "authentication.backend",
+            "/shared",
+            "current",
+            "nk"));
+    observations.add(
+        observation(
+            "DIF-015",
+            "CHR-A01",
+            "http.path",
+            "contract",
+            "semantic",
+            "http.path",
+            "/shared",
+            "current",
+            "nk"));
     mutate(
-        fixture.project().resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
+        fixture
+            .project()
+            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
         root -> ((ObjectNode) root.path("differences").get(1)).put("mode", "wildcard"));
-    observations.add(observation("DIF-002", "CHR-L01", "authorization.log", "wildcard", "semantic", "authorization.log", "/dif/DIF-002", "AUTHENTICATED", "ADMIN"));
+    observations.add(
+        observation(
+            "DIF-002",
+            "CHR-L01",
+            "authorization.log",
+            "wildcard",
+            "semantic",
+            "authorization.log",
+            "/dif/DIF-002",
+            "AUTHENTICATED",
+            "ADMIN"));
     writeJson(fixture.observations(), envelope);
 
     Path output = temporaryDirectory.resolve("observation-failure-report.json");
@@ -307,7 +581,8 @@ class ArtifactComparatorTest {
     java.util.Map<String, ObjectNode> currentArtifacts = new java.util.LinkedHashMap<>();
     java.util.Map<String, ObjectNode> nkArtifacts = new java.util.LinkedHashMap<>();
     for (String caseId : CASE_IDS) {
-      currentArtifacts.put(caseId, JSON.createObjectNode().put("caseId", caseId).put("status", "PASS"));
+      currentArtifacts.put(
+          caseId, JSON.createObjectNode().put("caseId", caseId).put("status", "PASS"));
       nkArtifacts.put(caseId, JSON.createObjectNode().put("caseId", caseId).put("status", "PASS"));
     }
 

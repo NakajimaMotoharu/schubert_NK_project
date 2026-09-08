@@ -19,7 +19,7 @@ Outbox lease、論理・物理削除の順序を定める。SQL文の実装は�
 | Isolation | 既定`READ COMMITTED`。個別の一貫性はrow/advisory lock、CAS、UKで保護 |
 | Read-only | 参照serviceは`readOnly=true`。大容量file出力へDB transactionを持ち出さない |
 | Command | Inbox INSERT～業務更新～critical audit～Inbox完了を1 transactionで確定 |
-| 時刻 | Service入口で`Clock.instant()`を1回取得し、同一transactionの全日時にbind |
+| 時刻 | SSC-016: 単一業務操作のservice入口で`Clock.instant()`を1回取得し、その業務状態更新とcritical auditへ同じInstantをbind。受信時刻、Inbox完了（324の保持起点）、response header構築、transaction外Outbox送信確認/失敗は別stageの時刻として区別する |
 | Timeout | API同期command 1,500ms、query 1,500ms、batch step 30min、lock timeout API 500ms/batch 5s |
 | Retry | DB deadlock/serializationをlistener内で自動loopしない。RollbackしJMS redelivery/inboxへ委ねる |
 | Rollback | Checked business errorは予期responseをInbox ERRORでcommit、DB/MQ/I/O例外はtransaction rollback |
@@ -35,41 +35,43 @@ API requestごとに`SET LOCAL application_name`を変更せず、pool設定のs
 - 画面互換のためpage番号式を使い、`offset = (page - 1) * pageSize`。同一主sort keyの末尾にstable IDを必ず付ける。
 - Count SQLとlist SQLは同じpredicate builder/parameter objectから生成し、所有者・論理削除条件の漏れを防ぐ。
 - Dynamic sort columnはenum→SQL fragmentのallowlistだけ。利用者入力のcolumn/directionをそのまま挿入しない。
-- `ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
+- Scenario以外の新規queryでは`ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
 
 ## 4. Scenario・Speaker・Media query
 
 ### 4.1 Scenario search（IF-005）
 
-```sql
-select e.id, e.display_order, e.entry_type, e.speaker_label, e.body,
-       f.id as script_file_id, f.display_path, f.chapter_title,
-       exists (
-         select 1 from schubert.entry_audio_links l
-          where l.entry_id = e.id and l.link_type = 'voice'
-       ) as has_voice
-  from schubert.script_entries e
-  join schubert.script_files f on f.id = e.script_file_id
- where (:game_id is null or e.game_id = :game_id)
-   and (:keyword = '' or e.body_search like :escaped_pattern escape '\\')
-   and (:speaker_id is null or e.speaker_id = :speaker_id)
-   and (:script_file_id is null or e.script_file_id = :script_file_id)
- order by e.display_order asc, e.id asc
- limit 100 offset :offset;
-```
+SSC-017: UI223/234の実際の要求は本文/game/話者名/章/type/voice/pageであり、speaker ID/file IDへ置換しない。下記predicateの必要なものだけをallowlist fragmentから構築し、値は全てprepared statementへbindする。Countとlistは同じfilterから一つのSQL statement snapshotで得る（CTE＋lateral等）。通常READ COMMITTEDの別statement間でcount/listをずらさない。
 
-Countは同predicateの`count(*)`。Keyword空の場合は`OR`をSQLに残さずnamed-query branchでpredicateそのものを除く。
-Game、speaker、fileの不整合組合せは0件とし、別gameのspeaker/fileへ広がらない。
+| 条件 | Predicate・bind |
+|---|---|
+| 本文 | `e.body_search LIKE ?`、NFC/trim後の`%keyword.toLowerCase(Locale.ROOT)%` |
+| Game | `g.code = ?`、指定code |
+| Speaker | `s.name = ?`、名前完全一致。任意gameとの不一致は0件 |
+| 章 | `f.chapter_title ILIKE ?`、`%chapter%` |
+| Type | `e.entry_type = ?`、dialogue/narration |
+| Voice | `EXISTS/NOT EXISTS`したvoice link。se/bgm/otherは対象外 |
+
+本文/章の`%/_/backslash`はCurrent RepositoryのPostgreSQL LIKE pattern解釈を維持する。literal化は未承認の検索結果変更になるため行わない。値bindによるSQL injection防御とpattern解釈は別問題である。空条件はpredicate自体を除く。
+
+Listは`e.display_order,e.id`順、100件。複数voiceは最小link `display_order,audio_file_id`の1件だけを代表音声にし、countはentry単位。UI234 PAGED48の99,999,900件を超えれば9001。必須line NULL/0、未知enum等は架空値へ補完せず一時整合異常9000、移行検証でも検出する。
+
+SSC-018: 検索/明細で表示するSpeaker名はCurrentと同じFK先`speakers.name`（地の文は未設定）とし、保持用`script_entries.speaker_label`へ置換しない。File/current/前後の表示titleはCurrent `ScriptFileSummary.displayTitle`と同じくchapter、section、file名の順にJava `isBlank()`でない最初の値を使う。NULL/空文字だけをSQL `coalesce/nullif`で処理するとASCII/Unicode空白で結果が変わるため、snapshot row mappingで明示判定する。選んだ非blank値を勝手にtrim/加工せずwire不適合metadataは移行検証へ返す。
 
 ### 4.2 Scenario file/detail（IF-003/004）
 
-- File/detailは`script_file_id`/`entry_id`によるPK lookup後、`display_order,id`順で一括取得。
-- 200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
+- File一覧はgame/prefixで絞り`f.display_order,f.id`順、titleはchapter/section/file名の最初の非空値。前後fileは全gameの`g.display_order,f.display_order,f.id`順。
+- Detailはfile PK lookup後、UI223に従い`entry_index,display_order,id`順へ1開始Entry sequenceを割当て、同entryのvoice linkを`display_order,audio_file_id`順へ1開始Audio sequenceで展開する。音声なしはAudio sequence0の1record。
+- 閾値はentry数ではなく音声展開後のrecord数。200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
 - 最大10,000件をJavaのimmutable snapshotへ取得しcommitした後、`.part`へ固定長recordを書く。超過は`9001`。
+
+SSC-023: snapshot前の認証事前確認は312 §3.3.1のread-only JOIN SELECTで行い、User/sessionをlockせずidleも更新しない。READ COMMITTEDの参照結果を将来の認証保証にせず、file I/O後の最終write transactionで現在の認証/認可を再確認する。既存の通常認証verifyをread-onlyへ置換しない。
+
+SSC-027補足（4.2のScenario再生成）: 最終write transactionで324 §7.1のrow lock/owner/HMAC/旧snapshot一致を確認してから、`update schubert.request_inbox set response_body_encrypted=?,response_key_version=? where message_id=? and processing_state='COMPLETED'`を実行する。SQL後条件は更新1件、他17列（初回completed_at/expires_atを含む）不変。失敗はcaller rollback、commit確認後にのみ応答する。PT-IDEM-SR01～SR03で本番DDL/限定app roleの実PostgreSQLにより検査する。
 
 ### 4.3 Speaker/Media
 
-- Speaker一覧はgame scopeのentry数`count(e.id)` desc、`normalized_name`、`s.id`順。Narration用NULLは一覧に出さない。
+- Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。
 - Audioはentry→link `display_order`→audio ID順、Video/MusicはUI 223のdefined category/section/display orderを維持。
 - Descriptor queryは`storage_relative_path`をWeb画面に返さず、署名対象のlogical ID/size/hash/MIME/file nameだけ投影する。
 

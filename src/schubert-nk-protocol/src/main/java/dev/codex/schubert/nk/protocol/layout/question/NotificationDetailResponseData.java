@@ -14,7 +14,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts NTDRSP01. */
-public record NotificationDetailResponseData(NotificationId notificationId,
+public record NotificationDetailResponseData(
+    NotificationId notificationId,
     String receiptId,
     NotificationType notificationType,
     NotificationState internalState,
@@ -28,7 +29,8 @@ public record NotificationDetailResponseData(NotificationId notificationId,
     Optional<String> answerText,
     Optional<NotificationErrorCode> errorCode,
     Optional<String> userFacingError,
-    Optional<QuestionId> questionId) implements PayloadData {
+    Optional<QuestionId> questionId)
+    implements PayloadData {
   public NotificationDetailResponseData {
     Objects.requireNonNull(notificationId, "notificationId");
     Objects.requireNonNull(receiptId, "receiptId");

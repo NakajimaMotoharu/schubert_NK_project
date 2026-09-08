@@ -14,7 +14,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /** Generated named wire record. Trace: SS 323; layouts WLGEVT01. */
-public record WebLogEventData(Instant occurredAt,
+public record WebLogEventData(
+    Instant occurredAt,
     LogLevel level,
     Optional<String> action,
     String message,
@@ -26,7 +27,8 @@ public record WebLogEventData(Instant occurredAt,
     String remoteAddress,
     Optional<String> username,
     Optional<UserRole> role,
-    Optional<String> details) implements PayloadData {
+    Optional<String> details)
+    implements PayloadData {
   public WebLogEventData {
     Objects.requireNonNull(occurredAt, "occurredAt");
     Objects.requireNonNull(level, "level");

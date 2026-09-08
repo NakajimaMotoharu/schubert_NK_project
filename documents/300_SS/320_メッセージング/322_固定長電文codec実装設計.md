@@ -137,6 +137,12 @@ Provider採番`JMSMessageID`はwire Message IDと同一である必要はない�
 Receiverはerror fillerへ通常M/range検査を適用しない。固定data長/header record lengthは成功・errorで不変。未知result codeは恒久protocol error。
 `error_field` 32 byte、`error_message` 256 byteを持つlayoutは利用者表示可能なbounded文字列だけを許可し、内部語/pathを拒否する。
 
+### 8.1 個別error field（SSC-012）
+
+UI234 §3を正として、`LGNRSP01`の0106ではDATA開始168/長さ6のRetry after秒を0～900の数値として保持する。他errorでは同fieldは全0。開始177/長さ256の利用者messageは全errorでoptional X（NFC/UTF-8、control・末尾space禁止）として保持する。Username/Role/context/発行日時/期限日時は全space、残り試行回数は全0、record0。任意の内部例外文を設定せず、利用者向け文言はapplication mapperの固定messageから設定する。
+
+`NTCRSP01`の0107は既定の更新後状態だけを保持する。`NTDRSP01`のERROR job状態は成功profileの業務dataであり、header error profile例外ではない。他29responseに例外を推測追加しない。型付き業務recordの通常semantic変換はsuccess用であり、error responseはresult-aware field codec経由で読む。Booleanのみの低水準filler APIを0106等の個別error応答生成へ使用しない。
+
 ## 9. Cross-field validator
 
 | Layout/領域 | 検査 |

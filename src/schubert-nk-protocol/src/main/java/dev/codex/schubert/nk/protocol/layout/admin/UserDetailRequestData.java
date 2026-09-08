@@ -14,15 +14,12 @@ public record UserDetailRequestData(UserId userId) implements PayloadData {
   }
 
   public static UserDetailRequestData from(FieldValueSet fields) {
-    return new UserDetailRequestData(
-        TypedFieldValues.requiredId(fields, "User ID", UserId::new));
+    return new UserDetailRequestData(TypedFieldValues.requiredId(fields, "User ID", UserId::new));
   }
 
   @Override
   public FieldValueSet fields() {
-    return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("User ID", TypedFieldValues.id(userId))));
+    return new FieldValueSet(Map.ofEntries(Map.entry("User ID", TypedFieldValues.id(userId))));
   }
 
   @Override

@@ -1,7 +1,6 @@
 package dev.codex.schubert.nk.protocol.layout;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,31 +44,37 @@ class LayoutMetadataTest {
     assertEquals(expected, actual);
     assertEquals("LGNREQ01", LayoutRegistry.standard().require("LGNREQ01", 1).id().value());
     assertEquals(
-        "LGNREQ01",
-        LayoutRegistry.standard().require(new LayoutId("LGNREQ01"), 1).id().value());
+        "LGNREQ01", LayoutRegistry.standard().require(new LayoutId("LGNREQ01"), 1).id().value());
     assertThrows(
-        UnsupportedLayoutException.class,
-        () -> LayoutRegistry.standard().require("LGNREQ01", 2));
-    assertThrows(NullPointerException.class, () -> LayoutRegistry.standard().require((String) null, 1));
+        UnsupportedLayoutException.class, () -> LayoutRegistry.standard().require("LGNREQ01", 2));
+    assertThrows(
+        NullPointerException.class, () -> LayoutRegistry.standard().require((String) null, 1));
     assertThrows(
         NullPointerException.class, () -> LayoutRegistry.standard().require((LayoutId) null, 1));
-    assertThrows(UnsupportedOperationException.class, () -> LayoutRegistry.standard().all().clear());
+    assertThrows(
+        UnsupportedOperationException.class, () -> LayoutRegistry.standard().all().clear());
   }
 
   @Test
   void registryRejectsEmptyNullDuplicateAndKindMismatches() {
-    LayoutDefinition request = d("ABCREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0);
+    LayoutDefinition request =
+        d("ABCREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0);
     assertThrows(NullPointerException.class, () -> LayoutRegistry.validateDefinitions(null));
-    assertThrows(LayoutValidationException.class, () -> LayoutRegistry.validateDefinitions(List.of()));
+    assertThrows(
+        LayoutValidationException.class, () -> LayoutRegistry.validateDefinitions(List.of()));
     ArrayList<LayoutDefinition> nullDefinition = new ArrayList<>();
     nullDefinition.add(null);
-    assertThrows(NullPointerException.class, () -> LayoutRegistry.validateDefinitions(nullDefinition));
-    assertThrows(LayoutValidationException.class, () -> LayoutRegistry.validateDefinitions(List.of(request, request)));
+    assertThrows(
+        NullPointerException.class, () -> LayoutRegistry.validateDefinitions(nullDefinition));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> LayoutRegistry.validateDefinitions(List.of(request, request)));
     assertThrows(
         LayoutValidationException.class,
         () ->
             LayoutRegistry.validateDefinitions(
-                List.of(d("ABCREQ01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 0, 0))));
+                List.of(
+                    d("ABCREQ01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 0, 0))));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -84,17 +89,26 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             LayoutRegistry.validateDefinitions(
-                List.of(d("QWKREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 64, 0, 0))));
+                List.of(
+                    d("QWKREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 64, 0, 0))));
     assertThrows(
         LayoutValidationException.class,
         () ->
             LayoutRegistry.validateDefinitions(
-                List.of(d("ABCREQ01", MessageKind.REQUEST, InteractionKind.ASYNC_ACCEPTANCE, 0, 0, 0))));
+                List.of(
+                    d(
+                        "ABCREQ01",
+                        MessageKind.REQUEST,
+                        InteractionKind.ASYNC_ACCEPTANCE,
+                        0,
+                        0,
+                        0))));
     assertThrows(
         LayoutValidationException.class,
         () ->
             LayoutRegistry.validateDefinitions(
-                List.of(d("QSBREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 4_144, 0, 0))));
+                List.of(
+                    d("QSBREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 4_144, 0, 0))));
     LayoutRegistry.validateDefinitions(List.of(request));
   }
 
@@ -110,41 +124,134 @@ class LayoutMetadataTest {
     assertThrows(LayoutValidationException.class, () -> definition.totalLengthFor(3));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 2, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                2,
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                0,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, -1, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                1,
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                -1,
+                0,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 1_000_000, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                1,
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                1_000_000,
+                0,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCRSP01"), 1, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 1, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCRSP01"),
+                1,
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                1,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCRSP01"), 1, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 0, 1));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCRSP01"),
+                1,
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                0,
+                1));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 999_999, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                1,
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                999_999,
+                0,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCRSP01"), 1, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 999_999, 999_999));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCRSP01"),
+                1,
+                MessageKind.RESPONSE,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                999_999,
+                999_999));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0, 257));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                1,
+                MessageKind.REQUEST,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                0,
+                0,
+                257));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCEVT01"), 1, MessageKind.EVENT, InteractionKind.SYNCHRONOUS, 0, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCEVT01"),
+                1,
+                MessageKind.EVENT,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                0,
+                0));
     assertThrows(
         LayoutValidationException.class,
-        () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, InteractionKind.INTERNAL, 0, 0, 0));
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"),
+                1,
+                MessageKind.REQUEST,
+                InteractionKind.INTERNAL,
+                0,
+                0,
+                0));
     assertEquals(
         256,
-        new LayoutDefinition(new LayoutId("ABCEVT01"), 1, MessageKind.EVENT, InteractionKind.INTERNAL, 0, 0, 0)
+        new LayoutDefinition(
+                new LayoutId("ABCEVT01"), 1, MessageKind.EVENT, InteractionKind.INTERNAL, 0, 0, 0)
             .maximumTotalLength());
-    assertThrows(NullPointerException.class, () -> new LayoutDefinition(null, 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0));
-    assertThrows(NullPointerException.class, () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, null, InteractionKind.SYNCHRONOUS, 0, 0, 0));
-    assertThrows(NullPointerException.class, () -> new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, null, 0, 0, 0));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new LayoutDefinition(
+                null, 1, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new LayoutDefinition(
+                new LayoutId("ABCREQ01"), 1, null, InteractionKind.SYNCHRONOUS, 0, 0, 0));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, null, 0, 0, 0));
   }
 
   @Test
@@ -159,11 +266,38 @@ class LayoutMetadataTest {
     assertThrows(LayoutValidationException.class, () -> new LayoutId("abcREQ01"));
 
     FieldDefinition<String> text =
-        new FieldDefinition<>(FieldArea.DATA, "name", 1, 8, WireType.TEXT, Presence.MANDATORY, Padding.SPACE_RIGHT, String.class, "NFC");
+        new FieldDefinition<>(
+            FieldArea.DATA,
+            "name",
+            1,
+            8,
+            WireType.TEXT,
+            Presence.MANDATORY,
+            Padding.SPACE_RIGHT,
+            String.class,
+            "NFC");
     FieldDefinition<Long> numeric =
-        new FieldDefinition<>(FieldArea.RECORD, "count", 9, 3, WireType.NUMERIC, Presence.OPTIONAL, Padding.ZERO_LEFT, Long.class, "0..999");
+        new FieldDefinition<>(
+            FieldArea.RECORD,
+            "count",
+            9,
+            3,
+            WireType.NUMERIC,
+            Presence.OPTIONAL,
+            Padding.ZERO_LEFT,
+            Long.class,
+            "0..999");
     FieldDefinition<Boolean> bool =
-        new FieldDefinition<>(FieldArea.HEADER, "flag", 12, 1, WireType.BOOLEAN, Presence.CONDITIONAL, Padding.NONE, Boolean.class, "0/1");
+        new FieldDefinition<>(
+            FieldArea.HEADER,
+            "flag",
+            12,
+            1,
+            WireType.BOOLEAN,
+            Presence.CONDITIONAL,
+            Padding.NONE,
+            Boolean.class,
+            "0/1");
     assertEquals(8, text.end());
     assertEquals(11, numeric.end());
     assertEquals(12, bool.end());
@@ -171,11 +305,21 @@ class LayoutMetadataTest {
     assertEquals(3, WireType.values().length);
     assertEquals(4, Presence.values().length);
     assertEquals(3, Padding.values().length);
-    assertThrows(LayoutValidationException.class, () -> field("", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, " "));
-    assertThrows(LayoutValidationException.class, () -> field("name", 0, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", 1, 0, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", Integer.MAX_VALUE, 2, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, " "));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 0, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 1, 0, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", Integer.MAX_VALUE, 2, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -190,16 +334,47 @@ class LayoutMetadataTest {
                 Padding.SPACE_RIGHT,
                 String.class,
                 "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", 1, 1, WireType.TEXT, Padding.NONE, "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", 1, 1, WireType.NUMERIC, Padding.NONE, "rule"));
-    assertThrows(LayoutValidationException.class, () -> field("name", 1, 1, WireType.BOOLEAN, Padding.SPACE_RIGHT, "rule"));
-    assertThrows(NullPointerException.class, () -> new FieldDefinition<>(null, "n", 1, 1, WireType.TEXT, Presence.MANDATORY, Padding.SPACE_RIGHT, String.class, "r"));
-    assertThrows(NullPointerException.class, () -> new FieldDefinition<>(FieldArea.DATA, null, 1, 1, WireType.TEXT, Presence.MANDATORY, Padding.SPACE_RIGHT, String.class, "r"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 1, 1, WireType.TEXT, Padding.NONE, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 1, 1, WireType.NUMERIC, Padding.NONE, "rule"));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> field("name", 1, 1, WireType.BOOLEAN, Padding.SPACE_RIGHT, "rule"));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new FieldDefinition<>(
+                null,
+                "n",
+                1,
+                1,
+                WireType.TEXT,
+                Presence.MANDATORY,
+                Padding.SPACE_RIGHT,
+                String.class,
+                "r"));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new FieldDefinition<>(
+                FieldArea.DATA,
+                null,
+                1,
+                1,
+                WireType.TEXT,
+                Presence.MANDATORY,
+                Padding.SPACE_RIGHT,
+                String.class,
+                "r"));
   }
 
   private static FieldDefinition<String> field(
       String name, int start, int length, WireType type, Padding padding, String rule) {
-    return new FieldDefinition<>(FieldArea.DATA, name, start, length, type, Presence.FIXED, padding, String.class, rule);
+    return new FieldDefinition<>(
+        FieldArea.DATA, name, start, length, type, Presence.FIXED, padding, String.class, rule);
   }
 
   private static LayoutDefinition d(
@@ -209,6 +384,7 @@ class LayoutMetadataTest {
       int dataLength,
       int recordLength,
       int count) {
-    return new LayoutDefinition(new LayoutId(id), 1, kind, interaction, dataLength, recordLength, count);
+    return new LayoutDefinition(
+        new LayoutId(id), 1, kind, interaction, dataLength, recordLength, count);
   }
 }

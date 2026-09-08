@@ -37,7 +37,8 @@ public final class LargeResultRecordCodec {
     } catch (IOException exception) {
       throw new LargeResultIoException("large-result write failed", exception);
     }
-    return new LargeResultContent(records.size(), byteLength, HexFormat.of().formatHex(digest.digest()));
+    return new LargeResultContent(
+        records.size(), byteLength, HexFormat.of().formatHex(digest.digest()));
   }
 
   public static List<byte[]> decode(InputStream input, LargeResultDescriptor descriptor) {
@@ -57,8 +58,9 @@ public final class LargeResultRecordCodec {
     } catch (IOException exception) {
       throw new LargeResultIoException("large-result read failed", exception);
     }
-    String actualHash = HexFormat.of().formatHex(digest.digest());
-    if (!actualHash.equals(descriptor.sha256())) {
+    // BUG-034/YKT-030: verification compares fixed 32-byte digests, not early-exit String equality.
+    byte[] expectedHash = HexFormat.of().parseHex(descriptor.sha256());
+    if (!MessageDigest.isEqual(digest.digest(), expectedHash)) {
       throw new PermanentProtocolException("large-result SHA-256 differs from its descriptor");
     }
     return Collections.unmodifiableList(records);

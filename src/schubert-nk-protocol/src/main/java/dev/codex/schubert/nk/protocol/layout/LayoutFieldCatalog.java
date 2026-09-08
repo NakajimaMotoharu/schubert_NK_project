@@ -402,8 +402,7 @@ public final class LayoutFieldCatalog {
         WLGEVT01	DATA	Reserved	2068	13	X	F	全space
       """;
 
-  private static final LayoutFieldCatalog STANDARD =
-      parse(CATALOG_TSV, LayoutRegistry.standard());
+  private static final LayoutFieldCatalog STANDARD = parse(CATALOG_TSV, LayoutRegistry.standard());
 
   private final List<LayoutFields> layouts;
   private final Map<String, LayoutFields> byId;
@@ -505,8 +504,7 @@ public final class LayoutFieldCatalog {
     return new LayoutFieldCatalog(result);
   }
 
-  private static void appendRows(
-      List<String> rows, LayoutId id, List<FieldDefinition<?>> fields) {
+  private static void appendRows(List<String> rows, LayoutId id, List<FieldDefinition<?>> fields) {
     for (FieldDefinition<?> field : fields) {
       rows.add(
           String.join(

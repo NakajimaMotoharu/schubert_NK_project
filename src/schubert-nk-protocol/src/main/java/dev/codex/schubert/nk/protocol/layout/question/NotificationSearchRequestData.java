@@ -10,11 +10,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /** Generated named wire record. Trace: SS 323; layouts NTSREQ01. */
-public record NotificationSearchRequestData(Optional<NotificationType> notificationType,
+public record NotificationSearchRequestData(
+    Optional<NotificationType> notificationType,
     Optional<Instant> submittedFrom,
     Optional<Instant> submittedTo,
     int page,
-    int pageSize) implements PayloadData {
+    int pageSize)
+    implements PayloadData {
   public NotificationSearchRequestData {
     Objects.requireNonNull(notificationType, "notificationType");
     Objects.requireNonNull(submittedFrom, "submittedFrom");

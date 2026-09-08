@@ -13,15 +13,12 @@ public record VideoDescriptorRequestData(String videoId) implements PayloadData 
   }
 
   public static VideoDescriptorRequestData from(FieldValueSet fields) {
-    return new VideoDescriptorRequestData(
-        TypedFieldValues.requiredString(fields, "Video ID"));
+    return new VideoDescriptorRequestData(TypedFieldValues.requiredString(fields, "Video ID"));
   }
 
   @Override
   public FieldValueSet fields() {
-    return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Video ID", TypedFieldValues.text(videoId))));
+    return new FieldValueSet(Map.ofEntries(Map.entry("Video ID", TypedFieldValues.text(videoId))));
   }
 
   @Override

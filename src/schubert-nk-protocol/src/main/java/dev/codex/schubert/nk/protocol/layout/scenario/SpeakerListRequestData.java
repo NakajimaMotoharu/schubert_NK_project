@@ -22,8 +22,7 @@ public record SpeakerListRequestData(Optional<GameCode> gameCode) implements Pay
   @Override
   public FieldValueSet fields() {
     return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Game code", TypedFieldValues.optionalEnumValue(gameCode))));
+        Map.ofEntries(Map.entry("Game code", TypedFieldValues.optionalEnumValue(gameCode))));
   }
 
   @Override

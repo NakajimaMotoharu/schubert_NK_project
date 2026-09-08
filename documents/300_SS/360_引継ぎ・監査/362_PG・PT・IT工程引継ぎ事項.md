@@ -55,13 +55,14 @@ local Git/review/backupが有効なら開始blockerではない。
 | Module | 主SS | 必須成果物 |
 |---|---|---|
 | `schubert-nk-protocol` | 311、322～323 | 64 layout record/codec/schema/golden vector、共通error/value |
+| `schubert-nk-storage`（SSC-021） | 311、333、342～343 | 保持directory/inode・低位native能力。API/Web file adapter専用、独立processではない |
 | `schubert-nk-api` | 311～312、314、321、324、331～333、352 | Consumer/application/repository/outbox/inbox/file/security |
 | `schubert-nk-web` | 311～314、321、324、333、351～352 | Controller/form/template/view/session/JMS client/log outbox |
 | `schubert-nk-batch` | 311、331～332、341、343、351～353 | Morning/backup/cleanup/migration verify/status |
 | `program/characterization` | 355 | Current/NK共通harness、baseline、DIF/report |
 | Infrastructure | 321、331、342～343 | Flyway SQL、Caddy/systemd/Artemis/PostgreSQL設定雛形、manifest |
 
-CommonへHTTP form/view/entity/Repositoryを入れない。Web/APIが同じDB entity classを共有せず、wire recordとcodecだけを共有する。
+CommonへHTTP form/view/entity/Repositoryを入れない。Web/APIが同じDB entity classを共有せず、業務の共有はwire recordとcodecだけとする。SSC-021の低位storage libraryは業務record/DB/HTTPを含まず、file adapterだけが依存する。同artifact version/hash・全module PT/coverage/静的解析を維持する（311/343）。
 
 ### 4.2 実装順
 

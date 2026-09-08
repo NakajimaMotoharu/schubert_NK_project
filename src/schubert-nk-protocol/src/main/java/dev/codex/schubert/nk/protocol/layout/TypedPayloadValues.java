@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 /** One payload represented by the named data/record types specified in SS 323. */
-public record TypedPayloadValues(
-    LayoutId layoutId, PayloadData data, List<PayloadRecord> records) {
+public record TypedPayloadValues(LayoutId layoutId, PayloadData data, List<PayloadRecord> records) {
   public TypedPayloadValues {
     Objects.requireNonNull(layoutId, "layoutId");
     Objects.requireNonNull(data, "data");

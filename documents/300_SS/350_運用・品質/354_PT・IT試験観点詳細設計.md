@@ -2,6 +2,10 @@
 
 ## 1. 目的・状態・追跡
 
+SSC-014: Username表示64byteと比較key96byteを分離し、U+0130×32/NFC/trim/Locale.ROOT/ギリシャ語文脈を独立literalで確認。旧64byte CHECKでの拒否を再現し、append-only V007で95/96受理・97/空/NULL拒否・UK維持・既存値非変更・Login audit64byteを検証する。表示/wireを拡張せず全scalarのUTF-8 lower最大3/2をJDK更新guardにする。
+
+SSC-013: Login snapshotは独立UI232/234の688byteで検証する。成功AUTH_SESSION＋snapshot/0200、失敗ERROR/NONE/元0101・0106、初回role/期限の凍結、DB参照/AAD/hash/発行時刻不整合、key rotation/改ざん/NULL/SQL故障/100並行を含む。再送でsession/counter/監査の再更新なし。新Headerのbyte23はS（応答）、24はS（同期）をUI表から独立配置する。
+
 詳細設計からPT（単体試験）・IT（結合試験）へ引き継ぐ分岐、境界値、異常系、競合、再送、権限、
 性能・復旧の試験条件とoracle、証跡を定める。本書は試験codeではなく、後続工程の実装・実行契約である。
 
@@ -36,7 +40,11 @@ redactionを無効化しない。
 - 確率・競合caseは少なくとも100回反復と一意seed再現を行い、失敗回のseed/event IDを保存する。
 - 合格はassertion数0ではなく、対象分岐・上下限・異常codeの要求coverage 100%をmatrixで証明する。
 
+SSC-024: PT-IDEM-RO01～RO04はread-only Message snapshotと通常Inboxの照合共通性を確認する。不在を予約とみなさず、別Message同tokenを拾わず、保持期限/状態/row数非更新、row lock非取得、100並行、全identity/HMAC/key/NULL/JDBC故障を拒否する。最終writeのUK/再照合と復号・業務参照検査を省略しない。
+
 ## 4. PT詳細観点
+
+SSC-025: PT-SCN-009-Q01～Q04で6 requestのUI234手組DATA、SS323 §9.1の全field順/ASCII名/type/LP null/数値/HMAC、keywordとquery正規化の分離、null/未知/UTF8/NFC/境界、実DB6分岐とDetail不在・entry/audio順を確認する。Header/meta変更をpayload HMACへ混入させず、同じdecoded値をSQLへ渡す。Request振分け部品は最終response/Inbox/file再送の完了には算入しない。
 
 ### 4.1 PT-CODEC（SS 322・323）
 
@@ -47,17 +55,25 @@ redactionを無効化しない。
 | PT-CODEC-S-* | NFC前/後、日本語・surrogate・combining mark、byte上限-1/上限/上限+1 | Code-point境界でpadding、切断・暗黙truncateなし |
 | PT-CODEC-P-* | Space/zero padding、sign/decimal禁止、control/NUL、invalid UTF-8、unknown enum | Decode/encode双方で一意error step/code |
 | PT-CODEC-E-* | Error response filler、record count 0、body不足/過剰、上限1,000,000 byte | Result-code profileに従い、不正bodyはDLQ/process exit引継ぎ |
+| PT-CODEC-AUTHERR-* | LGNRSP01/0106 retry0/1/900/901、message256/257byte、秘密field filler、他error retry0、31response全error組合せ | UI234独立432byte vectorとUI写しTSVで全byte検証。NTC0107例外維持、blank goldenだけでは代替しない（SSC-012/BUG-023） |
 
 Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、decode recordを保存する。
 
 ### 4.2 PT-AUTH（SS 314・352）
 
+SSC-023: PT-AUT-007-R01～R04で事前確認の実PostgreSQL read-only、User/session row lock非取得、idle/transaction所有の不変、全認証拒否・NULL/未知role/JDBC複合故障、100並行、事前確認後の失効を最終verifyが拒否することを確認する。段階serviceのInbox/file再送gateは別途必要。
+
 - Username NFC/trim/lowercase key、Login passwordのNFC前後と0/1/256/257 byte、作成password 11/12/128/129文字と255/256/257 byte、末尾ASCII space、
   PBKDF2-HMAC-SHA256のparameter/世代ID/rehash、先頭72 byte同一・末尾差分を含む全256 byte照合、存在/不存在timingの統計的差。
 - USER 4/5失敗、IP 9/10失敗、15分直前/到達/直後、成功clear、disable/lock/reset、同時Login race。
+- SSC-009/BUG-021: failure窓は終了一致を旧窓に含め、strict超過だけreset。初回1失敗＋終了時刻で4失敗のUSERはlock、終了+1nsなら非lockをCurrent/NK独立比較する。IPは初回1＋9失敗で同境界を検証する。lock有効性自体は終了一致でfalseのまま、DBではμs境界を照合する。
 - Session 1/2/3件、idle 8時間直前/到達、restart、fixation、cookie hash、ciphertext/tag/AAD/key version改ざん。Current Characterizationの3件継続は`DIF-016`のみのoracleとし、NK PTは3件目Login後を`[最古=revoke、残り2件=active]`で必ず合否判定する。
 - CSRF欠落/不一致/別session/再利用、SavedRequestのsafe GETとexternal/POST拒否、Logout POST、cache/header。
 - USER/ADMINの全route/layout、owner/他人/不存在の404/403使い分け、Web/API二重検証、Web業務schema grant 0。
+
+SSC-015: Logoutはknown contextのowner lookupからInboxへ入り、同Message再送で失効/監査の追加0、別Messageの既失効0200で元時刻/監査1を確認する。Snapshot/AUTH_SESSION/owner/hash/失効日時の不整合と鍵/DB故障はdeny closed。Known ownerの0102は元error維持、unknown contextはInbox0、通常業務のactor発行/idle延長0。LOGREQにない現在client IPを過去Login IPから補わず、失効監査SQL NULLとLogin/REPLACEDの当該IP維持を負/正常testする。
+
+SSC-016: 固定Clockだけでなく受信→業務入口→Inbox完了→reply構築を各1秒進めるClockで検証する。業務row/critical auditは同時刻、Inbox expiresはcompleted+24h/7d、wire headerは構築時刻、replay DATAは元業務時刻・headerだけ更新、保存期限不変を独立Instant/byteで確認する。
 
 ### 4.3 PT-IDEM・STATE（SS 312・324・332）
 
@@ -76,6 +92,8 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 - 全PK/FK/UK/CK/NOT NULL、DEFERRABLEの有無、ON DELETE RESTRICT、複合game FK、partial index predicateをcatalog自動照合。
 - N12/N9の0/上限/上限+1、UTF-8 byte上限、timestamptz境界、logical delete/version、sequenceのmigration後値。
 - 検索条件の単独/AND/escape、大小文字、sort tie、0/-1/1/最終/超過page、0/50/100/101件。
+- SSC-017: ScenarioはCurrentのLIKE/ILIKE wildcard/escape解釈を独立fixtureで維持する。話者名同名集計（gameあり/なし）、6条件の同一statement count/page、代表voiceと非voice、file title/順序、Entry indexからのsequenceと展開後200/201/10000/10001 record、必須DB NULLの非補完を検証する。
+- SSC-018: FK先Speaker名と保持labelが異なるfixture、NULL/空/ASCIIspace/Unicode blankのchapter/sectionでCurrent由来表示期待値を照合する。検索/明細speaker、一覧/現file/前後titleを全て対象とする。
 - Query IDごとのindex利用候補、statement timeout、N+1不発生、ADMIN/USER/technical/migration roleの正負grant。
 - Optimistic version 2更新、`FOR UPDATE SKIP LOCKED`複数dispatcher、deadlock/timeout/connection切断のrollbackとretry範囲。
 
@@ -83,6 +101,9 @@ Golden vectorはlayout IDごとにencode完成byteのSHA-256、field境界hex、
 
 - Empty/absolute/`..`/separator違い/NUL/Unicode欺瞞・各segment symlink・root symlink・hard link・open前後差替えを拒否する。
 - Descriptorのsize/hash/MIME/suffix/owner/layoutを1項目ずつ改ざん、`.part`、欠落、短い/過剰file、atomic rename失敗。
+- SSC-022: producer開始前の起動probeで、診断A/Bの実force/hash/属性・native no-replace collision・directory fsync、所有済診断fileだけの清掃を確認。既存業務ready非更新、公開不確定ready保全、清掃/close故障による起動不合格、full root/exclusive/readinessとの別gateを追跡する。
+- SSC-021: shared storage抽出で旧/新package PTの欠落/重複を防ぎ、全module coverage/静的解析を継続。Web readerは既存dateのみread-onlyでopenし、保持inodeの属性/hash先行・4800byte decode・再hash/sequence後にだけ値を返す。最大48MB/10000件、100並行、内容途中変更、symlink/hardlink、属性/EOF/部分read/close故障、FD全解放・file非更新/非削除を確認。認可/HTTP503/logging・full root/readiness・実service UID分離は別gateとする。
+- SSC-019: API writerの実libc openat/mkdirat/renameat2(NO_REPLACE)/unlinkat/fsync/closeについて成功・errno・同名100並行を確認する。Root/date差替え後も保持FD先だけを操作し、callback中のclose/reuseを防ぎ、途中open/close故障で所有FDを残さない。Java ATOMIC_MOVEの既存target置換を許容しない。Root admission/permission/nlink/readinessとwriter全体の故障試験は、この低level試験だけで完了にしない。
 - Scenario 200/201/10,000/10,001 recordと48,000,000 byte、transfer 5GB/5,000/9,000件境界、朝削除cutoff。
 - Rangeなし、`0-0`、`0-1048575`、1MiB超、open-ended、suffix 1/total/total+1、複数・不正・overflow、416と`bytes */total`。
 - Inline/downloadのMIME/Content-Disposition UTF-8、HEAD、If-Range非対応の扱い、owner違反の非存在同一応答。

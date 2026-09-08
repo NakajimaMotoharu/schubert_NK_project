@@ -29,8 +29,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -86,7 +86,8 @@ class GateCliTest {
     Path sourceB = write(current.resolve("program/app/src/日本語/B.java"), "class B {}\n");
     Path schema = write(current.resolve("program/database/schema.sql"), "schema\n");
     Path load = write(current.resolve("program/database/load_scenario_data.sql"), "load\n");
-    Path generator = write(current.resolve("program/database/generate_scenario_sql.py"), "generate\n");
+    Path generator =
+        write(current.resolve("program/database/generate_scenario_sql.py"), "generate\n");
     Path document = write(current.resolve("documents/001.md"), "# document\n");
     write(current.resolve("documents/ignored.txt"), "not a design document\n");
     Path masterA = write(current.resolve("data/master/a.bin"), "abc");
@@ -102,7 +103,8 @@ class GateCliTest {
     expected.put("masterFileCount", 2);
     expected.put("masterBytes", Files.size(masterA) + Files.size(masterB));
     writeJson(
-        project.resolve("program/characterization/tests/resources/fixtures/expected.json"), expected);
+        project.resolve("program/characterization/tests/resources/fixtures/expected.json"),
+        expected);
 
     Path passOutput = temporaryDirectory.resolve("source-pass.json");
     withProperties(
@@ -117,7 +119,8 @@ class GateCliTest {
     Files.createSymbolicLink(current.resolve("data/master/link.bin"), outside);
     expected.put("sourceFileCount", 999);
     writeJson(
-        project.resolve("program/characterization/tests/resources/fixtures/expected.json"), expected);
+        project.resolve("program/characterization/tests/resources/fixtures/expected.json"),
+        expected);
     Path failOutput = temporaryDirectory.resolve("source-fail.json");
     withProperties(
         Map.of("chr.projectRoot", project.toString(), "chr.currentRoot", current.toString()),
@@ -127,7 +130,9 @@ class GateCliTest {
                 () -> GateCli.main(new String[] {"verify-source", failOutput.toString()})));
     JsonNode fail = JSON.readTree(failOutput.toFile());
     assertEquals("FAIL", fail.path("status").asText());
-    assertTrue(strings(fail.path("failures")).stream().anyMatch(value -> value.startsWith("sourceFileCount expected=")));
+    assertTrue(
+        strings(fail.path("failures")).stream()
+            .anyMatch(value -> value.startsWith("sourceFileCount expected=")));
     assertTrue(strings(fail.path("failures")).contains("masterSymlinks must be empty"));
   }
 
@@ -163,10 +168,13 @@ class GateCliTest {
               PosixFilePermission.OWNER_WRITE,
               PosixFilePermission.GROUP_READ));
       Map<String, String> invalidProperties = new LinkedHashMap<>(invalid.properties());
-      invalidProperties.put("chr.currentJar", invalid.currentRoot().resolve("data/master").toString());
+      invalidProperties.put(
+          "chr.currentJar", invalid.currentRoot().resolve("data/master").toString());
       invalidProperties.put("chr.assetRoot", notAssetDirectory.toString());
-      invalidProperties.put("chr.javaExecutable", temporaryDirectory.resolve("missing-java").toString());
-      invalidProperties.put("chr.caddyExecutable", temporaryDirectory.resolve("missing-caddy").toString());
+      invalidProperties.put(
+          "chr.javaExecutable", temporaryDirectory.resolve("missing-java").toString());
+      invalidProperties.put(
+          "chr.caddyExecutable", temporaryDirectory.resolve("missing-caddy").toString());
       invalidProperties.put("chr.pgCtl", temporaryDirectory.resolve("missing-pgctl").toString());
       invalidProperties.put("chr.pgData", notPgDirectory.toString());
       invalidProperties.put("chr.dbUrl", "jdbc:postgresql://external.example:5432/db");
@@ -249,7 +257,10 @@ class GateCliTest {
 
   @Test
   void reportMapsEveryGateAndRejectsSecretCanaries() throws Exception {
-    Path users = ownerOnlyFile(temporaryDirectory.resolve("report-users.txt"), "user=unit-user-not-present\npass=unit-pass-not-present\n");
+    Path users =
+        ownerOnlyFile(
+            temporaryDirectory.resolve("report-users.txt"),
+            "user=unit-user-not-present\npass=unit-pass-not-present\n");
     Path reports = SOURCE_ROOT.resolve("program/characterization/reports/current");
     Path comparison =
         SOURCE_ROOT.resolve("program/characterization/reports/current-repeat-comparison.json");
@@ -267,7 +278,9 @@ class GateCliTest {
                 }));
     JsonNode pass = JSON.readTree(passOutput.toFile());
     assertEquals("PASS", pass.path("status").asText());
-    assertTrue(pass.path("gates").properties().stream().allMatch(entry -> "PASS".equals(entry.getValue().asText())));
+    assertTrue(
+        pass.path("gates").properties().stream()
+            .allMatch(entry -> "PASS".equals(entry.getValue().asText())));
 
     Path failureProject = reportFixture("gate-failures");
     mutate(
@@ -285,7 +298,8 @@ class GateCliTest {
     Path first = run(failureProject, "pgpt-gate-20260901-05");
     Path second = run(failureProject, "pgpt-gate-20260901-06");
     Files.delete(first.resolve("artifacts/CHR-A01.json"));
-    Path failUsers = ownerOnlyFile(temporaryDirectory.resolve("fail-users.txt"), "pass=not-in-fixture\n");
+    Path failUsers =
+        ownerOnlyFile(temporaryDirectory.resolve("fail-users.txt"), "pass=not-in-fixture\n");
     Path failOutput = temporaryDirectory.resolve("gate-fail.json");
     withProperties(
         Map.of(
@@ -301,20 +315,24 @@ class GateCliTest {
                           first.toString(),
                           second.toString(),
                           failureProject
-                              .resolve("program/characterization/reports/current-repeat-comparison.json")
+                              .resolve(
+                                  "program/characterization/reports/current-repeat-comparison.json")
                               .toString(),
                           failOutput.toString()
                         })));
     JsonNode fail = JSON.readTree(failOutput.toFile());
     assertEquals("FAIL", fail.path("status").asText());
-    assertTrue(fail.path("gates").properties().stream().allMatch(entry -> "FAIL".equals(entry.getValue().asText())));
+    assertTrue(
+        fail.path("gates").properties().stream()
+            .allMatch(entry -> "FAIL".equals(entry.getValue().asText())));
 
     Path secretProject = reportFixture("gate-secret");
     String canary = "unit-secret-canary-7d9a";
     write(
         secretProject.resolve("program/characterization/reports/secret-canary.txt"),
         "prefix-" + canary + "-suffix");
-    Path secretUsers = ownerOnlyFile(temporaryDirectory.resolve("secret-users.txt"), "pass=" + canary + "\n");
+    Path secretUsers =
+        ownerOnlyFile(temporaryDirectory.resolve("secret-users.txt"), "pass=" + canary + "\n");
     Path secretOutput = temporaryDirectory.resolve("gate-secret.json");
     withProperties(
         Map.of(
@@ -328,7 +346,8 @@ class GateCliTest {
                         secretProject,
                         run(secretProject, "pgpt-gate-20260901-05"),
                         run(secretProject, "pgpt-gate-20260901-06"),
-                        secretProject.resolve("program/characterization/reports/current-repeat-comparison.json"),
+                        secretProject.resolve(
+                            "program/characterization/reports/current-repeat-comparison.json"),
                         secretOutput)));
     JsonNode secretFailure = JSON.readTree(secretOutput.toFile());
     assertEquals(1, secretFailure.path("secretScanHits").asInt());
@@ -347,9 +366,7 @@ class GateCliTest {
         Map.of("chr.projectRoot", SOURCE_ROOT.toString(), "chr.gateCommit", "abcdef1"),
         () ->
             GateCli.main(
-                new String[] {
-                  "promote-current", sourceRun.toString(), baseline.toString()
-                }));
+                new String[] {"promote-current", sourceRun.toString(), baseline.toString()}));
     JsonNode manifest = JSON.readTree(baseline.resolve("manifest.json").toFile());
     assertEquals("abcdef1", manifest.path("gateCommit").asText());
     assertEquals(24, manifest.path("caseCount").asInt());
@@ -403,7 +420,8 @@ class GateCliTest {
     Files.createSymbolicLink(root.resolve("linked.txt"), first);
 
     assertTrue(GateCli.regularFiles(temporaryDirectory.resolve("absent"), path -> true).isEmpty());
-    assertEquals(List.of(second), GateCli.regularFiles(root, path -> path.toString().endsWith(".md")));
+    assertEquals(
+        List.of(second), GateCli.regularFiles(root, path -> path.toString().endsWith(".md")));
     GateCli.TreeStats stats = GateCli.treeStats(root);
     assertEquals(2, stats.fileCount());
     assertEquals(3, stats.bytes());
@@ -442,8 +460,7 @@ class GateCliTest {
     Path large = project.resolve("program/characterization/reports/large.bin");
     Files.createDirectories(large.getParent());
     try (SeekableByteChannel channel =
-        Files.newByteChannel(
-            large, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
+        Files.newByteChannel(large, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
       channel.position(10L * 1024 * 1024);
       channel.write(ByteBuffer.wrap(new byte[] {1}));
     }
@@ -475,8 +492,7 @@ class GateCliTest {
                   });
       assertTrue(serializationStarted.await(5, TimeUnit.SECONDS));
       assertThrows(
-          IllegalStateException.class,
-          () -> GateCli.writeJson(output, Map.of("value", "second")));
+          IllegalStateException.class, () -> GateCli.writeJson(output, Map.of("value", "second")));
       releaseSerialization.countDown();
       first.get(5, TimeUnit.SECONDS);
     }
@@ -485,8 +501,8 @@ class GateCliTest {
     assertThrows(IllegalArgumentException.class, () -> GateCli.writeJson(null, Map.of()));
   }
 
-  private void assertPortFailure(
-      PreflightFixture fixture, int appPort, int proxyPort, String name) throws Exception {
+  private void assertPortFailure(PreflightFixture fixture, int appPort, int proxyPort, String name)
+      throws Exception {
     Map<String, String> properties = new LinkedHashMap<>(fixture.properties());
     properties.put("chr.appPort", Integer.toString(appPort));
     properties.put("chr.proxyPort", Integer.toString(proxyPort));
@@ -578,8 +594,7 @@ class GateCliTest {
   private static Path ownerOnlyFile(Path path, String content) throws IOException {
     write(path, content);
     Files.setPosixFilePermissions(
-        path,
-        Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE));
+        path, Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE));
     return path;
   }
 
@@ -614,8 +629,7 @@ class GateCliTest {
     MessageDigest aggregate = MessageDigest.getInstance("SHA-256");
     for (Path file : sorted) {
       String relative = root.relativize(file).toString().replace('\\', '/');
-      aggregate.update(
-          (sha256(file) + "  " + relative + "\n").getBytes(StandardCharsets.UTF_8));
+      aggregate.update((sha256(file) + "  " + relative + "\n").getBytes(StandardCharsets.UTF_8));
     }
     return HEX.formatHex(aggregate.digest());
   }
@@ -672,10 +686,7 @@ class GateCliTest {
   }
 
   private record PreflightFixture(
-      Path projectRoot,
-      Path currentRoot,
-      Path usersFile,
-      Map<String, String> properties) {}
+      Path projectRoot, Path currentRoot, Path usersFile, Map<String, String> properties) {}
 
   private record BlockingValue(CountDownLatch started, CountDownLatch release) {
     public String getValue() throws InterruptedException {

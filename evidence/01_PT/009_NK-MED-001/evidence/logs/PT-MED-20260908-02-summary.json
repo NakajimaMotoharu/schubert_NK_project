@@ -1,0 +1,235 @@
+{
+  "runId": "PT-MED-20260908-02",
+  "targetCommit": "dc580fc7ed9c9f608430072b1ddf5caaf646eaae",
+  "branch": "dev-media",
+  "startedAt": "2026-09-08T12:14:50+09:00",
+  "completedAt": "2026-09-08T12:17:52+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 26,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1436
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 103
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 285
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 110
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 58
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 289,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17160
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1296
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3886
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1255
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 592
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 131
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 65,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3473
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 307
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 844
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 283
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 31
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "7ad60fb7b4ee83a6be226e6dcaffc9599bff09aa91fc9e9f2dd41760843cebd8",
+  "programId": "NK-MED-001",
+  "programStatus": "IN_PROGRESS",
+  "tests": {
+    "program": 14,
+    "reactor": 501
+  },
+  "testIdMethods": {
+    "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "PT-MED-002": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "PT-MED-003": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "PT-MED-004": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "PT-MED-005": "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "PT-MED-006": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "PT-MED-007": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer",
+    "PT-MED-008": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationMenuCountsStoredCategoriesWithoutFilesystem",
+    "PT-MED-009": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationRowsPreserveParentAndDisplayOrder",
+    "PT-MED-010": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicGroupsUseApprovedCategoryAndSectionOrder",
+    "PT-MED-011": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicTracksReadFrozenPairsAndLogicalIdTies",
+    "PT-MED-012": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#everyListCapacityRejectsTruncationAndCloseDowngrades",
+    "PT-MED-013": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#nullContractsAndJdbcMetadataFailuresRemainRedacted",
+    "PT-MED-014": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#concurrentReadersNeverMutateOrAcquireRowLocks"
+  },
+  "methods": [
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicTracksReadFrozenPairsAndLogicalIdTies",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationRowsPreserveParentAndDisplayOrder",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#animationMenuCountsStoredCategoriesWithoutFilesystem",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#concurrentReadersNeverMutateOrAcquireRowLocks",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#everyListCapacityRejectsTruncationAndCloseDowngrades",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#nullContractsAndJdbcMetadataFailuresRemainRedacted",
+    "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest#musicGroupsUseApprovedCategoryAndSectionOrder",
+    "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer"
+  ],
+  "actual": "All fourteen independent assertion sets passed",
+  "inputAndExpected": "001 PT specification and targetCommit's four named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC rows and independent UI235 16/8/928/72/136/1312-byte data/record vectors for all five queries, bounded count and immutable/read-only/fault postconditions. Production is never used to generate expected values.",
+  "scope": "Pure Range/header/bounded copy and five stored media menu/list queries only; not authenticated HTTP delivery or a manifest/file-integrity check. Three descriptor queries/auth/Inbox/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected.",
+  "relatedBug": [],
+  "relatedSsc": [],
+  "crossProgramRegressions": [
+    "BUG-040/YKT-036 in 003 manifest"
+  ],
+  "notRunCountedAsPass": 0,
+  "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content."
+}

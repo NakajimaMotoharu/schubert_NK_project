@@ -1,0 +1,343 @@
+{
+  "runId": "PT-MED-20260908-07",
+  "programId": "NK-PRO-003",
+  "targetCommit": "2a0939a7962e93f89c7541d6f5dfb6de6520601a",
+  "branch": "dev-media",
+  "startedAt": "2026-09-08T13:05:36+09:00",
+  "completedAt": "2026-09-08T13:08:38+09:00",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "exitCode": 0,
+  "result": "PASS_PROGRAM_COMPLETE",
+  "tests": {
+    "program": 17,
+    "reactor": 523
+  },
+  "methods": [
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#decodeRejectsTruncationExtraHashAndIoFailure",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writeRejectsNullCountLengthAndIoFailure",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#verificationRejectsAllThirtyTwoDigestBytePositions",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#contentMetadataRejectsInvalidValues",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#constructorRejectsNullComponents",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#acceptsExactlySevenSsc004ExtensionMimePairs",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#dispositionMapsOnlyIAndA",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsEveryMimeCrossProductAndVideoAttachment",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037RequiredAndOptionalDataSendersRejectBadTime",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#formatsAndParsesStrictJstMilliseconds"
+  ],
+  "module": {
+    "tests": 80,
+    "coverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17403
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1008
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3464
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1272
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 741
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 157
+      }
+    },
+    "spotbugs": {
+      "tool": "SpotBugs 4.10.4.0",
+      "violations": 0,
+      "errors": 0
+    }
+  },
+  "relatedBugs": [
+    "BUG-034",
+    "BUG-037",
+    "BUG-040"
+  ],
+  "relatedYkt": [
+    "YKT-030",
+    "YKT-033",
+    "YKT-036"
+  ],
+  "relatedSsc": [
+    "SSC-004"
+  ],
+  "testId": "PT-PRO-003-H01/T03/T04/T05/M03 plus full existing NK-PRO-003 regression",
+  "expected": "Independent JCA 32-byte digest; valid record accepted; each of 32 digest-byte mutations rejected. Compiled verification invokes MessageDigest.isEqual, with no String.equals callsite. Independent 17-digit timestamp boundaries reject expanded/signed years and unrepresentable instants before Header or required/optional DATA encoding; valid boundary and parse vectors are preserved.",
+  "actual": "PASS",
+  "bytecodeSha256": "b0959724c410655cee66ab5e439b5d63972aad30ab5376dfd128455e7b5011d8",
+  "rawLogSha256": "9ba2aee47679214cabd6674aca76cc9270a96363a47b748ed3b562160b18a44b",
+  "redaction": "JUnit names/counters only, no properties/stdout/stderr; public synthetic bytes, no secrets or master content.",
+  "scope": "NK-PRO-003 codec/timestamp/descriptor only; Scenario application/file lifecycle/HTTP/IT/ST remain incomplete.",
+  "files": [
+    {
+      "path": "coverage/jacoco.csv",
+      "sha256": "3396a1da06f2c8f63d7acf422544d9ad6493ce1ed71528a54b6f95d119ad9606"
+    },
+    {
+      "path": "coverage/jacoco.xml",
+      "sha256": "58b6283f345ea27516ac44a9042b34c52e92e109a6042a8c00916c049758f975"
+    },
+    {
+      "path": "logs/BUG-037-YKT-033.md",
+      "sha256": "8920ad738cbeffb7672c2105bd7db1dad4aded4eefb49e5c33defb069e4740d7"
+    },
+    {
+      "path": "logs/BUG-040-YKT-036.md",
+      "sha256": "079e404e73a2b478a2e4f3c4c052276e8b09c2a2387436bf3e4bab187ba21106"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-manifest.json",
+      "sha256": "7f6b82476a7d1ee0dbac69e43322874ae0e6b166200a741a76ec6614c6209b4b"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-summary.json",
+      "sha256": "ec7a6df8059fc3e263d935e8639764e8244d3c2b35c260339a49fc2a0404fb13"
+    },
+    {
+      "path": "logs/PT-MED-20260908-02-manifest.json",
+      "sha256": "c0f4a3651f94557179f9af6c867e9411ec60bc95f94d616b0236b115e8dec9f8"
+    },
+    {
+      "path": "logs/PT-MED-20260908-02-summary.json",
+      "sha256": "65dd82e75c316470392f340852c8bef5f182556229d233f331a2be3230718f7a"
+    },
+    {
+      "path": "logs/PT-MED-20260908-03-manifest.json",
+      "sha256": "6e2bc3da701b44cec6832d18f30e075fbe98489d14f8752a588e6c1d05a1a06b"
+    },
+    {
+      "path": "logs/PT-MED-20260908-03-summary.json",
+      "sha256": "e4aabfadc029c3c817fb32a3e3caf1898604670b3a4d2bb401f33edd0f0a69fe"
+    },
+    {
+      "path": "logs/PT-MED-20260908-04-manifest.json",
+      "sha256": "b8fbe0894ea58cbb20120814a874066b5f38c2fd2851d06b1bc4c22c87616bb2"
+    },
+    {
+      "path": "logs/PT-MED-20260908-04-summary.json",
+      "sha256": "991a9d96b8aa9d5ba1396ad6cc1b8f894f3e99bdd31217eb6d829f249eb214f3"
+    },
+    {
+      "path": "logs/PT-MED-20260908-05-manifest.json",
+      "sha256": "ee7b50d3146e49850774fe08075f216898c3601b9c806068496187801fec78f4"
+    },
+    {
+      "path": "logs/PT-MED-20260908-05-summary.json",
+      "sha256": "564001fc8ec99b37477de3264f3a3a3521510dd324a9ca8455f5bafa10ddad59"
+    },
+    {
+      "path": "logs/PT-MED-20260908-06-manifest.json",
+      "sha256": "b3fdd48ee090cd7fdafc698d1b0b0430be9a91abf3ada8b843fd15f298467992"
+    },
+    {
+      "path": "logs/PT-MED-20260908-06-summary.json",
+      "sha256": "fc217a4edd193fe55e439c5d9e572ed24b9a28fb6c87c2ed41a2acdcc73f02f2"
+    },
+    {
+      "path": "logs/PT-MED-20260908-07-summary.json",
+      "sha256": "a03630a177db9dc30f4b75dbdd96623e19928490adb3bb4f3c9af74a13fff3ba"
+    },
+    {
+      "path": "logs/PT-PRO-20260902-01-build.log",
+      "sha256": "3cfed00a1c29847681a4ea7e2fb40fb3a8e898008be3526d72d3f7e59187d233"
+    },
+    {
+      "path": "logs/PT-PRO-20260902-01-manifest.json",
+      "sha256": "e1286aba5b15ca2d249c731c462c5a11dd56d0488dbc68d88cf0c2857d54a974"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-02-manifest.json",
+      "sha256": "e44b9bc1e50ea9d2aea8fb04870c9bffa3922552a5d8242f55798a56e382053c"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-02-summary.json",
+      "sha256": "34a1ff1b10a4b2bced0a3e135cc5afc121f368c1151a0e4948c692e469b8bfce"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-03-manifest.json",
+      "sha256": "0b6c6a6eeb5771836780b2951f11da4cd3f754eb85173a8e1d9b911bc2d95114"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-03-summary.json",
+      "sha256": "e5fe7f98d446d87d7fd27442de8c4d3cd16f379d569af7f8ea4894d5e6f04868"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-05-manifest.json",
+      "sha256": "17b4c32c7d9d1bcd2060c1879205b0f4cddb4896dda15c4425485cb59f5ee466"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-05-summary.json",
+      "sha256": "01b23d52843a94a22688031b7a22ac342afa4793ed0bfbc7dd5f20a4dc963522"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-06-manifest.json",
+      "sha256": "a01e8c36e77100055a7682f0cb7dd36a6a24ef7cc12b564e4c7ece6fa7db3d72"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-06-summary.json",
+      "sha256": "6925360e3e3fe8b1107a6aed982eb7f55e1cfb416d85e5f58a0a0ede5662e380"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-07-manifest.json",
+      "sha256": "054f2df03fa61eb1df689f0652d783df72995bd4d58538fc155e9f22ee2a3ba6"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-07-summary.json",
+      "sha256": "a43b923d6b7df7f8271f13beab4a4665fb9909b629add9cc24f813a2cc774c44"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-08-manifest.json",
+      "sha256": "71e5aca2ef0b81d964523489a5f25158d3cce97404f441998d89b32e37eaf233"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-08-summary.json",
+      "sha256": "51cfb37f5d7f41d3d1702ed5224041f7197dcd8891206234c5abb74453ae3269"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-09-manifest.json",
+      "sha256": "764ea416ae1a860c0c95b4b3e4b5e1cf2a73f6eb7c24f68f2d346364780a4685"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-09-summary.json",
+      "sha256": "f88847af73567b9f77120422b8e6443b5bf19fe552b091781eb291d6d65e6ff7"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-10-manifest.json",
+      "sha256": "b753744328379bb6f059d7e18a55dc745edd2cef1bc2dd97d437dce7d860758a"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-10-summary.json",
+      "sha256": "824e4e89deddb60e2e08e0ad55c584855bd4e7170c29fb9c3f1c04df60203e44"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-manifest.json",
+      "sha256": "0e32d937a2bbe81a5cfb684d929614bfc1d87dff61ab8ed6ef09a0b4037bbce7"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-11-summary.json",
+      "sha256": "2644f457789206a832f8a60c3ef6e9a4aafa61203271b0153915ab346708b07d"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-12-manifest.json",
+      "sha256": "08c1ca492c2fe1f7ebb3b8af3df28b5fcd0ddf090b36087a7e33a779d231f426"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-12-summary.json",
+      "sha256": "edf1276205b709967bd0ea0d130157f66039b73ce8cede72a1aa3c4568289ccb"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-13-manifest.json",
+      "sha256": "d973e50ab4d474ad08483eff2e0f5bfa30e997b000bad858dcb9f1d59729a3ae"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-13-summary.json",
+      "sha256": "432573c8063717c9dc94ba4de65108b308fe7a2ae6178d942f60c5245c75365b"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-14-manifest.json",
+      "sha256": "9a7ec4cea8120e9a0ad42190b3e1316010ea1a88dba38038eb5aebcab95a6c3e"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-14-summary.json",
+      "sha256": "01a7817dfec8c11f62abf15c8265b82936120852aa58a7ce2695a8030a57a9db"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-15-manifest.json",
+      "sha256": "3f9f2d261b4bc1289295030fd6a84e0f2ef69c9c651478c3d46fed8a2548a1ff"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-15-summary.json",
+      "sha256": "c75becead49e16d1fa2c5f0aea8d69179ee7747df50835484a8d448b96c2e8b2"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-16-manifest.json",
+      "sha256": "b60685ec4d75eb85374b24dc315ca79b483e0ddcde59879277e6c91391e154e5"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-16-summary.json",
+      "sha256": "7b0ffeee08d4257f76155fdc520c0ce6db8ad0151d30b8124f18dfbeff4cc10c"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-17-manifest.json",
+      "sha256": "e5c7bb9e8b11300544eae279854a4a8fb489613ca20e7b18b4c14d9d938f13c0"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-17-summary.json",
+      "sha256": "0206f145bb0c2d0b2b52a2a78b41dac6163c1db482f6ae70531a7100f9e65bdb"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-18-manifest.json",
+      "sha256": "f854341e01a60d8d2545bc4dd8209dfd468274f1a76c99d8abd32fa21a5b9bee"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-18-summary.json",
+      "sha256": "f29b08eebe596caa7295a1ce49ca25396819b058ffe9974e41fa7d7ffae92907"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-19-manifest.json",
+      "sha256": "2d72dac1d6957a57361418583116e344e7949238524d7fc1302b53397b7240f3"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-19-summary.json",
+      "sha256": "86e913def867d50402ea608a5f877df8fe4cab112a6ddd275c7dd34f11afe78e"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-20-manifest.json",
+      "sha256": "49c468776dffab86e00d23956cc390f0f7361a227650cf2df26107f831c89d35"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-20-summary.json",
+      "sha256": "75a4524ed0326c5983f7982dfd51ef5b7c7f5f6b9a6320a59fe4e83c56273b30"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-23-manifest.json",
+      "sha256": "0882bc6e2101dd428e2486cd3f4672eb02bf490b3df0e18ab5308e02ebae0cba"
+    },
+    {
+      "path": "logs/PT-SCN-20260908-23-summary.json",
+      "sha256": "d027124d4160dfc58301643dc74a7b34d1483fd71d29d6cfd2e12c03000f85b3"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "1bd64fbf555e557a0e04942dbc337ff56da9f5a5621095f86f7c5b2007e2c489"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "b029f9353e340f5dbbe52dc7d34613bbeaee18af130fa50d6aaaf2d20e68af24"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "2a9974af34e21368cb5658bb4a8617b73e63b2d4a5e8d092838f6cf9698824a9"
+    },
+    {
+      "path": "output/spotbugs.xml",
+      "sha256": "447530a12a7b84d28a02ea5c08937e69601e7a1a30584112428de8d197cca44d"
+    }
+  ]
+}

@@ -11,14 +11,16 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Generated named wire record. Trace: SS 323; layouts NTSRSP01. */
-public record NotificationRecord(NotificationId notificationId,
+public record NotificationRecord(
+    NotificationId notificationId,
     String receiptId,
     NotificationType notificationType,
     NotificationState internalState,
     Instant submittedAt,
     Instant lastUpdatedAt,
     String questionSummary,
-    boolean questionDeleted) implements PayloadRecord {
+    boolean questionDeleted)
+    implements PayloadRecord {
   public NotificationRecord {
     Objects.requireNonNull(notificationId, "notificationId");
     Objects.requireNonNull(receiptId, "receiptId");

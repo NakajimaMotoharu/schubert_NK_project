@@ -13,15 +13,12 @@ public record MusicSectionRequestData(String category) implements PayloadData {
   }
 
   public static MusicSectionRequestData from(FieldValueSet fields) {
-    return new MusicSectionRequestData(
-        TypedFieldValues.requiredString(fields, "Category"));
+    return new MusicSectionRequestData(TypedFieldValues.requiredString(fields, "Category"));
   }
 
   @Override
   public FieldValueSet fields() {
-    return new FieldValueSet(
-        Map.ofEntries(
-            Map.entry("Category", TypedFieldValues.text(category))));
+    return new FieldValueSet(Map.ofEntries(Map.entry("Category", TypedFieldValues.text(category))));
   }
 
   @Override
