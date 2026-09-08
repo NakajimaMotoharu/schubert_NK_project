@@ -1,5 +1,7 @@
 # NK-DAT-001 認証Inbox参照実行結果
 
+最新回帰PT-WEB-20260909-15/source586b3ffe、2026-09-09 08:23:44 JST終了、exit0。認証8件再PASS、全814件/全Java coverage100%/静的解析0。現在の `evidence/authentication-inspection/manifest.json` SHA-256は `fbecee2bf9d53d312a01d6ccf7950b89897297c3c797f11c56e3a390ee4b7325`。以下run14とhashは証跡commit46d0f118の初回確定履歴であり、現在のmanifestと区別する。
+
 ## 1. 状態
 
 PG-D-120/005仕様のPT-DB-INBOX-009～016は正式PT-WEB-20260909-14で8件成功、failure/error/skipped0。source 5cb8f4329067806c98b4f09a92abbeae5ed4e5cc、dev-foundation、2026-09-09 07:53:30～07:58:34 JST、exit0。全806件（Protocol80/Storage34/API410/Web241/CHR41）成功、全5moduleのline/method/class/branch100%、SpotBugs0、NullAway/Enforcer/format PASS。追加classはline35/method2/class1/branch12すべてmissed0。8collectorの9scope（016の構造/認証を別収集）と全checksum確認成功。Program全体は未完了。

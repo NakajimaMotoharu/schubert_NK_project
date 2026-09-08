@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-2026-09-09 再開管理: 工程全体は456の領域別加重見積で約4割（35～50%、暫定）。QA-046は承認済み、UIC-006/SSC-049は対応中。dev-foundationで構造検査8件を追加し全798件のbuild/PT成功、証跡traceのBUG-076是正後の再検証中。認証Inbox参照検査の設計・PT009～016を先行作成。SQL/lock/oneshotまでBUG-014は未完了。基盤完了を優先し、実装済部品の前進とProgram完了を区別する。利用枠10%以下で中断準備、5%付近で保存・停止。以下の過去790件は旧確定履歴、詳細は456/457と004の最新実行結果。
+2026-09-09 最新確定: dev-foundation/source586b3ffe、正式PT-WEB-20260909-15、全814件（Protocol80/Storage34/API418/Web241/CHR41）PASS、failed/error/skipped0、対象5moduleのline/method/class/branch100%、静的解析0。8collector・10証跡scopeの収集/hash/trace確認済み。QA-046承認後は構造検査・認証参照・専用role/候補lockの3部品24 PTを確定し、BUG-075～080/YKT-067～071を再試験完了。原子的な正常削除・非認証参照・oneshot結線が残りBUG-014/UIC-006/SSC-049は対応中。加重工程見積は約4割（35～50%、456）。通常週間残90%、10%以下で中断準備/5%付近で保存停止。CHR41はrunner PTであり実NK互換gateではない。以下は旧確定履歴。
 
 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。
 
@@ -60,7 +60,7 @@
 | [454_Build契約・整形・再生成gate検証仕様](450_品質/454_Build契約・整形・再生成gate検証仕様.md) | 固定整形・依存収束・70生成fileの再現 | 検証中 | Build/生成toolの変更時 |
 | [455_再走論点_RERUN-001_Logout期限](450_品質/455_再走論点_RERUN-001_Logout期限.md) | Logout queue削除期限の設計論点・再走条件 | 再走待ち/SSC-045 | 安全性の証明・再試験時 |
 | [456_領域別進捗・利用枠・中断再開管理](450_品質/456_領域別進捗・利用枠・中断再開管理.md) | 暫定加重進捗・基盤完了条件・10%/5%停止・未検証変更の保存 | 運用中 | 領域の検証済成果・残量・中断理由の変更時 |
-| [457_Inbox削除保護の実行主体・承認論点](450_品質/457_Inbox削除保護の実行主体・承認論点.md) | BUG-014の検査主体と権限境界、代替案、承認後のPT条件 | QA-046/UIC-006/SSC-049回答待ち | 回答・設計確定・検証時 |
+| [457_Inbox削除保護の実行主体・承認論点](450_品質/457_Inbox削除保護の実行主体・承認論点.md) | BUG-014の検査主体と権限境界、代替案、承認後のPT条件 | QA-046承認済み/UIC-006・SSC-049対応中 | 回答・設計確定・検証時 |
 | [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 未着手 | PG gate完了時 |
 | [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 未着手 | PT gate完了時 |
 | [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 未着手 | 全gate完了時 |

@@ -2,7 +2,7 @@
 
 ## 1. 対象・状態
 
-007仕様PT-DB-INBOX-017～024、V008の検査用role/候補function。開発中で正式未確定、BUG-079/080とYKT-070/071は再試験待ち。各探索は新規隔離PGへ適用して終了時に停止する。未release V008の作業中是正であり、既存正本V001～007/既存本番DBのchecksumを書き換えない。
+007仕様PT-DB-INBOX-017～024、V008の検査用role/候補functionは正式PT-WEB-20260909-15で全8件PASS。BUG-079/080とYKT-070/071は本証跡により再試験完了。各探索は新規隔離PGへ適用して終了時に停止する。既存正本V001～007/既存本番DBのchecksumは不変。正常削除・全layout・oneshotを含むNK-DAT-001全体は未完了。
 
 ## 2. 修正前の実結果
 
@@ -29,4 +29,8 @@ V006等の既存6cleanupは新関数のlock済集合を再取得する形式を�
 
 ## 4. 再試験・証跡
 
-部分探索command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am -Dtest=FieldCodecTest,OwnedTransferDirectoryTest,InboxInspectionBoundaryTest,DatabaseMigrationTest,AuthenticationInboxInspectorTest test`。正式commandは007。正式run/source/終了code/SQL matrix/環境/全回帰・hashを検証後に本節へ固定する。現時点では未合格分を全体へ加算しない。
+部分探索command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am -Dtest=FieldCodecTest,OwnedTransferDirectoryTest,InboxInspectionBoundaryTest,DatabaseMigrationTest,AuthenticationInboxInspectorTest test`。正式commandは007。
+
+正式PT-WEB-20260909-15/source586b3ffe、dev-foundation、2026-09-09 08:23:44 JST終了、exit0。全814件（Protocol80/Storage34/API418/Web241/CHR41）failed/error/skipped0、対象5moduleのline/method/class/branch100%、NullAway/format/Enforcer成功、SpotBugs0。SQLは上記§3の全条件matrixを実SQLで検証し、Java JaCoCo値でSQL coverageを代用しない。8collectorの10scopeを収集しchecksums全一致、017 trace canary（欠落/誤path/誤hash/外部参照の拒否）成功、baseline843de94差分0。V001～007の差分0、既存DB15件もPASS。
+
+証跡: `evidence/inspection-sql/manifest.json` SHA-256 `766dcd72c8db980d80b68d435acbc11b44ab2884f32f8ecd96b42c041e11526a`。実行時刻/環境/command/source、PT017～024のmethod一意対応、V008/provision source hash、sanitized実結果・全体manifestへの存在/hash検証済みリンクを含む。秘密値・DB dump・raw電文は保存しない。未確定の削除機能を合格へ加算しない。

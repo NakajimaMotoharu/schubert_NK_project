@@ -1,0 +1,104 @@
+{
+  "runId": "PT-WEB-20260909-15",
+  "programId": "NK-DAT-001",
+  "targetCommit": "586b3ffe7e95945cfd29ea8e1718ade39616fcaf",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_AUTH_CANDIDATE_SQL_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T08:18:39+09:00",
+  "completedAt": "2026-09-09T08:23:44+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "e80bfd469e85370aeeae0616ad00b77af8168d8ec65313d0d73e1a1592cf70d0",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
+    "proof": "008 result section3: all five procedural IF true/false and WHERE/null/expiry/role/lock boundaries mapped to executed PT017..024. Java coverage remains in full reactor; no invented Java class or SQL JaCoCo percentage.",
+    "functions": [
+      "schubert.maintenance_next_auth_inbox(uuid,timestamptz,uuid)"
+    ],
+    "roles": [
+      "schubert_inbox_inspector"
+    ]
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-017": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#roleAndFunctionCatalogAreClosed",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-018": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#backupAndNullArgumentsFailClosed",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-019": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#expiryStateLayoutAndCursorAreExact",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-020": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#candidateLocksLiveUntilCallerEndsTransaction",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-021": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#sessionAndBackupLocksProtectReadOnlyValidation",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-022": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#noRoleCanEscalateInspectionPrivileges",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-023": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#advisoryContentionAndEmptyCandidatesAreExplicit",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-024": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest#appendOnlyMigrationAndUnverifiedCiphertextRemainDistinct",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Isolated PostgreSQL 18.6, synthetic rows, real restricted roles, controlled competing SQL row locks. No deployed DB or credential used. PT021 reuses independent JCE auth fixture.",
+  "oracle": "007/008 specifications: literal IDs/counts/SQLSTATE/catalog, exact expiry/cursor, rollback/lock postconditions; BUG080 backup inserted after first snapshot must not authorize an unlocked candidate.",
+  "remaining": "Atomic deletion/fixed-run replay, non-auth references and oneshot wiring NOT certified; V006 unchecked Inbox deletion remains BUG014.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "BUG-014",
+    "YKT-012",
+    "BUG-075",
+    "YKT-067",
+    "BUG-076",
+    "YKT-068",
+    "PG-D-121",
+    "BUG-079",
+    "BUG-080",
+    "YKT-070",
+    "YKT-071"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "34125c792291a40fd1a5fcc01f6379c49221d2b73b988144a8293421469490d6"
+    }
+  ],
+  "sqlSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql",
+      "sha256": "a90b338170322bd190335d2cfd382bb36b6f8b1243410345ef35b54dda928412"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
+      "sha256": "12781926e406b1f908737c8516a3cff478d3a8413a85fb926a75a110cccba4a9"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-09 管理補足: 領域別加重見積の正本は456（約4割/暫定35～50%）。QA-046承認済み、UIC-006/SSC-049対応中。基盤DBの構造検査8件を追加し全798件build/PT成功、BUG-076是正後のtrace再検証中。認証参照検査はSS324 §12.2/PG-D-120と004のPT009～016を先行仕様化。BUG-014全体・Program完了は未達。未検証Scenario3 fileは本branchの合格に含めない。以下は旧確定履歴。
+2026-09-09 最新確定: dev-foundation/source586b3ffe、正式PT-WEB-20260909-15の814件PASS、全Java coverage100%/静的解析0。NK-DAT-001の構造/認証参照/専用role・候補lockをPT-DB-INBOX-001～024として確定（004の003～008仕様・結果へ追跡）。原子的削除/非認証/oneshotは未完了。QA-046承認済み、UIC-006/SSC-049/BUG-014対応中。加重見積の正本は456（約4割/35～50%）。未検証Scenario3fileと実NK CHRは合格に含めない。以下は旧確定履歴。
 
 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。
 

@@ -2,7 +2,7 @@
 
 ## 1. 現状
 
-最新回帰PT-WEB-20260909-14、source5cb8f432、2026-09-09 07:53:30～07:58:34 JST、全806件/全coverage100%/静的解析0、構造8件も再PASS。最新manifestのhashは `1b4fca3cfb81230594317d7a15ca6708c462de73f57b90fbd969a7da2ae8bf0f`。以下のrun13/hash表は証跡commit d0f27656時点の履歴であり、最新manifestのhashとは区別する。認証参照8件の新結果は006。
+最新回帰PT-WEB-20260909-15、source586b3ffe、2026-09-09 08:23:44 JST終了、全814件/全coverage100%/静的解析0、構造8件も再PASS。最新manifestのhashは `c23f9d38e2bf0d25437b24d707bca2206d82bc5abc88079854b0a99f4a69173f`。以下のrun13/hash表は証跡commit d0f27656時点の履歴であり、最新manifestのhashとは区別する。認証参照8件の結果は006、SQL境界8件は008。
 
 PG-D-119の構造検査8caseは正式PT-WEB-20260909-13で成功。source e00e1855f8e818f04b3ba8a18605710969bfe7c7、2026-09-09 07:36:25～07:41:29 JST、dev-foundation、exit0。全798件（Protocol80/Storage34/API402/Web241/CHR41）成功、failure/error/skipped0。対象5moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。8collector成功と全checksum照合を確認。Program全体の完了ではない。
 対象は003のPT-DB-INBOX-001～008。DB参照・backup/期限・削除transaction・権限・oneshotは未実施であり合格へ算入しない。
