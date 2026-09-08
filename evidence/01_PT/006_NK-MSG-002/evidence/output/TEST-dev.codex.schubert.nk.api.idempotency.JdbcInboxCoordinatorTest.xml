@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite name="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.84" tests="11" errors="0" failures="0" skipped="0">
-  <testcase name="readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.123" />
-  <testcase name="anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.033" />
-  <testcase name="readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.103" />
-  <testcase name="handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.057" />
-  <testcase name="completionRetentionStartsAtCompletionAndReplayNeverExtendsIt" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.168" />
+<testsuite name="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.851" tests="11" errors="0" failures="0" skipped="0">
+  <testcase name="readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.114" />
+  <testcase name="anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.036" />
+  <testcase name="readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.1" />
+  <testcase name="handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.056" />
+  <testcase name="completionRetentionStartsAtCompletionAndReplayNeverExtendsIt" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.158" />
   <testcase name="sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.059" />
-  <testcase name="tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.048" />
-  <testcase name="concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.081" />
-  <testcase name="readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.107" />
-  <testcase name="transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.037" />
-  <testcase name="readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.024" />
+  <testcase name="tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.047" />
+  <testcase name="concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.08" />
+  <testcase name="readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.129" />
+  <testcase name="transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.041" />
+  <testcase name="readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.031" />
 </testsuite>

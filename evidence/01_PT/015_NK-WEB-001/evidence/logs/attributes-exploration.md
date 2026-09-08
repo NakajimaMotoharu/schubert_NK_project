@@ -24,4 +24,4 @@ JstWireTimestampは17桁wire専用で任意session JSONを受けず、既にDate
 
 ## 正式gate
 
-予定PT-WEB-20260908-02。確定sourcecommit・開始終了・全件数・各coverage・全対象再試験結果は同runのmanifest/checksumsと002へ追記する。暗号/永続化/CSRF/HTTP/実NK Characterization未完了、Program完了とはしない。
+正式PT-WEB-20260908-02、source7ca9ac19332690ad7c193234acdb47d6d2f87523、19:33:53～19:38:07 JST、exit0。全640件（Protocol80/Storage34/API394/Web91/CHR41）、新属性7件を含むWeb15件PASS。全5対象moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。YKT全対象既存testもPASSし、SSC-038/BUG-055/YKT-050完了。詳細・hashは同run manifest/checksumsと002。暗号/永続化/CSRF/HTTP/実NK Characterization未完了、Program完了とはしない。
