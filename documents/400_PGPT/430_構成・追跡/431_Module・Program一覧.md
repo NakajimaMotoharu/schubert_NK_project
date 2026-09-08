@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+最新確定: 正式PT-MED-20260908-01、source d986d3e3163069522fa052491a7431f865d673f7、dev-media、2026-09-08 11:59:40～12:02:43 JST。全494件（Protocol80/Storage26/API282/Web65/CHR41）、failed/error/skipped0、全5moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 Media7/Scenario143/Auth85/Inbox11+3/PRO00317は重複する内数。Media Range/header/bounded stream部品PASS、API query/descriptor/認証・asset/manifest・20permit/HTTP/実NK CHR等は未完了。確定Programは5/20=25%（件数比、工数換算なし）。詳細は対応manifest/Test ID/hash、以下は履歴。
+
 最新確定: 正式PT-SCN-20260908-23、source e6b4368407043850f0d11a8227d5577977f4868c、2026-09-08 11:46:25～11:49:26 JST、全487件（Protocol80/Storage26/API282/Web58/CHR41）。failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 Scenario143/Auth85/coordinator11/置換3/PRO00317は重複する内数であり全体へ加算しない。確定5/20=25%、SSC-023/024の段階接続を確認。SSC-027の内部serviceはPASS、本番起動/登録は別残件。 以下は履歴。
 
 2026-09-08 11:46 暫定判定: BUG-040/YKT-036のstorage拡張子検証漏れを修正前起票し、NK-PRO-003完了を再試験まで保留。確定4/20（20%、工数換算ではない）。正式22は全486件/coverage100%/静的解析0だったが、collectorのTest ID完全名誤りBUG-041で収集未完了。以下の過去完了表示を現在判定としない。BUG-038/039の再試験と併せ、source/collectorを固定した正式23へ進む。

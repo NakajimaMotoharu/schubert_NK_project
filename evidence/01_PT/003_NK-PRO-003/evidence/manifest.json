@@ -1,10 +1,10 @@
 {
-  "runId": "PT-SCN-20260908-23",
+  "runId": "PT-MED-20260908-01",
   "programId": "NK-PRO-003",
-  "targetCommit": "e6b4368407043850f0d11a8227d5577977f4868c",
-  "branch": "dev-scenario",
-  "startedAt": "2026-09-08T11:46:25+09:00",
-  "completedAt": "2026-09-08T11:49:26+09:00",
+  "targetCommit": "d986d3e3163069522fa052491a7431f865d673f7",
+  "branch": "dev-media",
+  "startedAt": "2026-09-08T11:59:40+09:00",
+  "completedAt": "2026-09-08T12:02:43+09:00",
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
     "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
@@ -19,7 +19,7 @@
   "result": "PASS_PROGRAM_COMPLETE",
   "tests": {
     "program": 17,
-    "reactor": 487
+    "reactor": 494
   },
   "methods": [
     "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
@@ -91,7 +91,7 @@
   "expected": "Independent JCA 32-byte digest; valid record accepted; each of 32 digest-byte mutations rejected. Compiled verification invokes MessageDigest.isEqual, with no String.equals callsite. Independent 17-digit timestamp boundaries reject expanded/signed years and unrepresentable instants before Header or required/optional DATA encoding; valid boundary and parse vectors are preserved.",
   "actual": "PASS",
   "bytecodeSha256": "b0959724c410655cee66ab5e439b5d63972aad30ab5376dfd128455e7b5011d8",
-  "rawLogSha256": "932e060ba5e8b88994ecc9e7fa569b0b1e615bfd18ea2bc6d4023774f4672e83",
+  "rawLogSha256": "10b9424ae49be5b453b19835356c8b68342fa50660970e12c5049d733c216f31",
   "redaction": "JUnit names/counters only, no properties/stdout/stderr; public synthetic bytes, no secrets or master content.",
   "scope": "NK-PRO-003 codec/timestamp/descriptor only; Scenario application/file lifecycle/HTTP/IT/ST remain incomplete.",
   "files": [
@@ -101,7 +101,7 @@
     },
     {
       "path": "coverage/jacoco.xml",
-      "sha256": "74210e8e9225790e97fef9212d943882e231de7b31e6b9f4171b62a964e5b776"
+      "sha256": "6b3cf46a9c8164b9ea6b904a7c26c3e73eb9d616afc2eb6177cdc131579f5896"
     },
     {
       "path": "logs/BUG-037-YKT-033.md",
@@ -110,6 +110,10 @@
     {
       "path": "logs/BUG-040-YKT-036.md",
       "sha256": "079e404e73a2b478a2e4f3c4c052276e8b09c2a2387436bf3e4bab187ba21106"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-summary.json",
+      "sha256": "ec7a6df8059fc3e263d935e8639764e8244d3c2b35c260339a49fc2a0404fb13"
     },
     {
       "path": "logs/PT-PRO-20260902-01-build.log",
@@ -264,24 +268,28 @@
       "sha256": "75a4524ed0326c5983f7982dfd51ef5b7c7f5f6b9a6320a59fe4e83c56273b30"
     },
     {
+      "path": "logs/PT-SCN-20260908-23-manifest.json",
+      "sha256": "0882bc6e2101dd428e2486cd3f4672eb02bf490b3df0e18ab5308e02ebae0cba"
+    },
+    {
       "path": "logs/PT-SCN-20260908-23-summary.json",
       "sha256": "d027124d4160dfc58301643dc74a7b34d1483fd71d29d6cfd2e12c03000f85b3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
-      "sha256": "23d998f1e8b344788f089eeeb8db1eb9efce9775006383a48c81f91f190c6b4b"
+      "sha256": "4940ddb6484997c46c9d299a59104a3c24c0201b815821602e78feba5fbb95ea"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
-      "sha256": "8f24e77bd177bffdf60f8f6dde819b335095db365f4d0091fdc6b46e54526528"
+      "sha256": "2d56aa3feb0b6aefcfad677bdd386ef28f1f1f7d5f1050a48d35473a7863a7f9"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
-      "sha256": "b8b765cb1c93ccd03c7251de98718e261da94a0e9fa51ef3bd09a7b01c64939b"
+      "sha256": "5f4fe02e40a76a7eee65d013a33862382f8a2b3c4ae413dde87bf695df42c055"
     },
     {
       "path": "output/spotbugs.xml",
-      "sha256": "a34f379f67a28a9876a3eb5f93dd46ae1b6a52842182b4d00ba32fae792f5420"
+      "sha256": "33711e38899a9221698595be261b508e77f1dd4b6678f71da11d715ac65f4936"
     }
   ]
 }

@@ -1,0 +1,255 @@
+{
+  "runId": "PT-MED-20260908-01",
+  "targetCommit": "d986d3e3163069522fa052491a7431f865d673f7",
+  "branch": "dev-media",
+  "startedAt": "2026-09-08T11:59:40+09:00",
+  "completedAt": "2026-09-08T12:02:43+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 26,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1436
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 103
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 285
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 110
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 58
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 282,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 16703
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1258
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3796
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1211
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 568
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 129
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 65,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3473
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 307
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 844
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 283
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 31
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "rawLogSha256": "10b9424ae49be5b453b19835356c8b68342fa50660970e12c5049d733c216f31",
+  "programId": "NK-MED-001",
+  "programStatus": "IN_PROGRESS",
+  "tests": {
+    "program": 7,
+    "reactor": 494
+  },
+  "testIdMethods": {
+    "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "PT-MED-002": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "PT-MED-003": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "PT-MED-004": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "PT-MED-005": "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "PT-MED-006": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "PT-MED-007": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer"
+  },
+  "methods": [
+    "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest#literalHeadersEncodeUtf8WithoutRawMetadata",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#invalidGrammarBoundsAndArithmeticNeverSelectBytes",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#nullAndConstructedSelectionsKeepInvariants",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)",
+    "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest#nullBoundsAndIoFailuresDoNotClaimCompleteTransfer"
+  ],
+  "actual": "All seven independent assertion sets passed",
+  "inputAndExpected": "001 PT specification and targetCommit's three named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices. Production is never used to generate expected values.",
+  "scope": "Pure Range selection/header factory and bounded copy only; not an authenticated HTTP delivery or a manifest/file-integrity check. Query/descriptor/auth/Inbox/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected.",
+  "relatedBug": [],
+  "relatedSsc": [],
+  "crossProgramRegressions": [
+    "BUG-040/YKT-036 in 003 manifest"
+  ],
+  "notRunCountedAsPass": 0,
+  "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
+  "files": [
+    {
+      "path": "coverage/protocol-jacoco.csv",
+      "sha256": "3396a1da06f2c8f63d7acf422544d9ad6493ce1ed71528a54b6f95d119ad9606"
+    },
+    {
+      "path": "coverage/protocol-jacoco.xml",
+      "sha256": "6b3cf46a9c8164b9ea6b904a7c26c3e73eb9d616afc2eb6177cdc131579f5896"
+    },
+    {
+      "path": "coverage/web-jacoco.csv",
+      "sha256": "bc2ec93abb71d4a68e550246b0d80239c00e72d4990c06b580bda33ae440eefc"
+    },
+    {
+      "path": "coverage/web-jacoco.xml",
+      "sha256": "ca6e522f3be69392555fef717e99692c5795a49fe95ae7a6f010b53b56751619"
+    },
+    {
+      "path": "logs/PT-MED-20260908-01-summary.json",
+      "sha256": "2f7a234639f2e7c1d6a5cbc05abb281392aca55b8dea31350d91425a587ccd9c"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "8f936cc9447bed97f5a113ed682e45c3197a2ad6e8bd1665ed2f55da5e616b25"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "befe6febfccd68d4197bf48781f5ea180798b3f97916420f86df6a6965b285b3"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "061230256dace7fd20a760c0635099eb2ac077ce355406c2c6abb2a4fec43527"
+    }
+  ]
+}
