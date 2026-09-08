@@ -61,6 +61,11 @@ def main():
             (29, "web029EveryJdbcFailureIsRedactedAndResourcesClose"),
             (30, "web030InvalidDatabaseRowsFailClosed"),
             (31, "web031ConcurrentLocksAndVersionsStayConsistent")),
+        "dev.codex.schubert.nk.web.security.WebCsrfTokenTest": (
+            (32, "web032GenerationMatchesIndependentHexAndErasesBuffers"),
+            (33, "web033EveryAllowedLengthMatchesOnlyIdenticalToken"),
+            (34, "web034MissingMalformedAndNullBoundariesStayRedacted"),
+            (35, "web035ConcurrentGenerationAndMatchingStayIndependent")),
     }
     methods, reports = [], {}
     for classname, cases in groups.items():
@@ -104,6 +109,7 @@ def main():
         "sessionEncryptionExpected": "PT-WEB-016..023 / SSC-039 / PG-D-095: independently handcrafted JSON/DataOutputStream seven-field LP AAD and JCE AES256-GCM full NKENC1 envelopes. DB UUID/hash/created_at microseconds bind row; every AAD field and envelope/nonce/tag/body mutation rejects. Current writes/previous reads/unknown key and DB-vs-envelope version mismatch, defensive key/ciphertext copies, nonce erasure, valid16384byte JSON and16436byte envelope limits, authenticated bad JSON/UTF8 reject. Null/config/closed negatives;100 distinct concurrent nonces and attributes; caller-monitor isolation; fixed provider/random failures with no diagnostic cause/suppressed; latch-controlled close serialization and restart/rotation.",
         "sessionStoreExpected": "PT-WEB-024..031 / SSC-040 / PG-D-096 / BUG-056 / YKT-051: isolated PostgreSQL18 with production Flyway/grants, independent nine-column metadata/SQL afterconditions, every ciphertext/key/time/TTL/version update field changed, row identity and expected-version predicates. Caller-owned read/write transactions, rollback/atomic old-delete and new-insert, stale CAS false and no resurrection. Web business-schema denial and all nine SQL NULL/DDL constraints; public null/time/precision/TTL/version limits; every JDBC operation/resource failure with fixed redacted exception. Invalid row/duplicate/null resource and non-unit update counts reject.100 row-locked updates retain all versions and CAS race has one winner. No production SQL/schema expectation is used as oracle.",
         "scope": "Web values, closed JSON, encryption and low-level transactional ciphertext store only. Encrypted session lifecycle/invalidation/rotation persistence/fixation orchestration/dirty merge/CSRF/security/SavedRequest route allowlist/HTTP/startup/actual NK Characterization remain required and incomplete; no IT/ST claim.",
+        "csrfValueExpected": "PT-WEB-032..035 / PG-D-097:32 CSPRNG bytes to independent fixed64hex vector and provider-failure buffer erasure. All persisted lengths64..128 with explicit same/different first/middle/last/length booleans; nullable submitted missing is false and malformed tokens reject. Valid secrets compare via MessageDigest.isEqual over fixed129byte length-plus-padding arrays, then erase.100 unique concurrent generated tokens and shared immutable matching; toString/cause/suppressed redacted. Value only, no claim of POST/filter/403/session wiring completion.",
         "relatedBug": ["BUG-055", "BUG-056"], "relatedSsc": ["SSC-038", "SSC-039", "SSC-040"], "relatedYkt": ["YKT-050", "YKT-051"],
         "notRunCountedAsPass": 0,
         "redaction": "Only allowlisted method names/timing/counters/coverage and metadata. No JVM properties/stdout/stderr, raw cookie/session/context/token/key or database dump.",
