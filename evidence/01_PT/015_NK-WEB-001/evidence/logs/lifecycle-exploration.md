@@ -37,4 +37,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 ## 正式gate
 
-PT-WEB-20260908-06を予定。正式結果は002/manifest/checksumsへ追記する。現時点の探索成功だけではSSC/BUG/YKTを完了扱いしない。Spring adapter、HTTP Cookie、Security/CSRF filter、API revoke queue/監査、全画面、実NK Characterizationは別残件。IT/STを完了扱いしない。
+正式PT-WEB-20260908-06、source01e378340b334fba5f51442384761afe818d56ae、20:56:12～21:00:30 JST、exit0。全668件（Protocol80/Storage34/API394/Web119/CHR41）、新8件を含むWeb43件PASS。全5対象moduleのline/method/class/branch各100%、NullAway/Enforcer/format PASS、SpotBugs0。SSC-041/BUG-057/YKT-052全対象再試験完了。002/manifest/checksumsで実行環境・Test ID・hashへ追跡。Spring adapter、HTTP Cookie、Security/CSRF filter、API revoke queue/監査、全画面、実NK Characterizationは別残件。IT/STを完了扱いしない。
