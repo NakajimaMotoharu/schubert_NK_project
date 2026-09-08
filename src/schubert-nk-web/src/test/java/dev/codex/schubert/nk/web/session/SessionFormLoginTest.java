@@ -818,7 +818,7 @@ class SessionFormLoginTest {
     }
   }
 
-  private static final class Api {
+  static final class Api {
     Runnable afterReply = () -> {};
     final AtomicInteger ids = new AtomicInteger(),
         sends = new AtomicInteger(),
