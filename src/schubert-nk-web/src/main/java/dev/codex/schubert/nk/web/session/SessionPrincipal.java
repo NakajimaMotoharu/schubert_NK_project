@@ -13,7 +13,8 @@ import java.util.Objects;
  * SSC-038/PG-D-094/PT-WEB-009..015. No password/user entity/session ID is stored.
  */
 public record SessionPrincipal(
-    String username, UserRole role, AuthenticationContext authenticationContext, Instant loginAt) {
+    String username, UserRole role, AuthenticationContext authenticationContext, Instant loginAt)
+    implements java.security.Principal {
   public SessionPrincipal {
     Objects.requireNonNull(username, "username");
     Objects.requireNonNull(role, "role");
@@ -26,6 +27,12 @@ public record SessionPrincipal(
         || username.endsWith(" ")
         || username.codePoints().anyMatch(Character::isISOControl))
       throw new IllegalArgumentException("session principal is invalid");
+  }
+
+  @Override
+  public String getName() {
+    // SSC-043/PG-D-102/PT-WEB-064: framework identity is username, never redacted toString/context.
+    return username;
   }
 
   @Override

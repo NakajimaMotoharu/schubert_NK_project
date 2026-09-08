@@ -455,7 +455,7 @@ final class MqLoginClientTest {
     return body;
   }
 
-  private static byte[] success(UUID id, String username, String role, String context) {
+  static byte[] success(UUID id, String username, String role, String context) {
     byte[] body = header("LGNRSP01", id, 432, "0000", false);
     put(body, 256, username);
     put(body, 320, role);
@@ -466,7 +466,7 @@ final class MqLoginClientTest {
     return body;
   }
 
-  private static byte[] error(UUID id, String code, int retry, String message) {
+  static byte[] error(UUID id, String code, int retry, String message) {
     byte[] body = header("LGNRSP01", id, 432, code, false);
     put(body, 423, String.format(java.util.Locale.ROOT, "%06d000", retry));
     put(body, 432, message);
@@ -474,8 +474,7 @@ final class MqLoginClientTest {
   }
 
   // Literal UI232 offsets; header/data expected lengths are not obtained from production metadata.
-  private static byte[] header(
-      String layout, UUID id, int dataLength, String code, boolean request) {
+  static byte[] header(String layout, UUID id, int dataLength, String code, boolean request) {
     byte[] body = new byte[256 + dataLength];
     Arrays.fill(body, (byte) ' ');
     put(body, 0, "SCHBNK01001" + layout + "001" + (request ? "QS" : "SS"));
@@ -490,7 +489,7 @@ final class MqLoginClientTest {
     return body;
   }
 
-  private static void put(byte[] body, int offset, String text) {
+  static void put(byte[] body, int offset, String text) {
     byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
     System.arraycopy(bytes, 0, body, offset, bytes.length);
   }
