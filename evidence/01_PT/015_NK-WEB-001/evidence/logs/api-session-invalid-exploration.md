@@ -1,6 +1,6 @@
 # 業務API0102・local session破棄の探索記録
 
-正式認定: 未実施。探索成功をProgram完了へ算入しない。正式clean verify後に確定する。
+正式認定: PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、2026-09-09 03:27:49～03:32:41 JST、全790/Web165 PASS、全line/method/class/branch100%、NullAway/format/Enforcer PASS、SpotBugs0。SSC-048完了。詳細はmanifest.json、全業務controller/Program全体は継続。
 
 NK-WEB-001、PT-WEB-158～165、PG-D-117、SSC-048。FUN-001/AUT-001～004/MON-004/TST-001～005、UI221/222/226/232、SS313/314/351/352。toolchainは421、独立入力/期待/fixtureは001 §14.13。
 
