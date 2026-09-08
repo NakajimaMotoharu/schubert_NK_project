@@ -132,8 +132,8 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | `mq-web`,`mq-api`,`mq-maintenance`,`mq-ops` | 対応process | Artemis credential、Address権限別 |
 | `web-session-aes-current/previous` | Web | AES-256-GCM、key version付き |
 | `web-revoke-aes-current/previous` | Web | Pending context revoke暗号、session keyと分離 |
-| `api-context-aes-current/previous` | API | `auth_sessions.context_ciphertext`暗号、key version付き |
-| `api-inbox-response-aes-current/previous` | API | Inbox replay response暗号、context keyと分離 |
+| `api-context-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | `auth_sessions.context_ciphertext`暗号、key version付き。batch/Web/backupへ配布不可 |
+| `api-inbox-response-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | Inbox replay response暗号、context keyと分離。検査はreadのみ、batch/Web/backupへ配布不可 |
 | `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |
 | `web-log-aes-current/previous` | Webのみ | Technical outbox保存・復号。API ingestへ配布しない（SSC-007） |
 | `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |

@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-2026-09-09 再開管理: 工程全体は456の領域別加重見積で約4割（35～50%、暫定）と報告し、Program5/20を工程全体の進捗に代用しない。基盤完了を優先。BUG-014の削除直前検証についてQA-046/UIC-006/SSC-049を起票し、運用・credential境界の承認待ち。今回の追加実装/PT完了は0。正式証跡は以下の790件を維持。利用枠10%以下で中断準備、5%付近で停止し再開記録を残す。詳細は456/457。
+2026-09-09 再開管理: 工程全体は456の領域別加重見積で約4割（35～50%、暫定）。QA-046は承認済み、UIC-006/SSC-049は対応中。dev-foundationで構造検査8件を追加し全798件のbuild/PT成功、証跡traceのBUG-076是正後の再検証中。認証Inbox参照検査の設計・PT009～016を先行作成。SQL/lock/oneshotまでBUG-014は未完了。基盤完了を優先し、実装済部品の前進とProgram完了を区別する。利用枠10%以下で中断準備、5%付近で保存・停止。以下の過去790件は旧確定履歴、詳細は456/457と004の最新実行結果。
 
 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。
 
