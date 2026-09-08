@@ -166,6 +166,12 @@ public final class UserMutationRequest implements AutoCloseable {
     return operationToken;
   }
 
+  /** Frozen result verification only; not a current DB version. PG-D-086/PT-ADM-028/031. */
+  long expectedVersion() {
+    ensureOpen();
+    return expectedVersion;
+  }
+
   /** Response layout mapping is fixed by the approved request layout. PT-ADM-024/026. */
   public LayoutId responseLayoutId() {
     ensureOpen();
