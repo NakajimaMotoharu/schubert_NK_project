@@ -248,6 +248,7 @@ class EmbeddedWebSecurityTest {
     final AtomicInteger posts = new AtomicInteger();
     final AtomicInteger converted = new AtomicInteger();
     volatile boolean breakDatabaseBeforeError;
+    volatile String invalidationFailure = "";
     final List<UUID> errorIds = new CopyOnWriteArrayList<>();
     final HttpClient client =
         HttpClient.newBuilder()
@@ -445,6 +446,28 @@ class EmbeddedWebSecurityTest {
           .setAsyncSupported(true);
       context.addServletMapping(menuMvc ? "/login" : "/*", "fixture");
       if (errorMvc) context.addServletMapping("/fixture-error", "fixture");
+      if (errorMvc) {
+        var invalid = new ApiSessionInvalidHandler(adapter, audit);
+        Tomcat.addServlet(
+            context,
+            "expired-fixture",
+            new HttpServlet() {
+              @Override
+              protected void service(HttpServletRequest request, HttpServletResponse response)
+                  throws IOException {
+                // Trusted API0102 component double, never an HTTP result-code parameter.
+                f.failure = invalidationFailure;
+                invalid.handle(request, response);
+              }
+            });
+        for (String path :
+            List.of(
+                "/fixture-expired",
+                "/audio/pt-expired",
+                "/animation/media/pt-expired",
+                "/music/media/pt-expired",
+                "/music/download/pt-expired")) context.addServletMapping(path, "expired-fixture");
+      }
       if (menuMvc) {
         var mvc =
             new org.springframework.web.context.support.AnnotationConfigWebApplicationContext();

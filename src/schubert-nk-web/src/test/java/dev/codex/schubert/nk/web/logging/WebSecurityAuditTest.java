@@ -35,11 +35,12 @@ class WebSecurityAuditTest {
       {"AUTHORIZATION_DENIED", "CSRF", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "ROLE", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "PROXY", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", "WARN"}
+      {"AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", "WARN"},
+      {"SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", "INFO"}
     };
     for (int i = 0; i < Event.values().length; i++) {
       Event event = Event.values()[i];
-      boolean hasActor = i == 0 || (i >= 3 && i <= 5);
+      boolean hasActor = i == 0 || (i >= 3 && i <= 5) || i == 7;
       audit.record(
           ID,
           event,
@@ -75,7 +76,7 @@ class WebSecurityAuditTest {
       assertEquals(expected[i][0], json.get("action").getAsString());
       assertEquals(expected[i][2], json.get("outcome").getAsString());
       assertEquals(expected[i][3], json.get("level").getAsString());
-      assertEquals(i == 0 ? Level.INFO : Level.WARNING, entry.level());
+      assertEquals(i == 0 || i == 7 ? Level.INFO : Level.WARNING, entry.level());
       if (hasActor) {
         assertEquals("reader", json.get("actorUsername").getAsString());
         assertEquals("USER", json.get("actorRole").getAsString());

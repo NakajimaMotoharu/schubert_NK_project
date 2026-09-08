@@ -46,10 +46,7 @@ public final class WebAccessFailureHandler
     Objects.requireNonNull(response, "response");
     Objects.requireNonNull(exception, "exception");
     var context = WebRequestContext.require(request);
-    boolean navigate =
-        "GET".equals(request.getMethod())
-            && !"XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))
-            && !MEDIA.matches(request);
+    boolean navigate = isNavigation(request);
     response.setStatus(403);
     if (navigate) cache.saveRequest(request, response);
     audit.record(
@@ -65,6 +62,13 @@ public final class WebAccessFailureHandler
     } else {
       response.sendError(403);
     }
+  }
+
+  /** Shared UI221 GET/AJAX/media classification; PG-D-117/PT-WEB-160, no request replay. */
+  static boolean isNavigation(HttpServletRequest request) {
+    return "GET".equals(request.getMethod())
+        && !"XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))
+        && !MEDIA.matches(request);
   }
 
   @Override
