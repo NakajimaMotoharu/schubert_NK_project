@@ -213,7 +213,7 @@ PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaint
 | authenticate | API認証済principalを受け、new Cookie/DB UUID/CSRFへfixation。UI226どおりSavedRequest/未完了tokenを含むallowlistを保持、旧削除＋新INSERTをatomic化。発行値衝突はrollback |
 | invalidate | hash限定DELETEをcommit。破損rowでもlocal失効可能。API revoke/queue/監査・HTTP Cookie失効は外側 |
 
-構造/NULL/型不正rowを表す`InvalidSessionRowException`を固定`SessionStoreException`のsubtypeとして区別し、失効用hash限定DELETEをstoreへ追加する。Row不正・復号不正・期限切れは削除commit後だけ不在を返す。DB接続/SQL/resource/暗号write故障はrollbackして固定障害、cause/suppressed診断を利用者へ返さない。
+構造/NULL/型不正rowを表す`InvalidSessionRowException`を固定`SessionStoreException`のsubtypeとして区別し、失効用hash限定DELETEをstoreへ追加する。Row不正・復号不正・期限切れは削除commit後だけ不在を返す。DB接続/SQL/resource/暗号write故障はcommit前ならrollbackを試み固定障害、cause/suppressed診断を利用者へ返さない。commit成功後のclose故障は既に確定したDBをrollbackできないため、呼出側へ固定障害を返し、次のhash lookupで実状態を確認する。commit応答不明も未確定結果として扱い、成功を推定しない。
 
 Idle延長はmax(現在時刻,既存last access)＋row max inactiveを用い、Clock後退で期限を縮めず絶対lifetimeを追加しない。新規/認証時は8h固定。version上限999999999の次はCookie/CSRF/created_at/属性を維持し、DB UUIDだけ新規発行して同hashの新row/version0へatomic置換、新PK AADで再暗号化する。旧PKのCASを成功させずABAを防ぐ。UUID衝突・想定外0件・commit/close故障は不成功で、呼出側が未確定成功を利用者へ表示しない。
 

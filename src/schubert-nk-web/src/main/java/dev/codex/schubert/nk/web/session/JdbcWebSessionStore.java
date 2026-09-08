@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
@@ -25,9 +26,7 @@ public final class JdbcWebSessionStore {
    */
   public Optional<WebSessionRow> findLocked(Connection connection, String hash) {
     Objects.requireNonNull(connection, "connection");
-    Objects.requireNonNull(hash, "hash");
-    if (!hash.matches("[0-9a-f]{64}"))
-      throw new IllegalArgumentException("session lookup is invalid");
+    requireHash(hash);
     try {
       transaction(connection);
       try (var statement =
@@ -41,12 +40,14 @@ public final class JdbcWebSessionStore {
           Optional<WebSessionRow> found = Optional.empty();
           if (result.next()) {
             var row = read(result);
-            if (result.next()) throw new SessionStoreException();
+            if (result.next()) throw new InvalidSessionRowException();
             found = Optional.of(row);
           }
           return found;
         }
       }
+    } catch (InvalidSessionRowException failure) {
+      throw new InvalidSessionRowException();
     } catch (SQLException | IllegalArgumentException | SessionStoreException failure) {
       throw new SessionStoreException();
     }
@@ -135,18 +136,51 @@ public final class JdbcWebSessionStore {
   }
 
   private static WebSessionRow read(ResultSet result) throws SQLException {
-    return new WebSessionRow(
-        new SessionPayloadIdentity(
-            required(result.getObject("id", UUID.class)),
-            required(result.getString("session_id_hash")),
-            required(result.getObject("created_at", OffsetDateTime.class)).toInstant()),
-        new EncryptedSessionPayload(
-            required(result.getString("key_version")),
-            required(result.getBytes("attributes_ciphertext"))),
-        required(result.getObject("last_accessed_at", OffsetDateTime.class)).toInstant(),
-        required(result.getObject("expires_at", OffsetDateTime.class)).toInstant(),
-        required(result.getObject("max_inactive_seconds", Integer.class)),
-        required(result.getObject("version", Long.class)));
+    try {
+      return new WebSessionRow(
+          new SessionPayloadIdentity(
+              column(result.getObject("id", UUID.class)),
+              column(result.getString("session_id_hash")),
+              column(result.getObject("created_at", OffsetDateTime.class)).toInstant()),
+          new EncryptedSessionPayload(
+              column(result.getString("key_version")),
+              column(result.getBytes("attributes_ciphertext"))),
+          column(result.getObject("last_accessed_at", OffsetDateTime.class)).toInstant(),
+          column(result.getObject("expires_at", OffsetDateTime.class)).toInstant(),
+          column(result.getObject("max_inactive_seconds", Integer.class)),
+          column(result.getObject("version", Long.class)));
+    } catch (IllegalArgumentException | SQLDataException failure) {
+      throw new InvalidSessionRowException();
+    }
+  }
+
+  /** SSC-041/PT-WEB-037/041: invalidates even an unreadable row, using only the validated hash. */
+  public boolean deleteByHash(Connection connection, String hash) {
+    Objects.requireNonNull(connection, "connection");
+    requireHash(hash);
+    try {
+      transaction(connection);
+      try (var statement =
+          required(
+              connection.prepareStatement(
+                  "delete from schubert_web_session.web_http_sessions where session_id_hash=?"))) {
+        statement.setString(1, hash);
+        return changed(statement.executeUpdate());
+      }
+    } catch (SQLException | SessionStoreException failure) {
+      throw new SessionStoreException();
+    }
+  }
+
+  private static void requireHash(String hash) {
+    Objects.requireNonNull(hash, "hash");
+    if (!hash.matches("[0-9a-f]{64}"))
+      throw new IllegalArgumentException("session lookup is invalid");
+  }
+
+  private static <T> T column(@Nullable T value) {
+    if (value == null) throw new InvalidSessionRowException();
+    return value;
   }
 
   private static void identity(
