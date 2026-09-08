@@ -40,4 +40,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 ## 正式gate・残件
 
-PT-WEB-20260908-07を予定。全回帰/coverage/静的解析とcollector/hash確認後だけ台帳を完了にする。Security chain、CSRF POST、API実認証/失効queue・監査、全画面/起動/実NK CHRは未完了。Program5/20とIT/ST未完了は変えない。
+正式PT-WEB-20260908-07、sourced6d9ff6c318f9bccb2df7d9716f742dda0573577、21:21:44～21:26:11 JST、exit0。全674件（Protocol80/Storage34/API394/Web125/CHR41）、新6件を含むWeb49件PASS。全5対象module line/method/class/branch各100%、NullAway/Enforcer/format PASS、SpotBugs0。SSC-042/BUG-058/059/YKT-053/054全対象再試験完了。002/manifest/checksumsで環境・実行・Test ID・hashへ追跡。Security chain、CSRF POST、API実認証/失効queue・監査、全画面/起動/実NK CHRは未完了。Program5/20とIT/ST未完了は変えない。
