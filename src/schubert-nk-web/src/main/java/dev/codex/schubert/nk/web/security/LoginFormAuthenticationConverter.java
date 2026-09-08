@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 import org.springframework.http.MediaType;
@@ -50,6 +51,12 @@ public final class LoginFormAuthenticationConverter implements AuthenticationCon
             throw new LoginFormRejectedException();
         }
       }
+      var names = request.getParameterNames();
+      if (names == null) throw new LoginFormRejectedException();
+      while (names.hasMoreElements()) {
+        String name = names.nextElement();
+        if (name == null || !FORM_KEYS.contains(name)) throw new LoginFormRejectedException();
+      }
       String username = single(request, "username");
       String password = single(request, "password");
       LoginClientAddress address = addresses.resolve(request);
@@ -57,7 +64,7 @@ public final class LoginFormAuthenticationConverter implements AuthenticationCon
           UsernamePasswordAuthenticationToken.unauthenticated(username, password.toCharArray());
       token.setDetails(address);
       return token;
-    } catch (IllegalArgumentException | IllegalStateException failure) {
+    } catch (IllegalArgumentException | IllegalStateException | NoSuchElementException failure) {
       throw new LoginFormRejectedException();
     }
   }

@@ -191,7 +191,7 @@ class SessionFormLoginTest {
                 "application/x-www-form-urlencoded;charset=UTF-8")) {
           var r = form(null, null, username, password);
           r.setContentType(type);
-          r.setQueryString("q=ignored&=value");
+          r.setQueryString("");
           var input = converter.convert(r);
           assertEquals(UsernamePasswordAuthenticationToken.class, input.getClass());
           assertFalse(input.isAuthenticated());
@@ -676,6 +676,49 @@ class SessionFormLoginTest {
       assertEquals(0, api.probes.get());
       assertEquals(100, count());
       api.erased();
+    }
+  }
+
+  @Test
+  void web090UnknownFormNamesAndEnumerationFaultsNeverAuthenticate() {
+    var converter = new LoginFormAuthenticationConverter(new CaddyClientAddressResolver());
+    var api = new Api("0000", "USER", "0000", 0);
+    for (String name : List.of("role", "", "Username", "Password", "_CSRF", "unknown", "q")) {
+      var request = form(null, "01".repeat(32), "reader", "p");
+      request.addParameter(name, "synthetic");
+      // Servlet merges decoded query and body parameter names; Mock setQueryString alone does not.
+      if (name.equals("q")) request.setQueryString("q=synthetic");
+      formRejected(() -> api.provider.authenticate(converter.convert(request)));
+      assertNull(request.getSession(false));
+      assertEquals(0, api.sends.get());
+    }
+    for (String fault : List.of("NULL", "ELEMENT", "HAS", "NEXT", "STATE", "ARGUMENT")) {
+      var request =
+          new HttpServletRequestWrapper(form(null, null, "reader", "p")) {
+            @Override
+            public Enumeration<String> getParameterNames() {
+              if (fault.equals("NULL")) return null;
+              if (fault.equals("ELEMENT"))
+                return Collections.enumeration(Arrays.asList((String) null));
+              if (fault.equals("STATE")) throw new IllegalStateException("private-parameter");
+              if (fault.equals("ARGUMENT")) throw new IllegalArgumentException("private-parameter");
+              return new Enumeration<>() {
+                @Override
+                public boolean hasMoreElements() {
+                  if (fault.equals("HAS")) throw new NoSuchElementException("private-parameter");
+                  return true;
+                }
+
+                @Override
+                public String nextElement() {
+                  throw new NoSuchElementException("private-parameter");
+                }
+              };
+            }
+          };
+      formRejected(() -> api.provider.authenticate(converter.convert(request)));
+      assertNull(request.getSession(false));
+      assertEquals(0, api.sends.get());
     }
   }
 
