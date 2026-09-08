@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260908-02",
-  "targetCommit": "7ca9ac19332690ad7c193234acdb47d6d2f87523",
+  "runId": "PT-WEB-20260908-03",
+  "targetCommit": "3bb7319839395b14ba87b9e2e96daedcfda4be15",
   "branch": "dev-web",
-  "startedAt": "2026-09-08T19:33:53+09:00",
-  "completedAt": "2026-09-08T19:38:07+09:00",
+  "startedAt": "2026-09-08T19:47:46+09:00",
+  "completedAt": "2026-09-08T19:52:00+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -149,31 +149,31 @@
       }
     },
     "web": {
-      "tests": 91,
+      "tests": 99,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 5013
+          "covered": 5741
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 427
+          "covered": 485
         },
         "LINE": {
           "missed": 0,
-          "covered": 1202
+          "covered": 1347
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 403
+          "covered": 452
         },
         "METHOD": {
           "missed": 0,
-          "covered": 186
+          "covered": 206
         },
         "CLASS": {
           "missed": 0,
-          "covered": 45
+          "covered": 50
         }
       },
       "spotbugs": {
@@ -183,12 +183,12 @@
       }
     }
   },
-  "rawLogSha256": "7d8e9029c82a10fe5736344c03a139eb544e4e3c5879bb30b059d6ddf8dce2b5",
+  "rawLogSha256": "fdd98da8c730509c465c176f2940193126b698576a217d1d8b757c39a3ec6dcb",
   "programId": "NK-MED-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
     "program": 61,
-    "reactor": 640
+    "reactor": 648
   },
   "testIdMethods": {
     "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
@@ -349,7 +349,7 @@
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "f770eb3b8fd9a5fbb2c8cac5800b43daa3749f439e7c2cdd2f0b91540372fe54"
+      "sha256": "dda7573d2bc06a5a6bd41054b5a1691a1ccd407dff026d96fdd7404106330694"
     },
     {
       "path": "coverage/protocol-jacoco.csv",
@@ -357,7 +357,7 @@
     },
     {
       "path": "coverage/protocol-jacoco.xml",
-      "sha256": "8a575d6780ae4ecaf877e20543a33e815bbae53a54142241d527e861fcd1e42b"
+      "sha256": "31757f750a3adf0f79394670d0f886a0af36145037a401f5b8aebc5223d1f3a7"
     },
     {
       "path": "coverage/storage-jacoco.csv",
@@ -365,15 +365,15 @@
     },
     {
       "path": "coverage/storage-jacoco.xml",
-      "sha256": "af39205a2d016e8b8a998e21ed7b8bc73340892eb3395c09846c4dad4512332a"
+      "sha256": "a3436866da9297f0fc6f6739177c1578abe79f9c24d82ff949925ee5b6dafb2d"
     },
     {
       "path": "coverage/web-jacoco.csv",
-      "sha256": "958a0e1faa3a770b4bf152b9621cb1257d6388fca666f6014a4350beb600d217"
+      "sha256": "6b301822aae08b87e69ae6569d182563c32b5659d7d39c8a363c854a66f132a5"
     },
     {
       "path": "coverage/web-jacoco.xml",
-      "sha256": "114da622ab2a6233846722eaf4fc79ae428f8d331330fa844b2898bbd3a376ce"
+      "sha256": "80c78e6b95d25153d7ab6f17cdaca0f2bde3c1f558b936e724c783569e9a5cc7"
     },
     {
       "path": "logs/BUG-042-YKT-037.md",
@@ -488,16 +488,20 @@
       "sha256": "0c48dc533e5e72a96271226cd27d8fb1ecba180bf03457e9d102fcbcc07a56eb"
     },
     {
+      "path": "logs/PT-WEB-20260908-03-summary.json",
+      "sha256": "af908936fc7f3b42ca260c7b1d1122f17070afae76846a4d180d663588e3eb98"
+    },
+    {
       "path": "logs/query-exploration.md",
       "sha256": "20554a0a77e1accfe649f7feec8014c9ee981483b40631cab3d1a4878e2e53ec"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
-      "sha256": "21876f56e9cdd589fc25a996538735c1a75747033c981a8db83bc47aadd276d4"
+      "sha256": "1c41d6d35cead6146acaeee42b17b07c17be2c6ca82055fa1d780e5f4d20b586"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
-      "sha256": "2806aa4cd9283d1bde599d911b7bed8b20ee9be3dc8f61da93183a3599ec27aa"
+      "sha256": "25c9a4228553a2694cf90cb4a43989f7b559f6cc413860af8f0cfc41ceac8d24"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
@@ -505,43 +509,43 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
-      "sha256": "7aa35ad4f4b1e305793b8264e3ee92cdd8705721ff31ecc2f7269fa505deb77d"
+      "sha256": "b57b44d7ba5b2d9c6d3a57e9fd9de7407aca11dd3488da99d38bbcdbfedab7a0"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
-      "sha256": "77d9d7b6953f6630d2d16852736bfe6fdfad8f174199b6297d311bf2849a97de"
+      "sha256": "a7e3c395fa4d6bc5d9d4c1dd3bb82b68e285a3f87071b5acea6b5fd12f837fda"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
-      "sha256": "3d730586bb818946cc44f1e65efe9740ae1e3a41932322164d39cbab018a59f5"
+      "sha256": "01c9507bfaa815035e5eb020d13b4d312a80bb951d67fafb07d133b89ae2fa09"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
-      "sha256": "0e4c78170909bf21906ec803eba89a0ccff2ea671313f9892f8eb835868142f8"
+      "sha256": "84a223e0079c745e22d58c365a3bc0d8303dea60fd45503d502b7f13405562f3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
-      "sha256": "3d428b11a787d9824b49c025a30f43f077c068348186d26d438c07cc052392b1"
+      "sha256": "e685f50d87bd8995aa787a0b202ad0580a510b9589df39958db504f17ef16ff3"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
-      "sha256": "dccba2800d06b6c785601db2c5eba8c64124f307acb637f28f21bab5556e366d"
+      "sha256": "6dbe057967dc8a6f1ada75f2dea8fc60435f6ed716b054d2e9ffce15d5477fcb"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
-      "sha256": "416d5c047858db212eaf7f0836bd47adb25bd8876b5d7262df92f2b66160cec9"
+      "sha256": "f6d604e1dc6055b097e8961bf9063ef29c567cde797434b2bc82f0e432a7fcfa"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
-      "sha256": "53246298a741bfdfe0e4ff77861142c118c7403f8c55dc7f4d0b7370a727b95b"
+      "sha256": "64c0e0f6b90c99cda9d2b4fe6b0c633831e6103be605e463a95c22ccdf5dc962"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
-      "sha256": "9982df433debf431684cc270c31c955fd70b770bb4d9b5394583559b5ed92eb5"
+      "sha256": "6c07cca908faf9688aebf3d40852be4d59760f1d8b58f76cef7223903d05abfc"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
-      "sha256": "09774ccefecd2ae245feb686c9b84efe7fb660dd9f8dff57a3be1c1f3ce91f97"
+      "sha256": "6f721f445581955ed4e3f8881f7057013357aa67e21f16aa00795b9939b38ce6"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
@@ -549,11 +553,11 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
-      "sha256": "4e65f16a2063fd613df0b4f6c30dc33e51477f786d67cd714d6bda778a63a922"
+      "sha256": "94f37f03ff1617c529dfd0a89a2a9a8f4ba10df7a5b408d46376fb8f35c84bd2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
-      "sha256": "646abaf4d53b2fa2c0b67d000038ea68ac5d61fc0dc2090aa790d9b4e6d94716"
+      "sha256": "1c5951a9084417f10146b430895f5332d1326d44f5fccf7c21bf4ee4cc9acb47"
     }
   ]
 }

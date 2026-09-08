@@ -24,4 +24,4 @@ SSC039の7field順序をDataOutputStreamで手組し、UUID bytesは固定hex、
 
 ## 正式gate・残件
 
-予定PT-WEB-20260908-03。source/全件数/日時/coverage/静的解析は正式manifest/002へ確定後記録。DB repository/失効・current再保存/CSRF/HTTP/実NK CHRは未完了。暗号部品の合格をProgram完了やIT/ST完了へ換算しない。
+正式PT-WEB-20260908-03、source3bb7319839395b14ba87b9e2e96daedcfda4be15、19:47:46～19:52:00 JST、exit0。全648件（Protocol80/Storage34/API394/Web99/CHR41）、暗号8件を含むWeb23件PASS。全5対象moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。SSC-039完了、新BUGなし。詳細とhashは正式manifest/002/checksums。DB repository/失効・current再保存/CSRF/HTTP/実NK CHRは未完了。暗号部品の合格をProgram完了やIT/ST完了へ換算しない。
