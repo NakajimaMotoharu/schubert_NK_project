@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.api.persistence;
 import dev.codex.schubert.nk.api.database.RequiredColumn;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
+import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
+import dev.codex.schubert.nk.protocol.file.MediaType;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.media.*;
@@ -13,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -22,9 +25,117 @@ import java.util.function.IntFunction;
  * Stored media menu/list queries, never filesystem enumeration or pair inference. Caller owns a
  * read-only transaction and supplies an API-verified actor. No commit/connection close or idle
  * update. NK-MED-001; FUN-006/007/AUT-001..004; UI223/235; SS312/332 §4.3/333; PG-D-071;
- * PT-MED-008..014. Descriptor/manifest/physical verification and final authentication are separate.
+ * PT-MED-008..017. Manifest/physical verification and final authentication are separate; metadata
+ * projections alone must never authorize a file response.
  */
 public final class MediaRepository {
+  /** PT-MED-015/017: canonical N12 identity and SS333 Audio OGG mapping, not file admission. */
+  public Optional<TypedPayloadValues> audioMetadata(
+      Connection connection, AuthenticatedActor actor, AudioDescriptorRequestData request) {
+    input("AUDREQ01", request);
+    String id = Long.toString(request.audioId().value());
+    return metadata(
+        connection,
+        actor,
+        """
+        select id::text as logical_id,storage_relative_path,file_name,byte_size,sha256,
+               'audio/ogg' as mime_type from schubert.audio_files where id=cast(? as bigint)
+        """,
+        id,
+        "AUDRSP01",
+        r -> descriptor(r, MediaType.AUDIO, id, request.disposition()));
+  }
+
+  /** PT-MED-015/017: logical ID and MUSIC type are both scoped in the prepared lookup. */
+  public Optional<TypedPayloadValues> musicMetadata(
+      Connection connection, AuthenticatedActor actor, MusicDescriptorRequestData request) {
+    input("MEDREQ01", request);
+    return metadata(
+        connection,
+        actor,
+        """
+        select logical_id,storage_relative_path,file_name,byte_size,sha256,mime_type
+          from schubert.media_assets where logical_id=? and media_type='MUSIC'
+        """,
+        request.trackId(),
+        "MEDRSP01",
+        r -> descriptor(r, MediaType.MUSIC, request.trackId(), request.disposition()));
+  }
+
+  /** PT-MED-016/017: includes standalone OPENING display metadata and fixes inline disposition. */
+  public Optional<TypedPayloadValues> videoMetadata(
+      Connection connection, AuthenticatedActor actor, VideoDescriptorRequestData request) {
+    input("VIDREQ01", request);
+    return metadata(
+        connection,
+        actor,
+        """
+        select logical_id,storage_relative_path,file_name,byte_size,sha256,mime_type,title,category,display_path
+          from schubert.media_assets where logical_id=? and media_type='VIDEO'
+        """,
+        request.videoId(),
+        "VIDRSP01",
+        r -> {
+          var base = descriptor(r, MediaType.VIDEO, request.videoId(), ContentDisposition.INLINE);
+          return new VideoDescriptorResponseData(
+              base.mediaLogicalId(),
+              base.storageRelativePath(),
+              base.fileName(),
+              base.fileByteLength(),
+              base.sha256(),
+              base.mimeType(),
+              base.contentDisposition(),
+              text(r, "title"),
+              VideoCategory.valueOf(text(r, "category")),
+              DisplayPath.of(text(r, "display_path")));
+        });
+  }
+
+  private static Optional<TypedPayloadValues> metadata(
+      Connection connection,
+      AuthenticatedActor actor,
+      String sql,
+      String id,
+      String layout,
+      RowMapper<PayloadData> mapper) {
+    return query(
+        connection,
+        actor,
+        sql,
+        List.of(id),
+        1,
+        mapper,
+        rows ->
+            rows.isEmpty()
+                ? Optional.empty()
+                : Optional.of(payload(layout, rows.getFirst(), List.of())));
+  }
+
+  private static MediaDescriptorData descriptor(
+      ResultSet result, MediaType type, String expectedId, ContentDisposition disposition)
+      throws SQLException {
+    String id = text(result, "logical_id");
+    if (!id.equals(expectedId)) throw new SQLException("media identity differs from lookup");
+    var checked =
+        new MediaDescriptor(
+            type,
+            id,
+            text(result, "storage_relative_path"),
+            text(result, "file_name"),
+            number(result, "byte_size"),
+            text(result, "sha256"),
+            text(result, "mime_type"),
+            dev.codex.schubert.nk.protocol.file.ContentDisposition.valueOf(disposition.name()));
+    return new MediaDescriptorData(
+        checked.logicalId(),
+        RelativePath.of(checked.storageRelativePath()),
+        checked.fileName(),
+        checked.byteLength(),
+        Sha256Hex.of(checked.sha256()),
+        MediaMimeType.valueOf(checked.mimeType().toUpperCase(Locale.ROOT).replace('/', '_')),
+        disposition);
+  }
+
   /** PT-MED-008: count each stored VIDEO category once; reject unknown or duplicate opening. */
   public TypedPayloadValues animationMenu(Connection connection, AuthenticatedActor actor) {
     return query(
@@ -177,14 +288,14 @@ public final class MediaRepository {
         rows -> payload(layout, data.apply(rows.size()), rows));
   }
 
-  private static <R> TypedPayloadValues query(
+  private static <R, T> T query(
       Connection connection,
       AuthenticatedActor actor,
       String sql,
       List<String> parameters,
       int maximum,
       RowMapper<R> mapper,
-      Function<List<R>, TypedPayloadValues> finish) {
+      Function<List<R>, T> finish) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(actor, "actor");
     try {

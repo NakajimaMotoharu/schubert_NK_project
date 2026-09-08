@@ -42,6 +42,9 @@ def main():
         "PT-MED-012": query + "everyListCapacityRejectsTruncationAndCloseDowngrades",
         "PT-MED-013": query + "nullContractsAndJdbcMetadataFailuresRemainRedacted",
         "PT-MED-014": query + "concurrentReadersNeverMutateOrAcquireRowLocks",
+        "PT-MED-015": query + "audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats",
+        "PT-MED-016": query + "videoMetadataIncludesOpeningAndDisplayFields",
+        "PT-MED-017": query + "descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing",
     })
     methods, clean_reports = [], {}
     reports = list((repo / "src/schubert-nk-web/target/surefire-reports").glob("TEST-" + prefix + "*.xml"))
@@ -76,9 +79,9 @@ def main():
     manifest.update({
         "programId": "NK-MED-001", "programStatus": "IN_PROGRESS",
         "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
-        "testIdMethods": expected, "methods": methods, "actual": "All fourteen independent assertion sets passed",
-        "inputAndExpected": "001 PT specification and targetCommit's four named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC rows and independent UI235 16/8/928/72/136/1312-byte data/record vectors for all five queries, bounded count and immutable/read-only/fault postconditions. Production is never used to generate expected values.",
-        "scope": "Pure Range/header/bounded copy and five stored media menu/list queries only; not authenticated HTTP delivery or a manifest/file-integrity check. Three descriptor queries/auth/Inbox/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected.",
+        "testIdMethods": expected, "methods": methods, "actual": "All seventeen independent assertion sets passed",
+        "inputAndExpected": "001 PT specification and targetCommit's four named test classes: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. Production is never used to generate expected values.",
+        "scope": "Pure Range/header/bounded copy, five menu/list and three descriptor DB metadata queries only; not authenticated HTTP delivery or a manifest/file-integrity check. Auth/Inbox/manifest/secure asset resolver/20 permits/HTTP HEAD-download/full startup/actual NK CHR remain unimplemented or unconnected. A validated DB projection must not authorize a file response without physical and manifest verification.",
         "relatedBug": [], "relatedSsc": [], "crossProgramRegressions": ["BUG-040/YKT-036 in 003 manifest"],
         "notRunCountedAsPass": 0, "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
     })

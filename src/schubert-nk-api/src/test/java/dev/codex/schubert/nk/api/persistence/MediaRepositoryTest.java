@@ -10,6 +10,8 @@ import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.media.*;
 import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
@@ -43,7 +45,250 @@ class MediaRepositoryTest {
 
   @BeforeEach
   void clear() throws Exception {
-    sql("truncate schubert.media_assets cascade");
+    sql("truncate schubert.media_assets,schubert.audio_files cascade");
+  }
+
+  /** PT-MED-015: UI235 independent MEDIA1024 for Audio and five Music formats, both modes. */
+  @Test
+  void audioAndMusicMetadataUseCanonicalIdsAndAllApprovedFormats() throws Exception {
+    audio();
+    try (var c = read()) {
+      for (var mode : ContentDisposition.values()) {
+        assertWire(
+            QUERIES
+                .audioMetadata(c, USER, new AudioDescriptorRequestData(new AudioId(700), mode))
+                .orElseThrow(),
+            descriptorBytes(
+                "700", "scenario/G/audio/700.ogg", "Audio nice.ogg", "audio/ogg", mode.wireValue()),
+            List.of());
+      }
+      assertTrue(
+          QUERIES
+              .audioMetadata(
+                  c,
+                  USER,
+                  new AudioDescriptorRequestData(new AudioId(701), ContentDisposition.INLINE))
+              .isEmpty());
+    }
+    String[][] formats = {
+      {".m4a", "audio/mp4"},
+      {".mp3", "audio/mpeg"},
+      {".ogg", "audio/ogg"},
+      {".wav", "audio/wav"},
+      {".flac", "audio/flac"}
+    };
+    for (int i = 0; i < formats.length; i++) {
+      int id = 100 + i;
+      String suffix = formats[i][0], mime = formats[i][1], logical = "music-" + i;
+      asset(id, "MUSIC", logical, "Track", "BGM", "ゲーム", null, null, "N", i + 1);
+      sql(
+          "update schubert.media_assets set storage_relative_path='music/"
+              + id
+              + suffix
+              + "',file_name='表示名"
+              + suffix
+              + "',mime_type='"
+              + mime
+              + "' where id="
+              + id);
+      try (var c = read()) {
+        for (var mode : ContentDisposition.values())
+          assertWire(
+              QUERIES
+                  .musicMetadata(c, ADMIN, new MusicDescriptorRequestData(logical, mode))
+                  .orElseThrow(),
+              descriptorBytes(
+                  logical, "music/" + id + suffix, "表示名" + suffix, mime, mode.wireValue()),
+              List.of());
+      }
+    }
+    videos();
+    try (var c = read()) {
+      assertTrue(
+          QUERIES
+              .musicMetadata(
+                  c, USER, new MusicDescriptorRequestData("opening", ContentDisposition.INLINE))
+              .isEmpty());
+      assertTrue(
+          QUERIES
+              .musicMetadata(
+                  c, USER, new MusicDescriptorRequestData("' OR '1'='1", ContentDisposition.INLINE))
+              .isEmpty());
+      assertTrue(
+          QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData("music-0")).isEmpty());
+    }
+  }
+
+  /** PT-MED-016: all four public video categories and 1808 independent data bytes. */
+  @Test
+  void videoMetadataIncludesOpeningAndDisplayFields() throws Exception {
+    videos();
+    String[][] rows = {
+      {"main-z", "30", "First", "MAIN"},
+      {"sub", "20", "Sub", "SUBTRACK"},
+      {"ova", "40", "Ova", "OVA"},
+      {"opening", "50", "Opening", "OPENING"}
+    };
+    try (var c = read()) {
+      for (String[] row : rows) {
+        byte[] expected = blank(1808);
+        System.arraycopy(
+            descriptorBytes(row[0], "video/" + row[1] + ".mp4", "file.mp4", "video/mp4", "I"),
+            0,
+            expected,
+            0,
+            1024);
+        put(expected, 1024, row[2]);
+        put(expected, 1280, row[3]);
+        put(expected, 1296, "v/" + row[1] + ".mp4");
+        assertWire(
+            QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData(row[0])).orElseThrow(),
+            expected,
+            List.of());
+      }
+      assertTrue(
+          QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData("missing")).isEmpty());
+      assertFalse(c.isClosed());
+      assertFalse(c.getAutoCommit());
+      assertTrue(c.isReadOnly());
+    }
+  }
+
+  /** PT-MED-017: absence is distinct from corrupt metadata and JDBC failure. */
+  @Test
+  void descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing() throws Exception {
+    audio();
+    videos();
+    asset(90, "MUSIC", "media", "Track", "BGM", "ゲーム", null, null, "N", 1);
+    for (String kind : List.of("audio", "video", "music")) {
+      assertThrows(NullPointerException.class, () -> metadata(kind, null, USER));
+      try (var c = read()) {
+        assertThrows(NullPointerException.class, () -> metadata(kind, c, null));
+        for (String problem :
+            List.of(
+                "connection.prepareStatement",
+                "statement.setString",
+                "statement.executeQuery",
+                "result.next",
+                "result.close",
+                "statement.close"))
+          failure(
+              ResultCode.TEMPORARY_FAILURE,
+              () -> metadata(kind, fault(c, problem, null, null), USER));
+        for (String column :
+            List.of("logical_id", "storage_relative_path", "file_name", "sha256", "mime_type"))
+          failure(
+              ResultCode.TEMPORARY_FAILURE,
+              () -> metadata(kind, fault(c, "overrideString", column, null), USER));
+        failure(
+            ResultCode.TEMPORARY_FAILURE,
+            () -> metadata(kind, fault(c, "overrideString", "logical_id", "different"), USER));
+        failure(
+            ResultCode.TEMPORARY_FAILURE,
+            () -> metadata(kind, fault(c, "overrideLong", "byte_size", 0L), USER));
+        failure(
+            ResultCode.TEMPORARY_FAILURE,
+            () -> metadata(kind, fault(c, "numericNull", null, null), USER));
+        assertFalse(c.isClosed());
+        assertFalse(c.getAutoCommit());
+        assertTrue(c.isReadOnly());
+      }
+    }
+    try (var c = read()) {
+      assertThrows(NullPointerException.class, () -> QUERIES.audioMetadata(c, USER, null));
+      assertThrows(NullPointerException.class, () -> QUERIES.videoMetadata(c, USER, null));
+      assertThrows(NullPointerException.class, () -> QUERIES.musicMetadata(c, USER, null));
+      for (String column : List.of("title", "category", "display_path"))
+        failure(
+            ResultCode.TEMPORARY_FAILURE,
+            () ->
+                QUERIES.videoMetadata(
+                    fault(c, "overrideString", column, null),
+                    USER,
+                    new VideoDescriptorRequestData("opening")));
+      failure(
+          ResultCode.TEMPORARY_FAILURE,
+          () ->
+              QUERIES.videoMetadata(
+                  fault(c, "overrideString", "category", "UNKNOWN"),
+                  USER,
+                  new VideoDescriptorRequestData("opening")));
+      String[][] invalid = {
+        {"storage_relative_path", "video/wrong.ogg"},
+        {"storage_relative_path", "music/wrong.bin"},
+        {"storage_relative_path", "music/../wrong.ogg"},
+        {"storage_relative_path", "music/" + "あ".repeat(84) + ".ogg"},
+        {"file_name", "wrong.mp4"},
+        {"file_name", "line\r\n.ogg"},
+        {"sha256", "g".repeat(64)},
+        {"mime_type", "audio/wav"}
+      };
+      for (String[] value : invalid)
+        failure(
+            ResultCode.TEMPORARY_FAILURE,
+            () -> metadata("music", fault(c, "overrideString", value[0], value[1]), USER));
+      var renamed =
+          QUERIES
+              .musicMetadata(
+                  fault(c, "overrideString", "file_name", "あ".repeat(84) + ".ogg"),
+                  USER,
+                  new MusicDescriptorRequestData("media", ContentDisposition.INLINE))
+              .orElseThrow();
+      assertWire(
+          renamed,
+          descriptorBytes("media", "music/90.ogg", "あ".repeat(84) + ".ogg", "audio/ogg", "I"),
+          List.of());
+      var segmented =
+          QUERIES
+              .musicMetadata(
+                  fault(
+                      c,
+                      "overrideString",
+                      "storage_relative_path",
+                      "music/" + "a".repeat(251) + ".ogg"),
+                  USER,
+                  new MusicDescriptorRequestData("media", ContentDisposition.INLINE))
+              .orElseThrow();
+      assertWire(
+          segmented,
+          descriptorBytes(
+              "media", "music/" + "a".repeat(251) + ".ogg", "file.ogg", "audio/ogg", "I"),
+          List.of());
+    }
+  }
+
+  private static Optional<TypedPayloadValues> metadata(
+      String kind, Connection c, AuthenticatedActor actor) {
+    return switch (kind) {
+      case "audio" ->
+          QUERIES.audioMetadata(
+              c,
+              actor,
+              new AudioDescriptorRequestData(new AudioId(700), ContentDisposition.INLINE));
+      case "video" -> QUERIES.videoMetadata(c, actor, new VideoDescriptorRequestData("opening"));
+      case "music" ->
+          QUERIES.musicMetadata(
+              c, actor, new MusicDescriptorRequestData("media", ContentDisposition.INLINE));
+      default -> throw new AssertionError(kind);
+    };
+  }
+
+  private static void audio() throws SQLException {
+    sql(
+        "insert into schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,byte_size,sha256,created_at) values(700,1,'scenario/G/audio/700.ogg','voice/700.ogg','Audio nice.ogg','700','voice',123,repeat('a',64),'2026-09-08Z')");
+  }
+
+  private static byte[] descriptorBytes(
+      String id, String path, String name, String mime, String disposition) {
+    byte[] expected = blank(1024);
+    put(expected, 0, id);
+    put(expected, 64, path);
+    put(expected, 576, name);
+    number(expected, 832, 12, 123);
+    put(expected, 844, "a".repeat(64));
+    put(expected, 908, mime);
+    put(expected, 972, disposition);
+    return expected;
   }
 
   @Test
