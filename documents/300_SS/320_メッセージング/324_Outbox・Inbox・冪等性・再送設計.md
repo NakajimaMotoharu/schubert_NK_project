@@ -268,6 +268,8 @@ Loginは6.1の`LoginReplayService.restore`、Logoutは6.2の`LogoutReplayService
 
 不整合は保護して次のcursorへ進めるが、SQL/commit/close故障は固定の非秘密運用失敗とし正常終了にしない。commit成否不明時は既削除の可能性を記録し、同じrun/cutoffで冪等再走する。rollbackで不明commitを取り消せたとは扱わない。正常削除の成功結果はcommit・resource終了後だけ返す。外へ出す診断は固定理由と件数のみ。参照sessionが既にcleanup済みなら保持するという現行保護条件と朝batch順序を変更しない。
 
+12.2の統合falseは原因を暗号破損と断定せず「検証未成立の保護WARNING」とする（内部replayは復号/参照/読取り失敗を同じfalseに集約する）。削除serviceで観測したSQL例外は失敗とし、検査後も明示queryでtransaction healthを確認する。aborted transactionへのCOMMITがROLLBACKへ変わっただけで正常結果を返さない。実装/試験はPGPT004の011仕様PT033～040に対応する。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
