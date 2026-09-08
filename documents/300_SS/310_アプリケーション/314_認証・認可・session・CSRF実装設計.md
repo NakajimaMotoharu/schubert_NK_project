@@ -310,6 +310,10 @@ SSC-031: User管理更新では312 §6/332 §12の認証前lock preludeを適用
 
 他人IDはUSERへ404を返し、存在を開示しない。ADMIN URLをUSERが要求した場合は対象に関係なく403。Web表示非表示だけで許可しない。
 
+### 9.1 業務API0102のlocal失効（SSC-048）
+
+検証済API0102を受けたcontrollerはApiSessionInvalidHandlerで終端する。構成済暗号repository marker同一性を確認し、閉actorの表示用投影だけを監査へ使用、WebDisplayContext/CSRF属性とSecurityContextをclearし既存getSession(false)だけinvalidateする。新session/SavedRequest/operation tokenやAPI Logout再送rowは作らない。通常GETは固定302 `/login?session-expired`、POST/HEAD/その他・AJAX・mediaは401共通error、bodyの自動再送は禁止。local DB削除とSESSION_EXPIRED監査後にだけ応答を確定する。DB/属性/監査/response故障は成功扱いせず、既存503境界へ連携する。commit済でもlocal破棄を行うが応答書換不能を伝播する。古いrequestの失効で新Loginの別rowを削除しないことを試験する。業務全controller接続は各program gateで確認する。
+
 ## 10. Logout失効再試行
 
 `pending_context_revocations`にはcontext rawをWeb session keyとは別のrevoke queue keyでAES-GCM暗号化し、key version、requested/

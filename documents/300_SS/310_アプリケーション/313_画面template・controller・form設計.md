@@ -185,7 +185,7 @@ Templateは0件時に`該当するデータはありません`を表示し、pag
 | 未認証保護GET | 302 Login | Safe same-origin GETだけSavedRequest |
 | 未認証POST/media | 401/403 | Login案内、body再送なし |
 | Field error | 400相当、同一画面 | Field＋summary、秘密値なし |
-| `0102` | Web session破棄、302 Login | `session-expired` message |
+| `0102` | Web session破棄、通常GETは302 Login、POST/AJAX/media等は401 | `session-expired` message、更新body再送なし（SSC-048/UI221） |
 | `0103` | 403 | 権限なし。対象存在を開示しない |
 | `0104` | 404 | 対象なし |
 | `0105` | 409 | 最新GETを取得して再表示、新token |

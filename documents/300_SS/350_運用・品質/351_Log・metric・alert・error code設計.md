@@ -125,6 +125,8 @@ Action名追加は351とLog画面filter/testを同時更新する。フリーテ
 
 SSC-046: 上表は汎用HTTP分類であり、form POST `/login`の0101は現行互換の302 `/login?error`、0106は302 `/login?locked`＋API応答の0..900秒 `Retry-After`を使用する。UI226のquery別表示と313のredirect/再表示を優先し、401/429の直接応答へ置換しない。不存在/不一致/disabledは同じ失敗遷移。API timeout/9000・session保存障害は503で、認証失敗counterをWebで加算せず、LOGIN_FAILEDへ誤分類しない。正常はsafe SavedRequestのGETへ302、なければ`/`。Header/body/sessionへ例外やpasswordを保存しない。根拠はCurrent LoginAuthenticationFailureHandler/SuccessHandlerとCHR-A02のlockedRedirectであり、Current baselineは不変更。
 
+SSC-048: 業務API0102の401はPOST/HEAD/その他・AJAX・media向けとし、通常GETだけ313/UI221に従い302 `/login?session-expired`へ戻す。いずれもlocal HTTP sessionと表示snapshot/CSRFを消去し、既存action SESSION_EXPIRED/reason API_SESSION_INVALIDをINFO/SECURITYで記録する。API context/session ID/hash/元response/秘密値は記録しない。WebResultMapperの全result汎用分類だけでは失効/競合/field再表示等の副作用を完了扱いしない。
+
 Permanent protocol errorは信頼できるresponseを返さずDLQとprocess exitのためwire resultなし。
 
 ### 5.2 Internal error群
