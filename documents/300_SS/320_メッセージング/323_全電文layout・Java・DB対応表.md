@@ -168,6 +168,23 @@ OwnerはAPI認証actorのuser ID十進、targetは`REQUEST:<request layout ID>`�
 
 `ScenarioRequest.decode`は6 request layoutをallowlistし、共通header/layoutとfixed DATA/semanticを検証した後だけ内部値を生成する。これを同じrequestのcanonicalとread-only Repository振分けへ用い、別modelのfield落ち/順序ずれを防ぐ。Detailはimmutable snapshot（不在Optionalを含む）を返し、file I/Oは行わない。Response作成、認証、Inbox確定、JMS、transaction所有は外側serviceの責務。GAM/SPK/RTE/SCF/SRCは即時projection、SCNはdetail候補を区別する。
 
+### 9.2 Media参照要求canonical（SSC-029）
+
+OwnerはAPI認証actor user ID十進、targetは`REQUEST:<request layout ID>`、version001、operation tokenなし。`X1`はNFC UTF-8（enumはwire値）、`N1`はpadding/signなしASCII十進。次の全有効fieldを順序どおりNKOP1へ格納する。全field必須で、header/context/message/correlation/sentAt/reserved/paddingを混入しない。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| AUDREQ01 | audioId/N1、disposition/X1 |
+| ANMREQ01 | 0 fields |
+| ANLREQ01 | category/X1 |
+| VIDREQ01 | videoId/X1 |
+| MCTREQ01 | 0 fields |
+| MCSREQ01 | category/X1 |
+| MTRREQ01 | category/X1、section/X1 |
+| MEDREQ01 | trackId/X1、disposition/X1 |
+
+`MediaRequest.decode`は8 requestをallowlistし共通header/固定DATA/semanticを検証。同じ内部値からcanonicalとMediaRepositoryの8 read-only queryへ振り分ける。通常一覧は存在するTypedPayload、3 descriptorだけ実ID不在をOptional.emptyとし、DB整合/上限/基盤障害を不存在へ補完しない。DB descriptorはまだmanifest/物理確認を通しておらず配信許可ではない。認証・Inbox/response snapshot、transaction/物理I/O/JMS所有は外側serviceに残す。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
