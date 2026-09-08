@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+最新確定: 正式PT-MED-20260908-10、source 9b152e0797948d1f346855bf5441164a46804618、dev-media、2026-09-08 13:58:53～14:01:59 JST。全541件（Protocol80/Storage34/API310/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media54件（他Programと重複する内数）。全8応答snapshot/独立JCEと手組wire/改変拒否/100並行を追加PASS、BUG-043/YKT-038のBerror oracle是正・再試験完了。実認証Inbox/file/JMS段階接続・HTTP/起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
+
 最新確定: 正式PT-MED-20260908-09、source c5de0e44d433180680c0c87b1c32612d7b37060e、dev-media、2026-09-08 13:43:18～13:46:23 JST。全536件（Protocol80/Storage34/API305/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media49件、Scenario151等は重複する内数。checksum manifest/実保持asset metadata・59,627合成件数・異常/100並行を追加PASS、BUG-042/YKT-037再試験完了。認証Inbox/応答snapshot/実HTTP・起動/実NK CHRは継続。確定5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。詳細manifest、以下は履歴。
 
 最新確定: 正式PT-MED-20260908-02、source dc580fc7ed9c9f608430072b1ddf5caaf646eaae、dev-media、2026-09-08 12:14:50～12:17:52 JST。全501件（Protocol80/Storage26/API289/Web65/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。 Media14件（先行Range/header/stream7＋実PG menu/list7）成功。各Programの内数を重複加算しない。descriptor/manifest/認証・実asset/20permit/HTTP/起動/実NK CHR等は未完了、確定5/20=25%を維持。詳細manifest/Test ID/hash、以下は履歴。

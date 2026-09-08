@@ -1,9 +1,9 @@
 {
-  "runId": "PT-MED-20260908-09",
-  "targetCommit": "c5de0e44d433180680c0c87b1c32612d7b37060e",
+  "runId": "PT-MED-20260908-10",
+  "targetCommit": "9b152e0797948d1f346855bf5441164a46804618",
   "branch": "dev-media",
-  "startedAt": "2026-09-08T13:43:18+09:00",
-  "completedAt": "2026-09-08T13:46:23+09:00",
+  "startedAt": "2026-09-08T13:58:53+09:00",
+  "completedAt": "2026-09-08T14:01:59+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,31 +115,31 @@
       }
     },
     "api": {
-      "tests": 305,
+      "tests": 310,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 18177
+          "covered": 18858
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1368
+          "covered": 1420
         },
         "LINE": {
           "missed": 0,
-          "covered": 4125
+          "covered": 4271
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1341
+          "covered": 1386
         },
         "METHOD": {
           "missed": 0,
-          "covered": 633
+          "covered": 652
         },
         "CLASS": {
           "missed": 0,
-          "covered": 138
+          "covered": 140
         }
       },
       "spotbugs": {
@@ -183,12 +183,12 @@
       }
     }
   },
-  "rawLogSha256": "84c6d9895c42b15a466f728f24be7b068658f10177323c1909492d4e4fef6904",
+  "rawLogSha256": "7e2772a9e4a2606a76708fa9f2922479e5dad5daf1f282e2690c9e92d4eae5b5",
   "programId": "NK-MED-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
-    "program": 49,
-    "reactor": 536
+    "program": 54,
+    "reactor": 541
   },
   "testIdMethods": {
     "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
@@ -223,6 +223,11 @@
     "PT-MED-033": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
     "PT-MED-034": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med034EightLayoutsHaveIndependentCanonicalFingerprints",
     "PT-MED-035": "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med035MalformedNullAndUnknownRequestsNeverReachQueries",
+    "PT-MED-050": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med050EightSuccessLayoutsPreserveLiteralWireAndEncryptedIdentity",
+    "PT-MED-051": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med051DefiniteErrorsKeepCodesAndNeverInventDescriptors",
+    "PT-MED-052": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med052AuthenticatedCorruptionAndRequestMixupsFailClosed",
+    "PT-MED-053": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med053NullKeyAndClockBoundariesRemainRedacted",
+    "PT-MED-054": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med054ConcurrentSnapshotsRemainImmutableAndRequestBound",
     "PT-MED-018": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
     "PT-MED-019": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
     "PT-MED-020": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest#med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
@@ -242,6 +247,11 @@
     "PT-MED-049": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest#med049ConcurrentInspectionsRetainRootOwnership"
   },
   "methods": [
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med050EightSuccessLayoutsPreserveLiteralWireAndEncryptedIdentity",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med054ConcurrentSnapshotsRemainImmutableAndRequestBound",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med052AuthenticatedCorruptionAndRequestMixupsFailClosed",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med053NullKeyAndClockBoundariesRemainRedacted",
+    "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest#med051DefiniteErrorsKeepCodesAndNeverInventDescriptors",
     "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med035MalformedNullAndUnknownRequestsNeverReachQueries",
     "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
     "dev.codex.schubert.nk.api.application.media.MediaRequestTest#med034EightLayoutsHaveIndependentCanonicalFingerprints",
@@ -292,14 +302,16 @@
     "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med039MalformedAndMismatchedRepliesNeverAuthorizeFiles",
     "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med037ThreeRequestsBindAllApprovedSuccessfulDescriptors"
   ],
-  "actual": "All 49 mapped independent assertion sets passed",
+  "actual": "All 54 mapped independent assertion sets passed",
   "inputAndExpected": "001 PT specification and exact testIdMethods at targetCommit: SS333 literal Range intervals/416 and 1MiB cap, literal UTF-8 percent header strings, independently patterned bytes and exact array slices; real PostgreSQL synthetic VIDEO/MUSIC/audio rows and independent UI235 16/8/928/72/136/1312/1024/1808-byte vectors for five lists/menu and three descriptor metadata queries, all approved formats/modes, scoped IDs, bounded counts and immutable/read-only/fault postconditions. SSC028 uses literal three-byte retained inodes, independent Unix attribute maps including 48MB+/N12 maximum/Long.MAX, strict single segments and counted FD close/fault/no-mutation checks. Production is never used to generate expected values.",
   "scope": "Range/header/bounded copy, five menu/list and three descriptor DB metadata queries, shared complete retained segment walk/Unix/size-before-after/scoped-channel, Web descriptor-file adapter and internal response-port delivery of 200/206/416/HEAD/download with 20 immediate permits and request binding. Explicit header maps and exact independently patterned body slices, latch-held 20/21 rejection and all-permit recovery, redacted I/O failures/no second response and 100 independent deliveries passed. This is not a registered/authenticated HTTP endpoint or manifest/hash check. Auth/Inbox/manifest/MQ-to-HTTP connection/full startup/client-abort classification/actual NK CHR remain unimplemented or unconnected. Selected eight Storage methods overlap Scenario's module regression and are not additive to reactor count.",
   "requestIdentity": "SSC-029 all eight UI235 literal request vectors, explicit ordered field names/type-version and independent LP/JCA HMAC; direct dispatch through the same decoded values to all eight real PostgreSQL queries; CanonicalField factory NFC/copy/zero and Scenario existing canonical regressions. Final authentication/Inbox/response capture is still separate.",
   "responseVerification": "SSC-030: manually assembled UI232/235 header/DATA bytes for all seven formats, both success profiles and all error fillers. Original request layout/correlation, constant-time 64-byte context and type/ID/disposition binding, invalid data/length/UTF8/NFC/video fields and 100 concurrent decodes passed. No separate response MAC/key/property exists in the approved protocol; API request HMAC and Web transport/request binding remain distinct responsibilities. Actual API/MQ/HTTP registration is pending.",
   "assetIntegrity": "PG-D-078 / PT-MED-041..049: strict immutable checksum subset, SHA256(abc) literal, seven formats, NFC/512-byte/255-byte bounds, 59627 synthetic entries, malformed UTF8/byte-vs-character regression, exact count/duplicate/hash64-position/IO rejection. Real retained manifests and asset abc files with Unix guards, name replacement, symlink/hardlink/size and before/after/open/read/close failures, native FD ownership/no write/repair and 100 concurrent inspections passed. No real master contents committed. This completes the manifest/file adapter slice, not its startup/API/Inbox registration; full migration metadata and content-hash inventory remain separate.",
+  "frozenReplay": "PG-D-079 / PT-MED-050..054: all eight captured responses compare to manually assembled UI232/235 bytes after independent JCE/AAD decryption, list zero/one/max and seven formats/I-A. Successful replay alone is 0200 with a new header/current context; definite errors preserve code/NONE reference. Authenticated semantic corruption, owner/message/layout/data binding, missing/unknown/closed keys, clock/null and 100 concurrent snapshots reject unsafe results. The codec is caller-owned. Current authentication/Inbox HMAC/DB transaction/file verification/JMS registration remain separate application-stage gates.",
   "relatedBug": [
-    "BUG-042"
+    "BUG-042",
+    "BUG-043"
   ],
   "relatedSsc": [
     "SSC-028",
@@ -308,18 +320,19 @@
   ],
   "crossProgramRegressions": [
     "BUG-040/YKT-036 in 003 manifest",
-    "BUG-042/YKT-037 in logs/BUG-042-YKT-037.md"
+    "BUG-042/YKT-037 in logs/BUG-042-YKT-037.md",
+    "BUG-043/YKT-038 in logs/BUG-043-YKT-038.md"
   ],
   "notRunCountedAsPass": 0,
   "redaction": "JUnit names/timing/counters only; no properties/stdout/stderr or raw logs/paths/credentials/master content.",
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "d61ae22c8d0411e56c19c82a0be0dfee575bd27c03e2445a106595f996841bb2"
+      "sha256": "4c30d49f98372950d16bdc01354b141a18099b6350f0ee006f2df8adf9e3c891"
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "fae917eb89da123e545b227114649be4cfd1b1c64db7fa42923b39bf76ebbadc"
+      "sha256": "bcf6dbee52063919cd0ff460bcdc9f06f2df41abc32aaa7164110e5219019034"
     },
     {
       "path": "coverage/protocol-jacoco.csv",
@@ -327,7 +340,7 @@
     },
     {
       "path": "coverage/protocol-jacoco.xml",
-      "sha256": "eef59e10b2d78a8edb5726932389258def3962c2c48e74ec6e023e054f9600be"
+      "sha256": "eac58b6fca5897af4158bd093d3ed1d2d5a41374f030fd481b097ca2771f9462"
     },
     {
       "path": "coverage/storage-jacoco.csv",
@@ -335,7 +348,7 @@
     },
     {
       "path": "coverage/storage-jacoco.xml",
-      "sha256": "8fbc8bb9ba3c81203cedea9624c294a31ed174391caee416136720e6a775ab45"
+      "sha256": "ac41700fe665ef05571e80c1cade7131438410ae1dce03f9902e3c5e1051d457"
     },
     {
       "path": "coverage/web-jacoco.csv",
@@ -343,11 +356,15 @@
     },
     {
       "path": "coverage/web-jacoco.xml",
-      "sha256": "aa20cfc541d348a61b381b3af808036f612d0e5a9cf048d587e7ddd4f9727069"
+      "sha256": "2b3b3a32b1fbc62d7f685f4c49a9c0ad2881612a48c98a9dbe86ea3c001328ee"
     },
     {
       "path": "logs/BUG-042-YKT-037.md",
       "sha256": "f407b01fe6bda507664284d6478aafade7d29c44e369edd758d96035c659c6b9"
+    },
+    {
+      "path": "logs/BUG-043-YKT-038.md",
+      "sha256": "3eeb4e6805af7482e69297b6f6fd632b49845e37707c1bb77403d0ed6ff69b5d"
     },
     {
       "path": "logs/PT-MED-20260908-01-summary.json",
@@ -386,64 +403,72 @@
       "sha256": "016baa1d60a2ee8fab8e55f4e1665dd8fc2b489899f4566009d69216942693f9"
     },
     {
+      "path": "logs/PT-MED-20260908-10-summary.json",
+      "sha256": "f16727c5bb50baabfe81a4bfd8f51cbd5c0e47438a7e289bf021f68cfc94b42c"
+    },
+    {
       "path": "logs/query-exploration.md",
       "sha256": "20554a0a77e1accfe649f7feec8014c9ee981483b40631cab3d1a4878e2e53ec"
     },
     {
+      "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "7ee1e1ce5d1157f7adf061306183494abb5d04834440cf8fa27d7bec09d3d74f"
+    },
+    {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
-      "sha256": "09f144cebf47b3997108c87eaf2af884fa5915d0845777944ef304079b0fb39f"
+      "sha256": "4b08edb74ef3f18dc54530ba976a414021bebec295522e1987d7bad3f2aa5fc8"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
-      "sha256": "76447f0087172b530cecde0c0c5a77a98ad262c50b070f9e97660ad8224b0137"
+      "sha256": "884259fac2e8295545be2cbf706964a7b16f65418deb0c1452d923fb5237c73b"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
-      "sha256": "d8dd54ad1446a4ed69955e23aec2fae06e160fdf74221c134771cf43963ab5dd"
+      "sha256": "8a02f3a337857b10b0b3a0bf2583a7e5f3afb08833ba4fec84fbe92302a4ec02"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
-      "sha256": "d41d91d452249f360a786eb36ac1ca9265dc41b1175fe0d396c9919ae7da2b36"
+      "sha256": "13ea48059df8cfb689e8fa7fd0e2e3fb141579e94450d34e6e85f5e5133f413b"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
-      "sha256": "bb7459e526c0d32534cfd3edd58f45ad13d3b5f858b5bcf452ca3e5b9f5fbc95"
+      "sha256": "6f0100791926d2e8b94fed7a1b478fbf42596299e5d88de81449803ccd6dc848"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
-      "sha256": "ad992fc1bacc4259f4dac61c5a471a38587daea6ac08fb2cd4fbbcc2582a7fcc"
+      "sha256": "50ddbf0d1794ecac3c1d6450da6cccc10a72901edcd006b22fdd9c56f59c1dd8"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
-      "sha256": "5da8c6517d253ea1338ed13e59fe2bfd6dfad3cdba9ab5608234eaa983354a78"
+      "sha256": "3931ae1318e8c46a3c534e7309da923d43d371afcc52332e52da86ad11993d71"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
-      "sha256": "275ac501639593b7c144c709fdc5ccf1c3b9f29034f866aa296be688024f39c8"
+      "sha256": "a6ffff4f6df3c53dab3fa924adc79c93632a956e9af60630ca9df2bb6d392751"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
-      "sha256": "35094f764dfd966d83a50fb9b044e4bde543cd0aaa26a082ee152f0577068ef5"
+      "sha256": "0e6b80b8e804be40b20047885efaa072b5873e3b9cdde696126f6aebd3104af1"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
-      "sha256": "b93638d3f621fc5dcb28b5fc72caca6f02675ffab4658844892cab84630bc430"
+      "sha256": "4b6f871748a986cd3598ce2a57bfe5bf644da701b2138f4bde283ea477939513"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
-      "sha256": "6c2d96b3f285db8ee7a3aca003330704672e2a723c2881259933239bc757b0d9"
+      "sha256": "fac24d1ca7a478e46254eace37e92a54277039f0b992c623505d57ab2270c812"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
-      "sha256": "097dca539164a1877286b46e50ea66a49319ae1a2c5740c887b7709def3399e9"
+      "sha256": "5379ad976372e9ae7fe697f13baf3097bdb160e622617dfba6fb7866356eaadd"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
-      "sha256": "a79a8d5103e9951529afaad58599ec6890cebd32a3f687637b869710a620fe54"
+      "sha256": "f3b735fa9ca12ffc13e768dca563ab322e13863a0f8de65a74bf4c02a3eb6ac1"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
-      "sha256": "6b9f87db00a664b278ec385c3b10655d3ab0fe9e7008d06d3a989d72604390eb"
+      "sha256": "a022396efdc89e2f2b67538d214e428ff24929e3dd19e484094a0cf6a48713ab"
     }
   ]
 }
