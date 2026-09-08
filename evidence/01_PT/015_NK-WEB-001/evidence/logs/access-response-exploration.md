@@ -12,4 +12,6 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 未認証イベントは既存AUTHORIZATION_DENIEDの理由UNAUTHENTICATED追加。既存6event期待は維持し、PT095へ独立7行目、PT096へactor混入拒否を追加。Sourceへの行為・counter変更に合わせて既存期待を緩和していない。新障害なし。BUG-072/YKT-064の全非回帰は正式runで確認予定。
 
+正式PT-WEB-20260909-08（sourcef8d84a47d79be73436587a4583aa5637933d8ecb、01:37:22～01:41:54 JST）は全755件/全5module coverage4指標100%/静的解析0・7collector成功。Web130method完全一致、BUG-072/YKT-064の全非回帰も成功。環境/command/原本log hash/全counterはmanifest.json。
+
 共通error HTML、runtime logger WARN固定、単一FilterChainProxy/本番bootstrap、API0102 local失効/owner検証・実NK Characterization/IT/STは未完了。

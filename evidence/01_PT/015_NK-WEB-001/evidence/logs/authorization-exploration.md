@@ -14,4 +14,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 修正後の探索02は同command、01:31:51 JST終了exit0、新Web4/Protocol5/Storage16成功、NullAway/format/Enforcer PASS/SpotBugs0。原本/tmp/PT-WEB-authorization-20260909-explore-02.log SHA256 885a993ad9f38726fdcc1878f536bc87c4caf8e48a3c311e892b5e14417e9ee4。Login GET/POST、static/error GET/HEAD、内部ERROR /errorだけ全methodを許可する厳密path×method表へ修正。外部POST/errorと管理URLのERROR再入は匿名拒否、正規エラー描画だけ許可する。全既存Login processing/converterはPOST限定で非該当（PT082～090/118の正式再回帰待ち）。上位正本は変更しない。
 
-Login案内/403 view/監査handler/最終chain/runtime・IT/ST・実NK Characterizationは未実施。
+正式PT-WEB-20260909-08（sourcef8d84a47d79be73436587a4583aa5637933d8ecb、01:37:22～01:41:54 JST）は全755件/全5module coverage4指標100%/静的解析0・7collector成功。全public method/dispatcher・既存Login/CSRF・全非回帰を確認しBUG-072/YKT-064完了。追加のLogin案内/role監査応答はaccess-response-exploration.md。共通error HTML/最終chain実HTTP/runtime・IT/ST・実NK Characterizationは未実施。
