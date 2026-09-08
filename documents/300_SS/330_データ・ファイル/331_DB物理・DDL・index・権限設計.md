@@ -83,6 +83,10 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 `REVOKE ALL ON FUNCTION ... FROM PUBLIC`後、完全signature単位で`schubert_batch`にEXECUTEをgrantする。返却は件数と理由codeだけとし、
 本文・ciphertext・pathを返さない。`batch_runs`記録とchunk transactionは341/332に従い、その他tableの直接DML grantは0とする。
 
+### 3.4 Inbox検査用最小権限（SSC-049/QA-046）
+
+UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。必要なInbox snapshot/参照先の読取りと固定保守functionだけを許可し、任意DML/DDL、他roleへのSET ROLE、Web session/schema、password hashの読取りを許可しない。batchの現行権限は増やさない。詳細signature/列grantは実装前に本書へ追記し、既存migrationは変更せずappend-onlyで反映する。暗号検査部品のtrueだけでSQL DELETEしてはならない。参照・期限・backup・競合保護の検査も必要である。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

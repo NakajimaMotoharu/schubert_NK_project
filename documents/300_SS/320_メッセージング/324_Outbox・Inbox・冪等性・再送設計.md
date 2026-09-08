@@ -244,6 +244,14 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 
 Cleanupは当日backup成功後、run cutoff固定で実行する。Inbox削除後もquestion `(owner,operation_token)`等の業務UKを破壊しない。
 
+### 12.1 削除前検査の責務分割（SSC-049/QA-046）
+
+UIC-006の検査processは、(1) 暗号snapshot・固定長構造、(2) DB owner/result/業務UK参照、(3) 固定run/backup/期限/lockと削除の原子性、を全て満たした行だけ削除対象とする。いずれか未検証なら保持する。通常replayの認証/idle延長や応答送信は起動しない。
+
+第一部品 `InboxResponseInspector.isStructurallyValid(identity, completion)` は副作用を持たず、NKENC1復号、AAD、identity/layout/version、header相関、実byte長、保存completed_atとwire時刻のmillisecond一致、response kind、resultとCOMPLETED/ERRORの対応、全DATA/record/semanticを検証する。結果はbooleanだけで、平文・context・DTOを返さない。不存在snapshot、不正暗号/鍵/metadata/byte/semanticはfalse。呼出しnullは契約違反として拒否しNPEを正常扱いしない。復号/分割bufferはfinally消去する。
+
+このtrueはDB参照の実在・整合、期限到達、削除許可を意味しない。後続のDB参照検査/競合保護/保守function/起動が完了するまでBUG-014は未完了。対応Test IDはPT-DB-INBOX-001～008、PG-D-119。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。

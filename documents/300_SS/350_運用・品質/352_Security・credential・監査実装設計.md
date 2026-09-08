@@ -178,6 +178,10 @@ authentication tag 16 bytes
 
 Operation fingerprintのHMACは324 `NKOP1`を正とし、AES keyとHMAC key、Web session/API inbox/Web logのkeyを共用しない。
 
+### 11.3 Inbox保守検査のcredential境界（SSC-049/QA-046）
+
+UIC-006で承認された非公開検査processだけに、必要なAPI Inbox response/contextのcurrent/previous keyを限定配布する。batch/backup/Webへは配布しない。専用OS identity、外部credential、読取り専用mount/限定DB roleを用い、argv/環境平文/ログ/Gitへ鍵を出さない。unknown key/復号不能/参照不整合は削除許可へ補完しない。保存応答の構造検査はbooleanのみ返し、平文bufferとDATA/record copyを全経路で消去する。DB参照検証・停止/lock条件を別途必須とし、構造検査だけで削除を承認しない。
+
 ## 12. Audit・redaction
 
 | Event | DB audit | 必須field | 除外 |
