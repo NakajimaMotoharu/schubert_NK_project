@@ -10,4 +10,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 
 独立oracleは0..31の合成byteから手書き64hex、全許可長64～128の同一/先頭・中間・末尾・長さ差異の明示bool。正規token同士は129byte固定長＋length byteでMessageDigest.isEqualを呼び、入力診断/比較値を出さない。生成一時bufferは公開CSPRNG出力を通じzeroを観測、比較一時bufferのfinally消去はsource review。Nullable submittedの欠落/不正はfalse、factory nullはfail-fast。Provider途中故障でも固定message/causeなし/suppressed0。100生成uniqueと共有immutable照合を確認。Timing実測をconstant-timeの数学的証明とはしない。
 
-新BUGなし。正式clean verify予定PT-WEB-20260908-05で累積探索coverageを再確定する。これはvalue部品だけで、HTTP全POST/parameter重複/403/JMS未送信・session保存/rotationとの接続は未完了。
+正式PT-WEB-20260908-05、sourcedc3c74e88cef0237b4e9ff8062ea309ca64fc077、20:18:15～20:22:30 JST、exit0。全660件（Protocol80/Storage34/API394/Web111/CHR41）、CSRF4件を含むWeb35件PASS、全5対象moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。新BUGなし、詳細とhashは正式manifest/002/checksums。これはvalue部品だけで、HTTP全POST/parameter重複/403/JMS未送信・session保存/rotationとの接続は未完了。
