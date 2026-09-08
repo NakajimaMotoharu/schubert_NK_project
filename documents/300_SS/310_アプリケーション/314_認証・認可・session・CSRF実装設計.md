@@ -242,6 +242,12 @@ create/find/setはlifecycleへ即時委譲、saveも現在hashを再検査し、
 
 changeSessionIdは既存principalを維持したrotateとして、fresh Cookie/DB UUID/CSRF、SavedRequest/token移管、旧削除＋新作成を短atomic TXで行う。API認証済み新principalを受けるauthenticateと分け、匿名sessionを認証済みにしない。CookieのSecure/HttpOnly/SameSite=Lax/Path=/、URL ID非使用、8h idleはUI226のまま。Mock Servlet＋実DBのfilter PTはHTTP adapter単体であり、全Security chain/画面/起動/実NK CHRとは別gate。
 
+#### 7.2.6 SecurityContext projectionとfixation専用保存（SSC-044）
+
+EncryptedSessionSecurityContextRepositoryは、先行SessionRepositoryFilterの公開SESSION_REPOSITORY_ATTRが設定済みSpringEncryptedSessionRepositoryと同じinstanceであることを検査し、欠落/別repositoryではnative HttpSessionへfallbackしない。永続化は7.2.1/7.2.5の閉principalだけ。request単位のlazy一回loadから、credential/detailなし・ROLE_USER/ROLE_ADMINのどちらか1個だけの標準認証tokenを作る。未知型/属性/権限・未認証tokenのgrantを拒否し、汎用SecurityContext/認証例外を保存しない。
+
+EncryptedSessionAuthenticationStrategyは既存CSRF sessionとAPI検証済み標準認証を必須にし、principal setで既存authenticateの短transactionを1回実行する。新Cookie/UUID/CSRF、SavedRequest/未完了token移管を保持し、標準CsrfAuthenticationStrategyのnull-save/追加rotateを重ねない。DB/key/状態故障は固定SessionAuthenticationException、成功HTTPへ進めない。通常saveContextは永続principalと閉認証projectionの一致検査だけで、追加writeや任意grantをしない。空/anonymous保存は匿名/不在sessionでのみno-op、既存認証を黙って消さず不一致として拒否する。LogoutはAPI revoke/queue後の明示session invalidateを先に行う。復元後も毎業務のAPI最新認証と失効済rowの非再生成を維持する。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
