@@ -102,8 +102,19 @@ def main():
         "adm047ConcurrentSnapshotsNeverShareQueryResults",
     ]
     expected.update({f"PT-ADM-{i:03d}": query_replay + "#" + name for i, name in enumerate(query_replay_names, 44)})
+    query_application = "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest"
+    query_application_names = [
+        "adm048QueriesCommitFrozenResponsesAndFullRetention",
+        "adm049BothStagesRecheckIdentityRoleAndAuditDenials",
+        "adm050DatabaseCryptoAndResourceFailuresRollbackSafely",
+        "adm051ConcurrentRequestsReplayOnlyTheWinningSnapshot",
+        "adm052SavedRowsCannotDisappearOrChangeBetweenStages",
+        "adm053BrokerFailuresReplayOneCommittedQueryResult",
+        "adm054PublicBoundariesAndStageOwnershipAreExplicit",
+    ]
+    expected.update({f"PT-ADM-{i:03d}": query_application + "#" + name for i, name in enumerate(query_application_names, 48)})
     methods, reports = [], {}
-    for classname in (prefix, authentication, commands, requests, replay, application, query_requests, query_replay):
+    for classname in (prefix, authentication, commands, requests, replay, application, query_requests, query_replay, query_application):
         report = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + classname + ".xml")
         suite = ET.parse(report).getroot()
         cases = suite.findall("testcase")
@@ -138,6 +149,7 @@ def main():
         "testIdMethods": expected, "methods": methods,
         "inputAndExpected": "PT-ADM-001..007 / PG-D-081: actual isolated PostgreSQL/Flyway roles and synthetic users, independent UI236 PAGED48/168-byte records/320-byte detail golden arrays. Empty/one/50/51/101 users, stable C/id order, NFC/literal escaped prefix and role/state filters, fixed 50 rows and bounded pages. Explicit UTC Instants/JST strings, disabled/lock and active-session expiry microsecond boundaries, SYSTEM for absent bootstrap actors only, 0/1/2 sessions. SQL postconditions never select credentials. Null/unknown/wire/JDBC/readOnly/resource-close/row aggregate faults and N6-page capacity boundary are independently asserted; one-statement snapshot and 100 concurrent reads under held writer locks leave data and caller connections unchanged.",
         "actual": "All mapped assertion sets passed; no failures/errors/skips/flaky or not-run counted",
+        "queryApplication": "PT-ADM-048..054 / PG-D-089: actual PostgreSQL read-only preflight/query or verified frozen response, then fresh current identity/ADMIN/owner verification and short write Inbox/critical-audit transaction. Connection closes between stages and before wire/JMS. Independent wire and SQL retention completed_at+24h, 0000/0200, persistent0104/9001 and nonpersistent0102/0103; original body/version/expiry survive current User changes. Same-Message query/owner mismatch audits and DLQs, 100 same/different Message and conflicting-query/owner races use the DB winner only. Lost/changed encrypted snapshot or keys fail closed. DB/open/NULL/prepare/close/commit/rollback/audit/clock/UUID/crypto failures include committed-but-unsent retry. Real Artemis send/ACK faults redeliver with deliveryCount2 and one Inbox; exact broker body/properties/queue drain. No global dispatcher, HTTP or startup registration claim.",
         "queryRequestReplay": "PT-ADM-040..047 / SSC035 / PG-D-088: strict USR96/UDT12 decoding, optional NULL LP and original prefix/page HMAC with independent JCE; real PostgreSQL read-only ADMIN query and no SQL mutation. Request-bound page/target validation, frozen 0/1/50-record lists and details, full independent UI232/236 wire/JCE snapshot envelope, initial0000/replay0200, definite UDT0104/USR9001 errors only. Authenticated but inconsistent body/layout/owner/AAD/page/target/time/state, keys, NULL and scope reject. 100 independent canonical and snapshot operations. BUG050 NullAway and BUG051 negative oracle corrected with YKT045/046. Completion metadata is checked here; 24-hour retention belongs to the pending outer Inbox transaction, not this component.",
         "mutationReplay": "PT-ADM-028..032 / PG-D-086 / SSC033: independent hand-built 256+24 byte responses and JCE/Deflater NKENC1 envelope/AAD. Five layouts/seven mutations, create0/update+1/N9 limits/unlock initial0200, frozen USER ref/version and original definite errors. Bound source controls decryption, current request controls fresh response ID/correlation/context/time; success replay0200 only. NULL/closed/USER/owner/cross-request scope, valid-encryption but inconsistent header/body/ref/state/version/time/code/filler, cipher/key/AAD corruption and PROCESSING reject without secrets. 100 concurrent independent operations. Component has no DB/current authentication/transaction/HTTP effects; outer registration remains pending.",
         "scope": "UserQueryRepository search/detail, administrative authentication prelude, definite UserCommandService mutations and frozen replay, connected by UserMutationApplicationService to real PostgreSQL Inbox/HMAC/critical denial and business audit/session revocation plus real JMS send/ACK redelivery. Global layout registration, query processor, HTTP/startup/actual NK Characterization are not completed by this slice. IT/ST remains later server work.",

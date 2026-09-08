@@ -370,7 +370,7 @@ class UserQueryRequestTest {
     assertNull(e.getCause());
   }
 
-  static void check(UserQueryRequest request, AuthenticatedActor actor, List<String> expected)
+  static byte[] check(UserQueryRequest request, AuthenticatedActor actor, List<String> expected)
       throws Exception {
     try (var canonical = request.canonical(actor);
         var keys = UserMutationRequestTest.keys()) {
@@ -409,7 +409,9 @@ class UserQueryRequestTest {
       }
       var mac = Mac.getInstance("HmacSHA256");
       mac.init(new SecretKeySpec(new byte[32], "HmacSHA256"));
-      assertArrayEquals(mac.doFinal(bytes.toByteArray()), keys.calculate(canonical).digest());
+      byte[] independentlyCalculated = mac.doFinal(bytes.toByteArray());
+      assertArrayEquals(independentlyCalculated, keys.calculate(canonical).digest());
+      return independentlyCalculated;
     }
   }
 }
