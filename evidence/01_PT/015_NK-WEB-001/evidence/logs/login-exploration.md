@@ -60,4 +60,4 @@ YKT-055は既存全対象の正式再試験後に完了可。YKT-056はprovider�
 
 ## 正式gate
 
-未実施。次のclean verifyとcollectorでsource commit/日時/終了code/全件結果/coverage/manifest/hashを確定する。API実dispatcher、JMS経由実認証、Spring provider/handler/session保存、現在context検証、画面、実NK CHR、IT/STの完了ではない。
+正式PT-WEB-20260908-10、source208ba474ec6f79c68de1ac3c28a77cc0cb3c1b1c、22:14:01～22:18:27 JST、exit0。全684件（Protocol80/Storage34/API394/Web135/CHR41）、Web59件、新6件を含めfailed/error/skipped0。全5対象module line/method/class/branch各100%、NullAway/Enforcer/format PASS、SpotBugs0。全7collector/manifest/hashを更新。BUG-060～062とYKT-055の再試験完了。YKT-056/SSC-043のproviderは未実装で対応中、先行仕様6d68f35。API実dispatcher、JMS経由実認証、Spring provider/handler/session保存、現在context検証、画面、実NK CHR、IT/STの完了ではない。
