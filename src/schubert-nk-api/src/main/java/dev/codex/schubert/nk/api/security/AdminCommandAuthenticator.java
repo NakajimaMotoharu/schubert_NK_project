@@ -43,6 +43,22 @@ public final class AdminCommandAuthenticator {
       Mutation mutation,
       OptionalLong target,
       Instant now) {
+    AuthenticatedActor actor = verifyIdentity(connection, context, mutation, target, now);
+    new AuthorizationService().requireAdmin(actor);
+    return actor;
+  }
+
+  /**
+   * Latest authenticated identity for caller ADMIN check/critical denial audit, never an ADMIN
+   * grant. All SSC-031 locks and normal context verification still precede this return.
+   * SSC-034/PG-D-087/PT-ADM-034/036/039. Caller owns transaction and must gate Inbox/commands.
+   */
+  public AuthenticatedActor verifyIdentity(
+      Connection connection,
+      AuthenticationContext context,
+      Mutation mutation,
+      OptionalLong target,
+      Instant now) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(mutation, "mutation");
@@ -67,7 +83,6 @@ public final class AdminCommandAuthenticator {
       if (owner(connection, hash, true) != candidate) throw new AuthenticationContextException();
       AuthenticatedActor actor = authentication.verify(connection, context, now);
       require(actor.userId() == candidate);
-      new AuthorizationService().requireAdmin(actor);
       return actor;
     } catch (AuthenticationContextException failure) {
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();

@@ -18,14 +18,7 @@ final class UserAuditWriter {
       UserCommandService.Change change,
       UserCommandMetadata metadata)
       throws SQLException {
-    String action =
-        switch (kind) {
-          case CREATE -> "USER_CREATED";
-          case ENABLE, DISABLE -> "USER_STATUS_CHANGED";
-          case PROMOTE, DEMOTE -> "USER_ROLE_CHANGED";
-          case RESET_PASSWORD -> "USER_PASSWORD_RESET";
-          case UNLOCK -> "USER_UNLOCKED";
-        };
+    String action = action(kind);
     boolean success = change.result().resultCode().usesSuccessProfile();
     var details = new JsonObject();
     details.addProperty("outcome", success ? "SUCCESS" : "DENIED");
@@ -52,6 +45,17 @@ final class UserAuditWriter {
     json.addProperty(
         "locked", state.lockedUntil().map(time -> time.isAfter(metadata.at())).orElse(false));
     return json;
+  }
+
+  /** Shared closed action catalog for business and pre-business token denial audit. PG-D-087. */
+  static String action(Mutation kind) {
+    return switch (kind) {
+      case CREATE -> "USER_CREATED";
+      case ENABLE, DISABLE -> "USER_STATUS_CHANGED";
+      case PROMOTE, DEMOTE -> "USER_ROLE_CHANGED";
+      case RESET_PASSWORD -> "USER_PASSWORD_RESET";
+      case UNLOCK -> "USER_UNLOCKED";
+    };
   }
 
   private static void insert(

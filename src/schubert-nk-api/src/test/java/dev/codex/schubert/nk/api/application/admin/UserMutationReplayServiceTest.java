@@ -557,7 +557,7 @@ final class UserMutationReplayServiceTest {
         time);
   }
 
-  private static byte[] wire(
+  static byte[] wire(
       String layout,
       UUID source,
       UUID response,
