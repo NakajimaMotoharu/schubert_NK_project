@@ -30,8 +30,8 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | `LargeResultReader.readScenario` | descriptor | `List<ScenarioRecord>` | descriptor/path/size/hash/record完全検証、最大10,000件 |
 | `StoragePathPolicy.parseRelative` | root kind、wire relative path | `ValidatedRelativePath` | NFC、segment、suffix、depth、UUID検証 |
 | `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | SSC-021の共有native保持root/inodeでNOFOLLOW segment walk、同一inodeの通常file/nlink等を検証後read |
-| `MediaQueryService.describeAudio/describeVideo/describeMusic` | actor context、media type/logical ID、mode | signed descriptor | API側のrole/DB metadata/manifest検証。311/323のAPI責務名へ統一 |
-| `MediaRangeService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の署名・path・size・MIME再検証、stream。311のWeb責務名へ統一 |
+| `MediaQueryService.describeAudio/describeVideo/describeMusic` | actor context、media type/logical ID、mode | 検証済metadata descriptor | API側のrole/DB metadata/manifest検証。311/323のAPI責務名へ統一 |
+| `MediaRangeService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の要求対応・path・size・MIME再検証、stream。311のWeb責務名へ統一 |
 | `HttpByteRangeParser.parseFirst` | Range header、file size | `Full/Partial/Unsatisfiable` | 最初のrangeだけ解析、1MiB cap |
 | `TransferCleanupService.clean` | run cutoff | `CleanupResult` | app停止/batch lock必須、非follow walk、対象別計数 |
 
@@ -137,13 +137,17 @@ ProbeはCREATE_NEW成功で所有を確認したpartと、公開成功を確認�
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。
 2. APIはIF-009/012/016でlogical ID、media type、inline/download modeを受け、DB metadataとmanifestを参照。
-3. Descriptorにlogical ID、storage relative path、safe file name、byte size、SHA-256、allowlisted MIME、mode、
-   message/correlation IDを入れ、MQ HMAC検証済みresponseとしてWebへ返す。
+3. Descriptor DATAにlogical ID、storage relative path、safe file name、byte size、SHA-256、allowlisted MIME、modeを設定する。
+   Message/correlation IDは共通headerに設定し、承認済みMQ経路でWebへ返す。
 4. Webはdescriptorと要求URLのlogical ID/type/modeを再照合、secure open後のsize、必要時hashを検証。
 5. Authorization済みchannelだけをstreamし、pathはBrowser/HTML/HTTP header/logへ出さない。
 
 DescriptorはHTTP session cacheの権限正本にせず、各GETでAPIへ照会する。ID不存在・非scopeは404、
 API/MQ/file integrity障害は503。内部理由をBrowserへ区別表示しない。
+
+SSC-030: 旧記載のsigned/署名/MQ HMAC検証済responseは要求Inbox fingerprintと応答検証の混同であり、独立した応答MAC/signatureを意味しない。RD MQ-020、UI231 §5/10、232 header、235 MEDIA1024、237 §8を正本とする。Operation HMAC keyはSS343どおりAPIだけが保持し、Webへ配布しない。Wire/property/credentialへ未定義の署名field/keyを追加しない。APIの全Request HMAC・暗号化snapshotの完全性検査はSS324の既存契約を維持する。
+
+Webはloopback Brokerの認証・Address別role（reply送信はAPI）、JMS/body属性一致と共通codec検証、待機correlation/deadlineを既存MQ層で保証する。その上でMediaResponseDecoderが元の3 descriptor要求を検証し、対応response layout、request Message IDへのcorrelation、同一認証context（constant-time比較）、全body長・result profile、成功時のtype/logical ID/disposition・path/MIMEを再照合する。Error profileはdescriptorを生成せず元result codeを維持する。不一致はfileを開かず503相当の安全な検証失敗とする。これらは各GETのAPI認証/manifest確認、Web物理検証・起動権限の代替ではない。
 
 MEDIA1024の許可MIMEとstorage file拡張子は次の完全一致allowlistとする。大文字小文字や別名を推測して受理せず、DB/manifest、descriptor、
 拡張子の組合せが不一致なら配信しない。これはSSC-004により、UI 221/223/235/237の現行互換規則を実装可能な値へ具体化したものである。
