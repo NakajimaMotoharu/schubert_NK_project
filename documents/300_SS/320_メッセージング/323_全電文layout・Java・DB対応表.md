@@ -203,6 +203,12 @@ Passwordは操作scope内だけの所有char bufferに切り離す。業務comma
 
 BUG-048/YKT-043の境界明確化: 有効UCR wireのUsernameはUI236 §4.1のASCII allowlistに従い、先頭spaceやslashを許可しない。原値/keyの区別は`New`/`NEW`など有効なcase差で検証する。NFC・byte幅・文字/Password長等のwire semantic不正は既存Protocolの恒久拒否規則を維持する。Web/formと内部commandの防御validationをwireへそのまま持ち込まない。DB依存のUPW target username/password一致はwireだけで判定不能なのでcommand0100、Username重複は0105（UI236 §4.2）。この区別は既存外部仕様/codecを変更するものではない。PG-D-084/PT-ADM-024～027で独立LP/JCE-HMAC/手組byte/実PG dispatch/negative/100独立操作を検証し、外側replay/JMS/HTTPは別gateとして継続する。
 
+### 9.4 User照会2layoutのNKOP1 mapping（SSC-035）
+
+Ownerは現在認証actor user IDの十進、version001、targetは`REQUEST:<layout-id>`。USRはusernamePrefix/X1、role/X1、state/X1、page/N1、pageSize/N1の順、UDTはuserId/N1。X1はdecodeしたNFC UTF-8原値、N1はpadding/signなし十進。USRのoptional3項目はwire全spaceの欠落をNULL LP（FFFFFFFF）として表す。検索repositoryのtrim/lowercaseやページ最終補正をHMACへ先取りせず、受信した有効値そのものを拘束する。
+
+Message ID/context/時刻/reserved/paddingをfieldへ含めず、operation tokenは参照layoutなので持たない。Strict wireのlayout/version/Q/S/固定長/record0/semanticを通過した同じtyped値をread-only ADMIN queryへ渡す。canonicalはcallerがcloseし、request自体を認証・query実行許可にしない。UDT responseは要求target IDと一致、USR responseは固定50件page-size/最終補正/total/page/record件数の整合を確認する。Snapshotは当該query時点の結果であり、replayに現在DBの内容/版を混ぜない。PG-D-088/PT-ADM-040～047。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
