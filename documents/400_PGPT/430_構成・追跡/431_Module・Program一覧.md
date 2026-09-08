@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+最新: 正式`PT-SCN-20260908-20`、source `e9d89e5a339320cc57dd7f50b9bb40810edd2a43`、dev-scenario、2026-09-08 11:02:42～11:05:27 JST。全479件（Protocol79/Storage26/API275/Web58/CHR41）、Scenario関連136/Auth85/coordinator11/置換3（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 NK-MSG-002のPT-IDEM-SR01～SR03でrow lock・旧暗号一致・2列限定置換/他17列不変を確認。NK-SCN-001の最終段階serviceを次に接続する。確定5/20=25%、Program残件とQA-045承認依存は継続。
+
 ## 1. 管理規則
 
 Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`PT-AUTH-*`等）をprefixとしてProgram内で欠番なく採番する。Class/method、resource、DDL、設定、test、evidenceをProgram IDで束ね、RD要件ID・UI文書・SS文書へforward/reverse traceする。正式module名はSS 311を正とする。
