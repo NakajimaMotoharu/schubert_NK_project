@@ -209,6 +209,26 @@ Ownerは現在認証actor user IDの十進、version001、targetは`REQUEST:<lay
 
 Message ID/context/時刻/reserved/paddingをfieldへ含めず、operation tokenは参照layoutなので持たない。Strict wireのlayout/version/Q/S/固定長/record0/semanticを通過した同じtyped値をread-only ADMIN queryへ渡す。canonicalはcallerがcloseし、request自体を認証・query実行許可にしない。UDT responseは要求target IDと一致、USR responseは固定50件page-size/最終補正/total/page/record件数の整合を確認する。Snapshotは当該query時点の結果であり、replayに現在DBの内容/版を混ぜない。PG-D-088/PT-ADM-040～047。
 
+### 9.5 Log検索要求のNKOP1 mapping（SSC-037）
+
+LGSREQ01は一度だけstrict decodeし、同じ不変値をcanonicalとread-only queryへ渡す。ownerは現在認証したactorのUser ID十進表記、versionは`001`、targetは`REQUEST:LGSREQ01`。fieldの順序・ASCII名・型は次に固定する。
+
+| 順序 | field名 | type-version | 値 |
+|---|---|---|---|
+| 1 | keyword | X1 | NFC UTF-8原値 |
+| 2 | logType | X1 | wire enum値 |
+| 3 | action | X1 | NFC UTF-8原値 |
+| 4 | path | X1 | NFC UTF-8原値 |
+| 5 | level | X1 | wire enum値 |
+| 6 | fromAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |
+| 7 | toAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |
+| 8 | page | N1 | 要求page十進表記 |
+| 9 | pageSize | N1 | 要求pageSize十進表記（100） |
+
+先頭7 optional fieldの欠落はNULL LP（FFFFFFFF）とし、空文字との同一視、検索用trim、実効page補正、暗黙日時範囲をcanonicalへ先取りしない。header ID/context/sentAt/reserved/paddingはcanonicalへ含めない。operation tokenはない。T1はwireのms精度を維持し、default timezoneや現在時刻へ依存しない。
+
+LGSRSP01保存結果はrequest/owner/layout/versionへ拘束した暗号化全電文とする。初回0000はCOMPLETED/NONE、確定9001だけERROR/NONE。保存時headerはms、completed_atはμs、retentionは後段Inboxが完了時刻から24時間を所有する。再送成功だけ0200へ変更し、保存record・9001は不変、応答ID/context/correlation/timeは現在要求から再構成する。現在ADMIN認証、HMAC、transaction、JMSは後段application責務であり、このvalue/replay部品だけで認可済みとみなさない。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
