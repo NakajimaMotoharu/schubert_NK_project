@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+最新確定: 正式PT-ADM-20260908-02、source c828f77ec11b1b0727724050323700c19b04dc76、dev-admin、2026-09-08 15:13:34～15:16:56 JST。全561件（Protocol80/Storage34/API330/Web76/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Admin13、Media61、Scenario151/Auth91等は重複する内数。SSC-031の管理認証prelude・実相互target/role再検証/100並行・全faultを追加PASS。SSC-031はUser command/Inbox接続まで対応中。確定Program5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。User更新本体・HTTP/起動/実NK CHRと未完了Program、QA-045承認依存は継続。以下は履歴。
+
 最新確定: 正式PT-ADM-20260908-01、source 9cbdfa1ae9dfda67557f48405c55a6a019294b71、dev-admin、2026-09-08 14:58:00～15:01:23 JST。全555件（Protocol80/Storage34/API324/Web76/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Admin照会7、Media61、Scenario151/Auth85等は重複する内数。User一覧/詳細・独立wire/実PG権限/NULL/時刻/容量・close/100並行をPASS。User更新接続前にSSC-031の認証/target lock順を先行補足し、PT-ADM-008～013は未実施。確定Program5/20=25%（件数比、工数換算なし）、明確な行き詰まり0件。HTTP/起動/実NK CHRと各未完了Program、QA-045承認依存は継続。以下は履歴。
 
 最新確定: 正式PT-MED-20260908-11、source 34ba78f138fd1e1db0cca48501f9b787ff4c526e、dev-media、2026-09-08（開始終了日時はmanifest）。全548件（Protocol80/Storage34/API317/Web76/CHR41）、failed/error/skipped0、5対象module全line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。Media61件（他Programと重複する内数）。8queryの認証/Inbox→DB外の実file→最新認証/確定→実JMS送信・ACK、100同一Message再送と障害回復を追加PASS。BUG-044/YKT-039の時刻oracle再試験完了。Web session/security・HTTP/画面/起動登録/実NK CHRは残件。確定5/20=25%（Program件数比、工数換算なし）、明確な行き詰まり0件。SS362順でUser管理APIのPG/PTへ進む。以下は履歴。
