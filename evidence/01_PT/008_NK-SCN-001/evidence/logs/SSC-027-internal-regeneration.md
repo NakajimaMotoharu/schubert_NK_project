@@ -13,3 +13,5 @@
 - Resource宣言をdate生成箇所へまとめ、root検査失敗とdate/entry不在を別の所有scopeにした。Coverage除外、NULL resource捏造、到達不能扱いは追加しない。
 
 対象範囲の探索は18関連method成功（既存delivery3、snapshot6、guard3、regenerator3、inspector3）。正式source commit・時刻・環境・command・全reactor結果・coverage・sanitized JUnit/hashは次の正式runのmanifest/002実行結果へ記録する。秘密情報/raw body/DB dump/実masterは本証跡へ保存しない。
+
+正式再試験: 正式`PT-SCN-20260908-19`、source `e46555c4dbfa5449e06f4c871b2aaa7fc4ec493a`、dev-scenario、2026-09-08 10:40:52～10:43:33 JST。全476件（Protocol79/Storage26/API272/Web58/CHR41）、Scenario関連133/Auth85/coordinator11（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 追加10methodはmanifestのtestIdMethodsへ一意対応。全新規/変更classのline/method/class/branch100%、除外追加0。Source e46555cを固定したclean verifyであり、探索失敗/過去report/未接続stageを合格へ加算していない。SSC-027はDB置換SQL/段階service/実writer接続・startup強制待ちとして対応中を維持する。
