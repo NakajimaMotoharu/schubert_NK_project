@@ -146,6 +146,14 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 python3 tools/qual
 
 libc symbol署名とABIは固定し、openatのvariadic境界とerrno captureを明示する。本機PTはLinux amd64で実施し、Linux aarch64は同定数の対象ABIだが実行適合は配備機のreadiness/ITで要確認。OS/CPU/symbol不一致は停止し、非atomic・上書きrenameへfallbackしない。再現は既定root clean verify、合成fixture以外を操作しない。
 
+### 5.5 Web framework選定調査（2026-09-08、導入前）
+
+[Spring Boot公式system requirements](https://docs.spring.io/spring-boot/system-requirements.html)で正式4.1.1のJava17～26/Maven3.6.3以上を確認し、本機Java25/Maven3.9.12は範囲内。[公式Maven Central BOM](https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/4.1.1/spring-boot-dependencies-4.1.1.pom)をwget標準出力で確認し、Framework7.0.9/Security7.1.1/Session4.1.1/Thymeleaf3.1.5.RELEASE/Tomcat11.0.24。既存APIのFramework/Security固定versionと一致する。まだWeb framework dependency導入・起動確認済みとはしない。BOM導入時は既存JUnit/Artemis/Netty等のversionを無意識に変更しない。
+
+[Spring Session公式API説明](https://docs.spring.io/spring-session/reference/api.html)のcustom SessionRepository＋SessionRepositoryFilter/HttpSession接続を参考にし、標準Jdbc repository/Java serializationは採用しない。公式ページからの4.1.1 Javadoc linkは404のため、必要なsignatureはMaven release source jarで確認する方針。本機curlコマンド未導入だがwgetが利用でき、調査継続可能。環境blocker/高推論再走対象ではない。
+
+Session属性JSONにはAPI側で既に固定導入済みのGson2.14.0をWebへ追加する予定。streaming Strictness.STRICT/型・重複key・nesting/byte境界を独立PTする。WebSessionId/SavedRequestTargetの初回8PTはJDKだけで実施し、framework配線完了と混同しない。導入時のartifact hash/依存tree・commandは後続記録へ追加する。
+
 ## 6. 導入予定・工程内service
 
 Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`dpkg-query -W libc6`）、runtime `glibc 2.43`（`getconf GNU_LIBC_VERSION`）。取得元は本機Ubuntu配布packageで、本工程によるlibc置換・独自共有library導入は行っていない。O_PATH/procfs inode属性とread channel再openも同runtimeで合成PTを実施する。配備先version/FS/systemd条件の確認はITS-H-008。

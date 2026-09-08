@@ -156,6 +156,24 @@ Spring Sessionの汎用Java serializationは使用せず、version付きJSON all
 Password、質問/回答本文、検索結果、固定長body、DB rowをsessionへ保存しない。Envelopeは`formatVersion`、`keyVersion`、12 byte nonce、
 ciphertext/tagを保持し、AADはsession ID hash＋created_at。復号後の未知field/type/上限超過はdeny closedでsession失効。
 
+#### 7.2.1 保存JSON version 1（SSC-038）
+
+UTF-8 JSON objectとし、`formatVersion`（数値の整数表記1）と`operationTokens`（配列、0～10件）を必須にする。その他の許可keyは下表だけ。任意Spring Security/Session objectやclass名をJSONへ保存しない。Encoderの順序はformatVersion、認証4field、csrfToken、savedRequest、operationTokens。Decoderはkey順序/通常JSON whitespaceを許可するが、重複key（nested含む）、unknown key、JSON null、型違い、末尾別document、不正UTF-8/BOMを拒否する。
+
+| key | JSON型 | 欠落・制約 |
+|---|---|---|
+| username | String | 以下4項目が全部欠落なら匿名session。存在時NFC/1～64 UTF-8 byte、control/不正Unicode/末尾ASCII space不可 |
+| role | String | 認証4項目all-or-none、USER/ADMIN |
+| authenticationContext | String | 認証4項目all-or-none、64 lowercase hex |
+| loginAt | String | 認証4項目all-or-none、Instantのcanonical UTC ISO表記。現在権限やexpiry判断は外側責務 |
+| csrfToken | String | 未発行は欠落、存在時64～128 ASCII base64url文字。標準発行は32 random byteの64 hexで満たす |
+| savedRequest | String | 未保存は欠落、同一originの安全なGET path/query合計2048 UTF-8 byte。PG-D-093 value検証＋後段route allowlist |
+| operationTokens | Array of Object | 各要素はpurpose/token/issuedAtだけを全件必須。purposeはUCRREQ01/USTREQ01/URLREQ01/UPWREQ01/ULKREQ01/QSBREQ01/NTCREQ01/QDLREQ01、tokenはcanonical UUID、issuedAtはcanonical UTC Instant。最大10件、同用途複数可、同UUID重複不可。順序を保持 |
+
+未認証sessionにもLogin前CSRFとsafe SavedRequestを保存できる。認証4項目の部分存在は不正とし、role/contextだけの偽principalを作らない。Cookie ID、password、request body、検索結果、tokenに対応する入力本文は保存しない。last_accessed_at/expiry/versionは331のrow metadataを正とし、このJSONへ二重保存しない。
+
+Plaintextは16KiB以下・JSON nesting最大3（root→array→token object）とする。この内部上限は許可field全最大値を包含することをPTで証明し、上位input上限を狭めない。復号/schema不正は外側repositoryが失効させる。平文codec部品はDB保存・認証・CSRF照合を行わず、永続化は必ず352のNKENC1/AES-GCM、session ID hash＋created_atに結合したAADを通す。
+
 ### 7.3 Lifecycle
 
 | Event | Web session | API session |
