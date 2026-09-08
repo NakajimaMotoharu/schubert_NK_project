@@ -27,4 +27,4 @@ USER/ADMIN・username/context/loginAt・権限1個・credential/detailなしを�
 
 ## 正式gate
 
-探索累積coverageでは確定しない。次のclean verify全reactor結果をmanifestとここへ記録する。
+正式PT-WEB-20260908-12、sourcec807a3838f983056015f1d92ab063731dcd89a37、22:59:37～23:04:06 JST、exit0。全700件（Protocol80/Storage34/API394/Web151/CHR41）、Web75件、新8件を含めfailed/error/skipped0。全5対象module line/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。全7collector/manifest/hash更新、SSC-044当該範囲完了。次のRequestCache PT076～081は未実行で本gateに含めない。最終form/handler/Logout/起動/実NK CHR、IT/STは未完了。
