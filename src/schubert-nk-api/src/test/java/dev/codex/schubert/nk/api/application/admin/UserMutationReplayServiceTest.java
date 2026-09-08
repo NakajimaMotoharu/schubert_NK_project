@@ -614,8 +614,8 @@ final class UserMutationReplayServiceTest {
     return bytes.toByteArray();
   }
 
-  private static EncryptedResponseSnapshot encrypt(
-      byte[] plaintext, UUID source, long owner, String layout) throws Exception {
+  static EncryptedResponseSnapshot encrypt(byte[] plaintext, UUID source, long owner, String layout)
+      throws Exception {
     var output = new ByteArrayOutputStream();
     var deflater = new Deflater(3);
     try (var stream = new DeflaterOutputStream(output, deflater)) {
@@ -644,8 +644,7 @@ final class UserMutationReplayServiceTest {
             .array());
   }
 
-  private static byte[] decrypt(InboxCompletion completion, UUID source, long owner)
-      throws Exception {
+  static byte[] decrypt(InboxCompletion completion, UUID source, long owner) throws Exception {
     byte[] stored = completion.responseSnapshot().orElseThrow().ciphertext();
     assertArrayEquals(
         "NKENC1".getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(stored, 0, 6));
