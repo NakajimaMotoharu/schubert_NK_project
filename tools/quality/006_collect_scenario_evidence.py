@@ -16,7 +16,7 @@ def main():
     parser.add_argument("run_id")
     args = parser.parse_args()
     run = args.run_id
-    if not run.startswith("PT-SCN-") or not all(c.isalnum() or c == "-" for c in run):
+    if not run.startswith(("PT-SCN-", "PT-MED-")) or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
     evidence = repo / "evidence/01_PT/008_NK-SCN-001/evidence"
