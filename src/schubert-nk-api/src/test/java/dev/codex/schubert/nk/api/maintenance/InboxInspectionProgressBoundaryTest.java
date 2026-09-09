@@ -26,8 +26,8 @@ final class InboxInspectionProgressBoundaryTest {
   private static final String PURGE = "schubert.maintenance_cleanup_inbox_progress";
   private static final List<String> VERSIONS =
       List.of(
-          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-          "013");
+          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
+          "014");
 
   @BeforeAll
   static void start() throws Exception {
@@ -48,7 +48,10 @@ final class InboxInspectionProgressBoundaryTest {
     for (String table : List.of(TABLE, "schubert.request_inbox", "schubert.batch_runs"))
       sql("delete from " + table);
     sql(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01') on conflict(id) do nothing");
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01')"
+            + " on conflict(id) do nothing");
     backup("BACKUP_DB");
     backup("BACKUP_CONFIG");
   }
@@ -98,7 +101,9 @@ final class InboxInspectionProgressBoundaryTest {
               + "'");
       rejects(c, "55000", () -> record(c, null, 0L, ONE, "PROTECTED", xact(c)));
       sql(
-          "update schubert.request_inbox set processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null where message_id='"
+          "update schubert.request_inbox set"
+              + " processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null"
+              + " where message_id='"
               + ONE
               + "'");
       rejects(c, "55000", () -> record(c, null, 0L, ONE, "PROTECTED", xact(c)));
@@ -284,7 +289,8 @@ final class InboxInspectionProgressBoundaryTest {
           id == 103 ? null : edge.plusNanos(id == 101 ? 0 : id == 102 ? 1000 : -1000));
     progress(RUN, edge.minusNanos(1000));
     sql(
-        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status) values('"
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
+            + " values('"
             + new UUID(0, 104)
             + "','2025-01-01','INSPECT',1,'2025-01-01','RUNNING'),('"
             + new UUID(0, 105)
@@ -414,11 +420,16 @@ final class InboxInspectionProgressBoundaryTest {
     assertEquals(
         String.join(",", VERSIONS),
         scalar(
-            "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where success and version is not null"));
+            "select string_agg(version,',' order by installed_rank) from"
+                + " schubert_meta.flyway_schema_history where success and version is not null"));
     assertEquals(
-        "149|23|30|22|1",
+        "154|23|30|23|1",
         scalar(
-            "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||count(*) filter(where contype='u')||'|'||count(*) filter(where contype='p')||'|'||count(*) filter(where contype='t') from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname in ('schubert','schubert_web_session')"));
+            "select count(*) filter(where contype='c')||'|'||count(*) filter(where"
+                + " contype='f')||'|'||count(*) filter(where contype='u')||'|'||count(*)"
+                + " filter(where contype='p')||'|'||count(*) filter(where contype='t') from"
+                + " pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname in"
+                + " ('schubert','schubert_web_session')"));
     Path migrations =
         Path.of(System.getProperty("nk.pt.repository"))
             .resolve("src/schubert-nk-api/src/main/resources/db/migration");
@@ -472,7 +483,8 @@ final class InboxInspectionProgressBoundaryTest {
   private static Progress open(Connection c, UUID run, String cutoff) throws SQLException {
     try (var s =
         c.prepareStatement(
-            "select after_message_id,inspected_count,deleted_count,protected_count,completed_at from "
+            "select after_message_id,inspected_count,deleted_count,protected_count,completed_at"
+                + " from "
                 + OPEN
                 + "(?,?::timestamptz)")) {
       s.setObject(1, run);
@@ -499,7 +511,8 @@ final class InboxInspectionProgressBoundaryTest {
       throws SQLException {
     try (var s =
         c.prepareStatement(
-            "select after_message_id,inspected_count,deleted_count,protected_count,completed_at from "
+            "select after_message_id,inspected_count,deleted_count,protected_count,completed_at"
+                + " from "
                 + RECORD
                 + "(?,?::timestamptz,?,?,?,?,?)")) {
       s.setObject(1, run);
@@ -597,7 +610,9 @@ final class InboxInspectionProgressBoundaryTest {
 
   private static void backup(String step) throws SQLException {
     sql(
-        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values('"
+        "insert into"
+            + " schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
+            + " values('"
             + RUN
             + "','2026-09-17','"
             + step
@@ -606,7 +621,9 @@ final class InboxInspectionProgressBoundaryTest {
 
   private static void inbox(UUID id) throws SQLException {
     sql(
-        "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,owner_user_id,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at) values('"
+        "insert into"
+            + " schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,owner_user_id,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at)"
+            + " values('"
             + id
             + "','"
             + id

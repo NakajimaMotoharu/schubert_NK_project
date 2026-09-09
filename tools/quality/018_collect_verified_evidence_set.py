@@ -28,6 +28,7 @@ NESTED = (
     ("--credential-access", "credential-access"), ("--inode-security", "inode-security"),
     ("--credential-loader", "credential-loader"),
     ("--inspector-process", "inspector-process"),
+    ("--log-progress", "log-cleanup-progress"),
 )
 SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
     "004_NK-DAT-001/evidence/" + p for _, p in NESTED)

@@ -58,8 +58,8 @@ final class DatabaseMigrationTest {
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS =
       List.of(
-          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-          "013");
+          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
+          "014");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -75,6 +75,7 @@ final class DatabaseMigrationTest {
           "maintenance_cleanup_sessions", 1000,
           "maintenance_cleanup_message_stores", 1000,
           "maintenance_cleanup_inbox_progress", 1000,
+          "maintenance_cleanup_log_progress", 1000,
           "maintenance_cleanup_logs", 10000,
           "maintenance_cleanup_batch_runs", 1000);
   private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
@@ -222,7 +223,7 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
   void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
     assertEquals(
-        "149|23|30|22|1",
+        "154|23|30|23|1",
         queryString(
             ADMIN,
             "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
@@ -1068,6 +1069,7 @@ final class DatabaseMigrationTest {
             "migration/V011__batch_outbox_only_cleanup.sql",
             "migration/V012__durable_inbox_inspection_progress.sql",
             "migration/V013__cleanup_backup_and_retention_guards.sql",
+            "migration/V014__durable_log_cleanup_progress.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1579,6 +1581,7 @@ final class DatabaseMigrationTest {
         "schubert.batch_runs",
         "schubert.inbox_inspection_progress",
         "schubert_web_session.web_http_sessions",
+        "schubert.log_cleanup_progress",
         "schubert_web_session.pending_context_revocations",
         "schubert_web_session.web_log_outbox");
   }
@@ -1639,6 +1642,7 @@ final class DatabaseMigrationTest {
         "ix_batch_runs_run_step",
         "ix_batch_runs_status_started",
         "ix_inbox_inspection_progress_completed",
+        "ix_log_cleanup_progress_completed",
         "ix_web_http_sessions_expires_at",
         "ix_pending_context_revocations_due",
         "ix_pending_context_revocations_expires",
@@ -1723,6 +1727,10 @@ final class DatabaseMigrationTest {
         "schubert.inbox_inspection_progress",
         set(
             "run_id cutoff after_message_id inspected_count deleted_count protected_count completed_at"));
+    columns.put(
+        "schubert.log_cleanup_progress",
+        set(
+            "run_id cutoff after_logged_at after_id target_count deleted_count skipped_count completed_at"));
     columns.put(
         "schubert_web_session.web_http_sessions",
         set(

@@ -19,7 +19,10 @@ V014/log_cleanup_progress・maintenance_cleanup_logs/maintenance_read_log_cleanu
 ## 2. 既存oracleの修正範囲
 
 PT095は1回目4/3/1後の2回目を0/0/0/OKとし、保全行7は残る。従来の1/0/1はBUG-104の再計上そのもの。rollback(savepoint)後の初回limit2=2/2/0と旧V006保持違反反例は維持。
-DB011の同種反復期待だけを対応変更し、旧全table/constraint/migration期待値は上記SS追加分へ更新。入力fixtureを新table初期状態へresetする。Sourceからexpected inventoryを生成しない。
+旧全table/constraint/migration期待値は上記SS追加分へ更新する。DB011の初回3/2/1は維持する。入力fixtureを新table初期状態へresetする。Sourceからexpected inventoryを生成しない。
+
+BUG-106/107・YKT-094: PT093のrowlockはSSC-051に従い0/0/0/LOCK_BUSY・進捗0・log2行不変、解除後の削除は維持。PT071の設定破壊は承認8関数のうち1件が不適合となる7を期待する。旧7関数/6期待は履歴以外で用いない。
+BUG-108/YKT-095: PT158の90日同値は`2026-06-19 00:00:00+00`で固定し、UTC/Asia-Tokyo/America-New-Yorkの3設定で全mutationを再試験。失敗時は秘密を含まない公開mutation名を表示する。閾値から離れた日付fixtureは順序/hold判定用であり同値境界ではない。
 
 ## 3. 実行・証跡
 

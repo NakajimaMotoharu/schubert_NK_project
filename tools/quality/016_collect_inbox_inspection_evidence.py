@@ -48,8 +48,9 @@ def main():
     selection.add_argument("--inode-security", action="store_true")
     selection.add_argument("--credential-loader", action="store_true")
     selection.add_argument("--inspector-process", action="store_true")
+    selection.add_argument("--log-progress", action="store_true")
     args = parser.parse_args()
-    args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety
+    args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety or args.log_progress
     run = args.run_id
     if not re.fullmatch(r"PT-(ADM|WEB|SCN|MED)-[A-Za-z0-9-]+", run):
         raise SystemExit("invalid run ID")
@@ -93,6 +94,8 @@ def main():
         subject = "InspectorCredentialLoader"
     if args.inspector_process:
         subject = "InspectorProcess"
+    if args.log_progress:
+        subject = "LogCleanupProgressBoundary"
     package = "dev.codex.schubert.nk.storage." if args.inode_security else "dev.codex.schubert.nk.api.maintenance."
     if args.credential_loader:
         package = "dev.codex.schubert.nk.api.file."
@@ -194,6 +197,11 @@ def main():
                  "timeoutsAndInterruptionCloseKeys", "databaseFailureAndResume",
                  "singleUseAndConcurrentContenders", "constructorAndSnapshotContracts",
                  "ownedCopiesAndMaterialLifetimes", "publicLoaderFailureAndRedaction"]
+    if args.log_progress:
+        names = ["heldPrefixCannotStarveLaterLogs", "cursorOrderCutoffAndReplay",
+                 "deletionAndProgressAreAtomic", "locksNeverSkipUnseenRows",
+                 "gatesRolesAndClosedReadProjection", "progressConstraintsAndFailures",
+                 "completedProgressRetention", "appendOnlyInventoryAndCrossCleanup"]
     if (len(cases) != len(names) or int(suite.get("tests", "0")) != len(names)
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or {c.get("name") for c in cases} != set(names)
@@ -261,6 +269,8 @@ def main():
         folder = "credential-loader"
     if args.inspector_process:
         folder = "inspector-process"
+    if args.log_progress:
+        folder = "log-cleanup-progress"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -285,7 +295,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 141 if args.inspector_process else 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 153 if args.log_progress else 141 if args.inspector_process else 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -391,14 +401,14 @@ def main():
         manifest["scopeResult"] = "PASS_CLEANUP_BACKUP_AND_RETENTION_SQL_BOUNDARIES"
         manifest["related"] = ["PG-D-129", "SSC-050", "BUG-092", "BUG-093", "YKT-083", "YKT-084", "BUG-014", "YKT-012"]
         manifest["fixture"] = "Isolated PostgreSQL 18.6, real roles and locks, literal public timestamps/IDs and rollback-only historical V006 definitions; no deployed data or credentials."
-        manifest["oracle"] = "025/026: all7 backup/finite/limit/role gates, exact snapshot race and locks; literal90-day and completion400-day microsecond boundaries, hold/investigating/current-run protection; rollback/exception/legacy counterexamples; non-regression notification/question/session conditions. No production expected generation."
+        manifest["oracle"] = "025/026: all8 backup/finite/limit/role gates after SSC-051, exact snapshot race and locks; log NOWAIT does not skip unseen rows; literal90-day and completion400-day microsecond boundaries, hold/investigating/current-run protection; rollback/exception/legacy counterexamples; non-regression notification/question/session conditions. No production expected generation."
         manifest["coverage"] = {"kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
-                                "proof": "026 maps the7 shared gates and5 replaced cleanup SQL branch/WHERE/null/retention/role conditions to PT089..096; full Java gate remains separately enforced.",
+                                "proof": "026 maps the8 shared gates and5 replaced cleanup SQL branch/WHERE/null/retention/role conditions to PT089..096; new log cursor details map separately to039/PT153..160. Full Java gate remains separately enforced.",
                                 "functions": ["schubert.maintenance_cleanup_" + name + "(uuid,timestamptz,integer)" for name in
-                                              ["notifications", "questions", "sessions", "logs", "batch_runs", "message_stores", "inbox_progress"]],
+                                              ["notifications", "questions", "sessions", "logs", "batch_runs", "message_stores", "inbox_progress", "log_progress"]],
                                 "roles": ["schubert_batch"]}
         manifest["sqlSources"] = [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
-                                  for p in sorted((repo / "src/schubert-nk-api/src/main/resources/db/migration").glob("V01[0-3]__*.sql"))]
+                                  for p in sorted((repo / "src/schubert-nk-api/src/main/resources/db/migration").glob("V01[0-4]__*.sql"))]
     if args.run_executor:
         manifest["scopeResult"] = "PASS_BOUNDED_INSPECTION_RUN_EXECUTOR_ONLY"
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-130", "BUG-014", "YKT-012"]
@@ -437,6 +447,18 @@ def main():
     if args.credential_access or args.inode_security or args.credential_loader or args.inspector_process:
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")} for cls in classes}
+    if args.log_progress:
+        manifest["scopeResult"] = "PASS_DURABLE_HELD_LOG_SCAN_SQL_ONLY"
+        manifest["related"] = ["SSC-051", "PG-D-136", "BUG-104", "YKT-092", "BUG-105", "YKT-093", "BUG-106", "BUG-107", "BUG-108", "YKT-094", "YKT-095", "BUG-014", "YKT-012"]
+        manifest["fixture"] = "Isolated PostgreSQL18.6 real restricted roles; public timestamps/IDs/hold markers; rollback-only historicalV013 counterexample and independent SQL afterconditions. No business log bodies or credentials saved."
+        manifest["oracle"] = "039/040 PT153..160: held prefix progresses2/0/2 then1/1/0 thenEND with cumulative3/1/2 once; timestamp/id order and90-day/hold boundary, rollback/savepoint/reconnection/overflow atomicity, NOWAIT never passes an unseen locked row and100 concurrent calls do not double count; all8 cleanup gates, closed4-column cumulative projection,5CHECK/8column and least grants,400-day completed/current/investigation/lock preservation, V001..013 frozen inventory. No parent batch/OS/backup-file success claim."
+        manifest["coverage"] = {"kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
+                                "proof": "039/040 maps V014 and shared backup/role/limit/null/cursor/END/retention/NOWAIT/rollback conditions to PT153..160; Java coverage remains enforced by the full reactor.",
+                                "functions": ["schubert.maintenance_cleanup_logs(uuid,timestamptz,integer)",
+                                              "schubert.maintenance_read_log_cleanup_progress(uuid,timestamptz)",
+                                              "schubert.maintenance_cleanup_log_progress(uuid,timestamptz,integer)"]}
+        migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql"
+        manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
     manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

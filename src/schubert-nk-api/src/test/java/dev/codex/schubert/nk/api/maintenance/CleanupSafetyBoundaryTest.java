@@ -27,6 +27,7 @@ final class CleanupSafetyBoundaryTest {
           "logs",
           "batch_runs",
           "message_stores",
+          "log_progress",
           "inbox_progress");
 
   @BeforeAll
@@ -55,12 +56,16 @@ final class CleanupSafetyBoundaryTest {
               "request_inbox",
               "mq_outbox",
               "inbox_inspection_progress",
+              "log_cleanup_progress",
               "batch_runs")) sql(c, "delete from schubert." + table);
       sql(c, "delete from schubert_web_session.web_http_sessions");
       sql(c, "delete from schubert_web_session.web_log_outbox");
       sql(
           c,
-          "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01') on conflict(id) do nothing");
+          "insert into"
+              + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+              + " values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01')"
+              + " on conflict(id) do nothing");
       backup(c, "BACKUP_DB");
       backup(c, "BACKUP_CONFIG");
     }
@@ -89,14 +94,16 @@ final class CleanupSafetyBoundaryTest {
             String before =
                 scalar(
                     c,
-                    "select md5(string_agg(row_to_json(b)::text,',' order by id)) from schubert.batch_runs b");
+                    "select md5(string_agg(row_to_json(b)::text,',' order by id)) from"
+                        + " schubert.batch_runs b");
             assertEquals(
                 "0|0|0|BACKUP_GATE", call(c, name, START, 1), name + ":" + step + ":" + mutation);
             assertEquals(
                 before,
                 scalar(
                     c,
-                    "select md5(string_agg(row_to_json(b)::text,',' order by id)) from schubert.batch_runs b"));
+                    "select md5(string_agg(row_to_json(b)::text,',' order by id)) from"
+                        + " schubert.batch_runs b"));
             c.rollback(save);
           }
       }
@@ -215,7 +222,9 @@ final class CleanupSafetyBoundaryTest {
             "nk_owner|true|search_path=pg_catalog, schubert, schubert_web_session|TimeZone=UTC",
             scalar(
                 c,
-                "select pg_get_userbyid(proowner)||'|'||prosecdef||'|'||array_to_string(proconfig,'|') from pg_proc where oid='"
+                "select"
+                    + " pg_get_userbyid(proowner)||'|'||prosecdef||'|'||array_to_string(proconfig,'|')"
+                    + " from pg_proc where oid='"
                     + sig
                     + "'::regprocedure"));
         assertEquals(
@@ -247,7 +256,8 @@ final class CleanupSafetyBoundaryTest {
               "false",
               scalar(
                   c,
-                  "select (proconfig=array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'])::text from pg_proc where oid='"
+                  "select (proconfig=array['search_path=pg_catalog, schubert,"
+                      + " schubert_web_session','TimeZone=UTC'])::text from pg_proc where oid='"
                       + sig
                       + "'::regprocedure"));
           c.rollback();
@@ -255,10 +265,11 @@ final class CleanupSafetyBoundaryTest {
         c.setAutoCommit(true);
       }
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013",
+          "001,002,003,004,005,006,007,008,009,010,011,012,013,014",
           scalar(
               c,
-              "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where success and version is not null"));
+              "select string_agg(version,',' order by installed_rank) from"
+                  + " schubert_meta.flyway_schema_history where success and version is not null"));
     }
     var flyway =
         Flyway.configure()
@@ -291,7 +302,9 @@ final class CleanupSafetyBoundaryTest {
       c.setAutoCommit(false);
       caller.setAutoCommit(false);
       scalar(c, "select id from schubert.app_logs where id=1 for update");
-      assertEquals("1|1|0|OK", call(caller, "logs", START, 10000));
+      assertEquals("0|0|0|LOCK_BUSY", call(caller, "logs", START, 10000));
+      assertEquals("0", scalar(c, "select count(*) from schubert.log_cleanup_progress"));
+      assertEquals("1,2", ids(c, "app_logs"));
       assertEquals(
           "42501", assertThrows(SQLException.class, () -> ids(caller, "app_logs")).getSQLState());
       caller.rollback();
@@ -301,10 +314,12 @@ final class CleanupSafetyBoundaryTest {
       caller.rollback();
       sql(
           c,
-          "create function schubert.pt_cleanup_failure() returns trigger language plpgsql as $$ begin raise exception using errcode='P0001',message='public fault'; end $$");
+          "create function schubert.pt_cleanup_failure() returns trigger language plpgsql as $$"
+              + " begin raise exception using errcode='P0001',message='public fault'; end $$");
       sql(
           c,
-          "create trigger pt_cleanup_failure before delete on schubert.app_logs for each row execute function schubert.pt_cleanup_failure()");
+          "create trigger pt_cleanup_failure before delete on schubert.app_logs for each row"
+              + " execute function schubert.pt_cleanup_failure()");
       c.commit();
       assertEquals(
           "P0001",
@@ -366,7 +381,9 @@ final class CleanupSafetyBoundaryTest {
                 .get(i - 1);
         sql(
             c,
-            "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id) values('"
+            "insert into"
+                + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
+                + " values('"
                 + new UUID(0, i)
                 + "',7,lpad('"
                 + i
@@ -408,13 +425,17 @@ final class CleanupSafetyBoundaryTest {
           "1|3|3",
           scalar(
               c,
-              "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from schubert.login_ip_attempts)||'|'||(select count(*) from schubert_web_session.web_http_sessions)"));
+              "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from"
+                  + " schubert.login_ip_attempts)||'|'||(select count(*) from"
+                  + " schubert_web_session.web_http_sessions)"));
       assertEquals("3|3|0|OK", call(c, "sessions", START, 3));
       assertEquals(
           "1|1|2",
           scalar(
               c,
-              "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from schubert.login_ip_attempts)||'|'||(select count(*) from schubert_web_session.web_http_sessions)"));
+              "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from"
+                  + " schubert.login_ip_attempts)||'|'||(select count(*) from"
+                  + " schubert_web_session.web_http_sessions)"));
       assertEquals("1|1|0|OK", call(c, "sessions", START, 1000));
       assertEquals("0|0|0|OK", call(c, "sessions", START, 1000));
       // Independent revocation/lock-window matrix, not just expiry.
@@ -439,12 +460,15 @@ final class CleanupSafetyBoundaryTest {
             expired ? "0|0|1" : "1|1|1",
             scalar(
                 c,
-                "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from schubert.login_ip_attempts)||'|'||(select count(*) from schubert_web_session.web_http_sessions)"));
+                "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from"
+                    + " schubert.login_ip_attempts)||'|'||(select count(*) from"
+                    + " schubert_web_session.web_http_sessions)"));
         c.rollback(save);
       }
       sql(
           c,
-          "update schubert.login_ip_attempts set window_started_at='2026-09-17',locked_until='2026-09-01'");
+          "update schubert.login_ip_attempts set"
+              + " window_started_at='2026-09-17',locked_until='2026-09-01'");
       assertEquals(
           "0|0|0|OK",
           call(c, "sessions", START, 1000),
@@ -467,7 +491,7 @@ final class CleanupSafetyBoundaryTest {
       var save = c.setSavepoint();
       assertEquals("4|3|1|OK", call(c, "logs", START, 10000));
       assertEquals("2,3,4,7", ids(c, "app_logs"));
-      assertEquals("1|0|1|OK", call(c, "logs", START, 10000));
+      assertEquals("0|0|0|OK", call(c, "logs", START, 10000)); // SSC-051: hold already counted.
       c.rollback(save);
       assertEquals("1,2,3,4,5,6,7", ids(c, "app_logs"));
       assertEquals("2|2|0|OK", call(c, "logs", START, 2));
@@ -570,13 +594,16 @@ final class CleanupSafetyBoundaryTest {
   private static String historyIds(Connection c) throws SQLException {
     return scalar(
         c,
-        "select coalesce(string_agg(id::text,',' order by id),'') from schubert.batch_runs where id>=101");
+        "select coalesce(string_agg(id::text,',' order by id),'') from schubert.batch_runs where"
+            + " id>=101");
   }
 
   private static void backup(Connection c, String step) throws SQLException {
     sql(
         c,
-        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values('"
+        "insert into"
+            + " schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
+            + " values('"
             + RUN
             + "','2026-09-17','"
             + step
@@ -590,7 +617,9 @@ final class CleanupSafetyBoundaryTest {
   private static void log(Connection c, int id, String at, String hold) throws SQLException {
     sql(
         c,
-        "insert into schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until) values("
+        "insert into"
+            + " schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until)"
+            + " values("
             + id
             + ","
             + at
@@ -603,7 +632,9 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status) values("
+        "insert into"
+            + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status)"
+            + " values("
             + id
             + ",'"
             + new UUID(0, run)
@@ -620,7 +651,9 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at,is_deleted,deleted_at,deleted_by) values("
+        "insert into"
+            + " schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at,is_deleted,deleted_at,deleted_by)"
+            + " values("
             + id
             + ",lpad('"
             + id
@@ -639,7 +672,9 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at) values("
+        "insert into"
+            + " schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at)"
+            + " values("
             + id
             + ","
             + id
@@ -652,7 +687,9 @@ final class CleanupSafetyBoundaryTest {
     String error = state.equals("ERROR") ? "'PROCESS_FAILED','public failure'" : "null,null";
     sql(
         c,
-        "insert into schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,error_code,error_message,created_at,updated_at) values("
+        "insert into"
+            + " schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,error_code,error_message,created_at,updated_at)"
+            + " values("
             + id
             + ","
             + id

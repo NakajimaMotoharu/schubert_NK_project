@@ -347,7 +347,7 @@ final class OutboxCleanupBoundaryTest {
           s.execute("alter function " + SIGNATURE + " set " + setting);
         }
         assertEquals(
-            "6",
+            "7",
             scalar(
                 c,
                 "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
@@ -376,7 +376,7 @@ final class OutboxCleanupBoundaryTest {
   @Test
   void migrationAndLegacyOraclesRemainExplicit() throws Exception {
     assertEquals(
-        "13",
+        "14",
         scalar(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =
