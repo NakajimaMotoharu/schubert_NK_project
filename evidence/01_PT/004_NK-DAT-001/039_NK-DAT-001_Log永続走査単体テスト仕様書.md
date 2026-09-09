@@ -26,4 +26,4 @@ BUG-108/YKT-095: PT158の90日同値は`2026-06-19 00:00:00+00`で固定し、UT
 
 ## 3. 実行・証跡
 
-Java25/Maven/PG18/toolchainは421、root clean verify/018全scope収集は451/458。日時/対象commit/環境/command/終了code/Test ID/実際値/BUG/SSC/hashは040とevidence/log-cleanup-progress/manifestへ固定する。未実装・未実行であり合格なし。親batch/OS lock/実backup/IT/STは別未完了。
+Java25/Maven/PG18/toolchainは421、root clean verify/018全scope収集は451/458。日時/対象commit/環境/command/終了code/Test ID/実際値/BUG/SSC/hashは040とevidence/log-cleanup-progress/manifestへ固定する。正式29でSQL8件を確認。親batch/OS lock/実backup/IT/STは別未完了。

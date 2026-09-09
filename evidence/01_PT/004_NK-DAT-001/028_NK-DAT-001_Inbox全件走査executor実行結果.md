@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox全件走査executor実行結果
 
-最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inbox-run-executor/manifest.json SHA-256 `dd4eb0f9f9d17446f98928cb84ffc3828c04e186070df1655b9f1c54233f27d6`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
+最新正式判定: PT-WEB-20260909-29/source4ec50a45、2026-09-09 14:12:02～14:18:24 JST、dev-foundation、exit0、全950件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inbox-run-executor/manifest.json SHA-256 `f7c3fdac1e8c542dbb7b8466c7984f53332626c00365f0967d1f747152c8ddcf`。全26scope同時点性/hash/参照と017/019負canary成功。BUG-105～108/YKT-093～095再試験完了。BUG-104/SSC-051のSQL永続走査は039/040で成功、親batch接続は未完了。main/親gate/7参照/全Program完了は残件。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-run-executor/manifest.jsonの現行SHA-256は `ecdb12d3a6dd2cca013532336a84b98a5844e9de0f660b9386c380c0e97804e6`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
