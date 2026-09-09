@@ -1,5 +1,7 @@
 # NK-DAT-001 検査process内部接続 実行結果
 
+最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inspector-process/manifest.json SHA-256 `e5c6c6e69788c7705e46bb7e7ebb20f53d2a5a283efa0256dceef896d4141771`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
+
 037/PT-DB-INBOX-141～152、PG-D-135/SSC-049。探索3は2026-09-09 13:42:08 JST、33.905秒、dev-foundation/9843e921後の未commit実装、exit0。新12＋関連57=69件全成功、NullAway/Enforcer/Spotless PASS、SpotBugs0。新2classはline67/method8/class2/branch34/instruction383で全missed0。正式全体回帰・証跡確定までは未合格。Main/専用unit/親OS gateおよび全Program完了ではない。
 
 Command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-api -am -Dtest=FieldCodecTest,OwnedTransferDirectoryTest,LinuxInodeSecurityTest,InspectorAesCredentialTest,InspectorCredentialAccessTest,InspectorCredentialLoaderTest,InspectorProcessTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check`。

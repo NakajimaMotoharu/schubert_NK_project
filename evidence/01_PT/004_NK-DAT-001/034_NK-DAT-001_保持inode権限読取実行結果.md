@@ -1,6 +1,6 @@
 # NK-DAT-001 保持inode権限読取実行結果
 
-最新正式判定: PT-WEB-20260909-27/source4bbb32de、2026-09-09 13:27:18～13:33:40 JST、dev-foundation、exit0、全930件・5 Java module全4種coverage100%・静的解析0。当scopeの全Test ID成功、evidence/inode-security/manifest.json SHA-256 `b7b004fd8ff9dcb18cc39959508ec768a74909dea7754b4783c4b416ebdc4f6f`。全24scope同時点性/hash/参照と017/019負canaryを確認済み。BUG-098～100/YKT-089の再試験と正式26の集約非合格は458参照。内部sliceのみ合格、main/親gate/7参照/全Program完了ではない。以下は旧正式・探索履歴。
+最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inode-security/manifest.json SHA-256 `801f03d4b6900a59c7b9711a03a83bc0c6b47655174c6b8337de94aacd243eaa`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、dev-foundation、2026-09-09 12:40:24～12:46:41 JST、exit0。全918件（Protocol80/Storage42/API514/Web241/CHR41）、failed/error/skipped0、5 Java moduleの4種coverage100%/静的解析0。新8 PTは全PASS、line64/method12/class1/branch28/instruction352全missed0。evidence/inode-security/manifest.json SHA-256 `19e5a449530065e970acfc24744d5a1a7341b0e0f3f3b88c18503e2a1cc00121`。8collector/23scopeのhash/trace/負canary、V001～013/Current baseline不変、秘密pattern scan0hit。BUG-097/YKT-088はsource6dd862d0・本正式runで再試験完了。file reader/実systemd/main/親gateは未完了。以下は探索履歴。
 

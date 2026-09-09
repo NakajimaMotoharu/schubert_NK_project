@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox検査実行結果
 
-最新正式判定: PT-WEB-20260909-27/source4bbb32de、2026-09-09 13:27:18～13:33:40 JST、dev-foundation、exit0、全930件・5 Java module全4種coverage100%・静的解析0。当scopeの全Test ID成功、evidence/inbox-inspection/manifest.json SHA-256 `54988f365563eb79780ed1dd1efac31ee005c68bbc3282514567477ca429da7c`。全24scope同時点性/hash/参照と017/019負canaryを確認済み。BUG-098～100/YKT-089の再試験と正式26の集約非合格は458参照。内部sliceのみ合格、main/親gate/7参照/全Program完了ではない。以下は旧正式・探索履歴。
+最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inbox-inspection/manifest.json SHA-256 `6ee3c47b9a40a09c3701d09ec6c2be72b51fb82aaaa9ade39c1e554a752b3c79`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-inspection/manifest.jsonの現行SHA-256は `d25e489432d334772f918c6d7424e33494c135f8c97abf4ff983ce29daaa1e34`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 

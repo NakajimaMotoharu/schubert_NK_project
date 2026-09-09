@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続検査service実行結果
 
-最新正式判定: PT-WEB-20260909-27/source4bbb32de、2026-09-09 13:27:18～13:33:40 JST、dev-foundation、exit0、全930件・5 Java module全4種coverage100%・静的解析0。当scopeの全Test ID成功、evidence/inbox-progress-service/manifest.json SHA-256 `6f129e622333ee29e5225bcf4076dae38b4d7d62d6b519faa60135bb953bf1f1`。全24scope同時点性/hash/参照と017/019負canaryを確認済み。BUG-098～100/YKT-089の再試験と正式26の集約非合格は458参照。内部sliceのみ合格、main/親gate/7参照/全Program完了ではない。以下は旧正式・探索履歴。
+最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/inbox-progress-service/manifest.json SHA-256 `eec5fa2affd359a3ce6dbebf6e86a0e765103c379e5f05774541b6a322583ebe`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
 
 ## 1. 判定
 

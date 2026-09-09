@@ -1,0 +1,180 @@
+{
+  "runId": "PT-WEB-20260909-28",
+  "programId": "NK-DAT-001",
+  "targetCommit": "6d93eb81a75196e749713fcb3bccb5e0fa37f625",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_SINGLE_USE_INSPECTOR_KEY_RUN_COMPOSITION_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T13:43:24+09:00",
+  "completedAt": "2026-09-09T13:49:41+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "7b8b5e0f07814b1492c56a2ffaf867a53498bf30c833bc756ad214b3581cb520",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0",
+    "postgresql": "18.6",
+    "jdbc": "42.7.13",
+    "flyway": "13.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 383
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 34
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 67
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 25
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 8
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 2
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-141": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#currentOnlyAndEmptyScan",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-142": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#previousKeysAndAtomicDeletion",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-143": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#unverifiableRowsWarnWithoutMutation",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-144": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#missingAndFaultedKeyLoads",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-145": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#versionsAndPurposeSeparation",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-146": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#closedMaterialFailsBeforeDatabase",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-147": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#timeoutsAndInterruptionCloseKeys",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-148": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#databaseFailureAndResume",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-149": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#singleUseAndConcurrentContenders",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-150": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#constructorAndSnapshotContracts",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-151": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#ownedCopiesAndMaterialLifetimes",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-152": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest#publicLoaderFailureAndRedaction",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Real isolated PostgreSQL and limited inspector role; independent JCE Login error/ASCII key envelope with runtime32-byte material; package-local source/clock ports, real JDBC and root rejection. No key/wire/dump logged.",
+  "oracle": "037/038 PT141..152: current/previous four-key snapshot, version and all cross-purpose key reuse rejected before DB; old-key decryption/deletion and protected unknown/Question rows; missing/failed/closed loads close all acquired material, timeout/interruption/storage/uncertain commit/new-instance resume;100 contenders yield one winner, input snapshots/nulls/redaction, borrowed root remains live. Private copy clearing also reviewed at its single lexical finally owner. No main/systemd/parent gate certificate.",
+  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "PG-D-135",
+    "BUG-014",
+    "YKT-012",
+    "BUG-101",
+    "BUG-102",
+    "BUG-103",
+    "YKT-090",
+    "YKT-091"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "03f23d08a2aff1598604af2aa7fd935cb320ab897eaa943515611c6b1aaed44f"
+    }
+  ],
+  "classCoverage": {
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess$OwnedKeys": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 196
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 187
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 34
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  }
+}

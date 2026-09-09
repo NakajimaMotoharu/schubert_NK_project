@@ -1,6 +1,6 @@
 # NK-DAT-001 検査AESfile読取実行結果
 
-最新正式判定: PT-WEB-20260909-27/source4bbb32de、2026-09-09 13:27:18～13:33:40 JST、dev-foundation、exit0、全930件・5 Java module全4種coverage100%・静的解析0。当scopeの全Test ID成功、evidence/credential-loader/manifest.json SHA-256 `aa403f99cc0384bb5c16111b4c80ef992ec07b19284f22a4f81ff6b5c39f1bfe`。全24scope同時点性/hash/参照と017/019負canaryを確認済み。BUG-098～100/YKT-089の再試験と正式26の集約非合格は458参照。内部sliceのみ合格、main/親gate/7参照/全Program完了ではない。以下は旧正式・探索履歴。
+最新正式判定: PT-WEB-20260909-28/source6d93eb81、2026-09-09 13:43:24～13:49:41 JST、dev-foundation、exit0、全942件・5 Java module全4種coverage100%・静的解析0。当scope全Test ID成功、evidence/credential-loader/manifest.json SHA-256 `ed6534c6e4daa43c950fe1ef9b7d996281ce39d070daa52e23ef1b17445c3f9f`。全25scope同時点性/hash/参照と017/019負canary成功。BUG-101～103/YKT-090/091再試験完了。Log全件走査BUG-104/SSC-051、main/親gate/7参照/全Program完了は未解決。本slice合格と工程全体の合格は区別する。以下は旧正式・探索履歴。
 
 探索2は2026-09-09 12:57:01 JST、32.456秒、exit0。dev-foundation/80b5da36後の未commit実装。新12＋旧AES16＋Storage24＋Protocol5=57件PASS、failed/error/skipped0、NullAway/Enforcer/Spotless PASS、SpotBugs0。関連6classのline94/method20/class6/branch50/instruction540全missed0。正式25は本sliceを含まず、全体回帰・証跡確定までは未完了。035/PT129～140、PG-D-134、SSC-049。
 
