@@ -1,0 +1,210 @@
+package dev.codex.schubert.nk.api.maintenance;
+
+import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+
+import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
+import java.sql.*;
+import java.util.*;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * Owns one fresh restricted connection from locked inspection through deletion and commit. No
+ * callback, SAVEPOINT, connection exposure, authentication, wire emission, or key ownership.
+ * Composition keeps inspector keys alive/immutable until every call returns. NK-DAT-001;
+ * OPS-009/DAT-009/MQ-008; UI212/241/251; SS324 12.3/331 3.5/341/343/352;
+ * QA-046/UIC-006/SSC-049/BUG-014; PG-D-122; PT-DB-INBOX-033..040.
+ */
+@NullMarked
+public final class AuthenticationInboxCleanup {
+  private static final String NEXT =
+      "select message_id,correlation_id,request_layout_id,request_version,owner_user_id,"
+          + "operation_token,request_fingerprint_hmac,fingerprint_key_version,processing_state,"
+          + "result_ref_type,result_ref_id,result_ref_uuid,response_layout_id,response_version,"
+          + "response_body_encrypted,response_key_version,created_at,completed_at,expires_at,"
+          + "pg_current_xact_id()::text as inspection_xact,"
+          + "sha256(response_body_encrypted) as inspection_hash"
+          + " from schubert.maintenance_next_auth_inbox(?,?,?)";
+  private final SqlConnectionProvider connections;
+  private final AuthenticationInboxInspector inspector;
+  private final Set<String> fingerprintVersions;
+
+  public AuthenticationInboxCleanup(
+      SqlConnectionProvider connections,
+      AuthenticationInboxInspector inspector,
+      Set<String> fingerprintVersions) {
+    this.connections = Objects.requireNonNull(connections, "connections");
+    this.inspector = Objects.requireNonNull(inspector, "inspector");
+    this.fingerprintVersions = Set.copyOf(fingerprintVersions);
+    if (this.fingerprintVersions.isEmpty()) {
+      throw new IllegalArgumentException("readable fingerprint versions are required");
+    }
+    for (String version : this.fingerprintVersions) {
+      if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")) {
+        throw new IllegalArgumentException("fingerprint version is invalid");
+      }
+    }
+  }
+
+  /** PROTECTED is an unverified-row warning, never successful validation. */
+  public InspectionStep inspectNext(InspectionRun run, Optional<UUID> after) {
+    Objects.requireNonNull(run, "run");
+    Objects.requireNonNull(after, "after");
+    try (Connection connection = requireValue(connections.open())) {
+      if (!connection.getAutoCommit()) {
+        throw new SQLDataException("inspection requires a fresh connection");
+      }
+      connection.setAutoCommit(false);
+      try {
+        InspectionStep result = inspect(connection, run, after);
+        // An inner replay may aggregate a failed SQL read into false. Never commit an aborted TX.
+        verifyTransaction(connection);
+        connection.commit();
+        return result;
+      } catch (SQLException | RuntimeException failure) {
+        try {
+          connection.rollback();
+        } catch (SQLException rollbackFailure) {
+          failure.addSuppressed(rollbackFailure);
+        }
+        throw failure;
+      }
+    } catch (SQLException | RuntimeException failure) {
+      // Do not retain bound columns/provider text/cause/suppressed close or uncertain commit data.
+      throw new InboxMaintenanceException();
+    }
+  }
+
+  private InspectionStep inspect(Connection connection, InspectionRun run, Optional<UUID> after)
+      throws SQLException {
+    InspectionStep result;
+    try (var statement = connection.prepareStatement(NEXT)) {
+      statement.setObject(1, run.id());
+      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(3, after.orElse(null));
+      try (var row = statement.executeQuery()) {
+        if (!row.next()) {
+          result = new InspectionStep(InspectionStep.Outcome.END, Optional.empty());
+        } else {
+          UUID message = requireValue(row.getObject("message_id", UUID.class));
+          Optional<Candidate> candidate = read(row, message);
+          if (row.next()) throw new SQLDataException("inspection candidate count is invalid");
+          var outcome = InspectionStep.Outcome.PROTECTED;
+          if (candidate.isPresent()) {
+            Candidate value = candidate.orElseThrow();
+            if (inspector.isConsistent(connection, value.identity, value.completion)
+                && delete(connection, run, value)) {
+              outcome = InspectionStep.Outcome.DELETED;
+            }
+          }
+          result = new InspectionStep(outcome, Optional.of(message));
+        }
+      }
+    }
+    return result;
+  }
+
+  private Optional<Candidate> read(ResultSet row, UUID message) throws SQLException {
+    String request = requireValue(row.getString("request_layout_id"));
+    String response = requireValue(row.getString("response_layout_id"));
+    requireValue(row.getObject("correlation_id", UUID.class));
+    requireValue(row.getTimestamp("created_at"));
+    requireValue(row.getTimestamp("expires_at"));
+    boolean login = request.equals("LGNREQ01");
+    if ((!login && !request.equals("LOGREQ01"))
+        || !response.equals(login ? "LGNRSP01" : "LOGRSP01")
+        || !requireValue(row.getString("request_version")).equals("001")
+        || !requireValue(row.getString("response_version")).equals("001")
+        || row.getObject("operation_token", UUID.class) != null
+        || !requireValue(row.getString("request_fingerprint_hmac")).matches("[0-9a-f]{64}")
+        || !fingerprintVersions.contains(requireValue(row.getString("fingerprint_key_version")))) {
+      return Optional.empty();
+    }
+    Long owner = row.getObject("owner_user_id", Long.class);
+    if (login != (owner == null)) return Optional.empty();
+    byte[] body = row.getBytes("response_body_encrypted");
+    if (body == null) return Optional.empty();
+    try {
+      var identity =
+          new ResponseSnapshotIdentity(
+              message,
+              response,
+              "001",
+              owner == null ? OptionalLong.empty() : OptionalLong.of(owner));
+      Long numeric = row.getObject("result_ref_id", Long.class);
+      var reference =
+          new InboxResultReference(
+              InboxResultReferenceType.valueOf(requireValue(row.getString("result_ref_type"))),
+              numeric == null ? OptionalLong.empty() : OptionalLong.of(numeric),
+              Optional.ofNullable(row.getObject("result_ref_uuid", UUID.class)));
+      var saved =
+          new InboxCompletion(
+              InboxCompletionState.valueOf(requireValue(row.getString("processing_state"))),
+              reference,
+              response,
+              "001",
+              Optional.of(
+                  new EncryptedResponseSnapshot(
+                      requireValue(row.getString("response_key_version")), body)),
+              requireValue(row.getTimestamp("completed_at")).toInstant());
+      return Optional.of(
+          new Candidate(
+              identity,
+              saved,
+              requireValue(row.getString("inspection_xact")),
+              requireValue(row.getBytes("inspection_hash"))));
+    } catch (IllegalArgumentException inconsistent) {
+      return Optional.empty();
+    } finally {
+      Arrays.fill(body, (byte) 0);
+    }
+  }
+
+  private static boolean delete(Connection connection, InspectionRun run, Candidate candidate)
+      throws SQLException {
+    try (var statement =
+        connection.prepareStatement(
+            "select schubert.maintenance_delete_auth_inbox(?,?,?,?,?) as deleted")) {
+      statement.setObject(1, run.id());
+      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(3, candidate.identity.requestMessageId());
+      statement.setString(4, candidate.transaction);
+      statement.setBytes(5, candidate.hash);
+      try (var row = statement.executeQuery()) {
+        if (!row.next()) throw new SQLDataException("inspection deletion result is missing");
+        boolean deleted = requireValue(row.getObject("deleted", Boolean.class));
+        if (row.next()) throw new SQLDataException("inspection deletion result count is invalid");
+        return deleted;
+      }
+    }
+  }
+
+  private static void verifyTransaction(Connection connection) throws SQLException {
+    try (var statement = connection.prepareStatement("select 1 as inspection_health");
+        var row = statement.executeQuery()) {
+      if (!row.next()
+          || requireValue(row.getObject("inspection_health", Integer.class)) != 1
+          || row.next()) {
+        throw new SQLDataException("inspection transaction is not healthy");
+      }
+    }
+  }
+
+  private static final class Candidate {
+    private final ResponseSnapshotIdentity identity;
+    private final InboxCompletion completion;
+    private final String transaction;
+    private final byte[] hash;
+
+    private Candidate(
+        ResponseSnapshotIdentity identity,
+        InboxCompletion completion,
+        String transaction,
+        byte[] hash) {
+      this.identity = identity;
+      this.completion = completion;
+      this.transaction = transaction;
+      this.hash = hash;
+    }
+  }
+}

@@ -34,6 +34,7 @@ def main():
     selection.add_argument("--authentication", action="store_true")
     selection.add_argument("--sql", action="store_true")
     selection.add_argument("--deletion-sql", action="store_true")
+    selection.add_argument("--cleanup", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql
     run = args.run_id
@@ -53,6 +54,8 @@ def main():
         subject = "InboxInspectionBoundary"
     if args.deletion_sql:
         subject = "InboxDeletionBoundary"
+    if args.cleanup:
+        subject = "AuthenticationInboxCleanup"
     class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     suite = ET.parse(target / "surefire-reports" / ("TEST-" + class_name + ".xml")).getroot()
     names = ["validSuccessAndErrorProfiles", "headerAndMetadataMismatchesReject",
@@ -74,6 +77,11 @@ def main():
                  "retainedAndMalformedMetadata", "ciphertextAndMessageBinding", "backupAndLockGate",
                  "leastPrivilegeIsUnchanged", "concurrentRowsCannotChangeDuringValidation",
                  "migrationInventoryAndSqlScope"]
+    if args.cleanup:
+        names = ["validAuthRowsDeleteAtomically", "invalidRowsAreProtectedWithoutMutation",
+                 "nullUnknownAndFactoryContracts", "ownsTransactionAndKeepsLocks",
+                 "failuresRollbackAndRemainRedacted", "orderedCursorAndFixedRunReplay",
+                 "concurrentAttemptsCannotDoubleDelete", "keysAndResultsNeverEscape"]
     cases = suite.findall("testcase")
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
@@ -81,12 +89,21 @@ def main():
             or any(c.get("classname") != class_name or len(c) != 0 for c in cases)):
         raise SystemExit("missing, nonpassing or noncanonical tests")
     coverage_xml = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
+    coverage_names = {subject}
+    if args.cleanup:
+        coverage_names |= {"AuthenticationInboxCleanup$Candidate", "InspectionRun", "InspectionStep",
+                           "InspectionStep$Outcome", "InboxMaintenanceException"}
+    expected_classes = {"dev/codex/schubert/nk/api/maintenance/" + name for name in coverage_names}
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
-               if c.get("name") == "dev/codex/schubert/nk/api/maintenance/" + subject]
-    if not args.sql and len(classes) != 1:
+               if c.get("name") in expected_classes]
+    if not args.sql and {c.get("name") for c in classes} != expected_classes:
         raise SystemExit("missing inspection class coverage")
-    counters = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                for c in ([] if args.sql else classes[0].findall("counter"))}
+    counters = {}
+    for cls in ([] if args.sql else classes):
+        for counter in cls.findall("counter"):
+            counts = counters.setdefault(counter.get("type"), {"missed": 0, "covered": 0})
+            for key in ("missed", "covered"):
+                counts[key] += int(counter.get(key))
     if not args.sql and (not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
                         or any(v["missed"] or not v["covered"] for v in counters.values())):
         raise SystemExit("inspection coverage below 100 percent")
@@ -95,6 +112,8 @@ def main():
         folder = "inspection-sql"
     if args.deletion_sql:
         folder = "deletion-sql"
+    if args.cleanup:
+        folder = "authentication-cleanup"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -118,7 +137,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -154,6 +173,13 @@ def main():
         manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)),
                                   "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
         manifest["remaining"] = "Java owned validation-to-deletion composition, fixed-run replay, non-auth references and oneshot wiring NOT certified; V006 unchecked Inbox deletion remains BUG014."
+    if args.cleanup:
+        manifest["scopeResult"] = "PASS_AUTH_OWNED_INSPECTION_DELETE_SERVICE_ONLY"
+        manifest["related"] += ["PG-D-122", "BUG-084", "YKT-075"]
+        manifest["oracle"] = "011/012 PT: independent JCE/handwritten Login/Logout wire, literal SQL rows/state/cursor, current/previous keys, expected failure/rollback/uncertain commit/close, JDBC NULL and public-interface faults; 100 attempts permit ONLY observed 55P03, all other failures reject."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")} for cls in classes}
+        manifest["remaining"] = "Non-auth reference inspection/deletion, oneshot key/process composition, whole-run persistence and replacement of V006 unchecked Inbox cleanup NOT certified; BUG014 remains open."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(
