@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+"""BUG-100/YKT-089: fail-fast collection and same-run/source verification of every active scope."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import re
+import subprocess
+import sys
+
+BASE = (
+    ("006_collect_scenario_evidence.py", "008_NK-SCN-001"),
+    ("003_collect_auth_evidence.py", "007_NK-AUT-001"),
+    ("007_collect_large_result_regression.py", "003_NK-PRO-003"),
+    ("008_collect_inbox_regression.py", "006_NK-MSG-002"),
+    ("009_collect_media_evidence.py", "009_NK-MED-001"),
+    ("010_collect_admin_evidence.py", "010_NK-ADM-001"),
+    ("015_collect_web_evidence.py", "015_NK-WEB-001"),
+)
+NESTED = (
+    ("", "inbox-inspection"), ("--authentication", "authentication-inspection"),
+    ("--sql", "inspection-sql"), ("--deletion-sql", "deletion-sql"),
+    ("--cleanup", "authentication-cleanup"), ("--non-authentication", "non-authentication-inspection"),
+    ("--full-sql", "full-inbox-sql"), ("--full-cleanup", "full-inbox-cleanup"),
+    ("--outbox-only", "outbox-only-cleanup"), ("--progress-sql", "inbox-progress-sql"),
+    ("--progress-service", "inbox-progress-service"), ("--cleanup-safety", "cleanup-safety"),
+    ("--run-executor", "inbox-run-executor"), ("--aes-credential", "inbox-aes-credential"),
+    ("--credential-access", "credential-access"), ("--inode-security", "inode-security"),
+    ("--credential-loader", "credential-loader"),
+)
+SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
+    "004_NK-DAT-001/evidence/" + p for _, p in NESTED)
+ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def local_file(root, relative):
+    path = root / relative
+    if (not relative or Path(relative).is_absolute()
+            or ".." in Path(relative).parts or not path.is_file()
+            or not path.resolve().is_relative_to(root.resolve())):
+        raise ValueError("invalid local evidence path")
+    return path
+
+
+def validate_scope(root, scope, run, commit, branch):
+    directory = root / scope
+    manifest_path = directory / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    if (manifest["runId"], manifest["targetCommit"], manifest["branch"], manifest["exitCode"]) != (
+            run, commit, branch, 0):
+        raise ValueError("mixed or failed evidence run/source/branch")
+    entries = manifest["files"]
+    paths = [entry["path"] for entry in entries]
+    actual = {str(p.relative_to(directory)) for p in directory.rglob("*") if p.is_file()
+              and p.name not in ("manifest.json", "checksums.sha256")}
+    if len(paths) != len(set(paths)) or set(paths) != actual:
+        raise ValueError("incomplete or duplicate evidence file inventory")
+    for entry in entries:
+        if digest(local_file(directory, entry["path"])) != entry["sha256"]:
+            raise ValueError("evidence file hash mismatch")
+    checksums = {}
+    for line in (directory / "checksums.sha256").read_text().splitlines():
+        match = re.fullmatch(r"([0-9a-f]{64})  (.+)", line)
+        if match is None or match[2] in checksums:
+            raise ValueError("invalid checksum inventory")
+        checksums[match[2]] = match[1]
+    if set(checksums) != actual | {"manifest.json"}:
+        raise ValueError("incomplete checksum inventory")
+    for path, expected in checksums.items():
+        if digest(local_file(directory, path)) != expected:
+            raise ValueError("checksum mismatch")
+    if scope.startswith("004_NK-DAT-001/"):
+        linked = directory / manifest["fullReactorManifest"]
+        if (linked.resolve() != (root / ROOT_MANIFEST).resolve()
+                or digest(linked) != manifest["fullReactorManifestSha256"]):
+            raise ValueError("invalid full reactor reference")
+    return {"scope": scope, "manifestSha256": digest(manifest_path)}
+
+
+def validate_all(root, run, commit, branch):
+    # Fixed mandatory inventory: globbing only extant manifests would silently accept missing scopes.
+    return [validate_scope(root, scope, run, commit, branch) for scope in SCOPES]
+
+
+def collect(repo, run, execute=subprocess.run):
+    commands = [[sys.executable, "-B", str(repo / "tools/quality" / tool), run]
+                for tool, _ in BASE]
+    commands.extend([sys.executable, "-B",
+                     str(repo / "tools/quality/016_collect_inbox_inspection_evidence.py"), run]
+                    + ([flag] if flag else []) for flag, _ in NESTED)
+    for command in commands:
+        execute(command, cwd=repo, check=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("run_id")
+    parser.add_argument("--validate-only", action="store_true")
+    args = parser.parse_args()
+    if not re.fullmatch(r"PT-(WEB|ADM|MED|SCN)-[A-Za-z0-9-]+", args.run_id):
+        raise SystemExit("invalid run ID")
+    repo = Path(__file__).resolve().parents[2]
+    commit = (Path("/tmp") / (args.run_id + ".commit")).read_text().strip()
+    branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
+    subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
+                    "program/characterization", "tools/quality"], cwd=repo, check=True)
+    if not args.validate_only:
+        collect(repo, args.run_id)
+    results = validate_all(repo / "evidence/01_PT", args.run_id, commit, branch)
+    print(json.dumps({"runId": args.run_id, "targetCommit": commit, "scopes": results,
+                      "result": "PASS_EVIDENCE_SET_ONLY", "phaseComplete": False}))
+
+
+if __name__ == "__main__":
+    main()

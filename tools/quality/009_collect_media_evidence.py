@@ -10,6 +10,25 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def shared_file_program(classname):
+    """BUG-099: shared package membership is explicit, unknown classes fail closed."""
+    prefix = "dev.codex.schubert.nk.api.file."
+    owners = {
+        prefix + "AssetChecksumManifestTest": "NK-MED-001",
+        prefix + "AssetManifestLoaderTest": "NK-MED-001",
+        prefix + "HeldMediaFileInspectorTest": "NK-MED-001",
+        prefix + "InspectorCredentialLoaderTest": "NK-DAT-001",
+    }
+    if classname not in owners:
+        raise ValueError("unmapped shared file test class")
+    return owners[classname]
+
+
+def validate_method_inventory(methods, expected):
+    if len(methods) != len(expected) or set(methods) != set(expected.values()):
+        raise ValueError("media Test IDs do not exactly cover executed methods")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -119,6 +138,9 @@ def main():
         cases = suite.findall("testcase")
         if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")) or len(cases) != int(suite.get("tests")):
             raise SystemExit("nonpassing/inconsistent media suite")
+        if (suite.get("name", "").startswith(asset)
+                and shared_file_program(suite.get("name")) != "NK-MED-001"):
+            continue
         if suite.get("name", "").startswith(storage):
             cases = [case for case in cases if case.get("classname", "") + "#" + case.get("name", "") in storage_cases.values()]
             if not cases:
@@ -133,8 +155,7 @@ def main():
             ET.SubElement(clean, "testcase", attrs)
         ET.indent(clean)
         clean_reports[report.name] = ET.ElementTree(clean)
-    if len(methods) != len(expected) or set(methods) != set(expected.values()):
-        raise SystemExit("media Test IDs do not exactly cover executed methods")
+    validate_method_inventory(methods, expected)
     evidence = repo / "evidence/01_PT/009_NK-MED-001/evidence"
     for folder in ("logs", "output", "coverage"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)

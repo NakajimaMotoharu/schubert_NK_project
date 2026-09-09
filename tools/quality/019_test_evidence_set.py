@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""PT-QA-TRACE-002/003 independent inventory/run/failure canaries; no production secrets."""
+import copy
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+
+sys.dont_write_bytecode = True
+
+
+def module(name, file):
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(file))
+    loaded = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(loaded)
+    return loaded
+
+
+media = module("media_collector", "009_collect_media_evidence.py")
+gate = module("set_collector", "018_collect_verified_evidence_set.py")
+
+
+class EvidenceSetTest(unittest.TestCase):
+    def test_shared_package_and_exact_method_ownership(self):
+        prefix = "dev.codex.schubert.nk.api.file."
+        for name in ("AssetChecksumManifestTest", "AssetManifestLoaderTest", "HeldMediaFileInspectorTest"):
+            self.assertEqual("NK-MED-001", media.shared_file_program(prefix + name))
+        self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorCredentialLoaderTest"))
+        for name in ("NewMediaTest", "", "InspectorCredentialLoaderTest"):
+            with self.assertRaisesRegex(ValueError, "unmapped"):
+                media.shared_file_program(name)
+        expected = {"PT-MED-X": "A#one", "PT-MED-Y": "B#two"}
+        media.validate_method_inventory(["B#two", "A#one"], expected)
+        for methods in (["A#one"], ["A#one", "B#two", "A#new"],
+                        ["A#one", "A#one"], ["A#one", "C#two"]):
+            with self.assertRaisesRegex(ValueError, "Test IDs"):
+                media.validate_method_inventory(methods, expected)
+
+    def test_every_scope_run_source_and_integrity(self):
+        # Independently enumerated mandatory inventory, not generated from gate.SCOPES.
+        expected_scopes = ["008_NK-SCN-001", "007_NK-AUT-001", "003_NK-PRO-003",
+                           "006_NK-MSG-002", "009_NK-MED-001", "010_NK-ADM-001", "015_NK-WEB-001"]
+        expected_scopes = [p + "/evidence" for p in expected_scopes] + [
+            "004_NK-DAT-001/evidence/" + p for p in (
+                "inbox-inspection", "authentication-inspection", "inspection-sql", "deletion-sql",
+                "authentication-cleanup", "non-authentication-inspection", "full-inbox-sql",
+                "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
+                "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
+                "inbox-aes-credential", "credential-access", "inode-security", "credential-loader")]
+        self.assertEqual(expected_scopes, list(gate.SCOPES))
+        with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
+            root = Path(temporary)
+            for scope in expected_scopes:
+                self.write_scope(root, scope)
+            accepted = gate.validate_all(root, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+            self.assertEqual(expected_scopes, [item["scope"] for item in accepted])
+            # Each scope must reject each wrong binding, even with a consistent checksum file.
+            for scope in expected_scopes:
+                for field, wrong in (("runId", "PT-WEB-OLD"), ("targetCommit", "b" * 40),
+                                     ("branch", "main"), ("exitCode", 1)):
+                    self.write_scope(root, scope, {field: wrong})
+                    with self.assertRaisesRegex(ValueError, "mixed"):
+                        gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+                self.write_scope(root, scope)
+            chosen = expected_scopes[-1]
+            directory = root / chosen
+            check = lambda: gate.validate_all(root, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+            baseline = (directory / "manifest.json").read_bytes()
+            for wrong in ("missing.xml", "../results.xml", "/tmp/outside"):
+                m = json.loads(baseline)
+                m["files"][0]["path"] = wrong
+                self.write_scope(root, chosen, m)
+                with self.assertRaises(ValueError):
+                    check()
+            self.write_scope(root, chosen)
+            for name in ("manifest.json", "results.xml", "checksums.sha256"):
+                path = directory / name
+                original = path.read_bytes()
+                path.unlink()
+                with self.assertRaises((ValueError, FileNotFoundError)):
+                    check()
+                path.write_bytes(original)
+            (directory / "results.xml").write_bytes(b"corrupt")
+            with self.assertRaisesRegex(ValueError, "hash"):
+                check()
+            self.write_scope(root, chosen)
+            for values in (
+                {"files": []},
+                {"files": json.loads(baseline)["files"] * 2},
+                {"fullReactorManifest": "manifest.json"},
+                {"fullReactorManifestSha256": "0" * 64},
+            ):
+                self.write_scope(root, chosen, values)
+                with self.assertRaises(ValueError):
+                    check()
+            self.write_scope(root, chosen)
+            original = (directory / "checksums.sha256").read_text()
+            for wrong in ("bad\n", "", original + original, original.replace("  results.xml", "  unknown.xml")):
+                (directory / "checksums.sha256").write_text(wrong)
+                with self.assertRaises(ValueError):
+                    check()
+            self.write_scope(root, chosen)
+            self.assertEqual(24, len(check()))
+            outside = root / "outside.xml"
+            outside.write_bytes(b"fixture")
+            link = directory / "escape.xml"
+            link.symlink_to(outside)
+            for relative in ("", "../results.xml", str(outside), "missing.xml", "escape.xml"):
+                with self.assertRaises(ValueError):
+                    gate.local_file(directory, relative)
+
+    def test_collection_stops_at_each_failure(self):
+        for failed_at in range(24):
+            calls = []
+            def fail(command, *, cwd, check):
+                self.assertEqual(Path("/safe/repo"), cwd)
+                self.assertTrue(check)
+                calls.append(command)
+                if len(calls) == failed_at + 1:
+                    raise subprocess.CalledProcessError(1, command)
+            with self.assertRaises(subprocess.CalledProcessError):
+                gate.collect(Path("/safe/repo"), "PT-WEB-TEST", fail)
+            self.assertEqual(failed_at + 1, len(calls))
+        calls = []
+        gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
+        self.assertEqual(24, len(calls))
+        self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
+        self.assertEqual("--credential-loader", calls[-1][-1])
+
+    @staticmethod
+    def write_scope(root, scope, changes=None):
+        directory = root / scope
+        directory.mkdir(parents=True, exist_ok=True)
+        payload = b"<testsuite/>\n"
+        (directory / "results.xml").write_bytes(payload)
+        manifest = {
+            "runId": "PT-WEB-TEST", "targetCommit": "a" * 40,
+            "branch": "dev-foundation", "exitCode": 0,
+            "files": [{"path": "results.xml", "sha256": hashlib.sha256(payload).hexdigest()}],
+        }
+        if scope.startswith("004_"):
+            manifest.update({
+                "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+                "fullReactorManifestSha256": hashlib.sha256(
+                    (root / "008_NK-SCN-001/evidence/manifest.json").read_bytes()).hexdigest(),
+            })
+        manifest.update(copy.deepcopy(changes or {}))
+        (directory / "manifest.json").write_text(json.dumps(manifest))
+        (directory / "checksums.sha256").write_text("".join(
+            hashlib.sha256((directory / name).read_bytes()).hexdigest() + "  " + name + "\n"
+            for name in ("manifest.json", "results.xml")))
+
+
+if __name__ == "__main__":
+    unittest.main()

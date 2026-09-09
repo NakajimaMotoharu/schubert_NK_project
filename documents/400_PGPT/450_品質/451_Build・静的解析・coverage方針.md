@@ -7,6 +7,7 @@
 3. Program単位PTを実行し、failed/flaky/skipped/disabled/not-runが0であることを確認する。
 4. JaCoCoでproduction対象のline、method、class、branchが各100%であることを確認する。
 5. DDL/設定/schema/shell、secret、trace、evidence manifest/hashを検査する。
+   収集は018_collect_verified_evidence_set.pyで各collector失敗時に停止し、固定必須scopeの同一run/source/branch・全file hash・参照を横断照合する。017/019の負canaryを先行実行する。個別hash成功だけを全証跡収集完了としない（BUG-099/100、YKT-089、458）。
 6. 影響するNK Characterization caseを実行し、DIF-001～016以外の差分0を確認する。
 
 ## 2. Build contract

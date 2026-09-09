@@ -15,4 +15,32 @@ PT-QA-TRACE-003: 必須24scopeがすべて指定run/source/branch/exit0を持つ
 
 ## 3. 横展開・再現・結果
 
-調査・実装・再試験中。Production変更なし、RD/UI/SS変更なし。品質toolも対象sourceへcommitしてから正式gateを実行する。
+Production変更なし、RD/UI/SS変更なし。品質toolも対象sourceへcommitしてから正式gateを実行する。
+
+| 対象 | 所属・非該当根拠と追加確認 |
+|---|---|
+| 009 Media | api.fileの3 Media class、1 DB classを明示分類。未知class拒否、Media全methodの完全一致を維持。61件から変更しない |
+| 003 Auth | 全moduleの全試験/coverageを再照合し、api.securityの共通認証回帰を収集する。Program独占件数ではなく重複を含む回帰範囲。今回は新readerを収集対象としない |
+| 006 Scenario | 全module試験のroot証明を持ち、共用storage全classを回帰として収集。native8件も共用能力回帰に含むがScenario独占成果や全体件数への加算には使わない |
+| 007/008 | 明示classと固定method件数/Test IDの回帰、package所属の仮定なし。全体証明のhashとsourceを照合 |
+| 010/015 | 明示class一覧とTest ID全method完全一致。共用packageを一括でProgram扱いしない |
+| 016 | switchでProgramのsubject/class/Test IDを選択、root manifest相対path/hashを017で負検証。今回は035の12件を専用scopeへ格納 |
+| 全24scope | 018が必須scope固定一覧で欠落/旧run/別source/別branch/非zero/hash不正/参照不正を拒否。収集の各exitをcheck=Trueで検査し失敗時に後続へ進まない |
+
+探索確認: `python3 -B tools/quality/019_test_evidence_set.py` は3/3成功（独立4class分類、未知class/欠落・未知・重複method、24scope×4異常binding、ファイル欠落/破損/重複/参照/脱出、24各段のcollector失敗停止）。017の既存1件も成功。
+実際の正式25/26混在treeは018のvalidate_allで「mixed or failed evidence run/source/branch」として拒否し、誤った全体証明を発行しないことを確認。
+Python品質canaryはJava930件に加算せず、Java JaCoCo coverage100%をPythonのcoverageとして流用しない。
+正式再試験は27で実施予定。個別manifestのslice成功表示は工程全体/証跡set成功を意味しない。
+
+## 4. 再現command
+
+source commitを確定しclean reactor build終了後、次を順に実行する。collector中もsrc/pom/characterization/toolsは変更しない。
+
+```sh
+python3 -B tools/quality/017_test_inbox_evidence_trace.py
+python3 -B tools/quality/019_test_evidence_set.py
+python3 -B tools/quality/018_collect_verified_evidence_set.py PT-WEB-20260909-27
+python3 -B tools/quality/018_collect_verified_evidence_set.py PT-WEB-20260909-27 --validate-only
+```
+
+最後の表示PASS_EVIDENCE_SET_ONLYもPG/PT完了や実NK CHRの合格ではない。秘密scan/上位変更/障害/trace/PR等は451・456の残るgateで判定する。
