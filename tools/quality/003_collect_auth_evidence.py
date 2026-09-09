@@ -37,7 +37,8 @@ def main():
     for module, directory in (("characterization", "program/characterization"),
                               ("protocol", "src/schubert-nk-protocol"),
                               ("storage", "src/schubert-nk-storage"),
-                              ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web")):
+                              ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"),
+                              ("batch", "src/schubert-nk-batch")):
         target = repo / directory / "target"
         reports = sorted((target / "surefire-reports").glob("TEST-*.xml"))
         if not reports:

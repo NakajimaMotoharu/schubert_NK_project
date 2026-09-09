@@ -1,0 +1,535 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.nio.file.*;
+import java.sql.*;
+import java.time.Instant;
+import java.util.*;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
+
+/** NK-BAT-001; UI251/SS311/331/332/341; PG-D-137; PT-BAT-001..017. */
+final class CleanupRepositoryTest {
+  @TempDir static Path root;
+  private static BatchDatabaseFixture db;
+  private static final BatchRun RUN =
+      new BatchRun(new UUID(0, 94), Instant.parse("2026-09-17T00:00:00Z"));
+  private static final CleanupCounts ZERO = new CleanupCounts(0, 0, 0);
+
+  @BeforeAll
+  static void start() throws Exception {
+    db = new BatchDatabaseFixture(root);
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    db.stop();
+  }
+
+  @BeforeEach
+  void reset() throws Exception {
+    try (var c = db.admin()) {
+      sql(c, "delete from schubert.log_cleanup_progress");
+      sql(c, "delete from schubert.app_logs");
+      sql(c, "delete from schubert.batch_runs");
+      for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG"))
+        sql(
+            c,
+            "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values('"
+                + RUN.id()
+                + "','2026-09-17','"
+                + step
+                + "',1,'2026-09-17 00:00:00+00','2026-09-17 00:00:00+00','SUCCESS')");
+    }
+  }
+
+  @Test
+  void runIdentityBoundaries() {
+    assertEquals(new UUID(0, 94), RUN.id());
+    assertEquals(Instant.parse("2026-09-17T00:00:00Z"), RUN.cutoff());
+    for (String at : List.of("0001-01-01T00:00:00Z", "9999-12-31T23:59:59.999999Z"))
+      assertEquals(Instant.parse(at), new BatchRun(RUN.id(), Instant.parse(at)).cutoff());
+    for (String at :
+        List.of(
+            "0000-12-31T23:59:59.999999Z",
+            "+10000-01-01T00:00:00Z",
+            "2026-09-17T00:00:00.000000001Z"))
+      assertThrows(IllegalArgumentException.class, () -> new BatchRun(RUN.id(), Instant.parse(at)));
+    assertThrows(NullPointerException.class, () -> new BatchRun(null, RUN.cutoff()));
+    assertThrows(NullPointerException.class, () -> new BatchRun(RUN.id(), null));
+    assertEquals("BatchRun[identity/cutoff=<redacted>]", RUN.toString());
+  }
+
+  @Test
+  void countInvariants() {
+    var max = new CleanupCounts(Long.MAX_VALUE, Long.MAX_VALUE, 0);
+    assertEquals(Long.MAX_VALUE, max.target());
+    assertEquals(Long.MAX_VALUE, max.deleted());
+    assertEquals(0, max.skipped());
+    assertEquals(Long.MAX_VALUE, new CleanupCounts(Long.MAX_VALUE, 0, Long.MAX_VALUE).skipped());
+    for (long[] values :
+        List.of(
+            new long[] {-1, 0, 0},
+            new long[] {0, -1, 0},
+            new long[] {0, 1, 0},
+            new long[] {1, 0, -1},
+            new long[] {1, 0, 0},
+            new long[] {Long.MAX_VALUE, 1, Long.MAX_VALUE}))
+      assertThrows(
+          IllegalArgumentException.class, () -> new CleanupCounts(values[0], values[1], values[2]));
+  }
+
+  @Test
+  void cleanupAllowlist() throws Exception {
+    Map<String, String> names =
+        Map.of(
+            "NOTIFICATIONS",
+            "notifications",
+            "QUESTIONS",
+            "questions",
+            "SESSIONS",
+            "sessions",
+            "OUTBOX",
+            "message_stores",
+            "LOGS",
+            "logs",
+            "BATCH_RUNS",
+            "batch_runs",
+            "INBOX_PROGRESS",
+            "inbox_progress",
+            "LOG_PROGRESS",
+            "log_progress");
+    assertEquals(
+        names.keySet(),
+        new HashSet<>(Arrays.stream(CleanupKind.values()).map(Enum::name).toList()));
+    for (var kind : CleanupKind.values()) {
+      assertEquals("schubert.maintenance_cleanup_" + names.get(kind.name()), kind.function());
+      assertEquals(kind == CleanupKind.LOGS ? 10000 : 1000, kind.maximumRows());
+      try (var c = transaction()) {
+        var probe = new BatchJdbcProbe();
+        assertEquals(ZERO, new CleanupRepository(probe.wrap(c)).execute(RUN, kind, 1).counts());
+        assertEquals(
+            "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_"
+                + names.get(kind.name())
+                + "(?,?,?)",
+            probe.lastSql);
+        c.rollback();
+      }
+    }
+  }
+
+  @Test
+  void rejectionAndProgressContracts() {
+    assertEquals(
+        Set.of("OK", "LOCK_BUSY", "BACKUP_GATE"),
+        new HashSet<>(Arrays.stream(CleanupReason.values()).map(Enum::name).toList()));
+    for (var reason : CleanupReason.values()) {
+      var result = new CleanupChunk(ZERO, reason);
+      assertEquals(ZERO, result.counts());
+      assertEquals(reason, result.reason());
+    }
+    for (var reason : List.of(CleanupReason.LOCK_BUSY, CleanupReason.BACKUP_GATE))
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupChunk(new CleanupCounts(1, 1, 0), reason));
+    assertEquals(
+        1, new CleanupChunk(new CleanupCounts(1, 1, 0), CleanupReason.OK).counts().target());
+    assertThrows(NullPointerException.class, () -> new CleanupChunk(null, CleanupReason.OK));
+    assertThrows(NullPointerException.class, () -> new CleanupChunk(ZERO, null));
+    assertThrows(NullPointerException.class, () -> new LogCleanupProgress(null, ZERO, false));
+    assertThrows(NullPointerException.class, () -> new LogCleanupProgress(RUN, null, false));
+    var progress = new LogCleanupProgress(RUN, ZERO, false);
+    assertEquals(RUN, progress.run());
+    assertEquals(ZERO, progress.counts());
+    assertFalse(progress.complete());
+  }
+
+  @Test
+  void emptyCleanupAndExplicitTransaction() throws Exception {
+    assertThrows(NullPointerException.class, () -> new CleanupRepository(null));
+    try (var c = db.open("schubert_batch")) {
+      var repository = new CleanupRepository(c);
+      redacted(() -> repository.execute(RUN, CleanupKind.LOGS, 1));
+      redacted(() -> repository.readLogProgress(RUN));
+      assertTrue(c.getAutoCommit());
+      c.setAutoCommit(false);
+      // The parent's session lock and SQL transaction lock share this exact connection.
+      assertEquals("true", scalar(c, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(new LogCleanupProgress(RUN, ZERO, false), repository.readLogProgress(RUN));
+      for (var kind : CleanupKind.values())
+        assertEquals(new CleanupChunk(ZERO, CleanupReason.OK), repository.execute(RUN, kind, 1));
+      assertTrue(repository.readLogProgress(RUN).complete());
+      assertFalse(c.isClosed());
+      assertFalse(c.getAutoCommit());
+      assertEquals("true", scalar(c, "select pg_advisory_unlock(71419602)::text"));
+      c.rollback();
+    }
+  }
+
+  @Test
+  void heldLogsAndDurableRead() throws Exception {
+    logs();
+    try (var c = transaction();
+        var admin = db.admin()) {
+      var r = new CleanupRepository(c);
+      assertEquals(new CleanupCounts(2, 0, 2), r.execute(RUN, CleanupKind.LOGS, 2).counts());
+      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+      c.commit();
+      assertEquals(new CleanupCounts(2, 0, 2), r.readLogProgress(RUN).counts());
+      c.commit();
+      assertEquals(new CleanupCounts(1, 1, 0), r.execute(RUN, CleanupKind.LOGS, 2).counts());
+      assertEquals("3", scalar(admin, "select count(*) from schubert.app_logs"));
+      c.commit();
+      assertEquals("2", scalar(admin, "select count(*) from schubert.app_logs"));
+      assertEquals(ZERO, r.execute(RUN, CleanupKind.LOGS, 2).counts());
+      var progress = r.readLogProgress(RUN);
+      assertTrue(progress.complete());
+      assertEquals(new CleanupCounts(3, 1, 2), progress.counts());
+      c.commit();
+    }
+  }
+
+  @Test
+  void rollbackSavepointAndResume() throws Exception {
+    logs();
+    try (var c = transaction()) {
+      var r = new CleanupRepository(c);
+      var save = c.setSavepoint();
+      assertEquals(new CleanupCounts(3, 1, 2), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      c.rollback(save);
+      assertEquals(ZERO, r.readLogProgress(RUN).counts());
+      assertEquals(new CleanupCounts(3, 1, 2), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      c.rollback();
+    }
+    try (var c = transaction()) {
+      var r = new CleanupRepository(c);
+      assertEquals(new CleanupCounts(3, 1, 2), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      c.commit();
+    }
+    try (var c = transaction()) {
+      var r = new CleanupRepository(c);
+      assertEquals(new CleanupCounts(3, 1, 2), r.readLogProgress(RUN).counts());
+      assertEquals(ZERO, r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      c.commit();
+    }
+  }
+
+  @Test
+  void backupAndAdvisoryRejection() throws Exception {
+    try (var c = transaction();
+        var admin = db.admin()) {
+      sql(admin, "update schubert.batch_runs set status='FAILED' where step='BACKUP_CONFIG'");
+      var r = new CleanupRepository(c);
+      for (var kind : CleanupKind.values())
+        assertEquals(new CleanupChunk(ZERO, CleanupReason.BACKUP_GATE), r.execute(RUN, kind, 1));
+      redacted(() -> r.readLogProgress(RUN));
+      c.rollback();
+      sql(admin, "update schubert.batch_runs set status='SUCCESS'");
+      assertEquals("true", scalar(admin, "select pg_try_advisory_lock(71419602)::text"));
+      for (var kind : CleanupKind.values())
+        assertEquals(new CleanupChunk(ZERO, CleanupReason.LOCK_BUSY), r.execute(RUN, kind, 1));
+      redacted(() -> r.readLogProgress(RUN));
+      c.rollback();
+      assertEquals("true", scalar(admin, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+    }
+  }
+
+  @Test
+  void exactLimitsAndNullInputs() throws Exception {
+    try (var c = transaction()) {
+      var p = new BatchJdbcProbe();
+      var r = new CleanupRepository(p.wrap(c));
+      assertThrows(NullPointerException.class, () -> r.execute(null, CleanupKind.LOGS, 1));
+      assertThrows(NullPointerException.class, () -> r.execute(RUN, null, 1));
+      assertThrows(NullPointerException.class, () -> r.readLogProgress(null));
+      for (var kind : CleanupKind.values())
+        for (int limit :
+            new int[] {0, -1, Integer.MIN_VALUE, Integer.MAX_VALUE, kind.maximumRows() + 1})
+          assertThrows(IllegalArgumentException.class, () -> r.execute(RUN, kind, limit));
+      assertEquals(0, p.selectedStatements);
+      for (var kind : CleanupKind.values()) {
+        assertEquals(ZERO, r.execute(RUN, kind, 1).counts());
+        c.rollback();
+        assertEquals(ZERO, r.execute(RUN, kind, kind.maximumRows()).counts());
+        c.rollback();
+      }
+    }
+  }
+
+  @Test
+  void rowProjectionFailures() throws Exception {
+    for (String column : List.of("target_count", "deleted_count", "skipped_count", "reason_code")) {
+      var p = new BatchJdbcProbe();
+      p.columns.put(column, null);
+      rejectProjection(p, false);
+    }
+    for (String reason : List.of("", "ok", "UNKNOWN")) {
+      var p = new BatchJdbcProbe();
+      p.columns.put("reason_code", reason);
+      rejectProjection(p, false);
+    }
+    for (String column : List.of("target_count", "deleted_count", "skipped_count")) {
+      var p = new BatchJdbcProbe();
+      p.columns.put(column, -1L);
+      rejectProjection(p, false);
+    }
+    var large = new BatchJdbcProbe();
+    large.columns.put("target_count", 2L);
+    large.columns.put("deleted_count", 2L);
+    rejectProjection(large, false);
+    var rejected = new BatchJdbcProbe();
+    rejected.columns.put("target_count", 1L);
+    rejected.columns.put("deleted_count", 1L);
+    rejected.columns.put("reason_code", "LOCK_BUSY");
+    rejectProjection(rejected, false);
+    var empty = new BatchJdbcProbe();
+    empty.empty = true;
+    rejectProjection(empty, false);
+    var duplicate = new BatchJdbcProbe();
+    duplicate.duplicate = true;
+    rejectProjection(duplicate, false);
+  }
+
+  @Test
+  void progressProjectionFailures() throws Exception {
+    for (String column : List.of("target_count", "deleted_count", "skipped_count", "complete")) {
+      var p = new BatchJdbcProbe();
+      p.columns.put(column, null);
+      rejectProjection(p, true);
+    }
+    var negative = new BatchJdbcProbe();
+    negative.columns.put("target_count", -1L);
+    rejectProjection(negative, true);
+    var empty = new BatchJdbcProbe();
+    empty.empty = true;
+    rejectProjection(empty, true);
+    var duplicate = new BatchJdbcProbe();
+    duplicate.duplicate = true;
+    rejectProjection(duplicate, true);
+  }
+
+  @Test
+  void jdbcFailuresRemainRedacted() throws Exception {
+    for (boolean progress : List.of(false, true)) {
+      for (String fault :
+          List.of(
+              "getAutoCommit",
+              "prepareStatement",
+              "setObject",
+              "setTimestamp",
+              "executeQuery",
+              "next",
+              "getObject",
+              "resultClose",
+              "statementClose")) {
+        var p = new BatchJdbcProbe();
+        p.fault = fault;
+        rejectProjection(p, progress);
+      }
+    }
+    for (String fault : List.of("setInt", "getString")) {
+      var p = new BatchJdbcProbe();
+      p.fault = fault;
+      rejectProjection(p, false);
+    }
+  }
+
+  @Test
+  void roleIsolationAndNoInboxBypass() throws Exception {
+    for (String role :
+        List.of(
+            "schubert_app",
+            "schubert_web_session",
+            "schubert_backup",
+            "schubert_inbox_inspector",
+            "schubert_ops_ro")) {
+      try (var c = db.open(role)) {
+        c.setAutoCommit(false);
+        var r = new CleanupRepository(c);
+        for (var kind : CleanupKind.values()) {
+          redacted(() -> r.execute(RUN, kind, 1));
+          c.rollback();
+        }
+        redacted(() -> r.readLogProgress(RUN));
+        c.rollback();
+      }
+    }
+    try (var c = transaction();
+        var admin = db.admin()) {
+      // Existing PT065 tests 96 actual Inbox rows; additionally reject any current SQL reference.
+      assertEquals(
+          "false",
+          scalar(
+              admin,
+              "select (pg_get_functiondef('schubert.maintenance_cleanup_message_stores(uuid,timestamptz,integer)'::regprocedure) like '%request_inbox%')::text"));
+      assertEquals(ZERO, new CleanupRepository(c).execute(RUN, CleanupKind.OUTBOX, 1).counts());
+      c.rollback();
+      assertEquals(
+          "false",
+          scalar(
+              admin,
+              "select has_table_privilege('schubert_batch','schubert.request_inbox','DELETE')::text"));
+    }
+  }
+
+  @Test
+  void timezoneAndCutoffIdentity() throws Exception {
+    for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
+      try (var c = transaction();
+          var admin = db.admin()) {
+        sql(c, "set timezone='" + zone + "'");
+        var r = new CleanupRepository(c);
+        assertEquals(ZERO, r.execute(RUN, CleanupKind.LOGS, 1).counts());
+        c.commit();
+        assertEquals(
+            "1789603200.000000",
+            scalar(
+                admin,
+                "select extract(epoch from cutoff)::text from schubert.log_cleanup_progress"));
+        var wrong = new BatchRun(RUN.id(), RUN.cutoff().plusSeconds(1));
+        redacted(() -> r.execute(wrong, CleanupKind.LOGS, 1));
+        c.rollback();
+        redacted(() -> r.readLogProgress(wrong));
+        c.rollback();
+        assertEquals(RUN, r.readLogProgress(RUN).run());
+        c.rollback();
+      }
+    }
+  }
+
+  @Test
+  void lockedLogsDoNotAdvance() throws Exception {
+    logs();
+    try (var c = transaction();
+        var locked = db.admin()) {
+      locked.setAutoCommit(false);
+      assertEquals("1", scalar(locked, "select id from schubert.app_logs where id=1 for update"));
+      var r = new CleanupRepository(c);
+      assertEquals(
+          new CleanupChunk(ZERO, CleanupReason.LOCK_BUSY), r.execute(RUN, CleanupKind.LOGS, 10000));
+      c.commit();
+      assertEquals("0", scalar(locked, "select count(*) from schubert.log_cleanup_progress"));
+      locked.rollback();
+      assertEquals(new CleanupCounts(3, 1, 2), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      c.commit();
+    }
+  }
+
+  @Test
+  void retentionAndResourceOwnership() throws Exception {
+    try (var admin = db.admin()) {
+      sql(
+          admin,
+          "insert into schubert.app_logs(id,logged_at,service,category,level,action,message) values(1,'2026-06-18 23:59:59.999999+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture'),(2,'2026-06-19 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture')");
+    }
+    try (var c = transaction();
+        var admin = db.admin()) {
+      var p = new BatchJdbcProbe();
+      var r = new CleanupRepository(p.wrap(c));
+      assertEquals(new CleanupCounts(1, 1, 0), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
+      assertFalse(r.readLogProgress(RUN).complete());
+      assertEquals(0, p.commits);
+      assertEquals(0, p.rollbacks);
+      assertEquals(0, p.closes);
+      assertEquals(0, p.saves);
+      assertEquals(0, p.autoChanges);
+      assertEquals("2", scalar(admin, "select count(*) from schubert.app_logs"));
+      c.commit();
+      assertEquals("2", scalar(admin, "select string_agg(id::text,',') from schubert.app_logs"));
+    }
+  }
+
+  @Test
+  void moduleDependencyBoundary() throws Exception {
+    var repo = Path.of(System.getProperty("nk.pt.repository"));
+    var document =
+        DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .parse(repo.resolve("src/schubert-nk-batch/pom.xml").toFile());
+    var dependencies = document.getElementsByTagName("dependency");
+    Set<String> runtime = new HashSet<>();
+    for (int i = 0; i < dependencies.getLength(); i++) {
+      var dependency = (org.w3c.dom.Element) dependencies.item(i);
+      var scope = dependency.getElementsByTagName("scope");
+      if (scope.getLength() == 0 || !scope.item(0).getTextContent().equals("test"))
+        runtime.add(
+            dependency.getElementsByTagName("groupId").item(0).getTextContent()
+                + ":"
+                + dependency.getElementsByTagName("artifactId").item(0).getTextContent());
+    }
+    assertEquals(Set.of("org.jspecify:jspecify"), runtime);
+    try (var files = Files.walk(repo.resolve("src/schubert-nk-batch/src/main/java"))) {
+      for (var file : files.filter(p -> p.toString().endsWith(".java")).toList()) {
+        var content = Files.readString(file);
+        assertFalse(
+            content.matches("(?s).*import dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*"),
+            file.toString());
+      }
+    }
+  }
+
+  private static void rejectProjection(BatchJdbcProbe probe, boolean progress) throws Exception {
+    probe.selectedSql =
+        progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+    try (var c = transaction()) {
+      var repository = new CleanupRepository(probe.wrap(c));
+      if (progress) redacted(() -> repository.readLogProgress(RUN));
+      else redacted(() -> repository.execute(RUN, CleanupKind.LOGS, 1));
+      assertEquals(0, probe.commits);
+      assertEquals(0, probe.rollbacks);
+      assertEquals(0, probe.closes);
+      assertEquals(0, probe.autoChanges);
+      c.rollback();
+      assertFalse(c.isClosed());
+    }
+    try (var admin = db.admin()) {
+      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+    }
+  }
+
+  private static void redacted(Runnable action) {
+    var error = assertThrows(BatchRepositoryException.class, action::run);
+    assertEquals("batch repository operation failed", error.getMessage());
+    assertNull(error.getCause());
+    assertEquals(0, error.getSuppressed().length);
+  }
+
+  private static Connection transaction() throws SQLException {
+    var c = db.open("schubert_batch");
+    c.setAutoCommit(false);
+    return c;
+  }
+
+  private static void logs() throws SQLException {
+    try (var c = db.admin()) {
+      for (int id = 1; id <= 3; id++)
+        sql(
+            c,
+            "insert into schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until) values("
+                + id
+                + ",'2026-01-01 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture',"
+                + (id < 3 ? "'2027-01-01 00:00:00+00'" : "null")
+                + ")");
+    }
+  }
+
+  private static void sql(Connection c, String query) throws SQLException {
+    try (var s = c.createStatement()) {
+      s.execute(query);
+    }
+  }
+
+  private static String scalar(Connection c, String query) throws SQLException {
+    try (var s = c.createStatement();
+        var r = s.executeQuery(query)) {
+      assertTrue(r.next());
+      String v = r.getString(1);
+      assertNotNull(v);
+      assertFalse(r.next());
+      return v;
+    }
+  }
+}
