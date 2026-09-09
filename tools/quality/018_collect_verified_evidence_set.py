@@ -27,6 +27,7 @@ NESTED = (
     ("--run-executor", "inbox-run-executor"), ("--aes-credential", "inbox-aes-credential"),
     ("--credential-access", "credential-access"), ("--inode-security", "inode-security"),
     ("--credential-loader", "credential-loader"),
+    ("--inspector-process", "inspector-process"),
 )
 SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
     "004_NK-DAT-001/evidence/" + p for _, p in NESTED)

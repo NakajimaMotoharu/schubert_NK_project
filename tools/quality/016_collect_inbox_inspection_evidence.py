@@ -47,6 +47,7 @@ def main():
     selection.add_argument("--credential-access", action="store_true")
     selection.add_argument("--inode-security", action="store_true")
     selection.add_argument("--credential-loader", action="store_true")
+    selection.add_argument("--inspector-process", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety
     run = args.run_id
@@ -90,6 +91,8 @@ def main():
         subject = "LinuxInodeSecurity"
     if args.credential_loader:
         subject = "InspectorCredentialLoader"
+    if args.inspector_process:
+        subject = "InspectorProcess"
     package = "dev.codex.schubert.nk.storage." if args.inode_security else "dev.codex.schubert.nk.api.maintenance."
     if args.credential_loader:
         package = "dev.codex.schubert.nk.api.file."
@@ -184,6 +187,13 @@ def main():
                  "inodeTypeBeforeNativeOrContent", "fileAttributesAndNulls", "boundedReadsAndEof",
                  "postReadChangesReject", "ioAndCloseFailures", "heldEntryAndRootReplacement",
                  "constructorAndEnumContracts", "ownedBuffersAreCleared", "concurrentReadsAndRedaction"]
+    if args.inspector_process:
+        names = ["currentOnlyAndEmptyScan", "previousKeysAndAtomicDeletion",
+                 "unverifiableRowsWarnWithoutMutation", "missingAndFaultedKeyLoads",
+                 "versionsAndPurposeSeparation", "closedMaterialFailsBeforeDatabase",
+                 "timeoutsAndInterruptionCloseKeys", "databaseFailureAndResume",
+                 "singleUseAndConcurrentContenders", "constructorAndSnapshotContracts",
+                 "ownedCopiesAndMaterialLifetimes", "publicLoaderFailureAndRedaction"]
     if (len(cases) != len(names) or int(suite.get("tests", "0")) != len(names)
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or {c.get("name") for c in cases} != set(names)
@@ -203,6 +213,8 @@ def main():
                            "InspectorCredentialLoader$NioIo", "InspectorCredentialLoader$Metadata",
                            "InspectorCredentialLoader$Snapshot"}
     expected_classes = {package.replace(".", "/") + name for name in coverage_names}
+    if args.inspector_process:
+        expected_classes.add(package.replace(".", "/") + "InspectorProcess$OwnedKeys")
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
                if c.get("name") in expected_classes]
     if not args.sql and {c.get("name") for c in classes} != expected_classes:
@@ -247,6 +259,8 @@ def main():
         folder = "inode-security"
     if args.credential_loader:
         folder = "credential-loader"
+    if args.inspector_process:
+        folder = "inspector-process"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -271,7 +285,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 141 if args.inspector_process else 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -415,7 +429,12 @@ def main():
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-134", "BUG-098"]
         manifest["fixture"] = "Real temporary files/retained handles/FileChannel and runtime CSPRNG32-byte independently assembled envelopes; explicitly synthetic privileged UID/mode/ACL/readonly metadata and package-local fault ports. Real default IO rejects the unprivileged RW fixture. No key/file content saved."
         manifest["oracle"] = "035/036 PT129..140: four literal IDs; previous absent only before entry callback, current/mid-IO/close missing fail; type-before-native, metadata null/type/size/link/owner and all before-after fields; partial/short/long/zero/lying reads bounded70; channel and entry close plus root recheck before parse; actual path replacement cannot redirect, all working buffers zero, independent returned key copies and100 concurrent loads. Does not certify root-manager credential provisioning."
-    if args.credential_access or args.inode_security or args.credential_loader:
+    if args.inspector_process:
+        manifest["scopeResult"] = "PASS_SINGLE_USE_INSPECTOR_KEY_RUN_COMPOSITION_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-135", "BUG-014", "YKT-012", "BUG-101", "BUG-102", "BUG-103", "YKT-090", "YKT-091"]
+        manifest["fixture"] = "Real isolated PostgreSQL and limited inspector role; independent JCE Login error/ASCII key envelope with runtime32-byte material; package-local source/clock ports, real JDBC and root rejection. No key/wire/dump logged."
+        manifest["oracle"] = "037/038 PT141..152: current/previous four-key snapshot, version and all cross-purpose key reuse rejected before DB; old-key decryption/deletion and protected unknown/Question rows; missing/failed/closed loads close all acquired material, timeout/interruption/storage/uncertain commit/new-instance resume;100 contenders yield one winner, input snapshots/nulls/redaction, borrowed root remains live. Private copy clearing also reviewed at its single lexical finally owner. No main/systemd/parent gate certificate."
+    if args.credential_access or args.inode_security or args.credential_loader or args.inspector_process:
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")} for cls in classes}
     manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."

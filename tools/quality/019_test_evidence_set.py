@@ -50,7 +50,8 @@ class EvidenceSetTest(unittest.TestCase):
                 "authentication-cleanup", "non-authentication-inspection", "full-inbox-sql",
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
-                "inbox-aes-credential", "credential-access", "inode-security", "credential-loader")]
+                "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
+                "inspector-process")]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -104,7 +105,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(24, len(check()))
+            self.assertEqual(25, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -114,7 +115,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(24):
+        for failed_at in range(25):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -127,9 +128,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(24, len(calls))
+        self.assertEqual(25, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertEqual("--credential-loader", calls[-1][-1])
+        self.assertEqual("--inspector-process", calls[-1][-1])
 
     @staticmethod
     def write_scope(root, scope, changes=None):

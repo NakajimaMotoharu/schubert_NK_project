@@ -34,6 +34,8 @@ Python品質canaryはJava930件に加算せず、Java JaCoCo coverage100%をPyth
 
 ## 4. 再現command
 
+PG-D-135追加時はinspector-processを必須scopeへ加え25scopeに拡張する。019独立inventory/全25失敗段/100異常bindingも同時に追加し、初回正式検証は28で実施予定。既存27の24scope完了記録を後から25scopeへ読み替えない。
+
 source commitを確定しclean reactor build終了後、次を順に実行する。collector中もsrc/pom/characterization/toolsは変更しない。
 
 ```sh
