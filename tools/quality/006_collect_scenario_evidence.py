@@ -11,6 +11,11 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def scenario_storage_suite(name):
+    # PG-D-146: shared module is not shared Program ownership. OPS IDs live in collector022.
+    return ".nk.storage." in name and name != "dev.codex.schubert.nk.storage.LinuxFileLockTest"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -61,7 +66,7 @@ def main():
                         or ".api.idempotency.JdbcScenarioSnapshotReplacementTest" in suite.get("name", "")
                         or ".api.application.scenario." in suite.get("name", "")
                         or ".api.storage." in suite.get("name", "")
-                        or ".nk.storage." in suite.get("name", "")
+                        or scenario_storage_suite(suite.get("name", ""))
                         or ".web.storage." in suite.get("name", "")
                         or ".protocol.codec.ScenarioRecordEncodingTest" in suite.get("name", ""))
             selected = cases if scenario else [c for c in cases if c.get("name", "").startswith("bug036")]

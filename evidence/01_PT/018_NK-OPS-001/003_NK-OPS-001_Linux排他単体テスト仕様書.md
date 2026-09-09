@@ -16,8 +16,10 @@ LinuxFileLock、RD OPS-009/AVL、UI251、SS311/341 §3/343、SSC-049/PG-D-146。
 | PT-OPS-FLOCK-004 | callbackFailureAndClose | callback IO/runtime/null結果でもFDを閉じる。close故障時成功にしない、秘密canary非露出 |
 | PT-OPS-FLOCK-005 | nativeErrorsAndFlags | open失敗・flock11/4/9/22/37・close失敗、固定flags/各close回数/呼出順 |
 | PT-OPS-FLOCK-006 | inputAndPlatformContracts | null/path/FD表記/overflow/未知OS・ABI/欠落symbolをIO前に拒否 |
-| PT-OPS-FLOCK-007 | concurrentSingleWinner | 同inode32同時呼出し、保持中1成功/31競合、解放後再獲得。別fileは独立 |
-| PT-OPS-FLOCK-008 | retainedInodeAndDescriptorLifetime | 元path置換でも保持inodeだけをlockし、借用元FDを閉じない。CLOEXECと例外時回収、後続操作可能 |
+| PT-OPS-FLOCK-007 | concurrentSingleWinner | 同inode32同時呼出し、保持中1成功/31競合、解放後再獲得 |
+| PT-OPS-FLOCK-008 | retainedInodeAndDescriptorLifetime | 元path置換でも保持inodeだけをlockし、借用元FDを閉じない。別inodeは独立、後続操作可能 |
+
+CLOEXECは005のnative open引数0x80000で確認する。子processに継承されたFD一覧の実測を行ったとはしない。例外時回収は004、別inode独立性は008。ABI選択分岐は3表記を試験するが、native実行環境はamd64でありaarch64実行実績ではない。
 
 ## 3. Gateと証跡
 

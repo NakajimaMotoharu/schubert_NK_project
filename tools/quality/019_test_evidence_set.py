@@ -28,9 +28,16 @@ inspection = module("inspection_collector", "016_collect_inbox_inspection_eviden
 database = module("inspector_database_collector", "021_collect_inspector_database_evidence.py")
 launch = module("inspector_launch_collector", "022_collect_inspector_launch_evidence.py")
 backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py")
+scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_shared_storage_program_ownership(self):
+        self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.LinuxFileLockTest"))
+        self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest"))
+        for name in ("LinuxDirectoryCallsTest", "OwnedTransferDirectoryTest", "LinuxInodeSecurityTest"):
+            self.assertTrue(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage." + name))
+
     def test_backup_rerun_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
         names = ("sameDayBackupReruns", "ordinarySuccessStillUnique", "attemptAndDateBoundaries",
@@ -67,14 +74,18 @@ class EvidenceSetTest(unittest.TestCase):
     def test_deployment_inventory_and_nonpassing_cases(self):
         groups = [("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest", 1,
                    ("renderedShellCheck", "statusMapping", "malformedReceipts", "argumentsAndPlaceholders",
-                    "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation"))]
+                    "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation")),
+                  ("dev.codex.schubert.nk.storage.LinuxFileLockTest", 1,
+                   ("nativeRoundTrip", "externalFlockInteroperability", "fcntlIsNotFlock", "callbackFailureAndClose",
+                    "nativeErrorsAndFlags", "inputAndPlatformContracts", "concurrentSingleWinner", "retainedInodeAndDescriptorLifetime"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
     def check_launch_inventory(self, groups, deployment):
         suites, expected = [], {}
-        prefix = "PT-OPS-INBOX" if deployment else "PT-DB-INBOX"
         for cls, start, names in groups:
+            prefix = ("PT-OPS-FLOCK" if cls == "dev.codex.schubert.nk.storage.LinuxFileLockTest"
+                      else "PT-OPS-INBOX") if deployment else "PT-DB-INBOX"
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
                 ET.SubElement(suite, "testcase", classname=cls, name=name)
