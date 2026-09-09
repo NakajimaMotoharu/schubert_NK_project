@@ -93,7 +93,7 @@ UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。�
 |---|---|---|
 | `maintenance_next_auth_inbox(uuid,timestamptz,uuid)` | EXECUTE。run_id、固定cutoff、after_message_id（最初はNULL） | PUBLIC/app/batch/Web/backup/opsへEXECUTEしない。最大1行、LGN/LOG応答だけ |
 | `auth_sessions` | SELECT列: id,user_id,created_message_id,context_hash,context_ciphertext,key_version,issued_at,revoked,revoked_at | 任意DML/DDLなし。expires_at/last_accessed_at/client_address等の不要列を追加しない |
-| `request_inbox`基底table、app_users/password、Web schema | 直接権限なし | Inboxは候補functionだけから読む。認証user/password queryは呼ばない |
+| `request_inbox`基底table、app_users/password、Web schema | V008時点は直接権限なし。追加は3.6のid/version列だけ | Inboxは候補functionだけから読む。認証user/password queryは呼ばない |
 
 候補functionはnk_owner所有/SECURITY DEFINER、固定search_pathとUTCを設定。run_id/cutoff必須、無限cutoff拒否、advisory xact lock 71419602取得、同run・cutoffのJST business_dateのDB/config backup SUCCESS（ended_at必須）を確認してbackup行をID昇順FOR SHARE。未達は固定SQLSTATE 22023/55P03/55000で失敗し秘密値を例外へ出さない。
 `processing_state IN (COMPLETED,ERROR)`、LGN/LOG response、`expires_at < cutoff`、`message_id > after`の候補をMessage PK昇順で1行だけFOR UPDATEし、AUTH_SESSION参照があれば当該auth_sessionsをFOR SHAREする。全Inbox列は既存composite型で検査processだけへ返す（SQLは明示列）。snapshot/参照欠落はJava検査で保持し、SQL単体で復号・整合合格としない。直接base table SELECTも不要。
@@ -110,6 +110,20 @@ callerは3.4の候補取得時に同じSQLから`pg_current_xact_id()::text`と`
 SQL自体はAES/HMAC検証器ではない。専用processが検証前にこの関数を呼ばないこと、候補/参照/backupのlockを検証開始からcommitまで保持することをJavaの所有境界とPTで保証する。transaction IDはtop-level IDでSAVEPOINT rollbackの証明にはならないため、所有serviceは新規connectionを外へ公開せずSAVEPOINT/外部callback/途中commitを使用しない。検査credentialを奪った任意SQL主体への暗号証明をこの関数が提供するとは主張しない。V001～008は変更しない。V006の汎用Inbox削除の置換と全layout結線は別の残件であり本追加だけでBUG-014を完了にしない。
 
 対応PT-DB-INBOX-025～032はSQLの全引数/条件/権限/lock/再実行・正常削除のmatrix。Javaの検査接続は別PTで認証の正常/不整合/故障/並行を検証する。
+
+### 3.6 全候補走査と24応答の限定削除（SSC-049、PG-D-124、V010予定）
+
+V010で`maintenance_next_inbox(uuid,timestamptz,uuid)`と`maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)`を追加し、検査roleだけへEXECUTEする。所有/固定search_path/UTC/SQLSTATE・1行/固定run/cutoff/top-level transaction/hash・SAVEPOINT禁止・SQLだけでは暗号証明にならない制約は3.4/3.5を継承する。V008/V009は認証限定の既存contractとして変更せず維持する。
+
+共通内部`maintenance_lock_inbox_backup(uuid,timestamptz)`はSECURITY INVOKER、PUBLIC/検査role/他serviceへEXECUTEを与えずnk_ownerのdefiner関数からだけ呼ぶ。NULL/有限cutoff、71419602、同run/JST日付/ended_at付きDB/CONFIG SUCCESSを単一locked queryで確認する。失敗22023/55P03/55000、backup snapshot途中追加を採用しない。外から共通helperを呼べたことを削除前検証とみなさない。
+
+候補はlayoutを限定せずCOMPLETED/ERRORかつexpires<cutoffをUUID昇順1行FOR UPDATEする。未知/未実装layoutもJavaで保護WARNINGとして数えられるよう返す。PROCESSING・未期限は候補外。参照type AUTH_SESSION/USER/SCENARIO_FILEだけ、それぞれauth_sessions.id/app_users.id/script_files.idをFOR SHAREして返す。不在参照はJavaがfalseとする。Question/JOB等は参照検査未実装として保持し、この段階では削除許可しない。
+
+追加SELECT列はapp_users(id,version)、script_files(id,game_id)だけ。任意DML/DDL、password/username/role/status、master本文・path/hash、base Inbox、Web schema、SET ROLE禁止を維持する。User/Scenario参照の明示CASTはJava projection用でありDDL型を変えない。
+
+条件付き削除の許可routeはLGN/LOGとSS324 §12.4の22種、計24 canonical REQ01/RSP01対応だけ。LGN ownerなし、その他owner必須。LGN/LOGとquery17種はoperation_tokenなし、User更新5種はtoken必須。両version001、同Message/ciphertext hash、完了state、有限created/completed/expires、created<=completed、expires<cutoffを要求する。最短保持はLGN/LOG/User更新5種168時間、query17種24時間。NONE/型付き参照の形態はDDLとSQLで検査し、実応答codeとの参照整合は同transactionのJava検査を必須とする。認証はNONE/AUTH_SESSION、User更新はNONE/USER、SCNはNONE/SCENARIO_FILE、他queryはNONEだけ。対象外/再削除=false。
+
+PT049～056で実SQL全引数/分岐/各24route/token/owner/ref/期限境界、最小列権限/禁止42501、参照とbackup/advisory競合、rollback/同run再走、未知候補保持・PROCESSING除外を検証する。migration inventory期待値は承認された追加に合わせ10へ更新し、旧1～9のhashを保全する。SQL matrixをJava coverageと偽らない。Java全候補の原子的検査接続・oneshot・V006置換は後続gateでありV010だけでBUG-014を閉じない。
 
 ## 4. Account・Session
 
