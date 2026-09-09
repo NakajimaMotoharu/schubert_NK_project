@@ -2,7 +2,7 @@
 
 ## 1. 判定
 
-最新正式判定: PT-WEB-20260909-22/source4e65b550、2026-09-09 11:45:25 JST完了、全886件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-progress-service/manifest.jsonの現行SHA-256は `423b74cdbd019590f81e81790c832b449ea76c1275975c1005d12701d90becce`。8collector/19scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。SQLは026の全7共通gate・5削除条件matrixへ追跡。BUG-092～095/YKT-083～086/SSC-050再試験完了。全件run executor/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-23/sourcef84b5153、2026-09-09 12:01:13 JST完了、全894件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-progress-service/manifest.jsonの現行SHA-256は `0ea0ba5cf291780478d0b7cb881cdde7a5b26a9cd824b735b6a5597603cf2149`。8collector/20scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。Executor3classはline50/method8/class3/branch29全missed0。SQLは026 matrixへ追跡。鍵file/ACL/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
 以下は探索時の履歴。正式未確定/Java接続未完了という旧記述は、上記対象sliceに限り更新済み。process/親接続の残件は維持する。
 

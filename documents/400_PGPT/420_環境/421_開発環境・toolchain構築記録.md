@@ -249,6 +249,12 @@ Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`d
 | 静的解析/coverage | ProtocolはCompiler `-Xlint:all -Werror`、JSpecify、SpotBugs Max/Low、JaCoCo 4指標100%を導入済み。NullAway相当のcompile-time null dataflow、PMD/Checkstyle/Spotlessとparent継承は後続module追加前にgate化する | 一部完了 |
 | Secret scan | Program対象source/config/test/reportをcredential/private key/token、raw body marker、CRLF/NUL、disabled/flaky/skipped/not-runと併せてscanしsanitized report化 | 実施中（NK-MSG-001でpattern/known-marker scanを導入しhit 0。全repositoryのentropy scanは総合gateで実施） |
 
+### 6.1 検査process接続準備の既存systemd/ACL環境
+
+2026-09-09、`dpkg-query -W systemd acl libacl1`でsystemd259.5-0ubuntu3.4、acl/libacl1 2.3.2-2を確認。Ubuntu既存package、今回のinstall/upgrade/置換はなし。本体はPATH上でなく`/usr/lib/systemd/systemd --version`、validatorは`systemd-analyze`。`getfacl --version`は2.3.2、libacl.so.1は/usr/lib/x86_64-linux-gnu。system/system-user managerのread-only状態照会はともにrunning。既存service停止/再設定は行っていない。
+
+再現: 上記version照会と`systemctl is-system-running`/`systemctl --user is-system-running`で可用性を確認する。PG-D-131/SS343 §6.1のsource0600とruntime readonly/ACLの区別は、将来の専用unit/ACL実PTで検証する。現在はそのPTを実施済みにせず、IT/ST稼働完了を宣言しない。参照は[systemd v259原本](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)。導入先minor版と実ACLの照合は後続gate。
+
 ## 7. 更新履歴
 
 | 日付 | 内容 |

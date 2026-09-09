@@ -1,6 +1,6 @@
 # NK-DAT-001 非認証Inbox参照検査実行結果
 
-最新正式判定: PT-WEB-20260909-22/source4e65b550、2026-09-09 11:45:25 JST完了、全886件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/non-authentication-inspection/manifest.jsonの現行SHA-256は `eb2013bdee6ac4d80abf7ea3e425e539062eb7dcc6df2f558234930d2cbc9f42`。8collector/19scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。SQLは026の全7共通gate・5削除条件matrixへ追跡。BUG-092～095/YKT-083～086/SSC-050再試験完了。全件run executor/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-23/sourcef84b5153、2026-09-09 12:01:13 JST完了、全894件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/non-authentication-inspection/manifest.jsonの現行SHA-256は `c01fa118e7e7ad4a8c0aad90bc430308abe81e8ef6ba15a893e4f4dc0fed6077`。8collector/20scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。Executor3classはline50/method8/class3/branch29全missed0。SQLは026 matrixへ追跡。鍵file/ACL/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
 以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
 

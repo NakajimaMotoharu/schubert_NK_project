@@ -1,5 +1,9 @@
 # NK-DAT-001 Inbox全件走査executor実行結果
 
+最新正式判定: PT-WEB-20260909-23/sourcef84b5153、2026-09-09 12:01:13 JST完了、全894件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-run-executor/manifest.jsonの現行SHA-256は `07f979b58260d022deebe9e9e8b218671bbbc23f315bfb25db95527f770154b0`。8collector/20scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。Executor3classはline50/method8/class3/branch29全missed0。SQLは026 matrixへ追跡。鍵file/ACL/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
+
+以下は探索時の履歴。正式未確定という記述は本sliceに限り上記で更新済み。
+
 027/PT097～104、PG-D-130、SSC-049。探索1 /tmp/pgpt-inbox-executor-explore-1.log、2026-09-09 11:53:20 JST完了、1分38秒、exit0。新8/永続8/旧認証8/旧非認証8/DB15/Protocol5/Storage16=68件PASS、failed/error/skipped0。関連3classのline50/method8/class3/branch29/instruction225、全missed0。NullAway/Spotless PASS、SpotBugs0。正式root/証跡未確定なのでslice完了へ不算入、正式22/886件に含めない。
 
 ## 1. 独立後条件

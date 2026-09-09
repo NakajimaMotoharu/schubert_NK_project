@@ -145,6 +145,14 @@ Symmetric keyは最低32 byte、自動生成passwordは最低32 byte相当のCSP
 
 SSC-049/PG-D-122: 検査processの鍵は起動時に読取り後、不変のcurrent/previous snapshotとしてprocess終了まで保持する。鍵rotationは同じ保守OS lockの下で検査process停止を確認して行い、検査から削除までの途中close/rotationを禁止する。HMAC秘密値は検査へ渡さず、保持中HMACの読取り可能version名だけを非秘密設定として固定する。
 
+### 6.1 Inbox検査のAES credential byte形式（SSC-049、PG-D-131）
+
+検査へ配布するapi-context-aes/current・previousおよびapi-inbox-response-aes/current・previousの各fileは、ASCIIで `NKKEY1 LF version LF base64 LF` とする（斜線表記は本節の説明上の略称、正式IDは上表のハイフン名）。versionは既存codecと同じ1～16 byteの `[A-Za-z0-9][A-Za-z0-9._-]{0,15}`、keyはAES-256の32 byteを標準Base64・必須padding・canonical表現の44 byteへ符号化する。全54～69 byte、LFのみ、BOM/CRLF/空白/余分field/末尾data/未padding/非canonical末尾bitを禁止する。値そのものはGit/argv/env/ログ/証跡へ記録しない。今回の形式確定は内部credential搬送であり、保存済AES envelopeや電文を変更しない。
+
+InspectorAesCredential.consume(byte[])は入力arrayの排他的所有を引き受け、正常/不正いずれもfinallyで消去する。versionだけを非秘密Stringとして保持し、base64/keyをString化しない。decodeしたkeyは長さ/canonical検証後にprivate所有とし、失敗時のtemporaryも消去する。copyKeyは独立arrayを返しcallerが使用後消去、closeはprivate lockの下で所有keyを消去して冪等終了、close後copyKeyは禁止。version/状態だけの診断で値を出さない。Java/JCA内部の不可制御copyまで物理消去を保証したとは述べず、所有bufferの明示消去・heapdump非生成・process寿命の管理を組み合わせる。
+
+元file0600とsystemd配布後のruntime権限は別物である。systemd 259の実装はroot所有fileへ対象UIDのACLを追加する経路と、対応filesystemによって所有者を移す経路を持つ。単に「runtime file owner=serviceかつmode0400だけ」とする実装は採用しない。後続readerは保持inode、regular/symlink/hardlink/サイズ、readonly/owner/実効ACLの専用主体限定、読取/close失敗を検証してからmaterialを渡す。ACL検証未実装を緩いmode判定で代用せず、main/専用unit/親processの鍵配布を完了にしない。[systemd 259 credential実装](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)、[公式credential契約](https://raw.githubusercontent.com/systemd/systemd/v259/man/systemd.exec.xml)を参照（2026-09-09確認）。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
