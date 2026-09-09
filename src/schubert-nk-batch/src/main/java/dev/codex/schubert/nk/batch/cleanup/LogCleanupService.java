@@ -45,6 +45,9 @@ public final class LogCleanupService {
         }
         return new LogCleanupSummary(run, initial.before(), progress);
       }
+    } catch (CleanupStoppedException failure) {
+      // BUG-145/YKT-113: resource closure can append raw JDBC suppressed diagnostics.
+      throw new CleanupStoppedException(failure.reason());
     } catch (SQLException | BatchRepositoryException failure) {
       throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
     }

@@ -1,0 +1,22 @@
+{
+  "runId": "PT-WEB-20260909-44",
+  "targetCommit": "71cb6769724b0c35bdcf74e10c90fa4724818354",
+  "startedAt": "2026-09-09T20:42:06+09:00",
+  "completedAt": "2026-09-09T20:49:08+09:00",
+  "exitCode": 0,
+  "rawLogSha256": "814a373039cc7fdd4881d6012eb0e21b15a9f47401fa80070fada6f205f4150a",
+  "testsByModule": {
+    "chr": 41,
+    "protocol": 80,
+    "storage": 50,
+    "api": 634,
+    "web": 241,
+    "batch": 53
+  },
+  "qualityCertification": "NOT_PROMOTED_KNOWN_BUG_145",
+  "related": [
+    "BUG-145",
+    "YKT-113"
+  ],
+  "notes": "All existing 1099 PT passed on source71cb6769; newly found compound Log lease cleanup fault is not covered by that run. No evidence-set collectors/certificate promotion for44; fix and re-run under a new ID. This is not a failed test run and not a completed PGPT gate."
+}

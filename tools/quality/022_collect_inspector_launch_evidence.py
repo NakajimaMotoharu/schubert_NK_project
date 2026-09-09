@@ -156,7 +156,7 @@ def main():
     })
     if args.deployment:
         manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage", "batch")}
-        manifest["related"] += ["PG-D-146", "PG-D-147", "PG-D-148", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112", "BUG-143", "YKT-113", "BUG-144"]
+        manifest["related"] += ["PG-D-146", "PG-D-147", "PG-D-148", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112", "BUG-143", "YKT-113", "BUG-144", "BUG-145"]
         manifest["reviewedStaticDiagnostic"] = {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False}
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."

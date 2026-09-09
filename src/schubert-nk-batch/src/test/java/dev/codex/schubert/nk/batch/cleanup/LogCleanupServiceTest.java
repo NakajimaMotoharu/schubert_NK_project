@@ -257,6 +257,62 @@ final class LogCleanupServiceTest {
 
   @Test
   void restorationAndUnlockFailures() throws Exception {
+    // BUG-145/YKT-113: a primary LOCK_BUSY must not expose suppressed raw JDBC close errors.
+    for (var faults :
+        List.of(
+            List.of("lock.resultClose"),
+            List.of("lock.statementClose"),
+            List.of("lock.resultClose", "lock.statementClose"))) {
+      var probe = new ServiceJdbcProbe();
+      faults.forEach(fault -> probe.failAt.put(fault, 1));
+      try (var holder = db.admin();
+          var c = batch()) {
+        assertEquals("true", scalar(holder, "select pg_try_advisory_lock(71419602)::text"));
+        stopped(
+            CleanupStopReason.LOCK_BUSY,
+            () -> new LogCleanupService(() -> 0).execute(probe.wrap(c), RUN));
+        assertEquals(faults.size(), probe.failures);
+        assertEquals(1, probe.seen.get("lock.resultClose"));
+        assertEquals(1, probe.seen.get("lock.statementClose"));
+        assertEquals(0, probe.commits);
+        assertEquals(0, probe.rollbacks);
+        assertEquals(0, probe.closes);
+        assertFalse(probe.seen.containsKey("cleanup.executeQuery"));
+        assertTrue(c.getAutoCommit());
+        assertEquals("true", scalar(holder, "select pg_advisory_unlock(71419602)::text"));
+      }
+      assertEquals("0", countLogs());
+    }
+    // Every typed early stop is re-created after lease cleanup; the primary reason remains.
+    for (var reason :
+        List.of(
+            CleanupStopReason.TIME_LIMIT,
+            CleanupStopReason.INTERRUPTED,
+            CleanupStopReason.BACKUP_GATE)) {
+      reset();
+      if (reason == CleanupStopReason.BACKUP_GATE)
+        try (var admin = db.admin()) {
+          sql(admin, "delete from schubert.batch_runs");
+        }
+      var probe = new ServiceJdbcProbe();
+      probe.failAt.put("unlock.resultClose", 1);
+      probe.failAt.put("unlock.statementClose", 1);
+      if (reason == CleanupStopReason.INTERRUPTED)
+        probe.afterCommit = count -> Thread.currentThread().interrupt();
+      try (var c = batch()) {
+        try {
+          var supplier = reason == CleanupStopReason.TIME_LIMIT ? clock(0, 0, LIMIT) : clock(0);
+          stopped(reason, () -> new LogCleanupService(supplier).execute(probe.wrap(c), RUN));
+          assertEquals(2, probe.failures);
+          assertEquals(
+              reason == CleanupStopReason.INTERRUPTED, Thread.currentThread().isInterrupted());
+          assertEquals(0, probe.closes);
+        } finally {
+          Thread.interrupted();
+        }
+      }
+    }
+    reset();
     for (String fault :
         List.of(
             "restore",
@@ -485,10 +541,7 @@ final class LogCleanupServiceTest {
     assertEquals(reason, failure.reason());
     assertEquals("cleanup did not complete", failure.getMessage());
     assertNull(failure.getCause());
-    for (var extra : failure.getSuppressed()) {
-      assertInstanceOf(CleanupStoppedException.class, extra);
-      assertNull(extra.getCause());
-    }
+    assertEquals(0, failure.getSuppressed().length);
     return failure;
   }
 
