@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox検査権限・候補lock実行結果
 
-最新正式判定: PT-WEB-20260909-31/source7efedb19、2026-09-09 14:56:08～15:02:39 JST、dev-foundation、exit0、全979件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/inspection-sql/manifest.json SHA-256 `dc2fbe5cb93110e4efa9186c4080f10ea31266159b27656eab78b23f01e135d7`。018全27scopeの同一run/source/branch/hash/参照、017の1件・019の5件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/inspection-sql/manifest.json SHA-256 `4f31615b1a61a9f1db534ae3714d587467e403c48406f1f4c4e2aa7af23c1e83`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inspection-sql/manifest.jsonの現行SHA-256は `3f95f71c3ad75f250c21755370737e56983eb1b8027de80af166555a536a145f`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 

@@ -1,6 +1,6 @@
 # NK-DAT-001 全Inbox候補・限定削除SQL実行結果
 
-最新正式判定: PT-WEB-20260909-31/source7efedb19、2026-09-09 14:56:08～15:02:39 JST、dev-foundation、exit0、全979件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/full-inbox-sql/manifest.json SHA-256 `32517e0ce82eb1cd57e00d9c6f4076751a57c1082006320e510145073838eb4e`。018全27scopeの同一run/source/branch/hash/参照、017の1件・019の5件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/full-inbox-sql/manifest.json SHA-256 `1c8b6865a3a689d96611e4ccf6567b3215df2ce4a331c0b0dc3b1c04d0211428`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/full-inbox-sql/manifest.jsonの現行SHA-256は `61622856868d28ab62bcfe5ad2a592034d63eb48678a7331ae19cb4d4d99b15f`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 

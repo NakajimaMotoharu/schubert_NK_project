@@ -1,6 +1,6 @@
 # NK-DAT-001 検査credential権限実行結果
 
-最新正式判定: PT-WEB-20260909-31/source7efedb19、2026-09-09 14:56:08～15:02:39 JST、dev-foundation、exit0、全979件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/credential-access/manifest.json SHA-256 `ab73972d667548c8c1c5f480c9d4f603e08288e159eb08196c8173e87fc23fba`。018全27scopeの同一run/source/branch/hash/参照、017の1件・019の5件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/credential-access/manifest.json SHA-256 `a07ee46be4920bd30a2d140f80eeb61862ad02d18b6fc68ef6f0def6568da6c0`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、dev-foundation、2026-09-09 12:40:24～12:46:41 JST、exit0。全918件（Protocol80/Storage42/API514/Web241/CHR41）、failed/error/skipped0、5 Java moduleの4種coverage100%/静的解析0。新8 PTは全PASS、line30/method7/class1/branch28/instruction179全missed0。evidence/credential-access/manifest.json SHA-256 `c592639b76e48b5605ccca4dd9b96c5839d6f412f15cead5d6e498451d374a3a`。8collector/23scopeのhash/trace/負canary、V001～013/Current baseline不変、秘密pattern scan0hit。BUG-097/YKT-088はsource6dd862d0・本正式runで再試験完了。file reader/実systemd/main/親gateは未完了。以下は探索履歴。
 

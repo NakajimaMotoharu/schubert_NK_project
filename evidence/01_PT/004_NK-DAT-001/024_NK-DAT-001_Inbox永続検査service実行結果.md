@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続検査service実行結果
 
-最新正式判定: PT-WEB-20260909-31/source7efedb19、2026-09-09 14:56:08～15:02:39 JST、dev-foundation、exit0、全979件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/inbox-progress-service/manifest.json SHA-256 `cde5056769d9fe17cf38e0566ea0f965cebf41cc3a878c02fed80219746654fb`。018全27scopeの同一run/source/branch/hash/参照、017の1件・019の5件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/inbox-progress-service/manifest.json SHA-256 `4212a3f6194e2204532b1844f04f8ac4e558ab1a0ad10be9c1dcc7fb3c5bb802`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
 
 ## 1. 判定
 

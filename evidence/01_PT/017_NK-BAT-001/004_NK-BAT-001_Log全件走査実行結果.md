@@ -1,6 +1,6 @@
 # NK-BAT-001 Log全件走査 実行結果
 
-最新正式判定: PT-WEB-20260909-31/source7efedb19、2026-09-09 14:56:08～15:02:39 JST、dev-foundation、exit0。新12件＋repository17件＝29件、全体979件、6 Java module全4coverage100%・静的解析0。新6classはline115/method16/class6/branch48、全batch14classはline215/method35/class14/branch94で全missed0。evidence/manifest.json SHA-256 `783ba56ceb628bdc96fb98cf48c328c08881194e18f8a2c07cdee8cbdd046b7a`。018全27scopeの同時点性/hash/参照、017の1件・019の5件負canary成功。BUG-104/112・YKT-092/098・SSC-051の本Log走査原因は再試験完了。main/親OS/実backup/全朝batchは未完了。以下は探索履歴。
+最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0。新12件＋repository17件＝29件、全体987件、6 Java module全4coverage100%・静的解析0。新6classはline115/method16/class6/branch48、全batch14classはline215/method35/class14/branch94で全missed0。evidence/manifest.json SHA-256 `fc9d18b4d345ac5dd2f2d5a0857903b8342a64544c691323685ab36a26e23a49`。018全28scopeの同時点性/hash/参照、017の1件・019の6件負canary成功。BUG-104/112・YKT-092/098・SSC-051の本Log走査原因は再試験完了。main/親OS/実backup/全朝batchは未完了。以下は探索履歴。
 
 PG-D-138/003/PT-BAT-018～029。探索2は2026-09-09 14:54:20 JST終了、13.215秒、dev-foundation/100aea52後の未commit実装、exit0。新12＋既存17=29件全成功、新6classはline115/method16/class6/branch48/instruction493で全missed0、batch全14classも4coverage100%。NullAway/Enforcer/Spotless PASS・SpotBugs0。正式全module回帰/収集までは未合格。親OS/実backup/専用main/全batchは未完了。
 

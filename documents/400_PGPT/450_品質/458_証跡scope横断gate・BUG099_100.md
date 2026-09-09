@@ -34,6 +34,8 @@ Python品質canaryはJava930件に加算せず、Java JaCoCo coverage100%をPyth
 
 ## 4. 再現command
 
+最新正式32/sourcefa0d53b4: 987件/6 Java module、9collector/28scopeの同時点性/hash/参照までPASS。新question-queryは8 Test IDとshared9class coverage、SQL V015hashを収集。019の6件（28段各失敗/112bindingと8query ID負canary）＋017の1件＝7 Python PT。BUG-115の旧最終flagはquestion-queryへ修正し全段再試験。SQLは新4照会を含む28routeでありJava SQL coverageと混同しない。
+
 最新正式31/source7efedb19は979件/6 Java module、9collector/27scopeの同一run/source/branch/全hash/参照までPASS。batchはrepository17＋Log全件service12の2class/29 Test IDを020で必須化。019は5 PT（新12 IDと2class集合の欠落/重複/別class等の負canary追加）、017は1 PT、計6 Python PTをJava979へ加算しない。正式30は967件/27scopeで成功済み。
 
 追補: 正式28は25scope/942件、正式29は26scope/950件を全収集確認済み。PG-D-137のbatch追加では9collector/27scope・6 Java moduleへ拡張し、019は4 PT（batchの17 Test ID負canary追加）となる。正式30で初回全体確認する。過去24/25/26scopeの履歴を27へ改記しない。

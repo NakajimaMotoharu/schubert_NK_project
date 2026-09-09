@@ -1,0 +1,341 @@
+{
+  "runId": "PT-WEB-20260909-32",
+  "programId": "NK-DAT-001",
+  "targetCommit": "fa0d53b4dacc0d5af8b074dd89b66d251aca0d5c",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_QUERY_4_ROUTE_INSPECTION_DELETE_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T15:46:34+09:00",
+  "completedAt": "2026-09-09T15:53:15+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "231e8df6f4c7e2fdbe01a8c3a0ac901afc635669d9699aece398c1600aad157f",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0",
+    "postgresql": "18.6",
+    "jdbc": "42.7.13",
+    "flyway": "13.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 1682
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 295
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 106
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 30
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 9
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 152
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-161": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#queryProfilesAndFrozenSnapshots",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-162": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#goldenBoundsAndSemanticDamage",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-163": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#canonicalIdentityReferencesAndNulls",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-164": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#validRowsDeleteAndRetainExactMetadata",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-165": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#retentionBackupAndSqlAuthority",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-166": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#failuresRollbackAndResume",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-167": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#concurrentAndDurableMixedRuns",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-168": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest#appendOnlyInventoryAndClosedRoutes",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Independent UI literal offsets/TSV/header and test-only JCE/Deflater, synthetic owner and empty business tables, isolated PostgreSQL/restricted roles, public JDBC faults, no raw keys/wire/dumps.",
+  "oracle": "041/042 PT161..168: four layouts x12 result codes; page0/1/50 and 51 rejection; detail states/deleted/empty and4096-byte answers, literal malformed field offsets/AAD/reference/null; exact24h/cutoff/backup/role/lock; rollback and uncertain commit durable resume;100 concurrent inspectors and mixed11/4/7 END, immutableV001..014. Java counters are shared-class aggregate; SQL branches are mapped separately, not SQL JaCoCo.",
+  "remaining": "Three mutation references QSB/NTC/QDL, private main/oneshot, parent OS/real-backup and full cross-audit remain incomplete; query business application and whole PGPT/IT/ST are NOT certified.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "PG-D-139",
+    "BUG-014",
+    "YKT-012",
+    "BUG-113",
+    "BUG-114",
+    "BUG-115",
+    "BUG-116",
+    "BUG-117",
+    "BUG-118",
+    "BUG-119",
+    "BUG-120",
+    "YKT-099",
+    "YKT-100"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "20c6b367fb85220db8c40b5fb36495fe7df68a0be55fe79acc45678e3979df8f"
+    }
+  ],
+  "classCoverage": {
+    "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InboxCleanup": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 915
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 78
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 156
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 54
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionRun": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 39
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InboxCleanup$LoadedProgress": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionProgress": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 76
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 36
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InboxCleanup$Candidate": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 21
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 567
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 50
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 102
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "sqlSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+      "sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b"
+    }
+  ]
+}
