@@ -1,5 +1,7 @@
 # NK-DAT-001 認証Inbox検査削除service単体テスト仕様書
 
+PG-D-125/SS324 §12.5承認変更: 対象を共通`InboxCleanup`（旧AuthenticationInboxCleanup）へ改称し、PT033～040の認証期待・所有境界・故障/並行matrixを維持する。PT034の非認証layoutへ変造したrowだけ、候補外ENDからPROTECTED/保持へ更新する（V010は全期限済完了候補を返すため）。未期限/PROCESSINGはENDのまま。SQL名はmaintenance_next_inbox/maintenance_delete_inboxを使用する。新非認証8 PTは017/PT057～064で別に追跡。以下の初版契約はこの明示変更以外を緩和しない。
+
 ## 1. 対象・契約（実装前）
 
 `AuthenticationInboxCleanup`のconstructor/inspectNext/内部JDBC境界、`InspectionRun`、`InspectionStep`、`InboxMaintenanceException`。RD OPS-009/DAT-009/MQ-008、UI212/241/251、SS324 §12.3/331 §3.5/332/341/343/352、QA-046/UIC-006/SSC-049、PG-D-122。ProductionはAPI module maintenance package、PTはAuthenticationInboxCleanupTest、結果は012。

@@ -24,7 +24,6 @@ import org.junit.jupiter.api.io.TempDir;
 final class NonAuthenticationInboxInspectorTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
-  private static List<String[]> dimensions, fields;
   private static final UUID MESSAGE = new UUID(0, 1), FILE = new UUID(0, 3);
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final List<String> LAYOUTS =
@@ -60,11 +59,6 @@ final class NonAuthenticationInboxInspectorTest {
 
   @BeforeAll
   static void start() throws Exception {
-    Path fixtures =
-        Path.of(System.getProperty("nk.pt.repository"))
-            .resolve("src/schubert-nk-protocol/src/test/resources/protocol");
-    dimensions = tsv(fixtures.resolve("layouts-ui233.tsv"));
-    fields = tsv(fixtures.resolve("fields-ui234-236.tsv"));
     db = new ApiLogDatabaseFixture(root);
   }
 
@@ -456,7 +450,7 @@ final class NonAuthenticationInboxInspectorTest {
     }
   }
 
-  private static Map<String, String> fileValues(int count) {
+  static Map<String, String> fileValues(int count) {
     return new HashMap<>(
         Map.of(
             "Delivery mode",
@@ -476,7 +470,14 @@ final class NonAuthenticationInboxInspectorTest {
   }
 
   /** UI fixture, not production layout/codec. Explicit normal values; zero N/blank X for errors. */
-  private static byte[] wire(String layout, String code, Map<String, String> overrides, int count) {
+  static byte[] wire(String layout, String code, Map<String, String> overrides, int count)
+      throws Exception {
+    // Shared independent test builder: no dependency on another test's BeforeAll ordering.
+    Path fixtures =
+        Path.of(System.getProperty("nk.pt.repository"))
+            .resolve("src/schubert-nk-protocol/src/test/resources/protocol");
+    var dimensions = tsv(fixtures.resolve("layouts-ui233.tsv"));
+    var fields = tsv(fixtures.resolve("fields-ui234-236.tsv"));
     String[] dimension =
         dimensions.stream().filter(d -> d[0].equals(layout)).findFirst().orElseThrow();
     int dataSize = Integer.parseInt(dimension[3]), recordSize = Integer.parseInt(dimension[4]);
@@ -566,7 +567,7 @@ final class NonAuthenticationInboxInspectorTest {
       if (layout.equals("SCNRSP01")) data.put("File byte長", "0");
     }
     data.putAll(overrides);
-    area(bytes, 256, layout, "DATA", data, !Set.of("0000", "0200").contains(code));
+    area(bytes, 256, layout, "DATA", data, !Set.of("0000", "0200").contains(code), fields);
     for (int i = 0; i < count; i++) {
       area(
           bytes,
@@ -584,7 +585,8 @@ final class NonAuthenticationInboxInspectorTest {
               "narration",
               "本文",
               "Synthetic text"),
-          false);
+          false,
+          fields);
     }
     return bytes;
   }
@@ -595,7 +597,8 @@ final class NonAuthenticationInboxInspectorTest {
       String layout,
       String area,
       Map<String, String> values,
-      boolean errorProfile) {
+      boolean errorProfile,
+      List<String[]> fields) {
     for (var field : fields) {
       if (!field[0].equals(layout) || !field[1].equals(area)) continue;
       int start = base + Integer.parseInt(field[3]) - 1, length = Integer.parseInt(field[4]);

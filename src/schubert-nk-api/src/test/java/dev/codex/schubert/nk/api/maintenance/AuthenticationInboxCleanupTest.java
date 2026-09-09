@@ -118,7 +118,10 @@ final class AuthenticationInboxCleanupTest {
         seed(f, LOGIN, "0000");
         sql("update schubert.request_inbox set " + mutation);
         assertEquals(
-            InspectionStep.Outcome.END, service(f).inspectNext(RUN, Optional.empty()).outcome());
+            mutation.contains("GAMREQ01")
+                ? InspectionStep.Outcome.PROTECTED
+                : InspectionStep.Outcome.END,
+            service(f).inspectNext(RUN, Optional.empty()).outcome());
         assertEquals("1", count());
       }
     }
@@ -146,35 +149,55 @@ final class AuthenticationInboxCleanupTest {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
       assertThrows(
           NullPointerException.class,
-          () -> new AuthenticationInboxCleanup(null, f.inspector, Set.of("v1")));
+          () ->
+              new InboxCleanup(
+                  null,
+                  f.inspector,
+                  new NonAuthenticationInboxInspector(f.snapshots),
+                  Set.of("v1")));
       assertThrows(
           NullPointerException.class,
           () ->
-              new AuthenticationInboxCleanup(
-                  AuthenticationInboxCleanupTest::connection, null, Set.of("v1")));
+              new InboxCleanup(
+                  AuthenticationInboxCleanupTest::connection,
+                  null,
+                  new NonAuthenticationInboxInspector(f.snapshots),
+                  Set.of("v1")));
       assertThrows(
           NullPointerException.class,
           () ->
-              new AuthenticationInboxCleanup(
-                  AuthenticationInboxCleanupTest::connection, f.inspector, null));
+              new InboxCleanup(
+                  AuthenticationInboxCleanupTest::connection,
+                  f.inspector,
+                  new NonAuthenticationInboxInspector(f.snapshots),
+                  null));
       var nullElement = new HashSet<String>();
       nullElement.add(null);
       assertThrows(
           NullPointerException.class,
           () ->
-              new AuthenticationInboxCleanup(
-                  AuthenticationInboxCleanupTest::connection, f.inspector, nullElement));
+              new InboxCleanup(
+                  AuthenticationInboxCleanupTest::connection,
+                  f.inspector,
+                  new NonAuthenticationInboxInspector(f.snapshots),
+                  nullElement));
       for (Set<String> versions :
           List.of(Set.<String>of(), Set.of(""), Set.of("v1", "bad secret value")))
         assertThrows(
             IllegalArgumentException.class,
             () ->
-                new AuthenticationInboxCleanup(
-                    AuthenticationInboxCleanupTest::connection, f.inspector, versions));
+                new InboxCleanup(
+                    AuthenticationInboxCleanupTest::connection,
+                    f.inspector,
+                    new NonAuthenticationInboxInspector(f.snapshots),
+                    versions));
       var versions = new HashSet<>(Set.of("v1", "previous"));
       var cleanup =
-          new AuthenticationInboxCleanup(
-              AuthenticationInboxCleanupTest::connection, f.inspector, versions);
+          new InboxCleanup(
+              AuthenticationInboxCleanupTest::connection,
+              f.inspector,
+              new NonAuthenticationInboxInspector(f.snapshots),
+              versions);
       versions.clear();
       assertThrows(NullPointerException.class, () -> cleanup.inspectNext(null, Optional.empty()));
       assertThrows(NullPointerException.class, () -> cleanup.inspectNext(RUN, null));
@@ -316,8 +339,7 @@ final class AuthenticationInboxCleanupTest {
       }
     }
     for (String selected :
-        List.of(
-            "maintenance_next_auth_inbox", "maintenance_delete_auth_inbox", "inspection_health")) {
+        List.of("maintenance_next_inbox", "maintenance_delete_inbox", "inspection_health")) {
       for (String fault : List.of("executeQuery", "resultClose", "statementClose")) {
         reset();
         try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
@@ -326,6 +348,7 @@ final class AuthenticationInboxCleanupTest {
           p.selectedSql = selected;
           p.fault = fault;
           redacted(() -> probed(f, p).inspectNext(RUN, Optional.empty()));
+          assertTrue(p.selectedStatements >= 1, selected);
           assertEquals("1", count());
           assertEquals(1, p.rollbacks);
           assertEquals(1, p.closes);
@@ -350,6 +373,7 @@ final class AuthenticationInboxCleanupTest {
                 InspectionStep.Outcome.END,
                 probed(f, p).inspectNext(RUN, Optional.empty()).outcome());
           else redacted(() -> probed(f, p).inspectNext(RUN, Optional.empty()));
+          assertTrue(p.selectedStatements >= 1, selected);
           assertEquals("1", count());
           assertEquals(1, p.closes);
         }
@@ -373,16 +397,21 @@ final class AuthenticationInboxCleanupTest {
           InspectionStep.Outcome.END, service(f).inspectNext(RUN, Optional.empty()).outcome());
       redacted(
           () ->
-              new AuthenticationInboxCleanup(
+              new InboxCleanup(
                       () -> {
                         throw new SQLException("synthetic-private-provider-marker");
                       },
                       f.inspector,
+                      new NonAuthenticationInboxInspector(f.snapshots),
                       Set.of("v1"))
                   .inspectNext(RUN, Optional.empty()));
       redacted(
           () ->
-              new AuthenticationInboxCleanup(() -> null, f.inspector, Set.of("v1"))
+              new InboxCleanup(
+                      () -> null,
+                      f.inspector,
+                      new NonAuthenticationInboxInspector(f.snapshots),
+                      Set.of("v1"))
                   .inspectNext(RUN, Optional.empty()));
     }
   }
@@ -422,8 +451,11 @@ final class AuthenticationInboxCleanupTest {
       seed(f, LOGIN, "0101");
       var observed = new ThreadLocal<MaintenanceJdbcProbe>();
       var cleanup =
-          new AuthenticationInboxCleanup(
-              () -> observed.get().wrap(connection()), f.inspector, Set.of("v1"));
+          new InboxCleanup(
+              () -> observed.get().wrap(connection()),
+              f.inspector,
+              new NonAuthenticationInboxInspector(f.snapshots),
+              Set.of("v1"));
       var tasks = new ArrayList<Callable<String>>();
       for (int i = 0; i < 100; i++)
         tasks.add(
@@ -498,8 +530,11 @@ final class AuthenticationInboxCleanupTest {
               new AuthenticationInboxInspector(
                   snapshots, contexts, new dev.codex.schubert.nk.api.security.ContextHash());
           var cleanup =
-              new AuthenticationInboxCleanup(
-                  AuthenticationInboxCleanupTest::connection, inspector, Set.of("v1"));
+              new InboxCleanup(
+                  AuthenticationInboxCleanupTest::connection,
+                  inspector,
+                  new NonAuthenticationInboxInspector(snapshots),
+                  Set.of("v1"));
           assertEquals(
               InspectionStep.Outcome.DELETED, cleanup.inspectNext(RUN, Optional.empty()).outcome());
           assertEquals("0", count());
@@ -514,14 +549,21 @@ final class AuthenticationInboxCleanupTest {
     assertEquals("55P03", sqlState);
   }
 
-  private static AuthenticationInboxCleanup service(AuthenticationInboxInspectorTest.Fixture f) {
-    return new AuthenticationInboxCleanup(
-        AuthenticationInboxCleanupTest::connection, f.inspector, Set.of("v1"));
+  private static InboxCleanup service(AuthenticationInboxInspectorTest.Fixture f) {
+    return new InboxCleanup(
+        AuthenticationInboxCleanupTest::connection,
+        f.inspector,
+        new NonAuthenticationInboxInspector(f.snapshots),
+        Set.of("v1"));
   }
 
-  private static AuthenticationInboxCleanup probed(
+  private static InboxCleanup probed(
       AuthenticationInboxInspectorTest.Fixture f, MaintenanceJdbcProbe p) {
-    return new AuthenticationInboxCleanup(() -> p.wrap(connection()), f.inspector, Set.of("v1"));
+    return new InboxCleanup(
+        () -> p.wrap(connection()),
+        f.inspector,
+        new NonAuthenticationInboxInspector(f.snapshots),
+        Set.of("v1"));
   }
 
   private static Connection connection() throws SQLException {

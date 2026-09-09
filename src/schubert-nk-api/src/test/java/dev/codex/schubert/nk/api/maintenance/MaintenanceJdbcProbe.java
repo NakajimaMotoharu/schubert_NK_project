@@ -11,10 +11,10 @@ import java.util.Map;
  * Public JDBC interface fault/ownership probe over real PG, not private implementation reflection.
  */
 final class MaintenanceJdbcProbe {
-  String selectedSql = "maintenance_next_auth_inbox", fault = "none";
+  String selectedSql = "maintenance_next_inbox", fault = "none";
   String lastSqlState = "unobserved";
   boolean empty, duplicate, commitAfter, fresh = true;
-  int commits, closes, rollbacks, saves, deletes;
+  int commits, closes, rollbacks, saves, deletes, selectedStatements;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeDelete = c -> {};
 
@@ -48,12 +48,15 @@ final class MaintenanceJdbcProbe {
               }
               if (name.equals("prepareStatement")) {
                 String sql = (String) a[0];
-                if (sql.contains("maintenance_delete_auth_inbox")) {
+                if (sql.contains("maintenance_delete_inbox")) {
                   deletes++;
                   beforeDelete.run(c);
                 }
                 boolean selected = sql.contains(selectedSql);
-                if (selected) fail("prepareStatement");
+                if (selected) {
+                  selectedStatements++;
+                  fail("prepareStatement");
+                }
                 return statement(c, (PreparedStatement) invoke(c, m, a), selected);
               }
               fail(name);

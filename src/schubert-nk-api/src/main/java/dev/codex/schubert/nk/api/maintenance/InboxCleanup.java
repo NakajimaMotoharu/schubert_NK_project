@@ -13,10 +13,40 @@ import org.jspecify.annotations.NullMarked;
  * callback, SAVEPOINT, connection exposure, authentication, wire emission, or key ownership.
  * Composition keeps inspector keys alive/immutable until every call returns. NK-DAT-001;
  * OPS-009/DAT-009/MQ-008; UI212/241/251; SS324 12.3/331 3.5/341/343/352;
- * QA-046/UIC-006/SSC-049/BUG-014; PG-D-122; PT-DB-INBOX-033..040.
+ * QA-046/UIC-006/SSC-049/BUG-014; PG-D-122/125; SS324 12.5/331 3.6; PT-DB-INBOX-033..040/057..064.
+ * Unsupported completed rows are protected, not silently skipped.
  */
 @NullMarked
-public final class AuthenticationInboxCleanup {
+public final class InboxCleanup {
+  private static final Set<String> REQUESTS =
+      Set.of(
+          "LGNREQ01",
+          "LOGREQ01",
+          "GAMREQ01",
+          "SPKREQ01",
+          "RTEREQ01",
+          "SCFREQ01",
+          "SRCREQ01",
+          "SCNREQ01",
+          "AUDREQ01",
+          "ANMREQ01",
+          "ANLREQ01",
+          "VIDREQ01",
+          "MCTREQ01",
+          "MCSREQ01",
+          "MTRREQ01",
+          "MEDREQ01",
+          "USRREQ01",
+          "UDTREQ01",
+          "LGSREQ01",
+          "UCRREQ01",
+          "USTREQ01",
+          "URLREQ01",
+          "UPWREQ01",
+          "ULKREQ01");
+  private static final Set<String> TOKEN_REQUESTS =
+      Set.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01");
+  private static final Set<String> AUTHENTICATION_RESPONSES = Set.of("LGNRSP01", "LOGRSP01");
   private static final String NEXT =
       "select message_id,correlation_id,request_layout_id,request_version,owner_user_id,"
           + "operation_token,request_fingerprint_hmac,fingerprint_key_version,processing_state,"
@@ -24,17 +54,20 @@ public final class AuthenticationInboxCleanup {
           + "response_body_encrypted,response_key_version,created_at,completed_at,expires_at,"
           + "pg_current_xact_id()::text as inspection_xact,"
           + "sha256(response_body_encrypted) as inspection_hash"
-          + " from schubert.maintenance_next_auth_inbox(?,?,?)";
+          + " from schubert.maintenance_next_inbox(?,?,?)";
   private final SqlConnectionProvider connections;
   private final AuthenticationInboxInspector inspector;
+  private final NonAuthenticationInboxInspector nonAuthentication;
   private final Set<String> fingerprintVersions;
 
-  public AuthenticationInboxCleanup(
+  public InboxCleanup(
       SqlConnectionProvider connections,
       AuthenticationInboxInspector inspector,
+      NonAuthenticationInboxInspector nonAuthentication,
       Set<String> fingerprintVersions) {
     this.connections = Objects.requireNonNull(connections, "connections");
     this.inspector = Objects.requireNonNull(inspector, "inspector");
+    this.nonAuthentication = Objects.requireNonNull(nonAuthentication, "nonAuthentication");
     this.fingerprintVersions = Set.copyOf(fingerprintVersions);
     if (this.fingerprintVersions.isEmpty()) {
       throw new IllegalArgumentException("readable fingerprint versions are required");
@@ -92,8 +125,11 @@ public final class AuthenticationInboxCleanup {
           var outcome = InspectionStep.Outcome.PROTECTED;
           if (candidate.isPresent()) {
             Candidate value = candidate.orElseThrow();
-            if (inspector.isConsistent(connection, value.identity, value.completion)
-                && delete(connection, run, value)) {
+            boolean consistent =
+                AUTHENTICATION_RESPONSES.contains(value.identity.responseLayoutId())
+                    ? inspector.isConsistent(connection, value.identity, value.completion)
+                    : nonAuthentication.isConsistent(connection, value.identity, value.completion);
+            if (consistent && delete(connection, run, value)) {
               outcome = InspectionStep.Outcome.DELETED;
             }
           }
@@ -111,11 +147,12 @@ public final class AuthenticationInboxCleanup {
     requireValue(row.getTimestamp("created_at"));
     requireValue(row.getTimestamp("expires_at"));
     boolean login = request.equals("LGNREQ01");
-    if ((!login && !request.equals("LOGREQ01"))
-        || !response.equals(login ? "LGNRSP01" : "LOGRSP01")
+    if (!REQUESTS.contains(request)
+        || !response.equals(request.substring(0, 3) + "RSP01")
         || !requireValue(row.getString("request_version")).equals("001")
         || !requireValue(row.getString("response_version")).equals("001")
-        || row.getObject("operation_token", UUID.class) != null
+        || (row.getObject("operation_token", UUID.class) != null)
+            != TOKEN_REQUESTS.contains(request)
         || !requireValue(row.getString("request_fingerprint_hmac")).matches("[0-9a-f]{64}")
         || !fingerprintVersions.contains(requireValue(row.getString("fingerprint_key_version")))) {
       return Optional.empty();
@@ -164,7 +201,7 @@ public final class AuthenticationInboxCleanup {
       throws SQLException {
     try (var statement =
         connection.prepareStatement(
-            "select schubert.maintenance_delete_auth_inbox(?,?,?,?,?) as deleted")) {
+            "select schubert.maintenance_delete_inbox(?,?,?,?,?) as deleted")) {
       statement.setObject(1, run.id());
       statement.setTimestamp(2, Timestamp.from(run.cutoff()));
       statement.setObject(3, candidate.identity.requestMessageId());
