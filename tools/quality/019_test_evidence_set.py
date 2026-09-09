@@ -25,9 +25,46 @@ media = module("media_collector", "009_collect_media_evidence.py")
 gate = module("set_collector", "018_collect_verified_evidence_set.py")
 batch = module("batch_collector", "020_collect_batch_evidence.py")
 inspection = module("inspection_collector", "016_collect_inbox_inspection_evidence.py")
+database = module("inspector_database_collector", "021_collect_inspector_database_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_database_credential_inventory_and_nonpassing_cases(self):
+        prefix = "dev.codex.schubert.nk.api."
+        groups = [
+            (prefix + "maintenance.InspectorDbCredentialTest", 193,
+             ("validUtf8AndNewlines", "invalidEncodingAndBounds", "ownedCopiesAndClose", "concurrentOwnership")),
+            (prefix + "file.InspectorDatabaseCredentialLoaderTest", 197,
+             ("validBoundedFile", "missingAndInvalidContent", "permissionsAndMetadata", "ioFailuresAndCleanup", "concurrentFilesAndAesRegression")),
+            (prefix + "maintenance.InspectorDatabaseConnectionsTest", 202,
+             ("fixedConnectionProperties", "urlAndNullContracts", "connectionAdmission", "sqlFailuresRemainRedacted",
+              "closeAndConcurrentOpen", "realScramRoleAndPassword", "ownedInspectionConnection"))]
+        self.assertEqual(groups, list(database.GROUPS))
+        suites = []
+        expected = {}
+        for cls, start, names in groups:
+            suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+            for i, name in enumerate(names, start):
+                ET.SubElement(suite, "testcase", classname=cls, name=name)
+                expected[f"PT-DB-INBOX-{i:03}"] = cls + "#" + name
+            suites.append(suite)
+        self.assertEqual(expected, database.validate_reports(suites))
+        for index, suite in enumerate(suites):
+            for position in range(len(suite)):
+                wrong = copy.deepcopy(suites); wrong[index].remove(wrong[index][position])
+                with self.assertRaises(ValueError): database.validate_reports(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+                wrong = copy.deepcopy(suites); ET.SubElement(wrong[index][0], tag)
+                with self.assertRaises(ValueError): database.validate_reports(wrong)
+            for key, value in (("tests", "0"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suites); wrong[index].set(key, value)
+                with self.assertRaises(ValueError): database.validate_reports(wrong)
+            for key, value in (("classname", "unknown"), ("name", "unknown"), ("name", suite[1].get("name"))):
+                wrong = copy.deepcopy(suites); wrong[index][0].set(key, value)
+                with self.assertRaises(ValueError): database.validate_reports(wrong)
+        for wrong in ([], suites[:-1], suites + [suites[0]], [suites[0]] * 3):
+            with self.assertRaises(ValueError): database.validate_reports(wrong)
+
     def test_mutation_inventory_rejects_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest"
         names = ["validMutationReferences", "submitReferencesAndWork", "cancellationHistory",
@@ -196,6 +233,7 @@ class EvidenceSetTest(unittest.TestCase):
         for name in ("AssetChecksumManifestTest", "AssetManifestLoaderTest", "HeldMediaFileInspectorTest"):
             self.assertEqual("NK-MED-001", media.shared_file_program(prefix + name))
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorCredentialLoaderTest"))
+        self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorDatabaseCredentialLoaderTest"))
         for name in ("NewMediaTest", "", "InspectorCredentialLoaderTest"):
             with self.assertRaisesRegex(ValueError, "unmapped"):
                 media.shared_file_program(name)
@@ -217,7 +255,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation")]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database")]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -271,7 +309,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(30, len(check()))
+            self.assertEqual(31, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -281,7 +319,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(30):
+        for failed_at in range(31):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -294,9 +332,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(30, len(calls))
+        self.assertEqual(31, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertEqual("--question-mutation", calls[-1][-1])
+        self.assertTrue(calls[-1][2].endswith("/021_collect_inspector_database_evidence.py"))
 
     @staticmethod
     def write_scope(root, scope, changes=None):

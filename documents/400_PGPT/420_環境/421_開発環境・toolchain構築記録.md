@@ -33,11 +33,13 @@ PG-D-058/PT-SCN-20260908-08のFS条件: 本機`df -T /tmp /home/mini/codex/proje
 | SpotBugs Maven Plugin | 4.10.4.0 | Maven Central `com.github.spotbugs:spotbugs-maven-plugin` | Protocol `verify`、Max/Low、error時FAIL、XML出力 | BUG-002検出・修正後bug/error 0 |
 | PostgreSQL | 18.6 (`18.6-0ubuntu0.26.04.1`) | Ubuntu 26.04 `resolute-updates/main`の`postgresql-18`、`postgresql-client-18`、`libpq5` deb | `work/characterization-tools/root/usr`へrootless展開。Testごとに`target`下へ`initdb`し、loopbackの自動選択portと合成fixtureだけを使用 | Flyway V001～V005、21 table、role/grant/constraint/functionのPT 15件PASS |
 | Flyway | 13.4.0 | Maven Central `org.flywaydb:flyway-core` / `flyway-database-postgresql` | API PT scopeにversion固定。`schubert_meta.flyway_schema_history`、`initSql=SET ROLE nk_owner`、validate on、out-of-order/baseline off、clean disabled | 初回5 migration、再実行0、checksum drift拒否、並行実行直列化 |
-| PostgreSQL JDBC | 42.7.13 | Maven Central `org.postgresql:postgresql` | API PT scopeにversion固定、PostgreSQL 18へのJDBC検査に使用 | catalog/SQLSTATE/role権限PT PASS |
+| PostgreSQL JDBC | 42.7.13 | Maven Central `org.postgresql:postgresql` | PG-D-142でAPI runtime scopeへ移行（PTでも同一artifact）、専用InspectorのDriverManager接続に使用。版更新/再導入なし | 従来catalog/SQLSTATE/role権限PT PASS、新SCRAM/接続PTは048で別判定 |
 | Apache Artemis | 2.56.0 | Apache Artemis公式配布とMaven Central `org.apache.artemis` | Binaryは`work/toolchain/artemis`へ展開。API/Web POMでJakarta clientをproduction、APIのserver/Jakarta serverをPT scopeに固定 | Java 25で`artemis version`、archive SHA-512照合、実NIO File Journalの再起動・duplicate・1/5/25秒再配送・transaction・DLQ component PT PASS |
 | Python | 3.14.4 | OS既存 | SS 323 named recordのversion管理済み再現生成scriptと検証補助に限定。通常のsource編集には使用しない | `python3 --version`、69 record/64 mappingの再生成hash一致 |
 | jq | OS既存 | Ubuntu package | PATH | 最終gateでversion記録 |
 | unzip/sha256sum | OS既存 | Ubuntu package/coreutils | PATH | command存在確認済み |
+
+PG-D-142/JDBC runtime再現: `org.postgresql:postgresql:42.7.13` jar SHA-256 `6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93`、既存Maven Central取得済みm2をoffline利用。JDK25.0.4+7/Maven3.9.12は不変更。`src/schubert-nk-api/pom.xml`のruntime依存を含めたrelease classpathが必要で、jar単体をdriver同梱と誤記しない。PT207はJUnit TempDirの隔離PGだけへ合成SCRAM password/専用role限定hbaを設定し、daemon/実DB/実credentialを変更しない。起動・試験・証跡の正式再現commandは048へ記録する。
 
 DownloadしたdebとMaven cacheは作業領域だけに保持する。Evidence manifestへpackage versionとbinary SHA-256を記録し、Gitにはdownload binaryを含めない。
 

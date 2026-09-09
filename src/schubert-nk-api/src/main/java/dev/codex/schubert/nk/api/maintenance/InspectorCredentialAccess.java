@@ -38,6 +38,13 @@ public final class InspectorCredentialAccess {
     require(links == 1 && size >= 54 && size <= 69);
   }
 
+  /** Same runtime access contract, with SS343 6.6 password bounds; PT-DB-INBOX-197..201. */
+  public void requireDatabaseFile(
+      int mode, long ownerUid, int links, long size, boolean readOnlyFilesystem, byte[] accessAcl) {
+    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0100000, 4, fileAcl);
+    require(links == 1 && size >= 1 && size <= 65536);
+  }
+
   private void requireAccess(
       int mode,
       long ownerUid,

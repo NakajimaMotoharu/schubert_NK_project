@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.file;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorAesCredential;
 import dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccess;
+import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageIoException;
@@ -58,7 +59,8 @@ public final class InspectorCredentialLoader {
     byte[] buffer = new byte[70];
     try {
       Snapshot before = root.atDirectory(this::directory);
-      OptionalInt length = readOptional(credential, buffer);
+      OptionalInt length =
+          readOptional(credential.fileName(), credential.optional(), buffer, false);
       require(before.equals(root.atDirectory(this::directory)));
       if (length.isEmpty()) return Optional.empty();
       return Optional.of(InspectorAesCredential.consume(Arrays.copyOf(buffer, length.getAsInt())));
@@ -69,29 +71,44 @@ public final class InspectorCredentialLoader {
     }
   }
 
-  private OptionalInt readOptional(AesCredentialFile credential, byte[] buffer)
+  /** Fixed mandatory password file; caller owns returned material. SS343 6.6/PT193..208. */
+  public InspectorDbCredential loadDatabasePassword() throws InspectorCredentialException {
+    byte[] buffer = new byte[65537];
+    try {
+      Snapshot before = root.atDirectory(this::directory);
+      int length = readOptional("db-inbox-inspector", false, buffer, true).orElseThrow();
+      require(before.equals(root.atDirectory(this::directory)));
+      return InspectorDbCredential.consume(Arrays.copyOf(buffer, length));
+    } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      throw new InspectorCredentialException();
+    } finally {
+      Arrays.fill(buffer, (byte) 0);
+    }
+  }
+
+  private OptionalInt readOptional(
+      String fileName, boolean optional, byte[] buffer, boolean database)
       throws StorageIoException {
     // Operation-local marker: missing after entry acquisition/inside IO/at close is not optional.
     var entered = new AtomicBoolean();
     try {
       int length =
           root.atExistingEntryHandle(
-              credential.fileName(),
+              fileName,
               held -> {
                 entered.set(true);
-                return readFile(held, buffer);
+                return readFile(held, buffer, database);
               });
       return OptionalInt.of(length);
     } catch (StorageIoException failure) {
-      if (failure.reason() == StorageIoException.Reason.MISSING
-          && !entered.get()
-          && credential.optional()) return OptionalInt.empty();
+      if (failure.reason() == StorageIoException.Reason.MISSING && !entered.get() && optional)
+        return OptionalInt.empty();
       throw failure;
     }
   }
 
-  private int readFile(Path held, byte[] bytes) throws IOException {
-    Snapshot before = file(held);
+  private int readFile(Path held, byte[] bytes, boolean database) throws IOException {
+    Snapshot before = file(held, database);
     int expectedSize = (int) before.metadata().size();
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
     try (var channel = io.openReadOnly(held)) {
@@ -105,7 +122,7 @@ public final class InspectorCredentialLoader {
       require(buffer.position() == expectedSize);
       require(channel.size() == expectedSize);
     }
-    require(before.equals(file(held)));
+    require(before.equals(file(held, database)));
     return expectedSize;
   }
 
@@ -118,18 +135,27 @@ public final class InspectorCredentialLoader {
     return new Snapshot(metadata, readonly);
   }
 
-  private Snapshot file(Path held) throws IOException {
+  private Snapshot file(Path held, boolean database) throws IOException {
     Metadata metadata = metadata(io.attributes(held));
     // Must precede native path-following getxattr/statvfs and any content open on O_PATH symlinks.
     require((metadata.mode() & 0170000) == 0100000);
     boolean readonly = security.readOnlyFilesystem(held);
-    policy.requireAesFile(
-        metadata.mode(),
-        metadata.uid(),
-        metadata.links(),
-        metadata.size(),
-        readonly,
-        security.accessAcl(held, 44));
+    if (database)
+      policy.requireDatabaseFile(
+          metadata.mode(),
+          metadata.uid(),
+          metadata.links(),
+          metadata.size(),
+          readonly,
+          security.accessAcl(held, 44));
+    else
+      policy.requireAesFile(
+          metadata.mode(),
+          metadata.uid(),
+          metadata.links(),
+          metadata.size(),
+          readonly,
+          security.accessAcl(held, 44));
     return new Snapshot(metadata, readonly);
   }
 

@@ -21,7 +21,7 @@ UTF-8 byteは手入力位置/独立JDK標準符号化、期待char列とzero化�
 | PT-DB-INBOX-199 | 同.permissionsAndMetadata | file/dir type・owner・mode・link・ACL/RO・前後変化・NULL属性を拒否、読取前gate維持 |
 | PT-DB-INBOX-200 | 同.ioFailuresAndCleanup | open/read/0read/過長/size変化/channel/entry/root再検証/close各故障で成功なし、buffer消去 |
 | PT-DB-INBOX-201 | 同.concurrentFilesAndAesRegression | 100独立読取、4 AES名/54～69制約を維持、任意名APIなし |
-| PT-DB-INBOX-202 | InspectorDatabaseConnectionsTest.fixedConnectionProperties | canonical loopback URLだけ、固定5property、独立password copy、Propertiesは成功/失敗後clear |
+| PT-DB-INBOX-202 | InspectorDatabaseConnectionsTest.fixedConnectionProperties | canonical loopback URLだけ、固定4property、独立password copy、Propertiesは成功/失敗後clear |
 | PT-DB-INBOX-203 | 同.urlAndNullContracts | null/credential終了、port0/65536、host/URL parameter/fragment/userinfo/DB識別子不正を接続前拒否 |
 | PT-DB-INBOX-204 | 同.connectionAdmission | autoCommit/readOnly/current_user/session_user/database/recovery/row欠落重複/nullの全拒否、返却connection所有境界 |
 | PT-DB-INBOX-205 | 同.sqlFailuresRemainRedacted | connect/属性/prepare/execute/next/get/statement/result/connection close各故障の固定SQLException、cause/suppressed/secretなし |

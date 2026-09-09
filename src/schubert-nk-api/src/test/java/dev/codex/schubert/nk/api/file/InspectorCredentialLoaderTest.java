@@ -394,7 +394,7 @@ final class InspectorCredentialLoaderTest {
     assertFalse(error.toString().contains(SENTINEL));
   }
 
-  private static final class Fixture implements AutoCloseable {
+  static final class Fixture implements AutoCloseable {
     final Path root;
     final EntryCloseProbe calls = new EntryCloseProbe();
     final OwnedTransferDirectory held;
@@ -440,11 +440,11 @@ final class InspectorCredentialLoaderTest {
   }
 
   @FunctionalInterface
-  private interface Hook {
+  interface Hook {
     void run() throws IOException;
   }
 
-  private static final class TestIo implements InspectorCredentialLoader.Io {
+  static final class TestIo implements InspectorCredentialLoader.Io {
     final InspectorCredentialLoader.NioIo actual = new InspectorCredentialLoader.NioIo();
     String fault = "", securityFault = "";
     int rootAttributes, fileAttributes, opens, reads, closes, fileNative, rootRo, fileRo;
@@ -569,12 +569,16 @@ final class InspectorCredentialLoaderTest {
     }
 
     void assertCleared() {
-      for (byte[] buffer : buffers) assertArrayEquals(new byte[70], buffer);
+      assertCleared(70);
+    }
+
+    void assertCleared(int expectedSize) {
+      for (byte[] buffer : buffers) assertArrayEquals(new byte[expectedSize], buffer);
       Arrays.fill(observedContent, (byte) 0); // test-owned observation is cleared as well
     }
   }
 
-  private static final class TestSecurity implements InodeSecurityCalls {
+  static final class TestSecurity implements InodeSecurityCalls {
     final TestIo io;
     long uid = 1000;
 
@@ -622,7 +626,7 @@ final class InspectorCredentialLoaderTest {
     }
   }
 
-  private static final class EntryCloseProbe implements DirectoryCalls {
+  static final class EntryCloseProbe implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> entries = new HashSet<>();
     boolean closeMissing, closeUnavailable, openFailure;
