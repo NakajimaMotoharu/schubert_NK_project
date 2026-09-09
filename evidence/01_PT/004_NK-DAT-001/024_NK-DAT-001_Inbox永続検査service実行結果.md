@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続検査service実行結果
 
-最新正式再試験: PT-WEB-20260909-33/sourcef3940eac、2026-09-09 16:11:26～16:18:10 JST、dev-foundation、exit0。全体995件（Protocol80/Storage42/API562/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%・静的解析0。対象Test ID・個別結果・coverageはevidence/inbox-progress-service/manifest.json、SHA-256 `20e6a74590ac98bdecb9cd8a821e1453a5933b2cf851af26ae6fac7d355b83cf`。全29scope/9collectorの同一run/source/branch・全hash/参照、017の1件・019の7件負canary成功。Current baseline不変、秘密pattern scan0hit。更新対象binding codecは追加合格したが更新3参照/通常writer・replay/main・oneshot/親OS・実backup/実NK CHRは未完了。以下は個別試験の経緯・過去の探索履歴。
+最新正式再試験: PT-WEB-20260909-35/source413dc339、2026-09-09 17:06:16～17:13:16 JST、dev-foundation、exit0。全体1011件（Protocol80/Storage42/API578/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/inbox-progress-service/manifest.json、SHA-256 `70982d4b77dd06f4ab3a7de06306d3af50a9c96bbf83a186c974e1ab32812102`。全30scope/9collectorの同run/source/branch/hash/参照、017の1件・019の8件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046で追加合格、通常writer/replay・DB credential/main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 ## 1. 判定
 

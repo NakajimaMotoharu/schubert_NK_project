@@ -1,5 +1,7 @@
 # NK-DAT-001 共通cleanup安全境界単体テスト仕様書
 
+2026-09-09 V016回帰追補（SSC-049/PG-D-141、BUG-127/129・YKT-102）: 現在の独立catalog期待値はversion付きmigration001～016の16件、業務/technical計23table・PK23/FK23/UK constraint30/CHECK154/constraint trigger1。QWK partial unique indexはconstraint数へ混同せず045/PT192で別照合する。後述の初回V005～015等の値は当時の履歴であり、現在の回帰期待値には使わない。全31route・更新3成功のQUESTION/JOB、ERROR/NONE、168hと6種参照matrixは045/PT177～192および015/PT051～056へ追跡。各Programの実行結果・manifestにある正式sourceを正とし、未実行を合格へ含めない。
+
 Program NK-DAT-001、CleanupSafetyBoundaryTest各method/V013、RD DAT-009/OPS-009、UI251 §6、SS331 §3.3.1/332 §11/341 §7、SSC-050、PG-D-129、BUG-092/093、YKT-083/084/012。
 
 ## 1. 独立fixture・期待値

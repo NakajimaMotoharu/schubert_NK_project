@@ -1,5 +1,7 @@
 # NK-DAT-001 通常batch削除境界単体テスト仕様書
 
+2026-09-09 V016回帰追補（SSC-049/PG-D-141、BUG-127/129・YKT-102）: 現在の独立catalog期待値はversion付きmigration001～016の16件、業務/technical計23table・PK23/FK23/UK constraint30/CHECK154/constraint trigger1。QWK partial unique indexはconstraint数へ混同せず045/PT192で別照合する。後述の初回V005～015等の値は当時の履歴であり、現在の回帰期待値には使わない。全31route・更新3成功のQUESTION/JOB、ERROR/NONE、168hと6種参照matrixは045/PT177～192および015/PT051～056へ追跡。各Programの実行結果・manifestにある正式sourceを正とし、未実行を合格へ含めない。
+
 QA-046/SSC-049、BUG-014/YKT-012、PG-D-126。RD DAT-009/MQ-008/OPS-009、UI212/241/251、SS331 §3.7/332 §11.4/341。対象V011 maintenance_cleanup_message_stores、OutboxCleanupBoundaryTest。既存PT-IDEM-013/DB-011を回帰する。Productionの期待値生成は禁止し、以下のliteral後条件を使用する。
 
 | Test ID | method / 目的・入力/操作 | 期待値・独立根拠 |

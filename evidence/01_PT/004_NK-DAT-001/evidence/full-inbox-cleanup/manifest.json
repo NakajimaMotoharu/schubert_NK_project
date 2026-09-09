@@ -1,15 +1,15 @@
 {
-  "runId": "PT-WEB-20260909-33",
+  "runId": "PT-WEB-20260909-35",
   "programId": "NK-DAT-001",
-  "targetCommit": "f3940eacb11e67991a2e72b166a0974b2999d898",
+  "targetCommit": "413dc339646b3a103af2cf5bc36f2e736bfb0ffc",
   "branch": "dev-foundation",
   "exitCode": 0,
   "scopeResult": "PASS_OWNED_NON_AUTH_22_RESPONSE_DELETE_SERVICE_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T16:11:26+09:00",
-  "completedAt": "2026-09-09T16:18:10+09:00",
+  "startedAt": "2026-09-09T17:06:16+09:00",
+  "completedAt": "2026-09-09T17:13:16+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "2988a199822b5d5ef740f74de3bcb4b641525e35ff036614b02897bfccb38a4d",
+  "fullReactorManifestSha256": "41474394ec3f48fb115441c2c882106e895f9b6d2a2011a600454c5a56d36f57",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
@@ -25,15 +25,15 @@
   "coverage": {
     "INSTRUCTION": {
       "missed": 0,
-      "covered": 1030
+      "covered": 1077
     },
     "LINE": {
       "missed": 0,
-      "covered": 184
+      "covered": 190
     },
     "COMPLEXITY": {
       "missed": 0,
-      "covered": 66
+      "covered": 67
     },
     "METHOD": {
       "missed": 0,
@@ -45,7 +45,7 @@
     },
     "BRANCH": {
       "missed": 0,
-      "covered": 88
+      "covered": 90
     }
   },
   "failed": 0,
@@ -87,7 +87,7 @@
   },
   "fixture": "Independent UI TSV wire builder/JCE snapshot, runtime keys, real PostgreSQL 18.6 and dedicated role, task-local public JDBC probes; no raw wire/context/token/cipher/credential saved.",
   "oracle": "017/018 PT: 22 routes success/persistent-error, ULK0200 and SCN I/F, literal row/ref/cursor/24h/168h postconditions, fault selectors must match real SQL, rollback/uncertain commit, 100 attempts in three completed waves (33/33/34) ensure progress; only observed55P03 is expected contention.",
-  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "remaining": "Mandatory private main/oneshot/parent composition and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate manifests cover authentication, non-auth query/User, mutation-reference inspection, V011 bypass removal and durable progress; SQL/Java alone do not certify normal Question writer/replay/worker or backup-file/OS-lock wiring.",
   "related": [
     "QA-046",
     "UIC-006",
@@ -107,7 +107,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "508adc54f97dfaeb744168005b4d74befb6bb570dcb2758064f0e6d59c67f7dc"
+      "sha256": "66a8f9a78afa36e2ab8f82b7446995b763e0f2d33a7f373585b52c8ce079373f"
     }
   ],
   "classCoverage": {
@@ -136,19 +136,19 @@
     "dev/codex/schubert/nk/api/maintenance/InboxCleanup": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 915
+        "covered": 959
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 78
+        "covered": 80
       },
       "LINE": {
         "missed": 0,
-        "covered": 156
+        "covered": 161
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 54
+        "covered": 55
       },
       "METHOD": {
         "missed": 0,
@@ -214,11 +214,11 @@
     "dev/codex/schubert/nk/api/maintenance/InboxCleanup$Candidate": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 15
+        "covered": 18
       },
       "LINE": {
         "missed": 0,
-        "covered": 6
+        "covered": 7
       },
       "COMPLEXITY": {
         "missed": 0,

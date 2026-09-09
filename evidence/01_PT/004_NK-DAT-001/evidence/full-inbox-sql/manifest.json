@@ -1,15 +1,15 @@
 {
-  "runId": "PT-WEB-20260909-33",
+  "runId": "PT-WEB-20260909-35",
   "programId": "NK-DAT-001",
-  "targetCommit": "f3940eacb11e67991a2e72b166a0974b2999d898",
+  "targetCommit": "413dc339646b3a103af2cf5bc36f2e736bfb0ffc",
   "branch": "dev-foundation",
   "exitCode": 0,
-  "scopeResult": "PASS_FULL_CANDIDATE_28_ROUTE_SQL_ONLY",
+  "scopeResult": "PASS_FULL_CANDIDATE_31_ROUTE_SQL_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T16:11:26+09:00",
-  "completedAt": "2026-09-09T16:18:10+09:00",
+  "startedAt": "2026-09-09T17:06:16+09:00",
+  "completedAt": "2026-09-09T17:13:16+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "2988a199822b5d5ef740f74de3bcb4b641525e35ff036614b02897bfccb38a4d",
+  "fullReactorManifestSha256": "41474394ec3f48fb115441c2c882106e895f9b6d2a2011a600454c5a56d36f57",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
@@ -72,8 +72,8 @@
     }
   },
   "fixture": "Isolated PostgreSQL 18.6/real roles; public synthetic invalid ciphertext30 and independent JDK SHA-256. Isolated admin rollback-only constraint removal tests SQL defense in depth, never deployed data.",
-  "oracle": "015/016 PT: literal 28 routes (V015 four queries included) x 6 reference kinds, 24h/168h boundaries, private helper/minimal column grants/42501, fixed run and UUID scan, unsupported rows protected, all five batch states, 55P03 lock and controlled backup snapshot races, independent frozen V001..009 hashes.",
-  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "oracle": "015/016 PT: literal31 routes (V015 four queries and V016 three mutations included) x6 reference kinds,24h/168h boundaries, private helper/minimal column grants/42501, fixed run and UUID scan, unsupported rows protected, all five batch states,55P03 lock and controlled backup snapshot races, independent frozenV001..009 hashes. Mutation successful typed references, new parent/child locks and QWK projection are additionally certified by PT177..192, not by SQL ciphertext acceptance.",
+  "remaining": "Mandatory private main/oneshot/parent composition and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate manifests cover authentication, non-auth query/User, mutation-reference inspection, V011 bypass removal and durable progress; SQL/Java alone do not certify normal Question writer/replay/worker or backup-file/OS-lock wiring.",
   "related": [
     "QA-046",
     "UIC-006",
@@ -100,7 +100,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "5ff6d2d903f5b6440c511ddf45e45c91e14848cdd92d041bc5ef406b776d33c9"
+      "sha256": "081a2237ee765bee3a5b1b4249a83c6e4084404dc997b9bce55ffe595f81438a"
     }
   ],
   "sqlSources": [
@@ -111,6 +111,10 @@
     {
       "path": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
       "sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8"
     }
   ]
 }

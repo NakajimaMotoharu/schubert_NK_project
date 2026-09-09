@@ -1,6 +1,6 @@
 # NK-DAT-001 質問・通知照会Inbox 実行結果
 
-最新正式再試験: PT-WEB-20260909-33/sourcef3940eac、2026-09-09 16:11:26～16:18:10 JST、dev-foundation、exit0。全体995件（Protocol80/Storage42/API562/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%・静的解析0。対象Test ID・個別結果・coverageはevidence/question-query/manifest.json、SHA-256 `ee778873b1158f9e0003be905d08840f9dfc6ca6fea1d8bd36159e2df67d5446`。全29scope/9collectorの同一run/source/branch・全hash/参照、017の1件・019の7件負canary成功。Current baseline不変、秘密pattern scan0hit。更新対象binding codecは追加合格したが更新3参照/通常writer・replay/main・oneshot/親OS・実backup/実NK CHRは未完了。以下は個別試験の経緯・過去の探索履歴。
+最新正式再試験: PT-WEB-20260909-35/source413dc339、2026-09-09 17:06:16～17:13:16 JST、dev-foundation、exit0。全体1011件（Protocol80/Storage42/API578/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/question-query/manifest.json、SHA-256 `6c0801df3a6b71d12fe3235e790a179bfd0748e50ca71d08ed0ed2c6d394ff7a`。全30scope/9collectorの同run/source/branch/hash/参照、017の1件・019の8件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046で追加合格、通常writer/replay・DB credential/main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 最新探索5: 2026-09-09 15:45:25 JST終了、31.200秒、exit0。PROCESSING候補外も追加、新8＋旧SQL8全成功。017の1件・019の6件も成功（28stage/112異常binding・8query Test ID負canary）。source固定後の全module正式回帰/coverage/解析/収集はこれからであり、まだ正式合格ではない。
 

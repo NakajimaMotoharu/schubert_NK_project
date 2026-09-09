@@ -1,6 +1,6 @@
 # NK-DAT-001 更新対象暗号binding 実行結果
 
-最新正式判定: PT-WEB-20260909-33/sourcef3940eacb11e67991a2e72b166a0974b2999d898、2026-09-09 16:11:26～16:18:10 JST、dev-foundation、exit0。043/PT169～176全8件成功、全995件、6 Java moduleのline/method/class/branch100%・NullAway/Enforcer/Spotless PASS・SpotBugs0。evidence/result-binding/manifest.json SHA-256 `7f6ff2a343b6fb635fe9cf59e7957335436994b2cbfa56ecd2f0d443d62ec781`。全29scope/9collectorの同run/source/branch/hash/参照、017の1件＋019の7件負canary成功。SSC-052/PG-D-140のcodecだけを合格とし、Production writer/DB参照/replay/保守削除・oneshot接続は別残件。以下の探索結果は履歴。
+最新正式判定: PT-WEB-20260909-35/source413dc339646b3a103af2cf5bc36f2e736bfb0ffc、2026-09-09 17:06:16～17:13:16 JST、dev-foundation、exit0。043/PT169～176全8件成功、全1011件、6 Java moduleのline/method/class/branch100%・NullAway/Enforcer/Spotless PASS・SpotBugs0。evidence/result-binding/manifest.json SHA-256 `1a6c0edbc80c04424efd095f146a6b007f7f079c314997c11b810fb164a34fbc`。全30scope/9collectorの同run/source/branch/hash/参照、017の1件＋019の8件負canary成功。SSC-052/PG-D-140のcodecだけを合格とし、Production writer/replay・main/DB接続（3参照と保守削除は045/046で別認定）は別残件。以下の探索結果は履歴。
 
 ## 0. 正式coverage・review
 

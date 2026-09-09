@@ -1,5 +1,7 @@
 # NK-DAT-001 Inbox検査権限・候補lock単体テスト仕様書
 
+2026-09-09 V016回帰追補（SSC-049/PG-D-141、BUG-127/129・YKT-102）: 現在の独立catalog期待値はversion付きmigration001～016の16件、業務/technical計23table・PK23/FK23/UK constraint30/CHECK154/constraint trigger1。QWK partial unique indexはconstraint数へ混同せず045/PT192で別照合する。後述の初回V005～015等の値は当時の履歴であり、現在の回帰期待値には使わない。全31route・更新3成功のQUESTION/JOB、ERROR/NONE、168hと6種参照matrixは045/PT177～192および015/PT051～056へ追跡。各Programの実行結果・manifestにある正式sourceを正とし、未実行を合格へ含めない。
+
 ## 1. 対象・根拠
 
 Program NK-DAT-001、V008の`maintenance_next_auth_inbox`/grant、provisioning001のschubert_inbox_inspector。RD OPS-009/DAT-009/MQ-008、UI212/241/251、SS331 §3.4/324 §12/332/341/343/352、QA-046/UIC-006/SSC-049、PG-D-121、BUG-014/YKT-012。

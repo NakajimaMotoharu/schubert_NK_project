@@ -1,15 +1,15 @@
 {
-  "runId": "PT-WEB-20260909-33",
+  "runId": "PT-WEB-20260909-35",
   "programId": "NK-DAT-001",
-  "targetCommit": "f3940eacb11e67991a2e72b166a0974b2999d898",
+  "targetCommit": "413dc339646b3a103af2cf5bc36f2e736bfb0ffc",
   "branch": "dev-foundation",
   "exitCode": 0,
   "scopeResult": "PASS_HELD_INODE_NATIVE_ACCESS_METADATA_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T16:11:26+09:00",
-  "completedAt": "2026-09-09T16:18:10+09:00",
+  "startedAt": "2026-09-09T17:06:16+09:00",
+  "completedAt": "2026-09-09T17:13:16+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "2988a199822b5d5ef740f74de3bcb4b641525e35ff036614b02897bfccb38a4d",
+  "fullReactorManifestSha256": "41474394ec3f48fb115441c2c882106e895f9b6d2a2011a600454c5a56d36f57",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
@@ -87,7 +87,7 @@
   },
   "fixture": "Public temporary byte files, installed setfacl2.3.2, independent Linux UAPI golden, real Linux/glibc FFM and task-local native-call/errno probes; no secret or daemon changes.",
   "oracle": "033/034: literal44-byte ACL, empty non-retrieval is not authorization, real ERANGE/inode replacement/UID; fixed path and buffer boundaries, native errno and size failures, statvfs112-byte/flag72/ST_RDONLY1 probes plus real FileStore comparison, platform/symbol/null/unsigned UID contracts,100 concurrent owned handles. Actual runtime is x86_64; AArch64 runtime not certified.",
-  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "remaining": "Mandatory private main/oneshot/parent composition and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate manifests cover authentication, non-auth query/User, mutation-reference inspection, V011 bypass removal and durable progress; SQL/Java alone do not certify normal Question writer/replay/worker or backup-file/OS-lock wiring.",
   "related": [
     "QA-046",
     "UIC-006",
@@ -99,7 +99,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "c8640a14e9279dea225969ec34c2c7e54083936983ee8b86db1850fef9833cd6"
+      "sha256": "917f0bf67901888224398868b6e29b8ec685bd121a9574859ca80a3430d8ea6e"
     }
   ],
   "classCoverage": {

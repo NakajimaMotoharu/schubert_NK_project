@@ -1,15 +1,15 @@
 {
-  "runId": "PT-WEB-20260909-33",
+  "runId": "PT-WEB-20260909-35",
   "programId": "NK-DAT-001",
-  "targetCommit": "f3940eacb11e67991a2e72b166a0974b2999d898",
+  "targetCommit": "413dc339646b3a103af2cf5bc36f2e736bfb0ffc",
   "branch": "dev-foundation",
   "exitCode": 0,
   "scopeResult": "PASS_AUTH_CANDIDATE_SQL_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T16:11:26+09:00",
-  "completedAt": "2026-09-09T16:18:10+09:00",
+  "startedAt": "2026-09-09T17:06:16+09:00",
+  "completedAt": "2026-09-09T17:13:16+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "2988a199822b5d5ef740f74de3bcb4b641525e35ff036614b02897bfccb38a4d",
+  "fullReactorManifestSha256": "41474394ec3f48fb115441c2c882106e895f9b6d2a2011a600454c5a56d36f57",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
@@ -71,7 +71,7 @@
   },
   "fixture": "Isolated PostgreSQL 18.6, synthetic rows, real restricted roles, controlled competing SQL row locks. No deployed DB or credential used. PT021 reuses independent JCE auth fixture.",
   "oracle": "007/008 specifications: literal IDs/counts/SQLSTATE/catalog, exact expiry/cursor, rollback/lock postconditions; BUG080 backup inserted after first snapshot must not authorize an unlocked candidate.",
-  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "remaining": "Mandatory private main/oneshot/parent composition and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate manifests cover authentication, non-auth query/User, mutation-reference inspection, V011 bypass removal and durable progress; SQL/Java alone do not certify normal Question writer/replay/worker or backup-file/OS-lock wiring.",
   "related": [
     "QA-046",
     "UIC-006",
@@ -91,7 +91,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "1070cab7a3f2df34d72656ae042696728fc980190a29adc9f419e52af07a9903"
+      "sha256": "5aea1e9861ae64ec68b4f003dad84cda17a6285b3bf93606e74be748c4f31772"
     }
   ],
   "sqlSources": [

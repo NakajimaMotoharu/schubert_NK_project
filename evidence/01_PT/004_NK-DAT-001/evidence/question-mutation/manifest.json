@@ -1,0 +1,183 @@
+{
+  "runId": "PT-WEB-20260909-35",
+  "programId": "NK-DAT-001",
+  "targetCommit": "413dc339646b3a103af2cf5bc36f2e736bfb0ffc",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_MUTATION_3_ROUTE_REFERENCE_AND_OWNED_CLEANUP_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T17:06:16+09:00",
+  "completedAt": "2026-09-09T17:13:16+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "41474394ec3f48fb115441c2c882106e895f9b6d2a2011a600454c5a56d36f57",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0",
+    "postgresql": "18.6",
+    "jdbc": "42.7.13",
+    "flyway": "13.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 846
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 147
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 154
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 92
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 18
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-177": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#validMutationReferences",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-178": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#submitReferencesAndWork",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-179": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#cancellationHistory",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-180": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#deletionHistoryAndAnswers",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-181": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#exactStoredProfiles",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-182": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#wireAndMetadataDamage",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-183": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#nullAndJdbcFailures",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-184": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#equalTimeTargetsRemainDistinct",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-185": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#leastPrivilegeCatalog",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-186": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#uniqueWorkProjection",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-187": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#referencesAndPhantomsStayLocked",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-188": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#canonicalRoutesAndRetention",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-189": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#ownedAtomicFailures",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-190": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#durableMixedResume",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-191": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#concurrentReferencesStayIndependent",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-192": {
+      "method": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest#appendOnlyInventory",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Isolated PostgreSQL real restricted roles, independently assembled UI232/236 response/QWK bytes and JCE/NKREF1, synthetic rows/JDBC fault projections; no raw body/key/token saved.",
+  "oracle": "045/046 PT177..192: three mutation response profiles and bound target/token; fixed business/SQL afterconditions, missing references protected, QWK correlation/SENT/unique work, cancellation and deleted Question/Answer triples, historical ownership, negative/null/projection faults, parent/child locks and absent-child insertion blocking,168h/cutoff/backup gates, owned rollback/uncertain commit/durable resume,100 parallel calls. Java counters and SQL branch/role matrix are separate.",
+  "remaining": "Normal Question writer/replay/worker and private main/oneshot/parent OS/actual-backup wiring remain incomplete. This capability does not certify whole Program/PGPT/IT/ST or actual NK characterization.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "SSC-052",
+    "PG-D-141",
+    "BUG-014",
+    "YKT-012",
+    "BUG-121",
+    "BUG-122",
+    "BUG-123",
+    "BUG-124",
+    "BUG-125",
+    "BUG-126",
+    "BUG-127",
+    "BUG-128",
+    "BUG-129",
+    "YKT-101",
+    "YKT-102"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "294cc2c8c692cc3575ee7c152d6d4ba289fab4e3b31e63e17c9c4de233717249"
+    }
+  ],
+  "classCoverage": {
+    "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 846
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 147
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 154
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 92
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 18
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "sqlSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8"
+    }
+  ]
+}

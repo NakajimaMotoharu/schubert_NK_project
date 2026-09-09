@@ -196,7 +196,7 @@ execute(run)はnull拒否後にprivate AtomicBooleanで1回だけ実行権を取
 
 各codecは実行thread内に閉じて公開せず、全run/chunk終了後にのみcloseする。正常/保護WARNING/期限/割込/DB失敗/想定外例外のすべてでcodec→所有copy→materialを回収し、鍵の途中close/rotationを許さない。Mandatory JCA algorithm取得失敗も成功へ変換せずcallerへ通知。診断は既存InspectionExecutionの許可済status/countのみ。Java/JCA内部copyの物理消去保証は§6.1と同じ限定。
 
-返却0/10/50は内部run結果であり、mainのroot/datasource close・DB credential読取・親backup実体/OS lock・systemd unitの成功を保証しない。構成不正はmainが70へ分類し、想定外runtime故障は正常化しない。Question/通知7routeは別途参照検査を実装するまで保護、全PG/PTや実NK CHRの完了としない。
+返却0/10/50は内部run結果であり、mainのroot/datasource close・DB credential読取・親backup実体/OS lock・systemd unitの成功を保証しない。構成不正はmainが70へ分類し、想定外runtime故障は正常化しない。SSC-049/PG-D-139～141によりQuestion/通知7routeを含む全31responseの保守検査を接続した。非認証検査の元22という上段はPG-D-135の初期範囲であり、現行の固定routeはSS324 §12.8～12.9/331 §3.10～3.11を正とする。通常Question業務writer/replayや全PG/PT・実NK CHRの完了ではない。
 
 ### 6.6 検査専用DB credential・接続（SSC-049、PG-D-142）
 
