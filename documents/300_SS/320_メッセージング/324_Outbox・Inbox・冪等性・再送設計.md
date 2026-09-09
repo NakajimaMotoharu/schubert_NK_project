@@ -270,6 +270,18 @@ Loginは6.1の`LoginReplayService.restore`、Logoutは6.2の`LogoutReplayService
 
 12.2の統合falseは原因を暗号破損と断定せず「検証未成立の保護WARNING」とする（内部replayは復号/参照/読取り失敗を同じfalseに集約する）。削除serviceで観測したSQL例外は失敗とし、検査後も明示queryでtransaction healthを確認する。aborted transactionへのCOMMITがROLLBACKへ変わっただけで正常結果を返さない。実装/試験はPGPT004の011仕様PT033～040に対応する。
 
+### 12.4 検索・Scenario・media・User保存結果の参照検査（SSC-049、PG-D-123）
+
+`NonAuthenticationInboxInspector`はowner付きのGAM/SPK/RTE/SCF/SRC/SCN、AUD/ANM/ANL/VID/MCT/MCS/MTR/MED、USR/UDT/LGS、UCR/UST/URL/UPW/ULKのRSP01計22 layoutを扱う。12.1構造検査と明示transactionを前提にbooleanだけを返し、通常認証、role再判定、更新、file生成、送信、transaction終了を行わない。Question/通知7応答はこの部品の対象外として保護する。
+
+保存可能codeは既存の6章replay契約と同一。0000は全22、0200はULKだけ。9001はUDT以外、0104はUDT/SCN/AUD/VID/MED/UST/URL/UPW/ULK、0105はUser更新5種、0100はUCR/UPWだけ。その他のcodeは正常な固定長形式でも保持する。errorはNONE参照を必須とする。
+
+通常のquery成功はNONE参照であり、保存後に変化した検索結果・名前・role・statusを過去snapshotと再比較しない。User更新成功はUSER参照と保存DATAのUser ID一致、実在するapp_users.id、現在versionが保存version以上を検証する（N9範囲、巻戻し/再採番なし）。UCR保存versionは0、他の0000は1以上、ULK0200は0も許可する。元password/request不保存のため旧更新内容の再計算や現在ADMIN権限を歴史的成功の証明条件へ追加しない。
+
+SCNのIはNONE、FはSCENARIO_FILE参照と保存Script file ID一致を必須とする。FはUI237/SS333のUUID・日付path・4800×record数・hash形式のdescriptorを検証し、script_files.id/game_idと保存Game code（NUKITASHI1=1、NUKITASHI2=2）を照合する。期限切れ生成.ready fileは正当に削除され得るため、本DB transaction内でfile IO/再生成を行わず実体存在を必須にしない。生成4800-byte record fileのhashとraw masterのscript_files.sha256は異なる対象であり比較しない。現在master内容全体の同一性を証明したとは扱わない。
+
+DBはUserのid/version、Scenarioのid/game_idだけを読む。NULL/欠落/多重row/不一致/SQL故障は未検証としてfalse、呼出しnullは契約違反。復号・分割bufferをfinally消去する。専用roleへの最小列grant、参照lock、期限/backup/条件付き削除接続は後続append-only SQLとserviceのgateであり、このtrueだけで削除してはならない。PT-DB-INBOX-041～048。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
