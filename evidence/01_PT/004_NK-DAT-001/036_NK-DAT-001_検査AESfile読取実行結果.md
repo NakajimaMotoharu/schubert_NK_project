@@ -1,6 +1,6 @@
 # NK-DAT-001 検査AESfile読取実行結果
 
-最新正式再試験: PT-WEB-20260909-36/source1dc0b57d、2026-09-09 17:46:15～17:53:11 JST、dev-foundation、exit0。全体1027件（Protocol80/Storage42/API594/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/credential-loader/manifest.json、SHA-256 `fd26ccd8faf0455811245d6f45d8f3be8352af1bb3bb34766d0c5ae97d21a5f6`。全31scope/10collectorの同run/source/branch/hash/参照、017の1件・019の9件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
+最新正式再試験: PT-WEB-20260909-38/sourcedfc17ae2、2026-09-09 18:20:11～18:27:07 JST、dev-foundation、exit0。全体1039件（Protocol80/Storage42/API606/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/credential-loader/manifest.json、SHA-256 `caa261d1e9021ab02bc605d567c0ccde7e2196acfae59fc0a2accf0c3db108b3`。全32scope/10collectorの同run/source/branch/hash/参照、017の1件・019の10件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048、外側resource寿命は049/050で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 探索2は2026-09-09 12:57:01 JST、32.456秒、exit0。dev-foundation/80b5da36後の未commit実装。新12＋旧AES16＋Storage24＋Protocol5=57件PASS、failed/error/skipped0、NullAway/Enforcer/Spotless PASS、SpotBugs0。関連6classのline94/method20/class6/branch50/instruction540全missed0。正式25は本sliceを含まず、全体回帰・証跡確定までは未完了。035/PT129～140、PG-D-134、SSC-049。
 

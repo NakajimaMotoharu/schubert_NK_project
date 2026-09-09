@@ -1,6 +1,10 @@
 # NK-DAT-001 検査resource寿命 実行結果
 
-049/PT-DB-INBOX-209～220、SS343 §6.7/SSC-049/PG-D-143。実装・探索中、正式未合格。正式source/run/証跡hashは全体回帰と全collector成功後のみ記録する。main/unit/親OS/実backup gateを含まない。
+049/PT-DB-INBOX-209～220、SS343 §6.7/SSC-049/PG-D-143。正式PT-WEB-20260909-38/sourcedfc17ae211c7871c4cb66c2f9f1ded65be45ea10、2026-09-09 18:20:11～18:27:07 JST、dev-foundation、exit0。新12件全PASS、全体1039件（Protocol80/Storage42/API606/Web241/Batch29/CHR41）成功、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのNullAway/Enforcer/Spotless/SpotBugs PASS。全32scope/10collectorの同run/source/branch/hash/参照と017/019の11負canary成功。evidence/inspector-application/manifest.json SHA-256 `f6f4d89cb9d58f2923683e7df43633be046e4d605279e59f633cabdd07c7a91d`、全体manifest SHA-256 `4ca1aff13eecc495fa90db5589060879c9bff627af107a42c75962b151d3cba4`。
+
+正式coverageはSettings class1/method4/line19/branch12、Application class1/method3/line21/branch2、各missed0。共有Process/credential/reader/providerも同scope全counter missed0。SQL後条件END0/0/0と再開、破損暗号END1/0/1、backup欠落/接続不成立の非成功・進捗0、最後のroot close失敗時の結果非返却と確定済みDB再開、開始割込IO0・実FileChannel途中割込、64並行の独立全FD解放を確認。BUG134/135/YKT105/106は正式38で再試験完了。Current baseline/V001～016不変、既知秘密pattern scan0hit、検証sourceからsrc/pom/characterization/tools差分0。
+
+再現は421の固定環境で`sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260909-38`（同ID上書き不可、再実行時は新ID）→終了0確認→017/019負canary→018全scope収集の順。完全command/OS/tool/commit/各Test ID期待・実際/source hashはmanifest/results.xmlに記録。main/unit/親OS/実backup gate・実root credential配布・実NK CHR・IT/ST・PGPT全工程の合格は含まない。以下は履歴であり、旧未確定表示を現在値と混同しない。
 
 ## 探索履歴（正式合格に算入しない）
 

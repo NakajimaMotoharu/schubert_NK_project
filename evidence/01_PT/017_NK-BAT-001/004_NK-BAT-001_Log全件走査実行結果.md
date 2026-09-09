@@ -1,6 +1,6 @@
 # NK-BAT-001 Log全件走査 実行結果
 
-最新正式再試験: PT-WEB-20260909-36/source1dc0b57dae258495f2198f3e348c150030b2e413、17:46:15～17:53:11 JST、exit0。Batch29件・全体1027件成功、6 Java moduleの4coverage100%・静的解析0。evidence/manifest.json SHA-256 `34744f734b5b3e33bfccae2626f91f3b2ec59d21f2e7f46ca0e8e156f123503d`。全31scope/10collector・同run/source/hash/参照・017/019計9負canary成功。BUG-104/112・SSC-051のLog原因は再試験済み、朝batch全体・main/OS/実backup gateは未完了。以下は実装・試験の履歴。
+最新正式再試験: PT-WEB-20260909-38/sourcedfc17ae211c7871c4cb66c2f9f1ded65be45ea10、18:20:11～18:27:07 JST、exit0。Batch29件・全体1039件成功、6 Java moduleの4coverage100%・静的解析0。evidence/manifest.json SHA-256 `0ec2a17ae6ee783418aedb4ca1df6560eda672590b22186baef7e32d31ed920f`。全32scope/10collector・同run/source/hash/参照・017/019計9負canary成功。BUG-104/112・SSC-051のLog原因は再試験済み、朝batch全体・main/OS/実backup gateは未完了。以下は実装・試験の履歴。
 
 PG-D-138/003/PT-BAT-018～029。探索2は2026-09-09 14:54:20 JST終了、13.215秒、dev-foundation/100aea52後の未commit実装、exit0。新12＋既存17=29件全成功、新6classはline115/method16/class6/branch48/instruction493で全missed0、batch全14classも4coverage100%。NullAway/Enforcer/Spotless PASS・SpotBugs0。正式全module回帰/収集までは未合格。親OS/実backup/専用main/全batchは未完了。
 

@@ -1,0 +1,392 @@
+{
+  "runId": "PT-WEB-20260909-38",
+  "targetCommit": "dfc17ae211c7871c4cb66c2f9f1ded65be45ea10",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-09T18:20:11+09:00",
+  "completedAt": "2026-09-09T18:27:07+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "df6adbb1484867c9fd591faf53bb80914b95ea45a1d8f5cd1c365ec2877fe1c4",
+  "programId": "NK-DAT-001",
+  "scopeResult": "PASS_INSPECTOR_RESOURCE_LIFETIME_ONLY",
+  "programComplete": false,
+  "testIdMethods": {
+    "PT-DB-INBOX-209": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot",
+    "PT-DB-INBOX-210": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#invalidSettings",
+    "PT-DB-INBOX-211": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation",
+    "PT-DB-INBOX-212": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#successAndResume",
+    "PT-DB-INBOX-213": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#protectedResult",
+    "PT-DB-INBOX-214": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#databaseFailure",
+    "PT-DB-INBOX-215": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#credentialFailures",
+    "PT-DB-INBOX-216": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#rootFailures",
+    "PT-DB-INBOX-217": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#nativeAdmission",
+    "PT-DB-INBOX-218": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#nullContracts",
+    "PT-DB-INBOX-219": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#interruptedExecution",
+    "PT-DB-INBOX-220": "dev.codex.schubert.nk.api.file.InspectorApplicationTest#concurrentLifetimes"
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "classCoverage": {
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess$OwnedKeys": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 196
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess$CredentialSource": {},
+    "dev/codex/schubert/nk/api/maintenance/InspectorDbCredential": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 172
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 36
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 20
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorSettings": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 77
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 19
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 224
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections$Connector": {},
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 157
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 28
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 205
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 34
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io": {},
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 494
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 52
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 90
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 37
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$NioIo": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorApplication": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 92
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 21
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Metadata": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 30
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Snapshot": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "tool": "SpotBugs 4.10.4.0",
+    "violations": 0,
+    "errors": 0
+  },
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "4ca1aff13eecc495fa90db5589060879c9bff627af107a42c75962b151d3cba4",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "PG-D-143",
+    "BUG-134",
+    "BUG-135",
+    "YKT-105",
+    "YKT-106",
+    "BUG-014",
+    "YKT-012"
+  ],
+  "fixture": "Public immutable path/URL/version vectors; real retained temporary files and native descriptors with explicitly synthetic privileged metadata; isolated PG18.6 trust fixture for resource composition only, NOT a SCRAM authentication certificate (047/PT207 independently covers SCRAM). Runtime random AES keys and public byte65 fixture password, no deployed credentials.",
+  "oracle": "049/PT209..220: immutable nonsecret configuration; null/empty/root/path/URL/version rejection before IO; real SQL empty-run END0/0/0 and same-run resume; malformed response retained END1/0/1; missing backup STORAGE_FAILURE and no durable progress; password/key failure closes all; root open/close failure never returns success and committed progress survives resume; default native RW root rejection; start interrupt flag retained with IO0, actual FileChannel interruption fails and closes;64 independent concurrent missing-file operations close every FD. Private reflection and production-derived expected values are not used.",
+  "limitations": "JVM/JDBC immutable String copies cannot be physically erased by this API. Root-manager actual credential provisioning, dedicated main/unit, parent OS/real-backup/full-morning, actual NK CHR and IT/ST are NOT certified.",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "sha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+      "sha256": "c7f9c4e866e4db1e2fdcf43618f4c5d98b35705ec2df06ea726db9f37499f47a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java",
+      "sha256": "d8fdb135d58edb19c62b29f00deeeed20b9d1ba7f3be7910899bb4fa8f877abc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "sha256": "a8b989091c057fb7c77da2556f34fbbefdaaa5d9352d240d2b8fa1a34e27be13"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+      "sha256": "2b3fa6519145771e5d90b96cf28c6f0a4423f7164b858524dae8fd47d15521c8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java",
+      "sha256": "a7c8eff408b43f158aeaf639d7add0f63a019f1c84d150a4e77eb2b66700e4b6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "sha256": "1fc9686e793f9a06971ad157a6ea698809247950d7d6248e93fbc315d2cf66f6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "sha256": "2b0b344232afaba126e20a66d70f8f058d29a0289985dd19a5a89b1224ea3f3c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java",
+      "sha256": "2511177570618d1cda136a4b790952c14e1fb7d2e4cffddf5de872eb2065029b"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "357122241350ef3c16dbd928480b0baf3374a042c2e8104930b7fbe056038c11"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+      "sha256": "f2cb18905fbed2cb6dfc171550679f0fe04a55cf9a3aff617f28aeedc7cb7f4f"
+    }
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "8119b4db959e274e98a44b338ea4a6a04a0bede032be26c886c19df7576f991e"
+    }
+  ]
+}
