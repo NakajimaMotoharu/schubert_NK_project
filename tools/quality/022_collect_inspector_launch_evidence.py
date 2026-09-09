@@ -132,7 +132,7 @@ def main():
     })
     if args.deployment:
         manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage")}
-        manifest["related"].append("PG-D-146")
+        manifest["related"] += ["PG-D-146", "BUG-140", "YKT-110"]
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."
         manifest["limitations"] += " LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64."

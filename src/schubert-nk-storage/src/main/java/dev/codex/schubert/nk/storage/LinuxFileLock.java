@@ -97,21 +97,27 @@ public final class LinuxFileLock {
     Objects.requireNonNull(operation, "operation");
     String path = heldPath(heldFile);
     try (Arena arena = Arena.ofConfined()) {
-      MemorySegment state = arena.allocate(STATE);
-      // Intentional follow of the caller's retained kernel FD, never a replaceable raw pathname.
-      int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
-      if (descriptor < 0) throw unavailable();
-      try (var owned = new OwnedDescriptor(descriptor, close)) {
-        int result = flock.call(state, owned.descriptor, 2 | 4);
-        if (result != 0) {
-          if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11) return Optional.empty();
-          throw unavailable();
-        }
-        return Optional.of(operation.execute());
-      }
+      return acquire(arena, path, operation);
     } catch (IOException failure) {
       // Drop every source cause/suppressed diagnostic; close failure also prevents success.
       throw unavailable();
+    }
+  }
+
+  // BUG-140/YKT-110: one return from the Arena owner; this helper only borrows its lifetime.
+  private <T> Optional<T> acquire(Arena arena, String path, Operation<T> operation)
+      throws IOException {
+    MemorySegment state = arena.allocate(STATE);
+    // Intentional follow of the caller's retained kernel FD, never a replaceable raw pathname.
+    int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
+    if (descriptor < 0) throw unavailable();
+    try (var owned = new OwnedDescriptor(descriptor, close)) {
+      int result = flock.call(state, owned.descriptor, 2 | 4);
+      if (result != 0) {
+        if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11) return Optional.empty();
+        throw unavailable();
+      }
+      return Optional.of(operation.execute());
     }
   }
 
