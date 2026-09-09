@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox検査実行結果
 
-最新正式判定: PT-WEB-20260909-19/source74cc57f8、2026-09-09 10:26:20 JST完了、全854件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。対応evidence/inbox-inspection/manifest.jsonの現行SHA-256は `795c91b1c85b4a1eab407bcacb08bda2290844d68ec0cbe6e47f22c2b9564f6e`。8collector/15scopeの全hashとtrace負canary、V001～010/Current baseline不変、秘密pattern scanを確認。認証/非認証の共通6classはline139/method14/class6/branch66全missed0。SQL条件は016 matrixに追跡し架空のJaCoCo値を付けない。BUG-087～090/YKT-078～081再試験完了。全run/oneshot/V006置換・Question/通知参照は未完了で、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-20/sourcea389975b、2026-09-09 10:47:29 JST完了、全862件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-inspection/manifest.jsonの現行SHA-256は `e6ae67484181f1806ea38879bf8435404a15d5fbb89cb9a4ad7a2cf1e4dfd6f1`。8collector/16scopeの全hashとtrace負canary、V001～011/Current baseline不変、秘密pattern scanを確認。共通6classはline139/method14/class6/branch66全missed0。SQL条件は016/020 matrixに追跡。V011の通常batch迂回削除は廃止済み、BUG-091/YKT-082再試験完了。永続run/oneshot・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
 
 以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
 

@@ -137,6 +137,8 @@ UIC-006の検査をbackup成功後のcleanup内部で実施する。通常API/We
 
 SSC-049/PG-D-122のlock所有: 親batchはOS flockを保守全体で保持する。検査を開始する前に前段transactionを完了しDB session advisory lockを解放し、専用processが自身のDB transactionで71419602を取得してから候補を検査する。検査・DELETE・commitの間にlockを渡さない。親はprocess終了後にDB advisoryを再取得して後続へ進む。引渡し区間に別DB主体がlockを取得した場合、検査側/親の再取得失敗は失敗として停止し、検査未実施を成功にしない。OS lockを放す実装や、検証済結果を別transactionへ渡す実装は不可。実oneshot/異常終了の試験は後続gateとし、SQL単体PTで実運用結線完了とはしない。
 
+SSC-049/PG-D-127再開状態: 専用processは331 §3.8の永続progressを同run/cutoffでlockして読み、候補処理とcursor/件数を同transactionで確定する。各row transactionを1件chunkとして使うため1,000上限を超えず、processは最大1,000回ずつのbounded呼出しを繰り返し30分のunit制限内でENDまで進む。途中中断は未完了、最終ENDでのみ検査stepをSUCCESS（保護0）またはWARNING（保護あり）へ集約する。未対応/不正rowもcursorを進めて保護件数へ加算し、先頭同一rowの無限再走をしない。commit不明時は同runでDB状態を再読取りし、削除済み行の件数を失わない。親attempt件数はそのattempt開始時/終了時の累積差分、run累積は別項目とする。既完了runは保存状態を返すだけ、鍵/参照修復後の再検査は新しい保守runで行う。CLEAN_BATCH_RUNでは完了progressの400日保持とRUNNING/FAILED調査保護を確認し、331の専用清掃関数で削除する。SQL/Javaだけでは専用unit/親のOS lock引継ぎ・backup実体gateは未完了。
+
 ## 8. Transfer cleanup
 
 333 §12のsecure directory walkを使い、backup失敗時も実行する。Root正常で個別file削除失敗はWARNINGとし

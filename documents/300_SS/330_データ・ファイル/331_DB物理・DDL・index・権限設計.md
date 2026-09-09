@@ -133,6 +133,30 @@ API mq_outbox→Web web_log_outboxの順にID昇順FOR UPDATE SKIP LOCKED、合�
 
 owner nk_owner、SECURITY DEFINER、固定search_path/UTC、PUBLIC/他service EXECUTEなし、通常batchのInbox/base table権限追加なし。動的SQL/汎用table引数/任意検査済flagを設けない。V008～010の専用検査関数はそのまま。PT065～072と旧DB/Outbox回帰で、Inbox全保持、Outbox境界/chunk/rollback、backup集合の途中追加/競合、権限・全DELETE経路の役割を確認する。旧PT-DB-011の不正Inbox削除期待は、承認済みBUG-014修正として保持2行/Outbox0削除へ変更し根拠を残す。全run/oneshot/参照未対応が残るためBUG-014/YKT-012を閉じない。
 
+### 3.8 Inbox検査の永続checkpoint（SSC-049、PG-D-127、V012予定）
+
+run単位の再開状態をDBの非秘密tableに置き、各候補の削除/保護判定とcheckpoint更新を同じ所有transactionでcommitする。OS runtime fileや別transactionの件数保存を削除確定の証明にしない。通常業務tableの仕様は変えず、同run/cutoffの再開と別attempt記録の責務を分離する。
+
+| inbox_inspection_progress列 | 型・制約 |
+|---|---|
+| run_id | uuid PK。batchの固定run ID。任意の公開session/tokenではない |
+| cutoff | timestamptz NOT NULL、finite。初回値不変 |
+| after_message_id | uuid nullable。DBのUUID順cursor、最初NULL |
+| inspected_count | bigint NOT NULL default0、>=0 |
+| deleted_count | bigint NOT NULL default0、0..inspected_count |
+| protected_count | bigint NOT NULL default0、inspected_count−deleted_count |
+| completed_at | timestamptz nullable、非NULLならfinite。ENDだけで設定 |
+
+PK名pk_inbox_inspection_progress。CHECK名ck_inbox_inspection_progress_cutoff/counts/cursor/completed。inspected_count=0とcursor=NULLを同値にする。部分index ix_inbox_inspection_progress_completed(completed_at,run_id) WHERE completed_at IS NOT NULL。base tableの通常API/Web/batch/検査roleのSELECT/DMLは全0。V005 defaultで継承されるschubert_app権限は新tableだけ明示REVOKEする。owner nk_ownerと既存全schema backup用schubert_backupのSELECTだけを維持し、backup復元に進捗を含める。backupへのDML/検査EXECUTEは許可しない。秘密・ciphertext・復元応答・参照id・理由詳細を保存しない。DDL増分は22table、PK22、CHECK149、既存FK23/UK30/trigger1は不変として独立inventoryへ明記する。
+
+- maintenance_open_inbox_inspection(run_id,cutoff)は検査roleだけのSECURITY DEFINER。V010 helperで固定backup/advisoryを確認し、初回INSERT ON CONFLICT DO NOTHING後に当該progressをFOR UPDATE。保存cutoffとの不一致は55000。既完了なら状態を返すだけで再走・件数初期化しない。current transaction IDはJavaが同じSELECTから保持する。
+- maintenance_record_inbox_inspection(run_id,cutoff,expected_after uuid,expected_count bigint,message_id uuid,outcome text,expected_xact text)は検査roleだけ。同run/backup/lock/transaction、cursor/count一致を再確認。NULL/不正count/非decimalxact/未知outcome・message形態は22023、stale状態/cutoff/xact/既完了は55000。許可outcomeはDELETED/PROTECTED/ENDだけ。DELETED/PROTECTEDはDB UUID順でcursorより後、count+1、対応countだけ+1。DELETEDは当該Message不在、PROTECTEDは期限済完了行の存在を追加確認する。ENDはmessage=NULLかつcursor以後に期限済完了候補なしだけを許可し、completed_atをDB時刻で記録する。算術overflow/SQL障害は削除もcheckpointもrollback。これら条件は暗号証明ではなく専用Java所有transactionを必須とする。
+- maintenance_cleanup_inbox_progress(run_id,run_cutoff,limit)は通常batchだけ。backup/advisoryを共用、finite cutoff/1～1000を検査。completed_atがrun_cutoff−400日より古く、別run、同runのRUNNING/FAILED batch_runsがない完了状態だけ、completed_at/run_id順FOR UPDATE SKIP LOCKEDで最大limit削除。未完了/調査中/期限同値・未来を保持。返却count/OK、0/LOCK_BUSY、0/BACKUP_GATEの閉形式をV011と共通にする。他例外は伝播。親のCLEAN_BATCH_RUN内で従来履歴清掃と別のbounded chunkとして呼び、件数を混同しない。
+
+全3関数は固定search_path/UTC、PUBLIC/他service EXECUTEなし、任意table/path/SQL引数なし。V001～011はappend-only不変。通常batchの検査・Inboxアクセス権限を増やさない。全runの状態は再起動後もDBから取得し、親batchのattempt件数は起動時と終了時の累積差分、run累積値は別項目として二重計上しない。commit結果不明時は同runで再読取りするまで成否/件数を推測しない。
+
+PT073～080はSQLの全状態遷移・制約・権限・atomic rollback/lock・保持400日・migrationを検証する。Java接続は別PT081～088、oneshot/親processは後続gate。完了progressだけで正常API停止・backup実file検証・鍵配布・IT/STが完了したとは判定しない。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`
