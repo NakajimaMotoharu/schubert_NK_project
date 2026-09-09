@@ -51,6 +51,14 @@ NullAway 0.14.1（SHA-256 `a74a5fb5a047537a4bdc362f9c1821279d7122d9d36aa2e6a72b7
 
 初回はonlineの`./mvnw --no-transfer-progress compile`で固定依存を取得し、以後`-o`で再現する。Maven cache/JAVA_HOMEは以下と同じ。canaryは`JAVA_HOME=... python3 tools/quality/001_verify_null_contracts.py --maven-repository <cache>/repository --output <sanitized-evidence-directory>`で実行する。NullAwayの指摘を抑止・対象除外で回避しない。
 
+### 3.2 ShellCheckの作業領域導入（2026-09-09）
+
+専用launcher wrapperのPG/PT準備としてUbuntu resolute/universe amd64のShellCheck `0.11.0-2`（本体表示0.11.0）を`apt-get download shellcheck=0.11.0-2`で取得し、`dpkg-deb -x shellcheck_0.11.0-2_amd64.deb root`でrootless展開した。入手元は`http://jp.archive.ubuntu.com/ubuntu/pool/universe/s/shellcheck/shellcheck_0.11.0-2_amd64.deb`、実行pathは`/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck`。OS package登録・daemon・既存toolchainは変更していない。
+
+deb SHA-256 `06990eaf21b5dfa3d855e492f7ca2d6fcacf63b490a73a545850c50cf7af2bce`はapt-cache showの配布indexと一致。binary SHA-256 `311de5f94ecea1d98052ccdc94166591dce89e031e7357debd2f3213b547f7df`、3313918-byte deb。既存libc6/libffi8/libgmp10/libnuma1で`--version`終了0を確認した。download/extractは一時作業directoryで行い、存在しない上記専用directoryへ移動。再現時は同version/hashを照合して展開し、既存toolを上書きしない。実際のscript解析・全分岐PTは次のPG-D-144以降で証明し、導入成功だけをscript品質合格としない。
+
+依存の実測版: libc6 `2.43-2ubuntu2.4`、libffi8 `3.5.2-4`、libgmp10 `2:6.3.0+dfsg-5ubuntu2`、libnuma1 `2.0.19-1build1`。systemd-analyzeはOS既存`259.5-0ubuntu3.4`、更新していない。
+
 ## 4. 実行環境変数
 
 ```sh
