@@ -2,7 +2,7 @@
 
 ## 1. 対象・判定
 
-011仕様/PT-DB-INBOX-033～040、AuthenticationInboxCleanup・内部Candidate・InspectionRun・InspectionStep/Outcome・InboxMaintenanceExceptionの6class。探索全47件PASS、新6classのline/method/class/branch100%、NullAway/format成功、SpotBugs0。正式全体回帰・収集前のためまだ確定合格に加算しない。PG-D-122、QA-046/SSC-049、BUG-084/YKT-075再試験中。非認証/oneshot/全run管理/V006置換は未完了。
+011仕様/PT-DB-INBOX-033～040、AuthenticationInboxCleanup・内部Candidate・InspectionRun・InspectionStep/Outcome・InboxMaintenanceExceptionの6classを正式PT-WEB-20260909-17で確定。新6classのline130/method13/class6/branch66は全missed0、NullAway/format成功、SpotBugs0。BUG-084/YKT-075は再試験完了。非認証/oneshot/全run管理/V006置換は未完了。
 
 ## 2. 探索・期待値正常性
 
@@ -30,4 +30,6 @@ BUG-084: production例外のredactionは維持し、testのtask-local JDBC probe
 
 ## 4. 正式gate・証跡
 
-未確定。正式全回帰後にrun/source/環境/command/開始終了/exit/全Test ID/全6class coverage/関連BUG/hashを `evidence/authentication-cleanup/manifest.json` と本節へ固定する。
+正式PT-WEB-20260909-17/source7200d8d6、dev-foundation、2026-09-09 09:14:51 JST終了、exit0。全830件（Protocol80/Storage34/API434/Web241/CHR41）、failed/error/skipped0、全5moduleのline/method/class/branch100%、NullAway/Enforcer/format PASS、SpotBugs0。8collector・12証跡scopeを収集しchecksum全一致、trace正負canary成功。baseline843de94/既存V001～009不変。CHR41はrunner PTで実NK互換gateではない。
+
+`evidence/authentication-cleanup/manifest.json` SHA-256 `44b7d645366d476d1c5804592c919c814cf627147ac4845f93a1f87e75eedf0d`。OS/JDK/tool/command/開始終了/source、全PT033～040とmethodの一意対応、全6class個別coverage、独立expected/実結果、BUG/SSC、全体正式manifestへの存在/hash検証済リンクを保存。秘密情報・raw session/token/鍵/電文/DB dumpは保存しない。正常認証Inboxの削除接続の範囲だけが確定であり、工程/Program全体を完了にしない。
