@@ -34,6 +34,8 @@ Python品質canaryはJava930件に加算せず、Java JaCoCo coverage100%をPyth
 
 ## 4. 再現command
 
+最新正式31/source7efedb19は979件/6 Java module、9collector/27scopeの同一run/source/branch/全hash/参照までPASS。batchはrepository17＋Log全件service12の2class/29 Test IDを020で必須化。019は5 PT（新12 IDと2class集合の欠落/重複/別class等の負canary追加）、017は1 PT、計6 Python PTをJava979へ加算しない。正式30は967件/27scopeで成功済み。
+
 追補: 正式28は25scope/942件、正式29は26scope/950件を全収集確認済み。PG-D-137のbatch追加では9collector/27scope・6 Java moduleへ拡張し、019は4 PT（batchの17 Test ID負canary追加）となる。正式30で初回全体確認する。過去24/25/26scopeの履歴を27へ改記しない。
 
 PG-D-135追加時はinspector-processを必須scopeへ加え25scopeに拡張する。019独立inventory/全25失敗段/100異常bindingも同時に追加し、初回正式検証は28で実施予定。既存27の24scope完了記録を後から25scopeへ読み替えない。

@@ -1,0 +1,382 @@
+{
+  "runId": "PT-WEB-20260909-31",
+  "programId": "NK-AUT-001",
+  "targetCommit": "7efedb19171e040316cd46048f2714b117e5c4a7",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-09T14:56:08+09:00",
+  "completedAt": "2026-09-09T15:02:39+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "springSecurityCrypto": "7.1.1",
+    "springCore": "7.0.9"
+  },
+  "modules": {
+    "characterization": {
+      "tests": 41,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5782
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 531
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1079
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 403
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 131
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 8
+        }
+      },
+      "spotbugs": "not configured for characterization runner"
+    },
+    "protocol": {
+      "tests": 80,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "storage": {
+      "tests": 42,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2068
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 153
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 407
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 160
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 83
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 11
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "api": {
+      "tests": 546,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 31296
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2479
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6772
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2291
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 222
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "web": {
+      "tests": 241,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 12791
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1055
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2933
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1043
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 502
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 117
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    },
+    "batch": {
+      "tests": 29,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 987
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 94
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 215
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 85
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 35
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 14
+        }
+      },
+      "spotbugs": {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0
+      }
+    }
+  },
+  "authenticationMethods": [
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#currentPreviousAndEveryIdentityBindingFailClosedOnMismatch",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#lengthVersionKeyAndNullInvariantsIncludeBothEndpointsAndClose",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#jcaUnavailabilityIsTypedAndProvidersAreRestored",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#envelopeMutationsAndAuthenticatedNonContextPlaintextAreRejected",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#independentEnvelopeAadAndDefensiveCopiesMatchExactly",
+    "dev.codex.schubert.nk.api.security.AuthContextCodecTest#concurrentEncryptionHasDistinctNoncesAndCorrectRowBinding",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#faultsNullRowsAndAuditFailuresRollbackWithoutLeakingData",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#absentRequestIpIsNotReplacedByLoginAddress",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#adminReasonsRevokeOnlyTargetAndPreserveExistingRevocations",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#logoutAndRepeatedLogoutKeepOriginalTimeWithoutExtendingIdle",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#concurrentLogoutAndIssuanceSerializeWithoutLostRevocation",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#missingDisabledDuplicateAndDatabaseFaultsRollbackWithoutLeaks",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#thirdSessionRevokesOldestAccessAndUuidTieOnly",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#oneHundredConcurrentIssuesKeepOnlyTwoActive",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#constructorsNullBoundsAndUnavailableCryptoFailBeforeCommit",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#replacementAuditIsAtomicBoundedAndCarriesRequestIdentity",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#issuancePersistsOnlyHashAndBoundCipherInCallerTransaction",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#currentDatabaseActorAndIdleUpdateUseCallerTransactionWithoutShortening",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#concurrentVerificationsSerializeUserThenSessionAndRemainUsable",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlNullAndUnknownRoleNeverBecomeAValidActor",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#unknownRevokedExpiredAndDisabledAllDenyWithoutTouch",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlFaultsAndSuppressedCloseErrorsAreBoundedAndDoNotCommit",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#nullAndAutocommitBoundariesRejectBeforeModifyingState",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightDoesNotWaitForRowLocksAndCannotAuthorizeAfterRevocation",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightBoundsNullContractsAndJdbcFailures",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightReturnsCurrentActorWithoutTouchOrTransactionOwnership",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#failuresLocksAndInfrastructureNeverExposeIdentity",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#logoutNullAndBoundaryResultsPreserveTheOriginalInstant",
+    "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest#loginSuccessMatchesIndependentUserAndAdminByteVectors",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+    "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#actorOwnerAndErrorNullInvariantsFailAtBoundaries",
+    "dev.codex.schubert.nk.api.security.AuthorizationServiceTest#literalOwnerAndAdminMatrixNeverExposesOtherNotifications",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#asciiVectorsAndConcurrentCallsDoNotShareDigestState",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#bug036CallerMonitorCannotBlockSharedDigest",
+    "dev.codex.schubert.nk.api.security.ContextHashTest#unavailableMandatoryDigestPreventsStartupAndRestoresProviders",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#thresholdsWindowsLocksAndSuccessHaveLiteralSqlPostconditions",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#knownAndUnknownUsersLockUserBeforeIpAndPersistAcrossConnections",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#jdbcNullUnknownEnumAndFaultsFailClosedWithoutProviderData",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#modelAndMethodNullBoundsDoNotInventPersistedState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#fifteenMinuteWindowAndLockBoundariesAreIndependent",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#nullMalformedAndClockRegressionCannotInventAValidState",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#exactUserAndIpThresholdsLockWithoutExtensionThenSuccessClears",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#retryAfterCeilsAndCapsUsingLiteralSeconds",
+    "dev.codex.schubert.nk.api.security.LoginAttemptStateTest#currentObservedWindowEndpointVectorAppliesToUserAndIp",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#failuresAndLocksReplayWithoutRehashingOrIncrementingCounters",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#wireInputNullNfcIpAndClockBoundariesAreValidatedBeforeMutation",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#databaseAndAuditFailpointsRollbackAllEffectsAndConsumeSecrets",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcLifecycleFaultsRemainRetryableAndRedacted",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#successfulLoginAndReplayShareOneAtomicInboxTransaction",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#movingClockSeparatesBusinessCompletionAndReplyTimes",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcOwnerCommitsOnlyCompleteBusinessResults",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#concurrentRedeliveryCreatesOneSessionAndOneAudit",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#permanentProtocolNeedsConfirmedRollbackAndClose",
+    "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#brokerRedeliveryReplaysCommittedLoginWithoutDuplicateEffects(Path)",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#tamperedMetadataWireAndSessionReferencesFailClosed",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#failureSnapshotKeepsOriginalCodeRetryAndMessage",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#successSnapshotFreezesOriginalFieldsAndRebuildsOnlyResponseHeader",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#jdbcNullFaultsAndInvalidArgumentsNeverLeakOrMutate",
+    "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#concurrentReplayAndKeyRotationPreserveExactData",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#normalizesNfcTrimAndLocaleIndependentKeyWithoutChangingDisplay",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#java25ScalarLowercaseExpansionFitsTheIndependentNinetySixByteBound",
+    "dev.codex.schubert.nk.api.security.LoginUsernameTest#displayBoundaryNullBlankControlAndSurrogateContractsAreExplicit",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#initialReplayAndNewMessageKeepOneOriginalRevocation",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#concurrentRedeliveryRevokesAndAuditsOnce",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#invalidAndExpiredContextsNeverGainAuthority",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#nullAndWireBoundariesAreRejected",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#jdbcAndCryptoFaultsRollBackEveryEffect",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#movingClockKeepsRevocationAndAuditTogetherButExpiresFromCompletion",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#savedMetadataCiphertextAndReferencesFailClosed",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#fixedSaltIndependentPbkdf2VectorAndNfcMatch",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#encodeUsesFreshSaltAndFull256BytePassword",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest#invalidStoredGenerationAndInputsAreBoundedAndConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#nfcSupplementaryAndUsernameComparisonUseExplicitValues",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#loginAndCreationBoundariesDifferAndInputsAreConsumed",
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest#malformedControlAndNullContractsRejectWithoutRetainingInput"
+  ],
+  "testIdsPassed": [
+    "PT-AUT-001",
+    "PT-AUT-002",
+    "PT-AUT-007-R01",
+    "PT-AUT-007-R02",
+    "PT-AUT-007-R03",
+    "PT-AUT-007-R04"
+  ],
+  "testIdsPartial": {
+    "PT-AUT-003": "policy, persisted User/IP counters and Login hash-skip/threshold/audit plus anonymous Inbox/JDBC/JMS replay passed; full dispatcher/bootstrap/HTTP connection remains",
+    "PT-AUT-004": "real PBKDF2 Login/counter/session/critical-audit and anonymous HMAC/Inbox transaction, dummy work, fault rollback, 100 concurrent redeliveries and actual JDBC/JMS commit boundaries passed; full dispatcher/bootstrap/HTTP connection remains",
+    "PT-AUT-005": "ASCII SHA256, AES-GCM, Login issuance and immutable Inbox replay passed; Web recovery and expiry orchestration remain",
+    "PT-AUT-006": "session issuance/oldest replacement/tie/expiry/100 requests and real Login transaction, atomic replacement audit and fault rollback passed; wire and CHR connection remains",
+    "PT-AUT-007": "real PostgreSQL verifier/idle/role/state/rollback/concurrency/faults passed; dispatcher/wire error mapping remains",
+    "PT-AUT-008": "actor/role/owner policy, real DB Logout owner Inbox/frozen replay/idempotency/admin all-revocation/audit/fault/concurrency and absent remote IP contract passed; management command/predicates/full dispatcher/HTTP remain"
+  },
+  "testIdsNotRun": [
+    "PT-AUT-009"
+  ],
+  "programStatus": "IN_PROGRESS",
+  "notRunCountedAsPass": 0,
+  "relatedBug": [
+    "BUG-020",
+    "BUG-021",
+    "BUG-022",
+    "BUG-023",
+    "BUG-024",
+    "BUG-026",
+    "BUG-027",
+    "BUG-028",
+    "BUG-029"
+  ],
+  "relatedYkt": [
+    "YKT-007",
+    "YKT-008",
+    "YKT-017",
+    "YKT-018",
+    "YKT-019",
+    "YKT-020",
+    "YKT-021",
+    "YKT-023",
+    "YKT-024",
+    "YKT-025",
+    "YKT-026"
+  ],
+  "relatedSsc": [
+    "SSC-009",
+    "SSC-010",
+    "SSC-011",
+    "SSC-012",
+    "SSC-013",
+    "SSC-014",
+    "SSC-015",
+    "SSC-016",
+    "SSC-023"
+  ],
+  "additionalTests": {
+    "PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; dispatcher/Inbox/HTTP connection remains",
+    "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation and anonymous HMAC/Inbox/application transaction passed; JMS/HTTP connection remains",
+    "PT-AUT-INBOX-001..006": "Real PostgreSQL anonymous Login Inbox with independent wire/LP-HMAC/PBKDF2/SQL expectations: atomic commit/rollback, 7-day completion retention, original failure/lock replay, identity conflict, 100 deliveries -> 1 session/1 audit, key/JDBC failures, owned-secret cleanup and distinct sender-NFC/receiver-NFD boundaries passed",
+    "PT-AUT-TX-001..004": "JDBC owner commits success and definite business errors before JMS reply/ACK; acquisition/begin/handler/commit-before/commit-after/close/rollback/null/permanent-plus-cleanup fault matrix is redacted and retryable as specified. Actual isolated Artemis redelivery after reply-send/ACK failure and independent cache-miss send produce one session/audit/Inbox with original DATA; DB outage redelivers before any effects. OS process kill/reboot belongs to later IT",
+    "PT-AUT-LOGOUT-INBOX-001..006": "Known-context owner-only lookup, atomic Logout/Inbox/audit, immutable 280-byte snapshot and AUTH_SESSION reference, same-message 100 concurrent replays with one audit, new-message idempotent audit, unknown/expired/disabled context, owner mismatch, ciphertext/header/ref/hash/time/NULL/JDBC/key tampering and rollback passed; never grants a principal or extends idle",
+    "PT-AUT-AUDIT-IP-001": "Unavailable current IP on Logout/admin revocation is SQL NULL, not prior Login IP or loopback; explicit IP remains canonical, actual Login/REPLACED retains current IP, null Optional is rejected",
+    "PT-AUT-CLOCK-001..002": "Independent moving-clock SQL/byte oracle: business state and audit at t+1, Inbox completion at t+2 and expiry t+2+7 days, initial header at t+3, replay header at t+4 with original DATA and unchanged retention/audit",
+    "PT-AUT-NAME-001..004": "64-byte display and 96-byte Locale.ROOT comparison key, independent Unicode literals/scalar expansion bound, old CHECK rejection to V007 upgrade, database bounds/UK/NULL and real Login with 64-byte audit passed; User management adoption remains"
+  },
+  "baseline": "Current baseline remains unchanged; authentication application CHR not run yet",
+  "rawLogSha256": "ce37a3f1aa7d0b11d6849202682582661c6d9e6c9656e64b800aa8cdb85dc1b1",
+  "redaction": "Only fixed metadata, class/method names and counters collected; all test output and properties omitted.",
+  "expectations": "007 PT specification; literal Unicode/Instant/authorization matrix, independent JCA PBKDF2/AES-GCM and DataOutputStream envelope/AAD, independently calculated SHA256 vectors. No production function constructs expected values."
+}
