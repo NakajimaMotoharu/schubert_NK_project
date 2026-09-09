@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-049/PG-D-147: batch.file.MaintenanceFileLockはroot controller内部だけの固定runtime admission adapterとする。storageの保持directory/inode/実Linux flockを借用し、固定/run配下の所有・型・mode・ACL・local tmpfs・identityを確認した保守callbackをOS lock下で実行する。公開factoryにpath/UID/commandを渡す入口を作らない。batch→storage依存を追加しAPI/Webへの逆依存は禁止。停止/backup/DB排他引渡しを低位lock取得結果だけで代替しない。
+
 SSC-028: Shared storageの既存保持directory/inodeへ、Asset adapter向け既存child/entryのread-only能力と正サイズfile属性照合を追加する。Transfer専用UUID/date/48MB入口は維持し、API/Webのnative実装複製やProtocolからfile I/Oを行わない。詳細はSS333 §7.2、PG-D-073/PT-MED-018～020。
 
 ## 1. 目的・追跡

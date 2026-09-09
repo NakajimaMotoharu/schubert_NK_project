@@ -29,6 +29,8 @@ transfer/Expiry清掃、依存順起動、失敗時の継続/打切り、二重�
 
 ## 3. Run identity・排他
 
+SSC-049/PG-D-147: root controllerのfile adapterは実効UID0、/runと/run/schubert-nkのroot:root0755・ACLなし・RW tmpfs、maintenance.lockのroot:root0600・通常file・nlink1・size0・同deviceを検証する。NOFOLLOWで各directoryとentryを保持してからflockを取得し、獲得直後/処理後に固定pathを再openして同dev/ino・権限・ACLを確認する。元の保持能力は全保守callback終了まで存続し、entry/root close失敗で成功にしない。競合はcallback0回でDUPLICATE、admission/IOは固定診断で失敗。root以外の親、ACL追加、別FS、symlink/hardlink、未知属性、inode交換を受理せず、adapter自身が作成/chmod/unlinkして修復しない。特権rootによる保守中の置換は運用禁止であり検証だけで敵対rootを封じ込めたとはしない。
+
 - Maintenance全体の`run_id`はUUID、`business_date`は開始時点のJST日付、`run_started_at`はUTC `Instant`で固定。
 - OS排他は`/run/schubert-nk/maintenance.lock`を`flock(LOCK_EX|LOCK_NB)`。DB接続後は固定
   `pg_try_advisory_lock(71419602)`も取得。両方を持つprocessだけcleanup/morningを実行。
