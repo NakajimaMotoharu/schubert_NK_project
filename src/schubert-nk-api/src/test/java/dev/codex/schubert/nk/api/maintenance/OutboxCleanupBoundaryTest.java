@@ -352,9 +352,9 @@ final class OutboxCleanupBoundaryTest {
                 c,
                 "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
                     + "where n.nspname='schubert' and p.proname like 'maintenance_cleanup_%' "
-                    + "and p.prosecdef and p.proconfig=case when p.proname in ('maintenance_cleanup_message_stores','maintenance_cleanup_inbox_progress') "
-                    + "then array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
-                    + "else array['search_path=pg_catalog, schubert, schubert_web_session'] end"));
+                    + "and p.prosecdef and p.proconfig="
+                    + "array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
+                    + ""));
         c.rollback();
       }
     }
@@ -376,7 +376,7 @@ final class OutboxCleanupBoundaryTest {
   @Test
   void migrationAndLegacyOraclesRemainExplicit() throws Exception {
     assertEquals(
-        "12",
+        "13",
         scalar(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

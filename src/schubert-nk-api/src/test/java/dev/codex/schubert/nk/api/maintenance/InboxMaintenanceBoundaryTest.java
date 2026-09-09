@@ -502,7 +502,7 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void migrationAndExistingAuthenticationRemainCompatible() throws Exception {
     assertEquals(
-        "12",
+        "13",
         scalarAdmin(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

@@ -57,7 +57,9 @@ import org.postgresql.util.PSQLException;
 final class DatabaseMigrationTest {
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS =
-      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012");
+      List.of(
+          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
+          "013");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -594,9 +596,9 @@ final class DatabaseMigrationTest {
             ADMIN,
             "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
                 + "where n.nspname='schubert' and p.proname like 'maintenance_cleanup_%' "
-                + "and p.prosecdef and p.proconfig=case when p.proname in ('maintenance_cleanup_message_stores','maintenance_cleanup_inbox_progress') "
-                + "then array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
-                + "else array['search_path=pg_catalog, schubert, schubert_web_session'] end"));
+                + "and p.prosecdef and p.proconfig="
+                + "array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
+                + ""));
     assertFalse(
         queryBoolean(
             ADMIN,
@@ -631,7 +633,7 @@ final class DatabaseMigrationTest {
               + "'public ordinary log',null),"
               + "(703,'2026-01-01 00:00:02+00','API','SECURITY','INFO','TEST_EXPIRED_HOLD',"
               + "'public expired hold log','"
-              + FIXED_TIME
+              + "2026-06-04 00:00:00+00"
               + "')");
       execute(connection, "set role schubert_batch");
       assertEquals(
@@ -918,8 +920,7 @@ final class DatabaseMigrationTest {
             + "'2026-01-01 00:00:00+00','2026-01-01 00:01:00+00','SUCCESS')");
     execute(connection, "set role schubert_batch");
     assertEquals(
-        "3|3|0|OK",
-        cleanupResult(connection, "maintenance_cleanup_batch_runs", "2025-01-01 00:00:00+00", 10));
+        "3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_batch_runs", FIXED_TIME, 10));
     execute(connection, "reset role");
     assertEquals(
         List.of("934", "935", "936"),
@@ -1066,6 +1067,7 @@ final class DatabaseMigrationTest {
             "migration/V010__full_inbox_scan_and_restricted_deletion.sql",
             "migration/V011__batch_outbox_only_cleanup.sql",
             "migration/V012__durable_inbox_inspection_progress.sql",
+            "migration/V013__cleanup_backup_and_retention_guards.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

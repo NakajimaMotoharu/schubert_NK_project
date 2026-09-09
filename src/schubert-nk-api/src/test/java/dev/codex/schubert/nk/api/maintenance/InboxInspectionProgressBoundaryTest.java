@@ -25,7 +25,9 @@ final class InboxInspectionProgressBoundaryTest {
   private static final String RECORD = "schubert.maintenance_record_inbox_inspection";
   private static final String PURGE = "schubert.maintenance_cleanup_inbox_progress";
   private static final List<String> VERSIONS =
-      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012");
+      List.of(
+          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
+          "013");
 
   @BeforeAll
   static void start() throws Exception {
