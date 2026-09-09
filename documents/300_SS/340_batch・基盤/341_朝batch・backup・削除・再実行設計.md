@@ -141,6 +141,8 @@ SSC-049/PG-D-127再開状態: 専用processは331 §3.8の永続progressを同ru
 
 SSC-050/PG-D-129: 全maintenance_cleanupの第2引数は固定run_started_atとし、log90日・batch履歴400日の保持閾値をcaller側で二重に差し引かない。SQL側でも当日backupの状態・終了・同runをrow lockの単一snapshotで再検証する。Batch履歴は完了ended_at基準、現在runと同run内のRUNNING/FAILED調査中を保持する。親processの実backup照合とOS lockは別途必須であり、このSQL補正で省略しない。
 
+SSC-049/PG-D-130: run executorは324 §12.7の単調時計30分とinterruptを各最大1,000呼出しchunk前後で確認する。END/保護0だけSUCCESS、END/保護ありWARNING、途中停止/DB障害はFAILED相当50。最後の確認済み累積値を「最新総数」と誤記せず、次attemptは同runで永続状態を再読する。30分はprocess unit上限でも維持し、Java協調停止だけで長時間SQLの強制停止を保証したとしない。親の実backup/key/OS lock/終了後close検証は別gate。
+
 ## 8. Transfer cleanup
 
 333 §12のsecure directory walkを使い、backup失敗時も実行する。Root正常で個別file削除失敗はWARNINGとし

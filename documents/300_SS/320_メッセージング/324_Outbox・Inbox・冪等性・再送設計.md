@@ -304,6 +304,16 @@ runChunkはmaxSteps=1～1000だけを受け、先頭からinspectStoredNextを�
 
 PT081～088で混在正常/保護/未対応cursor、1/1000上限・途中再開・既完了、独立wire/JCE＋実DDL、全null/矛盾DB結果/SQL・resource故障、deleteとcheckpointの間のfailure/不明commit/再読、100並行の一意累積、旧認証/非認証の回帰と全line/method/class/branch100%を検証する。
 
+### 12.7 時間制限付き全件走査（SSC-049、PG-D-130）
+
+InspectionRunExecutorは既存InboxCleanupを所有processの鍵寿命内で使用し、固定run/cutoffでrunChunk(run,1000)をENDまで呼ぶ。時計は壁時計でなくSystem.nanoTime相当の単調経過時間を使用し、開始から30分未満だけ進行を許可する。各chunkの前後で時間とthread interruptを確認し、境界30分一致/超過・時計後退・interruptで新しいchunkを開始しない。long nanoTimeの自然wrapは差分計算で許容し、壁時計変動でcutoffを変えない。
+
+InspectionExecutionのstatusはSUCCESS/WARNING/TIME_LIMIT/INTERRUPTED/STORAGE_FAILURE。SUCCESSはENDかつ保護0、WARNINGはENDかつ保護ありだけ（exit相当0/10）。他はexit相当50であり、不明commitや時間内に終わらなかった検査を成功にしない。Optional lastConfirmedに最後にcommit/closeまで成功したprogressだけを保持する。失敗時の値は最後の確認点であり最新DB件数/未削除証明ではない。未取得を0件へ変換しない。失敗が起きたchunkの途中commit件数は次の同run再読で確認する。
+
+InboxMaintenanceExceptionはSTORAGE_FAILUREへ射影し、自動SQL retryしない。予期しないprogramming例外・NPEは正常扱いせず起動境界まで伝播する。interrupt flagは消去しない。SUCCESS/WARNINGが得られてもその後のcredential/DB/provider resource close・親の全gateが成功するまで実process exit0/10へ確定しない。OS lock/backup実体/通常API停止/鍵file/本番main・systemd unitは別の未完了gateであり、run executor単体で省略できない。
+
+PT097～104は実DB/既存独立wire fixtureと注入単調clock・thread interruptで、空/既完了・保護あり・1,000件越え・時間前/一致/超過/自然wrap・DB故障/最後の確認点・同run再開・例外/redaction/record null契約・全Java4種100%を確認する。時間待ちsleep、reflection、productionからexpected生成は禁止。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。

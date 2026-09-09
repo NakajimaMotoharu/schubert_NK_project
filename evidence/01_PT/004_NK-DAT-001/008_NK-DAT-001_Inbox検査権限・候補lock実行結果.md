@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox検査権限・候補lock実行結果
 
-最新正式判定: PT-WEB-20260909-21/source718ee4c6、2026-09-09 11:22:33 JST完了、全878件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inspection-sql/manifest.jsonの現行SHA-256は `950bd69d44a11a9c741411f925289253f745f080b0e5481083786af6cfb4be02`。8collector/18scopeの全hashとtrace負canary、V001～012/Current baseline不変、秘密pattern scanを確認。永続接続8classはline193/method25/class8/branch102全missed0。SQL条件は016/020/022 matrixに追跡。V012永続SQLとJava検査の同transaction接続・1,001行の分割再開を正式確認。oneshot・親process・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-22/source4e65b550、2026-09-09 11:45:25 JST完了、全886件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inspection-sql/manifest.jsonの現行SHA-256は `4a329b009632dd76c91f82dd6bed494fd4cf15cf2cd5539fdae3b90b1085d8ae`。8collector/19scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。SQLは026の全7共通gate・5削除条件matrixへ追跡。BUG-092～095/YKT-083～086/SSC-050再試験完了。全件run executor/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
 以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
 

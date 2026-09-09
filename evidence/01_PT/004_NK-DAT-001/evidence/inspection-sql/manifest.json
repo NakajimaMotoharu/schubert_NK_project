@@ -1,22 +1,25 @@
 {
-  "runId": "PT-WEB-20260909-21",
+  "runId": "PT-WEB-20260909-22",
   "programId": "NK-DAT-001",
-  "targetCommit": "718ee4c631d026f65060be085103e42eb6c9364d",
+  "targetCommit": "4e65b5501d0a2ac0fa8a993af8feebf02bffe302",
   "branch": "dev-foundation",
   "exitCode": 0,
   "scopeResult": "PASS_AUTH_CANDIDATE_SQL_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T11:16:49+09:00",
-  "completedAt": "2026-09-09T11:22:33+09:00",
+  "startedAt": "2026-09-09T11:39:36+09:00",
+  "completedAt": "2026-09-09T11:45:25+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "e6380dc43bb47b1adfd310ed86a3ea8a9a326244076727f5d3561c80d605fd82",
+  "fullReactorManifestSha256": "f236d83a82f55ae923ac5a7bbde16d81b894c5bdd1c32cca1df56312ce7b12fb",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
     "maven": "3.9.12",
     "junit": "5.13.4",
     "jacoco": "0.8.15",
-    "spotbugsPlugin": "4.10.4.0"
+    "spotbugsPlugin": "4.10.4.0",
+    "postgresql": "18.6",
+    "jdbc": "42.7.13",
+    "flyway": "13.4.0"
   },
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "coverage": {
@@ -88,7 +91,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "51e530c49536b99120e403194fc7df3946b9fd5a5f4eecf014d7795c4071c6bb"
+      "sha256": "55d27940a620b5e1d0510c1ca4b59b4c8ef6826711cafef27a0c6d2233f7b7b7"
     }
   ],
   "sqlSources": [
