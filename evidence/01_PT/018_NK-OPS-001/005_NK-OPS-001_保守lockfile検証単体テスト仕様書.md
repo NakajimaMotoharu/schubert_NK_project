@@ -19,4 +19,8 @@ MaintenanceFileLock / RD OPS-009・AVL / UI251 / SS311・341 §3・343 / SSC-049
 
 ## 2. Gate・証跡
 
+BUG-142/YKT-112: 固定/runはUI251/SS341の必須配置であり可変設定へ変えない。MaintenanceFileLock.create単一methodのDMI_HARDCODED_ABSOLUTE_FILENAMEだけEXACT annotationで理由・owner・PG gate/配置変更時の再reviewを記録する。PT007は固定literal/非公開constructor/単一限定annotation/provided依存をsource contractで検証し、coverage/private状態へ介入しない。報告の静的指摘0はこのレビュー済み1件を明示した後の未解決件数であり、無条件に抑止ゼロとはしない。
+
+BUG-141/YKT-111: 実NIOのreadonly oracleは`/proc/mounts`の/dev/shm・/sys各一意mountのro/rwと独立照合する。/sysをcontainer設定だけで常時ROと仮定しない。policyのreadonly拒否は003のliteral synthetic3 inodeで維持する。access ACLが対象でありdefault ACLによる将来のfile生成権限は本read-only admissionだけで検証済みとしない。
+
 Batch module選択試験と全reactor clean verify、line/method/class/branch100%・NullAway/SpotBugs・Spotless。022 OPS証跡scopeへ独立PT-OPS-LOCK IDsとbatch class coverageを追加する。019所属/欠落/failed/flaky/skipped canaryも同期する。command、OS/JDK/tool、source/run/branch、時刻/exit、期待/実際、coverage、BUG/SSC、manifest/hashを006へ記録する。未実行・failed・途中結果を合格へ含めない。

@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+PG-D-147/BUG-142: `com.github.spotbugs:spotbugs-annotations:4.10.4`をBatchのprovided（compile-only）依存へ追加。既存Maven Central cacheのjar SHA-256 `28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3`、入手元`https://repo.maven.apache.org/maven2/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar`。Java25 javapでSuppressFBWarnings.matchType/EXACTを確認。固定/run移植性警告1件のmethod限定理由記録にだけ使い、runtimeへ配布しない。通常のoffline clean verifyで再現。systemd259.5 tmpfiles.d(5)でfは既存file非truncate、!は--boot時限定を確認し、hostで実行せず固定3行のPTを行う。
+
 ## 1. 原則
 
 Tool version、入手元、hash、設定、commandを固定し、secretを含めずに再現できる状態を保つ。OS packageを管理者権限で導入できない場合は`/home/mini/codex/project1/work/toolchain`へ展開し、repositoryへbinaryをcommitしない。

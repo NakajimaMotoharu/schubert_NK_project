@@ -20,8 +20,12 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
      "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation")),
     ("dev.codex.schubert.nk.storage.LinuxFileLockTest", 1,
      ("nativeRoundTrip", "externalFlockInteroperability", "fcntlIsNotFlock", "callbackFailureAndClose",
-      "nativeErrorsAndFlags", "inputAndPlatformContracts", "concurrentSingleWinner", "retainedInodeAndDescriptorLifetime")))
+      "nativeErrorsAndFlags", "inputAndPlatformContracts", "concurrentSingleWinner", "retainedInodeAndDescriptorLifetime")),
+    ("dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest", 1,
+     ("admittedRealLock", "contentionAndIndependentInvocations", "rootAndFilesystemPolicy", "inodeAndAttributePolicy",
+      "replacementAndPostconditions", "ioAndCloseFailures", "constructorAndNativeBoundary", "fixedProvisioningContract")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
+LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 SUBJECTS = tuple("dev/codex/schubert/nk/api/maintenance/" + c
                  for c in ("InspectorLaunchConfiguration", "InspectorLauncher"))
 TRACES = {"renderedShellCheck": 3, "statusMapping": 9, "malformedReceipts": 29,
@@ -43,8 +47,9 @@ def validate_reports(suites, deployment=False):
                 or any(c.get("classname") != cls or any(child.tag not in ("system-out", "system-err")
                    for child in c) for c in cases)):
             raise ValueError("launcher/deployment PT inventory or status is not certifiable")
-        prefix = ("PT-OPS-FLOCK" if cls == "dev.codex.schubert.nk.storage.LinuxFileLockTest"
-                  else "PT-OPS-INBOX") if deployment else "PT-DB-INBOX"
+        prefix = ({"dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
+                   "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK"}.get(cls, "PT-OPS-INBOX")
+                  if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
 
@@ -71,7 +76,8 @@ def main():
     target = repo / "src/schubert-nk-api/target"
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
     def module_for(cls):
-        return "storage" if cls == "dev.codex.schubert.nk.storage.LinuxFileLockTest" else "api"
+        return {"dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
+                "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -83,12 +89,13 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
-        for cls in ET.parse(repo / "src/schubert-nk-storage/target/site/jacoco/jacoco.xml").getroot().iter("class"):
-            name = cls.get("name")
-            if name == FLOCK_SUBJECT or name.startswith(FLOCK_SUBJECT + "$"):
-                coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                                 for c in cls.findall("counter")}
-        if FLOCK_SUBJECT not in coverage or any(c["missed"] for v in coverage.values() for c in v.values()):
+        for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT)):
+            for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
+                name = cls.get("name")
+                if name == subject or name.startswith(subject + "$"):
+                    coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")}
+        if not {FLOCK_SUBJECT, LOCK_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete Linux flock coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -103,7 +110,10 @@ def main():
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
-                    repo / "src/schubert-nk-storage/pom.xml"]
+                    repo / "src/schubert-nk-storage/pom.xml",
+                    repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
+                    repo / "src/schubert-nk-batch/pom.xml",
+                    repo / "src/deployment/tmpfiles/schubert-nk-maintenance.conf"]
         sources += [repo / "src/deployment" / p for p in (
             "operations/inbox-inspector.sh.template", "systemd/schubert-nk-inbox-inspector.service",
             "systemd/optional/inbox-inspector-context-previous.conf", "systemd/optional/inbox-inspector-response-previous.conf")]
@@ -131,11 +141,14 @@ def main():
         "sourceFiles": [{"path": str(p.relative_to(repo)), "sha256": digest(p)} for p in sources],
     })
     if args.deployment:
-        manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage")}
-        manifest["related"] += ["PG-D-146", "BUG-140", "YKT-110"]
+        manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage", "batch")}
+        manifest["related"] += ["PG-D-146", "PG-D-147", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112"]
+        manifest["reviewedStaticDiagnostic"] = {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False}
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."
         manifest["limitations"] += " LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64."
+        manifest["oracle"] += " 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked."
+        manifest["limitations"] += " MaintenanceFileLock PT uses synthetic root UID/GID/tmpfs admission over real isolated unprivileged files. Actual root/tmpfiles provisioning and parent inactive/backup/DB handoff remain unverified."
         manifest["deploymentCoverage"] = {
             "class": "not applicable", "method": "not applicable",
             "basis": "Every executable statement and decision outcome in the hashed shell template has an asserting test and recorded sh -x trace; no code is excluded. Unit is declarative, validated by independent exact directive map, not JaCoCo.",

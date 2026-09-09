@@ -460,7 +460,13 @@ final class CleanupRepositoryTest {
                 + ":"
                 + dependency.getElementsByTagName("artifactId").item(0).getTextContent());
     }
-    assertEquals(Set.of("org.jspecify:jspecify"), runtime);
+    // SSC-049/PG-D-147: only the file adapter gains shared native storage, never API/Web.
+    assertEquals(
+        Set.of(
+            "org.jspecify:jspecify",
+            "dev.codex.schubert:schubert-nk-storage",
+            "com.github.spotbugs:spotbugs-annotations"),
+        runtime);
     try (var files = Files.walk(repo.resolve("src/schubert-nk-batch/src/main/java"))) {
       for (var file : files.filter(p -> p.toString().endsWith(".java")).toList()) {
         var content = Files.readString(file);

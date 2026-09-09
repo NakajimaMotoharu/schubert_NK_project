@@ -22,6 +22,19 @@
   </properties>
 
   <dependencies>
+    <!-- BUG-142: CLASS-retained, compile-only, exact single-method portability review. -->
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>4.10.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- NK-OPS-001; SS311/341/343; SSC-049/PG-D-147; PT-OPS-LOCK-001..008. -->
+    <dependency>
+      <groupId>dev.codex.schubert</groupId>
+      <artifactId>schubert-nk-storage</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
