@@ -55,6 +55,9 @@ public final class InboxCleanup {
           + "pg_current_xact_id()::text as inspection_xact,"
           + "sha256(response_body_encrypted) as inspection_hash"
           + " from schubert.maintenance_next_inbox(?,?,?)";
+  private static final String PROGRESS_COLUMNS =
+      "select run_id,cutoff,after_message_id,inspected_count,deleted_count,protected_count,"
+          + "completed_at,pg_current_xact_id()::text as inspection_xact from ";
   private final SqlConnectionProvider connections;
   private final AuthenticationInboxInspector inspector;
   private final NonAuthenticationInboxInspector nonAuthentication;
@@ -83,13 +86,48 @@ public final class InboxCleanup {
   public InspectionStep inspectNext(InspectionRun run, Optional<UUID> after) {
     Objects.requireNonNull(run, "run");
     Objects.requireNonNull(after, "after");
+    return owned(connection -> inspect(connection, run, after));
+  }
+
+  /** One durable step, including END; SS324 12.6/PG-D-128/PT081..088. */
+  public InspectionProgress inspectStoredNext(InspectionRun run) {
+    Objects.requireNonNull(run, "run");
+    return owned(
+        connection -> {
+          LoadedProgress loaded = loadProgress(connection, run);
+          if (loaded.progress.complete()) return loaded.progress;
+          InspectionStep step = inspect(connection, run, loaded.progress.cursor());
+          return saveProgress(connection, run, loaded, step);
+        });
+  }
+
+  /** Bounded continuation; complete=false never certifies whole-run success. PT081..083/087. */
+  public InspectionProgress runChunk(InspectionRun run, int maximumSteps) {
+    Objects.requireNonNull(run, "run");
+    if (maximumSteps < 1 || maximumSteps > 1000) {
+      throw new IllegalArgumentException("inspection chunk bound is invalid");
+    }
+    InspectionProgress progress = inspectStoredNext(run);
+    for (int step = 1; step < maximumSteps && !progress.complete(); step++) {
+      progress = inspectStoredNext(run);
+    }
+    return progress;
+  }
+
+  @FunctionalInterface
+  private interface Work<T> {
+    T run(Connection connection) throws SQLException;
+  }
+
+  // Closures are created only above inside this class; no external transaction callback is exposed.
+  private <T> T owned(Work<T> work) {
     try (Connection connection = requireValue(connections.open())) {
       if (!connection.getAutoCommit()) {
         throw new SQLDataException("inspection requires a fresh connection");
       }
       connection.setAutoCommit(false);
       try {
-        InspectionStep result = inspect(connection, run, after);
+        T result = work.run(connection);
         // An inner replay may aggregate a failed SQL read into false. Never commit an aborted TX.
         verifyTransaction(connection);
         connection.commit();
@@ -107,6 +145,61 @@ public final class InboxCleanup {
       throw new InboxMaintenanceException();
     }
   }
+
+  private static LoadedProgress loadProgress(Connection connection, InspectionRun run)
+      throws SQLException {
+    try (var statement =
+        connection.prepareStatement(
+            PROGRESS_COLUMNS + "schubert.maintenance_open_inbox_inspection(?,?)")) {
+      statement.setObject(1, run.id());
+      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      return readProgress(statement, run);
+    }
+  }
+
+  private static InspectionProgress saveProgress(
+      Connection connection, InspectionRun run, LoadedProgress loaded, InspectionStep step)
+      throws SQLException {
+    try (var statement =
+        connection.prepareStatement(
+            PROGRESS_COLUMNS + "schubert.maintenance_record_inbox_inspection(?,?,?,?,?,?,?)")) {
+      statement.setObject(1, run.id());
+      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(3, loaded.progress.cursor().orElse(null));
+      statement.setLong(4, loaded.progress.inspected());
+      statement.setObject(5, step.cursor().orElse(null));
+      statement.setString(6, step.outcome().name());
+      statement.setString(7, loaded.transaction);
+      return readProgress(statement, run).progress;
+    }
+  }
+
+  private static LoadedProgress readProgress(PreparedStatement statement, InspectionRun run)
+      throws SQLException {
+    try (var row = statement.executeQuery()) {
+      if (!row.next()) throw new SQLDataException("inspection progress is missing");
+      if (!run.id().equals(requireValue(row.getObject("run_id", UUID.class)))
+          || !run.cutoff().equals(requireValue(row.getTimestamp("cutoff")).toInstant())) {
+        throw new SQLDataException("inspection progress identity mismatch");
+      }
+      var progress =
+          new InspectionProgress(
+              run,
+              Optional.ofNullable(row.getObject("after_message_id", UUID.class)),
+              requireValue(row.getObject("inspected_count", Long.class)),
+              requireValue(row.getObject("deleted_count", Long.class)),
+              requireValue(row.getObject("protected_count", Long.class)),
+              row.getTimestamp("completed_at") != null);
+      String transaction = requireValue(row.getString("inspection_xact"));
+      if (!transaction.matches("[0-9]{1,20}")) {
+        throw new SQLDataException("inspection progress transaction is invalid");
+      }
+      if (row.next()) throw new SQLDataException("inspection progress count is invalid");
+      return new LoadedProgress(progress, transaction);
+    }
+  }
+
+  private record LoadedProgress(InspectionProgress progress, String transaction) {}
 
   private InspectionStep inspect(Connection connection, InspectionRun run, Optional<UUID> after)
       throws SQLException {

@@ -40,6 +40,7 @@ def main():
     selection.add_argument("--full-cleanup", action="store_true")
     selection.add_argument("--outbox-only", action="store_true")
     selection.add_argument("--progress-sql", action="store_true")
+    selection.add_argument("--progress-service", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql
     run = args.run_id
@@ -69,11 +70,15 @@ def main():
         subject = "OutboxCleanupBoundary"
     if args.progress_sql:
         subject = "InboxInspectionProgressBoundary"
+    if args.progress_service:
+        subject = "InboxCleanup"
     class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
     if args.full_cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest"
+    if args.progress_service:
+        class_name = "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest"
     suite = ET.parse(target / "surefire-reports" / ("TEST-" + class_name + ".xml")).getroot()
     names = ["validSuccessAndErrorProfiles", "headerAndMetadataMismatchesReject",
              "payloadEncodingAndSemanticFaultsReject", "cryptographicDamageAndMissingSnapshotReject",
@@ -124,6 +129,11 @@ def main():
                  "deletionAndCheckpointCommitTogether", "invalidInputsAndConstraintsReject",
                  "backupAndConcurrentRunsStayLocked", "completedProgressRetentionIsBounded",
                  "rolesAndFixedFunctionsCannotEscalate", "migrationAndInventoryAreAppendOnly"]
+    if args.progress_service:
+        names = ["mixedRowsPersistExactProgress", "boundedChunksResumeAndSkipCompleted",
+                 "progressAndBoundaryContracts", "checkpointFaultsRollbackDeletion",
+                 "uncertainCommitReloadsDurableCounts", "ownsLocksWithoutSavepoints",
+                 "concurrentAttemptsNeverDoubleCount", "runIdentityKeysAndResultsStayPrivate"]
     cases = suite.findall("testcase")
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
@@ -132,9 +142,11 @@ def main():
         raise SystemExit("missing, nonpassing or noncanonical tests")
     coverage_xml = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
     coverage_names = {subject}
-    if args.cleanup or args.full_cleanup:
+    if args.cleanup or args.full_cleanup or args.progress_service:
         coverage_names |= {"InboxCleanup$Candidate", "InspectionRun", "InspectionStep",
                            "InspectionStep$Outcome", "InboxMaintenanceException"}
+    if args.progress_service:
+        coverage_names |= {"InboxCleanup$LoadedProgress", "InspectionProgress"}
     expected_classes = {"dev/codex/schubert/nk/api/maintenance/" + name for name in coverage_names}
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
                if c.get("name") in expected_classes]
@@ -166,6 +178,8 @@ def main():
         folder = "outbox-only-cleanup"
     if args.progress_sql:
         folder = "inbox-progress-sql"
+    if args.progress_service:
+        folder = "inbox-progress-service"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -189,7 +203,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -284,8 +298,15 @@ def main():
                                 "roles": ["schubert_inbox_inspector", "schubert_batch", "schubert_backup"]}
         migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql"
         manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
+    if args.progress_service:
+        manifest["scopeResult"] = "PASS_DURABLE_OWNED_INSPECTION_AND_BOUNDED_RESUME_SERVICE_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-128", "BUG-014", "YKT-012"]
+        manifest["fixture"] = "Independent UI TSV and handbuilt auth wire/JCE snapshots with runtime keys; isolated PostgreSQL and restricted role; matched public JDBC fault probes; 1001 deliberately unverifiable rows for exact 1000-step cutoff. No raw wire/keys/context/dump saved."
+        manifest["oracle"] = "023/024 PT: literal progress/cursor/counts and SQL row postconditions; mixed auth/query/User/SCN/delete/protect/unknown outcomes, chunk1000 then resume1001+END, complete short-circuit, NULL/invalid DB projections, open/save/health/resource/uncertain commit failures, no SAVEPOINT and continuous locks, 100 calls in completed33/33/34 waves permit only observed55P03."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")} for cls in classes}
     # Scope success is not the completion certificate for the complete maintenance workflow.
-    manifest["remaining"] = "Whole-run durable progress, mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify the available 24-route inspectors and V011 bypass removal."
+    manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(
