@@ -210,6 +210,14 @@ InspectorDatabaseConnectionsはloaderから受けたmaterialの独立copyだけ�
 
 返却前にautoCommit=true/readOnly=false、current_user/session_userが両方専用role、current_databaseが設定DBと一致、回復中でないことを固定SELECTで検証する。違反/SQL故障/検証用資源close故障は接続も閉じて固定SQLExceptionだけを返す（原因/suppressed/credential/URL/SQL値を公開しない）。正常返却connectionはcaller所有、provider closeと競合するopenはprivate lockで直列化、既返却connectionを勝手に閉じない。DB role権限と保持・backupは既存SQL/owned cleanupが別途再検証する。専用process main/OS lock/実backup検査/unit起動の成功をこの接続部品だけで保証しない。
 
+### 6.7 専用検査の操作内resource寿命（SSC-049、PG-D-143）
+
+InspectorSettingsは非秘密のcredential directory path、§6.6 canonical JDBC URL、読取可能fingerprint version集合の不変snapshotを持つ。Pathは絶対・正規化済み・rootそのもの以外、URLは既存専用providerと同じ検証、versionは§6.5の非空集合/1～16byte形式。null/空/未知値はIO前に拒否し、toStringは設定実値を表示しない。既存InspectorProcess/providerの同じ検証をこの設定契約へ共有し、判定を複製しない。ここはenv/file parserではなく、後続launcherが渡す値の型境界である。
+
+api.fileのInspectorApplicationはfile adapterとして低位DirectoryCalls/InodeSecurityCallsだけを使用する。execute(run)ごとに(1)全path segment NOFOLLOWでrootを開く、(2)既存readerでdb-inbox-inspector materialを所有、(3)固定role providerへ独立copy、(4)同rootのreaderとproviderからInspectorProcessを生成・同期実行、(5)provider/password/rootを逆順close、の順とする。鍵4個/copy/codecは既存InspectorProcessが操作内で所有・消去する。runはIO前にnon-null確認。各executeは独立寿命で、同run再開は永続状態を正とする。
+
+成功/保護あり結果はroot closeを含む全終了後だけ返す。root open/close、credential load、構成不正/暗号primitive故障は例外で終了し、途中結果を返さない。通常DB障害/割込/時間超過は既存InspectionExecutionの非成功を保持する。ここでroot権限を緩和したり、DB credentialを他processへ渡したりしない。ログ/HTTP/JMS/別processを生成しない。PTは実保持inode/file/JDBC/永続SQLと明示synthetic OS属性・fault portを組合せる。実systemd credential正系、Java main/unit、親flock/backup実体/朝batch全順序は別gateであり本接続だけを完了証明にしない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
