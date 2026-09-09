@@ -1,5 +1,7 @@
 # NK-OPS-001 Linux flock 実行結果
 
+2026-09-09 最新確定: dev-foundation/source20af737d、正式PT-WEB-20260909-42（19:47:16～19:54:18 JST）、全1075件（Protocol80/Storage50/API634/Web241/Batch29/CHR41）PASS、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのSpotBugs0/NullAway・Enforcer・Spotless PASS（CHR runnerのSpotBugsは未設定）。12collector・35証跡scopeの同run/source/branch/hash/参照、017の1件・019の14件負canary成功。DB26部品240 PT＋batch2部品29 PT＋OPS2部品16 PT＝30部分成果285件確定。PG-D-146の実Linux flock8 PT（実コマンド双方向競合、32並行、FD/例外回収、inode差替え）を追加し、BUG140/YKT110を再試験完了。正式41はbranch1不足で不合格・後続3module未実行として保存。親root lockfile検証PG-D-147はSS/PT仕様のみ未合格。親inactive/実backup/DB引渡し/root設定publish・全cleanup監査・通常Question writer/replay・RERUN-001は残る。BUG-014/UIC-006/SSC-049/052継続、加重見積約4割（35～50%、456）、試験件数だけで加点しない。週間残18%。元dev-web Scenario3fileは保全・不算入、CHR41はrunner PTであり実NK互換gateではない。以下は履歴。
+
 正式41/source66f43849（19:44:10～19:44:40 JST）は不合格。CHR41/Protocol80/Storage50件は成功したがStorageのbranch1不足でexit1、API/Web/Batchは未実行で合格に含めない。BUG-140/YKT-110を修正前起票。native Arenaの所有scopeを単一returnに整理し、実操作/例外の契約と全8 PTを維持する。null資源の人工注入やcoverage除外はしない。新正式runで再試験する。
 
 003/PT-OPS-FLOCK-001～008、SSC-049/PG-D-146。2026-09-09 19:37:04 JSTのStorage選択試験8件成功、19:43:39のStorage compile/SpotBugs成功・指摘0。探索logは`/tmp/pgpt-flock-explore-1.log`、`/tmp/pgpt-flock-spotbugs-1.log`（作業領域のみ、正式証跡ではない）。019 collector異常系14件成功。正式41の全体clean verifyと同一sourceの証跡収集はこれから実施し、正式40以前へ遡って算入しない。root lockfile配布/親OS停止/実backup/DB引渡しは別未完了。
