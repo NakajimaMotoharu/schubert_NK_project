@@ -18,6 +18,11 @@ QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticD
                     "canonicalIdentityReferencesAndNulls", "validRowsDeleteAndRetainExactMetadata",
                     "retentionBackupAndSqlAuthority", "failuresRollbackAndResume",
                     "concurrentAndDurableMixedRuns", "appendOnlyInventoryAndClosedRoutes"]
+BINDING_CLASS = "dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest"
+BINDING_METHODS = ["independentWriteAndReadAllRoutes", "nullIdentityAndReferenceContracts",
+                   "everyMetadataByteIsAuthenticated", "exactLengthAndLegacyRejection",
+                   "keysAadAndCipherDamage", "borrowedOwnershipAndRedaction",
+                   "concurrentBindingsNeverCross", "equalBusinessTimesDoNotAuthorizeAnotherTarget"]
 
 
 def validate_suite(suite, class_name, names):
@@ -66,6 +71,7 @@ def main():
     selection.add_argument("--inspector-process", action="store_true")
     selection.add_argument("--log-progress", action="store_true")
     selection.add_argument("--question-query", action="store_true")
+    selection.add_argument("--result-binding", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety or args.log_progress
     run = args.run_id
@@ -115,9 +121,13 @@ def main():
         subject = "LogCleanupProgressBoundary"
     if args.question_query:
         subject = "NonAuthenticationInboxInspector"
+    if args.result_binding:
+        subject = "ResultBoundResponseSnapshotCodec"
     package = "dev.codex.schubert.nk.storage." if args.inode_security else "dev.codex.schubert.nk.api.maintenance."
     if args.credential_loader:
         package = "dev.codex.schubert.nk.api.file."
+    if args.result_binding:
+        package = "dev.codex.schubert.nk.api.idempotency."
     class_name = package + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
@@ -127,6 +137,8 @@ def main():
         class_name = "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest"
     if args.question_query:
         class_name = QUESTION_CLASS
+    if args.result_binding:
+        class_name = BINDING_CLASS
     suite = ET.parse(target / "surefire-reports" / ("TEST-" + class_name + ".xml")).getroot()
     names = ["validSuccessAndErrorProfiles", "headerAndMetadataMismatchesReject",
              "payloadEncodingAndSemanticFaultsReject", "cryptographicDamageAndMissingSnapshotReject",
@@ -225,6 +237,8 @@ def main():
                  "completedProgressRetention", "appendOnlyInventoryAndCrossCleanup"]
     if args.question_query:
         names = QUESTION_METHODS
+    if args.result_binding:
+        names = BINDING_METHODS
     cases = validate_suite(suite, class_name, names)
     coverage_xml = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
     coverage_names = {subject}
@@ -297,6 +311,8 @@ def main():
         folder = "log-cleanup-progress"
     if args.question_query:
         folder = "question-query"
+    if args.result_binding:
+        folder = "result-binding"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -321,7 +337,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 161 if args.question_query else 153 if args.log_progress else 141 if args.inspector_process else 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 169 if args.result_binding else 161 if args.question_query else 153 if args.log_progress else 141 if args.inspector_process else 129 if args.credential_loader else 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -497,6 +513,13 @@ def main():
         migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql"
         manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
         manifest["remaining"] = "Three mutation references QSB/NTC/QDL, private main/oneshot, parent OS/real-backup and full cross-audit remain incomplete; query business application and whole PGPT/IT/ST are NOT certified."
+    if args.result_binding:
+        manifest["scopeResult"] = "PASS_AUTHENTICATED_RESULT_METADATA_CODEC_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "SSC-052", "PG-D-140", "BUG-014", "YKT-012"]
+        manifest["fixture"] = "Test-only independent DataOutputStream literal NKREF1 prefix, JCE/Deflater NKENC1 envelope, runtime CSPRNG keys and opaque exact-length wire. No raw key/token/wire saved."
+        manifest["oracle"] = "043/044 PT169..176: independently computed prefix and external envelope in both directions for three layouts; each of35 metadata bytes, exact lengths, legacy rejection, numeric/UUID extrema, null/identity/reference contracts, AAD/key/cipher damage, borrowed ownership,100 concurrent bindings and identical-time wrong-target/token rejection. Opaque wire is NOT fixed-wire semantic or DB-reference proof."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))} for c in cls.findall("counter")} for cls in classes}
+        manifest["remaining"] = "QSB/NTC/QDL writer/replay/DB-reference checks/owned cleanup and mandatory private main/parent OS/real-backup remain incomplete. No deletion authority, whole PGPT, IT or ST completion claim."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(

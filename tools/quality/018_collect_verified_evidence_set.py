@@ -31,6 +31,7 @@ NESTED = (
     ("--inspector-process", "inspector-process"),
     ("--log-progress", "log-cleanup-progress"),
     ("--question-query", "question-query"),
+    ("--result-binding", "result-binding"),
 )
 SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
     "004_NK-DAT-001/evidence/" + p for _, p in NESTED)

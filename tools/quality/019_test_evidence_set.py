@@ -28,6 +28,39 @@ inspection = module("inspection_collector", "016_collect_inbox_inspection_eviden
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_result_binding_inventory_rejects_nonpassing_cases(self):
+        cls = "dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest"
+        names = ["independentWriteAndReadAllRoutes", "nullIdentityAndReferenceContracts",
+                 "everyMetadataByteIsAuthenticated", "exactLengthAndLegacyRejection",
+                 "keysAadAndCipherDamage", "borrowedOwnershipAndRedaction",
+                 "concurrentBindingsNeverCross", "equalBusinessTimesDoNotAuthorizeAnotherTarget"]
+        self.assertEqual(cls, inspection.BINDING_CLASS)
+        self.assertEqual(names, inspection.BINDING_METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual(8, len(inspection.validate_suite(suite, cls, names)))
+        for position in range(8):
+            wrong = copy.deepcopy(suite)
+            wrong.remove(wrong[position])
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite)
+            ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for key, value in (("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite)
+            wrong.set(key, value)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for key, value in (("classname", "Wrong"), ("name", "unknown"), ("name", names[1])):
+            wrong = copy.deepcopy(suite)
+            wrong[0].set(key, value)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+
     def test_question_query_inventory_rejects_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
         names = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -150,7 +183,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query")]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding")]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -204,7 +237,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(28, len(check()))
+            self.assertEqual(29, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -214,7 +247,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(28):
+        for failed_at in range(29):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -227,9 +260,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(28, len(calls))
+        self.assertEqual(29, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertEqual("--question-query", calls[-1][-1])
+        self.assertEqual("--result-binding", calls[-1][-1])
 
     @staticmethod
     def write_scope(root, scope, changes=None):
