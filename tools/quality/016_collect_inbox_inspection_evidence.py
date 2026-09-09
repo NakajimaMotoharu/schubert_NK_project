@@ -541,7 +541,7 @@ def main():
         manifest["tests"] = {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
                              "result": "PASS"} for i, name in enumerate(names, 177)}
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "SSC-052", "PG-D-141", "BUG-014", "YKT-012",
-                               "BUG-121", "BUG-122", "BUG-123", "BUG-124", "BUG-125", "BUG-126", "BUG-127", "BUG-128", "YKT-101", "YKT-102"]
+                               "BUG-121", "BUG-122", "BUG-123", "BUG-124", "BUG-125", "BUG-126", "BUG-127", "BUG-128", "BUG-129", "YKT-101", "YKT-102"]
         manifest["fixture"] = "Isolated PostgreSQL real restricted roles, independently assembled UI232/236 response/QWK bytes and JCE/NKREF1, synthetic rows/JDBC fault projections; no raw body/key/token saved."
         manifest["oracle"] = "045/046 PT177..192: three mutation response profiles and bound target/token; fixed business/SQL afterconditions, missing references protected, QWK correlation/SENT/unique work, cancellation and deleted Question/Answer triples, historical ownership, negative/null/projection faults, parent/child locks and absent-child insertion blocking,168h/cutoff/backup gates, owned rollback/uncertain commit/durable resume,100 parallel calls. Java counters and SQL branch/role matrix are separate."
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))} for c in cls.findall("counter")} for cls in classes}
