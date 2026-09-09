@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-049/PG-D-149（2026-09-09、先行17b06c0c）: batch.platform.InspectorRunEnvironmentはSS343 §6.8のrun専用EnvironmentFileのcanonical ASCII生成・期待runとの全byte照合だけを担う。BatchRunの検証契約を再利用し、時刻取得・file IO・root/lock/backup/起動・永続原本の確定を行わない。NK-OPS-001、OPS-009、UI251、PT-OPS-ENV-001～004へ追跡する。
+
 SSC-049/PG-D-148: batch.platform.ApplicationStopGateはAPI/Webの固定2unitをread-only照会し、UnitStateParserの厳密な7property契約で停止を確認する。SystemctlStateSourceだけが固定systemctl show・制限環境・5秒/1024byte境界を所有する。停止/起動や任意unit/commandの実行入口を追加しない。親OS lock/再起動禁止/実backup/DB引渡しは別責務で、観測結果を永続的な停止leaseとして扱わない。
 
 SSC-049/PG-D-147: batch.file.MaintenanceFileLockはroot controller内部だけの固定runtime admission adapterとする。storageの保持directory/inode/実Linux flockを借用し、固定/run配下の所有・型・mode・ACL・local tmpfs・identityを確認した保守callbackをOS lock下で実行する。公開factoryにpath/UID/commandを渡す入口を作らない。batch→storage依存を追加しAPI/Webへの逆依存は禁止。停止/backup/DB排他引渡しを低位lock取得結果だけで代替しない。
