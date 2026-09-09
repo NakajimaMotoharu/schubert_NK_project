@@ -115,7 +115,7 @@ def main():
     if args.application:
         manifest.update({
             "scopeResult": "PASS_INSPECTOR_RESOURCE_LIFETIME_ONLY",
-            "related": ["QA-046", "UIC-006", "SSC-049", "PG-D-143", "BUG-134", "YKT-105", "BUG-014", "YKT-012"],
+            "related": ["QA-046", "UIC-006", "SSC-049", "PG-D-143", "BUG-134", "BUG-135", "YKT-105", "YKT-106", "BUG-014", "YKT-012"],
             "fixture": "Public immutable path/URL/version vectors; real retained temporary files and native descriptors with explicitly synthetic privileged metadata; isolated PG18.6 trust fixture for resource composition only, NOT a SCRAM authentication certificate (047/PT207 independently covers SCRAM). Runtime random AES keys and public byte65 fixture password, no deployed credentials.",
             "oracle": "049/PT209..220: immutable nonsecret configuration; null/empty/root/path/URL/version rejection before IO; real SQL empty-run END0/0/0 and same-run resume; malformed response retained END1/0/1; missing backup STORAGE_FAILURE and no durable progress; password/key failure closes all; root open/close failure never returns success and committed progress survives resume; default native RW root rejection; start interrupt flag retained with IO0, actual FileChannel interruption fails and closes;64 independent concurrent missing-file operations close every FD. Private reflection and production-derived expected values are not used.",
         })

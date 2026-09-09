@@ -34,6 +34,12 @@ public record InspectorSettings(
   }
 
   @Override
+  public Set<String> fingerprintVersions() {
+    // BUG-135/YKT-106: keep the immutable copy contract explicit at the public boundary too.
+    return Set.copyOf(fingerprintVersions);
+  }
+
+  @Override
   public String toString() {
     return "InspectorSettings[REDACTED]";
   }
