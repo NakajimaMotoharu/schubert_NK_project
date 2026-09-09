@@ -300,7 +300,7 @@ final class InboxResponseInspectorTest {
     System.arraycopy(value, 0, bytes, offset, value.length);
   }
 
-  private static final class Fixture implements AutoCloseable {
+  static final class Fixture implements AutoCloseable {
     final byte[] key = new byte[32];
     final ResponseSnapshotCodec codec;
     final InboxResponseInspector inspector;
