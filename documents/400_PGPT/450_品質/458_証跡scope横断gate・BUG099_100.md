@@ -1,6 +1,6 @@
 # 証跡scope横断gate・BUG-099/100
 
-最新追補・正式35: PT-WEB-20260909-35/source413dc339、17:06:16～17:13:16 JST、全1011件/6 Java moduleの4coverage100%/Production静的解析PASS。018全30scope・9collector/同run/source/branch/hash/参照PASS。017の1件と019の8件（独立新16method、全30失敗段/120異常bindingを含む）も成功。新question-mutationの1class/18method/154line/147branchはmissed0。正式34はAPI旧inventory1 failureで不合格・収集未開始。047/048は次scopeの仕様のみで未収集・未合格。以下は履歴。
+最新追補・正式36: PT-WEB-20260909-36/source1dc0b57d、17:46:15～17:53:11 JST、全1027件/6 Java moduleの4coverage100%/Production静的解析PASS。018全31scope・10collector/同run/source/branch/hash/参照PASS。017の1件と019の9件（独立新16method、全31失敗段/124異常bindingを含む）も成功。新inspector-databaseは047/048へ追跡。049/050のresource寿命は仕様のみ、未収集・未合格。以下は履歴。
 
 ## 1. 正式26の非合格記録（修正前）
 

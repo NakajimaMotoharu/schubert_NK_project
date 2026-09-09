@@ -1,6 +1,10 @@
 # NK-DAT-001 検査DB credential・接続 実行結果
 
-047/PT-DB-INBOX-193～208、SS343 §6.6/342/352、SSC-049/PG-D-142。実装・探索中、正式未合格。実process main/親OS/backup gateと分離する。対象source/run/hashは正式全体回帰とcollector成功後に記録する。
+047/PT-DB-INBOX-193～208、SS343 §6.6/342/352、SSC-049/PG-D-142。正式PT-WEB-20260909-36/source1dc0b57dae258495f2198f3e348c150030b2e413、2026-09-09 17:46:15～17:53:11 JST、dev-foundation、exit0。新16件全PASS、全体1027件（Protocol80/Storage42/API594/Web241/Batch29/CHR41）成功、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのNullAway/Enforcer/Spotless/SpotBugs PASS。全31scope/10collectorの同run/source/branch/hash/参照と017/019の10負canaryも成功。evidence/inspector-database/manifest.json SHA-256 `f34e56a41dbea484def980992b95ee83db2282a32a78184f16e3f8066abb3fb2`、全体manifest SHA-256 `80cd4b20c5d8a7bcb8074548c933ebc39111ef95df1a4480ae0ae633ce14ee57`。
+
+InspectorDbCredential class1/method6/line36/branch28、InspectorDatabaseConnections class1/method8/line51/branch28、各missed0。共有access/loader/nestedも同manifestの全counterでmissed0。実PGのSCRAM正誤・専用role/42501・100fresh接続・open/close排他、独立暗号/SQL後条件によるrollback2/0→最終1/1（検査2/削除1/保護1）と再開を確認。BUG130～133/YKT103～104を本runで再試験完了。Current baselineとV001～016は不変更。既知秘密pattern scan0hit。実process main/親OS/backup gate・systemd実credential正系・IT/STとは分離し、PGPT工程完了は未宣言。
+
+再現は421の固定JDK/Maven/m2で`sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260909-36`（既存runは上書き不可、再実行時は新ID）、終了0確認後に`python3 -B tools/quality/017_test_inbox_evidence_trace.py`、`019_test_evidence_set.py`、`018_collect_verified_evidence_set.py <run>`の順。完全な実行command・環境・source hash・各Test ID期待/実際はmanifest/同directory results.xmlへ保存。
 
 ## 探索履歴（正式合格へ算入しない）
 

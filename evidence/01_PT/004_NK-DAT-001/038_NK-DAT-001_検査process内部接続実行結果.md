@@ -1,6 +1,6 @@
 # NK-DAT-001 検査process内部接続 実行結果
 
-最新正式再試験: PT-WEB-20260909-35/source413dc339、2026-09-09 17:06:16～17:13:16 JST、dev-foundation、exit0。全体1011件（Protocol80/Storage42/API578/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/inspector-process/manifest.json、SHA-256 `9c8f1cd60867c18f34da3bf59b058ce11e5f5a9e5209ee8f89c9c77a46dd5229`。全30scope/9collectorの同run/source/branch/hash/参照、017の1件・019の8件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046で追加合格、通常writer/replay・DB credential/main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
+最新正式再試験: PT-WEB-20260909-36/source1dc0b57d、2026-09-09 17:46:15～17:53:11 JST、dev-foundation、exit0。全体1027件（Protocol80/Storage42/API594/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/inspector-process/manifest.json、SHA-256 `e6cfc9e3a283fbbc9a82e93fcbbad8d5d74f9455ecdf33eda6ac7b9b447e9d6a`。全31scope/10collectorの同run/source/branch/hash/参照、017の1件・019の9件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 037/PT-DB-INBOX-141～152、PG-D-135/SSC-049。探索3は2026-09-09 13:42:08 JST、33.905秒、dev-foundation/9843e921後の未commit実装、exit0。新12＋関連57=69件全成功、NullAway/Enforcer/Spotless PASS、SpotBugs0。新2classはline67/method8/class2/branch34/instruction383で全missed0。正式全体回帰・証跡確定までは未合格。Main/専用unit/親OS gateおよび全Program完了ではない。
 
