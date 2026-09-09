@@ -1,6 +1,6 @@
 # NK-DAT-001 認証Inbox検査削除service実行結果
 
-最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/authentication-cleanup/manifest.json SHA-256 `935d08de7be74e34f0535255dc33b2b10a05ad9b785841031d8c50c473453fbf`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式再試験: PT-WEB-20260909-33/sourcef3940eac、2026-09-09 16:11:26～16:18:10 JST、dev-foundation、exit0。全体995件（Protocol80/Storage42/API562/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%・静的解析0。対象Test ID・個別結果・coverageはevidence/authentication-cleanup/manifest.json、SHA-256 `d8116a178dba7da338e704173c687c4c7c4bdb11548d0e7582feb1bcd5f517ef`。全29scope/9collectorの同一run/source/branch・全hash/参照、017の1件・019の7件負canary成功。Current baseline不変、秘密pattern scan0hit。更新対象binding codecは追加合格したが更新3参照/通常writer・replay/main・oneshot/親OS・実backup/実NK CHRは未完了。以下は個別試験の経緯・過去の探索履歴。
 
 最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/authentication-cleanup/manifest.jsonの現行SHA-256は `e95d2d35734a6a8be9f34b973962c6acfcc521aba02d460755301951636ffc99`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 

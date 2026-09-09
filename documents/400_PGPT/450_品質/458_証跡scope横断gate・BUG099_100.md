@@ -1,5 +1,7 @@
 # 証跡scope横断gate・BUG-099/100
 
+最新追補・正式33: PT-WEB-20260909-33/sourcef3940eac、2026-09-09 16:11:26～16:18:10 JST、全995件・6 Java moduleの4coverage100%・静的解析0。018は9collector/29scopeを収集し全hash/同run/source/branch/参照PASS。result-bindingを29番目に追加、019は独立8method inventoryと全29失敗段/116異常bindingを含む7件成功、017の1件も成功。codec1class/8method/53line/20branchの各missed0。045/046の新16 PT仕様はまだ未実装・未合格で収集に含めない。旧runのscope数を遡って変更しない。以下は履歴。
+
 ## 1. 正式26の非合格記録（修正前）
 
 PT-WEB-20260909-26/source5b4d1d52は2026-09-09 12:58:59～13:05:13 JST、build exit0、930件成功・4種coverage100%・静的解析0。

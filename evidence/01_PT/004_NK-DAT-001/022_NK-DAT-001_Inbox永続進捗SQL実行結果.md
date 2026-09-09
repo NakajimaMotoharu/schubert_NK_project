@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続進捗SQL実行結果
 
-最新正式判定: PT-WEB-20260909-32/sourcefa0d53b4、2026-09-09 15:46:34～15:53:15 JST、dev-foundation、exit0、全987件・6 Java module全4coverage100%・静的解析0。当scopeの必須Test ID全成功、evidence/inbox-progress-sql/manifest.json SHA-256 `c6972474cf9318f7360496f1da6cc885b3061c84e61b9a54c2d6dae0f89cf848`。018全28scopeの同一run/source/branch/hash/参照、017の1件・019の6件負canary成功。Program全体・IT/STは未完了。以下は履歴。
+最新正式再試験: PT-WEB-20260909-33/sourcef3940eac、2026-09-09 16:11:26～16:18:10 JST、dev-foundation、exit0。全体995件（Protocol80/Storage42/API562/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%・静的解析0。対象Test ID・個別結果・coverageはevidence/inbox-progress-sql/manifest.json、SHA-256 `8f80afe5afb1026c31b4329bcc9092ad64ae6a15eff0720f324da4ee1325f6d0`。全29scope/9collectorの同一run/source/branch・全hash/参照、017の1件・019の7件負canary成功。Current baseline不変、秘密pattern scan0hit。更新対象binding codecは追加合格したが更新3参照/通常writer・replay/main・oneshot/親OS・実backup/実NK CHRは未完了。以下は個別試験の経緯・過去の探索履歴。
 
 ## 1. 判定
 
