@@ -1,0 +1,182 @@
+package dev.codex.schubert.nk.api.file;
+
+import dev.codex.schubert.nk.api.maintenance.InspectorAesCredential;
+import dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccess;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.FileTime;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.concurrent.atomic.AtomicBoolean;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * Borrowed credential root; parse only after bounded file IO and owned entry close succeed.
+ * NK-DAT-001; DAT-009/OPS-009/FIL-006; UI212/241/251; SS311/343 6.4; QA-046/SSC-049/PG-D-134;
+ * PT-DB-INBOX-129..140.
+ */
+@NullMarked
+public final class InspectorCredentialLoader {
+  interface Io {
+    Map<String, Object> attributes(Path held) throws IOException;
+
+    SeekableByteChannel openReadOnly(Path held) throws IOException;
+  }
+
+  private final OwnedTransferDirectory root;
+  private final InodeSecurityCalls security;
+  private final InspectorCredentialAccess policy;
+  private final Io io;
+
+  public InspectorCredentialLoader(OwnedTransferDirectory root, InodeSecurityCalls security) {
+    this(root, security, new NioIo());
+  }
+
+  InspectorCredentialLoader(OwnedTransferDirectory root, InodeSecurityCalls security, Io io) {
+    this.root = Objects.requireNonNull(root, "credential root");
+    this.security = Objects.requireNonNull(security, "inode security");
+    this.io = Objects.requireNonNull(io, "credential IO");
+    policy = new InspectorCredentialAccess(security.effectiveUid());
+  }
+
+  /** Caller owns returned material and root; missing current or any IO/close failure is fatal. */
+  public Optional<InspectorAesCredential> load(AesCredentialFile credential)
+      throws InspectorCredentialException {
+    Objects.requireNonNull(credential, "credential ID");
+    byte[] buffer = new byte[70];
+    try {
+      Snapshot before = root.atDirectory(this::directory);
+      OptionalInt length = readOptional(credential, buffer);
+      require(before.equals(root.atDirectory(this::directory)));
+      if (length.isEmpty()) return Optional.empty();
+      return Optional.of(InspectorAesCredential.consume(Arrays.copyOf(buffer, length.getAsInt())));
+    } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      throw new InspectorCredentialException();
+    } finally {
+      Arrays.fill(buffer, (byte) 0);
+    }
+  }
+
+  private OptionalInt readOptional(AesCredentialFile credential, byte[] buffer)
+      throws StorageIoException {
+    // Operation-local marker: missing after entry acquisition/inside IO/at close is not optional.
+    var entered = new AtomicBoolean();
+    try {
+      int length =
+          root.atExistingEntryHandle(
+              credential.fileName(),
+              held -> {
+                entered.set(true);
+                return readFile(held, buffer);
+              });
+      return OptionalInt.of(length);
+    } catch (StorageIoException failure) {
+      if (failure.reason() == StorageIoException.Reason.MISSING
+          && !entered.get()
+          && credential.optional()) return OptionalInt.empty();
+      throw failure;
+    }
+  }
+
+  private int readFile(Path held, byte[] bytes) throws IOException {
+    Snapshot before = file(held);
+    int expectedSize = (int) before.metadata().size();
+    ByteBuffer buffer = ByteBuffer.wrap(bytes);
+    try (var channel = io.openReadOnly(held)) {
+      require(channel.size() == expectedSize);
+      while (buffer.hasRemaining()) {
+        int position = buffer.position(), remaining = buffer.remaining();
+        int count = channel.read(buffer);
+        if (count == -1) break;
+        require(count > 0 && count <= remaining && buffer.position() == position + count);
+      }
+      require(buffer.position() == expectedSize);
+      require(channel.size() == expectedSize);
+    }
+    require(before.equals(file(held)));
+    return expectedSize;
+  }
+
+  private Snapshot directory(Path held) throws IOException {
+    Metadata metadata = metadata(io.attributes(held));
+    require((metadata.mode() & 0170000) == 040000);
+    boolean readonly = security.readOnlyFilesystem(held);
+    policy.requireDirectory(
+        metadata.mode(), metadata.uid(), metadata.links(), readonly, security.accessAcl(held, 44));
+    return new Snapshot(metadata, readonly);
+  }
+
+  private Snapshot file(Path held) throws IOException {
+    Metadata metadata = metadata(io.attributes(held));
+    // Must precede native path-following getxattr/statvfs and any content open on O_PATH symlinks.
+    require((metadata.mode() & 0170000) == 0100000);
+    boolean readonly = security.readOnlyFilesystem(held);
+    policy.requireAesFile(
+        metadata.mode(),
+        metadata.uid(),
+        metadata.links(),
+        metadata.size(),
+        readonly,
+        security.accessAcl(held, 44));
+    return new Snapshot(metadata, readonly);
+  }
+
+  private static Metadata metadata(@Nullable Map<String, Object> attributes)
+      throws InspectorCredentialException {
+    if (attributes == null
+        || !(attributes.get("mode") instanceof Integer mode)
+        || !(attributes.get("uid") instanceof Integer uid)
+        || !(attributes.get("gid") instanceof Integer gid)
+        || !(attributes.get("nlink") instanceof Integer links)
+        || !(attributes.get("size") instanceof Long size)
+        || !(attributes.get("dev") instanceof Long device)
+        || !(attributes.get("ino") instanceof Long inode)
+        || !(attributes.get("lastModifiedTime") instanceof FileTime modified)
+        || !(attributes.get("ctime") instanceof FileTime changed))
+      throw new InspectorCredentialException();
+    return new Metadata(
+        mode, Integer.toUnsignedLong(uid), gid, links, size, device, inode, modified, changed);
+  }
+
+  private static void require(boolean accepted) throws InspectorCredentialException {
+    if (!accepted) throw new InspectorCredentialException();
+  }
+
+  private record Metadata(
+      int mode,
+      long uid,
+      int gid,
+      int links,
+      long size,
+      long device,
+      long inode,
+      FileTime modified,
+      FileTime changed) {}
+
+  private record Snapshot(Metadata metadata, boolean readonly) {}
+
+  static final class NioIo implements Io {
+    @Override
+    public Map<String, Object> attributes(Path held) throws IOException {
+      return Files.readAttributes(
+          held, "unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime");
+    }
+
+    @Override
+    public SeekableByteChannel openReadOnly(Path held) throws IOException {
+      return FileChannel.open(held, StandardOpenOption.READ);
+    }
+  }
+}
