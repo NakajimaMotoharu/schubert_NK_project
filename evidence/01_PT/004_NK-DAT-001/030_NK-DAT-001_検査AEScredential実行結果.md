@@ -1,5 +1,7 @@
 # NK-DAT-001 検査AEScredential実行結果
 
+最新正式判定: PT-WEB-20260909-24/source3e325f49、dev-foundation、2026-09-09 12:17:13～12:23:32 JST、exit0。全902件（Protocol80/Storage34/API506/Web241/CHR41）、failed/error/skipped0、5 Java moduleのline/method/class/branch100%、NullAway/Enforcer/Spotless PASS、SpotBugs0。新8 PT105～112は全PASS、line42/method8/class1/branch22全missed0。8collector/21scopeの全hash・trace負canary、V001～013/Current baseline不変、秘密pattern scan0hitを確認。evidence/inbox-aes-credential/manifest.json SHA-256 `f53afc02bc86b7f0971755c09871d30d1bac317be7f4c372eead20294138af4d`。BUG-096/YKT-087はsource3e325f49で修正、全testCompileと再試験で完了。SS343 §6.2/031の権限判定・実IO/ACL/native/main/親gateは未完了。以下は探索時の履歴。
+
 探索2で新8件と依存21件が成功。2026-09-09 12:16:26 JST、30.575秒、exit0。対象はbe4e0e32後の未commit実装、dev-foundation。正式23は本sliceを含まず、正式24のclean verify・証跡確定までは合格完了へ算入しない。
 
 ## 1. 探索と障害
