@@ -43,6 +43,7 @@ def main():
     selection.add_argument("--progress-service", action="store_true")
     selection.add_argument("--cleanup-safety", action="store_true")
     selection.add_argument("--run-executor", action="store_true")
+    selection.add_argument("--aes-credential", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety
     run = args.run_id
@@ -78,6 +79,8 @@ def main():
         subject = "CleanupSafetyBoundary"
     if args.run_executor:
         subject = "InspectionRunExecutor"
+    if args.aes_credential:
+        subject = "InspectorAesCredential"
     class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
@@ -151,6 +154,11 @@ def main():
                  "invalidInputsAndTimezone", "rolesInventoryAndImmutableHistory",
                  "rollbackAndRowLocks", "businessAndSessionBoundaries",
                  "logRetentionAndHold", "batchCompletionRetention"]
+    if args.aes_credential:
+        names = ["validKeyAndVersionBounds", "envelopeLengthAndMagic",
+                 "versionAndLineBoundaries", "base64AndKeySize",
+                 "consumedInputAndCopiedKeysDoNotAlias", "closeIsIdempotentAndRedacted",
+                 "concurrentCopiesAndCloseStayConsistent", "nullAndInvalidInputsNeverEscape"]
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or {c.get("name") for c in cases} != set(names)
@@ -202,6 +210,8 @@ def main():
         folder = "cleanup-safety"
     if args.run_executor:
         folder = "inbox-run-executor"
+    if args.aes_credential:
+        folder = "inbox-aes-credential"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -226,7 +236,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -345,6 +355,13 @@ def main():
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-130", "BUG-014", "YKT-012"]
         manifest["fixture"] = "Real PostgreSQL/restricted role and prior independent JCE Login error; synthetic unverifiable1001 rows; deterministic monotonic nanoTime sequences, public JDBC close hook and actual thread interrupts. No secrets saved."
         manifest["oracle"] = "027/028: SUCCESS0/WARNING10 only committedEND;30min before/equal/after, clock rollback/natural wrap, interrupt before/after preserving flag;1001-row two chunks, failure inside second chunk confirms1000 while DB holds1001 and same-run resume recovers; record/null contracts and redaction, unexpected clock exceptions propagate."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")} for cls in classes}
+    if args.aes_credential:
+        manifest["scopeResult"] = "PASS_OWNED_AES_CREDENTIAL_FORMAT_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-131", "BUG-096", "YKT-087"]
+        manifest["fixture"] = "Runtime CSPRNG32-byte test material, independently assembled ASCII envelope and JDK Base64. No real credential, key, encoded value or raw output saved."
+        manifest["oracle"] = "029/030: literal magic/length/version grammar and canonical padded32-byte Base64; original independent key copy, malformed length/ASCII/padding/low-bit negatives; input zero on success/failure, no alias, close idempotence and after-close rejection, private-lock and100-copy/close races; fixed cause-free errors. File/ACL admission is not certified."
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")} for cls in classes}
     # Scope success is not the completion certificate for the complete maintenance workflow.
