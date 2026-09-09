@@ -176,6 +176,16 @@ Java25公開FFMでLinux/glibcのLP64 x86_64/amd64/aarch64 ABIに限定し、必�
 
 根拠: [Linux getxattr契約](https://man7.org/linux/man-pages/man2/getxattr.2.html)、[statvfs契約](https://man7.org/linux/man-pages/man3/statvfs.3.html)、[glibc statvfs layout更新](https://sourceware.org/pipermail/glibc-cvs/2023q3/082782.html)、上記の導入済みheader。実credential・DB・service設定は変更せず、公開metadataだけの一時file/setfacl2.3.2をPT fixtureとする。
 
+### 6.4 Private AES file reader（SSC-049、PG-D-134）
+
+API file adapter InspectorCredentialLoaderはborrowed OwnedTransferDirectory、InodeSecurityCalls、専用EUID policyを使い、AesCredentialFileの4固定名（api-context-aes-current、api-context-aes-previous、api-inbox-response-aes-current、api-inbox-response-aes-previous）だけを読む。Caller入力から任意pathを組み立てない。currentは必須。previousはentry openがENOENTでcallbackに一度も入っていない場合だけOptional.emptyを許可し、permission・途中消失・metadata/ACL/closeエラーをprevious不在に変換しない。previousの有無を鍵内容やdecode結果から推定しない。
+
+loadごとに保持directoryを検証し、entry O_PATHのunix typeがregularであることを最初に確認してからACL/readonly取得へ進む。symlink/FIFO/device/socketの内容openやACL経由のtarget追従を行わない。UID/GID/mode/nlink/size/dev/ino/mtime/ctimeを型確認し、§6.2を適用。FileChannel READだけを開き、前後のchannel size一致、最大70byte buffer（正常上限69＋過長検出1）、EOFと実読取長を確認する。0byte readを無期限retryせず不正停止。読取後channel closeを完了させ、同保持entryの属性/ACL/readonlyと開始snapshot一致を再検証、entry close後に同保持directoryも再検証する。検査対象root/fileのchmod/chown/repair/書込み/再openによる差替えはしない。
+
+全IO・entry close・directory再検証成功後にのみ、有効長をcopyして§6.1.consumeへ渡す。操作中70byte bufferは全終了のfinallyで消去し、parse側の所有copyもconsumeが消去する。失敗は固定InspectorCredentialException、原因/suppressed/path/鍵値を外へ出さない。入力nullはconstructor/境界契約で拒否し、NPEをcatchして正常扱いしない。Readerはrootを閉じず、mainが鍵codec/resourceと共に所有・closeし、root close失敗をprocess成功へ算入しない。4鍵の読取後のcurrent/previous version整合とcodec作成、親backup/OS lock/専用unitは後段の別責務。
+
+PT035は実public temporary file/FileChannel/保持inodeと、明示したOS metadata/call fault portを組み合わせる。権限policyとnative取得は031/033で独立検証済み範囲へ追跡する。root-manager由来の実credential正系を当機で起動したとは主張しない。当機sudoは対話認証が必要であり、daemon/認証設定は変更しない。正式unitの実権限配布確認は権限のある後続Linux環境へ引継ぎ、PG/PTの権限緩和で代用しない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
