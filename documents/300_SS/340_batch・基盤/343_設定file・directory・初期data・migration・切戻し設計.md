@@ -186,6 +186,18 @@ loadごとに保持directoryを検証し、entry O_PATHのunix typeがregularで
 
 PT035は実public temporary file/FileChannel/保持inodeと、明示したOS metadata/call fault portを組み合わせる。権限policyとnative取得は031/033で独立検証済み範囲へ追跡する。root-manager由来の実credential正系を当機で起動したとは主張しない。当機sudoは対話認証が必要であり、daemon/認証設定は変更しない。正式unitの実権限配布確認は権限のある後続Linux環境へ引継ぎ、PG/PTの権限緩和で代用しない。
 
+### 6.5 検査内部の鍵snapshot・run接続（SSC-049、PG-D-135）
+
+InspectorProcessは公開HTTP/JMS入口やOS process起動ではなく、private oneshot内で一度だけ呼ぶ同期serviceとする。constructorはborrowed InspectorCredentialLoader、専用SqlConnectionProvider、読取可能fingerprint version名の不変集合を受ける。root/DB datasource/OS lockはcaller所有。productionはSystem.nanoTime、PTはpackage内の鍵source/clock portを使う。Null/空集合/未知version名を起動契約で拒否する。
+
+execute(run)はnull拒否後にprivate AtomicBooleanで1回だけ実行権を取る。競合/2回目は固定例外で拒否し、鍵再読取・別runへの流用をしない。開始時割込はflagを保ち、鍵/DB未accessのINTERRUPTEDを返す。4固定credentialを順に読み、current必須/previous任意を§6.4と同じ契約で扱う。各materialは直ちに操作内の所有集合へ登録してからcopyKeyし、途中load/copy失敗も既取得material/copyをすべて消去する。閉じたmaterialは設定失敗とし、NPEをcatchしない。
+
+同purposeのcurrent/previous version重複はcodec生成前に拒否。ContextとResponseの全存在世代の鍵byteを定数時間比較し、purpose間の同一鍵は拒否する（version文字列のpurpose間一致は可）。既存AuthContextCodec/ResponseSnapshotCodecの保存形式・previous読取契約をそのまま使用する。応答・認証参照inspector、非認証22route inspector、InboxCleanup、InspectionRunExecutorへ接続し、鍵生成/取得、codec構築を全てDB処理より前に完了させる。fingerprintのHMAC実体は取得しない。
+
+各codecは実行thread内に閉じて公開せず、全run/chunk終了後にのみcloseする。正常/保護WARNING/期限/割込/DB失敗/想定外例外のすべてでcodec→所有copy→materialを回収し、鍵の途中close/rotationを許さない。Mandatory JCA algorithm取得失敗も成功へ変換せずcallerへ通知。診断は既存InspectionExecutionの許可済status/countのみ。Java/JCA内部copyの物理消去保証は§6.1と同じ限定。
+
+返却0/10/50は内部run結果であり、mainのroot/datasource close・DB credential読取・親backup実体/OS lock・systemd unitの成功を保証しない。構成不正はmainが70へ分類し、想定外runtime故障は正常化しない。Question/通知7routeは別途参照検査を実装するまで保護、全PG/PTや実NK CHRの完了としない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
