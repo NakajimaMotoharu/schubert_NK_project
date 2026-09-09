@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox検査権限・候補lock実行結果
 
-最新回帰PT-WEB-20260909-17/source7200d8d6、2026-09-09 09:14:51 JST終了、全830件/全Java coverage100%/静的解析0、SQL候補8件再PASS。現在の `evidence/inspection-sql/manifest.json` SHA-256は `ed54d5f6acbc56db4510e22dbceabc4ad2ea2cc7fc4e60a2bd4529aa2a7e1e80`。以下のrun15/hashは証跡commit5396be17の初回確定履歴として区別する。V009後の履歴件数は9件、再適用0、V001～008のsourceは不変。
+最新回帰PT-WEB-20260909-18/source56935aa0、2026-09-09 09:44:09 JST終了、全838件/全Java coverage100%/静的解析0、SQL候補8件再PASS。現在の `evidence/inspection-sql/manifest.json` SHA-256は `646e043600e7560ab46177b316d6267c0a1bae883e0b0e0b516b99453766dece`。以下のrun15/hashは証跡commit5396be17の初回確定履歴として区別する。V009後の履歴件数は9件、再適用0、V001～008のsourceは不変。
 
 ## 1. 対象・状態
 

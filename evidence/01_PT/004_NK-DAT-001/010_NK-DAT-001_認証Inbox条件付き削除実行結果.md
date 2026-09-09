@@ -1,6 +1,6 @@
 # NK-DAT-001 認証Inbox条件付き削除実行結果
 
-最新回帰PT-WEB-20260909-17/source7200d8d6、2026-09-09 09:14:51 JST終了、全830件/全Java coverage100%/静的解析0、条件付き削除8件も再PASS。現在の `evidence/deletion-sql/manifest.json` SHA-256は `7c9a31dea9a111d775a5e568845484c4c8eb1a75674509bc49c37132348d439c`。以下run16/hashは証跡commitd6f5d838の初回確定履歴として区別する。新しいJava検査削除接続の結果は012。
+最新回帰PT-WEB-20260909-18/source56935aa0、2026-09-09 09:44:09 JST終了、全838件/全Java coverage100%/静的解析0、条件付き削除8件も再PASS。現在の `evidence/deletion-sql/manifest.json` SHA-256は `fd139aec64fe27681a30e626a54368df3cf4f1990d398d26aa11e5bd46f648e9`。以下run16/hashは証跡commitd6f5d838の初回確定履歴として区別する。新しいJava検査削除接続の結果は012。
 
 ## 1. 対象・現在状態
 

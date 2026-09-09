@@ -2,7 +2,7 @@
 
 ## 1. 現在の判定
 
-正式reactor証跡確定前。NonAuthenticationInboxInspectorの22応答参照検査だけが対象であり、専用SQL権限/lock/削除/oneshot、Question/通知7応答、BUG-014完了は未証明。関連QA-046/SSC-049、PG-D-123、013仕様/PT-DB-INBOX-041～048。
+正式PT-WEB-20260909-18、source56935aa0、2026-09-09 09:44:09 JST完了、exit0。全838件（Protocol80/Storage34/API442/Web241/CHR41）PASS、failed/error/skipped0、5対象moduleのline/method/class/branch100%、NullAway/Spotless/Enforcer成功、SpotBugs0。NonAuthenticationInboxInspectorの22応答参照検査だけが本slice対象であり、専用SQL権限/lock/削除/oneshot、Question/通知7応答、BUG-014完了は未証明。関連QA-046/SSC-049、PG-D-123、013仕様/PT-DB-INBOX-041～048は全件PASS。
 
 探索2（2026-09-09 09:37:34 JST）で追加8件＋関連45件=53件PASS、failed/error/skipped0。追加classはline98/method5/class1/branch50/instruction539、全missed0。NullAway/Spotless/SpotBugs0。正式root clean verifyの代用にはしない。
 
@@ -15,4 +15,4 @@
 
 PT041は22×全12codeとquery/error参照不正。PT042はUser5種とULK0200、参照型/id、保存version0/1/9/10/999999999、後続name/role/status、欠落。PT043はSCN Iの0/1record、Fの両game、参照違い/欠落。PT044はNULL/匿名/対象外/AAD/欠落/暗号破損/検査間鍵close。PT045は公開JDBC全故障点/NULL/重複/欠落/範囲とaborted transaction 25P02。PT046は状態前後一致・commit/rollback/close/SAVEPOINT/DELETE0・caller所有継続。PT047は100futureを全件回収しtrue/false期待各50を厳密比較。PT048はF1/10000境界、日付/UUID/path/hash/4800×count矛盾、保存後User変更と100回反復、実体未作成かつraw master hash別値でもDB参照検査成功を確認する。
 
-Source/環境/実行日時/command/exit/各Test ID/期待根拠/coverageは正式run後に `evidence/non-authentication-inspection/manifest.json`、sanitizeしたresults.xml、checksumsへ確定する。生wire/context/暗号key/DB dumpは保存しない。
+Source/環境/実行日時/command/exit/各Test ID/期待根拠/coverageは `evidence/non-authentication-inspection/manifest.json`、sanitizeしたresults.xml、checksumsへ確定済み。manifest SHA-256は `57c78b8031463d1605264de71faaa86cda18c7e239ac79d34f4659f9aab13480`。追加classは正式runでもline98/method5/class1/branch50/instruction539、全missed0。8collector/13scopeのhash、base manifest相対traceとnegative canary、Current baselineとV001～009不変更、秘密pattern非検出を確認。生wire/context/暗号key/DB dumpは保存しない。BUG-085/086・YKT-076/077の再試験を本runで完了する。IT/ST・実NK CHR gateは未実施。

@@ -1,6 +1,6 @@
 # NK-DAT-001 認証Inbox参照実行結果
 
-最新回帰PT-WEB-20260909-17/source7200d8d6、2026-09-09 09:14:51 JST終了、exit0。認証8件再PASS、全830件/全Java coverage100%/静的解析0。現在の `evidence/authentication-inspection/manifest.json` SHA-256は `2df541a72c694607a98072d56807aa761ab309f86d0212a2a5509488c42e1c20`。以下run14とhashは証跡commit46d0f118の初回確定履歴であり、現在のmanifestと区別する。
+最新回帰PT-WEB-20260909-18/source56935aa0、2026-09-09 09:44:09 JST終了、exit0。認証8件再PASS、全838件/全Java coverage100%/静的解析0。現在の `evidence/authentication-inspection/manifest.json` SHA-256は `0aad4daaf00b3db1e719017f10d1c7d2268027467a0e00a823dbfff9f907d031`。以下run14とhashは証跡commit46d0f118の初回確定履歴であり、現在のmanifestと区別する。
 
 ## 1. 状態
 

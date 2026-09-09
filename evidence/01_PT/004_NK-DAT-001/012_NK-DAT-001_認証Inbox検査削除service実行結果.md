@@ -1,5 +1,7 @@
 # NK-DAT-001 認証Inbox検査削除service実行結果
 
+最新回帰PT-WEB-20260909-18/source56935aa0、2026-09-09 09:44:09 JST終了、全838件/全Java coverage100%/静的解析0、認証原子的削除8件再PASS。現在のauthentication-cleanup/manifest.json SHA-256は `7b590a35db42d0f989a7fb9bfdba9efd0883743000ddb41e7177114f0e6d6f89`。以下run17/hashは証跡commit b87c3c17の初回確定履歴であり最新manifestと区別する。
+
 ## 1. 対象・判定
 
 011仕様/PT-DB-INBOX-033～040、AuthenticationInboxCleanup・内部Candidate・InspectionRun・InspectionStep/Outcome・InboxMaintenanceExceptionの6classを正式PT-WEB-20260909-17で確定。新6classのline130/method13/class6/branch66は全missed0、NullAway/format成功、SpotBugs0。BUG-084/YKT-075は再試験完了。非認証/oneshot/全run管理/V006置換は未完了。
