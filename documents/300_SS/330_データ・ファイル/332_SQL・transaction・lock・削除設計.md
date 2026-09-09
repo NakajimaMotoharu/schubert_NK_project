@@ -249,6 +249,8 @@ update schubert.answers
 Batch開始時の`:run_started_at`を全stepで固定する。当日`BACKUP_DB`/`BACKUP_CONFIG`がSUCCESSでなければ
 業務data/inbox/outbox物理削除をSKIPPEDとし、application起動はQA-029に従い続行する。
 
+SSC-050/PG-D-129: SQLへ渡すcutoffは全cleanupでrun_started_atに統一する。log_cutoffはその2160時間前、batch_run_cutoffは9600時間前を関数内で計算する。有限値だけを許可し、331 §3.3.1のlock済backup2件判定を全cleanupへ適用する。Log holdの比較相手は従来どおりlog_cutoffでありrun_started_atへ変えない。Batch履歴の400日はstarted_atでなくended_atから計測し、同runのRUNNING/FAILED調査を保護する。
+
 ### 11.2 Notification
 
 Deletion candidateは次のいずれか。

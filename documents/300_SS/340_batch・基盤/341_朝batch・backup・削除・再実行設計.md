@@ -139,6 +139,8 @@ SSC-049/PG-D-122のlock所有: 親batchはOS flockを保守全体で保持する
 
 SSC-049/PG-D-127再開状態: 専用processは331 §3.8の永続progressを同run/cutoffでlockして読み、候補処理とcursor/件数を同transactionで確定する。各row transactionを1件chunkとして使うため1,000上限を超えず、processは最大1,000回ずつのbounded呼出しを繰り返し30分のunit制限内でENDまで進む。途中中断は未完了、最終ENDでのみ検査stepをSUCCESS（保護0）またはWARNING（保護あり）へ集約する。未対応/不正rowもcursorを進めて保護件数へ加算し、先頭同一rowの無限再走をしない。commit不明時は同runでDB状態を再読取りし、削除済み行の件数を失わない。親attempt件数はそのattempt開始時/終了時の累積差分、run累積は別項目とする。既完了runは保存状態を返すだけ、鍵/参照修復後の再検査は新しい保守runで行う。CLEAN_BATCH_RUNでは完了progressの400日保持とRUNNING/FAILED調査保護を確認し、331の専用清掃関数で削除する。SQL/Javaだけでは専用unit/親のOS lock引継ぎ・backup実体gateは未完了。
 
+SSC-050/PG-D-129: 全maintenance_cleanupの第2引数は固定run_started_atとし、log90日・batch履歴400日の保持閾値をcaller側で二重に差し引かない。SQL側でも当日backupの状態・終了・同runをrow lockの単一snapshotで再検証する。Batch履歴は完了ended_at基準、現在runと同run内のRUNNING/FAILED調査中を保持する。親processの実backup照合とOS lockは別途必須であり、このSQL補正で省略しない。
+
 ## 8. Transfer cleanup
 
 333 §12のsecure directory walkを使い、backup失敗時も実行する。Root正常で個別file削除失敗はWARNINGとし

@@ -83,6 +83,14 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 `REVOKE ALL ON FUNCTION ... FROM PUBLIC`後、完全signature単位で`schubert_batch`にEXECUTEをgrantする。返却は件数と理由codeだけとし、
 本文・ciphertext・pathを返さない。`batch_runs`記録とchunk transactionは341/332に従い、その他tableの直接DML grantは0とする。
 
+### 3.3.1 共通cutoff契約（SSC-050、PG-D-129）
+
+上表の全functionのcutoffは固定run_started_atであり、保持日数を差し引いた値ではない。内部でlog_cutoff = cutoff - 2160 hours、batch_run_cutoff = cutoff - 9600 hoursを導出する。signature/roleの追加・任意保持値引数はない。V013で旧5関数をappend-only置換し、全7 cleanupを既存maintenance_lock_inbox_backupへ統一する（名前は互換のため維持、owner内部helper）。
+
+NULL/非有限cutoff・limit範囲外は22023。advisory競合は0/0/0/LOCK_BUSY、同run/JST当日/ended_at非NULL/SUCCESSのBACKUP_DB・BACKUP_CONFIGがlock済単一snapshotで揃わなければ0/0/0/BACKUP_GATE。他のSQL障害は伝播し全chunk rollback。全7関数は固定search_pathとTimeZone=UTCを持ち、所有者nk_owner/PUBLIC非許可/batchだけEXECUTEを維持する。DB gateだけでbackup実体・OS lock・通常API/Web停止確認が済んだとはしない。
+
+Logはlogged_at < log_cutoffだけcandidate、hold > log_cutoffはskip（SS332/SSC-005維持）。Batch履歴はended_at < batch_run_cutoffかつ終了SUCCESS/WARNING/SKIPPEDで、現在run・終了NULL・同runにRUNNING/FAILEDがある調査対象は保持し、ended_at/id順でlockする。開始から400日でも終了400日未満は削除しない。保持値はUI251 §6に一致し変更しない。旧3引数を使う既存未実装callerもrun開始で呼ぶ。DB-011の旧閾値混用oracleを上位仕様に合わせて修正し、独立±1μs matrixを追加する。
+
 ### 3.4 Inbox検査用最小権限（SSC-049/QA-046）
 
 UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。必要なInbox snapshot/参照先の読取りと固定保守functionだけを許可し、任意DML/DDL、他roleへのSET ROLE、Web session/schema、password hashの読取りを許可しない。batchの現行権限は増やさない。既存migrationは変更せずappend-onlyで反映する。暗号検査部品のtrueだけでSQL DELETEしてはならない。参照・期限・backup・競合保護の検査も必要である。
