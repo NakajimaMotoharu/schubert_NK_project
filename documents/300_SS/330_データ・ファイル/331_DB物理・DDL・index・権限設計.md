@@ -192,6 +192,18 @@ V001～014を不変としmaintenance_delete_inboxの既存signature/owner/SECURI
 
 Javaの同transaction内snapshot検査はSS324 §12.8を正とし、SQLだけで暗号完全性を主張しない。未検証QSB/NTC/QDL、誤route/version/owner/token/ref/hash/transaction、未backup/lockは削除不可。既存V010の全引数/WHERE/SQLSTATE回帰に加え041/PT161～168で4種のactual deleted/protected/ENDと独立時刻/role/rollback後条件を確認する。
 
+### 3.11 質問更新の最小参照・限定削除（SSC-049/052、PG-D-141）
+
+9535086fで変更前登録。V016 append-onlyで324 §12.9の参照検査を支える。V001～015を変更せず、通常batch/他serviceへのInbox鍵・本文・DML権限は追加しない。
+
+- `maintenance_next_inbox`のQUESTION参照はquestionsをFOR UPDATE、存在するanswers/async_jobsをPK順FOR SHAREする。JOB参照はasync_jobsをFOR UPDATE、存在するnotificationsをPK順FOR SHAREする。親rowのFOR UPDATEはFKによる子INSERTも阻止し、Answer/Notification不存在確認のphantomを削除まで防ぐ。見つからない親を補完しない。
+- 検査roleへの列SELECTはquestions `(id,owner_user_id,operation_token,receipt_id,submitted_at,is_deleted,deleted_at,deleted_by,version)`、async_jobs `(id,question_id,owner_user_id,message_id,correlation_id,received_at,state,state_changed_at,cancelled_at,version)`、answers `(question_id,is_deleted,deleted_at,deleted_by)`、notifications `(job_id,question_id,owner_user_id,state,state_changed_at)` に限定。本文・password・Userの現在roleは不要で追加しない。
+- `maintenance_read_question_work(uuid)`は検査roleだけEXECUTE可能なnk_owner/SECURITY DEFINER、固定search_path/UTC、NULL拒否の限定projection。元受付Correlation・nk.async.work・QWKREQ01/001・実body長320に絞ってrowをFOR SHAREし、Message/Correlation/body/status/sent_at/lease有無だけ返す。任意Outbox/DLQ本文へのbase SELECTは付与しない。通常app/batch/Web/backup/ops/PUBLICは実行不可。戻り値は暗号検査成功flagではない。
+- `uq_mq_outbox_question_work`は`correlation_id`のpartial unique index、predicate `destination='nk.async.work' AND layout_id='QWKREQ01'`。UI231の受付ごとwork一通を実現し、読取row lock中の同相関差替えを防ぐ。既存重複はmigration失敗として保全し、削除や勝手な統合をしない。DLQ用outboxとは別scope。
+- `maintenance_delete_inbox`へQSB/NTC/QDLの3 canonical routeを追加。owner/token必須、最短168h、成功QSB/QDLはQUESTION・NTCはJOBの正N12参照、ERRORはNONE。既存の同transaction ID/response hash/backup/有限時刻/strict expiryを維持し、SQL単体を暗号認証の代替にしない。
+
+045/046 PT177以降で実PG18、最小role、partial UK/不正projection/全route、親子lock/並行INSERT阻止、exact168h、失敗rollback/commit不明/永続再開を検査する。未完了の業務writer/replayや親OS/backup実体を本SQL合格へ含めない。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

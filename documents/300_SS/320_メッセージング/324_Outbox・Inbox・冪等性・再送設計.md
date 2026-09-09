@@ -329,6 +329,22 @@ V015の4 canonical REQ01/RSP01 routeを既存owned InboxCleanupへ追加し、to
 
 004の041/042・PT-DB-INBOX-161～168で独立byte offset golden/JCE、4route×保存code、page0/1/50、状態/本文/null/未知/誤owner/誤ref、24h±1μs、backup/lock、rollback/commit不明の再開、100並行、V001～014不変と全既存route回帰を確認する。照会検査の成功を質問業務実装・本番oneshot・工程全体完了には算入しない。
 
+### 12.9 質問更新3応答の参照検査（SSC-049/052、PG-D-141）
+
+変更前登録9535086f。`QuestionMutationInboxInspector`はcaller所有の明示transactionでQSB/NTC/QDLだけを検査する。owner/token必須、identityとcompletionのlayout/version001/snapshotが一致し、成功は352 §11.2.1のNKREF1を期待ref/tokenで検証してから既存全wire検査へ渡す。既存構造検査のprivate algorithmを同package内部で共用し、復号済みwireや検証済flagをpublicへ公開しない。ERRORは従来のraw fixed responseのNKENC1、NONE参照だけとする。
+
+| response | 保存可能な成功 | 保存可能な確定ERROR | 成功参照の条件 |
+|---|---|---|---|
+| QSBRSP01 | 0000/0200 | 0100/9001 | QUESTION。wire Question ID/refが一致、questions.owner/token/receipt/submitted_atを照合。async_jobs.question_id/owner/message_id/correlation_id/received_atが元受付に一致。QWK相関/SENTは後述 |
+| NTCRSP01 | 0000/0200 | 0104/0107/9001 | JOB。async_jobs.ownerがsnapshot owner、state=CANCELLED、version1以上、cancelled_at/state_changed_at一致、wire取消日時がDBのmillisと一致。現在Notificationが残っていればjob/question/owner/CANCELLED/確定日時一致。正常な朝削除後のNotification不存在は許容 |
+| QDLRSP01 | 0000/0200 | 0104/9001 | QUESTION。is_deleted=true、version1以上、deleted_at/by必須、wire日時がDBのmillisと一致。0000はdeleted_by=保存owner、0200は既存削除者を維持（当時ADMINが他owner分を操作可能）。Answerがあればdelete tripleをquestionと完全一致、なければ許容 |
+
+時刻は有限・wire表現範囲、業務確定時刻はInbox completed_at以前。DB同士の同時刻契約はmicrosecond一致、wire比較だけmillisへ切詰める。受付後の質問論理削除やjob状態遷移、actorのrole/status変更は過去結果の不整合としない。Question/Jobそのものが不存在なら保護し、親の既存cleanup順を変更したり推測復元して削除しない。
+
+QSBはUI232 §8の新Message IDを持つQWKだけを元受付requestへのCorrelationで照合する。331 §3.11の限定projectionで、宛先nk.async.work・QWKREQ01/001・320byte・SENT・sent_atあり・leaseなしを確認。HeaderのEVENT/INTERNAL・全space context・Message/Correlation・長さ、DATAのreceipt/question/jobをcodecとDB参照で検証する。受付ごとQWK一件のpartial UKを使い、同相関の重複・別layout・不正body・PENDING/ERROR・欠落を成功推測しない。QWK/SENT確認は同transaction、send/dispatcher起床は保守processの責務外。先行Outboxの正当な物理削除で証明できない行もPROTECTEDのまま警告する。
+
+NTC 0107は個別error profile（競合時PROCESSING/COMPLETED/ERROR、取消日時space）を検査し、現在job状態へ上書きしない。0102/0103/異token0105/9000を保存済み業務結果として認めない。SQL/暗号/型/参照不備はfalse、caller nullは契約違反。borrowed connection/codec/keysは閉じず、SQL commit/rollback/DB更新/外部IOなし。参照lockと検査→削除は既存owned InboxCleanup/V016の同transactionで保持する。保存/replayの通常業務service・worker・公開認証は別途実装/PT必須。
+
 ## 13. Metric・alert
 
 
