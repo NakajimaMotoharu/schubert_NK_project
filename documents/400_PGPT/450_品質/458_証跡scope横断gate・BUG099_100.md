@@ -30,7 +30,7 @@ Production変更なし、RD/UI/SS変更なし。品質toolも対象sourceへcomm
 探索確認: `python3 -B tools/quality/019_test_evidence_set.py` は3/3成功（独立4class分類、未知class/欠落・未知・重複method、24scope×4異常binding、ファイル欠落/破損/重複/参照/脱出、24各段のcollector失敗停止）。017の既存1件も成功。
 実際の正式25/26混在treeは018のvalidate_allで「mixed or failed evidence run/source/branch」として拒否し、誤った全体証明を発行しないことを確認。
 Python品質canaryはJava930件に加算せず、Java JaCoCo coverage100%をPythonのcoverageとして流用しない。
-正式再試験は27で実施予定。個別manifestのslice成功表示は工程全体/証跡set成功を意味しない。
+正式再試験27/source4bbb32deは2026-09-09 13:27:18～13:33:40 JST、exit0、930件全成功・5 Java module全4種coverage100%・静的解析0。018収集は全24scopeで同一run/source/branch・全hash/参照PASS、Media61/reader12を分離し期待値不変。017 1件/019 3件負canaryも全成功、BUG-098～100/YKT-089再試験完了。Current baseline/V001～013不変、秘密pattern scan0hit。個別manifestのslice成功表示も本set合格も工程全体完了を意味しない。
 
 ## 4. 再現command
 
