@@ -33,7 +33,7 @@ final class InboxMaintenanceBoundaryTest {
       List.of(
           "LGN", "LOG", "GAM", "SPK", "RTE", "SCF", "SRC", "SCN", "AUD", "ANM", "ANL", "VID", "MCT",
           "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK", "NTS", "NTD",
-          "QSS", "QSD");
+          "QSS", "QSD", "QSB", "NTC", "QDL");
   private static final String NEXT = "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)",
       DELETE = "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)",
       HELPER = "schubert.maintenance_lock_inbox_backup(uuid,timestamptz)";
@@ -205,7 +205,8 @@ final class InboxMaintenanceBoundaryTest {
                 + (reference.equals("AUTH_SESSION") ? "'" + SESSION + "'" : "null"));
         boolean expected =
             reference.equals("AUTH_SESSION") && Set.of("LGN", "LOG").contains(route)
-                || reference.equals("USER") && TOKEN.contains(route)
+                || reference.equals("USER")
+                    && Set.of("UCR", "UST", "URL", "UPW", "ULK").contains(route)
                 || reference.equals("SCENARIO_FILE") && route.equals("SCN");
         try (var c = restricted()) {
           assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
@@ -215,12 +216,41 @@ final class InboxMaintenanceBoundaryTest {
         }
       }
     }
-    for (String route : List.of("QSB", "NTC", "QDL", "ZZZ")) {
+    for (String route : List.of("ZZZ")) {
       sql("delete from schubert.request_inbox");
       inbox(101, route, "ERROR", CUTOFF.minusSeconds(1));
       try (var c = restricted()) {
         assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
         assertFalse(remove(c, RUN, CUTOFF, MESSAGE, xact(c), hash));
+      }
+    }
+    // V016: independent closed state/reference matrix for the three mutation routes.
+    for (String route : List.of("QSB", "NTC", "QDL")) {
+      for (String state : List.of("COMPLETED", "ERROR")) {
+        for (String reference :
+            List.of("NONE", "AUTH_SESSION", "USER", "SCENARIO_FILE", "QUESTION", "JOB")) {
+          sql("delete from schubert.request_inbox");
+          inbox(101, route, state, CUTOFF.minusSeconds(1));
+          sql(
+              "update schubert.request_inbox set result_ref_type='"
+                  + reference
+                  + "',result_ref_id="
+                  + (Set.of("NONE", "AUTH_SESSION").contains(reference) ? "null" : "9")
+                  + ",result_ref_uuid="
+                  + (reference.equals("AUTH_SESSION") ? "'" + SESSION + "'" : "null"));
+          boolean expected =
+              state.equals("ERROR")
+                  ? reference.equals("NONE")
+                  : reference.equals(route.equals("NTC") ? "JOB" : "QUESTION");
+          try (var c = restricted()) {
+            assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
+            assertEquals(
+                expected,
+                remove(c, RUN, CUTOFF, MESSAGE, xact(c), hash),
+                route + "/" + state + "/" + reference);
+            c.rollback();
+          }
+        }
       }
     }
     // Remove only constraints in a rollback-only isolated admin TX to test SQL defense in depth.
@@ -244,11 +274,15 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void exactRetentionCutoffAndReplay() throws Exception {
     for (String route : ROUTES) {
-      long seconds =
-          Set.of("LGN", "LOG", "UCR", "UST", "URL", "UPW", "ULK").contains(route) ? 604800 : 86400;
+      long seconds = Set.of("LGN", "LOG").contains(route) || TOKEN.contains(route) ? 604800 : 86400;
       for (long adjustment : List.of(-1000L, 0L, 1000L)) {
         sql("delete from schubert.request_inbox");
         inbox(101, route, "COMPLETED", COMPLETED.plusSeconds(seconds).plusNanos(adjustment));
+        if (Set.of("QSB", "NTC", "QDL").contains(route))
+          sql(
+              "update schubert.request_inbox set result_ref_type='"
+                  + (route.equals("NTC") ? "JOB" : "QUESTION")
+                  + "',result_ref_id=9");
         try (var c = restricted()) {
           assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
           assertEquals(
@@ -503,7 +537,7 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void migrationAndExistingAuthenticationRemainCompatible() throws Exception {
     assertEquals(
-        "15",
+        "16",
         scalarAdmin(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

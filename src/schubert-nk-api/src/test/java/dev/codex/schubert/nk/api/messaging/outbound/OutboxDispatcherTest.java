@@ -863,9 +863,24 @@ final class OutboxDispatcherTest {
 
   private static long enqueue(JdbcOutboxRepository repository, UUID message, Instant due)
       throws SQLException {
+    // BUG-128: independent accepted questions need independent root correlations (UI231/232).
+    UUID rootRequest =
+        message.equals(MESSAGE)
+            ? CORRELATION
+            : new UUID(
+                message.getMostSignificantBits() ^ 0x4000000000000000L,
+                message.getLeastSignificantBits());
     return enqueue(
         repository,
-        request(message, OutboxDestination.ASYNC_WORK, eventWire(message, CORRELATION), due));
+        new OutboxRequest(
+            message,
+            rootRequest,
+            OutboxDestination.ASYNC_WORK,
+            "QWKREQ01",
+            "001",
+            eventWire(message, rootRequest),
+            due,
+            NOW.minusSeconds(30)));
   }
 
   private static long enqueue(JdbcOutboxRepository repository, OutboxRequest request)

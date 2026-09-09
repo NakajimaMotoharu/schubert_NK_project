@@ -58,10 +58,21 @@ public final class NonAuthenticationInboxInspector {
           Map.entry("ULKRSP01", Set.of("0000", "0200", "0104", "0105", "9001")));
   private final ResponseSnapshotCodec snapshots;
   private final InboxResponseInspector structure;
+  private final QuestionMutationInboxInspector questionMutations;
 
   public NonAuthenticationInboxInspector(ResponseSnapshotCodec snapshots) {
     this.snapshots = Objects.requireNonNull(snapshots, "snapshots");
     structure = new InboxResponseInspector(snapshots);
+    questionMutations = new QuestionMutationInboxInspector(snapshots);
+  }
+
+  // Package-only composition preserves the existing borrowed codec/key lifetime. PT177..192.
+  boolean isMutationConsistent(
+      Connection connection,
+      ResponseSnapshotIdentity identity,
+      InboxCompletion completion,
+      UUID operationToken) {
+    return questionMutations.isConsistent(connection, identity, completion, operationToken);
   }
 
   /** False preserves an unsupported/unverified row; null caller arguments violate the contract. */

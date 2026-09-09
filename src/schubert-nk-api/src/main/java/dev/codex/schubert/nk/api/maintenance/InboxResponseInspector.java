@@ -57,7 +57,9 @@ public final class InboxResponseInspector {
     }
   }
 
-  private static boolean inspect(
+  // Shared only with the bound mutation inspector after identity/completion/envelope checks.
+  // Borrowed plaintext; no public verified flag or ownership transfer. SS324 12.9/PT177..192.
+  static boolean inspect(
       ResponseSnapshotIdentity identity, InboxCompletion completion, byte[] wire) {
     var registry = LayoutRegistry.standard();
     var header = new HeaderCodec(registry).peek(wire);

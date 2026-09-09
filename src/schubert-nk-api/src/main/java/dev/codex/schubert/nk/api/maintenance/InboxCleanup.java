@@ -44,13 +44,25 @@ public final class InboxCleanup {
           "NTDREQ01",
           "QSSREQ01",
           "QSDREQ01",
+          "QSBREQ01",
+          "NTCREQ01",
+          "QDLREQ01",
           "UCRREQ01",
           "USTREQ01",
           "URLREQ01",
           "UPWREQ01",
           "ULKREQ01");
   private static final Set<String> TOKEN_REQUESTS =
-      Set.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01");
+      Set.of(
+          "UCRREQ01",
+          "USTREQ01",
+          "URLREQ01",
+          "UPWREQ01",
+          "ULKREQ01",
+          "QSBREQ01",
+          "NTCREQ01",
+          "QDLREQ01");
+  private static final Set<String> QUESTION_RESPONSES = Set.of("QSBRSP01", "NTCRSP01", "QDLRSP01");
   private static final Set<String> AUTHENTICATION_RESPONSES = Set.of("LGNRSP01", "LOGRSP01");
   private static final String NEXT =
       "select message_id,correlation_id,request_layout_id,request_version,owner_user_id,"
@@ -226,7 +238,14 @@ public final class InboxCleanup {
             boolean consistent =
                 AUTHENTICATION_RESPONSES.contains(value.identity.responseLayoutId())
                     ? inspector.isConsistent(connection, value.identity, value.completion)
-                    : nonAuthentication.isConsistent(connection, value.identity, value.completion);
+                    : QUESTION_RESPONSES.contains(value.identity.responseLayoutId())
+                        ? nonAuthentication.isMutationConsistent(
+                            connection,
+                            value.identity,
+                            value.completion,
+                            value.operationToken.orElseThrow())
+                        : nonAuthentication.isConsistent(
+                            connection, value.identity, value.completion);
             if (consistent && delete(connection, run, value)) {
               outcome = InspectionStep.Outcome.DELETED;
             }
@@ -245,12 +264,12 @@ public final class InboxCleanup {
     requireValue(row.getTimestamp("created_at"));
     requireValue(row.getTimestamp("expires_at"));
     boolean login = request.equals("LGNREQ01");
+    UUID token = row.getObject("operation_token", UUID.class);
     if (!REQUESTS.contains(request)
         || !response.equals(request.substring(0, 3) + "RSP01")
         || !requireValue(row.getString("request_version")).equals("001")
         || !requireValue(row.getString("response_version")).equals("001")
-        || (row.getObject("operation_token", UUID.class) != null)
-            != TOKEN_REQUESTS.contains(request)
+        || (token != null) != TOKEN_REQUESTS.contains(request)
         || !requireValue(row.getString("request_fingerprint_hmac")).matches("[0-9a-f]{64}")
         || !fingerprintVersions.contains(requireValue(row.getString("fingerprint_key_version")))) {
       return Optional.empty();
@@ -286,6 +305,7 @@ public final class InboxCleanup {
           new Candidate(
               identity,
               saved,
+              Optional.ofNullable(token),
               requireValue(row.getString("inspection_xact")),
               requireValue(row.getBytes("inspection_hash"))));
     } catch (IllegalArgumentException inconsistent) {
@@ -328,16 +348,19 @@ public final class InboxCleanup {
   private static final class Candidate {
     private final ResponseSnapshotIdentity identity;
     private final InboxCompletion completion;
+    private final Optional<UUID> operationToken;
     private final String transaction;
     private final byte[] hash;
 
     private Candidate(
         ResponseSnapshotIdentity identity,
         InboxCompletion completion,
+        Optional<UUID> operationToken,
         String transaction,
         byte[] hash) {
       this.identity = identity;
       this.completion = completion;
+      this.operationToken = operationToken;
       this.transaction = transaction;
       this.hash = hash;
     }

@@ -23,6 +23,13 @@ BINDING_METHODS = ["independentWriteAndReadAllRoutes", "nullIdentityAndReference
                    "everyMetadataByteIsAuthenticated", "exactLengthAndLegacyRejection",
                    "keysAadAndCipherDamage", "borrowedOwnershipAndRedaction",
                    "concurrentBindingsNeverCross", "equalBusinessTimesDoNotAuthorizeAnotherTarget"]
+MUTATION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest"
+MUTATION_METHODS = ["validMutationReferences", "submitReferencesAndWork", "cancellationHistory",
+                    "deletionHistoryAndAnswers", "exactStoredProfiles", "wireAndMetadataDamage",
+                    "nullAndJdbcFailures", "equalTimeTargetsRemainDistinct", "leastPrivilegeCatalog",
+                    "uniqueWorkProjection", "referencesAndPhantomsStayLocked",
+                    "canonicalRoutesAndRetention", "ownedAtomicFailures", "durableMixedResume",
+                    "concurrentReferencesStayIndependent", "appendOnlyInventory"]
 
 
 def validate_suite(suite, class_name, names):
@@ -72,6 +79,7 @@ def main():
     selection.add_argument("--log-progress", action="store_true")
     selection.add_argument("--question-query", action="store_true")
     selection.add_argument("--result-binding", action="store_true")
+    selection.add_argument("--question-mutation", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety or args.log_progress
     run = args.run_id
@@ -123,6 +131,8 @@ def main():
         subject = "NonAuthenticationInboxInspector"
     if args.result_binding:
         subject = "ResultBoundResponseSnapshotCodec"
+    if args.question_mutation:
+        subject = "QuestionMutationInboxInspector"
     package = "dev.codex.schubert.nk.storage." if args.inode_security else "dev.codex.schubert.nk.api.maintenance."
     if args.credential_loader:
         package = "dev.codex.schubert.nk.api.file."
@@ -139,6 +149,8 @@ def main():
         class_name = QUESTION_CLASS
     if args.result_binding:
         class_name = BINDING_CLASS
+    if args.question_mutation:
+        class_name = MUTATION_CLASS
     suite = ET.parse(target / "surefire-reports" / ("TEST-" + class_name + ".xml")).getroot()
     names = ["validSuccessAndErrorProfiles", "headerAndMetadataMismatchesReject",
              "payloadEncodingAndSemanticFaultsReject", "cryptographicDamageAndMissingSnapshotReject",
@@ -239,6 +251,8 @@ def main():
         names = QUESTION_METHODS
     if args.result_binding:
         names = BINDING_METHODS
+    if args.question_mutation:
+        names = MUTATION_METHODS
     cases = validate_suite(suite, class_name, names)
     coverage_xml = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
     coverage_names = {subject}
@@ -313,6 +327,8 @@ def main():
         folder = "question-query"
     if args.result_binding:
         folder = "result-binding"
+    if args.question_mutation:
+        folder = "question-mutation"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -387,10 +403,10 @@ def main():
         manifest["oracle"] = "013/014 PT: literal 22-layout x 12-code allowlist, User ID/version and Scenario ID/game SQL postconditions, descriptor boundaries, mutable query snapshots remain frozen, NULL/SQL faults protect, 100 concurrent expected booleans. No production expected generation."
         manifest["remaining"] = "Non-auth least-privilege SQL/locking/atomic deletion, Question/notification 7 responses, oneshot and V006 replacement NOT certified; BUG014 remains open."
     if args.full_sql:
-        manifest["scopeResult"] = "PASS_FULL_CANDIDATE_28_ROUTE_SQL_ONLY"
+        manifest["scopeResult"] = "PASS_FULL_CANDIDATE_31_ROUTE_SQL_ONLY"
         manifest["related"] += ["PG-D-124", "BUG-087", "BUG-088", "YKT-078", "YKT-079", "PG-D-139", "BUG-116"]
         manifest["fixture"] = "Isolated PostgreSQL 18.6/real roles; public synthetic invalid ciphertext30 and independent JDK SHA-256. Isolated admin rollback-only constraint removal tests SQL defense in depth, never deployed data."
-        manifest["oracle"] = "015/016 PT: literal 28 routes (V015 four queries included) x 6 reference kinds, 24h/168h boundaries, private helper/minimal column grants/42501, fixed run and UUID scan, unsupported rows protected, all five batch states, 55P03 lock and controlled backup snapshot races, independent frozen V001..009 hashes."
+        manifest["oracle"] = "015/016 PT: literal31 routes (V015 four queries and V016 three mutations included) x6 reference kinds,24h/168h boundaries, private helper/minimal column grants/42501, fixed run and UUID scan, unsupported rows protected, all five batch states,55P03 lock and controlled backup snapshot races, independent frozenV001..009 hashes. Mutation successful typed references, new parent/child locks and QWK projection are additionally certified by PT177..192, not by SQL ciphertext acceptance."
         manifest["coverage"] = {"kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
                                 "proof": "016 result maps all helper/candidate/delete procedural IF/ELSIF and WHERE/null/role/reference/token/expiry boundaries to PT049..056. Java coverage remains separately enforced; no invented SQL percentage.",
                                 "functions": ["schubert.maintenance_lock_inbox_backup(uuid,timestamptz)",
@@ -398,7 +414,7 @@ def main():
                                               "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)"],
                                 "roles": ["schubert_inbox_inspector"]}
         migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql"
-        manifest["sqlSources"] = [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in (migration, repo / "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql")]
+        manifest["sqlSources"] = [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in (migration, repo / "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql", repo / "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql")]
         manifest["remaining"] = "Java full-scan owned inspection/delete composition, Question/notification references, whole-run/oneshot and V006 replacement NOT certified; BUG014 remains open."
     if args.full_cleanup:
         manifest["scopeResult"] = "PASS_OWNED_NON_AUTH_22_RESPONSE_DELETE_SERVICE_ONLY"
@@ -501,7 +517,7 @@ def main():
                                               "schubert.maintenance_cleanup_log_progress(uuid,timestamptz,integer)"]}
         migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql"
         manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
-    manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."
+    manifest["remaining"] = "Mandatory private main/oneshot/parent composition and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate manifests cover authentication, non-auth query/User, mutation-reference inspection, V011 bypass removal and durable progress; SQL/Java alone do not certify normal Question writer/replay/worker or backup-file/OS-lock wiring."
     if args.question_query:
         manifest["scopeResult"] = "PASS_QUERY_4_ROUTE_INSPECTION_DELETE_ONLY"
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-139", "BUG-014", "YKT-012",
@@ -512,7 +528,7 @@ def main():
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))} for c in cls.findall("counter")} for cls in classes}
         migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql"
         manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
-        manifest["remaining"] = "Three mutation references QSB/NTC/QDL, private main/oneshot, parent OS/real-backup and full cross-audit remain incomplete; query business application and whole PGPT/IT/ST are NOT certified."
+        manifest["remaining"] = "Three mutation references are covered by a separate question-mutation manifest, not this four-query slice. Private main/oneshot, parent OS/real-backup and full cross-audit remain incomplete; query business application and whole PGPT/IT/ST are NOT certified."
     if args.result_binding:
         manifest["scopeResult"] = "PASS_AUTHENTICATED_RESULT_METADATA_CODEC_ONLY"
         manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "SSC-052", "PG-D-140", "BUG-014", "YKT-012"]
@@ -520,6 +536,18 @@ def main():
         manifest["oracle"] = "043/044 PT169..176: independently computed prefix and external envelope in both directions for three layouts; each of35 metadata bytes, exact lengths, legacy rejection, numeric/UUID extrema, null/identity/reference contracts, AAD/key/cipher damage, borrowed ownership,100 concurrent bindings and identical-time wrong-target/token rejection. Opaque wire is NOT fixed-wire semantic or DB-reference proof."
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))} for c in cls.findall("counter")} for cls in classes}
         manifest["remaining"] = "QSB/NTC/QDL writer/replay/DB-reference checks/owned cleanup and mandatory private main/parent OS/real-backup remain incomplete. No deletion authority, whole PGPT, IT or ST completion claim."
+    if args.question_mutation:
+        manifest["scopeResult"] = "PASS_MUTATION_3_ROUTE_REFERENCE_AND_OWNED_CLEANUP_ONLY"
+        manifest["tests"] = {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
+                             "result": "PASS"} for i, name in enumerate(names, 177)}
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "SSC-052", "PG-D-141", "BUG-014", "YKT-012",
+                               "BUG-121", "BUG-122", "BUG-123", "BUG-124", "BUG-125", "BUG-126", "BUG-127", "BUG-128", "YKT-101", "YKT-102"]
+        manifest["fixture"] = "Isolated PostgreSQL real restricted roles, independently assembled UI232/236 response/QWK bytes and JCE/NKREF1, synthetic rows/JDBC fault projections; no raw body/key/token saved."
+        manifest["oracle"] = "045/046 PT177..192: three mutation response profiles and bound target/token; fixed business/SQL afterconditions, missing references protected, QWK correlation/SENT/unique work, cancellation and deleted Question/Answer triples, historical ownership, negative/null/projection faults, parent/child locks and absent-child insertion blocking,168h/cutoff/backup gates, owned rollback/uncertain commit/durable resume,100 parallel calls. Java counters and SQL branch/role matrix are separate."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))} for c in cls.findall("counter")} for cls in classes}
+        migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql"
+        manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
+        manifest["remaining"] = "Normal Question writer/replay/worker and private main/oneshot/parent OS/actual-backup wiring remain incomplete. This capability does not certify whole Program/PGPT/IT/ST or actual NK characterization."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(
