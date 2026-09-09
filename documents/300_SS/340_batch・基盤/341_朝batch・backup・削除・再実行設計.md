@@ -208,6 +208,8 @@ systemd向け処理を明示する。予期外exception/signalは50扱い。
 
 ## 13. 証跡・機密除外
 
+SSC-049/PG-D-144: private Inspector子unitだけは343 §6.8のreceipt wrapperを入口とする。JVM正常終了と検査成功を分離し、wrapperの0/10/50/70を親が同run/cutoffの永続progress・unit終了状態と照合する。子unitのSuccessExitStatus=10は「警告付きで子processが終了した」という扱いに限り、親CLEAN_INBOX stepを自動成功にしない。親だけがWARNING/件数/attemptをbatch_runsへ記録した後に後続へ進む。childの0だけで親OS lock/停止/backupを省略せず、古いunit結果/別run/不確定commitは成功へ補完しない。
+
 Run ID、business date/cutoff、host、app/schema/config/package version、step/attempt、開始/終了、status、
 target/success/failure/skipped count、byte数、duration、exit/error code、backup manifest hashをDBとstructured logへ記録する。
 

@@ -218,6 +218,28 @@ api.fileのInspectorApplicationはfile adapterとして低位DirectoryCalls/Inod
 
 成功/保護あり結果はroot closeを含む全終了後だけ返す。BUG-134/YKT-105: 開始時割込はrun null確認後・root/password IO前に判定し、flagを保持してINTERRUPTED/最後の確認状態なしを返す。読取途中の割込は既存IO失敗として全資源を閉じ、成功にしない。root open/close、credential load、構成不正/暗号primitive故障は例外で終了し、途中結果を返さない。通常DB障害/割込/時間超過は既存InspectionExecutionの非成功を保持する。ここでroot権限を緩和したり、DB credentialを他processへ渡したりしない。ログ/HTTP/JMS/別processを生成しない。PTは実保持inode/file/JDBC/永続SQLと明示synthetic OS属性・fault portを組合せる。実systemd credential正系、Java main/unit、親flock/backup実体/朝batch全順序は別gateであり本接続だけを完了証明にしない。
 
+### 6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）
+
+公開HTTP/JMSではないInspectorLauncher.mainをprivate unitの必須wrapperから呼ぶ。argvによる設定上書きは禁止し引数0個だけ。設定は以下の非秘密環境値から一度だけ型化し、現在日時や別runへ補完しない。password/AES/HMAC実値をenvへ渡さない。
+
+| Key | 受理契約 |
+|---|---|
+| `CREDENTIALS_DIRECTORY` | systemdが設定するprivate root、1～4096文字、InspectorSettingsの絶対正規化path（`/`不可）。特定の未保証systemd内部path prefixを推測しない。保持inode/専用UID/ACL/ROは既存readerが毎回検証 |
+| `NK_INSPECTOR_DB_URL` | 1～256文字、§6.6のcanonical loopback専用DB URL |
+| `NK_INSPECTOR_RUN_ID` | canonical小文字36文字UUID、parse後toStringが原値と一致 |
+| `NK_INSPECTOR_CUTOFF` | 1～32文字、UTC Instant canonical文字列と完全一致、InspectionRunの年/精度契約（microsecond以下）を維持。offset別表現/補完/丸め禁止 |
+| `NK_INSPECTOR_FINGERPRINT_VERSIONS` | 1～65536文字のcomma区切り、空要素/重複不可、各versionは§6.5の1～16 ASCII。HMAC秘密値は含めない |
+
+上記必須値の欠落/null/空/過長/NUL/CR/LF、`NK_INSPECTOR` namespaceの未知key・大小文字alias、CREDENTIALS_DIRECTORYの大小文字aliasをCONFIG70とする。無関係なOS環境値は保持・出力せず無視する。Map化前に消えるEnvironmentFile内重複やsource優先順は配備側validatorの責務であり、このlauncherのMap検査で検出済みとしない。外側null引数/portはprogramming contract違反であり、NPEを正常へ変換しない。
+
+root所有の`/etc/schubert-nk/inbox-inspector.env`にDB URL/version名だけを置く。run ID/cutoffだけはroot所有maintenance controllerがOS flock保持下で`/run/schubert-nk/maintenance/inbox-inspector.env`（parent root:root0700、file0600）へ原子的にpublishし、systemd managerがEnvironmentFileとして読む。batch accountにこのfileの任意編集、任意環境/汎用systemd-run/sudo権限を付与しない。親の停止/lock/実backup・設定fileの検証/原子publishとrun bindingの実装は別必須gate。ここで未実装の親gateを代行済みとしない。
+
+設定不正・credential読取/形式不正・暗号primitive構成不正はreceipt70、StorageIoExceptionは50、通常の実行結果はInspectionExecutionの0/10/50を維持する。予期外runtime故障は成功receiptを出さずJVM異常終了とする。mainの未捕捉例外handlerは固定`inspector failed`だけstderrへ出し、Throwable/値/stackを出さない。出力stream障害も非成功。全resource close後の結果からだけASCII `NKINSPECTOR1 <code> LF`をstdoutへ一度出す。JVM exit0はreceipt発行成功であって業務成功ではない。
+
+必須POSIX sh wrapperは固定Java/artifact/classpathを実行し、JVM非zeroまたは不明/欠落/余分text/extra LF/不明codeを50へ分類する。exact receiptの0/10/50/70だけ対応exitで返す。引数/未render placeholderは70。command substitution末尾に固定sentinelを置き、shellの末尾LF除去で余分LFを受理しない。任意command/evalやsecret表示は禁止。これがOSへ公開する唯一の実行entryであり、Java main単独のexit0をparentが成功判定に使わない。親は同run/cutoffの永続progressを別途読んでattempt差分/最終件数を記録する。
+
+unitのLoadCredentialは常にDB/current2の絶対source pathを指定する。previous2はroot管理rotation profileに応じて固定path行を追加する選択drop-in（なし/contextだけ/responseだけ/両方の4構成）。宣言しないpreviousだけreaderで不存在可。配布宣言したsourceの欠落/読取不能はunit起動失敗とし、空defaultへ置換しない。source省略によるmanager/credstore検索やSetCredentialの空値fallbackは使わない。rotation/profile切替は同じ保守OS lock下でprocess停止→credential/profile整合→daemon reload→次回起動とする。systemd259.5の導入済みsystemd.exec(5) LoadCredential/SetCredential節で確認（2026-09-09）。実root配布はLinux serverのITで確認し、PTの合成metadataで代用済みとはしない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |

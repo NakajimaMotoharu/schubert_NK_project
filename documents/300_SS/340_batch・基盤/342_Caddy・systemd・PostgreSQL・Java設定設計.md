@@ -137,6 +137,14 @@ Missした05:00をboot時に即実行してreboot loopを起こさない。Miss�
 
 ## 5. Java/JVM・Spring process
 
+### Private Inspector unit補足（SSC-049、PG-D-144）
+
+`schubert-nk-inbox-inspector.service`はUser/Group=`schubert-inbox-inspector`の固定非root専用identity、Type=oneshot、Restart=no、SuccessExitStatus=10、TimeoutStartSec=30min/TimeoutStopSec=60s、KillMode=control-group/SendSIGKILL=no。ExecStartはrelease内の固定receipt wrapper、Java main直接起動を親の成功判定に使わない。DB/current2の必須LoadCredentialとprevious2の選択profileは343 §6.8。EnvironmentFileはroot所有静的設定とroot所有per-run2値だけ。Java option/classpath/commandをbatchが任意上書きする仕組みを作らない。
+
+§4.3のNoNewPrivileges/PrivateTmp/PrivateDevices/ProtectSystem=strict/ProtectHome等の共通hardeningを維持し、asset/transfer/backupへのwriteを与えない。readonly release/configとprivate runtime credentialだけを利用しHTTP/JMS listenerを起動しない。After/RequiresはPostgreSQL、Beforeは通常Artemis/API/Web/Caddy、通常起動順を変えず親cleanupの内部で同期起動する。既に動いているAPI/Webを子unitが勝手に停止するConflictsは追加しない。親のinactive確認・OS lock・backup照合は別gate。
+
+検査中は通常API/Web停止のため、その未使用枠内でInspector heap Xms128m/Xmx512m、Direct64m/Metaspace192m、ReservedCodeCache128m、MemoryMax1024Mを上限とする。UTF-8/UTC/ExitOnOutOfMemoryError/enable-native-access=ALL-UNNAMEDを固定し、heap dump自動出力は無効。実RSS/GC/timeout/TERM/権限配布は後続Linux IT。PTはmain・wrapperの全終了分岐、template/directive/profileの独立matrixとShellCheck/systemd-analyze検証を記録し、実unit起動成功と混同しない。
+
 ### 5.1 Resource
 
 | Process | Heap | Direct/Metaspace上限 | systemd `MemoryMax` | Native headroom | Thread/pool |
