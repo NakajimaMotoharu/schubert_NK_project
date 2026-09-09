@@ -1,10 +1,10 @@
 {
-  "runId": "PT-WEB-20260909-24",
+  "runId": "PT-WEB-20260909-25",
   "programId": "NK-SCN-001",
-  "targetCommit": "3e325f49550d34b91acebfb60733166ce926e8a9",
+  "targetCommit": "6dd862d0389c2d6e77aec44a75314b66e28b1e44",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-09T12:17:13+09:00",
-  "completedAt": "2026-09-09T12:23:32+09:00",
+  "startedAt": "2026-09-09T12:40:24+09:00",
+  "completedAt": "2026-09-09T12:46:41+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -82,31 +82,31 @@
       }
     },
     "storage": {
-      "tests": 34,
+      "tests": 42,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 1716
+          "covered": 2068
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 125
+          "covered": 153
         },
         "LINE": {
           "missed": 0,
-          "covered": 343
+          "covered": 407
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 134
+          "covered": 160
         },
         "METHOD": {
           "missed": 0,
-          "covered": 71
+          "covered": 83
         },
         "CLASS": {
           "missed": 0,
-          "covered": 10
+          "covered": 11
         }
       },
       "spotbugs": {
@@ -116,31 +116,31 @@
       }
     },
     "api": {
-      "tests": 506,
+      "tests": 514,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 30194
+          "covered": 30373
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 2367
+          "covered": 2395
         },
         "LINE": {
           "missed": 0,
-          "covered": 6581
+          "covered": 6611
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 2200
+          "covered": 2221
         },
         "METHOD": {
           "missed": 0,
-          "covered": 973
+          "covered": 980
         },
         "CLASS": {
           "missed": 0,
-          "covered": 213
+          "covered": 214
         }
       },
       "spotbugs": {
@@ -197,6 +197,14 @@
     "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f01NativeOperationsPreserveExistingTargetsAndBoundAllErrors",
     "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f01RejectsNullNamesTraversalUnknownAbiAndMissingSymbols",
     "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest#f03OneOf100ConcurrentPublishersWinsWithoutReplacingWinner",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#filesystemFlagsAndFailures",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#platformAndSymbolAdmission",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#heldInodeSurvivesReplacement",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#concurrentReadsStayIndependent",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#interfacesAndRedaction",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#actualAclAndUid",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#aclReturnAndErrnoBoundaries",
+    "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest#canonicalCapabilityAndBounds",
     "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
     "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
     "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest#f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
@@ -510,14 +518,14 @@
     "YKT-035"
   ],
   "baseline": "Current baseline unchanged; Scenario application CHR not run yet",
-  "rawLogSha256": "efaaf8d30342987fc998b19434453f7bdfb0ce96d341fe40b66cb3de35ef7858",
+  "rawLogSha256": "97646e355fb44c9b65949b5fe0ea552e7ff3b220324e3f3cd722c22fb4deb8ed",
   "redaction": "Only class/method names, versions, counters and fixed metadata; all properties/stdout/stderr omitted.",
   "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
   "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. An internal exclusive-startup diagnostic probe now verifies real A/B file force/hash/group, no-replace collision and directory fsync; only confirmed diagnostic artifacts are cleaned, while uncertain/changed ready files or cleanup failures remain failed startup evidence. Internal staged Scenario service now connects read-only authentication/Inbox/query, DB-free file work and freshly authenticated final Inbox commit/close before reply. T01-T05 use explicit publisher/inspector doubles; T06 connects real PostgreSQL/Artemis send/ACK failures; T07 connects real retained-inode writer/inspector and PostgreSQL with independent 201/10000-record bytes/hash and ready preservation. Full root/exclusive startup composition/readiness and scan-to-service initialization, production registration, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
   "files": [
     {
       "path": "coverage/api-jacoco.csv",
-      "sha256": "ae76f08abfd7ea0978872b1b962e0a92880a3d6208112343b916772a798dbc07"
+      "sha256": "9e1ae95c19b30c7d66f0b40ca20e7dbe922a4db1f00216cd8789709c06ade408"
     },
     {
       "path": "coverage/characterization-jacoco.csv",
@@ -529,7 +537,7 @@
     },
     {
       "path": "coverage/storage-jacoco.csv",
-      "sha256": "b582b8f46e93ce0d197aa50dc7528b45011c32b47ecef687477af7f2620ec16b"
+      "sha256": "c4ca89f8b35ebfc5bcf31baa5d2059c1e5bb556b6da1ca9c4d3eefc939414f51"
     },
     {
       "path": "coverage/web-jacoco.csv",
@@ -892,6 +900,10 @@
       "sha256": "9e6580d0ed2da2aa6e248258f177b85fff3442d0061b89ee106c4dda8cfb6ada"
     },
     {
+      "path": "logs/PT-WEB-20260909-25-summary.json",
+      "sha256": "1d3427a56e630aead30ff916819dd98321ea096de99515386f2dbb4a76a94d82"
+    },
+    {
       "path": "logs/SSC-027-internal-regeneration.md",
       "sha256": "053d080f5817671c27930cecfad798b8573d8333ceb500e44cb7c8190ca4ddbb"
     },
@@ -909,23 +921,23 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
-      "sha256": "fdf42bb66e941949466e77d31c8ab5a868726cdb4ea8cfb7210066061e897b79"
+      "sha256": "acb0d2bada63344f8497afdf4ff6487306edb09c8431a89c388c3177dde7b408"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
-      "sha256": "9a5de90dc17989125baf97f83c454671cdd58640598fd4e3b2e5214568f17ab8"
+      "sha256": "81e8d590a34d922305c6c4af132d3d80777b90adb369a864032c13d362ee32a2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
-      "sha256": "0aedc7913e873dcdef1d9e49629f50cab2fa319c04fb9102a269b4b96703ae26"
+      "sha256": "59bf61e06acaf12f5ba1f5c2842053cd6a9e7d08b110bfcd78cd8e331d8d1641"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
-      "sha256": "e500276b1c3e0a1198eaf5a5348ce17157bd4480a7a2361e18849ae010e6cac7"
+      "sha256": "2b4eb03523377e543ec0001af1b14bacf30216450d67dc7cb1c38b1e969f2a93"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
-      "sha256": "7c1b542b80d4318e53df36245a6c14357cc1393aac8621508d91911cc671fdba"
+      "sha256": "4ebce47438b9d908597aa2f2a2d33784ba4f71734b2a4543ea5044821bcb3145"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
@@ -933,99 +945,103 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
-      "sha256": "4c460d3ea1aa307f5fbe96221e33a946d19eeb3f7f67f182888c2b783231db95"
+      "sha256": "b7f50c3aafb75c187277f48b422d470c3931fdc114f51b64b66840aa987247e9"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-      "sha256": "2974bdc10b02bcad87411a72673807ccc86a139a47233a3ed2df34a001011693"
+      "sha256": "e1881f2c6120c9d01f2fee8f5d9c6a6a1d52736a757fc56e272a998ab478a657"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
-      "sha256": "8578ad93c92d8912c96617cef42b19eb09e924f4ab860d68f8406f9dfc300b2c"
+      "sha256": "0b156a5a64fbb7de76291f14591ef4bc4d85140a78a1301348f5fdcfeced319c"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
-      "sha256": "62e19414e865f0e66f2564c8ffb0c31ce2e6cd58a49f8eff18e88f7330427b70"
+      "sha256": "4253cb489c8249586ce1f3bc6a361d2445b535c016d67f63d80a2c607a67ab81"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
-      "sha256": "1630011ae8996315628986f1a76e632a17fa7099aea86f41586fd1682cb6afd8"
+      "sha256": "17cc0decb94a1b216c7142e417bd1bd2ff3c415bf11b81637472187578749ca0"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
-      "sha256": "35efcc3290ecc370ea4ca2188a82c1a680c7a33c256d936752f20c1dc45689b5"
+      "sha256": "5dbd542eaded491ab02cc5e69ed4fca3da6b9659069ab4ec9dc983f66a4f1fa2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
-      "sha256": "ce38e58ed90594dd959ce6c243fb2aad5dc113ea12389bfe14d763d2f34ba860"
+      "sha256": "5a3851802a870fdbba2986bcf127ecf1deee086a291f5d979b6debbd11715536"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
-      "sha256": "f442d59467a511ba69d4ae0f05af4fd489848590533b354ba05bbf0f246eddf4"
+      "sha256": "1445f70ff51221bf93fa214c3a7431ba98ba26769a11758468e599dd50835eff"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
-      "sha256": "f5ec68c52ba71e81c35325658c2a47a45ae285af23cb72a14a2ffdc9396c830d"
+      "sha256": "527f74ff7985214f7f363f674a62b78d1e1bc6f37f8e62f4ac9251d685487595"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
-      "sha256": "43c7c34f8b2fe521cd9b525a0a792452b8ce1b3bf71bb17147858a7053f9487d"
+      "sha256": "58d90b6d06865963bbfc2235c976d86fb8e06a558dce488f36b923039b722843"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
-      "sha256": "c8ac99726ff37bf2d0a28e9619420d89c7e72f852a7a2b09bbdb9f828fe30567"
+      "sha256": "64cbbf472457e847d622444a38775f0366aedd7442e5608bdf51e9e0996f0e67"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
-      "sha256": "6e897258305911c71d01ef6dfaef5b2ba97cd0e747238b3aaacbbf2e3b8a4195"
+      "sha256": "1a60b3da00a7f34aa7547881d737923a95a105a8c7b9ed4c010631136877fe46"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
-      "sha256": "30d4c05cdd71aac5cce9e074127d36751e8840fc741491ac9bc2cff828594ea6"
+      "sha256": "afb76f504c6dc710fb3dbc673cc1dd0d43b15b4b36ac0b8c355a15bc21a2bc57"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
-      "sha256": "1cbf361f8c23d84f9d5584ec3ce9d2638b1745d6e346b00cee7cb97b1c23fa2d"
+      "sha256": "13fc7d4dd9d8b0f2d287e7893ba1803c77c952bdad7e61206e7974f3627fa1d6"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
-      "sha256": "2c3788eab001b577c696012fafeb1f95d8cb2586aa5d6c5f08708d5ac9ca9688"
+      "sha256": "92d1ce0bad42611fa003b253019200123378bc05479d39ab8196adfdb69d24e8"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
-      "sha256": "cd0455fa985ba9fc8f069825d4c7c71ced34e4410741a70edfc292c9d48d1ab4"
+      "sha256": "2117fed27f7230f884810328fbc2f04d605fbf0f78885be2acaf5fccc50d8c2e"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
-      "sha256": "46fe92ed846c5908ba219a9c3fb1a7280403b9533be649512be08af6da3edf89"
+      "sha256": "a36b50f67d6d39c468ab95e0ea07acf8bc61090e643d4ab27dd7c3f7198ee713"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
-      "sha256": "aea6f67f953d1bad9ae7d1c18a6e057cb077eb1b0d01399839cde3d8a92e45d9"
+      "sha256": "b6bf1fdd9b5ecb078a35911aeb7e0a6244c1cb6c8d824defde9c39473977e6e9"
+    },
+    {
+      "path": "output/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "ef3f99590df543d26db383e80e33f8617714a8b721528debf97e8a7f4527951c"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
-      "sha256": "e731fabc0666c7a93737b50acc3af8672407630ab0755a4816792ab2e5d413f8"
+      "sha256": "e2deaedbd7a415ed55f02bca0a4083febf9bb6c14db69633d8a9d46bd4d77f03"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
-      "sha256": "3d8c34c511d4f56af819c4c98c073f34c8216761838176c30b5f9a6d74d2f32d"
+      "sha256": "ce32e35f61dc9709cd0aeeb00b8a26eedd1957a2fe0dd30e56f596f7ad2bcae1"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
-      "sha256": "eb33633b9e2ca19a12a3a80c5cdcc368aa5028150546ec2ff891f5f6c41470fa"
+      "sha256": "3c8e4a3d0d13401aa33849ca4cfea326b03f63173d8064f4c808d9cf462ea686"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
-      "sha256": "291bb016dc7b13888d9fa7c09fc517865a92030bdd91e2919887f2a5f34355aa"
+      "sha256": "2dbc696d202df7316fb00c6ad988e8238bc4d5d2d9a0f537dcd52cfe13986eb8"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
-      "sha256": "8c4130f65e2381292514636043946e7e33737e975568790fda1c20ae1307af68"
+      "sha256": "41dd740a0299355d19f2d1f4d0f11fd518fababf7d81fffbac4e51a878519280"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
-      "sha256": "0c3aaea9b03e5769fd074d8d7ee352ec6fda6483380009e2b214abb9eb859497"
+      "sha256": "b7d30b094a3ee5f19d0cbc8973ce362d7563ebcf472b1bebbc89d9571b1c41b3"
     }
   ]
 }

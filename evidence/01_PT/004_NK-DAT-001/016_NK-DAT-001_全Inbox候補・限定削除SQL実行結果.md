@@ -1,6 +1,6 @@
 # NK-DAT-001 全Inbox候補・限定削除SQL実行結果
 
-最新正式判定: PT-WEB-20260909-24/source3e325f49、2026-09-09 12:23:32 JST完了、全902件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/full-inbox-sql/manifest.jsonの現行SHA-256は `63fd64f52be9224c474ec0376cc83e54ec60826b8de1f2baa012cc41c48b4361`。8collector/21scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file/ACL/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/full-inbox-sql/manifest.jsonの現行SHA-256は `61622856868d28ab62bcfe5ad2a592034d63eb48678a7331ae19cb4d4d99b15f`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
 以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
 

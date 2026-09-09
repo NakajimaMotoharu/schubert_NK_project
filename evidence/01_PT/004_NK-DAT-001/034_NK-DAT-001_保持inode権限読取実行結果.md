@@ -1,5 +1,7 @@
 # NK-DAT-001 保持inode権限読取実行結果
 
+最新正式判定: PT-WEB-20260909-25/source6dd862d0、dev-foundation、2026-09-09 12:40:24～12:46:41 JST、exit0。全918件（Protocol80/Storage42/API514/Web241/CHR41）、failed/error/skipped0、5 Java moduleの4種coverage100%/静的解析0。新8 PTは全PASS、line64/method12/class1/branch28/instruction352全missed0。evidence/inode-security/manifest.json SHA-256 `19e5a449530065e970acfc24744d5a1a7341b0e0f3f3b88c18503e2a1cc00121`。8collector/23scopeのhash/trace/負canary、V001～013/Current baseline不変、秘密pattern scan0hit。BUG-097/YKT-088はsource6dd862d0・本正式runで再試験完了。file reader/実systemd/main/親gateは未完了。以下は探索履歴。
+
 探索2は2026-09-09 12:38:58 JST、12.155秒、exit0、dev-foundation/02949622後の未commit実装。Storage42件（新8＋旧34）すべてPASS、failed/error/skipped0、SpotBugs0。LinuxInodeSecurityはline64/method12/class1/branch28/instruction352全missed0、除外追加なし。正式root/証跡確定までは未完了。033/PT121～128、PG-D-133、SSC-049。
 
 探索1は42件PASS/静的解析0だがbranch29/30で非合格。javapとJaCoCo line133を照合し、early-return用compiler生成Arena null guardを確認。BUG-097/YKT-088を修正前に02949622で起票し、Arena所有scopeの単一returnとprivate判定helperへ整理した。非null Arenaをnullにするtest改変や除外はなく、全native成功/故障/ERANGE/100並行を同じ期待値で再試験。

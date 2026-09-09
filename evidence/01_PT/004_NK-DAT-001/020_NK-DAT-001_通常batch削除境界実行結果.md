@@ -1,6 +1,6 @@
 # NK-DAT-001 通常batch削除境界実行結果
 
-最新正式判定: PT-WEB-20260909-24/source3e325f49、2026-09-09 12:23:32 JST完了、全902件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/outbox-only-cleanup/manifest.jsonの現行SHA-256は `b3a28d3ba53e2dba23110384939881499c838ef288d75fc7fb63b7fd02c30f15`。8collector/21scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file/ACL/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-25/source6dd862d0、2026-09-09 12:46:41 JST完了、全918件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/outbox-only-cleanup/manifest.jsonの現行SHA-256は `f89c5b0bf4f001c41470fc03247c4b6661f68faa375e396bd3872c152516f1e9`。8collector/23scopeの全hashとtrace負canary、V001～013/Current baseline不変、秘密pattern scanを確認。本scopeのcoverage/SQL分岐対応は同manifestと以下の個別結果へ追跡。鍵file読取/main/oneshot・親process・Question/通知参照/親chunk走査は未完了、BUG-014/SSC-049継続。
 
 以下は初回探索時の履歴。未確定という記述は本sliceだけ上記で更新済み。旧hashは証跡commit b84d81ef等の該当履歴を参照し、現行manifestと混同しない。
 
