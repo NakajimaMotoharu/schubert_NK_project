@@ -2,6 +2,8 @@
 
 ## 1. 目的・追跡
 
+SSC-049/PG-D-148: read-only照会は`/usr/bin/systemctl --system --no-pager --no-ask-password show --property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID <固定APIまたはWeb unit>`だけ。子環境はclear後にPATH=/usr/bin:/bin、LANG/LC_ALL=C、SYSTEMD_COLORS=0、TERM=dumbのみ設定し、親credential/envやbus address overrideを引き継がない。stderrはdiscard、stdoutは終了後最大1025byte読取で過長を拒否、固定projectionを出す信頼OS binaryが前提。5秒wait timeout時は照会子processへTERMを要求し失敗、SIGKILLやservice stopへ置換しない。全stdio close完了前の成功返却は禁止。敵対rootがbinary/systemdを差替える場合や、TERMを無視するOS障害の強制解消は保証しない。実対象unit不在でもcommandがexit0/inactiveを返すため、必ずLoadState=loadedを検証する。PTでは実read-only診断と制御Process portを区別して記録する。
+
 SSC-049/PG-D-147: root管理のboot時tmpfiles設定は/run/schubert-nk0755、maintenance0700、maintenance.lock0600を固定root:rootで配布する。既存service子directoryの到達性を保つため共有親を0700へ変えない。lockfileは空regular/単一link、local /runのRW tmpfsだけ許可し、稼働中の再作成・削除・権限修復を禁止する。MaintenanceFileLock公開factoryは固定pathとnative portだけを生成し、実行時UID0を先に検査する。保持inodeのmetadata/ACL/FS・再open identityを検証して既存LinuxFileLockへ接続、path/FD/例外causeを結果へ公開しない。PTのroot metadata合成は非特権fixtureの実Linux IO/flockとの接続検証であり実root配置の合格ではない。起動時tmpfiles実行・権限配布・privileged親unit・停止/backup/DB引渡しは後続gate。
 
 SSC-049/PG-D-146: maintenance.lockは親root管理のlocal runtime namespaceへ配布し、保守中にpathを置換/削除しない。低位LinuxFileLockは保持済み/proc/self/fd能力を借りてflockするだけで、root/file owner・ACL・regular type・link・配置を検証するfile adapterの代替ではない。任意path/符号付き・範囲外FD表記/未知platformを拒否し、native診断/physical pathを例外へ出さない。親の配布・起動結線は別PG/PT gate。

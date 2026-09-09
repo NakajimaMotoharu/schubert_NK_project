@@ -116,6 +116,8 @@ backup/restore手順の変更・rehearsalなしに行わない。
 
 ### 7.1 必須gate
 
+SSC-049/PG-D-148: 親OS lock保持下で、削除開始前にAPI/Web各unitのId/LoadState/ActiveState/SubState/Job/MainPID/ControlPIDを固定systemctl showで読み、対象Id一致・loaded/inactive/dead・Job空・PID各0を全件確認する。not-found/masked/failed/active/遷移中/残job・PIDは通さない。7fieldは各1回、ASCIIのみ・末尾LF1つ・1～1024byte、未知/重複/欠落/CR/NULは失敗。unitごと5秒、非zero/IO/close/timeout/interruptは無条件に後続不可、割込flagを保持する。前後の割込確認と再実行時のfresh観測を必須とし、古い結果をcacheしない。これは停止実行やcgroup全検査ではない。親は保守中の再起動を禁止し、通常stop timeout/TERM/復旧の既存設計を維持する。
+
 - 同じ`business_date`のBACKUP_DBとBACKUP_CONFIGがSUCCESS。Dump/manifest directoryが現存しhash再照合済み。
 - `run_started_at`を全DELETEのcursor/cutoffに使い、実行中の現在時刻で対象を広げない。
 - API/Webはinactive、DB batch advisory lock取得済み。未満足は削除0件でSKIPPED/FAILEDを記録。
