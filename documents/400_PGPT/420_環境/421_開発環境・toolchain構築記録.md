@@ -267,6 +267,8 @@ Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`d
 
 ## 7. 更新履歴
 
+PG-D-146: /usr/bin/flock --versionはOS既設util-linux2.41.3。/usr/share/man/man2/flock.2.gzはLinux man-pages6.17（2026-02-08）、open-file-description所有・close解除・fcntl非互換・local/NFS/SMB差を照合した。新規導入やhost lock操作はせず、隔離一時fileと子processだけで相互排他PTを実施する。Javaは既存Java25公開FFMで固定libc symbol/ABIに限定し、native-access/解析gateを維持する。
+
 PG-D-144/SSC-053: `/usr/bin/od --version`はOS既設uutils coreutils0.8.0。`-An -v -tx1 -w64`で全byteをASCII hexへ変換する。新規導入なし。PT-OPS-INBOX-002/003は固定receiptの独立byte vector、NUL全位置、変換失敗を検証する。Linux配備では同option/output契約を再確認し、未確認の代替odを推測合格にしない。systemd-analyzeの構文検証は専用一時unit path/ExecStart=/bin/trueだけを用い、OS service・credentialは起動/配布しない。
 
 | 日付 | 内容 |

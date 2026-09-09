@@ -38,6 +38,8 @@ transfer/Expiry清掃、依存順起動、失敗時の継続/打切り、二重�
 
 ## 4. 05:00計画停止・update・reboot
 
+SSC-049/PG-D-146のOS排他部品: LinuxFileLockは親が既に型/所有/ACL/namespaceを検証して保持したlock inodeだけを独立O_RDONLY|O_CLOEXECでopenし、flock(LOCK_EX|LOCK_NB)成功後だけcallbackを呼ぶ。EWOULDBLOCKはcallback0回の競合結果、他errno/open/close失敗は非成功。callback終了・例外時も全FDを閉じ、close完了前に成功結果を返さない。FDは複製/公開せずcloseでlockを解除、既存lockfileの削除/作成/内容変更をしない。対象はlocal /runのOS lockでありNFS/SMBの異なる意味へ拡張しない。実util-linux flockと相互排他をPTで検証するが、root配布/親inactive/実backup/DB lock引渡しを本部品だけで実装済みとしない。
+
 ### 4.1 実行順
 
 1. OS lock取得、run ID生成、host/app/schema/version、disk、Queue/DLQ、未処理job、active session件数を記録。

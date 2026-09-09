@@ -53,6 +53,8 @@ Storage package `.storage`はDirectoryCalls/LinuxDirectoryCalls、OwnedTransferD
 
 SSC-049/PG-D-133: storageへ低位InodeSecurityCalls/LinuxInodeSecurityを追加し、保持inode callback内のaccess ACL/readonly filesystem flag/effective UIDだけを公開する。業務認証やkey内容を扱わず、APIのcredential file adapterがSS343 §6.2のpolicyと組み合わせる。任意path・symbol・attribute名を受けず、native実装をAPIへ複製しない。検査processも明示native-accessを必須とする。PT-DB-INBOX-121～128。
 
+SSC-049/PG-D-146: storageのLinuxFileLockは保持済みregular inodeへの低位scoped flockだけを担当し、batch file adapterから利用する。呼出しは保持callback中の固定/proc/self/fd能力と閉じた業務callbackに限定。任意pathや生FDをserviceへ公開せず、OS user/ACL/root/実backup/DB transactionはbatch側の別責務。FFM bindingはshared storageへ集約、FileChannel.lock/fcntlをflockの代用にしない。PT-OPS-FLOCK-001～008。
+
 ### 4.1 Package
 
 | Package | 主要class | 責務 |

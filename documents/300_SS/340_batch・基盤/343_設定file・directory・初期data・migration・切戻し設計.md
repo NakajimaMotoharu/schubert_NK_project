@@ -2,6 +2,8 @@
 
 ## 1. 目的・追跡
 
+SSC-049/PG-D-146: maintenance.lockは親root管理のlocal runtime namespaceへ配布し、保守中にpathを置換/削除しない。低位LinuxFileLockは保持済み/proc/self/fd能力を借りてflockするだけで、root/file owner・ACL・regular type・link・配置を検証するfile adapterの代替ではない。任意path/符号付き・範囲外FD表記/未知platformを拒否し、native診断/physical pathを例外へ出さない。親の配布・起動結線は別PG/PT gate。
+
 Source/release/config/credential/data/log/runtimeの配置、環境差分、設定key、初期data、Flyway DB migration、
 現行asset/metadata移行、切替・切戻しを実行前checkと証跡を含めて定める。
 
