@@ -472,7 +472,7 @@ final class LogCleanupProgressBoundaryTest {
                                 .resolve("V013__cleanup_backup_and_retention_guards.sql")))));
     try (var c = db.admin()) {
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014",
+          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015",
           scalar(
               c,
               "select string_agg(version,',' order by installed_rank) from"

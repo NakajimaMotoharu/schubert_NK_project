@@ -4,7 +4,9 @@
 
 V010予定: maintenance_lock_inbox_backup / maintenance_next_inbox / maintenance_delete_inbox、列grant。NK-DAT-001/MQ-008/OPS-009/DAT-009、UI212/241/251、SS324/331 §3.6/352、QA-046/UIC-006/SSC-049/PG-D-124/BUG-014/YKT-012。結果016。SQL単体は暗号・業務参照検査の証明ではない。独立の公開synthetic body30byte（復号不可）とJDK SHA-256、literal UUID/SQLSTATE/DB後条件、production DDLの隔離PGを使用する。
 
-## 2. Test ID（未実施）
+追補PG-D-139/SS331 §3.10: V015の4照会をPT051のROUTESへ追加し、同じNONE/全5型付きref/owner/token/24h/SQL guard行列を28routeで実施する。拒否routeはQSB/NTC/QDL/ZZZ。既存24routeの期待値は不変。新照会暗号/Java接続・独立goldenは041/PT161～168へ追跡し、SQLだけで復号合格とはしない。
+
+## 2. Test ID（初回仕様の履歴、最新結果は016）
 
 | ID / method | 事前条件・入力・操作 | 独立期待値 |
 |---|---|---|

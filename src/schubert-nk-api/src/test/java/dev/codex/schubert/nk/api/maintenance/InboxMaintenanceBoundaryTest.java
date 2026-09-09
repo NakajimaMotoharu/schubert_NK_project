@@ -32,7 +32,8 @@ final class InboxMaintenanceBoundaryTest {
   private static final List<String> ROUTES =
       List.of(
           "LGN", "LOG", "GAM", "SPK", "RTE", "SCF", "SRC", "SCN", "AUD", "ANM", "ANL", "VID", "MCT",
-          "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK");
+          "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK", "NTS", "NTD",
+          "QSS", "QSD");
   private static final String NEXT = "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)",
       DELETE = "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)",
       HELPER = "schubert.maintenance_lock_inbox_backup(uuid,timestamptz)";
@@ -214,7 +215,7 @@ final class InboxMaintenanceBoundaryTest {
         }
       }
     }
-    for (String route : List.of("QSB", "NTS", "NTD", "NTC", "QSS", "QSD", "QDL", "ZZZ")) {
+    for (String route : List.of("QSB", "NTC", "QDL", "ZZZ")) {
       sql("delete from schubert.request_inbox");
       inbox(101, route, "ERROR", CUTOFF.minusSeconds(1));
       try (var c = restricted()) {
@@ -502,7 +503,7 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void migrationAndExistingAuthenticationRemainCompatible() throws Exception {
     assertEquals(
-        "14",
+        "15",
         scalarAdmin(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

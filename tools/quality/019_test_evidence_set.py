@@ -24,9 +24,43 @@ def module(name, file):
 media = module("media_collector", "009_collect_media_evidence.py")
 gate = module("set_collector", "018_collect_verified_evidence_set.py")
 batch = module("batch_collector", "020_collect_batch_evidence.py")
+inspection = module("inspection_collector", "016_collect_inbox_inspection_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_question_query_inventory_rejects_nonpassing_cases(self):
+        cls = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
+        names = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
+                 "canonicalIdentityReferencesAndNulls", "validRowsDeleteAndRetainExactMetadata",
+                 "retentionBackupAndSqlAuthority", "failuresRollbackAndResume",
+                 "concurrentAndDurableMixedRuns", "appendOnlyInventoryAndClosedRoutes"]
+        self.assertEqual(cls, inspection.QUESTION_CLASS)
+        self.assertEqual(names, inspection.QUESTION_METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual(8, len(inspection.validate_suite(suite, cls, names)))
+        for position in range(8):
+            wrong = copy.deepcopy(suite)
+            wrong.remove(wrong[position])
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite)
+            ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for key, value in (("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite)
+            wrong.set(key, value)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+        for key, value in (("classname", "Wrong"), ("name", "unknown"), ("name", names[1])):
+            wrong = copy.deepcopy(suite)
+            wrong[0].set(key, value)
+            with self.assertRaises(ValueError):
+                inspection.validate_suite(wrong, cls, names)
+
     def test_log_service_class_and_pt_ids_are_mandatory(self):
         cls = "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest"
         names = ["emptyAndCompletedRuns", "heldPrefixAndLargeChunks", "resumedAttemptCounts", "sessionLockOwnership",
@@ -116,7 +150,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress")]
+                "inspector-process", "log-cleanup-progress", "question-query")]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -170,7 +204,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(27, len(check()))
+            self.assertEqual(28, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -180,7 +214,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(27):
+        for failed_at in range(28):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -193,9 +227,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(27, len(calls))
+        self.assertEqual(28, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertEqual("--log-progress", calls[-1][-1])
+        self.assertEqual("--question-query", calls[-1][-1])
 
     @staticmethod
     def write_scope(root, scope, changes=None):

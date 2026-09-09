@@ -14,7 +14,8 @@ import org.jspecify.annotations.NullMarked;
  * Composition keeps inspector keys alive/immutable until every call returns. NK-DAT-001;
  * OPS-009/DAT-009/MQ-008; UI212/241/251; SS324 12.3/331 3.5/341/343/352;
  * QA-046/UIC-006/SSC-049/BUG-014; PG-D-122/125; SS324 12.5/331 3.6; PT-DB-INBOX-033..040/057..064.
- * Unsupported completed rows are protected, not silently skipped.
+ * Question query routes: SS324 12.8/331 3.10/PG-D-139/PT-DB-INBOX-161..168. Unsupported completed
+ * rows are protected, not silently skipped.
  */
 @NullMarked
 public final class InboxCleanup {
@@ -39,6 +40,10 @@ public final class InboxCleanup {
           "USRREQ01",
           "UDTREQ01",
           "LGSREQ01",
+          "NTSREQ01",
+          "NTDREQ01",
+          "QSSREQ01",
+          "QSDREQ01",
           "UCRREQ01",
           "USTREQ01",
           "URLREQ01",

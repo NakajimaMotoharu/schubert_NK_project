@@ -15,11 +15,11 @@ import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Read-only inspection of 22 saved query/User results, not authentication or deletion permission.
+ * Read-only inspection of 26 saved query/User results, not authentication or deletion permission.
  * Caller owns transaction, reference locks and key lifetime. No file IO, replay or business writes.
  * NK-DAT-001/NK-MSG-002/NK-SCN-001/NK-MED-001/NK-ADM-001; OPS-009/MQ-008/DAT-009;
  * UI212/234..237/241/251; SS324 section12.4/331/333/352; QA-046/SSC-049/BUG-014; PG-D-123;
- * PT-DB-INBOX-041..048.
+ * PT-DB-INBOX-041..048; question queries SS324 12.8/PG-D-139/PT-DB-INBOX-161..168.
  */
 @NullMarked
 public final class NonAuthenticationInboxInspector {
@@ -47,6 +47,10 @@ public final class NonAuthenticationInboxInspector {
           Map.entry("USRRSP01", QUERY),
           Map.entry("UDTRSP01", Set.of("0000", "0104")),
           Map.entry("LGSRSP01", QUERY),
+          Map.entry("NTSRSP01", QUERY),
+          Map.entry("NTDRSP01", Set.of("0000", "0104")),
+          Map.entry("QSSRSP01", QUERY),
+          Map.entry("QSDRSP01", Set.of("0000", "0104")),
           Map.entry("UCRRSP01", Set.of("0000", "0100", "0105", "9001")),
           Map.entry("USTRSP01", UPDATE),
           Map.entry("URLRSP01", UPDATE),
