@@ -2,6 +2,10 @@
 
 ## 1. 判定
 
+最新正式判定: PT-WEB-20260909-21/source718ee4c6、2026-09-09 11:22:33 JST完了、全878件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-progress-service/manifest.jsonの現行SHA-256は `c10541d2bf64a09d1558e84cc325452510bc045bfbca4209504ff729abb61635`。8collector/18scopeの全hashとtrace負canary、V001～012/Current baseline不変、秘密pattern scanを確認。永続接続8classはline193/method25/class8/branch102全missed0。SQL条件は016/020/022 matrixに追跡。V012永続SQLとJava検査の同transaction接続・1,001行の分割再開を正式確認。oneshot・親process・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
+
+以下は探索時の履歴。正式未確定/Java接続未完了という旧記述は、上記対象sliceに限り更新済み。process/親接続の残件は維持する。
+
 探索2（2026-09-09 11:14:56 JST完了）: 新Java8/永続SQL8/旧認証8/旧非認証8/DB15/Protocol5/Storage16=68件PASS、failed/error/skipped0。関連8classのline193/method25/class8/branch102/instruction1099、全missed0、NullAway/Spotless PASS・SpotBugs0。正式root gate/証跡は未確定なのでslice完了へ算入しない。QA-046/SSC-049、PG-D-128、023/PT081～088。
 
 InboxCleanupの共通private所有transactionを既存2経路と永続経路で使用する。InspectionProgress/LoadedProgressを追加し、private Work interfaceには実行bytecode/counterがない（除外設定は追加していない）。module全体のcoverage gateは維持。processの実起動/親lock・実backup/key wiring、残参照/全cleanup監査は未完了。BUG-014/YKT-012を閉じない。

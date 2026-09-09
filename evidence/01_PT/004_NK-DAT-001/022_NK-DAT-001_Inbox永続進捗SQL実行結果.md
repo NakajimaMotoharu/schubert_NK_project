@@ -2,6 +2,10 @@
 
 ## 1. 判定
 
+最新正式判定: PT-WEB-20260909-21/source718ee4c6、2026-09-09 11:22:33 JST完了、全878件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/inbox-progress-sql/manifest.jsonの現行SHA-256は `17ab093f9601010caadf2b3d099c99c8e827dd0f415331f55fc630ca6d65e5d7`。8collector/18scopeの全hashとtrace負canary、V001～012/Current baseline不変、秘密pattern scanを確認。永続接続8classはline193/method25/class8/branch102全missed0。SQL条件は016/020/022 matrixに追跡。V012永続SQLとJava検査の同transaction接続・1,001行の分割再開を正式確認。oneshot・親process・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
+
+以下は探索時の履歴。正式未確定/Java接続未完了という旧記述は、上記対象sliceに限り更新済み。process/親接続の残件は維持する。
+
 探索3（2026-09-09 11:03:43 JST完了）: 新8＋旧SQL32＋DB15＋Outbox4＋Protocol5＋Storage16=80件PASS、failed/error/skipped0、静的解析0。追加のrecord全引数/未期限・PROCESSING拒否/空ENDも確認。正式root gate/証跡は未確定。V012・PG-D-127・QA-046/SSC-049、021/PT073～080に対応。Java検査との所有transaction接続、oneshot、親process、残る参照・全cleanup監査は未完了。BUG-014/YKT-012を閉じない。
 
 ## 2. SQL条件matrix

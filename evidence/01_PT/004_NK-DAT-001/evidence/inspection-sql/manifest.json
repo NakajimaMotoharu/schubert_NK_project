@@ -1,15 +1,15 @@
 {
-  "runId": "PT-WEB-20260909-20",
+  "runId": "PT-WEB-20260909-21",
   "programId": "NK-DAT-001",
-  "targetCommit": "a389975b30383a3602da67ca6607a7e1a4436576",
+  "targetCommit": "718ee4c631d026f65060be085103e42eb6c9364d",
   "branch": "dev-foundation",
   "exitCode": 0,
   "scopeResult": "PASS_AUTH_CANDIDATE_SQL_ONLY",
   "programStatus": "IN_PROGRESS",
-  "startedAt": "2026-09-09T10:42:02+09:00",
-  "completedAt": "2026-09-09T10:47:29+09:00",
+  "startedAt": "2026-09-09T11:16:49+09:00",
+  "completedAt": "2026-09-09T11:22:33+09:00",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "09827f3ba7c0b9e692ad666662e541c1b1f4e2b75a7b45ffefa5d524a323025c",
+  "fullReactorManifestSha256": "e6380dc43bb47b1adfd310ed86a3ea8a9a326244076727f5d3561c80d605fd82",
   "environment": {
     "os": "Ubuntu 26.04.1 LTS x86_64",
     "java": "25.0.4+7",
@@ -68,7 +68,7 @@
   },
   "fixture": "Isolated PostgreSQL 18.6, synthetic rows, real restricted roles, controlled competing SQL row locks. No deployed DB or credential used. PT021 reuses independent JCE auth fixture.",
   "oracle": "007/008 specifications: literal IDs/counts/SQLSTATE/catalog, exact expiry/cursor, rollback/lock postconditions; BUG080 backup inserted after first snapshot must not authorize an unlocked candidate.",
-  "remaining": "Whole-run durable progress, mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify the available 24-route inspectors and V011 bypass removal.",
+  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
   "related": [
     "QA-046",
     "UIC-006",
@@ -88,7 +88,7 @@
   "files": [
     {
       "path": "results.xml",
-      "sha256": "60c39ae8204048586ba651000f65363604a8f08a85ca47bd622441647f5554a7"
+      "sha256": "51e530c49536b99120e403194fc7df3946b9fd5a5f4eecf014d7795c4071c6bb"
     }
   ],
   "sqlSources": [

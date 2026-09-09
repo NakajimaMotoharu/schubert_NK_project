@@ -1,6 +1,6 @@
 # NK-DAT-001 通常batch削除境界実行結果
 
-最新正式判定: PT-WEB-20260909-20/sourcea389975b、2026-09-09 10:47:29 JST完了、全862件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/outbox-only-cleanup/manifest.jsonの現行SHA-256は `05489b945d3c1d17f071bdeb0c630c383501c15108f952d562b23b1af16848e3`。8collector/16scopeの全hashとtrace負canary、V001～011/Current baseline不変、秘密pattern scanを確認。共通6classはline139/method14/class6/branch66全missed0。SQL条件は016/020 matrixに追跡。V011の通常batch迂回削除は廃止済み、BUG-091/YKT-082再試験完了。永続run/oneshot・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
+最新正式判定: PT-WEB-20260909-21/source718ee4c6、2026-09-09 11:22:33 JST完了、全878件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。evidence/outbox-only-cleanup/manifest.jsonの現行SHA-256は `773d46e34e9cae410ec173622c8e1bf24df24587b930d5a99172811ecad276c4`。8collector/18scopeの全hashとtrace負canary、V001～012/Current baseline不変、秘密pattern scanを確認。永続接続8classはline193/method25/class8/branch102全missed0。SQL条件は016/020/022 matrixに追跡。V012永続SQLとJava検査の同transaction接続・1,001行の分割再開を正式確認。oneshot・親process・Question/通知参照/横断監査は未完了、BUG-014/SSC-049継続。
 
 以下は初回探索時の履歴。未確定という記述は本sliceだけ上記で更新済み。旧hashは証跡commit b84d81ef等の該当履歴を参照し、現行manifestと混同しない。
 

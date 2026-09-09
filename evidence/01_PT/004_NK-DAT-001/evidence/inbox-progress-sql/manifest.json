@@ -1,0 +1,96 @@
+{
+  "runId": "PT-WEB-20260909-21",
+  "programId": "NK-DAT-001",
+  "targetCommit": "718ee4c631d026f65060be085103e42eb6c9364d",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_DURABLE_INSPECTION_CHECKPOINT_SQL_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T11:16:49+09:00",
+  "completedAt": "2026-09-09T11:22:33+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "e6380dc43bb47b1adfd310ed86a3ea8a9a326244076727f5d3561c80d605fd82",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
+    "proof": "022 maps open/record/purge procedural and SQL conditions to PT073..080. Java composition is a separate gate.",
+    "functions": [
+      "schubert.maintenance_open_inbox_inspection(uuid,timestamptz)",
+      "schubert.maintenance_record_inbox_inspection(uuid,timestamptz,uuid,bigint,uuid,text,text)",
+      "schubert.maintenance_cleanup_inbox_progress(uuid,timestamptz,integer)"
+    ],
+    "roles": [
+      "schubert_inbox_inspector",
+      "schubert_batch",
+      "schubert_backup"
+    ]
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-073": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#newAndResumedRunKeepOneCutoff",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-074": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#outcomesAdvanceOnlyMatchingState",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-075": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#deletionAndCheckpointCommitTogether",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-076": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#invalidInputsAndConstraintsReject",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-077": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#backupAndConcurrentRunsStayLocked",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-078": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#completedProgressRetentionIsBounded",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-079": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#rolesAndFixedFunctionsCannotEscalate",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-080": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest#migrationAndInventoryAreAppendOnly",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Isolated PostgreSQL 18.6/real roles; synthetic run/backup/Inbox; no real credentials or dump. SQL capability permits only trusted private transaction composition, not an AES certificate.",
+  "oracle": "021/022 PT: fixed run cutoff/cursor/counts and UUID byte ordering; atomic delete/checkpoint commit/rollback, invalid arguments/constraints/overflow, role/table boundaries with backup SELECT only, 400-day retention and investigating-run protection; independent V001..012 inventory and frozen V001..011 hashes.",
+  "remaining": "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "PG-D-127",
+    "BUG-014",
+    "YKT-012"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "32ddef03888e8c4becbd550d0f59d85fc16e44d939af2f1b88a134246058a24d"
+    }
+  ],
+  "sqlSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+      "sha256": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411"
+    }
+  ]
+}

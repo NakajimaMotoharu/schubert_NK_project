@@ -133,7 +133,7 @@ API mq_outbox→Web web_log_outboxの順にID昇順FOR UPDATE SKIP LOCKED、合�
 
 owner nk_owner、SECURITY DEFINER、固定search_path/UTC、PUBLIC/他service EXECUTEなし、通常batchのInbox/base table権限追加なし。動的SQL/汎用table引数/任意検査済flagを設けない。V008～010の専用検査関数はそのまま。PT065～072と旧DB/Outbox回帰で、Inbox全保持、Outbox境界/chunk/rollback、backup集合の途中追加/競合、権限・全DELETE経路の役割を確認する。旧PT-DB-011の不正Inbox削除期待は、承認済みBUG-014修正として保持2行/Outbox0削除へ変更し根拠を残す。全run/oneshot/参照未対応が残るためBUG-014/YKT-012を閉じない。
 
-### 3.8 Inbox検査の永続checkpoint（SSC-049、PG-D-127、V012予定）
+### 3.8 Inbox検査の永続checkpoint（SSC-049、PG-D-127、V012）
 
 run単位の再開状態をDBの非秘密tableに置き、各候補の削除/保護判定とcheckpoint更新を同じ所有transactionでcommitする。OS runtime fileや別transactionの件数保存を削除確定の証明にしない。通常業務tableの仕様は変えず、同run/cutoffの再開と別attempt記録の責務を分離する。
 
