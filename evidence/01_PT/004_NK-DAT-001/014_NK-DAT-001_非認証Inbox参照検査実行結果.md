@@ -1,5 +1,9 @@
 # NK-DAT-001 非認証Inbox参照検査実行結果
 
+最新正式判定: PT-WEB-20260909-19/source74cc57f8、2026-09-09 10:26:20 JST完了、全854件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。対応evidence/non-authentication-inspection/manifest.jsonの現行SHA-256は `e397d4041cc8f7458978c2a4bfa1ff4c678e224111309a053d9d2dca4a039c95`。8collector/15scopeの全hashとtrace負canary、V001～010/Current baseline不変、秘密pattern scanを確認。認証/非認証の共通6classはline139/method14/class6/branch66全missed0。SQL条件は016 matrixに追跡し架空のJaCoCo値を付けない。BUG-087～090/YKT-078～081再試験完了。全run/oneshot/V006置換・Question/通知参照は未完了で、BUG-014/SSC-049継続。
+
+以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
+
 ## 1. 現在の判定
 
 正式PT-WEB-20260909-18、source56935aa0、2026-09-09 09:44:09 JST完了、exit0。全838件（Protocol80/Storage34/API442/Web241/CHR41）PASS、failed/error/skipped0、5対象moduleのline/method/class/branch100%、NullAway/Spotless/Enforcer成功、SpotBugs0。NonAuthenticationInboxInspectorの22応答参照検査だけが本slice対象であり、専用SQL権限/lock/削除/oneshot、Question/通知7応答、BUG-014完了は未証明。関連QA-046/SSC-049、PG-D-123、013仕様/PT-DB-INBOX-041～048は全件PASS。

@@ -1,5 +1,9 @@
 # NK-DAT-001 全Inbox検査削除service実行結果
 
+最新正式判定: PT-WEB-20260909-19/source74cc57f8、2026-09-09 10:26:20 JST完了、全854件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。対応evidence/full-inbox-cleanup/manifest.jsonの現行SHA-256は `957834377ba11bd9b5e95179599ccc0351ac98e59be4373f09076cb7dea90a84`。8collector/15scopeの全hashとtrace負canary、V001～010/Current baseline不変、秘密pattern scanを確認。認証/非認証の共通6classはline139/method14/class6/branch66全missed0。SQL条件は016 matrixに追跡し架空のJaCoCo値を付けない。BUG-087～090/YKT-078～081再試験完了。全run/oneshot/V006置換・Question/通知参照は未完了で、BUG-014/SSC-049継続。
+
+以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
+
 ## 1. 現在の判定
 
 探索2（2026-09-09 10:18:37 JST）: 新8件＋認証8＋非認証参照8＋V010 SQL8＋DB15＋Protocol5＋Storage16=68件PASS、failed/error/skipped0。共通InboxCleanupとCandidate/Run/Step/Outcome/Exceptionの6class合計line139/method14/class6/branch66/instruction747、全missed0。NullAway/Spotless成功、SpotBugs0。正式全reactor証跡は未確定のためslice完了とは扱わない。

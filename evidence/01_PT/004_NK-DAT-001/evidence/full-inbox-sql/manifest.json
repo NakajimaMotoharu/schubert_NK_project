@@ -1,0 +1,107 @@
+{
+  "runId": "PT-WEB-20260909-19",
+  "programId": "NK-DAT-001",
+  "targetCommit": "74cc57f8759f213e5b7aba090bd6bd88c592a6a8",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "scopeResult": "PASS_FULL_CANDIDATE_24_ROUTE_SQL_ONLY",
+  "programStatus": "IN_PROGRESS",
+  "startedAt": "2026-09-09T10:20:54+09:00",
+  "completedAt": "2026-09-09T10:26:20+09:00",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "acf7b42c1772fa22fde6f97570aec4865a935830a6fbabb0ea4e9a659030f1b5",
+  "environment": {
+    "os": "Ubuntu 26.04.1 LTS x86_64",
+    "java": "25.0.4+7",
+    "maven": "3.9.12",
+    "junit": "5.13.4",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0"
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "coverage": {
+    "kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
+    "proof": "016 result maps all helper/candidate/delete procedural IF/ELSIF and WHERE/null/role/reference/token/expiry boundaries to PT049..056. Java coverage remains separately enforced; no invented SQL percentage.",
+    "functions": [
+      "schubert.maintenance_lock_inbox_backup(uuid,timestamptz)",
+      "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)",
+      "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)"
+    ],
+    "roles": [
+      "schubert_inbox_inspector"
+    ]
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tests": {
+    "PT-DB-INBOX-049": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#catalogAndColumnCapabilities",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-050": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#candidateOrderStateAndUnknownRoutes",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-051": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#canonicalRoutesReferencesAndTokens",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-052": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#exactRetentionCutoffAndReplay",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-053": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#argumentsHashAndTransactionBinding",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-054": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#referencesStayLockedUntilTransactionEnds",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-055": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#backupGateAndSnapshotRace",
+      "result": "PASS"
+    },
+    "PT-DB-INBOX-056": {
+      "method": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest#migrationAndExistingAuthenticationRemainCompatible",
+      "result": "PASS"
+    }
+  },
+  "fixture": "Isolated PostgreSQL 18.6/real roles; public synthetic invalid ciphertext30 and independent JDK SHA-256. Isolated admin rollback-only constraint removal tests SQL defense in depth, never deployed data.",
+  "oracle": "015/016 PT: literal 24 routes x 6 reference kinds, 24h/168h boundaries, private helper/minimal column grants/42501, fixed run and UUID scan, unsupported rows protected, all five batch states, 55P03 lock and controlled backup snapshot races, independent frozen V001..009 hashes.",
+  "remaining": "Java full-scan owned inspection/delete composition, Question/notification references, whole-run/oneshot and V006 replacement NOT certified; BUG014 remains open.",
+  "related": [
+    "QA-046",
+    "UIC-006",
+    "SSC-049",
+    "BUG-014",
+    "YKT-012",
+    "BUG-075",
+    "YKT-067",
+    "BUG-076",
+    "YKT-068",
+    "PG-D-121",
+    "BUG-079",
+    "BUG-080",
+    "YKT-070",
+    "YKT-071",
+    "PG-D-124",
+    "BUG-087",
+    "BUG-088",
+    "YKT-078",
+    "YKT-079"
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "c9bb4e5220071aa94dbba0290d7a44a9750bc4dbea20215481a8371492768867"
+    }
+  ],
+  "sqlSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+      "sha256": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0"
+    }
+  ]
+}

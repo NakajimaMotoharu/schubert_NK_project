@@ -1,5 +1,9 @@
 # NK-DAT-001 Inbox検査権限・候補lock実行結果
 
+最新正式判定: PT-WEB-20260909-19/source74cc57f8、2026-09-09 10:26:20 JST完了、全854件PASS、failed/error/skipped0、5 Java moduleの4種coverage100%、静的解析0。本仕様8 PTも全PASS。対応evidence/inspection-sql/manifest.jsonの現行SHA-256は `29e188d58eb6031f4528da161f0a1e472adeb7a93f2222d702bd03b6f124d086`。8collector/15scopeの全hashとtrace負canary、V001～010/Current baseline不変、秘密pattern scanを確認。認証/非認証の共通6classはline139/method14/class6/branch66全missed0。SQL条件は016 matrixに追跡し架空のJaCoCo値を付けない。BUG-087～090/YKT-078～081再試験完了。全run/oneshot/V006置換・Question/通知参照は未完了で、BUG-014/SSC-049継続。
+
+以下は初回・探索・旧正式runの履歴。旧hashは証跡commit d98961c6等の該当履歴を参照し、現行manifestのhashと混同しない。未確定という旧記述は本段落の対象sliceに限って更新済み。
+
 最新回帰PT-WEB-20260909-18/source56935aa0、2026-09-09 09:44:09 JST終了、全838件/全Java coverage100%/静的解析0、SQL候補8件再PASS。現在の `evidence/inspection-sql/manifest.json` SHA-256は `646e043600e7560ab46177b316d6267c0a1bae883e0b0e0b516b99453766dece`。以下のrun15/hashは証跡commit5396be17の初回確定履歴として区別する。V009後の履歴件数は9件、再適用0、V001～008のsourceは不変。
 
 ## 1. 対象・状態

@@ -111,7 +111,7 @@ SQL自体はAES/HMAC検証器ではない。専用processが検証前にこの�
 
 対応PT-DB-INBOX-025～032はSQLの全引数/条件/権限/lock/再実行・正常削除のmatrix。Javaの検査接続は別PTで認証の正常/不整合/故障/並行を検証する。
 
-### 3.6 全候補走査と24応答の限定削除（SSC-049、PG-D-124、V010予定）
+### 3.6 全候補走査と24応答の限定削除（SSC-049、PG-D-124、V010）
 
 V010で`maintenance_next_inbox(uuid,timestamptz,uuid)`と`maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)`を追加し、検査roleだけへEXECUTEする。所有/固定search_path/UTC/SQLSTATE・1行/固定run/cutoff/top-level transaction/hash・SAVEPOINT禁止・SQLだけでは暗号証明にならない制約は3.4/3.5を継承する。V008/V009は認証限定の既存contractとして変更せず維持する。
 
