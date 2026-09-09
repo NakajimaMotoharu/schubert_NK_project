@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260909-43",
-  "targetCommit": "5e00cfd6b07dd6053a0f20e02d14769bf9af0337",
+  "runId": "PT-WEB-20260909-45",
+  "targetCommit": "f8729ce10e63af77872b115bbb25b02e9d7c5e1c",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-09T20:09:49+09:00",
-  "completedAt": "2026-09-09T20:16:45+09:00",
+  "startedAt": "2026-09-09T20:52:07+09:00",
+  "completedAt": "2026-09-09T20:59:10+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -183,31 +183,31 @@
       }
     },
     "batch": {
-      "tests": 37,
+      "tests": 53,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 1477
+          "covered": 1944
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 146
+          "covered": 194
         },
         "LINE": {
           "missed": 0,
-          "covered": 285
+          "covered": 383
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 131
+          "covered": 173
         },
         "METHOD": {
           "missed": 0,
-          "covered": 55
+          "covered": 73
         },
         "CLASS": {
           "missed": 0,
-          "covered": 19
+          "covered": 26
         }
       },
       "spotbugs": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "746e866f2b3356ba7dcc9d1676c4f6e02f95dd904a2cea48fe7e00d44966b879",
+  "rawLogSha256": "8d36ce2fee70412907654a83a0f65b9883db996c3605a41944f564161b778b7f",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_AND_LOG_SERVICE_ONLY",
   "programComplete": false,
@@ -252,9 +252,9 @@
     "PT-BAT-016": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#retentionAndResourceOwnership",
     "PT-BAT-017": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#moduleDependencyBoundary"
   },
-  "sharedModuleOwnership": "Batch module37 PT = NK-BAT-00129 + NK-OPS-0018. Full module coverage includes both; OPS IDs and admission coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+  "sharedModuleOwnership": "Batch module53 PT = NK-BAT-00129 + NK-OPS-00124. Full module coverage includes both; OPS IDs and admission/stop coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "6076bd79ce19f009111ff9d264dc85fa5a2a3a3c89a324aaa36d70ef63a8aeeb",
+  "fullReactorManifestSha256": "eaab2f525046060d5d0dbcd7d6504423c14b335be83dbf9419662e72ecfe35b8",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -269,11 +269,13 @@
     "BUG-112",
     "YKT-098",
     "BUG-014",
-    "YKT-012"
+    "YKT-012",
+    "BUG-145",
+    "YKT-113"
   ],
   "fixture": "Isolated PostgreSQL18 with real Flyway and five denied roles; literal public log rows, fixed UUID/time, explicit parent transactions and public JDBC fault probes. No deployed credentials or data.",
   "oracle": "001/PT-BAT-001..017: independent8 function names/limits and3 reasons; held2+eligible1 gives2/0/2 then1/1/0 thenEND, run cumulative3/1/2; rollback/savepoint/reconnect/lock do not lose or duplicate counts; UTC/JST/NewYork epoch1789603200 and90day microsecond boundary; no parent connection commit/rollback/close/config mutation; all typed-null/row-count/SQL-stage failures reject; dependency allowlist.",
-  "logServiceOracle": "003/PT018..029: held10000 then eligible1 yields three committed chunks and cumulative10001/1/10000; resume initial2/0/2 yields attempt1/1/0; derive initial cumulative by first committed cumulative minus its same-TX chunk; parent reentrant session lock retained, own acquisition released; first/late backup and row locks stop;30min/interrupt/wrap; rollback failure never enables implicit commit; unknown commit/recovery, every JDBC and resource failure, invalid counts/continuity reject before commit; only complete committed/restored/unlocked summary returns0/10.",
+  "logServiceOracle": "003/PT018..029: held10000 then eligible1 yields three committed chunks and cumulative10001/1/10000; resume initial2/0/2 yields attempt1/1/0; derive initial cumulative by first committed cumulative minus its same-TX chunk; parent reentrant session lock retained, own acquisition released; first/late backup and row locks stop;30min/interrupt/wrap; rollback failure never enables implicit commit; unknown commit/recovery, every JDBC and resource failure, invalid counts/continuity reject before commit; only complete committed/restored/unlocked summary returns0/10. BUG145/YKT113: BAT026 crosses real foreign-connection lock contention with result/statement/both close faults, and TIME_LIMIT/INTERRUPTED/BACKUP_GATE with both unlock close faults. All typed failures have zero cause/suppressed after closure; primary reason, interruption and caller connection ownership are preserved; no deletion on lock rejection.",
   "limitations": "No OS flock, actual backup verification, dedicated main, unit, whole-morning orchestrator, or IT/ST certificate. Repository observations require caller commit; LogCleanupService owns chunk transactions but borrows the parent connection.",
   "sourceFiles": [
     {
@@ -286,7 +288,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
-      "sha256": "03d31d5e4fcd010dce905de3318fa113fc72c684c5c3ac79dd40b8e058389723"
+      "sha256": "975ee0ee94aafebb5aff320a3c679c6f2a7c4e8b5f966024fae223f385411d8b"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java",
@@ -295,6 +297,30 @@
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLock.java",
       "sha256": "3372db87aaa89c45885efe5785a71e5670bdff756f3692bf3a0bd2fb7fb89982"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java",
+      "sha256": "8b4a740a515af46718400d17c8d9eb060d39c4aabed4358722ae47e86baaf405"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java",
+      "sha256": "7e95e06d132f569bd9133b5c094a5e8373715135a13b4bcfc4124eea3a5f39e9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+      "sha256": "a1a12c5e601b8b1d2fb76f66765b311c325dff72eaea4579bcc0c85df6519892"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java",
+      "sha256": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "sha256": "a866dab1c6bcd9394632b78f32aabfe75f9a61dc558307bde516c8cf5a5ea92e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java",
+      "sha256": "287990df64ca2c8b4a0aa872497abaeaaf8f9de1dbec59c536203ef3acabe948"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
@@ -330,7 +356,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupServiceTest.java",
-      "sha256": "6b4c3dee0e727df50d7b09481f661d4027c69e9b99549fa67252704868210b4e"
+      "sha256": "7528bc9fd82710f46a7c35f6bd8703ede0b6485ee694ca8680b256f636b07468"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/ServiceJdbcProbe.java",
@@ -339,6 +365,14 @@
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
       "sha256": "8e7ccd054cfe8e3ff98f45c63f68e849713bad95e36b69aa751362700dcac6f3"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java",
+      "sha256": "fe36e1a1ec713318790519b23a2c11f99c0e3ec539cb0ac0deea48b21d5b4526"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSourceTest.java",
+      "sha256": "74429a665f41b82ba5848c29764ad6762c6290b414bd5adeafbc92749b7b6b24"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
@@ -356,11 +390,15 @@
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "7857c5bd2564c288f0188e83698a92672beae6be0ae9562fd3dafe2d712373cb"
+      "sha256": "7871b2c45a2a4d96c0d477203432a2f6ef3fb121729e3e4ec45e9677f7ae6d1f"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "9f22770b39c6f80faa7c947ddba88d6b09d1e86e160aa6b84677d2ec803d1c2a"
+      "sha256": "dc4d9eb10df23ad953895346b56c97fbf0eed0c35de7bb9f39d52195b71bfbc1"
+    },
+    {
+      "path": "logs/BUG-145-compound-close.json",
+      "sha256": "803b68059c3015e3485f28a7aa0ab0e7ccc80c59e272f674743ee0d18c18e77a"
     },
     {
       "path": "logs/PT-WEB-20260909-30-summary.json",
@@ -405,6 +443,10 @@
     {
       "path": "logs/PT-WEB-20260909-43-summary.json",
       "sha256": "166ef7358469ee3fd82bdc4d7248d89a369f300251b4168a0e96bca07378f70a"
+    },
+    {
+      "path": "logs/PT-WEB-20260909-45-summary.json",
+      "sha256": "e591582203ab120f1a73f0f88ec133070a7b4bdefffd7dd1622d94e9f53fb403"
     },
     {
       "path": "output/results.xml",
