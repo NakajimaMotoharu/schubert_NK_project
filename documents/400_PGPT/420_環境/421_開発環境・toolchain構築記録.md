@@ -267,6 +267,8 @@ Native port実機: 本機既存Ubuntu package `libc6:amd64 2.43-2ubuntu2.3`（`d
 
 ## 7. 更新履歴
 
+PG-D-144/SSC-053: `/usr/bin/od --version`はOS既設uutils coreutils0.8.0。`-An -v -tx1 -w64`で全byteをASCII hexへ変換する。新規導入なし。PT-OPS-INBOX-002/003は固定receiptの独立byte vector、NUL全位置、変換失敗を検証する。Linux配備では同option/output契約を再確認し、未確認の代替odを推測合格にしない。systemd-analyzeの構文検証は専用一時unit path/ExecStart=/bin/trueだけを用い、OS service・credentialは起動/配布しない。
+
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | 開始時環境を確認し、rootless OpenJDK 25.0.4とMaven 3.9.12を構築。 |

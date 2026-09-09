@@ -26,9 +26,54 @@ gate = module("set_collector", "018_collect_verified_evidence_set.py")
 batch = module("batch_collector", "020_collect_batch_evidence.py")
 inspection = module("inspection_collector", "016_collect_inbox_inspection_evidence.py")
 database = module("inspector_database_collector", "021_collect_inspector_database_evidence.py")
+launch = module("inspector_launch_collector", "022_collect_inspector_launch_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_launch_inventory_and_nonpassing_cases(self):
+        prefix = "dev.codex.schubert.nk.api.maintenance."
+        groups = [(prefix + "InspectorLaunchConfigurationTest", 221,
+                   ("validConfiguration", "missingUnknownAndArguments", "scalarBoundaries", "versionAndSnapshotContracts")),
+                  (prefix + "InspectorLauncherTest", 225,
+                   ("successWarningAndFailureStatus", "expectedFailuresAndRedaction", "nativeFactoryFailure", "receiptAndOutputFailure",
+                    "nullContracts", "mainAndFatalHandler", "concurrentInvocations", "actualJvmEntry"))]
+        self.assertEqual(groups, list(launch.GROUPS))
+        self.check_launch_inventory(groups, False)
+
+    def test_deployment_inventory_and_nonpassing_cases(self):
+        groups = [("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest", 1,
+                   ("renderedShellCheck", "statusMapping", "malformedReceipts", "argumentsAndPlaceholders",
+                    "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation"))]
+        self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
+        self.check_launch_inventory(groups, True)
+
+    def check_launch_inventory(self, groups, deployment):
+        suites, expected = [], {}
+        prefix = "PT-OPS-INBOX" if deployment else "PT-DB-INBOX"
+        for cls, start, names in groups:
+            suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+            for i, name in enumerate(names, start):
+                ET.SubElement(suite, "testcase", classname=cls, name=name)
+                expected[f"{prefix}-{i:03}"] = cls + "#" + name
+            suites.append(suite)
+        self.assertEqual(expected, launch.validate_reports(suites, deployment))
+        with self.assertRaises(ValueError): launch.validate_reports(suites, not deployment)
+        for index, suite in enumerate(suites):
+            for position in range(len(suite)):
+                wrong = copy.deepcopy(suites); wrong[index].remove(wrong[index][position])
+                with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suites); ET.SubElement(wrong[index][0], tag)
+                with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
+            for key, value in (("tests", "0"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suites); wrong[index].set(key, value)
+                with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
+            for key, value in (("classname", "unknown"), ("name", "unknown"), ("name", suite[1].get("name"))):
+                wrong = copy.deepcopy(suites); wrong[index][0].set(key, value)
+                with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
+        for wrong in ([], suites[:-1], suites + [suites[0]]):
+            with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
+
     def test_application_inventory_and_nonpassing_cases(self):
         prefix = "dev.codex.schubert.nk.api."
         groups = [
@@ -291,7 +336,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application")]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -345,7 +390,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(32, len(check()))
+            self.assertEqual(34, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -355,7 +400,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(32):
+        for failed_at in range(34):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -368,10 +413,10 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(32, len(calls))
+        self.assertEqual(34, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-1][2].endswith("/021_collect_inspector_database_evidence.py"))
-        self.assertEqual("--application", calls[-1][-1])
+        self.assertTrue(calls[-1][2].endswith("/022_collect_inspector_launch_evidence.py"))
+        self.assertEqual("--deployment", calls[-1][-1])
 
     @staticmethod
     def write_scope(root, scope, changes=None):
@@ -384,7 +429,7 @@ class EvidenceSetTest(unittest.TestCase):
             "branch": "dev-foundation", "exitCode": 0,
             "files": [{"path": "results.xml", "sha256": hashlib.sha256(payload).hexdigest()}],
         }
-        if scope.startswith(("004_", "017_")):
+        if scope.startswith(("004_", "017_", "018_")):
             manifest.update({
                 "fullReactorManifest": ("../../../" if scope.startswith("004_") else "../../") + "008_NK-SCN-001/evidence/manifest.json",
                 "fullReactorManifestSha256": hashlib.sha256(

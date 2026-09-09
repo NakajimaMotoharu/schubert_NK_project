@@ -1,0 +1,34 @@
+#!/bin/sh
+# NK-OPS-001; OPS-009; UI212/251; SS341/342/343 6.8/352; SSC-049/PG-D-144.
+# PT-OPS-INBOX-001..005/008; SSC-053/BUG-137. JVM exit0 alone is NOT business success.
+set -eu
+if [ "$#" -ne 0 ]; then
+    exit 70
+fi
+inspector_artifacts='@JAVA_BIN@:@API_JAR@:@LIB_DIR@'
+case "$inspector_artifacts" in
+    *@*) exit 70 ;;
+esac
+if inspector_receipt=$(
+    { if '@JAVA_BIN@' --enable-native-access=ALL-UNNAMED \
+        -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError \
+        -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m \
+        -XX:ReservedCodeCacheSize=128m \
+        -cp '@API_JAR@:@LIB_DIR@/*' \
+        dev.codex.schubert.nk.api.maintenance.InspectorLauncher; then
+        printf '.'
+    else
+        printf '!'
+    fi; } | /usr/bin/od -An -v -tx1 -w64
+); then
+    # Hex preserves NUL and every LF. Only the exact receipt plus JVM-success dot passes.
+    case "$inspector_receipt" in
+        ' 4e 4b 49 4e 53 50 45 43 54 4f 52 31 20 30 0a 2e') exit 0 ;;
+        ' 4e 4b 49 4e 53 50 45 43 54 4f 52 31 20 31 30 0a 2e') exit 10 ;;
+        ' 4e 4b 49 4e 53 50 45 43 54 4f 52 31 20 35 30 0a 2e') exit 50 ;;
+        ' 4e 4b 49 4e 53 50 45 43 54 4f 52 31 20 37 30 0a 2e') exit 70 ;;
+        *) exit 50 ;;
+    esac
+else
+    exit 50
+fi

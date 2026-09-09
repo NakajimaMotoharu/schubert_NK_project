@@ -1,0 +1,47 @@
+# NK-OPS-001; OPS-009; UI212/251; SS341/342/343 6.8/352; SSC-049/PG-D-144.
+# PT-OPS-INBOX-006..008. Parent OS/backup/run gates remain mandatory.
+[Unit]
+Description=Schubert NK private Inbox maintenance inspector
+After=postgresql.service
+Requires=postgresql.service
+Before=artemis.service schubert-nk-api.service schubert-nk-web.service caddy.service
+
+[Service]
+Type=oneshot
+User=schubert-inbox-inspector
+Group=schubert-inbox-inspector
+WorkingDirectory=/opt/schubert-nk/current/api
+ExecStart=/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector
+EnvironmentFile=/etc/schubert-nk/inbox-inspector.env
+EnvironmentFile=/run/schubert-nk/maintenance/inbox-inspector.env
+UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=db-inbox-inspector:/etc/schubert-nk/credentials/db-inbox-inspector
+LoadCredential=api-context-aes-current:/etc/schubert-nk/credentials/api-context-aes-current
+LoadCredential=api-inbox-response-aes-current:/etc/schubert-nk/credentials/api-inbox-response-aes-current
+Restart=no
+SuccessExitStatus=10
+TimeoutStartSec=30min
+TimeoutStopSec=60s
+KillMode=control-group
+SendSIGKILL=no
+MemoryMax=1024M
+LimitNOFILE=65536
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal
