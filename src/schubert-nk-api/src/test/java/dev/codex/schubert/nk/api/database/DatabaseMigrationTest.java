@@ -55,6 +55,9 @@ import org.postgresql.util.PSQLException;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
+  // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
+  private static final List<String> MIGRATION_VERSIONS =
+      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -134,9 +137,9 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("PT-DB-001 V001-V009 migrate, validate and idempotent rerun")
+  @DisplayName("PT-DB-001 V001-V010 migrate, validate and idempotent rerun")
   void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
-    assertEquals(9, firstMigration.migrationsExecuted);
+    assertEquals(MIGRATION_VERSIONS.size(), firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
     assertEquals(0, flyway.migrate().migrationsExecuted);
     List<String> applied =
@@ -145,7 +148,7 @@ final class DatabaseMigrationTest {
             .filter(Objects::nonNull)
             .map(version -> version.getVersion())
             .toList();
-    assertEquals(List.of("001", "002", "003", "004", "005", "006", "007", "008", "009"), applied);
+    assertEquals(MIGRATION_VERSIONS, applied);
     assertEquals(
         0L,
         queryLong(
@@ -1021,10 +1024,10 @@ final class DatabaseMigrationTest {
     try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
       Future<Integer> first = executor.submit(migrate);
       Future<Integer> second = executor.submit(migrate);
-      assertEquals(9, first.get() + second.get());
+      assertEquals(MIGRATION_VERSIONS.size(), first.get() + second.get());
     }
     assertEquals(
-        9L,
+        (long) MIGRATION_VERSIONS.size(),
         queryLong(
             ADMIN,
             parallelUrl,
@@ -1046,7 +1049,7 @@ final class DatabaseMigrationTest {
     try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
       paths.filter(Files::isRegularFile).forEach(resources::add);
     }
-    // QA-046/SSC-049 append-only V009 inventory; secret/byte scan remains unchanged.
+    // QA-046/SSC-049/PG-D-124 approved V010 inventory; secret/byte scan remains unchanged.
     assertEquals(
         java.util.Set.of(
             "migration/V001__schemas_and_extension.sql",
@@ -1058,6 +1061,7 @@ final class DatabaseMigrationTest {
             "migration/V007__username_comparison_key_expansion.sql",
             "migration/V008__auth_inbox_inspection_boundary.sql",
             "migration/V009__conditional_auth_inbox_deletion.sql",
+            "migration/V010__full_inbox_scan_and_restricted_deletion.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

@@ -408,7 +408,7 @@ final class InboxDeletionBoundaryTest {
   void migrationInventoryAndSqlScope() throws Exception {
     try (var c = db.admin()) {
       assertEquals(
-          "9",
+          "10",
           value(
               c,
               "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
