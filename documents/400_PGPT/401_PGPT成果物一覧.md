@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-2026-09-09 最新確定: dev-foundation/sourcef25955f2、正式PT-WEB-20260909-46（21:07:26～21:14:32 JST）、全1103件（Protocol80/Storage50/API634/Web241/Batch57/CHR41）PASS、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのSpotBugs未解決0/NullAway・Enforcer・Spotless PASS。固定/run移植性指摘1件のmethod/ID限定レビューを明示（BUG142/005）、coverage除外なし、CHR runnerのSpotBugsは未設定。12collector・35証跡scopeの同run/source/branch/hash/参照、017の1件・019の15件負canary成功。DB26部品240 PT＋batch2部品29 PT＋OPS6部品44 PT＝34部分成果313件確定。PG-D-149/run環境fileのcanonical生成・全byte照合4 PTを追加、新規BUGなし。BUG143～145/YKT113は正式45で完了し46で回帰。親root実配置/停止実行/実backup/DB引渡し/設定publish/固定run永続化SSC055・全cleanup監査・通常Question writer/replay・Logout RERUN-001は残る。QA045はLogin title差分の未回答でLogoutとは別。BUG-014/UIC-006/SSC-049/052継続、加重見積約4割（35～50%、456）を維持。週間残10%、新しい大規模作業は開始せず、既着手PG-D-150/DB引渡し8 PTだけを続けて中断準備。150は仕様のみで未合格。元dev-web Scenario3file保全・不算入、CHR41はrunner PTで実NK互換gateではない。以下は履歴。
+2026-09-09 最新確定: dev-foundation/source3cac4ede9bffd328adada4078f7207494c0b7e8f、正式PT-WEB-20260909-47（21:30:23～21:37:30 JST）、全1111件（Protocol80/Storage50/API634/Web241/Batch65/CHR41）PASS、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのSpotBugs未解決0/NullAway・Enforcer・Spotless PASS。固定/run移植性指摘1件のmethod/ID限定レビューを明示（BUG142/005）、coverage除外なし、CHR runnerのSpotBugsは未設定。12collector・35証跡scopeの同run/source/branch/hash/参照、017の1件・019の16件負canary成功。DB26部品240 PT＋batch3部品37 PT＋OPS6部品44 PT＝35部分成果321件確定（全1111件の内数）。PG-D-150の同期DBロック引渡し8 PTを追加、BUG146/YKT114の資源取得2箇所修正・既存13資源境界の非該当根拠と全体再試験を確認。親制御/実backup artifact/設定publish/固定run永続化SSC055・全cleanup caller・通常Question writer/replay・Logout RERUN-001は未完了（460参照）。実root/systemd配布等は後続Linux IT/STで別確認し、未実装Productionを後工程へ移して完了にしない。QA045はLogin title差分の未回答でLogoutとは別。BUG-014/UIC-006/SSC-049/052継続、加重見積約4割（35～50%、456）を維持。週間残8%、新規大規模作業なし・中断準備。元dev-web Scenario3file保全・不算入。CHR41はrunner PTで実NK互換gateではない。以下は履歴。
 
 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。
 
@@ -44,6 +44,8 @@
 
 追加管理資料: [459_保守run固定時刻の永続化検討](450_品質/459_保守run固定時刻の永続化検討.md)（SSC-055調査中、固定cutoffの設計残件。未完了）。
 
+再開時の残件整理: [460_基盤残件・再開優先順](450_品質/460_基盤残件・再開優先順.md)。確定部品/不足するProductionとPT/後続Linux IT・STを区別する。新たな完了認定ではない。
+
 本ディレクトリをschubert NK再構築projectの製造・単体テスト（PGPT）工程における文書最正本とする。外部仕様の最正本は`documents/100_RD`、`documents/200_UI`、実装・試験詳細の最正本は`documents/300_SS`であり、本工程の文書・code・test・evidenceはそれらを変更せず具体化する。
 
 開始基準は`main`のSS最終commit `749a777`、Characterization baseline/gate commit `843de94`、CHR-G01～G06全件PASS、QA-001～044解決、UIC-001～004完了、RDF/SSC 0件である。PG開始時精査でQA-045/UIC-005、SSC-001～003、BUG-001/YKT-001を起票した。
@@ -63,10 +65,12 @@
 | [455_再走論点_RERUN-001_Logout期限](450_品質/455_再走論点_RERUN-001_Logout期限.md) | Logout queue削除期限の設計論点・再走条件 | 再走待ち/SSC-045 | 安全性の証明・再試験時 |
 | [456_領域別進捗・利用枠・中断再開管理](450_品質/456_領域別進捗・利用枠・中断再開管理.md) | 暫定加重進捗・基盤完了条件・10%/5%停止・未検証変更の保存 | 運用中 | 領域の検証済成果・残量・中断理由の変更時 |
 | [457_Inbox削除保護の実行主体・承認論点](450_品質/457_Inbox削除保護の実行主体・承認論点.md) | BUG-014の検査主体と権限境界、代替案、承認後のPT条件 | QA-046承認済み/UIC-006・SSC-049対応中 | 回答・設計確定・検証時 |
-| [458_証跡scope横断gate・BUG099_100](450_品質/458_証跡scope横断gate・BUG099_100.md) | 正式26の集約非合格、分類修正・全scope同時点性と再試験 | BUG-099/100・YKT-089再試験中 | collector/必須scope変更時 |
-| [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 未着手 | PG gate完了時 |
-| [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 未着手 | PT gate完了時 |
-| [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 未着手 | 全gate完了時 |
+| [458_証跡scope横断gate・BUG099_100](450_品質/458_証跡scope横断gate・BUG099_100.md) | 正式26の集約非合格、分類修正・全scope同時点性と再試験 | 正式27で再試験完了、現在は運用中 | collector/必須scope変更時 |
+| [459_保守run固定時刻の永続化検討](450_品質/459_保守run固定時刻の永続化検討.md) | reboot前後のrun原本・再attempt/保持の未確定事項 | SSC-055調査中 | 設計再走時 |
+| [460_基盤残件・再開優先順](450_品質/460_基盤残件・再開優先順.md) | 部品/親結線/PGPT・ITSTの境界と次手順 | 残件整理中 | 完了根拠・依存関係の変更時 |
+| [461_PG完了報告](460_完了報告/461_PG完了報告.md) | PG完了判定 | 工程未完了・判定保留 | PG gate完了時 |
+| [462_PT完了報告](460_完了報告/462_PT完了報告.md) | PT完了判定 | 工程未完了・判定保留 | PT gate完了時 |
+| [463_PGPTフェーズ完了報告](460_完了報告/463_PGPTフェーズ完了報告.md) | PGPT総合完了判定 | 工程未完了・判定保留 | 全gate完了時 |
 | [464_IT・ST引継ぎ事項](460_完了報告/464_IT・ST引継ぎ事項.md) | Linux server後続工程への引継ぎ | 作成中 | 未実測値・制約判明時 |
 | [915_障害表](../900_OTHER/910_台帳/915_障害表.md) | 実装済み処理の仕様違反管理 | 運用中 | 障害発見前に起票 |
 | [916_横展開管理台帳](../900_OTHER/910_台帳/916_横展開管理台帳.md) | 共通原因の全対象確認 | 運用中 | 横展開対象判明時 |
