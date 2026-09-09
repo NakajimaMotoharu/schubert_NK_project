@@ -22,6 +22,8 @@ LogCleanupService・LogCleanupSummary・CleanupStoppedException。実PG18/Flyway
 
 ## 2. 判定・証跡
 
+BUG-145/YKT-113（58998395で修正前起票）: PT-BAT-026へ、別実connectionでadvisory71419602を保持したLOCK_BUSYとlock.resultClose/lock.statementClose/両方故障の3組合せを追加する。独立期待値はLOCK_BUSY・固定message・causeなし/suppressed0・DELETE/commit/rollbackなし・借用connection非close・全取得ResultSet/Statement close試行・他connectionのlock保持。既存のTIME_LIMIT/INTERRUPTED/BACKUP_GATE等とunlock失敗の組合せも同じ最外側redactionを確認する。全PTの例外helperはtyped suppressed許容から0へ厳格化し、raw診断の新規経路を合格へ含めない。実装済み故障の反例を先に実行し、修正後の新正式runで再試験する。通常データ保持/削除・時刻oracleは変更しない。
+
 BUG-112の方式確定: 最初のchunk結果と同transaction内の累積から開始件数を差引復元する。PT018～020の独立開始/終了/attempt期待値は不変。2chunk目以降は復元開始値と直前確定累積の一致をcommit前に確認し、PT027/029で不整合を注入する。非公開backup helperの直接実行やgrant追加は行わず、既存cleanupのBACKUP_GATE/LOCK_BUSYをそのまま使う。
 
 実行command/OS/JDK/tool version/branch/source/日時/exit/line-method-class-branch100%/Test ID/BUG/関連file/hashを004・evidenceへ固定する。Sourceからexpectedを生成しない。固定10001行と差分は算術/SQL後条件を使い、同Production methodからexpectedを生成しない。
