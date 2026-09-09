@@ -294,6 +294,8 @@ SSC-049/PG-D-126補足: V011以降のmaintenance_cleanup_message_storesは上記
 
 ## 12. Deadlock・競合防止
 
+SSC-051/PG-D-136（BUG-104）: §11.4 Log chunkは331 §3.9の永続(logged_at,id) cursorでholdも走査済みへ進め、DELETEと累積countを同commitする。limitを満たすholdだけのchunkでも次のeligibleへ進み、target0/END前に完了としない。同run後続の保全行再計上はしない。Log候補だけNOWAITを採り、競合時は全chunk rollback・LOCK_BUSYで進捗不変。SKIP LOCKEDで未取得行より先のcursorを確定する方式は使わない。[PostgreSQL 18 SELECT lock](https://www.postgresql.org/docs/18/sql-select.html)と[PL/pgSQL例外blockのrollback](https://www.postgresql.org/docs/18/plpgsql-control-structures.html)を根拠に実DBで検証する。他cleanupの既定SKIP LOCKED/保持値は不変。
+
 | 処理 | Lock順 |
 |---|---|
 | Login | User → IP attempt → auth sessionsの時刻/ID順 |

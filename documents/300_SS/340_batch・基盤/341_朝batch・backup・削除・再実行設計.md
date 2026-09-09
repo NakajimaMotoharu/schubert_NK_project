@@ -131,6 +131,8 @@ SQL、lock、delete順は332 §11を正とする。Batch roleは基底tableを�
 maintenance functionを呼び出す。各chunk commit後にcountを更新する。
 Process kill後は未削除rowだけ残り、同cutoff再実行で0件/残件を冪等処理する。
 
+SSC-051/PG-D-136のCLEAN_LOG再開: 331 §3.9の永続cursor/累積を使い、同run/cutoffで全holdを含む各chunkを一度だけ数える。target0のENDをDBへ記録するまで完了としない。親のattempt件数は開始時と終了時のmaintenance_read_log_cleanup_progress累積差分、run累積は別記録。row lock競合/SQL異常/commit不明は未完了、再開時はDB状態を読取り直す。CLEAN_BATCH_RUNでlog progressの完了400日・調査保護も別chunkで清掃する。持続cursorのない旧関数を親側の無限retryで補わない。親process実装/OS gateは引き続き必須。
+
 ### 7.3 非公開Inbox検査process（SSC-049/QA-046）
 
 UIC-006の検査をbackup成功後のcleanup内部で実施する。通常API/Web inactive条件、固定run/cutoff、backup gateを維持する。検査中はHTTP/JMS Consumerを生成せず、DB snapshot/参照の検査だけを行う。batchのadvisory lockを別connectionから二重取得して自己deadlockさせないよう、検証・削除chunkのconnection/lock所有者を実装前に明示する。検査前後のlock断絶や他runの結果流用を許可しない。異常行は削除せず固定理由・件数だけを返し、暗号文・平文・鍵をbatchへ渡さない。SQL/権限/oneshot wiringのPT完了まで本stepを完了扱いしない。

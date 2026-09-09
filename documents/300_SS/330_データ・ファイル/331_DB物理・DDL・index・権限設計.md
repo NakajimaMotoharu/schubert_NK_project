@@ -165,6 +165,27 @@ PK名pk_inbox_inspection_progress。CHECK名ck_inbox_inspection_progress_cutoff/
 
 PT073～080はSQLの全状態遷移・制約・権限・atomic rollback/lock・保持400日・migrationを検証する。Java接続は別PT081～088、oneshot/親processは後続gate。完了progressだけで正常API停止・backup実file検証・鍵配布・IT/STが完了したとは判定しない。
 
+### 3.9 Log保全行を含む永続走査（SSC-051、PG-D-136、V014）
+
+BUG-104の先頭hold反復を解消するため、V001～013は変更せず非秘密table log_cleanup_progressを追加する。業務log内容/保持値/hold条件は変更しない。
+
+| 列 | 型・条件 |
+|---|---|
+| run_id | uuid NOT NULL PK pk_log_cleanup_progress |
+| cutoff | timestamptz NOT NULL、finite。初回固定run_started_at |
+| after_logged_at / after_id | timestamptz / bigint、初回ともNULL、以降走査済み最後の(logged_at,id) |
+| target_count / deleted_count / skipped_count | bigint NOT NULL default0、非負、deleted<=target、skipped=target−deleted |
+| completed_at | timestamptz nullable、END時だけfinite値 |
+
+CHECKはck_log_cleanup_progress_cutoff/counts/cursor/position/completedの5個。cursorは日時/IDのNULL同値かつtarget=0と両NULLを同値、positionは非NULL時finite日時・logged_at<cutoff−2160時間・id1..999999999999。完了日時finite。部分index ix_log_cleanup_progress_completed(completed_at,run_id) WHERE completed_at IS NOT NULL。owner nk_owner、PUBLICとdefault継承app権限はREVOKE、backup SELECTだけ維持、通常API/Web/batch/検査roleの基底SELECT/DMLなし。独立inventoryは23table/PK23/CHECK154、FK23/UK30/trigger1不変。
+
+- maintenance_cleanup_logs(uuid,timestamptz,integer)の4出力signatureを維持。入力finite/limit1..10000、既存同run/JSTbackup/advisory gateの後に同run progressを初回INSERTしFOR UPDATE、cutoff不一致55000。既完了は0/0/0/OK。以後(logged_at,id)>cursorの保持期限済行を昇順最大limit選び、hold込みtarget・削除・skipのdeltaと最後のcursorを同transactionで保存する。target0でだけcompleted_atを確定。holdを削除せず一度だけ数え、同run再開時に再集計しない。既完了後の再検査は新runを使う。
+- 永続cursorが未取得行を飛び越えないよう、Log候補だけFOR UPDATE NOWAITとする。row lock競合は当chunkのINSERT/DELETE/checkpointを例外blockでrollbackし0/0/0/LOCK_BUSY、cursor/累積不変、完了扱い禁止。通常削除候補を消すだけの他cleanupのSKIP LOCKEDは変更しない。任意privileged writerによる過去logged_at差替え/過去行追加が並行する状況を全件保証しない。通常API/Web停止・親OS lock条件は必須。
+- maintenance_read_log_cleanup_progress(uuid,timestamptz)は同backup/advisory、finite入力、cutoff一致を確認し、累積target/deleted/skippedとcomplete booleanだけを返す。未開始は0/0/0/false。cursor/log ID/本文/秘密を返さずtable自体のgrantを追加しない。親はattempt前後の累積差分で記録し、commit成否不明時は同runで再読取りする。
+- maintenance_cleanup_log_progress(uuid,timestamptz,integer)はlimit1..1000、既存gate、400日超の完了行だけをcompleted_at/run_id順SKIP LOCKEDで削除する。現在run、未完了、同runにRUNNING/FAILEDの調査対象、期限同値/未来は保持。既存inbox progressと同条件・別bounded呼出し。全8 cleanupのgateをPTで照合する。
+
+3関数はnk_owner/SECURITY DEFINER/固定search_path=pg_catalog,schubert,schubert_web_session/UTC、PUBLIC非許可・batchだけEXECUTE。新2関数も完全signatureでgrant。算術overflow/他SQL異常は伝播し削除と進捗をrollback、NPE/null/未開始を完了へ変換しない。旧functionのhold再計上を期待したPT095/DB011は本修正の承認済み独立oracleへ更新し、旧V013反例はrollback-onlyで別検証する。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`
