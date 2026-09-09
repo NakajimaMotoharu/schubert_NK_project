@@ -282,6 +282,16 @@ SCNのIはNONE、FはSCENARIO_FILE参照と保存Script file ID一致を必須�
 
 DBはUserのid/version、Scenarioのid/game_idだけを読む。NULL/欠落/多重row/不一致/SQL故障は未検証としてfalse、呼出しnullは契約違反。復号・分割bufferをfinally消去する。専用roleへの最小列grant、参照lock、期限/backup/条件付き削除接続は後続append-only SQLとserviceのgateであり、このtrueだけで削除してはならない。PT-DB-INBOX-041～048。
 
+### 12.5 全候補の検査・削除の共通所有service（SSC-049、PG-D-125）
+
+既存の認証限定AuthenticationInboxCleanupを`InboxCleanup`へ改称し、transaction/resource/health/commit/固定非秘密例外処理を複製せず共用する。constructorはfresh connection provider、AuthenticationInboxInspector、NonAuthenticationInboxInspector、既知fingerprint version集合を受け、鍵は全呼出し終了まで不変・生存とする。外部callback/connection/SAVEPOINT/途中commitは禁止のまま。参照検査だけのpublic APIから削除を呼べるようにはしない。
+
+V010の全完了期限済候補を取得し、24 canonical REQ/RSP対応、version001、owner（Loginのみなし）、User更新5種token必須/他はなし、fingerprint形式/既知versionを検査する。未知/未実装route、metadata不整合、snapshot欠落/暗号・参照不整合はPROTECTEDを返し、そのUUIDの次へ進める。auth2応答は12.2、他22は12.4を呼び、trueの同transactionだけV010限定削除を呼ぶ。false/SQL条件不一致を削除成功にしない。最短保持はV010の24h/168h条件を満たすこと。
+
+NULL必須DB列/SQL/health/commit/close故障は12.3どおり非秘密の運用失敗。同run/cutoffで再走し、commit成否不明を無理に成功/未実施と断定しない。返却はcommit/resource終了後のDELETED/PROTECTED/ENDとcursorだけ。owner/token/context/cipher/DTO/SQL値を診断へ出さない。警告件数・全run持続状態・oneshot/朝batch接続は別の後続gate。
+
+旧認証PT033～040は同serviceの回帰として維持する。新PT057～064で全22 query/User route、SCN I/Fと参照lock、24h/168h、未知を含む混在cursor、非認証のSQL/commit故障・100並行を検証する。既存の「非認証layoutへの変造は候補外END」という期待だけを、3.6承認の全候補走査に合わせPROTECTED/保持へ更新する。PROCESSING/未期限は引き続きEND。この内部走査契約変更はRD/UIの外部動作変更ではない。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
