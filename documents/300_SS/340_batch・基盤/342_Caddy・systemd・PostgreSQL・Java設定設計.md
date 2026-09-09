@@ -217,6 +217,7 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 | `schubert_backup` | 30min | 5s | 60s |
 | `schubert_migration` | 30min | 5s | 60s |
 | `schubert_ops_ro` | 10s | 1s | 15s |
+| `schubert_inbox_inspector`（SSC-049） | 30s | 5s | 専用単発transaction、process上限30min。既存provisioningに未設定のidle値を設定済みとしない |
 
 Long-running migrationは個別migrationで`SET LOCAL`し、roleの無制限化をしない。
 
@@ -228,6 +229,7 @@ host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_ba
 host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_backup,schubert_ops_ro  ::1/128       scram-sha-256
 host   schubert_nk  schubert_migration                    127.0.0.1/32  scram-sha-256
 host   schubert_nk  schubert_migration                    ::1/128       scram-sha-256
+host   schubert_nk  schubert_inbox_inspector              127.0.0.1/32  scram-sha-256
 host   all          all                                   0.0.0.0/0     reject
 host   all          all                                   ::/0          reject
 ```

@@ -198,6 +198,18 @@ execute(run)はnull拒否後にprivate AtomicBooleanで1回だけ実行権を取
 
 返却0/10/50は内部run結果であり、mainのroot/datasource close・DB credential読取・親backup実体/OS lock・systemd unitの成功を保証しない。構成不正はmainが70へ分類し、想定外runtime故障は正常化しない。Question/通知7routeは別途参照検査を実装するまで保護、全PG/PTや実NK CHRの完了としない。
 
+### 6.6 検査専用DB credential・接続（SSC-049、PG-D-142）
+
+`db-inbox-inspector`は352 §11.1のUTF-8 passwordとし、独自の暗号envelopeやversion prefixを加えない。fileは1～65536byte、BOMなし・不正UTF-8なし。終端の改行は1個のLFまたはCRLFだけ取り除く（改行なしも可）。残るpasswordは空/NUL/CR/LFを拒否し、それ以外のUnicode・前後spaceはtrim/正規化せず保持する。自動発行時のCSPRNG 32byte以上というcatalog要件はprovisioning側で維持し、parserが文字列からentropyを推定しない。
+
+InspectorDbCredential.consumeは入力byteの排他的所有を引受け、成功/失敗いずれも入力とdecoder一時bufferを消去する。passwordはprivate char[]、copyPasswordは独立copyでcallerが消去、closeはprivate lockで冪等消去、close後copyは拒否。診断は固定redacted値のみ。JDBCが要求するStringやdriver/JDK内部copyを物理消去できるとは主張せず、長寿命field/診断への格納禁止・Propertiesの即時clear・process寿命/heapdump無効化で限定する。
+
+InspectorCredentialLoader.loadDatabasePasswordは固定1file名だけを必須読取する。AES loaderの保持inode/type/owner/ACL/readonly/前後metadata一致・channel/entry/directory close成功条件を共用し、最大65537byte bufferで過長を検知する。§6.2のfile permissionと単一link条件は不変、password用サイズだけ1～65536、AESは54～69のまま。任意filename引数やACL緩和を追加しない。
+
+InspectorDatabaseConnectionsはloaderから受けたmaterialの独立copyだけを所有し、専用role `schubert_inbox_inspector`へfresh JDBC接続を返す（pool/共有connectionなし）。URLはliteral IPv4 loopback `jdbc:postgresql://127.0.0.1:<1..65535>/<lowercase database identifier>`だけ、query/fragment/userinfo/複数host/escapeを拒否。本番値は§5.2の5432/schubert_nk、PTは隔離port/DBを使う。固定接続propertyはuser/password/connectTimeout=3/ApplicationName=schubert-nk-inbox-inspector、loopback SCRAMを使い任意propertyを受けない。接続時だけpassword Stringを作り、Propertiesをfinally clear、元copyをclose時に消去する。
+
+返却前にautoCommit=true/readOnly=false、current_user/session_userが両方専用role、current_databaseが設定DBと一致、回復中でないことを固定SELECTで検証する。違反/SQL故障/検証用資源close故障は接続も閉じて固定SQLExceptionだけを返す（原因/suppressed/credential/URL/SQL値を公開しない）。正常返却connectionはcaller所有、provider closeと競合するopenはprivate lockで直列化、既返却connectionを勝手に閉じない。DB role権限と保持・backupは既存SQL/owned cleanupが別途再検証する。専用process main/OS lock/実backup検査/unit起動の成功をこの接続部品だけで保証しない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
