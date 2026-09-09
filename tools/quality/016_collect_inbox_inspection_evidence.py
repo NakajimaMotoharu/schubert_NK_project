@@ -42,6 +42,7 @@ def main():
     selection.add_argument("--progress-sql", action="store_true")
     selection.add_argument("--progress-service", action="store_true")
     selection.add_argument("--cleanup-safety", action="store_true")
+    selection.add_argument("--run-executor", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety
     run = args.run_id
@@ -75,6 +76,8 @@ def main():
         subject = "InboxCleanup"
     if args.cleanup_safety:
         subject = "CleanupSafetyBoundary"
+    if args.run_executor:
+        subject = "InspectionRunExecutor"
     class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
@@ -138,6 +141,11 @@ def main():
                  "uncertainCommitReloadsDurableCounts", "ownsLocksWithoutSavepoints",
                  "concurrentAttemptsNeverDoubleCount", "runIdentityKeysAndResultsStayPrivate"]
     cases = suite.findall("testcase")
+    if args.run_executor:
+        names = ["emptyAndCompletedRunsSucceed", "protectedRowsEndWithWarning",
+                 "moreThanOneChunkCompletes", "deadlineAndClockBoundaries",
+                 "interruptionRemainsVisible", "storageFailurePreservesLastConfirmedOnly",
+                 "resultAndNullContracts", "failuresDoNotLeakOrBecomeSuccess"]
     if args.cleanup_safety:
         names = ["backupMatrixAndLegacyCounterexample", "backupLocksAndSnapshotRace",
                  "invalidInputsAndTimezone", "rolesInventoryAndImmutableHistory",
@@ -155,6 +163,8 @@ def main():
                            "InspectionStep$Outcome", "InboxMaintenanceException"}
     if args.progress_service:
         coverage_names |= {"InboxCleanup$LoadedProgress", "InspectionProgress"}
+    if args.run_executor:
+        coverage_names |= {"InspectionExecution", "InspectionExecution$Status"}
     expected_classes = {"dev/codex/schubert/nk/api/maintenance/" + name for name in coverage_names}
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
                if c.get("name") in expected_classes]
@@ -190,6 +200,8 @@ def main():
         folder = "inbox-progress-service"
     if args.cleanup_safety:
         folder = "cleanup-safety"
+    if args.run_executor:
+        folder = "inbox-run-executor"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -214,7 +226,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -328,6 +340,13 @@ def main():
                                 "roles": ["schubert_batch"]}
         manifest["sqlSources"] = [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                                   for p in sorted((repo / "src/schubert-nk-api/src/main/resources/db/migration").glob("V01[0-3]__*.sql"))]
+    if args.run_executor:
+        manifest["scopeResult"] = "PASS_BOUNDED_INSPECTION_RUN_EXECUTOR_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-130", "BUG-014", "YKT-012"]
+        manifest["fixture"] = "Real PostgreSQL/restricted role and prior independent JCE Login error; synthetic unverifiable1001 rows; deterministic monotonic nanoTime sequences, public JDBC close hook and actual thread interrupts. No secrets saved."
+        manifest["oracle"] = "027/028: SUCCESS0/WARNING10 only committedEND;30min before/equal/after, clock rollback/natural wrap, interrupt before/after preserving flag;1001-row two chunks, failure inside second chunk confirms1000 while DB holds1001 and same-run resume recovers; record/null contracts and redaction, unexpected clock exceptions propagate."
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")} for cls in classes}
     # Scope success is not the completion certificate for the complete maintenance workflow.
     manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."
     validate_trace(out, manifest, certified)

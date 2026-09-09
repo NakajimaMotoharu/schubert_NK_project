@@ -17,6 +17,7 @@ final class MaintenanceJdbcProbe {
   int commits, closes, rollbacks, saves, deletes, selectedStatements;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeDelete = c -> {};
+  Runnable afterClose = () -> {};
 
   @FunctionalInterface
   interface Hook {
@@ -43,6 +44,7 @@ final class MaintenanceJdbcProbe {
               if (name.equals("close")) {
                 closes++;
                 Object value = invoke(c, m, a);
+                afterClose.run();
                 fail("close");
                 return value;
               }
