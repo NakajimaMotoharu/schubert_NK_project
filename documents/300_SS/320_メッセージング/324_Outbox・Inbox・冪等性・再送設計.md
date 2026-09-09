@@ -113,7 +113,10 @@ response layout/version、owner ID。最大平文1,000,000 byte、最大暗号�
 Replay responseは新しいresponse Message IDとsentAtを持ち、Correlation IDは再送requestのMessage IDへ合わせる。保存済み成功だけresult codeを`0200`とし、確定業務errorは元のerror result/retry/messageを維持する（SSC-013、UI232 §7の0200は成功profile）。
 保存済みbodyをbyte単位でそのまま返して古いheader/correlationを混入させない。
 
+SSC-052/PG-D-140: 新たに実装するQSB/NTC/QDLの成功snapshotは352 §11.2.1のNKREF1内部prefixで参照type/id/operation tokenとwireを同じ暗号認証へ束ねる。DB列ref/tokenを改変して別targetへ付替えた場合、同じ取消/削除日時でも復号後prefix照合で拒否する。既存NKENC1外側/認証/query/User更新/error profileは不変。業務rowからの再構成や同日時の一致だけを認証bindingの代替にしない。参照・UK・Outbox状態等の業務検証は引続き必要で、このcodecだけでは更新3routeの保守削除を許可しない。
+
 ### 6.1 Login replayの凍結・整合検証（SSC-013）
+
 
 成功も失敗も初回688byte LGNRSP01/001を上記snapshotへ保存する。成功はAUTH_SESSION参照を併記、失敗はNONE。成功の発行時username/role/発行日時/初回8h期限はsnapshotを正とし、現在のuser情報やidle延長後のexpires_atから推測しない。Header/全DATA byte/成功semantic、保存Message相関・layout/version・Inbox state/result/refの組合せを検証する。成功snapshotはauth_sessionsの参照UUID/created_message_id、AADのuser/session、復号context/hash、immutable issued_atと初回8h期限に一致必須。不在・不整合・unknown key・復号不能は9000/運用errorとし保存結果を成功推測しない。
 

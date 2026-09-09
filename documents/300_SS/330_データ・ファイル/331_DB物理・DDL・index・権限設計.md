@@ -345,6 +345,8 @@ Index: partial UK `uq_request_inbox_operation(owner_user_id,operation_token) whe
   `USER/QUESTION/JOB/SCENARIO_FILE`はbigint IDだけNNとする排他的CHECKを設ける。SCENARIO_FILEのIDは再生成元`script_files.id`である。
 - Response snapshotは`response_body_encrypted`/`response_key_version`の両方NULLまたは両方NN。Password/context等を含む再構成不可結果はsnapshotを必須とし、平文保存しない。
 
+SSC-052/PG-D-140: 新3更新QSB/NTC/QDLの成功はresponse_body_encryptedへ352 §11.2.1の参照/token付き内部profileを必須保存する。別列result_ref/tokenは復号後に照合する期待値であり、暗号内targetから上書きしない。新列/table/grantや既存migration変更なし。NONEの確定errorと既存認証/query/User更新は従来profile。unbound成功を推測変換するmigrationは行わず保護し、後続のDB検査/writer/replay接続を別途確認する。
+
 ### 7.2 `schubert.mq_outbox`
 
 `id bigint identity PK`、`message_id uuid NN UK`、`correlation_id uuid NN`、`destination varchar(32) NN`、

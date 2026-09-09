@@ -178,6 +178,25 @@ authentication tag 16 bytes
 
 Operation fingerprintのHMACは324 `NKOP1`を正とし、AES keyとHMAC key、Web session/API inbox/Web logのkeyを共用しない。
 
+### 11.2.1 更新対象の暗号認証binding（SSC-052、PG-D-140）
+
+取消/削除成功wireに対象IDが無いため、確定日時だけでresult refを照合してはならない。新たに実装するQSB/NTC/QDLの成功0000/0200 snapshotは、fixed response wireの前に次の内部metadataを連結し、全体を従来のDeflater3→NKENC1/AES-256-GCMへ渡す。外側magic/version1/AAD/nonce/tag/key配布は変更せず、新たなHMAC keyも配布しない。HTTP/JMS電文へこの内部prefixを送信しない。
+
+| 0開始offset | byte長 | 形式 |
+|---:|---:|---|
+| 0 | 6 | ASCII NKREF1 |
+| 6 | 1 | 参照kind: QUESTION=1、JOB=2、他は禁止 |
+| 7 | 8 | unsignedではなく正のbig-endian int64、ID1..999999999999 |
+| 15 | 16 | operation token UUIDのMSB64/LSB64 big-endian |
+| 31 | 4 | 後続wire byte長、big-endian int32 |
+| 35 | wire長 | UI236のfixed response wire、header256を含む |
+
+対応はQSBRSP01/QUESTION/320byte、NTCRSP01/JOB/288byte、QDLRSP01/QUESTION/280byte、version001・ownerありだけ。ResultBoundResponseSnapshotCodecは既存ResponseSnapshotCodecを借用し、encodeで内部prefixとwireをcopy、decodeで復号後の全長と期待prefix35byteをMessageDigest.isEqualで比較した後だけwire copyを返す。prefixはcallerのlock済DB ref/tokenから構成し、暗号内の値を正しい参照として逆採用しない。unknown magic/kind/ID/token/length、legacy unbound body、末尾追加/欠落は拒否。
+
+この部品は固定長header/semanticや実DB参照・業務UKの正しさを単独では保証しない。後続のreplay/保守検査は返却wireを既存構造検査相当と実参照検査へ渡し、全検査後にだけ利用/削除する。入力wireはcaller所有、作業prefix/復号包絡はfinally消去、返却wireもcallerが使用後消去。基礎codec/鍵を本wrapperからcloseしない。null/不適切route/長さは境界契約違反、暗号不正は固定ResponseSnapshotException、raw値を例外/log/toStringへ出さない。
+
+既存認証・照会・User更新snapshotの平文profileとNKENC1 goldenは完全不変。確定errorのNONE/fixed-error profileも変更しない。新3成功にunbound旧bodyを見つけてもtargetを推測して再暗号化せず保護し、運用調査へ回す。未実装更新Programの初回保存とreplay/DB照合への結線は別gate。043/PT169～176で独立binary/JCE vector、3route/全metadata変造/同時刻別target・token、旧形式不変、鍵世代/100並行/所有消去/NULLを確認する。
+
 ### 11.3 Inbox保守検査のcredential境界（SSC-049/QA-046）
 
 UIC-006で承認された非公開検査processだけに、必要なAPI Inbox response/contextのcurrent/previous keyを限定配布する。batch/backup/Webへは配布しない。専用OS identity、外部credential、読取り専用mount/限定DB roleを用い、argv/環境平文/ログ/Gitへ鍵を出さない。unknown key/復号不能/参照不整合は削除許可へ補完しない。保存応答の構造検査はbooleanのみ返し、平文bufferとDATA/record copyを全経路で消去する。DB参照検証・停止/lock条件を別途必須とし、構造検査だけで削除を承認しない。
