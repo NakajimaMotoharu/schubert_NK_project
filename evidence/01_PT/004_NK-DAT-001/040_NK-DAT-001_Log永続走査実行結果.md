@@ -1,6 +1,6 @@
 # NK-DAT-001 Log永続走査 実行結果
 
-最新正式再試験: PT-WEB-20260909-38/sourcedfc17ae2、2026-09-09 18:20:11～18:27:07 JST、dev-foundation、exit0。全体1039件（Protocol80/Storage42/API606/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/log-cleanup-progress/manifest.json、SHA-256 `8b0602c1af69a37ae4e5925c3cccb07423e96fe55c9acbe337ab442947b59312`。全32scope/10collectorの同run/source/branch/hash/参照、017の1件・019の10件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048、外側resource寿命は049/050で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
+最新正式再試験: PT-WEB-20260909-39/source2236df45、2026-09-09 19:02:57～19:09:57 JST、dev-foundation、exit0。全体1059件（Protocol80/Storage42/API626/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/log-cleanup-progress/manifest.json、SHA-256 `f419907351229160508941161eb185dd304d26740d361627c9ab207cf40d0f2b`。全34scope/11collectorの同run/source/branch/hash/参照、017の1件・019の10件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048、外側resource寿命は049/050で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 039/PT153～160、BUG-104/YKT-092、SSC-051/PG-D-136。探索3は2026-09-09 14:11:16 JST終了、52.781秒、dev-foundation/ae5690dd後の未commit実装、exit0。新SQL8＋旧SQL48＋DB15＋Protocol5＋Storage16=92件全成功。NullAway/Enforcer/Spotless PASS・SpotBugs0。SQLは039の条件matrixで評価し、JaCoCoへSQLが含まれるとはしない。正式全体回帰・証跡確定までは未合格。
 
