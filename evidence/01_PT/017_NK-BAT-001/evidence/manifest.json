@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260909-42",
-  "targetCommit": "20af737ddfb1b3dccb1731c19e1132b45fa3be4b",
+  "runId": "PT-WEB-20260909-43",
+  "targetCommit": "5e00cfd6b07dd6053a0f20e02d14769bf9af0337",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-09T19:47:16+09:00",
-  "completedAt": "2026-09-09T19:54:18+09:00",
+  "startedAt": "2026-09-09T20:09:49+09:00",
+  "completedAt": "2026-09-09T20:16:45+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -183,31 +183,31 @@
       }
     },
     "batch": {
-      "tests": 29,
+      "tests": 37,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 987
+          "covered": 1477
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 94
+          "covered": 146
         },
         "LINE": {
           "missed": 0,
-          "covered": 215
+          "covered": 285
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 85
+          "covered": 131
         },
         "METHOD": {
           "missed": 0,
-          "covered": 35
+          "covered": 55
         },
         "CLASS": {
           "missed": 0,
-          "covered": 14
+          "covered": 19
         }
       },
       "spotbugs": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "48f5b6ccd3fdc69888cfde4eef398b5a64e68ee4108d3cde998300343180ed6f",
+  "rawLogSha256": "746e866f2b3356ba7dcc9d1676c4f6e02f95dd904a2cea48fe7e00d44966b879",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_AND_LOG_SERVICE_ONLY",
   "programComplete": false,
@@ -252,8 +252,9 @@
     "PT-BAT-016": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#retentionAndResourceOwnership",
     "PT-BAT-017": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#moduleDependencyBoundary"
   },
+  "sharedModuleOwnership": "Batch module37 PT = NK-BAT-00129 + NK-OPS-0018. Full module coverage includes both; OPS IDs and admission coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "f2f54a720cdd549f87347f2008ea3f0d4bedaa71612efb7e6fdb31fafc6d0c60",
+  "fullReactorManifestSha256": "6076bd79ce19f009111ff9d264dc85fa5a2a3a3c89a324aaa36d70ef63a8aeeb",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -290,6 +291,10 @@
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java",
       "sha256": "9ffdcee6c652d1c07bcd02ef83bcefd49612c5dbbaac0f9f0e5bcce1e867d0a6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLock.java",
+      "sha256": "3372db87aaa89c45885efe5785a71e5670bdff756f3692bf3a0bd2fb7fb89982"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
@@ -332,6 +337,10 @@
       "sha256": "a4675370ea5a02f9acad05b313e494b3647362f005c515157024ec05cebfd4ce"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "sha256": "8e7ccd054cfe8e3ff98f45c63f68e849713bad95e36b69aa751362700dcac6f3"
+    },
+    {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
       "sha256": "cb99b34869bf0a0153aebb328251ad4159975eee72d62ce2ddb4a43a7a0d8017"
     },
@@ -341,17 +350,17 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRepositoryTest.java",
-      "sha256": "882f0ada534a1788926f5d4aa8e952671bb11e2b9fa50b8d86f7d1ceee56eee8"
+      "sha256": "4a3d8338cfb3638b5c23ddc04309fec07c5830d6799f31b9efea637c9bda3f6a"
     }
   ],
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "8b36d8fe6286e6ff9e82caa6da6874bfef8e100acf944d93cd415de74dc6389f"
+      "sha256": "7857c5bd2564c288f0188e83698a92672beae6be0ae9562fd3dafe2d712373cb"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "4a0b0093a27c0b9faaba09ad6a8f651887b162605e61a4e0a53c712c5baa91c0"
+      "sha256": "9f22770b39c6f80faa7c947ddba88d6b09d1e86e160aa6b84677d2ec803d1c2a"
     },
     {
       "path": "logs/PT-WEB-20260909-30-summary.json",
@@ -392,6 +401,10 @@
     {
       "path": "logs/PT-WEB-20260909-42-summary.json",
       "sha256": "0ef987a76c5d1d4d0bdf0b19f3d0aae9bb64df257b1b6cd121ae981a148970e8"
+    },
+    {
+      "path": "logs/PT-WEB-20260909-43-summary.json",
+      "sha256": "166ef7358469ee3fd82bdc4d7248d89a369f300251b4168a0e96bca07378f70a"
     },
     {
       "path": "output/results.xml",
