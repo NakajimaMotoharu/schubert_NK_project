@@ -166,8 +166,6 @@ typeを含むunix modeの完全一致を使い、symlink/FIFO/device/socket、se
 
 Linux UAPI形式はlittle-endian version2の4byte headerと8byte entry（tag u16、perm u16、id u32）。5entry=44byte、名前なしentryのidはFFFFFFFF、tag順は1/2/4/16/32。modeのgroup bitはACL maskであり、GROUP_OBJ権限と混同しない。上記は汎用ACL parserではなくsystemd配布形の厳格allowlist。根拠: [Linux ACL xattr UAPI](https://raw.githubusercontent.com/torvalds/linux/v6.16/include/uapi/linux/posix_acl_xattr.h)、[tag/permission UAPI](https://raw.githubusercontent.com/torvalds/linux/v6.16/include/uapi/linux/posix_acl.h)、[systemd v259 file/directory権限設定](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)。環境259.5実測と保持inode/native読取/close/親gateは別PTで確認するまで未完了とする。
 
-## 7. 環境差分
-
 ### 6.3 保持inodeからのaccess metadata読取（SSC-049、PG-D-133）
 
 storageのInodeSecurityCalls/LinuxInodeSecurityはOwnedTransferDirectory callback内のcanonical `/proc/self/fd/<0..2147483647>`だけを受け、libc getxattrの固定名system.posix_acl_access、statvfsのST_RDONLY、geteuidを読む。API file adapterは同callback内でunix属性・ACL・filesystem flagを取得し、型/owner/permissionを確認してから内容を開く。FD/pathをcallback外へ保持・返却・記録しない。final symlink自体を保持するO_PATHは、readerのunix type検査で先に拒否する。
@@ -177,6 +175,8 @@ ACLはcaller指定上限1～65536byteの単回読取（inspectorは44）。size�
 Java25公開FFMでLinux/glibcのLP64 x86_64/amd64/aarch64 ABIに限定し、必要symbol/OS/archが不明なら起動不可。statvfsは当環境libc6-dev2.43-2ubuntu2.4の/usr/include/x86_64-linux-gnu/bits/statvfs.hと照合した112byte/align8、f_flag offset72、ST_RDONLY=1。実PTは当機x86_64、他archの実動作は後続環境確認事項であり未実測を合格へ加えない。固定binding部分だけ既存PG-D-055同様restricted FFM warningを理由付き限定抑止し、null/他warning/coverageは除外しない。Test用call portはnative戻り値・errnoを決定的に注入し、実LinuxのACL/保持inode/UID/100並行と合わせて検証する。
 
 根拠: [Linux getxattr契約](https://man7.org/linux/man-pages/man2/getxattr.2.html)、[statvfs契約](https://man7.org/linux/man-pages/man3/statvfs.3.html)、[glibc statvfs layout更新](https://sourceware.org/pipermail/glibc-cvs/2023q3/082782.html)、上記の導入済みheader。実credential・DB・service設定は変更せず、公開metadataだけの一時file/setfacl2.3.2をPT fixtureとする。
+
+## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
 |---|---|---|---|

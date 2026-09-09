@@ -44,6 +44,8 @@ def main():
     selection.add_argument("--cleanup-safety", action="store_true")
     selection.add_argument("--run-executor", action="store_true")
     selection.add_argument("--aes-credential", action="store_true")
+    selection.add_argument("--credential-access", action="store_true")
+    selection.add_argument("--inode-security", action="store_true")
     args = parser.parse_args()
     args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only or args.progress_sql or args.cleanup_safety
     run = args.run_id
@@ -57,7 +59,7 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", base["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"],
                    cwd=repo, check=True, stdout=subprocess.DEVNULL)
-    target = repo / "src/schubert-nk-api/target"
+    target = repo / ("src/schubert-nk-storage/target" if args.inode_security else "src/schubert-nk-api/target")
     subject = "AuthenticationInboxInspector" if args.authentication else "InboxResponseInspector"
     if args.sql:
         subject = "InboxInspectionBoundary"
@@ -81,7 +83,12 @@ def main():
         subject = "InspectionRunExecutor"
     if args.aes_credential:
         subject = "InspectorAesCredential"
-    class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
+    if args.credential_access:
+        subject = "InspectorCredentialAccess"
+    if args.inode_security:
+        subject = "LinuxInodeSecurity"
+    package = "dev.codex.schubert.nk.storage." if args.inode_security else "dev.codex.schubert.nk.api.maintenance."
+    class_name = package + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
     if args.full_cleanup:
@@ -159,6 +166,14 @@ def main():
                  "versionAndLineBoundaries", "base64AndKeySize",
                  "consumedInputAndCopiedKeysDoNotAlias", "closeIsIdempotentAndRedacted",
                  "concurrentCopiesAndCloseStayConsistent", "nullAndInvalidInputsNeverEscape"]
+    if args.credential_access:
+        names = ["rootAclFileAndDirectory", "ownedReadonlyFallback", "inodeTypeAndMode",
+                 "linkSizeAndUidBounds", "everyAclBitAndShape", "nullAndInputOwnership",
+                 "concurrentPoliciesDoNotCross", "errorsAreFixedAndNonMutating"]
+    if args.inode_security:
+        names = ["actualAclAndUid", "filesystemFlagsAndFailures", "aclReturnAndErrnoBoundaries",
+                 "canonicalCapabilityAndBounds", "platformAndSymbolAdmission",
+                 "heldInodeSurvivesReplacement", "concurrentReadsStayIndependent", "interfacesAndRedaction"]
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or {c.get("name") for c in cases} != set(names)
@@ -173,7 +188,7 @@ def main():
         coverage_names |= {"InboxCleanup$LoadedProgress", "InspectionProgress"}
     if args.run_executor:
         coverage_names |= {"InspectionExecution", "InspectionExecution$Status"}
-    expected_classes = {"dev/codex/schubert/nk/api/maintenance/" + name for name in coverage_names}
+    expected_classes = {package.replace(".", "/") + name for name in coverage_names}
     classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
                if c.get("name") in expected_classes]
     if not args.sql and {c.get("name") for c in classes} != expected_classes:
@@ -212,6 +227,10 @@ def main():
         folder = "inbox-run-executor"
     if args.aes_credential:
         folder = "inbox-aes-credential"
+    if args.credential_access:
+        folder = "credential-access"
+    if args.inode_security:
+        folder = "inode-security"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -236,7 +255,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 121 if args.inode_security else 113 if args.credential_access else 105 if args.aes_credential else 97 if args.run_executor else 89 if args.cleanup_safety else 81 if args.progress_service else 73 if args.progress_sql else 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -365,6 +384,19 @@ def main():
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")} for cls in classes}
     # Scope success is not the completion certificate for the complete maintenance workflow.
+    if args.credential_access:
+        manifest["scopeResult"] = "PASS_RUNTIME_CREDENTIAL_ACCESS_POLICY_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-132"]
+        manifest["fixture"] = "Public numeric UID/mode/link/size/readonly metadata and independently handwritten44-byte Linux UAPI ACL golden; no filesystem or key."
+        manifest["oracle"] = "031/032: root plus exact dedicated UID ACL or dedicated owner plus readonly filesystem and empty ACL; exact inode type/mode, link/size/UID boundaries;352 bit mutations per file/directory ACL, extra zero-permission principals, null/alias/100 concurrent policies, fixed errors. Attribute provenance and real file admission remain separate."
+    if args.inode_security:
+        manifest["scopeResult"] = "PASS_HELD_INODE_NATIVE_ACCESS_METADATA_ONLY"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-133", "BUG-097", "YKT-088"]
+        manifest["fixture"] = "Public temporary byte files, installed setfacl2.3.2, independent Linux UAPI golden, real Linux/glibc FFM and task-local native-call/errno probes; no secret or daemon changes."
+        manifest["oracle"] = "033/034: literal44-byte ACL, empty non-retrieval is not authorization, real ERANGE/inode replacement/UID; fixed path and buffer boundaries, native errno and size failures, statvfs112-byte/flag72/ST_RDONLY1 probes plus real FileStore comparison, platform/symbol/null/unsigned UID contracts,100 concurrent owned handles. Actual runtime is x86_64; AArch64 runtime not certified."
+    if args.credential_access or args.inode_security:
+        manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")} for cls in classes}
     manifest["remaining"] = "Mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify 24-route inspectors, V011 bypass removal and V012/Java durable progress; SQL/Java alone do not certify process/backup-file/OS-lock/key wiring."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
