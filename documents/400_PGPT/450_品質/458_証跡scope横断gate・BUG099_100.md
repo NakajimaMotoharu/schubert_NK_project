@@ -1,6 +1,6 @@
 # 証跡scope横断gate・BUG-099/100
 
-最新追補・正式39: PT-WEB-20260909-39/source2236df45、19:02:57～19:09:57 JST、全1059件/6 Java moduleの4coverage100%/Production静的解析PASS。018全34scope・11collector/同run/source/branch/hash/参照PASS。017の1件と019の12件（新20method、全34失敗段/136異常bindingを含む）成功。inspector-launch12 PTと018 OPS8 PT/50公開tool traceを追加。Configuration/Invalid/Launcher合計class3/method14/line59/branch34各missed0、shell全判定とunit4profileは別matrixで証跡化。BUG136～137/YKT107/SSC053完了。親OS/実backup/root設定publish・次BUG138/SSC054は未完了。以下は履歴。
+最新追補・正式40: PT-WEB-20260909-40/source2dfbaaf5、19:22:08～19:29:08 JST、全1067件/6 Java module4coverage100%/Production静的解析PASS。018全35scope・12collector/同run/source/branch/hash/参照PASS。017の1件と019の13件（新backup8method、全35失敗段/140異常binding）成功。backup-rerunは053/054へ追跡。V017のSQL predicate網羅をJava coverageと混同しない。BUG138～139/YKT108～109/SSC054完了。次Linux flock8 PT/親OS/実backup/設定publishは未完了。以下は履歴。
 
 ## 1. 正式26の非合格記録（修正前）
 

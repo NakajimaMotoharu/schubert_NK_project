@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続進捗SQL実行結果
 
-最新正式再試験: PT-WEB-20260909-39/source2236df45、2026-09-09 19:02:57～19:09:57 JST、dev-foundation、exit0。全体1059件（Protocol80/Storage42/API626/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/inbox-progress-sql/manifest.json、SHA-256 `bd87814461544489f454ed3e255c6e7659dcad6a1df9688ebfb38410e7e22bbc`。全34scope/11collectorの同run/source/branch/hash/参照、017の1件・019の10件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048、外側resource寿命は049/050で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
+最新正式再試験: PT-WEB-20260909-40/source2dfbaaf5、2026-09-09 19:22:08～19:29:08 JST、dev-foundation、exit0。全体1067件（Protocol80/Storage42/API634/Web241/Batch29/CHR41）、6 Java moduleのline/method/class/branch100%、Production5 moduleの静的解析PASS。対象Test ID・個別結果・coverageはevidence/inbox-progress-sql/manifest.json、SHA-256 `937aa46067984b835ede7ad3cf41301ef9e88dd186784b3d18d78e3b2cf8d4fe`。全35scope/12collectorの同run/source/branch/hash/参照、017の1件・019の10件負canary成功。Current baseline不変、秘密pattern scan0hit。更新3参照は045/046、DB credential/接続は047/048、外側resource寿命は049/050で合格、通常writer/replay・main/oneshot・親OS/実backup/実NK CHRは未完了。以下は個別試験・過去の探索履歴（旧件数/hashを現在値に用いない）。
 
 ## 1. 判定
 

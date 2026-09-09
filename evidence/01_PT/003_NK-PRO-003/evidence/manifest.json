@@ -1,10 +1,10 @@
 {
-  "runId": "PT-WEB-20260909-39",
+  "runId": "PT-WEB-20260909-40",
   "programId": "NK-PRO-003",
-  "targetCommit": "2236df4511f0fd92ede100d99a39bfcb318c2670",
+  "targetCommit": "2dfbaaf533012c4720d1626241ec6243b74d7fcd",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-09T19:02:57+09:00",
-  "completedAt": "2026-09-09T19:09:57+09:00",
+  "startedAt": "2026-09-09T19:22:08+09:00",
+  "completedAt": "2026-09-09T19:29:09+09:00",
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
     "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
@@ -19,7 +19,7 @@
   "result": "PASS_PROGRAM_COMPLETE",
   "tests": {
     "program": 17,
-    "reactor": 1059
+    "reactor": 1067
   },
   "methods": [
     "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
@@ -91,7 +91,7 @@
   "expected": "Independent JCA 32-byte digest; valid record accepted; each of 32 digest-byte mutations rejected. Compiled verification invokes MessageDigest.isEqual, with no String.equals callsite. Independent 17-digit timestamp boundaries reject expanded/signed years and unrepresentable instants before Header or required/optional DATA encoding; valid boundary and parse vectors are preserved.",
   "actual": "PASS",
   "bytecodeSha256": "b0959724c410655cee66ab5e439b5d63972aad30ab5376dfd128455e7b5011d8",
-  "rawLogSha256": "53445fb9a1aaeacfcd23d75ca9f6305f5a1cbf5ab015f61be8147bd2b6dd2e42",
+  "rawLogSha256": "9e66f74d6fe910796d28d8388ee7e7d5dce85e0ae050252cb68e3b3f11223fc1",
   "redaction": "JUnit names/counters only, no properties/stdout/stderr; public synthetic bytes, no secrets or master content.",
   "scope": "NK-PRO-003 codec/timestamp/descriptor only; Scenario application/file lifecycle/HTTP/IT/ST remain incomplete.",
   "files": [
@@ -101,7 +101,7 @@
     },
     {
       "path": "coverage/jacoco.xml",
-      "sha256": "dfb8d525761a3b9f6861ae47ae8b831aada6e7e0f63e7e45e4be01d1641db7e9"
+      "sha256": "1605542717038f09437001da8c645452fe5b85d21699f8231bb7bf604cb9be7a"
     },
     {
       "path": "logs/BUG-037-YKT-033.md",
@@ -848,24 +848,32 @@
       "sha256": "787f771beaa87a007b2c19f630b4b00c7704a636f864f58a437c812918cee282"
     },
     {
+      "path": "logs/PT-WEB-20260909-39-manifest.json",
+      "sha256": "7ced9ba986df8c525abc5919f96d2e03f3f02eb79603f7ae0e3ae117afda93f8"
+    },
+    {
       "path": "logs/PT-WEB-20260909-39-summary.json",
       "sha256": "26b6f8d54d7999f49a90a7a8dd1822727d013772aea266f4f0657039ccaa8082"
     },
     {
+      "path": "logs/PT-WEB-20260909-40-summary.json",
+      "sha256": "b27b9eee82dc798de8ec9214765332022a207214b82383c7deea6c09121d7ab5"
+    },
+    {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
-      "sha256": "464439f9991a645a6f89d0cd7485f40919af4bb4c87a5bfd67b5cf8a118917b3"
+      "sha256": "51ca3fe8d854eefcb2eb06bbb9ec32066325d20b559ceffff7c8edf3134f1fe0"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
-      "sha256": "502fd979f801a3d2b02e49f8a39d7646b8531d3d9e2f555d4bed70a606e77919"
+      "sha256": "136785b412ea4acfe003aa46b49ead1e77c3fad6f0909a18c7dd778df8466cd2"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
-      "sha256": "bbce8f0328773698329c98f6b494816462d39f24cca89d662f78fdf52526f864"
+      "sha256": "f8a5ed388b5e96793a6b602ea4ab39b8d8d56d6ac1c0e61db3d8407025d19f9a"
     },
     {
       "path": "output/spotbugs.xml",
-      "sha256": "2618188e13639dafdd40b196b7adcfa34ce1bc9089030741e783f1a25b2b39b6"
+      "sha256": "2c6510f9bb6664720ef63bf009f9d4d0ab22cb3cd36c733e53c08c643a1f7820"
     }
   ]
 }

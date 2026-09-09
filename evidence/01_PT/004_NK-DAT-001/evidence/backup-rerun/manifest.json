@@ -1,0 +1,113 @@
+{
+  "runId": "PT-WEB-20260909-40",
+  "targetCommit": "2dfbaaf533012c4720d1626241ec6243b74d7fcd",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-09T19:22:08+09:00",
+  "completedAt": "2026-09-09T19:29:09+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "9e66f74d6fe910796d28d8388ee7e7d5dce85e0ae050252cb68e3b3f11223fc1",
+  "programId": "NK-DAT-001",
+  "scopeResult": "PASS_BACKUP_HISTORY_CONSTRAINT_ONLY",
+  "programComplete": false,
+  "testIdMethods": {
+    "PT-DB-INBOX-233": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#sameDayBackupReruns",
+    "PT-DB-INBOX-234": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#ordinarySuccessStillUnique",
+    "PT-DB-INBOX-235": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#attemptAndDateBoundaries",
+    "PT-DB-INBOX-236": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#failureAndLatestSuccessHistory",
+    "PT-DB-INBOX-237": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#transactionRollbackAndMigration",
+    "PT-DB-INBOX-238": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#concurrentSuccessAndAttemptConflicts",
+    "PT-DB-INBOX-239": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#cleanupGatesWithRepeatedBackups",
+    "PT-DB-INBOX-240": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest#catalogAndPrivileges"
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "javaCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 33408
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 2754
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 7189
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 2495
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1073
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 231
+    }
+  },
+  "staticAnalysis": {
+    "tool": "SpotBugs 4.10.4.0",
+    "violations": 0,
+    "errors": 0
+  },
+  "sqlCoverage": {
+    "basis": "053/PT233..240 independent SQL predicate/constraint matrix, not JaCoCo",
+    "cases": [
+      "both backup steps / other steps / lookalikes",
+      "SUCCESS / all4 other statuses / NULL / unknown",
+      "attempt1/99/0/100/duplicate and another date",
+      "old SUCCESS history retained / later failure",
+      "V004 counterexample23505 / V017 success / rollback / Flyway validate",
+      "16 independent attempts / duplicate-attempt and ordinary-success races",
+      "all8 cleanup gates and private Inbox helper still reject absent/other-run/unfinished backups"
+    ]
+  },
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "5bf54aa70ad4e01eafc570202447c70ac19ee8c670396538b3449af405777dc6",
+  "related": [
+    "SSC-054",
+    "PG-D-145",
+    "BUG-138",
+    "BUG-139",
+    "YKT-108",
+    "YKT-109",
+    "BUG-014",
+    "YKT-012"
+  ],
+  "fixture": "Isolated PostgreSQL18.6 with production Flyway; public UUID/date/status/counts only. No deployed DB or dump.",
+  "oracle": "UI251 section11 permits another successful backup while retaining the prior success. Only BACKUP_DB/CONFIG are excepted from the day/step success unique index. Attempt1..99/day-step-attempt uniqueness, ordinary success uniqueness, grant/ownership, rollback and same-run/day/finished2step backup gates remain unchanged.",
+  "limitations": "No parent BatchRunRepository, fixed-run persistence, real backup generation, latest directory/manifest/hash verification, OS flock/inactive gate, actual NK CHR or IT/ST is certified.",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql",
+      "sha256": "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java",
+      "sha256": "9773146a112af64decdded93df29b7b8a5644b5914a7caa8a85bef4363188239"
+    }
+  ],
+  "files": [
+    {
+      "path": "results.xml",
+      "sha256": "921a7b652f1efd96dfb842e011d8576b0fc33928cf64b1aada0b596173efe661"
+    }
+  ]
+}
