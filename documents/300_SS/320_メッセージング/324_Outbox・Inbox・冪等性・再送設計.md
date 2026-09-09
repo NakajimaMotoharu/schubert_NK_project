@@ -272,7 +272,7 @@ Loginは6.1の`LoginReplayService.restore`、Logoutは6.2の`LogoutReplayService
 
 ### 12.4 検索・Scenario・media・User保存結果の参照検査（SSC-049、PG-D-123）
 
-`NonAuthenticationInboxInspector`はowner付きのGAM/SPK/RTE/SCF/SRC/SCN、AUD/ANM/ANL/VID/MCT/MCS/MTR/MED、USR/UDT/LGS、UCR/UST/URL/UPW/ULKのRSP01計22 layoutを扱う。12.1構造検査と明示transactionを前提にbooleanだけを返し、通常認証、role再判定、更新、file生成、送信、transaction終了を行わない。Question/通知7応答はこの部品の対象外として保護する。
+`NonAuthenticationInboxInspector`はowner付きのGAM/SPK/RTE/SCF/SRC/SCN、AUD/ANM/ANL/VID/MCT/MCS/MTR/MED、USR/UDT/LGS、UCR/UST/URL/UPW/ULKのRSP01計22 layoutを扱う。12.1構造検査と明示transactionを前提にbooleanだけを返し、通常認証、role再判定、更新、file生成、送信、transaction終了を行わない。Question/通知7応答は初期22種の対象外であり、照会4種の追加は12.8に従う。更新3種は未検証のまま保護する。
 
 保存可能codeは既存の6章replay契約と同一。0000は全22、0200はULKだけ。9001はUDT以外、0104はUDT/SCN/AUD/VID/MED/UST/URL/UPW/ULK、0105はUser更新5種、0100はUCR/UPWだけ。その他のcodeは正常な固定長形式でも保持する。errorはNONE参照を必須とする。
 
@@ -314,7 +314,20 @@ InboxMaintenanceExceptionはSTORAGE_FAILUREへ射影し、自動SQL retryしな�
 
 PT097～104は実DB/既存独立wire fixtureと注入単調clock・thread interruptで、空/既完了・保護あり・1,000件越え・時間前/一致/超過/自然wrap・DB故障/最後の確認点・同run再開・例外/redaction/record null契約・全Java4種100%を確認する。時間待ちsleep、reflection、productionからexpected生成は禁止。
 
+### 12.8 質問・通知の照会snapshot検査（SSC-049、PG-D-139）
+
+12.4の初期22種へNTSRSP01/NTDRSP01/QSSRSP01/QSDRSP01の4照会を追加し、非認証26種・認証を含む28 canonical routeとする。UI236のpage50/最大50件、NTS record624/QSS record672、NTD data8896/QSD data8352、全field・状態・日時・削除済み条件を12.1の固定長/typed semanticで検証する。owner付きAAD・version001、明示transaction、NONE参照を必須とし、構造が正しくても型付き参照付きは保護する。
+
+保存許可codeはNTS/QSSが0000/9001、NTD/QSDが0000/0104だけ。0200は再送時に構築するheaderであり初回照会snapshotの保存許可にはしない。0100/0102/0103/0105/0107/9000等の未確定・未対応codeは保護。errorはUI232/323の数値zero・文字space・record0 profileを必須とする。
+
+6章の参照/list/detailの凍結snapshot契約に従い、現在のquestions/notifications/answersの有無や本文、現在のowner role/statusを過去の照会結果へ再比較しない。ADMIN照会の他利用者Questionを現在ownerと同一に強制しない。通常認証・再送・body再生成・DB参照権限の追加なし。保存wire自体のowner AAD/相関・schema意味検査は省略しない。
+
+V015の4 canonical REQ01/RSP01 routeを既存owned InboxCleanupへ追加し、tokenなし・ownerあり・最短24時間・strict expires<cutoff・同transaction ID/hash・固定backup/lockという12.3/12.5の保護を維持する。QSB/NTC/QDL更新3応答は本追加の対象外でPROTECTED、業務UK/result ref照合完了まで削除許可しない。
+
+004の041/042・PT-DB-INBOX-161～168で独立byte offset golden/JCE、4route×保存code、page0/1/50、状態/本文/null/未知/誤owner/誤ref、24h±1μs、backup/lock、rollback/commit不明の再開、100並行、V001～014不変と全既存route回帰を確認する。照会検査の成功を質問業務実装・本番oneshot・工程全体完了には算入しない。
+
 ## 13. Metric・alert
+
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
 - API/Web outbox status count、oldest pending、attempt histogram、send/duplicate count。

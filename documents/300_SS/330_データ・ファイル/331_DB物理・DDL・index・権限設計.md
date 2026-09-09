@@ -133,6 +133,12 @@ V010で`maintenance_next_inbox(uuid,timestamptz,uuid)`と`maintenance_delete_inb
 
 PT049～056で実SQL全引数/分岐/各24route/token/owner/ref/期限境界、最小列権限/禁止42501、参照とbackup/advisory競合、rollback/同run再走、未知候補保持・PROCESSING除外を検証する。migration inventory期待値は承認された追加に合わせ10へ更新し、旧1～9のhashを保全する。SQL matrixをJava coverageと偽らない。Java全候補の原子的検査接続・oneshot・V006置換は後続gateでありV010だけでBUG-014を閉じない。
 
+### 3.10 照会4routeの条件付き削除追加（SSC-049、PG-D-139、V015）
+
+V001～014を不変としmaintenance_delete_inboxの既存signature/owner/SECURITY DEFINER/search_path/UTC/EXECUTE権限を維持してNTSREQ01/NTDREQ01/QSSREQ01/QSDREQ01だけ追加する。合計28 route。4種はowner必須・operation_tokenなし・REQ/RSP両version001・NONE参照のみ、最短24時間・expires<cutoff。既存認証2/更新5の168時間と参照条件は不変。任意table/SQL引数、新table/列/role/grantなし。
+
+Javaの同transaction内snapshot検査はSS324 §12.8を正とし、SQLだけで暗号完全性を主張しない。未検証QSB/NTC/QDL、誤route/version/owner/token/ref/hash/transaction、未backup/lockは削除不可。既存V010の全引数/WHERE/SQLSTATE回帰に加え041/PT161～168で4種のactual deleted/protected/ENDと独立時刻/role/rollback後条件を確認する。
+
 ### 3.7 通常batchからのInbox削除迂回を廃止（SSC-049、PG-D-126、V011）
 
 QA-046承認済みの実行主体分離をV011で具体化する。V001～010は不変とし、既存signatureのmaintenance_cleanup_message_stores(uuid,timestamptz,integer)をOutbox専用に置換する。schubert_batchのEXECUTEは維持するが、本関数はrequest_inboxを読み書きせず、全state/layout/暗号/参照のInboxをそのまま残す。Inbox件数をOutbox chunk件数へ合算しない。検査processの未起動/失敗を本関数のOKで代替せず、341の親processが必須の検査stepを別途実行・確認する。
