@@ -314,7 +314,7 @@ final class InboxInspectionBoundaryTest {
   @Test
   void appendOnlyMigrationAndUnverifiedCiphertextRemainDistinct() throws Exception {
     assertEquals(
-        "16",
+        "17",
         scalar(
             "pgpt_admin",
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));

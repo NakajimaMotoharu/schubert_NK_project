@@ -27,9 +27,33 @@ batch = module("batch_collector", "020_collect_batch_evidence.py")
 inspection = module("inspection_collector", "016_collect_inbox_inspection_evidence.py")
 database = module("inspector_database_collector", "021_collect_inspector_database_evidence.py")
 launch = module("inspector_launch_collector", "022_collect_inspector_launch_evidence.py")
+backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_backup_rerun_inventory_and_nonpassing_cases(self):
+        cls = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
+        names = ("sameDayBackupReruns", "ordinarySuccessStillUnique", "attemptAndDateBoundaries",
+                 "failureAndLatestSuccessHistory", "transactionRollbackAndMigration",
+                 "concurrentSuccessAndAttemptConflicts", "cleanupGatesWithRepeatedBackups", "catalogAndPrivileges")
+        self.assertEqual(cls, backup.CLASS)
+        self.assertEqual(names, backup.METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-DB-INBOX-{i:03}": cls + "#" + name for i, name in enumerate(names, 233)}, backup.validate_suite(suite))
+        for position in range(8):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): backup.validate_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): backup.validate_suite(wrong)
+        for key, value in (("tests", "7"), ("name", "other"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): backup.validate_suite(wrong)
+        for key, value in (("name", "other"), ("name", names[1]), ("classname", "other")):
+            wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+            with self.assertRaises(ValueError): backup.validate_suite(wrong)
+
     def test_launch_inventory_and_nonpassing_cases(self):
         prefix = "dev.codex.schubert.nk.api.maintenance."
         groups = [(prefix + "InspectorLaunchConfigurationTest", 221,
@@ -336,7 +360,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence"]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -390,7 +414,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(34, len(check()))
+            self.assertEqual(35, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -400,7 +424,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(34):
+        for failed_at in range(35):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -413,10 +437,10 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(34, len(calls))
+        self.assertEqual(35, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-1][2].endswith("/022_collect_inspector_launch_evidence.py"))
-        self.assertEqual("--deployment", calls[-1][-1])
+        self.assertTrue(calls[-1][2].endswith("/023_collect_backup_rerun_evidence.py"))
+        self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod
     def write_scope(root, scope, changes=None):

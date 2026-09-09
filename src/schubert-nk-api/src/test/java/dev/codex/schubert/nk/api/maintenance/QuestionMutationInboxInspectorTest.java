@@ -957,7 +957,7 @@ final class QuestionMutationInboxInspectorTest {
   @Test
   void appendOnlyInventory() throws Exception {
     assertEquals(
-        "16",
+        "17",
         scalar(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     assertEquals(

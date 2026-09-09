@@ -376,7 +376,7 @@ final class OutboxCleanupBoundaryTest {
   @Test
   void migrationAndLegacyOraclesRemainExplicit() throws Exception {
     assertEquals(
-        "16",
+        "17",
         scalar(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

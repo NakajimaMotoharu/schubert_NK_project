@@ -27,7 +27,7 @@ final class InboxInspectionProgressBoundaryTest {
   private static final List<String> VERSIONS =
       List.of(
           "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
-          "014", "015", "016");
+          "014", "015", "016", "017");
 
   @BeforeAll
   static void start() throws Exception {

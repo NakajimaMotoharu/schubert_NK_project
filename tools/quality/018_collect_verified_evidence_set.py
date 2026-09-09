@@ -38,7 +38,8 @@ SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
     "004_NK-DAT-001/evidence/" + p for _, p in NESTED) + (
         "004_NK-DAT-001/evidence/inspector-database",
         "004_NK-DAT-001/evidence/inspector-application",
-        "004_NK-DAT-001/evidence/inspector-launch", "018_NK-OPS-001/evidence",)
+        "004_NK-DAT-001/evidence/inspector-launch", "018_NK-OPS-001/evidence",
+        "004_NK-DAT-001/evidence/backup-rerun",)
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -105,6 +106,7 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/021_collect_inspector_database_evidence.py"), run, "--application"])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/022_collect_inspector_launch_evidence.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/022_collect_inspector_launch_evidence.py"), run, "--deployment"])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/023_collect_backup_rerun_evidence.py"), run])
     for command in commands:
         execute(command, cwd=repo, check=True)
 
