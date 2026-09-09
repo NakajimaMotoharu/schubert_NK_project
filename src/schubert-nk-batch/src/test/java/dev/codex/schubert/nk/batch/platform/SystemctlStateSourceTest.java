@@ -1,0 +1,338 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Test;
+
+/** NK-OPS-001/PT-OPS-STOP-009..016; SS341/343; real readonly tool and fault-controlled Process. */
+final class SystemctlStateSourceTest {
+  @Test
+  void fixedCommandAndSuccess() {
+    for (var unit : ApplicationUnit.values()) {
+      var child = new Child("public byte vector".getBytes(StandardCharsets.US_ASCII));
+      var source =
+          new SystemctlStateSource(
+              command -> {
+                assertEquals(
+                    List.of(
+                        "/usr/bin/systemctl",
+                        "--system",
+                        "--no-pager",
+                        "--no-ask-password",
+                        "show",
+                        "--property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID",
+                        unit == ApplicationUnit.API
+                            ? "schubert-nk-api.service"
+                            : "schubert-nk-web.service"),
+                    command);
+                return child;
+              });
+      assertArrayEquals(
+          "public byte vector".getBytes(StandardCharsets.US_ASCII), source.read(unit));
+      closed(child);
+      assertEquals(0, child.destroyed);
+      assertEquals(1, child.output.reads);
+    }
+  }
+
+  @Test
+  void commandFailure() {
+    failed(
+        StopGateFailure.COMMAND_FAILURE,
+        () ->
+            new SystemctlStateSource(
+                    command -> {
+                      throw new IOException("SECRET_CANARY");
+                    })
+                .read(ApplicationUnit.API));
+    for (int code : List.of(1, 20, 50, 255, -1)) {
+      var child = new Child(new byte[] {1});
+      child.code = code;
+      failed(StopGateFailure.COMMAND_FAILURE, () -> source(child).read(ApplicationUnit.API));
+      closed(child);
+      assertEquals(0, child.output.reads);
+      assertEquals(0, child.destroyed);
+    }
+  }
+
+  @Test
+  void timeoutAndTermination() {
+    var child = new Child(new byte[0]);
+    child.completed = false;
+    failed(StopGateFailure.TIMEOUT, () -> source(child).read(ApplicationUnit.API));
+    closed(child);
+    assertEquals(1, child.destroyed);
+    assertEquals(0, child.output.reads);
+  }
+
+  @Test
+  void interruptedWait() {
+    var child = new Child(new byte[0]);
+    child.interrupted = true;
+    try {
+      failed(StopGateFailure.INTERRUPTED, () -> source(child).read(ApplicationUnit.API));
+      assertTrue(Thread.currentThread().isInterrupted());
+      closed(child);
+      assertEquals(1, child.destroyed);
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
+  @Test
+  void outputBoundaries() {
+    for (int size : List.of(0, 1, 1024)) {
+      var bytes = new byte[size];
+      Arrays.fill(bytes, (byte) 'x');
+      var child = new Child(bytes);
+      assertArrayEquals(bytes, source(child).read(ApplicationUnit.API));
+      closed(child);
+    }
+    for (int size : List.of(1025, 20000)) {
+      var child = new Child(new byte[size]);
+      failed(StopGateFailure.MALFORMED_STATE, () -> source(child).read(ApplicationUnit.API));
+      closed(child);
+      assertEquals(1025, child.output.maximumRequested);
+    }
+    var child = new Child(new byte[0]);
+    child.output.failRead = true;
+    failed(StopGateFailure.COMMAND_FAILURE, () -> source(child).read(ApplicationUnit.API));
+    closed(child);
+  }
+
+  @Test
+  void closeFailures() {
+    for (String stream : List.of("output", "input", "error"))
+      for (String primary : List.of("success", "exit", "timeout", "oversize", "io", "interrupt")) {
+        var child = new Child(new byte[primary.equals("oversize") ? 1025 : 0]);
+        child.output.failClose = stream.equals("output");
+        child.input.failClose = stream.equals("input");
+        child.error.failClose = stream.equals("error");
+        if (primary.equals("exit")) child.code = 1;
+        if (primary.equals("timeout")) child.completed = false;
+        if (primary.equals("io")) child.output.failRead = true;
+        if (primary.equals("interrupt")) child.interrupted = true;
+        var expected =
+            switch (primary) {
+              case "timeout" -> StopGateFailure.TIMEOUT;
+              case "oversize" -> StopGateFailure.MALFORMED_STATE;
+              case "interrupt" -> StopGateFailure.INTERRUPTED;
+              default -> StopGateFailure.COMMAND_FAILURE;
+            };
+        try {
+          failed(expected, () -> source(child).read(ApplicationUnit.API));
+          closed(child);
+          assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
+        } finally {
+          Thread.interrupted();
+        }
+      }
+    var child = new Child(new byte[0]);
+    child.output.failClose = true;
+    child.input.failClose = true;
+    child.error.failClose = true;
+    failed(StopGateFailure.COMMAND_FAILURE, () -> source(child).read(ApplicationUnit.API));
+    closed(child);
+  }
+
+  @Test
+  void nativeEnvironmentAndRead() {
+    var command = List.of("/usr/bin/systemctl", "--version");
+    var builder = SystemctlStateSource.NativeProcess.builder(command);
+    assertEquals(command, builder.command());
+    assertEquals(
+        Map.of(
+            "PATH",
+            "/usr/bin:/bin",
+            "LANG",
+            "C",
+            "LC_ALL",
+            "C",
+            "SYSTEMD_COLORS",
+            "0",
+            "TERM",
+            "dumb"),
+        builder.environment());
+    assertEquals(ProcessBuilder.Redirect.DISCARD, builder.redirectError());
+    assertEquals(ProcessBuilder.Redirect.PIPE, builder.redirectInput());
+    assertEquals(ProcessBuilder.Redirect.PIPE, builder.redirectOutput());
+    for (var unit : ApplicationUnit.values()) {
+      var result = new SystemctlStateSource().read(unit);
+      assertTrue(result.length > 0 && result.length <= 1024);
+      var fields = new HashMap<String, String>();
+      for (String line :
+          new String(result, StandardCharsets.US_ASCII).stripTrailing().split("\n")) {
+        int equals = line.indexOf('=');
+        assertTrue(equals > 0);
+        assertNull(fields.put(line.substring(0, equals), line.substring(equals + 1)));
+      }
+      assertEquals(
+          Set.of("Id", "LoadState", "ActiveState", "SubState", "Job", "MainPID", "ControlPID"),
+          fields.keySet());
+      assertEquals(
+          unit == ApplicationUnit.API ? "schubert-nk-api.service" : "schubert-nk-web.service",
+          fields.get("Id"));
+      assertEquals(
+          "not-found",
+          fields.get("LoadState"),
+          "unprovisioned PG/PT host only; not a deployment acceptance test");
+    }
+  }
+
+  @Test
+  void nullAndRuntimeContracts() {
+    assertThrows(NullPointerException.class, () -> new SystemctlStateSource(null));
+    var child = new Child(new byte[0]);
+    assertThrows(NullPointerException.class, () -> source(child).read(null));
+    assertEquals(0, child.output.closed);
+    var runtime = new IllegalStateException("programming failure");
+    child.runtime = runtime;
+    assertSame(
+        runtime,
+        assertThrows(IllegalStateException.class, () -> source(child).read(ApplicationUnit.API)));
+    closed(child);
+    assertEquals(1, child.destroyed);
+    assertSame(
+        runtime,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                new SystemctlStateSource(
+                        command -> {
+                          throw runtime;
+                        })
+                    .read(ApplicationUnit.API)));
+  }
+
+  private static SystemctlStateSource source(Child child) {
+    return new SystemctlStateSource(command -> child);
+  }
+
+  private static void closed(Child child) {
+    assertEquals(1, child.output.closed);
+    assertEquals(1, child.input.closed);
+    assertEquals(1, child.error.closed);
+  }
+
+  private static void failed(StopGateFailure expected, Runnable action) {
+    var failure = assertThrows(StopGateException.class, action::run);
+    assertEquals(expected, failure.reason());
+    assertEquals("application stop check failed", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  private static final class Child extends Process {
+    final ReadStream output, error = new ReadStream(new byte[0]);
+    final WriteStream input = new WriteStream();
+    boolean completed = true, interrupted, alive = true;
+    int code, destroyed;
+    RuntimeException runtime;
+
+    Child(byte[] bytes) {
+      output = new ReadStream(bytes);
+    }
+
+    @Override
+    public InputStream getInputStream() {
+      return output;
+    }
+
+    @Override
+    public InputStream getErrorStream() {
+      return error;
+    }
+
+    @Override
+    public OutputStream getOutputStream() {
+      return input;
+    }
+
+    @Override
+    public int waitFor() {
+      throw new AssertionError("unbounded wait forbidden");
+    }
+
+    @Override
+    public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
+      assertEquals(5, timeout);
+      assertEquals(TimeUnit.SECONDS, unit);
+      if (runtime != null) throw runtime;
+      if (interrupted) throw new InterruptedException("SECRET_CANARY");
+      alive = !completed;
+      return completed;
+    }
+
+    @Override
+    public int exitValue() {
+      assertFalse(alive);
+      return code;
+    }
+
+    @Override
+    public boolean isAlive() {
+      return alive;
+    }
+
+    @Override
+    public void destroy() {
+      destroyed++;
+      alive = false;
+    }
+
+    @Override
+    public Process destroyForcibly() {
+      throw new AssertionError("SIGKILL forbidden");
+    }
+  }
+
+  private static final class ReadStream extends InputStream {
+    final ByteArrayInputStream bytes;
+    boolean failRead, failClose;
+    int closed, reads, maximumRequested;
+
+    ReadStream(byte[] bytes) {
+      this.bytes = new ByteArrayInputStream(bytes);
+    }
+
+    @Override
+    public int read() {
+      throw new AssertionError("bounded read required");
+    }
+
+    @Override
+    public byte[] readNBytes(int length) throws IOException {
+      assertEquals(1025, length);
+      maximumRequested = length;
+      reads++;
+      if (failRead) throw new IOException("SECRET_CANARY");
+      return bytes.readNBytes(length);
+    }
+
+    @Override
+    public void close() throws IOException {
+      closed++;
+      if (failClose) throw new IOException("SECRET_CANARY");
+    }
+  }
+
+  private static final class WriteStream extends OutputStream {
+    boolean failClose;
+    int closed;
+
+    @Override
+    public void write(int value) {
+      throw new AssertionError("no command stdin");
+    }
+
+    @Override
+    public void close() throws IOException {
+      closed++;
+      if (failClose) throw new IOException("SECRET_CANARY");
+    }
+  }
+}

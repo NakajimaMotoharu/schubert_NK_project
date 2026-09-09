@@ -35,13 +35,19 @@ class EvidenceSetTest(unittest.TestCase):
     def test_shared_batch_program_ownership(self):
         names = ("dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
-                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest")
+                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
+                 "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
+                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
         self.assertEqual(suites[:2], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
-        for position in range(3):
+        for position in range(5):
             bad = copy.deepcopy(suites); bad[position].set("name", "unknown")
+            with self.assertRaises(ValueError): batch.select_program_suites(bad)
+            bad = copy.deepcopy(suites); del bad[position]
+            with self.assertRaises(ValueError): batch.select_program_suites(bad)
+            bad = copy.deepcopy(suites); bad[position] = copy.deepcopy(suites[(position + 1) % 5])
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
 
     def test_shared_storage_program_ownership(self):
@@ -92,7 +98,13 @@ class EvidenceSetTest(unittest.TestCase):
                     "nativeErrorsAndFlags", "inputAndPlatformContracts", "concurrentSingleWinner", "retainedInodeAndDescriptorLifetime")),
                   ("dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest", 1,
                    ("admittedRealLock", "contentionAndIndependentInvocations", "rootAndFilesystemPolicy", "inodeAndAttributePolicy",
-                    "replacementAndPostconditions", "ioAndCloseFailures", "constructorAndNativeBoundary", "fixedProvisioningContract"))]
+                    "replacementAndPostconditions", "ioAndCloseFailures", "constructorAndNativeBoundary", "fixedProvisioningContract")),
+                  ("dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest", 1,
+                   ("literalAndOrder", "nonStoppedStates", "malformedFields", "byteAndNullContracts",
+                    "gateOrderAndFreshReads", "interruptAndFailure", "concurrentChecks", "factoryAndContracts")),
+                  ("dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest", 9,
+                   ("fixedCommandAndSuccess", "commandFailure", "timeoutAndTermination", "interruptedWait",
+                    "outputBoundaries", "closeFailures", "nativeEnvironmentAndRead", "nullAndRuntimeContracts"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -100,7 +112,9 @@ class EvidenceSetTest(unittest.TestCase):
         suites, expected = [], {}
         for cls, start, names in groups:
             prefix = ({"dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
-                       "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
+                       "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
+                       "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

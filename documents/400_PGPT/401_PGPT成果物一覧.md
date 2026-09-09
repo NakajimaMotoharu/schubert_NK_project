@@ -1,7 +1,5 @@
 # PGPT成果物一覧・進捗
 
-追加管理資料: [459_保守run固定時刻の永続化検討](450_品質/459_保守run固定時刻の永続化検討.md)（SSC-055調査中、固定cutoffの設計残件。未完了）。
-
 2026-09-09 最新確定: dev-foundation/source5e00cfd6、正式PT-WEB-20260909-43（20:09:49～20:16:45 JST）、全1083件（Protocol80/Storage50/API634/Web241/Batch37/CHR41）PASS、failed/error/skipped0。6 Java moduleのline/method/class/branch100%、Production5 moduleのSpotBugs未解決0/NullAway・Enforcer・Spotless PASS。固定/runの移植性指摘1件だけmethod/ID限定レビューを明示（BUG142/005）、coverage除外なし、CHR runnerのSpotBugsは未設定。12collector・35証跡scopeの同run/source/branch/hash/参照、017の1件・019の15件負canary成功。DB26部品240 PT＋batch2部品29 PT＋OPS3部品24 PT＝31部分成果293件確定。PG-D-147のroot lockfile admission→実flock8 PTを追加、root/FS/ACLは合成属性、inode/競合/全open-closeは実Linuxで検証。BUG141～142/YKT111～112を再試験完了。親root実配置/inactive/実backup/DB引渡し/root設定publish/固定run永続化・全cleanup監査・通常Question writer/replay・Logout RERUN-001は残る。QA045はLogin title差分の未回答でありLogout論点とは別。BUG-014/UIC-006/SSC-049/052継続、加重見積約4割（35～50%、456）、試験件数だけで加点しない。週間残16%。元dev-web Scenario3fileは保全・不算入、CHR41はrunner PTであり実NK互換gateではない。以下は履歴。
 
 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。
@@ -43,6 +41,8 @@
 最新判定（2026-09-08 10:43）: BUG-037/YKT-033を正式再試験完了しNK-PRO-003復帰、確定5/20=25%（Program数比、工数換算なし）。正式`PT-SCN-20260908-19`、source `e46555c4dbfa5449e06f4c871b2aaa7fc4ec493a`、dev-scenario、2026-09-08 10:40:52～10:43:33 JST。全476件（Protocol79/Storage26/API272/Web58/CHR41）、Scenario関連133/Auth85/coordinator11（重複を全体総数へ再加算しない）。failed/error/skipped0、5対象module全coverage100%、NullAway/Enforcer/format PASS、SpotBugs0。 SSC-026保存・再送部品完了。SSC-027のguard/実ready検査/元content再生成・descriptor置換の内部10追加PTもPASS、最終DB接続は継続。段階service/実file再生成/起動/HTTP/CHR等は継続。
 
 ## 1. 位置づけ
+
+追加管理資料: [459_保守run固定時刻の永続化検討](450_品質/459_保守run固定時刻の永続化検討.md)（SSC-055調査中、固定cutoffの設計残件。未完了）。
 
 本ディレクトリをschubert NK再構築projectの製造・単体テスト（PGPT）工程における文書最正本とする。外部仕様の最正本は`documents/100_RD`、`documents/200_UI`、実装・試験詳細の最正本は`documents/300_SS`であり、本工程の文書・code・test・evidenceはそれらを変更せず具体化する。
 

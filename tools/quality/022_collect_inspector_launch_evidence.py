@@ -23,9 +23,17 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
       "nativeErrorsAndFlags", "inputAndPlatformContracts", "concurrentSingleWinner", "retainedInodeAndDescriptorLifetime")),
     ("dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest", 1,
      ("admittedRealLock", "contentionAndIndependentInvocations", "rootAndFilesystemPolicy", "inodeAndAttributePolicy",
-      "replacementAndPostconditions", "ioAndCloseFailures", "constructorAndNativeBoundary", "fixedProvisioningContract")))
+      "replacementAndPostconditions", "ioAndCloseFailures", "constructorAndNativeBoundary", "fixedProvisioningContract")),
+    ("dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest", 1,
+     ("literalAndOrder", "nonStoppedStates", "malformedFields", "byteAndNullContracts",
+      "gateOrderAndFreshReads", "interruptAndFailure", "concurrentChecks", "factoryAndContracts")),
+    ("dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest", 9,
+     ("fixedCommandAndSuccess", "commandFailure", "timeoutAndTermination", "interruptedWait",
+      "outputBoundaries", "closeFailures", "nativeEnvironmentAndRead", "nullAndRuntimeContracts")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
+STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
+    ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource"))
 SUBJECTS = tuple("dev/codex/schubert/nk/api/maintenance/" + c
                  for c in ("InspectorLaunchConfiguration", "InspectorLauncher"))
 TRACES = {"renderedShellCheck": 3, "statusMapping": 9, "malformedReceipts": 29,
@@ -48,7 +56,9 @@ def validate_reports(suites, deployment=False):
                    for child in c) for c in cases)):
             raise ValueError("launcher/deployment PT inventory or status is not certifiable")
         prefix = ({"dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
-                   "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
+                   "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
+                   "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -77,7 +87,9 @@ def main():
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
     def module_for(cls):
         return {"dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
-                "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
+                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
+                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -89,14 +101,15 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
-        for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT)):
+        for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
+                                *(("batch", s) for s in STOP_SUBJECTS)):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, LOCK_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-            raise SystemExit("missing or incomplete Linux flock coverage")
+        if not {FLOCK_SUBJECT, LOCK_SUBJECT, *STOP_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+            raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
     evidence.mkdir(parents=True, exist_ok=True)
@@ -109,6 +122,7 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
+        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in STOP_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
@@ -130,7 +144,7 @@ def main():
             destination.write_text(json.dumps(data, indent=2) + "\n")
     manifest = {k: verified[k] for k in ("runId", "targetCommit", "branch", "startedAt", "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
-        "programId": program, "scopeResult": "PASS_DEPLOYMENT_AND_FLOCK_SLICES_ONLY" if args.deployment else "PASS_PRIVATE_LAUNCHER_ONLY",
+        "programId": program, "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY" if args.deployment else "PASS_PRIVATE_LAUNCHER_ONLY",
         "programComplete": False, "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0,
         "classCoverage": coverage, "staticAnalysis": verified["modules"]["api"]["spotbugs"],
         "fullReactorManifest": ("../../" if args.deployment else "../../../") + "008_NK-SCN-001/evidence/manifest.json",
@@ -142,13 +156,15 @@ def main():
     })
     if args.deployment:
         manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage", "batch")}
-        manifest["related"] += ["PG-D-146", "PG-D-147", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112"]
+        manifest["related"] += ["PG-D-146", "PG-D-147", "PG-D-148", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112", "BUG-143", "YKT-113", "BUG-144"]
         manifest["reviewedStaticDiagnostic"] = {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False}
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."
         manifest["limitations"] += " LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64."
         manifest["oracle"] += " 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked."
         manifest["limitations"] += " MaintenanceFileLock PT uses synthetic root UID/GID/tmpfs admission over real isolated unprivileged files. Actual root/tmpfiles provisioning and parent inactive/backup/DB handoff remain unverified."
+        manifest["oracle"] += " 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected."
+        manifest["limitations"] += " STOP is read-only transient state observation, not service stopping or a lease. Deployed units, root execution, parent restart prohibition/cgroup validation and integration remain unverified. Trusted fixed systemctl/OS assumptions apply; timeout is tested using a process fault port, not a real stalled manager or TERM-ignoring descendant."
         manifest["deploymentCoverage"] = {
             "class": "not applicable", "method": "not applicable",
             "basis": "Every executable statement and decision outcome in the hashed shell template has an asserting test and recorded sh -x trace; no code is excluded. Unit is declarative, validated by independent exact directive map, not JaCoCo.",
