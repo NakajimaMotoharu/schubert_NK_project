@@ -23,6 +23,10 @@ LOG_METHODS = (
     "restorationAndUnlockFailures", "invalidInputsAndProjections", "summaryInvariants", "failuresLeaveNoFalseSuccess",
 )
 LOG_CLASS = "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest"
+HANDOFF_CLASS = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
+HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
+                   "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
+                   "stateChangesAndInterrupts", "concurrentGapCompetition")
 OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -31,7 +35,7 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    if len(suites) != 6 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS, *OPS_CLASSES}:
+    if len(suites) != 7 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS, HANDOFF_CLASS, *OPS_CLASSES}:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
 
@@ -42,6 +46,10 @@ def validate_suite(suite):
 
 def validate_log_suite(suite):
     return validate_group(suite, LOG_CLASS, LOG_METHODS, 18)
+
+
+def validate_handoff_suite(suite):
+    return validate_group(suite, HANDOFF_CLASS, HANDOFF_METHODS, 30)
 
 
 def validate_group(suite, cls, expected, start):
@@ -57,11 +65,12 @@ def validate_group(suite, cls, expected, start):
 
 
 def validate_reports(suites):
-    if len(suites) != 2 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS}:
+    if len(suites) != 3 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS, HANDOFF_CLASS}:
         raise ValueError("unmapped or missing batch test class")
     methods = {}
     for suite in suites:
-        methods.update(validate_suite(suite) if suite.get("name") == CLASS else validate_log_suite(suite))
+        validator = {CLASS: validate_suite, LOG_CLASS: validate_log_suite, HANDOFF_CLASS: validate_handoff_suite}[suite.get("name")]
+        methods.update(validator(suite))
     return methods
 
 
@@ -74,7 +83,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 57:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 65:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -84,24 +93,24 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
-    sanitized = ET.Element("testsuite", name="NK-BAT-001", tests="29", failures="0", errors="0", skipped="0")
+    sanitized = ET.Element("testsuite", name="NK-BAT-001", tests="37", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(sanitized, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(sanitized).write(evidence / "output/results.xml", encoding="utf-8", xml_declaration=True)
     for suffix in ("csv", "xml"):
         shutil.copyfile(target / ("site/jacoco/jacoco." + suffix), evidence / ("coverage/batch-jacoco." + suffix))
-    summary = {"runId": run, "targetCommit": verified["targetCommit"], "tests": 29,
+    summary = {"runId": run, "targetCommit": verified["targetCommit"], "tests": 37,
                "failed": 0, "errors": 0, "skipped": 0,
                "coverage": verified["modules"]["batch"]["coverage"],
                "staticAnalysis": verified["modules"]["batch"]["spotbugs"],
-               "result": "PASS_REPOSITORY_AND_LOG_SERVICE_ONLY", "programComplete": False}
+               "result": "PASS_REPOSITORY_LOG_AND_HANDOFF_BOUNDARIES_ONLY", "programComplete": False}
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(summary, indent=2) + "\n")
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                  "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_AND_LOG_SERVICE_ONLY",
+        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_AND_HANDOFF_BOUNDARIES_ONLY",
         "programComplete": False, "testIdMethods": methods,
-        "sharedModuleOwnership": "Batch module57 PT = NK-BAT-00129 + NK-OPS-00128. Full module coverage includes both; OPS IDs and admission/stop/run-file coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+        "sharedModuleOwnership": "Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. Full module coverage includes both; OPS IDs and admission/stop/run-file coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
         "fullReactorManifestSha256": hashlib.sha256(full.read_bytes()).hexdigest(),
         "related": ["PG-D-137", "PG-D-138", "SSC-051", "BUG-104", "YKT-092", "BUG-109", "BUG-110", "BUG-111", "YKT-096", "YKT-097", "BUG-112", "YKT-098", "BUG-014", "YKT-012", "BUG-145", "YKT-113"],
@@ -113,6 +122,9 @@ def main():
                         for p in sorted((repo / "src/schubert-nk-batch").glob("src/**/*.java"))],
     })
     manifest["logServiceOracle"] += " BUG145/YKT113: BAT026 crosses real foreign-connection lock contention with result/statement/both close faults, and TIME_LIMIT/INTERRUPTED/BACKUP_GATE with both unlock close faults. All typed failures have zero cause/suppressed after closure; primary reason, interruption and caller connection ownership are preserved; no deletion on lock rejection."
+    manifest["related"] += ["PG-D-150", "SSC-049", "BUG-146", "YKT-114"]
+    manifest["handoffOracle"] = "005/PT-BAT-030..037: parent single session lock -> child dedicated-role transaction lock -> parent nonblocking reacquire; repeated handoff preserves exact one acquisition. Missing/shared/two-int/reentrant/state/interrupt/null reject, every observed JDBC occurrence and each of5 scalar missing/duplicate/null/flipped/null-resource faults reject, resources close and provider diagnostics stay absent. Child IOException fixed, unexpected Runtime/Error identity preserved, null result never succeeds. A competing real connection/thread in the gap prevents parent success without waiting/force unlock."
+    manifest["limitations"] += " InspectorLockHandoff only supplies the borrowed-connection synchronous handoff boundary. Caller must retain OS lock, admit backup/stopped applications/run, confirm child process termination before callback return, avoid sharing parent connection, verify receipts/progress, and dispose parent connection after failure. Actual oneshot and OS/backup orchestration remain unverified."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

@@ -32,23 +32,52 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    @staticmethod
+    def handoff_fixture():
+        cls = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
+        names = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
+                 "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
+                 "stateChangesAndInterrupts", "concurrentGapCompetition")
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 30)}
+
+    def test_handoff_inventory_and_nonpassing_cases(self):
+        suite, expected = self.handoff_fixture()
+        self.assertEqual(suite.get("name"), batch.HANDOFF_CLASS)
+        self.assertEqual(tuple(c.get("name") for c in suite), batch.HANDOFF_METHODS)
+        self.assertEqual(expected, batch.validate_handoff_suite(suite))
+        for position in range(8):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
+        for key, value in (("tests", "7"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
+        for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+            with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
+
     def test_shared_batch_program_ownership(self):
         names = ("dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+                 "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:2], batch.select_program_suites(suites))
+        self.assertEqual(suites[:3], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
-        for position in range(6):
+        for position in range(7):
             bad = copy.deepcopy(suites); bad[position].set("name", "unknown")
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
             bad = copy.deepcopy(suites); del bad[position]
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
-            bad = copy.deepcopy(suites); bad[position] = copy.deepcopy(suites[(position + 1) % 6])
+            bad = copy.deepcopy(suites); bad[position] = copy.deepcopy(suites[(position + 1) % 7])
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
 
     def test_shared_storage_program_ownership(self):
@@ -338,8 +367,10 @@ class EvidenceSetTest(unittest.TestCase):
         repository = ET.Element("testsuite", name=batch.CLASS, tests="17", failures="0", errors="0", skipped="0")
         for name in batch.METHODS:
             ET.SubElement(repository, "testcase", classname=batch.CLASS, name=name)
-        accepted = batch.validate_reports([suite, repository])
-        self.assertEqual(29, len(accepted))
+        handoff, expected_handoff = self.handoff_fixture()
+        accepted = batch.validate_reports([suite, repository, handoff])
+        self.assertEqual(37, len(accepted))
+        self.assertEqual(expected_handoff, {k: v for k, v in accepted.items() if k in expected_handoff})
         self.assertEqual(expected, {k: v for k, v in accepted.items() if k in expected})
         for reports in ([], [suite], [repository], [suite, suite], [repository, repository], [suite, repository, suite]):
             with self.assertRaises(ValueError):
