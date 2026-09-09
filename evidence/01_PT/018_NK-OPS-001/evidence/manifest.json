@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260909-45",
-  "targetCommit": "f8729ce10e63af77872b115bbb25b02e9d7c5e1c",
+  "runId": "PT-WEB-20260909-46",
+  "targetCommit": "f25955f2b31efc23ced5aa86f0762554cc9b3a2a",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-09T20:52:07+09:00",
-  "completedAt": "2026-09-09T20:59:10+09:00",
+  "startedAt": "2026-09-09T21:07:26+09:00",
+  "completedAt": "2026-09-09T21:14:32+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -15,7 +15,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "8d36ce2fee70412907654a83a0f65b9883db996c3605a41944f564161b778b7f",
+  "rawLogSha256": "b33988fa2d96cb4ec1a3142cc6f1b3c7ec60396493c420cb294c551d938d79bb",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -59,7 +59,11 @@
     "PT-OPS-STOP-013": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest#outputBoundaries",
     "PT-OPS-STOP-014": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest#closeFailures",
     "PT-OPS-STOP-015": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest#nativeEnvironmentAndRead",
-    "PT-OPS-STOP-016": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest#nullAndRuntimeContracts"
+    "PT-OPS-STOP-016": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest#nullAndRuntimeContracts",
+    "PT-OPS-ENV-001": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest#independentGolden",
+    "PT-OPS-ENV-002": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest#mutationAndRunBinding",
+    "PT-OPS-ENV-003": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest#boundariesNullAndOwnership",
+    "PT-OPS-ENV-004": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest#concurrentUse"
   },
   "failed": 0,
   "errors": 0,
@@ -479,6 +483,32 @@
         "missed": 0,
         "covered": 1
       }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 29
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
     }
   },
   "staticAnalysis": {
@@ -487,7 +517,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "eaab2f525046060d5d0dbcd7d6504423c14b335be83dbf9419662e72ecfe35b8",
+  "fullReactorManifestSha256": "04e2834f29a2f6e43fe37e0052aed046828a9c6fbfd32b56315feeec75c28de9",
   "related": [
     "QA-046",
     "UIC-006",
@@ -511,11 +541,12 @@
     "BUG-143",
     "YKT-113",
     "BUG-144",
-    "BUG-145"
+    "BUG-145",
+    "PG-D-149"
   ],
   "fixture": "Public environment/path/UUID/time/version/receipt vectors only. Fresh real JVM negative tests. OPS uses fixed fake Java and local static unit syntax verification; no host manager/service/credential changes. FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation.",
-  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected.",
-  "limitations": "Java coverage belongs to launcher, not a shell percentage. Parent OS flock/inactive/backup/run binding, root-owned environment validation/publication, actual unit credential provisioning and timeout/TERM behavior, full batch, NK CHR and IT/ST are NOT certified. LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64. MaintenanceFileLock PT uses synthetic root UID/GID/tmpfs admission over real isolated unprivileged files. Actual root/tmpfiles provisioning and parent inactive/backup/DB handoff remain unverified. STOP is read-only transient state observation, not service stopping or a lease. Deployed units, root execution, parent restart prohibition/cgroup validation and integration remain unverified. Trusted fixed systemctl/OS assumptions apply; timeout is tested using a process fault port, not a real stalled manager or TERM-ignoring descendant.",
+  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected. 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked.",
+  "limitations": "Java coverage belongs to launcher, not a shell percentage. Parent OS flock/inactive/backup/run binding, root-owned environment validation/publication, actual unit credential provisioning and timeout/TERM behavior, full batch, NK CHR and IT/ST are NOT certified. LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64. MaintenanceFileLock PT uses synthetic root UID/GID/tmpfs admission over real isolated unprivileged files. Actual root/tmpfiles provisioning and parent inactive/backup/DB handoff remain unverified. STOP is read-only transient state observation, not service stopping or a lease. Deployed units, root execution, parent restart prohibition/cgroup validation and integration remain unverified. Trusted fixed systemctl/OS assumptions apply; timeout is tested using a process fault port, not a real stalled manager or TERM-ignoring descendant. Run EnvironmentFile codec neither reads/writes files nor chooses the authoritative run. Root ownership/ACL/NOFOLLOW/bounded read/atomic publication, static setting file validation, OS lifecycle and durable run anchorSSC055 remain unverified.",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java",
@@ -546,6 +577,10 @@
       "sha256": "74429a665f41b82ba5848c29764ad6762c6290b414bd5adeafbc92749b7b6b24"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "sha256": "b501a145a01fc42ca7a39741ac32212514338c0468b8d4c1289ad9ec182808fc"
+    },
+    {
       "path": "src/schubert-nk-api/pom.xml",
       "sha256": "357122241350ef3c16dbd928480b0baf3374a042c2e8104930b7fbe056038c11"
     },
@@ -572,6 +607,10 @@
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
       "sha256": "a866dab1c6bcd9394632b78f32aabfe75f9a61dc558307bde516c8cf5a5ea92e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java",
+      "sha256": "0faabe383f02947cf0be44ade1a356efee8dea14276b14aef4956dabd604d8cf"
     },
     {
       "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java",
@@ -676,207 +715,207 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "2078465cf80cd99e011d5fa26877b1c406479369976065769363f7183533292d"
+      "sha256": "3256b7ac2bad98328b0d83976c452c9c834df3d6092afb1f0531d999654c1dc9"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "924fc1bbd7de9f565dfeb79fb9c239c1a9f422e2a719cd16e39c9c2fdff4cb4d"
+      "sha256": "ce5f665f1ee958a8f8a2d27f052945269c1dcd4288285cddbd45e969e77454f5"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "cd75cce064e835041ea8ebe4bbbc8eddf1e8521e2c534c470f4520fe2e848b78"
+      "sha256": "2d8e0e697efcb9954d29b896455c423da95da18f6a56be669849cc7f07a35b9a"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "dd494708f422d494e228cb171f6a78085323f351af0fa5aabf2a867720edd979"
+      "sha256": "3ffac5b86419a839d938b3386e793bb55c125bd1102aa6a4be91ec2998eb00b6"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "d5e925e53f0db5ece2b5993391f59fade13231fdb209f8228f6f9a8a67ff7710"
+      "sha256": "148b737808b1c0cef789e0f3d0c27a04aeb90dbeef5be8fd7d49c42a6d8933c2"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "e5cba9a4ff4af1c3f790f9f8242f6e7adc0ffb18806214aaa5c5c0ba224129b9"
+      "sha256": "7387bf017289fad2a6efe8a4268e3db7f802d4f2502419cf81200a582fe685e0"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "7d5367556107e7869786769ea16d35b8907603a548a5070480eedfdd9a52632e"
+      "sha256": "89f604af9952b404c3dca22bb005d4b0907c92f5f378d585167d2acf903a5329"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "e5fc9060e9d051444ae70d5af7df49f4fc9d882094a89d02bbbba832a98e6a67"
+      "sha256": "668277ff8ceb6dee780734e00e39214a1072bc972f24866ac3a7e96b183efcf4"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "7250e7ec5f449a2b0f3a2f29714b686a5c8ad0c58ffc2383627eea61144c2074"
+      "sha256": "17d532426ee06484046b226bedd007ca9ea989e25f23af316cc82b3201881806"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "f12d67213699585f366ca2ea85e6cffd5b241c06de1e3d1e460712cc7790e184"
+      "sha256": "18d17312af4b632ff9a0077f181a55f44db3872b13cc3c8636d3cb48d54962d9"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "a3cca0ba61d65b5fe11236e2cb08955cb5c6a0954afd9082520ba2d7c47b6141"
+      "sha256": "358cfcbaab689c83413b2a239264dcc112154f00245e1efee2a2b13a3be583f7"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "b2695cc59c5f48f1280d15e3b77d8b9e0e26ca10c7939e10b56330f7788752d0"
+      "sha256": "1650af3991554cbe6e49c8783b2fe4e08d81d20aa62b42c7ae8796c456d56e47"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "9ff2dea530b19998bc2a337450725acd567b4ca17a99c92802861d73d386698e"
+      "sha256": "f9ce1fcbc24544ce694cfdc52637f4c415f598f25b0067011cdfcac06c3e69ca"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "03d5f2b0756902ef99ef266720fedd58576f482aa835e34b6e05a295c9f5c857"
+      "sha256": "148f2b6aa32577a3195f481ed4b5a9c77a663a26e2267d77bbf5a803adecea76"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "6fc8d7e5bc148f2439b7bfa7c7b0f4feebd3861253ad753b6f1332800041dfd8"
+      "sha256": "751fb588dc687a4ae96423e64c9fe0c843b5b13b88313f6a078b32cf15d0aaba"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "0a953ebf75dcb3a7fc959b0d153347cc090dd466bd0f2266540489df4e9e2930"
+      "sha256": "68c7051550861ae0942dd24d4ce33877d0bba4b5777897a3b3a2767e9172e1e3"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "9ddbc021952e7468f21791c6592b3dae369f02c674cbc681e99a63eb03f8e671"
+      "sha256": "1f86676c45e24e76e050712e56f69a690d55cc2a15cda5784ff704796b2bfeac"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "d3f0c7919ecf3630bb4fe3fefbc1a157eaf84b0c1188bc5afd157373370d6c24"
+      "sha256": "d8825250c7abfbbe9d312a4d9729021cfd72688f3e66e311bc469edf73a7d06f"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "906860ed96af41fa8d4b3bfa3ce381cdda783e177c3f6654fe1c6a9225ac57b2"
+      "sha256": "403918db65d88f0e8c99b4f4a5535d360c278fb789b12b092c4b203d58af473a"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "4a6877fc12eb9838f144c2c022d8c279dd5cfdf6b748cb17a6e7fdccfa6dce16"
+      "sha256": "3452748e8cd4cb792bebfe0a2c413aac37ccff4c19d87ae3cfc1efba1b815156"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "99e6cccb1c038fafc41097f9f2246a8b8731d988bf9896483824d7f4eb8ad76c"
+      "sha256": "4f78d0fc5d1a392236fc365dc5deb927369a43f6f05869105786691e1f1dd02f"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "7723df74620eb70064a98236a5610347588921e58af7aa10af43ad5f789c75ec"
+      "sha256": "f66ca67e6a87ae08c10b693064293d36b71242cc24c1994ee4e2f3d9afeb78fa"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "9c5592154dd572800cd307c25ab2c7f38974daf6dda15ab037c8ecf11ee66dde"
+      "sha256": "50e89a8c229f05150cb8cbdca169b0b2a4543fdaf874a6496065a81fcc511343"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "87b254b39ca396b226783af3d31dcf7c22ad4c54959032765294542045cfd00f"
+      "sha256": "e6fc102b98b2a95aa0d78b0d7693e8383dae4af59328ef164e232afc429e4030"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "92b4223db248cfe627e2ce25e0d2ff767093c35069cc7b3410fd024738869f0a"
+      "sha256": "439322b34f45a3ebcd4e76fb048463d3e64082e43e457265aae5457e6c2efe38"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "209ecfa45a5dd348d0e9fab014796f94619362c7230d23c74aaf7b185359faaf"
+      "sha256": "07d73d32ec943fefc766dcbeebe7d12f263b20a2904a1f09da1973a7c25dc126"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "39ae2b02bf996f223a5a5224f0935c2868198801e1467002fa0195549d886080"
+      "sha256": "62140331b71b1649ffe0debbb5113d8bb6833eb739e8a457b3a518703ed91a70"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "e44d210496bd67c4d61119bc29bac10b7eef0da33573f8bf53e354dcfd975a92"
+      "sha256": "a5d040667713adfa57c55b7a0f0daad0ba4e57384f57e7d75c0f2e501b7eca2e"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "44c0522f689af92cde52e73c350eb3c514d5cb8762e628b6faae71783b67bd3d"
+      "sha256": "1f0ca8004a436a298c4f8abfcaffe58a860a5257ea1704fa1b1d915b3746323d"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "a8896e06e296ea26276579c7f39294286e73f8512d23de02532eafed445bf0bd"
+      "sha256": "e0d3ae4e8a4bc75da69fb4afd69b22d244d4125e6956eb5c3de0aeaeb28da063"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "7841f7cfe98bd1e19cfcadc773c63a2288257d586eeace3321301c49a34dfd8c"
+      "sha256": "ed5fd782a08dcdf9b30d6c76f419e6b6544d54a635af533a03fe656fc38fa9dd"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "6ad4e705e9f6969bd1b11bacc6d8046127af79a543a00660f13c14c6e27f809d"
+      "sha256": "a5a583c99f147a0286265c47ca1d31dbe4db44270783f2be658b1f04f637d496"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "a7ba19b20616284b599d3750924da5288d75a6342c9339a2169f2a11832d83ec"
+      "sha256": "690aba089ba43d539dda72cb4599a2a4bfcaf4bf79faddde627adbc560c973de"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "8dca832b0988ebe7cfadb427e8fe6a91ef635fc4736882f1c32bc8ca4484ae77"
+      "sha256": "2e97390138322fe21974b8c2bd84b9fb95d5c1f13e4b5be13abd92e96a1aa6dd"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "e0dbf2f23b1f02479ccec54d9ae69f075c48411f831e0ece1f008079b1cc1c1e"
+      "sha256": "914ca467350e62d642c627fd0d1b1275c8a5e78fd30dc15d38197e968ce4a587"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "9cd0310e4917c2cc0860749defc49499c0c7944d9efe26efa2877a97ea13e964"
+      "sha256": "a07251ed56a8eed6277f623436c1e04731635758f67d871943ac3d55efbdff12"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "58908d090dff1613d19cfca06c35bbb8b7adcb3f47ce2ed10d3f32f393c22ffb"
+      "sha256": "74374aa6f570de861b9509e17f0ff31ee9e6764a0f0d4255fffdd801c181933e"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "0353085f479495de6c627ab8cfb1e583ed7096482758a6ce89a6f9c1e386f26f"
+      "sha256": "5413c0e6368d983cbabc6df01cdf16533056ec73957657de9b57f48b204d833f"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "178ff3de44cfd3c3b62c1f2f807b657195bea035fdbdd268be0433d882035860"
+      "sha256": "5e6d4e7c0d952c49f25b6239b706b61abbab17c6a0326c2b08017b44fcbac885"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "f1a47e59b6ccdb90ae49ef4eed7bd474890a49f9c76f1ef902f36f0b8a40cd4a"
+      "sha256": "3f3bb234a228cfd70b3d2af0101bc1d91e3cdaedd36d732b3773de2effb4a96a"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "f01aaf323519710f5fd8a100f0edc49a6e4b31e362759bf5c17e046b8ce85220"
+      "sha256": "517358313647194dd850b2c262668e8998a6597cd5c42b55b709a6599a293d4d"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "cd2652c0a733ae36dada1224ba5cc0b677f23a9a0367026ae99c20cea97da8bb"
+      "sha256": "9b390b6104924d0146379c3323d8281dc1d422686051256ddb9dcff852686a18"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "43b83254fc2df0bb6b7f26226ef4deb4e8cfc12e754295fbbca73e252fadb34b"
+      "sha256": "11d669dd9f95f728f18228895eb02d30b30a18b03a5b1759c21337fbbed26d77"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "caac1e7e2b91b82baeb4052214277c0fe2b361e13869a62fbcdfe1471e4ce90a"
+      "sha256": "38ef5fe6006b3f999a8aefa08c7f12c02e1004b57d2774dc8d819cd3a7f253ef"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "70cb4270ecc1d448fafd8522b464f60b70d6de0ffe9b9c30c4c84f36663d251c"
+      "sha256": "13a1a0772b488b76679c36978c3c12af4176d3d33bd707ea8d0967d10785b3e6"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "6db6700edc3446aa8c6be44b939b4269c72475906fabbdd433d838550f41e0fd"
+      "sha256": "891219c33213cfa62403dd623cbfc783dd416726a0a32a0351e1b18677a4a970"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "b4e9997ba4813ea1bb250d98effd8ab675a1e863553606703439638cf70523bc"
+      "sha256": "ea0b7eed2a86f24312501ceefa2a6a3fcbdf196e633bfbbb51ca669512d17730"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "c718376717a46ead622c6fbcfb6e98a4e137cca11d9fab81a0f73ce249ef5292"
+      "sha256": "7a910beff2fdfba8af653c9aba87870c423caf32cdd7273fd3b17979379202b6"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "8242fb66b647716b0cbc9b0fb8ff2e1cc54881a3701fdf85c9b458306a4c960e"
+      "sha256": "4c75e756dbd3b1ae0ce291e86752df2cf85d652044ba173d762a43108fd99a10"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "b98cf06ff6b856ab8becc4a4fabd52bece30c1d4a0dd49b1d72c2c2c4bffe6ab"
+      "sha256": "1915b2548f29008e7d4effe3714cb57086e589256a0eabe122746acc2dd2f32c"
     },
     {
       "path": "results.xml",
-      "sha256": "0bccdb6fc27a18c5693a24d7ee11fb7c50f6ac8589bb12eb66fe037e1b4709dc"
+      "sha256": "5b0105020e7606e207bafe5bfa59c5959d2eaa59dfc68c6c6e4ff3b2daeff861"
     }
   ]
 }
