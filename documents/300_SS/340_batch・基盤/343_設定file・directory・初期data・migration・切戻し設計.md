@@ -216,7 +216,7 @@ InspectorSettingsは非秘密のcredential directory path、§6.6 canonical JDBC
 
 api.fileのInspectorApplicationはfile adapterとして低位DirectoryCalls/InodeSecurityCallsだけを使用する。execute(run)ごとに(1)全path segment NOFOLLOWでrootを開く、(2)既存readerでdb-inbox-inspector materialを所有、(3)固定role providerへ独立copy、(4)同rootのreaderとproviderからInspectorProcessを生成・同期実行、(5)provider/password/rootを逆順close、の順とする。鍵4個/copy/codecは既存InspectorProcessが操作内で所有・消去する。runはIO前にnon-null確認。各executeは独立寿命で、同run再開は永続状態を正とする。
 
-成功/保護あり結果はroot closeを含む全終了後だけ返す。root open/close、credential load、構成不正/暗号primitive故障は例外で終了し、途中結果を返さない。通常DB障害/割込/時間超過は既存InspectionExecutionの非成功を保持する。ここでroot権限を緩和したり、DB credentialを他processへ渡したりしない。ログ/HTTP/JMS/別processを生成しない。PTは実保持inode/file/JDBC/永続SQLと明示synthetic OS属性・fault portを組合せる。実systemd credential正系、Java main/unit、親flock/backup実体/朝batch全順序は別gateであり本接続だけを完了証明にしない。
+成功/保護あり結果はroot closeを含む全終了後だけ返す。BUG-134/YKT-105: 開始時割込はrun null確認後・root/password IO前に判定し、flagを保持してINTERRUPTED/最後の確認状態なしを返す。読取途中の割込は既存IO失敗として全資源を閉じ、成功にしない。root open/close、credential load、構成不正/暗号primitive故障は例外で終了し、途中結果を返さない。通常DB障害/割込/時間超過は既存InspectionExecutionの非成功を保持する。ここでroot権限を緩和したり、DB credentialを他processへ渡したりしない。ログ/HTTP/JMS/別processを生成しない。PTは実保持inode/file/JDBC/永続SQLと明示synthetic OS属性・fault portを組合せる。実systemd credential正系、Java main/unit、親flock/backup実体/朝batch全順序は別gateであり本接続だけを完了証明にしない。
 
 ## 7. 環境差分
 

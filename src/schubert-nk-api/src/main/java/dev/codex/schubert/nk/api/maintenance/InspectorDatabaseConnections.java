@@ -40,11 +40,15 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
     this.url = Objects.requireNonNull(url, "database URL");
     Objects.requireNonNull(credential, "database credential");
     this.connector = Objects.requireNonNull(connector, "database connector");
-    var match = URL.matcher(url);
+    database = databaseName(url);
+    password = credential.copyPassword();
+  }
+
+  static String databaseName(String url) {
+    var match = URL.matcher(Objects.requireNonNull(url, "database URL"));
     if (!match.matches() || Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535)
       throw new IllegalArgumentException("inspector database URL is invalid");
-    database = Objects.requireNonNull(match.group(2));
-    password = credential.copyPassword();
+    return Objects.requireNonNull(match.group(2));
   }
 
   @FunctionalInterface

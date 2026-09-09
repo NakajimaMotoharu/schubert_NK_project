@@ -36,7 +36,8 @@ NESTED = (
 )
 SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
     "004_NK-DAT-001/evidence/" + p for _, p in NESTED) + (
-        "004_NK-DAT-001/evidence/inspector-database",)
+        "004_NK-DAT-001/evidence/inspector-database",
+        "004_NK-DAT-001/evidence/inspector-application",)
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -100,6 +101,7 @@ def collect(repo, run, execute=subprocess.run):
                      str(repo / "tools/quality/016_collect_inbox_inspection_evidence.py"), run]
                     + ([flag] if flag else []) for flag, _ in NESTED)
     commands.append([sys.executable, "-B", str(repo / "tools/quality/021_collect_inspector_database_evidence.py"), run])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/021_collect_inspector_database_evidence.py"), run, "--application"])
     for command in commands:
         execute(command, cwd=repo, check=True)
 

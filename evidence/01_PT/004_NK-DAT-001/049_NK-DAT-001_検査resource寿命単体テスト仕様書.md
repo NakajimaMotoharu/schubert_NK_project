@@ -20,7 +20,7 @@ RD DAT-009/OPS-009/FIL-006、UI212/241/251、SS343 §6.7/324/341/352、QA-046/UI
 | PT-DB-INBOX-216 | 同.rootFailures | open/最後のclose故障で結果返却なし。close故障後の再開はDB永続結果を読み直す |
 | PT-DB-INBOX-217 | 同.nativeAdmission | default実Linux factoryでRW/非専用rootを拒否。別metadata portの正系を実root認可と混同しない |
 | PT-DB-INBOX-218 | 同.nullContracts | settings/native/io/runのnullはconstructor/execute境界で拒否、run null時IO0 |
-| PT-DB-INBOX-219 | 同.interruptedExecution | 割込flag維持、内部結果INTERRUPTEDを成功にしない、外側で取得済resourceも全close |
+| PT-DB-INBOX-219 | 同.interruptedExecution | 開始時はrun null確認後に割込flag維持/IO0/INTERRUPTED、実FileChannel読取途中の割込は例外・全close/消去。BUG-134/YKT-105のSS補足に追跡 |
 | PT-DB-INBOX-220 | 同.concurrentLifetimes | 独立操作を並行実行し借用native portをcloseしない。各root/entryを回収、設定snapshot非変化、実DB競合試験は既存run PTを回帰 |
 
 ## 3. 正式gate・再現

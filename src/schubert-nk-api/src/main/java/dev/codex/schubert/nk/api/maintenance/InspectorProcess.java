@@ -54,13 +54,7 @@ public final class InspectorProcess {
     this.credentials = Objects.requireNonNull(credentials, "credentials");
     this.connections = Objects.requireNonNull(connections, "connections");
     this.clock = Objects.requireNonNull(clock, "clock");
-    this.fingerprintVersions = Set.copyOf(fingerprintVersions);
-    if (this.fingerprintVersions.isEmpty())
-      throw new IllegalArgumentException("readable fingerprint versions are required");
-    for (String version : this.fingerprintVersions) {
-      if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}"))
-        throw new IllegalArgumentException("fingerprint version is invalid");
-    }
+    this.fingerprintVersions = InspectorSettings.requireVersions(fingerprintVersions);
   }
 
   /**

@@ -22,13 +22,26 @@ SUBJECTS = (
     "dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess",
     "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
 )
+APPLICATION_GROUPS = (
+    ("dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest", 209,
+     ("validSnapshot", "invalidSettings", "sharedValidation")),
+    ("dev.codex.schubert.nk.api.file.InspectorApplicationTest", 212,
+     ("successAndResume", "protectedResult", "databaseFailure", "credentialFailures", "rootFailures",
+      "nativeAdmission", "nullContracts", "interruptedExecution", "concurrentLifetimes")),
+)
+APPLICATION_SUBJECTS = (
+    "dev/codex/schubert/nk/api/maintenance/InspectorSettings",
+    "dev/codex/schubert/nk/api/file/InspectorApplication",
+    "dev/codex/schubert/nk/api/maintenance/InspectorProcess",
+) + SUBJECTS
 
 
-def validate_reports(suites):
-    if len(suites) != 3 or {s.get("name") for s in suites} != {g[0] for g in GROUPS}:
+def validate_reports(suites, application=False):
+    groups = APPLICATION_GROUPS if application else GROUPS
+    if len(suites) != len(groups) or {s.get("name") for s in suites} != {g[0] for g in groups}:
         raise ValueError("missing or unmapped inspector database class")
     methods = {}
-    for cls, start, expected in GROUPS:
+    for cls, start, expected in groups:
         suite = next(s for s in suites if s.get("name") == cls)
         cases = suite.findall("testcase")
         names = [c.get("name") for c in cases]
@@ -50,7 +63,12 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
-    run = parser.parse_args().run_id
+    parser.add_argument("--application", action="store_true")
+    args = parser.parse_args()
+    run = args.run_id
+    groups = APPLICATION_GROUPS if args.application else GROUPS
+    subjects = APPLICATION_SUBJECTS if args.application else SUBJECTS
+    folder = "inspector-application" if args.application else "inspector-database"
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
@@ -62,23 +80,23 @@ def main():
                     "src", "pom.xml", "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-api/target"
     methods = validate_reports([ET.parse(target / "surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
-                                for g in GROUPS])
+                                for g in groups], args.application)
     coverage = {}
     for cls in ET.parse(target / "site/jacoco/jacoco.xml").getroot().iter("class"):
         name = cls.get("name")
-        if any(name == subject or name.startswith(subject + "$") for subject in SUBJECTS):
+        if any(name == subject or name.startswith(subject + "$") for subject in subjects):
             coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                               for c in cls.findall("counter")}
-    if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+    if not set(subjects).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete inspector database coverage")
-    evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence/inspector-database"
+    evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     evidence.mkdir(parents=True, exist_ok=True)
-    sanitized = ET.Element("testsuite", name="NK-DAT-001-inspector-database", tests="16", failures="0", errors="0", skipped="0")
+    sanitized = ET.Element("testsuite", name="NK-DAT-001-" + folder, tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(sanitized, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(sanitized).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
-    sources = [repo / "src/schubert-nk-api/src/main/java" / (name + ".java") for name in SUBJECTS]
-    sources += [repo / "src/schubert-nk-api/src/test/java" / (g[0].replace(".", "/") + ".java") for g in GROUPS]
+    sources = [repo / "src/schubert-nk-api/src/main/java" / (name + ".java") for name in subjects]
+    sources += [repo / "src/schubert-nk-api/src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml",
                 repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java"]
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
@@ -94,6 +112,13 @@ def main():
         "limitations": "JVM/JDBC immutable String copies cannot be physically erased by this API. Root-manager actual credential provisioning, dedicated main/unit, parent OS/real-backup/full-morning, actual NK CHR and IT/ST are NOT certified.",
         "sourceFiles": [{"path": str(p.relative_to(repo)), "sha256": digest(p)} for p in sources],
     })
+    if args.application:
+        manifest.update({
+            "scopeResult": "PASS_INSPECTOR_RESOURCE_LIFETIME_ONLY",
+            "related": ["QA-046", "UIC-006", "SSC-049", "PG-D-143", "BUG-134", "YKT-105", "BUG-014", "YKT-012"],
+            "fixture": "Public immutable path/URL/version vectors; real retained temporary files and native descriptors with explicitly synthetic privileged metadata; isolated PG18.6 trust fixture for resource composition only, NOT a SCRAM authentication certificate (047/PT207 independently covers SCRAM). Runtime random AES keys and public byte65 fixture password, no deployed credentials.",
+            "oracle": "049/PT209..220: immutable nonsecret configuration; null/empty/root/path/URL/version rejection before IO; real SQL empty-run END0/0/0 and same-run resume; malformed response retained END1/0/1; missing backup STORAGE_FAILURE and no durable progress; password/key failure closes all; root open/close failure never returns success and committed progress survives resume; default native RW root rejection; start interrupt flag retained with IO0, actual FileChannel interruption fails and closes;64 independent concurrent missing-file operations close every FD. Private reflection and production-derived expected values are not used.",
+        })
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
