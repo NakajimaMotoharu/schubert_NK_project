@@ -1,0 +1,28 @@
+# NK-DAT-001 Inbox永続進捗SQL実行結果
+
+## 1. 判定
+
+探索3（2026-09-09 11:03:43 JST完了）: 新8＋旧SQL32＋DB15＋Outbox4＋Protocol5＋Storage16=80件PASS、failed/error/skipped0、静的解析0。追加のrecord全引数/未期限・PROCESSING拒否/空ENDも確認。正式root gate/証跡は未確定。V012・PG-D-127・QA-046/SSC-049、021/PT073～080に対応。Java検査との所有transaction接続、oneshot、親process、残る参照・全cleanup監査は未完了。BUG-014/YKT-012を閉じない。
+
+## 2. SQL条件matrix
+
+| 対象 | Test ID / 期待結果・根拠 |
+|---|---|
+| open初回/既存/完了、NULL/finite/cutoff変更 | 073/076/077、初回0/NULL/未完了、再読同値、別cutoff55000、NULL/±infinity22023、既完了不変 |
+| record全NULL必須引数/負count/unknown outcome/xact形式・同一性 | 076、22023・異なるTX55000、case mismatch/空/未知を拒否。cursor NULLは初回だけ正当 |
+| record progress不在/cutoff不一致/cursor不一致/count不一致/既完了 | 073/074/076、55000/0変更、savepointはSQL負値のfixture隔離にだけ使用し本番所有境界の証明にしない |
+| DELETED/PROTECTED/END・Message NULL形態・UUID前進 | 073/074/076、D/Pは各count+1・合計維持、Message不在/存在・期限同値/未完了を区別、PG byte順の8000…を進める、stale/同値/逆行55000 |
+| END残候補/候補なし/二重END | 073/074、残候補55000、後方に候補なしだけcompleted_at設定、二重記録55000・完了readは不変 |
+| DELETEと記録のcommit/rollback・記録overflow | 075/076、同TX両方確定または両方復元、Long.MAX_VALUE＋1は22003、削除後のoverflowでも全rollback、再読で二重計上なし |
+| 全4CK/NN | 076/080、非有限cutoff/completed、負・不一致count、0とcursor不一致は23514、必須NULL23502、正常0/上限許容 |
+| backup/state/JST日付/終了/同run、advisory/row lock | 077、成功2行以外55000、同run/別run競合55P03、backup/progress NOWAIT55P03、終了後再取得可 |
+| purge400日strict±1µs/未完了/同run/調査中/lock/limit | 078、100/107だけ先に2削除、106はlock解除後1、他6保持、rollback全復元/反復0、batch履歴4不変 |
+| purge各NULL/finite/limit0/1/1000/1001/backup/lock | 078、不正22023、LOCK_BUSY/BACKUP_GATEいずれも0/0/0、正常OK件数一致 |
+| role/owner/search_path/UTC/PUBLIC/default privilege | 079、検査2関数/batch清掃1、base tableはbackup SELECTだけ（app default明示REVOKE）、service DML/SET ROLE不可、PUBLIC0 |
+| inventory/旧history/hash | 080/旧SQL/DB、12履歴・22table・CK149/PK22/FK23/UK30/trigger1、再適用0、旧V001～011独立固定SHA不変 |
+
+全SQL条件matrixはSQL実行と後条件で検証し、架空のJaCoCo100%としない。Java4種100%は正式root gateへ追跡する。テスト中のSQL capabilityを暗号検査成功の証明と誤認しない。
+
+## 3. 証跡
+
+正式run後、evidence/inbox-progress-sql/manifest.json/results.xml/checksumsへsource/branch/日時/command/exit/tool/SQL source hash/Test ID/期待・実際/QA/SSC/BUGを確定する。fixtureのciphertext/生wire/credential/dumpは保存しない。全既存scopeの再試験・hash/trace・Current baselineと旧migration不変・秘密scan確認後に更新する。IT/ST未実施。

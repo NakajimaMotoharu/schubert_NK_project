@@ -57,7 +57,7 @@ import org.postgresql.util.PSQLException;
 final class DatabaseMigrationTest {
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS =
-      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011");
+      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -72,6 +72,7 @@ final class DatabaseMigrationTest {
           "maintenance_cleanup_questions", 1000,
           "maintenance_cleanup_sessions", 1000,
           "maintenance_cleanup_message_stores", 1000,
+          "maintenance_cleanup_inbox_progress", 1000,
           "maintenance_cleanup_logs", 10000,
           "maintenance_cleanup_batch_runs", 1000);
   private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
@@ -137,7 +138,7 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("PT-DB-001 V001-V011 migrate, validate and idempotent rerun")
+  @DisplayName("PT-DB-001 V001-V012 migrate, validate and idempotent rerun")
   void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
     assertEquals(MIGRATION_VERSIONS.size(), firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
@@ -163,7 +164,7 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(2)
-  @DisplayName("PT-DB-002 schemas, pg_trgm and 21 tables")
+  @DisplayName("PT-DB-002 schemas, pg_trgm and 22 tables")
   void schemasExtensionAndTablesMatchTheIndependentCatalog() throws SQLException {
     assertEquals(
         Set.of("schubert", "schubert_meta", "schubert_web_session"),
@@ -219,7 +220,7 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
   void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
     assertEquals(
-        "145|23|30|21|1",
+        "149|23|30|22|1",
         queryString(
             ADMIN,
             "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
@@ -588,12 +589,12 @@ final class DatabaseMigrationTest {
                 + "where n.nspname='schubert' and c.relname like 'v_ops_%' "
                 + "and array_to_string(c.reloptions,',') like '%security_barrier=true%'"));
     assertEquals(
-        6L,
+        (long) CLEANUP_FUNCTION_LIMITS.size(),
         queryLong(
             ADMIN,
             "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
                 + "where n.nspname='schubert' and p.proname like 'maintenance_cleanup_%' "
-                + "and p.prosecdef and p.proconfig=case when p.proname='maintenance_cleanup_message_stores' "
+                + "and p.prosecdef and p.proconfig=case when p.proname in ('maintenance_cleanup_message_stores','maintenance_cleanup_inbox_progress') "
                 + "then array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
                 + "else array['search_path=pg_catalog, schubert, schubert_web_session'] end"));
     assertFalse(
@@ -1034,7 +1035,7 @@ final class DatabaseMigrationTest {
             parallelUrl,
             "select count(*) from schubert_meta.flyway_schema_history where success"));
     assertEquals(
-        21L,
+        (long) expectedTables().size(),
         queryLong(
             ADMIN,
             parallelUrl,
@@ -1050,7 +1051,7 @@ final class DatabaseMigrationTest {
     try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
       paths.filter(Files::isRegularFile).forEach(resources::add);
     }
-    // QA-046/SSC-049/PG-D-126 approved V011 inventory; secret/byte scan remains unchanged.
+    // QA-046/SSC-049/PG-D-127 approved V012 inventory; secret/byte scan remains unchanged.
     assertEquals(
         java.util.Set.of(
             "migration/V001__schemas_and_extension.sql",
@@ -1064,6 +1065,7 @@ final class DatabaseMigrationTest {
             "migration/V009__conditional_auth_inbox_deletion.sql",
             "migration/V010__full_inbox_scan_and_restricted_deletion.sql",
             "migration/V011__batch_outbox_only_cleanup.sql",
+            "migration/V012__durable_inbox_inspection_progress.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1573,6 +1575,7 @@ final class DatabaseMigrationTest {
         "schubert.mq_outbox",
         "schubert.app_logs",
         "schubert.batch_runs",
+        "schubert.inbox_inspection_progress",
         "schubert_web_session.web_http_sessions",
         "schubert_web_session.pending_context_revocations",
         "schubert_web_session.web_log_outbox");
@@ -1633,6 +1636,7 @@ final class DatabaseMigrationTest {
         "uq_batch_runs_business_step_success",
         "ix_batch_runs_run_step",
         "ix_batch_runs_status_started",
+        "ix_inbox_inspection_progress_completed",
         "ix_web_http_sessions_expires_at",
         "ix_pending_context_revocations_due",
         "ix_pending_context_revocations_expires",
@@ -1713,6 +1717,10 @@ final class DatabaseMigrationTest {
         "schubert.batch_runs",
         set(
             "id run_id business_date step attempt started_at ended_at status target_count success_count failure_count byte_count error_code error_summary"));
+    columns.put(
+        "schubert.inbox_inspection_progress",
+        set(
+            "run_id cutoff after_message_id inspected_count deleted_count protected_count completed_at"));
     columns.put(
         "schubert_web_session.web_http_sessions",
         set(

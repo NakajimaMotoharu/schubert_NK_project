@@ -292,6 +292,18 @@ NULL必須DB列/SQL/health/commit/close故障は12.3どおり非秘密の運用�
 
 旧認証PT033～040は同serviceの回帰として維持する。新PT057～064で全22 query/User route、SCN I/Fと参照lock、24h/168h、未知を含む混在cursor、非認証のSQL/commit故障・100並行を検証する。既存の「非認証layoutへの変造は候補外END」という期待だけを、3.6承認の全候補走査に合わせPROTECTED/保持へ更新する。PROCESSING/未期限は引き続きEND。この内部走査契約変更はRD/UIの外部動作変更ではない。
 
+### 12.6 永続progressとの原子的接続（SSC-049、PG-D-128）
+
+InboxCleanupへinspectStoredNext(run)とrunChunk(run,maxSteps)を追加する。既存inspectNextの単一候補PTは維持し、process用入口は必ず永続経路とする。privateなtransaction共通methodだけがfresh connectionを開き、class内部から渡す処理だけを実行する。外部callback/connection公開は追加せず、従来のhealth/commit/rollback/close/固定cause-free例外の処理を複製しない。
+
+inspectStoredNextはV012 openでprogress行をlockし、同じSELECTのtop-level transaction IDを内部保持する。返却run/cutoff、必須列/型/件数、cursorと非負の累積countの不変条件を再検査する。completed_atありなら保存済み結果だけを返す。未完了なら保存cursorで12.5の候補検査・条件付き削除を行い、その結果をV012 recordへ同じtransactionで保存する。健康確認・commit・close成功後だけ戻り値を返す。不明commit/close障害は例外とし、次回同runでDBを再読取りするまで件数を推測しない。
+
+InspectionProgressはInspectionRun、Optional UUID cursor、inspected/deleted/protectedのlong累積値、complete booleanの不変recordとする。NULLは禁止、count>=0、deleted<=inspected、protected=inspected-deleted、inspected=0とcursorなしを同値とする。加算でoverflowする検査式を使わない。内部projectionだけにID/cutoffを持たせ、toString/運用診断ではID/cursor/cutoffをredactして件数・完了flagだけを出す。completed_atの有無はDB制約に従いcompleteへ射影し、任意SQL列/DTOを外へ出さない。
+
+runChunkはmaxSteps=1～1000だけを受け、先頭からinspectStoredNextを最大指定回数実行する。各stepは独立の所有transactionで、返却complete=trueで早期終了する。上限到達で未完了ならcomplete=falseを返し、工程成功にしない。無限loop/自動SQL retry/新run採番/時計でcutoffを進める処理はしない。全processの30分制限・親のOS lock/通常API停止・backup実file gate・鍵寿命は341/343の起動実装で保証し、この部品だけで完了扱いしない。
+
+PT081～088で混在正常/保護/未対応cursor、1/1000上限・途中再開・既完了、独立wire/JCE＋実DDL、全null/矛盾DB結果/SQL・resource故障、deleteとcheckpointの間のfailure/不明commit/再読、100並行の一意累積、旧認証/非認証の回帰と全line/method/class/branch100%を検証する。
+
 ## 13. Metric・alert
 
 - Inbox PROCESSING/COMPLETED/ERROR count、oldest、replay count、token mismatch count。
