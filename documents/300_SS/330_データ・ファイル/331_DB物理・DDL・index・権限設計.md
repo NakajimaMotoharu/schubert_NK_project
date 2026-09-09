@@ -125,6 +125,14 @@ V010で`maintenance_next_inbox(uuid,timestamptz,uuid)`と`maintenance_delete_inb
 
 PT049～056で実SQL全引数/分岐/各24route/token/owner/ref/期限境界、最小列権限/禁止42501、参照とbackup/advisory競合、rollback/同run再走、未知候補保持・PROCESSING除外を検証する。migration inventory期待値は承認された追加に合わせ10へ更新し、旧1～9のhashを保全する。SQL matrixをJava coverageと偽らない。Java全候補の原子的検査接続・oneshot・V006置換は後続gateでありV010だけでBUG-014を閉じない。
 
+### 3.7 通常batchからのInbox削除迂回を廃止（SSC-049、PG-D-126、V011）
+
+QA-046承認済みの実行主体分離をV011で具体化する。V001～010は不変とし、既存signatureのmaintenance_cleanup_message_stores(uuid,timestamptz,integer)をOutbox専用に置換する。schubert_batchのEXECUTEは維持するが、本関数はrequest_inboxを読み書きせず、全state/layout/暗号/参照のInboxをそのまま残す。Inbox件数をOutbox chunk件数へ合算しない。検査processの未起動/失敗を本関数のOKで代替せず、341の親processが必須の検査stepを別途実行・確認する。
+
+API mq_outbox→Web web_log_outboxの順にID昇順FOR UPDATE SKIP LOCKED、合計limit 1～1000。SENTかつsent_at < cutoff−168時間、lease_until IS NULLまたは<cutoffだけを削除する。期限同値/未来/lease中/PENDING/ERRORを保持。NULL/非有限cutoff/不正limitは22023。V010内部helperのadvisory/同run/JST日付/成功backup単一locked snapshotを共用し、55P03は従来の0/0/0/LOCK_BUSY、55000は0/0/0/BACKUP_GATEへ閉じたcodeだけ変換する。他例外は伝播しtransaction rollback。返却target/deletedは実Outbox削除件数、skipped0、OKはOutboxの本呼出し成功だけを表す。行lock待ちをSKIPした候補を成功件数へ加算しない。
+
+owner nk_owner、SECURITY DEFINER、固定search_path/UTC、PUBLIC/他service EXECUTEなし、通常batchのInbox/base table権限追加なし。動的SQL/汎用table引数/任意検査済flagを設けない。V008～010の専用検査関数はそのまま。PT065～072と旧DB/Outbox回帰で、Inbox全保持、Outbox境界/chunk/rollback、backup集合の途中追加/競合、権限・全DELETE経路の役割を確認する。旧PT-DB-011の不正Inbox削除期待は、承認済みBUG-014修正として保持2行/Outbox0削除へ変更し根拠を残す。全run/oneshot/参照未対応が残るためBUG-014/YKT-012を閉じない。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

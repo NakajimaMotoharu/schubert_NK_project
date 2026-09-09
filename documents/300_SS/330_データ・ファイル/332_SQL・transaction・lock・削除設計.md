@@ -288,6 +288,8 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
    `security_hold_until > :log_cutoff`は保全中としてskip、NULLまたは`<= :log_cutoff`は期限到達として削除する。
    target/deleted/skippedは同lock対象chunkで集計し、保全行の存在を成功件数に隠さない。
 
+SSC-049/PG-D-126補足: V011以降のmaintenance_cleanup_message_storesは上記2のOutboxだけを処理し、3のInboxを読み書きしない。通常batchのOKをInbox検査完了の証明にしない。Inboxは専用processの候補lock→暗号/参照検査→条件付き削除という同transactionの経路だけで処理する。全件検査の未起動/失敗は親stepで非成功として記録・警告し、検査しない削除へfallbackしない。通常batchの直接Inbox権限は追加しない。
+
 ## 12. Deadlock・競合防止
 
 | 処理 | Lock順 |
