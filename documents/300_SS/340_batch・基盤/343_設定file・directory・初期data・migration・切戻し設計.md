@@ -153,6 +153,19 @@ InspectorAesCredential.consume(byte[])は入力arrayの排他的所有を引き�
 
 元file0600とsystemd配布後のruntime権限は別物である。systemd 259の実装はroot所有fileへ対象UIDのACLを追加する経路と、対応filesystemによって所有者を移す経路を持つ。単に「runtime file owner=serviceかつmode0400だけ」とする実装は採用しない。後続readerは保持inode、regular/symlink/hardlink/サイズ、readonly/owner/実効ACLの専用主体限定、読取/close失敗を検証してからmaterialを渡す。ACL検証未実装を緩いmode判定で代用せず、main/専用unit/親processの鍵配布を完了にしない。[systemd 259 credential実装](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)、[公式credential契約](https://raw.githubusercontent.com/systemd/systemd/v259/man/systemd.exec.xml)を参照（2026-09-09確認）。
 
+### 6.2 Runtime credential権限の限定（SSC-049、PG-D-132）
+
+非公開検査processは非rootの専用UID（1～4294967294）で動作する。保持inodeの属性とaccess ACLは以下の2形式だけを許可する。ACL検査単体はfileを読まない。後続IO adapterが同じ保持inodeから取得した型付き属性、実際のfilesystem readonly flag、`system.posix_acl_access`を渡し、取得失敗を空ACLへ変換しない。
+
+| 形式 | Directory | AES file | Access ACL |
+|---|---|---|---|
+| system manager root所有＋専用UID ACL | type directory、mode0550、nlink>=1 | type regular、mode0440、nlink=1、size54～69 | owner root、USER_OBJ=r-x/r--、USER=専用UID:r-x/r--、GROUP_OBJ=---、MASK=r-x/r--、OTHER=---の5 entryのみ |
+| 専用UID所有fallback | type directory、mode0500、nlink>=1 | type regular、mode0400、nlink=1、size54～69 | access ACLなし、owner=専用UID、実filesystem readonly必須 |
+
+typeを含むunix modeの完全一致を使い、symlink/FIFO/device/socket、setuid/setgid/sticky、write bit、fileのexecute、余分なhardlinkを拒否する。root+ACL形式は専用UIDがchmodできず、plain-directory fallbackでも安全性を保てる。専用UID所有形式はchmodでwriteを取り戻せないようreadonly filesystemを必須とする。root所有なのにACLなし、他owner/他UID/他group/余分entry（権限0でも）、mask/other許可、byte順/ACL version/entry順/不足/末尾dataの相違を拒否する。規定形式を満たさない現物のchmod/chown/ACL補正はreaderの責務にせず、設定不正で停止する。
+
+Linux UAPI形式はlittle-endian version2の4byte headerと8byte entry（tag u16、perm u16、id u32）。5entry=44byte、名前なしentryのidはFFFFFFFF、tag順は1/2/4/16/32。modeのgroup bitはACL maskであり、GROUP_OBJ権限と混同しない。上記は汎用ACL parserではなくsystemd配布形の厳格allowlist。根拠: [Linux ACL xattr UAPI](https://raw.githubusercontent.com/torvalds/linux/v6.16/include/uapi/linux/posix_acl_xattr.h)、[tag/permission UAPI](https://raw.githubusercontent.com/torvalds/linux/v6.16/include/uapi/linux/posix_acl.h)、[systemd v259 file/directory権限設定](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)。環境259.5実測と保持inode/native読取/close/親gateは別PTで確認するまで未完了とする。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
