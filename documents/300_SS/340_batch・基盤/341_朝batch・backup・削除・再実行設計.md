@@ -189,6 +189,7 @@ Readinessは認証情報・Queue内容・DBデータをbodyへ返さない。Cad
 | `expiry-cleanup --run-id` | Artemis UP、API停止 | 同cutoff selectorの残件だけpurge |
 
 新しい日時でresume対象を再計算しない。別日へ進む場合は新run ID/business dateを作る。
+SSC-054/BUG-138: 手動backup再実行は通常成功stepのskip例外。331 §8.2のbackup2stepだけ同日複数SUCCESSを保持し、新attempt失敗で既存成功を消去・状態変更しない。最新成功の実artifactを検証し、通常step成功一意性・固定run/cutoffと全backup gateは維持する。DB制約修正を実backup生成/検証完了と混同しない。
 Manual commandもsystemd transient scopeまたは対応oneshot unitを通し、root shellでJava/SQL/scriptを直接実行しない。
 
 ## 12. Exit code・終了判定

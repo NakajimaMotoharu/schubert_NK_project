@@ -401,8 +401,10 @@ GIN `message gin_trgm_ops`に限定する。容量実測がthresholdを超えた
 `target_count/success_count/failure_count bigint NN default 0 check >=0`、`byte_count bigint NN default 0 check >=0`、
 `error_code varchar(64)`、`error_summary varchar(512)`。
 
-UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS'`、index `(run_id,step)`、
-`(status,started_at desc)`。同一stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
+UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS' AND step NOT IN ('BACKUP_DB','BACKUP_CONFIG')`、index `(run_id,step)`、
+`(status,started_at desc)`。通常stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
+
+SSC-054/BUG-138/PG-D-145: UI251 §11のbackup例外に従い、BACKUP_DB/CONFIGだけ同日複数SUCCESSを許容し、再実行前の成功履歴をSKIPPED等へ書換えない。同日stepのattempt1～99・UKは維持し、99超は繰返し/上書きせず停止。V017で既存success indexのpredicateだけappend-only修正し、旧migrationは不変。他index/role/grant/保持期限は不変。最新成功backupの実directory/manifest/hash選択・DB/configの同一成果物照合は親backup/cleanup実装の別必須責務であり、本制約修正だけでは配備・backup完了を意味しない。
 
 ## 9. Web technical schema
 
