@@ -168,6 +168,16 @@ Linux UAPI形式はlittle-endian version2の4byte headerと8byte entry（tag u16
 
 ## 7. 環境差分
 
+### 6.3 保持inodeからのaccess metadata読取（SSC-049、PG-D-133）
+
+storageのInodeSecurityCalls/LinuxInodeSecurityはOwnedTransferDirectory callback内のcanonical `/proc/self/fd/<0..2147483647>`だけを受け、libc getxattrの固定名system.posix_acl_access、statvfsのST_RDONLY、geteuidを読む。API file adapterは同callback内でunix属性・ACL・filesystem flagを取得し、型/owner/permissionを確認してから内容を開く。FD/pathをcallback外へ保持・返却・記録しない。final symlink自体を保持するO_PATHは、readerのunix type検査で先に拒否する。
+
+ACLはcaller指定上限1～65536byteの単回読取（inspectorは44）。size照会→再allocateのraceを作らず、ERANGE/上限超過/0byte成功/不正returnは拒否する。ENODATA/EOPNOTSUPPだけは「ACL値が取得されない」空結果であり、ACL不存在や権限許可の単独証明ではない（ENODATAはアクセス不可も含み得る）。その他EACCES/EPERM/EIO/ENOENT等は固定StorageIoExceptionで停止する。空結果は§6.2のroot+ACL形式では必ず拒否され、専用UID所有・mode0400/0500・filesystem ROの全条件を別途満たす場合だけ内容読取へ進める。POSIX ACLのgroup class mask0/other0は他主体の実効accessを許可しない。Read失敗を成功へ変換しない。Linux systemd local credential filesystemを対象とし、NFS等の異種ACLを一般に認可する機能ではない。
+
+Java25公開FFMでLinux/glibcのLP64 x86_64/amd64/aarch64 ABIに限定し、必要symbol/OS/archが不明なら起動不可。statvfsは当環境libc6-dev2.43-2ubuntu2.4の/usr/include/x86_64-linux-gnu/bits/statvfs.hと照合した112byte/align8、f_flag offset72、ST_RDONLY=1。実PTは当機x86_64、他archの実動作は後続環境確認事項であり未実測を合格へ加えない。固定binding部分だけ既存PG-D-055同様restricted FFM warningを理由付き限定抑止し、null/他warning/coverageは除外しない。Test用call portはnative戻り値・errnoを決定的に注入し、実LinuxのACL/保持inode/UID/100並行と合わせて検証する。
+
+根拠: [Linux getxattr契約](https://man7.org/linux/man-pages/man2/getxattr.2.html)、[statvfs契約](https://man7.org/linux/man-pages/man3/statvfs.3.html)、[glibc statvfs layout更新](https://sourceware.org/pipermail/glibc-cvs/2023q3/082782.html)、上記の導入済みheader。実credential・DB・service設定は変更せず、公開metadataだけの一時file/setfacl2.3.2をPT fixtureとする。
+
 | 項目 | Local dev | PT/IT | Production |
 |---|---|---|---|
 | PostgreSQL/Artemis | Container/専用instance可、実製品同major | Java 25/PG18/Artemis導入minor | 単一server、loopback |

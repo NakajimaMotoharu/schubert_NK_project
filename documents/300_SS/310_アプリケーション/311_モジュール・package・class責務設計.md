@@ -51,6 +51,8 @@ Storage package `.storage`はDirectoryCalls/LinuxDirectoryCalls、OwnedTransferD
 
 ## 4. `schubert-nk-protocol`
 
+SSC-049/PG-D-133: storageへ低位InodeSecurityCalls/LinuxInodeSecurityを追加し、保持inode callback内のaccess ACL/readonly filesystem flag/effective UIDだけを公開する。業務認証やkey内容を扱わず、APIのcredential file adapterがSS343 §6.2のpolicyと組み合わせる。任意path・symbol・attribute名を受けず、native実装をAPIへ複製しない。検査processも明示native-accessを必須とする。PT-DB-INBOX-121～128。
+
 ### 4.1 Package
 
 | Package | 主要class | 責務 |
