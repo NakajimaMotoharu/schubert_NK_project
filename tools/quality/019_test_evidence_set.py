@@ -27,6 +27,37 @@ batch = module("batch_collector", "020_collect_batch_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_log_service_class_and_pt_ids_are_mandatory(self):
+        cls = "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest"
+        names = ["emptyAndCompletedRuns", "heldPrefixAndLargeChunks", "resumedAttemptCounts", "sessionLockOwnership",
+                 "backupAndRowLockStop", "timeBoundaryAndClockWrap", "interruptsRemainSet", "rollbackAndUncertainCommit",
+                 "restorationAndUnlockFailures", "invalidInputsAndProjections", "summaryInvariants", "failuresLeaveNoFalseSuccess"]
+        suite = ET.Element("testsuite", name=cls, tests="12", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        expected = {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 18)}
+        self.assertEqual(expected, batch.validate_log_suite(suite))
+        for position in range(12):
+            wrong = copy.deepcopy(suite)
+            wrong.remove(wrong[position])
+            with self.assertRaises(ValueError):
+                batch.validate_log_suite(wrong)
+        for kind in ("failure", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite)
+            ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError):
+                batch.validate_log_suite(wrong)
+        # Repository method ownership is independently checked by the next test.
+        repository = ET.Element("testsuite", name=batch.CLASS, tests="17", failures="0", errors="0", skipped="0")
+        for name in batch.METHODS:
+            ET.SubElement(repository, "testcase", classname=batch.CLASS, name=name)
+        accepted = batch.validate_reports([suite, repository])
+        self.assertEqual(29, len(accepted))
+        self.assertEqual(expected, {k: v for k, v in accepted.items() if k in expected})
+        for reports in ([], [suite], [repository], [suite, suite], [repository, repository], [suite, repository, suite]):
+            with self.assertRaises(ValueError):
+                batch.validate_reports(reports)
+
     def test_batch_inventory_rejects_unrun_and_changed_tests(self):
         names = ["runIdentityBoundaries", "countInvariants", "cleanupAllowlist", "rejectionAndProgressContracts",
                  "emptyCleanupAndExplicitTransaction", "heldLogsAndDurableRead", "rollbackSavepointAndResume",

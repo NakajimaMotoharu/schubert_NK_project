@@ -25,4 +25,4 @@ LogCleanupService・LogCleanupSummary・CleanupStoppedException。実PG18/Flyway
 BUG-112の方式確定: 最初のchunk結果と同transaction内の累積から開始件数を差引復元する。PT018～020の独立開始/終了/attempt期待値は不変。2chunk目以降は復元開始値と直前確定累積の一致をcommit前に確認し、PT027/029で不整合を注入する。非公開backup helperの直接実行やgrant追加は行わず、既存cleanupのBACKUP_GATE/LOCK_BUSYをそのまま使う。
 
 実行command/OS/JDK/tool version/branch/source/日時/exit/line-method-class-branch100%/Test ID/BUG/関連file/hashを004・evidenceへ固定する。Sourceからexpectedを生成しない。固定10001行と差分は算術/SQL後条件を使い、同Production methodからexpectedを生成しない。
-未実装・未実行。TDDの初回未実装失敗以外は915を修正前起票。Failed/flaky/skipped/not-runを合格へ含めない。
+探索29件/新12件成功は004参照。正式全体gateまでは未合格。TDDの初回未実装失敗以外は915を修正前起票。Failed/flaky/skipped/not-runを合格へ含めない。
