@@ -38,8 +38,9 @@ def main():
     selection.add_argument("--non-authentication", action="store_true")
     selection.add_argument("--full-sql", action="store_true")
     selection.add_argument("--full-cleanup", action="store_true")
+    selection.add_argument("--outbox-only", action="store_true")
     args = parser.parse_args()
-    args.sql = args.sql or args.deletion_sql or args.full_sql
+    args.sql = args.sql or args.deletion_sql or args.full_sql or args.outbox_only
     run = args.run_id
     if not re.fullmatch(r"PT-(ADM|WEB|SCN|MED)-[A-Za-z0-9-]+", run):
         raise SystemExit("invalid run ID")
@@ -63,6 +64,8 @@ def main():
         subject = "NonAuthenticationInboxInspector"
     if args.full_sql:
         subject = "InboxMaintenanceBoundary"
+    if args.outbox_only:
+        subject = "OutboxCleanupBoundary"
     class_name = "dev.codex.schubert.nk.api.maintenance." + subject + "Test"
     if args.cleanup:
         class_name = "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest"
@@ -108,6 +111,11 @@ def main():
                  "canonicalMetadataAndTokensAreRequired", "mixedCursorsNeverSkipUnverifiedRows",
                  "transactionFaultsRollbackAndResume", "concurrentMixedRequestsStayIsolated",
                  "leastPrivilegeAndKeyLifetimes", "outcomesAndSideEffectsRemainBounded"]
+    if args.outbox_only:
+        names = ["inboxRowsAreNeverTouched", "outboxBoundariesAndSharedLimit",
+                 "invalidArgumentsAndFixedReasons", "backupStatesAndDatesAreLocked",
+                 "competingMaintenanceNeverDeletes", "backupSnapshotCannotBeReplaced",
+                 "currentFunctionsAndRolesCloseBypasses", "migrationAndLegacyOraclesRemainExplicit"]
     cases = suite.findall("testcase")
     if (len(cases) != 8 or int(suite.get("tests", "0")) != 8
             or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
@@ -146,6 +154,8 @@ def main():
         folder = "full-inbox-sql"
     if args.full_cleanup:
         folder = "full-inbox-cleanup"
+    if args.outbox_only:
+        folder = "outbox-only-cleanup"
     out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
@@ -169,7 +179,7 @@ def main():
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
         "coverage": counters, "failed": 0, "errors": 0, "skipped": 0,
         "tests": {f"PT-DB-INBOX-{i:03d}": {"method": class_name + "#" + name,
-                                         "result": "PASS"} for i, name in enumerate(names, 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
+                                         "result": "PASS"} for i, name in enumerate(names, 65 if args.outbox_only else 57 if args.full_cleanup else 49 if args.full_sql else 41 if args.non_authentication else 33 if args.cleanup else 25 if args.deletion_sql else 17 if args.sql else 9 if args.authentication else 1)},
         "fixture": "Runtime CSPRNG test-only keys; independent JCE/Deflater envelope and hand-written UI234/SS322/323 wire. No credential or ciphertext saved.",
         "oracle": ("005 PT specification: literal true/false and SQL Instant postconditions under UTC/JST; LOG error N17 zero accepted, spaces rejected; Login immutable refs and Logout owner/revocation. No production expected generation."
                    if args.authentication else "003 PT specification: literal true/false, unsigned N3 000/999 valid, nonnumeric/descending invalid. No production expected generation."),
@@ -240,6 +250,19 @@ def main():
         manifest["classCoverage"] = {cls.get("name"): {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")} for cls in classes}
         manifest["remaining"] = "Question/notification reference validation, whole-run persistence, oneshot key/process composition and V006 replacement NOT certified; BUG014 remains open."
+    if args.outbox_only:
+        manifest["scopeResult"] = "PASS_BATCH_OUTBOX_ONLY_INBOX_BYPASS_REMOVED"
+        manifest["related"] = ["QA-046", "UIC-006", "SSC-049", "PG-D-126", "BUG-014", "YKT-012", "BUG-091", "YKT-082"]
+        manifest["fixture"] = "Isolated PostgreSQL 18.6/real restricted roles; synthetic 31 routes plus unknown x 3 states; NULL/public invalid ciphertext and missing refs only; no credentials/raw wire/dump saved."
+        manifest["oracle"] = "019/020 PT: all Inbox rows and columns unchanged, literal Outbox 168h/lease microsecond boundaries, combined chunk limit and rollback, all five backup states/JST date/locked snapshot race, public/direct/inspector bypass denied, V001..011 inventory and frozen V001..010 hashes."
+        manifest["coverage"] = {"kind": "SQL_BRANCH_MATRIX_NOT_JACOCO",
+                                "proof": "020 maps every argument/gate/exception/DELETE/WHERE/limit/role branch to PT065..072; full Java four-counter gate remains separate.",
+                                "functions": ["schubert.maintenance_cleanup_message_stores(uuid,timestamptz,integer)"],
+                                "roles": ["schubert_batch"]}
+        migration = repo / "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql"
+        manifest["sqlSources"] = [{"path": str(migration.relative_to(repo)), "sha256": hashlib.sha256(migration.read_bytes()).hexdigest()}]
+    # Scope success is not the completion certificate for the complete maintenance workflow.
+    manifest["remaining"] = "Whole-run durable progress, mandatory private oneshot/parent composition, Question/notification reference validation and full cleanup cross-audit NOT certified. BUG014/YKT012 remain open. Separate slice manifests certify the available 24-route inspectors and V011 bypass removal."
     validate_trace(out, manifest, certified)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "checksums.sha256").write_text("".join(

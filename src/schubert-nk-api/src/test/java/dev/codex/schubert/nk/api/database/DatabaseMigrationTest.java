@@ -57,7 +57,7 @@ import org.postgresql.util.PSQLException;
 final class DatabaseMigrationTest {
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS =
-      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010");
+      List.of("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -137,7 +137,7 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("PT-DB-001 V001-V010 migrate, validate and idempotent rerun")
+  @DisplayName("PT-DB-001 V001-V011 migrate, validate and idempotent rerun")
   void migrationsAreVersionedValidatedAndIdempotent() throws SQLException {
     assertEquals(MIGRATION_VERSIONS.size(), firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
@@ -593,8 +593,9 @@ final class DatabaseMigrationTest {
             ADMIN,
             "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
                 + "where n.nspname='schubert' and p.proname like 'maintenance_cleanup_%' "
-                + "and p.prosecdef and array_to_string(p.proconfig,',')="
-                + "'search_path=pg_catalog, schubert, schubert_web_session'"));
+                + "and p.prosecdef and p.proconfig=case when p.proname='maintenance_cleanup_message_stores' "
+                + "then array['search_path=pg_catalog, schubert, schubert_web_session','TimeZone=UTC'] "
+                + "else array['search_path=pg_catalog, schubert, schubert_web_session'] end"));
     assertFalse(
         queryBoolean(
             ADMIN,
@@ -878,13 +879,13 @@ final class DatabaseMigrationTest {
             + ",'key-1','ERROR','2026-08-29 00:00:00+00',"
             + "'2026-08-29 00:00:00+00',null)");
     execute(connection, "set role schubert_batch");
-    // BUG-014: two-day-old SENT rows are retained; only the expired Inbox row is removed.
+    // BUG-014/QA-046/SS331 3.7: two-day SENT and ALL Inbox rows remain in normal batch.
     assertEquals(
-        "1|1|0|OK",
+        "0|0|0|OK",
         cleanupResult(connection, "maintenance_cleanup_message_stores", FIXED_TIME, 10));
     execute(connection, "reset role");
     assertEquals(
-        1L,
+        2L,
         queryLong(
             connection,
             "select count(*) from schubert.request_inbox where message_id in "
@@ -1049,7 +1050,7 @@ final class DatabaseMigrationTest {
     try (var paths = Files.walk(MODULE.resolve("src/main/resources/db"))) {
       paths.filter(Files::isRegularFile).forEach(resources::add);
     }
-    // QA-046/SSC-049/PG-D-124 approved V010 inventory; secret/byte scan remains unchanged.
+    // QA-046/SSC-049/PG-D-126 approved V011 inventory; secret/byte scan remains unchanged.
     assertEquals(
         java.util.Set.of(
             "migration/V001__schemas_and_extension.sql",
@@ -1062,6 +1063,7 @@ final class DatabaseMigrationTest {
             "migration/V008__auth_inbox_inspection_boundary.sql",
             "migration/V009__conditional_auth_inbox_deletion.sql",
             "migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+            "migration/V011__batch_outbox_only_cleanup.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
