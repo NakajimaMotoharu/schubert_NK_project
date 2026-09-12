@@ -8,6 +8,8 @@ import java.util.*;
 
 /** Real JDBC delegation with per-operation fault points and observed lock order. No secret logs. */
 final class AdminAuthFixture {
+  final Map<String, Integer> faultOccurrences = new HashMap<>();
+
   interface Before {
     void run(String sql) throws SQLException;
   }
@@ -96,7 +98,9 @@ final class AdminAuthFixture {
   }
 
   private void fail(String sql, String point) throws SQLException {
-    if (sql.contains(match) && method.equals(point))
+    if (!sql.contains(match)) return;
+    int occurrence = faultOccurrences.merge(point, 1, Integer::sum);
+    if (method.equals(point) || method.equals(point + "#" + occurrence))
       throw new SQLException("synthetic private administrative JDBC marker");
   }
 

@@ -429,7 +429,7 @@ final class InboxCleanupNonAuthenticationTest {
               TIME.plusSeconds(layout.equals("GAMRSP01") ? 86400 : 604800).plusNanos(adjustment);
           try (var c = db.api();
               var s = c.prepareStatement("update schubert.request_inbox set expires_at=?")) {
-            s.setTimestamp(1, Timestamp.from(expires));
+            s.setObject(1, expires.atOffset(java.time.ZoneOffset.UTC));
             assertEquals(1, s.executeUpdate());
           }
           assertEquals(
@@ -582,10 +582,12 @@ final class InboxCleanupNonAuthenticationTest {
       s.setObject(8, reference.uuid().orElse(null));
       s.setString(9, layout);
       s.setBytes(10, body);
-      s.setTimestamp(11, Timestamp.from(TIME.minusMillis(1)));
-      s.setTimestamp(12, Timestamp.from(TIME));
-      s.setTimestamp(
-          13, Timestamp.from(TIME.plusSeconds(MUTATIONS.contains(layout) ? 604800 : 86400)));
+      s.setObject(11, TIME.minusMillis(1).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(12, TIME.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(
+          13,
+          TIME.plusSeconds(MUTATIONS.contains(layout) ? 604800 : 86400)
+              .atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     } finally {
       Arrays.fill(body, (byte) 0);

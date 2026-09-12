@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -56,7 +55,7 @@ final class MessageStoreCleanupTest {
             connection.prepareStatement(
                 "select reason_code from schubert.maintenance_cleanup_" + function + "(?,?,?)")) {
           statement.setObject(1, RUN);
-          statement.setTimestamp(2, Timestamp.from(CUTOFF));
+          statement.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
           statement.setNull(3, java.sql.Types.INTEGER);
           var failure = assertThrows(SQLException.class, statement::executeQuery, function);
           assertEquals("22023", failure.getSQLState(), function);
@@ -157,8 +156,8 @@ final class MessageStoreCleanupTest {
       for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG")) {
         statement.setObject(1, RUN);
         statement.setString(2, step);
-        statement.setTimestamp(3, Timestamp.from(CUTOFF));
-        statement.setTimestamp(4, Timestamp.from(CUTOFF));
+        statement.setObject(3, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(4, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
         assertEquals(1, statement.executeUpdate());
       }
     }
@@ -187,11 +186,11 @@ final class MessageStoreCleanupTest {
       statement.setObject(3, new UUID(1, id));
       statement.setString(4, web ? "WLGEVT01" : "QWKREQ01");
       statement.setString(5, status);
-      statement.setTimestamp(6, Timestamp.from(CUTOFF.minusSeconds(864000)));
-      statement.setTimestamp(7, Timestamp.from(CUTOFF.minusSeconds(864000)));
-      statement.setTimestamp(8, sent == null ? null : Timestamp.from(sent));
+      statement.setObject(6, CUTOFF.minusSeconds(864000).atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(7, CUTOFF.minusSeconds(864000).atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(8, sent == null ? null : sent.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(9, lease == null ? null : "synthetic-worker");
-      statement.setTimestamp(10, lease == null ? null : Timestamp.from(lease));
+      statement.setObject(10, lease == null ? null : lease.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, statement.executeUpdate());
     }
   }
@@ -204,7 +203,7 @@ final class MessageStoreCleanupTest {
         connection.prepareStatement(
             "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_message_stores(?,?,?)")) {
       statement.setObject(1, RUN);
-      statement.setTimestamp(2, Timestamp.from(CUTOFF));
+      statement.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, limit);
       try (var result = statement.executeQuery()) {
         assertTrue(result.next());

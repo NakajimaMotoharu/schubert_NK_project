@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.logging;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
@@ -12,7 +14,6 @@ import dev.codex.schubert.nk.protocol.layout.log.WebLogEventData;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Objects;
 import javax.sql.DataSource;
@@ -113,7 +114,7 @@ public final class WebLogIngestService implements InternalEventProcessor {
                 + "status_code,remote_address,duration_ms,details) "
                 + "values(?,'WEB','REQUEST',?,'HTTP_REQUEST_COMPLETED',?,?,?,?,?,?,?,?,?,cast(? as inet),?,cast(? as jsonb)) "
                 + "on conflict(source_message_id) do nothing")) {
-      statement.setTimestamp(1, Timestamp.from(data.occurredAt()));
+      statement.setObject(1, data.occurredAt().atOffset(java.time.ZoneOffset.UTC));
       statement.setString(2, data.level().name());
       statement.setString(3, data.message());
       statement.setObject(4, data.httpRequestId());

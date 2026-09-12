@@ -590,7 +590,7 @@ final class InboxMaintenanceBoundaryTest {
                   + "',null)"));
       try (var s = c.prepareStatement("select schubert.maintenance_delete_auth_inbox(?,?,?,?,?)")) {
         s.setObject(1, RUN);
-        s.setTimestamp(2, Timestamp.from(CUTOFF));
+        s.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
         s.setObject(3, MESSAGE);
         s.setString(4, xact(c));
         s.setBytes(5, hash);
@@ -635,7 +635,7 @@ final class InboxMaintenanceBoundaryTest {
     try (var s =
         c.prepareStatement("select message_id from schubert.maintenance_next_inbox(?,?,?)")) {
       s.setObject(1, run);
-      s.setTimestamp(2, cutoff == null ? null : Timestamp.from(cutoff));
+      s.setObject(2, cutoff == null ? null : cutoff.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(3, after);
       try (var r = s.executeQuery()) {
         var ids = new ArrayList<UUID>();
@@ -650,7 +650,7 @@ final class InboxMaintenanceBoundaryTest {
       throws SQLException {
     try (var s = c.prepareStatement("select schubert.maintenance_delete_inbox(?,?,?,?,?)")) {
       s.setObject(1, run);
-      s.setTimestamp(2, cutoff == null ? null : Timestamp.from(cutoff));
+      s.setObject(2, cutoff == null ? null : cutoff.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(3, message);
       s.setString(4, tx);
       s.setBytes(5, digest);
@@ -732,8 +732,8 @@ final class InboxMaintenanceBoundaryTest {
       s.setString(9, processing ? null : "001");
       s.setBytes(10, processing ? null : new byte[30]);
       s.setString(11, processing ? null : "v1");
-      s.setTimestamp(12, processing ? null : Timestamp.from(COMPLETED));
-      s.setTimestamp(13, Timestamp.from(expires));
+      s.setObject(12, processing ? null : COMPLETED.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(13, expires.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }

@@ -462,7 +462,7 @@ final class LogCleanupServiceTest {
             "lock.statementClose",
             "cleanup.prepareStatement",
             "cleanup.setObject",
-            "cleanup.setTimestamp",
+            "cleanup.setObject#2",
             "cleanup.setInt",
             "cleanup.executeQuery",
             "cleanup.next",
@@ -472,14 +472,14 @@ final class LogCleanupServiceTest {
             "cleanup.statementClose",
             "progress.prepareStatement",
             "progress.setObject",
-            "progress.setTimestamp",
+            "progress.setObject#2",
             "progress.executeQuery",
             "progress.next",
             "progress.getObject",
             "progress.resultClose",
             "progress.statementClose")) {
       var probe = new ServiceJdbcProbe();
-      probe.failAt.put(fault, 1);
+      probe.failAt.put(fault.replace("#2", ""), fault.endsWith("#2") ? 2 : 1);
       try (var c = batch()) {
         stopped(
             CleanupStopReason.DATABASE_FAILURE,

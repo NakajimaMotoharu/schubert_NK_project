@@ -446,7 +446,7 @@ final class InboxDeletionBoundaryTest {
         c.prepareStatement(
             "select pg_current_xact_id()::text,sha256(response_body_encrypted) from schubert.maintenance_next_auth_inbox(?,?,null)")) {
       s.setObject(1, RUN);
-      s.setTimestamp(2, Timestamp.from(CUTOFF));
+      s.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       try (var r = s.executeQuery()) {
         assertTrue(r.next());
         assertArrayEquals(digest, r.getBytes(2));
@@ -466,7 +466,7 @@ final class InboxDeletionBoundaryTest {
       throws SQLException {
     try (var s = c.prepareStatement("select schubert.maintenance_delete_auth_inbox(?,?,?,?,?)")) {
       s.setObject(1, run);
-      s.setTimestamp(2, cutoff == null ? null : Timestamp.from(cutoff));
+      s.setObject(2, cutoff == null ? null : cutoff.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(3, message);
       s.setString(4, tx);
       s.setBytes(5, hash);

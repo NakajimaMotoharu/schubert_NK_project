@@ -699,10 +699,14 @@ class MediaApplicationServiceTest {
                   "select timestamptz '2026-09-09T00:01:00Z',timestamptz '2026-09-09T09:01:00+09',timestamptz '2026-09-09T09:01:01+09'")) {
             assertTrue(row.next());
             Instant expected = Instant.parse("2026-09-09T00:01:00Z");
-            assertEquals(expected, row.getTimestamp(1).toInstant());
-            assertEquals(expected, row.getTimestamp(2).toInstant());
-            assertEquals(expected.plusSeconds(1), row.getTimestamp(3).toInstant());
-            assertNotEquals(row.getTimestamp(2).toInstant(), row.getTimestamp(3).toInstant());
+            assertEquals(expected, row.getObject(1, java.time.OffsetDateTime.class).toInstant());
+            assertEquals(expected, row.getObject(2, java.time.OffsetDateTime.class).toInstant());
+            assertEquals(
+                expected.plusSeconds(1),
+                row.getObject(3, java.time.OffsetDateTime.class).toInstant());
+            assertNotEquals(
+                row.getObject(2, java.time.OffsetDateTime.class).toInstant(),
+                row.getObject(3, java.time.OffsetDateTime.class).toInstant());
           }
         }
       }

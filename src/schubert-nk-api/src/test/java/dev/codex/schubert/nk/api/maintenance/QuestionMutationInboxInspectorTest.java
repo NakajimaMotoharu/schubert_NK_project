@@ -114,9 +114,9 @@ final class QuestionMutationInboxInspectorTest {
       s.setObject(1, WORK);
       s.setObject(2, message("QSBRSP01"));
       s.setBytes(3, workWire());
-      s.setTimestamp(4, Timestamp.from(TIME));
-      s.setTimestamp(5, Timestamp.from(TIME));
-      s.setTimestamp(6, Timestamp.from(TIME.plusMillis(1)));
+      s.setObject(4, TIME.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(5, TIME.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(6, TIME.plusMillis(1).atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
     try (var c = db.admin();
@@ -754,7 +754,7 @@ final class QuestionMutationInboxInspectorTest {
                     "select message_id from schubert.maintenance_next_inbox(?,?,null)")) {
           held.setAutoCommit(false);
           s.setObject(1, RUN.id());
-          s.setTimestamp(2, Timestamp.from(RUN.cutoff()));
+          s.setObject(2, RUN.cutoff().atOffset(java.time.ZoneOffset.UTC));
           try (var rows = s.executeQuery()) {
             assertTrue(rows.next());
             assertEquals(message(route), rows.getObject(1, UUID.class));
@@ -789,7 +789,7 @@ final class QuestionMutationInboxInspectorTest {
                     "select message_id from schubert.maintenance_next_inbox(?,?,null)")) {
           held.setAutoCommit(false);
           s.setObject(1, RUN.id());
-          s.setTimestamp(2, Timestamp.from(RUN.cutoff()));
+          s.setObject(2, RUN.cutoff().atOffset(java.time.ZoneOffset.UTC));
           try (var rows = s.executeQuery()) {
             assertTrue(rows.next());
           }
@@ -1141,9 +1141,9 @@ final class QuestionMutationInboxInspectorTest {
       p.setObject(7, success(code) ? (route.equals("NTCRSP01") ? 11L : 9L) : null);
       p.setString(8, route);
       p.setBytes(9, s.responseSnapshot().orElseThrow().ciphertext());
-      p.setTimestamp(10, Timestamp.from(TIME.minusSeconds(1)));
-      p.setTimestamp(11, Timestamp.from(TIME));
-      p.setTimestamp(12, Timestamp.from(TIME.plusSeconds(604800)));
+      p.setObject(10, TIME.minusSeconds(1).atOffset(java.time.ZoneOffset.UTC));
+      p.setObject(11, TIME.atOffset(java.time.ZoneOffset.UTC));
+      p.setObject(12, TIME.plusSeconds(604800).atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, p.executeUpdate());
     }
   }

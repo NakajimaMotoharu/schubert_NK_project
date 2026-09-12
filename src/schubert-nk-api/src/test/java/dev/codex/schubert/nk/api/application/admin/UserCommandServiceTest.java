@@ -100,11 +100,11 @@ class UserCommandServiceTest {
           assertEquals(0, r.getLong("version"));
           assertEquals(0, r.getInt("failed_count"));
           for (String column : List.of("created_at", "updated_at", "password_changed_at"))
-            assertEquals(NOW, r.getTimestamp(column).toInstant());
+            assertEquals(NOW, r.getObject(column, java.time.OffsetDateTime.class).toInstant());
           assertEquals(1, r.getLong("created_by"));
           assertEquals(1, r.getLong("updated_by"));
           independentHash(r.getString("password_hash"), normalized[i]);
-          assertNull(r.getTimestamp("locked_until"));
+          assertNull(r.getObject("locked_until", java.time.OffsetDateTime.class));
           assertFalse(r.next());
         }
       }
@@ -477,7 +477,7 @@ class UserCommandServiceTest {
             "next",
             "getString",
             "getLong",
-            "getTimestamp",
+            "getObject",
             "wasNull",
             "resultClose")) {
       var fault = new UserCommandFaults();
@@ -494,7 +494,7 @@ class UserCommandServiceTest {
         List.of(
             "prepareStatement",
             "setString",
-            "setTimestamp",
+            "setObject",
             "setLong",
             "executeQuery",
             "next",
@@ -864,7 +864,7 @@ class UserCommandServiceTest {
         assertEquals("USER_STATUS_CHANGED", r.getString("message"));
         assertEquals(1, r.getLong("actor_user_id"));
         assertEquals("u1", r.getString("actor_username"));
-        assertEquals(NOW, r.getTimestamp("logged_at").toInstant());
+        assertEquals(NOW, r.getObject("logged_at", java.time.OffsetDateTime.class).toInstant());
         assertEquals(META.messageId(), r.getObject("message_id", UUID.class));
         assertEquals(META.correlationId(), r.getObject("correlation_id", UUID.class));
         var details = JsonParser.parseString(r.getString("details")).getAsJsonObject();

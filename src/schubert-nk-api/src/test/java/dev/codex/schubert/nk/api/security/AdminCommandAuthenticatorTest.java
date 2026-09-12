@@ -295,7 +295,7 @@ class AdminCommandAuthenticatorTest {
             "update schubert.auth_sessions")) {
       List<String> points = new ArrayList<>(List.of("prepareStatement", "statementClose"));
       if (stage.startsWith("update"))
-        points.addAll(List.of("executeUpdate", "zeroUpdate", "setTimestamp", "setObject"));
+        points.addAll(List.of("executeUpdate", "zeroUpdate", "setObject", "setObject#2"));
       else points.addAll(List.of("executeQuery", "next", "resultClose"));
       if (stage.equals("select user_id from") || stage.equals("order by id for update"))
         points.addAll(List.of("getLong", "wasNull"));
@@ -485,8 +485,8 @@ class AdminCommandAuthenticatorTest {
       s.setInt(1, user);
       try (var r = s.executeQuery()) {
         assertTrue(r.next());
-        assertEquals(touched, r.getTimestamp(1).toInstant());
-        assertEquals(expires, r.getTimestamp(2).toInstant());
+        assertEquals(touched, r.getObject(1, java.time.OffsetDateTime.class).toInstant());
+        assertEquals(expires, r.getObject(2, java.time.OffsetDateTime.class).toInstant());
         assertFalse(r.next());
       }
     }

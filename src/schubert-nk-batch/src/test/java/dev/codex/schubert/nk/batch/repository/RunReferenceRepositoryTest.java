@@ -31,8 +31,7 @@ final class RunReferenceRepositoryTest {
           Map.entry("connection.getTransactionIsolation", 1),
           Map.entry("connection.prepareStatement", 1),
           Map.entry("statement.setQueryTimeout", 1),
-          Map.entry("statement.setObject", 1),
-          Map.entry("statement.setTimestamp", 1),
+          Map.entry("statement.setObject", 2),
           Map.entry("statement.executeQuery", 1),
           Map.entry("statement.close", 1),
           Map.entry("row.next", 2),
@@ -100,6 +99,25 @@ final class RunReferenceRepositoryTest {
       assertEquals(new RunReferences(true, true, true, false), repository.read(RUN));
       assertEquals(Instant.parse("2026-09-12T15:00:00.123456Z"), RUN.cutoff());
       c.rollback();
+      // BUG167/DB249/BAT083: SQL literal fixture cannot cancel a JDBC bind calendar defect.
+      for (String table :
+          List.of("batch_runs", "inbox_inspection_progress", "log_cleanup_progress"))
+        sql(admin, "delete from schubert." + table);
+      for (String literal :
+          List.of("0001-01-01T00:00:00Z", "1582-10-05T00:00:00Z", "9999-12-31T23:59:59.999999Z")) {
+        sql(
+            admin,
+            "insert into schubert.inbox_inspection_progress(run_id,cutoff) values('"
+                + RUN.id()
+                + "','"
+                + literal
+                + "')");
+        assertEquals(
+            new RunReferences(false, true, false, true),
+            repository.read(new BatchRun(RUN.id(), Instant.parse(literal))),
+            literal);
+        sql(admin, "delete from schubert.inbox_inspection_progress");
+      }
     }
   }
 
@@ -317,7 +335,7 @@ final class RunReferenceRepositoryTest {
     try (var s =
         c.prepareStatement("insert into schubert." + table + "(run_id,cutoff) values(?,?)")) {
       s.setObject(1, run.id());
-      s.setTimestamp(2, Timestamp.from(run.cutoff()));
+      s.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
       s.executeUpdate();
     }
   }
@@ -376,12 +394,12 @@ final class RunReferenceRepositoryTest {
                 hit("statement." + name);
                 if (name.equals("setQueryTimeout")) assertEquals(5, a[0]);
                 if (name.equals("setObject")) {
-                  assertEquals(1, a[0]);
-                  assertEquals(RUN.id(), a[1]);
-                }
-                if (name.equals("setTimestamp")) {
-                  assertEquals(2, a[0]);
-                  assertEquals(Timestamp.from(RUN.cutoff()), a[1]);
+                  assertTrue(a[0].equals(1) || a[0].equals(2));
+                  assertEquals(
+                      a[0].equals(1)
+                          ? RUN.id()
+                          : java.time.OffsetDateTime.parse("2026-09-12T15:00:00.123456Z"),
+                      a[1]);
                 }
                 if (name.equals("executeQuery")) {
                   if (runtime != null) throw runtime;

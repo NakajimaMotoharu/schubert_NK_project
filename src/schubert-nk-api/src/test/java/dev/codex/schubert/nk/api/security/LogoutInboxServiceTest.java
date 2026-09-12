@@ -121,8 +121,10 @@ final class LogoutInboxServiceTest {
       assertEquals(7, r.getLong(1));
       assertNull(r.getObject(2));
       assertEquals(fingerprint(), r.getString(3));
-      assertEquals(NOW, r.getTimestamp(4).toInstant());
-      assertEquals(Instant.parse("2026-09-15T01:00:00.123456Z"), r.getTimestamp(5).toInstant());
+      assertEquals(NOW, r.getObject(4, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-15T01:00:00.123456Z"),
+          r.getObject(5, java.time.OffsetDateTime.class).toInstant());
       assertFalse(r.next());
     }
     var another = AuthenticationContext.of("c".repeat(64));
@@ -700,8 +702,7 @@ final class LogoutInboxServiceTest {
                                     case "null:timestamp" -> "revoked_at";
                                     default -> "context_hash";
                                   };
-                              if (Set.of("getObject", "getTimestamp", "getString")
-                                      .contains(rm.getName())
+                              if (Set.of("getObject", "getString").contains(rm.getName())
                                   && column.equals(ra[0])) return null;
                               return invoke(result, rm, ra);
                             });

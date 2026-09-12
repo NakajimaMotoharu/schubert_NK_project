@@ -756,7 +756,7 @@ class UserQueryApplicationServiceTest {
               r.getString(2),
               r.getString(3),
               Optional.of(new EncryptedResponseSnapshot(r.getString(5), r.getBytes(4))),
-              r.getTimestamp(6).toInstant());
+              r.getObject(6, java.time.OffsetDateTime.class).toInstant());
       assertFalse(r.next());
       return completion;
     }

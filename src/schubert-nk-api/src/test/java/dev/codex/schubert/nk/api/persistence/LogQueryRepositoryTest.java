@@ -320,7 +320,7 @@ class LogQueryRepositoryTest {
             "getLong",
             "wasNull",
             "getObject",
-            "getTimestamp",
+            "getObject#2",
             "getString",
             "resultClose",
             "statementClose"))

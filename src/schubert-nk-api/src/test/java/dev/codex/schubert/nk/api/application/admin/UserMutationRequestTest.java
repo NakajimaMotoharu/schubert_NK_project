@@ -194,7 +194,8 @@ class UserMutationRequestTest {
                 r.getString("status"));
             assertEquals(0, r.getInt("failed_count"));
             assertEquals(1, r.getLong("updated_by"));
-            assertEquals(NOW, r.getTimestamp("updated_at").toInstant());
+            assertEquals(
+                NOW, r.getObject("updated_at", java.time.OffsetDateTime.class).toInstant());
             if (layout.equals("UCRREQ01") || layout.equals("UPWREQ01"))
               UserCommandServiceTest.independentHash(r.getString("password_hash"), PASSWORD);
             else assertEquals("unusable-test-hash", r.getString("password_hash"));

@@ -38,11 +38,11 @@ class EvidenceSetTest(unittest.TestCase):
         cls = ("dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest" if sql else
                "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest")
         names = (("referenceCombinations", "identityConsistency", "temporalAndNullBoundaries", "lockOwnership",
-                  "roleAndCatalog", "transactionVisibility", "concurrentOwnership", "migrationAndReadOnlyHistory") if sql else
+                  "roleAndCatalog", "transactionVisibility", "concurrentOwnership", "migrationAndReadOnlyHistory", "jdbcUtcVectors", "productionUtcBoundaryInventory") if sql else
                  ("referenceValueInvariants", "realReferenceRead", "transactionAndLockContracts",
                   "projectionAndNullContracts", "jdbcFailureMatrix", "interruptionAndRuntime",
                   "rollbackAndFreshVisibility", "independentConcurrentConnections"))
-        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
         for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
         prefix, start = ("PT-DB-INBOX", 241) if sql else ("PT-BAT", 82)
         return suite, {f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}

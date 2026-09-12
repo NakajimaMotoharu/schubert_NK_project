@@ -342,11 +342,11 @@ final class AuthenticationInboxInspectorTest {
                 "select issued_at,last_accessed_at,expires_at,revoked,(select count(*) from schubert.app_logs) from schubert.auth_sessions")) {
       assertTrue(r.next());
       String result =
-          r.getTimestamp(1).toInstant()
+          r.getObject(1, java.time.OffsetDateTime.class).toInstant()
               + "|"
-              + r.getTimestamp(2).toInstant()
+              + r.getObject(2, java.time.OffsetDateTime.class).toInstant()
               + "|"
-              + r.getTimestamp(3).toInstant()
+              + r.getObject(3, java.time.OffsetDateTime.class).toInstant()
               + "|"
               + r.getBoolean(4)
               + "|"
@@ -457,7 +457,7 @@ final class AuthenticationInboxInspectorTest {
             2, HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(ascii(raw))));
         s.setBytes(3, cipher);
         s.setBoolean(4, revoked);
-        s.setTimestamp(5, revoked ? java.sql.Timestamp.from(TIME) : null);
+        s.setObject(5, revoked ? TIME.atOffset(java.time.ZoneOffset.UTC) : null);
         s.setString(6, revoked ? "LOGOUT" : null);
         s.setObject(7, REQUEST);
         assertEquals(1, s.executeUpdate());

@@ -11,6 +11,7 @@ import java.util.Map;
 
 /** Actual JDBC delegate with controlled boundary faults, never a replacement database/oracle. */
 final class UserQueryFaults {
+  final Map<String, Integer> faultOccurrences = new HashMap<>();
   final Map<String, Object> columns = new HashMap<>();
   String fault = "none";
   int changedRow, statements, resultCloses, statementCloses;
@@ -95,7 +96,9 @@ final class UserQueryFaults {
   }
 
   private void fail(String point) throws SQLException {
-    if (fault.equals(point)) throw new SQLException("synthetic private JDBC fault marker");
+    int occurrence = faultOccurrences.merge(point, 1, Integer::sum);
+    if (fault.equals(point) || fault.equals(point + "#" + occurrence))
+      throw new SQLException("synthetic private JDBC fault marker");
   }
 
   private static Object invoke(Object target, Method method, Object[] arguments) throws Throwable {

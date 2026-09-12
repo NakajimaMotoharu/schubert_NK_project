@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.idempotency;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import java.security.MessageDigest;
@@ -8,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Savepoint;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Arrays;
 import java.util.HexFormat;
@@ -319,7 +320,7 @@ public final class JdbcInboxCoordinator {
         requireValue(result.getString("response_layout_id")),
         requireValue(result.getString("response_version")),
         snapshot,
-        requireValue(result.getTimestamp("completed_at")).toInstant());
+        requireValue(result.getObject("completed_at", java.time.OffsetDateTime.class)).toInstant());
   }
 
   private static OptionalLong optionalLong(ResultSet result, String column) throws SQLException {
@@ -338,8 +339,8 @@ public final class JdbcInboxCoordinator {
       setOptionalUuid(statement, 6, request.operationToken());
       statement.setString(7, HexFormat.of().formatHex(fingerprint.digest()));
       statement.setString(8, fingerprint.keyVersion());
-      statement.setTimestamp(9, Timestamp.from(request.receivedAt()));
-      statement.setTimestamp(10, Timestamp.from(request.expiresAt()));
+      statement.setObject(9, request.receivedAt().atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(10, request.expiresAt().atOffset(java.time.ZoneOffset.UTC));
       statement.executeUpdate();
     }
   }
@@ -362,10 +363,10 @@ public final class JdbcInboxCoordinator {
         statement.setNull(7, Types.BINARY);
         statement.setNull(8, Types.VARCHAR);
       }
-      statement.setTimestamp(9, Timestamp.from(completion.completedAt()));
+      statement.setObject(9, completion.completedAt().atOffset(java.time.ZoneOffset.UTC));
       // Preserve the configured retention duration, but start it at completion (SS324 §12).
       // Replay bypasses this transition, so repeated delivery cannot prolong retention.
-      statement.setTimestamp(10, Timestamp.from(completion.completedAt()));
+      statement.setObject(10, completion.completedAt().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(11, messageId);
       if (statement.executeUpdate() != 1) {
         throw failure(

@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.application.admin;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.security.*;
 import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator.Mutation;
@@ -95,7 +97,7 @@ public final class UserCommandService {
                 s.setString(4, role.wireValue());
                 s.setString(5, enabled ? "ACTIVE" : "DISABLED");
                 for (int index = 6; index <= 8; index++)
-                  s.setTimestamp(index, Timestamp.from(metadata.at()));
+                  s.setObject(index, metadata.at().atOffset(java.time.ZoneOffset.UTC));
                 s.setLong(9, actor.userId());
                 s.setLong(10, actor.userId());
                 try (var r = s.executeQuery()) {
@@ -271,11 +273,11 @@ public final class UserCommandService {
               case PROMOTE, DEMOTE -> s.setString(p++, next.role().wireValue());
               case RESET_PASSWORD -> {
                 s.setString(p++, next.hash().orElseThrow());
-                s.setTimestamp(p++, Timestamp.from(metadata.at()));
+                s.setObject(p++, metadata.at().atOffset(java.time.ZoneOffset.UTC));
               }
               case UNLOCK -> {}
             }
-            s.setTimestamp(p++, Timestamp.from(metadata.at()));
+            s.setObject(p++, metadata.at().atOffset(java.time.ZoneOffset.UTC));
             s.setLong(p++, actor.userId());
             s.setLong(p++, id.value());
             s.setLong(p, expectedVersion);
@@ -332,7 +334,8 @@ public final class UserCommandService {
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
-        | ArithmeticException failure) {
+        | ArithmeticException
+        | java.time.DateTimeException failure) {
       // BUG-045: DB typed-value and clock conversion failures are not input-policy denials.
       throw new TemporaryInfrastructureException();
     }
@@ -350,7 +353,8 @@ public final class UserCommandService {
           require(status.equals("ACTIVE") || status.equals("DISABLED"));
           long version = number(r, "version"), failed = number(r, "failed_count");
           require(version >= 0 && version <= 999_999_999 && failed >= 0 && failed <= 5);
-          Timestamp locked = r.getTimestamp("locked_until");
+          java.time.OffsetDateTime locked =
+              r.getObject("locked_until", java.time.OffsetDateTime.class);
           value =
               Optional.of(
                   new State(

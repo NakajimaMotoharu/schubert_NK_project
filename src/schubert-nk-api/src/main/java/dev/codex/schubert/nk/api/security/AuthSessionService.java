@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
@@ -8,7 +10,6 @@ import java.net.InetAddress;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -101,9 +102,9 @@ public final class AuthSessionService {
         statement.setString(3, hashes.calculate(raw));
         statement.setBytes(4, ciphertext);
         statement.setString(5, encrypted.keyVersion());
-        statement.setTimestamp(6, Timestamp.from(issuedAt));
-        statement.setTimestamp(7, Timestamp.from(issuedAt));
-        statement.setTimestamp(8, Timestamp.from(expiresAt));
+        statement.setObject(6, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(7, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(8, expiresAt.atOffset(java.time.ZoneOffset.UTC));
         statement.setString(9, client.getHostAddress());
         statement.setObject(10, messageId);
         if (statement.executeUpdate() != 1) {
@@ -115,14 +116,14 @@ public final class AuthSessionService {
       var active = new ArrayList<UUID>();
       try (var statement = connection.prepareStatement(LOCK_ACTIVE)) {
         statement.setLong(1, userId);
-        statement.setTimestamp(2, Timestamp.from(issuedAt));
+        statement.setObject(2, issuedAt.atOffset(java.time.ZoneOffset.UTC));
         try (var row = statement.executeQuery()) {
           while (row.next()) active.add(requireValue(row.getObject("id", UUID.class)));
         }
       }
       for (int index = 0; index < active.size() - 2; index++) {
         try (var statement = connection.prepareStatement(REPLACE)) {
-          statement.setTimestamp(1, Timestamp.from(issuedAt));
+          statement.setObject(1, issuedAt.atOffset(java.time.ZoneOffset.UTC));
           statement.setObject(2, active.get(index));
           if (statement.executeUpdate() != 1) {
             throw new SQLException("session replacement changed during issue", "40001");

@@ -106,13 +106,17 @@ final class AuthSessionServiceTest {
         assertEquals("v1", row.getString("key_version"));
         assertEquals("127.0.0.1", row.getString("client_address"));
         assertEquals(MESSAGE, row.getObject("created_message_id", UUID.class));
-        assertEquals(NOW.plusNanos(123456000), row.getTimestamp("issued_at").toInstant());
-        assertEquals(NOW.plusNanos(123456000), row.getTimestamp("last_accessed_at").toInstant());
+        assertEquals(
+            NOW.plusNanos(123456000),
+            row.getObject("issued_at", java.time.OffsetDateTime.class).toInstant());
+        assertEquals(
+            NOW.plusNanos(123456000),
+            row.getObject("last_accessed_at", java.time.OffsetDateTime.class).toInstant());
         assertEquals(
             Instant.parse("2026-09-07T09:00:00.123456Z"),
-            row.getTimestamp("expires_at").toInstant());
+            row.getObject("expires_at", java.time.OffsetDateTime.class).toInstant());
         assertFalse(row.getBoolean("revoked"));
-        assertNull(row.getTimestamp("revoked_at"));
+        assertNull(row.getObject("revoked_at", java.time.OffsetDateTime.class));
         assertNull(row.getString("revoke_reason"));
         assertFalse(row.next());
       }
@@ -317,7 +321,7 @@ final class AuthSessionServiceTest {
         assertEquals("127.0.0.1", row.getString("remote_address"));
         assertEquals(MESSAGE, row.getObject("message_id", UUID.class));
         assertEquals(correlation, row.getObject("correlation_id", UUID.class));
-        assertEquals(NOW, row.getTimestamp("logged_at").toInstant());
+        assertEquals(NOW, row.getObject("logged_at", java.time.OffsetDateTime.class).toInstant());
         assertNull(row.getObject("request_id"));
         assertNull(row.getObject("source_message_id"));
         assertEquals(

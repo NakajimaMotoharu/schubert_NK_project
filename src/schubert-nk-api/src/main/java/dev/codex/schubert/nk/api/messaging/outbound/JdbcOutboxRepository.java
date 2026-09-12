@@ -1,12 +1,13 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -59,8 +60,8 @@ public final class JdbcOutboxRepository {
       statement.setString(4, request.layoutId());
       statement.setString(5, request.layoutVersion());
       statement.setBytes(6, request.body());
-      statement.setTimestamp(7, Timestamp.from(request.nextAttemptAt()));
-      statement.setTimestamp(8, Timestamp.from(request.createdAt()));
+      statement.setObject(7, request.nextAttemptAt().atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(8, request.createdAt().atOffset(java.time.ZoneOffset.UTC));
       try (ResultSet result = statement.executeQuery()) {
         if (!result.next()) {
           throw new OutboxIntegrityException("outbox insert returned no identifier");
@@ -80,11 +81,11 @@ public final class JdbcOutboxRepository {
     }
     Instant leaseUntil = now.plusSeconds(10);
     try (PreparedStatement statement = connection.prepareStatement(CLAIM_SQL)) {
-      statement.setTimestamp(1, Timestamp.from(now));
-      statement.setTimestamp(2, Timestamp.from(now));
+      statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, limit);
       statement.setString(4, owner);
-      statement.setTimestamp(5, Timestamp.from(leaseUntil));
+      statement.setObject(5, leaseUntil.atOffset(java.time.ZoneOffset.UTC));
       try (ResultSet result = statement.executeQuery()) {
         List<OutboxEntry> entries = new ArrayList<>();
         while (result.next()) {
@@ -107,7 +108,7 @@ public final class JdbcOutboxRepository {
             + "lease_until=null,last_error_code=null,last_error_detail=null "
             + "where id=? and lease_owner=? and status in ('PENDING','ERROR')";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
-      statement.setTimestamp(1, Timestamp.from(sentAt));
+      statement.setObject(1, sentAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setLong(2, entry.id());
       statement.setString(3, entry.leaseOwner());
       return statement.executeUpdate() == 1;
@@ -137,7 +138,7 @@ public final class JdbcOutboxRepository {
             + "and status in ('PENDING','ERROR')";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setInt(1, nextAttempt);
-      statement.setTimestamp(2, Timestamp.from(dueAt));
+      statement.setObject(2, dueAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(3, code);
       statement.setString(4, detail);
       statement.setLong(5, entry.id());
@@ -158,10 +159,12 @@ public final class JdbcOutboxRepository {
           requireValue(result.getString("layout_version")),
           requireValue(result.getBytes("body")),
           result.getInt("attempt_count"),
-          requireValue(result.getTimestamp("next_attempt_at")).toInstant(),
-          requireValue(result.getTimestamp("created_at")).toInstant(),
+          requireValue(result.getObject("next_attempt_at", java.time.OffsetDateTime.class))
+              .toInstant(),
+          requireValue(result.getObject("created_at", java.time.OffsetDateTime.class)).toInstant(),
           requireValue(result.getString("lease_owner")),
-          requireValue(result.getTimestamp("lease_until")).toInstant());
+          requireValue(result.getObject("lease_until", java.time.OffsetDateTime.class))
+              .toInstant());
     } catch (IllegalArgumentException exception) {
       throw new OutboxIntegrityException(
           "outbox row violates its bounded storage contract", exception);

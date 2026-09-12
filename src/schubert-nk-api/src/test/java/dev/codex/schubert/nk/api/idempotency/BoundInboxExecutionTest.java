@@ -19,7 +19,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HexFormat;
@@ -421,8 +420,9 @@ final class BoundInboxExecutionTest {
       assertTrue(r.next());
       var values = new ArrayList<String>();
       for (int i = 1; i <= 11; i++) values.add(r.getString(i));
-      assertEquals(FINISHED, r.getTimestamp(10).toInstant());
-      assertEquals(FINISHED.plusSeconds(86400), r.getTimestamp(11).toInstant());
+      assertEquals(FINISHED, r.getObject(10, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          FINISHED.plusSeconds(86400), r.getObject(11, java.time.OffsetDateTime.class).toInstant());
       assertFalse(r.next());
       return values;
     }
@@ -454,8 +454,8 @@ final class BoundInboxExecutionTest {
       s.setString(3, request.canonicalRequest().layoutId());
       s.setObject(4, request.operationToken().orElse(null));
       s.setString(5, hmac(request.canonicalRequest()));
-      s.setTimestamp(6, Timestamp.from(RECEIVED));
-      s.setTimestamp(7, Timestamp.from(RECEIVED.plusSeconds(86400)));
+      s.setObject(6, RECEIVED.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(7, RECEIVED.plusSeconds(86400).atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
       c.commit();
     }

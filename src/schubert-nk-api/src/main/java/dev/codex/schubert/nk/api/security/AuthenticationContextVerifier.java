@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.domain.Role;
@@ -7,7 +9,6 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -56,8 +57,8 @@ public final class AuthenticationContextVerifier {
       }
       VerifiedSession session = readSession(connection, LOCK_SESSION, hash, now);
       try (var statement = connection.prepareStatement(TOUCH)) {
-        statement.setTimestamp(1, Timestamp.from(now));
-        statement.setTimestamp(2, Timestamp.from(now));
+        statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setObject(3, session.id());
         if (statement.executeUpdate() != 1) {
           throw new SQLException("authentication session changed during verification", "40001");
@@ -110,7 +111,8 @@ public final class AuthenticationContextVerifier {
           throw new AuthenticationContextException();
         }
         boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
-        Instant expires = requireValue(row.getTimestamp("expires_at")).toInstant();
+        Instant expires =
+            requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class)).toInstant();
         String status = requireValue(row.getString("status"));
         if (revoked || !expires.isAfter(now) || !status.equals("ACTIVE")) {
           throw new AuthenticationContextException();

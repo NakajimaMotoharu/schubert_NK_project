@@ -535,7 +535,7 @@ final class InboxInspectionProgressBoundaryTest {
               r.getLong(2),
               r.getLong(3),
               r.getLong(4),
-              r.getTimestamp(5) != null);
+              r.getObject(5, java.time.OffsetDateTime.class) != null);
       assertFalse(r.next());
       return p;
     }
@@ -563,7 +563,7 @@ final class InboxInspectionProgressBoundaryTest {
   private static void delete(Connection c, UUID message) throws SQLException {
     try (var s = c.prepareStatement("select schubert.maintenance_delete_inbox(?,?,?,?,?)")) {
       s.setObject(1, RUN);
-      s.setTimestamp(2, Timestamp.from(CUTOFF));
+      s.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(3, message);
       s.setString(4, xact(c));
       s.setBytes(5, digest);
@@ -636,7 +636,7 @@ final class InboxInspectionProgressBoundaryTest {
             c.prepareStatement(
                 "insert into " + TABLE + "(run_id,cutoff,completed_at) values(?,'2025-01-01',?)")) {
       s.setObject(1, id);
-      s.setTimestamp(2, completed == null ? null : Timestamp.from(completed));
+      s.setObject(2, completed == null ? null : completed.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }

@@ -1,12 +1,13 @@
 package dev.codex.schubert.nk.api.application.admin;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import com.google.gson.JsonObject;
 import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator.Mutation;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.Normalizer;
 
 /** Critical allowlist audit in the same transaction. NK-ADM-001; SS351/352; PT-ADM-014..023. */
@@ -74,7 +75,7 @@ final class UserAuditWriter {
           message_id,correlation_id,actor_user_id,actor_username,details)
         values (?,'API',?,?,?,?,?,?,?,?,cast(? as jsonb))
         """)) {
-      s.setTimestamp(1, Timestamp.from(metadata.at()));
+      s.setObject(1, metadata.at().atOffset(java.time.ZoneOffset.UTC));
       s.setString(2, category);
       s.setString(3, success ? "INFO" : "WARN");
       s.setString(4, action);

@@ -1,6 +1,6 @@
 # NK-BAT-001 run参照単体テスト仕様書
 
-独立JDBC inventory確定: connection.getAutoCommit/isReadOnly/getTransactionIsolation/prepareStatement各1、statement.setQueryTimeout/setObject/setTimestamp/executeQuery/close各1、row.next2/getObject4/close1＝全16呼出し。query5秒、固定SQL・UUID/cutoffのbindをassertし、各全位置SQLException・両close複合故障を注入してfixed診断/cause suppressed0・owned statement/row0・親未close/config不変を要求する。新2class/7method/37line/30branchは関連探索でmissed0、正式は別途。
+独立JDBC inventory確定: connection.getAutoCommit/isReadOnly/getTransactionIsolation/prepareStatement各1、statement.setQueryTimeout/executeQuery/close各1・setObject2（UUID/UTC OffsetDateTime）、row.next2/getObject4/close1＝全16呼出し。query5秒、固定SQL・UUID/cutoffのbindをassertし、各全位置SQLException・両close複合故障を注入してfixed診断/cause suppressed0・owned statement/row0・親未close/config不変を要求する。新2class/7method/37line/30branchは関連探索でmissed0、正式は別途。
 
 PG159/SSC055、先行4c5dcb85、RunReferenceRepository.read/RunReferences、OPS-009/DAT-009/UI251/SS311/331 §3.12/332/343。実装前仕様、独立DB literal4boolean/手で数えたJDBC call、値からexpectedを生成する際Production readを使わない。
 

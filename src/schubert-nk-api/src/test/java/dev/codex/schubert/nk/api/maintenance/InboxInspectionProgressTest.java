@@ -186,7 +186,7 @@ final class InboxInspectionProgressTest {
         for (var value :
             List.of(
                 Map.entry("run_id", id(90)),
-                Map.entry("cutoff", Timestamp.from(TIME)),
+                Map.entry("cutoff", TIME.atOffset(java.time.ZoneOffset.UTC)),
                 Map.entry("inspected_count", -1L),
                 Map.entry("deleted_count", -1L),
                 Map.entry("protected_count", -1L),
@@ -214,15 +214,18 @@ final class InboxInspectionProgressTest {
                 List.of(
                     "prepareStatement",
                     "setObject",
-                    "setTimestamp",
+                    "setObject#2",
                     "executeQuery",
                     "next",
                     "getObject",
-                    "getTimestamp",
+                    "getObject#2",
                     "getString",
                     "resultClose",
                     "statementClose"));
-        if (selected.equals(SAVE)) faults.addAll(List.of("setLong", "setString"));
+        faults.addAll(
+            List.of("getObject#3", "getObject#4", "getObject#5", "getObject#6", "getObject#7"));
+        if (selected.equals(SAVE))
+          faults.addAll(List.of("setLong", "setString", "setObject#3", "setObject#4"));
         for (String fault : faults) {
           reset();
           seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
@@ -527,9 +530,11 @@ final class InboxInspectionProgressTest {
       s.setObject(9, ref.uuid().orElse(null));
       s.setString(10, layout);
       s.setBytes(11, cipher);
-      s.setTimestamp(12, Timestamp.from(TIME.minusMillis(1)));
-      s.setTimestamp(13, Timestamp.from(TIME));
-      s.setTimestamp(14, Timestamp.from(TIME.plusSeconds(login || mutation ? 604800 : 86400)));
+      s.setObject(12, TIME.minusMillis(1).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(13, TIME.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(
+          14,
+          TIME.plusSeconds(login || mutation ? 604800 : 86400).atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     } finally {
       Arrays.fill(cipher, (byte) 0);

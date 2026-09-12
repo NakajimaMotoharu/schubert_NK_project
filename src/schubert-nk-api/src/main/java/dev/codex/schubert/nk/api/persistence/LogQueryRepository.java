@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
@@ -12,7 +14,6 @@ import dev.codex.schubert.nk.protocol.layout.semantic.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.Normalizer;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -75,14 +76,14 @@ public final class LogQueryRepository {
         .ifPresent(
             value -> {
               predicates.add("logged_at>=?");
-              parameters.add(Timestamp.from(value));
+              parameters.add(value.atOffset(java.time.ZoneOffset.UTC));
             });
     request
         .toAt()
         .ifPresent(
             value -> {
               predicates.add("logged_at<=?");
-              parameters.add(Timestamp.from(value));
+              parameters.add(value.atOffset(java.time.ZoneOffset.UTC));
             });
     String sql =
         "with filtered as materialized (select "
@@ -153,7 +154,9 @@ public final class LogQueryRepository {
   private static LogRecord record(ResultSet row) throws SQLException {
     return new LogRecord(
         new LogId(number(row, "id")),
-        requireValue(row.getTimestamp("logged_at")).toInstant().truncatedTo(ChronoUnit.MILLIS),
+        requireValue(row.getObject("logged_at", java.time.OffsetDateTime.class))
+            .toInstant()
+            .truncatedTo(ChronoUnit.MILLIS),
         LogType.valueOf(requireValue(row.getString("category"))),
         LogLevel.valueOf(requireValue(row.getString("level"))),
         Optional.of(requireValue(row.getString("action"))),

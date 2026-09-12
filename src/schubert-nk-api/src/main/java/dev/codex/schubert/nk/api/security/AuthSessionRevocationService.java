@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
@@ -7,7 +9,6 @@ import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -70,10 +71,14 @@ public final class AuthSessionRevocationService {
                   requireValue(row.getObject("user_id", Long.class)));
           boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
           if (revoked) {
-            revokedAt = requireValue(row.getTimestamp("revoked_at")).toInstant();
+            revokedAt =
+                requireValue(row.getObject("revoked_at", java.time.OffsetDateTime.class))
+                    .toInstant();
             result = ResultCode.IDEMPOTENT_SUCCESS;
           } else {
-            Instant expiry = requireValue(row.getTimestamp("expires_at")).toInstant();
+            Instant expiry =
+                requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class))
+                    .toInstant();
             String status = requireValue(row.getString("status"));
             if (!expiry.isAfter(at) || !status.equals("ACTIVE"))
               throw new AuthenticationContextException();
@@ -95,7 +100,7 @@ public final class AuthSessionRevocationService {
           SessionRevocationReason.LOGOUT,
           result);
       return new RevokedContext(identity, revokedAt, result);
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();
@@ -189,7 +194,7 @@ public final class AuthSessionRevocationService {
     try (var statement =
         connection.prepareStatement(
             "update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked")) {
-      statement.setTimestamp(1, Timestamp.from(at));
+      statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(2, reason.name());
       statement.setObject(3, id);
       if (statement.executeUpdate() != 1)

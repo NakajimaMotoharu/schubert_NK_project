@@ -89,9 +89,14 @@ class JdbcWebSessionStoreTest {
           assertEquals(hash(1), result.getString("session_id_hash"));
           assertArrayEquals(new byte[64], result.getBytes("attributes_ciphertext"));
           assertEquals("v1", result.getString("key_version"));
-          assertEquals(NOW, result.getTimestamp("created_at").toInstant());
-          assertEquals(NOW.plusSeconds(1), result.getTimestamp("last_accessed_at").toInstant());
-          assertEquals(NOW.plusSeconds(28801), result.getTimestamp("expires_at").toInstant());
+          assertEquals(
+              NOW, result.getObject("created_at", java.time.OffsetDateTime.class).toInstant());
+          assertEquals(
+              NOW.plusSeconds(1),
+              result.getObject("last_accessed_at", java.time.OffsetDateTime.class).toInstant());
+          assertEquals(
+              NOW.plusSeconds(28801),
+              result.getObject("expires_at", java.time.OffsetDateTime.class).toInstant());
           assertEquals(28800, result.getInt("max_inactive_seconds"));
           assertEquals(0, result.getLong("version"));
           assertFalse(result.next());
@@ -259,6 +264,20 @@ class JdbcWebSessionStoreTest {
 
   @Test
   void web028NullRowAndConfigurationBoundaries() throws Exception {
+    // BUG169/YKT130: microsecond-valid but unrepresentable Instants fail at the storage boundary.
+    for (Instant invalid :
+        List.of(Instant.MIN, Instant.MAX.truncatedTo(java.time.temporal.ChronoUnit.MICROS))) {
+      var invalidIdentity = new SessionPayloadIdentity(new UUID(0, 1), hash(1), invalid);
+      var before = new WebSessionRow(invalidIdentity, PAYLOAD, invalid, invalid, 1, 0);
+      var after = new WebSessionRow(invalidIdentity, PAYLOAD, invalid, invalid, 1, 1);
+      try (var c = db.transaction()) {
+        unavailable(() -> STORE.insert(c, before));
+        unavailable(() -> STORE.replace(c, before, after));
+        unavailable(() -> STORE.delete(c, invalidIdentity, 0));
+        assertFalse(c.isClosed());
+        c.rollback();
+      }
+    }
     var identity = row(1, 0).identity();
     assertThrows(
         NullPointerException.class, () -> new WebSessionRow(null, PAYLOAD, NOW, NOW, 1, 0));
@@ -350,12 +369,16 @@ class JdbcWebSessionStoreTest {
                 "result.close"));
       else {
         methods.addAll(
-            List.of(
-                "statement.setObject",
-                "statement.setTimestamp",
-                "statement.setLong",
-                "statement.executeUpdate"));
+            List.of("statement.setObject", "statement.setLong", "statement.executeUpdate"));
+
         if (op != 3) methods.addAll(List.of("statement.setBytes", "statement.setInt"));
+        if (op == 1)
+          methods.addAll(
+              List.of("statement.setObject#2", "statement.setObject#3", "statement.setObject#4"));
+        if (op == 2)
+          methods.addAll(
+              List.of("statement.setObject#2", "statement.setObject#3", "statement.setObject#4"));
+        if (op == 3) methods.add("statement.setObject#2");
       }
       for (String method : methods) {
         try (var c = db.transaction()) {
@@ -555,6 +578,7 @@ class JdbcWebSessionStoreTest {
     Integer count;
     boolean duplicate, hit, columnHit;
     int statementsClosed, resultsClosed, nextCalls;
+    final Map<String, Integer> seen = new HashMap<>();
     final Map<String, Object> columns = new HashMap<>();
     final List<String> sql = new ArrayList<>();
 
@@ -572,7 +596,8 @@ class JdbcWebSessionStoreTest {
                 if (name.equals("connection.prepareStatement")) sql.add((String) args[0]);
                 if (name.equals("statement.close")) statementsClosed++;
                 if (name.equals("result.close")) resultsClosed++;
-                if (name.equals(failure)) {
+                int occurrence = seen.merge(name, 1, Integer::sum);
+                if (name.equals(failure) || (name + "#" + occurrence).equals(failure)) {
                   hit = true;
                   if (method.getName().equals("close")) method.invoke(target, args);
                   throw new SQLDataException("private-sql-marker", "22000");

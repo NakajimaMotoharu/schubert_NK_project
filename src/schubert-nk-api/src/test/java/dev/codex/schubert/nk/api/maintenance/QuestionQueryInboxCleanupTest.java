@@ -737,9 +737,9 @@ final class QuestionQueryInboxCleanupTest {
       s.setString(4, saved.state().name());
       s.setString(5, layout);
       s.setBytes(6, body);
-      s.setTimestamp(7, Timestamp.from(TIME.minusMillis(1)));
-      s.setTimestamp(8, Timestamp.from(TIME));
-      s.setTimestamp(9, Timestamp.from(TIME.plusSeconds(86400)));
+      s.setObject(7, TIME.minusMillis(1).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(8, TIME.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(9, TIME.plusSeconds(86400).atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     } finally {
       Arrays.fill(body, (byte) 0);

@@ -335,7 +335,9 @@ final class MediaStageFixture implements AutoCloseable {
         if (row.next())
           for (int i = 1; i <= 7; i++)
             result.add(
-                i >= 3 && i <= 5 ? row.getTimestamp(i).toInstant().toString() : row.getString(i));
+                i >= 3 && i <= 5
+                    ? row.getObject(i, java.time.OffsetDateTime.class).toInstant().toString()
+                    : row.getString(i));
         assertFalse(row.next());
         return result;
       }

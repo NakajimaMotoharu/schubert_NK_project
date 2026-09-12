@@ -198,6 +198,20 @@ final class LoginAttemptRepositoryTest {
 
   @Test
   void jdbcNullUnknownEnumAndFaultsFailClosedWithoutProviderData() throws Exception {
+    // BUG169/YKT130: unknown-user insertion and successful-attempt persistence both bind time.
+    for (Instant invalid : List.of(Instant.MIN, Instant.MAX)) {
+      try (var c = database.transaction()) {
+        assertInfrastructure(() -> repository.lockForAttempt(c, "unknown", client, invalid));
+        c.rollback();
+      }
+      try (var c = database.transaction()) {
+        var locked = repository.lockForAttempt(c, "login-user", client, NOW);
+        assertInfrastructure(() -> repository.recordSuccess(c, locked, invalid));
+        c.rollback();
+        assertFalse(c.isClosed());
+      }
+      assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    }
     for (String fault :
         List.of(
             "getAutoCommit",
@@ -236,7 +250,7 @@ final class LoginAttemptRepositoryTest {
             "prepareStatement",
             "setInt",
             "setNull",
-            "setTimestamp",
+            "setObject",
             "zeroUser",
             "zeroIp",
             "afterIp",
@@ -358,7 +372,8 @@ final class LoginAttemptRepositoryTest {
             statement.executeQuery(
                 "select " + column + " from schubert." + table + " where " + predicate)) {
       assertTrue(row.next());
-      assertEquals(Instant.parse(expected), row.getTimestamp(1).toInstant());
+      assertEquals(
+          Instant.parse(expected), row.getObject(1, java.time.OffsetDateTime.class).toInstant());
     }
   }
 

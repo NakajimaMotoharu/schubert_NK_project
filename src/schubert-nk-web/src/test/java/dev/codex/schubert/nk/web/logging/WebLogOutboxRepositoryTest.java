@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -173,10 +172,11 @@ final class WebLogOutboxRepositoryTest {
           assertEquals("ERROR", rows.getString(1));
           assertEquals(Math.min(100, attempts[index] + 1), rows.getInt(2));
           assertEquals(
-              NOW.plusMillis(3000 + expected[index][boundary]), rows.getTimestamp(3).toInstant());
+              NOW.plusMillis(3000 + expected[index][boundary]),
+              rows.getObject(3, java.time.OffsetDateTime.class).toInstant());
           assertNull(rows.getString(4));
-          assertNull(rows.getTimestamp(5));
-          assertNull(rows.getTimestamp(6));
+          assertNull(rows.getObject(5, java.time.OffsetDateTime.class));
+          assertNull(rows.getObject(6, java.time.OffsetDateTime.class));
           assertEquals("JMS_FAILURE", rows.getString(7));
         }
       }
@@ -285,10 +285,10 @@ final class WebLogOutboxRepositoryTest {
                 Map.entry("key_version", "test"),
                 Map.entry("payload_ciphertext", new byte[64]),
                 Map.entry("attempt_count", 0),
-                Map.entry("next_attempt_at", Timestamp.from(NOW)),
-                Map.entry("created_at", Timestamp.from(NOW)),
+                Map.entry("next_attempt_at", NOW.atOffset(java.time.ZoneOffset.UTC)),
+                Map.entry("created_at", NOW.atOffset(java.time.ZoneOffset.UTC)),
                 Map.entry("lease_owner", "worker"),
-                Map.entry("lease_until", Timestamp.from(NOW.plusSeconds(10)))));
+                Map.entry("lease_until", NOW.plusSeconds(10).atOffset(java.time.ZoneOffset.UTC))));
     assertEquals(1, WebLogOutboxRepository.read(result(fields)).id());
     for (String column : fields.keySet()) {
       Map<String, Object> altered = new HashMap<>(fields);

@@ -87,7 +87,7 @@ public final class AdminCommandAuthenticator {
     } catch (AuthenticationContextException failure) {
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();
       throw new AuthenticationContextException();
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
       throw new AuthenticationInfrastructureException();
     }
   }

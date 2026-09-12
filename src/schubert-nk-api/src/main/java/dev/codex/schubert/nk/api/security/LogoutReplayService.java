@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.idempotency.*;
@@ -184,7 +186,7 @@ public final class LogoutReplayService {
         require(requireValue(row.getObject("user_id", Long.class)) == owner);
         require(requireValue(row.getObject("revoked", Boolean.class)));
         require(
-            requireValue(row.getTimestamp("revoked_at"))
+            requireValue(row.getObject("revoked_at", java.time.OffsetDateTime.class))
                 .toInstant()
                 .truncatedTo(ChronoUnit.MILLIS)
                 .equals(data.sessionRevokedAt()));

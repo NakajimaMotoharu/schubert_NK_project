@@ -544,9 +544,11 @@ final class JdbcScenarioSnapshotReplacementTest {
             s.executeQuery(
                 "select created_at,completed_at,expires_at from schubert.request_inbox")) {
       assertTrue(r.next());
-      assertEquals(RECEIVED, r.getTimestamp(1).toInstant());
-      assertEquals(COMPLETED, r.getTimestamp(2).toInstant());
-      assertEquals(Instant.parse("2026-09-09T00:00:01.123456Z"), r.getTimestamp(3).toInstant());
+      assertEquals(RECEIVED, r.getObject(1, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(COMPLETED, r.getObject(2, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-09T00:00:01.123456Z"),
+          r.getObject(3, java.time.OffsetDateTime.class).toInstant());
       assertFalse(r.next());
     }
   }

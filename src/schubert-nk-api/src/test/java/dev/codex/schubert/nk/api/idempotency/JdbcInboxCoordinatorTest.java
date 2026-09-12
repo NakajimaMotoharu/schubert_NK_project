@@ -24,7 +24,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -238,7 +237,7 @@ final class JdbcInboxCoordinatorTest {
       statement.setObject(1, message);
       try (var row = statement.executeQuery()) {
         assertTrue(row.next());
-        Instant value = row.getTimestamp(1).toInstant();
+        Instant value = row.getObject(1, java.time.OffsetDateTime.class).toInstant();
         assertFalse(row.next());
         return value;
       }
@@ -816,7 +815,7 @@ final class JdbcInboxCoordinatorTest {
               "setObject",
               "executeQuery",
               "next",
-              "getTimestamp",
+              "getObject",
               "rowClose",
               "statementClose",
               "null:correlation_id",
@@ -1084,8 +1083,8 @@ final class JdbcInboxCoordinatorTest {
       statement.setObject(6, request.operationToken().orElse(null));
       statement.setString(7, HexFormat.of().formatHex(fingerprint.digest()));
       statement.setString(8, fingerprint.keyVersion());
-      statement.setTimestamp(9, Timestamp.from(request.receivedAt()));
-      statement.setTimestamp(10, Timestamp.from(request.expiresAt()));
+      statement.setObject(9, request.receivedAt().atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(10, request.expiresAt().atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, statement.executeUpdate());
     }
   }
@@ -1153,7 +1152,7 @@ final class JdbcInboxCoordinatorTest {
         connection.prepareStatement(
             "insert into schubert.app_logs(logged_at,service,category,level,action,message) "
                 + "values(?,'API','ACTION','INFO',?,'public PT audit')")) {
-      statement.setTimestamp(1, Timestamp.from(COMPLETED));
+      statement.setObject(1, COMPLETED.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(2, action);
       assertEquals(1, statement.executeUpdate());
     }

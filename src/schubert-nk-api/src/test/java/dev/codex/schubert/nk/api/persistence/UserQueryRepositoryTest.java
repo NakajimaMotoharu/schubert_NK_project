@@ -188,7 +188,7 @@ class UserQueryRepositoryTest {
         var s = c.createStatement();
         var r = s.executeQuery("select locked_until,version from schubert.app_users where id=1")) {
       assertTrue(r.next());
-      assertEquals(NOW, r.getTimestamp(1).toInstant());
+      assertEquals(NOW, r.getObject(1, java.time.OffsetDateTime.class).toInstant());
       assertEquals(0, r.getLong(2));
     }
   }
@@ -245,6 +245,15 @@ class UserQueryRepositoryTest {
   @Test
   void adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing() throws Exception {
     seed(1);
+    // BUG169/YKT130: both query entry points preserve the fixed infrastructure contract.
+    for (Instant invalid : List.of(Instant.MIN, Instant.MAX))
+      try (var c = read()) {
+        temporary(() -> QUERIES.search(c, ADMIN, request(null, null, null, 1), invalid));
+        temporary(
+            () -> QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(1)), invalid));
+        assertFalse(c.isClosed());
+        c.rollback();
+      }
     for (String point : List.of("setString", "getObject")) {
       try (var c = read()) {
         var fault = new UserQueryFaults();
@@ -270,13 +279,13 @@ class UserQueryRepositoryTest {
               "getAutoCommit",
               "isReadOnly",
               "prepareStatement",
-              "setTimestamp",
+              "setObject",
               detail ? "setLong" : "setInt",
               "executeQuery",
               "next",
               "getLong",
               "getString",
-              "getTimestamp",
+              "getObject",
               "wasNull",
               "resultClose",
               "statementClose")) {
@@ -311,7 +320,7 @@ class UserQueryRepositoryTest {
                   "version",
                   1_000_000_000L,
                   "created_at",
-                  Timestamp.from(Instant.parse("+10000-01-01T00:00:00Z")))
+                  Instant.parse("+10000-01-01T00:00:00Z").atOffset(java.time.ZoneOffset.UTC))
               .entrySet()) {
         try (var c = read()) {
           var fault = new UserQueryFaults();
@@ -576,9 +585,9 @@ class UserQueryRepositoryTest {
                 "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,revoked,revoked_at,revoke_reason,client_address,created_message_id) values (?,1,?,decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z',?,?,?,?,'127.0.0.1',?)")) {
       s.setObject(1, new UUID(0, id));
       s.setString(2, String.format(Locale.ROOT, "%064x", id));
-      s.setTimestamp(3, Timestamp.from(Instant.parse(expires)));
+      s.setObject(3, Instant.parse(expires).atOffset(java.time.ZoneOffset.UTC));
       s.setBoolean(4, revoked);
-      s.setTimestamp(5, revoked ? Timestamp.from(NOW) : null);
+      s.setObject(5, revoked ? NOW.atOffset(java.time.ZoneOffset.UTC) : null);
       s.setString(6, revoked ? "ADMIN" : null);
       s.setObject(7, new UUID(1, id));
       s.executeUpdate();

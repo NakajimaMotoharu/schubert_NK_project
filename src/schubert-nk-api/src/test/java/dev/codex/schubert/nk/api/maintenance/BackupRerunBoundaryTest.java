@@ -378,8 +378,8 @@ final class BackupRerunBoundaryTest {
       statement.setObject(2, day);
       statement.setString(3, step);
       statement.setInt(4, attempt);
-      statement.setTimestamp(5, Timestamp.from(CUTOFF));
-      statement.setTimestamp(6, Timestamp.from(CUTOFF.plusSeconds(attempt)));
+      statement.setObject(5, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(6, CUTOFF.plusSeconds(attempt).atOffset(java.time.ZoneOffset.UTC));
       statement.setString(7, status);
       assertEquals(1, statement.executeUpdate());
     }
@@ -393,7 +393,7 @@ final class BackupRerunBoundaryTest {
                 + name
                 + "(?,?,?)")) {
       statement.setObject(1, RUN);
-      statement.setTimestamp(2, Timestamp.from(CUTOFF));
+      statement.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, 1);
       try (var row = statement.executeQuery()) {
         assertTrue(row.next());

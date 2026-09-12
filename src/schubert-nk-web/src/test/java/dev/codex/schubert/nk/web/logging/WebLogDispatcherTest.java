@@ -382,7 +382,7 @@ final class WebLogDispatcherTest {
             statement.executeQuery(
                 "select " + name + " from schubert_web_session.web_log_outbox")) {
       assertTrue(result.next());
-      return result.getTimestamp(1).toInstant();
+      return result.getObject(1, java.time.OffsetDateTime.class).toInstant();
     }
   }
 

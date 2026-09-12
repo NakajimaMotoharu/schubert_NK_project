@@ -278,6 +278,12 @@ final class AuthSessionRevocationServiceTest {
 
   @Test
   void faultsNullRowsAndAuditFailuresRollbackWithoutLeakingData() throws Exception {
+    // BUG169/YKT130: a too-early clock reaches revocation, but never leaks conversion details.
+    try (var c = database.transaction()) {
+      assertInfrastructure(() -> service.logout(c, RAW, client, MESSAGE, CORRELATION, Instant.MIN));
+      c.rollback();
+      assertFalse(c.isClosed());
+    }
     for (String fault :
         List.of(
             "getAutoCommit",

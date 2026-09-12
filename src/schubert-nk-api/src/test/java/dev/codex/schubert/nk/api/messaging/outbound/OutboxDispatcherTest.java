@@ -31,7 +31,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -1111,8 +1110,7 @@ final class OutboxDispatcherTest {
                     new Class<?>[] {PreparedStatement.class},
                     (statementProxy, statementMethod, statementArguments) ->
                         switch (statementMethod.getName()) {
-                          case "setObject", "setString", "setBytes", "setTimestamp", "close" ->
-                              null;
+                          case "setObject", "setString", "setBytes", "close" -> null;
                           case "executeQuery" -> empty;
                           case "toString" -> "EmptyInsert";
                           case "hashCode" -> System.identityHashCode(statementProxy);
@@ -1314,7 +1312,7 @@ final class OutboxDispatcherTest {
             connection.prepareStatement(
                 "update schubert.mq_outbox set lease_owner=?,lease_until=? where id=?")) {
       statement.setString(1, owner);
-      statement.setTimestamp(2, Timestamp.from(until));
+      statement.setObject(2, until.atOffset(java.time.ZoneOffset.UTC));
       statement.setLong(3, id);
       assertEquals(1, statement.executeUpdate());
     }
@@ -1350,7 +1348,7 @@ final class OutboxDispatcherTest {
             statement.executeQuery(
                 "select " + column + " from schubert.mq_outbox where id=" + id)) {
       assertTrue(result.next());
-      return result.getTimestamp(1).toInstant();
+      return result.getObject(1, java.time.OffsetDateTime.class).toInstant();
     }
   }
 

@@ -1,11 +1,12 @@
 package dev.codex.schubert.nk.web.session;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -48,7 +49,10 @@ public final class JdbcWebSessionStore {
       }
     } catch (InvalidSessionRowException failure) {
       throw new InvalidSessionRowException();
-    } catch (SQLException | IllegalArgumentException | SessionStoreException failure) {
+    } catch (SQLException
+        | IllegalArgumentException
+        | java.time.DateTimeException
+        | SessionStoreException failure) {
       throw new SessionStoreException();
     }
   }
@@ -70,14 +74,17 @@ public final class JdbcWebSessionStore {
         statement.setString(2, row.identity().sessionIdHash());
         statement.setBytes(3, row.payload().ciphertext());
         statement.setString(4, row.payload().keyVersion());
-        statement.setTimestamp(5, Timestamp.from(row.identity().createdAt()));
-        statement.setTimestamp(6, Timestamp.from(row.lastAccessedAt()));
-        statement.setTimestamp(7, Timestamp.from(row.expiresAt()));
+        statement.setObject(5, row.identity().createdAt().atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(6, row.lastAccessedAt().atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(7, row.expiresAt().atOffset(java.time.ZoneOffset.UTC));
         statement.setInt(8, row.maxInactiveSeconds());
         statement.setLong(9, row.version());
         if (statement.executeUpdate() != 1) throw new SessionStoreException();
       }
-    } catch (SQLException | IllegalArgumentException | SessionStoreException failure) {
+    } catch (SQLException
+        | IllegalArgumentException
+        | java.time.DateTimeException
+        | SessionStoreException failure) {
       throw new SessionStoreException();
     }
   }
@@ -102,15 +109,18 @@ public final class JdbcWebSessionStore {
                       + "where id=? and session_id_hash=? and created_at=? and version=?"))) {
         statement.setBytes(1, replacement.payload().ciphertext());
         statement.setString(2, replacement.payload().keyVersion());
-        statement.setTimestamp(3, Timestamp.from(replacement.lastAccessedAt()));
-        statement.setTimestamp(4, Timestamp.from(replacement.expiresAt()));
+        statement.setObject(3, replacement.lastAccessedAt().atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(4, replacement.expiresAt().atOffset(java.time.ZoneOffset.UTC));
         statement.setInt(5, replacement.maxInactiveSeconds());
         statement.setLong(6, replacement.version());
         identity(statement, 7, original.identity());
         statement.setLong(10, original.version());
         return changed(statement.executeUpdate());
       }
-    } catch (SQLException | IllegalArgumentException | SessionStoreException failure) {
+    } catch (SQLException
+        | IllegalArgumentException
+        | java.time.DateTimeException
+        | SessionStoreException failure) {
       throw new SessionStoreException();
     }
   }
@@ -130,7 +140,10 @@ public final class JdbcWebSessionStore {
         statement.setLong(4, version);
         return changed(statement.executeUpdate());
       }
-    } catch (SQLException | IllegalArgumentException | SessionStoreException failure) {
+    } catch (SQLException
+        | IllegalArgumentException
+        | java.time.DateTimeException
+        | SessionStoreException failure) {
       throw new SessionStoreException();
     }
   }
@@ -187,7 +200,7 @@ public final class JdbcWebSessionStore {
       PreparedStatement statement, int index, SessionPayloadIdentity identity) throws SQLException {
     statement.setObject(index, identity.id());
     statement.setString(index + 1, identity.sessionIdHash());
-    statement.setTimestamp(index + 2, Timestamp.from(identity.createdAt()));
+    statement.setObject(index + 2, identity.createdAt().atOffset(java.time.ZoneOffset.UTC));
   }
 
   private static boolean changed(int count) {

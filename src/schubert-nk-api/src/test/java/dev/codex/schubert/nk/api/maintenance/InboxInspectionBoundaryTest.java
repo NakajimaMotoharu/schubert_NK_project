@@ -191,7 +191,7 @@ final class InboxInspectionBoundaryTest {
             c.prepareStatement(
                 "update schubert.request_inbox set response_body_encrypted=?,response_key_version='s1',completed_at=?")) {
           s.setBytes(1, saved.responseSnapshot().orElseThrow().ciphertext());
-          s.setTimestamp(2, Timestamp.from(saved.completedAt()));
+          s.setObject(2, saved.completedAt().atOffset(java.time.ZoneOffset.UTC));
           assertEquals(1, s.executeUpdate());
         }
       }
@@ -383,7 +383,7 @@ final class InboxInspectionBoundaryTest {
     try (var s =
         c.prepareStatement("select message_id from schubert.maintenance_next_auth_inbox(?,?,?)")) {
       s.setObject(1, RUN);
-      s.setTimestamp(2, Timestamp.from(CUTOFF));
+      s.setObject(2, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(3, after);
       try (var r = s.executeQuery()) {
         var ids = new ArrayList<UUID>();
@@ -442,8 +442,9 @@ final class InboxInspectionBoundaryTest {
       s.setString(9, processing ? null : "001");
       s.setBytes(10, processing ? null : new byte[30]);
       s.setString(11, processing ? null : "v1");
-      s.setTimestamp(12, processing ? null : Timestamp.from(CUTOFF.minusSeconds(100)));
-      s.setTimestamp(13, Timestamp.from(expiry));
+      s.setObject(
+          12, processing ? null : CUTOFF.minusSeconds(100).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(13, expiry.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }

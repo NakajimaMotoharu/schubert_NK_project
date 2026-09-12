@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.idempotency.*;
@@ -169,7 +171,7 @@ public final class InboxCleanup {
         connection.prepareStatement(
             PROGRESS_COLUMNS + "schubert.maintenance_open_inbox_inspection(?,?)")) {
       statement.setObject(1, run.id());
-      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
       return readProgress(statement, run);
     }
   }
@@ -181,7 +183,7 @@ public final class InboxCleanup {
         connection.prepareStatement(
             PROGRESS_COLUMNS + "schubert.maintenance_record_inbox_inspection(?,?,?,?,?,?,?)")) {
       statement.setObject(1, run.id());
-      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(3, loaded.progress.cursor().orElse(null));
       statement.setLong(4, loaded.progress.inspected());
       statement.setObject(5, step.cursor().orElse(null));
@@ -196,7 +198,10 @@ public final class InboxCleanup {
     try (var row = statement.executeQuery()) {
       if (!row.next()) throw new SQLDataException("inspection progress is missing");
       if (!run.id().equals(requireValue(row.getObject("run_id", UUID.class)))
-          || !run.cutoff().equals(requireValue(row.getTimestamp("cutoff")).toInstant())) {
+          || !run.cutoff()
+              .equals(
+                  requireValue(row.getObject("cutoff", java.time.OffsetDateTime.class))
+                      .toInstant())) {
         throw new SQLDataException("inspection progress identity mismatch");
       }
       var progress =
@@ -206,7 +211,7 @@ public final class InboxCleanup {
               requireValue(row.getObject("inspected_count", Long.class)),
               requireValue(row.getObject("deleted_count", Long.class)),
               requireValue(row.getObject("protected_count", Long.class)),
-              row.getTimestamp("completed_at") != null);
+              row.getObject("completed_at", java.time.OffsetDateTime.class) != null);
       String transaction = requireValue(row.getString("inspection_xact"));
       if (!transaction.matches("[0-9]{1,20}")) {
         throw new SQLDataException("inspection progress transaction is invalid");
@@ -223,7 +228,7 @@ public final class InboxCleanup {
     InspectionStep result;
     try (var statement = connection.prepareStatement(NEXT)) {
       statement.setObject(1, run.id());
-      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(3, after.orElse(null));
       try (var row = statement.executeQuery()) {
         if (!row.next()) {
@@ -261,8 +266,8 @@ public final class InboxCleanup {
     String request = requireValue(row.getString("request_layout_id"));
     String response = requireValue(row.getString("response_layout_id"));
     requireValue(row.getObject("correlation_id", UUID.class));
-    requireValue(row.getTimestamp("created_at"));
-    requireValue(row.getTimestamp("expires_at"));
+    requireValue(row.getObject("created_at", java.time.OffsetDateTime.class));
+    requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class));
     boolean login = request.equals("LGNREQ01");
     UUID token = row.getObject("operation_token", UUID.class);
     if (!REQUESTS.contains(request)
@@ -300,7 +305,8 @@ public final class InboxCleanup {
               Optional.of(
                   new EncryptedResponseSnapshot(
                       requireValue(row.getString("response_key_version")), body)),
-              requireValue(row.getTimestamp("completed_at")).toInstant());
+              requireValue(row.getObject("completed_at", java.time.OffsetDateTime.class))
+                  .toInstant());
       return Optional.of(
           new Candidate(
               identity,
@@ -321,7 +327,7 @@ public final class InboxCleanup {
         connection.prepareStatement(
             "select schubert.maintenance_delete_inbox(?,?,?,?,?) as deleted")) {
       statement.setObject(1, run.id());
-      statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+      statement.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(3, candidate.identity.requestMessageId());
       statement.setString(4, candidate.transaction);
       statement.setBytes(5, candidate.hash);

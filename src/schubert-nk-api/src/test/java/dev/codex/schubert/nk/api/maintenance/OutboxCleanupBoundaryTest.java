@@ -476,8 +476,8 @@ final class OutboxCleanupBoundaryTest {
                 "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values(?,'2026-09-17',?,1,?,?,'SUCCESS')")) {
       s.setObject(1, RUN);
       s.setString(2, step);
-      s.setTimestamp(3, Timestamp.from(CUTOFF));
-      s.setTimestamp(4, Timestamp.from(CUTOFF));
+      s.setObject(3, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(4, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }
@@ -503,11 +503,11 @@ final class OutboxCleanupBoundaryTest {
       s.setObject(3, new UUID(1, id));
       s.setString(4, web ? "WLGEVT01" : "QWKREQ01");
       s.setString(5, status);
-      s.setTimestamp(6, Timestamp.from(CUTOFF.minusSeconds(864000)));
-      s.setTimestamp(7, Timestamp.from(CUTOFF.minusSeconds(864000)));
-      s.setTimestamp(8, sent == null ? null : Timestamp.from(sent));
+      s.setObject(6, CUTOFF.minusSeconds(864000).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(7, CUTOFF.minusSeconds(864000).atOffset(java.time.ZoneOffset.UTC));
+      s.setObject(8, sent == null ? null : sent.atOffset(java.time.ZoneOffset.UTC));
       s.setString(9, lease == null ? null : "synthetic-worker");
-      s.setTimestamp(10, lease == null ? null : Timestamp.from(lease));
+      s.setObject(10, lease == null ? null : lease.atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }
@@ -530,7 +530,11 @@ final class OutboxCleanupBoundaryTest {
       s.setString(9, processing ? null : "001");
       s.setBytes(10, processing || id % 2 == 0 ? null : new byte[30]);
       s.setString(11, processing || id % 2 == 0 ? null : "v1");
-      s.setTimestamp(12, processing ? null : Timestamp.from(Instant.parse("2026-09-01T00:00:00Z")));
+      s.setObject(
+          12,
+          processing
+              ? null
+              : Instant.parse("2026-09-01T00:00:00Z").atOffset(java.time.ZoneOffset.UTC));
       assertEquals(1, s.executeUpdate());
     }
   }

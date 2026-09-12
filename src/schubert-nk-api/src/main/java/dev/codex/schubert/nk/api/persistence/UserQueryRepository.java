@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.api.security.AuthorizationService;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
@@ -11,7 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.Normalizer;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public final class UserQueryRepository {
     try {
       requireReadTransaction(connection);
       try (PreparedStatement statement = connection.prepareStatement(sql)) {
-        statement.setTimestamp(1, Timestamp.from(now));
+        statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
         for (int i = 0; i < parameters.size(); i++) statement.setString(i + 2, parameters.get(i));
         statement.setInt(parameters.size() + 2, request.page());
         try (ResultSet result = statement.executeQuery()) {
@@ -136,7 +137,8 @@ public final class UserQueryRepository {
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
-        | ArithmeticException failure) {
+        | ArithmeticException
+        | java.time.DateTimeException failure) {
       throw new UserQueryException(false);
     }
   }
@@ -163,8 +165,8 @@ public final class UserQueryRepository {
             left join schubert.app_users b on b.id=u.updated_by
            where p.id=?
           """)) {
-        statement.setTimestamp(1, Timestamp.from(now));
-        statement.setTimestamp(2, Timestamp.from(now));
+        statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setLong(3, request.userId().value());
         try (ResultSet result = statement.executeQuery()) {
           Optional<TypedPayloadValues> found = Optional.empty();
@@ -198,7 +200,8 @@ public final class UserQueryRepository {
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
-        | ArithmeticException failure) {
+        | ArithmeticException
+        | java.time.DateTimeException failure) {
       throw new UserQueryException(false);
     }
   }
@@ -242,7 +245,7 @@ public final class UserQueryRepository {
 
   private static Optional<Instant> optionalTime(ResultSet result, String column)
       throws SQLException {
-    Timestamp value = result.getTimestamp(column);
+    java.time.OffsetDateTime value = result.getObject(column, java.time.OffsetDateTime.class);
     return value == null ? Optional.empty() : Optional.of(value.toInstant());
   }
 

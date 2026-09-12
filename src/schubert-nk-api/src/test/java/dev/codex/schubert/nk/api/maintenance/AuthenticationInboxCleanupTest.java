@@ -318,7 +318,7 @@ final class AuthenticationInboxCleanupTest {
             "setAutoCommit",
             "prepareStatement",
             "setObject",
-            "setTimestamp",
+            "setObject#2",
             "executeQuery",
             "next",
             "getString",

@@ -958,8 +958,10 @@ final class LoginInboxServiceTest {
       else assertNull(row.getObject(8));
       assertTrue(row.getBytes(9).length >= 29);
       assertEquals("s1", row.getString(10));
-      assertEquals(NOW, row.getTimestamp(11).toInstant());
-      assertEquals(Instant.parse("2026-09-15T01:02:03.456789Z"), row.getTimestamp(12).toInstant());
+      assertEquals(NOW, row.getObject(11, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-15T01:02:03.456789Z"),
+          row.getObject(12, java.time.OffsetDateTime.class).toInstant());
       assertEquals("LGNREQ01", row.getString(13));
       assertEquals("001", row.getString(14));
       assertFalse(row.next());

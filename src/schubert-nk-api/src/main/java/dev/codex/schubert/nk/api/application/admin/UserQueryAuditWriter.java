@@ -1,10 +1,11 @@
 package dev.codex.schubert.nk.api.application.admin;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import com.google.gson.JsonObject;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.Normalizer;
 import java.time.Instant;
@@ -58,7 +59,7 @@ final class UserQueryAuditWriter {
           message_id,correlation_id,actor_user_id,actor_username,details)
         values (?,'API',?,?,?,?,?,?,?,?,cast(? as jsonb))
         """)) {
-      statement.setTimestamp(1, Timestamp.from(at));
+      statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(
           2, event == Event.REPLAY || event == Event.MESSAGE_MISMATCH ? "MQ" : "SECURITY");
       statement.setString(

@@ -11,6 +11,7 @@ import java.util.Map;
  * Public JDBC interface fault/ownership probe over real PG, not private implementation reflection.
  */
 final class MaintenanceJdbcProbe {
+  final Map<String, Integer> faultOccurrences = new HashMap<>();
   String selectedSql = "maintenance_next_inbox", fault = "none";
   String lastSqlState = "unobserved";
   boolean empty, duplicate, commitAfter, fresh = true;
@@ -114,7 +115,9 @@ final class MaintenanceJdbcProbe {
   }
 
   private void fail(String name) throws SQLException {
-    if (fault.equals(name)) throw new SQLException("synthetic-private-provider-marker", "08006");
+    int occurrence = faultOccurrences.merge(name, 1, Integer::sum);
+    if (fault.equals(name) || fault.equals(name + "#" + occurrence))
+      throw new SQLException("synthetic-private-provider-marker", "08006");
   }
 
   private Object invoke(Object target, Method method, Object[] args) throws Throwable {

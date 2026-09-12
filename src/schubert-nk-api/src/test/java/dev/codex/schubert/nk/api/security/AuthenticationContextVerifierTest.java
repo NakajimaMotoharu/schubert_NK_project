@@ -127,7 +127,9 @@ final class AuthenticationContextVerifierTest {
           var statement = connection.createStatement();
           var row = statement.executeQuery("select last_accessed_at from schubert.auth_sessions")) {
         assertTrue(row.next());
-        assertEquals(Instant.parse("2026-09-07T00:00:00Z"), row.getTimestamp(1).toInstant());
+        assertEquals(
+            Instant.parse("2026-09-07T00:00:00Z"),
+            row.getObject(1, java.time.OffsetDateTime.class).toInstant());
       }
     }
   }
@@ -196,7 +198,7 @@ final class AuthenticationContextVerifierTest {
             "prepareStatement",
             "setString",
             "executeQuery",
-            "getTimestamp",
+            "getObject",
             "executeUpdate",
             "rowClose",
             "statementClose",
@@ -295,7 +297,9 @@ final class AuthenticationContextVerifierTest {
           var statement = connection.createStatement();
           var row = statement.executeQuery("select last_accessed_at from schubert.auth_sessions")) {
         assertTrue(row.next());
-        assertEquals(Instant.parse("2026-09-07T00:00:00Z"), row.getTimestamp(1).toInstant());
+        assertEquals(
+            Instant.parse("2026-09-07T00:00:00Z"),
+            row.getObject(1, java.time.OffsetDateTime.class).toInstant());
       }
     }
   }
@@ -319,7 +323,7 @@ final class AuthenticationContextVerifierTest {
             "prepareStatement",
             "setString",
             "executeQuery",
-            "getTimestamp",
+            "getObject",
             "rowClose",
             "statementClose",
             "null:revoked",
@@ -435,8 +439,10 @@ final class AuthenticationContextVerifierTest {
             statement.executeQuery(
                 "select last_accessed_at,expires_at from schubert.auth_sessions")) {
       assertTrue(row.next());
-      assertEquals(Instant.parse(accessed), row.getTimestamp(1).toInstant());
-      assertEquals(Instant.parse(expires), row.getTimestamp(2).toInstant());
+      assertEquals(
+          Instant.parse(accessed), row.getObject(1, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse(expires), row.getObject(2, java.time.OffsetDateTime.class).toInstant());
       assertFalse(row.next());
     }
   }

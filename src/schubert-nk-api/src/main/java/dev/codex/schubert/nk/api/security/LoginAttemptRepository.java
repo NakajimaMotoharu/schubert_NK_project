@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.domain.Role;
@@ -9,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
 import java.util.Objects;
@@ -87,8 +88,8 @@ public final class LoginAttemptRepository {
       }
       try (var statement = connection.prepareStatement(CREATE_IP)) {
         statement.setString(1, client.getHostAddress());
-        statement.setTimestamp(2, Timestamp.from(now));
-        statement.setTimestamp(3, Timestamp.from(now));
+        statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
+        statement.setObject(3, now.atOffset(java.time.ZoneOffset.UTC));
         statement.executeUpdate();
       }
       try (var statement = connection.prepareStatement(IP)) {
@@ -99,12 +100,15 @@ public final class LoginAttemptRepository {
               new LoginAttemptState(
                   LoginAttemptKind.IP,
                   requireValue(row.getObject("failed_count", Integer.class)),
-                  Optional.of(requireValue(row.getTimestamp("window_started_at")).toInstant()),
+                  Optional.of(
+                      requireValue(
+                              row.getObject("window_started_at", java.time.OffsetDateTime.class))
+                          .toInstant()),
                   optionalInstant(row, "locked_until"));
           return new LockedLoginAttempt(client.getHostAddress(), account, state);
         }
       }
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
       throw new AuthenticationInfrastructureException();
     }
   }
@@ -135,7 +139,7 @@ public final class LoginAttemptRepository {
           setInstant(statement, 2, state.windowStartedAt());
           setInstant(statement, 3, state.lockedUntil());
           statement.setBoolean(4, success);
-          statement.setTimestamp(5, Timestamp.from(now));
+          statement.setObject(5, now.atOffset(java.time.ZoneOffset.UTC));
           statement.setLong(6, account.identity().userId());
           if (statement.executeUpdate() != 1)
             throw new SQLException("login user update count differs", "40001");
@@ -144,14 +148,15 @@ public final class LoginAttemptRepository {
       var state = success ? locked.ip().afterSuccess() : locked.ip().afterFailure(now);
       try (var statement = connection.prepareStatement(UPDATE_IP)) {
         statement.setInt(1, state.failedCount());
-        statement.setTimestamp(2, Timestamp.from(state.windowStartedAt().orElse(now)));
+        statement.setObject(
+            2, state.windowStartedAt().orElse(now).atOffset(java.time.ZoneOffset.UTC));
         setInstant(statement, 3, state.lockedUntil());
-        statement.setTimestamp(4, Timestamp.from(now));
+        statement.setObject(4, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setString(5, locked.clientAddress());
         if (statement.executeUpdate() != 1)
           throw new SQLException("login IP update count differs", "40001");
       }
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
       throw new AuthenticationInfrastructureException();
     }
   }
@@ -163,13 +168,14 @@ public final class LoginAttemptRepository {
 
   private static Optional<Instant> optionalInstant(ResultSet row, String column)
       throws SQLException {
-    Timestamp value = row.getTimestamp(column);
+    java.time.OffsetDateTime value = row.getObject(column, java.time.OffsetDateTime.class);
     return value == null ? Optional.empty() : Optional.of(value.toInstant());
   }
 
   private static void setInstant(PreparedStatement statement, int index, Optional<Instant> value)
       throws SQLException {
-    if (value.isPresent()) statement.setTimestamp(index, Timestamp.from(value.orElseThrow()));
+    if (value.isPresent())
+      statement.setObject(index, value.orElseThrow().atOffset(java.time.ZoneOffset.UTC));
     else statement.setNull(index, Types.TIMESTAMP_WITH_TIMEZONE);
   }
 }

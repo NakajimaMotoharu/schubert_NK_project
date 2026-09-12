@@ -77,7 +77,8 @@ final class WebLogIngestServiceTest {
                 "select logged_at, service, category, level, action, message, request_id, message_id, correlation_id, source_message_id, actor_user_id, actor_username, http_method, request_uri, status_code, remote_address, duration_ms, security_hold_until, details = '{\"responseBytes\":42,\"truncated\":false,\"projectionStatus\":\"PENDING\",\"actorRole\":\"USER\"}'::jsonb as details_match from schubert.app_logs")) {
       assertTrue(rows.next());
       assertEquals(
-          Instant.parse("2026-09-04T21:00:00Z"), rows.getTimestamp("logged_at").toInstant());
+          Instant.parse("2026-09-04T21:00:00Z"),
+          rows.getObject("logged_at", java.time.OffsetDateTime.class).toInstant());
       assertEquals("WEB", rows.getString("service"));
       assertEquals("REQUEST", rows.getString("category"));
       assertEquals("INFO", rows.getString("level"));

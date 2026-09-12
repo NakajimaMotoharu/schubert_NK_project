@@ -1,10 +1,11 @@
 package dev.codex.schubert.nk.web.logging;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -53,8 +54,8 @@ public final class WebLogOutboxRepository {
       statement.setObject(2, identity.correlationId());
       statement.setBytes(3, payload.ciphertext());
       statement.setString(4, payload.keyVersion());
-      statement.setTimestamp(5, Timestamp.from(now));
-      statement.setTimestamp(6, Timestamp.from(now));
+      statement.setObject(5, now.atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(6, now.atOffset(java.time.ZoneOffset.UTC));
       return statement.executeUpdate() == 1;
     }
   }
@@ -78,11 +79,11 @@ public final class WebLogOutboxRepository {
             + "o.payload_ciphertext,o.key_version,o.attempt_count,o.next_attempt_at,o.created_at,"
             + "o.lease_owner,o.lease_until";
     try (var statement = connection.prepareStatement(sql)) {
-      statement.setTimestamp(1, Timestamp.from(now));
-      statement.setTimestamp(2, Timestamp.from(now));
+      statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
+      statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, limit);
       statement.setString(4, worker);
-      statement.setTimestamp(5, Timestamp.from(now.plusSeconds(10)));
+      statement.setObject(5, now.plusSeconds(10).atOffset(java.time.ZoneOffset.UTC));
       try (ResultSet result = statement.executeQuery()) {
         List<ClaimedWebLog> rows = new ArrayList<>();
         while (result.next()) {
@@ -107,7 +108,7 @@ public final class WebLogOutboxRepository {
             "update schubert_web_session.web_log_outbox set status='SENT',sent_at=?,"
                 + "lease_owner=null,lease_until=null,last_error_code=null "
                 + "where id=? and lease_owner=? and status in ('PENDING','ERROR')")) {
-      statement.setTimestamp(1, Timestamp.from(confirmedAt));
+      statement.setObject(1, confirmedAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setLong(2, row.id());
       statement.setString(3, row.leaseOwner());
       return statement.executeUpdate() == 1;
@@ -145,7 +146,7 @@ public final class WebLogOutboxRepository {
                 + "next_attempt_at=?,sent_at=null,lease_owner=null,lease_until=null,last_error_code=? "
                 + "where id=? and lease_owner=? and attempt_count=? and status in ('PENDING','ERROR')")) {
       statement.setInt(1, attempt);
-      statement.setTimestamp(2, Timestamp.from(due));
+      statement.setObject(2, due.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(3, errorCode);
       statement.setLong(4, row.id());
       statement.setString(5, row.leaseOwner());
@@ -168,10 +169,10 @@ public final class WebLogOutboxRepository {
             required(result.getString("key_version")),
             required(result.getBytes("payload_ciphertext"))),
         required(result.getObject("attempt_count", Integer.class)),
-        required(result.getTimestamp("next_attempt_at")).toInstant(),
-        required(result.getTimestamp("created_at")).toInstant(),
+        required(result.getObject("next_attempt_at", java.time.OffsetDateTime.class)).toInstant(),
+        required(result.getObject("created_at", java.time.OffsetDateTime.class)).toInstant(),
         required(result.getString("lease_owner")),
-        required(result.getTimestamp("lease_until")).toInstant());
+        required(result.getObject("lease_until", java.time.OffsetDateTime.class)).toInstant());
   }
 
   private static <T> T required(@Nullable T value) throws SQLDataException {

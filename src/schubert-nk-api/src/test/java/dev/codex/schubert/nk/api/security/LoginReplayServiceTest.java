@@ -428,9 +428,11 @@ final class LoginReplayServiceTest {
                 "select issued_at,last_accessed_at,expires_at,revoked,(select count(*) from schubert.app_logs) logs"
                     + " from schubert.auth_sessions")) {
       assertTrue(row.next());
-      assertEquals(NOW, row.getTimestamp(1).toInstant());
-      assertEquals(NOW, row.getTimestamp(2).toInstant());
-      assertEquals(Instant.parse("2026-09-08T09:02:03.456789Z"), row.getTimestamp(3).toInstant());
+      assertEquals(NOW, row.getObject(1, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(NOW, row.getObject(2, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-08T09:02:03.456789Z"),
+          row.getObject(3, java.time.OffsetDateTime.class).toInstant());
       assertFalse(row.getBoolean(4));
       assertEquals(0, row.getInt(5));
       assertFalse(row.next());

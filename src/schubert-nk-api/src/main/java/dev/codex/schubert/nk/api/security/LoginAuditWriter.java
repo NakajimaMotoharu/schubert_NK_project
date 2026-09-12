@@ -1,11 +1,12 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import com.google.gson.JsonObject;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.Normalizer;
 import java.time.Instant;
@@ -44,7 +45,7 @@ public final class LoginAuditWriter {
             "insert into schubert.app_logs"
                 + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,actor_username,remote_address,details)"
                 + " values(?,'API','SECURITY',?,?,?,?,?,?,?,cast(? as inet),cast(? as jsonb))")) {
-      statement.setTimestamp(1, Timestamp.from(now));
+      statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(2, success ? "INFO" : "WARN");
       statement.setString(3, action);
       statement.setString(4, action);

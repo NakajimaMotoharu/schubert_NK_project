@@ -319,7 +319,7 @@ final class CleanupRepositoryTest {
               "getAutoCommit",
               "prepareStatement",
               "setObject",
-              "setTimestamp",
+              "setObject#2",
               "executeQuery",
               "next",
               "getObject",

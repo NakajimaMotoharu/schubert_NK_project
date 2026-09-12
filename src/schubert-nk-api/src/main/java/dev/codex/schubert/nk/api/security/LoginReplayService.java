@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.security;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
@@ -191,7 +193,8 @@ public final class LoginReplayService {
         } finally {
           Arrays.fill(cipher, (byte) 0);
         }
-        Instant issued = requireValue(row.getTimestamp("issued_at")).toInstant();
+        Instant issued =
+            requireValue(row.getObject("issued_at", java.time.OffsetDateTime.class)).toInstant();
         require(issued.truncatedTo(ChronoUnit.MILLIS).equals(data.issuedAt().orElseThrow()));
         require(
             issued

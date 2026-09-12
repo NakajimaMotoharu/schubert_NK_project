@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import java.sql.*;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
@@ -33,7 +35,7 @@ public final class RunReferenceRepository {
         var checked = present(statement);
         checked.setQueryTimeout(5);
         checked.setObject(1, run.id());
-        checked.setTimestamp(2, Timestamp.from(run.cutoff()));
+        checked.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
         try (var row = checked.executeQuery()) {
           var values = present(row);
           require(values.next());

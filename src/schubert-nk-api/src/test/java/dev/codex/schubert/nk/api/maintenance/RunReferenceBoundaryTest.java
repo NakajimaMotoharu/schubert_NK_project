@@ -14,7 +14,7 @@ import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
-/** NK-DAT-001; DAT-009/OPS-009/UI251/SS331 3.12/332/343; SSC055/PG159; DB241..248. */
+/** NK-DAT-001; DAT-009/OPS-009/UI251/SS331 3.12/332/343; SSC055/056/PG159/160; DB241..250. */
 final class RunReferenceBoundaryTest {
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
@@ -119,28 +119,6 @@ final class RunReferenceBoundaryTest {
   @Test
   void temporalAndNullBoundaries() throws Exception {
     try (var c = locked()) {
-      // BUG167 diagnostic, all values are public fixed time vectors, never deployed data.
-      try (var s = c.prepareStatement("select extract(epoch from ?::timestamptz)::text")) {
-        var minimum = Instant.parse("0001-01-01T00:00:00Z");
-        s.setObject(1, minimum.atOffset(ZoneOffset.UTC));
-        try (var r = s.executeQuery()) {
-          assertTrue(r.next());
-          assertEquals("-62135596800.000000", r.getString(1));
-        }
-        s.setTimestamp(1, Timestamp.from(minimum));
-        try (var r = s.executeQuery()) {
-          assertTrue(r.next());
-          System.out.println("PUBLIC_BUG167_TIMESTAMP_EPOCH=" + r.getString(1));
-        }
-      }
-      try (var s = c.createStatement();
-          var r = s.executeQuery("select timestamptz '0001-01-01 00:00:00+00'")) {
-        assertTrue(r.next());
-        assertEquals(
-            Instant.parse("0001-01-01T00:00:00Z"),
-            r.getObject(1, OffsetDateTime.class).toInstant());
-        System.out.println("PUBLIC_BUG167_GET_TIMESTAMP=" + r.getTimestamp(1).toInstant());
-      }
       // BUG165 diagnostic: independently observe SQL literal admission before changing fixture.
       sql(c, "set timezone='Asia/Tokyo'");
       assertEquals(
@@ -200,6 +178,125 @@ final class RunReferenceBoundaryTest {
       assertEquals(
           List.of(true, false, false, true),
           read(c, RUN, Instant.parse("9999-12-31T23:59:59.999999Z")));
+    }
+  }
+
+  /** PT-DB-INBOX-249; handwritten SQL literals are independent of the JDBC bind/read path. */
+  @Test
+  void jdbcUtcVectors() throws Exception {
+    List<String> vectors =
+        List.of(
+            "0001-01-01T00:00:00Z",
+            "1582-10-04T00:00:00Z",
+            "1582-10-05T00:00:00Z",
+            "1582-10-14T00:00:00Z",
+            "1582-10-15T00:00:00Z",
+            "1900-03-01T00:00:00Z",
+            "1970-01-01T00:00:00Z",
+            "2026-09-12T14:59:59.999999Z",
+            "2026-09-12T15:00:00.123456Z",
+            "9999-12-31T23:59:59.999999Z");
+    try (var c = db.admin()) {
+      for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
+        sql(c, "set timezone='" + zone + "'");
+        for (String literal : vectors) {
+          Instant expected = Instant.parse(literal);
+          // Equality and epoch are evaluated by SQL against the literal, not a JDBC round trip.
+          try (var p =
+              c.prepareStatement(
+                  "select ?::timestamptz = timestamptz '"
+                      + literal
+                      + "' as equal,"
+                      + "extract(epoch from timestamptz '"
+                      + literal
+                      + "') as epoch")) {
+            p.setObject(1, expected.atOffset(ZoneOffset.UTC));
+            try (var row = p.executeQuery()) {
+              assertTrue(row.next());
+              assertTrue(row.getBoolean("equal"), zone + "/" + literal);
+              assertEquals(
+                  0,
+                  new java.math.BigDecimal(expected.getEpochSecond())
+                      .add(java.math.BigDecimal.valueOf(expected.getNano(), 9))
+                      .compareTo(row.getBigDecimal("epoch")));
+              assertFalse(row.next());
+            }
+          }
+          // Projection starts from SQL literal only: a bind defect cannot cancel a read defect.
+          try (var p = c.createStatement();
+              var row =
+                  p.executeQuery(
+                      "select timestamptz '"
+                          + literal
+                          + "' as at,"
+                          + "null::timestamptz as absent")) {
+            assertTrue(row.next());
+            assertEquals(expected, row.getObject("at", OffsetDateTime.class).toInstant());
+            assertNull(row.getObject("absent", OffsetDateTime.class));
+            assertFalse(row.next());
+          }
+        }
+        assertEquals(
+            "-62135596800.000000",
+            scalar(c, "select extract(epoch from timestamptz '0001-01-01 00:00:00+00')::text"));
+      }
+    }
+  }
+
+  /**
+   * PT-DB-INBOX-250; fixed target inventory plus actual per-program regressions, not search alone.
+   */
+  @Test
+  void productionUtcBoundaryInventory() throws Exception {
+    Path source = Path.of(System.getProperty("nk.pt.repository")).resolve("src");
+    List<String> targets =
+        List.of(
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java",
+            "schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+            "schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+            "schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+            "schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+            "schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java");
+    assertEquals(23, new HashSet<>(targets).size());
+    for (String target : targets) {
+      String code = Files.readString(source.resolve(target));
+      assertTrue(code.contains("PG-D-160/SSC056/BUG167/YKT128"), target);
+      assertTrue(code.contains("ZoneOffset.UTC") || code.contains("OffsetDateTime.class"), target);
+    }
+    try (var paths = Files.walk(source)) {
+      for (Path path :
+          paths
+              .filter(p -> p.toString().contains("/src/main/java/"))
+              .filter(p -> p.toString().endsWith(".java"))
+              .toList()) {
+        String code = Files.readString(path);
+        for (String forbidden :
+            List.of(
+                "java.sql.Timestamp",
+                "Timestamp.from(",
+                ".setTimestamp(",
+                ".getTimestamp(",
+                "java.sql.Date",
+                ".setDate(",
+                ".getDate(")) assertFalse(code.contains(forbidden), path + ":" + forbidden);
+      }
     }
   }
 
@@ -417,7 +514,7 @@ final class RunReferenceBoundaryTest {
           c.prepareStatement(
               "insert into schubert." + TABLES[bit] + "(run_id,cutoff) values(?,?)")) {
         s.setObject(1, run);
-        s.setTimestamp(2, Timestamp.from(cutoff));
+        s.setObject(2, cutoff.atOffset(ZoneOffset.UTC));
         s.executeUpdate();
       }
   }
@@ -436,7 +533,7 @@ final class RunReferenceBoundaryTest {
     try (var s =
         c.prepareStatement("select * from schubert.maintenance_read_run_references(?,?)")) {
       s.setObject(1, run);
-      s.setTimestamp(2, Timestamp.from(at));
+      s.setObject(2, at.atOffset(ZoneOffset.UTC));
       try (var r = s.executeQuery()) {
         assertTrue(r.next());
         List<Boolean> result = new ArrayList<>();

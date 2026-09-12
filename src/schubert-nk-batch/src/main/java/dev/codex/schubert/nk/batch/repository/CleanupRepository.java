@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
+
 import java.sql.*;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
@@ -104,7 +106,7 @@ public final class CleanupRepository {
 
   private static void bind(PreparedStatement statement, BatchRun run) throws SQLException {
     statement.setObject(1, run.id());
-    statement.setTimestamp(2, Timestamp.from(run.cutoff()));
+    statement.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
   }
 
   private static CleanupCounts counts(ResultSet row) throws SQLException {

@@ -1,5 +1,7 @@
 # JDBC UTC境界 横展開単体テスト仕様書
 
+BUG169/YKT130追加（先行22051162、修正前）: 旧Timestamp.fromの範囲外IllegalArgumentExceptionに代わりOffsetDateTimeはDateTimeExceptionを投げる。固定infrastructureを約束するAdminCommandAuthenticator/UserCommandService/UserQueryRepository/LoginAttemptRepository/AuthSessionRevocationService.logout/JdbcWebSessionStoreでは同じ固定外側例外とrollback/所有を維持する。既存ADM012/020に加え、既存ADM005・LoginAttemptのJDBC負PT・Logoutのfault PT・WEB028にMIN/MAXまたはMINの直接境界を追加する。対象クラスのcatchへ特定DateTimeExceptionを加え、未知runtime/NPEを包括正常化しない。単純Instant値を受ける低位adapterで元からunchecked invalid-clockを伝播する契約と、BatchRun/InspectionRun・wireの年範囲invariantは変更しない。
+
 PG160/SSC056/BUG167/YKT128、先行8002b28b/3cf06b00・SS332/352 a1ebcabd。DAT-003～011/AUT-001～004/ASY-001～009/MON/OPS-009、UI225/226/231/241/242/251。修正開始前仕様。既存Program境界・Test IDを維持して以下を追加する。
 
 | Test ID | class/method | 独立期待値・fixture |
