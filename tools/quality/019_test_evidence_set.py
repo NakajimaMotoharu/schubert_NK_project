@@ -34,6 +34,14 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     def test_retirement_literal_traces(self):
+        io = b"{acl=1075, attributes=1075, close=854, create=2, filesystem=1075, force=2, namesClose=54, namesHasNext=138, namesIterator=54, namesNext=84, namesOpen=54, openDirectory=477, openEntry=324, openRead=57, openRoot=53, openWriter=2, publish=2, read=114, readClose=57, readSize=114, readonly=1075, sync=13, unlink=5, write=2, writeSize=4, writerClose=2}"
+        self.assertEqual(io, batch.RETIREMENT_IO_TRACE)
+        with self.assertRaises(ValueError):
+            batch.validate_retirement_io(b"{acl=1075, attributes=1075, close=854, create=2, filesystem=1075, force=2, namesClose=54, namesHasNext=138, namesIterator=54, namesNext=84, namesOpen=54, openDirectory=477, openEntry=324, openRead=57, openRoot=53, openWriter=2, publish=2, read=114, readClose=57, readonly=1075, readSize=114, sync=13, unlink=5, write=2, writerClose=2, writeSize=4}")
+        self.assertIsNone(batch.validate_retirement_io(io))
+        for wrong in (b"", io + b"\0", io.replace(b"openDirectory=477", b"openDirectory=461"),
+                      io.replace(b"close=854", b"close=838"), io + b"\n"):
+            with self.assertRaises(ValueError): batch.validate_retirement_io(wrong)
         expected = {
             "PT-BAT-090-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n1\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
             "PT-BAT-090-maximum.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n2147483647\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
@@ -341,6 +349,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(151, 81))
         self.assertEqual("Batch module159 PT = NK-BAT-00189 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(159, 89))
+        self.assertEqual("Batch module183 PT = NK-BAT-001113 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(183, 113))
         self.assertEqual(("OS lock continuity and child termination",
                           "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
                           "actual root systemd credential deployment", "actual NK characterization and IT/ST"),

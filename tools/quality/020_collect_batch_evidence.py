@@ -95,6 +95,14 @@ RETIREMENT_TRACES = {
 }
 
 
+RETIREMENT_IO_TRACE = b"{acl=1075, attributes=1075, close=854, create=2, filesystem=1075, force=2, namesClose=54, namesHasNext=138, namesIterator=54, namesNext=84, namesOpen=54, openDirectory=477, openEntry=324, openRead=57, openRoot=53, openWriter=2, publish=2, read=114, readClose=57, readSize=114, readonly=1075, sync=13, unlink=5, write=2, writeSize=4, writerClose=2}"
+
+
+def validate_retirement_io(value):
+    if value != RETIREMENT_IO_TRACE:
+        raise ValueError("invalid independently counted retirement IO inventory")
+
+
 def validate_retirement_traces(traces):
     if traces != RETIREMENT_TRACES:
         raise ValueError("missing, extra or invalid independent retirement trace")
@@ -229,11 +237,15 @@ def main():
     retirement_traces = {str(p.relative_to(retirement_root)): p.read_bytes()
                          for p in retirement_root.rglob("*") if p.is_file()}
     validate_retirement_traces(retirement_traces)
+    retirement_io = (target / "run-retirement-io-inventory.txt").read_bytes()
+    validate_retirement_io(retirement_io)
     for folder, values in (("input/run-retirement", RETIREMENT_TRACES), ("output/run-retirement", retirement_traces)):
         destination = evidence / folder
         destination.mkdir(parents=True, exist_ok=True)
         for name, value in values.items():
             (destination / name).write_bytes(value)
+    for folder, value in (("input/run-retirement", RETIREMENT_IO_TRACE), ("output/run-retirement", retirement_io)):
+        (evidence / folder / "PT-BAT-110-io.txt").write_bytes(value)
     for folder, values in (("input/run-lifecycle", LIFECYCLE_TRACES), ("output/run-lifecycle", lifecycle_traces)):
         destination = evidence / folder
         destination.mkdir(parents=True, exist_ok=True)
@@ -290,7 +302,8 @@ def main():
     manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
     manifest["related"] += ["PG-D-159", "BUG-163", "BUG-164", "BUG-165", "BUG-166", "YKT-127"]
     manifest["runReferencesOracle"] = "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity."
-    manifest["related"] += ["PG-D-160", "SSC-056", "PG-D-161", "BUG-171", "BUG-172", "YKT-132", "YKT-133"]
+    manifest["related"] += ["PG-D-160", "SSC-056", "PG-D-161", "BUG-171", "BUG-172", "BUG-173", "BUG-174", "YKT-132", "YKT-133", "YKT-134", "YKT-135"]
+    manifest["retirementIoFaultPositions"] = 6768
     manifest["retirementOracle"] = "015/BAT090..113: literal NKRET1 195..204 bytes and independent one/two-activation SHA256 vectors; full canonical plan count/hash retained through original done/begin/anchor deletion, original-directory durability barriers BEFORE any plan/marker disposal, metadata-only recovery, strict latest-completion400day age, actual PG18 V018 three-reference combinations/identity/query failures, target-only active/pending protection and other-run preservation. Full namespace/graph, bounded record ownership, every native IO occurrence, crash/close/null/interruption/concurrency, no unknown part repair or recursive deletion."
     manifest["limitations"] += " The file scope establishes fixed-namespace, record lifecycle and limited400day retirement under caller exclusion, not actual OS-lock continuity, parent/child lifecycle or whole-morning orchestration. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

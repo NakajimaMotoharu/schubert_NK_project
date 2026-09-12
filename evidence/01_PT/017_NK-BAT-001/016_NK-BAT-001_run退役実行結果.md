@@ -1,5 +1,11 @@
 # NK-BAT-001 run退役実行結果
 
+最新探索e0a31cb2（正式認定前）: 全Batch183/Storage58成功、failed/error/skipped0、2026-09-13 03:28:23 JST終了、8分02秒、exit0。Batch58class/309method/1699line/843branchすべてmissed0、6,768全IO位置を実行。コマンドは421のJDK/M2を指定したoffline `./mvnw -pl src/schubert-nk-batch -am test org.jacoco:jacoco-maven-plugin:0.8.15:report`。raw `/tmp/pgpt-retirement-explore6.log` SHA256 ba851009a27987babeb8f80dcbfb24ccd43d824c9d463b4d6c0cdbd9ca10e1fc。
+
+静的解析: compile＋SpotBugs checkを同reactorで実施、03:30:48 JST終了/12.441秒/exit0、指摘0（raw `/tmp/pgpt-retirement-static7.log`）。先行static6のgoal単独実行はstorage jar未解決で非成功だったため合格に数えない。compile phase付きで依存を確定して再実行したもので、PT skipやoffline依存を外していない。
+
+BUG174/YKT135: 実IO証跡とcollectorの照合でlocale順序の期待値不備を検出し先行435bd5f5で登録。ASCII/Java自然順へ修正し、旧誤順序を拒否する負例・実5golden＋IO証跡の再照合・019の23canaryを成功確認。詳細はevidence/logs/BUG-171-174-YKT-132-135.md。全module正式run04と13collector/36scopeを完了するまではPG/PT正式完了へ加算しない。
+
 PG161/SSC055、PT-BAT-090～113。正式合格認定0、coverage未認定。正式対象source/branch/run/time/tool/command/exit/BUG/hashは全実行後に記録する。原本GCおよび親工程の完了へ算入しない。
 
 探索記録（dev-foundationの未commit実装候補、正式sourceではない）:
