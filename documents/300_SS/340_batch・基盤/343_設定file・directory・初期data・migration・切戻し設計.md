@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC060/PG167（先行81e0e64b）: 341 §7.4の固定Inspector unit18property・GetUnitProcesses空配列と前後snapshotを、親のfresh終了観測へ使用する。実InvocationID/commandline/process一覧は設定/証跡へ保存せず、独立合成vectorだけで単体検証する。現行unitのRemainAfterExit=no/固定起動wrapperは本変更で変えない。古い状態の流用、query process終了を実検査unit全終端へ代用、start結果不明のままOS lock解除は不可。018021～024/UNIT001～016を追跡し、実親start/stop/quarantine/原本・DB結線は引き続き未完了。
+
 ## 1. 目的・追跡
 
 SSC-049/PG-D-148: read-only照会は`/usr/bin/systemctl --system --no-pager --no-ask-password show --property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID <固定APIまたはWeb unit>`だけ。子環境はclear後にPATH=/usr/bin:/bin、LANG/LC_ALL=C、SYSTEMD_COLORS=0、TERM=dumbのみ設定し、親credential/envやbus address overrideを引き継がない。stderrはdiscard、stdoutは終了後最大1025byte読取で過長を拒否、固定projectionを出す信頼OS binaryが前提。5秒wait timeout時は照会子processへTERMを要求し失敗、SIGKILLやservice stopへ置換しない。全stdio close完了前の成功返却は禁止。敵対rootがbinary/systemdを差替える場合や、TERMを無視するOS障害の強制解消は保証しない。実対象unit不在でもcommandがexit0/inactiveを返すため、必ずLoadState=loadedを検証する。PTでは実read-only診断と制御Process portを区別して記録する。

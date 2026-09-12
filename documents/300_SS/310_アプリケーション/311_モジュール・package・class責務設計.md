@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC060/PG167: Batch .platform.InspectorUnitSnapshot（固定18property/値/必要終端条件/fresh receipt）とInspectorUnitProbe（固定show・GetUnitProcesses・同状態照合/所有stdio/固定例外）を追加予定。既存API/Web停止確認とは用途を分離し、start/stop/親callback/OS lockを所有しない。全public/private method・native helperはOPS009/UI251/SS341 §7.4・343/018021～024・PT-OPS-UNIT-001～016へ対応。依存は既存Batch/Java標準のみ、systemd設定そのものの変更は含まない。
+
 SSC059/PG166: .batch.file.BackupArtifactVerifierは341 §6.5の信頼manifestと実4fileのread-only一致・保持inode/metadata/ACL/size/hash/byte/再binding・owned closeだけを担う。BAK/BKO/UI251/SS341・343、017038/039/BAT194～209でconstructor/verify・全内部port/snapshot/safe-close/streaming/時計のmethodを追跡する。実backup生成/DB信頼binding/世代管理やroot/OS authorityをこの結果から発明しない。
 
 SSC058/PG165の追加責務: .batch.backup.BackupFileDigest/BackupVersions/BackupManifestは341 §6.4の申告観測値・3file/両完全handle/時刻/version/正size/hashの不変条件。.batch.file.BackupManifestCodecは固定順ASCII JSON/末尾LFとcanonical roundtrip。BAK001～008/BKO001～008/UI251/SS341・343、BAT178～193/017033～036へ全methodを追跡。実artifact I/O/worker/root/DB binding/世代管理は別未完了。module依存を追加せず既存BatchStepAttempt/BatchRunを共用する。

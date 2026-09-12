@@ -195,6 +195,21 @@ SSC-050/PG-D-129: 全maintenance_cleanupの第2引数は固定run_started_atと�
 
 SSC-049/PG-D-130: run executorは324 §12.7の単調時計30分とinterruptを各最大1,000呼出しchunk前後で確認する。END/保護0だけSUCCESS、END/保護ありWARNING、途中停止/DB障害はFAILED相当50。最後の確認済み累積値を「最新総数」と誤記せず、次attemptは同runで永続状態を再読する。30分はprocess unit上限でも維持し、Java協調停止だけで長時間SQLの強制停止を保証したとしない。親の実backup/key/OS lock/終了後close検証は別gate。
 
+### 7.4 Inspector unitのfresh終端観測（SSC060/PG167）
+
+先行81e0e64b。これはread-onlyの観測部品でありstart/stop/OS排他/quarantine/DB summary接続ではない。341 §7.3の同期callbackは実子終端まで戻らず、古いunit結果やPID2値だけを終了証明にしない。
+
+- .batch.platform.InspectorUnitSnapshotは固定unit schubert-nk-inbox-inspector.serviceのshow出力18propertyをparseする。Id/LoadState/ActiveState/SubState/Job/MainPID/ControlPID/InvocationID/ExecMainCode/ExecMainStatus/ExecMainStartTimestampMonotonic/ExecMainExitTimestampMonotonic/Result/Type/Restart/RemainAfterExit/KillMode/SendSIGKILL。順序は不問、各1回・集合完全一致、ASCII1～2048byte・各行LF・末尾LF1、CR/NUL/高bit/未知/重複/欠落を拒否する。値に任意path/command/改行を持ち込まない。
+- Id完全一致、LoadState=loaded、Type=oneshot、Restart=no、KillMode=control-group、SendSIGKILL=noを必須とする。RemainAfterExitはyes/noの観測値（現行unit設定はnoを維持）。他状態・ResultはASCII小文字の英数/hyphen1～64token、Jobは空または1～uint32のcanonical decimal、PIDは0～uint32、ExecMainCode0～6/Status0～255、monotonic µsは0～uint64のcanonical decimal。先頭0/符号/空白/overflowを拒否し、InvocationIDは空またはlower32hexの非nil ID。すべて型/範囲を構築時検査し、不変snapshot/toString redactとする。
+- snapshot.quiescentはJob空・MainPID/ControlPID0かつ inactive/dead、active/exited、failed/failedのいずれかの必要条件だけ。これ単独を全process終端証明にしない。fresh receiptはその条件に加え今回InvocationID非空/開始前のOptional IDとは別、ExecMainStart>0、Exit>=Start、ExecMainCode=1、ExecMainStatus=0または10、Result=success、active/exitedまたはinactive/deadが必要。failed/failedやsignal/timeout、開始未観測、古いIDはreceiptなし。0/10をsystemctl clientの終了codeへ混同しない。今回runとの対応は親が同run環境の寿命とfresh起動を別途保証する。
+- InspectorUnitProbeはread()、quiescent()（Optional snapshot）、completionAfter(Optional<UUID>)を供給する。quiescentはread→必要条件→固定GetUnitProcessesの正確なASCII `a(sus) 0\n`→再readで全18property不変、全command成功/資源解放/割込なしの時だけ存在する。非空/未知/過長process出力は終了を認定せず、command内容やPID/commandlineをlog/evidenceへ保存しない。Main/Control PIDとcgroup再帰の独立確認を重ね、TasksCurrent欠落を0としない。
+- showは /usr/bin/systemctl --system --no-pager --no-ask-password show --property=<固定18field> <固定unit>。process照会は /usr/bin/busctl --system --timeout=5s --no-pager call org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager GetUnitProcesses s <固定unit>。shell/環境任意commandを介さず、既存NativeProcessのclear-env固定6変数・stderr破棄を使う。show受信2049byte/process受信10byteで上限を検出、process空vectorは9byte。読取command各5秒、非0/IO/timeout/割込/null resourceは合格にしない。
+- 全stdioを取得順に所有し、後続getter/IO/close失敗でも先行資源を閉じる。known IO/停止例外は既存StopGateExceptionの固定message/reasonへredactしcause/suppressedにrawを出さない。unknown Runtime/NPE/Errorは正常化せずidentity保持、既知cleanupのsuppressedも固定化。読取query自身へのTERMは可、SIGKILLは禁止。query子終了とInspector unit全終端は別概念。生byteはparse/比較後に消去し、値を外へ返す前にも割込flagを保持して再確認する。
+- 未開始/GCによるInvocationID欠落、途中遷移、manager故障は成功ではない。現在RemainAfterExit=noなので取り逃した終端を古い結果で補完しない。後続controllerで結果保持設定/新起動barrier・起動不明時の停止待ち/OS lock寿命・SIGTERM shutdown・再開admissionを具体化する。期限を過ぎて子が残る場合に正常callback returnしてOS lockを閉じる実装は禁止する。
+- OPS009/UI251/SS311/341/343、018021～024/PT-OPS-UNIT-001～016。単体は独立18field literal・公開process mockと実ローカルread-only tool確認、全resource/NULL/境界/並行/4coverage・静的解析を行う。本番root/systemd配布や実unit起動のIT/ST合格ではない。
+
+一次資料（2026-09-13確認）: [systemd v259 D-Bus](https://raw.githubusercontent.com/systemd/systemd/v259/man/org.freedesktop.systemd1.xml)、[service](https://raw.githubusercontent.com/systemd/systemd/v259/man/systemd.service.xml)、[dbus-unit.c](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/dbus-unit.c)。GetUnitProcessesはcgroup再帰とmain/control PIDを集約する。ExecMain時刻は現在または直前の実行で、fresh対応を別途確認する必要がある。
+
 ## 8. Transfer cleanup
 
 333 §12のsecure directory walkを使い、backup失敗時も実行する。Root正常で個別file削除失敗はWARNINGとし
