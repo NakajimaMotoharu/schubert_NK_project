@@ -16,6 +16,10 @@ Outbox lease、論理・物理削除の順序を定める。SQL文の実装は�
 
 ## 2. Transaction共通規則
 
+SSC056/PG160（先行8002b28b・3cf06b00）: Java InstantとPostgreSQL timestamptzの境界はJDBC4.2を使い、setObject(index, instant.atOffset(ZoneOffset.UTC))、getObject(column,OffsetDateTime.class)→null契約確認→toInstantに統一する。java.sql.Timestamp/getTimestamp/setTimestampで歴史暦やdefault timezoneを経由しない。SQL NULLは既存Optional/必須列検査を維持し、値0やepochへ補完しない。PG-D-159もこの規則を適用する。年月日だけのLocalDateは時刻へ変換せず既存date型対応を維持する。既存SQL/parameter番号/transaction/lock/µs範囲・wire表示は不変、新DB columnや推測backfillを追加しない。
+
+独立PTは明示UTCのSQL literal/extract(epoch)と原本Instantで期待値を決め、同じJDBC変換でfixtureとexpectedを生成しない。UTC0001・1582前後・1900・現代µs・UTC9999とUTC/JST/NewYork session、両方向bind/projection、NULL/欠落/未知、全JDBC fault/close所有を対象classへ横展開する。元Timestampの年0001反例を固定記録し、同じ方式へ戻ることをstatic/architecture canaryで拒否する。現在の23 classと既存OffsetDateTime classの全回帰が完了するまでYKT128/SSC056を閉じない。
+
 | 項目 | 設計 |
 |---|---|
 | Isolation | 既定`READ COMMITTED`。個別の一貫性はrow/advisory lock、CAS、UKで保護 |

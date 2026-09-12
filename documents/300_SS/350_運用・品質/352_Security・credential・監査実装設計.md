@@ -1,5 +1,7 @@
 # Security・credential・監査実装設計
 
+SSC056/PG160（先行8002b28b・3cf06b00、BUG167/YKT128）: session期限・revoke・認証retry・監査・Inbox/OutboxのDB時刻を332のJDBC4.2 UTC境界へ統一する。歴史暦ずれで期限/参照一致/署名に使うInstantを変えない。NULL/不正/範囲外は既存error契約を維持し、日時補完・許容年縮小・保存暗号/Current期待値の変更をしない。SQL原本と独立epoch/vectorで両方向を照合し、raw session/token/秘密を診断へ出さない。
+
 ## 1. 目的・追跡
 
 Browser/Caddy/Web/Artemis/API/PostgreSQL/file/systemdの信頼境界ごとに、認証・認可、CSRF/session、
