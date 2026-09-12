@@ -279,6 +279,22 @@ InspectorEnvironmentPublisherは借用runtime rootでprepare(BatchRun)/retire(Ba
 
 PTは孤立実inode/FFM・合成root/tmpfs属性・明示IO faultで全分岐を検証。実root/manager/親全順序/永続anchorは別PGPT・後続IT条件を維持する。
 
+### 6.12 固定namespace・account解決と環境寿命（SSC-049/PG-D-155、先行023017b2）
+
+ConfigurationGroupResolverの公開入口は引数なしresolve()だけ。固定argv `/usr/bin/getent group schubert`をshellなしで実行し、NSSの名前照会からGIDを独立取得する。group列挙・gshadow・任意key/optionsを扱わない。環境はPATH=/usr/bin:/bin・LANG=C・LC_ALL=Cだけ、stderr破棄、親env/secretは継承しない。5秒待機・stdout最大65536byte（65537で過長検知）・exit0・全stdio closeの成功を必須とし、timeout/非zero/IO/不明read/close/割込は固定IOException、割込flagを維持する。失敗後の生存lookup子にだけTERMを要求しSIGKILLは使わない。任意子孫がpipeを保持しないtrusted OS tool/NSS設定を前提とし、実際の未停止子検知は非成功のまま運用へ引継ぐ。
+
+stdoutは13～65536byte、prefix `schubert:`、colon合計3個、終端LF1個、内部NUL/制御ASCII/DEL/追加LF/CRを拒否する。password/member fieldは空でもよく、内容を解釈/表示/保存しない（非ASCII byteはこの2fieldに限りopaqueとして扱う）。GID fieldは先頭0なしASCII数字1～10桁、1～4294967295。別名/別group/欠落/多行/空GID/未知byteは拒否。全stdoutをString化せずGIDだけ積算し、byte配列を全終了時に消去する。nullはprogramming契約違反として正常化しない。lookup失敗を対象fileのGIDで補完しない。参照資料: host GLIBC2.43-2ubuntu2.4、Linux man-pages6.17 getent(1)、2026-09-12。
+
+InspectorEnvironmentFilesの公開factoryは固定/etc・/runとnative portを生成する。execute(BatchRun, Operation<T>)は開始時null/interrupt/euid0を検査し、親のOS flock保持・root管理変更禁止・現在子終端・backup/永続run原本一致を必須preconditionとする。Operationは同じrunの子処理が終端となるまで復帰せず、親file/root/namespaceを操作しない。
+
+1. 独立GIDを取得。全segment NOFOLLOWで/etc→schubert-nk、/run→schubert-nk→maintenanceを各独立FDとして保持する。/etc・/run・/run/schubert-nkはroot:root0755通常directory、configはroot:schubert0750、maintenanceはroot:root0700。access ACLなし・同階層device一致、/etc系は既定local FS（RO可）、/run系はRW tmpfs。rootそのもの/固定祖先の作成/chmodはしない。
+2. static fileのSnapshotとcanonical byteを保持rootから取得し、同inode/全byte/属性を検証する。runtime publisher.prepare(run)を実行する。
+3. 直前に固定pathを全て開き直して各保持rootのidentityと比較し、独立group照会も同GID、static fileも元Snapshot/byteと一致することを確認してからOperationを1回呼ぶ。runtime fileも期待runへ再読照合する。根拠をcallbackへ渡すpath/FD/secretとして公開しない。
+4. Operationの正常nonnull終了後に同じnamespace/group/static/runtime確認を再実行し、同runretireを行う。全所有root close成功後だけ結果を返す。callbackが例外/nullで終了した場合はretireせずruntime fileを保全し、親が子終端/復旧を判断する。途中IO/close失敗で成功を補完しない。
+5. 各directory比較は内容変化で変わるsize/mtime/ctimeを除いた型/owner/group/link/dev/ino/FS/ROを一致させる。static fileは変更を許可せずctimeを含む全snapshot＋byte一致。同階層を同deviceとし/etcと/runのdevice違いは正常。最後の割込も非成功、IO診断は固定cause/suppressedなし、未知runtimeは回収後にescapeする。
+
+固定pathに対するportability警告はBUG142/YKT112と同じ理由で公開factoryのexact diagnosticだけreview可能（owner NK-OPS-001、PG gate/OS/path変更時再審査）。coverage/null/securityの除外ではない。実root/systemd/OS lock連続性は本PTの合成属性だけで認定せず、子制御の実装と後続ITを維持する。
+
 ## 7. 環境差分
 
 
