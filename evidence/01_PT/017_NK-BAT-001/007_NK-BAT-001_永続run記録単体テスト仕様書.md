@@ -13,4 +13,14 @@ PG-D-156/SSC-055先行b6b5f0f6、OPS-009/UI251/SS311/331 §8.2/341 §3/343 §6.1
 | PT-BAT-044 | ownershipAndRedaction | 入力byte不変、返却配列相互独立、モデル同値/相違とaccessor・redacted toString、getterが値を取り違えない |
 | PT-BAT-045 | concurrentUse | 64独立activation/各0・10、独立fixtureのID/cutoff/結果集合、5秒Future bound、共有可変byteなし |
 
-Production encodeをexpected生成に使わない。round-tripだけで成功とせずliteral byteと各fieldを別々にassertする。parserにはfile所有/expected run検証の責務がなく、正規の別runを誤って不正期待値にしない。全line/method/class/branch100%、NullAway/SpotBugs/format、18負canary/全reactor/35scope・所属一意性を確認する。実行command/環境/commit/結果/coverage/BUG/hashは008とmanifestへ記録。未実行・failed・flaky・skippedは未合格。
+Production encodeをexpected生成に使わない。round-tripだけで成功とせずliteral byteと各fieldを別々にassertする。parserにはfile所有/expected run検証の責務がなく、正規の別runを誤って不正期待値にしない。全line/method/class/branch100%、NullAway/SpotBugs/format、19負canary（017の1＋019の18）/全reactor/35scope・所属一意性を確認する。実行command/環境/commit/結果/coverage/BUG/hashは008とmanifestへ記録。未実行・failed・flaky・skippedは未合格。
+
+PT038は4種の実encode返却byteを`target/maintenance-record-traces/PT-BAT-038-{anchor,activation,completion-0,completion-10}.txt`へ保存する。020 collectorは独立literalと完全一致、4fileの過不足0を確認し、期待値をevidence/input/maintenance-records、実際値をoutput/maintenance-recordsへ別保存する。manifestの各file hashへ追跡する。実際値をcollector側でProductionから再生成しない。019は欠落/余分/改変traceを不合格にする。
+
+| Production method | Test ID |
+|---|---|
+| MaintenanceRecords.anchor/readAnchor、identity/run/ascii/lines/require/invalid | PT038～041・043～045 |
+| MaintenanceRecords.activation/readActivation | PT038～041・043～045 |
+| MaintenanceRecords.completion/readCompletion | PT038～045 |
+| MaintenanceActivation constructor/run/id/businessDate/toString/value equality | PT038～039・043～045 |
+| MaintenanceCompletion constructor/activation/endedAt/outcome/toString/value equality、Outcome constructor/exitCode | PT038～039・042～045 |

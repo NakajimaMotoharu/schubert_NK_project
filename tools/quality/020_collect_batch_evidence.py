@@ -27,6 +27,14 @@ HANDOFF_CLASS = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
 HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
                    "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
                    "stateChangesAndInterrupts", "concurrentGapCompetition")
+RECORD_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest"
+RECORD_METHODS = ("literalRecords", "identityTemporalBoundaries", "malformedSources", "scalarAliases",
+                  "completionInvariants", "nullContracts", "ownershipAndRedaction", "concurrentUse")
+RECORD_TRACES = {
+    "PT-BAT-038-anchor.txt": b"NKRUN1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\n",
+    "PT-BAT-038-activation.txt": b"NKACT1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n",
+    "PT-BAT-038-completion-0.txt": b"NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n0\n",
+    "PT-BAT-038-completion-10.txt": b"NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n10\n"}
 OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -40,7 +48,7 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, *OPS_CLASSES}
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -58,6 +66,15 @@ def validate_handoff_suite(suite):
     return validate_group(suite, HANDOFF_CLASS, HANDOFF_METHODS, 30)
 
 
+def validate_record_suite(suite):
+    return validate_group(suite, RECORD_CLASS, RECORD_METHODS, 38)
+
+
+def validate_record_traces(traces):
+    if traces != RECORD_TRACES:
+        raise ValueError("missing, extra or invalid independently checked run record trace")
+
+
 def validate_group(suite, cls, expected, start):
     cases = suite.findall("testcase")
     names = [c.get("name") for c in cases]
@@ -71,11 +88,13 @@ def validate_group(suite, cls, expected, start):
 
 
 def validate_reports(suites):
-    if len(suites) != 3 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS, HANDOFF_CLASS}:
+    validators = {CLASS: validate_suite, LOG_CLASS: validate_log_suite,
+                  HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite}
+    if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
     for suite in suites:
-        validator = {CLASS: validate_suite, LOG_CLASS: validate_log_suite, HANDOFF_CLASS: validate_handoff_suite}[suite.get("name")]
+        validator = validators[suite.get("name")]
         methods.update(validator(suite))
     return methods
 
@@ -96,7 +115,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 107:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 115:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -106,22 +125,30 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
-    sanitized = ET.Element("testsuite", name="NK-BAT-001", tests="37", failures="0", errors="0", skipped="0")
+    trace_root = target / "maintenance-record-traces"
+    traces = {str(p.relative_to(trace_root)): p.read_bytes() for p in trace_root.rglob("*") if p.is_file()}
+    validate_record_traces(traces)
+    for folder, values in (("input/maintenance-records", RECORD_TRACES), ("output/maintenance-records", traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    sanitized = ET.Element("testsuite", name="NK-BAT-001", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(sanitized, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(sanitized).write(evidence / "output/results.xml", encoding="utf-8", xml_declaration=True)
     for suffix in ("csv", "xml"):
         shutil.copyfile(target / ("site/jacoco/jacoco." + suffix), evidence / ("coverage/batch-jacoco." + suffix))
-    summary = {"runId": run, "targetCommit": verified["targetCommit"], "tests": 37,
+    summary = {"runId": run, "targetCommit": verified["targetCommit"], "tests": len(methods),
                "failed": 0, "errors": 0, "skipped": 0,
                "coverage": verified["modules"]["batch"]["coverage"],
                "staticAnalysis": verified["modules"]["batch"]["spotbugs"],
-               "result": "PASS_REPOSITORY_LOG_AND_HANDOFF_BOUNDARIES_ONLY", "programComplete": False}
+               "result": "PASS_REPOSITORY_LOG_HANDOFF_AND_RECORD_BOUNDARIES_ONLY", "programComplete": False}
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(summary, indent=2) + "\n")
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                  "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_AND_HANDOFF_BOUNDARIES_ONLY",
+        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_AND_RECORD_BOUNDARIES_ONLY",
         "programComplete": False, "testIdMethods": methods,
         "sharedModuleOwnership": ownership_description(verified["modules"]["batch"]["tests"], len(methods)),
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
@@ -138,6 +165,9 @@ def main():
     manifest["related"] += ["PG-D-150", "SSC-049", "BUG-146", "YKT-114"]
     manifest["handoffOracle"] = "005/PT-BAT-030..037: parent single session lock -> child dedicated-role transaction lock -> parent nonblocking reacquire; repeated handoff preserves exact one acquisition. Missing/shared/two-int/reentrant/state/interrupt/null reject, every observed JDBC occurrence and each of5 scalar missing/duplicate/null/flipped/null-resource faults reject, resources close and provider diagnostics stay absent. Child IOException fixed, unexpected Runtime/Error identity preserved, null result never succeeds. A competing real connection/thread in the gap prevents parent success without waiting/force unlock."
     manifest["limitations"] += " InspectorLockHandoff only supplies the borrowed-connection synchronous handoff boundary. Caller must retain OS lock, admit backup/stopped applications/run, confirm child process termination before callback return, avoid sharing parent connection, verify receipts/progress, and dispose parent connection after failure. Actual oneshot and OS/backup orchestration remain unverified."
+    manifest["related"] += ["PG-D-156", "SSC-055"]
+    manifest["recordOracle"] = "007/PT-BAT-038..045: hand-written ASCII anchor72/activation109/done140 or141 bytes; nil/max UUID, UTC0001/9999 and microseconds, Asia/Tokyo civil date boundaries,0/10 only. Each fixed magic/delimiter byte mutated to all other byte values; aliases, leap normalization, scalar errors, malformed/null and wrong model reject. Valid different identity remains different data, not authentication. Completion invariants, caller-owned arrays, redacted values and64 independent activations use literal field/byte oracles."
+    manifest["limitations"] += " Run records are values/byte codecs only: no persisted anchor store, active/completion crash recovery, expected-file/run authorization, whole-parent lifecycle, reference query or400-day retirement is certified. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

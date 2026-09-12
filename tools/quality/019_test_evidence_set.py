@@ -33,6 +33,48 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     @staticmethod
+    def record_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest"
+        names = ("literalRecords", "identityTemporalBoundaries", "malformedSources", "scalarAliases",
+                 "completionInvariants", "nullContracts", "ownershipAndRedaction", "concurrentUse")
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 38)}
+
+    def test_run_record_inventory_and_nonpassing_cases(self):
+        suite, expected = self.record_fixture()
+        self.assertEqual(suite.get("name"), batch.RECORD_CLASS)
+        self.assertEqual(tuple(c.get("name") for c in suite), batch.RECORD_METHODS)
+        self.assertEqual(expected, batch.validate_record_suite(suite))
+        prefix = "12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\n"
+        activation = "fedcba98-7654-3210-8fed-cba987654321\n"
+        end = "2026-09-12T05:06:07.234567Z\n"
+        traces = {"PT-BAT-038-anchor.txt": ("NKRUN1\n" + prefix).encode("ascii"),
+                  "PT-BAT-038-activation.txt": ("NKACT1\n" + prefix + activation).encode("ascii"),
+                  "PT-BAT-038-completion-0.txt": ("NKDONE1\n" + prefix + activation + end + "0\n").encode("ascii"),
+                  "PT-BAT-038-completion-10.txt": ("NKDONE1\n" + prefix + activation + end + "10\n").encode("ascii")}
+        self.assertEqual(traces, batch.RECORD_TRACES)
+        self.assertIsNone(batch.validate_record_traces(traces))
+        for name in traces:
+            wrong = dict(traces); del wrong[name]
+            with self.assertRaises(ValueError): batch.validate_record_traces(wrong)
+            wrong = dict(traces); wrong[name] = b"unknown"
+            with self.assertRaises(ValueError): batch.validate_record_traces(wrong)
+        with self.assertRaises(ValueError): batch.validate_record_traces(dict(traces, unknown=b""))
+        for position in range(len(suite)):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_record_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): batch.validate_record_suite(wrong)
+        for key, value in (("tests", "7"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_record_suite(wrong)
+        for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+            with self.assertRaises(ValueError): batch.validate_record_suite(wrong)
+
+    @staticmethod
     def handoff_fixture():
         cls = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
         names = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
@@ -64,6 +106,7 @@ class EvidenceSetTest(unittest.TestCase):
         names = ("dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
                  "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest",
+                 "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -74,7 +117,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:3], batch.select_program_suites(suites))
+        self.assertEqual(suites[:4], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -102,6 +145,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(91, 37))
         self.assertEqual("Batch module107 PT = NK-BAT-00137 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(107, 37))
+        self.assertEqual("Batch module115 PT = NK-BAT-00145 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(115, 45))
         self.assertEqual(("OS lock continuity and child termination",
                           "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
                           "actual root systemd credential deployment", "actual NK characterization and IT/ST"),
@@ -421,10 +466,20 @@ class EvidenceSetTest(unittest.TestCase):
         for name in batch.METHODS:
             ET.SubElement(repository, "testcase", classname=batch.CLASS, name=name)
         handoff, expected_handoff = self.handoff_fixture()
-        accepted = batch.validate_reports([suite, repository, handoff])
-        self.assertEqual(37, len(accepted))
+        records, expected_records = self.record_fixture()
+        reports = [suite, repository, handoff, records]
+        accepted = batch.validate_reports(reports)
+        self.assertEqual(45, len(accepted))
+        self.assertEqual(expected_records, {k: v for k, v in accepted.items() if k in expected_records})
         self.assertEqual(expected_handoff, {k: v for k, v in accepted.items() if k in expected_handoff})
         self.assertEqual(expected, {k: v for k, v in accepted.items() if k in expected})
+        for position in range(len(reports)):
+            wrong = copy.deepcopy(reports); del wrong[position]
+            with self.assertRaises(ValueError): batch.validate_reports(wrong)
+            wrong = copy.deepcopy(reports); wrong[position].set("name", "unknown")
+            with self.assertRaises(ValueError): batch.validate_reports(wrong)
+            wrong = copy.deepcopy(reports); wrong[position] = copy.deepcopy(reports[(position + 1) % len(reports)])
+            with self.assertRaises(ValueError): batch.validate_reports(wrong)
         for reports in ([], [suite], [repository], [suite, suite], [repository, repository], [suite, repository, suite]):
             with self.assertRaises(ValueError):
                 batch.validate_reports(reports)
