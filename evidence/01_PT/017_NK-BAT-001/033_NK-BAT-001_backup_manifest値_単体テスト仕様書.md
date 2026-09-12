@@ -1,5 +1,7 @@
 # NK-BAT-001 backup_manifest値単体テスト仕様書
 
+実装・探索段階へ移行。BAT182のAsia/Tokyo歴史oracleはBUG182/YKT143先行9447f481、037のIANA独立offset/遷移literalを使用する。全9field null・7token/schema各境界、全step種別・id/run/skipped/開始整合、µs/上限/overflow/64並行を検証する。最新結果は034。正式認定前のため以下の起票時状態へ合格件数を遡及しない。
+
 PG165/SSC058先行8a606fc7、BAK001～008/BKO001～008/UI251 §5/SS311・341 §6.4・343 §5.3。PG164正式08のsource凍結中に仕様のみ先行、未実装/未実行/認定0。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |

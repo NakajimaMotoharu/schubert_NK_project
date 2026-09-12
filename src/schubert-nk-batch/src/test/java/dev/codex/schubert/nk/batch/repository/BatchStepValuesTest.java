@@ -162,6 +162,15 @@ final class BatchStepValuesTest {
 
   @Test
   void temporalContractAndBusinessDay() {
+    // YKT143: IANA historical LMT crosses midnight before fixed +09 would do so.
+    var historical = new BatchRun(new UUID(0, 143), Instant.parse("1582-10-04T14:50:00Z"));
+    assertEquals(
+        LocalDate.of(1582, 10, 5),
+        new BatchStepAttempt(1, historical, BatchStep.CLEAN_LOG, 1, historical.cutoff(), false)
+            .businessDate());
+    assertEquals(
+        LocalDate.of(1582, 10, 5),
+        new MaintenanceActivation(historical, new UUID(0, 1)).businessDate());
     for (String s :
         List.of("0001-01-01T00:00:00Z", "1582-10-10T00:00:00Z", "9999-12-31T23:59:59.999999Z")) {
       var run = new BatchRun(new UUID(0, 1), Instant.parse(s));

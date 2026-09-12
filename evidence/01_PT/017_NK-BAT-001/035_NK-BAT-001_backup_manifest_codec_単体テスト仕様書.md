@@ -1,5 +1,15 @@
 # NK-BAT-001 backup_manifest_codec単体テスト仕様書
 
+## 実装前に固定した独立golden
+
+BAT187最大正規byte長は独立field幅の総和1873（7token×128、2id×12、2attempt×2、3size×19、固定timestamp/UUID/hash/構造）。全3sizeを3074457345618258602/3074457345618258602/3074457345618258603へ置き、合計Long.MAX_VALUEを独立計算する。受信上限4096と正規最大1873を混同しない。実装/探索結果は036、BUG182/183・YKT143/144の全対象確認は037。正式認定待ち。
+
+965 ASCII bytes（下記JSONの末尾にLF1つ）。SHA256=733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e。SSのfield順と公開literalを手書きし、Production未実装時点で固定。directoryName=20260913-000002-12345678-9abc-def0-8123-456789abcdef、configurationBytes=712、totalBytes=713。申告hashであり実artifact検証済みとはしない。
+
+```json
+{"format":"NKBACKUP1","database":"schubert_nk","runId":"12345678-9abc-def0-8123-456789abcdef","cutoff":"2026-09-12T15:00:00.000000Z","startedAt":"2026-09-12T15:00:02.123456Z","contentFinishedAt":"2026-09-12T15:00:03.654321Z","databaseStep":{"id":90000,"attempt":1,"startedAt":"2026-09-12T15:00:00.000000Z"},"configurationStep":{"id":90001,"attempt":1,"startedAt":"2026-09-12T15:00:01.000000Z"},"versions":{"host":"nk-pt","app":"0.1.0-SNAPSHOT","schema":"020","os":"Ubuntu-26.04.1","jdk":"25.0.4","postgresql":"18.6","artemis":"2.56.0","age":"1.2.1"},"recipientSha256":"0000000000000000000000000000000000000000000000000000000000000000","files":{"schubert_nk.dump":{"size":1,"sha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},"config.tar":{"size":512,"sha256":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},"credentials.tar.age":{"size":200,"sha256":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}}}
+```
+
 PG165/SSC058先行8a606fc7、BAK001～008/BKO001～008/UI251 §5/SS311・341 §6.4・343 §5.3。PG164正式08のsource凍結中に仕様のみ先行、未実装/未実行/認定0。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |

@@ -23,6 +23,11 @@ class JstWireTimestampTest {
   /** PT-PRO-003-T03: strict seventeen digits, not formatter's signed/expanded uuuu output. */
   @Test
   void bug037ExpandedYearsAndUnrepresentableInstantsAreRejected() {
+    // YKT143: independent IANA LMT literal, not a formatter-generated oracle.
+    assertEquals(
+        "15821005000859000", JstWireTimestamp.format(Instant.parse("1582-10-04T14:50:00Z")));
+    assertEquals(
+        Instant.parse("1582-10-04T14:50:00Z"), JstWireTimestamp.parse("15821005000859000"));
     for (Instant invalid : invalidInstants()) {
       var failure =
           assertThrows(IllegalArgumentException.class, () -> JstWireTimestamp.format(invalid));

@@ -8,6 +8,23 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+BACKUP_VALUE_CLASS = "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest"
+BACKUP_VALUE_METHODS = ("completeIdentityAndDirectoryName", "fileDigestBoundsAndOverflow", "versionTokenBoundaries", "stepAndRunBinding", "timeAndPrecisionBoundaries", "nullAndRedaction", "immutableAccessors", "concurrentValueUse",)
+BACKUP_CODEC_CLASS = "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest"
+BACKUP_CODEC_METHODS = ("independentCanonicalGolden", "allFieldsAndMaximumLengths", "structuralByteMutation", "noncanonicalScalarsAndDates", "missingUnknownDuplicateAndOrder", "sizeAndNullBoundaries", "inputOutputOwnership", "concurrentCanonicalRoundTrips",)
+BACKUP_GOLDEN = "{\"format\":\"NKBACKUP1\",\"database\":\"schubert_nk\",\"runId\":\"12345678-9abc-def0-8123-456789abcdef\",\"cutoff\":\"2026-09-12T15:00:00.000000Z\",\"startedAt\":\"2026-09-12T15:00:02.123456Z\",\"contentFinishedAt\":\"2026-09-12T15:00:03.654321Z\",\"databaseStep\":{\"id\":90000,\"attempt\":1,\"startedAt\":\"2026-09-12T15:00:00.000000Z\"},\"configurationStep\":{\"id\":90001,\"attempt\":1,\"startedAt\":\"2026-09-12T15:00:01.000000Z\"},\"versions\":{\"host\":\"nk-pt\",\"app\":\"0.1.0-SNAPSHOT\",\"schema\":\"020\",\"os\":\"Ubuntu-26.04.1\",\"jdk\":\"25.0.4\",\"postgresql\":\"18.6\",\"artemis\":\"2.56.0\",\"age\":\"1.2.1\"},\"recipientSha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"files\":{\"schubert_nk.dump\":{\"size\":1,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"config.tar\":{\"size\":512,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"credentials.tar.age\":{\"size\":200,\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\"}}}\n".encode("ascii")
+
+def validate_backup_value_suite(suite):
+    return validate_group(suite, BACKUP_VALUE_CLASS, BACKUP_VALUE_METHODS, 178)
+
+def validate_backup_codec_suite(suite):
+    return validate_group(suite, BACKUP_CODEC_CLASS, BACKUP_CODEC_METHODS, 186)
+
+def validate_backup_traces(traces):
+    if traces != {"PT-BAT-186-manifest.json": BACKUP_GOLDEN}:
+        raise ValueError("missing, extra or invalid independent backup manifest")
+
+
 ATOMIC_VALUE_CLASS = "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest"
 ATOMIC_VALUE_METHODS = ("kindStepMapping", "successfulChunkContracts", "rejectionAndDeferredContracts", "summaryCountsAndCompletion", "counterOverflowAndBounds", "nullAndRedaction", "immutableValues", "concurrentValues",)
 
@@ -172,7 +189,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -258,7 +275,7 @@ def validate_reports(suites):
                   RETIREMENT_CLASS: validate_retirement_suite,
                   SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
                   STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
-                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite}
+                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -284,7 +301,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 247:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 263:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -294,6 +311,20 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    backup_root = target / "backup-manifest-traces"
+    backup_traces = {str(p.relative_to(backup_root)): p.read_bytes() for p in backup_root.rglob("*") if p.is_file()}
+    validate_backup_traces(backup_traces)
+    fixture = repo / "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json"
+    if fixture.read_bytes() != BACKUP_GOLDEN:
+        raise ValueError("independent backup manifest fixture changed")
+    for folder, values in (("input/backup-manifest", {"PT-BAT-186-manifest.json": BACKUP_GOLDEN}),
+                           ("output/backup-manifest", backup_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001/037_NK-BAT-001_backup_manifest横展開.md",
+                    evidence / "logs/BUG-182-183-YKT-143-144.md")
     atomic_root = target / "atomic-cleanup-traces"
     atomic_traces = {str(p.relative_to(atomic_root)): p.read_bytes() for p in atomic_root.rglob("*") if p.is_file()}
     validate_atomic_traces(atomic_traces)
@@ -398,6 +429,9 @@ def main():
     manifest["related"] += ["PG-D-163", "SSC-055", "BUG-176", "BUG-177", "BUG-178", "YKT-137", "YKT-138", "YKT-139"]
     manifest["parentStepOracle"] = "021/023 BAT130..153: 10 closed steps, fixed immutable handle and 4 terminal statuses/11 reasons; borrowed explicit RW READ_COMMITTED connection, self-db run identity guard before/after. Max99 ordered history, same-run explicit abandonment only, nonbackup daily success skip and backup always rerun. Exact full-handle terminal replay only; no implicit commit/rollback. Independent historical UTC/SQL and 399 JDBC fault positions plus6 double-close pairs, actual rollback/ownership/advisory/row-lock concurrency and all null/invalid projections. Parent child/OS/root/backup orchestration remains incomplete."
     manifest["related"] += ["PG-D-164", "SSC-057", "BUG-179", "YKT-140", "BUG-180", "YKT-141", "BUG-181", "YKT-142"]
+    manifest["related"] += ["PG-D-165", "SSC-058", "BUG-182", "BUG-183", "YKT-143", "YKT-144"]
+    manifest["backupManifestOracle"] = "033/035 BAT178..193: independent 965-byte canonical JSON/SHA256, immutable nine-field claims and complete two-step binding, microsecond UTC and IANA historical name literals, positive three-file counts/overflow, bounded nonsecret version tokens, exact LF/schema/order, all965 positions mutated with tilde/NUL/nonASCII, null/ownership/64concurrency. Claimed digest metadata only: no actual backup/restore/DB success authorization."
+    manifest["sourceFiles"].append({"path": str(fixture.relative_to(repo)), "sha256": hashlib.sha256(fixture.read_bytes()).hexdigest()})
     manifest["atomicCleanupOracle"] = "026/028/030 BAT154..177: seven non-Log kinds and immutable full step handle/counts. V020 DELETE and stored totals atomic; caller transaction repository, service commits bounded1000 chunks. Independent53 repository JDBC failure positions and115 service positions/3 double-close pairs, 1000/1/0 actual chunks, unknown commit resume rereads stored totals; locks/backups never false-END, FK question deferral only. Negative/null/time-wrap/interrupt/continuity/rollback-restoration/runtime and concurrency. Actual output trace independent from fixed collector literal (BUG179/YKT140). Not parent orchestration."
     manifest["atomicCleanupJdbcFaultPositions"] = {"repository": 53, "service": 115, "doubleClosePairs": 3}
     manifest["sourceFiles"].append({"path": "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql", "sha256": hashlib.sha256((repo / "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql").read_bytes()).hexdigest()})

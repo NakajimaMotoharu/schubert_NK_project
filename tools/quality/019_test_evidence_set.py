@@ -37,6 +37,48 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 class EvidenceSetTest(unittest.TestCase):
 
     @staticmethod
+    def backup_fixture(codec=False):
+        cls, names, start = (
+            ("dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
+             ("independentCanonicalGolden", "allFieldsAndMaximumLengths", "structuralByteMutation", "noncanonicalScalarsAndDates", "missingUnknownDuplicateAndOrder", "sizeAndNullBoundaries", "inputOutputOwnership", "concurrentCanonicalRoundTrips",), 186) if codec else
+            ("dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
+             ("completeIdentityAndDirectoryName", "fileDigestBoundsAndOverflow", "versionTokenBoundaries", "stepAndRunBinding", "timeAndPrecisionBoundaries", "nullAndRedaction", "immutableAccessors", "concurrentValueUse",), 178))
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_backup_manifest_inventories(self):
+        for codec, validate in ((False, batch.validate_backup_value_suite), (True, batch.validate_backup_codec_suite)):
+            suite, expected = self.backup_fixture(codec)
+            self.assertEqual(expected, validate(suite))
+            for position in range(8):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+                for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                    wrong = copy.deepcopy(suite); ET.SubElement(wrong[position], tag)
+                    with self.assertRaises(ValueError): validate(wrong)
+                for key, value in (("name", "unknown"), ("name", suite[(position + 1) % 8].get("name")), ("classname", "unknown")):
+                    wrong = copy.deepcopy(suite); wrong[position].set(key, value)
+                    with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
+    def test_backup_manifest_literal_trace(self):
+        expected = "{\"format\":\"NKBACKUP1\",\"database\":\"schubert_nk\",\"runId\":\"12345678-9abc-def0-8123-456789abcdef\",\"cutoff\":\"2026-09-12T15:00:00.000000Z\",\"startedAt\":\"2026-09-12T15:00:02.123456Z\",\"contentFinishedAt\":\"2026-09-12T15:00:03.654321Z\",\"databaseStep\":{\"id\":90000,\"attempt\":1,\"startedAt\":\"2026-09-12T15:00:00.000000Z\"},\"configurationStep\":{\"id\":90001,\"attempt\":1,\"startedAt\":\"2026-09-12T15:00:01.000000Z\"},\"versions\":{\"host\":\"nk-pt\",\"app\":\"0.1.0-SNAPSHOT\",\"schema\":\"020\",\"os\":\"Ubuntu-26.04.1\",\"jdk\":\"25.0.4\",\"postgresql\":\"18.6\",\"artemis\":\"2.56.0\",\"age\":\"1.2.1\"},\"recipientSha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"files\":{\"schubert_nk.dump\":{\"size\":1,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"config.tar\":{\"size\":512,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"credentials.tar.age\":{\"size\":200,\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\"}}}\n".encode("ascii")
+        self.assertEqual(965, len(expected))
+        self.assertEqual("733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e",
+                         hashlib.sha256(expected).hexdigest())
+        self.assertEqual(expected, batch.BACKUP_GOLDEN)
+        name = "PT-BAT-186-manifest.json"
+        batch.validate_backup_traces({name: expected})
+        for wrong in ({}, {name: expected, "unknown": b""}, {name: expected + b"\n"}):
+            with self.assertRaises(ValueError): batch.validate_backup_traces(wrong)
+        for i in range(len(expected)):
+            changed = expected[:i] + bytes([expected[i] ^ 1]) + expected[i+1:]
+            with self.assertRaises(ValueError): batch.validate_backup_traces({name: changed})
+
+    @staticmethod
     def atomic_fixture(group):
         cls, names, prefix, start = [
             ("dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest", ("kindStepMapping", "successfulChunkContracts", "rejectionAndDeferredContracts", "summaryCountsAndCompletion", "counterOverflowAndBounds", "nullAndRedaction", "immutableValues", "concurrentValues",), "BAT", 154),
@@ -447,6 +489,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
                  "dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+                 "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
+                 "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -457,8 +501,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(25, len(suites))
-        self.assertEqual(suites[:16], batch.select_program_suites(suites))
+        self.assertEqual(27, len(suites))
+        self.assertEqual(suites[:18], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -482,6 +526,8 @@ class EvidenceSetTest(unittest.TestCase):
                   "No duplicate PT credit.")
         self.assertEqual("Batch module247 PT = NK-BAT-001177 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(247, 177))
+        self.assertEqual("Batch module263 PT = NK-BAT-001193 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(263, 193))
         self.assertEqual("Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. " + suffix,
                          batch.ownership_description(65, 37))
         self.assertEqual("Batch module91 PT = NK-BAT-00137 + NK-OPS-00154. " + suffix,
@@ -830,8 +876,12 @@ class EvidenceSetTest(unittest.TestCase):
         step_values, expected_step_values = self.step_fixture()
         step_repository, expected_step_repository = self.step_fixture(True)
         reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt, step_values, step_repository] + [self.atomic_fixture(i)[0] for i in range(3)]
+        reports += [self.backup_fixture(False)[0], self.backup_fixture(True)[0]]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(177, len(accepted))
+        self.assertEqual(193, len(accepted))
+        for codec in (False, True):
+            _, backup_expected = self.backup_fixture(codec)
+            self.assertEqual(backup_expected, {k: v for k, v in accepted.items() if k in backup_expected})
         for i in range(3):
             _, atomic_expected = self.atomic_fixture(i)
             self.assertEqual(atomic_expected, {k: v for k, v in accepted.items() if k in atomic_expected})
