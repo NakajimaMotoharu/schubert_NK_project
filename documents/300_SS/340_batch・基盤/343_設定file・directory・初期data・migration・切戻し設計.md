@@ -226,6 +226,8 @@ api.fileのInspectorApplicationはfile adapterとして低位DirectoryCalls/Inod
 
 ### 6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）
 
+SSC-049/PG-D-151（先行85eef317）: root静的fileのrender結果は`NK_INSPECTOR_DB_URL=<URL>`＋LF、`NK_INSPECTOR_FINGERPRINT_VERSIONS=<comma列>`＋LFの順に固定する。2行以外・空行・CRLF・引用/escape/コメント/space・未知/重複/alias key・run/credential設定混入は不正。URLは§6.6と同じ`jdbc:postgresql://127.0.0.1:<port>/<database>`、portは先頭0なし1～65535、DB名は`[a-z_][a-z0-9_]{0,62}`、query/userinfo/remote host不可。versionは1～65536 ASCII文字、comma区切りの各要素`[A-Za-z0-9][A-Za-z0-9._-]{0,15}`で空/重複不可。file全体は1～65848byte（key/各値の既定上限/LFの合計上界）。全byteを照合し、UTF-8非ASCIIも拒否する。親のInspectorStaticEnvironment.requireValidは固定診断だけを返し、nullはprogramming契約違反。任意shell/systemd構文を評価しない。親の保持inode/bounded IO/属性検査で得たsnapshotに使用し、子launcherの型検査・DB接続時の再検証を省略しない。雛形はDB名等をrenderし本検査に合格してから配置する。秘密実体・環境全体は保持/出力しない。
+
 公開HTTP/JMSではないInspectorLauncher.mainをprivate unitの必須wrapperから呼ぶ。argvによる設定上書きは禁止し引数0個だけ。設定は以下の非秘密環境値から一度だけ型化し、現在日時や別runへ補完しない。password/AES/HMAC実値をenvへ渡さない。
 
 | Key | 受理契約 |

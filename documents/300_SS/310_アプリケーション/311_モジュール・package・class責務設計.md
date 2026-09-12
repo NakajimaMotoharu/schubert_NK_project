@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-049/PG-D-151: batch.platform.InspectorStaticEnvironmentはSS343 §6.8の静的2行fileをMap化前に検証する非秘密byte境界。DB connectorや秘密鍵をbatchへ持込まず、子API launcherの値検証と両側で同じSSを満たす。file属性/読取/公開の責務はbatch.file、子起動と同run確認は親platformへ分離する。NK-OPS-001、OPS-009/UI251、PT-OPS-CFG-001～006。
+
 SSC-049/PG-D-150（先行0797b369）: batch.cleanup.InspectorLockHandoffはSS341 §7.3の親Connectionのadvisory解放・同期callback・finally再取得だけを担う。借用transaction/connectionのcommit/rollback/close、実process/OS lock/backup/run原本には責務を広げない。NK-BAT-001、OPS-009、UI251、PT-BAT-030～037。JDBC scalar/資源終了の固定診断と未知programming failureの非成功を検証する。
 
 SSC-049/PG-D-149（2026-09-09、先行17b06c0c）: batch.platform.InspectorRunEnvironmentはSS343 §6.8のrun専用EnvironmentFileのcanonical ASCII生成・期待runとの全byte照合だけを担う。BatchRunの検証契約を再利用し、時刻取得・file IO・root/lock/backup/起動・永続原本の確定を行わない。NK-OPS-001、OPS-009、UI251、PT-OPS-ENV-001～004へ追跡する。
