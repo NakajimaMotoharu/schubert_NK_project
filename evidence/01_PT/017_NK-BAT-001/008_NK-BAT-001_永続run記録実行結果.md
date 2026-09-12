@@ -1,6 +1,6 @@
 # NK-BAT-001 永続run記録の実行結果
 
-PG-D-156/007/PT-BAT-038～045。実装・探索成功、正式全体試験待ち。正式20260912-06には含めない。source/全体run/関連証跡hashは正式実行後に追記する。原本file store・active lifecycle・親/GCとR001全体は未完了。
+PG-D-156/007/PT-BAT-038～045: 正式PT-WEB-20260912-07/source e919ac03a008355dbc6afa51c8c94c51845a01b2、dev-foundation、2026-09-12 23:51:38～23:59:15 JST、終了0で8件を認定。全1169 PT、failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 Production静的解析未解決0（固定path2 method限定reviewは維持）。12collector/35scope/19負canary成功。実行commandは `sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260912-07`、環境は421。evidence/manifest.jsonのhash de2e8de88dc55228d73b0a86303234a600a5e8fee16f9735936e7ecaa32a6324、4独立literal inputと4実output・XML・coverageをmanifestで追跡。関連SSC055、BUGなし。原本file store・active lifecycle・親/GCとR001全体は未完了、実NK CHR/IT/STを認定しない。
 
 2026-09-12 23:45:54 JST、`JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-batch -am verify` 終了0。Storage58+Batch115＝173 PT、line/method/class/branch100%、NullAway/Enforcer/Spotless/SpotBugs成功。OS既存toolchainは421のまま、新規導入なし。`/tmp/pgpt-run-record-explore2.log` SHA256 d6522a084b99c166f7e2ede0f9827de7844f1a84e9560e1ec9dbaef037754324。4実byte trace出力、017の1＋019の18＝19負canary成功。新規BUGなし。
 
