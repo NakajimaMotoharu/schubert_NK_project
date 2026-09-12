@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-049/PG-D-153: storageのDirectoryCalls/LinuxDirectoryCalls/OwnedTransferDirectoryへprivate0600 create・同directory単一名のno-replace publish・検証済みentry unlinkを追加する。file adapter専用で設定/DB/認証/run modelへ依存しない。通常Transfer writerとWeb readerの許可操作は変更せず、保守側のpolicyはbatch.fileへ置く。NK-OPS-001、OPS-009/UI251/SS333 §7.3/343、PT-OPS-PFILE-001～008。
+
 SSC-049/PG-D-152: batch.file.InspectorEnvironmentReaderがstatic/runtimeの既存環境fileを保持inodeからbounded readし、属性・同名再取得・close後にplatformのCFG/ENV byte検査へ渡す。借用rootの選択/寿命とOS排他は親、読取り専用で公開/修復しない。NK-OPS-001、OPS-009/UI251/SS343 §6.9、PT-OPS-EFILE-001～008。
 
 SSC-049/PG-D-151: batch.platform.InspectorStaticEnvironmentはSS343 §6.8の静的2行fileをMap化前に検証する非秘密byte境界。DB connectorや秘密鍵をbatchへ持込まず、子API launcherの値検証と両側で同じSSを満たす。file属性/読取/公開の責務はbatch.file、子起動と同run確認は親platformへ分離する。NK-OPS-001、OPS-009/UI251、PT-OPS-CFG-001～006。

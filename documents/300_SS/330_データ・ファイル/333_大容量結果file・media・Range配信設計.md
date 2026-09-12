@@ -113,6 +113,10 @@ Hard link対策としてasset/transfer filesystemの書込権限を専用account
 
 ### 7.3 API writerのdirectory capability（SSC-019）
 
+SSC-049/PG-D-153（先行67148c13）: shared storageへ保守file adapter専用のprivate能力を追加する。DirectoryCalls.createPrivateFileは同じopenat CREATE_NEW/NOFOLLOW/CLOEXECでmode0600を要求し、既存createFile0640は不変。未対応実装のdefaultは無操作UNAVAILABLEで拒否する。OwnedTransferDirectory.createPrivatePart(UUID,callback)は生成時点のinodeを保持し全終了close。publishAs(UUID,単一名)はUUID.partから同directoryの単一targetへ既存RENAME_NOREPLACE、その後directory fsync。unlinkEntry(単一名)はcallerが証明済みのentryだけをunlinkat→directory fsync。空/`.`/`..`/slash/NUL/null・closed rootは無操作拒否。root/階層の削除はなく、既存target衝突時はpart/targetを保持する。rename/unlink後のfsync/close失敗は不確定な非成功で、逆操作や他file削除で隠さない。
+
+上記能力自体はfileのowner/ACL/expected runのpolicyではない。callerが保持inode属性/同run byte・namespace/OS排他・子停止を確認してから使う。通常Transferの0640/.readyとWeb read-only、従来no-replaceの契約は変更しない。作成した0600 fileもumask/ACL/所有を上位で再検証し、不明既存fileの自動chmod・truncate・削除をしない。実nativeと公開SPI faultのPT-OPS-PFILE-001～008で確認し、runtime publisher完了とは分離する。
+
 SSC-021でReaderも同じ低位能力を共有する。Writerのmkdir/非上書きatomic公開はJava25の公開FFMからLinux libcのopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ぶ限定portで実現する。Preview、JDK internal API、private FDのreflection、shell subprocessを使用しない。Rootは`/`から全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、起動時の所有者/permission/非重複検査後も自分で取得したdirectory FDを保持する。
 
 日付directory作成とUUID entry操作はそのFD相対だけで行う。FileChannelでのCREATE_NEW/read/attribute取得に必要なpathは、自processが保持中のFDを指すkernel procfs `/proc/self/fd/<owned fd>/<validated generated name>`に限定する。利用者pathや置換可能な元root pathを再解決しない。FDは操作中close/reuseされない寿命管理を行い、close失敗時に同じ番号を再closeしない。File名の最終symlinkは常にNOFOLLOWで拒否し、nlink=1等の既存検査を省略しない。

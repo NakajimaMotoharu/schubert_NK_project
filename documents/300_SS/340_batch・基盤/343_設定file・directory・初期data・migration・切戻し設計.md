@@ -262,6 +262,10 @@ unitのLoadCredentialは常にDB/current2の絶対source pathを指定する。p
 
 本部品は既存fileの読取だけであり、atomic publisher/親起動・子終了/backup/永続run原本を完了にしない。合成root/GID/tmpfsの単体fixtureと実root配備のITを区別する。
 
+### 6.10 private原子公開の低位能力（SSC-049/PG-D-153）
+
+先行67148c13。SS333 §7.3のprivate0600 CREATE_NEW/保持inode・単一名RENAME_NOREPLACE・directory fsync・検証済みentry unlinkを再利用する。上位publisherはroot:root0700の固定runtime・OS lock・子非稼働・期待BatchRunを確認してから、新規UUID.partへcanonical2行だけを書き、file fsync/byte再照合後に固定inbox-inspector.envへ公開する。既存targetを通常renameで置換しない。同runの既存公開fileは再読取/再同期で判定し、別run/不正fileは勝手に置換しない。公開後の終了/再試行・known partialの扱い・親からの固定namespace結線は上位publisherの次の詳細化/PGPT対象であり、本低位能力だけでは認定しない。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
