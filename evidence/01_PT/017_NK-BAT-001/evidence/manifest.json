@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260913-04",
-  "targetCommit": "956a2f47c04730c940dc15b0817721b1c7848b49",
+  "runId": "PT-WEB-20260913-06",
+  "targetCommit": "23691ba619e22b6e759b8ecf19d5376e49e037ff",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-13T03:33:29+09:00",
-  "completedAt": "2026-09-13T03:48:59+09:00",
+  "startedAt": "2026-09-13T04:18:32+09:00",
+  "completedAt": "2026-09-13T04:34:00+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,7 +115,7 @@
       }
     },
     "api": {
-      "tests": 644,
+      "tests": 652,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
@@ -183,31 +183,31 @@
       }
     },
     "batch": {
-      "tests": 183,
+      "tests": 199,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 9173
+          "covered": 9562
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 843
+          "covered": 883
         },
         "LINE": {
           "missed": 0,
-          "covered": 1699
+          "covered": 1773
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 734
+          "covered": 765
         },
         "METHOD": {
           "missed": 0,
-          "covered": 309
+          "covered": 320
         },
         "CLASS": {
           "missed": 0,
-          "covered": 58
+          "covered": 61
         }
       },
       "spotbugs": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "467c3707a36af8f04f9d4bc38e9756a6164050b1662be7107dc93b8abf23d8f5",
+  "rawLogSha256": "91964fef8e1775bd43390661b9bc55d5314a694637d2f49351fd1b3a3fef9268",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
   "programComplete": false,
@@ -274,6 +274,14 @@
     "PT-BAT-079": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest#interruptionAndRuntime",
     "PT-BAT-080": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest#concurrentScopeOwnership",
     "PT-BAT-081": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest#fixedFactoryAndReopen",
+    "PT-BAT-114": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#summaryValueInvariants",
+    "PT-BAT-115": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#realBoundedRead",
+    "PT-BAT-116": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#parentStateAndLock",
+    "PT-BAT-117": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#projectionAndNull",
+    "PT-BAT-118": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#allJdbcFailurePositions",
+    "PT-BAT-119": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#historicalUtcIdentity",
+    "PT-BAT-120": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#freshVisibilityAndBorrowing",
+    "PT-BAT-121": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest#interruptAndRuntime",
     "PT-BAT-038": "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest#literalRecords",
     "PT-BAT-039": "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest#identityTemporalBoundaries",
     "PT-BAT-040": "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest#malformedSources",
@@ -334,11 +342,19 @@
     "PT-BAT-014": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#timezoneAndCutoffIdentity",
     "PT-BAT-015": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#lockedLogsDoNotAdvance",
     "PT-BAT-016": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#retentionAndResourceOwnership",
-    "PT-BAT-017": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#moduleDependencyBoundary"
+    "PT-BAT-017": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest#moduleDependencyBoundary",
+    "PT-BAT-122": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#matchingSuccessAndWarning",
+    "PT-BAT-123": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#zeroAndResumedAttemptCounts",
+    "PT-BAT-124": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#completedBaselineImmutability",
+    "PT-BAT-125": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#countRegressionAndOverflow",
+    "PT-BAT-126": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#runIdentityAndMissingEnd",
+    "PT-BAT-127": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#receiptCodesAndNulls",
+    "PT-BAT-128": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#redactionAndValueOwnership",
+    "PT-BAT-129": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest#independentConcurrentObservations"
   },
-  "sharedModuleOwnership": "Batch module183 PT = NK-BAT-001113 + NK-OPS-00170. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+  "sharedModuleOwnership": "Batch module199 PT = NK-BAT-001129 + NK-OPS-00170. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "528a268148565da9babf522989bb92ca44921ca4cc1109abb7f24fd2889e11cc",
+  "fullReactorManifestSha256": "dfafd632ad108bb0535a98525c7aee9e8bcd092c7a5de081cfed1ad482ea8e25",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -401,6 +417,10 @@
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java",
       "sha256": "896ea87c81ebdeefe1bb7a5ffdac427148378c143447a6dd18690a768f512aa1"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java",
+      "sha256": "46c8779ed19a91cbe741643efb6312cdaa51564449899f58fc0a41b2186191f8"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
@@ -511,6 +531,14 @@
       "sha256": "8bfecd1669a89066a8cbf09b0dbc4bd55c288c5d93b6ac8c630bb889a37d296b"
     },
     {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "b0697a5690e93f0e36b11d950c5b6adafb064c5147ecf1e825ae70341dc777e8"
+    },
+    {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java",
       "sha256": "57cd675756ee9d372388f562ee2242f75df95ce95173f56fe9b861b4723a2833"
     },
@@ -541,6 +569,10 @@
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/HandoffJdbcProbe.java",
       "sha256": "7fdb0271a789714657e31f7d0979c283ed702c09cef015ee0464585c250b210d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "sha256": "533f23de7ac03d06cfd2013ae8241fde2eb2ba423060a7c09253b0015046f0b9"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoffTest.java",
@@ -623,6 +655,10 @@
       "sha256": "722c4335ad02b9cc5644a87d4f212d8d9bf7cfb0f20bb8d76560513ec8bb0ad2"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepositoryTest.java",
+      "sha256": "9fedfeb05fb47c497bef2598680f7f1aba37ca72ec62085d1994cb2eaba5049a"
+    },
+    {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryTest.java",
       "sha256": "2421b9566305a3beab07f7effd5862580ee1ae5d7a031adde88576a1c75cf9f6"
     }
@@ -645,15 +681,17 @@
   ],
   "runReferencesOracle": "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity.",
   "retirementIoFaultPositions": 6768,
+  "parentSummaryOracle": "017/BAT114..121: borrowed autoCommit=true RW READ_COMMITTED connection; self DB lock only; no config/commit/close mutations. Missing is Optional.empty, 4 nonnull columns/one row maximum. Independent 16/11 JDBC calls with every SQL fault and both closes, fresh actual PG commit/rollback and historical UTC literal vectors; null/invalid counts/interrupt/runtime reject.",
+  "inspectionAttemptOracle": "019/BAT122..129: same-run END and receipt0/10 match cumulative protection; all3 counts nondecreasing, prior END immutable; handwritten (5,2,3)->(9,5,4) delta(4,3,1), prior completed WARNING stays10 even delta0, MAX/null/identity/receipt/64 parallel vectors. Not a fresh child/OS/backup/step certificate.",
   "retirementOracle": "015/BAT090..113: literal NKRET1 195..204 bytes and independent one/two-activation SHA256 vectors; full canonical plan count/hash retained through original done/begin/anchor deletion, original-directory durability barriers BEFORE any plan/marker disposal, metadata-only recovery, strict latest-completion400day age, actual PG18 V018 three-reference combinations/identity/query failures, target-only active/pending protection and other-run preservation. Full namespace/graph, bounded record ownership, every native IO occurrence, crash/close/null/interruption/concurrency, no unknown part repair or recursive deletion.",
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "9a11881e244e66986224e64677da0e95d8e218dd58f1cf6862a30434fe41dc67"
+      "sha256": "d4e0f0f1c114f24612f14e557b3251f4fce24dd8ee5cc3a3c143c3a23f45ec51"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "204a244dff862d35ea231d091626b1e338091faccbd838234e631b193267e70d"
+      "sha256": "a1abccfcff1cb0238a91997e4e79e4f82f51af2b71352b3ad6d683a29692d056"
     },
     {
       "path": "input/durable-records/PT-BAT-047-active.txt",
@@ -868,6 +906,10 @@
       "sha256": "0a00f9dc230e84bfee1bfa834bb755bb34864b1441331a38398c9e122a1fd0f4"
     },
     {
+      "path": "logs/PT-WEB-20260913-06-summary.json",
+      "sha256": "0bc6443dbda3f90cd4e62923b68bb506e285f132fd2f284a48be4a3679c34108"
+    },
+    {
       "path": "output/durable-records/PT-BAT-047-active.txt",
       "sha256": "f13f9d68e35c5b4fc1a5f12555a612b559d1956f33d647da874c007efe7a2c13"
     },
@@ -901,7 +943,7 @@
     },
     {
       "path": "output/results.xml",
-      "sha256": "05636244cd6e482c13a568750974d3296fc9b5e102a1be2d52b1792421ae44d8"
+      "sha256": "115b2152802454ac0a7c4b55b98adf0abd7c220bbe3c7cfa9ea8d4029dfe0e87"
     },
     {
       "path": "output/run-lifecycle/PT-BAT-058-active.txt",

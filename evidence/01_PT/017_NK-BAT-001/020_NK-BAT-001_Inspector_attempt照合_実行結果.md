@@ -1,5 +1,7 @@
 # NK-BAT-001 Inspector_attempt照合実行結果
 
+正式PT-WEB-20260913-06/source23691ba619e22b6e759b8ecf19d5376e49e037ff、dev-foundation、2026-09-13 04:18:32～04:34:00 JST、exit0。全1271 PT（Protocol80/Storage58/API652/Web241/Batch199/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 ProductionのNullAway/Enforcer/Spotless/SpotBugs未解決0（固定path3 method限定レビューは維持、coverage除外なし）。14collector/37scope/source・hash検証と26負canary成功。正式05は非合格のまま保持。PG162追加24件を部分成果として認定し、親実子/OS/backup/全工程完了へ昇格しない。 BAT122～129/8件PASS。同identity/END/cumulative単調・completed不変・MAXと固定差分(4,3,1)、0/10/保護累積WARNING/64並行を確認。 環境Ubuntu26.04.1/Linux7.0.0-31、JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13/Flyway13.4.0/JaCoCo0.8.15、421参照。command: sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-06 →017/019→018 collect/validate-only。Batch全61class/320method/1773line/883branch missed0、新3class/11method/74line/40branch missed0。017 evidence/manifest.jsonへinput/expected/actual/test source/coverage/staticのhashを収録。 以下は履歴。
+
 PG162探索成功（未commit候補、正式認定0）。explore1: 2026-09-13 04:00:48 JST終了/11.343秒/exit0、pure8/Storage8成功。explore2でも回帰。手計算累積/差分/MAX・0/10・END不変・64並行を確認。 JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13、421環境。raw /tmp/pgpt-parent-summary-explore1～3.log、commandはoffline Mavenの該当module -am -Dtest指定test（全正式runとは別）。探索JaCoCo新規3class/11method/74line/40branch missed0、01925＋0171負canary成功。BUG新規発見なし。全reactor/静的解析/37scope/hashは正式run05後に認定する。
 
 PG162/SSC049、PT-BAT-122～129。未実装・未実行・正式認定0。対象commit/環境/command/日時/exit/coverage/期待・実結果/BUG/evidence hashは実行後に記録する。親工程・PGPT完了へ算入しない。

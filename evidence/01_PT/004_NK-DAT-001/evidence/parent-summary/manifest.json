@@ -1,0 +1,123 @@
+{
+  "runId": "PT-WEB-20260913-06",
+  "targetCommit": "23691ba619e22b6e759b8ecf19d5376e49e037ff",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-13T04:18:32+09:00",
+  "completedAt": "2026-09-13T04:34:00+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "91964fef8e1775bd43390661b9bc55d5314a694637d2f49351fd1b3a3fef9268",
+  "programId": "NK-DAT-001",
+  "scopeResult": "PASS_PARENT_INSPECTION_SUMMARY_ONLY",
+  "programComplete": false,
+  "testIdMethods": {
+    "PT-DB-INBOX-251": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#summaryStatesAndCounts",
+    "PT-DB-INBOX-252": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#identityAndTimeBoundaries",
+    "PT-DB-INBOX-253": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#parentLockNamespaces",
+    "PT-DB-INBOX-254": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#roleAndCatalog",
+    "PT-DB-INBOX-255": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#freshReadAndRollback",
+    "PT-DB-INBOX-256": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#concurrentOwners",
+    "PT-DB-INBOX-257": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#noMutationOrPrivateProjection",
+    "PT-DB-INBOX-258": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest#appendOnlyMigration"
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "javaCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 33489
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 2754
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 7209
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 2495
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1073
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 231
+    }
+  },
+  "staticAnalysis": {
+    "tool": "SpotBugs 4.10.4.0",
+    "violations": 0,
+    "errors": 0
+  },
+  "sqlCoverage": {
+    "basis": "059/PT251..258 independent SQL predicates/roles/locks/temporal and state matrix; not JaCoCo",
+    "cases": [
+      "0row/open/END/zero/mixed/MAX 4column literal",
+      "NULL/infinity/0001..9999/1582/UTC/JST/NewYork/identity",
+      "self exclusive bigint/shared/two-int/other backend and unchanged lock",
+      "batch-only execute/owner/definer/search_path/UTC/no base grants",
+      "fresh commit/rollback/uncommitted/parallel owners",
+      "all table and index snapshot unchanged/no row lock/no backup prerequisite",
+      "18 frozen migration hashes/19 inventory/repeat validate"
+    ]
+  },
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "dfafd632ad108bb0535a98525c7aee9e8bcd092c7a5de081cfed1ad482ea8e25",
+  "related": [
+    "SSC-049",
+    "PG-D-162",
+    "QA-046",
+    "UIC-006",
+    "BUG-175",
+    "YKT-136"
+  ],
+  "fixture": "Isolated PostgreSQL18.6/Flyway; public synthetic UUID/counts and independent SQL literals.",
+  "oracle": "Absent progress stays absent; same-run cutoff exact; inspected/deleted/protected/END observed once without DML or private projection. Independent count vectors and all-role/lock/transaction/time boundaries.",
+  "limitations": "No actual fresh child/unit termination, OS-lock continuity, backup artifacts, parent steps, actual NK CHR or IT/ST is certified.",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+      "sha256": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java",
+      "sha256": "0e1c16a255098d60f6cecf6f6a1af8f2fcdbe5319d0f0e196db91a5ee1ab5402"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionParentBoundaryTest.java",
+      "sha256": "643af4e29e24131906846ee84a527a1652ce92e0e86a5861632af9248977a2fd"
+    }
+  ],
+  "files": [
+    {
+      "path": "input/PT-DB-INBOX-251-states.txt",
+      "sha256": "823ca0a67830f5e0f58267dcafa136c2c27e606b367ce42e46674b4b8b30fc4b"
+    },
+    {
+      "path": "logs/BUG-175-YKT-136.md",
+      "sha256": "53759113d559bbb42970452af826667e12b5f3fe25f62a50dd3f45cb90bf711c"
+    },
+    {
+      "path": "output/PT-DB-INBOX-251-states.txt",
+      "sha256": "823ca0a67830f5e0f58267dcafa136c2c27e606b367ce42e46674b4b8b30fc4b"
+    },
+    {
+      "path": "results.xml",
+      "sha256": "d1f76ed7d9df603e987e724c2ecaac71fd357155fb907d520effc1bfabd51df5"
+    }
+  ]
+}

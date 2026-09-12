@@ -1,5 +1,7 @@
 # migration一覧横展開
 
+正式PT-WEB-20260913-06/source23691ba619e22b6e759b8ecf19d5376e49e037ff、dev-foundation、2026-09-13 04:18:32～04:34:00 JST、exit0。全1271 PT（Protocol80/Storage58/API652/Web241/Batch199/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 ProductionのNullAway/Enforcer/Spotless/SpotBugs未解決0（固定path3 method限定レビューは維持、coverage除外なし）。14collector/37scope/source・hash検証と26負canary成功。正式05は非合格のまま保持。PG162追加24件を部分成果として認定し、親実子/OS/backup/全工程完了へ昇格しない。 BUG175/YKT136完了。先行b3ba65db→修正23691ba6、全13classの後条件とDB258の独立19literal/旧18欠落・不変性guardを正式回帰した。以下の「未修正/待ち」は起票・探索時点の履歴。 以下は履歴。
+
 是正後探索4: 2026-09-13 04:17:11 JST終了/1分02秒/exit0、上記全13classのAPI121件＋Protocol/Storage選択PT成功、failed/error/skipped0。全13classが独立MigrationInventoryを参照し、DB258が固定19要素・文字列・不変性/旧18不一致を別literalで検証する。歴史hashと列/権限/後条件は不変。raw /tmp/pgpt-parent-summary-explore4.log。正式全module・37scope/26負canaryの再試験までは完了を保留。以下の未修正表現は起票時点の履歴。
 
 BUG175/YKT136、先行b3ba65db、PG162/V019。正式05は非成功・未認定。修正前の期待値18が実19に対して失敗したもので、DDLや既存migrationを期待値へ合わせて変更しない。

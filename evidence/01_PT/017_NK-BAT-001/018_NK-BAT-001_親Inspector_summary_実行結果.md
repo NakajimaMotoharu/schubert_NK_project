@@ -1,5 +1,7 @@
 # NK-BAT-001 親Inspector_summary実行結果
 
+正式PT-WEB-20260913-06/source23691ba619e22b6e759b8ecf19d5376e49e037ff、dev-foundation、2026-09-13 04:18:32～04:34:00 JST、exit0。全1271 PT（Protocol80/Storage58/API652/Web241/Batch199/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 ProductionのNullAway/Enforcer/Spotless/SpotBugs未解決0（固定path3 method限定レビューは維持、coverage除外なし）。14collector/37scope/source・hash検証と26負canary成功。正式05は非合格のまま保持。PG162追加24件を部分成果として認定し、親実子/OS/backup/全工程完了へ昇格しない。 BAT114～121/8件PASS。1行16・0行11の全JDBC故障位置、親借用Connection所有、4列null/時刻・割込/未知runtimeを確認。 環境Ubuntu26.04.1/Linux7.0.0-31、JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13/Flyway13.4.0/JaCoCo0.8.15、421参照。command: sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-06 →017/019→018 collect/validate-only。Batch全61class/320method/1773line/883branch missed0、新3class/11method/74line/40branch missed0。017 evidence/manifest.jsonへinput/expected/actual/test source/coverage/staticのhashを収録。 以下は履歴。
+
 PG162探索成功（未commit候補、正式認定0）。explore2: 2026-09-13 04:02:50 JST終了/10.806秒/exit0、新Repository8＋pure8/Storage8成功。1行16・0行11 JDBC全故障位置と複合close、独立歴史時刻/各NULL/transaction/lock/割込/未知runtime確認。 JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13、421環境。raw /tmp/pgpt-parent-summary-explore1～3.log、commandはoffline Mavenの該当module -am -Dtest指定test（全正式runとは別）。探索JaCoCo新規3class/11method/74line/40branch missed0、01925＋0171負canary成功。BUG新規発見なし。全reactor/静的解析/37scope/hashは正式run05後に認定する。
 
 PG162/SSC049、PT-BAT-114～121。未実装・未実行・正式認定0。対象commit/環境/command/日時/exit/coverage/期待・実結果/BUG/evidence hashは実行後に記録する。親工程・PGPT完了へ算入しない。
