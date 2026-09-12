@@ -1,5 +1,7 @@
 # NK-BAT-001 永続record保存の単体テスト仕様書
 
+BUG159/YKT124: BAT049の不存在再試行もdir sync1を必須assertし、実unlink後のsync故障→不存在再試行で再同期失敗を注入して非成功を確認する。正常不存在はunlink0/sync1。readのOptional.emptyとは別契約であり全read PTは無変更。
+
 BAT047は実publish後の4fileをtarget/durable-record-traces/PT-BAT-047-{anchor,active,begin,done-10}.txtへcopyする。Production encode再実行でactualを生成しない。020はSS/PG156と共通の独立literalからinputを作り、実file byteとの完全一致・4file過不足0を検証してevidence/input・output/durable-recordsへ分離格納しmanifestへhashを記録。019は各欠落/余分/改変を拒否する。
 
 独立call inventory（全位置を故障注入しowned reader/writer/entry残0、borrowed root保全）。attributes/ACL/filesystem/readonlyは各同回数。read=各7・openEntry3/close3・openRead/readClose各1/read2/readSize2。new=各13・openEntry8/entryClose8・reader2/read4/readSize4・create/publish/openWriter/writerClose/force/sync/write各1/writeSize2。reuse=各13・openEntry8/close8・reader2/read4/readSize4・openWriter/writerClose/force/sync各1/writeSize2・create/publish/write0。remove=各7・openEntry4/close4・reader1/read2/readSize2・unlink/sync各1。正常call集合/各回数をliteral oracleと一致確認してから全位置へ注入する。

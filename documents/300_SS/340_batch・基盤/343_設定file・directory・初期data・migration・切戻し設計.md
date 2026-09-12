@@ -328,6 +328,8 @@ MaintenanceRecordsは3種encode/decode、MaintenanceActivationはBatchRun/activa
 
 ### 6.14 借用rootの永続record IO（SSC-055/PG-D-157、先行19e22eb4）
 
+BUG159/YKT124（先行12446fed）: removeで最初からentryが不存在でも、親directoryのsync成功を必須とする。前回unlink成功→sync失敗の可視不存在を耐rebootの確定と混同しない。再同期に失敗すれば不存在でも非成功。純readのOptional.emptyは存在観測だけであり、永続化を約束しない。
+
 DurableRecordFilesはpackage内のfile能力であり、既に固定namespaceを認可したOwnedTransferDirectoryを借用する。任意pathのopen/provisioningやroot closeをしない。各操作をinstance内で直列化するが、callerは別instance/processも排除するOS flockとroot管理者の変更禁止を全区間で維持する。private root0700、regular0600/nlink1、root:root・ACLなし、同device、既定local filesystem（ext2/ext3/ext4/xfs/btrfs）のRWだけを受理し、tmpfs/remote/unknown/readonlyを拒否する。既存static/runtime環境fileの契約は変えない。
 
 read(name)の名前は固定activeまたはcanonical lowercase UUID＋.run/.begin/.doneだけ。.runは内容のrun UUID、.begin/.doneはactivation UUIDと一致必須。activeはactivation構造だけを保証し、begin/anchorとのgraphはcallerの別責務。nullはprogramming契約、名前不正は固定IllegalArgumentException、byte/IO不正は原因/suppressedなしのStorageIoException。不存在は最初のentry openがcallback未開始でMISSINGのときだけOptional.empty。途中消失/close失敗は不存在扱いしない。保持root/full file snapshot・bounded142byte読取・channel size/position/EOF・読取後の同inode/full metadataと同名再open・root前後を検証し、全資源close成功後だけcaller所有byteを返す。読取bufferはfinally消去。
@@ -339,6 +341,8 @@ remove(name, expectedBytes)はcallerが完了/GC条件を別に確認した後�
 PT-BAT-046～057/017の009・010はliteral72/109/140/141byteと実隔離inode/native no-replace/fsyncに合成root属性・fault portを組み合わせる。固定namespace/実root配備・state graph/OS lock/親終端/400日GC/DB参照判定はこの低位能力で認定しない。
 
 ### 6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）
+
+BUG159/YKT124（先行12446fed）: 再開は既存byteの可視性だけを成功条件にしない。全graph/対象条件を検証した後、選択runのanchor→対象begin→既done（存在時）→active（存在時）の順に同byte force/dir syncで再確定してから、active再利用結果を返す。activeなしresumeはanchorを再同期し、未完了beginならそれも再同期、新beginなら新規公開し、最後にactiveを公開する。completeはanchor→begin→active（存在時）を再同期した後、同値確認済みdoneを新規公開または再同期し、active退役・不存在を含めた親dir syncを確定する。全force/syncの失敗・null part supplierは非成功とし、前回の未確定commitをsuccessへ変換しない。byte/UUID/cutoff/mtimeは変更せず、全graphの期待値を再照合する。
 
 MaintenanceRunFiles.createは固定/varとnative能力だけを構成する。公開execute(Operation)はcallerが保守OS flockを獲得し、root管理者のnamespace変更を禁止した区間でのみ使用する。/var→lib→schubert-nk（共有root:root0755）→maintenance→runs/attempts（private root:root0700）をNOFOLLOWで6個の独立FDとして保持する。全scopeはlocal永続RW・ACLなし、private3rootは同device、共有祖先の別local mountは許すが毎回identity/属性を固定確認する。applicationによるmkdir/chmod/修復なし。操作前後と各record mutationの境界で固定namespaceのfresh6rootを再openし元snapshotのidentityと比較する。自身のmutationによるdirectory size/mtime/ctimeだけはidentity比較の対象外、scan内はfull snapshot一致を要求する。
 

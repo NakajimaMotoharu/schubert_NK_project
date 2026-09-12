@@ -1,5 +1,7 @@
 # NK-BAT-001 原本lifecycleの単体テスト仕様書
 
+BUG159/YKT124（先行12446fed）: BAT059のactive再利用は同byteのanchor/begin/active各forceと各directory sync（doneありは4件）を必須にする。BAT060/061/062は元anchor再同期、既beginも再同期してからactive確定。BAT064/065/077はanchor/begin/activeを再同期後done確定、active不存在でもdir syncを要求する。最初のsync failure→可視record/不存在から再開し、再同期force/syncを再度失敗させても成功しない独立負例を加える。byte/元inode/mtime不変を併記し、可視性をdurability oracleにしない。正式20260913-01には含まれない新発見として追跡する。
+
 PG-D-158/SSC055先行36b5f85b、OPS-009/UI251/SS311/341/343 §6.15。MaintenanceRunFiles/Session・immutable再開状態・共通durable ancestor policy。実装前仕様。実file/native NOFOLLOWと合成root属性を使用、秘密実体なし。既存literal72/109/140・141byteを独立oracleとしProduction encodeからexpectedを生成しない。
 
 | Test ID | 予定method | 入力/操作・独立期待値 |
