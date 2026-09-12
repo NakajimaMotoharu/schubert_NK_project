@@ -1,5 +1,11 @@
 # NK-BAT-001 backup_manifest値単体テスト仕様書
 
+## Coverage集計とcompiler生成methodの独立確認
+
+[JaCoCo標準filterの定義](https://www.jacoco.org/jacoco/trunk/doc/changes.html)（record accessorは0.8.9、生成equals/hashCode/toStringは0.8.6から集計対象外）。本scopeはJDK25 javac生成のBackupFileDigestのsize/sha256、BackupVersionsの全8 accessor、BackupManifestの全9 accessorと各生成equals/hashCodeが標準filter対象。理由はconstructorで確立したcomponentの単純読取・JDK生成値比較であり、新たな除外設定や業務分岐の除外ではない。手書constructor/guard/全計数・名前・codec・redaction toStringはすべてJaCoCo計測対象（新4class/18method/134line/50branch missed0）。
+
+計測外componentもBAT178/180/184・BAT187で独立literalの全19 accessor値を検証し、BAT184で同値/変化したmanifest・hashCode整合を確認する。NULL/範囲/相互不変条件・所有/並行は別Test IDで全実行。18methodというレポート値をclassfile上の全method総数と同一視しない。内部review: 当該3recordは可変componentなし、生成accessorに業務分岐なし、手書toStringはredaction期待を別確認、要求の正常/境界/null/全業務分岐を損なわないと確認。全Programの同種標準filter説明の最終棚卸しは451/後続総合品質gateで維持する。
+
 実装・探索段階へ移行。BAT182のAsia/Tokyo歴史oracleはBUG182/YKT143先行9447f481、037のIANA独立offset/遷移literalを使用する。全9field null・7token/schema各境界、全step種別・id/run/skipped/開始整合、µs/上限/overflow/64並行を検証する。最新結果は034。正式認定前のため以下の起票時状態へ合格件数を遡及しない。
 
 PG165/SSC058先行8a606fc7、BAK001～008/BKO001～008/UI251 §5/SS311・341 §6.4・343 §5.3。PG164正式08のsource凍結中に仕様のみ先行、未実装/未実行/認定0。

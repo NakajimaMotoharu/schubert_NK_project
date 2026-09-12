@@ -1,5 +1,11 @@
 # NK-BAT-001 backup manifest横展開・独立期待値
 
+## 最新正式認定
+
+正式PT-WEB-20260913-09、source89e97bdcc3e56f262b8f5f26151b2d5bf7b01c00/dev-foundation、2026-09-13 06:34:49～06:50:39 JST、exit0。全1343件（Protocol80/Storage58/API660/Web241/Batch263/CHR41）failed/error/skipped0、6 Java moduleのJaCoCo line/method/class/branch100%、5 Production static未解決0・追加除外なし。15collector/38scope/32負canary成功。PG165新4class/18method/134line/50branch、Batch全77class/389method/2294line/1201branch、各missed0。BUG182～183/YKT143～144の全対象・非該当根拠・追加再発防止PTを正式再試験して完了。
+
+017/evidence/manifest.json、input/backup-manifest/PT-BAT-186-manifest.jsonとoutputの実値、logs/BUG-182-183-YKT-143-144.md、全XML・coverage・環境・input/output hashを一式で照合。SS058はmanifest値/byteを反映済みだが実生成/DB信頼binding/世代管理が残るため対応中を維持。PG166/SSC059の16 PTは仕様だけで認定へ加算しない。以下は探索履歴・監査根拠。
+
 PG165/SSC058、BUG182/YKT143先行9447f481、BUG183/YKT144先行d4c89df4。実装・探索段階、正式認定待ち。実artifact/DB両step成功/親全体ではない。
 
 ## 1. BUG182/YKT143: 歴史timezoneの根拠と全対象
