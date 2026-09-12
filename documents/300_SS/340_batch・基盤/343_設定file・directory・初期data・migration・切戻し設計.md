@@ -250,6 +250,18 @@ SSC-049/PG-D-149（先行17b06c0c）: 親が生成するrun専用fileは`NK_INSP
 
 unitのLoadCredentialは常にDB/current2の絶対source pathを指定する。previous2はroot管理rotation profileに応じて固定path行を追加する選択drop-in（なし/contextだけ/responseだけ/両方の4構成）。宣言しないpreviousだけreaderで不存在可。配布宣言したsourceの欠落/読取不能はunit起動失敗とし、空defaultへ置換しない。source省略によるmanager/credstore検索やSetCredentialの空値fallbackは使わない。rotation/profile切替は同じ保守OS lock下でprocess停止→credential/profile整合→daemon reload→次回起動とする。systemd259.5の導入済みsystemd.exec(5) LoadCredential/SetCredential節で確認（2026-09-09）。実root配布はLinux serverのITで確認し、PTの合成metadataで代用済みとはしない。
 
+### 6.9 親の保持inode環境file reader（SSC-049/PG-D-152）
+
+先行58f7e8b7。InspectorEnvironmentReaderは親file adapterが既に固定pathからNOFOLLOWで保持したdirectoryを借用し、既存名`inbox-inspector.env`だけを保持して読む。読取中は親がOS flockを保持しroot設定変更/子起動を禁止する。root/ancestorの固定namespace再検証は親が行う。readerが借用rootのpath選択やclose/作成/chmodをしない。
+
+- euid0必須。static directoryはroot:schubert0750、fileはroot:schubert0640。期待schubert GIDは信頼できるaccount設定から解決した1～4294967295をconstructorで受け、対象fileのGIDから自己生成しない。runtime directoryはroot:root0700、fileはroot:root0600。
+- directoryは通常directory/nlink2以上、fileは通常file/nlink1、同device。static fileは1～65848byte、run fileは1～110byte（§6.8のkey/UUID/32文字cutoff/LFの上界）。各metadataはmode/uid/gid/nlink/size/dev/ino/mtime/ctimeの型付き必須値。型判定前にcontent open・path-following xattr/FS照会をしない。
+- access ACLなし。staticはext2/ext3/ext4/xfs/btrfs/tmpfsのlocal FS（RO可）、runtimeはRW tmpfsのみ。未知FS/属性/欠落/別inode/過長/不明read結果は拒否。default ACLは既存inodeを読む権限を付与せず、このreadonly部品の検査対象外。新規作成時のACLはpublisher側で別検証する。
+- 上限+1のbufferと保持inodeへのread-only channelを使う。開始/終了sizeとmetadataを照合し、EOFまで読んだ長さが元sizeと同じことを確認する。read0、不正count/position、短縮/伸長/close失敗は非成功。追加1byteは過長判定専用で受理しない。
+- 同名をもう一度O_PATHで保持してdev/ino・mode/UID/GID/nlink/size/mtime/ctime/FSと元snapshotを完全照合する。directoryのidentity/属性も前後照合。entry/channel全close後にstatic内容検査または期待BatchRunへの全byte照合を行い、caller所有の新規配列を返す。型/IO異常は固定StorageIoException、byte設定不正は既存固定IllegalArgumentException、null caller依存は明示契約違反。診断にpath/内容/cause/suppressedを出さない。
+
+本部品は既存fileの読取だけであり、atomic publisher/親起動・子終了/backup/永続run原本を完了にしない。合成root/GID/tmpfsの単体fixtureと実root配備のITを区別する。
+
 ## 7. 環境差分
 
 | 項目 | Local dev | PT/IT | Production |
