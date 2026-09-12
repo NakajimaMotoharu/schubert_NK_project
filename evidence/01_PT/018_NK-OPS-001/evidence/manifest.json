@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260913-01",
-  "targetCommit": "a4317d05982a27e74e64b027e2a6b8df56b8c2e5",
+  "runId": "PT-WEB-20260913-02",
+  "targetCommit": "364ea2655a9684f71bb0890677386b3fa6d003aa",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-13T00:25:37+09:00",
-  "completedAt": "2026-09-13T00:33:14+09:00",
+  "startedAt": "2026-09-13T01:15:33+09:00",
+  "completedAt": "2026-09-13T01:23:49+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -15,7 +15,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "78c483a1ce340dc9a101cdfbf2d519c0c9ffaa0826b36f2ad4078e7984d297db",
+  "rawLogSha256": "c4dca8d92afde1d5206e0f8d81d19bb2075afe686b804634d8c99af3879e025f",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -763,23 +763,23 @@
     "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 324
+        "covered": 348
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 66
+        "covered": 70
       },
       "LINE": {
         "missed": 0,
-        "covered": 45
+        "covered": 48
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 42
+        "covered": 45
       },
       "METHOD": {
         "missed": 0,
-        "covered": 9
+        "covered": 10
       },
       "CLASS": {
         "missed": 0,
@@ -990,7 +990,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "b10e83611b5ec9390b7b8284976213d401c1b5f1a1cc692ffece7c8049a0f3a7",
+  "fullReactorManifestSha256": "bdf23763fb0d3624bde890cfd2438b3e44d41a1dcf359c43792dd69e8b65eb9b",
   "related": [
     "QA-046",
     "UIC-006",
@@ -1143,7 +1143,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java",
-      "sha256": "16728412432cdab66b0e0ae00e2589a29f901d2c52870cc3f1ad1c376bd67645"
+      "sha256": "0a243d85f0666fde754c538e7d5401a94f4aa38096876bf2c21c04920895e446"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java",
@@ -1247,6 +1247,16 @@
       "reviewAt": "PG gate or OS/path/SS change",
       "testId": "PT-OPS-NS-008",
       "coverageExcluded": false
+    },
+    {
+      "method": "MaintenanceRunFiles.create",
+      "id": "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      "match": "EXACT",
+      "reason": "UI251/SS343 require fixed Linux /var",
+      "owner": "NK-BAT-001 PG",
+      "reviewAt": "PG gate or OS/path/SS change",
+      "testId": "PT-BAT-081",
+      "coverageExcluded": false
     }
   ],
   "unverifiedParentGates": [
@@ -1335,203 +1345,203 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "1cfa06e43f49f9d847ab810aabcf2f952aa025cd0c781cc8492697fedadc86e5"
+      "sha256": "7aab1fd3fdc115987feda295b4797c9d2e25caa7f266ff23e4664da1c2b82603"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "f8259fb9306b25ab9d1e7035d5e08819d7f54bfbbda167b500776663bf0c17f5"
+      "sha256": "59d874c6e44945fdc7199d91868b25611083f5597376c175eb2b43d27e6be0f6"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "3b43b5aaeb8598568cfc5a3ecf29fd067cb3fc898d021b9fabf7ac0674be5447"
+      "sha256": "d351a66d17e998735efd40f5fa7ece65eef1571f4fec8166e6d2392d753225dd"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "4059cf5081678fd84b56432d8e8a3fcd3bcac7d6ef90820f2474f0e18681b55d"
+      "sha256": "8e1bb058e24f85527e6dc0e76d9800df595ef71b73d925884a273c72d73231b1"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "d4453cda22a944366be89a84cd79e995fbc3a6ae901bca9cf898f7f45123f50b"
+      "sha256": "423658b35558c522b037cc30ca3c6237e3c28b5689e6dc4c6c39112081f31d7c"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "ea964fef2824c5ca60fed76cde3beefbc4bf444f989ca55d3498b27c57511bc9"
+      "sha256": "926478e036736615e2d7fb6761c9b0e42b0baa56b2109b3c91a76d5c1df9b035"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "80e98afd3ce20cfb32d61fd9ed09ed6c4bbf1b5210882e1c7b635e20edb2d9ab"
+      "sha256": "7e54b7cc72dce0f368a04c38d26311a16ac35a366e2ca81fbbbf6b84515c324e"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "a722ccb2b9b6e11203423607751c7ad685570075219f8cacbca3e6dc17ec020c"
+      "sha256": "bc9e5d81c10c9a68adb9aa2f99fbbcda042c7ee9b6d8ea06b867cef96f3618f2"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "32097cd57ae47dc54ca26e3425d78216508232ef8079ac899da8613393defa17"
+      "sha256": "bae0991f7e13f9f2a693722d9ea352556011d70c352b2df3db3d2dab92f14459"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "e4c3f1a4f8eafcdc9ab78594494d0f43a780edc86dfef1372e0bcea06afdd14e"
+      "sha256": "65b76ab3f71920aa7f8f79346ab42126f9940d703d122b1800bb1abd1e56ccf5"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "57cf6c50b1aec5db6001a40c0e056e3d9e1c4f359a55c325405d1acff1f7b48a"
+      "sha256": "ec157bfa34b5c4f1ee1e97743b7aa5dbeb3c5d018dc100dd655e7a0c0ff51f94"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "ad50f4d758490333122ade3a8cbeba7b602858f4de20c137d494c2425786be08"
+      "sha256": "3efe57e6d342d56f22285b996402960ab10a8a60a5cb343247e4c0a5bf306901"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "cd100daf313f723d617d86585e305c44a2423414a7a2a9a64bc898035251bffe"
+      "sha256": "df5888426995940c4f329d1162003cc7c9b2cfa9043945163b49bf6cf14013ab"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "452af6d30f7d74cc00fbf5638eccebf0baa6f59fc05021117ccc96860b0dfa97"
+      "sha256": "2ccbd286f04fb624473936aebfc15a47729a650ba09805ff451ec620c399aa56"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "8b41dd6451cb86e20be4b74e1b657e6fd6359759a54b58ce93f837ecc733eb3f"
+      "sha256": "84649f42e740a856121185d6f495d85f32f137cd0181d2e302553e1fe6dee65c"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "10f58ce2597b8fb1e551aeeb9d08cd12c8dd8b58f505cbdfc09b8747c262d6ed"
+      "sha256": "aa165ff19182a74f12ffd435539c4c496d4c597a3366d13826c4f219fd4ae9b9"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "ed95ee0a66379b9915b7ac48e8b5c117943247b11f434cfbecbedff4ae5e4069"
+      "sha256": "08c7538dec5c232b5133769050497b9faa46d1542f415c32c5fd1fafc846c1e9"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "60e53e689360a2525dabd3fece7a8447f4cb14657b5d940717d6562bac76092f"
+      "sha256": "14c3bc7899648fcb41e853d26599a3edc397cbf9c7f77ed802fe01f070f6e276"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "3d4253b369bfbbd18eefa1690ae02c8f70b4ac546a217768581ee3666cb72887"
+      "sha256": "e17a130d748e463dac22dba6f584f238743b91ade4bff59ffff381b7d5914616"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "e43b68bc5af641a17d5d93de09662b4380bd07c8a1d721d1b249d4ccb139f27e"
+      "sha256": "5d20473b250a0aed993aea15be2b49fbf4a9db293aa0e20cb48d3e55715e85d8"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "b9c8cf401aa82a3f3e5de3e524d6e3ac784de056db755860b4bb6f7fdf02f192"
+      "sha256": "34017c2d30430aae4b009ac20ebfb86d52f41747dd5f0910b754e12b20131a35"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "c97a0fc514a25d984e6288fb6da7d4f51a6560e35753d8cbf38b36ed7bdf2fed"
+      "sha256": "7f899833a55ff29244a9dd85d6032f3e2f4ea92d145f9e915c3e438bae3bac2f"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "c550089c87d824984596f3ac8ff4bbad8eb145e70de2201dad79e2ab327f64d7"
+      "sha256": "7fef3f8dc25884ec7b7c0dc6503aa142259ae09705ed6c177e140c8c3f41b557"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "21647322ef260acf246e2a1dc4a79511eb13a973b985af186769c9ecaf183269"
+      "sha256": "340fff2edee29a742deb4f2b30a02a7b084d4365c8bfca63f6049a69c3d96e43"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "35abf4ec6ff7211685a0a99269418341f49b9ab78750684187d4deaf6746d973"
+      "sha256": "7b942ebc7067571d9152e7b2b05ea2239bf7fac11f9701edd5002ff4e1107177"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "f101deecdd706f00484d16a823ebb8b9676ea6ba9021e3b32823bc1ffd779b4f"
+      "sha256": "ec70ac8f35d79f82d1b22ba204826b2708056c5ac723530580376aca8b11dae0"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "831cd44cdf86b4c0c02d9d1509abb7289439191072145aed0d703bacddcc9398"
+      "sha256": "5d12327eae2e06bc0a760f5389ce4ff72d63a62f92b81cb257ab27df912a0dc1"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "00acf1d458221be76cbdd05a6edade8d507451a474aa94dc8ffaebd614f99d1b"
+      "sha256": "5b71ddfeed59a3b8d00a31e7e7ea41392fd5a3ca400c688d541ba12061deb3ac"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "33052cd6ca8889ace0fc6a1c45962bb5eb1033374c0c46355230e56a92a51453"
+      "sha256": "1978924fb1b9f2204b8c686641c4295b6ab09356896e0273d910a48c2413b440"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "af5a7963f07fff06980e3df089aa4debf5eb66f669998921f038f1f72bafb3aa"
+      "sha256": "37f7c0f73cffa6f1fab304f8579df68366896e03f00a2a4f2e112d77ab557987"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "c6aeffae4081747e24303102cbe514c45c14a19b5f362bce8e00f0de75017fd4"
+      "sha256": "432dbd25e5717a03cf95562692a9f45dea52c4440a1f636ea88917843af90a17"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "86b8c08e773afc5eabc6988ac03390f2898ec33ef9aa3c722a3e1a5affe658d7"
+      "sha256": "43a0f34079330b818037972d2965232ae15e883428396f00378f660ee1289c92"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "bc65e3458fe6424774074c5791fb5e82ee5c3c403d53e92b3b872d5206da6c27"
+      "sha256": "218fe5b463a281ba87d347401d391051254fa204ce226f67fff7c7825eebcdf6"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "12d2a3fddc04fc18fd42b797595d315c1be2b11365f16ab14f4e2d8cbb26aeac"
+      "sha256": "b0fd455efa132037905fde08030a254fa0dce3750156a7b16257aa153cb244e0"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "e63c15ef10ab141cfe32746898e258e851ac8d618249e4f0438a184fec2190a4"
+      "sha256": "68facf9715652e5124c190c8abe8e1426aec002469a2968b86d16f18af83282c"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "2cd047343e5e64c855f56f18670ab1135aab16020d6f9a7c8bf7d41e137ae2d6"
+      "sha256": "264139613e09fabfd7384372da2f423c79263742576919d568213e0493651384"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "42d27f19c9c78503e395d5ddc68c42758625b42b107033bb6ea93f1899bf8dc3"
+      "sha256": "2070cee47a704c84e5fc50e189fd58510cbd55d628395f6fb278cf65f5bb8758"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "868f2c2a243eed94d20a64fa0750b810619ce14839771062118861e25e9b503a"
+      "sha256": "d6813d6c06afb4b52b3ca5512cc85bfdfc234d3601f2b41c6a77815f354724a0"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "8751f41619ecbc652a569c11563b4f3cbac1b7d7ef864dacb696fbe909f1a843"
+      "sha256": "6f64e61d889d4d96edd736ab2e36ccf973bf99492dd37263b888e48abb5b9c00"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "4ab8c07692a7bacd39b6a67a0c7ab8504e4c8fb723a11a8004188d06e34ec81a"
+      "sha256": "0ded3a2ffb490f82008d68944d6f80e35db53f7143088b69141618ebc6329176"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "03209ef2e74778b3f7861cdb95dfeffa1a14121e961a79ccacc07dbc7ee09191"
+      "sha256": "9914ba43daa3731c17ddb1c5e68904ff4bf4a545ddaed65cad4560169a13fa57"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "674d063b0defa2ec35b9d9ac269625027675533562d0772781cf5cd789162019"
+      "sha256": "c4e4ddc86d67b67eeea9db9b0b9cb224371e22399e35d3f32df72ca142ff4202"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "c5d487e637e67dabe430d5e80183da9ad914154040351aa4a359d1f5d112acbd"
+      "sha256": "672c33d78df713d51624db5058041e4ed1c4bee26b5afbcc7e1635644634c015"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "29965e057ecaf7afd02f9d53549371b131d35256358dc28fc5b58b8b1b1f2de2"
+      "sha256": "aaae8ec428cb4a98dd0e183de9de0fdd203139f2525186b7a1998cc2a2e339de"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "917addd73c3c70880f667b48c5f1dabb9b0ca9c5e1a87be5659296761427bbfd"
+      "sha256": "7d88c285192f74a0f367262b433c35b690baf52f69a53a8b15f3a6f1cf20a5a7"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "a271ac7a7f5f282a110bf47e3eadf1bf57d48bf9df2543dfaf5e95675f947a45"
+      "sha256": "8cca7bfa665dd82ff6587867c85e9be04e5e53e0504fb17cc16a7944ad56f979"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "106075ea87fbd76017b52553eec6c0a68d6507c5f7d29549eed302e0f5a87f99"
+      "sha256": "0fd69a4a5334399e56ecea6bffbf67d6d67378a72a6c8a333d1d7a4ecd6a7b23"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "f3fdaf61d831782c56901dfbfa0751af8252d3a59fcd53d0b5ed1c14f5e8473e"
+      "sha256": "8d10a521889737480a6c6b2b4d5c1eb3a8c72a02ddb50a19de93c0dad046d1b2"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "29deed6c87d578047303058615090955d3dfd2cb67ba690956672a73e22fe079"
+      "sha256": "861e221fefdf2349c8501b8546776b868b5d79ec313fe45fd20c409e0e71bb41"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "424616456281dbc74dbd0a5fd53b55dde57c369c24a5600ac8d6381ca959066d"
+      "sha256": "576a66182ab7a21d84ec8a0368abd67d1cef0f063bd3807d0218b5e5b43f1c58"
     },
     {
       "path": "results.xml",

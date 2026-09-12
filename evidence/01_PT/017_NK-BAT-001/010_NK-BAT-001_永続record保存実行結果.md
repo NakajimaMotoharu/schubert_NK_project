@@ -1,5 +1,7 @@
 # NK-BAT-001 永続record保存の実行結果
 
+2026-09-13正式02/source364ea265でBUG159の不存在remove再syncと全12件を再試験成功。全1205件/4coverage100%/35scope/21負canary、012・BUG159/YKT124 audit・manifestを最新結果とする。PG158の固定namespace/graph24件も認定、DB参照/GC/実親は未完了。以下は正式01時点の履歴。
+
 PG-D-157/009/PT-BAT-046～057。正式PT-WEB-20260913-01/source a4317d05982a27e74e64b027e2a6b8df56b8c2e5、dev-foundation、00:25:37～00:33:14 JST、終了0で12件認定。commandは `sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-01`、環境421。全1181 PT、failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5Production静的解析未解決0（固定path2 method review維持）、35scope/20負canary成功。BUG158/YKT123は全対象回帰で完了。独立input/実file output4組・XML/coverage/監査logのhashはevidence/manifest.jsonとchecksums.sha256を正とする。固定namespace/state graph/親/GCは未完了、PG158仕様24件は未合格。
 
 2026-09-13 00:24:40 JST、dev-foundation未commit source、Ubuntu26.04.1/JDK25.0.4/Maven3.9.12等421の既存環境。command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-batch -am verify`、終了0。Storage58+Batch127＝185 PT成功、failed/error/skipped0、両module line/method/class/branch100%、NullAway/Enforcer/Spotless/SpotBugs成功。raw /tmp/pgpt-durable-explore4.log SHA256 147a9e4e426c7eac2be8697e1c48915b905ed89209df1369b676d54092798cc6。実file4traceを出力、017の1＋019の19＝20負canary成功。BUG158/YKT123は正式再試験待ち。

@@ -1,5 +1,7 @@
 # NK-BAT-001 原本lifecycleの実行結果
 
+正式認定: PT-WEB-20260913-02/source364ea2655a9684f71bb0890677386b3fa6d003aa、dev-foundation、2026-09-13 01:15:33～01:23:49 JST、command `sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-02`、終了0。新24件を含む全1205 PT、失敗/error/skipped0、6 module line/method/class/branch100%、5 Production静的解析未解決0、固定path限定review3 method（coverage除外なし）、35scope/21負canary成功。環境421/manifest、独立inputと実output7組・XML/coverage/logのhashはevidence/manifest.json・checksums.sha256を正とする。BUG159～162/YKT124～126の全対象回帰・再発防止を認定。OS lockの実親/DB参照・GCは未完了、PG159の16 PTは仕様のみ。以下は探索履歴。
+
 PG-D-158/011/PT-BAT-058～081。関連module探索は成功、正式全reactor待ち。正式20260913-01へ含めない。OS lock/親/DB legacy・400日GCは未完了。
 
 | Run（2026-09-13 JST） | 結果 | sanitized原log SHA-256 |
