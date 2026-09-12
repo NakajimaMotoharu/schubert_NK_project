@@ -17,6 +17,13 @@ METHODS = (
     "moduleDependencyBoundary",
 )
 CLASS = "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest"
+SUMMARY_CLASS = "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest"
+SUMMARY_METHODS = ("summaryValueInvariants", "realBoundedRead", "parentStateAndLock", "projectionAndNull",
+                   "allJdbcFailurePositions", "historicalUtcIdentity", "freshVisibilityAndBorrowing", "interruptAndRuntime")
+ATTEMPT_CLASS = "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest"
+ATTEMPT_METHODS = ("matchingSuccessAndWarning", "zeroAndResumedAttemptCounts", "completedBaselineImmutability",
+                   "countRegressionAndOverflow", "runIdentityAndMissingEnd", "receiptCodesAndNulls",
+                   "redactionAndValueOwnership", "independentConcurrentObservations")
 REFERENCES_CLASS = "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest"
 REFERENCES_METHODS = ("referenceValueInvariants", "realReferenceRead", "transactionAndLockContracts",
                       "projectionAndNullContracts", "jdbcFailureMatrix", "interruptionAndRuntime",
@@ -111,7 +118,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -119,6 +126,14 @@ def select_program_suites(suites):
 
 def validate_suite(suite):
     return validate_group(suite, CLASS, METHODS, 1)
+
+
+def validate_summary_suite(suite):
+    return validate_group(suite, SUMMARY_CLASS, SUMMARY_METHODS, 114)
+
+
+def validate_attempt_suite(suite):
+    return validate_group(suite, ATTEMPT_CLASS, ATTEMPT_METHODS, 122)
 
 
 def validate_log_suite(suite):
@@ -186,7 +201,8 @@ def validate_reports(suites):
                   DURABLE_CLASS: validate_durable_suite, LIFECYCLE_CLASS: validate_lifecycle_suite,
                   REFERENCES_CLASS: validate_references_suite,
                   RETIREMENT_RECORD_CLASS: validate_retirement_record_suite,
-                  RETIREMENT_CLASS: validate_retirement_suite}
+                  RETIREMENT_CLASS: validate_retirement_suite,
+                  SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -212,7 +228,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 183:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 199:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -304,6 +320,8 @@ def main():
     manifest["runReferencesOracle"] = "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity."
     manifest["related"] += ["PG-D-160", "SSC-056", "PG-D-161", "BUG-171", "BUG-172", "BUG-173", "BUG-174", "YKT-132", "YKT-133", "YKT-134", "YKT-135"]
     manifest["retirementIoFaultPositions"] = 6768
+    manifest["parentSummaryOracle"] = "017/BAT114..121: borrowed autoCommit=true RW READ_COMMITTED connection; self DB lock only; no config/commit/close mutations. Missing is Optional.empty, 4 nonnull columns/one row maximum. Independent 16/11 JDBC calls with every SQL fault and both closes, fresh actual PG commit/rollback and historical UTC literal vectors; null/invalid counts/interrupt/runtime reject."
+    manifest["inspectionAttemptOracle"] = "019/BAT122..129: same-run END and receipt0/10 match cumulative protection; all3 counts nondecreasing, prior END immutable; handwritten (5,2,3)->(9,5,4) delta(4,3,1), prior completed WARNING stays10 even delta0, MAX/null/identity/receipt/64 parallel vectors. Not a fresh child/OS/backup/step certificate."
     manifest["retirementOracle"] = "015/BAT090..113: literal NKRET1 195..204 bytes and independent one/two-activation SHA256 vectors; full canonical plan count/hash retained through original done/begin/anchor deletion, original-directory durability barriers BEFORE any plan/marker disposal, metadata-only recovery, strict latest-completion400day age, actual PG18 V018 three-reference combinations/identity/query failures, target-only active/pending protection and other-run preservation. Full namespace/graph, bounded record ownership, every native IO occurrence, crash/close/null/interruption/concurrency, no unknown part repair or recursive deletion."
     manifest["limitations"] += " The file scope establishes fixed-namespace, record lifecycle and limited400day retirement under caller exclusion, not actual OS-lock continuity, parent/child lifecycle or whole-morning orchestration. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

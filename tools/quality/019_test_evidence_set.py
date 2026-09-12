@@ -29,10 +29,56 @@ database = module("inspector_database_collector", "021_collect_inspector_databas
 launch = module("inspector_launch_collector", "022_collect_inspector_launch_evidence.py")
 backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py")
 references = module("run_reference_collector", "024_collect_run_reference_evidence.py")
+parent_summary = module("parent_summary_collector", "025_collect_parent_summary_evidence.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    @staticmethod
+    def parent_fixture(kind):
+        cls, names, prefix, start = {
+            "sql": ("dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest",
+                    ("summaryStatesAndCounts", "identityAndTimeBoundaries", "parentLockNamespaces", "roleAndCatalog",
+                     "freshReadAndRollback", "concurrentOwners", "noMutationOrPrivateProjection", "appendOnlyMigration"), "PT-DB-INBOX", 251),
+            "repository": ("dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest",
+                    ("summaryValueInvariants", "realBoundedRead", "parentStateAndLock", "projectionAndNull",
+                     "allJdbcFailurePositions", "historicalUtcIdentity", "freshVisibilityAndBorrowing", "interruptAndRuntime"), "PT-BAT", 114),
+            "attempt": ("dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+                    ("matchingSuccessAndWarning", "zeroAndResumedAttemptCounts", "completedBaselineImmutability",
+                     "countRegressionAndOverflow", "runIdentityAndMissingEnd", "receiptCodesAndNulls",
+                     "redactionAndValueOwnership", "independentConcurrentObservations"), "PT-BAT", 122),
+        }[kind]
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_parent_summary_inventories(self):
+        for kind, validate in (("sql", parent_summary.validate_suite), ("repository", batch.validate_summary_suite),
+                               ("attempt", batch.validate_attempt_suite)):
+            suite, expected = self.parent_fixture(kind)
+            self.assertEqual(expected, validate(suite))
+            for position in range(8):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "7"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
+    def test_parent_summary_literal_trace(self):
+        literal = (b"absent=[]\nopen=[0, 0, 0, false]\nemptyEnd=[0, 0, 0, true]\n"
+                   b"mixedEnd=[9, 5, 4, true]\nmaxEnd=[9223372036854775807, 9223372036854775806, 1, true]\n")
+        expected = {"PT-DB-INBOX-251-states.txt": literal}
+        self.assertEqual(expected, parent_summary.TRACES)
+        self.assertIsNone(parent_summary.validate_traces(expected))
+        for wrong in ({}, dict(expected, unknown=b""), {"PT-DB-INBOX-251-states.txt": literal + b"\0"}):
+            with self.assertRaises(ValueError): parent_summary.validate_traces(wrong)
+
     def test_retirement_literal_traces(self):
         io = b"{acl=1075, attributes=1075, close=854, create=2, filesystem=1075, force=2, namesClose=54, namesHasNext=138, namesIterator=54, namesNext=84, namesOpen=54, openDirectory=477, openEntry=324, openRead=57, openRoot=53, openWriter=2, publish=2, read=114, readClose=57, readSize=114, readonly=1075, sync=13, unlink=5, write=2, writeSize=4, writerClose=2}"
         self.assertEqual(io, batch.RETIREMENT_IO_TRACE)
@@ -303,6 +349,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest",
+                 "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest",
+                 "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -313,7 +361,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:9], batch.select_program_suites(suites))
+        self.assertEqual(suites[:11], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -678,9 +726,13 @@ class EvidenceSetTest(unittest.TestCase):
         refs, expected_refs = self.references_fixture()
         retirement_records, expected_retirement_records = self.retirement_fixture(True)
         retirement, expected_retirement = self.retirement_fixture()
-        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement]
+        summary, expected_summary = self.parent_fixture("repository")
+        attempt, expected_attempt = self.parent_fixture("attempt")
+        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(113, len(accepted))
+        self.assertEqual(129, len(accepted))
+        self.assertEqual(expected_summary, {k: v for k, v in accepted.items() if k in expected_summary})
+        self.assertEqual(expected_attempt, {k: v for k, v in accepted.items() if k in expected_attempt})
         self.assertEqual(expected_retirement_records, {k: v for k, v in accepted.items() if k in expected_retirement_records})
         self.assertEqual(expected_retirement, {k: v for k, v in accepted.items() if k in expected_retirement})
         self.assertEqual(expected_refs, {k: v for k, v in accepted.items() if k in expected_refs})
@@ -760,7 +812,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references"]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -814,7 +866,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(36, len(check()))
+            self.assertEqual(37, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -824,7 +876,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(36):
+        for failed_at in range(37):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -837,9 +889,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(36, len(calls))
+        self.assertEqual(37, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-1][2].endswith("/024_collect_run_reference_evidence.py"))
+        self.assertTrue(calls[-1][2].endswith("/025_collect_parent_summary_evidence.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod

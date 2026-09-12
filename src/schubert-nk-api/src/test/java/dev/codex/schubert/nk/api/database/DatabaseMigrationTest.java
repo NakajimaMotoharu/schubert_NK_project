@@ -59,7 +59,7 @@ final class DatabaseMigrationTest {
   private static final List<String> MIGRATION_VERSIONS =
       List.of(
           "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
-          "014", "015", "016", "017", "018");
+          "014", "015", "016", "017", "018", "019");
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -1074,6 +1074,7 @@ final class DatabaseMigrationTest {
             "migration/V016__question_mutation_inbox_references.sql",
             "migration/V017__backup_rerun_success_history.sql",
             "migration/V018__maintenance_run_references.sql",
+            "migration/V019__parent_inbox_inspection_summary.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

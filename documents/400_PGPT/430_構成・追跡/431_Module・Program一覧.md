@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG162候補（正式未認定）: DAT/DB251～258はV019 maintenance_read_inbox_summaryの引数・自己DB lock・一回PK読取/identity・4列・権限へ対応。BAT114～121はInspectionSummary全constructor/accessor/toString、InspectionSummaryRepository constructor/read/present/require。BAT122～129はInspectionAttempt constructor/reconcile/expectedOutcome/require/toString、既存MaintenanceCompletion.Outcomeの0/10を共用。SS311/331 §3.13/332/341 §7.3、004/059・060、017/017～020へ全methodを追跡。追加24件は探索成功だが全正式1271件/37scopeはまだ未認定。
+
 PG161正式04認定: MaintenanceRunFiles.Session.retirementCandidates・retire/全private helper・Inventory、MaintenanceRetirement、MaintenanceRecords.retirement/readRetirement、DurableRecordFilesのplan/marker、EnvironmentInodePolicy.durableをOPS009/DAT009/UI251/SS311/331/332/341/343 §6.16/SSC055/PG161へ追跡。017/015・016、BAT090～113/24件を全1247 PT・4coverage100%・36scope・24負canaryで確定。BUG171～174/YKT132～135完了。親結線/SSC055全体は未完了。
 
 PG-D-158（正式PT-WEB-20260913-02認定）: NK-BAT-001/file.MaintenanceRunFiles/create・execute・scope-bound Session/start・resume・complete・全内部scan/record/namespace/所有guardとrepository.MaintenanceRunState、共有EnvironmentInodePolicy.durableAncestorをOPS-009/UI251/SS311・341・343 §6.15、017/011・012/PT058～081へ追跡。PG157 remove不存在の再syncはBUG159/BAT049。正式02/source364ea265・全1205 PT/4coverage100%/静的解析・35scope/21負canaryで確定、正式01へ遡及加算しない。R001はDB legacy/参照・GC・親結線が残り未完了。
