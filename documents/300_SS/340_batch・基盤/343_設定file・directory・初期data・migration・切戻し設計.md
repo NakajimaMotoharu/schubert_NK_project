@@ -281,6 +281,8 @@ PTは孤立実inode/FFM・合成root/tmpfs属性・明示IO faultで全分岐を
 
 ### 6.12 固定namespace・account解決と環境寿命（SSC-049/PG-D-155、先行023017b2）
 
+BUG-155/YKT-120（先行d0308b55）: 正常上限がpipe容量を超えても終了待ちとwriterが相互待機しないよう、所有virtual taskでstdoutを並行drainする。親は5秒のprocess待機/exit検証後に読取結果を受け、失敗時は生存lookup子へTERMを要求してから全task終端を待ち、全stdioを閉じた後に返す。task終了前に共有byteを消去しない。既定のtrusted OS/NSSと子孫がpipeを保持しない前提のもと、TERM/pipe終端を待つcleanup時間を5秒の成功保証に含めない。TERMを無視する異常OSの強制終端を約束せず、その状態で成功返却しない。実pipe4096で65536byteの正常vector、超過、途中失敗、停止/割込と消去を再発防止試験にする。
+
 ConfigurationGroupResolverの公開入口は引数なしresolve()だけ。固定argv `/usr/bin/getent group schubert`をshellなしで実行し、NSSの名前照会からGIDを独立取得する。group列挙・gshadow・任意key/optionsを扱わない。環境はPATH=/usr/bin:/bin・LANG=C・LC_ALL=Cだけ、stderr破棄、親env/secretは継承しない。5秒待機・stdout最大65536byte（65537で過長検知）・exit0・全stdio closeの成功を必須とし、timeout/非zero/IO/不明read/close/割込は固定IOException、割込flagを維持する。失敗後の生存lookup子にだけTERMを要求しSIGKILLは使わない。任意子孫がpipeを保持しないtrusted OS tool/NSS設定を前提とし、実際の未停止子検知は非成功のまま運用へ引継ぐ。
 
 stdoutは13～65536byte、prefix `schubert:`、colon合計3個、終端LF1個、内部NUL/制御ASCII/DEL/追加LF/CRを拒否する。password/member fieldは空でもよく、内容を解釈/表示/保存しない（非ASCII byteはこの2fieldに限りopaqueとして扱う）。GID fieldは先頭0なしASCII数字1～10桁、1～4294967295。別名/別group/欠落/多行/空GID/未知byteは拒否。全stdoutをString化せずGIDだけ積算し、byte配列を全終了時に消去する。nullはprogramming契約違反として正常化しない。lookup失敗を対象fileのGIDで補完しない。参照資料: host GLIBC2.43-2ubuntu2.4、Linux man-pages6.17 getent(1)、2026-09-12。
