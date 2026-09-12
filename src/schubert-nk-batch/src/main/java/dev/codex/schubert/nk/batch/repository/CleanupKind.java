@@ -31,4 +31,19 @@ public enum CleanupKind {
   public int maximumRows() {
     return maximumRows;
   }
+
+  /**
+   * Fixed parent step. LOGS uses its dedicated durable-cursor service, not V020. SS331
+   * 3.14/332/341; SSC057/PG164; BAT154.
+   */
+  public BatchStep step() {
+    return switch (this) {
+      case NOTIFICATIONS -> BatchStep.CLEAN_NOTIFICATION;
+      case QUESTIONS -> BatchStep.CLEAN_QUESTION;
+      case SESSIONS -> BatchStep.CLEAN_SESSION;
+      case OUTBOX -> BatchStep.CLEAN_INBOX_OUTBOX;
+      case LOGS -> BatchStep.CLEAN_LOG;
+      case BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> BatchStep.CLEAN_BATCH_RUN;
+    };
+  }
 }

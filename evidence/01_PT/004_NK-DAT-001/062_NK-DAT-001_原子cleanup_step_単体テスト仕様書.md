@@ -1,6 +1,6 @@
 # NK-DAT-001 原子cleanup_step単体テスト仕様書
 
-PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332 §11/341 §7.2。PG163正式07中はsource/collector変更禁止、現在は仕様のみ・未実装/未実行/認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。
+PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332 §11/341 §7.2。初版はPG163正式07の凍結中に仕様のみ先行。現在はPG164の実装・選択探索試験まで実施、正式全reactorと同source証跡認定は未実施・認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |
 |---|---|---|
@@ -16,3 +16,5 @@ PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.1
 Fixtureは隔離PG18.6/Flyway/JDBC42.7.13・公開literal run/handle/時刻/件数のみ。期待値はSSの固定SQL後条件/候補predicate/型・byte/手計算差分/固定JDBC呼出表で別途定め、Productionの出力・観測mapからexpectedを生成しない。正常/境界/異常/例外/NULL/未知/割込/再送/並行/commit不明を全分岐で網羅する。故障は修正前915、共通原因は916、設計修正はSSC057等へ先行する。
 
 実行は421 JDK25.0.4/Maven3.9.12/M2を用いるoffline Mavenの該当module -am test/clean verify。対象commit/branch/command/日時/OS/tool/終了code/input/期待・実際/line・method・class・branch100%/static/BUG・SSC/証跡path・SHA256を063_NK-DAT-001_原子cleanup_step_実行結果.mdとmanifestへ実行後記録する。failed/flaky/skipped/not-runは合格にしない。未実装の親OS/実子/実backup/通常Question/pending revoke・全cleanup順序を本部品の試験だけで完了にしない。
+
+2026-09-13探索追記: SQL8、17predicate代替×3境界・全7kind/10table/typed7列/NULL/FK/rollback/20inventoryを選択実行でPASS。BUG179/180・YKT140/141は017/032で修正・全横展開を管理する。正式clean verify/38scope/30負canary/源commit・hashの確定前は部分成果へ加算しない。

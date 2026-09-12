@@ -1072,6 +1072,7 @@ final class DatabaseMigrationTest {
             "migration/V017__backup_rerun_success_history.sql",
             "migration/V018__maintenance_run_references.sql",
             "migration/V019__parent_inbox_inspection_summary.sql",
+            "migration/V020__atomic_cleanup_step_counts.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

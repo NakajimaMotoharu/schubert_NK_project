@@ -289,16 +289,16 @@ final class InspectionParentBoundaryTest {
 
   @Test
   void appendOnlyMigration() throws Exception {
-    // Independent canonical list guard: missing V019, aliases and mutation must not silently pass.
+    // SSC057/PG164 appends V020; historical V001..018 hashes below remain immutable.
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019"),
+            "013", "014", "015", "016", "017", "018", "019", "020"),
         MigrationInventory.VERSIONS);
     assertEquals(
-        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020",
         MigrationInventory.CSV);
-    assertEquals("19", MigrationInventory.COUNT_TEXT);
+    assertEquals("20", MigrationInventory.COUNT_TEXT);
     assertNotEquals(MigrationInventory.VERSIONS.subList(0, 18), MigrationInventory.VERSIONS);
     assertThrows(UnsupportedOperationException.class, () -> MigrationInventory.VERSIONS.add("020"));
     Path migrations =
@@ -329,7 +329,7 @@ final class InspectionParentBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(19, files.size());
+    assertEquals(20, files.size());
     for (int i = 0; i < 18; i++) {
       assertTrue(files.get(i).getFileName().toString().startsWith("V%03d__".formatted(i + 1)));
       assertEquals(
@@ -340,7 +340,7 @@ final class InspectionParentBoundaryTest {
     }
     try (var c = db.admin()) {
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020",
           scalar(
               c,
               "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where version is not null and success"));

@@ -8,6 +8,37 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+ATOMIC_VALUE_CLASS = "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest"
+ATOMIC_VALUE_METHODS = ("kindStepMapping", "successfulChunkContracts", "rejectionAndDeferredContracts", "summaryCountsAndCompletion", "counterOverflowAndBounds", "nullAndRedaction", "immutableValues", "concurrentValues",)
+
+def validate_atomic_value_suite(suite):
+    return validate_group(suite, ATOMIC_VALUE_CLASS, ATOMIC_VALUE_METHODS, 154)
+
+ATOMIC_REPOSITORY_CLASS = "dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest"
+ATOMIC_REPOSITORY_METHODS = ("actualSevenKindsAndStepTotals", "borrowedStateAndMapping", "nullAndProjection", "allJdbcFailures", "rejectionReasonsAndUnknownTotals", "utcFullHandle", "interruptRuntimeAndResourceOwnership", "concurrentTransactionsAndRollback",)
+
+def validate_atomic_repository_suite(suite):
+    return validate_group(suite, ATOMIC_REPOSITORY_CLASS, ATOMIC_REPOSITORY_METHODS, 162)
+
+ATOMIC_SERVICE_CLASS = "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest"
+ATOMIC_SERVICE_METHODS = ("allKindsCompleteAndPersistedCounts", "multiChunkResumeAndSharedStep", "lockBackupAndForeignKeyDeferral", "transactionFaultsAndUnknownCommit", "timeoutInterruptAndClockWrap", "counterContinuityAndOverflow", "connectionStateRestorationAndNulls", "concurrencyAndIndependentTrace",)
+
+def validate_atomic_service_suite(suite):
+    return validate_group(suite, ATOMIC_SERVICE_CLASS, ATOMIC_SERVICE_METHODS, 170)
+
+ATOMIC_TRACES = {
+    "PT-BAT-162-seven-kinds.txt": b"NOTIFICATIONS=1|1|END\nQUESTIONS=1|1|END\nSESSIONS=3|3|END\nOUTBOX=2|2|END\nBATCH_RUNS=1|1|END\nINBOX_PROGRESS=2|1|END\nLOG_PROGRESS=3|1|END\n",
+    "PT-BAT-165-jdbc.txt": b"repository=53\nfault_positions=53\ndouble_close_pairs=3\n",
+    "PT-BAT-171-chunks.txt": b"sessions=1001\nchunks=1000|1|0\nservice_jdbc=171\nresume_delta=0\n",
+    "PT-BAT-173-jdbc.txt": b"positive_end=115\nfault_positions=115\ncommit_response_unknown=stored1|resume_delta0\n",
+    "PT-BAT-177-service.txt": b"NOTIFICATIONS=RUNNING|1|1|0|0|true\nQUESTIONS=RUNNING|1|1|0|0|true\nSESSIONS=RUNNING|3|3|0|0|true\nOUTBOX=RUNNING|2|2|0|0|true\nBATCH_RUNS=RUNNING|1|1|0|0|true\nINBOX_PROGRESS=RUNNING|2|2|0|0|true\nLOG_PROGRESS=RUNNING|3|3|0|0|true\n",
+}
+
+def validate_atomic_traces(traces):
+    if traces != ATOMIC_TRACES:
+        raise ValueError("missing, extra or invalid independent atomic cleanup trace")
+
+
 METHODS = (
     "runIdentityBoundaries", "countInvariants", "cleanupAllowlist", "rejectionAndProgressContracts",
     "emptyCleanupAndExplicitTransaction", "heldLogsAndDurableRead", "rollbackSavepointAndResume",
@@ -141,7 +172,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -226,7 +257,8 @@ def validate_reports(suites):
                   RETIREMENT_RECORD_CLASS: validate_retirement_record_suite,
                   RETIREMENT_CLASS: validate_retirement_suite,
                   SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
-                  STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite}
+                  STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
+                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -252,7 +284,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 223:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 247:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -262,6 +294,16 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    atomic_root = target / "atomic-cleanup-traces"
+    atomic_traces = {str(p.relative_to(atomic_root)): p.read_bytes() for p in atomic_root.rglob("*") if p.is_file()}
+    validate_atomic_traces(atomic_traces)
+    for folder, values in (("input/atomic-cleanup", ATOMIC_TRACES), ("output/atomic-cleanup", atomic_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001/032_NK-BAT-001_cleanup証跡横展開.md", evidence / "logs/BUG-179-YKT-140.md")
+    shutil.copyfile(repo / "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql", evidence / "input/atomic-cleanup/step-cleanup-fixture.sql")
     trace_root = target / "maintenance-record-traces"
     step_root = target / "batch-step-traces"
     step_traces = {str(p.relative_to(step_root)): p.read_bytes() for p in step_root.rglob("*") if p.is_file()}
@@ -355,6 +397,10 @@ def main():
     manifest["retirementIoFaultPositions"] = 6768
     manifest["related"] += ["PG-D-163", "SSC-055", "BUG-176", "BUG-177", "BUG-178", "YKT-137", "YKT-138", "YKT-139"]
     manifest["parentStepOracle"] = "021/023 BAT130..153: 10 closed steps, fixed immutable handle and 4 terminal statuses/11 reasons; borrowed explicit RW READ_COMMITTED connection, self-db run identity guard before/after. Max99 ordered history, same-run explicit abandonment only, nonbackup daily success skip and backup always rerun. Exact full-handle terminal replay only; no implicit commit/rollback. Independent historical UTC/SQL and 399 JDBC fault positions plus6 double-close pairs, actual rollback/ownership/advisory/row-lock concurrency and all null/invalid projections. Parent child/OS/root/backup orchestration remains incomplete."
+    manifest["related"] += ["PG-D-164", "SSC-057", "BUG-179", "YKT-140", "BUG-180", "YKT-141", "BUG-181", "YKT-142"]
+    manifest["atomicCleanupOracle"] = "026/028/030 BAT154..177: seven non-Log kinds and immutable full step handle/counts. V020 DELETE and stored totals atomic; caller transaction repository, service commits bounded1000 chunks. Independent53 repository JDBC failure positions and115 service positions/3 double-close pairs, 1000/1/0 actual chunks, unknown commit resume rereads stored totals; locks/backups never false-END, FK question deferral only. Negative/null/time-wrap/interrupt/continuity/rollback-restoration/runtime and concurrency. Actual output trace independent from fixed collector literal (BUG179/YKT140). Not parent orchestration."
+    manifest["atomicCleanupJdbcFaultPositions"] = {"repository": 53, "service": 115, "doubleClosePairs": 3}
+    manifest["sourceFiles"].append({"path": "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql", "sha256": hashlib.sha256((repo / "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql").read_bytes()).hexdigest()})
     manifest["parentStepJdbcFaultPositions"] = 399
     manifest["parentSummaryOracle"] = "017/BAT114..121: borrowed autoCommit=true RW READ_COMMITTED connection; self DB lock only; no config/commit/close mutations. Missing is Optional.empty, 4 nonnull columns/one row maximum. Independent 16/11 JDBC calls with every SQL fault and both closes, fresh actual PG commit/rollback and historical UTC literal vectors; null/invalid counts/interrupt/runtime reject."
     manifest["inspectionAttemptOracle"] = "019/BAT122..129: same-run END and receipt0/10 match cumulative protection; all3 counts nondecreasing, prior END immutable; handwritten (5,2,3)->(9,5,4) delta(4,3,1), prior completed WARNING stays10 even delta0, MAX/null/identity/receipt/64 parallel vectors. Not a fresh child/OS/backup/step certificate."

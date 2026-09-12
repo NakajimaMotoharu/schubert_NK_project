@@ -30,10 +30,59 @@ launch = module("inspector_launch_collector", "022_collect_inspector_launch_evid
 backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py")
 references = module("run_reference_collector", "024_collect_run_reference_evidence.py")
 parent_summary = module("parent_summary_collector", "025_collect_parent_summary_evidence.py")
+atomic = module("atomic_collector", "026_collect_atomic_cleanup_evidence.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+
+    @staticmethod
+    def atomic_fixture(group):
+        cls, names, prefix, start = [
+            ("dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest", ("kindStepMapping", "successfulChunkContracts", "rejectionAndDeferredContracts", "summaryCountsAndCompletion", "counterOverflowAndBounds", "nullAndRedaction", "immutableValues", "concurrentValues",), "BAT", 154),
+            ("dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest", ("actualSevenKindsAndStepTotals", "borrowedStateAndMapping", "nullAndProjection", "allJdbcFailures", "rejectionReasonsAndUnknownTotals", "utcFullHandle", "interruptRuntimeAndResourceOwnership", "concurrentTransactionsAndRollback",), "BAT", 162),
+            ("dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest", ("allKindsCompleteAndPersistedCounts", "multiChunkResumeAndSharedStep", "lockBackupAndForeignKeyDeferral", "transactionFaultsAndUnknownCommit", "timeoutInterruptAndClockWrap", "counterContinuityAndOverflow", "connectionStateRestorationAndNulls", "concurrencyAndIndependentTrace",), "BAT", 170),
+            ("dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest", ("sevenKindAtomicCounts", "handleArgumentsAndIdentity", "backupLockAndRoleBoundary", "zeroChunkLockedRemainder", "retentionAndProtectedRows", "rollbackOverflowAndForeignKey", "typedProjectionAndNoBypass", "appendOnlyMigrationInventory",), "DB-INBOX", 259),
+        ][group]
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_atomic_cleanup_inventories(self):
+        for group, validate in enumerate((batch.validate_atomic_value_suite, batch.validate_atomic_repository_suite,
+                                           batch.validate_atomic_service_suite, atomic.validate_suite)):
+            suite, expected = self.atomic_fixture(group)
+            self.assertEqual(expected, validate(suite))
+            for position in range(8):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
+    def test_atomic_cleanup_literal_traces(self):
+        batch_expected = {
+            "PT-BAT-162-seven-kinds.txt": b"NOTIFICATIONS=1|1|END\nQUESTIONS=1|1|END\nSESSIONS=3|3|END\nOUTBOX=2|2|END\nBATCH_RUNS=1|1|END\nINBOX_PROGRESS=2|1|END\nLOG_PROGRESS=3|1|END\n",
+            "PT-BAT-165-jdbc.txt": b"repository=53\nfault_positions=53\ndouble_close_pairs=3\n",
+            "PT-BAT-171-chunks.txt": b"sessions=1001\nchunks=1000|1|0\nservice_jdbc=171\nresume_delta=0\n",
+            "PT-BAT-173-jdbc.txt": b"positive_end=115\nfault_positions=115\ncommit_response_unknown=stored1|resume_delta0\n",
+            "PT-BAT-177-service.txt": b"NOTIFICATIONS=RUNNING|1|1|0|0|true\nQUESTIONS=RUNNING|1|1|0|0|true\nSESSIONS=RUNNING|3|3|0|0|true\nOUTBOX=RUNNING|2|2|0|0|true\nBATCH_RUNS=RUNNING|1|1|0|0|true\nINBOX_PROGRESS=RUNNING|2|2|0|0|true\nLOG_PROGRESS=RUNNING|3|3|0|0|true\n",
+        }
+        sql_expected = {"PT-DB-INBOX-259-seven-kinds.txt": b"NOTIFICATIONS=1|1|0|1|1|false|OK\nQUESTIONS=1|1|0|1|1|false|OK\nSESSIONS=3|3|0|3|3|false|OK\nOUTBOX=2|2|0|2|2|false|OK\nBATCH_RUNS=1|1|0|1|1|false|OK\nINBOX_PROGRESS=1|1|0|2|2|false|OK\nLOG_PROGRESS=1|1|0|3|3|false|OK\n"}
+        for expected, constants, validate in ((batch_expected, batch.ATOMIC_TRACES, batch.validate_atomic_traces),
+                                               (sql_expected, atomic.TRACES, atomic.validate_traces)):
+            self.assertEqual(expected, constants); self.assertIsNone(validate(expected))
+            for name in expected:
+                missing = dict(expected); del missing[name]
+                wrong = dict(expected); wrong[name] += b"X"
+                for bad in (missing, wrong, {**expected, "unknown": b""}):
+                    with self.assertRaises(ValueError): validate(bad)
 
     @staticmethod
     def step_fixture(repository=False):
@@ -395,6 +444,9 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
                  "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest",
                  "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+                 "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+                 "dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest",
+                 "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -405,7 +457,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:13], batch.select_program_suites(suites))
+        self.assertEqual(25, len(suites))
+        self.assertEqual(suites[:16], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -427,6 +480,8 @@ class EvidenceSetTest(unittest.TestCase):
     def test_current_ownership_and_scope_descriptions(self):
         suffix = ("Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. "
                   "No duplicate PT credit.")
+        self.assertEqual("Batch module247 PT = NK-BAT-001177 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(247, 177))
         self.assertEqual("Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. " + suffix,
                          batch.ownership_description(65, 37))
         self.assertEqual("Batch module91 PT = NK-BAT-00137 + NK-OPS-00154. " + suffix,
@@ -774,9 +829,12 @@ class EvidenceSetTest(unittest.TestCase):
         attempt, expected_attempt = self.parent_fixture("attempt")
         step_values, expected_step_values = self.step_fixture()
         step_repository, expected_step_repository = self.step_fixture(True)
-        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt, step_values, step_repository]
+        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt, step_values, step_repository] + [self.atomic_fixture(i)[0] for i in range(3)]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(153, len(accepted))
+        self.assertEqual(177, len(accepted))
+        for i in range(3):
+            _, atomic_expected = self.atomic_fixture(i)
+            self.assertEqual(atomic_expected, {k: v for k, v in accepted.items() if k in atomic_expected})
         self.assertEqual(expected_step_values, {k: v for k, v in accepted.items() if k in expected_step_values})
         self.assertEqual(expected_step_repository, {k: v for k, v in accepted.items() if k in expected_step_repository})
         self.assertEqual(expected_summary, {k: v for k, v in accepted.items() if k in expected_summary})
@@ -860,7 +918,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary"]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -914,7 +972,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(37, len(check()))
+            self.assertEqual(38, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -924,7 +982,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(37):
+        for failed_at in range(38):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -937,9 +995,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(37, len(calls))
+        self.assertEqual(38, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-1][2].endswith("/025_collect_parent_summary_evidence.py"))
+        self.assertTrue(calls[-1][2].endswith("/026_collect_atomic_cleanup_evidence.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod

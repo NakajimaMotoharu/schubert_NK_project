@@ -717,7 +717,7 @@ final class BatchRunRepositoryTest {
     try (var c = locked();
         var admin = db.admin()) {
       assertEquals(
-          "19",
+          "20",
           query(
               admin,
               "select count(*) from schubert_meta.flyway_schema_history where success and version is not null and type='SQL'"));
