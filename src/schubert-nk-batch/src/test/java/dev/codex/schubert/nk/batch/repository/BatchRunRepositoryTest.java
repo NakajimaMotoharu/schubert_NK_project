@@ -1,0 +1,1170 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.reflect.*;
+import java.nio.file.*;
+import java.sql.*;
+import java.time.*;
+import java.util.*;
+import java.util.concurrent.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
+
+/** NK-BAT-001/OPS009/DAT009/UI251/SS331 8.3/332/341; SSC055/PG163; BAT138..153. */
+final class BatchRunRepositoryTest {
+  @TempDir static Path root;
+  static BatchDatabaseFixture db;
+  static final BatchRun RUN =
+      new BatchRun(
+          UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
+          Instant.parse("2026-09-12T15:00:00Z"));
+  static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z"), END = NOW.plusSeconds(1);
+  static final BatchStep STEP = BatchStep.CLEAN_LOG;
+  static final BatchStepResult SUCCESS =
+      new BatchStepResult(BatchStepResult.Status.SUCCESS, 5, 3, 0, 9, BatchStepResult.Reason.NONE);
+  static final List<String> COLS =
+      List.of(
+          "id",
+          "run_id",
+          "business_date",
+          "step",
+          "attempt",
+          "started_at",
+          "ended_at",
+          "status",
+          "target_count",
+          "success_count",
+          "failure_count",
+          "byte_count");
+
+  @BeforeAll
+  static void start() throws Exception {
+    db = new BatchDatabaseFixture(root);
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    db.stop();
+  }
+
+  @BeforeEach
+  void reset() throws Exception {
+    try (var c = db.admin()) {
+      sql(c, "delete from schubert.batch_runs");
+      sql(c, "delete from schubert.inbox_inspection_progress");
+      sql(c, "delete from schubert.log_cleanup_progress");
+    }
+  }
+
+  @Test
+  void firstAttemptAndTerminalStates() throws Exception {
+    StringBuilder trace = new StringBuilder();
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      int i = 0;
+      for (var step : BatchStep.values()) {
+        var a = repo.begin(RUN, step, NOW, false);
+        assertEquals(1, a.attempt());
+        assertFalse(a.skipped());
+        assertEquals(RUN, a.run());
+        assertEquals(
+            "RUNNING|0|0|0|0|true|true|true",
+            query(
+                c,
+                "select status||'|'||target_count||'|'||success_count||'|'||failure_count||'|'||byte_count||'|'||(ended_at is null)||'|'||(error_code is null)||'|'||(error_summary is null) from schubert.batch_runs where id="
+                    + a.id()));
+        BatchStepResult r =
+            switch (i++ % 4) {
+              case 0 -> SUCCESS;
+              case 1 ->
+                  new BatchStepResult(
+                      BatchStepResult.Status.WARNING,
+                      5,
+                      2,
+                      0,
+                      8,
+                      BatchStepResult.Reason.PROTECTED_RECORDS);
+              case 2 ->
+                  new BatchStepResult(
+                      BatchStepResult.Status.FAILED,
+                      6,
+                      2,
+                      4,
+                      0,
+                      BatchStepResult.Reason.DATABASE_FAILURE);
+              default ->
+                  new BatchStepResult(
+                      BatchStepResult.Status.SKIPPED,
+                      0,
+                      0,
+                      0,
+                      0,
+                      BatchStepResult.Reason.BACKUP_UNAVAILABLE);
+            };
+        repo.finish(a, END, r);
+        String expected =
+            switch ((i - 1) % 4) {
+              case 0 -> "SUCCESS|5|3|0|9|NULL|NULL";
+              case 1 -> "WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained";
+              case 2 -> "FAILED|6|2|4|0|DATABASE_FAILURE|batch database operation failed";
+              default -> "SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable";
+            };
+        String actual = terminal(c, a.id());
+        assertEquals(expected, actual);
+        trace.append(step.name()).append('=').append(actual).append('\n');
+        assertEquals(
+            "2026-09-13|2026-09-13 02:00:00+00|2026-09-13 02:00:01+00",
+            query(
+                c,
+                "select business_date||'|'||started_at||'|'||ended_at from schubert.batch_runs where id="
+                    + a.id()));
+      }
+      c.commit();
+      assertEquals("10", query(c, "select count(*) from schubert.batch_runs"));
+    }
+    trace("PT-BAT-138-terminals.txt", trace.toString());
+  }
+
+  @Test
+  void ordinarySuccessSkipsByBusinessDate() throws Exception {
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      var a = repo.begin(RUN, STEP, NOW, false);
+      repo.finish(a, END, SUCCESS);
+      c.commit();
+      var sameDay = new BatchRun(new UUID(0, 8), RUN.cutoff().plusSeconds(30));
+      var skip = repo.begin(sameDay, STEP, END.plusSeconds(1), false);
+      assertTrue(skip.skipped());
+      assertEquals(2, skip.attempt());
+      assertEquals(
+          "SKIPPED|0|0|0|0|ALREADY_SUCCESSFUL|step already successful for business date",
+          terminal(c, skip.id()));
+      assertEquals(
+          "true",
+          query(
+              c,
+              "select (started_at=ended_at)::text from schubert.batch_runs where id=" + skip.id()));
+      var nextDay = new BatchRun(new UUID(0, 9), RUN.cutoff().plusSeconds(86400));
+      var fresh = repo.begin(nextDay, STEP, NOW.plusSeconds(86400), false);
+      assertFalse(fresh.skipped());
+      assertEquals(1, fresh.attempt());
+      assertEquals("SUCCESS|5|3|0|9|NULL|NULL", terminal(c, a.id()));
+    }
+  }
+
+  @Test
+  void backupAlwaysRunsAndAttemptLimit() throws Exception {
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      for (var step : List.of(BatchStep.BACKUP_DB, BatchStep.BACKUP_CONFIG)) {
+        for (int n = 1; n <= 2; n++) {
+          var a = repo.begin(RUN, step, NOW.plusSeconds(n * 2), false);
+          assertFalse(a.skipped());
+          assertEquals(n, a.attempt());
+          repo.finish(a, NOW.plusSeconds(n * 2 + 1), SUCCESS);
+        }
+      }
+      c.commit();
+      assertEquals(
+          "4", query(c, "select count(*) from schubert.batch_runs where status='SUCCESS'"));
+      seed(c, 98, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      var last = repo.begin(RUN, STEP, NOW, false);
+      assertEquals(99, last.attempt());
+      String before = snapshot(c);
+      redacted(() -> repo.begin(RUN, STEP, END, true));
+      assertEquals(before, snapshot(c));
+      c.rollback();
+    }
+  }
+
+  @Test
+  void explicitAbandonedRecovery() throws Exception {
+    try (var c = locked()) {
+      seed(c, 1, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", null);
+      seed(c, 2, "WARNING", RUN.id(), "2026-09-13", "2026-09-13T01:10:00Z", "2026-09-13T01:10:01Z");
+      seed(c, 3, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:20:00Z", null);
+      c.commit();
+      var repo = new BatchRunRepository(c);
+      String before = snapshot(c);
+      redacted(() -> repo.begin(RUN, STEP, NOW, false));
+      assertEquals(before, snapshot(c));
+      var a = repo.begin(RUN, STEP, NOW, true);
+      assertEquals(4, a.attempt());
+      assertEquals(
+          "FAILED:1,WARNING:2,FAILED:3,RUNNING:4",
+          query(
+              c,
+              "select string_agg(status||':'||attempt,',' order by attempt) from schubert.batch_runs"));
+      assertEquals(
+          "2",
+          query(
+              c,
+              "select count(*) from schubert.batch_runs where error_code='ABANDONED' and error_summary='previous same-run attempt abandoned' and target_count=9 and success_count=3 and failure_count=2 and byte_count=8 and ended_at=timestamptz '2026-09-13T02:00:00Z'"));
+      c.rollback();
+      assertEquals(before, snapshot(c));
+      Probe wrong = new Probe();
+      wrong.changeKind = "abandon";
+      wrong.changed = 0;
+      redacted(() -> new BatchRunRepository(wrong.wrap(c)).begin(RUN, STEP, NOW, true));
+      wrong.closed();
+      c.rollback();
+    }
+  }
+
+  @Test
+  void foreignRunningAndRootIdentity() throws Exception {
+    try (var c = locked()) {
+      seed(c, 1, "RUNNING", new UUID(0, 7), "2026-09-13", "2026-09-13T01:00:00Z", null);
+      c.commit();
+      String before = snapshot(c);
+      redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, true));
+      assertEquals(before, snapshot(c));
+      c.rollback();
+      sql(c, "delete from schubert.batch_runs");
+      seed(c, 1, "FAILED", RUN.id(), "2026-09-12", "2026-09-12T01:00:00Z", "2026-09-12T01:00:01Z");
+      c.commit();
+      redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+      c.rollback();
+      sql(c, "delete from schubert.batch_runs");
+      c.commit();
+      try (var admin = db.admin()) {
+        sql(
+            admin,
+            "insert into schubert.inbox_inspection_progress(run_id,cutoff) values('"
+                + RUN.id()
+                + "','2026-09-12T15:00:01Z')");
+      }
+      redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+      assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+    }
+  }
+
+  @Test
+  void exactFinishReplay() throws Exception {
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      var a = repo.begin(RUN, STEP, NOW, false);
+      repo.finish(a, END, SUCCESS);
+      repo.finish(a, END, SUCCESS);
+      c.commit();
+      repo.finish(a, END, SUCCESS);
+      String saved = snapshot(c);
+      redacted(() -> repo.finish(a, END.plusNanos(1000), SUCCESS));
+      for (var r :
+          List.of(
+              new BatchStepResult(
+                  BatchStepResult.Status.SUCCESS, 6, 3, 0, 9, BatchStepResult.Reason.NONE),
+              new BatchStepResult(
+                  BatchStepResult.Status.SUCCESS, 5, 4, 0, 9, BatchStepResult.Reason.NONE),
+              new BatchStepResult(
+                  BatchStepResult.Status.SUCCESS, 5, 3, 0, 10, BatchStepResult.Reason.NONE),
+              new BatchStepResult(
+                  BatchStepResult.Status.WARNING, 5, 3, 1, 9, BatchStepResult.Reason.IO_FAILURE)))
+        redacted(() -> repo.finish(a, END, r));
+      assertEquals(saved, snapshot(c));
+      sql(
+          c,
+          "update schubert.batch_runs set error_summary='public legacy diagnostic' where id="
+              + a.id());
+      c.commit();
+      redacted(() -> repo.finish(a, END, SUCCESS));
+      assertEquals(
+          "public legacy diagnostic",
+          query(c, "select error_summary from schubert.batch_runs where id=" + a.id()));
+    }
+  }
+
+  @Test
+  void handleIdentityAndMissingRows() throws Exception {
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      var a = repo.begin(RUN, STEP, NOW, false);
+      c.commit();
+      for (var bad :
+          List.of(
+              new BatchStepAttempt(999999999999L, RUN, STEP, 1, NOW, false),
+              new BatchStepAttempt(
+                  a.id(), new BatchRun(new UUID(0, 9), RUN.cutoff()), STEP, 1, NOW, false),
+              new BatchStepAttempt(
+                  a.id(),
+                  new BatchRun(new UUID(0, 10), RUN.cutoff().minusSeconds(86400)),
+                  STEP,
+                  1,
+                  NOW,
+                  false),
+              new BatchStepAttempt(a.id(), RUN, BatchStep.CLEAN_SESSION, 1, NOW, false),
+              new BatchStepAttempt(a.id(), RUN, STEP, 2, NOW, false),
+              new BatchStepAttempt(a.id(), RUN, STEP, 1, NOW.plusNanos(1000), false))) {
+        String before = snapshot(c);
+        redacted(() -> repo.finish(bad, END, SUCCESS));
+        assertEquals(before, snapshot(c));
+      }
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(new BatchStepAttempt(a.id(), RUN, STEP, 1, NOW, true), END, SUCCESS));
+      for (int changed : List.of(-1, 2)) {
+        Probe p = new Probe();
+        p.changeKind = "finish";
+        p.changed = changed;
+        redacted(() -> new BatchRunRepository(p.wrap(c)).finish(a, END, SUCCESS));
+        p.closed();
+        c.rollback();
+        assertEquals(
+            "RUNNING", query(c, "select status from schubert.batch_runs where id=" + a.id()));
+      }
+      repo.finish(a, END, SUCCESS);
+      for (String bad : List.of("empty", "extra", "matches", "nullStatement", "nullRows")) {
+        Probe p = new Probe();
+        p.kind = "replay";
+        p.anomaly = bad;
+        redacted(() -> new BatchRunRepository(p.wrap(c)).finish(a, END, SUCCESS));
+        p.closed();
+      }
+    }
+  }
+
+  @Test
+  void rollbackAndUnknownCommit() throws Exception {
+    try (var c = locked();
+        var observer = db.admin()) {
+      var repo = new BatchRunRepository(c);
+      var a = repo.begin(RUN, STEP, NOW, false);
+      assertEquals("0", query(observer, "select count(*) from schubert.batch_runs"));
+      c.rollback();
+      assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+      var b = repo.begin(RUN, STEP, NOW, false);
+      c.commit();
+      redacted(() -> repo.finish(a, END, SUCCESS));
+      repo.finish(b, END, SUCCESS);
+      c.rollback();
+      assertEquals(
+          "RUNNING", query(c, "select status from schubert.batch_runs where id=" + b.id()));
+      repo.finish(b, END, SUCCESS);
+      c.commit();
+      // Simulated lost commit acknowledgement: state is independently observed committed,
+      // same-value retry only.
+      assertEquals(
+          "SUCCESS", query(observer, "select status from schubert.batch_runs where id=" + b.id()));
+      repo.finish(b, END, SUCCESS);
+      var skip = repo.begin(RUN, STEP, END.plusSeconds(1), false);
+      assertTrue(skip.skipped());
+    }
+  }
+
+  @Test
+  void historicalUtcAndFixedRunDay() throws Exception {
+    String[][] vectors = {
+      {"0001-01-01T00:00:00Z", "0001-01-01"},
+      {"1582-10-04T00:00:00Z", "1582-10-04"},
+      {"1582-10-10T00:00:00Z", "1582-10-10"},
+      {"1582-10-15T00:00:00Z", "1582-10-15"},
+      {"1900-03-01T00:00:00Z", "1900-03-01"},
+      {"1970-01-01T00:00:00Z", "1970-01-01"},
+      {"2026-09-12T14:59:59.999999Z", "2026-09-12"},
+      {"2026-09-12T15:00:00Z", "2026-09-13"},
+      {"9999-12-31T23:59:59.999999Z", "10000-01-01"}
+    };
+    try (var c = locked()) {
+      for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
+        sql(c, "set timezone='" + zone + "'");
+        for (String[] v : vectors) {
+          sql(c, "delete from schubert.batch_runs");
+          var run = new BatchRun(RUN.id(), Instant.parse(v[0]));
+          var repo = new BatchRunRepository(c);
+          var a = repo.begin(run, STEP, run.cutoff(), false);
+          repo.finish(a, run.cutoff(), SUCCESS);
+          assertEquals(
+              "true|true|true",
+              query(
+                  c,
+                  "select (business_date=date '"
+                      + v[1]
+                      + "')||'|'||(started_at=timestamptz '"
+                      + v[0]
+                      + "')||'|'||(ended_at=timestamptz '"
+                      + v[0]
+                      + "') from schubert.batch_runs"));
+          // Read the stored historical values through the opposite JDBC direction.
+          var b = repo.begin(run, STEP, run.cutoff(), false);
+          assertTrue(b.skipped());
+          assertEquals(2, b.attempt());
+        }
+      }
+      sql(c, "delete from schubert.batch_runs");
+      var a = new BatchRunRepository(c).begin(RUN, STEP, NOW.plusSeconds(86400), false);
+      assertEquals(
+          "2026-09-13",
+          query(c, "select business_date from schubert.batch_runs where id=" + a.id()));
+    }
+  }
+
+  @Test
+  void clockRegressionPreservesRows() throws Exception {
+    try (var c = locked()) {
+      var repo = new BatchRunRepository(c);
+      for (Instant bad :
+          List.of(
+              RUN.cutoff().minusNanos(1000),
+              NOW.plusNanos(1),
+              Instant.parse("+10000-01-01T00:00:00Z")))
+        assertThrows(IllegalArgumentException.class, () -> repo.begin(RUN, STEP, bad, false));
+      var a = repo.begin(RUN, STEP, NOW, false);
+      c.commit();
+      String before = snapshot(c);
+      redacted(() -> repo.begin(RUN, STEP, NOW.minusNanos(1000), true));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(a, NOW.minusNanos(1000), SUCCESS));
+      assertEquals(before, snapshot(c));
+      repo.finish(a, END, SUCCESS);
+      c.commit();
+      before = snapshot(c);
+      redacted(() -> repo.begin(RUN, STEP, END.minusNanos(1000), false));
+      assertEquals(before, snapshot(c));
+      assertThrows(NullPointerException.class, () -> new BatchRunRepository(null));
+      assertThrows(NullPointerException.class, () -> repo.begin(null, STEP, NOW, false));
+      assertThrows(NullPointerException.class, () -> repo.begin(RUN, null, NOW, false));
+      assertThrows(NullPointerException.class, () -> repo.begin(RUN, STEP, null, false));
+      assertThrows(NullPointerException.class, () -> repo.finish(null, END, SUCCESS));
+      assertThrows(NullPointerException.class, () -> repo.finish(a, null, SUCCESS));
+      assertThrows(NullPointerException.class, () -> repo.finish(a, END, null));
+      assertThrows(IllegalArgumentException.class, () -> repo.finish(a, END.plusNanos(1), SUCCESS));
+    }
+  }
+
+  @Test
+  void parentTransactionAndLock() throws Exception {
+    try (var c = db.open("schubert_batch")) {
+      redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+      c.setAutoCommit(false);
+      for (String command :
+          List.of(
+              "",
+              "select pg_advisory_lock_shared(71419602)",
+              "select pg_advisory_lock(0,71419602)")) {
+        if (!command.isEmpty()) sql(c, command);
+        redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+        c.rollback();
+        sql(c, "select pg_advisory_unlock_all()");
+        c.commit();
+      }
+      sql(c, "select pg_advisory_lock(71419602)");
+      c.commit();
+      c.setReadOnly(true);
+      redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+      c.rollback();
+      c.setReadOnly(false);
+      for (int level :
+          List.of(
+              Connection.TRANSACTION_SERIALIZABLE,
+              Connection.TRANSACTION_REPEATABLE_READ,
+              Connection.TRANSACTION_READ_UNCOMMITTED)) {
+        c.setTransactionIsolation(level);
+        redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
+        c.rollback();
+      }
+      c.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+      var a = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
+      assertFalse(a.skipped());
+      assertFalse(c.isClosed());
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isReadOnly());
+      assertEquals(Connection.TRANSACTION_READ_COMMITTED, c.getTransactionIsolation());
+      try (var other = db.open("schubert_batch")) {
+        other.setAutoCommit(false);
+        redacted(() -> new BatchRunRepository(other).begin(RUN, STEP, NOW, false));
+      }
+    }
+  }
+
+  @Test
+  void historyProjectionAndNulls() throws Exception {
+    try (var c = locked()) {
+      seed(c, 1, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      c.commit();
+      List<String> anomalies = new ArrayList<>(COLS);
+      anomalies.addAll(
+          List.of(
+              "nullStatement",
+              "nullRows",
+              "badIdLow",
+              "badIdHigh",
+              "badDate",
+              "badStep",
+              "badAttemptLow",
+              "badAttemptHigh",
+              "unknown",
+              "negativeTarget",
+              "negativeSuccess",
+              "negativeFailure",
+              "negativeBytes",
+              "earlyStart",
+              "oldStart",
+              "fineStart",
+              "futureStart",
+              "earlyEnd",
+              "oldEnd",
+              "fineEnd",
+              "futureEnd",
+              "runningEnd",
+              "duplicateId",
+              "duplicateAttempt",
+              "tooMany",
+              "doubleSuccess"));
+      for (String bad : anomalies) {
+        Probe p = new Probe();
+        p.kind = "history";
+        p.anomaly = bad;
+        try {
+          redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, true));
+        } catch (AssertionError failure) {
+          throw new AssertionError("history anomaly: " + bad, failure);
+        }
+        p.closed();
+        c.rollback();
+        assertEquals("1", query(c, "select count(*) from schubert.batch_runs"));
+      }
+      sql(c, "delete from schubert.batch_runs");
+      c.commit();
+      for (String bad :
+          List.of("nullStatement", "nullRows", "empty", "extra", "id", "badIdLow", "badIdHigh")) {
+        Probe p = new Probe();
+        p.kind = "insert";
+        p.anomaly = bad;
+        redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, false));
+        p.closed();
+        c.rollback();
+        assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+      }
+    }
+  }
+
+  @Test
+  void jdbcFailurePositions() throws Exception {
+    StringBuilder trace = new StringBuilder();
+    assertEquals(57, inventory("empty").values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(70, inventory("history").values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(80, inventory("recover").values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(50, inventory("finish").values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(72, inventory("replay").values().stream().mapToInt(Integer::intValue).sum());
+    try (var c = locked()) {
+      for (String path : List.of("empty", "history", "skip", "recover", "finish", "replay")) {
+        sql(c, "delete from schubert.batch_runs");
+        c.commit();
+        BatchStepAttempt handle = null;
+        if (Set.of("history", "skip", "recover").contains(path)) {
+          String status =
+              path.equals("skip") ? "SUCCESS" : path.equals("recover") ? "RUNNING" : "FAILED";
+          seed(
+              c,
+              1,
+              status,
+              RUN.id(),
+              "2026-09-13",
+              "2026-09-13T01:00:00Z",
+              status.equals("RUNNING") ? null : "2026-09-13T01:00:01Z");
+        }
+        if (Set.of("finish", "replay").contains(path)) {
+          handle = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
+          if (path.equals("replay")) new BatchRunRepository(c).finish(handle, END, SUCCESS);
+        }
+        c.commit();
+        String before = snapshot(c);
+        Probe ok = new Probe();
+        operate(new BatchRunRepository(ok.wrap(c)), path, handle);
+        assertEquals(inventory(path), ok.seen, path);
+        int faultCount = 0;
+        ok.closed();
+        c.rollback();
+        for (var entry : inventory(path).entrySet())
+          for (int pos = 1; pos <= entry.getValue(); pos++) {
+            Probe p = new Probe();
+            p.failAt.put(entry.getKey(), pos);
+            BatchStepAttempt fixed = handle;
+            redacted(() -> operate(new BatchRunRepository(p.wrap(c)), path, fixed));
+            assertEquals(1, p.failures, path + "/" + entry + "/" + pos);
+            faultCount += p.failures;
+            p.closed();
+            c.rollback();
+            assertEquals(before, snapshot(c));
+            assertFalse(c.isClosed());
+          }
+        Probe both = new Probe();
+        both.failAt.put("row.close", 1);
+        both.failAt.put("statement.close", 1);
+        BatchStepAttempt fixed = handle;
+        redacted(() -> operate(new BatchRunRepository(both.wrap(c)), path, fixed));
+        assertEquals(2, both.failures);
+        trace
+            .append(path)
+            .append('=')
+            .append(ok.seen.values().stream().mapToInt(Integer::intValue).sum())
+            .append('/')
+            .append(faultCount)
+            .append('/')
+            .append(both.failures)
+            .append('\n');
+        both.closed();
+        c.rollback();
+        assertEquals(before, snapshot(c));
+      }
+    }
+    trace("PT-BAT-150-jdbc.txt", trace.toString());
+  }
+
+  @Test
+  void interruptionAndRuntime() throws Exception {
+    try (var c = locked()) {
+      Probe p = new Probe();
+      try {
+        Thread.currentThread().interrupt();
+        redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, false));
+        assertTrue(Thread.currentThread().isInterrupted());
+        assertTrue(p.seen.isEmpty());
+      } finally {
+        Thread.interrupted();
+      }
+      for (String path : List.of("empty", "finish")) {
+        sql(c, "delete from schubert.batch_runs");
+        BatchStepAttempt a =
+            path.equals("finish") ? new BatchRunRepository(c).begin(RUN, STEP, NOW, false) : null;
+        c.commit();
+        Probe last = new Probe();
+        last.interruptAt = "statement.close";
+        last.interruptPosition = path.equals("finish") ? 3 : 4;
+        try {
+          redacted(() -> operate(new BatchRunRepository(last.wrap(c)), path, a));
+          assertTrue(Thread.currentThread().isInterrupted());
+          last.closed();
+        } finally {
+          Thread.interrupted();
+          c.rollback();
+        }
+      }
+      for (Throwable runtime :
+          List.of(
+              new IllegalStateException("public-runtime"),
+              new NullPointerException("public-null"),
+              new AssertionError("public-error"))) {
+        Probe fault = new Probe();
+        fault.runtime = runtime;
+        assertSame(
+            runtime,
+            assertThrows(
+                Throwable.class,
+                () -> new BatchRunRepository(fault.wrap(c)).begin(RUN, STEP, NOW, false)));
+        fault.closed();
+        c.rollback();
+      }
+      Probe argument = new Probe();
+      argument.runtime = new IllegalArgumentException("public-invalid");
+      redacted(() -> new BatchRunRepository(argument.wrap(c)).begin(RUN, STEP, NOW, false));
+      argument.closed();
+    }
+  }
+
+  @Test
+  void concurrentOwnersAndRowLocks() throws Exception {
+    try (var owner = locked();
+        var other = db.open("schubert_batch");
+        var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+      other.setAutoCommit(false);
+      assertEquals("false", query(other, "select pg_try_advisory_lock(71419602)::text"));
+      other.rollback();
+      var repo = new BatchRunRepository(owner);
+      var a = repo.begin(RUN, STEP, NOW, false);
+      assertEquals("0", query(other, "select count(*) from schubert.batch_runs"));
+      other.rollback();
+      repo.finish(a, END, SUCCESS);
+      owner.commit();
+      // Existing row lock blocks a competing UPDATE; server returns 55P03 using fixed lock_timeout.
+      repo.begin(RUN, STEP, END.plusSeconds(1), false);
+      var blocked =
+          pool.submit(
+              () -> {
+                sql(other, "set local lock_timeout='100ms'");
+                var e =
+                    assertThrows(
+                        SQLException.class,
+                        () ->
+                            sql(
+                                other,
+                                "update schubert.batch_runs set byte_count=7 where id=" + a.id()));
+                assertEquals("55P03", e.getSQLState());
+                other.rollback();
+                return true;
+              });
+      assertTrue(blocked.get(5, TimeUnit.SECONDS));
+      owner.commit();
+      sql(owner, "select pg_advisory_unlock(71419602)");
+      owner.commit();
+      assertEquals("true", query(other, "select pg_try_advisory_lock(71419602)::text"));
+      other.commit();
+      var after = new BatchRunRepository(other).begin(RUN, STEP, END.plusSeconds(2), false);
+      assertEquals(3, after.attempt());
+      assertTrue(after.skipped());
+      other.commit();
+      assertEquals(
+          "1,2,3",
+          query(
+              other,
+              "select string_agg(attempt::text,',' order by attempt) from schubert.batch_runs"));
+    }
+  }
+
+  @Test
+  void independentSqlInventoryAndGrants() throws Exception {
+    try (var c = locked();
+        var admin = db.admin()) {
+      assertEquals(
+          "19",
+          query(
+              admin,
+              "select count(*) from schubert_meta.flyway_schema_history where success and version is not null and type='SQL'"));
+      assertEquals(
+          "1",
+          query(
+              admin,
+              "select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null"));
+      assertEquals(
+          "true|true|true|false",
+          query(
+              admin,
+              "select has_table_privilege('schubert_batch','schubert.batch_runs','SELECT')||'|'||has_table_privilege('schubert_batch','schubert.batch_runs','INSERT')||'|'||has_table_privilege('schubert_batch','schubert.batch_runs','UPDATE')||'|'||has_table_privilege('schubert_batch','schubert.questions','SELECT')"));
+      seed(c, 1, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      sql(c, "update schubert.batch_runs set error_summary='public historical diagnostic'");
+      c.commit();
+      Probe p = new Probe();
+      var repo = new BatchRunRepository(p.wrap(c));
+      var a = repo.begin(RUN, STEP, NOW, false);
+      repo.finish(a, END, SUCCESS);
+      repo.finish(a, END, SUCCESS);
+      p.closed();
+      assertEquals(Set.of("refs", "history", "insert", "finish", "replay"), p.kinds);
+      assertEquals(
+          "public historical diagnostic",
+          query(c, "select error_summary from schubert.batch_runs where attempt=1"));
+      assertFalse(p.projected.contains("error_code"));
+      assertFalse(p.projected.contains("error_summary"));
+      assertTrue(p.projected.containsAll(COLS));
+    }
+    Path repo = Path.of(System.getProperty("nk.pt.repository"));
+    String source =
+        Files.readString(
+            repo.resolve(
+                "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"));
+    assertFalse(source.contains("DriverManager"));
+    assertFalse(source.contains(".commit("));
+    assertFalse(source.contains(".rollback("));
+    assertFalse(source.contains("getTimestamp"));
+    assertFalse(source.contains("setTimestamp"));
+  }
+
+  static Map<String, Integer> inventory(String path) {
+    Map<String, Integer> m = new TreeMap<>();
+    // Independently specified in 023 before source: two reference reads = 32.
+    for (var e :
+        Map.ofEntries(
+                Map.entry("connection.getAutoCommit", 2),
+                Map.entry("connection.isReadOnly", 2),
+                Map.entry("connection.getTransactionIsolation", 2),
+                Map.entry("connection.prepareStatement", 2),
+                Map.entry("statement.setQueryTimeout", 2),
+                Map.entry("statement.setObject", 4),
+                Map.entry("statement.executeQuery", 2),
+                Map.entry("statement.close", 2),
+                Map.entry("row.next", 4),
+                Map.entry("row.getObject", 8),
+                Map.entry("row.close", 2))
+            .entrySet()) m.put(e.getKey(), e.getValue());
+    if (path.equals("finish") || path.equals("replay")) {
+      add(m, "connection.prepareStatement", 1);
+      add(m, "statement.setQueryTimeout", 1);
+      add(m, "statement.setObject", 4);
+      add(m, "statement.setString", 4);
+      add(m, "statement.setLong", 5);
+      add(m, "statement.setInt", 1);
+      add(m, "statement.executeUpdate", 1);
+      add(m, "statement.close", 1);
+      if (path.equals("replay")) {
+        add(m, "connection.prepareStatement", 1);
+        add(m, "statement.setQueryTimeout", 1);
+        add(m, "statement.setObject", 4);
+        add(m, "statement.setString", 4);
+        add(m, "statement.setLong", 5);
+        add(m, "statement.setInt", 1);
+        add(m, "statement.executeQuery", 1);
+        add(m, "statement.close", 1);
+        add(m, "row.next", 2);
+        add(m, "row.getObject", 1);
+        add(m, "row.close", 1);
+      }
+    } else {
+      add(m, "connection.prepareStatement", 2);
+      add(m, "statement.setQueryTimeout", 2);
+      add(m, "statement.setObject", 5);
+      add(m, "statement.setString", 5);
+      add(m, "statement.setInt", 1);
+      add(m, "statement.executeQuery", 2);
+      add(m, "statement.close", 2);
+      add(m, "row.next", 3);
+      add(m, "row.getObject", 1);
+      add(m, "row.close", 2);
+      if (!path.equals("empty")) {
+        add(m, "row.next", 1);
+        add(m, "row.getObject", 10);
+        add(m, "row.getString", 2);
+      }
+      if (path.equals("recover")) {
+        add(m, "connection.prepareStatement", 1);
+        add(m, "statement.setQueryTimeout", 1);
+        add(m, "statement.setObject", 3);
+        add(m, "statement.setString", 2);
+        add(m, "statement.setLong", 1);
+        add(m, "statement.executeUpdate", 1);
+        add(m, "statement.close", 1);
+      }
+    }
+    return m;
+  }
+
+  static void trace(String name, String value) throws Exception {
+    Path dir = Path.of("target/batch-step-traces");
+    Files.createDirectories(dir);
+    Files.writeString(dir.resolve(name), value);
+  }
+
+  static void add(Map<String, Integer> m, String key, int n) {
+    m.merge(key, n, Integer::sum);
+  }
+
+  static void operate(BatchRunRepository repo, String path, BatchStepAttempt a) {
+    if (path.equals("finish") || path.equals("replay"))
+      repo.finish(Objects.requireNonNull(a), END, SUCCESS);
+    else repo.begin(RUN, STEP, NOW, path.equals("recover"));
+  }
+
+  static Connection locked() throws SQLException {
+    var c = db.open("schubert_batch");
+    sql(c, "set timezone='UTC'");
+    sql(c, "select pg_advisory_lock(71419602)");
+    c.setAutoCommit(false);
+    return c;
+  }
+
+  static void seed(
+      Connection c, int attempt, String status, UUID run, String day, String start, String end)
+      throws SQLException {
+    sql(
+        c,
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count) values('"
+            + run
+            + "','"
+            + day
+            + "','CLEAN_LOG',"
+            + attempt
+            + ",'"
+            + start
+            + "',"
+            + (end == null ? "null" : "'" + end + "'")
+            + ",'"
+            + status
+            + "',9,3,2,8)");
+  }
+
+  static void sql(Connection c, String text) throws SQLException {
+    try (var s = c.createStatement()) {
+      s.execute(text);
+    }
+  }
+
+  static String query(Connection c, String text) throws SQLException {
+    try (var s = c.createStatement();
+        var r = s.executeQuery(text)) {
+      assertTrue(r.next());
+      String v = r.getString(1);
+      assertFalse(r.next());
+      return v;
+    }
+  }
+
+  static String terminal(Connection c, long id) throws SQLException {
+    return query(
+        c,
+        "select status||'|'||target_count||'|'||success_count||'|'||failure_count||'|'||byte_count||'|'||coalesce(error_code,'NULL')||'|'||coalesce(error_summary,'NULL') from schubert.batch_runs where id="
+            + id);
+  }
+
+  static String snapshot(Connection c) throws SQLException {
+    return query(
+        c,
+        "select coalesce(string_agg(row_to_json(b)::text,';' order by id),'EMPTY') from schubert.batch_runs b");
+  }
+
+  static void redacted(Runnable r) {
+    var e = assertThrows(BatchRepositoryException.class, r::run);
+    assertEquals("batch repository operation failed", e.getMessage());
+    assertNull(e.getCause());
+    assertEquals(0, e.getSuppressed().length);
+  }
+
+  static final class Probe {
+    final Map<String, Integer> seen = new TreeMap<>(), failAt = new HashMap<>();
+    final Set<String> kinds = new HashSet<>(), projected = new HashSet<>();
+    String kind = "", anomaly = "", changeKind = "", interruptAt = "";
+    int changed, interruptPosition, failures, statements, rows;
+    Throwable runtime;
+
+    void hit(String key) throws SQLException {
+      int n = seen.merge(key, 1, Integer::sum);
+      if (key.equals(interruptAt) && n == interruptPosition) Thread.currentThread().interrupt();
+      if (Objects.equals(failAt.get(key), n)) {
+        failures++;
+        throw new SQLException("public provider fixture", "08006");
+      }
+    }
+
+    Connection wrap(Connection c) {
+      return (Connection)
+          Proxy.newProxyInstance(
+              Connection.class.getClassLoader(),
+              new Class<?>[] {Connection.class},
+              (p, m, a) -> {
+                hit("connection." + m.getName());
+                if (m.getName().equals("prepareStatement")) {
+                  String sql = (String) a[0], k = classify(sql);
+                  kinds.add(k);
+                  if (k.equals(kind) && anomaly.equals("nullStatement")) return null;
+                  var s = (PreparedStatement) invoke(c, m, a);
+                  statements++;
+                  return statement(s, k);
+                }
+                assertTrue(
+                    Set.of("getAutoCommit", "isReadOnly", "getTransactionIsolation")
+                        .contains(m.getName()),
+                    "borrowed configuration changed: " + m.getName());
+                return invoke(c, m, a);
+              });
+    }
+
+    PreparedStatement statement(PreparedStatement s, String k) {
+      Map<Integer, Object> binds = new TreeMap<>();
+      return (PreparedStatement)
+          Proxy.newProxyInstance(
+              PreparedStatement.class.getClassLoader(),
+              new Class<?>[] {PreparedStatement.class},
+              (p, m, a) -> {
+                String name = m.getName();
+                if (name.equals("close")) {
+                  Object v = invoke(s, m, a);
+                  statements--;
+                  hit("statement.close");
+                  return v;
+                }
+                hit("statement." + name);
+                if (name.equals("setQueryTimeout")) assertEquals(5, a[0]);
+                if (Set.of("setObject", "setString", "setInt", "setLong").contains(name)) {
+                  binds.put((Integer) a[0], a[1]);
+                  if (name.equals("setObject") && a[1] instanceof OffsetDateTime time)
+                    assertEquals(ZoneOffset.UTC, time.getOffset());
+                }
+                if (name.equals("executeQuery") || name.equals("executeUpdate")) {
+                  if (runtime != null) throw runtime;
+                  assertBinds(k, binds);
+                  if (k.equals(kind) && anomaly.equals("nullRows")) return null;
+                  Object v = invoke(s, m, a);
+                  if (name.equals("executeUpdate")) return k.equals(changeKind) ? changed : v;
+                  rows++;
+                  return row((ResultSet) v, k);
+                }
+                return invoke(s, m, a);
+              });
+    }
+
+    ResultSet row(ResultSet r, String k) {
+      int[] pos = {0};
+      return (ResultSet)
+          Proxy.newProxyInstance(
+              ResultSet.class.getClassLoader(),
+              new Class<?>[] {ResultSet.class},
+              (p, m, a) -> {
+                String name = m.getName();
+                if (name.equals("close")) {
+                  Object v = invoke(r, m, a);
+                  rows--;
+                  hit("row.close");
+                  return v;
+                }
+                hit("row." + name);
+                boolean broken = k.equals(kind);
+                if (name.equals("next")) {
+                  pos[0]++;
+                  if (broken && anomaly.equals("empty")) return false;
+                  if (broken
+                      && Set.of("extra", "duplicateId", "duplicateAttempt", "doubleSuccess")
+                          .contains(anomaly)
+                      && pos[0] == 2) return true;
+                  if (broken && anomaly.equals("tooMany")) return pos[0] <= 100;
+                }
+                if (name.equals("getObject") || name.equals("getString")) {
+                  String col = (String) a[0];
+                  projected.add(col);
+                  if (broken) {
+                    if (anomaly.equals(col)) return null;
+                    if (anomaly.equals("tooMany")) return synthetic(col, pos[0]);
+                    if (anomaly.equals("duplicateId")) {
+                      if (col.equals("attempt")) return pos[0];
+                      return synthetic(col, 1);
+                    }
+                    if (anomaly.equals("duplicateAttempt") && pos[0] == 2) {
+                      if (col.equals("attempt")) return 1;
+                      return synthetic(col, 2);
+                    }
+                    if (anomaly.equals("doubleSuccess")) {
+                      if (col.equals("status")) return "SUCCESS";
+                      return synthetic(col, pos[0]);
+                    }
+                    Object override = override(col, anomaly);
+                    if (override != NO_OVERRIDE) return override;
+                  }
+                }
+                return invoke(r, m, a);
+              });
+    }
+
+    static final Object NO_OVERRIDE = new Object();
+
+    static Object override(String col, String anomaly) {
+      if (col.equals("id")) {
+        if (anomaly.equals("badIdLow")) return 0L;
+        if (anomaly.equals("badIdHigh")) return 1000000000000L;
+      }
+      if (col.equals("business_date") && anomaly.equals("badDate"))
+        return LocalDate.of(2026, 9, 14);
+      if (col.equals("step") && anomaly.equals("badStep")) return "CLEAN_SESSION";
+      if (col.equals("attempt")) {
+        if (anomaly.equals("badAttemptLow")) return 0;
+        if (anomaly.equals("badAttemptHigh")) return 100;
+      }
+      if (col.equals("status")) {
+        if (anomaly.equals("unknown")) return "UNKNOWN";
+        if (anomaly.equals("runningEnd")) return "RUNNING";
+      }
+      if (col.equals("target_count") && anomaly.equals("negativeTarget")) return -1L;
+      if (col.equals("success_count") && anomaly.equals("negativeSuccess")) return -1L;
+      if (col.equals("failure_count") && anomaly.equals("negativeFailure")) return -1L;
+      if (col.equals("byte_count") && anomaly.equals("negativeBytes")) return -1L;
+      if (col.equals("started_at")) {
+        if (anomaly.equals("earlyStart"))
+          return OffsetDateTime.parse("2026-09-12T14:59:59.999999Z");
+        if (anomaly.equals("oldStart")) return OffsetDateTime.parse("0000-12-31T23:59:59Z");
+        if (anomaly.equals("fineStart"))
+          return OffsetDateTime.parse("2026-09-13T01:00:00.000000001Z");
+        if (anomaly.equals("futureStart")) return OffsetDateTime.parse("2026-09-13T02:00:01Z");
+      }
+      if (col.equals("ended_at")) {
+        if (anomaly.equals("earlyEnd")) return OffsetDateTime.parse("2026-09-13T00:59:59.999999Z");
+        if (anomaly.equals("oldEnd")) return OffsetDateTime.parse("0000-12-31T23:59:59Z");
+        if (anomaly.equals("fineEnd"))
+          return OffsetDateTime.parse("2026-09-13T01:00:01.000000001Z");
+        if (anomaly.equals("futureEnd")) return OffsetDateTime.parse("2026-09-13T02:00:01Z");
+      }
+      return NO_OVERRIDE;
+    }
+
+    static Object synthetic(String col, int n) {
+      return switch (col) {
+        case "id" -> (long) n;
+        case "run_id" -> RUN.id();
+        case "business_date" -> LocalDate.of(2026, 9, 13);
+        case "step" -> "CLEAN_LOG";
+        case "attempt" -> n;
+        case "started_at" -> OffsetDateTime.parse("2026-09-13T01:00:00Z");
+        case "ended_at" -> OffsetDateTime.parse("2026-09-13T01:00:01Z");
+        case "status" -> "FAILED";
+        case "target_count", "success_count", "failure_count", "byte_count" -> 0L;
+        default -> throw new AssertionError(col);
+      };
+    }
+
+    static String classify(String sql) {
+      String handle =
+          "id=? and run_id=? and business_date=? and step=? and attempt=? and started_at=?";
+      Map<String, String> allowed =
+          Map.of(
+              "refs",
+                  "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent from schubert.maintenance_read_run_references(?,?)",
+              "history",
+                  "select id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count from schubert.batch_runs where business_date=? and step=? order by attempt limit 100 for update",
+              "insert",
+                  "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values(?,?,?,?,?,?,?,0,0,0,0,?,?) returning id",
+              "abandon",
+                  "update schubert.batch_runs set status='FAILED',ended_at=?,error_code=?,error_summary=? where id=? and run_id=? and started_at=? and status='RUNNING' and ended_at is null",
+              "finish",
+                  "update schubert.batch_runs set ended_at=?,status=?,target_count=?,success_count=?,failure_count=?,byte_count=?,error_code=?,error_summary=? where "
+                      + handle
+                      + " and status='RUNNING' and ended_at is null",
+              "replay",
+                  "select exists(select 1 from schubert.batch_runs where ended_at=? and status=? and target_count=? and success_count=? and failure_count=? and byte_count=? and error_code is not distinct from ? and error_summary is not distinct from ? and "
+                      + handle
+                      + ") as matches");
+      return allowed.entrySet().stream()
+          .filter(e -> e.getValue().equals(sql))
+          .map(Map.Entry::getKey)
+          .findFirst()
+          .orElseThrow(() -> new AssertionError("SQL outside fixed inventory"));
+    }
+
+    static void assertBinds(String k, Map<Integer, Object> b) {
+      int count =
+          switch (k) {
+            case "refs", "history" -> 2;
+            case "insert" -> 9;
+            case "abandon" -> 6;
+            default -> 14;
+          };
+      assertEquals(count, b.size());
+      for (int i = 1; i <= count; i++) assertTrue(b.containsKey(i));
+      if (k.equals("refs")) {
+        assertEquals(RUN.id(), b.get(1));
+        assertEquals(OffsetDateTime.parse("2026-09-12T15:00:00Z"), b.get(2));
+      }
+      if (k.equals("history")) {
+        assertEquals(LocalDate.of(2026, 9, 13), b.get(1));
+        assertEquals("CLEAN_LOG", b.get(2));
+      }
+      if (k.equals("insert")) {
+        assertEquals(RUN.id(), b.get(1));
+        assertEquals(LocalDate.of(2026, 9, 13), b.get(2));
+        assertEquals("CLEAN_LOG", b.get(3));
+      }
+      if (k.equals("abandon")) {
+        assertEquals("ABANDONED", b.get(2));
+        assertEquals("previous same-run attempt abandoned", b.get(3));
+      }
+      if (k.equals("finish") || k.equals("replay")) {
+        assertEquals(OffsetDateTime.parse("2026-09-13T02:00:01Z"), b.get(1));
+        assertEquals("SUCCESS", b.get(2));
+        assertEquals(5L, b.get(3));
+        assertEquals(3L, b.get(4));
+        assertEquals(0L, b.get(5));
+        assertEquals(9L, b.get(6));
+        assertNull(b.get(7));
+        assertNull(b.get(8));
+      }
+    }
+
+    void closed() {
+      assertEquals(0, statements);
+      assertEquals(0, rows);
+    }
+
+    static Object invoke(Object target, Method m, Object[] a) throws Throwable {
+      try {
+        return m.invoke(target, a);
+      } catch (InvocationTargetException e) {
+        throw e.getCause();
+      }
+    }
+  }
+}

@@ -16,6 +16,29 @@ METHODS = (
     "timezoneAndCutoffIdentity", "lockedLogsDoNotAdvance", "retentionAndResourceOwnership",
     "moduleDependencyBoundary",
 )
+STEP_VALUE_CLASS = "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest"
+STEP_VALUE_METHODS = ("closedStepsAndBackupPolicy", "attemptIdentityAndBounds", "terminalStatesAndReasonMatrix", "counterAndStatusBoundaries", "temporalContractAndBusinessDay", "nullContractsAndRedaction", "immutableValueSemantics", "independentConcurrentValues",)
+STEP_REPOSITORY_CLASS = "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest"
+STEP_REPOSITORY_METHODS = ("firstAttemptAndTerminalStates", "ordinarySuccessSkipsByBusinessDate", "backupAlwaysRunsAndAttemptLimit", "explicitAbandonedRecovery", "foreignRunningAndRootIdentity", "exactFinishReplay", "handleIdentityAndMissingRows", "rollbackAndUnknownCommit", "historicalUtcAndFixedRunDay", "clockRegressionPreservesRows", "parentTransactionAndLock", "historyProjectionAndNulls", "jdbcFailurePositions", "interruptionAndRuntime", "concurrentOwnersAndRowLocks", "independentSqlInventoryAndGrants",)
+STEP_TRACES = {
+    "PT-BAT-138-terminals.txt": b"BACKUP_DB=SUCCESS|5|3|0|9|NULL|NULL\nBACKUP_CONFIG=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\nCLEAN_NOTIFICATION=FAILED|6|2|4|0|DATABASE_FAILURE|batch database operation failed\nCLEAN_QUESTION=SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable\nCLEAN_SESSION=SUCCESS|5|3|0|9|NULL|NULL\nCLEAN_INBOX_OUTBOX=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\nCLEAN_LOG=FAILED|6|2|4|0|DATABASE_FAILURE|batch database operation failed\nCLEAN_BATCH_RUN=SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable\nCLEAN_TRANSFER=SUCCESS|5|3|0|9|NULL|NULL\nCLEAN_EXPIRY=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\n",
+    "PT-BAT-150-jdbc.txt": b"empty=57/57/2\nhistory=70/70/2\nskip=70/70/2\nrecover=80/80/2\nfinish=50/50/2\nreplay=72/72/2\n",
+}
+
+
+def validate_step_traces(traces):
+    if traces != STEP_TRACES:
+        raise ValueError("missing, extra or invalid independently specified batch step trace")
+
+
+def validate_step_value_suite(suite):
+    return validate_group(suite, STEP_VALUE_CLASS, STEP_VALUE_METHODS, 130)
+
+
+def validate_step_repository_suite(suite):
+    return validate_group(suite, STEP_REPOSITORY_CLASS, STEP_REPOSITORY_METHODS, 138)
+
+
 CLASS = "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest"
 SUMMARY_CLASS = "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest"
 SUMMARY_METHODS = ("summaryValueInvariants", "realBoundedRead", "parentStateAndLock", "projectionAndNull",
@@ -118,7 +141,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -202,7 +225,8 @@ def validate_reports(suites):
                   REFERENCES_CLASS: validate_references_suite,
                   RETIREMENT_RECORD_CLASS: validate_retirement_record_suite,
                   RETIREMENT_CLASS: validate_retirement_suite,
-                  SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite}
+                  SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
+                  STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -228,7 +252,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 199:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 223:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -239,6 +263,15 @@ def main():
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     trace_root = target / "maintenance-record-traces"
+    step_root = target / "batch-step-traces"
+    step_traces = {str(p.relative_to(step_root)): p.read_bytes() for p in step_root.rglob("*") if p.is_file()}
+    validate_step_traces(step_traces)
+    for folder, values in (("input/batch-step", STEP_TRACES), ("output/batch-step", step_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001/025_NK-BAT-001_step試験横展開.md", evidence / "logs/BUG-176-178-YKT-137-139.md")
     traces = {str(p.relative_to(trace_root)): p.read_bytes() for p in trace_root.rglob("*") if p.is_file()}
     validate_record_traces(traces)
     durable_root = target / "durable-record-traces"
@@ -320,6 +353,9 @@ def main():
     manifest["runReferencesOracle"] = "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity."
     manifest["related"] += ["PG-D-160", "SSC-056", "PG-D-161", "BUG-171", "BUG-172", "BUG-173", "BUG-174", "YKT-132", "YKT-133", "YKT-134", "YKT-135"]
     manifest["retirementIoFaultPositions"] = 6768
+    manifest["related"] += ["PG-D-163", "SSC-055", "BUG-176", "BUG-177", "BUG-178", "YKT-137", "YKT-138", "YKT-139"]
+    manifest["parentStepOracle"] = "021/023 BAT130..153: 10 closed steps, fixed immutable handle and 4 terminal statuses/11 reasons; borrowed explicit RW READ_COMMITTED connection, self-db run identity guard before/after. Max99 ordered history, same-run explicit abandonment only, nonbackup daily success skip and backup always rerun. Exact full-handle terminal replay only; no implicit commit/rollback. Independent historical UTC/SQL and 399 JDBC fault positions plus6 double-close pairs, actual rollback/ownership/advisory/row-lock concurrency and all null/invalid projections. Parent child/OS/root/backup orchestration remains incomplete."
+    manifest["parentStepJdbcFaultPositions"] = 399
     manifest["parentSummaryOracle"] = "017/BAT114..121: borrowed autoCommit=true RW READ_COMMITTED connection; self DB lock only; no config/commit/close mutations. Missing is Optional.empty, 4 nonnull columns/one row maximum. Independent 16/11 JDBC calls with every SQL fault and both closes, fresh actual PG commit/rollback and historical UTC literal vectors; null/invalid counts/interrupt/runtime reject."
     manifest["inspectionAttemptOracle"] = "019/BAT122..129: same-run END and receipt0/10 match cumulative protection; all3 counts nondecreasing, prior END immutable; handwritten (5,2,3)->(9,5,4) delta(4,3,1), prior completed WARNING stays10 even delta0, MAX/null/identity/receipt/64 parallel vectors. Not a fresh child/OS/backup/step certificate."
     manifest["retirementOracle"] = "015/BAT090..113: literal NKRET1 195..204 bytes and independent one/two-activation SHA256 vectors; full canonical plan count/hash retained through original done/begin/anchor deletion, original-directory durability barriers BEFORE any plan/marker disposal, metadata-only recovery, strict latest-completion400day age, actual PG18 V018 three-reference combinations/identity/query failures, target-only active/pending protection and other-run preservation. Full namespace/graph, bounded record ownership, every native IO occurrence, crash/close/null/interruption/concurrency, no unknown part repair or recursive deletion."

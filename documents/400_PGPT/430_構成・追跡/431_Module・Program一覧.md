@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG163実装候補（正式未認定）: .batch.repository.BatchStep全enum/backup、BatchStepAttempt constructor/businessDate/time/toString、BatchStepResult/Status/Reason全constructor/code/summary/allows/toStringはBAT130～137/017021・022。BatchRunRepository constructor/begin/finish/history/abandon/insert/replayed/bindResult/bindHandle/guarded/validStoredTime/require/present・filter lambda・HistoryはBAT138～153/017023～025。OPS009/DAT009/UI251/SS311・331 §8.3・332・341/SSC055へ追跡。24 PTと独立399 JDBC位置・2traceは探索成功、全正式1295件/37scopeは未認定なので既確定値は1271を維持。
+
 PG162正式06認定: DAT/DB251～258はV019 maintenance_read_inbox_summaryの引数・自己DB lock・一回PK読取/identity・4列・権限へ対応。BAT114～121はInspectionSummary全constructor/accessor/toString、InspectionSummaryRepository constructor/read/present/require。BAT122～129はInspectionAttempt constructor/reconcile/expectedOutcome/require/toString、既存MaintenanceCompletion.Outcomeの0/10を共用。SS311/331 §3.13/332/341 §7.3、004/059・060、017/017～020へ全methodを追跡。追加24件と全正式1271件/37scope/26負canary・4coverage100%/静的解析を認定。BUG175/YKT136完了。PG163は別の未実装24仕様。
 
 PG161正式04認定: MaintenanceRunFiles.Session.retirementCandidates・retire/全private helper・Inventory、MaintenanceRetirement、MaintenanceRecords.retirement/readRetirement、DurableRecordFilesのplan/marker、EnvironmentInodePolicy.durableをOPS009/DAT009/UI251/SS311/331/332/341/343 §6.16/SSC055/PG161へ追跡。017/015・016、BAT090～113/24件を全1247 PT・4coverage100%・36scope・24負canaryで確定。BUG171～174/YKT132～135完了。親結線/SSC055全体は未完了。

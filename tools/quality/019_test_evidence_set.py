@@ -34,6 +34,48 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+
+    @staticmethod
+    def step_fixture(repository=False):
+        cls, names, start = (
+            ("dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+             ("firstAttemptAndTerminalStates", "ordinarySuccessSkipsByBusinessDate", "backupAlwaysRunsAndAttemptLimit", "explicitAbandonedRecovery", "foreignRunningAndRootIdentity", "exactFinishReplay", "handleIdentityAndMissingRows", "rollbackAndUnknownCommit", "historicalUtcAndFixedRunDay", "clockRegressionPreservesRows", "parentTransactionAndLock", "historyProjectionAndNulls", "jdbcFailurePositions", "interruptionAndRuntime", "concurrentOwnersAndRowLocks", "independentSqlInventoryAndGrants",), 138) if repository else
+            ("dev.codex.schubert.nk.batch.repository.BatchStepValuesTest",
+             ("closedStepsAndBackupPolicy", "attemptIdentityAndBounds", "terminalStatesAndReasonMatrix", "counterAndStatusBoundaries", "temporalContractAndBusinessDay", "nullContractsAndRedaction", "immutableValueSemantics", "independentConcurrentValues",), 130))
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_parent_step_inventories(self):
+        for repository, validate in ((False, batch.validate_step_value_suite), (True, batch.validate_step_repository_suite)):
+            suite, expected = self.step_fixture(repository)
+            self.assertEqual(expected, validate(suite))
+            for position in range(len(suite)):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
+    def test_parent_step_literal_traces(self):
+        expected = {
+            "PT-BAT-138-terminals.txt": b"BACKUP_DB=SUCCESS|5|3|0|9|NULL|NULL\nBACKUP_CONFIG=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\nCLEAN_NOTIFICATION=FAILED|6|2|4|0|DATABASE_FAILURE|batch database operation failed\nCLEAN_QUESTION=SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable\nCLEAN_SESSION=SUCCESS|5|3|0|9|NULL|NULL\nCLEAN_INBOX_OUTBOX=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\nCLEAN_LOG=FAILED|6|2|4|0|DATABASE_FAILURE|batch database operation failed\nCLEAN_BATCH_RUN=SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable\nCLEAN_TRANSFER=SUCCESS|5|3|0|9|NULL|NULL\nCLEAN_EXPIRY=WARNING|5|2|0|8|PROTECTED_RECORDS|protected records retained\n",
+            "PT-BAT-150-jdbc.txt": b"empty=57/57/2\nhistory=70/70/2\nskip=70/70/2\nrecover=80/80/2\nfinish=50/50/2\nreplay=72/72/2\n",
+        }
+        self.assertEqual(expected, batch.STEP_TRACES)
+        self.assertIsNone(batch.validate_step_traces(expected))
+        for name in expected:
+            missing = dict(expected); del missing[name]
+            wrong = dict(expected); wrong[name] += b"X"
+            for bad in (missing, wrong):
+                with self.assertRaises(ValueError): batch.validate_step_traces(bad)
+        with self.assertRaises(ValueError): batch.validate_step_traces(dict(expected, unknown=b""))
     @staticmethod
     def parent_fixture(kind):
         cls, names, prefix, start = {
@@ -351,6 +393,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest",
                  "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+                 "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest",
+                 "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -361,7 +405,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:11], batch.select_program_suites(suites))
+        self.assertEqual(suites[:13], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -728,9 +772,13 @@ class EvidenceSetTest(unittest.TestCase):
         retirement, expected_retirement = self.retirement_fixture()
         summary, expected_summary = self.parent_fixture("repository")
         attempt, expected_attempt = self.parent_fixture("attempt")
-        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt]
+        step_values, expected_step_values = self.step_fixture()
+        step_repository, expected_step_repository = self.step_fixture(True)
+        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt, step_values, step_repository]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(129, len(accepted))
+        self.assertEqual(153, len(accepted))
+        self.assertEqual(expected_step_values, {k: v for k, v in accepted.items() if k in expected_step_values})
+        self.assertEqual(expected_step_repository, {k: v for k, v in accepted.items() if k in expected_step_repository})
         self.assertEqual(expected_summary, {k: v for k, v in accepted.items() if k in expected_summary})
         self.assertEqual(expected_attempt, {k: v for k, v in accepted.items() if k in expected_attempt})
         self.assertEqual(expected_retirement_records, {k: v for k, v in accepted.items() if k in expected_retirement_records})
