@@ -35,25 +35,28 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
     Process process;
     try {
       process =
-          start.execute(
-              List.of(
-                  "/usr/bin/systemctl",
-                  "--system",
-                  "--no-pager",
-                  "--no-ask-password",
-                  "show",
-                  "--property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID",
-                  unit.serviceName()));
+          Objects.requireNonNull(
+              start.execute(
+                  List.of(
+                      "/usr/bin/systemctl",
+                      "--system",
+                      "--no-pager",
+                      "--no-ask-password",
+                      "show",
+                      "--property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID",
+                      unit.serviceName())),
+              "systemctl process");
     } catch (IOException failure) {
       throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
     }
     try {
-      var output = process.getInputStream();
-      var input = process.getOutputStream();
-      var error = process.getErrorStream();
-      try (output;
-          input;
-          error) {
+      // BUG-157: acquire into ownership before any following getter can fail.
+      try (var output = process.getInputStream();
+          var input = process.getOutputStream();
+          var error = process.getErrorStream()) {
+        Objects.requireNonNull(output, "systemctl stdout");
+        Objects.requireNonNull(input, "systemctl stdin");
+        Objects.requireNonNull(error, "systemctl stderr");
         if (!process.waitFor(5, TimeUnit.SECONDS))
           throw new StopGateException(StopGateFailure.TIMEOUT);
         if (process.exitValue() != 0) throw new StopGateException(StopGateFailure.COMMAND_FAILURE);

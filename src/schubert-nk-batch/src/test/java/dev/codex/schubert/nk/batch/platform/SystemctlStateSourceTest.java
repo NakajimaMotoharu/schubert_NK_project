@@ -185,6 +185,35 @@ final class SystemctlStateSourceTest {
 
   @Test
   void nullAndRuntimeContracts() {
+    // BUG-157: register each acquisition before the next getter may fail.
+    for (String getter : List.of("output", "input", "error")) {
+      var failed = new Child(new byte[0]);
+      failed.getFailure = getter;
+      assertSame(
+          failed.getterFailure,
+          assertThrows(
+              IllegalStateException.class, () -> source(failed).read(ApplicationUnit.API)));
+      assertEquals(getter.equals("output") ? 0 : 1, failed.output.closed);
+      assertEquals(getter.equals("error") ? 1 : 0, failed.input.closed);
+      assertEquals(0, failed.error.closed);
+      assertEquals(0, failed.waits);
+      assertEquals(0, failed.output.reads);
+      assertEquals(1, failed.destroyed);
+    }
+    for (String getter : List.of("output", "input", "error")) {
+      var missing = new Child(new byte[0]);
+      missing.nullGetter = getter;
+      assertThrows(NullPointerException.class, () -> source(missing).read(ApplicationUnit.API));
+      assertEquals(getter.equals("output") ? 0 : 1, missing.output.closed);
+      assertEquals(getter.equals("input") ? 0 : 1, missing.input.closed);
+      assertEquals(getter.equals("error") ? 0 : 1, missing.error.closed);
+      assertEquals(0, missing.waits);
+      assertEquals(0, missing.output.reads);
+      assertEquals(1, missing.destroyed);
+    }
+    assertThrows(
+        NullPointerException.class,
+        () -> new SystemctlStateSource(command -> null).read(ApplicationUnit.API));
     assertThrows(NullPointerException.class, () -> new SystemctlStateSource(null));
     var child = new Child(new byte[0]);
     assertThrows(NullPointerException.class, () -> source(child).read(null));
@@ -230,8 +259,11 @@ final class SystemctlStateSourceTest {
     final ReadStream output, error = new ReadStream(new byte[0]);
     final WriteStream input = new WriteStream();
     boolean completed = true, interrupted, alive = true;
-    int code, destroyed;
+    int code, destroyed, waits;
     RuntimeException runtime;
+    String getFailure = "", nullGetter = "";
+    final IllegalStateException getterFailure =
+        new IllegalStateException("synthetic getter failure");
 
     Child(byte[] bytes) {
       output = new ReadStream(bytes);
@@ -239,16 +271,22 @@ final class SystemctlStateSourceTest {
 
     @Override
     public InputStream getInputStream() {
+      if (getFailure.equals("output")) throw getterFailure;
+      if (nullGetter.equals("output")) return null;
       return output;
     }
 
     @Override
     public InputStream getErrorStream() {
+      if (getFailure.equals("error")) throw getterFailure;
+      if (nullGetter.equals("error")) return null;
       return error;
     }
 
     @Override
     public OutputStream getOutputStream() {
+      if (getFailure.equals("input")) throw getterFailure;
+      if (nullGetter.equals("input")) return null;
       return input;
     }
 
@@ -259,6 +297,7 @@ final class SystemctlStateSourceTest {
 
     @Override
     public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
+      waits++;
       assertEquals(5, timeout);
       assertEquals(TimeUnit.SECONDS, unit);
       if (runtime != null) throw runtime;
