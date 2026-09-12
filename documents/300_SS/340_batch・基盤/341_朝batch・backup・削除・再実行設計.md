@@ -29,6 +29,8 @@ transfer/Expiry清掃、依存順起動、失敗時の継続/打切り、二重�
 
 ## 3. Run identity・排他
 
+SSC-055/PG-D-158: 固定namespaceの原本file lifecycleは343 §6.15。親はOS flockの内側でscopeを開き、start成功後だけ停止/updateへ進み、reboot後resumeで同activation/cutoffと前回完了の有無を区別する。completeには実子終端・許容morning終端・step永続記録を先に確認する。file側の全graph検証をDB legacy ID非衝突/親の成功証明へ代用しない。
+
 SSC-055/PG-D-156（先行b6b5f0f6）: run_id/cutoffの唯一の原本は343 §6.13のroot永続anchor。DBが停止してもreboot後に同じbyteを復元できる。各保守起動/明示resumeには別activation UUIDを用い、completionはそのactivationにだけ対応する。過去completionを新activationの成功として使わない。原本→activation begin→activeをdurable公開するまでは停止/update/rebootを行わず、親の許容morning終端を確認してcompletion→active消去をdurable確定する。backup失敗時の削除skip/起動継続をこの追加metadataで禁止しない。途中失敗/不明完了はactiveと原本を保全する。原本fileの完成だけで親全体・永続step・GCを実装済みにしない。
 
 SSC-049/PG-D-147: root controllerのfile adapterは実効UID0、/runと/run/schubert-nkのroot:root0755・ACLなし・RW tmpfs、maintenance.lockのroot:root0600・通常file・nlink1・size0・同deviceを検証する。NOFOLLOWで各directoryとentryを保持してからflockを取得し、獲得直後/処理後に固定pathを再openして同dev/ino・権限・ACLを確認する。元の保持能力は全保守callback終了まで存続し、entry/root close失敗で成功にしない。競合はcallback0回でDUPLICATE、admission/IOは固定診断で失敗。root以外の親、ACL追加、別FS、symlink/hardlink、未知属性、inode交換を受理せず、adapter自身が作成/chmod/unlinkして修復しない。特権rootによる保守中の置換は運用禁止であり検証だけで敵対rootを封じ込めたとはしない。

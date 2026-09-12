@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-055/PG-D-158（先行36b5f85b）: batch.file.MaintenanceRunFilesは固定6rootの操作scope・Session寿命・全record scan/graph・start/resume/completeを所有し、PG157のDurableRecordFilesへ限定IOを委譲する。返却のrun再開状態はimmutable activationとOptional completion。SS343 §6.15、OPS-009/UI251/SS341、NK-BAT-001/017の011・012/PT058～081。OS lock/実親/DB legacy照合/GCを本file scopeへ完了扱いで混入しない。
+
 SSC-055/PG-D-157（先行19e22eb4）: batch.file.DurableRecordFilesは借用private永続rootの限定read/publish/remove、EnvironmentInodePolicy.durableはlocal RW/root0700・file0600検証を共有する。SS343 §6.14、NK-BAT-001/OPS-009/UI251、017の009/010・PT-BAT-046～057へ追跡。固定namespace/graph/OS lock/親終端/GCを低位IO成功で代替しない。
 
 SSC-055/PG-D-156（先行b6b5f0f6）: batch.repository.MaintenanceActivation/MaintenanceCompletionは固定BatchRunと起動単位・完了単位のimmutable契約。batch.file.MaintenanceRecordsはSS343 §6.13の3種canonical ASCII encode/decodeだけを担う。原本からの同run照合・OS lock・private永続file・active/完了/crash/GCは親と後続file storeの責務でありparserに成功保証を混入しない。NK-BAT-001、OPS-009/UI251/SS331・341・343、PT-BAT-038～045へ追跡する。

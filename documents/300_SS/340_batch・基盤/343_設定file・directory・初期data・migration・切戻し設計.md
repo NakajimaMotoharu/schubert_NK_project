@@ -338,6 +338,28 @@ remove(name, expectedBytes)はcallerが完了/GC条件を別に確認した後�
 
 PT-BAT-046～057/017の009・010はliteral72/109/140/141byteと実隔離inode/native no-replace/fsyncに合成root属性・fault portを組み合わせる。固定namespace/実root配備・state graph/OS lock/親終端/400日GC/DB参照判定はこの低位能力で認定しない。
 
+### 6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）
+
+MaintenanceRunFiles.createは固定/varとnative能力だけを構成する。公開execute(Operation)はcallerが保守OS flockを獲得し、root管理者のnamespace変更を禁止した区間でのみ使用する。/var→lib→schubert-nk（共有root:root0755）→maintenance→runs/attempts（private root:root0700）をNOFOLLOWで6個の独立FDとして保持する。全scopeはlocal永続RW・ACLなし、private3rootは同device、共有祖先の別local mountは許すが毎回identity/属性を固定確認する。applicationによるmkdir/chmod/修復なし。操作前後と各record mutationの境界で固定namespaceのfresh6rootを再openし元snapshotのidentityと比較する。自身のmutationによるdirectory size/mtime/ctimeだけはidentity比較の対象外、scan内はfull snapshot一致を要求する。
+
+callbackへ渡すSessionはscope内だけ有効。各操作をprivate lockで直列化し、execute終端で無効化してから全rootを逆順closeする。callback例外/null/割込/任意close失敗では成功を返さず、既公開fileを逆操作で消さない。close後に保存したSessionを使用しても拒否する。操作を実行中の別threadがある場合はその終了を待って無効化し、owned資源を使用中にcloseしない。callerはcallback外へSessionや非同期処理を持ち出してはならない。IOはscope終了後に原因/suppressedなし固定StorageIoException、未知runtime/NPEは非成功を維持する。
+
+scanはmaintenanceの全直下名（runs/attempts/activeだけ）とruns/attemptsの全直下名を、保持directoryのDirectoryStreamを閉じてから検証する。既知名だけをfilterして不明を見落とさない。null/重複/別parent/不正segment/stream故障・途中mutationは不正。runsはcanonical UUID.run、attemptsはUUID.begin/UUID.doneだけ。unknown/.part/GC markerは保全し通常new/resume/completeを拒否する。GC markerからの限定退役再開は別GC機能として未完了。既知fileは§6.14で全byteを読み、name↔ID、begin↔anchor、done↔begin↔anchor、active↔beginの全値一致を確認する。別cutoff/孤立begin/done、複数未完了beginを拒否する。
+
+anchorだけでbeginがない状態はanchor公開後の中断を表すpendingとして扱い、明示同run resumeでのみ再接続する。未完了beginもpendingであり、pendingは全runで最大1つ。activeがあるときはそのbeginと同一で、他pendingは認めない。active＋同activation doneだけは完了後active消去前の回復状態として認める。複数孤立anchorや未完了beginとの混在は曖昧なため保全拒否する。過去の全完了runは複数保持できる。
+
+| Session操作 | 前提と順序 | 結果/中断保全 |
+|---|---|---|
+| start(BatchRun, activationUUID) | null/型検証→全scan、active/pendingなし、run UUID未登録、activation UUIDは全履歴未使用。callerがDB既存legacy ID非衝突を別照会。anchor→begin→activeを各durable公開→全graph期待値と照合 | 同じ固定activationを返す。各公開途中の失敗は原本/partを保全、停止/update等はcallerがこの成功後だけ行う |
+| resume(runUUID, nextActivationUUID)・activeあり | 全scan、active.runが指定runと一致 | 同activationとOptional completionを返す。doneありは回復状態であり今回の副作用実行成功とは数えない。勝手にactiveを消さず、親終端確認後completeへ |
+| resume・activeなし/未完了beginあり | pendingが指定runだけ、anchor/未完了begin完全一致 | 同beginからactiveだけ再公開、同activationを返す。nextActivationUUIDへ取り替えない |
+| resume・activeなし/anchorのみまたは全activation完了 | 原本必須、他runのpendingなし、nextActivationUUID未使用 | 新begin→active、原本cutoffを変更しない。旧completionを新activationへコピーしない |
+| complete(MaintenanceCompletion) | 全scan、指定activationとanchor/begin一致、activeは同activationまたは同done確定済みの不存在。別active/別既done・doneなしでactive不存在は拒否。callerは実子終端/親の許容morning終端/DB stepを別確認 | 同doneは全値一致だけ、新doneはdurable公開→同activeだけ退役→全graph照合。同じcompletion再試行は冪等。別終了時刻/0↔10で上書きしない |
+
+Session内の各publicationは非秘密UUID supplierからpart identityを採り、null/既存part collisionを成功にしない。run/activation UUIDやcutoffはcaller指定の検証済み値を再生成/丸めず、supplier値で代用しない。read-only scanで正常化/DB補完をしない。返す状態はimmutable activationとOptional completionだけで、directory/byte/FD/秘密値を公開しない。
+
+本scopeは原本file lifecycleのPG/PTであり、OS flock実獲得・親process/DB stop/reboot/実子起動・step/backup・legacy DB衝突・400日GC/参照照会は別未完了条件。fixtureの合成root権限を実root配備済みとしない。PT-BAT-058～081/017の011・012で全namespace/全graph/crash/fault/close/null/並行/再開の独立期待値を検証する。
+
 ## 7. 環境差分
 
 
