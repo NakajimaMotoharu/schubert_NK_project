@@ -188,6 +188,9 @@ final class MaintenanceRetirementRecordsTest {
       records.publish(name, expected, new UUID(1, 1));
       assertArrayEquals(expected, Files.readAllBytes(f.maintenance.resolve(name)));
       assertArrayEquals(expected, records.read(name).orElseThrow());
+      f.overfillReader = true;
+      assertThrows(StorageIoException.class, () -> records.read(name));
+      f.overfillReader = false;
       records.publish(name, expected, new UUID(1, 2));
       records.remove(name, expected);
       assertTrue(records.read(name).isEmpty());

@@ -985,7 +985,7 @@ final class MaintenanceRunFilesTest {
     long uid;
     int readers, writers, listings, failAt = 1, hookAt = 1, partSequence;
     String fail = "", hookName = "", invalid = "", badRole = "", listingFault = "";
-    boolean triggered, rawCloses, nullPart;
+    boolean triggered, rawCloses, nullPart, overfillReader;
     RuntimeException runtimeFailure;
     Action hook = () -> {};
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
@@ -1243,6 +1243,11 @@ final class MaintenanceRunFilesTest {
         @Override
         public int read(ByteBuffer bytes) throws IOException {
           point("read");
+          if (overfillReader) {
+            int count = bytes.remaining();
+            bytes.put(new byte[count]);
+            return count;
+          }
           return channel.read(bytes);
         }
 

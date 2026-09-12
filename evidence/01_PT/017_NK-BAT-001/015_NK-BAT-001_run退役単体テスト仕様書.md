@@ -1,5 +1,7 @@
 # NK-BAT-001 run退役単体テスト仕様書
 
+BUG173/YKT134による独立native計数補正: 新barrierの4 namespace再openは絶対varPathの4segment walkを含むため、差分openDirectory/closeは下記旧式より各16多い。固定fixtureは`/tmp/<junit>/<retire>/var`の4segmentを明示assertする。全openDirectoryは53root×(4 absolute＋5固定child)＝477、closeは53 root＋477 directory＋324 entry＝854、全位置数6768。下記6736/差分20・48は初版の誤りの履歴であり最新oracleに使用しない。Production経路や外部期待値は変更しない。
+
 BAT110独立IO inventory: 単一activationの新規退役は初期scan＋8 mutation/barrierの前後scan＋最終scan＝18 scan、3 directoryずつでnamesOpen/Iterator/Close各54。読取record数は3＋(3+4)＋(4+5)＋(5+4)＋(4+3)＋(3+2)＋(2+2)＋(2+1)＋(1+0)＋0＝48。公開2件のpart/公開済verify4回と削除5件verify5回を加えopenRead57、各EOF照合2read/2size＝114、readClose57。各scanの2 namespace再open、2全root captureと各record10属性照合から全属性1075、同acl/filesystem/readonly各1075。BUG172の追加barrierだけの差分は2record×2scanで属性88/openEntry24/openRoot4/openDirectory20/close48、namesNext8/hasNext14とsync3。固定mapで全6736呼出し位置を検査し、観測mapをそのままexpectedへ生成しない。正常map全一致を要求してから各位置故障を試す。synctargetは実保持FDから独立に観測し、marker再同期→maintenance/runs/attempts成功の前にplanをunlinkしないことをBAT105で確認する。
 
 SSC055/PG-D-161、先行4d534ba9、OPS-009/DAT-009/UI251/SS311/331/332/341/343 §6.16。実装前仕様。Program NK-BAT-001、MaintenanceRetirement/MaintenanceRecords/DurableRecordFiles/MaintenanceRunFiles.Session.retirementCandidates・retire。

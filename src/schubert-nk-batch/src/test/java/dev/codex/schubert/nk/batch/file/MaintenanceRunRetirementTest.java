@@ -28,7 +28,7 @@ final class MaintenanceRunRetirementTest {
       Map.ofEntries(
           Map.entry("acl", 1075),
           Map.entry("attributes", 1075),
-          Map.entry("close", 838),
+          Map.entry("close", 854),
           Map.entry("create", 2),
           Map.entry("filesystem", 1075),
           Map.entry("force", 2),
@@ -37,7 +37,7 @@ final class MaintenanceRunRetirementTest {
           Map.entry("namesIterator", 54),
           Map.entry("namesNext", 84),
           Map.entry("namesOpen", 54),
-          Map.entry("openDirectory", 461),
+          Map.entry("openDirectory", 477),
           Map.entry("openEntry", 324),
           Map.entry("openRead", 57),
           Map.entry("openRoot", 53),
@@ -77,6 +77,19 @@ final class MaintenanceRunRetirementTest {
 
   @Test
   void candidatesAndProtectedRuns() throws Exception {
+    try (var f = fixture();
+        var c = locked()) {
+      seed(f);
+      other(f, true);
+      Files.writeString(f.maintenance.resolve("active"), BEGIN);
+      var before = disk(f);
+      assertEquals(
+          List.of(new BatchRun(UUID.fromString(OTHER), Instant.parse(CUTOFF))),
+          f.files.execute(s -> s.retirementCandidates()));
+      assertEquals(
+          PROTECTED, f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
+      assertEquals(before, disk(f));
+    }
     try (var f = fixture();
         var c = locked()) {
       var repository = new RunReferenceRepository(c);
@@ -361,6 +374,30 @@ final class MaintenanceRunRetirementTest {
 
   @Test
   void planCompletenessAndDigest() throws Exception {
+    for (String fault : List.of("beginCutoff", "beginCollision", "doneCollision"))
+      try (var f = fixture();
+          var c = locked()) {
+        seededMarker(f, 0);
+        switch (fault) {
+          case "beginCutoff" ->
+              Files.writeString(
+                  f.attempts.resolve(ACT + ".begin"),
+                  BEGIN.replace(CUTOFF, "2025-01-01T00:00:00.000001Z"));
+          case "beginCollision" -> {
+            Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(ID, OTHER));
+            Files.writeString(f.attempts.resolve(ACT + ".begin"), BEGIN.replace(ID, OTHER));
+          }
+          case "doneCollision" -> {
+            Files.delete(f.attempts.resolve(ACT + ".begin"));
+            Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(ID, OTHER));
+            Files.writeString(f.attempts.resolve(ACT + ".done"), DONE.replace(ID, OTHER));
+          }
+          default -> throw new AssertionError(fault);
+        }
+        var before = disk(f);
+        failure(() -> f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
+        assertEquals(before, disk(f), fault);
+      }
     for (String fault :
         List.of(
             "missing",
@@ -667,7 +704,10 @@ final class MaintenanceRunRetirementTest {
   }
 
   private MaintenanceRunFilesTest.Fixture fixture() throws Exception {
-    return new MaintenanceRunFilesTest.Fixture(Files.createTempDirectory(temporary, "retire-"));
+    var fixture =
+        new MaintenanceRunFilesTest.Fixture(Files.createTempDirectory(temporary, "retire-"));
+    assertEquals(4, fixture.varPath.getNameCount(), "fixed PT native path-walk inventory");
+    return fixture;
   }
 
   private static void seed(MaintenanceRunFilesTest.Fixture f) throws IOException {
