@@ -1,5 +1,7 @@
 # NK-BAT-001 原子cleanup_step単体テスト仕様書
 
+独立JDBC inventory（実装適用前にSQL/資源順序から計数）: 前後RunReference各16=32、V020 queryはprepare1/timeout1/bind7/execute1/next2/get7/close2=21、合計53。method map: connection.getAutoCommit/isReadOnly/getTransactionIsolation各2、prepareStatement3、statement.setQueryTimeout3/setObject7/setLong1/setInt2/setString1/executeQuery3/close3、row.next6/getObject14/getString1/close3。known/unknown累積/FKの型値は違っても全7列を読むため正常観測53。各SQL故障positionは固定map全発火と所有0/rollbackを確認し、実mapからexpectedを生成しない。
+
 PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332/341。PG163正式07中はsource/collector変更禁止、現在は仕様のみ・未実装/未実行/認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |

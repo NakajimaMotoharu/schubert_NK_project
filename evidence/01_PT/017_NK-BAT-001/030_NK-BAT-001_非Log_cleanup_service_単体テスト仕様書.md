@@ -1,5 +1,7 @@
 # NK-BAT-001 非Log_cleanup_service単体テスト仕様書
 
+独立JDBC inventory（source適用前）: 初期connection.getAutoCommit/isReadOnly/getTransactionIsolationの3call、各正常chunkはsetAutoCommit(false)1＋Repository53＋commit1＋setAutoCommit(true)1=56。0END/1chunkは59、1positive+0ENDは115、1000/1/0の3chunkは171。gate非成功はcommitではなくrollbackが1となり1chunk59、FKdeferredは保存済み件数だけをcommitし59。各正常mapは028のmapを独立3状態＋chunk数×定数mapで計数する。故障時は打切り/rollback/復元追加を理由付きで確認し、rollback失敗時はsetAutoCommit(true)へ進まない。unknown Runtime/Errorとrollback/restoration SQL失敗の同時発生は元のunknownを再throwし、追加診断は固定CleanupStoppedExceptionだけでraw SQL cause/suppressedを含めない。SQL/既知失敗は固定DATABASE_FAILUREへ統一する。
+
 PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332/341 §7.2。PG163正式07中はsource/collector変更禁止、現在は仕様のみ・未実装/未実行/認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |

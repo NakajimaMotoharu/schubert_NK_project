@@ -226,6 +226,8 @@ NULL/非有限/UTC0001～9999外の引数は22023。§3.12と同じ現在DB・�
 
 ### 3.14 非Log/非Inbox cleanupの原子件数・終端照合
 
+精度補足: PostgreSQLのtimestamptz引数は型変換後すでにµs精度であり、元のtext/JDBC nanosを復元して検査できない。Java入口は非µsを拒否し、SQLは型が保持する有限UTC範囲/大小関係を検査する。nanosecondをSQLで黙示roundした結果だけでJava境界の合格とはしない。Repositoryは返却chunk件数<=指定limitも独立検査する。
+
 SSC057/PG164（先行78bde51a）。非Log/非秘密Inboxの7種類を、既存の削除predicate/保持期間/最大1,000/既定SKIP LOCKEDを変えず、同一RUNNING stepへの原子件数記録と組み合わせる。
 
 - V020のmaintenance_execute_cleanup_step(p_run_id uuid,p_cutoff timestamptz,p_step_id bigint,p_attempt integer,p_started timestamptz,p_kind text,p_limit integer)をnk_owner/SECURITY DEFINER、search_path=pg_catalog,schubert,schubert_web_session、timezone=UTC、PUBLIC revoke/batchだけEXECUTEで追加する。任意SQL/基表権限/table/columnを追加せず、V001～019は不変。
