@@ -1,5 +1,9 @@
 # NK-BAT-001 非Log_cleanup_service実行結果
 
+正式認定: PT-WEB-20260913-08、source fbc121e2ddad645e876d659dff7dd1d0db86c7ee/dev-foundation、2026-09-13 05:50:30～06:06:17 JST、exit0。全1327件（Protocol80/Storage58/API660/Web241/Batch247/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 Production static未解決0・新除外なし。15collector/38scope/30負canary成功。PG164新5classは19method/145line/102branch、共有CleanupKindは5method/22line/6branch、各missed0。SQLは17predicate×3境界/全7kind、Repository53・Service115 JDBC故障位置、18時刻/18例外組、全8実traceを独立期待値で確認。BUG179～181/YKT140～142・SSC057完了。
+
+正式commandは sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-08（内部clean verify）。環境・全ファイルSHA256・input/expected/actual・実XML・coverage・staticはevidence/manifest.jsonとchecksums.sha256へ格納。対象Test ID: PT-BAT-170～177。親実子/backup/全cleanup/実NK CHR・PGPT/IT/STは未完了。以下は探索履歴であり現在の認定値ではない。
+
 PG164/SSC057、PT-BAT-170～177。探索成功・正式認定待ち。Service8、独立115 JDBC位置/1000-1-0/commit不明再開/時間・割込・復元・並行。
 
 選択結合実行: 2026-09-13 05:44:46 JST終了、39.764秒、exit0。/tmp/pgpt-atomic-cleanup-combined-explore1.log、API31（本SQL8/既存parent8/DDL15）・Batch48（新24/PG163既存24）＋Protocol/Storage選択PT、failed/error/skipped0。sourceはdev-foundation/HEAD231b948f上の未commit candidateであり正式sourceの証跡へ流用しない。JDK25.0.4/Maven3.9.12、PostgreSQL18.6/pgJDBC42.7.13/Flyway13.4.0、Ubuntu26.04.1。421と017/032参照。

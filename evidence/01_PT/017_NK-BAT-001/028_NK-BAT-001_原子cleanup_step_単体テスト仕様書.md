@@ -1,5 +1,7 @@
 # NK-BAT-001 原子cleanup_step単体テスト仕様書
 
+正式実行済: PT-WEB-20260913-08/sourcefbc121e2、対象PT-BAT-162～169全PASS。結果・独立期待値・coverage/環境/command/hashは対の029_NK-BAT-001_原子cleanup_step_実行結果.mdを参照。以下の先行仕様・探索履歴は変更せず、未実装記述は起票時点の状態である。
+
 独立JDBC inventory（実装適用前にSQL/資源順序から計数）: 前後RunReference各16=32、V020 queryはprepare1/timeout1/bind7/execute1/next2/get7/close2=21、合計53。method map: connection.getAutoCommit/isReadOnly/getTransactionIsolation各2、prepareStatement3、statement.setQueryTimeout3/setObject7/setLong1/setInt2/setString1/executeQuery3/close3、row.next6/getObject14/getString1/close3。known/unknown累積/FKの型値は違っても全7列を読むため正常観測53。各SQL故障positionは固定map全発火と所有0/rollbackを確認し、実mapからexpectedを生成しない。
 
 PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332/341。初版はPG163正式07の凍結中に仕様のみ先行。現在はPG164の実装・選択探索試験まで実施、正式全reactorと同source証跡認定は未実施・認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。

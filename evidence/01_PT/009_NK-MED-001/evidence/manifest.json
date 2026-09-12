@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260913-07",
-  "targetCommit": "b5968a821029ce32b9f90c9d395c297e28f60162",
+  "runId": "PT-WEB-20260913-08",
+  "targetCommit": "fbc121e2ddad645e876d659dff7dd1d0db86c7ee",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-13T04:56:23+09:00",
-  "completedAt": "2026-09-13T05:11:55+09:00",
+  "startedAt": "2026-09-13T05:50:30+09:00",
+  "completedAt": "2026-09-13T06:06:17+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -115,7 +115,7 @@
       }
     },
     "api": {
-      "tests": 652,
+      "tests": 660,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
@@ -183,31 +183,31 @@
       }
     },
     "batch": {
-      "tests": 223,
+      "tests": 247,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 10895
+          "covered": 11652
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1043
+          "covered": 1151
         },
         "LINE": {
           "missed": 0,
-          "covered": 2008
+          "covered": 2160
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 882
+          "covered": 958
         },
         "METHOD": {
           "missed": 0,
-          "covered": 351
+          "covered": 371
         },
         "CLASS": {
           "missed": 0,
-          "covered": 68
+          "covered": 73
         }
       },
       "spotbugs": {
@@ -217,12 +217,12 @@
       }
     }
   },
-  "rawLogSha256": "50f68dd2b60266b71e0f6d318bf749efbfba7ae2fa7550155f52fb7f6f8a27c0",
+  "rawLogSha256": "dbdedcb80626db38fc67ad0957f36b787c8358079c81f1e0d02f2439ff08eebb",
   "programId": "NK-MED-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
     "program": 61,
-    "reactor": 1295
+    "reactor": 1327
   },
   "testIdMethods": {
     "PT-MED-001": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#literalRangesPreserveFirstSpecAndOneMebibyteCap",
@@ -383,7 +383,7 @@
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "d9e9e89c7e47413d86613ce98c3efe3074d2e5b90841d0dd0f9772fef2552b46"
+      "sha256": "2064259d9ef0f90bd0fb073dec67ed5bb79bf0189c8ab760e05807229e191217"
     },
     {
       "path": "coverage/protocol-jacoco.csv",
@@ -391,7 +391,7 @@
     },
     {
       "path": "coverage/protocol-jacoco.xml",
-      "sha256": "5dfcd7e32febc4f4969f8dac1e69426987c056fbceb8b2d999bc54017175f8dc"
+      "sha256": "0da064d63ade8817d8e8e657ef7610464af17882b48b3016b86f611ef3064514"
     },
     {
       "path": "coverage/storage-jacoco.csv",
@@ -399,7 +399,7 @@
     },
     {
       "path": "coverage/storage-jacoco.xml",
-      "sha256": "a20cf7092a2a0e718b35707e8336c929616e336a329cab32f81c9cd5af0bf351"
+      "sha256": "04c33dc85dfa88394ffda7210acaefe8cb3feeda8584e93841392a5a96d2d267"
     },
     {
       "path": "coverage/web-jacoco.csv",
@@ -407,7 +407,7 @@
     },
     {
       "path": "coverage/web-jacoco.xml",
-      "sha256": "72940d05d15c189ad8ef1eb6a5ec082b9480dfd61bfaae3e56ea3a14f29ecfed"
+      "sha256": "f15bca49d17225743151a4b7095db0404cc46b5190d99d8570008d7c3825e569"
     },
     {
       "path": "logs/BUG-042-YKT-037.md",
@@ -786,72 +786,76 @@
       "sha256": "1e9a426672817cc31fd3efe792b91730d638abef86226c68323be7a7abbae4a2"
     },
     {
+      "path": "logs/PT-WEB-20260913-08-summary.json",
+      "sha256": "2bdd405f45b47a0c6fa31ae599d3ad87a49217b68b936d6d08c778580ec932ab"
+    },
+    {
       "path": "logs/query-exploration.md",
       "sha256": "20554a0a77e1accfe649f7feec8014c9ee981483b40631cab3d1a4878e2e53ec"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
-      "sha256": "05e51dacf4ae961601c840902f034ea17249a36aa49eb5eb1b8b3963ca87865d"
+      "sha256": "570b941c3feb5634519095d7d97b92aab17141bfcbdad87189bea4c682f7f8a7"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
-      "sha256": "e19661aa9109d2b97e439ef83344bed69b803dbcb07ff54dd941c99f9ce8ec9c"
+      "sha256": "c5b1646058f77fdc194b8a92b4623b5ff81f167fd65b68825a45f84f98809236"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
-      "sha256": "fb7155f06b8bbd7ac508208fb936bbe38e63b835daab8d10d0757e6c4f538356"
+      "sha256": "6eb341b66edf38531ffda1baae05f22aa4c6dd086c6964bf4004485617027bad"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
-      "sha256": "901ba5dcc77927d62cd9cbf9c9307273156f034d29d3f564f93d92da161c08b0"
+      "sha256": "2ea0fe632a696d53a5c7e52a4655ccf8d732002be6e5f7ca6998e8a5b5129dc6"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
-      "sha256": "52ce16645c0a970fbdc79cd2f88b7d7dd3440c7fd053ed22517a28fcb87d0c8a"
+      "sha256": "48be8342b65d501c1e16d9b76c8bdf5404a003e9e6e831f94cb7429af5381757"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
-      "sha256": "82fb7ba1b7f230713fc6f3aead236f9cc8a2eef936e21125da936d349194a97a"
+      "sha256": "154945059d6fba4c6df0ead05c8cf5ea225034e6d4cf3464053e6cc9c683940d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
-      "sha256": "741e88f56577a4101ce515f5888023040e089c4afc75a48d28b8a1c3910c5c80"
+      "sha256": "f811e2343b8f30a58029aabead51077aff828c58b2ffa6f9d3f3e27a028aa840"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
-      "sha256": "a01f8ee4aa6ac3157ab071042bb32c3f2dacbed3f2634b1ae742c54f9d881a76"
+      "sha256": "9a33b7961389721a80757bf431938ed93517a9c20579b8755780d9276770a87f"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
-      "sha256": "b888772c2294318bec8dde181d083cc4eb8500a37383233b6c990434e19d5187"
+      "sha256": "dd0b185664c923ce7f8ca6a76f50cabeb2ae2cd371f2d7b0c6665dc1e3835428"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
-      "sha256": "47b99306eeff466c047646e1e59602ba11d3b1e9d883a9025e451d882ae9680d"
+      "sha256": "92a442e62b4ad327b57309349aad3ae33f836c7ac5fbbb2d4e3c55d2acfc6c56"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
-      "sha256": "172502f8575ab59754252d828f7a192deac7d3127e89b0a0e39db1adb1c91e2e"
+      "sha256": "a85ef88db2f33df046bf82a94bb9c54eeca4e508f2b6eaff4fa5cd92d4db9f39"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
-      "sha256": "fd8f82132b58993207ed1a6b82671f280e5ad8f255c73b7e5eb2fe5c2088e92d"
+      "sha256": "26706cc86edd49afda2e2bc281e4a3051ad8b9f51942a4fda3db106e3610cbc6"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
-      "sha256": "c8ed6407c6ec5bc35e8cb77fd64eee599a7d16dac48db05a24971fb61a959148"
+      "sha256": "4fe7b42e47ccf8c9a79ac293f26da9493351059c9815795af314ac8b92903698"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
-      "sha256": "8b4bb87b410bddcdc5e0345bfcc74f7f3cc2b26a0c81a6eeffed1d5a910c532e"
+      "sha256": "0e46e0ac61329dd6b885e4913bb70e465d9e2bc73fefa55f55d899b7590773ee"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
-      "sha256": "2750d17d4cf22fd950883ef2f46ee3ab89f053975f6b6615bfdd1dd42c783497"
+      "sha256": "b4da6bce8f4edf72c8fdb773e14721d022388fce83d1c8cfdbb642a0f36f80ce"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
-      "sha256": "39b0df883cb6b2c906aad52cc5f773ca2bc78f2f93c92504096da2d21bdcc9bf"
+      "sha256": "19357e66ed46cffa17ecb0b3eb1f4a473b15c83a8bef0466c7620e8dd8824ea8"
     }
   ]
 }

@@ -1,5 +1,7 @@
 # NK-BAT-001 cleanup_step値単体テスト仕様書
 
+正式実行済: PT-WEB-20260913-08/sourcefbc121e2、対象PT-BAT-154～161全PASS。結果・独立期待値・coverage/環境/command/hashは対の027_NK-BAT-001_cleanup_step値_実行結果.mdを参照。以下の先行仕様・探索履歴は変更せず、未実装記述は起票時点の状態である。
+
 PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332/341。初版はPG163正式07の凍結中に仕様のみ先行。現在はPG164の実装・選択探索試験まで実施、正式全reactorと同source証跡認定は未実施・認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。
 
 | Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |

@@ -1,5 +1,7 @@
 # NK-BAT-001 非Log_cleanup_service単体テスト仕様書
 
+正式実行済: PT-WEB-20260913-08/sourcefbc121e2、対象PT-BAT-170～177全PASS。結果・独立期待値・coverage/環境/command/hashは対の031_NK-BAT-001_非Log_cleanup_service_実行結果.mdを参照。以下の先行仕様・探索履歴は変更せず、未実装記述は起票時点の状態である。
+
 独立JDBC inventory（source適用前）: 初期connection.getAutoCommit/isReadOnly/getTransactionIsolationの3call、各正常chunkはsetAutoCommit(false)1＋Repository53＋commit1＋setAutoCommit(true)1=56。0END/1chunkは59、1positive+0ENDは115、1000/1/0の3chunkは171。gate非成功はcommitではなくrollbackが1となり1chunk59、FKdeferredは保存済み件数だけをcommitし59。各正常mapは028のmapを独立3状態＋chunk数×定数mapで計数する。故障時は打切り/rollback/復元追加を理由付きで確認し、rollback失敗時はsetAutoCommit(true)へ進まない。unknown Runtime/Errorとrollback/restoration SQL失敗の同時発生は元のunknownを再throwし、追加診断は固定CleanupStoppedExceptionだけでraw SQL cause/suppressedを含めない。SQL/既知失敗は固定DATABASE_FAILUREへ統一する。
 
 PG164/SSC057（先行78bde51a）、OPS009/DAT009/UI251 §6・11・12/SS331 §3.14/332/341 §7.2。初版はPG163正式07の凍結中に仕様のみ先行。現在はPG164の実装・選択探索試験まで実施、正式全reactorと同source証跡認定は未実施・認定0。既存V001～019/削除predicate/保持/Current baselineは変更しない。

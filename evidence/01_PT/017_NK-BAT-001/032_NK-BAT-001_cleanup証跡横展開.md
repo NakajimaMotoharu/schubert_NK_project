@@ -1,5 +1,11 @@
 # NK-BAT-001 cleanup証跡・共有inventory横展開
 
+## 最新正式認定（2026-09-13）
+
+正式認定: PT-WEB-20260913-08、source fbc121e2ddad645e876d659dff7dd1d0db86c7ee/dev-foundation、2026-09-13 05:50:30～06:06:17 JST、exit0。全1327件（Protocol80/Storage58/API660/Web241/Batch247/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 Production static未解決0・新除外なし。15collector/38scope/30負canary成功。PG164新5classは19method/145line/102branch、共有CleanupKindは5method/22line/6branch、各missed0。SQLは17predicate×3境界/全7kind、Repository53・Service115 JDBC故障位置、18時刻/18例外組、全8実traceを独立期待値で確認。BUG179～181/YKT140～142・SSC057完了。
+
+上記全対象の修正または非該当根拠を以下§1/2/5で維持し、全既存moduleを正式再試験した。再収集は018_collect_verified_evidence_set.py PT-WEB-20260913-08、負canaryは019の29件と017の1件、すべてexit0。監査本紙も017/evidence/logs/BUG-179-YKT-140.mdおよび004/evidence/atomic-cleanupへ複製・hash登録する。manifestのrun/commit/branch/OS/JDK/command/時刻/終了code・全input/output/coverage/hashを同一sourceとして照合。以下は探索時点の記録であり「正式待ち」は履歴。
+
 PG164/SSC057、BUG179/YKT140は先行fac8438e、BUG180/YKT141は先行231b948f。2026-09-13。正式認定前candidateのPT側不備でありProduction/DDL/独立期待値を変更していない。正式回帰までは対応中。
 
 ## 1. BUG179・YKT140 — 実値の起点
