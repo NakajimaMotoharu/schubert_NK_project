@@ -1,0 +1,20 @@
+# NK-BAT-001 backup_manifest値単体テスト仕様書
+
+PG165/SSC058先行8a606fc7、BAK001～008/BKO001～008/UI251 §5/SS311・341 §6.4・343 §5.3。PG164正式08のsource凍結中に仕様のみ先行、未実装/未実行/認定0。
+
+| Test ID | class/method | 目的・事前条件/入力/操作・独立期待値 |
+|---|---|---|
+| PT-BAT-178 | BackupManifestValuesTest.completeIdentityAndDirectoryName | 公開固定run/DB90000・CONFIG90001/3file1・512・200byteから独立JST名と713合計・712config量 |
+| PT-BAT-179 | BackupManifestValuesTest.fileDigestBoundsAndOverflow | size1/MAX/0/負値/hex長さ・大文字/合計overflow、既定3fileだけ |
+| PT-BAT-180 | BackupManifestValuesTest.versionTokenBoundaries | 8version scalarの1/128境界・不正byte・schema001/999/000 |
+| PT-BAT-181 | BackupManifestValuesTest.stepAndRunBinding | DB/CONFIG取り違え・id重複・同一run/別cutoff・skip・attempt別番号許容 |
+| PT-BAT-182 | BackupManifestValuesTest.timeAndPrecisionBoundaries | UTC0001/1582/9999・JST年境界・µs/順序・内容生成終了とstep開始 |
+| PT-BAT-183 | BackupManifestValuesTest.nullAndRedaction | 全constructor/null/固定redacted診断・値を例外へ出さない |
+| PT-BAT-184 | BackupManifestValuesTest.immutableAccessors | 全record accessor・同値/hashCode/別値と元オブジェクトの独立性 |
+| PT-BAT-185 | BackupManifestValuesTest.concurrentValueUse | 64並行model利用・値計数/名前が相互混在しない |
+
+Fixtureは公開合成run/id/version/count/hashだけ。サイズ/hashは申告値のvalidation fixtureでありactual dump成功の証明ではない。golden JSONはSS順・literal fieldから独立作成しProductionでexpectedを生成しない。PK/実DB state/実artifactのI/O・hash/暗号・復元・7世代は別未完了。全正常/境界/異常/例外/NULL/未知/所有/64並行を上記Test IDへ一意に対応付ける。
+
+Production全class/method（record accessorを含む）: BackupFileDigest constructor/toString、BackupVersions constructor/全field検証/toString、BackupManifest constructor/run/directoryName/configurationBytes/totalBytes/time/toString。line/method/class/branch100%・NullAway/negative・SpotBugs/Spotless成功が必要、除外や無意味assertionで代替しない。障害は修正前915、共通原因916、設計はSSC058を先行する。
+
+実行環境は421 Java25/Maven、コマンドは該当batch -am test/正式clean verify。034_NK-BAT-001_backup_manifest値_実行結果.mdとmanifestへ日時・OS/tool/branch/対象commit/実行command/exit/input/期待と実際/4coverage/static/BUG・SSC/証跡path・hashを記録する。未実行/skipped/flaky/error/failedは合格にしない。

@@ -118,6 +118,22 @@ backup/restore手順の変更・rehearsalなしに行わない。
 3. 新規backup成功後だけ、正規名・通常directoryの成功backupを古い順に並べ、8世代目以降を削除。
 4. Unknown name、symlink、manifest不整合、`.part`は自動世代削除せずwarning。既存7世代をbackup失敗時に削除しない。
 
+### 6.4 MANIFEST.jsonの値・byte契約（SSC058/PG165）
+
+先行8a606fc7。以下はmanifest内容の契約であり、実artifact検証・DB成功・root/OS/子終端の代用品ではない。
+
+- Production型は .batch.backup.BackupFileDigest(size,sha256)、BackupVersions(host,app,schema,os,jdk,postgresql,artemis,age)、BackupManifest(databaseStep,configurationStep,startedAt,contentFinishedAt,versions,recipientSha256,dump,configuration,credentials)。file byte codecは .batch.file.BackupManifestCodec.encode/decode。record accessor、計数/名前導出、全内部parse/renderを017033～036/BAT178～193で追跡する。
+- 両stepは既存BatchStepAttemptの完全handle（id/run/cutoff/step/attempt/startedAt/skipped）。databaseStepはBACKUP_DB、configurationStepはBACKUP_CONFIG、両skipped=false、idは相異なる、run/cutoffは同一。attempt番号・開始時刻は同一である必要はなく、各完全handleを記録して取り違えを拒否する。DBの実在/状態・同一bundleへの永続bindingは後続で別検証する。
+- startedAtは内容生成の開始、contentFinishedAtはdump/list/tar/ageの内容生成終了の観測時刻。両UTC0001～9999・µs、startedAt>=両step.startedAt、contentFinishedAt>=startedAt。fsync/atomic確定/再hash後の最終step.ended_atとは区別する。名前に使うstartedAtのJST年は0001～9999。
+- directoryNameはstartedAtのAsia/Tokyo yyyyMMdd-HHmmss＋ハイフン＋canonical run UUID。µsはmanifestに保持し、directory名だけ既定の秒表示。既存同名/partとの衝突は後続CREATE_NEWで拒否し、上書きやsuffix推測をしない。
+- 3file名は schubert_nk.dump / config.tar / credentials.tar.age の固定集合。各sizeは正long、SHA256はlowercase64hex、3size合計はlong overflowしない。configurationBytesは後2fileの合計、totalBytesは全3file。manifest自身のsize/hashを内部へ循環記載しない。recipientSha256もlowercase64hexで、元public recipientのfingerprintをcallerが独立算出する。
+- host/app/os/jdk/postgresql/artemis/ageは各ASCII1～128byte、先頭英数字・後続英数字または . _ + - の非秘密release token。schemaは001～999の3桁。任意command出力/path/credential/JSON/制御文字を受け入れず、versionが実環境と一致するかは生成側で別確認する。public診断toStringは値全体をredactする。
+- 全nullはconstructor/API境界で拒否し不変条件を先に確立する。型/範囲/format不正は固定IllegalArgumentException、NULLはnull契約違反。decodeでJDK/parseのraw入力をcause/suppressedへ出さない。入力byte/返却byteのmutable所有を共有せず、同一不変modelの並行encodeを許す。
+- Canonical JSONは下記順・key名と固定database名、ASCIIのみ、余白なし1行＋末尾LF1つ、最大4096byte。数値は符号/先頭0なし10進（size/id/attemptは正）。UUIDはlowercase36、時刻は必ずyyyy-MM-ddTHH:mm:ss.ffffffZ。意味上同じでもkey順違い/空白/CRLF/BOM/escape/大文字hash/省略µs/指数数値/unknown/duplicate/欠落/NULL/末尾追加は拒否。全string値が上記ASCII許可集合に収まるためescapeを生成しない。
+- decodeは固定schema全fieldを構築し、再encodeとのbyte完全一致も確認する。dateの自動補正/別表現を許可しない。独立goldenをProduction encodeで生成しない。
+- 形式: {"format":"NKBACKUP1","database":"schubert_nk","runId":"<UUID>","cutoff":"<UTC6>","startedAt":"<UTC6>","contentFinishedAt":"<UTC6>","databaseStep":{"id":<N12>,"attempt":<N2>,"startedAt":"<UTC6>"},"configurationStep":{"id":<N12>,"attempt":<N2>,"startedAt":"<UTC6>"},"versions":{"host":"<token>","app":"<token>","schema":"<N3>","os":"<token>","jdk":"<token>","postgresql":"<token>","artemis":"<token>","age":"<token>"},"recipientSha256":"<hex64>","files":{"schubert_nk.dump":{"size":<positive long>,"sha256":"<hex64>"},"config.tar":{"size":<positive long>,"sha256":"<hex64>"},"credentials.tar.age":{"size":<positive long>,"sha256":"<hex64>"}}} LF
+- 制約として、この型は「申告された観測値」が整合することだけを保証する。actual dump/list/age/restore・3file metadata/hash・全file集合・原本/DB両stepへの信頼binding・成功後7世代削除は別必須。archive平文/秘密key、任意path、未検証claimからSUCCESSを生成しない。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate

@@ -119,6 +119,8 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 
 ### 5.3 Batch・backup
 
+SSC058/PG165: backupのMANIFEST.json固定値/byte schemaは341 §6.4を正とする。version8項目・recipient fingerprint・固定3fileとrun/両完全backup step handleを保存する。内容生成終了時刻とatomic確定後のstep終了を混同しない。codec成功だけで実file/hash/秘密暗号/DB binding/7世代を検証済みにせず、実体gateと世代管理は別必須。実装/独立16PTは017033～036へ追跡する。
+
 | Key | Initial | Validation |
 |---|---|---|
 | `nk.batch.zone/schedule` | `Asia/Tokyo` / `05:00` | systemd timerと照合 |

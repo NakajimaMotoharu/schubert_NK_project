@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC058/PG165の追加責務: .batch.backup.BackupFileDigest/BackupVersions/BackupManifestは341 §6.4の申告観測値・3file/両完全handle/時刻/version/正size/hashの不変条件。.batch.file.BackupManifestCodecは固定順ASCII JSON/末尾LFとcanonical roundtrip。BAK001～008/BKO001～008/UI251/SS341・343、BAT178～193/017033～036へ全methodを追跡。実artifact I/O/worker/root/DB binding/世代管理は別未完了。module依存を追加せず既存BatchStepAttempt/BatchRunを共用する。
+
 SSC057/PG164の追加責務: .batch.repository.CleanupKind.stepは既定step対応、CleanupStepChunk/Reasonは今回chunk・明示optional step保存累積・未完了/deferredの型契約、CleanupStepRepositoryは331 §3.14のV020固定7bind/7列/前後run identityとborrowed資源境界。.batch.cleanup.StepCleanupSummary/StepCleanupServiceは同step累積と今回呼出差分・30分/割込・chunk commit/rollback/restoration・END/deferredを扱う。OPS009/DAT009/UI251/SS331・332・341/SSC057、DB259～266・BAT154～177を追跡。親main/実unit/backup/他cleanupは別未完了。
 
 SSC049/PG162（先行d23b1afd）: batch.repository.InspectionSummaryRepositoryは331 §3.13のborrowed read、InspectionSummaryはBatchRun/CleanupCounts/completeの非秘密不変projectionを所有する。batch.cleanup.InspectionAttempt.reconcile(expectedRun,before Optional summary,after summary,receipt int)は341 §7.3の保存END/identity/非減少/既完了不変/0・10とattempt差分を照合し、run/cumulative/attempt/Outcomeの不変値を返す。Outcome SUCCESS0/WARNING10。各constructor/factoryはnull/非負/相互不変条件を確立し、identityはtoStringでredact。API moduleのclassへ依存/複製せず、既存CleanupCountsを共用する。NULL/未知値を成功に変換しない。OPS009/DAT009/MQ008/UI212/241/251、SS331/332/341、DB251～258/BAT114～129。値だけでfresh unit起動/実子終端/OS lock/backup/親step記録を完了としない。
