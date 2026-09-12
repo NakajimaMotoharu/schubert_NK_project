@@ -366,6 +366,31 @@ Session内の各publicationは非秘密UUID supplierからpart identityを採り
 
 本scopeは原本file lifecycleのPG/PTであり、OS flock実獲得・親process/DB stop/reboot/実子起動・step/backup・legacy DB衝突・400日GC/参照照会は別未完了条件。fixtureの合成root権限を実root配備済みとしない。PT-BAT-058～081/017の011・012で全namespace/全graph/crash/fault/close/null/並行/再開の独立期待値を検証する。
 
+### 6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）
+
+§6.13のactiveなしは対象runのactiveなしを意味する。別runの有効なactive/pendingは§6.15の最大1件条件で保全し、現在のmorningのcompletion確定前に過去runのGCを行える。全namespaceのunknown/partは拒否する。通常start/resume/completeはplan/markerがあれば非成功、中断GCの回復を先に実行する。親の連続OS flock、同一borrowed ReadCommitted transaction/backendのDB advisory自己exclusive保持、子終端、管理者によるnamespace変更禁止を全区間で要求する。GC部品はOS lock獲得や親終端を代行しない。
+
+Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一覧。planまたはmarkerがあればその唯一の対象runだけを返す。それ以外は全activation完了かつactive対象外のrunを返す。age/DB参照はこの列挙だけで許可済みにしない。Session.retire(run, now, RunReferenceRepository)の結果はABSENT（原本/plan/markerの初期不存在で退役成功とは区別）、TOO_YOUNG（最新completionから400日以下）、PROTECTED（対象active/未完了、または初期DB参照あり）、RETIRED（限定退役・最後の同期/照会まで成功）。run/now/repositoryのnullは契約違反、nowはUTC年0001～9999/µsであり現在時刻の内部取得・丸めをしない。原本の同UUID異cutoff、DBidentity不整合/不明/不通、plan開始後の参照復活は固定非成功で保全する。
+
+退役は次の順序を変更しない。
+
+1. 全namespace/full snapshotを安定読取、対象の全activation完了・active対象外・最新終了から厳密400日超・同run DB3参照0/identity一致を確認する。
+2. `attempts/<activation UUID>.plan`へ各doneと完全同byteのNKDONE1をdurable公開/再同期する。全planは対象run一つだけ。marker前の部分plan再開は元の完全graphとの一致を確認し、不足分だけ追加する。既存不同byte・不明partを上書き/推測修復しない。
+3. 完全plan集合のcountとdigestを確定し、`maintenance/<run UUID>.retire`をdurable公開する。digestはASCII `NKPLAN1\n`の後にactivation UUID文字列順の各canonical NKDONE1全byteを連結したSHA-256小文字hex。countは1～2147483647の正規十進で恣意的activation上限を設けない。
+4. markerが保持されanchorが存在する間は全plan集合のcount/digest/最新完了を照合する。残存originalは必ず同planに一致し、planにないoriginalは拒否する。完全planから仮想完全graphを再構成して別runを含む全参照を検証し、削除済みoriginalを現在時刻や残存doneで補完しない。各activationのdone→beginを同byte限定remove/dir sync、その後anchorを限定remove/syncする。anchorが残る間はplanを一つも消さない。
+5. anchor不存在時は対象original attemptが0であることを要求し、残存planはmarkerのrun/最新終了以下・canonicalであることを照合して限定remove/syncする。最後にmarkerだけをremove/syncする。削除済みplanを再生成しない。全plan/marker消去後も3private rootをsyncして不可視の前回unlinkを確定する。
+
+各plan/marker公開・original/plan/marker削除の前、および最終scan後にRunReferenceRepository.readを再実行し3参照0/identity一致を要求する。最初から参照ありのPROTECTEDは副作用0、準備開始後の参照ありは非成功。各mutation境界で保持namespace、期待graph/plan集合を再照合し、他runのrecordを変更しない。これは排他規約を破るDB superuserとのatomicity保証ではない。部分失敗で逆操作・recursive delete・DB参照の期限による無視をしない。
+
+| record | 正規ASCII LFの順序 | 長さ |
+|---|---|---:|
+| plan | 既存NKDONE1をそのまま使用。nameはactivation UUID | 140/141 |
+| marker | `NKRET1`、run UUID、cutoff、latestEnded、preparedAt、count、digest、最後LF | 195～204 |
+
+時刻は§6.13の27byte。latestEnded>=cutoff、preparedAt-latestEnded>400日、全時刻年0001～9999/µs。MaintenanceRetirementは不変型・null拒否・toString redact、MaintenanceRecordsは独立byte所有・再encode完全一致・固定不正診断。DurableRecordFilesの限定名へ.plan/.retireを追加し各内容IDと束縛、bounded bufferは205byte（最大+1）とする。old record/原本内容/外部処理は不変。SHA256取得失敗は資源close後固定IO非成功、未知runtime/NPEは成功化しない。
+
+017/015・016/PT-BAT-090～113の独立literal/digest、厳密400日、全8参照組合せ、全crash phase/IO位置/close/並行/nullで検証する。GC成功はこの部品の条件だけであり、親morning/backup/実server/IT/ST完了を意味しない。SSC055は親への実接続まで継続。
+
 ## 7. 環境差分
 
 
