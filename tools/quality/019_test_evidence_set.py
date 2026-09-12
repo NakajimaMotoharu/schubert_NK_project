@@ -69,7 +69,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
-                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest")
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
         self.assertEqual(suites[:3], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
@@ -89,6 +90,22 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest"))
         for name in ("LinuxDirectoryCallsTest", "OwnedTransferDirectoryTest", "LinuxInodeSecurityTest"):
             self.assertTrue(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage." + name))
+
+    def test_current_ownership_and_scope_descriptions(self):
+        suffix = ("Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. "
+                  "No duplicate PT credit.")
+        self.assertEqual("Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. " + suffix,
+                         batch.ownership_description(65, 37))
+        self.assertEqual("Batch module91 PT = NK-BAT-00137 + NK-OPS-00154. " + suffix,
+                         batch.ownership_description(91, 37))
+        self.assertEqual(("fixed namespace and trusted account resolution", "OS lock continuity and child termination",
+                          "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
+                          "actual root systemd credential deployment", "actual NK characterization and IT/ST"),
+                         launch.UNVERIFIED_PARENT_GATES)
+        self.assertIn("borrowed-root admission/read/publish", launch.DEPLOYMENT_LIMITATIONS)
+        self.assertIn("Root UID/GID/tmpfs admission is synthetic", launch.DEPLOYMENT_LIMITATIONS)
+        for gate_name in launch.UNVERIFIED_PARENT_GATES:
+            self.assertIn(gate_name, launch.DEPLOYMENT_LIMITATIONS)
 
     def test_backup_rerun_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
@@ -148,7 +165,11 @@ class EvidenceSetTest(unittest.TestCase):
                     "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor")),
                   ("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest", 1,
                    ("nativePrivateCreation", "atomicNoReplace", "scopedOwnership", "nameAndNullContracts",
-                    "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments"))]
+                    "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments")),
+                  ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest", 1,
+                   ("createAndRetire", "sameRunAndDifferentRun", "privatePartCollisions", "permissionsAndNull",
+                    "boundedWrites", "replacementsAndRetention", "createFailureMatrix", "reuseFailureMatrix",
+                    "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -162,7 +183,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
                        "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
-                       "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

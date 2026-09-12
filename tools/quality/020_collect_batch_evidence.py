@@ -32,7 +32,8 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
                "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
-               "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest"}
+               "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
+               "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest"}
 
 
 def select_program_suites(suites):
@@ -77,6 +78,13 @@ def validate_reports(suites):
     return methods
 
 
+def ownership_description(total, program):
+    # BUG-153/YKT-119: observed totals have one source; this is reporting, not the PT oracle.
+    return (f"Batch module{total} PT = NK-BAT-001{program} + NK-OPS-001{total - program}. "
+            "Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. "
+            "No duplicate PT credit.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -86,7 +94,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 79:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 91:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -113,7 +121,7 @@ def main():
     manifest.update({
         "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_AND_HANDOFF_BOUNDARIES_ONLY",
         "programComplete": False, "testIdMethods": methods,
-        "sharedModuleOwnership": "Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. Full module coverage includes both; OPS IDs and admission/stop/run-file coverage are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+        "sharedModuleOwnership": ownership_description(verified["modules"]["batch"]["tests"], len(methods)),
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
         "fullReactorManifestSha256": hashlib.sha256(full.read_bytes()).hexdigest(),
         "related": ["PG-D-137", "PG-D-138", "SSC-051", "BUG-104", "YKT-092", "BUG-109", "BUG-110", "BUG-111", "YKT-096", "YKT-097", "BUG-112", "YKT-098", "BUG-014", "YKT-012", "BUG-145", "YKT-113"],

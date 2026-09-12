@@ -39,7 +39,11 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
       "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor")),
     ("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest", 1,
      ("nativePrivateCreation", "atomicNoReplace", "scopedOwnership", "nameAndNullContracts",
-      "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments")))
+      "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments")),
+    ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest", 1,
+     ("createAndRetire", "sameRunAndDifferentRun", "privatePartCollisions", "permissionsAndNull",
+      "boundedWrites", "replacementsAndRetention", "createFailureMatrix", "reuseFailureMatrix",
+      "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
@@ -49,10 +53,27 @@ STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
 ENV_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment"
 CFG_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
 EFILE_SUBJECT = "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader"
+PUBLISH_SUBJECTS = tuple("dev/codex/schubert/nk/batch/file/" + name for name in
+    ("EnvironmentInodePolicy", "InspectorEnvironmentPublisher"))
 SUBJECTS = tuple("dev/codex/schubert/nk/api/maintenance/" + c
                  for c in ("InspectorLaunchConfiguration", "InspectorLauncher"))
 TRACES = {"renderedShellCheck": 3, "statusMapping": 9, "malformedReceipts": 29,
           "argumentsAndPlaceholders": 3, "realMainBridge": 1, "baseUnitAndSyntax": 1, "previousProfiles": 4}
+
+# BUG-153/YKT-119: current limitations, not an accumulation of stale milestones.
+UNVERIFIED_PARENT_GATES = (
+    "fixed namespace and trusted account resolution", "OS lock continuity and child termination",
+    "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
+    "actual root systemd credential deployment", "actual NK characterization and IT/ST")
+DEPLOYMENT_LIMITATIONS = (
+    "Scope covers private launcher, wrapper/unit syntax, low-level flock, borrowed-root admission/read/publish, "
+    "read-only application stop observations and canonical environment bytes. Java coverage is not a shell percentage; "
+    "shell decisions use recorded traces. Root UID/GID/tmpfs admission is synthetic over isolated real inodes; "
+    "no privileged deployed service acceptance. Flock executes amd64 libc; aarch64 is ABI selection only and "
+    "CLOEXEC is checked at the call boundary, not by inherited-FD inspection. Systemctl timeout tests use a process "
+    "fault port, not a stalled manager or TERM-ignoring descendant. Borrowed-root publisher requires caller-held "
+    "OS lock, stable namespace and terminal child; its success proves none of those. Failed unpublished parts "
+    "remain for controlled operational reconciliation. Remaining gates: " + "; ".join(UNVERIFIED_PARENT_GATES) + ".")
 
 
 def validate_reports(suites, deployment=False):
@@ -77,7 +98,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
                    "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
-                   "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
+                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -107,6 +129,7 @@ def main():
     def module_for(cls):
         return {"dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
                 "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
+                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
@@ -126,13 +149,13 @@ def main():
     if args.deployment:
         for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
-                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT))):
+                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -146,7 +169,7 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
-        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT)]
+        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS)]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (s + ".java") for s in PRIVATE_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
@@ -185,23 +208,20 @@ def main():
         manifest["reviewedStaticDiagnostic"] = {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False}
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."
-        manifest["limitations"] += " LinuxFileLock is a low-level capability only; root/type/UID/ACL/stable-namespace admission and parent lifecycle are not supplied by it. CLOEXEC is asserted at the native call boundary, not an actual inherited-FD inspection; aarch64 ABI selection only, execution is amd64."
         manifest["oracle"] += " 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked."
-        manifest["limitations"] += " MaintenanceFileLock PT uses synthetic root UID/GID/tmpfs admission over real isolated unprivileged files. Actual root/tmpfiles provisioning and parent inactive/backup/DB handoff remain unverified."
         manifest["oracle"] += " 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected."
-        manifest["limitations"] += " STOP is read-only transient state observation, not service stopping or a lease. Deployed units, root execution, parent restart prohibition/cgroup validation and integration remain unverified. Trusted fixed systemctl/OS assumptions apply; timeout is tested using a process fault port, not a real stalled manager or TERM-ignoring descendant."
         manifest["related"] += ["PG-D-149"]
         manifest["oracle"] += " 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked."
-        manifest["limitations"] += " Run EnvironmentFile codec neither reads/writes files nor chooses the authoritative run. Root ownership/ACL/NOFOLLOW/bounded read/atomic publication, static setting file validation, OS lifecycle and durable run anchorSSC055 remain unverified."
         manifest["related"] += ["PG-D-151"]
         manifest["oracle"] += " 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected."
-        manifest["limitations"] += " Static source bytes are now certified separately; bounded retained-inode IO, root metadata, atomic publication and parent-child lifecycle remain pending."
         manifest["related"] += ["PG-D-152", "BUG-147", "YKT-115", "BUG-148", "BUG-149"]
         manifest["oracle"] += " 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state."
-        manifest["limitations"] += " EFILE certifies borrowed-root read only. Fixed ancestor namespace/account resolution, OS lock continuity, source stability until systemd reads, atomic publisher and actual root deployment remain caller responsibilities."
         manifest["related"] += ["PG-D-153", "BUG-150", "YKT-116"]
         manifest["oracle"] += " 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS."
-        manifest["limitations"] += " PFILE is a low-level named-entry capability, not the environment publisher. Ownership/ACL/run admission, fixed stable namespace, actual child stop, expected-run retirement and recovery remain mandatory caller gates."
+        manifest["related"] += ["PG-D-154", "BUG-151", "YKT-117", "BUG-152", "YKT-118", "BUG-153", "YKT-119"]
+        manifest["oracle"] += " 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers."
+        manifest["limitations"] = DEPLOYMENT_LIMITATIONS
+        manifest["unverifiedParentGates"] = list(UNVERIFIED_PARENT_GATES)
         manifest["deploymentCoverage"] = {
             "class": "not applicable", "method": "not applicable",
             "basis": "Every executable statement and decision outcome in the hashed shell template has an asserting test and recorded sh -x trace; no code is excluded. Unit is declarative, validated by independent exact directive map, not JaCoCo.",
