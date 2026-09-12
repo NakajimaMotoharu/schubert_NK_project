@@ -30,12 +30,14 @@ HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", 
 OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
-               "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest"}
+               "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
+               "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest"}
 
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    if len(suites) != 7 or {s.get("name") for s in suites} != {CLASS, LOG_CLASS, HANDOFF_CLASS, *OPS_CLASSES}:
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, *OPS_CLASSES}
+    if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
 
@@ -83,7 +85,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 65:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 71:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)

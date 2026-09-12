@@ -31,12 +31,15 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
      ("fixedCommandAndSuccess", "commandFailure", "timeoutAndTermination", "interruptedWait",
       "outputBoundaries", "closeFailures", "nativeEnvironmentAndRead", "nullAndRuntimeContracts")),
     ("dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest", 1,
-     ("independentGolden", "mutationAndRunBinding", "boundariesNullAndOwnership", "concurrentUse")))
+     ("independentGolden", "mutationAndRunBinding", "boundariesNullAndOwnership", "concurrentUse")),
+    ("dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest", 1,
+     ("canonicalFixtures", "sourceAndSyntaxRejection", "urlBoundaries", "versionBoundaries", "sizeNullAndRedaction", "concurrentValidation")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
     ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource"))
 ENV_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment"
+CFG_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
 SUBJECTS = tuple("dev/codex/schubert/nk/api/maintenance/" + c
                  for c in ("InspectorLaunchConfiguration", "InspectorLauncher"))
 TRACES = {"renderedShellCheck": 3, "statusMapping": 9, "malformedReceipts": 29,
@@ -62,7 +65,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                    "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                    "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
-                   "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
+                   "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -94,7 +98,8 @@ def main():
                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "batch",
+                "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -107,13 +112,13 @@ def main():
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
         for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
-                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT))):
+                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {FLOCK_SUBJECT, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -127,14 +132,14 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
-        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT)]
+        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT)]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-batch/pom.xml",
                     repo / "src/deployment/tmpfiles/schubert-nk-maintenance.conf"]
         sources += [repo / "src/deployment" / p for p in (
-            "operations/inbox-inspector.sh.template", "systemd/schubert-nk-inbox-inspector.service",
+            "operations/inbox-inspector.sh.template", "config/inbox-inspector.env.template", "systemd/schubert-nk-inbox-inspector.service",
             "systemd/optional/inbox-inspector-context-previous.conf", "systemd/optional/inbox-inspector-response-previous.conf")]
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -173,6 +178,9 @@ def main():
         manifest["related"] += ["PG-D-149"]
         manifest["oracle"] += " 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked."
         manifest["limitations"] += " Run EnvironmentFile codec neither reads/writes files nor chooses the authoritative run. Root ownership/ACL/NOFOLLOW/bounded read/atomic publication, static setting file validation, OS lifecycle and durable run anchorSSC055 remain unverified."
+        manifest["related"] += ["PG-D-151"]
+        manifest["oracle"] += " 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected."
+        manifest["limitations"] += " Static source bytes are now certified separately; bounded retained-inode IO, root metadata, atomic publication and parent-child lifecycle remain pending."
         manifest["deploymentCoverage"] = {
             "class": "not applicable", "method": "not applicable",
             "basis": "Every executable statement and decision outcome in the hashed shell template has an asserting test and recorded sh -x trace; no code is excluded. Unit is declarative, validated by independent exact directive map, not JaCoCo.",
