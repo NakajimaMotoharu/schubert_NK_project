@@ -1,5 +1,9 @@
 # NK-BAT-001 親step履歴単体テスト仕様書
 
+PT-BAT-150の独立JDBC計数（source未適用時にSS331 §8.3とSQL/資源順序から確定）: RunReferenceの前後各16call＝32。history0行はprepare/timeout/bind2/executeQuery/next/close2＝8、INSERT RETURNINGはprepare/timeout/bind9/executeQuery/next2/getObject/close2＝17。したがってbegin0行57、history1行は12列＋next1で13増えて通常/skip70、明示abandonはprepare/timeout/bind6/executeUpdate/close＝10増えて80。finish UPDATEはprepare/timeout/bind14/executeUpdate/close＝18で合計50。0件後の同値replay SELECTはprepare/timeout/bind14/executeQuery/next2/getObject/close2＝22追加で72。各loopは既登録関数内/自前SQLを含むmethod別固定mapと全発火数を照合し、実観測mapをexpectedへ流用しない。新規設計に沿ってsourceが変わる場合は再計数理由を記録する。
+
+begin0行57の固定map: connection.getAutoCommit/isReadOnly/getTransactionIsolation各2、prepareStatement4、statement.setQueryTimeout4/setObject9/setString5/setInt1/executeQuery4/close4、row.next7/getObject9/close4。history1行はrow.next+1/getObject+10/getString+2。abandon1行はprepareStatement+1/setQueryTimeout+1/setObject+3/setString+2/setLong+1/executeUpdate+1/statement.close+1。finish新規50は前後参照32にprepareStatement1/setQueryTimeout1/setObject4/setString4/setLong5/setInt1/executeUpdate1/statement.close1を加える。replay追加22はprepareStatement1/setQueryTimeout1/setObject4/setString4/setLong5/setInt1/executeQuery1/row.next2/row.getObject1/row.close1/statement.close1。故障経路は失敗した時点から本来の後続callが実行されないため、同じ成功mapとの完全一致を要求するのでなく指定位置発火・資源0・rollback後条件を照合する。
+
 PG163/SSC055、先行898cc267、OPS009/DAT009/UI251 §11・12/SS311・331 §8.3・332・341 §3/11。実装前仕様。原本/fresh子全終端/OS排他/実backup/親全工程は未完了。PG162正式06中はsource/collectorを変更しない。
 
 | Test ID | class/method | 目的・fixture/入力/操作・独立期待値 |
