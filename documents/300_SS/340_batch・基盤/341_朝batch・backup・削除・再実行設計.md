@@ -162,6 +162,18 @@ BUG193/YKT152の例外優先規則追補（修正前f030f647）: rollback/autoCo
 - 未知Runtime/NPE/Errorを正常扱いせずprimary identityを保持、既知cleanup SQLのsuppressedは固定例外。input/cause/SQL/manifest値を診断へ出さない。全API nullを境界で拒否、Connectionはcaller単独所有、異なるconnectionの並行呼出しだけを許す。
 - 017041～044/BAT210～225で独立合成manifest/SQL後条件、borrowed read/complete・全列/全JDBC位置/NULL/close/割込/commit不明/rollback/2connection・同ID再試行を検証する。new部品の全line/method/class/branch100%、全既存PT/static/traceを再実行。成功rowだけでcleanup許可せず、生成/信頼reader/最新真正bundle選択/親全体/7世代/実NK CHR/IT/STは未完了。
 
+### 6.7 root MANIFESTの保持inode読取り（SSC062/PG169）
+
+先行c2da887a。BackupManifestReaderは§6.6のroot生成済MANIFESTを、callerの原本両stepと単一の正規directoryへ束縛して読む。root CREATE_NEW/0600生成・writer close/fsync/atomic/実体検証の正当な運用が信頼前提であり、任意root作成fileを暗号学的に認証する機構ではない。専用backup user所有directory上のroot所有fileは低権限者が内容を書けないことを利用し、別真正manifest入替えをfull handle/name照合で拒否する。
+
+- Production .file.BackupManifestReader、read(String directoryName,BatchStepAttempt databaseStep,BatchStepAttempt configurationStep)→不変BackupManifest。callerはroot原本から両完全handleを供給し、backup rootの設定/ancestor/realpath/FS durability・OS排他・account UID/GIDを既定gateで確認して保持rootを借用させる。nameはASCII8桁日付-6桁時分秒-lowercase canonical UUID形の1segmentだけ、part/絶対/相対区切り/別名/NULLを拒否。最終的にmanifest.directoryNameと完全一致を要す。新たな任意path探索や最新選択は行わない。
+- 実効UID0。root/子directoryは専用backup UID/GID（1～unsigned32）0700・nlink>=2・size>=0、RW/ACLなし、子と親同device。固定MANIFEST.jsonはroot:root0600のregular/nlink1・同device・size1～4096、ACLなし・RW。mode/uid/gid/nlink/size/dev/ino/mtime/ctimeをtypedで全取得し、欠落/null/誤型/不一致は固定拒否する。NASの追加保証はcaller責務のまま。
+- 保持entryからbounded読み、前後channel.sizeと実read数・buffer進捗を照合し、全size読了後に1byte EOF(-1、position0)を別確認する。zero/短縮/過長/進捗矛盾は失敗、再試行で勝手に補完しない。前後inode全属性を照合し、同名entryを再保持、子directoryとrootから再保持した子、最後にrootを照合する。read atimeは比較に含めない。
+- canonical decodeは既存§6.4 codecを利用し、database/configuration完全handleとnameをcaller値へ照合。未来のDB SUCCESS、現存3archiveのhash/妥当性、7世代、子終端、親完了は推定しない。次段は§6.5でこの取得値と実3file/canonical bytesを再照合し、§6.6でDB pairを結合する。読取り後の第三者変更を永続防止する保証ではなく、親排他/actor停止/使用時の再検証を維持する。
+- 全操作はinstance内直列化、所有child/entry/channelだけをcloseしてから不変値を返す。root close/作成/chmod/chown/書込/unlink/fsyncはしない。単調30分/割込をIO境界と返却直前まで検査し、clock内に届く割込も取りこぼさずflagを保持する。blocking OS readの即時強制中断を保証しない。
+- nullは契約違反、NPEを正常化しない。既知IO/不正metadata/codec不正は固定StorageIoException、raw path/byte/cause/suppressedを返さない。codecのIllegalArgumentExceptionだけを狭い呼出境界で集約し、未知provider Runtime/Errorのidentityを保持する。channel closeの既知IOはTWRへ渡す前に固定例外化、bufferを全終了で消去する。未知primary/closeの組合せでも成功へ変換しない。
+- 017046/047/BAT226～241で全method/line/class/branch100%、実Linux保持inodeと非特権synthetic UID境界、独立golden、name/full handle/null、全metadata/全IO出現点/close複合/読取り進捗/変更/中断/並行を検証する。Production expected生成は禁止。shared fixtureを使ってもgolden byte/名前/UID/sizeを固定独立値とし、readerが返した実値のsanitized traceをcollector独立期待に照合する。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate
