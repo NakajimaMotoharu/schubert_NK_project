@@ -28,6 +28,17 @@ HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", 
                    "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
                    "stateChangesAndInterrupts", "concurrentGapCompetition")
 DURABLE_CLASS = "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest"
+LIFECYCLE_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest"
+LIFECYCLE_METHODS = ("newRunPublication", "resumeActive", "resumeOrphanAnchor", "resumePendingBegin",
+                     "resumeCompletedHistory", "completedActiveRecovery", "completeSuccessAndWarning",
+                     "completionRetryAndMismatch", "noImplicitNewIdentity", "malformedGraphReferences",
+                     "ambiguousPendingStates", "inventoryUnknownAndPartial", "namespacePermissions",
+                     "namespaceReplacement", "recordReplacementDuringScan", "listingAndIoFailures",
+                     "rootAcquisitionAndCloseFailures", "startCrashBoundaries", "resumeCrashBoundaries",
+                     "completionCrashBoundaries", "nullAndClosedContracts", "interruptionAndRuntime",
+                     "concurrentScopeOwnership", "fixedFactoryAndReopen")
+REVIEWED_STATIC_DIAGNOSTICS = (
+    {"method": "MaintenanceRunFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /var", "owner": "NK-BAT-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-BAT-081", "coverageExcluded": False},)
 DURABLE_METHODS = ("literalReads", "newPublication", "sameRecordReuse", "expectedRetirement",
                    "nameContentAndNull", "metadataAndFilesystems", "boundedChannels",
                    "namespaceAndReplacement", "allReadFailures", "allWriteRetireFailures",
@@ -54,11 +65,22 @@ DURABLE_TRACES = {
     "PT-BAT-047-active.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
     "PT-BAT-047-begin.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
     "PT-BAT-047-done-10.txt": RECORD_TRACES["PT-BAT-038-completion-10.txt"]}
+LIFECYCLE_NAMES = (b"attempts/fedcba98-7654-3210-8fed-cba987654321.begin\n"
+                   b"attempts/fedcba98-7654-3210-8fed-cba987654321.done\n"
+                   b"runs/12345678-9abc-def0-8123-456789abcdef.run\n")
+LIFECYCLE_TRACES = {
+    "PT-BAT-058-anchor.txt": RECORD_TRACES["PT-BAT-038-anchor.txt"],
+    "PT-BAT-058-begin.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
+    "PT-BAT-058-active.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
+    "PT-BAT-064-done-0.txt": RECORD_TRACES["PT-BAT-038-completion-0.txt"],
+    "PT-BAT-064-done-10.txt": RECORD_TRACES["PT-BAT-038-completion-10.txt"],
+    "PT-BAT-064-names-0.txt": LIFECYCLE_NAMES,
+    "PT-BAT-064-names-10.txt": LIFECYCLE_NAMES}
 
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, *OPS_CLASSES}
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -84,6 +106,10 @@ def validate_durable_suite(suite):
     return validate_group(suite, DURABLE_CLASS, DURABLE_METHODS, 46)
 
 
+def validate_lifecycle_suite(suite):
+    return validate_group(suite, LIFECYCLE_CLASS, LIFECYCLE_METHODS, 58)
+
+
 def validate_record_traces(traces):
     if traces != RECORD_TRACES:
         raise ValueError("missing, extra or invalid independently checked run record trace")
@@ -92,6 +118,11 @@ def validate_record_traces(traces):
 def validate_durable_traces(traces):
     if traces != DURABLE_TRACES:
         raise ValueError("missing, extra or invalid independently checked durable record trace")
+
+
+def validate_lifecycle_traces(traces):
+    if traces != LIFECYCLE_TRACES:
+        raise ValueError("missing, extra or invalid independently checked lifecycle trace")
 
 
 def validate_group(suite, cls, expected, start):
@@ -109,7 +140,7 @@ def validate_group(suite, cls, expected, start):
 def validate_reports(suites):
     validators = {CLASS: validate_suite, LOG_CLASS: validate_log_suite,
                   HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite,
-                  DURABLE_CLASS: validate_durable_suite}
+                  DURABLE_CLASS: validate_durable_suite, LIFECYCLE_CLASS: validate_lifecycle_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -135,7 +166,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 127:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 151:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -152,6 +183,15 @@ def main():
     durable_traces = {str(p.relative_to(durable_root)): p.read_bytes()
                       for p in durable_root.rglob("*") if p.is_file()}
     validate_durable_traces(durable_traces)
+    lifecycle_root = target / "run-lifecycle-traces"
+    lifecycle_traces = {str(p.relative_to(lifecycle_root)): p.read_bytes()
+                        for p in lifecycle_root.rglob("*") if p.is_file()}
+    validate_lifecycle_traces(lifecycle_traces)
+    for folder, values in (("input/run-lifecycle", LIFECYCLE_TRACES), ("output/run-lifecycle", lifecycle_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
     for folder, values in (("input/durable-records", DURABLE_TRACES), ("output/durable-records", durable_traces)):
         destination = evidence / folder
         destination.mkdir(parents=True, exist_ok=True)
@@ -198,7 +238,10 @@ def main():
     manifest["recordOracle"] = "007/PT-BAT-038..045: hand-written ASCII anchor72/activation109/done140 or141 bytes; nil/max UUID, UTC0001/9999 and microseconds, Asia/Tokyo civil date boundaries,0/10 only. Each fixed magic/delimiter byte mutated to all other byte values; aliases, leap normalization, scalar errors, malformed/null and wrong model reject. Valid different identity remains different data, not authentication. Completion invariants, caller-owned arrays, redacted values and64 independent activations use literal field/byte oracles."
     manifest["related"] += ["PG-D-157"]
     manifest["durableRecordOracle"] = "009/PT-BAT-046..057: independent literal records and real private inode/no-replace/fsync with synthetic root admission. Borrowed-root canonical name-to-content binding; bounded read, same-content reuse only, expected-inode retirement, every independently counted native/IO occurrence fails closed and releases owned resources; namespace replacement, metadata/ACL/filesystem, null, invalid IO, interruption and concurrency. No partial-file overwrite or automatic cleanup."
-    manifest["limitations"] += " Run record codecs and borrowed-root durable IO do not prove fixed-namespace admission, active/completion graph or crash recovery, whole-parent lifecycle, reference query or400-day retirement. No actual reboot or root deployment."
+    manifest["related"] += ["PG-D-158", "BUG-159", "BUG-160", "BUG-161", "BUG-162", "YKT-124", "YKT-125", "YKT-126"]
+    manifest["lifecycleOracle"] = "011/PT-BAT-058..081: fixed six-root namespace and scope-bound session, complete unfiltered canonical inventory, original-inode snapshots through whole-graph scan, anchor/begin/done/active consistency and unique pending run. Literal start/resume/complete and crash states, no new cutoff on resume, immutable prior completion, same-byte recovery force/directory sync and absent retirement re-sync, independently counted native/IO fault locations, null/closed/interrupt/runtime and concurrency. Root admission is synthetic over actual local inodes; parent OS lock and legacy DB uniqueness are caller obligations."
+    manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
+    manifest["limitations"] += " The file scope establishes fixed-namespace and record-lifecycle consistency under caller OS-lock authority, not actual OS-lock continuity, parent/child lifecycle, legacy DB identity checks, reference queries or400-day retirement. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

@@ -149,6 +149,9 @@ final class DurableRecordFiles {
           verify(name, expected, directory, copy);
           require(expected.equals(root.atExistingEntryHandle(name, p -> file(p, 1, directory))));
           root.unlinkEntry(name);
+        } else {
+          // BUG-159: absence may follow unlink success plus a failed directory durability barrier.
+          root.sync();
         }
         finish(directory);
       } catch (IOException failure) {

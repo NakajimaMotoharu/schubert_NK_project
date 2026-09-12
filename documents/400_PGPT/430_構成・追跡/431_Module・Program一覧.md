@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D-158（正式待ち）: NK-BAT-001/file.MaintenanceRunFiles/create・execute・scope-bound Session/start・resume・complete・全内部scan/record/namespace/所有guardとrepository.MaintenanceRunState、共有EnvironmentInodePolicy.durableAncestorをOPS-009/UI251/SS311・341・343 §6.15、017/011・012/PT058～081へ追跡。PG157 remove不存在の再syncはBUG159/BAT049。関連209 PT探索/4coverage100%/静的解析は成功、正式01へ加算しない。R001はDB legacy/参照・GC・親結線が残り未完了。
+
 PG-D-157（正式20260913-01認定）: NK-BAT-001/file.DurableRecordFilesと共有EnvironmentInodePolicy.durableを追加。OPS-009/UI251/SS311・343 §6.14、009/PT046～057/010へ全methodを追跡。借用rootでの永続IO、独立native/IO全位置・実差替え/競合/保全・4実file byteを全1181件/35scope/20負canaryで確認。過去正式07へ遡及加算しない。次PG158の固定namespace/state graph24件は仕様のみ、親/GCも残る。
 
 PG-D-156（正式07認定）: NK-BAT-001にrepository.MaintenanceActivation/MaintenanceCompletion/Outcome、file.MaintenanceRecordsを追加。OPS-009/UI251/SS311・331 §8.2・341 §3・343 §6.13、007のProduction method対応表とPT038～045/008/evidenceへ追跡。全1169件/4coverage/static・35scope/19負canary成功、正式06までの認定値へ遡って混入しない。file store/親/GCは未実装。

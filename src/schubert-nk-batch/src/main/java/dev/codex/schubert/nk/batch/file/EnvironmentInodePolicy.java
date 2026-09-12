@@ -49,6 +49,13 @@ final class EnvironmentInodePolicy {
     return result;
   }
 
+  /** Shared durable ancestors retain 0755; NK-BAT-001/SS343 6.15/PT-BAT-070. */
+  Snapshot durableAncestor(Path held) throws IOException {
+    Snapshot result = inspect(held, false, true, 040755, 0, 0, 0);
+    require(!result.filesystem().equals("tmpfs") && !result.readonly());
+    return result;
+  }
+
   private Snapshot inspect(
       Path held, boolean runtime, boolean directory, int mode, long group, int minimum, int maximum)
       throws IOException {

@@ -34,3 +34,23 @@ PG-D-158/SSC055先行36b5f85b、OPS-009/UI251/SS311/341/343 §6.15。Maintenance
 全line/method/class/branch100%、NullAway/SpotBugs/format、全reactor・collector scope/負canaryを要求。未実行/failed/flaky/skippedは非合格。各操作の全native/IO occurrenceは実装後に独立回数表を確定し、全位置へ故障注入する。spec↔method↔Test ID対応、literal入力/実output、実行日時/OS/JDK/command/branch/commit/exit/coverage/BUG/hashは012とmanifestに保存する。actualをcollectorで再生成しない。
 
 SSどおりOS flock/親終端/DB既存ID照合・backup/step・400日GC/DB参照は別の未完了実装であり、IT/STへ移して完了にしない。実root/systemd/rebootは後続Linux実環境確認。
+
+## 実装後に確定した独立IO・境界表
+
+探索209件（Storage58＋Batch151）を3回実行。初回の5 branch不足はBUG162/YKT126へ先行起票、2・3回目は全4指標100%/静的解析成功。正式全reactorとは区別する。
+
+fixtureのabsolute var pathの名前数をdとする。下表は固定6rootの取得・fresh reopen回数とread/write順を手で数えた期待値であり、productionの計測値をexpectedに転記しない。全operation観測値との一致をassertしてから、root open/closeはBAT074、残り全IO位置はBAT075～077で一箇所ずつ失敗させる。
+
+| 操作 | attrs/ACL/filesystem/readonly各 | 6root取得回数r | openEntry e | reader n | writer w | create/publish/write各 | sync | unlink | namesNext/HasNext |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| new | 171 | 13 | 42 | 9 | 3 | 3 | 3 | 0 | 7/13 |
+| active resume | 201 | 13 | 60 | 12 | 3 | 0 | 3 | 0 | 10/16 |
+| active complete | 239 | 16 | 72 | 15 | 4 | 1 | 5 | 1 | 10/16 |
+
+openDirectory=r×(d+5)、close=r×(d+6)+e、read/readSize各2n、readerClose=n、writerClose/force各w、writeSize=2w、namesOpen/Close/Iterator各6。失敗結果は固定UNAVAILABLE（cause/suppressedなし）、全owned FD/reader/writer/listing残0、残存anchorは元literalのまま。null・未知runtime・割込は正常扱いしない。
+
+最終guardは前段を通す独立fixtureを持つ。completed対象run＋他runのorphan（activeなし/完了activeあり）、6root正常でfileだけdevice不一致、operation終了直後/全scope close直後の2箇所の割込flag、first anchor差替えのscan終端検出、全record読取後の6root時刻変化、mutation中に別の正規完了履歴を追加した場合の全graph不一致を個別assertする。Session操作中にcallbackが返っても終端はその操作を待ち、close後は同Sessionを再利用できない。16並行startは新規1件のみ。
+
+BAT058の実anchor/begin/active、BAT064の実done0/done10と実在する相対file名集合2件、計7fileをtarget/run-lifecycle-tracesから採取。020は独立ASCII literalとexact filename集合を照合しinput/run-lifecycle・output/run-lifecycleへ保存する。完了後の集合はattemptsの同activation.begin/.doneとrunsの同run.runだけ、activeはない。019は全7fileそれぞれの欠落/NUL追加/未知fileを拒否する負canary。実outputを再encodeしない。
+
+MaintenanceRunFiles.createの固定/varだけ、DMI_HARDCODED_ABSOLUTE_FILENAMEをEXACTでreview（owner NK-BAT-001 PG、再reviewはPG gate/OS・path・SS変更、BAT081）。coverage/null/security除外はない。既存OPSの2 factoryと合計3件をmanifestへ個別記録する。name↔ID/canonical検査はPG157共通validator、全graphのanchor↔begin↔done一致はPG158で重複なく担保する。

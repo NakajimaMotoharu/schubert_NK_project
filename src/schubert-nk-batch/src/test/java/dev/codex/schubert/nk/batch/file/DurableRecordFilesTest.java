@@ -128,6 +128,22 @@ final class DurableRecordFilesTest {
   void expectedRetirement() throws Exception {
     try (var f = fixture()) {
       f.seed();
+      f.fail = "sync";
+      failure(() -> f.records.remove(NAME, bytes(GOLDEN)));
+      assertFalse(Files.exists(f.target));
+      f.reset();
+      f.fail = "sync";
+      failure(() -> f.records.remove(NAME, bytes(GOLDEN)));
+      assertFalse(Files.exists(f.target));
+      assertEquals(1, f.count("sync"));
+      assertEquals(0, f.count("unlink"));
+      f.reset();
+      f.records.remove(NAME, bytes(GOLDEN));
+      assertEquals(1, f.count("sync"));
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.seed();
       Files.writeString(f.directory.resolve("unrelated"), "preserve");
       failure(() -> f.records.remove(NAME, bytes(GOLDEN.replace("123456Z", "123457Z"))));
       assertTrue(Files.exists(f.target));
@@ -139,6 +155,7 @@ final class DurableRecordFilesTest {
       f.reset();
       f.records.remove(NAME, bytes(GOLDEN));
       assertEquals(0, f.count("unlink"));
+      assertEquals(1, f.count("sync"), "absence after a failed unlink sync must be sealed");
       assertEquals("preserve", Files.readString(f.directory.resolve("unrelated")));
       f.released();
     }

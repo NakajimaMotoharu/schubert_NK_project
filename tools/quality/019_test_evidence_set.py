@@ -33,6 +33,57 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     @staticmethod
+    def lifecycle_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest"
+        names = ("newRunPublication", "resumeActive", "resumeOrphanAnchor", "resumePendingBegin",
+                 "resumeCompletedHistory", "completedActiveRecovery", "completeSuccessAndWarning",
+                 "completionRetryAndMismatch", "noImplicitNewIdentity", "malformedGraphReferences",
+                 "ambiguousPendingStates", "inventoryUnknownAndPartial", "namespacePermissions",
+                 "namespaceReplacement", "recordReplacementDuringScan", "listingAndIoFailures",
+                 "rootAcquisitionAndCloseFailures", "startCrashBoundaries", "resumeCrashBoundaries",
+                 "completionCrashBoundaries", "nullAndClosedContracts", "interruptionAndRuntime",
+                 "concurrentScopeOwnership", "fixedFactoryAndReopen")
+        suite = ET.Element("testsuite", name=cls, tests="24", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 58)}
+
+    def test_run_lifecycle_inventory_and_nonpassing_cases(self):
+        suite, expected = self.lifecycle_fixture()
+        self.assertEqual(suite.get("name"), batch.LIFECYCLE_CLASS)
+        self.assertEqual(tuple(c.get("name") for c in suite), batch.LIFECYCLE_METHODS)
+        self.assertEqual(expected, batch.validate_lifecycle_suite(suite))
+        run = "12345678-9abc-def0-8123-456789abcdef"
+        activation = "fedcba98-7654-3210-8fed-cba987654321"
+        prefix = run + "\n2026-09-12T04:05:06.123456Z\n"
+        names = ("attempts/" + activation + ".begin\nattempts/" + activation + ".done\nruns/" + run + ".run\n").encode("ascii")
+        traces = {"PT-BAT-058-anchor.txt": ("NKRUN1\n" + prefix).encode("ascii"),
+                  "PT-BAT-058-begin.txt": ("NKACT1\n" + prefix + activation + "\n").encode("ascii"),
+                  "PT-BAT-058-active.txt": ("NKACT1\n" + prefix + activation + "\n").encode("ascii"),
+                  "PT-BAT-064-done-0.txt": ("NKDONE1\n" + prefix + activation + "\n2026-09-12T05:06:07.234567Z\n0\n").encode("ascii"),
+                  "PT-BAT-064-done-10.txt": ("NKDONE1\n" + prefix + activation + "\n2026-09-12T05:06:07.234567Z\n10\n").encode("ascii"),
+                  "PT-BAT-064-names-0.txt": names, "PT-BAT-064-names-10.txt": names}
+        self.assertEqual(traces, batch.LIFECYCLE_TRACES)
+        self.assertIsNone(batch.validate_lifecycle_traces(traces))
+        for name in traces:
+            wrong = dict(traces); del wrong[name]
+            with self.assertRaises(ValueError): batch.validate_lifecycle_traces(wrong)
+            wrong = dict(traces); wrong[name] = traces[name] + b"\x00"
+            with self.assertRaises(ValueError): batch.validate_lifecycle_traces(wrong)
+        with self.assertRaises(ValueError): batch.validate_lifecycle_traces(dict(traces, unknown=b""))
+        for position in range(len(suite)):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_lifecycle_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): batch.validate_lifecycle_suite(wrong)
+        for key, value in (("tests", "23"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_lifecycle_suite(wrong)
+        for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+            with self.assertRaises(ValueError): batch.validate_lifecycle_suite(wrong)
+
+    @staticmethod
     def durable_fixture():
         cls = "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest"
         names = ("literalReads", "newPublication", "sameRecordReuse", "expectedRetirement",
@@ -151,6 +202,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest",
                  "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest",
+                 "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -161,7 +213,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:5], batch.select_program_suites(suites))
+        self.assertEqual(suites[:6], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -193,6 +245,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(115, 45))
         self.assertEqual("Batch module127 PT = NK-BAT-00157 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(127, 57))
+        self.assertEqual("Batch module151 PT = NK-BAT-00181 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(151, 81))
         self.assertEqual(("OS lock continuity and child termination",
                           "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
                           "actual root systemd credential deployment", "actual NK characterization and IT/ST"),
@@ -203,8 +257,10 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertIn(gate_name, launch.DEPLOYMENT_LIMITATIONS)
         self.assertEqual((
             {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False},
-            {"method": "InspectorEnvironmentFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /etc and /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-NS-008", "coverageExcluded": False}),
+            {"method": "InspectorEnvironmentFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /etc and /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-NS-008", "coverageExcluded": False},
+            {"method": "MaintenanceRunFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /var", "owner": "NK-BAT-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-BAT-081", "coverageExcluded": False}),
             launch.REVIEWED_STATIC_DIAGNOSTICS)
+        self.assertEqual((launch.REVIEWED_STATIC_DIAGNOSTICS[2],), batch.REVIEWED_STATIC_DIAGNOSTICS)
 
     def test_backup_rerun_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
@@ -514,9 +570,11 @@ class EvidenceSetTest(unittest.TestCase):
         handoff, expected_handoff = self.handoff_fixture()
         records, expected_records = self.record_fixture()
         durable, expected_durable = self.durable_fixture()
-        reports = [suite, repository, handoff, records, durable]
+        lifecycle, expected_lifecycle = self.lifecycle_fixture()
+        reports = [suite, repository, handoff, records, durable, lifecycle]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(57, len(accepted))
+        self.assertEqual(81, len(accepted))
+        self.assertEqual(expected_lifecycle, {k: v for k, v in accepted.items() if k in expected_lifecycle})
         self.assertEqual(expected_durable, {k: v for k, v in accepted.items() if k in expected_durable})
         self.assertEqual(expected_records, {k: v for k, v in accepted.items() if k in expected_records})
         self.assertEqual(expected_handoff, {k: v for k, v in accepted.items() if k in expected_handoff})
