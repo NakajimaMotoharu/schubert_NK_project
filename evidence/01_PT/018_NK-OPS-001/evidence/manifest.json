@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260913-10",
-  "targetCommit": "b102cc9a08a39f7b966fce6750eca54b960c4586",
+  "runId": "PT-WEB-20260913-11",
+  "targetCommit": "af2526dda0e64ca3d0a427a66fd9335afff836ae",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-13T07:28:13+09:00",
-  "completedAt": "2026-09-13T07:43:57+09:00",
+  "startedAt": "2026-09-13T08:08:31+09:00",
+  "completedAt": "2026-09-13T08:24:20+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -15,7 +15,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "83fd7e00a058acacf69d978b44adc2abd490541533f1eae2449ca93b0b264c4d",
+  "rawLogSha256": "66380c702230ad344e34cc9d4b518716a57f2bfd708fa077110d5246378fbaed",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -113,7 +113,23 @@
     "PT-OPS-NS-005": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest#allOpenCloseFailures",
     "PT-OPS-NS-006": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest#lateFailureAndInterruption",
     "PT-OPS-NS-007": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest#concurrentScopes",
-    "PT-OPS-NS-008": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest#constructorAndFactory"
+    "PT-OPS-NS-008": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest#constructorAndFactory",
+    "PT-OPS-UNIT-001": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#strictGolden",
+    "PT-OPS-UNIT-002": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#propertyInventory",
+    "PT-OPS-UNIT-003": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#byteBoundaries",
+    "PT-OPS-UNIT-004": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#scalarBounds",
+    "PT-OPS-UNIT-005": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#quiescentStates",
+    "PT-OPS-UNIT-006": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#freshReceipt",
+    "PT-OPS-UNIT-007": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#immutabilityAndNull",
+    "PT-OPS-UNIT-008": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest#concurrentSnapshots",
+    "PT-OPS-UNIT-009": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#fixedCommands",
+    "PT-OPS-UNIT-010": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#stableTerminalAndReceipt",
+    "PT-OPS-UNIT-011": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#unstableAndNonempty",
+    "PT-OPS-UNIT-012": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#commandFailures",
+    "PT-OPS-UNIT-013": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#boundedOutputAndTimeout",
+    "PT-OPS-UNIT-014": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#interruptions",
+    "PT-OPS-UNIT-015": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#allResourceFailures",
+    "PT-OPS-UNIT-016": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest#nativeEnvironmentAndConcurrency"
   },
   "failed": 0,
   "errors": 0,
@@ -982,7 +998,139 @@
         "covered": 1
       }
     },
-    "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$GroupLookup": {}
+    "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$GroupLookup": {},
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 482
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 72
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 72
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 47
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 30
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 14
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 200
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 40
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader": {},
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start": {},
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 156
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 36
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
   },
   "staticAnalysis": {
     "tool": "SpotBugs 4.10.4.0",
@@ -990,7 +1138,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "847dc9b79153fe2ee9d2635b54a4cd5b11952a82b673d6efb1b175c536f4fb41",
+  "fullReactorManifestSha256": "56f21484dbbecf95a5ad0a05449c54183b592ae31ff25632cefbdd9c5c0857e0",
   "related": [
     "QA-046",
     "UIC-006",
@@ -1039,11 +1187,21 @@
     "BUG-155",
     "YKT-120",
     "BUG-156",
-    "YKT-121"
+    "YKT-121",
+    "PG-D-167",
+    "SSC-060",
+    "BUG-187",
+    "BUG-188",
+    "BUG-189",
+    "BUG-190",
+    "YKT-147",
+    "YKT-148",
+    "YKT-149",
+    "YKT-150"
   ],
   "fixture": "Public environment/path/UUID/time/version/receipt vectors only. Fresh real JVM negative tests. OPS uses fixed fake Java and local static unit syntax verification; no host manager/service/credential changes. FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation.",
-  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected. BUG157/STOP016: null Process and all three getter runtime/null failures, already-acquired stdio closed exactly once before escape; no wait/read after invalid acquisition, alive lookup child TERM only. GID005 independently regresses the other production Process owner. 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked. 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected. 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state. 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS. 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers. BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure. 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values.",
-  "limitations": "Scope covers private launcher, wrapper/unit syntax, low-level flock, borrowed-root admission/read/publish, read-only application stop observations, canonical environment bytes and fixed namespace/NSS callback lifetime. Java coverage is not a shell percentage; shell decisions use recorded traces. Root UID/GID/tmpfs admission is synthetic over isolated real inodes; no privileged deployed service acceptance. Flock executes amd64 libc; aarch64 is ABI selection only and CLOEXEC is checked at the call boundary, not by inherited-FD inspection. Systemctl timeout tests use a process fault port, not a stalled manager or TERM-ignoring descendant. Borrowed-root publisher requires caller-held OS lock, stable namespace and terminal child; its success proves none of those. Failed unpublished parts remain for controlled operational reconciliation. Fixed factory admission uses synthetic root metadata in PT; actual getent on this unprovisioned host verifies missing-group rejection, not a deployed positive lookup. Remaining gates: OS lock continuity and child termination; durable authoritative run and parent lifecycle; real backup artifact and full cleanup callers; actual root systemd credential deployment; actual NK characterization and IT/ST.",
+  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected. BUG157/STOP016: null Process and all three getter runtime/null failures, already-acquired stdio closed exactly once before escape; no wait/read after invalid acquisition, alive lookup child TERM only. GID005 independently regresses the other production Process owner. 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked. 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected. 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state. 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS. 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers. BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure. 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values. 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof.",
+  "limitations": "Scope covers private launcher, wrapper/unit syntax, low-level flock, borrowed-root admission/read/publish, read-only application stop observations, canonical environment bytes and fixed namespace/NSS callback lifetime. Java coverage is not a shell percentage; shell decisions use recorded traces. Root UID/GID/tmpfs admission is synthetic over isolated real inodes; no privileged deployed service acceptance. Flock executes amd64 libc; aarch64 is ABI selection only and CLOEXEC is checked at the call boundary, not by inherited-FD inspection. Systemctl timeout tests use a process fault port, not a stalled manager or TERM-ignoring descendant. Borrowed-root publisher requires caller-held OS lock, stable namespace and terminal child; its success proves none of those. Failed unpublished parts remain for controlled operational reconciliation. Fixed factory admission uses synthetic root metadata in PT; actual getent on this unprovisioned host verifies missing-group rejection, not a deployed positive lookup. Remaining gates: OS lock continuity and child termination; durable authoritative run and parent lifecycle; real backup artifact and full cleanup callers; actual root systemd credential deployment; actual NK characterization and IT/ST. Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination.",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java",
@@ -1102,6 +1260,14 @@
       "sha256": "71ffae824f27612112e9dd9fc0d430464cfd2c116bf3b3de5931f4edff9f4381"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java",
+      "sha256": "96b8f282f582aaf5c3d5336b2f5f70fc600a05752dd8bffaf6de1f753cc68fbe"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java",
+      "sha256": "260d822bffe35b2d96e0511f7865676d7659e07b29047c1239a987ab6ea9bdb7"
+    },
+    {
       "path": "src/schubert-nk-api/pom.xml",
       "sha256": "357122241350ef3c16dbd928480b0baf3374a042c2e8104930b7fbe056038c11"
     },
@@ -1158,6 +1324,14 @@
       "sha256": "57e1c9d555b6468c518e1a3c2ece13de6e37f3eab394e51e6aa2cec1e6216690"
     },
     {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
+      "sha256": "de77527e9b37f8a569a27e5136149847b5dea854f70cc353bf54152ca8b0bdd6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "sha256": "31e4e680f2e463713e746647088acd40e09877f366477860245ba2fd7ad926a7"
+    },
+    {
       "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
       "sha256": "680f7718fbcc518858b249fe4cd40241935d8c29156417f04839d02d21a995cc"
     },
@@ -1208,6 +1382,14 @@
     {
       "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
       "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/resources/inspector/unit-golden.txt",
+      "sha256": "2170fc2e71a4ba50519bc2f123d0bf75fcc46adab033645b7b68b5c513c345f6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeFixture.java",
+      "sha256": "1d3d794f13484956457ffb0f8cf28356368d9b76001fa3421e57498a7be0d99c"
     }
   ],
   "staticAnalysisByModule": {
@@ -1292,6 +1474,14 @@
   },
   "files": [
     {
+      "path": "input/unit-golden.txt",
+      "sha256": "2170fc2e71a4ba50519bc2f123d0bf75fcc46adab033645b7b68b5c513c345f6"
+    },
+    {
+      "path": "logs/025_NK-OPS-001_Inspector終端観測横展開.md",
+      "sha256": "12d9b505248c50d31241085f0e5317b502490411c7543bb25a3b6e98b3b40dd5"
+    },
+    {
       "path": "logs/BUG-143-145-YKT-113.md",
       "sha256": "f7ccd4bdae8b9631f6f782e5b89cfd5438720bedf5eebabe0cc9b609abc61f40"
     },
@@ -1345,207 +1535,219 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "5078b98766730c3cf646a05e2ddafdf91514be7c6e8331566e099cb25687feb8"
+      "sha256": "f9a3522a8d6110170f83a934c2861b71926c67a43b07a1da74ccfa458bbf51a3"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "6e42ff33fe0b4d29b0441aeebf3468a9a2db8debf5016d7279b9829c4c83440f"
+      "sha256": "88e1f9ab126e63b71e1d6836dffd6401e615348e1e6be14828f840c4ab21b65d"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "d58964573415221578130c2130bcb55abe6e28f591cb7c4e198603d0ae4a83aa"
+      "sha256": "232465349246440f4b2bf4e325693a6bb4ddd611562b7c73783934b94c7515ca"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "0002173e4f62fc99c4a5276fadc0447fb9787c00e15b7b74b5459f61db1d8b23"
+      "sha256": "9e96d97778649c0195b3c4ae8d89e09ce9777a9d4ae6a258987d0af124904378"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "4ceb691a7959ea2d57188bd548d1445e43f71ac32012bddc4773647dddedde7a"
+      "sha256": "943e51aab610c86375aedb705a117ab41aa5a873b51ce2a2662c84a5831db878"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "24642d107837f0af059f4d58f59c406b937e44c24709f93428f779a2146a2adf"
+      "sha256": "77663db5075aad0db58db6c662ce19e357433d57ba243f23f6fad1ff39591e51"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "2534af38df79380bc8b674c7cc8b375b1a1eb575241c1b64ac2d666b7861c7a2"
+      "sha256": "74faddb73cc757cc653ff707585b27c5370aa515b7e635d76f88323c42df3ee0"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "35872fb416f140b991b2d27eaf0c77bf118ff5ee5d18b4bf0529a6f1e7eaf725"
+      "sha256": "dcb1136610d2e890222c12017e520fd41fa7791d5076985752311daed326d149"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "f45c18f924257b78fb2e073bacf339c9127ee97ba7eedd70d8bdc6a1580d58f6"
+      "sha256": "ed470a48b6f910be66cf130709731d344cf71bbfc46b0f9f96053dd2bbe75703"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "d1fd40d7c11d44055c7ce7669834229187e2da3cb64a94c0fd6b49535323702d"
+      "sha256": "6748f97e2fe8e02cd061d07ff026245ee81b656e455abbb0ffa4fdb36e5eb997"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "7312cd0dc1d81e198212f70a4debe2552f7ae7f6f47d714857e65270c7b97cd8"
+      "sha256": "9a67c935742f295082967dd0fc2e8023723c7ec97c2971abcb5aaf5f82031dfe"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "ade88638ec450a13d0f98d1bd278a72446e279ecf2fc370cfe84fc6255182e03"
+      "sha256": "bcfd759e302e894830b1181d6c4e5d239bdb4b0637148555a08f5e7052fccaef"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "b89d194b0afbbbafd0e27c270c0d7ba619385af6cfeed1e4c862c1cfc71442a0"
+      "sha256": "8dd73476428b94efe5d7c2681f36047ecdf67d0868188c5d22cb5a7a81fa3426"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "ec7ee9238164a39ff72de08c56710e1aea356da2a765df1bb8d8bc1b2767f8f7"
+      "sha256": "b7f4cd9e296fa1a70efa403bc4e61d3bf679ac62d743cc55480c1f9dffc71f2f"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "42a6864507f0ee8215c1f17b8f0d7057e65dcded5302c7854f1bfc69b3673f98"
+      "sha256": "dde6ae7047d957ece643cf2fa44ae8d41735a649b7cd4f804a9875eadfeb2d4d"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "5d390ff3d0dd52e52a334ad2a31b8a032747497177aed1824919c6743940c52b"
+      "sha256": "51639abf9852ffe39bc27cfac342551feb8912eef507a26d583a9753e267401c"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "f6c3f59918ffbb4165f65576d134d42141539d59eec14d0993d40fd3db31f6e3"
+      "sha256": "d672695908b95af05ecbd986a0d4cd10d93f0e9d5fb4fa1e6fddc49dc1c65b0e"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "ed43fff37deb5d3a29c5471e94de0cef1480dbdc5e96d6f1fef6a848852f4dd8"
+      "sha256": "6bbd2c8c5ef97c39d942487376154cc3ebf7371972c7b3c8e97d038cdfbb8860"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "95f65f4a2361e1f56c06663d1f5a951401d51502a0b25f501e7a67c2c1e1b5e3"
+      "sha256": "b35e296486dd16024df18e2b2118ad33087bec0f12dc5afdcb51787fe28d4fc1"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "5a20254a463898dd09829a5e5dd5e1ae74902189308684d3dd6cf50650fcf048"
+      "sha256": "06708f57132cd5714a27a7e659bd83597bca9888c4de6cab247e0b290ad9432d"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "3c1b6f483968cd25b6822c66c529c467f99903e121acb20cb83d4e3556297871"
+      "sha256": "0ec1c6a0fc81b659a28f10a7ca77f26ab161bd3621c8f138d2d32d86da804ee0"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "a935ed67eb375028ab982d1c835a8fd79b6b4479d36f3a446a4e826dcd607e1a"
+      "sha256": "88779042f9d0b87ee55f596140f7233cbce178fc042da7c210b1bf9526380ea9"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "80c44eeb17b67e35a3d1aa3461a3c3b31e79528f370f6d5ab9c6b1d32d480cbc"
+      "sha256": "7d48aa1579bac32e66a722121ef39bcc2474d21a2dea81ab9b5a14d514ec195f"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "f8e6207d3ae6aa6deb66091fcc5e7a6d3f4704984bde175c86f5db31f2de3454"
+      "sha256": "f99ccefd4a47094acf81371768b2cc67693462ba0d6cf7101e5381c8a62fa72f"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "87edca886253a7c68cd52609a9630fbd2328ca81828e348874badb21d365a6a0"
+      "sha256": "89be9214a006cb31a1cdf0b9cdf17448ebd7780808ed34099324a643ca218005"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "f0c1d9541b57f5f2a0a23c0640dd03e2f4a14312112603f284f705763ab2185b"
+      "sha256": "040929bd8271e6807c1d27919fa402fd1dda7516b6c48ef67f778f2ae0de9a8a"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "579281aea987a67adf8733bcbec2f025d526995f5543da8a11c391fe9e93ead6"
+      "sha256": "1f37c9e411aa0765c6edce798fcf8fcb5588c65869c00d7e435fa89f1adab13b"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "88301b493cd0cb1605e5dac8f67917ffdb146d2694654e3e0046b5e1e296e548"
+      "sha256": "89cbae6196f427581c6d9208af874a035eaaa7439341bef554488198e165bb09"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "3a21148aaba353398757827a8fc08986916ab34cfe18357f8e8b3c3d4951d560"
+      "sha256": "cc97b31d379f099b638a24421847cc63dc32ec5a3be4d6b757b34d2b0e44d4dc"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "aab55eef80a40631b5d187256d22398231df68fbb1656b5567ff763844ed1871"
+      "sha256": "8b8824c4b6e2c4d5b7122152a4c484afe31d25ccdf300ccc758b2dd6b49edef2"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "dcdc3cb9df7dfbde0842f4397a4c5ba1df34c4b23bf91d5030d91981b637aa62"
+      "sha256": "02a8a22e5f98fa280b2946ebe1f24d17ddade59ae505beb82803049d7073721c"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "e3b7466a6c2f4c81752fa34abf8172fc6ddf4d9e3afbc7b79e7839c87eafa5e8"
+      "sha256": "79e190220da738e08228df4e07ff6e1ed1235b76be4760bb7a49ba5796f63f30"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "471694ce77f27f22e5f6898a1f2552fe9658b8d1214a923f6bad1d65b4180b65"
+      "sha256": "b88301ae6033b5e7a6c2e68ab8effe85e563f0c428fab1d1dbdd32dc3639313c"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "f260c50eb8484e79b063405faec9e0c42baf076e74a4c41e0ebd2a19d17f5c18"
+      "sha256": "edddd509d18ddf47a65e71d27266f433cb82f2bb6e0e57239a0647d692d276db"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "7a200e813015295a58d6bf672311eb1674a7c9777b90e00fe370d250787fdb6f"
+      "sha256": "96c830a29174ca419f6be173c7dd2eb9caac46d28ed857c857615c24b156947d"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "6f0b3ae40cf9dbf8e7a1c09e51e9dd375e6e0b2702c3d700deccae102922c8d2"
+      "sha256": "60dea4ee8d704bd4a89c41bda352181e5257233688e25c814876c00e5df17a7d"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "9ae5a79cf2be4e2ce09005f30e9edcfcac2ded6e2c2a8db5d1f98733ab9e56c6"
+      "sha256": "7a18a689a105eb15fa2ef2b8ebbb5872ea59ed46a6aace90122f49218ccdb7ce"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "26a7015c1c5c2cc9638ce7bca0233bbb43f05f55e98a6b0a7feddea185b24f1a"
+      "sha256": "581cfbeabdc00d61c790c82a8153473fb66b27ba661f6a2e7fcb69a27a6aebb1"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "1c6a1bfd6d91e2dad941e851243c82bde63d6b4ff329a041ea1bf57a5ee6ce27"
+      "sha256": "326bce3c8897977e4cf4bd54248bc87c4760da1d9bd26b96e05625aa11cffc01"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "6f2cdef1ebf44372ee6101f0f8fb4d99cd45fc46d3b202acc99e413ee088a118"
+      "sha256": "fba2d9981636049f76808f34c74b48ef16702bf20fa4d6df592b50be62c3558c"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "c26c55274eae91cbb1bb2b5c932f09fd20847e4d136baa2d5a8497265d4ea286"
+      "sha256": "38cfdf04858b3ecdef59d446c07e8d0577848179488eb7cf82635874be8c8732"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "7d6dcfc759cb84f1eb471afa9ddaee0320c48ffde631d5e455b3fb76e01256ac"
+      "sha256": "3c0f7558692f49fb2a12917f0379e703c7b6a1cc753030956443879f0a52ede0"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "a83c9381f8f6db9cd4d6dacd11772bc3414fc7a1d70e6307b738922c7ef618fe"
+      "sha256": "bb7685374daeaf2d96b30505c17eaec0317e9b03ea27545fb83b612068ae611b"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "71b92db81b77be9948c7ae85fb52fd2c7640f95031db016accf734d64519ec81"
+      "sha256": "3a9a2e9d129d12b1babb785bf1732109cb511e1bde25d9d1c5a34802f0304701"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "29cf0262ab0401822db99cb9cdbb6bd74a9067e819a6288e922001c4078879ef"
+      "sha256": "d178957c33ba1e5b0b36d800ca10a258d094681d3ae2eda916117fcdb220e00b"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "8676a250b04b74c6953728ac4d35aced9d5831076f561c13940f63f2190fb209"
+      "sha256": "7e32f305ed50d889b82d1eb6996038f52cfd563bc9ededaea58fce4d96f9599c"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "4fd6cc05361e2e71dc931693ce81b8bf788da396e9d037d22df79de3cfbfef51"
+      "sha256": "57578572cd1c868b7d3377efcdc7f99e38d68bce65ac683c9d895cbbbd537283"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "ecc4abd7ec2c832dcd11f061829d3aad5b3129760ed18cd00fc0a73ad53a1f37"
+      "sha256": "8c4ca71304aed7e51b3fbe503773e5ff18f4958de3a5de160e0953d7307dd1a3"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "67789f55a074377b9effad85dea3ccdd49368f3c460f1a35d0394a708d218e55"
+      "sha256": "699cb76abae93612e47b9ef14fc4934d62f653757b333d72fa71966f3b9c6c84"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "2d4461210a5d6d994bd39b389f78c1844ee15b19364432a84490486e83ac0d36"
+      "sha256": "20800b92ec551536969a7878613fa4e886d4a818d1350cfd9a83e89cb3cb5aad"
+    },
+    {
+      "path": "output/unit/PT-OPS-UNIT-001-state.txt",
+      "sha256": "0fc251ea8eac5281cac5409a19097e1cb505b596483de46ae105a4c202b6e64b"
+    },
+    {
+      "path": "output/unit/PT-OPS-UNIT-010-receipt-0.txt",
+      "sha256": "4673c5bfb303c2987ee7b883f49a54313fda11a933ffeea8727ab18c2099c353"
+    },
+    {
+      "path": "output/unit/PT-OPS-UNIT-010-receipt-10.txt",
+      "sha256": "4299e30514ce197338cc318bd542aa3df12b13123b859f4377622f1dc0a350d0"
     },
     {
       "path": "results.xml",
-      "sha256": "a06664e444682296a33460076acb9233a04498625d709616fd77ab722d01834e"
+      "sha256": "7f400c1f1e7e21ee42fb1edebbf7ff8445e487cc8824fe58cedb9ca0ebf06776"
     }
   ]
 }
