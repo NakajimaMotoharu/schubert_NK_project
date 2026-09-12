@@ -1,5 +1,7 @@
 # step試験横展開
 
+正式PT-WEB-20260913-07/sourceb5968a821029ce32b9f90c9d395c297e28f60162、dev-foundation、2026-09-13 04:56:23～05:11:55 JST、exit0。全1295件（Protocol80/Storage58/API652/Web241/Batch223/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 ProductionのNullAway/Enforcer/Spotless/SpotBugs未解決0。固定path3 method限定review維持・coverage除外なし。14collector/37scope同run/source/hash・28負canary成功。PG163の24 PTを確定、親OS/実子/backup/全step接続とPGPT全体は未完了。 BUG176～178/YKT137～139完了。先行6a44bb8d→是正b5968a82。全対象・非該当根拠と追加PTは下表、未認定/待ちは過去履歴。 Batch全68class/351method/2008line/1043branch missed0、新7class/31method/235line/160branch missed0。command: sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-07 →017/019→018 collect/validate-only。環境Ubuntu26.04.1/Linux7.0.0-31/JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13/JaCoCo0.8.15（421）、全input/output/coverage/source/time/command/hashはevidence/manifest.json。新2traceはinput/batch-stepとoutput/batch-step、横展開はlogs/BUG-176-178-YKT-137-139.md。以下は履歴。
+
 PG163/BUG176～178/YKT137～139、先行6a44bb8d。Production仕様違反ではなく新PT oracle/probeの不足で、先行登録後にtestだけ是正した。正式認定は全回帰後まで保留する。
 
 | 対象・原因 | 修正/非該当根拠・再発防止 |

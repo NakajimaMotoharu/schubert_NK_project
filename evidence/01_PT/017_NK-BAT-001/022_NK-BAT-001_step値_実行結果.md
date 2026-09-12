@@ -1,5 +1,7 @@
 # NK-BAT-001 step値実行結果
 
+正式PT-WEB-20260913-07/sourceb5968a821029ce32b9f90c9d395c297e28f60162、dev-foundation、2026-09-13 04:56:23～05:11:55 JST、exit0。全1295件（Protocol80/Storage58/API652/Web241/Batch223/CHR41）failed/error/skipped0、6 Java moduleのline/method/class/branch100%、5 ProductionのNullAway/Enforcer/Spotless/SpotBugs未解決0。固定path3 method限定review維持・coverage除外なし。14collector/37scope同run/source/hash・28負canary成功。PG163の24 PTを確定、親OS/実子/backup/全step接続とPGPT全体は未完了。 BAT130～137/8件認定。全closed enum/status/reason・NULL・時刻/件数・immutable/64並行とredactionを確認。 Batch全68class/351method/2008line/1043branch missed0、新7class/31method/235line/160branch missed0。command: sh /home/mini/codex/project1/work/pgpt_foundation_verify.sh PT-WEB-20260913-07 →017/019→018 collect/validate-only。環境Ubuntu26.04.1/Linux7.0.0-31/JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13/JaCoCo0.8.15（421）、全input/output/coverage/source/time/command/hashはevidence/manifest.json。新2traceはinput/batch-stepとoutput/batch-step、横展開はlogs/BUG-176-178-YKT-137-139.md。以下は履歴。
+
 PG163探索3: 2026-09-13 04:54:02 JST終了/12.140秒/exit0、BAT130～137/8件とRepository16/Storage8成功。新7class/31method/235line/160branch missed0（探索2後のJaCoCo集計）、全closed status/reason matrix・NULL/時刻/件数・64並行・private legacy診断objectの漏えい監査を確認。raw /tmp/pgpt-step-explore1～3.log、環境421、JDK25.0.4/Maven3.9.12/PG18.6/JDBC42.7.13。正式認定は全clean verify/28負canary/37scope後に別記。BUG176～178/YKT137～139は025参照。以下は実装前履歴。
 
 PG163/SSC055、PT-BAT-130～137。実装前仕様のみ、未実装・未実行・正式認定0。関連SS/PTは021、環境421、実行後にbranch/source/日時/command/exit/coverage/BUG/証跡hashを記録する。PG162の合格件数へ含めない。
