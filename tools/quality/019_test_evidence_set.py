@@ -70,7 +70,9 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
-                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest")
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
+                 "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
         self.assertEqual(suites[:3], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
@@ -98,7 +100,9 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(65, 37))
         self.assertEqual("Batch module91 PT = NK-BAT-00137 + NK-OPS-00154. " + suffix,
                          batch.ownership_description(91, 37))
-        self.assertEqual(("fixed namespace and trusted account resolution", "OS lock continuity and child termination",
+        self.assertEqual("Batch module107 PT = NK-BAT-00137 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(107, 37))
+        self.assertEqual(("OS lock continuity and child termination",
                           "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
                           "actual root systemd credential deployment", "actual NK characterization and IT/ST"),
                          launch.UNVERIFIED_PARENT_GATES)
@@ -106,6 +110,10 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertIn("Root UID/GID/tmpfs admission is synthetic", launch.DEPLOYMENT_LIMITATIONS)
         for gate_name in launch.UNVERIFIED_PARENT_GATES:
             self.assertIn(gate_name, launch.DEPLOYMENT_LIMITATIONS)
+        self.assertEqual((
+            {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False},
+            {"method": "InspectorEnvironmentFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /etc and /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-NS-008", "coverageExcluded": False}),
+            launch.REVIEWED_STATIC_DIAGNOSTICS)
 
     def test_backup_rerun_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
@@ -169,7 +177,13 @@ class EvidenceSetTest(unittest.TestCase):
                   ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest", 1,
                    ("createAndRetire", "sameRunAndDifferentRun", "privatePartCollisions", "permissionsAndNull",
                     "boundedWrites", "replacementsAndRetention", "createFailureMatrix", "reuseFailureMatrix",
-                    "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor"))]
+                    "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor")),
+                  ("dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest", 1,
+                   ("canonicalByteBoundaries", "malformedAndNull", "ownedCommandAndExit", "timeoutInterruptAndTermination",
+                    "stdioFailureMatrix", "sourceBufferAndNoLeak", "concurrentLookup", "nativeFactory")),
+                  ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest", 1,
+                   ("prepareCallbackRetire", "callbackFailureRetention", "namespaceAndStaticIdentity", "permissionsAndAccounts",
+                    "allOpenCloseFailures", "lateFailureAndInterruption", "concurrentScopes", "constructorAndFactory"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -184,7 +198,9 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
-                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
+                       "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

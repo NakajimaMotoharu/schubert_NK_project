@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+PG-D-155（2026-09-12）: 既存OSの/usr/bin/getent、Ubuntu GLIBC2.43-2ubuntu2.4を利用（新規導入なし）。実行fileはroot:root0755、SHA256 aa31e99e0818cf40cd6549568397b39e8b907341e715ec733a15842067a45255。配布元はUbuntu libc-bin package。固定`getent group schubert`、PATH=/usr/bin:/bin・LANG=C・LC_ALL=C以外のenvなし、stderr破棄・5秒/65536byte上限、shellなし。再現確認はgetent --version/--help、Linux man-pages6.17 getent(1)（/usr/share/man/man1/getent.1.gz SHA256 de56d08d490d1014e879b0fe65f6e23751b21b74238e905fe2f6abef8164da3b）。当PG/PT hostはschubert group未配備で固定照会exit2、実factoryはこの負例を検証し、正系/opaque fieldは孤立process fixtureだけ。root/group/NSS設定やdaemonを本確認で変更していない。実配備の正系は後続Linux ITで別確認する。
+
 PG-D-147/BUG-142: `com.github.spotbugs:spotbugs-annotations:4.10.4`をBatchのprovided（compile-only）依存へ追加。既存Maven Central cacheのjar SHA-256 `28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3`、入手元`https://repo.maven.apache.org/maven2/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar`。Java25 javapでSuppressFBWarnings.matchType/EXACTを確認。固定/run移植性警告1件のmethod限定理由記録にだけ使い、runtimeへ配布しない。通常のoffline clean verifyで再現。systemd259.5 tmpfiles.d(5)でfは既存file非truncate、!は--boot時限定を確認し、hostで実行せず固定3行のPTを行う。
 
 ## 1. 原則

@@ -43,7 +43,13 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
     ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest", 1,
      ("createAndRetire", "sameRunAndDifferentRun", "privatePartCollisions", "permissionsAndNull",
       "boundedWrites", "replacementsAndRetention", "createFailureMatrix", "reuseFailureMatrix",
-      "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor")))
+      "retireFailureMatrix", "interruptionAndRuntime", "concurrentInvocations", "nativeAndConstructor")),
+    ("dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest", 1,
+     ("canonicalByteBoundaries", "malformedAndNull", "ownedCommandAndExit", "timeoutInterruptAndTermination",
+      "stdioFailureMatrix", "sourceBufferAndNoLeak", "concurrentLookup", "nativeFactory")),
+    ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest", 1,
+     ("prepareCallbackRetire", "callbackFailureRetention", "namespaceAndStaticIdentity", "permissionsAndAccounts",
+      "allOpenCloseFailures", "lateFailureAndInterruption", "concurrentScopes", "constructorAndFactory")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
@@ -55,25 +61,32 @@ CFG_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
 EFILE_SUBJECT = "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader"
 PUBLISH_SUBJECTS = tuple("dev/codex/schubert/nk/batch/file/" + name for name in
     ("EnvironmentInodePolicy", "InspectorEnvironmentPublisher"))
+NAMESPACE_SUBJECTS = ("dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver",
+                      "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles")
 SUBJECTS = tuple("dev/codex/schubert/nk/api/maintenance/" + c
                  for c in ("InspectorLaunchConfiguration", "InspectorLauncher"))
 TRACES = {"renderedShellCheck": 3, "statusMapping": 9, "malformedReceipts": 29,
           "argumentsAndPlaceholders": 3, "realMainBridge": 1, "baseUnitAndSyntax": 1, "previousProfiles": 4}
+REVIEWED_STATIC_DIAGNOSTICS = (
+    {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False},
+    {"method": "InspectorEnvironmentFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /etc and /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-NS-008", "coverageExcluded": False})
 
 # BUG-153/YKT-119: current limitations, not an accumulation of stale milestones.
 UNVERIFIED_PARENT_GATES = (
-    "fixed namespace and trusted account resolution", "OS lock continuity and child termination",
+    "OS lock continuity and child termination",
     "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
     "actual root systemd credential deployment", "actual NK characterization and IT/ST")
 DEPLOYMENT_LIMITATIONS = (
     "Scope covers private launcher, wrapper/unit syntax, low-level flock, borrowed-root admission/read/publish, "
-    "read-only application stop observations and canonical environment bytes. Java coverage is not a shell percentage; "
+    "read-only application stop observations, canonical environment bytes and fixed namespace/NSS callback lifetime. Java coverage is not a shell percentage; "
     "shell decisions use recorded traces. Root UID/GID/tmpfs admission is synthetic over isolated real inodes; "
     "no privileged deployed service acceptance. Flock executes amd64 libc; aarch64 is ABI selection only and "
     "CLOEXEC is checked at the call boundary, not by inherited-FD inspection. Systemctl timeout tests use a process "
     "fault port, not a stalled manager or TERM-ignoring descendant. Borrowed-root publisher requires caller-held "
     "OS lock, stable namespace and terminal child; its success proves none of those. Failed unpublished parts "
-    "remain for controlled operational reconciliation. Remaining gates: " + "; ".join(UNVERIFIED_PARENT_GATES) + ".")
+    "remain for controlled operational reconciliation. Fixed factory admission uses synthetic root metadata in PT; "
+    "actual getent on this unprovisioned host verifies missing-group rejection, not a deployed positive lookup. "
+    "Remaining gates: " + "; ".join(UNVERIFIED_PARENT_GATES) + ".")
 
 
 def validate_reports(suites, deployment=False):
@@ -99,7 +112,9 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                    "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
-                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
+                   "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
+                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -130,6 +145,8 @@ def main():
         return {"dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
                 "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
+                "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "batch",
+                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "batch",
                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
@@ -149,13 +166,13 @@ def main():
     if args.deployment:
         for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
-                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS))):
+                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -169,7 +186,7 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
-        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS)]
+        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS)]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (s + ".java") for s in PRIVATE_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
@@ -205,7 +222,7 @@ def main():
     if args.deployment:
         manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage", "batch")}
         manifest["related"] += ["PG-D-146", "PG-D-147", "PG-D-148", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112", "BUG-143", "YKT-113", "BUG-144", "BUG-145"]
-        manifest["reviewedStaticDiagnostic"] = {"method": "MaintenanceFileLock.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS341/343 require fixed Linux /run", "owner": "NK-OPS-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-OPS-LOCK-007", "coverageExcluded": False}
+        manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."
         manifest["oracle"] += " 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction."
         manifest["oracle"] += " 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked."
@@ -220,6 +237,9 @@ def main():
         manifest["oracle"] += " 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS."
         manifest["related"] += ["PG-D-154", "BUG-151", "YKT-117", "BUG-152", "YKT-118", "BUG-153", "YKT-119"]
         manifest["oracle"] += " 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers."
+        manifest["related"] += ["PG-D-155", "BUG-154", "BUG-155", "YKT-120", "BUG-156", "YKT-121"]
+        manifest["oracle"] += " BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure."
+        manifest["oracle"] += " 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS
         manifest["unverifiedParentGates"] = list(UNVERIFIED_PARENT_GATES)
         manifest["deploymentCoverage"] = {

@@ -32,9 +32,20 @@ final class EnvironmentInodePolicy {
   Snapshot snapshot(
       Path held, boolean runtime, boolean directory, int maximum, int minimum, long configGroup)
       throws IOException {
-    Metadata m = metadata(source.attributes(held));
     int mode = directory ? (runtime ? 040700 : 040750) : (runtime ? 0100600 : 0100640);
-    require(m.mode() == mode && m.uid() == 0 && m.gid() == (runtime ? 0 : configGroup));
+    return inspect(held, runtime, directory, mode, runtime ? 0 : configGroup, minimum, maximum);
+  }
+
+  /** Fixed /etc, /run and shared runtime ancestor: root:root0755, never created or repaired. */
+  Snapshot ancestor(Path held, boolean runtime) throws IOException {
+    return inspect(held, runtime, true, 040755, 0, 0, 0);
+  }
+
+  private Snapshot inspect(
+      Path held, boolean runtime, boolean directory, int mode, long group, int minimum, int maximum)
+      throws IOException {
+    Metadata m = metadata(source.attributes(held));
+    require(m.mode() == mode && m.uid() == 0 && m.gid() == group);
     if (directory) require(m.links() >= 2 && m.size() >= 0);
     else require(m.links() == 1 && m.size() >= minimum && m.size() <= maximum);
     byte[] acl = security.accessAcl(held, 44);
