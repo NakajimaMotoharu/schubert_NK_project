@@ -1,5 +1,7 @@
 # NK-BAT-001 run退役単体テスト仕様書
 
+BAT110独立IO inventory: 単一activationの新規退役は初期scan＋8 mutation/barrierの前後scan＋最終scan＝18 scan、3 directoryずつでnamesOpen/Iterator/Close各54。読取record数は3＋(3+4)＋(4+5)＋(5+4)＋(4+3)＋(3+2)＋(2+2)＋(2+1)＋(1+0)＋0＝48。公開2件のpart/公開済verify4回と削除5件verify5回を加えopenRead57、各EOF照合2read/2size＝114、readClose57。各scanの2 namespace再open、2全root captureと各record10属性照合から全属性1075、同acl/filesystem/readonly各1075。BUG172の追加barrierだけの差分は2record×2scanで属性88/openEntry24/openRoot4/openDirectory20/close48、namesNext8/hasNext14とsync3。固定mapで全6736呼出し位置を検査し、観測mapをそのままexpectedへ生成しない。正常map全一致を要求してから各位置故障を試す。synctargetは実保持FDから独立に観測し、marker再同期→maintenance/runs/attempts成功の前にplanをunlinkしないことをBAT105で確認する。
+
 SSC055/PG-D-161、先行4d534ba9、OPS-009/DAT-009/UI251/SS311/331/332/341/343 §6.16。実装前仕様。Program NK-BAT-001、MaintenanceRetirement/MaintenanceRecords/DurableRecordFiles/MaintenanceRunFiles.Session.retirementCandidates・retire。
 
 Fixtureは隔離native inode/合成root属性と実PostgreSQL18.6/V018の借用batch connection。親OS lock実接続は別未完了条件。cutoff=2025-01-01T00:00:00.000000Z、latest=2025-01-02T00:00:00.000000Z、400日丁度=2026-02-06T00:00:00.000000Z、+1µsを成熟とする。期待recordは手書きASCII LF、digestはそのliteralへの独立計算で固定値化しProduction encode/readからexpectedを生成しない。input/outputはsynthetic UUID/timeのみ、実session/credentialを保存しない。

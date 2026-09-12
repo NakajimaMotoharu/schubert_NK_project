@@ -44,7 +44,7 @@ final class EnvironmentInodePolicy {
   /** NK-BAT-001; SS343 6.14; PT-BAT-046..057. Never admit volatile or readonly records. */
   Snapshot durable(Path held, boolean directory, int minimum) throws IOException {
     Snapshot result =
-        inspect(held, false, directory, directory ? 040700 : 0100600, 0, minimum, 141);
+        inspect(held, false, directory, directory ? 040700 : 0100600, 0, minimum, 204);
     require(!result.filesystem().equals("tmpfs") && !result.readonly());
     return result;
   }

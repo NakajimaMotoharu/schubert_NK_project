@@ -973,8 +973,7 @@ final class MaintenanceRunFilesTest {
     void execute() throws IOException;
   }
 
-  private static final class Fixture
-      implements AutoCloseable, InodeSecurityCalls, MaintenanceRunFiles.Io {
+  static final class Fixture implements AutoCloseable, InodeSecurityCalls, MaintenanceRunFiles.Io {
     final Path base, varPath, lib, app, maintenance, runs, attempts;
     final DirectoryCalls calls;
     final MaintenanceRunFiles files;
@@ -982,6 +981,7 @@ final class MaintenanceRunFilesTest {
     final Set<Integer> live = new HashSet<>();
     final Map<Long, String> originalRoles = new HashMap<>();
     final Map<String, Integer> counts = new HashMap<>();
+    final List<String> syncTargets = new ArrayList<>();
     long uid;
     int readers, writers, listings, failAt = 1, hookAt = 1, partSequence;
     String fail = "", hookName = "", invalid = "", badRole = "", listingFault = "";
@@ -1015,6 +1015,11 @@ final class MaintenanceRunFilesTest {
                     Object result;
                     try {
                       result = method.invoke(delegate, args);
+                      if (name.equals("sync"))
+                        syncTargets.add(
+                            base.relativize(
+                                    Path.of("/proc/self/fd", args[0].toString()).toRealPath())
+                                .toString());
                     } catch (InvocationTargetException e) {
                       throw e.getCause();
                     }
@@ -1058,6 +1063,7 @@ final class MaintenanceRunFilesTest {
 
     void reset() {
       counts.clear();
+      syncTargets.clear();
       fail = "";
       hookName = "";
       triggered = false;

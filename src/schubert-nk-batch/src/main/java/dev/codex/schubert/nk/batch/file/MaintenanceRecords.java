@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion.Outcome;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRetirement;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.DateTimeException;
@@ -47,6 +48,39 @@ public final class MaintenanceRecords {
             + "\n"
             + value.outcome().exitCode()
             + "\n");
+  }
+
+  /** SS343 6.16; PG161; PT-BAT-090..097. */
+  public static byte[] retirement(MaintenanceRetirement value) {
+    Objects.requireNonNull(value, "retirement");
+    return ascii(
+        "NKRET1\n"
+            + identity(value.run())
+            + TIME.format(value.latestEnded())
+            + "\n"
+            + TIME.format(value.preparedAt())
+            + "\n"
+            + value.count()
+            + "\n"
+            + value.digest()
+            + "\n");
+  }
+
+  public static MaintenanceRetirement readRetirement(byte[] bytes) throws IOException {
+    try {
+      String[] fields = lines(bytes, "NKRET1", 195, 204, 8);
+      var result =
+          new MaintenanceRetirement(
+              run(fields),
+              Instant.parse(fields[3]),
+              Instant.parse(fields[4]),
+              Integer.parseInt(fields[5]),
+              fields[6]);
+      require(Arrays.equals(bytes, retirement(result)));
+      return result;
+    } catch (DateTimeException | IllegalArgumentException failure) {
+      throw invalid();
+    }
   }
 
   public static BatchRun readAnchor(byte[] bytes) throws IOException {

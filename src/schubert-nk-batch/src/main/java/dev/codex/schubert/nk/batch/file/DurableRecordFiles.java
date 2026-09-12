@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
 final class DurableRecordFiles {
   private static final Pattern NAME =
       Pattern.compile(
-          "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.(run|begin|done)");
+          "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.(run|begin|done|plan|retire)");
   private final Object stateLock = new Object();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
@@ -52,7 +52,7 @@ final class DurableRecordFiles {
     name(name);
     synchronized (stateLock) {
       begin();
-      byte[] buffer = new byte[142];
+      byte[] buffer = new byte[205];
       try {
         Snapshot directory = directory();
         Optional<Snapshot> initial = probe(name, directory);
@@ -175,6 +175,10 @@ final class DurableRecordFiles {
       require(name.equals(MaintenanceRecords.readAnchor(bytes).id() + ".run"));
     } else if (name.endsWith(".begin")) {
       require(name.equals(MaintenanceRecords.readActivation(bytes).id() + ".begin"));
+    } else if (name.endsWith(".plan")) {
+      require(name.equals(MaintenanceRecords.readCompletion(bytes).activation().id() + ".plan"));
+    } else if (name.endsWith(".retire")) {
+      require(name.equals(MaintenanceRecords.readRetirement(bytes).run().id() + ".retire"));
     } else {
       require(name.equals(MaintenanceRecords.readCompletion(bytes).activation().id() + ".done"));
     }
@@ -227,7 +231,7 @@ final class DurableRecordFiles {
 
   private void verify(String name, Snapshot expected, Snapshot directory, byte[] bytes)
       throws StorageIoException {
-    byte[] buffer = new byte[142];
+    byte[] buffer = new byte[205];
     try {
       readStable(name, expected, directory, buffer);
       require(expected.metadata().size() == bytes.length);

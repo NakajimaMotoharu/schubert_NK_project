@@ -7,7 +7,9 @@ import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRetirement;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.batch.repository.RunReferenceRepository;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
@@ -18,14 +20,21 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.channels.SeekableByteChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -50,6 +59,20 @@ public final class MaintenanceRunFiles {
   private final Io io;
   private final Supplier<UUID> parts;
   private final EnvironmentInodePolicy policy;
+  private final Digests digests;
+
+  @FunctionalInterface
+  interface Digests {
+    MessageDigest create() throws GeneralSecurityException;
+  }
+
+  /** SS343 6.16; an initial absence is never certified as completed retirement. */
+  public enum RetirementResult {
+    ABSENT,
+    TOO_YOUNG,
+    PROTECTED,
+    RETIRED
+  }
 
   @FunctionalInterface
   public interface Operation<T> {
@@ -58,7 +81,7 @@ public final class MaintenanceRunFiles {
 
   @FunctionalInterface
   private interface Work<T> {
-    T execute() throws IOException;
+    T execute() throws IOException, GeneralSecurityException;
   }
 
   @FunctionalInterface
@@ -91,11 +114,22 @@ public final class MaintenanceRunFiles {
       InodeSecurityCalls security,
       Io io,
       Supplier<UUID> parts) {
+    this(varPath, directories, security, io, parts, () -> MessageDigest.getInstance("SHA-256"));
+  }
+
+  MaintenanceRunFiles(
+      Path varPath,
+      DirectoryCalls directories,
+      InodeSecurityCalls security,
+      Io io,
+      Supplier<UUID> parts,
+      Digests digests) {
     this.varPath = Objects.requireNonNull(varPath, "durable ancestor");
     this.directories = Objects.requireNonNull(directories, "directory operations");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "record IO");
     this.parts = Objects.requireNonNull(parts, "part identities");
+    this.digests = Objects.requireNonNull(digests, "plan digests");
     if (!varPath.isAbsolute()
         || varPath.getNameCount() == 0
         || !varPath.equals(varPath.normalize()))
@@ -261,6 +295,358 @@ public final class MaintenanceRunFiles {
           });
     }
 
+    /** SS343 6.16; PT-BAT-098..113. Enumeration is not a DB/age authorization. */
+    public List<BatchRun> retirementCandidates() throws StorageIoException {
+      return perform(
+          () -> {
+            Inventory inventory = retirementScan();
+            Graph graph = validateRetirement(inventory);
+            Optional<BatchRun> target = inventory.target();
+            if (target.isPresent()) return List.of(target.orElseThrow());
+            return graph.runs().values().stream()
+                .filter(run -> !graph.pending().filter(run.id()::equals).isPresent())
+                .filter(run -> !graph.active().filter(a -> a.run().equals(run)).isPresent())
+                .sorted(Comparator.comparing(run -> run.id().toString()))
+                .toList();
+          });
+    }
+
+    /** Caller owns continuous OS/DB exclusion; this never acquires or releases either lock. */
+    public RetirementResult retire(BatchRun run, Instant now, RunReferenceRepository references)
+        throws StorageIoException {
+      Objects.requireNonNull(run, "retiring run");
+      Objects.requireNonNull(now, "retirement time");
+      Objects.requireNonNull(references, "run reference repository");
+      // Reuse the exact established timestamp invariant without creating a fresh identity.
+      new BatchRun(run.id(), now);
+      return perform(
+          () -> {
+            Inventory state = retirementScan();
+            Graph graph = validateRetirement(state);
+            Optional<BatchRun> pending = state.target();
+            if (pending.isPresent()) require(pending.orElseThrow().equals(run));
+            BatchRun anchor = state.runs().get(run.id());
+            if (anchor == null && state.marker().isEmpty()) return RetirementResult.ABSENT;
+            if (anchor != null) require(anchor.equals(run));
+            if (graph.pending().filter(run.id()::equals).isPresent()
+                || graph.active().filter(a -> a.run().equals(run)).isPresent())
+              return RetirementResult.PROTECTED;
+            List<MaintenanceCompletion> completions =
+                ordered(state.marker().isPresent() ? state.plans() : state.done()).stream()
+                    .filter(value -> value.activation().run().equals(run))
+                    .toList();
+            Instant latest =
+                state.marker().isPresent()
+                    ? state.marker().orElseThrow().latestEnded()
+                    : completions.stream()
+                        .map(MaintenanceCompletion::endedAt)
+                        .max(Instant::compareTo)
+                        .orElseThrow(EnvironmentInodePolicy::unavailable);
+            if (Duration.between(latest, now).compareTo(Duration.ofDays(400)) <= 0) {
+              require(pending.isEmpty());
+              return RetirementResult.TOO_YOUNG;
+            }
+            if (!unreferenced(references, run)) {
+              require(pending.isEmpty());
+              return RetirementResult.PROTECTED;
+            }
+            if (state.marker().isEmpty()) {
+              for (var completion : completions) {
+                var plans = new HashMap<>(state.plans());
+                plans.put(completion.activation().id(), completion);
+                Inventory expected = state.withPlans(plans);
+                state =
+                    retirementChange(
+                        state,
+                        expected,
+                        references,
+                        run,
+                        () ->
+                            publish(
+                                attemptFiles,
+                                completion.activation().id() + ".plan",
+                                MaintenanceRecords.completion(completion)));
+              }
+              var marker =
+                  new MaintenanceRetirement(
+                      run, latest, now, completions.size(), digest(state.plans()));
+              Inventory expected = state.withMarker(Optional.of(marker));
+              state =
+                  retirementChange(
+                      state,
+                      expected,
+                      references,
+                      run,
+                      () ->
+                          publish(
+                              maintenanceFiles,
+                              run.id() + ".retire",
+                              MaintenanceRecords.retirement(marker)));
+            } else {
+              // A visible marker may be the residue of publication followed by a failed fsync.
+              var marker = state.marker().orElseThrow();
+              state =
+                  retirementChange(
+                      state,
+                      state,
+                      references,
+                      run,
+                      () ->
+                          publish(
+                              maintenanceFiles,
+                              run.id() + ".retire",
+                              MaintenanceRecords.retirement(marker)));
+            }
+            MaintenanceRetirement marker = state.marker().orElseThrow();
+            if (state.runs().containsKey(run.id())) {
+              // ALL plan copies remain until ALL original records, including the anchor, are
+              // durable absent.
+              for (var completion : ordered(state.plans())) {
+                UUID id = completion.activation().id();
+                var done = new HashMap<>(state.done());
+                done.remove(id);
+                Inventory expected = state.withOriginals(state.runs(), state.begins(), done);
+                state =
+                    retirementChange(
+                        state,
+                        expected,
+                        references,
+                        run,
+                        () ->
+                            remove(
+                                attemptFiles,
+                                id + ".done",
+                                MaintenanceRecords.completion(completion)));
+                var begins = new HashMap<>(state.begins());
+                begins.remove(id);
+                expected = state.withOriginals(state.runs(), begins, state.done());
+                state =
+                    retirementChange(
+                        state,
+                        expected,
+                        references,
+                        run,
+                        () ->
+                            remove(
+                                attemptFiles,
+                                id + ".begin",
+                                MaintenanceRecords.activation(completion.activation())));
+              }
+              var runs = new HashMap<>(state.runs());
+              runs.remove(run.id());
+              Inventory expected = state.withOriginals(runs, state.begins(), state.done());
+              state =
+                  retirementChange(
+                      state,
+                      expected,
+                      references,
+                      run,
+                      () -> remove(runFiles, run.id() + ".run", MaintenanceRecords.anchor(run)));
+            }
+            // BUG172/YKT133: visible absence after a prior failed unlink barrier is not durable.
+            // Seal ALL original directories before discarding any recovery plan, even on retry.
+            state =
+                retirementChange(
+                    state,
+                    state,
+                    references,
+                    run,
+                    () -> {
+                      for (int index = 3; index < 6; index++) roots.get(index).sync();
+                    });
+            for (var completion : ordered(state.plans())) {
+              var plans = new HashMap<>(state.plans());
+              plans.remove(completion.activation().id());
+              Inventory expected = state.withPlans(plans);
+              state =
+                  retirementChange(
+                      state,
+                      expected,
+                      references,
+                      run,
+                      () ->
+                          remove(
+                              attemptFiles,
+                              completion.activation().id() + ".plan",
+                              MaintenanceRecords.completion(completion)));
+            }
+            Inventory expected = state.withMarker(Optional.empty());
+            state =
+                retirementChange(
+                    state,
+                    expected,
+                    references,
+                    run,
+                    () ->
+                        remove(
+                            maintenanceFiles,
+                            run.id() + ".retire",
+                            MaintenanceRecords.retirement(marker)));
+            // Also re-establish barriers for initially absent originals/plans after a previous
+            // crash.
+            for (int index = 3; index < 6; index++) roots.get(index).sync();
+            require(state.equals(retirementScan()));
+            require(unreferenced(references, run));
+            return RetirementResult.RETIRED;
+          });
+    }
+
+    private boolean unreferenced(RunReferenceRepository references, BatchRun run)
+        throws StorageIoException {
+      var result = references.read(run);
+      require(result.identityConsistent());
+      return !result.anyReference();
+    }
+
+    private Inventory retirementChange(
+        Inventory before,
+        Inventory expected,
+        RunReferenceRepository references,
+        BatchRun run,
+        Mutation mutation)
+        throws IOException, GeneralSecurityException {
+      require(before.equals(retirementScan()));
+      validateRetirement(before);
+      require(unreferenced(references, run));
+      mutation.execute();
+      Inventory actual = retirementScan();
+      require(expected.equals(actual));
+      validateRetirement(actual);
+      return actual;
+    }
+
+    private void remove(DurableRecordFiles files, String name, byte[] bytes) throws IOException {
+      try {
+        verifyNamespace();
+        files.remove(name, bytes);
+        verifyNamespace();
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
+    }
+
+    private String digest(Map<UUID, MaintenanceCompletion> plans) throws GeneralSecurityException {
+      var hash = Objects.requireNonNull(digests.create(), "plan digest");
+      hash.update("NKPLAN1\n".getBytes(StandardCharsets.US_ASCII));
+      for (var completion : ordered(plans)) {
+        byte[] bytes = MaintenanceRecords.completion(completion);
+        try {
+          hash.update(bytes);
+        } finally {
+          Arrays.fill(bytes, (byte) 0);
+        }
+      }
+      return HexFormat.of().formatHex(hash.digest());
+    }
+
+    private Graph validateRetirement(Inventory state) throws IOException, GeneralSecurityException {
+      Optional<BatchRun> target = state.target();
+      for (var completion : state.plans().values())
+        require(completion.activation().run().equals(target.orElseThrow()));
+      var begins = new HashMap<>(state.begins());
+      var done = new HashMap<>(state.done());
+      if (state.marker().isPresent()) {
+        var marker = state.marker().orElseThrow();
+        BatchRun anchor = state.runs().get(marker.run().id());
+        for (var completion : state.plans().values())
+          require(!completion.endedAt().isAfter(marker.latestEnded()));
+        if (anchor != null) {
+          require(anchor.equals(marker.run()));
+          require(state.plans().size() == marker.count());
+          require(digest(state.plans()).equals(marker.digest()));
+          require(
+              state.plans().values().stream()
+                  .map(MaintenanceCompletion::endedAt)
+                  .max(Instant::compareTo)
+                  .orElseThrow(EnvironmentInodePolicy::unavailable)
+                  .equals(marker.latestEnded()));
+          for (var begin : state.begins().values())
+            if (begin.run().id().equals(marker.run().id())) {
+              var plan = state.plans().get(begin.id());
+              require(plan != null && plan.activation().equals(begin));
+            }
+          for (var completion : state.done().values())
+            if (completion.activation().run().id().equals(marker.run().id()))
+              require(completion.equals(state.plans().get(completion.activation().id())));
+          for (var completion : state.plans().values()) {
+            // Never overwrite a different-run activation that happens to reuse the same ID.
+            var priorBegin =
+                begins.putIfAbsent(completion.activation().id(), completion.activation());
+            require(priorBegin == null || priorBegin.equals(completion.activation()));
+            var priorDone = done.putIfAbsent(completion.activation().id(), completion);
+            require(priorDone == null || priorDone.equals(completion));
+          }
+        } else {
+          for (var begin : state.begins().values())
+            require(!begin.run().id().equals(marker.run().id()));
+          for (var completion : state.done().values())
+            require(!completion.activation().run().id().equals(marker.run().id()));
+        }
+      } else {
+        for (var completion : state.plans().values())
+          require(completion.equals(state.done().get(completion.activation().id())));
+      }
+      Graph result = graph(state.runs(), begins, done, state.active());
+      if (target.isPresent()) {
+        UUID id = target.orElseThrow().id();
+        require(result.pending().filter(id::equals).isEmpty());
+        require(result.active().filter(a -> a.run().id().equals(id)).isEmpty());
+      }
+      return result;
+    }
+
+    private Inventory retirementScan() throws IOException {
+      verifyNamespace();
+      List<Snapshot> before = capture(roots);
+      Set<String> rootNames = names(roots.get(3));
+      require(rootNames.containsAll(Set.of("runs", "attempts")));
+      Map<UUID, BatchRun> runs = new HashMap<>();
+      Map<UUID, MaintenanceActivation> begins = new HashMap<>();
+      Map<UUID, MaintenanceCompletion> done = new HashMap<>(), plans = new HashMap<>();
+      List<CapturedFile> files = new ArrayList<>();
+      Optional<MaintenanceRetirement> marker = Optional.empty();
+      Optional<MaintenanceActivation> active = Optional.empty();
+      for (String name : rootNames) {
+        if (name.equals("runs") || name.equals("attempts")) continue;
+        if (name.equals("active"))
+          active =
+              Optional.of(
+                  read(3, maintenanceFiles, name, MaintenanceRecords::readActivation, files));
+        else {
+          identity(name, ".retire");
+          require(marker.isEmpty());
+          marker =
+              Optional.of(
+                  read(3, maintenanceFiles, name, MaintenanceRecords::readRetirement, files));
+        }
+      }
+      for (String name : names(roots.get(4))) {
+        UUID id = identity(name, ".run");
+        runs.put(id, read(4, runFiles, name, MaintenanceRecords::readAnchor, files));
+      }
+      for (String name : names(roots.get(5))) {
+        if (name.endsWith(".begin")) {
+          UUID id = identity(name, ".begin");
+          begins.put(id, read(5, attemptFiles, name, MaintenanceRecords::readActivation, files));
+        } else if (name.endsWith(".done")) {
+          UUID id = identity(name, ".done");
+          done.put(id, read(5, attemptFiles, name, MaintenanceRecords::readCompletion, files));
+        } else {
+          UUID id = identity(name, ".plan");
+          plans.put(id, read(5, attemptFiles, name, MaintenanceRecords::readCompletion, files));
+        }
+      }
+      for (CapturedFile file : files)
+        require(
+            file.snapshot()
+                .equals(
+                    file.root()
+                        .atExistingEntryHandle(file.name(), p -> policy.durable(p, false, 1))));
+      require(before.equals(capture(roots)));
+      verifyNamespace();
+      return new Inventory(runs, begins, done, active, plans, marker);
+    }
+
     /** Re-establish durability of the selected identity before publishing or reusing its state. */
     private void sealIdentity(MaintenanceActivation activation) throws IOException {
       publish(
@@ -276,7 +662,7 @@ public final class MaintenanceRunFiles {
           T value = operation.execute();
           require(!Thread.currentThread().isInterrupted());
           return value;
-        } catch (IOException failure) {
+        } catch (IOException | GeneralSecurityException failure) {
           throw unavailable();
         }
       }
@@ -455,6 +841,52 @@ public final class MaintenanceRunFiles {
         Map.copyOf(done),
         active,
         pending.stream().findFirst());
+  }
+
+  @FunctionalInterface
+  private interface Mutation {
+    void execute() throws IOException;
+  }
+
+  private static List<MaintenanceCompletion> ordered(Map<UUID, MaintenanceCompletion> plans) {
+    return plans.values().stream()
+        .sorted(Comparator.comparing(value -> value.activation().id().toString()))
+        .toList();
+  }
+
+  private record Inventory(
+      Map<UUID, BatchRun> runs,
+      Map<UUID, MaintenanceActivation> begins,
+      Map<UUID, MaintenanceCompletion> done,
+      Optional<MaintenanceActivation> active,
+      Map<UUID, MaintenanceCompletion> plans,
+      Optional<MaintenanceRetirement> marker) {
+    Inventory {
+      runs = Map.copyOf(runs);
+      begins = Map.copyOf(begins);
+      done = Map.copyOf(done);
+      plans = Map.copyOf(plans);
+    }
+
+    Optional<BatchRun> target() {
+      if (marker.isPresent()) return Optional.of(marker.orElseThrow().run());
+      return plans.values().stream().findFirst().map(value -> value.activation().run());
+    }
+
+    Inventory withPlans(Map<UUID, MaintenanceCompletion> values) {
+      return new Inventory(runs, begins, done, active, values, marker);
+    }
+
+    Inventory withMarker(Optional<MaintenanceRetirement> value) {
+      return new Inventory(runs, begins, done, active, plans, value);
+    }
+
+    Inventory withOriginals(
+        Map<UUID, BatchRun> newRuns,
+        Map<UUID, MaintenanceActivation> newBegins,
+        Map<UUID, MaintenanceCompletion> newDone) {
+      return new Inventory(newRuns, newBegins, newDone, active, plans, marker);
+    }
   }
 
   private record CapturedFile(OwnedTransferDirectory root, String name, Snapshot snapshot) {}

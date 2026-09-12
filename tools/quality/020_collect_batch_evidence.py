@@ -41,6 +41,10 @@ LIFECYCLE_METHODS = ("newRunPublication", "resumeActive", "resumeOrphanAnchor", 
                      "rootAcquisitionAndCloseFailures", "startCrashBoundaries", "resumeCrashBoundaries",
                      "completionCrashBoundaries", "nullAndClosedContracts", "interruptionAndRuntime",
                      "concurrentScopeOwnership", "fixedFactoryAndReopen")
+RETIREMENT_RECORD_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest"
+RETIREMENT_RECORD_METHODS = ("literalMarkerAndPlanHash", "temporalAndCountInvariants", "nullAndOwnership", "malformedMarkerBytes", "markerAliases", "boundedStorageRecords", "planNameBinding", "concurrentCanonicalRecords")
+RETIREMENT_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest"
+RETIREMENT_METHODS = ("candidatesAndProtectedRuns", "strictAgeAndLatestCompletion", "referenceCombinations", "missingAndContradictoryIdentity", "newRetirementPreservesOtherRuns", "preMarkerPlanRecovery", "markerOriginalRecovery", "metadataOnlyRecovery", "planCompletenessAndDigest", "namespaceAndForeignArtifacts", "referenceReappearanceAndDbFaults", "publicationAndDeletionCrashes", "everyIoFailurePreservesState", "scopeNullAndInterruption", "concurrentAndClosedScope", "resourceCloseAndDigestFailure")
 REVIEWED_STATIC_DIAGNOSTICS = (
     {"method": "MaintenanceRunFiles.create", "id": "DMI_HARDCODED_ABSOLUTE_FILENAME", "match": "EXACT", "reason": "UI251/SS343 require fixed Linux /var", "owner": "NK-BAT-001 PG", "reviewAt": "PG gate or OS/path/SS change", "testId": "PT-BAT-081", "coverageExcluded": False},)
 DURABLE_METHODS = ("literalReads", "newPublication", "sameRecordReuse", "expectedRetirement",
@@ -82,9 +86,24 @@ LIFECYCLE_TRACES = {
     "PT-BAT-064-names-10.txt": LIFECYCLE_NAMES}
 
 
+RETIREMENT_TRACES = {
+    "PT-BAT-090-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n1\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+    "PT-BAT-090-maximum.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n2147483647\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+    "PT-BAT-099-two-activation-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-03T00:00:00.000000Z\n2026-02-07T00:00:00.000001Z\n2\ne6ff18dc21a10852fe4de7e8606fe0ad005c8e242bdc535ea8d391dd052528de\n",
+    "PT-BAT-102-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n1\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+    "PT-BAT-102-phases.txt": b"phase0:\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase1:\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase2:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase3:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase4:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase5:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nphase6:\n12345678-9abc-def0-8123-456789abcdef.retire\nphase7:\n",
+}
+
+
+def validate_retirement_traces(traces):
+    if traces != RETIREMENT_TRACES:
+        raise ValueError("missing, extra or invalid independent retirement trace")
+
+
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS, *OPS_CLASSES}
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -118,6 +137,14 @@ def validate_references_suite(suite):
     return validate_group(suite, REFERENCES_CLASS, REFERENCES_METHODS, 82)
 
 
+def validate_retirement_record_suite(suite):
+    return validate_group(suite, RETIREMENT_RECORD_CLASS, RETIREMENT_RECORD_METHODS, 90)
+
+
+def validate_retirement_suite(suite):
+    return validate_group(suite, RETIREMENT_CLASS, RETIREMENT_METHODS, 98)
+
+
 def validate_record_traces(traces):
     if traces != RECORD_TRACES:
         raise ValueError("missing, extra or invalid independently checked run record trace")
@@ -149,7 +176,9 @@ def validate_reports(suites):
     validators = {CLASS: validate_suite, LOG_CLASS: validate_log_suite,
                   HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite,
                   DURABLE_CLASS: validate_durable_suite, LIFECYCLE_CLASS: validate_lifecycle_suite,
-                  REFERENCES_CLASS: validate_references_suite}
+                  REFERENCES_CLASS: validate_references_suite,
+                  RETIREMENT_RECORD_CLASS: validate_retirement_record_suite,
+                  RETIREMENT_CLASS: validate_retirement_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -175,7 +204,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 159:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 183:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -196,6 +225,15 @@ def main():
     lifecycle_traces = {str(p.relative_to(lifecycle_root)): p.read_bytes()
                         for p in lifecycle_root.rglob("*") if p.is_file()}
     validate_lifecycle_traces(lifecycle_traces)
+    retirement_root = target / "run-retirement-traces"
+    retirement_traces = {str(p.relative_to(retirement_root)): p.read_bytes()
+                         for p in retirement_root.rglob("*") if p.is_file()}
+    validate_retirement_traces(retirement_traces)
+    for folder, values in (("input/run-retirement", RETIREMENT_TRACES), ("output/run-retirement", retirement_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
     for folder, values in (("input/run-lifecycle", LIFECYCLE_TRACES), ("output/run-lifecycle", lifecycle_traces)):
         destination = evidence / folder
         destination.mkdir(parents=True, exist_ok=True)
@@ -221,12 +259,12 @@ def main():
                "failed": 0, "errors": 0, "skipped": 0,
                "coverage": verified["modules"]["batch"]["coverage"],
                "staticAnalysis": verified["modules"]["batch"]["spotbugs"],
-               "result": "PASS_REPOSITORY_LOG_HANDOFF_AND_RECORD_BOUNDARIES_ONLY", "programComplete": False}
+               "result": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY", "programComplete": False}
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(summary, indent=2) + "\n")
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                  "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_AND_RECORD_BOUNDARIES_ONLY",
+        "programId": "NK-BAT-001", "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
         "programComplete": False, "testIdMethods": methods,
         "sharedModuleOwnership": ownership_description(verified["modules"]["batch"]["tests"], len(methods)),
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
@@ -252,7 +290,9 @@ def main():
     manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
     manifest["related"] += ["PG-D-159", "BUG-163", "BUG-164", "BUG-165", "BUG-166", "YKT-127"]
     manifest["runReferencesOracle"] = "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity."
-    manifest["limitations"] += " The file scope establishes fixed-namespace and record-lifecycle consistency under caller OS-lock authority, not actual OS-lock continuity, parent/child lifecycle, legacy DB identity checks, reference queries or400-day retirement. No actual reboot or root deployment."
+    manifest["related"] += ["PG-D-160", "SSC-056", "PG-D-161", "BUG-171", "BUG-172", "YKT-132", "YKT-133"]
+    manifest["retirementOracle"] = "015/BAT090..113: literal NKRET1 195..204 bytes and independent one/two-activation SHA256 vectors; full canonical plan count/hash retained through original done/begin/anchor deletion, original-directory durability barriers BEFORE any plan/marker disposal, metadata-only recovery, strict latest-completion400day age, actual PG18 V018 three-reference combinations/identity/query failures, target-only active/pending protection and other-run preservation. Full namespace/graph, bounded record ownership, every native IO occurrence, crash/close/null/interruption/concurrency, no unknown part repair or recursive deletion."
+    manifest["limitations"] += " The file scope establishes fixed-namespace, record lifecycle and limited400day retirement under caller exclusion, not actual OS-lock continuity, parent/child lifecycle or whole-morning orchestration. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

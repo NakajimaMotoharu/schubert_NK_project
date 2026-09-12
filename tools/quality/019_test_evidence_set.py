@@ -33,6 +33,53 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_retirement_literal_traces(self):
+        expected = {
+            "PT-BAT-090-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n1\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+            "PT-BAT-090-maximum.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n2147483647\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+            "PT-BAT-099-two-activation-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-03T00:00:00.000000Z\n2026-02-07T00:00:00.000001Z\n2\ne6ff18dc21a10852fe4de7e8606fe0ad005c8e242bdc535ea8d391dd052528de\n",
+            "PT-BAT-102-marker.txt": b"NKRET1\n12345678-9abc-def0-8123-456789abcdef\n2025-01-01T00:00:00.000000Z\n2025-01-02T00:00:00.000000Z\n2026-02-06T00:00:00.000001Z\n1\na5bf8bfabd8dbcc640bae2c4aa19c1e3387e43cb1a96cc3d9951be048a4a4065\n",
+            "PT-BAT-102-phases.txt": b"phase0:\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase1:\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase2:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.done\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase3:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.begin\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase4:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nruns/12345678-9abc-def0-8123-456789abcdef.run\nphase5:\n12345678-9abc-def0-8123-456789abcdef.retire\nattempts/fedcba98-7654-3210-8fed-cba987654321.plan\nphase6:\n12345678-9abc-def0-8123-456789abcdef.retire\nphase7:\n",
+        }
+        self.assertEqual(expected, batch.RETIREMENT_TRACES)
+        self.assertIsNone(batch.validate_retirement_traces(expected))
+        for key in expected:
+            wrong = dict(expected); del wrong[key]
+            with self.assertRaises(ValueError): batch.validate_retirement_traces(wrong)
+            wrong = dict(expected); wrong[key] += b"\0"
+            with self.assertRaises(ValueError): batch.validate_retirement_traces(wrong)
+        for wrong in ({}, dict(expected, unknown=b"")):
+            with self.assertRaises(ValueError): batch.validate_retirement_traces(wrong)
+
+    @staticmethod
+    def retirement_fixture(records=False):
+        cls = ("dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest" if records else
+               "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest")
+        names = (("literalMarkerAndPlanHash", "temporalAndCountInvariants", "nullAndOwnership", "malformedMarkerBytes", "markerAliases", "boundedStorageRecords", "planNameBinding", "concurrentCanonicalRecords") if records else
+                 ("candidatesAndProtectedRuns", "strictAgeAndLatestCompletion", "referenceCombinations", "missingAndContradictoryIdentity", "newRetirementPreservesOtherRuns", "preMarkerPlanRecovery", "markerOriginalRecovery", "metadataOnlyRecovery", "planCompletenessAndDigest", "namespaceAndForeignArtifacts", "referenceReappearanceAndDbFaults", "publicationAndDeletionCrashes", "everyIoFailurePreservesState", "scopeNullAndInterruption", "concurrentAndClosedScope", "resourceCloseAndDigestFailure"))
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        start = 90 if records else 98
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_retirement_inventory_rejects_nonpassing_cases(self):
+        for records in (False, True):
+            suite, expected = self.retirement_fixture(records)
+            validate = batch.validate_retirement_record_suite if records else batch.validate_retirement_suite
+            self.assertEqual(expected, validate(suite))
+            for position in range(len(suite)):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "0"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
     @staticmethod
     def references_fixture(sql=False):
         cls = ("dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest" if sql else
@@ -246,6 +293,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
                  "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest",
+                 "dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest",
+                 "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -256,7 +305,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:7], batch.select_program_suites(suites))
+        self.assertEqual(suites[:9], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -617,9 +666,13 @@ class EvidenceSetTest(unittest.TestCase):
         durable, expected_durable = self.durable_fixture()
         lifecycle, expected_lifecycle = self.lifecycle_fixture()
         refs, expected_refs = self.references_fixture()
-        reports = [suite, repository, handoff, records, durable, lifecycle, refs]
+        retirement_records, expected_retirement_records = self.retirement_fixture(True)
+        retirement, expected_retirement = self.retirement_fixture()
+        reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(89, len(accepted))
+        self.assertEqual(113, len(accepted))
+        self.assertEqual(expected_retirement_records, {k: v for k, v in accepted.items() if k in expected_retirement_records})
+        self.assertEqual(expected_retirement, {k: v for k, v in accepted.items() if k in expected_retirement})
         self.assertEqual(expected_refs, {k: v for k, v in accepted.items() if k in expected_refs})
         self.assertEqual(expected_lifecycle, {k: v for k, v in accepted.items() if k in expected_lifecycle})
         self.assertEqual(expected_durable, {k: v for k, v in accepted.items() if k in expected_durable})
