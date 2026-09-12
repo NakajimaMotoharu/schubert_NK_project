@@ -177,6 +177,8 @@ password、全bodyを保持・`toString`出力しない。
 
 ## 7. `schubert-nk-batch`
 
+SSC055/PG163: .batch.repository.BatchStepは既定10stepとbackup例外、BatchStepAttemptは原本BatchRun/日別attempt/開始時刻・skipのimmutable handle、BatchStepResultはterminal状態/件数/固定診断、BatchRunRepositoryは331 §8.3の借用transaction・全履歴検査・明示回復・CAS/replay。内部History rowは非秘密12列だけで原本cutoffを推測せず、全helperをBAT130～153へ追跡する。親bootstrap/OS/unit/実backupは別の未完了責務。
+
 | Package | 主要class | 責務 |
 |---|---|---|
 | `.batch.bootstrap` | `BatchApplication`, `BatchCommandRouter` | `backup`、`cleanup`、`morning-run`等のcommand選択 |

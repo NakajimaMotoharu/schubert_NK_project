@@ -29,6 +29,8 @@ transfer/Expiry清掃、依存順起動、失敗時の継続/打切り、二重�
 
 ## 3. Run identity・排他
 
+SSC055/PG163（先行898cc267）: 親step履歴は331 §8.3のBatchRunRepository。root原本/OS lock/子終端を確認したcallerがbegin/finishとcommitを所有する。runとstep時刻を分け、当日非backup成功済みだけ新attempt SKIPPED、backup2stepは毎回実行する。残存RUNNINGは明示同run回復時だけABANDONED相当FAILED、別run/不明root/99超/時計逆転は保全拒否。今回attempt件数とrun累積を混同しない。各step終了値の完全一致再試行だけ冪等にし、未確認child/backup/cleanupをSUCCESSへ補完しない。詳細型・固定診断・transaction・24PTは331 §8.3/017021～024を正とする。
+
 SSC-055/PG-D-158: 固定namespaceの原本file lifecycleは343 §6.15。親はOS flockの内側でscopeを開き、start成功後だけ停止/updateへ進み、reboot後resumeで同activation/cutoffと前回完了の有無を区別する。completeには実子終端・許容morning終端・step永続記録を先に確認する。file側の全graph検証をDB legacy ID非衝突/親の成功証明へ代用しない。
 
 SSC-055/PG-D-156（先行b6b5f0f6）: run_id/cutoffの唯一の原本は343 §6.13のroot永続anchor。DBが停止してもreboot後に同じbyteを復元できる。各保守起動/明示resumeには別activation UUIDを用い、completionはそのactivationにだけ対応する。過去completionを新activationの成功として使わない。原本→activation begin→activeをdurable公開するまでは停止/update/rebootを行わず、親の許容morning終端を確認してcompletion→active消去をdurable確定する。backup失敗時の削除skip/起動継続をこの追加metadataで禁止しない。途中失敗/不明完了はactiveと原本を保全する。原本fileの完成だけで親全体・永続step・GCを実装済みにしない。

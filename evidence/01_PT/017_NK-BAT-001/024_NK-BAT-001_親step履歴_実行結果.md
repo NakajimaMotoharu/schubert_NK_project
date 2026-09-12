@@ -1,0 +1,3 @@
+# NK-BAT-001 親step履歴実行結果
+
+PG163/SSC055、PT-BAT-138～153。実装前仕様のみ、未実装・未実行・正式認定0。関連SS/PTは023、環境421、実行後にbranch/source/日時/command/exit/coverage/BUG/証跡hashを記録する。PG162の合格件数へ含めない。
