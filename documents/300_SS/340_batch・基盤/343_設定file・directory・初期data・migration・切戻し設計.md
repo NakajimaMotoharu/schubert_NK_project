@@ -368,6 +368,8 @@ Session内の各publicationは非秘密UUID supplierからpart identityを採り
 
 ### 6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）
 
+BUG172/YKT133修正前追補: metadata-only recoveryのanchor不存在は前回unlinkの耐reboot確定を意味しない。対象originalが全て不在と照合した後、planを一つでも消す前にmaintenance/runs/attemptsの3private rootをsyncし、前回の未確定unlinkをdurable化する。同期失敗では残存plan/markerを保持し非成功。最後だけのsyncではmetadata先行消去を防げないため代替不可。
+
 §6.13のactiveなしは対象runのactiveなしを意味する。別runの有効なactive/pendingは§6.15の最大1件条件で保全し、現在のmorningのcompletion確定前に過去runのGCを行える。全namespaceのunknown/partは拒否する。通常start/resume/completeはplan/markerがあれば非成功、中断GCの回復を先に実行する。親の連続OS flock、同一borrowed ReadCommitted transaction/backendのDB advisory自己exclusive保持、子終端、管理者によるnamespace変更禁止を全区間で要求する。GC部品はOS lock獲得や親終端を代行しない。
 
 Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一覧。planまたはmarkerがあればその唯一の対象runだけを返す。それ以外は全activation完了かつactive対象外のrunを返す。age/DB参照はこの列挙だけで許可済みにしない。Session.retire(run, now, RunReferenceRepository)の結果はABSENT（原本/plan/markerの初期不存在で退役成功とは区別）、TOO_YOUNG（最新completionから400日以下）、PROTECTED（対象active/未完了、または初期DB参照あり）、RETIRED（限定退役・最後の同期/照会まで成功）。run/now/repositoryのnullは契約違反、nowはUTC年0001～9999/µsであり現在時刻の内部取得・丸めをしない。原本の同UUID異cutoff、DBidentity不整合/不明/不通、plan開始後の参照復活は固定非成功で保全する。
