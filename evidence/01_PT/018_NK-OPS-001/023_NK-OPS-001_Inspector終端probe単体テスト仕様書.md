@@ -31,7 +31,7 @@ SendSIGKILL=no
 
 | Test ID | class/method | fixture/入力/操作・独立期待値 |
 |---|---|---|
-| PT-OPS-UNIT-009 | InspectorUnitProbeTest.fixedCommands | 固定show/busctl argvと環境6変数・stderr破棄、任意unit/commandなし。18field読取と空process vector9byteを独立文字列で照合。 |
+| PT-OPS-UNIT-009 | InspectorUnitProbeTest.fixedCommands | 固定show/busctl argvと環境5変数（PATH/LANG/LC_ALL/SYSTEMD_COLORS/TERM）・stderr破棄、任意unit/commandなし。18field読取と空process vector9byteを独立文字列で照合。 |
 | PT-OPS-UNIT-010 | InspectorUnitProbeTest.stableTerminalAndReceipt | 初回read→9byte空process→同18field再readの3commandのみquiescent、fresh0/10。旧ID/空/不成立は空、単独PID0だけで成功禁止。 |
 | PT-OPS-UNIT-011 | InspectorUnitProbeTest.unstableAndNonempty | 前後18fieldそれぞれの別の妥当値/不正値とprocess非空/余分byte/未知/空を拒否。前段非終端はprocess照会なし。code/ID同じでも全snapshot変化は不成立。 |
 | PT-OPS-UNIT-012 | InspectorUnitProbeTest.commandFailures | start/exit非0/IO/NULLProcess/unknownRuntime/Errorと各command位置を注入、固定diagnosticで偽成功しない。 |
@@ -46,4 +46,4 @@ Productionの全public/private method・constructor・native ownership helperを
 
 421のJava25.0.4/Maven3.9.12/systemd259.5/Ubuntu26.04.1。選択Batch PTと全module clean verify、017/019証跡負canary・018全scope収集を実行する。実source commit/branch、日時、OS/tool、command/exit、全coverage、関連BUG/SSC、独立input/expected/actualとhashを対応する実行結果およびevidence/manifest.jsonへ記録する。工具native defaultを使う観測はread-onlyのみで、実配備ROOT/child起動/DB排他/backup/全親/IT/STは証明しない。raw InvocationID/process名前/secretは保存しない。
 
-SG060のquiescent/fresh receiptはその観測時の必要情報だけ。start要求の確定性、callback中の全子終端、OS lockを閉じる時点、同run環境/summary・親step結線は別gateとして残す。
+SSC060のquiescent/fresh receiptはその観測時の必要情報だけ。start要求の確定性、callback中の全子終端、OS lockを閉じる時点、同run環境/summary・親step結線は別gateとして残す。実装後の境界・fault注入と横展開は025へ記録する。

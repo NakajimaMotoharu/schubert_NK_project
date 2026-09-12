@@ -46,4 +46,4 @@ Productionの全public/private method・constructor・native ownership helperを
 
 421のJava25.0.4/Maven3.9.12/systemd259.5/Ubuntu26.04.1。選択Batch PTと全module clean verify、017/019証跡負canary・018全scope収集を実行する。実source commit/branch、日時、OS/tool、command/exit、全coverage、関連BUG/SSC、独立input/expected/actualとhashを対応する実行結果およびevidence/manifest.jsonへ記録する。工具native defaultを使う観測はread-onlyのみで、実配備ROOT/child起動/DB排他/backup/全親/IT/STは証明しない。raw InvocationID/process名前/secretは保存しない。
 
-SG060のquiescent/fresh receiptはその観測時の必要情報だけ。start要求の確定性、callback中の全子終端、OS lockを閉じる時点、同run環境/summary・親step結線は別gateとして残す。
+SSC060のquiescent/fresh receiptはその観測時の必要情報だけ。start要求の確定性、callback中の全子終端、OS lockを閉じる時点、同run環境/summary・親step結線は別gateとして残す。実装後の境界・fault注入と横展開は025へ記録する。

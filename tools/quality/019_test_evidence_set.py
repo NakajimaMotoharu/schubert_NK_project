@@ -508,6 +508,33 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set(key, value)
             with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
 
+    def test_unit_literal_traces(self):
+        expected = {
+            "PT-OPS-UNIT-001-state.txt": b"quiescent=true\nreceipt=10\nsameInvocationReceipt=none\n",
+            "PT-OPS-UNIT-010-receipt-0.txt": b"receipt=0\ncommands=3\n",
+            "PT-OPS-UNIT-010-receipt-10.txt": b"receipt=10\ncommands=3\n"}
+        self.assertEqual(expected, launch.UNIT_TRACES)
+        launch.validate_unit_traces(expected)
+        for name in expected:
+            wrong = dict(expected); del wrong[name]
+            with self.assertRaises(ValueError): launch.validate_unit_traces(wrong)
+            for changed in (b"", expected[name] + b"\0", expected[name].replace(b"receipt=", b"receipt=9")):
+                wrong = dict(expected); wrong[name] = changed
+                with self.assertRaises(ValueError): launch.validate_unit_traces(wrong)
+        with self.assertRaises(ValueError): launch.validate_unit_traces(dict(expected, unknown=b""))
+
+    def test_unit_independent_golden(self):
+        data = (Path(__file__).resolve().parents[2] / "src/schubert-nk-batch/src/test/resources/inspector/unit-golden.txt").read_bytes()
+        self.assertEqual(373, len(data))
+        self.assertEqual("2170fc2e71a4ba50519bc2f123d0bf75fcc46adab033645b7b68b5c513c345f6",
+                         hashlib.sha256(data).hexdigest())
+        launch.validate_unit_golden(data)
+        for wrong in (b"", data[:-1], data + b"\n"):
+            with self.assertRaises(ValueError): launch.validate_unit_golden(wrong)
+        for position in range(len(data)):
+            wrong = bytearray(data); wrong[position] ^= 1
+            with self.assertRaises(ValueError): launch.validate_unit_golden(bytes(wrong))
+
     def test_shared_batch_program_ownership(self):
         names = ("dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
                  "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
@@ -536,9 +563,11 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
-                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest",
+                 "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
+                 "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(28, len(suites))
+        self.assertEqual(30, len(suites))
         self.assertEqual(suites[:19], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
@@ -565,6 +594,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(247, 177))
         self.assertEqual("Batch module263 PT = NK-BAT-001193 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(263, 193))
+        self.assertEqual("Batch module295 PT = NK-BAT-001209 + NK-OPS-00186. " + suffix,
+                         batch.ownership_description(295, 209))
         self.assertEqual("Batch module279 PT = NK-BAT-001209 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(279, 209))
         self.assertEqual("Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. " + suffix,
@@ -666,7 +697,13 @@ class EvidenceSetTest(unittest.TestCase):
                     "stdioFailureMatrix", "sourceBufferAndNoLeak", "concurrentLookup", "nativeFactory")),
                   ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest", 1,
                    ("prepareCallbackRetire", "callbackFailureRetention", "namespaceAndStaticIdentity", "permissionsAndAccounts",
-                    "allOpenCloseFailures", "lateFailureAndInterruption", "concurrentScopes", "constructorAndFactory"))]
+                    "allOpenCloseFailures", "lateFailureAndInterruption", "concurrentScopes", "constructorAndFactory")),
+                  ("dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest", 1,
+                   ("strictGolden", "propertyInventory", "byteBoundaries", "scalarBounds",
+                    "quiescentStates", "freshReceipt", "immutabilityAndNull", "concurrentSnapshots")),
+                  ("dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest", 9,
+                   ("fixedCommands", "stableTerminalAndReceipt", "unstableAndNonempty", "commandFailures",
+                    "boundedOutputAndTimeout", "interruptions", "allResourceFailures", "nativeEnvironmentAndConcurrency"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -683,7 +720,9 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
-                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
+                       "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest": "PT-OPS-UNIT",
+                       "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "PT-OPS-UNIT"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

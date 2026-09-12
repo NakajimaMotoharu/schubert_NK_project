@@ -156,7 +156,9 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
                "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
-               "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest"}
+               "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest",
+               "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
+               "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest"}
 DURABLE_TRACES = {
     "PT-BAT-047-anchor.txt": RECORD_TRACES["PT-BAT-038-anchor.txt"],
     "PT-BAT-047-active.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
@@ -312,7 +314,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 279:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 295:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
