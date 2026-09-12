@@ -539,3 +539,4 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 2026-08-31 | 横断監査で`pg_dump`のSELECT要件とbatchのciphertext閲覧禁止が両立しないため、専用`schubert_backup` role案をQA-043/UIC-003として保留。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用`schubert_backup`と通常保守用`schubert_batch`のrole/grantを確定。 |
 | 2026-09-03 | SSC-005を反映し、`app_logs.security_hold_until`とcategory制約、cutoff判定、ops非公開を確定。 |
+SSC061/PG168: backup両完全handleの同一transaction確定/照合を341 §6.6で具体化する。BackupStepRepositoryは既存batch_runsの14列を2id昇順FOR UPDATEで全値検査し、両RUNNING/同一end両SUCCESS以外を保全拒否。BackupCommitServiceがborrowed Connectionのrollback/commit/再読を所有。新table/FK/DDL/grantなし、V001～020と400日保持を変更しない。root manifestの生成/保持inode信頼・実体/OS前提はcaller未完了gateとして明示する。

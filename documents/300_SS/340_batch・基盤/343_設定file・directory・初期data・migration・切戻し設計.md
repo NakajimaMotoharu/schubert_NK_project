@@ -573,3 +573,4 @@ security境界違反、backup/recovery不成立、公開TLS不能、停止枠内
 | 2026-08-31 | 横断監査でWeb DB poolをUI 212の上限2へ修正し、Web revoke/API context/API InboxのAES keyを用途別に分離。 |
 | 2026-08-31 | DB dump credentialをbatch保守用から分離する`db-backup`候補をQA-043/UIC-003回答待ちで追加。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、`db-backup`を専用backup unitだけへ配布するcredentialとして確定。 |
+SSC061/PG168: 341 §6.6の真正root manifestはroot CREATE_NEW/0600・書込FD全close・fsync/atomic/再hashと、読取側のuid0/gid0/nlink1/ACL・namespace/全handle/name/hash検査を前提とする。backup user作成fileのchownで真正化しない。両step DB確定部品はこの前提の代用ではなく、生成/信頼reader・最新選択/7世代は後続で実装する。専用DB/OS資格と秘密鍵配布は変更しない。

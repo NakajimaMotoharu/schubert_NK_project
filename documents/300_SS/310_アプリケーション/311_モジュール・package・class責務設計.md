@@ -238,3 +238,4 @@ SSC055/PG163: .batch.repository.BatchStepは既定10stepとbackup例外、BatchS
 |---|---|
 | 2026-08-31 | Module、package、主要class、依存規則を初版作成。 |
 | 2026-09-01 | SSC-002により`FixedWidthDecoder.decode`を322 §5の完全なtransport/route検査署名へ統一。 |
+SSC061/PG168: .batch.repository.BackupStepRepositoryと.backup.BackupCommitServiceは341 §6.6/331 §8.3の同一真正manifest両完全stepのread/transaction確定・不明commit再読を担当する。BAK/BKO/OPS009/UI251、017041～044/BAT210～225へconstructor/inspect/complete/helperを追跡。manifest生成/信頼reader/実artifact/root/OS/最新選択/7世代は別必須。DDLやmodule依存は変更しない。

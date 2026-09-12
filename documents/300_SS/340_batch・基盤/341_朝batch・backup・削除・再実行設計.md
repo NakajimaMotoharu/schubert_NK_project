@@ -148,6 +148,18 @@ backup/restore手順の変更・rehearsalなしに行わない。
 - nullは境界/invariant契約違反として拒否しNPEを正常化しない。IO/既知不正状態/crypt provider失敗は固定StorageIoException、raw path/bytes/cause/suppressedを出さない。未知Runtime/Errorのidentityを保持し、cleanup IO失敗を添える場合も固定診断だけ。bufferは全終了で消去し、close失敗を成功へ算入しない。
 - Production class/内部port・snapshot/安全close helperは.file.BackupArtifactVerifierの責務内、全public/private methodを017038/039/PT-BAT-194～209へ追跡する。package/module依存は既存Storage/Batch/Java標準のまま。PTは実Linux保持inode・公開合成byteと非特権metadata adapterを区別し、実root配布/NAS/IT/STの完了を宣言しない。
 
+### 6.6 root manifestとbackup両stepの原子的確定（SSC061/PG168）
+
+先行26fb3bad。root生成manifestを信頼binding recordとして扱うが、単なるJava値の受領は信頼確立ではない。rootが内容生成成功・実byte照合後にCREATE_NEW/0600でmanifestを生成し、writerを全close、fsync/atomic確定/再hashすること、読取側がuid0/gid0/0600/nlink1/ACLなし・保持inode/前後属性・canonical byte・namespace・原本run/cutoffを確認することが別の必須条件。backup user作成inodeのchownで真正化しない。低権限者が親directoryを変更してもroot所有file内容は改変できず、別の真正manifestへの入替えは全handle/name/hash照合で拒否、同一真正bundleの再使用だけ冪等である。root侵害や保守中の管理者変更を本方式が封じ込めるとはしない。PG166の期待値照合だけで生成元を証明せず、生成・信頼readerは後続実装する。
+
+- Production .repository.BackupStepRepositoryは借用親Connection、.backup.BackupCommitServiceは同借用Connectionのtransaction境界を所有する。原本/OS排他/停止/実artifactの継続保全はcaller、DB専用backup credentialは使わず既存schubert_batchを使う。新table/FK/DDL/grantは追加せずV001～020不変、400日/7世代保持不変更。
+- inspect(manifest,observedAt)は親explicit read-write READ_COMMITTED transaction、自己DB advisory・run identityをRunReferenceRepositoryで前後検査し、2idを昇順FOR UPDATEで読取る。query timeout5秒。全14列id/run_id/business_date/step/attempt/started_at/ended_at/status/target_count/success_count/failure_count/byte_count/error_code/error_summaryの所有ResultSet/Statementを閉じるまで返さない。WHERE id INの行を信用せずmanifest完全handle2個と各列を照合し、欠落/余分/重複/NULL/未知/取り違えを拒否する。
+- 観測時刻はUTC0001～9999/µsでcontentFinishedAt以上。DB/CONFIGの両方RUNNINGだけはended=NULL、4counts0、error2列NULLを要しOptional.empty（未完了）。両SUCCESSだけは共通ended>=contentFinishedAtかつ<=observedAt、µs、error2列NULLを要す。DB target=success=1/failure0/bytes=dump.size、CONFIG target=success=2/failure0/bytes=configurationBytes。これは対象file数でmanifest自体を数えない。片SUCCESS・異なるended・WARNING/FAILED/SKIPPED/未知status・別run/pair/handle・count不正を未完了から補完せず保全拒否。
+- complete(manifest,endedAt)はinspectを先に行い、両SUCCESSなら保存済共通endedだけを返し現在時刻で書き換えない。両RUNNINGならBatchRunRepository.finishでDB→CONFIGの順に同一endedAt/SUCCESS/NONEと上記独立count/byteを記録し、再inspectで両確定値の一致を確認する。Repositoryはcommit/rollback/connection closeをしない。途中失敗は呼出側が全rollback、片方だけcommit禁止。
+- BackupCommitService.complete(connection,manifest,endedAt)は入口autoCommit=true/read-write/READ_COMMITTEDを要求し、割込を前後確認、setAutoCommit(false)→Repository complete→commit→setAutoCommit(true)→割込再確認→保存end返却。既知SQL/Repository failureは固定BatchRepositoryException。transaction処理の失敗はrollback成功後だけautoCommitを復元し、rollback失敗なら復元しない。commit不明は成功にしないが次回同manifestのinspectで永続両SUCCESSを再読できる。後commitの復元/割込失敗も今回返却は非成功、保存済み結果を上書きしない。全障害後のconnection破棄はcaller必須。
+- 未知Runtime/NPE/Errorを正常扱いせずprimary identityを保持、既知cleanup SQLのsuppressedは固定例外。input/cause/SQL/manifest値を診断へ出さない。全API nullを境界で拒否、Connectionはcaller単独所有、異なるconnectionの並行呼出しだけを許す。
+- 017041～044/BAT210～225で独立合成manifest/SQL後条件、borrowed read/complete・全列/全JDBC位置/NULL/close/割込/commit不明/rollback/2connection・同ID再試行を検証する。new部品の全line/method/class/branch100%、全既存PT/static/traceを再実行。成功rowだけでcleanup許可せず、生成/信頼reader/最新真正bundle選択/親全体/7世代/実NK CHR/IT/STは未完了。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate
