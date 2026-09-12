@@ -396,6 +396,8 @@ GIN `message gin_trgm_ops`に限定する。容量実測がthresholdを超えた
 
 ### 8.2 `schubert.batch_runs`
 
+SSC-055/PG-D-156（先行b6b5f0f6）: このtableのstarted_atは各stepの時刻でありrun原本ではない。親は343 §6.13のimmutable root永続anchorからrun_id/cutoffを復元し、business_dateを既存SQLと同じAsia/Tokyo日付で導出する。最小step時刻・progress・現在日時による原本backfillをしない。原本/active/activation/completionの状態とstep状態は異なる。run原本不明legacyは保持してresumeを拒否する。原本GCは完了400日超・active/未完了activationなしに加え、batch_runs/Inbox progress/log progressの同run参照0をOS/DB lock下で検査する。原本fileを追加するために旧V001～017へ列/tableを後書きしない。具体的な参照照会の限定DB入口と親step Repositoryは別PG/PTで必須。
+
 `id bigint identity PK`、`run_id uuid NN`、`business_date date NN`、`step varchar(32) NN`、`attempt smallint NN check 1..99`、
 `started_at timestamptz NN`、`ended_at timestamptz`、`status varchar(10) NN check RUNNING/SUCCESS/WARNING/FAILED/SKIPPED`、
 `target_count/success_count/failure_count bigint NN default 0 check >=0`、`byte_count bigint NN default 0 check >=0`、

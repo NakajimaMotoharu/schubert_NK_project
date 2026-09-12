@@ -30,6 +30,7 @@ Source/release/config/credential/data/log/runtimeの配置、環境差分、設�
 | `/srv/schubert-nk/data/transfer` | schubert-api:schubert-web 0750 | API `.part/.ready`、Web read | Git禁止、次回朝削除 |
 | `/srv/schubert-nk/backup` | schubert-backup 0700 | 7世代dump/config | Git禁止 |
 | `/var/lib/schubert-nk/artemis` | schubert-artemis 0700 | Broker instance/journal/paging | Git禁止、config templateはrelease |
+| `/var/lib/schubert-nk/maintenance` と `runs`/`attempts` 子dir | root:root 0700、file0600。共有祖先はroot:root0755 | SSC-055の不変run原本・activation/完了・active metadata。local永続RW、tmpfs不可 | 実体Git禁止、provisioning雛形/独立fixtureだけGit |
 | `/var/log/schubert-nk` | service group 0750、file 0640 | File logを使う場合のみ | Git禁止、journald優先 |
 | `/run/schubert-nk/<service>` | systemd RuntimeDirectory | Lock/socket/temp metadata | Rebootで消去可 |
 | `/srv/schubert-nk/staging/<run-id>` | migration user 0700 | 移行中asset/manifest、対象run限定 | Go/切戻し完了まで隔離 |
@@ -296,6 +297,34 @@ InspectorEnvironmentFilesの公開factoryは固定/etc・/runとnative portを�
 5. 各directory比較は内容変化で変わるsize/mtime/ctimeを除いた型/owner/group/link/dev/ino/FS/ROを一致させる。static fileは変更を許可せずctimeを含む全snapshot＋byte一致。同階層を同deviceとし/etcと/runのdevice違いは正常。最後の割込も非成功、IO診断は固定cause/suppressedなし、未知runtimeは回収後にescapeする。
 
 固定pathに対するportability警告はBUG142/YKT112と同じ理由で公開factoryのexact diagnosticだけreview可能（owner NK-OPS-001、PG gate/OS/path変更時再審査）。coverage/null/securityの除外ではない。実root/systemd/OS lock連続性は本PTの合成属性だけで認定せず、子制御の実装と後続ITを維持する。
+
+### 6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）
+
+DB停止前/reboot後の原本は`/var/lib/schubert-nk/maintenance/runs/<run UUID>.run`。runのUUID/cutoffを一度だけ固定し、batch_runs.started_at/現在時刻/既存progressで補完しない。DBはstep履歴であり原本の第二コピーを後付けしない。既存runで原本がない場合はresumeを拒否し、履歴とfileを保持する。runなしの新規開始にだけ親がUUID/時刻を採り、公開後に生成し直さない。
+
+再開単位をrunと区別するためactivation UUIDを持つ。`attempts/<activation UUID>.begin`はrun/activationを束縛し、固定`active`はそのbeginと同じbyteを持つ。`attempts/<activation UUID>.done`はそのactivationの親morning完了であり、別activation/別runへ流用しない。既存UUIDの上書き再利用は禁止。completionはSUCCESS(0)/WARNING(10)だけ。個別backup失敗→削除skip→正常起動の許容WARNING経路を維持し、個別FAILED調査中を完了recordで解除しない。
+
+全rootはprovisioningで作成済み、private root/runs/attemptsはroot:root0700、recordはregular0600/nlink1・root:root・access ACLなし。共有祖先root0755を勝手に0700へ変更しない。local永続RW filesystemで、tmpfs/remote/readonly/unknown・symlink/不明属性を拒否する。保持directory/inodeでのmetadata/名前の再取得identityを操作前後に照合する。全scopeを親OS flockで保持し、保守中のroot管理者によるnamespace変更を禁止する。原本の有効なbyteだけを読めたことでは配布・所有・排他を証明しない。
+
+状態遷移とcrash条件:
+
+1. 新規run原本をCREATE_NEW0600のpartへ書き、file force→no-replace公開→directory sync→保持readbackを確定する。続いてbeginを同じ手順で確定し、最後にactiveを確定する。active確定前に停止/update/reboot等の副作用へ進まない。
+2. Reboot後はactive→begin→原本の全値一致を確認して同cutoffを復元する。active/原本不明・複数未完了begin・異なるrun・不明partは推測補完/無条件消去せず停止。active公開前の単独未完了beginを見つけた場合の再接続は、明示resumeが同runで全identityを再確認した場合だけ。自動的に別runへ取り替えない。
+3. 明示resumeはactiveが同runなら同activationを継続する。既doneがあれば、親は既完了activationの回復として読み、前回の副作用を再実行したと数えない。activeがなく、そのrunの全activationが完了している場合にだけ新activationを作る。前回completionを今回成功に使わず、必要stepのskip/新attempt/backup例外をSS341に従って実施する。
+4. 親が許容morning終端・実子終端・step記録を確認後、doneをdurable公開してから同じactiveを限定unlink/syncする。終了timeはrun cutoff以上、microsecond精度・UTC年0001～9999。process exitだけを完了にせず、失敗/interrupt/commit不明はactive/原本を保全する。同じdoneの再確認は全値完全一致だけを認め、別時刻/別statusへ上書きしない。
+5. `runs`の原本退役は最新completionから400日超、全activation完了、active/未公開part/不明fileなし、batch_runs/Inbox progress/log progressの参照0をOS/DB lock下で再確認した場合だけ。先にrun限定のretirement markerをdurable確定し、既知のbegin/done/原本だけを限定削除、最後にmarkerを消す。中断時はmarkerを保持して新resumeを拒否し、同じ限定対象の参照0を再確認して冪等再開する。未完了・FAILED調査中・DB不通・不明runは保全。marker具体byte/DB照会/GC callerは後続PG/PTで先行仕様化し、本項目全体の未完了条件として残す。
+
+PG-D-156のcanonical record（各行末LF、ASCII、以下の順序、空白/quote/CRLF/BOM/追加行/aliasなし）:
+
+| 種別 | 行1 | 続く行 | byte長 |
+|---|---|---|---:|
+| anchor | `NKRUN1` | run UUID、cutoff | 72 |
+| begin/active | `NKACT1` | run UUID、cutoff、activation UUID | 109 |
+| done | `NKDONE1` | run UUID、cutoff、activation UUID、ended_at、`0`または`10` | 140/141 |
+
+UUIDはlowercase36文字、時刻は`uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'`の27文字、BatchRunの年0001～9999/µs範囲を維持する。business_dateは既存SQLと同じAsia/Tokyo変換から導出しrecordへ別値として重複保存しない。canonicalでない同値表記・うるう秒の自動正規化を受理しない。parserは構造的に有効な別runも値として復元するが、file store/親が期待する原本と全値一致を別途検証し、parser単体を所有/認証/同run保証にしない。
+
+MaintenanceRecordsは3種encode/decode、MaintenanceActivationはBatchRun/activation UUID、MaintenanceCompletionはactivation/ended_at/0・10の型付きOutcomeを保持する。nullは境界で拒否し、byte入力の不正はraw cause/suppressedを含まない固定IOException、constructor不変条件違反は固定IllegalArgumentException。配列を保持/共有せず、recordのtoStringはidentityをredactする。記録実体はGitへ保存せず独立synthetic goldenだけを試験に使用する。永続file store・親unit/reboot・GC/DB照会の実装はcodecだけでは完了しない。
 
 ## 7. 環境差分
 

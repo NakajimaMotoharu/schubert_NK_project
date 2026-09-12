@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-055/PG-D-156（先行b6b5f0f6）: batch.repository.MaintenanceActivation/MaintenanceCompletionは固定BatchRunと起動単位・完了単位のimmutable契約。batch.file.MaintenanceRecordsはSS343 §6.13の3種canonical ASCII encode/decodeだけを担う。原本からの同run照合・OS lock・private永続file・active/完了/crash/GCは親と後続file storeの責務でありparserに成功保証を混入しない。NK-BAT-001、OPS-009/UI251/SS331・341・343、PT-BAT-038～045へ追跡する。
+
 SSC-049/PG-D-155（先行023017b2）: batch.platform.ConfigurationGroupResolverは固定OS NSS group照会のbounded process/byte検査だけを担当する。batch.file.InspectorEnvironmentFilesは固定/etc・/run祖先からrootを保持し、static reader・runtime publisherと同期callbackを全close込みで結線する。任意path/account/commandの公開入口はなく、親OS lock/実子終端/backup/run原本はcaller必須契約。OPS-009/UI251/SS343 §6.12、PT-OPS-GID-001～008/NS-001～008。
 
 SSC-049/PG-D-154（先行aa2baa3a）: batch.file.InspectorEnvironmentPublisherはroot保持run fileの新規原子公開/同run再同期/停止確認後retireを担当する。EnvironmentInodePolicyは既存readerとpublisherが共用するpackage限定Unix/ACL/FS検査。公開factoryで任意path/UID/commandを受けず、借用capabilityのadmission/OS lock/子終端は親の責務。OPS-009/UI251/SS343 §6.11、PT-OPS-PUB-001～012。
