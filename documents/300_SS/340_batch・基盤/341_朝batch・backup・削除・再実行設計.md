@@ -134,6 +134,20 @@ backup/restore手順の変更・rehearsalなしに行わない。
 - 形式: {"format":"NKBACKUP1","database":"schubert_nk","runId":"<UUID>","cutoff":"<UTC6>","startedAt":"<UTC6>","contentFinishedAt":"<UTC6>","databaseStep":{"id":<N12>,"attempt":<N2>,"startedAt":"<UTC6>"},"configurationStep":{"id":<N12>,"attempt":<N2>,"startedAt":"<UTC6>"},"versions":{"host":"<token>","app":"<token>","schema":"<N3>","os":"<token>","jdk":"<token>","postgresql":"<token>","artemis":"<token>","age":"<token>"},"recipientSha256":"<hex64>","files":{"schubert_nk.dump":{"size":<positive long>,"sha256":"<hex64>"},"config.tar":{"size":<positive long>,"sha256":"<hex64>"},"credentials.tar.age":{"size":<positive long>,"sha256":"<hex64>"}}} LF
 - 制約として、この型は「申告された観測値」が整合することだけを保証する。actual dump/list/age/restore・3file metadata/hash・全file集合・原本/DB両stepへの信頼binding・成功後7世代削除は別必須。archive平文/秘密key、任意path、未検証claimからSUCCESSを生成しない。
 
+### 6.5 実backup artifactのread-only検証（SSC059/PG166）
+
+先行4da9e96b。BackupArtifactVerifierは「信頼されたmanifest申告値と現存byteの一致」を検証する。生成/復元/age実行・fsync/rename・DB成功・rootのmanifest binding・7世代管理は別必須であり、本部品成功で補完しない。
+
+- 親rootはOS排他とbackup rootの設定/非重複/realpath/FS権限・durability能力を別途確認してから、保持したOwnedTransferDirectory、専用schubert-backupのUID/GIDを渡す。UID/GIDは1～unsigned32上限、実効UID0。rootを閉じたり任意pathを再解決せず借用する。NASのサーバ側ACL/fsync保証を単なるUnix mode/読取成功で証明したことにしない。
+- verify(BackupManifest)はdirectoryNameで既存子だけをNOFOLLOWで保持する。backup rootと子は専用backup UID/GID・0700・directory/nlink>=2、RW・ACLなし。子は親と同device。子の全entryはMANIFEST.json/schubert_nk.dump/config.tar/credentials.tar.ageの正確な4件（重複/NULL/未知/不足を拒否）。part名や別runへfallbackしない。
+- dumpは専用backup UID/GID・0600、config.tar/credentials.tar.age/MANIFEST.jsonはroot:root0600、regular/nlink1。全fileは子と同deviceで、manifest3fileの正sizeと一致する。MANIFEST.jsonは341 6.4のcanonical encode長とbyte完全一致。親rootが最終manifestを作成する責務をここで固定するが、格納先親がbackup主体所有であるため別の信頼bindingなしにmanifest自身を信頼しない。
+- 各保持inodeのmode/uid/gid/nlink/size/dev/ino/mtime/ctime・ACLをIO前後に照合。読取り前後のchannel.sizeを別観測し、最終EOFも確認する。65536byte bufferでstreaming SHA256、残長を超えて読み進めず0byte進捗も固定失敗。fileの途中短縮/過長/変更/同名差替えを成功にしない。MANIFESTの期待byte/hashはcallerの信頼manifest由来だがPTの期待値はProduction codecから生成しない。
+- 全4file読取後、全entryを名前から再保持して元snapshotと照合し、正確な全file集合と子snapshot・親から再openした子identity・借用root snapshotを再確認。byte内容を変えず通常readによるatime更新は比較しない。敵対rootや検査後の第三者変更をこの一回の検査で封じ込めたとは主張せず、親排他/actor停止・最終使用時再検証を維持する。
+- 全操作はinstance内直列化し、所有child/entry/channelを閉じた後だけ実測MANIFESTのBackupFileDigestを返す。path/FD/channel/ファイル集合やarchive内容を結果へ公開しない。既存fileの作成/chmod/chown/書込/unlink/sync・root closeをしない。
+- 単調時計30分と割込を各IO境界/読取loop前後・最終帰還前で確認する。期限以上/割込は固定非成功・flag保持。blocking OS readをJava協調検査で強制中断できるとはしない。clock引算は既存30分契約同様wrapを許し、逆転は拒否する。
+- nullは境界/invariant契約違反として拒否しNPEを正常化しない。IO/既知不正状態/crypt provider失敗は固定StorageIoException、raw path/bytes/cause/suppressedを出さない。未知Runtime/Errorのidentityを保持し、cleanup IO失敗を添える場合も固定診断だけ。bufferは全終了で消去し、close失敗を成功へ算入しない。
+- Production class/内部port・snapshot/安全close helperは.file.BackupArtifactVerifierの責務内、全public/private methodを017038/039/PT-BAT-194～209へ追跡する。package/module依存は既存Storage/Batch/Java標準のまま。PTは実Linux保持inode・公開合成byteと非特権metadata adapterを区別し、実root配布/NAS/IT/STの完了を宣言しない。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate

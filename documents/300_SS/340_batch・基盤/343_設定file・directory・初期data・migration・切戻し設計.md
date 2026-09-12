@@ -119,6 +119,8 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 
 ### 5.3 Batch・backup
 
+SSC059/PG166: 実artifact read-only照合は341 §6.5。root親が作るconfig.tar/credentials.tar.age/MANIFEST.jsonはroot:root0600、DB worker dumpは専用backup UID/GID0600、backup root/子は同専用UID/GID0700。親が信頼manifest bindingとroot admission・NAS能力を別確認し、保持inodeの全4file/metadata/hash/byte・再bindingを照合する。検証は生成/暗号化/fsync/DB成功を代替しない。実装/16PTは017038/039へ先行する。
+
 SSC058/PG165: backupのMANIFEST.json固定値/byte schemaは341 §6.4を正とする。version8項目・recipient fingerprint・固定3fileとrun/両完全backup step handleを保存する。内容生成終了時刻とatomic確定後のstep終了を混同しない。codec成功だけで実file/hash/秘密暗号/DB binding/7世代を検証済みにせず、実体gateと世代管理は別必須。実装/独立16PTは017033～036へ追跡する。
 
 | Key | Initial | Validation |
