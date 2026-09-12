@@ -1,5 +1,27 @@
 # NK-BAT-001 backup実体保持inode検証単体テスト仕様書
 
+## 実装前固定fixture（独立算出）
+
+Python3 hashlibだけで公開literal byteからSHA256を独立計算（Productionは未実装）。全textはASCII・末尾LF1つ、opaque fixtureであり実dump/tar/ageではない。
+
+| file | 公開literal（末尾LF） | size | SHA256 |
+|---|---|---:|---|
+| schubert_nk.dump | PG166 public dump fixture | 26 | 9ae12cbba1c4e9e71419a38fde527ad49dac8ecd22d408173df80165d27d0aa9 |
+| config.tar | PG166 public configuration fixture | 35 | 0793bedfb1288edbbf286aeda46ff08601492dc311bcc9ef352d5b76b4a0eb9a |
+| credentials.tar.age | PG166 public ciphertext fixture | 32 | de5619301aab91cfd8872a1bd80b7f9c793bf01ca40fa38bfe2ac15ff93debb2 |
+
+3file合計93/設定量67。以下MANIFESTは964bytes、SHA256=bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370。既存PG165の965byte goldenを変更せず、新検証用に別fixtureとする。元公開literalのfieldを手作業で差し替え、Production encodeは使わない。
+
+```json
+{"format":"NKBACKUP1","database":"schubert_nk","runId":"12345678-9abc-def0-8123-456789abcdef","cutoff":"2026-09-12T15:00:00.000000Z","startedAt":"2026-09-12T15:00:02.123456Z","contentFinishedAt":"2026-09-12T15:00:03.654321Z","databaseStep":{"id":90000,"attempt":1,"startedAt":"2026-09-12T15:00:00.000000Z"},"configurationStep":{"id":90001,"attempt":1,"startedAt":"2026-09-12T15:00:01.000000Z"},"versions":{"host":"nk-pt","app":"0.1.0-SNAPSHOT","schema":"020","os":"Ubuntu-26.04.1","jdk":"25.0.4","postgresql":"18.6","artemis":"2.56.0","age":"1.2.1"},"recipientSha256":"0000000000000000000000000000000000000000000000000000000000000000","files":{"schubert_nk.dump":{"size":26,"sha256":"9ae12cbba1c4e9e71419a38fde527ad49dac8ecd22d408173df80165d27d0aa9"},"config.tar":{"size":35,"sha256":"0793bedfb1288edbbf286aeda46ff08601492dc311bcc9ef352d5b76b4a0eb9a"},"credentials.tar.age":{"size":32,"sha256":"de5619301aab91cfd8872a1bd80b7f9c793bf01ca40fa38bfe2ac15ff93debb2"}}}
+```
+
+Streaming独立vectorはASCII DをN回（LFなし）:
+- 65535: 00cb85dd20678f79167f809e3f17f03c63007640367ec24ff7bde50250f65431
+- 65536: dcb3cceeb89595b15abac3233c5871a9dc8d5e4af56443c0c5085386c9b50439
+- 65537: c2c8deb12c89c8025c92a362b28cafc28437fc5b54bce28df26763b810b22652
+- 196613: 77c51a7e252a8d972e7d4ac7897a7a80eb95f37c7ba798d9f8a5b76056738f91
+
 PG166/SSC059先行4da9e96b。BAK001～008/BKO001～008/UI251/SS311・341 §6.5・343 §5.3。PG165正式09/source89e97bdc凍結中の仕様先行、未実装/未実行/認定0。
 
 | Test ID | class/method | 目的・事前条件/fixture/入力/操作・独立期待値 |
