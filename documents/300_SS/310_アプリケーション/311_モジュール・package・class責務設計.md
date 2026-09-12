@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-049/PG-D-154（先行aa2baa3a）: batch.file.InspectorEnvironmentPublisherはroot保持run fileの新規原子公開/同run再同期/停止確認後retireを担当する。EnvironmentInodePolicyは既存readerとpublisherが共用するpackage限定Unix/ACL/FS検査。公開factoryで任意path/UID/commandを受けず、借用capabilityのadmission/OS lock/子終端は親の責務。OPS-009/UI251/SS343 §6.11、PT-OPS-PUB-001～012。
+
 SSC-049/PG-D-153: storageのDirectoryCalls/LinuxDirectoryCalls/OwnedTransferDirectoryへprivate0600 create・同directory単一名のno-replace publish・検証済みentry unlinkを追加する。file adapter専用で設定/DB/認証/run modelへ依存しない。通常Transfer writerとWeb readerの許可操作は変更せず、保守側のpolicyはbatch.fileへ置く。NK-OPS-001、OPS-009/UI251/SS333 §7.3/343、PT-OPS-PFILE-001～008。
 
 SSC-049/PG-D-152: batch.file.InspectorEnvironmentReaderがstatic/runtimeの既存環境fileを保持inodeからbounded readし、属性・同名再取得・close後にplatformのCFG/ENV byte検査へ渡す。借用rootの選択/寿命とOS排他は親、読取り専用で公開/修復しない。NK-OPS-001、OPS-009/UI251/SS343 §6.9、PT-OPS-EFILE-001～008。

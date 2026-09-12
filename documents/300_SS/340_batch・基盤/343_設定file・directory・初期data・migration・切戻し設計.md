@@ -266,7 +266,21 @@ unitのLoadCredentialは常にDB/current2の絶対source pathを指定する。p
 
 先行67148c13。SS333 §7.3のprivate0600 CREATE_NEW/保持inode・単一名RENAME_NOREPLACE・directory fsync・検証済みentry unlinkを再利用する。上位publisherはroot:root0700の固定runtime・OS lock・子非稼働・期待BatchRunを確認してから、新規UUID.partへcanonical2行だけを書き、file fsync/byte再照合後に固定inbox-inspector.envへ公開する。既存targetを通常renameで置換しない。同runの既存公開fileは再読取/再同期で判定し、別run/不正fileは勝手に置換しない。公開後の終了/再試行・known partialの扱い・親からの固定namespace結線は上位publisherの次の詳細化/PGPT対象であり、本低位能力だけでは認定しない。
 
+### 6.11 親run環境publisher（SSC-049/PG-D-154、先行aa2baa3a）
+
+InspectorEnvironmentPublisherは借用runtime rootでprepare(BatchRun)/retire(BatchRun)を行うfile adapter。親は固定namespace/OS flockの全区間保持、root設定変更禁止、子unitが終端であること、永続原本に一致するBatchRunを独立して保証する。部品の成功をこれらの証明に使わない。借用rootを閉じず、private monitorで同instance操作を直列化する。
+
+- 全入口はnull拒否、割込flag保持/euid0、§6.9のroot:root0700・RW tmpfs・access ACLなし・型付きmetadataを検査。共通EnvironmentInodePolicyへreadonly readerの判定を抽出し、静的root/file仕様は変えない。新規空fileだけsize0を作成直後の検査に許可し、公開/読取は1～110を維持する。新規fileにもaccess ACL不在を必須とし、継承ACLを含む不明grantは拒否する。
+- 最初の固定target openだけがENOENTで、callbackに一度も入らずclose等の失敗もない場合を不存在とする。存在時は同runのcanonical全byte/属性を保持inodeから検証し、file force(true)→close→directory sync→同inode/全byte再読→root identity再検証の全成功でprepareを冪等成功とする。別run/cutoff/不正byte/型/ACLは置換せず拒否。
+- 不存在時はrun.idのUUID.partを0600 CREATE_NEWで作成し即時FD所有。既存partはCOLLISIONで保全し、期待run名というだけで削除/再利用しない。上位運用が過去不確定・所有・子停止・公開状態を確認して解決する。最初に空file属性/同device、書込みはcanonical110byte以下・進捗count/position一致・0/不正結果拒否、開始size0/終了size一致、force(true)、全channel closeとinode再検証を行う。
+- partを§6.9相当のbounded readで同run全byte照合してから固定targetへRENAME_NOREPLACEしdirectory syncする。公開targetのdev/ino/所有/mode/link/size/mtime/FSが書込済みpartと同じことを確認（renameに伴うctime変化は許容）、再度全byte/属性とroot identityを検証して返す。directory内容変更によるsize/mtime/ctime変化は許容するがdev/ino/owner/mode/link/FSの変化は拒否。途中に他root管理者が名前を書換えないことは親lock運用の前提。
+- retireは同runの公開fileを保持/全byte/属性検証し、同名identity再確認後だけunlink+directory syncする。最初から不存在だけ冪等成功でrootを再確認。途中消失/別run/壊れたfile/close/sync/割込は成功へ補完しない。子非停止中のretireは禁止で、親が実終端を確認してから呼ぶ。
+- 成功/失敗にかかわらず任意既存fileのchmod/chown、上書きrename、部分fileの無条件削除、失敗したrename/unlinkの逆操作を行わない。作成/公開/削除後sync失敗は不確定として保全・非成功。caller-owned一時byteは消去、IO診断は固定StorageIoExceptionでcause/suppressed/値を出さず、未知runtimeを正常化しない。runを新規採番/現在日時へ補完しない。
+
+PTは孤立実inode/FFM・合成root/tmpfs属性・明示IO faultで全分岐を検証。実root/manager/親全順序/永続anchorは別PGPT・後続IT条件を維持する。
+
 ## 7. 環境差分
+
 
 | 項目 | Local dev | PT/IT | Production |
 |---|---|---|---|
