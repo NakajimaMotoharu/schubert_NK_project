@@ -182,6 +182,12 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
     return open(parent, segment(name), CREATE_FLAGS, 0640);
   }
 
+  /** NK-OPS-001; OPS-009/UI251/SS343 §6.10; PG-D-153; PT-OPS-PFILE-001/008. */
+  @Override
+  public int createPrivateFile(int parent, String name) throws StorageIoException {
+    return open(parent, segment(name), CREATE_FLAGS, 0600);
+  }
+
   private int open(int parent, String name, int flags) throws StorageIoException {
     return open(parent, name, flags, 0);
   }

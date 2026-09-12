@@ -206,6 +206,19 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /**
+   * Own a new 0600 part inode. NK-OPS-001; OPS-009/UI251/SS333/343 §6.10; PG-D-153;
+   * PT-OPS-PFILE-001/003/004/005. Caller validates metadata/ACL and forces written content.
+   */
+  public <T> T createPrivatePart(UUID id, FileOperation<T> operation) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(id, "id");
+      Objects.requireNonNull(operation, "operation");
+      requireOpen();
+      return withEntry(calls.createPrivateFile(descriptor, id + ".part"), operation);
+    }
+  }
+
   private <T> T withEntry(int ownedDescriptor, FileOperation<T> operation)
       throws StorageIoException {
     try (EntryHandle entry = new EntryHandle(calls, ownedDescriptor)) {
@@ -265,6 +278,34 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       Objects.requireNonNull(id, "id");
       requireOpen();
       calls.unlink(descriptor, id + ".part");
+    }
+  }
+
+  /**
+   * No-replace publication of an owned part under one admitted name, then directory sync.
+   * NK-OPS-001; SS333/343 §6.10; PG-D-153; PT-OPS-PFILE-002/004..007. A sync failure does not undo
+   * the rename; callers must reconcile the uncertain result under their exclusive lock.
+   */
+  public void publishAs(UUID id, String name) throws StorageIoException {
+    synchronized (stateLock) {
+      Objects.requireNonNull(id, "id");
+      requireSegment(name);
+      requireOpen();
+      calls.publish(descriptor, id + ".part", name);
+      calls.sync(descriptor);
+    }
+  }
+
+  /**
+   * Unlink one caller-admitted owned entry and sync. NK-OPS-001; SS343 §6.10; PG-D-153;
+   * PT-OPS-PFILE-004..006. Does not itself establish run ownership, stable namespace or child stop.
+   */
+  public void unlinkEntry(String name) throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(name);
+      requireOpen();
+      calls.unlink(descriptor, name);
+      calls.sync(descriptor);
     }
   }
 

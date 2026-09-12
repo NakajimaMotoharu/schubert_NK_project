@@ -14,6 +14,11 @@ public interface DirectoryCalls {
   /** Atomically create and own a new 0640 file; never opens/replaces an existing name. */
   int createFile(int parent, String name) throws StorageIoException;
 
+  /** Private 0600 CREATE_NEW capability. Unsupported adapters must fail without mutation. */
+  default int createPrivateFile(int parent, String name) throws StorageIoException {
+    throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+  }
+
   void createDirectory(int parent, String name) throws StorageIoException;
 
   void publish(int directory, String part, String ready) throws StorageIoException;

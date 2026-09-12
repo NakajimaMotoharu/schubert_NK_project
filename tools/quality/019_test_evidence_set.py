@@ -47,7 +47,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(suite.get("name"), batch.HANDOFF_CLASS)
         self.assertEqual(tuple(c.get("name") for c in suite), batch.HANDOFF_METHODS)
         self.assertEqual(expected, batch.validate_handoff_suite(suite))
-        for position in range(8):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
             with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
         for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
@@ -74,16 +74,18 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(suites[:3], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
-        for position in range(7):
+        # BUG-150/YKT-116: visit every independently specified class after inventory growth.
+        for position in range(len(suites)):
             bad = copy.deepcopy(suites); bad[position].set("name", "unknown")
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
             bad = copy.deepcopy(suites); del bad[position]
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
-            bad = copy.deepcopy(suites); bad[position] = copy.deepcopy(suites[(position + 1) % 7])
+            bad = copy.deepcopy(suites); bad[position] = copy.deepcopy(suites[(position + 1) % len(suites)])
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
 
     def test_shared_storage_program_ownership(self):
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.LinuxFileLockTest"))
+        self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest"))
         for name in ("LinuxDirectoryCallsTest", "OwnedTransferDirectoryTest", "LinuxInodeSecurityTest"):
             self.assertTrue(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage." + name))
@@ -98,7 +100,7 @@ class EvidenceSetTest(unittest.TestCase):
         suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
         for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual({f"PT-DB-INBOX-{i:03}": cls + "#" + name for i, name in enumerate(names, 233)}, backup.validate_suite(suite))
-        for position in range(8):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
             with self.assertRaises(ValueError): backup.validate_suite(wrong)
         for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
@@ -143,7 +145,10 @@ class EvidenceSetTest(unittest.TestCase):
                    ("canonicalFixtures", "sourceAndSyntaxRejection", "urlBoundaries", "versionBoundaries", "sizeNullAndRedaction", "concurrentValidation")),
                   ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest", 1,
                    ("staticReadAndBoundaries", "runReadAndBinding", "permissionAndFilesystem", "metadataAndNull",
-                    "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor"))]
+                    "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor")),
+                  ("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest", 1,
+                   ("nativePrivateCreation", "atomicNoReplace", "scopedOwnership", "nameAndNullContracts",
+                    "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -156,7 +161,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
                        "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
-                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
+                       "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
@@ -265,7 +271,7 @@ class EvidenceSetTest(unittest.TestCase):
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual(16, len(inspection.validate_suite(suite, cls, names)))
-        for position in range(16):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite)
             wrong.remove(wrong[position])
             with self.assertRaises(ValueError):
@@ -298,7 +304,7 @@ class EvidenceSetTest(unittest.TestCase):
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual(8, len(inspection.validate_suite(suite, cls, names)))
-        for position in range(8):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite)
             wrong.remove(wrong[position])
             with self.assertRaises(ValueError):
@@ -331,7 +337,7 @@ class EvidenceSetTest(unittest.TestCase):
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual(8, len(inspection.validate_suite(suite, cls, names)))
-        for position in range(8):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite)
             wrong.remove(wrong[position])
             with self.assertRaises(ValueError):
@@ -362,7 +368,7 @@ class EvidenceSetTest(unittest.TestCase):
             ET.SubElement(suite, "testcase", classname=cls, name=name)
         expected = {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 18)}
         self.assertEqual(expected, batch.validate_log_suite(suite))
-        for position in range(12):
+        for position in range(len(suite)):
             wrong = copy.deepcopy(suite)
             wrong.remove(wrong[position])
             with self.assertRaises(ValueError):

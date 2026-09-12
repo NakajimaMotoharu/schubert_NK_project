@@ -36,8 +36,13 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
      ("canonicalFixtures", "sourceAndSyntaxRejection", "urlBoundaries", "versionBoundaries", "sizeNullAndRedaction", "concurrentValidation")),
     ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest", 1,
      ("staticReadAndBoundaries", "runReadAndBinding", "permissionAndFilesystem", "metadataAndNull",
-      "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor")))
+      "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor")),
+    ("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest", 1,
+     ("nativePrivateCreation", "atomicNoReplace", "scopedOwnership", "nameAndNullContracts",
+      "faultAndUncertainOutcomes", "retainedNamespace", "concurrentSinglePublication", "unsupportedAndNativeArguments")))
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
+PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
+    ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
     ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource"))
@@ -71,7 +76,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
                    "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
                    "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
-                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
+                   "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -100,6 +106,7 @@ def main():
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
     def module_for(cls):
         return {"dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
+                "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
                 "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
@@ -118,13 +125,14 @@ def main():
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
         for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
+                                *(("storage", s) for s in PRIVATE_SUBJECTS),
                                 *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -139,6 +147,7 @@ def main():
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT)]
+        sources += [repo / "src/schubert-nk-storage/src/main/java" / (s + ".java") for s in PRIVATE_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
@@ -190,6 +199,9 @@ def main():
         manifest["related"] += ["PG-D-152", "BUG-147", "YKT-115", "BUG-148", "BUG-149"]
         manifest["oracle"] += " 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state."
         manifest["limitations"] += " EFILE certifies borrowed-root read only. Fixed ancestor namespace/account resolution, OS lock continuity, source stability until systemd reads, atomic publisher and actual root deployment remain caller responsibilities."
+        manifest["related"] += ["PG-D-153", "BUG-150", "YKT-116"]
+        manifest["oracle"] += " 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS."
+        manifest["limitations"] += " PFILE is a low-level named-entry capability, not the environment publisher. Ownership/ACL/run admission, fixed stable namespace, actual child stop, expected-run retirement and recovery remain mandatory caller gates."
         manifest["deploymentCoverage"] = {
             "class": "not applicable", "method": "not applicable",
             "basis": "Every executable statement and decision outcome in the hashed shell template has an asserting test and recorded sh -x trace; no code is excluded. Unit is declarative, validated by independent exact directive map, not JaCoCo.",
