@@ -326,6 +326,18 @@ UUIDはlowercase36文字、時刻は`uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'`の27文字
 
 MaintenanceRecordsは3種encode/decode、MaintenanceActivationはBatchRun/activation UUID、MaintenanceCompletionはactivation/ended_at/0・10の型付きOutcomeを保持する。nullは境界で拒否し、byte入力の不正はraw cause/suppressedを含まない固定IOException、constructor不変条件違反は固定IllegalArgumentException。配列を保持/共有せず、recordのtoStringはidentityをredactする。記録実体はGitへ保存せず独立synthetic goldenだけを試験に使用する。永続file store・親unit/reboot・GC/DB照会の実装はcodecだけでは完了しない。
 
+### 6.14 借用rootの永続record IO（SSC-055/PG-D-157、先行19e22eb4）
+
+DurableRecordFilesはpackage内のfile能力であり、既に固定namespaceを認可したOwnedTransferDirectoryを借用する。任意pathのopen/provisioningやroot closeをしない。各操作をinstance内で直列化するが、callerは別instance/processも排除するOS flockとroot管理者の変更禁止を全区間で維持する。private root0700、regular0600/nlink1、root:root・ACLなし、同device、既定local filesystem（ext2/ext3/ext4/xfs/btrfs）のRWだけを受理し、tmpfs/remote/unknown/readonlyを拒否する。既存static/runtime環境fileの契約は変えない。
+
+read(name)の名前は固定activeまたはcanonical lowercase UUID＋.run/.begin/.doneだけ。.runは内容のrun UUID、.begin/.doneはactivation UUIDと一致必須。activeはactivation構造だけを保証し、begin/anchorとのgraphはcallerの別責務。nullはprogramming契約、名前不正は固定IllegalArgumentException、byte/IO不正は原因/suppressedなしのStorageIoException。不存在は最初のentry openがcallback未開始でMISSINGのときだけOptional.empty。途中消失/close失敗は不存在扱いしない。保持root/full file snapshot・bounded142byte読取・channel size/position/EOF・読取後の同inode/full metadataと同名再open・root前後を検証し、全資源close成功後だけcaller所有byteを返す。読取bufferはfinally消去。
+
+publish(name, canonicalBytes, partUUID)はbyteを独立copyし名前/値を検証してからmutationへ進む。既存は全byte/元inode一致だけforce/syncし、内容を一切変更しない。新規はcaller指定UUID.partのCREATE_NEW0600→bounded全byte write/size/force→保持再読と元snapshot照合→no-replace公開/dir sync→公開直後snapshot・再読・同名の全metadata/ctime再照合。renameだけのctime変化は許すが、その後の変化を許さない。既存part・競合target・部分失敗は保全し、自動上書き/再生成/消去はしない。part UUIDは非秘密の操作識別子でありrun原本の再採番ではない。
+
+remove(name, expectedBytes)はcallerが完了/GC条件を別に確認した後だけ使用する。初回不存在だけ冪等成功、存在時は全byte/元inode・直前full snapshot一致の後に限定unlink/dir sync。失敗時は逆操作や補完をせず不確実性をcallerへ返す。公開/削除のrootはidentityを前後比較し、自身のmutationによるdirectory size/時刻変化だけを許す。開始/終端割込とEUID0を検査し割込flagは保持する。owned channel/entryは全終了で閉じ、IO診断はscope終了後に固定化、未知runtime/NPEを正常化しない。
+
+PT-BAT-046～057/017の009・010はliteral72/109/140/141byteと実隔離inode/native no-replace/fsyncに合成root属性・fault portを組み合わせる。固定namespace/実root配備・state graph/OS lock/親終端/400日GC/DB参照判定はこの低位能力で認定しない。
+
 ## 7. 環境差分
 
 
