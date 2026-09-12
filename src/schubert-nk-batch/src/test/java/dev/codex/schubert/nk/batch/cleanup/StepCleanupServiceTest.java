@@ -29,6 +29,78 @@ final class StepCleanupServiceTest {
     db.stop();
   }
 
+  // BUG193/YKT152: declared, unknown and same-object cleanup failures.
+  private static void unknownCleanupMatrix() throws Exception {
+    for (int main = 0; main < 5; main++)
+      for (int other = 0; other < 7; other++)
+        for (boolean restore : new boolean[] {false, true}) {
+          reset(db);
+          try (var c = locked(db, true)) {
+            Throwable primary = cleanupFault(main);
+            Throwable secondary = other == 5 ? primary : cleanupFault(other);
+            var p = new Probe();
+            int[] injected = {0, 0};
+            p.before =
+                (key, count) -> {
+                  if (key.equals("statement.executeQuery") && count == 1) {
+                    injected[0]++;
+                    throw primary;
+                  }
+                  if ((!restore && key.equals("connection.rollback") && count == 1)
+                      || (restore && key.equals("connection.setAutoCommit") && count == 2)) {
+                    injected[1]++;
+                    throw secondary;
+                  }
+                };
+            boolean primaryUnknown = main >= 2;
+            boolean secondaryUnknown = other >= 2 && other <= 4 || other == 5 && main >= 2;
+            if (primaryUnknown || secondaryUnknown) {
+              Throwable expected = primaryUnknown ? primary : secondary;
+              assertSame(
+                  expected,
+                  assertThrows(
+                      expected.getClass(),
+                      () ->
+                          new StepCleanupService(() -> 0)
+                              .execute(
+                                  p.wrap(c),
+                                  attempt(CleanupKind.QUESTIONS),
+                                  CleanupKind.QUESTIONS)));
+              assertEquals(primaryUnknown ? 1 : 0, expected.getSuppressed().length);
+              if (primaryUnknown) {
+                var fixed =
+                    assertInstanceOf(CleanupStoppedException.class, expected.getSuppressed()[0]);
+                assertNull(fixed.getCause());
+                assertEquals(CleanupStopReason.DATABASE_FAILURE, fixed.reason());
+              }
+            } else {
+              stopped(
+                  CleanupStopReason.DATABASE_FAILURE,
+                  () ->
+                      new StepCleanupService(() -> 0)
+                          .execute(
+                              p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
+            }
+            assertArrayEquals(new int[] {1, 1}, injected);
+            assertEquals(restore ? 2 : 1, p.seen.get("connection.setAutoCommit"));
+            assertFalse(c.getAutoCommit());
+            p.closed();
+            c.rollback();
+          }
+        }
+  }
+
+  private static Throwable cleanupFault(int kind) {
+    return switch (kind) {
+      case 0 -> new SQLException("public SQL");
+      case 1 -> new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
+      case 2 -> new IllegalStateException("public runtime");
+      case 3 -> new NullPointerException("public null");
+      case 6 -> new BatchRepositoryException();
+      default -> new AssertionError("public fatal");
+    };
+  }
+
   @BeforeEach
   void seed() throws Exception {
     reset(db);
@@ -422,6 +494,24 @@ final class StepCleanupServiceTest {
 
   @Test
   void connectionStateRestorationAndNulls() throws Exception {
+    unknownCleanupMatrix();
+    // BUG193/YKT152: this borrowed-transaction owner has the same masking boundary.
+    try (var c = locked(db, true)) {
+      var primary = new IllegalStateException("public primary");
+      var p = new Probe();
+      p.unknown.put("statement.executeQuery", primary);
+      p.unknown.put("connection.rollback", new NullPointerException("public secondary"));
+      assertSame(
+          primary,
+          assertThrows(
+              IllegalStateException.class,
+              () ->
+                  new StepCleanupService(() -> 0)
+                      .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS)));
+      p.closed();
+      assertEquals(1, primary.getSuppressed().length);
+      c.rollback();
+    }
     assertThrows(NullPointerException.class, () -> new StepCleanupService(null));
     var service = new StepCleanupService(() -> 0);
     assertThrows(

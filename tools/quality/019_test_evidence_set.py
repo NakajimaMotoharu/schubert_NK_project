@@ -36,6 +36,53 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     @staticmethod
+    def pair_fixture(service=False):
+        cls, names, start = (
+            ("dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
+             ("commitAndExistingReceipt", "rollbackBothSteps", "uncertainCommitReplay", "connectionContract", "everyBoundaryFailure", "interruptionAfterCommit", "unknownPrimaryAndCleanup", "independentConnections"), 218) if service else
+            ("dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+             ("runningAndCommittedPair", "fullHandleAndMissingRows", "statusCounterAndTimeMatrix", "atomicPairAndReplay", "databaseGuardsAndLocks", "everyJdbcFault", "nullAndUnknownFailures", "concurrentBindings"), 210))
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_backup_pair_inventory(self):
+        for service, validate in ((False, batch.validate_pair_suite), (True, batch.validate_commit_suite)):
+            suite, expected = self.pair_fixture(service)
+            self.assertEqual(expected, validate(suite))
+            for position in range(8):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+                for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                    wrong = copy.deepcopy(suite); ET.SubElement(wrong[position], tag)
+                    with self.assertRaises(ValueError): validate(wrong)
+                for key, value in (("name", "unknown"), ("name", suite[(position + 1) % 8].get("name")), ("classname", "unknown")):
+                    wrong = copy.deepcopy(suite); wrong[position].set(key, value)
+                    with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+
+    def test_backup_pair_literal_traces(self):
+        rows = b"BACKUP_CONFIG|SUCCESS|2|2|0|67|2026-09-13 02:00:03.000000+00|true|true\nBACKUP_DB|SUCCESS|1|1|0|26|2026-09-13 02:00:03.000000+00|true|true\n"
+        expected = {
+            "PT-BAT-213-pair.txt": rows,
+            "PT-BAT-215-jdbc.txt": b"read=70\nnew=240\nreplay=70\ninjected=380\n",
+            "PT-BAT-218-commit.txt": b"fresh_jdbc=246\nreplay_jdbc=76\n" + rows,
+            "PT-BAT-220-uncertain-false.txt": b"committed_before_failure=false\nretry_updates=2\n" + rows,
+            "PT-BAT-220-uncertain-true.txt": b"committed_before_failure=true\nretry_updates=0\n" + rows,
+        }
+        batch.validate_pair_traces(expected)
+        for wrong in ({}, {**expected, "unknown": b""}):
+            with self.assertRaises(ValueError): batch.validate_pair_traces(wrong)
+        for name, value in expected.items():
+            wrong = dict(expected); del wrong[name]
+            with self.assertRaises(ValueError): batch.validate_pair_traces(wrong)
+            for position in range(len(value)):
+                wrong = dict(expected); wrong[name] = value[:position] + bytes([value[position] ^ 1]) + value[position+1:]
+                with self.assertRaises(ValueError): batch.validate_pair_traces(wrong)
+
+    @staticmethod
     def artifact_fixture():
         cls = "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest"
         names = ("trustedBundleAndManifestDigest", "completeFileSetAndCanonicalName", "directoryAndOwnerContracts", "perFileMetadataAndAcl", "rootAndChildRebinding", "eachFileReplacementAndMutation", "sizesShortLongAndZeroRead", "independentHashAndGoldenMismatch", "streamingBoundaryAndLargeFile", "everyIoFailure", "resourceClosureAndSuppression", "timeAndInterrupt", "providerNullRuntimeAndRedaction", "borrowedRootOwnershipAndClosed", "concurrentSerializedAccess", "readOnlyNoMutationInventory",)
@@ -555,6 +602,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
                  "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
                  "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
+                 "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+                 "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -567,8 +616,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(30, len(suites))
-        self.assertEqual(suites[:19], batch.select_program_suites(suites))
+        self.assertEqual(32, len(suites))
+        self.assertEqual(suites[:21], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -594,6 +643,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(247, 177))
         self.assertEqual("Batch module263 PT = NK-BAT-001193 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(263, 193))
+        self.assertEqual("Batch module311 PT = NK-BAT-001225 + NK-OPS-00186. " + suffix,
+                         batch.ownership_description(311, 225))
         self.assertEqual("Batch module295 PT = NK-BAT-001209 + NK-OPS-00186. " + suffix,
                          batch.ownership_description(295, 209))
         self.assertEqual("Batch module279 PT = NK-BAT-001209 + NK-OPS-00170. " + suffix,
@@ -957,8 +1008,12 @@ class EvidenceSetTest(unittest.TestCase):
         reports += [self.backup_fixture(False)[0], self.backup_fixture(True)[0]]
         artifact, expected_artifact = self.artifact_fixture()
         reports.append(artifact)
+        reports += [self.pair_fixture(False)[0], self.pair_fixture(True)[0]]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(209, len(accepted))
+        self.assertEqual(225, len(accepted))
+        for service in (False, True):
+            _, pair_expected = self.pair_fixture(service)
+            self.assertEqual(pair_expected, {k: v for k, v in accepted.items() if k in pair_expected})
         self.assertEqual(expected_artifact, {k: v for k, v in accepted.items() if k in expected_artifact})
         for codec in (False, True):
             _, backup_expected = self.backup_fixture(codec)

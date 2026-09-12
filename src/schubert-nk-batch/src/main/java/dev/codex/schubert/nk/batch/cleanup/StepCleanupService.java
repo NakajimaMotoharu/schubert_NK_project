@@ -74,7 +74,7 @@ public final class StepCleanupService {
       try {
         c.rollback();
         c.setAutoCommit(true);
-      } catch (SQLException cleanupFailure) {
+      } catch (SQLException | RuntimeException | Error cleanupFailure) {
         // BUG181/YKT142: classify without replacing/narrowing the original rethrow identity.
         if (failure instanceof Error
             || (failure instanceof RuntimeException
@@ -83,6 +83,10 @@ public final class StepCleanupService {
           failure.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
           throw failure;
         }
+        if (cleanupFailure instanceof Error fatal) throw fatal;
+        if (cleanupFailure instanceof RuntimeException
+            && !(cleanupFailure instanceof BatchRepositoryException)
+            && !(cleanupFailure instanceof CleanupStoppedException)) throw cleanupFailure;
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
       throw failure;

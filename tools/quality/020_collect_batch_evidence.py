@@ -8,6 +8,29 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
+PAIR_METHODS = ("runningAndCommittedPair", "fullHandleAndMissingRows", "statusCounterAndTimeMatrix", "atomicPairAndReplay", "databaseGuardsAndLocks", "everyJdbcFault", "nullAndUnknownFailures", "concurrentBindings",)
+COMMIT_CLASS = "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest"
+COMMIT_METHODS = ("commitAndExistingReceipt", "rollbackBothSteps", "uncertainCommitReplay", "connectionContract", "everyBoundaryFailure", "interruptionAfterCommit", "unknownPrimaryAndCleanup", "independentConnections",)
+PAIR_ROWS = b"BACKUP_CONFIG|SUCCESS|2|2|0|67|2026-09-13 02:00:03.000000+00|true|true\nBACKUP_DB|SUCCESS|1|1|0|26|2026-09-13 02:00:03.000000+00|true|true\n"
+PAIR_TRACES = {
+    "PT-BAT-213-pair.txt": PAIR_ROWS,
+    "PT-BAT-215-jdbc.txt": b"read=70\nnew=240\nreplay=70\ninjected=380\n",
+    "PT-BAT-218-commit.txt": b"fresh_jdbc=246\nreplay_jdbc=76\n" + PAIR_ROWS,
+    "PT-BAT-220-uncertain-false.txt": b"committed_before_failure=false\nretry_updates=2\n" + PAIR_ROWS,
+    "PT-BAT-220-uncertain-true.txt": b"committed_before_failure=true\nretry_updates=0\n" + PAIR_ROWS,
+}
+
+def validate_pair_suite(suite):
+    return validate_group(suite, PAIR_CLASS, PAIR_METHODS, 210)
+
+def validate_commit_suite(suite):
+    return validate_group(suite, COMMIT_CLASS, COMMIT_METHODS, 218)
+
+def validate_pair_traces(traces):
+    if traces != PAIR_TRACES:
+        raise ValueError("missing, extra or invalid independent backup pair trace")
+
 BACKUP_VALUE_CLASS = "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest"
 ARTIFACT_CLASS = "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest"
 ARTIFACT_METHODS = ("trustedBundleAndManifestDigest", "completeFileSetAndCanonicalName", "directoryAndOwnerContracts", "perFileMetadataAndAcl", "rootAndChildRebinding", "eachFileReplacementAndMutation", "sizesShortLongAndZeroRead", "independentHashAndGoldenMismatch", "streamingBoundaryAndLargeFile", "everyIoFailure", "resourceClosureAndSuppression", "timeAndInterrupt", "providerNullRuntimeAndRedaction", "borrowedRootOwnershipAndClosed", "concurrentSerializedAccess", "readOnlyNoMutationInventory",)
@@ -202,7 +225,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -288,7 +311,7 @@ def validate_reports(suites):
                   RETIREMENT_CLASS: validate_retirement_suite,
                   SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
                   STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
-                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite}
+                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -314,7 +337,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 295:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 311:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -324,6 +347,16 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    pair_root = target / "backup-step-traces"
+    pair_traces = {str(p.relative_to(pair_root)): p.read_bytes() for p in pair_root.rglob("*") if p.is_file()}
+    validate_pair_traces(pair_traces)
+    for folder, values in (("input/backup-pair", PAIR_TRACES), ("output/backup-pair", pair_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001/045_NK-BAT-001_backup両step横展開.md",
+                    evidence / "logs/BUG-191-194-YKT-151-153.md")
     artifact_root = target / "backup-artifact-traces"
     artifact_traces = {str(p.relative_to(artifact_root)): p.read_bytes() for p in artifact_root.rglob("*") if p.is_file()}
     validate_artifact_traces(artifact_traces)
@@ -458,6 +491,9 @@ def main():
     manifest["related"] += ["PG-D-164", "SSC-057", "BUG-179", "YKT-140", "BUG-180", "YKT-141", "BUG-181", "YKT-142"]
     manifest["related"] += ["PG-D-165", "SSC-058", "BUG-182", "BUG-183", "YKT-143", "YKT-144"]
     manifest["related"] += ["PG-D-166", "SSC-059", "BUG-184", "BUG-185", "BUG-186", "YKT-145", "YKT-146"]
+    manifest["related"] += ["PG-D-168", "SSC-061", "BUG-191", "BUG-192", "BUG-193", "BUG-194", "YKT-151", "YKT-152", "YKT-153"]
+    manifest["backupPairOracle"] = "041/043 BAT210..225: independent14-column two-row identity/counters/UTC microsecond ends; borrowed RW READ_COMMITTED and advisory owner. Both RUNNING or exact both SUCCESS only; atomic DB+CONFIG completion, rollback and uncertain commit replay without double update. Independently counted repository70/240/70=380 SQL fault positions and service246 positions/interrupt points; unknown primary/cleanup130 compound cases across Backup60+Step70 plus2 original counterexamples. Every owned JDBC resource closes, parent connection remains borrowed; null/Error/Runtime and concurrent isolated connections tested."
+    manifest["limitations"] += " Backup pair completion requires caller-trusted root manifest, continuous OS/root/artifact verification. No manifest authentication, dump/tar/age creation, seven-generation retention or whole-parent completion."
     manifest["backupArtifactOracle"] = "038/BAT194..209: independent964byte manifest and public26/35/32byte inputs; actual returned manifest digest, canonical exact4 entries, held inode and final rebinding,0700/0600 owner/device/link/ACL/RW, streaming65535/65536/65537/196613byte fixed SHA256, all123 fallible IO positions and207 clock boundaries. Safe resource closure, read-only unchanged bytes/metadata, null/unknown exception ownership, 64serialized callers. BUG186 final-clock interrupt also rechecked by Log/Step/Inspection executor regression."
     manifest["limitations"] += " BackupArtifactVerifier checks real local held inode/bytes against caller-trusted claims under synthetic root/owner security admission in PT. It is not backup creation, valid pg_dump/tar/age, trusted DB binding, seven-generation retention, parent success or deployed root/NAS verification."
     manifest["backupManifestOracle"] = "033/035 BAT178..193: independent 965-byte canonical JSON/SHA256, immutable nine-field claims and complete two-step binding, microsecond UTC and IANA historical name literals, positive three-file counts/overflow, bounded nonsecret version tokens, exact LF/schema/order, all965 positions mutated with tilde/NUL/nonASCII, null/ownership/64concurrency. Claimed digest metadata only: no actual backup/restore/DB success authorization."

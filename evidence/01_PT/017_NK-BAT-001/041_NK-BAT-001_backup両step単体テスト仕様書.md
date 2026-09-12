@@ -1,6 +1,6 @@
 # NK-BAT-001 backup両step 単体テスト仕様書
 
-SSC061先行26fb3bad、PG168。BAK/BKO/OPS009/DAT009/UI251/SS311・3318.3・3416.6・343。正式11source凍結中に仕様先行。未実装・未実行・認定加算0。
+SSC061先行26fb3bad、PG168。BAK/BKO/OPS009/DAT009/UI251/SS311・3318.3・3416.6・343。13b9931aで仕様先行後、ProductionとPT-BAT-210～217を並行実装。選択再試験は成功、全clean verify認定前のため認定加算0。独立14列/JDBC全出現位置・実trace・BUG191～194/YKT151～153の全対象は045を参照。
 
 Production BackupStepRepositoryのconstructor/全public/private methodを対象に独立PTを並行実装する。manifestは公開合成fixture（PG165/166の3file bytes26/35/32と同一）。合成run/cutoff/2完全handleをfixtureとして明記し、期待値はProduction methodで生成せずliteral14列/SQL後条件/時刻を使用する。秘密credential/DB dump/実master/実manifest値はGitへ保存しない。
 
