@@ -1,5 +1,22 @@
 # NK-BAT-001 backup実体保持inode検証単体テスト仕様書
 
+## 探索実測・最終clock割込の横展開
+
+BUG184/185/186とYKT145/146は040へ先行起票・全対象/再発防止を記録。探索4（2026-09-13 07:24:27 JST終了、exit0）は新16件と既存Log12/Step8/Inspection8を成功。新4class/23method/198line/114branch missed0、別static実行07:25:34 JST/33.117秒/exit0。全module正式認定はまだ未完了。
+
+独立123 fallible/207 clock/2 euidのcall map・1061 partial readsと実観測は040参照。clock取得中の割込は終了直前を含め再確認する（BUG186）。既存BAT024/BAT174/DB-INBOX-101も同causeの負例を追加。時間limit/interruptの優先は割込、flag保持。OS blocking読取の強制取消を保証しない。
+
+Streaming inputのD×Nから事前に独立Python hashlibで求めたMANIFEST側hash:
+
+| N | manifest size | SHA256 |
+|---:|---:|---|
+| 65535 | 967 | e16edf98d60d11aed52517ca8a367c0026ad416c5b955bf84cc25383fe6ec82e |
+| 65536 | 967 | 20c4fbf06b348ae91fb9908186a44997951bd00e558d760467bb7076a3638a08 |
+| 65537 | 967 | ce4e4ddcddce82822438b31c700d82ef73542b1acdbd0751f54a487fd358b6a2 |
+| 196613 | 968 | 1568db96d49dba9f5f5c24eced6ab35c3b5c7cb43748acc056d11baceedb2ab1 |
+
+4field private recordの標準生成filter（プロジェクト除外追加なし）と意味上の全field観点、資源/例外/null契約は040 §2/3へ明記。
+
 ## 実装前固定fixture（独立算出）
 
 Python3 hashlibだけで公開literal byteからSHA256を独立計算（Productionは未実装）。全textはASCII・末尾LF1つ、opaque fixtureであり実dump/tar/ageではない。

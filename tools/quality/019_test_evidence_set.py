@@ -35,6 +35,42 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    @staticmethod
+    def artifact_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest"
+        names = ("trustedBundleAndManifestDigest", "completeFileSetAndCanonicalName", "directoryAndOwnerContracts", "perFileMetadataAndAcl", "rootAndChildRebinding", "eachFileReplacementAndMutation", "sizesShortLongAndZeroRead", "independentHashAndGoldenMismatch", "streamingBoundaryAndLargeFile", "everyIoFailure", "resourceClosureAndSuppression", "timeAndInterrupt", "providerNullRuntimeAndRedaction", "borrowedRootOwnershipAndClosed", "concurrentSerializedAccess", "readOnlyNoMutationInventory",)
+        suite = ET.Element("testsuite", name=cls, tests="16", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 194)}
+
+    def test_backup_artifact_inventory(self):
+        suite, expected = self.artifact_fixture()
+        self.assertEqual(expected, batch.validate_artifact_suite(suite))
+        for position in range(16):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_artifact_suite(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[position], tag)
+                with self.assertRaises(ValueError): batch.validate_artifact_suite(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[(position + 1) % 16].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[position].set(key, value)
+                with self.assertRaises(ValueError): batch.validate_artifact_suite(wrong)
+        for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_artifact_suite(wrong)
+
+    def test_backup_artifact_independent_digest_trace(self):
+        name = "PT-BAT-194-digest.txt"
+        expected = b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\n"
+        batch.validate_artifact_traces({name: expected})
+        for wrong in ({}, {name: expected, "unknown": b""}, {name: expected + b"\n"}):
+            with self.assertRaises(ValueError): batch.validate_artifact_traces(wrong)
+        for position in range(len(expected)):
+            wrong = expected[:position] + bytes([expected[position] ^ 1]) + expected[position+1:]
+            with self.assertRaises(ValueError): batch.validate_artifact_traces({name: wrong})
+        self.assertEqual(964, len(batch.ARTIFACT_GOLDEN))
+        self.assertEqual("bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370",
+                         hashlib.sha256(batch.ARTIFACT_GOLDEN).hexdigest())
 
     @staticmethod
     def backup_fixture(codec=False):
@@ -491,6 +527,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
                  "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
                  "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
+                 "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -501,8 +538,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(27, len(suites))
-        self.assertEqual(suites[:18], batch.select_program_suites(suites))
+        self.assertEqual(28, len(suites))
+        self.assertEqual(suites[:19], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -528,6 +565,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(247, 177))
         self.assertEqual("Batch module263 PT = NK-BAT-001193 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(263, 193))
+        self.assertEqual("Batch module279 PT = NK-BAT-001209 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(279, 209))
         self.assertEqual("Batch module65 PT = NK-BAT-00137 + NK-OPS-00128. " + suffix,
                          batch.ownership_description(65, 37))
         self.assertEqual("Batch module91 PT = NK-BAT-00137 + NK-OPS-00154. " + suffix,
@@ -877,8 +916,11 @@ class EvidenceSetTest(unittest.TestCase):
         step_repository, expected_step_repository = self.step_fixture(True)
         reports = [suite, repository, handoff, records, durable, lifecycle, refs, retirement_records, retirement, summary, attempt, step_values, step_repository] + [self.atomic_fixture(i)[0] for i in range(3)]
         reports += [self.backup_fixture(False)[0], self.backup_fixture(True)[0]]
+        artifact, expected_artifact = self.artifact_fixture()
+        reports.append(artifact)
         accepted = batch.validate_reports(reports)
-        self.assertEqual(193, len(accepted))
+        self.assertEqual(209, len(accepted))
+        self.assertEqual(expected_artifact, {k: v for k, v in accepted.items() if k in expected_artifact})
         for codec in (False, True):
             _, backup_expected = self.backup_fixture(codec)
             self.assertEqual(backup_expected, {k: v for k, v in accepted.items() if k in backup_expected})

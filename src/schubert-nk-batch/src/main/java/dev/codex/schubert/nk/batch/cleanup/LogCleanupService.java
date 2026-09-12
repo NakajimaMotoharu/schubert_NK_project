@@ -57,6 +57,9 @@ public final class LogCleanupService {
     if (Thread.currentThread().isInterrupted())
       throw new CleanupStoppedException(CleanupStopReason.INTERRUPTED);
     long elapsed = clock.getAsLong() - start;
+    // BUG186/YKT146: interruption may arrive while the clock boundary executes.
+    if (Thread.currentThread().isInterrupted())
+      throw new CleanupStoppedException(CleanupStopReason.INTERRUPTED);
     if (elapsed < 0 || elapsed >= LIMIT_NANOS)
       throw new CleanupStoppedException(CleanupStopReason.TIME_LIMIT);
   }

@@ -190,6 +190,30 @@ final class LogCleanupServiceTest {
 
   @Test
   void interruptsRemainSet() throws Exception {
+    // BUG186/YKT146: empty run has start, preflight and post-commit final clock.
+    for (int point = 1; point <= 3; point++) {
+      reset();
+      int selected = point;
+      AtomicInteger calls = new AtomicInteger();
+      try (var c = batch()) {
+        LongSupplier time =
+            () -> {
+              if (calls.incrementAndGet() == selected) Thread.currentThread().interrupt();
+              return 0;
+            };
+        try {
+          stopped(CleanupStopReason.INTERRUPTED, () -> new LogCleanupService(time).execute(c, RUN));
+          assertTrue(Thread.currentThread().isInterrupted());
+          assertEquals(selected, calls.get());
+        } finally {
+          Thread.interrupted();
+        }
+        assertTrue(c.getAutoCommit());
+        assertFalse(c.isClosed());
+      }
+      if (point == 3) assertEquals("0|0|0|true", progress());
+    }
+    reset();
     try (var c = batch()) {
       var probe = new ServiceJdbcProbe();
       Thread.currentThread().interrupt();

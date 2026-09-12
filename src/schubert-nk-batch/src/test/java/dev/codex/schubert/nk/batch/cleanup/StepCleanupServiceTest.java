@@ -255,6 +255,35 @@ final class StepCleanupServiceTest {
 
   @Test
   void timeoutInterruptAndClockWrap() throws Exception {
+    // BUG186/YKT146: start, preflight, two before/after chunk clock pairs (six calls).
+    for (int point = 1; point <= 6; point++) {
+      reset(db);
+      int selected = point;
+      AtomicInteger calls = new AtomicInteger();
+      try (var c = locked(db, true);
+          var admin = db.admin()) {
+        LongSupplier time =
+            () -> {
+              if (calls.incrementAndGet() == selected) Thread.currentThread().interrupt();
+              return 0;
+            };
+        try {
+          stopped(
+              CleanupStopReason.INTERRUPTED,
+              () ->
+                  new StepCleanupService(time)
+                      .execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
+          assertTrue(Thread.currentThread().isInterrupted());
+          assertEquals(selected, calls.get());
+        } finally {
+          Thread.interrupted();
+        }
+        long n = point <= 3 ? 0 : 1;
+        assertEquals("RUNNING|" + n + "|" + n + "|0|0|true", totals(admin, 90011));
+        assertTrue(c.getAutoCommit());
+        assertFalse(c.isClosed());
+      }
+    }
     for (long elapsed : new long[] {LIMIT, LIMIT + 1, -1}) {
       AtomicInteger calls = new AtomicInteger();
       LongSupplier time = () -> calls.getAndIncrement() == 0 ? 0 : elapsed;

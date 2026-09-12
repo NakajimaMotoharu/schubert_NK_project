@@ -53,6 +53,9 @@ public final class InspectionRunExecutor {
       return Optional.of(InspectionExecution.Status.INTERRUPTED);
     // Signed subtraction tolerates nanoTime's natural wrap; a negative delta is fail-closed.
     long elapsed = monotonicNanos.getAsLong() - started;
+    // BUG186/YKT146: also observe interruption at the final clock boundary.
+    if (Thread.currentThread().isInterrupted())
+      return Optional.of(InspectionExecution.Status.INTERRUPTED);
     if (elapsed < 0 || elapsed >= TIME_LIMIT_NANOS)
       return Optional.of(InspectionExecution.Status.TIME_LIMIT);
     return Optional.empty();

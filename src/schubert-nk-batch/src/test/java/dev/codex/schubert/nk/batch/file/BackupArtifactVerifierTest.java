@@ -1,0 +1,748 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.batch.backup.*;
+import dev.codex.schubert.nk.storage.*;
+import java.io.*;
+import java.nio.file.*;
+import java.nio.file.attribute.FileTime;
+import java.security.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** BAK/BKO/UI251/SS341 6.5/343 5.3; SSC059/PG166; BAT194..209, see 017/038. */
+final class BackupArtifactVerifierTest {
+  @TempDir Path temporary;
+
+  @Test
+  void trustedBundleAndManifestDigest() throws Exception {
+    try (var f = fixture()) {
+      BackupFileDigest actual = f.verifier().verify(f.expected);
+      assertEquals(964, actual.size());
+      assertEquals(MANIFEST_HASH, actual.sha256());
+      assertEquals(93, f.expected.totalBytes());
+      assertEquals(67, f.expected.configurationBytes());
+      assertEquals(COUNTS, f.counts);
+      assertEquals(123, f.position);
+      f.released();
+      f.unchanged();
+      Path traces = Path.of("target", "backup-artifact-traces");
+      Files.createDirectories(traces);
+      Files.writeString(
+          traces.resolve("PT-BAT-194-digest.txt"), actual.size() + "|" + actual.sha256() + "\n");
+    }
+    try (var f = fixture()) {
+      // Default SHA-256 factory with injected IO/clock, not a production-generated expected.
+      var actual = new BackupArtifactVerifier(f.root, f, UID, GID, f, f::clock).verify(f.expected);
+      assertEquals(MANIFEST_HASH, actual.sha256());
+      f.released();
+    }
+  }
+
+  @Test
+  void completeFileSetAndCanonicalName() throws Exception {
+    for (int option = 0; option < 6; option++) {
+      final int chosen = option;
+      try (var f = fixture()) {
+        f.listing =
+            held -> {
+              var paths = new ArrayList<>(NAMES.stream().map(held::resolve).toList());
+              switch (chosen) {
+                case 0 -> paths.remove(3);
+                case 1 -> paths.add(held.resolve("unknown"));
+                case 2 -> paths.set(3, paths.get(0));
+                case 3 -> paths.set(3, null);
+                case 4 -> paths.set(3, Path.of("relative"));
+                case 5 -> paths.set(3, held.resolve("unknown"));
+                default -> throw new AssertionError();
+              }
+              return paths;
+            };
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+        f.unchanged();
+      }
+    }
+    try (var f = fixture()) {
+      Files.move(f.child, f.parent.resolve(DIR + ".part"));
+      failure(() -> f.verifier().verify(f.expected));
+      assertTrue(Files.exists(f.parent.resolve(DIR + ".part")));
+      f.released();
+    }
+    try (var f = fixture()) {
+      Files.createDirectory(f.parent.resolve("public-other-generation"));
+      assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
+      assertTrue(Files.isDirectory(f.parent.resolve("public-other-generation")));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void directoryAndOwnerContracts() throws Exception {
+    for (String role : List.of("parent", "child"))
+      for (var bad :
+          List.<Map.Entry<String, Object>>of(
+              Map.entry("mode", 040750), Map.entry("mode", 0100700),
+              Map.entry("uid", 0), Map.entry("gid", 0),
+              Map.entry("nlink", 1), Map.entry("size", -1L))) {
+        try (var f = fixture()) {
+          f.selectedRole = role;
+          f.metadata = (name, values) -> values.put(bad.getKey(), bad.getValue());
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+          f.unchanged();
+        }
+      }
+    for (String role : List.of("parent", "child")) {
+      try (var f = fixture()) {
+        f.selectedRole = role;
+        f.readonly = true;
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+      }
+    }
+    try (var f = fixture()) {
+      f.selectedRole = "child";
+      f.metadata = (role, values) -> values.put("dev", ((Long) values.get("dev")) + 1);
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+    }
+    for (long id : new long[] {Long.MIN_VALUE, 0, 0x100000000L, Long.MAX_VALUE})
+      try (var f = fixture()) {
+        assertThrows(
+            IllegalArgumentException.class, () -> new BackupArtifactVerifier(f.root, f, id, GID));
+        assertThrows(
+            IllegalArgumentException.class, () -> new BackupArtifactVerifier(f.root, f, UID, id));
+      }
+    for (long id : new long[] {1, 0xffffffffL})
+      try (var f = fixture()) {
+        var verifier = new BackupArtifactVerifier(f.root, f, id, id, f, f::digest, f::clock);
+        f.metadata =
+            (role, values) -> {
+              if (role.equals("parent")
+                  || role.equals("child")
+                  || role.equals("schubert_nk.dump")) {
+                values.put("uid", (int) id);
+                values.put("gid", (int) id);
+              }
+            };
+        assertEquals(MANIFEST_HASH, verifier.verify(f.expected).sha256());
+        f.released();
+      }
+    try (var f = fixture()) {
+      f.effective = 1000;
+      failure(() -> f.verifier().verify(f.expected));
+      assertEquals(0, f.channelCount);
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("effectiveUid") && n == 2) f.effective = 1000;
+          };
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+    }
+  }
+
+  @Test
+  void perFileMetadataAndAcl() throws Exception {
+    for (String name : NAMES) {
+      for (var bad :
+          List.<Map.Entry<String, Object>>of(
+              Map.entry("mode", 0100640),
+              Map.entry("mode", 0120600),
+              Map.entry("uid", 99),
+              Map.entry("gid", 99),
+              Map.entry("nlink", 2),
+              Map.entry("size", 0L),
+              Map.entry("dev", Long.MIN_VALUE))) {
+        try (var f = fixture()) {
+          f.selectedRole = name;
+          f.metadata = (role, values) -> values.put(bad.getKey(), bad.getValue());
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+          f.unchanged();
+        }
+      }
+      for (byte[] acl : Arrays.asList(null, new byte[1], new byte[44])) {
+        try (var f = fixture()) {
+          f.selectedRole = name;
+          f.acl = acl;
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+        }
+      }
+      try (var f = fixture()) {
+        f.selectedRole = name;
+        f.readonly = true;
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+      }
+    }
+    for (String field :
+        List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+      for (boolean absent : List.of(false, true))
+        try (var f = fixture()) {
+          f.metadata =
+              (role, values) -> {
+                if (absent) values.remove(field);
+                else values.put(field, "not-a-typed-value");
+              };
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+        }
+    try (var f = fixture()) {
+      f.nullAttributes = true;
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+    }
+  }
+
+  @Test
+  void sizesShortLongAndZeroRead() throws Exception {
+    for (String name : NAMES) {
+      for (String mode : List.of("zero", "short", "count", "position", "extra", "eof-position"))
+        try (var f = fixture()) {
+          f.selectedRole = name;
+          f.readMode = mode;
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+          f.unchanged();
+        }
+      for (String mode : List.of("first", "last"))
+        try (var f = fixture()) {
+          f.selectedRole = name;
+          f.sizeMode = mode;
+          failure(() -> f.verifier().verify(f.expected));
+          f.released();
+          f.unchanged();
+        }
+    }
+    try (var f = fixture()) {
+      f.smallRead = 1;
+      assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
+      assertEquals(1061, f.counts.get("read")); // 964+26+35+32 data reads, plus four EOF reads.
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void independentHashAndGoldenMismatch() throws Exception {
+    for (String name : NAMES)
+      try (var f = fixture()) {
+        f.selectedRole = name;
+        f.readMode = "content";
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+        f.unchanged();
+      }
+    for (int position : new int[] {0, 500, 963})
+      try (var f = fixture()) {
+        byte[] wrong = golden();
+        wrong[position] ^= 1;
+        Files.write(f.child.resolve("MANIFEST.json"), wrong);
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+        assertArrayEquals(wrong, Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+      }
+    try (var f = fixture()) {
+      var wrong =
+          BackupManifestFixture.manifest(
+              6,
+              new BackupFileDigest(26, "0".repeat(64)),
+              7,
+              new BackupFileDigest(35, CONFIG_HASH),
+              8,
+              new BackupFileDigest(32, CREDS_HASH));
+      failure(() -> f.verifier().verify(wrong));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void everyIoFailure() throws Exception {
+    List<String> observed;
+    try (var f = fixture()) {
+      f.verifier().verify(f.expected);
+      assertEquals(COUNTS, f.counts);
+      assertEquals(123, f.events.size());
+      observed = List.copyOf(f.events);
+    }
+    int injected = 0;
+    for (int position = 1; position <= 123; position++) {
+      try (var f = fixture()) {
+        f.faultAt = position;
+        failure(() -> f.verifier().verify(f.expected));
+        assertTrue(f.events.size() >= position);
+        assertEquals(observed.get(position - 1), f.events.get(position - 1));
+        f.released();
+        f.unchanged();
+        injected++;
+      }
+    }
+    assertEquals(123, injected);
+  }
+
+  @Test
+  void borrowedRootOwnershipAndClosed() throws Exception {
+    try (var f = fixture()) {
+      f.verifier().verify(f.expected);
+      f.released();
+      assertEquals(Boolean.TRUE, f.root.atDirectory(held -> Files.isDirectory(held)));
+      assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
+      f.released();
+      f.unchanged();
+    }
+    try (var f = fixture()) {
+      f.tracking = false;
+      f.root.close();
+      f.tracking = true;
+      failure(() -> f.verifier().verify(f.expected));
+      assertTrue(f.directories.isEmpty());
+    }
+    try (var f = fixture()) {
+      // The real metadata adapter does not trust synthetic policy ownership.
+      var verifier = new BackupArtifactVerifier(f.root, f, 1, 1);
+      failure(() -> verifier.verify(f.expected));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void rootAndChildRebinding() throws Exception {
+    for (int point : new int[] {15, 16, 17})
+      try (var f = fixture()) {
+        f.hook =
+            (name, count) -> {
+              if (name.equals("attributes") && count == point)
+                f.metadata = (role, values) -> values.put("ino", ((Long) values.get("ino")) + 1);
+            };
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+      }
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("openDirectory") && n == 2) {
+              try {
+                Files.move(f.child, f.parent.resolve("saved-generation"));
+                Files.createDirectory(f.child);
+                Files.setPosixFilePermissions(
+                    f.child, java.nio.file.attribute.PosixFilePermissions.fromString("rwx------"));
+              } catch (IOException e) {
+                throw new UncheckedIOException(e);
+              }
+            }
+          };
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+      assertTrue(Files.exists(f.parent.resolve("saved-generation/MANIFEST.json")));
+    }
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("closeDirectory") && n == 2)
+              try {
+                Files.writeString(f.parent.resolve("public-interference"), "public");
+              } catch (IOException e) {
+                throw new UncheckedIOException(e);
+              }
+          };
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void eachFileReplacementAndMutation() throws Exception {
+    for (int index = 0; index < NAMES.size(); index++)
+      for (String mode : List.of("replacement", "same-bytes", "mtime", "permission")) {
+        final int selected = index;
+        try (var f = fixture()) {
+          String target = NAMES.get(index);
+          f.hook =
+              (name, n) -> {
+                if (name.equals("openEntry") && n == 5) {
+                  Path file = f.child.resolve(target);
+                  try {
+                    switch (mode) {
+                      case "replacement" -> {
+                        byte[] bytes = Files.readAllBytes(file);
+                        Files.move(file, f.child.resolve("saved-" + target));
+                        Files.write(file, bytes);
+                        Files.setPosixFilePermissions(
+                            file,
+                            java.nio.file.attribute.PosixFilePermissions.fromString("rw-------"));
+                      }
+                      case "same-bytes" -> Files.write(file, Files.readAllBytes(file));
+                      case "mtime" -> Files.setLastModifiedTime(file, FileTime.fromMillis(1));
+                      case "permission" ->
+                          Files.setPosixFilePermissions(
+                              file,
+                              java.nio.file.attribute.PosixFilePermissions.fromString("rw-r-----"));
+                      default -> throw new AssertionError();
+                    }
+                  } catch (IOException e) {
+                    throw new UncheckedIOException(e);
+                  }
+                }
+              };
+          failure(() -> f.verifier().verify(f.expected));
+          assertEquals(5 + selected, f.counts.get("openEntry"));
+          f.released();
+        }
+      }
+    // A real in-place mutation during read is rejected, not just a synthetic metadata difference.
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("read") && n == 3)
+              try {
+                Files.writeString(f.child.resolve("schubert_nk.dump"), "X".repeat(26));
+              } catch (IOException e) {
+                throw new UncheckedIOException(e);
+              }
+          };
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+    }
+  }
+
+  @Test
+  void streamingBoundaryAndLargeFile() throws Exception {
+    Map<Integer, String> fileHashes =
+        Map.of(
+            65535, "00cb85dd20678f79167f809e3f17f03c63007640367ec24ff7bde50250f65431",
+            65536, "dcb3cceeb89595b15abac3233c5871a9dc8d5e4af56443c0c5085386c9b50439",
+            65537, "c2c8deb12c89c8025c92a362b28cafc28437fc5b54bce28df26763b810b22652",
+            196613, "77c51a7e252a8d972e7d4ac7897a7a80eb95f37c7ba798d9f8a5b76056738f91");
+    Map<Integer, String> manifestHashes =
+        Map.of(
+            65535, "e16edf98d60d11aed52517ca8a367c0026ad416c5b955bf84cc25383fe6ec82e",
+            65536, "20c4fbf06b348ae91fb9908186a44997951bd00e558d760467bb7076a3638a08",
+            65537, "ce4e4ddcddce82822438b31c700d82ef73542b1acdbd0751f54a487fd358b6a2",
+            196613, "1568db96d49dba9f5f5c24eced6ab35c3b5c7cb43748acc056d11baceedb2ab1");
+    for (int size : List.of(65535, 65536, 65537, 196613))
+      try (var f = fixture()) {
+        byte[] bytes = new byte[size];
+        Arrays.fill(bytes, (byte) 'D');
+        Files.write(f.child.resolve("schubert_nk.dump"), bytes);
+        String literal =
+            new String(golden(), java.nio.charset.StandardCharsets.US_ASCII)
+                .replace("\"size\":26,", "\"size\":" + size + ",")
+                .replace(DUMP_HASH, fileHashes.get(size));
+        Files.writeString(
+            f.child.resolve("MANIFEST.json"), literal, java.nio.charset.StandardCharsets.US_ASCII);
+        f.expected =
+            BackupManifestFixture.manifest(
+                6,
+                new BackupFileDigest(size, fileHashes.get(size)),
+                7,
+                new BackupFileDigest(35, CONFIG_HASH),
+                8,
+                new BackupFileDigest(32, CREDS_HASH));
+        var actual = f.verifier().verify(f.expected);
+        assertEquals(size == 196613 ? 968 : 967, actual.size());
+        assertEquals(manifestHashes.get(size), actual.sha256());
+        assertEquals(7 + (size + 65535) / 65536, f.counts.get("read"));
+        assertTrue(f.buffers.stream().allMatch(b -> b.length == 65536));
+        f.released();
+      }
+  }
+
+  @Test
+  void resourceClosureAndSuppression() throws Exception {
+    for (String location : List.of("read", "next", "openEntry"))
+      for (int kind = 0; kind < 4; kind++)
+        try (var f = fixture()) {
+          Throwable primary =
+              switch (kind) {
+                case 0 -> new IOException("public original IO");
+                case 1 -> new IllegalStateException("public unknown runtime");
+                case 2 -> new NullPointerException("public contract failure");
+                default -> new AssertionError("public unknown error");
+              };
+          f.extraFaults.add(location + "#1");
+          f.faultTypes.put(location + "#1", primary);
+          f.extraFaults.add("closeDirectory#1");
+          if (location.equals("read")) f.extraFaults.add("closeChannel#1");
+          if (location.equals("next")) f.extraFaults.add("closeNames#1");
+          if (kind == 0) failure(() -> f.verifier().verify(f.expected));
+          else {
+            Throwable actual =
+                assertThrows(primary.getClass(), () -> f.verifier().verify(f.expected));
+            assertSame(primary, actual);
+            assertNull(actual.getCause());
+            assertTrue(actual.getSuppressed().length >= 1);
+            for (Throwable secondary : actual.getSuppressed()) {
+              assertInstanceOf(StorageIoException.class, secondary);
+              assertNull(secondary.getCause());
+              assertEquals("transfer storage operation failed", secondary.getMessage());
+            }
+          }
+          f.released();
+          f.unchanged();
+        }
+  }
+
+  @Test
+  void timeAndInterrupt() throws Exception {
+    for (long elapsed : new long[] {-1, 1800000000000L, 1800000000001L})
+      try (var f = fixture()) {
+        f.hook =
+            (name, n) -> {
+              if (name.equals("clock") && n == 2) f.clockValue = 100 + elapsed;
+            };
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+      }
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("clock") && n == 2) f.clockValue = 100 + 1799999999999L;
+          };
+      assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.clockValue = Long.MAX_VALUE - 50;
+      f.hook =
+          (name, n) -> {
+            if (name.equals("clock") && n == 2) f.clockValue = Long.MIN_VALUE + 49;
+          };
+      assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
+      f.released();
+    }
+    for (int position = 2; position <= 207; position++) {
+      final int selected = position;
+      try (var f = fixture()) {
+        f.hook =
+            (name, n) -> {
+              if (name.equals("clock") && n == selected) f.clockValue = 100 + 1800000000000L;
+            };
+        failure(() -> f.verifier().verify(f.expected));
+        f.released();
+        f.unchanged();
+      }
+    }
+    for (int position = 1; position <= 207; position++) {
+      final int selected = position;
+      try (var f = fixture()) {
+        f.hook =
+            (name, n) -> {
+              if (name.equals("clock") && n == selected) Thread.currentThread().interrupt();
+            };
+        try {
+          failure(() -> f.verifier().verify(f.expected));
+          assertTrue(Thread.currentThread().isInterrupted());
+        } finally {
+          Thread.interrupted();
+        }
+        f.released();
+        f.unchanged();
+      }
+    }
+  }
+
+  @Test
+  void providerNullRuntimeAndRedaction() throws Exception {
+    try (var f = fixture()) {
+      assertThrows(NullPointerException.class, () -> new BackupArtifactVerifier(null, f, UID, GID));
+      assertThrows(
+          NullPointerException.class, () -> new BackupArtifactVerifier(f.root, null, UID, GID));
+      assertThrows(
+          NullPointerException.class,
+          () -> new BackupArtifactVerifier(f.root, f, UID, GID, null, f::digest, f::clock));
+      assertThrows(
+          NullPointerException.class,
+          () -> new BackupArtifactVerifier(f.root, f, UID, GID, f, null, f::clock));
+      assertThrows(
+          NullPointerException.class,
+          () -> new BackupArtifactVerifier(f.root, f, UID, GID, f, f::digest, null));
+      assertThrows(NullPointerException.class, () -> f.verifier().verify(null));
+      assertEquals(Map.of(), f.counts);
+      f.released();
+    }
+    for (int mode = 0; mode < 3; mode++)
+      try (var f = fixture()) {
+        f.nullNames = mode == 0;
+        f.nullChannel = mode == 1;
+        f.nullDigest = mode == 2;
+        if (mode == 2)
+          assertThrows(NullPointerException.class, () -> f.verifier().verify(f.expected));
+        else failure(() -> f.verifier().verify(f.expected));
+        f.released();
+      }
+    for (byte[] digest : Arrays.asList(null, new byte[31], new byte[32]))
+      try (var f = fixture()) {
+        var verifier =
+            new BackupArtifactVerifier(
+                f.root,
+                f,
+                UID,
+                GID,
+                f,
+                () ->
+                    new MessageDigest("public test provider") {
+                      @Override
+                      protected void engineUpdate(byte b) {}
+
+                      @Override
+                      protected void engineUpdate(byte[] b, int off, int len) {}
+
+                      @Override
+                      protected byte[] engineDigest() {
+                        return digest;
+                      }
+
+                      @Override
+                      protected void engineReset() {}
+                    },
+                f::clock);
+        failure(() -> verifier.verify(f.expected));
+        f.released();
+      }
+    try (var f = fixture()) {
+      var verifier =
+          new BackupArtifactVerifier(
+              f.root,
+              f,
+              UID,
+              GID,
+              f,
+              () -> {
+                throw new NoSuchAlgorithmException("public provider detail");
+              },
+              f::clock);
+      failure(() -> verifier.verify(f.expected));
+      f.released();
+    }
+    for (Throwable primary :
+        List.of(
+            new IllegalStateException("public runtime"),
+            new NullPointerException("public NPE"),
+            new AssertionError("public Error")))
+      try (var f = fixture()) {
+        f.extraFaults.add("attributes#4");
+        f.faultTypes.put("attributes#4", primary);
+        assertSame(
+            primary, assertThrows(primary.getClass(), () -> f.verifier().verify(f.expected)));
+        f.released();
+        f.unchanged();
+      }
+    try (var f = fixture()) {
+      f.hook =
+          (name, n) -> {
+            if (name.equals("attributes") && n == 1)
+              throw new UnsupportedOperationException("public unsupported IO");
+          };
+      failure(() -> f.verifier().verify(f.expected));
+      f.released();
+    }
+  }
+
+  @Test
+  void concurrentSerializedAccess() throws Exception {
+    try (var f = fixture();
+        var pool = Executors.newFixedThreadPool(8)) {
+      var verifier = f.verifier();
+      AtomicInteger active = new AtomicInteger(), maximum = new AtomicInteger();
+      f.hook =
+          (name, n) -> {
+            if (name.equals("clock")) {
+              if ((n - 1) % 207 == 0) maximum.accumulateAndGet(active.incrementAndGet(), Math::max);
+              if (n % 207 == 0) active.decrementAndGet();
+            }
+          };
+      var tasks = new ArrayList<Future<BackupFileDigest>>();
+      for (int i = 0; i < 64; i++) tasks.add(pool.submit(() -> verifier.verify(f.expected)));
+      for (var task : tasks) {
+        var actual = task.get(20, TimeUnit.SECONDS);
+        assertEquals(964, actual.size());
+        assertEquals(MANIFEST_HASH, actual.sha256());
+      }
+      assertEquals(1, maximum.get());
+      assertEquals(0, active.get());
+      f.released();
+      f.unchanged();
+    }
+    try (var f = fixture();
+        var pool = Executors.newFixedThreadPool(8)) {
+      var verifier = f.verifier();
+      f.extraFaults.add("read#1");
+      var tasks = new ArrayList<Future<Boolean>>();
+      for (int i = 0; i < 64; i++)
+        tasks.add(
+            pool.submit(
+                () -> {
+                  try {
+                    assertEquals(MANIFEST_HASH, verifier.verify(f.expected).sha256());
+                    return true;
+                  } catch (StorageIoException error) {
+                    assertNull(error.getCause());
+                    assertEquals(0, error.getSuppressed().length);
+                    return false;
+                  }
+                }));
+      int accepted = 0, rejected = 0;
+      for (var task : tasks) {
+        if (task.get(20, TimeUnit.SECONDS)) accepted++;
+        else rejected++;
+      }
+      assertEquals(63, accepted);
+      assertEquals(1, rejected);
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
+  void readOnlyNoMutationInventory() throws Exception {
+    try (var f = fixture()) {
+      var before = new LinkedHashMap<Path, Map<String, Object>>();
+      var paths = new ArrayList<Path>();
+      paths.add(f.parent);
+      paths.add(f.child);
+      for (String name : NAMES) paths.add(f.child.resolve(name));
+      for (Path path : paths)
+        before.put(
+            path,
+            Files.readAttributes(
+                path, "unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime"));
+      var result = f.verifier().verify(f.expected);
+      assertEquals(MANIFEST_HASH, result.sha256());
+      for (Path path : paths)
+        assertEquals(
+            before.get(path),
+            Files.readAttributes(
+                path, "unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime"));
+      assertEquals(COUNTS, f.counts);
+      f.unchanged();
+      f.released();
+    }
+  }
+
+  private BackupArtifactFixture fixture() throws Exception {
+    return new BackupArtifactFixture(temporary);
+  }
+
+  static StorageIoException failure(org.junit.jupiter.api.function.Executable action) {
+    var error = assertThrows(StorageIoException.class, action);
+    assertEquals(StorageIoException.Reason.UNAVAILABLE, error.reason());
+    assertEquals("transfer storage operation failed", error.getMessage());
+    assertNull(error.getCause());
+    assertEquals(0, error.getSuppressed().length);
+    return error;
+  }
+}

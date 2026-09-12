@@ -153,6 +153,33 @@ final class InspectionRunExecutorTest {
 
   @Test
   void interruptionRemainsVisible() throws Exception {
+    // BUG186/YKT146: empty run uses start, pre-chunk and final post-chunk clock.
+    for (int point = 1; point <= 3; point++) {
+      reset();
+      int selected = point;
+      AtomicInteger calls = new AtomicInteger();
+      try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+        LongSupplier time =
+            () -> {
+              if (calls.incrementAndGet() == selected) Thread.currentThread().interrupt();
+              return 0;
+            };
+        try {
+          var result = executor(f, time).run(RUN);
+          assertEquals(INTERRUPTED, result.status());
+          assertEquals(50, result.exitCode());
+          assertEquals(
+              selected == 3 ? Optional.of(progress(0, 0, true)) : Optional.empty(),
+              result.lastConfirmed());
+          assertTrue(Thread.currentThread().isInterrupted());
+          assertEquals(selected, calls.get());
+        } finally {
+          Thread.interrupted();
+        }
+      }
+      assertEquals(point == 3 ? "1" : "0", progressCount());
+    }
+    reset();
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
       try {
         Thread.currentThread().interrupt();
