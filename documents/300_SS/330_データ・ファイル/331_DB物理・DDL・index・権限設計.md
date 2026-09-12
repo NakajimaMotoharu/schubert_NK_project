@@ -214,6 +214,16 @@ Javaの同transaction内snapshot検査はSS324 §12.8を正とし、SQLだけで
 
 004の055/056・PT-DB-INBOX-241～248で3存在flag全8組合せ、全status/日付/µs/UTC-JST/上限、違うrun、cutoff不一致、権限・lock namespace/並行/rollback、catalogと旧migration不変を独立期待値で検証する。通常API/wire/Current oracle変更なし。
 
+### 3.13 親用Inbox検査summary照会（SSC049/PG162、先行d23b1afd）
+
+V019は`schubert.maintenance_read_inbox_summary(uuid,timestamptz)`をappend-only追加する。nk_owner/SECURITY DEFINER、固定search_path=pg_catalog,schubert/TimeZone=UTC、PUBLICを剥奪しschubert_batchだけEXECUTE。基表SELECT/DML、専用検査open/record/delete、cursor/応答本文/参照ID/秘密への権限は増やさない。他app/Web/ops/backup/inspector/PUBLICは拒否。新table/column/indexなし、V001～018不変。
+
+NULL/非有限/UTC0001～9999外の引数は22023。§3.12と同じ現在DB・自己backend・bigint71419602/Exclusive/granted保持がなければ55000。関数はlock取得/解放をしない。progress PKの同runを一度readし、存在してcutoffが完全一致しなければ55000、存在しなければ0行。返却は`inspected_count bigint, deleted_count bigint, protected_count bigint, complete boolean`の4非NULL列だけで、completeは保存completed_at IS NOT NULL。rowを作成/lock/更新/補完せず、年齢/status/現在時刻で絞らない。0行を0件完了へ変更しない。戻り値は保存済みENDの観測であり、実子のfresh起動・終端/OS排他/backupの証明ではない。backup失敗時の状態調査にも使えるreadなので本関数自体ではbackupを要求せず、削除/子起動の既存backup gateは別に必須。
+
+親は341 §7.3の連続OS lock下で、前段transactionを終了して親session advisoryを保持し、autoCommit=true/readOnly=false/READ COMMITTEDで開始前を読む。子終了後にDB lockを再取得してからfresh readする。途中結果を別run/cutoffへ流用せず、DB不通・不明・identity不一致は非成功。関数内の自己lock観測だけでOSやsession/xactの連続保持を推測しない。
+
+004/059・060、DB251～258で未開始/未完了/完了・累積long境界・UTC/JST/歴史時刻・違うrun/µs・全role・自己lock namespace・fresh snapshot/rollback/並行・no-DML/旧migration/catalogを独立SQL後条件で検証する。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

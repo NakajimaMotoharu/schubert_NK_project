@@ -145,6 +145,8 @@ SSC-051/PG-D-136のCLEAN_LOG再開: 331 §3.9の永続cursor/累積を使い、�
 
 ### 7.3 非公開Inbox検査process（SSC-049/QA-046）
 
+SSC049/PG162（先行d23b1afd）の親summary・attempt照合: 子へのDB引渡し前に331 §3.13の同run summaryをOptionalで読み、未開始0行は「未開始」として保持する。子のfresh起動・実終端・wrapper結果を別途確認してDB lockを再取得した後、同run/cutoffのsummaryを再読する。after不存在/未END/別identity、receiptが0/10以外、保護あり累積とreceipt10の不一致は非成功。beforeが存在すれば同identityで全3累積の非減少が必須。before既ENDならafterのcounts/ENDが完全不変でなければ非成功。attemptはafter累積−before累積（before不存在の差分基準だけ0）、run累積と分けて記録する。既完了再開のattempt0でも累積保護ありならWARNING10を維持する。現在時刻/推測cursor/receiptだけから件数を補完しない。純照合関数は不正を固定IllegalArgumentException、nullは契約違反とし、引数値を診断へ出さない。返却型もattempt各値<=cumulative、0/10と累積保護の整合をconstructorで保持する。実子unit・OS排他・実backup/親step記録の接続は引き続き別必須条件。
+
 UIC-006の検査をbackup成功後のcleanup内部で実施する。通常API/Web inactive条件、固定run/cutoff、backup gateを維持する。検査中はHTTP/JMS Consumerを生成せず、DB snapshot/参照の検査だけを行う。batchのadvisory lockを別connectionから二重取得して自己deadlockさせないよう、検証・削除chunkのconnection/lock所有者を実装前に明示する。検査前後のlock断絶や他runの結果流用を許可しない。異常行は削除せず固定理由・件数だけを返し、暗号文・平文・鍵をbatchへ渡さない。SQL/権限/oneshot wiringのPT完了まで本stepを完了扱いしない。
 
 SSC-049/PG-D-122のlock所有: 親batchはOS flockを保守全体で保持する。検査を開始する前に前段transactionを完了しDB session advisory lockを解放し、専用processが自身のDB transactionで71419602を取得してから候補を検査する。検査・DELETE・commitの間にlockを渡さない。親はprocess終了後にDB advisoryを再取得して後続へ進む。引渡し区間に別DB主体がlockを取得した場合、検査側/親の再取得失敗は失敗として停止し、検査未実施を成功にしない。OS lockを放す実装や、検証済結果を別transactionへ渡す実装は不可。実oneshot/異常終了の試験は後続gateとし、SQL単体PTで実運用結線完了とはしない。

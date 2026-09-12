@@ -1,5 +1,7 @@
 # SQL・transaction・lock・削除設計
 
+SSC049/PG162（先行d23b1afd）: 親Inspector summaryは331 §3.13の固定4列readだけを借用Connectionで実施する。InspectorLockHandoffと同じparent autoCommit=true/readOnly=false/READ COMMITTED、queryTimeout5秒、UUID＋JDBC4.2 UTC OffsetDateTimeの固定bind。開始時/返却直前割込を拒否し、statement/result全close後だけ0/1行のOptional値を返す。null4列/複数行/不正counts/SQL・close故障は原因/suppressedなし固定BatchRepositoryException。constructor/run nullや未知runtime/NPEは成功化しない。connection commit/rollback/close/config変更/新接続・progress補完を行わない。子引渡し前後の独立fresh queryであり、関数が実子状態やOS lockを認証するものではない。
+
 SSC-055/PG-D-159（先行4c5dcb85）: 331 §3.12のrun参照readは新規collision/resume整合/GC保全の共通非秘密観測。親は単独所有Connectionのexplicit transaction・READ COMMITTED・readOnly=falseで実行し、固定OS/DB lockを対象file mutationまで保持する。single snapshotの存在と整合を返し、rollback/commit/lock解放後の結果を再利用しない。service停止やDB不通時は補完せず保全する。SQL readはrow更新/lock取得/backup成功を行わず、通常step/進捗writerも既存保守排他規約を守る。管理者の手動DMLや別connection共有を検査済みとして許可しない。
 
 ## 1. 目的・追跡
