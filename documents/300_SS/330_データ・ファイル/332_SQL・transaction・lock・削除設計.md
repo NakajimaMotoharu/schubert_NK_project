@@ -256,6 +256,8 @@ update schubert.answers
 
 ### 11.1 Cutoff・事前条件
 
+SSC057/PG164: 非Log/非秘密Inboxの7cleanup callerは331 §3.14のV020を用い、既存DELETEとRUNNING stepの件数加算を同transactionで確定する。backup→full step NOWAIT→候補のlock順、既存predicate/1,000/SKIP LOCKEDは不変。0件は候補非lock EXISTSで0を確認した場合だけ終端、残行はLOCK_BUSY非成功。FK23503はQUESTIONSだけ保全deferredで上位へ返し、全削除済みにしない。詳細optional累積/型/rollback/30分は331 §3.14、PG163のbegin/finish・親OS/実backup/全kind順序を代行しない。
+
 Batch開始時の`:run_started_at`を全stepで固定する。当日`BACKUP_DB`/`BACKUP_CONFIG`がSUCCESSでなければ
 業務data/inbox/outbox物理削除をSKIPPEDとし、application起動はQA-029に従い続行する。
 

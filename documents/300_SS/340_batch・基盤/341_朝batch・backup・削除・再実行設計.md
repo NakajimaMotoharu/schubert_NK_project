@@ -130,6 +130,8 @@ SSC-049/PG-D-148: 親OS lock保持下で、削除開始前にAPI/Web各unitのId
 
 ### 7.2 Step順
 
+SSC057/PG164: 非Log/非秘密Inboxの7kindは331 §3.14のStepCleanupService→CleanupStepRepository→V020を使用し、DELETE/step累積を一緒にcommitする。borrowed親Connectionはchunk間だけautoCommit=true、既取得自己session lock/OS排他を保持し、各chunk前後に30分・interruptを検査する。完了はchunk0＋残候補0の実確認後、FKdeferredは保全した非完了として親へ返しWARNING/次回保持の判断を維持する。backup/lock/SQL/commit不明は未完了、rollback成功前のautoCommit復元は禁止。shared step内の別kind累積・今回service差分を区別し、finishは親が全kind・実Inbox/Log等を照合した後だけ行う。実親結線/全清掃完了はこのserviceだけでは成立しない。
+
 | Step | 対象 | Chunk | 失敗時 |
 |---|---|---:|---|
 | `CLEAN_NOTIFICATION` | COMPLETED/ERROR 24h超、CANCELLEDの前日まで | 1,000 | Chunk rollback、FAILED、question削除へ進まない |

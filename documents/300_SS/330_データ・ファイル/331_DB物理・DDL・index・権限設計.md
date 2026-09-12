@@ -224,6 +224,22 @@ NULL/非有限/UTC0001～9999外の引数は22023。§3.12と同じ現在DB・�
 
 004/059・060、DB251～258で未開始/未完了/完了・累積long境界・UTC/JST/歴史時刻・違うrun/µs・全role・自己lock namespace・fresh snapshot/rollback/並行・no-DML/旧migration/catalogを独立SQL後条件で検証する。
 
+### 3.14 非Log/非Inbox cleanupの原子件数・終端照合
+
+SSC057/PG164（先行78bde51a）。非Log/非秘密Inboxの7種類を、既存の削除predicate/保持期間/最大1,000/既定SKIP LOCKEDを変えず、同一RUNNING stepへの原子件数記録と組み合わせる。
+
+- V020のmaintenance_execute_cleanup_step(p_run_id uuid,p_cutoff timestamptz,p_step_id bigint,p_attempt integer,p_started timestamptz,p_kind text,p_limit integer)をnk_owner/SECURITY DEFINER、search_path=pg_catalog,schubert,schubert_web_session、timezone=UTC、PUBLIC revoke/batchだけEXECUTEで追加する。任意SQL/基表権限/table/columnを追加せず、V001～019は不変。
+- run/cutoff/started/id/attempt/kind/limitのNULLは22023。UTC0001～9999有限µs、cutoff<=started、id1..999999999999/attempt1..99/limit1..1000を検査する。kindはNOTIFICATIONS/QUESTIONS/SESSIONS/OUTBOX/BATCH_RUNS/INBOX_PROGRESS/LOG_PROGRESSだけ。LOGS/unknown/aliasは禁止。kindからstepをCLEAN_NOTIFICATION/CLEAN_QUESTION/CLEAN_SESSION/CLEAN_INBOX_OUTBOX/CLEAN_BATCH_RUNへ固定対応し、progress2種はCLEAN_BATCH_RUNへ属する。
+- 既存maintenance_lock_inbox_backup(run,cutoff)で自己DB advisory/同run・当日backupの固定row lockを先に取得し、次にmaintenance_read_run_referencesのidentity_consistentを確認、最後にbatch_runsのfull handle(id/run/business_date=JST cutoff/step/attempt/started)をFOR UPDATE NOWAITで取得する。RUNNING/ended NULLとtarget=success>=0/failure=0/bytes=0を必須とし、欠落/別identity/terminal/不整合は55000で保全拒否する。これは普通の削除件数だけを積むstep用であり、Log/Inspector/backup/transferの件数を混入しない。
+- 戻り7列はtarget_count/deleted_count/skipped_count（今回chunk）、step_target_count/step_success_count（既知のstep保存累積、または明示NULL）、complete boolean、reason_code text。全行必ず1行。OKは今回target=deleted/skip0と非NULL step累積(target=success)、completeは今回chunk0のときだけtrue。LOCK_BUSY/BACKUP_GATEは今回chunk0・両step累積NULL・completefalse（未読を0にしない）。QUESTIONSのDELETE内23503だけはnested blockをrollbackし、FOREIGN_KEY_CONFLICT/chunk0/既lock済みstep累積/completefalseを返す。他SQL異常/他kindのFKは伝播して全chunk rollbackする。理由/件数にraw constraint名/SQL/値を含めない。
+- 7種類の既存maintenance_cleanup_*関数を固定CASEで呼ぶ。返却の1行/非NULL/limit/target=deleted/skip0/reasonを検証する。guard拒否は上記unknown累積形式で返す。正chunkの削除とstep target_count/success_countへの加算は同transactionでUPDATEする。bigint overflow、件数相違、0/複数updateは失敗しDELETEを含めrollback。status/end/旧error/failure/bytesは変更しない。parent callerだけがcommitする。
+- target0のOKをそのまま全件完了としない。同transaction内で現行7関数の削除候補条件を使い、lockで除外しないEXISTSを新snapshotで照会する。通知/質問/3session表/2Outbox表/履歴/2progress表の全構成が候補0ならcompletetrue。候補ありならLOCK_BUSY/chunk0/unknown累積として停止し、成功の補完や無限loopをしない。保護条件を満たす行（active/期限内/通知あり/調査中等）は候補に含めず、保護行を失敗・削除件数へ加算しない。通常app停止/OS排他は依然callerの前提。
+- Java .batch.repository.CleanupKind.step()は8kindの既定step対応を持つ（LOGS=CLEAN_LOGも対応）。CleanupStepRepository.execute(attempt,kind,limit)はLOGS/skipped handle/step不一致をDB操作前に拒否、nullは契約違反とする。borrowed autoCommit=false/RW/READ_COMMITTED、RunReferenceRepositoryで前後自己DB/identity/割込を確認し、timeout5秒/7typed bind/JDBC4.2 UTCで固定関数だけ呼ぶ。7列全NULL契約・0/複数行・type/bounds/理由整合を検証し、owned close完了後だけ返す。Connection取得/config/commit/rollback/closeなし。SQL/不正投影/owned closeはcause/suppressedなしBatchRepositoryException、unknownRuntime/NPE/Errorは正常化しない。
+- CleanupStepChunk(attempt,kind,CleanupCounts chunk,Optional<CleanupCounts> stepCounts,boolean complete,Reason reason)は上記4reason/optional累積規則をconstructorで確立する。既知累積は今回chunk以上、各count非負/target=deleted/skip0。identity/toStringはredact、unknownをemptyで表し0に変換しない。FKは既知保存累積だが非completeであり、未削除aggregateを成功件数へ算入しない。
+- .batch.cleanup.StepCleanupServiceはcallerの単独borrowed Connection（開始autoCommit=true/RW/READ_COMMITTED、親が既取得session advisory/OS排他・停止・実backup）を使い、run/step/kindを固定して最大1000ずつtransaction化する。SQL内でDELETE＋件数を確定してからcommit→autoCommit復元→割込/単調時計30分未満を確認する。0件completetrueまで続ける。LOCK_BUSY/BACKUP_GATEは既存CleanupStoppedExceptionの固定reasonで停止し未完了。FKだけはrollback済み0件/保存累積を確定し、deferred=trueの結果で呼出側へ返す（親のWARNING/次回保持判断と全親step finishは別責務、全削除完了とはしない）。
+- 正常chunkの保存累積−今回chunkを初回beforeとし、後続は直前committed累積と一致必須。step保存累積は以前の同step構成kind/同handle再開を含み、今回service呼出し差分と区別する。commit応答不明/rollback不明は結果を返さず、次回同handleでDB保存状態を再読する。rollback成功前にautoCommitへ復元して暗黙commitしない。未知runtime/Errorでも失敗transactionをrollbackして再throwし、SQL/close診断はredactする。
+- StepCleanupSummaryはattempt/kind/before/after/deferredを保持し、非負単調/同対象・0skipを検証する。afterは保存済step全体、after-beforeは今回呼出しで確認できた差分であり、中断前の件数を推測しない。deferred時は全削除済み/ENDと表示しない。serviceはBatchRunRepository.finishやOS/子/backup生成を代行しない。親の全kind順序/失敗規則・通常Question/pending revoke・実Log/Inspector結線は残る。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`
