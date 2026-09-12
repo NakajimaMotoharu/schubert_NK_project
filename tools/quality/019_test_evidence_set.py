@@ -68,7 +68,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
-                 "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest")
+                 "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
+                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
         self.assertEqual(suites[:3], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
@@ -139,7 +140,10 @@ class EvidenceSetTest(unittest.TestCase):
                   ("dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest", 1,
                    ("independentGolden", "mutationAndRunBinding", "boundariesNullAndOwnership", "concurrentUse")),
                   ("dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest", 1,
-                   ("canonicalFixtures", "sourceAndSyntaxRejection", "urlBoundaries", "versionBoundaries", "sizeNullAndRedaction", "concurrentValidation"))]
+                   ("canonicalFixtures", "sourceAndSyntaxRejection", "urlBoundaries", "versionBoundaries", "sizeNullAndRedaction", "concurrentValidation")),
+                  ("dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest", 1,
+                   ("staticReadAndBoundaries", "runReadAndBinding", "permissionAndFilesystem", "metadataAndNull",
+                    "boundedReadsAndMutation", "inodeReplacementAndOwnership", "ioFaultsAndRedaction", "concurrentAndConstructor"))]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -151,7 +155,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "PT-OPS-ENV",
-                       "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
+                       "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
