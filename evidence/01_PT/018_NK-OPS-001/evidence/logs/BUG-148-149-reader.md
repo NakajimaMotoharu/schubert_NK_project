@@ -11,4 +11,4 @@
 
 EFILE008は開始割込・実IO途中割込・最終metadata後割込を独立に確認し、全てflag維持/非成功/owned資源解放。EFILE001はborrowed rootが生存することを明示booleanでassert。単一新reader試験の注入/型付け修正で、他Productionへの同一原因修正はなし。collectorの新reader所属9class/OPS8group/全79PTは独立019 inventory・欠落/重複/未知/非PASSで検証する。
 
-正式20260912-02と全35scope/hash認定まではBUG148/149完了判定保留。探索logは環境pathを含むためGitへ全文を置かず、固定診断/日時/対象/hashで追跡する。Program/工程/実root配備完了は宣言しない。
+正式PT-WEB-20260912-02/source27698d4865da64a174c59e8c80acbe131c0df3d8（21:24:02～21:31:24 JST）で全1125件・6 moduleの4coverage100%・Production静的解析成功、017/019全17負canaryと12collector/35scope同run/source/hashを認定したためBUG148/149完了。探索logは環境pathを含むためGitへ全文を置かず、固定診断/日時/対象/hashで追跡する。Program/工程/実root配備完了は宣言しない。

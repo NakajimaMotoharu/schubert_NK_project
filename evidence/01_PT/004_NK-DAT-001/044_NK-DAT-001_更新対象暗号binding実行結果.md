@@ -1,6 +1,6 @@
 # NK-DAT-001 更新対象暗号binding 実行結果
 
-2026-09-12 最新確定: dev-foundation/source d2d3a0809de9e9805c1907eeef74721e6b95e4bf、正式PT-WEB-20260912-01（21:00:14～21:07:39 JST）、全1117件（Protocol80/Storage50/API634/Web241/Batch71/CHR41）PASS、failed/error/skipped0。実装済み6 Java moduleのline/method/class/branch100%、Production5 moduleのNullAway/Enforcer/Spotless/SpotBugs未解決0。固定/runの限定静的レビュー1件は維持しcoverage除外なし、CHR runnerのSpotBugsは未設定。12collector/35scopeの同run/source/branch/hashと17負canary成功。DB26部品240＋batch3部品37＋OPS7部品50＝36部分成果327 PT（全1117の内数）、今回CFG6件を追加。BUG147/YKT115再試験完了。保持inode reader PG-D-152/EFILE8は仕様のみで未合格。親制御/backup artifact/設定publish/SSC055原本・全cleanup caller・通常Question writer/replay・Logout RERUN001・QA045は残る。進捗は456の固定加重約4割（35～50%）、残件は460を参照。実NK CHR/IT/ST完了とはしない。前回の停止を解除し利用枠残99%でPG/PT継続中、元dev-web3file保全。以下は履歴。
+2026-09-12 最新確定: dev-foundation/source 27698d4865da64a174c59e8c80acbe131c0df3d8、正式PT-WEB-20260912-02（21:24:02～21:31:24 JST）、全1125件（Protocol80/Storage50/API634/Web241/Batch79/CHR41）PASS、failed/error/skipped0。実装済み6 Java moduleのline/method/class/branch100%、Production5 moduleのNullAway/Enforcer/Spotless/SpotBugs未解決0。固定/runの限定静的レビュー1件は維持しcoverage除外なし、CHR runnerのSpotBugsは未設定。12collector/35scopeの同run/source/branch/hashと17負canary成功。DB26部品240＋batch3部品37＋OPS8部品58＝37部分成果335 PT（全1125の内数）、今回保持inode環境reader8件を追加しBUG148/149再試験完了。PG153/private低位公開8件は仕様のみで未合格。親制御/backup artifact/設定publish/SSC055原本・全cleanup caller・通常Question writer/replay・Logout RERUN001・QA045は残る。固定加重約4割（35～50%、456）を維持、残件は460。実NK CHR/IT/ST完了とはしない。利用枠残96%でPG/PT継続中、元dev-web3file保全。以下は履歴。
 
 ## 0. 正式coverage・review
 
