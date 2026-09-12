@@ -27,6 +27,11 @@ HANDOFF_CLASS = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
 HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
                    "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
                    "stateChangesAndInterrupts", "concurrentGapCompetition")
+DURABLE_CLASS = "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest"
+DURABLE_METHODS = ("literalReads", "newPublication", "sameRecordReuse", "expectedRetirement",
+                   "nameContentAndNull", "metadataAndFilesystems", "boundedChannels",
+                   "namespaceAndReplacement", "allReadFailures", "allWriteRetireFailures",
+                   "interruptionsAndUnknownRuntime", "concurrencyAndNative")
 RECORD_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest"
 RECORD_METHODS = ("literalRecords", "identityTemporalBoundaries", "malformedSources", "scalarAliases",
                   "completionInvariants", "nullContracts", "ownershipAndRedaction", "concurrentUse")
@@ -44,11 +49,16 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
                "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest"}
+DURABLE_TRACES = {
+    "PT-BAT-047-anchor.txt": RECORD_TRACES["PT-BAT-038-anchor.txt"],
+    "PT-BAT-047-active.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
+    "PT-BAT-047-begin.txt": RECORD_TRACES["PT-BAT-038-activation.txt"],
+    "PT-BAT-047-done-10.txt": RECORD_TRACES["PT-BAT-038-completion-10.txt"]}
 
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, *OPS_CLASSES}
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -70,9 +80,18 @@ def validate_record_suite(suite):
     return validate_group(suite, RECORD_CLASS, RECORD_METHODS, 38)
 
 
+def validate_durable_suite(suite):
+    return validate_group(suite, DURABLE_CLASS, DURABLE_METHODS, 46)
+
+
 def validate_record_traces(traces):
     if traces != RECORD_TRACES:
         raise ValueError("missing, extra or invalid independently checked run record trace")
+
+
+def validate_durable_traces(traces):
+    if traces != DURABLE_TRACES:
+        raise ValueError("missing, extra or invalid independently checked durable record trace")
 
 
 def validate_group(suite, cls, expected, start):
@@ -89,7 +108,8 @@ def validate_group(suite, cls, expected, start):
 
 def validate_reports(suites):
     validators = {CLASS: validate_suite, LOG_CLASS: validate_log_suite,
-                  HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite}
+                  HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite,
+                  DURABLE_CLASS: validate_durable_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -115,7 +135,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 115:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 127:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -128,6 +148,15 @@ def main():
     trace_root = target / "maintenance-record-traces"
     traces = {str(p.relative_to(trace_root)): p.read_bytes() for p in trace_root.rglob("*") if p.is_file()}
     validate_record_traces(traces)
+    durable_root = target / "durable-record-traces"
+    durable_traces = {str(p.relative_to(durable_root)): p.read_bytes()
+                      for p in durable_root.rglob("*") if p.is_file()}
+    validate_durable_traces(durable_traces)
+    for folder, values in (("input/durable-records", DURABLE_TRACES), ("output/durable-records", durable_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
     for folder, values in (("input/maintenance-records", RECORD_TRACES), ("output/maintenance-records", traces)):
         destination = evidence / folder
         destination.mkdir(parents=True, exist_ok=True)
@@ -167,7 +196,9 @@ def main():
     manifest["limitations"] += " InspectorLockHandoff only supplies the borrowed-connection synchronous handoff boundary. Caller must retain OS lock, admit backup/stopped applications/run, confirm child process termination before callback return, avoid sharing parent connection, verify receipts/progress, and dispose parent connection after failure. Actual oneshot and OS/backup orchestration remain unverified."
     manifest["related"] += ["PG-D-156", "SSC-055"]
     manifest["recordOracle"] = "007/PT-BAT-038..045: hand-written ASCII anchor72/activation109/done140 or141 bytes; nil/max UUID, UTC0001/9999 and microseconds, Asia/Tokyo civil date boundaries,0/10 only. Each fixed magic/delimiter byte mutated to all other byte values; aliases, leap normalization, scalar errors, malformed/null and wrong model reject. Valid different identity remains different data, not authentication. Completion invariants, caller-owned arrays, redacted values and64 independent activations use literal field/byte oracles."
-    manifest["limitations"] += " Run records are values/byte codecs only: no persisted anchor store, active/completion crash recovery, expected-file/run authorization, whole-parent lifecycle, reference query or400-day retirement is certified. No actual reboot or root deployment."
+    manifest["related"] += ["PG-D-157"]
+    manifest["durableRecordOracle"] = "009/PT-BAT-046..057: independent literal records and real private inode/no-replace/fsync with synthetic root admission. Borrowed-root canonical name-to-content binding; bounded read, same-content reuse only, expected-inode retirement, every independently counted native/IO occurrence fails closed and releases owned resources; namespace replacement, metadata/ACL/filesystem, null, invalid IO, interruption and concurrency. No partial-file overwrite or automatic cleanup."
+    manifest["limitations"] += " Run record codecs and borrowed-root durable IO do not prove fixed-namespace admission, active/completion graph or crash recovery, whole-parent lifecycle, reference query or400-day retirement. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

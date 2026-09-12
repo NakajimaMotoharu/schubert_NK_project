@@ -1,5 +1,11 @@
 # NK-BAT-001 永続record保存の単体テスト仕様書
 
+BAT047は実publish後の4fileをtarget/durable-record-traces/PT-BAT-047-{anchor,active,begin,done-10}.txtへcopyする。Production encode再実行でactualを生成しない。020はSS/PG156と共通の独立literalからinputを作り、実file byteとの完全一致・4file過不足0を検証してevidence/input・output/durable-recordsへ分離格納しmanifestへhashを記録。019は各欠落/余分/改変を拒否する。
+
+独立call inventory（全位置を故障注入しowned reader/writer/entry残0、borrowed root保全）。attributes/ACL/filesystem/readonlyは各同回数。read=各7・openEntry3/close3・openRead/readClose各1/read2/readSize2。new=各13・openEntry8/entryClose8・reader2/read4/readSize4・create/publish/openWriter/writerClose/force/sync/write各1/writeSize2。reuse=各13・openEntry8/close8・reader2/read4/readSize4・openWriter/writerClose/force/sync各1/writeSize2・create/publish/write0。remove=各7・openEntry4/close4・reader1/read2/readSize2・unlink/sync各1。正常call集合/各回数をliteral oracleと一致確認してから全位置へ注入する。
+
+BUG158/YKT123はBAT048のdone0/10合法長差、BAT052のmetadata2位置とread後増大を追加。既存4reader/publisherの非該当根拠と回帰はevidence/logs/BUG-158-YKT-123.md。負canaryは017の1＋019の19＝20件。仕様/探索だけを正式認定へ加算しない。
+
 PG-D-157/SSC-055先行19e22eb4、OPS-009/UI251/SS311/343 §6.14。DurableRecordFiles、EnvironmentInodePolicy.durable。実装前仕様。実fixtureは隔離file/FFMで、root UID/GID・ACL・filesystem許可属性だけ明示合成する。実root配布の認定ではない。
 
 | Test ID | DurableRecordFilesTest method | 入力・操作・独立期待値 |

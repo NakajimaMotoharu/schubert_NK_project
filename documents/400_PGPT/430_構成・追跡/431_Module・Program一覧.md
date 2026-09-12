@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D-157（正式待ち）: NK-BAT-001/file.DurableRecordFilesと共有EnvironmentInodePolicy.durableを追加。OPS-009/UI251/SS311・343 §6.14、009/PT046～057/010へ全methodを追跡。借用rootでの永続IO、独立native/IO全位置・実差替え/競合/保全を検証中。全体正式07の1169件へ未認定の12件を混入しない。固定namespace/state graph/親/GCは残る。
+
 PG-D-156（正式07認定）: NK-BAT-001にrepository.MaintenanceActivation/MaintenanceCompletion/Outcome、file.MaintenanceRecordsを追加。OPS-009/UI251/SS311・331 §8.2・341 §3・343 §6.13、007のProduction method対応表とPT038～045/008/evidenceへ追跡。全1169件/4coverage/static・35scope/19負canary成功、正式06までの認定値へ遡って混入しない。file store/親/GCは未実装。
 
 2026-09-13 最新確定: dev-foundation/source e919ac03a008355dbc6afa51c8c94c51845a01b2、正式PT-WEB-20260912-07（23:51:38～23:59:15 JST）、全1169件（Protocol80/Storage58/API634/Web241/Batch115/CHR41）PASS、failed/error/skipped0。実装済み6 Java moduleのline/method/class/branch100%、Production5 moduleのNullAway/Enforcer/Spotless/SpotBugs未解決0。固定/etc・/runの2 method限定静的レビューを記録しcoverage除外なし、CHR runnerのSpotBugsは未設定。12collector/35scopeの同run/source/branch/hashと19負canary成功。DB26部品240＋batch4部品45＋OPS11部品94＝41部分成果379 PT（全1169の内数）。PG156のimmutable run/activation/completion型・canonical byte・独立literal実出力8件を認定、新規BUGなし。R002環境file範囲は確定、親実子制御/backup artifact/SSC055原本file store・全cleanup caller・通常Question writer/replay・Logout RERUN001・QA045は残る。PG157の永続record IOは事前登録のみで未合格。固定加重約4割（35～50%、456）を維持、残件は460。実NK CHR/IT/ST完了とはしない。利用枠残82%でPG/PT継続中、元dev-web3file保全。以下は履歴。
