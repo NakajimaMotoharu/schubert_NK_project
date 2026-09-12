@@ -28,10 +28,52 @@ inspection = module("inspection_collector", "016_collect_inbox_inspection_eviden
 database = module("inspector_database_collector", "021_collect_inspector_database_evidence.py")
 launch = module("inspector_launch_collector", "022_collect_inspector_launch_evidence.py")
 backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py")
+references = module("run_reference_collector", "024_collect_run_reference_evidence.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    @staticmethod
+    def references_fixture(sql=False):
+        cls = ("dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest" if sql else
+               "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest")
+        names = (("referenceCombinations", "identityConsistency", "temporalAndNullBoundaries", "lockOwnership",
+                  "roleAndCatalog", "transactionVisibility", "concurrentOwnership", "migrationAndReadOnlyHistory") if sql else
+                 ("referenceValueInvariants", "realReferenceRead", "transactionAndLockContracts",
+                  "projectionAndNullContracts", "jdbcFailureMatrix", "interruptionAndRuntime",
+                  "rollbackAndFreshVisibility", "independentConcurrentConnections"))
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        prefix, start = ("PT-DB-INBOX", 241) if sql else ("PT-BAT", 82)
+        return suite, {f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(names, start)}
+
+    def test_run_reference_inventories_and_traces(self):
+        for sql in (False, True):
+            suite, expected = self.references_fixture(sql)
+            validate = references.validate_suite if sql else batch.validate_references_suite
+            self.assertEqual(expected, validate(suite))
+            for position in range(len(suite)):
+                wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("tests", "7"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[0].set(key, value)
+                with self.assertRaises(ValueError): validate(wrong)
+        literal = ("0:[false, false, false, true]\n1:[true, false, false, true]\n"
+                   "2:[false, true, false, true]\n3:[true, true, false, true]\n"
+                   "4:[false, false, true, true]\n5:[true, false, true, true]\n"
+                   "6:[false, true, true, true]\n7:[true, true, true, true]\n").encode("ascii")
+        traces = {"PT-DB-INBOX-241-combinations.txt": literal}
+        self.assertEqual(traces, references.TRACES)
+        self.assertIsNone(references.validate_traces(traces))
+        for wrong in ({}, dict(traces, unknown=b""), {"PT-DB-INBOX-241-combinations.txt": literal + b"\0"}):
+            with self.assertRaises(ValueError): references.validate_traces(wrong)
+
     @staticmethod
     def lifecycle_fixture():
         cls = "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest"
@@ -203,6 +245,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest",
                  "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+                 "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -213,7 +256,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
                  "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(suites[:6], batch.select_program_suites(suites))
+        self.assertEqual(suites[:7], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -247,6 +290,8 @@ class EvidenceSetTest(unittest.TestCase):
                          batch.ownership_description(127, 57))
         self.assertEqual("Batch module151 PT = NK-BAT-00181 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(151, 81))
+        self.assertEqual("Batch module159 PT = NK-BAT-00189 + NK-OPS-00170. " + suffix,
+                         batch.ownership_description(159, 89))
         self.assertEqual(("OS lock continuity and child termination",
                           "durable authoritative run and parent lifecycle", "real backup artifact and full cleanup callers",
                           "actual root systemd credential deployment", "actual NK characterization and IT/ST"),
@@ -571,9 +616,11 @@ class EvidenceSetTest(unittest.TestCase):
         records, expected_records = self.record_fixture()
         durable, expected_durable = self.durable_fixture()
         lifecycle, expected_lifecycle = self.lifecycle_fixture()
-        reports = [suite, repository, handoff, records, durable, lifecycle]
+        refs, expected_refs = self.references_fixture()
+        reports = [suite, repository, handoff, records, durable, lifecycle, refs]
         accepted = batch.validate_reports(reports)
-        self.assertEqual(81, len(accepted))
+        self.assertEqual(89, len(accepted))
+        self.assertEqual(expected_refs, {k: v for k, v in accepted.items() if k in expected_refs})
         self.assertEqual(expected_lifecycle, {k: v for k, v in accepted.items() if k in expected_lifecycle})
         self.assertEqual(expected_durable, {k: v for k, v in accepted.items() if k in expected_durable})
         self.assertEqual(expected_records, {k: v for k, v in accepted.items() if k in expected_records})
@@ -650,7 +697,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun"]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -704,7 +751,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(35, len(check()))
+            self.assertEqual(36, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -714,7 +761,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(35):
+        for failed_at in range(36):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -727,9 +774,9 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(35, len(calls))
+        self.assertEqual(36, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-1][2].endswith("/023_collect_backup_rerun_evidence.py"))
+        self.assertTrue(calls[-1][2].endswith("/024_collect_run_reference_evidence.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod

@@ -1,5 +1,7 @@
 # NK-DAT-001 run参照単体テスト仕様書
 
+BUG165/YKT127追補: UTC上限の異常literalは+00明示、UTC/JST/NewYork3 sessionで拒否を検証する。時差なし10000-01-01をAsia/Tokyoでcastした独立UTC値は9999-12-31 15:00:00で、これは範囲内。関数の設定は引数parseに遡及しない。0001/9999・µs・JST境界の正系はJDBC Timestampでexpectedを再生成せず、明示Zの手書SQLで既存progressを作りtyped bindとのidentity一致を別assertする。BUG166のcatalog名はTimeZone=UTC、値/owner/security/search_pathは完全一致を維持する。DB241の全8組合せは実ResultSetを1traceへ出力し024が独立8行literalへ照合する。
+
 PG159/SSC055、先行4c5dcb85、OPS-009/DAT-009/UI251/SS331 §3.12/332/343。実装前仕様。RunReferenceBoundaryTest/V018。隔離PostgreSQL18/Flyway、固定UUID2件・UTC/JST date/cutoffの非秘密fixture。3table存在flagとcutoff/日付を独立SQL後条件として決め、production functionからexpectedを生成しない。
 
 | Test ID | method | 入力/操作・期待値 |

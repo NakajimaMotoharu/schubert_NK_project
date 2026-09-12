@@ -315,7 +315,7 @@ final class BackupRerunBoundaryTest {
   void catalogAndPrivileges() throws Exception {
     try (var c = db.admin()) {
       assertEquals(
-          "17",
+          "18",
           scalar(
               c,
               "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));

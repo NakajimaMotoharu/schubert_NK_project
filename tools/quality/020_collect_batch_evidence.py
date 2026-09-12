@@ -17,6 +17,10 @@ METHODS = (
     "moduleDependencyBoundary",
 )
 CLASS = "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest"
+REFERENCES_CLASS = "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest"
+REFERENCES_METHODS = ("referenceValueInvariants", "realReferenceRead", "transactionAndLockContracts",
+                      "projectionAndNullContracts", "jdbcFailureMatrix", "interruptionAndRuntime",
+                      "rollbackAndFreshVisibility", "independentConcurrentConnections")
 LOG_METHODS = (
     "emptyAndCompletedRuns", "heldPrefixAndLargeChunks", "resumedAttemptCounts", "sessionLockOwnership",
     "backupAndRowLockStop", "timeBoundaryAndClockWrap", "interruptsRemainSet", "rollbackAndUncertainCommit",
@@ -80,7 +84,7 @@ LIFECYCLE_TRACES = {
 
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
-    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, *OPS_CLASSES}
+    expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -108,6 +112,10 @@ def validate_durable_suite(suite):
 
 def validate_lifecycle_suite(suite):
     return validate_group(suite, LIFECYCLE_CLASS, LIFECYCLE_METHODS, 58)
+
+
+def validate_references_suite(suite):
+    return validate_group(suite, REFERENCES_CLASS, REFERENCES_METHODS, 82)
 
 
 def validate_record_traces(traces):
@@ -140,7 +148,8 @@ def validate_group(suite, cls, expected, start):
 def validate_reports(suites):
     validators = {CLASS: validate_suite, LOG_CLASS: validate_log_suite,
                   HANDOFF_CLASS: validate_handoff_suite, RECORD_CLASS: validate_record_suite,
-                  DURABLE_CLASS: validate_durable_suite, LIFECYCLE_CLASS: validate_lifecycle_suite}
+                  DURABLE_CLASS: validate_durable_suite, LIFECYCLE_CLASS: validate_lifecycle_suite,
+                  REFERENCES_CLASS: validate_references_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -166,7 +175,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 151:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 159:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -241,6 +250,8 @@ def main():
     manifest["related"] += ["PG-D-158", "BUG-159", "BUG-160", "BUG-161", "BUG-162", "YKT-124", "YKT-125", "YKT-126"]
     manifest["lifecycleOracle"] = "011/PT-BAT-058..081: fixed six-root namespace and scope-bound session, complete unfiltered canonical inventory, original-inode snapshots through whole-graph scan, anchor/begin/done/active consistency and unique pending run. Literal start/resume/complete and crash states, no new cutoff on resume, immutable prior completion, same-byte recovery force/directory sync and absent retirement re-sync, independently counted native/IO fault locations, null/closed/interrupt/runtime and concurrency. Root admission is synthetic over actual local inodes; parent OS lock and legacy DB uniqueness are caller obligations."
     manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
+    manifest["related"] += ["PG-D-159", "BUG-163", "BUG-164", "BUG-165", "BUG-166", "YKT-127"]
+    manifest["runReferencesOracle"] = "013/BAT082..089: immutable4boolean/3flag OR/inconsistent-empty rejection; realPG reads and fixed UUID/cutoff; explicit read-write READ COMMITTED, own DB advisory required; all16 independently counted JDBC calls including all4 NULL columns and both close failures, missing/duplicate/null resource reject after closure. Initial/final interrupt retained, unknown runtime/NPE not normal, connection ownership/config untouched, fresh rollback and separate-owner concurrent connections. Observation alone never authorizes GC or substitutes for parent lock continuity."
     manifest["limitations"] += " The file scope establishes fixed-namespace and record-lifecycle consistency under caller OS-lock authority, not actual OS-lock continuity, parent/child lifecycle, legacy DB identity checks, reference queries or400-day retirement. No actual reboot or root deployment."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
