@@ -288,3 +288,16 @@ PG-D-144/SSC-053: `/usr/bin/od --version`はOS既設uutils coreutils0.8.0。`-An
 | 2026-09-03 | Apache Artemis公式2.56.0のarchive/hashとMaven client/server artifactを固定し、Java 25の実File Journal component PT用toolchainを導入。 |
 | 2026-09-03 | Production broker.xml、NIO File Journal再起動・duplicate cache・1/5/25秒再配送・JMS transaction/DLQ、API/Web moduleのcoverage/SpotBugs中間gateを確認。 |
 | 2026-09-03 | `ActiveMQBasicSecurityManager`の実行時UUID credentialでrole/address/operation ACLを検証。値は一時directoryだけに保持し、source/reportへ保存しない。 |
+
+## 追補 2026-09-13 — backup用age隔離toolchain
+
+PG164正式08のsourceを凍結したまま、後続FND-R004用にUbuntu配布age 1.2.1をworkへ隔離展開した。今回08のMaven/PTでは未使用であり、環境導入だけをbackupのPG/PT合格にしない。OS package構成・global PATHは未変更。GNU tarは既存1.35。
+
+- Catalog: Ubuntu resolute/universe、amd64、age=1.2.1-1build1、size1,884,068、libc6>=2.34。apt-cache policy/showで導入前の未導入と候補を確認。
+- 配布: [Ubuntu package](http://jp.archive.ubuntu.com/ubuntu/pool/universe/a/age/age_1.2.1-1build1_amd64.deb)、[upstream固定manual](https://raw.githubusercontent.com/FiloSottile/age/v1.2.1/doc/age.1)。
+- 隔離先: /home/mini/codex/project1/work/toolchain/age-1.2.1。既存不存在を確認してmkdir、そこでapt-get download age=1.2.1-1build1、sha256sumを下記catalog値と比較後だけdpkg-deb -x age_1.2.1-1build1_amd64.deb rootを実行。
+- package SHA256: b6994be61dd9880456c36c13da5392ee4ab406763152cd86e33e430676aa8fb9
+- root/usr/bin/age: --version=1.2.1、SHA256 00c07670d548aa01705923fbbecbcd6edb76a65bd73e1b5644fad0c4a60bf678。
+- root/usr/bin/age-keygen: SHA256 0cadbef602a8849c9522869ff4007e66df1ec1cd00bc1e7c0b6ab2f08a95643d。
+- 後続PTは公開合成dataと一時生成鍵のみを使用し、秘密key/dump/plain archiveはGitへ保存しない。実recipient fingerprintは配備時の非秘密manifestへ記録し、この導入時に本番keyを生成していない。
+- root本番導入・更新時の再検証とrestore rehearsal、NAS適合/実子の終端確認は未実施。作業整理はwork/PGPT_R004_backup_artifact_design_draft.md。
