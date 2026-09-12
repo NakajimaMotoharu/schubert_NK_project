@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC-055/PG-D-159（先行4c5dcb85）: batch.repository.RunReferenceRepositoryは親Connectionを借用し、explicit READ COMMITTED/read-write transactionと前後割込を検査、331 §3.12の固定PreparedStatementへBatchRunをbindする。queryTimeout5秒、statement/result/null4列/1行だけ、全close成功後にimmutable RunReferences（history/inbox/log/identityConsistent）を返す。全参照なしでinconsistentは不正projection。anyReferenceは3flag OR、値toStringはredacted。Connection commit/rollback/close/config変更/新接続をしない。SQLException/不正projectionは全資源close後の固定BatchRepositoryException、未知Runtime/NPEは正常化しない。null constructor/runはprogramming契約。OPS-009/DAT-009/UI251/SS331・332・343、017の013/014・PT-BAT-082～089。
+
 SSC-055/PG-D-158（先行36b5f85b）: batch.file.MaintenanceRunFilesは固定6rootの操作scope・Session寿命・全record scan/graph・start/resume/completeを所有し、PG157のDurableRecordFilesへ限定IOを委譲する。返却のrun再開状態はimmutable activationとOptional completion。SS343 §6.15、OPS-009/UI251/SS341、NK-BAT-001/017の011・012/PT058～081。OS lock/実親/DB legacy照合/GCを本file scopeへ完了扱いで混入しない。
 
 SSC-055/PG-D-157（先行19e22eb4）: batch.file.DurableRecordFilesは借用private永続rootの限定read/publish/remove、EnvironmentInodePolicy.durableはlocal RW/root0700・file0600検証を共有する。SS343 §6.14、NK-BAT-001/OPS-009/UI251、017の009/010・PT-BAT-046～057へ追跡。固定namespace/graph/OS lock/親終端/GCを低位IO成功で代替しない。

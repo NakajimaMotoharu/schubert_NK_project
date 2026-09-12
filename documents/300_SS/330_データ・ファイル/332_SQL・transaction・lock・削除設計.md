@@ -1,5 +1,7 @@
 # SQL・transaction・lock・削除設計
 
+SSC-055/PG-D-159（先行4c5dcb85）: 331 §3.12のrun参照readは新規collision/resume整合/GC保全の共通非秘密観測。親は単独所有Connectionのexplicit transaction・READ COMMITTED・readOnly=falseで実行し、固定OS/DB lockを対象file mutationまで保持する。single snapshotの存在と整合を返し、rollback/commit/lock解放後の結果を再利用しない。service停止やDB不通時は補完せず保全する。SQL readはrow更新/lock取得/backup成功を行わず、通常step/進捗writerも既存保守排他規約を守る。管理者の手動DMLや別connection共有を検査済みとして許可しない。
+
 ## 1. 目的・追跡
 
 RepositoryのSQL、page/count、所有者scope、transaction isolation、optimistic/pessimistic/advisory lock、

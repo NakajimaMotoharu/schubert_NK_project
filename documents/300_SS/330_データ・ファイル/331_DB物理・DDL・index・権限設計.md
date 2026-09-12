@@ -204,6 +204,16 @@ Javaの同transaction内snapshot検査はSS324 §12.8を正とし、SQLだけで
 
 045/046 PT177以降で実PG18、最小role、partial UK/不正projection/全route、親子lock/並行INSERT阻止、exact168h、失敗rollback/commit不明/永続再開を検査する。未完了の業務writer/replayや親OS/backup実体を本SQL合格へ含めない。
 
+### 3.12 原本runの限定DB参照照会（SSC-055/PG-D-159）
+
+先行4c5dcb85。V018は`schubert.maintenance_read_run_references(uuid,timestamptz)`だけを追加する。nk_owner所有/SECURITY DEFINER、search_path=pg_catalog,schubert・timezone=UTC、PUBLIC実行を剥奪しschubert_batchだけEXECUTEする。app/Web/backup/ops/inspector/PUBLICに許可しない。基底progress SELECT/DML、新table/column/index、既存V001～017の変更はない。run_id検索は既存batch(run_id,step) indexと2progress PKを利用する。
+
+引数NULL・非有限cutoff・UTC0001～9999外を22023で拒否。自己backend/現在DBのbigint namespace（classid0/objid71419602/objsubid1）・granted ExclusiveLockがないと55000。shared/two-int/別backendでは不足。関数が自動取得/解放せず、観測だけではsession/xact lockの保持寿命を証明しない。親はOS flockとDB排他をfile mutation/参照再確認まで連続保持する。backup前の新run採番にも使うため本関数はbackup gateを要求しない。
+
+同じRETURN QUERYのsnapshotで非NULL Boolean4列を必ず1行返す: `has_batch_history`、`has_inbox_progress`、`has_log_progress`はstatus/完了/年齢によらず同run存在、`identity_consistent`は同run全batch.business_dateがcutoffのAsia/Tokyo日付に一致し、同run両progress.cutoffが完全一致する場合true。不存在はconsistent=true。step.started_at/ended_atを原本cutoffとして比較/補完せず、無関係runは結果へ混ぜない。SQL失敗/permission不明は非成功で保全。新runは3flag全false必須、resumeは原本が別途存在しconsistent=true、GCは3flag全falseに加えて343の全file/400日/active/未完了条件が必須。read結果だけで親/GC完了を証明しない。
+
+004の055/056・PT-DB-INBOX-241～248で3存在flag全8組合せ、全status/日付/µs/UTC-JST/上限、違うrun、cutoff不一致、権限・lock namespace/並行/rollback、catalogと旧migration不変を独立期待値で検証する。通常API/wire/Current oracle変更なし。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`

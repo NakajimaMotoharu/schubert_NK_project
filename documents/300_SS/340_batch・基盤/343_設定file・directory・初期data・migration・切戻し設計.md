@@ -342,6 +342,8 @@ PT-BAT-046～057/017の009・010はliteral72/109/140/141byteと実隔離inode/na
 
 ### 6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）
 
+SSC055/PG159追補（先行4c5dcb85）: 新run start前のDB既存ID確認とresume整合・GC同run参照は331 §3.12/332の限定readを使用する。親がOS/DB排他を維持して全3参照0/identity整合を確認し、DB不通/不明/nullを不存在扱いしない。原本なしlegacyはprogressから復元しない。GCはread成功だけで開始せず、既定400日/全activation完了/marker確定の全条件を別途満たす。RunReferenceRepositoryの実装・単体合格は親/GC実装の完了を意味しない。
+
 BUG159/YKT124（先行12446fed）: 再開は既存byteの可視性だけを成功条件にしない。全graph/対象条件を検証した後、選択runのanchor→対象begin→既done（存在時）→active（存在時）の順に同byte force/dir syncで再確定してから、active再利用結果を返す。activeなしresumeはanchorを再同期し、未完了beginならそれも再同期、新beginなら新規公開し、最後にactiveを公開する。completeはanchor→begin→active（存在時）を再同期した後、同値確認済みdoneを新規公開または再同期し、active退役・不存在を含めた親dir syncを確定する。全force/syncの失敗・null part supplierは非成功とし、前回の未確定commitをsuccessへ変換しない。byte/UUID/cutoff/mtimeは変更せず、全graphの期待値を再照合する。
 
 MaintenanceRunFiles.createは固定/varとnative能力だけを構成する。公開execute(Operation)はcallerが保守OS flockを獲得し、root管理者のnamespace変更を禁止した区間でのみ使用する。/var→lib→schubert-nk（共有root:root0755）→maintenance→runs/attempts（private root:root0700）をNOFOLLOWで6個の独立FDとして保持する。全scopeはlocal永続RW・ACLなし、private3rootは同device、共有祖先の別local mountは許すが毎回identity/属性を固定確認する。applicationによるmkdir/chmod/修復なし。操作前後と各record mutationの境界で固定namespaceのfresh6rootを再openし元snapshotのidentityと比較する。自身のmutationによるdirectory size/mtime/ctimeだけはidentity比較の対象外、scan内はfull snapshot一致を要求する。
