@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.*;
 import java.security.MessageDigest;
@@ -376,7 +377,7 @@ final class OutboxCleanupBoundaryTest {
   @Test
   void migrationAndLegacyOraclesRemainExplicit() throws Exception {
     assertEquals(
-        "18",
+        MigrationInventory.COUNT_TEXT,
         scalar(
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     Path migrations =

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
@@ -519,7 +520,7 @@ final class QuestionQueryInboxCleanupTest {
   @Test
   void appendOnlyInventoryAndClosedRoutes() throws Exception {
     assertEquals(
-        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+        MigrationInventory.CSV,
         scalar(
             "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where version is not null"));
     assertEquals(

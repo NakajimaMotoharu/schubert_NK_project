@@ -56,6 +56,9 @@ def main():
     traces = {str(p.relative_to(trace_root)): p.read_bytes() for p in trace_root.rglob("*") if p.is_file()}
     validate_traces(traces)
     evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence/parent-summary"
+    audit = repo / "evidence/01_PT/004_NK-DAT-001/061_NK-DAT-001_migration一覧横展開.md"
+    (evidence / "logs").mkdir(parents=True, exist_ok=True)
+    (evidence / "logs/BUG-175-YKT-136.md").write_bytes(audit.read_bytes())
     for folder, values in (("input", TRACES), ("output", traces)):
         directory = evidence / folder
         directory.mkdir(parents=True, exist_ok=True)
@@ -66,6 +69,7 @@ def main():
         ET.SubElement(suite, "testcase", id=test_id, classname=CLASS, name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
     sources = [repo / "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+               repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java",
                repo / "src/schubert-nk-api/src/test/java" / (CLASS.replace(".", "/") + ".java")]
     manifest = {k: verified[k] for k in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                  "exitCode", "command", "environment", "rawLogSha256")}
@@ -82,7 +86,7 @@ def main():
                                   "all table and index snapshot unchanged/no row lock/no backup prerequisite",
                                   "18 frozen migration hashes/19 inventory/repeat validate"]},
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json", "fullReactorManifestSha256": digest(full),
-        "related": ["SSC-049", "PG-D-162", "QA-046", "UIC-006"],
+        "related": ["SSC-049", "PG-D-162", "QA-046", "UIC-006", "BUG-175", "YKT-136"],
         "fixture": "Isolated PostgreSQL18.6/Flyway; public synthetic UUID/counts and independent SQL literals.",
         "oracle": "Absent progress stays absent; same-run cutoff exact; inspected/deleted/protected/END observed once without DML or private projection. Independent count vectors and all-role/lock/transaction/time boundaries.",
         "limitations": "No actual fresh child/unit termination, OS-lock continuity, backup artifacts, parent steps, actual NK CHR or IT/ST is certified.",

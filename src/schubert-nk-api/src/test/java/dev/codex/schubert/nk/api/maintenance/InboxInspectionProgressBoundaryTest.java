@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.*;
 import java.security.MessageDigest;
@@ -24,10 +25,7 @@ final class InboxInspectionProgressBoundaryTest {
   private static final String OPEN = "schubert.maintenance_open_inbox_inspection";
   private static final String RECORD = "schubert.maintenance_record_inbox_inspection";
   private static final String PURGE = "schubert.maintenance_cleanup_inbox_progress";
-  private static final List<String> VERSIONS =
-      List.of(
-          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
-          "014", "015", "016", "017", "018", "019");
+  private static final List<String> VERSIONS = MigrationInventory.VERSIONS;
 
   @BeforeAll
   static void start() throws Exception {

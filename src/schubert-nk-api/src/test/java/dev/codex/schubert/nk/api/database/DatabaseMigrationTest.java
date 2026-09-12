@@ -56,10 +56,7 @@ import org.postgresql.util.PSQLException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
-  private static final List<String> MIGRATION_VERSIONS =
-      List.of(
-          "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
-          "014", "015", "016", "017", "018", "019");
+  private static final List<String> MIGRATION_VERSIONS = MigrationInventory.VERSIONS;
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";

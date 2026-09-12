@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -429,7 +430,7 @@ final class RunReferenceBoundaryTest {
       for (int i = 0; i < 5; i++) assertEquals(List.of(true, true, true, true), read(c, RUN, TIME));
       assertEquals(before, snapshot(admin));
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+          MigrationInventory.CSV,
           scalar(
               admin,
               "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where version is not null and success"));
@@ -461,7 +462,7 @@ final class RunReferenceBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(19, files.size());
+    assertEquals(MigrationInventory.VERSIONS.size(), files.size());
     for (int i = 0; i < 17; i++) {
       assertTrue(files.get(i).getFileName().toString().startsWith("V%03d__".formatted(i + 1)));
       assertEquals(

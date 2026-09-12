@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -288,6 +289,18 @@ final class InspectionParentBoundaryTest {
 
   @Test
   void appendOnlyMigration() throws Exception {
+    // Independent canonical list guard: missing V019, aliases and mutation must not silently pass.
+    assertEquals(
+        List.of(
+            "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
+            "013", "014", "015", "016", "017", "018", "019"),
+        MigrationInventory.VERSIONS);
+    assertEquals(
+        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+        MigrationInventory.CSV);
+    assertEquals("19", MigrationInventory.COUNT_TEXT);
+    assertNotEquals(MigrationInventory.VERSIONS.subList(0, 18), MigrationInventory.VERSIONS);
+    assertThrows(UnsupportedOperationException.class, () -> MigrationInventory.VERSIONS.add("020"));
     Path migrations =
         Path.of(System.getProperty("nk.pt.repository"))
             .resolve("src/schubert-nk-api/src/main/resources/db/migration");

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -408,7 +409,7 @@ final class InboxDeletionBoundaryTest {
   void migrationInventoryAndSqlScope() throws Exception {
     try (var c = db.admin()) {
       assertEquals(
-          "18",
+          MigrationInventory.COUNT_TEXT,
           value(
               c,
               "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));

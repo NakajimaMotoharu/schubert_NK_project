@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.*;
 import java.security.MessageDigest;
@@ -472,7 +473,7 @@ final class LogCleanupProgressBoundaryTest {
                                 .resolve("V013__cleanup_backup_and_retention_guards.sql")))));
     try (var c = db.admin()) {
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019",
+          MigrationInventory.CSV,
           scalar(
               c,
               "select string_agg(version,',' order by installed_rank) from"

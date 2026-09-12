@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.Path;
@@ -314,7 +315,7 @@ final class InboxInspectionBoundaryTest {
   @Test
   void appendOnlyMigrationAndUnverifiedCiphertextRemainDistinct() throws Exception {
     assertEquals(
-        "18",
+        MigrationInventory.COUNT_TEXT,
         scalar(
             "pgpt_admin",
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
