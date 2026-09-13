@@ -1,6 +1,6 @@
 # NK-BAT-001 root manifest・資源解放横展開
 
-PG169/170、SSC062/063、BUG195～197/YKT154～156。2026-09-13。正式13前の実装・探索記録。工程/横展開全体の完了を意味しない。
+PG169/170、SSC062/063、BUG195～197/YKT154～156。2026-09-13。正式PT-WEB-20260913-13、source820554603bca7e5ddd358139f33dee27c9ae87c3/dev-foundation、2026-09-13 09:48:33～10:04:44 JST、Maven16分10秒/exit0。全1415件（Protocol80/Storage66/API660/Web241/Batch327/CHR41）PASS、failed/error/skipped0。6 Java module全line/method/class/branch100%、Production5 module static未解決0、固定path3method限定レビュー・coverage除外なし。15collector/38scopeと41負canary PASS。PG169/170新24件を認定するがBUG195/YKT154の広域残候補は未完了。実NK CHR/IT/ST/親全体の完了ではない。 以下の探索記録は正式13前の履歴として維持する。
 
 ## 1. 修正前再現と探索履歴
 
@@ -15,6 +15,18 @@ PG169/170、SSC062/063、BUG195～197/YKT154～156。2026-09-13。正式13前の
 | collector負canary | 019=40、017=1 | 全41件PASS。欠落/重複/異class/method、不合格・flaky/skip、trace全byte改変を拒否 |
 
 上表logは公開合成値だけの探索記録を要約したもの。正式証跡はsource commitを凍結した全reactor後にmanifestへ登録する。探索72件は全reactor件数へ重複加算しない。
+
+探索log SHA-256（原logは/tmp、再現条件/期待/実際を上表へsanitizeして保存）:
+
+| log | SHA-256 |
+|---|---|
+| pgpt-bug195-red2.log | 102bd63c78257b39025bfe9b4434ceb3dd054bffb9d0151ce9830ce6c79e81d7 |
+| pgpt-bug195-probe-red.log | 807fc62e65f3d8d6ab9fa1043ed9a6995a08b2da9c938942bd86a6ebd227e325 |
+| pgpt-bug195-probe-green.log | bd7f1bc5b4f638ab0a8b8b8d00f73aa833df827c3b1aafe81322579c68ca2dac |
+| pgpt-pg169-170-explore2.log | b9ce0d9684d2d62e8c0755ea043f9fd15b26853087b8d4f0e7d62233a1579e51 |
+| pgpt-pg169-170-explore3.log | be9ebbac9893e7cbbafbdd7ca189666067c45c059f0d8f333d8b8f08ed2cea29 |
+
+探索command（09:42:56の単一実行）: JAVA_HOME=work/toolchain/jdk-25.0.4、Maven ./mvnw -o -Dmaven.repo.local=work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-batch -am -Dtest=OwnedTransferDirectoryTest,LinuxFileLockTest,ResourceScopeTest,BackupManifestReaderTest,BackupArtifactVerifierTest,InspectorUnitProbeTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check。ここでworkは /home/mini/codex/project1/work、cwdは同配下pgpt-foundation。JDK25.0.4/Maven3.9.12/Ubuntu26.04.1/amd64、その他は421。Sourceは後続820554603bca7e5ddd358139f33dee27c9ae87c3へ確定して正式13で再試験する。
 
 ## 2. 修正済み直接対象と独立確認
 
@@ -48,10 +60,10 @@ Reader/Artifact/Probeのprimaryを渡してexpectedを計算せず、例外same 
 
 ## 4. PT自身の横展開
 
-BUG196/YKT155: UNIT015追加compound loopにknown種別ごとのflag期待assert＋finally Thread.interruptedを追加。UNIT014全割込loopは既存finallyあり、ResourceScopeは割込注入なし。09:42:56のProbe8件と全compound通過、正式全reactor待ち。
+BUG196/YKT155: UNIT015追加compound loopにknown種別ごとのflag期待assert＋finally Thread.interruptedを追加。UNIT014全割込loopは既存finallyあり、ResourceScopeは割込注入なし。09:42:56のProbe8件と全compound通過後、正式13の全1415件/4coverage/staticでも成功。全対象確認により完了。
 
-BUG197/YKT156: OpenCall4/LockCall3/CloseCall2を実interface・既存fakeと照合。新OpenCallのみ修正しmode0/flags/descriptorもassert。DirectoryCallsは実override。09:42:56のStorage32件compile/PT通過、正式全reactor待ち。
+BUG197/YKT156: OpenCall4/LockCall3/CloseCall2を実interface・既存fakeと照合。新OpenCallのみ修正しmode0/flags/descriptorもassert。DirectoryCallsは実override。09:42:56のStorage32件compile/PT通過後、正式13のStorage全66件と全1415件/4coverage/staticでも成功。全対象確認により完了。
 
 ## 5. 正式認定・限界
 
-正式13は未実行。run/source/commit/環境/command/exit/全4coverageは017/018各evidence/manifest.jsonと047/028へ登録する。追加24PTは正式認定までは進捗加算0。rootUIDの入場はsynthetic、実dump/tar/age/manifest生成/fsync/7世代/親OS継続保持・子終端・実NKCHR/IT/STは未完了。
+正式13は上記の通り成功。run/source/commit/環境/command/exit/全4coverageを017/018各evidence/manifest.jsonと047/028へ登録、追加24PT/2部品を認定。BUG196/YKT155とBUG197/YKT156は全対象の正式再試験成功で完了、BUG195/YKT154は直接対象を認定し残候補があるため対応中。rootUIDの入場はsynthetic、実dump/tar/age/manifest生成/fsync/7世代/親OS継続保持・子終端・実NKCHR/IT/STは未完了。
