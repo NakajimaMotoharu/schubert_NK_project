@@ -159,6 +159,50 @@ final class ConfigurationGroupResolverTest {
 
   @Test
   void stdioFailureMatrix() throws Exception {
+    // PG174/SSC063/BUG195/YKT154: private IO scope keeps the existing Future oracle.
+    for (String scope : List.of("closeOutput", "closeInput", "closeError", "destroy"))
+      for (String primary :
+          List.of("runtime", "read", "timeout", "interrupt", "exit", "oversize", "success"))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("synthetic compound"),
+                new NullPointerException("synthetic compound"),
+                new AssertionError("synthetic compound"))) {
+          var child = new Child(primary.equals("oversize") ? new byte[65537] : RECORD);
+          child.alive = true;
+          int[] injected = {0};
+          child.compound =
+              name -> {
+                if (name.equals(scope)) {
+                  injected[0]++;
+                  throwUnknown(unknown);
+                }
+                if (name.equals("wait") && primary.equals("runtime")) throwUnknown(unknown);
+              };
+          if (primary.equals("exit")) child.exit = 2;
+          if (primary.equals("timeout") || primary.equals("interrupt")) child.mode = primary;
+          if (primary.equals("read")) child.readBehavior = "exception";
+          try {
+            Throwable actual = assertThrows(unknown.getClass(), () -> resolver(child).resolve());
+            assertSame(unknown, actual);
+            assertEquals(primary.equals("runtime") ? 1 : 0, actual.getSuppressed().length);
+            if (primary.equals("runtime")) {
+              var fixed = assertInstanceOf(IOException.class, actual.getSuppressed()[0]);
+              assertEquals("configuration group lookup failed", fixed.getMessage());
+              assertNull(fixed.getCause());
+              assertEquals(0, fixed.getSuppressed().length);
+            }
+            assertEquals(1, injected[0]);
+            assertEquals(1, child.destroyed);
+            assertEquals(0, child.forceDestroyed);
+            assertTrue(child.events.contains("wait"));
+            assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
+            child.closedAndCleared();
+            assertArrayEquals(primary.equals("oversize") ? new byte[65537] : RECORD, child.record);
+          } finally {
+            Thread.interrupted();
+          }
+        }
     for (String getter : List.of("getOutput", "getInput", "getError")) {
       var child = new Child(RECORD);
       child.getFailure = getter;
@@ -351,6 +395,11 @@ final class ConfigurationGroupResolverTest {
     assertEquals(0, failure.getSuppressed().length);
   }
 
+  private static void throwUnknown(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
   private static final class Child extends Process {
     final byte[] record;
     final List<String> events = Collections.synchronizedList(new ArrayList<>());
@@ -373,6 +422,7 @@ final class ConfigurationGroupResolverTest {
         errorClosed,
         chunk = Integer.MAX_VALUE;
     boolean alive, interruptClose;
+    java.util.function.Consumer<String> compound = name -> {};
 
     Child(byte[] record) {
       this.record = record.clone();
@@ -380,6 +430,7 @@ final class ConfigurationGroupResolverTest {
 
     void event(String name) {
       events.add(name);
+      compound.accept(name);
       if (runtimeAt.equals(name) || getFailure.equals(name)) throw runtime;
     }
 
@@ -495,6 +546,7 @@ final class ConfigurationGroupResolverTest {
     public void destroy() {
       destroyed++;
       alive = false;
+      event("destroy");
     }
 
     @Override

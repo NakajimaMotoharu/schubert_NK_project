@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -12,11 +13,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed NSS name lookup, independent of the file being admitted. NK-OPS-001; OPS-009/UI251; SS343
- * 6.12; SSC-049/PG-D-155; PT-OPS-GID-001..008. No shell, enumeration, inherited secret environment,
- * raw stdout diagnostic or target-derived fallback GID.
+ * 6.12; SSC-049/063, PG-D-155/174, BUG195/YKT154; PT-OPS-GID-001..008/017052. No shell,
+ * enumeration, inherited secret environment, raw stdout diagnostic or target-derived fallback GID.
  */
 @NullMarked
 public final class ConfigurationGroupResolver {
@@ -44,45 +46,84 @@ public final class ConfigurationGroupResolver {
       Process process =
           Objects.requireNonNull(
               start.execute(List.of("/usr/bin/getent", "group", "schubert")), "lookup process");
-      try {
-        long result;
-        // Register each stream before obtaining the next, including unexpected getter failures.
-        try (var output = process.getInputStream();
-            var input = process.getOutputStream();
-            var error = process.getErrorStream()) {
-          Objects.requireNonNull(output, "lookup stdout");
-          Objects.requireNonNull(input, "lookup stdin");
-          Objects.requireNonNull(error, "lookup stderr");
-          // BUG-155: even a valid group record can exceed the current OS pipe capacity.
-          // The executor owns the reader until it terminates; no raw output is spooled to disk.
-          try (var readers = Executors.newVirtualThreadPerTaskExecutor()) {
-            var pending = readers.submit(() -> read(output, bytes));
-            try {
-              require(process.waitFor(5, TimeUnit.SECONDS));
-              require(process.exitValue() == 0);
-              result = parse(bytes, readResult(pending));
-            } finally {
-              // Before joining readers: TERM releases a trusted lookup writer/pipe on failure.
-              // A TERM-ignoring OS/NSS fault cannot become success (SS343 6.12).
-              if (process.isAlive()) process.destroy();
-            }
-          }
-        }
-        require(!Thread.currentThread().isInterrupted());
-        return result;
-      } finally {
-        if (process.isAlive())
-          process.destroy(); // Lookup child only; never force kill or a service.
-      }
+      long[] result = {0};
+      scope(
+          () -> terminate(process),
+          () -> {
+            var output = process.getInputStream();
+            scope(
+                () -> finish(output),
+                () -> {
+                  var input = process.getOutputStream();
+                  scope(
+                      () -> finish(input),
+                      () -> {
+                        var error = process.getErrorStream();
+                        scope(
+                            () -> finish(error),
+                            () -> {
+                              Objects.requireNonNull(output, "lookup stdout");
+                              Objects.requireNonNull(input, "lookup stdin");
+                              Objects.requireNonNull(error, "lookup stderr");
+                              var readers = Executors.newVirtualThreadPerTaskExecutor();
+                              scope(
+                                  readers::close,
+                                  () -> {
+                                    var pending = readers.submit(() -> read(output, bytes));
+                                    // Retain TERM-before-join: no reader writes into the buffer
+                                    // after it is wiped.
+                                    scope(
+                                        () -> terminate(process),
+                                        () -> {
+                                          require(process.waitFor(5, TimeUnit.SECONDS));
+                                          require(process.exitValue() == 0);
+                                          result[0] = parse(bytes, readResult(pending));
+                                        });
+                                  });
+                            });
+                      });
+                });
+          });
+      require(!Thread.currentThread().isInterrupted());
+      return result[0];
     } catch (InterruptedException failure) {
       Thread.currentThread().interrupt();
       throw unavailable();
     } catch (IOException failure) {
-      // Includes raw close diagnostics added to a primary exception by TWR.
+      // Normalize known I/O only after all owned scopes have finished.
       throw unavailable();
     } finally {
       Arrays.fill(bytes, (byte) 0);
     }
+  }
+
+  // PG174/SSC063/BUG195: checked lookup IO is not the StopGate exception contract.
+  private static void scope(Closeable release, ProcessResourceScope.QueryWork work)
+      throws IOException, InterruptedException {
+    try {
+      work.run();
+    } catch (IOException | InterruptedException | RuntimeException | Error primary) {
+      try {
+        release.close();
+      } catch (IOException | RuntimeException | Error cleanup) {
+        if ((primary instanceof IOException || primary instanceof InterruptedException)
+            && !(cleanup instanceof IOException)) {
+          if (primary instanceof InterruptedException) Thread.currentThread().interrupt();
+          throw cleanup;
+        }
+        primary.addSuppressed(unavailable());
+      }
+      throw primary;
+    }
+    release.close();
+  }
+
+  private static void terminate(Process process) {
+    if (process.isAlive()) process.destroy();
+  }
+
+  private static void finish(@Nullable Closeable resource) throws IOException {
+    if (resource != null) resource.close();
   }
 
   private static int readResult(Future<Integer> pending) throws IOException, InterruptedException {

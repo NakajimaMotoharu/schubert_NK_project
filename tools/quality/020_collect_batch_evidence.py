@@ -366,7 +366,7 @@ def main():
         destination.mkdir(parents=True, exist_ok=True)
         for name, value in values.items():
             (destination / name).write_bytes(value)
-    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md"):
+    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md"):
         audit = repo / "evidence/01_PT/017_NK-BAT-001" / audit_name
         shutil.copyfile(audit, evidence / "logs" / audit.name)
     pair_root = target / "backup-step-traces"
@@ -515,6 +515,7 @@ def main():
     manifest["related"] += ["PG-D-166", "SSC-059", "BUG-184", "BUG-185", "BUG-186", "YKT-145", "YKT-146"]
     manifest["related"] += ["PG-D-168", "SSC-061", "BUG-191", "BUG-192", "BUG-193", "BUG-194", "YKT-151", "YKT-152", "YKT-153"]
     manifest["related"] += ["PG-D-169", "PG-D-170", "SSC-062", "SSC-063", "BUG-195", "YKT-154", "BUG-196", "YKT-155", "BUG-197", "YKT-156"]
+    manifest["related"] += ["PG-D-171", "PG-D-172", "PG-D-173", "PG-D-174", "BUG-198", "YKT-157"]
     manifest["rootManifestReaderOracle"] = "046 BAT226..241: canonical root-owned MANIFEST with full caller step identity; independent964-byte vector and reader result trace. Real held inode/positive-progress bounded4097-byte buffer, metadata/ACL/device/rebinding, all38 I/O and63 clock/interrupt positions, all close scopes/unknown compound and zeroed buffers. Root/backup UID admission remains synthetic; no backup creation or parent completion claim. BUG195 direct scopes repaired, broader YKT154 candidates remain open as enumerated in048."
     manifest["backupPairOracle"] = "041/043 BAT210..225: independent14-column two-row identity/counters/UTC microsecond ends; borrowed RW READ_COMMITTED and advisory owner. Both RUNNING or exact both SUCCESS only; atomic DB+CONFIG completion, rollback and uncertain commit replay without double update. Independently counted repository70/240/70=380 SQL fault positions and service246 positions/interrupt points; unknown primary/cleanup130 compound cases across Backup60+Step70 plus2 original counterexamples. Every owned JDBC resource closes, parent connection remains borrowed; null/Error/Runtime and concurrent isolated connections tested."
     manifest["limitations"] += " Backup pair completion requires caller-trusted root manifest, continuous OS/root/artifact verification. No manifest authentication, dump/tar/age creation, seven-generation retention or whole-parent completion."
