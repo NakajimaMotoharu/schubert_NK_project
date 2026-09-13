@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC062/PG169: .batch.file.BackupManifestReaderはSS341§6.7のroot MANIFEST保持inode読取りを所有し、constructor/read・metadata/bounded IO/safe close/clockを017046・047/BAT226～241へ追跡する。callerの原本両handle/name照合、root/child/entry前後検査までを担い、任意root侵害、root生成/実3archive/DB成功/7世代/親OS寿命は保証しない。依存は既存Batch/Storage/Java標準、PG168正式12中は設計のみ先行。
+
 SSC060/PG167: Batch .platform.InspectorUnitSnapshot（固定18property/値/必要終端条件/fresh receipt）とInspectorUnitProbe（固定show・GetUnitProcesses・同状態照合/所有stdio/固定例外）を追加予定。既存API/Web停止確認とは用途を分離し、start/stop/親callback/OS lockを所有しない。全public/private method・native helperはOPS009/UI251/SS341 §7.4・343/018021～024・PT-OPS-UNIT-001～016へ対応。依存は既存Batch/Java標準のみ、systemd設定そのものの変更は含まない。
 
 SSC059/PG166: .batch.file.BackupArtifactVerifierは341 §6.5の信頼manifestと実4fileのread-only一致・保持inode/metadata/ACL/size/hash/byte/再binding・owned closeだけを担う。BAK/BKO/UI251/SS341・343、017038/039/BAT194～209でconstructor/verify・全内部port/snapshot/safe-close/streaming/時計のmethodを追跡する。実backup生成/DB信頼binding/世代管理やroot/OS authorityをこの結果から発明しない。
