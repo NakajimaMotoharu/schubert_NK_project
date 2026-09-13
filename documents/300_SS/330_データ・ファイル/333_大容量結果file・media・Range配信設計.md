@@ -1,5 +1,15 @@
 # 大容量結果file・media・Range配信設計
 
+SSC063/PG170・BUG195/YKT154（先行6e59c153）: resource bodyとcloseの複合は標準TWR self-suppressionへ依存せず明示的に解決する。Storage.ResourceScope.use(Closeable,Action<T>)は受領したcloseを全経路で1回だけ実施し、body成功後のclose成功まで返さない。close/action nullは所有受領前に拒否。generic callbackの明示nullable結果は透過し、呼出側の既存null契約を変えない。
+
+bodyが未知Runtime/Errorの場合は同じprimaryを保持し、closeがIO/Runtime/Errorで失敗しても新しい固定StorageIoExceptionをsuppressed1件だけ追加する（同一throwable再送を含む）。bodyが既知IOExceptionでcloseが未知Runtime/Errorならcloseの元unknownを優先する。既知IO同士なら非成功UNAVAILABLE、bodyだけのStorageIoExceptionはsuppressedなしのreasonを保ちraw causeを除去、それ以外のIOはUNAVAILABLE。成功bodyのunknown closeはそのまま非正常伝播、IO closeは固定失敗。catch NPEによる正常復帰、close再試行、resource以外の所有物のcloseを禁止する。nested scopeも内側から順に全closeを行い、この同じ規則でprimaryを保つ。
+
+直接適用はOwnedTransferDirectoryのopen/openDate/withEntry、LinuxFileLockのowned descriptor、BackupArtifactVerifierのchild/rebound/entry経由/channel/names、BackupManifestReaderのchild/rebound/entry経由/channel。根元ArenaはJDK実体で外部close portがなく、既存所有・close回帰を維持する。これらのI/O順・file/DB/OS操作と正常結果は変更しない。未知provider自身の例外は元identityを保持するが、そこからraw messageを監査/UIへ出してよいという意味ではない。
+
+InspectorUnitProbeは専用の同等scopeでstdio/QueryProcessを管理し、既知StopGate/IOException/InterruptedExceptionとunknown Runtime/Errorを区別する。primary unknown＋cleanup失敗は固定StopGate(COMMAND_FAILURE) secondary、primary既知＋cleanup unknownは元unknown、既知同士は元停止理由を外側でredact。早期stdin/stderr closeは既存once状態を維持し、未取得streamをcloseしない。取得済output byteはclose失敗を含む全異常終了で消去し、途中配列を正常結果へ返さない。systemctl command/timeout/TERM/環境と既存Test oracleを不変更。
+
+018027/028・PT-OPS-RSCOPE-001～008が共通scope単体（NULL/nullable/全IO理由・未知3型/同一・別例外/close1回/並行・nested）。既存BAT204/235、UNIT015、Storage保持inode/lockの追加反例と正式全reactorで各呼出箇所を検証する。全line/method/class/branch100%、新たな解析抑制/coverage除外なし。未修正箇所を検索済みだけで横展開完了にしない。
+
 ## 1. 目的・適用範囲
 
 Scenario大容量結果fileの生成・descriptor・完全性検証・朝削除と、audio/video/musicの認証済み

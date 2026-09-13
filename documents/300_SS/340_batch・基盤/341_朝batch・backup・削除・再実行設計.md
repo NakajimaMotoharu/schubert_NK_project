@@ -164,6 +164,8 @@ BUG193/YKT152の例外優先規則追補（修正前f030f647）: rollback/autoCo
 
 ### 6.7 root MANIFESTの保持inode読取り（SSC062/PG169）
 
+SSC063/PG170・BUG195/YKT154: 本節/§6.5/§7.4のresource compoundはSS333冒頭の明示close優先順位を適用する。同一unknownのbody/close再送をself-suppressionで置換しない。既知IOとunknown cleanup/fatalを区別し、byte消去・全所有close・元unknown同一性を維持する。IO/commandの正常条件や既存expectedは変更しない。
+
 先行c2da887a。BackupManifestReaderは§6.6のroot生成済MANIFESTを、callerの原本両stepと単一の正規directoryへ束縛して読む。root CREATE_NEW/0600生成・writer close/fsync/atomic/実体検証の正当な運用が信頼前提であり、任意root作成fileを暗号学的に認証する機構ではない。専用backup user所有directory上のroot所有fileは低権限者が内容を書けないことを利用し、別真正manifest入替えをfull handle/name照合で拒否する。
 
 - Production .file.BackupManifestReader、read(String directoryName,BatchStepAttempt databaseStep,BatchStepAttempt configurationStep)→不変BackupManifest。callerはroot原本から両完全handleを供給し、backup rootの設定/ancestor/realpath/FS durability・OS排他・account UID/GIDを既定gateで確認して保持rootを借用させる。nameはASCII8桁日付-6桁時分秒-lowercase canonical UUID形の1segmentだけ、part/絶対/相対区切り/別名/NULLを拒否。最終的にmanifest.directoryNameと完全一致を要す。新たな任意path探索や最新選択は行わない。
