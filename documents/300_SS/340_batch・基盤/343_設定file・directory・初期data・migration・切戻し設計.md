@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC063継続/PG171・BUG195/YKT154: 同じIO close優先順位をDurableRecordFiles.readFile/write/force、InspectorEnvironmentReader.readFile、InspectorEnvironmentPublisher.writeNew/forceExisting、ExistingFileAccess.walkのchannel/childへ適用する。nullable IO resourceは従来の固定IO拒否（ExistingFileAccessのnonnull channelは境界NPE拒否）を所有受領前に実施し、callbackの値/IO順/サイズ/metadata/partial保全/借用root・非公開能力を変更しない。8所有scopeを既知IO＋未知cleanup/同一未知body＋cleanupの各Runtime/NPE/Error3型で独立再試験する。Directory/Process/JDBC等の残候補は別段で未完了を維持する。IO型と回復責務を変える一般frameworkや追加coverage除外は採用しない。
+
 SSC062/PG169: 341§6.7のreaderはcallerがadmitした保持backup rootから正規単一子/MANIFEST.jsonだけを読む。専用backup UID/GIDの0700 root/子とroot:root0600/link1のfile、同device/ACLなし/RW、typed前後属性と1～4096byte/canonical/原本両handleを確認する。rootのCREATE_NEW生成・FS durability/NAS保証・実archive生成/再hash/7世代は別責務であり、readerの成功を代用しない。既存directory/config/credential配布先や権限を変更しない。
 
 SSC060/PG167（先行81e0e64b）: 341 §7.4の固定Inspector unit18property・GetUnitProcesses空配列と前後snapshotを、親のfresh終了観測へ使用する。実InvocationID/commandline/process一覧は設定/証跡へ保存せず、独立合成vectorだけで単体検証する。現行unitのRemainAfterExit=no/固定起動wrapperは本変更で変えない。古い状態の流用、query process終了を実検査unit全終端へ代用、start結果不明のままOS lock解除は不可。018021～024/UNIT001～016を追跡し、実親start/stop/quarantine/原本・DB結線は引き続き未完了。
