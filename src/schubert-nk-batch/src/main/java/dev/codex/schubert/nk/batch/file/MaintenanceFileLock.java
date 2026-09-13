@@ -18,6 +18,7 @@ import org.jspecify.annotations.Nullable;
  * App stop, backup verification, DB handoff and the trusted root's namespace stability remain
  * mandatory caller duties. No path/UID/command can be selected through the public factory.
  */
+// PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class MaintenanceFileLock {
   private final Path runtime;
@@ -77,27 +78,37 @@ public final class MaintenanceFileLock {
       throws StorageIoException {
     Objects.requireNonNull(operation, "operation");
     require(security.effectiveUid() == 0);
-    try (var run = OwnedTransferDirectory.open(directories, runtime)) {
-      Identity runIdentity = run.atDirectory(this::directory);
-      try (var app = run.openExistingChild("schubert-nk")) {
-        Identity appIdentity = app.atDirectory(this::directory);
-        require(runIdentity.device() == appIdentity.device());
-        return app.atExistingEntryHandle(
-            "maintenance.lock",
-            held -> {
-              Identity fileIdentity = file(held);
-              require(appIdentity.device() == fileIdentity.device());
-              var expected = new Snapshot(runIdentity, appIdentity, fileIdentity);
-              return lock.tryExclusive(
-                  held,
+    try {
+      var run = OwnedTransferDirectory.open(directories, runtime);
+      return ResourceScope.use(
+          run::close,
+          () -> {
+            Identity runIdentity = run.atDirectory(this::directory);
+            {
+              var app = run.openExistingChild("schubert-nk");
+              return ResourceScope.use(
+                  app::close,
                   () -> {
-                    verifyCurrent(expected);
-                    T result = operation.execute();
-                    verifyCurrent(expected);
-                    return result;
+                    Identity appIdentity = app.atDirectory(this::directory);
+                    require(runIdentity.device() == appIdentity.device());
+                    return app.atExistingEntryHandle(
+                        "maintenance.lock",
+                        held -> {
+                          Identity fileIdentity = file(held);
+                          require(appIdentity.device() == fileIdentity.device());
+                          var expected = new Snapshot(runIdentity, appIdentity, fileIdentity);
+                          return lock.tryExclusive(
+                              held,
+                              () -> {
+                                verifyCurrent(expected);
+                                T result = operation.execute();
+                                verifyCurrent(expected);
+                                return result;
+                              });
+                        });
                   });
-            });
-      }
+            }
+          });
     } catch (IOException failure) {
       // Every owned entry/root has already closed; never leak nested/suppressed physical paths.
       throw unavailable();
@@ -105,13 +116,28 @@ public final class MaintenanceFileLock {
   }
 
   private void verifyCurrent(Snapshot expected) throws StorageIoException {
-    try (var run = OwnedTransferDirectory.open(directories, runtime)) {
-      require(expected.run().equals(run.atDirectory(this::directory)));
-      try (var app = run.openExistingChild("schubert-nk")) {
-        require(expected.app().equals(app.atDirectory(this::directory)));
-        require(
-            app.atExistingEntryHandle("maintenance.lock", p -> expected.file().equals(file(p))));
-      }
+    {
+      var run = OwnedTransferDirectory.open(directories, runtime);
+      ResourceScope.use(
+          run::close,
+          () -> {
+            require(expected.run().equals(run.atDirectory(this::directory)));
+            {
+              var app = run.openExistingChild("schubert-nk");
+              ResourceScope.use(
+                  app::close,
+                  () -> {
+                    require(expected.app().equals(app.atDirectory(this::directory)));
+                    require(
+                        app.atExistingEntryHandle(
+                            "maintenance.lock", p -> expected.file().equals(file(p))));
+
+                    return Boolean.TRUE;
+                  });
+            }
+
+            return Boolean.TRUE;
+          });
     }
   }
 

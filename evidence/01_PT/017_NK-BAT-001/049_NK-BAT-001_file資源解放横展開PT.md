@@ -1,5 +1,7 @@
 # NK-BAT/OPS/MED 既存file資源解放横展開 PT追補
 
+2026-09-13追補: source9fb1f14dへ実装固定・push済み。PG172選択green2（017050）で54compoundを含む93 PTが再成功、DurableRecordFilesの既存plan/marker3分岐も関連RetirementRecordsTestで通過し当該classの4coverageは全missed0。全reactorの正式認定は別途行う。
+
 PG171/SSC063継続・BUG195/YKT154。source修正前の仕様。正式13/source82055460はこの追加反例をまだ実行していない。新しいJUnit件数・部品数への加算0、既存Test IDの再発防止観点として管理する。
 
 SSC063継続/PG171・BUG195/YKT154: 同じIO close優先順位をDurableRecordFiles.readFile/write/force、InspectorEnvironmentReader.readFile、InspectorEnvironmentPublisher.writeNew/forceExisting、ExistingFileAccess.walkのchannel/childへ適用する。nullable IO resourceは従来の固定IO拒否（ExistingFileAccessのnonnull channelは境界NPE拒否）を所有受領前に実施し、callbackの値/IO順/サイズ/metadata/partial保全/借用root・非公開能力を変更しない。8所有scopeを既知IO＋未知cleanup/同一未知body＋cleanupの各Runtime/NPE/Error3型で独立再試験する。Directory/Process/JDBC等の残候補は別段で未完了を維持する。IO型と回復責務を変える一般frameworkや追加coverage除外は採用しない。

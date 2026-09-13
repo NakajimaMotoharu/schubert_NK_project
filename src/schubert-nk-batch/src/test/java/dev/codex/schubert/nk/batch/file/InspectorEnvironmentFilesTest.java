@@ -64,8 +64,69 @@ final class InspectorEnvironmentFilesTest {
     }
   }
 
+  private static void throwCompound(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  private static void assertCompound(Throwable expected, Throwable actual, boolean known) {
+    assertSame(expected, actual);
+    assertEquals(known ? 0 : 1, actual.getSuppressed().length);
+    if (!known) {
+      var fixed = assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
+      assertEquals(StorageIoException.Reason.UNAVAILABLE, fixed.reason());
+      assertNull(fixed.getCause());
+      assertEquals(0, fixed.getSuppressed().length);
+    }
+  }
+
   @Test
   void callbackFailureRetention() throws Exception {
+
+    // PG172/SSC063, BUG195/YKT154; close offsets independently follow reverse acquisition.
+    for (int position = 1; position <= 5; position++) {
+      int offset = position;
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("synthetic compound"),
+                new NullPointerException("synthetic compound"),
+                new AssertionError("synthetic compound"))) {
+          try (var f = fixture()) {
+            int[] closes = {0}, injected = {0}, callbacks = {0};
+
+            Throwable actual =
+                assertThrows(
+                    unknown.getClass(),
+                    () ->
+                        f.files.execute(
+                            RUN,
+                            () -> {
+                              callbacks[0]++;
+
+                              closes[0] = f.count("close");
+                              f.on(
+                                  "close",
+                                  closes[0] + offset,
+                                  () -> {
+                                    injected[0]++;
+                                    throwCompound(unknown);
+                                  });
+                              if (known) throw new IOException("synthetic primary");
+                              throwCompound(unknown);
+                              return true;
+                            }));
+            assertCompound(unknown, actual, known);
+            assertEquals(1, injected[0]);
+            assertEquals(1, callbacks[0]);
+            assertEquals(closes[0] + 5, f.count("close"));
+            assertEquals(RUNTIME, Files.readString(f.target));
+            assertEquals(CONFIG, Files.readString(f.staticFile));
+            assertEquals(0, f.count("unlink"));
+            f.released();
+          }
+        }
+    }
     for (String mode : List.of("io", "runtime", "null"))
       try (var f = fixture()) {
         var expected = new IllegalStateException("synthetic callback failure");

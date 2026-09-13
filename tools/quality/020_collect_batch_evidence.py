@@ -366,7 +366,7 @@ def main():
         destination.mkdir(parents=True, exist_ok=True)
         for name, value in values.items():
             (destination / name).write_bytes(value)
-    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md"):
+    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md"):
         audit = repo / "evidence/01_PT/017_NK-BAT-001" / audit_name
         shutil.copyfile(audit, evidence / "logs" / audit.name)
     pair_root = target / "backup-step-traces"

@@ -682,8 +682,103 @@ final class MaintenanceRunFilesTest {
                 Optional.of(completion(MaintenanceCompletion.Outcome.SUCCESS))));
   }
 
+  private static void throwCompound(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  private static void assertCompound(Throwable expected, Throwable actual, boolean known) {
+    assertSame(expected, actual);
+    assertEquals(known ? 0 : 1, actual.getSuppressed().length);
+    if (!known) {
+      var fixed = assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
+      assertEquals(StorageIoException.Reason.UNAVAILABLE, fixed.reason());
+      assertNull(fixed.getCause());
+      assertEquals(0, fixed.getSuppressed().length);
+    }
+  }
+
   @Test
   void interruptionAndRuntime() throws Exception {
+
+    // PG172/SSC063, BUG195/YKT154; close offsets independently follow reverse acquisition.
+    for (int position = 1; position <= 6; position++) {
+      int offset = position;
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("synthetic compound"),
+                new NullPointerException("synthetic compound"),
+                new AssertionError("synthetic compound"))) {
+          try (var f = fixture()) {
+            int[] closes = {0}, injected = {0}, callbacks = {0};
+            var retained =
+                new java.util.concurrent.atomic.AtomicReference<MaintenanceRunFiles.Session>();
+            Throwable actual =
+                assertThrows(
+                    unknown.getClass(),
+                    () ->
+                        f.files.execute(
+                            session -> {
+                              callbacks[0]++;
+                              retained.set(session);
+                              closes[0] = f.count("close");
+                              f.on(
+                                  "close",
+                                  closes[0] + offset,
+                                  () -> {
+                                    injected[0]++;
+                                    throwCompound(unknown);
+                                  });
+                              if (known) throw new IOException("synthetic primary");
+                              throwCompound(unknown);
+                              return true;
+                            }));
+            assertCompound(unknown, actual, known);
+            assertEquals(1, injected[0]);
+            assertEquals(1, callbacks[0]);
+            assertEquals(closes[0] + 6, f.count("close"));
+            failure(() -> retained.get().start(RUN, ACTIVATION.id()));
+            assertTrue(disk(f).isEmpty());
+            f.released();
+          }
+        }
+    }
+
+    for (boolean known : List.of(false, true))
+      for (Throwable unknown :
+          List.of(
+              new IllegalStateException("synthetic compound"),
+              new NullPointerException("synthetic compound"),
+              new AssertionError("synthetic compound")))
+        try (var f = fixture()) {
+          int[] injected = {0}, bodies = {0};
+          f.on(
+              "namesIterator",
+              1,
+              () -> {
+                bodies[0]++;
+                f.on(
+                    "namesClose",
+                    1,
+                    () -> {
+                      injected[0]++;
+                      throwCompound(unknown);
+                    });
+                if (known) throw new IOException("synthetic iterator primary");
+                throwCompound(unknown);
+              });
+          Throwable actual =
+              assertThrows(
+                  unknown.getClass(),
+                  () -> f.files.execute(session -> session.start(RUN, ACTIVATION.id())));
+          assertCompound(unknown, actual, known);
+          assertEquals(1, bodies[0]);
+          assertEquals(1, injected[0]);
+          assertEquals(1, f.count("namesClose"));
+          assertTrue(disk(f).isEmpty());
+          f.released();
+        }
     // Independently counted final closes: stop after operation IO, then after all scope roots.
     for (boolean wholeScope : List.of(false, true))
       try (var f = fixture()) {

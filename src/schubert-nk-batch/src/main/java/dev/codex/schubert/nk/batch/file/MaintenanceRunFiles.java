@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
@@ -50,6 +51,7 @@ import org.jspecify.annotations.Nullable;
  * namespace changes, verify legacy DB identity and confirm parent/child termination before
  * complete. NK-BAT-001; OPS-009/UI251/SS311/341/343 6.15; SSC-055/PG-D-158; PT-BAT-058..081.
  */
+// PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class MaintenanceRunFiles {
   private final Object scopeLock = new Object();
@@ -144,21 +146,59 @@ public final class MaintenanceRunFiles {
       begin();
       try {
         T result;
-        try (var var = OwnedTransferDirectory.open(directories, varPath);
-            var lib = var.openExistingChild("lib");
-            var app = lib.openExistingChild("schubert-nk");
-            var maintenance = app.openExistingChild("maintenance");
-            var runs = maintenance.openExistingChild("runs");
-            var attempts = maintenance.openExistingChild("attempts")) {
-          var roots = List.of(var, lib, app, maintenance, runs, attempts);
-          var session = new Session(roots, capture(roots));
-          try {
-            session.verifyNamespace();
-            result = Objects.requireNonNull(operation.execute(session), "run operation result");
-            session.finish();
-          } finally {
-            session.invalidate();
-          }
+        {
+          var var = OwnedTransferDirectory.open(directories, varPath);
+          result =
+              ResourceScope.use(
+                  var::close,
+                  () -> {
+                    var lib = var.openExistingChild("lib");
+                    return ResourceScope.use(
+                        lib::close,
+                        () -> {
+                          var app = lib.openExistingChild("schubert-nk");
+                          return ResourceScope.use(
+                              app::close,
+                              () -> {
+                                var maintenance = app.openExistingChild("maintenance");
+                                return ResourceScope.use(
+                                    maintenance::close,
+                                    () -> {
+                                      var runs = maintenance.openExistingChild("runs");
+                                      return ResourceScope.use(
+                                          runs::close,
+                                          () -> {
+                                            var attempts =
+                                                maintenance.openExistingChild("attempts");
+                                            return ResourceScope.use(
+                                                attempts::close,
+                                                () -> {
+                                                  var roots =
+                                                      List.of(
+                                                          var,
+                                                          lib,
+                                                          app,
+                                                          maintenance,
+                                                          runs,
+                                                          attempts);
+                                                  var session = new Session(roots, capture(roots));
+                                                  try {
+                                                    session.verifyNamespace();
+                                                    T completed =
+                                                        Objects.requireNonNull(
+                                                            operation.execute(session),
+                                                            "run operation result");
+                                                    session.finish();
+                                                    return completed;
+                                                  } finally {
+                                                    session.invalidate();
+                                                  }
+                                                });
+                                          });
+                                    });
+                              });
+                        });
+                  });
         }
         require(!Thread.currentThread().isInterrupted());
         return result;
@@ -748,15 +788,55 @@ public final class MaintenanceRunFiles {
     }
 
     private void verifyNamespace() throws StorageIoException {
-      try (var var = OwnedTransferDirectory.open(directories, varPath);
-          var lib = var.openExistingChild("lib");
-          var app = lib.openExistingChild("schubert-nk");
-          var maintenance = app.openExistingChild("maintenance");
-          var runs = maintenance.openExistingChild("runs");
-          var attempts = maintenance.openExistingChild("attempts")) {
-        List<Snapshot> actual = capture(List.of(var, lib, app, maintenance, runs, attempts));
-        for (int index = 0; index < expectedRoots.size(); index++)
-          require(expectedRoots.get(index).sameIdentity(actual.get(index)));
+      {
+        var var = OwnedTransferDirectory.open(directories, varPath);
+        ResourceScope.use(
+            var::close,
+            () -> {
+              var lib = var.openExistingChild("lib");
+              return ResourceScope.use(
+                  lib::close,
+                  () -> {
+                    var app = lib.openExistingChild("schubert-nk");
+                    return ResourceScope.use(
+                        app::close,
+                        () -> {
+                          var maintenance = app.openExistingChild("maintenance");
+                          return ResourceScope.use(
+                              maintenance::close,
+                              () -> {
+                                var runs = maintenance.openExistingChild("runs");
+                                return ResourceScope.use(
+                                    runs::close,
+                                    () -> {
+                                      var attempts = maintenance.openExistingChild("attempts");
+                                      return ResourceScope.use(
+                                          attempts::close,
+                                          () -> {
+                                            List<Snapshot> actual =
+                                                capture(
+                                                    List.of(
+                                                        var,
+                                                        lib,
+                                                        app,
+                                                        maintenance,
+                                                        runs,
+                                                        attempts));
+                                            for (int index = 0;
+                                                index < expectedRoots.size();
+                                                index++)
+                                              require(
+                                                  expectedRoots
+                                                      .get(index)
+                                                      .sameIdentity(actual.get(index)));
+
+                                            return Boolean.TRUE;
+                                          });
+                                    });
+                              });
+                        });
+                  });
+            });
       }
     }
 
@@ -782,18 +862,26 @@ public final class MaintenanceRunFiles {
     return root.atDirectory(
         held -> {
           Set<String> names = new HashSet<>();
-          try (var entries = io.openNames(held)) {
-            if (entries == null) throw unavailable();
-            for (Path child : entries) {
-              if (child == null) throw unavailable();
-              require(held.equals(child.getParent()));
-              // Equal nonnull parent admits exactly one relative child; a root-only path is
-              // excluded.
-              require(names.add(held.relativize(child).toString()));
-            }
-          } catch (DirectoryIteratorException failure) {
-            throw unavailable();
-          }
+          var entries = io.openNames(held);
+          if (entries == null) throw unavailable();
+          ResourceScope.use(
+              entries::close,
+              () -> {
+                try {
+
+                  for (Path child : entries) {
+                    if (child == null) throw unavailable();
+                    require(held.equals(child.getParent()));
+                    // Equal nonnull parent admits exactly one relative child; a root-only path is
+                    // excluded.
+                    require(names.add(held.relativize(child).toString()));
+                  }
+
+                } catch (DirectoryIteratorException failure) {
+                  throw unavailable();
+                }
+                return Boolean.TRUE;
+              });
           return Set.copyOf(names);
         });
   }

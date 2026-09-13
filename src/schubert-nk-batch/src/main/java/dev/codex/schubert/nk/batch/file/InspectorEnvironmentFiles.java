@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
@@ -28,6 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * authoritative run, stable root administration and the terminal child. The callback must await its
  * child's terminal state before returning and never mutate/export these filesystem resources.
  */
+// PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class InspectorEnvironmentFiles {
   private static final String CONFIG = "schubert-nk",
@@ -94,28 +96,76 @@ public final class InspectorEnvironmentFiles {
     synchronized (lifecycleLock) {
       require(!Thread.currentThread().isInterrupted());
       require(security.effectiveUid() == 0);
-      byte[] reference = new byte[0];
+      byte[][] reference = {new byte[0]};
       try {
         long group = groups.resolve();
         require(group >= 1 && group <= 0xffff_ffffL);
         T result;
-        try (var etc = OwnedTransferDirectory.open(directories, etcPath);
-            var config = etc.openExistingChild(CONFIG);
-            var runtime = OwnedTransferDirectory.open(directories, runPath);
-            var app = runtime.openExistingChild(CONFIG);
-            var maintenance = app.openExistingChild(MAINTENANCE)) {
-          var roots = new Roots(etc, config, runtime, app, maintenance);
-          List<Snapshot> expectedRoots = capture(roots, group);
-          Snapshot expectedFile = staticFile(roots, group, expectedRoots.get(1));
-          var staticReader = new InspectorEnvironmentReader(config, security, group, io);
-          reference = staticReader.readStatic();
-          require(expectedFile.equals(staticFile(roots, group, expectedRoots.get(1))));
-          var publisher = new InspectorEnvironmentPublisher(maintenance, security, io);
-          publisher.prepare(run);
-          verify(roots, group, expectedRoots, expectedFile, reference, run);
-          result = Objects.requireNonNull(operation.execute(), "environment operation result");
-          verify(roots, group, expectedRoots, expectedFile, reference, run);
-          publisher.retire(run);
+        {
+          var etc = OwnedTransferDirectory.open(directories, etcPath);
+          result =
+              ResourceScope.use(
+                  etc::close,
+                  () -> {
+                    var config = etc.openExistingChild(CONFIG);
+                    return ResourceScope.use(
+                        config::close,
+                        () -> {
+                          var runtime = OwnedTransferDirectory.open(directories, runPath);
+                          return ResourceScope.use(
+                              runtime::close,
+                              () -> {
+                                var app = runtime.openExistingChild(CONFIG);
+                                return ResourceScope.use(
+                                    app::close,
+                                    () -> {
+                                      var maintenance = app.openExistingChild(MAINTENANCE);
+                                      return ResourceScope.use(
+                                          maintenance::close,
+                                          () -> {
+                                            var roots =
+                                                new Roots(etc, config, runtime, app, maintenance);
+                                            List<Snapshot> expectedRoots = capture(roots, group);
+                                            Snapshot expectedFile =
+                                                staticFile(roots, group, expectedRoots.get(1));
+                                            var staticReader =
+                                                new InspectorEnvironmentReader(
+                                                    config, security, group, io);
+                                            reference[0] = staticReader.readStatic();
+                                            require(
+                                                expectedFile.equals(
+                                                    staticFile(
+                                                        roots, group, expectedRoots.get(1))));
+                                            var publisher =
+                                                new InspectorEnvironmentPublisher(
+                                                    maintenance, security, io);
+                                            publisher.prepare(run);
+                                            verify(
+                                                roots,
+                                                group,
+                                                expectedRoots,
+                                                expectedFile,
+                                                reference[0],
+                                                run);
+                                            T completed =
+                                                Objects.requireNonNull(
+                                                    operation.execute(),
+                                                    "environment operation result");
+                                            verify(
+                                                roots,
+                                                group,
+                                                expectedRoots,
+                                                expectedFile,
+                                                reference[0],
+                                                run);
+                                            publisher.retire(run);
+
+                                            return completed;
+                                          });
+                                    });
+                              });
+                        });
+                  });
         }
         require(!Thread.currentThread().isInterrupted());
         return result;
@@ -123,7 +173,7 @@ public final class InspectorEnvironmentFiles {
         // All root/entry/channel scopes have ended, even when close compounded a callback failure.
         throw unavailable();
       } finally {
-        Arrays.fill(reference, (byte) 0);
+        Arrays.fill(reference[0], (byte) 0);
       }
     }
   }
@@ -165,14 +215,41 @@ public final class InspectorEnvironmentFiles {
       BatchRun run)
       throws IOException {
     require(groups.resolve() == group);
-    try (var etc = OwnedTransferDirectory.open(directories, etcPath);
-        var config = etc.openExistingChild(CONFIG);
-        var runtime = OwnedTransferDirectory.open(directories, runPath);
-        var app = runtime.openExistingChild(CONFIG);
-        var maintenance = app.openExistingChild(MAINTENANCE)) {
-      List<Snapshot> actual = capture(new Roots(etc, config, runtime, app, maintenance), group);
-      for (int index = 0; index < expectedRoots.size(); index++)
-        require(expectedRoots.get(index).sameIdentity(actual.get(index)));
+    {
+      var etc = OwnedTransferDirectory.open(directories, etcPath);
+      ResourceScope.use(
+          etc::close,
+          () -> {
+            var config = etc.openExistingChild(CONFIG);
+            return ResourceScope.use(
+                config::close,
+                () -> {
+                  var runtime = OwnedTransferDirectory.open(directories, runPath);
+                  return ResourceScope.use(
+                      runtime::close,
+                      () -> {
+                        var app = runtime.openExistingChild(CONFIG);
+                        return ResourceScope.use(
+                            app::close,
+                            () -> {
+                              var maintenance = app.openExistingChild(MAINTENANCE);
+                              return ResourceScope.use(
+                                  maintenance::close,
+                                  () -> {
+                                    List<Snapshot> actual =
+                                        capture(
+                                            new Roots(etc, config, runtime, app, maintenance),
+                                            group);
+                                    for (int index = 0; index < expectedRoots.size(); index++)
+                                      require(
+                                          expectedRoots.get(index).sameIdentity(actual.get(index)));
+
+                                    return Boolean.TRUE;
+                                  });
+                            });
+                      });
+                });
+          });
     }
     byte[] actual =
         new InspectorEnvironmentReader(roots.config(), security, group, io).readStatic();

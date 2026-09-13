@@ -268,8 +268,67 @@ final class MaintenanceFileLockTest {
     }
   }
 
+  private static void throwCompound(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  private static void assertCompound(Throwable expected, Throwable actual, boolean known) {
+    assertSame(expected, actual);
+    assertEquals(known ? 0 : 1, actual.getSuppressed().length);
+    if (!known) {
+      var fixed = assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
+      assertEquals(StorageIoException.Reason.UNAVAILABLE, fixed.reason());
+      assertNull(fixed.getCause());
+      assertEquals(0, fixed.getSuppressed().length);
+    }
+  }
+
   @Test
   void ioAndCloseFailures() throws Exception {
+
+    // PG172/SSC063, BUG195/YKT154; close offsets independently follow reverse acquisition.
+    for (int position = 1; position <= 2; position++) {
+      int offset = position + 1;
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("synthetic compound"),
+                new NullPointerException("synthetic compound"),
+                new AssertionError("synthetic compound"))) {
+          var f = fixture();
+          int[] closes = {0}, injected = {0}, callbacks = {0};
+
+          Throwable actual =
+              assertThrows(
+                  unknown.getClass(),
+                  () ->
+                      f.lock()
+                          .tryExclusive(
+                              () -> {
+                                callbacks[0]++;
+
+                                closes[0] = f.calls.closed.get();
+                                f.calls.afterClose =
+                                    count -> {
+                                      if (count == closes[0] + offset) {
+                                        injected[0]++;
+                                        throwCompound(unknown);
+                                      }
+                                    };
+                                if (known) throw new IOException("synthetic primary");
+                                throwCompound(unknown);
+                                return true;
+                              }));
+          assertCompound(unknown, actual, known);
+          assertEquals(1, injected[0]);
+          assertEquals(1, callbacks[0]);
+          assertEquals(closes[0] + 3, f.calls.closed.get());
+          assertEquals(0, f.calls.outstanding.get());
+          assertEquals(0, external(f.file));
+          assertEquals(0L, Files.size(f.file));
+        }
+    }
     var baseline = fixture();
     assertEquals(Optional.of(1), baseline.lock().tryExclusive(() -> 1));
     int opens = 3 * (baseline.runtime.getNameCount() + 3);
@@ -534,6 +593,7 @@ final class MaintenanceFileLockTest {
         closed = new AtomicInteger(),
         outstanding = new AtomicInteger();
     int openFailure, closeFailure;
+    java.util.function.IntConsumer afterClose = count -> {};
 
     private int open(Open action) throws StorageIoException {
       if (opened.incrementAndGet() == openFailure)
@@ -562,7 +622,9 @@ final class MaintenanceFileLockTest {
     public void close(int fd) throws StorageIoException {
       real.close(fd);
       outstanding.decrementAndGet();
-      if (closed.incrementAndGet() == closeFailure)
+      int count = closed.incrementAndGet();
+      afterClose.accept(count);
+      if (count == closeFailure)
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
 
