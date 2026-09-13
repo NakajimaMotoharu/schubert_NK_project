@@ -1,7 +1,7 @@
 # NK-BAT-001 backup両step横展開・独立oracle
 
 PG-D-168 / SSC-061 / BUG-191～194 / YKT-151～153。2026-09-13。
-正式全reactor・collector認定前。以下の選択再試験だけを全PGPT合格へ算入しない。
+正式12/source2abb30ff、08:53:53～09:09:54 JST/exit0、全1391 PT・4coverage100%・Production static未解決0、38scope/38負canaryで再試験認定。全14所有者の回帰は成功、BUG191～194/YKT151～153完了。新2class/12method/115line/84branch、既存Step1class/5method/63line/46branchは全missed0。以下の探索反例・選択成功は履歴であり、それだけで全PGPT合格としたものではない。
 
 ## 1. 独立期待値と故障出現点
 
