@@ -19,4 +19,10 @@ SSC063継続/PG171・BUG195/YKT154: 同じIO close優先順位をDurableRecordFi
 
 JDK25.0.4/Maven3.9.12/Ubuntu26.04.1/amd64（421）。source修正前に選択4 Test IDでredを実行し、標準TWRが期待を満たさないことを確認する。修正後は対象4class＋ResourceScope/OwnedTransferDirectory/LinuxFileLock/Backup Reader/Verifier/Probe、既存全fault inventory、NullAway/Spotless/SpotBugs、全reactor/4coverage100%を確認する。同時Mavenは禁止。実行時刻/command/exit/branch/source・BUG/SSC・結果/coverage・SHA256を本書と017/018/MED各manifestへ記録する。
 
-新規・再試験結果: 未実行。BUG195/YKT154とSSC063は継続。検索だけで他対象を完了としない。正式認定後も実backup生成・親終端・全PGPT・IT/STの完了を意味しない。
+探索結果: 2026-09-13 10:18:09 JST/4.137秒/exit1のStorage MED024でself-suppression反例1件を確認（/tmp/pgpt-pg171-red.log）。依存Storage failureでBatchは未実行だったため、既存ResourceScope8件を依存側選択として別実行し、10:18:37/8.004秒/exit1にBatch3対象で同じ反例3件を確認（/tmp/pgpt-pg171-batch-red.log）。期待IllegalStateException同一、実際IllegalArgumentException。修正前の4失敗を合格へ算入しない。
+
+修正後は10:20:11/30.677秒/exit0、Storage13＋Batch32=45件成功、54複合case全通過、NullAway/Spotless/SpotBugs未解決0（/tmp/pgpt-pg171-green.log）。readのcompoundは2回目へ注入し、内容を読んだ後の配列消去を確認。write側も実引数配列を保持して終了後のzeroを検証。既存partial保全とGOLDENを不変更。対象coverageはExistingFileAccess2class/11method/39line/10branch、EnvironmentReader2/19/70/34、Publisher3/32/127/40が全missed0。DurableRecordFilesは全31method/1classを実行したが、既存retirementのplan/marker分岐3・line2は今回の選択対象外であり100%とはしない。次のretirement関連PT/全reactorで検証する。
+
+実行command: JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress -pl src/schubert-nk-batch -am -Dtest=ExistingFileAccessTest,ResourceScopeTest,DurableRecordFilesTest,InspectorEnvironmentReaderTest,InspectorEnvironmentPublisherTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check。cwd=work/pgpt-foundation、branch=dev-foundation、対象はPG171未commit作業tree（後続source commitと正式runで固定する）。
+
+BUG195/YKT154とSSC063は継続、正式認定待ち。検索だけで他対象を完了としない。正式認定後も実backup生成・親終端・全PGPT・IT/STの完了を意味しない。

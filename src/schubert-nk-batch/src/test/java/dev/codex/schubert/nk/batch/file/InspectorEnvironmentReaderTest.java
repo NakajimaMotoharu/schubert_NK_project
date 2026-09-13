@@ -288,6 +288,49 @@ final class InspectorEnvironmentReaderTest {
 
   @Test
   void ioFaultsAndRedaction() throws Exception {
+    for (boolean runtime : List.of(false, true))
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("public compound"),
+                new NullPointerException("public compound"),
+                new AssertionError("public compound")))
+          try (var f = fixture(runtime)) {
+            if (known) {
+              f.fail = "read";
+              f.failAt = 2;
+            }
+            f.compound =
+                (name, count) -> {
+                  if ((count == 1 && name.equals("channelClose"))
+                      || (!known && count == 2 && name.equals("read"))) {
+                    if (unknown instanceof RuntimeException failure) throw failure;
+                    throw (Error) unknown;
+                  }
+                };
+            assertSame(
+                unknown,
+                assertThrows(
+                    unknown.getClass(),
+                    () -> {
+                      if (runtime) f.reader().readRun(RUN);
+                      else f.reader().readStatic();
+                    }));
+            assertEquals(2, f.count("read"));
+            assertEquals(1, f.count("channelClose"));
+            assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
+            for (Throwable secondary : unknown.getSuppressed()) {
+              var fixed = assertInstanceOf(StorageIoException.class, secondary);
+              assertEquals(StorageIoException.Reason.UNAVAILABLE, fixed.reason());
+              assertEquals("transfer storage operation failed", fixed.getMessage());
+              assertNull(fixed.getCause());
+              assertEquals(0, fixed.getSuppressed().length);
+            }
+            f.released();
+            assertEquals(2, f.compoundBuffers.size());
+            for (byte[] bytes : f.compoundBuffers) assertArrayEquals(new byte[bytes.length], bytes);
+            assertEquals(runtime ? RUNTIME : STATIC, Files.readString(f.file));
+          }
     // Independent read protocol counts; root is borrowed and already opened before counting.
     Map<String, Integer> inventory =
         Map.of(
@@ -452,6 +495,8 @@ final class InspectorEnvironmentReaderTest {
     int failAt = 1, sizeDelta, endSizeDelta, readLimit = Integer.MAX_VALUE, maximumBuffer;
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action afterRead = () -> {};
+    BiConsumer<String, Integer> compound = (name, count) -> {};
+    final List<byte[]> compoundBuffers = new ArrayList<>();
 
     Fixture(Path directory, boolean runtime) throws Exception {
       this.directory = directory;
@@ -494,6 +539,7 @@ final class InspectorEnvironmentReaderTest {
 
     void point(String name) throws StorageIoException {
       int n = counts.computeIfAbsent(name, key -> new AtomicInteger()).incrementAndGet();
+      compound.accept(name, n);
       if (lateInterrupt && name.equals("readonly") && n == 5) Thread.currentThread().interrupt();
       if ((name.equals(fail) && n == failAt) || (failCloses && name.endsWith("Close")))
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -566,6 +612,7 @@ final class InspectorEnvironmentReaderTest {
 
         @Override
         public int read(ByteBuffer target) throws IOException {
+          compoundBuffers.add(target.array());
           point("read");
           maximumBuffer = Math.max(maximumBuffer, target.capacity());
           int start = target.position(), remaining = target.remaining();

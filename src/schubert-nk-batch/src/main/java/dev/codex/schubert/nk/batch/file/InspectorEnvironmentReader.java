@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironment;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -21,9 +22,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Read-only, borrowed retained root; no path choice, repair, publication or child execution.
- * NK-OPS-001; OPS-009/UI251/SS311/343 6.9; SSC-049/PG-D-152; PT-OPS-EFILE-001..008. Caller owns the
- * fixed namespace, root lifetime, OS lock and trusted account-to-GID resolution.
+ * SSC063/PG171/BUG195/YKT154: explicit close precedence; 017049 compound PT supplement. Read-only,
+ * borrowed retained root; no path choice, repair, publication or child execution. NK-OPS-001;
+ * OPS-009/UI251/SS311/343 6.9; SSC-049/PG-D-152; PT-OPS-EFILE-001..008. Caller owns the fixed
+ * namespace, root lifetime, OS lock and trusted account-to-GID resolution.
  */
 @NullMarked
 public final class InspectorEnvironmentReader {
@@ -121,18 +123,23 @@ public final class InspectorEnvironmentReader {
 
   private void readFile(Path held, long expected, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    try (var channel = io.open(held)) {
-      if (channel == null) throw unavailable();
-      require(channel.size() == expected);
-      while (buffer.hasRemaining()) {
-        int position = buffer.position(), remaining = buffer.remaining();
-        int count = channel.read(buffer);
-        if (count == -1) break;
-        require(count > 0 && count <= remaining && buffer.position() == position + count);
-      }
-      require(buffer.position() == expected);
-      require(channel.size() == expected);
-    }
+    var channel = io.open(held);
+    if (channel == null) throw unavailable();
+    ResourceScope.use(
+        channel::close,
+        () -> {
+          require(channel.size() == expected);
+          while (buffer.hasRemaining()) {
+            int position = buffer.position(), remaining = buffer.remaining();
+            int count = channel.read(buffer);
+            if (count == -1) break;
+            require(count > 0 && count <= remaining && buffer.position() == position + count);
+          }
+          require(buffer.position() == expected);
+          require(channel.size() == expected);
+
+          return Boolean.TRUE;
+        });
   }
 
   private Snapshot snapshot(Path held, boolean runtime, boolean directory, int maximum)

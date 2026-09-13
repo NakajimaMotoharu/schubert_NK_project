@@ -475,6 +475,48 @@ final class DurableRecordFilesTest {
 
   @Test
   void interruptionsAndUnknownRuntime() throws Exception {
+    for (String op : List.of("read", "new", "reuse"))
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("public compound"),
+                new NullPointerException("public compound"),
+                new AssertionError("public compound")))
+          try (var f = fixture()) {
+            if (!op.equals("new")) f.seed();
+            String body = op.equals("read") ? "read" : op.equals("new") ? "write" : "force";
+            String close = op.equals("read") ? "readClose" : "writerClose";
+            int bodyAt = op.equals("read") ? 2 : 1;
+            if (known) {
+              f.fail = body;
+              f.failAt = bodyAt;
+            }
+            f.compound =
+                (name, count) -> {
+                  if ((count == 1 && name.equals(close))
+                      || (!known && count == bodyAt && name.equals(body))) {
+                    if (unknown instanceof RuntimeException failure) throw failure;
+                    throw (Error) unknown;
+                  }
+                };
+            assertSame(unknown, assertThrows(unknown.getClass(), () -> operate(f, op)));
+            assertEquals(bodyAt, f.count(body));
+            assertEquals(1, f.count(close));
+            assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
+            for (Throwable secondary : unknown.getSuppressed())
+              failure(
+                  () -> {
+                    throw secondary;
+                  });
+            f.released();
+            assertFalse(f.compoundBuffers.isEmpty());
+            for (byte[] bytes : f.compoundBuffers) assertArrayEquals(new byte[bytes.length], bytes);
+            if (op.equals("new")) {
+              assertFalse(Files.exists(f.target));
+              assertTrue(Files.exists(f.part));
+              assertEquals(0, Files.size(f.part));
+            } else assertEquals(GOLDEN, Files.readString(f.target));
+          }
     for (String op : List.of("read", "new", "reuse", "remove")) {
       try (var f = fixture()) {
         if (!op.equals("new")) f.seed();
@@ -692,6 +734,8 @@ final class DurableRecordFilesTest {
     StorageIoException.Reason reason = StorageIoException.Reason.UNAVAILABLE;
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action hook = () -> {};
+    BiConsumer<String, Integer> compound = (name, count) -> {};
+    final List<byte[]> compoundBuffers = new ArrayList<>();
 
     Fixture(Path directory) throws Exception {
       this.directory = directory;
@@ -754,6 +798,7 @@ final class DurableRecordFilesTest {
 
     void point(String name) throws StorageIoException {
       int at = counts.merge(name, 1, Integer::sum);
+      compound.accept(name, at);
       if (hookName.equals(name) && hookAt == at) {
         try {
           hook.execute();
@@ -840,6 +885,7 @@ final class DurableRecordFilesTest {
       return new InspectorEnvironmentPublisher.Writer() {
         @Override
         public int write(ByteBuffer source) throws IOException {
+          compoundBuffers.add(source.array());
           point("write");
           int start = source.position(), remaining = source.remaining();
           if (writeBehavior.equals("zero")) return 0;
@@ -884,6 +930,7 @@ final class DurableRecordFilesTest {
       return new SeekableByteChannel() {
         @Override
         public int read(ByteBuffer bytes) throws IOException {
+          compoundBuffers.add(bytes.array());
           point("read");
           if (rawRead) throw new IOException("synthetic private read diagnostic");
           int start = bytes.position(), remaining = bytes.remaining(), end = bytes.limit();

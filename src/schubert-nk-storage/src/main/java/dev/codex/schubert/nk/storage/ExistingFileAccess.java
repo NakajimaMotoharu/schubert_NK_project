@@ -11,7 +11,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Scoped read-only file-adapter capability, not authentication or root admission. NK-MED-001; RD
+ * SSC063/PG171/BUG195/YKT154: explicit close precedence; 017049 compound PT supplement. Scoped
+ * read-only file-adapter capability, not authentication or root admission. NK-MED-001; RD
  * FIL-006/007; UI237/243; SS311/333; SSC-028; PG-D-074; PT-MED-021..025. Caller owns an admitted
  * root and supplies already logically validated segments. No root or file is repaired.
  */
@@ -82,18 +83,22 @@ public final class ExistingFileAccess {
           name,
           handle -> {
             StorageAttributeGuard.existingFile(io.attributes(handle), identity, expectedSize);
-            try (SeekableByteChannel channel = io.openReadOnly(handle)) {
-              requireSize(channel, expectedSize);
-              T result = operation.execute(channel);
-              requireSize(channel, expectedSize);
-              StorageAttributeGuard.existingFile(io.attributes(handle), identity, expectedSize);
-              return result;
-            }
+            SeekableByteChannel channel =
+                Objects.requireNonNull(io.openReadOnly(handle), "file channel");
+            return ResourceScope.use(
+                channel::close,
+                () -> {
+                  requireSize(channel, expectedSize);
+                  T result = operation.execute(channel);
+                  requireSize(channel, expectedSize);
+                  StorageAttributeGuard.existingFile(io.attributes(handle), identity, expectedSize);
+                  return result;
+                });
           });
     }
-    try (OwnedTransferDirectory child = directory.openExistingChild(name)) {
-      return walk(child, names, index + 1, expectedSize, operation);
-    }
+    OwnedTransferDirectory child = directory.openExistingChild(name);
+    return ResourceScope.use(
+        child::close, () -> walk(child, names, index + 1, expectedSize, operation));
   }
 
   private static void requireSize(SeekableByteChannel channel, long expectedSize)

@@ -450,6 +450,43 @@ final class InspectorEnvironmentPublisherTest {
 
   @Test
   void interruptionAndRuntime() throws Exception {
+    for (boolean reuse : List.of(false, true))
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("public compound"),
+                new NullPointerException("public compound"),
+                new AssertionError("public compound")))
+          try (var f = fixture()) {
+            if (reuse) f.seed();
+            String body = reuse ? "force" : "write";
+            if (known) f.fail = body;
+            f.compound =
+                (name, count) -> {
+                  if (count == 1 && (name.equals("writerClose") || (!known && name.equals(body)))) {
+                    if (unknown instanceof RuntimeException failure) throw failure;
+                    throw (Error) unknown;
+                  }
+                };
+            assertSame(unknown, assertThrows(unknown.getClass(), () -> f.publisher.prepare(RUN)));
+            assertEquals(1, f.count(body));
+            assertEquals(1, f.count("writerClose"));
+            assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
+            for (Throwable secondary : unknown.getSuppressed())
+              failure(
+                  () -> {
+                    throw secondary;
+                  });
+            f.released();
+            assertFalse(f.compoundBuffers.isEmpty());
+            for (byte[] bytes : f.compoundBuffers) assertArrayEquals(new byte[bytes.length], bytes);
+            if (reuse) assertEquals(GOLDEN, Files.readString(f.target));
+            else {
+              assertFalse(Files.exists(f.target));
+              assertTrue(Files.exists(f.part));
+              assertEquals(0, Files.size(f.part));
+            }
+          }
     for (boolean retire : List.of(false, true))
       try (var f = fixture()) {
         Thread.currentThread().interrupt();
@@ -635,6 +672,8 @@ final class InspectorEnvironmentPublisherTest {
     StorageIoException.Reason reason = StorageIoException.Reason.UNAVAILABLE;
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action hook = () -> {};
+    BiConsumer<String, Integer> compound = (name, count) -> {};
+    final List<byte[]> compoundBuffers = new ArrayList<>();
 
     Fixture(Path directory) throws Exception {
       this.directory = directory;
@@ -697,6 +736,7 @@ final class InspectorEnvironmentPublisherTest {
 
     void point(String name) throws StorageIoException {
       int at = counts.merge(name, 1, Integer::sum);
+      compound.accept(name, at);
       if (hookName.equals(name) && hookAt == at) {
         try {
           hook.execute();
@@ -780,6 +820,7 @@ final class InspectorEnvironmentPublisherTest {
       return new InspectorEnvironmentPublisher.Writer() {
         @Override
         public int write(ByteBuffer source) throws IOException {
+          compoundBuffers.add(source.array());
           point("write");
           int start = source.position(), remaining = source.remaining();
           if (writeBehavior.equals("zero")) return 0;
@@ -823,6 +864,7 @@ final class InspectorEnvironmentPublisherTest {
       return new SeekableByteChannel() {
         @Override
         public int read(ByteBuffer bytes) throws IOException {
+          compoundBuffers.add(bytes.array());
           point("read");
           if (rawRead) throw new IOException("synthetic private read diagnostic");
           return channel.read(bytes);

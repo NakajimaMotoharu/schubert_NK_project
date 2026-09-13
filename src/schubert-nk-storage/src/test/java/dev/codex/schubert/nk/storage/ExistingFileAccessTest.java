@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.storage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
@@ -13,10 +15,12 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -159,6 +163,7 @@ class ExistingFileAccessTest {
 
   @Test
   void med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned() throws Exception {
+    compoundOwnership();
     Path nested = Files.createDirectory(root.resolve("nested"));
     directory(nested);
     file(nested.resolve("x"));
@@ -292,10 +297,89 @@ class ExistingFileAccessTest {
     assertEquals(0, failure.getSuppressed().length);
   }
 
+  private void compoundOwnership() throws Exception {
+    Path nested = Files.createDirectory(root.resolve("compound"));
+    directory(nested);
+    file(nested.resolve("x"));
+    for (boolean childClose : List.of(false, true))
+      for (boolean known : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("public compound"),
+                new NullPointerException("public compound"),
+                new AssertionError("public compound"))) {
+          var childDescriptors = new HashSet<Integer>();
+          var childCloses = new AtomicInteger();
+          DirectoryCalls nativeCalls = LinuxDirectoryCalls.create();
+          DirectoryCalls calls =
+              (DirectoryCalls)
+                  Proxy.newProxyInstance(
+                      getClass().getClassLoader(),
+                      new Class<?>[] {DirectoryCalls.class},
+                      (proxy, method, arguments) -> {
+                        boolean released =
+                            method.getName().equals("close")
+                                && childDescriptors.remove((Integer) arguments[0]);
+                        Object result;
+                        try {
+                          result = method.invoke(nativeCalls, arguments);
+                        } catch (InvocationTargetException failure) {
+                          throw failure.getCause();
+                        }
+                        if (method.getName().equals("openDirectory")
+                            && arguments[1].equals("compound"))
+                          assertTrue(childDescriptors.add((Integer) result));
+                        if (released) {
+                          childCloses.incrementAndGet();
+                          if (childClose) raiseUnknown(unknown);
+                        }
+                        return result;
+                      });
+          try (var held = OwnedTransferDirectory.open(calls, root)) {
+            var io = new FaultIo("none");
+            if (!childClose) io.closeFailure = unknown;
+            var access = new ExistingFileAccess(held, identity, io);
+            assertSame(
+                unknown,
+                assertThrows(
+                    unknown.getClass(),
+                    () ->
+                        access.read(
+                            List.of("compound", "x"),
+                            3,
+                            channel -> {
+                              assertArrayEquals(new byte[] {1, 2, 3}, bytes(channel));
+                              if (known) throw new IOException("public I/O");
+                              raiseUnknown(unknown);
+                              return true;
+                            })));
+            assertEquals(1, io.opens);
+            assertEquals(1, io.closes);
+            assertTrue(io.channels.stream().noneMatch(SeekableByteChannel::isOpen));
+            assertEquals(1, childCloses.get());
+            assertTrue(childDescriptors.isEmpty());
+            assertEquals(Boolean.TRUE, held.atDirectory(Files::isDirectory));
+            assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
+            for (Throwable secondary : unknown.getSuppressed())
+              reject(
+                  () -> {
+                    throw secondary;
+                  });
+          }
+          assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(nested.resolve("x")));
+        }
+  }
+
+  private static void raiseUnknown(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
   private static final class FaultIo implements ExistingFileAccess.Io {
     final String fault;
     final List<SeekableByteChannel> channels = new ArrayList<>();
     int attributes, opens, closes;
+    Throwable closeFailure;
 
     FaultIo(String fault) {
       this.fault = fault;
@@ -366,6 +450,7 @@ class ExistingFileAccessTest {
         public void close() throws IOException {
           closes++;
           delegate.close();
+          if (closeFailure != null) raiseUnknown(closeFailure);
           if (fault.equals("close") || fault.equals("callback-close"))
             throw new IOException("SYNTHETIC_PRIVATE_PATH");
         }

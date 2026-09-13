@@ -6,6 +6,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -18,7 +19,8 @@ import java.util.regex.Pattern;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Borrowed private durable root, never a state-machine or OS-lock authority. NK-BAT-001;
+ * SSC063/PG171/BUG195/YKT154: explicit close precedence; 017049 compound PT supplement. Borrowed
+ * private durable root, never a state-machine or OS-lock authority. NK-BAT-001;
  * OPS-009/UI251/SS311/343 6.14; SSC-055/PG-D-157; PT-BAT-046..057. Caller admits fixed namespace
  * and holds the maintenance OS flock across all related operations.
  */
@@ -243,42 +245,57 @@ final class DurableRecordFiles {
 
   private void readFile(Path held, long expected, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    try (var channel = io.open(held)) {
-      if (channel == null) throw unavailable();
-      require(channel.size() == expected);
-      while (buffer.hasRemaining()) {
-        int position = buffer.position(), remaining = buffer.remaining();
-        int count = channel.read(buffer);
-        if (count == -1) break;
-        require(count > 0 && count <= remaining && buffer.position() == position + count);
-      }
-      require(buffer.position() == expected);
-      require(channel.size() == expected);
-    }
+    var channel = io.open(held);
+    if (channel == null) throw unavailable();
+    ResourceScope.use(
+        channel::close,
+        () -> {
+          require(channel.size() == expected);
+          while (buffer.hasRemaining()) {
+            int position = buffer.position(), remaining = buffer.remaining();
+            int count = channel.read(buffer);
+            if (count == -1) break;
+            require(count > 0 && count <= remaining && buffer.position() == position + count);
+          }
+          require(buffer.position() == expected);
+          require(channel.size() == expected);
+
+          return Boolean.TRUE;
+        });
   }
 
   private void write(Path held, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    try (var writer = io.openWriter(held)) {
-      if (writer == null) throw unavailable();
-      require(writer.size() == 0);
-      while (buffer.hasRemaining()) {
-        int position = buffer.position(), remaining = buffer.remaining();
-        int count = writer.write(buffer);
-        require(count > 0 && count <= remaining && buffer.position() == position + count);
-      }
-      require(writer.size() == bytes.length);
-      writer.force();
-    }
+    var writer = io.openWriter(held);
+    if (writer == null) throw unavailable();
+    ResourceScope.use(
+        writer::close,
+        () -> {
+          require(writer.size() == 0);
+          while (buffer.hasRemaining()) {
+            int position = buffer.position(), remaining = buffer.remaining();
+            int count = writer.write(buffer);
+            require(count > 0 && count <= remaining && buffer.position() == position + count);
+          }
+          require(writer.size() == bytes.length);
+          writer.force();
+
+          return Boolean.TRUE;
+        });
   }
 
   private void force(Path held, int size) throws IOException {
-    try (var writer = io.openWriter(held)) {
-      if (writer == null) throw unavailable();
-      require(writer.size() == size);
-      writer.force();
-      require(writer.size() == size);
-    }
+    var writer = io.openWriter(held);
+    if (writer == null) throw unavailable();
+    ResourceScope.use(
+        writer::close,
+        () -> {
+          require(writer.size() == size);
+          writer.force();
+          require(writer.size() == size);
+
+          return Boolean.TRUE;
+        });
   }
 
   private void finish(Snapshot directory) throws StorageIoException {
