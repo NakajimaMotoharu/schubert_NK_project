@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260913-13",
-  "targetCommit": "820554603bca7e5ddd358139f33dee27c9ae87c3",
+  "runId": "PT-WEB-20260913-14",
+  "targetCommit": "b234a4b356a9b456d3fdd245dbd6baed568be426",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-13T09:48:33+09:00",
-  "completedAt": "2026-09-13T10:04:44+09:00",
+  "startedAt": "2026-09-13T10:51:57+09:00",
+  "completedAt": "2026-09-13T11:08:12+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -85,7 +85,7 @@
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 2574
+          "covered": 2600
         },
         "BRANCH": {
           "missed": 0,
@@ -93,15 +93,15 @@
         },
         "LINE": {
           "missed": 0,
-          "covered": 519
+          "covered": 523
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 193
+          "covered": 195
         },
         "METHOD": {
           "missed": 0,
-          "covered": 105
+          "covered": 107
         },
         "CLASS": {
           "missed": 0,
@@ -187,27 +187,27 @@
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 15844
+          "covered": 16534
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1615
+          "covered": 1625
         },
         "LINE": {
           "missed": 0,
-          "covered": 2955
+          "covered": 3117
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1295
+          "covered": 1356
         },
         "METHOD": {
           "missed": 0,
-          "covered": 476
+          "covered": 532
         },
         "CLASS": {
           "missed": 0,
-          "covered": 89
+          "covered": 90
         }
       },
       "spotbugs": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "d0d4f8aa060ead535cd6c6e71306cc815c4782eae134627b4e71a09ae57c856d",
+  "rawLogSha256": "08261611c92237175173327bd25b6ec5830c141fa2f713fedc0e8ca76c2e4fa1",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
   "programComplete": false,
@@ -466,7 +466,7 @@
   },
   "sharedModuleOwnership": "Batch module327 PT = NK-BAT-001241 + NK-OPS-00186. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "36414fb27caf251cca3b73cd5f0de25d5abaef14c4945626649878b4d035ff64",
+  "fullReactorManifestSha256": "7895f37c1c6f4ce6d21657b4b6104412c570925c9188c15fa7fad82119fbdb69",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -563,7 +563,13 @@
     "BUG-196",
     "YKT-155",
     "BUG-197",
-    "YKT-156"
+    "YKT-156",
+    "PG-D-171",
+    "PG-D-172",
+    "PG-D-173",
+    "PG-D-174",
+    "BUG-198",
+    "YKT-157"
   ],
   "fixture": "Isolated PostgreSQL18 with real Flyway and five denied roles; literal public log rows, fixed UUID/time, explicit parent transactions and public JDBC fault probes. No deployed credentials or data.",
   "oracle": "001/PT-BAT-001..017: independent8 function names/limits and3 reasons; held2+eligible1 gives2/0/2 then1/1/0 thenEND, run cumulative3/1/2; rollback/savepoint/reconnect/lock do not lose or duplicate counts; UTC/JST/NewYork epoch1789603200 and90day microsecond boundary; no parent connection commit/rollback/close/config mutation; all typed-null/row-count/SQL-stage failures reject; dependency allowlist.",
@@ -632,7 +638,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
-      "sha256": "23061415d4b03a24db0e1b5ee8ee51441fcd7a9f5b1663cac5673053637ddff0"
+      "sha256": "84a07edbcd250d339e402144efcaf001c78754c359f7b9da9c503a26818fd1d3"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java",
@@ -640,19 +646,19 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
-      "sha256": "57e1c9d555b6468c518e1a3c2ece13de6e37f3eab394e51e6aa2cec1e6216690"
+      "sha256": "78978fc3829298d032d5d09c7654d377abe14c014bdf5cf7972aed32900a63ad"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java",
-      "sha256": "3830f3a977099df023597adca9786c9400dcfe1b206c0f6091e4c30d99bd6919"
+      "sha256": "7dd36a3d2e6d8aa8d2f1aa62710de40f1be7f00e470a80347052169f70d545d0"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
-      "sha256": "7263c6f6a788a34ace60508d485a4fa9afeddcb0f855ba2be1be32836d7d72d2"
+      "sha256": "29dc073ec9d78b2e1fede74348da3d315482eec36d52ea77bbdfbd6312805f01"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLock.java",
-      "sha256": "3372db87aaa89c45885efe5785a71e5670bdff756f3692bf3a0bd2fb7fb89982"
+      "sha256": "03627ba804a5f88150f4033f583389651c065a8f7b6cddbe0a256e286a54efad"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java",
@@ -660,7 +666,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
-      "sha256": "10175a6344a6d81d9705e29fe74f0840b0a386e5d2871a73e415fd62757a0ccf"
+      "sha256": "64b9a3eff6bfbc50476fbfc97f02042abf194197493836a747bf4815f3e7e72e"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java",
@@ -672,7 +678,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
-      "sha256": "0a395de7fdabcfaf11f672ca036a8e7dbb83c8dbb5eafa396b11691a717cfed5"
+      "sha256": "dccd92f17bb5ff12fdd7617b4ea10f9c57b87042dc8d07d390d5a04a43e78662"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java",
@@ -684,11 +690,15 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
-      "sha256": "f2f46475c9c5e129344e5c4a029aecbda4597dd5b0eeb34b95a4d9bfaf0df150"
+      "sha256": "3ea74a308b6d1ae2abf982f011d4050b54ab0ff29359142e72c82fcc23f16fac"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
       "sha256": "de77527e9b37f8a569a27e5136149847b5dea854f70cc353bf54152ca8b0bdd6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "sha256": "851cf08644d0b499602a3bcd0fef44d426a7d84b866954e8373d257c17d61edb"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
@@ -700,7 +710,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
-      "sha256": "47027736f7574d85daf0e036da87bffcc81b4723906c6f9dcc7f672693ea0012"
+      "sha256": "84515224b308b977e1f2e9817813762b31533fc7c88240517016dde5bf8dc916"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java",
@@ -852,23 +862,23 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
-      "sha256": "022c6f061b322552f3d85b374c5ba5f33c9928093aaa5a70d891adb26dbeba01"
+      "sha256": "3a015dd85d1b71faf0ee2c545e357ab40543491187f1e3541f6a6323f3b4aa25"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFilesTest.java",
-      "sha256": "71ffae824f27612112e9dd9fc0d430464cfd2c116bf3b3de5931f4edff9f4381"
+      "sha256": "57557a690c74713481283dae486d8d529d08702c8a64eb94f1296d8179f09534"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisherTest.java",
-      "sha256": "913d5f8357e10768cc7b0ebc27b5c48f86363d129163118c6a7c3023a4e3066f"
+      "sha256": "c3c9813187f1e9b5ebe382ea59ecce70ef5f00f25cfb62116f227f52f5f1610b"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReaderTest.java",
-      "sha256": "f9983514e18c2bc6a443bfa674cfaad4dfa8c412a9909d52000729f148696801"
+      "sha256": "017d14a72efe16a18d062168874821f7eab84e1e18ec3cb516ace3612a81008d"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
-      "sha256": "8e7ccd054cfe8e3ff98f45c63f68e849713bad95e36b69aa751362700dcac6f3"
+      "sha256": "e5ed7a373d98ce0478f54f2ad1f167dacb030a54af0aa3d297461f4361acb038"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
@@ -880,7 +890,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java",
-      "sha256": "d5cc7ef6c925330e92d0ab34093c80a61cca1faf8bdde86b6ff90e4d1d204c2a"
+      "sha256": "fde84f0a8c98961adb96723b15052d7c61b550f0cd716c0212ce5e2a3f4c1d5b"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunRetirementTest.java",
@@ -892,7 +902,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
-      "sha256": "ccdb7f888af0b866f2bbdbfcda038f4239a48c3ba518c2a11920811d5dbce5ca"
+      "sha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
@@ -916,7 +926,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSourceTest.java",
-      "sha256": "13a7916e33bd3d599ac1c18e69f539416f4d7e9a33b371b0d1ba27d2913708d6"
+      "sha256": "b58cc324a101712f046d778f64ec6477a0e9bcb92e40489d87f6cbd6e24d8061"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepFixture.java",
@@ -1011,11 +1021,11 @@
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "57c122f1f698160661641c7bc7143618bbf7e9076dcebdcecae9819a59f99d85"
+      "sha256": "e9dd1f99bb646af6b2eaa56d0e847c7dfd12ea6c13e26eb3f4c351543679bb20"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "3ef000699698b24f0c05315be5fb556f545f4927d6586efaf011f59f09579ed6"
+      "sha256": "4abf6b83e34515a00268d3eac19635a1b94b03a4d1f620e968503c6dd03a847c"
     },
     {
       "path": "input/atomic-cleanup/PT-BAT-162-seven-kinds.txt",
@@ -1167,7 +1177,23 @@
     },
     {
       "path": "logs/048_NK-BAT-001_root_manifest資源横展開.md",
-      "sha256": "8d6913c538488d77ee56466e8a611fd56bf5741da471fa89919db5a394c382d0"
+      "sha256": "747ccf199cb7ab863badcd6142d9ad31e40bbf1ce990b442dac1719735dd9862"
+    },
+    {
+      "path": "logs/049_NK-BAT-001_file資源解放横展開PT.md",
+      "sha256": "953110440e37b293c3fe006116efd0f3545f0cde41abc64e96cbc4f7e0d90310"
+    },
+    {
+      "path": "logs/050_NK-BAT-001_namespace資源解放横展開PT.md",
+      "sha256": "caeff99c2053b219cc469eaa1e045b45f15f6f39ee5f4426a9bc6797ed8e984a"
+    },
+    {
+      "path": "logs/051_NK-OPS-001_Systemctl資源解放横展開PT.md",
+      "sha256": "65c96c9741b780a3b4770314d4752a68e062dcc8538524c2a8fbe124ca2e8ec1"
+    },
+    {
+      "path": "logs/052_NK-OPS-001_group資源解放横展開PT.md",
+      "sha256": "7805352e25f874e5ca49af41b4cd1d774ff5be09b4070009af5e9b3091e5d383"
     },
     {
       "path": "logs/BUG-145-compound-close.json",
@@ -1348,6 +1374,10 @@
     {
       "path": "logs/PT-WEB-20260913-13-summary.json",
       "sha256": "d6f146e929215104ec75a7e054849b8369098950de9ad06cfd21ecb66ceb8c6b"
+    },
+    {
+      "path": "logs/PT-WEB-20260913-14-summary.json",
+      "sha256": "5e7692ba1289571d459fc73554684ffb13508b84b330841c1ceab0bcac1d11b7"
     },
     {
       "path": "output/atomic-cleanup/PT-BAT-162-seven-kinds.txt",

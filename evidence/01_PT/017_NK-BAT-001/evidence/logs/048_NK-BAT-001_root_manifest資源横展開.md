@@ -1,5 +1,7 @@
 # NK-BAT-001 root manifest・資源解放横展開
 
+正式PT-WEB-20260913-14/source b234a4b356a9b456d3fdd245dbd6baed568be426/dev-foundation、2026-09-13 10:51:57～11:08:12 JST、Maven16分13秒/exit0。1415件PASS（Protocol80/Storage66/API660/Web241/Batch327/CHR41）、failed/error/skipped0。6 Java全4coverage100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、3固定path限定review・coverage除外なし。15collector/38scopeの同run/source/hashと41負canary成功。PG171～174の306compoundを既存Test ID内で認定し新JUnit/部品増算0。BUG198/YKT157完了、BUG195/YKT154/SSC063はSQL残候補等のため継続。実NK Characterization/IT/ST/親全体は未完了。 最新の残候補分類は下記§3へ更新。以下の正式13/探索記録は履歴。
+
 PG169/170、SSC062/063、BUG195～197/YKT154～156。2026-09-13。正式PT-WEB-20260913-13、source820554603bca7e5ddd358139f33dee27c9ae87c3/dev-foundation、2026-09-13 09:48:33～10:04:44 JST、Maven16分10秒/exit0。全1415件（Protocol80/Storage66/API660/Web241/Batch327/CHR41）PASS、failed/error/skipped0。6 Java module全line/method/class/branch100%、Production5 module static未解決0、固定path3method限定レビュー・coverage除外なし。15collector/38scopeと41負canary PASS。PG169/170新24件を認定するがBUG195/YKT154の広域残候補は未完了。実NK CHR/IT/ST/親全体の完了ではない。 以下の探索記録は正式13前の履歴として維持する。
 
 ## 1. 修正前再現と探索履歴
@@ -41,22 +43,19 @@ PG169/170、SSC062/063、BUG195～197/YKT154～156。2026-09-13。正式PT-WEB-2
 
 Reader/Artifact/Probeのprimaryを渡してexpectedを計算せず、例外same identity・固定secondary型/reason・positive注入回数を独立assertする。正常時のI/O順・境界・電文・DB・command・利用者結果を変更していない。
 
-## 3. YKT154残対象（未完了）
+## 3. YKT154横展開の最新分類（正式14、全体未完了）
 
-検索条件: Productionのtry(resource)/implements AutoCloseable、SafeClose/SafeStream/EntryHandle/OwnedDescriptor、未知例外identity/非正常化/固定diagnosticのSS規約。Batch/Storageの所有構文59箇所を確認対象とし、API所有keyも確認する。検索ヒット数は完了数ではない。
-
-| 対象 | 現在の根拠・残確認 |
+| 対象 | 正式14の確認と残り |
 |---|---|
-| SystemctlStateSource stdio/process | TWR＋外側known固定化/finally TERMが残る。同一unknownとIO＋fatal、TERM複合の反例・契約別修正未実施。非該当にはしていない |
-| ConfigurationGroupResolver stdio/process/reader executor | TWR/TERM/非同期readResultの既存固定diagnostic契約あり。Future一次失敗とcleanupの同一性/優先順位を分類してから反例・修正が必要 |
-| DurableRecordFiles readFile/write/force | channel/writer TWRが残る。全3箇所をIO portで直接反例・buffer/part保持と合わせ再確認する必要あり |
-| InspectorEnvironmentReader channel | TWR＋外側IO固定化が残る。同一unknown/IO＋unknown closeの反例と既存環境byte消去・借用root回帰が必要 |
-| InspectorEnvironmentFiles/MaintenanceRunFiles/MaintenanceFileLock・namespace directory stream | root/child複合scopeを未解放資源/後続closeの優先順位まで確認する必要あり。基礎Entry修正だけで全caller完了とはしない |
-| API InspectorProcess.OwnedKeys/AuthContextCodec/ResponseSnapshotCodec等 | OwnedKeysはoperation-local配列消去とfinal credential close。外部I/O close portのないin-memory資源候補。実close実装・constructor失敗・並行禁止の全根拠/既存回帰を揃えるまで最終分類を保留 |
-| JDK Arena | 外部close fault portなし、同thread所有/descriptor lifetimeの既存Native PTを維持。今回のsame-provider throwable注入の直接対象外。全reactorで再確認予定 |
-| 他JDBC/SessionLease/codec所有者 | JDBC primary保持はBUG193/YKT153で別原因処理済み。一般化して例外意味を上書きしない。契約と既存負例を追記してからYKT154最終判定 |
+| DurableRecordFiles/InspectorEnvironmentReader/InspectorEnvironmentPublisher/ExistingFileAccess | PG171・017049、8scope/54compoundを全回帰で認定。実read後buffer消去、private part保全、借用root維持。対象のTWR置換とclose回数/unknown同一性を確認 |
+| MaintenanceFileLock/InspectorEnvironmentFiles/MaintenanceRunFiles・namespace stream | PG172・017050、27scope/84compound＋既存全IO故障・GC/並行を認定。DirectoryIteratorExceptionは列挙内で既知IO化。Session無効化/取得順/全closeを維持。BUG198/YKT157も全対象正式再試験で完了 |
+| SystemctlStateSource/InspectorUnitProbe | PG173・017051、共通ProcessResourceScopeへ既存Stop/IO/Interrupted規則を抽出し、Systemctl84compoundとProbe既存全条件を認定。全getter後null拒否/5秒/生存queryだけTERM/返却byte消去、実サービス変更なし |
+| ConfigurationGroupResolver | PG174・017052、checked IOの専用scopeと84compoundを認定。既存非同期Runtime固定診断/Error identity、TERM-before-join、完了後buffer消去/固定getent/65537境界を維持。JDK executor内部に新fault portはなく、全内部故障を合成注入したとは主張しない |
+| API AuthContextCodec/ResponseSnapshotCodec/InspectorProcess.OwnedKeys/InspectorAesCredential | 同一providerのbody/close再送には非該当。cloneしたnonnull byte配列/immutableまたはoperation-local mapとprivate lockのzero/closed操作だけで外部close portなし。Response codecのWiping streamもProductionは直接new、resetは同期zero/countのみ。AuthContextCodecTestのlengthVersionKeyAndNullInvariantsIncludeBothEndpointsAndClose/bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose/concurrentEncryptionHasDistinctNoncesAndCorrectRowBinding、ResponseSnapshotCodecTestのidentitySnapshotKeyAndLifecycleContractsRejectNullAndInvalidValues/malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected、SecretBufferTestのgrowth/reset/close・streamBoundsAndExceptionalExitWipeAllOwnedCapacity、InspectorProcessTestのownedCopiesAndMaterialLifetimes/missingAndFaultedKeyLoads/timeoutsAndInterruptionCloseKeys/singleUseAndConcurrentContenders、InspectorAesCredentialTestのcloseIsIdempotentAndRedacted/concurrentCopiesAndCloseStayConsistentを正式14/API660で再確認 |
+| JDK Arena/専有Deflater・Inflater | 外部close fault portなし・同呼出/同threadのJDK実体。native lifetime/解放と圧縮異常・境界PTは正式14で再確認。本分類をJDK全内部の故障保証へ一般化しない |
+| 他JDBC/SessionLease/所有者 | 未完了。LogCleanupService.execute/SessionLease acquire/close、各Repository stmt/rowのSQLException/typed拒否/unknownの契約分類と複合反例が残る。rollback/transaction復元は別回復責務（BUG193/YKT153）であり、IO scopeを機械適用しない。全対象一覧/非該当根拠/再発防止PTを揃えてから最終判定 |
 
-したがってBUG195は直接対象修正済み・全体対応中、YKT154未完了。未処理候補を「検索済み」のみで閉じない。次の小単位で上表を反例→必要なSSC→修正→全再試験へ進める。
+BUG195/YKT154/SSC063はSQL等の残候補があるため対応中。PG171～174で306compoundを確認しても、新JUnit/完成部品を増算しない。work/PGPT_YKT154_remaining_resource_scopes.mdは調査補助で、本表と915/916が正本。
 
 ## 4. PT自身の横展開
 

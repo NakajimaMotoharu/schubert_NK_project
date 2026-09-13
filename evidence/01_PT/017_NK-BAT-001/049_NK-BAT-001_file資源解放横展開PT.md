@@ -1,5 +1,7 @@
 # NK-BAT/OPS/MED 既存file資源解放横展開 PT追補
 
+正式PT-WEB-20260913-14/source b234a4b356a9b456d3fdd245dbd6baed568be426/dev-foundation、2026-09-13 10:51:57～11:08:12 JST、Maven16分13秒/exit0。1415件PASS（Protocol80/Storage66/API660/Web241/Batch327/CHR41）、failed/error/skipped0。6 Java全4coverage100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、3固定path限定review・coverage除外なし。15collector/38scopeの同run/source/hashと41負canary成功。PG171～174の306compoundを既存Test ID内で認定し新JUnit/部品増算0。BUG198/YKT157完了、BUG195/YKT154/SSC063はSQL残候補等のため継続。実NK Characterization/IT/ST/親全体は未完了。 実行command/環境/input/expected/actual/coverage/関連BUG/SSC・SHA256は本書および017/018各evidence/manifest.json、同runの各JUnit XMLを正とする。以下は正式前の仕様・探索履歴。
+
 2026-09-13追補: source9fb1f14dへ実装固定・push済み。PG172選択green2（017050）で54compoundを含む93 PTが再成功、DurableRecordFilesの既存plan/marker3分岐も関連RetirementRecordsTestで通過し当該classの4coverageは全missed0。全reactorの正式認定は別途行う。
 
 PG171/SSC063継続・BUG195/YKT154。source修正前の仕様。正式13/source82055460はこの追加反例をまだ実行していない。新しいJUnit件数・部品数への加算0、既存Test IDの再発防止観点として管理する。

@@ -1,5 +1,7 @@
 # NK-OPS-001 Systemctl照会・共通終了scope PT追補
 
+正式PT-WEB-20260913-14/source b234a4b356a9b456d3fdd245dbd6baed568be426/dev-foundation、2026-09-13 10:51:57～11:08:12 JST、Maven16分13秒/exit0。1415件PASS（Protocol80/Storage66/API660/Web241/Batch327/CHR41）、failed/error/skipped0。6 Java全4coverage100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、3固定path限定review・coverage除外なし。15collector/38scopeの同run/source/hashと41負canary成功。PG171～174の306compoundを既存Test ID内で認定し新JUnit/部品増算0。BUG198/YKT157完了、BUG195/YKT154/SSC063はSQL残候補等のため継続。実NK Characterization/IT/ST/親全体は未完了。 実行command/環境/input/expected/actual/coverage/関連BUG/SSC・SHA256は本書および017/018各evidence/manifest.json、同runの各JUnit XMLを正とする。以下は正式前の仕様・探索履歴。
+
 ## 2026-09-13 選択実行結果（正式待ち）
 
 設計先行8d767725/dev-foundation。redは10:44:34 JST/8.172秒/exit1、STOP014で期待IllegalState同一→実self-suppression IllegalArgumentException（/tmp/pgpt-pg173-red.log、SHA256 0ea80905202808f6ea6e222f6275b160f26013c267b267a53a929bc52c8a0edc）。修正後10:46:09/26.537秒/exit0、Storage8＋Batch16=24 PT成功、84compound全通過、failed/error/skipped0（/tmp/pgpt-pg173-green.log、SHA256 909785045d44dba01547c501d7eb9b2790342f3ff4ee253033ea9547703dc184）。NullAway/Spotless/SpotBugs未解決0。

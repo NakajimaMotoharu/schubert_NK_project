@@ -1,5 +1,7 @@
 # NK-BAT/OPS root・namespace資源解放横展開 PT追補
 
+正式PT-WEB-20260913-14/source b234a4b356a9b456d3fdd245dbd6baed568be426/dev-foundation、2026-09-13 10:51:57～11:08:12 JST、Maven16分13秒/exit0。1415件PASS（Protocol80/Storage66/API660/Web241/Batch327/CHR41）、failed/error/skipped0。6 Java全4coverage100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、3固定path限定review・coverage除外なし。15collector/38scopeの同run/source/hashと41負canary成功。PG171～174の306compoundを既存Test ID内で認定し新JUnit/部品増算0。BUG198/YKT157完了、BUG195/YKT154/SSC063はSQL残候補等のため継続。実NK Characterization/IT/ST/親全体は未完了。 実行command/環境/input/expected/actual/coverage/関連BUG/SSC・SHA256は本書および017/018各evidence/manifest.json、同runの各JUnit XMLを正とする。以下は正式前の仕様・探索履歴。
+
 ## 2026-09-13 選択試験結果（正式認定待ち）
 
 設計先行6d5e4901、branch dev-foundation。修正前10:37:09 JST/7.908秒/exit1（/tmp/pgpt-pg172-red.log）でLOCK006/NS002/BAT079全3件がself-suppression IllegalArgumentExceptionとなり失敗。修正後の初回compileはimport欠落BUG198/YKT157で失敗（/tmp/pgpt-pg172-green.log、Batch未実行）。欠落2class修正後、10:40:46 JST/1分09秒/exit0（/tmp/pgpt-pg172-green2.log）、Storage13＋Batch80=93 PT成功・failed/error/skipped0、84compound全通過、NullAway/Spotless/SpotBugs未解決0。PG171の54compoundも同実行で再確認。
