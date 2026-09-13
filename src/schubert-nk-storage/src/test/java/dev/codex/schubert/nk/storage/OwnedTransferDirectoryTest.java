@@ -68,6 +68,7 @@ class OwnedTransferDirectoryTest {
 
   @Test
   void med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership() throws Exception {
+    compoundOwnership();
     FaultCalls calls = new FaultCalls();
     calls.readOnly = true;
     var parent = OwnedTransferDirectory.open(calls, root);
@@ -745,11 +746,86 @@ class OwnedTransferDirectoryTest {
   /**
    * Test fault port still performs actual open/close; tracks every live FD, never guesses numbers.
    */
+  private void compoundOwnership() throws Exception {
+    int sequence = 0;
+    for (int scope = 0; scope < 3; scope++)
+      for (Throwable primary :
+          new Throwable[] {
+            new IllegalStateException("public primary"),
+            new NullPointerException("public primary"),
+            new AssertionError("public primary"),
+            new StorageIoException(StorageIoException.Reason.MISSING)
+          }) {
+        var calls = new FaultCalls();
+        Throwable cleanup =
+            primary instanceof StorageIoException ? new AssertionError("public cleanup") : primary;
+        if (scope == 0) {
+          calls.openFailure = primary;
+          calls.closeFailure = cleanup;
+          assertSame(
+              cleanup,
+              assertThrows(cleanup.getClass(), () -> OwnedTransferDirectory.open(calls, root)));
+          assertEquals(1, calls.closes);
+        } else {
+          try (var parent = OwnedTransferDirectory.open(calls, root)) {
+            int before = calls.closes;
+            calls.closeFailure = cleanup;
+            if (scope == 1) {
+              LocalDate date = DATE.plusDays(sequence++);
+              assertSame(
+                  cleanup,
+                  assertThrows(
+                      cleanup.getClass(),
+                      () ->
+                          parent.openDate(
+                              date,
+                              path -> {
+                                raise(primary);
+                                return true;
+                              })));
+            } else {
+              String name = "compound-" + sequence++;
+              write(root.resolve(name));
+              assertSame(
+                  cleanup,
+                  assertThrows(
+                      cleanup.getClass(),
+                      () ->
+                          parent.atExistingEntryHandle(
+                              name,
+                              path -> {
+                                raise(primary);
+                                return true;
+                              })));
+            }
+            assertEquals(before + 1, calls.closes);
+            assertEquals(1, calls.live.size());
+          }
+        }
+        assertTrue(calls.live.isEmpty());
+        assertEquals(primary instanceof StorageIoException ? 0 : 1, cleanup.getSuppressed().length);
+        for (Throwable secondary : cleanup.getSuppressed()) {
+          failure(
+              StorageIoException.Reason.UNAVAILABLE,
+              () -> {
+                throw secondary;
+              });
+        }
+      }
+  }
+
+  private static void raise(Throwable failure) throws StorageIoException {
+    if (failure instanceof StorageIoException known) throw known;
+    if (failure instanceof RuntimeException unknown) throw unknown;
+    throw (Error) failure;
+  }
+
   private static final class FaultCalls implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> live = new HashSet<>();
     int closes;
     boolean failClose, failCreate, failSync, readOnly;
+    Throwable openFailure, closeFailure;
 
     @Override
     public int openRoot() throws StorageIoException {
@@ -760,6 +836,7 @@ class OwnedTransferDirectoryTest {
 
     @Override
     public int openDirectory(int parent, String name) throws StorageIoException {
+      if (openFailure != null) raise(openFailure);
       int fd = delegate.openDirectory(parent, name);
       assertTrue(live.add(fd));
       return fd;
@@ -811,6 +888,11 @@ class OwnedTransferDirectoryTest {
       assertTrue(live.remove(directory));
       closes++;
       delegate.close(directory);
+      if (closeFailure != null) {
+        Throwable failure = closeFailure;
+        closeFailure = null;
+        raise(failure);
+      }
       if (failClose) {
         failClose = false;
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);

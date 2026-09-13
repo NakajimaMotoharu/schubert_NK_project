@@ -42,17 +42,20 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       throw new IllegalArgumentException("invalid transfer root");
     }
     // JDK Path parsing has already rejected NUL; native calls recheck each segment before use.
-    try (OwnedTransferDirectory current = new OwnedTransferDirectory(calls, calls.openRoot())) {
-      for (Path segment : root) {
-        int next = calls.openDirectory(current.descriptor, segment.toString());
-        int previous = current.descriptor;
-        current.descriptor = next;
-        calls.close(previous);
-      }
-      OwnedTransferDirectory result = new OwnedTransferDirectory(calls, current.descriptor);
-      current.descriptor = -1; // Ownership transfer; the lexical resource has nothing to close.
-      return result;
-    }
+    OwnedTransferDirectory current = new OwnedTransferDirectory(calls, calls.openRoot());
+    return ResourceScope.use(
+        current::close,
+        () -> {
+          for (Path segment : root) {
+            int next = calls.openDirectory(current.descriptor, segment.toString());
+            int previous = current.descriptor;
+            current.descriptor = next;
+            calls.close(previous);
+          }
+          OwnedTransferDirectory result = new OwnedTransferDirectory(calls, current.descriptor);
+          current.descriptor = -1; // Ownership transfer; the lexical resource has nothing to close.
+          return result;
+        });
   }
 
   /**
@@ -132,15 +135,19 @@ public final class OwnedTransferDirectory implements AutoCloseable {
         // EEXIST proves no type/ownership: openDirectory still performs O_DIRECTORY|O_NOFOLLOW.
         created = false;
       }
-      try (var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name))) {
-        if (created) {
-          child.atDirectory(initialize);
-          calls.sync(child.descriptor);
-        }
-        var result = new OwnedTransferDirectory(calls, child.descriptor);
-        child.descriptor = -1;
-        return result;
-      }
+      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
+      final boolean initializeCreated = created;
+      return ResourceScope.use(
+          child::close,
+          () -> {
+            if (initializeCreated) {
+              child.atDirectory(initialize);
+              calls.sync(child.descriptor);
+            }
+            var result = new OwnedTransferDirectory(calls, child.descriptor);
+            child.descriptor = -1;
+            return result;
+          });
     }
   }
 
@@ -221,13 +228,11 @@ public final class OwnedTransferDirectory implements AutoCloseable {
 
   private <T> T withEntry(int ownedDescriptor, FileOperation<T> operation)
       throws StorageIoException {
-    try (EntryHandle entry = new EntryHandle(calls, ownedDescriptor)) {
-      return execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation);
-    } catch (StorageIoException ex) {
-      // A close failure makes the operation uncertain. Never leak an original/suppressed path.
-      throw new StorageIoException(
-          ex.getSuppressed().length == 0 ? ex.reason() : StorageIoException.Reason.UNAVAILABLE);
-    }
+    EntryHandle entry = new EntryHandle(calls, ownedDescriptor);
+    // ResourceScope owns both one-close and path-free compound I/O normalization (SSC063).
+    return ResourceScope.use(
+        entry::close,
+        () -> execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation));
   }
 
   private static <T> T execute(Path capability, FileOperation<T> operation)

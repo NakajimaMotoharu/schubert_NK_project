@@ -8,8 +8,8 @@ import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
-import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -111,68 +111,92 @@ public final class BackupArtifactVerifier {
         guard(started);
         require(security.effectiveUid() == 0);
         Metadata parent = directory(root, started);
-        BackupFileDigest result;
         guard(started);
-        try (var child = root.openExistingChild(expected.directoryName())) {
-          Metadata initial = directory(child, started);
-          require(initial.device() == parent.device());
-          names(child, started);
-          Map<String, FileClaim> claims =
-              Map.of(
-                  MANIFEST,
-                  new FileClaim(canonical.length, "", 0, 0),
-                  "schubert_nk.dump",
-                  new FileClaim(expected.dump().size(), expected.dump().sha256(), uid, gid),
-                  "config.tar",
-                  new FileClaim(
-                      expected.configuration().size(), expected.configuration().sha256(), 0, 0),
-                  "credentials.tar.age",
-                  new FileClaim(
-                      expected.credentials().size(), expected.credentials().sha256(), 0, 0));
-          Map<String, Metadata> snapshots = new HashMap<>();
-          Map<String, BackupFileDigest> observed = new HashMap<>();
-          for (String name : NAMES) {
-            FileClaim claim = Objects.requireNonNull(claims.get(name));
-            guard(started);
-            child.atExistingEntryHandle(
-                name,
-                held -> {
-                  Metadata before =
-                      capture(held, false, claim.uid(), claim.gid(), claim.size(), started);
-                  require(before.device() == initial.device());
-                  snapshots.put(name, before);
-                  observed.put(name, read(held, name, claim, canonical, buffer, started));
-                  require(
-                      before.equals(
-                          capture(held, false, claim.uid(), claim.gid(), claim.size(), started)));
-                  return Boolean.TRUE;
+        var child = root.openExistingChild(expected.directoryName());
+        BackupFileDigest result =
+            ResourceScope.use(
+                child::close,
+                () -> {
+                  Metadata initial = directory(child, started);
+                  require(initial.device() == parent.device());
+                  names(child, started);
+                  Map<String, FileClaim> claims =
+                      Map.of(
+                          MANIFEST,
+                          new FileClaim(canonical.length, "", 0, 0),
+                          "schubert_nk.dump",
+                          new FileClaim(expected.dump().size(), expected.dump().sha256(), uid, gid),
+                          "config.tar",
+                          new FileClaim(
+                              expected.configuration().size(),
+                              expected.configuration().sha256(),
+                              0,
+                              0),
+                          "credentials.tar.age",
+                          new FileClaim(
+                              expected.credentials().size(),
+                              expected.credentials().sha256(),
+                              0,
+                              0));
+                  Map<String, Metadata> snapshots = new HashMap<>();
+                  Map<String, BackupFileDigest> observed = new HashMap<>();
+                  for (String name : NAMES) {
+                    FileClaim claim = Objects.requireNonNull(claims.get(name));
+                    guard(started);
+                    child.atExistingEntryHandle(
+                        name,
+                        held -> {
+                          Metadata before =
+                              capture(held, false, claim.uid(), claim.gid(), claim.size(), started);
+                          require(before.device() == initial.device());
+                          snapshots.put(name, before);
+                          observed.put(name, read(held, name, claim, canonical, buffer, started));
+                          require(
+                              before.equals(
+                                  capture(
+                                      held,
+                                      false,
+                                      claim.uid(),
+                                      claim.gid(),
+                                      claim.size(),
+                                      started)));
+                          return Boolean.TRUE;
+                        });
+                    guard(started);
+                  }
+                  for (String name : NAMES) {
+                    FileClaim claim = Objects.requireNonNull(claims.get(name));
+                    guard(started);
+                    child.atExistingEntryHandle(
+                        name,
+                        held -> {
+                          require(
+                              Objects.requireNonNull(snapshots.get(name))
+                                  .equals(
+                                      capture(
+                                          held,
+                                          false,
+                                          claim.uid(),
+                                          claim.gid(),
+                                          claim.size(),
+                                          started)));
+                          return Boolean.TRUE;
+                        });
+                    guard(started);
+                  }
+                  names(child, started);
+                  require(initial.equals(directory(child, started)));
+                  guard(started);
+                  var rebound = root.openExistingChild(expected.directoryName());
+                  ResourceScope.use(
+                      rebound::close,
+                      () -> {
+                        require(initial.equals(directory(rebound, started)));
+                        return Boolean.TRUE;
+                      });
+                  guard(started);
+                  return Objects.requireNonNull(observed.get(MANIFEST));
                 });
-            guard(started);
-          }
-          for (String name : NAMES) {
-            FileClaim claim = Objects.requireNonNull(claims.get(name));
-            guard(started);
-            child.atExistingEntryHandle(
-                name,
-                held -> {
-                  require(
-                      Objects.requireNonNull(snapshots.get(name))
-                          .equals(
-                              capture(
-                                  held, false, claim.uid(), claim.gid(), claim.size(), started)));
-                  return Boolean.TRUE;
-                });
-            guard(started);
-          }
-          names(child, started);
-          require(initial.equals(directory(child, started)));
-          guard(started);
-          try (var rebound = root.openExistingChild(expected.directoryName())) {
-            require(initial.equals(directory(rebound, started)));
-          }
-          guard(started);
-          result = Objects.requireNonNull(observed.get(MANIFEST));
-        }
         guard(started);
         require(parent.equals(directory(root, started)));
         require(security.effectiveUid() == 0);
@@ -247,18 +271,21 @@ public final class BackupArtifactVerifier {
           guard(started);
           DirectoryStream<Path> stream = io.openNames(held);
           if (stream == null) throw unavailable();
-          try (var owned = new SafeClose<>(stream)) {
-            guard(started);
-            Set<String> names = new HashSet<>();
-            for (Path child : owned.resource) {
-              guard(started);
-              require(child != null && held.equals(child.getParent()));
-              require(names.add(held.relativize(child).toString()) && names.size() <= 4);
-              guard(started);
-            }
-            require(names.equals(REQUIRED));
-            guard(started);
-          }
+          ResourceScope.use(
+              stream,
+              () -> {
+                guard(started);
+                Set<String> names = new HashSet<>();
+                for (Path child : stream) {
+                  guard(started);
+                  require(child != null && held.equals(child.getParent()));
+                  require(names.add(held.relativize(child).toString()) && names.size() <= 4);
+                  guard(started);
+                }
+                require(names.equals(REQUIRED));
+                guard(started);
+                return Boolean.TRUE;
+              });
           guard(started);
           return Boolean.TRUE;
         });
@@ -273,42 +300,44 @@ public final class BackupArtifactVerifier {
     guard(started);
     SeekableByteChannel opened = io.open(held);
     if (opened == null) throw unavailable();
-    try (var owned = new SafeClose<>(opened)) {
-      SeekableByteChannel channel = owned.resource;
-      guard(started);
-      require(channel.size() == claim.size());
-      guard(started);
-      ByteBuffer buffer = ByteBuffer.wrap(bytes);
-      long remaining = claim.size();
-      while (remaining > 0) {
-        guard(started);
-        buffer.clear().limit((int) Math.min(remaining, bytes.length));
-        int limit = buffer.limit();
-        int read = channel.read(buffer);
-        guard(started);
-        require(read > 0 && read <= limit && buffer.position() == read);
-        buffer.flip();
-        if (name.equals(MANIFEST)) {
-          int offset = (int) (claim.size() - remaining);
-          for (int i = 0; i < read; i++) require(buffer.get(i) == canonical[offset + i]);
-        }
-        hash.update(buffer);
-        guard(started);
-        remaining -= read;
-      }
-      buffer.clear().limit(1);
-      guard(started);
-      require(channel.read(buffer) == -1 && buffer.position() == 0);
-      guard(started);
-      require(channel.size() == claim.size());
-      guard(started);
-      byte[] digest = hash.digest();
-      require(digest != null && digest.length == 32);
-      String actual = HexFormat.of().formatHex(digest);
-      if (!name.equals(MANIFEST)) require(actual.equals(claim.hash()));
-      guard(started);
-      return new BackupFileDigest(claim.size(), actual);
-    }
+    return ResourceScope.use(
+        opened,
+        () -> {
+          SeekableByteChannel channel = opened;
+          guard(started);
+          require(channel.size() == claim.size());
+          guard(started);
+          ByteBuffer buffer = ByteBuffer.wrap(bytes);
+          long remaining = claim.size();
+          while (remaining > 0) {
+            guard(started);
+            buffer.clear().limit((int) Math.min(remaining, bytes.length));
+            int limit = buffer.limit();
+            int read = channel.read(buffer);
+            guard(started);
+            require(read > 0 && read <= limit && buffer.position() == read);
+            buffer.flip();
+            if (name.equals(MANIFEST)) {
+              int offset = (int) (claim.size() - remaining);
+              for (int i = 0; i < read; i++) require(buffer.get(i) == canonical[offset + i]);
+            }
+            hash.update(buffer);
+            guard(started);
+            remaining -= read;
+          }
+          buffer.clear().limit(1);
+          guard(started);
+          require(channel.read(buffer) == -1 && buffer.position() == 0);
+          guard(started);
+          require(channel.size() == claim.size());
+          guard(started);
+          byte[] digest = hash.digest();
+          require(digest != null && digest.length == 32);
+          String actual = HexFormat.of().formatHex(digest);
+          if (!name.equals(MANIFEST)) require(actual.equals(claim.hash()));
+          guard(started);
+          return new BackupFileDigest(claim.size(), actual);
+        });
   }
 
   private void guard(long started) throws StorageIoException {
@@ -320,24 +349,6 @@ public final class BackupArtifactVerifier {
   }
 
   private record FileClaim(long size, String hash, long uid, long gid) {}
-
-  /** Sanitize known close errors before TWR attaches them to an unknown primary exception. */
-  private static final class SafeClose<T extends Closeable> implements AutoCloseable {
-    private final T resource;
-
-    SafeClose(T resource) {
-      this.resource = resource;
-    }
-
-    @Override
-    public void close() throws StorageIoException {
-      try {
-        resource.close();
-      } catch (IOException failure) {
-        throw unavailable();
-      }
-    }
-  }
 
   static final class NioIo implements Io {
     @Override

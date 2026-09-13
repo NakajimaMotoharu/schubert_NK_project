@@ -1,10 +1,10 @@
 # NK-OPS-001 共通resource scope 単体テスト仕様書
 
-PG170/SSC063、修正前6e59c153、BUG195/YKT154。OPS009/FIL001～009/UI237・251/SS311・333冒頭・341§6.5/6.7/7.4。対象Storage.ResourceScope.use/normalize・Action全責務。scopeは資源を受領後1回だけclose、正常値はclose成功後だけ返す。所有前null拒否とcallback nullable透過を区別し、NPE正常化なし。
+PG170/SSC063、修正前6e59c153、BUG195/YKT154。OPS009/FIL001～009/UI237・251/SS311・333冒頭・341§6.5/6.7/7.4。対象Storage.ResourceScope.use（IO正規化を含む）・Action全責務。scopeは資源を受領後1回だけclose、正常値はclose成功後だけ返す。所有前null拒否とcallback nullable透過を区別し、NPE正常化なし。
 
 | Test ID | method | 独立期待・操作 |
 |---|---|---|
-| PT-OPS-RSCOPE-001 | successfulOwnership | fixed42をbody→closeのliteral順で返し、close1回、呼出中のcaller-owned別資源不変更 |
+| PT-OPS-RSCOPE-001 | successfulOwnership | fixed42をbody→closeのliteral順で返し、指定releaseのclose1回。別の借用資源は各実callerの保持inode/lock PTで確認 |
 | PT-OPS-RSCOPE-002 | knownIoFailures | plain IO/Storage全reasonとbody/close/両方、cause/suppressedを固定化、両失敗はUNAVAILABLE、close1回 |
 | PT-OPS-RSCOPE-003 | unknownBodyFailures | Runtime/NPE/Error body単独は同一例外、close正常完了・返却なし |
 | PT-OPS-RSCOPE-004 | knownBodyUnknownCleanup | 既知IO body＋Runtime/NPE/Error cleanupはcleanup同一・非成功、成功body unknown closeも同一 |

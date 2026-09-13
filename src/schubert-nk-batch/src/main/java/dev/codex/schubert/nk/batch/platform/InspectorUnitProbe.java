@@ -131,44 +131,93 @@ public final class InspectorUnitProbe {
 
     private byte[] execute(List<String> command, int limit) {
       interrupted();
-      byte[] bytes = new byte[0];
+      // Keep the delivered array reachable even when a later scope close fails.
+      byte[][] bytes = {new byte[0]};
       try {
-        try (var owned =
-                new QueryProcess(Objects.requireNonNull(start.execute(command), "query process"));
-            var output = new SafeStream<>(owned.process.getInputStream());
-            var input = new SafeStream<>(owned.process.getOutputStream());
-            var error = new SafeStream<>(owned.process.getErrorStream())) {
-          // Neither query accepts stdin. Signal EOF and close discarded stderr before waiting.
-          input.finish();
-          error.finish();
-          if (!owned.process.waitFor(5, TimeUnit.SECONDS))
-            throw new StopGateException(StopGateFailure.TIMEOUT);
-          interrupted();
-          if (owned.process.exitValue() != 0)
-            throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-          bytes = Objects.requireNonNull(output.resource.readNBytes(limit + 1), "query output");
-          if (bytes.length > limit) throw new StopGateException(StopGateFailure.MALFORMED_STATE);
-        }
+        var owned =
+            new QueryProcess(Objects.requireNonNull(start.execute(command), "query process"));
+        scope(
+            owned::close,
+            () -> {
+              var output = new SafeStream<>(owned.process.getInputStream());
+              scope(
+                  output::finish,
+                  () -> {
+                    var input = new SafeStream<>(owned.process.getOutputStream());
+                    scope(
+                        input::finish,
+                        () -> {
+                          var error = new SafeStream<>(owned.process.getErrorStream());
+                          scope(
+                              error::finish,
+                              () -> {
+                                // Neither query accepts stdin. Signal EOF and close discarded
+                                // stderr before waiting.
+                                input.finish();
+                                error.finish();
+                                if (!owned.process.waitFor(5, TimeUnit.SECONDS))
+                                  throw new StopGateException(StopGateFailure.TIMEOUT);
+                                interrupted();
+                                if (owned.process.exitValue() != 0)
+                                  throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+                                bytes[0] =
+                                    Objects.requireNonNull(
+                                        output.resource.readNBytes(limit + 1), "query output");
+                                if (bytes[0].length > limit)
+                                  throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+                              });
+                        });
+                  });
+            });
         interrupted();
-        return bytes;
+        return bytes[0];
       } catch (StopGateException failure) {
-        Arrays.fill(bytes, (byte) 0);
+        Arrays.fill(bytes[0], (byte) 0);
         throw new StopGateException(failure.reason());
       } catch (InterruptedException failure) {
-        Arrays.fill(bytes, (byte) 0);
+        Arrays.fill(bytes[0], (byte) 0);
         Thread.currentThread().interrupt();
         throw new StopGateException(StopGateFailure.INTERRUPTED);
       } catch (IOException failure) {
-        Arrays.fill(bytes, (byte) 0);
+        Arrays.fill(bytes[0], (byte) 0);
         throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
       } catch (RuntimeException | Error failure) {
-        Arrays.fill(bytes, (byte) 0);
+        Arrays.fill(bytes[0], (byte) 0);
         throw failure;
       }
     }
   }
 
-  private static final class SafeStream<T extends Closeable> implements AutoCloseable {
+  @FunctionalInterface
+  private interface QueryWork {
+    void run() throws IOException, InterruptedException;
+  }
+
+  // SSC063/BUG195: fixed stop diagnostics, not raw suppressed process/stream failures.
+  private static void scope(Runnable release, QueryWork work)
+      throws IOException, InterruptedException {
+    try {
+      work.run();
+    } catch (IOException | InterruptedException | RuntimeException | Error primary) {
+      try {
+        release.run();
+      } catch (RuntimeException | Error cleanup) {
+        if ((primary instanceof IOException
+                || primary instanceof InterruptedException
+                || primary instanceof StopGateException)
+            && !(cleanup instanceof StopGateException)) {
+          // Preserve cancellation even when an unknown cleanup must take precedence.
+          if (primary instanceof InterruptedException) Thread.currentThread().interrupt();
+          throw cleanup;
+        }
+        primary.addSuppressed(new StopGateException(StopGateFailure.COMMAND_FAILURE));
+      }
+      throw primary;
+    }
+    release.run();
+  }
+
+  private static final class SafeStream<T extends Closeable> {
     private final T resource;
     private boolean closed;
 
@@ -176,12 +225,7 @@ public final class InspectorUnitProbe {
       this.resource = Objects.requireNonNull(resource, "query stream");
     }
 
-    @Override
-    public void close() {
-      finish();
-    }
-
-    // BUG187/YKT147: explicit early EOF/discard; TWR fallback shares the one-close state.
+    // BUG187/YKT147: explicit early EOF/discard; scope fallback shares the one-close state.
     void finish() {
       if (closed) return;
       closed = true; // A failed native close is not retried against an uncertain descriptor.

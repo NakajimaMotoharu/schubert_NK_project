@@ -19,7 +19,10 @@ import java.util.function.*;
  * PG166/BAT194..209.
  */
 final class BackupArtifactFixture
-    implements AutoCloseable, BackupArtifactVerifier.Io, InodeSecurityCalls {
+    implements AutoCloseable,
+        BackupArtifactVerifier.Io,
+        BackupManifestReader.Io,
+        InodeSecurityCalls {
   static final String DIR = "20260913-000002-12345678-9abc-def0-8123-456789abcdef";
   static final long UID = 2000, GID = 2001;
   static final String DUMP_HASH =
@@ -326,7 +329,8 @@ final class BackupArtifactFixture
           }
         }
         int limit = buffer.limit();
-        buffer.limit(Math.min(limit, smallRead));
+        // PG169: accumulated manifest reads and reset-per-chunk artifact reads share this port.
+        buffer.limit(buffer.position() + Math.min(buffer.remaining(), smallRead));
         int actual = delegate.read(buffer);
         buffer.limit(limit);
         if (selected(role) && readMode.equals("content") && actual > 0)

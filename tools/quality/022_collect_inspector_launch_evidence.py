@@ -15,7 +15,7 @@ GROUPS = (
      ("successWarningAndFailureStatus", "expectedFailuresAndRedaction", "nativeFactoryFailure",
       "receiptAndOutputFailure", "nullContracts", "mainAndFatalHandler", "concurrentInvocations", "actualJvmEntry")),
 )
-DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
+DEPLOYMENT_GROUPS = (("dev.codex.schubert.nk.storage.ResourceScopeTest", 1, ("successfulOwnership", "knownIoFailures", "unknownBodyFailures", "knownBodyUnknownCleanup", "unknownCompoundFailures", "nullAndNullableContracts", "nestedScopes", "concurrentScopes")), (PREFIX + "InspectorDeploymentTest", 1,
     ("renderedShellCheck", "statusMapping", "malformedReceipts", "argumentsAndPlaceholders",
      "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation")),
     ("dev.codex.schubert.nk.storage.LinuxFileLockTest", 1,
@@ -56,6 +56,7 @@ DEPLOYMENT_GROUPS = ((PREFIX + "InspectorDeploymentTest", 1,
     ("dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest", 9,
      ("fixedCommands", "stableTerminalAndReceipt", "unstableAndNonempty", "commandFailures",
       "boundedOutputAndTimeout", "interruptions", "allResourceFailures", "nativeEnvironmentAndConcurrency")))
+SCOPE_SUBJECT = "dev/codex/schubert/nk/storage/ResourceScope"
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
@@ -127,7 +128,8 @@ def validate_reports(suites, deployment=False):
                 or any(c.get("classname") != cls or any(child.tag not in ("system-out", "system-err")
                    for child in c) for c in cases)):
             raise ValueError("launcher/deployment PT inventory or status is not certifiable")
-        prefix = ({"dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
+        prefix = ({"dev.codex.schubert.nk.storage.ResourceScopeTest": "PT-OPS-RSCOPE",
+                   "dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
                    "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                    "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                    "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
@@ -169,6 +171,7 @@ def main():
     def module_for(cls):
         return {"dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "batch",
+                "dev.codex.schubert.nk.storage.ResourceScopeTest": "storage",
                 "dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
                 "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
@@ -191,7 +194,7 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
-        for module, subject in (("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
+        for module, subject in (("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
                                 *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
@@ -199,7 +202,7 @@ def main():
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {SCOPE_SUBJECT, FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -215,7 +218,8 @@ def main():
     if args.deployment:
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS)]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (s + ".java") for s in PRIVATE_SUBJECTS]
-        sources += [repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
+        sources += [repo / "src/schubert-nk-storage/src/main/java" / (SCOPE_SUBJECT + ".java"),
+                    repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-batch/pom.xml",
@@ -286,6 +290,8 @@ def main():
         manifest["related"] += ["PG-D-155", "BUG-154", "BUG-155", "YKT-120", "BUG-156", "YKT-121"]
         manifest["oracle"] += " BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure."
         manifest["oracle"] += " 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values."
+        manifest["related"] += ["PG-D-170", "SSC-063", "BUG-195", "YKT-154", "BUG-196", "YKT-155", "BUG-197", "YKT-156"]
+        manifest["oracle"] += " 027/PT-OPS-RSCOPE-001..008: explicit single close before return, null ownership contracts, nullable callback, known I/O reasons, unknown identity, same-throwable/body-cleanup precedence, nested release order and64 concurrent scopes. UNIT015 and native inode/flock callers independently regress compound failures. Broader YKT154 candidates remain open in017/048."
         manifest["related"] += ["PG-D-167", "SSC-060", "BUG-187", "BUG-188", "BUG-189", "BUG-190", "YKT-147", "YKT-148", "YKT-149", "YKT-150"]
         manifest["oracle"] += " 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

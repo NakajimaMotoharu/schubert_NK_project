@@ -463,6 +463,33 @@ final class BackupArtifactVerifierTest {
 
   @Test
   void resourceClosureAndSuppression() throws Exception {
+    // BUG195: same unknown instance must never become TWR self-suppression failure.
+    for (String close : List.of("closeChannel", "closeEntry", "closeDirectory"))
+      for (Throwable primary :
+          List.of(
+              new IllegalStateException("public repeated"),
+              new NullPointerException("public repeated"),
+              new AssertionError("public repeated"))) {
+        try (var f = fixture()) {
+          f.extraFaults.add("read#1");
+          f.faultTypes.put("read#1", primary);
+          f.extraFaults.add(close + "#1");
+          f.faultTypes.put(close + "#1", primary);
+          assertSame(
+              primary, assertThrows(primary.getClass(), () -> f.verifier().verify(f.expected)));
+          assertEquals(1, primary.getSuppressed().length);
+          assertInstanceOf(StorageIoException.class, primary.getSuppressed()[0]);
+          f.released();
+        }
+      }
+    try (var f = fixture()) {
+      var fatal = new AssertionError("public close fatal");
+      f.extraFaults.add("read#1");
+      f.extraFaults.add("closeChannel#1");
+      f.faultTypes.put("closeChannel#1", fatal);
+      assertSame(fatal, assertThrows(AssertionError.class, () -> f.verifier().verify(f.expected)));
+      f.released();
+    }
     for (String location : List.of("read", "next", "openEntry"))
       for (int kind = 0; kind < 4; kind++)
         try (var f = fixture()) {

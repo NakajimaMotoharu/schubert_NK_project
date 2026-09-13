@@ -1,6 +1,6 @@
 # NK-BAT-001 root manifest reader 単体テスト仕様書
 
-PG169/SSC062（先行c2da887a）。NK-BAT-001/BAK/BKO/OPS009/UI251/SS311・341§6.7・343§5.3。正式12source凍結中に仕様先行、未実装/未実行/認定加算0。
+PG169/SSC062（先行c2da887a）。NK-BAT-001/BAK/BKO/OPS009/UI251/SS311・341§6.7・343§5.3。仕様先行後に実装、09:42:56の探索16件PASS。正式全reactor待ち・認定加算0。BUG195/SSC063のclose優先順位・横展開は048参照。
 
 対象 .file.BackupManifestReader constructor/read/全内部method・IO/安全close。fixtureは公開合成artifact-manifest.json（964byte）、directory 20260913-000002-12345678-9abc-def0-8123-456789abcdef、専用UID2000/GID2001、rootUID0/GID0を非特権metadata adapterで区別する。実Linux FD/IOとsynthetic root入場を混同しない。独立期待値は公開JSON/SSbyte規約とliteral値。productionをexpectedに呼ばない。
 

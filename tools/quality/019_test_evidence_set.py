@@ -36,6 +36,53 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     @staticmethod
+    def reader_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest"
+        names = ("canonicalRootManifest", "nameAndFullHandleBinding", "directoryAndOwnerContracts",
+                 "manifestMetadataAndAcl", "rootAndChildRebinding", "manifestReplacementAndMutation",
+                 "sizeAndReadBoundaries", "canonicalByteRejection", "everyIoFailure", "closeFailurePrecedence",
+                 "timeAndInterrupt", "nullAndUnknownProviders", "borrowedRootAndClosed",
+                 "concurrentSerializedReaders", "readOnlyNativeAdapters", "independentTraceAndDownstream")
+        suite = ET.Element("testsuite", name=cls, tests="16", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 226)}
+
+    def test_root_reader_inventory(self):
+        suite, expected = self.reader_fixture()
+        self.assertEqual(expected, batch.validate_reader_suite(suite))
+        for position in range(16):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_reader_suite(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[position], tag)
+                with self.assertRaises(ValueError): batch.validate_reader_suite(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[(position + 1) % 16].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[position].set(key, value)
+                with self.assertRaises(ValueError): batch.validate_reader_suite(wrong)
+        for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_reader_suite(wrong)
+
+    def test_root_reader_literal_trace(self):
+        expected = {"PT-BAT-241-reader.txt": b"20260913-000002-12345678-9abc-def0-8123-456789abcdef\n90000|90001\n26|67\n964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\n"}
+        batch.validate_reader_traces(expected)
+        for wrong in ({}, {**expected, "unknown": b""}):
+            with self.assertRaises(ValueError): batch.validate_reader_traces(wrong)
+        name, value = next(iter(expected.items()))
+        for position in range(len(value)):
+            wrong = {name: value[:position] + bytes([value[position] ^ 1]) + value[position + 1:]}
+            with self.assertRaises(ValueError): batch.validate_reader_traces(wrong)
+
+    def test_resource_scope_inventory(self):
+        cls = "dev.codex.schubert.nk.storage.ResourceScopeTest"
+        self.assertEqual((cls, 1, ("successfulOwnership", "knownIoFailures", "unknownBodyFailures",
+                         "knownBodyUnknownCleanup", "unknownCompoundFailures", "nullAndNullableContracts",
+                         "nestedScopes", "concurrentScopes")),
+                         next(group for group in launch.DEPLOYMENT_GROUPS if group[0] == cls))
+        self.assertFalse(scenario.scenario_storage_suite(cls))
+        self.assertEqual("dev/codex/schubert/nk/storage/ResourceScope", launch.SCOPE_SUBJECT)
+
+    @staticmethod
     def pair_fixture(service=False):
         cls, names, start = (
             ("dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
@@ -604,6 +651,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
                  "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
                  "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
+                 "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -616,8 +664,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(32, len(suites))
-        self.assertEqual(suites[:21], batch.select_program_suites(suites))
+        self.assertEqual(33, len(suites))
+        self.assertEqual(suites[:22], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -639,6 +687,8 @@ class EvidenceSetTest(unittest.TestCase):
     def test_current_ownership_and_scope_descriptions(self):
         suffix = ("Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. "
                   "No duplicate PT credit.")
+        self.assertEqual("Batch module327 PT = NK-BAT-001241 + NK-OPS-00186. " + suffix,
+                         batch.ownership_description(327, 241))
         self.assertEqual("Batch module247 PT = NK-BAT-001177 + NK-OPS-00170. " + suffix,
                          batch.ownership_description(247, 177))
         self.assertEqual("Batch module263 PT = NK-BAT-001193 + NK-OPS-00170. " + suffix,
@@ -714,7 +764,10 @@ class EvidenceSetTest(unittest.TestCase):
         self.check_launch_inventory(groups, False)
 
     def test_deployment_inventory_and_nonpassing_cases(self):
-        groups = [("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest", 1,
+        groups = [("dev.codex.schubert.nk.storage.ResourceScopeTest", 1,
+                   ("successfulOwnership", "knownIoFailures", "unknownBodyFailures", "knownBodyUnknownCleanup",
+                    "unknownCompoundFailures", "nullAndNullableContracts", "nestedScopes", "concurrentScopes")),
+                  ("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest", 1,
                    ("renderedShellCheck", "statusMapping", "malformedReceipts", "argumentsAndPlaceholders",
                     "realMainBridge", "baseUnitAndSyntax", "previousProfiles", "releaseClasspathAndIsolation")),
                   ("dev.codex.schubert.nk.storage.LinuxFileLockTest", 1,
@@ -761,7 +814,8 @@ class EvidenceSetTest(unittest.TestCase):
     def check_launch_inventory(self, groups, deployment):
         suites, expected = [], {}
         for cls, start, names in groups:
-            prefix = ({"dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
+            prefix = ({"dev.codex.schubert.nk.storage.ResourceScopeTest": "PT-OPS-RSCOPE",
+                       "dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
                        "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                        "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
@@ -1009,8 +1063,11 @@ class EvidenceSetTest(unittest.TestCase):
         artifact, expected_artifact = self.artifact_fixture()
         reports.append(artifact)
         reports += [self.pair_fixture(False)[0], self.pair_fixture(True)[0]]
+        reader, reader_expected = self.reader_fixture()
+        reports.append(reader)
         accepted = batch.validate_reports(reports)
-        self.assertEqual(225, len(accepted))
+        self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
+        self.assertEqual(241, len(accepted))
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)
             self.assertEqual(pair_expected, {k: v for k, v in accepted.items() if k in pair_expected})

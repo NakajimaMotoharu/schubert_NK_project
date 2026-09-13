@@ -165,6 +165,52 @@ final class LinuxFileLockTest {
 
   @Test
   void nativeErrorsAndFlags() throws Exception {
+    // BUG195: owned descriptor cleanup preserves unknown identity, even self-rethrow.
+    for (boolean known : new boolean[] {false, true})
+      for (Throwable unknown :
+          List.of(
+              new IllegalStateException("public unknown"),
+              new NullPointerException("public unknown"),
+              new AssertionError("public unknown"))) {
+        var order = new ArrayList<String>();
+        var scoped =
+            new LinuxFileLock(
+                (state, path, flags, mode) -> {
+                  assertEquals(0x80000, flags);
+                  assertEquals(0, mode);
+                  order.add("open");
+                  return 17;
+                },
+                (state, descriptor, flags) -> {
+                  assertEquals(17, descriptor);
+                  assertEquals(6, flags);
+                  order.add("flock");
+                  return 0;
+                },
+                (state, descriptor) -> {
+                  assertEquals(17, descriptor);
+                  order.add("close");
+                  if (unknown instanceof RuntimeException failure) throw failure;
+                  throw (Error) unknown;
+                });
+        assertSame(
+            unknown,
+            assertThrows(
+                unknown.getClass(),
+                () ->
+                    scoped.tryExclusive(
+                        Path.of("/proc/self/fd/9"),
+                        () -> {
+                          order.add("body");
+                          if (known) throw new IOException("public I/O");
+                          if (unknown instanceof RuntimeException failure) throw failure;
+                          throw (Error) unknown;
+                        })));
+        assertEquals(List.of("open", "flock", "body", "close"), order);
+        assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
+        for (Throwable secondary : unknown.getSuppressed())
+          assertUnavailable(assertInstanceOf(StorageIoException.class, secondary));
+      }
     for (int error : List.of(11, 4, 9, 22, 37)) {
       var calls = new ArrayList<String>();
       var lock = fake(17, -1, error, 0, calls);

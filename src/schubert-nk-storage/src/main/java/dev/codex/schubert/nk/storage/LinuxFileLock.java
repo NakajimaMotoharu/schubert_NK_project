@@ -111,14 +111,18 @@ public final class LinuxFileLock {
     // Intentional follow of the caller's retained kernel FD, never a replaceable raw pathname.
     int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
     if (descriptor < 0) throw unavailable();
-    try (var owned = new OwnedDescriptor(descriptor, close)) {
-      int result = flock.call(state, owned.descriptor, 2 | 4);
-      if (result != 0) {
-        if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11) return Optional.empty();
-        throw unavailable();
-      }
-      return Optional.of(operation.execute());
-    }
+    var owned = new OwnedDescriptor(descriptor, close);
+    return ResourceScope.use(
+        owned::close,
+        () -> {
+          int result = flock.call(state, owned.descriptor, 2 | 4);
+          if (result != 0) {
+            if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11)
+              return Optional.empty();
+            throw unavailable();
+          }
+          return Optional.of(operation.execute());
+        });
   }
 
   private static String heldPath(Path held) {

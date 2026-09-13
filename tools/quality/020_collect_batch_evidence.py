@@ -9,6 +9,17 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
+READER_CLASS = "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest"
+READER_METHODS = ("canonicalRootManifest", "nameAndFullHandleBinding", "directoryAndOwnerContracts", "manifestMetadataAndAcl", "rootAndChildRebinding", "manifestReplacementAndMutation", "sizeAndReadBoundaries", "canonicalByteRejection", "everyIoFailure", "closeFailurePrecedence", "timeAndInterrupt", "nullAndUnknownProviders", "borrowedRootAndClosed", "concurrentSerializedReaders", "readOnlyNativeAdapters", "independentTraceAndDownstream",)
+READER_TRACES = {"PT-BAT-241-reader.txt": b"20260913-000002-12345678-9abc-def0-8123-456789abcdef\n90000|90001\n26|67\n964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\n"}
+
+def validate_reader_suite(suite):
+    return validate_group(suite, READER_CLASS, READER_METHODS, 226)
+
+def validate_reader_traces(traces):
+    if traces != READER_TRACES:
+        raise ValueError("missing, extra or invalid independent root manifest reader trace")
+
 PAIR_METHODS = ("runningAndCommittedPair", "fullHandleAndMissingRows", "statusCounterAndTimeMatrix", "atomicPairAndReplay", "databaseGuardsAndLocks", "everyJdbcFault", "nullAndUnknownFailures", "concurrentBindings",)
 COMMIT_CLASS = "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest"
 COMMIT_METHODS = ("commitAndExistingReceipt", "rollbackBothSteps", "uncertainCommitReplay", "connectionContract", "everyBoundaryFailure", "interruptionAfterCommit", "unknownPrimaryAndCleanup", "independentConnections",)
@@ -225,7 +236,7 @@ def validate_retirement_traces(traces):
 def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
-                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, *OPS_CLASSES}
+                RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, READER_CLASS, *OPS_CLASSES}
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -311,7 +322,7 @@ def validate_reports(suites):
                   RETIREMENT_CLASS: validate_retirement_suite,
                   SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
                   STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
-                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite}
+                  ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite, READER_CLASS: validate_reader_suite}
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -337,7 +348,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 311:
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 327:
         raise SystemExit("matching verified full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
@@ -347,6 +358,16 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    reader_root = target / "backup-reader-traces"
+    reader_traces = {str(p.relative_to(reader_root)): p.read_bytes() for p in reader_root.rglob("*") if p.is_file()}
+    validate_reader_traces(reader_traces)
+    for folder, values in (("input/backup-reader", READER_TRACES), ("output/backup-reader", reader_traces)):
+        destination = evidence / folder
+        destination.mkdir(parents=True, exist_ok=True)
+        for name, value in values.items():
+            (destination / name).write_bytes(value)
+    audit = repo / "evidence/01_PT/017_NK-BAT-001/048_NK-BAT-001_root_manifest資源横展開.md"
+    shutil.copyfile(audit, evidence / "logs" / audit.name)
     pair_root = target / "backup-step-traces"
     pair_traces = {str(p.relative_to(pair_root)): p.read_bytes() for p in pair_root.rglob("*") if p.is_file()}
     validate_pair_traces(pair_traces)
@@ -492,6 +513,8 @@ def main():
     manifest["related"] += ["PG-D-165", "SSC-058", "BUG-182", "BUG-183", "YKT-143", "YKT-144"]
     manifest["related"] += ["PG-D-166", "SSC-059", "BUG-184", "BUG-185", "BUG-186", "YKT-145", "YKT-146"]
     manifest["related"] += ["PG-D-168", "SSC-061", "BUG-191", "BUG-192", "BUG-193", "BUG-194", "YKT-151", "YKT-152", "YKT-153"]
+    manifest["related"] += ["PG-D-169", "PG-D-170", "SSC-062", "SSC-063", "BUG-195", "YKT-154", "BUG-196", "YKT-155", "BUG-197", "YKT-156"]
+    manifest["rootManifestReaderOracle"] = "046 BAT226..241: canonical root-owned MANIFEST with full caller step identity; independent964-byte vector and reader result trace. Real held inode/positive-progress bounded4097-byte buffer, metadata/ACL/device/rebinding, all38 I/O and63 clock/interrupt positions, all close scopes/unknown compound and zeroed buffers. Root/backup UID admission remains synthetic; no backup creation or parent completion claim. BUG195 direct scopes repaired, broader YKT154 candidates remain open as enumerated in048."
     manifest["backupPairOracle"] = "041/043 BAT210..225: independent14-column two-row identity/counters/UTC microsecond ends; borrowed RW READ_COMMITTED and advisory owner. Both RUNNING or exact both SUCCESS only; atomic DB+CONFIG completion, rollback and uncertain commit replay without double update. Independently counted repository70/240/70=380 SQL fault positions and service246 positions/interrupt points; unknown primary/cleanup130 compound cases across Backup60+Step70 plus2 original counterexamples. Every owned JDBC resource closes, parent connection remains borrowed; null/Error/Runtime and concurrent isolated connections tested."
     manifest["limitations"] += " Backup pair completion requires caller-trusted root manifest, continuous OS/root/artifact verification. No manifest authentication, dump/tar/age creation, seven-generation retention or whole-parent completion."
     manifest["backupArtifactOracle"] = "038/BAT194..209: independent964byte manifest and public26/35/32byte inputs; actual returned manifest digest, canonical exact4 entries, held inode and final rebinding,0700/0600 owner/device/link/ACL/RW, streaming65535/65536/65537/196613byte fixed SHA256, all123 fallible IO positions and207 clock boundaries. Safe resource closure, read-only unchanged bytes/metadata, null/unknown exception ownership, 64serialized callers. BUG186 final-clock interrupt also rechecked by Log/Step/Inspection executor regression."

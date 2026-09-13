@@ -368,6 +368,66 @@ final class InspectorUnitProbeTest {
         }
         child.wiped();
       }
+    // BUG195/YKT154: repeated unknown throwable must not trigger TWR self-suppression.
+    for (String cleanup : List.of("stdout.close", "stdin.close", "stderr.close"))
+      for (Throwable primary :
+          List.of(
+              new IllegalStateException("public primary"),
+              new NullPointerException("public primary"),
+              new AssertionError("public primary"))) {
+        var repeated = child();
+        String point =
+            switch (cleanup) {
+              case "stdout.close" -> "stdout.read";
+              case "stdin.close" -> "get.stderr";
+              default -> "stdin.close";
+            };
+        repeated.hook =
+            (name, count) -> {
+              if (name.equals(point) || name.equals(cleanup)) {
+                if (primary instanceof RuntimeException failure) throw failure;
+                throw (Error) primary;
+              }
+            };
+        assertSame(primary, assertThrows(primary.getClass(), () -> reader(repeated).readState()));
+        assertEquals(1, repeated.counts.get(cleanup));
+        assertEquals(1, primary.getSuppressed().length);
+        var secondary = assertInstanceOf(StopGateException.class, primary.getSuppressed()[0]);
+        assertEquals(StopGateFailure.COMMAND_FAILURE, secondary.reason());
+        assertNull(secondary.getCause());
+        assertEquals(1, repeated.output.closed);
+        assertEquals(1, repeated.input.closed);
+        assertEquals(cleanup.equals("stdin.close") ? 0 : 1, repeated.error.closed);
+        repeated.wiped();
+      }
+    // I/O, timeout and interrupted known primaries cannot hide unknown/fatal cleanup.
+    for (int known = 0; known < 3; known++)
+      for (Throwable cleanup :
+          List.of(
+              new IllegalStateException("public cleanup"),
+              new NullPointerException("public cleanup"),
+              new AssertionError("public cleanup"))) {
+        var compound = child();
+        if (known == 0) compound.ioFailures.add("stdout.read");
+        if (known == 1) compound.completed = false;
+        if (known == 2) compound.waitInterrupt = true;
+        compound.hook =
+            (name, count) -> {
+              if (name.equals("stdout.close")) {
+                if (cleanup instanceof RuntimeException failure) throw failure;
+                throw (Error) cleanup;
+              }
+            };
+        try {
+          assertSame(cleanup, assertThrows(cleanup.getClass(), () -> reader(compound).readState()));
+          assertEquals(known == 2, Thread.currentThread().isInterrupted());
+          assertEquals(0, cleanup.getSuppressed().length);
+          compound.allClosed();
+          compound.wiped();
+        } finally {
+          Thread.interrupted();
+        }
+      }
     var child = child();
     child.ioFailures.addAll(Set.of("stdout.close", "stdin.close", "stderr.close"));
     failed(StopGateFailure.COMMAND_FAILURE, () -> reader(child).readState());

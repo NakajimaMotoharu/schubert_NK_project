@@ -15,7 +15,8 @@ def scenario_storage_suite(name):
     # PG-D-146: shared module is not shared Program ownership. OPS IDs live in collector022.
     return ".nk.storage." in name and name not in {
         "dev.codex.schubert.nk.storage.LinuxFileLockTest",
-        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest"}
+        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+        "dev.codex.schubert.nk.storage.ResourceScopeTest"}
 
 
 def main():
