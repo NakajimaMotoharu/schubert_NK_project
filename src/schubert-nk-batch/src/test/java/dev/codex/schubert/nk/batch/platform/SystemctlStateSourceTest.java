@@ -106,6 +106,61 @@ final class SystemctlStateSourceTest {
 
   @Test
   void closeFailures() {
+    // PG173/SSC063/BUG195/YKT154: independent 4 x 3 x 7 compound matrix.
+    for (String scope : List.of("output", "input", "error", "term"))
+      for (String primary :
+          List.of("runtime", "io", "timeout", "interrupt", "exit", "oversize", "success"))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("synthetic compound"),
+                new NullPointerException("synthetic compound"),
+                new AssertionError("synthetic compound"))) {
+          byte[] vector = new byte[primary.equals("oversize") ? 1025 : 3];
+          java.util.Arrays.fill(vector, (byte) 7);
+          var compound = new Child(vector);
+          compound.cleanupAlive = true;
+          int[] injected = {0};
+          Runnable cleanup =
+              () -> {
+                injected[0]++;
+                throwUnknown(unknown);
+              };
+          switch (scope) {
+            case "output" -> compound.output.ending = cleanup;
+            case "input" -> compound.input.ending = cleanup;
+            case "error" -> compound.error.ending = cleanup;
+            case "term" -> compound.ending = cleanup;
+            default -> throw new AssertionError(scope);
+          }
+          if (primary.equals("runtime")) compound.waiting = () -> throwUnknown(unknown);
+          if (primary.equals("io")) compound.output.failRead = true;
+          if (primary.equals("timeout")) compound.completed = false;
+          if (primary.equals("interrupt")) compound.interrupted = true;
+          if (primary.equals("exit")) compound.code = 1;
+          try {
+            Throwable actual =
+                assertThrows(unknown.getClass(), () -> source(compound).read(ApplicationUnit.API));
+            assertSame(unknown, actual);
+            assertEquals(primary.equals("runtime") ? 1 : 0, actual.getSuppressed().length);
+            if (primary.equals("runtime")) {
+              var fixed = assertInstanceOf(StopGateException.class, actual.getSuppressed()[0]);
+              assertEquals(StopGateFailure.COMMAND_FAILURE, fixed.reason());
+              assertNull(fixed.getCause());
+              assertEquals(0, fixed.getSuppressed().length);
+            }
+            assertEquals(1, injected[0]);
+            closed(compound);
+            assertEquals(1, compound.destroyed);
+            assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
+            assertEquals(
+                primary.equals("oversize") ? 1025 : primary.equals("success") ? 3 : 0,
+                compound.output.delivered.length);
+            assertArrayEquals(
+                new byte[compound.output.delivered.length], compound.output.delivered);
+          } finally {
+            Thread.interrupted();
+          }
+        }
     for (String stream : List.of("output", "input", "error"))
       for (String primary : List.of("success", "exit", "timeout", "oversize", "io", "interrupt")) {
         var child = new Child(new byte[primary.equals("oversize") ? 1025 : 0]);
@@ -237,6 +292,11 @@ final class SystemctlStateSourceTest {
                     .read(ApplicationUnit.API)));
   }
 
+  private static void throwUnknown(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
   private static SystemctlStateSource source(Child child) {
     return new SystemctlStateSource(command -> child);
   }
@@ -259,6 +319,8 @@ final class SystemctlStateSourceTest {
     final ReadStream output, error = new ReadStream(new byte[0]);
     final WriteStream input = new WriteStream();
     boolean completed = true, interrupted, alive = true;
+    boolean cleanupAlive;
+    Runnable waiting = () -> {}, ending = () -> {};
     int code, destroyed, waits;
     RuntimeException runtime;
     String getFailure = "", nullGetter = "";
@@ -300,6 +362,7 @@ final class SystemctlStateSourceTest {
       waits++;
       assertEquals(5, timeout);
       assertEquals(TimeUnit.SECONDS, unit);
+      waiting.run();
       if (runtime != null) throw runtime;
       if (interrupted) throw new InterruptedException("SECRET_CANARY");
       alive = !completed;
@@ -314,13 +377,14 @@ final class SystemctlStateSourceTest {
 
     @Override
     public boolean isAlive() {
-      return alive;
+      return alive || cleanupAlive;
     }
 
     @Override
     public void destroy() {
       destroyed++;
       alive = false;
+      ending.run();
     }
 
     @Override
@@ -333,6 +397,8 @@ final class SystemctlStateSourceTest {
     final ByteArrayInputStream bytes;
     boolean failRead, failClose;
     int closed, reads, maximumRequested;
+    byte[] delivered = new byte[0];
+    Runnable ending = () -> {};
 
     ReadStream(byte[] bytes) {
       this.bytes = new ByteArrayInputStream(bytes);
@@ -349,12 +415,14 @@ final class SystemctlStateSourceTest {
       maximumRequested = length;
       reads++;
       if (failRead) throw new IOException("SECRET_CANARY");
-      return bytes.readNBytes(length);
+      delivered = bytes.readNBytes(length);
+      return delivered;
     }
 
     @Override
     public void close() throws IOException {
       closed++;
+      ending.run();
       if (failClose) throw new IOException("SECRET_CANARY");
     }
   }
@@ -362,6 +430,7 @@ final class SystemctlStateSourceTest {
   private static final class WriteStream extends OutputStream {
     boolean failClose;
     int closed;
+    Runnable ending = () -> {};
 
     @Override
     public void write(int value) {
@@ -371,6 +440,7 @@ final class SystemctlStateSourceTest {
     @Override
     public void close() throws IOException {
       closed++;
+      ending.run();
       if (failClose) throw new IOException("SECRET_CANARY");
     }
   }

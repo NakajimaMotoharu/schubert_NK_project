@@ -136,19 +136,19 @@ public final class InspectorUnitProbe {
       try {
         var owned =
             new QueryProcess(Objects.requireNonNull(start.execute(command), "query process"));
-        scope(
+        ProcessResourceScope.use(
             owned::close,
             () -> {
               var output = new SafeStream<>(owned.process.getInputStream());
-              scope(
+              ProcessResourceScope.use(
                   output::finish,
                   () -> {
                     var input = new SafeStream<>(owned.process.getOutputStream());
-                    scope(
+                    ProcessResourceScope.use(
                         input::finish,
                         () -> {
                           var error = new SafeStream<>(owned.process.getErrorStream());
-                          scope(
+                          ProcessResourceScope.use(
                               error::finish,
                               () -> {
                                 // Neither query accepts stdin. Signal EOF and close discarded
@@ -186,35 +186,6 @@ public final class InspectorUnitProbe {
         throw failure;
       }
     }
-  }
-
-  @FunctionalInterface
-  private interface QueryWork {
-    void run() throws IOException, InterruptedException;
-  }
-
-  // SSC063/BUG195: fixed stop diagnostics, not raw suppressed process/stream failures.
-  private static void scope(Runnable release, QueryWork work)
-      throws IOException, InterruptedException {
-    try {
-      work.run();
-    } catch (IOException | InterruptedException | RuntimeException | Error primary) {
-      try {
-        release.run();
-      } catch (RuntimeException | Error cleanup) {
-        if ((primary instanceof IOException
-                || primary instanceof InterruptedException
-                || primary instanceof StopGateException)
-            && !(cleanup instanceof StopGateException)) {
-          // Preserve cancellation even when an unknown cleanup must take precedence.
-          if (primary instanceof InterruptedException) Thread.currentThread().interrupt();
-          throw cleanup;
-        }
-        primary.addSuppressed(new StopGateException(StopGateFailure.COMMAND_FAILURE));
-      }
-      throw primary;
-    }
-    release.run();
   }
 
   private static final class SafeStream<T extends Closeable> {

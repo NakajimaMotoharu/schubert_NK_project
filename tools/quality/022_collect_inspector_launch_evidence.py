@@ -62,7 +62,7 @@ PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
-    ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource"))
+    ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource", "ProcessResourceScope"))
 ENV_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment"
 CFG_SUBJECT = "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
 EFILE_SUBJECT = "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader"
@@ -71,7 +71,7 @@ PUBLISH_SUBJECTS = tuple("dev/codex/schubert/nk/batch/file/" + name for name in
 NAMESPACE_SUBJECTS = ("dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver",
                       "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles")
 UNIT_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
-    ("InspectorUnitSnapshot", "InspectorUnitProbe"))
+    ("InspectorUnitSnapshot", "InspectorUnitProbe", "ProcessResourceScope"))
 UNIT_TRACES = {
     "PT-OPS-UNIT-001-state.txt": b"quiescent=true\nreceipt=10\nsameInvocationReceipt=none\n",
     "PT-OPS-UNIT-010-receipt-0.txt": b"receipt=0\ncommands=3\n",

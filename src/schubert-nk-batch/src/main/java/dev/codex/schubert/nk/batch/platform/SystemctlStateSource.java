@@ -1,16 +1,19 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import java.io.Closeable;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed trusted OS show command only; bounded wait/projection and owned stdio. No shell/service
  * mutation, inherited credentials, force kill or raw diagnostics. NK-OPS-001; OPS-009; UI251;
- * SS341/343; PG-D-148; PT-OPS-STOP-009..016.
+ * SS341/343; PG-D-148/173, SSC063/BUG195/YKT154; PT-OPS-STOP-009..016; 017051.
  */
 @NullMarked
 final class SystemctlStateSource implements ApplicationStopGate.StateSource {
@@ -49,33 +52,66 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
     } catch (IOException failure) {
       throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
     }
+    byte[][] bytes = {new byte[0]};
     try {
-      // BUG-157: acquire into ownership before any following getter can fail.
-      try (var output = process.getInputStream();
-          var input = process.getOutputStream();
-          var error = process.getErrorStream()) {
-        Objects.requireNonNull(output, "systemctl stdout");
-        Objects.requireNonNull(input, "systemctl stdin");
-        Objects.requireNonNull(error, "systemctl stderr");
-        if (!process.waitFor(5, TimeUnit.SECONDS))
-          throw new StopGateException(StopGateFailure.TIMEOUT);
-        if (process.exitValue() != 0) throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-        // Fixed trusted systemctl projection cannot spawn arbitrary writer descendants. An
-        // oversized output filling the pipe cannot pass wait; timeout requests TERM below.
-        byte[] bytes = output.readNBytes(1025);
-        if (bytes.length > 1024) throw new StopGateException(StopGateFailure.MALFORMED_STATE);
-        return bytes;
-      }
+      ProcessResourceScope.use(
+          () -> {
+            if (process.isAlive()) process.destroy();
+          },
+          () -> {
+            // Preserve all-getters-before-null admission and each already-owned stream.
+            var output = process.getInputStream();
+            ProcessResourceScope.use(
+                () -> finish(output),
+                () -> {
+                  var input = process.getOutputStream();
+                  ProcessResourceScope.use(
+                      () -> finish(input),
+                      () -> {
+                        var error = process.getErrorStream();
+                        ProcessResourceScope.use(
+                            () -> finish(error),
+                            () -> {
+                              Objects.requireNonNull(output, "systemctl stdout");
+                              Objects.requireNonNull(input, "systemctl stdin");
+                              Objects.requireNonNull(error, "systemctl stderr");
+                              if (!process.waitFor(5, TimeUnit.SECONDS))
+                                throw new StopGateException(StopGateFailure.TIMEOUT);
+                              if (process.exitValue() != 0)
+                                throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+                              bytes[0] =
+                                  Objects.requireNonNull(
+                                      output.readNBytes(1025), "systemctl output");
+                              if (bytes[0].length > 1024)
+                                throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+                            });
+                      });
+                });
+          });
+      return bytes[0];
     } catch (StopGateException failure) {
-      // BUG-143/YKT-113: TWR may have attached raw close diagnostics to our fixed exception.
+      Arrays.fill(bytes[0], (byte) 0);
       throw new StopGateException(failure.reason());
     } catch (InterruptedException failure) {
+      Arrays.fill(bytes[0], (byte) 0);
       Thread.currentThread().interrupt();
       throw new StopGateException(StopGateFailure.INTERRUPTED);
     } catch (IOException failure) {
+      Arrays.fill(bytes[0], (byte) 0);
       throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-    } finally {
-      if (process.isAlive()) process.destroy(); // Only the show child, never SIGKILL or a service.
+    } catch (RuntimeException | Error failure) {
+      Arrays.fill(bytes[0], (byte) 0);
+      throw failure;
+    }
+  }
+
+  // Nullable getter is admitted only after acquisition of all stdio, matching STOP016.
+  private static void finish(@Nullable Closeable resource) {
+    if (resource == null) return;
+    try {
+      resource.close();
+    } catch (IOException failure) {
+      throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
     }
   }
 
