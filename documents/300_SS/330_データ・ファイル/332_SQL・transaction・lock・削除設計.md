@@ -1,5 +1,7 @@
 # SQL・transaction・lock・削除設計
 
+SSC063/PG182（修正前）: BackupStepRepository.inspectのpair Statement/ResultSet2scopeへPG179のdirect finally close/SQLとunknownの例外順位を適用する。元のSQL-only catchとpresentのNULL固定拒否、14列/fullhandle/時刻/2状態一致/前後guard/borrowed transactionは変更しない。017066・BAT216/既存BAT210～225で68複合とpair/commit/replayの元期待を再確認する。BackupStep自体のprovider IAEは従来も未知であり維持、completeから呼ぶBatchRun.finishは別の横展開対象。
+
 SSC063/PG181（修正前）: CleanupStepRepository.executeの2 owned JDBC scopeへPG179のdirect finally close/例外順位を適用する。counts/nullable累積/complete/reasonのJDBC取得とpure値構築を分離し、CleanupCounts/Reason/CleanupStepChunkの検査IAEだけをSQL不正に変換する。provider未知IAEは同一性を保持する。元presentによるNULL resource/NULL列の固定SQL拒否、7kind・limit・run guard・SQL/bind順・borrowed transactionは維持する。017064・BAT168と既存BAT162～169で68複合/独立rollback後条件を検証し、未確認Repositoryは未完了に保つ。
 
 PG180のJDBC resource null契約: CleanupRepositoryのprepare/executeQuery結果はJDBCのnonnull resource契約を取得境界のObjects.requireNonNullで確立する。違反時は固定messageのNPEとして非正常拒否し、SQL column NULLの固定DB不正とは区別する。NPE正常化、未取得resourceのclose、borrowed Connectionの所有移転を行わない。062の4 null反例で既存の非正常性と解放責務を確認する。
