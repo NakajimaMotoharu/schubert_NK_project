@@ -57,6 +57,21 @@ class EvidenceSetTest(unittest.TestCase):
         with self.assertRaises(ValueError): screen.validate_suite(wrong, True)
         with self.assertRaises(ValueError): screen.validate_suite(suite)
 
+    def test_search_results_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web206LiteralRowsAndAudio", "web207PageBounds", "web208PageRecordMismatch",
+                 "web209AudioAndLineInvariants", "web210NullAndOwnership", "web211ClosedBeansAndRedaction",
+                 "web212SyntheticEscaping", "web213ConcurrentProjection")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest#" + name
+                   for i, name in enumerate(names, 206)}
+        web.validate_search_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_search_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_search_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_search_inventory(dict(mapping, unknown="unknown"))
+
     def test_detail_web_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web194HeaderAndNavigation", "web195GroupingAndAudio", "web196EmptyAndBounds",
