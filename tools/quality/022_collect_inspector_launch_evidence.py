@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
@@ -69,12 +70,18 @@ PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.database.PostgresDeploymentTest", 1,
     ("literalConfiguration", "nativeConfiguration", "literalHba", "nativeHba", "roleTimeouts",
      "invalidConfiguration", "invalidHba", "isolationAndEvidence")),)
-POSTGRES_TRACES = {"PT-OPS-PGCFG008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
+POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
 def validate_postgres_traces(traces):
     if traces != POSTGRES_TRACES:
         raise ValueError("missing, extra or invalid PostgreSQL deployment trace")
+
+
+def validate_postgres_ids(source):
+    ids = re.findall(r'@DisplayName\(\s*"(PT-OPS-PGCFG-\d{3})\b', source)
+    if len(ids) != 8 or set(ids) != {f"PT-OPS-PGCFG-{i:03}" for i in range(1, 9)}:
+        raise ValueError("missing, duplicate or inconsistent PostgreSQL source Test IDs")
 
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
@@ -239,6 +246,7 @@ def main():
     if args.deployment:
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
+        validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
         sources += [repo / "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
                     repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java"]
         postgres_root = target / "postgres-deployment-traces"
@@ -344,7 +352,7 @@ def main():
     if args.deployment:
         manifest["related"] = manifest.get("related", []) + ["PG-D-176", "SSC-065", "PG-D-186", "SSC-068"]
         manifest["related"] += ["PG-D-187", "SSC-069", "BUG-208", "BUG-209", "YKT-164", "YKT-165"]
-        manifest["postgresConfigurationOracle"] = "033/034 PGCFG001..008: independent32-directive map and native PostgreSQL18 -C normalized units/enum/string; exact16 ordered HBA rules and native pg_hba_file_rules with finally restoration/no reload; six roles18 timeouts plus inspector2 unchanged, invalid configuration/HBA canaries. Declarative coverage is complete inventory, not Java percentage. Isolated fixture only, no host deployment or universal primary error MESSAGE redaction claim."
+        manifest["postgresConfigurationOracle"] = "033/034 PGCFG-001..008: independent32-directive map and native PostgreSQL18 -C normalized units/enum/string; exact16 ordered HBA rules and native pg_hba_file_rules with finally restoration/no reload; six roles18 timeouts plus inspector2 unchanged, invalid configuration/HBA canaries. Declarative coverage is complete inventory, not Java percentage. Isolated fixture only, no host deployment or universal primary error MESSAGE redaction claim."
         manifest["privateChildOracle"] = "031/032 CDIR001..008: new-only mkdirat0700, retained NOFOLLOW child, child then parent sync before FD ownership transfer; actual mode/inode/owner and empty namespace, collision preservation, null/closed/native arguments, all four native body fault positions and40 compound cleanup combinations, unsupported default no mutation, retained parent and eight contenders/one winner. Borrowed parent, partial preservation, no chmod/chown/repair. Caller authenticates backup owner/namespace under exclusion; not archive generation or backup success."
         manifest["directoryPublicationOracle"] = "029/PT-OPS-PDIR001..008: retained parent, existing NOFOLLOW directory, same-parent RENAME_NOREPLACE then sync/one child close; literal bytes/inode, all4 native failure positions, compound unknown identity, uncertain final preservation, original parent capability and eight concurrent contenders. Caller exclusion/backup authenticity remain separate."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)} for p in sorted(evidence.rglob("*"))

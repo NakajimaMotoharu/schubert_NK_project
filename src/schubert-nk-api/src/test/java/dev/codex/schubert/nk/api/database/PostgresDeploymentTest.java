@@ -79,14 +79,14 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG001 independent complete configuration inventory")
+  @DisplayName("PT-OPS-PGCFG-001 independent complete configuration inventory")
   void literalConfiguration() throws Exception {
     assertEquals(settings(EXPECTED), settings(configuration()));
     assertEquals(32, settings(EXPECTED).size());
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG002 PostgreSQL native configuration parser")
+  @DisplayName("PT-OPS-PGCFG-002 PostgreSQL native configuration parser")
   void nativeConfiguration() throws Exception {
     Map<String, String> expected = new LinkedHashMap<>(settings(EXPECTED));
     expected.put("shared_buffers", "262144");
@@ -109,14 +109,14 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG003 exact ordered least privilege HBA rules")
+  @DisplayName("PT-OPS-PGCFG-003 exact ordered least privilege HBA rules")
   void literalHba() throws Exception {
     assertEquals(expectedHba(), lines(hba()));
     assertEquals(16, expectedHba().size());
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG004 native HBA catalog with restoration")
+  @DisplayName("PT-OPS-PGCFG-004 native HBA catalog with restoration")
   void nativeHba() throws Exception {
     List<String> expected = new ArrayList<>();
     for (String rule : expectedHba()) {
@@ -139,7 +139,7 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG005 independent role timeout catalog BUG208 YKT164")
+  @DisplayName("PT-OPS-PGCFG-005 independent role timeout catalog BUG208 YKT164")
   void roleTimeouts() throws Exception {
     Map<String, List<String>> expected =
         Map.of(
@@ -179,7 +179,7 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG006 native invalid settings and independent policy canaries")
+  @DisplayName("PT-OPS-PGCFG-006 native invalid settings and independent policy canaries")
   void invalidConfiguration() throws Exception {
     for (String invalid : List.of("nk_unknown_setting=1", "shared_buffers='unterminated")) {
       Path file = Files.createTempFile(root, "bad-", ".conf");
@@ -199,7 +199,7 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG007 invalid HBA and policy canaries with restoration")
+  @DisplayName("PT-OPS-PGCFG-007 invalid HBA and policy canaries with restoration")
   void invalidHba() throws Exception {
     assertFalse(inspectHba("host all all 127.0.0.1/32 unknown_auth\n", true).isEmpty());
     for (String changed :
@@ -213,7 +213,7 @@ final class PostgresDeploymentTest {
   }
 
   @Test
-  @DisplayName("PT-OPS-PGCFG008 isolated fixture and public evidence")
+  @DisplayName("PT-OPS-PGCFG-008 isolated fixture and public evidence")
   void isolationAndEvidence() throws Exception {
     assertTrue(root.startsWith(Path.of("target").toAbsolutePath()));
     assertEquals(originalHba, Files.readString(root.resolve("data/pg_hba.conf")));
@@ -223,7 +223,7 @@ final class PostgresDeploymentTest {
     Path trace = Path.of("target/postgres-deployment-traces");
     Files.createDirectories(trace);
     Files.writeString(
-        trace.resolve("PT-OPS-PGCFG008.txt"),
+        trace.resolve("PT-OPS-PGCFG-008.txt"),
         "isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n");
   }
 

@@ -43,7 +43,7 @@ ALTER ROLE schubert_inbox_inspector SET search_path = schubert, pg_catalog;
 ALTER ROLE schubert_inbox_inspector SET lock_timeout = '5s';
 ALTER ROLE schubert_inbox_inspector SET statement_timeout = '30s';
 
--- BUG208/YKT164; RD PER, UI212/253, SS342 section6.2; PT-OPS-PGCFG005.
+-- BUG208/YKT164; RD PER, UI212/253, SS342 section6.2; PT-OPS-PGCFG-005.
 ALTER ROLE schubert_app SET statement_timeout = '1500ms';
 ALTER ROLE schubert_app SET lock_timeout = '500ms';
 ALTER ROLE schubert_app SET idle_in_transaction_session_timeout = '15s';

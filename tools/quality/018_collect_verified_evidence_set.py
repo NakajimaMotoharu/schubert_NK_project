@@ -17,6 +17,7 @@ BASE = (
     ("010_collect_admin_evidence.py", "010_NK-ADM-001"),
     ("015_collect_web_evidence.py", "015_NK-WEB-001"),
     ("020_collect_batch_evidence.py", "017_NK-BAT-001"),
+    ("027_collect_question_receipt_evidence.py", "011_NK-QST-001"),
 )
 NESTED = (
     ("", "inbox-inspection"), ("--authentication", "authentication-inspection"),
@@ -84,7 +85,7 @@ def validate_scope(root, scope, run, commit, branch):
     for path, expected in checksums.items():
         if digest(local_file(directory, path)) != expected:
             raise ValueError("checksum mismatch")
-    if scope.startswith(("004_NK-DAT-001/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
+    if scope.startswith(("004_NK-DAT-001/", "011_NK-QST-001/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
         linked = directory / manifest["fullReactorManifest"]
         if (linked.resolve() != (root / ROOT_MANIFEST).resolve()
                 or digest(linked) != manifest["fullReactorManifestSha256"]):
