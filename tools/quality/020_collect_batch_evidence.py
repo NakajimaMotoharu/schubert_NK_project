@@ -409,7 +409,7 @@ def main():
         destination.mkdir(parents=True, exist_ok=True)
         for name, value in values.items():
             (destination / name).write_bytes(value)
-    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md", "053_NK-BAT-001_root_manifest公開単体テスト仕様書.md", "055_NK-BAT-001_bundle確定単体テスト仕様書.md", "057_NK-BAT-001_bundle元inode横展開.md"):
+    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md", "053_NK-BAT-001_root_manifest公開単体テスト仕様書.md", "055_NK-BAT-001_bundle確定単体テスト仕様書.md", "057_NK-BAT-001_bundle元inode横展開.md", "058_NK-BAT-001_Log_SQL資源横展開仕様.md", "059_NK-BAT-001_Log_SQL資源横展開結果.md"):
         audit = repo / "evidence/01_PT/017_NK-BAT-001" / audit_name
         shutil.copyfile(audit, evidence / "logs" / audit.name)
     pair_root = target / "backup-step-traces"
@@ -571,6 +571,8 @@ def main():
     manifest["sourceFiles"].append({"path": "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql", "sha256": hashlib.sha256((repo / "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql").read_bytes()).hexdigest()})
     manifest["related"] += ["PG-D-175", "SSC-064", "BUG-199"]
     manifest["related"] += ["PG-D-176", "PG-D-177", "SSC-065", "SSC-066", "BUG-200", "BUG-201", "BUG-202", "BUG-203", "BUG-204", "YKT-158", "YKT-159", "YKT-160"]
+    manifest["related"] += ["PG-D-178", "BUG-205", "YKT-161"]
+    manifest["logResourceOracle"] = "058/059 BAT026: five owned SQL/lease release boundaries,225 compound and close-only cases; known SQL/repository/stop reasons versus unknown runtime/NPE/fatal, same throwable identity, fixed secondary, exact acquired-resource close counts, borrowed connection preservation and independent lock reacquisition after caller disposal. Direct JDBC finally close, no added static suppression. Transaction recovery and other repository scopes are separate."
     manifest["backupBundleOracle"] = "055/057 BAT258..273: trusted pending four-file byte/inode/hash verification, held-file force and close, child sync, no-replace directory publication/parent sync, final root reader and full artifact verification. Immutable original directory and four-file identity proof retained across phases rejects same-byte inode replacement (BUG204/YKT160). Independent964-byte manifest and26/35/32 archive vectors;301 I/O observations,514 shared-clock observations without phase budget reset. Synthetic root admission; no actual archive generation, DB success, retention or whole-parent claim."
     manifest["rootManifestPublicationOracle"] = "053 BAT242..257: new-only private0600 held inode, independent964-byte golden, write/force/close/readback/no-replace/directory sync/rebinding; 79 IO and109 clock observations. Synthetic root UID over real Linux FD, not archive generation, final bundle rename, DB success or retention."
     manifest["parentStepJdbcFaultPositions"] = 399

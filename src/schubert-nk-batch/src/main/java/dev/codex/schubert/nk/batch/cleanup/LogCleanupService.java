@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.LongSupplier;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * NK-BAT-001; OPS-009/DAT-009; UI251; SS341§3/7.2; SSC-051; PG-D-138; PT-BAT-018..029. Borrows the
@@ -33,18 +34,21 @@ public final class LogCleanupService {
     try {
       if (!connection.getAutoCommit())
         throw new IllegalArgumentException("parent connection must be between transactions");
-      try (var lease = new SessionLease(connection)) {
-        lease.acquire();
-        var initial = transaction(connection, run, Optional.empty());
-        check(start);
-        var progress = initial.progress();
-        while (!progress.complete()) {
-          check(start);
-          progress = transaction(connection, run, Optional.of(progress.counts())).progress();
-          check(start);
-        }
-        return new LogCleanupSummary(run, initial.before(), progress);
-      }
+      var lease = new SessionLease(connection);
+      return owned(
+          lease::close,
+          () -> {
+            lease.acquire();
+            var initial = transaction(connection, run, Optional.empty());
+            check(start);
+            var progress = initial.progress();
+            while (!progress.complete()) {
+              check(start);
+              progress = transaction(connection, run, Optional.of(progress.counts())).progress();
+              check(start);
+            }
+            return new LogCleanupSummary(run, initial.before(), progress);
+          });
     } catch (CleanupStoppedException failure) {
       // BUG-145/YKT-113: resource closure can append raw JDBC suppressed diagnostics.
       throw new CleanupStoppedException(failure.reason());
@@ -65,6 +69,47 @@ public final class LogCleanupService {
   }
 
   private record ChunkProgress(CleanupCounts before, LogCleanupProgress progress) {}
+
+  @FunctionalInterface
+  private interface SqlRelease {
+    void close() throws SQLException;
+  }
+
+  @FunctionalInterface
+  private interface SqlAction<T extends @Nullable Object> {
+    T run() throws SQLException;
+  }
+
+  /** SSC063/PG178/BAT026,029: one release, fixed secondary, never TWR self-suppression. */
+  private static <T extends @Nullable Object> T owned(SqlRelease release, SqlAction<T> action)
+      throws SQLException {
+    T result;
+    try {
+      result = action.run();
+    } catch (SQLException | RuntimeException | Error primary) {
+      try {
+        release.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (replace(primary, secondary)) throw secondary;
+      }
+      throw primary;
+    }
+    release.close();
+    return result;
+  }
+
+  private static boolean replace(@Nullable Throwable primary, Throwable secondary) {
+    if (primary == null || (known(primary) && !known(secondary))) return true;
+    if (!known(primary))
+      primary.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
+    return false;
+  }
+
+  private static boolean known(Throwable failure) {
+    return failure instanceof SQLException
+        || failure instanceof BatchRepositoryException
+        || failure instanceof CleanupStoppedException;
+  }
 
   private static ChunkProgress transaction(
       Connection c, BatchRun run, Optional<CleanupCounts> expectedBefore) throws SQLException {
@@ -114,15 +159,37 @@ public final class LogCleanupService {
     }
 
     void acquire() throws SQLException {
-      try (var statement =
-              connection.prepareStatement("select pg_try_advisory_lock(71419602) as held");
-          var row = statement.executeQuery()) {
-        if (!row.next()) throw new SQLDataException("lock result is missing");
-        Boolean held = row.getObject("held", Boolean.class);
-        if (held == null) throw new SQLDataException("lock result is missing");
-        acquired = held;
-        if (row.next()) throw new SQLDataException("lock result is ambiguous");
-        if (!acquired) throw new CleanupStoppedException(CleanupStopReason.LOCK_BUSY);
+      var statement = connection.prepareStatement("select pg_try_advisory_lock(71419602) as held");
+      @Nullable Throwable statementFailure = null;
+      try {
+        var row = statement.executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
+          if (!row.next()) throw new SQLDataException("lock result is missing");
+          Boolean held = row.getObject("held", Boolean.class);
+          if (held == null) throw new SQLDataException("lock result is missing");
+          acquired = held;
+          if (row.next()) throw new SQLDataException("lock result is ambiguous");
+          if (!acquired) throw new CleanupStoppedException(CleanupStopReason.LOCK_BUSY);
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          try {
+            row.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (replace(rowFailure, secondary)) throw secondary;
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        try {
+          statement.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          if (replace(statementFailure, secondary)) throw secondary;
+        }
       }
     }
 
@@ -132,12 +199,35 @@ public final class LogCleanupService {
       try {
         if (!connection.getAutoCommit())
           throw new SQLDataException("failed transaction requires connection disposal");
-        try (var statement =
-                connection.prepareStatement("select pg_advisory_unlock(71419602) as released");
-            var row = statement.executeQuery()) {
-          if (!row.next()
-              || !Boolean.TRUE.equals(row.getObject("released", Boolean.class))
-              || row.next()) throw new SQLDataException("lock release is unconfirmed");
+        var statement =
+            connection.prepareStatement("select pg_advisory_unlock(71419602) as released");
+        @Nullable Throwable statementFailure = null;
+        try {
+          var row = statement.executeQuery();
+          @Nullable Throwable rowFailure = null;
+          try {
+            if (!row.next()
+                || !Boolean.TRUE.equals(row.getObject("released", Boolean.class))
+                || row.next()) throw new SQLDataException("lock release is unconfirmed");
+          } catch (SQLException | RuntimeException | Error failure) {
+            rowFailure = failure;
+            throw failure;
+          } finally {
+            try {
+              row.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (replace(rowFailure, secondary)) throw secondary;
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          statementFailure = failure;
+          throw failure;
+        } finally {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (replace(statementFailure, secondary)) throw secondary;
+          }
         }
       } catch (SQLException failure) {
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);

@@ -16,6 +16,10 @@ LogCleanupService.executeのSessionLease、SessionLease.acquire/closeの各State
 
 fixtureの同一Throwableは各反例で新しく生成し、前反例のsuppressedを流用しない。未知3型はIllegalStateException/NullPointerException/AssertionError、実inputに秘密情報を使わない。null拒否・empty/hold10000/期限・再開・実lock競合・並行は既存018～029を全て再実行する。Resource helperをreflectionで直接呼ぶ試験はしない。
 
+実装matrixは5境界×（SQL/Repository/TIME_LIMIT/IllegalState/NPE/AssertionErrorの異なる6×6組＋同じ未知3組＋body成功/closeだけ6組）=225。SessionLease bodyの時計portだけはchecked SQLを投げられないため、0番は既知DATABASE_FAILURE停止として注入する。各反例で取得済みStatement/ResultSetの正確なclose回数、未知identityまたは独立reason表、固定suppressed、caller Connection非close、破棄後に別接続からlock再取得可能、Log0行不変を確認する。
+
+BUG205/YKT161: JDBC4scopeは各finallyで直接closeを行い、静的解析へ所有解消を明示する。例外優先順位だけprivate helperへ分離する。新たな解析抑止/ownership免除/coverage除外を追加しない。外側SessionLeaseは従来の一所有callback境界を維持する。
+
 ## 2. 境界・実行・完了条件
 
 対象sourceは次の修正commitへ固定する。まず修正前BAT026/029の反例を実行し期待identityとの差を保存する。Sourceは正式02認定までは変更せず、他Mavenとの同時実行もしない。選択commandは既定JAVA_HOME/M2で `./mvnw -o --no-transfer-progress -pl src/schubert-nk-batch -am -Dtest=ResourceScopeTest,LogCleanupServiceTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check`、明示 `-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository` を使用する。正式はclean verify/全collector/同run source・hash・46負canary。後続059へ日時/OS/tool/branch/commit/command/exit/入力期待実際/coverage/証跡hashを記録する。

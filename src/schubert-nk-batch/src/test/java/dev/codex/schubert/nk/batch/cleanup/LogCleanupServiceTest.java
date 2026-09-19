@@ -281,6 +281,7 @@ final class LogCleanupServiceTest {
 
   @Test
   void restorationAndUnlockFailures() throws Exception {
+    resourceCompounds();
     // BUG-145/YKT-113: a primary LOCK_BUSY must not expose suppressed raw JDBC close errors.
     for (var faults :
         List.of(
@@ -571,6 +572,109 @@ final class LogCleanupServiceTest {
 
   private static Connection batch() throws SQLException {
     return db.open("schubert_batch");
+  }
+
+  /** 5 owned boundaries x (36 different + 3 same unknown + 6 close-only) = 225 cases. */
+  private void resourceCompounds() throws Exception {
+    for (var pair :
+        List.of(
+            List.of("lock.next", "lock.resultClose"),
+            List.of("lock.executeQuery", "lock.statementClose"),
+            List.of("unlock.next", "unlock.resultClose"),
+            List.of("unlock.executeQuery", "unlock.statementClose"),
+            List.of("clock", "unlock.prepareStatement"))) {
+      for (int first = 0; first < 6; first++) {
+        for (int second = 0; second < 6; second++) resourceCompound(pair, first, second, false);
+        if (first >= 3) resourceCompound(pair, first, first, true);
+      }
+      for (int second = 0; second < 6; second++) resourceCompound(pair, -1, second, false);
+    }
+  }
+
+  private void resourceCompound(List<String> pair, int first, int second, boolean same)
+      throws Exception {
+    reset();
+    var probe = new ServiceJdbcProbe();
+    String body = pair.get(0), close = pair.get(1);
+    boolean clockBody = body.equals("clock");
+    Throwable primary = first < 0 ? null : resourceFault(first, clockBody);
+    Throwable secondary = same ? primary : resourceFault(second, false);
+    if (primary != null && !clockBody) probe.thrown.put(body, primary);
+    probe.thrown.put(close, secondary);
+    var ticks = new AtomicInteger();
+    var clockThrows = new AtomicInteger();
+    LongSupplier clock =
+        () -> {
+          if (ticks.incrementAndGet() == 3 && clockBody && primary != null) {
+            clockThrows.incrementAndGet();
+            if (primary instanceof RuntimeException runtime) throw runtime;
+            throw (Error) primary;
+          }
+          return 0;
+        };
+    try (var c = batch()) {
+      Throwable actual =
+          assertThrows(
+              Throwable.class, () -> new LogCleanupService(clock).execute(probe.wrap(c), RUN));
+      // Independent table: 0 SQL,1 repository,2 TIME_LIMIT are known;3..5 are unknown.
+      Throwable identity = first >= 3 ? primary : second >= 3 ? secondary : null;
+      if (identity != null) {
+        assertSame(identity, actual, pair + " " + first + "/" + second);
+        assertEquals(first >= 3 ? 1 : 0, actual.getSuppressed().length);
+        for (var suppressed : actual.getSuppressed()) {
+          var fixed = assertInstanceOf(CleanupStoppedException.class, suppressed);
+          assertEquals(CleanupStopReason.DATABASE_FAILURE, fixed.reason());
+          assertEquals("cleanup did not complete", fixed.getMessage());
+          assertNull(fixed.getCause());
+          assertEquals(0, fixed.getSuppressed().length);
+        }
+      } else {
+        var fixed = assertInstanceOf(CleanupStoppedException.class, actual);
+        int retained = first < 0 ? second : first;
+        assertEquals(
+            retained == 2 ? CleanupStopReason.TIME_LIMIT : CleanupStopReason.DATABASE_FAILURE,
+            fixed.reason());
+        assertEquals("cleanup did not complete", fixed.getMessage());
+        assertNull(fixed.getCause());
+        assertEquals(0, fixed.getSuppressed().length);
+      }
+      assertEquals(first < 0 || clockBody ? 1 : 2, probe.failures);
+      assertEquals(clockBody && first >= 0 ? 1 : 0, clockThrows.get());
+      boolean acquireFailure = first >= 0 && body.startsWith("lock.");
+      assertEquals(
+          first >= 0 && body.equals("lock.executeQuery") ? 0 : 1,
+          probe.seen.getOrDefault("lock.resultClose", 0));
+      assertEquals(1, probe.seen.getOrDefault("lock.statementClose", 0));
+      assertEquals(
+          acquireFailure || clockBody || (first >= 0 && body.equals("unlock.executeQuery")) ? 0 : 1,
+          probe.seen.getOrDefault("unlock.resultClose", 0));
+      assertEquals(
+          acquireFailure || clockBody ? 0 : 1, probe.seen.getOrDefault("unlock.statementClose", 0));
+      assertEquals(0, probe.closes);
+      assertTrue(c.getAutoCommit());
+      assertFalse(c.isClosed());
+    }
+    // The failed borrowed connection has now been disposed; no session lock remains.
+    try (var observer = db.admin()) {
+      assertEquals("true", scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals("true", scalar(observer, "select pg_advisory_unlock(71419602)::text"));
+    }
+    assertEquals("0", countLogs());
+  }
+
+  private static Throwable resourceFault(int kind, boolean clock) {
+    return switch (kind) {
+      case 0 ->
+          clock
+              ? new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE)
+              : new SQLException("public compound SQL fault");
+      case 1 -> new BatchRepositoryException();
+      case 2 -> new CleanupStoppedException(CleanupStopReason.TIME_LIMIT);
+      case 3 -> new IllegalStateException("public compound runtime fault");
+      case 4 -> new NullPointerException("public compound null fault");
+      case 5 -> new AssertionError("public compound fatal fault");
+      default -> throw new AssertionError("unknown test fixture kind");
+    };
   }
 
   private static void logs(int held, int deleted) throws SQLException {

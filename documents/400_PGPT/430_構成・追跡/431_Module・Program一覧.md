@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG178/SSC063横展開（正式未認定）: NK-BAT-001 LogCleanupService.execute/owned/replace/known・SqlRelease/SqlAction、SessionLease.acquire/closeの5所有releaseを017058/059・既存BAT026/029へ追跡。OPS009/DAT009/UI251/SS341§7.2/411、BUG195/YKT154・BUG205/YKT161。225複合と既存12件の選択成功/変更3class全4coverage100%/static成功。新JUnit/完成部品加算0、transaction回復/他Repositoryを完了にしない。
+
 PG177/SSC066追加（正式PT-WEB-20260919-02/source0ca3aa95認定）: NK-BAT-001 BackupBundlePublisher全constructor/publish/force/guard/NioIoと、BackupArtifactVerifier.forcePending/verifyWithin/verifyAt/Force/BundleSnapshot、BackupManifestReader.readWithin/readAtを017055～057・BAT258～273へ追跡。BAK/BKO/OPS009/UI251/SS311/333§7.5/341§6.10/343§5.3。旧readonly公開APIと元snapshotの同一性回帰は従来BAT194～209/226～241も維持。新1部品16 PTを認定した。
 
 PG176/SSC065追加（正式PT-WEB-20260919-02/source0ca3aa95認定）: NK-OPS-001 Storage.OwnedTransferDirectory.publishChild/所有scope lambdaは018029/030・PT-OPS-PDIR-001～008、BAK/BKO/OPS009/UI251/SS333§7.5/341§6.9。共有Storage全4coverage100%を確認、新1部品8 PTをOPSへ認定しScenario PTへ二重計上しない。

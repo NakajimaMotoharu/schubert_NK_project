@@ -7,6 +7,7 @@ import java.util.*;
 /** Public JDBC calls only; deterministic failure timing, never private implementation access. */
 final class ServiceJdbcProbe {
   final Map<String, Integer> failAt = new HashMap<>(), seen = new HashMap<>();
+  final Map<String, Throwable> thrown = new HashMap<>();
   final Map<String, Object> columns = new HashMap<>();
   final Set<String> empty = new HashSet<>(), duplicate = new HashSet<>();
   String runtimeAt = "none";
@@ -99,8 +100,12 @@ final class ServiceJdbcProbe {
             });
   }
 
-  private void check(String key) throws SQLException {
+  private void check(String key) throws Throwable {
     int count = seen.merge(key, 1, Integer::sum);
+    if (count == 1 && thrown.containsKey(key)) {
+      failures++;
+      throw thrown.get(key);
+    }
     if (key.equals(runtimeAt)) throw new IllegalStateException("public programming fault");
     if (Objects.equals(failAt.get(key), count)) {
       failures++;
