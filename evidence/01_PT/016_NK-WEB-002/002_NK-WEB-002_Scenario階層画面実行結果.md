@@ -2,7 +2,11 @@
 
 ## 現在状態
 
-PG194/SSC071の3階層画面に限定。選択16PTは成功、正式全reactorは未実行。Program全体・実NK Characterization gate・PGPT・IT/STの完了証明ではない。
+正式認定: PT-WEB-20260920-12/source0d0abbb80e91d016f961042e9b9e09cb07b5f7a9、dev-foundation、2026-09-20 05:24:36～05:36:26 JST、Maven11:48/exit0。全1544PT（Protocol80/Storage82/API689/Web285/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5のNullAway/Enforcer/Spotless/SpotBugs未解決0。固定path3methodの既存限定静的reviewは維持、coverage除外追加なし、CHR SpotBugs未設定。18collector/41必須scope・60負canary成功。
+
+新PT-SCR-001～016とcontroller1class10method72line25branch、config2class11method35line/branch0を再確認した。BUG213～216/YKT169～172は全対象の修正/非該当根拠・再試験を確認し完了、SSC071は3階層画面の内部具体化範囲だけ完了。raw log SHA256 `15da7275771ea9caffb9e20ae050feb5195f1d1e94d9a32f0fc1ac0614e1a8be`。正式command/環境/source・11file hash/16ID対応・coverage/公開012 traceはevidence/manifest.json参照。
+
+PG194/SSC071の3階層画面に限定。Program全体・実NK Characterization gate・PGPT・IT/STの完了証明ではない。以下は選択試験履歴。
 
 ## 選択試験
 
@@ -23,4 +27,4 @@ raw log `/tmp/pgpt-pg194-green4.log` SHA256 `6ee7b639626e67c7ba9d5dd65f6008b5c98
 - BUG215/YKT171: 新3templateのinline要素空白をCurrent同様に保持。Games card、Routes meta/nav、Files meta/navを独立literalで照合。menu/layoutは改行あり、block境界は非該当。expected/Current baseline不変更。
 - BUG216/YKT172: 証跡scope41への増設に伴う固定count2箇所・failure loop1箇所を修正。019全59＋017全1canary成功。残る40 literalはGit SHA長でscope件数ではない。
 
-上記は選択再試験成功、正式全reactorと同一commit証跡の確定後に台帳を完了へ更新する。実broker/bootstrap/全画面/Production request logging/実NK互換性gateは未完了。
+上記の選択結果に加え、冒頭の正式全reactor・同一commit証跡を確定した。実broker/bootstrap/全画面/Production request logging/実NK互換性gateは未完了。

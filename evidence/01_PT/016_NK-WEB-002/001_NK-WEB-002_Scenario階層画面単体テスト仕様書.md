@@ -23,4 +23,4 @@
 
 golden電文はUI232/234 byte offsetから独立構築し、expectedにProduction codecを使わない。HTTP/DOM期待はCurrent templateとUIのliteral。fixtureは公開合成値で、master実体/credential/session/cookie/tokenは証跡に保存しない。正常/boundary/null/exception/並行・0/最大、追加Retryなしを網羅。既存Menu/error/session/APIinvalid PTも回帰する。
 
-Java4coverage100%/NullAway/staticを要求。templateの各if/each分岐は空・単・最大・escape/role/CSRFで照合する。失敗/flaky/skipped/not-runを成功に含めない。実行command/環境/対象commit/終了/結果/coverage/BUG/SSC/hashは002とevidence/manifest.jsonへ成功後固定する。選択16PT成功、全reactor認定待ち。実Artemis/全layout登録/本番logger/実NK全CHR/IT/STの完成証跡ではない。
+Java4coverage100%/NullAway/staticを要求。templateの各if/each分岐は空・単・最大・escape/role/CSRFで照合する。失敗/flaky/skipped/not-runを成功に含めない。実行command/環境/対象commit/終了/結果/coverage/BUG/SSC/hashは002とevidence/manifest.jsonへ成功後固定する。正式PT-WEB-20260920-12で16PTと全reactor成功、002/manifest参照。実Artemis/全layout登録/本番logger/実NK全CHR/IT/STの完成証跡ではない。
