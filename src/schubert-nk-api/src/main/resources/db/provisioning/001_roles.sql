@@ -43,6 +43,26 @@ ALTER ROLE schubert_inbox_inspector SET search_path = schubert, pg_catalog;
 ALTER ROLE schubert_inbox_inspector SET lock_timeout = '5s';
 ALTER ROLE schubert_inbox_inspector SET statement_timeout = '30s';
 
+-- BUG208/YKT164; RD PER, UI212/253, SS342 section6.2; PT-OPS-PGCFG005.
+ALTER ROLE schubert_app SET statement_timeout = '1500ms';
+ALTER ROLE schubert_app SET lock_timeout = '500ms';
+ALTER ROLE schubert_app SET idle_in_transaction_session_timeout = '15s';
+ALTER ROLE schubert_web_session SET statement_timeout = '1500ms';
+ALTER ROLE schubert_web_session SET lock_timeout = '500ms';
+ALTER ROLE schubert_web_session SET idle_in_transaction_session_timeout = '15s';
+ALTER ROLE schubert_batch SET statement_timeout = '30min';
+ALTER ROLE schubert_batch SET lock_timeout = '5s';
+ALTER ROLE schubert_batch SET idle_in_transaction_session_timeout = '60s';
+ALTER ROLE schubert_backup SET statement_timeout = '30min';
+ALTER ROLE schubert_backup SET lock_timeout = '5s';
+ALTER ROLE schubert_backup SET idle_in_transaction_session_timeout = '60s';
+ALTER ROLE schubert_migration SET statement_timeout = '30min';
+ALTER ROLE schubert_migration SET lock_timeout = '5s';
+ALTER ROLE schubert_migration SET idle_in_transaction_session_timeout = '60s';
+ALTER ROLE schubert_ops_ro SET statement_timeout = '10s';
+ALTER ROLE schubert_ops_ro SET lock_timeout = '1s';
+ALTER ROLE schubert_ops_ro SET idle_in_transaction_session_timeout = '15s';
+
 DO $database_grants$
 DECLARE
     database_name text := pg_catalog.current_database();

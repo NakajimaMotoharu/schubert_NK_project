@@ -66,6 +66,16 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.PrivateChildDirectoryTest"
      "compoundFailures", "retainedParentCapability", "unsupportedAdapter", "concurrentNewOnly")),)
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.database.PostgresDeploymentTest", 1,
+    ("literalConfiguration", "nativeConfiguration", "literalHba", "nativeHba", "roleTimeouts",
+     "invalidConfiguration", "invalidHba", "isolationAndEvidence")),)
+POSTGRES_TRACES = {"PT-OPS-PGCFG008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
+
+
+def validate_postgres_traces(traces):
+    if traces != POSTGRES_TRACES:
+        raise ValueError("missing, extra or invalid PostgreSQL deployment trace")
+
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
 STOP_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
     ("ApplicationUnit", "StopGateFailure", "StopGateException", "UnitStateParser", "ApplicationStopGate", "SystemctlStateSource", "ProcessResourceScope"))
@@ -145,6 +155,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
                    "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
                    "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "PT-OPS-CDIR",
+                   "dev.codex.schubert.nk.api.database.PostgresDeploymentTest": "PT-OPS-PGCFG",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
@@ -227,6 +238,16 @@ def main():
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS)]
+        sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
+        sources += [repo / "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
+                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java"]
+        postgres_root = target / "postgres-deployment-traces"
+        postgres_traces = {str(p.relative_to(postgres_root)): p.read_bytes() for p in postgres_root.rglob("*") if p.is_file()}
+        validate_postgres_traces(postgres_traces)
+        for name, data in postgres_traces.items():
+            destination = evidence / "output/postgresql" / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (s + ".java") for s in PRIVATE_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java" / (SCOPE_SUBJECT + ".java"),
                     repo / "src/schubert-nk-storage/src/main/java" / (FLOCK_SUBJECT + ".java"),
@@ -255,6 +276,8 @@ def main():
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(audit.read_bytes())
         for name in ("031_NK-OPS-001_private子directory単体テスト仕様書.md", "032_NK-OPS-001_private子directory実行結果.md"):
+            (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
+        for name in ("033_NK-OPS-001_PostgreSQL配備設定単体テスト仕様書.md", "034_NK-OPS-001_PostgreSQL配備設定実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -320,6 +343,8 @@ def main():
         }
     if args.deployment:
         manifest["related"] = manifest.get("related", []) + ["PG-D-176", "SSC-065", "PG-D-186", "SSC-068"]
+        manifest["related"] += ["PG-D-187", "SSC-069", "BUG-208", "BUG-209", "YKT-164", "YKT-165"]
+        manifest["postgresConfigurationOracle"] = "033/034 PGCFG001..008: independent32-directive map and native PostgreSQL18 -C normalized units/enum/string; exact16 ordered HBA rules and native pg_hba_file_rules with finally restoration/no reload; six roles18 timeouts plus inspector2 unchanged, invalid configuration/HBA canaries. Declarative coverage is complete inventory, not Java percentage. Isolated fixture only, no host deployment or universal primary error MESSAGE redaction claim."
         manifest["privateChildOracle"] = "031/032 CDIR001..008: new-only mkdirat0700, retained NOFOLLOW child, child then parent sync before FD ownership transfer; actual mode/inode/owner and empty namespace, collision preservation, null/closed/native arguments, all four native body fault positions and40 compound cleanup combinations, unsupported default no mutation, retained parent and eight contenders/one winner. Borrowed parent, partial preservation, no chmod/chown/repair. Caller authenticates backup owner/namespace under exclusion; not archive generation or backup success."
         manifest["directoryPublicationOracle"] = "029/PT-OPS-PDIR001..008: retained parent, existing NOFOLLOW directory, same-parent RENAME_NOREPLACE then sync/one child close; literal bytes/inode, all4 native failure positions, compound unknown identity, uncertain final preservation, original parent capability and eight concurrent contenders. Caller exclusion/backup authenticity remain separate."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)} for p in sorted(evidence.rglob("*"))

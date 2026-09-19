@@ -1,0 +1,18 @@
+# NK-OPS-001; RD SYS/DAT; UI212/253; SS342 section6.3; PG187.
+# PT-OPS-PGCFG003/004/007/008. First match. Do not append permissive rules.
+local all postgres peer
+host schubert_nk schubert_app 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_app ::1/128 scram-sha-256
+host schubert_nk schubert_web_session 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_web_session ::1/128 scram-sha-256
+host schubert_nk schubert_batch 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_batch ::1/128 scram-sha-256
+host schubert_nk schubert_backup 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_backup ::1/128 scram-sha-256
+host schubert_nk schubert_ops_ro 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_ops_ro ::1/128 scram-sha-256
+host schubert_nk schubert_migration 127.0.0.1/32 scram-sha-256
+host schubert_nk schubert_migration ::1/128 scram-sha-256
+host schubert_nk schubert_inbox_inspector 127.0.0.1/32 scram-sha-256
+host all all 0.0.0.0/0 reject
+host all all ::/0 reject

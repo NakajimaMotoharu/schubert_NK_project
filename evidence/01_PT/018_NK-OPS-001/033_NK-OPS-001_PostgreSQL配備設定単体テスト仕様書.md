@@ -1,5 +1,7 @@
 # NK-OPS-001 PostgreSQL配備設定単体テスト仕様書
 
+BUG209のnative enum換算根拠: [PostgreSQL18 WAL](https://www.postgresql.org/docs/18/runtime-config-wal.html#GUC-WAL-COMPRESSION)はonをpglzの旧表記として規定する。literal設定はonのまま、native期待だけpglzとする。得られた実際値を無根拠に期待へコピーしない。
+
 着手時発見BUG208/YKT164: 既存001_rolesには6roleの18timeoutが未設定。PGCFG005は修正前catalogを反例として記録し、SS342既定値を実装後再試験する。前提の「既存設定済み」は誤りであり、期待値を現状へ緩和しない。
 
 PG-D-187/SSC-069。RD SYS005～014/DAT003/PER/ENV、UI212/253、SS342§6/351。対象src/deployment/postgresqlの2雛形、PostgresDeploymentTest各method。既存role timeoutは001_roles.sqlの実適用後catalogを検証しDDL/grantを変更しない。

@@ -35,6 +35,13 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_postgres_configuration_trace(self):
+        expected = {"PT-OPS-PGCFG008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
+        self.assertEqual(expected, launch.POSTGRES_TRACES)
+        launch.validate_postgres_traces(expected)
+        for wrong in ({}, dict(expected, unknown=b""), {"PT-OPS-PGCFG008.txt": b"PASS"}):
+            with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
+
     def test_batch_reactor_gate(self):
         verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 367}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
@@ -941,6 +948,9 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.storage.PrivateChildDirectoryTest", 1,
                       ("nativePrivateCreation", "existingEntriesPreserved", "nameNullAndClosed", "everyNativeFailure",
                        "compoundFailures", "retainedParentCapability", "unsupportedAdapter", "concurrentNewOnly")))
+        groups.append(("dev.codex.schubert.nk.api.database.PostgresDeploymentTest", 1,
+                      ("literalConfiguration", "nativeConfiguration", "literalHba", "nativeHba",
+                       "roleTimeouts", "invalidConfiguration", "invalidHba", "isolationAndEvidence")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -958,6 +968,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
                        "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
                        "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "PT-OPS-CDIR",
+                       "dev.codex.schubert.nk.api.database.PostgresDeploymentTest": "PT-OPS-PGCFG",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
