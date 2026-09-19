@@ -1,0 +1,26 @@
+# NK-WEB-002 Scenario階層画面単体テスト仕様書
+
+対象: ScenarioController.games/routes/filesと内部認証/交換/終端helper、ScenarioMvcConfiguration、WebMvcConfiguration view allowlist追補、templates/scenarios.html・scenario-routes.html・scenario-files.html・fragments/layout.htmlの共有user操作。FUN004/AUT001～003/SYS006/TST001～005、UI221～223/234/264、SS311/313/314/323/352、SSC071/PG194。他画面や本番bootstrapは対象外。
+
+| Test ID | method | 事前条件/入力/操作 | 独立期待 |
+|---|---|---|---|
+| PT-SCR-001 | screens001GamesSuccess | USER/ADMIN、0000/0200、GAM0/2/10 | 1回要求、固定空DATA、閉model、title/code/順/URL一致 |
+| PT-SCR-002 | screens002RoutesSuccess | 両game、RTE1/50、prefix00/99 | 要求game literal、response順・route名・件数を保持 |
+| PT-SCR-003 | screens003FilesSuccess | 両game/prefix01/99、SCF1/500 | game/prefix binding一致、routeName/title/path/entries/URL保持 |
+| PT-SCR-004 | screens004EmptyHierarchy | GAM/RTE/SCF0件成功応答 | GAM200空結果、Route/FileはCurrent同様404、成功modelなし |
+| PT-SCR-005 | screens005AllResultCodes | 12result code、error profile固定vector | 独立HTTP表、0102は別専用終端、modelなし、追加送信なし |
+| PT-SCR-006 | screens006InvalidSessionTerminal | 実暗号session/現在context、API0102 | local破棄、nav302 login?session-expired/非nav401、後続renderなし |
+| PT-SCR-007 | screens007WireAndBindingFailure | 不正header/SCF game・prefix不一致/transport | 503・modelなし、retryなし、raw/cause非表示 |
+| PT-SCR-008 | screens008NullAndForeignPrincipal | constructor/handlerのnull、他Principal | 境界拒否、MQ0、偽principal値を読まない |
+| PT-SCR-009 | screens009ClosedRoutesAndRequests | 正規game/ASCII2桁、未知/数値/detail path、method | 3正規routeだけdispatch、衝突なし・未知は404/405、query偽role/context非使用 |
+| PT-SCR-010 | screens010RealTemplatesAndNavigation | 3実template＋CSRF/Topbar | Current見出し/nav/カード列・文字列、POST logoutとCSRF、USER/ADMIN表示 |
+| PT-SCR-011 | screens011HtmlEscaping | API title/route/pathとusernameにHTML文字 | text保持、script/event nodeなし、raw context非露出 |
+| PT-SCR-012 | screens012CompatibilityObservations | Current/UI固定表示literalとDOM抽出 | CHR-S05/S06に対応する公開合成fixtureの順序/文字列/URL比較。実NK全体gateとは別 |
+| PT-SCR-013 | screens013ConcurrentQueries | 100独立context/correlation | 応答取違え/共有Modelなし、pending0 |
+| PT-SCR-014 | screens014FailurePropagation | model追加/response IO/未知runtime/0102失敗 | 元失敗を成功扱いしない、追加送信/正常画面なし |
+| PT-SCR-015 | screens015MvcConfiguration | bean依存/allowlist/null/unknown view | 明示登録3画面、未知/外部redirect/forward不可、既存Menu/Error維持 |
+| PT-SCR-016 | screens016RealHttpSecurityAndTerminal | 実Tomcat＋既存security/session＋合成API sender | 未認証Login遷移、USER/ADMIN、no-store/header/CSRF、API0102後session終端 |
+
+golden電文はUI232/234 byte offsetから独立構築し、expectedにProduction codecを使わない。HTTP/DOM期待はCurrent templateとUIのliteral。fixtureは公開合成値で、master実体/credential/session/cookie/tokenは証跡に保存しない。正常/boundary/null/exception/並行・0/最大、追加Retryなしを網羅。既存Menu/error/session/APIinvalid PTも回帰する。
+
+Java4coverage100%/NullAway/staticを要求。templateの各if/each分岐は空・単・最大・escape/role/CSRFで照合する。失敗/flaky/skipped/not-runを成功に含めない。実行command/環境/対象commit/終了/結果/coverage/BUG/SSC/hashは002とevidence/manifest.jsonへ成功後固定する。現在仕様のみ、未実装・未実行。実Artemis/全layout登録/本番logger/実NK全CHR/IT/STの完成証跡ではない。

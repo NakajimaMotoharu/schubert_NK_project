@@ -61,6 +61,17 @@ inline event handler、外部CDNを使用しない。TemplateはView Modelだけ
 
 ## 4. 画面・class対応
 
+### 4.0 Scenario階層のHTTP binding・終端具体化（SSC-071/PG-D-194）
+
+- SCR005は`/scenarios/{game:NUKITASHI[12]}`、SCR006は`/scenarios/{game:NUKITASHI[12]}/{prefix:[0-9]{2}}`とし、SCR007の数値ID segmentと衝突させない。Current SearchControllerのgame/prefix/numeric区別を維持し、未知game・非ASCII/桁不一致prefixはhandlerへ入れない。数値IDは後続明細controllerで別routeとして扱う。
+- GAM/RTE/SCF要求は既存ScenarioWireClientへ1回だけ委譲する。保護pathの認証済SessionPrincipalだけからcontextを取得し、request parameterでrole/contextを上書きしない。WebResultMapperで承認済resultをHTTP分類、0102は既存ApiSessionInvalidHandlerへ委譲した後に即終端する。
+- SCR004の0件は一覧として空結果文言を表示する。SCR005/006の0件はCurrent SearchController同様404とし、成功コードの空recordを200画面へ変換しない。§6.1のPageViewModelの0件規則はpaged一覧の規則で、この階層404を変更しない。
+- SCF応答のgame/prefixを要求値へ照合し、不一致は503で終端、正常時はAPIのrouteName/title/順序をそのまま閉modelへcopyする。DTOや認証contextをHTML Modelへ入れない。
+- HTTP送信済みのMVC endpoint戻り値だけはSpring ServletInvocableHandlerMethodのrequestHandled契約に従う`@Nullable String`とする。HttpServletResponse引数を持ち、sendErrorまたは0102 handler完了直後だけnullを返す。成功は固定template名。業務helperはOptional/non-null契約、nullを成功値・欠落補正へ使わない。MVC/実HTTP PTで二重render/後続MQがないことを確認する。
+- ScenarioMvcConfigurationで依存を明示注入し、WebMvcConfigurationのview名allowlistへ3templateだけを追加する。これだけで本番bootstrap/全画面登録/実brokerの完了とはしない。共通layoutのuser操作fragmentを共有し、Currentの見出し/業務nav/card/list順を維持する。
+
+追跡: NK-WEB-002、FUN004/AUT001～003/SYS006/TST001～005、UI221～223/234/264、016001/002・PT-SCR-001～016。実NK CHR-S05/S06/U02/E01と本番REQUEST log結線は別gateで未完了を明示する。
+
 | SCR | Method/URL | Template | Controller.method | Form / View Model | Fixed IF | Role・追跡 |
 |---|---|---|---|---|---|---|
 | 001 | GET `/login` | `login.html` | `LoginController.show(LoginQuery,Model)` | `LoginForm` / `LoginViewModel` | なし | 未認証、UI 226、FUN-001 |
