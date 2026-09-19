@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG181/SSC063（仕様のみ・未実装）: CleanupStepRepository.execute/present/requireと2 owned JDBC scopeを017064・BAT168/既存BAT162～169へ追跡。DAT009/OPS009/UI251/SS331§3.14/332/341、BUG195・206/YKT154・162。68複合と元8PTを予定、新JUnit/完成部品加算0。
+
 PG180/SSC063（正式未認定）: CleanupRepository.execute/readLogProgress/countsと4 owned JDBC scope、既存prepare/bind/required/requireTransactionを017062/063・BAT012と既存BAT001～017へ追跡。DAT009/OPS009/UI251/SS331§3.3・3.9/332/341。新136複合/4 NULL/元4反例、関連53PT、1class/8method/94line/34branch全missed0/static成功。BUG195・206/YKT154・162継続、新JUnit/部品加算0。
 
 PG179/SSC063（正式未認定）: RunReferenceRepository.read/require/present、InspectionSummaryRepository.read/require/present、JdbcResourceFailures.replaceは017060/061・BAT087/121と既存BAT082～089/114～121へ追跡。新136複合/元4反例・選択36PT成功、対象3class全4coverage100%/static成功。BUG195・206/YKT154・162、DAT009/OPS009/UI251/SS331§3.12～13/332。新JUnit/部品加算0、他Repositoryは残る。

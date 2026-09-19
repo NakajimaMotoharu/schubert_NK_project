@@ -1,5 +1,7 @@
 # SQL・transaction・lock・削除設計
 
+SSC063/PG181（修正前）: CleanupStepRepository.executeの2 owned JDBC scopeへPG179のdirect finally close/例外順位を適用する。counts/nullable累積/complete/reasonのJDBC取得とpure値構築を分離し、CleanupCounts/Reason/CleanupStepChunkの検査IAEだけをSQL不正に変換する。provider未知IAEは同一性を保持する。元presentによるNULL resource/NULL列の固定SQL拒否、7kind・limit・run guard・SQL/bind順・borrowed transactionは維持する。017064・BAT168と既存BAT162～169で68複合/独立rollback後条件を検証し、未確認Repositoryは未完了に保つ。
+
 PG180のJDBC resource null契約: CleanupRepositoryのprepare/executeQuery結果はJDBCのnonnull resource契約を取得境界のObjects.requireNonNullで確立する。違反時は固定messageのNPEとして非正常拒否し、SQL column NULLの固定DB不正とは区別する。NPE正常化、未取得resourceのclose、borrowed Connectionの所有移転を行わない。062の4 null反例で既存の非正常性と解放責務を確認する。
 
 SSC063/PG180（修正前）: 下記PG179のdirect JDBC close/SQLとunknownの優先順位をCleanupRepository.execute/readLogProgressの4scopeにも適用する。JdbcResourceFailuresは例外順位だけ共有する。countsの3getter、reason_code/completeの取得をprovider呼出としてconstructor/enum変換catchの外へ置き、CleanupCounts/CleanupChunk/CleanupReason変換の不正値だけSQL不正へ固定する。8kind allowlist、引数・limit・呼出SQL・元projection/NULL・取得後のborrowed未commit結果は変更しない。owned Statement/ResultSetのみcloseし、Connectionのcommit/rollback/config/closeはcaller専用。017062/063・BAT012と既存17件へ追跡し、全136複合と独立rollback後条件を確認する。BUG195/206・YKT154/162の他Repository分類は残す。
