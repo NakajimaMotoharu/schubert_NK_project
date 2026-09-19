@@ -1,5 +1,7 @@
 # Scenario検索入力実行結果
 
+正式認定: PT-WEB-20260920-16/source0039a6ef78df48432cebbc32d7ba86ea07f24234、06:32:13～06:43:57 JST/Maven11:42/exit0。全1580PT（Web321、本Program221）、failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、41scope/64負canary成功。新8PT・3class19method90line42branch全missed0を認定し、SSC072は入力境界限定完了。raw log SHA256=edfd7c3313e552e7c5887cb517b754b81165e0b35049695cc2b75d3989de323e。manifestにcommand/環境/対象commit/source・evidence hash。HTTP/template/MQ接続・実NKgateは未完了。以下は選択試験履歴。
+
 PG199/SSC072/PT-WEB214～221、仕様012。選択8PT成功、正式全reactor未実行。正式1572PT/81部分成果へ未加算。HTTP/template/MQ接続・実NKgate/PGPT/IT/ST完成ではない。
 
 選択 `/tmp/pgpt-pg199-green.log`、2026-09-20 06:30:24 JST終了、34.336秒、exit0。SHA256 `454e6a97f93091a2a7ebe27560219edd3fc065fa4d6d05dbb7af9c7ca96ecc01`。新8＋検索結果8＋依存選択成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。新3class/19method/90line/42branch全missed0。2enumのbranch0/0は除外なし。新規障害なし。

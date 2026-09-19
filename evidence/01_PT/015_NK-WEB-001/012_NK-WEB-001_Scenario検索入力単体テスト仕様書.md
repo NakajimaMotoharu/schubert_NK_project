@@ -1,5 +1,7 @@
 # Scenario検索入力単体テスト仕様書
 
+2026-09-20正式16で8PT認定済。実行結果013/manifestを参照。以下の未実装表記は仕様先行時の履歴であり、現在は013の正式認定を正とする。
+
 NK-WEB-001/ScenarioSearchForm、FUN003/TST001～005、UI222§5/6・223§3・234§7、SS313/352、SSC072/PG199。HTTP非依存の入力snapshot・validation・typed要求生成。未実装・未実行、正式認定数へ算入しない。
 
 | Test ID | method | 入力・操作 | 独立期待 |
