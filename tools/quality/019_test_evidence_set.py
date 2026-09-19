@@ -35,6 +35,27 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_search_template_inventory(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest"
+        names = ("search026CommonLayoutAndInputs", "search027ResultsAndAudio", "search028PaginationAndEmpty",
+                 "search029ValidationErrors", "search030EscapingAndCsp", "search031MaximumRowsAndCandidates",
+                 "search032CssResourcesAndViewBoundary", "search033ConcurrentRendering")
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name for i, name in enumerate(names, 26)}, screen.validate_search_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): screen.validate_search_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): screen.validate_search_suite(wrong)
+        for field, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(field, value)
+            with self.assertRaises(ValueError): screen.validate_search_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
+        with self.assertRaises(ValueError): screen.validate_search_suite(wrong)
+
     def test_search_script_inventory_and_trace(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest"
@@ -181,9 +202,15 @@ class EvidenceSetTest(unittest.TestCase):
     def test_screen_trace_and_coverage(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         expected = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
-                    "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n"}
+                    "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
+                    "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n"}
         screen.validate_traces(expected)
         for wrong in ({}, dict(expected, unknown=b""), {"PT-SCR-012.txt": b"PASS"}):
+            with self.assertRaises(ValueError): screen.validate_traces(wrong)
+        for key in expected:
+            wrong = dict(expected); del wrong[key]
+            with self.assertRaises(ValueError): screen.validate_traces(wrong)
+            wrong = dict(expected); wrong[key] = b"PASS"
             with self.assertRaises(ValueError): screen.validate_traces(wrong)
         report = ET.Element("report")
         for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration"):

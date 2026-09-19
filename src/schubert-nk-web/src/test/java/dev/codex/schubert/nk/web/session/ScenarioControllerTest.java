@@ -638,8 +638,13 @@ class ScenarioControllerTest {
       var resolver = context.getBean(ThymeleafViewResolver.class);
       for (String view :
           List.of(
-              "menu", "error/error", "scenarios", "scenario-routes", "scenario-files", "scenario"))
-        assertNotNull(resolver.resolveViewName(view, Locale.JAPAN));
+              "menu",
+              "error/error",
+              "scenarios",
+              "scenario-routes",
+              "scenario-files",
+              "scenario",
+              "search")) assertNotNull(resolver.resolveViewName(view, Locale.JAPAN));
       for (String view :
           List.of(
               "scenario-private",

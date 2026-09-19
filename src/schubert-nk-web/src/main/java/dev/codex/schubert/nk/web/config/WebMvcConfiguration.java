@@ -73,7 +73,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     resolver.setForceContentType(true);
     resolver.setViewNames(
         new String[] {
-          "menu", "error/error", "scenarios", "scenario-routes", "scenario-files", "scenario"
+          "menu",
+          "error/error",
+          "scenarios",
+          "scenario-routes",
+          "scenario-files",
+          "scenario",
+          "search"
         });
     resolver.setAlwaysProcessRedirectAndForward(false);
     resolver.setProducePartialOutputWhileProcessing(false);
@@ -91,5 +97,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     // Resource lookup is not a public authorization grant; the security chain has an exact
     // allowlist.
     registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+    registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
   }
 }

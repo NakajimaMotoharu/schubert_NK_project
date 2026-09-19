@@ -1,0 +1,84 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR003/FUN003; UI222/223/234; SS313/352; PG202/PT-SCR026..033. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('schubert NK - 検索')}"></head>
+  <body><main class="page search-page">
+    <header class="topbar">
+      <h1>schubert NK - 検索</h1>
+      <div class="topbar-actions">
+        <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+        <nav class="nav-links" aria-label="検索ナビゲーション"><a th:href="@{/scenarios}">一覧</a></nav>
+        <div class="count" th:if="${page.results.present}"
+             th:text="${page.results.orElseThrow().page.totalCount + ' results / page ' + page.results.orElseThrow().page.effectivePage + ' of ' + page.results.orElseThrow().page.totalPages}"></div>
+      </div>
+    </header>
+    <div id="search-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
+      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
+    </div>
+    <form class="filters" method="get" th:action="@{/search}">
+      <label><span>本文</span>
+        <input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="search-errors">
+      </label>
+      <label><span>ゲーム</span>
+        <select name="game" aria-describedby="search-errors">
+          <option value="" th:selected="${page.filters.game.empty}">すべて</option>
+          <option th:each="game : ${page.games}" th:value="${game}" th:text="${game}" th:selected="${page.filters.game == game}"></option>
+        </select>
+      </label>
+      <label><span>話者</span>
+        <select name="speaker" aria-describedby="search-errors">
+          <option value="" th:selected="${page.filters.speaker.empty}">すべて</option>
+          <option th:each="speaker : ${page.speakers}" th:value="${speaker}" th:text="${speaker}" th:selected="${page.filters.speaker == speaker}"></option>
+        </select>
+      </label>
+      <label><span>章タイトル</span>
+        <input name="chapter" th:value="${page.filters.chapter}" placeholder="タイトル" aria-describedby="search-errors">
+      </label>
+      <label><span>形態</span>
+        <select name="entry_type" aria-describedby="search-errors">
+          <option value="" th:selected="${page.filters.entryType.empty}">すべて</option>
+          <option value="dialogue" th:selected="${page.filters.entryType == 'dialogue'}">セリフ</option>
+          <option value="narration" th:selected="${page.filters.entryType == 'narration'}">ナレーション</option>
+          <option th:if="${!page.filters.entryType.empty and page.filters.entryType != 'dialogue' and page.filters.entryType != 'narration'}"
+                  th:value="${page.filters.entryType}" th:text="${page.filters.entryType}" selected></option>
+        </select>
+      </label>
+      <label><span>音声</span>
+        <select name="voice" aria-describedby="search-errors">
+          <option value="" th:selected="${page.filters.voice.empty}">すべて</option>
+          <option value="with" th:selected="${page.filters.voice == 'with'}">あり</option>
+          <option value="without" th:selected="${page.filters.voice == 'without'}">なし</option>
+          <option th:if="${!page.filters.voice.empty and page.filters.voice != 'with' and page.filters.voice != 'without'}"
+                  th:value="${page.filters.voice}" th:text="${page.filters.voice}" selected></option>
+        </select>
+      </label>
+      <button type="submit">検索</button>
+    </form>
+    <nav th:replace="~{fragments/pagination :: search(${page}, false)}"></nav>
+    <section class="results" th:if="${page.results.present}">
+      <p class="empty-results" th:if="${page.results.orElseThrow().page.empty}">該当するデータはありません</p>
+      <article class="result" th:each="row : ${page.results.orElseThrow().rows}">
+        <div class="result-body">
+          <div class="meta">
+            <span th:text="${row.game}"></span>
+            <span th:if="${!row.chapterTitle.empty}" th:text="${row.chapterTitle}"></span>
+            <span th:text="${row.entryTypeLabel}"></span>
+            <span th:if="${!row.speaker.empty}" th:text="${row.speaker}"></span>
+            <span th:text="${row.scriptDisplayPath + ':' + row.lineNumber}"></span>
+            <span th:if="${row.audio.present}" th:text="${row.audio.orElseThrow().displayPath}"></span>
+          </div>
+          <p th:text="${row.body}"></p>
+        </div>
+        <div class="result-actions">
+          <a class="scenario-open" th:href="@{${row.scenarioHref}}">開く</a>
+          <div class="audio" th:if="${row.audio.present}">
+            <audio controls preload="none" th:src="@{${row.audio.orElseThrow().href}}"></audio>
+            <a class="download" th:href="@{${row.audio.orElseThrow().downloadHref}}">DL</a>
+          </div>
+        </div>
+      </article>
+    </section>
+    <nav th:replace="~{fragments/pagination :: search(${page}, true)}"></nav>
+    <script defer th:src="@{/js/search-speaker-submit.js}"></script>
+  </main></body>
+</html>
