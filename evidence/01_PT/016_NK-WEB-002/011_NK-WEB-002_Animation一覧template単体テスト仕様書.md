@@ -1,6 +1,6 @@
 # Animationメニュー・一覧template単体テスト仕様書
 
-NK-WEB-002/SCR008/009、animation.html/animation-list.html/CSS/WebMvcConfiguration、FUN006/AUT/TST、UI222/223/235/264、SS313/352、PG205。仕様先行・未実装/未実行。AnimationTemplateTestの8methodを次へ一意対応。
+NK-WEB-002/SCR008/009、animation.html/animation-list.html/CSS/WebMvcConfiguration、FUN006/AUT/TST、UI222/223/235/264、SS313/352、PG205。正式21で8PT合格、実行詳細は012とmanifest参照。AnimationTemplateTestの8methodを次へ一意対応。
 
 | Test ID | method | fixture/操作 | 独立期待値 |
 |---|---|---|---|

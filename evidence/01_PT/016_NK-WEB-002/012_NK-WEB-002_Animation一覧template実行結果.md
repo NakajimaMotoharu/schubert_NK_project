@@ -1,6 +1,6 @@
 # Animationメニュー・一覧template実行結果
 
-PG205/PT-SCR046～053、仕様011。選択8PT初回成功、正式reactor未実行。PG204 model8PTとまとめて正式21へ進める。正式1609PT/86部分成果へ未加算。Animation HTTP/MQ/動画視聴・stream/実Browser/実NKgate・PGPT/IT/ST完成ではない。
+PG205/PT-SCR046～053、仕様011。正式21/sourcee4eb018d817bf234d646246f8a5166c21868b3b4、2026-09-20 08:05:26～08:17:17 JST、clean verify 11:49/exit0で認定。全1625PT/Web366、failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、JS3coverage100%、41scope/70負canary成功。PG204と合わせ2部分成果16PT追加、88部分成果835PT。Animation HTTP/MQ/動画視聴・stream/実Browser/実NKgate・PGPT/IT/ST完成ではない。実行command/環境/対象commit/各hashはevidence/manifest.json、raw log SHA256=d841d9b16cbea9b2e76a4e0b36955941206cc151689dabebb8accfdc31a5a2f3。以下は選択試験記録。
 
 `/tmp/pgpt-pg205-green.log`、2026-09-20 08:04:18 JST終了、51.096秒、exit0。SHA256 `617379e8cedfbd548d5e72f5eb41a8919b98d9ef7a018df1a87eb8d0424bd0d7`。Web77（新template8/model8/Search template8/本文8/階層16/検索HTTP12/JS1/Menu6/Error10）と依存選択成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。WebMvcConfiguration1class9method34line・branch0/0全missed0、追加除外なし。PG204新4class28method91line52branch全missed0も維持。新規障害なし。
 

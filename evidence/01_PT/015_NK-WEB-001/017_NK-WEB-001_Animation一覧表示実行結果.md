@@ -1,6 +1,6 @@
 # Animationメニュー・一覧表示実行結果
 
-PG204/PT-WEB230～237、仕様016。選択8PT初回成功、正式reactor未実行。正式1609PT/86部分成果へ未加算。表示modelだけでtemplate/HTTP/MQ/動画stream/実NKgate・PGPT/IT/ST完成ではない。PG205 templateと合わせて正式21へ進める。
+PG204/PT-WEB230～237、仕様016。正式21/sourcee4eb018d817bf234d646246f8a5166c21868b3b4、2026-09-20 08:05:26～08:17:17 JST、clean verify 11:49/exit0で認定。全1625PT/Web366、failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、41scope/70負canary成功。新4class28method91line52branch全missed0。PG205と合わせ2部分成果16PTを追加し88部分成果835PT。HTTP/MQ/動画stream/実NKgate・PGPT/IT/ST完成ではない。実行command/環境/対象commit/各hashはevidence/manifest.json、raw log SHA256=d841d9b16cbea9b2e76a4e0b36955941206cc151689dabebb8accfdc31a5a2f3。以下は選択試験記録。
 
 `/tmp/pgpt-pg204-green.log`、2026-09-20 08:01:36 JST終了、35.968秒、exit0、SHA256 `b0c7fa2dddbb28d604ae0d0bb9298eb94eb51620fe57970aff3df55e74a8ba45`。新8PTと依存選択成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。新4classのline/method/class/branch全missed0、除外なし。新規障害なし。
 

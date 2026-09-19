@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-20",
-  "targetCommit": "fc3b957dc49895079bc66d88edc4e5c78426b8c0",
+  "runId": "PT-WEB-20260920-21",
+  "targetCommit": "e4eb018d817bf234d646246f8a5166c21868b3b4",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T07:46:17+09:00",
-  "completedAt": "2026-09-20T07:58:06+09:00",
+  "startedAt": "2026-09-20T08:05:26+09:00",
+  "completedAt": "2026-09-20T08:17:17+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,10 +16,11 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "6d40433ec383aa2d1a0369659af2ae056dd50a0fadbbd62790e1017e03ed64d2",
+  "rawLogSha256": "d841d9b16cbea9b2e76a4e0b36955941206cc151689dabebb8accfdc31a5a2f3",
   "programId": "NK-WEB-002",
-  "scopeResult": "PASS_HIERARCHY_SEARCH_HTTP_DETAIL_TEMPLATE_AND_SCRIPT_ONLY",
+  "scopeResult": "PASS_HIERARCHY_SEARCH_HTTP_DETAIL_ANIMATION_TEMPLATES_AND_SCRIPT_ONLY",
   "programComplete": false,
+  "animationTemplateOracle": "011/SCR046..053: actual Animation menu/list resolver,independent Current three-card labels/order/count/URLs,main/subtrack grouping and placeholder,OVA metadata,0/50 records,MB rounding literals,escaping/CSRF,7 desktop and1 mobile CSS rules,64 renders.Not Animation HTTP/stream/live Browser/NK gate.",
   "searchHttpOracle": "009/SCR034..045: independent UI234 bytes,SRC/GAM/SPK order,invalid400/no-MQ,all stages error/0102/malformed,request-page binding,null/unknown propagation,MVC and real HEAD distinction,real HTTP USER/ADMIN/session invalidation,64 isolated queries/192 correlations,escaped DOM and public trace.Not live broker/actual NK gate.",
   "searchTemplateOracle": "007/SCR026..033: actual search/pagination template, independent Current title/labels/order/metadata/audio/URLs/counts and all field errors.0/100 results,10 games,500 speakers,64 renders,CSRF only on Logout,all conditionals and HTML escaping.25 desktop/7 mobile CSS rules from Current,exact JS resource GET/HEAD and unknown404 at resource-unit boundary. Not search controller/live browser/actual NK gate.",
   "javascript": {
@@ -104,7 +105,15 @@
     "PT-SCR-042": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search042RealHttpSecurity",
     "PT-SCR-043": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search043EscapingAndIsolation",
     "PT-SCR-044": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search044ConcurrentRequests",
-    "PT-SCR-045": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search045CompatibilityTrace"
+    "PT-SCR-045": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search045CompatibilityTrace",
+    "PT-SCR-046": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation046Menu",
+    "PT-SCR-047": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation047MainRows",
+    "PT-SCR-048": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation048OvaRows",
+    "PT-SCR-049": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation049EmptyAndMaximum",
+    "PT-SCR-050": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation050MegabyteRounding",
+    "PT-SCR-051": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation051EscapingAndCsrf",
+    "PT-SCR-052": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation052CssAndViewBoundary",
+    "PT-SCR-053": "dev.codex.schubert.nk.web.view.AnimationTemplateTest#animation053ConcurrentRendering"
   },
   "failed": 0,
   "errors": 0,
@@ -165,7 +174,7 @@
     "dev/codex/schubert/nk/web/config/WebMvcConfiguration": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 164
+        "covered": 172
       },
       "LINE": {
         "missed": 0,
@@ -189,14 +198,14 @@
       }
     }
   },
-  "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033. SCR025 executes8 Node subcases; JavaScript1file line/function/branch100, no JS class declaration and no exclusion; not8 additional JUnit tests.",
+  "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053. SCR025 executes8 Node subcases; JavaScript1file line/function/branch100, no JS class declaration and no exclusion; not8 additional JUnit tests.",
   "staticAnalysis": {
     "tool": "SpotBugs 4.10.4.0",
     "violations": 0,
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "2c08f79005bd5c8cabcf8b6cdf59775a054a0aaacb0aeee19ae134b85c01cffc",
+  "fullReactorManifestSha256": "d9cc7ab1821ad3c9133fcd00051c089d7c7ec71a8df268978a15b79692444fa9",
   "related": [
     "PG-D-194",
     "PG-D-195",
@@ -204,6 +213,8 @@
     "PG-D-201",
     "PG-D-202",
     "PG-D-203",
+    "PG-D-204",
+    "PG-D-205",
     "SSC-071",
     "SSC-072",
     "BUG-213",
@@ -232,7 +243,7 @@
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java",
-      "sha256": "6ce7e5eb86dbf69bebff05ed6e2e06a85bd10b8049cfa3115e9f6d4e6b911f26"
+      "sha256": "cfad6d2ae9381cc9ed39ee22177fa2ad3a9222e4810cf684ba3645b79e2a1343"
     },
     {
       "path": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
@@ -252,7 +263,7 @@
     },
     {
       "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
-      "sha256": "fdce17646dbdc46356030f722c90361ab5df5fb639e8528ff037fed863ee4b6f"
+      "sha256": "5e7df546746f64417c331f9cd4394e66443f6299d0ea9c4345704def92ccab61"
     },
     {
       "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java",
@@ -305,12 +316,32 @@
     {
       "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
       "sha256": "199150545b070fd488efb7952883fbc25244b1236818481568bf18e9057dfefa"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/animation.html",
+      "sha256": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/animation-list.html",
+      "sha256": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationMenuViewModel.java",
+      "sha256": "db892a5bd863ddfa1e5ad24efe62b88920a957ee7369564b579f1b92272de464"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationListViewModel.java",
+      "sha256": "178dd16e7ba539f0aadae8c3803a533293cd372fbb6373e4461ab9455ff04689"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+      "sha256": "83c17547697aaf160787350ed157718d4be1ad325ef7214deb20cf34a1215c70"
     }
   ],
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "c1e4befcefe5e05ab4c1ba7957051c7a4a6c902b6ccea34ac72afd764eca6931"
+      "sha256": "132465b95a8ff20c3fb8c87e9382c6f69dc6bb34969d5cd51c94d1a9b9e7b6f8"
     },
     {
       "path": "input/PT-SCR-012.txt",
@@ -327,6 +358,10 @@
     {
       "path": "input/PT-SCR-045.txt",
       "sha256": "93c99394621269f4d4146bf78fd76c0061971e63792c20453ea76b3b0f0b5545"
+    },
+    {
+      "path": "input/PT-SCR-053.txt",
+      "sha256": "928a042ccaf9909027846287b44727c2c74fb6c57f54d323fe728c59bb58bef8"
     },
     {
       "path": "logs/001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md",
@@ -369,6 +404,14 @@
       "sha256": "6c47945c266aff9c3e83350d02e8c2d0877fef1cbed00219a385752cc7e510f2"
     },
     {
+      "path": "logs/011_NK-WEB-002_Animation一覧template単体テスト仕様書.md",
+      "sha256": "a91a290ff4d18c68db95fad7f6110d54c0575ce71b2effaa7a7578459b517412"
+    },
+    {
+      "path": "logs/012_NK-WEB-002_Animation一覧template実行結果.md",
+      "sha256": "6a45ff0cb24f176ba8aaff0743208f4b5177272e638f85d66be49fc7ae92fe53"
+    },
+    {
       "path": "output/PT-SCR-012.txt",
       "sha256": "4495bf375d2ff5ba59a126a10636ce39521cd3f5ebc125ce8405b50622dc95fa"
     },
@@ -385,12 +428,16 @@
       "sha256": "93c99394621269f4d4146bf78fd76c0061971e63792c20453ea76b3b0f0b5545"
     },
     {
+      "path": "output/PT-SCR-053.txt",
+      "sha256": "928a042ccaf9909027846287b44727c2c74fb6c57f54d323fe728c59bb58bef8"
+    },
+    {
       "path": "output/PT-SCR025-node.json",
       "sha256": "07cbfcf206ffc9b3a2aaa8ff27c98f906d6c204f45735d9ff014bc9692fcc9b0"
     },
     {
       "path": "results.xml",
-      "sha256": "37d707448cdfeabc11771c49d0f83fb5d77a501233250d823ac98aa1d873c6a5"
+      "sha256": "d320038d39d66f5525caee4f8a9cffa919e6f7e2710c77c074dbf4f6bde38ace"
     }
   ]
 }

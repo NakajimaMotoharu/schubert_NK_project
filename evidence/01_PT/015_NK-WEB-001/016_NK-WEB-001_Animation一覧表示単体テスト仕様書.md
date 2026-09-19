@@ -1,6 +1,6 @@
 # Animationメニュー・一覧表示単体テスト仕様書
 
-NK-WEB-001/SCR008/009、AnimationMenuViewModel/AnimationListViewModel・nested Video/Row。FUN006/AUT/TST、UI223§6/235§4～5/264、SS313/323/352、PG204。仕様先行、未実装/未実行。AnimationViewModelTestの以下8methodを一意対応。
+NK-WEB-001/SCR008/009、AnimationMenuViewModel/AnimationListViewModel・nested Video/Row。FUN006/AUT/TST、UI223§6/235§4～5/264、SS313/323/352、PG204。正式21で8PT合格、実行詳細は017とmanifest参照。AnimationViewModelTestの以下8methodを一意対応。
 
 | Test ID | method | 入力・操作・fixture | 独立期待値・根拠 |
 |---|---|---|---|
