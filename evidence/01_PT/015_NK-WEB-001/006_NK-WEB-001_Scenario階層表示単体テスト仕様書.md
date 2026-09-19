@@ -21,4 +21,4 @@ PG193/FUN004/SYS006/PER003/TST001～005、UI222/223§4/234§5・8・9、SS313§4
 
 期待値はUI223・234とCurrent templateの独立literalで定義する。数値URLやtitleをProduction factoryからexpected生成しない。上限はUI234の10/50/500、routeは2桁、file IDは12桁を使用。全line/method/class/branch100%、null negative/static、失敗/skip/flakyは不合格。合成DOMは画面互換やHTTP成功の証跡に算入しない。
 
-実行command/環境/日時/source commit/結果/coverage/関連BUG・SSC/evidence path/hashは007とmanifestへ保存する。現在は仕様先行、未実装・未実行であり部分成果数に加えない。
+実行command/環境/日時/source commit/結果/coverage/関連BUG・SSC/evidence path/hashは007とmanifestへ保存する。選択12PTとstatic再試験は成功、BUG212/YKT168を起票・修正済だが正式回帰前であり部分成果数に加えない。

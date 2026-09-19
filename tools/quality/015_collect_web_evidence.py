@@ -32,6 +32,14 @@ def validate_page_inventory(mapping):
         raise ValueError("Page Web Test IDs are incomplete or inconsistent")
 
 
+def validate_hierarchy_inventory(mapping):
+    names = ("web182GameDisplay", "web183RouteDisplay", "web184FileDisplay", "web185NullBoundaries", "web186PrefixBoundaries", "web187SnapshotOwnership", "web188ClosedBeanContract", "web189SyntheticEscaping", "web190ConcurrentProjection", "web191ListSizeBoundaries", "web192PreserveSourceOrder", "web193RedactedDiagnostics")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest#" + name
+                for i, name in enumerate(names, 182)}
+    if mapping != expected:
+        raise ValueError("Hierarchy Web Test IDs are incomplete or inconsistent")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -254,6 +262,20 @@ def main():
         (176, "web176MaximumWireBounds"), (177, "web177InvalidProjectionCombinations"),
         (178, "web178NullConfigurationAndRedaction"), (179, "web179IndependentParallelProjection"),
         (180, "web180JavaBeanDisplayContract"), (181, "web181ThymeleafSyntheticDom"))
+    groups["dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest"] = (
+        (182, "web182GameDisplay"),
+        (183, "web183RouteDisplay"),
+        (184, "web184FileDisplay"),
+        (185, "web185NullBoundaries"),
+        (186, "web186PrefixBoundaries"),
+        (187, "web187SnapshotOwnership"),
+        (188, "web188ClosedBeanContract"),
+        (189, "web189SyntheticEscaping"),
+        (190, "web190ConcurrentProjection"),
+        (191, "web191ListSizeBoundaries"),
+        (192, "web192PreserveSourceOrder"),
+        (193, "web193RedactedDiagnostics"),
+    )
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -278,13 +300,15 @@ def main():
         raise SystemExit("Web Test IDs do not exactly cover executed methods")
     validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
     validate_page_inventory({key: value for key, value in expected.items() if "PageViewModelTest#" in value})
+    validate_hierarchy_inventory({key: value for key, value in expected.items() if "ScenarioHierarchyViewModelTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
     for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md",
-                 "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md"):
+                 "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md",
+                 "006_NK-WEB-001_Scenario階層表示単体テスト仕様書.md", "007_NK-WEB-001_Scenario階層表示実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -294,6 +318,13 @@ def main():
     manifest.update({
         "frameworkVersions": {"springMvc": "7.0.9", "thymeleafSpring6": "3.1.5.RELEASE", "jsoupTest": "1.23.2", "springSession": "4.1.1", "springWeb": "7.0.9", "springTest": "7.0.9", "springSecurityWeb": "7.1.1", "micrometerWeb": "1.17.1", "servletApi": "6.1 (Tomcat bundled)", "tomcatEmbedCore": "11.0.25", "commonsLoggingWeb": "1.4.0", "jspecifyWeb": "1.0.1", "sourceAndHashes": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md sections5.7/5.8/5.9/5.10"},
         "programId": "NK-WEB-001", "programStatus": "IN_PROGRESS",
+        "hierarchyExpected": "PG193/PT-WEB-182..193/006/007/UI223,234/SS313: immutable display-only projections of already validated game/route/file records; independent literal values/URLs/order, null/0/max/max+1, owned snapshots, closed getter graph, synthetic escaping,100 parallel calls and redaction. Limits10/50/500; no protocol/session retention. Not semantic wire validation, request binding, production templates/controller/HTTP/NK CHR.",
+        "hierarchySources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                             for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java",
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/RouteListViewModel.java",
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java")],
         "pageViewExpected": "PG192/PT-WEB-174..181/004/005/SS313 section6.1/UI222: independent literal 50/100 page fixtures, empty/single/first/middle/last/max, invalid projection and null/configuration rejection, 100 parallel checks, closed read-only JavaBean and synthetic Thymeleaf DOM. User input page correction remains upstream. Not production screens/controller/URLs/NK CHR.",
         "pageViewSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
                             for relative in (

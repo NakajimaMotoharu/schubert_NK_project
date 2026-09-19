@@ -113,6 +113,19 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): web.validate_page_inventory(wrong)
         with self.assertRaises(ValueError): web.validate_page_inventory(dict(mapping, unknown="unknown"))
 
+    def test_hierarchy_web_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web182GameDisplay", "web183RouteDisplay", "web184FileDisplay", "web185NullBoundaries", "web186PrefixBoundaries", "web187SnapshotOwnership", "web188ClosedBeanContract", "web189SyntheticEscaping", "web190ConcurrentProjection", "web191ListSizeBoundaries", "web192PreserveSourceOrder", "web193RedactedDiagnostics")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest#" + name
+                   for i, name in enumerate(names, 182)}
+        web.validate_hierarchy_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_hierarchy_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_hierarchy_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_hierarchy_inventory(dict(mapping, unknown="unknown"))
+
     def test_stub_trace_and_coverage(self):
         stub = module("stub_collector", "028_collect_stub_evidence.py")
         expected = {"PT-ASY-STB005.txt": b"provider=STUB\nanswerLength=0\nclockReadsPerCall=1\nconcurrentCalls=64\nuniqueClockValues=64\nexternalCalls=0\nrawBodySaved=false\n"}
