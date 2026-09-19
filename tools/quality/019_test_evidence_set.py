@@ -63,6 +63,50 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set(attribute, value)
             with self.assertRaises(ValueError): receipt.validate_suite(wrong)
 
+    def test_stub_inventory_and_negative_status(self):
+        stub = module("stub_collector", "028_collect_stub_evidence.py")
+        cls = "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest"
+        names = ("emptyAnswerAndClock", "nullContracts", "clockFailures", "resultValueAndRedaction",
+                 "concurrentCallsAndEvidence")
+        suite = ET.Element("testsuite", name=cls, tests="5", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-ASY-STB{i:03}": cls + "#" + name for i, name in enumerate(names, 1)}, stub.validate_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "4"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): stub.validate_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): stub.validate_suite(wrong)
+        for attribute, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(attribute, value)
+            with self.assertRaises(ValueError): stub.validate_suite(wrong)
+
+    def test_stub_trace_and_coverage(self):
+        stub = module("stub_collector", "028_collect_stub_evidence.py")
+        expected = {"PT-ASY-STB005.txt": b"provider=STUB\nanswerLength=0\nclockReadsPerCall=1\nconcurrentCalls=64\nuniqueClockValues=64\nexternalCalls=0\nrawBodySaved=false\n"}
+        self.assertEqual(expected, stub.TRACES)
+        stub.validate_traces(expected)
+        for wrong in ({}, dict(expected, unknown=b""), {"PT-ASY-STB005.txt": b"PASS"}):
+            with self.assertRaises(ValueError): stub.validate_traces(wrong)
+        report = ET.Element("report")
+        for name in ("AnswerResult", "StubAnswerProvider"):
+            cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/api/application/question/" + name)
+            for kind in ("LINE", "METHOD", "CLASS"):
+                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        result = stub.validate_coverage(report)
+        self.assertEqual(2, len(result))
+        self.assertTrue(all(counters["BRANCH"] == {"missed": 0, "covered": 0} for counters in result.values()))
+        for cls_index in (0, 1):
+            wrong = copy.deepcopy(report); ET.SubElement(wrong[cls_index], "counter", type="BRANCH", missed="1", covered="0")
+            with self.assertRaises(ValueError): stub.validate_coverage(wrong)
+            for counter_index in range(3):
+                wrong = copy.deepcopy(report); wrong[cls_index][counter_index].set("missed", "1")
+                with self.assertRaises(ValueError): stub.validate_coverage(wrong)
+                wrong = copy.deepcopy(report); wrong[cls_index].remove(wrong[cls_index][counter_index])
+                with self.assertRaises(ValueError): stub.validate_coverage(wrong)
+            wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
+            with self.assertRaises(ValueError): stub.validate_coverage(wrong)
+
     def test_submit_inventory_and_negative_status(self):
         receipt = module("receipt_collector", "027_collect_question_receipt_evidence.py")
         cls = "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest"
@@ -1380,7 +1424,7 @@ class EvidenceSetTest(unittest.TestCase):
     def test_every_scope_run_source_and_integrity(self):
         # Independently enumerated mandatory inventory, not generated from gate.SCOPES.
         expected_scopes = ["008_NK-SCN-001", "007_NK-AUT-001", "003_NK-PRO-003",
-                           "006_NK-MSG-002", "009_NK-MED-001", "010_NK-ADM-001", "015_NK-WEB-001", "017_NK-BAT-001", "011_NK-QST-001"]
+                           "006_NK-MSG-002", "009_NK-MED-001", "010_NK-ADM-001", "015_NK-WEB-001", "017_NK-BAT-001", "011_NK-QST-001", "012_NK-ASY-001"]
         expected_scopes = [p + "/evidence" for p in expected_scopes] + [
             "004_NK-DAT-001/evidence/" + p for p in (
                 "inbox-inspection", "authentication-inspection", "inspection-sql", "deletion-sql",
@@ -1442,7 +1486,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(39, len(check()))
+            self.assertEqual(40, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -1452,7 +1496,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(39):
+        for failed_at in range(40):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -1465,7 +1509,7 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(39, len(calls))
+        self.assertEqual(40, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
         self.assertTrue(calls[-1][2].endswith("/026_collect_atomic_cleanup_evidence.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
@@ -1481,7 +1525,7 @@ class EvidenceSetTest(unittest.TestCase):
             "branch": "dev-foundation", "exitCode": 0,
             "files": [{"path": "results.xml", "sha256": hashlib.sha256(payload).hexdigest()}],
         }
-        if scope.startswith(("004_", "011_", "017_", "018_")):
+        if scope.startswith(("004_", "011_", "012_", "017_", "018_")):
             manifest.update({
                 "fullReactorManifest": ("../../../" if scope.startswith("004_") else "../../") + "008_NK-SCN-001/evidence/manifest.json",
                 "fullReactorManifestSha256": hashlib.sha256(
