@@ -2,6 +2,8 @@
 
 PG192、FUN003/008/009・QST005/NTF、UI222/234§2/235/236、SS313§6.1/323。PageViewModel.fromとprivate constructor、全getter/isEmpty/isPaginated/previous/next/toStringを対象にする。元PAGED48は検証済電文から来る前提でも、型constructorだけでは相互整合を保証しないため表示境界で再検証する。
 
+UI222§6の「利用者が指定したpage0以下を1、最終page超過を最終へ補正」は入力/検索側の責務として維持する。本モデルが拒否するのはその処理後のAPI応答effectivePage0や矛盾値であり、利用者入力の互換補正を撤廃する変更ではない。通常入力の補正を本モデルへ二重実装しない。
+
 | Test ID | method | 入力・操作 | 独立期待 |
 |---|---|---|---|
 | PT-WEB-174 | web174EmptyAndSinglePage | 50/100、0/1/満杯1page | 0件はpage/pages1・first/last0、prev/nextなし、empty true。他は指定literalの件数範囲 |

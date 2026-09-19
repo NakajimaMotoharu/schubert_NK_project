@@ -1,5 +1,7 @@
 # NK-WEB-001 Scenario通信実行結果
 
+正式認定: PT-WEB-20260920-09/source fa490cdf8f8e36adf550082bf025b31a5c232220、04:12:23～04:24:05 JST/Maven11:40/exit0。全1508PT（Web249、うち本Program173）成功、failed/error/skipped0、6Java line/method/class/branch全100%、Production5静的解析未解決0。40scope整合・56負canary成功。追加Scenario8件と4class/15method/88line/26branch全missed0を認定する。実broker/業務画面/実NK gate/PGPT/IT/ST完了ではない。正式commandとtool/OS、入力・期待・実際値、source/証跡hashはevidence/manifest.json。raw log SHA256=2f1ae37900a60397ff8921e0eaad5f97b2e7a894615aab6191f40f04692b844e。以下は選択試験履歴。
+
 PG118継続/PG191、仕様は001§14.14・PT-WEB-166～173。選択8PT成功、正式全回帰前。6layout交換部品のみで、controller/画面/実Artemis/本番起動・実NK CHR完了ではない。
 
 2026-09-20 04:09:47 JST終了、31.059秒/exit0。依存FieldCodecTest/ResourceScopeTestとScenarioWireClientTest8件成功。新4class/15method/88line/26branch全missed0、NullAway/Enforcer/Spotless/SpotBugs成功。選択runの旧coverage execを正式全体結果へ流用しない。raw log `/tmp/pgpt-pg191-green.log` SHA256=`53b5761da2a6b7479f457bb8522ddd76b4f9c3bff5b8a0481bcdc3866df7ce9e`。
