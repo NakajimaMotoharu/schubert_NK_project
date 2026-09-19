@@ -1,5 +1,7 @@
 # Scenario検索結果表示単体テスト仕様書
 
+2026-09-20正式15で8PT認定済。実行結果011/manifestを参照。末尾の未実装記述は仕様先行時の履歴であり、現在の実装・試験状態は011の正式認定を正とする。
+
 NK-WEB-001/ScenarioSearchResultsViewModel.from/getter、Row/Audio。FUN003/AUT001～003/TST001～005、UI223§3/234§7、SS313/323、PG198。既にwire検証済みのPAGED48/SRCRSP01を表示専用snapshotへ変換する。検索form/candidate取得/HTTP/template/実NKgateの完成ではない。
 
 | Test ID | method | 入力・操作・fixture | 独立期待 |
