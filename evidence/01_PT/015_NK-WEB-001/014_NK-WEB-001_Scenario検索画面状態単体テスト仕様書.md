@@ -1,5 +1,7 @@
 # Scenario検索画面状態単体テスト仕様書
 
+2026-09-20正式17で8PT認定済。実行結果015/manifestを参照。以下の未実装表記は仕様先行履歴、現在は015の正式認定を正とする。
+
 NK-WEB-001/ScenarioSearchViewModel.success/invalid/Filters/FieldError、FUN003/AUT/TST、UI222/223/234、SS313/323、PG200。未実装・未実行、正式認定へ未加算。
 
 | Test ID | method | fixture・操作 | 独立期待 |

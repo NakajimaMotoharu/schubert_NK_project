@@ -1,5 +1,7 @@
 # Scenario検索画面状態実行結果
 
+正式認定: PT-WEB-20260920-17/source444683553d629bc53459d0d726ed6e20e315432b、06:47:56～06:59:44 JST/Maven11:46/exit0。全1588PT（Web329、本Program229）、failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、41scope/65負canary成功。新8PT・3class33method86line16branch全missed0を認定。raw log SHA256=480d5acb26115becb58a65057af0f7b29a8f298fd63d5b547bdc37c52e999699。manifestにcommand/環境/対象commit/source・evidence hash。template/controller/実NKgateは未完了。以下は選択履歴。
+
 PG200/PT-WEB222～229、仕様014。選択8PT成功、正式全reactor未実行。正式1580PT/82部分成果へ未加算。検索template/controller/実NKgate・PGPT/IT/ST完成ではない。
 
 選択 `/tmp/pgpt-pg200-green.log`、2026-09-20 06:46:31 JST終了、32.791秒、exit0。SHA256 `4a177fd3d4e4f188b2333299f5df91462e35ba5ff386211651cf4426e6964e51`。新8＋検索入力8/結果8＋依存選択成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。新3class/33method/86line/16branch全missed0。Filtersのbranch0/0は除外なし。新規障害なし。
