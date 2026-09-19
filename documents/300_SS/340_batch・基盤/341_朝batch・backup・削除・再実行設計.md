@@ -92,6 +92,8 @@ Artemis以降を開始しない。
 
 ### 6.1 作成
 
+SSC068/PG186: step2の低位0700/new-only保持child能力は333§7.6。既存0750日付directory能力を流用せず、専用backup主体が生成しcallerが入場/同device/metadata/namespaceを確認する。private能力の単体成功は実archive生成・親排他・worker終端を代替しない。
+
 1. Backup rootをabsolute・real pathで検証し、`/`、home、asset/transfer/log/Artemis root自体または配下を拒否。
 2. `yyyyMMdd-HHmmss-<runId>.part`をmode 0700でCREATE_NEW。同一mountの確定先とする。
 3. Systemd credentialで渡された`.pgpass`を`PGPASSFILE`へ指定し、passwordをcommand line/environment実値へ出さない。

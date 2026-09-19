@@ -161,6 +161,14 @@ missing source、非directory/symlink sourceは非成功、targetがdirectory/fi
 
 PT-OPS-PDIR-001～008/018029で実Linux inode/no-replace/sync、入力全不正・close/不確定結果・compound・並行とborrowed ownershipを検証する。既存0640file/0600private file/Transfer公開のoracleは変更しない。
 
+### 7.6 private子directoryの新規作成（SSC068/PG186）
+
+backup pending用に既存0750日付directoryとは別の0700/new-only能力を設ける。DirectoryCalls.createPrivateDirectoryは未対応adapterではmutationせずUNAVAILABLE、Linuxは保持parent FDに対するmkdirat(mode0700)を使用する。umaskは権限を縮小し得るためcallerがmetadataを確認し、chmod/chownで補修しない。既存nameはdirectory/file/symlinkを問わずcollision、既存openへfallbackしない。
+
+OwnedTransferDirectory.createPrivateChildは単一segment/null/closed検査後、private lock内でmkdir→NOFOLLOW child open→child fsync→parent fsyncを行い、全成功時だけ独立所有child FDを返す。失敗時は取得済child FDを一度だけ消費し、部分生成directoryは消さず保全する。rootは借用のまま。既知/未知close複合の順位はResourceScopeに従いself-suppressionを作らない。
+
+この低位能力はmkdir/open間のnamespace真正性、backup owner、root admissionを証明しない。callerが専用backup OS UID/GID、親排他/他actor停止、parent/rootとの同device、inode/owner/mode/ACL前後一致を確認する。rootで生成してbackup所有を装うこと、既存directory修復、partialの無条件再利用は禁止。archive生成・backup確定・7世代・NAS durabilityは別の上位責務であり、ここだけのPT成功で完了としない。関連RD BAK/BKO/OPS009、UI251、SS341§6.1/343§5.3、018031/032・PT-OPS-CDIR-001～008。
+
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。
