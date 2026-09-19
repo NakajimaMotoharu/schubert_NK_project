@@ -1,6 +1,6 @@
 # 検索HTTP単体テスト仕様書
 
-NK-WEB-002/SCR003、ScenarioController.search、FUN003/AUT001～003/SYS006/TST001～005、UI221～223/234/264、SS312/313/314/323/352、SSC072/PG203。仕様先行・未実装・未実行。ScenarioSearchControllerTestの以下12methodをTest IDへ一意対応する。
+NK-WEB-002/SCR003、ScenarioController.search、FUN003/AUT001～003/SYS006/TST001～005、UI221～223/234/264、SS312/313/314/323/352、SSC072/PG203。正式PT-WEB-20260920-20で全12PT成功、010結果/manifest参照。ScenarioSearchControllerTestの以下12methodをTest IDへ一意対応する。
 
 | Test ID | method | fixture・操作 | 独立期待値・根拠 |
 |---|---|---|---|
@@ -11,7 +11,7 @@ NK-WEB-002/SCR003、ScenarioController.search、FUN003/AUT001～003/SYS006/TST00
 | PT-SCR-038 | search038MalformedAndTransport | 各段階不正wire/known送信失敗 | 503、後続/描画なし、buffer消去、再送なし |
 | PT-SCR-039 | search039ResponseBinding | 最終page補正/要求と異なるpage/不整合count | 正当な最終補正だけ成功、不整合503、secret非反射 |
 | PT-SCR-040 | search040NullAndFailurePropagation | null/非SessionPrincipal、Model/response/未知callback例外 | constructor/API境界拒否、未知例外同一instance伝播、NPE正常化なし |
-| PT-SCR-041 | search041MvcGetHeadAndMethod | 実MVC/resolver、GET/HEAD/POST/未知parameter | 200 DOM/HEAD空/POST405、invalid400かつMQなし |
+| PT-SCR-041 | search041MvcGetHeadAndMethod | 実MVC/resolver、GET/HEAD/POST/未知parameter | 200 DOM/HEAD handler選択・描画/POST405、invalid400かつMQなし。実HEAD本文空はSCR042で検証（BUG220） |
 | PT-SCR-042 | search042RealHttpSecurity | embedded HTTP/実Web session DB、匿名/両role/0102 | 匿名302かつMQ0、成功no-store/nosniff/Logout CSRF、失効cookieと次回no-MQ |
 | PT-SCR-043 | search043EscapingAndIsolation | 特殊文字q/speaker/chapter/username | escaped DOM、独立固定href、raw context/電文/例外なし |
 | PT-SCR-044 | search044ConcurrentRequests | 64独立actor/query、共有controller | 各3要求のcontext/query分離・192独立correlation、混入なし |

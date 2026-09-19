@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-19",
-  "targetCommit": "793813d85ec8509c7d0913fbe6c80e6da0ee792e",
+  "runId": "PT-WEB-20260920-20",
+  "targetCommit": "fc3b957dc49895079bc66d88edc4e5c78426b8c0",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T07:27:43+09:00",
-  "completedAt": "2026-09-20T07:39:35+09:00",
+  "startedAt": "2026-09-20T07:46:17+09:00",
+  "completedAt": "2026-09-20T07:58:06+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,10 +16,11 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "7c4b1ea5e2f1ab59e91bc266051eea7b10ad5190a436ee4d615f19b799a917d5",
+  "rawLogSha256": "6d40433ec383aa2d1a0369659af2ae056dd50a0fadbbd62790e1017e03ed64d2",
   "programId": "NK-WEB-002",
-  "scopeResult": "PASS_HIERARCHY_HTTP_DETAIL_SEARCH_TEMPLATES_AND_SCRIPT_ONLY",
+  "scopeResult": "PASS_HIERARCHY_SEARCH_HTTP_DETAIL_TEMPLATE_AND_SCRIPT_ONLY",
   "programComplete": false,
+  "searchHttpOracle": "009/SCR034..045: independent UI234 bytes,SRC/GAM/SPK order,invalid400/no-MQ,all stages error/0102/malformed,request-page binding,null/unknown propagation,MVC and real HEAD distinction,real HTTP USER/ADMIN/session invalidation,64 isolated queries/192 correlations,escaped DOM and public trace.Not live broker/actual NK gate.",
   "searchTemplateOracle": "007/SCR026..033: actual search/pagination template, independent Current title/labels/order/metadata/audio/URLs/counts and all field errors.0/100 results,10 games,500 speakers,64 renders,CSRF only on Logout,all conditionals and HTML escaping.25 desktop/7 mobile CSS rules from Current,exact JS resource GET/HEAD and unknown404 at resource-unit boundary. Not search controller/live browser/actual NK gate.",
   "javascript": {
     "testId": "PT-SCR-025",
@@ -91,7 +92,19 @@
     "PT-SCR-030": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest#search030EscapingAndCsp",
     "PT-SCR-031": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest#search031MaximumRowsAndCandidates",
     "PT-SCR-032": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest#search032CssResourcesAndViewBoundary",
-    "PT-SCR-033": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest#search033ConcurrentRendering"
+    "PT-SCR-033": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest#search033ConcurrentRendering",
+    "PT-SCR-034": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search034SuccessAndWire",
+    "PT-SCR-035": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search035InvalidNoMq",
+    "PT-SCR-036": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search036ResultErrorsAtEveryStage",
+    "PT-SCR-037": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search037SessionInvalidAtEveryStage",
+    "PT-SCR-038": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search038MalformedAndTransport",
+    "PT-SCR-039": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search039ResponseBinding",
+    "PT-SCR-040": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search040NullAndFailurePropagation",
+    "PT-SCR-041": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search041MvcGetHeadAndMethod",
+    "PT-SCR-042": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search042RealHttpSecurity",
+    "PT-SCR-043": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search043EscapingAndIsolation",
+    "PT-SCR-044": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search044ConcurrentRequests",
+    "PT-SCR-045": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest#search045CompatibilityTrace"
   },
   "failed": 0,
   "errors": 0,
@@ -100,23 +113,23 @@
     "dev/codex/schubert/nk/web/controller/ScenarioController": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 325
+        "covered": 474
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 25
+        "covered": 33
       },
       "LINE": {
         "missed": 0,
-        "covered": 72
+        "covered": 107
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 23
+        "covered": 31
       },
       "METHOD": {
         "missed": 0,
-        "covered": 10
+        "covered": 14
       },
       "CLASS": {
         "missed": 0,
@@ -183,21 +196,26 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "7263f11177c35d005d67f56fdf25204851aa5791858c4b42a7c6663e8322f37e",
+  "fullReactorManifestSha256": "2c08f79005bd5c8cabcf8b6cdf59775a054a0aaacb0aeee19ae134b85c01cffc",
   "related": [
     "PG-D-194",
     "PG-D-195",
     "PG-D-196",
     "PG-D-201",
     "PG-D-202",
+    "PG-D-203",
     "SSC-071",
     "SSC-072",
     "BUG-213",
     "BUG-214",
     "BUG-215",
+    "BUG-219",
+    "BUG-220",
     "YKT-169",
     "YKT-170",
-    "YKT-171"
+    "YKT-171",
+    "YKT-175",
+    "YKT-176"
   ],
   "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
   "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
@@ -206,7 +224,7 @@
   "sourceFiles": [
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
-      "sha256": "a04a3a00c481337066346ff45ec63f86612b69fb900f9795652d1a111e295646"
+      "sha256": "7d5de2dd4562be46c21fdd97a69d818a96fda37c42f413b409d3243a4c222f4b"
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java",
@@ -283,12 +301,16 @@
     {
       "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
       "sha256": "d0155f118beb92d01dfef232d42e173225593847faac2712782e3fd35f7c3a5a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+      "sha256": "199150545b070fd488efb7952883fbc25244b1236818481568bf18e9057dfefa"
     }
   ],
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "be94bc31002e95d3f7335e074f63a1bfbd899929388cd2af58fdceec81b20c95"
+      "sha256": "c1e4befcefe5e05ab4c1ba7957051c7a4a6c902b6ccea34ac72afd764eca6931"
     },
     {
       "path": "input/PT-SCR-012.txt",
@@ -301,6 +323,10 @@
     {
       "path": "input/PT-SCR-033.txt",
       "sha256": "3aa9ee8371f15f6ffc210356ba478921fe61f1934714ab713d5b547022b14910"
+    },
+    {
+      "path": "input/PT-SCR-045.txt",
+      "sha256": "93c99394621269f4d4146bf78fd76c0061971e63792c20453ea76b3b0f0b5545"
     },
     {
       "path": "logs/001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md",
@@ -335,6 +361,14 @@
       "sha256": "6564237cc5c1a3432caa78ba1b92c1710931457fa1ca1096b5358479e75f9016"
     },
     {
+      "path": "logs/009_NK-WEB-002_検索HTTP単体テスト仕様書.md",
+      "sha256": "c3e91ef63edb2543fe0640bcaf0991c2ef87b88a2cd4682b9ab16e94a84a4b74"
+    },
+    {
+      "path": "logs/010_NK-WEB-002_検索HTTP実行結果.md",
+      "sha256": "6c47945c266aff9c3e83350d02e8c2d0877fef1cbed00219a385752cc7e510f2"
+    },
+    {
       "path": "output/PT-SCR-012.txt",
       "sha256": "4495bf375d2ff5ba59a126a10636ce39521cd3f5ebc125ce8405b50622dc95fa"
     },
@@ -347,12 +381,16 @@
       "sha256": "3aa9ee8371f15f6ffc210356ba478921fe61f1934714ab713d5b547022b14910"
     },
     {
+      "path": "output/PT-SCR-045.txt",
+      "sha256": "93c99394621269f4d4146bf78fd76c0061971e63792c20453ea76b3b0f0b5545"
+    },
+    {
       "path": "output/PT-SCR025-node.json",
       "sha256": "07cbfcf206ffc9b3a2aaa8ff27c98f906d6c204f45735d9ff014bc9692fcc9b0"
     },
     {
       "path": "results.xml",
-      "sha256": "5dd841ea29d732b8f606da2c8eaf875e6830968b94a112bb90086eb28e97ccb2"
+      "sha256": "37d707448cdfeabc11771c49d0f83fb5d77a501233250d823ac98aa1d873c6a5"
     }
   ]
 }

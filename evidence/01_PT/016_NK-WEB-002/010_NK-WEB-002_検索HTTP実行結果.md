@@ -1,5 +1,9 @@
 # 検索HTTP実行結果
 
+## 正式20認定
+
+PT-WEB-20260920-20/sourcefc3b957dc49895079bc66d88edc4e5c78426b8c0、2026-09-20 07:46:17～07:58:06 JST、Maven11:47、exit0。全1609PT/Web350・新12PT成功、failed/error/skipped0、6Java全4coverage100%・Production5静的解析未解決0、既存JS全3coverage100%、41scope/68負canary成功。raw log SHA256 `6d40433ec383aa2d1a0369659af2ae056dd50a0fadbbd62790e1017e03ed64d2`。全reactor command/環境/source/hashはmanifest。BUG219/220修正commitfc3b957d、YKT175の全固定幅・YKT176のMVC/実HTTP/resource境界を再試験し完了。PG203を86部分成果819PTの内1成果12PTとして認定。実broker/API/本番起動/監査/実NKgate/PGPT・IT/ST未完了。以下は選択時点の履歴。
+
 PG203/PT-SCR034～045、仕様009。選択12PT成功、正式reactor未実行。正式1597PT/85部分成果へ未加算。検索HTTPは実MVC/loopback HTTPと実Web session DBまで接続し、業務電文応答は独立synthetic fixture。実broker/API/本番起動/REQUEST log/実NKgate・PGPT/IT/ST完成ではない。
 
 ## 失敗・修正・横展開
