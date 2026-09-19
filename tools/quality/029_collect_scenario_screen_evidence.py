@@ -12,6 +12,11 @@ DETAIL_CLASS = "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest"
 SCRIPT_CLASS = "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest"
 SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js"
 SEARCH_CLASS = "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest"
+SEARCH_HTTP_CLASS = "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest"
+SEARCH_HTTP_METHODS = ("search034SuccessAndWire", "search035InvalidNoMq", "search036ResultErrorsAtEveryStage",
+                       "search037SessionInvalidAtEveryStage", "search038MalformedAndTransport", "search039ResponseBinding",
+                       "search040NullAndFailurePropagation", "search041MvcGetHeadAndMethod", "search042RealHttpSecurity",
+                       "search043EscapingAndIsolation", "search044ConcurrentRequests", "search045CompatibilityTrace")
 SEARCH_METHODS = ("search026CommonLayoutAndInputs", "search027ResultsAndAudio", "search028PaginationAndEmpty",
                   "search029ValidationErrors", "search030EscapingAndCsp", "search031MaximumRowsAndCandidates",
                   "search032CssResourcesAndViewBoundary", "search033ConcurrentRendering")
@@ -29,7 +34,8 @@ SUBJECTS = ("dev/codex/schubert/nk/web/controller/ScenarioController",
             "dev/codex/schubert/nk/web/config/WebMvcConfiguration")
 TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
           "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
-          "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n"}
+          "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
+          "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n"}
 SOURCE_PATHS = (
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java",
@@ -50,7 +56,8 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchScriptTest.java",
     "src/schubert-nk-web/src/main/resources/templates/search.html",
     "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
-    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java")
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java")
 
 
 def validate_suite(suite, detail=False):
@@ -64,6 +71,10 @@ def validate_script_suite(suite):
 
 def validate_search_suite(suite):
     return validate_named_suite(suite, SEARCH_CLASS, SEARCH_METHODS, 26)
+
+
+def validate_search_http_suite(suite):
+    return validate_named_suite(suite, SEARCH_HTTP_CLASS, SEARCH_HTTP_METHODS, 34)
 
 
 def validate_named_suite(suite, classname, methods, first):
@@ -135,6 +146,7 @@ def main():
     methods.update(validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + DETAIL_CLASS + ".xml")).getroot(), True))
     methods.update(validate_script_suite(ET.parse(target / "surefire-reports" / ("TEST-" + SCRIPT_CLASS + ".xml")).getroot()))
     methods.update(validate_search_suite(ET.parse(target / "surefire-reports" / ("TEST-" + SEARCH_CLASS + ".xml")).getroot()))
+    methods.update(validate_search_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + SEARCH_HTTP_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
@@ -153,9 +165,10 @@ def main():
     for name in ("001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md", "002_NK-WEB-002_Scenario階層画面実行結果.md",
                  "003_NK-WEB-002_Scenario本文template単体テスト仕様書.md", "004_NK-WEB-002_Scenario本文template実行結果.md",
                  "005_NK-WEB-002_検索ブラウザ入力単体テスト仕様書.md", "006_NK-WEB-002_検索ブラウザ入力実行結果.md",
-                 "007_NK-WEB-002_検索template単体テスト仕様書.md", "008_NK-WEB-002_検索template実行結果.md"):
+                 "007_NK-WEB-002_検索template単体テスト仕様書.md", "008_NK-WEB-002_検索template実行結果.md",
+                 "009_NK-WEB-002_検索HTTP単体テスト仕様書.md", "010_NK-WEB-002_検索HTTP実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="33", failures="0", errors="0", skipped="0")
+    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="45", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
@@ -164,7 +177,8 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-WEB-002", "scopeResult": "PASS_HIERARCHY_HTTP_DETAIL_SEARCH_TEMPLATES_AND_SCRIPT_ONLY", "programComplete": False,
+        "programId": "NK-WEB-002", "scopeResult": "PASS_HIERARCHY_SEARCH_HTTP_DETAIL_TEMPLATE_AND_SCRIPT_ONLY", "programComplete": False,
+        "searchHttpOracle": "009/SCR034..045: independent UI234 bytes,SRC/GAM/SPK order,invalid400/no-MQ,all stages error/0102/malformed,request-page binding,null/unknown propagation,MVC and real HEAD distinction,real HTTP USER/ADMIN/session invalidation,64 isolated queries/192 correlations,escaped DOM and public trace.Not live broker/actual NK gate.",
         "searchTemplateOracle": "007/SCR026..033: actual search/pagination template, independent Current title/labels/order/metadata/audio/URLs/counts and all field errors.0/100 results,10 games,500 speakers,64 renders,CSRF only on Logout,all conditionals and HTML escaping.25 desktop/7 mobile CSS rules from Current,exact JS resource GET/HEAD and unknown404 at resource-unit boundary. Not search controller/live browser/actual NK gate.",
         "javascript": script_trace,
         "javascriptCommand": {
@@ -179,7 +193,7 @@ def main():
         "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033. SCR025 executes8 Node subcases; JavaScript1file line/function/branch100, no JS class declaration and no exclusion; not8 additional JUnit tests.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "YKT-169", "YKT-170", "YKT-171"],
+        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "PG-D-203", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "BUG-219", "BUG-220", "YKT-169", "YKT-170", "YKT-171", "YKT-175", "YKT-176"],
         "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
         "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
         "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
