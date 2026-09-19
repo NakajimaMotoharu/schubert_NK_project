@@ -1,6 +1,6 @@
 # 証跡scope横断gate・BUG-099/100
 
-2026-09-20 最新確定: 正式PT-WEB-20260920-17/source444683553d629bc53459d0d726ed6e20e315432b、06:47:56～06:59:44 JST/Maven11:46/exit0、全1588PT（Protocol80/Storage82/API689/Web329/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。18collector/41scope整合・65負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web9/88＝83部分成果798PT（全1588の内数）、今回再開比+173PT/+18部分成果。PG200検索画面状態8PTを限定認定、新規障害なし。PG201外部JSは仕様・Node導入のみ。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重38.25～49.75%（中心44%、約38～50%）を維持。残量38%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
+2026-09-20 最新確定: 正式PT-WEB-20260920-18/sourcec171ad68f1ebed666f42a595c6ba223bb352060c、07:06:06～07:17:48 JST/Maven11:41/exit0、全1589PT（Protocol80/Storage82/API689/Web330/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。JS1file全line/function/branch100%、18collector/41scope整合・66負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web10/89＝84部分成果799PT（全1589の内数）、今回再開比+174PT/+19部分成果。PG201外部JS1JUnit/内数Node8caseを限定認定・二重加算なし、新規障害なし。PG202検索templateは仕様のみ。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重38.25～49.75%（中心44%、約38～50%）を維持。残量36%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
 
 ## 1. 正式26の非合格記録（修正前）
 
