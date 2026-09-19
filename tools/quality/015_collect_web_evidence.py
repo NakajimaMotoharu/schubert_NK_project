@@ -21,6 +21,17 @@ def validate_scenario_inventory(mapping):
         raise ValueError("Scenario Web Test IDs are incomplete or inconsistent")
 
 
+def validate_page_inventory(mapping):
+    names = ("web174EmptyAndSinglePage", "web175FirstMiddleAndLastPages",
+             "web176MaximumWireBounds", "web177InvalidProjectionCombinations",
+             "web178NullConfigurationAndRedaction", "web179IndependentParallelProjection",
+             "web180JavaBeanDisplayContract", "web181ThymeleafSyntheticDom")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.PageViewModelTest#" + name
+                for i, name in enumerate(names, 174)}
+    if mapping != expected:
+        raise ValueError("Page Web Test IDs are incomplete or inconsistent")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -238,6 +249,11 @@ def main():
         (171, "web171TransportFailuresDoNotRetryOrLeakPending"),
         (172, "web172ConcurrentQueriesKeepContextsAndRepliesSeparate"),
         (173, "web173ResponseBoundsAndCallerOwnershipRemainExact"))
+    groups["dev.codex.schubert.nk.web.view.PageViewModelTest"] = (
+        (174, "web174EmptyAndSinglePage"), (175, "web175FirstMiddleAndLastPages"),
+        (176, "web176MaximumWireBounds"), (177, "web177InvalidProjectionCombinations"),
+        (178, "web178NullConfigurationAndRedaction"), (179, "web179IndependentParallelProjection"),
+        (180, "web180JavaBeanDisplayContract"), (181, "web181ThymeleafSyntheticDom"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -261,12 +277,14 @@ def main():
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Web Test IDs do not exactly cover executed methods")
     validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
+    validate_page_inventory({key: value for key, value in expected.items() if "PageViewModelTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
-    for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md"):
+    for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md",
+                 "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -276,6 +294,11 @@ def main():
     manifest.update({
         "frameworkVersions": {"springMvc": "7.0.9", "thymeleafSpring6": "3.1.5.RELEASE", "jsoupTest": "1.23.2", "springSession": "4.1.1", "springWeb": "7.0.9", "springTest": "7.0.9", "springSecurityWeb": "7.1.1", "micrometerWeb": "1.17.1", "servletApi": "6.1 (Tomcat bundled)", "tomcatEmbedCore": "11.0.25", "commonsLoggingWeb": "1.4.0", "jspecifyWeb": "1.0.1", "sourceAndHashes": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md sections5.7/5.8/5.9/5.10"},
         "programId": "NK-WEB-001", "programStatus": "IN_PROGRESS",
+        "pageViewExpected": "PG192/PT-WEB-174..181/004/005/SS313 section6.1/UI222: independent literal 50/100 page fixtures, empty/single/first/middle/last/max, invalid projection and null/configuration rejection, 100 parallel checks, closed read-only JavaBean and synthetic Thymeleaf DOM. User input page correction remains upstream. Not production screens/controller/URLs/NK CHR.",
+        "pageViewSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                            for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java")],
         "scenarioWireExpected": "PG118/191, PT-WEB-166..173,001 section14.14/003: six independent UI234 request/response byte vectors,0/1/max records,I/F descriptors,all defined error profiles,mutated headers/data/records,100 concurrent correlations,timeout/interruption/capacity/no retry/buffer erasure. Synthetic sender and real correlation registry, not actual broker/controller/production bootstrap/NK CHR.",
         "scenarioWireSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
                                 for relative in (

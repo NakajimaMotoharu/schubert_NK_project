@@ -15,4 +15,4 @@ UI222§6の「利用者が指定したpage0以下を1、最終page超過を最�
 | PT-WEB-180 | web180JavaBeanDisplayContract | JavaBean introspection | 独立定義の6数値・previous/next・empty/paginatedプロパティ、protocol/sessionをgetterへ露出しない |
 | PT-WEB-181 | web181ThymeleafSyntheticDom | test専用inline templateへ0/単/複数page | 明示DOMのcount/page/first/last/前後数字、0件では前後要素なし。これはProduction画面/URLの試験ではない |
 
-期待値はUIの上限と手計算のliteral tableを使い、Production methodで作らない。成功4coverage100%/NullAway/static/negative、failed/flaky/skipped/not-runを合格へ算入しない。入力は公開数値のみ。command/環境/branch/commit/coverage/BUG・SSC/結果/evidence/hashは005とmanifestへ正式成功後記録する。現在未実装・未実行。
+期待値はUIの上限と手計算のliteral tableを使い、Production methodで作らない。成功4coverage100%/NullAway/static/negative、failed/flaky/skipped/not-runを合格へ算入しない。入力は公開数値のみ。command/環境/branch/commit/coverage/BUG・SSC/結果/evidence/hashは005とmanifestへ記録する。選択8PT成功、正式全回帰前。
