@@ -1,5 +1,13 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-20 Caddy 2.11.4検証toolの隔離導入
+
+既存Characterization用2.6.2は変更せず、公式GitHub release APIのlatest=v2.11.4（2026-06-03公開）を確認してlinux_amd64 tarとchecksumsをwgetで取得。導入先`/home/mini/codex/project1/work/toolchain/caddy-2.11.4-pRgVbp/caddy`、表示`v2.11.4 h1:XKxkMTgNSizEvKG6QHue6cAsFOteU2qA61w2tKkCWi0=`。OS package/service/port/CA trustは変更していない。配備採用・template試験完了ではなく、native検証準備のみ。
+
+入手元: [公式release](https://github.com/caddyserver/caddy/releases/tag/v2.11.4)。同release assetsの`caddy_2.11.4_linux_amd64.tar.gz` SHA256=`527fbf917c39189a1e3b31d34fa955601680b2d5c8055d2a87b8b9588dec7bb9`、checksums.txt SHA256=`7bfa272f3ece3ac987c1e06cd3c0acf126749d88110c20d7b83dcea3caaf0080`はAPI asset digest一致。本体SHA256=`b7105518e3ed1c0761f232e44fc09345535533c9cb0abf0e12809416c7ac64d9`。
+
+再現: work/toolchain内でmktemp -dにより新規領域を作り、同versionの2assetをwget -Pで取得。checksumsはSHA512形式なので対象tarの行を`sha512sum -c -`で検証（OK）後`tar -xzf`、`./caddy version`。最初のsha256sum -cはdigest長不一致でexit1、展開前に停止した。形式確認後SHA512で再検証し、checksum無視や既存tool上書きはしていない。binary/archive/生成CA実体はGitへ格納しない。
+
 PG-D-185（2026-09-20）: PT-BAT-110だけ固定4worker・独立PG18.6 cluster/Connectionへ分割。追加tool導入なし、既存1＋追加3のclusterを逐次起動し、各worker終了後try-resourceで全追加clusterを停止する。同一Connection/advisory lockを共有しない。実行機12CPU/RAM15160MiB、/tmp tmpfs7.5GiB・空き7.4GiB（開始前）、project ext4空き162GiB、FD limit524288。実行中swap0、RAM逼迫なし。選択class397.9→178.8秒、単回約55%短縮、全6768 fault位置・期待値・JUnit16を維持。再現commandとhash/制約は017072/073。全JUnit/Mavenを並列化せずMaven1本を維持、正式全reactorは次に確認する。
 
 PG-D-155（2026-09-12）: 既存OSの/usr/bin/getent、Ubuntu GLIBC2.43-2ubuntu2.4を利用（新規導入なし）。実行fileはroot:root0755、SHA256 aa31e99e0818cf40cd6549568397b39e8b907341e715ec733a15842067a45255。配布元はUbuntu libc-bin package。固定`getent group schubert`、PATH=/usr/bin:/bin・LANG=C・LC_ALL=C以外のenvなし、stderr破棄・5秒/65536byte上限、shellなし。再現確認はgetent --version/--help、Linux man-pages6.17 getent(1)（/usr/share/man/man1/getent.1.gz SHA256 de56d08d490d1014e879b0fe65f6e23751b21b74238e905fe2f6abef8164da3b）。当PG/PT hostはschubert group未配備で固定照会exit2、実factoryはこの負例を検証し、正系/opaque fieldは孤立process fixtureだけ。root/group/NSS設定やdaemonを本確認で変更していない。実配備の正系は後続Linux ITで別確認する。

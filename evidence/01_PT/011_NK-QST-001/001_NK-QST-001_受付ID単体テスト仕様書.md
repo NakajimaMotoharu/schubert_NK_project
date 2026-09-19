@@ -1,0 +1,16 @@
+# NK-QST-001 受付ID単体テスト仕様書
+
+PG-D-188。RD QST002/ASY001、UI224§3/236、SS312§7/331§6.1。対象QuestionReceiptId(value)とQuestionReceiptIdGenerator.create/generate、関連methodを各Test IDへ対応。質問受付DB/Outbox/再送/認可は別の未完了範囲。
+
+| Test ID（PT-QST-） | method | 入力・操作 | 独立期待 |
+|---|---|---|---|
+| RID001 | exactAlphabet | 32文字を各26回反復、公開固定値を構築 | 全32候補を受理、value等値・hash・表示値保持。0..7だけへ狭めない |
+| RID002 | lengthBoundaries | 0/1/25/27/4096文字 | 固定非秘密例外、26だけ許容、trim/padなし |
+| RID003 | characterBoundaries | 全26位置に小文字/I/L/O/U/space/control/非ASCIIを注入 | 全拒否、NFC/大小case/曖昧文字置換しない |
+| RID004 | independentRandomVector | 0..25次いで31..6の固定index列 | 0123456789ABCDEFGHJKMNPQRS / ZYXWVTSRQPNMKJHGFEDCBA9876（32文字表を独立計数し各26文字と照合）、32boundを毎回確認 |
+| RID005 | randomFailure | 各0..25位置で同じ例外を注入 | 同一例外伝搬、残り乱数取得0、ID返却なし・fallbackなし |
+| RID006 | nullAndFactory | value/null乱数port、公開factory生成 | null契約拒否、factoryは26許容ASCII、実乱数の一意性を確率的合格条件にしない |
+| RID007 | concurrentCalls | 同一generatorに並行64呼出、固定cyclicindex port | 26取得のinterleaveなし、全返却値を独立通番oracleと集合/重複数で照合 |
+| RID008 | equalityAndPublicEvidence | 同一/相異public値、失敗message、固定vector trace | 等値/hash契約・toString/診断はREDACTED・公開vectorのみ保存。表示用値はvalue accessorのみ |
+
+期待値はProductionのalphabet/helperで作らず独立literal/BigInteger等の別算定を使う。正常/境界/異常/null/並行/例外を網羅。DB再送/衝突は本部品非該当として別writer仕様へ残す。constructorでinvariantを確立、NPEをcatchして成功にしない。新Java全line/method/class/branch100%、既存全回帰/静的解析と新scope整合が正式認定条件。実行日時/tool/commit/command/結果/hashは002とmanifestへ後記、未実行を合格にしない。
