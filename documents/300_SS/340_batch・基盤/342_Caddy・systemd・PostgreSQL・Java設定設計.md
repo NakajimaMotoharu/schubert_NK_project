@@ -215,6 +215,10 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 
 ### 6.2 Roleごとのtimeout
 
+SSC-069/PG-D-187（2026-09-20）: §6.1の運用eventを`log_connections=on`、`log_disconnections=on`、`log_checkpoints=on`、`log_lock_waits=on`、`log_autovacuum_min_duration=0`で具体化する。slow SQL本文は`log_min_duration_statement=-1`、`log_min_duration_sample=-1`、`log_transaction_sample_rate=0`で無効にし、失敗SQL本文は`log_min_error_statement=panic`、DETAIL/HINT/QUERY/CONTEXTは`log_error_verbosity=terse`で抑止する。error severityは既定の記録を維持する。PostgreSQL自身のprimary error MESSAGEには不正入力値を含む場合があるため、これだけで任意入力の秘密非出力を保証しない。型付きbind/入力検証・実配備のOS log/redaction確認は別gateとし、raw DB logをPTエビデンスへコピーしない。
+
+根拠: [PostgreSQL18 logging](https://www.postgresql.org/docs/18/runtime-config-logging.html)。配備雛形は`src/deployment/postgresql/`、全directiveとHBA16規則をPT-OPS-PGCFG001～008で独立照合する。log保存先/rotationは配備環境とSS351で管理し、雛形だけで全運用完成としない。
+
 `schubert_backup`行と後続hba entryはQA-043/UIC-003承認済みのrelease値である。
 
 | Role | `statement_timeout` | `lock_timeout` | `idle_in_transaction_session_timeout` |
