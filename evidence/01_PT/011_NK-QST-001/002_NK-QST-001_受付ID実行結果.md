@@ -1,5 +1,7 @@
 # NK-QST-001 受付ID実行結果
 
+正式認定: PT-WEB-20260920-06/source6575b21bf467002cccda7fbb9a6980e4cdfc9a71、03:13:05～03:24:50 JST、11:44/exit0。全1487PT・6Java4coverage100%・Production5静的解析未解決0・39scope/52負canary成功。RID001～008、新2class/6method/20line/8branch全missed0を認定し、QST1部分成果8PTを追加。Program全体は未完了。環境/command/source/input期待実際/sanitized結果/hashはevidence/manifest.json、raw log SHA256=c75b7bc94be1ea6c73540a73458bc126376279a7f751c9560499283484f43c7e。以下は選択時履歴。
+
 PG188/RID001～008、選択8PT成功・正式全reactor前。低位ID部品だけ、質問受付/再送/worker完成ではない。
 
 2026-09-20 03:10:49 JST終了、39.339秒/exit0、QuestionReceiptIdTest8＋PostgresDeploymentTest8と依存FieldCodecTest/ResourceScopeTest成功、failed/error/skipped0。新2class/6method/20line/8branch全missed0、NullAway/Enforcer/Spotless/SpotBugs成功。古いexecを含む選択実行なのでAPI全coverage表示は正式認定へ流用しない。raw log `/tmp/pgpt-pg188-green.log` SHA256=`b4b95bbae29d563faaeaf7a02b0376244f1a61f47f80b960a663e4f666b8c0cf`。

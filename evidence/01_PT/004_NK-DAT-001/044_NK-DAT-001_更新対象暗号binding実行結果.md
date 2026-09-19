@@ -1,6 +1,6 @@
 # NK-DAT-001 更新対象暗号binding 実行結果
 
-2026-09-20 最新確定: dev-foundation/source139c74b3dd844a213bf5581d51f4814219386497、正式PT-WEB-20260920-05（02:55:42～03:07:25 JST、Maven11:42/exit0）、全1479件（Protocol80/Storage82/API668/Web241/Batch367/CHR41）PASS、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review/coverage除外なし、CHR SpotBugs未設定。15collector/38scope整合・49負canary成功。DB29/266＋Batch25/281＋OPS16/134＝70部分成果681PTを維持。PG187の8PT成功・BUG208/209/YKT164/165完了だが、BUG210/YKT166のTest ID表記差が残りSSC069/新OPS1部分成果は保留。今回再開比+64PT/+5部分成果。PG188受付IDは仕様のみ。BUG195/206/YKT154/162/SSC063、実archive/親/Question/Web/Logout/QA045/実NKgateは未完了。固定加重約4割（35～50%）、利用枠残68%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
+2026-09-20 最新確定: dev-foundation/source6575b21bf467002cccda7fbb9a6980e4cdfc9a71、正式PT-WEB-20260920-06（03:13:05～03:24:50 JST、Maven11:44/exit0）、全1487件（Protocol80/Storage82/API676/Web241/Batch367/CHR41）PASS、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review/coverage除外なし、CHR SpotBugs未設定。16collector/39scope整合・52負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST1/8＝72部分成果697PT（全1487の内数）、今回再開比+72PT/+7部分成果。PG187配備設定・PG188受付IDを認定、BUG210/YKT166・SSC069限定完了。PG189/SSC070は仕様のみ。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/Web/Logout/QA045/実NKgateは未完了。固定加重約4割（35～50%）、残量65%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
 
 ## 0. 正式coverage・review
 

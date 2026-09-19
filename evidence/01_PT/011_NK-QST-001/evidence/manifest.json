@@ -1,0 +1,138 @@
+{
+  "runId": "PT-WEB-20260920-06",
+  "targetCommit": "6575b21bf467002cccda7fbb9a6980e4cdfc9a71",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-20T03:13:05+09:00",
+  "completedAt": "2026-09-20T03:24:50+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "c75b7bc94be1ea6c73540a73458bc126376279a7f751c9560499283484f43c7e",
+  "programId": "NK-QST-001",
+  "scopeResult": "PASS_RECEIPT_IDENTIFIER_ONLY",
+  "programComplete": false,
+  "testIdMethods": {
+    "PT-QST-RID001": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet",
+    "PT-QST-RID002": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#lengthBoundaries",
+    "PT-QST-RID003": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#characterBoundaries",
+    "PT-QST-RID004": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#independentRandomVector",
+    "PT-QST-RID005": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#randomFailure",
+    "PT-QST-RID006": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory",
+    "PT-QST-RID007": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#concurrentCalls",
+    "PT-QST-RID008": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence"
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "classCoverage": {
+    "dev/codex/schubert/nk/api/application/question/QuestionReceiptId": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 26
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 68
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "tool": "SpotBugs 4.10.4.0",
+    "violations": 0,
+    "errors": 0
+  },
+  "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "bd9dc35097fbd9dfb3464db2cfc36f2f30ec6ba5a4243e6be3d05b94f89db14b",
+  "related": [
+    "PG-D-188"
+  ],
+  "fixture": "Public literal alphabet/index vectors; no real user IDs or credentials.",
+  "oracle": "001/RID001..008:32 permitted letters at every leading value; exact26 length, all forbidden ASCII at26 positions; independent forward/reverse vectors and16 fixed cyclic values in64 concurrent calls, every26 provider failure position, invalid provider index and null contracts. Factory uses SecureRandom; no probabilistic uniqueness assertion.",
+  "limitations": "No DB uniqueness/retry, owner authorization, Submit/Outbox/Inbox replay, async worker, actual NK CHR or IT/ST certification.",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java",
+      "sha256": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java",
+      "sha256": "50d667d8085cd3df1c9cbbe2c092a81b937eed2dbc137235879666f28ae886b2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "sha256": "34896c85e175329ac1147b3e9cd252689963f45d0a9e404131f08ae2ce525bb6"
+    }
+  ],
+  "files": [
+    {
+      "path": "input/PT-QST-RID008.txt",
+      "sha256": "589c9a9908f79744c9f6567eb37628de324e152e07b0359dfbd92f0cf5026fed"
+    },
+    {
+      "path": "logs/001_NK-QST-001_受付ID単体テスト仕様書.md",
+      "sha256": "49cb2dff228d0e3868537729143c0e3e41a2941212d31b324f0eceb53433b31a"
+    },
+    {
+      "path": "logs/002_NK-QST-001_受付ID実行結果.md",
+      "sha256": "d9778b95a691bf4e6cf6199dfb27a60ada7c908dbdb48f8f5bbe0cb435e89489"
+    },
+    {
+      "path": "output/PT-QST-RID008.txt",
+      "sha256": "589c9a9908f79744c9f6567eb37628de324e152e07b0359dfbd92f0cf5026fed"
+    },
+    {
+      "path": "results.xml",
+      "sha256": "722eba7a81447d02d1a49c9e64b120243609c326139dc024b5ec1bfae98b92d9"
+    }
+  ]
+}

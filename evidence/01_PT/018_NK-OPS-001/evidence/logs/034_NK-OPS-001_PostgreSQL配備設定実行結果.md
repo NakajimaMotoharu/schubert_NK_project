@@ -1,5 +1,9 @@
 # NK-OPS-001 PostgreSQL配備設定実行結果
 
+正式06再認定: source6575b21bf467002cccda7fbb9a6980e4cdfc9a71、03:13:05～03:24:50/11:44/exit0、全1487PT/6Java4coverage100%/static/39scope/52負canary成功。PT-OPS-PGCFG-001～008の全annotation・仕様・manifest・traceを統一しBUG210/YKT166完了。旧separator無し公開traceは新名へ置換（旧版はGitで復元可能）。SSC069は雛形/低位設定PT範囲で完了、OPS17部分成果142PTとなる。実host配備・全秘密非出力gate・PGPT/IT/ST完成ではない。rawSHA c75b7bc94be1ea6c73540a73458bc126376279a7f751c9560499283484f43c7e、正式manifest参照。以下は過去の保留/選択履歴。
+
+BUG210/YKT166修正後選択（03:10:49/39.339秒/exit0）: 全8DisplayName/2template/SS342/033/role trace/collector traceをPT-OPS-PGCFG-001～008へ統一。新native8PTとreceipt8PT成功、019のsource annotation separator・欠落・重複・未知ID canaryを追加し成功。source/spec等の旧PGCFG直結数字検索0。source/test/toolsの正式commitは次の全reactor前固定、正式再認定までは対応中。
+
 正式PT-WEB-20260920-05/source139c74b3dd844a213bf5581d51f4814219386497、02:55:42～03:07:25 JST、11:42/exit0。全1479PT（API668）・failed/error/skipped0、6Java全4coverage100%・Production5static未解決0、38scope/49負canary成功。BUG208/209・YKT164/165は全32native設定・全role値・既存回帰で再試験成功。raw log SHA256=`4fb20cbffb7e5f59a325cd1b8dc46dd83c9c8220bc9b3b6821ef711626d5ffd4`、source/環境/command/入力期待実際/hashはevidence/manifest.json。
 
 BUG210/YKT166: DisplayName/specのPGCFG001とmanifestのPGCFG-001の表記差は未解決。8methodとの対応は一意だが、表記統一を次回正式回帰で確認するまでSSC069/新OPS部分成果の完了を保留する。全1479試験成功と全trace gate完了を混同しない。以下は選択時履歴。
