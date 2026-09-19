@@ -1,6 +1,6 @@
 # Animationメニュー・一覧HTTP単体テスト仕様書
 
-NK-WEB-002/SCR008/009、AnimationController.menu/main/ova/list/exchange/actor、AnimationMvcConfiguration.animationController。FUN006/AUT/SYS006/TST、UI221～223/232/235/264、SS311～314/321/323/352、PG207。仕様先行、未実装/未実行。AnimationControllerTestの12methodと以下IDを一意対応させる。
+NK-WEB-002/SCR008/009、AnimationController.menu/main/ova/list/exchange/actor、AnimationMvcConfiguration.animationController。FUN006/AUT/SYS006/TST、UI221～223/232/235/264、SS311～314/321/323/352、PG207。正式23で12PT合格、詳細は014とmanifest参照。AnimationControllerTestの12methodと以下IDを一意対応させる。
 
 | Test ID | method | 事前条件・入力・操作 | 独立期待値・根拠 |
 |---|---|---|---|
