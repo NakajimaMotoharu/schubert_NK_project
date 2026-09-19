@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-PG183/SSC063（仕様のみ）: BatchRunRepository.begin/finish/history/abandon/insert/replayed・8 owned JDBC scope、既存bind/guard/time/Historyを017068・BAT151/既存BAT138～153へ追跡。OPS009/DAT009/UI251/SS331§8.3/332/341、BUG195・206/YKT154・162。272複合予定、未認定、新JUnit/部品加算0。
+PG183/SSC063（正式未認定）: BatchRunRepository.begin/finish/history/abandon/insert/replayed・8 owned JDBC scope、既存bind/guard/time/Historyを017068/069・BAT151/既存BAT138～153へ追跡。OPS009/DAT009/UI251/SS331§8.3/332/341、BUG195・206/YKT154・162。272複合/2NULL/元2反例・関連64PT・2class/17method/236line/124branch全missed0/static成功、新JUnit/部品加算0。
 
 PG182/SSC063（正式未認定）: BackupStepRepository.inspectのpair2scope、complete/readRow/guarded等は017066/067・BAT216/既存BAT210～225へ追跡。BAK/BKO/OPS009/UI251/SS331§8.3/332/341§6.6/343、BUG195/YKT154、YKT162直接原因非該当。68複合＋元反例・関連24PT・1class/9method/99line/72branch全missed0/static成功、新JUnit/部品加算0。
 

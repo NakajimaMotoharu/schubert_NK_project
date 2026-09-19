@@ -615,6 +615,8 @@ final class BatchRunRepositoryTest {
 
   @Test
   void interruptionAndRuntime() throws Exception {
+    resourceCompounds();
+    assertAll(() -> originalResourceFailure(false), () -> originalResourceFailure(true));
     try (var c = locked()) {
       Probe p = new Probe();
       try {
@@ -659,9 +661,106 @@ final class BatchRunRepositoryTest {
       }
       Probe argument = new Probe();
       argument.runtime = new IllegalArgumentException("public-invalid");
-      redacted(() -> new BatchRunRepository(argument.wrap(c)).begin(RUN, STEP, NOW, false));
+      // PG183/SSC063/BUG206: a provider failure is not a malformed projected value.
+      assertSame(
+          argument.runtime,
+          assertThrows(
+              Throwable.class,
+              () -> new BatchRunRepository(argument.wrap(c)).begin(RUN, STEP, NOW, false)));
       argument.closed();
     }
+  }
+
+  private void originalResourceFailure(boolean compound) throws Exception {
+    try (var c = locked()) {
+      Probe p = new Probe();
+      Throwable original =
+          compound
+              ? new IllegalStateException("public same run fixture")
+              : new IllegalArgumentException("public provider fixture");
+      p.scopedFaults.put(
+          compound ? "history.row.next" : "history.statement.executeQuery", original);
+      if (compound) p.scopedFaults.put("history.row.close", original);
+      try {
+        assertSame(
+            original,
+            assertThrows(
+                Throwable.class,
+                () -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, false)));
+        assertEquals(compound ? 2 : 1, p.scopedInjected);
+        p.closed();
+      } finally {
+        c.rollback();
+      }
+    }
+  }
+
+  private void resourceCompounds() throws Exception {
+    int cases = 0;
+    try (var c = locked()) {
+      for (String kind : List.of("history", "insert", "abandon", "finish", "replay")) {
+        sql(c, "delete from schubert.batch_runs");
+        c.commit();
+        String path =
+            kind.equals("abandon")
+                ? "recover"
+                : Set.of("finish", "replay").contains(kind) ? kind : "empty";
+        BatchStepAttempt handle = null;
+        if (kind.equals("abandon"))
+          seed(c, 1, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", null);
+        if (Set.of("finish", "replay").contains(kind)) {
+          handle = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
+          if (kind.equals("replay")) new BatchRunRepository(c).finish(handle, END, SUCCESS);
+        }
+        c.commit();
+        String before = snapshot(c);
+        c.rollback();
+        BatchStepAttempt fixed = handle;
+        boolean update = Set.of("abandon", "finish").contains(kind);
+        int stageCases = 0;
+        for (var sample : JdbcResourceCases.all()) {
+          if (update && sample.body().startsWith("row.")) continue;
+          String body = update ? "statement.executeUpdate" : sample.body();
+          Probe p = new Probe();
+          if (sample.primary() != null) p.scopedFaults.put(kind + "." + body, sample.primary());
+          p.scopedFaults.put(kind + "." + sample.close(), sample.secondary());
+          sample.verify(
+              assertThrows(
+                  Throwable.class, () -> operate(new BatchRunRepository(p.wrap(c)), path, fixed)));
+          assertEquals(sample.primary() == null ? 1 : 2, p.scopedInjected);
+          assertEquals(1, p.scopedSeen.get(kind + ".statement.close"));
+          assertEquals(
+              update || (body.equals("statement.executeQuery") && sample.primary() != null) ? 0 : 1,
+              p.scopedSeen.getOrDefault(kind + ".row.close", 0));
+          p.closed();
+          for (String key :
+              List.of(
+                  "connection.commit",
+                  "connection.rollback",
+                  "connection.close",
+                  "connection.setAutoCommit")) assertFalse(p.seen.containsKey(key));
+          assertFalse(c.getAutoCommit());
+          c.rollback();
+          assertEquals(before, snapshot(c));
+          c.rollback();
+          stageCases++;
+          cases++;
+        }
+        assertEquals(update ? 34 : 68, stageCases);
+        if (update) {
+          Probe absent = new Probe();
+          absent.kind = kind;
+          absent.anomaly = "nullStatement";
+          redacted(() -> operate(new BatchRunRepository(absent.wrap(c)), path, fixed));
+          assertEquals(0, absent.scopedSeen.getOrDefault(kind + ".statement.close", 0));
+          absent.closed();
+          c.rollback();
+          assertEquals(before, snapshot(c));
+          c.rollback();
+        }
+      }
+    }
+    assertEquals(272, cases);
   }
 
   @Test
@@ -911,6 +1010,9 @@ final class BatchRunRepositoryTest {
 
   static final class Probe {
     final Map<String, Integer> seen = new TreeMap<>(), failAt = new HashMap<>();
+    final Map<String, Integer> scopedSeen = new TreeMap<>();
+    final Map<String, Throwable> scopedFaults = new HashMap<>();
+    int scopedInjected;
     final Set<String> kinds = new HashSet<>(), projected = new HashSet<>();
     String kind = "", anomaly = "", changeKind = "", interruptAt = "";
     int changed, interruptPosition, failures, statements, rows;
@@ -922,6 +1024,15 @@ final class BatchRunRepositoryTest {
       if (Objects.equals(failAt.get(key), n)) {
         failures++;
         throw new SQLException("public provider fixture", "08006");
+      }
+    }
+
+    void scopedHit(String kind, String key) throws Throwable {
+      String scoped = kind + "." + key;
+      int n = scopedSeen.merge(scoped, 1, Integer::sum);
+      if (n == 1 && scopedFaults.containsKey(scoped)) {
+        scopedInjected++;
+        throw scopedFaults.get(scoped);
       }
     }
 
@@ -960,9 +1071,11 @@ final class BatchRunRepositoryTest {
                   Object v = invoke(s, m, a);
                   statements--;
                   hit("statement.close");
+                  scopedHit(k, "statement.close");
                   return v;
                 }
                 hit("statement." + name);
+                scopedHit(k, "statement." + name);
                 if (name.equals("setQueryTimeout")) assertEquals(5, a[0]);
                 if (Set.of("setObject", "setString", "setInt", "setLong").contains(name)) {
                   binds.put((Integer) a[0], a[1]);
@@ -994,9 +1107,11 @@ final class BatchRunRepositoryTest {
                   Object v = invoke(r, m, a);
                   rows--;
                   hit("row.close");
+                  scopedHit(k, "row.close");
                   return v;
                 }
                 hit("row." + name);
+                scopedHit(k, "row." + name);
                 boolean broken = k.equals(kind);
                 if (name.equals("next")) {
                   pos[0]++;
