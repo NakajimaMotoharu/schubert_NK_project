@@ -2,7 +2,7 @@
 
 正式認定: PT-WEB-20260920-02/source21cf373541fc7d0d7e131f79ebc9d67db3c44d41/dev-foundation、2026-09-20 01:27:40～01:43:47 JST/16:06/exit0。全1455 PT・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし、38scope/46負canary成功。PG181/182/183の68/68/272＝408複合・BatchRun2NULL・元反例と既存回帰を認定、PG178以降の905複合は既存Test ID内で新JUnit/部品加算0。Batch95class/579method/3632line/1891branch全missed0。BUG207/YKT163完了、BUG195/206・YKT154/162・SSC063の別境界分類は継続。実NK CHR/親全体/PGPT/IT/ST未完了。実行環境・入力期待実際・source/test/hashは017/evidence/manifest.json、raw log SHA256=6654362af9ac97cc912a388172d1344400157201d7574b0f138a5325562214d4。以下の未認定表記は探索履歴。
 
-PG184/SSC067（仕様のみ）: file.BackupBundleCompletion constructor/complete/guard、既存Reader/Verifier/BackupCommitService接続を017070・BAT274～281へ追跡。BAK001～008/BKO001～008/OPS009/UI251/SS341§6.11/332/343。新8PT/1部分成果予定、未実装/未加算。archive生成/最新bundle/7世代/親全体は別残件。
+PG184/SSC067（選択成功・正式認定前）: file.BackupBundleCompletion constructor/complete/guard、既存Reader/Verifier/BackupCommitService接続を017070/071・BAT274～281へ追跡。BAK001～008/BKO001～008/OPS009/UI251/SS341§6.11/332/343。関連16PT中新8PT成功、1class/4method/33line/8branch全missed0/static成功。全reactor前のため新8PT/1部分成果は未加算。archive生成/最新bundle/7世代/親全体は別残件。
 
 PG183/SSC063（正式未認定）: BatchRunRepository.begin/finish/history/abandon/insert/replayed・8 owned JDBC scope、既存bind/guard/time/Historyを017068/069・BAT151/既存BAT138～153へ追跡。OPS009/DAT009/UI251/SS331§8.3/332/341、BUG195・206/YKT154・162。272複合/2NULL/元2反例・関連64PT・2class/17method/236line/124branch全missed0/static成功、新JUnit/部品加算0。
 

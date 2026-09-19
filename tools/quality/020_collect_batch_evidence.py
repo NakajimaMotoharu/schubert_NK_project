@@ -9,7 +9,17 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 359
+BATCH_TEST_COUNT = 367
+COMPLETION_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest"
+COMPLETION_METHODS = ("verifiedCommitAndReplay", "invalidFilesAndHandleBinding", "allReadAndDatabaseFailures", "sharedDeadlineAndInterrupt", "completionClockAndCommitUncertainty", "nullOwnershipAndFactory", "unknownFailuresAndResourceOwnership", "concurrentAndIndependentTrace")
+COMPLETION_TRACES = {"PT-BAT-281-completion.txt": b"manifestSha256=bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nfiles=4\nDB=1/1/0/26\nCONFIG=2/2/0/67\nend=2026-09-12T15:00:04.987654Z\nowner=SUCCESS\nnonowner=REJECTED\n"}
+
+def validate_completion_suite(suite):
+    return validate_group(suite, COMPLETION_CLASS, COMPLETION_METHODS, 274)
+
+def validate_completion_traces(traces):
+    if traces != COMPLETION_TRACES:
+        raise ValueError("missing, extra or invalid independent backup completion trace")
 BUNDLE_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest"
 BUNDLE_METHODS = ("verifiedDurablePublication", "forceOrderAndRetainedInodes", "pendingContentAndMetadata", "finalManifestAndArtifactChecks", "forceSizeAndNullBoundaries", "everyIoFailure", "unknownAndCompoundFailures", "deadlineAcrossPhases", "interruptionAcrossPhases", "existingFinalAndMissingPending", "namespaceReplacement", "nullAndOwnerContracts", "concurrentPublication", "nativePortsAndFactory", "readonlyCompatibility", "independentBundleTrace")
 BUNDLE_TRACES = {"PT-BAT-273-bundle.txt": b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nforce=4|publish=1|sync=2\nio=301|clock=514\n"}
@@ -265,6 +275,7 @@ def select_program_suites(suites):
                 RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, READER_CLASS, *OPS_CLASSES}
     expected.add(PUBLICATION_CLASS)
     expected.add(BUNDLE_CLASS)
+    expected.add(COMPLETION_CLASS)
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -353,6 +364,7 @@ def validate_reports(suites):
                   ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite, READER_CLASS: validate_reader_suite}
     validators[PUBLICATION_CLASS] = validate_publication_suite
     validators[BUNDLE_CLASS] = validate_bundle_suite
+    validators[COMPLETION_CLASS] = validate_completion_suite
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -387,6 +399,13 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    completion_root = target / "backup-completion-traces"
+    completion_traces = {str(p.relative_to(completion_root)): p.read_bytes() for p in completion_root.rglob("*") if p.is_file()}
+    validate_completion_traces(completion_traces)
+    for folder, values in (("input/backup-completion", COMPLETION_TRACES), ("output/backup-completion", completion_traces)):
+        (evidence / folder).mkdir(parents=True, exist_ok=True)
+        for name, content in values.items():
+            (evidence / folder / name).write_bytes(content)
     bundle_root = target / "backup-bundle-traces"
     bundle_traces = {str(p.relative_to(bundle_root)): p.read_bytes() for p in bundle_root.rglob("*") if p.is_file()}
     validate_bundle_traces(bundle_traces)
@@ -412,6 +431,8 @@ def main():
     for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md", "053_NK-BAT-001_root_manifest公開単体テスト仕様書.md", "055_NK-BAT-001_bundle確定単体テスト仕様書.md", "057_NK-BAT-001_bundle元inode横展開.md", "058_NK-BAT-001_Log_SQL資源横展開仕様.md", "059_NK-BAT-001_Log_SQL資源横展開結果.md", "060_NK-BAT-001_読取Repository資源横展開仕様.md", "061_NK-BAT-001_読取Repository資源横展開結果.md", "062_NK-BAT-001_CleanupRepository資源横展開仕様.md", "063_NK-BAT-001_CleanupRepository資源横展開結果.md", "064_NK-BAT-001_CleanupStep資源横展開仕様.md", "065_NK-BAT-001_CleanupStep資源横展開結果.md", "066_NK-BAT-001_BackupStep資源横展開仕様.md", "067_NK-BAT-001_BackupStep資源横展開結果.md", "068_NK-BAT-001_BatchRun資源横展開仕様.md", "069_NK-BAT-001_BatchRun資源横展開結果.md"):
         audit = repo / "evidence/01_PT/017_NK-BAT-001" / audit_name
         shutil.copyfile(audit, evidence / "logs" / audit.name)
+    for completion_audit in ("070_NK-BAT-001_backup検証確定caller単体テスト仕様書.md", "071_NK-BAT-001_backup検証確定caller実行結果.md"):
+        shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001" / completion_audit, evidence / "logs" / completion_audit)
     pair_root = target / "backup-step-traces"
     pair_traces = {str(p.relative_to(pair_root)): p.read_bytes() for p in pair_root.rglob("*") if p.is_file()}
     validate_pair_traces(pair_traces)
@@ -577,6 +598,8 @@ def main():
     manifest["related"] += ["PG-D-181", "BUG-207", "YKT-163"]
     manifest["related"] += ["PG-D-182"]
     manifest["related"] += ["PG-D-183"]
+    manifest["related"] += ["PG-D-184", "SSC-067"]
+    manifest["backupCompletionOracle"] = "070/071 BAT274..281: root reader and full artifact verifier precede DB pair completion; independent 161 IO and274 shared clock observations, every IO/deadline/interrupt position, actual PG18 rollback/uncertain commit/replay and fixed microsecond end. Borrowed root and connection; caller supplies continuous exclusion/stopped actors/terminated generation child. No actual archive generation, retention or whole-parent completion claim."
     manifest["batchRunResourceOracle"] = "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count."
     manifest["backupStepResourceOracle"] = "066/067 BAT216: pair-only two JDBC scopes,68 independent compounds and original same-throwable regression. SQL-only catch unchanged including provider IAE identity. Exact acquired/unacquired close counts/live0, borrowed connection unchanged and independent RUNNING pair SQL after caller rollback; existing repository/commit16 PT. No new JUnit/component count."
     manifest["cleanupStepResourceOracle"] = "064/065 BAT168: two cleanup-only JDBC scopes and68 independent compounds plus provider/same-throwable regressions. Preserve null-resource SQL contract, narrow pure model validation, exact close/live/injection counters, unchanged borrowed connection and admin SQL rollback oracle. Existing repository/service16 tests rerun, no new JUnit/component count."
