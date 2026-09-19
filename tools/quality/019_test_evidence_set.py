@@ -35,6 +35,27 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_animation_template_inventory(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = "dev.codex.schubert.nk.web.view.AnimationTemplateTest"
+        names = ("animation046Menu", "animation047MainRows", "animation048OvaRows", "animation049EmptyAndMaximum",
+                 "animation050MegabyteRounding", "animation051EscapingAndCsrf", "animation052CssAndViewBoundary",
+                 "animation053ConcurrentRendering")
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name for i, name in enumerate(names, 46)}, screen.validate_animation_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
+        for field, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(field, value)
+            with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
+        with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
+
     def test_animation_view_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web230AnimationMenuCounts", "web231MainGrouping", "web232OvaAndBounds", "web233RejectInconsistentGroups",
@@ -240,7 +261,8 @@ class EvidenceSetTest(unittest.TestCase):
         expected = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
                     "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
                     "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
-                    "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n"}
+                    "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n",
+                    "PT-SCR-053.txt": b"templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n"}
         screen.validate_traces(expected)
         for wrong in ({}, dict(expected, unknown=b""), {"PT-SCR-012.txt": b"PASS"}):
             with self.assertRaises(ValueError): screen.validate_traces(wrong)

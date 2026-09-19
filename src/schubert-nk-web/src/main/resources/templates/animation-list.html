@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- NK-WEB002/SCR009/FUN006/UI223,235/SS313/PG205/PT-SCR046..053. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head(${page.title})}"></head>
+  <body><main class="page animation-page">
+    <header class="topbar">
+      <div>
+        <h1 th:text="${page.title}"></h1>
+        <div class="subtitle" th:text="|${page.totalCount}本|"></div>
+      </div>
+      <div class="topbar-actions">
+        <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+        <nav class="nav-links" aria-label="Animationナビゲーション">
+          <a th:href="@{/animation}">アニメ視聴</a>
+          <a th:href="@{/search}">検索</a>
+        </nav>
+      </div>
+    </header>
+    <section class="scenario-list animation-list" th:if="${page.section == 'ova'}">
+      <a class="scenario-link" th:each="video : ${page.videos}" th:href="${video.href}">
+        <span class="scenario-title" th:text="${video.title}"></span>
+        <span class="scenario-meta">
+          <span th:text="${video.category}"></span>
+          <span th:text="${video.displayPath}"></span>
+          <span th:text="${#numbers.formatDecimal(video.byteSize / 1024.0 / 1024.0, 1, 1) + ' MB'}"></span>
+        </span>
+      </a>
+    </section>
+    <section class="scenario-list animation-list" th:if="${page.section == 'main'}">
+      <article class="scenario-link animation-row" th:each="row : ${page.rows}">
+        <a class="animation-main-link" th:href="${row.main.href}">
+          <span class="scenario-title" th:text="${row.main.title}"></span>
+          <span class="scenario-meta">
+            <span th:text="${row.main.category}"></span>
+            <span th:text="${row.main.displayPath}"></span>
+            <span th:text="${#numbers.formatDecimal(row.main.byteSize / 1024.0 / 1024.0, 1, 1) + ' MB'}"></span>
+          </span>
+        </a>
+        <a class="subtrack-link" th:if="${row.subtrack.present}" th:href="${row.subtrack.orElseThrow().href}">SUBTRACK</a>
+        <span class="subtrack-placeholder" th:if="${!row.subtrack.present}"></span>
+      </article>
+    </section>
+  </main></body>
+</html>

@@ -74,6 +74,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     resolver.setViewNames(
         new String[] {
           "menu",
+          "animation",
+          "animation-list",
           "error/error",
           "scenarios",
           "scenario-routes",

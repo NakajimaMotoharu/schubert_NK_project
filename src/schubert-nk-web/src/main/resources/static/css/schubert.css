@@ -102,3 +102,15 @@ button { font: inherit; cursor: pointer; }
   .search-page .filters label:nth-child(n), .search-page .filters label:first-child, .search-page .filters button { grid-column: 1 / -1; }
 }
 /* End PG202 search styles. */
+/* PG205/SCR008,009/PT-SCR046..053: Current Animation rules scoped to its pages. */
+.animation-page .animation-main-link, .animation-page .subtrack-link { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.animation-page .animation-main-link:hover .scenario-title, .animation-page .subtrack-link:hover { text-decoration: underline; }
+.animation-page .animation-list .scenario-title { font-size: 17px; }
+.animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 110px; align-items: center; gap: 14px; }
+.animation-page .animation-main-link { display: grid; gap: 7px; min-width: 0; color: inherit; }
+.animation-page .subtrack-link, .animation-page .subtrack-placeholder { display: inline-grid; place-items: center; min-height: 34px; }
+.animation-page .subtrack-link { border: 1px solid #c9ced6; border-radius: 6px; background: #fff; font-size: 12px; }
+@media (max-width: 900px) {
+  .animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 94px; }
+}
+/* End PG205 Animation styles. */

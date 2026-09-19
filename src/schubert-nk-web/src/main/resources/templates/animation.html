@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- NK-WEB002/SCR008/FUN006/UI223,235/SS313/PG205/PT-SCR046..053. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Animation')}"></head>
+  <body><main class="page animation-page">
+    <header class="topbar">
+      <h1>Animation</h1>
+      <div class="topbar-actions">
+        <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+        <nav class="nav-links" aria-label="Animationナビゲーション">
+          <a th:href="@{/scenarios}">シナリオ閲覧</a>
+          <a th:href="@{/search}">検索</a>
+        </nav>
+      </div>
+    </header>
+    <nav class="menu-grid" aria-label="animation menu">
+      <a class="menu-item" th:href="@{/animation/main}">
+        <strong>メインパート一覧</strong>
+        <span th:text="|${page.mainCount}本の映像|"></span>
+      </a>
+      <a class="menu-item" th:href="@{/animation/ova}">
+        <strong>OVA一覧</strong>
+        <span th:text="|${page.ovaCount}本の映像|"></span>
+      </a>
+      <a class="menu-item" th:href="@{/animation/opening}">
+        <strong>オープニング映像</strong>
+        <span>OP映像を再生する</span>
+      </a>
+    </nav>
+  </main></body>
+</html>
