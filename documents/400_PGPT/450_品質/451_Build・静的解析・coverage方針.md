@@ -1,5 +1,9 @@
 # Build・静的解析・coverage方針
 
+PG201追補（2026-09-20）: Production JavaScriptはNode24.19.0の構文checkと実script/独立DOM event fixtureをJUnitから必須実行する。V8 line/function/branchを各100%へ強制し、対象Production fileがcoverage表に実在することを確認する。検索scriptはclass定義なし（class0/0、除外なし）、定義した全functionをmethod相当として100%・source file inventory1/1を検査する。JavaのJaCoCo4指標100%は従来どおり維持。8Node subcaseは1JUnit内数。Node不存在/異version、構文失敗、対象なし、failed/skipped/todoを合格にしない。実Browser描画・IT/STは別gate。
+
+検索scriptの静的確認はNode構文check＋限定source全体review（document.querySelector/制御されたform event/setCustomValidity/requestSubmit、TextEncoder/Decoder/NFC/固定ASCII trimだけ）。inline handler/eval/innerHTML/network/storage/console/秘密値読取りなし。JavaのNullAway/SpotBugsをJSにも実施したとは記載しない。再現Node path/version/hashは421、実command/coverage/hashは016005/006・manifest。
+
 ## 1. Gate順序
 
 1. Maven Enforcer/toolchain/dependency convergenceとformatを検査する。

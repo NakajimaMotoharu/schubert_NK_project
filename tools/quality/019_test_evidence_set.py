@@ -35,6 +35,42 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_search_script_inventory_and_trace(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest"
+        suite = ET.Element("testsuite", name=cls, tests="1", failures="0", errors="0", skipped="0")
+        ET.SubElement(suite, "testcase", classname=cls, name="search025BrowserInputScript")
+        self.assertEqual({"PT-SCR-025": cls + "#search025BrowserInputScript"}, screen.validate_script_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "0"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): screen.validate_script_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): screen.validate_script_suite(wrong)
+        for field in ("name", "classname"):
+            wrong = copy.deepcopy(suite); wrong[0].set(field, "unknown")
+            with self.assertRaises(ValueError): screen.validate_script_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
+        with self.assertRaises(ValueError): screen.validate_script_suite(wrong)
+        trace = {"testId": "PT-SCR-025", "nodeVersion": "v24.19.0", "subcases": 8, "failed": 0,
+                 "skipped": 0, "todo": 0, "syntaxExit": 0, "testExit": 0, "lineCoverage": 100,
+                 "functionCoverage": 100, "branchCoverage": 100, "productionFiles": 1,
+                 "scriptSha256": "a" * 64, "browserDom": "deterministic-event-double", "actualNkGate": False}
+        screen.validate_script_trace(trace, "a" * 64)
+        for key in trace:
+            wrong = dict(trace); del wrong[key]
+            with self.assertRaises(ValueError): screen.validate_script_trace(wrong, "a" * 64)
+            wrong = dict(trace); wrong[key] = "unknown"
+            with self.assertRaises(ValueError): screen.validate_script_trace(wrong, "a" * 64)
+        for key in ("failed", "skipped", "todo", "syntaxExit", "testExit"):
+            wrong = dict(trace); wrong[key] = False
+            with self.assertRaises(ValueError): screen.validate_script_trace(wrong, "a" * 64)
+        for key in ("lineCoverage", "functionCoverage", "branchCoverage"):
+            wrong = dict(trace); wrong[key] = 99
+            with self.assertRaises(ValueError): screen.validate_script_trace(wrong, "a" * 64)
+        with self.assertRaises(ValueError): screen.validate_script_trace(dict(trace, unknown=1), "a" * 64)
+        with self.assertRaises(ValueError): screen.validate_script_trace(trace, "b" * 64)
+
     def test_detail_template_inventory(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest"

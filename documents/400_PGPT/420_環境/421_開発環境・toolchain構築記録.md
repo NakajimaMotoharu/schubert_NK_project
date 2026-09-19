@@ -2,6 +2,8 @@
 
 ## 2026-09-20 Node.js 24.19.0（検索外部JS PT用、導入済・試験組込前）
 
+07:02追補: PG201選択試験で構文check/Node8case/Production1file全line・function・branch100%が成功、Java wrapper1PTとして実行。正式reactorは未実行。full verify wrapperと006 manifest commandへ `-Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` を追加し、次正式runから使用する。以下は導入時記録。
+
 入手元はworkspace dependency bundle `26.905.11957` の `/home/mini/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node`。PATHにはNodeなし。tool案内で所在を取得しversionを実行確認、Linux x86-64 ELFを `/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` へ新規copy（`install -D -m 0755`、既存targetなし確認）。元/先SHA256はともに `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12`。system Node/apt/service変更なし、binaryはGit外。
 
 再現: 同bundleの実行fileのhash/versionを確認し同じ新規pathへinstallするか、既設Node24.19.0を `-Dnk.pt.node=/absolute/path/to/node` でMavenへ指定する。値を省略する場合はPATH上のnodeを使い、存在/version不一致はPT失敗（skipしない）。実運用Javaサービスの依存にはしない。
