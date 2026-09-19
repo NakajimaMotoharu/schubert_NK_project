@@ -1,5 +1,13 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-20 Node.js 24.19.0（検索外部JS PT用、導入済・試験組込前）
+
+入手元はworkspace dependency bundle `26.905.11957` の `/home/mini/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node`。PATHにはNodeなし。tool案内で所在を取得しversionを実行確認、Linux x86-64 ELFを `/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` へ新規copy（`install -D -m 0755`、既存targetなし確認）。元/先SHA256はともに `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12`。system Node/apt/service変更なし、binaryはGit外。
+
+再現: 同bundleの実行fileのhash/versionを確認し同じ新規pathへinstallするか、既設Node24.19.0を `-Dnk.pt.node=/absolute/path/to/node` でMavenへ指定する。値を省略する場合はPATH上のnodeを使い、存在/version不一致はPT失敗（skipしない）。実運用Javaサービスの依存にはしない。
+
+PG201ではNode組込`--check`、`--test --experimental-test-coverage --test-reporter=tap --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100`と明示Production file includeで実行する予定。Node8caseはJavaラッパー1Test IDの内数、二重計上しない。VMのDOM event doubleで実scriptを実行し、実Browser視覚/IT/STの代替とはしない。JSは1Production file全体を対象としline/function/branch100%・対象file実在を照合、Javaの4coverage100%とは区別する。現時点は未実装/未認定。
+
 ## 2026-09-20 Caddy 2.11.4検証toolの隔離導入
 
 既存Characterization用2.6.2は変更せず、公式GitHub release APIのlatest=v2.11.4（2026-06-03公開）を確認してlinux_amd64 tarとchecksumsをwgetで取得。導入先`/home/mini/codex/project1/work/toolchain/caddy-2.11.4-pRgVbp/caddy`、表示`v2.11.4 h1:XKxkMTgNSizEvKG6QHue6cAsFOteU2qA61w2tKkCWi0=`。OS package/service/port/CA trustは変更していない。配備採用・template試験完了ではなく、native検証準備のみ。
