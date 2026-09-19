@@ -1,5 +1,7 @@
 # BUG204/YKT160 bundle元inode横展開
 
+正式認定: PT-WEB-20260919-02/source 0ca3aa9588fa480ccf4b3e4ff06561f627365e66/dev-foundation、2026-09-19 23:58:54～09-20 00:14:59 JST、Maven16分04秒/exit0。全1455 PT（80/74/660/241/359/41）・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし。15collector/38scopeと46負canary成功。PG175/176/177の16/8/16 PT・3部品を認定、BUG199～204/YKT158～160/SSC064～066完了。実archive生成/DB成功caller/7世代/親全体/実NK CHR/IT/STは未完了。実行環境・source/test/入力期待実際・hashは017/018各evidence/manifest.json。raw実行log SHA256=b777f9ea117c514d2ae78fcc402aaf9711147655a50df31024e6eeb47c0abf94。以下は探索時点の履歴であり、旧「未認定」は当時の状態。
+
 2026-09-19。修正前反例 `/tmp/pgpt-bug204-red.log` は23:47:53 JST終了/exit1。Storage共通8は成功、新BAT268の1件は「例外が投げられない」で失敗。同期済partを退避し、native publish直前に同byte4fileを持つ別directoryを作ると、digest-only比較では元inodeを区別できたと誤認した。反例fixtureは公開合成byte/UIDだけ、実fileのrename/copyで再現する。
 
 ## 対象・非該当根拠
