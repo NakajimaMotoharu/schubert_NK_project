@@ -315,6 +315,29 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   }
 
   /**
+   * Publish one existing directory under the same retained parent, never replacing a target.
+   * NK-OPS-001; BAK/BKO/OPS009/UI251/SS333 7.5/341 6.9; SSC065/PG176; PDIR001..008. Caller retains
+   * exclusion, authenticates the original/final inode and forces all contents. This capability
+   * alone does not certify a backup. Partial publication is never undone.
+   */
+  public void publishChild(String pending, String ready) throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(pending);
+      requireSegment(ready);
+      if (pending.equals(ready)) throw new IllegalArgumentException("identical directory names");
+      requireOpen();
+      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, pending));
+      ResourceScope.use(
+          child::close,
+          () -> {
+            calls.publish(descriptor, pending, ready);
+            calls.sync(descriptor);
+            return Boolean.TRUE;
+          });
+    }
+  }
+
+  /**
    * Durability barrier for owned startup-probe cleanup; never a reader operation. SS333 §7.4;
    * SSC-022; PT-SCN-008-P01/P03 and BUG-036 monitor regression.
    */

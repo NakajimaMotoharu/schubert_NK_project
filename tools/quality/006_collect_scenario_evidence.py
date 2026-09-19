@@ -16,6 +16,7 @@ def scenario_storage_suite(name):
     return ".nk.storage." in name and name not in {
         "dev.codex.schubert.nk.storage.LinuxFileLockTest",
         "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+        "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
         "dev.codex.schubert.nk.storage.ResourceScopeTest"}
 
 

@@ -35,6 +35,16 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_batch_reactor_gate(self):
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 343}}}
+        batch.validate_reactor(verified, "PT-WEB-fixture")
+        for count in (0, 327, 342, 344):
+            wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
+            with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
+        wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
+        with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
+        with self.assertRaises(ValueError): batch.validate_reactor(verified, "PT-WEB-other")
+
     @staticmethod
     def publication_fixture():
         cls = "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest"
@@ -719,6 +729,7 @@ class EvidenceSetTest(unittest.TestCase):
     def test_shared_storage_program_ownership(self):
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.LinuxFileLockTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest"))
+        self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest"))
         for name in ("LinuxDirectoryCallsTest", "OwnedTransferDirectoryTest", "LinuxInodeSecurityTest"):
             self.assertTrue(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage." + name))
@@ -847,6 +858,9 @@ class EvidenceSetTest(unittest.TestCase):
                   ("dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest", 9,
                    ("fixedCommands", "stableTerminalAndReceipt", "unstableAndNonempty", "commandFailures",
                     "boundedOutputAndTimeout", "interruptions", "allResourceFailures", "nativeEnvironmentAndConcurrency"))]
+        groups.append(("dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest", 1,
+                      ("nativeDirectoryPublication", "noReplaceAndSourceType", "nameNullAndClosed", "everyNativeFailure",
+                       "uncertainPublication", "compoundFailures", "retainedParentCapability", "concurrentNoReplace")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -862,6 +876,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
+                       "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
@@ -1110,6 +1125,9 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(257, len(accepted))
+        batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
+        self.assertEqual(86, batch_ops)
+        self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)
             self.assertEqual(pair_expected, {k: v for k, v in accepted.items() if k in pair_expected})

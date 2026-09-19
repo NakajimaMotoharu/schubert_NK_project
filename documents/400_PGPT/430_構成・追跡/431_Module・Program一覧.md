@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG176/SSC065追加（正式認定前）: NK-OPS-001 Storage.OwnedTransferDirectory.publishChild/所有scope lambdaは018029/030・PT-OPS-PDIR-001～008、BAK/BKO/OPS009/UI251/SS333§7.5/341§6.9。共有Storageの既存class全coverageは全回帰で確認し、Scenario PTへ二重計上しない。
+
 PG175/SSC064追加（正式認定前）: NK-BAT-001 `.batch.file.BackupManifestPublisher` のconstructor2/create/write/verify/directory/capture/identity/metadata/guardと所有scope lambdaを017053/054・PT-BAT-242～257へ追跡。RD BAK/BKO/OPS009、UI251、SS311/341§6.8/343§5.3。既存InspectorEnvironmentPublisher.Io/NioIoはfile IO portとして再利用、Storage.ResourceScopeはRSCOPE回帰。本文の正式1415件/22batch部品は変更せず、正式run後に1部品16件を加算する。
 
 PG171～174正式14追跡: file4classの8scope（DurableRecordFiles/InspectorEnvironmentReader/InspectorEnvironmentPublisher/ExistingFileAccess）は017049/BAT056・EFILE007・PUB010・MED024。namespace3classの27scope（MaintenanceFileLock/InspectorEnvironmentFiles/MaintenanceRunFiles）は017050/LOCK006・NS002・BAT079。SystemctlStateSource.read/finish・InspectorUnitProbe.execute・共通ProcessResourceScope.use/QueryWorkは017051/STOP014・UNIT015。ConfigurationGroupResolver.resolve/scope/finish/terminate・既存readResultは017052/GID005。関連RD OPS009/FIL/BAK/BKO、UI237/251、SS333/341/343・SSC063、PGD171～174。正式14で306compound・全1415/4coverage100%を認定、新JUnit/部品は0。以下は時点別履歴。

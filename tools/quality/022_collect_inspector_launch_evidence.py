@@ -57,6 +57,9 @@ DEPLOYMENT_GROUPS = (("dev.codex.schubert.nk.storage.ResourceScopeTest", 1, ("su
      ("fixedCommands", "stableTerminalAndReceipt", "unstableAndNonempty", "commandFailures",
       "boundedOutputAndTimeout", "interruptions", "allResourceFailures", "nativeEnvironmentAndConcurrency")))
 SCOPE_SUBJECT = "dev/codex/schubert/nk/storage/ResourceScope"
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest", 1,
+    ("nativeDirectoryPublication", "noReplaceAndSourceType", "nameNullAndClosed", "everyNativeFailure",
+     "uncertainPublication", "compoundFailures", "retainedParentCapability", "concurrentNoReplace")),)
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
@@ -137,6 +140,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "PT-OPS-CFG",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                    "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
+                   "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
@@ -174,6 +178,7 @@ def main():
                 "dev.codex.schubert.nk.storage.ResourceScopeTest": "storage",
                 "dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
                 "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
+                "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "storage",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "batch",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "batch",
@@ -306,6 +311,9 @@ def main():
             "profiles": {"none": 3, "context": 4, "response": 4, "both": 5},
             "tools": {"ShellCheck": "0.11.0", "systemd-analyze": "259.5-0ubuntu3.4", "shell": "/bin/sh", "od": "uutils coreutils0.8.0"},
         }
+    if args.deployment:
+        manifest["related"] = manifest.get("related", []) + ["PG-D-176", "SSC-065"]
+        manifest["directoryPublicationOracle"] = "029/PT-OPS-PDIR001..008: retained parent, existing NOFOLLOW directory, same-parent RENAME_NOREPLACE then sync/one child close; literal bytes/inode, all4 native failure positions, compound unknown identity, uncertain final preservation, original parent capability and eight concurrent contenders. Caller exclusion/backup authenticity remain separate."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)} for p in sorted(evidence.rglob("*"))
                          if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")

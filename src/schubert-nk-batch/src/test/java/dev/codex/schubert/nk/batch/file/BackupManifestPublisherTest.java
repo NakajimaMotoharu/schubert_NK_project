@@ -55,6 +55,22 @@ final class BackupManifestPublisherTest {
 
   @Test
   void rootAndChildAdmission() throws Exception {
+    for (long owner : new long[] {1, 0xffffffffL}) {
+      try (var f = fixture()) {
+        f.metadata =
+            (role, values) -> {
+              if (!role.equals("file")) {
+                values.put("uid", (int) owner);
+                values.put("gid", (int) owner);
+              }
+            };
+        new BackupManifestPublisher(f.root, f, owner, owner, f, f::clock)
+            .create(BackupArtifactFixture.expected(), PART);
+        assertArrayEquals(
+            BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+        f.released();
+      }
+    }
     for (long owner : new long[] {0, -1, 0x100000000L}) {
       try (var f = fixture()) {
         assertThrows(

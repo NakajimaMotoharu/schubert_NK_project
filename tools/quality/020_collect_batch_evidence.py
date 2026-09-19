@@ -9,6 +9,12 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
+BATCH_TEST_COUNT = 343
+
+def validate_reactor(verified, run):
+    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != BATCH_TEST_COUNT:
+        raise ValueError("matching verified full reactor required")
+
 PUBLICATION_CLASS = "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest"
 PUBLICATION_METHODS = ("independentGoldenPublication", "privateCreationOwnership", "rootAndChildAdmission", "metadataNullTypes", "filePermissionsAndLinks", "writeProgressBoundaries", "readbackAndIdentity", "namespaceReplacement", "collisionAndPartRetention", "everyIoFailure", "deadlineAndInterrupt", "compoundAndBufferWipe", "nullAndClosedContracts", "concurrentNoReplace", "nativeIoAndFactory", "independentPublicationTrace")
 PUBLICATION_TRACES = {"PT-BAT-257-publication.txt": b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\ncreate=1|publish=1|sync=1\nio=79|clock=109\n"}
@@ -360,8 +366,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != 327:
-        raise SystemExit("matching verified full reactor required")
+    validate_reactor(verified, run)
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-batch/target"
