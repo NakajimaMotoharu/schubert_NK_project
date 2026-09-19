@@ -12,9 +12,12 @@ import java.util.Map;
  */
 final class BatchJdbcProbe {
   final Map<String, Integer> faultOccurrences = new HashMap<>();
+  final Map<String, Throwable> thrown = new HashMap<>();
+  int liveStatements, liveRows, injected;
   String selectedSql = "maintenance_cleanup_", fault = "none";
   String lastSqlState = "unobserved", lastSql = "unobserved";
   boolean empty, duplicate, commitAfter, fresh = true;
+  boolean nullStatement, nullRows;
   int commits, closes, rollbacks, saves, deletes, selectedStatements, autoChanges;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeDelete = c -> {};
@@ -61,8 +64,11 @@ final class BatchJdbcProbe {
                 if (selected) {
                   selectedStatements++;
                   fail("prepareStatement");
+                  if (nullStatement) return null;
                 }
-                return statement(c, (PreparedStatement) invoke(c, m, a), selected);
+                var obtained = (PreparedStatement) invoke(c, m, a);
+                if (selected) liveStatements++;
+                return statement(c, obtained, selected);
               }
               fail(name);
               return invoke(c, m, a);
@@ -82,9 +88,17 @@ final class BatchJdbcProbe {
                   abort.execute("select 1 / 0");
                 }
               }
+              if (selected && name.equals("executeQuery") && nullRows) return null;
               Object value = invoke(s, m, a);
-              if (selected && name.equals("close")) fail("statementClose");
-              return selected && name.equals("executeQuery") ? rows((ResultSet) value) : value;
+              if (selected && name.equals("close")) {
+                liveStatements--;
+                fail("statementClose");
+              }
+              if (selected && name.equals("executeQuery")) {
+                liveRows++;
+                return rows((ResultSet) value);
+              }
+              return value;
             });
   }
 
@@ -111,13 +125,20 @@ final class BatchJdbcProbe {
                 if (empty) return false;
                 if (duplicate && position[0] == 2) return true;
               }
-              if (name.equals("close")) fail("resultClose");
+              if (name.equals("close")) {
+                liveRows--;
+                fail("resultClose");
+              }
               return value;
             });
   }
 
-  private void fail(String name) throws SQLException {
+  private void fail(String name) throws Throwable {
     int occurrence = faultOccurrences.merge(name, 1, Integer::sum);
+    if (occurrence == 1 && thrown.containsKey(name)) {
+      injected++;
+      throw thrown.get(name);
+    }
     if (fault.equals(name) || fault.equals(name + "#" + occurrence))
       throw new SQLException("synthetic-private-provider-marker", "08006");
   }

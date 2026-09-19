@@ -313,6 +313,12 @@ final class CleanupRepositoryTest {
 
   @Test
   void jdbcFailuresRemainRedacted() throws Exception {
+    resourceCompounds();
+    assertAll(
+        () -> resourceRed(false, false),
+        () -> resourceRed(false, true),
+        () -> resourceRed(true, false),
+        () -> resourceRed(true, true));
     for (boolean progress : List.of(false, true)) {
       for (String fault :
           List.of(
@@ -474,6 +480,103 @@ final class CleanupRepositoryTest {
             content.matches("(?s).*import dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*"),
             file.toString());
       }
+    }
+  }
+
+  private static void resourceCompounds() throws Exception {
+    for (boolean progress : List.of(false, true)) {
+      for (var sample : JdbcResourceCases.all()) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql =
+            progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+        var faults = new HashMap<String, Throwable>();
+        sample.install(faults);
+        faults.forEach((key, value) -> probe.thrown.put(resourceFaultName(key), value));
+        try (var c = transaction()) {
+          if (progress) new CleanupRepository(c).execute(RUN, CleanupKind.LOGS, 1);
+          var repository = new CleanupRepository(probe.wrap(c));
+          Runnable action =
+              progress
+                  ? () -> repository.readLogProgress(RUN)
+                  : () -> repository.execute(RUN, CleanupKind.LOGS, 1);
+          sample.verify(assertThrows(Throwable.class, action::run));
+          assertEquals(sample.first() < 0 ? 1 : 2, probe.injected);
+          assertEquals(1, probe.faultOccurrences.getOrDefault("statementClose", 0));
+          assertEquals(
+              sample.first() >= 0 && sample.body().equals("statement.executeQuery") ? 0 : 1,
+              probe.faultOccurrences.getOrDefault("resultClose", 0));
+          assertEquals(0, probe.liveRows);
+          assertEquals(0, probe.liveStatements);
+          assertEquals(0, probe.commits);
+          assertEquals(0, probe.rollbacks);
+          assertEquals(0, probe.closes);
+          assertEquals(0, probe.autoChanges);
+          assertFalse(c.isClosed());
+          assertFalse(c.getAutoCommit());
+          c.rollback();
+        }
+        try (var admin = db.admin()) {
+          assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+          assertEquals("0", scalar(admin, "select count(*) from schubert.app_logs"));
+        }
+      }
+      for (boolean statement : List.of(false, true)) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql =
+            progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+        probe.nullStatement = statement;
+        probe.nullRows = !statement;
+        try (var c = transaction()) {
+          if (progress) new CleanupRepository(c).execute(RUN, CleanupKind.LOGS, 1);
+          var repository = new CleanupRepository(probe.wrap(c));
+          Runnable action =
+              progress
+                  ? () -> repository.readLogProgress(RUN)
+                  : () -> repository.execute(RUN, CleanupKind.LOGS, 1);
+          var failure = assertThrows(NullPointerException.class, action::run);
+          assertEquals(statement ? "JDBC statement" : "JDBC result", failure.getMessage());
+          assertEquals(0, probe.liveRows);
+          assertEquals(0, probe.liveStatements);
+          assertEquals(statement ? 0 : 1, probe.faultOccurrences.getOrDefault("statementClose", 0));
+          assertEquals(0, probe.faultOccurrences.getOrDefault("resultClose", 0));
+          assertEquals(0, probe.closes);
+          c.rollback();
+        }
+      }
+    }
+  }
+
+  private static String resourceFaultName(String name) {
+    return switch (name) {
+      case "row.next" -> "next";
+      case "row.close" -> "resultClose";
+      case "statement.executeQuery" -> "executeQuery";
+      case "statement.close" -> "statementClose";
+      default -> throw new AssertionError("unknown fixture boundary");
+    };
+  }
+
+  private static void resourceRed(boolean progress, boolean same) throws Exception {
+    var probe = new BatchJdbcProbe();
+    probe.selectedSql =
+        progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+    Throwable failure =
+        same
+            ? new IllegalStateException("public same fixture")
+            : new IllegalArgumentException("public provider argument fixture");
+    probe.thrown.put(same ? "next" : "executeQuery", failure);
+    if (same) probe.thrown.put("resultClose", failure);
+    try (var c = transaction()) {
+      if (progress) new CleanupRepository(c).execute(RUN, CleanupKind.LOGS, 1);
+      var repository = new CleanupRepository(probe.wrap(c));
+      Runnable action =
+          progress
+              ? () -> repository.readLogProgress(RUN)
+              : () -> repository.execute(RUN, CleanupKind.LOGS, 1);
+      assertSame(failure, assertThrows(Throwable.class, action::run));
+      assertEquals(0, probe.liveRows);
+      assertEquals(0, probe.liveStatements);
+      c.rollback();
     }
   }
 

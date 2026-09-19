@@ -28,22 +28,48 @@ public final class CleanupRepository {
       throw new IllegalArgumentException("cleanup limit is invalid");
     try {
       requireTransaction();
-      try (var statement = prepare(kind)) {
+      var statement = Objects.requireNonNull(prepare(kind), "JDBC statement");
+      @Nullable Throwable statementFailure = null;
+      try {
         bind(statement, run);
         statement.setInt(3, maximumRows);
-        try (var row = statement.executeQuery()) {
+        var row = Objects.requireNonNull(statement.executeQuery(), "JDBC result");
+        @Nullable Throwable rowFailure = null;
+        try {
           if (!row.next()) throw new SQLDataException("cleanup result is missing");
           CleanupCounts counts = counts(row);
           if (counts.target() > maximumRows)
             throw new SQLDataException("cleanup result exceeds chunk bound");
-          var result =
-              new CleanupChunk(
-                  counts, CleanupReason.valueOf(required(row.getString("reason_code"))));
+          String reason = required(row.getString("reason_code"));
+          CleanupChunk result;
+          try {
+            result = new CleanupChunk(counts, CleanupReason.valueOf(reason));
+          } catch (IllegalArgumentException invalidProjection) {
+            throw new SQLDataException("cleanup projection invalid");
+          }
           if (row.next()) throw new SQLDataException("cleanup result is ambiguous");
           return result;
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          try {
+            row.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        try {
+          statement.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
         }
       }
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException failure) {
       throw new BatchRepositoryException();
     }
   }
@@ -52,20 +78,44 @@ public final class CleanupRepository {
     Objects.requireNonNull(run, "run");
     try {
       requireTransaction();
-      try (var statement =
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,complete from schubert.maintenance_read_log_cleanup_progress(?,?)")) {
+      var statement =
+          Objects.requireNonNull(
+              connection.prepareStatement(
+                  "select target_count,deleted_count,skipped_count,complete from schubert.maintenance_read_log_cleanup_progress(?,?)"),
+              "JDBC statement");
+      @Nullable Throwable statementFailure = null;
+      try {
         bind(statement, run);
-        try (var row = statement.executeQuery()) {
+        var row = Objects.requireNonNull(statement.executeQuery(), "JDBC result");
+        @Nullable Throwable rowFailure = null;
+        try {
           if (!row.next()) throw new SQLDataException("log progress is missing");
           var result =
               new LogCleanupProgress(
                   run, counts(row), required(row.getObject("complete", Boolean.class)));
           if (row.next()) throw new SQLDataException("log progress is ambiguous");
           return result;
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          try {
+            row.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        try {
+          statement.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
         }
       }
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException failure) {
       throw new BatchRepositoryException();
     }
   }
@@ -110,10 +160,14 @@ public final class CleanupRepository {
   }
 
   private static CleanupCounts counts(ResultSet row) throws SQLException {
-    return new CleanupCounts(
-        required(row.getObject("target_count", Long.class)),
-        required(row.getObject("deleted_count", Long.class)),
-        required(row.getObject("skipped_count", Long.class)));
+    long target = required(row.getObject("target_count", Long.class));
+    long deleted = required(row.getObject("deleted_count", Long.class));
+    long skipped = required(row.getObject("skipped_count", Long.class));
+    try {
+      return new CleanupCounts(target, deleted, skipped);
+    } catch (IllegalArgumentException invalidProjection) {
+      throw new SQLDataException("cleanup counts invalid");
+    }
   }
 
   private static <T> T required(@Nullable T value) throws SQLDataException {
