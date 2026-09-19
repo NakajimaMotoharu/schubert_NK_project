@@ -56,6 +56,28 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
 
+    def test_animation_http_inventory(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = "dev.codex.schubert.nk.web.session.AnimationControllerTest"
+        names = ("animation054SuccessAndWire", "animation055ErrorMapping", "animation056SessionInvalid",
+                 "animation057MalformedAndTransport", "animation058ResponseBinding", "animation059NullAndUnknown",
+                 "animation060MvcRoutes", "animation061RealHttpSecurity", "animation062EscapingAndIsolation",
+                 "animation063EmptyAndGrouping", "animation064ConcurrentRequests", "animation065CompatibilityTrace")
+        suite = ET.Element("testsuite", name=cls, tests="12", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name for i, name in enumerate(names, 54)}, screen.validate_animation_http_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "11"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): screen.validate_animation_http_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): screen.validate_animation_http_suite(wrong)
+        for field, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(field, value)
+            with self.assertRaises(ValueError): screen.validate_animation_http_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
+        with self.assertRaises(ValueError): screen.validate_animation_http_suite(wrong)
+
     def test_animation_wire_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web238AnimationRequests", "web239SuccessProfiles", "web240ErrorProfiles",
@@ -277,7 +299,8 @@ class EvidenceSetTest(unittest.TestCase):
                     "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
                     "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
                     "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n",
-                    "PT-SCR-053.txt": b"templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n"}
+                    "PT-SCR-053.txt": b"templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n",
+                    "PT-SCR-065.txt": b"screens=SCR008|SCR009\nfixture=public-synthetic\nroutes=3\nmenuCards=3\nlistRecords=2\nactualNkGate=false\n"}
         screen.validate_traces(expected)
         for wrong in ({}, dict(expected, unknown=b""), {"PT-SCR-012.txt": b"PASS"}):
             with self.assertRaises(ValueError): screen.validate_traces(wrong)
@@ -287,13 +310,15 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = dict(expected); wrong[key] = b"PASS"
             with self.assertRaises(ValueError): screen.validate_traces(wrong)
         report = ET.Element("report")
-        for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration"):
+        for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration",
+                     "controller/AnimationController", "config/AnimationMvcConfiguration"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
         ET.SubElement(report[0], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(3, len(screen.validate_coverage(report)))
-        for cls_index in range(3):
+        ET.SubElement(report[3], "counter", type="BRANCH", missed="0", covered="1")
+        self.assertEqual(5, len(screen.validate_coverage(report)))
+        for cls_index in range(5):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):
