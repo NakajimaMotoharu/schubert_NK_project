@@ -1,5 +1,7 @@
 # NK-BAT-001 backup検証確定caller実行結果
 
+正式認定: PT-WEB-20260920-03/source1d5b44ad26736366950936653914f67e7e096fe2/dev-foundation、2026-09-20 02:01:07～02:16:34 JST、Maven15:26/exit0。全1463PT、failed/error/skipped0、6Java全line/method/class/branch100%、Production5静的解析未解決0、固定path3method限定review（coverage除外なし）、38scope/48負canary成功。新caller8PTを認定、Batch96class/583method/3665line/1899branch全missed0。SSC067のcaller限定範囲を完了し、実archive生成/7世代/親全体/PGPT/IT/STは未完了。raw log SHA256 `ab8d49270ce7dda80d962d63ef87b919eabb639740c73236309df8309cd9aea9`、sanitized証跡/実行環境/input/expected/actual/test/hashは017/evidence/manifest.jsonへ収録。以下は探索履歴。
+
 PG184/SSC067・070/PT-BAT-274～281。選択PT成功、全reactor正式認定前。正式完了数への加算はまだ行わない。
 
 初回 `/tmp/pgpt-pg184-green.log`: 2026-09-20 01:53:39 JST終了、14.697秒/exit1。testCompileのassertThrows条件式が異なる例外Class型の型推論に失敗し、Batch試験未実行。期待例外は変更せずClass<? extends RuntimeException>の明示で解消。初期試験作成時のコンパイル不備でProduction動作障害ではない。SHA256 `2e52ba487e600795e0902abe92aa82e3c314378f320f4d294aa9710eff52a2d9`。

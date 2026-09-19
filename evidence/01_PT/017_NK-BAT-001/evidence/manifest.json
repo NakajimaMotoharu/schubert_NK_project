@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-02",
-  "targetCommit": "21cf373541fc7d0d7e131f79ebc9d67db3c44d41",
+  "runId": "PT-WEB-20260920-03",
+  "targetCommit": "1d5b44ad26736366950936653914f67e7e096fe2",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T01:27:40+09:00",
-  "completedAt": "2026-09-20T01:43:47+09:00",
+  "startedAt": "2026-09-20T02:01:07+09:00",
+  "completedAt": "2026-09-20T02:16:34+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -183,31 +183,31 @@
       }
     },
     "batch": {
-      "tests": 359,
+      "tests": 367,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 18592
+          "covered": 18756
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1891
+          "covered": 1899
         },
         "LINE": {
           "missed": 0,
-          "covered": 3632
+          "covered": 3665
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1536
+          "covered": 1544
         },
         "METHOD": {
           "missed": 0,
-          "covered": 579
+          "covered": 583
         },
         "CLASS": {
           "missed": 0,
-          "covered": 95
+          "covered": 96
         }
       },
       "spotbugs": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "6654362af9ac97cc912a388172d1344400157201d7574b0f138a5325562214d4",
+  "rawLogSha256": "ab8d49270ce7dda80d962d63ef87b919eabb639740c73236309df8309cd9aea9",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
   "programComplete": false,
@@ -250,6 +250,14 @@
     "PT-BAT-055": "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest#allWriteRetireFailures",
     "PT-BAT-056": "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest#interruptionsAndUnknownRuntime",
     "PT-BAT-057": "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest#concurrencyAndNative",
+    "PT-BAT-274": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#verifiedCommitAndReplay",
+    "PT-BAT-275": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#invalidFilesAndHandleBinding",
+    "PT-BAT-276": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#allReadAndDatabaseFailures",
+    "PT-BAT-277": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#sharedDeadlineAndInterrupt",
+    "PT-BAT-278": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#completionClockAndCommitUncertainty",
+    "PT-BAT-279": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#nullOwnershipAndFactory",
+    "PT-BAT-280": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#unknownFailuresAndResourceOwnership",
+    "PT-BAT-281": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest#concurrentAndIndependentTrace",
     "PT-BAT-218": "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest#commitAndExistingReceipt",
     "PT-BAT-219": "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest#rollbackBothSteps",
     "PT-BAT-220": "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest#uncertainCommitReplay",
@@ -496,9 +504,9 @@
     "PT-BAT-176": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest#connectionStateRestorationAndNulls",
     "PT-BAT-177": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest#concurrencyAndIndependentTrace"
   },
-  "sharedModuleOwnership": "Batch module359 PT = NK-BAT-001273 + NK-OPS-00186. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+  "sharedModuleOwnership": "Batch module367 PT = NK-BAT-001281 + NK-OPS-00186. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "50d281b1e73cab1d20c6d4888771eeeafaff5a4213711821089c0619cca7e213",
+  "fullReactorManifestSha256": "a2a5bac8222bbd78a3ef0a459242900ef51d772ebda7faf49dd8539b0b73db02",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -628,7 +636,9 @@
     "BUG-207",
     "YKT-163",
     "PG-D-182",
-    "PG-D-183"
+    "PG-D-183",
+    "PG-D-184",
+    "SSC-067"
   ],
   "fixture": "Isolated PostgreSQL18 with real Flyway and five denied roles; literal public log rows, fixed UUID/time, explicit parent transactions and public JDBC fault probes. No deployed credentials or data.",
   "oracle": "001/PT-BAT-001..017: independent8 function names/limits and3 reasons; held2+eligible1 gives2/0/2 then1/1/0 thenEND, run cumulative3/1/2; rollback/savepoint/reconnect/lock do not lose or duplicate counts; UTC/JST/NewYork epoch1789603200 and90day microsecond boundary; no parent connection commit/rollback/close/config mutation; all typed-null/row-count/SQL-stage failures reject; dependency allowlist.",
@@ -686,6 +696,10 @@
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
       "sha256": "adf821d2a392513c5236d29cf74c47cef8731bca0bc5cedb7871737ba69d289d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletion.java",
+      "sha256": "5b85c46cb472d7e7f4814686cff5fce7f8211811a2fd83b5ffbcec41cf183c16"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundlePublisher.java",
@@ -924,6 +938,10 @@
       "sha256": "ec00b1aa01d49d5373473822078d7912b945b99f672d43acf6df8eef7efe8bf1"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletionTest.java",
+      "sha256": "16b80381b348fd49bfae36422e932b5f3cf759005f06dbe4941c7d068d04f0c6"
+    },
+    {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupBundlePublisherTest.java",
       "sha256": "ef288d91a279296cdaf5998df6c20c7b09a896b2ff8d505ebe408265ec97915b"
     },
@@ -942,6 +960,10 @@
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupPublicationFixture.java",
       "sha256": "313f91f941b040d02977fd23ea2a50920dd7011670a74b384cd399ad2a092f19"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CompletionJdbcProbe.java",
+      "sha256": "26144fb085c340c84ea00218a98a6cd05639978e075ce65fbb0b743038c64052"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
@@ -1101,6 +1123,7 @@
     "service": 115,
     "doubleClosePairs": 3
   },
+  "backupCompletionOracle": "070/071 BAT274..281: root reader and full artifact verifier precede DB pair completion; independent 161 IO and274 shared clock observations, every IO/deadline/interrupt position, actual PG18 rollback/uncertain commit/replay and fixed microsecond end. Borrowed root and connection; caller supplies continuous exclusion/stopped actors/terminated generation child. No actual archive generation, retention or whole-parent completion claim.",
   "batchRunResourceOracle": "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count.",
   "backupStepResourceOracle": "066/067 BAT216: pair-only two JDBC scopes,68 independent compounds and original same-throwable regression. SQL-only catch unchanged including provider IAE identity. Exact acquired/unacquired close counts/live0, borrowed connection unchanged and independent RUNNING pair SQL after caller rollback; existing repository/commit16 PT. No new JUnit/component count.",
   "cleanupStepResourceOracle": "064/065 BAT168: two cleanup-only JDBC scopes and68 independent compounds plus provider/same-throwable regressions. Preserve null-resource SQL contract, narrow pure model validation, exact close/live/injection counters, unchanged borrowed connection and admin SQL rollback oracle. Existing repository/service16 tests rerun, no new JUnit/component count.",
@@ -1116,11 +1139,11 @@
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "0be4dc49d690230a8b4b720db4068e0c20227bd7bd20a3d9038d494b55cbaa7e"
+      "sha256": "a01d6b61ac34978ca14ef3f70b9f4cf76899d782820421e8125199304c9bad9d"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "87a5f21d8847e969c9352bbc82e48c50ea0e8a7cade29fd4be3438774ed07cff"
+      "sha256": "515e579fa0e7b8d5302494fe42e8260207640fa3d5d8b1c5dba573b64993d9ce"
     },
     {
       "path": "input/atomic-cleanup/PT-BAT-162-seven-kinds.txt",
@@ -1153,6 +1176,10 @@
     {
       "path": "input/backup-bundle/PT-BAT-273-bundle.txt",
       "sha256": "9c5f831d3ca88fa33fa2eee2e12edb6bec97f9fca4c7eb0dc9cf2d668f50ba60"
+    },
+    {
+      "path": "input/backup-completion/PT-BAT-281-completion.txt",
+      "sha256": "2b6ad41c7fcf9b2c0a9c9cad6a4e122ab700d52cd7b2b55ed776f8c89d8309bc"
     },
     {
       "path": "input/backup-manifest/PT-BAT-186-manifest.json",
@@ -1359,6 +1386,14 @@
       "sha256": "1be6a368a31ec4deb42cae3ccfa879980e3a98c337a84eda4737d4993011e5a4"
     },
     {
+      "path": "logs/070_NK-BAT-001_backup検証確定caller単体テスト仕様書.md",
+      "sha256": "b178115eac5326f9e29e4c739333fb51a9f61dfe7fc8237eeb9c6b40db8515b8"
+    },
+    {
+      "path": "logs/071_NK-BAT-001_backup検証確定caller実行結果.md",
+      "sha256": "53dc3777f10dc01429a0a4277c7a896c2f35d121017e2f002cd8c2cc717703fd"
+    },
+    {
       "path": "logs/BUG-145-compound-close.json",
       "sha256": "803b68059c3015e3485f28a7aa0ab0e7ccc80c59e272f674743ee0d18c18e77a"
     },
@@ -1555,6 +1590,10 @@
       "sha256": "3c43b881bc691f49bee9ecb833bcc7767e8b836a1a89b50ae38167ab2d9be50a"
     },
     {
+      "path": "logs/PT-WEB-20260920-03-summary.json",
+      "sha256": "f0bdcb8b9f2ab970cd814e5582ea3ba1ea4c126431a8388036cc58d8d3b4d915"
+    },
+    {
       "path": "output/atomic-cleanup/PT-BAT-162-seven-kinds.txt",
       "sha256": "e3f41e193c6215c8c41bc795cce679593bb54d238a24bbe830cf6f7b01b2ff78"
     },
@@ -1581,6 +1620,10 @@
     {
       "path": "output/backup-bundle/PT-BAT-273-bundle.txt",
       "sha256": "9c5f831d3ca88fa33fa2eee2e12edb6bec97f9fca4c7eb0dc9cf2d668f50ba60"
+    },
+    {
+      "path": "output/backup-completion/PT-BAT-281-completion.txt",
+      "sha256": "2b6ad41c7fcf9b2c0a9c9cad6a4e122ab700d52cd7b2b55ed776f8c89d8309bc"
     },
     {
       "path": "output/backup-manifest/PT-BAT-186-manifest.json",
@@ -1656,7 +1699,7 @@
     },
     {
       "path": "output/results.xml",
-      "sha256": "36ef0eae8043749d7f38a52bcf825207943ab84603cab0af963be56073801cff"
+      "sha256": "c62e7e3cb393d84095d144338d9914bb8714ed59f81557a0bd86c16daf4e9b24"
     },
     {
       "path": "output/run-lifecycle/PT-BAT-058-active.txt",
