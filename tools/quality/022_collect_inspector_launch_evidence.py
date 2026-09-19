@@ -285,7 +285,8 @@ def main():
         destination.write_bytes(audit.read_bytes())
         for name in ("031_NK-OPS-001_private子directory単体テスト仕様書.md", "032_NK-OPS-001_private子directory実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
-        for name in ("033_NK-OPS-001_PostgreSQL配備設定単体テスト仕様書.md", "034_NK-OPS-001_PostgreSQL配備設定実行結果.md"):
+        for name in ("033_NK-OPS-001_PostgreSQL配備設定単体テスト仕様書.md", "034_NK-OPS-001_PostgreSQL配備設定実行結果.md",
+                     "035_NK-OPS-001_shell診断混線再試験.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}

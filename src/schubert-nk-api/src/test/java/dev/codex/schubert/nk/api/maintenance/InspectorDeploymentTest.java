@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.*;
@@ -47,13 +48,13 @@ final class InspectorDeploymentTest {
       assertEquals(status, result.code());
       assertEquals("", result.out());
       assertTrue(result.err().contains("exit " + status));
-      assertTrue(result.err().contains("printf ."));
+      assertReceipt(result, "NKINSPECTOR1 " + status + "\n.");
     }
     for (int status : List.of(1, 70, 143)) {
       var result = shell(fake("NKINSPECTOR1 0\n", status));
       assertEquals(50, result.code());
       assertEquals("", result.out());
-      assertFalse(result.err().contains("printf ."));
+      assertReceipt(result, "NKINSPECTOR1 0\n!");
     }
     Path brokenOd = Files.createTempFile(root, "failed-od-", ".sh");
     Files.writeString(brokenOd, "#!/bin/sh\nexit 1\n");
@@ -69,7 +70,22 @@ final class InspectorDeploymentTest {
         shell(render(root.resolve("missing-java").toString(), "/fixed/api.jar", "/fixed/lib"));
     assertEquals(50, missingJava.code());
     assertEquals("", missingJava.out());
-    assertTrue(missingJava.err().contains("printf !"));
+    assertReceipt(missingJava, "!");
+    // BUG217/YKT173: pipeline xtrace may interleave; the parent's post-pipeline hex is stable.
+    assertReceipt(
+        new Result(
+            50,
+            "",
+            "+ + printf/usr/bin/od ! -An\n -v -tx1 -w64\n+ inspector_receipt= 21\n+ exit 50\n"),
+        "!");
+    for (String wrong :
+        List.of(
+            "",
+            "+ inspector_receipt= 2e\n",
+            "+ inspector_receipt= 21\n+ inspector_receipt= 21\n",
+            "+ inspector_receipt= 21\n+ inspector_receipt= 2e\n")) {
+      assertThrows(AssertionError.class, () -> assertReceipt(new Result(50, "", wrong), "!"));
+    }
   }
 
   @Test
@@ -98,7 +114,7 @@ final class InspectorDeploymentTest {
       var result = shell(fake(receipt, 0));
       assertEquals(50, result.code(), receipt);
       assertEquals("", result.out());
-      assertTrue(result.err().contains("printf ."));
+      assertReceipt(result, receipt + ".");
       assertTrue(result.err().contains("exit 50"));
     }
   }
@@ -252,6 +268,15 @@ final class InspectorDeploymentTest {
     assertEquals(
         "${postgresql.jdbc.version}",
         xpath.evaluate("/project/dependencies/dependency[artifactId='postgresql']/version", pom));
+  }
+
+  private static void assertReceipt(Result result, String bytes) {
+    String expected =
+        "+ inspector_receipt= "
+            + HexFormat.ofDelimiter(" ").formatHex(bytes.getBytes(StandardCharsets.UTF_8));
+    assertEquals(
+        List.of(expected),
+        result.err().lines().filter(line -> line.startsWith("+ inspector_receipt=")).toList());
   }
 
   private Path fake(String receipt, int exit) throws Exception {
