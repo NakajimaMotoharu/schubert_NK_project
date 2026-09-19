@@ -189,6 +189,10 @@ SSC063/PG170・BUG195/YKT154: 本節/§6.5/§7.4のresource compoundはSS333冒�
 - 失敗時のpart/公開済fileは保全。新規専用であり再実行の再利用判断はcallerの別検証とする。最終directory rename、Reader＋ArtifactVerifierの再検証、DB pair確定、実dump/tar/age/7世代は別の必須残件。
 - PTは017053/BAT242～257、独立golden・実Linux FDとsynthetic UIDを区別し、全4coverage100%と静的解析を要求。writer専用fixtureとする。低位write/read portは既存InspectorEnvironmentPublisher.Ioを再利用するが環境fileのpolicy/上書き/再利用規則は借用しない。
 
+### 6.9 bundle directory公開能力の境界（SSC065/PG176）
+
+SS333 §7.5の低位publishChildは、保持backup root内で正規`<directoryName>.part`から`<directoryName>`へno-replace公開するための能力である。batch callerが両名、所有/同device/全4file/全byte検証、全file forceと子directory syncを完了した後だけ呼ぶ。後段は確定directoryのReader＋ArtifactVerifierとDB両step確定を必須とする。低位API実装だけでこれらを完了扱いにしない。失敗part/不確定finalの調査、再実行、新backup検証後の7世代整理は既定どおり保全優先。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate

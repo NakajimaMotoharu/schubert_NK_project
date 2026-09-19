@@ -149,6 +149,18 @@ ProbeはCREATE_NEW成功で所有を確認したpartと、公開成功を確認�
 
 この限定された起動診断の清掃を、通常writer/readerや業務ready削除へ流用しない。通常のlarge-result lifecycleは従来どおり次回朝batchへ委ねる。Probe成功後の完全scanだけで容量を初期化し、single-instance/exclusive保証・full root検査・service readinessへの結線を別途検証する。
 
+### 7.5 既存子directoryの非上書き公開（SSC065/PG176）
+
+先行d744fb57。OwnedTransferDirectory.publishChild(String pending,String ready)は借用した単一親capability内の既存directoryだけを公開する。両名を既存単一segment規則で検証し、同名はIllegalArgumentException、NULLは境界NPE、closed親はUNAVAILABLE。入力検査前のnative操作はしない。backup正規名/owner/ACL/device/内容のpolicyはbatch caller側に残し、Storageへ業務型依存を入れない。
+
+親のprivate lock内でpendingを既存O_DIRECTORY/NOFOLLOW/CLOEXECで保持し、既存DirectoryCalls.publish（renameat2 RENAME_NOREPLACE）→親sync→所有child closeの順で終了する。mkdir/file作成/通常renameへのfallback/chmod/chown/unlinkはしない。parentはcloseせず、child closeは成功・失敗とも一度だけ。資源複合はResourceScope/SSC063の安全なprimary優先順位を使用する。
+
+missing source、非directory/symlink sourceは非成功、targetがdirectory/file/symlinkのいずれでも衝突は保全。rename後のsync/close失敗では公開済targetを巻き戻さず、失敗前のpart/targetも自動削除しない。借用親の元pathが置換されても保持FD側だけを操作する。
+
+この操作はcallerの連続排他・actor停止・元inode/確定後inode照合の代替ではない。openしたsourceとrename時のnamespaceが敵対actorによって差替えられないことはcaller責務で、openDirectory成功だけで真正なbundleやbackup完了を認定しない。batchの全file force/子sync/確定後Reader＋ArtifactVerifier/DB pair確定はSS341の別必須段。
+
+PT-OPS-PDIR-001～008/018029で実Linux inode/no-replace/sync、入力全不正・close/不確定結果・compound・並行とborrowed ownershipを検証する。既存0640file/0600private file/Transfer公開のoracleは変更しない。
+
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。
