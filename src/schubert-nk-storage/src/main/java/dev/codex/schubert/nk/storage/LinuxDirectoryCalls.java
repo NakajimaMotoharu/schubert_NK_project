@@ -209,6 +209,15 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
   }
 
   @Override
+  public void createPrivateDirectory(int parent, String name) throws StorageIoException {
+    segment(name);
+    try (Arena arena = Arena.ofConfined()) {
+      MemorySegment state = arena.allocate(STATE);
+      check(mkdir.call(state, parent, arena.allocateFrom(name), 0700), state);
+    }
+  }
+
+  @Override
   public void publish(int directory, String part, String ready) throws StorageIoException {
     segment(part);
     segment(ready);

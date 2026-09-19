@@ -151,6 +151,29 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /**
+   * New-only 0700 child, with child/parent durability before transferring ownership. Caller
+   * authenticates namespace/owner under exclusion; no repair or deletion on failure.
+   * NK-OPS-001/BAK/BKO/UI251/SS333 7.6/341 6.1/343; SSC068/PG186; CDIR001..008.
+   */
+  public OwnedTransferDirectory createPrivateChild(String name) throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(name);
+      requireOpen();
+      calls.createPrivateDirectory(descriptor, name);
+      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
+      return ResourceScope.use(
+          child::close,
+          () -> {
+            calls.sync(child.descriptor);
+            calls.sync(descriptor);
+            var result = new OwnedTransferDirectory(calls, child.descriptor);
+            child.descriptor = -1;
+            return result;
+          });
+    }
+  }
+
   /** Inspect this held directory, not its replaceable configured path; never export the path. */
   public <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {

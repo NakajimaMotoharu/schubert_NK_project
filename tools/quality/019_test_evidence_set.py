@@ -806,6 +806,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.LinuxFileLockTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest"))
+        self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage.PrivateChildDirectoryTest"))
         self.assertFalse(scenario.scenario_storage_suite("dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest"))
         for name in ("LinuxDirectoryCallsTest", "OwnedTransferDirectoryTest", "LinuxInodeSecurityTest"):
             self.assertTrue(scenario.scenario_storage_suite("dev.codex.schubert.nk.storage." + name))
@@ -937,6 +938,9 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest", 1,
                       ("nativeDirectoryPublication", "noReplaceAndSourceType", "nameNullAndClosed", "everyNativeFailure",
                        "uncertainPublication", "compoundFailures", "retainedParentCapability", "concurrentNoReplace")))
+        groups.append(("dev.codex.schubert.nk.storage.PrivateChildDirectoryTest", 1,
+                      ("nativePrivateCreation", "existingEntriesPreserved", "nameNullAndClosed", "everyNativeFailure",
+                       "compoundFailures", "retainedParentCapability", "unsupportedAdapter", "concurrentNewOnly")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -953,6 +957,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                        "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
                        "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
+                       "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "PT-OPS-CDIR",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",

@@ -21,6 +21,11 @@ public interface DirectoryCalls {
 
   void createDirectory(int parent, String name) throws StorageIoException;
 
+  /** Private 0700 new-only directory; unsupported adapters must not mutate. SSC068/SS333 7.6. */
+  default void createPrivateDirectory(int parent, String name) throws StorageIoException {
+    throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+  }
+
   void publish(int directory, String part, String ready) throws StorageIoException;
 
   void unlink(int directory, String name) throws StorageIoException;

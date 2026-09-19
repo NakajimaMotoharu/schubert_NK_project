@@ -61,6 +61,9 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ChildDirectoryPublicationT
     ("nativeDirectoryPublication", "noReplaceAndSourceType", "nameNullAndClosed", "everyNativeFailure",
      "uncertainPublication", "compoundFailures", "retainedParentCapability", "concurrentNoReplace")),)
 FLOCK_SUBJECT = "dev/codex/schubert/nk/storage/LinuxFileLock"
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.PrivateChildDirectoryTest", 1,
+    ("nativePrivateCreation", "existingEntriesPreserved", "nameNullAndClosed", "everyNativeFailure",
+     "compoundFailures", "retainedParentCapability", "unsupportedAdapter", "concurrentNewOnly")),)
 PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
     ("DirectoryCalls", "LinuxDirectoryCalls", "OwnedTransferDirectory"))
 LOCK_SUBJECT = "dev/codex/schubert/nk/batch/file/MaintenanceFileLock"
@@ -141,6 +144,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "PT-OPS-EFILE",
                    "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "PT-OPS-PFILE",
                    "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "PT-OPS-PDIR",
+                   "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "PT-OPS-CDIR",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "PT-OPS-PUB",
                    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
@@ -179,6 +183,7 @@ def main():
                 "dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
                 "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
                 "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "storage",
+                "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "storage",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "batch",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "batch",
@@ -249,6 +254,8 @@ def main():
         destination = evidence / "logs/025_NK-OPS-001_Inspector終端観測横展開.md"
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(audit.read_bytes())
+        for name in ("031_NK-OPS-001_private子directory単体テスト仕様書.md", "032_NK-OPS-001_private子directory実行結果.md"):
+            (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
         if {str(p.relative_to(trace_root)) for p in trace_root.rglob("*") if p.is_file()} != expected_paths:
@@ -312,7 +319,8 @@ def main():
             "tools": {"ShellCheck": "0.11.0", "systemd-analyze": "259.5-0ubuntu3.4", "shell": "/bin/sh", "od": "uutils coreutils0.8.0"},
         }
     if args.deployment:
-        manifest["related"] = manifest.get("related", []) + ["PG-D-176", "SSC-065"]
+        manifest["related"] = manifest.get("related", []) + ["PG-D-176", "SSC-065", "PG-D-186", "SSC-068"]
+        manifest["privateChildOracle"] = "031/032 CDIR001..008: new-only mkdirat0700, retained NOFOLLOW child, child then parent sync before FD ownership transfer; actual mode/inode/owner and empty namespace, collision preservation, null/closed/native arguments, all four native body fault positions and40 compound cleanup combinations, unsupported default no mutation, retained parent and eight contenders/one winner. Borrowed parent, partial preservation, no chmod/chown/repair. Caller authenticates backup owner/namespace under exclusion; not archive generation or backup success."
         manifest["directoryPublicationOracle"] = "029/PT-OPS-PDIR001..008: retained parent, existing NOFOLLOW directory, same-parent RENAME_NOREPLACE then sync/one child close; literal bytes/inode, all4 native failure positions, compound unknown identity, uncertain final preservation, original parent capability and eight concurrent contenders. Caller exclusion/backup authenticity remain separate."
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)} for p in sorted(evidence.rglob("*"))
                          if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
