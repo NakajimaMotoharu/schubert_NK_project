@@ -1,6 +1,6 @@
 # Animation通信・保護read共通化単体テスト仕様書
 
-NK-WEB-001/NK-MED-001、ProtectedReadWireClient/ProtectedReadWireException/AnimationWireClient/ScenarioWireClient adapter。FUN004/006/MQ/AUT/TST、UI232/234/235、SS311/312/321/322/323/352、PG206。仕様先行・未実装/未実行。AnimationWireClientTestの以下8methodを一意対応。
+NK-WEB-001/NK-MED-001、ProtectedReadWireClient/ProtectedReadWireException/AnimationWireClient/ScenarioWireClient adapter。FUN004/006/MQ/AUT/TST、UI232/234/235、SS311/312/321/322/323/352、PG206。正式22で8PT合格、実行詳細は019とmanifest参照。AnimationWireClientTestの以下8methodを一意対応。
 
 | Test ID | method | 入力・操作・fixture | 独立期待値 |
 |---|---|---|---|

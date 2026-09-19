@@ -1,6 +1,6 @@
 # Animation通信・保護read共通化実行結果
 
-PG206/PT-WEB238～245、仕様018。選択新8PT＋既存Scenario8/階層16/検索12/JMS8＝Web52件成功、正式reactorは未実行。正式1625PT/88部分成果へ未加算。Animation HTTP/実broker/動画stream/実NKgate・PGPT/IT/ST未完了。
+PG206/PT-WEB238～245、仕様018。正式22/source4e942a7485899d262a6d8d4eab56aad8228f7291、2026-09-20 08:25:04～08:36:55 JST/11:49/exit0で認定。全1633PT/Web374、failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、41scope/71負canary成功。新8PTを1部分成果として追加、89部分成果843PT。新変更7class22method106line26branch全missed0。BUG221/YKT177は全対象の回帰・上限拒否・64並行再試験完了。実行command/環境/commit/各hashはmanifestへ記録、raw log SHA256=7754fa29ac786ba1d55b42666898599a48676bc359ac77816add585972e34c89。Animation HTTP/実broker/動画stream/実NKgate・PGPT/IT/ST未完了。以下は選択試験履歴。
 
 初回 `/tmp/pgpt-pg206-selected.log` は2026-09-20 08:20:46 JST/32.019秒/exit1、Web44中1error、SHA256=71e7b8f7a0efbd6537c84034ac3bc029f121cd61fe2354227d4b748807f18157。BUG221/YKT177を0b58319fへ修正前起票。64総要求を上限128と誤設定したfixtureだけを12/8workerへ修正、Production上限は変えない。Web全constructorを検索し、既存正常1～12・意図的0/13拒否・他fixture非該当を確認。再発防止に既存上限拒否8PTと新64並行を含める。
 
