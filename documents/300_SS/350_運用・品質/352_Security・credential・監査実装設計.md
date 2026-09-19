@@ -137,6 +137,8 @@ HTTP content-type/size/method
 - 数値はASCII digitだけ、先頭+/minus/小数/指数なし。日時はstrict parser、JST wire→`Instant`の一義変換。
 - Validation messageへraw入力を反射しない。
 
+SSC-072: 上記一般規則よりUI222§5/6・223§3の検索固有規則を優先する。ScenarioSearchFormの検索文字列はcontrol検査後NFC/trimするため前後ASCII spaceをerrorにしない。pageのみ負ASCII整数を1へ補正する（int範囲内）。その他の数値のminus禁止、Password/質問の末尾space禁止は変えない。詳細はSS313§5.2追補。未知・複数parameter、plus、非ASCII数字、overflow、正数上限超過は引き続き拒否する。
+
 ## 9. Fixed protocol・JMS security
 
 - `BytesMessage`以外、body 1,000,000 byte超過、property/header/layout/version/length/UTF-8/padding不整合は業務handler前に拒否。

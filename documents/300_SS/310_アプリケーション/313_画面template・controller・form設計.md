@@ -145,6 +145,10 @@ Client-side `maxlength`は補助であり、UTF-8 byte validatorをWeb/API双方
 
 ## 6. View Model・表示制御
 
+SSC-072（ScenarioSearchForm限定）: UI222§5/6・223§3とCurrent SearchFiltersの優先規則を明示する。HTTPの7field `q/game/speaker/chapter/entry_type/voice/page` だけを受け、未知名・同名複数値は拒否する。欠落文字列は空、欠落/空pageは1。入力Unicode・制御文字を検査してからNFC/trimし、検索文字列の前後ASCII spaceはtrim対象（Password/質問の末尾space禁止を適用しない）。CR/LF/TAB/NULをtrimで消して受け入れない。byte上限・enum検査は正規化後で、超過切捨てなし。pageはASCII整数、先頭plus/小数/指数/非ASCII数字は拒否する。ただしUI222§6の明示例外として先頭minusの負整数と0は1へ補正する。Currentのint範囲を超える値、正数999999超過はfield error。leading zeroは数値として解釈する。最終pageへの補正は結果総件数を持つAPI側に残す。
+
+内部formは不変snapshotとclosed field/error-code集合を返す。raw入力を例外/診断へ反射しない。文字入力値は画面再表示のためだけに保持しtemplateで必ずescapeする。検証失敗時はtyped検索要求を生成せずMQを送らない。正常時の空文字はwire mapperでOptional.empty（設計上のnull条件）へ写像する。候補取得/HTTP binding/field error描画は別接続試験で確認する。
+
 ### 6.1 共通
 
 `PageViewModel`はeffective page、page size、total count/pages、first/last、previous/nextを持つ。0件でもtotal pages=1、first/last=0。
