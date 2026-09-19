@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG184/SSC067（仕様のみ）: file.BackupBundleCompletion constructor/complete/guard、既存Reader/Verifier/BackupCommitService接続を017070・BAT274～281へ追跡。BAK001～008/BKO001～008/OPS009/UI251/SS341§6.11/332/343。新8PT/1部分成果予定、未実装/未加算。archive生成/最新bundle/7世代/親全体は別残件。
+
 PG183/SSC063（正式未認定）: BatchRunRepository.begin/finish/history/abandon/insert/replayed・8 owned JDBC scope、既存bind/guard/time/Historyを017068/069・BAT151/既存BAT138～153へ追跡。OPS009/DAT009/UI251/SS331§8.3/332/341、BUG195・206/YKT154・162。272複合/2NULL/元2反例・関連64PT・2class/17method/236line/124branch全missed0/static成功、新JUnit/部品加算0。
 
 PG182/SSC063（正式未認定）: BackupStepRepository.inspectのpair2scope、complete/readRow/guarded等は017066/067・BAT216/既存BAT210～225へ追跡。BAK/BKO/OPS009/UI251/SS331§8.3/332/341§6.6/343、BUG195/YKT154、YKT162直接原因非該当。68複合＋元反例・関連24PT・1class/9method/99line/72branch全missed0/static成功、新JUnit/部品加算0。

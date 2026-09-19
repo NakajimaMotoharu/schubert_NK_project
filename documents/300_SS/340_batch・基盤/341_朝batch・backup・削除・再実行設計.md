@@ -207,6 +207,16 @@ BUG204/YKT160修正前追補: forcePendingとverifyWithinのpackage内返値は�
 - 失敗時はpartまたはfinal現物を保全、renameやsync不確定を元へ戻さない。最終Reader/Verifier失敗もDB成功へ進めない。既存finalとの衝突は双方不変、別generationへのfallbackなし。DB pair確定は§6.6の別caller段であり、本返値だけでcleanup許可しない。
 - 017055/056・BAT258～273で独立4file/golden・共有期限・全IO/force/close/rename/sync/再読・crash/置換/並行・nullを検証する。既存read-only fixtureのmutation拒否を維持し、publisher専用fixtureを拡張して区別する。実dump/tar/age/restore/最新bundle・7世代・親全体は別残件。
 
+### 6.11 root検証からDB両step確定へのcaller（SSC067/PG184）
+
+先行483dc405。file.BackupBundleCompletionはpublic constructorで借用admitted root/同inode security/backup UID・GIDを受け、complete(parent,directoryName,databaseHandle,configurationHandle)をprivate lock内で直列実行する。parentは単独借用autoCommit=true/RW/READ_COMMITTEDで自己advisory lockを保持する。親の連続OS排他・生成子終端・停止状態・真正handle原本はcaller必須条件であり本部品から推測しない。
+
+- API境界でConnection/name/2handleのnullを拒否。任意BackupManifest値をpublic入力にせず、6.7 Readerでroot所有canonical manifest/完全handle/nameを再読し、6.5 Verifierで同じmanifestに実4file・hash・owner/ACL/namespaceを照合する。各phaseの全owned closeを完了するまでDB処理を行わない。reader/verifierの既存期待値・read-only性を維持する。
+- monotonic開始tickを1回取り、既存readWithin/verifyWithinへ同値を渡す。phase前後/DB前後の期限30分・割込を検査し、別phaseで予算をresetしない。既知IO/期限/割込は固定StorageIoException、DBの既知失敗は既存BatchRepositoryException、未知Runtime/NPE/Errorは非正常伝播。raw診断/manifest実体/秘密をlogへ出さない。
+- 実file検証後に現在Instantを1回取得してMICROSへ切り下げ、6.6 BackupCommitServiceへmanifestと同時刻を渡す。UTC範囲/contentFinished以降は既存DB service境界で検査し、invalid clockを成功時刻へ補完しない。保存済両SUCCESSの再送は保存endを返し、現在時刻で書き換えない。新規DB/CONFIGは同一transactionでのみSUCCESS。
+- commit後の期限/割込でも今回成功値を返さない。既にcommit済みならrollbackしたと偽らず、callerはConnectionを破棄し、次回にroot/4fileを再検証した上で既存保存済結果を照合する。失敗時fileの削除/修復、DB片成功補完、親排他の解除、borrowed root/Connection closeはしない。
+- 017070/071・BAT274～281は独立golden/SQL後条件・161 IO・境界/NULL/未知・commit不明/並行/再送を確認する。constructorのpackage内clock/既存engine差替えはPT用で任意manifestをpublicに受け入れる代替入口ではない。実archive生成/最新真正bundle/7世代/親全体/実Linux deploymentは別未完了。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate
