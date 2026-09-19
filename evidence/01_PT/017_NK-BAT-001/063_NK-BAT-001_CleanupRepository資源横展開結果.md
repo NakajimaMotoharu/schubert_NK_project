@@ -1,5 +1,7 @@
 # NK-BAT-001 CleanupRepository資源横展開結果
 
+正式認定: PT-WEB-20260920-01/source5f813145c442e2b80df28d0ede5d1a9e4b9b55ad/dev-foundation、2026-09-20 00:50:23～01:06:30 JST（Maven終了01:06:29、16:05/exit0）。全1455 PT・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし。38scope/46負canary成功。PG178～180の497複合とCleanup4 NULL、既存SQL/不正投影/所有/rollbackを再確認。Batch95class/578method/3515line/1843branch、全missed0。BUG205/YKT161完了、BUG195/206・YKT154/162・SSC063の残Repositoryは継続。新JUnit/部品加算0、実NK CHR/親全体/PGPT/IT/STは未完了。実行環境・入力期待実際・source/test/hashは017/evidence/manifest.json、raw log SHA256=936f1e675b26c8a023d4a61b08d27b6ad9c836af984fe252d77db777c132999a。以下の未認定表記は探索履歴。
+
 探索log SHA256: red=`aa2dc16bd8f80f30b20ecf1a9a61cdbc29f60cf2f5de7ee1892503323a63bc1c`、green=`90f2ae4ca86b38bee0fb93c32a1f427f6d46771ac82498b544ce93471689cc7a`。原logは/tmp、正式manifestは単一clean verifyの同sourceから生成する。
 
 PG180/SSC063/BUG195・206/YKT154・162、062/BAT012。正式未認定。
