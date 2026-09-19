@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-06",
-  "targetCommit": "6575b21bf467002cccda7fbb9a6980e4cdfc9a71",
+  "runId": "PT-WEB-20260920-07",
+  "targetCommit": "53c2f7bf8fc6bb45851cd088a78e8f9c590fc45b",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T03:13:05+09:00",
-  "completedAt": "2026-09-20T03:24:50+09:00",
+  "startedAt": "2026-09-20T03:37:38+09:00",
+  "completedAt": "2026-09-20T03:49:28+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -15,9 +15,9 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "c75b7bc94be1ea6c73540a73458bc126376279a7f751c9560499283484f43c7e",
+  "rawLogSha256": "5db42cd50372fb3dbd4393d30e6d521dd8b4836a9c6b17d325c5836f8e706bd5",
   "programId": "NK-QST-001",
-  "scopeResult": "PASS_RECEIPT_IDENTIFIER_ONLY",
+  "scopeResult": "PASS_QUESTION_INPUT_BOUNDARIES_ONLY",
   "programComplete": false,
   "testIdMethods": {
     "PT-QST-RID001": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet",
@@ -27,7 +27,15 @@
     "PT-QST-RID005": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#randomFailure",
     "PT-QST-RID006": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory",
     "PT-QST-RID007": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#concurrentCalls",
-    "PT-QST-RID008": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence"
+    "PT-QST-RID008": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence",
+    "PT-QST-SUB001": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#literalWireAndCanonical",
+    "PT-QST-SUB002": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#byteAndUnicodeBoundaries",
+    "PT-QST-SUB003": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#protocolRejection",
+    "PT-QST-SUB004": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#fingerprintBinding",
+    "PT-QST-SUB005": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#ownershipAndClose",
+    "PT-QST-SUB006": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#nullContracts",
+    "PT-QST-SUB007": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#concurrentScopes",
+    "PT-QST-SUB008": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest#publicEvidenceAndRedaction"
   },
   "failed": 0,
   "errors": 0,
@@ -84,6 +92,32 @@
         "missed": 0,
         "covered": 1
       }
+    },
+    "dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 174
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 42
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
     }
   },
   "staticAnalysis": {
@@ -92,9 +126,13 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "bd9dc35097fbd9dfb3464db2cfc36f2f30ec6ba5a4243e6be3d05b94f89db14b",
+  "fullReactorManifestSha256": "6d3a2a3a01de4c813ae96f7fd722ee432c6dbedcd1bb75351e0c8b6a6e547580",
   "related": [
-    "PG-D-188"
+    "PG-D-188",
+    "PG-D-189",
+    "SSC-070",
+    "BUG-211",
+    "YKT-167"
   ],
   "fixture": "Public literal alphabet/index vectors; no real user IDs or credentials.",
   "oracle": "001/RID001..008:32 permitted letters at every leading value; exact26 length, all forbidden ASCII at26 positions; independent forward/reverse vectors and16 fixed cyclic values in64 concurrent calls, every26 provider failure position, invalid provider index and null contracts. Factory uses SecureRandom; no probabilistic uniqueness assertion.",
@@ -109,14 +147,26 @@
       "sha256": "50d667d8085cd3df1c9cbbe2c092a81b937eed2dbc137235879666f28ae886b2"
     },
     {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java",
+      "sha256": "2d945e1f4349a092ef439034f54158dfcdaacefcbaf3ce4cf5d12d585bec7cb9"
+    },
+    {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
       "sha256": "34896c85e175329ac1147b3e9cd252689963f45d0a9e404131f08ae2ce525bb6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java",
+      "sha256": "ac80219522994482b26eb475838a1ebe19e4d682824f44b4f9f03de2eca1719c"
     }
   ],
   "files": [
     {
       "path": "input/PT-QST-RID008.txt",
       "sha256": "589c9a9908f79744c9f6567eb37628de324e152e07b0359dfbd92f0cf5026fed"
+    },
+    {
+      "path": "input/PT-QST-SUB008.txt",
+      "sha256": "fdbfd6db045fe46d413120fdd0c5fce4a6eda7a8270f1c4360a13746cc86a3d7"
     },
     {
       "path": "logs/001_NK-QST-001_受付ID単体テスト仕様書.md",
@@ -127,12 +177,24 @@
       "sha256": "d9778b95a691bf4e6cf6199dfb27a60ada7c908dbdb48f8f5bbe0cb435e89489"
     },
     {
+      "path": "logs/003_NK-QST-001_質問送信入力単体テスト仕様書.md",
+      "sha256": "f09809571908d4464416b0cb5b932896087190cff80ba8853cf41781b492237f"
+    },
+    {
+      "path": "logs/004_NK-QST-001_質問送信入力実行結果.md",
+      "sha256": "4cf55fed447083948b1226d140e7314e0d4c261510bb089403536f14bc3ed144"
+    },
+    {
       "path": "output/PT-QST-RID008.txt",
       "sha256": "589c9a9908f79744c9f6567eb37628de324e152e07b0359dfbd92f0cf5026fed"
     },
     {
+      "path": "output/PT-QST-SUB008.txt",
+      "sha256": "fdbfd6db045fe46d413120fdd0c5fce4a6eda7a8270f1c4360a13746cc86a3d7"
+    },
+    {
       "path": "results.xml",
-      "sha256": "722eba7a81447d02d1a49c9e64b120243609c326139dc024b5ec1bfae98b92d9"
+      "sha256": "c6775f74128dbb7182c97d2804ed80c744ef7e1fc4359d59a83b3ae2105b5af0"
     }
   ]
 }
