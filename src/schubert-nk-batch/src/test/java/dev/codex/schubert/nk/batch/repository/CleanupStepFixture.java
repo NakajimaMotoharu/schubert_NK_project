@@ -130,6 +130,9 @@ public final class CleanupStepFixture {
     public final Map<String, Integer> seen = new TreeMap<>();
     public final Map<String, Set<Integer>> faults = new HashMap<>();
     public final Map<String, Throwable> unknown = new HashMap<>();
+    public final Map<String, Throwable> cleanupFaults = new HashMap<>();
+    public final Map<String, Integer> cleanupSeen = new TreeMap<>();
+    public int cleanupInjected;
     public final Map<String, Object> overrides = new HashMap<>();
     public final Map<Integer, Map<String, Object>> cleanupOverrides = new HashMap<>();
     public final List<Map<Integer, Object>> cleanupBinds = new ArrayList<>();
@@ -153,6 +156,15 @@ public final class CleanupStepFixture {
         throw new SQLException("public provider diagnostic", "08006");
       }
       if (unknown.containsKey(key)) throw unknown.get(key);
+    }
+
+    private void cleanupHit(boolean cleanup, String key) throws Throwable {
+      if (!cleanup) return;
+      int n = cleanupSeen.merge(key, 1, Integer::sum);
+      if (n == 1 && cleanupFaults.containsKey(key)) {
+        cleanupInjected++;
+        throw cleanupFaults.get(key);
+      }
     }
 
     public Connection wrap(Connection c) {
@@ -209,10 +221,12 @@ public final class CleanupStepFixture {
                   Object v = invoke(s, m, a);
                   statements--;
                   hit(key);
+                  cleanupHit(cleanup, key);
                   after.call(key, seen.get(key));
                   return v;
                 }
                 hit(key);
+                cleanupHit(cleanup, key);
                 if (name.equals("setQueryTimeout")) assertEquals(5, a[0]);
                 if (Set.of("setObject", "setLong", "setInt", "setString").contains(name)) {
                   binds.put((Integer) a[0], a[1]);
@@ -247,10 +261,12 @@ public final class CleanupStepFixture {
                   Object v = invoke(r, m, a);
                   rows--;
                   hit(key);
+                  cleanupHit(cleanup, key);
                   after.call(key, seen.get(key));
                   return v;
                 }
                 hit(key);
+                cleanupHit(cleanup, key);
                 if (name.equals("next")) {
                   position[0]++;
                   if (cleanup && anomaly.equals("empty")) return false;

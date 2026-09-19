@@ -409,6 +409,8 @@ final class CleanupStepRepositoryTest {
 
   @Test
   void interruptRuntimeAndResourceOwnership() throws Exception {
+    cleanupResourceCompounds();
+    assertAll(() -> cleanupOriginalFailure(false), () -> cleanupOriginalFailure(true));
     try (var c = locked(db, false)) {
       Thread.currentThread().interrupt();
       try {
@@ -454,6 +456,67 @@ final class CleanupStepRepositoryTest {
         p.closed();
       } finally {
         Thread.interrupted();
+        c.rollback();
+      }
+    }
+  }
+
+  private void cleanupOriginalFailure(boolean compound) throws Exception {
+    try (var c = locked(db, false)) {
+      var p = new Probe();
+      Throwable primary =
+          compound
+              ? new IllegalStateException("public same cleanup fixture")
+              : new IllegalArgumentException("public provider fixture");
+      p.cleanupFaults.put(compound ? "row.next" : "row.getObject", primary);
+      if (compound) p.cleanupFaults.put("row.close", primary);
+      try {
+        assertSame(
+            primary,
+            assertThrows(
+                Throwable.class,
+                () ->
+                    new CleanupStepRepository(p.wrap(c))
+                        .execute(attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS, 1)));
+        assertEquals(compound ? 2 : 1, p.cleanupInjected);
+        p.closed();
+      } finally {
+        c.rollback();
+      }
+    }
+  }
+
+  private void cleanupResourceCompounds() throws Exception {
+    try (var c = locked(db, false);
+        var admin = db.admin()) {
+      String before = totals(c, 90011);
+      String questions = query(admin, "select count(*) from schubert.questions");
+      c.rollback();
+      for (var sample : JdbcResourceCases.all()) {
+        var p = new Probe();
+        sample.install(p.cleanupFaults);
+        sample.verify(
+            assertThrows(
+                Throwable.class,
+                () ->
+                    new CleanupStepRepository(p.wrap(c))
+                        .execute(attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS, 1)));
+        assertEquals(sample.primary() == null ? 1 : 2, p.cleanupInjected);
+        assertEquals(1, p.cleanupSeen.get("statement.close"));
+        assertEquals(
+            sample.body().equals("statement.executeQuery") && sample.primary() != null ? 0 : 1,
+            p.cleanupSeen.getOrDefault("row.close", 0));
+        p.closed();
+        for (String key :
+            List.of(
+                "connection.commit",
+                "connection.rollback",
+                "connection.close",
+                "connection.setAutoCommit")) assertFalse(p.seen.containsKey(key));
+        assertFalse(c.getAutoCommit());
+        c.rollback();
+        assertEquals(before, totals(c, 90011));
+        assertEquals(questions, query(admin, "select count(*) from schubert.questions"));
         c.rollback();
       }
     }

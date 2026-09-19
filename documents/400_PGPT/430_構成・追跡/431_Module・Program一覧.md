@@ -2,7 +2,7 @@
 
 正式認定: PT-WEB-20260920-01/source5f813145c442e2b80df28d0ede5d1a9e4b9b55ad/dev-foundation、2026-09-20 00:50:23～01:06:30 JST（Maven終了01:06:29、16:05/exit0）。全1455 PT・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし。38scope/46負canary成功。PG178～180の497複合とCleanup4 NULL、既存SQL/不正投影/所有/rollbackを再確認。Batch95class/578method/3515line/1843branch、全missed0。BUG205/YKT161完了、BUG195/206・YKT154/162・SSC063の残Repositoryは継続。新JUnit/部品加算0、実NK CHR/親全体/PGPT/IT/STは未完了。実行環境・入力期待実際・source/test/hashは017/evidence/manifest.json、raw log SHA256=936f1e675b26c8a023d4a61b08d27b6ad9c836af984fe252d77db777c132999a。以下の未認定表記は探索履歴。
 
-PG181/SSC063（仕様のみ・未実装）: CleanupStepRepository.execute/present/requireと2 owned JDBC scopeを017064・BAT168/既存BAT162～169へ追跡。DAT009/OPS009/UI251/SS331§3.14/332/341、BUG195・206/YKT154・162。68複合と元8PTを予定、新JUnit/完成部品加算0。
+PG181/SSC063（正式未認定）: CleanupStepRepository.execute/counts/present/requireと2 owned JDBC scopeを017064/065・BAT168/既存BAT162～169へ追跡。DAT009/OPS009/UI251/SS331§3.14/332/341、BUG195・206・207/YKT154・162・163。68複合＋元2反例・関連24PT・1class/5method/68line/28branch全missed0/static成功、新JUnit/完成部品加算0。
 
 PG180/SSC063（正式未認定）: CleanupRepository.execute/readLogProgress/countsと4 owned JDBC scope、既存prepare/bind/required/requireTransactionを017062/063・BAT012と既存BAT001～017へ追跡。DAT009/OPS009/UI251/SS331§3.3・3.9/332/341。新136複合/4 NULL/元4反例、関連53PT、1class/8method/94line/34branch全missed0/static成功。BUG195・206/YKT154・162継続、新JUnit/部品加算0。
 

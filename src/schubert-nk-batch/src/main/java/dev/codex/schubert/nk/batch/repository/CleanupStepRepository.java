@@ -26,10 +26,12 @@ public final class CleanupStepRepository {
     try {
       require(references.read(attempt.run()).identityConsistent());
       CleanupStepChunk result;
-      try (var statement =
+      var statement =
           connection.prepareStatement(
               "select target_count,deleted_count,skipped_count,step_target_count,step_success_count,complete,reason_code"
-                  + " from schubert.maintenance_execute_cleanup_step(?,?,?,?,?,?,?)")) {
+                  + " from schubert.maintenance_execute_cleanup_step(?,?,?,?,?,?,?)");
+      @Nullable Throwable statementFailure = null;
+      try {
         var query = present(statement);
         query.setQueryTimeout(5);
         query.setObject(1, attempt.run().id());
@@ -39,11 +41,13 @@ public final class CleanupStepRepository {
         query.setObject(5, attempt.startedAt().atOffset(ZoneOffset.UTC));
         query.setString(6, kind.name());
         query.setInt(7, limit);
-        try (var rows = query.executeQuery()) {
+        var rows = query.executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
           var row = present(rows);
           require(row.next());
           var counts =
-              new CleanupCounts(
+              counts(
                   present(row.getObject("target_count", Long.class)),
                   present(row.getObject("deleted_count", Long.class)),
                   present(row.getObject("skipped_count", Long.class)));
@@ -52,19 +56,53 @@ public final class CleanupStepRepository {
               deleted = row.getObject("step_success_count", Long.class);
           require((target == null) == (deleted == null));
           Optional<CleanupCounts> total =
-              target == null
-                  ? Optional.empty()
-                  : Optional.of(new CleanupCounts(target, present(deleted), 0));
+              target == null ? Optional.empty() : Optional.of(counts(target, present(deleted), 0));
           boolean complete = present(row.getObject("complete", Boolean.class));
-          var reason = CleanupStepChunk.Reason.valueOf(present(row.getString("reason_code")));
-          result = new CleanupStepChunk(attempt, kind, counts, total, complete, reason);
+          String reasonCode = present(row.getString("reason_code"));
+          try {
+            var reason = CleanupStepChunk.Reason.valueOf(reasonCode);
+            result = new CleanupStepChunk(attempt, kind, counts, total, complete, reason);
+          } catch (IllegalArgumentException invalid) {
+            throw new SQLDataException("step cleanup projection invalid");
+          }
           require(!row.next());
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          if (rows != null) {
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error failure) {
+              if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
+            }
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null) {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error failure) {
+            if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
+          }
         }
       }
       require(references.read(attempt.run()).identityConsistent());
       return result;
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException failure) {
       throw new BatchRepositoryException();
+    }
+  }
+
+  private static CleanupCounts counts(long target, long deleted, long skipped)
+      throws SQLDataException {
+    try {
+      return new CleanupCounts(target, deleted, skipped);
+    } catch (IllegalArgumentException invalid) {
+      throw new SQLDataException("step cleanup counts invalid");
     }
   }
 
