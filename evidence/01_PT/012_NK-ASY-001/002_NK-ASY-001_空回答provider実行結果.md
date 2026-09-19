@@ -1,5 +1,7 @@
 # NK-ASY-001 空回答provider実行結果
 
+正式認定: PT-WEB-20260920-08/sourcee756613a1c5a35a216ff86d6fb78733bb55991ca、03:55:38～04:07:23 JST/Maven11:44/exit0。全1500PT・6Java4coverage100%・Production5static・40scope/55負canary成功。STB001～005、2class4method10line全missed0、branch0/0・生成methodの扱いは001の明示どおり。API計236class/1092method/7283line/2768branch全missed0。実行環境/command/期待・実際/source/hashはevidence/manifest.json、raw log SHA256=f70a3189f8f0bd00091306b7acb5570dad227b9caafbec4cafb9b1f8e769b992。新1部品5PT認定。worker DB/JMS/ACK/外部AI/Program全体は未完了。以下は選択時履歴。
+
 PG190/STB001～005、選択試験成功・正式全回帰前。workerのDB/JMS/ACK/非同期フロー完成ではない。
 
 2026-09-20 03:52:44 JST終了、38.323秒/exit0、新5PT＋既存Question16PT・依存FieldCodecTest/ResourceScopeTest成功、fail/error/skipped0。実行code2class/4method/10lineすべてmissed0、両classとも条件分岐なしのbranch0/0。抽象AnswerProviderには実行命令なし、coverage除外設定なし。NullAway/Enforcer/Spotless/SpotBugs成功。
