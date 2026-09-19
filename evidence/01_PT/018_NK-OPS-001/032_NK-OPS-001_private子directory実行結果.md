@@ -1,6 +1,8 @@
 # NK-OPS-001 private子directory新規作成実行結果
 
-PG186/SSC068/031・PT-OPS-CDIR-001～008。新規実装・Storage clean選択回帰成功、全reactor正式認定前。新8PT/OPS1部分成果はまだ正式数へ加算しない。
+PG186/SSC068/031・PT-OPS-CDIR-001～008。正式PT-WEB-20260920-04/source e63b7d045fa7d64aa532fa95494020e3c4492514、02:27:35～02:39:18 JST、clean verify 11:41/exit0で認定。全1471PT、failed/error/skipped0、6Java全4coverage100%、Production5静的解析未解決0、38scope/48負canary成功。新8PT/OPS1部分成果を加算し、OPS16部品134PT・全70部分成果681PTとなる。SSC068はprivate能力範囲のみ完了。
+
+正式Storageは15class/113method/554line/177branch全missed0。正式command・環境・入力期待実際・sourceと証跡hashはevidence/manifest.json、raw log SHA256は`b01c4c44fdba5a613221f0816c21cae480e562f1d68d1e450298223305029615`。以下の選択実行は履歴であり、正式sourceは上記に固定済み。
 
 `/tmp/pgpt-pg186-green.log`: 2026-09-20 02:26:01 JST終了、12.009秒/exit0。Storage全82PT（既存74＋新8）、failed/error/skipped0。cleanからのJaCoCoは15class/113method/554line/177branch全missed0、NullAway/Enforcer/Spotless/SpotBugs成功。default能力、Linux mkdirat0700、Owned createと所有移送lambdaの新4method/18lineを含み、既存分岐分母177を全網羅。coverage除外/新静的解析抑止なし。SHA256 `1d960ee0bdbbaba85545afae46d1bf68e5f8ac3b9939b2f3dced04766093d5eb`。
 
