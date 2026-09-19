@@ -10,6 +10,16 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def validate_animation_wire_inventory(mapping):
+    names = ("web238AnimationRequests", "web239SuccessProfiles", "web240ErrorProfiles",
+             "web241MalformedReplies", "web242CapabilitiesAndNull", "web243TransportFailures",
+             "web244ConcurrentRequests", "web245OwnershipAndDiagnostics")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest#" + name
+                for i, name in enumerate(names, 238)}
+    if mapping != expected:
+        raise ValueError("Animation wire Test IDs are incomplete or inconsistent")
+
+
 def validate_animation_view_inventory(mapping):
     names = ("web230AnimationMenuCounts", "web231MainGrouping", "web232OvaAndBounds", "web233RejectInconsistentGroups",
              "web234NullAndOwnership", "web235ClosedBeansAndRedaction", "web236SyntheticHtmlEscaping", "web237ConcurrentProjection")
@@ -347,6 +357,10 @@ def main():
         (230, "web230AnimationMenuCounts"), (231, "web231MainGrouping"), (232, "web232OvaAndBounds"),
         (233, "web233RejectInconsistentGroups"), (234, "web234NullAndOwnership"), (235, "web235ClosedBeansAndRedaction"),
         (236, "web236SyntheticHtmlEscaping"), (237, "web237ConcurrentProjection"))
+    groups["dev.codex.schubert.nk.web.messaging.AnimationWireClientTest"] = (
+        (238, "web238AnimationRequests"), (239, "web239SuccessProfiles"), (240, "web240ErrorProfiles"),
+        (241, "web241MalformedReplies"), (242, "web242CapabilitiesAndNull"),
+        (243, "web243TransportFailures"), (244, "web244ConcurrentRequests"), (245, "web245OwnershipAndDiagnostics"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -377,6 +391,7 @@ def main():
     validate_search_form_inventory({key: value for key, value in expected.items() if "ScenarioSearchFormTest#" in value})
     validate_search_view_inventory({key: value for key, value in expected.items() if "ScenarioSearchViewModelTest#" in value})
     validate_animation_view_inventory({key: value for key, value in expected.items() if "AnimationViewModelTest#" in value})
+    validate_animation_wire_inventory({key: value for key, value in expected.items() if "AnimationWireClientTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
@@ -389,7 +404,8 @@ def main():
                  "010_NK-WEB-001_Scenario検索結果表示単体テスト仕様書.md", "011_NK-WEB-001_Scenario検索結果表示実行結果.md",
                  "012_NK-WEB-001_Scenario検索入力単体テスト仕様書.md", "013_NK-WEB-001_Scenario検索入力実行結果.md",
                  "014_NK-WEB-001_Scenario検索画面状態単体テスト仕様書.md", "015_NK-WEB-001_Scenario検索画面状態実行結果.md",
-                 "016_NK-WEB-001_Animation一覧表示単体テスト仕様書.md", "017_NK-WEB-001_Animation一覧表示実行結果.md"):
+                 "016_NK-WEB-001_Animation一覧表示単体テスト仕様書.md", "017_NK-WEB-001_Animation一覧表示実行結果.md",
+                 "018_NK-WEB-001_Animation通信単体テスト仕様書.md", "019_NK-WEB-001_Animation通信実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -397,6 +413,13 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                                               "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
+        "animationWireExpected": "PG206/PT-WEB238..245/UI232,235/SS311,312,321,322,323,352: independently assembled header/data/record bytes, ANM and MAIN/OVA capability, success/error profiles, malformed response/correlation/context/bounds, null, no retry,64 concurrent contexts, buffer erasure and immutable redacted result. Existing Scenario166..173 and HTTP regression retained. Not HTTP/MQ deployment/NK gate completion.",
+        "animationWireSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                                 for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.java",
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/AnimationWireClient.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/AnimationWireClientTest.java")],
         "animationViewExpected": "PG204/PT-WEB230..237/016/017/UI223,235/SS313,323: independent menu count sum,main/SUBTRACK parent grouping and source main order,OVA order,0/50/51 bounds,all invalid category/parent/duplicates/zero size/empty-dot links,null/immutable/closed beans/redaction,percent-encoded literal URL,synthetic HTML and64 independent snapshots. No template/HTTP/stream/NK gate certificate.",
         "animationViewSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
                                  for relative in (

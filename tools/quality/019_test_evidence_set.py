@@ -56,6 +56,21 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
 
+    def test_animation_wire_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web238AnimationRequests", "web239SuccessProfiles", "web240ErrorProfiles",
+                 "web241MalformedReplies", "web242CapabilitiesAndNull", "web243TransportFailures",
+                 "web244ConcurrentRequests", "web245OwnershipAndDiagnostics")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest#" + name
+                   for i, name in enumerate(names, 238)}
+        web.validate_animation_wire_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_animation_wire_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_animation_wire_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_animation_wire_inventory(dict(mapping, unknown="unknown"))
+
     def test_animation_view_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web230AnimationMenuCounts", "web231MainGrouping", "web232OvaAndBounds", "web233RejectInconsistentGroups",
