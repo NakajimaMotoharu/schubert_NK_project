@@ -1,6 +1,6 @@
 # NK-DAT-001 Inbox永続検査service実行結果
 
-2026-09-20 最新確定: 正式PT-WEB-20260920-18/sourcec171ad68f1ebed666f42a595c6ba223bb352060c、07:06:06～07:17:48 JST/Maven11:41/exit0、全1589PT（Protocol80/Storage82/API689/Web330/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。JS1file全line/function/branch100%、18collector/41scope整合・66負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web10/89＝84部分成果799PT（全1589の内数）、今回再開比+174PT/+19部分成果。PG201外部JS1JUnit/内数Node8caseを限定認定・二重加算なし、新規障害なし。PG202検索templateは仕様のみ。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重38.25～49.75%（中心44%、約38～50%）を維持。残量36%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
+2026-09-20 最新確定: 正式PT-WEB-20260920-19/source793813d85ec8509c7d0913fbe6c80e6da0ee792e、07:27:43～07:39:35 JST/Maven11:51/exit0、全1597PT（Protocol80/Storage82/API689/Web338/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。JS1file全line/function/branch100%、18collector/41scope整合・67負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web11/97＝85部分成果807PT（全1597の内数）、今回再開比+182PT/+20部分成果。PG202検索template8PTを限定認定、新規障害なし。PG203検索HTTPは仕様のみ。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重38.25～49.75%（中心44%、約38～50%）を維持。残量34%で継続、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
 
 ## 1. 判定
 

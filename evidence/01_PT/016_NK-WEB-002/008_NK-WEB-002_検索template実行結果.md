@@ -1,5 +1,9 @@
 # 検索template実行結果
 
+## 正式19認定
+
+PT-WEB-20260920-19/source793813d85ec8509c7d0913fbe6c80e6da0ee792e、2026-09-20 07:27:43～07:39:35 JST、Maven11:51、exit0。全1597PT/Web338・新8PT成功、failed/error/skipped0、6Java全4coverage100%・Production5静的解析未解決0、既存JS全3coverage100%。41scope/67負canary成功。raw log SHA256 `7c4b1ea5e2f1ab59e91bc266051eea7b10ad5190a436ee4d615f19b799a917d5`。全reactor command/環境/対象commit/coverage/source・証跡hashはmanifestへ記録。PG202を85部分成果807PTの内1成果8PTとして限定認定。業務HTTP controller/実MQ/実Browser/実NKgate/PGPT・IT/ST未完了。以下は選択試験時点の履歴。
+
 PG202/PT-SCR026～033、仕様007。選択8PT成功、正式reactor未実行。正式1589PT/84部分成果へ未加算。template/JS配信は実装済だが業務controller/実MQ/実Browser視覚/実NKgate・PGPT/IT/ST完成ではない。
 
 選択 `/tmp/pgpt-pg202-green.log`、2026-09-20 07:21:08 JST終了、49.504秒、exit0。SHA256 `fcf2837b2d325f2945192fb97d511751a389b31028b85e6e14659368ad09a3a1`。Web選択57（新8、JS1/内数Node8、検索状態8、階層16、本文template8、Menu6、Error10）と依存選択成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。変更WebMvcConfigurationは1class9method34line・branch0/0全missed0、除外なし。新規障害なし。

@@ -1,6 +1,6 @@
 # 検索template単体テスト仕様書
 
-NK-WEB-002/SCR003/search.html、fragments/pagination.html、schubert.css検索部、WebMvcConfiguration、FUN003/AUT/TST、UI222/223/234/264、SS313/352、PG202。未実装・未実行。既存PG201scriptの実行PTはSCR025で重複計上しない。
+NK-WEB-002/SCR003/search.html、fragments/pagination.html、schubert.css検索部、WebMvcConfiguration、FUN003/AUT/TST、UI222/223/234/264、SS313/352、PG202。正式PT-WEB-20260920-19で8PT成功、008結果/manifest参照。既存PG201scriptの実行PTはSCR025で重複計上しない。
 
 | Test ID | method | fixture・入力・操作 | 独立期待 |
 |---|---|---|---|
