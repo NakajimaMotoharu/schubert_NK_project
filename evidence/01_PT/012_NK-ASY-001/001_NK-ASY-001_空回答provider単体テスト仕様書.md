@@ -2,6 +2,8 @@
 
 計測対象は実行codeを持つAnswerResult/StubAnswerProvider全体。AnswerProviderは抽象method宣言のみで実行命令がなく、JaCoCo除外設定は追加しない。分岐命令が生成されない場合のbranchは0/0としてmanifestへ明示し、missed branchのあるclassを0/0へ置換しない。
 
+AnswerResultのrecord生成accessor/equals/hashCodeはJaCoCo0.8.15のXMLでは独立method counterに現れず、手書きconstructor/toStringの2methodが記録される。恣意的なexcludes/Generated付与ではない。生成methodの動作もSTB001/004/005のgetter・等値/不等値/hash assertionで確認し、計測上の非表示を未試験扱いの免除に使わない。
+
 PG190、RD123 QST003/101、UI224§5/7・236§12、SS311/312§8.1。AnswerProvider.answer、StubAnswerProvider constructor/answer、AnswerResult constructor/body/answeredAt/equality/hash/toString。providerだけを対象とし、worker DB/JMS/ACKや外部AIは未実装。
 
 | Test ID | method | 入力・事前条件・操作 | 独立期待 |
