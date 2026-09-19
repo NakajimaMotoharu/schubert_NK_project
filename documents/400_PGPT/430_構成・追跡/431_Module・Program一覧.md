@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG175/SSC064追加（正式認定前）: NK-BAT-001 `.batch.file.BackupManifestPublisher` のconstructor2/create/write/verify/directory/capture/identity/metadata/guardと所有scope lambdaを017053/054・PT-BAT-242～257へ追跡。RD BAK/BKO/OPS009、UI251、SS311/341§6.8/343§5.3。既存InspectorEnvironmentPublisher.Io/NioIoはfile IO portとして再利用、Storage.ResourceScopeはRSCOPE回帰。本文の正式1415件/22batch部品は変更せず、正式run後に1部品16件を加算する。
+
 PG171～174正式14追跡: file4classの8scope（DurableRecordFiles/InspectorEnvironmentReader/InspectorEnvironmentPublisher/ExistingFileAccess）は017049/BAT056・EFILE007・PUB010・MED024。namespace3classの27scope（MaintenanceFileLock/InspectorEnvironmentFiles/MaintenanceRunFiles）は017050/LOCK006・NS002・BAT079。SystemctlStateSource.read/finish・InspectorUnitProbe.execute・共通ProcessResourceScope.use/QueryWorkは017051/STOP014・UNIT015。ConfigurationGroupResolver.resolve/scope/finish/terminate・既存readResultは017052/GID005。関連RD OPS009/FIL/BAK/BKO、UI237/251、SS333/341/343・SSC063、PGD171～174。正式14で306compound・全1415/4coverage100%を認定、新JUnit/部品は0。以下は時点別履歴。
 
 PG169/170正式13認定: BackupManifestReaderのconstructor2/read/所有scope全lambda/directory/capture/readFile/decode/metadata/guard・NioIo.attributes/openはBAT226～241/017046～048、BAK/BKO/OPS009/UI251/SS311・341§6.7・343§5.3/SSC062。Storage.ResourceScope.useの全known/unknown/nullable/nested責務とActionはRSCOPE001～008/018027～028、OPS009/FIL001～009/UI237/251/SS333/341/SSC063。全24新PTと1415全回帰/4coverage100%を認定。BUG195/YKT154の広域残候補を017048へ明示し未完了を維持。以下のPG164候補などは各実装時点の履歴であり現時点の未実装判定ではない。

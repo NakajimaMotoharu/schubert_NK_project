@@ -1,0 +1,265 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.storage.*;
+import java.io.IOException;
+import java.lang.reflect.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.*;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.*;
+import java.util.function.*;
+
+/** Writer-only fixture; real FD/IO, public bytes, synthetic UID. BAT242..257/SS341 6.8. */
+final class BackupPublicationFixture
+    implements AutoCloseable, InspectorEnvironmentPublisher.Io, InodeSecurityCalls {
+  static final UUID PART = UUID.fromString("11111111-2222-4333-8444-555555555555");
+  static final long UID = 2000, GID = 2001;
+  final Path parent, child;
+  final OwnedTransferDirectory root;
+  final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
+  final Set<Integer> descriptors = new HashSet<>();
+  final Set<byte[]> buffers = Collections.newSetFromMap(new IdentityHashMap<>());
+  final Map<String, Integer> counts = new LinkedHashMap<>();
+  final Map<String, Throwable> faults = new HashMap<>();
+  final List<String> events = new ArrayList<>();
+  final int rootFd;
+  int channels, faultAt, position;
+  long effective = 0, time = 100;
+  int chunk = Integer.MAX_VALUE;
+  boolean track = true, nullMap, nullWriter, nullReader, readonly;
+  byte[] acl = new byte[0];
+  String writeMode = "", readMode = "";
+  String changedSize = "";
+  BiConsumer<String, Integer> hook = (name, n) -> {};
+  BiConsumer<String, Map<String, Object>> metadata = (role, values) -> {};
+
+  BackupPublicationFixture(Path temporary) throws Exception {
+    parent = Files.createTempDirectory(temporary, "publication-");
+    child = Files.createDirectory(parent.resolve(BackupArtifactFixture.DIR + ".part"));
+    Files.setPosixFilePermissions(parent, PosixFilePermissions.fromString("rwx------"));
+    Files.setPosixFilePermissions(child, PosixFilePermissions.fromString("rwx------"));
+    DirectoryCalls nativeCalls = LinuxDirectoryCalls.create();
+    DirectoryCalls calls =
+        (DirectoryCalls)
+            Proxy.newProxyInstance(
+                getClass().getClassLoader(),
+                new Class<?>[] {DirectoryCalls.class},
+                (proxy, method, args) -> {
+                  String name = method.getName();
+                  if (!Set.of(
+                          "openRoot",
+                          "openDirectory",
+                          "openEntry",
+                          "createPrivateFile",
+                          "publish",
+                          "sync",
+                          "close")
+                      .contains(name)) throw new AssertionError("unapproved mutation " + name);
+                  if (!name.equals("close")) point(name);
+                  Object result;
+                  try {
+                    result = method.invoke(nativeCalls, args);
+                  } catch (InvocationTargetException failure) {
+                    throw failure.getCause();
+                  }
+                  if (name.equals("close")) {
+                    descriptors.remove((Integer) args[0]);
+                    point("close");
+                  } else if (Set.of("openRoot", "openDirectory", "openEntry", "createPrivateFile")
+                      .contains(name)) descriptors.add((Integer) result);
+                  return result;
+                });
+    track = false;
+    root = OwnedTransferDirectory.open(calls, parent);
+    rootFd = descriptors.iterator().next();
+    track = true;
+  }
+
+  BackupManifestPublisher publisher() {
+    return new BackupManifestPublisher(root, this, UID, GID, this, this::clock);
+  }
+
+  void create() throws StorageIoException {
+    publisher().create(BackupArtifactFixture.expected(), PART);
+  }
+
+  long clock() {
+    try {
+      point("clock");
+    } catch (IOException failure) {
+      throw new AssertionError("clock IO not supported", failure);
+    }
+    return time;
+  }
+
+  void point(String name) throws StorageIoException {
+    if (!track) return;
+    int n = counts.merge(name, 1, Integer::sum);
+    hook.accept(name, n);
+    if (!name.equals("clock") && !name.equals("effectiveUid")) {
+      position++;
+      events.add(name);
+    }
+    Throwable failure = faults.get(name + "#" + n);
+    if (failure instanceof RuntimeException value) throw value;
+    if (failure instanceof Error value) throw value;
+    if (failure != null || (faultAt > 0 && faultAt == position))
+      throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+  }
+
+  @Override
+  public Map<String, Object> attributes(Path held) throws IOException {
+    point("attributes");
+    if (nullMap) return null;
+    var values = new HashMap<>(nativeIo.attributes(held));
+    boolean directory = ((Integer) values.get("mode") & 0170000) == 040000;
+    values.put("uid", directory ? (int) UID : 0);
+    values.put("gid", directory ? (int) GID : 0);
+    String role = Files.isSameFile(held, parent) ? "parent" : directory ? "child" : "file";
+    metadata.accept(role, values);
+    return values;
+  }
+
+  @Override
+  public String filesystem(Path held) {
+    throw new AssertionError("backup FS admission belongs to caller");
+  }
+
+  @Override
+  public byte[] accessAcl(Path held, int maximum) throws StorageIoException {
+    point("acl");
+    assertEquals(44, maximum);
+    return acl;
+  }
+
+  @Override
+  public boolean readOnlyFilesystem(Path held) throws StorageIoException {
+    point("readonly");
+    return readonly;
+  }
+
+  @Override
+  public long effectiveUid() {
+    try {
+      point("effectiveUid");
+    } catch (IOException failure) {
+      throw new AssertionError("UID IO not supported", failure);
+    }
+    return effective;
+  }
+
+  @Override
+  public InspectorEnvironmentPublisher.Writer openWriter(Path held) throws IOException {
+    point("openWriter");
+    if (nullWriter) return null;
+    var delegate = nativeIo.openWriter(held);
+    channels++;
+    return new InspectorEnvironmentPublisher.Writer() {
+      @Override
+      public int write(ByteBuffer buffer) throws IOException {
+        point("write");
+        buffers.add(buffer.array());
+        if (writeMode.equals("zero")) return 0;
+        if (writeMode.equals("negative")) return -1;
+        if (writeMode.equals("large")) return buffer.remaining() + 1;
+        if (writeMode.equals("position")) return 1;
+        int limit = buffer.limit();
+        buffer.limit(buffer.position() + Math.min(buffer.remaining(), chunk));
+        int n = delegate.write(buffer);
+        buffer.limit(limit);
+        return n;
+      }
+
+      @Override
+      public long size() throws IOException {
+        point("writerSize");
+        long actual = delegate.size();
+        return changedSize.equals("writerSize#" + counts.get("writerSize")) ? actual + 1 : actual;
+      }
+
+      @Override
+      public void force() throws IOException {
+        point("force");
+        delegate.force();
+      }
+
+      @Override
+      public void close() throws IOException {
+        try {
+          delegate.close();
+        } finally {
+          channels--;
+        }
+        point("closeWriter");
+      }
+    };
+  }
+
+  @Override
+  public SeekableByteChannel open(Path held) throws IOException {
+    point("openReader");
+    if (nullReader) return null;
+    var delegate = nativeIo.open(held);
+    channels++;
+    return (SeekableByteChannel)
+        Proxy.newProxyInstance(
+            getClass().getClassLoader(),
+            new Class<?>[] {SeekableByteChannel.class},
+            (proxy, method, args) -> {
+              String name = method.getName();
+              if (!Set.of("read", "size", "close").contains(name))
+                throw new AssertionError("unexpected channel operation");
+              if (name.equals("close")) {
+                try {
+                  delegate.close();
+                } finally {
+                  channels--;
+                }
+                point("closeReader");
+                return null;
+              }
+              point(name);
+              if (name.equals("size")) {
+                long actual = delegate.size();
+                return changedSize.equals("size#" + counts.get("size")) ? actual + 1 : actual;
+              }
+              ByteBuffer buffer = (ByteBuffer) args[0];
+              buffers.add(buffer.array());
+              if (readMode.equals("zero")) return 0;
+              if (readMode.equals("short")) return -1;
+              if (readMode.equals("large")) return buffer.remaining() + 1;
+              if (readMode.equals("position")) return 1;
+              if (buffer.remaining() == 1 && readMode.equals("extra")) {
+                buffer.put((byte) 1);
+                return 1;
+              }
+              if (buffer.remaining() == 1 && readMode.equals("eof-position")) {
+                buffer.put((byte) 1);
+                return -1;
+              }
+              int limit = buffer.limit();
+              buffer.limit(buffer.position() + Math.min(buffer.remaining(), chunk));
+              int n = delegate.read(buffer);
+              buffer.limit(limit);
+              if (readMode.equals("content") && n > 0) buffer.put(0, (byte) 0);
+              return n;
+            });
+  }
+
+  void released() {
+    assertEquals(Set.of(rootFd), descriptors);
+    assertEquals(0, channels);
+    for (byte[] buffer : buffers) for (byte value : buffer) assertEquals(0, value);
+  }
+
+  @Override
+  public void close() throws StorageIoException {
+    track = false;
+    root.close();
+    assertTrue(descriptors.isEmpty());
+    assertEquals(0, channels);
+  }
+}

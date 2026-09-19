@@ -36,6 +36,44 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     @staticmethod
+    def publication_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest"
+        names = ("independentGoldenPublication", "privateCreationOwnership", "rootAndChildAdmission",
+                 "metadataNullTypes", "filePermissionsAndLinks", "writeProgressBoundaries",
+                 "readbackAndIdentity", "namespaceReplacement", "collisionAndPartRetention",
+                 "everyIoFailure", "deadlineAndInterrupt", "compoundAndBufferWipe",
+                 "nullAndClosedContracts", "concurrentNoReplace", "nativeIoAndFactory", "independentPublicationTrace")
+        suite = ET.Element("testsuite", name=cls, tests="16", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names,242)}
+
+    def test_root_publication_inventory(self):
+        suite, expected = self.publication_fixture()
+        self.assertEqual(expected, batch.validate_publication_suite(suite))
+        for position in range(16):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_publication_suite(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[position], tag)
+                with self.assertRaises(ValueError): batch.validate_publication_suite(wrong)
+            for key, value in (("name", "unknown"), ("name", suite[(position+1)%16].get("name")), ("classname", "unknown")):
+                wrong = copy.deepcopy(suite); wrong[position].set(key,value)
+                with self.assertRaises(ValueError): batch.validate_publication_suite(wrong)
+        for key, value in (("tests", "1"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key,value)
+            with self.assertRaises(ValueError): batch.validate_publication_suite(wrong)
+
+    def test_root_publication_literal_trace(self):
+        expected = {"PT-BAT-257-publication.txt": b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\ncreate=1|publish=1|sync=1\nio=79|clock=109\n"}
+        batch.validate_publication_traces(expected)
+        for wrong in ({}, {**expected, "unknown": b""}):
+            with self.assertRaises(ValueError): batch.validate_publication_traces(wrong)
+        name, value = next(iter(expected.items()))
+        for position in range(len(value)):
+            with self.assertRaises(ValueError):
+                batch.validate_publication_traces({name: value[:position] + bytes([value[position]^1]) + value[position+1:]})
+
+    @staticmethod
     def reader_fixture():
         cls = "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest"
         names = ("canonicalRootManifest", "nameAndFullHandleBinding", "directoryAndOwnerContracts",
@@ -652,6 +690,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
                  "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
                  "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest",
+                 "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -664,8 +703,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(33, len(suites))
-        self.assertEqual(suites[:22], batch.select_program_suites(suites))
+        self.assertEqual(34, len(suites))
+        self.assertEqual(suites[:23], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -1065,9 +1104,12 @@ class EvidenceSetTest(unittest.TestCase):
         reports += [self.pair_fixture(False)[0], self.pair_fixture(True)[0]]
         reader, reader_expected = self.reader_fixture()
         reports.append(reader)
+        publication, publication_expected = self.publication_fixture()
+        reports.append(publication)
         accepted = batch.validate_reports(reports)
+        self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
-        self.assertEqual(241, len(accepted))
+        self.assertEqual(257, len(accepted))
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)
             self.assertEqual(pair_expected, {k: v for k, v in accepted.items() if k in pair_expected})

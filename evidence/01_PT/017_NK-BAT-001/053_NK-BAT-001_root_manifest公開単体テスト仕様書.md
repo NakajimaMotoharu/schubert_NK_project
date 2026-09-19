@@ -29,4 +29,12 @@
 
 ## 実行・証跡契約
 
+### 独立IO inventoryと探索追補
+
+正常固定964byteの1回書込・各1回読取を条件とし、attributes/ACL/RW各14、子open2、private create1、entry open5、entry/子close計8、writer open1/size3/write1/force1/close1、reader open2/read4/size4/close2、publish1/sync1＝79 IO。単調clockは開始1＋guard108＝109、UID2。各79位置でIO/未知Runtime/Errorを独立注入し、clock2～109で期限/割込を注入する。clock1は基点なので経過期限の注入対象ではなく入口割込を別に確認する。30分未満・wrap成功/一致・逆転失敗を確認。未知failureは同identity、IOのpath/cause/suppressedは公開しない。
+
+実fileのpart/公開先/子directoryを同byte別inodeへ入替える反例を追加する。読み終えたbyteが同じだけでは認定しない。別instanceはcaller共通排他の内側で試験し、OS排他なしの同時改変へ成功保証を与えない。metadataの固定mode/owner/linkの変化は毎回captureで検査し、identityの重複分岐を除去してもnegativeを残す。
+
+BUG199はCOLLISIONの最外二重変換、BUG200は証跡総合fixtureへの新suite追加漏れ。いずれも修正前起票、探索成功のみでは完了へ更新せず正式runで再確認する。019の負canaryは42件（既存40＋publisher inventory/trace2）へ増加、017の別1件と合わせ43件予定。
+
 JDK25.0.4/Maven3.9.12、dev-foundation、対象commitは実装後記録。選択testはResourceScopeTest,BackupManifestPublisherTestをbatch -amでtest＋JaCoCo0.8.15 report＋SpotBugs4.10.4.0 check、正式は新IDで単一clean verify。line/method/class/branch各100%、failed/error/skipped/not-run0を完了条件とする。探索結果だけで正式認定しない。実行結果054、manifestは既存017/evidence/manifest.jsonへ追加しrun日時/OS/tools/source/command/exit/独立expected/actual/coverage/hashと関連BUG/SSCを記録。secret/raw token/session/key/dumpを保存しない。
