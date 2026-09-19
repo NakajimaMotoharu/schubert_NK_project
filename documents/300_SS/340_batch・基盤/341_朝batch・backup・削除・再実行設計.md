@@ -219,6 +219,8 @@ SSC-049/PG-D-148: 親OS lock保持下で、削除開始前にAPI/Web各unitのId
 
 ### 7.2 Step順
 
+SSC063/PG178・BUG195/YKT154（修正前追補）: LogCleanupServiceのSessionLeaseとacquire/closeで取得するStatement/ResultSetの5所有releaseは明示SQL scopeで内側から一度ずつ解放する。borrowed Connectionは閉じない。body成功後も全close成功までsummaryを返さず、未取得資源はcloseしない。SQLException/BatchRepositoryException/CleanupStoppedExceptionは既知失敗、他Runtime/NPE/Errorは未知失敗と区別する。未知primaryは同一性を保持し、cleanup失敗には固定DATABASE_FAILUREだけをsuppressedへ追加する（同じThrowable再送でも自身を追加しない）。既知primary＋未知cleanupはcleanupの同一性を優先する。既知同士ならprimary停止reasonを保ち、最外側でraw SQL cause/suppressedを除去する。既存LOCK_BUSY/TIME_LIMIT/INTERRUPTEDの理由、割込flag、lock取得/解放順と所有Connection破棄責務を変更しない。constructor/API境界nullは契約違反であり正常化しない。transaction rollback/autoCommit復元は別責務で、この資源scopeが回復成功を推定しない。017058/BAT026・029で公開JDBC複合故障と実lockの後条件を検証する。
+
 SSC057/PG164: 非Log/非秘密Inboxの7kindは331 §3.14のStepCleanupService→CleanupStepRepository→V020を使用し、DELETE/step累積を一緒にcommitする。borrowed親Connectionはchunk間だけautoCommit=true、既取得自己session lock/OS排他を保持し、各chunk前後に30分・interruptを検査する。完了はchunk0＋残候補0の実確認後、FKdeferredは保全した非完了として親へ返しWARNING/次回保持の判断を維持する。backup/lock/SQL/commit不明は未完了、rollback成功前のautoCommit復元は禁止。shared step内の別kind累積・今回service差分を区別し、finishは親が全kind・実Inbox/Log等を照合した後だけ行う。実親結線/全清掃完了はこのserviceだけでは成立しない。
 
 | Step | 対象 | Chunk | 失敗時 |
