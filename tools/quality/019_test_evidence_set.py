@@ -35,6 +35,20 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_animation_view_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web230AnimationMenuCounts", "web231MainGrouping", "web232OvaAndBounds", "web233RejectInconsistentGroups",
+                 "web234NullAndOwnership", "web235ClosedBeansAndRedaction", "web236SyntheticHtmlEscaping", "web237ConcurrentProjection")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.AnimationViewModelTest#" + name
+                   for i, name in enumerate(names, 230)}
+        web.validate_animation_view_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_animation_view_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_animation_view_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_animation_view_inventory(dict(mapping, unknown="unknown"))
+
     def test_search_http_inventory(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest"
