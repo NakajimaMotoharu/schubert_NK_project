@@ -61,6 +61,16 @@ def validate_search_inventory(mapping):
         raise ValueError("Search result Web Test IDs are incomplete or inconsistent")
 
 
+def validate_search_form_inventory(mapping):
+    names = ("web214CanonicalRequest", "web215ByteBoundaries", "web216UnicodeAndEnums",
+             "web217BindingAllowlist", "web218PageBoundaries", "web219InvalidCannotRequest",
+             "web220NullOwnershipRedaction", "web221ConcurrentValidation")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest#" + name
+                for i, name in enumerate(names, 214)}
+    if mapping != expected:
+        raise ValueError("Search form Web Test IDs are incomplete or inconsistent")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -306,6 +316,10 @@ def main():
         (206, "web206LiteralRowsAndAudio"), (207, "web207PageBounds"), (208, "web208PageRecordMismatch"),
         (209, "web209AudioAndLineInvariants"), (210, "web210NullAndOwnership"),
         (211, "web211ClosedBeansAndRedaction"), (212, "web212SyntheticEscaping"), (213, "web213ConcurrentProjection"))
+    groups["dev.codex.schubert.nk.web.form.ScenarioSearchFormTest"] = (
+        (214, "web214CanonicalRequest"), (215, "web215ByteBoundaries"), (216, "web216UnicodeAndEnums"),
+        (217, "web217BindingAllowlist"), (218, "web218PageBoundaries"), (219, "web219InvalidCannotRequest"),
+        (220, "web220NullOwnershipRedaction"), (221, "web221ConcurrentValidation"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -333,6 +347,7 @@ def main():
     validate_hierarchy_inventory({key: value for key, value in expected.items() if "ScenarioHierarchyViewModelTest#" in value})
     validate_detail_inventory({key: value for key, value in expected.items() if "ScenarioDetailViewModelTest#" in value})
     validate_search_inventory({key: value for key, value in expected.items() if "ScenarioSearchResultsViewModelTest#" in value})
+    validate_search_form_inventory({key: value for key, value in expected.items() if "ScenarioSearchFormTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
@@ -342,7 +357,8 @@ def main():
                  "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md",
                  "006_NK-WEB-001_Scenario階層表示単体テスト仕様書.md", "007_NK-WEB-001_Scenario階層表示実行結果.md",
                  "008_NK-WEB-001_Scenario本文表示モデル単体テスト仕様書.md", "009_NK-WEB-001_Scenario本文表示モデル実行結果.md",
-                 "010_NK-WEB-001_Scenario検索結果表示単体テスト仕様書.md", "011_NK-WEB-001_Scenario検索結果表示実行結果.md"):
+                 "010_NK-WEB-001_Scenario検索結果表示単体テスト仕様書.md", "011_NK-WEB-001_Scenario検索結果表示実行結果.md",
+                 "012_NK-WEB-001_Scenario検索入力単体テスト仕様書.md", "013_NK-WEB-001_Scenario検索入力実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -350,6 +366,11 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                                               "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
+        "searchFormExpected": "PG199/SSC072/PT-WEB214..221/012/013/UI222,223,234/SS313,352: independent NFC/UTF8 boundaries, exact seven names and duplicate rejection, four prohibited controls and malformed surrogates, enums, signed ASCII int page correction and overflow, immutable snapshots/null/redaction, invalid request prohibition and64 parallel validations. No HTTP/template/MQ connection certificate.",
+        "searchFormSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                              for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java")],
         "searchResultsExpected": "PG198/PT-WEB-206..213/010/011/UI223,234/SS313,323: independent literal display values, order, numeric scenario/audio URLs, page count boundaries, all eight audio presence combinations, null and immutable ownership, closed bean graph, synthetic HTML escaping and64 concurrent projections. Validated wire input only; no search form/controller/template or actual NK gate certificate.",
         "searchResultsSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
                                  for relative in (
