@@ -17,4 +17,4 @@ NK-WEB-001 / ScenarioDetailViewModel.from、getter、内部Entry/Audio/Navigatio
 | PT-WEB-204 | web204ConcurrentProjection | 64独立principal/本文 | snapshot/context混線なし・全結果独立literal一致 |
 | PT-WEB-205 | web205RedactedDiagnostics | 4閉classのtoString | 本文/title/username/path/descriptor非露出、固定REDACTED |
 
-入力は公開合成typed record、期待値はUI定義と独立literal。expectedをProduction投影/codecから算出しない。I/Fは既存decoder/readerによるbyte・hash・path検証後が前提で、本PTはその代替ではない。Java4coverage100%/NullAway/SpotBugs、全既存PT回帰を要求。branch0/0の値getter classがあれば分岐なしとして明記し除外しない。未実装・未実行、失敗/flaky/skipped/not-runは合格算入しない。command/環境/commit/結果/coverage/hashは009とmanifestへ確定後記録する。
+入力は公開合成typed record、期待値はUI定義と独立literal。expectedをProduction投影/codecから算出しない。I/Fは既存decoder/readerによるbyte・hash・path検証後が前提で、本PTはその代替ではない。Java4coverage100%/NullAway/SpotBugs、全既存PT回帰を要求。branch0/0の値getter classがあれば分岐なしとして明記し除外しない。選択12PT成功・正式全回帰待ち、失敗/flaky/skipped/not-runは合格算入しない。command/環境/commit/結果/coverage/hashは009とmanifestへ確定後記録する。

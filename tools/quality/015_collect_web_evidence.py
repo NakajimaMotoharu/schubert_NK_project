@@ -40,6 +40,17 @@ def validate_hierarchy_inventory(mapping):
         raise ValueError("Hierarchy Web Test IDs are incomplete or inconsistent")
 
 
+def validate_detail_inventory(mapping):
+    names = ("web194HeaderAndNavigation", "web195GroupingAndAudio", "web196EmptyAndBounds",
+             "web197NullContracts", "web198NavigationPairs", "web199SequenceRejection",
+             "web200EntryMetadataConsistency", "web201ImmutableSnapshot", "web202ClosedBeanContract",
+             "web203SyntheticHtmlEscaping", "web204ConcurrentProjection", "web205RedactedDiagnostics")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest#" + name
+                for i, name in enumerate(names, 194)}
+    if mapping != expected:
+        raise ValueError("Detail Web Test IDs are incomplete or inconsistent")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -276,6 +287,11 @@ def main():
         (192, "web192PreserveSourceOrder"),
         (193, "web193RedactedDiagnostics"),
     )
+    groups["dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest"] = (
+        (194, "web194HeaderAndNavigation"), (195, "web195GroupingAndAudio"), (196, "web196EmptyAndBounds"),
+        (197, "web197NullContracts"), (198, "web198NavigationPairs"), (199, "web199SequenceRejection"),
+        (200, "web200EntryMetadataConsistency"), (201, "web201ImmutableSnapshot"), (202, "web202ClosedBeanContract"),
+        (203, "web203SyntheticHtmlEscaping"), (204, "web204ConcurrentProjection"), (205, "web205RedactedDiagnostics"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -301,6 +317,7 @@ def main():
     validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
     validate_page_inventory({key: value for key, value in expected.items() if "PageViewModelTest#" in value})
     validate_hierarchy_inventory({key: value for key, value in expected.items() if "ScenarioHierarchyViewModelTest#" in value})
+    validate_detail_inventory({key: value for key, value in expected.items() if "ScenarioDetailViewModelTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
@@ -308,7 +325,8 @@ def main():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
     for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md",
                  "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md",
-                 "006_NK-WEB-001_Scenario階層表示単体テスト仕様書.md", "007_NK-WEB-001_Scenario階層表示実行結果.md"):
+                 "006_NK-WEB-001_Scenario階層表示単体テスト仕様書.md", "007_NK-WEB-001_Scenario階層表示実行結果.md",
+                 "008_NK-WEB-001_Scenario本文表示モデル単体テスト仕様書.md", "009_NK-WEB-001_Scenario本文表示モデル実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -316,6 +334,11 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                                               "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
+        "detailViewExpected": "PG195/PT-WEB-194..205/008/009/UI223,234/SS313,333: independent literal header/navigation/audio grouping/order,0/200/10000 bounds,null,sequence/pair/metadata rejection,immutable snapshots,closed bean graph,synthetic escaping,64 concurrent projections and fixed redaction. Input already wire/file-verified. No controller/production detail template/large reader bootstrap/actual NK CHR certificate.",
+        "detailViewSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                              for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java")],
         "frameworkVersions": {"springMvc": "7.0.9", "thymeleafSpring6": "3.1.5.RELEASE", "jsoupTest": "1.23.2", "springSession": "4.1.1", "springWeb": "7.0.9", "springTest": "7.0.9", "springSecurityWeb": "7.1.1", "micrometerWeb": "1.17.1", "servletApi": "6.1 (Tomcat bundled)", "tomcatEmbedCore": "11.0.25", "commonsLoggingWeb": "1.4.0", "jspecifyWeb": "1.0.1", "sourceAndHashes": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md sections5.7/5.8/5.9/5.10"},
         "programId": "NK-WEB-001", "programStatus": "IN_PROGRESS",
         "hierarchyExpected": "PG193/PT-WEB-182..193/006/007/UI223,234/SS313: immutable display-only projections of already validated game/route/file records; independent literal values/URLs/order, null/0/max/max+1, owned snapshots, closed getter graph, synthetic escaping,100 parallel calls and redaction. Limits10/50/500; no protocol/session retention. Not semantic wire validation, request binding, production templates/controller/HTTP/NK CHR.",

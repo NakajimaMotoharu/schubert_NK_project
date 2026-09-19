@@ -35,6 +35,22 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_detail_web_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web194HeaderAndNavigation", "web195GroupingAndAudio", "web196EmptyAndBounds",
+                 "web197NullContracts", "web198NavigationPairs", "web199SequenceRejection",
+                 "web200EntryMetadataConsistency", "web201ImmutableSnapshot", "web202ClosedBeanContract",
+                 "web203SyntheticHtmlEscaping", "web204ConcurrentProjection", "web205RedactedDiagnostics")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest#" + name
+                   for i, name in enumerate(names, 194)}
+        web.validate_detail_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_detail_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_detail_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_detail_inventory(dict(mapping, unknown="unknown"))
+
     def test_screen_inventory_and_negative_status(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.session.ScenarioControllerTest"
