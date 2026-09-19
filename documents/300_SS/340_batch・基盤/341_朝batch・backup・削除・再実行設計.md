@@ -193,6 +193,18 @@ SSC063/PG170・BUG195/YKT154: 本節/§6.5/§7.4のresource compoundはSS333冒�
 
 SS333 §7.5の低位publishChildは、保持backup root内で正規`<directoryName>.part`から`<directoryName>`へno-replace公開するための能力である。batch callerが両名、所有/同device/全4file/全byte検証、全file forceと子directory syncを完了した後だけ呼ぶ。後段は確定directoryのReader＋ArtifactVerifierとDB両step確定を必須とする。低位API実装だけでこれらを完了扱いにしない。失敗part/不確定finalの調査、再実行、新backup検証後の7世代整理は既定どおり保全優先。
 
+### 6.10 検証済bundleの耐久化・確定後照合（SSC066/PG177）
+
+先行f224f646。`.file.BackupBundlePublisher.publish(BackupManifest trusted)`は既存新規partの4fileを耐久化・確定し、確定後MANIFESTのBackupFileDigestを返す。callerがroot生成manifest/閉じた3実archiveのtrusted claim、原本、固定account/root設定、連続OS排他と全actor停止を保証する。DB成功/command成功/世代削除/不明partの自動再利用を本APIが推定しない。
+
+- 借用root/security/backup UID/GID・IO・単調時計をconstructorで確立する。全呼出はinstance内直列。単一の開始tickを操作全体で共有し、各phaseで30分予算をリセットしない。package内だけのReader.readWithin/Verifier.verifyWithin・forcePendingへ同じclockと開始tickを渡す。既存public reader/verifyは従来どおり自分の開始tick・readonly/final-directory限定を維持する。
+- ArtifactVerifierのpackage内forcePending(expected,Force,started)だけは既存`directoryName+.part`を対象にする。既存public verifyのfile集合/属性/byte/hash/所有/再保持/診断/IO順を変更せず同一検査engineを用い、各保持entryでread/hashに成功した後、同じcapabilityを狭いForce callbackへ渡す。callback後はその元snapshotと全属性を再照合する。元pathを再解決しない。
+- ForceはopenWriter（WRITEのみ、CREATE/TRUNCATE/内容writeなし）→size期待長→force(true)→size期待長→closeを全終了ResourceScopeで行う。4fileすべての成功・全entry/namespace再照合後だけ子directory syncし、全owned close・親確認まで成功した場合だけ次段へ進む。
+- root.publishChild(part,final)で同親no-replace・親sync。確定後Reader.readWithinでroot manifestと原本両handle/nameを読む。返却manifestの全値がtrustedと一致し、Verifier.verifyWithinの全4file/hash結果がpending時のmanifest digestと一致した後だけ返却する。再検証はrename前の結果だけで省略しない。
+- 操作全体の各IO境界/loop・所有close後・最終帰還まで同じ30分/割込契約を維持する。各phase入口も共有開始tickで検査する。blocking syscallの即時強制中断は保証しない。NULLは境界/invariant違反。既知IOは固定StorageIoException、衝突reason保持、未知Runtime/ErrorはResourceScopeの同identity・固定secondary規則。全読取bufferは既存engineの全終了消去を維持する。
+- 失敗時はpartまたはfinal現物を保全、renameやsync不確定を元へ戻さない。最終Reader/Verifier失敗もDB成功へ進めない。既存finalとの衝突は双方不変、別generationへのfallbackなし。DB pair確定は§6.6の別caller段であり、本返値だけでcleanup許可しない。
+- 017055/056・BAT258～273で独立4file/golden・共有期限・全IO/force/close/rename/sync/再読・crash/置換/並行・nullを検証する。既存read-only fixtureのmutation拒否を維持し、publisher専用fixtureを拡張して区別する。実dump/tar/age/restore/最新bundle・7世代・親全体は別残件。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate
