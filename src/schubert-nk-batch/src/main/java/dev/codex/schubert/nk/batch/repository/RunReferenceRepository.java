@@ -28,29 +28,56 @@ public final class RunReferenceRepository {
       require(!connection.isReadOnly());
       require(connection.getTransactionIsolation() == Connection.TRANSACTION_READ_COMMITTED);
       RunReferences result;
-      try (var statement =
+      var statement =
           connection.prepareStatement(
               "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent"
-                  + " from schubert.maintenance_read_run_references(?,?)")) {
+                  + " from schubert.maintenance_read_run_references(?,?)");
+      @Nullable Throwable statementFailure = null;
+      try {
         var checked = present(statement);
         checked.setQueryTimeout(5);
         checked.setObject(1, run.id());
         checked.setObject(2, run.cutoff().atOffset(java.time.ZoneOffset.UTC));
-        try (var row = checked.executeQuery()) {
+        var row = checked.executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
           var values = present(row);
           require(values.next());
-          result =
-              new RunReferences(
-                  present(values.getObject("has_batch_history", Boolean.class)),
-                  present(values.getObject("has_inbox_progress", Boolean.class)),
-                  present(values.getObject("has_log_progress", Boolean.class)),
-                  present(values.getObject("identity_consistent", Boolean.class)));
+          boolean history = present(values.getObject("has_batch_history", Boolean.class));
+          boolean inbox = present(values.getObject("has_inbox_progress", Boolean.class));
+          boolean log = present(values.getObject("has_log_progress", Boolean.class));
+          boolean consistent = present(values.getObject("identity_consistent", Boolean.class));
+          try {
+            result = new RunReferences(history, inbox, log, consistent);
+          } catch (IllegalArgumentException invalidProjection) {
+            throw new SQLDataException("run reference projection invalid");
+          }
           require(!values.next());
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          if (row != null)
+            try {
+              row.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+            }
         }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null)
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+          }
       }
       require(!Thread.currentThread().isInterrupted());
       return result;
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException failure) {
       // All owned resources have closed. No raw/suppressed provider diagnostics escape.
       throw new BatchRepositoryException();
     }

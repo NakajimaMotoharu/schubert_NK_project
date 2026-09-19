@@ -219,6 +219,50 @@ final class RunReferenceRepositoryTest {
   @Test
   void interruptionAndRuntime() throws Exception {
     try (var c = locked()) {
+      for (var sample : JdbcResourceCases.all()) {
+        var probe = new Probe();
+        sample.install(probe.thrown);
+        sample.verify(
+            assertThrows(
+                Throwable.class, () -> new RunReferenceRepository(probe.wrap(c)).read(RUN)));
+        probe.assertOwnedClosed();
+        assertEquals(sample.first() < 0 ? 1 : 2, probe.failures);
+        assertEquals(1, probe.seen.getOrDefault("statement.close", 0));
+        assertEquals(
+            sample.first() >= 0 && sample.body().equals("statement.executeQuery") ? 0 : 1,
+            probe.seen.getOrDefault("row.close", 0));
+        for (String call :
+            List.of(
+                "close",
+                "commit",
+                "rollback",
+                "setAutoCommit",
+                "setReadOnly",
+                "setTransactionIsolation"))
+          assertEquals(0, probe.seen.getOrDefault("connection." + call, 0));
+        assertFalse(c.isClosed());
+        assertEquals(false, c.getAutoCommit());
+      }
+      assertAll(
+          () -> {
+            var probe = new Probe();
+            var failure = new IllegalArgumentException("public unknown provider fault");
+            probe.thrown.put("statement.executeQuery", failure);
+            assertSame(
+                failure,
+                assertThrows(
+                    Throwable.class, () -> new RunReferenceRepository(probe.wrap(c)).read(RUN)));
+          },
+          () -> {
+            var probe = new Probe();
+            var failure = new IllegalStateException("public same provider fault");
+            probe.thrown.put("row.next", failure);
+            probe.thrown.put("row.close", failure);
+            assertSame(
+                failure,
+                assertThrows(
+                    Throwable.class, () -> new RunReferenceRepository(probe.wrap(c)).read(RUN)));
+          });
       Probe initial = new Probe();
       Thread.currentThread().interrupt();
       try {
@@ -355,6 +399,7 @@ final class RunReferenceRepositoryTest {
 
   static final class Probe {
     final Map<String, Integer> seen = new HashMap<>(), failAt = new HashMap<>();
+    final Map<String, Throwable> thrown = new HashMap<>();
     String anomaly = "", interruptAt = "";
     RuntimeException runtime;
     int failures, statements, rows;
@@ -443,8 +488,12 @@ final class RunReferenceRepositoryTest {
               });
     }
 
-    void hit(String name) throws SQLException {
+    void hit(String name) throws Throwable {
       int count = seen.merge(name, 1, Integer::sum);
+      if (count == 1 && thrown.containsKey(name)) {
+        failures++;
+        throw thrown.get(name);
+      }
       if (name.equals(interruptAt)) Thread.currentThread().interrupt();
       if (Objects.equals(failAt.get(name), count)) {
         failures++;

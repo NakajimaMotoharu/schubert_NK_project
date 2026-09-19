@@ -28,35 +28,62 @@ public final class InspectionSummaryRepository {
       require(!connection.isReadOnly());
       require(connection.getTransactionIsolation() == Connection.TRANSACTION_READ_COMMITTED);
       Optional<InspectionSummary> result;
-      try (var statement =
+      var statement =
           connection.prepareStatement(
               "select inspected_count,deleted_count,protected_count,complete"
-                  + " from schubert.maintenance_read_inbox_summary(?,?)")) {
+                  + " from schubert.maintenance_read_inbox_summary(?,?)");
+      @Nullable Throwable statementFailure = null;
+      try {
         var checked = present(statement);
         checked.setQueryTimeout(5);
         checked.setObject(1, run.id());
         checked.setObject(2, run.cutoff().atOffset(ZoneOffset.UTC));
-        try (var row = checked.executeQuery()) {
+        var row = checked.executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
           var values = present(row);
           if (values.next()) {
-            result =
-                Optional.of(
-                    new InspectionSummary(
-                        run,
-                        new CleanupCounts(
-                            present(values.getObject("inspected_count", Long.class)),
-                            present(values.getObject("deleted_count", Long.class)),
-                            present(values.getObject("protected_count", Long.class))),
-                        present(values.getObject("complete", Boolean.class))));
+            long inspected = present(values.getObject("inspected_count", Long.class));
+            long deleted = present(values.getObject("deleted_count", Long.class));
+            long protectedCount = present(values.getObject("protected_count", Long.class));
+            boolean complete = present(values.getObject("complete", Boolean.class));
+            try {
+              result =
+                  Optional.of(
+                      new InspectionSummary(
+                          run, new CleanupCounts(inspected, deleted, protectedCount), complete));
+            } catch (IllegalArgumentException invalidProjection) {
+              throw new SQLDataException("inspection summary projection invalid");
+            }
             require(!values.next());
           } else {
             result = Optional.empty();
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          if (row != null)
+            try {
+              row.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+            }
         }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null)
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+          }
       }
       require(!Thread.currentThread().isInterrupted());
       return result;
-    } catch (SQLException | IllegalArgumentException failure) {
+    } catch (SQLException failure) {
       // Owned resources have closed; no provider diagnostics/cause/suppressed escape.
       throw new BatchRepositoryException();
     }
