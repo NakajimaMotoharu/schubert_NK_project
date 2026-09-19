@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-01",
-  "targetCommit": "5f813145c442e2b80df28d0ede5d1a9e4b9b55ad",
+  "runId": "PT-WEB-20260920-02",
+  "targetCommit": "21cf373541fc7d0d7e131f79ebc9d67db3c44d41",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T00:50:23+09:00",
-  "completedAt": "2026-09-20T01:06:30+09:00",
+  "startedAt": "2026-09-20T01:27:40+09:00",
+  "completedAt": "2026-09-20T01:43:47+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository --no-transfer-progress clean verify",
   "environment": {
@@ -187,23 +187,23 @@
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 18337
+          "covered": 18592
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1843
+          "covered": 1891
         },
         "LINE": {
           "missed": 0,
-          "covered": 3515
+          "covered": 3632
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1511
+          "covered": 1536
         },
         "METHOD": {
           "missed": 0,
-          "covered": 578
+          "covered": 579
         },
         "CLASS": {
           "missed": 0,
@@ -217,7 +217,7 @@
       }
     }
   },
-  "rawLogSha256": "936f1e675b26c8a023d4a61b08d27b6ad9c836af984fe252d77db777c132999a",
+  "rawLogSha256": "6654362af9ac97cc912a388172d1344400157201d7574b0f138a5325562214d4",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
   "programComplete": false,
@@ -498,7 +498,7 @@
   },
   "sharedModuleOwnership": "Batch module359 PT = NK-BAT-001273 + NK-OPS-00186. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "aabe276db0a35cda3098f9a986a6b22809d80d6b6273e0dc13298e86be085ba1",
+  "fullReactorManifestSha256": "50d281b1e73cab1d20c6d4888771eeeafaff5a4213711821089c0619cca7e213",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -623,7 +623,12 @@
     "PG-D-179",
     "BUG-206",
     "YKT-162",
-    "PG-D-180"
+    "PG-D-180",
+    "PG-D-181",
+    "BUG-207",
+    "YKT-163",
+    "PG-D-182",
+    "PG-D-183"
   ],
   "fixture": "Isolated PostgreSQL18 with real Flyway and five denied roles; literal public log rows, fixed UUID/time, explicit parent transactions and public JDBC fault probes. No deployed credentials or data.",
   "oracle": "001/PT-BAT-001..017: independent8 function names/limits and3 reasons; held2+eligible1 gives2/0/2 then1/1/0 thenEND, run cumulative3/1/2; rollback/savepoint/reconnect/lock do not lose or duplicate counts; UTC/JST/NewYork epoch1789603200 and90day microsecond boundary; no parent connection commit/rollback/close/config mutation; all typed-null/row-count/SQL-stage failures reject; dependency allowlist.",
@@ -780,7 +785,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
-      "sha256": "18c41c2cf2cd720d5b231bbb95e883ac6d2b18e69d7e842ac66a968c9ec341b9"
+      "sha256": "1b1da6c98f2105711f63ac529d5501e988ab54e10dc72ee3b630bbed56a1b301"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
@@ -792,7 +797,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
-      "sha256": "9886436073c654db56bcc25bf35a06ab6240c8d09b8abc13b26c50f2868e167b"
+      "sha256": "15266a715dfc1e9cf63b136ee109bfd8072045c8ad8f87c8229b0a703b63f846"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
@@ -832,7 +837,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
-      "sha256": "3cd00a7d88abb8a69b7b6df3730c1ac1721e08d0a275d1e14ab484da75985663"
+      "sha256": "c9bd32b472fd7f4080d4b41bb61d3f5defaf376ffa61881a805b0b2ce680d555"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
@@ -1008,11 +1013,11 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepFixture.java",
-      "sha256": "503f8acfbd718fb7a27b091e4974028082b76027c2de3ae6c68fe0c315308a0a"
+      "sha256": "f70e1ac81a82e4d037e0a16e4958119058906124a861eb416282a2a32ae73ecf"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepRepositoryTest.java",
-      "sha256": "d21ee17a1078aa0aa1b54b67255dba31e51221385d2d273bfae9e306bf6de2af"
+      "sha256": "71173f966407dae12ec1e41a9186dbdadb6369f4a6930fb4b2c7da3400baa231"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
@@ -1024,7 +1029,7 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunRepositoryTest.java",
-      "sha256": "8ef360971ca99bc52994497586dc25589c8123eadec3593171e3a4d57032cea1"
+      "sha256": "2a65380b3fb89320a45af05a2807be871928808ba6bd0b4c31f0e8826af5b189"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
@@ -1036,11 +1041,11 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepFixture.java",
-      "sha256": "0c51d1500f749ac10b9c55f87c1c9a06f108461fc01a88e9f3713a4c2f48b2a0"
+      "sha256": "aebe3241209f9945b5bdc8629b9181ef2d07356cfe7d979019098a16f37b696c"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepositoryTest.java",
-      "sha256": "37e9e243e8be7b5b13116a48c72c4f2d04903c2b1d4db1ef37a10272e09c21e9"
+      "sha256": "faad0ad269743e9a2a448f973e91fe6c208857fa3cb03413fd1c36f398695d42"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
@@ -1096,6 +1101,9 @@
     "service": 115,
     "doubleClosePairs": 3
   },
+  "batchRunResourceOracle": "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count.",
+  "backupStepResourceOracle": "066/067 BAT216: pair-only two JDBC scopes,68 independent compounds and original same-throwable regression. SQL-only catch unchanged including provider IAE identity. Exact acquired/unacquired close counts/live0, borrowed connection unchanged and independent RUNNING pair SQL after caller rollback; existing repository/commit16 PT. No new JUnit/component count.",
+  "cleanupStepResourceOracle": "064/065 BAT168: two cleanup-only JDBC scopes and68 independent compounds plus provider/same-throwable regressions. Preserve null-resource SQL contract, narrow pure model validation, exact close/live/injection counters, unchanged borrowed connection and admin SQL rollback oracle. Existing repository/service16 tests rerun, no new JUnit/component count.",
   "cleanupResourceOracle": "062/063 BAT012: execute/progress four JDBC scopes,136 compound cases plus original provider/same-throwable regressions and four null-resource contract checks. Direct finally close, narrow pure counts/enum validation, exact live/close counters, borrowed connection unchanged and independent empty Log/progress SQL after caller rollback. Log225 and readonly136 compounds rerun; no added JUnit or component count.",
   "readOnlyResourceOracle": "060/061 BAT087,121: four JDBC release boundaries/136 compound cases plus four original counterexamples; SQL only is known, provider IAE/runtime/NPE/fatal preserve identity, model validation alone becomes fixed SQL failure. Direct finally close, live resources zero, exact owned close counts and no borrowed connection mutation. Log225 compounds also rerun; remaining repositories not certified by this scope.",
   "logResourceOracle": "058/059 BAT026: five owned SQL/lease release boundaries,225 compound and close-only cases; known SQL/repository/stop reasons versus unknown runtime/NPE/fatal, same throwable identity, fixed secondary, exact acquired-resource close counts, borrowed connection preservation and independent lock reacquisition after caller disposal. Direct JDBC finally close, no added static suppression. Transaction recovery and other repository scopes are separate.",
@@ -1108,11 +1116,11 @@
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "3eac560c3d4887aa3a5f103682ed1c6037de70e0d84f23187ad2515cd87b0c1f"
+      "sha256": "0be4dc49d690230a8b4b720db4068e0c20227bd7bd20a3d9038d494b55cbaa7e"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "206875ee24f87c066c0fe98014abbd25a1fc7b2d45a64ae69904f80f97b71dc9"
+      "sha256": "87a5f21d8847e969c9352bbc82e48c50ea0e8a7cade29fd4be3438774ed07cff"
     },
     {
       "path": "input/atomic-cleanup/PT-BAT-162-seven-kinds.txt",
@@ -1327,6 +1335,30 @@
       "sha256": "29dfaab069dbe3975c0695cc031268aebcdf59108e5e17ec44225e44b5df20a8"
     },
     {
+      "path": "logs/064_NK-BAT-001_CleanupStep資源横展開仕様.md",
+      "sha256": "2a0b569d0f891b53081b5d8481650bb5ba1cc8a0e94a6374f4293068ec7b8272"
+    },
+    {
+      "path": "logs/065_NK-BAT-001_CleanupStep資源横展開結果.md",
+      "sha256": "9ab9669f159a01797756084f59240b497d353064654dd0132ae3862aacdc2a44"
+    },
+    {
+      "path": "logs/066_NK-BAT-001_BackupStep資源横展開仕様.md",
+      "sha256": "eb40b21f464a07829c81ce8f5b0765cb981ad9993d2aadbf4b519393764fc612"
+    },
+    {
+      "path": "logs/067_NK-BAT-001_BackupStep資源横展開結果.md",
+      "sha256": "9fa90a1f49d6c84359809d50f71d342af2bf5d23fb24b07fe8dde4db64a0d8d0"
+    },
+    {
+      "path": "logs/068_NK-BAT-001_BatchRun資源横展開仕様.md",
+      "sha256": "f9942f8ee82aebd29bef58c9018b517786884853bcc6982650176cec2522bfaf"
+    },
+    {
+      "path": "logs/069_NK-BAT-001_BatchRun資源横展開結果.md",
+      "sha256": "1be6a368a31ec4deb42cae3ccfa879980e3a98c337a84eda4737d4993011e5a4"
+    },
+    {
       "path": "logs/BUG-145-compound-close.json",
       "sha256": "803b68059c3015e3485f28a7aa0ab0e7ccc80c59e272f674743ee0d18c18e77a"
     },
@@ -1517,6 +1549,10 @@
     {
       "path": "logs/PT-WEB-20260920-01-summary.json",
       "sha256": "da7685e44f7cea3d8ec7d4514e9df264946e757a2eb2a492eb7cfa6b5280c8e9"
+    },
+    {
+      "path": "logs/PT-WEB-20260920-02-summary.json",
+      "sha256": "3c43b881bc691f49bee9ecb833bcc7767e8b836a1a89b50ae38167ab2d9be50a"
     },
     {
       "path": "output/atomic-cleanup/PT-BAT-162-seven-kinds.txt",

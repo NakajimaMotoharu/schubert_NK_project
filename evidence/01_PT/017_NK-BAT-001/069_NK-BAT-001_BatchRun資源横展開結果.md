@@ -1,5 +1,7 @@
 # NK-BAT-001 BatchRunRepository資源横展開結果
 
+正式認定: PT-WEB-20260920-02/source21cf373541fc7d0d7e131f79ebc9d67db3c44d41/dev-foundation、2026-09-20 01:27:40～01:43:47 JST/16:06/exit0。全1455 PT・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし、38scope/46負canary成功。PG181/182/183の68/68/272＝408複合・BatchRun2NULL・元反例と既存回帰を認定、PG178以降の905複合は既存Test ID内で新JUnit/部品加算0。Batch95class/579method/3632line/1891branch全missed0。BUG207/YKT163完了、BUG195/206・YKT154/162・SSC063の別境界分類は継続。実NK CHR/親全体/PGPT/IT/ST未完了。実行環境・入力期待実際・source/test/hashは017/evidence/manifest.json、raw log SHA256=6654362af9ac97cc912a388172d1344400157201d7574b0f138a5325562214d4。以下の未認定表記は探索履歴。
+
 PG183/SSC063/BUG195・206/YKT154・162、068・BAT151。選択成功、正式全reactor前。新JUnit/部品加算0。
 
 反例 `/tmp/pgpt-pg183-red.log`: 2026-09-20 01:21:38 JST/10.568秒/exit1。Storage8成功、BAT151 1FAIL（assertAll内2反例）。history provider IAEと同一IllegalState row.next/closeがBatchRepositoryExceptionへ置換。Production0fffc827、test/probeのみ追加。SHA256=`e231190680ca2c9579ef3fb70608e337b6240a58a87e865c516724253cc98e29`。

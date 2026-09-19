@@ -1,5 +1,7 @@
 # NK-BAT-001 CleanupStepRepository資源横展開結果
 
+正式認定: PT-WEB-20260920-02/source21cf373541fc7d0d7e131f79ebc9d67db3c44d41/dev-foundation、2026-09-20 01:27:40～01:43:47 JST/16:06/exit0。全1455 PT・failed/error/skipped0、6 Java全4coverage100%、Production5静的解析未解決0、固定path3method限定review・coverage除外なし、38scope/46負canary成功。PG181/182/183の68/68/272＝408複合・BatchRun2NULL・元反例と既存回帰を認定、PG178以降の905複合は既存Test ID内で新JUnit/部品加算0。Batch95class/579method/3632line/1891branch全missed0。BUG207/YKT163完了、BUG195/206・YKT154/162・SSC063の別境界分類は継続。実NK CHR/親全体/PGPT/IT/ST未完了。実行環境・入力期待実際・source/test/hashは017/evidence/manifest.json、raw log SHA256=6654362af9ac97cc912a388172d1344400157201d7574b0f138a5325562214d4。以下の未認定表記は探索履歴。
+
 選択再試験成功: `/tmp/pgpt-pg181-green2.log`、2026-09-20 01:14:22 JST/34.326秒/exit0。Storage8＋Repository8＋Service8＝24 PT、BAT168内68複合と元2反例、failed/error/skipped0。CleanupStepRepository1class/5method/68line/28branch全missed0、NullAway/Enforcer/Spotless/SpotBugs成功。borrowed接続不変/全取得済close/未取得0/live0、admin独立質問count・caller rollback後step countsを確認。BUG207/YKT163の新2読取位置を修正、既存後条件はadminで非該当、16関連PT回帰成功。全reactor前のため障害/横展開完了は保留。SHA256=`1f8fc8551c3a2d6330803fb14e1ddf3fe928ba72f1aed2f50bc222fb7c63a452`。
 
 PG181/SSC063/BUG195・206・207/YKT154・162・163、064・BAT168。正式認定前、新JUnit/部品加算0。
