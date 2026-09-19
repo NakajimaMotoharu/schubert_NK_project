@@ -8,6 +8,10 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 CLASS = "dev.codex.schubert.nk.web.session.ScenarioControllerTest"
+DETAIL_CLASS = "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest"
+DETAIL_METHODS = ("detail017HeaderAndCommonLayout", "detail018PreviousNext", "detail019EntriesAndVoices",
+                  "detail020EmptyScenario", "detail021HtmlAndUrlSafety", "detail022MaximumRecordsAndVoices",
+                  "detail023CssAndViewBoundary", "detail024ConcurrentRendering")
 METHODS = ("screens001GamesSuccess", "screens002RoutesSuccess", "screens003FilesSuccess",
            "screens004EmptyHierarchy", "screens005AllResultCodes", "screens006InvalidSessionTerminal",
            "screens007WireAndBindingFailure", "screens008NullAndForeignPrincipal",
@@ -17,7 +21,8 @@ METHODS = ("screens001GamesSuccess", "screens002RoutesSuccess", "screens003Files
 SUBJECTS = ("dev/codex/schubert/nk/web/controller/ScenarioController",
             "dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration",
             "dev/codex/schubert/nk/web/config/WebMvcConfiguration")
-TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n"}
+TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
+          "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n"}
 SOURCE_PATHS = (
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java",
@@ -29,19 +34,23 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java",
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ApiSessionInvalidTest.java",
-    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/EmbeddedWebSecurityTest.java")
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/EmbeddedWebSecurityTest.java",
+    "src/schubert-nk-web/src/main/resources/templates/scenario.html",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java")
 
 
-def validate_suite(suite):
+def validate_suite(suite, detail=False):
+    classname, methods, first = (DETAIL_CLASS, DETAIL_METHODS, 17) if detail else (CLASS, METHODS, 1)
     cases = suite.findall("testcase")
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != CLASS or suite.get("tests") != "16"
+    if (suite.get("name") != classname or suite.get("tests") != str(len(methods))
             or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
-            or len(names) != 16 or len(set(names)) != 16 or set(names) != set(METHODS)
-            or any(case.get("classname") != CLASS or
+            or len(names) != len(methods) or len(set(names)) != len(methods) or set(names) != set(methods)
+            or any(case.get("classname") != classname or
                    any(child.tag not in ("system-out", "system-err") for child in case) for case in cases)):
         raise ValueError("missing or nonpassing hierarchy screen tests")
-    return {f"PT-SCR-{i:03}": CLASS + "#" + name for i, name in enumerate(METHODS, 1)}
+    return {f"PT-SCR-{i:03}": classname + "#" + name for i, name in enumerate(methods, first)}
 
 
 def validate_traces(traces):
@@ -88,6 +97,7 @@ def main():
                     "src", "pom.xml", "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-web/target"
     methods = validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + CLASS + ".xml")).getroot())
+    methods.update(validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + DETAIL_CLASS + ".xml")).getroot(), True))
     coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
     trace_root = target / "scenario-screen-traces"
     traces = {str(path.relative_to(trace_root)): path.read_bytes() for path in trace_root.rglob("*") if path.is_file()}
@@ -100,26 +110,28 @@ def main():
         for name, value in values.items():
             (directory / name).write_bytes(value)
     (evidence / "logs").mkdir(exist_ok=True)
-    for name in ("001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md", "002_NK-WEB-002_Scenario階層画面実行結果.md"):
+    for name in ("001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md", "002_NK-WEB-002_Scenario階層画面実行結果.md",
+                 "003_NK-WEB-002_Scenario本文template単体テスト仕様書.md", "004_NK-WEB-002_Scenario本文template実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    suite = ET.Element("testsuite", name="NK-WEB-002-hierarchy", tests="16", failures="0", errors="0", skipped="0")
+    suite = ET.Element("testsuite", name="NK-WEB-002-hierarchy-and-detail-template", tests="24", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
-        ET.SubElement(suite, "testcase", id=test_id, classname=CLASS, name=method.split("#")[1], result="PASS")
+        ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
     (evidence / "coverage").mkdir(exist_ok=True)
     (evidence / "coverage/class-counters.json").write_text(json.dumps(coverage, indent=2) + "\n")
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-WEB-002", "scopeResult": "PASS_SCENARIO_HIERARCHY_HTTP_ONLY", "programComplete": False,
+        "programId": "NK-WEB-002", "scopeResult": "PASS_SCENARIO_HIERARCHY_HTTP_AND_DETAIL_TEMPLATE_ONLY", "programComplete": False,
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
         "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..016.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "SSC-071", "BUG-213", "BUG-214", "BUG-215", "YKT-169", "YKT-170", "YKT-171"],
+        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "SSC-071", "BUG-213", "BUG-214", "BUG-215", "YKT-169", "YKT-170", "YKT-171"],
         "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
         "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
-        "limitations": "No final bootstrap/live broker/full screens/production request logging/actual NK CHR/IT/ST certificate.",
+        "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
+        "limitations": "No detail controller/file port/readiness binding/final bootstrap/live broker/full screens/production request logging/actual NK CHR/IT/ST certificate.",
         "sourceFiles": [{"path": path, "sha256": digest(repo / path)} for path in SOURCE_PATHS]})
     manifest["files"] = [{"path": str(path.relative_to(evidence)), "sha256": digest(path)}
                          for path in sorted(evidence.rglob("*")) if path.is_file()
@@ -128,7 +140,7 @@ def main():
     (evidence / "checksums.sha256").write_text("".join(
         digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
         for path in sorted(evidence.rglob("*")) if path.is_file() and path.name != "checksums.sha256"))
-    print(json.dumps({"runId": run, "tests": 16, "scopeResult": manifest["scopeResult"], "programComplete": False}))
+    print(json.dumps({"runId": run, "tests": len(methods), "scopeResult": manifest["scopeResult"], "programComplete": False}))
 
 
 if __name__ == "__main__":

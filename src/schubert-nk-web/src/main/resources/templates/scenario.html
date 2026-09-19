@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR007/FUN004; UI222/223/234; SS313/333; PG196/PT-SCR-017..024. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head(${page.title})}"></head>
+  <body><main class="page scenario-page">
+    <header class="topbar">
+      <div><span class="brand" th:text="${page.topBar.brand}"></span>
+        <h1 th:text="${page.title}"></h1>
+        <div class="subtitle" th:text="${page.game + ' / ' + page.displayPath}"></div>
+      </div>
+      <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+    </header>
+    <nav class="nav-links" aria-label="Scenarioナビゲーション">
+      <a th:href="@{/scenarios}">一覧</a>
+      <a th:href="@{/search}">検索</a>
+    </nav>
+    <nav class="scenario-nav" aria-label="scenario navigation">
+      <a th:if="${page.previous.present}" th:href="@{${page.previous.orElseThrow().href}}"
+         th:text="${'前: ' + page.previous.orElseThrow().title}"></a>
+      <span th:if="${!page.previous.present}">前: なし</span>
+      <a th:if="${page.next.present}" th:href="@{${page.next.orElseThrow().href}}"
+         th:text="${'次: ' + page.next.orElseThrow().title}"></a>
+      <span th:if="${!page.next.present}">次: なし</span>
+    </nav>
+    <section class="script-body">
+      <article class="script-entry" th:each="entry : ${page.entries}" th:id="${entry.anchor}"
+               th:classappend="${entry.dialogue} ? ' dialogue' : ' narration'">
+        <div class="line-meta">
+          <span th:text="${entry.lineNumber}"></span>
+          <span th:if="${!entry.speaker.empty}" th:text="${entry.speaker}"></span>
+        </div>
+        <p th:text="${entry.body}"></p>
+        <div class="audio" th:each="audio : ${entry.audio}">
+          <audio controls preload="none" th:src="@{${audio.href}}"></audio>
+          <a class="download" th:href="@{${audio.downloadHref}}">DL</a>
+          <span th:text="${audio.displayPath}"></span>
+        </div>
+      </article>
+    </section>
+    <nav class="scenario-nav bottom-nav" aria-label="scenario navigation bottom">
+      <a th:if="${page.previous.present}" th:href="@{${page.previous.orElseThrow().href}}"
+         th:text="${'前: ' + page.previous.orElseThrow().title}"></a>
+      <span th:if="${!page.previous.present}">前: なし</span>
+      <a th:if="${page.next.present}" th:href="@{${page.next.orElseThrow().href}}"
+         th:text="${'次: ' + page.next.orElseThrow().title}"></a>
+      <span th:if="${!page.next.present}">次: なし</span>
+    </nav>
+  </main></body>
+</html>

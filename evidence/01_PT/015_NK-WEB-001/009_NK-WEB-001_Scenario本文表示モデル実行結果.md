@@ -1,5 +1,7 @@
 # Scenario本文表示モデル実行結果
 
+正式13は既存InspectorDeploymentTestのxtrace混線（BUG217/YKT173）でexit1となり、Web/Batch未実行。PG195は未認定のまま。詳細は018035、修正後の別clean verifyで全体を再試験する。正式13の失敗をretry成功へ書換えない。
+
 PG195/PT-WEB-194～205、仕様008。選択12PT成功、正式全reactorは未実行。現在の正式1544PT/78部分成果へ加算しない。画面・large reader本番接続・実NK互換性gate・PGPT/IT/ST完成ではない。
 
 選択 `/tmp/pgpt-pg195-green.log`、2026-09-20 05:39:44 JST終了、38.413秒、exit0。SHA256 `62efc72b638dcf0622c3e777672babf34f2426b44cea835713118b895ba5e4c1`。新12PTと階層HTTP16PT・依存選択が成功、failed/error/skipped0、NullAway/Enforcer/Spotless/SpotBugs未解決0。新4class/36method/99line/30branch全missed0。Navigation/Audioのbranch0/0は条件なしで、coverage除外ではない。新規障害なし。

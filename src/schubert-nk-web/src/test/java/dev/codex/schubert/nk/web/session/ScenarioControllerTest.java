@@ -637,11 +637,12 @@ class ScenarioControllerTest {
       assertInstanceOf(ScenarioController.class, context.getBean(ScenarioController.class));
       var resolver = context.getBean(ThymeleafViewResolver.class);
       for (String view :
-          List.of("menu", "error/error", "scenarios", "scenario-routes", "scenario-files"))
+          List.of(
+              "menu", "error/error", "scenarios", "scenario-routes", "scenario-files", "scenario"))
         assertNotNull(resolver.resolveViewName(view, Locale.JAPAN));
       for (String view :
           List.of(
-              "scenario",
+              "scenario-private",
               "private",
               "../scenarios",
               "redirect:https://invalid.example",
