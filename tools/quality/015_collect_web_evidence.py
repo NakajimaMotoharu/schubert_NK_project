@@ -10,6 +10,17 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def validate_scenario_inventory(mapping):
+    names = ("web166SixRequestsMatchIndependentWire", "web167SixSuccessResponsesDecodeWithoutRetainingSecrets",
+             "web168ApprovedErrorsNeverExposeSuccessPayload", "web169MalformedUncorrelatedAndForeignResponsesReject",
+             "web170InputAndConfigurationFaultsNeverSend", "web171TransportFailuresDoNotRetryOrLeakPending",
+             "web172ConcurrentQueriesKeepContextsAndRepliesSeparate", "web173ResponseBoundsAndCallerOwnershipRemainExact")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest#" + name
+                for i, name in enumerate(names, 166)}
+    if mapping != expected:
+        raise ValueError("Scenario Web Test IDs are incomplete or inconsistent")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -218,6 +229,15 @@ def main():
             (164, "web164InvalidationFaultsNeverClaimSuccessfulLogout"),
             (165, "web165ConcurrentAndStaleInvalidationCannotDeleteNewLogin")),
     }
+    groups["dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest"] = (
+        (166, "web166SixRequestsMatchIndependentWire"),
+        (167, "web167SixSuccessResponsesDecodeWithoutRetainingSecrets"),
+        (168, "web168ApprovedErrorsNeverExposeSuccessPayload"),
+        (169, "web169MalformedUncorrelatedAndForeignResponsesReject"),
+        (170, "web170InputAndConfigurationFaultsNeverSend"),
+        (171, "web171TransportFailuresDoNotRetryOrLeakPending"),
+        (172, "web172ConcurrentQueriesKeepContextsAndRepliesSeparate"),
+        (173, "web173ResponseBoundsAndCallerOwnershipRemainExact"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -240,11 +260,14 @@ def main():
         reports[report.name] = ET.ElementTree(clean)
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Web Test IDs do not exactly cover executed methods")
+    validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
+    for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md"):
+        shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
                         evidence / "coverage" / ("web-jacoco." + suffix))
@@ -253,6 +276,12 @@ def main():
     manifest.update({
         "frameworkVersions": {"springMvc": "7.0.9", "thymeleafSpring6": "3.1.5.RELEASE", "jsoupTest": "1.23.2", "springSession": "4.1.1", "springWeb": "7.0.9", "springTest": "7.0.9", "springSecurityWeb": "7.1.1", "micrometerWeb": "1.17.1", "servletApi": "6.1 (Tomcat bundled)", "tomcatEmbedCore": "11.0.25", "commonsLoggingWeb": "1.4.0", "jspecifyWeb": "1.0.1", "sourceAndHashes": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md sections5.7/5.8/5.9/5.10"},
         "programId": "NK-WEB-001", "programStatus": "IN_PROGRESS",
+        "scenarioWireExpected": "PG118/191, PT-WEB-166..173,001 section14.14/003: six independent UI234 request/response byte vectors,0/1/max records,I/F descriptors,all defined error profiles,mutated headers/data/records,100 concurrent correlations,timeout/interruption/capacity/no retry/buffer erasure. Synthetic sender and real correlation registry, not actual broker/controller/production bootstrap/NK CHR.",
+        "scenarioWireSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                                for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java",
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireException.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java")],
         "tests": {"program": len(methods), "reactor": sum(m["tests"] for m in verified["modules"].values())},
         "testIdMethods": expected, "methods": methods,
         "inputAndExpected": "PT-WEB-001..008 / PG-D-093: synthetic 32-byte zero/sequence/FF CSPRNG data with independent Python base64/hashlib fixed vectors; canonical unpadded43-character base64url and raw-ASCII SHA256 lookup, temporary random/decode/hash arrays erased. Null/length/alphabet/padding/unused-bits negatives, provider failure and100 concurrent random IDs/per-call hashes. Explicit GET URL strings preserve path/query/Unicode and valid query escapes with no trim/decode; reject schemes/authority/fragment/malformed/control/dot-segments/encoded path delimiters and nonGET. Exact2047/2048/2049 UTF8-byte, malformed surrogate and100 independent query cases. toString and validation errors contain no values.",
