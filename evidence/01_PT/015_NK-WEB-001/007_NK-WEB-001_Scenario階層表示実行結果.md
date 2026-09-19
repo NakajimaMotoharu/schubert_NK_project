@@ -1,5 +1,7 @@
 # NK-WEB-001 Scenario階層表示実行結果
 
+正式認定: PT-WEB-20260920-11/source50ebfa27026736b702d723f7e11a482495b6cc0d、04:47:50～04:59:36 JST/Maven11:44/exit0。全1528PT（Web269、うち本Program193）成功、failed/error/skipped0。6Java4coverage100%/Production5静的解析未解決0、40scope/58負canary成功。新12PTと6class42method82line10branch全missed0を限定認定。BUG212/YKT168の全3fieldを再試験し完了。raw log SHA256=0e49ecccc91cd044c055e37fea950dd209f7334fe2288ba4b9929ac94970b739。command/環境/source/hashはmanifest。controller/実template/HTTP/実NKgate/PGPT/IT/STは未完了。以下は選択試験履歴。
+
 PG193/PT-WEB-182～193、仕様006。正式全回帰前。3一覧projectionを1部分成果として扱うが、現在の正式1516件/76部分成果へは未加算。
 
 | run | 終了JST/時間/exit | 結果 | raw log SHA256 |
