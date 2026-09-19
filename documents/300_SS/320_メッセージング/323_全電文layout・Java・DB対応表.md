@@ -229,6 +229,12 @@ LGSREQ01は一度だけstrict decodeし、同じ不変値をcanonicalとread-onl
 
 LGSRSP01保存結果はrequest/owner/layout/versionへ拘束した暗号化全電文とする。初回0000はCOMPLETED/NONE、確定9001だけERROR/NONE。保存時headerはms、completed_atはμs、retentionは後段Inboxが完了時刻から24時間を所有する。再送成功だけ0200へ変更し、保存record・9001は不変、応答ID/context/correlation/timeは現在要求から再構成する。現在ADMIN認証、HMAC、transaction、JMSは後段application責務であり、このvalue/replay部品だけで認可済みとみなさない。
 
+### 9.6 QSBREQ01のNKOP1 fieldと入力所有（SSC-070）
+
+Ownerは検証済actor.userId十進、layout QSBREQ01/version001、target `QUESTION:NEW`、field count1、field名`question`/type`X1`/値はwire decode後のNFC UTF-8本文とする。本文以外のtoken/header ID/time/context/reserved/paddingはcanonicalへ混入しない。既存§9の対象/意味を変更せずfield名/typeを具体化する。
+
+`QuestionSubmitRequest.decode`はQSBREQ01のQ/A・DATA4144・record0・reservedとUUID/本文を既存共通codecで検証してからowned char[]へ切離し、decode用byteコピーはfinally消去する。`copyQuestion`はcaller-owned clone、canonicalの各bufferは返却後callerが別途closeする。request.closeは本文を消去してterminal、冪等close可・close後の業務access不可。private lockによりcopy/canonicalとcloseの途中状態を公開しない。String型wire DTOや呼出元のFixedPayloadは別所有であり、このcloseで他所有者の全メモリを消去したと主張しない。利用者認証/owner照合、Inbox NEW、DB受付/Outbox送達、保持期限後再送は上位service責務として別gateに残す。PG189/011003～004へ追跡。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
