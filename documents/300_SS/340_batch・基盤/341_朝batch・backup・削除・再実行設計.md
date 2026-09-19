@@ -176,6 +176,19 @@ SSC063/PG170・BUG195/YKT154: 本節/§6.5/§7.4のresource compoundはSS333冒�
 - nullは契約違反、NPEを正常化しない。既知IO/不正metadata/codec不正は固定StorageIoException、raw path/byte/cause/suppressedを返さない。codecのIllegalArgumentExceptionだけを狭い呼出境界で集約し、未知provider Runtime/Errorのidentityを保持する。channel closeの既知IOはTWRへ渡す前に固定例外化、bufferを全終了で消去する。未知primary/closeの組合せでも成功へ変換しない。
 - 017046/047/BAT226～241で全method/line/class/branch100%、実Linux保持inodeと非特権synthetic UID境界、独立golden、name/full handle/null、全metadata/全IO出現点/close複合/読取り進捗/変更/中断/並行を検証する。Production expected生成は禁止。shared fixtureを使ってもgolden byte/名前/UID/sizeを固定独立値とし、readerが返した実値のsanitized traceをcollector独立期待に照合する。
 
+### 6.8 root MANIFEST新規公開（SSC064/PG175）
+
+先行51b872ed。`.file.BackupManifestPublisher.create(BackupManifest trusted, UUID partId)`は既存の`trusted.directoryName()+".part"`へMANIFESTだけを新規作成する。constructorは借用root、InodeSecurityCalls、backup UID/GID（1～unsigned32）を受領する。callerは原本両handle・閉じた実archiveの検証済claim、root設定/ancestor/realpath/FS durability、連続OS排他/actor停止を別途保証する。任意claimが正しいことをwriterは証明しない。
+
+- 実効UID0、親/子はbackup UID/GID・0700 directory/nlink>=2/size>=0、同device、RW、ACLなし。既存子だけをNOFOLLOW保持し、新directory/command/DB操作はしない。
+- UUID.partは`createPrivatePart`によるCREATE_NEW0600。新inodeはroot:root regular/nlink1/size0・同device・RW/ACLなし。既存UUID.partはCOLLISION、上書き/chown/自動削除/再利用をしない。
+- canonical encodeのbyteを正進捗（返却countとbuffer位置一致）で全書込し、前後size、force(true)、writer closeを確認する。属性はmode/uid/gid/nlink/size/dev/ino/mtime/ctimeのtyped9項目。書込前後はidentity(mode/uid/gid/nlink/dev/ino)不変と最終長を確認する。
+- writer close後、保持entryをbounded readbackしbyte一致、前後sizeとEOF、全9属性不変を確認する。公開直前に同名partを再保持して元snapshotと照合する。publishAs(partId,MANIFEST.json)のno-replace rename＋directory syncで公開し、既存MANIFESTは衝突として両fileを保全する。
+- rename前後はdev/ino/mode/uid/gid/nlink/size/mtime不変（renameに伴うctimeだけは比較対象外）。公開後readbackと再保持ではctimeを含む全属性一致。子directoryは書込に伴うsize/time変化を許すがdev/ino/mode/uid/gid identityを維持し、親から再保持した子と照合。親root自体の全属性は不変を要求する。
+- 所有child/entry/channel/writerの全close後、親root・実効UID・単調30分/割込を再確認してのみ正常帰還。全IO前後とloopで期限/割込を確認しflagを保持。instance内直列化、借用rootをcloseしない。PG170のResourceScopeでunknown identity・既知IO redaction・複合優先順位を維持し、encode/readback bufferは全終了で消去する。NULLは境界違反、NPEをcatchして正常化しない。
+- 失敗時のpart/公開済fileは保全。新規専用であり再実行の再利用判断はcallerの別検証とする。最終directory rename、Reader＋ArtifactVerifierの再検証、DB pair確定、実dump/tar/age/7世代は別の必須残件。
+- PTは017053/BAT242～257、独立golden・実Linux FDとsynthetic UIDを区別し、全4coverage100%と静的解析を要求。writer専用fixtureとする。低位write/read portは既存InspectorEnvironmentPublisher.Ioを再利用するが環境fileのpolicy/上書き/再利用規則は借用しない。
+
 ## 7. Business/technical cleanup
 
 ### 7.1 必須gate
