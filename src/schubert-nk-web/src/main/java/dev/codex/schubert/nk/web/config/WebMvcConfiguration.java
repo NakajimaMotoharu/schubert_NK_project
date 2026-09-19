@@ -71,7 +71,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     resolver.setCharacterEncoding("UTF-8");
     resolver.setContentType("text/html;charset=UTF-8");
     resolver.setForceContentType(true);
-    resolver.setViewNames(new String[] {"menu", "error/error"});
+    resolver.setViewNames(
+        new String[] {"menu", "error/error", "scenarios", "scenario-routes", "scenario-files"});
     resolver.setAlwaysProcessRedirectAndForward(false);
     resolver.setProducePartialOutputWhileProcessing(false);
     return resolver;

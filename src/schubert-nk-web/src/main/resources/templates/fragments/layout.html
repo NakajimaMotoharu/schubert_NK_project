@@ -10,7 +10,7 @@
   <body>
     <header class="topbar" th:fragment="topbar(topbar)">
       <h1 th:text="${topbar.brand}">schubert NK</h1>
-      <div class="topbar-actions">
+      <div class="topbar-actions" th:fragment="userActions(topbar)">
         <nav class="nav-links" aria-label="共通ナビゲーション">
           <a th:href="@{/}">メニュー</a>
           <a th:href="@{/notifications}">通知</a>

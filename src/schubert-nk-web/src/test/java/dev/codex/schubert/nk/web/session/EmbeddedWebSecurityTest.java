@@ -292,6 +292,22 @@ class EmbeddedWebSecurityTest {
         boolean menuMvc,
         boolean errorMvc)
         throws Exception {
+      this(root, secureRandom, database, provider, menuMvc, errorMvc, (mvc, invalid) -> {});
+    }
+
+    Server(
+        Path root,
+        boolean secureRandom,
+        WebLogDatabaseFixture database,
+        Optional<MqAuthenticationProvider> provider,
+        boolean menuMvc,
+        boolean errorMvc,
+        java.util.function.BiConsumer<
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext,
+                ApiSessionInvalidHandler>
+            mvcSetup)
+        throws Exception {
+      Objects.requireNonNull(mvcSetup);
       assertFalse(errorMvc && !menuMvc);
       f = new Fixture(Objects.requireNonNull(database));
       f.clock.value = Instant.now();
@@ -472,6 +488,7 @@ class EmbeddedWebSecurityTest {
         var mvc =
             new org.springframework.web.context.support.AnnotationConfigWebApplicationContext();
         mvc.register(dev.codex.schubert.nk.web.config.WebMvcConfiguration.class);
+        mvcSetup.accept(mvc, new ApiSessionInvalidHandler(adapter, audit));
         var dispatcher = new org.springframework.web.servlet.DispatcherServlet(mvc);
         var wrapper = Tomcat.addServlet(context, "mvc", dispatcher);
         wrapper.setLoadOnStartup(1);

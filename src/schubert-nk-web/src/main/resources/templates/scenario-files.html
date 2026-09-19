@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR006/FUN004; UI221..223/234; SS313; SSC071/PG194/PT-SCR-001..016. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head(${page.game + ' ' + page.title})}"></head>
+  <body><main class="page">
+    <header class="topbar">
+      <div><span class="brand" th:text="${page.topBar.brand}"></span>
+        <h1 th:text="${page.title}"></h1><div class="subtitle" th:text="${page.game}"></div></div>
+      <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+    </header>
+    <nav class="nav-links" aria-label="Scenarioナビゲーション">
+      <a th:href="@{/scenarios}">ゲーム選択</a>
+      <a th:href="@{${page.upHref}}">ルート選択</a>
+      <a th:href="@{/search}">検索</a>
+    </nav>
+    <section class="scenario-list">
+      <a class="scenario-link" th:each="file : ${page.files}" th:href="@{${file.href}}">
+        <span class="scenario-title" th:text="${file.displayTitle}"></span>
+        <span class="scenario-meta">
+          <span th:text="${page.game}"></span>
+          <span th:text="${file.displayPath}"></span>
+          <span th:text="${file.entryCount + ' entries'}"></span>
+        </span>
+      </a>
+    </section>
+  </main></body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR004/FUN004; UI221..223/234; SS313; SSC071/PG194/PT-SCR-001..016. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Scenario Games')}"></head>
+  <body><main class="page">
+    <header class="topbar">
+      <div><span class="brand" th:text="${page.topBar.brand}"></span><h1>Scenario Games</h1></div>
+      <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+    </header>
+    <nav class="nav-links" aria-label="Scenarioナビゲーション"><a th:href="@{/search}">検索</a></nav>
+    <p class="empty" th:if="${page.games.empty}">該当するデータはありません</p>
+    <section class="menu-grid">
+      <a class="menu-item" th:each="game : ${page.games}" th:href="@{${game.href}}">
+        <strong th:text="${game.code}"></strong>
+        <span th:text="${game.title}"></span>
+      </a>
+    </section>
+  </main></body>
+</html>

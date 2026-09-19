@@ -655,8 +655,9 @@ class ApiSessionInvalidTest {
     return r;
   }
 
-  private static final class Harness implements AutoCloseable {
-    final Fixture f = new Fixture(db);
+  // PG194: shared test-only security harness with explicit database ownership.
+  static final class Harness implements AutoCloseable {
+    final Fixture f;
     final SpringEncryptedSessionRepository adapter;
     final SessionLoginHandlerTest.Log log = new SessionLoginHandlerTest.Log();
     final WebSecurityAudit audit = new WebSecurityAudit(log, Clock.systemUTC(), "pt", "pt");
@@ -668,6 +669,11 @@ class ApiSessionInvalidTest {
     final SessionFormLoginTest.Api api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
 
     Harness() {
+      this(db);
+    }
+
+    Harness(WebLogDatabaseFixture database) {
+      f = new Fixture(database);
       f.clock.value = Instant.now();
       adapter = new SpringEncryptedSessionRepository(f.repository, f.clock);
       handler = new ApiSessionInvalidHandler(adapter, audit);
