@@ -433,6 +433,8 @@ def main():
         shutil.copyfile(audit, evidence / "logs" / audit.name)
     for completion_audit in ("070_NK-BAT-001_backup検証確定caller単体テスト仕様書.md", "071_NK-BAT-001_backup検証確定caller実行結果.md"):
         shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001" / completion_audit, evidence / "logs" / completion_audit)
+    for retirement_audit in ("072_NK-BAT-001_全IO位置試験の独立並列実行仕様.md", "073_NK-BAT-001_全IO位置試験の独立並列実行結果.md"):
+        shutil.copyfile(repo / "evidence/01_PT/017_NK-BAT-001" / retirement_audit, evidence / "logs" / retirement_audit)
     pair_root = target / "backup-step-traces"
     pair_traces = {str(p.relative_to(pair_root)): p.read_bytes() for p in pair_root.rglob("*") if p.is_file()}
     validate_pair_traces(pair_traces)
@@ -599,6 +601,8 @@ def main():
     manifest["related"] += ["PG-D-182"]
     manifest["related"] += ["PG-D-183"]
     manifest["related"] += ["PG-D-184", "SSC-067"]
+    manifest["related"] += ["PG-D-185"]
+    manifest["retirementExecution"] = "072/073 BAT110: unchanged independent26-operation/6768-position oracle, fixed4 workers with independent PG clusters/connections and thread-owned native fixtures. Every injection/fixed failure/resource release assertion retained; exact completed position set and zero duplicates. Three extra clusters stopped after worker completion; no JUnit/component increase or production change."
     manifest["backupCompletionOracle"] = "070/071 BAT274..281: root reader and full artifact verifier precede DB pair completion; independent 161 IO and274 shared clock observations, every IO/deadline/interrupt position, actual PG18 rollback/uncertain commit/replay and fixed microsecond end. Borrowed root and connection; caller supplies continuous exclusion/stopped actors/terminated generation child. No actual archive generation, retention or whole-parent completion claim."
     manifest["batchRunResourceOracle"] = "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count."
     manifest["backupStepResourceOracle"] = "066/067 BAT216: pair-only two JDBC scopes,68 independent compounds and original same-throwable regression. SQL-only catch unchanged including provider IAE identity. Exact acquired/unacquired close counts/live0, borrowed connection unchanged and independent RUNNING pair SQL after caller rollback; existing repository/commit16 PT. No new JUnit/component count."

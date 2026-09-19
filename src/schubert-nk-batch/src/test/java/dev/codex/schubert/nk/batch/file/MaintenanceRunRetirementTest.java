@@ -567,19 +567,67 @@ final class MaintenanceRunRetirementTest {
     Path report = Path.of("target", "run-retirement-io-inventory.txt");
     Files.createDirectories(report.getParent());
     Files.writeString(report, new TreeMap<>(count).toString());
-    try (var c = locked()) {
-      for (var operation : new TreeMap<>(IO_INVENTORY).entrySet())
-        for (int at = 1; at <= operation.getValue(); at++)
-          try (var f = fixture()) {
-            seed(f);
-            f.reset();
-            f.fail = operation.getKey();
-            f.failAt = at;
-            failure(() -> f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
-            assertTrue(f.triggered, operation.getKey() + "#" + at);
-            f.released();
-          }
+    var faults = new ArrayList<IoFault>();
+    for (var operation : new TreeMap<>(IO_INVENTORY).entrySet())
+      for (int at = 1; at <= operation.getValue(); at++)
+        faults.add(new IoFault(operation.getKey(), at));
+    assertEquals(6768, faults.size());
+    var expected = Set.copyOf(faults);
+    assertEquals(6768, expected.size());
+    Set<IoFault> executed = ConcurrentHashMap.newKeySet();
+    // Independent clusters avoid both JDBC sharing and advisory-lock serialization.
+    // Each native fixture is created/closed in its worker; preserve the four-segment path oracle.
+    try (var second =
+            new DatabaseShard(
+                new BatchDatabaseFixture(Files.createTempDirectory(temporary, "db2-")));
+        var third =
+            new DatabaseShard(
+                new BatchDatabaseFixture(Files.createTempDirectory(temporary, "db3-")));
+        var fourth =
+            new DatabaseShard(
+                new BatchDatabaseFixture(Files.createTempDirectory(temporary, "db4-")));
+        var executor = Executors.newFixedThreadPool(4)) {
+      var databases = List.of(db, second.database(), third.database(), fourth.database());
+      var futures = new ArrayList<Future<Integer>>();
+      for (int shard = 0; shard < 4; shard++) {
+        final int worker = shard;
+        futures.add(
+            executor.submit(
+                () -> {
+                  int completed = 0;
+                  try (var c = locked(databases.get(worker))) {
+                    for (int position = worker; position < faults.size(); position += 4) {
+                      if (Thread.currentThread().isInterrupted())
+                        throw new InterruptedException("PT shard interrupted");
+                      var fault = faults.get(position);
+                      try (var f = fixture()) {
+                        seed(f);
+                        f.reset();
+                        f.fail = fault.operation();
+                        f.failAt = fault.occurrence();
+                        failure(
+                            () ->
+                                f.files.execute(
+                                    s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
+                        assertTrue(f.triggered, fault.toString());
+                        f.released();
+                        assertTrue(executed.add(fault), "duplicate fault execution");
+                      }
+                      completed++;
+                    }
+                  }
+                  return completed;
+                }));
+      }
+      int completed = 0;
+      try {
+        for (var future : futures) completed += future.get(10, TimeUnit.MINUTES);
+      } finally {
+        for (var future : futures) if (!future.isDone()) future.cancel(true);
+      }
+      assertEquals(6768, completed);
     }
+    assertEquals(expected, executed);
   }
 
   @Test
@@ -746,8 +794,29 @@ final class MaintenanceRunRetirementTest {
     return result;
   }
 
+  private record IoFault(String operation, int occurrence) {}
+
+  private record DatabaseShard(BatchDatabaseFixture database) implements AutoCloseable {
+    @Override
+    public void close() throws IOException {
+      boolean interrupted = Thread.interrupted();
+      try {
+        database.stop();
+      } catch (InterruptedException failure) {
+        interrupted = true;
+        throw new IOException("PT database stop interrupted", failure);
+      } finally {
+        if (interrupted) Thread.currentThread().interrupt();
+      }
+    }
+  }
+
   private static Connection locked() throws SQLException {
-    var connection = db.open("schubert_batch");
+    return locked(db);
+  }
+
+  private static Connection locked(BatchDatabaseFixture source) throws SQLException {
+    var connection = source.open("schubert_batch");
     sql(connection, "select pg_advisory_lock(71419602)");
     connection.setAutoCommit(false);
     return connection;
