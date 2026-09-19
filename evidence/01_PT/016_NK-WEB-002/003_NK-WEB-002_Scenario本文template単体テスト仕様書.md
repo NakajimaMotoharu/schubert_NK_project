@@ -13,4 +13,4 @@ NK-WEB-002/SCR007、scenario.html、schubert.cssのScenario規則、WebMvcConfig
 | PT-SCR-023 | detail023CssAndViewBoundary | Current由来CSS規則、resolver登録/unknown | 全新宣言値・900px/target highlightを独立literal照合、scenario解決・unknown/redirect拒否 |
 | PT-SCR-024 | detail024ConcurrentRendering | 64独立本文/actor/CSRFで共通resolver | 全DOM値一致・他request値の混入なし |
 
-期待値はCurrent scenario.html/styles.cssとUIの明示literalから作成し、Production templateのparse結果をexpected生成へ使わない。共通UI以外の表示変更をしない。新CSSは全新規rule/declarationを照合し、templateのif/each/三項両側を空/単/複数/最大とrole・前後・speaker有無で実行する。Java4coverageを下げずNullAway/SpotBugs・既存階層16/Menu/Error回帰を行う。秘密値は合成fixtureだけ、raw CSRF/session/contextを保存しない。選択8PT成功・正式全回帰待ち、004/manifestへcommand/時刻/OS/JDK/対象commit/結果/coverage/関連BUG/hashを確定後記録する。
+期待値はCurrent scenario.html/styles.cssとUIの明示literalから作成し、Production templateのparse結果をexpected生成へ使わない。共通UI以外の表示変更をしない。新CSSは全新規rule/declarationを照合し、templateのif/each/三項両側を空/単/複数/最大とrole・前後・speaker有無で実行する。Java4coverageを下げずNullAway/SpotBugs・既存階層16/Menu/Error回帰を行う。秘密値は合成fixtureだけ、raw CSRF/session/contextを保存しない。正式PT-WEB-20260920-14で8PTと全回帰成功、004/manifestへcommand/時刻/OS/JDK/対象commit/結果/coverage/関連BUG/hashを確定後記録する。

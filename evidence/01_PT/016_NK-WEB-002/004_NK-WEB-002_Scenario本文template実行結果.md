@@ -1,5 +1,7 @@
 # Scenario本文template実行結果
 
+正式認定: PT-WEB-20260920-14/source414d79c5d21ef00e4ada50aad85b9cd433bccfd8、05:55:40～06:07:26 JST/Maven11:44/exit0。全1564PT（Web305）・failed/error/skipped0、6Java4coverage100%・Production5静的解析未解決0、41scope/62負canary成功。新8template PT、全SCR001～024・14source/2trace/4docの同run/source/hashを確認。BUG218/YKT174全対象と既存Menu/Error/階層を再試験し完了。raw log SHA256=4e695d4c3a998cf6808fd8446d50831a7d7b655da1153d3db7ae64f174553c50。正式command/環境/coverage/対象commitはmanifest。実HTTP detail endpoint・file/readiness結線の完成ではない。以下は選択試験履歴。
+
 PG196/PT-SCR-017～024、仕様003。Production scenario.htmlとCSS、resolver allowlistの限定実装。選択8PT成功・正式全reactor待ち。本文controller/実HTTP→MQ/file reader/本番root/readinessは未接続で、画面機能全体・実NKgate・PGPT/IT/ST完了ではない。
 
 | 選択run | 終了JST/秒/exit | 結果 | SHA256 |

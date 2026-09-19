@@ -1,5 +1,7 @@
 # shell診断混線の修正・横展開再試験
 
+正式再試験: PT-WEB-20260920-14/source414d79c5d21ef00e4ada50aad85b9cd433bccfd8、05:55:40～06:07:26 JST/Maven11:44/exit0。全1564PT・6Java4coverage100%・Production5静的解析未解決0・41scope/62負canary成功。deployment8PT/50tool、正規/非zero/欠落/不正29receiptと混線/誤marker/欠落/重複canaryを再確認し、BUG217/YKT173完了。修正source0814abe1を含む正式runで、元Production wrapperは不変更。raw SHA256=4e695d4c3a998cf6808fd8446d50831a7d7b655da1153d3db7ae64f174553c50。正式13は非合格履歴のまま保持。command/環境/対象commit/trace/source/evidence hashはmanifest参照。
+
 PG197/BUG217/YKT173、InspectorDeploymentTest.statusMapping/malformedReceipts、PT-OPS-INBOX-002/003。関連018001、UI251、SS343/SSC053/BUG137。Production wrapper・終了code・receipt grammar・全50tool呼出しは不変更。
 
 ## 正式13の失敗（非合格）

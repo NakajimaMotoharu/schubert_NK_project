@@ -1,5 +1,7 @@
 # Scenario本文表示モデル実行結果
 
+正式認定: PT-WEB-20260920-14/source414d79c5d21ef00e4ada50aad85b9cd433bccfd8、05:55:40～06:07:26 JST/Maven11:44/exit0。全1564PT（Web305、本Program205）・6Java4coverage100%・Production5静的解析未解決0、41scope/62負canary成功。新12PT・4class36method99line30branch全missed0を認定。raw log SHA256=4e695d4c3a998cf6808fd8446d50831a7d7b655da1153d3db7ae64f174553c50。正式13は非合格のまま別履歴。command/環境/対象commit/source・evidence hashはmanifest。本文controller/file port/readiness/実NKgateは未完了。以下は選択・失敗履歴。
+
 正式13は既存InspectorDeploymentTestのxtrace混線（BUG217/YKT173）でexit1となり、Web/Batch未実行。PG195は未認定のまま。詳細は018035、修正後の別clean verifyで全体を再試験する。正式13の失敗をretry成功へ書換えない。
 
 PG195/PT-WEB-194～205、仕様008。選択12PT成功、正式全reactorは未実行。現在の正式1544PT/78部分成果へ加算しない。画面・large reader本番接続・実NK互換性gate・PGPT/IT/ST完成ではない。
