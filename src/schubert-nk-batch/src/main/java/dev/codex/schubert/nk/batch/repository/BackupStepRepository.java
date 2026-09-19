@@ -33,12 +33,16 @@ public final class BackupStepRepository {
       guarded(manifest);
       List<Optional<Instant>> states = new ArrayList<>();
       Set<Long> seen = new HashSet<>();
-      try (var statement = connection.prepareStatement(PAIR)) {
+      var statement = connection.prepareStatement(PAIR);
+      @Nullable Throwable statementFailure = null;
+      try {
         var query = present(statement);
         query.setQueryTimeout(5);
         query.setLong(1, manifest.databaseStep().id());
         query.setLong(2, manifest.configurationStep().id());
-        try (var rows = query.executeQuery()) {
+        var rows = query.executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
           var row = present(rows);
           while (row.next()) {
             require(states.size() < 2);
@@ -51,6 +55,28 @@ public final class BackupStepRepository {
               attempt = manifest.configurationStep();
             }
             states.add(readRow(row, attempt, manifest, observedAt));
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          if (rows != null) {
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error failure) {
+              if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
+            }
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null) {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error failure) {
+            if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
           }
         }
       }

@@ -214,6 +214,8 @@ public final class BackupStepFixture {
     public final Map<String, Integer> seen = new TreeMap<>();
     public final Map<String, Set<Integer>> faults = new HashMap<>();
     public final Map<String, Throwable> unknown = new HashMap<>();
+    public final Map<String, Throwable> compound = new HashMap<>();
+    public int compoundInjected;
     public final Map<Integer, Map<String, Object>> override = new HashMap<>();
     public final Set<String> columns = new TreeSet<>();
     public Hook before = (k, n) -> {}, after = (k, n) -> {};
@@ -234,6 +236,10 @@ public final class BackupStepFixture {
     private void hit(String key) throws Throwable {
       int n = seen.merge(key, 1, Integer::sum);
       before.call(key, n);
+      if (n == 1 && compound.containsKey(key)) {
+        compoundInjected++;
+        throw compound.get(key);
+      }
       if (faults.getOrDefault(key, Set.of()).contains(n)) {
         hits++;
         throw new SQLException("PUBLIC_DIAGNOSTIC_CANARY", "08006");

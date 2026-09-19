@@ -298,6 +298,24 @@ final class BackupStepRepositoryTest {
 
   @Test
   void nullAndUnknownFailures() throws Exception {
+    pairResourceCompounds();
+    try (var c = locked(db, false)) {
+      var p = new Probe();
+      var original = new IllegalStateException("public same backup fixture");
+      p.compound.put("pair.row.next", original);
+      p.compound.put("pair.row.close", original);
+      try {
+        assertSame(
+            original,
+            assertThrows(
+                Throwable.class,
+                () -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END)));
+        assertEquals(2, p.compoundInjected);
+        p.closed();
+      } finally {
+        c.rollback();
+      }
+    }
     assertThrows(NullPointerException.class, () -> new BackupStepRepository(null));
     try (var c = locked(db, false)) {
       var repo = new BackupStepRepository(c);
@@ -359,6 +377,36 @@ final class BackupStepRepositoryTest {
           Thread.interrupted();
           c.rollback();
         }
+      }
+    }
+  }
+
+  private void pairResourceCompounds() throws Exception {
+    try (var c = locked(db, false)) {
+      for (var sample : JdbcResourceCases.all()) {
+        var p = new Probe();
+        if (sample.primary() != null) p.compound.put("pair." + sample.body(), sample.primary());
+        p.compound.put("pair." + sample.close(), sample.secondary());
+        sample.verify(
+            assertThrows(
+                Throwable.class,
+                () -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END)));
+        assertEquals(sample.primary() == null ? 1 : 2, p.compoundInjected);
+        assertEquals(1, p.seen.get("pair.statement.close"));
+        assertEquals(
+            sample.body().equals("statement.executeQuery") && sample.primary() != null ? 0 : 1,
+            p.seen.getOrDefault("pair.row.close", 0));
+        p.closed();
+        for (String key :
+            List.of(
+                "connection.commit",
+                "connection.rollback",
+                "connection.close",
+                "connection.setAutoCommit")) assertFalse(p.seen.containsKey(key));
+        assertFalse(c.getAutoCommit());
+        c.rollback();
+        assertEquals(RUNNING, state(c));
+        c.rollback();
       }
     }
   }
