@@ -63,20 +63,41 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set(attribute, value)
             with self.assertRaises(ValueError): receipt.validate_suite(wrong)
 
+    def test_submit_inventory_and_negative_status(self):
+        receipt = module("receipt_collector", "027_collect_question_receipt_evidence.py")
+        cls = "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest"
+        names = ("literalWireAndCanonical", "byteAndUnicodeBoundaries", "protocolRejection",
+                 "fingerprintBinding", "ownershipAndClose", "nullContracts", "concurrentScopes",
+                 "publicEvidenceAndRedaction")
+        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-QST-SUB{i:03}": cls + "#" + name for i, name in enumerate(names, 1)},
+                         receipt.validate_suite(suite))
+        for field, value in (("name", "unknown"), ("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(field, value)
+            with self.assertRaises(ValueError): receipt.validate_suite(wrong)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+            with self.assertRaises(ValueError): receipt.validate_suite(wrong)
+        for attribute, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
+            wrong = copy.deepcopy(suite); wrong[0].set(attribute, value)
+            with self.assertRaises(ValueError): receipt.validate_suite(wrong)
+
     def test_receipt_trace_and_coverage(self):
         receipt = module("receipt_collector", "027_collect_question_receipt_evidence.py")
         expected = {"PT-QST-RID008.txt": b"forward=0123456789ABCDEFGHJKMNPQRS\nreverse=ZYXWVTSRQPNMKJHGFEDCBA9876\nlength=26\nalphabetSize=32\nrandomDrawsPerId=26\nownerOrTimeInput=false\n"}
+        expected["PT-QST-SUB008.txt"] = b"layout=QSBREQ01\ninteraction=A\ndataLength=4144\ncanonicalFieldCount=1\ncanonicalField=question/X1\ntarget=QUESTION:NEW\nmetadataExcluded=true\nrawBodySaved=false\n"
         self.assertEqual(expected, receipt.TRACES)
         receipt.validate_traces(expected)
         for wrong in ({}, dict(expected, unknown=b""), {"PT-QST-RID008.txt": b"PASS"}):
             with self.assertRaises(ValueError): receipt.validate_traces(wrong)
         report = ET.Element("report")
-        for name in ("QuestionReceiptId", "QuestionReceiptIdGenerator"):
+        for name in ("QuestionReceiptId", "QuestionReceiptIdGenerator", "QuestionSubmitRequest"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/api/application/question/" + name)
             for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
-        self.assertEqual(2, len(receipt.validate_coverage(report)))
-        for cls_index in (0, 1):
+        self.assertEqual(3, len(receipt.validate_coverage(report)))
+        for cls_index in (0, 1, 2):
             for counter_index in range(4):
                 wrong = copy.deepcopy(report); wrong[cls_index][counter_index].set("missed", "1")
                 with self.assertRaises(ValueError): receipt.validate_coverage(wrong)
