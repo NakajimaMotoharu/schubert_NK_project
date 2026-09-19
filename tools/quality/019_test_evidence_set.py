@@ -36,9 +36,9 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 343}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 359}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 342, 344):
+        for count in (0, 327, 343, 358, 360):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -56,6 +56,44 @@ class EvidenceSetTest(unittest.TestCase):
         suite = ET.Element("testsuite", name=cls, tests="16", failures="0", errors="0", skipped="0")
         for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
         return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names,242)}
+
+    @staticmethod
+    def bundle_fixture():
+        cls = "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest"
+        names = ("verifiedDurablePublication", "forceOrderAndRetainedInodes", "pendingContentAndMetadata",
+                 "finalManifestAndArtifactChecks", "forceSizeAndNullBoundaries", "everyIoFailure",
+                 "unknownAndCompoundFailures", "deadlineAcrossPhases", "interruptionAcrossPhases",
+                 "existingFinalAndMissingPending", "namespaceReplacement", "nullAndOwnerContracts",
+                 "concurrentPublication", "nativePortsAndFactory", "readonlyCompatibility", "independentBundleTrace")
+        suite = ET.Element("testsuite", name=cls, tests="16", failures="0", errors="0", skipped="0")
+        for name in names: ET.SubElement(suite,"testcase",classname=cls,name=name)
+        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i,name in enumerate(names,258)}
+
+    def test_bundle_inventory(self):
+        suite, expected = self.bundle_fixture()
+        self.assertEqual(expected,batch.validate_bundle_suite(suite))
+        for position in range(16):
+            wrong=copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): batch.validate_bundle_suite(wrong)
+            for tag in ("failure","error","skipped","flakyFailure","rerunFailure","unknown"):
+                wrong=copy.deepcopy(suite); ET.SubElement(wrong[position],tag)
+                with self.assertRaises(ValueError): batch.validate_bundle_suite(wrong)
+            for key,value in (("name","unknown"),("name",suite[(position+1)%16].get("name")),("classname","unknown")):
+                wrong=copy.deepcopy(suite); wrong[position].set(key,value)
+                with self.assertRaises(ValueError): batch.validate_bundle_suite(wrong)
+        for key,value in (("tests","1"),("name","unknown"),("failures","1"),("errors","1"),("skipped","1")):
+            wrong=copy.deepcopy(suite); wrong.set(key,value)
+            with self.assertRaises(ValueError): batch.validate_bundle_suite(wrong)
+
+    def test_bundle_literal_trace(self):
+        expected={"PT-BAT-273-bundle.txt":b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nforce=4|publish=1|sync=2\nio=301|clock=514\n"}
+        batch.validate_bundle_traces(expected)
+        for wrong in ({},{**expected,"unknown":b""}):
+            with self.assertRaises(ValueError): batch.validate_bundle_traces(wrong)
+        name,value=next(iter(expected.items()))
+        for position in range(len(value)):
+            with self.assertRaises(ValueError):
+                batch.validate_bundle_traces({name:value[:position]+bytes([value[position]^1])+value[position+1:]})
 
     def test_root_publication_inventory(self):
         suite, expected = self.publication_fixture()
@@ -701,6 +739,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
                  "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest",
                  "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest",
+                 "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -713,8 +752,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
                  "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(34, len(suites))
-        self.assertEqual(suites[:23], batch.select_program_suites(suites))
+        self.assertEqual(35, len(suites))
+        self.assertEqual(suites[:24], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -1121,10 +1160,13 @@ class EvidenceSetTest(unittest.TestCase):
         reports.append(reader)
         publication, publication_expected = self.publication_fixture()
         reports.append(publication)
+        bundle, bundle_expected = self.bundle_fixture()
+        reports.append(bundle)
         accepted = batch.validate_reports(reports)
+        self.assertEqual(bundle_expected,{k:v for k,v in accepted.items() if k in bundle_expected})
         self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
-        self.assertEqual(257, len(accepted))
+        self.assertEqual(273, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
         self.assertEqual(86, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)

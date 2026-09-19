@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG177/SSC066追加（正式認定前）: NK-BAT-001 BackupBundlePublisher全constructor/publish/force/guard/NioIoと、BackupArtifactVerifier.forcePending/verifyWithin/verifyAt/Force/BundleSnapshot、BackupManifestReader.readWithin/readAtを017055～057・BAT258～273へ追跡。BAK/BKO/OPS009/UI251/SS311/333§7.5/341§6.10/343§5.3。旧readonly公開APIと元snapshotの同一性回帰は従来BAT194～209/226～241も維持。部品増分は正式認定後だけ加算する。
+
 PG176/SSC065追加（正式認定前）: NK-OPS-001 Storage.OwnedTransferDirectory.publishChild/所有scope lambdaは018029/030・PT-OPS-PDIR-001～008、BAK/BKO/OPS009/UI251/SS333§7.5/341§6.9。共有Storageの既存class全coverageは全回帰で確認し、Scenario PTへ二重計上しない。
 
 PG175/SSC064追加（正式認定前）: NK-BAT-001 `.batch.file.BackupManifestPublisher` のconstructor2/create/write/verify/directory/capture/identity/metadata/guardと所有scope lambdaを017053/054・PT-BAT-242～257へ追跡。RD BAK/BKO/OPS009、UI251、SS311/341§6.8/343§5.3。既存InspectorEnvironmentPublisher.Io/NioIoはfile IO portとして再利用、Storage.ResourceScopeはRSCOPE回帰。本文の正式1415件/22batch部品は変更せず、正式run後に1部品16件を加算する。

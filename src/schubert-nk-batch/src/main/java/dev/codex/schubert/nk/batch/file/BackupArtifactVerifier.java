@@ -67,6 +67,33 @@ public final class BackupArtifactVerifier {
     MessageDigest create() throws NoSuchAlgorithmException;
   }
 
+  /** Package-only durability on the same admitted, verified inode; SSC066/BAT258..273. */
+  @FunctionalInterface
+  interface Force {
+    void apply(Path held, long expectedSize) throws IOException;
+  }
+
+  /** Internal immutable durability proof, never a public file capability. BUG204/YKT160. */
+  record BundleSnapshot(
+      BackupFileDigest manifest, Metadata directory, Map<String, Metadata> files) {
+    BundleSnapshot {
+      Objects.requireNonNull(manifest, "manifest digest");
+      Objects.requireNonNull(directory, "directory snapshot");
+      files = Map.copyOf(files);
+    }
+
+    boolean samePublished(BundleSnapshot other) {
+      // Role-fixed mode/uid/gid were checked in both captures; only directory ctime may change.
+      return manifest.equals(other.manifest)
+          && directory.device() == other.directory.device()
+          && directory.inode() == other.directory.inode()
+          && directory.links() == other.directory.links()
+          && directory.size() == other.directory.size()
+          && directory.modified().equals(other.directory.modified())
+          && files.equals(other.files);
+    }
+  }
+
   public BackupArtifactVerifier(
       OwnedTransferDirectory root, InodeSecurityCalls security, long uid, long gid) {
     this(root, security, uid, gid, new NioIo(), System::nanoTime);
@@ -103,8 +130,29 @@ public final class BackupArtifactVerifier {
 
   public BackupFileDigest verify(BackupManifest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "trusted manifest");
+    return verifyAt(expected, expected.directoryName(), null, null).manifest();
+  }
+
+  BundleSnapshot verifyWithin(BackupManifest expected, long started) throws StorageIoException {
+    Objects.requireNonNull(expected, "trusted manifest");
+    return verifyAt(expected, expected.directoryName(), null, started);
+  }
+
+  BundleSnapshot forcePending(BackupManifest expected, Force force, long started)
+      throws StorageIoException {
+    Objects.requireNonNull(expected, "trusted manifest");
+    Objects.requireNonNull(force, "held inode force");
+    return verifyAt(expected, expected.directoryName() + ".part", force, started);
+  }
+
+  private BundleSnapshot verifyAt(
+      BackupManifest expected,
+      String directoryName,
+      @Nullable Force force,
+      @Nullable Long suppliedStart)
+      throws StorageIoException {
     synchronized (lock) {
-      long started = clock.getAsLong();
+      long started = suppliedStart == null ? clock.getAsLong() : suppliedStart;
       byte[] buffer = new byte[65536];
       byte[] canonical = BackupManifestCodec.encode(expected);
       try {
@@ -112,8 +160,8 @@ public final class BackupArtifactVerifier {
         require(security.effectiveUid() == 0);
         Metadata parent = directory(root, started);
         guard(started);
-        var child = root.openExistingChild(expected.directoryName());
-        BackupFileDigest result =
+        var child = root.openExistingChild(directoryName);
+        BundleSnapshot result =
             ResourceScope.use(
                 child::close,
                 () -> {
@@ -151,6 +199,11 @@ public final class BackupArtifactVerifier {
                           require(before.device() == initial.device());
                           snapshots.put(name, before);
                           observed.put(name, read(held, name, claim, canonical, buffer, started));
+                          if (force != null) {
+                            guard(started);
+                            force.apply(held, claim.size());
+                            guard(started);
+                          }
                           require(
                               before.equals(
                                   capture(
@@ -187,7 +240,7 @@ public final class BackupArtifactVerifier {
                   names(child, started);
                   require(initial.equals(directory(child, started)));
                   guard(started);
-                  var rebound = root.openExistingChild(expected.directoryName());
+                  var rebound = root.openExistingChild(directoryName);
                   ResourceScope.use(
                       rebound::close,
                       () -> {
@@ -195,7 +248,12 @@ public final class BackupArtifactVerifier {
                         return Boolean.TRUE;
                       });
                   guard(started);
-                  return Objects.requireNonNull(observed.get(MANIFEST));
+                  if (force != null) {
+                    child.sync();
+                    guard(started);
+                  }
+                  return new BundleSnapshot(
+                      Objects.requireNonNull(observed.get(MANIFEST)), initial, snapshots);
                 });
         guard(started);
         require(parent.equals(directory(root, started)));
@@ -203,6 +261,8 @@ public final class BackupArtifactVerifier {
         guard(started);
         return result;
       } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+        if (force != null && failure instanceof StorageIoException storage)
+          throw new StorageIoException(storage.reason());
         throw unavailable();
       } finally {
         Arrays.fill(buffer, (byte) 0);

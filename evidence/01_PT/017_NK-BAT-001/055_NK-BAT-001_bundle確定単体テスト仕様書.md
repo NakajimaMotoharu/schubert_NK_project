@@ -24,3 +24,7 @@ SSC066/PG177、2026-09-19、実装前・全not-run。対象BackupBundlePublisher
 | 273 | independentBundleTrace | 実final byte/hash・force数/公開/同期を固定literal traceへ照合しcollector検証 |
 
 JDK25.0.4/Maven3.9.12、dev-foundation、選択test→単一clean verify。同じclock/開始tickを全phaseへ渡すことをcounter/期限反例で確認する。class/method/line/branch100%、NULL/例外/境界/並行/再送不確定の独立assert、静的解析0。失敗/skip/flaky/not-runを合格にしない。実行command/対象commit/時刻/OS/exit/BUG/coverage/hashは056結果と017/evidence/manifest.jsonへ記録。正式認定前は部品・完成割合へ算入しない。
+
+独立正常IO inventory: attributes/ACL/RW各42、names open4/iterator4/hasNext20/next16/close4、reader open9/read18/size18/close9、子open7/entry open18/native close25、writer open4/size8/force4/close4、sync2/publish1＝301。clockはpending検証206＋force前後8＋force callback24＋子sync後1、Reader62、最終Verifier206、coordinator基点1＋guard6＝514。4fileは固定順、各file1read＋EOF。各301 IOに既知IOと未知Runtime、513経過clockへ期限到達、514 clockへ割込を注入。Error/同一Throwableはwriter/read/公開directoryの3複合scopeを別確認する。全未知例外の全組合せを網羅したとの過大な主張はしない。
+
+BUG204/YKT160は057へ追跡。同byte clone directoryをpublish直前に実置換する反例、確定phaseのdev/ino/nlink/size/mtime/file snapshot差分、digest provider差、Map.copyOfによる入力/返却非共有を追加。public結果へproofを出さず、package内だけで元force済実体との連続性を照合する。既存readonly/環境/永続publisherの期待値を変更しない。

@@ -67,6 +67,22 @@ public final class BackupManifestReader {
 
   public BackupManifest read(String name, BatchStepAttempt database, BatchStepAttempt configuration)
       throws StorageIoException {
+    return readAt(name, database, configuration, null);
+  }
+
+  /** Same operation-wide monotonic budget supplied by the package publisher. SSC066/BAT258..273. */
+  BackupManifest readWithin(
+      String name, BatchStepAttempt database, BatchStepAttempt configuration, long started)
+      throws StorageIoException {
+    return readAt(name, database, configuration, started);
+  }
+
+  private BackupManifest readAt(
+      String name,
+      BatchStepAttempt database,
+      BatchStepAttempt configuration,
+      @Nullable Long suppliedStart)
+      throws StorageIoException {
     Objects.requireNonNull(name, "backup directory name");
     Objects.requireNonNull(database, "database handle");
     Objects.requireNonNull(configuration, "configuration handle");
@@ -75,7 +91,7 @@ public final class BackupManifestReader {
             && name.matches(
                 "[0-9]{8}-[0-9]{6}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"));
     synchronized (lock) {
-      long started = clock.getAsLong();
+      long started = suppliedStart == null ? clock.getAsLong() : suppliedStart;
       byte[] bytes = new byte[4097];
       try {
         guard(started);

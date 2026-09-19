@@ -9,7 +9,17 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 343
+BATCH_TEST_COUNT = 359
+BUNDLE_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest"
+BUNDLE_METHODS = ("verifiedDurablePublication", "forceOrderAndRetainedInodes", "pendingContentAndMetadata", "finalManifestAndArtifactChecks", "forceSizeAndNullBoundaries", "everyIoFailure", "unknownAndCompoundFailures", "deadlineAcrossPhases", "interruptionAcrossPhases", "existingFinalAndMissingPending", "namespaceReplacement", "nullAndOwnerContracts", "concurrentPublication", "nativePortsAndFactory", "readonlyCompatibility", "independentBundleTrace")
+BUNDLE_TRACES = {"PT-BAT-273-bundle.txt": b"964|bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nforce=4|publish=1|sync=2\nio=301|clock=514\n"}
+
+def validate_bundle_suite(suite):
+    return validate_group(suite, BUNDLE_CLASS, BUNDLE_METHODS, 258)
+
+def validate_bundle_traces(traces):
+    if traces != BUNDLE_TRACES:
+        raise ValueError("missing, extra or invalid independent bundle publication trace")
 
 def validate_reactor(verified, run):
     if verified["runId"] != run or verified["exitCode"] != 0 or verified["modules"]["batch"]["tests"] != BATCH_TEST_COUNT:
@@ -254,6 +264,7 @@ def select_program_suites(suites):
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
                 RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, READER_CLASS, *OPS_CLASSES}
     expected.add(PUBLICATION_CLASS)
+    expected.add(BUNDLE_CLASS)
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -341,6 +352,7 @@ def validate_reports(suites):
                   STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
                   ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite, READER_CLASS: validate_reader_suite}
     validators[PUBLICATION_CLASS] = validate_publication_suite
+    validators[BUNDLE_CLASS] = validate_bundle_suite
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -375,6 +387,13 @@ def main():
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
+    bundle_root = target / "backup-bundle-traces"
+    bundle_traces = {str(p.relative_to(bundle_root)): p.read_bytes() for p in bundle_root.rglob("*") if p.is_file()}
+    validate_bundle_traces(bundle_traces)
+    for folder, values in (("input/backup-bundle", BUNDLE_TRACES), ("output/backup-bundle", bundle_traces)):
+        (evidence / folder).mkdir(parents=True, exist_ok=True)
+        for name, content in values.items():
+            (evidence / folder / name).write_bytes(content)
     publication_root = target / "backup-publication-traces"
     publication_traces = {str(p.relative_to(publication_root)): p.read_bytes() for p in publication_root.rglob("*") if p.is_file()}
     validate_publication_traces(publication_traces)
@@ -390,7 +409,7 @@ def main():
         destination.mkdir(parents=True, exist_ok=True)
         for name, value in values.items():
             (destination / name).write_bytes(value)
-    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md", "053_NK-BAT-001_root_manifest公開単体テスト仕様書.md"):
+    for audit_name in ("048_NK-BAT-001_root_manifest資源横展開.md", "049_NK-BAT-001_file資源解放横展開PT.md", "050_NK-BAT-001_namespace資源解放横展開PT.md", "051_NK-OPS-001_Systemctl資源解放横展開PT.md", "052_NK-OPS-001_group資源解放横展開PT.md", "053_NK-BAT-001_root_manifest公開単体テスト仕様書.md", "055_NK-BAT-001_bundle確定単体テスト仕様書.md", "057_NK-BAT-001_bundle元inode横展開.md"):
         audit = repo / "evidence/01_PT/017_NK-BAT-001" / audit_name
         shutil.copyfile(audit, evidence / "logs" / audit.name)
     pair_root = target / "backup-step-traces"
@@ -551,6 +570,8 @@ def main():
     manifest["atomicCleanupJdbcFaultPositions"] = {"repository": 53, "service": 115, "doubleClosePairs": 3}
     manifest["sourceFiles"].append({"path": "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql", "sha256": hashlib.sha256((repo / "src/schubert-nk-api/src/test/resources/maintenance/step-cleanup-fixture.sql").read_bytes()).hexdigest()})
     manifest["related"] += ["PG-D-175", "SSC-064", "BUG-199"]
+    manifest["related"] += ["PG-D-176", "PG-D-177", "SSC-065", "SSC-066", "BUG-200", "BUG-201", "BUG-202", "BUG-203", "BUG-204", "YKT-158", "YKT-159", "YKT-160"]
+    manifest["backupBundleOracle"] = "055/057 BAT258..273: trusted pending four-file byte/inode/hash verification, held-file force and close, child sync, no-replace directory publication/parent sync, final root reader and full artifact verification. Immutable original directory and four-file identity proof retained across phases rejects same-byte inode replacement (BUG204/YKT160). Independent964-byte manifest and26/35/32 archive vectors;301 I/O observations,514 shared-clock observations without phase budget reset. Synthetic root admission; no actual archive generation, DB success, retention or whole-parent claim."
     manifest["rootManifestPublicationOracle"] = "053 BAT242..257: new-only private0600 held inode, independent964-byte golden, write/force/close/readback/no-replace/directory sync/rebinding; 79 IO and109 clock observations. Synthetic root UID over real Linux FD, not archive generation, final bundle rename, DB success or retention."
     manifest["parentStepJdbcFaultPositions"] = 399
     manifest["parentSummaryOracle"] = "017/BAT114..121: borrowed autoCommit=true RW READ_COMMITTED connection; self DB lock only; no config/commit/close mutations. Missing is Optional.empty, 4 nonnull columns/one row maximum. Independent 16/11 JDBC calls with every SQL fault and both closes, fresh actual PG commit/rollback and historical UTC literal vectors; null/invalid counts/interrupt/runtime reject."

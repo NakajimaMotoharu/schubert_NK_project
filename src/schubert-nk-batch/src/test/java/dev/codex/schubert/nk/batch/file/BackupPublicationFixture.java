@@ -14,7 +14,10 @@ import java.util.function.*;
 
 /** Writer-only fixture; real FD/IO, public bytes, synthetic UID. BAT242..257/SS341 6.8. */
 final class BackupPublicationFixture
-    implements AutoCloseable, InspectorEnvironmentPublisher.Io, InodeSecurityCalls {
+    implements AutoCloseable,
+        InspectorEnvironmentPublisher.Io,
+        BackupBundlePublisher.Io,
+        InodeSecurityCalls {
   static final UUID PART = UUID.fromString("11111111-2222-4333-8444-555555555555");
   static final long UID = 2000, GID = 2001;
   final Path parent, child;
@@ -26,7 +29,8 @@ final class BackupPublicationFixture
   final Map<String, Throwable> faults = new HashMap<>();
   final List<String> events = new ArrayList<>();
   final int rootFd;
-  int channels, faultAt, position;
+  int channels, streams, faultAt, position;
+  boolean bundle;
   long effective = 0, time = 100;
   int chunk = Integer.MAX_VALUE;
   boolean track = true, nullMap, nullWriter, nullReader, readonly;
@@ -86,6 +90,21 @@ final class BackupPublicationFixture
     publisher().create(BackupArtifactFixture.expected(), PART);
   }
 
+  BackupBundlePublisher bundlePublisher() {
+    return new BackupBundlePublisher(root, this, UID, GID, this, this::clock);
+  }
+
+  void seedBundle() throws IOException {
+    bundle = true;
+    Files.write(child.resolve("MANIFEST.json"), BackupArtifactFixture.golden());
+    Files.writeString(child.resolve("schubert_nk.dump"), "PG166 public dump fixture\n");
+    Files.writeString(child.resolve("config.tar"), "PG166 public configuration fixture\n");
+    Files.writeString(child.resolve("credentials.tar.age"), "PG166 public ciphertext fixture\n");
+    for (String name : BackupArtifactFixture.NAMES)
+      Files.setPosixFilePermissions(
+          child.resolve(name), PosixFilePermissions.fromString("rw-------"));
+  }
+
   long clock() {
     try {
       point("clock");
@@ -116,8 +135,10 @@ final class BackupPublicationFixture
     if (nullMap) return null;
     var values = new HashMap<>(nativeIo.attributes(held));
     boolean directory = ((Integer) values.get("mode") & 0170000) == 040000;
-    values.put("uid", directory ? (int) UID : 0);
-    values.put("gid", directory ? (int) GID : 0);
+    boolean dump =
+        bundle && Files.readSymbolicLink(held).getFileName().toString().equals("schubert_nk.dump");
+    values.put("uid", directory || dump ? (int) UID : 0);
+    values.put("gid", directory || dump ? (int) GID : 0);
     String role = Files.isSameFile(held, parent) ? "parent" : directory ? "child" : "file";
     metadata.accept(role, values);
     return values;
@@ -160,6 +181,7 @@ final class BackupPublicationFixture
     return new InspectorEnvironmentPublisher.Writer() {
       @Override
       public int write(ByteBuffer buffer) throws IOException {
+        if (bundle) throw new AssertionError("bundle force must not write content");
         point("write");
         buffers.add(buffer.array());
         if (writeMode.equals("zero")) return 0;
@@ -252,6 +274,7 @@ final class BackupPublicationFixture
   void released() {
     assertEquals(Set.of(rootFd), descriptors);
     assertEquals(0, channels);
+    assertEquals(0, streams);
     for (byte[] buffer : buffers) for (byte value : buffer) assertEquals(0, value);
   }
 
@@ -261,5 +284,51 @@ final class BackupPublicationFixture
     root.close();
     assertTrue(descriptors.isEmpty());
     assertEquals(0, channels);
+    assertEquals(0, streams);
+  }
+
+  @Override
+  public DirectoryStream<Path> openNames(Path held) throws IOException {
+    point("openNames");
+    var delegate = Files.newDirectoryStream(held);
+    streams++;
+    return new DirectoryStream<>() {
+      @Override
+      public Iterator<Path> iterator() {
+        iteratePoint("iterator");
+        var iterator = delegate.iterator();
+        return new Iterator<>() {
+          @Override
+          public boolean hasNext() {
+            iteratePoint("hasNext");
+            return iterator.hasNext();
+          }
+
+          @Override
+          public Path next() {
+            iteratePoint("next");
+            return iterator.next();
+          }
+        };
+      }
+
+      @Override
+      public void close() throws IOException {
+        try {
+          delegate.close();
+        } finally {
+          streams--;
+        }
+        point("closeNames");
+      }
+    };
+  }
+
+  private void iteratePoint(String name) {
+    try {
+      point(name);
+    } catch (IOException failure) {
+      throw new DirectoryIteratorException(failure);
+    }
   }
 }

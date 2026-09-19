@@ -195,6 +195,8 @@ SS333 §7.5の低位publishChildは、保持backup root内で正規`<directoryNa
 
 ### 6.10 検証済bundleの耐久化・確定後照合（SSC066/PG177）
 
+BUG204/YKT160修正前追補: forcePendingとverifyWithinのpackage内返値は不変BundleSnapshot（manifest digest、子directoryのtyped snapshot、全4fileの名前→typed snapshotのMap.copyOf）とし、外部public verifyは従来digestだけを返す。確定後はmanifest digest、子dev/ino/nlink/size/mtime、全4fileの9属性を元のforce済観測へ照合する。子mode/uid/gidは同じpolicy固定値を各phaseで既に検査し、renameに伴う子ctimeだけは許容する。file ctimeは変更を許さない。Map/metadata/capabilityをpublic結果へ出さず、同byte別inode cloneをforce済とみなさない。新forcePendingの安全なStorageIo reasonはMISSING/COLLISIONを保持し、従来public readonly確認の固定診断は不変更。
+
 先行f224f646。`.file.BackupBundlePublisher.publish(BackupManifest trusted)`は既存新規partの4fileを耐久化・確定し、確定後MANIFESTのBackupFileDigestを返す。callerがroot生成manifest/閉じた3実archiveのtrusted claim、原本、固定account/root設定、連続OS排他と全actor停止を保証する。DB成功/command成功/世代削除/不明partの自動再利用を本APIが推定しない。
 
 - 借用root/security/backup UID/GID・IO・単調時計をconstructorで確立する。全呼出はinstance内直列。単一の開始tickを操作全体で共有し、各phaseで30分予算をリセットしない。package内だけのReader.readWithin/Verifier.verifyWithin・forcePendingへ同じclockと開始tickを渡す。既存public reader/verifyは従来どおり自分の開始tick・readonly/final-directory限定を維持する。
