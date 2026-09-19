@@ -1,5 +1,7 @@
 # NK-BAT-001 BatchRunRepository資源横展開仕様
 
+NULL resource追補: abandon/finishの2 updateにnull Statementを明示注入し、固定SQL拒否・未取得close0・caller rollback後snapshot不変を確認する。272複合とは別の2negativeであり、既存queryのNULL resource確認も維持する。
+
 PG183/SSC063/BUG195・206/YKT154・162、2026-09-20。OPS009/DAT009/UI251/SS331§8.3/332/341。対象begin/finish/history/abandon/insert/replayedと8 owned JDBC scope。未実装・未認定。
 
 既存BAT151 interruptionAndRuntimeへ272複合を追加する。history/insert/replay各query68（row/statement各34）、abandon/finish各update34。独立060のSQL/IAE/IllegalState/NPE/Error25別組＋同一未知4＋closeだけ5。updateはstatement.executeQuery標本をexecuteUpdateへ対応しrow標本は対象外（row取得なし）。各SQL分類prefixで前後RunReferenceや別stageへの誤注入を防ぐ。注入数と各取得済close1/未取得0/live0、borrowed commit/rollback/close/config変更0を確認する。
