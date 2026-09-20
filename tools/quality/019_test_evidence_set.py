@@ -56,6 +56,20 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_animation_suite(wrong)
 
+    def test_music_hierarchy_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web246CategorySnapshot", "web247SectionSnapshot", "web248SizeAndCountBounds", "web249DuplicateAndSegment",
+                 "web250NullAndOwnership", "web251ClosedBeansAndRedaction", "web252SyntheticHtmlEscaping", "web253ConcurrentProjection")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest#" + name
+                   for i, name in enumerate(names, 246)}
+        web.validate_music_hierarchy_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_music_hierarchy_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_music_hierarchy_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_music_hierarchy_inventory(dict(mapping, unknown="unknown"))
+
     def test_animation_http_inventory(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.session.AnimationControllerTest"
