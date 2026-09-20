@@ -6,6 +6,8 @@ PG201追補（2026-09-20）: Production JavaScriptはNode24.19.0の構文check�
 
 ## 1. Gate順序
 
+以下は正式認定/受入の順序であり、小部品の編集ごとに全gateを再認定する要求ではない。開発中は変更moduleと依存/影響suiteを選び、選択根拠・実行/未実行範囲を記録する。機能がつながる完成単位、変更後の停止・PR・工程gateでは全体検証を実施する。POM/共通codec/DDL/security等の横断変更は全回帰を先行する。予算上限等で実施できない場合は未認定として保存し、限定試験を正式合格へ読み替えない。運用目的は456に従う重複調査/証跡更新のトークン削減であり、機械実行時間だけを理由に必要試験を削らない。
+
 1. Maven Enforcer/toolchain/dependency convergenceとformatを検査する。
 2. Java 25 compileを全warning error化し、null/static/security analysisを実行する。
 3. Program単位PTを実行し、failed/flaky/skipped/disabled/not-runが0であることを確認する。
@@ -16,7 +18,7 @@ PG201追補（2026-09-20）: Production JavaScriptはNode24.19.0の構文check�
 
 ## 2. Build contract
 
-基準commandは次とし、root POMから全moduleをreactor buildする。
+正式認定の基準commandは次とし、root POMから全moduleをreactor buildする。開発中の限定実行はこの基準の代替ではない。source/試験/設定/toolが未変更の再開や管理文書のみの変更では、既存認定との一致確認を行い、新しい実行結果として再認定しない。
 
 ```sh
 ./mvnw --no-transfer-progress clean verify
@@ -54,6 +56,8 @@ Nullability/static analysis、constructor/factory invariant、API/DB/config/coll
 
 各Program directoryに仕様書、実行結果、必要な`evidence/*`、`manifest.json`を置く。Manifestには実行UTC/JST、OS/JDK/tool、branch/commit、command/exit code、Test ID、sanitized input/expected/actual、coverage counter、BUG/SSC、artifact path/SHA-256を記録する。秘密値は保存しない。
 
+開発中の限定実行は対象/未実行範囲/command/source/結果を暫定記録へ残し、正式manifestへ混入しない。小編集ごとの全証跡再生成や最新概況の多文書転記は不要。正式収集では従来どおり全必須scopeを同一run/source/branchで横断検証し、古い別sourceの成功結果を流用しない。過去runの証跡は履歴として保全し、最新状態は456・各Programの正式manifestへの参照で追跡する。collectorの厳密性・coverage条件は変更しない。
+
 ## 7. 完了gate
 
 Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、全YKT完了、未回答QA/RDF/UIC/SSC 0、未承認CHR差分0、secret hit 0、trace漏れ0、clean worktree、必要commit/branch/PR/push済みをすべて満たした場合だけPGPT完了とする。Remote認証やLinux実測など工程外依存は隠さずblockerとして報告し、未達のまま完了扱いしない。
@@ -64,3 +68,4 @@ Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、�
 |---|---|
 | 2026-09-01 | Build・静的解析・coverage・NPE・evidence gate初版を確定。 |
 | 2026-09-02 | Protocolのcompiler/JSpecify/SpotBugs/JaCoCo実績と、JSpecify単独でnull dataflow PASSとしない判定を追記。 |
+| 2026-09-20 | 開発中の限定実行と正式全体認定を区別。週次枠優先で重複更新を減らすが、全gate/全scope同一source検証と未実行の非合格扱いを維持。 |
