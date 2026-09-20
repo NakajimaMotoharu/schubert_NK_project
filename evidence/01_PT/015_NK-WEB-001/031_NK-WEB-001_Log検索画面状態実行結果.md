@@ -1,5 +1,7 @@
 # Log検索画面状態実行結果
 
+正式認定: PT-WEB-20260920-27/source3b980d71f5573342b7c787ad6eed53db6d8c2940、10:14:36～10:27:24 JST/12:47/exit0。全1719PT/Web460、failed/error/skipped0、6Java4coverage100%/Production5静的解析未解決0、JS3coverage100%、41scope/81負canary成功。PG215/216計16PTを認定しBUG226/YKT182は全template/閉resolver再試験で完了。raw SHA256=03b144af204d27da27c388a4abfe933407787d29920e4d162510825b08edc4e6。evidence/manifest.jsonとsanitized suite/coverage/spec copyへ対象commit/環境/command/独立expected/actual/hashを固定。以下の未認定表現は選択試験時点の履歴。Browser入力検査/Log HTTP/実NKgate・PGPT/IT/ST未完了。
+
 PG215/仕様030/WEB286～293。選択成功・正式未認定。新3class30method77line12branch全missed0、固定field/error/URI・ADMIN・page binding/0～201/過大page・null/不変性/閉bean/HTML escape/64並行すべて独立assert成功。新障害なし。
 
 2026-09-20 10:10:33 JST/40.783秒/exit0、Web32（Log状態8/結果8/入力8/Scenario状態8）＋依存PT成功、failed/error/skipped0、NullAway/Spotless/SpotBugs未解決0。raw /tmp/pgpt-pg215-selected.log SHA256=e2d81e5987108dee4affdc1c0a5544631d49a73d4bf68e2a224b2d35fcb76798。

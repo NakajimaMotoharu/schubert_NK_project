@@ -1,5 +1,7 @@
 # Log画面template単体テスト仕様書
 
+現在状態: 正式PT-WEB-20260920-27/source3b980d71で本仕様8件を合格認定。次番号の実行結果/manifest参照。以下の未実装/未実行は仕様先行時の履歴。Log HTTP/Browser入力検査/実NKgateは未完了。
+
 NK-WEB-002/SCR014、logs.html・fragments/log-pagination.html・css/schubert.css、FUN008/AUT002/MON003/UI222/225/235/DIF008・010/SS313/352/SSC073/PG216。仕様先行、未実装/未実行。LogSearchTemplateTestの8method。
 
 | Test ID | method | 入力・操作 | 独立期待値 |
