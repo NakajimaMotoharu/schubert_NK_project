@@ -1,5 +1,7 @@
 # Log検索入力単体テスト仕様書
 
+現在状態: 正式PT-WEB-20260920-26/source7df9eb2eで本仕様8件を合格認定、対応する次番号の実行結果/manifest参照。以下の「未実装/未実行」は仕様先行時の履歴。Log全画面/HTTP/NKgateの完了ではない。
+
 NK-WEB-001/SCR014、LogSearchForm.bind/toRequest/invalidCharacters/date/optional、FUN008/AUT/MON/TST、UI222/225/235/DIF010、SS313/352/SSC073、PG-D-214。仕様先行・未実装/未実行。LogSearchFormTestの8methodへ対応。
 
 | Test ID | method | 入力・操作 | 独立期待値 |

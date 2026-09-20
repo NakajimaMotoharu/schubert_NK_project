@@ -1,5 +1,7 @@
 # Log検索結果表示単体テスト仕様書
 
+現在状態: 正式PT-WEB-20260920-26/source7df9eb2eで本仕様8件を合格認定、対応する次番号の実行結果/manifest参照。以下の「未実装/未実行」は仕様先行時の履歴。Log全画面/HTTP/NKgateの完了ではない。
+
 NK-WEB-001/SCR014、LogSearchResultsViewModel/from/Row、FUN008/AUT002～003/MON003～004/TST、UI225§2/235§11/264、SS311/313/323/352、PG-D-212。仕様先行・未実装/未実行。LogSearchResultsViewModelTestの8methodへ一意対応。
 
 | Test ID | method | fixture・操作 | 独立期待値 |
