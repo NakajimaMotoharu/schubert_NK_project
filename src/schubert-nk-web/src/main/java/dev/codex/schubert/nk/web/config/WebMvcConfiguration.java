@@ -76,6 +76,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
           "menu",
           "animation",
           "animation-list",
+          "music",
+          "music-sections",
           "error/error",
           "scenarios",
           "scenario-routes",

@@ -8,6 +8,9 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 CLASS = "dev.codex.schubert.nk.web.session.ScenarioControllerTest"
+MUSIC_CLASS = "dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest"
+MUSIC_METHODS = ("music066CategoryMenu", "music067SectionMenu", "music068EmptyAndMaximum",
+                 "music069EscapingAndCsrf", "music070CssAndViewBoundary", "music071ConcurrentRendering")
 DETAIL_CLASS = "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest"
 SCRIPT_CLASS = "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest"
 SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js"
@@ -48,8 +51,14 @@ TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ng
           "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
           "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n",
           "PT-SCR-053.txt": b"templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n",
-          "PT-SCR-065.txt": b"screens=SCR008|SCR009\nfixture=public-synthetic\nroutes=3\nmenuCards=3\nlistRecords=2\nactualNkGate=false\n"}
+          "PT-SCR-065.txt": b"screens=SCR008|SCR009\nfixture=public-synthetic\nroutes=3\nmenuCards=3\nlistRecords=2\nactualNkGate=false\n",
+          "PT-SCR-071.txt": b"templates=music|music-sections\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumCategories=20\nmaximumSections=100\nactualNkGate=false\n"}
 SOURCE_PATHS = (
+    "src/schubert-nk-web/src/main/resources/templates/music.html",
+    "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicSectionViewModel.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/AnimationMvcConfiguration.java",
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
@@ -104,6 +113,10 @@ def validate_animation_http_suite(suite):
 
 def validate_animation_suite(suite):
     return validate_named_suite(suite, ANIMATION_CLASS, ANIMATION_METHODS, 46)
+
+
+def validate_music_suite(suite):
+    return validate_named_suite(suite, MUSIC_CLASS, MUSIC_METHODS, 66)
 
 
 def validate_named_suite(suite, classname, methods, first):
@@ -178,6 +191,7 @@ def main():
     methods.update(validate_search_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + SEARCH_HTTP_CLASS + ".xml")).getroot()))
     methods.update(validate_animation_suite(ET.parse(target / "surefire-reports" / ("TEST-" + ANIMATION_CLASS + ".xml")).getroot()))
     methods.update(validate_animation_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + ANIMATION_HTTP_CLASS + ".xml")).getroot()))
+    methods.update(validate_music_suite(ET.parse(target / "surefire-reports" / ("TEST-" + MUSIC_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
@@ -199,9 +213,10 @@ def main():
                  "007_NK-WEB-002_検索template単体テスト仕様書.md", "008_NK-WEB-002_検索template実行結果.md",
                  "009_NK-WEB-002_検索HTTP単体テスト仕様書.md", "010_NK-WEB-002_検索HTTP実行結果.md",
                  "011_NK-WEB-002_Animation一覧template単体テスト仕様書.md", "012_NK-WEB-002_Animation一覧template実行結果.md",
-                 "013_NK-WEB-002_Animation一覧HTTP単体テスト仕様書.md", "014_NK-WEB-002_Animation一覧HTTP実行結果.md"):
+                 "013_NK-WEB-002_Animation一覧HTTP単体テスト仕様書.md", "014_NK-WEB-002_Animation一覧HTTP実行結果.md",
+                 "015_NK-WEB-002_Music階層template単体テスト仕様書.md", "016_NK-WEB-002_Music階層template実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="65", failures="0", errors="0", skipped="0")
+    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="71", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
@@ -211,6 +226,7 @@ def main():
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
         "programId": "NK-WEB-002", "scopeResult": "PASS_HIERARCHY_SEARCH_ANIMATION_HTTP_DETAIL_TEMPLATES_AND_SCRIPT_ONLY", "programComplete": False,
+        "musicTemplateOracle": "015/SCR066..071: actual category/section templates, independent Current title/count/order/URLs,USER/ADMIN,0/20 categories,0/100 sections,HTML/CSRF escaping,closed resolver,CSS,64 renders.Not Music HTTP/tracks/stream/actual NK gate.",
         "animationHttpOracle": "013/SCR054..065: independent ANM/ANL wire and three fixed routes,USER/ADMIN,error/0102 session invalidation,malformed and semantic binding,null/unknown propagation,actual MVC/Tomcat/security/HEAD,closed escaped models,0/50 and main/subtrack grouping,64 isolated requests,public trace.Not watch/stream/live broker/NK gate.",
         "animationTemplateOracle": "011/SCR046..053: actual Animation menu/list resolver,independent Current three-card labels/order/count/URLs,main/subtrack grouping and placeholder,OVA metadata,0/50 records,MB rounding literals,escaping/CSRF,7 desktop and1 mobile CSS rules,64 renders.Not Animation HTTP/stream/live Browser/NK gate.",
         "searchHttpOracle": "009/SCR034..045: independent UI234 bytes,SRC/GAM/SPK order,invalid400/no-MQ,all stages error/0102/malformed,request-page binding,null/unknown propagation,MVC and real HEAD distinction,real HTTP USER/ADMIN/session invalidation,64 isolated queries/192 correlations,escaped DOM and public trace.Not live broker/actual NK gate.",

@@ -1,0 +1,24 @@
+<!doctype html>
+<!-- SCR011/FUN007/UI222,223,235/SS313/PG209/PT-SCR066..071. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Music')}"></head>
+  <body><main class="page music-page">
+    <header class="topbar">
+      <div><h1>Music</h1><div class="subtitle" th:text="|${page.trackCount}曲|"></div></div>
+      <div class="topbar-actions">
+        <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+        <nav class="nav-links" aria-label="Musicナビゲーション">
+          <a th:href="@{/scenarios}">シナリオ閲覧</a>
+          <a th:href="@{/search}">検索</a>
+          <a th:href="@{/animation}">アニメ視聴</a>
+        </nav>
+      </div>
+    </header>
+    <nav class="menu-grid" aria-label="music menu">
+      <a class="menu-item" th:each="category : ${page.categories}" th:href="${category.href}">
+        <strong th:text="${category.name}"></strong>
+        <span>分類を選択する</span>
+      </a>
+    </nav>
+  </main></body>
+</html>
