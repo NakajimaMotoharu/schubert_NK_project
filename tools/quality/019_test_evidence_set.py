@@ -76,6 +76,20 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_music_suite(wrong)
 
+    def test_music_wire_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web254Requests", "web255SuccessProfiles", "web256ErrorProfiles", "web257MalformedReplies",
+                 "web258CapabilitiesAndNull", "web259TransportFailures", "web260ConcurrentRequests", "web261OwnershipAndDiagnostics")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest#" + name
+                   for i, name in enumerate(names, 254)}
+        web.validate_music_wire_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_music_wire_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_music_wire_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_music_wire_inventory(dict(mapping, unknown="unknown"))
+
     def test_music_hierarchy_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web246CategorySnapshot", "web247SectionSnapshot", "web248SizeAndCountBounds", "web249DuplicateAndSegment",

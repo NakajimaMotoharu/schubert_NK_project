@@ -10,6 +10,15 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def validate_music_wire_inventory(mapping):
+    names = ("web254Requests", "web255SuccessProfiles", "web256ErrorProfiles", "web257MalformedReplies",
+             "web258CapabilitiesAndNull", "web259TransportFailures", "web260ConcurrentRequests", "web261OwnershipAndDiagnostics")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest#" + name
+                for i, name in enumerate(names, 254)}
+    if mapping != expected:
+        raise ValueError("Music wire Test IDs are incomplete or inconsistent")
+
+
 def validate_music_hierarchy_inventory(mapping):
     names = ("web246CategorySnapshot", "web247SectionSnapshot", "web248SizeAndCountBounds", "web249DuplicateAndSegment",
              "web250NullAndOwnership", "web251ClosedBeansAndRedaction", "web252SyntheticHtmlEscaping", "web253ConcurrentProjection")
@@ -374,6 +383,10 @@ def main():
         (246, "web246CategorySnapshot"), (247, "web247SectionSnapshot"), (248, "web248SizeAndCountBounds"),
         (249, "web249DuplicateAndSegment"), (250, "web250NullAndOwnership"), (251, "web251ClosedBeansAndRedaction"),
         (252, "web252SyntheticHtmlEscaping"), (253, "web253ConcurrentProjection"))
+    groups["dev.codex.schubert.nk.web.messaging.MusicWireClientTest"] = (
+        (254, "web254Requests"), (255, "web255SuccessProfiles"), (256, "web256ErrorProfiles"),
+        (257, "web257MalformedReplies"), (258, "web258CapabilitiesAndNull"), (259, "web259TransportFailures"),
+        (260, "web260ConcurrentRequests"), (261, "web261OwnershipAndDiagnostics"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -406,6 +419,7 @@ def main():
     validate_animation_view_inventory({key: value for key, value in expected.items() if "AnimationViewModelTest#" in value})
     validate_animation_wire_inventory({key: value for key, value in expected.items() if "AnimationWireClientTest#" in value})
     validate_music_hierarchy_inventory({key: value for key, value in expected.items() if "MusicHierarchyViewModelTest#" in value})
+    validate_music_wire_inventory({key: value for key, value in expected.items() if "MusicWireClientTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
@@ -420,7 +434,8 @@ def main():
                  "014_NK-WEB-001_Scenario検索画面状態単体テスト仕様書.md", "015_NK-WEB-001_Scenario検索画面状態実行結果.md",
                  "016_NK-WEB-001_Animation一覧表示単体テスト仕様書.md", "017_NK-WEB-001_Animation一覧表示実行結果.md",
                  "018_NK-WEB-001_Animation通信単体テスト仕様書.md", "019_NK-WEB-001_Animation通信実行結果.md",
-                 "020_NK-WEB-001_Music階層表示単体テスト仕様書.md", "021_NK-WEB-001_Music階層表示実行結果.md"):
+                 "020_NK-WEB-001_Music階層表示単体テスト仕様書.md", "021_NK-WEB-001_Music階層表示実行結果.md",
+                 "022_NK-WEB-001_Music通信単体テスト仕様書.md", "023_NK-WEB-001_Music通信実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -428,6 +443,11 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                                               "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
+        "musicWireExpected": "PG210/022/023/PT-WEB254..261/UI232,235/SS311,312,321,323,352: independent MCT/MCS/MTR byte vectors,0/20/100/200 bounds,all error profiles,malformed/semantic/null/transport/unknown error,64 concurrent exchanges,buffer erasure and immutable redacted snapshots.No descriptor/retry/HTTP/live broker/NK gate certificate.",
+        "musicWireSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                             for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MusicWireClient.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/MusicWireClientTest.java")],
         "musicHierarchyExpected": "PG208/020/021/PT-WEB246..253/UI223,235/SS313,323: independent category/section names,order,sum,0/20/100 bounds and6-digit totals,count mismatch/duplicate/empty-dot rejection,null/ownership/closed beans/redaction,UTF8 literal URLs,synthetic escaped HTML,64 snapshots.Not actual template/HTTP/Music pair/stream/NK gate.",
         "musicHierarchySources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
                                  for relative in (
