@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260920-23",
-  "targetCommit": "749fbae69b7098119af8020f9fe04893e01aca65",
+  "runId": "PT-WEB-20260920-24",
+  "targetCommit": "5f2abbf26f67c19a4d60a0778057360313366759",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-20T08:43:29+09:00",
-  "completedAt": "2026-09-20T08:55:24+09:00",
+  "startedAt": "2026-09-20T09:06:27+09:00",
+  "completedAt": "2026-09-20T09:19:08+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -150,31 +150,31 @@
       }
     },
     "web": {
-      "tests": 386,
+      "tests": 400,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 16514
+          "covered": 16835
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1314
+          "covered": 1342
         },
         "LINE": {
           "missed": 0,
-          "covered": 3748
+          "covered": 3824
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1421
+          "covered": 1460
         },
         "METHOD": {
           "missed": 0,
-          "covered": 750
+          "covered": 775
         },
         "CLASS": {
           "missed": 0,
-          "covered": 154
+          "covered": 158
         }
       },
       "spotbugs": {
@@ -218,7 +218,7 @@
       }
     }
   },
-  "rawLogSha256": "3b7fd3ea02199347f9d475f9de7b70f1bac9463c0de2c1ca2f57a7e09c4396f6",
+  "rawLogSha256": "efe1bf7eb10e042397b389c60147c87c3b9cd81fea2a8579beedec0dea963abc",
   "programId": "NK-MSG-002",
   "programStatus": "IN_PROGRESS",
   "result": "REGRESSION_SLICE_PASS",
@@ -309,7 +309,7 @@
     },
     {
       "path": "coverage/web-jacoco.csv",
-      "sha256": "c75c2012231dd52bab0bd3101a13e4052a9f2a73cf616fbb578b71ac27662420"
+      "sha256": "e297899655f989dea62dccc79e3395395ac3dcc508256e8a00480cf6c8aa5aee"
     },
     {
       "path": "database/inbox-replay-results.tsv",
@@ -1476,8 +1476,16 @@
       "sha256": "3e418edcb1d1bacbaf8d8ff264f9a6d6960ecaf48cadf04eacac886d33b5d04c"
     },
     {
+      "path": "logs/PT-WEB-20260920-23-manifest.json",
+      "sha256": "a0e37305d4ef7e389910ae5a3a3b074b7c2d31fbdb2b3fe08397397829f37914"
+    },
+    {
       "path": "logs/PT-WEB-20260920-23-summary.json",
       "sha256": "c55b6bee13485a8dcb27ffb9471ff375476707e7db264d3f46026e515fdeb739"
+    },
+    {
+      "path": "logs/PT-WEB-20260920-24-summary.json",
+      "sha256": "29653747ec38ae19832c02f3c5bcfb11fbff88f7b0627ebf7d2796252efe37ef"
     },
     {
       "path": "logs/SSC-027-snapshot-replacement.md",
@@ -1529,7 +1537,7 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
-      "sha256": "4637d8dc42c16bc30fca984762b76d81d358f6c5c1e3a0148a1c3e977843a3c9"
+      "sha256": "ce867fa2ff480b2e98aa4dd10fada2fb2a125d29555791990d4ff4cbcea22d11"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
@@ -1541,11 +1549,11 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
-      "sha256": "01902495d1272db6441f11f1c36e4e3bb23e4be8086bf81640c7409789e26194"
+      "sha256": "709157aaa9693658977ecce0d866013103d9d4fcf75961a5c2b3a9582b94eb3f"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
-      "sha256": "a5cd27ae2d26cd9f383c363e7d31e2e1b7143f2ed4287474b060966340ba7f16"
+      "sha256": "b4bc8a02d275f535530d74e7ebc8b3c1007553129b319cd3ec4921e2013bb765"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",

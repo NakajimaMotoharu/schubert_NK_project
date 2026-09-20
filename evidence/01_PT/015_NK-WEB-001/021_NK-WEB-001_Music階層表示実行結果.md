@@ -1,5 +1,7 @@
 # Music階層表示実行結果
 
+正式24/source5f2abbf26f67c19a4d60a0778057360313366759、2026-09-20 09:06:27～09:19:08 JST/Maven12:39/exit0で認定。全1659PT/Web400、failed/error/skipped0、6Java全line/method/class/branch100%・Production5静的解析未解決0、JS3coverage100%、41scope/74負canary成功。raw log SHA256=efe1bf7eb10e042397b389c60147c87c3b9cd81fea2a8579beedec0dea963abc。新BUG/SSCなし。環境/command/対象commit/coverage/hashはmanifestへ保存。PG208の8PTを限定認定。4class25method76line28branch全missed0。PGPT/IT/ST未完了。以下は選択試験履歴。
+
 PG208/PT-WEB246～253、仕様020。選択試験合格・正式全体回帰は未実行。全体合格件数へはまだ加算しない。
 
 2026-09-20 09:03:59 JST終了、40.835秒、exit0。新8PT/依存PTすべて成功、failed/error/skipped0。MusicCategoryViewModel/MusicSectionViewModelとnested Cardの4class25method76line28branchは全missed0、除外なし。NullAway/Spotless/SpotBugs未解決0。独立期待値は020のliteral件数・URL・順序・閉じたproperty集合で、正常/境界/不正/null/不変性/64並行を確認。新規BUG/SSCなし。
