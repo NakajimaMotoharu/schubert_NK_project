@@ -1,5 +1,7 @@
 # Music category・section表示単体テスト仕様書
 
+現在状態: 正式24/source5f2abbf2で8PT認定済。結果021・manifest参照。以下の「仕様先行」は作成時点の記録であり現在の未実装を意味しない。Music HTTP/配信は未完了。
+
 NK-WEB-001/SCR011/012、MusicCategoryViewModel/MusicSectionViewModel・nested Card、FUN007/AUT/TST、UI223§7/235§7～8/264、SS311/313/323/352、PG208。仕様先行・未実装/未実行。MusicHierarchyViewModelTestの以下8methodを対応付ける。
 
 | Test ID | method | fixture・入力・操作 | 独立期待値 |

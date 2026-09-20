@@ -1,5 +1,7 @@
 # Music category・section template単体テスト仕様書
 
+現在状態: 正式24/source5f2abbf2で6PT認定済。結果016・manifest参照。以下の「仕様先行」は作成時点の記録であり現在の未実装を意味しない。Music HTTP/配信は未完了。
+
 NK-WEB-002/SCR011/012、music.html/music-sections.html/WebMvcConfiguration、FUN007/AUT/TST、UI222/223/235/264、SS313/352、PG209。仕様先行・未実装/未実行。MusicHierarchyTemplateTestの6methodを対応付ける。
 
 | Test ID | method | fixture/操作 | 独立期待値 |

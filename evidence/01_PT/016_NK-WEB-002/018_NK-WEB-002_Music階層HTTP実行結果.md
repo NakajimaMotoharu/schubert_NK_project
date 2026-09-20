@@ -1,5 +1,7 @@
 # Music分類・区分HTTP実行結果
 
+正式25/source42d8bfbf0c0d88a27ba29a8f9cf0054d5cdacc58、2026-09-20 09:26:44～09:39:24 JST/Maven12:39/exit0で認定。全1679PT/Web420、failed/error/skipped0、6Java全line/method/class/branch100%・Production5静的解析未解決0、JS3coverage100%、41scope/76負canary成功。raw log SHA256=1261a8a6e3ec27f824eb5965f374146a83623421d1689a3245296c32e26ab24d。環境/対象commit/command/日時/coverage/hashはmanifestへ保存。PG211の12PTを限定認定、2画面/2routeをmodel→wire→controller→実template→認証済HTTPまで接続。track/pair/stream/実broker/実NKgate・PGPT/IT/ST未完了。以下は選択試験履歴。
+
 PG211/PT-SCR072～083、仕様017。選択成功・正式全体回帰待ち。新12件は合格総数へ未加算。
 
 2026-09-20 09:25:10 JST終了、46.435秒/exit0。Web46（新HTTP12/Musicwire8/model8/template6/AnimationHTTP12）＋依存PT成功、failed/error/skipped0。MusicController1class7method66line12branch、MusicMvcConfiguration1class2method2line/branch0は全missed0、除外なし。NullAway/Spotless/SpotBugs未解決0。BUG追加なし。

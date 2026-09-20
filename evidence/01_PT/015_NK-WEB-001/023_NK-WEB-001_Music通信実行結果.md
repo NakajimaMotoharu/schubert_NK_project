@@ -1,5 +1,7 @@
 # Music一覧通信実行結果
 
+正式25/source42d8bfbf0c0d88a27ba29a8f9cf0054d5cdacc58、2026-09-20 09:26:44～09:39:24 JST/Maven12:39/exit0で認定。全1679PT/Web420、failed/error/skipped0、6Java全line/method/class/branch100%・Production5静的解析未解決0、JS3coverage100%、41scope/76負canary成功。raw log SHA256=1261a8a6e3ec27f824eb5965f374146a83623421d1689a3245296c32e26ab24d。環境/対象commit/command/日時/coverage/hashはmanifestへ保存。PG210の8PTを限定認定、BUG223/YKT179は明示import/全compile/通信負例・同一性回帰で完了。track/pair/stream/実broker/実NKgate・PGPT/IT/ST未完了。以下は選択試験履歴。
+
 PG210/PT-WEB254～261、仕様022。選択成功、正式全体回帰待ちで新8件は未加算。
 
 初回 /tmp/pgpt-pg210-selected.log は2026-09-20 09:21:49 JST/25.191秒/exit1、Web testCompile失敗・新8PT未実行。SHA256=df81d47c9a2766cb1f1e82ce95829c1b15b90ecc6a53a32997aa3dee9aeab6b0。BUG223/YKT179をeec777beへ修正前起票。JMS wildcardの同名IllegalStateException衝突をJMSException/JMSRuntimeException明示importへ修正、Production/oracle不変更。全src Java検索でwildcard対象は新1fileだけ、既存Animation/Scenario/JMSは明示import。再発防止は全module compileとtransport/未知例外同一性/diagnosticの回帰。
