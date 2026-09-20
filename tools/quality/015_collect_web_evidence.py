@@ -10,6 +10,13 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def validate_log_form_inventory(mapping):
+    names = ("web278DefaultsAndFilters", "web279TextAndBinding", "web280Characters", "web281PageAndEnums", "web282Dates", "web283DateRange", "web284NullOwnershipAndRedaction", "web285ConcurrentBinding")
+    expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.form.LogSearchFormTest#" + name for i, name in enumerate(names, 278)}
+    if mapping != expected:
+        raise ValueError("Log form Test IDs are incomplete or inconsistent")
+
+
 def validate_log_results_inventory(mapping):
     names = ("web262CompleteRow", "web263OptionalFields", "web264PageBounds", "web265OrderingAndIdentity", "web266NullRoleAndOwnership", "web267ClosedBeansAndRedaction", "web268SyntheticHtmlEscaping", "web269ConcurrentProjection")
     expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest#" + name
@@ -405,6 +412,7 @@ def main():
         (260, "web260ConcurrentRequests"), (261, "web261OwnershipAndDiagnostics"))
     groups["dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest"] = ((262, "web262CompleteRow"), (263, "web263OptionalFields"), (264, "web264PageBounds"), (265, "web265OrderingAndIdentity"), (266, "web266NullRoleAndOwnership"), (267, "web267ClosedBeansAndRedaction"), (268, "web268SyntheticHtmlEscaping"), (269, "web269ConcurrentProjection"))
     groups["dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest"] = ((270, "web270Requests"), (271, "web271SuccessProfiles"), (272, "web272ErrorProfiles"), (273, "web273MalformedReplies"), (274, "web274CapabilitiesAndNull"), (275, "web275TransportFailures"), (276, "web276ConcurrentRequests"), (277, "web277OwnershipAndDiagnostics"))
+    groups["dev.codex.schubert.nk.web.form.LogSearchFormTest"] = ((278, "web278DefaultsAndFilters"), (279, "web279TextAndBinding"), (280, "web280Characters"), (281, "web281PageAndEnums"), (282, "web282Dates"), (283, "web283DateRange"), (284, "web284NullOwnershipAndRedaction"), (285, "web285ConcurrentBinding"))
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -440,6 +448,7 @@ def main():
     validate_music_wire_inventory({key: value for key, value in expected.items() if "MusicWireClientTest#" in value})
     validate_log_wire_inventory({key: value for key, value in expected.items() if "LogSearchWireClientTest#" in value})
     validate_log_results_inventory({key: value for key, value in expected.items() if "LogSearchResultsViewModelTest#" in value})
+    validate_log_form_inventory({key: value for key, value in expected.items() if "LogSearchFormTest#" in value})
     evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
@@ -457,7 +466,8 @@ def main():
                  "020_NK-WEB-001_Music階層表示単体テスト仕様書.md", "021_NK-WEB-001_Music階層表示実行結果.md",
                  "022_NK-WEB-001_Music通信単体テスト仕様書.md", "023_NK-WEB-001_Music通信実行結果.md",
                  "024_NK-WEB-001_Log検索結果表示単体テスト仕様書.md", "025_NK-WEB-001_Log検索結果表示実行結果.md",
-                 "026_NK-WEB-001_Log検索通信単体テスト仕様書.md", "027_NK-WEB-001_Log検索通信実行結果.md"):
+                 "026_NK-WEB-001_Log検索通信単体テスト仕様書.md", "027_NK-WEB-001_Log検索通信実行結果.md",
+                 "028_NK-WEB-001_Log検索入力単体テスト仕様書.md", "029_NK-WEB-001_Log検索入力実行結果.md"):
         shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
@@ -465,6 +475,11 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                                               "exitCode", "command", "environment", "modules", "rawLogSha256")}
     manifest.update({
+        "logFormExpected": "PG214/028/029/PT-WEB278..285/SSC073/UI222,225,235/SS313,352: independent8fields/defaults/enums/NFC/ASCIItrim/UTF8limits/control/surrogates/page/int bounds/strict JST literal dates/31day boundary/null/immutable/redaction/64 binds.No template/HTTP/NK gate completion.",
+        "logFormSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}
+                           for relative in (
+            "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java",
+            "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java")],
         "logResultsExpected": "PG212/024/025/PT-WEB262..269/UI225,235/SS313,323: independent fields/UTC OffsetDateTime literals/1024 optional combinations/page0..100/order/identity/null/ADMIN/ownership/closed beans/escaping/64 projections.Not form/template/HTTP/NK gate.",
         "logWireExpected": "PG213/026/027/PT-WEB270..277/UI232,234,235/SS311,312,321,323: independent LGS656/PAGED48/2088 vectors,all type/level,0/1/100,31day/page boundaries,all error/malformed/null/unknown/64 requests/erasure/ownership.No authorization or HTTP/NK gate completion.",
         "logSources": [{"path": relative, "sha256": hashlib.sha256((repo / relative).read_bytes()).hexdigest()}

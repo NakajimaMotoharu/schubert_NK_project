@@ -98,6 +98,18 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_music_suite(wrong)
 
+    def test_log_form_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web278DefaultsAndFilters", "web279TextAndBinding", "web280Characters", "web281PageAndEnums", "web282Dates", "web283DateRange", "web284NullOwnershipAndRedaction", "web285ConcurrentBinding")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.form.LogSearchFormTest#" + name for i, name in enumerate(names, 278)}
+        web.validate_log_form_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_log_form_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_log_form_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_log_form_inventory(dict(mapping, unknown="unknown"))
+
     def test_log_results_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web262CompleteRow", "web263OptionalFields", "web264PageBounds", "web265OrderingAndIdentity", "web266NullRoleAndOwnership", "web267ClosedBeansAndRedaction", "web268SyntheticHtmlEscaping", "web269ConcurrentProjection")
