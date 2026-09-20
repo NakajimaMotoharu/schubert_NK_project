@@ -8,6 +8,11 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 CLASS = "dev.codex.schubert.nk.web.session.ScenarioControllerTest"
+MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
+MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
+                      "music075MalformedAndTransport", "music076ResponseBinding", "music077NullAndUnknown",
+                      "music078MvcRoutesAndInput", "music079RealHttpSecurity", "music080EscapingAndIsolation",
+                      "music081EmptyAndMaximum", "music082ConcurrentRequests", "music083CompatibilityTrace")
 MUSIC_CLASS = "dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest"
 MUSIC_METHODS = ("music066CategoryMenu", "music067SectionMenu", "music068EmptyAndMaximum",
                  "music069EscapingAndCsrf", "music070CssAndViewBoundary", "music071ConcurrentRendering")
@@ -45,15 +50,21 @@ SUBJECTS = ("dev/codex/schubert/nk/web/controller/ScenarioController",
             "dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration",
             "dev/codex/schubert/nk/web/config/WebMvcConfiguration",
             "dev/codex/schubert/nk/web/controller/AnimationController",
-            "dev/codex/schubert/nk/web/config/AnimationMvcConfiguration")
+            "dev/codex/schubert/nk/web/config/AnimationMvcConfiguration",
+            "dev/codex/schubert/nk/web/controller/MusicController",
+            "dev/codex/schubert/nk/web/config/MusicMvcConfiguration")
 TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
           "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
           "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
           "PT-SCR-045.txt": b"screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n",
           "PT-SCR-053.txt": b"templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n",
           "PT-SCR-065.txt": b"screens=SCR008|SCR009\nfixture=public-synthetic\nroutes=3\nmenuCards=3\nlistRecords=2\nactualNkGate=false\n",
-          "PT-SCR-071.txt": b"templates=music|music-sections\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumCategories=20\nmaximumSections=100\nactualNkGate=false\n"}
+          "PT-SCR-071.txt": b"templates=music|music-sections\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumCategories=20\nmaximumSections=100\nactualNkGate=false\n",
+          "PT-SCR-083.txt": b"screens=SCR011|SCR012\nfixture=public-synthetic\nroutes=2\ncategories=2\nsections=2\nactualNkGate=false\n"}
 SOURCE_PATHS = (
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
     "src/schubert-nk-web/src/main/resources/templates/music.html",
     "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
@@ -119,6 +130,10 @@ def validate_music_suite(suite):
     return validate_named_suite(suite, MUSIC_CLASS, MUSIC_METHODS, 66)
 
 
+def validate_music_http_suite(suite):
+    return validate_named_suite(suite, MUSIC_HTTP_CLASS, MUSIC_HTTP_METHODS, 72)
+
+
 def validate_named_suite(suite, classname, methods, first):
     cases = suite.findall("testcase")
     names = [case.get("name") for case in cases]
@@ -154,14 +169,14 @@ def validate_coverage(report):
                 "missed": int(counter.get("missed")), "covered": int(counter.get("covered"))
             } for counter in cls.findall("counter")}
             # Only explicit configuration classes are branchless; no exclusion.
-            if cls.get("name") in (SUBJECTS[1], SUBJECTS[2], SUBJECTS[4]):
+            if cls.get("name") in (SUBJECTS[1], SUBJECTS[2], SUBJECTS[4], SUBJECTS[6]):
                 counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
             result[cls.get("name")] = counters
     if set(result) != set(SUBJECTS) or any(
             not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
             or any(value["missed"] for value in counters.values())
             or any(counters[kind]["covered"] <= 0 for kind in ("LINE", "METHOD", "CLASS"))
-            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3])):
+            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5])):
         raise ValueError("missing or incomplete hierarchy screen coverage")
     return result
 
@@ -192,6 +207,7 @@ def main():
     methods.update(validate_animation_suite(ET.parse(target / "surefire-reports" / ("TEST-" + ANIMATION_CLASS + ".xml")).getroot()))
     methods.update(validate_animation_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + ANIMATION_HTTP_CLASS + ".xml")).getroot()))
     methods.update(validate_music_suite(ET.parse(target / "surefire-reports" / ("TEST-" + MUSIC_CLASS + ".xml")).getroot()))
+    methods.update(validate_music_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + MUSIC_HTTP_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
@@ -214,9 +230,10 @@ def main():
                  "009_NK-WEB-002_検索HTTP単体テスト仕様書.md", "010_NK-WEB-002_検索HTTP実行結果.md",
                  "011_NK-WEB-002_Animation一覧template単体テスト仕様書.md", "012_NK-WEB-002_Animation一覧template実行結果.md",
                  "013_NK-WEB-002_Animation一覧HTTP単体テスト仕様書.md", "014_NK-WEB-002_Animation一覧HTTP実行結果.md",
-                 "015_NK-WEB-002_Music階層template単体テスト仕様書.md", "016_NK-WEB-002_Music階層template実行結果.md"):
+                 "015_NK-WEB-002_Music階層template単体テスト仕様書.md", "016_NK-WEB-002_Music階層template実行結果.md",
+                 "017_NK-WEB-002_Music階層HTTP単体テスト仕様書.md", "018_NK-WEB-002_Music階層HTTP実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="71", failures="0", errors="0", skipped="0")
+    suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests="83", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
@@ -225,7 +242,8 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-WEB-002", "scopeResult": "PASS_HIERARCHY_SEARCH_ANIMATION_HTTP_DETAIL_TEMPLATES_AND_SCRIPT_ONLY", "programComplete": False,
+        "programId": "NK-WEB-002", "scopeResult": "PASS_HIERARCHY_SEARCH_ANIMATION_MUSIC_HTTP_DETAIL_TEMPLATES_AND_SCRIPT_ONLY", "programComplete": False,
+        "musicHttpOracle": "017/SCR072..083: independent MCT/MCS wire,2routes,USER/ADMIN,all error and0102 terminal,malformed/binding/null/unknown,category NFC/64bytes/control/trailing-space/noMQ400,root-empty200/section-empty404,actual template/HTTP/HEAD/security/escaping,20/100 bounds,64 contexts.Not tracks/pair/stream/live broker/NK gate.",
         "musicTemplateOracle": "015/SCR066..071: actual category/section templates, independent Current title/count/order/URLs,USER/ADMIN,0/20 categories,0/100 sections,HTML/CSRF escaping,closed resolver,CSS,64 renders.Not Music HTTP/tracks/stream/actual NK gate.",
         "animationHttpOracle": "013/SCR054..065: independent ANM/ANL wire and three fixed routes,USER/ADMIN,error/0102 session invalidation,malformed and semantic binding,null/unknown propagation,actual MVC/Tomcat/security/HEAD,closed escaped models,0/50 and main/subtrack grouping,64 isolated requests,public trace.Not watch/stream/live broker/NK gate.",
         "animationTemplateOracle": "011/SCR046..053: actual Animation menu/list resolver,independent Current three-card labels/order/count/URLs,main/subtrack grouping and placeholder,OVA metadata,0/50 records,MB rounding literals,escaping/CSRF,7 desktop and1 mobile CSS rules,64 renders.Not Animation HTTP/stream/live Browser/NK gate.",
@@ -241,10 +259,10 @@ def main():
                      str(repo / "src/schubert-nk-web/src/test/javascript/search-speaker-submit.test.cjs")]},
         "javascriptOracle": "005/PT-SCR025-A..H:8 Node cases inside1 JUnit, independent DOM event double and literals for missing structure,UTF8/NFC/ASCII trim/Unicode controls/surrogates/BOM/byte boundaries,all errors,input recovery and native requestSubmit. Exact Production1file coverage inclusion,syntax/version/exit/skipped/todo checks. Not live Browser/HTTP certificate.",
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
-        "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053. SCR025 executes8 Node subcases; JavaScript1file line/function/branch100, no JS class declaration and no exclusion; not8 additional JUnit tests.",
+        "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053/066..071. SCR025 executes8 Node subcases; JavaScript1file line/function/branch100, no JS class declaration and no exclusion; not8 additional JUnit tests.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "PG-D-203", "PG-D-204", "PG-D-205", "PG-D-206", "PG-D-207", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "BUG-219", "BUG-220", "YKT-169", "YKT-170", "YKT-171", "YKT-175", "YKT-176"],
+        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "PG-D-203", "PG-D-204", "PG-D-205", "PG-D-206", "PG-D-207", "PG-D-208", "PG-D-209", "PG-D-210", "PG-D-211", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "BUG-219", "BUG-220", "YKT-169", "YKT-170", "YKT-171", "YKT-175", "YKT-176"],
         "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
         "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
         "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
