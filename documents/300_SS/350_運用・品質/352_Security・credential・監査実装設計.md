@@ -137,6 +137,8 @@ HTTP content-type/size/method
 - 数値はASCII digitだけ、先頭+/minus/小数/指数なし。日時はstrict parser、JST wire→`Instant`の一義変換。
 - Validation messageへraw入力を反射しない。
 
+SSC-073: LogSearchFormのCurrent検索文字列trimとUI222§6の0以下page補正は上記一般規則の限定例外とする。処理順・8field allowlist・DIF010日時のstrict JST/millisecond/31日境界はSS313§5.2追補に従う。trim前のCR/LF/TAB/NUL・不正surrogateは拒否し、未知/複数field・byte超過・enum未知は引き続き拒否する。他の数値やPassword/質問の末尾space禁止を緩和しない。
+
 SSC-072: 上記一般規則よりUI222§5/6・223§3の検索固有規則を優先する。ScenarioSearchFormの検索文字列はcontrol検査後NFC/trimするため前後ASCII spaceをerrorにしない。pageのみ負ASCII整数を1へ補正する（int範囲内）。その他の数値のminus禁止、Password/質問の末尾space禁止は変えない。詳細はSS313§5.2追補。未知・複数parameter、plus、非ASCII数字、overflow、正数上限超過は引き続き拒否する。
 
 ## 9. Fixed protocol・JMS security

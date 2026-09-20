@@ -145,6 +145,10 @@ Client-side `maxlength`は補助であり、UTF-8 byte validatorをWeb/API双方
 
 ## 6. View Model・表示制御
 
+SSC-073（LogSearchForm限定）: HTTP fieldはq/log_type/action/path/level/from/to/pageの8個、未知名・同名複数値は400相当でMQ前に拒否する。既存5文字列はCurrent LogSearchFiltersのtrimを維持し、制御文字/不正Unicode検査→NFC→前後ASCII trim→byte/enum検査とする。q256/action64/path256byte、種別空/ACTION/REQUEST/SECURITY/MQ/SYSTEM/BATCH、level空/INFO/WARN/ERROR。pageは欠落/空1、ASCII int範囲内の0以下を1へ補正、正数999999超過・plus・小数・指数・非ASCII数字・overflowは拒否する（UI222§6優先）。
+
+From/ToはDIF010の新条件をdatetime-localで入力し、JST（固定+09:00）のyyyy-MM-ddTHH:mm、任意の:ssと1～3桁小数秒を受ける。秒がない場合は00、毫秒未満は受けない。4桁年0001～9999・実在日付/時刻のstrict検査、timezone suffix/offset/24時/うるう秒は拒否する。空は未指定、片側だけは許可、両側指定時はFrom≦Toかつ差が31日以下（境界含む）。wireへInstantとして渡し既存JST17桁codecで再検査、丸め/切捨てなし。文字列の再表示は閉snapshotとescape、失敗理由は固定field/codeでraw入力を診断へ出さない。ADMIN認可は既存security chainとAPIに維持する。
+
 SSC-072（ScenarioSearchForm限定）: UI222§5/6・223§3とCurrent SearchFiltersの優先規則を明示する。HTTPの7field `q/game/speaker/chapter/entry_type/voice/page` だけを受け、未知名・同名複数値は拒否する。欠落文字列は空、欠落/空pageは1。入力Unicode・制御文字を検査してからNFC/trimし、検索文字列の前後ASCII spaceはtrim対象（Password/質問の末尾space禁止を適用しない）。CR/LF/TAB/NULをtrimで消して受け入れない。byte上限・enum検査は正規化後で、超過切捨てなし。pageはASCII整数、先頭plus/小数/指数/非ASCII数字は拒否する。ただしUI222§6の明示例外として先頭minusの負整数と0は1へ補正する。Currentのint範囲を超える値、正数999999超過はfield error。leading zeroは数値として解釈する。最終pageへの補正は結果総件数を持つAPI側に残す。
 
 内部formは不変snapshotとclosed field/error-code集合を返す。raw入力を例外/診断へ反射しない。文字入力値は画面再表示のためだけに保持しtemplateで必ずescapeする。検証失敗時はtyped検索要求を生成せずMQを送らない。正常時の空文字はwire mapperでOptional.empty（設計上のnull条件）へ写像する。候補取得/HTTP binding/field error描画は別接続試験で確認する。
