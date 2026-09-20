@@ -114,3 +114,36 @@ button { font: inherit; cursor: pointer; }
   .animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 94px; }
 }
 /* End PG205 Animation styles. */
+/* PG216/SCR014/PT-SCR084..091: Current Log rules, scoped; DIF010 adds two date fields. */
+.log-page .count { color: #5f6368; font-size: 14px; }
+.log-page .filters { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 10px; align-items: end; padding: 14px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; margin-bottom: 16px; }
+.log-page .log-filters label:nth-child(1) { grid-column: span 3; }
+.log-page .log-filters label:nth-child(2), .log-page .log-filters label:nth-child(3), .log-page .log-filters label:nth-child(4), .log-page .log-filters label:nth-child(5) { grid-column: span 2; }
+.log-page .log-filters label:nth-child(6), .log-page .log-filters label:nth-child(7) { grid-column: span 3; }
+.log-page .log-filters button { grid-column: span 1; }
+.log-page .filters label { display: grid; gap: 5px; font-size: 12px; color: #5f6368; min-width: 0; }
+.log-page .filters input, .log-page .filters select, .log-page .filters button { width: 100%; min-width: 0; box-sizing: border-box; min-height: 38px; border: 1px solid #c9ced6; border-radius: 6px; padding: 0 10px; font: inherit; background: #fff; color: #202124; }
+.log-page .filters button { border-color: #1f6feb; background: #1f6feb; color: #fff; font-weight: 700; cursor: pointer; }
+.log-page .log-results { display: grid; gap: 10px; }
+.log-page .pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 12px; }
+.log-page .pagination > a, .log-page .pagination > span, .log-page .pagination > div { min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.log-page .pagination > a:last-child, .log-page .pagination > span:last-child { justify-content: flex-end; }
+.log-page .pagination > div { gap: 4px; color: #5f6368; font-size: 13px; }
+.log-page .pagination > a { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.log-page .pagination.bottom-nav { margin-top: 12px; margin-bottom: 0; }
+.log-page .log-row { display: grid; gap: 8px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 14px; }
+.log-page .log-main { display: flex; flex-wrap: wrap; gap: 8px; color: #5f6368; font-size: 12px; }
+.log-page .log-main span, .log-page .log-main strong { padding: 2px 7px; background: #eef1f5; border-radius: 999px; }
+.log-page .log-fields { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; color: #5f6368; font-size: 12px; }
+.log-page .log-fields div { display: flex; gap: 4px; padding: 2px 7px; background: #f6f7f9; border-radius: 999px; }
+.log-page .log-fields dt { font-weight: 700; }
+.log-page .log-fields dd { margin: 0; }
+.log-page .log-details summary { color: #1f6feb; cursor: pointer; font-size: 13px; font-weight: 700; }
+.log-page .log-details pre { overflow: auto; margin: 8px 0 0; padding: 10px; background: #f6f7f9; border-radius: 6px; font-size: 12px; }
+@media (max-width: 900px) {
+  .log-page .pagination { grid-template-columns: 1fr; }
+  .log-page .pagination > a:last-child, .log-page .pagination > span:last-child { justify-content: flex-start; }
+  .log-page .filters { grid-template-columns: 1fr 1fr; }
+  .log-page .log-filters label:nth-child(n), .log-page .log-filters button { grid-column: 1 / -1; }
+}
+/* End PG216 Log styles. */

@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR014/FUN008/AUT002/MON003; UI222/225/235; SS313/352; PG216/PT-SCR084..091. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Logs')}"></head>
+  <body><main class="page log-page">
+    <header class="topbar"><h1>Logs</h1><div class="topbar-actions">
+      <div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div>
+      <nav class="nav-links" aria-label="ログナビゲーション"><a th:href="@{/search}">検索</a><a th:href="@{/scenarios}">一覧</a></nav>
+      <div class="count" th:if="${page.results.present}"
+           th:text="${page.results.orElseThrow().page.totalCount + ' logs / page ' + page.results.orElseThrow().page.effectivePage + ' of ' + page.results.orElseThrow().page.totalPages}"></div>
+    </div></header>
+    <div id="log-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
+      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
+    </div>
+    <form class="filters log-filters" method="get" th:action="@{/logs}">
+      <label><span>メッセージ</span><input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="log-errors"></label>
+      <label><span>種別</span><select name="log_type" aria-describedby="log-errors">
+        <option value="" th:selected="${page.filters.logType.empty}">すべて</option>
+        <option th:each="type : ${ {'ACTION','REQUEST','SECURITY','MQ','SYSTEM','BATCH'} }" th:value="${type}" th:text="${type}" th:selected="${page.filters.logType == type}"></option>
+        <option th:if="${!page.filters.logType.empty and !#lists.contains({'ACTION','REQUEST','SECURITY','MQ','SYSTEM','BATCH'}, page.filters.logType)}" th:value="${page.filters.logType}" th:text="${page.filters.logType}" selected></option>
+      </select></label>
+      <label><span>アクション</span><input name="action" th:value="${page.filters.action}" placeholder="search" aria-describedby="log-errors"></label>
+      <label><span>パス</span><input name="path" th:value="${page.filters.path}" placeholder="/search" aria-describedby="log-errors"></label>
+      <label><span>レベル</span><select name="level" aria-describedby="log-errors">
+        <option value="" th:selected="${page.filters.level.empty}">すべて</option>
+        <option th:each="level : ${ {'INFO','WARN','ERROR'} }" th:value="${level}" th:text="${level}" th:selected="${page.filters.level == level}"></option>
+        <option th:if="${!page.filters.level.empty and !#lists.contains({'INFO','WARN','ERROR'}, page.filters.level)}" th:value="${page.filters.level}" th:text="${page.filters.level}" selected></option>
+      </select></label>
+      <label><span>From</span><input type="datetime-local" step="0.001" name="from" th:value="${page.filters.from}" aria-describedby="log-errors"></label>
+      <label><span>To</span><input type="datetime-local" step="0.001" name="to" th:value="${page.filters.to}" aria-describedby="log-errors"></label>
+      <button type="submit">検索</button>
+    </form>
+    <nav th:replace="~{fragments/log-pagination :: logs(${page}, false)}"></nav>
+    <section class="log-results" th:if="${page.results.present}">
+      <p class="empty-results" th:if="${page.results.orElseThrow().page.empty}">該当するデータはありません</p>
+      <article class="log-row" th:each="log : ${page.results.orElseThrow().rows}">
+        <div class="log-main">
+          <span th:text="${log.loggedAt}"></span><strong th:text="${log.logType}"></strong><span th:text="${log.level}"></span>
+          <span th:if="${!log.action.empty}" th:text="${log.action}"></span>
+        </div>
+        <p th:text="${log.message}"></p>
+        <dl class="log-fields">
+          <div><dt>ID</dt><dd th:text="${log.id}"></dd></div>
+          <div th:if="${!log.requestId.empty}"><dt>Request</dt><dd th:text="${log.requestId}"></dd></div>
+          <div th:if="${!log.messageId.empty}"><dt>Message</dt><dd th:text="${log.messageId}"></dd></div>
+          <div th:if="${!log.correlationId.empty}"><dt>Correlation</dt><dd th:text="${log.correlationId}"></dd></div>
+          <div th:if="${!log.method.empty}"><dt>Method</dt><dd th:text="${log.method}"></dd></div>
+          <div th:if="${!log.path.empty}"><dt>Path</dt><dd th:text="${log.path}"></dd></div>
+          <div th:if="${log.status.present}"><dt>Status</dt><dd th:text="${log.status.orElseThrow()}"></dd></div>
+          <div th:if="${log.elapsedMs.present}"><dt>Elapsed</dt><dd th:text="${log.elapsedMs.orElseThrow() + 'ms'}"></dd></div>
+          <div th:if="${!log.remoteAddr.empty}"><dt>Remote</dt><dd th:text="${log.remoteAddr}"></dd></div>
+        </dl>
+        <details class="log-details"><summary>details</summary><pre th:text="${log.details}"></pre></details>
+      </article>
+    </section>
+    <nav th:replace="~{fragments/log-pagination :: logs(${page}, true)}"></nav>
+  </main></body>
+</html>
