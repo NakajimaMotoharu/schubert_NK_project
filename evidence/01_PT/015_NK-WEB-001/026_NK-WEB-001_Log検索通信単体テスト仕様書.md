@@ -1,6 +1,6 @@
 # Log検索通信単体テスト仕様書
 
-NK-WEB-001/NK-LOG-001/SCR014、LogSearchWireClient constructor/exchange、FUN008/AUT002/MON/MQ/TST、UI232/234§2/235§11/264、SS311/312/321/323/352、PG-D-213。仕様先行・未実装/未実行。LogSearchWireClientTestの8methodを対応付ける。
+NK-WEB-001/NK-ADM-001/SCR014、LogSearchWireClient constructor/exchange、FUN008/AUT002/MON/MQ/TST、UI232/234§2/235§11/264、SS311/312/321/323/352、PG-D-213。仕様先行・未実装/未実行。LogSearchWireClientTestの8methodを対応付ける。管理Log APIは431の既存NK-ADM-001に属し、新Programを増設しない。
 
 | Test ID | method | 観点・入力 | 独立期待値 |
 |---|---|---|---|
