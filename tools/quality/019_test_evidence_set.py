@@ -98,6 +98,30 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_music_suite(wrong)
 
+    def test_log_results_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web262CompleteRow", "web263OptionalFields", "web264PageBounds", "web265OrderingAndIdentity", "web266NullRoleAndOwnership", "web267ClosedBeansAndRedaction", "web268SyntheticHtmlEscaping", "web269ConcurrentProjection")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest#" + name for i, name in enumerate(names, 262)}
+        web.validate_log_results_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_log_results_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_log_results_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_log_results_inventory(dict(mapping, unknown="unknown"))
+
+    def test_log_wire_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        names = ("web270Requests", "web271SuccessProfiles", "web272ErrorProfiles", "web273MalformedReplies", "web274CapabilitiesAndNull", "web275TransportFailures", "web276ConcurrentRequests", "web277OwnershipAndDiagnostics")
+        mapping = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest#" + name for i, name in enumerate(names, 270)}
+        web.validate_log_wire_inventory(mapping)
+        for key in mapping:
+            wrong = dict(mapping); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_log_wire_inventory(wrong)
+            wrong = dict(mapping); wrong[key] = "Other#unknown"
+            with self.assertRaises(ValueError): web.validate_log_wire_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_log_wire_inventory(dict(mapping, unknown="unknown"))
+
     def test_music_wire_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")
         names = ("web254Requests", "web255SuccessProfiles", "web256ErrorProfiles", "web257MalformedReplies",
