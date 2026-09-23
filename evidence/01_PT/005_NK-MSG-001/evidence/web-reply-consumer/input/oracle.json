@@ -1,0 +1,16 @@
+{
+  "testId": "PT-JMS-014",
+  "subcases": [
+    "PT-JMS-014-A",
+    "PT-JMS-014-B",
+    "PT-JMS-014-C",
+    "PT-JMS-014-D",
+    "PT-JMS-014-E"
+  ],
+  "consumerCount": 1,
+  "sessionMode": "SESSION_TRANSACTED",
+  "replyQueue": "nk.sync.reply.web::nk.sync.reply.web.q",
+  "fatalQueue": "nk.dead.letter::nk.dead.letter.q",
+  "expected": "active reply once; late ACK/metric; fatal DLQ commit/terminal once; temporary rollback; failed startup closes",
+  "source": "SS321 sections 6-9 and SS322 header byte offsets; not production encoder"
+}

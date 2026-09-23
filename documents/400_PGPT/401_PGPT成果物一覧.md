@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint12。正式`PT-WEB-20260924-13`/source`d6080633`で全1768PT/43scope/hash、Java6 moduleのline/method/class/branch100%・Production静的0を限定認定。PG225/Web返信専用consumerのPT-JMS-014 A～Eを追加。実NK CHR-L01とWeb/API親起動・全dispatcher/Log background retryは未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
+
 2026-09-24最新確定は456 checkpoint10・460 checkpoint10。正式`PT-WEB-20260924-12`/source`c5642f9e`で全1763PT/42scope/hash、Java6 moduleのline/method/class/branch100%・Production静的0を限定認定。PG224/API同期4 consumerのPT-JMS-013 A～Fを追加し、BUG-230/231・YKT-184を当該範囲で完了。実NK CHR-L01と親起動/全業務dispatcher/Web reply/Log retryは未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
 
 2026-09-23試行の最新確定は456 checkpoint05・460 checkpoint05。正式 `PT-WEB-20260923-02`/source `7b09c090` の全1731PT/41scopeを限定認定し、PG217/218を含む101部分成果941PT。実NK CHR-L01を含むLog一画面、BUG195等の全横展開、PGPT工程は未完了。442はResource契約の判断記録であり修正完了証明ではない。固定加重中心46.6%は据置。

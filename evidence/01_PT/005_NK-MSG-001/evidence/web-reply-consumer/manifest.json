@@ -1,0 +1,101 @@
+{
+  "runId": "PT-WEB-20260924-13",
+  "targetCommit": "d608063318753d00a6ded4991a67733a7263a4c4",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-24T04:06:09+09:00",
+  "completedAt": "2026-09-24T04:18:18+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "node": "24.19.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "bbcb82ede103fba68ddf5b39dfeb16b228ad666a172e1aeccbb2e8764972476e",
+  "programId": "NK-MSG-001",
+  "testIds": {
+    "PT-JMS-014-A": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest#oneConsumerDeliversActiveAndLateReplies(Path)",
+    "PT-JMS-014-B": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest#invalidRepliesAreCommittedToDlqAndTerminalIsSignalledOnce(Path)",
+    "PT-JMS-014-C": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest#startupRejectsNullAndWrongModeAndClosesPartialSession(Path)",
+    "PT-JMS-014-D": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest#closeIsIdempotentAndPreservesStartupAndCloseFailures",
+    "PT-JMS-014-E": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest#temporaryReadFailureRollsBackAndLeavesRuntimeReady"
+  },
+  "scopeResult": "PASS_WEB_REPLY_SINGLE_CONSUMER_UNIT_ONLY",
+  "programComplete": false,
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 134
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 10
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 42
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 11
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "related": [
+    "PG225",
+    "PT-JMS-014",
+    "RD MQ-004/005/008",
+    "UI212/231",
+    "SS321/322"
+  ],
+  "limitations": "No production Web parent bootstrap, request/reply business path, Log replay, real NK CHR or IT/ST.",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "1655fa6a12f8aed651a71993921cbaadede4a8391404310bfa50a986045d8149",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "sha256": "b5e08b3c1ada56d3b857d79c898d47ca76201d0798b8f9edc76b622c94057d85"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumersTest.java",
+      "sha256": "dcb2ec4421fc574b2a4e72d5d97268eb556f0929b2b41d1b872ee8935946488c"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/class-counters.json",
+      "sha256": "7db23003cdfc9e4912e6bd12dbc179c6b5ca98d27762e6d252c8d16a2d5a7c02"
+    },
+    {
+      "path": "input/oracle.json",
+      "sha256": "b733232948404b099c632d718aa6b92dd82447f3bfe6bf66f2ea3863aec3bb23"
+    },
+    {
+      "path": "logs/001_NK-MSG-001_単体テスト仕様書.md",
+      "sha256": "bb46dc19eb6ea407c35e3c978eca990c69b9b6114ffbf289e4e61c7e52c1ed40"
+    },
+    {
+      "path": "logs/002_NK-MSG-001_実行結果.md",
+      "sha256": "ecf1987c57df1d8b7dc45c685c0e073bb6c6a99f26a256a83fefefb34dc99f17"
+    },
+    {
+      "path": "output/results.xml",
+      "sha256": "07ee87a54d082d037246b4ce1368fb9b4854a9d67cea6424298fb7b35f4e27b8"
+    }
+  ]
+}
