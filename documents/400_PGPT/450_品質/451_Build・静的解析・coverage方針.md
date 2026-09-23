@@ -58,6 +58,8 @@ Nullability/static analysis、constructor/factory invariant、API/DB/config/coll
 
 開発中の限定実行は対象/未実行範囲/command/source/結果を暫定記録へ残し、正式manifestへ混入しない。小編集ごとの全証跡再生成や最新概況の多文書転記は不要。正式収集では従来どおり全必須scopeを同一run/source/branchで横断検証し、古い別sourceの成功結果を流用しない。過去runの証跡は履歴として保全し、最新状態は456・各Programの正式manifestへの参照で追跡する。collectorの厳密性・coverage条件は変更しない。
 
+2026-09-23以降の新run IDは`tools/quality/030_run_pgpt_verify.sh`（既存`work/pgpt_foundation_verify.sh`は入口）で当日・未使用だけを発行する。018の`--validate-only`は`/tmp/<run>.commit`消失後も保存root manifestのrun/source/branch/exitと全必須scope/hashを照合する。これは`PASS_PERSISTED_EVIDENCE_ONLY`であり旧runを再実行・再認定した表示ではない。新しい正式runの収集は従来どおり実行時commit・同一source/tools・負canaryを要する。
+
 ## 7. 完了gate
 
 Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、全YKT完了、未回答QA/RDF/UIC/SSC 0、未承認CHR差分0、secret hit 0、trace漏れ0、clean worktree、必要commit/branch/PR/push済みをすべて満たした場合だけPGPT完了とする。Remote認証やLinux実測など工程外依存は隠さずblockerとして報告し、未達のまま完了扱いしない。
@@ -69,3 +71,4 @@ Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、�
 | 2026-09-01 | Build・静的解析・coverage・NPE・evidence gate初版を確定。 |
 | 2026-09-02 | Protocolのcompiler/JSpecify/SpotBugs/JaCoCo実績と、JSpecify単独でnull dataflow PASSとしない判定を追記。 |
 | 2026-09-20 | 開発中の限定実行と正式全体認定を区別。週次枠優先で重複更新を減らすが、全gate/全scope同一source検証と未実行の非合格扱いを維持。 |
+| 2026-09-23 | PMO W00で新規日付run IDと永続保存manifestからのvalidate-only入口を整合。旧runの照合と新規正式認定を区別。 |

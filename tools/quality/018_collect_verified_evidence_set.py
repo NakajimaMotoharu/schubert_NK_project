@@ -126,15 +126,32 @@ def main():
     if not re.fullmatch(r"PT-(WEB|ADM|MED|SCN)-[A-Za-z0-9-]+", args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    commit = (Path("/tmp") / (args.run_id + ".commit")).read_text().strip()
+    temporary_commit = Path("/tmp") / (args.run_id + ".commit")
+    if args.validate_only:
+        # A persisted manifest can validate an old run after /tmp is cleared. It is not
+        # evidence of a new execution, and every mandatory scope is checked below.
+        manifest = json.loads((repo / "evidence/01_PT" / ROOT_MANIFEST).read_text())
+        if manifest["runId"] != args.run_id or manifest["exitCode"] != 0:
+            raise ValueError("invalid persisted reactor run")
+        commit = manifest["targetCommit"]
+        if temporary_commit.is_file() and temporary_commit.read_text().strip() != commit:
+            raise ValueError("temporary and persisted source commits disagree")
+    else:
+        commit = temporary_commit.read_text().strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("invalid evidence source commit")
+    subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=repo, check=True)
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
-    subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True)
+    paths = ["src", "pom.xml", "program/characterization"]
+    if not args.validate_only:
+        paths.append("tools/quality")
+    subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo, check=True)
     if not args.validate_only:
         collect(repo, args.run_id)
     results = validate_all(repo / "evidence/01_PT", args.run_id, commit, branch)
     print(json.dumps({"runId": args.run_id, "targetCommit": commit, "scopes": results,
-                      "result": "PASS_EVIDENCE_SET_ONLY", "phaseComplete": False}))
+                      "result": "PASS_PERSISTED_EVIDENCE_ONLY" if args.validate_only
+                      else "PASS_EVIDENCE_SET_ONLY", "phaseComplete": False}))
 
 
 if __name__ == "__main__":
