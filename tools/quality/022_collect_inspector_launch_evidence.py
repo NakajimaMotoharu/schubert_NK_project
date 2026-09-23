@@ -269,7 +269,6 @@ def main():
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-batch/pom.xml",
-                    repo / "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
                     repo / "src/deployment/artemis/etc/broker.xml",
                     repo / "src/deployment/tmpfiles/schubert-nk-maintenance.conf"]
         sources += [repo / "src/deployment" / p for p in (

@@ -466,11 +466,12 @@ final class CleanupRepositoryTest {
                 + ":"
                 + dependency.getElementsByTagName("artifactId").item(0).getTextContent());
     }
-    // SSC-049/PG-D-147: only the file adapter gains shared native storage, never API/Web.
+    // SSC-049/PG-D-147/223: only storage and Artemis management client; never API/Web/Protocol.
     assertEquals(
         Set.of(
             "org.jspecify:jspecify",
             "dev.codex.schubert:schubert-nk-storage",
+            "org.apache.artemis:artemis-jakarta-client",
             "com.github.spotbugs:spotbugs-annotations"),
         runtime);
     try (var files = Files.walk(repo.resolve("src/schubert-nk-batch/src/main/java"))) {

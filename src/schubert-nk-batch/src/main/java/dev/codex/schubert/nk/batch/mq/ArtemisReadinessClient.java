@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import java.util.List;
 import java.util.Objects;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
@@ -15,12 +14,22 @@ import org.apache.activemq.artemis.api.core.client.ClientSession;
  * MQ-001/002/009/010,SYS-004; UI231/251; SS311/321/341/342; PG223/PT-OPS-MQ-001..004.
  */
 public final class ArtemisReadinessClient {
+  // SS321 §4 literal operational topology; Batch must not depend on Protocol (SS311 §3).
+  private static final List<String> APPROVED_ADDRESSES =
+      List.of(
+          "nk.sync.request",
+          "nk.sync.reply.web",
+          "nk.async.work",
+          "nk.web.log",
+          "nk.dead.letter",
+          "nk.expiry");
+
   public void verifyTopology(ClientSession session) {
     Objects.requireNonNull(session, "session");
     try {
-      for (var expected : BrokerTopology.values()) {
-        var address = SimpleString.of(expected.address());
-        var queue = SimpleString.of(expected.queue());
+      for (var addressName : APPROVED_ADDRESSES) {
+        var address = SimpleString.of(addressName);
+        var queue = SimpleString.of(addressName + ".q");
         var observedAddress = Objects.requireNonNull(session.addressQuery(address));
         if (!observedAddress.isExists()
             || !observedAddress.isSupportsAnycast()
