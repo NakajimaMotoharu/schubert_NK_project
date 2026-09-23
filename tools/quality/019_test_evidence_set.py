@@ -35,6 +35,30 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_web_log_runtime_inventory_and_negative_status(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = screen.WEB_LOG_RUNTIME_CLASS
+        names = (
+            "scr127RealReplyWorkerAndSecuredLogMvcStartAndClose",
+            "scr128InvalidReplyDlqMakesWholeRuntimeNotReady",
+            "scr129PartialStartupClosesReplyConsumer",
+            "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
+            "scr131StartupNullContractsAndSuppressedCleanup",
+        )
+        self.assertEqual(names, screen.WEB_LOG_RUNTIME_METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="5", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name
+                          for i, name in enumerate(names, 127)},
+                         screen.validate_web_log_runtime_suite(suite))
+        for key, value in (("tests", "4"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): screen.validate_web_log_runtime_suite(wrong)
+        for replacement in (names[1], "scr127RealReplyWorkerAndSecuredLogMvcStartAndClose(Path)", "unlisted"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
+            with self.assertRaises(ValueError): screen.validate_web_log_runtime_suite(wrong)
+
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
         names = (
@@ -770,7 +794,7 @@ class EvidenceSetTest(unittest.TestCase):
                      "controller/LogController", "config/LogMvcConfiguration",
                      "controller/LoginController", "bootstrap/WebHttpServer",
                      "bootstrap/WebDependencyReadiness", "bootstrap/WebStartupException",
-                     "bootstrap/WebApplication"):
+                     "bootstrap/WebApplication", "bootstrap/WebLogApplicationRuntime"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
@@ -780,8 +804,9 @@ class EvidenceSetTest(unittest.TestCase):
         ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[10], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[11], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(14, len(screen.validate_coverage(report)))
-        for cls_index in range(14):
+        ET.SubElement(report[14], "counter", type="BRANCH", missed="0", covered="1")
+        self.assertEqual(15, len(screen.validate_coverage(report)))
+        for cls_index in range(15):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):

@@ -37,6 +37,13 @@ WEB_APPLICATION_METHODS = ("scr117ActualIntegratedLoginAndDirectDenial",
                            "scr125NullSessionFactoryStopsBeforeBorrowingResources",
                            "scr126InvalidSessionDependenciesStopBeforeHttpBind")
 WEB_APPLICATION_IDS = (117, 118, 119, 122, 124, 125, 126)
+WEB_LOG_RUNTIME_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest"
+WEB_LOG_RUNTIME_METHODS = (
+    "scr127RealReplyWorkerAndSecuredLogMvcStartAndClose",
+    "scr128InvalidReplyDlqMakesWholeRuntimeNotReady",
+    "scr129PartialStartupClosesReplyConsumer",
+    "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
+    "scr131StartupNullContractsAndSuppressedCleanup")
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
 MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
 MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
@@ -89,7 +96,8 @@ SUBJECTS = ("dev/codex/schubert/nk/web/controller/ScenarioController",
             "dev/codex/schubert/nk/web/bootstrap/WebHttpServer",
             "dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness",
             "dev/codex/schubert/nk/web/bootstrap/WebStartupException",
-            "dev/codex/schubert/nk/web/bootstrap/WebApplication")
+            "dev/codex/schubert/nk/web/bootstrap/WebApplication",
+            "dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime")
 TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
           "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
           "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
@@ -155,7 +163,9 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java",
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadinessTest.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebApplication.java",
-    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebApplicationTest.java")
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebApplicationTest.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntimeTest.java")
 
 
 def validate_suite(suite, detail=False):
@@ -219,6 +229,10 @@ def validate_web_application_suite(suite):
     return validate_named_suite(suite, WEB_APPLICATION_CLASS, WEB_APPLICATION_METHODS, 117, WEB_APPLICATION_IDS)
 
 
+def validate_web_log_runtime_suite(suite):
+    return validate_named_suite(suite, WEB_LOG_RUNTIME_CLASS, WEB_LOG_RUNTIME_METHODS, 127)
+
+
 def validate_named_suite(suite, classname, methods, first, test_ids=None):
     identifiers = tuple(range(first, first + len(methods))) if test_ids is None else tuple(test_ids)
     if len(identifiers) != len(methods) or len(set(identifiers)) != len(methods):
@@ -264,7 +278,7 @@ def validate_coverage(report):
             not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
             or any(value["missed"] for value in counters.values())
             or any(counters[kind]["covered"] <= 0 for kind in ("LINE", "METHOD", "CLASS"))
-            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5], SUBJECTS[7], SUBJECTS[10], SUBJECTS[11])):
+            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5], SUBJECTS[7], SUBJECTS[10], SUBJECTS[11], SUBJECTS[14])):
         raise ValueError("missing or incomplete hierarchy screen coverage")
     return result
 
@@ -303,6 +317,7 @@ def main():
     methods.update(validate_web_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_HTTP_CLASS + ".xml")).getroot()))
     methods.update(validate_web_dependency_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_DEPENDENCY_CLASS + ".xml")).getroot()))
     methods.update(validate_web_application_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_APPLICATION_CLASS + ".xml")).getroot()))
+    methods.update(validate_web_log_runtime_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_LOG_RUNTIME_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     log_script_trace = json.loads((target / "pt-log-script/PT-SCR092-node.json").read_text())
@@ -338,7 +353,8 @@ def main():
                  "029_NK-WEB-002_Web依存接続単体テスト仕様書.md", "030_NK-WEB-002_Web依存接続実行結果.md",
                  "031_NK-WEB-002_Web起動統合単体テスト仕様書.md", "032_NK-WEB-002_Web起動統合実行結果.md",
                  "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md",
-                 "035_NK-WEB-002_共有session依存単体テスト仕様書.md", "036_NK-WEB-002_共有session依存実行結果.md"):
+                 "035_NK-WEB-002_共有session依存単体テスト仕様書.md", "036_NK-WEB-002_共有session依存実行結果.md",
+                 "037_NK-WEB-002_Log経路親起動単体テスト仕様書.md", "038_NK-WEB-002_Log経路親起動実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
