@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.config;
 
 import dev.codex.schubert.nk.web.controller.ErrorController;
+import dev.codex.schubert.nk.web.controller.LoginController;
 import dev.codex.schubert.nk.web.controller.MenuController;
 import dev.codex.schubert.nk.web.error.ProblemViewFactory;
 import java.util.Objects;
@@ -41,6 +42,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
   }
 
   @Bean
+  public LoginController loginController() {
+    return new LoginController();
+  }
+
+  @Bean
   public SpringResourceTemplateResolver templateResolver(ApplicationContext context) {
     Objects.requireNonNull(context, "context");
     var resolver = new SpringResourceTemplateResolver();
@@ -74,6 +80,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     resolver.setViewNames(
         new String[] {
           "menu",
+          "login",
           "animation",
           "animation-list",
           "music",

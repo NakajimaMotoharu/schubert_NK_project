@@ -458,6 +458,23 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): screen.validate_suite(wrong)
 
+    def test_login_inventory_and_negative_status(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = "dev.codex.schubert.nk.web.controller.LoginControllerTest"
+        names = ("scr105ApprovedBrandAndPostCsrf", "scr106InputsAndNoLeakedCredentials",
+                 "scr107OnlyMatchingCurrentMessagesAppear", "scr108ClosedViewAndControllerBoundary")
+        suite = ET.Element("testsuite", name=cls, tests="4", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in enumerate(names, 105)}
+        self.assertEqual(expected, screen.validate_login_suite(suite))
+        for position in range(4):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): screen.validate_login_suite(wrong)
+        for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError): screen.validate_login_suite(wrong)
+
     def test_screen_trace_and_coverage(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         expected = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
@@ -480,7 +497,8 @@ class EvidenceSetTest(unittest.TestCase):
         for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration",
                      "controller/AnimationController", "config/AnimationMvcConfiguration",
                      "controller/MusicController", "config/MusicMvcConfiguration",
-                     "controller/LogController", "config/LogMvcConfiguration"):
+                     "controller/LogController", "config/LogMvcConfiguration",
+                     "controller/LoginController"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
@@ -488,8 +506,8 @@ class EvidenceSetTest(unittest.TestCase):
         ET.SubElement(report[3], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[5], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(9, len(screen.validate_coverage(report)))
-        for cls_index in range(9):
+        self.assertEqual(10, len(screen.validate_coverage(report)))
+        for cls_index in range(10):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):
@@ -665,9 +683,9 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 367}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 368}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 343, 359, 366, 368):
+        for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -1330,10 +1348,13 @@ class EvidenceSetTest(unittest.TestCase):
         cls = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
         names = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
                  "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
-                 "stateChangesAndInterrupts", "concurrentGapCompetition")
-        suite = ET.Element("testsuite", name=cls, tests="8", failures="0", errors="0", skipped="0")
+                 "stateChangesAndInterrupts", "concurrentGapCompetition",
+                 "callbackIdentitySurvivesReacquisitionSqlFailure")
+        suite = ET.Element("testsuite", name=cls, tests="9", failures="0", errors="0", skipped="0")
         for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
-        return suite, {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names, 30)}
+        expected = {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(names[:8], 30)}
+        expected["PT-BAT-282"] = cls + "#" + names[8]
+        return suite, expected
 
     def test_handoff_inventory_and_nonpassing_cases(self):
         suite, expected = self.handoff_fixture()
@@ -1346,7 +1367,7 @@ class EvidenceSetTest(unittest.TestCase):
         for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure", "unknown"):
             wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
             with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
-        for key, value in (("tests", "7"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+        for key, value in (("tests", "8"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
             wrong = copy.deepcopy(suite); wrong.set(key, value)
             with self.assertRaises(ValueError): batch.validate_handoff_suite(wrong)
         for key, value in (("name", "unknown"), ("name", suite[1].get("name")), ("classname", "unknown")):
@@ -1844,7 +1865,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(bundle_expected,{k:v for k,v in accepted.items() if k in bundle_expected})
         self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
-        self.assertEqual(281, len(accepted))
+        self.assertEqual(282, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
         self.assertEqual(86, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)

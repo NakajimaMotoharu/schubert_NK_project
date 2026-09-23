@@ -12,6 +12,7 @@ PG-D-150/SSC-049、RD OPS-009、UI251、SS311/341 §7.3。InspectorLockHandoff.e
 | PT-BAT-035 | invalidResultMatrix | 5固定SELECTごとに欠落/多重/NULL/真偽逆転を注入。結果Booleanだけ/row1必須。初期/解放確認不成立は子0回。cleanup SQLなし |
 | PT-BAT-036 | stateChangesAndInterrupts | 開始割込でSQL0/flag維持。callback後autoCommit/readOnly破壊・途中割込は値なし・接続破棄、未知Runtimeを正常にしない |
 | PT-BAT-037 | concurrentGapCompetition | 同期callbackをlatchで保持し別thread/connectionが引渡しgapで取得。親再取得は失敗、他者lockは維持。有限waitで終了し偽成功なし |
+| PT-BAT-282 | callbackIdentitySurvivesReacquisitionSqlFailure | 未知Runtime/Error callback失敗の直後、親lock再取得の4回目prepareStatementだけをSQLState 08006で故障させる。同じ未知例外instanceを主例外に維持し、固定二次Failureをsuppressedに付ける。既知IOExceptionの対照は固定Failureを維持。借用connectionの所有権を侵さない |
 
 SSC-063/BUG195/YKT154追加反例（2026-09-23、修正前）: PT-BAT-032/034では、公開JDBC proxyが最初の3 queryを正当応答とし、4回目の`prepareStatement`（再取得）のみSQLState 08006を投げる。callbackが固定markerの未知`IllegalStateException`または`AssertionError`を投げた場合、同一instanceを返し、再取得の固定secondaryをsuppressed 1件だけに含める。secondaryにraw SQL message/cause/suppressedを含めない。`IOException`対照では従来の固定Failure（cause/suppressedなし）とする。callback各1回、再取得試行各1回、取得済statement/rowはclose済、借用Connectionへのcommit/rollback/closeは0回、戻り値なし。期待identity/診断はSS341 §7.3/SSC063の規則から固定し、Production methodをexpected算出に使わない。既存の単独JDBC故障matrixと実PG lock後条件を維持する。
 

@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 367
+BATCH_TEST_COUNT = 368
 COMPLETION_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest"
 COMPLETION_METHODS = ("verifiedCommitAndReplay", "invalidFilesAndHandleBinding", "allReadAndDatabaseFailures", "sharedDeadlineAndInterrupt", "completionClockAndCommitUncertainty", "nullOwnershipAndFactory", "unknownFailuresAndResourceOwnership", "concurrentAndIndependentTrace")
 COMPLETION_TRACES = {"PT-BAT-281-completion.txt": b"manifestSha256=bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nfiles=4\nDB=1/1/0/26\nCONFIG=2/2/0/67\nend=2026-09-12T15:00:04.987654Z\nowner=SUCCESS\nnonowner=REJECTED\n"}
@@ -189,7 +189,8 @@ LOG_CLASS = "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest"
 HANDOFF_CLASS = "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest"
 HANDOFF_METHODS = ("actualTransactionHandoff", "preconditionsAndReentrantLock", "callbackFailuresAndNull",
                    "reacquisitionConflict", "jdbcFailureMatrix", "invalidResultMatrix",
-                   "stateChangesAndInterrupts", "concurrentGapCompetition")
+                   "stateChangesAndInterrupts", "concurrentGapCompetition",
+                   "callbackIdentitySurvivesReacquisitionSqlFailure")
 DURABLE_CLASS = "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest"
 LIFECYCLE_CLASS = "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest"
 LIFECYCLE_METHODS = ("newRunPublication", "resumeActive", "resumeOrphanAnchor", "resumePendingBegin",
@@ -298,7 +299,9 @@ def validate_log_suite(suite):
 
 
 def validate_handoff_suite(suite):
-    return validate_group(suite, HANDOFF_CLASS, HANDOFF_METHODS, 30)
+    methods = validate_group(suite, HANDOFF_CLASS, HANDOFF_METHODS, 30)
+    methods["PT-BAT-282"] = methods.pop("PT-BAT-038")
+    return methods
 
 
 def validate_record_suite(suite):

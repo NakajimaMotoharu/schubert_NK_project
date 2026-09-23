@@ -1,0 +1,3 @@
+# NK-WEB-002 Login画面 PT実行結果
+
+2026-09-23 JST。PG219、PT-SCR-105～108、QA-045/UIC-005/SSC-074。JDK25.0.4、Maven3.9.12、Linux、`dev-foundation`の未commit差分で選択試験 `LoginControllerTest` 4件はexit0、failed/error/skipped0。実Spring MVC/Thymeleafと独立DOM期待値を照合した。実行commandは`JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -q -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-web -Dtest=LoginControllerTest test`。初回は依存Protocolのlocal artifactが旧くcompile不可、`-pl src/schubert-nk-web -am -DskipTests install`で依存を再生成した後の選択試験結果であり、初回失敗を合格に含めない。全reactor、Java4coverage、静的解析、正式run/manifest/hash、実NK CHR-A01/L01は未認定。秘密値・raw tokenは保存しない。

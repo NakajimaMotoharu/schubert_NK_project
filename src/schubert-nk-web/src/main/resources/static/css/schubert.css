@@ -8,6 +8,17 @@
   font-size: 16px;
 }
 body { margin: 0; }
+/* PG219/SCR001: Current centered Login card, with QA-045 approved NK brand only. */
+.login-page { min-height: 100vh; display: grid; place-items: center; }
+.login-shell { width: min(420px, calc(100% - 32px)); }
+.login-card { padding: 28px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.login-description { color: #5f6368; line-height: 1.5; }
+.login-form { display: grid; gap: 10px; }
+.login-form input { width: 100%; box-sizing: border-box; min-height: 40px; border: 1px solid #c9ced6; border-radius: 6px; padding: 0 10px; font: inherit; }
+.login-form button { min-height: 40px; border: 1px solid #1f6feb; border-radius: 6px; background: #1f6feb; color: #fff; font-weight: 700; }
+.login-message { padding: 10px 12px; border-radius: 6px; }
+.login-message.error { color: #8a1c1c; background: #fdecec; }
+.login-message.success { color: #176b37; background: #eaf7ee; }
 .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
 .topbar { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
 .topbar-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
