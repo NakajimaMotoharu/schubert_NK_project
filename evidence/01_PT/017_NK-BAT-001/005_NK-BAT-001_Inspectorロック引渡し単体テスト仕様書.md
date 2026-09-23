@@ -13,6 +13,8 @@ PG-D-150/SSC-049、RD OPS-009、UI251、SS311/341 §7.3。InspectorLockHandoff.e
 | PT-BAT-036 | stateChangesAndInterrupts | 開始割込でSQL0/flag維持。callback後autoCommit/readOnly破壊・途中割込は値なし・接続破棄、未知Runtimeを正常にしない |
 | PT-BAT-037 | concurrentGapCompetition | 同期callbackをlatchで保持し別thread/connectionが引渡しgapで取得。親再取得は失敗、他者lockは維持。有限waitで終了し偽成功なし |
 
+SSC-063/BUG195/YKT154追加反例（2026-09-23、修正前）: PT-BAT-032/034では、公開JDBC proxyが最初の3 queryを正当応答とし、4回目の`prepareStatement`（再取得）のみSQLState 08006を投げる。callbackが固定markerの未知`IllegalStateException`または`AssertionError`を投げた場合、同一instanceを返し、再取得の固定secondaryをsuppressed 1件だけに含める。secondaryにraw SQL message/cause/suppressedを含めない。`IOException`対照では従来の固定Failure（cause/suppressedなし）とする。callback各1回、再取得試行各1回、取得済statement/rowはclose済、借用Connectionへのcommit/rollback/closeは0回、戻り値なし。期待identity/診断はSS341 §7.3/SSC063の規則から固定し、Production methodをexpected算出に使わない。既存の単独JDBC故障matrixと実PG lock後条件を維持する。
+
 Expectedは固定SQLの後条件（外部connectionのtrue/false、1回unlock、transaction commitで子lock解放）とliteral call inventoryから作る。Production query/methodからexpectedを生成しない。queryTimeoutは5秒設定を実adapter境界でassertし、ネットワーク断の厳密最大時間は後続Linuxの接続/socket timeoutと併せて確認する。単独所有connection契約、全null境界/negative、4coverage100%/静的解析、実行command/OS/tool/branch/source/日時/exit/Test ID/hashを006・evidenceへ保存する。Failed/flaky/skipped/not-runは合格にしない。
 
 BUG146/YKT114（先行702b64ac）: Statement/ResultSetを直接TWRで所有してからnonnull aliasを確立する。034/035のnull resourceは既存のAPI境界契約試験であり、coverage用の無意味な生成分岐試験ではない。全close/SQL/null行・二重close故障と型付き固定診断を維持し、静的抑止/除外なしで再試験する。探索1失敗と探索2成功、他13境界の根拠はlogs/BUG-146-YKT-114.mdを参照。

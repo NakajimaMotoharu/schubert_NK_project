@@ -1,5 +1,7 @@
 # Resource例外契約判断（PGPT-PMO-20260923-01）
 
+2026-09-23継続自走追補: 本文の「後続」指示のうちHandoff未知callback＋再取得SQL反例を017/005のPT-BAT-032/034へ移植し、`InspectorLockHandoff`を限定修正した。修正前の選択試験は9件中1件FAIL（期待`IllegalStateException`、実際固定Failure）。修正後の同9件はexit0/failed0。未知Runtime/Errorは同一identityと固定secondary 1、既知IOException対照は固定Failure、再取得4回目prepare故障・callback 1回・借用connection無操作を検査した。対象外Web session/API/JMS/IOと全体coverage・正式証跡は未認定で、BUG195/YKT154/SSC063をcloseしない。初回試行15pp上限やPMO停止条件は456/460の新現行方針により解除済み。
+
 2026-09-23、W02a。判断対象はBUG-195/206、YKT-154/162、SSC-063。これは残契約の**責務別判断**であり、全対象の実装修正・横展開再試験・台帳完了ではない。根拠はSS314 §7.2.3～4、SS341 §7.3、SS312/324、既存017/048および下記親実測。RD/UI変更なし。補助agentはAstra/highのread-onlyレビュー、親はSol/medium指定でprobeを実行した。実モデル設定は機械確認できない。
 
 ここで確定するのは各責務に適用する**設計契約と検証順**である。「非該当」はBatch型の未知provider例外identityを外部へそのまま出す規則が非該当という意味であり、close故障や固定Infrastructure失敗の追加PTが不要という意味ではない。未実測のcode違反候補は障害確定と区別する。

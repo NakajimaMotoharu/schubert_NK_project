@@ -163,6 +163,70 @@ final class InspectorLockHandoffTest {
   }
 
   @Test
+  void callbackIdentitySurvivesReacquisitionSqlFailure() throws Exception {
+    for (String kind : List.of("runtime", "error", "io")) {
+      var probe = new HandoffJdbcProbe();
+      probe.failAt.put("connection.prepareStatement", 4);
+      var calls = new AtomicInteger();
+      try (var parent = owned()) {
+        var wrapped = probe.wrap(parent);
+        if (kind.equals("runtime")) {
+          var marker = new IllegalStateException("public callback marker");
+          assertSame(
+              marker,
+              assertThrows(
+                  IllegalStateException.class,
+                  () ->
+                      InspectorLockHandoff.execute(
+                          wrapped,
+                          () -> {
+                            calls.incrementAndGet();
+                            throw marker;
+                          })));
+          fixedSecondary(marker);
+        } else if (kind.equals("error")) {
+          var marker = new AssertionError("public callback marker");
+          assertSame(
+              marker,
+              assertThrows(
+                  AssertionError.class,
+                  () ->
+                      InspectorLockHandoff.execute(
+                          wrapped,
+                          () -> {
+                            calls.incrementAndGet();
+                            throw marker;
+                          })));
+          fixedSecondary(marker);
+        } else {
+          failed(
+              () ->
+                  InspectorLockHandoff.execute(
+                      wrapped,
+                      () -> {
+                        calls.incrementAndGet();
+                        throw new IOException("private callback probe");
+                      }));
+        }
+        assertEquals(1, calls.get());
+        assertEquals(1, probe.failures);
+        assertEquals(4, probe.seen.get("connection.prepareStatement"));
+        assertEquals(3, probe.queries);
+        resourcesClosed(probe);
+      }
+    }
+  }
+
+  private static void fixedSecondary(Throwable primary) {
+    assertEquals(1, primary.getSuppressed().length);
+    var secondary =
+        assertInstanceOf(InspectorLockHandoff.Failure.class, primary.getSuppressed()[0]);
+    assertEquals("maintenance lock handoff failed", secondary.getMessage());
+    assertNull(secondary.getCause());
+    assertEquals(0, secondary.getSuppressed().length);
+  }
+
+  @Test
   void jdbcFailureMatrix() throws Exception {
     var inventory =
         Map.of(

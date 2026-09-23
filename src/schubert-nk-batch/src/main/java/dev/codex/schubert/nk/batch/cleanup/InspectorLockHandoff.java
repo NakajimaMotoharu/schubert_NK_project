@@ -39,14 +39,24 @@ public final class InspectorLockHandoff {
       require(scalar(parent, "select pg_catalog.pg_advisory_unlock(71419602) as value"));
       require(!scalar(parent, HELD)); // Reentrant residual ownership must never start the child.
       T result;
+      Throwable unknownCallback = null;
       try {
         result = Objects.requireNonNull(operation.execute(), "operation result");
       } catch (IOException failure) {
         throw new Failure();
+      } catch (RuntimeException | Error failure) {
+        unknownCallback = failure;
+        throw failure;
       } finally {
-        ready(parent);
-        require(scalar(parent, "select pg_catalog.pg_try_advisory_lock(71419602) as value"));
-        require(scalar(parent, HELD));
+        try {
+          ready(parent);
+          require(scalar(parent, "select pg_catalog.pg_try_advisory_lock(71419602) as value"));
+          require(scalar(parent, HELD));
+        } catch (SQLException | Failure failure) {
+          // A fixed secondary must not replace an unknown callback or expose provider details.
+          if (unknownCallback == null) throw new Failure();
+          unknownCallback.addSuppressed(new Failure());
+        }
       }
       require(!Thread.currentThread().isInterrupted());
       return result;
