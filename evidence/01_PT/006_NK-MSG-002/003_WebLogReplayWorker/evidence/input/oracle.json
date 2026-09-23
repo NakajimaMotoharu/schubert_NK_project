@@ -1,0 +1,17 @@
+{
+  "testId": "PT-IDEM-012-W01",
+  "subcases": [
+    "PT-IDEM-012-W01-A",
+    "PT-IDEM-012-W01-B",
+    "PT-IDEM-012-W01-C",
+    "PT-IDEM-012-W01-D",
+    "PT-IDEM-012-W01-E",
+    "PT-IDEM-012-W01-F"
+  ],
+  "workerCount": 1,
+  "batchLimit": "1..100",
+  "leaseSeconds": 10,
+  "firstRetryMilliseconds": 1000,
+  "expected": "PENDING to ERROR on first send failure; due replay to SENT; one JMS delivery; bounded stop and no later cycle",
+  "source": "SS324 section 9, SS332 Web outbox SQL postconditions and prior independent PT-IDEM-012 matrix"
+}

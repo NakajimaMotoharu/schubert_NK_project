@@ -1,0 +1,11 @@
+{
+  "testId": "PT-IDEM-012-W01-A",
+  "fixture": "isolated PostgreSQL 18/Flyway and Artemis File Journal",
+  "expectedSqlStatus": [
+    "PENDING",
+    "ERROR",
+    "SENT"
+  ],
+  "expectedJmsDeliveries": 1,
+  "actualEvidence": "JUnit XML asserts persisted SENT, exactly two send attempts and one broker delivery; no row or wire exported"
+}
