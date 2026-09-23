@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-24 PG231選択段階: `NK-WEB-002`の`WebLogApplicationRuntime.start/port/ready/terminalFailureObserved/close/closeAfterFailure`→PT-SCR127～131（016/037～038予定）、RD MQ003～008/AUT002/MON003/SYS001、UI225/226/231/232/235、SS311/313/314/321/324/342/352、PG-D-231。隔離DB/Artemis/Tomcatでreply1＋worker＋HTTPの親起動/停止・不正DLQ/terminal・部分起動・close故障/nullを選択5/5確認。追加class instruction376/376・line71/71・method9/9・class1/1・branch22/22。正式全reactor・実NK CHR-L01は未認定。
+2026-09-24 PG231正式追記: `NK-WEB-002`の`WebLogApplicationRuntime.start/port/ready/terminalFailureObserved/close/closeAfterFailure`→PT-SCR127～131（016/037～038証跡）を正式`PT-WEB-20260924-22`/source`74bd4fcf`で限定認定。RD MQ003～008/AUT002/MON003/SYS001、UI225/226/231/232/235、SS311/313/314/321/324/342/352、PG-D-231。全1797PT/46scope/hash・93負canary・Java6 module全instruction/4coverage/静的0。隔離DB/Artemis/Tomcatでreply1＋worker＋HTTPの親起動/停止・不正DLQ/terminal・部分起動・close故障/nullを確認。追加class instruction376/376・line71/71・method9/9・class1/1・branch22/22。実NK CHR-L01は未認定。
 
 2026-09-24 PG230正式追記: `NK-WEB-002`の`WebApplication.startWithSessionDependencies/startWithValidatedDependencies`→PT-SCR124～126（016/035～036証跡）を正式`PT-WEB-20260924-20`/source`883b33f1`で限定認定。RD AUT002・SYS001/006、UI225/226/232、SS311/313/314/321/342/352、PG-D-230。全1792PT/46scope/hash・92負canary・Java6 module全instruction/4coverage/静的0。隔離DB/Artemis/TomcatでLog MVCへのsecurity同一session repository供給とLogin HTTP、null/誤型のbind前拒否を確認。実NK CHR-L01は未認定。
 
