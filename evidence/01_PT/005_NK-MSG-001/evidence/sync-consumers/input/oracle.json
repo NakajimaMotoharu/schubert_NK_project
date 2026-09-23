@@ -1,0 +1,18 @@
+{
+  "testId": "PT-JMS-013",
+  "subcases": [
+    "PT-JMS-013-A",
+    "PT-JMS-013-B",
+    "PT-JMS-013-C",
+    "PT-JMS-013-D",
+    "PT-JMS-013-E",
+    "PT-JMS-013-F"
+  ],
+  "consumerCount": 4,
+  "sessionMode": "SESSION_TRANSACTED",
+  "requestQueue": "nk.sync.request::nk.sync.request.q",
+  "replyQueue": "nk.sync.reply.web::nk.sync.reply.web.q",
+  "fatalQueue": "nk.dead.letter::nk.dead.letter.q",
+  "expected": "reply/ACK same commit; temporary rollback/redelivery; fatal DLQ commit once; partial startup closes all",
+  "source": "SS321 sections 6-7 and SS322 header byte offsets; not production encoder"
+}
