@@ -73,6 +73,10 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.database.PostgresDeploymentTes
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest", 1,
     ("opsMq001ActualBrokerHasSixDurableAnycastPairs", "opsMq002MissingLiveQueueFailsWithoutRecreation",
      "opsMq003EveryAddressAndQueueMismatchFailsClosed", "opsMq004NullProviderFaultAndBorrowedConcurrentSession")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest", 5,
+    ("opsMq005ReadsActualBrokerWithoutChangingOrClosingBorrowedSession",
+     "opsMq006EveryApprovedValueIsCheckedAndDiskBoundaryIsStrict",
+     "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -99,7 +103,8 @@ NAMESPACE_SUBJECTS = ("dev/codex/schubert/nk/batch/platform/ConfigurationGroupRe
 UNIT_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
     ("InspectorUnitSnapshot", "InspectorUnitProbe", "ProcessResourceScope"))
 MQ_SUBJECTS = tuple("dev/codex/schubert/nk/batch/mq/" + name for name in
-    ("ArtemisReadinessClient", "ArtemisReadinessException"))
+    ("ArtemisReadinessClient", "ArtemisReadinessException",
+     "ArtemisManagementReadinessClient", "ArtemisManagementReadinessException"))
 UNIT_TRACES = {
     "PT-OPS-UNIT-001-state.txt": b"quiescent=true\nreceipt=10\nsameInvocationReceipt=none\n",
     "PT-OPS-UNIT-010-receipt-0.txt": b"receipt=0\ncommands=3\n",
@@ -173,7 +178,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
                    "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest": "PT-OPS-UNIT",
                    "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "PT-OPS-UNIT",
-                   "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "PT-OPS-MQ",
+                   "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -217,7 +223,8 @@ def main():
                 "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "batch",
                 "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "batch",
+                "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -350,6 +357,7 @@ def main():
         manifest["oracle"] += " 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof."
         manifest["related"] += ["PG-D-223"]
         manifest["oracle"] += " 036/PT-OPS-MQ-001..004: actual isolated Artemis Core live queries for six literal Address/Queue pairs, missing Queue denial without recreation, each address/queue attribute mutation and provider faults, borrowed session and32 concurrent reads. This is topology only; journal/disk/ACL/settings/thresholds/Expiry purge and production credentials remain mandatory."
+        manifest["oracle"] += " 038/PT-OPS-MQ-005..007: isolated live Artemis Core management reads for broker name/persistence/NIO/journal sizing/global memory/duplicate cache/disk bound; independent SS321 literal mutation matrix, 89.9999/90% boundary, null/malformed/provider failure, borrowed-session/no secret leakage. Journal recovery error, acceptor, ACL, address settings, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 
         manifest["unverifiedParentGates"] = list(UNVERIFIED_PARENT_GATES)

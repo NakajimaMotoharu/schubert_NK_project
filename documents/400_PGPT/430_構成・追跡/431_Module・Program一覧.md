@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG235選択追記: `NK-OPS-001`の`ArtemisManagementReadinessClient.verifyBroker/read`・`ArtemisManagementReadinessException`→PT-OPS-MQ-005～007（018/038・039、既存018/evidence scopeへ追加予定）。RD MQ001/002/009/010・SYS004、UI231/251、SS321/342、PG-D-235。実隔離Artemis管理API、全11属性の独立変異、Disk<90%境界、null/provider redaction、借用session不変を選択3件PASS。対象2class全instruction/line/method/class/branch100%。正式全reactor前で未認定。journal/acceptor/ACL/settings/Queue閾値/Expiry purge/本番Ops credential/実NK CHR-L01は未完了。
+
 2026-09-24 PG234正式追記: `NK-MSG-001`の`ApiDependencyReadiness` constructor/verify・`ApiLogPathApplicationRuntime.start`→PT-JMS-019 A～E（005/api-log-path-runtime証跡）。RD MQ001/003/006/008・SYS004、UI212/231/252、SS311/312/321/342、PG-D-234。正式`PT-WEB-20260924-25`/source`02cdb79a`で全1810PT/48scope/hash・96負canary、Java6 module全instruction/4coverage・静的0。実PG18/ArtemisのDB優先・2 FQQN借用接続/close、故障・停止・null/秘匿5件＋親3件PASS。追加class instruction84/84・line25/25・method2/2・class1/1・branch4/4。broker management/実NK CHR-L01は未完了。
 
 2026-09-24 PG233正式追記: `NK-MSG-001`の`ApiLogPathApplicationRuntime.start/ready/terminalFailureObserved/close`→PT-JMS-018 A～C（005/api-log-path-runtime証跡）を正式`PT-WEB-20260924-24`/source`51e3cc4c`で限定認定。RD FUN001/008・AUT001/002・MQ003/006/008、UI225/226/231/232/235、SS311/312/314/321/323/324、PG-D-233。全1805PT/48scope/hash・95負canary、Java6 module全instruction/4coverage・静的0。実PG18/Flyway・Artemisの3route/4+1 consumer/JDBC transaction/DLQ/terminal/null/部分起動3件PASS。追加class instruction80/80・line20/20・method6/6・class1/1、branch0/0。全API/実NK CHR-L01未完了。
