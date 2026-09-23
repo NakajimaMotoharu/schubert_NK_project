@@ -2,17 +2,19 @@
 
 2026-09-23、W02a。判断対象はBUG-195/206、YKT-154/162、SSC-063。これは残契約の**責務別判断**であり、全対象の実装修正・横展開再試験・台帳完了ではない。根拠はSS314 §7.2.3～4、SS341 §7.3、SS312/324、既存017/048および下記親実測。RD/UI変更なし。補助agentはAstra/highのread-onlyレビュー、親はSol/medium指定でprobeを実行した。実モデル設定は機械確認できない。
 
+ここで確定するのは各責務に適用する**設計契約と検証順**である。「非該当」はBatch型の未知provider例外identityを外部へそのまま出す規則が非該当という意味であり、close故障や固定Infrastructure失敗の追加PTが不要という意味ではない。未実測のcode違反候補は障害確定と区別する。
+
 ## 不変条件と適用判断
 
 | 責務・対象 | 適用/非該当、次の独立確認 |
 |---|---|
 | `InspectorLockHandoff.execute/scalar` | BUG195/YKT154のunknown非正常化を適用。callback body、JDBC close、finally再取得は別の失敗段階。SQL/IO単独は固定Failure、未知Runtime/Errorは同一性を維持し、再取得は必ず試みる。全close・lock確認前に値を返さず、借用Connectionのcommit/rollback/closeをしない。SS341 §7.3/SSC063へ限定補足が必要。 |
 | Web `JdbcWebSessionStore`＋`EncryptedWebSessionRepository` | BUG195/206、YKT154/162の次優先候補。`read`のprovider getter IAEを不正rowへ誤変換すると、`load`がhash限定DELETE→不在へ進み得る。実不正row＋ResultSet.close SQL/Errorでも同じ危険。SS314 §7.2.4は不正rowの削除commit後のみ不在、resource失敗は固定障害と明記。未実測につき修正済みと扱わない。 |
-| API認証4class/5併合catch：`LoginAttemptRepository`2、`AdminCommandAuthenticator`、`AuthSessionRevocationService`、`LogoutInboxService`各1 | Batchと同じ「provider IAE identityを必ず保持」は非該当候補。認証Infrastructure固定化を維持する。ただしprovider IAE/不正projection/正当0102/close SQLの4区別を既存PTへ追加して初めて非該当確定。BUG167/YKT128の固定変換を削らない。 |
+| API認証4class/5併合catch：`LoginAttemptRepository`2、`AdminCommandAuthenticator`、`AuthSessionRevocationService`、`LogoutInboxService`各1 | Batchと同じ「provider IAE identityを外部へ必ず保持」は契約上非該当、認証Infrastructure固定化が適用。codeがそれを守るかはprovider IAE/不正projection/正当0102/close SQLの4区別を既存PTへ追加して判定する。BUG167/YKT128の固定変換を削らない。 |
 | APIの低位JDBC・借用TX・audit・Outbox、Web `WebLogOutboxRepository/Dispatcher` | SQL、commit/rollback、close、結果確定を分離。上位Infrastructure固定化と低位unknownのidentity要件を混同しない。`Scenario/Media/User/LogQuery` Repository、各AuditWriter、Inbox/Outbox/認証サービスを群ごとに反例確認する。確定拒否や成功へresource失敗を降格しない。 |
 | JMS `OutboxJmsSender/ArtemisRequestSender/WebLogMessageSender` | 送達未確認、重複確認、markSent、rollback、closeを分離。固定送信障害を維持し、同一Throwableのrollback再送とduplicate＋close失敗を追加PT。無条件の共通ResourceScope置換は非該当。 |
 | IO/保守API | `TransferStartupProbe/UsageScanner/HeldProbeFileIo/TransferRootInspection/ScenarioReadyFileInspector/HeldTransferFileIo/ScenarioFileWriter/AssetManifestLoader/InspectorCredentialLoader/InspectorApplication/LargeResultReader`は所有scope候補。`InboxCleanup/NonAuthenticationInboxInspector/QuestionMutationInboxInspector/InspectorDatabaseConnections/InspectorProcess`はPROTECTEDとSTORAGE_FAILURE/非zero終了の別契約。MISSING＋closeを正常な不在・再生成にしない。既存File系の認定scope以外は未確認。 |
-| private memory/JDK | `ResponseSnapshotCodec/OperationFingerprint/RequestLogDetails/SessionAttributeCodec`等には外部provider body/close再送の一般契約を機械適用しない。017/048 §3の既存非該当根拠は限定範囲だけ維持。 |
+| private memory/JDK | 外部provider body/close再送の一般契約は非該当。`ResponseSnapshotCodec/OperationFingerprint/RequestLogDetails/SessionAttributeCodec`等の固有失敗契約は残る。017/048 §3の既存非該当根拠はその限定範囲だけ維持。 |
 
 ## 親による独立代表反例
 

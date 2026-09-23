@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-23追記: `NK-WEB-002` にPG-D-217 `log-search-validation.js`/`LogSearchScriptTest`/PT-SCR-092とPG-D-218 `LogController`/`LogMvcConfiguration`/`LogControllerTest`/PT-SCR-093～103を追加。関連FUN008/AUT002/MON003、UI221/222/225/232/235、SS311/313/314/323/351/352、SSC073、CHR-L01。正式 `PT-WEB-20260923-02`/source `7b09c090` の16/evidence manifestで限定範囲を認定。103 screen JUnit（従来91＋12）、全体1731PT、W01実NK CHR-L01と最終bootstrapsは未完了。過去行は当時の履歴とし、最新状態は456/460を正とする。
+
 正式認定（2026-09-20 02:39）: PT-WEB-20260920-04/source e63b7d04、全1471PT/6Java全4coverage100%/Production5静的解析未解決0/38scope/48負canary成功。PG185全6768位置並列試験を認定、PG186 private0700子directory8PTを認定しSSC068限定完了。70部分成果681PT、今回再開比+56PT/+5部分成果。全工程約4割（35～50%）、残50～65%の固定加重見積は維持する。利用枠残72%で継続。Question受付の保持期限後再送と元job対応はwork/PGPT_FND_R008_question_writer_review.mdへ保留根拠を保存。以下の旧未認定記述は履歴。
 
 PG186/SSC068（Storage選択成功・全reactor前）: DirectoryCalls.createPrivateDirectory/LinuxDirectoryCalls.createPrivateDirectory/OwnedTransferDirectory.createPrivateChildと所有移送lambdaを018031/032・CDIR001～008へ追跡。RD BAK/BKO/OPS009/UI251/SS333§7.6/341§6.1/343§5.3。新8PT/OPS1部分成果は正式認定待ち、private作成能力と上位archive/backup成功を区別する。
