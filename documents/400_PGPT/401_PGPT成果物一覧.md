@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint17。正式`PT-WEB-20260924-17`/source`be6379cc`で全1778PT/44scope/hash、90負canary、Java6 moduleのinstruction/line/method/class/branch100%・Production静的0を限定認定。PG227/PT-SCR120～123でWeb MVCへのcaller-owned port登録を完了。Web/API親起動・全dispatcher・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
+
 2026-09-24最新確定は456/460 checkpoint14。正式`PT-WEB-20260924-14`/source`eb474d20`で全1774PT/44scope/hash、89負canary、Java6 moduleのline/method/class/branch100%・Production静的0を限定認定。PG226/Web Log常駐再送のPT-IDEM-012-W01 A～Fを追加。Web/API親起動・全dispatcher・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
 
 2026-09-24最新確定は456/460 checkpoint12。正式`PT-WEB-20260924-13`/source`d6080633`で全1768PT/43scope/hash、Java6 moduleのline/method/class/branch100%・Production静的0を限定認定。PG225/Web返信専用consumerのPT-JMS-014 A～Eを追加。実NK CHR-L01とWeb/API親起動・全dispatcher/Log background retryは未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
