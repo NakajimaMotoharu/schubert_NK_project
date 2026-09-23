@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-01",
-  "targetCommit": "00f76be9fc7bfdca7acb7525b98e4393ec1bd873",
+  "runId": "PT-WEB-20260924-02",
+  "targetCommit": "8e39ed4169d91e94b145cc0604ca970682614bff",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T00:15:09+09:00",
-  "completedAt": "2026-09-24T00:27:54+09:00",
+  "startedAt": "2026-09-24T00:41:53+09:00",
+  "completedAt": "2026-09-24T00:54:39+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "009963056055f898abd1bd666f9c734f27dbbbe80ad54829bd35e6d10e874f18",
+  "rawLogSha256": "8691fb89c1e77c096db55848a8cf505390dc64c17d055ec95f94093c0fb7aab1",
   "logTemplateOracle": "019/SCR084..091: actual Log resolver/Current DOM literals,ADMIN,7filters/6types/3levels/date step,all row optionals/details,0/100/101/201/clamped pagination,escaping/invalid field display/CSRF,scoped Current CSS/resource,64 renders.Not browser byte validator/HTTP/NK gate.",
   "logBrowserOracle": "021/SCR092-A..H: eight independent byte/NFC/control/DOM event cases, Node line/function/branch100, exact hash and no skipped/todo. Not live browser or actual NK CHR.",
   "logHttpOracle": "023/SCR093..103: independent UI232/235 bytes and DOM/status, ADMIN/anonymous/USER/0102, all result errors, invalid400/noMQ, malformed/unknown/IO/null, real loopback GET/HEAD/POST and role/session, 64 concurrent contexts. Not live broker or actual NK CHR-L01.",
@@ -197,12 +197,42 @@
     "PT-SCR-105": "dev.codex.schubert.nk.web.controller.LoginControllerTest#scr105ApprovedBrandAndPostCsrf",
     "PT-SCR-106": "dev.codex.schubert.nk.web.controller.LoginControllerTest#scr106InputsAndNoLeakedCredentials",
     "PT-SCR-107": "dev.codex.schubert.nk.web.controller.LoginControllerTest#scr107OnlyMatchingCurrentMessagesAppear",
-    "PT-SCR-108": "dev.codex.schubert.nk.web.controller.LoginControllerTest#scr108ClosedViewAndControllerBoundary"
+    "PT-SCR-108": "dev.codex.schubert.nk.web.controller.LoginControllerTest#scr108ClosedViewAndControllerBoundary",
+    "PT-SCR-109": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest#scr109ActualLoopbackLoginAndClosedRoutes",
+    "PT-SCR-110": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest#scr110InvalidStartupFailsBeforeBinding",
+    "PT-SCR-111": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest#scr111CloseIsIdempotentAndPortBecomesUnavailable",
+    "PT-SCR-112": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest#scr112StartupWithoutStartedContextAndCleanupFailureAreVisible"
   },
   "failed": 0,
   "errors": 0,
   "skipped": 0,
   "classCoverage": {
+    "dev/codex/schubert/nk/web/bootstrap/WebHttpServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 260
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 62
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
     "dev/codex/schubert/nk/web/controller/ScenarioController": {
       "INSTRUCTION": {
         "missed": 0,
@@ -465,6 +495,7 @@
     }
   },
   "loginOracle": "025/SCR105..108: actual Spring MVC GET and Thymeleaf, independent approved title/brand, POST form/CSRF and credential-free inputs, Current error/locked/logout text, closed resolver and no controller POST. QA045/UIC005/SSC074; not actual NK CHR-A01/L01.",
+  "webHttpOracle": "027/SCR109..112: actual loopback Tomcat11/MVC/Thymeleaf GET/HEAD/404, mandatory caller security Filter, invalid path/port/config, failed bind/start/cleanup, idempotent close. No credential/DB/JMS production bootstrap or actual NK CHR.",
   "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053/066..071/084..091. SCR025 and SCR092 each execute8 Node subcases; both Production JS files have line/function/branch100, no JS class declaration and no exclusion; subcases are not additional JUnit tests.",
   "staticAnalysis": {
     "tool": "SpotBugs 4.10.4.0",
@@ -472,7 +503,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "89188b5b0c6b387802ddd54f47f3cc8222b779efa4e7f1699f86bc4896c87af3",
+  "fullReactorManifestSha256": "593ef86aa8fc5685f50e70d411b5cf48bdece972c623df37a484babeb96f0d2e",
   "related": [
     "PG-D-194",
     "PG-D-195",
@@ -504,7 +535,7 @@
   "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
   "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
   "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
-  "limitations": "Login GET only; no detail controller/file port/readiness binding/final bootstrap/live broker/all screens/production request logging/actual NK CHR-A01/L01/IT/ST certificate.",
+  "limitations": "Web HTTP composition and Login GET only; no credential/DB/JMS final bootstrap, detail/file port/readiness binding/live broker/all screens/production request logging/actual NK CHR-A01/L01/IT/ST certificate.",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js",
@@ -705,12 +736,20 @@
     {
       "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
       "sha256": "55540d3e04ab4800b03361dc5913f9f0777aa6a21667e9c597d0aad58542b12e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "sha256": "f1c90be5c6936164ae49f275080f8c4c63f83442fa54ba24ff3394de86281ddd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServerTest.java",
+      "sha256": "69970484168dbe040d192c9651757c2c6f7b6c2844a624cb014107a92b93dd79"
     }
   ],
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "0b8deb3f72970b46dda09007a0cae363d16d884603e15f2d69637371b1464784"
+      "sha256": "87644ceaa9953aea46cf9abe3c008ac36c1bfaf78ab36cf5831509c9b9b95ada"
     },
     {
       "path": "input/PT-SCR-012.txt",
@@ -849,6 +888,14 @@
       "sha256": "97d5174e6ef99e3c4eb4018bf90710d6e544ef880bc8882e997e67dc48fe41d7"
     },
     {
+      "path": "logs/027_NK-WEB-002_WebHTTP起動単体テスト仕様書.md",
+      "sha256": "00a7c4a85ec8dc4dc4b628be1d898be049f72504801c96ada09ff46e062fc2bf"
+    },
+    {
+      "path": "logs/028_NK-WEB-002_WebHTTP起動実行結果.md",
+      "sha256": "06159735c61a708ef8a4fa637da4758ee4c783cedad3b0426a8d51b329cbf740"
+    },
+    {
       "path": "output/PT-SCR-012.txt",
       "sha256": "4495bf375d2ff5ba59a126a10636ce39521cd3f5ebc125ce8405b50622dc95fa"
     },
@@ -890,7 +937,7 @@
     },
     {
       "path": "results.xml",
-      "sha256": "0e6c291368b4c68a5cefea3929734324c8265fa7582e1c0d05aea0a134ceab98"
+      "sha256": "f2a20497387d28ee5f63b665e302e5848f65f6e11d45b8606121bfe267b59638"
     }
   ]
 }
