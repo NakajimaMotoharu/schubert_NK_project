@@ -176,9 +176,10 @@ final class SyncRequestConsumersTest {
             ignored -> {});
     assertTrue(consumers.ready());
     IllegalStateException failure = assertThrows(IllegalStateException.class, consumers::close);
-    assertEquals("synthetic-close-1", failure.getMessage());
-    assertEquals(1, failure.getSuppressed().length);
-    assertEquals("synthetic-close-2", failure.getSuppressed()[0].getMessage());
+    assertEquals("API sync consumer close failed", failure.getMessage());
+    assertEquals("synthetic-close-1", failure.getCause().getMessage());
+    assertEquals(1, failure.getCause().getSuppressed().length);
+    assertEquals("synthetic-close-2", failure.getCause().getSuppressed()[0].getMessage());
     assertEquals(4, closes.get());
     assertFalse(consumers.ready());
     consumers.close();
@@ -189,9 +190,9 @@ final class SyncRequestConsumersTest {
   void failedStartupPreservesClosingFailureAsSuppressed() {
     AtomicInteger created = new AtomicInteger();
     AtomicInteger closes = new AtomicInteger();
-    NullPointerException failure =
+    IllegalStateException failure =
         assertThrows(
-            NullPointerException.class,
+            IllegalStateException.class,
             () ->
                 SyncRequestConsumers.start(
                     () ->
@@ -199,8 +200,13 @@ final class SyncRequestConsumersTest {
                     new SyncRequestListener(ignored -> new byte[0], CLOCK),
                     ignored -> {}));
     assertEquals(1, closes.get());
-    assertEquals(1, failure.getSuppressed().length);
-    assertEquals("synthetic-close-1", failure.getSuppressed()[0].getMessage());
+    assertEquals("API sync consumer startup failed", failure.getMessage());
+    assertTrue(failure.getCause() instanceof NullPointerException);
+    assertEquals(1, failure.getCause().getSuppressed().length);
+    assertEquals(
+        "API sync consumer close failed", failure.getCause().getSuppressed()[0].getMessage());
+    assertEquals(
+        "synthetic-close-1", failure.getCause().getSuppressed()[0].getCause().getMessage());
   }
 
   @Test

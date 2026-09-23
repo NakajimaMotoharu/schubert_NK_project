@@ -71,7 +71,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
       return runtime;
     } catch (RuntimeException failure) {
       runtime.closeAfterFailure(failure);
-      throw failure;
+      throw new IllegalStateException("API sync consumer startup failed", failure);
     }
   }
 
@@ -103,7 +103,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
       }
     }
     if (failure != null) {
-      throw failure;
+      throw new IllegalStateException("API sync consumer close failed", failure);
     }
   }
 
