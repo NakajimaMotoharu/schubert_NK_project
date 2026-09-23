@@ -56,12 +56,7 @@ public final class WebHttpServer implements AutoCloseable {
     Objects.requireNonNull(security, "security");
     Objects.requireNonNull(tomcatFactory, "tomcatFactory");
     Objects.requireNonNull(featureConfigurations, "featureConfigurations");
-    if (!Files.isDirectory(runtimeDirectory, LinkOption.NOFOLLOW_LINKS)
-        || port < 0
-        || port > 65535
-        || Arrays.stream(featureConfigurations).anyMatch(Objects::isNull)) {
-      throw new IllegalArgumentException("invalid Web HTTP startup configuration");
-    }
+    validateConfiguration(runtimeDirectory, port, featureConfigurations);
     var tomcat = Objects.requireNonNull(tomcatFactory.get(), "tomcatFactory result");
     try {
       tomcat.setBaseDir(runtimeDirectory.toString());
@@ -105,6 +100,17 @@ public final class WebHttpServer implements AutoCloseable {
         failure.addSuppressed(cleanup);
       }
       throw failure;
+    }
+  }
+
+  static void validateConfiguration(Path runtimeDirectory, int port, Class<?>[] configurations) {
+    Objects.requireNonNull(runtimeDirectory, "runtimeDirectory");
+    Objects.requireNonNull(configurations, "featureConfigurations");
+    if (!Files.isDirectory(runtimeDirectory, LinkOption.NOFOLLOW_LINKS)
+        || port < 0
+        || port > 65535
+        || Arrays.stream(configurations).anyMatch(Objects::isNull)) {
+      throw new IllegalArgumentException("invalid Web HTTP startup configuration");
     }
   }
 

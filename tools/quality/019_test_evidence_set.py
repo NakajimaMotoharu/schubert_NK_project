@@ -555,7 +555,8 @@ class EvidenceSetTest(unittest.TestCase):
                      "controller/MusicController", "config/MusicMvcConfiguration",
                      "controller/LogController", "config/LogMvcConfiguration",
                      "controller/LoginController", "bootstrap/WebHttpServer",
-                     "bootstrap/WebDependencyReadiness", "bootstrap/WebStartupException"):
+                     "bootstrap/WebDependencyReadiness", "bootstrap/WebStartupException",
+                     "bootstrap/WebApplication"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
@@ -565,8 +566,8 @@ class EvidenceSetTest(unittest.TestCase):
         ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[10], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[11], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(13, len(screen.validate_coverage(report)))
-        for cls_index in range(13):
+        self.assertEqual(14, len(screen.validate_coverage(report)))
+        for cls_index in range(14):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):
