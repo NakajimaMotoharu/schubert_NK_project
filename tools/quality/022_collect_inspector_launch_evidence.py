@@ -70,6 +70,9 @@ PRIVATE_SUBJECTS = tuple("dev/codex/schubert/nk/storage/" + name for name in
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.database.PostgresDeploymentTest", 1,
     ("literalConfiguration", "nativeConfiguration", "literalHba", "nativeHba", "roleTimeouts",
      "invalidConfiguration", "invalidHba", "isolationAndEvidence")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest", 1,
+    ("opsMq001ActualBrokerHasSixDurableAnycastPairs", "opsMq002MissingLiveQueueFailsWithoutRecreation",
+     "opsMq003EveryAddressAndQueueMismatchFailsClosed", "opsMq004NullProviderFaultAndBorrowedConcurrentSession")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -95,6 +98,8 @@ NAMESPACE_SUBJECTS = ("dev/codex/schubert/nk/batch/platform/ConfigurationGroupRe
                       "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles")
 UNIT_SUBJECTS = tuple("dev/codex/schubert/nk/batch/platform/" + name for name in
     ("InspectorUnitSnapshot", "InspectorUnitProbe", "ProcessResourceScope"))
+MQ_SUBJECTS = tuple("dev/codex/schubert/nk/batch/mq/" + name for name in
+    ("ArtemisReadinessClient", "ArtemisReadinessException"))
 UNIT_TRACES = {
     "PT-OPS-UNIT-001-state.txt": b"quiescent=true\nreceipt=10\nsameInvocationReceipt=none\n",
     "PT-OPS-UNIT-010-receipt-0.txt": b"receipt=0\ncommands=3\n",
@@ -167,7 +172,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "PT-OPS-GID",
                    "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "PT-OPS-NS",
                    "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest": "PT-OPS-UNIT",
-                   "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "PT-OPS-UNIT"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "PT-OPS-UNIT",
+                   "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -210,7 +216,8 @@ def main():
                 "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "batch",
                 "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "batch",
-                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "batch",
+                "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -224,13 +231,13 @@ def main():
     if args.deployment:
         for module, subject in (("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
-                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS))):
+                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS))):
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {SCOPE_SUBJECT, FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+        if not {SCOPE_SUBJECT, FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = repo / "evidence/01_PT" / directory
@@ -244,7 +251,7 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
-        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS)]
+        sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
         sources += [repo / "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
@@ -262,6 +269,8 @@ def main():
                     repo / "src/schubert-nk-storage/pom.xml",
                     repo / "src/schubert-nk-batch/src/main/java" / (LOCK_SUBJECT + ".java"),
                     repo / "src/schubert-nk-batch/pom.xml",
+                    repo / "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+                    repo / "src/deployment/artemis/etc/broker.xml",
                     repo / "src/deployment/tmpfiles/schubert-nk-maintenance.conf"]
         sources += [repo / "src/deployment" / p for p in (
             "operations/inbox-inspector.sh.template", "config/inbox-inspector.env.template", "systemd/schubert-nk-inbox-inspector.service",
@@ -286,7 +295,9 @@ def main():
         for name in ("031_NK-OPS-001_private子directory単体テスト仕様書.md", "032_NK-OPS-001_private子directory実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         for name in ("033_NK-OPS-001_PostgreSQL配備設定単体テスト仕様書.md", "034_NK-OPS-001_PostgreSQL配備設定実行結果.md",
-                     "035_NK-OPS-001_shell診断混線再試験.md"):
+                     "035_NK-OPS-001_shell診断混線再試験.md",
+                     "036_NK-OPS-001_Artemis実効Queue単体テスト仕様書.md",
+                     "037_NK-OPS-001_Artemis実効Queue実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -338,6 +349,8 @@ def main():
         manifest["oracle"] += " 027/PT-OPS-RSCOPE-001..008: explicit single close before return, null ownership contracts, nullable callback, known I/O reasons, unknown identity, same-throwable/body-cleanup precedence, nested release order and64 concurrent scopes. UNIT015 and native inode/flock callers independently regress compound failures. Broader YKT154 candidates remain open in017/048."
         manifest["related"] += ["PG-D-167", "SSC-060", "BUG-187", "BUG-188", "BUG-189", "BUG-190", "YKT-147", "YKT-148", "YKT-149", "YKT-150"]
         manifest["oracle"] += " 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof."
+        manifest["related"] += ["PG-D-223"]
+        manifest["oracle"] += " 036/PT-OPS-MQ-001..004: actual isolated Artemis Core live queries for six literal Address/Queue pairs, missing Queue denial without recreation, each address/queue attribute mutation and provider faults, borrowed session and32 concurrent reads. This is topology only; journal/disk/ACL/settings/thresholds/Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 
         manifest["unverifiedParentGates"] = list(UNVERIFIED_PARENT_GATES)

@@ -19,6 +19,7 @@
     <jspecify.version>1.0.0</jspecify.version>
     <jacoco.version>0.8.15</jacoco.version>
     <spotbugs.plugin.version>4.10.4.0</spotbugs.plugin.version>
+    <artemis.version>2.56.0</artemis.version>
   </properties>
 
   <dependencies>
@@ -36,6 +37,16 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>dev.codex.schubert</groupId>
+      <artifactId>schubert-nk-protocol</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.artemis</groupId>
+      <artifactId>artemis-jakarta-client</artifactId>
+      <version>${artemis.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
       <version>${jspecify.version}</version>
@@ -49,6 +60,8 @@
     <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</artifactId><version>13.4.0</version><scope>test</scope></dependency>
     <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-database-postgresql</artifactId><version>13.4.0</version><scope>test</scope></dependency>
     <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><version>42.7.13</version><scope>test</scope></dependency>
+    <dependency><groupId>org.apache.artemis</groupId><artifactId>artemis-server</artifactId><version>${artemis.version}</version><scope>test</scope></dependency>
+    <dependency><groupId>org.apache.artemis</groupId><artifactId>artemis-jakarta-server</artifactId><version>${artemis.version}</version><scope>test</scope></dependency>
   </dependencies>
 
   <build>
@@ -75,6 +88,7 @@
           <argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</argLine>
           <systemPropertyVariables>
             <nk.pt.repository>${maven.multiModuleProjectDirectory}</nk.pt.repository>
+            <broker.template>${maven.multiModuleProjectDirectory}/src/deployment/artemis/etc/broker.xml</broker.template>
             <user.language>ja</user.language>
             <user.country>JP</user.country>
             <user.timezone>Asia/Tokyo</user.timezone>
