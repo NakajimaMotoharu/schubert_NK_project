@@ -11,6 +11,15 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+RESOURCE_METHOD = ("dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest"
+                   "#providerIllegalArgumentAndCloseSqlRemainRedactedInfrastructure")
+
+
+def validate_resource_method(methods):
+    if methods.count(RESOURCE_METHOD) != 1:
+        raise ValueError("missing or duplicate PT-AUT-003-D06")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -80,6 +89,7 @@ def main():
                 raise SystemExit("static analysis not clean")
             static = {"tool": "SpotBugs 4.10.4.0", "violations": 0, "errors": 0}
         modules[module] = {"tests": count, "coverage": counters, "spotbugs": static}
+    validate_resource_method(auth_methods)
     manifest = {
         "runId": args.run_id, "programId": "NK-AUT-001", "targetCommit": commit,
         "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
@@ -99,6 +109,7 @@ def main():
         "programStatus": "IN_PROGRESS", "notRunCountedAsPass": 0,
         "relatedBug": ["BUG-020", "BUG-021", "BUG-022", "BUG-023", "BUG-024", "BUG-026", "BUG-027", "BUG-028", "BUG-029"], "relatedYkt": ["YKT-007", "YKT-008", "YKT-017", "YKT-018", "YKT-019", "YKT-020", "YKT-021", "YKT-023", "YKT-024", "YKT-025", "YKT-026"], "relatedSsc": ["SSC-009", "SSC-010", "SSC-011", "SSC-012", "SSC-013", "SSC-014", "SSC-015", "SSC-016", "SSC-023"],
         "additionalTests": {
+            "PT-AUT-003-D06": "LoginAttemptRepository two catch sites: real PostgreSQL transaction with public JDBC provider-IAE plus close-SQL composite, fixed redacted Infrastructure exception, rollback and literal zero-row/count postconditions. Other API authentication classes remain YKT-162 open",
             "PT-AUT-WIRE-001..003": "Login success/failure/lock/9000 and Logout 0000/0200 fixed DATA mapper passed with independent byte vectors; dispatcher/Inbox/HTTP connection remains",
             "PT-AUT-REPLAY-001..005": "Immutable encrypted Login snapshot, AUTH_SESSION cross-check, fresh response header, original failure codes, tamper/NULL/JDBC faults/100 concurrent replays/key rotation and anonymous HMAC/Inbox/application transaction passed; JMS/HTTP connection remains",
             "PT-AUT-INBOX-001..006": "Real PostgreSQL anonymous Login Inbox with independent wire/LP-HMAC/PBKDF2/SQL expectations: atomic commit/rollback, 7-day completion retention, original failure/lock replay, identity conflict, 100 deliveries -> 1 session/1 audit, key/JDBC failures, owned-secret cleanup and distinct sender-NFC/receiver-NFD boundaries passed",

@@ -25,7 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PT-AUT-003-D01..05. Production DDL/limited role; literal SQL postconditions are the oracle. */
+/** PT-AUT-003-D01..06. Production DDL/limited role; literal SQL postconditions are the oracle. */
 final class LoginAttemptRepositoryTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
@@ -276,6 +276,37 @@ final class LoginAttemptRepositoryTest {
   }
 
   @Test
+  void providerIllegalArgumentAndCloseSqlRemainRedactedInfrastructure() throws Exception {
+    // PT-AUT-003-D06/YKT-162: provider IAE is not a model-validation result. Close failure is
+    // secondary; the two production catch sites must keep their fixed Infrastructure contract.
+    try (Connection connection = database.transaction()) {
+      assertInfrastructure(
+          () ->
+              repository.lockForAttempt(
+                  intercept(connection, "providerIaeReadAndRowClose", new ArrayList<>()),
+                  "login-user",
+                  client,
+                  NOW));
+      connection.rollback();
+      assertFalse(connection.isClosed());
+    }
+    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    try (Connection connection = database.transaction()) {
+      var locked = repository.lockForAttempt(connection, "login-user", client, NOW);
+      assertInfrastructure(
+          () ->
+              repository.recordFailure(
+                  intercept(connection, "providerIaeWriteAndStatementClose", new ArrayList<>()),
+                  locked,
+                  NOW));
+      connection.rollback();
+      assertFalse(connection.isClosed());
+    }
+    assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
+    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+  }
+
+  @Test
   void modelAndMethodNullBoundsDoNotInventPersistedState() throws Exception {
     var actor = new AuthenticatedActor(7, "user", Role.USER);
     var user = LoginAttemptState.empty(LoginAttemptKind.USER);
@@ -404,6 +435,12 @@ final class LoginAttemptRepositoryTest {
                   PreparedStatement.class.getClassLoader(),
                   new Class<?>[] {PreparedStatement.class},
                   (sp, sm, sa) -> {
+                    if (fault.equals("providerIaeWriteAndStatementClose")
+                        && sm.getName().equals("setInt"))
+                      throw new IllegalArgumentException("synthetic-sensitive-provider-identity");
+                    if (fault.equals("providerIaeWriteAndStatementClose")
+                        && sm.getName().equals("close"))
+                      throw new SQLException("synthetic-sensitive-close");
                     if (sm.getName().equals(fault))
                       throw new SQLException("synthetic-sensitive-provider-text");
                     if (sm.getName().equals("executeUpdate")
@@ -419,6 +456,13 @@ final class LoginAttemptRepositoryTest {
                         ResultSet.class.getClassLoader(),
                         new Class<?>[] {ResultSet.class},
                         (rp, rm, ra) -> {
+                          if (fault.equals("providerIaeReadAndRowClose")
+                              && rm.getName().equals("getObject"))
+                            throw new IllegalArgumentException(
+                                "synthetic-sensitive-provider-identity");
+                          if (fault.equals("providerIaeReadAndRowClose")
+                              && rm.getName().equals("close"))
+                            throw new SQLException("synthetic-sensitive-close");
                           String scope = userQuery ? "user:" : "ip:";
                           if (fault.startsWith(scope + "null:")
                               && ra != null
