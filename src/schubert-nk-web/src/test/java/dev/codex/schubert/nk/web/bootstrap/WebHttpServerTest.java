@@ -213,6 +213,15 @@ class WebHttpServerTest {
     assertEquals(0, starts.get());
   }
 
+  @Test
+  void scr123LegacyFactoryOverloadReturnsStartedServer() throws Exception {
+    Filter security = (request, response, chain) -> chain.doFilter(request, response);
+    try (var server = WebHttpServer.startWithFactory(root, 0, security, Tomcat::new);
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      assertEquals(200, send(client, server.port(), "GET", "/login").statusCode());
+    }
+  }
+
   private static HttpResponse<String> send(HttpClient client, int port, String method, String path)
       throws Exception {
     var request =
