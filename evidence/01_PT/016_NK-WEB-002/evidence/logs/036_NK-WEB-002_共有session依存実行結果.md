@@ -1,0 +1,3 @@
+# NK-WEB-002 共有session依存実行結果
+
+PG230/PT-SCR124～126は正式`PT-WEB-20260924-20`/source`883b33f1`で限定認定。2026-09-24 06:30:32～06:43:33 JST、全1792PT（CHR41/Protocol80/Storage82/API710/Web507/Batch372）、failed/error/skipped0、Java6 module instruction/line/method/class/branch missed0、Production SpotBugs0、92負canary、46scope/hash・保存manifest再照合PASS。root manifest SHA-256 `42a3559413c36aa258249090ab130b68c66aace929bcfc60614925e458e9b83e`。隔離PostgreSQL/Artemis・実TomcatでLog MVC bean解決、Login HTTP200/承認済みタイトル、factoryへ渡したrepositoryから発行cookieのsession取得、null/誤型dependencyのbind前拒否を確認。`WebApplication` instruction132/132・line24/24・method6/6・class1/1、branchなし。Test ID/環境・実行command・終了code・input/expected/actual・coverage・file hashは`evidence/manifest.json`を正とする。実NK CHR-L01とWeb親は未完了。

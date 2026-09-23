@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-24 PG230選択段階: `NK-WEB-002`の`WebApplication.startWithSessionDependencies/startWithValidatedDependencies`→PT-SCR124～126（016/035～036予定）、RD AUT002・SYS001/006、UI225/226/232、SS311/313/314/321/342/352、PG-D-230。隔離DB/Artemis/TomcatでLog MVCへのsecurity同一session repository供給とLogin HTTP、null/誤型のbind前拒否を選択確認。正式全reactor/証跡・実NK CHR-L01は未認定。
+2026-09-24 PG230正式追記: `NK-WEB-002`の`WebApplication.startWithSessionDependencies/startWithValidatedDependencies`→PT-SCR124～126（016/035～036証跡）を正式`PT-WEB-20260924-20`/source`883b33f1`で限定認定。RD AUT002・SYS001/006、UI225/226/232、SS311/313/314/321/342/352、PG-D-230。全1792PT/46scope/hash・92負canary・Java6 module全instruction/4coverage/静的0。隔離DB/Artemis/TomcatでLog MVCへのsecurity同一session repository供給とLogin HTTP、null/誤型のbind前拒否を確認。実NK CHR-L01は未認定。
 
 2026-09-24 PG229正式追記: `NK-MSG-001`の`ApiMessagingRuntime.start/ready/terminalFailureObserved/close`→PT-JMS-016 A～F（005/api-messaging-parent証跡）を正式`PT-WEB-20260924-19`/source`f018d086`で限定認定。RD MQ003/006/008/010、UI212/231/251、SS312/321、PG-D-229。全1789PT/46scope/hash・92負canary・Java6 module全instruction/4coverage/静的0。実Artemis同期4+Web Log1の共同起動・不正DLQ2/terminal全体1・部分起動/close失敗を確認。追加class instruction141/141・line45/45・method6/6・class1/1・branch12/12。full API processと実NK CHR-L01は未認定。
 
