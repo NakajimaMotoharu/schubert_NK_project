@@ -30,7 +30,8 @@ public final class WebAuthorizationFilterFactory {
                 readResource("/styles.css"),
                 readResource("/favicon.ico"),
                 readResource("/css/schubert.css"),
-                readResource("/js/search-speaker-submit.js"))
+                readResource("/js/search-speaker-submit.js"),
+                readResource("/js/log-search-validation.js"))
             .permitAll()
             .requestMatchers(pathPattern("/admin/**"), pathPattern("/logs"))
             .hasRole("ADMIN")

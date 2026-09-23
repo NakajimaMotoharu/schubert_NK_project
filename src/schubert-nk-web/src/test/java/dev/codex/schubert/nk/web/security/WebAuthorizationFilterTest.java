@@ -30,7 +30,8 @@ class WebAuthorizationFilterTest {
           "/styles.css",
           "/favicon.ico",
           "/css/schubert.css",
-          "/js/search-speaker-submit.js");
+          "/js/search-speaker-submit.js",
+          "/js/log-search-validation.js");
   private static final List<String> ADMIN =
       List.of(
           "/admin",

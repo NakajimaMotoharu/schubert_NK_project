@@ -119,6 +119,7 @@ class SessionSavedRequestTest {
             "/error",
             "/css/schubert.css",
             "/js/search-speaker-submit.js",
+            "/js/log-search-validation.js",
             "/actuator/health",
             "/logout",
             "/audio/1",

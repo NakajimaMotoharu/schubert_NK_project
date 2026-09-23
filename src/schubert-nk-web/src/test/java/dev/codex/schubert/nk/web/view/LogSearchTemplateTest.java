@@ -270,7 +270,7 @@ class LogSearchTemplateTest {
       assertEquals(text, d.selectFirst("[name=q]").attr("value"));
       assertEquals(text, d.selectFirst(".log-row > p").text());
       assertEquals(text, d.selectFirst("pre").text());
-      assertTrue(d.select("script,img,iframe").isEmpty());
+      assertTrue(d.select("script:not([src]),img,iframe").isEmpty());
       var pages = render(c, page(Map.of("q", "A&B +%"), 1, 101));
       assertEquals(
           "/logs?q=A%26B%20%2B%25&log_type=&action=&path=&level=&from=&to=&page=2",
@@ -282,7 +282,7 @@ class LogSearchTemplateTest {
       for (String name : List.of("log_type", "level"))
         assertEquals(
             text, bad.selectFirst("select[name=" + name + "] option[selected]").attr("value"));
-      assertTrue(bad.select("script,img,iframe").isEmpty());
+      assertTrue(bad.select("script:not([src]),img,iframe").isEmpty());
     }
   }
 
@@ -346,7 +346,9 @@ class LogSearchTemplateTest {
       assertTrue(d.select(".log-filters input[type=hidden]").isEmpty());
       assertEquals("ADMIN", d.selectFirst(".login-role").text());
       assertFalse(d.html().contains("a".repeat(64)));
-      assertTrue(d.select("input[type=password],audio,video,script").isEmpty());
+      assertTrue(d.select("input[type=password],audio,video,script:not([src])").isEmpty());
+      assertEquals(
+          List.of("/js/log-search-validation.js"), d.select("script[src]").eachAttr("src"));
     }
   }
 
@@ -381,7 +383,19 @@ class LogSearchTemplateTest {
         assertTrue(css.contains(literal), literal);
       String template = Files.readString(Path.of("src/main/resources/templates/logs.html"));
       assertFalse(template.contains("th:utext"));
-      assertFalse(template.contains("<script"));
+      assertFalse(template.contains("<script>") || template.contains("onerror="));
+      assertTrue(template.contains("th:src=\"@{/js/log-search-validation.js}\""));
+      var script =
+          MockMvcBuilders.webAppContextSetup(c)
+              .build()
+              .perform(get("/js/log-search-validation.js"))
+              .andReturn()
+              .getResponse();
+      assertEquals(200, script.getStatus());
+      assertTrue(script.getContentType().startsWith("text/javascript"));
+      assertEquals(
+          Files.readString(Path.of("src/main/resources/static/js/log-search-validation.js")),
+          script.getContentAsString(java.nio.charset.StandardCharsets.UTF_8));
       assertTrue(template.contains("aria-describedby=\"log-errors\""));
     }
   }
