@@ -46,7 +46,8 @@ SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
         "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup",)
 SCOPES += ("005_NK-MSG-001/evidence/sync-consumers",
            "005_NK-MSG-001/evidence/web-reply-consumer",
-           "006_NK-MSG-002/003_WebLogReplayWorker/evidence")
+           "006_NK-MSG-002/003_WebLogReplayWorker/evidence",
+           "005_NK-MSG-001/evidence/api-web-log-consumer")
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -120,6 +121,7 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/030_collect_sync_consumers.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/031_collect_web_reply_consumers.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/032_collect_web_log_worker.py"), run])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/033_collect_api_web_log_consumers.py"), run])
     for command in commands:
         execute(command, cwd=repo, check=True)
 

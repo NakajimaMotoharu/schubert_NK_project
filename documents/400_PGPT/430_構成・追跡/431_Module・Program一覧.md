@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG228追記（正式認定待ち）: `NK-MSG-001`の`WebLogConsumers.start/ready/terminalFailureObserved/close`→PT-JMS-015 A～E（005/api-web-log-consumer証跡）を追加。RD MQ006/008/010・MON003/005、UI212/231/251、SS312 §11/321 §6～10。実Artemis単一transacted consumerのACK/rollback/DLQ・terminal・停止を選択5件で確認。API親組込と実NK CHR-L01は未完了。
+
 2026-09-24 PG227正式追記: `NK-WEB-002`の`WebHttpServer.start/checkedDependencies`・`WebApplication.start`→PT-SCR120～123（016/033～034証跡）を正式`PT-WEB-20260924-17`/source`be6379cc`で限定認定。RD SYS001/006・MQ001/004、UI225/226、SS311/313/314/321/342に紐付ける。全1778PT/44scope/hash・90負canary・Java6 module全instruction/4coverage/静的0。caller-owned MVC portが実Tomcat feature Controllerへ渡ること、起動前拒否、旧factory成功戻りを確認。run15/16は不認定履歴、実NK CHR-L01・全Web親/API接続は未完了。
 
 2026-09-23追記: `NK-WEB-002` にPG-D-217 `log-search-validation.js`/`LogSearchScriptTest`/PT-SCR-092とPG-D-218 `LogController`/`LogMvcConfiguration`/`LogControllerTest`/PT-SCR-093～103を追加。関連FUN008/AUT002/MON003、UI221/222/225/232/235、SS311/313/314/323/351/352、SSC073、CHR-L01。正式 `PT-WEB-20260923-02`/source `7b09c090` の16/evidence manifestで限定範囲を認定。103 screen JUnit（従来91＋12）、全体1731PT、W01実NK CHR-L01と最終bootstrapsは未完了。過去行は当時の履歴とし、最新状態は456/460を正とする。
