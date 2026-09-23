@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG234選択追記: `NK-MSG-001`の`ApiDependencyReadiness` constructor/verify・`ApiLogPathApplicationRuntime.start`→PT-JMS-019 A～E（005/api-log-path-runtimeの既存scopeを更新予定）。RD MQ001/003/006/008・SYS004、UI212/231/252、SS311/312/321/342、PG-D-234。実PG18/ArtemisのDB優先・2 FQQN借用接続/close、故障・停止・null/秘匿を選択5件＋親3件で確認。追加class instruction84/84・line25/25・method2/2・class1/1・branch4/4。正式全reactor/48scope前で未認定、broker management/実NK CHR-L01は未完了。
+
 2026-09-24 PG233正式追記: `NK-MSG-001`の`ApiLogPathApplicationRuntime.start/ready/terminalFailureObserved/close`→PT-JMS-018 A～C（005/api-log-path-runtime証跡）を正式`PT-WEB-20260924-24`/source`51e3cc4c`で限定認定。RD FUN001/008・AUT001/002・MQ003/006/008、UI225/226/231/232/235、SS311/312/314/321/323/324、PG-D-233。全1805PT/48scope/hash・95負canary、Java6 module全instruction/4coverage・静的0。実PG18/Flyway・Artemisの3route/4+1 consumer/JDBC transaction/DLQ/terminal/null/部分起動3件PASS。追加class instruction80/80・line20/20・method6/6・class1/1、branch0/0。全API/実NK CHR-L01未完了。
 
 2026-09-24 PG232正式追記: `NK-MSG-001`の`LogPathSyncRequestProcessor` constructor/process→PT-JMS-017 A～E（005/log-path-router証跡）を正式`PT-WEB-20260924-23`/source`ff23b5aa`で限定認定。RD FUN001/008・AUT001/002・MQ003/006/008、UI225/226/231/232/235、SS311/312/314/321/323/324、PG-D-232。全1802PT/47scope/hash・94負canary、Java6 module全instruction/4coverage・静的0。LGN/GAM/LGS閉じた3登録、未登録妥当layout retry、null/例外分類/96並行5件PASS。追加class instruction57/57・line12/12・method2/2・class1/1・branch4/4。実NK CHR-L01/全API起動は未完了。

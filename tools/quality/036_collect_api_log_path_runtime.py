@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PT-JMS-018: certify the API Login/Game-context/Log receive-path composition only."""
+"""PT-JMS-018/019: certify the API Log-path composition and borrowed connection gate."""
 import argparse
 import hashlib
 import json
@@ -14,9 +14,20 @@ METHODS = (
     "failedConsumerStartupDoesNotReturnPartialRuntime",
 )
 SUBJECT = "dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime"
+READY_CLASS = "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest"
+READY_METHODS = (
+    "realPostgresAndBothReceiveQueuesCloseAfterProbe",
+    "nullAndInvalidDatabaseFailBeforeBroker",
+    "jdbcInspectionAndCloseFailuresAreRedacted",
+    "brokerNullModeAttachAndCloseFailuresAreRedacted",
+    "stoppedBrokerCannotPassConnectivity",
+)
+READY_SUBJECT = "dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness"
 SOURCE_FILES = (
     "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java",
     "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntimeTest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadinessTest.java",
 )
 
 
@@ -39,6 +50,21 @@ def validate_suite(root):
             for index, name in enumerate(METHODS)}
 
 
+def validate_ready_suite(root):
+    cases = root.findall("testcase")
+    names = [case.get("name") for case in cases]
+    if (root.get("name") != READY_CLASS or root.get("tests") != str(len(READY_METHODS))
+            or any(int(root.get(key, "0")) for key in ("failures", "errors", "skipped"))
+            or len(names) != len(READY_METHODS) or len(set(names)) != len(READY_METHODS)
+            or set(names) != set(READY_METHODS)
+            or any(case.get("classname") != READY_CLASS or
+                   any(child.tag not in ("system-out", "system-err") for child in case)
+                   for case in cases)):
+        raise ValueError("missing, nonpassing, or unlisted API dependency readiness PT")
+    return {"PT-JMS-019-" + chr(ord("A") + index): READY_CLASS + "#" + name
+            for index, name in enumerate(READY_METHODS)}
+
+
 def validate_coverage(report):
     classes = [element for element in report.iter("class") if element.get("name") == SUBJECT]
     if len(classes) != 1:
@@ -52,6 +78,21 @@ def validate_coverage(report):
                    for kind in required)
             or ("BRANCH" in counters and counters["BRANCH"]["missed"] != 0)):
         raise ValueError("API Log-path runtime production coverage below 100%")
+    return counters
+
+
+def validate_ready_coverage(report):
+    classes = [element for element in report.iter("class") if element.get("name") == READY_SUBJECT]
+    if len(classes) != 1:
+        raise ValueError("API dependency readiness production class missing")
+    counters = {counter.get("type"): {"missed": int(counter.get("missed")),
+                                       "covered": int(counter.get("covered"))}
+                for counter in classes[0].findall("counter")}
+    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH")
+    if (not set(required).issubset(counters)
+            or any(counters[kind]["missed"] != 0 or counters[kind]["covered"] <= 0
+                   for kind in required)):
+        raise ValueError("API dependency readiness production coverage below 100%")
     return counters
 
 
@@ -71,33 +112,37 @@ def main():
                    cwd=repo, check=True)
     target = repo / "src/schubert-nk-api/target"
     methods = validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + CLASS + ".xml")).getroot())
-    coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
+    ready_methods = validate_ready_suite(ET.parse(target / "surefire-reports" / ("TEST-" + READY_CLASS + ".xml")).getroot())
+    report = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
+    coverage = {"runtime": validate_coverage(report), "readiness": validate_ready_coverage(report)}
     program = repo / "evidence/01_PT/005_NK-MSG-001"
     evidence = program / "evidence/api-log-path-runtime"
     for folder in ("logs", "input", "output", "coverage"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name in ("001_NK-MSG-001_単体テスト仕様書.md", "002_NK-MSG-001_実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    oracle = {"testId": "PT-JMS-018", "subcases": list(methods),
+    oracle = {"testIds": ["PT-JMS-018", "PT-JMS-019"],
+              "subcases": list(methods) + list(ready_methods),
               "syncConsumers": 4, "webLogConsumers": 1,
               "loginTransaction": "JDBC autoCommit false before handler; commit before JMS reply owner",
               "terminal": "one signal after committed fatal DLQ; both consumer groups closed",
-              "source": "SS312/321/324 five-consumer and transaction/terminal contracts; not production count calculation"}
+              "preflight": "JDBC isValid(2), then borrowed transacted JMS attachment to exact sync/Web-log FQQNs; no consumption",
+              "source": "SS312/321/324 five-consumer, preflight and transaction/terminal contracts; not production count calculation"}
     (evidence / "input/oracle.json").write_text(json.dumps(oracle, indent=2) + "\n")
-    suite = ET.Element("testsuite", name="PT-JMS-018", tests=str(len(methods)),
+    suite = ET.Element("testsuite", name="PT-JMS-018-019", tests=str(len(methods) + len(ready_methods)),
                        failures="0", errors="0", skipped="0")
-    for test_id, method in methods.items():
-        ET.SubElement(suite, "testcase", id=test_id, classname=CLASS,
+    for test_id, method in (methods | ready_methods).items():
+        ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0],
                       name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "output/results.xml", encoding="utf-8", xml_declaration=True)
     (evidence / "coverage/class-counters.json").write_text(json.dumps(coverage, indent=2) + "\n")
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
-        "programId": "NK-MSG-001", "testIds": methods,
-        "scopeResult": "PASS_API_LOG_PATH_COMPOSITION_UNIT_ONLY", "programComplete": False,
+        "programId": "NK-MSG-001", "testIds": methods | ready_methods,
+        "scopeResult": "PASS_API_LOG_PATH_STARTUP_UNIT_ONLY", "programComplete": False,
         "coverage": coverage, "failed": 0, "errors": 0, "skipped": 0,
-        "related": ["PG233", "PT-JMS-018", "RD FUN-001/008 AUT-001/002 MQ-003/006/008",
+        "related": ["PG233/234", "PT-JMS-018/019", "RD FUN-001/008 AUT-001/002 MQ-001/003/006/008 SYS-004",
                     "UI225/226/231/232/235", "SS311/312/314/321/323/324"],
         "limitations": "No full API process, production credentials, broker-management readiness, real NK CHR or IT/ST.",
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
@@ -111,7 +156,8 @@ def main():
         digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
         for path in sorted(evidence.rglob("*")) if path.is_file()
         and path.name != "checksums.sha256"))
-    print(json.dumps({"runId": run, "testId": "PT-JMS-018", "subcases": len(methods),
+    print(json.dumps({"runId": run, "testIds": ["PT-JMS-018", "PT-JMS-019"],
+                      "subcases": len(methods) + len(ready_methods),
                       "scopeResult": manifest["scopeResult"], "programComplete": False}))
 
 

@@ -23,6 +23,7 @@ import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Connection;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
@@ -181,7 +182,26 @@ final class ApiLogPathApplicationRuntimeTest {
   @Test
   void failedConsumerStartupDoesNotReturnPartialRuntime() {
     var opened = new AtomicInteger();
-    DataSource database = new PGSimpleDataSource();
+    var jdbc =
+        (Connection)
+            Proxy.newProxyInstance(
+                Connection.class.getClassLoader(),
+                new Class<?>[] {Connection.class},
+                (ignored, method, arguments) ->
+                    switch (method.getName()) {
+                      case "isValid" -> true;
+                      case "close" -> null;
+                      default -> throw new AssertionError(method.getName());
+                    });
+    DataSource database =
+        (DataSource)
+            Proxy.newProxyInstance(
+                DataSource.class.getClassLoader(),
+                new Class<?>[] {DataSource.class},
+                (ignored, method, arguments) -> {
+                  if (method.getName().equals("getConnection")) return jdbc;
+                  throw new AssertionError(method.getName());
+                });
     assertThrows(
         IllegalStateException.class,
         () ->

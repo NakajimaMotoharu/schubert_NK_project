@@ -45,6 +45,7 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
     Objects.requireNonNull(logSearch, "logSearch");
     Objects.requireNonNull(clock, "clock");
     Objects.requireNonNull(onTerminal, "onTerminal");
+    new ApiDependencyReadiness(database, factory).verify();
     var processor =
         new LogPathSyncRequestProcessor(
             new JdbcSyncRequestProcessor(database, login, clock), gameContext, logSearch);

@@ -35,6 +35,38 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_api_dependency_readiness_inventory_and_branch_coverage(self):
+        runtime = module("api_log_path_runtime_collector", "036_collect_api_log_path_runtime.py")
+        names = (
+            "realPostgresAndBothReceiveQueuesCloseAfterProbe",
+            "nullAndInvalidDatabaseFailBeforeBroker",
+            "jdbcInspectionAndCloseFailuresAreRedacted",
+            "brokerNullModeAttachAndCloseFailuresAreRedacted",
+            "stoppedBrokerCannotPassConnectivity",
+        )
+        self.assertEqual(names, runtime.READY_METHODS)
+        suite = ET.Element("testsuite", name=runtime.READY_CLASS, tests="5",
+                           failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=runtime.READY_CLASS, name=name)
+        self.assertEqual(5, len(runtime.validate_ready_suite(suite)))
+        for key, value in (("tests", "4"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): runtime.validate_ready_suite(wrong)
+        for replacement in (names[1], "unlisted"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
+            with self.assertRaises(ValueError): runtime.validate_ready_suite(wrong)
+        report = ET.Element("report")
+        cls = ET.SubElement(report, "class", name=runtime.READY_SUBJECT)
+        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
+            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        self.assertEqual(5, len(runtime.validate_ready_coverage(report)))
+        for counter in cls.findall("counter"):
+            wrong = copy.deepcopy(report)
+            matching = next(c for c in wrong.iter("counter") if c.get("type") == counter.get("type"))
+            matching.set("missed", "1")
+            with self.assertRaises(ValueError): runtime.validate_ready_coverage(wrong)
+
     def test_api_log_path_runtime_inventory_and_coverage(self):
         runtime = module("api_log_path_runtime_collector", "036_collect_api_log_path_runtime.py")
         names = (
