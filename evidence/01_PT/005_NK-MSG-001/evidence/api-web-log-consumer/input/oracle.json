@@ -1,0 +1,16 @@
+{
+  "testId": "PT-JMS-015",
+  "subcases": [
+    "PT-JMS-015-A",
+    "PT-JMS-015-B",
+    "PT-JMS-015-C",
+    "PT-JMS-015-D",
+    "PT-JMS-015-E"
+  ],
+  "consumerCount": 1,
+  "sessionMode": "SESSION_TRANSACTED",
+  "sourceQueue": "nk.web.log::nk.web.log.q",
+  "fatalQueue": "nk.dead.letter::nk.dead.letter.q",
+  "expected": "valid log ACK once; temporary failure rollback/redelivery; permanent invalid DLQ/terminal once; failed startup closes",
+  "source": "SS321 sections 6-10 and SS323 fixed header offsets; not production encoder"
+}
