@@ -35,6 +35,34 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_log_http_and_browser_inventory(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        for cls, names, first, validate in (
+                (screen.LOG_SCRIPT_CLASS, ("log092BrowserInputScript",), 92, screen.validate_log_script_suite),
+                (screen.LOG_HTTP_CLASS, screen.LOG_HTTP_METHODS, 93, screen.validate_log_http_suite)):
+            suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+            for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
+            self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name for i, name in enumerate(names, first)}, validate(suite))
+            for field, value in (("tests", "0"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+                wrong = copy.deepcopy(suite); wrong.set(field, value)
+                with self.assertRaises(ValueError): validate(wrong)
+            for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+                wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+                with self.assertRaises(ValueError): validate(wrong)
+            wrong = copy.deepcopy(suite); wrong[0].set("name", "unknown")
+            with self.assertRaises(ValueError): validate(wrong)
+        source_hash = "a" * 64
+        trace = {"testId": "PT-SCR-092", "nodeVersion": "v24.19.0", "subcases": 8,
+                 "failed": 0, "skipped": 0, "todo": 0, "syntaxExit": 0, "testExit": 0,
+                 "lineCoverage": 100, "functionCoverage": 100, "branchCoverage": 100,
+                 "productionFiles": 1, "scriptSha256": source_hash,
+                 "browserDom": "deterministic-event-double", "actualNkGate": False}
+        screen.validate_script_trace(trace, source_hash, "PT-SCR-092")
+        for key, value in (("testId", "PT-SCR-025"), ("branchCoverage", 99), ("skipped", 1),
+                           ("actualNkGate", True), ("scriptSha256", "b" * 64), ("failed", False)):
+            wrong = dict(trace); wrong[key] = value
+            with self.assertRaises(ValueError): screen.validate_script_trace(wrong, source_hash, "PT-SCR-092")
+
     def test_log_template_inventory(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = "dev.codex.schubert.nk.web.view.LogSearchTemplateTest"
@@ -451,15 +479,17 @@ class EvidenceSetTest(unittest.TestCase):
         report = ET.Element("report")
         for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration",
                      "controller/AnimationController", "config/AnimationMvcConfiguration",
-                     "controller/MusicController", "config/MusicMvcConfiguration"):
+                     "controller/MusicController", "config/MusicMvcConfiguration",
+                     "controller/LogController", "config/LogMvcConfiguration"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
         ET.SubElement(report[0], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[3], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[5], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(7, len(screen.validate_coverage(report)))
-        for cls_index in range(7):
+        ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
+        self.assertEqual(9, len(screen.validate_coverage(report)))
+        for cls_index in range(9):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):
