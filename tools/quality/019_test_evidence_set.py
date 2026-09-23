@@ -37,9 +37,13 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 class EvidenceSetTest(unittest.TestCase):
     def test_authentication_resource_method_inventory(self):
         auth = module("auth_collector", "003_collect_auth_evidence.py")
-        auth.validate_resource_method([auth.RESOURCE_METHOD])
-        for wrong in ([], [auth.RESOURCE_METHOD, auth.RESOURCE_METHOD], ["Other#method"]):
+        methods = list(auth.RESOURCE_METHODS.values())
+        auth.validate_resource_method(methods)
+        for wrong in ([], ["Other#method"]):
             with self.assertRaises(ValueError): auth.validate_resource_method(wrong)
+        for method in methods:
+            with self.assertRaises(ValueError): auth.validate_resource_method([m for m in methods if m != method])
+            with self.assertRaises(ValueError): auth.validate_resource_method(methods + [method])
 
     def test_web_session_resource_inventory(self):
         web = module("web_collector", "015_collect_web_evidence.py")

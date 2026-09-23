@@ -28,7 +28,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * PT-AUT-LOGOUT-INBOX-001..006; independent UI232/234 280-byte, JCA/LP-HMAC and real SQL oracles.
+ * PT-AUT-LOGOUT-INBOX-001..007; independent UI232/234 280-byte, JCA/LP-HMAC and real SQL oracles.
  */
 final class LogoutInboxServiceTest {
   @TempDir static Path root;
@@ -541,6 +541,20 @@ final class LogoutInboxServiceTest {
   }
 
   @Test
+  void providerIllegalArgumentOwnerAndCloseRollbackAllEffects() throws Exception {
+    // PT-AUT-LOGOUT-INBOX-007/YKT-162: a provider getter fault is not an absent owner.
+    try (var c = database.transaction()) {
+      assertInfrastructure(
+          () ->
+              service(NOW)
+                  .execute(fault(c, "providerIaeOwnerAndRowClose"), request(RAW, REQUEST), NOW));
+      assertFalse(c.isClosed());
+      c.rollback();
+    }
+    effects(0, 0, 0);
+  }
+
+  @Test
   void nullAndWireBoundariesAreRejected() throws Exception {
     var inbox = new JdbcInboxCoordinator(keys);
     var clock = Clock.fixed(NOW, ZoneOffset.UTC);
@@ -670,17 +684,21 @@ final class LogoutInboxServiceTest {
   private static Connection fault(Connection connection, String point) {
     boolean nullValue = point.startsWith("null:");
     boolean close = point.startsWith("close:");
+    boolean providerIae = point.equals("providerIaeOwnerAndRowClose");
     String match =
-        nullValue
-            ? (point.equals("null:owner") ? "select u.id" : "select user_id,context_hash")
-            : close ? point.substring(6) : point;
+        providerIae
+            ? "select u.id"
+            : nullValue
+                ? (point.equals("null:owner") ? "select u.id" : "select user_id,context_hash")
+                : close ? point.substring(6) : point;
     return (Connection)
         Proxy.newProxyInstance(
             Connection.class.getClassLoader(),
             new Class<?>[] {Connection.class},
             (p, m, a) -> {
               if (m.getName().equals("prepareStatement") && ((String) a[0]).contains(match)) {
-                if (!nullValue && !close) throw new SQLException("synthetic-sensitive-SQL");
+                if (!nullValue && !close && !providerIae)
+                  throw new SQLException("synthetic-sensitive-SQL");
                 Object statement = invoke(connection, m, a);
                 return Proxy.newProxyInstance(
                     PreparedStatement.class.getClassLoader(),
@@ -689,7 +707,7 @@ final class LogoutInboxServiceTest {
                       Object result = invoke(statement, sm, sa);
                       if (close && sm.getName().equals("close"))
                         throw new SQLException("synthetic-sensitive-close");
-                      if (nullValue && sm.getName().equals("executeQuery"))
+                      if ((nullValue || providerIae) && sm.getName().equals("executeQuery"))
                         return Proxy.newProxyInstance(
                             ResultSet.class.getClassLoader(),
                             new Class<?>[] {ResultSet.class},
@@ -703,8 +721,17 @@ final class LogoutInboxServiceTest {
                                     default -> "context_hash";
                                   };
                               if (Set.of("getObject", "getString").contains(rm.getName())
-                                  && column.equals(ra[0])) return null;
-                              return invoke(result, rm, ra);
+                                  && column.equals(ra[0])
+                                  && nullValue) return null;
+                              if (providerIae
+                                  && rm.getName().equals("getObject")
+                                  && "id".equals(ra[0]))
+                                throw new IllegalArgumentException(
+                                    "synthetic-sensitive-provider-identity");
+                              Object actual = invoke(result, rm, ra);
+                              if (providerIae && rm.getName().equals("close"))
+                                throw new SQLException("synthetic-sensitive-row-close");
+                              return actual;
                             });
                       return result;
                     });

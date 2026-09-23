@@ -450,6 +450,26 @@ final class AuthSessionRevocationServiceTest {
         () -> new RevokedContext(identity, NOW, ResultCode.AUTHENTICATION_FAILED));
   }
 
+  @Test
+  void providerIllegalArgumentAndRowCloseAreInfrastructure() throws Exception {
+    // PT-AUT-008-R05/YKT-162: provider identity must not become a business 0102 response.
+    try (Connection connection = database.transaction()) {
+      assertInfrastructure(
+          () ->
+              service.logout(
+                  intercept(connection, "providerIaeReadAndRowClose"),
+                  RAW,
+                  client,
+                  MESSAGE,
+                  CORRELATION,
+                  NOW));
+      assertFalse(connection.isClosed());
+      connection.rollback();
+    }
+    assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
+    assertEquals(0, count("select count(*) from schubert.app_logs"));
+  }
+
   private static int revokeAll(Connection connection, long target, SessionRevocationReason reason) {
     return service.revokeAll(connection, ADMIN, target, reason, client, MESSAGE, CORRELATION, NOW);
   }
@@ -551,6 +571,12 @@ final class AuthSessionRevocationServiceTest {
                         new Class<?>[] {ResultSet.class},
                         (rp, rm, ra) -> {
                           if (step == 2
+                              && fault.equals("providerIaeReadAndRowClose")
+                              && rm.getName().equals("getObject")
+                              && "id".equals(ra[0]))
+                            throw new IllegalArgumentException(
+                                "synthetic-sensitive-provider-identity");
+                          if (step == 2
                               && rm.getName().equals("next")
                               && fault.equals("missingSession")) return false;
                           if (step == 2
@@ -561,7 +587,9 @@ final class AuthSessionRevocationServiceTest {
                             if (fault.equals("badOwner") && field.equals("user_id")) return 0L;
                           }
                           Object rr = invoke(sr, rm, ra);
-                          if (rm.getName().equals("close") && fault.equals("rowClose"))
+                          if (rm.getName().equals("close")
+                              && (fault.equals("rowClose")
+                                  || (step == 2 && fault.equals("providerIaeReadAndRowClose"))))
                             throw new SQLException("synthetic-sensitive-row-close");
                           return rr;
                         });
