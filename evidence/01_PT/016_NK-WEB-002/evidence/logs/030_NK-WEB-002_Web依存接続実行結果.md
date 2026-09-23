@@ -1,0 +1,7 @@
+# NK-WEB-002 Web依存接続 PT実行結果
+
+PG221、PT-SCR113～116。2026-09-24 JST、JDK25.0.4/Maven3.9.12/Linux、`dev-foundation`未commit差分で選択4件は最終exit0、failed/error/skipped0。command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -q -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-web -Dtest=WebDependencyReadinessTest test`。隔離PG/Flyway Web roleとSS321 broker設定を使い、provider SQL/IAE/JMSの秘密本文を固定例外でredactする。初回のfixtureではQueue欠落でもJMS consumer生成が成功し得たため、Queue存在をこのPTで証明したとは扱わず、SS321 management実効設定を別必須gateとしてPG-D-221へ記録した。最終fixtureはbroker停止拒否を確認する。失敗した探索runは合格に算入しない。
+
+正式run `PT-WEB-20260924-03`、source `d0fd7efd`、`dev-foundation`、2026-09-24 01:18:48 JST終了、exit0。`sh tools/quality/030_run_pgpt_verify.sh PT-WEB-20260924-03`で全1746件（CHR41/Protocol80/Storage82/API689/Web486/Batch368）、failed/error/skipped0。PT-SCR113～116の4件はWeb486の内数。Java6 moduleのline/method/class/branch missed0、Production SpotBugs0。`python3 -B tools/quality/019_test_evidence_set.py`負canary85件PASS、018の全41scope/hash収集・保存manifest `--validate-only` PASS。root manifestは`evidence/01_PT/008_NK-SCN-001/evidence/manifest.json`、SHA-256 `4762011bfbf90fa84caa8e464b33ee6aec903a2efe65d67ad7494c8c402d32e5`。Test ID→JUnit/coverage/入力期待・実測は本programのsanitized `evidence/results.xml`・manifestへ格納し、raw logはGit非格納。秘密値・raw session/token・master dataは保存しない。
+
+実NK CHR-A01/L01は未実行。接続probeはProduction親起動、Queue実在/実効設定management検査の代用ではない。初回のQueue欠落探索失敗を合格へ算入していない。
