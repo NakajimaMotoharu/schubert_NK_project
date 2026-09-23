@@ -7,6 +7,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 import org.apache.catalina.LifecycleException;
@@ -41,7 +42,19 @@ public final class WebHttpServer implements AutoCloseable {
   public static WebHttpServer start(
       Path runtimeDirectory, int port, Filter security, Class<?>... featureConfigurations)
       throws LifecycleException {
-    return startWithFactory(runtimeDirectory, port, security, Tomcat::new, featureConfigurations);
+    return start(runtimeDirectory, port, security, Map.of(), featureConfigurations);
+  }
+
+  /** Registers caller-owned application ports before any feature controller is instantiated. */
+  public static WebHttpServer start(
+      Path runtimeDirectory,
+      int port,
+      Filter security,
+      Map<Class<?>, ?> dependencies,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
+    return startWithFactory(
+        runtimeDirectory, port, security, dependencies, Tomcat::new, featureConfigurations);
   }
 
   /** Package-local lifecycle seam: PT can verify failed bind/start and failed cleanup. */
@@ -52,11 +65,24 @@ public final class WebHttpServer implements AutoCloseable {
       Supplier<Tomcat> tomcatFactory,
       Class<?>... featureConfigurations)
       throws LifecycleException {
+    return startWithFactory(
+        runtimeDirectory, port, security, Map.of(), tomcatFactory, featureConfigurations);
+  }
+
+  static WebHttpServer startWithFactory(
+      Path runtimeDirectory,
+      int port,
+      Filter security,
+      Map<Class<?>, ?> dependencies,
+      Supplier<Tomcat> tomcatFactory,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
     Objects.requireNonNull(runtimeDirectory, "runtimeDirectory");
     Objects.requireNonNull(security, "security");
     Objects.requireNonNull(tomcatFactory, "tomcatFactory");
     Objects.requireNonNull(featureConfigurations, "featureConfigurations");
     validateConfiguration(runtimeDirectory, port, featureConfigurations);
+    Map<Class<?>, ?> registeredDependencies = checkedDependencies(dependencies);
     var tomcat = Objects.requireNonNull(tomcatFactory.get(), "tomcatFactory result");
     try {
       tomcat.setBaseDir(runtimeDirectory.toString());
@@ -82,6 +108,10 @@ public final class WebHttpServer implements AutoCloseable {
       }
       context.addFilterMap(mapping);
       var mvc = new AnnotationConfigWebApplicationContext();
+      mvc.addBeanFactoryPostProcessor(
+          factory ->
+              registeredDependencies.forEach(
+                  (type, instance) -> factory.registerSingleton(type.getName(), instance)));
       mvc.register(WebMvcConfiguration.class);
       if (featureConfigurations.length > 0) mvc.register(featureConfigurations);
       var servlet = Tomcat.addServlet(context, "nk-mvc", new DispatcherServlet(mvc));
@@ -112,6 +142,18 @@ public final class WebHttpServer implements AutoCloseable {
         || Arrays.stream(configurations).anyMatch(Objects::isNull)) {
       throw new IllegalArgumentException("invalid Web HTTP startup configuration");
     }
+  }
+
+  static Map<Class<?>, ?> checkedDependencies(Map<Class<?>, ?> dependencies) {
+    Objects.requireNonNull(dependencies, "dependencies");
+    for (var entry : dependencies.entrySet()) {
+      Class<?> type = Objects.requireNonNull(entry.getKey(), "dependency type");
+      Object value = Objects.requireNonNull(entry.getValue(), "dependency value");
+      if (!type.isInstance(value)) {
+        throw new IllegalArgumentException("Web MVC dependency type does not match its value");
+      }
+    }
+    return Map.copyOf(dependencies);
   }
 
   public int port() {

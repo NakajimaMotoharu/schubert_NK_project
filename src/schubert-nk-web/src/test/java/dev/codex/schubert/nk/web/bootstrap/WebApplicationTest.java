@@ -24,6 +24,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.Map;
 import java.util.UUID;
 import javax.sql.DataSource;
 import org.apache.activemq.artemis.core.config.Configuration;
@@ -160,6 +161,25 @@ final class WebApplicationTest {
       assertThrows(IllegalArgumentException.class, () -> app.start(root, -1));
       assertThrows(IllegalArgumentException.class, () -> app.start(root, 65536));
       assertThrows(IllegalArgumentException.class, () -> app.start(root, 0, (Class<?>) null));
+    }
+  }
+
+  @Test
+  void scr122InvalidMvcDependencyStopsBeforeDatabaseBorrow() throws Exception {
+    try (var codec = codec()) {
+      var preProbe =
+          application(
+              source(
+                  () -> {
+                    throw new AssertionError("DB must not be probed");
+                  }),
+              () -> {
+                throw new AssertionError("JMS must not be probed");
+              },
+              codec);
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> preProbe.start(root, 0, Map.of(String.class, new Object())));
     }
   }
 

@@ -10,6 +10,8 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
@@ -21,6 +23,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.DefaultCsrfToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /** PG220/PT-SCR109..111; actual loopback Tomcat/MVC, not API/JMS or NK CHR. */
 class WebHttpServerTest {
@@ -160,6 +165,54 @@ class WebHttpServerTest {
     }
   }
 
+  @Test
+  void scr120CallerOwnedPortReachesRealFeatureController() throws Exception {
+    Filter security = (request, response, chain) -> chain.doFilter(request, response);
+    var supplied = new InjectedPort("PG227-PORT");
+    try (var server =
+            WebHttpServer.start(
+                root,
+                0,
+                security,
+                Map.of(InjectedPort.class, supplied),
+                InjectedConfiguration.class);
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      var response = send(client, server.port(), "GET", "/pt-port");
+      assertEquals(200, response.statusCode());
+      assertEquals("PG227-PORT", response.body());
+    }
+  }
+
+  @Test
+  void scr121InvalidPortRegistrationFailsBeforeTomcatCreation() {
+    Filter security = (request, response, chain) -> chain.doFilter(request, response);
+    var starts = new AtomicInteger();
+    java.util.function.Supplier<Tomcat> factory =
+        () -> {
+          starts.incrementAndGet();
+          return new Tomcat();
+        };
+    assertThrows(
+        NullPointerException.class,
+        () -> WebHttpServer.startWithFactory(root, 0, security, null, factory));
+    var nullKey = new HashMap<Class<?>, Object>();
+    nullKey.put(null, new InjectedPort("x"));
+    assertThrows(
+        NullPointerException.class,
+        () -> WebHttpServer.startWithFactory(root, 0, security, nullKey, factory));
+    var nullValue = new HashMap<Class<?>, Object>();
+    nullValue.put(InjectedPort.class, null);
+    assertThrows(
+        NullPointerException.class,
+        () -> WebHttpServer.startWithFactory(root, 0, security, nullValue, factory));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            WebHttpServer.startWithFactory(
+                root, 0, security, Map.of(String.class, new InjectedPort("x")), factory));
+    assertEquals(0, starts.get());
+  }
+
   private static HttpResponse<String> send(HttpClient client, int port, String method, String path)
       throws Exception {
     var request =
@@ -175,6 +228,31 @@ class WebHttpServerTest {
     @Bean
     String broken() {
       throw new IllegalStateException("synthetic startup failure");
+    }
+  }
+
+  record InjectedPort(String value) {}
+
+  @Controller
+  static class InjectedController {
+    private final InjectedPort port;
+
+    InjectedController(InjectedPort port) {
+      this.port = port;
+    }
+
+    @GetMapping("/pt-port")
+    @ResponseBody
+    String text() {
+      return port.value();
+    }
+  }
+
+  @Configuration(proxyBeanMethods = false)
+  static class InjectedConfiguration {
+    @Bean
+    InjectedController injectedController(InjectedPort port) {
+      return new InjectedController(port);
     }
   }
 }

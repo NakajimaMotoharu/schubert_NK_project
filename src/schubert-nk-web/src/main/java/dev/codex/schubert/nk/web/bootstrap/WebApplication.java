@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
 import dev.codex.schubert.nk.web.session.SpringEncryptedSessionRepository;
 import java.nio.file.Path;
 import java.time.Clock;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -51,14 +52,25 @@ public final class WebApplication {
 
   public WebHttpServer start(Path runtimeDirectory, int port, Class<?>... featureConfigurations)
       throws LifecycleException {
+    return start(runtimeDirectory, port, Map.of(), featureConfigurations);
+  }
+
+  public WebHttpServer start(
+      Path runtimeDirectory,
+      int port,
+      Map<Class<?>, ?> dependencies,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
     // Validate the local path/port/configuration before borrowing DB or broker resources.
     WebHttpServer.validateConfiguration(runtimeDirectory, port, featureConfigurations);
+    Map<Class<?>, ?> registeredDependencies = WebHttpServer.checkedDependencies(dependencies);
     new WebDependencyReadiness(database, broker).verify();
     var sessions =
         new SpringEncryptedSessionRepository(
             new EncryptedWebSessionRepository(database, codec, clock), clock);
     var security =
         new WebSecurityFilterFactory().create(sessions, authentication, audit, requestIds);
-    return WebHttpServer.start(runtimeDirectory, port, security, featureConfigurations);
+    return WebHttpServer.start(
+        runtimeDirectory, port, security, registeredDependencies, featureConfigurations);
   }
 }
