@@ -619,17 +619,40 @@ class EvidenceSetTest(unittest.TestCase):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = screen.WEB_HTTP_CLASS
         names = screen.WEB_HTTP_METHODS
-        suite = ET.Element("testsuite", name=cls, tests="4", failures="0", errors="0", skipped="0")
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
-        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in enumerate(names, 109)}
+        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in zip(screen.WEB_HTTP_IDS, names)}
         self.assertEqual(expected, screen.validate_web_http_suite(suite))
-        for position in range(4):
+        for position in range(len(names)):
             wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
             with self.assertRaises(ValueError): screen.validate_web_http_suite(wrong)
         for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
             wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], kind)
             with self.assertRaises(ValueError): screen.validate_web_http_suite(wrong)
+        for replacement in (names[1], "scr999Unknown"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
+            with self.assertRaises(ValueError): screen.validate_web_http_suite(wrong)
+        with self.assertRaises(ValueError):
+            screen.validate_named_suite(suite, cls, names, 109, (109,) * len(names))
+
+    def test_web_application_inventory_and_negative_status(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = screen.WEB_APPLICATION_CLASS
+        names = screen.WEB_APPLICATION_METHODS
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in zip(screen.WEB_APPLICATION_IDS, names)}
+        self.assertEqual(expected, screen.validate_web_application_suite(suite))
+        for position in range(len(names)):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): screen.validate_web_application_suite(wrong)
+        for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError): screen.validate_web_application_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "scr999Unknown")
+        with self.assertRaises(ValueError): screen.validate_web_application_suite(wrong)
 
     def test_web_dependency_inventory_and_negative_status(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")

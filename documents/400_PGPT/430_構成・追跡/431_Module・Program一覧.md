@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-24 PG227追記（正式認定待ち）: `NK-WEB-001/002`の`WebHttpServer.start/checkedDependencies`・`WebApplication.start`→PT-SCR120～123（015証跡）を追加。RD SYS001/006・MQ001/004、UI225/226、SS311/313/314/321/342に紐付ける。caller-owned MVC portが実Tomcat feature Controllerへ渡ること、起動前拒否、旧factory口成功戻りを選択11件で確認。正式run15はcollector未網羅で不認定、次run待ち。実NK CHR-L01、全Web親・API接続は未完了。
+2026-09-24 PG227追記（正式認定待ち）: `NK-WEB-002`の`WebHttpServer.start/checkedDependencies`・`WebApplication.start`→PT-SCR120～123（016/033～034証跡）を追加。RD SYS001/006・MQ001/004、UI225/226、SS311/313/314/321/342に紐付ける。caller-owned MVC portが実Tomcat feature Controllerへ渡ること、起動前拒否、旧factory口成功戻りを選択11件で確認。正式run15はinstruction2未網羅、run16は旧collector ID固定表により未認定。新source/run待ち。実NK CHR-L01、全Web親・API接続は未完了。
 
 2026-09-23追記: `NK-WEB-002` にPG-D-217 `log-search-validation.js`/`LogSearchScriptTest`/PT-SCR-092とPG-D-218 `LogController`/`LogMvcConfiguration`/`LogControllerTest`/PT-SCR-093～103を追加。関連FUN008/AUT002/MON003、UI221/222/225/232/235、SS311/313/314/323/351/352、SSC073、CHR-L01。正式 `PT-WEB-20260923-02`/source `7b09c090` の16/evidence manifestで限定範囲を認定。103 screen JUnit（従来91＋12）、全体1731PT、W01実NK CHR-L01と最終bootstrapsは未完了。過去行は当時の履歴とし、最新状態は456/460を正とする。
 

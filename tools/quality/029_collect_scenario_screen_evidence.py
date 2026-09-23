@@ -19,7 +19,11 @@ LOGIN_METHODS = ("scr105ApprovedBrandAndPostCsrf", "scr106InputsAndNoLeakedCrede
 WEB_HTTP_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest"
 WEB_HTTP_METHODS = ("scr109ActualLoopbackLoginAndClosedRoutes", "scr110InvalidStartupFailsBeforeBinding",
                     "scr111CloseIsIdempotentAndPortBecomesUnavailable",
-                    "scr112StartupWithoutStartedContextAndCleanupFailureAreVisible")
+                    "scr112StartupWithoutStartedContextAndCleanupFailureAreVisible",
+                    "scr120CallerOwnedPortReachesRealFeatureController",
+                    "scr121InvalidPortRegistrationFailsBeforeTomcatCreation",
+                    "scr123LegacyFactoryOverloadReturnsStartedServer")
+WEB_HTTP_IDS = (109, 110, 111, 112, 120, 121, 123)
 WEB_DEPENDENCY_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest"
 WEB_DEPENDENCY_METHODS = ("scr113RealPostgresAndApprovedBrokerQueue", "scr114NullAndInvalidDatabaseStopBeforeJms",
                           "scr115ProviderFailuresAreRedactedAndBorrowedResourcesClose",
@@ -27,7 +31,9 @@ WEB_DEPENDENCY_METHODS = ("scr113RealPostgresAndApprovedBrokerQueue", "scr114Nul
 WEB_APPLICATION_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest"
 WEB_APPLICATION_METHODS = ("scr117ActualIntegratedLoginAndDirectDenial",
                            "scr118DependencyFailurePreventsHttpBind",
-                           "scr119NullAndInvalidInputStopsBeforeDependencyProbe")
+                           "scr119NullAndInvalidInputStopsBeforeDependencyProbe",
+                           "scr122InvalidMvcDependencyStopsBeforeDatabaseBorrow")
+WEB_APPLICATION_IDS = (117, 118, 119, 122)
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
 MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
 MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
@@ -199,7 +205,7 @@ def validate_login_suite(suite):
 
 
 def validate_web_http_suite(suite):
-    return validate_named_suite(suite, WEB_HTTP_CLASS, WEB_HTTP_METHODS, 109)
+    return validate_named_suite(suite, WEB_HTTP_CLASS, WEB_HTTP_METHODS, 109, WEB_HTTP_IDS)
 
 
 def validate_web_dependency_suite(suite):
@@ -207,10 +213,13 @@ def validate_web_dependency_suite(suite):
 
 
 def validate_web_application_suite(suite):
-    return validate_named_suite(suite, WEB_APPLICATION_CLASS, WEB_APPLICATION_METHODS, 117)
+    return validate_named_suite(suite, WEB_APPLICATION_CLASS, WEB_APPLICATION_METHODS, 117, WEB_APPLICATION_IDS)
 
 
-def validate_named_suite(suite, classname, methods, first):
+def validate_named_suite(suite, classname, methods, first, test_ids=None):
+    identifiers = tuple(range(first, first + len(methods))) if test_ids is None else tuple(test_ids)
+    if len(identifiers) != len(methods) or len(set(identifiers)) != len(methods):
+        raise ValueError("duplicate or missing screen Test IDs")
     cases = suite.findall("testcase")
     names = [case.get("name") for case in cases]
     if (suite.get("name") != classname or suite.get("tests") != str(len(methods))
@@ -219,7 +228,7 @@ def validate_named_suite(suite, classname, methods, first):
             or any(case.get("classname") != classname or
                    any(child.tag not in ("system-out", "system-err") for child in case) for case in cases)):
         raise ValueError("missing or nonpassing hierarchy screen tests")
-    return {f"PT-SCR-{i:03}": classname + "#" + name for i, name in enumerate(methods, first)}
+    return {f"PT-SCR-{i:03}": classname + "#" + name for i, name in zip(identifiers, methods)}
 
 
 def validate_script_trace(trace, script_hash, test_id="PT-SCR-025"):
@@ -324,7 +333,8 @@ def main():
                  "025_NK-WEB-002_Login画面単体テスト仕様書.md", "026_NK-WEB-002_Login画面実行結果.md",
                  "027_NK-WEB-002_WebHTTP起動単体テスト仕様書.md", "028_NK-WEB-002_WebHTTP起動実行結果.md",
                  "029_NK-WEB-002_Web依存接続単体テスト仕様書.md", "030_NK-WEB-002_Web依存接続実行結果.md",
-                 "031_NK-WEB-002_Web起動統合単体テスト仕様書.md", "032_NK-WEB-002_Web起動統合実行結果.md"):
+                 "031_NK-WEB-002_Web起動統合単体テスト仕様書.md", "032_NK-WEB-002_Web起動統合実行結果.md",
+                 "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
@@ -358,9 +368,9 @@ def main():
         "logJavascriptCommand": {"cwd": "src/schubert-nk-web", "node": "/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node", "test": "--test --experimental-test-coverage --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100", "production": LOG_SCRIPT_PATH, "fixture": "src/schubert-nk-web/src/test/javascript/log-search-validation.test.cjs"},
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
         "loginOracle": "025/SCR105..108: actual Spring MVC GET and Thymeleaf, independent approved title/brand, POST form/CSRF and credential-free inputs, Current error/locked/logout text, closed resolver and no controller POST. QA045/UIC005/SSC074; not actual NK CHR-A01/L01.",
-        "webHttpOracle": "027/SCR109..112: actual loopback Tomcat11/MVC/Thymeleaf GET/HEAD/404, mandatory caller security Filter, invalid path/port/config, failed bind/start/cleanup, idempotent close. No credential/DB/JMS production bootstrap or actual NK CHR.",
+        "webHttpOracle": "027/SCR109..112 and 033/SCR120/121/123: actual loopback Tomcat11/MVC/Thymeleaf GET/HEAD/404, mandatory caller security Filter, caller-owned port reaches feature Controller, invalid dependency/path/port/config before Tomcat, legacy factory success, failed bind/start/cleanup, idempotent close. No full production bootstrap or actual NK CHR.",
         "webDependencyOracle": "029/SCR113..116: isolated PostgreSQL18/Flyway Web role and embedded Artemis broker, no message consumption, JDBC false/SQL/close and JMS open/attach/close/unavailable provider boundaries. Consumer construction does not certify Queue existence; SS321 management readiness remains mandatory. No actual NK CHR.",
-        "webApplicationOracle": "031/SCR117..119: actual isolated PostgreSQL18/Flyway, embedded Artemis and secured loopback Tomcat, approved login title/CSRF/session cookie and DB row, untrusted direct 403, null/invalid/dependency fault before HTTP. Not credential management, API listener, Queue management readiness or actual NK CHR.",
+        "webApplicationOracle": "031/SCR117..119 and 033/SCR122: actual isolated PostgreSQL18/Flyway, embedded Artemis and secured loopback Tomcat, approved login title/CSRF/session cookie and DB row, untrusted direct 403, invalid MVC port rejected before DB/JMS borrow, null/invalid/dependency fault before HTTP. Not credential management, API listener, Queue management readiness or actual NK CHR.",
         "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053/066..071/084..091. SCR025 and SCR092 each execute8 Node subcases; both Production JS files have line/function/branch100, no JS class declaration and no exclusion; subcases are not additional JUnit tests.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
