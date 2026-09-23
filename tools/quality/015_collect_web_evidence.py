@@ -10,6 +10,15 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 
+def validate_session_resource_inventory(mapping):
+    expected = {
+        "PT-WEB-294": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow",
+        "PT-WEB-295": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession",
+    }
+    if mapping != expected:
+        raise ValueError("Web session resource Test IDs are incomplete or inconsistent")
+
+
 def validate_log_view_inventory(mapping):
     names = ("web286SuccessfulSnapshot", "web287Pagination", "web288QueryEncoding", "web289ResponseBinding", "web290InvalidFields", "web291NullRoleOwnership", "web292ClosedBeanAndEscaping", "web293ConcurrentViews")
     expected = {f"PT-WEB-{i:03}": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest#" + name for i, name in enumerate(names, 286)}
@@ -198,7 +207,8 @@ def main():
             (28, "web028NullRowAndConfigurationBoundaries"),
             (29, "web029EveryJdbcFailureIsRedactedAndResourcesClose"),
             (30, "web030InvalidDatabaseRowsFailClosed"),
-            (31, "web031ConcurrentLocksAndVersionsStayConsistent")),
+            (31, "web031ConcurrentLocksAndVersionsStayConsistent"),
+            (294, "web294ProviderGetterFailureNeverBecomesInvalidRow")),
         "dev.codex.schubert.nk.web.security.WebCsrfTokenTest": (
             (32, "web032GenerationMatchesIndependentHexAndErasesBuffers"),
             (33, "web033EveryAllowedLengthMatchesOnlyIdenticalToken"),
@@ -421,6 +431,7 @@ def main():
     groups["dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest"] = ((270, "web270Requests"), (271, "web271SuccessProfiles"), (272, "web272ErrorProfiles"), (273, "web273MalformedReplies"), (274, "web274CapabilitiesAndNull"), (275, "web275TransportFailures"), (276, "web276ConcurrentRequests"), (277, "web277OwnershipAndDiagnostics"))
     groups["dev.codex.schubert.nk.web.form.LogSearchFormTest"] = ((278, "web278DefaultsAndFilters"), (279, "web279TextAndBinding"), (280, "web280Characters"), (281, "web281PageAndEnums"), (282, "web282Dates"), (283, "web283DateRange"), (284, "web284NullOwnershipAndRedaction"), (285, "web285ConcurrentBinding"))
     groups["dev.codex.schubert.nk.web.view.LogSearchViewModelTest"] = ((286, "web286SuccessfulSnapshot"), (287, "web287Pagination"), (288, "web288QueryEncoding"), (289, "web289ResponseBinding"), (290, "web290InvalidFields"), (291, "web291NullRoleOwnership"), (292, "web292ClosedBeanAndEscaping"), (293, "web293ConcurrentViews"))
+    groups["dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest"] += ((295, "web295ProviderGetterFailureRollsBackWithoutDeletingSession"),)
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -443,6 +454,7 @@ def main():
         reports[report.name] = ET.ElementTree(clean)
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Web Test IDs do not exactly cover executed methods")
+    validate_session_resource_inventory({key: value for key, value in expected.items() if key in ("PT-WEB-294", "PT-WEB-295")})
     validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
     validate_page_inventory({key: value for key, value in expected.items() if "PageViewModelTest#" in value})
     validate_hierarchy_inventory({key: value for key, value in expected.items() if "ScenarioHierarchyViewModelTest#" in value})

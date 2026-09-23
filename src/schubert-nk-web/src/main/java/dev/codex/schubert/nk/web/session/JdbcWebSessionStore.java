@@ -5,7 +5,6 @@ package dev.codex.schubert.nk.web.session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -49,10 +48,7 @@ public final class JdbcWebSessionStore {
       }
     } catch (InvalidSessionRowException failure) {
       throw new InvalidSessionRowException();
-    } catch (SQLException
-        | IllegalArgumentException
-        | java.time.DateTimeException
-        | SessionStoreException failure) {
+    } catch (SQLException | RuntimeException failure) {
       throw new SessionStoreException();
     }
   }
@@ -149,20 +145,26 @@ public final class JdbcWebSessionStore {
   }
 
   private static WebSessionRow read(ResultSet result) throws SQLException {
+    // JDBC provider exceptions belong to infrastructure. Only values already detached from
+    // ResultSet can be classified as an invalid stored row and deleted by the outer lifecycle.
+    UUID id = column(result.getObject("id", UUID.class));
+    String hash = column(result.getString("session_id_hash"));
+    OffsetDateTime created = column(result.getObject("created_at", OffsetDateTime.class));
+    String keyVersion = column(result.getString("key_version"));
+    byte[] ciphertext = column(result.getBytes("attributes_ciphertext"));
+    OffsetDateTime accessed = column(result.getObject("last_accessed_at", OffsetDateTime.class));
+    OffsetDateTime expires = column(result.getObject("expires_at", OffsetDateTime.class));
+    Integer idle = column(result.getObject("max_inactive_seconds", Integer.class));
+    Long version = column(result.getObject("version", Long.class));
     try {
       return new WebSessionRow(
-          new SessionPayloadIdentity(
-              column(result.getObject("id", UUID.class)),
-              column(result.getString("session_id_hash")),
-              column(result.getObject("created_at", OffsetDateTime.class)).toInstant()),
-          new EncryptedSessionPayload(
-              column(result.getString("key_version")),
-              column(result.getBytes("attributes_ciphertext"))),
-          column(result.getObject("last_accessed_at", OffsetDateTime.class)).toInstant(),
-          column(result.getObject("expires_at", OffsetDateTime.class)).toInstant(),
-          column(result.getObject("max_inactive_seconds", Integer.class)),
-          column(result.getObject("version", Long.class)));
-    } catch (IllegalArgumentException | SQLDataException failure) {
+          new SessionPayloadIdentity(id, hash, created.toInstant()),
+          new EncryptedSessionPayload(keyVersion, ciphertext),
+          accessed.toInstant(),
+          expires.toInstant(),
+          idle,
+          version);
+    } catch (IllegalArgumentException failure) {
       throw new InvalidSessionRowException();
     }
   }

@@ -191,6 +191,20 @@ class EncryptedWebSessionRepositoryTest {
   }
 
   @Test
+  void web295ProviderGetterFailureRollsBackWithoutDeletingSession() throws Exception {
+    try (var fixture = new Fixture()) {
+      var created = fixture.repository.create();
+      fixture.runtimeFailure = "result.getObject";
+      unavailable(() -> fixture.repository.find(created.sessionId()));
+      assertTrue(fixture.runtimeHit);
+      assertEquals(1, fixture.rollbacks.get());
+      assertEquals(1, count());
+      fixture.runtimeFailure = "";
+      assertTrue(fixture.repository.find(created.sessionId()).isPresent());
+    }
+  }
+
+  @Test
   void web038MutationPreservesCurrentAttributesAndSecurityIdentity() throws Exception {
     try (var f = new Fixture()) {
       var created = f.repository.create();
@@ -734,10 +748,10 @@ class EncryptedWebSessionRepositoryTest {
     final AtomicInteger live = new AtomicInteger(),
         commits = new AtomicInteger(),
         rollbacks = new AtomicInteger();
-    volatile String failure = "";
+    volatile String failure = "", runtimeFailure = "";
     String nullColumn = "";
     Integer deleteCount, updateCount;
-    boolean nullConnection, hit, rollbackFailure, rollbackHit;
+    boolean nullConnection, hit, rollbackFailure, rollbackHit, runtimeHit;
     final DataSource source =
         DataSource.class.cast(
             Proxy.newProxyInstance(
@@ -775,6 +789,10 @@ class EncryptedWebSessionRepositoryTest {
                 if (name.equals("connection.rollback") && rollbackFailure) {
                   rollbackHit = true;
                   throw new SQLException("private-rollback-marker");
+                }
+                if (name.equals(runtimeFailure)) {
+                  runtimeHit = true;
+                  throw new IllegalArgumentException("private-provider-marker");
                 }
                 if (name.equals(failure)) {
                   hit = true;

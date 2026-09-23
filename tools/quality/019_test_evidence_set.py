@@ -35,6 +35,20 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_web_session_resource_inventory(self):
+        web = module("web_collector", "015_collect_web_evidence.py")
+        expected = {
+            "PT-WEB-294": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow",
+            "PT-WEB-295": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession",
+        }
+        web.validate_session_resource_inventory(expected)
+        for key in expected:
+            wrong = dict(expected); del wrong[key]
+            with self.assertRaises(ValueError): web.validate_session_resource_inventory(wrong)
+            wrong = dict(expected); wrong[key] = "Other#unverified"
+            with self.assertRaises(ValueError): web.validate_session_resource_inventory(wrong)
+        with self.assertRaises(ValueError): web.validate_session_resource_inventory(dict(expected, unknown="Other#unverified"))
+
     def test_log_http_and_browser_inventory(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         for cls, names, first, validate in (

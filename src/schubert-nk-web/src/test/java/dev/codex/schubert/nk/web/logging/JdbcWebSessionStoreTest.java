@@ -470,6 +470,33 @@ class JdbcWebSessionStoreTest {
   }
 
   @Test
+  void web294ProviderGetterFailureNeverBecomesInvalidRow() throws Exception {
+    seed();
+    for (boolean closeFailure : List.of(false, true)) {
+      try (var connection = db.transaction()) {
+        var fault = new Fault();
+        fault.runtimeFailure = "result.getObject";
+        if (closeFailure) fault.failure = "result.close";
+        var failure =
+            assertThrows(
+                SessionStoreException.class,
+                () -> STORE.findLocked(fault.wrap(connection), hash(1)));
+        assertEquals(SessionStoreException.class, failure.getClass());
+        assertEquals("session storage is unavailable", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+        assertTrue(fault.runtimeHit);
+        assertEquals(closeFailure, fault.hit);
+        assertEquals(1, fault.resultsClosed);
+        assertEquals(1, fault.statementsClosed);
+        assertFalse(connection.isClosed());
+        connection.rollback();
+      }
+    }
+    assertEquals(1, count());
+  }
+
+  @Test
   void web031ConcurrentLocksAndVersionsStayConsistent() throws Exception {
     seed();
     try (var pool = Executors.newFixedThreadPool(10)) {
@@ -574,9 +601,9 @@ class JdbcWebSessionStoreTest {
 
   /** Intercepts only public JDBC calls, never production/private fields. */
   private static final class Fault {
-    String failure = "", nullResource = "";
+    String failure = "", nullResource = "", runtimeFailure = "";
     Integer count;
-    boolean duplicate, hit, columnHit;
+    boolean duplicate, hit, columnHit, runtimeHit;
     int statementsClosed, resultsClosed, nextCalls;
     final Map<String, Integer> seen = new HashMap<>();
     final Map<String, Object> columns = new HashMap<>();
@@ -597,6 +624,10 @@ class JdbcWebSessionStoreTest {
                 if (name.equals("statement.close")) statementsClosed++;
                 if (name.equals("result.close")) resultsClosed++;
                 int occurrence = seen.merge(name, 1, Integer::sum);
+                if (name.equals(runtimeFailure)) {
+                  runtimeHit = true;
+                  throw new IllegalArgumentException("private-provider-marker");
+                }
                 if (name.equals(failure) || (name + "#" + occurrence).equals(failure)) {
                   hit = true;
                   if (method.getName().equals("close")) method.invoke(target, args);
