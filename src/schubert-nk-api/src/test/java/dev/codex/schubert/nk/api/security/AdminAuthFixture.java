@@ -99,6 +99,11 @@ final class AdminAuthFixture {
 
   private void fail(String sql, String point) throws SQLException {
     if (!sql.contains(match)) return;
+    if (method.equals("providerIaeGetLongAndResultClose")) {
+      if (point.equals("getLong"))
+        throw new IllegalArgumentException("synthetic-private-provider-identity");
+      if (point.equals("resultClose")) throw new SQLException("synthetic-private-close");
+    }
     int occurrence = faultOccurrences.merge(point, 1, Integer::sum);
     if (method.equals(point) || method.equals(point + "#" + occurrence))
       throw new SQLException("synthetic private administrative JDBC marker");

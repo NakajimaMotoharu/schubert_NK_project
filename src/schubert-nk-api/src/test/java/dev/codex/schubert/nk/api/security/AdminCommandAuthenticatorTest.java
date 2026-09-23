@@ -18,7 +18,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
-/** SSC-031; independent real PG lock/state postconditions, PT-ADM-008..013. */
+/** SSC-031; independent real PG lock/state postconditions, PT-ADM-008..013/074. */
 class AdminCommandAuthenticatorTest {
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
@@ -458,6 +458,28 @@ class AdminCommandAuthenticatorTest {
         assertTimes(c, user, NOW, Instant.parse("2026-09-08T08:01:00Z"));
       assertTimes(
           c, 3, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
+    }
+  }
+
+  @Test
+  void adm074ProviderIllegalArgumentPlusCloseIsInfrastructure() throws Exception {
+    // YKT-162: the borrowed JDBC provider is not a model validator. Both faults are redacted,
+    // and the caller-owned transaction retains its original session state after rollback.
+    try (var c = database.transaction()) {
+      var fault = new AdminAuthFixture();
+      fault.match = "select user_id from";
+      fault.method = "providerIaeGetLongAndResultClose";
+      infrastructure(
+          () ->
+              authentication.verify(
+                  fault.wrap(c), CONTEXT, Mutation.ENABLE, OptionalLong.of(3), NOW));
+      assertEquals(1, fault.resultsClosed);
+      assertFalse(c.isClosed());
+      c.rollback();
+    }
+    try (var c = database.api()) {
+      assertTimes(
+          c, 1, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
     }
   }
 
