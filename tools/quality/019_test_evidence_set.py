@@ -35,6 +35,45 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_web_log_worker_inventory_and_coverage(self):
+        worker = module("web_log_worker_collector", "032_collect_web_log_worker.py")
+        actual_surefire_names = (
+            "realOutboxRetriesInBackgroundAndSendsOnce",
+            "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+            "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+            "closeIsIdempotentAndRejectsInvalidInputs",
+            "boundedStopReportsUnresponsiveWorkerThenReleases",
+            "interruptedStopRestoresCallerFlag",
+        )
+        self.assertEqual(actual_surefire_names, worker.METHODS)
+        suite = ET.Element("testsuite", name=worker.CLASS, tests="6",
+                           failures="0", errors="0", skipped="0")
+        for method in actual_surefire_names:
+            ET.SubElement(suite, "testcase", classname=worker.CLASS, name=method)
+        self.assertEqual(6, len(worker.validate_suite(suite)))
+        for key, value in (("tests", "5"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): worker.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
+        with self.assertRaises(ValueError): worker.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
+        with self.assertRaises(ValueError): worker.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "realOutboxRetriesInBackgroundAndSendsOnce(Path)")
+        with self.assertRaises(ValueError): worker.validate_suite(wrong)
+        report = ET.Element("report")
+        for subject in worker.SUBJECTS:
+            cls = ET.SubElement(report, "class", name=subject)
+            for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
+                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        self.assertEqual(2, len(worker.validate_coverage(report)))
+        for subject in worker.SUBJECTS:
+            for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
+                for field, value in (("missed", "1"), ("covered", "0")):
+                    wrong = copy.deepcopy(report)
+                    matching = next(c for c in wrong.iter("class") if c.get("name") == subject)
+                    next(c for c in matching.findall("counter") if c.get("type") == kind).set(field, value)
+                    with self.assertRaises(ValueError): worker.validate_coverage(wrong)
+
     def test_web_reply_consumer_inventory_and_coverage(self):
         reply = module("web_reply_consumer_collector", "031_collect_web_reply_consumers.py")
         actual_surefire_names = (
@@ -2104,7 +2143,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer"]
+                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -2158,7 +2197,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(43, len(check()))
+            self.assertEqual(44, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -2168,7 +2207,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(43):
+        for failed_at in range(44):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -2181,10 +2220,11 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(43, len(calls))
+        self.assertEqual(44, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-2][2].endswith("/030_collect_sync_consumers.py"))
-        self.assertTrue(calls[-1][2].endswith("/031_collect_web_reply_consumers.py"))
+        self.assertTrue(calls[-3][2].endswith("/030_collect_sync_consumers.py"))
+        self.assertTrue(calls[-2][2].endswith("/031_collect_web_reply_consumers.py"))
+        self.assertTrue(calls[-1][2].endswith("/032_collect_web_log_worker.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod
@@ -2198,9 +2238,9 @@ class EvidenceSetTest(unittest.TestCase):
             "branch": "dev-foundation", "exitCode": 0,
             "files": [{"path": "results.xml", "sha256": hashlib.sha256(payload).hexdigest()}],
         }
-        if scope.startswith(("004_", "005_", "011_", "012_", "016_", "017_", "018_")):
+        if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_", "011_", "012_", "016_", "017_", "018_")):
             manifest.update({
-                "fullReactorManifest": ("../../../" if scope.startswith(("004_", "005_")) else "../../") + "008_NK-SCN-001/evidence/manifest.json",
+                "fullReactorManifest": ("../../../" if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_")) else "../../") + "008_NK-SCN-001/evidence/manifest.json",
                 "fullReactorManifestSha256": hashlib.sha256(
                     (root / "008_NK-SCN-001/evidence/manifest.json").read_bytes()).hexdigest(),
             })

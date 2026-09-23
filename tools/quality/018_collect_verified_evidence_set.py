@@ -45,7 +45,8 @@ SCOPES = tuple(p + "/evidence" for _, p in BASE) + tuple(
         "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references",
         "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup",)
 SCOPES += ("005_NK-MSG-001/evidence/sync-consumers",
-           "005_NK-MSG-001/evidence/web-reply-consumer")
+           "005_NK-MSG-001/evidence/web-reply-consumer",
+           "006_NK-MSG-002/003_WebLogReplayWorker/evidence")
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -89,7 +90,7 @@ def validate_scope(root, scope, run, commit, branch):
     for path, expected in checksums.items():
         if digest(local_file(directory, path)) != expected:
             raise ValueError("checksum mismatch")
-    if scope.startswith(("004_NK-DAT-001/", "005_NK-MSG-001/", "011_NK-QST-001/", "012_NK-ASY-001/", "016_NK-WEB-002/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
+    if scope.startswith(("004_NK-DAT-001/", "005_NK-MSG-001/", "006_NK-MSG-002/003_", "011_NK-QST-001/", "012_NK-ASY-001/", "016_NK-WEB-002/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
         linked = directory / manifest["fullReactorManifest"]
         if (linked.resolve() != (root / ROOT_MANIFEST).resolve()
                 or digest(linked) != manifest["fullReactorManifestSha256"]):
@@ -118,6 +119,7 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/026_collect_atomic_cleanup_evidence.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/030_collect_sync_consumers.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/031_collect_web_reply_consumers.py"), run])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/032_collect_web_log_worker.py"), run])
     for command in commands:
         execute(command, cwd=repo, check=True)
 
