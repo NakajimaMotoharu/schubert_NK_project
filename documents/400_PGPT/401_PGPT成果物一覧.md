@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-2026-09-24最新確定は456/460 checkpoint29。正式`PT-WEB-20260924-25`/source`02cdb79a`で全1810PT/48scope/hash、96負canary、Java6 module instruction/line/method/class/branch100%・Production静的0を限定認定。PG235のOps管理readiness PT-OPS-MQ-005～007は選択段階で正式未認定。Production credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
+2026-09-24最新確定は456/460 checkpoint30。正式`PT-WEB-20260924-27`/source`640fac42`で全1813PT/48scope/hash、96負canary、Java6 module instruction/line/method/class/branch100%・Production静的0を限定認定。PG235の11管理属性だけが対象で、一時返信QueueのOps権限・有限待ち、SS321残条件とProduction credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
 
 2026-09-24最新確定は456/460 checkpoint26。正式`PT-WEB-20260924-22`/source`74bd4fcf`で全1797PT/46scope/hash、93負canary、Java6 module instruction/line/method/class/branch100%・Production静的0を限定認定。PG231/Web Log親のPT-SCR127～131を追加。run21は不認定履歴。API Log経路dispatcher・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
 
