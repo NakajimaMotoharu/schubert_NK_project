@@ -16,6 +16,10 @@ LOG_HTTP_METHODS = ("log093SuccessAndIndependentWire", "log094InvalidInputNeverS
 LOGIN_CLASS = "dev.codex.schubert.nk.web.controller.LoginControllerTest"
 LOGIN_METHODS = ("scr105ApprovedBrandAndPostCsrf", "scr106InputsAndNoLeakedCredentials",
                  "scr107OnlyMatchingCurrentMessagesAppear", "scr108ClosedViewAndControllerBoundary")
+WEB_HTTP_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest"
+WEB_HTTP_METHODS = ("scr109ActualLoopbackLoginAndClosedRoutes", "scr110InvalidStartupFailsBeforeBinding",
+                    "scr111CloseIsIdempotentAndPortBecomesUnavailable",
+                    "scr112StartupWithoutStartedContextAndCleanupFailureAreVisible")
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
 MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
 MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
@@ -64,7 +68,8 @@ SUBJECTS = ("dev/codex/schubert/nk/web/controller/ScenarioController",
             "dev/codex/schubert/nk/web/config/MusicMvcConfiguration",
             "dev/codex/schubert/nk/web/controller/LogController",
             "dev/codex/schubert/nk/web/config/LogMvcConfiguration",
-            "dev/codex/schubert/nk/web/controller/LoginController")
+            "dev/codex/schubert/nk/web/controller/LoginController",
+            "dev/codex/schubert/nk/web/bootstrap/WebHttpServer")
 TRACES = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
           "PT-SCR-024.txt": b"template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
           "PT-SCR-033.txt": b"template=search\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRows=100\nmaximumSpeakers=500\nactualNkGate=false\n",
@@ -123,7 +128,9 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java",
     "src/schubert-nk-web/src/main/resources/templates/login.html",
-    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java")
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServerTest.java")
 
 
 def validate_suite(suite, detail=False):
@@ -175,6 +182,10 @@ def validate_login_suite(suite):
     return validate_named_suite(suite, LOGIN_CLASS, LOGIN_METHODS, 105)
 
 
+def validate_web_http_suite(suite):
+    return validate_named_suite(suite, WEB_HTTP_CLASS, WEB_HTTP_METHODS, 109)
+
+
 def validate_named_suite(suite, classname, methods, first):
     cases = suite.findall("testcase")
     names = [case.get("name") for case in cases]
@@ -217,7 +228,7 @@ def validate_coverage(report):
             not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
             or any(value["missed"] for value in counters.values())
             or any(counters[kind]["covered"] <= 0 for kind in ("LINE", "METHOD", "CLASS"))
-            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5], SUBJECTS[7])):
+            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5], SUBJECTS[7], SUBJECTS[10])):
         raise ValueError("missing or incomplete hierarchy screen coverage")
     return result
 
@@ -253,6 +264,7 @@ def main():
     methods.update(validate_log_script_suite(ET.parse(target / "surefire-reports" / ("TEST-" + LOG_SCRIPT_CLASS + ".xml")).getroot()))
     methods.update(validate_log_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + LOG_HTTP_CLASS + ".xml")).getroot()))
     methods.update(validate_login_suite(ET.parse(target / "surefire-reports" / ("TEST-" + LOGIN_CLASS + ".xml")).getroot()))
+    methods.update(validate_web_http_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_HTTP_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     log_script_trace = json.loads((target / "pt-log-script/PT-SCR092-node.json").read_text())
@@ -283,7 +295,8 @@ def main():
                  "019_NK-WEB-002_Log画面template単体テスト仕様書.md", "020_NK-WEB-002_Log画面template実行結果.md",
                  "021_NK-WEB-002_Logブラウザ入力単体テスト仕様書.md", "022_NK-WEB-002_Logブラウザ入力実行結果.md",
                  "023_NK-WEB-002_Log検索HTTP単体テスト仕様書.md", "024_NK-WEB-002_Log検索HTTP実行結果.md",
-                 "025_NK-WEB-002_Login画面単体テスト仕様書.md", "026_NK-WEB-002_Login画面実行結果.md"):
+                 "025_NK-WEB-002_Login画面単体テスト仕様書.md", "026_NK-WEB-002_Login画面実行結果.md",
+                 "027_NK-WEB-002_WebHTTP起動単体テスト仕様書.md", "028_NK-WEB-002_WebHTTP起動実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
@@ -317,6 +330,7 @@ def main():
         "logJavascriptCommand": {"cwd": "src/schubert-nk-web", "node": "/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node", "test": "--test --experimental-test-coverage --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100", "production": LOG_SCRIPT_PATH, "fixture": "src/schubert-nk-web/src/test/javascript/log-search-validation.test.cjs"},
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
         "loginOracle": "025/SCR105..108: actual Spring MVC GET and Thymeleaf, independent approved title/brand, POST form/CSRF and credential-free inputs, Current error/locked/logout text, closed resolver and no controller POST. QA045/UIC005/SSC074; not actual NK CHR-A01/L01.",
+        "webHttpOracle": "027/SCR109..112: actual loopback Tomcat11/MVC/Thymeleaf GET/HEAD/404, mandatory caller security Filter, invalid path/port/config, failed bind/start/cleanup, idempotent close. No credential/DB/JMS production bootstrap or actual NK CHR.",
         "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053/066..071/084..091. SCR025 and SCR092 each execute8 Node subcases; both Production JS files have line/function/branch100, no JS class declaration and no exclusion; subcases are not additional JUnit tests.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
@@ -324,7 +338,7 @@ def main():
         "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
         "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
         "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
-        "limitations": "Login GET only; no detail controller/file port/readiness binding/final bootstrap/live broker/all screens/production request logging/actual NK CHR-A01/L01/IT/ST certificate.",
+        "limitations": "Web HTTP composition and Login GET only; no credential/DB/JMS final bootstrap, detail/file port/readiness binding/live broker/all screens/production request logging/actual NK CHR-A01/L01/IT/ST certificate.",
         "sourceFiles": [{"path": path, "sha256": digest(repo / path)} for path in SOURCE_PATHS]})
     manifest["files"] = [{"path": str(path.relative_to(evidence)), "sha256": digest(path)}
                          for path in sorted(evidence.rglob("*")) if path.is_file()
