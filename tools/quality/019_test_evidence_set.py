@@ -37,9 +37,18 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 class EvidenceSetTest(unittest.TestCase):
     def test_api_sync_consumer_inventory_and_coverage(self):
         sync = module("sync_consumer_collector", "030_collect_sync_consumers.py")
+        actual_surefire_names = (
+            "fourConsumersReceiveAndCommitOneReply(Path)",
+            "invalidMessageCommitsToDlqAndSignalsTerminal(Path)",
+            "partialStartupRejectsWrongSessionAndClosesAll(Path)",
+            "temporaryBusinessFailureRollsBackAndRedelivers(Path)",
+            "closeIsIdempotentAndAggregatesAllContextFailures",
+            "failedStartupPreservesClosingFailureAsSuppressed",
+        )
+        self.assertEqual(actual_surefire_names, sync.METHODS)
         suite = ET.Element("testsuite", name=sync.CLASS, tests=str(len(sync.METHODS)),
                            failures="0", errors="0", skipped="0")
-        for method in sync.METHODS:
+        for method in actual_surefire_names:
             ET.SubElement(suite, "testcase", classname=sync.CLASS, name=method)
         self.assertEqual(6, len(sync.validate_suite(suite)))
         for key, value in (("tests", "5"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
@@ -48,6 +57,10 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong.remove(wrong[0])
         with self.assertRaises(ValueError): sync.validate_suite(wrong)
         wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
+        with self.assertRaises(ValueError): sync.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "fourConsumersReceiveAndCommitOneReply")
+        with self.assertRaises(ValueError): sync.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[-1].set("name", "failedStartupPreservesClosingFailureAsSuppressed(Path)")
         with self.assertRaises(ValueError): sync.validate_suite(wrong)
         report = ET.Element("report")
         cls = ET.SubElement(report, "class", name=sync.SUBJECT)

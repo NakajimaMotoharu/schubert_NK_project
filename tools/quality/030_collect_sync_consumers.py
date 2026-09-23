@@ -9,10 +9,10 @@ import xml.etree.ElementTree as ET
 
 CLASS = "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest"
 METHODS = (
-    "fourConsumersReceiveAndCommitOneReply",
-    "invalidMessageCommitsToDlqAndSignalsTerminal",
-    "partialStartupRejectsWrongSessionAndClosesAll",
-    "temporaryBusinessFailureRollsBackAndRedelivers",
+    "fourConsumersReceiveAndCommitOneReply(Path)",
+    "invalidMessageCommitsToDlqAndSignalsTerminal(Path)",
+    "partialStartupRejectsWrongSessionAndClosesAll(Path)",
+    "temporaryBusinessFailureRollsBackAndRedelivers(Path)",
     "closeIsIdempotentAndAggregatesAllContextFailures",
     "failedStartupPreservesClosingFailureAsSuppressed",
 )
