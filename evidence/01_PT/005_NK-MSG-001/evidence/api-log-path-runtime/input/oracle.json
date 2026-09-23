@@ -1,0 +1,13 @@
+{
+  "testId": "PT-JMS-018",
+  "subcases": [
+    "PT-JMS-018-A",
+    "PT-JMS-018-B",
+    "PT-JMS-018-C"
+  ],
+  "syncConsumers": 4,
+  "webLogConsumers": 1,
+  "loginTransaction": "JDBC autoCommit false before handler; commit before JMS reply owner",
+  "terminal": "one signal after committed fatal DLQ; both consumer groups closed",
+  "source": "SS312/321/324 five-consumer and transaction/terminal contracts; not production count calculation"
+}
