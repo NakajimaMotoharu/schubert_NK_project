@@ -1,13 +1,22 @@
 {
-  "testId": "PT-JMS-018",
+  "testIds": [
+    "PT-JMS-018",
+    "PT-JMS-019"
+  ],
   "subcases": [
     "PT-JMS-018-A",
     "PT-JMS-018-B",
-    "PT-JMS-018-C"
+    "PT-JMS-018-C",
+    "PT-JMS-019-A",
+    "PT-JMS-019-B",
+    "PT-JMS-019-C",
+    "PT-JMS-019-D",
+    "PT-JMS-019-E"
   ],
   "syncConsumers": 4,
   "webLogConsumers": 1,
   "loginTransaction": "JDBC autoCommit false before handler; commit before JMS reply owner",
   "terminal": "one signal after committed fatal DLQ; both consumer groups closed",
-  "source": "SS312/321/324 five-consumer and transaction/terminal contracts; not production count calculation"
+  "preflight": "JDBC isValid(2), then borrowed transacted JMS attachment to exact sync/Web-log FQQNs; no consumption",
+  "source": "SS312/321/324 five-consumer, preflight and transaction/terminal contracts; not production count calculation"
 }
