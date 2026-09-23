@@ -447,7 +447,7 @@ class ArtifactComparatorTest {
     observations.add(
         observation(
             "DIF-001",
-            "CHR-A01",
+            "CHR-M01",
             "wrong-field",
             "contract",
             "header",
