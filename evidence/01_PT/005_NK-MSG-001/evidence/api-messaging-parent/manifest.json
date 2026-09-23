@@ -1,0 +1,102 @@
+{
+  "runId": "PT-WEB-20260924-19",
+  "targetCommit": "f018d086f31489a8ac187b6b36713f65b0091cee",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-24T06:10:19+09:00",
+  "completedAt": "2026-09-24T06:23:09+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "node": "24.19.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "aad3d70430fa049ce1bbf885439710a64cc7f8fd6e9591699fcf4bf1de6cce59",
+  "programId": "NK-MSG-001",
+  "testIds": {
+    "PT-JMS-016-A": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#opensFiveConsumersAndSignalsOneTerminalAcrossGroups(Path)",
+    "PT-JMS-016-B": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#validatesAllPortsBeforeOpeningAnyContext",
+    "PT-JMS-016-C": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#fifthContextFailureClosesFourEarlierContexts",
+    "PT-JMS-016-D": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#failedSecondStartupPreservesFirstCloseFailure",
+    "PT-JMS-016-E": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#closeAttemptsBothGroupsAndPreservesBothFailures",
+    "PT-JMS-016-F": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest#closeHandlesOnlySyncFailure"
+  },
+  "scopeResult": "PASS_API_RECEIVE_GROUP_PARENT_UNIT_ONLY",
+  "programComplete": false,
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 141
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 45
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 12
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "related": [
+    "PG229",
+    "PT-JMS-016",
+    "RD MQ-003/006/008/010",
+    "UI212/231/251",
+    "SS312/321"
+  ],
+  "limitations": "No full API process, async consumer, DB/broker readiness, real NK CHR or IT/ST.",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "9affe8526a789a638663c22f1b2fccc8104d1b04d8a494861fce35462e181591",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+      "sha256": "6a87c8e2c6c2a41f05e26f485a16bc5e23775f981b1bee6bbdf97f0d481c291e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntimeTest.java",
+      "sha256": "0ec9b05eb1e99842d55bed4854ebab98af57eead6fa3d4ffbf16e4d245ad02fb"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/class-counters.json",
+      "sha256": "111a4abdf62c884d15a936c978e05ef7a2e7fb0f8f73de5b365d2991f1ca0c6b"
+    },
+    {
+      "path": "input/oracle.json",
+      "sha256": "b7c78579019b560818d4d5c31b78695ae1f5db2425c49059725e2b0074c51638"
+    },
+    {
+      "path": "logs/001_NK-MSG-001_単体テスト仕様書.md",
+      "sha256": "3d1233cad9af452901bafdcd0c8f55438d6b7fa0c55d8668824c3e5f5db37caa"
+    },
+    {
+      "path": "logs/002_NK-MSG-001_実行結果.md",
+      "sha256": "2a62048c8ce4056ae2cea5eed82778f62a876e419b2826c257d8acee3636f89e"
+    },
+    {
+      "path": "output/results.xml",
+      "sha256": "757a02fc079b1b8e3e928f3cd7e564c97ee10ff18fb70012d724e487c8f9d15f"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "testId": "PT-JMS-016",
+  "subcases": [
+    "PT-JMS-016-A",
+    "PT-JMS-016-B",
+    "PT-JMS-016-C",
+    "PT-JMS-016-D",
+    "PT-JMS-016-E",
+    "PT-JMS-016-F"
+  ],
+  "consumerCounts": {
+    "nk.sync.request.q": 4,
+    "nk.web.log.q": 1
+  },
+  "fatalQueue": "nk.dead.letter.q",
+  "expectedFatalDeliveries": 2,
+  "expectedTerminalSignals": 1,
+  "source": "SS321 receive-group concurrency 4+1 and fatal-DLQ contract; not production calculation"
+}

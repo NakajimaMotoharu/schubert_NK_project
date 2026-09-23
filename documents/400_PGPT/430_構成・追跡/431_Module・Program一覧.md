@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-24 PG229選択段階: `NK-MSG-001`の`ApiMessagingRuntime.start/ready/terminalFailureObserved/close`→PT-JMS-016 A～F（005/api-messaging-parent証跡予定）。RD MQ003/006/008/010、UI212/231/251、SS312/321、PG-D-229。実Artemis同期4+Web Log1の共同起動・不正DLQ2/terminal全体1・部分起動/close失敗を選択6/6で確認。追加class instruction141/141・line45/45・method6/6・class1/1・branch12/12。正式全reactor/46scopeと実NK CHR-L01は未認定。
+2026-09-24 PG229正式追記: `NK-MSG-001`の`ApiMessagingRuntime.start/ready/terminalFailureObserved/close`→PT-JMS-016 A～F（005/api-messaging-parent証跡）を正式`PT-WEB-20260924-19`/source`f018d086`で限定認定。RD MQ003/006/008/010、UI212/231/251、SS312/321、PG-D-229。全1789PT/46scope/hash・92負canary・Java6 module全instruction/4coverage/静的0。実Artemis同期4+Web Log1の共同起動・不正DLQ2/terminal全体1・部分起動/close失敗を確認。追加class instruction141/141・line45/45・method6/6・class1/1・branch12/12。full API processと実NK CHR-L01は未認定。
 
 2026-09-24 PG228正式追記: `NK-MSG-001`の`WebLogConsumers.start/ready/terminalFailureObserved/close`→PT-JMS-015 A～E（005/api-web-log-consumer証跡）を正式`PT-WEB-20260924-18`/source`7af02eae`で限定認定。RD MQ006/008/010・MON003/005、UI212/231/251、SS312 §11/321 §6～10。全1783PT/45scope/hash・91負canary・Java6 module全instruction/4coverage/静的0。実Artemis単一transacted consumerのACK/rollback/DLQ・terminal・停止を確認。API親組込と実NK CHR-L01は未完了。
 
