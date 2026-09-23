@@ -505,6 +505,22 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], kind)
             with self.assertRaises(ValueError): screen.validate_web_http_suite(wrong)
 
+    def test_web_dependency_inventory_and_negative_status(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = screen.WEB_DEPENDENCY_CLASS
+        names = screen.WEB_DEPENDENCY_METHODS
+        suite = ET.Element("testsuite", name=cls, tests="4", failures="0", errors="0", skipped="0")
+        for name in names:
+            ET.SubElement(suite, "testcase", classname=cls, name=name)
+        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in enumerate(names, 113)}
+        self.assertEqual(expected, screen.validate_web_dependency_suite(suite))
+        for position in range(4):
+            wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
+            with self.assertRaises(ValueError): screen.validate_web_dependency_suite(wrong)
+        for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], kind)
+            with self.assertRaises(ValueError): screen.validate_web_dependency_suite(wrong)
+
     def test_screen_trace_and_coverage(self):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         expected = {"PT-SCR-012.txt": b"cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
@@ -528,7 +544,8 @@ class EvidenceSetTest(unittest.TestCase):
                      "controller/AnimationController", "config/AnimationMvcConfiguration",
                      "controller/MusicController", "config/MusicMvcConfiguration",
                      "controller/LogController", "config/LogMvcConfiguration",
-                     "controller/LoginController", "bootstrap/WebHttpServer"):
+                     "controller/LoginController", "bootstrap/WebHttpServer",
+                     "bootstrap/WebDependencyReadiness", "bootstrap/WebStartupException"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
@@ -537,8 +554,9 @@ class EvidenceSetTest(unittest.TestCase):
         ET.SubElement(report[5], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
         ET.SubElement(report[10], "counter", type="BRANCH", missed="0", covered="1")
-        self.assertEqual(11, len(screen.validate_coverage(report)))
-        for cls_index in range(11):
+        ET.SubElement(report[11], "counter", type="BRANCH", missed="0", covered="1")
+        self.assertEqual(13, len(screen.validate_coverage(report)))
+        for cls_index in range(13):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
             for counter_index in range(len(report[cls_index])):

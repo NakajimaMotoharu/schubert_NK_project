@@ -1,0 +1,232 @@
+package dev.codex.schubert.nk.web.bootstrap;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
+import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.Queue;
+import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicInteger;
+import javax.sql.DataSource;
+import org.apache.activemq.artemis.core.config.Configuration;
+import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
+import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** PG221/PT-SCR113..116. No deployed DB/broker or credentials are used. */
+final class WebDependencyReadinessTest {
+  @TempDir Path root;
+
+  @Test
+  void scr113RealPostgresAndApprovedBrokerQueue() throws Exception {
+    var pgRoot = Files.createDirectory(root.resolve("pg"));
+    var fixture = new WebLogDatabaseFixture(pgRoot);
+    var broker = start(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0")) {
+      DataSource database = source(fixture::web);
+      assertDoesNotThrow(
+          () ->
+              new WebDependencyReadiness(
+                      database, () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
+                  .verify());
+    } finally {
+      broker.stop();
+      fixture.stop();
+    }
+  }
+
+  @Test
+  void scr114NullAndInvalidDatabaseStopBeforeJms() throws Exception {
+    var connection = connection(false, false, false, new AtomicInteger());
+    var brokerCalls = new AtomicInteger();
+    assertThrows(NullPointerException.class, () -> new WebDependencyReadiness(null, () -> null));
+    assertThrows(
+        NullPointerException.class, () -> new WebDependencyReadiness(source(() -> null), null));
+    var missing =
+        new WebDependencyReadiness(
+            source(() -> null),
+            () -> {
+              brokerCalls.incrementAndGet();
+              return null;
+            });
+    assertEquals(
+        "Web technical database is unavailable",
+        assertThrows(WebStartupException.class, missing::verify).getMessage());
+    var invalid =
+        new WebDependencyReadiness(
+            source(() -> connection),
+            () -> {
+              brokerCalls.incrementAndGet();
+              return null;
+            });
+    assertThrows(WebStartupException.class, invalid::verify);
+    assertEquals(0, brokerCalls.get());
+  }
+
+  @Test
+  void scr115ProviderFailuresAreRedactedAndBorrowedResourcesClose() throws Exception {
+    var closes = new AtomicInteger();
+    for (var database :
+        new DataSource[] {
+          source(
+              () -> {
+                throw new SQLException("private-db-password");
+              }),
+          source(() -> connection(true, true, false, closes)),
+          source(() -> connection(true, false, true, closes))
+        }) {
+      var failure =
+          assertThrows(
+              WebStartupException.class,
+              () -> new WebDependencyReadiness(database, () -> null).verify());
+      assertEquals("Web technical database is unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+    }
+    assertEquals(2, closes.get());
+
+    var db = source(() -> connection(true, false, false, closes));
+    var noContext =
+        assertThrows(
+            WebStartupException.class, () -> new WebDependencyReadiness(db, () -> null).verify());
+    assertEquals("Web Artemis reply Queue is unavailable", noContext.getMessage());
+    var provider =
+        assertThrows(
+            WebStartupException.class,
+            () ->
+                new WebDependencyReadiness(
+                        db,
+                        () -> {
+                          throw new JMSRuntimeException("private-mq-password");
+                        })
+                    .verify());
+    assertNull(provider.getCause());
+    var brokerCloses = new AtomicInteger();
+    var attach =
+        assertThrows(
+            WebStartupException.class,
+            () ->
+                new WebDependencyReadiness(db, () -> context(true, false, brokerCloses)).verify());
+    assertEquals("Web Artemis reply Queue is unavailable", attach.getMessage());
+    var close =
+        assertThrows(
+            WebStartupException.class,
+            () ->
+                new WebDependencyReadiness(db, () -> context(false, true, brokerCloses)).verify());
+    assertEquals("Web Artemis reply Queue is unavailable", close.getMessage());
+    assertEquals(2, brokerCloses.get());
+  }
+
+  @Test
+  void scr116UnavailableBrokerCannotBecomeReady() throws Exception {
+    var broker = start(Files.createDirectory(root.resolve("broker-stopped")));
+    broker.stop();
+    try (var factory = new ActiveMQConnectionFactory("vm://0")) {
+      var db = source(() -> connection(true, false, false, new AtomicInteger()));
+      var failure =
+          assertThrows(
+              WebStartupException.class,
+              () ->
+                  new WebDependencyReadiness(
+                          db, () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
+                      .verify());
+      assertEquals("Web Artemis reply Queue is unavailable", failure.getMessage());
+    }
+  }
+
+  private static Connection connection(
+      boolean valid, boolean inspectionFails, boolean closeFails, AtomicInteger closes) {
+    return proxy(
+        Connection.class,
+        (instance, method, args) ->
+            switch (method.getName()) {
+              case "isValid" -> {
+                assertEquals(2, args[0]);
+                if (inspectionFails) throw new SQLException("private-db-password");
+                yield valid;
+              }
+              case "close" -> {
+                closes.incrementAndGet();
+                if (closeFails) throw new SQLException("private-db-password");
+                yield null;
+              }
+              default -> throw new AssertionError("unexpected JDBC call " + method.getName());
+            });
+  }
+
+  private static DataSource source(SqlOpen open) {
+    return proxy(
+        DataSource.class,
+        (instance, method, args) -> {
+          if (method.getName().equals("getConnection")) return open.get();
+          throw new AssertionError("unexpected DataSource call " + method.getName());
+        });
+  }
+
+  private static JMSContext context(boolean attachFails, boolean closeFails, AtomicInteger closes) {
+    return proxy(
+        JMSContext.class,
+        (instance, method, args) ->
+            switch (method.getName()) {
+              case "createQueue" -> {
+                assertEquals("nk.sync.reply.web::nk.sync.reply.web.q", args[0]);
+                yield proxy(
+                    Queue.class,
+                    (queue, called, parameters) -> {
+                      if (called.getName().equals("getQueueName")) return "nk.sync.reply.web.q";
+                      throw new AssertionError("unexpected Queue call " + called.getName());
+                    });
+              }
+              case "createConsumer" -> {
+                if (attachFails) throw new JMSRuntimeException("private-mq-password");
+                yield proxy(
+                    JMSConsumer.class,
+                    (consumer, called, parameters) -> {
+                      if (called.getName().equals("close")) return null;
+                      throw new AssertionError("unexpected consumer call " + called.getName());
+                    });
+              }
+              case "close" -> {
+                closes.incrementAndGet();
+                if (closeFails) throw new JMSRuntimeException("private-mq-password");
+                yield null;
+              }
+              default -> throw new AssertionError("unexpected JMS call " + method.getName());
+            });
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T> T proxy(Class<T> type, InvocationHandler handler) {
+    return (T) Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler);
+  }
+
+  private static EmbeddedActiveMQ start(Path root) throws Exception {
+    Configuration config;
+    try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+      config = new FileConfigurationParser().parseMainConfig(input);
+    }
+    config
+        .setPagingDirectory(root.resolve("paging").toString())
+        .setBindingsDirectory(root.resolve("bindings").toString())
+        .setJournalDirectory(root.resolve("journal").toString())
+        .setLargeMessagesDirectory(root.resolve("large-messages").toString())
+        .setSecurityEnabled(false)
+        .clearAcceptorConfigurations()
+        .addAcceptorConfiguration("component", "vm://0");
+    return new EmbeddedActiveMQ().setConfiguration(config).start();
+  }
+
+  @FunctionalInterface
+  private interface SqlOpen {
+    Connection get() throws SQLException;
+  }
+}
