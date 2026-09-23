@@ -2,14 +2,18 @@ package dev.codex.schubert.nk.web.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.web.config.LogMvcConfiguration;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
 import dev.codex.schubert.nk.web.messaging.JmsContextFactory;
 import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.LogSearchWireClient;
+import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.security.MqAuthenticationProvider;
 import dev.codex.schubert.nk.web.security.MqLoginClient;
 import dev.codex.schubert.nk.web.security.MqLoginContextProbe;
 import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
+import dev.codex.schubert.nk.web.session.SpringEncryptedSessionRepository;
 import jakarta.jms.JMSContext;
 import java.io.InputStream;
 import java.lang.reflect.Proxy;
@@ -26,6 +30,8 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.sql.DataSource;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
@@ -180,6 +186,119 @@ final class WebApplicationTest {
       assertThrows(
           IllegalArgumentException.class,
           () -> preProbe.start(root, 0, Map.of(String.class, new Object())));
+    }
+  }
+
+  @Test
+  void scr124SessionFactoryWiresLogMvcUsingSecurityRepository() throws Exception {
+    var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
+    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var codec = codec();
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      var audit = audit();
+      var app =
+          new WebApplication(
+              source(database::web),
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+              codec,
+              clock,
+              authentication(),
+              audit,
+              UUID::randomUUID);
+      var supplied = new AtomicReference<SpringEncryptedSessionRepository>();
+      var calls = new AtomicInteger();
+      try (var server =
+          app.startWithSessionDependencies(
+              root,
+              0,
+              sessions -> {
+                calls.incrementAndGet();
+                supplied.set(sessions);
+                var search =
+                    new LogSearchWireClient(
+                        new JmsRequestReplyClient(),
+                        (id, bytes) -> fail("no search on GET /login"),
+                        clock,
+                        UUID::randomUUID,
+                        Duration.ofSeconds(2));
+                return Map.<Class<?>, Object>of(
+                    LogSearchWireClient.class,
+                    search,
+                    ApiSessionInvalidHandler.class,
+                    new ApiSessionInvalidHandler(sessions, audit));
+              },
+              LogMvcConfiguration.class)) {
+        var page =
+            client.send(
+                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, page.statusCode());
+        assertEquals("schubert NK - ログイン", Jsoup.parse(page.body()).title());
+        assertEquals(1, calls.get());
+        assertNotNull(supplied.get());
+        String cookie = page.headers().firstValue("Set-Cookie").orElseThrow();
+        String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
+        assertNotNull(supplied.get().findById(sessionId));
+      }
+    } finally {
+      broker.stop();
+      database.stop();
+    }
+  }
+
+  @Test
+  void scr125NullSessionFactoryStopsBeforeBorrowingResources() throws Exception {
+    try (var codec = codec()) {
+      var app =
+          application(
+              source(
+                  () -> {
+                    throw new AssertionError("DB must not be borrowed");
+                  }),
+              () -> {
+                throw new AssertionError("JMS must not be borrowed");
+              },
+              codec);
+      assertThrows(
+          NullPointerException.class, () -> app.startWithSessionDependencies(root, 0, null));
+    }
+  }
+
+  @Test
+  void scr126InvalidSessionDependenciesStopBeforeHttpBind() throws Exception {
+    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var codec = codec();
+        var reserved = new ServerSocket(0)) {
+      var app =
+          application(
+              source(() -> connection(true)),
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+              codec);
+      var calls = new AtomicInteger();
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              app.startWithSessionDependencies(
+                  root,
+                  reserved.getLocalPort(),
+                  sessions -> {
+                    calls.incrementAndGet();
+                    return null;
+                  }));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              app.startWithSessionDependencies(
+                  root, reserved.getLocalPort(), sessions -> Map.of(String.class, new Object())));
+      assertEquals(1, calls.get());
+      assertFalse(reserved.isClosed());
+    } finally {
+      broker.stop();
     }
   }
 

@@ -12,6 +12,7 @@ import java.time.Clock;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
 import org.apache.catalina.LifecycleException;
@@ -64,10 +65,40 @@ public final class WebApplication {
     // Validate the local path/port/configuration before borrowing DB or broker resources.
     WebHttpServer.validateConfiguration(runtimeDirectory, port, featureConfigurations);
     Map<Class<?>, ?> registeredDependencies = WebHttpServer.checkedDependencies(dependencies);
+    return startWithValidatedDependencies(
+        runtimeDirectory, port, ignored -> registeredDependencies, featureConfigurations);
+  }
+
+  /**
+   * Supplies the exact repository used by the security filter to caller-owned MVC ports. This is
+   * required by the API-session-invalid handler, whose identity check rejects a second repository
+   * instance even when it points to the same database. Trace: AUT-002; UI225/226; SS313/314/352;
+   * PG230/PT-SCR124..126.
+   */
+  public WebHttpServer startWithSessionDependencies(
+      Path runtimeDirectory,
+      int port,
+      Function<SpringEncryptedSessionRepository, Map<Class<?>, ?>> dependencies,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
+    WebHttpServer.validateConfiguration(runtimeDirectory, port, featureConfigurations);
+    Objects.requireNonNull(dependencies, "dependencies");
+    return startWithValidatedDependencies(
+        runtimeDirectory, port, dependencies, featureConfigurations);
+  }
+
+  private WebHttpServer startWithValidatedDependencies(
+      Path runtimeDirectory,
+      int port,
+      Function<SpringEncryptedSessionRepository, Map<Class<?>, ?>> dependencies,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
     new WebDependencyReadiness(database, broker).verify();
     var sessions =
         new SpringEncryptedSessionRepository(
             new EncryptedWebSessionRepository(database, codec, clock), clock);
+    Map<Class<?>, ?> registeredDependencies =
+        WebHttpServer.checkedDependencies(dependencies.apply(sessions));
     var security =
         new WebSecurityFilterFactory().create(sessions, authentication, audit, requestIds);
     return WebHttpServer.start(

@@ -32,8 +32,11 @@ WEB_APPLICATION_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest"
 WEB_APPLICATION_METHODS = ("scr117ActualIntegratedLoginAndDirectDenial",
                            "scr118DependencyFailurePreventsHttpBind",
                            "scr119NullAndInvalidInputStopsBeforeDependencyProbe",
-                           "scr122InvalidMvcDependencyStopsBeforeDatabaseBorrow")
-WEB_APPLICATION_IDS = (117, 118, 119, 122)
+                           "scr122InvalidMvcDependencyStopsBeforeDatabaseBorrow",
+                           "scr124SessionFactoryWiresLogMvcUsingSecurityRepository",
+                           "scr125NullSessionFactoryStopsBeforeBorrowingResources",
+                           "scr126InvalidSessionDependenciesStopBeforeHttpBind")
+WEB_APPLICATION_IDS = (117, 118, 119, 122, 124, 125, 126)
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
 MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
 MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
@@ -334,7 +337,8 @@ def main():
                  "027_NK-WEB-002_WebHTTP起動単体テスト仕様書.md", "028_NK-WEB-002_WebHTTP起動実行結果.md",
                  "029_NK-WEB-002_Web依存接続単体テスト仕様書.md", "030_NK-WEB-002_Web依存接続実行結果.md",
                  "031_NK-WEB-002_Web起動統合単体テスト仕様書.md", "032_NK-WEB-002_Web起動統合実行結果.md",
-                 "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md"):
+                 "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md",
+                 "035_NK-WEB-002_共有session依存単体テスト仕様書.md", "036_NK-WEB-002_共有session依存実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():

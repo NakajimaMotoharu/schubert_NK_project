@@ -707,6 +707,14 @@ class EvidenceSetTest(unittest.TestCase):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = screen.WEB_APPLICATION_CLASS
         names = screen.WEB_APPLICATION_METHODS
+        self.assertEqual(("scr117ActualIntegratedLoginAndDirectDenial",
+                          "scr118DependencyFailurePreventsHttpBind",
+                          "scr119NullAndInvalidInputStopsBeforeDependencyProbe",
+                          "scr122InvalidMvcDependencyStopsBeforeDatabaseBorrow",
+                          "scr124SessionFactoryWiresLogMvcUsingSecurityRepository",
+                          "scr125NullSessionFactoryStopsBeforeBorrowingResources",
+                          "scr126InvalidSessionDependenciesStopBeforeHttpBind"), names)
+        self.assertEqual((117, 118, 119, 122, 124, 125, 126), screen.WEB_APPLICATION_IDS)
         suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
