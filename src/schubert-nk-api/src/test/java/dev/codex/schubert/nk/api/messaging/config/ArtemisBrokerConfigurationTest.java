@@ -142,7 +142,7 @@ final class ArtemisBrokerConfigurationTest {
     expected.put("nk.web.log", Set.of("nk_web:S", "nk_api:C", "nk_ops:B"));
     expected.put("nk.dead.letter", Set.of("nk_web:S", "nk_api:S", "nk_ops:BCM"));
     expected.put("nk.expiry", Set.of("nk_mq_maintenance:BC", "nk_ops:BCM"));
-    expected.put("activemq.management.#", Set.of("nk_ops:CMS"));
+    expected.put("activemq.management.#", Set.of("nk_ops:CMSadnx"));
     expected.put("#", Set.of());
 
     Map<String, Set<String>> actual =
@@ -200,12 +200,20 @@ final class ArtemisBrokerConfigurationTest {
     if (role.isSend()) {
       permissions.append('S');
     }
-    assertFalse(role.isCreateAddress());
-    assertFalse(role.isDeleteAddress());
+    if (role.isCreateAddress()) {
+      permissions.append('a');
+    }
+    if (role.isDeleteAddress()) {
+      permissions.append('d');
+    }
+    if (role.isCreateNonDurableQueue()) {
+      permissions.append('n');
+    }
+    if (role.isDeleteNonDurableQueue()) {
+      permissions.append('x');
+    }
     assertFalse(role.isCreateDurableQueue());
     assertFalse(role.isDeleteDurableQueue());
-    assertFalse(role.isCreateNonDurableQueue());
-    assertFalse(role.isDeleteNonDurableQueue());
     assertFalse(role.isEdit());
     assertFalse(role.isView());
     return role.getName() + ":" + permissions;

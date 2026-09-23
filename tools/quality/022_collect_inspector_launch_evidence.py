@@ -76,7 +76,9 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTes
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest", 5,
     ("opsMq005ReadsActualBrokerWithoutChangingOrClosingBorrowedSession",
      "opsMq006EveryApprovedValueIsCheckedAndDiskBoundaryIsStrict",
-     "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership")),)
+     "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership",
+     "opsMq008ProductionOpsRoleCanReadEffectiveManagementValues",
+     "opsMq009MissingManagementReplyIsBoundedAndInterruptIsRestored")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -357,7 +359,7 @@ def main():
         manifest["oracle"] += " 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof."
         manifest["related"] += ["PG-D-223"]
         manifest["oracle"] += " 036/PT-OPS-MQ-001..004: actual isolated Artemis Core live queries for six literal Address/Queue pairs, missing Queue denial without recreation, each address/queue attribute mutation and provider faults, borrowed session and32 concurrent reads. This is topology only; journal/disk/ACL/settings/thresholds/Expiry purge and production credentials remain mandatory."
-        manifest["oracle"] += " 038/PT-OPS-MQ-005..007: isolated live Artemis Core management reads for broker name/persistence/NIO/journal sizing/global memory/duplicate cache/disk bound; independent SS321 literal mutation matrix, 89.9999/90% boundary, null/malformed/provider failure, borrowed-session/no secret leakage. Journal recovery error, acceptor, ACL, address settings, Queue thresholds, Expiry purge and production credentials remain mandatory."
+        manifest["oracle"] += " 038/PT-OPS-MQ-005..009: isolated live Artemis Core management reads for broker name/persistence/NIO/journal sizing/global memory/duplicate cache/disk bound; independent SS321 literal mutation matrix, 89.9999/90% boundary, null/malformed/provider failure, borrowed-session/no secret leakage. Authenticated nk_ops ephemeral reply Address/Queue succeeds and is removed; nk_api cannot create or query management. Synthetic no-reply proves 2000ms receive/close and checked interrupt flag restoration. Journal recovery error, acceptor, full ACL/address settings/Queue thresholds, Expiry purge and production credential provisioning remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 
         manifest["unverifiedParentGates"] = list(UNVERIFIED_PARENT_GATES)

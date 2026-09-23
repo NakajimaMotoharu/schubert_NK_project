@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
+import org.apache.activemq.artemis.api.core.client.ClientRequestor;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.management.ManagementHelper;
 import org.apache.activemq.artemis.api.core.management.ResourceNames;
@@ -17,6 +17,11 @@ public final class ArtemisManagementReadinessClient {
   @FunctionalInterface
   interface Reader {
     Object read(ClientSession session, String attribute);
+  }
+
+  @FunctionalInterface
+  interface Exchange {
+    Object query(ClientSession session, String attribute) throws InterruptedException;
   }
 
   private final Reader reader;
@@ -63,18 +68,37 @@ public final class ArtemisManagementReadinessClient {
   }
 
   static Object read(ClientSession session, String attribute) {
-    var result = new AtomicReference<>();
+    return read(session, attribute, ArtemisManagementReadinessClient::query);
+  }
+
+  static Object read(ClientSession session, String attribute, Exchange exchange) {
     try {
-      ManagementHelper.doManagement(
-          session,
-          request -> ManagementHelper.putAttribute(request, ResourceNames.BROKER, attribute),
-          reply -> result.set(ManagementHelper.getResult(reply)),
-          ignored -> {
-            throw new ArtemisManagementReadinessException();
-          });
+      return exchange.query(session, attribute);
+    } catch (InterruptedException failure) {
+      Thread.currentThread().interrupt();
+      throw new ArtemisManagementReadinessException();
+    } catch (RuntimeException failure) {
+      throw new ArtemisManagementReadinessException();
+    }
+  }
+
+  // ClientRequestor.close declares Exception although its 2.56.0 constituent Core close methods
+  // declare ActiveMQException. TWR preserves the primary error and closes the ephemeral reply
+  // Address/Queue. The outer read boundary also restores interrupt from an Exchange port.
+  @SuppressWarnings("try")
+  private static Object query(ClientSession session, String attribute) {
+    try {
+      session.start();
+      try (var requestor = new ClientRequestor(session, "activemq.management")) {
+        var request = session.createMessage(false);
+        ManagementHelper.putAttribute(request, ResourceNames.BROKER, attribute);
+        var reply = requestor.request(request, 2_000L);
+        if (reply == null || !ManagementHelper.hasOperationSucceeded(reply))
+          throw new ArtemisManagementReadinessException();
+        return ManagementHelper.getResult(reply);
+      }
     } catch (Exception failure) {
       throw new ArtemisManagementReadinessException();
     }
-    return result.get();
   }
 }

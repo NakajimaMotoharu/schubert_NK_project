@@ -1080,7 +1080,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 375}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 377}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -1999,7 +1999,9 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest", 5,
                       ("opsMq005ReadsActualBrokerWithoutChangingOrClosingBorrowedSession",
                        "opsMq006EveryApprovedValueIsCheckedAndDiskBoundaryIsStrict",
-                       "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership")))
+                       "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership",
+                       "opsMq008ProductionOpsRoleCanReadEffectiveManagementValues",
+                       "opsMq009MissingManagementReplyIsBoundedAndInterruptIsRestored")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2275,7 +2277,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(282, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(93, batch_ops)
+        self.assertEqual(95, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

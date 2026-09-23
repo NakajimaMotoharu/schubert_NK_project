@@ -202,6 +202,8 @@ Registry上限はWeb同期待機20、初期semaphore 12。上限時はMQ送信�
 Application roleはAddress/Queue create/delete、management、browse、arbitrary sendを禁止する。Management console/Jolokiaはloopback＋
 OS tunnel、strong credential、ADMIN app accountと別管理accountとする。Credentialをapplication log/command lineへ出さない。
 
+SSC-075: Ops専用Core management照会はArtemis `ClientRequestor`が`activemq.management.<UUID>`の一時・非durable reply Address/Queueを明示作成し、完了時に削除する。`nk_ops`だけに`activemq.management.#`内の`createAddress`/`deleteAddress`/`createNonDurableQueue`/`deleteNonDurableQueue`を許す。業務6 Address、`nk_web`/`nk_api`/`nk_mq_maintenance`には付与しない。恒久Queue作成/削除と管理namespace外のAddress作成/削除は許さず、global auto-create=falseを維持する。管理応答待ちは各request 2秒上限、null/失敗/cleanup不完了は固定redacted失敗でAPI起動へ進めない。実認証BrokerでOps正系とapp role拒否、2秒境界/一時Address/Queue cleanupをPTする。これは管理値照会の限定契約であり、§13全項目のreadiness完了を意味しない。
+
 ## 11. DLQ metadata
 
 Fatal handlerはbodyを改変せず、次のbounded propertyを付加する。
