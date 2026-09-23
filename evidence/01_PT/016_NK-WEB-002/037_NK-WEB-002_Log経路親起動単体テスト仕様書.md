@@ -5,7 +5,7 @@ PG231。対象`WebLogApplicationRuntime.start/port/ready/terminalFailureObserved
 | Test ID | JUnit method | 事前条件・入力/操作 | 独立期待・根拠 |
 |---|---|---|---|
 | PT-SCR-127 | `WebLogApplicationRuntimeTest#scr127RealReplyWorkerAndSecuredLogMvcStartAndClose` | 隔離PostgreSQL18/Flyway・Artemis2.56、worker、GET `/login` | SS321のWeb返信consumer count1、Log workerとHTTP起動、UI226/QA045の固定title・HTTP200。closeでconsumer0、ready false、port再取得拒否 |
-| PT-SCR-128 | `WebLogApplicationRuntimeTest#scr128InvalidReplyDlqMakesWholeRuntimeNotReady` | 起動後に合成不正TextをWeb reply Queueへ送る | SS321の恒久不正隔離、DLQ1、terminal通知1、全体ready false。業務応答は行わない |
+| PT-SCR-128 | `WebLogApplicationRuntimeTest#scr128InvalidReplyDlqMakesWholeRuntimeNotReady` | 起動後に合成不正TextをWeb reply Queueへ送る。DLQ受信とterminal callbackの双方を上限5秒で待つ | SS321の恒久不正隔離、DLQ1、terminal通知1、全体ready false。DLQ受信とcallback完了の順序は規定せず、業務応答は行わない |
 | PT-SCR-129 | `WebLogApplicationRuntimeTest#scr129PartialStartupClosesReplyConsumer` | worker ID不正とDB transport不達を別実行 | worker起動拒否/DB readiness拒否でも先行Web返信consumerをcloseしQueue count0、HTTP bindしない |
 | PT-SCR-130 | `WebLogApplicationRuntimeTest#scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries` | synthetic AutoCloseable 3件の故障、各ready predicate | HTTP→worker→replyの順に全closeを試み、二次故障をsuppressed、二重close無作用。reply/worker/terminal/closedの各not-ready境界 |
 | PT-SCR-131 | `WebLogApplicationRuntimeTest#scr131StartupNullContractsAndSuppressedCleanup` | DB/JMS禁止fixtureで10依存のnull、合成cleanup故障 | 全nullをresource borrow前に拒否しDB借用0、cleanup故障2件を元の起動失敗にsuppressed、null未生成handleは無視 |

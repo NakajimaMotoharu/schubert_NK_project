@@ -26,6 +26,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.sql.DataSource;
@@ -111,6 +113,7 @@ final class WebLogApplicationRuntimeTest {
           (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
       var signals = new AtomicInteger();
+      var signalled = new CountDownLatch(1);
       try (var runtime =
           WebLogApplicationRuntime.start(
               root,
@@ -125,13 +128,17 @@ final class WebLogApplicationRuntimeTest {
               "web-log-worker",
               10,
               Duration.ofMillis(10),
-              ignored -> signals.incrementAndGet())) {
+              ignored -> {
+                signals.incrementAndGet();
+                signalled.countDown();
+              })) {
         producer
             .createProducer()
             .send(
                 new ActiveMQQueue("nk.sync.reply.web::nk.sync.reply.web.q"),
                 producer.createTextMessage("invalid"));
         assertNotNull(dlq.receive(5_000));
+        assertTrue(signalled.await(5, TimeUnit.SECONDS));
         assertEquals(1, signals.get());
         assertTrue(runtime.terminalFailureObserved());
         assertFalse(runtime.ready());
