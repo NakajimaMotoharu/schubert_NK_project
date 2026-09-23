@@ -1,0 +1,101 @@
+{
+  "runId": "PT-WEB-20260924-23",
+  "targetCommit": "ff23b5aaa231798004e84988bfe8f1b36fa6cdff",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-24T07:25:24+09:00",
+  "completedAt": "2026-09-24T07:38:27+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "node": "24.19.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "453f6325112cf64359630b9e6e39148c4b8728a11f52c4a6c16adef2978bdeb6",
+  "programId": "NK-MSG-001",
+  "testIds": {
+    "PT-JMS-017-A": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest#exactThreeLayoutsReachOnlyTheirRegisteredProcessor",
+    "PT-JMS-017-B": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest#validButUnregisteredLayoutIsRetryableNotPermanentDlq",
+    "PT-JMS-017-C": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest#nullInputsAndNullReplyAreRejectedAtTheirBoundary",
+    "PT-JMS-017-D": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest#delegateFailureClassificationIsNotRewritten",
+    "PT-JMS-017-E": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest#concurrentDispatchDoesNotShareMutableRoutingState"
+  },
+  "scopeResult": "PASS_LOG_PATH_ROUTER_UNIT_ONLY",
+  "programComplete": false,
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 57
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 4
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 12
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 5
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 2
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "related": [
+    "PG232",
+    "PT-JMS-017",
+    "RD FUN-001/008 AUT-001/002 MQ-003/006/008",
+    "UI225/226/231/232/235",
+    "SS311/312/314/321/323/324"
+  ],
+  "limitations": "No full API process, application delegates, broker readiness, real NK CHR or IT/ST.",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "3e64e5ed9015941e38c919c74c96eb8559f285256deeea29cb45e0e15f36f64a",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessor.java",
+      "sha256": "d87277bdb8b89af1da9ee8f2aa0c0d8a3a4408f589f62c7d2dff0fb5e61e943f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessorTest.java",
+      "sha256": "ec25c82ee6a2eaadc0247d9858da424626c0689d4200e834148f649a8b59f692"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/class-counters.json",
+      "sha256": "062e35f2126c8393d8adbfec3dd9063f831448efded1fd16095851a5a08bf969"
+    },
+    {
+      "path": "input/oracle.json",
+      "sha256": "f7a0577d47f76051ba05c22ee9645dcf32a49557574f3556a4514ae2bd59b85d"
+    },
+    {
+      "path": "logs/001_NK-MSG-001_単体テスト仕様書.md",
+      "sha256": "de09d38a5c0b9f03bfb2926819d8ccfe845a7415eb07ae4caa7b96618846b030"
+    },
+    {
+      "path": "logs/002_NK-MSG-001_実行結果.md",
+      "sha256": "208c6b7dcc07976f401ca68468d9da62dd23b01e291337c97a9f6c36d901b5cc"
+    },
+    {
+      "path": "output/results.xml",
+      "sha256": "cce4aaa04a8d573ee301805969f9ec52caad9e70e2ee6d337c0c63d1025d5735"
+    }
+  ]
+}
