@@ -256,6 +256,15 @@ class LogControllerTest {
           f.controller.search(
               params(), actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), result));
       assertEquals(503, result.getStatus());
+      // A byte-valid reply may still name another request page; this is a view-binding failure.
+      f.responder =
+          (id, bytes) ->
+              response(id, ascii(bytes, 113, 64), "0000", 2, 1, 101, "public synthetic log");
+      result = new MockHttpServletResponse();
+      assertNull(
+          f.controller.search(
+              params(), actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), result));
+      assertEquals(503, result.getStatus());
       f.erased();
     }
   }
