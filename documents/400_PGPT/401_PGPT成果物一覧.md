@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24 PG244選択段階: 018/050～051のExpiry実7日selector purgeをPT-OPS-MQ-023～026選択4/4、Batch全395PT/coverage check/静的0、98負canaryで確認。正式全reactor/hash前で未認定、`batch_runs`/critical/朝起動親は未完了。最新正式確定はcheckpoint46の1830PT、全工程中心47%据置。
+
 2026-09-24最新確定は456/460 checkpoint46、正式`PT-WEB-20260924-36`/source`bbc3460c`の全1830PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG243/018-048～049のExpiry保守管理RBACのみ限定認定。実7日purge/DB記録/起動判断、全Broker readiness・Production親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24 PG243選択段階: 018/048～049のExpiry管理RBACを実Brokerで選択確認（PT-OPS-MQ-022 1/1、Batch391PT/coverage check/静的0、98負canary）。正式全reactor/hash前かつ実7日削除・DB記録/起動判断未実装でPG243/SSC-076/BUG-236/YKT-187は未完了。最新正式確定はcheckpoint44の1829PT、全工程中心47%据置。

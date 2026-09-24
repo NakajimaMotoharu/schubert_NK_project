@@ -149,9 +149,9 @@ final class ArtemisBrokerConfigurationTest {
     expected.put(
         "mops.queue.nk.expiry.q.removeMessages", Set.of("nk_ops:Me", "nk_mq_maintenance:Me"));
     expected.put(
-        "mops.queue.nk.expiry.q.messageCount", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
+        "mops.queue.nk.expiry.q.getMessageCount", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
     expected.put(
-        "mops.queue.nk.expiry.q.persistentSize", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
+        "mops.queue.nk.expiry.q.getPersistentSize", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
     expected.put("#", Set.of());
 
     assertTrue(configuration.isManagementMessageRbac());

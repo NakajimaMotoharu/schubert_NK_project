@@ -108,8 +108,8 @@ public final class ArtemisRoleReadinessClient {
     var view =
         Map.of("nk_ops", Set.of("manage", "view"), "nk_mq_maintenance", Set.of("manage", "view"));
     roles.put("mops.queue.nk.expiry.q.countMessages", view);
-    roles.put("mops.queue.nk.expiry.q.messageCount", view);
-    roles.put("mops.queue.nk.expiry.q.persistentSize", view);
+    roles.put("mops.queue.nk.expiry.q.getMessageCount", view);
+    roles.put("mops.queue.nk.expiry.q.getPersistentSize", view);
     roles.put(
         "mops.queue.nk.expiry.q.removeMessages",
         Map.of("nk_ops", Set.of("manage", "edit"), "nk_mq_maintenance", Set.of("manage", "edit")));

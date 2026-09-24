@@ -141,6 +141,29 @@ public final class ArtemisManagementReadinessClient {
                         message, ResourceNames.QUEUE + queue, attribute)));
   }
 
+  /** SSC-076: only the fixed Expiry Queue and a nonempty numeric-cutoff selector are mutable. */
+  static Object expiryOperation(ClientSession session, String operation, String selector) {
+    if (!("countMessages".equals(operation) || "removeMessages".equals(operation))
+        || selector == null
+        || !selector.matches("_AMQ_ACTUAL_EXPIRY < -?[0-9]+")) {
+      throw new ArtemisManagementReadinessException();
+    }
+    return read(
+        session,
+        operation,
+        (borrowed, ignored) ->
+            query(borrowed, message -> putExpiryOperation(message, operation, selector)));
+  }
+
+  static void putExpiryOperation(ClientMessage message, String operation, String selector) {
+    try {
+      ManagementHelper.putOperationInvocation(
+          message, ResourceNames.QUEUE + "nk.expiry.q", operation, selector);
+    } catch (Exception failure) {
+      throw new ArtemisManagementReadinessException();
+    }
+  }
+
   static void putAddressSettingsOperation(ClientMessage message, String address) {
     try {
       ManagementHelper.putOperationInvocation(
