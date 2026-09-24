@@ -50,8 +50,8 @@ import org.postgresql.util.PSQLException;
 /**
  * PostgreSQL 18 component PT for NK-DAT-001.
  *
- * <p>Trace: RD DAT-001..011; UI 212/241/242; SS 331/343/354; PT-DB-001..015. Expected catalog sets
- * in this class are independent from the migration implementation.
+ * <p>Trace: RD DAT-001..011/OPS-009/MQ-009; UI 212/241/242/251; SS 331/341/343/354; PT-DB-001..017.
+ * Expected catalog sets in this class are independent from the migration implementation.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
@@ -220,7 +220,7 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
   void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
     assertEquals(
-        "154|23|30|23|1",
+        "155|23|30|23|1",
         queryString(
             ADMIN,
             "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
@@ -1073,6 +1073,7 @@ final class DatabaseMigrationTest {
             "migration/V018__maintenance_run_references.sql",
             "migration/V019__parent_inbox_inspection_summary.sql",
             "migration/V020__atomic_cleanup_step_counts.sql",
+            "migration/V021__expiry_batch_run_audit.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1087,6 +1088,145 @@ final class DatabaseMigrationTest {
       assertTrue(text.endsWith("\n"), resource.toString());
     }
     writeEvidenceSnapshots();
+  }
+
+  @Test
+  @Order(16)
+  @DisplayName("PT-DB-016 append-only Expiry batch audit columns and success invariants")
+  void expiryBatchRunAuditIsCompleteAndOtherStepsRemainUnchanged() throws Exception {
+    assertEquals(
+        "timestamp with time zone|bigint|bigint",
+        queryString(
+            ADMIN,
+            "select string_agg(data_type,'|' order by ordinal_position) from information_schema.columns"
+                + " where table_schema='schubert' and table_name='batch_runs'"
+                + " and column_name in ('expiry_cutoff_at','expiry_before_count','expiry_after_count')"));
+    try (Connection connection = connection(ADMIN)) {
+      connection.setAutoCommit(false);
+      String row =
+          "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
+              + " values('"
+              + UUID_1
+              + "','2031-06-01','CLEAN_EXPIRY',1,'2031-06-01 00:00:00+00','RUNNING')";
+      execute(connection, row);
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00'"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set status='SUCCESS'"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='infinity',"
+              + "expiry_before_count=2,expiry_after_count=1"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
+              + "expiry_before_count=1,expiry_after_count=2"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      execute(
+          connection,
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
+              + "expiry_before_count=2,expiry_after_count=1,target_count=1,success_count=1,"
+              + "failure_count=0,byte_count=64,status='SUCCESS',"
+              + "ended_at='2031-06-01 00:00:01+00'"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_after_count=0"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set target_count=2"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      execute(
+          connection,
+          "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
+              + " values('"
+              + UUID_2
+              + "','2031-06-02','BACKUP_DB',1,'2031-06-02 00:00:00+00','RUNNING')");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-26 00:00:00+00',"
+              + "expiry_before_count=2,expiry_after_count=1"
+              + " where business_date='2031-06-02' and step='BACKUP_DB'");
+      connection.rollback();
+    }
+    assertAllowed(
+        "schubert_batch",
+        "select expiry_cutoff_at,expiry_before_count,expiry_after_count from schubert.batch_runs limit 0");
+    assertDenied(
+        "schubert_web_session", "select expiry_cutoff_at from schubert.batch_runs limit 0");
+  }
+
+  @Test
+  @Order(17)
+  @DisplayName("PT-DB-017 legacy successful Expiry rows abort V021 without inferred backfill")
+  void legacySuccessfulExpiryAuditIsNotGuessedOrPartiallyMigrated() throws Exception {
+    String legacyDatabase = "schubert_expiry_legacy";
+    run(
+        pgBinary("createdb"),
+        "-h",
+        "127.0.0.1",
+        "-p",
+        Integer.toString(port),
+        "-U",
+        ADMIN,
+        legacyDatabase);
+    String legacyUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + legacyDatabase;
+    executeResource(ADMIN, legacyUrl, "db/provisioning/001_roles.sql");
+    execute(ADMIN, legacyUrl, "create schema schubert_meta authorization nk_owner");
+    var old =
+        Flyway.configure()
+            .dataSource(legacyUrl, MIGRATION, "")
+            .defaultSchema("schubert_meta")
+            .schemas("schubert_meta")
+            .createSchemas(false)
+            .initSql("SET ROLE nk_owner")
+            .table("flyway_schema_history")
+            .locations("classpath:db/migration")
+            .target("020")
+            .validateOnMigrate(true)
+            .outOfOrder(false)
+            .baselineOnMigrate(false)
+            .cleanDisabled(true)
+            .load();
+    assertEquals(20, old.migrate().migrationsExecuted);
+    execute(
+        ADMIN,
+        legacyUrl,
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
+            + " values('"
+            + UUID_1
+            + "','2031-06-03','CLEAN_EXPIRY',1,'2031-06-03 00:00:00+00',"
+            + "'2031-06-03 00:00:01+00','SUCCESS')");
+    assertThrows(
+        org.flywaydb.core.api.FlywayException.class,
+        () -> configuredFlyway(legacyUrl, false, "classpath:db/migration").migrate());
+    assertEquals(
+        20L,
+        queryLong(
+            ADMIN,
+            legacyUrl,
+            "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
+    assertEquals(
+        0L,
+        queryLong(
+            ADMIN,
+            legacyUrl,
+            "select count(*) from information_schema.columns"
+                + " where table_schema='schubert' and table_name='batch_runs'"
+                + " and column_name like 'expiry_%'"));
   }
 
   private static void writeEvidenceSnapshots() throws Exception {
@@ -1725,7 +1865,7 @@ final class DatabaseMigrationTest {
     columns.put(
         "schubert.batch_runs",
         set(
-            "id run_id business_date step attempt started_at ended_at status target_count success_count failure_count byte_count error_code error_summary"));
+            "id run_id business_date step attempt started_at ended_at status target_count success_count failure_count byte_count error_code error_summary expiry_cutoff_at expiry_before_count expiry_after_count"));
     columns.put(
         "schubert.inbox_inspection_progress",
         set(

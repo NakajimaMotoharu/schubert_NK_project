@@ -441,6 +441,8 @@ SSC-055/PG-D-156（先行b6b5f0f6）: このtableのstarted_atは各stepの時�
 `target_count/success_count/failure_count bigint NN default 0 check >=0`、`byte_count bigint NN default 0 check >=0`、
 `error_code varchar(64)`、`error_summary varchar(512)`。
 
+SSC-077/BUG-237: V001～020を不変とし、V021で`CLEAN_EXPIRY`監査専用のnullable `expiry_cutoff_at timestamptz`、`expiry_before_count bigint`、`expiry_after_count bigint`を追記する。他stepでは3列すべてNULL。Expiry stepは3列すべてNULL（未観測/失敗/skip）または3列すべて非NULL（観測済み）とし、有限cutoff・非負count・after<=beforeをCHECKする。SUCCESSは3列必須、`expiry_before_count-expiry_after_count=success_count=target_count`、`failure_count=0`。既存`byte_count`をこのstepの削除対象推定byte数、既存`target_count/success_count/failure_count`を対象/削除/失敗数として使う。旧SUCCESS行はcutoff/前後値を推測できないため、V021は事前検出して安全停止し、自動backfillしない。親はimmutable run原本の開始cutoffから7日を引いた値とDB監査cutoffを照合し、借用同transactionで監査列とstep結果を確定する。既存他step計数、索引、role/grantを無断変更しない。V005の`schubert_app`に対する既存table-level DMLは新列にも継承されるので、V021でapp専用の追加grantを行わないという意味であり、appから新列へのアクセスを拒否する意味ではない。PostgreSQL catalog/制約/権限/旧migration hashと実再実行PTが揃うまで完了扱いにしない。
+
 UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS' AND step NOT IN ('BACKUP_DB','BACKUP_CONFIG')`、index `(run_id,step)`、
 `(status,started_at desc)`。通常stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
 

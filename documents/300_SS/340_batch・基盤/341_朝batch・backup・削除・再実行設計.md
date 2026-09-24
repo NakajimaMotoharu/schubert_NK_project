@@ -304,6 +304,7 @@ SSC-049/PG-D-130: run executorは324 §12.7の単調時計30分とinterruptを�
 SSC-076: この保守専用credentialの管理電文はSS321 §10の`nk.expiry.q`個別RBACに限定する。`countMessages`/`removeMessages`へ渡すselectorは固定`_AMQ_ACTUAL_EXPIRY`と数値cutoffから組み立て、null/空を送らない。DLQ/他Queue/Broker全操作の管理権限は付与しない。権限の実Broker正負試験だけで本節の削除/再実行/永続記録を完了扱いにしない。
 2. Brokerが保持するexpiry timestampが`run_started_at - 7 days`より前のmessageをselectorでcount/byte見積り。
 3. Count/byte/cutoffを記録した後、同selectorをArtemis management operationでpurge。Queue/journal fileをOSから削除しない。
+   SSC-077: `batch_runs`の`CLEAN_EXPIRY`行には`expiry_cutoff_at`/`expiry_before_count`/`expiry_after_count`をV021以降で保存し、既存target/success/failure/byteに対象/削除/失敗/推定byteを対応させる。既存`started_at`からrun原本開始時刻を推定しない。監査値はstep結果と同一DB transactionで確定し、不確定commitは同run/cutoffの原本とDB行を再読取りして判定する。
 4. 実行後countで削除差分を照合。DLQは対象にしない。
 5. Purge失敗でもExpiryがwarning未満・broker health正常ならWARNING exitでAPI起動。Critical以上またはhealth不正はFAILEDで停止。
 
