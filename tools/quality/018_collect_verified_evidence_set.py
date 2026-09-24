@@ -54,7 +54,8 @@ SCOPES += ("005_NK-MSG-001/evidence/sync-consumers",
            "005_NK-MSG-001/evidence/api-log-path-runtime",
            "005_NK-MSG-001/evidence/request-sender-resource",
            "005_NK-MSG-001/evidence/jms-resource-compounds",
-           "006_NK-MSG-002/004_JmsResourceCompounds/evidence")
+           "006_NK-MSG-002/004_JmsResourceCompounds/evidence",
+           "006_NK-MSG-002/005_LogReplayVertical/evidence")
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -98,7 +99,7 @@ def validate_scope(root, scope, run, commit, branch):
     for path, expected in checksums.items():
         if digest(local_file(directory, path)) != expected:
             raise ValueError("checksum mismatch")
-    if scope.startswith(("004_NK-DAT-001/", "005_NK-MSG-001/", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_", "011_NK-QST-001/", "012_NK-ASY-001/", "016_NK-WEB-002/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
+    if scope.startswith(("004_NK-DAT-001/", "005_NK-MSG-001/", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_", "006_NK-MSG-002/005_", "011_NK-QST-001/", "012_NK-ASY-001/", "016_NK-WEB-002/", "017_NK-BAT-001/", "018_NK-OPS-001/")):
         linked = directory / manifest["fullReactorManifest"]
         if (linked.resolve() != (root / ROOT_MANIFEST).resolve()
                 or digest(linked) != manifest["fullReactorManifestSha256"]):
@@ -135,6 +136,7 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/036_collect_api_log_path_runtime.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/038_collect_request_sender_resource.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/039_collect_jms_resource_compounds.py"), run])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/040_collect_log_replay_vertical.py"), run])
     for command in commands:
         execute(command, cwd=repo, check=True)
 

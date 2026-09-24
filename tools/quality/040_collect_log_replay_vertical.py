@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""PT-IDEM-016: bind real Web-outbox/Artemis/API-ingest PT to one certified reactor."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import xml.etree.ElementTree as ET
+
+CLASS = "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest"
+METHOD = "idem016WebOutboxRetriesIntoApiProjectionExactlyOnce"
+SUBJECTS = (
+    ("web", "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository"),
+    ("web", "dev/codex/schubert/nk/web/logging/WebLogDispatcher"),
+    ("web", "dev/codex/schubert/nk/web/logging/WebLogMessageSender"),
+    ("api", "dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers"),
+    ("api", "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener"),
+    ("api", "dev/codex/schubert/nk/api/logging/WebLogIngestService"),
+)
+SOURCES = (
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+)
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_suite(suite):
+    cases = suite.findall("testcase")
+    if (suite.get("name") != CLASS or suite.get("tests") != "1"
+            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+            or len(cases) != 1 or cases[0].get("classname") != CLASS
+            or cases[0].get("name") != METHOD
+            or any(child.tag not in ("system-out", "system-err") for child in cases[0])):
+        raise ValueError("missing, failed, flaky, or unlisted vertical Log PT")
+    return {"PT-IDEM-016": CLASS + "#" + METHOD}
+
+
+def validate_coverage(report, subject):
+    classes = [element for element in report.iter("class") if element.get("name") == subject]
+    if len(classes) != 1:
+        raise ValueError("vertical Log production class missing")
+    counters = {c.get("type"): {"covered": int(c.get("covered")),
+                                 "missed": int(c.get("missed"))}
+                for c in classes[0].findall("counter")}
+    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH")
+    if (not set(required).issubset(counters)
+            or any(counters[k]["covered"] <= 0 or counters[k]["missed"] != 0
+                   for k in required)):
+        raise ValueError("vertical Log production coverage below 100%")
+    return counters
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("run_id")
+    run = parser.parse_args().run_id
+    if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
+        raise SystemExit("invalid run ID")
+    repo = Path(__file__).resolve().parents[2]
+    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    verified = json.loads(full.read_text())
+    if verified["runId"] != run or verified["exitCode"] != 0:
+        raise ValueError("matching successful reactor required")
+    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--",
+                    "src", "pom.xml", "program/characterization", "tools/quality"],
+                   cwd=repo, check=True)
+    report_path = "output/TEST-" + CLASS + ".xml"
+    stored = repo / "evidence/01_PT/008_NK-SCN-001/evidence" / report_path
+    hashes = {item["path"]: item["sha256"] for item in verified["files"]}
+    if hashes.get(report_path) != digest(stored):
+        raise ValueError("vertical Log JUnit report differs from certified reactor")
+    methods = validate_suite(ET.parse(stored).getroot())
+    coverage = {}
+    for module, subject in SUBJECTS:
+        report = repo / f"src/schubert-nk-{module}/target/site/jacoco/jacoco.xml"
+        coverage[subject] = validate_coverage(ET.parse(report).getroot(), subject)
+    evidence = repo / "evidence/01_PT/006_NK-MSG-002/005_LogReplayVertical/evidence"
+    for folder in ("logs", "input", "output", "coverage"):
+        (evidence / folder).mkdir(parents=True, exist_ok=True)
+    program = repo / "evidence/01_PT/006_NK-MSG-002"
+    for name in ("005_Log再送縦結線単体テスト仕様書.md", "006_Log再送縦結線実行結果.md"):
+        (evidence / "logs" / name).write_bytes((program / name).read_bytes())
+    oracle = {
+        "testId": "PT-IDEM-016",
+        "source": "UI232/235 fixed byte offsets; SS312/324/351; SQL postconditions on V001..022",
+        "expected": {"firstSend": "ERROR/attempt1/JMS_SEND_FAILURE/API row0",
+                     "beforeDue": "no claim at due minus 1 microsecond",
+                     "retry": "SENT/attempt1/API WEB|REQUEST|HTTP_REQUEST_COMPLETED row1",
+                     "duplicate": "second API callback, source_message_id row remains 1",
+                     "terminalCallbacks": 0},
+        "limitations": "Actual NK process startup and CHR-L01 not covered."
+    }
+    (evidence / "input/oracle.json").write_text(json.dumps(oracle, indent=2) + "\n")
+    suite = ET.Element("testsuite", name=CLASS, tests="1", failures="0", errors="0", skipped="0")
+    ET.SubElement(suite, "testcase", id="PT-IDEM-016", classname=CLASS, name=METHOD, result="PASS")
+    ET.ElementTree(suite).write(evidence / "output/results.xml", encoding="utf-8", xml_declaration=True)
+    (evidence / "coverage/class-counters.json").write_text(json.dumps(coverage, indent=2) + "\n")
+    manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
+                "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
+    manifest.update({"programId": "NK-MSG-002", "testIds": methods,
+                     "scopeResult": "PASS_REAL_LOG_REPLAY_VERTICAL_UNIT_ONLY",
+                     "programComplete": False, "failed": 0, "errors": 0, "skipped": 0,
+                     "expected": oracle["expected"], "actual": "All independent JUnit SQL/JMS assertions passed",
+                     "coverage": coverage,
+                     "related": ["PG253", "PT-IDEM-016", "RD MQ-006/008/010/MON-003/004/005",
+                                 "UI231/235/242/251", "SS312/321/324/331/332/351/352"],
+                     "limitations": oracle["limitations"],
+                     "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+                     "fullReactorManifestSha256": digest(full),
+                     "sourceFiles": [{"path": p, "sha256": digest(repo / p)} for p in SOURCES]})
+    manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)}
+                         for p in sorted(evidence.rglob("*")) if p.is_file()
+                         and p.name not in ("manifest.json", "checksums.sha256")]
+    (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    (evidence / "checksums.sha256").write_text("".join(
+        digest(p) + "  " + str(p.relative_to(evidence)) + "\n"
+        for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
+    print(json.dumps({"runId": run, "testIds": methods, "scopeResult": manifest["scopeResult"]}))
+
+
+if __name__ == "__main__":
+    main()

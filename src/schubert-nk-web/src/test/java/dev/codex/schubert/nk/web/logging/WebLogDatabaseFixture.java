@@ -80,6 +80,10 @@ public final class WebLogDatabaseFixture {
     return DriverManager.getConnection(url, "schubert_web_session", "");
   }
 
+  public Connection api() throws SQLException {
+    return DriverManager.getConnection(url, "schubert_app", "");
+  }
+
   public Connection transaction() throws SQLException {
     Connection connection = web();
     connection.setAutoCommit(false);

@@ -259,6 +259,27 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): screen.validate_web_runtime_dependency_suite(wrong)
 
+    def test_real_log_replay_vertical_inventory_and_negative_coverage(self):
+        vertical = module("log_replay_vertical", "040_collect_log_replay_vertical.py")
+        suite = ET.Element("testsuite", name=vertical.CLASS, tests="1",
+                           failures="0", errors="0", skipped="0")
+        ET.SubElement(suite, "testcase", classname=vertical.CLASS, name=vertical.METHOD)
+        self.assertEqual({"PT-IDEM-016": vertical.CLASS + "#" + vertical.METHOD},
+                         vertical.validate_suite(suite))
+        for key, value in (("tests", "0"), ("failures", "1"), ("errors", "1"),
+                           ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): vertical.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
+        with self.assertRaises(ValueError): vertical.validate_suite(wrong)
+        report = ET.Element("report")
+        candidate = ET.SubElement(report, "class", name=vertical.SUBJECTS[0][1])
+        for counter in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
+            ET.SubElement(candidate, "counter", type=counter, covered="1", missed="0")
+        self.assertEqual(5, len(vertical.validate_coverage(report, vertical.SUBJECTS[0][1])))
+        bad = copy.deepcopy(report); bad[0][4].set("missed", "1")
+        with self.assertRaises(ValueError): vertical.validate_coverage(bad, vertical.SUBJECTS[0][1])
+
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
         names = (
@@ -2540,7 +2561,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-            "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "004_NK-DAT-001/evidence/expiry-audit", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime", "005_NK-MSG-001/evidence/request-sender-resource", "005_NK-MSG-001/evidence/jms-resource-compounds", "006_NK-MSG-002/004_JmsResourceCompounds/evidence"]
+            "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "004_NK-DAT-001/evidence/expiry-audit", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime", "005_NK-MSG-001/evidence/request-sender-resource", "005_NK-MSG-001/evidence/jms-resource-compounds", "006_NK-MSG-002/004_JmsResourceCompounds/evidence", "006_NK-MSG-002/005_LogReplayVertical/evidence"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -2594,7 +2615,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(52, len(check()))
+            self.assertEqual(53, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -2604,7 +2625,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(51):
+        for failed_at in range(52):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -2617,17 +2638,18 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(51, len(calls))
+        self.assertEqual(52, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-9][2].endswith("/030_collect_sync_consumers.py"))
-        self.assertTrue(calls[-8][2].endswith("/031_collect_web_reply_consumers.py"))
-        self.assertTrue(calls[-7][2].endswith("/032_collect_web_log_worker.py"))
-        self.assertTrue(calls[-6][2].endswith("/033_collect_api_web_log_consumers.py"))
-        self.assertTrue(calls[-5][2].endswith("/034_collect_api_messaging_runtime.py"))
-        self.assertTrue(calls[-4][2].endswith("/035_collect_log_path_router.py"))
-        self.assertTrue(calls[-3][2].endswith("/036_collect_api_log_path_runtime.py"))
-        self.assertTrue(calls[-2][2].endswith("/038_collect_request_sender_resource.py"))
-        self.assertTrue(calls[-1][2].endswith("/039_collect_jms_resource_compounds.py"))
+        self.assertTrue(calls[-10][2].endswith("/030_collect_sync_consumers.py"))
+        self.assertTrue(calls[-9][2].endswith("/031_collect_web_reply_consumers.py"))
+        self.assertTrue(calls[-8][2].endswith("/032_collect_web_log_worker.py"))
+        self.assertTrue(calls[-7][2].endswith("/033_collect_api_web_log_consumers.py"))
+        self.assertTrue(calls[-6][2].endswith("/034_collect_api_messaging_runtime.py"))
+        self.assertTrue(calls[-5][2].endswith("/035_collect_log_path_router.py"))
+        self.assertTrue(calls[-4][2].endswith("/036_collect_api_log_path_runtime.py"))
+        self.assertTrue(calls[-3][2].endswith("/038_collect_request_sender_resource.py"))
+        self.assertTrue(calls[-2][2].endswith("/039_collect_jms_resource_compounds.py"))
+        self.assertTrue(calls[-1][2].endswith("/040_collect_log_replay_vertical.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod
@@ -2641,9 +2663,9 @@ class EvidenceSetTest(unittest.TestCase):
             "branch": "dev-foundation", "exitCode": 0,
             "files": [{"path": "results.xml", "sha256": hashlib.sha256(payload).hexdigest()}],
         }
-        if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_", "011_", "012_", "016_", "017_", "018_")):
+        if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_", "006_NK-MSG-002/005_", "011_", "012_", "016_", "017_", "018_")):
             manifest.update({
-                "fullReactorManifest": ("../../../" if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_")) else "../../") + "008_NK-SCN-001/evidence/manifest.json",
+                "fullReactorManifest": ("../../../" if scope.startswith(("004_", "005_", "006_NK-MSG-002/003_", "006_NK-MSG-002/004_", "006_NK-MSG-002/005_")) else "../../") + "008_NK-SCN-001/evidence/manifest.json",
                 "fullReactorManifestSha256": hashlib.sha256(
                     (root / "008_NK-SCN-001/evidence/manifest.json").read_bytes()).hexdigest(),
             })
