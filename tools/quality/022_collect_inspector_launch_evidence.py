@@ -152,6 +152,15 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest
     ("dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest", 1,
     ("opsWebInput001CombinesIndependentFixedInputs", "opsWebInput002MissingPrivateLocationStopsBeforeSourceRead",
      "opsWebInput003SourceFailureAndConfigAdmissionStayDistinct", "opsWebInput004NullContracts")))
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest", 1,
+    ("opsCredread001AllFixedIdsReturnOwnedExactBytes",
+     "opsCredread002RejectsCrossServiceAndNullBeforeIo",
+     "opsCredread003MissingSymlinkAndNonregularFailClosed",
+     "opsCredread004RootAndAclAdmissionBeforeContent",
+     "opsCredread005KeyPasswordSizeMetadataAndDeviceBoundaries",
+     "opsCredread006ReadSizeCloseAndRootDriftFailuresEraseBuffer",
+     "opsCredread007EntryCloseAndBorrowedRootLifetime",
+     "opsCredread008ConcurrentIndependentOwnedReads")),)
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
@@ -162,7 +171,11 @@ RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs"),
-                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebStartupInputs"))
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebStartupInputs"),
+                    ("api", "dev/codex/schubert/nk/api/file/InspectorCredentialLoader"),
+                    ("api", "dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess"),
+                    ("api", "dev/codex/schubert/nk/api/file/ServiceCredentialReader"),
+                    ("api", "dev/codex/schubert/nk/api/file/ServiceCredentialException"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -293,7 +306,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
                    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
                    "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
-                   "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
+                   "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -364,6 +378,7 @@ def main():
         sources += [repo / ("src/schubert-nk-" + module) / "src/main/java" / (subject + ".java")
                     for module, subject in RUNTIME_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java"]
+        sources += [repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java"]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/deployment/config" / name
                     for name in ("common.yml.template", "api.yml.template", "web.yml.template",
@@ -512,6 +527,8 @@ def main():
         manifest["startupInputsOracle"] = "072/074: API/Web each receives fixed nonsecret YAML source and systemd CREDENTIALS_DIRECTORY in one nonsecret startup boundary; independent literal DEBUG/config/Path, missing credential location before source IO, checked source failure identity vs fixed invalid config, null contracts and separate immutable result. Does not read a credential, create DB/JMS or launch an external process."
         manifest["related"] += ["PG-D-280", "SSC-081", "PT-OPS-CREDID-001..004"]
         manifest["credentialIdOracle"] = "076/PT-OPS-CREDID-001..004: independent SS342/343 literal API and Web five LoadCredential IDs, password vs fixed-key kind, disjoint service identity, immutable allowlists and null rejection. No credential byte read or OS distribution is claimed."
+        manifest["related"] += ["PG-D-281", "SSC-081", "PT-OPS-CREDREAD-001..008"]
+        manifest["credentialReaderOracle"] = "078/PT-OPS-CREDREAD-001..008: borrowed retained directory, fixed service ID and existing strict Inspector inode/ACL/readonly admission reused; independent synthetic ten ID bytes, password/key 1..65536/54..69 bounds, same-device, missing/symlink/nonregular/cross-service rejection, root/file drift and IO/entry-close faults, buffer erasure and32 fresh concurrent reads. Test metadata is explicitly synthetic; no actual root/systemd credential distribution, secret format codec, DB/JMS or external process is claimed."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

@@ -5,6 +5,7 @@ import dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccess;
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -26,7 +27,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * Borrowed credential root; parse only after bounded file IO and owned entry close succeed.
  * NK-DAT-001; DAT-009/OPS-009/FIL-006; UI212/241/251; SS311/343 6.4; QA-046/SSC-049/PG-D-134;
- * PT-DB-INBOX-129..140.
+ * PT-DB-INBOX-129..140. SSC-081/PG281 additionally reuses the same held-inode/ACL/bounded read path
+ * for the fixed Web/API ServiceCredentialId catalog; no caller filename is accepted.
  */
 @NullMarked
 public final class InspectorCredentialLoader {
@@ -86,8 +88,33 @@ public final class InspectorCredentialLoader {
     }
   }
 
+  /** Fixed Web/API ID only; returned raw bytes are exclusively caller-owned and must be cleared. */
+  byte[] readService(ServiceCredentialId credential) throws InspectorCredentialException {
+    Objects.requireNonNull(credential, "service credential ID");
+    boolean password = credential.kind() == ServiceCredentialId.Kind.PASSWORD;
+    byte[] buffer = new byte[password ? 65537 : 70];
+    try {
+      Snapshot before = root.atDirectory(this::directory);
+      int length =
+          readOptional(credential.fileName(), false, buffer, password, before.metadata().device())
+              .orElseThrow();
+      require(before.equals(root.atDirectory(this::directory)));
+      return Arrays.copyOf(buffer, length);
+    } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      throw new InspectorCredentialException();
+    } finally {
+      Arrays.fill(buffer, (byte) 0);
+    }
+  }
+
   private OptionalInt readOptional(
       String fileName, boolean optional, byte[] buffer, boolean database)
+      throws StorageIoException {
+    return readOptional(fileName, optional, buffer, database, -1);
+  }
+
+  private OptionalInt readOptional(
+      String fileName, boolean optional, byte[] buffer, boolean database, long expectedDevice)
       throws StorageIoException {
     // Operation-local marker: missing after entry acquisition/inside IO/at close is not optional.
     var entered = new AtomicBoolean();
@@ -97,7 +124,7 @@ public final class InspectorCredentialLoader {
               fileName,
               held -> {
                 entered.set(true);
-                return readFile(held, buffer, database);
+                return readFile(held, buffer, database, expectedDevice);
               });
       return OptionalInt.of(length);
     } catch (StorageIoException failure) {
@@ -107,8 +134,10 @@ public final class InspectorCredentialLoader {
     }
   }
 
-  private int readFile(Path held, byte[] bytes, boolean database) throws IOException {
+  private int readFile(Path held, byte[] bytes, boolean database, long expectedDevice)
+      throws IOException {
     Snapshot before = file(held, database);
+    if (expectedDevice >= 0) require(before.metadata().device() == expectedDevice);
     int expectedSize = (int) before.metadata().size();
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
     try (var channel = io.openReadOnly(held)) {
