@@ -63,6 +63,11 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
             with self.assertRaises(ValueError):
                 jms_compounds.validate_suite(wrong, class_name, method, count)
+            wrong = copy.deepcopy(suite)
+            wrong[0].set("name", method.removesuffix("(Path)") if method.endswith("(Path)")
+                         else method + "(Path)")
+            with self.assertRaises(ValueError):
+                jms_compounds.validate_suite(wrong, class_name, method, count)
             wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], "failure")
             with self.assertRaises(ValueError):
                 jms_compounds.validate_suite(wrong, class_name, method, count)

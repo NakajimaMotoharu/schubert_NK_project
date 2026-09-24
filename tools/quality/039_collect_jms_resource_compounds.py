@@ -30,7 +30,7 @@ SUBJECTS = (
      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
     ("PT-IDEM-010-R05", "NK-MSG-002", "006_NK-MSG-002", "api",
      "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
-     "idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess", 14,
+     "idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess(Path)", 14,
      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
     ("PT-IDEM-012-R01", "NK-MSG-002", "006_NK-MSG-002", "web",
      "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
