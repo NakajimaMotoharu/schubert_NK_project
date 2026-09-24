@@ -48,6 +48,7 @@ Source/release/config/credential/data/log/runtimeの配置、環境差分、設�
 | `/srv/schubert-nk/staging/<run-id>` | migration user 0700 | 移行中asset/manifest、対象run限定 | Go/切戻し完了まで隔離 |
 
 Directoryはprovisioningで明示作成し、application起動時に不明rootを自動作成/chmodしない。
+SSC-079/BUG-253/YKT-191: release/configの`root:schubert`0750/非秘密file0640は両Java serviceが`schubert`補助groupを明示して読む。service専用primary groupと既存asset/transfer用補助groupは不変。`/etc/schubert-nk/credentials` root:root0700とservice private LoadCredentialを`schubert`へ公開しない。実OS account provisioningとsystemd起動後読取・秘密拒否はLinux ITで検証し、templateのdirective照合だけで実配布済みとはしない。
 SSC-020: Transfer rootはschubert-api:schubert-web 0750を維持する。APIは専用primary group＋schubert-web supplementary membershipで、新規作成した保持inodeだけをchgrpし、date0750/part0640へ確定する。既存date/part/readyのmode/groupを補正して受理しない。API/Web credentialとprivate runtimeの600境界を維持し、共有group追加を秘密fileの公開理由にしない。
 Asset/transfer/backup/log/Artemis/stagingを同一または相互配下、またはsymlink接続しない。
 

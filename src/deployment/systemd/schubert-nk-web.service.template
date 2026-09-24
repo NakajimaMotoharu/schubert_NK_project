@@ -1,5 +1,5 @@
 # NK-OPS-001; RD SYS-002/004, AUT-001, OPS-009; UI212/225/251/253; SS311/313/342/343.
-# PG269/PT-OPS-SVC-001..004. Do not install until WebProcessMain and full readiness are verified.
+# PG269/274, SSC-079, PT-OPS-SVC-001..004. Do not install until WebProcessMain and full readiness are verified.
 [Unit]
 Description=Schubert NK Web
 After=schubert-nk-api.service artemis.service postgresql.service
@@ -11,7 +11,7 @@ StartLimitBurst=5
 Type=simple
 User=schubert-web
 Group=schubert-web
-SupplementaryGroups=schubert-read
+SupplementaryGroups=schubert schubert-read
 WorkingDirectory=/opt/schubert-nk/current/web
 EnvironmentFile=/etc/schubert-nk/web.env
 UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH

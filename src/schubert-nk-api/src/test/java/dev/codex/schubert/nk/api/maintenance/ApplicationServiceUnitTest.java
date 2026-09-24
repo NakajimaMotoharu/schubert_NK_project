@@ -14,7 +14,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/251/253; SS342/343; PG269. */
+/** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/243/251/253; SS342/343; PG269/274. */
 final class ApplicationServiceUnitTest {
   private static final Path ROOT = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path UNITS = ROOT.resolve("src/deployment/systemd");
@@ -26,7 +26,7 @@ final class ApplicationServiceUnitTest {
     common(unit, "api", "2048M", "60s", "512m", "1024m", "256m", "256m");
     exact(unit, "After", "expiry-cleanup.service artemis.service postgresql.service");
     exact(unit, "Requires", "expiry-cleanup.service artemis.service postgresql.service");
-    exact(unit, "SupplementaryGroups", "schubert-read schubert-web");
+    exact(unit, "SupplementaryGroups", "schubert schubert-read schubert-web");
     exact(unit, "ReadWritePaths", "/srv/schubert-nk/data/transfer");
     credentials(
         unit,
@@ -46,7 +46,7 @@ final class ApplicationServiceUnitTest {
     common(unit, "web", "1536M", "30s", "384m", "768m", "128m", "192m");
     exact(unit, "After", "schubert-nk-api.service artemis.service postgresql.service");
     exact(unit, "Requires", "schubert-nk-api.service artemis.service postgresql.service");
-    exact(unit, "SupplementaryGroups", "schubert-read");
+    exact(unit, "SupplementaryGroups", "schubert schubert-read");
     assertFalse(unit.contains("ReadWritePaths="));
     credentials(
         unit,

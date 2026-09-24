@@ -118,6 +118,8 @@ SSC-075: 起動前のOps Core management属性照会はSS321 §10の管理namesp
 
 SSC-020: APIのUser/primary Groupはschubert-api専用を維持し、Transfer読取group schubert-webをSupplementaryGroupsへ追加する。Asset用のschubert-readと同様、共有対象は承認済みdataだけであり、Web/APIのcredentialやprivate runtime fileをgroup-readableへ変更しない。APIが作った新規日付directory/partに限り、保持inodeへgroup=schubert-webと0750/0640を明示設定して検証する。既存root/childの所有者・mode不一致は起動/処理失敗とし、applicationが修正しない。Provisioningと起動probeでgroup membership・新規作成権限を検証する。
 
+SSC-079/BUG-253/YKT-191: Web/APIのreleaseとconfigはUI243/SS343の`root:schubert` directory0750・非秘密file0640なので、両unitの`SupplementaryGroups`へ`schubert`を明示し、OS accountの暗黙の補助groupに依存しない。APIは既存`schubert-read schubert-web`、Webは既存`schubert-read`を維持する。`schubert`は非秘密release/configの読取にだけ用い、`/etc/schubert-nk/credentials`のroot:root0700、private runtime、service別LoadCredentialの秘密権限は緩和しない。PTではmode/groupの独立固定oracleと両unitのdirectiveを照合し、実Linuxでのgroup provisioning/credential分離と起動後の実読取はIT開始条件へ残す。
+
 ### 4.3 Hardening
 
 Web/API/batchは`NoNewPrivileges=true`、`PrivateTmp=true`、`PrivateDevices=true`、`ProtectSystem=strict`、
