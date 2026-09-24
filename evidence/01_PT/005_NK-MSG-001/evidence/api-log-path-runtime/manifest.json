@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-64",
-  "targetCommit": "15764bdf34f37e16066f73cf00f8c1791723d820",
+  "runId": "PT-WEB-20260925-01",
+  "targetCommit": "c95a0fcaf7e53fbbbacc9779221534f5d162b3f9",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T23:50:44+09:00",
-  "completedAt": "2026-09-25T00:03:44+09:00",
+  "startedAt": "2026-09-25T00:18:19+09:00",
+  "completedAt": "2026-09-25T00:31:24+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "c5cbd2ebf280f4167a92e6d6e7c98eef5858b2493683e01d3bacb1c339107a4a",
+  "rawLogSha256": "08b63ee29f6bad68aa5d959c28764d475b36590f401fcff5ca4af4045bf0fd88",
   "programId": "NK-MSG-001",
   "testIds": {
     "PT-JMS-018-A": "dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest#realDatabaseAndBrokerBindThreeRoutesAndTerminal(Path)",
@@ -26,7 +26,10 @@
     "PT-JMS-019-B": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#nullAndInvalidDatabaseFailBeforeBroker",
     "PT-JMS-019-C": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#jdbcInspectionAndCloseFailuresAreRedacted",
     "PT-JMS-019-D": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#brokerNullModeAttachAndCloseFailuresAreRedacted",
-    "PT-JMS-019-E": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#stoppedBrokerCannotPassConnectivity"
+    "PT-JMS-019-E": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#stoppedBrokerCannotPassConnectivity",
+    "PT-JMS-022-A": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#apiReadinessFatalBrokerCloseCannotBeDowngradedToOrdinaryUnavailable",
+    "PT-JMS-022-B": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#apiReadinessOrdinaryInspectionAndCloseFailuresRemainRedacted",
+    "PT-JMS-022-C": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest#apiReadinessFatalInspectionRetainsIdentityEvenWhenCloseAlsoFatal"
   },
   "scopeResult": "PASS_API_LOG_PATH_STARTUP_UNIT_ONLY",
   "programComplete": false,
@@ -56,19 +59,19 @@
     "readiness": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 84
+        "covered": 105
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 4
+        "covered": 10
       },
       "LINE": {
         "missed": 0,
-        "covered": 25
+        "covered": 34
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 4
+        "covered": 7
       },
       "METHOD": {
         "missed": 0,
@@ -84,15 +87,17 @@
   "errors": 0,
   "skipped": 0,
   "related": [
-    "PG233/234",
-    "PT-JMS-018/019",
+    "PG233/234/266",
+    "PT-JMS-018/019/022",
+    "BUG-248",
+    "YKT-154",
     "RD FUN-001/008 AUT-001/002 MQ-001/003/006/008 SYS-004",
     "UI225/226/231/232/235",
     "SS311/312/314/321/323/324"
   ],
   "limitations": "No full API process, production credentials, broker-management readiness, real NK CHR or IT/ST.",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "971e05c98b25b60d5cec2beac2bbe456db0d226f21108eed65405f0d3217ef46",
+  "fullReactorManifestSha256": "2db25eb5f2455ab75ea41588944a3b5943a3c0b4a459a4cda2fddb55f1be9e02",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java",
@@ -104,33 +109,33 @@
     },
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
-      "sha256": "4bec8c0953f885c550f6ebb0339701ff60f0ff301b0dcda86cdbcd846e5aabbf"
+      "sha256": "6ebef2a905bbdc911d29cf2918ebb70fc9199dccbc93c76d029fca52f2ebef64"
     },
     {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadinessTest.java",
-      "sha256": "bdc9c7d075458d949b975bdf66a34faec527f1aa629fe383f68ed1e3faf17e59"
+      "sha256": "f0ca9c811eb557b1c874fcabfdab567c43db10c1d076c7d1eb2b408d6b236eb3"
     }
   ],
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "8efbfa50e754ed90ae865e74b7e7a21b16e091a79cbc4d13ae6919e3582cc8e6"
+      "sha256": "589abd698f76c9659ec7912cc92f6a3398952410c2729231b539abe8cee10d78"
     },
     {
       "path": "input/oracle.json",
-      "sha256": "6e01204ce00eeca32d1458d9818edd652fa01a9d7fe5a021b9e6a09f6c93055b"
+      "sha256": "c62c1f538e3244b25ed932ecc993713069cb10eb36b1b02145df1fd595d0c687"
     },
     {
       "path": "logs/001_NK-MSG-001_単体テスト仕様書.md",
-      "sha256": "2e872bd167d8cd6e91b0e1545edee09f6d0b1c4a9e66b4b3aff4f0897e9b5058"
+      "sha256": "3b91b9abf779b34f26b2d9ac383df743de32c82ea6354c38c13d9d406506f363"
     },
     {
       "path": "logs/002_NK-MSG-001_実行結果.md",
-      "sha256": "543bbcba76783f2615183809e72a250a663d827e2128c6910a5f04a739b61860"
+      "sha256": "7434bef26b1e467c73f3b278aeabaffb21a6cfe9e5c25d8206504517cf28d6d3"
     },
     {
       "path": "output/results.xml",
-      "sha256": "a943315ca9df5ad0fd3b361eed5353c89a8c680d12593cc97e8c71e023247d2d"
+      "sha256": "3e7ba6a51c5be661d0d6e1834ef392e92336eceebd0d68710220344963acc07b"
     }
   ]
 }
