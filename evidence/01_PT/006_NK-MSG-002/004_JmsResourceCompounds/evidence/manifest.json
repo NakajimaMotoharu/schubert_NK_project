@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-60",
-  "targetCommit": "71c79c4b7a6b5f0c0fa8493ebc62520e069236e8",
+  "runId": "PT-WEB-20260924-62",
+  "targetCommit": "fa6be989f4cc71d65b58ab2bddda90612f9292b3",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T21:53:14+09:00",
-  "completedAt": "2026-09-24T22:05:18+09:00",
+  "startedAt": "2026-09-24T22:46:07+09:00",
+  "completedAt": "2026-09-24T22:58:16+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,10 +16,14 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "866ce8735fde1815d9526522d4a9c957400d7e9cd0c647b8c4a1076df54c6085",
+  "rawLogSha256": "394d1de2b7f5c0aed5b206515b0efcea956dc13f7f07dd53a39d34b0305b82bb",
   "programId": "NK-MSG-002",
   "testIds": {
     "PT-IDEM-010-R01": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#idem010r01SameProviderFailureOnStageAndRollbackKeepsOriginalCause",
+    "PT-IDEM-010-R02": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#idem010r02SameProviderFailureOnSessionModeAndCloseKeepsOriginalCause",
+    "PT-IDEM-010-R03": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#idem010r03DistinctSessionModeAndCloseFailuresKeepFixedPrimary",
+    "PT-IDEM-010-R04": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#idem010r04FatalSessionModeAndCloseKeepFatalIdentity",
+    "PT-IDEM-010-R05": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest#idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess(Path)",
     "PT-IDEM-012-R01": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest#idem012r01SameProviderFailureOnStageAndRollbackKeepsOriginalCauseAndErasesWire"
   },
   "scopeResult": "PASS_JMS_RESOURCE_COMPOUND_UNIT_ONLY",
@@ -28,23 +32,23 @@
     "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 277
+        "covered": 337
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 34
+        "covered": 44
       },
       "LINE": {
         "missed": 0,
-        "covered": 83
+        "covered": 103
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 24
+        "covered": 30
       },
       "METHOD": {
         "missed": 0,
-        "covered": 7
+        "covered": 8
       },
       "CLASS": {
         "missed": 0,
@@ -84,6 +88,7 @@
   "related": [
     "PG251",
     "BUG-242",
+    "BUG-244",
     "YKT-154",
     "RD MQ-003/004/006/008",
     "UI231/242",
@@ -92,7 +97,7 @@
   ],
   "limitations": "Other JMS/JDBC/IO owners, Production startup, real NK CHR and IT/ST remain unverified.",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "09fb207362e05ec1828692aae141ae538c6949a31c59055c087605dc0747e608",
+  "fullReactorManifestSha256": "d081d7690059215aaeb24ef7cefbb02500f4dcc8a21038c3b7d02a83ac17dcc1",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
@@ -104,11 +109,11 @@
     },
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java",
-      "sha256": "ced9c8e1eb5e2ea8e21d7398c0da76eeb89a96ff4e5824cd0b414d5d43379bee"
+      "sha256": "c1c8393ac8c959dc7bfaa76aaec99751ab46a1573d147ac0e7863e9606d25ae1"
     },
     {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcherTest.java",
-      "sha256": "da775c5a2f7f28976ebf61fbbe6b977ad3d60f60b0a1ad68cff06022dcbc1bc1"
+      "sha256": "2ba1c711c76a1d4913007e79d2bc218c15a643d6a309f0acf9a88f666f560cb9"
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
@@ -122,23 +127,27 @@
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "629d48e12bdcb5e7b068ece3ec56f85ec5b38aa18f8fea1b8abe610c0e76736c"
+      "sha256": "c491b91ed8e2afd1d56776b54e10a06bf4bb94b7434b590e18d165f1c0c0d826"
     },
     {
       "path": "input/oracle.json",
-      "sha256": "39a426adf8a2bd696b6f062dbcd43f5405689b52e7346c86af027d8af8446134"
+      "sha256": "d003e34845aa5fbbe536970b59ef2aeac84a07ffab874cb55bc1a59b16251430"
     },
     {
       "path": "logs/001_NK-MSG-002_単体テスト仕様書.md",
-      "sha256": "1ae1151c8fda13227f7964b185d1887af4f4b83698d14949d04005dda5a72874"
+      "sha256": "9864b886dfe95852118032eeebda296819d4f731cd106858de836fba925f2451"
     },
     {
       "path": "logs/002_NK-MSG-002_実行結果.md",
-      "sha256": "8ebd20be0dcacc27bf61aec5ada3847e0be0b05ae42538ecf42902f38cea957d"
+      "sha256": "6b0e46a5803cb7eb1d137eac6c29b57447b232999804d27be819d0603be6e0b5"
     },
     {
       "path": "output/PT-IDEM-010-R01-BUG-242-red.txt",
       "sha256": "ef075c8948c653be57417c523aa6cecb717d98eb719f75e3060ed1ba59983212"
+    },
+    {
+      "path": "output/PT-IDEM-010-R02-BUG-244-red.txt",
+      "sha256": "367617069331a7456293f399b873d08e3e2a8497b146189520ffe07429b3f114"
     },
     {
       "path": "output/PT-IDEM-012-R01-BUG-242-red.txt",
@@ -146,7 +155,7 @@
     },
     {
       "path": "output/results.xml",
-      "sha256": "4cf3dcc15ae8526fdac64eb963ff0dbac80c7bb3e1b52ca0c5a357084e1f6ee4"
+      "sha256": "c01dc6267d486c3a623ed8334ca8d3344ed8647ed5578374fd826b181bc81316"
     }
   ]
 }
