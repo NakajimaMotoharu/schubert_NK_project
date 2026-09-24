@@ -238,3 +238,4 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 | 2026-09-03 | NK-MSG-001のWeb reply decoder/consumer、active/late ACK、body/type不変DLQ隔離、隔離失敗rollbackを反映。Web中間gateを27件へ更新。 |
 | 2026-09-04 | NK-MSG-001のAPI sync/work/log listenerを含む最終reactor runとPT-JMS-012 scanを完了。sanitized evidence/manifest/hashを固定し、ProgramをPG/PT完了へ更新。 |
 | 2026-09-05 | NK-MSG-002の`JdbcInboxCoordinator`とrequest/completion/result model、PT-IDEM-004～006の実PostgreSQL transaction/replay/競合証跡を反映。PT-IDEM-001～008を中間PASSとし、未実施009～015を明示。 |
+2026-09-25 PG272正式gate前: `NK-OPS-001` API `ApiNonSecretConfig.parse/value/canonicalSha256`と`src/deployment/config/{common,api}.yml.template`→PT-OPS-API-CFG-001～006（018/060・061・manifest）。RD SYS-002/004・MQ-001・DAT-001、UI212/231/253、SS311/321/342/343 §4–5。非秘密層合成と独立golden vectorに限定し、実file/credential/DB admission・全起動は未了。BUG-251を修正前起票。

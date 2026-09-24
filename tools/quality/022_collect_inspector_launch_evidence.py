@@ -117,8 +117,13 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest", 1,
     ("dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest", 4,
     ("opsDbpool004RealRoleAndFixedConfiguration", "opsDbpool005TwoBorrowersAndThirdTimeout",
      "opsDbpool006NullAndUnavailableFailBeforeReady")))
-POOL_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
-                 ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"))
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest", 1,
+    ("opsApiCfg001IndependentDefaultsAndCanonicalHash", "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
+     "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures", "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
+     "opsApiCfg005NullUnknownAndConcurrentDeterminism", "opsApiCfg006ShippedTemplatesMatchApprovedDefaults")),)
+RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -233,7 +238,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ",
                    PREFIX + "ApplicationServiceUnitTest": "PT-OPS-SVC",
                    "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest": "PT-OPS-DBPOOL",
-                   "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
+                   "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -298,14 +304,14 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
-        for module, subject in POOL_SUBJECTS:
+        for module, subject in RUNTIME_SUBJECTS:
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
                     coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
                                      for c in cls.findall("counter")}
-        if not {subject for _, subject in POOL_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-            raise SystemExit("missing or incomplete API/Web pool coverage")
+        if not {subject for _, subject in RUNTIME_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+            raise SystemExit("missing or incomplete API/Web runtime coverage")
         for module, subject in (("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
                                 *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS))):
@@ -329,8 +335,10 @@ def main():
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
         sources += [repo / ("src/schubert-nk-" + module) / "src/main/java" / (subject + ".java")
-                    for module, subject in POOL_SUBJECTS]
+                    for module, subject in RUNTIME_SUBJECTS]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
+        sources += [repo / "src/deployment/config" / name
+                    for name in ("common.yml.template", "api.yml.template")]
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
@@ -383,7 +391,9 @@ def main():
                      "056_NK-OPS-001_WebAPI_service単体テスト仕様書.md",
                      "057_NK-OPS-001_WebAPI_service実行結果.md",
                      "058_NK-OPS-001_WebAPI_DBpool単体テスト仕様書.md",
-                     "059_NK-OPS-001_WebAPI_DBpool実行結果.md"):
+                     "059_NK-OPS-001_WebAPI_DBpool実行結果.md",
+                     "060_NK-OPS-001_API非秘密設定単体テスト仕様書.md",
+                     "061_NK-OPS-001_API非秘密設定実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -448,6 +458,8 @@ def main():
         manifest["serviceUnitOracle"] = "056/PT-OPS-SVC-001..004: SS342/343 independent API/Web dependency, five LoadCredential IDs each, service identity, readonly/write separation, exact JVM resources/hardening and no secret environment/shell; rendered syntax verified with test-only /bin/true and no host manager mutation. Java entry, actual credential distribution/DB/JMS/readiness and NK capture are unverified."
         manifest["related"] += ["PG-D-271", "PT-OPS-DBPOOL-001..006"]
         manifest["databasePoolOracle"] = "058/PT-OPS-DBPOOL-001..006: two isolated PostgreSQL18 clusters with production DDL roles, SQL current_user/database and cross-schema 42501 denial; HikariCP7.1.0 API max8/min2 and Web max2/min1 with 3000ms wait, actual 8+1/2+1 borrowing, return/reuse, null and unavailable startup rejection. Credential/URL admission, external process and NK capture remain unverified."
+        manifest["related"] += ["PG-D-272", "BUG-251", "PT-OPS-API-CFG-001..006"]
+        manifest["apiNonSecretConfigOracle"] = "060/PT-OPS-API-CFG-001..006: independent SS343 sorted UTF-8 key=value LF SHA-256 vector and shipped common/api YAML; defaults→common→API merge, six fixed broker addresses, loopback URL bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

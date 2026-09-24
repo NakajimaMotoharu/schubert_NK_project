@@ -2242,6 +2242,10 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest", 4,
                        ("opsDbpool004RealRoleAndFixedConfiguration", "opsDbpool005TwoBorrowersAndThirdTimeout",
                         "opsDbpool006NullAndUnavailableFailBeforeReady")))
+        groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest", 1,
+                       ("opsApiCfg001IndependentDefaultsAndCanonicalHash", "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
+                        "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures", "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
+                        "opsApiCfg005NullUnknownAndConcurrentDeterminism", "opsApiCfg006ShippedTemplatesMatchApprovedDefaults")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2276,7 +2280,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ",
                        "dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest": "PT-OPS-SVC",
                        "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest": "PT-OPS-DBPOOL",
-                       "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
+                       "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
