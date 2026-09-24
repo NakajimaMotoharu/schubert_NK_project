@@ -1,0 +1,3 @@
+# NK-OPS-001 service credential set実行結果
+
+PG284/SSC-081、PT-OPS-CREDSET-001～005。2026-09-25、branch`dev-foundation`、Linux/JDK25.0.4/Maven wrapper。選択5PTはfailure/error/skipped0、collector自己試験103件PASS。初回NullAwayのnullable Map取得指摘は全5 ID取得後だけconstructするinvariantを明示する非null検査で解消し、コンパイル不合格を認定しない。API全verify初回はBUG-258のcompiler synthetic enum default branch1 missedでexit1、修正後はBUG-259の公開monitor同期SpotBugs4件でexit1。両runは不認定。Kind全値PT、private lockと公開monitor干渉負PT-005追加後のAPI全verifyはexit0、新Set instruction/branch/line/method/class missed0、SpotBugs0。全reactor正式run・53scope/hash・対象commit固定は未実施のため正式合格ではない。実systemd配布・DB/MQ driver/外部main/実NK CHRは未認定。

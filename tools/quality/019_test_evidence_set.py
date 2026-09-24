@@ -2295,6 +2295,12 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsDbadmit002WrongRoleTransactionAndReadonlyRejectWithoutOwningConnection",
                         "opsDbadmit003RowsNullMismatchDuplicateAndSqlFaultsFailClosed",
                         "opsDbadmit004StrictUrlAndNullContracts")))
+        groups.append(("dev.codex.schubert.nk.api.file.ServiceCredentialSetTest", 1,
+                       ("opsCredset001FiveFixedMaterialsPerServiceAreOwnedAndClosed",
+                        "opsCredset002WrongIdNullAndClosedStateReject",
+                        "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
+                        "opsCredset004ConcurrentIndependentLoads",
+                        "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]
@@ -2349,7 +2355,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
                        "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
                        "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
-                       "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
+                       "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
