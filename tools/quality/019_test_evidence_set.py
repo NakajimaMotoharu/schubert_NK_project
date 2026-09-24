@@ -39,7 +39,9 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     def test_jms_resource_compound_inventory_and_coverage(self):
-        self.assertEqual(("PT-JMS-021", "PT-IDEM-010-R01", "PT-IDEM-012-R01"),
+        self.assertEqual(("PT-JMS-021", "PT-IDEM-010-R01", "PT-IDEM-010-R02",
+                          "PT-IDEM-010-R03", "PT-IDEM-010-R04", "PT-IDEM-010-R05",
+                          "PT-IDEM-012-R01"),
                          tuple(subject[0] for subject in jms_compounds.SUBJECTS))
         for test_id, program, folder, module_name, class_name, method, count, subject in jms_compounds.SUBJECTS:
             self.assertTrue(test_id.startswith("PT-"))

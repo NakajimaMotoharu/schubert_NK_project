@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BUG-242: certify three JMS rollback self-suppression contracts by Program."""
+"""Certify JMS rollback and owned-context close compound contracts by Program."""
 import argparse
 import hashlib
 import json
@@ -14,7 +14,23 @@ SUBJECTS = (
      "dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer"),
     ("PT-IDEM-010-R01", "NK-MSG-002", "006_NK-MSG-002", "api",
      "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
-     "idem010r01SameProviderFailureOnStageAndRollbackKeepsOriginalCause", 10,
+     "idem010r01SameProviderFailureOnStageAndRollbackKeepsOriginalCause", 14,
+     "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
+    ("PT-IDEM-010-R02", "NK-MSG-002", "006_NK-MSG-002", "api",
+     "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+     "idem010r02SameProviderFailureOnSessionModeAndCloseKeepsOriginalCause", 14,
+     "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
+    ("PT-IDEM-010-R03", "NK-MSG-002", "006_NK-MSG-002", "api",
+     "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+     "idem010r03DistinctSessionModeAndCloseFailuresKeepFixedPrimary", 14,
+     "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
+    ("PT-IDEM-010-R04", "NK-MSG-002", "006_NK-MSG-002", "api",
+     "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+     "idem010r04FatalSessionModeAndCloseKeepFatalIdentity", 14,
+     "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
+    ("PT-IDEM-010-R05", "NK-MSG-002", "006_NK-MSG-002", "api",
+     "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+     "idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess", 14,
      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender"),
     ("PT-IDEM-012-R01", "NK-MSG-002", "006_NK-MSG-002", "web",
      "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
@@ -74,10 +90,10 @@ def write_scope(repo, full, verified, program_id, folder, methods, coverage):
                  "002_" + program_id + "_実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     oracle = {"testIds": list(methods), "source": "SS312/321/324 and Java Throwable self-suppression contract",
-              "expected": "same provider Throwable on primary and rollback: original identity/cause, rollback once, no self-suppression; no unconfirmed delivery or ACK success",
+              "expected": "same provider Throwable on primary and rollback/close: original identity/cause, each owned resource closed once, no self-suppression; distinct close failure is secondary, and no unconfirmed delivery or ACK success",
               "scope": "three sender/consumer resource units only; not full NK startup"}
     (evidence / "input/oracle.json").write_text(json.dumps(oracle, indent=2) + "\n")
-    suite = ET.Element("testsuite", name="BUG-242", tests=str(len(methods)),
+    suite = ET.Element("testsuite", name="JMS-RESOURCE-COMPOUNDS", tests=str(len(methods)),
                        failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         classname, name = method.split("#", 1)
@@ -90,7 +106,7 @@ def write_scope(repo, full, verified, program_id, folder, methods, coverage):
         "programId": program_id, "testIds": methods,
         "scopeResult": "PASS_JMS_RESOURCE_COMPOUND_UNIT_ONLY", "programComplete": False,
         "coverage": coverage, "failed": 0, "errors": 0, "skipped": 0,
-        "related": ["PG251", "BUG-242", "YKT-154", "RD MQ-003/004/006/008",
+        "related": ["PG251", "BUG-242", "BUG-244", "YKT-154", "RD MQ-003/004/006/008",
                     "UI231/242", "SS312/321/324", "442"],
         "limitations": "Other JMS/JDBC/IO owners, Production startup, real NK CHR and IT/ST remain unverified.",
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",

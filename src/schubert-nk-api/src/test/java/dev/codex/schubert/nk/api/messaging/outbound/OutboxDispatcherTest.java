@@ -874,6 +874,117 @@ final class OutboxDispatcherTest {
   }
 
   @Test
+  void idem010r03DistinctSessionModeAndCloseFailuresKeepFixedPrimary() {
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-mode-failure");
+    JMSRuntimeException secondary = new JMSRuntimeException("synthetic-close-failure");
+    AtomicInteger closes = new AtomicInteger();
+    JMSContext context =
+        (JMSContext)
+            Proxy.newProxyInstance(
+                JMSContext.class.getClassLoader(),
+                new Class<?>[] {JMSContext.class},
+                (ignored, method, args) ->
+                    switch (method.getName()) {
+                      case "getSessionMode" -> throw primary;
+                      case "close" -> {
+                        closes.incrementAndGet();
+                        throw secondary;
+                      }
+                      case "toString" -> "synthetic-context";
+                      default -> throw new AssertionError(method.getName());
+                    });
+    OutboxSendException failure =
+        assertThrows(
+            OutboxSendException.class, () -> new OutboxJmsSender().send(() -> context, sample()));
+    assertEquals("outbox JMS context lifecycle failed", failure.getMessage());
+    assertSame(primary, failure.getCause());
+    assertEquals(1, failure.getSuppressed().length);
+    assertSame(secondary, failure.getSuppressed()[0]);
+    assertEquals(1, closes.get());
+  }
+
+  @Test
+  void idem010r04FatalSessionModeAndCloseKeepFatalIdentity() {
+    AssertionError primary = new AssertionError("synthetic-fatal-mode");
+    for (boolean same : new boolean[] {true, false}) {
+      AssertionError secondary = same ? primary : new AssertionError("synthetic-fatal-close");
+      AtomicInteger closes = new AtomicInteger();
+      JMSContext context =
+          (JMSContext)
+              Proxy.newProxyInstance(
+                  JMSContext.class.getClassLoader(),
+                  new Class<?>[] {JMSContext.class},
+                  (ignored, method, args) ->
+                      switch (method.getName()) {
+                        case "getSessionMode" -> throw primary;
+                        case "close" -> {
+                          closes.incrementAndGet();
+                          throw secondary;
+                        }
+                        case "toString" -> "synthetic-context";
+                        default -> throw new AssertionError(method.getName());
+                      });
+      assertSame(
+          primary,
+          assertThrows(
+              AssertionError.class, () -> new OutboxJmsSender().send(() -> context, sample())));
+      assertEquals(1, closes.get());
+      assertEquals(same ? 0 : 1, primary.getSuppressed().length);
+      if (!same) assertSame(secondary, primary.getSuppressed()[0]);
+    }
+  }
+
+  @Test
+  void idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess(@TempDir Path root)
+      throws Exception {
+    EmbeddedActiveMQ broker = startBroker(root);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0")) {
+      JMSRuntimeException runtime = new JMSRuntimeException("synthetic-close-after-commit");
+      JMSContext first =
+          closingContext(factory.createContext(JMSContext.SESSION_TRANSACTED), runtime);
+      OutboxSendException failure =
+          assertThrows(
+              OutboxSendException.class, () -> new OutboxJmsSender().send(() -> first, sample()));
+      assertEquals("outbox JMS context lifecycle failed", failure.getMessage());
+      assertSame(runtime, failure.getCause());
+      AssertionError fatal = new AssertionError("synthetic-fatal-close-after-commit");
+      UUID next = uuid(902);
+      OutboxEntry second =
+          withIdentity(
+              sample(),
+              next,
+              CORRELATION,
+              "QWKREQ01",
+              "001",
+              eventWire(next, CORRELATION),
+              OutboxDestination.ASYNC_WORK);
+      JMSContext after =
+          closingContext(factory.createContext(JMSContext.SESSION_TRANSACTED), fatal);
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class, () -> new OutboxJmsSender().send(() -> after, second)));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  private static JMSContext closingContext(JMSContext delegate, Throwable closing) {
+    return (JMSContext)
+        Proxy.newProxyInstance(
+            JMSContext.class.getClassLoader(),
+            new Class<?>[] {JMSContext.class},
+            (ignored, method, args) -> {
+              if (method.getName().equals("close")) {
+                delegate.close();
+                if (closing instanceof Error fatal) throw fatal;
+                throw closing;
+              }
+              return invoke(delegate, method, args);
+            });
+  }
+
+  @Test
   void persistedQwkPayloadIsFullyDecodedBeforeOpeningJms() {
     // PT-IDEM-011 / BUG-010: expected offsets and values come directly from SS 323.
     OutboxEntry valid = sample();

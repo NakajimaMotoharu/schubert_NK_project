@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.Objects;
 import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Validates and commits one persistent outbox message in a local JMS transaction. Trace:
@@ -27,7 +28,14 @@ public final class OutboxJmsSender {
     Objects.requireNonNull(contextProvider, "contextProvider");
     Objects.requireNonNull(entry, "entry");
     validateWireIdentity(entry);
-    try (JMSContext context = Objects.requireNonNull(contextProvider.open(), "JMS context")) {
+    final JMSContext context;
+    try {
+      context = Objects.requireNonNull(contextProvider.open(), "JMS context");
+    } catch (RuntimeException failure) {
+      throw new OutboxSendException("outbox JMS context lifecycle failed", failure);
+    }
+    @Nullable Throwable primary = null;
+    try {
       if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
         throw new OutboxSendException("outbox JMS context is not transacted");
       }
@@ -46,9 +54,33 @@ public final class OutboxJmsSender {
         }
       }
     } catch (OutboxSendException exception) {
+      primary = exception;
       throw exception;
     } catch (RuntimeException exception) {
-      throw new OutboxSendException("outbox JMS context lifecycle failed", exception);
+      var wrapped = new OutboxSendException("outbox JMS context lifecycle failed", exception);
+      primary = wrapped;
+      throw wrapped;
+    } catch (Error exception) {
+      primary = exception;
+      throw exception;
+    } finally {
+      closeAfterFailure(context, primary);
+    }
+  }
+
+  private static void closeAfterFailure(JMSContext context, @Nullable Throwable primary)
+      throws OutboxSendException {
+    try {
+      context.close();
+    } catch (RuntimeException | Error closing) {
+      if (primary == null) {
+        if (closing instanceof Error fatal) throw fatal;
+        throw new OutboxSendException("outbox JMS context lifecycle failed", closing);
+      }
+      if (closing != primary
+          && !(primary instanceof OutboxSendException typed && closing == typed.getCause())) {
+        primary.addSuppressed(closing);
+      }
     }
   }
 
