@@ -698,6 +698,106 @@ class LogQueryApplicationServiceTest {
     assertEquals(new TemporaryInfrastructureException().getMessage(), error.getMessage());
   }
 
+  @Test
+  void adm075ProductionAssemblyUsesRealDependenciesAndNullContract() throws Exception {
+    try (var f = new LogApplicationFixture(database)) {
+      seed(f);
+      var service =
+          LogQueryApplicationAssembly.create(
+              f.source, f.fingerprints, f.snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
+      var request = input(null, MESSAGE, 1);
+      byte[] first = service.process(request);
+      assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      byte[] replay = service.process(request);
+      assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(
+          1, f.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
+      var fixed = Clock.fixed(NOW, ZoneOffset.UTC);
+      assertThrows(
+          NullPointerException.class,
+          () -> LogQueryApplicationAssembly.create(null, f.fingerprints, f.snapshots, fixed));
+      assertThrows(
+          NullPointerException.class,
+          () -> LogQueryApplicationAssembly.create(f.source, null, f.snapshots, fixed));
+      assertThrows(
+          NullPointerException.class,
+          () -> LogQueryApplicationAssembly.create(f.source, f.fingerprints, null, fixed));
+      assertThrows(
+          NullPointerException.class,
+          () -> LogQueryApplicationAssembly.create(f.source, f.fingerprints, f.snapshots, null));
+    }
+  }
+
+  @Test
+  void adm076ProductionLogRouteReceivesThroughBroker(@TempDir Path brokerRoot) throws Exception {
+    org.apache.activemq.artemis.core.config.Configuration configuration;
+    try (var file =
+        java.nio.file.Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+      configuration =
+          new org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser()
+              .parseMainConfig(file);
+    }
+    configuration
+        .setPagingDirectory(brokerRoot.resolve("paging").toString())
+        .setBindingsDirectory(brokerRoot.resolve("bindings").toString())
+        .setJournalDirectory(brokerRoot.resolve("journal").toString())
+        .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
+        .setSecurityEnabled(false)
+        .clearAcceptorConfigurations()
+        .addAcceptorConfiguration("component", "vm://0");
+    var broker =
+        new org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ()
+            .setConfiguration(configuration)
+            .start();
+    try (var f = new LogApplicationFixture(database);
+        var contexts = new AuthContextCodec("test", new byte[32], null, null);
+        var factory =
+            new org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
+        var observer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
+        var replies =
+            observer.createConsumer(
+                new org.apache.activemq.artemis.jms.client.ActiveMQQueue(
+                    dev.codex.schubert.nk.protocol.transport.BrokerTopology.SYNC_REPLY_WEB
+                        .fullyQualifiedQueue()))) {
+      seed(f);
+      var request = input(null, MESSAGE, 1);
+      var queue =
+          new org.apache.activemq.artemis.jms.client.ActiveMQQueue(
+              dev.codex.schubert.nk.protocol.transport.BrokerTopology.SYNC_REQUEST
+                  .fullyQualifiedQueue());
+      var terminal = new java.util.concurrent.atomic.AtomicInteger();
+      try (var runtime =
+          dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime.startWithLoginAndLog(
+              () -> factory.createContext(jakarta.jms.JMSContext.SESSION_TRANSACTED),
+              f.source,
+              f.fingerprints,
+              contexts,
+              f.snapshots,
+              ignored -> {
+                throw new AssertionError("Game route is outside this Log PT");
+              },
+              Clock.fixed(NOW, ZoneOffset.UTC),
+              ignored -> terminal.incrementAndGet())) {
+        assertTrue(runtime.ready());
+        send(producer, queue, request);
+        byte[] first = brokerBody(replies.receive(5_000));
+        assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
+        send(producer, queue, request);
+        byte[] replay = brokerBody(replies.receive(5_000));
+        assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
+        assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(
+            1, f.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
+        assertEquals(0, terminal.get());
+      }
+    } finally {
+      broker.stop();
+    }
+  }
+
   static LogQueryApplicationService service(LogApplicationFixture f) throws Exception {
     return new LogQueryApplicationService(
         f.source,

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.dispatch;
 
+import dev.codex.schubert.nk.api.application.log.LogQueryApplicationAssembly;
 import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.WebLogIngestService;
@@ -18,8 +19,8 @@ import javax.sql.DataSource;
 
 /**
  * Owns the API receive groups for the initial Login→Game-context→Log path. The outer process must
- * provide {@code LoginInboxService::execute}, {@code ScenarioApplicationService} and {@code
- * LogQueryApplicationService}. Login alone uses an outer JDBC transaction, whereas Scenario and Log
+ * provide {@code ScenarioApplicationService}; Login and Log can be constructed by the Production
+ * assembly entry point below. Login alone uses an outer JDBC transaction, whereas Scenario and Log
  * services own their staged transactions. This is a path runtime, not complete API readiness: the
  * outer process must validate all broker resources/credentials and register all layouts before
  * exposure. Trace: NK-MSG-001/002, NK-AUT-001, NK-ADM-001; RD FUN-001/008, AUT-001/002,
@@ -54,6 +55,25 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
       throws NoSuchAlgorithmException {
     var login = LoginApplicationAssembly.create(fingerprints, contexts, snapshots, clock);
     return start(factory, database, login::execute, gameContext, logSearch, clock, onTerminal);
+  }
+
+  /**
+   * Binds real Login and Log search processors. Game-context is still supplied by the caller and
+   * must be Production before full readiness. PG256/PT-ADM-075; SS311/312/314/324/352.
+   */
+  public static ApiLogPathApplicationRuntime startWithLoginAndLog(
+      Supplier<JMSContext> factory,
+      DataSource database,
+      FingerprintKeyRing fingerprints,
+      AuthContextCodec contexts,
+      ResponseSnapshotCodec snapshots,
+      SyncRequestProcessor gameContext,
+      Clock clock,
+      Consumer<CommittedFatalInboundException> onTerminal)
+      throws NoSuchAlgorithmException {
+    var log = LogQueryApplicationAssembly.create(database, fingerprints, snapshots, clock);
+    return startWithLogin(
+        factory, database, fingerprints, contexts, snapshots, gameContext, log, clock, onTerminal);
   }
 
   public static ApiLogPathApplicationRuntime start(
