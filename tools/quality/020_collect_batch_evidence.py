@@ -9,7 +9,17 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 397
+BATCH_TEST_COUNT = 401
+EXPIRY_AUDIT_CLASS = "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest"
+EXPIRY_AUDIT_METHODS = (
+    "bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff",
+    "bat285TerminalSuccessAndExactReplayCannotRewriteOldResult",
+    "bat286RollbackUnknownAfterAndSameRunAttemptAreNeverGuessed",
+    "bat287NullInvalidHandleAndTerminalAreRejectedWithoutMutation",
+)
+
+def validate_expiry_audit_suite(suite):
+    return validate_group(suite, EXPIRY_AUDIT_CLASS, EXPIRY_AUDIT_METHODS, 284)
 BATCH_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
 BATCH_RUNTIME_DEPENDENCY_METHODS = ("bat283RuntimePostgresDriverAndScopeCanaries",)
 
@@ -291,6 +301,7 @@ def select_program_suites(suites):
     expected.add(PUBLICATION_CLASS)
     expected.add(BUNDLE_CLASS)
     expected.add(COMPLETION_CLASS)
+    expected.add(EXPIRY_AUDIT_CLASS)
     if len(suites) != len(expected) or {s.get("name") for s in suites} != expected:
         raise ValueError("unmapped or missing shared batch module class")
     return [s for s in suites if s.get("name") not in OPS_CLASSES]
@@ -383,6 +394,7 @@ def validate_reports(suites):
     validators[PUBLICATION_CLASS] = validate_publication_suite
     validators[BUNDLE_CLASS] = validate_bundle_suite
     validators[COMPLETION_CLASS] = validate_completion_suite
+    validators[EXPIRY_AUDIT_CLASS] = validate_expiry_audit_suite
     if len(suites) != len(validators) or {s.get("name") for s in suites} != set(validators):
         raise ValueError("unmapped or missing batch test class")
     methods = {}
@@ -623,6 +635,8 @@ def main():
     manifest["related"] += ["PG-D-185"]
     manifest["related"] += ["PG-D-239", "BUG-234", "YKT-186"]
     manifest["batchRuntimeDependencyOracle"] = "074/PT-BAT-283: SS341/342 independent Batch process JDBC42.7.13 runtime exactly once; test/compile/system/missing scope, old version and duplicate/absent dependency mutations rejected. Maven runtime-only classpath observed separately. No Batch launcher, credential or actual DB login certificate."
+    manifest["related"] += ["PG-D-249", "SSC-077", "SSC-078", "BUG-237", "BUG-238", "YKT-188", "YKT-189"]
+    manifest["expiryAuditOracle"] = "076/PT-BAT-284..287: V022 exact UTC microsecond stage, before/target/estimated bytes and unknown after, parent-borrowed transaction with independently observed pre/post commit visibility. Same-run attempt2, rollback, exact terminal replay, field-by-field malformed projection, full-handle/cutoff mismatch and SQL/close/null faults are rejected without raw diagnostics. Repository never commits or removes broker messages; durable parent stage and terminal commit remain mandatory."
     manifest["retirementExecution"] = "072/073 BAT110: unchanged independent26-operation/6768-position oracle, fixed4 workers with independent PG clusters/connections and thread-owned native fixtures. Every injection/fixed failure/resource release assertion retained; exact completed position set and zero duplicates. Three extra clusters stopped after worker completion; no JUnit/component increase or production change."
     manifest["backupCompletionOracle"] = "070/071 BAT274..281: root reader and full artifact verifier precede DB pair completion; independent 161 IO and274 shared clock observations, every IO/deadline/interrupt position, actual PG18 rollback/uncertain commit/replay and fixed microsecond end. Borrowed root and connection; caller supplies continuous exclusion/stopped actors/terminated generation child. No actual archive generation, retention or whole-parent completion claim."
     manifest["batchRunResourceOracle"] = "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count."

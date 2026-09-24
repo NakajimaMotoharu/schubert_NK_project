@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG249選択追記: `NK-BAT-001`/`ExpiryAuditRepository.Stage/Snapshot/stage/read/finish`→PT-BAT-284～287（017/076～077）。RD OPS-009/MQ-009/DAT-009、UI251§8/11、SS331§8.2/8.3・341§9、SSC-077/078/BUG-237/238/YKT-188/189、PG-D-249。隔離実PG18/Flyway V022でstage commit前後、unknown after、terminal同値/異値replay、同run attempt2、projection/SQL/close/null反例を選択4/4、対象class全coverageで確認。Batch全体/正式全reactor・evidence前、親のBroker remove前durable commit・same-run commit不明解決は未実装。PGPT中心47%据置。
+
 2026-09-24 PG248正式限定追記: `NK-OPS-001`/`ArtemisExpiryPurgeClient.selectorCutoff`と`observe/purgeObserved`→PT-OPS-MQ-026/028（018/054～055）。RD MQ009/OPS009、UI251§8、SS341§9・SS331§8.2、BUG-239/PG-D-248。修正前実Broker/固定値RED2は不認定、正式`PT-WEB-20260924-43`/source`7a8d4ebcc`の1839PT/49scope/hash/99負canary・Java6 module全coverage/静的0でµs selector境界を限定認定。親DB結線は未了、PGPT中心47%据置。
 
 2026-09-24 PG247正式限定追記: `NK-OPS-001`/`ArtemisExpiryPurgeClient.observe/purgeObserved`・`Observation/Result`→PT-OPS-MQ-023/024/026/027（018/052～053）。RD MQ009/OPS009、UI251§8/11、SS321§12・341§9、SSC-078/BUG-238/YKT-189、PG-D-247。正式`PT-WEB-20260924-42`/source`7345a103c`の1838PT/49scope/hash/99負canary・Java6 module全coverage/静的0で削除前観測・run/値drift拒否を限定認定。親DB durable stage・同run再開/health/critical、BUG-239のµs境界は未了。PGPT中心47%据置。

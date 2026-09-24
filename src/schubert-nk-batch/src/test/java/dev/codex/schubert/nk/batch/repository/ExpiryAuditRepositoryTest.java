@@ -1,0 +1,525 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** PG249/PT-BAT-284..287; SS331 §8.2/8.3,341 §9; SSC077/078/BUG237/238. */
+final class ExpiryAuditRepositoryTest {
+  @TempDir static Path root;
+  private static BatchDatabaseFixture db;
+  private static final BatchRun RUN =
+      new BatchRun(
+          UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
+          Instant.parse("2026-09-12T15:00:00.000500Z"));
+  private static final Instant START = Instant.parse("2026-09-12T15:00:01Z");
+  private static final Instant END = Instant.parse("2026-09-12T15:00:02Z");
+  private static final Instant EXPIRY_CUTOFF = Instant.parse("2026-09-05T15:00:00.000500Z");
+  private static final BatchStepResult SUCCESS =
+      new BatchStepResult(
+          BatchStepResult.Status.SUCCESS, 2, 2, 0, 200, BatchStepResult.Reason.NONE);
+
+  @BeforeAll
+  static void start() throws Exception {
+    db = new BatchDatabaseFixture(root);
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    db.stop();
+  }
+
+  @BeforeEach
+  void clear() throws Exception {
+    try (var admin = db.admin()) {
+      execute(admin, "delete from schubert.batch_runs");
+    }
+  }
+
+  @Test
+  void bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff() throws Exception {
+    try (var parent = locked();
+        var observer = db.open("schubert_batch")) {
+      var attempt = new BatchRunRepository(parent).begin(RUN, BatchStep.CLEAN_EXPIRY, START, false);
+      parent.commit();
+      var repo = new ExpiryAuditRepository(parent);
+      var stage = repo.stage(attempt, 3, 2, 200);
+      assertEquals(new ExpiryAuditRepository.Stage(EXPIRY_CUTOFF, 3, 2, 200), stage);
+      assertEquals("NULL|NULL|NULL|0|0|0|0", audit(observer, attempt.id()));
+      assertEquals("ExpiryAuditStage[observation=<redacted>]", stage.toString());
+      parent.commit();
+      assertEquals("2026-09-05 15:00:00.000500|3|NULL|2|0|0|200", audit(observer, attempt.id()));
+      assertEquals(stage, repo.stage(attempt, 3, 2, 200)); // Same committed stage is idempotent.
+      var snapshot = repo.read(attempt).orElseThrow();
+      assertEquals("RUNNING", snapshot.status());
+      assertEquals(EXPIRY_CUTOFF, snapshot.cutoff());
+      assertEquals(3L, snapshot.before());
+      assertNull(snapshot.after());
+      assertNull(snapshot.ended());
+      assertEquals("ExpiryAuditSnapshot[observation=<redacted>]", snapshot.toString());
+    }
+  }
+
+  @Test
+  void bat285TerminalSuccessAndExactReplayCannotRewriteOldResult() throws Exception {
+    try (var parent = locked()) {
+      var attempt = new BatchRunRepository(parent).begin(RUN, BatchStep.CLEAN_EXPIRY, START, false);
+      var repo = new ExpiryAuditRepository(parent);
+      var stage = repo.stage(attempt, 3, 2, 200);
+      parent.commit();
+      repo.finish(attempt, stage, END, 1L, SUCCESS);
+      parent.commit();
+      var snapshot = repo.read(attempt).orElseThrow();
+      assertEquals("SUCCESS", snapshot.status());
+      assertEquals(1L, snapshot.after());
+      assertEquals(END, snapshot.ended());
+      assertEquals(2, snapshot.success());
+      repo.finish(attempt, stage, END, 1L, SUCCESS);
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> repo.finish(attempt, stage, END.plusSeconds(1), 1L, SUCCESS));
+      assertEquals("SUCCESS|2|0|NULL", terminal(parent, attempt.id()));
+    }
+  }
+
+  @Test
+  void bat286RollbackUnknownAfterAndSameRunAttemptAreNeverGuessed() throws Exception {
+    try (var parent = locked()) {
+      var attempts = new BatchRunRepository(parent);
+      var first = attempts.begin(RUN, BatchStep.CLEAN_EXPIRY, START, false);
+      parent.commit();
+      var repo = new ExpiryAuditRepository(parent);
+      var stage = repo.stage(first, 3, 2, 200);
+      parent.rollback();
+      var unobserved = repo.read(first).orElseThrow();
+      assertNull(unobserved.cutoff());
+      assertNull(unobserved.before());
+      assertNull(unobserved.after());
+      assertEquals(0, unobserved.target());
+      stage = repo.stage(first, 3, 2, 200);
+      parent.commit();
+      var failed =
+          new BatchStepResult(
+              BatchStepResult.Status.FAILED, 2, 0, 0, 200, BatchStepResult.Reason.COMMAND_FAILURE);
+      repo.finish(first, stage, END, null, failed);
+      parent.commit();
+      assertEquals("FAILED|0|0|COMMAND_FAILURE", terminal(parent, first.id()));
+      assertNull(repo.read(first).orElseThrow().after());
+      var second = attempts.begin(RUN, BatchStep.CLEAN_EXPIRY, START.plusSeconds(2), false);
+      assertEquals(2, second.attempt());
+      var laterStage = repo.stage(second, 3, 2, 200);
+      var warning =
+          new BatchStepResult(
+              BatchStepResult.Status.WARNING, 2, 1, 1, 200, BatchStepResult.Reason.COMMAND_FAILURE);
+      repo.finish(second, laterStage, END.plusSeconds(2), 2L, warning);
+      parent.commit();
+      assertEquals("WARNING|1|1|COMMAND_FAILURE", terminal(parent, second.id()));
+      assertEquals(2L, repo.read(second).orElseThrow().after());
+      assertNull(repo.read(first).orElseThrow().after());
+    }
+  }
+
+  @Test
+  void bat287NullInvalidHandleAndTerminalAreRejectedWithoutMutation() throws Exception {
+    projectionMatrix();
+    assertThrows(BatchRepositoryException.class, () -> ExpiryAuditRepository.required(null));
+    assertEquals(7L, ExpiryAuditRepository.required(7L));
+    assertThrows(NullPointerException.class, () -> new ExpiryAuditRepository(null));
+    assertThrows(NullPointerException.class, () -> new ExpiryAuditRepository.Stage(null, 1, 1, 1));
+    for (long[] invalid : new long[][] {{-1, 0, 0}, {1, -1, 0}, {1, 2, 0}, {1, 1, -1}})
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new ExpiryAuditRepository.Stage(EXPIRY_CUTOFF, invalid[0], invalid[1], invalid[2]));
+    try (var parent = locked()) {
+      var attempts = new BatchRunRepository(parent);
+      var attempt = attempts.begin(RUN, BatchStep.CLEAN_EXPIRY, START, false);
+      var repo = new ExpiryAuditRepository(parent);
+      assertThrows(NullPointerException.class, () -> repo.stage(null, 1, 1, 1));
+      assertThrows(NullPointerException.class, () -> repo.read(null));
+      var otherStep = attempts.begin(RUN, BatchStep.CLEAN_LOG, START, false);
+      assertThrows(IllegalArgumentException.class, () -> repo.stage(otherStep, 1, 1, 1));
+      var skipped =
+          new BatchStepAttempt(
+              attempt.id(), RUN, BatchStep.CLEAN_EXPIRY, attempt.attempt(), START, true);
+      assertThrows(IllegalArgumentException.class, () -> repo.stage(skipped, 1, 1, 1));
+      var missing =
+          new BatchStepAttempt(
+              attempt.id() + 100, RUN, BatchStep.CLEAN_EXPIRY, attempt.attempt(), START, false);
+      assertTrue(repo.read(missing).isEmpty());
+      assertThrows(BatchRepositoryException.class, () -> repo.stage(missing, 1, 1, 1));
+      var stage = repo.stage(attempt, 3, 2, 200);
+      assertThrows(BatchRepositoryException.class, () -> repo.stage(attempt, 3, 1, 200));
+      assertThrows(NullPointerException.class, () -> repo.finish(null, stage, END, 1L, SUCCESS));
+      assertThrows(NullPointerException.class, () -> repo.finish(attempt, null, END, 1L, SUCCESS));
+      assertThrows(
+          NullPointerException.class, () -> repo.finish(attempt, stage, null, 1L, SUCCESS));
+      assertThrows(NullPointerException.class, () -> repo.finish(attempt, stage, END, 1L, null));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(attempt, stage, START.minusSeconds(1), 1L, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, null, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, -1L, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 4L, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 2L, SUCCESS));
+      var skippedResult =
+          new BatchStepResult(
+              BatchStepResult.Status.SKIPPED,
+              0,
+              0,
+              0,
+              0,
+              BatchStepResult.Reason.ALREADY_SUCCESSFUL);
+      var warningSuccess =
+          new BatchStepResult(
+              BatchStepResult.Status.WARNING, 2, 1, 0, 200, BatchStepResult.Reason.COMMAND_FAILURE);
+      var warningMismatch =
+          new BatchStepResult(
+              BatchStepResult.Status.WARNING, 2, 0, 1, 200, BatchStepResult.Reason.COMMAND_FAILURE);
+      var wrongTarget =
+          new BatchStepResult(
+              BatchStepResult.Status.WARNING, 1, 0, 0, 200, BatchStepResult.Reason.COMMAND_FAILURE);
+      var wrongBytes =
+          new BatchStepResult(
+              BatchStepResult.Status.WARNING, 2, 0, 0, 201, BatchStepResult.Reason.COMMAND_FAILURE);
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(attempt, stage, END, null, skippedResult));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 1L, wrongTarget));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 1L, wrongBytes));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(attempt, stage, END, null, warningSuccess));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(attempt, stage, END, 2L, warningMismatch));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 2L, SUCCESS));
+      var tooFew =
+          new BatchStepResult(
+              BatchStepResult.Status.SUCCESS, 2, 1, 0, 200, BatchStepResult.Reason.NONE);
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 1L, tooFew));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repo.finish(attempt, stage, RUN.cutoff(), 1L, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class, () -> repo.finish(attempt, stage, END, 2L, tooFew));
+      var forgedRun =
+          new BatchRun(RUN.id(), RUN.cutoff().plus(1, java.time.temporal.ChronoUnit.DAYS));
+      var forgedAttempt =
+          new BatchStepAttempt(
+              attempt.id(),
+              forgedRun,
+              attempt.step(),
+              attempt.attempt(),
+              START.plus(1, java.time.temporal.ChronoUnit.DAYS),
+              false);
+      assertThrows(BatchRepositoryException.class, () -> repo.read(forgedAttempt));
+      for (String operation :
+          new String[] {
+            "stage",
+            "stageNull",
+            "stageRuntime",
+            "finish",
+            "finishNull",
+            "finishRuntime",
+            "read",
+            "readNullStatement",
+            "readNullRows",
+            "readRuntime",
+            "readExecute",
+            "readNext",
+            "readNextAndRowClose",
+            "readNextAndStatementClose",
+            "readRowClose",
+            "readStatementClose"
+          }) {
+        var fault = new ExpiryAuditRepository(failingConnection(parent, operation));
+        BatchRepositoryException caught =
+            assertThrows(
+                BatchRepositoryException.class,
+                () -> {
+                  switch (operation) {
+                    case "stage", "stageNull", "stageRuntime" -> fault.stage(attempt, 3, 2, 200);
+                    case "finish", "finishNull", "finishRuntime" ->
+                        fault.finish(attempt, stage, END, 1L, SUCCESS);
+                    default -> fault.read(attempt);
+                  }
+                });
+        assertNull(caught.getCause());
+        assertFalse(caught.toString().contains("SQL_SECRET_SENTINEL"));
+      }
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              repo.finish(
+                  attempt,
+                  new ExpiryAuditRepository.Stage(EXPIRY_CUTOFF.plusNanos(1_000), 3, 2, 200),
+                  END,
+                  1L,
+                  SUCCESS));
+      assertThrows(
+          BatchRepositoryException.class, () -> repo.finish(missing, stage, END, 1L, SUCCESS));
+      execute(
+          parent,
+          "update schubert.batch_runs set expiry_cutoff_at=expiry_cutoff_at"
+              + "+interval '1 microsecond' where id="
+              + attempt.id());
+      assertThrows(BatchRepositoryException.class, () -> repo.read(attempt));
+      execute(
+          parent,
+          "update schubert.batch_runs set expiry_cutoff_at=expiry_cutoff_at"
+              + "-interval '1 microsecond' where id="
+              + attempt.id());
+      assertEquals("RUNNING|0|0|NULL", terminal(parent, attempt.id()));
+      assertEquals("2026-09-05 15:00:00.000500|3|NULL|2|0|0|200", audit(parent, attempt.id()));
+      parent.rollback();
+    }
+    try (var autoCommit = db.open("schubert_batch")) {
+      var repo = new ExpiryAuditRepository(autoCommit);
+      var forged = new BatchStepAttempt(1, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false);
+      assertThrows(BatchRepositoryException.class, () -> repo.read(forged));
+    }
+  }
+
+  private static Connection failingConnection(Connection delegate, String operation) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (proxy, method, args) -> {
+              if (method.getName().equals("prepareStatement") && args != null && args.length > 0) {
+                String sql = (String) args[0];
+                boolean selected =
+                    switch (operation) {
+                      case "stage", "stageNull", "stageRuntime" ->
+                          sql.startsWith("update schubert.batch_runs set expiry_cutoff_at");
+                      case "finish", "finishNull", "finishRuntime" ->
+                          sql.startsWith("update schubert.batch_runs set ended_at");
+                      default -> sql.startsWith("select status,expiry_cutoff_at");
+                    };
+                if (selected) {
+                  if (operation.equals("stageNull")
+                      || operation.equals("finishNull")
+                      || operation.equals("readNullStatement")) return null;
+                  if (operation.endsWith("Runtime"))
+                    throw new IllegalStateException("SQL_SECRET_SENTINEL");
+                  if (operation.equals("readExecute")
+                      || operation.equals("readNext")
+                      || operation.equals("readNextAndRowClose")
+                      || operation.equals("readNextAndStatementClose")
+                      || operation.equals("readNullRows")
+                      || operation.equals("readRowClose")
+                      || operation.equals("readStatementClose")) {
+                    var statement = (java.sql.PreparedStatement) method.invoke(delegate, args);
+                    return Proxy.newProxyInstance(
+                        java.sql.PreparedStatement.class.getClassLoader(),
+                        new Class<?>[] {java.sql.PreparedStatement.class},
+                        (statementProxy, statementMethod, statementArgs) -> {
+                          if (statementMethod.getName().equals("close")
+                              && (operation.equals("readStatementClose")
+                                  || operation.equals("readNextAndStatementClose"))) {
+                            statement.close();
+                            throw new SQLException("SQL_SECRET_SENTINEL");
+                          }
+                          if (statementMethod.getName().equals("executeQuery")) {
+                            if (operation.equals("readExecute"))
+                              throw new SQLException("SQL_SECRET_SENTINEL");
+                            if (operation.equals("readNullRows")) return null;
+                            var rows = statement.executeQuery();
+                            if (operation.equals("readStatementClose")) return rows;
+                            return Proxy.newProxyInstance(
+                                java.sql.ResultSet.class.getClassLoader(),
+                                new Class<?>[] {java.sql.ResultSet.class},
+                                (rowsProxy, rowsMethod, rowsArgs) -> {
+                                  if (rowsMethod.getName().equals("next")
+                                      && (operation.equals("readNext")
+                                          || operation.equals("readNextAndRowClose")
+                                          || operation.equals("readNextAndStatementClose")))
+                                    throw new SQLException("SQL_SECRET_SENTINEL");
+                                  if (rowsMethod.getName().equals("close")
+                                      && (operation.equals("readRowClose")
+                                          || operation.equals("readNextAndRowClose"))) {
+                                    rows.close();
+                                    throw new SQLException("SQL_SECRET_SENTINEL");
+                                  }
+                                  return rowsMethod.invoke(rows, rowsArgs);
+                                });
+                          }
+                          try {
+                            return statementMethod.invoke(statement, statementArgs);
+                          } catch (InvocationTargetException failure) {
+                            throw failure.getCause();
+                          }
+                        });
+                  }
+                  throw new SQLException("SQL_SECRET_SENTINEL");
+                }
+              }
+              try {
+                return method.invoke(delegate, args);
+              } catch (InvocationTargetException failure) {
+                throw failure.getCause();
+              }
+            });
+  }
+
+  private static void projectionMatrix() {
+    var handle = new BatchStepAttempt(1, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false);
+    var stage = new ExpiryAuditRepository.Stage(EXPIRY_CUTOFF, 3, 2, 200);
+    var running = snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null);
+    var success = snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null);
+    assertTrue(ExpiryAuditRepository.validSnapshot(handle, running));
+    assertTrue(ExpiryAuditRepository.validSnapshot(handle, success));
+    assertTrue(ExpiryAuditRepository.matchesStage(java.util.Optional.of(running), stage));
+    assertTrue(
+        ExpiryAuditRepository.matchesTerminal(
+            java.util.Optional.of(success), stage, END, 1L, SUCCESS));
+
+    // Independent V022 projection mutations: none may be promoted into a replay oracle.
+    var invalid =
+        new ExpiryAuditRepository.Snapshot[] {
+          snapshot("UNKNOWN", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
+          snapshot("FAILED", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, -1, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, -1, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, -1, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, -1, null, null, null),
+          snapshot("RUNNING", null, 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, null, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", null, null, 1L, 0, 0, 0, 0, null, null, null),
+          snapshot("SUCCESS", null, null, null, 0, 0, 0, 0, END, null, null),
+          snapshot(
+              "RUNNING", EXPIRY_CUTOFF.plusSeconds(1), 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, -1L, null, 0, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 4, 0, 0, 200, null, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, -1L, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, 4L, 2, 0, 0, 200, null, null, null),
+          snapshot("WARNING", EXPIRY_CUTOFF, 3L, 2L, 2, 0, 1, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
+        };
+    for (var candidate : invalid)
+      assertFalse(ExpiryAuditRepository.validSnapshot(handle, candidate), candidate.toString());
+
+    assertFalse(ExpiryAuditRepository.matchesStage(java.util.Optional.empty(), stage));
+    var stageMutations =
+        new ExpiryAuditRepository.Snapshot[] {
+          snapshot("FAILED", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, 1L, 2, 0, 0, 200, null, null, null),
+          snapshot(
+              "RUNNING", EXPIRY_CUTOFF.plusSeconds(1), 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 4L, null, 2, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 1, 0, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 1, 200, null, null, null),
+          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 201, null, null, null)
+        };
+    for (var candidate : stageMutations)
+      assertFalse(ExpiryAuditRepository.matchesStage(java.util.Optional.of(candidate), stage));
+
+    assertFalse(
+        ExpiryAuditRepository.matchesTerminal(java.util.Optional.empty(), stage, END, 1L, SUCCESS));
+    var terminalMutations =
+        new ExpiryAuditRepository.Snapshot[] {
+          snapshot("SUCCESS", EXPIRY_CUTOFF.plusSeconds(1), 3L, 1L, 2, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 4L, 1L, 2, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 0L, 2, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 201, END, null, null),
+          snapshot("WARNING", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END.plusSeconds(1), null, null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, "OTHER", null),
+          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, "OTHER")
+        };
+    for (var candidate : terminalMutations)
+      assertFalse(
+          ExpiryAuditRepository.matchesTerminal(
+              java.util.Optional.of(candidate), stage, END, 1L, SUCCESS));
+  }
+
+  private static ExpiryAuditRepository.Snapshot snapshot(
+      String status,
+      Instant cutoff,
+      Long before,
+      Long after,
+      long target,
+      long success,
+      long failure,
+      long bytes,
+      Instant ended,
+      String code,
+      String summary) {
+    return new ExpiryAuditRepository.Snapshot(
+        status, cutoff, before, after, target, success, failure, bytes, ended, code, summary);
+  }
+
+  private static Connection locked() throws SQLException {
+    var connection = db.open("schubert_batch");
+    execute(connection, "set timezone='UTC'");
+    execute(connection, "select pg_advisory_lock(71419602)");
+    connection.setAutoCommit(false);
+    return connection;
+  }
+
+  private static void execute(Connection connection, String sql) throws SQLException {
+    try (var statement = connection.createStatement()) {
+      statement.execute(sql);
+    }
+  }
+
+  private static String audit(Connection connection, long id) throws SQLException {
+    try (var statement = connection.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select coalesce(to_char(expiry_cutoff_at AT TIME ZONE 'UTC',"
+                    + "'YYYY-MM-DD HH24:MI:SS.US'),'NULL')||'|'||"
+                    + "coalesce(expiry_before_count::text,'NULL')||'|'||"
+                    + "coalesce(expiry_after_count::text,'NULL')||'|'||target_count||'|'||"
+                    + "success_count||'|'||failure_count||'|'||byte_count from schubert.batch_runs"
+                    + " where id="
+                    + id)) {
+      assertTrue(rows.next());
+      String result = rows.getString(1);
+      assertFalse(rows.next());
+      return result;
+    }
+  }
+
+  private static String terminal(Connection connection, long id) throws SQLException {
+    try (var statement = connection.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select status||'|'||success_count||'|'||failure_count||'|'||"
+                    + "coalesce(error_code,'NULL') from schubert.batch_runs where id="
+                    + id)) {
+      assertTrue(rows.next());
+      String result = rows.getString(1);
+      assertFalse(rows.next());
+      return result;
+    }
+  }
+}

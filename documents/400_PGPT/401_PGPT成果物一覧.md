@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24 PG249着手: `ExpiryAuditRepository`とNK-BAT-001 PT-BAT-284～287仕様（017/076～077）を追加。隔離実PG18選択4/4・対象class全coverage、Production SpotBugs0、証跡collector負canary99/99は通過。BUG-240修正前RED→GREEN。Batch401件/coverageは通ったが1件静的指摘で初回全体gate不認定、局所null契約修正後の選択静的0まで再確認。新source固定・正式全reactor/49scope/hash前のため、直近正式はcheckpoint59/run43の1839PT、PG249は未認定。親のdurable commit/Broker remove/同run再開・実NK CHR-L01も未了。固定加重中心47%（幅41～52%）据置、PGPT/IT/ST未完了。
+
 2026-09-24最新確定は456 checkpoint59、正式`PT-WEB-20260924-43`/source`7a8d4ebcc`の全1839PT/49scope/hash/99負canary、Java6 moduleのinstruction/line/method/class/branch missed0・Production静的0。PG248/018-054～055でBUG-239のµs selector境界を実Broker含むRED→GREEN・正式再試験で限定完了。Expiry親DB stage/terminal・同run再開/起動判断と実NK CHR-L01は未了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24最新確定は456 checkpoint57、正式`PT-WEB-20260924-42`/source`7345a103c`の全1838PT/49scope/hash/99負canary、Java6 moduleのinstruction/line/method/class/branch missed0・Production静的0。PG247/018-052～053のExpiry観測・削除分離だけを限定認定。BUG-239のµs境界、親DB stage/terminal・同run再開・起動判断は未了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。

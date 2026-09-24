@@ -1117,7 +1117,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 397}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 401}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -1877,6 +1877,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest",
                  "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest",
                  "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest",
+                 "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -1897,8 +1898,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest",
                  "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(45, len(suites))
-        self.assertEqual(suites[:26], batch.select_program_suites(suites))
+        self.assertEqual(46, len(suites))
+        self.assertEqual(suites[:27], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -2368,12 +2369,16 @@ class EvidenceSetTest(unittest.TestCase):
         runtime = ET.Element("testsuite", name=runtime_cls, tests="1", failures="0", errors="0", skipped="0")
         ET.SubElement(runtime, "testcase", classname=runtime_cls, name=runtime_name)
         reports.append(runtime)
+        expiry = ET.Element("testsuite", name=batch.EXPIRY_AUDIT_CLASS, tests="4", failures="0", errors="0", skipped="0")
+        for name in batch.EXPIRY_AUDIT_METHODS:
+            ET.SubElement(expiry, "testcase", classname=batch.EXPIRY_AUDIT_CLASS, name=name)
+        reports.append(expiry)
         accepted = batch.validate_reports(reports)
         self.assertEqual(completion_expected,{k:v for k,v in accepted.items() if k in completion_expected})
         self.assertEqual(bundle_expected,{k:v for k,v in accepted.items() if k in bundle_expected})
         self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
-        self.assertEqual(283, len(accepted))
+        self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
         self.assertEqual(114, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)

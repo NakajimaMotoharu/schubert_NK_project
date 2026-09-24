@@ -1,0 +1,9 @@
+PT-BAT-287 / BUG-240 修正前反例（探索・不認定）
+日時: 2026-09-24 16:06 JST
+環境: Linux x86_64 / JDK 25.0.4 / PostgreSQL 18.6 / Flyway V001～022
+command: JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress -pl :schubert-nk-batch -Dtest=ExpiryAuditRepositoryTest test
+input: CLEAN_EXPIRY stage before=3,target=2,estimatedBytes=200; WARNING result success=0,failure=1; actualAfter=2.
+independent expected: before-after=1 != success=0, so finish must reject without DB mutation (SS341 §9 actual count comparison).
+actual before fix: finish returned normally; JUnit assertThrows failed. Selected 4 tests, 1 failure, 0 errors, 0 skipped, exit=1.
+raw local log SHA-256: 2946072989b4b8fb789411d31f5f9f7e1fca01b651651a6773f97e62103f0aff (raw log not committed).
+relation: SSC-077/078, BUG-237/238/240, YKT-189. No secret, credential, session or DB dump is included.
