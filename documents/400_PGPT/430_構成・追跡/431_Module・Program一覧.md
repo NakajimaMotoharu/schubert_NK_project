@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-25 PG271正式限定追記: `NK-OPS-001/NK-DAT-001/NK-WEB-002`、API `ApiJdbcPool.open`とWeb `WebJdbcPool.open`→PT-OPS-DBPOOL-001～006（018/058・059・manifest）。RD SYS-002/004・DAT-001・AUT-002、UI212/226/253、SS311/342/343。正式`PT-WEB-20260925-07`/source`fcda0a05f`で隔離PG18の実role、相互schema42501、API8+1/Web2+1、null/不在DBを限定認定（全1897PT・Production全coverage/静的0・53scope/hash/103負canary）。実credential・config/role URL admission・全起動/実NK CHRは未了。
+
 2026-09-24 PG263正式限定追記: `NK-MSG-002`/`OutboxJmsSender.send/closeAfterFailure`→PT-IDEM-010-R02～R05（006/001・002・004 manifest）、RD MQ-006/008、UI242、SS323/324/442、BUG-244/YKT-154。`tools/quality/039_collect_jms_resource_compounds.py`→BUG-245/YKT-184/019負canary。正式source`fa6be989f`/run62は1869PT・53scope/hash・102負canary、Production全coverage/静的0。直接対象のみ認定、NK-MSG-002全体・実NK CHR/外部processは未完了。
 
 2026-09-24 PG262正式限定認定: `NK-WEB-001`/`ScenarioLogMvcConfiguration`、`WebLogApplicationRuntime.startWithScenario/startPath`をPT-SCR-135拡張（015/001～002・manifest）へ追跡。RD FUN-004/008/AUT-001/002/MQ-003～008、UI221～225/231/235、SS311/313/314/321/323/324/342/352。実HTTP/PG18/ArtemisのLogin→Log→Scenario一覧200/Inbox GAM・LGS各1を正式`PT-WEB-20260924-60`/source`71c79c4b7`、1865PT/53scope/hash/102負canary/Production全coverage・静的0で限定認定。実file/OS排他/外部process/CHRは未了。
