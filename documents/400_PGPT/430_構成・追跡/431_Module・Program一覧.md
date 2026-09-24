@@ -1,6 +1,6 @@
 # Module・Program一覧
 
-2026-09-24 PG260選択段階: `NK-SCN-001`/`StorageRootInspection.inspect/requireDirectory/requireBackup/requireSecureStream`をPT-SCN-008-A07/A07-M（008/001～002）へ追跡。RD FIL-001～009、UI243、SS333 §2/343 §2。6既存rootのNOFOLLOW保持・mode/owner等とSecureDirectoryStreamの限定検査はStorage module `clean verify`で選択成功。正式全reactor/53scope/hash前につき未認定。ACL/全root権限profile・物理重複/単一instance/readinessは未了。
+2026-09-24 PG260正式限定認定: `NK-SCN-001`/`StorageRootInspection.inspect/requireDirectory/requireBackup/requireSecureStream`をPT-SCN-008-A07/A07-M（008/001～002・manifest）へ追跡。RD FIL-001～009、UI243、SS333 §2/343 §2。6既存rootのNOFOLLOW保持・mode/owner等とSecureDirectoryStreamの限定検査は正式`PT-WEB-20260924-58`/source`25956eae0`、1864PT/53scope/hash/102負canary/Production全coverage・静的0で認定。ACL/全root権限profile・物理重複/単一instance/readinessは未了。
 
 2026-09-24 PG259正式限定認定: `NK-SCN-001`/`TransferStoragePreparation.prepare/Prepared.usage`をPT-SCN-008-P04/P05（008/001～002）へ追跡。RD FIL-001～009、UI237/243、SS311/333 §7.4/§13/342。実ext4のprobe→完全scan→容量初期化、ready1件再入場・不正identity/entry/nullを`PT-WEB-20260924-57`/source`0c0792cfe`、1862PT/53scope/hash/102負canary/Production全coverage・静的0で限定認定。OS単一instance/全root/readiness/API登録は未了。
 
