@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationAssembly;
 import dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime;
 import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
@@ -213,6 +214,18 @@ final class WebLogApplicationRuntimeTest {
         statement.setString(1, independentLoginHash());
         assertEquals(1, statement.executeUpdate());
       }
+      var gameService =
+          ScenarioApplicationAssembly.create(
+              source(db::api),
+              fingerprints,
+              snapshots,
+              (records, generatedAt) -> {
+                throw new AssertionError("file publication is outside SCR135");
+              },
+              descriptor -> {
+                throw new AssertionError("file inspection is outside SCR135");
+              },
+              clock);
       var transport =
           (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
@@ -223,15 +236,13 @@ final class WebLogApplicationRuntimeTest {
                   fingerprints,
                   contexts,
                   snapshots,
-                  ignored -> {
-                    throw new AssertionError("Game route is outside Log PT");
-                  },
+                  gameService,
                   clock,
                   ignored -> {
                     throw new AssertionError("unexpected terminal API delivery");
                   });
           var web =
-              WebLogApplicationRuntime.start(
+              WebLogApplicationRuntime.startWithScenario(
                   root,
                   0,
                   source(db::web),
@@ -305,6 +316,21 @@ final class WebLogApplicationRuntimeTest {
         assertEquals(1, rows.size());
         assertTrue(rows.first().text().contains("PTSCR135"));
         assertTrue(rows.first().text().contains("synthetic log result"));
+        var games =
+            client.send(
+                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + web.port() + "/scenarios"))
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .header("Cookie", cookie)
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, games.statusCode());
+        assertEquals("Scenario Games", Jsoup.parse(games.body()).selectFirst("h1").text());
+        assertEquals(
+            1,
+            count(
+                db.api(),
+                "select count(*) from schubert.request_inbox where request_layout_id='GAMREQ01' and processing_state='COMPLETED'"));
         assertEquals(
             1,
             count(

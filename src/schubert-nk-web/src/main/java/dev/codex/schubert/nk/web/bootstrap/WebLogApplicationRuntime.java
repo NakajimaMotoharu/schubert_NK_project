@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.web.config.LogMvcConfiguration;
+import dev.codex.schubert.nk.web.config.ScenarioLogMvcConfiguration;
 import dev.codex.schubert.nk.web.logging.WebLogDispatcher;
 import dev.codex.schubert.nk.web.logging.WebLogReplayWorker;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
@@ -12,6 +13,7 @@ import dev.codex.schubert.nk.web.messaging.JmsContextFactory;
 import dev.codex.schubert.nk.web.messaging.JmsReplyDecoder;
 import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
 import dev.codex.schubert.nk.web.messaging.LogSearchWireClient;
+import dev.codex.schubert.nk.web.messaging.ScenarioWireClient;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.security.MqAuthenticationProvider;
 import dev.codex.schubert.nk.web.security.MqLoginClient;
@@ -83,8 +85,75 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
       Duration logInterval,
       Consumer<dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException> onTerminal)
       throws LifecycleException {
-    WebHttpServer.validateConfiguration(
-        runtimeDirectory, port, new Class<?>[] {LogMvcConfiguration.class});
+    return startPath(
+        runtimeDirectory,
+        port,
+        database,
+        broker,
+        sessionCodec,
+        clock,
+        audit,
+        identifiers,
+        logDispatcher,
+        logWorker,
+        logBatchLimit,
+        logInterval,
+        onTerminal,
+        false);
+  }
+
+  /** Registers Scenario and Log MVC together; the outer process still owns full readiness. */
+  public static WebLogApplicationRuntime startWithScenario(
+      Path runtimeDirectory,
+      int port,
+      DataSource database,
+      JmsContextFactory broker,
+      SessionPayloadCodec sessionCodec,
+      Clock clock,
+      WebSecurityAudit audit,
+      Supplier<UUID> identifiers,
+      WebLogDispatcher logDispatcher,
+      String logWorker,
+      int logBatchLimit,
+      Duration logInterval,
+      Consumer<dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException> onTerminal)
+      throws LifecycleException {
+    return startPath(
+        runtimeDirectory,
+        port,
+        database,
+        broker,
+        sessionCodec,
+        clock,
+        audit,
+        identifiers,
+        logDispatcher,
+        logWorker,
+        logBatchLimit,
+        logInterval,
+        onTerminal,
+        true);
+  }
+
+  private static WebLogApplicationRuntime startPath(
+      Path runtimeDirectory,
+      int port,
+      DataSource database,
+      JmsContextFactory broker,
+      SessionPayloadCodec sessionCodec,
+      Clock clock,
+      WebSecurityAudit audit,
+      Supplier<UUID> identifiers,
+      WebLogDispatcher logDispatcher,
+      String logWorker,
+      int logBatchLimit,
+      Duration logInterval,
+      Consumer<dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException> onTerminal,
+      boolean scenario)
+      throws LifecycleException {
+    Class<?> configuration =
+        scenario ? ScenarioLogMvcConfiguration.class : LogMvcConfiguration.class;
+    WebHttpServer.validateConfiguration(runtimeDirectory, port, new Class<?>[] {configuration});
     Objects.requireNonNull(database, "database");
     Objects.requireNonNull(broker, "broker");
     Objects.requireNonNull(sessionCodec, "sessionCodec");
@@ -122,14 +191,26 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
           application.startWithSessionDependencies(
               runtimeDirectory,
               port,
-              sessions ->
-                  Map.<Class<?>, Object>of(
+              sessions -> {
+                var logClient =
+                    new LogSearchWireClient(
+                        client, sender, clock, identifiers, Duration.ofSeconds(2));
+                var invalid = new ApiSessionInvalidHandler(sessions, audit);
+                if (scenario) {
+                  return Map.<Class<?>, Object>of(
                       LogSearchWireClient.class,
-                      new LogSearchWireClient(
+                      logClient,
+                      ScenarioWireClient.class,
+                      new ScenarioWireClient(
                           client, sender, clock, identifiers, Duration.ofSeconds(2)),
                       ApiSessionInvalidHandler.class,
-                      new ApiSessionInvalidHandler(sessions, audit)),
-              LogMvcConfiguration.class);
+                      invalid);
+                }
+                return Map.<Class<?>, Object>of(
+                    LogSearchWireClient.class, logClient,
+                    ApiSessionInvalidHandler.class, invalid);
+              },
+              configuration);
       return new WebLogApplicationRuntime(
           http, replay, replies, http::port, replies::ready, replay::running, terminal);
     } catch (LifecycleException | RuntimeException failure) {
