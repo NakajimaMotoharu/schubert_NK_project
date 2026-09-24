@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 401
+BATCH_TEST_COUNT = 404
 EXPIRY_AUDIT_CLASS = "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest"
 EXPIRY_AUDIT_METHODS = (
     "bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff",
@@ -243,6 +243,7 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+               "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",

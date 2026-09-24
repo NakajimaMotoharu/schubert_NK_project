@@ -104,6 +104,9 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientT
      "opsMq026RealBrokerRemovesOnlyActualExpiredMessage",
      "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove",
      "opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest", 29,
+    ("opsMq029OrderedReadOnlyObservation", "opsMq030FailClosedAndNoLaterChecks",
+     "opsMq031MalformedPressureAndFatalContracts")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -133,7 +136,7 @@ MQ_SUBJECTS = tuple("dev/codex/schubert/nk/batch/mq/" + name for name in
     ("ArtemisReadinessClient", "ArtemisReadinessException",
      "ArtemisManagementReadinessClient", "ArtemisManagementReadinessException",
      "ArtemisAddressSettingsReadinessClient", "ArtemisAcceptorReadinessClient",
-     "ArtemisRoleReadinessClient", "ArtemisQueuePressureClient"))
+     "ArtemisRoleReadinessClient", "ArtemisQueuePressureClient", "ArtemisStartupObservation"))
 UNIT_TRACES = {
     "PT-OPS-UNIT-001-state.txt": b"quiescent=true\nreceipt=10\nsameInvocationReceipt=none\n",
     "PT-OPS-UNIT-010-receipt-0.txt": b"receipt=0\ncommands=3\n",
@@ -214,7 +217,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ",
-                   "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "PT-OPS-MQ",
+                   "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -265,7 +269,8 @@ def main():
                 "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "batch",
+                "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -344,7 +349,9 @@ def main():
         for name in ("033_NK-OPS-001_PostgreSQL配備設定単体テスト仕様書.md", "034_NK-OPS-001_PostgreSQL配備設定実行結果.md",
                      "035_NK-OPS-001_shell診断混線再試験.md",
                      "036_NK-OPS-001_Artemis実効Queue単体テスト仕様書.md",
-                     "037_NK-OPS-001_Artemis実効Queue実行結果.md"):
+                     "037_NK-OPS-001_Artemis実効Queue実行結果.md",
+                     "038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md",
+                     "039_NK-OPS-001_Artemis起動前観測実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -404,6 +411,7 @@ def main():
         manifest["acceptorOracle"] = "042/PT-OPS-MQ-013..015: live Ops Core management getAcceptorsAsJSON plus acceptor.core started; exactly one Netty/tcp/127.0.0.1/61616/CORE and empty extras, app role denied; null/missing/extra/wildcard/AMQP/provider redacted. Not journal recovery, all roles, Queue threshold or full startup."
         manifest["roleOracle"] = "044/PT-OPS-MQ-016..018: live Ops getRolesAsJSON for SS321 six business matches plus management namespace; exact role names and 12 boolean permissions, every permission flip/missing/extra/unknown/malformed/provider redacted, app management denied. JAAS user provisioning and all other startup gates remain separate."
         manifest["queuePressureOracle"] = "046/PT-OPS-MQ-019..021: live six-Queue Ops messageCount/persistentSize, independent SS321 count/byte 70/90 boundary-1/equals/+1 and DLQ one-message alert; missing/negative/type/provider redacted, app role denied. No startup policy or Expiry purge claimed."
+        manifest["startupObservationOracle"] = "038/PT-OPS-MQ-029..031: fixed topology→broker→settings→acceptor→roles→six pressure order; any ordinary failure stops later probes with fixed redaction, fatal identity escapes, nullable/missing/extra pressure rejected, borrowed Ops session never closed. This is a read-only observation, not journal recovery, credential provenance, Expiry maintenance or a startup go/no-go."
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 
