@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite name="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.057" tests="16" errors="0" failures="0" skipped="0">
-  <testcase name="f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.005" />
-  <testcase name="a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.005" />
-  <testcase name="f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.004" />
+<testsuite name="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.046" tests="16" errors="0" failures="0" skipped="0">
+  <testcase name="f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.004" />
+  <testcase name="a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
+  <testcase name="f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.003" />
   <testcase name="bug036CallerMonitorCannotBlockAnyDirectoryOperation" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.005" />
-  <testcase name="f02ExistingDateIndependentChildLifetimeAndSafeIoFailures" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.007" />
-  <testcase name="med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.003" />
-  <testcase name="rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
-  <testcase name="med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.009" />
+  <testcase name="f02ExistingDateIndependentChildLifetimeAndSafeIoFailures" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
+  <testcase name="med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.001" />
+  <testcase name="rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.001" />
+  <testcase name="med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.008" />
   <testcase name="a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
-  <testcase name="w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.001" />
+  <testcase name="w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
   <testcase name="f02RejectsNullRelativeRootDotSegmentsAndInvalidDates" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
-  <testcase name="a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
-  <testcase name="w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.003" />
+  <testcase name="a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.003" />
+  <testcase name="w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.004" />
   <testcase name="rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
   <testcase name="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.003" />
   <testcase name="f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd" classname="dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest" time="0.002" />
