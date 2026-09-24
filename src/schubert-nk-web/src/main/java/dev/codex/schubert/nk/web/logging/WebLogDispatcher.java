@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.sql.DataSource;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Short Web-only DB transactions surrounding independently committed JMS sends. Trace: NK-MSG-002;
@@ -73,21 +74,45 @@ public final class WebLogDispatcher {
   }
 
   private <T> T transaction(SqlAction<T> action) throws SQLException {
-    try (Connection connection =
-        Objects.requireNonNull(database.getConnection(), "JDBC connection")) {
+    Connection connection = Objects.requireNonNull(database.getConnection(), "JDBC connection");
+    @Nullable Throwable primary = null;
+    try {
       connection.setAutoCommit(false);
       try {
         T value = action.execute(connection);
         connection.commit();
         return value;
       } catch (SQLException | RuntimeException failure) {
+        primary = failure;
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException rollbackFailure) {
+          if (rollbackFailure != failure) failure.addSuppressed(rollbackFailure);
+        } catch (Error fatal) {
+          fatal.addSuppressed(failure);
+          throw fatal;
         }
         throw failure;
       }
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeAfterFailure(connection, primary);
+    }
+  }
+
+  private static void closeAfterFailure(Connection connection, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      connection.close();
+    } catch (SQLException | RuntimeException | Error closing) {
+      if (primary == null) throw closing;
+      if (closing instanceof Error fatal && fatal != primary) {
+        fatal.addSuppressed(primary);
+        throw fatal;
+      }
+      if (closing != primary) primary.addSuppressed(closing);
     }
   }
 

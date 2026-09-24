@@ -326,6 +326,82 @@ final class WebLogDispatcherTest {
   }
 
   @Test
+  void idem012r03DistinctRollbackAndCloseFailuresRemainSecondary() throws Exception {
+    try (var codec = codec()) {
+      SQLException primary = new SQLException("claim", "PT003");
+      SQLException rollback = new SQLException("rollback", "PT004");
+      SQLException close = new SQLException("close", "PT005");
+      AtomicInteger rolledBack = new AtomicInteger();
+      AtomicInteger closed = new AtomicInteger();
+      SQLException observed =
+          assertThrows(
+              SQLException.class,
+              () ->
+                  new WebLogDispatcher(
+                          source(
+                              () ->
+                                  failingConnection(primary, rollback, close, rolledBack, closed)),
+                          repository,
+                          unreachableSender(codec),
+                          Clock.fixed(NOW, ZoneOffset.UTC))
+                      .dispatch("worker", 1));
+      assertSame(primary, observed);
+      assertArrayEquals(new Throwable[] {rollback, close}, observed.getSuppressed());
+      assertEquals(1, rolledBack.get());
+      assertEquals(1, closed.get());
+    }
+  }
+
+  @Test
+  void idem012r04RollbackFatalAndSameCloseFatalRemainFatal() throws Exception {
+    try (var codec = codec()) {
+      SQLException primary = new SQLException("claim", "PT006");
+      AssertionError fatal = new AssertionError("rollback fatal");
+      AtomicInteger rolledBack = new AtomicInteger();
+      AtomicInteger closed = new AtomicInteger();
+      AssertionError observed =
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  new WebLogDispatcher(
+                          source(
+                              () -> failingConnection(primary, fatal, fatal, rolledBack, closed)),
+                          repository,
+                          unreachableSender(codec),
+                          Clock.fixed(NOW, ZoneOffset.UTC))
+                      .dispatch("worker", 1));
+      assertSame(fatal, observed);
+      assertArrayEquals(new Throwable[] {primary}, observed.getSuppressed());
+      assertEquals(1, rolledBack.get());
+      assertEquals(1, closed.get());
+    }
+  }
+
+  @Test
+  void idem012r05CloseFatalAfterClaimFailureDoesNotHidePrimary() throws Exception {
+    try (var codec = codec()) {
+      SQLException primary = new SQLException("claim", "PT007");
+      AssertionError fatal = new AssertionError("close fatal");
+      AtomicInteger rolledBack = new AtomicInteger();
+      AtomicInteger closed = new AtomicInteger();
+      AssertionError observed =
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  new WebLogDispatcher(
+                          source(() -> failingConnection(primary, null, fatal, rolledBack, closed)),
+                          repository,
+                          unreachableSender(codec),
+                          Clock.fixed(NOW, ZoneOffset.UTC))
+                      .dispatch("worker", 1));
+      assertSame(fatal, observed);
+      assertArrayEquals(new Throwable[] {primary}, observed.getSuppressed());
+      assertEquals(1, rolledBack.get());
+      assertEquals(1, closed.get());
+    }
+  }
+
+  @Test
   void nullContractsAndReportInvariantsRejectInvalidInput() throws Exception {
     try (var codec = codec()) {
       DataSource source = source(db::web);
@@ -487,5 +563,43 @@ final class WebLogDispatcherTest {
                 throw wrapped.getCause();
               }
             });
+  }
+
+  private static Connection failingConnection(
+      Throwable claim,
+      Throwable rollback,
+      Throwable close,
+      AtomicInteger rolledBack,
+      AtomicInteger closed) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (ignored, method, args) -> {
+              return switch (method.getName()) {
+                case "setAutoCommit" -> null;
+                case "getAutoCommit" -> false;
+                case "prepareStatement" -> throw claim;
+                case "rollback" -> {
+                  rolledBack.incrementAndGet();
+                  if (rollback != null) throw rollback;
+                  yield null;
+                }
+                case "close" -> {
+                  closed.incrementAndGet();
+                  if (close != null) throw close;
+                  yield null;
+                }
+                default -> throw new AssertionError(method.getName());
+              };
+            });
+  }
+
+  private static WebLogMessageSender unreachableSender(WebLogPayloadCodec codec) {
+    return new WebLogMessageSender(
+        codec,
+        () -> {
+          throw new AssertionError("claim failure must not send");
+        });
   }
 }

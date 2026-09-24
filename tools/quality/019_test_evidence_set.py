@@ -34,10 +34,42 @@ atomic = module("atomic_collector", "026_collect_atomic_cleanup_evidence.py")
 expiry = module("expiry_audit_collector", "037_collect_expiry_audit_database.py")
 request_sender = module("request_sender_resource_collector", "038_collect_request_sender_resource.py")
 jms_compounds = module("jms_resource_compound_collector", "039_collect_jms_resource_compounds.py")
+log_vertical = module("log_replay_vertical_collector", "040_collect_log_replay_vertical.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_web_log_jdbc_resource_suite_canaries(self):
+        expected = ("PT-IDEM-012-R02", "PT-IDEM-012-R03", "PT-IDEM-012-R04",
+                    "PT-IDEM-012-R05")
+        self.assertEqual(expected, tuple(log_vertical.RESOURCE_METHODS))
+        suite = ET.Element("testsuite", name=log_vertical.RESOURCE_CLASS,
+                           tests="9", failures="0", errors="0", skipped="0")
+        for name in log_vertical.RESOURCE_METHODS.values():
+            ET.SubElement(suite, "testcase", classname=log_vertical.RESOURCE_CLASS,
+                          name=name)
+        for index in range(5):
+            ET.SubElement(suite, "testcase", classname=log_vertical.RESOURCE_CLASS,
+                          name=f"existing{index}")
+        self.assertEqual(expected, tuple(log_vertical.validate_resource_suite(suite)))
+        for key, value in (("tests", "8"), ("failures", "1"), ("errors", "1"),
+                           ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError):
+                log_vertical.validate_resource_suite(wrong)
+        for mutation in ("missing", "duplicate", "failed", "renamed"):
+            wrong = copy.deepcopy(suite)
+            if mutation == "missing":
+                wrong.remove(wrong[0])
+            elif mutation == "duplicate":
+                wrong[-1].set("name", wrong[0].get("name"))
+            elif mutation == "failed":
+                ET.SubElement(wrong[0], "failure")
+            else:
+                wrong[0].set("name", "wrong-name")
+            with self.assertRaises(ValueError):
+                log_vertical.validate_resource_suite(wrong)
+
     def test_jms_resource_compound_inventory_and_coverage(self):
         self.assertEqual(("PT-JMS-021", "PT-IDEM-010-R01", "PT-IDEM-010-R02",
                           "PT-IDEM-010-R03", "PT-IDEM-010-R04", "PT-IDEM-010-R05",
