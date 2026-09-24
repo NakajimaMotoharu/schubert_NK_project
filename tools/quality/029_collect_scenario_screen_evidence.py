@@ -27,7 +27,10 @@ WEB_HTTP_IDS = (109, 110, 111, 112, 120, 121, 123)
 WEB_DEPENDENCY_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest"
 WEB_DEPENDENCY_METHODS = ("scr113RealPostgresAndApprovedBrokerQueue", "scr114NullAndInvalidDatabaseStopBeforeJms",
                           "scr115ProviderFailuresAreRedactedAndBorrowedResourcesClose",
-                          "scr116UnavailableBrokerCannotBecomeReady")
+                          "scr116UnavailableBrokerCannotBecomeReady",
+                          "scr136FatalDatabaseCloseCannotBeDowngraded",
+                          "scr137FatalBrokerCloseCannotBeDowngraded")
+WEB_DEPENDENCY_IDS = (113, 114, 115, 116, 136, 137)
 WEB_APPLICATION_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest"
 WEB_APPLICATION_METHODS = ("scr117ActualIntegratedLoginAndDirectDenial",
                            "scr118DependencyFailurePreventsHttpBind",
@@ -234,7 +237,7 @@ def validate_web_http_suite(suite):
 
 
 def validate_web_dependency_suite(suite):
-    return validate_named_suite(suite, WEB_DEPENDENCY_CLASS, WEB_DEPENDENCY_METHODS, 113)
+    return validate_named_suite(suite, WEB_DEPENDENCY_CLASS, WEB_DEPENDENCY_METHODS, 113, WEB_DEPENDENCY_IDS)
 
 
 def validate_web_application_suite(suite):
@@ -377,7 +380,9 @@ def main():
                  "041_NK-WEB-002_Web・API実Login縦結線単体テスト仕様書.md",
                  "042_NK-WEB-002_Web・API実Login縦結線実行結果.md",
                  "043_NK-WEB-002_Web・API実Log検索縦結線単体テスト仕様書.md",
-                 "044_NK-WEB-002_Web・API実Log検索縦結線実行結果.md"):
+                 "044_NK-WEB-002_Web・API実Log検索縦結線実行結果.md",
+                 "045_NK-WEB-002_Web起動前資源複合単体テスト仕様書.md",
+                 "046_NK-WEB-002_Web起動前資源複合実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
@@ -388,6 +393,7 @@ def main():
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt",
                 "completedAt", "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
+        "webReadinessResourceOracle": "045/SCR136..137: synthetic public JDBC/JMS normal inspection with distinct fatal owned close must preserve original Error and close once, DB failure prevents broker acquisition; BUG250 RED is not a PT pass. Full process readiness and NK capture remain unverified.",
         "logTemplateOracle": "019/SCR084..091: actual Log resolver/Current DOM literals,ADMIN,7filters/6types/3levels/date step,all row optionals/details,0/100/101/201/clamped pagination,escaping/invalid field display/CSRF,scoped Current CSS/resource,64 renders.Not browser byte validator/HTTP/NK gate.",
         "logBrowserOracle": "021/SCR092-A..H: eight independent byte/NFC/control/DOM event cases, Node line/function/branch100, exact hash and no skipped/todo. Not live browser or actual NK CHR.",
         "logHttpOracle": "023/SCR093..103: independent UI232/235 bytes and DOM/status, ADMIN/anonymous/USER/0102, all result errors, invalid400/noMQ, malformed/unknown/IO/null, real loopback GET/HEAD/POST and role/session, 64 concurrent contexts. Not live broker or actual NK CHR-L01.",

@@ -4,7 +4,7 @@ Program `NK-WEB-002`、PG270、class `WebDependencyReadiness`、method `verify`�
 
 | Test ID / method | fixture・入力・操作 | 独立期待値 |
 |---|---|---|
-| PT-SCR-136 / `scr136FatalDatabaseCloseCannotBeDowngraded` | 公開Connection proxy `isValid`が通常SQLException、`close`が別fatal Error。Broker supplierは呼出回数を保持 | 元Error同一性、Connection close1、Broker取得0。SS342起動fail-closedとJava所有資源の重大故障優先から導出。Production methodでexpectedを生成しない |
-| PT-SCR-137 / `scr137FatalBrokerCloseCannotBeDowngraded` | 正常DB Connection、JMSContext `createConsumer`が通常JMSRuntimeException、`close`が別fatal Error | 元Error同一性、DB/JMS各close1、HTTP未起動。固定redacted通常故障との境界を独立確認 |
+| PT-SCR-136 / `scr136FatalDatabaseCloseCannotBeDowngraded` | 公開Connection proxyで`isValid`通常SQLException＋`close`別fatal Error、通常＋通常、fatal＋fatalの3組。Broker supplierは呼出回数を保持 | 通常＋fatalでは元close Error、通常＋通常では固定redacted・causeなし、fatal＋fatalでは元検査Error同一性。各Connection close1、Broker取得0。SS342起動fail-closedとJava所有資源の重大故障優先から導出。Production methodでexpectedを生成しない |
+| PT-SCR-137 / `scr137FatalBrokerCloseCannotBeDowngraded` | 正常DB Connection、JMSContext `createConsumer`通常JMSRuntimeException＋`close`別fatal Error、通常＋通常、fatal＋fatalの3組 | 通常＋fatalでは元close Error、通常＋通常では固定redacted・causeなし、fatal＋fatalでは元検査Error同一性。各JMS close1、DB connection close1、HTTP未起動 |
 
-既存PT-SCR-113～116の実PG18/Artemis、欠落/null/無効DB、JMS停止・通常close/redactionを回帰する。追加する通常＋通常、fatal＋fatal、正常body＋fatal closeなどの全分岐/例外後条件は実装と並行して本表に追補する。選択command JDK25/Maven3.9.12 `./mvnw -o -pl src/schubert-nk-web -Dtest=WebDependencyReadinessTest test`、正式全reactorのrun/commit、coverage、OS/tool、input/expected/actual、sanitized RED、関連BUG、manifest/hashは046へ記録する。Failed/skippedを合格に算入しない。
+既存PT-SCR-113～116の実PG18/Artemis、欠落/null/無効DB、JMS停止・単独通常close/redactionを回帰する。上記通常/fatal組合せと既存正常body/単独closeで追加全条件分岐を実測する。選択command JDK25/Maven3.9.12 `./mvnw -o -pl src/schubert-nk-web -Dtest=WebDependencyReadinessTest test`、正式全reactorのrun/commit、coverage、OS/tool、input/expected/actual、sanitized RED、関連BUG、manifest/hashは046へ記録する。Failed/skippedを合格に算入しない。

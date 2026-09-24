@@ -1033,12 +1033,12 @@ class EvidenceSetTest(unittest.TestCase):
         screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
         cls = screen.WEB_DEPENDENCY_CLASS
         names = screen.WEB_DEPENDENCY_METHODS
-        suite = ET.Element("testsuite", name=cls, tests="4", failures="0", errors="0", skipped="0")
+        suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
-        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in enumerate(names, 113)}
+        expected = {f"PT-SCR-{index:03}": cls + "#" + name for index, name in zip(screen.WEB_DEPENDENCY_IDS, names)}
         self.assertEqual(expected, screen.validate_web_dependency_suite(suite))
-        for position in range(4):
+        for position in range(len(names)):
             wrong = copy.deepcopy(suite); wrong.remove(wrong[position])
             with self.assertRaises(ValueError): screen.validate_web_dependency_suite(wrong)
         for kind in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):

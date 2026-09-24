@@ -171,6 +171,38 @@ final class WebDependencyReadinessTest {
     assertSame(fatal, assertThrows(AssertionError.class, readiness::verify));
     assertEquals(1, closes.get());
     assertEquals(0, brokerCalls.get());
+
+    var ordinaryCloses = new AtomicInteger();
+    var ordinary =
+        new WebDependencyReadiness(
+            source(
+                () ->
+                    compoundConnection(
+                        new SQLException("synthetic inspection"),
+                        new SQLException("synthetic close"),
+                        ordinaryCloses)),
+            () -> {
+              brokerCalls.incrementAndGet();
+              throw new AssertionError("broker must not be acquired");
+            });
+    var fixed = assertThrows(WebStartupException.class, ordinary::verify);
+    assertEquals("Web technical database is unavailable", fixed.getMessage());
+    assertNull(fixed.getCause());
+    assertEquals(1, ordinaryCloses.get());
+    assertEquals(0, brokerCalls.get());
+
+    var primaryFatal = new AssertionError("fatal-db-inspection-marker");
+    var fatalCloses = new AtomicInteger();
+    var bothFatal =
+        new WebDependencyReadiness(
+            source(() -> compoundConnection(primaryFatal, fatal, fatalCloses)),
+            () -> {
+              brokerCalls.incrementAndGet();
+              throw new AssertionError("broker must not be acquired");
+            });
+    assertSame(primaryFatal, assertThrows(AssertionError.class, bothFatal::verify));
+    assertEquals(1, fatalCloses.get());
+    assertEquals(0, brokerCalls.get());
   }
 
   @Test
@@ -204,6 +236,70 @@ final class WebDependencyReadinessTest {
     assertSame(fatal, assertThrows(AssertionError.class, readiness::verify));
     assertEquals(1, dbCloses.get());
     assertEquals(1, brokerCloses.get());
+
+    var ordinaryCloses = new AtomicInteger();
+    var ordinary =
+        new WebDependencyReadiness(
+            source(() -> connection(true, false, false, dbCloses)),
+            () ->
+                compoundContext(
+                    new JMSRuntimeException("synthetic inspection"),
+                    new JMSRuntimeException("synthetic close"),
+                    ordinaryCloses));
+    var fixed = assertThrows(WebStartupException.class, ordinary::verify);
+    assertEquals("Web Artemis reply Queue is unavailable", fixed.getMessage());
+    assertNull(fixed.getCause());
+    assertEquals(1, ordinaryCloses.get());
+
+    var primaryFatal = new AssertionError("fatal-broker-inspection-marker");
+    var fatalCloses = new AtomicInteger();
+    var bothFatal =
+        new WebDependencyReadiness(
+            source(() -> connection(true, false, false, dbCloses)),
+            () -> compoundContext(primaryFatal, fatal, fatalCloses));
+    assertSame(primaryFatal, assertThrows(AssertionError.class, bothFatal::verify));
+    assertEquals(1, fatalCloses.get());
+    assertEquals(3, dbCloses.get());
+  }
+
+  private static Connection compoundConnection(
+      Throwable inspection, Throwable closing, AtomicInteger closes) {
+    return proxy(
+        Connection.class,
+        (instance, method, args) -> {
+          switch (method.getName()) {
+            case "isValid" -> throw inspection;
+            case "close" -> {
+              closes.incrementAndGet();
+              throw closing;
+            }
+            default -> throw new AssertionError("unexpected JDBC call " + method.getName());
+          }
+        });
+  }
+
+  private static JMSContext compoundContext(
+      Throwable inspection, Throwable closing, AtomicInteger closes) {
+    return proxy(
+        JMSContext.class,
+        (instance, method, args) -> {
+          switch (method.getName()) {
+            case "createQueue" -> {
+              return proxy(
+                  Queue.class,
+                  (queue, called, parameters) -> {
+                    if (called.getName().equals("getQueueName")) return "nk.sync.reply.web.q";
+                    throw new AssertionError("unexpected Queue call " + called.getName());
+                  });
+            }
+            case "createConsumer" -> throw inspection;
+            case "close" -> {
+              closes.incrementAndGet();
+              throw closing;
+            }
+            default -> throw new AssertionError("unexpected JMS call " + method.getName());
+          }
+        });
   }
 
   private static Connection connection(
