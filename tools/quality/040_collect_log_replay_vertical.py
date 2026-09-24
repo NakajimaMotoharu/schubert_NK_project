@@ -52,10 +52,11 @@ def validate_coverage(report, subject):
     counters = {c.get("type"): {"covered": int(c.get("covered")),
                                  "missed": int(c.get("missed"))}
                 for c in classes[0].findall("counter")}
-    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH")
+    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS")
     if (not set(required).issubset(counters)
             or any(counters[k]["covered"] <= 0 or counters[k]["missed"] != 0
-                   for k in required)):
+                   for k in required)
+            or ("BRANCH" in counters and counters["BRANCH"]["missed"] != 0)):
         raise ValueError("vertical Log production coverage below 100%")
     return counters
 

@@ -279,6 +279,8 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(5, len(vertical.validate_coverage(report, vertical.SUBJECTS[0][1])))
         bad = copy.deepcopy(report); bad[0][4].set("missed", "1")
         with self.assertRaises(ValueError): vertical.validate_coverage(bad, vertical.SUBJECTS[0][1])
+        branchless = copy.deepcopy(report); branchless[0].remove(branchless[0][4])
+        self.assertEqual(4, len(vertical.validate_coverage(branchless, vertical.SUBJECTS[0][1])))
 
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
