@@ -1,0 +1,7 @@
+PT-IDEM-010-R02 / BUG-244 pre-fix RED, 2026-09-24 JST
+Target: OutboxJmsSender.send / OutboxDispatcherTest.idem010r02SameProviderFailureOnSessionModeAndCloseKeepsOriginalCause
+Selected Maven test exit=1; tests=1, failures=1, errors=0, skipped=0.
+Independent expected: OutboxSendException lifecycle failure; cause is original JMSRuntimeException instance; close once; no self-suppression.
+Observed: OutboxSendException cause is IllegalArgumentException: Self-suppression not permitted.
+Input: synthetic public JMSContext proxy returns the same exception object from getSessionMode and close. No real credential, payload content, session, or token is recorded.
+This RED run is not a passing PT result. Formal full-reactor/coverage/hash remain pending.

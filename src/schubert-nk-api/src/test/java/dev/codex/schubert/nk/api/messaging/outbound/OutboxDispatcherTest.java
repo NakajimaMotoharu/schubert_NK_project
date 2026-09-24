@@ -846,6 +846,34 @@ final class OutboxDispatcherTest {
   }
 
   @Test
+  void idem010r02SameProviderFailureOnSessionModeAndCloseKeepsOriginalCause() {
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-shared-provider-failure");
+    AtomicInteger closes = new AtomicInteger();
+    JMSContext context =
+        (JMSContext)
+            Proxy.newProxyInstance(
+                JMSContext.class.getClassLoader(),
+                new Class<?>[] {JMSContext.class},
+                (ignored, method, args) ->
+                    switch (method.getName()) {
+                      case "getSessionMode" -> throw primary;
+                      case "close" -> {
+                        closes.incrementAndGet();
+                        throw primary;
+                      }
+                      case "toString" -> "synthetic-context";
+                      default -> throw new AssertionError(method.getName());
+                    });
+    OutboxSendException failure =
+        assertThrows(
+            OutboxSendException.class, () -> new OutboxJmsSender().send(() -> context, sample()));
+    assertEquals("outbox JMS context lifecycle failed", failure.getMessage());
+    assertSame(primary, failure.getCause());
+    assertEquals(0, primary.getSuppressed().length);
+    assertEquals(1, closes.get());
+  }
+
+  @Test
   void persistedQwkPayloadIsFullyDecodedBeforeOpeningJms() {
     // PT-IDEM-011 / BUG-010: expected offsets and values come directly from SS 323.
     OutboxEntry valid = sample();
