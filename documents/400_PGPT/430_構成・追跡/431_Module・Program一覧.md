@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG262正式限定認定: `NK-WEB-001`/`ScenarioLogMvcConfiguration`、`WebLogApplicationRuntime.startWithScenario/startPath`をPT-SCR-135拡張（015/001～002・manifest）へ追跡。RD FUN-004/008/AUT-001/002/MQ-003～008、UI221～225/231/235、SS311/313/314/321/323/324/342/352。実HTTP/PG18/ArtemisのLogin→Log→Scenario一覧200/Inbox GAM・LGS各1を正式`PT-WEB-20260924-60`/source`71c79c4b7`、1865PT/53scope/hash/102負canary/Production全coverage・静的0で限定認定。実file/OS排他/外部process/CHRは未了。
+
 2026-09-24 PG262選択段階: `NK-WEB-001`/`ScenarioLogMvcConfiguration`、`WebLogApplicationRuntime.startWithScenario/startPath`をPT-SCR-135拡張（015/001～002）へ追跡。RD FUN-004/008/AUT-001/002/MQ-003～008、UI221～225/231/235、SS311/313/314/321/323/324/342/352。実HTTP/PG18/ArtemisのLogin→Log→Scenario一覧200/Inbox GAM・LGS各1を選択PASS、Web module `clean verify`/全coverage/SpotBugs0。正式全reactor/53scope/hash前で未認定。実file/OS排他/実process/CHRは未了。
 
 2026-09-24 PG261正式限定認定: `NK-SCN-001`/`StorageRootInspection.inode/requireDistinct`をPT-SCN-008-A08（008/001～002・manifest）へ追跡。RD FIL-001～009、UI243、SS333 §2/343 §2。6root保持inodeのUnix dev/ino同一拒否を独立合成matrixと実ext4正経路で正式`PT-WEB-20260924-59`/source`f7b128e0e`、1865PT/53scope/hash/102負canary/Production全coverage・静的0で限定認定。bind mount反例の実測・ACL/全root権限profile・起動排他は未了。
