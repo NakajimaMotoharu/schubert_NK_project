@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 387
+BATCH_TEST_COUNT = 390
 BATCH_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
 BATCH_RUNTIME_DEPENDENCY_METHODS = ("bat283RuntimePostgresDriverAndScopeCanaries",)
 
@@ -230,6 +230,7 @@ OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+               "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",

@@ -129,6 +129,18 @@ public final class ArtemisManagementReadinessClient {
     }
   }
 
+  static Object queueMetric(ClientSession session, String queue, String attribute) {
+    return read(
+        session,
+        attribute,
+        (borrowed, ignored) ->
+            query(
+                borrowed,
+                message ->
+                    ManagementHelper.putAttribute(
+                        message, ResourceNames.QUEUE + queue, attribute)));
+  }
+
   static void putAddressSettingsOperation(ClientMessage message, String address) {
     try {
       ManagementHelper.putOperationInvocation(
