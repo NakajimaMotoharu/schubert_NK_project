@@ -1,0 +1,8 @@
+BUG-248 pre-fix selected RED, 2026-09-25 JST
+Program=NK-MSG-001 Test=PT-JMS-022
+Command=JDK25 Maven offline -pl src/schubert-nk-api -Dtest=ApiDependencyReadinessTest#apiReadinessFatalBrokerCloseCannotBeDowngradedToOrdinaryUnavailable test
+Fixture=public synthetic JMSContext and valid synthetic JDBC Connection; no credential or message retained
+Input=getSessionMode ordinary Runtime failure plus owned JMSContext.close distinct fatal Error
+Expected=original fatal Error identity, close once, readiness does not succeed
+Actual=fixed IllegalStateException; one assertion failure, exitCode=1
+Raw Surefire output, provider details, credential, token, DB values and JMS body are not retained.

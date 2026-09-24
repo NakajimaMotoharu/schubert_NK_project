@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.dispatch;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
@@ -146,6 +147,31 @@ final class ApiDependencyReadinessTest {
                           .verify())
               .getMessage());
     }
+  }
+
+  @Test
+  void apiReadinessFatalBrokerCloseCannotBeDowngradedToOrdinaryUnavailable() {
+    RuntimeException inspection = new JMSRuntimeException("synthetic inspection failure");
+    AssertionError fatal = new AssertionError("synthetic owned context close failure");
+    var closed = new AtomicInteger();
+    var database = source(() -> connection(true, false, false, new AtomicInteger()));
+    JMSContext context =
+        proxy(
+            JMSContext.class,
+            (ignored, method, args) -> {
+              if (method.getName().equals("getSessionMode")) throw inspection;
+              if (method.getName().equals("close")) {
+                closed.incrementAndGet();
+                throw fatal;
+              }
+              throw new AssertionError(method.getName());
+            });
+    AssertionError observed =
+        assertThrows(
+            AssertionError.class,
+            () -> new ApiDependencyReadiness(database, () -> context).verify());
+    assertSame(fatal, observed);
+    assertEquals(1, closed.get());
   }
 
   private static Connection connection(
