@@ -1,0 +1,9 @@
+BUG-247 pre-fix selected RED, 2026-09-24 JST
+Program=NK-WEB-001 Test=PT-WEB-296
+Command=JDK25 Maven offline -pl src/schubert-nk-web -Dtest=JdbcWebSessionStoreTest#web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation test
+Fixture=isolated PostgreSQL 18, synthetic valid row, public JDBC proxy; no actual session ID or credential retained
+Input=detached id projection null plus distinct ResultSet.close SQLDataException
+Expected=exact SessionStoreException; no invalid-row classification or deletion
+Actual=InvalidSessionRowException; assertion failure 1/1, exitCode=1
+Initial formatting-only attempt stopped before test execution and is not the bug evidence.
+Raw Surefire output, database values, provider markers, tokens and credentials are not retained.

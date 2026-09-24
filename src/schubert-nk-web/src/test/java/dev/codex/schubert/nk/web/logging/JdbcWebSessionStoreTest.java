@@ -497,6 +497,30 @@ class JdbcWebSessionStoreTest {
   }
 
   @Test
+  void web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation() throws Exception {
+    seed();
+    try (var connection = db.transaction()) {
+      var fault = new Fault();
+      fault.columns.put("id", null);
+      fault.failure = "result.close";
+      SessionStoreException failure =
+          assertThrows(
+              SessionStoreException.class, () -> STORE.findLocked(fault.wrap(connection), hash(1)));
+      assertEquals(SessionStoreException.class, failure.getClass());
+      assertEquals("session storage is unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+      assertTrue(fault.columnHit);
+      assertTrue(fault.hit);
+      assertEquals(1, fault.resultsClosed);
+      assertEquals(1, fault.statementsClosed);
+      assertFalse(connection.isClosed());
+      connection.rollback();
+    }
+    assertEquals(1, count());
+  }
+
+  @Test
   void web031ConcurrentLocksAndVersionsStayConsistent() throws Exception {
     seed();
     try (var pool = Executors.newFixedThreadPool(10)) {
