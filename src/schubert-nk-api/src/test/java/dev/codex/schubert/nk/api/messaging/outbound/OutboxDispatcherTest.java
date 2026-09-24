@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -808,6 +809,40 @@ final class OutboxDispatcherTest {
                         CLOCK)
                     .dispatch("worker-rollback-failure", 1));
     assertEquals(1, rollbackFailure.getSuppressed().length);
+  }
+
+  @Test
+  void idem010r01SameProviderFailureOnStageAndRollbackKeepsOriginalCause() {
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-shared-provider-failure");
+    AtomicInteger rollbacks = new AtomicInteger();
+    AtomicInteger closes = new AtomicInteger();
+    JMSContext context =
+        (JMSContext)
+            Proxy.newProxyInstance(
+                JMSContext.class.getClassLoader(),
+                new Class<?>[] {JMSContext.class},
+                (ignored, method, args) ->
+                    switch (method.getName()) {
+                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+                      case "createBytesMessage" -> throw primary;
+                      case "rollback" -> {
+                        rollbacks.incrementAndGet();
+                        throw primary;
+                      }
+                      case "close" -> {
+                        closes.incrementAndGet();
+                        yield null;
+                      }
+                      default -> throw new AssertionError(method.getName());
+                    });
+    OutboxSendException failure =
+        assertThrows(
+            OutboxSendException.class, () -> new OutboxJmsSender().send(() -> context, sample()));
+    assertEquals("outbox JMS send was not confirmed", failure.getMessage());
+    assertSame(primary, failure.getCause());
+    assertEquals(0, primary.getSuppressed().length);
+    assertEquals(1, rollbacks.get());
+    assertEquals(1, closes.get());
   }
 
   @Test

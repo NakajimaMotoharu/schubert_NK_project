@@ -1,0 +1,7 @@
+BUG-242 / PT-JMS-021 / 修正前 RED（不認定）
+実行日: 2026-09-24 JST。Linux x86_64、JDK25.0.4、Maven3.9.12、dev-foundation。
+入力: 公開JMSContext proxyのcommitとrollbackが同一JMSRuntimeException instanceをthrow。valid返信はSS322固定byte fixture。
+期待: 元instanceをthrow、commit1・rollback1、自己suppressionなし。
+実際: java.lang.IllegalArgumentException: Self-suppression not permitted（ArtemisReplyConsumer.rollbackAfterFailure）。
+選択run: Web2件中failure2、exit1。BUG-242の他Web Log failureも含みRED全体を合格に算入しない。
+秘密情報・raw wire・credential・session/token: 格納なし。GREENは同scope manifest/results/coverage。

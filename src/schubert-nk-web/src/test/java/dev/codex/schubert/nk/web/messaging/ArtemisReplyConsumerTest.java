@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -245,6 +246,23 @@ final class ArtemisReplyConsumerTest {
             () -> consumer.onMessage(rollbackContext.proxy(), failingBytes(primary)));
     assertEquals(primary, observed);
     assertArrayEquals(new Throwable[] {rollbackFailure}, observed.getSuppressed());
+  }
+
+  @Test
+  void jms021SameProviderFailureOnCommitAndRollbackPreservesPrimaryIdentity() throws Exception {
+    ArtemisReplyConsumer consumer = consumer(new ReplyCorrelationRegistry());
+    ContextState context = new ContextState();
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-shared-provider-failure");
+    context.commitFailure = primary;
+    context.rollbackFailure = primary;
+    assertSame(
+        primary,
+        assertThrows(
+            JMSRuntimeException.class,
+            () -> consumer.onMessage(context.proxy(), validReplyBytes())));
+    assertEquals(1, context.commits);
+    assertEquals(1, context.rollbacks);
+    assertEquals(0, primary.getSuppressed().length);
   }
 
   @Test

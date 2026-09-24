@@ -65,7 +65,9 @@ public final class ArtemisReplyConsumer {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
+      if (rollbackFailure != failure) {
+        failure.addSuppressed(rollbackFailure);
+      }
     }
   }
 }

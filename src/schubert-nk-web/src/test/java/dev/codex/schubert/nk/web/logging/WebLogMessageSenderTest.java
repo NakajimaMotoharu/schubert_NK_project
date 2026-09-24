@@ -155,6 +155,58 @@ final class WebLogMessageSenderTest {
   }
 
   @Test
+  void idem012r01SameProviderFailureOnStageAndRollbackKeepsOriginalCauseAndErasesWire() {
+    try (WebLogPayloadCodec codec = codec()) {
+      ClaimedWebLog row = row(codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()));
+      JMSRuntimeException primary = new JMSRuntimeException("synthetic-shared-provider-failure");
+      AtomicInteger rollbacks = new AtomicInteger();
+      AtomicInteger closes = new AtomicInteger();
+      AtomicReference<byte[]> plaintext = new AtomicReference<>();
+      BytesMessage message =
+          (BytesMessage)
+              Proxy.newProxyInstance(
+                  BytesMessage.class.getClassLoader(),
+                  new Class<?>[] {BytesMessage.class},
+                  (ignored, method, args) -> {
+                    if (method.getName().equals("writeBytes")) {
+                      plaintext.set((byte[]) args[0]);
+                      throw primary;
+                    }
+                    return null;
+                  });
+      JMSContext context =
+          (JMSContext)
+              Proxy.newProxyInstance(
+                  JMSContext.class.getClassLoader(),
+                  new Class<?>[] {JMSContext.class},
+                  (ignored, method, args) ->
+                      switch (method.getName()) {
+                        case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+                        case "createBytesMessage" -> message;
+                        case "rollback" -> {
+                          rollbacks.incrementAndGet();
+                          throw primary;
+                        }
+                        case "close" -> {
+                          closes.incrementAndGet();
+                          yield null;
+                        }
+                        default -> throw new AssertionError(method.getName());
+                      });
+      WebLogSendException failure =
+          assertThrows(
+              WebLogSendException.class,
+              () -> new WebLogMessageSender(codec, () -> context).send(row));
+      assertEquals("web log JMS send was not confirmed", failure.getMessage());
+      assertSame(primary, failure.getCause());
+      assertEquals(0, primary.getSuppressed().length);
+      assertEquals(1, rollbacks.get());
+      assertEquals(1, closes.get());
+      assertArrayEquals(new byte[2336], plaintext.get());
+    }
+  }
+
+  @Test
   void duplicateDetectionUsesTypedCauseAndLinkedGraphNotTextAndTerminatesCycles() {
     assertThrows(NullPointerException.class, () -> WebLogMessageSender.duplicateConfirmed(null));
     assertFalse(WebLogMessageSender.duplicateConfirmed(new JMSException("duplicate")));

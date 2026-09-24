@@ -114,7 +114,9 @@ public final class OutboxJmsSender {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
+      if (rollbackFailure != failure) {
+        failure.addSuppressed(rollbackFailure);
+      }
     }
   }
 
