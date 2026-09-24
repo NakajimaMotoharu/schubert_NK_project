@@ -113,6 +113,22 @@ public final class ArtemisManagementReadinessClient {
                         message, ResourceNames.ACCEPTOR + "core", "started")));
   }
 
+  static Object roles(ClientSession session, String addressMatch) {
+    return read(
+        session,
+        addressMatch,
+        (borrowed, match) -> query(borrowed, message -> putRolesOperation(message, match)));
+  }
+
+  static void putRolesOperation(ClientMessage message, String addressMatch) {
+    try {
+      ManagementHelper.putOperationInvocation(
+          message, ResourceNames.BROKER, "getRolesAsJSON", addressMatch);
+    } catch (Exception failure) {
+      throw new ArtemisManagementReadinessException();
+    }
+  }
+
   static void putAddressSettingsOperation(ClientMessage message, String address) {
     try {
       ManagementHelper.putOperationInvocation(
