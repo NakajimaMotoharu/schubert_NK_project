@@ -2260,6 +2260,9 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCredloc002RejectsMissingEmptyRelativeAndRoot",
                         "opsCredloc003RejectsAliasTraversalAndControlBytes", "opsCredloc004BoundsAndNullContracts",
                         "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot")))
+        groups.append(("dev.codex.schubert.nk.storage.ServiceCredentialIdTest", 1,
+                       ("opsCredid001ApiExactlyFiveRequiredIds", "opsCredid002WebExactlyFiveRequiredIds",
+                        "opsCredid003ServicesAreDisjointAndImmutable", "opsCredid004NullServiceRejected")))
         groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
                        ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
                         "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads",
@@ -2322,6 +2325,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG",
                        "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
                        "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest": "PT-OPS-CREDLOC",
+                       "dev.codex.schubert.nk.storage.ServiceCredentialIdTest": "PT-OPS-CREDID",
                        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
                        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
                        "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",

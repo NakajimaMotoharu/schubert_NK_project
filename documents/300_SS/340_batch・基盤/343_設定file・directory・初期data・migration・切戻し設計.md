@@ -177,6 +177,8 @@ SSC-049/PG-D-122: 検査processの鍵は起動時に読取り後、不変のcurr
 
 検査へ配布するapi-context-aes/current・previousおよびapi-inbox-response-aes/current・previousの各fileは、ASCIIで `NKKEY1 LF version LF base64 LF` とする（斜線表記は本節の説明上の略称、正式IDは上表のハイフン名）。versionは既存codecと同じ1～16 byteの `[A-Za-z0-9][A-Za-z0-9._-]{0,15}`、keyはAES-256の32 byteを標準Base64・必須padding・canonical表現の44 byteへ符号化する。全54～69 byte、LFのみ、BOM/CRLF/空白/余分field/末尾data/未padding/非canonical末尾bitを禁止する。値そのものはGit/argv/env/ログ/証跡へ記録しない。今回の形式確定は内部credential搬送であり、保存済AES envelopeや電文を変更しない。
 
+SSC-081（通常Web/APIへ横断）: `web-session-aes-current`、`web-revoke-aes-current`、`web-log-aes-current`、`api-context-aes-current`、`api-inbox-response-aes-current`、`operation-hmac-current`は、上記と同じ`NKKEY1 LF version LF canonical Base64(32byte) LF`の54～69 byteを必須とする。HMACの32 byteは§6 catalogの256 bit以上を満たす固定初期profileであり、保存済HMAC/envelope形式は変更しない。`db-web`/`mq-web`/`db-api`/`mq-api`は§6.6のInspectorDbCredentialと同じstrict UTF-8の1～65536 byte、末尾LF/CRLF一組だけ任意、空/BOM/NUL/内部CR/LF/不正UTF-8拒否。password/鍵値はGit/argv/env/log/証跡に保存しない。current10個は各serviceのUnit宣言と一致する必須fileで、別service ID・未知名を読まない。previousはroot管理rotation profileでUnitへ明示配布した場合だけ固定IDを追加でき、暗黙探索/不在fallbackはしない。読取後materialのpurpose分離・version検証と全所有buffer消去を必須とし、外部起動/実OS配布をこのbyte契約だけで認定しない。
+
 InspectorAesCredential.consume(byte[])は入力arrayの排他的所有を引き受け、正常/不正いずれもfinallyで消去する。versionだけを非秘密Stringとして保持し、base64/keyをString化しない。decodeしたkeyは長さ/canonical検証後にprivate所有とし、失敗時のtemporaryも消去する。copyKeyは独立arrayを返しcallerが使用後消去、closeはprivate lockの下で所有keyを消去して冪等終了、close後copyKeyは禁止。version/状態だけの診断で値を出さない。Java/JCA内部の不可制御copyまで物理消去を保証したとは述べず、所有bufferの明示消去・heapdump非生成・process寿命の管理を組み合わせる。
 
 元file0600とsystemd配布後のruntime権限は別物である。systemd 259の実装はroot所有fileへ対象UIDのACLを追加する経路と、対応filesystemによって所有者を移す経路を持つ。単に「runtime file owner=serviceかつmode0400だけ」とする実装は採用しない。後続readerは保持inode、regular/symlink/hardlink/サイズ、readonly/owner/実効ACLの専用主体限定、読取/close失敗を検証してからmaterialを渡す。ACL検証未実装を緩いmode判定で代用せず、main/専用unit/親processの鍵配布を完了にしない。[systemd 259 credential実装](https://raw.githubusercontent.com/systemd/systemd/v259/src/core/exec-credential.c)、[公式credential契約](https://raw.githubusercontent.com/systemd/systemd/v259/man/systemd.exec.xml)を参照（2026-09-09確認）。
@@ -184,6 +186,8 @@ InspectorAesCredential.consume(byte[])は入力arrayの排他的所有を引き�
 ### 6.2 Runtime credential権限の限定（SSC-049、PG-D-132）
 
 非公開検査processは非rootの専用UID（1～4294967294）で動作する。保持inodeの属性とaccess ACLは以下の2形式だけを許可する。ACL検査単体はfileを読まない。後続IO adapterが同じ保持inodeから取得した型付き属性、実際のfilesystem readonly flag、`system.posix_acl_access`を渡し、取得失敗を空ACLへ変換しない。
+
+SSC-081: 通常Web/APIのsystemd runtime credential directory/fileにも同表を、それぞれの非root専用service UIDで適用する。検査用UIDや`schubert`共有groupを代入せず、root+対象service ACLと対象service owner+read-only filesystemの2形だけを許可する。password fileのサイズだけ1～65536、鍵fileは54～69。両serviceの`CREDENTIALS_DIRECTORY`は位置入力にすぎず、実root/fileを保持inodeで検証する前にsecretを読まない。
 
 | 形式 | Directory | AES file | Access ACL |
 |---|---|---|---|
@@ -205,6 +209,8 @@ Java25公開FFMでLinux/glibcのLP64 x86_64/amd64/aarch64 ABIに限定し、必�
 根拠: [Linux getxattr契約](https://man7.org/linux/man-pages/man2/getxattr.2.html)、[statvfs契約](https://man7.org/linux/man-pages/man3/statvfs.3.html)、[glibc statvfs layout更新](https://sourceware.org/pipermail/glibc-cvs/2023q3/082782.html)、上記の導入済みheader。実credential・DB・service設定は変更せず、公開metadataだけの一時file/setfacl2.3.2をPT fixtureとする。
 
 ### 6.4 Private AES file reader（SSC-049、PG-D-134）
+
+SSC-081通常Web/API readerの追加契約: §6.1で列挙したservice別必須5 IDだけを型付きallowlistで受け、caller文字列から任意file名を作らない。§6.2/6.3と同じ保持directory/entryの前後typed metadata・ACL/readonly・link/device/size、最大値＋1 byteのbounded READ、channel/entry/directory close完了、失敗時の一時byte消去と固定redacted失敗を満たす。AES/HMACはcodecに、DB/MQはstrict password codecへ独立所有copyで渡す。readerは別service ID、任意path、symlink/非regular/余分hardlinkを拒否し、失敗時に成功materialを返さない。root-manager由来credentialの実ACL/権限とservice起動はLinux ITで確認する。
 
 API file adapter InspectorCredentialLoaderはborrowed OwnedTransferDirectory、InodeSecurityCalls、専用EUID policyを使い、AesCredentialFileの4固定名（api-context-aes-current、api-context-aes-previous、api-inbox-response-aes-current、api-inbox-response-aes-previous）だけを読む。Caller入力から任意pathを組み立てない。currentは必須。previousはentry openがENOENTでcallbackに一度も入っていない場合だけOptional.emptyを許可し、permission・途中消失・metadata/ACL/closeエラーをprevious不在に変換しない。previousの有無を鍵内容やdecode結果から推定しない。
 

@@ -135,6 +135,9 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ServiceCredentialLocationT
      "opsCredloc002RejectsMissingEmptyRelativeAndRoot",
      "opsCredloc003RejectsAliasTraversalAndControlBytes", "opsCredloc004BoundsAndNullContracts",
      "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ServiceCredentialIdTest", 1,
+    ("opsCredid001ApiExactlyFiveRequiredIds", "opsCredid002WebExactlyFiveRequiredIds",
+     "opsCredid003ServicesAreDisjointAndImmutable", "opsCredid004NullServiceRejected")),)
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
     ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
      "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads",
@@ -155,6 +158,7 @@ RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig"),
                     ("storage", "dev/codex/schubert/nk/storage/ServiceConfigFiles"),
                     ("storage", "dev/codex/schubert/nk/storage/ServiceCredentialLocation"),
+                    ("storage", "dev/codex/schubert/nk/storage/ServiceCredentialId"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs"),
@@ -285,6 +289,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG",
                    "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
                    "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest": "PT-OPS-CREDLOC",
+                   "dev.codex.schubert.nk.storage.ServiceCredentialIdTest": "PT-OPS-CREDID",
                    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
                    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
                    "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
@@ -505,6 +510,8 @@ def main():
         manifest["credentialLocationOracle"] = "070/PT-OPS-CREDLOC-001..005: independent systemd CREDENTIALS_DIRECTORY nonsecret map admission, absolute normalized nonroot 1..4096-char path, missing/empty/relative/root/case alias/traversal/control/null rejection, unrelated environment nonretention and 32 concurrent fresh-map results. No inode/owner/ACL/readonly/credential byte admission, external main or OS distribution is claimed."
         manifest["related"] += ["PG-D-279", "PT-OPS-API-INPUT-001..004", "PT-OPS-WEB-INPUT-001..004"]
         manifest["startupInputsOracle"] = "072/074: API/Web each receives fixed nonsecret YAML source and systemd CREDENTIALS_DIRECTORY in one nonsecret startup boundary; independent literal DEBUG/config/Path, missing credential location before source IO, checked source failure identity vs fixed invalid config, null contracts and separate immutable result. Does not read a credential, create DB/JMS or launch an external process."
+        manifest["related"] += ["PG-D-280", "SSC-081", "PT-OPS-CREDID-001..004"]
+        manifest["credentialIdOracle"] = "076/PT-OPS-CREDID-001..004: independent SS342/343 literal API and Web five LoadCredential IDs, password vs fixed-key kind, disjoint service identity, immutable allowlists and null rejection. No credential byte read or OS distribution is claimed."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
