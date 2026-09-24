@@ -116,6 +116,8 @@ def main():
                 raise SystemExit("refusing to overwrite archived JUnit evidence")
             report.rename(destination)
     required_methods = {
+        "PT-SCN-008-A07": "dev.codex.schubert.nk.storage.StorageRootInspectionTest#a07AcceptsSixExistingRootsAndRejectsUnsafeExistingRoots",
+        "PT-SCN-008-A07-M": "dev.codex.schubert.nk.storage.StorageRootInspectionTest#a07MetadataAndProviderNegativeMatrix",
         "PT-IDEM-B01": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
         "PT-IDEM-B02": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
         "PT-IDEM-B03": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
