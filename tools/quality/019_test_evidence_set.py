@@ -2251,6 +2251,15 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues", "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
                         "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
+        for cls, _, _ in groups:
+            expected_module = cls.split(".")[4]
+            self.assertIn(expected_module, ("api", "web", "batch", "storage"))
+            self.assertEqual(expected_module, launch.module_for(cls))
+        for cls in ("dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest",
+                    "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest"):
+            self.assertEqual("web", launch.module_for(cls))
+        with self.assertRaises(ValueError):
+            launch.module_for("dev.codex.schubert.nk.unknown.FutureTest")
         self.check_launch_inventory(groups, True)
 
     def check_launch_inventory(self, groups, deployment):

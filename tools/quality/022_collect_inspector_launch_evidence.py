@@ -132,6 +132,13 @@ RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
+def module_for(cls):
+    for module in ("api", "web", "batch", "storage"):
+        if cls.startswith("dev.codex.schubert.nk." + module + "."):
+            return module
+    raise ValueError("unknown PT module")
+
+
 def validate_postgres_traces(traces):
     if traces != POSTGRES_TRACES:
         raise ValueError("missing, extra or invalid PostgreSQL deployment trace")
@@ -272,33 +279,6 @@ def main():
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-api/target"
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
-    def module_for(cls):
-        return {"dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest": "batch",
-                "dev.codex.schubert.nk.storage.ResourceScopeTest": "storage",
-                "dev.codex.schubert.nk.storage.LinuxFileLockTest": "storage",
-                "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest": "storage",
-                "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest": "storage",
-                "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest": "storage",
-                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest": "batch",
-                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest": "batch",
-                "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest": "batch",
-                "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest": "batch",
-                "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "batch",
-                "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "web"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
