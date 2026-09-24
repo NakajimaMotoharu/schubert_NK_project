@@ -191,7 +191,7 @@ final class ServiceConfigFilesTest {
     assertThrows(
         NullPointerException.class,
         () -> ServiceConfigFiles.read(root, identity, LinuxDirectoryCalls.create(), null));
-    assertThrows(NullPointerException.class, () -> ServiceConfigFiles.read(null));
+    assertThrows(NullPointerException.class, () -> ServiceConfigFiles.production().read(null));
     assertThrows(NullPointerException.class, () -> new ServiceConfigFiles.Contents(null, "web"));
     assertThrows(NullPointerException.class, () -> new ServiceConfigFiles.Contents("common", null));
     assertThrows(
@@ -219,7 +219,17 @@ final class ServiceConfigFilesTest {
   void opsCfgfile007MidReadFaultsAndInodeDrift() throws Exception {
     Path root = root();
     StorageIdentity identity = identity(root);
+    assertEquals(
+        "nk.db.pool.api.max: '8'\n",
+        ServiceConfigFiles.read(
+                root,
+                identity,
+                LinuxDirectoryCalls.create(),
+                new FaultIo(FaultKind.NONE),
+                ServiceConfigFiles.Service.API)
+            .serviceYaml());
     for (FaultKind kind : FaultKind.values()) {
+      if (kind == FaultKind.NONE) continue;
       unavailable(
           () ->
               ServiceConfigFiles.read(
@@ -232,6 +242,7 @@ final class ServiceConfigFilesTest {
   }
 
   private enum FaultKind {
+    NONE,
     ROOT_DRIFT,
     FILE_DRIFT,
     FIRST_SIZE,

@@ -27,6 +27,16 @@ import org.jspecify.annotations.NullMarked;
 public final class ServiceConfigFiles {
   private static final Path PRODUCTION_ROOT = Path.of("/etc/schubert-nk");
   private static final int MAX_BYTES = 16_384;
+  private static final ServiceConfigFiles PRODUCTION =
+      new ServiceConfigFiles(
+          PRODUCTION_ROOT,
+          new StorageIdentity("root", "schubert"),
+          LinuxDirectoryCalls.create(),
+          new NioIo());
+  private final Path root;
+  private final StorageIdentity identity;
+  private final DirectoryCalls calls;
+  private final Io io;
 
   interface Io {
     Map<String, Object> attributes(Path heldPath) throws IOException;
@@ -64,28 +74,29 @@ public final class ServiceConfigFiles {
     }
   }
 
-  private ServiceConfigFiles() {}
+  private ServiceConfigFiles(Path root, StorageIdentity identity, DirectoryCalls calls, Io io) {
+    this.root = Objects.requireNonNull(root, "config root");
+    this.identity = Objects.requireNonNull(identity, "config identity");
+    this.calls = Objects.requireNonNull(calls, "directory calls");
+    this.io = Objects.requireNonNull(io, "config IO");
+  }
 
-  public static Contents read(Service service) throws StorageIoException {
-    return read(
-        PRODUCTION_ROOT,
-        new StorageIdentity("root", "schubert"),
-        LinuxDirectoryCalls.create(),
-        service);
+  public static ServiceConfigFiles production() {
+    return PRODUCTION;
   }
 
   static Contents read(Path root, StorageIdentity identity, DirectoryCalls calls, Service service)
       throws StorageIoException {
-    return read(root, identity, calls, new NioIo(), service);
+    return new ServiceConfigFiles(root, identity, calls, new NioIo()).read(service);
   }
 
   static Contents read(
       Path root, StorageIdentity identity, DirectoryCalls calls, Io io, Service service)
       throws StorageIoException {
-    Objects.requireNonNull(root, "config root");
-    Objects.requireNonNull(identity, "config identity");
-    Objects.requireNonNull(calls, "directory calls");
-    Objects.requireNonNull(io, "config IO");
+    return new ServiceConfigFiles(root, identity, calls, io).read(service);
+  }
+
+  public Contents read(Service service) throws StorageIoException {
     Objects.requireNonNull(service, "service");
     try {
       OwnedTransferDirectory held = OwnedTransferDirectory.open(calls, root);
