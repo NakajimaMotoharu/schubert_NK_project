@@ -1117,7 +1117,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 396}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 397}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -2084,7 +2084,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "opsMq024RejectsEveryCounterDriftOverflowAndProviderFailure",
                        "opsMq025RejectsMissingMalformedOrUnboundedManagementSelector",
                        "opsMq026RealBrokerRemovesOnlyActualExpiredMessage",
-                       "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove")))
+                       "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove",
+                       "opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2374,7 +2375,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(283, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(113, batch_ops)
+        self.assertEqual(114, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

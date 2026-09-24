@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG248選択追記: `NK-OPS-001`/`ArtemisExpiryPurgeClient.selectorCutoff`と`observe/purgeObserved`→PT-OPS-MQ-026/028（018/054～055）。RD MQ009/OPS009、UI251§8、SS341§9・SS331§8.2、BUG-239/PG-D-248。修正前実Broker/固定値RED2、修正後選択6/6、99負canary。全Batch/正式49scope/hash・親DB結線は未了、PGPT中心47%据置。
+
 2026-09-24 PG247正式限定追記: `NK-OPS-001`/`ArtemisExpiryPurgeClient.observe/purgeObserved`・`Observation/Result`→PT-OPS-MQ-023/024/026/027（018/052～053）。RD MQ009/OPS009、UI251§8/11、SS321§12・341§9、SSC-078/BUG-238/YKT-189、PG-D-247。正式`PT-WEB-20260924-42`/source`7345a103c`の1838PT/49scope/hash/99負canary・Java6 module全coverage/静的0で削除前観測・run/値drift拒否を限定認定。親DB durable stage・同run再開/health/critical、BUG-239のµs境界は未了。PGPT中心47%据置。
 
 2026-09-24 PG244正式限定追記: `NK-OPS-001`/`ArtemisExpiryPurgeClient.purge`・共有`ArtemisManagementReadinessClient.expiryOperation`→PT-OPS-MQ-023～026（018/050～051）。RD MQ009/OPS009、UI251§8、SS321§10/12・341§9、SSC-076/BUG-236/YKT-187、PG-D-244。正式`PT-WEB-20260924-37`/source`00d2ae9a`で1834PT/48scope/hash/98負canary、Java6 module全4coverage/静的0。実Brokerの境界同時刻保持/+1ms削除、全計数/型/byte反例を確認。親DB/critical/再実行・実NK CHR-L01は未完了。

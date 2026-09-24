@@ -91,6 +91,13 @@ final class ArtemisExpiryPurgeClientTest {
       assertEquals(0, retained.selectedCount());
       assertEquals(0, retained.removedCount());
       assertEquals(1, retained.afterCount());
+      var fractionalRun =
+          new BatchRun(
+              UUID.randomUUID(),
+              Instant.ofEpochMilli(actualExpiry).plus(7, ChronoUnit.DAYS).plusNanos(500_000));
+      var fractionalObservation = client.observe(maintenance, fractionalRun);
+      assertEquals(1, fractionalObservation.selectedCount()); // timestamp t < t+500µs.
+      assertEquals(1, expiryCount); // Observation does not remove the broker message.
       var plusOneMillisecondRun =
           new BatchRun(
               UUID.randomUUID(),
@@ -262,6 +269,26 @@ final class ArtemisExpiryPurgeClientTest {
     var providerFailure = new Fake(1, 10, 1, 1, 0, 0);
     providerFailure.failSelected = true;
     assertPurgeRejectedBeforeRemove(providerFailure, validObservation());
+  }
+
+  @Test
+  void opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision() {
+    var operations = new Fake(1, 10, 1, 1, 0, 0);
+    var client = new ArtemisExpiryPurgeClient(operations);
+    var microRun = new BatchRun(UUID.randomUUID(), Instant.parse("2026-09-24T00:00:00.000500Z"));
+    var observation = client.observe(unusedSession(), microRun);
+    assertEquals(CUTOFF + 1, observation.cutoffEpochMillis());
+    assertEquals("_AMQ_ACTUAL_EXPIRY < 1789603200001", operations.selector);
+    assertEquals(1, client.purgeObserved(unusedSession(), microRun, observation).removedCount());
+    assertEquals("_AMQ_ACTUAL_EXPIRY < 1789603200001", operations.selector);
+
+    var beforeEpoch = new Fake(1, 10, 1, 1, 0, 0);
+    var beforeEpochRun =
+        new BatchRun(UUID.randomUUID(), Instant.parse("1970-01-07T23:59:59.999500Z"));
+    var negativeObservation =
+        new ArtemisExpiryPurgeClient(beforeEpoch).observe(unusedSession(), beforeEpochRun);
+    assertEquals(0, negativeObservation.cutoffEpochMillis());
+    assertEquals("_AMQ_ACTUAL_EXPIRY < 0", beforeEpoch.selector);
   }
 
   private static void assertPurgeRejectedBeforeRemove(

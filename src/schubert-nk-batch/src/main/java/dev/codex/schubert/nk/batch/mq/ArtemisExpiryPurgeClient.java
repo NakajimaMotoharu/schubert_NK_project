@@ -12,7 +12,7 @@ import org.jspecify.annotations.Nullable;
  * broker/queue health, own the fixed run/cutoff, durably commit the observation in batch_runs
  * before calling purgeObserved, and decide WARNING/FAILED startup policy. Never pass a
  * caller-supplied selector or touch the DLQ. NK-OPS-001; RD MQ-009/OPS-009; UI251; SS321 §12/341
- * §9; SSC-076/078/BUG-236/238/YKT-187/189; PG244/247/PT-OPS-MQ-023..027.
+ * §9; SSC-076/078/BUG-236/238/239/YKT-187/189; PG244/247/248/PT-OPS-MQ-023..028.
  */
 @NullMarked
 public final class ArtemisExpiryPurgeClient {
@@ -58,7 +58,7 @@ public final class ArtemisExpiryPurgeClient {
     Objects.requireNonNull(session, "maintenance session");
     Objects.requireNonNull(run, "fixed run");
     try {
-      long cutoff = run.cutoff().minus(7, ChronoUnit.DAYS).toEpochMilli();
+      long cutoff = selectorCutoff(run);
       long beforeCount = nonnegative(operations.count(session));
       long beforeBytes = nonnegative(operations.bytes(session));
       long selected = nonnegative(operations.selected(session, selector(cutoff)));
@@ -76,7 +76,7 @@ public final class ArtemisExpiryPurgeClient {
     Objects.requireNonNull(run, "fixed run");
     Objects.requireNonNull(observation, "durably staged observation");
     try {
-      long cutoff = run.cutoff().minus(7, ChronoUnit.DAYS).toEpochMilli();
+      long cutoff = selectorCutoff(run);
       if (observation.cutoffEpochMillis() != cutoff
           || observation.beforeCount() < 0
           || observation.beforeBytes() < 0
@@ -121,6 +121,13 @@ public final class ArtemisExpiryPurgeClient {
 
   private static String selector(long cutoff) {
     return "_AMQ_ACTUAL_EXPIRY < " + cutoff;
+  }
+
+  private static long selectorCutoff(BatchRun run) {
+    var exact = run.cutoff().minus(7, ChronoUnit.DAYS);
+    long floor = exact.toEpochMilli();
+    // Integer broker timestamp t < microsecond cutoff iff t < ceil(cutoff in milliseconds).
+    return exact.getNano() % 1_000_000 == 0 ? floor : Math.addExact(floor, 1);
   }
 
   private static long nonnegative(long value) {

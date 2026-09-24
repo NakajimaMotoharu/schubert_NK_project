@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 396
+BATCH_TEST_COUNT = 397
 BATCH_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
 BATCH_RUNTIME_DEPENDENCY_METHODS = ("bat283RuntimePostgresDriverAndScopeCanaries",)
 
