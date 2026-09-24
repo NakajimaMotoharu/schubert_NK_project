@@ -966,7 +966,7 @@ final class QuestionMutationInboxInspectorTest {
         scalar(
             "select count(*) from information_schema.tables where table_schema in ('schubert','schubert_web_session') and table_type='BASE TABLE'"));
     assertEquals(
-        "154",
+        "155",
         scalar(
             "select count(*) from pg_constraint where contype='c' and connamespace in ('schubert'::regnamespace,'schubert_web_session'::regnamespace)"));
     assertEquals(

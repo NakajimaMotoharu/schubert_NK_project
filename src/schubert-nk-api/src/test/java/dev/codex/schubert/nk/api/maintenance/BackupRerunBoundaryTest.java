@@ -374,7 +374,7 @@ final class BackupRerunBoundaryTest {
       throws SQLException {
     try (var statement =
         c.prepareStatement(
-            "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values(?,?,?,?,?,?,?)")) {
+            "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,expiry_cutoff_at,expiry_before_count,expiry_after_count) values(?,?,?,?,?,?,?,?,?,?)")) {
       statement.setObject(1, run);
       statement.setObject(2, day);
       statement.setString(3, step);
@@ -382,6 +382,16 @@ final class BackupRerunBoundaryTest {
       statement.setObject(5, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(6, CUTOFF.plusSeconds(attempt).atOffset(java.time.ZoneOffset.UTC));
       statement.setString(7, status);
+      if (step.equals("CLEAN_EXPIRY") && status.equals("SUCCESS")) {
+        statement.setObject(
+            8, CUTOFF.minus(7, java.time.temporal.ChronoUnit.DAYS).atOffset(ZoneOffset.UTC));
+        statement.setLong(9, 0);
+        statement.setLong(10, 0);
+      } else {
+        statement.setNull(8, Types.TIMESTAMP_WITH_TIMEZONE);
+        statement.setNull(9, Types.BIGINT);
+        statement.setNull(10, Types.BIGINT);
+      }
       assertEquals(1, statement.executeUpdate());
     }
   }

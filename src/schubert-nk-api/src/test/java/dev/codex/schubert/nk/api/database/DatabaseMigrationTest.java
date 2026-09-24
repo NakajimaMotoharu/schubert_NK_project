@@ -1131,6 +1131,12 @@ final class DatabaseMigrationTest {
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=1,expiry_after_count=2"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
+              + "expiry_before_count=-1,expiry_after_count=0"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       execute(
           connection,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
@@ -1147,6 +1153,11 @@ final class DatabaseMigrationTest {
           connection,
           "23514",
           "update schubert.batch_runs set target_count=2"
+              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set failure_count=1"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       execute(
           connection,

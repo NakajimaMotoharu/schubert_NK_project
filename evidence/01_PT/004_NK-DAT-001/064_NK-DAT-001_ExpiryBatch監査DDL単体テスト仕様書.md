@@ -18,4 +18,4 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 \
 -Dtest=DatabaseMigrationTest,StepCleanupBoundaryTest,InspectionParentBoundaryTest test
 ```
 
-合格は失敗/エラー/skipped/not-run0、Java全moduleのline/method/class/branch100%、SQLは上記独立制約・移行・権限matrix全条件、Production静的解析0、秘密情報scan0、全正式evidence scope/hash整合。実行日時・OS/JDK/PostgreSQL/Flyway/pgJDBC・branch/source commit/exit code/coverage/manifest hashは対の065結果と正式manifestへ記録する。初回失敗は合格に算入しない。
+合格は失敗/エラー/skipped/not-run0、Java全moduleのline/method/class/branch100%、SQLは上記独立制約・移行・権限matrix全条件、Production静的解析0、秘密情報scan0、全49正式evidence scope/hash整合（本Program専用`evidence/expiry-audit/manifest.json`を含む）。実行日時・OS/JDK/PostgreSQL/Flyway/pgJDBC・branch/source commit/exit code/coverage/manifest hashは対の065結果と正式manifestへ記録する。初回失敗は合格に算入しない。

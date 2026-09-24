@@ -31,10 +31,31 @@ backup = module("backup_rerun_collector", "023_collect_backup_rerun_evidence.py"
 references = module("run_reference_collector", "024_collect_run_reference_evidence.py")
 parent_summary = module("parent_summary_collector", "025_collect_parent_summary_evidence.py")
 atomic = module("atomic_collector", "026_collect_atomic_cleanup_evidence.py")
+expiry = module("expiry_audit_collector", "037_collect_expiry_audit_database.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_expiry_audit_sql_method_inventory_and_oracle(self):
+        self.assertEqual({"PT-DB-016", "PT-DB-017"}, set(expiry.METHODS))
+        self.assertEqual(2, len(expiry.ORACLE.splitlines()))
+        suite = ET.Element("testsuite", name=expiry.CLASS, tests="17", failures="0",
+                           errors="0", skipped="0")
+        for name in (*expiry.METHODS.values(), *(f"other{i}" for i in range(15))):
+            ET.SubElement(suite, "testcase", classname=expiry.CLASS, name=name)
+        self.assertEqual({key: expiry.CLASS + "#" + name for key, name in expiry.METHODS.items()},
+                         expiry.validate_suite(suite))
+        for key, bad in (("tests", "16"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, bad)
+            with self.assertRaises(ValueError): expiry.validate_suite(wrong)
+        for name in (list(expiry.METHODS.values())[1], "other0"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", name)
+            with self.assertRaises(ValueError): expiry.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("classname", "unknown")
+        with self.assertRaises(ValueError): expiry.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], "failure")
+        with self.assertRaises(ValueError): expiry.validate_suite(wrong)
+
     def test_api_dependency_readiness_inventory_and_branch_coverage(self):
         runtime = module("api_log_path_runtime_collector", "036_collect_api_log_path_runtime.py")
         names = (
@@ -2447,7 +2468,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-                "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime"]
+            "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "004_NK-DAT-001/evidence/expiry-audit", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -2501,7 +2522,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(48, len(check()))
+            self.assertEqual(49, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -2511,7 +2532,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(48):
+        for failed_at in range(49):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -2524,7 +2545,7 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(48, len(calls))
+        self.assertEqual(49, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
         self.assertTrue(calls[-7][2].endswith("/030_collect_sync_consumers.py"))
         self.assertTrue(calls[-6][2].endswith("/031_collect_web_reply_consumers.py"))
