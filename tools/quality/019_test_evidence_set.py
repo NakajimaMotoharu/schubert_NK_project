@@ -2255,6 +2255,11 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCfgfile003LengthEncodingAndModeBoundaries", "opsCfgfile004RootAndFileIdentityPolicy",
                         "opsCfgfile005IndependentAttributeMutationMatrix", "opsCfgfile006NullConcurrentAndOwnedCloseFailure",
                         "opsCfgfile007MidReadFaultsAndInodeDrift")))
+        groups.append(("dev.codex.schubert.nk.storage.ServiceCredentialLocationTest", 1,
+                       ("opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention",
+                        "opsCredloc002RejectsMissingEmptyRelativeAndRoot",
+                        "opsCredloc003RejectsAliasTraversalAndControlBytes", "opsCredloc004BoundsAndNullContracts",
+                        "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot")))
         groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
                        ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
                         "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads",
@@ -2310,6 +2315,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG",
                        "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG",
                        "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
+                       "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest": "PT-OPS-CREDLOC",
                        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
                        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
