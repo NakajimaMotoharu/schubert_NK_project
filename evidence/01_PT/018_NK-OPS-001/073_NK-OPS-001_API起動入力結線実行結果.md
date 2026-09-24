@@ -1,3 +1,5 @@
 # NK-OPS-001 API起動入力結線実行結果
 
 PG279/PT-OPS-API-INPUT-001～004、branch`dev-foundation`、JDK25.0.4/Maven wrapper/Linux。選択4PTはfailure/error/skipped0。初回reactor選択commandは依存Protocolに対象testがなくexit1、次のskipTests installはJacoco checkが残りexit1、いずれも不認定。`-DskipTests -Djacoco.skip=true install`で依存artifact再生成後、対象4件PASS。対象class/Valuesの選択Jacocoはinstruction/line/method/class missed0。正式全reactor・53scope/hash/固定source commit前なので本段階を正式合格へ算入しない。秘密値を保存しない。
+
+正式限定認定: source`5076c19ed1c40d3091993a04dbe2d9f1135ecc73`、`PT-WEB-20260925-17`（06:21:20～06:33:53 JST）、command `sh tools/quality/030_run_pgpt_verify.sh PT-WEB-20260925-17`、exit0。全1,939PT（CHR41/Protocol80/Storage97/API767/Web550/Batch404）、failure/error/skipped0、Production Java6 module instruction/branch/line/method/class missed0、SpotBugs0、負canary103/103、全53scope/hash再照合PASS。API-INPUT4件4/4、root manifest SHA-256 `a62e8cf4c1be2a2e155a35052813f8f5790a4411ca795465c2dacc20439a8cc7`。Test ID別fixture/独立期待は072、実際/環境/coverage/source/証跡hashは同Program sanitized manifest/resultsへ記録。実credential内容/OS ACL、DB/JMS、外部main/実NK CHRは未認定。新規障害なし。
