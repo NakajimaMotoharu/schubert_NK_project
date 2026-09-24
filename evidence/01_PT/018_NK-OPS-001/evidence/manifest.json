@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260925-13",
-  "targetCommit": "cd25161828822ede1fedc8cb60993a04cea2f4cc",
+  "runId": "PT-WEB-20260925-14",
+  "targetCommit": "4eeb1d7e5a47ad3bb5d286dcd7e10bbedcb63b48",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-25T04:56:17+09:00",
-  "completedAt": "2026-09-25T05:08:51+09:00",
+  "startedAt": "2026-09-25T05:17:19+09:00",
+  "completedAt": "2026-09-25T05:29:52+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "3700f0ca42b78f643e1251ed2174a5343d90194cc4cf85a47c1c95b04d4def28",
+  "rawLogSha256": "43d21ba36544adf229063f72b9470eda2036074082196a4d778f819d7278714e",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -222,7 +222,15 @@
     "PT-OPS-CFGFILE-004": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest#opsCfgfile004RootAndFileIdentityPolicy",
     "PT-OPS-CFGFILE-005": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest#opsCfgfile005IndependentAttributeMutationMatrix",
     "PT-OPS-CFGFILE-006": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest#opsCfgfile006NullConcurrentAndOwnedCloseFailure",
-    "PT-OPS-CFGFILE-007": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest#opsCfgfile007MidReadFaultsAndInodeDrift"
+    "PT-OPS-CFGFILE-007": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest#opsCfgfile007MidReadFaultsAndInodeDrift",
+    "PT-OPS-API-LOAD-001": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad001FixedServiceAndLayerOrder",
+    "PT-OPS-API-LOAD-002": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad002SourceAndParserFailuresStayDistinct",
+    "PT-OPS-API-LOAD-003": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad003NullContractsAndProductionFactory",
+    "PT-OPS-API-LOAD-004": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad004ConcurrentFreshReads",
+    "PT-OPS-WEB-LOAD-001": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad001FixedServiceAndLayerOrder",
+    "PT-OPS-WEB-LOAD-002": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad002SourceAndParserFailuresStayDistinct",
+    "PT-OPS-WEB-LOAD-003": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad003NullContractsAndProductionFactory",
+    "PT-OPS-WEB-LOAD-004": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad004ConcurrentFreshReads"
   },
   "failed": 0,
   "errors": 0,
@@ -510,6 +518,50 @@
       "METHOD": {
         "missed": 0,
         "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
       },
       "CLASS": {
         "missed": 0,
@@ -1796,7 +1848,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "0094e014d2d8d3bb6a9a165e7c84229857ba85ef236bed8080a6e1b8529d3f50",
+  "fullReactorManifestSha256": "dca1c2d0d819076713ad37c1d64f7f3a063cd32d09681ae5642695aacd032091",
   "related": [
     "QA-046",
     "UIC-006",
@@ -1894,6 +1946,9 @@
     "BUG-254",
     "BUG-255",
     "PT-OPS-CFGFILE-001..007",
+    "PG-D-276",
+    "PT-OPS-API-LOAD-001..004",
+    "PT-OPS-WEB-LOAD-001..004",
     "PG-D-176",
     "SSC-065",
     "PG-D-186",
@@ -2050,6 +2105,14 @@
       "sha256": "ebf36599038fda91f5c4949cd86879bbeef70d6821df51b743178efccafc652f"
     },
     {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoaderTest.java",
+      "sha256": "21937558da781f288d8eba02dc4f8cf7c2a4eaf3c66285f045df203c476fe8bb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoaderTest.java",
+      "sha256": "8d9c9b830ef388612cd4ec3e9f2be4d76f1ea5eacbe114934d77d03b49980fc8"
+    },
+    {
       "path": "src/schubert-nk-api/pom.xml",
       "sha256": "694ae02f8c489fce66e52c3722ea53a119f8e0faa86353926d7a23b9852b37df"
     },
@@ -2071,7 +2134,19 @@
     },
     {
       "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
-      "sha256": "7c435c7631995d9f48b556731d3783f18d9845e28188a490b48c062d795ed939"
+      "sha256": "d73d837484cd47f6181637b6ad107ec04866d88e8c76be726cc1101930bfa96a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader.java",
+      "sha256": "ab3e82aa80b8219113b2a52fa490120cff5436507c3693ca6f03583b07210d33"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader.java",
+      "sha256": "b7035aab73f5e45a16d615836c28c35090bc61811dc696967127e3adeaf046d4"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java",
+      "sha256": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b"
     },
     {
       "path": "src/schubert-nk-web/pom.xml",
@@ -2344,6 +2419,7 @@
   "apiNonSecretConfigOracle": "060/PT-OPS-API-CFG-001..006: independent SS343 sorted UTF-8 key=value LF SHA-256 vector and shipped common/api YAML; defaults→common→API merge, six fixed broker addresses, loopback URL bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified.",
   "webNonSecretConfigOracle": "062/PT-OPS-WEB-CFG-001..006: independent SS343 15-key sorted UTF-8 key=value LF SHA-256 vector and shipped common/web YAML; defaults→common→Web merge, fixed session/max-range/loopback, port distinctness, reply 100..2000ms, wait/max/streams bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified.",
   "serviceConfigFileOracle": "064/PT-OPS-CFGFILE-001..007: independent literal common/api/web UTF-8 bytes; fixed names and root:schubert 0750 / file0640 single-link metadata, same device and held-inode before/after, 1..16384-byte bounds, symlink/nonregular/missing/invalid UTF-8/identity drift and injected mid-read faults, null/concurrent/owned-close checks. Actual account/ACL/filesystem/env/credential/cross-file atomic rollout, Java process integration and readiness are unverified.",
+  "configLoaderOracle": "066/068: independent common DEBUG and API/Web fixed service layer vectors; exact API or Web read once, parser result, source checked failure identity vs fixed malformed YAML, null contracts and32 fresh concurrent reads. Immutable production factory uses fixed ServiceConfigFiles. Actual external Java main/OS/credential/DB/JMS/readiness and NK CHR are unverified.",
   "webStaticAnalysis": {
     "tool": "SpotBugs 4.10.4.0",
     "violations": 0,
@@ -2469,6 +2545,22 @@
       "sha256": "1834088d6ac451172a5f901e3c9512031c7f544b4edc7211f1f99059fa92ca9a"
     },
     {
+      "path": "logs/066_NK-OPS-001_API設定読取結線単体テスト仕様書.md",
+      "sha256": "24cc581e80c948371e548a3819875a930c9c67a9f2a3483cb271bf0596440de5"
+    },
+    {
+      "path": "logs/067_NK-OPS-001_API設定読取結線実行結果.md",
+      "sha256": "c13cec8963114213db34e61616d76fa9d42a2cb390c7206103acc040582e1718"
+    },
+    {
+      "path": "logs/068_NK-OPS-001_Web設定読取結線単体テスト仕様書.md",
+      "sha256": "7ef601c711ec3d09eb2c729572fa451b5dd1160c1b304d99d8f4093654569731"
+    },
+    {
+      "path": "logs/069_NK-OPS-001_Web設定読取結線実行結果.md",
+      "sha256": "a5a2d896f6b2e89f08df7bb467e4e7bce42ca44b95735cb64eb499b10f635c40"
+    },
+    {
       "path": "logs/BUG-143-145-YKT-113.md",
       "sha256": "f7ccd4bdae8b9631f6f782e5b89cfd5438720bedf5eebabe0cc9b609abc61f40"
     },
@@ -2526,203 +2618,203 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "c2a52aeabe77ef5e35e16b4fc578e12aa6fb61988a142afd2a79bb3c8a907095"
+      "sha256": "b68f8c04528fda38d57cef6beacc05333b9758c4b0cbd78ab06bc58533a4016c"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "294b033517946f5845baf0a41f166def1b1376457ffc1cf08d3d16283412bc54"
+      "sha256": "13a5aaab552bea0a07b714475323e3415ad88fa573e88a01a0142b686c731ea5"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "d351a66d17e998735efd40f5fa7ece65eef1571f4fec8166e6d2392d753225dd"
+      "sha256": "f44fd92641a591674a9b5355935a73b466665b4824d681c7540fb416ee179578"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "01feb8e618d075e46f1c00a431d18dd13c4523ce89d7820fac52f10ae31c1c26"
+      "sha256": "0362d94f80374c7f779b622f84c109e7bd49173e54dfcb6bfcbba18c0d2c45e8"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "b3a9528f520513903e72d0243d9aa4683ce275b71d1e4a81db263f2246a8f3fb"
+      "sha256": "6a966dea0bae32cf830b71786bfc4d7f85da47a93320d4ee31b65736d85abf43"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "ae5a222da899445fdf4d2f069677da35bc6c2ddc9c73f9789c4b582bb4df2da7"
+      "sha256": "426942147287dcc7cc0f146a3c5253bb823d9e3dda815bd8a7f1b6615df7dac0"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "4ae9bb0c4e459f8cea3d979b0b054a3ab548f42d5dc4f80381ebcfc00f9cb0be"
+      "sha256": "b87121633df43df865bef8f0d95f2f3502e0c2a228bd73bf94351fa8bfe278e0"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "6d12a60945577f6d9529912712b71779c98c6afc67a72a9b8e8f3f3fea5a30b2"
+      "sha256": "257dc96ae85f11cf64711c96ffb804e4fd7d7818f3eafa716ccae7ac14954a8d"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "c925426c1cff8e41e5b5ba25ba01a7e11d68c7ad363b0dea18028d2092cbef59"
+      "sha256": "0ae096ce7013afb9fe2527d00132bfca51f781f99b452a6794f40e1a3a7c9c3e"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "b7dfa70c475d9e0db3a14739aa545e67032f1e9a73b0d08de88d1fc465aa5e62"
+      "sha256": "18ca160042f753103cc530f55eb61b51b68557004ea7a8a44ab8b65c9ba67aa0"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "e7335f3039fca4532a8567d0f7255412801bb4904e54266617a98783ee603bea"
+      "sha256": "80ea9ca234a4765d1054604538904ab989d10a9a2f0ace2a11d5920dcef99117"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "8219a2dd1d82f51ef5b75ca01fb2af070ddf3edaa62be3fe14d71d55ee9c9c3b"
+      "sha256": "08e78bc9b18b006cf9936f1aba723ab1d44b3f95fd6c3a5204c8e33c6a204b6f"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "371bad5d1c601268b1806a2f3d778f8b4d5927d069985c7d9625107abb7a54dd"
+      "sha256": "0b1d9c702657df9da22ec13c4897cf61dbd2c2a3229eb426c3cddae5fc39dc26"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "550e18debf344a0ad9ec22f7f1531e3a38ea08d094cae91c7b76e347af924550"
+      "sha256": "b258a93195ca1cad69d5be1e5ae099f1a9e3650dd8bc98218c2481b29545b938"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "8b27280d7d0bc1a7f3a576adb4ad42bad3c3c7a5493c500276130349d5b243ca"
+      "sha256": "b54ba821baa4267dc87183dd9795c5efbe6bd1128dfd657f9e174502633f7f02"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "10aedd5b1ecec74d1fadf971c15b8d0d3c0e806e62697386fff31a453e6b92bf"
+      "sha256": "f3dbfe1ba630e1c18c81cb63767769a729a1ff8f7a6c336cd0f9359252728820"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "fc7d31b2016435669da8dd84425ee8fde9883ad3c30603cf206bde65e3a513f5"
+      "sha256": "12eb3b4b4287eb9105c43c9ab54048dab1018750eeb62d64fc29497938057503"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "6b794edd16e1775e964609d6bcef0fef20bc16824045b4378f9908473e796f37"
+      "sha256": "c6be11eebe054a292f3e2a03733a8fdf0aaa47649082755f27beac4de6a5875d"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "435205ce93bd80a4b3682d87720755d47ae78b97b79bb55c30d53b2c570d75a8"
+      "sha256": "583c98c1f2877aafe2d18fcc9c1a7638a14e24eb35033ccd501c72a858e91f90"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "432afff70b5efc9e9fc789d5adf849a77c979377f923774c7efc87914f7a79cb"
+      "sha256": "b4afb35aae2dc29be9e0b471d4e7acfea95ea5ac869c32345a0ec74a0a83fddd"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "447a3f238bd3b15cc3f495351371873602ec7ca9246a4e11639b79aae2a2c243"
+      "sha256": "412becec5ed6a153316ea41d6973a22042f9bd95dcbb1ef989f54ef8477860b0"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "87661faff4cbba9e111cfd3245daa5675ad0379d6e8c3e041c6bfe230f71b0cd"
+      "sha256": "90438adefa74347a1b0f37bbceeeceb73c6c1883ebd8b9947310491a7d80679a"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "d705002747bb3639e2b1bae90c7bbc8e7cb17cf89f20a3a35c1d10e51d7f2bf0"
+      "sha256": "90c2a41ea40b4a6d27e579824d426f3950bdd42bd64dc7fad31a5790e192cecd"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "6431fc291f4b5599c3366ca0c4789aca04209d8c64e9d20350f45a0d2aa92eae"
+      "sha256": "c1e1a710409781a827925316c747bc05fab1877ce3cd7f7785bd4cb4afb3316d"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "64e8f1cc10c394ac874dd5991cc8fde0477f3a646a3ce9eedb8e36f399182374"
+      "sha256": "eb5b40d328518c30c126efafb7ededca70140a4b743e98c8c68c2a7fd1063069"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "1dc1faa453cbcb1b07912b3e4947488e76daf066d44ce0b6db6fddeeea0354d2"
+      "sha256": "f8bd442305156a5cdef7c8fef9010ee0b8345f5af3ed169cdb2f434a03b4ea27"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "80ae76b9fb613524c3486fc518aa414ab897b768adc029fe9bfa1a197f57b3b9"
+      "sha256": "5a29824c6748f9361ca321e98ca624261452e499647b4daa8fe79d654100a02a"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "40f22e60a72a67de8b52b3278c772716868c4ecb42ec2b463ca940af09401806"
+      "sha256": "387c9539b20ce9e032256b2c1d669d4f1dcef476a9719ebb935409cb0111bba4"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "e5552f72671173e8c1229e7a1ea37027e903c41bad80ffc395837fe7e29119df"
+      "sha256": "41b018386e0a3315bda6284a9a6eb8bc9e7d0e7d0518fe0966f282d783a7f1d8"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "666cb442d07a8e56b3d6a4439d1173d8fac5729669c14a12aecb5cf128d6b5d9"
+      "sha256": "248d33ccd4e4c33e7da5f0417fc7a0b164a9585a1464f1d5a57ff6984e3bcfc7"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "6e37a75741c49867ad7bac033d7e123c4ae56f9e8b303cad7aaacfe9aaf96005"
+      "sha256": "d1448a7f4f89648765879b990d70484498d11633234eb81243c4127a90525ec5"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "92015e93d9d72dbef3e2f9ccaad03d7b992a0eea77df05c48aa0666c08b93c21"
+      "sha256": "f82a6eb551b94a0511ef4a6f4fba2a13114b7ddcd4a966b0d9a1cf74c5535e59"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "c56eb5883137c5b5dda22b4d4c1dc76f442bb71641877d5fbe7286d4ad9e39e0"
+      "sha256": "01114e33bedd52036f99ffd12fc2f066be5c90da81b1632edd5299358567bd6d"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "8a06bebab15ff50650a2dd261a2c6d59a3dcb1de2e8da0167d46afc0055dfc5b"
+      "sha256": "b61e4aed2923e5f0aa135b415daf7309c9e2549dcafc55661ce9ed6d62f82a2e"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "c055dc320743d752c5f2585052b9e33abf787c902a40044a2ef4312bc3bf1a7e"
+      "sha256": "2965d0a871b9ff6af80c03f9b89ff9f7b40a9a881e8efb00312c8fc06c74a256"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "5fa9cc585516420942b204e6553af6ad90d6a7f3f6cf33eb817c46279a9f7e93"
+      "sha256": "b887b31dfebcf89867f8abcce630907738238d31e11b2f6566d2752749f69115"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "74d9c353b94b029e43fa810d34f15b4409a1fa5693310c1963e71343af5a4e96"
+      "sha256": "cb2518999980d9a2d7b44f0210f2f5a7f51814dbb0b79e184c686da2ec9e34a1"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "b0ae7af86613fe4052b9b0497a4a37857ff3f166e6bfb46591a9d6702f06b6d0"
+      "sha256": "ebd7168e4a06720bf77964a7bab3dff17a5dcad6eabd055cf5c80143b8f70e58"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "eb58b4138081391a198ce22a4d594112ab2142bf4f667ec5aaff07c325f27953"
+      "sha256": "c9d4a2a159b2d2edfad48c481c3d2c9caa578717efc88d880765e715ce07cfe5"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "0ded3a2ffb490f82008d68944d6f80e35db53f7143088b69141618ebc6329176"
+      "sha256": "cadb986303fe6421e062ec5c96c2a50f699db9a4234527dd9e7c960e9ecd3195"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "14389f588a921781d007e43797c05bc62ae1d59b364a035b3a653a5a28353d00"
+      "sha256": "7b61d3d8df91a74c1fa2f507656364ec2b06fa7c7b29051e224322e5b68b6aca"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "8380ebdf975bb608f198602532bf3929dbdde74a32801770aaf033bbf02470ad"
+      "sha256": "05ea013302c0bb7269f420a736d3e749557079c262616eb2fbe94a716ae976b3"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "e5930ea750116490ee8ed1e593183a51b04a4349c3d4e6da3f0360460f8487fc"
+      "sha256": "41c6e7270f191902849f0aee5af54828b77cc1fca0dd314678a299d9720059ed"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "91d51d7ff15ffd002cc125c90e94f1d0d57b87a74d8f57b226cbc1588097d249"
+      "sha256": "7fd8f8c8bab8b94fefc765b674e6d1030b25612da79143e48c5e4a5998510d99"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "b6a1eaf78886eb9152a96f9e9525730a6bc0531376de2b570c0a384018852b4d"
+      "sha256": "484e9b26b68fbef483e1f22a4f7f4b219dd7ff68ffa7f07cfa3c36648320cdad"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "e879cfaa72961367319ec4e0b08e2c998076e02cc33d136f24a0cc113d58d008"
+      "sha256": "b539e2aa12e1529e8138db17739f658049ad70aa581a256132608fcd7e3f1d39"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "e89219cdb79b8f5204c099ee2b7992ae926186f24be291150b1cb4e6a0879245"
+      "sha256": "8b5a4552e604259826e88ddd4cf432955e8dc004c548ee659a13b75b4483befe"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "ccfad84176432c2e4b09807e632d16963b37099e743173c34b2b8939033f47bd"
+      "sha256": "8d8a140133325438368f7ba914f8485c1ce7233b18eb96b8a1543e7959f417f5"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "e533752aabf09b1cbb20284b05a3410f585ba433e548fed1eac3f3e6954dc5ee"
+      "sha256": "09866e00e07cd8c5b1a3affd4c460134af1440ba0201ea4c46acbc7ad5cd2b2b"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "c23e3050fe964d2d8a2492be3b4a2a755d3336555f75a19631a8a33055bc4d9d"
+      "sha256": "f113c1796c96f6b4ba9a7cf7d782798cd15702be47831c328f2e7ede8d4ed7b2"
     },
     {
       "path": "output/postgresql/PT-OPS-PGCFG-008.txt",
@@ -2742,7 +2834,7 @@
     },
     {
       "path": "results.xml",
-      "sha256": "c276303b839f528ef04841afdcc41c516dcb23a6356368eb245fd72ad1146811"
+      "sha256": "148badb0314e9891a0bbb74cbd549cbafd48e6ad81474aeac8d5625d1b642b15"
     }
   ]
 }
