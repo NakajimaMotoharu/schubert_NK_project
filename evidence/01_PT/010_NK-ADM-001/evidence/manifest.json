@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-36",
-  "targetCommit": "bbc3460c9732a650c143f0812344b401fd130b58",
+  "runId": "PT-WEB-20260924-37",
+  "targetCommit": "00d2ae9aaae528768e532ba499aa368c29172df3",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T12:34:23+09:00",
-  "completedAt": "2026-09-24T12:46:39+09:00",
+  "startedAt": "2026-09-24T13:06:39+09:00",
+  "completedAt": "2026-09-24T13:18:50+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -184,31 +184,31 @@
       }
     },
     "batch": {
-      "tests": 391,
+      "tests": 395,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 20420
+          "covered": 20698
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 2039
+          "covered": 2065
         },
         "LINE": {
           "missed": 0,
-          "covered": 3992
+          "covered": 4040
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1672
+          "covered": 1700
         },
         "METHOD": {
           "missed": 0,
-          "covered": 641
+          "covered": 656
         },
         "CLASS": {
           "missed": 0,
-          "covered": 107
+          "covered": 111
         }
       },
       "spotbugs": {
@@ -218,12 +218,12 @@
       }
     }
   },
-  "rawLogSha256": "a30e70c012ea6a6762c26ee74c95510f33ea246a6ba5613aace978540e3e3bdb",
+  "rawLogSha256": "c9dd57482ab178aab5339e3bb72aa691a07a0ba95192e5839634ac7357bed5c6",
   "programId": "NK-ADM-001",
   "programStatus": "IN_PROGRESS",
   "tests": {
     "program": 74,
-    "reactor": 1830
+    "reactor": 1834
   },
   "testIdMethods": {
     "PT-ADM-001": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
@@ -435,7 +435,7 @@
     },
     {
       "path": "coverage/api-jacoco.xml",
-      "sha256": "0130fd91b6c978940ae01ef23d3641c4afd874f7f4ff8ca97c3282b4992a24d7"
+      "sha256": "13a39147d1554758afd2bbf22c4c416741cd930a14218242c7511a01b3c16071"
     },
     {
       "path": "logs/BUG-045-YKT-040.md",
@@ -1034,6 +1034,10 @@
       "sha256": "761ff25c7cb8e7f3f4cf2804fee0b426d1318900bd35da4970b82c6679c6be91"
     },
     {
+      "path": "logs/PT-WEB-20260924-37-summary.json",
+      "sha256": "45c196375a50bbdae90512d5d8607f376515046fb7844cb644c6ba31badeb731"
+    },
+    {
       "path": "logs/application-exploration.md",
       "sha256": "3f91b346aac5c7f3afee7f9923faf903a885a36c9892e9e268a3364f1ae87a08"
     },
@@ -1079,55 +1083,55 @@
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
-      "sha256": "84554fa4e899b4fc150484cdc72b27b63e7e96aa5ff0a039be0e261a331c5018"
+      "sha256": "e0eb25c3f1a25cef9a1d2939d9256d8301339e1c499a63e7e99462d8dc96900b"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
-      "sha256": "d6c13f8c644e6298d661c66e9d980d4706935df0c74cd85f876016d8f09130c9"
+      "sha256": "d7e173e7c60f050fee35e1e310a43aac69f2d58d2e4a34e957bbf36e7c0d98cf"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
-      "sha256": "2faec9935d834b704b2a90397e82312897a76d8f60844011de5cefe308d647a5"
+      "sha256": "901fdbd36e2926bc2f2dbbaf559e0318380d2bcff629ca03a22279d9860598bb"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
-      "sha256": "3de3a8220046265c592ac0127b3328a116cf23405285497d0ca09267371bf016"
+      "sha256": "8c5e463005a5f2156248b978de73ab658a2643e2a5a17e32ab15d1caa9bdfb98"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
-      "sha256": "83e3434bf25e867ad5ae4779f719119b2670b600ab2fd6a7b9ec1c19fa23ad51"
+      "sha256": "48e4ace2bc2d79eb8bf22c16f9911c25205c13433dbf815788df5dd27d2d0398"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
-      "sha256": "21c1cc9e4b0c1ff2bb01f146103db13248cba2986ce336d84e61fcc8a2cbea1e"
+      "sha256": "ccfddd9e0cdb942a0fd3565920363e2b191ebb29e3568ef75f4a11f6be4b77e5"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
-      "sha256": "87452d50c8b8a96b0457a1d3f04c1011e29cc846283911ca95b9889b37efd694"
+      "sha256": "90ad3e118e125be3037353d50578aee3eedf9adc4ca5879ac4776193a14fce60"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
-      "sha256": "287f19557f9715f5756846bd020f374fe591d3034e3a373a00013168552d3b4f"
+      "sha256": "ef94016c1ce29c52f598236479785a3d061cfbf6888bd0b9b1f62a9716be1539"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
-      "sha256": "957124b11da4217be046466ed13ee21fae2ce7dcbb44354ed15f6c9f77d7fada"
+      "sha256": "68bdf17bc962905644f66909f6a8238ec92124bbcd8d26bb363f5eed7a0d4b15"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
-      "sha256": "6150694aadb9e72fa7f009314e0c0141f4cf7786655150f058d61dc331af6052"
+      "sha256": "05db36ce353099aecdad4703e9b13ca48618e0e8fcfbeaf64c88e67b97d3f98d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
-      "sha256": "8a94008d24a3a4c8002b4c241790d28f55a2cc5e9e69d3fb9c6e66d971e7ddf2"
+      "sha256": "9fef8d9766b42762d2256920a1892fb1aa46768b7ed644a6a0e3f1240700bf0d"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
-      "sha256": "ee91d2518f7d75e27669c21c385361c2c4dafbee29ea99bd9e7289e1bdd9eaf2"
+      "sha256": "442c07aadcd8b66b7d119dad65d01e1fa0878ff2f9063c33dc5ea06d8baa7bb4"
     },
     {
       "path": "output/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
-      "sha256": "9e895a677a9557fa5b015b795700ce46267db94e261efd7620d928e45baba6ef"
+      "sha256": "63ff39c6b219695c21063bed4918474833c1c31dfb9f5673112d15a300012a02"
     }
   ]
 }
