@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * PT-OPS-CREDREAD-001..008; real held files/channels with explicit synthetic privileged metadata.
+ * PT-OPS-CREDREAD-001..012; real held files/channels with explicit synthetic privileged metadata.
  * Never claims that systemd distributed these temporary files.
  */
 final class ServiceCredentialReaderTest {
@@ -213,6 +213,102 @@ final class ServiceCredentialReaderTest {
       }
       for (var task : tasks) assertTrue(task.get().booleanValue());
       Arrays.fill(expected, (byte) 0);
+    }
+  }
+
+  @Test
+  void opsCredread009DbAndMqPasswordDecodeWithOwnedCopies() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      for (var id : List.of(ServiceCredentialId.DB_API, ServiceCredentialId.MQ_API)) {
+        Files.write(fixture.root.resolve(id.fileName()), synthetic(id));
+        var io = new InspectorCredentialLoaderTest.TestIo();
+        try (var material = reader(fixture, io, id.service()).readPassword(id)) {
+          char[] copy = material.copyPassword();
+          try {
+            assertArrayEquals(("public-pt-only-" + id.fileName()).toCharArray(), copy);
+            assertFalse(material.toString().contains("public-pt-only"));
+          } finally {
+            Arrays.fill(copy, '\0');
+          }
+        }
+        var closedMaterial =
+            reader(fixture, new InspectorCredentialLoaderTest.TestIo(), id.service())
+                .readPassword(id);
+        closedMaterial.close();
+        assertThrows(IllegalStateException.class, closedMaterial::copyPassword);
+        io.assertCleared(65537);
+      }
+    }
+    byte[] owned = "literal-test-only\n".getBytes(StandardCharsets.UTF_8);
+    try (var decoded = ServiceCredentialReader.consumePassword(owned)) {
+      assertArrayEquals("literal-test-only".toCharArray(), decoded.copyPassword());
+    }
+    assertArrayEquals(new byte[owned.length], owned);
+  }
+
+  @Test
+  void opsCredread010SixKeysDecodeCanonicalCurrentMaterial() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      for (var id : ServiceCredentialId.values()) {
+        if (id.kind() != ServiceCredentialId.Kind.KEY) continue;
+        Files.write(fixture.root.resolve(id.fileName()), synthetic(id));
+        var io = new InspectorCredentialLoaderTest.TestIo();
+        try (var material = reader(fixture, io, id.service()).readKey(id)) {
+          assertEquals("v", material.version());
+          byte[] copy = material.copyKey();
+          try {
+            assertArrayEquals(new byte[32], copy);
+          } finally {
+            Arrays.fill(copy, (byte) 0);
+          }
+          assertFalse(material.toString().contains("NKKEY1"));
+        }
+        io.assertCleared(70);
+      }
+    }
+    byte[] owned = synthetic(KEY);
+    try (var decoded = ServiceCredentialReader.consumeKey(owned)) {
+      assertEquals("v", decoded.version());
+    }
+    assertArrayEquals(new byte[owned.length], owned);
+  }
+
+  @Test
+  void opsCredread011KindServiceAndNullRejectBeforeIo() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      var io = new InspectorCredentialLoaderTest.TestIo();
+      var api = reader(fixture, io, ServiceConfigFiles.Service.API);
+      failure(() -> api.readPassword(KEY));
+      failure(() -> api.readKey(PASSWORD));
+      failure(() -> api.readPassword(ServiceCredentialId.DB_WEB));
+      failure(() -> api.readKey(ServiceCredentialId.WEB_LOG_AES_CURRENT));
+      assertThrows(NullPointerException.class, () -> api.readPassword(null));
+      assertThrows(NullPointerException.class, () -> api.readKey(null));
+      assertThrows(NullPointerException.class, () -> ServiceCredentialReader.consumePassword(null));
+      assertThrows(NullPointerException.class, () -> ServiceCredentialReader.consumeKey(null));
+      assertEquals(0, io.opens);
+    }
+  }
+
+  @Test
+  void opsCredread012MalformedContentErasesOwnedBytesAndRedacts() throws Exception {
+    byte[] password = new byte[] {'x', 0, 'y'};
+    failure(() -> ServiceCredentialReader.consumePassword(password));
+    assertArrayEquals(new byte[password.length], password);
+    byte[] key = synthetic(KEY);
+    key[key.length - 1] = '\r';
+    failure(() -> ServiceCredentialReader.consumeKey(key));
+    assertArrayEquals(new byte[key.length], key);
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      Files.write(fixture.root.resolve(PASSWORD.fileName()), new byte[] {'x', 0});
+      Files.write(fixture.root.resolve(KEY.fileName()), new byte[54]);
+      var passwordIo = new InspectorCredentialLoaderTest.TestIo();
+      failure(
+          () -> reader(fixture, passwordIo, ServiceConfigFiles.Service.API).readPassword(PASSWORD));
+      passwordIo.assertCleared(65537);
+      var keyIo = new InspectorCredentialLoaderTest.TestIo();
+      failure(() -> reader(fixture, keyIo, ServiceConfigFiles.Service.API).readKey(KEY));
+      keyIo.assertCleared(70);
     }
   }
 

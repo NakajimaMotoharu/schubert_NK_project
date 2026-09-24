@@ -2285,7 +2285,11 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCredread005KeyPasswordSizeMetadataAndDeviceBoundaries",
                         "opsCredread006ReadSizeCloseAndRootDriftFailuresEraseBuffer",
                         "opsCredread007EntryCloseAndBorrowedRootLifetime",
-                        "opsCredread008ConcurrentIndependentOwnedReads")))
+                        "opsCredread008ConcurrentIndependentOwnedReads",
+                        "opsCredread009DbAndMqPasswordDecodeWithOwnedCopies",
+                        "opsCredread010SixKeysDecodeCanonicalCurrentMaterial",
+                        "opsCredread011KindServiceAndNullRejectBeforeIo",
+                        "opsCredread012MalformedContentErasesOwnedBytesAndRedacts")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]

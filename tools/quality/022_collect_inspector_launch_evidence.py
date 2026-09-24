@@ -160,7 +160,11 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.file.ServiceCredentialReaderTe
      "opsCredread005KeyPasswordSizeMetadataAndDeviceBoundaries",
      "opsCredread006ReadSizeCloseAndRootDriftFailuresEraseBuffer",
      "opsCredread007EntryCloseAndBorrowedRootLifetime",
-     "opsCredread008ConcurrentIndependentOwnedReads")),)
+     "opsCredread008ConcurrentIndependentOwnedReads",
+     "opsCredread009DbAndMqPasswordDecodeWithOwnedCopies",
+     "opsCredread010SixKeysDecodeCanonicalCurrentMaterial",
+     "opsCredread011KindServiceAndNullRejectBeforeIo",
+     "opsCredread012MalformedContentErasesOwnedBytesAndRedacts")),)
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
@@ -529,6 +533,8 @@ def main():
         manifest["credentialIdOracle"] = "076/PT-OPS-CREDID-001..004: independent SS342/343 literal API and Web five LoadCredential IDs, password vs fixed-key kind, disjoint service identity, immutable allowlists and null rejection. No credential byte read or OS distribution is claimed."
         manifest["related"] += ["PG-D-281", "SSC-081", "PT-OPS-CREDREAD-001..008"]
         manifest["credentialReaderOracle"] = "078/PT-OPS-CREDREAD-001..008: borrowed retained directory, fixed service ID and existing strict Inspector inode/ACL/readonly admission reused; independent synthetic ten ID bytes, password/key 1..65536/54..69 bounds, same-device, missing/symlink/nonregular/cross-service rejection, root/file drift and IO/entry-close faults, buffer erasure and32 fresh concurrent reads. Test metadata is explicitly synthetic; no actual root/systemd credential distribution, secret format codec, DB/JMS or external process is claimed."
+        manifest["related"] += ["PG-D-282", "SSC-081", "PT-OPS-CREDREAD-009..012"]
+        manifest["credentialMaterialOracle"] = "080/PT-OPS-CREDREAD-009..012: DB/MQ strict UTF-8 password and six fixed current AES/HMAC keys use established independent Inspector parsers. Explicit test-owned raw arrays are all zero after success and format failure; typed kind/cross-service/null reject before IO; returned material owns destroyable password/key copies. Non-secret synthetic vectors only. This does not establish live secret distribution, DB/MQ driver copy destruction or external process readiness."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
