@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260925-10",
-  "targetCommit": "d39442d72e4f7d23509faa345f8bf56451eeec0a",
+  "runId": "PT-WEB-20260925-11",
+  "targetCommit": "fc77bfa2afd9a7137389a67d15799d4dcbfe92c7",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-25T03:53:38+09:00",
-  "completedAt": "2026-09-25T04:06:11+09:00",
+  "startedAt": "2026-09-25T04:13:02+09:00",
+  "completedAt": "2026-09-25T04:25:30+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "7f0d822060e7533a9098ca2fd6ee464063fb6c90c49e6fd7053c048c9bda40fb",
+  "rawLogSha256": "290be4995959eafaa43e1c80e96ad7dd383c32cc1e219fa2f21dbf8bc6aac4a8",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -1674,7 +1674,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "c8777950fa08fdfc902f161fe23ba195c74be7f369b060c26b5ced5f786f2809",
+  "fullReactorManifestSha256": "af772e50df06413e4784a50c76d9af98eaf1b8f121c064e8994ed450bc7d96cc",
   "related": [
     "QA-046",
     "UIC-006",
@@ -1757,6 +1757,10 @@
     "YKT-185",
     "PG-D-269",
     "PT-OPS-SVC-001..004",
+    "PG-D-274",
+    "SSC-079",
+    "BUG-253",
+    "YKT-191",
     "PG-D-271",
     "PT-OPS-DBPOOL-001..006",
     "PG-D-272",
@@ -1897,7 +1901,7 @@
     },
     {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ApplicationServiceUnitTest.java",
-      "sha256": "99ff834b134253aa8e463cdde0766324d90e6fa0d091c9becd90de4e5dd9a73c"
+      "sha256": "3eac9ea3db48eb5ca044adc77f8c60417175f82d47653dac9dcdb8eccaf7a742"
     },
     {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPoolTest.java",
@@ -2133,11 +2137,11 @@
     },
     {
       "path": "src/deployment/systemd/schubert-nk-api.service.template",
-      "sha256": "a1bb6dfcea0f17c6cdedc211463577e02e907c86feddc19084c44b210995acef"
+      "sha256": "7b8bf1101f5581b0c2db3a9728f40cb4750c3ff4194ce803672a900e6fdb2ec0"
     },
     {
       "path": "src/deployment/systemd/schubert-nk-web.service.template",
-      "sha256": "d94b726a4e49a657577fa4b197bc22934b922009f9c6f805b09fbfe4fa4355b5"
+      "sha256": "b69e001824b26fb1af068454ab727ec645161c96b06449b3fa4de4b216314faf"
     },
     {
       "path": "src/schubert-nk-batch/src/test/resources/inspector/unit-golden.txt",
@@ -2201,7 +2205,7 @@
   "roleOracle": "044/PT-OPS-MQ-016..018: live Ops getRolesAsJSON for SS321 six business matches plus management namespace; exact role names and 12 boolean permissions, every permission flip/missing/extra/unknown/malformed/provider redacted, app management denied. JAAS user provisioning and all other startup gates remain separate.",
   "queuePressureOracle": "046/PT-OPS-MQ-019..021: live six-Queue Ops messageCount/persistentSize, independent SS321 count/byte 70/90 boundary-1/equals/+1 and DLQ one-message alert; missing/negative/type/provider redacted, app role denied. No startup policy or Expiry purge claimed.",
   "startupObservationOracle": "038/PT-OPS-MQ-029..031: fixed topology→broker→settings→acceptor→roles→six pressure order; any ordinary failure stops later probes with fixed redaction, fatal identity escapes, nullable/missing/extra pressure rejected, borrowed Ops session never closed. This is a read-only observation, not journal recovery, credential provenance, Expiry maintenance or a startup go/no-go.",
-  "serviceUnitOracle": "056/PT-OPS-SVC-001..004: SS342/343 independent API/Web dependency, five LoadCredential IDs each, service identity, readonly/write separation, exact JVM resources/hardening and no secret environment/shell; rendered syntax verified with test-only /bin/true and no host manager mutation. Java entry, actual credential distribution/DB/JMS/readiness and NK capture are unverified.",
+  "serviceUnitOracle": "056/PT-OPS-SVC-001..004/SSC-079/BUG-253/YKT-191: SS342/343 independent API/Web dependency, explicit schubert supplementary group for UI243 release/config 0750/0640 while retaining schubert-read and API schubert-web, five private LoadCredential IDs each, service identity, readonly/write separation, exact JVM resources/hardening and no secret environment/shell; rendered syntax verified with test-only /bin/true and no host manager mutation. Actual OS account group provisioning/file admission, Java entry, credential distribution/DB/JMS/readiness and NK capture are unverified.",
   "databasePoolOracle": "058/PT-OPS-DBPOOL-001..006: two isolated PostgreSQL18 clusters with production DDL roles, SQL current_user/database and cross-schema 42501 denial; HikariCP7.1.0 API max8/min2 and Web max2/min1 with 3000ms wait, actual 8+1/2+1 borrowing, return/reuse, null and unavailable startup rejection. Credential/URL admission, external process and NK capture remain unverified.",
   "apiNonSecretConfigOracle": "060/PT-OPS-API-CFG-001..006: independent SS343 sorted UTF-8 key=value LF SHA-256 vector and shipped common/api YAML; defaults→common→API merge, six fixed broker addresses, loopback URL bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified.",
   "webNonSecretConfigOracle": "062/PT-OPS-WEB-CFG-001..006: independent SS343 15-key sorted UTF-8 key=value LF SHA-256 vector and shipped common/web YAML; defaults→common→Web merge, fixed session/max-range/loopback, port distinctness, reply 100..2000ms, wait/max/streams bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified.",
@@ -2291,11 +2295,11 @@
     },
     {
       "path": "logs/056_NK-OPS-001_WebAPI_service単体テスト仕様書.md",
-      "sha256": "0b29553c133c521465d50a16c94c884c601cb1bc6b41ba652653e7b05bbea903"
+      "sha256": "22718f832ee7fa5056e9af292f2e56335e07a2ceac06ab5a34cbd7a9c93e771e"
     },
     {
       "path": "logs/057_NK-OPS-001_WebAPI_service実行結果.md",
-      "sha256": "3618da2b3600fcd566245a22ca6c276d31d79b0dff0f2cc0c4a512ef4031bd03"
+      "sha256": "6998d2834d0d013ddb5130c414eca779ae40ec4bfe0bccbf2f3ef929c171bc1b"
     },
     {
       "path": "logs/058_NK-OPS-001_WebAPI_DBpool単体テスト仕様書.md",
@@ -2379,203 +2383,203 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "404e301e3e1a4d510a5e8f263aa13a8bfb72f5a0649dcd9ab74ea2802fba20ad"
+      "sha256": "53a7cf81d20a6c8be8c45aa20ee71d976384977afebd94d8a94336acd0ad4d76"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "5b6cab5df6a30d5bdc355eed07bdd89a3a259e3c99181c991d262245a6f52ec8"
+      "sha256": "2c5fe8b7ec6c08358e4ac5b214bf701d989604b8eda7cc3052cd2212e564db4f"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "2d8e0e697efcb9954d29b896455c423da95da18f6a56be669849cc7f07a35b9a"
+      "sha256": "c057ee5dd70732f62a8e7e8142579deabc1003ee038791168ae7b062302a73e0"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "1603a2d9ed4026cf840658ff285e481912f42d60b2de84bab47f0a985b2985c1"
+      "sha256": "6103aadae8fe666de4781e39ba686b9713014c89d9cb146a9992383f47ad6c45"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "c52e78d65271027c7527103d260770384d3561d69089059ebe781f5395c6ad3c"
+      "sha256": "1b1ac5e9f8d20d71119c2fb5f1b55020d0581bc8517284de8f7654ca8dc19099"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "f490339e21c25e0a39721cbb2b896572017a26db0592b285b7d7e154cd7cb35f"
+      "sha256": "d3b869ddf0c1fdf14b81b4c107595186336384266bf73044da989569aa799f23"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "3dc37fe1604119e44e5e9dc531b02598bdcd70bbf0e981f761b7af3b3c10a21f"
+      "sha256": "c44f96849ecd7ccee938879deab439ea03314672cbc5774853f3ea6e4680b06a"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "be619dfc50bf92457ba19342b35d49b9ab8821d64279eadf311dba66ced5b2aa"
+      "sha256": "658d90a03912b6174fa04514ebc5b983ac592a4308ad6408bf7cb90bee999ccb"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "8453281ca51456783155967e62f3a143bc051a500874e3d7c0309cab5f66a786"
+      "sha256": "adeb2b53fb07c79c24ee9d3be0d1916fea53658698dd02cf0ca531504914165f"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "f4f0fc8646d88396c3ff231560cb51720ca768ec31a473e3ae1c787ba2931265"
+      "sha256": "fb4b8379e1417c15650a86d78e00248349751bd0ebe0c9026e40702df38dd5a8"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "cff6b73d2eea808ff84b591f639c31577200239142012c4cd7c56aa1b47a66db"
+      "sha256": "14ad01da9268b0b8a55e0a5633f497f25883ead179d6249a91ac5b6c9ac91455"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "ee5fb8ce5c9deb98c843218bd5d13d41972a4e35c4110dfe091432b509fae3fe"
+      "sha256": "32741c8d7a48fd8538dd9c7db20526f584db9c871f7fe68b81f72e16b543c4d1"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "7fd1599756883d5965aed6f3c55e7a3e18afd603774113523df53b9a9d190643"
+      "sha256": "784cfc6c1547a5fbea12b9b767deb1fac31993726857d125f60ad92f201a12e2"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "ce30b74902f036c6c8fd194b51b1b8105d1cb168cd969d7704d05c84b58a9d48"
+      "sha256": "fa36adf8f98c009b188ab65ba56748e7cc17fe5381dc2e2a77038afb497c4daa"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "9f7a4aa50459f048aa12175eb81d5331ba617f7c371ecc9d293b330a7c1ca0aa"
+      "sha256": "4100ca37605e0f8ec40e492e64b37fa7fdc8137a1257b04d0f7c879e0c52b8b2"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "0d095a4861c3c44812d71b1617574208e6283ed0647e4be05aecdd3a11ed7d43"
+      "sha256": "d24efc9bcec886defe2405ce505ecd4513ce6fda856d2d6ec7f70485ef8bd8d7"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "6bca9af00941c710c336cc0e00373b18b510381ed302e76baa64854d31326b5c"
+      "sha256": "17dd747df6d8fab4e244b531f0a2e9de954778dc1f9b63256d74c738ae4514bf"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "968e7a191507e955c92c8a91a044f38c8793d578dbcd912cd601545434ee996d"
+      "sha256": "3ec59c74ed688c39c587cf510a48cd3513bc5f2f3a7d196010e2f708224435c9"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "d81f1bd97db7afd944e5bd713bdad5a22ecd50e35f905cb0ced04cb1e8e4d66d"
+      "sha256": "de4af8c87c9781086290d81d741013f58abeec0f4ef2744e99058a65890be9ea"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "d84abbda53904a8998424293eb0cb7128d53142fe1cf98c6b80e9bff62e6e33e"
+      "sha256": "52f83c92d675d77a2b1003745bb5968a185dc7327ff0e1e7345ceeca153f2df0"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "37c9c25de61791eb9d7940876eda445ebe3809c4d459fd537dd413caea14aeb1"
+      "sha256": "d2e90e9457578ddcfb003c96afe5c2711b0ec16226f717e40a16ee3f350d98a5"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "c57fc95d9b3c0d8352ffea036829f11ede838d699cb6b8db67864561a066b3b8"
+      "sha256": "b656554891bb1004b8706c5277cd6788cefe2d1d04690019e84bd9aa746e1257"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "c0aba58c43f81ae25b2c1388718ea999e6e4b754f5a052fdfd07f4ad77af21d1"
+      "sha256": "a244e34d1050fe22f390456eeb3c8f23d2260ca59b5e81f267453bb3249543a9"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "e74b2148ee469a6e62a76af86f3bc8e5fff048d6399dbda9fa29855d04ea3a52"
+      "sha256": "8cf4beaf5a73fe22496319840901c9714ebfce74b853d7c64b4a31ff1b53bea8"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "e187ec28e195b026e0d80a9668d1d9eb5b71a0d9ba230c6899c43617809dce3c"
+      "sha256": "abf251fe5085e2d83578840b1d5e4f87cbfe164c201f51262020e687767a3f0f"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "d54059f64ae668c89cfcc726885e288ef070405bf2e2ffe7d51bd85ad876ceb9"
+      "sha256": "36dd18cfc7332cb38113ba2add860ff0c4b48c1b5871f7f3e502e0695f4e2c15"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "e5135b6f98822ac656e5d6f780ea87b786d8841fff05144d0d00421e51eddb88"
+      "sha256": "b20f4b8758281b40fec4292e4966a04306b0ad5355264e5283a66e32ff62a01b"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "a252937d9bf93f156474324358fe5c2451972d192744a660454edb333ea9f86b"
+      "sha256": "c93047f62333c7d75b03100cfff6c59319ba5442d7b06af7fb517cd6fa4c974d"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "1e81317ff6ba5ca05331e92629c07843249a4611b076a5995632e2cf87e646cb"
+      "sha256": "5a5bd8281be25d26207be3c0f34380ee688bc97113d1aab406ee75c6c28510a3"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "4b6b60c49ffb0c3118a25202fa565cf709bd0ff0e3158864898590f8140f1a5e"
+      "sha256": "a7b9003ac364c4cfc7b2796a10a4640c3b6a312808c7c8cf989a9530310cafa5"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "b793232ec7fb3083812828826ab4d69f93cf8a2f89a563eeea58fbdd0fc7b209"
+      "sha256": "9c42d47f992a6e3ec0ab4fb5c279324d16cd6e20e1037653a0c442654b41f215"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "7baa2dc40e84ee50383dcff1c5629e6647a9197d46e6f03c0fb701a7451c261b"
+      "sha256": "d4176cd2d8b2888e82569448e9edc02bb3fb50351506738e3f575c0094a63f86"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "3abb8488c9c5c8e686185d683392b036a5bcd45a109a3b80ff26d34de8e20af6"
+      "sha256": "dda6d006770ddaf38964cef1da372a2977b40dda8af9c8807123a9bd3d4d6578"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "5824e5d57def954b53be817c306c112690e74b6d82c055ddda587b1e6ce7294b"
+      "sha256": "dc1a16512656d54f73d341a6641e2fba2b170139686f34fa1993641385ee698d"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "37ac18667c3fe5ecb4e928f0d21cd1e30269a7c895ea7cd058fba712fbc77f64"
+      "sha256": "1a66a4d4dc51818804c917fd1557bf6d988f018032e3dd3c2f41700a05b0b67a"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "335f3e18fa56d219fbbc740a1daa6e9f7651919ac66faa1ebdf7b1c795bff134"
+      "sha256": "c6a1e606f05da71531d92fe640fe0a2c0b24fd57b342d692527cde5730b350e4"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "488d16ee351150ddd315d92fcc638a6182cc4a4b7d4efb86781120f818e66d5e"
+      "sha256": "f473442bbb3c39f34c031627da83251f1757e8d83929d52a5e31816aeeed63b7"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "6da99ebadf395280df58813391829a2dc1b9df00dd826c0d2cd8c214ac77fa19"
+      "sha256": "f28b99479ac900d46be7848e3629eb85b30c7ddf48c64e1a526b1167816f6066"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "75863da23b6141b82e951de0ec46ab75d0aeed9736f5d587650e029b6b04d30f"
+      "sha256": "5af11d035605e0aa471c5e264623f4cce423d29f313715c185958ec79898dbf2"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "3f3bb234a228cfd70b3d2af0101bc1d91e3cdaedd36d732b3773de2effb4a96a"
+      "sha256": "067aa64ce16600c59da73579a9bbd284f7424387c1dee167a77c0e3ef37be8bc"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "d708586524192731b778586938a1549585c383deaa2543061594328d7759d16f"
+      "sha256": "1c72cf9c6cb50890eebade42a423474abd8bce8b941afadb74a08502e141b62f"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "00f24d603b810cf3b8d899deed65ca538d7f99e6194c9896e25c03328090509e"
+      "sha256": "da49161adec94d3159213c91fc3a4dc56d25051a9a7e5d0ec9e9d34e8f7ec097"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "0af3e01d8b833735076413df43d3801959b51e3a6272e3e0f144aec4b077d8dd"
+      "sha256": "cc1263eee059bfe618b397a70be68c1bb8fc2ba5277ef35888377060631c4a4a"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "34cbb534c6bb8648e1116ecded8a98911eb718c018882fd4da88a08b422cd6b0"
+      "sha256": "ab376194414776f0cc48c49c8cf5226df5807b2a3e4a5b10cd8306cbc0a2bd21"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "770b6aabea708aa4913c2f02f39ee849c721c72289f49beecd1b3aa55601d2fe"
+      "sha256": "ba85fdf6b900d8b8df7822e7fe348be49f44aed1437a765625e72bb0e9a92b28"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "7d4d20a6368c02647c5508b43f01e7c18cb80c95e8c90e6b80e47414eac86a62"
+      "sha256": "c7b1254b8878b65019f23d2430f509b830cbb71f80d1445f7e78c0f17250d2a2"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "5766d09a0c86169de31f977819df45a881c3587069e9850ab6d6258cb67ea7df"
+      "sha256": "d2b168a99fa14c26795f9bb3645509bdf741364c66f348da77373185eb508eb0"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "dc264cb8b68475f01491eba781aae1e432a4387cd25988fd07bcc4cd877cc4a8"
+      "sha256": "e68500b9e70208f88f66b28245d44a4332e02ac8acf5a3a333463b77aa78309e"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "5bd820c365308f4870d0f44313aac17f346588435aad5eee850a359394403861"
+      "sha256": "15038ce06d98f96c31ab96fa61d0c1b21690d5fc415e133262df42c0785a90fb"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "1e8c3addcaabae0738234e78895012089184a13c9fd173704f9bae5f7467b8f4"
+      "sha256": "0b131c49b3bfde996ff93296df98920d884f178feef68e96403805e2460845b8"
     },
     {
       "path": "output/postgresql/PT-OPS-PGCFG-008.txt",
