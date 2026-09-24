@@ -2,11 +2,16 @@ package dev.codex.schubert.nk.web.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.security.AuthContextCodec;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.logging.WebLogDispatcher;
 import dev.codex.schubert.nk.web.logging.WebLogMessageSender;
@@ -18,19 +23,27 @@ import jakarta.jms.JMSContext;
 import java.io.InputStream;
 import java.lang.reflect.Proxy;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.sql.DataSource;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.core.config.Configuration;
@@ -46,6 +59,175 @@ import org.junit.jupiter.api.io.TempDir;
 final class WebLogApplicationRuntimeTest {
   @TempDir Path root;
   private final Clock clock = Clock.systemUTC();
+
+  @Test
+  void scr134RealHttpLoginUsesProductionApiBrokerAndSession() throws Exception {
+    var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
+    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var fingerprints = new FingerprintKeyRing("f1", syntheticKey(7), null, null);
+        var contexts = new AuthContextCodec("a1", syntheticKey(1), null, null);
+        var snapshots = new ResponseSnapshotCodec("s1", syntheticKey(3), null, null);
+        var sessionCodec = new SessionPayloadCodec("test", syntheticKey(4), null, null);
+        var logCodec = new WebLogPayloadCodec("test", syntheticKey(5), null, null);
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      try (var connection = db.api();
+          var statement =
+              connection.prepareStatement(
+                  "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+                      + " values(7,'reader','reader',?,'USER','ACTIVE','2026-09-24','2026-09-24','2026-09-24')")) {
+        statement.setString(1, independentLoginHash());
+        assertEquals(1, statement.executeUpdate());
+      }
+      var transport =
+          (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
+      try (var api =
+              ApiLogPathApplicationRuntime.startWithLogin(
+                  () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                  source(db::api),
+                  fingerprints,
+                  contexts,
+                  snapshots,
+                  ignored -> {
+                    throw new AssertionError("game is outside Login PT");
+                  },
+                  ignored -> {
+                    throw new AssertionError("Log search is outside Login PT");
+                  },
+                  clock,
+                  ignored -> {
+                    throw new AssertionError("unexpected terminal API delivery");
+                  });
+          var web =
+              WebLogApplicationRuntime.start(
+                  root,
+                  0,
+                  source(db::web),
+                  transport,
+                  sessionCodec,
+                  clock,
+                  audit(),
+                  java.util.UUID::randomUUID,
+                  dispatcher(source(db::web), logCodec, transport),
+                  "web-log-worker",
+                  10,
+                  Duration.ofMillis(10),
+                  ignored -> {
+                    throw new AssertionError("unexpected terminal Web reply");
+                  })) {
+        assertTrue(api.ready());
+        assertTrue(web.ready());
+        URI login = URI.create("http://127.0.0.1:" + web.port() + "/login");
+        var get =
+            client.send(
+                HttpRequest.newBuilder(login)
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, get.statusCode());
+        var page = Jsoup.parse(get.body());
+        assertEquals("schubert NK - ログイン", page.title());
+        var hidden = page.selectFirst("input[name=_csrf]");
+        assertNotNull(hidden);
+        String csrf = hidden.attr("value");
+        assertFalse(csrf.isEmpty());
+        String anonymousSetCookie = get.headers().firstValue("Set-Cookie").orElseThrow();
+        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains("httponly"));
+        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains("secure"));
+        String anonymousCookie = anonymousSetCookie.split(";", 2)[0];
+        assertTrue(anonymousCookie.startsWith("SCHUBERT_NK_SESSION="));
+        String form =
+            "username=reader&password=synthetic-password&_csrf="
+                + URLEncoder.encode(csrf, StandardCharsets.UTF_8);
+        var post =
+            client.send(
+                HttpRequest.newBuilder(login)
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .header("Cookie", anonymousCookie)
+                    .header("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(302, post.statusCode());
+        assertEquals("/", post.headers().firstValue("Location").orElseThrow());
+        String authenticatedSetCookie = post.headers().firstValue("Set-Cookie").orElseThrow();
+        assertTrue(authenticatedSetCookie.toLowerCase(Locale.ROOT).contains("httponly"));
+        assertTrue(authenticatedSetCookie.toLowerCase(Locale.ROOT).contains("secure"));
+        String authenticatedCookie = authenticatedSetCookie.split(";", 2)[0];
+        assertTrue(authenticatedCookie.startsWith("SCHUBERT_NK_SESSION="));
+        assertNotEquals(anonymousCookie, authenticatedCookie);
+        var menu =
+            client.send(
+                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + web.port() + "/"))
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .header("Cookie", authenticatedCookie)
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, menu.statusCode());
+        assertEquals(
+            1,
+            count(
+                db.api(),
+                "select count(*) from schubert.request_inbox where request_layout_id='LGNREQ01' and processing_state='COMPLETED' and result_ref_type='AUTH_SESSION'"));
+        assertEquals(
+            1,
+            count(
+                db.api(),
+                "select count(*) from schubert.auth_sessions where user_id=7 and not revoked"));
+        assertEquals(
+            1,
+            count(
+                db.api(), "select count(*) from schubert.app_logs where action='LOGIN_SUCCEEDED'"));
+        assertEquals(0, count(db.api(), "select failed_count from schubert.app_users where id=7"));
+        assertEquals(
+            1, count(db.web(), "select count(*) from schubert_web_session.web_http_sessions"));
+        assertTrue(api.ready());
+        assertTrue(web.ready());
+      }
+    } finally {
+      broker.stop();
+      db.stop();
+    }
+  }
+
+  private static int count(Connection connection, String query) throws SQLException {
+    try (connection;
+        var statement = connection.createStatement();
+        var rows = statement.executeQuery(query)) {
+      assertTrue(rows.next());
+      int value = rows.getInt(1);
+      assertFalse(rows.next());
+      return value;
+    }
+  }
+
+  private static byte[] syntheticKey(int value) {
+    byte[] bytes = new byte[32];
+    Arrays.fill(bytes, (byte) value);
+    return bytes;
+  }
+
+  private static String independentLoginHash() throws GeneralSecurityException {
+    byte[] salt = new byte[16];
+    Arrays.fill(salt, (byte) 17);
+    var specification = new PBEKeySpec("synthetic-password".toCharArray(), salt, 310000, 256);
+    try {
+      return "{pbkdf2-v1}"
+          + HexFormat.of().formatHex(salt)
+          + HexFormat.of()
+              .formatHex(
+                  SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+                      .generateSecret(specification)
+                      .getEncoded());
+    } finally {
+      specification.clearPassword();
+      Arrays.fill(salt, (byte) 0);
+    }
+  }
 
   @Test
   void scr127RealReplyWorkerAndSecuredLogMvcStartAndClose() throws Exception {

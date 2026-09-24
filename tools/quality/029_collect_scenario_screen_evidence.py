@@ -44,8 +44,9 @@ WEB_LOG_RUNTIME_METHODS = (
     "scr129PartialStartupClosesReplyConsumer",
     "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
     "scr131StartupNullContractsAndSuppressedCleanup",
-    "scr133SameThrowableAcrossOwnedClosuresKeepsPrimary")
-WEB_LOG_RUNTIME_IDS = (127, 128, 129, 130, 131, 133)
+    "scr133SameThrowableAcrossOwnedClosuresKeepsPrimary",
+    "scr134RealHttpLoginUsesProductionApiBrokerAndSession")
+WEB_LOG_RUNTIME_IDS = (127, 128, 129, 130, 131, 133, 134)
 WEB_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest"
 WEB_RUNTIME_DEPENDENCY_METHODS = ("scr132RuntimePostgresDriverAndScopeCanaries",)
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
@@ -172,7 +173,9 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntimeTest.java")
 SOURCE_PATHS += (
     "src/schubert-nk-web/pom.xml",
-    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeDependencyTest.java")
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeDependencyTest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java")
 
 
 def validate_suite(suite, detail=False):
@@ -368,7 +371,9 @@ def main():
                  "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md",
                  "035_NK-WEB-002_共有session依存単体テスト仕様書.md", "036_NK-WEB-002_共有session依存実行結果.md",
                  "037_NK-WEB-002_Log経路親起動単体テスト仕様書.md", "038_NK-WEB-002_Log経路親起動実行結果.md",
-                 "039_NK-WEB-002_Web実行時JDBC依存単体テスト仕様書.md"):
+                 "039_NK-WEB-002_Web実行時JDBC依存単体テスト仕様書.md",
+                 "041_NK-WEB-002_Web・API実Login縦結線単体テスト仕様書.md",
+                 "042_NK-WEB-002_Web・API実Login縦結線実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():

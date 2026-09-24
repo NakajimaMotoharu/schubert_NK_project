@@ -228,13 +228,14 @@ class EvidenceSetTest(unittest.TestCase):
             "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
             "scr131StartupNullContractsAndSuppressedCleanup",
             "scr133SameThrowableAcrossOwnedClosuresKeepsPrimary",
+            "scr134RealHttpLoginUsesProductionApiBrokerAndSession",
         )
         self.assertEqual(names, screen.WEB_LOG_RUNTIME_METHODS)
-        suite = ET.Element("testsuite", name=cls, tests="6", failures="0", errors="0", skipped="0")
+        suite = ET.Element("testsuite", name=cls, tests="7", failures="0", errors="0", skipped="0")
         for name in names:
             ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual({f"PT-SCR-{i:03}": cls + "#" + name
-                          for i, name in zip((127, 128, 129, 130, 131, 133), names)},
+                          for i, name in zip((127, 128, 129, 130, 131, 133, 134), names)},
                          screen.validate_web_log_runtime_suite(suite))
         for key, value in (("tests", "5"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
             wrong = copy.deepcopy(suite); wrong.set(key, value)

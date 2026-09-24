@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG255選択段階: `NK-WEB-002`/`WebLogApplicationRuntime`＋`NK-MSG-001`/`ApiLogPathApplicationRuntime.startWithLogin`＋`NK-AUT-001`/`LoginInboxService`をPT-SCR-134（016/041～042、Web親JUnit）へ追跡。RD FUN-001/AUT-001～004/MQ-003/006～010、UI221/225/226/232/234、SS311～314/321/323/324/331/332/342/352。実HTTP/Broker/PG18の匿名GET→CSRF付きPOST→API認証→session固定防止/保護Menuまで選択7/7で確認。正式全reactor/53scope/hash前なので認定・PGPT加点なし。実NK CHR-A01/L01・Game/Log実handler・全process入口は未完了。
+
 2026-09-24 PG254正式限定追記: `NK-AUT-001`/API `LoginApplicationAssembly.create`と`NK-MSG-001`/`ApiLogPathApplicationRuntime.startWithLogin`をPT-AUT-INBOX-007～009（007仕様/結果・auth evidence）へ一意追跡。RD AUT-001/002・MQ-006～010、UI226/232/234/241、SS311/312/314/323/324/332。正式`PT-WEB-20260924-52`/source`61223902c`で1855PT/53scope/hash/102負canary、全Production coverage・静的0。隔離PG18で実依存の成功/失敗/再送、実Artemis4+1 consumer受信を限定認定。Web POST・全API業務handler・実NK CHRは未完了、PGPT中心47%据置。
 
 2026-09-24 PG253正式限定追記: `NK-MSG-002`/Web `WebLogOutboxRepository`・`WebLogDispatcher`・`WebLogMessageSender`→実Artemis→API `WebLogConsumers`・`WebLogListener`・`WebLogIngestService`をPT-IDEM-016（006/005～006・`005_LogReplayVertical/evidence`）で追跡。RD MQ-006/008/010・MON-003/004/005、UI231/235/242/251、SS312/321/324/331/332/351/352、PG-D-253。正式`PT-WEB-20260924-50`/source`773c4341c`で1852PT/53scope/hash/102負canary・Production全coverage/静的0。実DB/Brokerの初回失敗→due再送→API投影・同一wire重複1行を限定認定。全Production起動/実NK CHR-L01は未完了、PGPT中心47%据置。
