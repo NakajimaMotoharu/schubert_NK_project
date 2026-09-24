@@ -143,6 +143,69 @@ final class WebDependencyReadinessTest {
     }
   }
 
+  @Test
+  void scr136FatalDatabaseCloseCannotBeDowngraded() {
+    var closes = new AtomicInteger();
+    var brokerCalls = new AtomicInteger();
+    var fatal = new AssertionError("fatal-db-close-marker");
+    Connection connection =
+        proxy(
+            Connection.class,
+            (instance, method, args) -> {
+              switch (method.getName()) {
+                case "isValid" -> throw new SQLException("private-db-password");
+                case "close" -> {
+                  closes.incrementAndGet();
+                  throw fatal;
+                }
+                default -> throw new AssertionError("unexpected JDBC call " + method.getName());
+              }
+            });
+    var readiness =
+        new WebDependencyReadiness(
+            source(() -> connection),
+            () -> {
+              brokerCalls.incrementAndGet();
+              throw new AssertionError("broker must not be acquired");
+            });
+    assertSame(fatal, assertThrows(AssertionError.class, readiness::verify));
+    assertEquals(1, closes.get());
+    assertEquals(0, brokerCalls.get());
+  }
+
+  @Test
+  void scr137FatalBrokerCloseCannotBeDowngraded() {
+    var dbCloses = new AtomicInteger();
+    var brokerCloses = new AtomicInteger();
+    var fatal = new AssertionError("fatal-broker-close-marker");
+    JMSContext context =
+        proxy(
+            JMSContext.class,
+            (instance, method, args) ->
+                switch (method.getName()) {
+                  case "createQueue" ->
+                      proxy(
+                          Queue.class,
+                          (queue, called, parameters) -> {
+                            if (called.getName().equals("getQueueName"))
+                              return "nk.sync.reply.web.q";
+                            throw new AssertionError("unexpected Queue call " + called.getName());
+                          });
+                  case "createConsumer" -> throw new JMSRuntimeException("private-mq-password");
+                  case "close" -> {
+                    brokerCloses.incrementAndGet();
+                    throw fatal;
+                  }
+                  default -> throw new AssertionError("unexpected JMS call " + method.getName());
+                });
+    var readiness =
+        new WebDependencyReadiness(
+            source(() -> connection(true, false, false, dbCloses)), () -> context);
+    assertSame(fatal, assertThrows(AssertionError.class, readiness::verify));
+    assertEquals(1, dbCloses.get());
+    assertEquals(1, brokerCloses.get());
+  }
+
   private static Connection connection(
       boolean valid, boolean inspectionFails, boolean closeFails, AtomicInteger closes) {
     return proxy(
