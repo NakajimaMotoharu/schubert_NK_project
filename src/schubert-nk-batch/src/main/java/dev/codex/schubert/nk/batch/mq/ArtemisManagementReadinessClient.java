@@ -85,6 +85,34 @@ public final class ArtemisManagementReadinessClient {
         (borrowed, name) -> query(borrowed, message -> putAddressSettingsOperation(message, name)));
   }
 
+  static Object acceptors(ClientSession session) {
+    return read(
+        session,
+        "acceptors",
+        (borrowed, ignored) ->
+            query(borrowed, ArtemisManagementReadinessClient::putAcceptorsOperation));
+  }
+
+  static void putAcceptorsOperation(ClientMessage message) {
+    try {
+      ManagementHelper.putOperationInvocation(message, ResourceNames.BROKER, "getAcceptorsAsJSON");
+    } catch (Exception failure) {
+      throw new ArtemisManagementReadinessException();
+    }
+  }
+
+  static Object acceptorStarted(ClientSession session) {
+    return read(
+        session,
+        "started",
+        (borrowed, ignored) ->
+            query(
+                borrowed,
+                message ->
+                    ManagementHelper.putAttribute(
+                        message, ResourceNames.ACCEPTOR + "core", "started")));
+  }
+
   static void putAddressSettingsOperation(ClientMessage message, String address) {
     try {
       ManagementHelper.putOperationInvocation(
