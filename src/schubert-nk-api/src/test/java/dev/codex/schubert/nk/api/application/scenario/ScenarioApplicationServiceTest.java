@@ -111,6 +111,53 @@ final class ScenarioApplicationServiceTest {
   }
 
   @Test
+  void productionAssemblyUsesRealQueryInboxAndNullContract() throws Exception {
+    try (var h = new Harness()) {
+      var service =
+          ScenarioApplicationAssembly.create(
+              h.source, h.keys, h.snapshots, h.publisher, h.inspector, h.clock);
+      var message = request("GAM");
+      byte[] first = service.process(message);
+      assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, count("schubert.request_inbox"));
+      byte[] replay = service.process(message);
+      assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(0, h.published.get());
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  null, h.keys, h.snapshots, h.publisher, h.inspector, h.clock));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  h.source, null, h.snapshots, h.publisher, h.inspector, h.clock));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  h.source, h.keys, null, h.publisher, h.inspector, h.clock));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  h.source, h.keys, h.snapshots, null, h.inspector, h.clock));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  h.source, h.keys, h.snapshots, h.publisher, null, h.clock));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ScenarioApplicationAssembly.create(
+                  h.source, h.keys, h.snapshots, h.publisher, h.inspector, null));
+    }
+  }
+
+  @Test
   void detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent() throws Exception {
     master(501);
     sql(
