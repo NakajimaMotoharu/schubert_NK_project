@@ -1,6 +1,6 @@
 # NK-OPS-001 Expiry選択削除 PT仕様
 
-PG244。対象: `ArtemisExpiryPurgeClient.purge`/`Result`/`ManagementOperations`、`ArtemisManagementReadinessClient.expiryOperation/putExpiryOperation`、`ArtemisExpiryPurgeException`。RD MQ-009・OPS-009、UI251 §8、SS321 §10/12・341 §9、SSC-076/BUG-236/YKT-187、PG-D-244。Java25/Artemis2.56.0。これは保守専用Core sessionを借用する単体処理であり、親のBroker health/lock/credential/`batch_runs`記録/criticalによるAPI起動判断を代替しない。
+PG244（当時のAPI名`purge`）、PG247以後の対象は`ArtemisExpiryPurgeClient.observe/purgeObserved`/`Observation/Result`/`ManagementOperations`、`ArtemisManagementReadinessClient.expiryOperation/putExpiryOperation`、`ArtemisExpiryPurgeException`。RD MQ-009・OPS-009、UI251 §8、SS321 §10/12・341 §9、SSC-076/BUG-236/YKT-187、PG-D-244。Java25/Artemis2.56.0。PG247以後の観測・削除分離とPT-OPS-MQ-027は052を正とする。これは保守専用Core sessionを借用する単体処理であり、親のBroker health/lock/credential/`batch_runs`記録/criticalによるAPI起動判断を代替しない。
 
 | Test ID | 目的・事前条件・fixture・入力/操作 | Productionと独立した期待値・根拠 |
 |---|---|---|

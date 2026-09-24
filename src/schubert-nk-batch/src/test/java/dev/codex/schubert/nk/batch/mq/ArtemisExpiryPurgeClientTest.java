@@ -84,7 +84,10 @@ final class ArtemisExpiryPurgeClientTest {
       var equalBoundaryRun =
           new BatchRun(
               UUID.randomUUID(), Instant.ofEpochMilli(actualExpiry).plus(7, ChronoUnit.DAYS));
-      var retained = new ArtemisExpiryPurgeClient().purge(maintenance, equalBoundaryRun);
+      var client = new ArtemisExpiryPurgeClient();
+      var retainedObservation = client.observe(maintenance, equalBoundaryRun);
+      assertEquals(0, retainedObservation.selectedCount());
+      var retained = client.purgeObserved(maintenance, equalBoundaryRun, retainedObservation);
       assertEquals(0, retained.selectedCount());
       assertEquals(0, retained.removedCount());
       assertEquals(1, retained.afterCount());
@@ -92,7 +95,10 @@ final class ArtemisExpiryPurgeClientTest {
           new BatchRun(
               UUID.randomUUID(),
               Instant.ofEpochMilli(actualExpiry).plus(7, ChronoUnit.DAYS).plusMillis(1));
-      var purged = new ArtemisExpiryPurgeClient().purge(maintenance, plusOneMillisecondRun);
+      var purgeObservation = client.observe(maintenance, plusOneMillisecondRun);
+      assertEquals(1, purgeObservation.selectedCount());
+      assertEquals(1, expiryCount);
+      var purged = client.purgeObserved(maintenance, plusOneMillisecondRun, purgeObservation);
       assertEquals(1, purged.beforeCount());
       assertEquals(1, purged.selectedCount());
       assertEquals(1, purged.removedCount());
@@ -111,23 +117,32 @@ final class ArtemisExpiryPurgeClientTest {
   @Test
   void opsMq023FixedCutoffCountAndByteReconciliationWithoutCallerSelector() {
     var operations = new Fake(3, 300, 2, 2, 1, 100);
-    var result = new ArtemisExpiryPurgeClient(operations).purge(unusedSession(), run());
+    var client = new ArtemisExpiryPurgeClient(operations);
+    var observation = client.observe(unusedSession(), run());
+    assertEquals(new ArtemisExpiryPurgeClient.Observation(CUTOFF, 3, 2, 300, 200), observation);
+    assertEquals(0, operations.removeCalls); // The parent can durably commit here.
+    var result = client.purgeObserved(unusedSession(), run(), observation);
     assertEquals(
         new ArtemisExpiryPurgeClient.Result(CUTOFF, 3, 2, 2, 1, 300, 200, 200, 100), result);
     assertEquals("_AMQ_ACTUAL_EXPIRY < 1789603200000", operations.selector);
     assertEquals(1, operations.removeCalls);
-    assertEquals(2, operations.countCalls);
-    assertEquals(2, operations.byteCalls);
+    assertEquals(3, operations.countCalls);
+    assertEquals(3, operations.byteCalls);
 
     var empty = new Fake(0, 0, 0, 0, 0, 0);
-    assertEquals(
-        0, new ArtemisExpiryPurgeClient(empty).purge(unusedSession(), run()).removedCount());
-    assertEquals(0, empty.removeCalls);
-    var retained = new Fake(2, 80, 0, 0, 2, 80);
+    var emptyClient = new ArtemisExpiryPurgeClient(empty);
     assertEquals(
         0,
-        new ArtemisExpiryPurgeClient(retained)
-            .purge(unusedSession(), run())
+        emptyClient
+            .purgeObserved(unusedSession(), run(), emptyClient.observe(unusedSession(), run()))
+            .removedCount());
+    assertEquals(0, empty.removeCalls);
+    var retained = new Fake(2, 80, 0, 0, 2, 80);
+    var retainedClient = new ArtemisExpiryPurgeClient(retained);
+    assertEquals(
+        0,
+        retainedClient
+            .purgeObserved(unusedSession(), run(), retainedClient.observe(unusedSession(), run()))
             .estimatedSelectedBytes());
     assertEquals(0, retained.removeCalls);
   }
@@ -150,10 +165,21 @@ final class ArtemisExpiryPurgeClientTest {
     assertRedacted(fault);
     assertThrows(NullPointerException.class, () -> new ArtemisExpiryPurgeClient(null));
     assertThrows(
-        NullPointerException.class, () -> new ArtemisExpiryPurgeClient().purge(null, run()));
+        NullPointerException.class, () -> new ArtemisExpiryPurgeClient().observe(null, run()));
     assertThrows(
         NullPointerException.class,
-        () -> new ArtemisExpiryPurgeClient().purge(unusedSession(), null));
+        () -> new ArtemisExpiryPurgeClient().observe(unusedSession(), null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new ArtemisExpiryPurgeClient().purgeObserved(null, run(), validObservation()));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new ArtemisExpiryPurgeClient()
+                .purgeObserved(unusedSession(), null, validObservation()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new ArtemisExpiryPurgeClient().purgeObserved(unusedSession(), run(), null));
   }
 
   @Test
@@ -203,11 +229,61 @@ final class ArtemisExpiryPurgeClientTest {
     assertNull(failure.getCause());
   }
 
+  @Test
+  void opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove() {
+    var invalid =
+        new ArtemisExpiryPurgeClient.Observation[] {
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF + 1, 1, 1, 10, 10),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, -1, 0, 10, 0),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, 1, -1, 0),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, -1, 10, 0),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, 2, 10, 0),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, 1, 10, -1),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, 1, 10, 11),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 2, 1, 10, 4),
+          new ArtemisExpiryPurgeClient.Observation(CUTOFF, 2, 2, Long.MAX_VALUE, Long.MAX_VALUE)
+        };
+    for (var value : invalid) {
+      var operations = new Fake(1, 10, 1, 1, 0, 0);
+      assertPurgeRejectedBeforeRemove(operations, value);
+    }
+    var countDrift = new Fake(1, 10, 1, 1, 0, 0);
+    countDrift.prePurgeCount = 0;
+    countDrift.countCalls = 1;
+    assertPurgeRejectedBeforeRemove(countDrift, validObservation());
+    var byteDrift = new Fake(1, 10, 1, 1, 0, 0);
+    byteDrift.prePurgeBytes = 9;
+    byteDrift.byteCalls = 1;
+    assertPurgeRejectedBeforeRemove(byteDrift, validObservation());
+    var selectedDrift = new Fake(1, 10, 1, 1, 0, 0);
+    selectedDrift.selectedAfterStage = 0;
+    selectedDrift.selectedCalls = 1;
+    assertPurgeRejectedBeforeRemove(selectedDrift, validObservation());
+    var providerFailure = new Fake(1, 10, 1, 1, 0, 0);
+    providerFailure.failSelected = true;
+    assertPurgeRejectedBeforeRemove(providerFailure, validObservation());
+  }
+
+  private static void assertPurgeRejectedBeforeRemove(
+      Fake operations, ArtemisExpiryPurgeClient.Observation observation) {
+    var failure =
+        assertThrows(
+            ArtemisExpiryPurgeException.class,
+            () ->
+                new ArtemisExpiryPurgeClient(operations)
+                    .purgeObserved(unusedSession(), run(), observation));
+    assertNull(failure.getCause());
+    assertEquals(0, operations.removeCalls);
+  }
+
   private static void assertRedacted(Fake operations) {
     var failure =
         assertThrows(
             ArtemisExpiryPurgeException.class,
-            () -> new ArtemisExpiryPurgeClient(operations).purge(unusedSession(), run()));
+            () -> {
+              var client = new ArtemisExpiryPurgeClient(operations);
+              client.purgeObserved(unusedSession(), run(), client.observe(unusedSession(), run()));
+            });
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
     assertFalse(failure.getMessage().contains("private"));
@@ -217,6 +293,10 @@ final class ArtemisExpiryPurgeClientTest {
     return new BatchRun(
         UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
         Instant.parse("2026-09-24T00:00:00Z"));
+  }
+
+  private static ArtemisExpiryPurgeClient.Observation validObservation() {
+    return new ArtemisExpiryPurgeClient.Observation(CUTOFF, 1, 1, 10, 10);
   }
 
   private static ClientSession unusedSession() {
@@ -239,8 +319,12 @@ final class ArtemisExpiryPurgeClientTest {
     int countCalls;
     int byteCalls;
     int removeCalls;
+    int selectedCalls;
     String selector = "";
     boolean failSelected;
+    long prePurgeCount;
+    long prePurgeBytes;
+    long selectedAfterStage;
 
     Fake(
         long beforeCount,
@@ -255,23 +339,34 @@ final class ArtemisExpiryPurgeClientTest {
       this.removed = removed;
       this.afterCount = afterCount;
       this.afterBytes = afterBytes;
+      prePurgeCount = beforeCount;
+      prePurgeBytes = beforeBytes;
+      selectedAfterStage = selected;
     }
 
     @Override
     public long count(ClientSession ignored) {
-      return countCalls++ == 0 ? beforeCount : afterCount;
+      return switch (countCalls++) {
+        case 0 -> beforeCount;
+        case 1 -> prePurgeCount;
+        default -> afterCount;
+      };
     }
 
     @Override
     public long bytes(ClientSession ignored) {
-      return byteCalls++ == 0 ? beforeBytes : afterBytes;
+      return switch (byteCalls++) {
+        case 0 -> beforeBytes;
+        case 1 -> prePurgeBytes;
+        default -> afterBytes;
+      };
     }
 
     @Override
     public long selected(ClientSession ignored, String value) {
       if (failSelected) throw new IllegalStateException("private-management-value");
       selector = value;
-      return selected;
+      return selectedCalls++ == 0 ? selected : selectedAfterStage;
     }
 
     @Override

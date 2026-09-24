@@ -101,7 +101,8 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientT
     ("opsMq023FixedCutoffCountAndByteReconciliationWithoutCallerSelector",
      "opsMq024RejectsEveryCounterDriftOverflowAndProviderFailure",
      "opsMq025RejectsMissingMalformedOrUnboundedManagementSelector",
-     "opsMq026RealBrokerRemovesOnlyActualExpiredMessage")),)
+     "opsMq026RealBrokerRemovesOnlyActualExpiredMessage",
+     "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
