@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PT-JMS-018/019: certify the API Log-path composition and borrowed connection gate."""
+"""PT-JMS-018/019/022: certify API Log-path composition and borrowed connection gate."""
 import argparse
 import hashlib
 import json
@@ -21,6 +21,9 @@ READY_METHODS = (
     "jdbcInspectionAndCloseFailuresAreRedacted",
     "brokerNullModeAttachAndCloseFailuresAreRedacted",
     "stoppedBrokerCannotPassConnectivity",
+    "apiReadinessFatalBrokerCloseCannotBeDowngradedToOrdinaryUnavailable",
+    "apiReadinessOrdinaryInspectionAndCloseFailuresRemainRedacted",
+    "apiReadinessFatalInspectionRetainsIdentityEvenWhenCloseAlsoFatal",
 )
 READY_SUBJECT = "dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness"
 SOURCE_FILES = (
@@ -61,7 +64,8 @@ def validate_ready_suite(root):
                    any(child.tag not in ("system-out", "system-err") for child in case)
                    for case in cases)):
         raise ValueError("missing, nonpassing, or unlisted API dependency readiness PT")
-    return {"PT-JMS-019-" + chr(ord("A") + index): READY_CLASS + "#" + name
+    return {("PT-JMS-019-" + chr(ord("A") + index) if index < 5
+             else "PT-JMS-022-" + chr(ord("A") + index - 5)): READY_CLASS + "#" + name
             for index, name in enumerate(READY_METHODS)}
 
 
@@ -121,15 +125,16 @@ def main():
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name in ("001_NK-MSG-001_単体テスト仕様書.md", "002_NK-MSG-001_実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    oracle = {"testIds": ["PT-JMS-018", "PT-JMS-019"],
+    oracle = {"testIds": ["PT-JMS-018", "PT-JMS-019", "PT-JMS-022"],
               "subcases": list(methods) + list(ready_methods),
               "syncConsumers": 4, "webLogConsumers": 1,
               "loginTransaction": "JDBC autoCommit false before handler; commit before JMS reply owner",
               "terminal": "one signal after committed fatal DLQ; both consumer groups closed",
               "preflight": "JDBC isValid(2), then borrowed transacted JMS attachment to exact sync/Web-log FQQNs; no consumption",
-              "source": "SS312/321/324 five-consumer, preflight and transaction/terminal contracts; not production count calculation"}
+              "resourceFailurePrecedence": "fatal owned JMS close escapes ordinary inspection; two ordinary failures remain fixed/redacted; fatal inspection retains identity against fatal close",
+              "source": "SS312/321/324 five-consumer, preflight and transaction/terminal contracts; 442 owned resource failure precedence; not production count calculation"}
     (evidence / "input/oracle.json").write_text(json.dumps(oracle, indent=2) + "\n")
-    suite = ET.Element("testsuite", name="PT-JMS-018-019", tests=str(len(methods) + len(ready_methods)),
+    suite = ET.Element("testsuite", name="PT-JMS-018-019-022", tests=str(len(methods) + len(ready_methods)),
                        failures="0", errors="0", skipped="0")
     for test_id, method in (methods | ready_methods).items():
         ET.SubElement(suite, "testcase", id=test_id, classname=method.split("#")[0],
@@ -142,7 +147,7 @@ def main():
         "programId": "NK-MSG-001", "testIds": methods | ready_methods,
         "scopeResult": "PASS_API_LOG_PATH_STARTUP_UNIT_ONLY", "programComplete": False,
         "coverage": coverage, "failed": 0, "errors": 0, "skipped": 0,
-        "related": ["PG233/234", "PT-JMS-018/019", "RD FUN-001/008 AUT-001/002 MQ-001/003/006/008 SYS-004",
+        "related": ["PG233/234/266", "PT-JMS-018/019/022", "BUG-248", "YKT-154", "RD FUN-001/008 AUT-001/002 MQ-001/003/006/008 SYS-004",
                     "UI225/226/231/232/235", "SS311/312/314/321/323/324"],
         "limitations": "No full API process, production credentials, broker-management readiness, real NK CHR or IT/ST.",
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
@@ -156,7 +161,7 @@ def main():
         digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
         for path in sorted(evidence.rglob("*")) if path.is_file()
         and path.name != "checksums.sha256"))
-    print(json.dumps({"runId": run, "testIds": ["PT-JMS-018", "PT-JMS-019"],
+    print(json.dumps({"runId": run, "testIds": ["PT-JMS-018", "PT-JMS-019", "PT-JMS-022"],
                       "subcases": len(methods) + len(ready_methods),
                       "scopeResult": manifest["scopeResult"], "programComplete": False}))
 

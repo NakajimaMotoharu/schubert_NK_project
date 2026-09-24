@@ -26,7 +26,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PG234/PT-JMS-019: borrowed API DB/JMS connection admission, not broker management readiness. */
+/** PG234/266/PT-JMS-019/022: borrowed API DB/JMS admission, not broker management readiness. */
 final class ApiDependencyReadinessTest {
   @TempDir Path root;
 
@@ -171,6 +171,57 @@ final class ApiDependencyReadinessTest {
             AssertionError.class,
             () -> new ApiDependencyReadiness(database, () -> context).verify());
     assertSame(fatal, observed);
+    assertEquals(1, closed.get());
+  }
+
+  @Test
+  void apiReadinessOrdinaryInspectionAndCloseFailuresRemainRedacted() {
+    RuntimeException inspection = new JMSRuntimeException("synthetic inspection failure");
+    RuntimeException closeFailure = new JMSRuntimeException("synthetic close failure");
+    var closed = new AtomicInteger();
+    var database = source(() -> connection(true, false, false, new AtomicInteger()));
+    JMSContext context =
+        proxy(
+            JMSContext.class,
+            (ignored, method, args) -> {
+              if (method.getName().equals("getSessionMode")) throw inspection;
+              if (method.getName().equals("close")) {
+                closed.incrementAndGet();
+                throw closeFailure;
+              }
+              throw new AssertionError(method.getName());
+            });
+    var observed =
+        assertThrows(
+            IllegalStateException.class,
+            () -> new ApiDependencyReadiness(database, () -> context).verify());
+    assertEquals("API Artemis receive queues unavailable", observed.getMessage());
+    assertNull(observed.getCause());
+    assertEquals(1, closed.get());
+  }
+
+  @Test
+  void apiReadinessFatalInspectionRetainsIdentityEvenWhenCloseAlsoFatal() {
+    AssertionError inspection = new AssertionError("synthetic inspection failure");
+    AssertionError closeFailure = new AssertionError("synthetic close failure");
+    var closed = new AtomicInteger();
+    var database = source(() -> connection(true, false, false, new AtomicInteger()));
+    JMSContext context =
+        proxy(
+            JMSContext.class,
+            (ignored, method, args) -> {
+              if (method.getName().equals("getSessionMode")) throw inspection;
+              if (method.getName().equals("close")) {
+                closed.incrementAndGet();
+                throw closeFailure;
+              }
+              throw new AssertionError(method.getName());
+            });
+    AssertionError observed =
+        assertThrows(
+            AssertionError.class,
+            () -> new ApiDependencyReadiness(database, () -> context).verify());
+    assertSame(inspection, observed);
     assertEquals(1, closed.get());
   }
 

@@ -167,14 +167,19 @@ class EvidenceSetTest(unittest.TestCase):
             "jdbcInspectionAndCloseFailuresAreRedacted",
             "brokerNullModeAttachAndCloseFailuresAreRedacted",
             "stoppedBrokerCannotPassConnectivity",
+            "apiReadinessFatalBrokerCloseCannotBeDowngradedToOrdinaryUnavailable",
+            "apiReadinessOrdinaryInspectionAndCloseFailuresRemainRedacted",
+            "apiReadinessFatalInspectionRetainsIdentityEvenWhenCloseAlsoFatal",
         )
         self.assertEqual(names, runtime.READY_METHODS)
-        suite = ET.Element("testsuite", name=runtime.READY_CLASS, tests="5",
+        suite = ET.Element("testsuite", name=runtime.READY_CLASS, tests="8",
                            failures="0", errors="0", skipped="0")
         for name in names:
             ET.SubElement(suite, "testcase", classname=runtime.READY_CLASS, name=name)
-        self.assertEqual(5, len(runtime.validate_ready_suite(suite)))
-        for key, value in (("tests", "4"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+        self.assertEqual({"PT-JMS-019-A", "PT-JMS-019-B", "PT-JMS-019-C", "PT-JMS-019-D",
+                          "PT-JMS-019-E", "PT-JMS-022-A", "PT-JMS-022-B", "PT-JMS-022-C"},
+                         set(runtime.validate_ready_suite(suite)))
+        for key, value in (("tests", "7"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
             wrong = copy.deepcopy(suite); wrong.set(key, value)
             with self.assertRaises(ValueError): runtime.validate_ready_suite(wrong)
         for replacement in (names[1], "unlisted"):
