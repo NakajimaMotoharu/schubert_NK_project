@@ -20,6 +20,7 @@
     <jacoco.version>0.8.15</jacoco.version>
     <spotbugs.plugin.version>4.10.4.0</spotbugs.plugin.version>
     <artemis.version>2.56.0</artemis.version>
+    <hikaricp.version>7.1.0</hikaricp.version>
   </properties>
 
   <dependencyManagement>
@@ -112,6 +113,11 @@
       <artifactId>postgresql</artifactId>
       <version>42.7.13</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>${hikaricp.version}</version>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>

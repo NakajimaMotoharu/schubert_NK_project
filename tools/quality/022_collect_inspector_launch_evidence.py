@@ -111,6 +111,14 @@ DEPLOYMENT_GROUPS += ((PREFIX + "ApplicationServiceUnitTest", 1,
     ("apiDependencyCredentialAndResourceContract", "webDependencyCredentialAndResourceContract",
      "noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation",
      "renderedSyntaxIsAcceptedWithoutStartingService")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest", 1,
+    ("opsDbpool001RealRoleAndFixedConfiguration", "opsDbpool002EightBorrowersAndNinthTimeout",
+     "opsDbpool003NullAndUnavailableFailBeforeReady")),
+    ("dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest", 4,
+    ("opsDbpool004RealRoleAndFixedConfiguration", "opsDbpool005TwoBorrowersAndThirdTimeout",
+     "opsDbpool006NullAndUnavailableFailBeforeReady")))
+POOL_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
+                 ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -223,7 +231,9 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ",
-                   PREFIX + "ApplicationServiceUnitTest": "PT-OPS-SVC"}.get(cls, "PT-OPS-INBOX")
+                   PREFIX + "ApplicationServiceUnitTest": "PT-OPS-SVC",
+                   "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest": "PT-OPS-DBPOOL",
+                   "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -275,7 +285,8 @@ def main():
                 "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "batch",
+                "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "web"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}
@@ -287,6 +298,14 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
+        for module, subject in POOL_SUBJECTS:
+            for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
+                name = cls.get("name")
+                if name == subject or name.startswith(subject + "$"):
+                    coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                     for c in cls.findall("counter")}
+        if not {subject for _, subject in POOL_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
+            raise SystemExit("missing or incomplete API/Web pool coverage")
         for module, subject in (("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
                                 *(("storage", s) for s in PRIVATE_SUBJECTS),
                                 *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS))):
@@ -309,6 +328,9 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
+        sources += [repo / ("src/schubert-nk-" + module) / "src/main/java" / (subject + ".java")
+                    for module, subject in POOL_SUBJECTS]
+        sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
@@ -359,7 +381,9 @@ def main():
                      "038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md",
                      "039_NK-OPS-001_Artemis起動前観測実行結果.md",
                      "056_NK-OPS-001_WebAPI_service単体テスト仕様書.md",
-                     "057_NK-OPS-001_WebAPI_service実行結果.md"):
+                     "057_NK-OPS-001_WebAPI_service実行結果.md",
+                     "058_NK-OPS-001_WebAPI_DBpool単体テスト仕様書.md",
+                     "059_NK-OPS-001_WebAPI_DBpool実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -422,6 +446,9 @@ def main():
         manifest["startupObservationOracle"] = "038/PT-OPS-MQ-029..031: fixed topology→broker→settings→acceptor→roles→six pressure order; any ordinary failure stops later probes with fixed redaction, fatal identity escapes, nullable/missing/extra pressure rejected, borrowed Ops session never closed. This is a read-only observation, not journal recovery, credential provenance, Expiry maintenance or a startup go/no-go."
         manifest["related"] += ["PG-D-269", "PT-OPS-SVC-001..004"]
         manifest["serviceUnitOracle"] = "056/PT-OPS-SVC-001..004: SS342/343 independent API/Web dependency, five LoadCredential IDs each, service identity, readonly/write separation, exact JVM resources/hardening and no secret environment/shell; rendered syntax verified with test-only /bin/true and no host manager mutation. Java entry, actual credential distribution/DB/JMS/readiness and NK capture are unverified."
+        manifest["related"] += ["PG-D-271", "PT-OPS-DBPOOL-001..006"]
+        manifest["databasePoolOracle"] = "058/PT-OPS-DBPOOL-001..006: two isolated PostgreSQL18 clusters with production DDL roles, SQL current_user/database and cross-schema 42501 denial; HikariCP7.1.0 API max8/min2 and Web max2/min1 with 3000ms wait, actual 8+1/2+1 borrowing, return/reuse, null and unavailable startup rejection. Credential/URL admission, external process and NK capture remain unverified."
+        manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 

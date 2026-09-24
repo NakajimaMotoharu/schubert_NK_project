@@ -1,5 +1,11 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-25 HikariCP 7.1.0（PG271 API/Web DB pool）
+
+Web/API各Maven moduleへ`com.zaxxer:HikariCP:7.1.0`を明示依存として追加。取得元は[Maven Central](https://central.sonatype.com/artifact/com.zaxxer/HikariCP/7.1.0)、設定意味は[project公式README](https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby)を確認。cache jarは`/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar`、SHA-256 `2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b`。OS package/daemon/実credentialは変更なし。APIはmax8/min2、Webはmax2/min1、共にconnectionTimeout3000ms、validationTimeout2000ms、initializationFailTimeout正値1msでlazy成功を禁止。実role/URL admission・systemd credential読取・外部process readinessは別依存であり、poolだけでは起動完了ではない。
+
+再現は同Maven依存をCentralから取得後、既存Java25/Maven wrapper・`-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository`で`clean verify`。PTは隔離PostgreSQL18のtemporary cluster/信頼認証を使用し、運用DBや秘密値へ触れない。
+
 ## 2026-09-20 Node.js 24.19.0（検索外部JS PT用、導入済・試験組込前）
 
 07:02追補: PG201選択試験で構文check/Node8case/Production1file全line・function・branch100%が成功、Java wrapper1PTとして実行。正式reactorは未実行。full verify wrapperと006 manifest commandへ `-Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` を追加し、次正式runから使用する。以下は導入時記録。

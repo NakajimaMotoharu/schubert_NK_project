@@ -22,6 +22,7 @@
     <artemis.version>2.56.0</artemis.version>
     <flyway.version>13.4.0</flyway.version>
     <postgresql.jdbc.version>42.7.13</postgresql.jdbc.version>
+    <hikaricp.version>7.1.0</hikaricp.version>
   </properties>
 
   <dependencies>
@@ -84,6 +85,11 @@
       <artifactId>postgresql</artifactId>
       <version>${postgresql.jdbc.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>${hikaricp.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.artemis</groupId>

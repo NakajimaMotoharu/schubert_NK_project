@@ -1,0 +1,3 @@
+# NK-OPS-001 Web/API DB pool実行結果
+
+PG271/PT-OPS-DBPOOL-001～006。2026-09-25、branch`dev-foundation`、正式source commit未固定。Java25.0.4/Maven wrapper/HikariCP7.1.0、隔離PostgreSQL18。選択`ApiJdbcPoolTest,WebJdbcPoolTest`は6/6、failure/error/skipped0。API module `clean verify` 752/752、Web module `clean verify` 535/535、各Production全coverage100%・SpotBugs0。現版の相互schema拒否追記後は選択6件を再実行して成功したが、全module verifyは追記前のため正式全reactorで再検証する。最初の`-am -Dtest`は依存Protocolで選択test不在のcommand選択誤りによりpreflight停止、初回API verifyは未整形でSpotless停止。両方ともPT成功に算入しない。正式全reactor/53scope/hash未確認のため現時点は合格認定しない。隔離PostgreSQL以外の実運用DB/credentialへ接続しない。証跡manifest/hashは正式run後追記。
