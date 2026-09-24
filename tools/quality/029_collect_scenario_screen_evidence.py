@@ -43,7 +43,9 @@ WEB_LOG_RUNTIME_METHODS = (
     "scr128InvalidReplyDlqMakesWholeRuntimeNotReady",
     "scr129PartialStartupClosesReplyConsumer",
     "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
-    "scr131StartupNullContractsAndSuppressedCleanup")
+    "scr131StartupNullContractsAndSuppressedCleanup",
+    "scr133SameThrowableAcrossOwnedClosuresKeepsPrimary")
+WEB_LOG_RUNTIME_IDS = (127, 128, 129, 130, 131, 133)
 WEB_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest"
 WEB_RUNTIME_DEPENDENCY_METHODS = ("scr132RuntimePostgresDriverAndScopeCanaries",)
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
@@ -235,7 +237,8 @@ def validate_web_application_suite(suite):
 
 
 def validate_web_log_runtime_suite(suite):
-    return validate_named_suite(suite, WEB_LOG_RUNTIME_CLASS, WEB_LOG_RUNTIME_METHODS, 127)
+    return validate_named_suite(suite, WEB_LOG_RUNTIME_CLASS, WEB_LOG_RUNTIME_METHODS, 127,
+                                WEB_LOG_RUNTIME_IDS)
 
 
 def validate_web_runtime_dependency_suite(suite):

@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.bootstrap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -251,6 +252,36 @@ final class WebLogApplicationRuntimeTest {
     assertFalse(workerStopped.ready());
     notReady.close();
     workerStopped.close();
+  }
+
+  @Test
+  void scr133SameThrowableAcrossOwnedClosuresKeepsPrimary() {
+    SQLException shared = new SQLException("synthetic shared close failure");
+    AtomicInteger closes = new AtomicInteger();
+    AutoCloseable owner =
+        () -> {
+          closes.incrementAndGet();
+          throw shared;
+        };
+    var runtime =
+        new WebLogApplicationRuntime(
+            owner, owner, owner, () -> 1, () -> true, () -> true, new AtomicBoolean());
+    IllegalStateException stopped = assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals("Web Log runtime stop failed", stopped.getMessage());
+    assertSame(shared, stopped.getCause());
+    assertEquals(0, shared.getSuppressed().length);
+    assertEquals(3, closes.get());
+
+    IllegalStateException startup = new IllegalStateException("synthetic startup failure");
+    AtomicInteger startupCloses = new AtomicInteger();
+    AutoCloseable replay =
+        () -> {
+          startupCloses.incrementAndGet();
+          throw startup;
+        };
+    WebLogApplicationRuntime.closeAfterFailure(startup, replay, replay);
+    assertEquals(2, startupCloses.get());
+    assertEquals(0, startup.getSuppressed().length);
   }
 
   @Test

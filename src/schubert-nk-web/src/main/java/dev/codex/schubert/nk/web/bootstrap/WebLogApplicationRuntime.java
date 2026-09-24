@@ -168,7 +168,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
         resource.close();
       } catch (Exception closing) {
         if (failure == null) failure = closing;
-        else failure.addSuppressed(closing);
+        else if (failure != closing) failure.addSuppressed(closing);
       }
     }
     if (failure != null) {
@@ -183,7 +183,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
         try {
           resource.close();
         } catch (Exception closing) {
-          startupFailure.addSuppressed(closing);
+          if (startupFailure != closing) startupFailure.addSuppressed(closing);
         }
       }
     }

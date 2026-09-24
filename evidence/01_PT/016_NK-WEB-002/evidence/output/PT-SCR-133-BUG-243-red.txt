@@ -1,0 +1,7 @@
+Run: PG252 selected RED, 2026-09-24 JST
+Command: Java 25 Maven, -pl src/schubert-nk-web -Dtest=WebLogApplicationRuntimeTest#scr132SameThrowableAcrossOwnedClosuresKeepsPrimary test
+Exit: 1
+Tests: 1; failures: 1; errors: 0; skipped: 0
+Expected: fixed Web Log runtime stop wrapper with the first SQLException instance as cause; all three close attempts.
+Actual: IllegalArgumentException (Self-suppression not permitted) from WebLogApplicationRuntime.close at the second close.
+Note: RED method was renamed to scr133 after detecting the pre-existing PT-SCR-132 allocation; the test body and oracle were unchanged. No credentials or raw identifiers were recorded.
