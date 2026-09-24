@@ -1096,7 +1096,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 390}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 391}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -1872,9 +1872,10 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
                  "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
                  "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
-                 "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest")
+                 "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+                 "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(43, len(suites))
+        self.assertEqual(44, len(suites))
         self.assertEqual(suites[:26], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
@@ -2054,6 +2055,8 @@ class EvidenceSetTest(unittest.TestCase):
                       ("opsMq019LiveSixEmptyQueueMetricsAndApplicationDenial",
                        "opsMq020EveryCountAndByteBoundaryIncludingDlqAlert",
                        "opsMq021NullInvalidMetricsAndProviderFaultAreRedacted")))
+        groups.append(("dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest", 22,
+                      ("opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",)))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2082,7 +2085,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest": "PT-OPS-MQ",
                        "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest": "PT-OPS-MQ",
                        "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "PT-OPS-MQ",
-                       "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ",
+                       "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
@@ -2101,7 +2105,10 @@ class EvidenceSetTest(unittest.TestCase):
             for key, value in (("tests", "0"), ("name", "unknown"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
                 wrong = copy.deepcopy(suites); wrong[index].set(key, value)
                 with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
-            for key, value in (("classname", "unknown"), ("name", "unknown"), ("name", suite[1].get("name"))):
+            substitutions = [("classname", "unknown"), ("name", "unknown")]
+            if len(suite) > 1:
+                substitutions.append(("name", suite[1].get("name")))
+            for key, value in substitutions:
                 wrong = copy.deepcopy(suites); wrong[index][0].set(key, value)
                 with self.assertRaises(ValueError): launch.validate_reports(wrong, deployment)
         for wrong in ([], suites[:-1], suites + [suites[0]]):
@@ -2338,7 +2345,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(283, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(107, batch_ops)
+        self.assertEqual(108, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

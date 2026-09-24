@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -37,59 +38,83 @@ public final class ArtemisRoleReadinessClient {
           "view",
           "edit");
   private static final Set<String> FIELDS = fields();
-  private static final Map<String, Map<String, Set<String>>> APPROVED =
-      Map.of(
-          "nk.sync.request",
-              Map.of(
-                  "nk_web",
-                  Set.of("send"),
-                  "nk_api",
-                  Set.of("consume"),
-                  "nk_ops",
-                  Set.of("browse")),
-          "nk.sync.reply.web",
-              Map.of(
-                  "nk_web",
-                  Set.of("consume"),
-                  "nk_api",
-                  Set.of("send"),
-                  "nk_ops",
-                  Set.of("browse")),
-          "nk.async.work",
-              Map.of("nk_api", Set.of("send", "consume"), "nk_ops", Set.of("send", "browse")),
-          "nk.web.log",
-              Map.of(
-                  "nk_web",
-                  Set.of("send"),
-                  "nk_api",
-                  Set.of("consume"),
-                  "nk_ops",
-                  Set.of("browse")),
-          "nk.dead.letter",
-              Map.of(
-                  "nk_web",
-                  Set.of("send"),
-                  "nk_api",
-                  Set.of("send"),
-                  "nk_ops",
-                  Set.of("consume", "browse", "manage")),
-          "nk.expiry",
-              Map.of(
-                  "nk_mq_maintenance",
-                  Set.of("consume", "browse"),
-                  "nk_ops",
-                  Set.of("consume", "browse", "manage")),
-          "activemq.management.#",
-              Map.of(
-                  "nk_ops",
-                  Set.of(
-                      "send",
-                      "consume",
-                      "manage",
-                      "createAddress",
-                      "deleteAddress",
-                      "createNonDurableQueue",
-                      "deleteNonDurableQueue")));
+  private static final Map<String, Map<String, Set<String>>> APPROVED = approved();
+
+  private static Map<String, Map<String, Set<String>>> approved() {
+    var roles =
+        new HashMap<String, Map<String, Set<String>>>(
+            Map.of(
+                "nk.sync.request",
+                    Map.of(
+                        "nk_web",
+                        Set.of("send"),
+                        "nk_api",
+                        Set.of("consume"),
+                        "nk_ops",
+                        Set.of("browse")),
+                "nk.sync.reply.web",
+                    Map.of(
+                        "nk_web",
+                        Set.of("consume"),
+                        "nk_api",
+                        Set.of("send"),
+                        "nk_ops",
+                        Set.of("browse")),
+                "nk.async.work",
+                    Map.of("nk_api", Set.of("send", "consume"), "nk_ops", Set.of("send", "browse")),
+                "nk.web.log",
+                    Map.of(
+                        "nk_web",
+                        Set.of("send"),
+                        "nk_api",
+                        Set.of("consume"),
+                        "nk_ops",
+                        Set.of("browse")),
+                "nk.dead.letter",
+                    Map.of(
+                        "nk_web",
+                        Set.of("send"),
+                        "nk_api",
+                        Set.of("send"),
+                        "nk_ops",
+                        Set.of("consume", "browse", "manage")),
+                "nk.expiry",
+                    Map.of(
+                        "nk_mq_maintenance",
+                        Set.of("consume", "browse"),
+                        "nk_ops",
+                        Set.of("consume", "browse", "manage")),
+                "activemq.management.#",
+                    Map.of(
+                        "nk_ops",
+                        Set.of(
+                            "send",
+                            "consume",
+                            "manage",
+                            "createAddress",
+                            "deleteAddress",
+                            "createNonDurableQueue",
+                            "deleteNonDurableQueue"),
+                        "nk_mq_maintenance",
+                        Set.of(
+                            "send",
+                            "consume",
+                            "manage",
+                            "createAddress",
+                            "deleteAddress",
+                            "createNonDurableQueue",
+                            "deleteNonDurableQueue"))));
+    roles.put("mops.#", Map.of("nk_ops", Set.of("manage", "view", "edit")));
+    var view =
+        Map.of("nk_ops", Set.of("manage", "view"), "nk_mq_maintenance", Set.of("manage", "view"));
+    roles.put("mops.queue.nk.expiry.q.countMessages", view);
+    roles.put("mops.queue.nk.expiry.q.messageCount", view);
+    roles.put("mops.queue.nk.expiry.q.persistentSize", view);
+    roles.put(
+        "mops.queue.nk.expiry.q.removeMessages",
+        Map.of("nk_ops", Set.of("manage", "edit"), "nk_mq_maintenance", Set.of("manage", "edit")));
+    return Map.copyOf(roles);
+  }
 
   private final Reader reader;
 

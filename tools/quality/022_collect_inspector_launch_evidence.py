@@ -95,6 +95,8 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClien
     ("opsMq019LiveSixEmptyQueueMetricsAndApplicationDenial",
      "opsMq020EveryCountAndByteBoundaryIncludingDlqAlert",
      "opsMq021NullInvalidMetricsAndProviderFaultAreRedacted")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest", 22,
+    ("opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",)),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -203,7 +205,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "PT-OPS-MQ",
-                   "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ",
+                   "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -252,7 +255,8 @@ def main():
                 "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest": "batch",
                 "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": "batch",
-                "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "batch"}.get(cls, "api")
+                "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "batch",
+                "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "batch"}.get(cls, "api")
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
     coverage = {}

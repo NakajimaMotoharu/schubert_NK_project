@@ -202,7 +202,9 @@ Registry上限はWeb同期待機20、初期semaphore 12。上限時はMQ送信�
 Application roleはAddress/Queue create/delete、management、browse、arbitrary sendを禁止する。Management console/Jolokiaはloopback＋
 OS tunnel、strong credential、ADMIN app accountと別管理accountとする。Credentialをapplication log/command lineへ出さない。
 
-SSC-075: Ops専用Core management照会はArtemis `ClientRequestor`が`activemq.management.<UUID>`の一時・非durable reply Address/Queueを明示作成し、完了時に削除する。`nk_ops`だけに`activemq.management.#`内の`createAddress`/`deleteAddress`/`createNonDurableQueue`/`deleteNonDurableQueue`を許す。業務6 Address、`nk_web`/`nk_api`/`nk_mq_maintenance`には付与しない。恒久Queue作成/削除と管理namespace外のAddress作成/削除は許さず、global auto-create=falseを維持する。管理応答待ちは各request 2秒上限、null/失敗/cleanup不完了は固定redacted失敗でAPI起動へ進めない。実認証BrokerでOps正系とapp role拒否、2秒境界/一時Address/Queue cleanupをPTする。これは管理値照会の限定契約であり、§13全項目のreadiness完了を意味しない。
+SSC-075: Ops専用Core management照会はArtemis `ClientRequestor`が`activemq.management.<UUID>`の一時・非durable reply Address/Queueを明示作成し、完了時に削除する。`nk_ops`に`activemq.management.#`内の`createAddress`/`deleteAddress`/`createNonDurableQueue`/`deleteNonDurableQueue`を許す。業務6 Address、`nk_web`/`nk_api`には付与しない。`nk_mq_maintenance`の例外はSSC-076に限定する。恒久Queue作成/削除と管理namespace外のAddress作成/削除は許さず、global auto-create=falseを維持する。管理応答待ちは各request 2秒上限、null/失敗/cleanup不完了は固定redacted失敗でAPI起動へ進めない。実認証BrokerでOps正系とapp role拒否、2秒境界/一時Address/Queue cleanupをPTする。これは管理値照会の限定契約であり、§13全項目のreadiness完了を意味しない。
+
+SSC-076: Expiry保守専用`nk_mq_maintenance`だけは上記Ops管理照会の例外として、`activemq.management.#`内の一時・非durable reply Address/Queueの作成/削除・送受信を許し、管理電文RBACを有効にする。`mops.#`の全管理操作は`nk_ops`に限定し、保守roleには`nk.expiry.q`の`countMessages`/`messageCount`/`persistentSize`読取と`removeMessages`だけを個別許可する。業務Addressの作成/削除・他Queue/DLQの管理・アプリroleの管理は禁止し、空/null selectorを全件削除として渡さない。`nk_ops`の既存管理照会はRBACを有効化しても維持する。実Brokerで保守role正系、他Queue/アプリ拒否、一時reply cleanupを確認するまで本修正を完了扱いにしない。
 
 ## 11. DLQ metadata
 

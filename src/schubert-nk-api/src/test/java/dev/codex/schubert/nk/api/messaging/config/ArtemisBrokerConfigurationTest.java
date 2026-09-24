@@ -142,8 +142,20 @@ final class ArtemisBrokerConfigurationTest {
     expected.put("nk.web.log", Set.of("nk_web:S", "nk_api:C", "nk_ops:B"));
     expected.put("nk.dead.letter", Set.of("nk_web:S", "nk_api:S", "nk_ops:BCM"));
     expected.put("nk.expiry", Set.of("nk_mq_maintenance:BC", "nk_ops:BCM"));
-    expected.put("activemq.management.#", Set.of("nk_ops:CMSadnx"));
+    expected.put("activemq.management.#", Set.of("nk_ops:CMSadnx", "nk_mq_maintenance:CMSadnx"));
+    expected.put("mops.#", Set.of("nk_ops:Mve"));
+    expected.put(
+        "mops.queue.nk.expiry.q.countMessages", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
+    expected.put(
+        "mops.queue.nk.expiry.q.removeMessages", Set.of("nk_ops:Me", "nk_mq_maintenance:Me"));
+    expected.put(
+        "mops.queue.nk.expiry.q.messageCount", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
+    expected.put(
+        "mops.queue.nk.expiry.q.persistentSize", Set.of("nk_ops:Mv", "nk_mq_maintenance:Mv"));
     expected.put("#", Set.of());
+
+    assertTrue(configuration.isManagementMessageRbac());
+    assertEquals("mops", configuration.getManagementRbacPrefix());
 
     Map<String, Set<String>> actual =
         configuration.getSecurityRoles().entrySet().stream()
@@ -214,8 +226,12 @@ final class ArtemisBrokerConfigurationTest {
     }
     assertFalse(role.isCreateDurableQueue());
     assertFalse(role.isDeleteDurableQueue());
-    assertFalse(role.isEdit());
-    assertFalse(role.isView());
+    if (role.isView()) {
+      permissions.append('v');
+    }
+    if (role.isEdit()) {
+      permissions.append('e');
+    }
     return role.getName() + ":" + permissions;
   }
 

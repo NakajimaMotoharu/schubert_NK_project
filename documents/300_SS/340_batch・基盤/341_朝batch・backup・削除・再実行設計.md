@@ -300,6 +300,8 @@ SSC-049/PG-D-130: run executorは324 §12.7の単調時計30分とinterruptを�
 ## 9. Artemis Expiry cleanup
 
 1. Broker readinessと`nk.expiry.q` healthを確認。`nk_mq_maintenance`のLoadCredentialで管理APIへloopback接続。
+
+SSC-076: この保守専用credentialの管理電文はSS321 §10の`nk.expiry.q`個別RBACに限定する。`countMessages`/`removeMessages`へ渡すselectorは固定`_AMQ_ACTUAL_EXPIRY`と数値cutoffから組み立て、null/空を送らない。DLQ/他Queue/Broker全操作の管理権限は付与しない。権限の実Broker正負試験だけで本節の削除/再実行/永続記録を完了扱いにしない。
 2. Brokerが保持するexpiry timestampが`run_started_at - 7 days`より前のmessageをselectorでcount/byte見積り。
 3. Count/byte/cutoffを記録した後、同selectorをArtemis management operationでpurge。Queue/journal fileをOSから削除しない。
 4. 実行後countで削除差分を照合。DLQは対象にしない。

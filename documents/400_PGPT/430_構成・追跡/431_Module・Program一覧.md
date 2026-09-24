@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG243選択追記: `NK-OPS-001`/Artemis `broker.xml` management-message-rbacと`ArtemisRoleReadinessClient.verify`→PT-OPS-MQ-022（018/048～049）、API `ArtemisBrokerConfigurationTest`/PT-JMS-002。RD MQ001/002/009/010・OPS001～017、UI251§8、SS321§10/12・341§9、SSC-076/BUG-236/YKT-187、PG-D-243。保守credentialのExpiry個別管理だけ実Broker選択PASS、Batch391/静的0/coverage check、98負canary。実7日purge/DB後条件・正式48scope/hash/親起動は未完了。
+
 2026-09-24 PG242正式限定追記: `NK-OPS-001`/`ArtemisQueuePressureClient.assess`と共有`ArtemisManagementReadinessClient.queueMetric`→PT-OPS-MQ-019～021（018/046～047・evidence）。RD MQ001/002/009/010・SYS004、UI231/251/253、SS321§5.2/5.3/13・342§4、YKT-185、PG-D-242。正式`PT-WEB-20260924-35`/source`77fcddb8`で1829PT/48scope/hash/98負canary、Java6 module全4coverage/静的0。実Broker全6 Queue管理metricと件数/byte閾値、DLQ1件alert、app管理拒否を確認。起動阻止policy/full readiness・Expiry purge/Production credential/親起動・実NK CHR-L01は未完了。
 
 2026-09-24 PG241正式限定追記: `NK-OPS-001`/`ArtemisRoleReadinessClient.verify`と共有`ArtemisManagementReadinessClient.roles`→PT-OPS-MQ-016～018（018/044～045・evidence）。RD MQ001/002/009/010・SYS004、UI231/251/253、SS321§10/13・342§4、SSC-075/YKT-185、PG-D-241。正式`PT-WEB-20260924-34`/source`55def91f`で1826PT/48scope/hash/98負canary、Java6 module全4coverage/静的0、対象class全coverage。実Broker7 matchと各role/12 permission過不足、app管理拒否を確認。JAAS credential/全readiness/親起動・実NK CHR-L01は未完了。

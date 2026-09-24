@@ -29,6 +29,8 @@
     <disk-scan-period>5000</disk-scan-period>
     <id-cache-size>20000</id-cache-size>
     <persist-id-cache>true</persist-id-cache>
+    <management-message-rbac>true</management-message-rbac>
+    <management-rbac-prefix>mops</management-rbac-prefix>
 
     <acceptors>
       <acceptor name="core">tcp://127.0.0.1:61616?protocols=CORE</acceptor>
@@ -67,13 +69,34 @@
         <permission type="manage" roles="nk_ops"/>
       </security-setting>
       <security-setting match="activemq.management.#">
+        <permission type="manage" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="send" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="consume" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="createAddress" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="deleteAddress" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="createNonDurableQueue" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="deleteNonDurableQueue" roles="nk_ops,nk_mq_maintenance"/>
+      </security-setting>
+      <security-setting match="mops.#">
         <permission type="manage" roles="nk_ops"/>
-        <permission type="send" roles="nk_ops"/>
-        <permission type="consume" roles="nk_ops"/>
-        <permission type="createAddress" roles="nk_ops"/>
-        <permission type="deleteAddress" roles="nk_ops"/>
-        <permission type="createNonDurableQueue" roles="nk_ops"/>
-        <permission type="deleteNonDurableQueue" roles="nk_ops"/>
+        <permission type="view" roles="nk_ops"/>
+        <permission type="edit" roles="nk_ops"/>
+      </security-setting>
+      <security-setting match="mops.queue.nk.expiry.q.countMessages">
+        <permission type="manage" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="view" roles="nk_ops,nk_mq_maintenance"/>
+      </security-setting>
+      <security-setting match="mops.queue.nk.expiry.q.removeMessages">
+        <permission type="manage" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="edit" roles="nk_ops,nk_mq_maintenance"/>
+      </security-setting>
+      <security-setting match="mops.queue.nk.expiry.q.messageCount">
+        <permission type="manage" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="view" roles="nk_ops,nk_mq_maintenance"/>
+      </security-setting>
+      <security-setting match="mops.queue.nk.expiry.q.persistentSize">
+        <permission type="manage" roles="nk_ops,nk_mq_maintenance"/>
+        <permission type="view" roles="nk_ops,nk_mq_maintenance"/>
       </security-setting>
       <security-setting match="#"/>
     </security-settings>
