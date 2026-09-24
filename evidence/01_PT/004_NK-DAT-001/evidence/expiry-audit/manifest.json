@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-40",
-  "targetCommit": "c1512bf61d288dd8a08a7bd5cc2b47bdb04bd197",
+  "runId": "PT-WEB-20260924-41",
+  "targetCommit": "00d97082e1700d75c58f3142c8b501a57621613d",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T13:58:50+09:00",
-  "completedAt": "2026-09-24T14:11:05+09:00",
+  "startedAt": "2026-09-24T14:25:22+09:00",
+  "completedAt": "2026-09-24T14:37:46+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,18 +16,19 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "3572a4d0032328240d198cc520615b5be0acc38a9d8bfaebad84be8307c2439c",
+  "rawLogSha256": "f386768fb764945e6d05c2fdf4c6e3be4bf6c7512bd0b2178099eaa40b74cdb3",
   "programId": "NK-DAT-001",
-  "scopeResult": "PASS_EXPIRY_AUDIT_DDL_ONLY",
+  "scopeResult": "PASS_STAGED_EXPIRY_AUDIT_DDL_ONLY",
   "programComplete": false,
   "testIdMethods": {
     "PT-DB-016": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#expiryBatchRunAuditIsCompleteAndOtherStepsRemainUnchanged",
-    "PT-DB-017": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#legacySuccessfulExpiryAuditIsNotGuessedOrPartiallyMigrated"
+    "PT-DB-017": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#legacySuccessfulExpiryAuditIsNotGuessedOrPartiallyMigrated",
+    "PT-DB-018": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest#stagedExpiryAuditPreservesOldRowsAndUnknownAfter"
   },
   "failed": 0,
   "errors": 0,
   "skipped": 0,
-  "inputAndExpected": "PT-DB-016|V021 applied 21/21|expiry three columns timestamptz,bigint,bigint|SUCCESS before-after=success=target and failure=0|other step all null|partial/null/infinity/negative/reverse/mismatched 23514|batch allow; web-session deny\nPT-DB-017|V001..020 plus synthetic old CLEAN_EXPIRY SUCCESS|V021 abort|history remains 20|new columns remain 0|no inferred backfill\n",
+  "inputAndExpected": "PT-DB-016|current V001..022 applied 22/22|expiry three columns timestamptz,bigint,bigint|SUCCESS before-after=success=target and failure=0|other step all null|partial/null/infinity/negative/reverse/mismatched 23514|batch allow; web-session deny\nPT-DB-017|V001..020 plus synthetic old CLEAN_EXPIRY SUCCESS|V021 abort|history remains 20|new columns remain 0|no inferred backfill\nPT-DB-018|V021 partial before/NULL after rejects 23514|V022 stage accepts exact cutoff/before/target/byte with NULL after|SUCCESS requires actual after|FAILED unknown after remains NULL|same-day retry final counts independent|old V021 SUCCESS unchanged|22 migrations then rerun0\n",
   "actual": "Validated JUnit method-level PASS and SQLSTATE/catalog/legacy rollback assertions in the fixed source.",
   "javaCoverage": {
     "INSTRUCTION": {
@@ -60,13 +61,16 @@
     "violations": 0,
     "errors": 0
   },
-  "sqlCoverage": "064/PT-DB-016..017 independent schema, CHECK, role, legacy migration matrix; not Java JaCoCo",
+  "sqlCoverage": "064/066 PT-DB-016..018 independent final/staged CHECK, role, legacy migration and same-day replay matrix; not Java JaCoCo",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "a6fbe76a0ea1f048237e189a5520cdaf478fb14d901c1053e832ba2b2d2033b3",
+  "fullReactorManifestSha256": "5bc7a55f71ae3dfc341a89bebc6cfe315f86b38c54041aba5bef631269aa9201",
   "related": [
     "SSC-077",
+    "SSC-078",
     "BUG-237",
-    "YKT-188"
+    "BUG-238",
+    "YKT-188",
+    "YKT-189"
   ],
   "limitations": "No borrowed parent transaction, startup policy, same-run uncertain commit, actual NK CHR or IT/ST certificate.",
   "sourceFiles": [
@@ -75,22 +79,26 @@
       "sha256": "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e"
     },
     {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+      "sha256": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735"
+    },
+    {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
-      "sha256": "537e9abf62704f0e4aa0dde333dca0ca2db0dac55312ecccd75af75745967cf5"
+      "sha256": "0504f6cb0528aee8631bc503a78d0d131ecb9d2158d3e5a7f40d984a44aa2579"
     },
     {
       "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java",
-      "sha256": "eaae12200a695ad79a501e9314d28d288ce9e51872a1111cc677f53b8e2cc238"
+      "sha256": "a9d45b998a2ea6c3c59afc2f745ffa960d38b4cb2dc76c4d9c989efeb99cc8ee"
     }
   ],
   "files": [
     {
       "path": "input/independent-oracle.txt",
-      "sha256": "84bfe816c40bb927f8ab5cc42bf928a61083921385de74eb0c40f4d9c1b0fd76"
+      "sha256": "bb3ab20652667e7ae079c8817cf1ca712e7884ae2b64ca81e567b4cc992b0c8f"
     },
     {
       "path": "output/results.xml",
-      "sha256": "1bb19a451a5cbe433c5ed8b9e31c5f162fb49c95680c6fa549763117618d0a3c"
+      "sha256": "7dcc5e14bec24e18b39d62ef51be23e078053b215ee149351beed0d48112ed88"
     }
   ]
 }

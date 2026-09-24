@@ -1,2 +1,3 @@
-PT-DB-016|V021 applied 21/21|expiry three columns timestamptz,bigint,bigint|SUCCESS before-after=success=target and failure=0|other step all null|partial/null/infinity/negative/reverse/mismatched 23514|batch allow; web-session deny
+PT-DB-016|current V001..022 applied 22/22|expiry three columns timestamptz,bigint,bigint|SUCCESS before-after=success=target and failure=0|other step all null|partial/null/infinity/negative/reverse/mismatched 23514|batch allow; web-session deny
 PT-DB-017|V001..020 plus synthetic old CLEAN_EXPIRY SUCCESS|V021 abort|history remains 20|new columns remain 0|no inferred backfill
+PT-DB-018|V021 partial before/NULL after rejects 23514|V022 stage accepts exact cutoff/before/target/byte with NULL after|SUCCESS requires actual after|FAILED unknown after remains NULL|same-day retry final counts independent|old V021 SUCCESS unchanged|22 migrations then rerun0
