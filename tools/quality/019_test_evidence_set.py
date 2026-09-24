@@ -467,7 +467,7 @@ class EvidenceSetTest(unittest.TestCase):
 
     def test_authentication_resource_method_inventory(self):
         auth = module("auth_collector", "003_collect_auth_evidence.py")
-        methods = list(auth.RESOURCE_METHODS.values())
+        methods = list(auth.RESOURCE_METHODS.values()) + list(auth.PRODUCTION_LOGIN_METHODS.values())
         auth.validate_resource_method(methods)
         for wrong in ([], ["Other#method"]):
             with self.assertRaises(ValueError): auth.validate_resource_method(wrong)

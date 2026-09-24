@@ -1,10 +1,15 @@
 package dev.codex.schubert.nk.api.dispatch;
 
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.WebLogIngestService;
 import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
 import dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException;
 import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor;
+import dev.codex.schubert.nk.api.security.AuthContextCodec;
+import dev.codex.schubert.nk.api.security.LoginApplicationAssembly;
 import jakarta.jms.JMSContext;
+import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -28,6 +33,27 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
       ApiMessagingRuntime messaging, SyncRequestProcessor processor) {
     this.messaging = messaging;
     this.processor = processor;
+  }
+
+  /**
+   * Connects the real Login transaction graph to the receive group. Key-bearing codecs remain
+   * caller-owned and must outlive this runtime. Game-context and Log search are separate staged
+   * processors and must also be Production implementations before process readiness. PG254;
+   * PT-AUT-INBOX-009; SS311/312/314/324.
+   */
+  public static ApiLogPathApplicationRuntime startWithLogin(
+      Supplier<JMSContext> factory,
+      DataSource database,
+      FingerprintKeyRing fingerprints,
+      AuthContextCodec contexts,
+      ResponseSnapshotCodec snapshots,
+      SyncRequestProcessor gameContext,
+      SyncRequestProcessor logSearch,
+      Clock clock,
+      Consumer<CommittedFatalInboundException> onTerminal)
+      throws NoSuchAlgorithmException {
+    var login = LoginApplicationAssembly.create(fingerprints, contexts, snapshots, clock);
+    return start(factory, database, login::execute, gameContext, logSearch, clock, onTerminal);
   }
 
   public static ApiLogPathApplicationRuntime start(

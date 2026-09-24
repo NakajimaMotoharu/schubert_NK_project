@@ -17,10 +17,18 @@ RESOURCE_METHODS = {
     "PT-AUT-LOGOUT-INBOX-007": "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#providerIllegalArgumentOwnerAndCloseRollbackAllEffects",
 }
 
+PRODUCTION_LOGIN_METHODS = {
+    "PT-AUT-INBOX-007": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyAuthenticatesWithRealInboxSessionAndAudit",
+    "PT-AUT-INBOX-008": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyFailedLoginReplaysWithoutSecondAttempt",
+    "PT-AUT-INBOX-009": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionApiReceiveGroupConsumesRealBrokerLoginAndReplay",
+}
+
 
 def validate_resource_method(methods):
     if any(methods.count(method) != 1 for method in RESOURCE_METHODS.values()):
         raise ValueError("missing or duplicate authentication resource PT")
+    if any(methods.count(method) != 1 for method in PRODUCTION_LOGIN_METHODS.values()):
+        raise ValueError("missing or duplicate production Login PT")
 
 
 def main():
@@ -101,9 +109,9 @@ def main():
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",
                         "springSecurityCrypto": "7.1.1", "springCore": "7.0.9"},
         "modules": modules, "authenticationMethods": auth_methods,
-        "testIdsPassed": ["PT-AUT-001", "PT-AUT-002", "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04"],
+        "testIdsPassed": ["PT-AUT-001", "PT-AUT-002", "PT-AUT-007-R01", "PT-AUT-007-R02", "PT-AUT-007-R03", "PT-AUT-007-R04", *PRODUCTION_LOGIN_METHODS],
         "testIdsPartial": {"PT-AUT-003": "policy, persisted User/IP counters and Login hash-skip/threshold/audit plus anonymous Inbox/JDBC/JMS replay passed; full dispatcher/bootstrap/HTTP connection remains",
-                           "PT-AUT-004": "real PBKDF2 Login/counter/session/critical-audit and anonymous HMAC/Inbox transaction, dummy work, fault rollback, 100 concurrent redeliveries and actual JDBC/JMS commit boundaries passed; full dispatcher/bootstrap/HTTP connection remains",
+                           "PT-AUT-004": "real PBKDF2 Login/counter/session/critical-audit and anonymous HMAC/Inbox transaction, dummy work, fault rollback, 100 concurrent redeliveries and actual JDBC/JMS commit boundaries passed; Production Login graph and API sync receive group are connected, but Web POST/full bootstrap/CHR remain",
                            "PT-AUT-005": "ASCII SHA256, AES-GCM, Login issuance and immutable Inbox replay passed; Web recovery and expiry orchestration remain",
                            "PT-AUT-006": "session issuance/oldest replacement/tie/expiry/100 requests and real Login transaction, atomic replacement audit and fault rollback passed; wire and CHR connection remains",
                            "PT-AUT-007": "real PostgreSQL verifier/idle/role/state/rollback/concurrency/faults passed; dispatcher/wire error mapping remains",

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.security;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime;
 import dev.codex.schubert.nk.api.dispatch.JdbcSyncRequestProcessor;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
@@ -133,6 +134,134 @@ final class LoginInboxServiceTest {
     passwordChecks.set(0);
     observedPassword.set(null);
     ids.set(1000);
+  }
+
+  @Test
+  void productionAssemblyAuthenticatesWithRealInboxSessionAndAudit() throws Exception {
+    var login =
+        LoginApplicationAssembly.create(
+            keys, contexts, snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
+    byte[] response =
+        call(login, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1));
+    assertEquals(688, response.length);
+    assertEquals("SCHBNK01", text(response, 0, 8));
+    assertEquals("LGNRSP01", text(response, 11, 8));
+    assertEquals("0000", text(response, 208, 4));
+    assertEquals(REQUEST.toString(), text(response, 60, 36));
+    assertEquals(FIRST_STAMP, text(response, 96, 17));
+    assertEquals("利用者", text(response, 256, 64).stripTrailing());
+    assertEquals("USER ", text(response, 320, 5));
+    assertNotEquals(REQUEST, UUID.fromString(text(response, 24, 36)));
+    assertEquals(64, text(response, 325, 64).stripTrailing().length());
+    assertEffects(1, 1, 1);
+    assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
+    assertEquals(
+        1,
+        scalar(
+            "select count(*) from schubert.request_inbox where message_id='00000000-0000-0000-0000-000000000065'"
+                + " and processing_state='COMPLETED' and result_ref_type='AUTH_SESSION'"));
+  }
+
+  @Test
+  void productionAssemblyFailedLoginReplaysWithoutSecondAttempt() throws Exception {
+    assertThrows(
+        NullPointerException.class,
+        () -> LoginApplicationAssembly.create(null, contexts, snapshots, Clock.systemUTC()));
+    assertThrows(
+        NullPointerException.class,
+        () -> LoginApplicationAssembly.create(keys, null, snapshots, Clock.systemUTC()));
+    assertThrows(
+        NullPointerException.class,
+        () -> LoginApplicationAssembly.create(keys, contexts, null, Clock.systemUTC()));
+    assertThrows(
+        NullPointerException.class,
+        () -> LoginApplicationAssembly.create(keys, contexts, snapshots, null));
+    assertEffects(0, 0, 0);
+    var login =
+        LoginApplicationAssembly.create(
+            keys, contexts, snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
+    var input = request("利用者", "synthetic-wrong", "127.0.0.1", REQUEST);
+    byte[] first = call(login, input, NOW.minusSeconds(1));
+    byte[] replay = call(login, input, NOW);
+    assertEquals("0101", text(first, 208, 4));
+    assertEquals("0101", text(replay, 208, 4));
+    assertEquals("LGNRSP01", text(first, 11, 8));
+    assertEquals("LGNRSP01", text(replay, 11, 8));
+    assertEquals(FIRST_STAMP, text(first, 96, 17));
+    assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(1, scalar("select failed_count from schubert.app_users where id=7"));
+    assertEquals(1, scalar("select count(*) from schubert.request_inbox"));
+    assertEquals(1, scalar("select count(*) from schubert.app_logs"));
+  }
+
+  @Test
+  void productionApiReceiveGroupConsumesRealBrokerLoginAndReplay(@TempDir Path brokerRoot)
+      throws Exception {
+    Configuration configuration;
+    try (var file = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
+      configuration = new FileConfigurationParser().parseMainConfig(file);
+    }
+    configuration
+        .setPagingDirectory(brokerRoot.resolve("paging").toString())
+        .setBindingsDirectory(brokerRoot.resolve("bindings").toString())
+        .setJournalDirectory(brokerRoot.resolve("journal").toString())
+        .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
+        .setSecurityEnabled(false)
+        .clearAcceptorConfigurations()
+        .addAcceptorConfiguration("component", "vm://0");
+    var broker = new EmbeddedActiveMQ().setConfiguration(configuration).start();
+    var terminal = new AtomicInteger();
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var replies =
+            observer.createConsumer(
+                new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue()));
+        var runtime =
+            ApiLogPathApplicationRuntime.startWithLogin(
+                () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                source(database::api),
+                keys,
+                contexts,
+                snapshots,
+                ignored -> {
+                  throw new AssertionError("game route is not part of Login PT");
+                },
+                ignored -> {
+                  throw new AssertionError("log route is not part of Login PT");
+                },
+                Clock.fixed(NOW, ZoneOffset.UTC),
+                ignored -> terminal.incrementAndGet())) {
+      assertTrue(runtime.ready());
+      sendLogin(producer, new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()));
+      assertBrokerLoginReply(replies.receive(5_000), "0000");
+      assertEffects(1, 1, 1);
+      sendLogin(producer, new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()));
+      assertBrokerLoginReply(replies.receive(5_000), "0200");
+      assertEffects(1, 1, 1);
+      assertEquals(0, terminal.get());
+      assertTrue(runtime.ready());
+    } finally {
+      broker.stop();
+    }
+  }
+
+  private static void assertBrokerLoginReply(Message message, String result) throws JMSException {
+    assertNotNull(message);
+    assertTrue(message instanceof BytesMessage);
+    var bytesMessage = (BytesMessage) message;
+    assertEquals(688, bytesMessage.getBodyLength());
+    byte[] body = new byte[688];
+    try {
+      assertEquals(688, bytesMessage.readBytes(body));
+      assertEquals("SCHBNK01", text(body, 0, 8));
+      assertEquals("LGNRSP01", text(body, 11, 8));
+      assertEquals(REQUEST.toString(), text(body, 60, 36));
+      assertEquals(result, text(body, 208, 4));
+      UUID.fromString(text(body, 24, 36));
+    } finally {
+      Arrays.fill(body, (byte) 0);
+    }
   }
 
   @Test
