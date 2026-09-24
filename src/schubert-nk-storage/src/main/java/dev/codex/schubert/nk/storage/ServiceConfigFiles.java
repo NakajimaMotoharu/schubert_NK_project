@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * NK-OPS-001; RD SYS-002/004; UI243/253; SS311/342/343 §2/4; PG275/PT-OPS-CFGFILE-001..007.
  */
 @NullMarked
-public final class ServiceConfigFiles {
+public final class ServiceConfigFiles implements NonSecretConfigSource {
   private static final Path PRODUCTION_ROOT = Path.of("/etc/schubert-nk");
   private static final int MAX_BYTES = 16_384;
   private static final ServiceConfigFiles PRODUCTION =
@@ -96,6 +96,7 @@ public final class ServiceConfigFiles {
     return new ServiceConfigFiles(root, identity, calls, io).read(service);
   }
 
+  @Override
   public Contents read(Service service) throws StorageIoException {
     Objects.requireNonNull(service, "service");
     try {

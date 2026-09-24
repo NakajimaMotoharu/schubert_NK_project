@@ -130,11 +130,19 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ServiceConfigFilesTest", 1
      "opsCfgfile003LengthEncodingAndModeBoundaries", "opsCfgfile004RootAndFileIdentityPolicy",
      "opsCfgfile005IndependentAttributeMutationMatrix", "opsCfgfile006NullConcurrentAndOwnedCloseFailure",
      "opsCfgfile007MidReadFaultsAndInodeDrift")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
+    ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
+     "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads")),
+    ("dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest", 1,
+    ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
+     "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads")))
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig"),
-                    ("storage", "dev/codex/schubert/nk/storage/ServiceConfigFiles"))
+                    ("storage", "dev/codex/schubert/nk/storage/ServiceConfigFiles"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader"),
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -259,7 +267,9 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
                    "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG",
                    "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG",
-                   "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
+                   "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
+                   "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -329,6 +339,7 @@ def main():
     if args.deployment:
         sources += [repo / ("src/schubert-nk-" + module) / "src/main/java" / (subject + ".java")
                     for module, subject in RUNTIME_SUBJECTS]
+        sources += [repo / "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java"]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/deployment/config" / name
                     for name in ("common.yml.template", "api.yml.template", "web.yml.template")]
@@ -390,7 +401,11 @@ def main():
                      "062_NK-OPS-001_Web非秘密設定単体テスト仕様書.md",
                      "063_NK-OPS-001_Web非秘密設定実行結果.md",
                      "064_NK-OPS-001_固定設定実file読取単体テスト仕様書.md",
-                     "065_NK-OPS-001_固定設定実file読取実行結果.md"):
+                     "065_NK-OPS-001_固定設定実file読取実行結果.md",
+                     "066_NK-OPS-001_API設定読取結線単体テスト仕様書.md",
+                     "067_NK-OPS-001_API設定読取結線実行結果.md",
+                     "068_NK-OPS-001_Web設定読取結線単体テスト仕様書.md",
+                     "069_NK-OPS-001_Web設定読取結線実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -462,6 +477,8 @@ def main():
         manifest["webNonSecretConfigOracle"] = "062/PT-OPS-WEB-CFG-001..006: independent SS343 15-key sorted UTF-8 key=value LF SHA-256 vector and shipped common/web YAML; defaults→common→Web merge, fixed session/max-range/loopback, port distinctness, reply 100..2000ms, wait/max/streams bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified."
         manifest["related"] += ["PG-D-275", "BUG-254", "BUG-255", "PT-OPS-CFGFILE-001..007"]
         manifest["serviceConfigFileOracle"] = "064/PT-OPS-CFGFILE-001..007: independent literal common/api/web UTF-8 bytes; fixed names and root:schubert 0750 / file0640 single-link metadata, same device and held-inode before/after, 1..16384-byte bounds, symlink/nonregular/missing/invalid UTF-8/identity drift and injected mid-read faults, null/concurrent/owned-close checks. Actual account/ACL/filesystem/env/credential/cross-file atomic rollout, Java process integration and readiness are unverified."
+        manifest["related"] += ["PG-D-276", "PT-OPS-API-LOAD-001..004", "PT-OPS-WEB-LOAD-001..004"]
+        manifest["configLoaderOracle"] = "066/068: independent common DEBUG and API/Web fixed service layer vectors; exact API or Web read once, parser result, source checked failure identity vs fixed malformed YAML, null contracts and32 fresh concurrent reads. Immutable production factory uses fixed ServiceConfigFiles. Actual external Java main/OS/credential/DB/JMS/readiness and NK CHR are unverified."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

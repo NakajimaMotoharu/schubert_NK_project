@@ -2255,6 +2255,12 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCfgfile003LengthEncodingAndModeBoundaries", "opsCfgfile004RootAndFileIdentityPolicy",
                         "opsCfgfile005IndependentAttributeMutationMatrix", "opsCfgfile006NullConcurrentAndOwnedCloseFailure",
                         "opsCfgfile007MidReadFaultsAndInodeDrift")))
+        groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
+                       ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
+                        "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads")))
+        groups.append(("dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest", 1,
+                       ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
+                        "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]
@@ -2301,7 +2307,9 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
                        "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG",
                        "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG",
-                       "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
+                       "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
+                       "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
