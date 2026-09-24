@@ -1,0 +1,121 @@
+{
+  "runId": "PT-WEB-20260924-46",
+  "targetCommit": "536488e8100dfb284fd044188a22f24c924721dc",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-24T17:09:21+09:00",
+  "completedAt": "2026-09-24T17:21:42+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "node": "24.19.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "9e568442da6ee35264c0d883f08e414a0d0f2a8932a728ec209db976c0040fa7",
+  "programId": "NK-MSG-001",
+  "testIds": {
+    "PT-JMS-021": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest#jms021SameProviderFailureOnCommitAndRollbackPreservesPrimaryIdentity"
+  },
+  "scopeResult": "PASS_JMS_RESOURCE_COMPOUND_UNIT_ONLY",
+  "programComplete": false,
+  "coverage": {
+    "dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 108
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 35
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "related": [
+    "PG251",
+    "BUG-242",
+    "YKT-154",
+    "RD MQ-003/004/006/008",
+    "UI231/242",
+    "SS312/321/324",
+    "442"
+  ],
+  "limitations": "Other JMS/JDBC/IO owners, Production startup, real NK CHR and IT/ST remain unverified.",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "7dbc82e31f63f88148ff2f3f71b3c603fec2078023fb4adb97daad73b49c92c9",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "sha256": "55a026253a6ecb3277bdc4e1e7cf35b93abb8528f81da8fa722988150e196a2f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumerTest.java",
+      "sha256": "484d80efe1b2b21ddd2af468afd5717547378571057e0d5c26c128f7db096bc8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java",
+      "sha256": "ced9c8e1eb5e2ea8e21d7398c0da76eeb89a96ff4e5824cd0b414d5d43379bee"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcherTest.java",
+      "sha256": "da775c5a2f7f28976ebf61fbbe6b977ad3d60f60b0a1ad68cff06022dcbc1bc1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+      "sha256": "e33e8fa95a59034b50ca019d508466653e8eb99cb59c4dfc5358545b5a06ecad"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+      "sha256": "94daf0d9a939d89ff41daad552db6ea2a447d8c7bc689c0a3e137320269dc0d2"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/class-counters.json",
+      "sha256": "289990fa72fb68d19040009adb947148e2b5b9af044497688a23dfa2afd1ada3"
+    },
+    {
+      "path": "input/oracle.json",
+      "sha256": "71fe92db98cd0a5ca2ef4ffca398350888f97ed5aebd0456f82af26b9408113e"
+    },
+    {
+      "path": "logs/001_NK-MSG-001_単体テスト仕様書.md",
+      "sha256": "2e872bd167d8cd6e91b0e1545edee09f6d0b1c4a9e66b4b3aff4f0897e9b5058"
+    },
+    {
+      "path": "logs/002_NK-MSG-001_実行結果.md",
+      "sha256": "6db2ffc6c3ed7c8f931063e2cc92741a06f472b57f31cfd7826b20d0f6925088"
+    },
+    {
+      "path": "output/PT-JMS-021-BUG-242-red.txt",
+      "sha256": "49c3bfe0fc95a90e850410637b0d547d6401c9fdd2eee1012bea5d7368b8eb37"
+    },
+    {
+      "path": "output/results.xml",
+      "sha256": "dbec9b2040edaf8c9bfb543bce21309303a5597bb4c8b4e0bf060a543b549fe0"
+    }
+  ]
+}
