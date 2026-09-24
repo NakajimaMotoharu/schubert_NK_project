@@ -225,6 +225,41 @@ final class ApiDependencyReadinessTest {
     assertEquals(1, closed.get());
   }
 
+  @Test
+  void apiReadinessFatalDatabaseCloseCannotBeDowngradedToOrdinaryUnavailable() {
+    SQLException inspection = new SQLException("synthetic private database failure");
+    AssertionError fatal = new AssertionError("synthetic owned database close failure");
+    var closed = new AtomicInteger();
+    var brokerCalls = new AtomicInteger();
+    var database =
+        source(
+            () ->
+                proxy(
+                    Connection.class,
+                    (ignored, method, args) -> {
+                      if (method.getName().equals("isValid")) throw inspection;
+                      if (method.getName().equals("close")) {
+                        closed.incrementAndGet();
+                        throw fatal;
+                      }
+                      throw new AssertionError(method.getName());
+                    }));
+    AssertionError observed =
+        assertThrows(
+            AssertionError.class,
+            () ->
+                new ApiDependencyReadiness(
+                        database,
+                        () -> {
+                          brokerCalls.incrementAndGet();
+                          return null;
+                        })
+                    .verify());
+    assertSame(fatal, observed);
+    assertEquals(1, closed.get());
+    assertEquals(0, brokerCalls.get());
+  }
+
   private static Connection connection(
       boolean valid, boolean inspectFails, boolean closeFails, AtomicInteger closes) {
     return proxy(

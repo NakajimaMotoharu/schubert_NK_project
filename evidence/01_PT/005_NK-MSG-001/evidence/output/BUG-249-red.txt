@@ -1,0 +1,7 @@
+BUG-249 / PT-JMS-023-A / 2026-09-25 / source before fix
+Command: Java 25 Maven offline, -pl src/schubert-nk-api -Dtest=ApiDependencyReadinessTest test
+Exit: 1; tests: 9; failures: 1; errors: 0; skipped: 0
+Fixture: synthetic JDBC Connection; isValid throws ordinary SQLException; close throws distinct fatal Error.
+Expected: original fatal Error identity; close 1; broker acquisition 0; no startup success.
+Actual: fixed IllegalStateException(API database unavailable); fatal Error suppressed and hidden.
+No raw JDBC data, credential, password, token, session, or private provider diagnostics stored.
