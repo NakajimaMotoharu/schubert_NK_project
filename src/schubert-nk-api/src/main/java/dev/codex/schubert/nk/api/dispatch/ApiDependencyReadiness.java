@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
  * Borrowed DB/JMS connectivity admission before API consumers start. A JMS consumer attachment can
  * be lazy: SS321 management verification of topology, ACL, journal, disk and queue thresholds is a
  * separate mandatory gate. Trace: NK-MSG-001/002; RD MQ-001/003/006/008, SYS-004; UI212/231/252;
- * SS311/312/321/342; PG234/266, PT-JMS-019/022, BUG-248.
+ * SS311/312/321/342; PG234/266/268, PT-JMS-019/022/023, BUG-248/249.
  */
 public final class ApiDependencyReadiness {
   private final DataSource database;
@@ -27,9 +27,24 @@ public final class ApiDependencyReadiness {
 
   /** Neither a DB mutation nor JMS message consumption; all borrowed resources close on failure. */
   public void verify() {
-    try (Connection connection =
-        Objects.requireNonNull(database.getConnection(), "JDBC connection")) {
-      if (!connection.isValid(2)) throw new IllegalStateException("invalid JDBC connection");
+    try {
+      Connection connection = Objects.requireNonNull(database.getConnection(), "JDBC connection");
+      @Nullable Throwable primary = null;
+      try {
+        if (!connection.isValid(2)) throw new IllegalStateException("invalid JDBC connection");
+      } catch (SQLException | RuntimeException | Error failure) {
+        primary = failure;
+        throw failure;
+      } finally {
+        try {
+          connection.close();
+        } catch (SQLException | RuntimeException | Error closing) {
+          // The DB probe has the same owned-resource fatal precedence as the JMS probe below.
+          if (primary == null || closing instanceof Error && !(primary instanceof Error)) {
+            throw closing;
+          }
+        }
+      }
     } catch (SQLException | RuntimeException failure) {
       throw new IllegalStateException("API database unavailable");
     }

@@ -260,6 +260,48 @@ final class ApiDependencyReadinessTest {
     assertEquals(0, brokerCalls.get());
   }
 
+  @Test
+  void apiReadinessOrdinaryDatabaseInspectionAndCloseFailuresRemainRedacted() {
+    SQLException inspection = new SQLException("synthetic private database failure");
+    SQLException closeFailure = new SQLException("synthetic private close failure");
+    var closed = new AtomicInteger();
+    var database = source(() -> failingDatabase(inspection, closeFailure, closed));
+    var observed =
+        assertThrows(
+            IllegalStateException.class,
+            () -> new ApiDependencyReadiness(database, () -> null).verify());
+    assertEquals("API database unavailable", observed.getMessage());
+    assertNull(observed.getCause());
+    assertEquals(1, closed.get());
+  }
+
+  @Test
+  void apiReadinessFatalDatabaseInspectionRetainsIdentityEvenWhenCloseAlsoFatal() {
+    AssertionError inspection = new AssertionError("synthetic database inspection failure");
+    AssertionError closeFailure = new AssertionError("synthetic database close failure");
+    var closed = new AtomicInteger();
+    var database = source(() -> failingDatabase(inspection, closeFailure, closed));
+    AssertionError observed =
+        assertThrows(
+            AssertionError.class, () -> new ApiDependencyReadiness(database, () -> null).verify());
+    assertSame(inspection, observed);
+    assertEquals(1, closed.get());
+  }
+
+  private static Connection failingDatabase(
+      Throwable inspection, Throwable closeFailure, AtomicInteger closed) {
+    return proxy(
+        Connection.class,
+        (ignored, method, args) -> {
+          if (method.getName().equals("isValid")) throw inspection;
+          if (method.getName().equals("close")) {
+            closed.incrementAndGet();
+            throw closeFailure;
+          }
+          throw new AssertionError(method.getName());
+        });
+  }
+
   private static Connection connection(
       boolean valid, boolean inspectFails, boolean closeFails, AtomicInteger closes) {
     return proxy(
