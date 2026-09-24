@@ -8,5 +8,12 @@
     "duplicate": "second API callback, source_message_id row remains 1",
     "terminalCallbacks": 0
   },
-  "limitations": "Actual NK process startup and CHR-L01 not covered."
+  "limitations": "Actual NK process startup and CHR-L01 not covered.",
+  "jdbcResource": {
+    "source": "SS324 section 9/332 and Java Throwable self-suppression contract",
+    "sameFailure": "original SQL exception identity, one rollback and close, no suppression",
+    "distinctFailure": "rollback and close exceptions remain secondary in order",
+    "fatalRollback": "fatal identity with original SQL failure suppressed, no self-suppression",
+    "fatalClose": "fatal identity with original SQL failure suppressed"
+  }
 }

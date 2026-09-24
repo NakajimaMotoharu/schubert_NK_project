@@ -1,0 +1,9 @@
+BUG-246 / PT-IDEM-012-R02 / pre-fix RED (not certified)
+Date: 2026-09-24 JST
+Selected test: WebLogDispatcherTest#idem012r02SameJdbcFailureAtClaimRollbackAndClosePreservesPrimary
+Command: Maven offline, JDK25.0.4, -pl src/schubert-nk-web -Dtest=<selected method> test
+Exit: 1; tests: 1; failures: 1; errors: 0; skipped: 0
+Expected: original SQLException identity, rollback once, close once, no self-suppression.
+Actual: IllegalArgumentException: Self-suppression not permitted.
+Independent source: SS324/332 transaction contract and Java Throwable identity rule.
+No raw JDBC URL, credential, SQL bind, session, token, cookie or database rows retained.

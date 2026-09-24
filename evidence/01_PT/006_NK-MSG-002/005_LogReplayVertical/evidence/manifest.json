@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-62",
-  "targetCommit": "fa6be989f4cc71d65b58ab2bddda90612f9292b3",
+  "runId": "PT-WEB-20260924-63",
+  "targetCommit": "65f996055843b49d87e089989f00357864d1254d",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T22:46:07+09:00",
-  "completedAt": "2026-09-24T22:58:16+09:00",
+  "startedAt": "2026-09-24T23:19:48+09:00",
+  "completedAt": "2026-09-24T23:31:58+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,24 +16,37 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "394d1de2b7f5c0aed5b206515b0efcea956dc13f7f07dd53a39d34b0305b82bb",
+  "rawLogSha256": "0f3ec9e085577887bf1583ddb065f866c1ba1417cf420d4eb7cbe11b793ad6de",
   "programId": "NK-MSG-002",
   "testIds": {
-    "PT-IDEM-016": "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest#idem016WebOutboxRetriesIntoApiProjectionExactlyOnce"
+    "PT-IDEM-016": "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest#idem016WebOutboxRetriesIntoApiProjectionExactlyOnce",
+    "PT-IDEM-012-R02": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r02SameJdbcFailureAtClaimRollbackAndClosePreservesPrimary",
+    "PT-IDEM-012-R03": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r03DistinctRollbackAndCloseFailuresRemainSecondary",
+    "PT-IDEM-012-R04": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r04RollbackFatalAndSameCloseFatalRemainFatal",
+    "PT-IDEM-012-R05": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r05CloseFatalAfterClaimFailureDoesNotHidePrimary"
   },
-  "scopeResult": "PASS_REAL_LOG_REPLAY_VERTICAL_UNIT_ONLY",
+  "scopeResult": "PASS_REAL_LOG_REPLAY_AND_JDBC_RESOURCE_UNIT_ONLY",
   "programComplete": false,
   "failed": 0,
   "errors": 0,
   "skipped": 0,
   "expected": {
-    "firstSend": "ERROR/attempt1/JMS_SEND_FAILURE/API row0",
-    "beforeDue": "no claim at due minus 1 microsecond",
-    "retry": "SENT/attempt1/API WEB|REQUEST|HTTP_REQUEST_COMPLETED row1",
-    "duplicate": "second API callback, source_message_id row remains 1",
-    "terminalCallbacks": 0
+    "vertical": {
+      "firstSend": "ERROR/attempt1/JMS_SEND_FAILURE/API row0",
+      "beforeDue": "no claim at due minus 1 microsecond",
+      "retry": "SENT/attempt1/API WEB|REQUEST|HTTP_REQUEST_COMPLETED row1",
+      "duplicate": "second API callback, source_message_id row remains 1",
+      "terminalCallbacks": 0
+    },
+    "jdbcResource": {
+      "source": "SS324 section 9/332 and Java Throwable self-suppression contract",
+      "sameFailure": "original SQL exception identity, one rollback and close, no suppression",
+      "distinctFailure": "rollback and close exceptions remain secondary in order",
+      "fatalRollback": "fatal identity with original SQL failure suppressed, no self-suppression",
+      "fatalClose": "fatal identity with original SQL failure suppressed"
+    }
   },
-  "actual": "All independent JUnit SQL/JMS assertions passed",
+  "actual": "All independent JUnit SQL/JMS/Resource assertions passed",
   "coverage": {
     "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository": {
       "INSTRUCTION": {
@@ -63,23 +76,23 @@
     },
     "dev/codex/schubert/nk/web/logging/WebLogDispatcher": {
       "INSTRUCTION": {
-        "covered": 172,
+        "covered": 223,
         "missed": 0
       },
       "BRANCH": {
-        "covered": 8,
+        "covered": 18,
         "missed": 0
       },
       "LINE": {
-        "covered": 44,
+        "covered": 61,
         "missed": 0
       },
       "COMPLEXITY": {
-        "covered": 11,
+        "covered": 17,
         "missed": 0
       },
       "METHOD": {
-        "covered": 7,
+        "covered": 8,
         "missed": 0
       },
       "CLASS": {
@@ -190,15 +203,20 @@
   },
   "related": [
     "PG253",
+    "PG264",
     "PT-IDEM-016",
+    "PT-IDEM-012-R02..R05",
+    "BUG-246",
+    "YKT-154",
     "RD MQ-006/008/010/MON-003/004/005",
     "UI231/235/242/251",
     "SS312/321/324/331/332/351/352"
   ],
   "limitations": "Actual NK process startup and CHR-L01 not covered.",
   "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "d081d7690059215aaeb24ef7cefbb02500f4dcc8a21038c3b7d02a83ac17dcc1",
-  "junitReportSha256": "c5b5fea60b1576c776c4898eac7e3d780833e7c971f37fb8f7b29d2399efea3b",
+  "fullReactorManifestSha256": "7d865b316c56562f06860890e1f2e73ffdfc61761cdfc650a7a9a16a78bdc63f",
+  "junitReportSha256": "da6b5d1a0bb9b0168925327e6a7932fd9c141814afdaf25d1b4e8ae2379bd672",
+  "resourceJunitReportSha256": "f85a09fd79bf1584daad1f6539595d73b1c5dc76f8c43289529d1436349e2e77",
   "sourceFiles": [
     {
       "path": "src/schubert-nk-web/pom.xml",
@@ -213,8 +231,12 @@
       "sha256": "560d09a73c681cc2ff35a106cfae6457cdbd24a94923ae84885c84be1f5903ae"
     },
     {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+      "sha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+    },
+    {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
-      "sha256": "994e1ce2780c9b6c795e4e2404810ef19940d12ac87c9a902bb7f01782684bd8"
+      "sha256": "8f0f8c34add12f62da5b1f2def4d86127f97dae350dfa79f277a68cada498ac8"
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
@@ -240,11 +262,19 @@
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "2e2bda49078a02b6044f1bf34f7bbed8ac7441ad3c639a3c4e9e074fc72d8f1c"
+      "sha256": "8e5bc32d26c4c0d6ab9335ae467ecaf06a66ba9f07f59262a8ee7353e36655fd"
     },
     {
       "path": "input/oracle.json",
-      "sha256": "b7881de3cf73628b7c73ac4cbc7a8118bfb1867f7172b8d13efc8a4d473860c0"
+      "sha256": "780c321147e0e0f33c2bb129ada2bed5cb1d754f6278d3dc067bfb30517c5f18"
+    },
+    {
+      "path": "logs/001_NK-MSG-002_単体テスト仕様書.md",
+      "sha256": "96ecad28842f9906297e57bf4bcc8114e563171397dc21f481fe69a01412efe9"
+    },
+    {
+      "path": "logs/002_NK-MSG-002_実行結果.md",
+      "sha256": "587912428e7763da05d61c950dc4670adf8f1cfd71ff7c838bfa72d9efb7b79a"
     },
     {
       "path": "logs/005_Log再送縦結線単体テスト仕様書.md",
@@ -255,8 +285,12 @@
       "sha256": "14b06464c03fa62e30f5a8f18d2e0696ab6e088b7e7b8f063cbb4cf7bce9de7d"
     },
     {
+      "path": "output/BUG-246-red.txt",
+      "sha256": "b5a370ccee2cb90e794f6f1b9d385e32ecf93102b5cbf17af79280cda3e77133"
+    },
+    {
       "path": "output/results.xml",
-      "sha256": "b1ea755e3bd5b8a4f6cdb68c09a3a118946e4a4f4834f3ff719b06b63eee7388"
+      "sha256": "fc9322ad94a45b68219c7b77989c5a547b63dc877ebfa99ad5adcbff905cfc3d"
     }
   ]
 }
