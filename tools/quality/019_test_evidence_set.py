@@ -2246,6 +2246,10 @@ class EvidenceSetTest(unittest.TestCase):
                        ("opsApiCfg001IndependentDefaultsAndCanonicalHash", "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
                         "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures", "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
                         "opsApiCfg005NullUnknownAndConcurrentDeterminism", "opsApiCfg006ShippedTemplatesMatchApprovedDefaults")))
+        groups.append(("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest", 1,
+                       ("opsWebCfg001IndependentDefaultsAndCanonicalHash", "opsWebCfg002LayeredRangesAndScalarTypes",
+                        "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues", "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
+                        "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2281,7 +2285,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest": "PT-OPS-SVC",
                        "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest": "PT-OPS-DBPOOL",
                        "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
-                       "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG",
+                       "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

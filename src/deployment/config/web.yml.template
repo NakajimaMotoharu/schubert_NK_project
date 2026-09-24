@@ -1,0 +1,14 @@
+# Non-secret Web settings only. Credentials use systemd LoadCredential, never YAML.
+# SS343 §4–5; PG273/PT-OPS-WEB-CFG-006.
+"nk.web.http.address": "127.0.0.1"
+"nk.web.http.port": "8080"
+"nk.web.management.port": "8081"
+"nk.web.mq.reply-timeout": "2s"
+"nk.web.mq.wait.initial": "12"
+"nk.web.mq.wait.max": "20"
+"nk.web.session.idle-timeout": "8h"
+"nk.web.session.max-per-user": "2"
+"nk.web.storage.asset-root": "/srv/schubert-nk/data/assets"
+"nk.web.storage.transfer-root": "/srv/schubert-nk/data/transfer"
+"nk.web.media.max-streams": "20"
+"nk.web.media.max-range-bytes": "1048576"

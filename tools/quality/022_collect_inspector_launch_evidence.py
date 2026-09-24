@@ -121,9 +121,14 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTe
     ("opsApiCfg001IndependentDefaultsAndCanonicalHash", "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
      "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures", "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
      "opsApiCfg005NullUnknownAndConcurrentDeterminism", "opsApiCfg006ShippedTemplatesMatchApprovedDefaults")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest", 1,
+    ("opsWebCfg001IndependentDefaultsAndCanonicalHash", "opsWebCfg002LayeredRangesAndScalarTypes",
+     "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues", "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
+     "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults")),)
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
-                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"))
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -239,7 +244,8 @@ def validate_reports(suites, deployment=False):
                    PREFIX + "ApplicationServiceUnitTest": "PT-OPS-SVC",
                    "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest": "PT-OPS-DBPOOL",
                    "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest": "PT-OPS-DBPOOL",
-                   "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest": "PT-OPS-API-CFG",
+                   "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest": "PT-OPS-WEB-CFG"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -338,7 +344,7 @@ def main():
                     for module, subject in RUNTIME_SUBJECTS]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/deployment/config" / name
-                    for name in ("common.yml.template", "api.yml.template")]
+                    for name in ("common.yml.template", "api.yml.template", "web.yml.template")]
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
@@ -393,7 +399,9 @@ def main():
                      "058_NK-OPS-001_WebAPI_DBpool単体テスト仕様書.md",
                      "059_NK-OPS-001_WebAPI_DBpool実行結果.md",
                      "060_NK-OPS-001_API非秘密設定単体テスト仕様書.md",
-                     "061_NK-OPS-001_API非秘密設定実行結果.md"):
+                     "061_NK-OPS-001_API非秘密設定実行結果.md",
+                     "062_NK-OPS-001_Web非秘密設定単体テスト仕様書.md",
+                     "063_NK-OPS-001_Web非秘密設定実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -460,6 +468,8 @@ def main():
         manifest["databasePoolOracle"] = "058/PT-OPS-DBPOOL-001..006: two isolated PostgreSQL18 clusters with production DDL roles, SQL current_user/database and cross-schema 42501 denial; HikariCP7.1.0 API max8/min2 and Web max2/min1 with 3000ms wait, actual 8+1/2+1 borrowing, return/reuse, null and unavailable startup rejection. Credential/URL admission, external process and NK capture remain unverified."
         manifest["related"] += ["PG-D-272", "BUG-251", "PT-OPS-API-CFG-001..006"]
         manifest["apiNonSecretConfigOracle"] = "060/PT-OPS-API-CFG-001..006: independent SS343 sorted UTF-8 key=value LF SHA-256 vector and shipped common/api YAML; defaults→common→API merge, six fixed broker addresses, loopback URL bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified."
+        manifest["related"] += ["PG-D-273", "PT-OPS-WEB-CFG-001..006"]
+        manifest["webNonSecretConfigOracle"] = "062/PT-OPS-WEB-CFG-001..006: independent SS343 15-key sorted UTF-8 key=value LF SHA-256 vector and shipped common/web YAML; defaults→common→Web merge, fixed session/max-range/loopback, port distinctness, reply 100..2000ms, wait/max/streams bounds, separated absolute roots, unknown/duplicate/secret/alias/multiple-document/type/placeholder/decoded-empty/newline/16KiB rejection and32 deterministic concurrent parses. File identity, env and credential layers and external process readiness are not certified."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

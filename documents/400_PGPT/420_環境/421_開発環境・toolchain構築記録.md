@@ -1,5 +1,10 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-25 SnakeYAML Engine 3.1.1 Web追加（PG273）
+
+Web moduleにも既存APIと同じ`org.snakeyaml:snakeyaml-engine:3.1.1`を明示依存として追加。入手元・jar SHA-256・Java25/Maven wrapperでの再現手順は直下PG272の記録と同一。追加OS package/daemon/秘密実体はなし。Web15非秘密keyをdefaults→common→Webでmergeし、flat dotted-key、重複/alias/secret/未知/placeholder拒否、16KiB制限を適用。実file属性・env/credential搬送・外部processは未認定。
+
+
 ## 2026-09-25 SnakeYAML Engine 3.1.1（PG272 API非秘密設定）
 
 API Mavenへ`org.snakeyaml:snakeyaml-engine:3.1.1`を明示依存として追加。入手元は[Maven Central](https://central.sonatype.com/artifact/org.snakeyaml/snakeyaml-engine/3.1.1)、設定制限は[project公式説明](https://github.com/snakeyaml/snakeyaml-engine)と導入jarのJava25 `javap`で確認。cache jar `/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar` SHA-256 `59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947`。OS package/daemon/secret実体は変更なし。重複key禁止、非scalar key禁止、collection alias0、codepoint上限16384、入力byte上限16384、flat dotted-keyのみの起動前構成とする。再現はJava25/Maven wrapperで同依存を取得後`-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository`を指定し`clean verify`。実fileの権限/identity/credential/env層は後続依存で未認定。
