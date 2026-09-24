@@ -189,12 +189,16 @@ final class ArtemisManagementReadinessClientTest {
     var timeout = new AtomicLong(-1);
     var closes = new AtomicInteger();
     var deletes = new AtomicInteger();
-    var session = noReplySession(timeout, closes, deletes);
+    var session = noReplySession(timeout, closes, deletes, false);
     assertRedacted(() -> ArtemisManagementReadinessClient.read(session, "name"));
     assertEquals(2_000L, timeout.get());
     assertEquals(2, closes.get());
     assertEquals(1, deletes.get());
     assertFalse(Thread.currentThread().isInterrupted());
+
+    var closeFault =
+        noReplySession(new AtomicLong(), new AtomicInteger(), new AtomicInteger(), true);
+    assertRedacted(() -> ArtemisManagementReadinessClient.read(closeFault, "name"));
 
     assertRedacted(
         () ->
@@ -208,7 +212,7 @@ final class ArtemisManagementReadinessClientTest {
   }
 
   private static ClientSession noReplySession(
-      AtomicLong timeout, AtomicInteger closes, AtomicInteger deletes) {
+      AtomicLong timeout, AtomicInteger closes, AtomicInteger deletes, boolean failDelete) {
     return proxy(
         ClientSession.class,
         (instance, method, args) ->
@@ -249,6 +253,7 @@ final class ArtemisManagementReadinessClientTest {
               case "createQueue" -> null;
               case "deleteQueue" -> {
                 deletes.incrementAndGet();
+                if (failDelete) throw new IllegalStateException("private-close-failure");
                 yield null;
               }
               default -> throw new AssertionError(method.getName());

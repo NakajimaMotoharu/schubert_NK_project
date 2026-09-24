@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG237選択追記: `NK-OPS-001`/`ArtemisAddressSettingsReadinessClient.verify`と共有`ArtemisManagementReadinessClient.addressSettings`→PT-OPS-MQ-010～012（018/040～041）。RD MQ001/002/009/010、UI231/251/253、SS321§5/10/13・342§4、QA041/042、UIC001/002、PG-D-237。実Broker6 Address共通22 field・容量4 fieldの正系、代表共通変異/6容量変異、null/欠落/不正JSON/未知fallback/encoder/cleanup拒否を選択確認。正式全reactor/48scope未認定、SS321全readiness・credential・全API/実NK CHR-L01未完了。
+
 2026-09-24 PG236正式限定追記: `NK-OPS-001`の`ArtemisManagementReadinessClient.read/query`・管理ACL→PT-OPS-MQ-008/009（018/038～039・evidence）。RD MQ001/002/009/010・SYS004、UI231/251、SS321§10/13・342§4、SSC-075/BUG-232/YKT-185、PG-D-236。正式`PT-WEB-20260924-28`/source`151023d7`で1815PT/48scope/hash/96負canary、追加Batch2class全coverage、Java6 module全4coverage/静的0。Ops正系/app拒否・一時Address残存0、2秒/null/close/interruptを確認。YKT-185全横展開・SS321全readiness・production credential・実NK CHR-L01は未完了。
 
 2026-09-24 PG236選択追記: BUG-232/SSC-075/YKT-185、`NK-OPS-001`の`ArtemisManagementReadinessClient.read/query`・管理ACL→PT-OPS-MQ-008/009（018/038～039）。RD MQ001/002/009/010・SYS004、UI231/251、SS321§10/13・342§4、PG-D-236。実認証BrokerのOps正系/app拒否・一時Address残存0、合成null reply 2秒・close/interrupt、既存005～007回帰の選択5件、API静的/実ACL 5件PASS。Batch追加2class全coverage/SpotBugs0、正式全reactor/48scope前で未認定。full broker readiness/本番credential/実NK CHR-L01は未完了。

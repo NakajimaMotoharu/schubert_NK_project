@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 377
+BATCH_TEST_COUNT = 380
 COMPLETION_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest"
 COMPLETION_METHODS = ("verifiedCommitAndReplay", "invalidFilesAndHandleBinding", "allReadAndDatabaseFailures", "sharedDeadlineAndInterrupt", "completionClockAndCommitUncertainty", "nullOwnershipAndFactory", "unknownFailuresAndResourceOwnership", "concurrentAndIndependentTrace")
 COMPLETION_TRACES = {"PT-BAT-281-completion.txt": b"manifestSha256=bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nfiles=4\nDB=1/1/0/26\nCONFIG=2/2/0/67\nend=2026-09-12T15:00:04.987654Z\nowner=SUCCESS\nnonowner=REJECTED\n"}
@@ -222,6 +222,7 @@ RECORD_TRACES = {
 OPS_CLASSES = {"dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
                "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+               "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
                "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
                "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",

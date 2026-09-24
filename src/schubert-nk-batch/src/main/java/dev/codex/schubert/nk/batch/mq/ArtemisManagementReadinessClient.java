@@ -1,17 +1,19 @@
 package dev.codex.schubert.nk.batch.mq;
 
 import java.util.Objects;
+import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientRequestor;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.management.ManagementHelper;
 import org.apache.activemq.artemis.api.core.management.ResourceNames;
 
 /**
- * Reads actual broker values using a caller-owned, ops-authenticated Core session. This is not the
- * complete SS321 §13 gate: journal recovery errors, acceptor, ACL, address settings and per-Queue
- * limits still require independent proof before API startup. Never use an application-role session
- * or log the provider response. NK-OPS-001; MQ-001/002/009/010,SYS-004; UI231/251; SS321/342;
- * PG235/PT-OPS-MQ-005..007.
+ * Reads actual broker values using a caller-owned, ops-authenticated Core session. Management
+ * request/reply creates and deletes an ephemeral Address/Queue only inside the Ops namespace; it
+ * does not mutate business resources. This is not the complete SS321 §13 gate: journal recovery
+ * errors, acceptor, ACL, address settings and per-Queue limits still require independent proof
+ * before API startup. Never use an application-role session or log the provider response.
+ * NK-OPS-001; MQ-001/002/009/010,SYS-004; UI231/251; SS321/342; PG235/PT-OPS-MQ-005..007.
  */
 public final class ArtemisManagementReadinessClient {
   @FunctionalInterface
@@ -22,6 +24,11 @@ public final class ArtemisManagementReadinessClient {
   @FunctionalInterface
   interface Exchange {
     Object query(ClientSession session, String attribute) throws InterruptedException;
+  }
+
+  @FunctionalInterface
+  private interface MessageWriter {
+    void write(ClientMessage message);
   }
 
   private final Reader reader;
@@ -71,6 +78,22 @@ public final class ArtemisManagementReadinessClient {
     return read(session, attribute, ArtemisManagementReadinessClient::query);
   }
 
+  static Object addressSettings(ClientSession session, String address) {
+    return read(
+        session,
+        address,
+        (borrowed, name) -> query(borrowed, message -> putAddressSettingsOperation(message, name)));
+  }
+
+  static void putAddressSettingsOperation(ClientMessage message, String address) {
+    try {
+      ManagementHelper.putOperationInvocation(
+          message, ResourceNames.BROKER, "getAddressSettingsAsJSON", address);
+    } catch (Exception failure) {
+      throw new ArtemisManagementReadinessException();
+    }
+  }
+
   static Object read(ClientSession session, String attribute, Exchange exchange) {
     try {
       return exchange.query(session, attribute);
@@ -87,11 +110,18 @@ public final class ArtemisManagementReadinessClient {
   // Address/Queue. The outer read boundary also restores interrupt from an Exchange port.
   @SuppressWarnings("try")
   private static Object query(ClientSession session, String attribute) {
+    return query(
+        session,
+        message -> ManagementHelper.putAttribute(message, ResourceNames.BROKER, attribute));
+  }
+
+  @SuppressWarnings("try")
+  private static Object query(ClientSession session, MessageWriter writer) {
     try {
       session.start();
       try (var requestor = new ClientRequestor(session, "activemq.management")) {
         var request = session.createMessage(false);
-        ManagementHelper.putAttribute(request, ResourceNames.BROKER, attribute);
+        writer.write(request);
         var reply = requestor.request(request, 2_000L);
         if (reply == null || !ManagementHelper.hasOperationSucceeded(reply))
           throw new ArtemisManagementReadinessException();

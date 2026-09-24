@@ -1,6 +1,6 @@
 # NK-OPS-001 Artemis実効管理値 PT仕様
 
-PG235、RD MQ-001/002/009/010・SYS-004、UI231/251、SS321 §2/3/13・342 §4。対象は`ArtemisManagementReadinessClient.verifyBroker/read`と固定redacted例外。限定Ops credentialでcallerが開いたCore sessionを借用し、management Addressへのread-only照会結果をSS321 literalと照合する。アプリroleをmanagementへ昇格させない。
+PG235/236、RD MQ-001/002/009/010・SYS-004、UI231/251、SS321 §2/3/10/13・342 §4。対象は`ArtemisManagementReadinessClient.verifyBroker/read`と固定redacted例外。限定Ops credentialでcallerが開いたCore sessionを借用し、management Addressの属性照会結果をSS321 literalと照合する。SSC-075により一時reply Address/Queueの作成/削除はOps管理namespace内だけで許可し、業務資源は不変。アプリroleをmanagementへ昇格させない。
 
 | Test ID | 事前条件・入力/操作 | 独立期待値 |
 |---|---|---|
