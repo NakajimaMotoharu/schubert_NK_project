@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-63",
-  "targetCommit": "65f996055843b49d87e089989f00357864d1254d",
+  "runId": "PT-WEB-20260924-64",
+  "targetCommit": "15764bdf34f37e16066f73cf00f8c1791723d820",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T23:19:48+09:00",
-  "completedAt": "2026-09-24T23:31:58+09:00",
+  "startedAt": "2026-09-24T23:50:44+09:00",
+  "completedAt": "2026-09-25T00:03:44+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "0f3ec9e085577887bf1583ddb065f866c1ba1417cf420d4eb7cbe11b793ad6de",
+  "rawLogSha256": "c5cbd2ebf280f4167a92e6d6e7c98eef5858b2493683e01d3bacb1c339107a4a",
   "logTemplateOracle": "019/SCR084..091: actual Log resolver/Current DOM literals,ADMIN,7filters/6types/3levels/date step,all row optionals/details,0/100/101/201/clamped pagination,escaping/invalid field display/CSRF,scoped Current CSS/resource,64 renders.Not browser byte validator/HTTP/NK gate.",
   "logBrowserOracle": "021/SCR092-A..H: eight independent byte/NFC/control/DOM event cases, Node line/function/branch100, exact hash and no skipped/todo. Not live browser or actual NK CHR.",
   "logHttpOracle": "023/SCR093..103: independent UI232/235 bytes and DOM/status, ADMIN/anonymous/USER/0102, all result errors, invalid400/noMQ, malformed/unknown/IO/null, real loopback GET/HEAD/POST and role/session, 64 concurrent contexts. Not live broker or actual NK CHR-L01.",
@@ -256,6 +256,32 @@
         "covered": 0
       }
     },
+    "dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 443
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 30
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 79
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 26
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
     "dev/codex/schubert/nk/web/bootstrap/WebHttpServer": {
       "INSTRUCTION": {
         "missed": 0,
@@ -308,32 +334,6 @@
         "covered": 0
       }
     },
-    "dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime": {
-      "INSTRUCTION": {
-        "missed": 0,
-        "covered": 443
-      },
-      "BRANCH": {
-        "missed": 0,
-        "covered": 30
-      },
-      "LINE": {
-        "missed": 0,
-        "covered": 79
-      },
-      "COMPLEXITY": {
-        "missed": 0,
-        "covered": 26
-      },
-      "METHOD": {
-        "missed": 0,
-        "covered": 11
-      },
-      "CLASS": {
-        "missed": 0,
-        "covered": 1
-      }
-    },
     "dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness": {
       "INSTRUCTION": {
         "missed": 0,
@@ -360,32 +360,6 @@
         "covered": 1
       }
     },
-    "dev/codex/schubert/nk/web/controller/ScenarioController": {
-      "INSTRUCTION": {
-        "missed": 0,
-        "covered": 474
-      },
-      "BRANCH": {
-        "missed": 0,
-        "covered": 33
-      },
-      "LINE": {
-        "missed": 0,
-        "covered": 107
-      },
-      "COMPLEXITY": {
-        "missed": 0,
-        "covered": 31
-      },
-      "METHOD": {
-        "missed": 0,
-        "covered": 14
-      },
-      "CLASS": {
-        "missed": 0,
-        "covered": 1
-      }
-    },
     "dev/codex/schubert/nk/web/controller/MusicController": {
       "INSTRUCTION": {
         "missed": 0,
@@ -406,32 +380,6 @@
       "METHOD": {
         "missed": 0,
         "covered": 7
-      },
-      "CLASS": {
-        "missed": 0,
-        "covered": 1
-      }
-    },
-    "dev/codex/schubert/nk/web/controller/AnimationController": {
-      "INSTRUCTION": {
-        "missed": 0,
-        "covered": 213
-      },
-      "BRANCH": {
-        "missed": 0,
-        "covered": 10
-      },
-      "LINE": {
-        "missed": 0,
-        "covered": 51
-      },
-      "COMPLEXITY": {
-        "missed": 0,
-        "covered": 13
-      },
-      "METHOD": {
-        "missed": 0,
-        "covered": 8
       },
       "CLASS": {
         "missed": 0,
@@ -490,30 +438,56 @@
         "covered": 1
       }
     },
-    "dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration": {
+    "dev/codex/schubert/nk/web/controller/ScenarioController": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 9
+        "covered": 474
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 33
       },
       "LINE": {
         "missed": 0,
-        "covered": 2
+        "covered": 107
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 2
+        "covered": 31
       },
       "METHOD": {
         "missed": 0,
-        "covered": 2
+        "covered": 14
       },
       "CLASS": {
         "missed": 0,
         "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/controller/AnimationController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 213
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 0
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 51
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
       }
     },
     "dev/codex/schubert/nk/web/config/WebMvcConfiguration": {
@@ -619,6 +593,32 @@
         "missed": 0,
         "covered": 0
       }
+    },
+    "dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      }
     }
   },
   "loginOracle": "025/SCR105..108: actual Spring MVC GET and Thymeleaf, independent approved title/brand, POST form/CSRF and credential-free inputs, Current error/locked/logout text, closed resolver and no controller POST. QA045/UIC005/SSC074; not actual NK CHR-A01/L01.",
@@ -633,7 +633,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "7d865b316c56562f06860890e1f2e73ffdfc61761cdfc650a7a9a16a78bdc63f",
+  "fullReactorManifestSha256": "971e05c98b25b60d5cec2beac2bbe456db0d226f21108eed65405f0d3217ef46",
   "related": [
     "PG-D-194",
     "PG-D-195",
@@ -930,7 +930,7 @@
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "cd6dfdb1d080e5867b2060119eb0fd509d956b7c12c3481d5610d3f02b5ee0d3"
+      "sha256": "66320997a04d3ae5afc168cffe4a1c43dc4eeb99c5dae4ec888b2aac32cd5a5e"
     },
     {
       "path": "input/PT-SCR-012.txt",
