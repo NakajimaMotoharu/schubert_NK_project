@@ -4,10 +4,12 @@ Program `NK-OPS-001`、PG269、配備source `src/deployment/systemd/schubert-nk-
 
 PG274/SSC-079/BUG-253/YKT-191追記: UI243/SS343のrelease/config root:schubert0750・非秘密file0640へ専用Web/API UIDが到達するため、両unitの`SupplementaryGroups`に`schubert`を明示する。`schubert`は非秘密配置用で、credential root:root0700/private LoadCredentialの権限は緩めない。実OS account配布/起動後のアクセスはLinux IT未実測。PT-OPS-SVC-001/002の独立期待値にgroupを追加し、他のgroupと秘密IDの既存期待値は固定する。
 
+PG277/SSC-080/BUG-256/YKT-192追記: 両Unitの必須`EnvironmentFile`に対応する`src/deployment/config/{api,web}.env.template`をそれぞれ固定ASCII `SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk`＋LFの完全一致で検査する。秘密/JVM optionを含む任意行や欠落を許さず、0600 root:serviceの実配置はLinux ITへ残す。PT-OPS-SVC-001/002の期待値に追加し、Unit依存/秘密IDは変更しない。
+
 | Test ID / method | 事前条件・入力・操作 | Productionと独立した期待値 |
 |---|---|---|
-| PT-OPS-SVC-001 / `apiDependencyCredentialAndResourceContract` | repositoryのAPI templateを読取り、全必須directiveを照合 | SS342 §4.1/4.2/5.1のexpiry→API、API 2048M/Xms512m/Xmx1024m/Direct256m/Meta256m/停止60s。343 §2/6の専用API UID/GIDと補助group `schubert schubert-read schubert-web`、transferのみwrite、DB/MQ/API AES/HMAC currentだけ5秘密。Web/session秘密なし |
-| PT-OPS-SVC-002 / `webDependencyCredentialAndResourceContract` | Web templateを同様に読取り | API→Web、1536M/Xms384m/Xmx768m/Direct128m/Meta192m/停止30s。Web専用UID/GIDと補助group `schubert schubert-read`、DB/MQ/Web AES currentだけ5秘密。assets/transferへwrite不可、API/HMAC秘密なし |
+| PT-OPS-SVC-001 / `apiDependencyCredentialAndResourceContract` | repositoryのAPI templateを読取り、全必須directiveと対応env templateの全byteを照合 | SS342 §4.1/4.2/5.1のexpiry→API、API 2048M/Xms512m/Xmx1024m/Direct256m/Meta256m/停止60s。343 §2/6の専用API UID/GIDと補助group `schubert schubert-read schubert-web`、transferのみwrite、DB/MQ/API AES/HMAC currentだけ5秘密。`api.env.template`は固定1行ASCII/LF。Web/session秘密なし |
+| PT-OPS-SVC-002 / `webDependencyCredentialAndResourceContract` | Web templateと対応env templateの全byteを同様に読取り | API→Web、1536M/Xms384m/Xmx768m/Direct128m/Meta192m/停止30s。Web専用UID/GIDと補助group `schubert schubert-read`、DB/MQ/Web AES currentだけ5秘密。`web.env.template`は固定1行ASCII/LF。assets/transferへwrite不可、API/HMAC秘密なし |
 | PT-OPS-SVC-003 / `noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation` | 両unitの非comment全行を検査 | `Environment=`/shell/SetCredential/PassEnvironment/特権ExecStartなし、LoadCredential各5、ProtectSystem=strict、ProtectHome/NoNewPrivileges、SendSIGKILL=no、AF_UNIX/INET/INET6だけ。credential実値はfixtureにも証跡にも存在しない |
 | PT-OPS-SVC-004 / `renderedSyntaxIsAcceptedWithoutStartingService` | isolated tempへunitを`.service`でrender、ExecStartをtest-only `/bin/true`へ置換し必要依存unitをtest-only作成、`systemd-analyze verify --man=no` | exit0・stdout/stderr空。OS managerへinstall/startしない。実ExecStartの起動可能性は未合格 |
 

@@ -1,5 +1,7 @@
 # NK-OPS-001 Web設定読取結線実行結果
 
+PG277/PT-OPS-WEB-LOAD-005・SSC-080/BUG-256/YKT-192追加正式結果: source`a36fd83cc3ed32e5940f6448c87865d2eb5822c1`、branch`dev-foundation`、`PT-WEB-20260925-15`（2026-09-25 05:39:22～05:51:56 JST）、command `sh tools/quality/030_run_pgpt_verify.sh PT-WEB-20260925-15`、exit0。全1,926PT（CHR41/Protocol80/Storage92/API763/Web546/Batch404）、failure/error/skipped0、Production Java6 module全instruction/branch/line/method/class missed0、SpotBugs0、103負canary/53scope/hash PASS。Web-LOAD-005は許可固定環境と無関係PATHの成功、欠落/異なるpath/大小文字alias/未知secret風key/null mapの固定不正を独立期待で確認。root manifest SHA-256 `2589d2534d91bad454d72849b69ce253e6151d353b8c471cc916cc0a2e5284b2`。実systemd/OS env配布・外部main/DB/JMS/実NK CHRは未認定。Test ID別入力・期待・実際・coverage/hashはsanitized manifest/resultsを参照。
+
 PG276/PT-OPS-WEB-LOAD-001～004。選択4PTはfailure/error/skipped0。Java25.0.4/Maven wrapper、branch `dev-foundation`。選択run単独は正式認定に算入しない。
 
 正式`PT-WEB-20260925-14`、source `4eeb1d7e5a47ad3bb5d286dcd7e10bbedcb63b48`、2026-09-25 05:17:19～05:29:52 JST、command `sh tools/quality/030_run_pgpt_verify.sh PT-WEB-20260925-14`、exit0。全1,924PT（CHR41/Protocol80/Storage92/API762/Web545/Batch404）failure/error/skipped0。Production Java6 module instruction/branch/line/method/class missed0、SpotBugs0、019負canary103/103、018全53scope/保存hash再照合PASS。root manifest SHA-256 `dca1c2d0d819076713ad37c1d64f7f3a063cd32d09681ae5642695aacd032091`。Web4件は全PASS、入力/独立期待値は068、実際のTest ID→method、coverage、環境、関連番号、sanitized evidence path/hashは同Program `evidence/manifest.json`と`results.xml`。公開非秘密fixtureのみで、実`/etc`/credential・外部main・DB/JMS/実NK CHRは未認定。
