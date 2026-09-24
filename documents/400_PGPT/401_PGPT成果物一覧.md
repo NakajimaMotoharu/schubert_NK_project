@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint32、正式`PT-WEB-20260924-28`/source`151023d7`の全1815PT/48scope/hash/96負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG236のOps管理reply ACL・2秒期限だけを限定認定し、BUG-232/SSC-075の再試験済み範囲を確定。YKT-185横展開、SS321全readiness・Production credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了は宣言しない。以下の要約は時点履歴で、最新状態は456を正とする。
+
 2026-09-24最新確定は456/460 checkpoint30、正式`PT-WEB-20260924-27`/source`640fac42`の1813PT/48scope。PG236のOps role/管理reply修正は選択PT成功、正式全reactor未認定。BUG-232/SSC-075/YKT-185対応中、SS321残条件・Production credential/全API・実NK CHR-L01未完了。固定加重全工程中心約47%（幅41～52%）を維持。以下の過去日付要約は履歴であり、最新状態は456を正とする。
 
 2026-09-24最新確定は456/460 checkpoint30。正式`PT-WEB-20260924-27`/source`640fac42`で全1813PT/48scope/hash、96負canary、Java6 module instruction/line/method/class/branch100%・Production静的0を限定認定。PG235の11管理属性だけが対象で、一時返信QueueのOps権限・有限待ち、SS321残条件とProduction credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）を維持し、PGPT/IT/ST完了を宣言しない。以下の過去日付要約は履歴であり、最新状態は456を正とする。
