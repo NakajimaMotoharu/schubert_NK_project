@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456 checkpoint59、正式`PT-WEB-20260924-43`/source`7a8d4ebcc`の全1839PT/49scope/hash/99負canary、Java6 moduleのinstruction/line/method/class/branch missed0・Production静的0。PG248/018-054～055でBUG-239のµs selector境界を実Broker含むRED→GREEN・正式再試験で限定完了。Expiry親DB stage/terminal・同run再開/起動判断と実NK CHR-L01は未了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
+
 2026-09-24最新確定は456 checkpoint57、正式`PT-WEB-20260924-42`/source`7345a103c`の全1838PT/49scope/hash/99負canary、Java6 moduleのinstruction/line/method/class/branch missed0・Production静的0。PG247/018-052～053のExpiry観測・削除分離だけを限定認定。BUG-239のµs境界、親DB stage/terminal・同run再開・起動判断は未了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24最新確定は456 checkpoint55、正式`PT-WEB-20260924-41`/source`00d97082e`の全1837PT/49scope/hash/99負canary、Java6 moduleのinstruction/line/method/class/branch missed0・Production静的0。PG246/004-066～067のappend-only V022・Expiry削除前段階監査DDLだけを限定認定。SSC-078/BUG-238/YKT-189は親DB/Artemis結線・同run再実行・不確定commitが未了で対応中。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
