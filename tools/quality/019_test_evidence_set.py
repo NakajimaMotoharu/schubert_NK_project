@@ -32,10 +32,36 @@ references = module("run_reference_collector", "024_collect_run_reference_eviden
 parent_summary = module("parent_summary_collector", "025_collect_parent_summary_evidence.py")
 atomic = module("atomic_collector", "026_collect_atomic_cleanup_evidence.py")
 expiry = module("expiry_audit_collector", "037_collect_expiry_audit_database.py")
+request_sender = module("request_sender_resource_collector", "038_collect_request_sender_resource.py")
 scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    def test_request_sender_resource_inventory_and_coverage(self):
+        self.assertEqual(("PT-JMS-020-A", "PT-JMS-020-B", "PT-JMS-020-C", "PT-JMS-020-D"),
+                         tuple(request_sender.METHODS))
+        suite = ET.Element("testsuite", name=request_sender.CLASS, tests="7", failures="0",
+                           errors="0", skipped="0")
+        for name in (*request_sender.BASE_METHODS, *request_sender.METHODS.values()):
+            ET.SubElement(suite, "testcase", classname=request_sender.CLASS, name=name)
+        self.assertEqual(4, len(request_sender.validate_suite(suite)))
+        for key, bad in (("tests", "6"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, bad)
+            with self.assertRaises(ValueError): request_sender.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
+        with self.assertRaises(ValueError): request_sender.validate_suite(wrong)
+        wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], "failure")
+        with self.assertRaises(ValueError): request_sender.validate_suite(wrong)
+        report = ET.Element("report")
+        cls = ET.SubElement(report, "class", name=request_sender.SUBJECT)
+        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
+            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        self.assertEqual(5, len(request_sender.validate_coverage(report)))
+        for counter in cls.findall("counter"):
+            wrong = copy.deepcopy(report)
+            next(c for c in wrong.iter("counter") if c.get("type") == counter.get("type")).set("missed", "1")
+            with self.assertRaises(ValueError): request_sender.validate_coverage(wrong)
+
     def test_expiry_audit_sql_method_inventory_and_oracle(self):
         self.assertEqual({"PT-DB-016", "PT-DB-017", "PT-DB-018"}, set(expiry.METHODS))
         self.assertEqual(3, len(expiry.ORACLE.splitlines()))
@@ -2475,7 +2501,7 @@ class EvidenceSetTest(unittest.TestCase):
                 "full-inbox-cleanup", "outbox-only-cleanup", "inbox-progress-sql",
                 "inbox-progress-service", "cleanup-safety", "inbox-run-executor",
                 "inbox-aes-credential", "credential-access", "inode-security", "credential-loader",
-            "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "004_NK-DAT-001/evidence/expiry-audit", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime"]
+            "inspector-process", "log-cleanup-progress", "question-query", "result-binding", "question-mutation", "inspector-database", "inspector-application", "inspector-launch")] + ["018_NK-OPS-001/evidence", "004_NK-DAT-001/evidence/backup-rerun", "004_NK-DAT-001/evidence/run-references", "004_NK-DAT-001/evidence/parent-summary", "004_NK-DAT-001/evidence/atomic-cleanup", "004_NK-DAT-001/evidence/expiry-audit", "005_NK-MSG-001/evidence/sync-consumers", "005_NK-MSG-001/evidence/web-reply-consumer", "006_NK-MSG-002/003_WebLogReplayWorker/evidence", "005_NK-MSG-001/evidence/api-web-log-consumer", "005_NK-MSG-001/evidence/api-messaging-parent", "005_NK-MSG-001/evidence/log-path-router", "005_NK-MSG-001/evidence/api-log-path-runtime", "005_NK-MSG-001/evidence/request-sender-resource"]
         self.assertEqual(expected_scopes, list(gate.SCOPES))
         with tempfile.TemporaryDirectory(prefix="nk-evidence-set-") as temporary:
             root = Path(temporary)
@@ -2529,7 +2555,7 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check()
             self.write_scope(root, chosen)
-            self.assertEqual(49, len(check()))
+            self.assertEqual(50, len(check()))
             outside = root / "outside.xml"
             outside.write_bytes(b"fixture")
             link = directory / "escape.xml"
@@ -2539,7 +2565,7 @@ class EvidenceSetTest(unittest.TestCase):
                     gate.local_file(directory, relative)
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(49):
+        for failed_at in range(50):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -2552,15 +2578,16 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(49, len(calls))
+        self.assertEqual(50, len(calls))
         self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
-        self.assertTrue(calls[-7][2].endswith("/030_collect_sync_consumers.py"))
-        self.assertTrue(calls[-6][2].endswith("/031_collect_web_reply_consumers.py"))
-        self.assertTrue(calls[-5][2].endswith("/032_collect_web_log_worker.py"))
-        self.assertTrue(calls[-4][2].endswith("/033_collect_api_web_log_consumers.py"))
-        self.assertTrue(calls[-3][2].endswith("/034_collect_api_messaging_runtime.py"))
-        self.assertTrue(calls[-2][2].endswith("/035_collect_log_path_router.py"))
-        self.assertTrue(calls[-1][2].endswith("/036_collect_api_log_path_runtime.py"))
+        self.assertTrue(calls[-8][2].endswith("/030_collect_sync_consumers.py"))
+        self.assertTrue(calls[-7][2].endswith("/031_collect_web_reply_consumers.py"))
+        self.assertTrue(calls[-6][2].endswith("/032_collect_web_log_worker.py"))
+        self.assertTrue(calls[-5][2].endswith("/033_collect_api_web_log_consumers.py"))
+        self.assertTrue(calls[-4][2].endswith("/034_collect_api_messaging_runtime.py"))
+        self.assertTrue(calls[-3][2].endswith("/035_collect_log_path_router.py"))
+        self.assertTrue(calls[-2][2].endswith("/036_collect_api_log_path_runtime.py"))
+        self.assertTrue(calls[-1][2].endswith("/038_collect_request_sender_resource.py"))
         self.assertEqual("PT-WEB-TEST", calls[-1][-1])
 
     @staticmethod

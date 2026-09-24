@@ -51,7 +51,8 @@ SCOPES += ("005_NK-MSG-001/evidence/sync-consumers",
            "005_NK-MSG-001/evidence/api-web-log-consumer",
            "005_NK-MSG-001/evidence/api-messaging-parent",
            "005_NK-MSG-001/evidence/log-path-router",
-           "005_NK-MSG-001/evidence/api-log-path-runtime")
+           "005_NK-MSG-001/evidence/api-log-path-runtime",
+           "005_NK-MSG-001/evidence/request-sender-resource")
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
 
 
@@ -130,6 +131,7 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/034_collect_api_messaging_runtime.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/035_collect_log_path_router.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/036_collect_api_log_path_runtime.py"), run])
+    commands.append([sys.executable, "-B", str(repo / "tools/quality/038_collect_request_sender_resource.py"), run])
     for command in commands:
         execute(command, cwd=repo, check=True)
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,6 +12,7 @@ import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
 import jakarta.jms.Queue;
 import java.io.InputStream;
@@ -22,6 +24,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
@@ -155,6 +158,127 @@ final class ArtemisRequestSenderTest {
         assertThrows(JMSRuntimeException.class, () -> runtimeSender.send(MESSAGE_ID, request));
     assertEquals(runtime, actual);
     assertArrayEquals(new Throwable[] {rollback}, actual.getSuppressed());
+  }
+
+  @Test
+  void jms020aSameFailureReplayedByRollbackCannotMaskPrimary() throws Exception {
+    byte[] request = independentRequestWire();
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-primary");
+    AtomicInteger rollbackCalls = new AtomicInteger();
+    AtomicInteger closeCalls = new AtomicInteger();
+    ArtemisRequestSender sameRollback =
+        new ArtemisRequestSender(
+            () -> failingContext(primary, primary, null, rollbackCalls, closeCalls));
+    assertSame(
+        primary,
+        assertThrows(JMSRuntimeException.class, () -> sameRollback.send(MESSAGE_ID, request)));
+    assertEquals(0, primary.getSuppressed().length);
+    assertEquals(1, rollbackCalls.get());
+    assertEquals(1, closeCalls.get());
+  }
+
+  @Test
+  void jms020bSameFailureReplayedByCloseCannotMaskPrimary() throws Exception {
+    byte[] request = independentRequestWire();
+    AtomicInteger rollbackCalls = new AtomicInteger();
+    AtomicInteger closeCalls = new AtomicInteger();
+    JMSRuntimeException sameClose = new JMSRuntimeException("synthetic-same-close");
+    ArtemisRequestSender closeReplaysPrimary =
+        new ArtemisRequestSender(
+            () -> failingContext(sameClose, null, sameClose, rollbackCalls, closeCalls));
+    assertSame(
+        sameClose,
+        assertThrows(
+            JMSRuntimeException.class, () -> closeReplaysPrimary.send(MESSAGE_ID, request)));
+    assertEquals(0, sameClose.getSuppressed().length);
+    assertEquals(1, rollbackCalls.get());
+    assertEquals(1, closeCalls.get());
+  }
+
+  @Test
+  void jms020dDistinctSecondaryFailuresRemainVisible() throws Exception {
+    byte[] request = independentRequestWire();
+    JMSRuntimeException primary = new JMSRuntimeException("synthetic-primary");
+    JMSRuntimeException rollback = new JMSRuntimeException("synthetic-rollback");
+    JMSRuntimeException close = new JMSRuntimeException("synthetic-close");
+    AtomicInteger rollbackCalls = new AtomicInteger();
+    AtomicInteger closeCalls = new AtomicInteger();
+    ArtemisRequestSender compound =
+        new ArtemisRequestSender(
+            () -> failingContext(primary, rollback, close, rollbackCalls, closeCalls));
+    assertSame(
+        primary, assertThrows(JMSRuntimeException.class, () -> compound.send(MESSAGE_ID, request)));
+    assertArrayEquals(new Throwable[] {rollback, close}, primary.getSuppressed());
+    assertEquals(1, rollbackCalls.get());
+    assertEquals(1, closeCalls.get());
+  }
+
+  @Test
+  void jms020cCloseOnlyFailureRemainsVisible() throws Exception {
+    byte[] request = independentRequestWire();
+    AtomicInteger successfulCloseCalls = new AtomicInteger();
+    JMSRuntimeException closeOnly = new JMSRuntimeException("synthetic-close-only");
+    ArtemisRequestSender closeOnlySender =
+        new ArtemisRequestSender(() -> successfulContext(closeOnly, successfulCloseCalls));
+    assertSame(
+        closeOnly,
+        assertThrows(JMSRuntimeException.class, () -> closeOnlySender.send(MESSAGE_ID, request)));
+    assertEquals(1, successfulCloseCalls.get());
+  }
+
+  private static JMSContext failingContext(
+      JMSRuntimeException primary,
+      JMSRuntimeException rollback,
+      JMSRuntimeException close,
+      AtomicInteger rollbackCalls,
+      AtomicInteger closeCalls) {
+    return proxy(
+        JMSContext.class,
+        (method, ignored) ->
+            switch (method.getName()) {
+              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+              case "createBytesMessage" -> throw primary;
+              case "rollback" -> {
+                rollbackCalls.incrementAndGet();
+                if (rollback != null) throw rollback;
+                yield null;
+              }
+              case "close" -> {
+                closeCalls.incrementAndGet();
+                if (close != null) throw close;
+                yield null;
+              }
+              default -> throw new AssertionError(method.getName());
+            });
+  }
+
+  private static JMSContext successfulContext(JMSRuntimeException close, AtomicInteger closeCalls) {
+    JMSProducer[] producer = new JMSProducer[1];
+    producer[0] =
+        proxy(
+            JMSProducer.class,
+            (method, ignored) ->
+                switch (method.getName()) {
+                  case "setDeliveryMode", "setTimeToLive" -> producer[0];
+                  case "send" -> null;
+                  default -> throw new AssertionError(method.getName());
+                });
+    BytesMessage message =
+        proxy(BytesMessage.class, (method, ignored) -> defaultValue(method.getReturnType()));
+    return proxy(
+        JMSContext.class,
+        (method, ignored) ->
+            switch (method.getName()) {
+              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+              case "createBytesMessage" -> message;
+              case "createProducer" -> producer[0];
+              case "commit" -> null;
+              case "close" -> {
+                closeCalls.incrementAndGet();
+                throw close;
+              }
+              default -> throw new AssertionError(method.getName());
+            });
   }
 
   private static JMSContext context(Map<String, Object> actions) {

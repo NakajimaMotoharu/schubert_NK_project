@@ -12,6 +12,7 @@ import jakarta.jms.JMSException;
 import java.util.Objects;
 import java.util.UUID;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.jspecify.annotations.Nullable;
 
 /** Production Web request adapter for the closed Artemis request/reply topology. */
 public final class ArtemisRequestSender implements JmsRequestSender {
@@ -37,7 +38,9 @@ public final class ArtemisRequestSender implements JmsRequestSender {
       throw new IllegalArgumentException("encoded outbound request identity is inconsistent");
     }
 
-    try (JMSContext context = Objects.requireNonNull(contexts.open(), "JMS context")) {
+    JMSContext context = Objects.requireNonNull(contexts.open(), "JMS context");
+    @Nullable Throwable primary = null;
+    try {
       if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
         throw new IllegalStateException("JMS request context must be transacted");
       }
@@ -59,6 +62,11 @@ public final class ArtemisRequestSender implements JmsRequestSender {
         rollbackAfterFailure(context, exception);
         throw exception;
       }
+    } catch (JMSException | RuntimeException | Error exception) {
+      primary = exception;
+      throw exception;
+    } finally {
+      closeAfterFailure(context, primary);
     }
   }
 
@@ -66,7 +74,22 @@ public final class ArtemisRequestSender implements JmsRequestSender {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
+      if (rollbackFailure != failure) {
+        failure.addSuppressed(rollbackFailure);
+      }
+    }
+  }
+
+  private static void closeAfterFailure(JMSContext context, @Nullable Throwable primary) {
+    try {
+      context.close();
+    } catch (RuntimeException | Error closing) {
+      if (primary == null) {
+        throw closing;
+      }
+      if (closing != primary) {
+        primary.addSuppressed(closing);
+      }
     }
   }
 }
