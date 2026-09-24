@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG257選択段階: `NK-WEB-002`/Web Log親・`LogSearchWireClient`→`NK-MSG-001`/API Log受信→`NK-ADM-001`/Log照会をPT-SCR-135（016/043～044）へ追跡。RD FUN-001/008・AUT-001/002/004・MQ-003/006～010、UI221/225/226/232/235、SS311～314/321/323/324/331/332/342/351/352。実PG18/Artemis/TomcatでADMIN Login→合成Log1行の`/logs` DOM→API Inbox1行を選択8/8で確認。正式全reactor/coverage/53scope/hash前で未認定、実NK CHR-L01/A01・Scenario/全process入口は未了。
+
 2026-09-24 PG256正式限定追記: `NK-ADM-001`/`LogQueryApplicationAssembly`＋`NK-MSG-001`/`ApiLogPathApplicationRuntime.startWithLoginAndLog`→PT-ADM-075/076（010/075～076、Admin manifest）を正式`PT-WEB-20260924-54`/source`f41ce7493`で限定認定。RD FUN-008/AUT-002/MQ-006～010、UI225/232/235/241/242、SS311/312/314/323/324/332/351/352。全1858PT/53scope/hash/102負canary、Production全coverage/静的0。実PG18/ArtemisのLog初回0000/再送0200、Inbox1/監査1を確認。Web Log画面・Scenario実handler/全process入口/実NK CHRは未了、PGPT中心47%据置。
 
 2026-09-24 PG256選択段階: `NK-ADM-001`/`LogQueryApplicationAssembly`＋`NK-MSG-001`/`ApiLogPathApplicationRuntime.startWithLoginAndLog`をPT-ADM-075/076（010/075～076）へ追跡。RD FUN-008/AUT-002/MQ-006～010、UI225/232/235/241/242、SS311/312/314/323/324/332/351/352。実PG18/ArtemisのLog初回0000/再送0200とInbox/監査、null契約を選択9/9で確認。正式全reactor/coverage/53scope/hash前で未認定。Web Log画面・Scenario実handler/全起動/実NK CHRは未了。

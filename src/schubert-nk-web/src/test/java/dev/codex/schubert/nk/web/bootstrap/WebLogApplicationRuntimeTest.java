@@ -194,6 +194,133 @@ final class WebLogApplicationRuntimeTest {
     }
   }
 
+  @Test
+  void scr135RealHttpAdminLogSearchUsesProductionApiBroker() throws Exception {
+    var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
+    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var fingerprints = new FingerprintKeyRing("f1", syntheticKey(7), null, null);
+        var contexts = new AuthContextCodec("a1", syntheticKey(1), null, null);
+        var snapshots = new ResponseSnapshotCodec("s1", syntheticKey(3), null, null);
+        var sessionCodec = new SessionPayloadCodec("test", syntheticKey(4), null, null);
+        var logCodec = new WebLogPayloadCodec("test", syntheticKey(5), null, null);
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      try (var connection = db.api();
+          var statement =
+              connection.prepareStatement(
+                  "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+                      + " values(8,'adminpt','adminpt',?,'ADMIN','ACTIVE','2026-09-24','2026-09-24','2026-09-24')")) {
+        statement.setString(1, independentLoginHash());
+        assertEquals(1, statement.executeUpdate());
+      }
+      var transport =
+          (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
+      try (var api =
+              ApiLogPathApplicationRuntime.startWithLoginAndLog(
+                  () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                  source(db::api),
+                  fingerprints,
+                  contexts,
+                  snapshots,
+                  ignored -> {
+                    throw new AssertionError("Game route is outside Log PT");
+                  },
+                  clock,
+                  ignored -> {
+                    throw new AssertionError("unexpected terminal API delivery");
+                  });
+          var web =
+              WebLogApplicationRuntime.start(
+                  root,
+                  0,
+                  source(db::web),
+                  transport,
+                  sessionCodec,
+                  clock,
+                  audit(),
+                  java.util.UUID::randomUUID,
+                  dispatcher(source(db::web), logCodec, transport),
+                  "web-log-worker",
+                  10,
+                  Duration.ofMillis(10),
+                  ignored -> {
+                    throw new AssertionError("unexpected terminal Web reply");
+                  })) {
+        URI login = URI.create("http://127.0.0.1:" + web.port() + "/login");
+        var get =
+            client.send(
+                HttpRequest.newBuilder(login)
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, get.statusCode());
+        assertEquals("schubert NK - ログイン", Jsoup.parse(get.body()).title());
+        var csrf = Jsoup.parse(get.body()).selectFirst("input[name=_csrf]");
+        assertNotNull(csrf);
+        assertFalse(csrf.attr("value").isEmpty());
+        String anonymous = get.headers().firstValue("Set-Cookie").orElseThrow();
+        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains("secure"));
+        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains("httponly"));
+        String form =
+            "username=adminpt&password=synthetic-password&_csrf="
+                + URLEncoder.encode(csrf.attr("value"), StandardCharsets.UTF_8);
+        var post =
+            client.send(
+                HttpRequest.newBuilder(login)
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .header("Cookie", anonymous.split(";", 2)[0])
+                    .header("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(302, post.statusCode());
+        assertEquals("/", post.headers().firstValue("Location").orElseThrow());
+        String authenticated = post.headers().firstValue("Set-Cookie").orElseThrow();
+        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains("secure"));
+        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains("httponly"));
+        String cookie = authenticated.split(";", 2)[0];
+        assertNotEquals(anonymous.split(";", 2)[0], cookie);
+        try (var connection = db.api();
+            var statement = connection.createStatement()) {
+          assertEquals(
+              1,
+              statement.executeUpdate(
+                  "insert into schubert.app_logs(logged_at,service,category,level,action,message)"
+                      + " values(current_timestamp,'API','ACTION','INFO','PTSCR135','synthetic log result')"));
+        }
+        var result =
+            client.send(
+                HttpRequest.newBuilder(
+                        URI.create("http://127.0.0.1:" + web.port() + "/logs?action=PTSCR135"))
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .header("Cookie", cookie)
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, result.statusCode());
+        var rows = Jsoup.parse(result.body()).select(".log-row");
+        assertEquals(1, rows.size());
+        assertTrue(rows.first().text().contains("PTSCR135"));
+        assertTrue(rows.first().text().contains("synthetic log result"));
+        assertEquals(
+            1,
+            count(
+                db.api(),
+                "select count(*) from schubert.request_inbox where request_layout_id='LGSREQ01' and processing_state='COMPLETED'"));
+        assertEquals(
+            1, count(db.api(), "select count(*) from schubert.app_logs where action='PTSCR135'"));
+        assertTrue(api.ready());
+        assertTrue(web.ready());
+      }
+    } finally {
+      broker.stop();
+      db.stop();
+    }
+  }
+
   private static int count(Connection connection, String query) throws SQLException {
     try (connection;
         var statement = connection.createStatement();
