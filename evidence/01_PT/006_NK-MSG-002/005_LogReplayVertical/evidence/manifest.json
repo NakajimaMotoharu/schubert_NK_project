@@ -1,0 +1,262 @@
+{
+  "runId": "PT-WEB-20260924-50",
+  "targetCommit": "773c4341c5c992164a0cb0ad4d4fa28ad9e054b8",
+  "branch": "dev-foundation",
+  "startedAt": "2026-09-24T18:35:53+09:00",
+  "completedAt": "2026-09-24T18:48:14+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6",
+    "artemis": "2.56.0",
+    "node": "24.19.0",
+    "libc": "glibc 2.43",
+    "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
+  },
+  "rawLogSha256": "a975b433b5383eb779f2592886a2e733df1e223f5df54a63839fe737c724c079",
+  "programId": "NK-MSG-002",
+  "testIds": {
+    "PT-IDEM-016": "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest#idem016WebOutboxRetriesIntoApiProjectionExactlyOnce"
+  },
+  "scopeResult": "PASS_REAL_LOG_REPLAY_VERTICAL_UNIT_ONLY",
+  "programComplete": false,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "expected": {
+    "firstSend": "ERROR/attempt1/JMS_SEND_FAILURE/API row0",
+    "beforeDue": "no claim at due minus 1 microsecond",
+    "retry": "SENT/attempt1/API WEB|REQUEST|HTTP_REQUEST_COMPLETED row1",
+    "duplicate": "second API callback, source_message_id row remains 1",
+    "terminalCallbacks": 0
+  },
+  "actual": "All independent JUnit SQL/JMS assertions passed",
+  "coverage": {
+    "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository": {
+      "INSTRUCTION": {
+        "covered": 430,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 31,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 95,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 27,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogDispatcher": {
+      "INSTRUCTION": {
+        "covered": 172,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 44,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 11,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogMessageSender": {
+      "INSTRUCTION": {
+        "covered": 202,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 18,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 60,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 13,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers": {
+      "INSTRUCTION": {
+        "covered": 134,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 42,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 11,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": {
+      "INSTRUCTION": {
+        "covered": 18,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/logging/WebLogIngestService": {
+      "INSTRUCTION": {
+        "covered": 256,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 12,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "related": [
+    "PG253",
+    "PT-IDEM-016",
+    "RD MQ-006/008/010/MON-003/004/005",
+    "UI231/235/242/251",
+    "SS312/321/324/331/332/351/352"
+  ],
+  "limitations": "Actual NK process startup and CHR-L01 not covered.",
+  "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
+  "fullReactorManifestSha256": "96e8035d3da1dcede60e76a9d991245db0f137afa63d7573478a4ebd80098622",
+  "junitReportSha256": "3eb0c11f1c8504c0511057cb5e8f09c695514441e2ccd67596595ea352809a28",
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "c4ecd645e2dfb6c1962d94f3ced10e047d2250d94b4dcd775cb29bae0d088be2"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+      "sha256": "9ef6ea79920b6627b6120d76125d2947326d3ea3dd0c3ec587baaaaf47e6a9ce"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "sha256": "560d09a73c681cc2ff35a106cfae6457cdbd24a94923ae84885c84be1f5903ae"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+      "sha256": "994e1ce2780c9b6c795e4e2404810ef19940d12ac87c9a902bb7f01782684bd8"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+      "sha256": "e33e8fa95a59034b50ca019d508466653e8eb99cb59c4dfc5358545b5a06ecad"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+      "sha256": "b37b87f7e787540b2ccf20ce92d014a2b71d7f038ae4cfecc22ab3133177933e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "sha256": "79043416a36dd6aeddd222831899f04973b61ffea0c77550de2495cb6e6e51bd"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+      "sha256": "93b7efd06f8fa11f905dc3ea11a6417ec7b59ae09cb76d44cfa9ce10da8e8ce6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "sha256": "3ac3e41946ff6d7a7da99cbf1ee2dc95397964e22be7d52e9b846a1312c7278a"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/class-counters.json",
+      "sha256": "2e2bda49078a02b6044f1bf34f7bbed8ac7441ad3c639a3c4e9e074fc72d8f1c"
+    },
+    {
+      "path": "input/oracle.json",
+      "sha256": "b7881de3cf73628b7c73ac4cbc7a8118bfb1867f7172b8d13efc8a4d473860c0"
+    },
+    {
+      "path": "logs/005_Log再送縦結線単体テスト仕様書.md",
+      "sha256": "09691145eb94967a289bbcef134c35d36918c973b7f2470bbbae6ef3474bc7d5"
+    },
+    {
+      "path": "logs/006_Log再送縦結線実行結果.md",
+      "sha256": "14b06464c03fa62e30f5a8f18d2e0696ab6e088b7e7b8f063cbb4cf7bce9de7d"
+    },
+    {
+      "path": "output/results.xml",
+      "sha256": "b1ea755e3bd5b8a4f6cdb68c09a3a118946e4a4f4834f3ff719b06b63eee7388"
+    }
+  ]
+}

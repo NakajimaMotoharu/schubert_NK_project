@@ -1,0 +1,12 @@
+{
+  "testId": "PT-IDEM-016",
+  "source": "UI232/235 fixed byte offsets; SS312/324/351; SQL postconditions on V001..022",
+  "expected": {
+    "firstSend": "ERROR/attempt1/JMS_SEND_FAILURE/API row0",
+    "beforeDue": "no claim at due minus 1 microsecond",
+    "retry": "SENT/attempt1/API WEB|REQUEST|HTTP_REQUEST_COMPLETED row1",
+    "duplicate": "second API callback, source_message_id row remains 1",
+    "terminalCallbacks": 0
+  },
+  "limitations": "Actual NK process startup and CHR-L01 not covered."
+}

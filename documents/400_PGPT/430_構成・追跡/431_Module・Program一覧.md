@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG253正式限定追記: `NK-MSG-002`/Web `WebLogOutboxRepository`・`WebLogDispatcher`・`WebLogMessageSender`→実Artemis→API `WebLogConsumers`・`WebLogListener`・`WebLogIngestService`をPT-IDEM-016（006/005～006・`005_LogReplayVertical/evidence`）で追跡。RD MQ-006/008/010・MON-003/004/005、UI231/235/242/251、SS312/321/324/331/332/351/352、PG-D-253。正式`PT-WEB-20260924-50`/source`773c4341c`で1852PT/53scope/hash/102負canary・Production全coverage/静的0。実DB/Brokerの初回失敗→due再送→API投影・同一wire重複1行を限定認定。全Production起動/実NK CHR-L01は未完了、PGPT中心47%据置。
+
 2026-09-24 PG252正式限定追記: `NK-WEB-002`/`WebLogApplicationRuntime.close/closeAfterFailure`→PT-SCR-133（016/037～038・evidence）。RD MQ-003/008・MON-003、UI231/251、SS314/321/342、BUG-243/YKT-154、PG-D-252。正式`PT-WEB-20260924-47`/source`b0872135d`で1851PT/52scope/hash/101負canary・Production全coverage/静的0。親close複合同一Throwableだけ限定認定、Web/API全起動・実NK CHR-L01は未完了、PGPT中心47%据置。
 
 2026-09-24 PG251正式限定追記: `NK-MSG-001`/`ArtemisReplyConsumer.rollbackAfterFailure`→PT-JMS-021（005/evidence/jms-resource-compounds）、`NK-MSG-002`/`OutboxJmsSender.rollback`→PT-IDEM-010-R01、`WebLogMessageSender.rollback`→PT-IDEM-012-R01（006/004_JmsResourceCompounds/evidence）。RD MQ-003/004/006/008、UI231/242、SS312/321/324、BUG-242/YKT-154、PG-D-251。正式`PT-WEB-20260924-46`/source`536488e81`で1850PT/52scope/hash/101負canary・Java6 module全coverage/静的0。3責務の同一Throwable rollback限定認定、他owner・Production親起動/実NK CHR-L01未完了、PGPT中心47%据置。
