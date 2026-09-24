@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-46",
-  "targetCommit": "536488e8100dfb284fd044188a22f24c924721dc",
+  "runId": "PT-WEB-20260924-47",
+  "targetCommit": "b0872135d539a6c6af5aa4657a2a876e4678c29b",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T17:09:21+09:00",
-  "completedAt": "2026-09-24T17:21:42+09:00",
+  "startedAt": "2026-09-24T17:36:04+09:00",
+  "completedAt": "2026-09-24T17:48:24+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "9e568442da6ee35264c0d883f08e414a0d0f2a8932a728ec209db976c0040fa7",
+  "rawLogSha256": "c341f466fe79d97d40a1d164474cc8f9473fc8159764bb602415a79e6e1090da",
   "logTemplateOracle": "019/SCR084..091: actual Log resolver/Current DOM literals,ADMIN,7filters/6types/3levels/date step,all row optionals/details,0/100/101/201/clamped pagination,escaping/invalid field display/CSRF,scoped Current CSS/resource,64 renders.Not browser byte validator/HTTP/NK gate.",
   "logBrowserOracle": "021/SCR092-A..H: eight independent byte/NFC/control/DOM event cases, Node line/function/branch100, exact hash and no skipped/todo. Not live browser or actual NK CHR.",
   "logHttpOracle": "023/SCR093..103: independent UI232/235 bytes and DOM/status, ADMIN/anonymous/USER/0102, all result errors, invalid400/noMQ, malformed/unknown/IO/null, real loopback GET/HEAD/POST and role/session, 64 concurrent contexts. Not live broker or actual NK CHR-L01.",
@@ -221,6 +221,7 @@
     "PT-SCR-129": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest#scr129PartialStartupClosesReplyConsumer",
     "PT-SCR-130": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest#scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
     "PT-SCR-131": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest#scr131StartupNullContractsAndSuppressedCleanup",
+    "PT-SCR-133": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest#scr133SameThrowableAcrossOwnedClosuresKeepsPrimary",
     "PT-SCR-132": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest#scr132RuntimePostgresDriverAndScopeCanaries"
   },
   "failed": 0,
@@ -308,11 +309,11 @@
     "dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 376
+        "covered": 382
       },
       "BRANCH": {
         "missed": 0,
-        "covered": 22
+        "covered": 26
       },
       "LINE": {
         "missed": 0,
@@ -320,7 +321,7 @@
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 20
+        "covered": 22
       },
       "METHOD": {
         "missed": 0,
@@ -630,7 +631,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "7dbc82e31f63f88148ff2f3f71b3c603fec2078023fb4adb97daad73b49c92c9",
+  "fullReactorManifestSha256": "8f9122fbc72c8cb37b905265286b00257eeeb100ac7d3b6fc9e719132528c905",
   "related": [
     "PG-D-194",
     "PG-D-195",
@@ -897,11 +898,11 @@
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
-      "sha256": "0c223630b16180a5b84bcb87d7fe15b5cc619f47a223ece681142ca5d0dfdfa0"
+      "sha256": "919686c1a7bfe59a44f0fa481ca1bdc9505c05a5fccc75b3abea9786525e7232"
     },
     {
       "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntimeTest.java",
-      "sha256": "d0214e887356a973d22b713b9588494a8d8d1406337cdc6048e0abfd21c7ed5a"
+      "sha256": "d450fa2c6e8ae810ba1847d03ce0d726ce901abcd21310526277d336080be1eb"
     },
     {
       "path": "src/schubert-nk-web/pom.xml",
@@ -915,7 +916,7 @@
   "files": [
     {
       "path": "coverage/class-counters.json",
-      "sha256": "4daf17fe3ba5dcc199238a97d744d3266120c1115fc836a974381b999b532305"
+      "sha256": "ba31532b06dce3147cae14847085ae5fc4bad42bff597fa074598c7f1d8fe1ce"
     },
     {
       "path": "input/PT-SCR-012.txt",
@@ -1095,11 +1096,11 @@
     },
     {
       "path": "logs/037_NK-WEB-002_Log経路親起動単体テスト仕様書.md",
-      "sha256": "dfe74c72569bb9753973b5fc6c9a348dd3d2e26c4c72209908521529ee2d87cb"
+      "sha256": "51182db848079431654b0f352a204c43be319e0e04781d7cc250b1db525d9f79"
     },
     {
       "path": "logs/038_NK-WEB-002_Log経路親起動実行結果.md",
-      "sha256": "d72e8a211978505ebbd3dc91ad4386429c358f213a4e83b2e83a67724fdc3e85"
+      "sha256": "eef94d55437ccf3bb7182e63a24c13de38d9f1a732c9f4ce9538bee7088d0b2b"
     },
     {
       "path": "logs/039_NK-WEB-002_Web実行時JDBC依存単体テスト仕様書.md",
@@ -1138,6 +1139,10 @@
       "sha256": "a2cf9e88566fde6322a35b250725c7f07a0219d09511f2ac78cee5557a0f2117"
     },
     {
+      "path": "output/PT-SCR-133-BUG-243-red.txt",
+      "sha256": "1fcb42fc745f0ae8f14315883421f50b04db744831665f2a775e30d2d9ee6a30"
+    },
+    {
       "path": "output/PT-SCR025-node.json",
       "sha256": "07cbfcf206ffc9b3a2aaa8ff27c98f906d6c204f45735d9ff014bc9692fcc9b0"
     },
@@ -1147,7 +1152,7 @@
     },
     {
       "path": "results.xml",
-      "sha256": "ae43cf19bc8ba97485caffb48ea841e7447b3c5ee5acd8bf29b11e94d50ab6ef"
+      "sha256": "f2f2b02a091757d2f54b00f8e35d0559bc1a3cc225738971bd28d676696c92ec"
     }
   ]
 }

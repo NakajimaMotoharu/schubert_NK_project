@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG252正式限定追記: `NK-WEB-002`/`WebLogApplicationRuntime.close/closeAfterFailure`→PT-SCR-133（016/037～038・evidence）。RD MQ-003/008・MON-003、UI231/251、SS314/321/342、BUG-243/YKT-154、PG-D-252。正式`PT-WEB-20260924-47`/source`b0872135d`で1851PT/52scope/hash/101負canary・Production全coverage/静的0。親close複合同一Throwableだけ限定認定、Web/API全起動・実NK CHR-L01は未完了、PGPT中心47%据置。
+
 2026-09-24 PG251正式限定追記: `NK-MSG-001`/`ArtemisReplyConsumer.rollbackAfterFailure`→PT-JMS-021（005/evidence/jms-resource-compounds）、`NK-MSG-002`/`OutboxJmsSender.rollback`→PT-IDEM-010-R01、`WebLogMessageSender.rollback`→PT-IDEM-012-R01（006/004_JmsResourceCompounds/evidence）。RD MQ-003/004/006/008、UI231/242、SS312/321/324、BUG-242/YKT-154、PG-D-251。正式`PT-WEB-20260924-46`/source`536488e81`で1850PT/52scope/hash/101負canary・Java6 module全coverage/静的0。3責務の同一Throwable rollback限定認定、他owner・Production親起動/実NK CHR-L01未完了、PGPT中心47%据置。
 
 2026-09-24 PG250正式限定追記: `NK-MSG-001`/`ArtemisRequestSender.send/rollbackAfterFailure/closeAfterFailure`→PT-JMS-020 A～D（005/evidence/request-sender-resource）。RD MQ-003/008、UI231、SS321/324、BUG-241/YKT-154、PG-D-250。正式`PT-WEB-20260924-45`/source`328b05a2e`で1847PT/50scope/hash/100負canary・Java6 module全coverage/静的0。Web同期送信の同一Throwable複合だけ限定認定。他JMS所有者、Production全親起動・実NK CHR-L01は未完了、PGPT中心47%据置。
