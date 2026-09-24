@@ -1096,7 +1096,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 380}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 381}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -1104,6 +1104,21 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
         with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         with self.assertRaises(ValueError): batch.validate_reactor(verified, "PT-WEB-other")
+
+    def test_batch_runtime_dependency_inventory_and_nonpassing_cases(self):
+        cls = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
+        name = "bat283RuntimePostgresDriverAndScopeCanaries"
+        self.assertEqual(cls, batch.BATCH_RUNTIME_DEPENDENCY_CLASS)
+        self.assertEqual((name,), batch.BATCH_RUNTIME_DEPENDENCY_METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="1", failures="0", errors="0", skipped="0")
+        ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({"PT-BAT-283": cls + "#" + name}, batch.validate_batch_runtime_dependency_suite(suite))
+        for key, value in (("tests", "0"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): batch.validate_batch_runtime_dependency_suite(wrong)
+        for replacement in ("unlisted", name + "(Path)"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
+            with self.assertRaises(ValueError): batch.validate_batch_runtime_dependency_suite(wrong)
 
     @staticmethod
     def completion_fixture():
@@ -1840,6 +1855,7 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest",
                  "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest",
                  "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest",
+                 "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest",
                  "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
                  "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
                  "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
@@ -1855,8 +1871,8 @@ class EvidenceSetTest(unittest.TestCase):
                  "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
                  "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest")
         suites = [ET.Element("testsuite", name=n) for n in names]
-        self.assertEqual(39, len(suites))
-        self.assertEqual(suites[:25], batch.select_program_suites(suites))
+        self.assertEqual(40, len(suites))
+        self.assertEqual(suites[:26], batch.select_program_suites(suites))
         for bad in ([], suites[:-1], suites + [suites[0]], [suites[0], suites[0], suites[2]]):
             with self.assertRaises(ValueError): batch.select_program_suites(bad)
         # BUG-150/YKT-116: visit every independently specified class after inventory growth.
@@ -2292,12 +2308,17 @@ class EvidenceSetTest(unittest.TestCase):
         reports.append(bundle)
         completion, completion_expected = self.completion_fixture()
         reports.append(completion)
+        runtime_cls = batch.BATCH_RUNTIME_DEPENDENCY_CLASS
+        runtime_name = batch.BATCH_RUNTIME_DEPENDENCY_METHODS[0]
+        runtime = ET.Element("testsuite", name=runtime_cls, tests="1", failures="0", errors="0", skipped="0")
+        ET.SubElement(runtime, "testcase", classname=runtime_cls, name=runtime_name)
+        reports.append(runtime)
         accepted = batch.validate_reports(reports)
         self.assertEqual(completion_expected,{k:v for k,v in accepted.items() if k in completion_expected})
         self.assertEqual(bundle_expected,{k:v for k,v in accepted.items() if k in bundle_expected})
         self.assertEqual(publication_expected, {k: v for k,v in accepted.items() if k in publication_expected})
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
-        self.assertEqual(282, len(accepted))
+        self.assertEqual(283, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
         self.assertEqual(98, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)

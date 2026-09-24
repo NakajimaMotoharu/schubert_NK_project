@@ -9,7 +9,12 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 380
+BATCH_TEST_COUNT = 381
+BATCH_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
+BATCH_RUNTIME_DEPENDENCY_METHODS = ("bat283RuntimePostgresDriverAndScopeCanaries",)
+
+def validate_batch_runtime_dependency_suite(suite):
+    return validate_group(suite, BATCH_RUNTIME_DEPENDENCY_CLASS, BATCH_RUNTIME_DEPENDENCY_METHODS, 283)
 COMPLETION_CLASS = "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest"
 COMPLETION_METHODS = ("verifiedCommitAndReplay", "invalidFilesAndHandleBinding", "allReadAndDatabaseFailures", "sharedDeadlineAndInterrupt", "completionClockAndCommitUncertainty", "nullOwnershipAndFactory", "unknownFailuresAndResourceOwnership", "concurrentAndIndependentTrace")
 COMPLETION_TRACES = {"PT-BAT-281-completion.txt": b"manifestSha256=bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370\nfiles=4\nDB=1/1/0/26\nCONFIG=2/2/0/67\nend=2026-09-12T15:00:04.987654Z\nowner=SUCCESS\nnonowner=REJECTED\n"}
@@ -277,6 +282,7 @@ def select_program_suites(suites):
     # PG-D-147/148: shared module, distinct Program IDs; no unknown/missing/duplicate class.
     expected = {CLASS, LOG_CLASS, HANDOFF_CLASS, RECORD_CLASS, DURABLE_CLASS, LIFECYCLE_CLASS, REFERENCES_CLASS,
                 RETIREMENT_RECORD_CLASS, RETIREMENT_CLASS, SUMMARY_CLASS, ATTEMPT_CLASS, STEP_VALUE_CLASS, STEP_REPOSITORY_CLASS, ATOMIC_VALUE_CLASS, ATOMIC_REPOSITORY_CLASS, ATOMIC_SERVICE_CLASS, BACKUP_VALUE_CLASS, BACKUP_CODEC_CLASS, ARTIFACT_CLASS, PAIR_CLASS, COMMIT_CLASS, READER_CLASS, *OPS_CLASSES}
+    expected.add(BATCH_RUNTIME_DEPENDENCY_CLASS)
     expected.add(PUBLICATION_CLASS)
     expected.add(BUNDLE_CLASS)
     expected.add(COMPLETION_CLASS)
@@ -368,6 +374,7 @@ def validate_reports(suites):
                   SUMMARY_CLASS: validate_summary_suite, ATTEMPT_CLASS: validate_attempt_suite,
                   STEP_VALUE_CLASS: validate_step_value_suite, STEP_REPOSITORY_CLASS: validate_step_repository_suite,
                   ATOMIC_VALUE_CLASS: validate_atomic_value_suite, ATOMIC_REPOSITORY_CLASS: validate_atomic_repository_suite, ATOMIC_SERVICE_CLASS: validate_atomic_service_suite, BACKUP_VALUE_CLASS: validate_backup_value_suite, BACKUP_CODEC_CLASS: validate_backup_codec_suite, ARTIFACT_CLASS: validate_artifact_suite, PAIR_CLASS: validate_pair_suite, COMMIT_CLASS: validate_commit_suite, READER_CLASS: validate_reader_suite}
+    validators[BATCH_RUNTIME_DEPENDENCY_CLASS] = validate_batch_runtime_dependency_suite
     validators[PUBLICATION_CLASS] = validate_publication_suite
     validators[BUNDLE_CLASS] = validate_bundle_suite
     validators[COMPLETION_CLASS] = validate_completion_suite
@@ -563,7 +570,8 @@ def main():
         "logServiceOracle": "003/PT018..029: held10000 then eligible1 yields three committed chunks and cumulative10001/1/10000; resume initial2/0/2 yields attempt1/1/0; derive initial cumulative by first committed cumulative minus its same-TX chunk; parent reentrant session lock retained, own acquisition released; first/late backup and row locks stop;30min/interrupt/wrap; rollback failure never enables implicit commit; unknown commit/recovery, every JDBC and resource failure, invalid counts/continuity reject before commit; only complete committed/restored/unlocked summary returns0/10.",
         "limitations": "No OS flock, actual backup verification, dedicated main, unit, whole-morning orchestrator, or IT/ST certificate. Repository observations require caller commit; LogCleanupService owns chunk transactions but borrows the parent connection.",
         "sourceFiles": [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
-                        for p in sorted((repo / "src/schubert-nk-batch").glob("src/**/*.java"))],
+                        for p in sorted((repo / "src/schubert-nk-batch").glob("src/**/*.java"))] +
+                       [{"path": "src/schubert-nk-batch/pom.xml", "sha256": hashlib.sha256((repo / "src/schubert-nk-batch/pom.xml").read_bytes()).hexdigest()}],
     })
     manifest["logServiceOracle"] += " BUG145/YKT113: BAT026 crosses real foreign-connection lock contention with result/statement/both close faults, and TIME_LIMIT/INTERRUPTED/BACKUP_GATE with both unlock close faults. All typed failures have zero cause/suppressed after closure; primary reason, interruption and caller connection ownership are preserved; no deletion on lock rejection."
     manifest["related"] += ["PG-D-150", "SSC-049", "BUG-146", "YKT-114"]
@@ -608,6 +616,8 @@ def main():
     manifest["related"] += ["PG-D-183"]
     manifest["related"] += ["PG-D-184", "SSC-067"]
     manifest["related"] += ["PG-D-185"]
+    manifest["related"] += ["PG-D-239", "BUG-234", "YKT-186"]
+    manifest["batchRuntimeDependencyOracle"] = "074/PT-BAT-283: SS341/342 independent Batch process JDBC42.7.13 runtime exactly once; test/compile/system/missing scope, old version and duplicate/absent dependency mutations rejected. Maven runtime-only classpath observed separately. No Batch launcher, credential or actual DB login certificate."
     manifest["retirementExecution"] = "072/073 BAT110: unchanged independent26-operation/6768-position oracle, fixed4 workers with independent PG clusters/connections and thread-owned native fixtures. Every injection/fixed failure/resource release assertion retained; exact completed position set and zero duplicates. Three extra clusters stopped after worker completion; no JUnit/component increase or production change."
     manifest["backupCompletionOracle"] = "070/071 BAT274..281: root reader and full artifact verifier precede DB pair completion; independent 161 IO and274 shared clock observations, every IO/deadline/interrupt position, actual PG18 rollback/uncertain commit/replay and fixed microsecond end. Borrowed root and connection; caller supplies continuous exclusion/stopped actors/terminated generation child. No actual archive generation, retention or whole-parent completion claim."
     manifest["batchRunResourceOracle"] = "068/069 BAT151: eight SQL-classified resource scopes,272 compounds plus two null Statement and original provider/same-throwable regressions. History/insert/replay68 each,abandon/finish34 each; scoped fault counts, actual close/live0 and independent snapshots after caller rollback. Provider IAE oracle clarified by prior SSC063/BUG206; malformed projection expectations unchanged. Existing399 fault positions and recovery/skip/replay/related services rerun, no new JUnit/component count."
