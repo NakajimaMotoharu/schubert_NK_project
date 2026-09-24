@@ -7,15 +7,17 @@ import java.nio.file.Path;
 import java.nio.file.SecureDirectoryStream;
 import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.UserPrincipal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /**
  * Read-only, no-follow inspection of six existing deployment roots. This is one startup
  * prerequisite, not an OS singleton, ACL, credential, or complete readiness decision. NK-SCN-001;
- * RD FIL-001..009; UI243; SS333 §2/343 §2; PG260/PT-SCN-008-A07.
+ * RD FIL-001..009; UI243; SS333 §2/343 §2; PG260-261/PT-SCN-008-A07/A08.
  */
 @NullMarked
 public final class StorageRootInspection {
@@ -39,23 +41,26 @@ public final class StorageRootInspection {
             layout.log(),
             layout.artemis(),
             layout.staging());
+    Set<Inode> inspected = new HashSet<>();
     for (int index = 0; index < roots.size(); index++) {
-      inspectOne(roots.get(index), index, assetIdentity, transferIdentity, backupIdentity);
+      Inode inode =
+          inspectOne(roots.get(index), index, assetIdentity, transferIdentity, backupIdentity);
+      requireDistinct(inspected, inode);
     }
   }
 
-  private static void inspectOne(
+  private static Inode inspectOne(
       Path root, int index, StorageIdentity asset, StorageIdentity transfer, StorageIdentity backup)
       throws StorageIoException {
     OwnedTransferDirectory held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
-    ResourceScope.use(
+    return ResourceScope.use(
         held::close,
         () ->
             held.atDirectory(
                 path -> {
                   try {
                     Map<String, Object> attributes =
-                        Files.readAttributes(path, "unix:owner,group,mode,nlink");
+                        Files.readAttributes(path, "unix:owner,group,mode,nlink,dev,ino");
                     if (index == 0) StorageAttributeGuard.directory(attributes, asset);
                     else if (index == 1) StorageAttributeGuard.directory(attributes, transfer);
                     else if (index == 2) requireBackup(attributes, backup);
@@ -63,11 +68,28 @@ public final class StorageRootInspection {
                     try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
                       requireSecureStream(entries);
                     }
-                    return Boolean.TRUE;
+                    return inode(attributes);
                   } catch (IOException | UnsupportedOperationException failure) {
                     throw unavailable();
                   }
                 }));
+  }
+
+  static Inode inode(Map<String, Object> attributes) throws StorageIoException {
+    Objects.requireNonNull(attributes, "attributes");
+    if (!(attributes.get("dev") instanceof Long device)
+        || !(attributes.get("ino") instanceof Long number)
+        || device < 0
+        || number < 1) throw unavailable();
+    return new Inode(device, number);
+  }
+
+  record Inode(long device, long number) {}
+
+  static void requireDistinct(Set<Inode> inspected, Inode candidate) throws StorageIoException {
+    Objects.requireNonNull(inspected, "inspected");
+    Objects.requireNonNull(candidate, "candidate");
+    if (!inspected.add(candidate)) throw unavailable();
   }
 
   static void requireBackup(Map<String, Object> attributes, StorageIdentity identity)

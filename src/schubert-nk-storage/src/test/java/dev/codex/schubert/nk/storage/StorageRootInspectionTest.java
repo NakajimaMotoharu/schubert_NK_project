@@ -9,6 +9,7 @@ import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.UserPrincipal;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -16,6 +17,34 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-SCN-008-A07: real Linux six-root, no-follow and read-only startup prerequisite. */
 class StorageRootInspectionTest {
   @TempDir Path temporary;
+
+  @Test
+  void a08DeviceAndInodeBothDefinePhysicalRootIdentity() throws Exception {
+    var same = StorageRootInspection.inode(Map.of("dev", 8L, "ino", 200L));
+    var otherDevice = StorageRootInspection.inode(Map.of("dev", 9L, "ino", 200L));
+    var otherInode = StorageRootInspection.inode(Map.of("dev", 8L, "ino", 201L));
+    var seen = new HashSet<StorageRootInspection.Inode>();
+    StorageRootInspection.requireDistinct(seen, same);
+    StorageRootInspection.requireDistinct(seen, otherDevice);
+    StorageRootInspection.requireDistinct(seen, otherInode);
+    assertEquals(3, seen.size());
+    assertThrows(StorageIoException.class, () -> StorageRootInspection.requireDistinct(seen, same));
+    for (Map<String, Object> bad :
+        java.util.List.of(
+            Map.<String, Object>of("ino", 200L),
+            Map.<String, Object>of("dev", 8L),
+            Map.<String, Object>of("dev", "8", "ino", 200L),
+            Map.<String, Object>of("dev", 8L, "ino", "200"),
+            Map.<String, Object>of("dev", -1L, "ino", 200L),
+            Map.<String, Object>of("dev", 8L, "ino", 0L))) {
+      assertThrows(StorageIoException.class, () -> StorageRootInspection.inode(bad));
+    }
+    assertThrows(NullPointerException.class, () -> StorageRootInspection.inode(null));
+    assertThrows(
+        NullPointerException.class, () -> StorageRootInspection.requireDistinct(null, same));
+    assertThrows(
+        NullPointerException.class, () -> StorageRootInspection.requireDistinct(seen, null));
+  }
 
   @Test
   void a07MetadataAndProviderNegativeMatrix() throws Exception {
