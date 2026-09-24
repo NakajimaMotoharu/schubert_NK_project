@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456 checkpoint53、正式`PT-WEB-20260924-40`/source`c1512bf6`の全1836PT/49scope/hash/99負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG245/004-064～065のappend-only V021・Expiry batch監査3列/旧SUCCESS安全停止だけを限定認定。run38/39は旧PT inventory/fixture不整合により不認定として保持。親DB同transaction書込/失敗時監査・同run再実行・health/critical/Production親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
+
 2026-09-24最新確定は456/460 checkpoint48、正式`PT-WEB-20260924-37`/source`00d2ae9a`の全1834PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG244/018-050～051の実Expiry7日選択削除単体のみ限定認定。親DB記録/health/critical/同run再実行・全Broker readiness・Production親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24 PG244選択段階: 018/050～051のExpiry実7日selector purgeをPT-OPS-MQ-023～026選択4/4、Batch全395PT/coverage check/静的0、98負canaryで確認。正式全reactor/hash前で未認定、`batch_runs`/critical/朝起動親は未完了。最新正式確定はcheckpoint46の1830PT、全工程中心47%据置。
