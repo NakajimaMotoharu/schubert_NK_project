@@ -466,12 +466,13 @@ final class CleanupRepositoryTest {
                 + ":"
                 + dependency.getElementsByTagName("artifactId").item(0).getTextContent());
     }
-    // SSC-049/PG-D-147/223: only storage and Artemis management client; never API/Web/Protocol.
+    // SS311/341/342, BUG-234/235: external JDBC driver is required; never API/Web/Protocol.
     assertEquals(
         Set.of(
             "org.jspecify:jspecify",
             "dev.codex.schubert:schubert-nk-storage",
             "org.apache.artemis:artemis-jakarta-client",
+            "org.postgresql:postgresql",
             "com.github.spotbugs:spotbugs-annotations"),
         runtime);
     try (var files = Files.walk(repo.resolve("src/schubert-nk-batch/src/main/java"))) {
