@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint44、正式`PT-WEB-20260924-35`/source`77fcddb8`の全1829PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG242/018-046～047のQueue容量read-only snapshotのみ限定認定。Expiry purge/Production credential/全Broker readiness・親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
+
 2026-09-24最新確定は456/460 checkpoint42、正式`PT-WEB-20260924-34`/source`55def91f`の全1826PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG241/018-044～045の実効role設定のみ限定認定。Production credential/全Broker readiness・親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24最新確定は456/460 checkpoint40、正式`PT-WEB-20260924-33`/source`e81eb72b`の全1823PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG240/018-042～043の実効Core acceptor照合のみ限定認定。SS321残readiness、YKT-185/186、Production credential/親起動・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
