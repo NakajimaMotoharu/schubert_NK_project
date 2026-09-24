@@ -132,10 +132,12 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ServiceConfigFilesTest", 1
      "opsCfgfile007MidReadFaultsAndInodeDrift")),)
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
     ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
-     "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads")),
+     "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads",
+     "opsApiLoad005EnvironmentIsExactBeforeFileRead")),
     ("dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest", 1,
     ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
-     "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads")))
+     "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads",
+     "opsWebLoad005EnvironmentIsExactBeforeFileRead")))
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
@@ -342,7 +344,8 @@ def main():
         sources += [repo / "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java"]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/deployment/config" / name
-                    for name in ("common.yml.template", "api.yml.template", "web.yml.template")]
+                    for name in ("common.yml.template", "api.yml.template", "web.yml.template",
+                                 "api.env.template", "web.env.template")]
         sources += [repo / "src/schubert-nk-batch/src/main/java" / (s + ".java") for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS)]
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
@@ -479,6 +482,8 @@ def main():
         manifest["serviceConfigFileOracle"] = "064/PT-OPS-CFGFILE-001..007: independent literal common/api/web UTF-8 bytes; fixed names and root:schubert 0750 / file0640 single-link metadata, same device and held-inode before/after, 1..16384-byte bounds, symlink/nonregular/missing/invalid UTF-8/identity drift and injected mid-read faults, null/concurrent/owned-close checks. Actual account/ACL/filesystem/env/credential/cross-file atomic rollout, Java process integration and readiness are unverified."
         manifest["related"] += ["PG-D-276", "PT-OPS-API-LOAD-001..004", "PT-OPS-WEB-LOAD-001..004"]
         manifest["configLoaderOracle"] = "066/068: independent common DEBUG and API/Web fixed service layer vectors; exact API or Web read once, parser result, source checked failure identity vs fixed malformed YAML, null contracts and32 fresh concurrent reads. Immutable production factory uses fixed ServiceConfigFiles. Actual external Java main/OS/credential/DB/JMS/readiness and NK CHR are unverified."
+        manifest["related"] += ["PG-D-277", "SSC-080", "BUG-256", "YKT-192", "PT-OPS-API-LOAD-005", "PT-OPS-WEB-LOAD-005"]
+        manifest["environmentOracle"] = "056/PT-OPS-SVC-001/002 and066/068 LOAD005: independent exact single ASCII LF `SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk` for both required EnvironmentFile templates, fixed path and namespace map admission before source read, missing/other path/lowercase alias/unknown secret-like key rejection without value exposure. systemd manager actual root:service0600 deployment and external Java main remain unverified."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

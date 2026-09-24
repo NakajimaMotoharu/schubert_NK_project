@@ -14,7 +14,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/243/251/253; SS342/343; PG269/274. */
+/** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/243/251/253; SS342/343; PG269/274/277. */
 final class ApplicationServiceUnitTest {
   private static final Path ROOT = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path UNITS = ROOT.resolve("src/deployment/systemd");
@@ -38,6 +38,7 @@ final class ApplicationServiceUnitTest {
     assertTrue(unit.contains("dev.codex.schubert.nk.api.bootstrap.ApiProcessMain"));
     assertFalse(unit.contains("LoadCredential=web-session-aes"));
     assertFalse(unit.contains("ReadWritePaths=/srv/schubert-nk/data/assets"));
+    exactEnvTemplate("api");
   }
 
   @Test
@@ -58,6 +59,7 @@ final class ApplicationServiceUnitTest {
     assertTrue(unit.contains("dev.codex.schubert.nk.web.bootstrap.WebProcessMain"));
     assertFalse(unit.contains("LoadCredential=api-context-aes"));
     assertFalse(unit.contains("LoadCredential=operation-hmac"));
+    exactEnvTemplate("web");
   }
 
   @Test
@@ -122,6 +124,15 @@ final class ApplicationServiceUnitTest {
 
   private static String read(String name) throws Exception {
     return Files.readString(UNITS.resolve(name + ".service.template"));
+  }
+
+  private static void exactEnvTemplate(String service) throws Exception {
+    byte[] actual =
+        Files.readAllBytes(ROOT.resolve("src/deployment/config/" + service + ".env.template"));
+    assertTrue(
+        java.util.Arrays.equals(
+            "SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk\n".getBytes(StandardCharsets.US_ASCII),
+            actual));
   }
 
   private static void exact(String unit, String key, String value) {

@@ -9,12 +9,16 @@ import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** PT-OPS-API-LOAD-001..004, SS343 API-only fixed file-to-parser bridge. */
+/** PT-OPS-API-LOAD-001..005, SS343 API-only fixed file-to-parser bridge. */
 final class ApiConfigurationLoaderTest {
+  private static final Map<String, String> ENV =
+      Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk");
+
   @Test
   void opsApiLoad001FixedServiceAndLayerOrder() throws Exception {
     AtomicInteger calls = new AtomicInteger();
@@ -25,7 +29,7 @@ final class ApiConfigurationLoaderTest {
           return new ServiceConfigFiles.Contents(
               "nk.monitoring.mode: DEBUG\n", "nk.mq.url: tcp://127.0.0.1:61617\n");
         };
-    ApiNonSecretConfig config = new ApiConfigurationLoader(source).load();
+    ApiNonSecretConfig config = new ApiConfigurationLoader(source, ENV).load();
     assertEquals(1, calls.get());
     assertEquals("DEBUG", config.value("nk.monitoring.mode"));
     assertEquals("tcp://127.0.0.1:61617", config.value("nk.mq.url"));
@@ -40,13 +44,15 @@ final class ApiConfigurationLoaderTest {
         new ApiConfigurationLoader(
             service -> {
               throw sourceFailure;
-            });
+            },
+            ENV);
     assertSame(sourceFailure, assertThrows(StorageIoException.class, failed::load));
     ApiConfigurationLoader malformed =
         new ApiConfigurationLoader(
             service ->
                 new ServiceConfigFiles.Contents(
-                    "nk.monitoring.mode: DEBUG\n", "nk.web.http.port: 8080\n"));
+                    "nk.monitoring.mode: DEBUG\n", "nk.web.http.port: 8080\n"),
+            ENV);
     assertEquals(
         "API non-secret configuration unavailable",
         assertThrows(IllegalArgumentException.class, malformed::load).getMessage());
@@ -54,9 +60,9 @@ final class ApiConfigurationLoaderTest {
 
   @Test
   void opsApiLoad003NullContractsAndProductionFactory() {
-    assertThrows(NullPointerException.class, () -> new ApiConfigurationLoader(null));
+    assertThrows(NullPointerException.class, () -> new ApiConfigurationLoader(null, ENV));
     assertThrows(
-        NullPointerException.class, () -> new ApiConfigurationLoader(service -> null).load());
+        NullPointerException.class, () -> new ApiConfigurationLoader(service -> null, ENV).load());
     assertNotNull(ApiConfigurationLoader.production());
   }
 
@@ -70,7 +76,8 @@ final class ApiConfigurationLoaderTest {
               calls.incrementAndGet();
               return new ServiceConfigFiles.Contents(
                   "nk.monitoring.mode: STANDARD\n", "nk.db.pool.api.max: '8'\n");
-            });
+            },
+            ENV);
     try (var executor = Executors.newFixedThreadPool(8)) {
       var results = new ArrayList<java.util.concurrent.Future<ApiNonSecretConfig>>();
       for (int i = 0; i < 32; i++) results.add(executor.submit(loader::load));
@@ -80,5 +87,42 @@ final class ApiConfigurationLoaderTest {
       }
     }
     assertEquals(32, calls.get());
+  }
+
+  @Test
+  void opsApiLoad005EnvironmentIsExactBeforeFileRead() throws Exception {
+    AtomicInteger calls = new AtomicInteger();
+    NonSecretConfigSource source =
+        service -> {
+          calls.incrementAndGet();
+          return new ServiceConfigFiles.Contents(
+              "nk.monitoring.mode: STANDARD\n", "nk.db.pool.api.max: '8'\n");
+        };
+    for (Map<String, String> invalid :
+        java.util.List.of(
+            Map.<String, String>of(),
+            Map.of("SCHUBERT_NK_CONFIG_DIR", "/tmp/config"),
+            Map.of("schubert_nk_config_dir", "/etc/schubert-nk"),
+            Map.of(
+                "SCHUBERT_NK_CONFIG_DIR",
+                "/etc/schubert-nk",
+                "SCHUBERT_NK_PASSWORD",
+                "not-a-secret"))) {
+      assertEquals(
+          "API non-secret environment unavailable",
+          assertThrows(
+                  IllegalArgumentException.class,
+                  () -> new ApiConfigurationLoader(source, invalid).load())
+              .getMessage());
+    }
+    assertEquals(0, calls.get());
+    assertThrows(NullPointerException.class, () -> new ApiConfigurationLoader(source, null));
+    assertEquals(
+        "8",
+        new ApiConfigurationLoader(
+                source, Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk", "PATH", "/usr/bin"))
+            .load()
+            .value("nk.db.pool.api.max"));
+    assertEquals(1, calls.get());
   }
 }

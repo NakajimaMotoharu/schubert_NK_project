@@ -2257,10 +2257,12 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCfgfile007MidReadFaultsAndInodeDrift")))
         groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest", 1,
                        ("opsApiLoad001FixedServiceAndLayerOrder", "opsApiLoad002SourceAndParserFailuresStayDistinct",
-                        "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads")))
+                        "opsApiLoad003NullContractsAndProductionFactory", "opsApiLoad004ConcurrentFreshReads",
+                        "opsApiLoad005EnvironmentIsExactBeforeFileRead")))
         groups.append(("dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest", 1,
                        ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
-                        "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads")))
+                        "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads",
+                        "opsWebLoad005EnvironmentIsExactBeforeFileRead")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]

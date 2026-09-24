@@ -89,6 +89,8 @@ SSC-021のstorage version/hashもmanifestへ記載し、Web/API（batch使用時
 | 4 | `/etc/schubert-nk/<service>.env` | JVM option、config file location等の非秘密 |
 | 5（高） | systemd credential/config tree | DB/MQ password、AES/HMAC key、backup recipient等のsecret |
 
+SSC-080/BUG-256/YKT-192: Web/APIの`<service>.env`は固定`SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk`＋LFの単一ASCII行のみとし、root:service0600で配る。重複/未知/secret/大小文字alias/空値/CRLF/placeholder/JVM optionを受けない。Java起動前はsystemdから受けた非秘密値を固定pathと完全一致検査し、任意別directoryへfallbackしない。YAML2層の保持inode読取とcredentialのprivate LoadCredentialは別境界。配布file実体、systemd managerの読取、service identity/ACLはLinux IT実測で確認し、Java Map検査だけでfile文法や実権限を証明したとはしない。
+
 Command line引数でapplication property実値を上書きしない。未知key、重複・非推奨alias、placeholder未解決、
 secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはsecret値を`<redacted>`にしcanonical hashを保存。
 
