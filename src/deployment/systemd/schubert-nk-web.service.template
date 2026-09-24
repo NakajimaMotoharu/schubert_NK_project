@@ -1,0 +1,51 @@
+# NK-OPS-001; RD SYS-002/004, AUT-001, OPS-009; UI212/225/251/253; SS311/313/342/343.
+# PG269/PT-OPS-SVC-001..004. Do not install until WebProcessMain and full readiness are verified.
+[Unit]
+Description=Schubert NK Web
+After=schubert-nk-api.service artemis.service postgresql.service
+Requires=schubert-nk-api.service artemis.service postgresql.service
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=schubert-web
+Group=schubert-web
+SupplementaryGroups=schubert-read
+WorkingDirectory=/opt/schubert-nk/current/web
+EnvironmentFile=/etc/schubert-nk/web.env
+UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=db-web:/etc/schubert-nk/credentials/db-web
+LoadCredential=mq-web:/etc/schubert-nk/credentials/mq-web
+LoadCredential=web-session-aes-current:/etc/schubert-nk/credentials/web-session-aes-current
+LoadCredential=web-revoke-aes-current:/etc/schubert-nk/credentials/web-revoke-aes-current
+LoadCredential=web-log-aes-current:/etc/schubert-nk/credentials/web-log-aes-current
+ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=128m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -Xms384m -Xmx768m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/web/web.jar:/opt/schubert-nk/current/web/lib/* dev.codex.schubert.nk.web.bootstrap.WebProcessMain
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=120s
+TimeoutStopSec=30s
+SendSIGKILL=no
+MemoryMax=1536M
+LimitNOFILE=65536
+RuntimeDirectory=schubert-nk/web
+RuntimeDirectoryMode=0750
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

@@ -2230,8 +2230,12 @@ class EvidenceSetTest(unittest.TestCase):
                        "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove",
                        "opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision")))
         groups.append(("dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest", 29,
-                      ("opsMq029OrderedReadOnlyObservation", "opsMq030FailClosedAndNoLaterChecks",
+                       ("opsMq029OrderedReadOnlyObservation", "opsMq030FailClosedAndNoLaterChecks",
                        "opsMq031MalformedPressureAndFatalContracts")))
+        groups.append(("dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest", 1,
+                       ("apiDependencyCredentialAndResourceContract", "webDependencyCredentialAndResourceContract",
+                        "noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation",
+                        "renderedSyntaxIsAcceptedWithoutStartingService")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         self.check_launch_inventory(groups, True)
 
@@ -2263,7 +2267,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ",
                        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ",
                        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "PT-OPS-MQ",
-                       "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ",
+                       "dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest": "PT-OPS-SVC"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

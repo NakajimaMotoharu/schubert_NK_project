@@ -1,0 +1,52 @@
+# NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/251/253; SS311/321/342/343.
+# PG269/PT-OPS-SVC-001..004. Do not install until ApiProcessMain and full readiness are verified.
+[Unit]
+Description=Schubert NK API
+After=expiry-cleanup.service artemis.service postgresql.service
+Requires=expiry-cleanup.service artemis.service postgresql.service
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=schubert-api
+Group=schubert-api
+SupplementaryGroups=schubert-read schubert-web
+WorkingDirectory=/opt/schubert-nk/current/api
+EnvironmentFile=/etc/schubert-nk/api.env
+UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=db-api:/etc/schubert-nk/credentials/db-api
+LoadCredential=mq-api:/etc/schubert-nk/credentials/mq-api
+LoadCredential=api-context-aes-current:/etc/schubert-nk/credentials/api-context-aes-current
+LoadCredential=api-inbox-response-aes-current:/etc/schubert-nk/credentials/api-inbox-response-aes-current
+LoadCredential=operation-hmac-current:/etc/schubert-nk/credentials/operation-hmac-current
+ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=256m -XX:MaxMetaspaceSize=256m -XX:ReservedCodeCacheSize=128m -Xms512m -Xmx1024m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/api/api.jar:/opt/schubert-nk/current/api/lib/* dev.codex.schubert.nk.api.bootstrap.ApiProcessMain
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=120s
+TimeoutStopSec=60s
+SendSIGKILL=no
+MemoryMax=2048M
+LimitNOFILE=65536
+RuntimeDirectory=schubert-nk/api
+RuntimeDirectoryMode=0750
+ReadWritePaths=/srv/schubert-nk/data/transfer
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

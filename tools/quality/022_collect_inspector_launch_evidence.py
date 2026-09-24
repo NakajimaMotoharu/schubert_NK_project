@@ -107,6 +107,10 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientT
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest", 29,
     ("opsMq029OrderedReadOnlyObservation", "opsMq030FailClosedAndNoLaterChecks",
      "opsMq031MalformedPressureAndFatalContracts")),)
+DEPLOYMENT_GROUPS += ((PREFIX + "ApplicationServiceUnitTest", 1,
+    ("apiDependencyCredentialAndResourceContract", "webDependencyCredentialAndResourceContract",
+     "noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation",
+     "renderedSyntaxIsAcceptedWithoutStartingService")),)
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -218,7 +222,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": "PT-OPS-MQ",
                    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": "PT-OPS-MQ",
-                   "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": "PT-OPS-MQ",
+                   PREFIX + "ApplicationServiceUnitTest": "PT-OPS-SVC"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -326,7 +331,8 @@ def main():
                     repo / "src/deployment/tmpfiles/schubert-nk-maintenance.conf"]
         sources += [repo / "src/deployment" / p for p in (
             "operations/inbox-inspector.sh.template", "config/inbox-inspector.env.template", "systemd/schubert-nk-inbox-inspector.service",
-            "systemd/optional/inbox-inspector-context-previous.conf", "systemd/optional/inbox-inspector-response-previous.conf")]
+            "systemd/optional/inbox-inspector-context-previous.conf", "systemd/optional/inbox-inspector-response-previous.conf",
+            "systemd/schubert-nk-api.service.template", "systemd/schubert-nk-web.service.template")]
         unit_root = repo / "src/schubert-nk-batch/target/inspector-unit-traces"
         unit_traces = {str(p.relative_to(unit_root)): p.read_bytes() for p in unit_root.rglob("*") if p.is_file()}
         validate_unit_traces(unit_traces)
@@ -351,7 +357,9 @@ def main():
                      "036_NK-OPS-001_Artemis実効Queue単体テスト仕様書.md",
                      "037_NK-OPS-001_Artemis実効Queue実行結果.md",
                      "038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md",
-                     "039_NK-OPS-001_Artemis起動前観測実行結果.md"):
+                     "039_NK-OPS-001_Artemis起動前観測実行結果.md",
+                     "056_NK-OPS-001_WebAPI_service単体テスト仕様書.md",
+                     "057_NK-OPS-001_WebAPI_service実行結果.md"):
             (evidence / "logs" / name).write_bytes((repo / "evidence/01_PT/018_NK-OPS-001" / name).read_bytes())
         trace_root = target / "inspector-deployment"
         expected_paths = {f"{method}/{i:03}.json" for method, count in TRACES.items() for i in range(1, count + 1)}
@@ -412,6 +420,8 @@ def main():
         manifest["roleOracle"] = "044/PT-OPS-MQ-016..018: live Ops getRolesAsJSON for SS321 six business matches plus management namespace; exact role names and 12 boolean permissions, every permission flip/missing/extra/unknown/malformed/provider redacted, app management denied. JAAS user provisioning and all other startup gates remain separate."
         manifest["queuePressureOracle"] = "046/PT-OPS-MQ-019..021: live six-Queue Ops messageCount/persistentSize, independent SS321 count/byte 70/90 boundary-1/equals/+1 and DLQ one-message alert; missing/negative/type/provider redacted, app role denied. No startup policy or Expiry purge claimed."
         manifest["startupObservationOracle"] = "038/PT-OPS-MQ-029..031: fixed topology→broker→settings→acceptor→roles→six pressure order; any ordinary failure stops later probes with fixed redaction, fatal identity escapes, nullable/missing/extra pressure rejected, borrowed Ops session never closed. This is a read-only observation, not journal recovery, credential provenance, Expiry maintenance or a startup go/no-go."
+        manifest["related"] += ["PG-D-269", "PT-OPS-SVC-001..004"]
+        manifest["serviceUnitOracle"] = "056/PT-OPS-SVC-001..004: SS342/343 independent API/Web dependency, five LoadCredential IDs each, service identity, readonly/write separation, exact JVM resources/hardening and no secret environment/shell; rendered syntax verified with test-only /bin/true and no host manager mutation. Java entry, actual credential distribution/DB/JMS/readiness and NK capture are unverified."
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
 
