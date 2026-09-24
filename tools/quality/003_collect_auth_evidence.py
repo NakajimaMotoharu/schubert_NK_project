@@ -20,7 +20,7 @@ RESOURCE_METHODS = {
 PRODUCTION_LOGIN_METHODS = {
     "PT-AUT-INBOX-007": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyAuthenticatesWithRealInboxSessionAndAudit",
     "PT-AUT-INBOX-008": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyFailedLoginReplaysWithoutSecondAttempt",
-    "PT-AUT-INBOX-009": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionApiReceiveGroupConsumesRealBrokerLoginAndReplay",
+    "PT-AUT-INBOX-009": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionApiReceiveGroupConsumesRealBrokerLoginAndReplay(Path)",
 }
 
 
