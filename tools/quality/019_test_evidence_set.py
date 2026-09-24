@@ -2268,6 +2268,12 @@ class EvidenceSetTest(unittest.TestCase):
                        ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
                         "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads",
                         "opsWebLoad005EnvironmentIsExactBeforeFileRead")))
+        groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest", 1,
+                       ("opsApiInput001CombinesIndependentFixedInputs", "opsApiInput002MissingPrivateLocationStopsBeforeSourceRead",
+                        "opsApiInput003SourceFailureAndConfigAdmissionStayDistinct", "opsApiInput004NullContracts")))
+        groups.append(("dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest", 1,
+                       ("opsWebInput001CombinesIndependentFixedInputs", "opsWebInput002MissingPrivateLocationStopsBeforeSourceRead",
+                        "opsWebInput003SourceFailureAndConfigAdmissionStayDistinct", "opsWebInput004NullContracts")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]
@@ -2317,7 +2323,9 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
                        "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest": "PT-OPS-CREDLOC",
                        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
-                       "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
+                       "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
+                       "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

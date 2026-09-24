@@ -143,6 +143,12 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoad
     ("opsWebLoad001FixedServiceAndLayerOrder", "opsWebLoad002SourceAndParserFailuresStayDistinct",
      "opsWebLoad003NullContractsAndProductionFactory", "opsWebLoad004ConcurrentFreshReads",
      "opsWebLoad005EnvironmentIsExactBeforeFileRead")))
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest", 1,
+    ("opsApiInput001CombinesIndependentFixedInputs", "opsApiInput002MissingPrivateLocationStopsBeforeSourceRead",
+     "opsApiInput003SourceFailureAndConfigAdmissionStayDistinct", "opsApiInput004NullContracts")),
+    ("dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest", 1,
+    ("opsWebInput001CombinesIndependentFixedInputs", "opsWebInput002MissingPrivateLocationStopsBeforeSourceRead",
+     "opsWebInput003SourceFailureAndConfigAdmissionStayDistinct", "opsWebInput004NullContracts")))
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
@@ -150,7 +156,9 @@ RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("storage", "dev/codex/schubert/nk/storage/ServiceConfigFiles"),
                     ("storage", "dev/codex/schubert/nk/storage/ServiceCredentialLocation"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader"),
-                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader"))
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs"),
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebStartupInputs"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -278,7 +286,9 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.storage.ServiceConfigFilesTest": "PT-OPS-CFGFILE",
                    "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest": "PT-OPS-CREDLOC",
                    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest": "PT-OPS-API-LOAD",
-                   "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
+                   "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
+                   "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -493,6 +503,8 @@ def main():
         manifest["environmentOracle"] = "056/PT-OPS-SVC-001/002 and066/068 LOAD005: independent exact single ASCII LF `SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk` for both required EnvironmentFile templates, fixed path and namespace map admission before source read, missing/other path/lowercase alias/unknown secret-like key rejection without value exposure. systemd manager actual root:service0600 deployment and external Java main remain unverified."
         manifest["related"] += ["PG-D-278", "PT-OPS-CREDLOC-001..005"]
         manifest["credentialLocationOracle"] = "070/PT-OPS-CREDLOC-001..005: independent systemd CREDENTIALS_DIRECTORY nonsecret map admission, absolute normalized nonroot 1..4096-char path, missing/empty/relative/root/case alias/traversal/control/null rejection, unrelated environment nonretention and 32 concurrent fresh-map results. No inode/owner/ACL/readonly/credential byte admission, external main or OS distribution is claimed."
+        manifest["related"] += ["PG-D-279", "PT-OPS-API-INPUT-001..004", "PT-OPS-WEB-INPUT-001..004"]
+        manifest["startupInputsOracle"] = "072/074: API/Web each receives fixed nonsecret YAML source and systemd CREDENTIALS_DIRECTORY in one nonsecret startup boundary; independent literal DEBUG/config/Path, missing credential location before source IO, checked source failure identity vs fixed invalid config, null contracts and separate immutable result. Does not read a credential, create DB/JMS or launch an external process."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."
