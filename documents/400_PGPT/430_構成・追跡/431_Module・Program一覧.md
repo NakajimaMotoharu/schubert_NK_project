@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG258正式限定追記: `NK-SCN-001`/`ScenarioApplicationAssembly.create`→`ScenarioApplicationService`をPT-SCN-009-T08（008/001～002・manifest）へ追跡。正式`PT-WEB-20260924-56`/source`a3cb491e9`で1860PT/53scope/hash/102負canary、Production全coverage/静的0。実PG18のGAM初回0000/再送0200、Inbox1/null6引数を限定認定。Storage root排他/probe/scan/全API登録/実NK CHRは未了、中心48%据置。
+
 2026-09-24 PG258選択段階: `NK-SCN-001`/`ScenarioApplicationAssembly.create`→`ScenarioApplicationService`をPT-SCN-009-T08（008/001～002）へ追跡。RD FUN-003～005/AUT-001～004/MQ-006～010/DAT-009/FIL-001～009、UI232/234/237/241、SS311/312/314/323/324/332/333/342。実PG18のGAM初回0000/再送0200/Inbox1と6 null契約を選択8/8で確認。正式全reactor/coverage/53scope/hash前で未認定。Storage root排他/probe/scan前にAPI登録しない。
 
 2026-09-24 PG257正式限定追記: `NK-WEB-002`/Web Log親・`LogSearchWireClient`→`NK-MSG-001`/API Log受信→`NK-ADM-001`/Log照会をPT-SCR-135（016/043～044、Web manifest）へ追跡。正式`PT-WEB-20260924-55`/source`87263eb9b`で1859PT/53scope/hash/102負canary、Production全coverage/静的0。実PG18/Artemis/TomcatのADMIN Login→合成Log1行の`/logs` DOM→API Inbox1行を限定認定。実NK CHR-L01/A01・Scenario/全process入口は未了。固定加重再評価中心48%（幅42～53%、456 checkpoint73）。
