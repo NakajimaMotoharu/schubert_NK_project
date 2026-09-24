@@ -50,7 +50,7 @@ import org.postgresql.util.PSQLException;
 /**
  * PostgreSQL 18 component PT for NK-DAT-001.
  *
- * <p>Trace: RD DAT-001..011/OPS-009/MQ-009; UI 212/241/242/251; SS 331/341/343/354; PT-DB-001..017.
+ * <p>Trace: RD DAT-001..011/OPS-009/MQ-009; UI 212/241/242/251; SS 331/341/343/354; PT-DB-001..018.
  * Expected catalog sets in this class are independent from the migration implementation.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -1074,6 +1074,7 @@ final class DatabaseMigrationTest {
             "migration/V019__parent_inbox_inspection_summary.sql",
             "migration/V020__atomic_cleanup_step_counts.sql",
             "migration/V021__expiry_batch_run_audit.sql",
+            "migration/V022__staged_expiry_batch_run_audit.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1238,6 +1239,149 @@ final class DatabaseMigrationTest {
             "select count(*) from information_schema.columns"
                 + " where table_schema='schubert' and table_name='batch_runs'"
                 + " and column_name like 'expiry_%'"));
+  }
+
+  @Test
+  @Order(18)
+  @DisplayName("PT-DB-018 V022 records pre-purge observations without guessing after-count")
+  void stagedExpiryAuditPreservesOldRowsAndUnknownAfter() throws Exception {
+    String stageDatabase = "schubert_expiry_stage";
+    run(
+        pgBinary("createdb"),
+        "-h",
+        "127.0.0.1",
+        "-p",
+        Integer.toString(port),
+        "-U",
+        ADMIN,
+        stageDatabase);
+    String stageUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + stageDatabase;
+    executeResource(ADMIN, stageUrl, "db/provisioning/001_roles.sql");
+    execute(ADMIN, stageUrl, "create schema schubert_meta authorization nk_owner");
+    var throughV021 =
+        Flyway.configure()
+            .dataSource(stageUrl, MIGRATION, "")
+            .defaultSchema("schubert_meta")
+            .schemas("schubert_meta")
+            .createSchemas(false)
+            .initSql("SET ROLE nk_owner")
+            .table("flyway_schema_history")
+            .locations("classpath:db/migration")
+            .target("021")
+            .validateOnMigrate(true)
+            .outOfOrder(false)
+            .baselineOnMigrate(false)
+            .cleanDisabled(true)
+            .load();
+    assertEquals(21, throughV021.migrate().migrationsExecuted);
+    execute(
+        ADMIN,
+        stageUrl,
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
+            + " values('"
+            + UUID_1
+            + "','2031-06-04','CLEAN_EXPIRY',1,'2031-06-04 00:00:00+00','RUNNING')");
+    execute(
+        ADMIN,
+        stageUrl,
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,"
+            + "expiry_cutoff_at,expiry_before_count,expiry_after_count,target_count,success_count)"
+            + " values('"
+            + UUID_2
+            + "','2031-06-05','CLEAN_EXPIRY',1,'2031-06-05 00:00:00+00',"
+            + "'2031-06-05 00:00:01+00','SUCCESS','2031-05-29 00:00:00+00',2,1,1,1)");
+    try (Connection connection = connection(ADMIN, stageUrl)) {
+      connection.setAutoCommit(false);
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-28 00:00:00+00',"
+              + "expiry_before_count=2,target_count=2,byte_count=64"
+              + " where business_date='2031-06-04' and attempt=1");
+      connection.rollback();
+    }
+    assertEquals(
+        1,
+        configuredFlyway(stageUrl, false, "classpath:db/migration").migrate().migrationsExecuted);
+    assertEquals(
+        "SUCCESS|2|1|1|1",
+        queryString(
+            ADMIN,
+            stageUrl,
+            "select status||'|'||expiry_before_count||'|'||expiry_after_count||'|'||target_count||'|'||success_count"
+                + " from schubert.batch_runs where business_date='2031-06-05'"));
+    try (Connection connection = connection(ADMIN, stageUrl)) {
+      connection.setAutoCommit(false);
+      execute(
+          connection,
+          "update schubert.batch_runs set expiry_cutoff_at='2031-05-28 00:00:00+00',"
+              + "expiry_before_count=2,target_count=2,byte_count=64"
+              + " where business_date='2031-06-04' and attempt=1");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set status='SUCCESS'"
+              + " where business_date='2031-06-04' and attempt=1");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set target_count=3"
+              + " where business_date='2031-06-04' and attempt=1");
+      assertRejects(
+          connection,
+          "23514",
+          "update schubert.batch_runs set success_count=1"
+              + " where business_date='2031-06-04' and attempt=1");
+      connection.commit();
+    }
+    assertEquals(
+        "RUNNING|2031-05-28 00:00:00+00|2|NULL|2|0|64",
+        queryString(
+            ADMIN,
+            stageUrl,
+            "select status||'|'||to_char(expiry_cutoff_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS')"
+                + "||'+00|'||expiry_before_count||'|'||coalesce(expiry_after_count::text,'NULL')"
+                + "||'|'||target_count||'|'||success_count||'|'||byte_count"
+                + " from schubert.batch_runs where business_date='2031-06-04' and attempt=1"));
+    execute(
+        ADMIN,
+        stageUrl,
+        "update schubert.batch_runs set status='FAILED',failure_count=2,"
+            + "ended_at='2031-06-04 00:00:01+00'"
+            + " where business_date='2031-06-04' and attempt=1");
+    assertEquals(
+        "FAILED|2|0|NULL",
+        queryString(
+            ADMIN,
+            stageUrl,
+            "select status||'|'||failure_count||'|'||success_count||'|'"
+                + "||coalesce(expiry_after_count::text,'NULL')"
+                + " from schubert.batch_runs where business_date='2031-06-04' and attempt=1"));
+    execute(
+        ADMIN,
+        stageUrl,
+        "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status,"
+            + "expiry_cutoff_at,expiry_before_count,target_count,byte_count) values('"
+            + UUID_1
+            + "','2031-06-04','CLEAN_EXPIRY',2,'2031-06-04 00:00:02+00','RUNNING',"
+            + "'2031-05-28 00:00:00+00',1,1,32)");
+    execute(
+        ADMIN,
+        stageUrl,
+        "update schubert.batch_runs set status='SUCCESS',ended_at='2031-06-04 00:00:03+00',"
+            + "expiry_after_count=0,success_count=1"
+            + " where business_date='2031-06-04' and attempt=2");
+    assertEquals(
+        "SUCCESS|1|0|1|1|0",
+        queryString(
+            ADMIN,
+            stageUrl,
+            "select status||'|'||expiry_before_count||'|'||expiry_after_count||'|'"
+                + "||target_count||'|'||success_count||'|'||failure_count"
+                + " from schubert.batch_runs where business_date='2031-06-04' and attempt=2"));
+    assertEquals(
+        0,
+        configuredFlyway(stageUrl, false, "classpath:db/migration").migrate().migrationsExecuted);
   }
 
   private static void writeEvidenceSnapshots() throws Exception {
@@ -1478,6 +1622,12 @@ final class DatabaseMigrationTest {
 
   private static String queryString(String role, String sql) throws SQLException {
     try (Connection connection = connection(role)) {
+      return queryString(connection, sql);
+    }
+  }
+
+  private static String queryString(String role, String url, String sql) throws SQLException {
+    try (Connection connection = connection(role, url)) {
       return queryString(connection, sql);
     }
   }

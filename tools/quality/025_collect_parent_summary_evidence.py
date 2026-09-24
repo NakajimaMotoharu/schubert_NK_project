@@ -84,7 +84,7 @@ def main():
                                   "batch-only execute/owner/definer/search_path/UTC/no base grants",
                                   "fresh commit/rollback/uncommitted/parallel owners",
                                   "all table and index snapshot unchanged/no row lock/no backup prerequisite",
-                                  "18 frozen migration hashes/21 current inventory/repeat validate (V021 PG245 addition)"]},
+                                  "18 frozen migration hashes/22 current inventory/repeat validate (V022 PG246 addition)"]},
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json", "fullReactorManifestSha256": digest(full),
         "related": ["SSC-049", "PG-D-162", "QA-046", "UIC-006", "BUG-175", "YKT-136"],
         "fixture": "Isolated PostgreSQL18.6/Flyway; public synthetic UUID/counts and independent SQL literals.",

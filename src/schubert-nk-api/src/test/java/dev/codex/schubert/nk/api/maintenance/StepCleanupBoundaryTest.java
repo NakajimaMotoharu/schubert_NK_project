@@ -667,27 +667,29 @@ final class StepCleanupBoundaryTest {
             "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce",
             "8799bd8dbe60b34e8c7a4e507ad54b2c41979be47973943b5e868d1224f302c9",
             "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
-            "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983");
+            "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983",
+            "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e");
     List<Path> files;
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(21, files.size());
-    for (int i = 0; i < 20; i++)
+    assertEquals(22, files.size());
+    for (int i = 0; i < 21; i++)
       assertEquals(
           expected.get(i),
           HexFormat.of()
               .formatHex(
                   MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.get(i)))));
-    assertEquals("V021__expiry_batch_run_audit.sql", files.getLast().getFileName().toString());
+    assertEquals(
+        "V022__staged_expiry_batch_run_audit.sql", files.getLast().getFileName().toString());
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019", "020", "021"),
+            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022"),
         MigrationInventory.VERSIONS);
     try (var c = db.admin()) {
       assertEquals(
-          "21|1",
+          "22|1",
           scalar(
               c,
               "select (select count(*) from schubert_meta.flyway_schema_history where success and type='SQL' and version is not null)||'|'||(select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null)"));

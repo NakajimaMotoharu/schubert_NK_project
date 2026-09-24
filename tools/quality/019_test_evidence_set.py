@@ -37,15 +37,15 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 class EvidenceSetTest(unittest.TestCase):
     def test_expiry_audit_sql_method_inventory_and_oracle(self):
-        self.assertEqual({"PT-DB-016", "PT-DB-017"}, set(expiry.METHODS))
-        self.assertEqual(2, len(expiry.ORACLE.splitlines()))
-        suite = ET.Element("testsuite", name=expiry.CLASS, tests="17", failures="0",
+        self.assertEqual({"PT-DB-016", "PT-DB-017", "PT-DB-018"}, set(expiry.METHODS))
+        self.assertEqual(3, len(expiry.ORACLE.splitlines()))
+        suite = ET.Element("testsuite", name=expiry.CLASS, tests="18", failures="0",
                            errors="0", skipped="0")
         for name in (*expiry.METHODS.values(), *(f"other{i}" for i in range(15))):
             ET.SubElement(suite, "testcase", classname=expiry.CLASS, name=name)
         self.assertEqual({key: expiry.CLASS + "#" + name for key, name in expiry.METHODS.items()},
                          expiry.validate_suite(suite))
-        for key, bad in (("tests", "16"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+        for key, bad in (("tests", "17"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
             wrong = copy.deepcopy(suite); wrong.set(key, bad)
             with self.assertRaises(ValueError): expiry.validate_suite(wrong)
         for name in (list(expiry.METHODS.values())[1], "other0"):

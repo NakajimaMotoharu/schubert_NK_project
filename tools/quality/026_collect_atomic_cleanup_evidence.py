@@ -75,7 +75,7 @@ def main():
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0,
         "javaCoverage": verified["modules"]["api"]["coverage"], "staticAnalysis": verified["modules"]["api"]["spotbugs"],
         "sqlCoverage": {"basis": "062/PT259..266 SS331 3.14 independent predicate, transaction, handle, lock, role and typed projection matrix; not JaCoCo",
-                        "cases": ["7 closed kinds/10 table components/full handle/1000 bound", "strict retention and protected row/locked remainder never END", "backup-before-step lock/NULL unknown counts/batch-only execute", "DELETE and count atomic rollback/overflow/trigger/FK23503 question deferral", "typed seven-column projection/null/extra/invalid/guard rows", "19 frozen migration hashes/21 current SQL inventory/1 SCHEMA/repeat0"]},
+                        "cases": ["7 closed kinds/10 table components/full handle/1000 bound", "strict retention and protected row/locked remainder never END", "backup-before-step lock/NULL unknown counts/batch-only execute", "DELETE and count atomic rollback/overflow/trigger/FK23503 question deferral", "typed seven-column projection/null/extra/invalid/guard rows", "19 frozen migration hashes/22 current SQL inventory/1 SCHEMA/repeat0"]},
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json", "fullReactorManifestSha256": digest(full),
         "related": ["SSC-057", "PG-D-164", "BUG-179", "YKT-140"],
         "fixture": "Isolated PostgreSQL18.6/Flyway; public synthetic UUID/counts and independent SQL literals.",
