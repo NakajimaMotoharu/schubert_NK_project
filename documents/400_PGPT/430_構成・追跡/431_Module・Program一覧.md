@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG239正式限定追記: `NK-BAT-001`/Batch POMのPostgreSQL JDBC42.7.13 runtime依存と`BatchRuntimeDependencyTest#bat283RuntimePostgresDriverAndScopeCanaries`→PT-BAT-283（017/074～075・evidence）、既存`CleanupRepositoryTest#moduleDependencyBoundary`→PT-BAT-017。RD OPS001～012/SYS004、UI251～253、SS311/341/342/343、BUG-234/235・YKT-186、PG-D-239。正式`PT-WEB-20260924-32`/source`f1b05dac`で1820PT/48scope/hash/98負canary、Java6 module全4coverage/静的0。Batch driver runtime1、禁止API/Web/Protocol依存0。Batch launcher/credential/実DB・実NK CHR-L01は未完了。
+
 2026-09-24 PG238正式限定追記: `NK-WEB-002`/Web POM `org.postgresql:postgresql:42.7.13` runtime依存と`WebRuntimeDependencyTest#scr132RuntimePostgresDriverAndScopeCanaries`→PT-SCR-132（016/039～040・evidence）。RD AUT002/DAT001/SYS004、UI212/225/251、SS311/313/342/343、BUG-233/YKT-186、PG-D-238。正式`PT-WEB-20260924-30`/source`4cc96c75`で1819PT/48scope/hash/97負canary、Java6 module全4coverage/静的0。API driverはruntime1、Batch/CHRは0で後者の配備分類とProduction親起動/実NK CHR-L01は未完了。
 
 2026-09-24 PG237正式限定追記: `NK-OPS-001`/`ArtemisAddressSettingsReadinessClient.verify`と共有管理要求→PT-OPS-MQ-010～012（018/040～041・evidence）。RD MQ001/002/009/010、UI231/251/253、SS321§5/10/13・342§4、QA041/042、UIC001/002、PG-D-237。正式`PT-WEB-20260924-29`/source`28fd29db`で1818PT/48scope/hash/96負canary、Java6 module全4coverage/静的0、対象新class＋record全coverage。実Broker6 Address値と変異/null/欠落/未知fallback/provider/cleanupを確認。SS321全readiness・本番credential・実NK CHR-L01は未完了。

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint38、正式`PT-WEB-20260924-32`/source`f1b05dac`の全1820PT/48scope/hash/98負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG239/Batch JDBC runtime依存とPT-BAT-017 oracleの限定修正を認定、BUG-234/235の当該原因は再試験済み。run31は不認定。YKT-186の実配備・Production credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
+
 2026-09-24最新確定は456/460 checkpoint35、正式`PT-WEB-20260924-30`/source`4cc96c75`の全1819PT/48scope/hash/97負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG238/Web JDBC runtime依存を限定認定し、BUG-233はWeb原因の再試験済み。YKT-186のBatch/CHR配備範囲、Production credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下は履歴。
 
 2026-09-24最新確定は456/460 checkpoint34、正式`PT-WEB-20260924-29`/source`28fd29db`の全1818PT/48scope/hash/96負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG237/018-040～041の実効6 Address設定だけを限定認定。YKT-185、SS321残readiness・Production credential/全API・実NK CHR-L01未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下の要約は時点履歴で、最新状態は456を正とする。
