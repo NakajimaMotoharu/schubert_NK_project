@@ -2676,6 +2676,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorCredentialLoaderTest"))
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorDatabaseCredentialLoaderTest"))
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorApplicationTest"))
+        self.assertEqual("NK-OPS-001", media.shared_file_program(prefix + "ServiceCredentialReaderTest"))
         for name in ("NewMediaTest", "", "InspectorCredentialLoaderTest"):
             with self.assertRaisesRegex(ValueError, "unmapped"):
                 media.shared_file_program(name)
