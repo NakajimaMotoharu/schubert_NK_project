@@ -1,0 +1,11 @@
+BUG-241 / PT-JMS-020-A / 修正前 RED（不認定）
+実行日: 2026-09-24 JST
+環境: Linux x86_64、JDK 25.0.4、Maven 3.9.12、dev-foundation
+対象: ArtemisRequestSender.send / rollbackAfterFailure
+操作: 公開JMSContext proxyのcreateBytesMessageとrollbackから同一JMSRuntimeExceptionをthrow
+期待: 元のJMSRuntimeException instanceを保持、rollback1回、context close1回、自己suppressionなし
+実際: java.lang.IllegalArgumentException: Self-suppression not permitted
+観測箇所: ArtemisRequestSender.rollbackAfterFailure -> Throwable.addSuppressed
+選択結果: 5件中failure1、exit1。ほか4件は本REDをPASSへ転用しない
+秘密情報・raw wire・credential・session/token: 格納なし
+修正後の正式結果・source・hashは同scope manifest.jsonおよび002実行結果を正とする

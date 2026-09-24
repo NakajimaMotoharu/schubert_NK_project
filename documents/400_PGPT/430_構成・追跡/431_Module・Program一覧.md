@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG250正式限定追記: `NK-MSG-001`/`ArtemisRequestSender.send/rollbackAfterFailure/closeAfterFailure`→PT-JMS-020 A～D（005/evidence/request-sender-resource）。RD MQ-003/008、UI231、SS321/324、BUG-241/YKT-154、PG-D-250。正式`PT-WEB-20260924-45`/source`328b05a2e`で1847PT/50scope/hash/100負canary・Java6 module全coverage/静的0。Web同期送信の同一Throwable複合だけ限定認定。他JMS所有者、Production全親起動・実NK CHR-L01は未完了、PGPT中心47%据置。
+
 2026-09-24 PG249正式限定追記: `NK-BAT-001`/`ExpiryAuditRepository.Stage/Snapshot/stage/read/finish`→PT-BAT-284～287（017/076～077）。RD OPS-009/MQ-009/DAT-009、UI251§8/11、SS331§8.2/8.3・341§9、SSC-077/078/BUG-237/238/240/YKT-188/189、PG-D-249。正式`PT-WEB-20260924-44`/source`1402a89f7`で1843PT/49scope/hash/99負canary・Java6 module全coverage/静的0。隔離実PG18 stage commit前後、unknown after、同run attempt2、非SUCCESS count不整合拒否、SQL/close/null反例を限定認定。親のBroker remove前durable commit/同run不確定commit解決は未実装、PGPT中心47%据置。
 
 2026-09-24 PG249選択追記: `NK-BAT-001`/`ExpiryAuditRepository.Stage/Snapshot/stage/read/finish`→PT-BAT-284～287（017/076～077）。RD OPS-009/MQ-009/DAT-009、UI251§8/11、SS331§8.2/8.3・341§9、SSC-077/078/BUG-237/238/YKT-188/189、PG-D-249。隔離実PG18/Flyway V022でstage commit前後、unknown after、terminal同値/異値replay、同run attempt2、projection/SQL/close/null反例を選択4/4、対象class全coverageで確認。Batch全体/正式全reactor・evidence前、親のBroker remove前durable commit・same-run commit不明解決は未実装。PGPT中心47%据置。

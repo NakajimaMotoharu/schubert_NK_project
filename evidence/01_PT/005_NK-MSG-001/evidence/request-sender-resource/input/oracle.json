@@ -1,0 +1,16 @@
+{
+  "testIds": [
+    "PT-JMS-020-A",
+    "PT-JMS-020-B",
+    "PT-JMS-020-C",
+    "PT-JMS-020-D"
+  ],
+  "source": "SS321/324 and Java Throwable self-suppression contract",
+  "expected": {
+    "A": "same primary, rollback1, close1, no suppression",
+    "B": "same primary, rollback1, close1, no suppression",
+    "C": "close failure visible after commit, close1",
+    "D": "primary identity with rollback then close secondary, each once"
+  },
+  "scope": "sender unit only; no claim of delivery after failure or full NK startup"
+}
