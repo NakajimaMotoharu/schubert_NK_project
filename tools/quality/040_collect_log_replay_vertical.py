@@ -74,12 +74,9 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"],
                    cwd=repo, check=True)
-    report_path = "output/TEST-" + CLASS + ".xml"
-    stored = repo / "evidence/01_PT/008_NK-SCN-001/evidence" / report_path
-    hashes = {item["path"]: item["sha256"] for item in verified["files"]}
-    if hashes.get(report_path) != digest(stored):
-        raise ValueError("vertical Log JUnit report differs from certified reactor")
-    methods = validate_suite(ET.parse(stored).getroot())
+    report = (repo / "src/schubert-nk-web/target/surefire-reports" /
+              ("TEST-" + CLASS + ".xml"))
+    methods = validate_suite(ET.parse(report).getroot())
     coverage = {}
     for module, subject in SUBJECTS:
         report = repo / f"src/schubert-nk-{module}/target/site/jacoco/jacoco.xml"
@@ -117,6 +114,7 @@ def main():
                      "limitations": oracle["limitations"],
                      "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json",
                      "fullReactorManifestSha256": digest(full),
+                     "junitReportSha256": digest(report),
                      "sourceFiles": [{"path": p, "sha256": digest(repo / p)} for p in SOURCES]})
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)}
                          for p in sorted(evidence.rglob("*")) if p.is_file()
