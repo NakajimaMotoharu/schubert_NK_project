@@ -40,13 +40,20 @@ public final class JdbcWebSessionStore {
           Optional<WebSessionRow> found = Optional.empty();
           if (result.next()) {
             var row = read(result);
-            if (result.next()) throw new InvalidSessionRowException();
+            if (result.next()) throw new InvalidStoredRow();
             found = Optional.of(row);
           }
           return found;
         }
       }
-    } catch (InvalidSessionRowException failure) {
+    } catch (InvalidStoredRow failure) {
+      // A malformed row is deletable only after both owned JDBC resources close cleanly.
+      // TWR attaches close failures to the private marker; never expose the public invalid-row
+      // classification in that case. Fatal close failures retain their identity.
+      for (Throwable closing : failure.getSuppressed()) {
+        if (closing instanceof Error fatal) throw fatal;
+      }
+      if (failure.getSuppressed().length != 0) throw new SessionStoreException();
       throw new InvalidSessionRowException();
     } catch (SQLException | RuntimeException failure) {
       throw new SessionStoreException();
@@ -165,7 +172,7 @@ public final class JdbcWebSessionStore {
           idle,
           version);
     } catch (IllegalArgumentException failure) {
-      throw new InvalidSessionRowException();
+      throw new InvalidStoredRow();
     }
   }
 
@@ -194,7 +201,7 @@ public final class JdbcWebSessionStore {
   }
 
   private static <T> T column(@Nullable T value) {
-    if (value == null) throw new InvalidSessionRowException();
+    if (value == null) throw new InvalidStoredRow();
     return value;
   }
 
@@ -217,5 +224,9 @@ public final class JdbcWebSessionStore {
   private static <T> T required(@Nullable T value) {
     if (value == null) throw new SessionStoreException();
     return value;
+  }
+
+  private static final class InvalidStoredRow extends RuntimeException {
+    private static final long serialVersionUID = 1L;
   }
 }

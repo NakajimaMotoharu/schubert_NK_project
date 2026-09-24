@@ -205,6 +205,24 @@ class EncryptedWebSessionRepositoryTest {
   }
 
   @Test
+  void web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession() throws Exception {
+    try (var fixture = new Fixture()) {
+      var created = fixture.repository.create();
+      int committedBefore = fixture.commits.get();
+      fixture.nullColumn = "id";
+      fixture.failure = "result.close";
+      unavailable(() -> fixture.repository.find(created.sessionId()));
+      assertTrue(fixture.hit);
+      assertEquals(1, fixture.rollbacks.get());
+      assertEquals(committedBefore, fixture.commits.get());
+      assertEquals(1, count());
+      fixture.nullColumn = "";
+      fixture.failure = "";
+      assertTrue(fixture.repository.find(created.sessionId()).isPresent());
+    }
+  }
+
+  @Test
   void web038MutationPreservesCurrentAttributesAndSecurityIdentity() throws Exception {
     try (var f = new Fixture()) {
       var created = f.repository.create();

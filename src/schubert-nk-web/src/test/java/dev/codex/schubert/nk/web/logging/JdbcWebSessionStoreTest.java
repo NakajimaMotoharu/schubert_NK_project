@@ -521,6 +521,28 @@ class JdbcWebSessionStoreTest {
   }
 
   @Test
+  void web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation() throws Exception {
+    seed();
+    try (var connection = db.transaction()) {
+      var fault = new Fault();
+      fault.columns.put("id", null);
+      AssertionError fatal = new AssertionError("synthetic close failure");
+      fault.fatalClose = fatal;
+      AssertionError observed =
+          assertThrows(
+              AssertionError.class, () -> STORE.findLocked(fault.wrap(connection), hash(1)));
+      assertSame(fatal, observed);
+      assertEquals(0, observed.getSuppressed().length);
+      assertTrue(fault.columnHit);
+      assertEquals(1, fault.resultsClosed);
+      assertEquals(1, fault.statementsClosed);
+      assertFalse(connection.isClosed());
+      connection.rollback();
+    }
+    assertEquals(1, count());
+  }
+
+  @Test
   void web031ConcurrentLocksAndVersionsStayConsistent() throws Exception {
     seed();
     try (var pool = Executors.newFixedThreadPool(10)) {
@@ -626,6 +648,7 @@ class JdbcWebSessionStoreTest {
   /** Intercepts only public JDBC calls, never production/private fields. */
   private static final class Fault {
     String failure = "", nullResource = "", runtimeFailure = "";
+    Error fatalClose;
     Integer count;
     boolean duplicate, hit, columnHit, runtimeHit;
     int statementsClosed, resultsClosed, nextCalls;
@@ -647,6 +670,10 @@ class JdbcWebSessionStoreTest {
                 if (name.equals("connection.prepareStatement")) sql.add((String) args[0]);
                 if (name.equals("statement.close")) statementsClosed++;
                 if (name.equals("result.close")) resultsClosed++;
+                if (name.equals("result.close") && fatalClose != null) {
+                  method.invoke(target, args);
+                  throw fatalClose;
+                }
                 int occurrence = seen.merge(name, 1, Integer::sum);
                 if (name.equals(runtimeFailure)) {
                   runtimeHit = true;

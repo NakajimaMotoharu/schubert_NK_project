@@ -14,6 +14,9 @@ def validate_session_resource_inventory(mapping):
     expected = {
         "PT-WEB-294": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow",
         "PT-WEB-295": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession",
+        "PT-WEB-296": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation",
+        "PT-WEB-297": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession",
+        "PT-WEB-298": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation",
     }
     if mapping != expected:
         raise ValueError("Web session resource Test IDs are incomplete or inconsistent")
@@ -432,6 +435,9 @@ def main():
     groups["dev.codex.schubert.nk.web.form.LogSearchFormTest"] = ((278, "web278DefaultsAndFilters"), (279, "web279TextAndBinding"), (280, "web280Characters"), (281, "web281PageAndEnums"), (282, "web282Dates"), (283, "web283DateRange"), (284, "web284NullOwnershipAndRedaction"), (285, "web285ConcurrentBinding"))
     groups["dev.codex.schubert.nk.web.view.LogSearchViewModelTest"] = ((286, "web286SuccessfulSnapshot"), (287, "web287Pagination"), (288, "web288QueryEncoding"), (289, "web289ResponseBinding"), (290, "web290InvalidFields"), (291, "web291NullRoleOwnership"), (292, "web292ClosedBeanAndEscaping"), (293, "web293ConcurrentViews"))
     groups["dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest"] += ((295, "web295ProviderGetterFailureRollsBackWithoutDeletingSession"),)
+    groups["dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest"] += ((296, "web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation"),)
+    groups["dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest"] += ((297, "web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession"),)
+    groups["dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest"] += ((298, "web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation"),)
     methods, reports = [], {}
     for classname, cases in groups.items():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
@@ -454,7 +460,7 @@ def main():
         reports[report.name] = ET.ElementTree(clean)
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Web Test IDs do not exactly cover executed methods")
-    validate_session_resource_inventory({key: value for key, value in expected.items() if key in ("PT-WEB-294", "PT-WEB-295")})
+    validate_session_resource_inventory({key: value for key, value in expected.items() if key in ("PT-WEB-294", "PT-WEB-295", "PT-WEB-296", "PT-WEB-297", "PT-WEB-298")})
     validate_scenario_inventory({key: value for key, value in expected.items() if "ScenarioWireClientTest#" in value})
     validate_page_inventory({key: value for key, value in expected.items() if "PageViewModelTest#" in value})
     validate_hierarchy_inventory({key: value for key, value in expected.items() if "ScenarioHierarchyViewModelTest#" in value})
@@ -475,7 +481,8 @@ def main():
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():
         report.write(evidence / "output" / name, encoding="UTF-8", xml_declaration=True)
-    for name in ("001_NK-WEB-001_単体テスト仕様書.md", "003_NK-WEB-001_Scenario通信実行結果.md",
+    for name in ("001_NK-WEB-001_単体テスト仕様書.md", "002_NK-WEB-001_実行結果.md",
+                 "003_NK-WEB-001_Scenario通信実行結果.md",
                  "004_NK-WEB-001_Page表示モデル単体テスト仕様書.md", "005_NK-WEB-001_Page表示モデル実行結果.md",
                  "006_NK-WEB-001_Scenario階層表示単体テスト仕様書.md", "007_NK-WEB-001_Scenario階層表示実行結果.md",
                  "008_NK-WEB-001_Scenario本文表示モデル単体テスト仕様書.md", "009_NK-WEB-001_Scenario本文表示モデル実行結果.md",

@@ -521,6 +521,9 @@ class EvidenceSetTest(unittest.TestCase):
         expected = {
             "PT-WEB-294": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow",
             "PT-WEB-295": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession",
+            "PT-WEB-296": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation",
+            "PT-WEB-297": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession",
+            "PT-WEB-298": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation",
         }
         web.validate_session_resource_inventory(expected)
         for key in expected:
