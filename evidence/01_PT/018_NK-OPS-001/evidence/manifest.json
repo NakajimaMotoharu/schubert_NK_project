@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-28",
-  "targetCommit": "151023d7ee37ca8ba38c2944cf5fe16aaec09da7",
+  "runId": "PT-WEB-20260924-29",
+  "targetCommit": "28fd29dbc9098eccae3d55d6c296d0e4935912a7",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T08:57:05+09:00",
-  "completedAt": "2026-09-24T09:09:19+09:00",
+  "startedAt": "2026-09-24T09:33:59+09:00",
+  "completedAt": "2026-09-24T09:46:10+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -16,7 +16,7 @@
     "libc": "glibc 2.43",
     "nativeAccess": "Storage/API/Web test JVM: ALL-UNNAMED; public Java25 FFM; SSC-019/021"
   },
-  "rawLogSha256": "5ed77cdae70a942e164c493ed333ce81d78e31bf95ef8c7fffa795264a33b6cf",
+  "rawLogSha256": "ed49cc0589478ce891c16730cc1e371b54d8d55db95cadea89ed087f86e8bca4",
   "programId": "NK-OPS-001",
   "scopeResult": "PASS_DEPLOYMENT_AND_PARENT_BOUNDARIES_ONLY",
   "programComplete": false,
@@ -171,7 +171,10 @@
     "PT-OPS-MQ-006": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest#opsMq006EveryApprovedValueIsCheckedAndDiskBoundaryIsStrict",
     "PT-OPS-MQ-007": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest#opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership",
     "PT-OPS-MQ-008": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest#opsMq008ProductionOpsRoleCanReadEffectiveManagementValues",
-    "PT-OPS-MQ-009": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest#opsMq009MissingManagementReplyIsBoundedAndInterruptIsRestored"
+    "PT-OPS-MQ-009": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest#opsMq009MissingManagementReplyIsBoundedAndInterruptIsRestored",
+    "PT-OPS-MQ-010": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest#opsMq010ReadsSixEffectiveSettingsWithOpsRole",
+    "PT-OPS-MQ-011": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest#opsMq011RejectsEveryCommonAndCapacityDriftAndMissingValues",
+    "PT-OPS-MQ-012": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest#opsMq012RejectsNullMalformedUnknownAndProviderFailures"
   },
   "failed": 0,
   "errors": 0,
@@ -1278,7 +1281,7 @@
     "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient": {
       "INSTRUCTION": {
         "missed": 0,
-        "covered": 251
+        "covered": 291
       },
       "BRANCH": {
         "missed": 0,
@@ -1286,21 +1289,22 @@
       },
       "LINE": {
         "missed": 0,
-        "covered": 46
+        "covered": 55
       },
       "COMPLEXITY": {
         "missed": 0,
-        "covered": 21
+        "covered": 27
       },
       "METHOD": {
         "missed": 0,
-        "covered": 8
+        "covered": 14
       },
       "CLASS": {
         "missed": 0,
         "covered": 1
       }
     },
+    "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$MessageWriter": {},
     "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$Exchange": {},
     "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$Reader": {},
     "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException": {
@@ -1324,6 +1328,55 @@
         "missed": 0,
         "covered": 1
       }
+    },
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": {},
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 341
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 58
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
     }
   },
   "staticAnalysis": {
@@ -1332,7 +1385,7 @@
     "errors": 0
   },
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "896975401ce931f2c675a85aaab049fda6ed28d4acef069cfe11c45041972e63",
+  "fullReactorManifestSha256": "f1c1e92508436ba789e4ba51159dd30b8d058e21e81f6e445d7c07f03654ccf4",
   "related": [
     "QA-046",
     "UIC-006",
@@ -1401,6 +1454,11 @@
     "YKT-149",
     "YKT-150",
     "PG-D-223",
+    "PG-D-237",
+    "QA-041",
+    "QA-042",
+    "UIC-001",
+    "UIC-002",
     "PG-D-176",
     "SSC-065",
     "PG-D-186",
@@ -1413,7 +1471,7 @@
     "YKT-165"
   ],
   "fixture": "Public environment/path/UUID/time/version/receipt vectors only. Fresh real JVM negative tests. OPS uses fixed fake Java and local static unit syntax verification; no host manager/service/credential changes. FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation.",
-  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected. BUG157/STOP016: null Process and all three getter runtime/null failures, already-acquired stdio closed exactly once before escape; no wait/read after invalid acquisition, alive lookup child TERM only. GID005 independently regresses the other production Process owner. 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked. 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected. 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state. 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS. 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers. BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure. 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values. 027/PT-OPS-RSCOPE-001..008: explicit single close before return, null ownership contracts, nullable callback, known I/O reasons, unknown identity, same-throwable/body-cleanup precedence, nested release order and64 concurrent scopes. UNIT015 and native inode/flock callers independently regress compound failures. Broader YKT154 candidates remain open in017/048. 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof. 036/PT-OPS-MQ-001..004: actual isolated Artemis Core live queries for six literal Address/Queue pairs, missing Queue denial without recreation, each address/queue attribute mutation and provider faults, borrowed session and32 concurrent reads. This is topology only; journal/disk/ACL/settings/thresholds/Expiry purge and production credentials remain mandatory. 038/PT-OPS-MQ-005..009: isolated live Artemis Core management reads for broker name/persistence/NIO/journal sizing/global memory/duplicate cache/disk bound; independent SS321 literal mutation matrix, 89.9999/90% boundary, null/malformed/provider failure, borrowed-session/no secret leakage. Authenticated nk_ops ephemeral reply Address/Queue succeeds and is removed; nk_api cannot create or query management. Synthetic no-reply proves 2000ms receive/close and checked interrupt flag restoration. Journal recovery error, acceptor, full ACL/address settings/Queue thresholds, Expiry purge and production credential provisioning remain mandatory.",
+  "oracle": "051/PT221..232: bounded nonsecret canonical input, missing/null/unknown rejection, no parsing diagnostics, exact ASCII receipt after owned resource closure, 0/10/50/70 mapping, unexpected runtime escape/fixed fatal message, native admission negatives,64 independent invocations. 018/PT001..008: fixed receipt byte matrix and JVM exit override; all base directives and4 selected previous-key profiles; actual sh/ShellCheck/systemd-analyze with recorded outputs; release classpath/JDBC runtime/Java25 flags. 003/PT-OPS-FLOCK-001..008: independent flock exit20 while Java holds and Java empty while external holds; fcntl does not conflict; one of32 wins; retained original inode remains locked after path replacement; errno11 alone is contention; fixed open flags0x80000/flock6, close once and IO diagnostic redaction. 005/PT-OPS-LOCK-001..008: MaintenanceFileLock connects held directories/inode and real flock, requires euid0, root:root0755 directories, root:root0600 empty single-link file, RW tmpfs/access ACL absent, same device and re-open identity before/after callback. All native open/close positions and attributes/FS/ACL faults, null/runtime failure,32 simultaneous requests, no repair and fixed3 boot-only tmpfiles entries are checked. 007/PT-OPS-STOP-001..016: independent ASCII seven-property vectors, exact loaded/inactive/dead/no Job/zero PID admission; missing/duplicate/unknown/control/1024+1/null rejection; fixed API then Web fresh reads; interrupts preserved and64 concurrent invocations; fixed systemctl argv/5-second wait/1025-byte read; all three stdio close failures crossed with normal/exit/timeout/oversize/read/interrupt; child-only TERM and no force kill; empty inherited environment replaced with exact five nonsecret variables; actual unprovisioned host not-found states rejected. BUG157/STOP016: null Process and all three getter runtime/null failures, already-acquired stdio closed exactly once before escape; no wait/read after invalid acquisition, alive lookup child TERM only. GID005 independently regresses the other production Process owner. 009/PT-OPS-ENV-001..004: SS343 independent two-line ASCII golden; every byte changed to each other possible byte, missing/extra/duplicate/quoted/CRLF/unknown-key input, all128 UUID bit changes and +/-1 microsecond fail exact run binding; years0001/9999, null, caller-owned fresh arrays and64 concurrent results are independently checked. 011/PT-OPS-CFG-001..006: fixed static DB/version two-line ASCII grammar before Map parsing; literal rendered template, port1/65535 and database1/63, version1/16 and unique list65535/65536, wrong source/duplicate/unknown/alias/quotes/controls/high-byte/oversize/null rejection, fixed redaction and64 concurrent checks. Independent SS values, no production-generated expected. 013/PT-OPS-EFILE-001..008: real retained inode/channel reads with synthetic root/GID/local-FS metadata; exact source and run bytes, metadata types/modes/owner/group/link/size/device/ACL/FS before IO, max+1 bounded EOF and size/identity/time rechecks, same-name replacement rejection, explicit nine-key null/type matrix, every IO/owned-close occurrence, compound raw IO diagnostics stripped,64 reads and start/mid/final interrupts preserved. No source-derived expected or reflection into private production state. 015/PT-OPS-PFILE-001..008: real libc CREATE_NEW/NOFOLLOW/0600 and unchanged0640, literal content/mode/link oracle; inode ownership across name replacement, callback/close failures, null/invalid/closed rejection, no-replace publication and sync uncertainty without undo, one of32 concurrent publications with31 retained losers, unsupported default fails without mutation. Shared storage full-class coverage is from the full regression; these8 PT belong only to OPS. 017/PT-OPS-PUB-001..012: literal run bytes and0600 inode conditions, shared EFILE policy, CREATE_NEW plus native no-replace/fsync, bounded writes/readback, same-run re-force/reuse, different-run rejection, preexisting part preservation, same-run retirement with only initial ENOENT idempotence; independent full new/reuse/retire IO occurrence inventories, compound close diagnostics stripped, interrupts preserved, unknown runtime escape and32 serialized callers. BUG155/GID008: real isolated pipe4096 with literal65536-byte success,65537 oversize, nonzero exit, timeout and interruption; owned virtual reader drains during process wait, all tasks terminate before zeroing. BUG156/GID005: checked IO is fixed, unknown runtime becomes fixed IllegalStateException without raw cause, Error remains failure. 019/PT-OPS-GID-001..008/NS-001..008: fixed getent group schubert with three-variable cleared environment,5s/65537-byte bounds, literal unsigned GID/source rejection, owned stdio/zeroed opaque bytes,64 independent lookups. Fixed five-root namespace lifetime with independent account lookup, real inode replacement for every ancestor/static source, stable source/run checks before and after one terminal callback, normal-only retire, all native/IO close occurrence faults, interrupts and32 serialized lifetimes. No target-derived expected GID or secret values. 027/PT-OPS-RSCOPE-001..008: explicit single close before return, null ownership contracts, nullable callback, known I/O reasons, unknown identity, same-throwable/body-cleanup precedence, nested release order and64 concurrent scopes. UNIT015 and native inode/flock callers independently regress compound failures. Broader YKT154 candidates remain open in017/048. 021/023/PT-OPS-UNIT-001..016: independent 373-byte eighteen-property ASCII golden; canonical uint32/uint64 and InvocationID, all fields missing/duplicate/unknown and numerical/byte boundaries. Fresh receipt0/10 only after stable state-process-state triple and exact empty GetUnitProcesses vector; PID/job alone never enough. Fixed argv/env5,5-second bounded command wait and2049/10-byte reads,11 native operation fault/interrupt positions, three cleanup by three primary compound failures with positive injection/suppressed counts, close-once and zeroed bytes,64 concurrent probes. Actual host checks only reject unprovisioned unit; no startup/termination ownership proof. 036/PT-OPS-MQ-001..004: actual isolated Artemis Core live queries for six literal Address/Queue pairs, missing Queue denial without recreation, each address/queue attribute mutation and provider faults, borrowed session and32 concurrent reads. This is topology only; journal/disk/ACL/settings/thresholds/Expiry purge and production credentials remain mandatory. 038/PT-OPS-MQ-005..009: isolated live Artemis Core management reads for broker name/persistence/NIO/journal sizing/global memory/duplicate cache/disk bound; independent SS321 literal mutation matrix, 89.9999/90% boundary, null/malformed/provider failure, borrowed-session/no secret leakage. Authenticated nk_ops ephemeral reply Address/Queue succeeds and is removed; nk_api cannot create or query management. Synthetic no-reply proves 2000ms receive/close and checked interrupt flag restoration. Journal recovery error, acceptor, full ACL/address settings/Queue thresholds, Expiry purge and production credential provisioning remain mandatory. 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory.",
   "limitations": "Scope covers private launcher, wrapper/unit syntax, low-level flock, borrowed-root admission/read/publish, read-only application stop observations, canonical environment bytes and fixed namespace/NSS callback lifetime. Java coverage is not a shell percentage; shell decisions use recorded traces. Root UID/GID/tmpfs admission is synthetic over isolated real inodes; no privileged deployed service acceptance. Flock executes amd64 libc; aarch64 is ABI selection only and CLOEXEC is checked at the call boundary, not by inherited-FD inspection. Systemctl timeout tests use a process fault port, not a stalled manager or TERM-ignoring descendant. Borrowed-root publisher requires caller-held OS lock, stable namespace and terminal child; its success proves none of those. Failed unpublished parts remain for controlled operational reconciliation. Fixed factory admission uses synthetic root metadata in PT; actual getent on this unprovisioned host verifies missing-group rejection, not a deployed positive lookup. Remaining gates: OS lock continuity and child termination; durable authoritative run and parent lifecycle; real backup artifact and full cleanup callers; actual root systemd credential deployment; actual NK characterization and IT/ST. Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination.",
   "sourceFiles": [
     {
@@ -1502,7 +1560,11 @@
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClientTest.java",
-      "sha256": "09267cdb3437debf34f2bbec2968ce1b19b5be022b29d0df84ec53f26ef6db8e"
+      "sha256": "3c3752cbb702af5e7343ea89905dfec40f5c5736598dc67fd475934535bf8f4e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClientTest.java",
+      "sha256": "772366e51a9e557d697f29602a46a996357854e76cc2c902edf0deaacdd0fe67"
     },
     {
       "path": "src/schubert-nk-api/pom.xml",
@@ -1586,11 +1648,15 @@
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
-      "sha256": "2c3565d508b6b920f24a74ae050d3f31dbaeb11d4492fc7f4031e587f2a387b0"
+      "sha256": "3237f643dc8e8e5b42cfc8f572c69115e42b2d265655f97ce97e3accfa475d7b"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java",
-      "sha256": "a5b37ecd2306edb53b535b6b6e5c9b67f753b09de62572d1e22357740f92c0d3"
+      "sha256": "6b3e87f566e3901e1674a14d3dcad7d3cc60bbcb938ed505ddf6553d3bf6346d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "sha256": "266037bf28e9d3fed115f07c7861bcf8482b916da7f510fe51eb9bf53a596f3a"
     },
     {
       "path": "src/deployment/postgresql/postgresql.conf.template",
@@ -1855,203 +1921,203 @@
     },
     {
       "path": "logs/argumentsAndPlaceholders/001.json",
-      "sha256": "ceac0a7c1ddd037d65989fd4f349cdebdc3178e7425b051a37ff0e0f219ae239"
+      "sha256": "9508b7f3f4b7fe6dba97ab76f1a1193d9c0aa19b7211774a11134cc0f69b564a"
     },
     {
       "path": "logs/argumentsAndPlaceholders/002.json",
-      "sha256": "92dc39d8b551e9c1db393ab3d5bb761a02d75addca6b0d1f8abe8684beda6aa2"
+      "sha256": "0dc79c5b40b9c85750ab2edf74745a93b2bce38b3a246f3ecc85966965de46b5"
     },
     {
       "path": "logs/argumentsAndPlaceholders/003.json",
-      "sha256": "2d8e0e697efcb9954d29b896455c423da95da18f6a56be669849cc7f07a35b9a"
+      "sha256": "d4b982fe1ef1eca1d296dd44bcdc2026f5ebae441954b5d785f47ceff9427663"
     },
     {
       "path": "logs/baseUnitAndSyntax/001.json",
-      "sha256": "254b81b53a0d5a60f79314489e39926365c31f884fb26fd082a91881c5a74b0d"
+      "sha256": "dba9943e6fab8492283762ad7cd8e4714b1961511aeda762b952a67930587d84"
     },
     {
       "path": "logs/malformedReceipts/001.json",
-      "sha256": "250cffee6fb14710e1a4975dd3191a6e4fcb151042920b969f63373e1740656a"
+      "sha256": "1a17875483f7f38d57ccb5576de50e60662f397292d5284fc03728aecd5b56b5"
     },
     {
       "path": "logs/malformedReceipts/002.json",
-      "sha256": "d28ae3edd00864a6074c717b11a51bc37ca33170bb5a9db1fa6a7f4678af9595"
+      "sha256": "6de67530e38c47933731e4ea8b2ae304cc76901591e24e0cc3b91fd51d9859da"
     },
     {
       "path": "logs/malformedReceipts/003.json",
-      "sha256": "4734cbfab5d8a4d4901a433d0c71219c775e5bcaa21098f341b0d01519496c42"
+      "sha256": "75398541b12dd7e38bed3d9f5e19362834fbefa8831a6d77e4a4f2921269364e"
     },
     {
       "path": "logs/malformedReceipts/004.json",
-      "sha256": "abcd771026e9e0ab0fc2c669453d8312e51fca2acdf2a59e58430140343d42f2"
+      "sha256": "26cd44410dbc45ebc6db65916b4d2c1fea7bd5eec8e053d91ada4e4750414b2c"
     },
     {
       "path": "logs/malformedReceipts/005.json",
-      "sha256": "57938af28610bebaf9a2afbc4f6f6a7fc810077a991c0316ca47cb1be3335929"
+      "sha256": "dd4642fd09834805b822e405a9ba2141d7a76c495c93fa884e58c84ec21c77ff"
     },
     {
       "path": "logs/malformedReceipts/006.json",
-      "sha256": "469e19f4b4308f67f2396bb7622852ce764f88ecf1477f776847b3ebe757b5fd"
+      "sha256": "73042e8b1454d662ac0886161301f51cb02e07f13845547654eb6b484e41a684"
     },
     {
       "path": "logs/malformedReceipts/007.json",
-      "sha256": "e6d909f5005ff7e97ef842419c014681aa62861931cbbdaf4bb7a08a9f1982fb"
+      "sha256": "8a80d6c68ddd1300cc15b93be66abb0b321cb8c709d0ef74ac4a48d616afc971"
     },
     {
       "path": "logs/malformedReceipts/008.json",
-      "sha256": "b9125aa9310c1495cb3772e6af26cf624e65ec2adc22abcb500f80565e898e16"
+      "sha256": "0b3e529198b82d9f91c0c305c33be8fb7f3a91f87340076adf3a92ed5bb24298"
     },
     {
       "path": "logs/malformedReceipts/009.json",
-      "sha256": "cd8a7e70de998aa370aa8421849d7385c244828ce8c3f2e685435e1285fd8ef0"
+      "sha256": "6c3e4de4c3af82fa7b4b7464e937e4f7df15cc2e64ea05f08cf78cc204e948c6"
     },
     {
       "path": "logs/malformedReceipts/010.json",
-      "sha256": "58aa75631ac1deff98c7fe38bf5e64563c55bec569089bb8babbfe4c36a987af"
+      "sha256": "3f3ad26674a01b6faef4aabde80e85bb442c3c83cd93b1b2afb16560589fad91"
     },
     {
       "path": "logs/malformedReceipts/011.json",
-      "sha256": "909607b58385fa56519e7de733a306b108cff081295b6b52bedc30c5d876efff"
+      "sha256": "53fec41730227f8e3ad7ced90fb9c62d2c97f35825d4c3248c369b6431e7381c"
     },
     {
       "path": "logs/malformedReceipts/012.json",
-      "sha256": "1d87ec9ab9e861af6630c7828621b7e3c9510b8159a56596bc897dd81d59c123"
+      "sha256": "c1dc154f4582613d9ecee30e1e7c50da5e5a9dd492bc1f07830c8f6403dda5b4"
     },
     {
       "path": "logs/malformedReceipts/013.json",
-      "sha256": "1c61264415f42c4eb31e1c08d76cd6306625cc063e0766c507fd1d214e42a121"
+      "sha256": "d38740458bf0092821950cdab6e199c104d0af2efd8585aca52fe75828d03d25"
     },
     {
       "path": "logs/malformedReceipts/014.json",
-      "sha256": "be4947f8b36c82bdb474ec96ace66dfafa52ecd2f892d9e5014510d2c67d639f"
+      "sha256": "f196f1baf690829e9afc1a785270ee4a9d61e304f0bee3e2853c7ba2b94a5bd9"
     },
     {
       "path": "logs/malformedReceipts/015.json",
-      "sha256": "d965f61dc7dbf1f53404693559385b6ade6cd0745ea08a59f074f01786b89692"
+      "sha256": "7deaa536279b83241053ba8f3ed1d98c4ab199e0a1e08378846d92e27984b4d8"
     },
     {
       "path": "logs/malformedReceipts/016.json",
-      "sha256": "41cb90c467c8ca4fa79a1400921a3da3963880d10161ce524c4599c0be72967d"
+      "sha256": "26fc3cfe94e73151aab0e662fa56f117ce47e9278d72415bdac0b85b0b254bcc"
     },
     {
       "path": "logs/malformedReceipts/017.json",
-      "sha256": "db1b0ad8f06b0585461a2690fbdefc4c1d8c3ebc2617d4480c649fa936f38014"
+      "sha256": "79924fd9da150df06b86e3a77841c945a7bdbb30de7acdf7f03244ea46fb9368"
     },
     {
       "path": "logs/malformedReceipts/018.json",
-      "sha256": "a1d29b1c1cdeb21a64f9db9b3fd0e873f223574bfc128e5325514f9a51327f3b"
+      "sha256": "fa4d31ce16d15e02998d192e00d68bb8e6d3f40acde3411efb8b61489f754132"
     },
     {
       "path": "logs/malformedReceipts/019.json",
-      "sha256": "394a084a46532eccf6f8e569785adb10352177b671e5167f6947fcfa6fc59583"
+      "sha256": "f8d1b68a35ed025f0b014fd159ead3a3921644538b65035ff8061b5e3571f486"
     },
     {
       "path": "logs/malformedReceipts/020.json",
-      "sha256": "6264f57e2c373b63a00798584ca222ff1a5674835e7cbf30e387c2d6bd178800"
+      "sha256": "42ac268b35c0f0d05fd9706a07ce277092728f5a57b12f739e96e9f8a0071bf3"
     },
     {
       "path": "logs/malformedReceipts/021.json",
-      "sha256": "ad01e77b91a8f6f0653fe6af6cb284ac18ce5d67ebd0563f06500b79d742e175"
+      "sha256": "26945ebb5eeef350bc45713a502bc38f54d6bb7d55f04a8ca8dd2080eab11842"
     },
     {
       "path": "logs/malformedReceipts/022.json",
-      "sha256": "6309f1b2fbe793e6426e21ba578270005ca972a494b1e09231bf07db6f5c6da9"
+      "sha256": "0a0b0c1eaa8cbff8e6b0ee7feb2de536a4839d60a5e1de7958554bb8c9b609eb"
     },
     {
       "path": "logs/malformedReceipts/023.json",
-      "sha256": "8d9a50885f591fc9a60b6e2e7f4e3ff69b42fb8fb721112f8224bbe629cbe29d"
+      "sha256": "ce68d0d3c4dd3dcd22f28ac7a539e120fdd99fd0d1380432d3fa7a93912d4893"
     },
     {
       "path": "logs/malformedReceipts/024.json",
-      "sha256": "7ebabcbf7dee63ffaf2b35d58029a8c22b13993c9ff4b5fa3e372955db0777ba"
+      "sha256": "8d3235122aa5bd5c82effa6f86d760ca8f936631b7954d4f42eb8d2458532dcd"
     },
     {
       "path": "logs/malformedReceipts/025.json",
-      "sha256": "254c724da77b17ae82f6b7a58530b976d94232445cfebffc36c2a3d21d1c0c9c"
+      "sha256": "3ca7b1d8c758ca509fb09d20d0f263f9a32f6851997d1c95d200ae038340782a"
     },
     {
       "path": "logs/malformedReceipts/026.json",
-      "sha256": "99550895cea171dfcda8f41ec3ef5b1e5574c0ecb5cce0a3163cfa5796a57906"
+      "sha256": "7b8968de0063edec33556075808295e73e8ae542794ae175707ffef8b0a258e1"
     },
     {
       "path": "logs/malformedReceipts/027.json",
-      "sha256": "b3424137735fcb4a7af6b4e75e4ffcad227ca6e865525dcc57705fd555b34a03"
+      "sha256": "2e1a5b6d3897586bf25859db80e3c83cd794c52ac2bf49fc257931c9399efa3e"
     },
     {
       "path": "logs/malformedReceipts/028.json",
-      "sha256": "fbc83c253cd966efc5046c1a7c8ed179c9f5d3d2d57661b43c8adc48b1911333"
+      "sha256": "f733115223ba96aeb3960fa8ac1d775e8a8d29e32a777f82e417b692a263a1be"
     },
     {
       "path": "logs/malformedReceipts/029.json",
-      "sha256": "1527dcc8c9fcebaf86a9667cd470f3c4f871a776a4d1c8cf52f4c4ae4cddac4c"
+      "sha256": "44eba5d2726088ba8b9936ad3d536f93ce98e7681db491136df094fdccf1565c"
     },
     {
       "path": "logs/previousProfiles/001.json",
-      "sha256": "5b85745905214eced5f5d9b0e491d786281d945714c56a01884d0a00948304be"
+      "sha256": "a678ecc55ff444a0657536b7f570f6c124a269ab4bee9efda322867b93ac7ec6"
     },
     {
       "path": "logs/previousProfiles/002.json",
-      "sha256": "7850b591d6f31ef3ea20f218f5eebeaac02cb94152f7cbec001d6416f49591ae"
+      "sha256": "41ef3bc63c397323b663edcf70f7607bbc05257086a2d3a017e77b67de227e8e"
     },
     {
       "path": "logs/previousProfiles/003.json",
-      "sha256": "3a6778da63a1c719657bfee2507a550e547b92080de6ac697e9849242142ea7c"
+      "sha256": "96c774ce561efc34030376305f65fa68e82f5170019c3d77d925031b7682de09"
     },
     {
       "path": "logs/previousProfiles/004.json",
-      "sha256": "b1582d3584b0b7b188e0602d801cf13147d63338e622f3e23550e4376ebac0f1"
+      "sha256": "b6322c3a176e8c92f615d20bba3adad87e3321a1517cf8cc4a96ad4e6cd968cd"
     },
     {
       "path": "logs/realMainBridge/001.json",
-      "sha256": "dff040411f23b20bca75b79532f462636dcd2e4935032f449f2c3ea319f1c416"
+      "sha256": "4ec1f560414151b253a081b86c2152989c673525a3debf86d8eaa19b2ae1c529"
     },
     {
       "path": "logs/renderedShellCheck/001.json",
-      "sha256": "628b3965894ce216c63e73cd4a964c9700b14f8defa2e15305baa38bfee80a86"
+      "sha256": "c5e4973c441aa046d1e88b2588648139604698eed3f59326f4374a982885f82f"
     },
     {
       "path": "logs/renderedShellCheck/002.json",
-      "sha256": "3f3bb234a228cfd70b3d2af0101bc1d91e3cdaedd36d732b3773de2effb4a96a"
+      "sha256": "7c5e83ad0ee254ce5949926ccae87422606c475c4872cfcc4a24cec2f9298243"
     },
     {
       "path": "logs/renderedShellCheck/003.json",
-      "sha256": "e68b2ee2ce52b578dc77fac817f11f67d1c2df60cb27b2e2b055b09f9fe5281a"
+      "sha256": "28ebea35c6b662f034e8d59366f182a9e5ee1790bdf9b3a533d02a35a7d94f8d"
     },
     {
       "path": "logs/statusMapping/001.json",
-      "sha256": "b24835d8b686e01302d2b3498d703480d42a4eab9734b2c79bdfd1dde18eefee"
+      "sha256": "f8bffc9c4a44967f1a2ae25b6e598a91fcc760682ae8778b64dd4b8cda89a451"
     },
     {
       "path": "logs/statusMapping/002.json",
-      "sha256": "973c23b0f87d27f45ae07f9159fedec116f5493e99609cca796ef5857e662fa0"
+      "sha256": "0e702e941d2625598f680088ad1b75d597826da7f751260aa1d13e7b59417389"
     },
     {
       "path": "logs/statusMapping/003.json",
-      "sha256": "b3686ce2d599700793739f7981cc506835f6b73dd4a251daa70920bba7efb6d0"
+      "sha256": "f5e4fd0ccc5f704309a78fdeecc85753700f3c8b048d62a26362808380d57f3d"
     },
     {
       "path": "logs/statusMapping/004.json",
-      "sha256": "517e0f6a198a68783a8b81171a254e9b32b590734ec5313e5dda25b70a411059"
+      "sha256": "be2b9860dd5adb55e938141f8535a5d2bb74e861b284e09c6ba39f795964e4df"
     },
     {
       "path": "logs/statusMapping/005.json",
-      "sha256": "6679f7eb3cfcceed7869b7ff6f87370db825d512d51eb5742d042d73be5f5047"
+      "sha256": "62bea522b07a82076a6a1cfc12abec946c9b51ffbc066194456a6788a2939e8a"
     },
     {
       "path": "logs/statusMapping/006.json",
-      "sha256": "a663187b7a700ffde8cf34fd26cd4af033495fc9abb462b6fb9dc6e59450be63"
+      "sha256": "b2ba6892cc0c2d987906565f02b2239b76ba15fe5f5025aca62363013264a7a2"
     },
     {
       "path": "logs/statusMapping/007.json",
-      "sha256": "994cc0cc2e16a900b615376bea2c8f575e8f30b9dc3e5f8877e53d6a23cd1e01"
+      "sha256": "b1d16ff8d6eb72de3b5732edd820bf3bc85e310f56dc5139e3f7e9dbdb4918d6"
     },
     {
       "path": "logs/statusMapping/008.json",
-      "sha256": "030842108ff6824145e77df1e35f18292783839e6e33d3988d951ee8b6ddf92d"
+      "sha256": "ac2da326bc2c8e15c849862d9dee361071f03e0686f093b5cf01bd2a6e93f3d9"
     },
     {
       "path": "logs/statusMapping/009.json",
-      "sha256": "519a01204e92f3c1ae1696af8a7e81519e8700ec390ff7cd06e5782e3d2a74fd"
+      "sha256": "54a38fc24565d06257a281329fed063cb56b4f0f49522d2a50f2cb8dfdb5d26b"
     },
     {
       "path": "output/postgresql/PT-OPS-PGCFG-008.txt",
@@ -2071,7 +2137,7 @@
     },
     {
       "path": "results.xml",
-      "sha256": "46b1a09546162dc1dc54a2d5c98c7b5be198984fb44ff9de7077a29df80bd82d"
+      "sha256": "194c99dec204752434bbb4d5485adac2efe572561f95055073fcd3acbd13a799"
     }
   ]
 }

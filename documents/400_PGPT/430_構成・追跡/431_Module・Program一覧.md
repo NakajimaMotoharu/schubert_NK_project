@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-24 PG237正式限定追記: `NK-OPS-001`/`ArtemisAddressSettingsReadinessClient.verify`と共有管理要求→PT-OPS-MQ-010～012（018/040～041・evidence）。RD MQ001/002/009/010、UI231/251/253、SS321§5/10/13・342§4、QA041/042、UIC001/002、PG-D-237。正式`PT-WEB-20260924-29`/source`28fd29db`で1818PT/48scope/hash/96負canary、Java6 module全4coverage/静的0、対象新class＋record全coverage。実Broker6 Address値と変異/null/欠落/未知fallback/provider/cleanupを確認。SS321全readiness・本番credential・実NK CHR-L01は未完了。
+
 2026-09-24 PG237選択追記: `NK-OPS-001`/`ArtemisAddressSettingsReadinessClient.verify`と共有`ArtemisManagementReadinessClient.addressSettings`→PT-OPS-MQ-010～012（018/040～041）。RD MQ001/002/009/010、UI231/251/253、SS321§5/10/13・342§4、QA041/042、UIC001/002、PG-D-237。実Broker6 Address共通22 field・容量4 fieldの正系、代表共通変異/6容量変異、null/欠落/不正JSON/未知fallback/encoder/cleanup拒否を選択確認。正式全reactor/48scope未認定、SS321全readiness・credential・全API/実NK CHR-L01未完了。
 
 2026-09-24 PG236正式限定追記: `NK-OPS-001`の`ArtemisManagementReadinessClient.read/query`・管理ACL→PT-OPS-MQ-008/009（018/038～039・evidence）。RD MQ001/002/009/010・SYS004、UI231/251、SS321§10/13・342§4、SSC-075/BUG-232/YKT-185、PG-D-236。正式`PT-WEB-20260924-28`/source`151023d7`で1815PT/48scope/hash/96負canary、追加Batch2class全coverage、Java6 module全4coverage/静的0。Ops正系/app拒否・一時Address残存0、2秒/null/close/interruptを確認。YKT-185全横展開・SS321全readiness・production credential・実NK CHR-L01は未完了。

@@ -1,9 +1,9 @@
 {
-  "runId": "PT-WEB-20260924-28",
-  "targetCommit": "151023d7ee37ca8ba38c2944cf5fe16aaec09da7",
+  "runId": "PT-WEB-20260924-29",
+  "targetCommit": "28fd29dbc9098eccae3d55d6c296d0e4935912a7",
   "branch": "dev-foundation",
-  "startedAt": "2026-09-24T08:57:05+09:00",
-  "completedAt": "2026-09-24T09:09:19+09:00",
+  "startedAt": "2026-09-24T09:33:59+09:00",
+  "completedAt": "2026-09-24T09:46:10+09:00",
   "exitCode": 0,
   "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
   "environment": {
@@ -184,31 +184,31 @@
       }
     },
     "batch": {
-      "tests": 377,
+      "tests": 380,
       "coverage": {
         "INSTRUCTION": {
           "missed": 0,
-          "covered": 19146
+          "covered": 19542
         },
         "BRANCH": {
           "missed": 0,
-          "covered": 1957
+          "covered": 1967
         },
         "LINE": {
           "missed": 0,
-          "covered": 3753
+          "covered": 3821
         },
         "COMPLEXITY": {
           "missed": 0,
-          "covered": 1586
+          "covered": 1604
         },
         "METHOD": {
           "missed": 0,
-          "covered": 596
+          "covered": 609
         },
         "CLASS": {
           "missed": 0,
-          "covered": 100
+          "covered": 102
         }
       },
       "spotbugs": {
@@ -218,7 +218,7 @@
       }
     }
   },
-  "rawLogSha256": "5ed77cdae70a942e164c493ed333ce81d78e31bf95ef8c7fffa795264a33b6cf",
+  "rawLogSha256": "ed49cc0589478ce891c16730cc1e371b54d8d55db95cadea89ed087f86e8bca4",
   "programId": "NK-BAT-001",
   "scopeResult": "PASS_REPOSITORY_LOG_HANDOFF_RECORDS_AND_RUN_RETIREMENT_ONLY",
   "programComplete": false,
@@ -506,9 +506,9 @@
     "PT-BAT-176": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest#connectionStateRestorationAndNulls",
     "PT-BAT-177": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest#concurrencyAndIndependentTrace"
   },
-  "sharedModuleOwnership": "Batch module377 PT = NK-BAT-001282 + NK-OPS-00195. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
+  "sharedModuleOwnership": "Batch module380 PT = NK-BAT-001282 + NK-OPS-00198. Full module coverage includes both; OPS IDs are certified separately by022/018_NK-OPS-001. No duplicate PT credit.",
   "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-  "fullReactorManifestSha256": "896975401ce931f2c675a85aaab049fda6ed28d4acef069cfe11c45041972e63",
+  "fullReactorManifestSha256": "f1c1e92508436ba789e4ba51159dd30b8d058e21e81f6e445d7c07f03654ccf4",
   "related": [
     "PG-D-137",
     "PG-D-138",
@@ -753,12 +753,16 @@
       "sha256": "64b9a3eff6bfbc50476fbfc97f02042abf194197493836a747bf4815f3e7e72e"
     },
     {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "sha256": "266037bf28e9d3fed115f07c7861bcf8482b916da7f510fe51eb9bf53a596f3a"
+    },
+    {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
-      "sha256": "2c3565d508b6b920f24a74ae050d3f31dbaeb11d4492fc7f4031e587f2a387b0"
+      "sha256": "3237f643dc8e8e5b42cfc8f572c69115e42b2d265655f97ce97e3accfa475d7b"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java",
-      "sha256": "a5b37ecd2306edb53b535b6b6e5c9b67f753b09de62572d1e22357740f92c0d3"
+      "sha256": "6b3e87f566e3901e1674a14d3dcad7d3cc60bbcb938ed505ddf6553d3bf6346d"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
@@ -1021,8 +1025,12 @@
       "sha256": "d7e65fa49cf3207b016066acaf04899ac2ee9fa2d3d64bb35be9983518c87652"
     },
     {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClientTest.java",
+      "sha256": "772366e51a9e557d697f29602a46a996357854e76cc2c902edf0deaacdd0fe67"
+    },
+    {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClientTest.java",
-      "sha256": "09267cdb3437debf34f2bbec2968ce1b19b5be022b29d0df84ec53f26ef6db8e"
+      "sha256": "3c3752cbb702af5e7343ea89905dfec40f5c5736598dc67fd475934535bf8f4e"
     },
     {
       "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClientTest.java",
@@ -1167,11 +1175,11 @@
   "files": [
     {
       "path": "coverage/batch-jacoco.csv",
-      "sha256": "7179329bd420041cbeb3b598e94112a8f9efaad01af82f55bbbc1bc54e357f6c"
+      "sha256": "248e6fc27b58a88d79072d9467d98171fc9bd3eeb835ed52007b20876c5f5370"
     },
     {
       "path": "coverage/batch-jacoco.xml",
-      "sha256": "ac04ae16ede27bafd97638c6e6c258079ad66c063ecca3278e538a077fa4d4b0"
+      "sha256": "f11e550e1d0ae4e64317da6418a29e685b058674d554e053a659f5974a62f623"
     },
     {
       "path": "input/atomic-cleanup/PT-BAT-162-seven-kinds.txt",
@@ -1812,6 +1820,10 @@
     {
       "path": "logs/PT-WEB-20260924-28-summary.json",
       "sha256": "18399bf0d7c03f42406d6a0911b797a2cabea7818109f4e56a5b7aa8c7c5af22"
+    },
+    {
+      "path": "logs/PT-WEB-20260924-29-summary.json",
+      "sha256": "5a4d845c22c25eb0c10a9ebd127bc772300ffaaec5493aa42e9063cb5982ef0f"
     },
     {
       "path": "output/atomic-cleanup/PT-BAT-162-seven-kinds.txt",

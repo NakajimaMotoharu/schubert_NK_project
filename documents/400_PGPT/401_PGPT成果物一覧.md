@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-09-24最新確定は456/460 checkpoint34、正式`PT-WEB-20260924-29`/source`28fd29db`の全1818PT/48scope/hash/96負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG237/018-040～041の実効6 Address設定だけを限定認定。YKT-185、SS321残readiness・Production credential/全API・実NK CHR-L01未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了を宣言しない。以下の要約は時点履歴で、最新状態は456を正とする。
+
 2026-09-24進行中: `018_NK-OPS-001/040` PT仕様・`041`選択結果、PG237の稼働Broker6 Address実効設定照合を追加。PT-OPS-MQ-010～012は選択3/3、Batch初回全380件は静的1件で不認定、修正後の選択8件/静的0まで。正式全reactor/証跡48scope前のため最新確定はcheckpoint32/source`151023d7`の1815PT、PGPT中心約47%据置。SS321残条件・実NK CHR-L01未完了。
 
 2026-09-24最新確定は456/460 checkpoint32、正式`PT-WEB-20260924-28`/source`151023d7`の全1815PT/48scope/hash/96負canary、Java6 module全instruction/line/method/class/branch100%・Production静的0。PG236のOps管理reply ACL・2秒期限だけを限定認定し、BUG-232/SSC-075の再試験済み範囲を確定。YKT-185横展開、SS321全readiness・Production credential/全API・実NK CHR-L01は未完了。固定加重全工程中心約47%（幅41～52%）据置、PGPT/IT/ST完了は宣言しない。以下の要約は時点履歴で、最新状態は456を正とする。
