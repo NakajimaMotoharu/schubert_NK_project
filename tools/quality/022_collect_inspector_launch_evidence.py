@@ -165,6 +165,11 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.file.ServiceCredentialReaderTe
      "opsCredread010SixKeysDecodeCanonicalCurrentMaterial",
      "opsCredread011KindServiceAndNullRejectBeforeIo",
      "opsCredread012MalformedContentErasesOwnedBytesAndRedacts")),)
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest", 1,
+    ("opsDbadmit001ExactApiAndWebRolesOnIsolatedPg",
+     "opsDbadmit002WrongRoleTransactionAndReadonlyRejectWithoutOwningConnection",
+     "opsDbadmit003RowsNullMismatchDuplicateAndSqlFaultsFailClosed",
+     "opsDbadmit004StrictUrlAndNullContracts")),)
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
@@ -179,7 +184,8 @@ RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/file/InspectorCredentialLoader"),
                     ("api", "dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess"),
                     ("api", "dev/codex/schubert/nk/api/file/ServiceCredentialReader"),
-                    ("api", "dev/codex/schubert/nk/api/file/ServiceCredentialException"))
+                    ("api", "dev/codex/schubert/nk/api/file/ServiceCredentialException"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission"))
 POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationChanged=false\nhbaReload=false\nrawDatabaseLogCopied=false\nconfigurationKeys=32\nhbaRules=16\n"}
 
 
@@ -311,7 +317,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest": "PT-OPS-WEB-LOAD",
                    "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest": "PT-OPS-API-INPUT",
                    "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
-                   "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
+                   "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
@@ -391,7 +398,8 @@ def main():
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
         sources += [repo / "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
-                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java"]
+                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe.java"]
         postgres_root = target / "postgres-deployment-traces"
         postgres_traces = {str(p.relative_to(postgres_root)): p.read_bytes() for p in postgres_root.rglob("*") if p.is_file()}
         validate_postgres_traces(postgres_traces)
@@ -535,6 +543,8 @@ def main():
         manifest["credentialReaderOracle"] = "078/PT-OPS-CREDREAD-001..008: borrowed retained directory, fixed service ID and existing strict Inspector inode/ACL/readonly admission reused; independent synthetic ten ID bytes, password/key 1..65536/54..69 bounds, same-device, missing/symlink/nonregular/cross-service rejection, root/file drift and IO/entry-close faults, buffer erasure and32 fresh concurrent reads. Test metadata is explicitly synthetic; no actual root/systemd credential distribution, secret format codec, DB/JMS or external process is claimed."
         manifest["related"] += ["PG-D-282", "SSC-081", "PT-OPS-CREDREAD-009..012"]
         manifest["credentialMaterialOracle"] = "080/PT-OPS-CREDREAD-009..012: DB/MQ strict UTF-8 password and six fixed current AES/HMAC keys use established independent Inspector parsers. Explicit test-owned raw arrays are all zero after success and format failure; typed kind/cross-service/null reject before IO; returned material owns destroyable password/key copies. Non-secret synthetic vectors only. This does not establish live secret distribution, DB/MQ driver copy destruction or external process readiness."
+        manifest["related"] += ["PG-D-283", "SSC-082", "PT-OPS-DBADMIT-001..004"]
+        manifest["databaseAdmissionOracle"] = "082/PT-OPS-DBADMIT-001..004: isolated real PostgreSQL API/Web roles and fixed SELECT current_user/session_user/current_database/recovery, literal loopback URL boundaries, admin/cross-role/transaction/read-only/null/row/SQL/resource-close faults, fixed redacted SQLState08001. Borrowed connection remains caller-owned; actual production DataSource/pool/main readiness is not claimed."
         manifest["webStaticAnalysis"] = verified["modules"]["web"]["spotbugs"]
         manifest["oracle"] += " 040/PT-OPS-MQ-010..012: authenticated live Core getAddressSettingsAsJSON for all six SS321 business addresses, independent fixed capacity/paging/DLQ/Expiry/retry/auto-create/metric oracle, every checked field mutation/missing/null/malformed/provider failure, borrowed session and temporary reply cleanup. Unknown address resolves Artemis fallback and is rejected by full six-value verifier; raw management reply is not existence proof. Journal recovery, acceptor, full role matrix, Queue thresholds, Expiry purge and production credentials remain mandatory."
         manifest["limitations"] = DEPLOYMENT_LIMITATIONS + " Inspector unit observation is read-only and necessary, not proof of parent-start delivery ordering, callback lifetime, fresh startup ownership or deployed child termination."

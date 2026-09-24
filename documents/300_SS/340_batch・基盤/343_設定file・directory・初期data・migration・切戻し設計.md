@@ -132,6 +132,8 @@ secretのYAML/env格納、型/範囲不正は起動失敗。Effective configはs
 | `nk.inbox.reference/update-retention` | `24h` / `7d` | UI 251、324 |
 | `nk.outbox.sent-retention` | `7d` | PENDING/ERRORは無期限 |
 
+SSC-082（PG283）: 通常API/Webは専用DB roleを外部HTTP/JMS開始前の実Connectionで確認する。URLは既存非秘密設定と同じliteral IPv4 loopback `jdbc:postgresql://127.0.0.1:<1..65535>/<lowercase database identifier>`だけとし、query/fragment/userinfo/複数host/escape/先頭0 portを拒否する。APIの期待roleは`schubert_app`、Webは`schubert_web_session`で固定し、任意roleを設定から受けない。接続はautoCommit=true/readOnly=false、固定SELECTの`current_user`と`session_user`が両方期待role、`current_database()`がURL DB、`pg_is_in_recovery()`がfalse、結果は単一rowであることをadmission条件とする。null/欠落/SQL故障/不一致は固定非秘密診断で遮断し、credential/URL/SQL行値を診断へ出さない。検証するConnectionと失敗時closeは呼出し側の所有責務で、admission部品単体は接続を保持しない。既存§6.6 Inspector専用roleは混用しない。この部品のPT成功だけで実DataSource/Pool/外部main起動は認定しない。
+
 ### 5.3 Batch・backup
 
 SSC068/PG186: 新規backup子directory用のprivate0700/create-new/保持FD能力を333§7.6へ定める。配布root・既存UID/GID/modeを変えず、生成主体はbackup専用UID/GID、root callerは独立metadataと停止/排他を確認する。実環境権限未検証を一般native temporary PTの成功へ含めない。
