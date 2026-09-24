@@ -2,7 +2,8 @@
   "testIds": [
     "PT-JMS-018",
     "PT-JMS-019",
-    "PT-JMS-022"
+    "PT-JMS-022",
+    "PT-JMS-023"
   ],
   "subcases": [
     "PT-JMS-018-A",
@@ -15,13 +16,16 @@
     "PT-JMS-019-E",
     "PT-JMS-022-A",
     "PT-JMS-022-B",
-    "PT-JMS-022-C"
+    "PT-JMS-022-C",
+    "PT-JMS-023-A",
+    "PT-JMS-023-B",
+    "PT-JMS-023-C"
   ],
   "syncConsumers": 4,
   "webLogConsumers": 1,
   "loginTransaction": "JDBC autoCommit false before handler; commit before JMS reply owner",
   "terminal": "one signal after committed fatal DLQ; both consumer groups closed",
   "preflight": "JDBC isValid(2), then borrowed transacted JMS attachment to exact sync/Web-log FQQNs; no consumption",
-  "resourceFailurePrecedence": "fatal owned JMS close escapes ordinary inspection; two ordinary failures remain fixed/redacted; fatal inspection retains identity against fatal close",
+  "resourceFailurePrecedence": "fatal owned JMS or JDBC close escapes ordinary inspection; two ordinary failures remain fixed/redacted; fatal inspection retains identity against fatal close",
   "source": "SS312/321/324 five-consumer, preflight and transaction/terminal contracts; 442 owned resource failure precedence; not production count calculation"
 }
