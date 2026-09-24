@@ -279,6 +279,53 @@ final class WebLogDispatcherTest {
   }
 
   @Test
+  void idem012r02SameJdbcFailureAtClaimRollbackAndClosePreservesPrimary() throws Exception {
+    try (var codec = codec()) {
+      SQLException primary = new SQLException("synthetic shared JDBC failure", "PT002");
+      AtomicInteger rolledBack = new AtomicInteger();
+      AtomicInteger closed = new AtomicInteger();
+      DataSource failing =
+          source(
+              () ->
+                  (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (ignored, method, args) -> {
+                            if (method.getName().equals("prepareStatement")) throw primary;
+                            if (method.getName().equals("rollback")) {
+                              rolledBack.incrementAndGet();
+                              throw primary;
+                            }
+                            if (method.getName().equals("close")) {
+                              closed.incrementAndGet();
+                              throw primary;
+                            }
+                            if (method.getName().equals("setAutoCommit")) return null;
+                            if (method.getName().equals("getAutoCommit")) return false;
+                            throw new AssertionError(method.getName());
+                          }));
+      var sender =
+          new WebLogMessageSender(
+              codec,
+              () -> {
+                throw new AssertionError("claim failure must not send");
+              });
+      SQLException observed =
+          assertThrows(
+              SQLException.class,
+              () ->
+                  new WebLogDispatcher(
+                          failing, repository, sender, Clock.fixed(NOW, ZoneOffset.UTC))
+                      .dispatch("worker", 1));
+      assertSame(primary, observed);
+      assertEquals(0, observed.getSuppressed().length);
+      assertEquals(1, rolledBack.get());
+      assertEquals(1, closed.get());
+    }
+  }
+
+  @Test
   void nullContractsAndReportInvariantsRejectInvalidInput() throws Exception {
     try (var codec = codec()) {
       DataSource source = source(db::web);
