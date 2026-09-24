@@ -157,6 +157,22 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): screen.validate_web_log_runtime_suite(wrong)
 
+    def test_web_runtime_dependency_inventory_and_negative_status(self):
+        screen = module("screen_collector", "029_collect_scenario_screen_evidence.py")
+        cls = screen.WEB_RUNTIME_DEPENDENCY_CLASS
+        name = "scr132RuntimePostgresDriverAndScopeCanaries"
+        self.assertEqual((name,), screen.WEB_RUNTIME_DEPENDENCY_METHODS)
+        suite = ET.Element("testsuite", name=cls, tests="1", failures="0", errors="0", skipped="0")
+        ET.SubElement(suite, "testcase", classname=cls, name=name)
+        self.assertEqual({"PT-SCR-132": cls + "#" + name},
+                         screen.validate_web_runtime_dependency_suite(suite))
+        for key, value in (("tests", "0"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+            wrong = copy.deepcopy(suite); wrong.set(key, value)
+            with self.assertRaises(ValueError): screen.validate_web_runtime_dependency_suite(wrong)
+        for replacement in ("unlisted", name + "(Path)"):
+            wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
+            with self.assertRaises(ValueError): screen.validate_web_runtime_dependency_suite(wrong)
+
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
         names = (

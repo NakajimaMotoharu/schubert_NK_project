@@ -44,6 +44,8 @@ WEB_LOG_RUNTIME_METHODS = (
     "scr129PartialStartupClosesReplyConsumer",
     "scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries",
     "scr131StartupNullContractsAndSuppressedCleanup")
+WEB_RUNTIME_DEPENDENCY_CLASS = "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest"
+WEB_RUNTIME_DEPENDENCY_METHODS = ("scr132RuntimePostgresDriverAndScopeCanaries",)
 LOG_SCRIPT_PATH = "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js"
 MUSIC_HTTP_CLASS = "dev.codex.schubert.nk.web.session.MusicControllerTest"
 MUSIC_HTTP_METHODS = ("music072SuccessAndWire", "music073ErrorMapping", "music074SessionInvalid",
@@ -166,6 +168,9 @@ SOURCE_PATHS = (
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebApplicationTest.java",
     "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
     "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntimeTest.java")
+SOURCE_PATHS += (
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeDependencyTest.java")
 
 
 def validate_suite(suite, detail=False):
@@ -231,6 +236,10 @@ def validate_web_application_suite(suite):
 
 def validate_web_log_runtime_suite(suite):
     return validate_named_suite(suite, WEB_LOG_RUNTIME_CLASS, WEB_LOG_RUNTIME_METHODS, 127)
+
+
+def validate_web_runtime_dependency_suite(suite):
+    return validate_named_suite(suite, WEB_RUNTIME_DEPENDENCY_CLASS, WEB_RUNTIME_DEPENDENCY_METHODS, 132)
 
 
 def validate_named_suite(suite, classname, methods, first, test_ids=None):
@@ -318,6 +327,7 @@ def main():
     methods.update(validate_web_dependency_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_DEPENDENCY_CLASS + ".xml")).getroot()))
     methods.update(validate_web_application_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_APPLICATION_CLASS + ".xml")).getroot()))
     methods.update(validate_web_log_runtime_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_LOG_RUNTIME_CLASS + ".xml")).getroot()))
+    methods.update(validate_web_runtime_dependency_suite(ET.parse(target / "surefire-reports" / ("TEST-" + WEB_RUNTIME_DEPENDENCY_CLASS + ".xml")).getroot()))
     script_trace = json.loads((target / "pt-search-script/PT-SCR025-node.json").read_text())
     validate_script_trace(script_trace, digest(repo / SCRIPT_PATH))
     log_script_trace = json.loads((target / "pt-log-script/PT-SCR092-node.json").read_text())
@@ -354,7 +364,8 @@ def main():
                  "031_NK-WEB-002_Web起動統合単体テスト仕様書.md", "032_NK-WEB-002_Web起動統合実行結果.md",
                  "033_NK-WEB-002_MVC依存登録単体テスト仕様書.md", "034_NK-WEB-002_MVC依存登録実行結果.md",
                  "035_NK-WEB-002_共有session依存単体テスト仕様書.md", "036_NK-WEB-002_共有session依存実行結果.md",
-                 "037_NK-WEB-002_Log経路親起動単体テスト仕様書.md", "038_NK-WEB-002_Log経路親起動実行結果.md"):
+                 "037_NK-WEB-002_Log経路親起動単体テスト仕様書.md", "038_NK-WEB-002_Log経路親起動実行結果.md",
+                 "039_NK-WEB-002_Web実行時JDBC依存単体テスト仕様書.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
     suite = ET.Element("testsuite", name="NK-WEB-002-screen-slices", tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
@@ -391,10 +402,11 @@ def main():
         "webHttpOracle": "027/SCR109..112 and 033/SCR120/121/123: actual loopback Tomcat11/MVC/Thymeleaf GET/HEAD/404, mandatory caller security Filter, caller-owned port reaches feature Controller, invalid dependency/path/port/config before Tomcat, legacy factory success, failed bind/start/cleanup, idempotent close. No full production bootstrap or actual NK CHR.",
         "webDependencyOracle": "029/SCR113..116: isolated PostgreSQL18/Flyway Web role and embedded Artemis broker, no message consumption, JDBC false/SQL/close and JMS open/attach/close/unavailable provider boundaries. Consumer construction does not certify Queue existence; SS321 management readiness remains mandatory. No actual NK CHR.",
         "webApplicationOracle": "031/SCR117..119 and 033/SCR122: actual isolated PostgreSQL18/Flyway, embedded Artemis and secured loopback Tomcat, approved login title/CSRF/session cookie and DB row, untrusted direct 403, invalid MVC port rejected before DB/JMS borrow, null/invalid/dependency fault before HTTP. Not credential management, API listener, Queue management readiness or actual NK CHR.",
+        "webRuntimeDependencyOracle": "039/SCR132: SS342/343 Web production runtime JDBC scope/version/uniqueness; test/compile/system/absent scope, wrong version and duplicate mutation rejected; Maven runtime-only classpath independently checked in 040. BUG233/YKT186. Not a live DB login or actual NK CHR.",
         "coverageNotes": "Only configuration classes have zero conditional branches; controller branches all covered. No exclusion. Template condition/iteration/text branches verified by SCR001..024/026..033/046..053/066..071/084..091. SCR025 and SCR092 each execute8 Node subcases; both Production JS files have line/function/branch100, no JS class declaration and no exclusion; subcases are not additional JUnit tests.",
         "staticAnalysis": verified["modules"]["web"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "PG-D-203", "PG-D-204", "PG-D-205", "PG-D-206", "PG-D-207", "PG-D-208", "PG-D-209", "PG-D-210", "PG-D-211", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "BUG-219", "BUG-220", "YKT-169", "YKT-170", "YKT-171", "YKT-175", "YKT-176"],
+        "fullReactorManifestSha256": digest(full), "related": ["PG-D-194", "PG-D-195", "PG-D-196", "PG-D-201", "PG-D-202", "PG-D-203", "PG-D-204", "PG-D-205", "PG-D-206", "PG-D-207", "PG-D-208", "PG-D-209", "PG-D-210", "PG-D-211", "PG-D-238", "SSC-071", "SSC-072", "BUG-213", "BUG-214", "BUG-215", "BUG-219", "BUG-220", "BUG-233", "YKT-169", "YKT-170", "YKT-171", "YKT-175", "YKT-176", "YKT-186"],
         "fixture": "Public synthetic independent UI232/234 byte vectors, isolated PostgreSQL encrypted sessions, loopback Tomcat and actual security/MVC. No raw session/cookie/token or master data saved.",
         "oracle": "001/SCR001..016: explicit status/DOM/order/URLs,0/max/null/foreign identity,all result codes,SCF binding,0102 terminal,100 concurrent correlations,unknown failure identity.012 is a synthetic display projection comparison, not the actual NK CHR gate.",
         "detailTemplateOracle": "003/SCR017..024: Production scenario template via resolver, independent heading/navigation/entry/audio/URLs,0/10000 entries/999 voices,all conditionals,escaping,64 renders and full new CSS declaration table/900px/target highlighting. Not a browser screenshot or a registered detail HTTP endpoint.",
