@@ -2694,6 +2694,15 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorDatabaseCredentialLoaderTest"))
         self.assertEqual("NK-DAT-001", media.shared_file_program(prefix + "InspectorApplicationTest"))
         self.assertEqual("NK-OPS-001", media.shared_file_program(prefix + "ServiceCredentialReaderTest"))
+        self.assertEqual("NK-OPS-001", media.shared_file_program(prefix + "ServiceCredentialSetTest"))
+        # Every future OPS API-file test in the deployed inventory must be classified by the
+        # independent media collector before a full formal run can be certified.
+        deployed_file_tests = [cls for cls, _, _ in launch.DEPLOYMENT_GROUPS if cls.startswith(prefix)]
+        self.assertGreaterEqual(len(deployed_file_tests), 2)
+        for cls in deployed_file_tests:
+            self.assertEqual("NK-OPS-001", media.shared_file_program(cls))
+        with self.assertRaisesRegex(ValueError, "unmapped"):
+            media.shared_file_program(prefix + "FutureServiceFileTest")
         for name in ("NewMediaTest", "", "InspectorCredentialLoaderTest"):
             with self.assertRaisesRegex(ValueError, "unmapped"):
                 media.shared_file_program(name)

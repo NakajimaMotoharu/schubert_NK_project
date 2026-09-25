@@ -21,6 +21,7 @@ def shared_file_program(classname):
         prefix + "InspectorDatabaseCredentialLoaderTest": "NK-DAT-001",
         prefix + "InspectorApplicationTest": "NK-DAT-001",
         prefix + "ServiceCredentialReaderTest": "NK-OPS-001",
+        prefix + "ServiceCredentialSetTest": "NK-OPS-001",
     }
     if classname not in owners:
         raise ValueError("unmapped shared file test class")
