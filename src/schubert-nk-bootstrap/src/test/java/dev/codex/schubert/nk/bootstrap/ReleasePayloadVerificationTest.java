@@ -304,6 +304,29 @@ final class ReleasePayloadVerificationTest {
     accepted.publish();
     assertEquals(VERSION, accepted.subject().verify(accepted.approval).version());
     accepted.released();
+    // SS343 section 6.8: fixed tools are executable payloads, not arbitrary bin entries.
+    for (String tool : List.of("schubert-nkctl", "schubert-nk-inbox-inspector")) {
+      var executable = new Fixture("approved-bin-" + tool);
+      executable.payload.put(
+          "operations/bin/" + tool, "#!/bin/sh\nexit 0\n".getBytes(StandardCharsets.US_ASCII));
+      executable.publish();
+      Files.setPosixFilePermissions(
+          executable.release.resolve("operations/bin/" + tool),
+          PosixFilePermissions.fromString("rwxr-x---"));
+      assertEquals(VERSION, executable.subject().verify(executable.approval).version());
+      executable.released();
+      Files.setPosixFilePermissions(
+          executable.release.resolve("operations/bin/" + tool),
+          PosixFilePermissions.fromString("rw-r-----"));
+      refused(executable);
+    }
+    var unknown = new Fixture("unknown-bin");
+    unknown.payload.put("operations/bin/unapproved-tool", new byte[0]);
+    unknown.publish();
+    Files.setPosixFilePermissions(
+        unknown.release.resolve("operations/bin/unapproved-tool"),
+        PosixFilePermissions.fromString("rwxr-x---"));
+    refused(unknown);
     var f = new Fixture("nested");
     f.payload.put("api/lib/sub/x.jar", new byte[] {1});
     f.publish();
@@ -357,6 +380,51 @@ final class ReleasePayloadVerificationTest {
 
   @Test
   void fullBom008EveryRetainedOwnerAndUntrustedDigest() throws Exception {
+    var candidate = new Fixture("candidate-no-selector");
+    Files.delete(candidate.opt.resolve("schubert-nk/current"));
+    var candidateResult = candidate.subject().verifyCandidate(candidate.approval);
+    assertEquals(VERSION, candidateResult.version());
+    assertFalse(
+        Files.exists(candidate.opt.resolve("schubert-nk/current"), LinkOption.NOFOLLOW_LINKS));
+    candidate.released();
+    int candidateOpens = candidate.calls.opened, candidateCloses = candidate.calls.closed;
+    assertThrows(IOException.class, () -> candidate.subject().verify(candidate.approval));
+    candidate.released();
+    assertThrows(NullPointerException.class, () -> candidate.subject().verifyCandidate(null));
+    for (int i = 1; i <= candidateOpens; i++) {
+      var fault = new Fixture("candidate-open-" + i);
+      fault.calls.failOpenAt = i;
+      assertThrows(Exception.class, () -> fault.subject().verifyCandidate(fault.approval));
+      assertEquals(i, fault.calls.opened);
+      fault.released();
+    }
+    for (int i = 1; i <= candidateCloses; i++) {
+      var fault = new Fixture("candidate-close-" + i);
+      fault.calls.failCloseAt = i;
+      assertThrows(Exception.class, () -> fault.subject().verifyCandidate(fault.approval));
+      assertTrue(fault.calls.closed >= i);
+      fault.released();
+    }
+    var oldSelector = new Fixture("candidate-old-selector");
+    Path selector = oldSelector.opt.resolve("schubert-nk/current");
+    Files.delete(selector);
+    Path oldTarget = oldSelector.opt.resolve("schubert-nk/releases/old-version");
+    Files.createSymbolicLink(selector, oldTarget);
+    assertEquals(VERSION, oldSelector.subject().verifyCandidate(oldSelector.approval).version());
+    assertEquals(oldTarget, Files.readSymbolicLink(selector));
+    oldSelector.released();
+    assertThrows(
+        IOException.class,
+        () -> oldSelector.subject().verifyCandidate(new ReleaseApproval(VERSION, "a".repeat(64))));
+    oldSelector.released();
+    assertThrows(
+        IOException.class,
+        () ->
+            oldSelector
+                .subject()
+                .verifyCandidate(
+                    new ReleaseApproval("missing-version", oldSelector.approval.manifestSha256())));
+    oldSelector.released();
     var normal = new Fixture("counts");
     normal.subject().verify(normal.approval);
     normal.released();

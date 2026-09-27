@@ -50,6 +50,11 @@ public final class StartupReleaseManifest {
     T read(OwnedTransferDirectory release, String version) throws StorageIoException;
   }
 
+  @FunctionalInterface
+  private interface ApplicationOperation<T> {
+    T read(OwnedTransferDirectory application) throws StorageIoException;
+  }
+
   /** Actual file agreement only, not root approval authority or a complete startup permit. */
   public record Contents(
       String version,
@@ -135,6 +140,27 @@ public final class StartupReleaseManifest {
   }
 
   private <T> T inspect(ReleaseOperation<T> operation) throws IOException {
+    return inspectApplication(app -> selected(app, operation));
+  }
+
+  /**
+   * SSC097: verify a fixed releases/version candidate without reading or changing current. Borrowed
+   * claims are not signature authority, a root capability or an activation permit. The separately
+   * trusted deployment caller must authenticate original bytes with its fixed pin.
+   */
+  public Contents verifyCandidate(ReleaseApproval approval) throws IOException {
+    Objects.requireNonNull(approval, "borrowed candidate claims");
+    return inspectApplication(
+        app ->
+            released(
+                app,
+                approval.version(),
+                (release, version) ->
+                    new ReleasePayloadVerification(this, group, io, security)
+                        .verify(release, version, approval)));
+  }
+
+  private <T> T inspectApplication(ApplicationOperation<T> operation) throws IOException {
     try {
       var root = OwnedTransferDirectory.open(calls, opt);
       return ResourceScope.use(
@@ -146,7 +172,7 @@ public final class StartupReleaseManifest {
                 app::close,
                 () -> {
                   Snapshot appBefore = directory(app, group, 040750);
-                  T digest = selected(app, operation);
+                  T digest = operation.read(app);
                   require(appBefore.equals(directory(app, group, 040750)));
                   var reopened = root.openExistingChild("schubert-nk");
                   ResourceScope.use(
@@ -178,39 +204,7 @@ public final class StartupReleaseManifest {
         link -> {
           Snapshot before = checked(link, 0, 0120777, 1, -1);
           String version = version(app.atDirectory(io::selector), opt);
-          var releases = app.openExistingChild("releases");
-          T result =
-              ResourceScope.use(
-                  releases::close,
-                  () -> {
-                    Snapshot releasesBefore = directory(releases, group, 040750);
-                    var release = releases.openExistingChild(version);
-                    return ResourceScope.use(
-                        release::close,
-                        () -> {
-                          Snapshot releaseBefore = directory(release, group, 040750);
-                          T digest = operation.read(release, version);
-                          require(releaseBefore.equals(directory(release, group, 040750)));
-                          var reopened = releases.openExistingChild(version);
-                          ResourceScope.use(
-                              reopened::close,
-                              () -> {
-                                require(releaseBefore.equals(directory(reopened, group, 040750)));
-                                return Boolean.TRUE;
-                              });
-                          require(releasesBefore.equals(directory(releases, group, 040750)));
-                          var reopenedReleases = app.openExistingChild("releases");
-                          ResourceScope.use(
-                              reopenedReleases::close,
-                              () -> {
-                                require(
-                                    releasesBefore.equals(
-                                        directory(reopenedReleases, group, 040750)));
-                                return Boolean.TRUE;
-                              });
-                          return digest;
-                        });
-                  });
+          T result = released(app, version, operation);
           require(before.equals(checked(link, 0, 0120777, 1, -1)));
           require(version.equals(version(app.atDirectory(io::selector), opt)));
           app.atExistingEntryHandle(
@@ -220,6 +214,40 @@ public final class StartupReleaseManifest {
                 return Boolean.TRUE;
               });
           return result;
+        });
+  }
+
+  private <T> T released(OwnedTransferDirectory app, String version, ReleaseOperation<T> operation)
+      throws StorageIoException {
+    var releases = app.openExistingChild("releases");
+    return ResourceScope.use(
+        releases::close,
+        () -> {
+          Snapshot releasesBefore = directory(releases, group, 040750);
+          var release = releases.openExistingChild(version);
+          return ResourceScope.use(
+              release::close,
+              () -> {
+                Snapshot releaseBefore = directory(release, group, 040750);
+                T result = operation.read(release, version);
+                require(releaseBefore.equals(directory(release, group, 040750)));
+                var reopened = releases.openExistingChild(version);
+                ResourceScope.use(
+                    reopened::close,
+                    () -> {
+                      require(releaseBefore.equals(directory(reopened, group, 040750)));
+                      return Boolean.TRUE;
+                    });
+                require(releasesBefore.equals(directory(releases, group, 040750)));
+                var reopenedReleases = app.openExistingChild("releases");
+                ResourceScope.use(
+                    reopenedReleases::close,
+                    () -> {
+                      require(releasesBefore.equals(directory(reopenedReleases, group, 040750)));
+                      return Boolean.TRUE;
+                    });
+                return result;
+              });
         });
   }
 

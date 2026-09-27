@@ -478,14 +478,15 @@ final class CleanupRepositoryTest {
             "org.postgresql:postgresql",
             "com.github.spotbugs:spotbugs-annotations"),
         runtime);
-    // SSC084/088, BUG276/YKT209: compatibility package is not artifact ownership.
+    // SSC084/088/095/096, BUG276/298: compatibility package is not artifact ownership.
     // Independent literal allowlist, corroborated by the actual Bootstrap source location.
     java.util.function.Predicate<String> allowedImport =
         name ->
             !name.matches("dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*")
                 || (Set.of(
                             "dev.codex.schubert.nk.api.file.InspectorCredentialLoader",
-                            "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential")
+                            "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential",
+                            "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission")
                         .contains(name)
                     && Files.isRegularFile(
                         repo.resolve(
@@ -494,10 +495,13 @@ final class CleanupRepositoryTest {
                                 + ".java")));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.file.InspectorCredentialLoader"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.maintenance.InspectorDbCredential"));
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"));
     for (var forbidden :
         List.of(
             "dev.codex.schubert.nk.api.file.AssetResolver",
             "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderMissing",
+            "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmissionMissing",
+            "dev.codex.schubert.nk.api.bootstrap.*",
             "dev.codex.schubert.nk.api.file.*",
             "dev.codex.schubert.nk.web.LoginController",
             "dev.codex.schubert.nk.protocol.FixedLengthCodec")) {

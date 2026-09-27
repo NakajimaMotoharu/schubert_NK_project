@@ -94,8 +94,13 @@ final class ReleasePayloadVerification {
         || path.equals("config/caddy/Caddyfile.template")
         || path.equals("config/artemis/broker.xml.template")
         || path.matches("systemd/[A-Za-z0-9._-]+\\.(?:service|target|timer)")
-        || path.equals("operations/bin/schubert-nkctl")
+        || executable(path)
         || path.matches("operations/runbooks/[A-Za-z0-9._-]+");
+  }
+
+  private static boolean executable(String path) {
+    return path.equals("operations/bin/schubert-nkctl")
+        || path.equals("operations/bin/schubert-nk-inbox-inspector");
   }
 
   private static void add(Map<String, Set<String>> tree, String path) {
@@ -143,7 +148,7 @@ final class ReleasePayloadVerification {
         directory.atExistingEntryHandle(
             name,
             held -> {
-              int mode = child.equals("operations/bin/schubert-nkctl") ? 0100750 : 0100640;
+              int mode = executable(child) ? 0100750 : 0100640;
               var first = checked(held, mode);
               require(first.device() == original.device());
               if (child.equals("RELEASE-MANIFEST.json")) require(first.equals(original));

@@ -543,6 +543,8 @@ Current bookmarkのDB ID互換を新しい要件として暗黙追加しない�
 
 ### 11.1 Deploy
 
+SSC097/PG315: 配備候補の検査はcurrentを変更せず、固定`releases/<既存version token>`を既存保持namespace/fullBOM検査へ渡す。候補/current外の信頼済み配備toolが固定pin・Ed25519で元manifest bytesを認証し、同digest/versionの全payload検査を完了してからだけactivationで原本を発行する。候補検査の公開返値はfile agreementに限りroot起動/permit権限ではない。trusted tool/pinの固定配置・由来・独立検証と発行のforce/close/atomic置換/directory syncをPTへ残す。将来の既存Production更新は旧承認release/旧schemaでbackup実成功→migration→新release/approval/current→再gateの順。新schemaを要求するMorning beginをmigration前backupへ使わない。専用PGPT初期構築だけはmarker・業務行0（既定seed除く）・未受入/未許可・全停止/復元点を確認して専用migration actorによりappend-only適用する。VM snapshotを業務backup成功へ代用せず、保留中の真正run/activation原本を同identityで保持する。
+
 SSC096/PG313（実装前の固定契約）: 既定signature検証を省略しない。配備入力側で固定pinned公開鍵によるdetached signature検証成功後だけ固定root原本 `/etc/schubert-nk/release-approval/current` を発行する。親root:root0700、file root:root0400/single-link/ACL無し。固定ASCII1行列は `NKRELEASEAPPROVAL1\nversion=<既存release token1..64>\nmanifest_sha256=<lowerhex64>\n`、最大192byte、unknown/duplicate/欠落/NULL/CRLF/BOM/escape/末尾追加/非canonicalを拒否する。path/algorithm/keyは原本から選ばせない。原本の更新はM/A・全停止・permit失効・current切替を管理する配備処理内で行い、起動時の実測hashから承認原本を作るfallbackを禁止する。
 
 全root前段（API/Webの!前段とmorning）は真正RootStartupContextを認証してからPID1 host-viewのこの同じ固定原本を保持read/recheckする。API/Web UnitはUser=serviceを維持し、root-only原本を通常LoadCredentialへ混ぜない。既存ordinary5secret catalog不変更。root承認version/digest→既存held current/release内の同一manifest bytes/version照合・strict parse→全BOM/共有artifact/同梱SQL・外部SQL/checksum→前後原本/current/namespace一致→全close成功後だけimmutable schema期待を返す。digestだけの既存sha256読取をfullgateへ読み替えない。

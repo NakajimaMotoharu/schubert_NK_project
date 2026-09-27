@@ -1,0 +1,36 @@
+{
+  "sourceCommit": "8f41401df10229cb6e0bbbcdbc15210bd033fd9f",
+  "branch": "dev-foundation",
+  "finished": "2026-09-28T05:37:42+09:00",
+  "exitCode": 1,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch -am clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node > /tmp/PG314-regression-2217.log 2>&1",
+  "tests": 2217,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "bugs": [
+    "BUG-298"
+  ],
+  "formal": false,
+  "toolchain": {
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4.0",
+    "Node": "24.19.0"
+  },
+  "limitations": [
+    "Batch static not run; Batch coverage report generated after failure without source/class change",
+    "First oversized JSON drafts were discarded; all complete metadata/hash chunks now saved"
+  ],
+  "logs": [
+    {
+      "path": "/tmp/PG314-regression-2217.log",
+      "sha256": "2806e59d7d906d8a472b501cd6e680948133fe21077fba3e62f36809dccec7bf"
+    },
+    {
+      "path": "/tmp/PG314-batch-RED-report.log",
+      "sha256": "0b04b6c81280bb8f43b8d393786ac571495e3da41fcf5254d4375a5e1bcbbca5"
+    }
+  ]
+}
