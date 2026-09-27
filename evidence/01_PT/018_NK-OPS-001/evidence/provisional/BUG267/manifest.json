@@ -1,0 +1,50 @@
+{
+  "status": "DIRECT_LIMITED_RETEST_NOT_CERTIFIED",
+  "program": "NK-OPS-001",
+  "BUG": "BUG-267",
+  "YKT": "YKT-201",
+  "branch": "dev-foundation",
+  "predecessor_commit": "f1a3e24f3",
+  "source_changes": "only2relatedPTclasses; no Production/POM changes",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-batch spotless:apply test -Dtest=CleanupRepositoryTest,BatchRuntimeDependencyTest",
+  "finished": "2026-09-27T20:43:25+09:00",
+  "JDK": "25.0.4",
+  "Maven": "3.9.12",
+  "Node": "24.19.0",
+  "exit_code": 0,
+  "suites": [
+    {
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "34864b8e895bd366d4483cff232cd217c296232f6f5ab990ddb3a53a361811bd",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "b398b8f984824ab612f10385088347cdc628310c779af9b9b376aa15dfc8880a",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "files": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRepositoryTest.java": "e733d557dcf62741e1ff49cf91bebabe7eaf03360dde4ddfb4cd2b50b6195447",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/bootstrap/BatchRuntimeDependencyTest.java": "d2bcf5eb41046a5ae9a12d95381ba670a6a843592042d7006bfea0a2d17dc3aa",
+    "src/schubert-nk-batch/pom.xml": "dcb3eed0299d1207320279c02c1a1234780fd086cc3340ae7e93945171fa7356",
+    "/tmp/BUG267-batch-dependency-retest-2.log": "2ae91f12fc70cb85cb473c5088cff48394fd892e4b87a5365352b409f05adee6",
+    "/tmp/BUG267-canary.log": "6d49028c86671bc21e565189a289d462d4f89de0d8882f10404d964f5e1dab38"
+  },
+  "expected": "SS311/SSC088 fixed8non-test directdependencies; Bootstrap/Flyway core defaultcompile, Flyway PG/runtime, forbiddenAPI/Web/Protocol and unknown additions rejected",
+  "actual": "18PT pass, 105negative canaries pass",
+  "coverage": null,
+  "static": null,
+  "limits": [
+    "new-source full420notexecuted",
+    "fullregression f1failed retained separately",
+    "formal1964PT/48.3% unchanged",
+    "main A/resource defect BUG266 stillopen"
+  ]
+}

@@ -466,11 +466,14 @@ final class CleanupRepositoryTest {
                 + ":"
                 + dependency.getElementsByTagName("artifactId").item(0).getTextContent());
     }
-    // SS311/341/342, BUG-234/235: external JDBC driver is required; never API/Web/Protocol.
+    // SS311 SSC088/BUG267: fixed bootstrap and root schema validation only, never API/Web/Protocol.
     assertEquals(
         Set.of(
             "org.jspecify:jspecify",
             "dev.codex.schubert:schubert-nk-storage",
+            "dev.codex.schubert:schubert-nk-bootstrap",
+            "org.flywaydb:flyway-core",
+            "org.flywaydb:flyway-database-postgresql",
             "org.apache.artemis:artemis-jakarta-client",
             "org.postgresql:postgresql",
             "com.github.spotbugs:spotbugs-annotations"),

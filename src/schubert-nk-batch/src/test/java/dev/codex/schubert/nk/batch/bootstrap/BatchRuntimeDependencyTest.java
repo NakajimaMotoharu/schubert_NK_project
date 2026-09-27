@@ -38,6 +38,109 @@ final class BatchRuntimeDependencyTest {
     assertThrows(
         AssertionError.class, () -> assertRuntimeDriver(pom.replace(block, block + block)));
     assertThrows(AssertionError.class, () -> assertRuntimeDriver(pom.replace(block, "")));
+    // SS311/SSC088 and BUG267/YKT201: independent, closed root-startup dependency oracle.
+    assertStartupDependencies(pom);
+    assertThrows(
+        AssertionError.class,
+        () ->
+            assertStartupDependencies(
+                pom.replace(
+                    "<dependencies>",
+                    "<dependencies><dependency><groupId>unknown</groupId><artifactId>unknown</artifactId><version>1</version></dependency>")));
+    for (String forbidden :
+        new String[] {"schubert-nk-api", "schubert-nk-web", "schubert-nk-protocol"}) {
+      assertThrows(
+          AssertionError.class,
+          () ->
+              assertStartupDependencies(
+                  pom.replace(
+                      "<dependencies>",
+                      "<dependencies><dependency><groupId>dev.codex.schubert</groupId><artifactId>"
+                          + forbidden
+                          + "</artifactId><version>0.1.0-SNAPSHOT</version></dependency>")));
+    }
+    for (String[] dependency :
+        new String[][] {
+          {"dev.codex.schubert", "schubert-nk-bootstrap", "compile"},
+          {"org.flywaydb", "flyway-core", "compile"},
+          {"org.flywaydb", "flyway-database-postgresql", "runtime"}
+        }) {
+      String declared = dependencyBlock(pom, dependency[0], dependency[1]);
+      assertThrows(
+          AssertionError.class, () -> assertStartupDependencies(pom.replace(declared, "")));
+      assertThrows(
+          AssertionError.class,
+          () -> assertStartupDependencies(pom.replace(declared, declared + declared)));
+      String wrong =
+          declared.contains("<scope>runtime</scope>")
+              ? declared.replace("<scope>runtime</scope>", "<scope>test</scope>")
+              : declared.replace("</dependency>", "<scope>test</scope></dependency>");
+      assertThrows(
+          AssertionError.class, () -> assertStartupDependencies(pom.replace(declared, wrong)));
+      if (dependency[2].equals("runtime")) {
+        assertThrows(
+            AssertionError.class,
+            () ->
+                assertStartupDependencies(
+                    pom.replace(
+                        declared,
+                        declared.replace("<scope>runtime</scope>", "<scope>compile</scope>"))));
+      }
+    }
+  }
+
+  private static void assertStartupDependencies(String pom) {
+    var direct = new java.util.HashSet<String>();
+    var blocks = DEPENDENCY.matcher(pom);
+    while (blocks.find()) {
+      String block = blocks.group();
+      if (!block.contains("<scope>test</scope>")) {
+        var group = Pattern.compile("<groupId>([^<]+)</groupId>").matcher(block);
+        var artifact = Pattern.compile("<artifactId>([^<]+)</artifactId>").matcher(block);
+        assertTrue(group.find());
+        assertTrue(artifact.find());
+        direct.add(group.group(1) + ":" + artifact.group(1));
+      }
+    }
+    assertEquals(
+        java.util.Set.of(
+            "dev.codex.schubert:schubert-nk-storage",
+            "dev.codex.schubert:schubert-nk-bootstrap",
+            "org.flywaydb:flyway-core",
+            "org.flywaydb:flyway-database-postgresql",
+            "org.postgresql:postgresql",
+            "org.apache.artemis:artemis-jakarta-client",
+            "org.jspecify:jspecify",
+            "com.github.spotbugs:spotbugs-annotations"),
+        direct);
+    for (String artifact : new String[] {"schubert-nk-bootstrap", "flyway-core"}) {
+      String declared =
+          dependencyBlock(
+              pom,
+              artifact.equals("schubert-nk-bootstrap") ? "dev.codex.schubert" : "org.flywaydb",
+              artifact);
+      assertFalse(declared.contains("<scope>"), "SS311 default compile dependency");
+    }
+    String driver = dependencyBlock(pom, "org.flywaydb", "flyway-database-postgresql");
+    assertTrue(driver.contains("<scope>runtime</scope>"), "root Flyway PG adapter runtime");
+    for (String forbidden :
+        new String[] {"schubert-nk-api", "schubert-nk-web", "schubert-nk-protocol"}) {
+      assertFalse(pom.contains("<artifactId>" + forbidden + "</artifactId>"));
+      assertThrows(
+          AssertionError.class, () -> dependencyBlock(pom, "dev.codex.schubert", forbidden));
+    }
+  }
+
+  private static String dependencyBlock(String pom, String group, String artifact) {
+    var found = new ArrayList<String>();
+    var matcher = DEPENDENCY.matcher(pom);
+    while (matcher.find()) {
+      String value = matcher.group();
+      if (value.contains("<groupId>" + group + "</groupId>")
+          && value.contains("<artifactId>" + artifact + "</artifactId>")) found.add(value);
+    }
+    assertEquals(1, found.size(), "one fixed root startup declaration");
+    return found.getFirst();
   }
 
   private static String postgresBlock(String pom) {

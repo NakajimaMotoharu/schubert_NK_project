@@ -1,0 +1,2988 @@
+{
+  "status": "FAILED_PROVISIONAL_NOT_CERTIFIED",
+  "source_commit": "f1a3e24f3c6feb64d90514c7238169d14cfa9dc3",
+  "branch": "dev-foundation",
+  "program": "NK-OPS-001",
+  "trigger": "SSC088 shared security/POM change R1/D01-05",
+  "finished": "2026-09-27T20:38:37+09:00",
+  "JDK": "25.0.4",
+  "Maven": "3.9.12",
+  "Node": "24.19.0",
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "static_findings": 0
+    },
+    "storage": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5688
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 485
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1076
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 480
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 237
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 35
+        }
+      },
+      "static_findings": 0
+    },
+    "bootstrap": {
+      "tests": 95,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4113
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 416
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 747
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 365
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 157
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 26
+        }
+      },
+      "static_findings": 0
+    },
+    "api": {
+      "tests": 734,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 34544
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2788
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 7528
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 2557
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 1115
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        }
+      },
+      "static_findings": 0
+    },
+    "web": {
+      "tests": 555,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 21045
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1670
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 4763
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 1798
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 949
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 188
+        }
+      },
+      "static_findings": 0
+    },
+    "batch": {
+      "tests": 420,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "coverage": null,
+      "static_findings": null
+    }
+  },
+  "tests_latest_module_snapshot": 2033,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "c8c01183be1523c141cefe805b9cd1d1753bc73a9b7344e12ae12177c574b6a5",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "85ae87d72322daab24bb3236be20962a3560e47d44e665ea286a64a8caadb4a6",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "8003708a4439a0190c2294e515f9b412e145424ed889efdeeb9c938b701be043",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "c13481623390fd676367eb94c6f503651e66ad99685b5c9c4c512f15f5e1cbc8",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "b0cbd0ab5bde03ce1fe89b5dcf7f749762384723f1fddfc1a142c7ed7f4505d4",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "c53f8c6db8f8e853e2108bec4a04859808f49a0a082a61c8111ca4dda4ff6cf8",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "634af866f69b89f29177f40b0efa1d7a2b64c8623bc08406f7b09238275bbe47",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "d17eec13d6b5ddb5597b9a507d08cf0c9694276c325a2bf0bb56b848d85c59ef",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "79044d32de23a50b39c33e0906827aaa3f0540384aadb84562165a7e17d7c194",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "1e59a02c59a8f7fa7dc52d6a29a2a2b351896358f2d3567451f461d37a2da72c",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "b1a3971c5cc21c87baec52c9c1d4f7a5a6251c526f9a462f758056565d6a9e53",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "ca7b6f0e80a3f2dc30da3a1941e42452edf046235be026a76a4a87b31dde4bfa",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "dbb6be20a2783ad3605a1d49a573e3b303c60841f648f8a40e81c7b77ee3f3ab",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "de57991494dde276e34c270a0edbac2de504f49b0078a6389dbcb1ef52e5dddc",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "e502ff084f30a4ad9e9df1e005cf99d9e0c149ec54a04352cec3786239a6974a",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "c1d376a00bb56370d3aecdd050181548b92b868bd1c25b162a4ba6c1db110b43",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "protocol",
+      "path": "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "344e6361d5d91f1c7c5ffd8088eef28a1ce2af0d1d75f9c81bab0dd36c0e2cfa",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "669bec564f18ea1d51c0e00fb0e3c4230a559884ab0178c16a544f74a7c0a140",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "021e374ef354d56483c4cbc6d84e9d7a7ed2f9530c987b8794d54bdff1832b20",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "6c874256a684f0c0c090e7532b63f809b3082b5351dbc516cbe4013d21d0d70b",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "01a2eeb62e91c5322f466303fbe7aff476261cab3d2a006c0488647a7a46e467",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "40c1d61337aca3ccfadd9ebd685b7f2a7369221ff2fb9300eabb88b879caf6cf",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "379ee6bb362e5c1813e01fee277740c42763d659a42db2e95b79709fc390367f",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "5c9efe1ef90e651c7ee4735c26f9d8b85bf8989e2f2b7777a585c1a81c342e99",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "c0967da579c71efef0f33a0b57fb8fd0491129b4f668744ea6cae034f782966c",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "8a4787714200c423e7153f2fb5115a6fdae788e614df606a8b6da56ccbde86ba",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "61e5ac5f1bef8bccee7d087b50ca711288fd053b0258e4900793bd95a8be2f73",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "b2767d6d8e1ee5896e4990a806a4579e82c809a635627186de67f22f031a27a2",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "7acfc4dc77fbbf4dd408642dd387db3ec3f1bb05307262b8e9a2935e4120d57a",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "06f454e62ce21d0873c957cb638c9bc7b5e26b31d6310ceea79fb80cc12fa411",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "733bddc670ba13feb3dbd015fba835a114d6f80e4608ef7df2937e5b4ad57435",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "50f3a53a206ba56550c3cda1b133c5349ea2d335e337c28745a71000a95fe752",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "90ceec0d93207e68d0637c86827e130e6e017df06c8210126e1d86cb89b70ae8",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "36cc6b932b1b4700b4c9fc3236125e26b8df63ca5ea41aa41f2cc74f551686b9",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "25bf23ce132d466f513689b52d89ab9d5cd43a2b8894542ace88dea7e8c34c4c",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "46066e0af7e68bf3a688f97746b775b441d17222b85b19dc18ef487f24c6078a",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "6a1b3a3f52ca631f798802518cc413896e767bbd5fa64a0b08c287281e939ab8",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "storage",
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "556b96d3dbe6f14e092f8849f1c9cba67bed6d339668b49a606bb95bbd9a1cc5",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "8bc181bbac1c8a091b6dbfbd93174500830bf2eb536160dc980e50a11f7021f7",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "7e7aa9883e53f829fb12e8cfd973f444e6b394fb0f933f3901cefb0c73160f60",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "6f76c86949b907757d9f69dace4942aaaffd8aed5c4943cad63ce546dabb63ed",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "3252515eb17e9ef6a36a39fb9a13c8fe9c07342720fdf868823d0b7ef3001899",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "c04d962e2bd968d902edfc20b22bdab637982ccd7ed62e1821486c29ffa7536f",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "b1d74d9a4933b2043eda77fd713a743b74abdfbe581aa390b55902767d998fe2",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "6625c6ce35e9e0be9e52616e4834ee716063164577af774c107f1ca1f4394de4",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "2537d4d7b72c6d4caaf0b4ef2f7626096c8a42628a03174c081f1bdfa1b92917",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "51b37f9492a423c8a02daa893412cc852618ce65fac9dc24e4b9ae9ccca04cfe",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "36ae8bb5d3152e9225db0cb86b440295e98bad96b375cbc02d493dd2af26843e",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "093264321cd91459b1748a85173df49e607a7bfd72ff23208cfae21ac1e1449b",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "9460d549feb0f1136de2dcc76c4544bf787b1f796d7e1c28114fda6b80714a97",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "bootstrap",
+      "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "1665fb96c497d00d0c5f819577a7cb31810728aa23c38b6199208e09bfeb60f7",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "6fd7de3cd8a03abe248b0fddd784fb596c23d027613c3f3dea1349716fa4c2ef",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "7172b173e7f7d335b961722e2ee2b48346a61c67c87bded0b04159e69ee8ad02",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "d347f69750829d701b1fe30aee6bec3b815af35aa8dfe049c3225e7000f560d2",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "a4a6272f5ef5a2f55936ad41240c7451d05b340e1905969fd93e1b43bf42746d",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "18172070e8bdfc97e2d01a9353a14611430c99d2f3dd789962fcd7e190d6900b",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "4ce21c5e3df59e654a212038e68cc67fd54138509fb8f562cde3f043a32cc891",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "fff0764f640fdd5e5c8075cfb386b71779a9ce740cb5bf9e33bf5ef16401a769",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "6fc02bd363241bb40147c6f7f13ffde3e72a3c65aff837c3387ed21708b2344f",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "6da9caf3f6e64fbf6ac5d95d04a171a998115ebecaac612eddc6e8d3c295c7ca",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "5b5564a8567e4a8a967cda5be688bbd51ead9a4bf21db978b2eb43262670b32c",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "10805d15a9ceeb6bb9086cafd1eb21672dee1485119190c3d31e3c8bcf7e79f0",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "6ae54864fcf0f964cbc2d87cf9f15e315dcaae5b4ab9dbf1c7dc3288fc8e1a5c",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "d1ca6978277fad0525b54d0fa4db913c197946816096cd58b1eba878660f334f",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "4ee2ddeeb33224c25698729025c2dde4a75983fe436f33bdd21aacf2adec7312",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "6d704c185d8f20b0e8936e8e4ad03438229389546e9f342542f3a4fad8f32a60",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "c0db36bbc97f2c48502142c18e6adce2a66acf4d38334092c97dbcd6b8d849ee",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "34f7a8ff5c38c6be3e6e3d4329083fed1aff085a37ac524ca98b8f8b1244d576",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "dad6a95022cc94199bdb3878ba9f7bc4bd5f057f128cfbf00242be45e34b5808",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "bdddde54b07d60261c0e49ab7123e3a980c0a1c6a0c8c7a065cb5483b99b0b79",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "fe1081dbaa9e2ebcfc2c60f0b1726bc89cd67039242b89f678dbedefa00bc72a",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "2db271b1678e3f5976e4a4fb5fbfebcc9500c33aad8b62ac2babcac24bc06a45",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "20ecc57d2f75de948d8d1dfb50a82e24ad678925ef92b6d35587b8971475bff3",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "4b86e1eb3de733772333b44e63cda375867b5ca3f22eccee5005810e82f77d71",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "f4e048bb177b4ebf654be877f5ca6705046e178bbe3cd81275e17767d62c8791",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "678bed2a13ae1c246cde9238786227e67330049a948d61cfa8185a383e479992",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "ae02bc2e86c666e65e1129a829f04a925d8ed7b3358c0ed12cabbb4ab7fe9b1b",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "49d3d4e503524870927f81d42b7d28cf00c369fd9af6bbfa25e3fdfeb6811f36",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "e7d438eee1452185f328f406da19dbdfec5bf9a407b3cf45a4177cab97b2cef8",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "668357972c0a34a055b5aee656ee37edc750011bc75474ecc33df051211b6b57",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "a0424997a87c8ad6880a062471a72235f3f4a9f16a232ca0d02b378602f570fb",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "2abdfdfae3c5b23e51c1a28c4cd5fe5d55793d124b19ac87febe67f723ad810e",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "fe3630ab16cd4538395936528408c6c68186fb0b4703b7b252e0fd32395b56b9",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "1e663a28f1c97024c167eca39760f9657ee4bf74fd92d7d0d792f648758bd659",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "9ac896e6ac23b7980d4a086f5432084ce410f7482352bd858c316e75b1dda0db",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "37dddfea2599102ee607220fb9741b9f55c63b2443e085bcadf54272ced897bb",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "b89dfe17f2cbee384c1077f52bb8cefe7aba42f0a6df9aa3f6ac6120321cc3b1",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "a61833e61d9904af9511155fd717b91acfab79fd7db933c9b39c9cefc536f9b8",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "d9151ed3de8e41603405b4b77237e8e0a53b846d4a8cbf2b6f374f2d16ac3a04",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "20ac0ced64dd8840b8c7f8c72a44703d42609a837b747778c703ebb1b075a009",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "3429f8db5a51cc9656e4c966ebcb87700b9688c7c64e5e5d7a714e70e45bbd35",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "cfc5ccd4a2e9b44ddf2300cc90c234dbf3e522d983fba03e348053a79611de6a",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "c7846c763af220a288eddcfa950409cc2f0fede2ae49e2836bc0dfdcd0f9a489",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "0b3210152958e8f3be1c2b27716026ebaf96e31ba7de37e1ca33c6862eb191a3",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "b4712311edef04300b85431ccd7be90d7f4a8218d5813bd48eb3af8bd21a93b1",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "bcff0ced156e0b0210604a1c8bf65540b9918c42061a7e740384cb67c35b978b",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "1a706cb91cd7b66026d0f4ebc8cf58f68c67dc24a0a1a33a6c8811360a098439",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "ac889a91f3b6d9fa2c3eacc4a6f71c2564d7a3b175ce67403faf5e755dd630e5",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "a23ae82e17746617d4b60745283cd82ca71e333b97a2bd8ec50111aba17b6236",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "fcaf0f97f66fb2712685d5cef151eba0e14783ee597cfa31d43d549ac322c541",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "1f207baf8bb2ae2f343fee4adb4f2de04898775e5846e0e83643ab1511d97598",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "0d1c78123c9c6a8030cdcf694bed6b0a7da3e09883bc47ced17800a5d531f6f3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "ccd1dd28f87ad050af9788fefa2ce5cc674640bfdfb968ea20ed5c1868189cbc",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "44d7cf5833415da7202cbbf34cdad057ea988637cdd90f2dc12a383593de9a8a",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "764bd744130a2369277838dd620feae891e1e10b05d37f1a83819305d58de7a0",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "454bc6a06b9143a9c69737ef4137bf4094795e3ff5b2c296022483f6fd056caf",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "97fb36e5fcc69ce179048c849aa2c82cafc52eb6cb80653f0fa0a1f2d3b54fe1",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "117bdc6c5f08c91effa2200759053d2ea47124b20503dc190a32e518847a78a3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "a5f8065b60552fc8c2bb798aceeb8b1027b9bf74676062c5c91c1f96bf5247b6",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "5fd55d22bd4d58a349e0d793fd655733065440d7c9a04bbf619e527b1716cb8f",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "9123d7a1aecfce27a2fd7a406dfc76c8fc5963a00f683120ccefbbad19da47bf",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "bd33189bd472a7e59d341dd1c6f1d5701e9022005970bf5e83f51bef789bfe57",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "939e9c1df0753100f5cd4d7725220a6bbed77190abcf756898119b697b1252db",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "ced1acce9951d43f324aa88703df91d911b59b19dea0602040b8e32c68a242cc",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "6d5bd21066b1695889655614c146b87ff8654e4f649dfb825161c782d582219d",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "0cfae532f3057b34c055ae24ffd061489054ce2f13eb81418b0738ddf9d4e6f9",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "10c8a4afc4a094ec8ff2434959144ef8078103c940a56c3c8e8030a3ba888ba3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "e61b8b2774f2d297b6f42e57a74f5339a6ef4e87fba00f9d7b60cd02c1244847",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "3cbc5c53bce4cb2a316312efcc0f542ee82d52a7a30988dfc619c2e295a07d77",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "a3fb90f35dbb2b4574527791469900e1d6f28adc0f3d162c5d7e891688ae7099",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "3823e7fc079603c045caf35fd4cc25a63eb62dc442439001488215ad5ed5e9f6",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "ca4ad5ef9fb8b72a89a7cb068a4cf5fa2073a82c54f4ab627ef25c791b0dce99",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "eea70f578316d0b7cdfe5b28e39bed53f9e3c4fac37105b0bcd23eec018e8dc5",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "a3c2e0b59620709622ea48bfd86034d62437da18b40d65a1ea4fc8c36bbcf49e",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "cadd928dd1c9cd283995a12465278c969b7389cb96d6f8b2f65d303daa1c1586",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "a9e35c778ae5834811087a093a72515655e4869a272f8cec5afba9d924d291c3",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "5d5557ac2b6366eb11ee52e0a8b905c370d08502e75f1eb0a9c10464f7f0f890",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "9f0c5a8aa25d91a4628cf542faccfa349ee245d6271f5d8c018047e29c6d2cbe",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "214658aa4b9b543034f9b8e5e140e0ae2df8122e49bf5531099031c192e4c000",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "19ef84e899b86d1dc1db239b85cf7c082af01505251a6ee9aefd358b168922d5",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "0ec7b04cfea61cc0936893a3fb3c0ed40b8540f308f5b6867fbc18a2bfc7f265",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "434f46d42b64084e01fc5152fb30472b46be0c0511a130ef309cbd1cc8033044",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "4397ed75df24a23817ea0b7a2acf582c2e57f91c644af5b2ce5bb8612d49aac2",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "ef757efc72d4c78590e14ceda65f96e2121a8ad0483dc8bf1dfc82fff2466215",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "a203cfbe26ecda91ffa2feaac41c20b288178643d13f191467104820e26db9b7",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "5ffffa0af44cd6cc367710cdbf7fb3cf8d8ed238e29ece27c27a7da40b538367",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "444434c5c68aac77dc6018fd5d8f9b3a170d9898a72ee5bf31307032e333e383",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "42df4cb3f8e347bd7a46cf891cd4f91fc5746bad0dfd295e78a215007954203f",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "cd4a04a8cfca3e65a6d9a4318318df4f765161bce9d8cc113a10fe14595fe1d9",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "e2df811b6f886b7561446447d46b8bc7606a67435b09a0ac2cd01df93a07c6ee",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "57b9716d7c2dd5a1c326f89ec565e7bf402a6675997c6bd86bdbb188f571f86c",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "e5b681d05200d31fb9a98cc3fdb39351c6fbc5206209b65dffcb9cf5f6285f16",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "ec4f523d352a289cacffccc3569cf0ea01a1638b6367bd4f458fd50bd8507320",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "52e252586bf1041c7386e810cf993b54ed35afd7970aedafe1f71155fb618c62",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "0cd4c68f114a1158f7551deaa460b7e765264fc501f6ed2b3d7dc2d1c54fcfda",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "b9dcadaf38286637bcd94d74957eb86c478458156fed75b8391cfa1411d65b8b",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "04772eb97e4818d8a7ee3474e79f033d302729d533847eeeb31c76025687f7ea",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "4862f02dfd0d8951165c5c464944204e3ee69ca762b3b814ad3abe2dd89e0c19",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "4e47df128a97c76b2d6ceaf80c60aec445ce0689c9ffa44b11ee81d5eb3b7eed",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "15086048973902fafb04a72f90de3693c3967ec370a57ad92860bd8dc65eb28c",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "e661680d0286f548341bfc97a4281fb7bbce00b14a94dedff3cb043e6386d6be",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "82764639498b2f4f5a14bc661e894a40cba12cba2bbfa0760b83d15e79bcf33f",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "167654d33f4c00f3327248a16e70d9729d9b9710ae09d0a4f702a8c5c7b1a0cc",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "304125b6bb5997c05ab96f76c97332714a077d9baa652349f2c609d267829592",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "239a34cc1cdfcec675f26f20bb5ee9f0142c14b0669ff9abbab7ec21f04a0182",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "288e0f978c7145d5e479ac81c9ebfcfb59d712d298d6326f346b0e2f81826936",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "f2da1d4ebd95673c38c68f2e01ea25bd01e911d8f8d0ed59c48db63bfad5f1d7",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "c7d5ada338854ec8a3c04b0f88ed19a0a7085547d172f695ee74f69275b399ee",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "033aab6cddd7372c76e3f6f02758564a7fd4154f4024e47a8d78912ce9ae3129",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "fa0749d199516555ef38b65164eea0ea77847145f62c7b34d7002b31324dd658",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "a7b20cb6b70fea9039b8bdb768bd31756adf3449132b300b51350b66c03a7110",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "2fbfd6eeaeb9c98f9e429416705211eebc31e7a00a63cea8b56f52824759a4b1",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "e970c713e04fa6ee31ea69376e63f979f6ba5e8ff98e658997be8e5a040b6ca9",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "80e673e17d56dc6ecb8efb89af7f1ed035d7f5580619eacda107930867530468",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "387110dfd6e7d3480c0b9221d55cd48921a119671acd8cd9748d05f224d10156",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "92b65f2ec1c8746f0e222e8b0cf51281c0a386e6405b7226f747a206043caa2a",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "927ddd9bb36db7e480c7fb427ef68a6b6cf664fff54dd4f13435ef8afdd3eacd",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "7601a0ffbdaf531ec8a701a2764fab33cfa3a788cbcb68eefbcebeb04aaddf73",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "a4b1e490cbd937bbe94af052c54e4155313c5aa417ad90b0d2fe1b6bdc7dd26d",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "7b3e90d21ce9c7be54fe70f01ab575f2843f08b7e49017a6fea5bcad2c0a0009",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "103e1c5bf7c9411996ae4cd3b2eb8bd699d05db3b836ad16f85cf9b2b74f4db4",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "bb8ee0c3b33efaaea756770895bd0b39e9299111373654678c14f3ee7e574253",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "api",
+      "path": "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "c7e60d4b56c0534c969f6ca4f0438819e7880cf938f5d3fdf3495595af23fc04",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "9336da52d46c3369274fdc20a0878dfe735a4e5ce4c0c702906814b90f087945",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "6c6ee7fb273468bf743ee1bc6d220a6542f10f8e75b322b989969dab617a4805",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "c0e1ee8e68fdad81a20b0ade0b554d01e1259eb08a9d090447ae2a2854d77367",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "80b0e534d12e0bf7a1af52ed6ba6717fa13d4612a2106b38a29bdf80dd8cb618",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "2d2ef7cc149f3c01e862cc0b15009bf4744ef8c07324d1389e30073a7778edaf",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "dc54a1533b01cbed27f1b5db0c3156be4f53e51608167301b7247771382ba51f",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "4bf4aa54f26c24cb7c7e173df43db61d46201f51fbf6d88ba8065934cce360fe",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "86a0056f27c6fd08c4c6c736ec669041c4b522a0d9a8275d2a8c648ecc1ca43d",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "4588dc3afd952aeca07b6e97ee614d2f64002b7d3e0c4b5ebd2e9b39dc6edbc5",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "73d26f270661026da33cd2f8535396064b0613aa643f35375b05378ebdbc210a",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "f0de2bf7884122e2adfb3bc9d27afa48520c671de18d875054d247779c64fad3",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "ff385d4b631b8f86a0742b5e6bac2afffecef9fd8a1b5cd1824142d37d91017a",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "4769ca9235df132fee08dc029577abbdba5f215a81fb3cc5d02248b286eeb341",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "6e731f4e5cf8dd43c8064cbeaff4b02be424f782d88446aaf00a23063d48043a",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "ff44c6ff1e7d5419feb45a096c31ee7cf3a885845fa4c2a8658372e1cd03fdf6",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "b79ef0a026ff673fb0283d7d70a3afea869c489258488f30e05a58120c3086f5",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "f068d26fab5eafae0cc927a7d63053b936c71821be1715f8465cc1c5935efcb5",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "b1e03a46592be66c621bc95c7817b3bd616a5e9a5896d91e429c557debfa37fa",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "37c81ef17a82174d2a74ed8e1fe4d5e910f094843c73c414dc8821996a2a8d0c",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "30845ce1d52650804bb123cf8de15a8f7646f1360feda041e8c4774a1ac3b285",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "0cddee55ebde3089492496b66315349facc0e007f20433d3785c27e0f7204b8c",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "b2790a1b2c33b27b9309778f589870b1e66f657ef59195f7149bdd808f30156d",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "c544d4b3a6504cf2ef4ca74804a754f4e3f5cd8e563bd6b7e36e4c4f94fff478",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "735ed56e2a6620de433f468a1a1af6121c585300cae170178a5745d3df311fef",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "882ca3c14159b0d82040e3cc27d76533008136f06a38469523d380f9f7266b89",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "be7892afdfc563cbcb01599d7a58905906317ce092ac525a1073e8680895fc3d",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "b13b628f1aa9ff3f51d35c246450c338f663aec17de2718e31fae4e56b9725b4",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "0b78c6956d5c2f11e7dbd63458adae60270a7882f78afa614f3ffca020cbaf8a",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "f8d20ead42bb64ad55e5e80b729fe1538d7f7e53d029318cdd665af17756d278",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "a8f4e5296d2579377b00f8eca645fcff130d76d995c32d53ad6d3bab5072d6ec",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "912cf96c196e74292a6c99ffddf82a75d83a9ad3798ec77b9d9446da1c4f57dd",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "c974e5f1a0e48b53238d1710b60431591c374558b2b2b6c3c1ea0b35737cae78",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "b4a8e9de8a6c584c112d0a10562504a94278bed8ffb4d29b21199b1a6d18feef",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "b7a67ad1b72d9b15df79a654391779dd42e85ded6c1c83d7dd02b98c3f22ff06",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "367b051944c423d0260228a3b9caac764a4a55b1ef91699d508cedf38974bd0e",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "1a33060ca59064025a6f5de858cdfe6e37a165345a6b86934e3d46e53574ff0c",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "cb4d712c8cc22b5592dc835efd50595ee49c7e3b41b3d911ccaf037ccd3457cb",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "0ba39369b973cee74859129a2ad24a214e66df2eacb020074d2e955f4d6753a8",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "426ef7e57314d9f668e68f818ee5049f90b3dc8107c8fd419978f8c81a49f622",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "bae44c1649210c25969d4921b984e2dd088bf36c54f2eb98988b17ecd96dc630",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "343294436d9a669596a058e76cebd0fbe0d3b871bbfc92572cf9cbe4410897b1",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "1ef7daf666dc8662dc4e9e99fbdeddfe565412f0329c00799bcbff2d5585eb9b",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "ad96721a35db5e7a84fc6fb2ac203916f508413cefd3c71e55f6675f1545bfb7",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "90d64fcfaa98a51a95ea02959a99e4bd23c595affeb8ff2dd7811e491cb24c79",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "ba8ed9d788c832427df61031145a8494b12b1d51f2d20093e7bc6e014aea3bed",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "323d9fe05a70bd0806077629969a53a1cc7d126bb83009cda0032f46f221b712",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "50301f6a0a09b5243600969738e4b850560db454e03e1b7391b09cd7d8db8e52",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "55b022f9e3dc8ef3bb26ffd2862f3c5ea8a0ed42c8cf70eea572f2aaaf84c0f7",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "5724bbc88cdbc75ec902be7efd81d5e80d12e94c5d802272b0d7b22f72660e35",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "da0c07652326087f37afc83e79eebeb8f5c83cfc27bbb4bf31b6b63f79e7e84a",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "772241cf8fcd341895ad43436f26932e81214ea69a59e0f04cbe97064cb6a231",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "70eb1b22e9b1f01cc9d00b5119c21470b87c9ca9118b17efb08fce140b51d2a8",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "74a3e02ab61da3df0e396ade5f6f0228af6f0549ac5cbf92913a86b7d021064a",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "29cc438c35866d39f698061aeed4acad2f400cd4c12f69159facdeda3d63e207",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "27d0500c4ca003907432c1b2e4fa35b79247336e65d0bf732daa8041e94a100c",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "c388bfb99bbebc983f396ee3fc31c8cede10753e155efdf0b395ca6259797859",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "eaa571ce477ed5b0b728f6dee175d143cba76f453f222e5336ad7754a6f97584",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "ad18b9073e5e4d1ea12c0616de165249f7d95664a4065c02c8a8fb8650f692c1",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "2534ca435f895c8d005f59e6f465a11c26bf8c94ce265756ee88d010f455267f",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "87ab0b1937673b20b8e97135939a1ec7baab10ba9eec4f550853f02516fdfe1c",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "7178acac564be03aadc2bdcd4c85cb9861e44029bc026433dfd328be1d6fdf76",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "2014e3ef5266713309734d5944c2d5416a102291240075cdd745553fe0cf1918",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "fa37e3718b1a8815e8d052fdf4dac1a7696d15186e09471028e4a498ddae83e5",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "9616e1eea82d70724a5b48cd797a88976649a340921b0f663ae3c778bcf6ac1e",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "2b6c8d2d0dbf091097d9eaa23b1c8524e737711e4226e9e9e215b81238aaa959",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "fe0e52f255b3759784bdd67578faf8f28f52b1940da9298be3d410a36213c4e4",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "746ad12f028288e3ba1d980aa21345d93afc92b57a02a7202b8469aee0e7e63f",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "935fad338eb78a1b37f8e0a343cc360351e8bdf9c590b00c7228c0a0d392f6ad",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "477607cf0ca390366cbc59ed5fbdb8db0e10cdeb4b2b2d199f1b3a71cb98c05c",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "294874d51b2a70c41ae0aa8058e04593a42d7c5a694738780875b6912a8e5cd2",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "a1d9471025e551e922b952b5f50986594f54484eda0b2dbdfafe431b3e2b676e",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "decacdb5427c82ca5728fc210e079b863b974b7c3c6f84b5bc103c914fa92a75",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "c1b1aee29161882631a8a4116bcaaaa32aa67cc4e59ad0f6885d3569629115df",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "ca9f83b24717975e739aa67c30ca2cc2aa8ba07bc6313f332a310f9e18c31d09",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "6cc472fa423ac720c8315fd4dc3ab05911babe419d0a87c49fddaac5d164cb24",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "c5f1bc4d464d174ead5e7da569828a4f96b63119346bbe8371f6503326eb852e",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "146f0ba8059176e029e944354ba2a50993ccb84581a4e16cee5bbdfe11cdc791",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "2a374c091fd79fec126e08a0ef304d6ddc119d2936ea3ca1638bb7331ac3bc75",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "7d6c25c7636c5988b834c78964c71fba3011178f881dd8904ebd216eab427f21",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "80b70a1f636c2e5c2601ba17c1569ef00da2f6322fcb65b6d0cf4e644e2bd281",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "5928840fc2359563a77809c4275c121730ed134449b182cfbcd28b24f7d9fb0e",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "0bbe96d647e4205d23b7e5b329df191c5b4941ac024b80ccfc600563704caeae",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "1b68b478403339aeefd7e11e2ddb618c7a3287dd5fdfa1123a518443d6f1e9ae",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "d4a15ef6457c208ccc460f398943e8ed2bfa9988cd8ab14c5651f15d69b6ef58",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "web",
+      "path": "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "6de719285ddc9d0dfd4d02efaefefb8d086e23ed69a0cfdfe38816422b3128ce",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "4bea038a5c8361bc359284c0cb365677403c88d57a3a085a075320562a350b49",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "70b60ff5c06025649af92462b9808a5a9de00ac681821a55dbe574e714eee38c",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "4069fca825927fd7b3d1312ca35c1aed06de13f79bd80bb03bebdbfcb259e3e7",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "fad655e8dea2c0f3656f782467054731b986be541a5e9cc8800d303ed399b385",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "f9a61aa0d49e13822be09324ac139e4a5d921681c5e21b855288049c921d8edd",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "d9901dda3713379ff888653958d590782aebcf02725f2ca203ef09c22c1d9849",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "d4225f542af92d3088cb123d51a1326eb1e8115507fab726786929ed0636d6d2",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "487f68ab7393a26187d576957fd19134719b46c1b2e96e05d7547198177b27ae",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "52d6898293dbecf2559e2633b6391cfd6e36d9c29d024a68a0acd233c90369e7",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "50b44f2e9021193d59b351dcf8284a83483735edbabe2745268837c965e65e12",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "1f1c83f16f772a9ed334ca289167867624d284a6bbd15c3125d871347ed96ad6",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "665ebed7587dc59f38337e8aab59d93dfcb6fd97fed408dbe6c1af4ed28b7f3e",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "37c0e6901ea14c87978fd4b5e30925f3230c39a7689515e9ffca819845a310ed",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "5cce15e08e2043046b3c8ad3378d6b0ac3e80990116a9ff14baaad4c4bdaa9ea",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "f4089778fd2d4ca0e06c506ab493ec8854b1aa781ed1019d222790f9915dd347",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "19e555cf6d4f9063057bdefac9f7f3a8b4a13bd0940a34d14df04b28baa78fa9",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "b1a55df61c9ab1080763b039ad7fae5c273a387aeeb815a1fbc7ef6bf7f76a95",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "18a286eadc3b895851aa389aa6b6d3eeb1185c95789601e26de06ba7a7ab3ac0",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "f6940cf70458eac5eab731e0297e6419e41e347ef705258f7f419b1ccd480894",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "b0f84de14eeaddc51bf7447d38f77d32fe09bc29535e40fcdbdd0885d076b87f",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "10cdfe3c72e55713cd31caae9de22cae27126a362c238d0e0a41954a3752e6c0",
+      "tests": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "ed3e85f0f760c05c520ee23f51d51e6ce0f373e30bc21bed0f57f97eb68f2381",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "9b36aa072d07a18c1ab04a846554310ceb5c6856a3a9d4da1739017b266babab",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "5875eceae8354be0980214e87bbda545825559268c9df42363f9383f0d5427cc",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "c2a97b84af60bf430b1042bfbdbb774dddef61ccd30fec4be5d6f9bd80a56be4",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "87019a31a93c1176f8e80a756c32177615af5963f9a750fcb55d92186ed9090c",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "5eca67e772ee81a152639b372f0a37a290ce3d7e851f827ce7907ae2c8da00c1",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "2e916afa559c604066b1f44f188bb725dcd0ba234a2d327e7c600d703e04e03b",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "6f1d462327434d0afa740fc7d9565c9056743c24b7cb8281431d1741db6a12fb",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "63b02dc3b3c2c02ded5460e0d8a556caaa339155946ff9a3859424c96dbdb382",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "98e4755b0fba7124425dbb6c5418c619288a072192ae7345c15ba9a23aa76a3a",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "e4669617e349a983fc55436871faf716c54a12562e9d056bc908cb99adc20ad3",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "16a978c6e8f56b321d2e52d493950a0f52f0817f3afb38e857fb7b57e8a5feeb",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "7a763fefa0e9879b138ae43d813228bdf8958437c44fdcdf8ddc82b1daa2de86",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "60d324dfbf94b210515d1863024395767df898e0451e6f1b2fcbd7d9bc8020eb",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "891333ea35836829582f5f6bca8e6c809fff0e221af1b82964cd1a47aae5c08e",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "1c24dfe790a153604a75938f51f19877032f5bc8f1ac65061ee5c5e52c7b945e",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "44a145fba269a3e2d440944e59a2fbbb34763da3c0902e7e705de55cd186ca33",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "6949715cd9c1343335b74240ea76e9746868539b77160a17d18e4a2a9754a941",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "9721405d94a13d48dd16118ef9e612318d4bb09d8382e029e6359ded3a46a60a",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "946022564cf23408c83d903e06c837bf371c431b9019cd57301194bb34a15662",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "d5e146eefc5492416dfc44910500455be861597bc9b603550133a0240746964d",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "393595be10aa01d20ceba6747dd1ebca3cc098d5db5564004653b493263d5aa3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "5bde7a16ab25ae9ea4e5c5a9e56eef8614720271a6a94dcc6f059e7fe8be7bda",
+      "tests": 17,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "9c9b672a0b66afc575c2a3a775295577edc8c3d420bd3565dacae4939323f760",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "de1f5c946fc695d6026608e54b5ecff744ea1f54180d040afb27f822be47424b",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "8a5697a7460f35a449074356470b5f9204bc80d255d1895d20796f38900f1cdb",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "a5150ad6c135bf89fc85ad243fd68456fc6cbffb9e488d1ef3b56d5f7a3813c3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "batch",
+      "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "274a5e13fc926724f6fae49a2e9b02b54e334065cc701a4189e02e732ec2f6a0",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "frozen_source_hash_root": "d89120e75b03af9753ab9fb50349098c355e1750378ee878581c0a18d18b1798",
+  "frozen_paths": 1114,
+  "logs": {
+    "/tmp/PG299-production-regression.log": "e31dc221c4449de5a46c214b4b45c8384ffb33151ede61de1c1f792b5b55da2e",
+    "/tmp/PG299-api-static.log": "d12e1524dbeda20688c9c9a3e394c161e1530deeeaf2ae6273c4fe287bface9a",
+    "/tmp/PG299-production-regression-remainder.log": "8abfbaccc3e9b74a44170cae118b499ce97fa9d85f8b5b86a0eb6ed4155f2ae5",
+    "/tmp/PG299-production-regression-remainder-2.log": "a8b4368c4dc3845acc5a3a8c8110011ea7fbd8abe13ecd3a99d910131c996c8e"
+  },
+  "BUG": [
+    "BUG-267"
+  ],
+  "separate_source_review": [
+    "BUG-266/YKT200 main resource-before-A"
+  ],
+  "commands": [
+    "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch -am clean verify",
+    "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api spotbugs:check; artifact cache uses install-file only (no lifecycle acceptance)",
+    "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-web,src/schubert-nk-batch clean test jacoco:report spotbugs:check"
+  ],
+  "exit_codes": {
+    "first_verify": 1,
+    "API_static": 0,
+    "remainder_without_node": 1,
+    "remainder_node_corrected": 1
+  },
+  "failure": "Batch moduleDependencyBoundary still literal old5 instead of SS311/SSC088 approved8; oracle repair pending; Batch coverage/static not reached and NOT zero",
+  "limitations": [
+    "API/Web native main each 9instruction/3line/1method missed",
+    "multiple diagnostic commands, not a certified single full run",
+    "no Production main R2/realNK CHR R3",
+    "formal run24/source858713c0b/1964PT/48.3% unchanged",
+    "source/test frozen until final completion; only admin docs added"
+  ]
+}
