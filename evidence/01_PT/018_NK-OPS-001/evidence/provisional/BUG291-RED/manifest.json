@@ -1,0 +1,20 @@
+{
+  "sourceBase":"f8d8dedc3d7cb660499bb7eae2ecbef8e4312f0a",
+  "branch":"dev-foundation",
+  "finishedAt":"2026-09-28T04:30:36+09:00",
+  "exitCode":1,
+  "tests":24,
+  "failures":1,
+  "errors":0,
+  "skipped":0,
+  "formalAccepted":false,
+  "bug":"BUG-291",
+  "testId":"PT-OPS-BOMPROFILE-010",
+  "testSha256":"bfa8274f39f166b2ff82eb3434fff1b2d60e06105ee90a3fd1fbb43b818a75cd",
+  "files":[{"path":"junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml","sha256":"4903939ccd12227adce8a8eea24c88c0105349a9b48d6d6fe40164ca9121e02a"}],
+  "rawLog":{"path":"/tmp/BUG291-bomprofile-RED.log","sha256":"459e64fecad76274a138ddaba6ea7e9bbabdb89f1e13180bd0af4a4cbf5e9005"},
+  "command":"JDK25.0.4/Maven3.9.12 offline fixed repository -pl src/schubert-nk-bootstrap -am test -Dtest=ResourceScopeTest,ReleaseInventoryTest",
+  "expected":"Extra shared GAV while expected GAV remains must be refused",
+  "actual":"First bootstrap 0.2.0 extra GAV accepted; assertion expected IOException but no throw",
+  "limitations":["Only failed profile XML saved; Storage8 success supported by raw log, not claimed as copied XML","Remaining variants inside failing method not reached until GREEN","No report/static goal or old coverage copied for this RED"]
+}

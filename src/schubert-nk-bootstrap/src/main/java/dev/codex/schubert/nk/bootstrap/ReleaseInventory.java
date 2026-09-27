@@ -279,7 +279,11 @@ final class ReleaseInventory {
       }
     }
     var registered = new HashSet<String>();
+    var coordinates = new HashSet<String>();
     for (var dep : dependencies) {
+      // BUG291/YKT224: one group/artifact has exactly one version in every runtime role.
+      String ga = dep.coordinate().substring(0, dep.coordinate().lastIndexOf(':'));
+      require(coordinates.add(ga));
       @Nullable Artifact first = null;
       for (String path : dep.paths()) {
         require(registered.add(path));

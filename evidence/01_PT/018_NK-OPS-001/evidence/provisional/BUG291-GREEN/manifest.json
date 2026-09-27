@@ -1,0 +1,116 @@
+{
+  "sourceBase": "f8d8dedc3d7cb660499bb7eae2ecbef8e4312f0a",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-09-28T04:32:00+09:00",
+  "exitCode": 0,
+  "tests": 40,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "staticBugs": 0,
+  "bug": "BUG-291",
+  "crossExpansion": "YKT-224",
+  "formalAccepted": false,
+  "files": {
+    "coverage/bootstrap.xml": "598b5fa15e193d66b1d0693b54b13b4ab03cc1168fdd8d4b6244bfc3288110ba",
+    "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml": "0a173a90950e6fc5662aa37939186c00bbd58f24666c4d1b44317a2c9cd93ed0",
+    "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml": "f774021a8682f5aa9d91f1039377ca300f372715b26dda45a9a3f740edda215b",
+    "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml": "d6b565416c483824df03b7ec720604cc5e7f56fa69b81fb2a807ebf978c2cb84",
+    "junit/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "b51b7decfe5976ae6eba89f8188977b2069cec0918cc8ad09b253d4bcf16bc6b",
+    "static/bootstrap.xml": "465458041356515ab65dac8b1c79db4dabfe293172628012c1cbd87f6c808edd"
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory$Dependency": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 62
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory$Artifact": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 28
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1018
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 92
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 225
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 72
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 26
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "sourceHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": "9d454dcd2ef1e50db92666d9f378599964e1f0560c54a572340ff7feb69c399a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java": "bfa8274f39f166b2ff82eb3434fff1b2d60e06105ee90a3fd1fbb43b818a75cd"
+  },
+  "rawLog": {
+    "path": "/tmp/BUG291-bomprofile-GREEN.log",
+    "sha256": "95f76db18966eec4a7fd27e036c3997ccc22d44d1a78b5f62dd080af002b7e0d"
+  },
+  "command": "JDK25.0.4/Maven3.9.12 offline fixed repository -pl src/schubert-nk-bootstrap -am test jacoco0.8.15:report spotbugs4.10.4.0:check -Dtest=ResourceScopeTest,ReleaseApprovalTest,ReleaseSignatureVerifierTest,ReleaseInventoryTest",
+  "limitations": [
+    "40 selected PT only; previous full source f8d8dedc3 not recombined with this source",
+    "Shared3 and external GA shadow negatives actually reached; deeper lib/current/fullBOM/root DB remain pending",
+    "No R2/R3/whole PGPT acceptance"
+  ]
+}

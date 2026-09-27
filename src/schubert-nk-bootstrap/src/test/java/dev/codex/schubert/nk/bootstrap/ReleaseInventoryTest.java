@@ -292,6 +292,12 @@ final class ReleaseInventoryTest {
   @Test
   void bomProfile010SharedVersionsAndRequiredRoles() {
     for (String shared : List.of("bootstrap", "protocol", "storage")) {
+      // BUG291: the expected GAV remains; the extra GAV must not shadow its runtime classes.
+      var shadow = new Fixture();
+      String extra = "dev.codex.schubert:schubert-nk-" + shared + ":0.2.0";
+      shadow.deps.put(extra, dependency(extra, List.of("api/lib/extra.jar")));
+      shadow.files.put("api/lib/extra.jar", artifact("api/lib/extra.jar", "16", SHA));
+      refused(shadow.text());
       var f = new Fixture();
       String c = "dev.codex.schubert:schubert-nk-" + shared + ":0.1.0";
       f.deps.remove(c);
@@ -310,6 +316,14 @@ final class ReleaseInventoryTest {
         dependency(
             c, List.of("api/lib/protocol.jar", "api/lib/zprotocol.jar", "web/lib/protocol.jar")));
     f.files.put("api/lib/zprotocol.jar", artifact("api/lib/zprotocol.jar", "16", SHA));
+    refused(f.text());
+    f = new Fixture();
+    for (String version : List.of("0.1", "0.2")) {
+      String path = "api/lib/external-" + version + ".jar";
+      String gav = "org.example:external:" + version;
+      f.files.put(path, artifact(path, "16", SHA));
+      f.deps.put(gav, dependency(gav, List.of(path)));
+    }
     refused(f.text());
   }
 
