@@ -70,6 +70,8 @@ Maintenance開始から60分でreboot完了markerが更新されない場合、�
 
 ## 5. Reboot後の起動順・gate
 
+SSC093/PG310（code着手前）: root親の実行主体は固定schubert-nk-morning-controller.serviceとし、RootStartupContextのMORNINGだけで実UID0/kernel proc/PID1/boot/自己PID-start/固定MainPID-Invocation-ControlGroupを認証する。M獲得後/A獲得後/host観測前/帰還前にも再確認する。API/Web service proof enum・秘密配布は不変更。cold/post-stop backup Unitは既存18fieldに加え固定Id/Slice/Delegate/ControlGroupを別観測し、Id一致/Slice=system.slice/Delegate=no/非空groupが固定/system.slice/schubert-nk-backup.service一致を要求する。真正host /proc/1/rootからsys/fs/cgroup/system.sliceの全NOFOLLOW祖先を保持、rootUID/GID・directory0555/0755・ACLなし・dev/inoとsysfs/cgroup2を検査する。固定leaf open一点のMISSINGだけ不存在として受け、祖先欠落/権限/一般IO/link/close不明は拒否。leaf存在時は既存GetUnitProcesses全process空＋Unit前後安定を必要とする。root context・実効配置・祖先identity・Unitを前後照合し全FD close完了後だけquiescenceを返す。これはfresh Invocation/receipt0/実backup成功を証明しない。固定UnitのDelegate=no/zeroCaps/NoNewPrivileges/ProtectControlGroupsと親以外のstart/restart/migration禁止は配備・運用上の別必須条件で、敵対rootを封じ込める保証ではない。親側は開始client実終端→fresh worker全cgroup終端→明示stop/全終端→request retireまで連続M/A内、unknownでは排他/sourceを通常unwindしない。
+
 SSC-086（起動排他の内部具体化）: root親は従来のmaintenance.lock（M）を保守callback全体で保持する。別root所有`/run/schubert-nk/startup-admission.lock`（A）は起動観測から子readyまでの短期排他とする。変更側はM取得→固定対象停止→A取得→全対象のInvocation/cgroup終端再確認→旧起動許可失効→変更/必要保守→同boot/Broker/現在runに束縛した許可確定→A解放→固定Unit起動の順。A取得前の停止結果を再利用しない。再確認失敗は変更0回・非公開、親は既存停止手順へ戻すか拒否する。設定/release/root/Broker/鍵の変更も同規則を必須とする。起動側はAだけを取得し、取得前に業務DB/JMS/fileを開始しない。現許可のread-only検査と必要gateを終えて同OFDを子readyまで保持する。Mを起動側へ引き渡さず、M保持中の親による起動/readiness待ちとの循環を作らない。A自体は保守完了や起動順の証明ではなく、失効/確定済み現許可も必須。未実装gateは非成功のまま。
 
 ```text

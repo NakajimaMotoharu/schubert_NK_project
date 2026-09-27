@@ -1,0 +1,1054 @@
+{
+  "run": "BUG276-batch-dependency-regression",
+  "source": "1f6b1fec3c413f7a949a055ed2513e5635af3be4",
+  "branch": "dev-foundation",
+  "finished": "2026-09-28T01:01:21+09:00",
+  "command": "-pl batch -am clean test jacoco:report spotbugs:check (absolute JDK25.0.4 Maven3.9.12 offline repository)",
+  "exitCode": 0,
+  "formal": false,
+  "wholeGateAccepted": false,
+  "bug": "BUG-276",
+  "ykt": "YKT-209",
+  "modules": {
+    "storage": {
+      "suites": [
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+          "sha256": "afc7033199d5813b9a1cb5c56c05627059cee791a6951c0b7731c42257e6f7db",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+          "sha256": "7687474008c268cd492592f2a352030160bd94e8195ddb16bcc8c59ef74256e0",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+          "sha256": "492e8caf9a2daeaa833b4a41ead957abc05ff92fd23e901bcdc4eda9e6288e2f",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+          "sha256": "e20f7f3e9edc096c46ba799ad7c72c5fa0cd6a34c7a5b5380cb53833fb8e57ea",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+          "sha256": "689a28fbce1578a6dc4fa8c2712866f62d30570f6e01fdf2ee9ce94678929d4e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+          "sha256": "f9182f5866a18d7a5bcdfa4c79262b03865e5e0a35ce7c46abfa0de333537799",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+          "sha256": "c52e8aa2f88e7b82c4042db7811e19b31cd851672ed92e6d6b90cf8ba034120f",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+          "sha256": "57bb38d28ad25b28c30aeb6d33c28286b57dad554195ab97512743ab0c20d28d",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+          "sha256": "9ac3f4e4d28853057f9c876ddf7827ea17485b633f188d1b13ffed508e0787c3",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+          "sha256": "84bcc42f940e551f52c0156428f0340e5d49d2c0c75af49b7212c8a95d17b42b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+          "sha256": "bed767926a3da34ce8d87c2ac45c071df9377cc7f8c7597ee3d2305bceb610ae",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+          "sha256": "d0c32887e8d000f92a8edcb6a3f5bbd5906530b1e7595bb66e3d3602ae1cc1f2",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+          "sha256": "9ae79da87e140cd2dc64ecae3b622535e3db371330ad43d5d1cc2d8d6be27de1",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+          "sha256": "879465bf0dd74e123794213fc60d293bad0bb5fdeea254637bc6a8d8fc2606b7",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+          "sha256": "74d7c115ac4030246bba1109e1b6a79e08bdb5b3532b743108d608d6a70e6890",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+          "sha256": "ef1bbab488eb0fb2955b728fc961f9a7bff84782ac96196847cdac81ba3c023f",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+          "sha256": "70f9993ad73e43fac62f44ac4bb453caa67d7956079750d61055904ff2118bac",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+          "sha256": "dd52015ed0fae69897ce5deed74915fe605aada06e94e7f5b4d4c03a18b4bb86",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+          "sha256": "9000ae7d7b3f9972c1ba23a289a80c57ee34cd5cb555d47c7388c478cda47c27",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+          "sha256": "3d4b74118caf6f8ed102ef5deb22d08845915f807610e2b59f42ea8f0ceff260",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+          "sha256": "32ce6044959c43d4452d197444e3dd4eabf3a442472de277c8e383a48e46c71c",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "totals": {
+        "tests": 149,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "path": "src/schubert-nk-storage/target/site/jacoco/jacoco.xml",
+        "sha256": "210aa16b16fa78a502268dd8085f101cd7e0a6af742feb2c9bba0589c7ea8e2d",
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "5688"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "485"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "1076"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "480"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "237"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "35"
+          }
+        ],
+        "classesWithMissedCounters": []
+      },
+      "static": {
+        "path": "src/schubert-nk-storage/target/spotbugsXml.xml",
+        "sha256": "86c7c9f4a9e151d2d6bdf1b6e9de03b1eb3c1c5d0a70386294e6e3e3903cd293",
+        "bugs": 0
+      }
+    },
+    "bootstrap": {
+      "suites": [
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+          "sha256": "24db8a3ef17a7f21ab39e4c97b0341d434d26bdb5981b8076163079b0ac8619d",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+          "sha256": "4c14f630b84639b92f30948f26377f3a0e1470dadf19211e577d32bf280f6330",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+          "sha256": "9eff561ad69743ec90d075eb53c6d74476200e50aa165ae0bec5c69b10f3a4ae",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+          "sha256": "90ca1e1b9799b88abdca2501580bf1e23f9a1807ee867d5a0e35f0e8ad89829b",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+          "sha256": "deab7930a26ffcdc3410dd6cc8f69a7e2866c383dcfa2b7f92026616c84ba79f",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+          "sha256": "d90b080e05e1e393ce5412c331d0681c59ec25126a897198af73686b81a6eca3",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+          "sha256": "dc1059b7b411c005f28a95c44ba02ecddcea9ec7ddfa1d9cdcbfc607b2785db9",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+          "sha256": "5505e8fed126a14746d98c0ac3cc7e2307dbfba43b7fcf26a976abd8527c40ca",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+          "sha256": "1042c807eed2bf6f8cca48e3137560d52ea46b41f34da0ef630e635666e26dbe",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+          "sha256": "4e7ca5630b9f60a0baa1b6b2351c6f7616acc3412922c5695682925a4918b43f",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+          "sha256": "6bfeeabf5d41b07936f607cc49bc2f7ad50977ec96924da7404c68ff28566623",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+          "sha256": "ad68785107e9dcdbe7517cd0c19903867ad00d098b33909b4e8e3fa2c803c16f",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+          "sha256": "97ac794884a9322dad5104a954c7c385a246812f877d0cf8a544ec08b9948936",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+          "sha256": "5e386d1230be832969b3f501fb8ffe4feb4de5261d5405a6429a82d85814bdbc",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+          "sha256": "27e70b527891cab343354cf8d30eb8c8636a3c5ea7d959ec31cd63e3629c4147",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+          "sha256": "9e308107c39056e8bde2585d1420b2ec551c4a04a04c66b6831ddd6ba00906c8",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+          "sha256": "dbbfca79d1249634c6cdd372a0c342bfb7bd93cf259bed503d062a34a4c56d81",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "totals": {
+        "tests": 127,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "path": "src/schubert-nk-bootstrap/target/site/jacoco/jacoco.xml",
+        "sha256": "54e115f1ad585e88c7aa2365257ce9017dc822ef4c54fd3d803f3402e441f40e",
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "28",
+            "covered": "5388"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "506"
+          },
+          {
+            "type": "LINE",
+            "missed": "7",
+            "covered": "963"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "3",
+            "covered": "461"
+          },
+          {
+            "type": "METHOD",
+            "missed": "3",
+            "covered": "208"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "33"
+          }
+        ],
+        "classesWithMissedCounters": [
+          {
+            "class": "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeGate",
+            "counters": [
+              {
+                "type": "INSTRUCTION",
+                "missed": "15",
+                "covered": "8"
+              },
+              {
+                "type": "LINE",
+                "missed": "4",
+                "covered": "2"
+              },
+              {
+                "type": "COMPLEXITY",
+                "missed": "1",
+                "covered": "2"
+              },
+              {
+                "type": "METHOD",
+                "missed": "1",
+                "covered": "2"
+              },
+              {
+                "type": "CLASS",
+                "missed": "0",
+                "covered": "1"
+              }
+            ]
+          },
+          {
+            "class": "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeObservation",
+            "counters": [
+              {
+                "type": "INSTRUCTION",
+                "missed": "13",
+                "covered": "8"
+              },
+              {
+                "type": "LINE",
+                "missed": "3",
+                "covered": "2"
+              },
+              {
+                "type": "COMPLEXITY",
+                "missed": "2",
+                "covered": "2"
+              },
+              {
+                "type": "METHOD",
+                "missed": "2",
+                "covered": "2"
+              },
+              {
+                "type": "CLASS",
+                "missed": "0",
+                "covered": "1"
+              }
+            ]
+          }
+        ]
+      },
+      "static": {
+        "path": "src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "sha256": "e91af0931073bd5742fd72506641b34f42bed2d85b557c3542977af66649d13e",
+        "bugs": 0
+      }
+    },
+    "batch": {
+      "suites": [
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+          "sha256": "7a0060e650e532f8f8e195bdec51df1e7f2ee37e100ccf7b5490d047eab3778c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+          "sha256": "f7944a41cb00914252657bcd3455d94506ecd27dca8ed84fd20d04031f408f11",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+          "sha256": "350f42519240c011a18dc7ab0157372384d034b36e359f220b0fb22f65924ebd",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+          "sha256": "12dca315dac9a7cb9882b288e112f4d616a3789305e3d45db1da43fc27452977",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+          "sha256": "825ac1dfbd273c3760c3dfe97527a9215282afae183bbd32d42e275062728eb1",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+          "sha256": "4de00b7ba8cc12670ded8501bd98dae9efdc65b90ade77faa02823b083b3c654",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+          "sha256": "10ff4e37365fd40017e781a175ecf43b8fe099a7352038736aaa91c03a3c5ba4",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+          "sha256": "99c76ec849bd4ad8e9817373940af2718f43a8ba24cbcd83d8656b3ada4290eb",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+          "sha256": "a1bef50081cec01ae44b801d44d1686517aca46bc1df79574bae2b758e50b0ff",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+          "sha256": "0fe52d4f6a2448011eeaf6b860494e82535c3d9b301b1d678594c246ada44f8c",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+          "sha256": "b9f3600b0937e8c2c5fdb3d99a34dd0aeebe0c11fbe68d9ff107c740fd73d89c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+          "sha256": "4445b077f4026e5d2dc557758ecbb70839dbae0d73ae9a62e91857a56cd114b1",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+          "sha256": "98570f62f82c46d416c69f2ccabd11c1024d1a015eb93b868956ab9b7a386c4e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+          "sha256": "d5496b9c2c2dd114702178d249cb11cc99e05edd139badb8931b4cce5d8af52e",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+          "sha256": "7e3db7bbac75d6218ca473d6a985ab46309519ffe29c55c69572e5ed6ff22e13",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+          "sha256": "5be46acfe386890aadba0eb6b020b41604c6fcaac7ef6308eb2d126dbadafaa2",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+          "sha256": "111d8767f19b33c12c7fd029146d52eb61e72c3c0eb376c04047b829742c9f0d",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+          "sha256": "68a890586deeba91d659976f7c3de71a691353a2529a524ef05bb52be75586b0",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+          "sha256": "300dad4c8591dca64accc82a628ecff39a172edb6713925e7fb5e096b0f032c9",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+          "sha256": "0d805144d67347876aecd7a1eb19051d82b1acbac24c09cb0da19d19d1d709ca",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+          "sha256": "cd837a09584eccb374b4805c61e6048c1d996c83189f051c8dd1c7ca8ad325f6",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+          "sha256": "872ab203f310617f5cb4d694ee9f9c50bd47b0313380d11f3a163043301b7308",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+          "sha256": "bd2668f9b297e10d3e01f3d098a25912a6950deaf72352c0600f23e6b894cf44",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+          "sha256": "efd44e59130d605308f9b14292423750b0e03b8c57fdb3c887c9c7bdc989573b",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+          "sha256": "a4d001885c2ac42d5d400116641fe6983dc614018aba03bdd337a101be682c16",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+          "sha256": "6f7d65fbf80b55e5c843763c826b5a689f40bf33a802226be7dcbafe0b6661c7",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+          "sha256": "1183eadf250f6a77d5ff90fd79ec6e92e7ad0ce25947d23617eacd7c36963e07",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+          "sha256": "41bc424178d111c7154117fe1cdfc0939504a4a409cf89f997f8a4f5d148eae3",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+          "sha256": "dfa03eb08dc7e789abcbfad79951ad11c83233dca148a7097d9fe63a97ff3dd8",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+          "sha256": "fa94090e008609b457e4fb718cc80fc9383d3549e616d3a64c2c7cb991726fd8",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+          "sha256": "4139fd80a7e1a5f68c3513cf91fbfe08c580560f2c3382d5d0c96a806e75e86d",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+          "sha256": "b4953c7ed3b9d3e5f30206577a3890d2af93c6f749767a075efca0b8df3f6bc8",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+          "sha256": "0aa53083606602c95c5663a9275cd88547b97a8723312bcf6e9a31fe38b63f71",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+          "sha256": "e730907cb9d892b8836d8e1dab53efdb89d81d327e1861d628041c12e702d9a1",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+          "sha256": "250b9410e60114d5fa72cca854ade37a3524434bffe74003f71cda3b75bbbcf4",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+          "sha256": "01a5fdbaccd790eafb6b29ad2692087932ac6db5978a28000051c80ca0131644",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+          "sha256": "65ff4941b2b920f66f3dc514930c85beb83e481ca6246241720c60cabdf01e8b",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+          "sha256": "87282540192178126343fa8ff49564224c7221056b6680cf6e8cbabae1a8ae7a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+          "sha256": "000ae109aba0f3bdf768ceef7ff05076a17cf5a75852860c0af2b6cab458c5b8",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+          "sha256": "14ffce418136139242e3d099f0a886f61de5bc85498613609074a889ea240e42",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+          "sha256": "7a767df54053c1aba552eafd594a0d675c5c04f715e009de5179355d8dc66fad",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+          "sha256": "615219b4121b4d75731ce1fae687cf528b69c611cdec5d60828d081758f2bccd",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+          "sha256": "6d877fb750ab6c42d77a85be276f1ac6cc08e9331c8f5ae0005ac48cf7292c9e",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+          "sha256": "0cf849b74d3611783033172657b3b01fff68cb40ed2784eedc27b70053c9d0d2",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+          "sha256": "e3f9658849b84cbb6508aefef49236f603dbe6715271bd730d3d98e2cd824d88",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+          "sha256": "ae6718d1b56b19b3d583e09ac37b1abad9da64a7bbb9b31322da38b85b39dbfd",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+          "sha256": "c1e9f78d96cf3f00a1081d6b693c0fea1245f17d5609254c4967a85fe4c64889",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+          "sha256": "f82d25aec221387d381ecae906a3a3318a8c55314986974d254d6913c1151b53",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+          "sha256": "bd8b2678fe580d05265ada9b25153a4f2fe5f3e5fb17907c599e59af684b2d7a",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+          "sha256": "3510e6c4a0740479e203bc0c3fe8d194dfd0724b19c5223c1426372d72915a1a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+          "sha256": "ecebdae98ea1da70013896c1a8d31ac41e3e13bca61b4a414f672d18826bd3ee",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+          "sha256": "ba0514c4ea4152a592064adb49c94e36564aa924418f015c9dfffb28020b8cba",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+          "sha256": "cbb31d044e8310aae91f5495e90606cf0e9feaf3605b4d3f9306fcca98f77446",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+          "sha256": "1560036d208c41a75778ed57f1f414e6243ec3d33463b666060ae6955dd40174",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+          "sha256": "3665a35bf35e93c695ca5d11f4bc57e225a6fe680a4c5f42abe122c7c1b025ad",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+          "sha256": "47a34ac7915e00dda2bb6d0a6a551c7e23552ed89d6227e812ad164a53dcf814",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "totals": {
+        "tests": 476,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "path": "src/schubert-nk-batch/target/site/jacoco/jacoco.xml",
+        "sha256": "012ab14bc4d1ea46a4527d52fbdde21f1de5712701cc3bf27032d0bc11a14ee5",
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "87",
+            "covered": "27789"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "2795"
+          },
+          {
+            "type": "LINE",
+            "missed": "17",
+            "covered": "5373"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "12",
+            "covered": "2333"
+          },
+          {
+            "type": "METHOD",
+            "missed": "12",
+            "covered": "924"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "141"
+          }
+        ],
+        "classesWithMissedCounters": [
+          {
+            "class": "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker",
+            "counters": [
+              {
+                "type": "INSTRUCTION",
+                "missed": "5",
+                "covered": "578"
+              },
+              {
+                "type": "BRANCH",
+                "missed": "0",
+                "covered": "64"
+              },
+              {
+                "type": "LINE",
+                "missed": "2",
+                "covered": "97"
+              },
+              {
+                "type": "COMPLEXITY",
+                "missed": "0",
+                "covered": "51"
+              },
+              {
+                "type": "METHOD",
+                "missed": "0",
+                "covered": "19"
+              },
+              {
+                "type": "CLASS",
+                "missed": "0",
+                "covered": "1"
+              }
+            ]
+          },
+          {
+            "class": "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker$NativePorts",
+            "counters": [
+              {
+                "type": "INSTRUCTION",
+                "missed": "82",
+                "covered": "28"
+              },
+              {
+                "type": "LINE",
+                "missed": "15",
+                "covered": "8"
+              },
+              {
+                "type": "COMPLEXITY",
+                "missed": "12",
+                "covered": "1"
+              },
+              {
+                "type": "METHOD",
+                "missed": "12",
+                "covered": "1"
+              },
+              {
+                "type": "CLASS",
+                "missed": "0",
+                "covered": "1"
+              }
+            ]
+          }
+        ]
+      },
+      "static": {
+        "path": "src/schubert-nk-batch/target/spotbugsXml.xml",
+        "sha256": "172b63911308c031ad0bfcceaef5617f5051c0709981f5e66c74f25e197d4726",
+        "bugs": 0
+      }
+    }
+  },
+  "sourceInventoryCount": 1148,
+  "sourceInventorySha256": "cd0ad21780a849ba5f303f816b03ca60e3ee6240f3368c9068b31d35b3c4d74c",
+  "logSha256": "edc6f19d4f7ccce08d4179584c8a75f95e3a413c51d0e9dc1427faa9cefd9050",
+  "otherModules": "Protocol/API/Web passed source3002ab8f9, no production source changes; not rerun or same-run recertified",
+  "nativeWorkerClassSha256": "1885d1b83afcc066df232fcb2f7a02ada1a59ba629ca261c4cce1409b16778f3"
+}
