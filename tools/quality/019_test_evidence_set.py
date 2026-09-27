@@ -1260,7 +1260,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 436}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 444}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -2333,6 +2333,7 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.bootstrap.StartupProofFrameTest", 1, ("proof001IndependentGoldenAndExplicitFieldOrdering", "proof002EveryMissingExtraDuplicateAndNoncanonicalRow", "proof003AsciiByteSizeAndEveryNullContract", "proof004NumericLowerUpperOverflowAndCanonicalDecimals", "proof005StrictSortedGroupsAndInvalidGroupBoundary", "proof006ServiceBootEpochInvocationAndDigestDomains", "proof007ImmutableInputSnapshotAndByteOwnership", "proof008ConcurrentIndependentImmutableFrames")))
         groups.append(("dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest", 1, ("serviceid001BothFixedAccountsExplicitRequiredGroups", "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker", "serviceid003UidGidBoundariesAndCanonicalDecimal", "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored", "serviceid005ByteNullAndImmutableValueInvariant", "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets", "serviceid007EveryOwnedCloseAndUnknownFailurePreserved", "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ChildStartupContextTest", 1, ("childctx001IndependentGoldenBindingsAndBothUnits", "childctx002EnvironmentMissingAliasNullAndDescriptorBounds", "childctx003EveryAttestedFieldAndNativeIdentityMismatch", "childctx004KernelBoundariesCapabilitiesAndImmutableSnapshots", "childctx005MalformedKernelStatBootPidAndByteInputs", "childctx006EveryStatusMissingDuplicateBoundsAndMalformedValue", "childctx007NullUnknownFailureAndConcurrency", "childctx008NativeProcOnlyDoesNotGrantAuthority")))
+        groups.append(("dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest", 1, ("fixedCommandAndEnvironment", "inputAndNullContracts", "statusDeadlineAndCancellation", "everyStreamFailureAndCompoundOwnership", "encryptedPipelineIsNotPlaintextArtifact", "actorGatesAndDatabaseListFailure", "concurrentIndependentScopes", "actualNativePublicTarAndBuilder")))
         groups.append(("dev.codex.schubert.nk.batch.file.StartupPermitFilesTest", 1, ("originalsAndPublicationOrder", "missingCorruptAndWrongBindings", "metadataAndSecurityMatrix", "everyOwnedIoFaultAndUncertainPublication", "inodeChangesAndNoRepair", "interruptionNullAndUnknownIdentity", "concurrentSinglePublication", "nativeIoAndBorrowedLifetime")))
         groups.append(("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")))
         groups.append(("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")))
@@ -2366,6 +2367,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.bootstrap.ChildStartupContextTest": "PT-OPS-CHILDCTX",
                        "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest": "PT-OPS-PERMITREC",
                        "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest": "PT-OPS-PERMITFILE",
+                       "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest": "PT-OPS-ARCHPROC",
                        "dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest": "PT-OPS-RELEASE",
                        "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest": "PT-OPS-STARTADMIT",
                        "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
@@ -2673,7 +2675,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(149, batch_ops)
+        self.assertEqual(157, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

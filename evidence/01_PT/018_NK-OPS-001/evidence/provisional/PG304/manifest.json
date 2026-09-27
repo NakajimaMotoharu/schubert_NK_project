@@ -1,0 +1,177 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "predecessor_commit": "22613db35afb79c61913559bffd77389cb538829",
+  "branch": "dev-foundation",
+  "finished": "2026-09-27T22:27:41+09:00",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "spotbugs": "4.10.4.0",
+  "jacoco": "0.8.15",
+  "suites": {
+    "BackupArchiveProcessTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "84206ac3bcc0198bb21f61767abd5964cb647d05d0fcd91bf9fa170307ff8aef"
+    },
+    "BackupBundlePublisherTest": {
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "eb13a396788697e860ca503017286e3495b01223ceed879d9c4d8ad324c19247"
+    },
+    "BackupBundleCompletionTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "cf2e003e979944c9660d5cdd5e1c7c2d4b96c0f6f512a86d91f340ddcb978bb6"
+    },
+    "BackupManifestPublisherTest": {
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "d1d277f970b7f1f7a36cabc530ed1d3aee8dc6e9b742a582fb4aa54378ac0208"
+    },
+    "BackupArtifactVerifierTest": {
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "0b3bb5f85879d3a02c5fcf8ffda40d132432981f06c3e81178348113e907e9e3"
+    }
+  },
+  "new_subject_coverage": [
+    {
+      "class": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Start",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdinOwner",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "28"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "2"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "11"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "4"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "3"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "582"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "60"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "127"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "59"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "29"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Work",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "56"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "2"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "13"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "4"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "3"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    }
+  ],
+  "source_hashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java": "2bedf64f619c41f11a00e18d21cf83cf85390beef15bc47ae918ea3047cdb81b",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java": "d4b29529bb69251f86c58ce81c48c0ab82dfdd29cab08e6269f81e265d944e2a",
+    "tools/quality/vm/NativeBackupArchiveProbe.java": "8b296aa5706484241016b66860a3c7fe288e9002aa5e94120fca84b6153271ce",
+    "tools/quality/019_test_evidence_set.py": "29a844f8a356b5a40bf718ff47ee79972be503ed628a4480f03e9ebb42e8cc5e",
+    "tools/quality/020_collect_batch_evidence.py": "3a13ad0ff496e77fc7c30da80f3d331cefbf054458edb9b8550c6a39254cc96b",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "68f89b5c67b597dcf7eb521ece6f9b1c66c241b8e6e17f5353aa5ae036f3d586"
+  },
+  "negative_canaries": 105,
+  "native_case": "PT-OPS-NATIVE-021",
+  "native_result": "PASS genuine root/retained FD tar->age; host independent decrypt/cmp; public fixture only; fullBackup=false fullGate=false",
+  "ciphertext_sha256": "68c925d9e335c5fc0fe441c1d3a3a662332de641f4cb25c68adcbc00315a03f9",
+  "restored_public_tar_sha256": "b700db29a06d76594cd5c71a028cba2f0d54380ee299adb6591a17dc7b799720",
+  "native_batch_jar_sha256": "9fde324d144bc6d3fdc4db654ddd62ffab91af42939092efa1a5c82d5816044b",
+  "bugs": [
+    "BUG-270"
+  ],
+  "rollout": [
+    "YKT-204"
+  ],
+  "full_module_tests": "not run after PG304; related64 only",
+  "formal_run": "PT-WEB-20260925-24",
+  "logs": {
+    "PG304-archive-compile.log": "7e4e28d2d22bf34af57681578e5810eea431ac8514044c9c541c2a20f9a06e6e",
+    "PG304-archive-pt.log": "e164abd6ddb4a211f96a2f6a14108a3330d9a0cec9ddb6b4aa411079aa6ff8aa",
+    "PG304-archive-pt-2.log": "bf7bc42330e98ace4056fa1bba4a47818865227678f4a286220faaab7c912849",
+    "PG304-BUG270-red.log": "580b1104043614bc2efaf3c419368877a658b4c3d2fd92450d70574d45043893",
+    "PG304-archive-pt-3.log": "8a612b43e95684fa456a31d5539b54b22abb04a8a55b24ca6c3387d870960e5d",
+    "PG304-archive-dependencies.log": "5533010680a32fbfb74cb22f5b5485ac29dc8521b9153e444fd36d0a5b70fc62",
+    "PG304-archive-dependencies-2.log": "8f1dd6dcdf053a19eb802e5ac928e77813747f212a2234599d25268c4d00fa1e",
+    "PG304-canary-2.log": "37c0548e5d85dece0004275e00b215355276b342e0b097396f834139e2b49702",
+    "PG304-native-archive-021.log": "410587fe411fc697c48e97e68a8134b72a440f2e174e9c105a6a34d7892e8d28"
+  }
+}

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG304暫定追記: NK-OPS-001 Batch.platform.BackupArchiveProcess.dump/configuration/credentials/全所有scope→PT-OPS-ARCHPROC001～008、018/128・129/provisional PG304、NativeBackupArchiveProbe→PT-OPS-NATIVE-021。RD BAK/BKO/OPS009/UI251/SS341§6/343、BUG270/YKT204。64関連PT/new全counter0/静的0・105canary/実root tar-age＋独立host復号成功、DBdump/真正artifact/親morning/fullgate未受入。
+
 2026-09-27 PG303暫定追記: NK-OPS-001 StartupPermitFiles.invalidate/issue/current/readIssued・内部所有IO→PT-OPS-PERMITFILE001～008、018/126・127/provisional PG303、tools/vm/NativeStartupPermitProbe→PT-OPS-NATIVE-020。RD SYS002/004・OPS009/UI251/SS343 SSC089。関連36PT・新全counter0/静的0/105canary・実root/tmpfsテストnamespace限定、Production原本namespaceの真正入場/fullissuer/業務main未受入。
 
 2026-09-27 PG302暫定追記: NK-OPS-001 Batch.file.StartupPermitRecords/Epoch/Permit/State→PT-OPS-PERMITREC001～008、018/123・125/provisional PG302。RD SYS002/004・OPS009/UI251/SS343 SSC089。codec・value層限定8PT/全counter0/静的0、原本IO・issuer・業務外部起動未達、正式全体進捗加点なし。

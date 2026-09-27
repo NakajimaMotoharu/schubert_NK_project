@@ -1,5 +1,9 @@
 # 起動gate主体・共用境界の実装判断（SSC084）
 
+## PG303後の最少morning結線review（2026-09-27）
+
+既存Astra/high1名のread-only reviewを親が採用。親M/原本/固定停止/A/INVALID→実backup→既存StepCleanup7kind＋Logs→独立transfer清掃→Ops/Broker＋maintenance専用Expiry監査commit→current issuer→root launcher/business mainの6結線単位で進める。Archive生成と7世代整理、transfer朝走査は未実装。InboxはOUTBOXだけでterminalにせず実非公開Inspector Unit終端/InspectorLockHandoff/summary reconcileをつなぐ。launcherはMaintenanceRunFiles.resumeを呼ばず原本codecのread-only照合、正常morning完了後activeが消える状態も正しく扱う。StartupPermitFilesに明確なIO契約違反は今回reviewではなし、真正host namespace・現在boot/Broker/actual stepの認可は未結線caller責務。全既存部品の正式再認定待ちや省略したfullgateへ戻らない。
+
 ## PG299継続：現在permitと既存morning接続review
 
 2026-09-27、既存Astra/high補助1名への対象限定read-only review完了。親が採用する順序はM→MaintenanceRunFiles原本start/resume→固定対象停止→A→全Invocation/cgroup終端再確認→新epoch INVALID確定→DB/schema/advisory lock/run原本照合→実backup→成否依存cleanup→独立transfer→Broker→Expiry stage commit確認→実purge/after観測→terminal commit/readback→全root/Ops/schema/Broker/current step照合→permit公開→ISSUED(epoch,digest)確定→A解放→API/Web ready。未実装をFAILED/SKIPPEDへ置換せず、実走査対象0件だけ正当な成功とする。

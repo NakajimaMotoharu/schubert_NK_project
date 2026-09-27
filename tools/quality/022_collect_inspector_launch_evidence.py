@@ -210,12 +210,14 @@ DEPLOYMENT_GROUPS += (
     ("dev.codex.schubert.nk.bootstrap.ChildStartupContextTest", 1, ("childctx001IndependentGoldenBindingsAndBothUnits", "childctx002EnvironmentMissingAliasNullAndDescriptorBounds", "childctx003EveryAttestedFieldAndNativeIdentityMismatch", "childctx004KernelBoundariesCapabilitiesAndImmutableSnapshots", "childctx005MalformedKernelStatBootPidAndByteInputs", "childctx006EveryStatusMissingDuplicateBoundsAndMalformedValue", "childctx007NullUnknownFailureAndConcurrency", "childctx008NativeProcOnlyDoesNotGrantAuthority")),
 )
 DEPLOYMENT_GROUPS += (
+    ("dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest", 1, ("fixedCommandAndEnvironment", "inputAndNullContracts", "statusDeadlineAndCancellation", "everyStreamFailureAndCompoundOwnership", "encryptedPipelineIsNotPlaintextArtifact", "actorGatesAndDatabaseListFailure", "concurrentIndependentScopes", "actualNativePublicTarAndBuilder")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitFilesTest", 1, ("originalsAndPublicationOrder", "missingCorruptAndWrongBindings", "metadataAndSecurityMatrix", "everyOwnedIoFaultAndUncertainPublication", "inodeChangesAndNoRepair", "interruptionNullAndUnknownIdentity", "concurrentSinglePublication", "nativeIoAndBorrowedLifetime")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")),
     ("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")),
     ("dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest", 1, ("startadmit001MandatoryOrderBeforeBusinessAndReady", "startadmit002MissingInvalidAndUntrustedDescriptorsHaveFactoryZero", "startadmit003MalformedRootProofIsRedactedAndNeverObservesBusiness", "startadmit004IndependentBindingsAndChangedKernelRefuseFactory", "startadmit005EveryObservationFailureAndUnknownIdentity", "startadmit006BusinessFailureCleansBeforeFinalAAndCloseNotSuccess", "startadmit007NullConstructorHashAndDescriptorNames", "startadmit008ConcurrentScopesAndNativeFailureNoBusiness")),
 )
 RUNTIME_SUBJECTS = (
+    ("batch", "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess"),
     ("batch", "dev/codex/schubert/nk/batch/file/StartupPermitFiles"),
     ("batch", "dev/codex/schubert/nk/batch/file/StartupPermitRecords"),
     ("bootstrap", "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest"),
@@ -362,6 +364,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest": "PT-OPS-STARTADMIT",
                    "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest": "PT-OPS-PERMITREC",
                    "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest": "PT-OPS-PERMITFILE",
+                   "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest": "PT-OPS-ARCHPROC",
                    "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                    "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                    "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",

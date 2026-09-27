@@ -9,7 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
-BATCH_TEST_COUNT = 436
+BATCH_TEST_COUNT = 444
 EXPIRY_AUDIT_CLASS = "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest"
 EXPIRY_AUDIT_METHODS = (
     "bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff",
