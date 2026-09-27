@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
@@ -77,7 +78,13 @@ public final class WebProcessMain {
   private static void startNative(WebStartupInputs.Values inputs) throws IOException {
     // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
     // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
-    throw new IOException("WEB mandatory startup assembly unavailable");
+    new ServiceProcessResources(
+            new ServiceProcessResources.Inputs(
+                ServiceConfigFiles.Service.WEB,
+                inputs.credentials(),
+                inputs.config().value("nk.db.url")),
+            source -> new WebJdbcPool().open(source))
+        .execute(ServiceProcessResources.unassembledStartup());
   }
 
   static void fatal(Thread thread, Throwable failure) {

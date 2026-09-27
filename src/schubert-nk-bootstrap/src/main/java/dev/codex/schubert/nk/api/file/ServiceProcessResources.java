@@ -1,8 +1,6 @@
 package dev.codex.schubert.nk.api.file;
 
 import com.zaxxer.hikari.HikariDataSource;
-import dev.codex.schubert.nk.api.bootstrap.ApiJdbcPool;
-import dev.codex.schubert.nk.api.bootstrap.ApiStartupInputs;
 import dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
@@ -12,6 +10,7 @@ import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
+import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -20,15 +19,26 @@ import javax.sql.DataSource;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Operation-owned API credential root/material/source/pool, not full process readiness. All
+ * Operation-owned Web/API credential root/material/source/pool, not full process readiness. All
  * dependencies passed to the operation are borrowed only until it returns. Startup/DB/JMS/root
  * admission must still precede receive groups; no fixture/management credential is selected here.
  * NK-OPS-001; SYS-002/004,DAT-001; UI212/243/253; SS311/342/343/SSC081/082/084;
- * PG288/PT-OPS-API-RES-001..006; 471 D01/02/05.
+ * PG288/290/PT-OPS-API-RES-001..006,PT-OPS-WEB-RES-001; 471 D01/02/05.
  */
 @NullMarked
-public final class ApiProcessResources {
-  private final ApiStartupInputs.Values inputs;
+public final class ServiceProcessResources {
+  public record Inputs(
+      ServiceConfigFiles.Service service,
+      ServiceCredentialLocation credentials,
+      String databaseUrl) {
+    public Inputs {
+      Objects.requireNonNull(service, "service");
+      Objects.requireNonNull(credentials, "credential location");
+      Objects.requireNonNull(databaseUrl, "database URL");
+    }
+  }
+
+  private final Inputs inputs;
   private final DirectoryCalls directories;
   private final InodeSecurityCalls security;
   private final InspectorCredentialLoader.Io io;
@@ -41,7 +51,7 @@ public final class ApiProcessResources {
   }
 
   @FunctionalInterface
-  interface PoolFactory {
+  public interface PoolFactory {
     HikariDataSource open(DataSource source);
   }
 
@@ -55,34 +65,36 @@ public final class ApiProcessResources {
     return (pool, credentials) -> {
       Objects.requireNonNull(pool, "database pool");
       Objects.requireNonNull(credentials, "service credentials");
-      throw new IOException("API mandatory startup assembly unavailable");
+      throw new IOException("mandatory startup assembly unavailable");
     };
   }
 
-  public ApiProcessResources(ApiStartupInputs.Values inputs) {
+  public ServiceProcessResources(Inputs inputs, PoolFactory pools) {
     this(
         Objects.requireNonNull(inputs, "startup inputs"),
         LinuxDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
-        new InspectorCredentialLoader.NioIo());
+        new InspectorCredentialLoader.NioIo(),
+        pools);
   }
 
-  ApiProcessResources(
-      ApiStartupInputs.Values inputs,
+  ServiceProcessResources(
+      Inputs inputs,
       DirectoryCalls directories,
       InodeSecurityCalls security,
-      InspectorCredentialLoader.Io io) {
+      InspectorCredentialLoader.Io io,
+      PoolFactory pools) {
     this(
         inputs,
         directories,
         security,
         io,
-        (url, password) -> new ServiceDatabaseSource(ServiceConfigFiles.Service.API, url, password),
-        source -> new ApiJdbcPool().open(source));
+        (url, password) -> new ServiceDatabaseSource(inputs.service(), url, password),
+        pools);
   }
 
-  ApiProcessResources(
-      ApiStartupInputs.Values inputs,
+  ServiceProcessResources(
+      Inputs inputs,
       DirectoryCalls directories,
       InodeSecurityCalls security,
       InspectorCredentialLoader.Io io,
@@ -102,21 +114,20 @@ public final class ApiProcessResources {
     ResourceScope.use(
         root::close,
         () -> {
-          var reader =
-              new ServiceCredentialReader(root, security, ServiceConfigFiles.Service.API, io);
-          var credentials = ServiceCredentialSet.load(reader, ServiceConfigFiles.Service.API);
+          var reader = new ServiceCredentialReader(root, security, inputs.service(), io);
+          var credentials = ServiceCredentialSet.load(reader, inputs.service());
           return ResourceScope.use(credentials::close, () -> withDatabase(credentials, operation));
         });
   }
 
   private Boolean withDatabase(ServiceCredentialSet credentials, Operation operation)
       throws StorageIoException {
-    char[] password = credentials.copyPassword(ServiceCredentialId.DB_API);
+    char[] password =
+        credentials.copyPassword(ServiceCredentialId.forService(inputs.service()).getFirst());
     ServiceDatabaseSource source;
     try {
       source =
-          Objects.requireNonNull(
-              sources.open(inputs.config().value("nk.db.url"), password), "database source");
+          Objects.requireNonNull(sources.open(inputs.databaseUrl(), password), "database source");
     } finally {
       Arrays.fill(password, '\0');
     }

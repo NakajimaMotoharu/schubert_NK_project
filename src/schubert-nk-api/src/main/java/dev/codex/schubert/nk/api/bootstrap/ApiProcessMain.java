@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import dev.codex.schubert.nk.api.file.ApiProcessResources;
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
@@ -78,7 +78,13 @@ public final class ApiProcessMain {
   private static void startNative(ApiStartupInputs.Values inputs) throws IOException {
     // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
     // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
-    new ApiProcessResources(inputs).execute(ApiProcessResources.unassembledStartup());
+    new ServiceProcessResources(
+            new ServiceProcessResources.Inputs(
+                ServiceConfigFiles.Service.API,
+                inputs.credentials(),
+                inputs.config().value("nk.db.url")),
+            source -> new ApiJdbcPool().open(source))
+        .execute(ServiceProcessResources.unassembledStartup());
   }
 
   static void fatal(Thread thread, Throwable failure) {

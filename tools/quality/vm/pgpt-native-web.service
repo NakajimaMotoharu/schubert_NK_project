@@ -1,0 +1,23 @@
+# PT-OPS-NATIVE-002; isolated test unit, NOT schubert-nk-web.service or readiness gate.
+[Unit]
+Description=PGPT Web native resources probe
+After=postgresql.service
+[Service]
+Type=oneshot
+User=schubert-web
+Group=schubert-web
+SupplementaryGroups=schubert schubert-read
+LoadCredential=db-web:/etc/schubert-nk/credentials/db-web
+LoadCredential=mq-web:/etc/schubert-nk/credentials/mq-web
+LoadCredential=web-session-aes-current:/etc/schubert-nk/credentials/web-session-aes-current
+LoadCredential=web-revoke-aes-current:/etc/schubert-nk/credentials/web-revoke-aes-current
+LoadCredential=web-log-aes-current:/etc/schubert-nk/credentials/web-log-aes-current
+ExecStart=/opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp /opt/pgpt-native/classes:/opt/pgpt-native/lib/* NativeResourceProbe web
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

@@ -14,6 +14,8 @@ root→service gateの最小契約候補: 固定/run namespace root所有・app�
 
 ## 共用artifact具体化（PG289、着手前）
 
+PG290着手前追補（SSC084/D01・02・05）: API-localの所有scopeを共用`ServiceProcessResources`へ移し、固定Service/credential location/DB URLと各module専用PoolFactoryだけを借用入力とする。Web→API production依存/秘密増配を作らず、同一所有・消去・例外規則を再利用する。共用artifactのHikariはpool寿命型だけの依存、API最大8/min2・Web最大2/min1の生成は従来の各module factoryに残す。共有scopeは業務runtime開始の許可ではなく、未結線mandatory gateを依然拒否する。共有fixtureで両固定role/部分失敗/並行・nullを先に試験、実LoadCredential/SCRAMはVMで別検証する。
+
 着手後の確定差分: RequiredColumnは移動対象から外し、業務APIへ残す。共有11classと9suite/2fixtureの実ownerは`tools/quality/bootstrap_ownership.py`の固定catalogで管理する。ServiceDatabaseAdmissionは自身のSQL NULLを固定08001へ拒否し、業務API libraryには依存しない。既存Production poolとの結線はAPI側Resource PT、shared sourceの全物理接続は独立Hikari fixtureで試験する。
 
 `schubert-nk-bootstrap`をStorageの後、API/Webの前に置く。資格情報のstrict material/保持inode reader・固定role JDBC admission/sourceだけを移動し、Storageはnative-only/no-JDBC、業務API・HTTP/JMSは各moduleに残す。既存binary/package/Test IDを維持するため移動対象の`dev.codex.schubert.nk.api.file/maintenance/bootstrap/database`名は互換名として保存するが、artifactにAPI業務class/起動entry/DB migrationを含めない。WebのProduction依存はこのbootstrapだけで、業務APIへのtest-only依存は既存PT用途のまま。package名を理由にartifactの実依存を混同しない。

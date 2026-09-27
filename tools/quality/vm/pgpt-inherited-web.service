@@ -1,0 +1,23 @@
+# PT-OPS-NATIVE-008; isolated test unit, NOT schubert-nk-web.service or readiness gate.
+[Unit]
+Description=PGPT Web inherited admission lock feasibility
+After=postgresql.service
+[Service]
+Type=oneshot
+User=schubert-web
+Group=schubert-web
+SupplementaryGroups=schubert schubert-read
+LoadCredential=db-web:/etc/schubert-nk/credentials/db-web
+LoadCredential=mq-web:/etc/schubert-nk/credentials/mq-web
+LoadCredential=web-session-aes-current:/etc/schubert-nk/credentials/web-session-aes-current
+LoadCredential=web-revoke-aes-current:/etc/schubert-nk/credentials/web-revoke-aes-current
+LoadCredential=web-log-aes-current:/etc/schubert-nk/credentials/web-log-aes-current
+ExecStart=!/bin/bash /opt/pgpt-native/source/tools/quality/vm/044_inherited_lock.sh web
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

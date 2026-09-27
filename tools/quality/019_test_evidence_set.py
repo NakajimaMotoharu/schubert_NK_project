@@ -2316,12 +2316,13 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsDbsource004UnknownAndCompoundFailuresPreserveIdentity",
                         "opsDbsource005OptionsNullUrlSizeAndConstructorFailureErasure",
                         "opsDbsource006ConcurrentConnectionsAndPrivateMonitor")))
-        groups.append(("dev.codex.schubert.nk.api.file.ApiProcessResourcesTest", 1,
+        groups.append(("dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest", 1,
                        ("opsApiRes001RealFiveMaterialsAndAdmittedPoolOwnedScope",
                         "opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess",
                         "opsApiRes003PartialAcquisitionFailureClearsPasswordAndMaterials",
                         "opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase",
-                        "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes")))
+                        "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes",
+                        "opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2380,13 +2381,13 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                        "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                        "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
-                       "dev.codex.schubert.nk.api.file.ApiProcessResourcesTest": "PT-OPS-API-RES",
+                       "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest": "PT-OPS-API-RES",
                        "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest": "PT-OPS-WEB-MAIN"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):
                 ET.SubElement(suite, "testcase", classname=cls, name=name)
-                expected[f"{prefix}-{i:03}"] = cls + "#" + name
+                expected[("PT-OPS-WEB-RES-001" if name == "opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling" else f"{prefix}-{i:03}")] = cls + "#" + name
             suites.append(suite)
         self.assertEqual(expected, launch.validate_reports(suites, deployment))
         with self.assertRaises(ValueError): launch.validate_reports(suites, not deployment)
@@ -2734,7 +2735,7 @@ class EvidenceSetTest(unittest.TestCase):
             "file.InspectorCredentialLoader", "file.ServiceCredentialReader", "file.ServiceCredentialSet",
             "file.ServiceCredentialException", "file.InspectorCredentialException", "file.AesCredentialFile",
             "maintenance.InspectorAesCredential", "maintenance.InspectorDbCredential",
-            "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource"}
+            "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources"}
         self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main},
                          set(bootstrap_ownership.BOOTSTRAP_MAIN))
         for name in bootstrap_ownership.BOOTSTRAP_MAIN:
@@ -2745,7 +2746,7 @@ class EvidenceSetTest(unittest.TestCase):
         for name in bootstrap_ownership.BOOTSTRAP_TEST:
             self.assertTrue(bootstrap_ownership.source(repo, name, test=True).is_file())
             self.assertEqual("bootstrap", launch.module_for(name))
-        for name, expected in (("api.file.ApiProcessResources", "api"), ("api.bootstrap.ApiProcessMain", "api"),
+        for name, expected in (("api.file.ServiceProcessResources", "bootstrap"), ("api.bootstrap.ApiProcessMain", "api"),
                                ("web.bootstrap.WebProcessMain", "web"), ("storage.ServiceConfigFiles", "storage")):
             self.assertEqual(expected, bootstrap_ownership.owner("dev.codex.schubert.nk." + name))
         for wrong in ("", "InspectorCredentialLoader", "dev.codex.schubert.nk.bootstrap.Unknown"):

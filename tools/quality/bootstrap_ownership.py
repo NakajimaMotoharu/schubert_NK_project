@@ -10,14 +10,14 @@ BOOTSTRAP_MAIN = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "file.InspectorCredentialException", "file.InspectorCredentialLoader",
     "file.ServiceCredentialException", "file.ServiceCredentialReader",
     "file.ServiceCredentialSet", "bootstrap.ServiceDatabaseAdmission",
-    "bootstrap.ServiceDatabaseSource"))
+    "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources"))
 BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "maintenance.InspectorAesCredentialTest", "maintenance.InspectorDbCredentialTest",
     "maintenance.InspectorCredentialAccessTest", "file.InspectorCredentialLoaderTest",
     "file.InspectorDatabaseCredentialLoaderTest",
     "file.ServiceCredentialReaderTest", "file.ServiceCredentialSetTest",
     "maintenance.ServiceDatabaseAdmissionTest", "bootstrap.ServiceDatabaseSourceTest",
-    "logging.ApiLogDatabaseFixture", "maintenance.MaintenanceJdbcProbe"))
+    "file.ServiceProcessResourcesTest", "logging.ApiLogDatabaseFixture", "maintenance.MaintenanceJdbcProbe"))
 
 
 def owner(name, *, test=False):

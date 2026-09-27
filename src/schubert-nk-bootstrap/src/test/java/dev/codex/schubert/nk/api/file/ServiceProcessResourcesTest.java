@@ -2,10 +2,8 @@ package dev.codex.schubert.nk.api.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import dev.codex.schubert.nk.api.bootstrap.ApiJdbcPool;
-import dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig;
-import dev.codex.schubert.nk.api.bootstrap.ApiStartupInputs;
 import dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
@@ -33,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-API-RES-001..006. Real credential channels/PG/pool, explicitly synthetic OS admission. */
-final class ApiProcessResourcesTest {
+final class ServiceProcessResourcesTest {
   @TempDir static Path temporary;
   private static ApiLogDatabaseFixture database;
   private static String url;
@@ -51,10 +49,11 @@ final class ApiProcessResourcesTest {
     database.stop();
   }
 
-  private static ApiStartupInputs.Values inputs(Path root) throws Exception {
-    return new ApiStartupInputs.Values(
-        ApiNonSecretConfig.parse("", "nk.db.url: " + url + "\n"),
-        ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", root.toString())));
+  private static ServiceProcessResources.Inputs inputs(Path root) {
+    return new ServiceProcessResources.Inputs(
+        ServiceConfigFiles.Service.API,
+        ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", root.toString())),
+        url);
   }
 
   @Test
@@ -65,11 +64,12 @@ final class ApiProcessResourcesTest {
       AtomicReference<HikariDataSource> poolRef = new AtomicReference<>();
       AtomicReference<ServiceCredentialSet> credentialsRef = new AtomicReference<>();
       var runtime =
-          new ApiProcessResources(
+          new ServiceProcessResources(
               inputs(fixture.root),
               LinuxDirectoryCalls.create(),
               new InspectorCredentialLoaderTest.TestSecurity(io),
-              io);
+              io,
+              ServiceProcessResourcesTest::apiPool);
       runtime.execute(
           (pool, credentials) -> {
             poolRef.set((HikariDataSource) pool);
@@ -78,10 +78,10 @@ final class ApiProcessResourcesTest {
             assertEquals(2, poolRef.get().getMinimumIdle());
             assertThrows(
                 NullPointerException.class,
-                () -> ApiProcessResources.unassembledStartup().run(null, credentials));
+                () -> ServiceProcessResources.unassembledStartup().run(null, credentials));
             assertThrows(
                 NullPointerException.class,
-                () -> ApiProcessResources.unassembledStartup().run(pool, null));
+                () -> ServiceProcessResources.unassembledStartup().run(pool, null));
             try (var connection = pool.getConnection();
                 var statement = connection.createStatement();
                 var rows = statement.executeQuery("select current_user::text")) {
@@ -109,7 +109,7 @@ final class ApiProcessResourcesTest {
       // This tests the production refusal through the real owned scope, not a readiness fixture.
       assertThrows(
           StorageIoException.class,
-          () -> runtime.execute(ApiProcessResources.unassembledStartup()));
+          () -> runtime.execute(ServiceProcessResources.unassembledStartup()));
       ServiceCredentialSetTest.assertCleared(io);
     }
   }
@@ -133,7 +133,7 @@ final class ApiProcessResourcesTest {
           AtomicReference<ClosingPool> poolRef = new AtomicReference<>();
           AtomicReference<ServiceCredentialSet> credentialsRef = new AtomicReference<>();
           var runtime =
-              new ApiProcessResources(
+              new ServiceProcessResources(
                   inputs(fixture.root),
                   LinuxDirectoryCalls.create(),
                   new InspectorCredentialLoaderTest.TestSecurity(io),
@@ -145,12 +145,12 @@ final class ApiProcessResourcesTest {
                     return source;
                   },
                   source -> {
-                    var pool = new ClosingPool(new ApiJdbcPool().open(source), cleanup);
+                    var pool = new ClosingPool(apiPool(source), cleanup);
                     poolRef.set(pool);
                     return pool;
                   });
           var operation =
-              (ApiProcessResources.Operation)
+              (ServiceProcessResources.Operation)
                   (pool, credentials) -> {
                     credentialsRef.set(credentials);
                     if (body instanceof IOException known) throw known;
@@ -188,7 +188,7 @@ final class ApiProcessResourcesTest {
         AtomicReference<ServiceDatabaseSource> sourceRef = new AtomicReference<>();
         int failureStage = stage;
         var runtime =
-            new ApiProcessResources(
+            new ServiceProcessResources(
                 inputs(fixture.root),
                 LinuxDirectoryCalls.create(),
                 new InspectorCredentialLoaderTest.TestSecurity(io),
@@ -227,7 +227,7 @@ final class ApiProcessResourcesTest {
         var io = new InspectorCredentialLoaderTest.TestIo();
         if (stage == 2) io.rootChange = attributes -> attributes.put("uid", 2);
         var runtime =
-            new ApiProcessResources(
+            new ServiceProcessResources(
                 inputs(fixture.root),
                 LinuxDirectoryCalls.create(),
                 new InspectorCredentialLoaderTest.TestSecurity(io),
@@ -248,41 +248,49 @@ final class ApiProcessResourcesTest {
 
   @Test
   void opsApiRes005NullAndNativeFactoryBoundaries() throws Exception {
-    assertThrows(NullPointerException.class, () -> new ApiProcessResources(null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new ServiceProcessResources(null, ServiceProcessResourcesTest::apiPool));
     try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
       var values = inputs(fixture.root);
       var io = new InspectorCredentialLoaderTest.TestIo();
       var calls = LinuxDirectoryCalls.create();
       var security = new InspectorCredentialLoaderTest.TestSecurity(io);
       var source =
-          (ApiProcessResources.SourceFactory)
+          (ServiceProcessResources.SourceFactory)
               (target, password) ->
                   new ServiceDatabaseSource(ServiceConfigFiles.Service.API, target, password);
-      var pool = (ApiProcessResources.PoolFactory) admitted -> new ApiJdbcPool().open(admitted);
+      var pool = (ServiceProcessResources.PoolFactory) admitted -> apiPool(admitted);
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(null, calls, security, io, source, pool));
+          () -> new ServiceProcessResources(null, calls, security, io, source, pool));
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(values, null, security, io, source, pool));
+          () -> new ServiceProcessResources(values, null, security, io, source, pool));
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(values, calls, null, io, source, pool));
+          () -> new ServiceProcessResources(values, calls, null, io, source, pool));
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(values, calls, security, null, source, pool));
+          () -> new ServiceProcessResources(values, calls, security, null, source, pool));
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(values, calls, security, io, null, pool));
+          () -> new ServiceProcessResources(values, calls, security, io, null, pool));
       assertThrows(
           NullPointerException.class,
-          () -> new ApiProcessResources(values, calls, security, io, source, null));
-      assertThrows(NullPointerException.class, () -> new ApiProcessResources(values).execute(null));
+          () -> new ServiceProcessResources(values, calls, security, io, source, null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new ServiceProcessResources(values, ServiceProcessResourcesTest::apiPool)
+                  .execute(null));
       // Real temp FS does NOT satisfy production credential policy. This proves refusal, not OS
       // admission.
       assertThrows(
           StorageIoException.class,
-          () -> new ApiProcessResources(values).execute((p, c) -> fail("not admitted")));
+          () ->
+              new ServiceProcessResources(values, ServiceProcessResourcesTest::apiPool)
+                  .execute((p, c) -> fail("not admitted")));
     }
   }
 
@@ -297,11 +305,12 @@ final class ApiProcessResourcesTest {
         work.add(
             () -> {
               var io = new InspectorCredentialLoaderTest.TestIo();
-              new ApiProcessResources(
+              new ServiceProcessResources(
                       values,
                       LinuxDirectoryCalls.create(),
                       new InspectorCredentialLoaderTest.TestSecurity(io),
-                      io)
+                      io,
+                      ServiceProcessResourcesTest::apiPool)
                   .execute(
                       (pool, credentials) -> {
                         try (var connection = pool.getConnection()) {
@@ -315,6 +324,84 @@ final class ApiProcessResourcesTest {
             });
       for (var done : workers.invokeAll(work)) assertTrue(done.get(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.WEB);
+      var io = new InspectorCredentialLoaderTest.TestIo();
+      var location =
+          ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", fixture.root.toString()));
+      var values =
+          new ServiceProcessResources.Inputs(ServiceConfigFiles.Service.WEB, location, url);
+      assertEquals(ServiceConfigFiles.Service.WEB, values.service());
+      assertEquals(location, values.credentials());
+      assertEquals(url, values.databaseUrl());
+      assertThrows(
+          NullPointerException.class,
+          () -> new ServiceProcessResources.Inputs(null, location, url));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ServiceProcessResources.Inputs(ServiceConfigFiles.Service.WEB, null, url));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ServiceProcessResources.Inputs(ServiceConfigFiles.Service.WEB, location, null));
+      assertThrows(NullPointerException.class, () -> new ServiceProcessResources(values, null));
+      AtomicReference<HikariDataSource> closed = new AtomicReference<>();
+      new ServiceProcessResources(
+              values,
+              LinuxDirectoryCalls.create(),
+              new InspectorCredentialLoaderTest.TestSecurity(io),
+              io,
+              admitted -> {
+                var config = new HikariConfig();
+                config.setDataSource(admitted);
+                config.setMaximumPoolSize(2);
+                config.setMinimumIdle(1);
+                config.setConnectionTimeout(3000);
+                var pool = new HikariDataSource(config);
+                closed.set(pool);
+                return pool;
+              })
+          .execute(
+              (pool, credentials) -> {
+                assertEquals(2, closed.get().getMaximumPoolSize());
+                assertEquals(1, closed.get().getMinimumIdle());
+                try (var connection = pool.getConnection();
+                    var statement = connection.createStatement();
+                    var rows = statement.executeQuery("select current_user::text")) {
+                  assertTrue(rows.next());
+                  assertEquals("schubert_web_session", rows.getString(1));
+                  assertFalse(rows.next());
+                } catch (SQLException failure) {
+                  throw new IOException("fixture query failed");
+                }
+                assertThrows(
+                    IllegalArgumentException.class,
+                    () -> credentials.copyPassword(ServiceCredentialId.DB_API));
+                byte[] key = credentials.copyKey(ServiceCredentialId.WEB_SESSION_AES_CURRENT);
+                try {
+                  assertArrayEquals(new byte[32], key);
+                } finally {
+                  Arrays.fill(key, (byte) 0);
+                }
+              });
+      assertTrue(closed.get().isClosed());
+      assertEquals(5, io.opens);
+      assertEquals(5, io.closes);
+      ServiceCredentialSetTest.assertCleared(io);
+    }
+  }
+
+  private static HikariDataSource apiPool(javax.sql.DataSource source) {
+    // Independent pool fixture. Production API/Web factories remain in their owning modules.
+    var config = new HikariConfig();
+    config.setDataSource(source);
+    config.setMaximumPoolSize(8);
+    config.setMinimumIdle(2);
+    config.setConnectionTimeout(3000);
+    return new HikariDataSource(config);
   }
 
   private static final class ClosingPool extends HikariDataSource {

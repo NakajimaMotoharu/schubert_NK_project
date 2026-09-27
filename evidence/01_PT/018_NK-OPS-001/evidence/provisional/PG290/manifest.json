@@ -1,0 +1,217 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "id": "PG290",
+  "branch": "dev-foundation",
+  "baseCommit": "e6f20fd46",
+  "finishedAt": "2026-09-27T17:26:39+09:00",
+  "exitCode": 0,
+  "trigger": "SSC084 shared Resource/security/POM Web integration D01/D02/D05",
+  "hostOS": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+  "guestOS": "Ubuntu 26.04 Linux 7.0.0-31-generic",
+  "java": "25.0.4",
+  "postgres": "18.6",
+  "command": "mvnw -o -pl six-production-modules clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "canaries": 105,
+  "bugs": [
+    "BUG-261",
+    "BUG-262",
+    "BUG-263",
+    "BUG-264"
+  ],
+  "ssc": [
+    "SSC-084"
+  ],
+  "notAccepted": [
+    "API/Web native main coverage",
+    "full scope collection",
+    "full root/Ops/schema/Expiry/fresh gate",
+    "Production Unit",
+    "real NK CHR-A01/L01"
+  ],
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "e33c037398bf1d795ca4ce9999e9047a25f83a896ce8efbcd9982e985492cac0",
+      "junitAggregateSha256": "223e46b5a7cf0f316330149e4630cfee6c0caefbc8aa8a7913239093cb9e0fbc"
+    },
+    "storage": {
+      "tests": 101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "c691ea316c7a90cd9f873cbb9977fba1a2d494a6bb70a848d9df9e1071dcf37e",
+      "junitAggregateSha256": "0dabeb9be1ccea163a9a8e4d02699c569780a2b2e8dd589ec09fc498ba247b34"
+    },
+    "bootstrap": {
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "e2868a2fa7bd9ad259b300bf1e65a3d4e59270a5085a6c13b71c8a4922278ce9",
+      "junitAggregateSha256": "263661bc740d8e001af7fb615653f5215e1711ea09b4413286dcbacf4d791b17"
+    },
+    "api": {
+      "tests": 734,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 9,
+        "BRANCH": 0,
+        "LINE": 3,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "d5699b578962d317bf6a03f3ec06ce761d068238432e80ca67ae6d97557057eb",
+      "junitAggregateSha256": "86da94481f5781874ea3c546c2a85d2d01f685ddab98f6d880e030ab68de4384"
+    },
+    "web": {
+      "tests": 555,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 9,
+        "BRANCH": 0,
+        "LINE": 3,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "4e35b63f68797073271d7003d9d028bc154068e2e42b8af38c0434d7efb276b0",
+      "junitAggregateSha256": "c2b033c5aa90aa8eeaac89fd03647b23e704f157137d062b6e8e1c8f7f4cd71a"
+    },
+    "batch": {
+      "tests": 404,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "staticErrors": 0,
+      "sourceTreeSha256": "19b4975989ccedb0939c8408f98df0096faec8d2d992f2ae64ccab5d8f628bf0",
+      "junitAggregateSha256": "24f1d6d49d4aabd401d068153d5f19974741afc2236d2845469dba47bbacf636"
+    }
+  },
+  "nativeTests": {
+    "PT-OPS-NATIVE-001": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-002": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-003": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-004": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-005": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-006": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-007": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    },
+    "PT-OPS-NATIVE-008": {
+      "result": "PASS_PROVISIONAL",
+      "exitCode": 0,
+      "oracle": "095_NK-OPS-001",
+      "notProductionStartup": true
+    }
+  },
+  "payloadSha256": "966fac9f9bba08efbba35a928e29cfc1ddd66f40a1a161ca96c898ce2c1e52a7",
+  "privacy": "generated VM credentials/raw journals/DB/image excluded; only public artifacts hashed",
+  "treeHashAlgorithm": "SHA256 sorted relative path + NUL + per-file SHA256 + LF",
+  "sha256": {
+    "src/schubert-nk-protocol/target/site/jacoco/jacoco.xml": "aed492396925b7d172c586d332054da0207763c3b25b78585b8fca8c075531eb",
+    "src/schubert-nk-storage/target/site/jacoco/jacoco.xml": "4fea4fb491a9260f47c4a881551e0dae5e45bf161e9c0d6f2e970092a0131743",
+    "src/schubert-nk-bootstrap/target/site/jacoco/jacoco.xml": "c4fec853043d30ea769483e0718e500f6dc961d6f40840b3a5dc604b71b8d8ae",
+    "src/schubert-nk-api/target/site/jacoco/jacoco.xml": "da257eaf4d60fc8227908ed969c473677a8564e85d57ee7e943366808f338c51",
+    "src/schubert-nk-web/target/site/jacoco/jacoco.xml": "475b05523abd5a77a8feaaa826fd483663755d56409c3c88257f459bc3edcf69",
+    "src/schubert-nk-batch/target/site/jacoco/jacoco.xml": "1334479c1ea92d070b2e65e0914b8ddeb734801d89ee03cccffe5f1ed01756c5",
+    "pom.xml": "cc2623f61318995d2d15a55cef8ecf1a250827dc6de7d8b15a10423cbc45d134",
+    "tools/quality/bootstrap_ownership.py": "d7655c929f943f2317eff0ade815d42c8fcd3801cd51ea81d01b1558dc5e534a",
+    "tools/quality/019_test_evidence_set.py": "01cd64d822ac3454b1ccf9c6c7c959315b6f995da00fa5fbe8aad181698c2caf",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "a8c72ec4c82f5fde35594195d5606509efabb0ceb4bc257e781f3694cf2046ae",
+    "tools/quality/vm/041_native_resource_setup.sh": "adb4d9969d64174dd0c96fac9ac9a353457f1a0d207cdb79124b80eece69538c",
+    "tools/quality/vm/042_native_passwords.sql": "33b5c26925f5ba7ca737f1ca653ecd3ec830dcfe6b88c739e342b177f9f5276e",
+    "tools/quality/vm/043_native_resource_negative.sh": "63763821ce778592af308e0d020de9d88af657c6014bbdd80c9c1b33eb5dd873",
+    "tools/quality/vm/044_inherited_lock.sh": "98785bed0704b8f94f88a0e5589195fb21c7dde31dad2821cf6dd1fba080c500",
+    "tools/quality/vm/NativeInheritedLockProbe.java": "6e707e628133a145ffb02e19842b2d16570abbbc337fe9cc9e29024ce3589cb9",
+    "tools/quality/vm/NativeResourceProbe.java": "4fcda16faef048ff1c600d5e3dea1753c19e6571fe93eabf14571a32833602d3",
+    "tools/quality/vm/invalid-key.fixture": "155d99a90448b24b6091683879f98a6a9ce9a599ebcc159a43d873a7336e8204",
+    "tools/quality/vm/pgpt-inherited-api.service": "239bda5c95c555da061cd38338f9fc4b9a1db8f833262d86c3c5b61b91be8b07",
+    "tools/quality/vm/pgpt-inherited-web.service": "249c2487be9470bee04f51f642fb386a62faa42d2b8601a3dec89baf547ec2f2",
+    "tools/quality/vm/pgpt-native-api.service": "212f16641c33c7894cc044afb70ff2fc6448c3b6acc0c7af6db821ec98d8863c",
+    "tools/quality/vm/pgpt-native-web.service": "ad3ad80c27695fdc3d405b2b2ed9dc5d2a438fcba68990ee38dd08ec357a23f5"
+  }
+}

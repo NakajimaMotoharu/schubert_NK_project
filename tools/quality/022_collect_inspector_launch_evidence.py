@@ -190,14 +190,15 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourc
      "opsDbsource004UnknownAndCompoundFailuresPreserveIdentity",
      "opsDbsource005OptionsNullUrlSizeAndConstructorFailureErasure",
      "opsDbsource006ConcurrentConnectionsAndPrivateMonitor")),
-    ("dev.codex.schubert.nk.api.file.ApiProcessResourcesTest", 1,
+    ("dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest", 1,
     ("opsApiRes001RealFiveMaterialsAndAdmittedPoolOwnedScope",
      "opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess",
      "opsApiRes003PartialAcquisitionFailureClearsPasswordAndMaterials",
      "opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase",
-     "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes")))
+     "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes",
+     "opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling")))
 RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource"),
-                    ("api", "dev/codex/schubert/nk/api/file/ApiProcessResources"),
+                    ("api", "dev/codex/schubert/nk/api/file/ServiceProcessResources"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiProcessMain"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebProcessMain"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
@@ -355,10 +356,10 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                    "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
-                   "dev.codex.schubert.nk.api.file.ApiProcessResourcesTest": "PT-OPS-API-RES",
+                   "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest": "PT-OPS-API-RES",
                    "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest": "PT-OPS-WEB-MAIN"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
-        methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
+        methods.update({("PT-OPS-WEB-RES-001" if name == "opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling" else f"{prefix}-{i:03}"): cls + "#" + name for i, name in enumerate(expected, start)})
     return methods
 
 
