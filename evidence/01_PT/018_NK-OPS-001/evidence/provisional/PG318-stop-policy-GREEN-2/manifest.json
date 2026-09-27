@@ -1,0 +1,100 @@
+{
+  "totals": {
+    "tests": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/storage/jacoco.xml",
+      "sha256": "70f822d22a1dc708191a9a802e64ff7902e98113acede50bb6ff46b501405579"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/storage/spotbugsXml.xml",
+      "sha256": "c0d75dcabb0a1e389753e9772c27ce26118ab275c13805a6520de335a32eae52"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "250a5b20d79f3f3da748253dc1e59731feb805d8e071a289f0588c9b25e5e775"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "15dafa55f406c0b0319fccbebbfa388036fa5de446653fb14d233eee182cb7ae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/bootstrap/jacoco.xml",
+      "sha256": "b21a9b8b8620c885258f20e372f1c687b8cd0b1c1f2e3fd06166f2007fbbacac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/bootstrap/spotbugsXml.xml",
+      "sha256": "a96248b0efd8b8fbfa0e7c95c56ee0cadbe20d75495540894951d37888502935"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/batch/jacoco.xml",
+      "sha256": "50c3f78e78b73d6e5a5c51b488aae8a9fde0b9e641dee162adb69739bf6d80dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/batch/spotbugsXml.xml",
+      "sha256": "142e7121471aa96320fb8b874a9b82b4d5f2201f9841d72da45fc144f452d549"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG318-stop-policy-GREEN-2/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "b72fdb5b5c6db10870cda22bf617a54c527efe019aa1b7ded2d308a076469916"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java",
+      "sha256": "b4b7fc677bbe515cd048ba73e673afdd9a24fc0174d97694ed1035c74a9de0ef"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "sha256": "2f2c38fac8b66901706b1edef75df7f4dad8b40a876cd9d7e62b86d1c1257467"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+      "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"
+    }
+  ],
+  "log": {
+    "path": "/tmp/PG318-stop-policy-limited-3.log",
+    "sha256": "7b2d2beb6aaaa9f59ebcabb0519b14659556895fe392e40191a8b3a6251f533b"
+  },
+  "finished": "2026-09-28T07:41:59+09:00",
+  "formal": false,
+  "coverageNote": "Only actually generated report XML copied. No-clean cumulative exec is not formal isolated coverage.",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,MaintenanceUnitStopPolicyTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "exitCode": 0,
+  "sourceCommit": "8ad421d6d",
+  "dirty": true,
+  "ssc": [
+    "SSC-101"
+  ],
+  "testIds": [
+    "PT-OPS-MPOL001..007"
+  ]
+}

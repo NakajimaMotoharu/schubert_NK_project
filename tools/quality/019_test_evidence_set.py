@@ -1260,9 +1260,9 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 531}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 538}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500, 508, 516):
+        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500, 508, 516, 531):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -2357,6 +2357,7 @@ class EvidenceSetTest(unittest.TestCase):
         groups[60:60] = [
             ("dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest", 1, ("mstop001FixedNamesAndIndependentTerminalVectors", "mstop002MissingDuplicateUnknownAndSeparators", "mstop003ByteBoundsNullAndOriginalOwnership", "mstop004FixedPlacementAndNonTerminalStates", "mstop005InvocationAndUnsignedTimestampDomains", "mstop006AbaAndAllFieldChangesStayUnmatched", "mstop007IndependentParallelAndNoAmbientAuthorization")),
             ("dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest", 1, ("mterm001AllFixedColdAndPresentLeaves", "mterm002UnboundBusyAndNestedProcessRefused", "mterm003AbaCurrentNamespaceAndWrongActor", "mterm004EveryIoUnknownAndClosePosition", "mterm005NullContractsAndAllOwnedMaterials", "mterm006InterruptAndIndependentParallel", "mterm007NativeFixedQueriesAndMaterials", "mterm008NativeFactoryAndOrdinaryHostRefusal")),
+            ("dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest", 1, ("mpol001AllEightFixedPolicyAndOrderIndependent", "mpol002MissingDuplicateUnknownAndLineStructure", "mpol003ByteAndNullBounds", "mpol004WrongIdLoadKillAndAutomaticSigkillRefused", "mpol005FixedNativeQueryAndAllProcessOwners", "mpol006KnownUnknownNullAndInterrupts", "mpol007IndependentParallelAndNoStopAuthority")),
         ]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
@@ -2393,6 +2394,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest": "PT-OPS-BTERM",
                        "dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest": "PT-OPS-MSTOP",
                        "dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest": "PT-OPS-MTERM",
+                       "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest": "PT-OPS-MPOL",
                        "dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest": "PT-OPS-RBCR",
                        "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest": "PT-OPS-MDB",
                        "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest": "PT-OPS-BREQFILE",
@@ -2713,7 +2715,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(244, batch_ops)  # PG317: fixed Unit snapshot/termination adds fifteen PT.
+        self.assertEqual(251, batch_ops)  # PG318: fixed stop policy adds seven PT.
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

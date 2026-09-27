@@ -1,0 +1,26 @@
+{
+  "id": "PT-OPS-NATIVE-029",
+  "formal": false,
+  "dateTime": "2026-09-28 07:31-07:33 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, JDK 25.0.4, systemd, cgroup v2; Caddy active; Backup loaded/inactive",
+  "branch": "dev-foundation",
+  "sourceCommit": "8ad421d6d",
+  "toolVersions": {"javac": "25.0.4", "maven": "3.9.12", "jacoco": "0.8.15"},
+  "input": "test-only PG317 batch.jar SHA256=21575949a72acc0889a20e7a69e1ee70a7eb0b478adfcb836fcdd60cba06a216; probe class SHA256=9a5bcd089879418b39c3c03494822ed67a536ac407bb64d58e0d078c21d0209c; immutable PG316 dependency jars; existing genuine Morning unit with additive 317 drop-in",
+  "expected": "under genuine root Morning context and continuous M/A, cold Backup quiescent; active Caddy refused; no stop issued; no full parent or business startup claim",
+  "actual": "Production MaintenanceUnitTermination.create/quiescent passed for cold Backup and returned non-quiescent for active Caddy; probe ExecMainStatus=0, MainPID=0, post-stop Morning inactive and exact cgroup leaf absent; Caddy remained active; pending original three SHA256 unchanged; approval absent",
+  "commands": [
+    "mvn -pl src/schubert-nk-batch -am -DskipTests package (artifact only, not PT)",
+    "javac -cp actual Batch/Bootstrap/Storage/SpotBugs annotations jars -d Git-outside classes tools/quality/vm/NativeMaintenanceUnitTerminationProbe.java",
+    "isolated VM: systemctl start schubert-nk-morning-controller.service; systemctl show ExecMainStatus/ActiveState/MainPID; journalctl --system --grep PT-OPS-NATIVE-029 -o cat; systemctl stop schubert-nk-morning-controller.service",
+    "mvn -pl src/schubert-nk-batch -DskipTests -Djacoco.dataFile=Git-outside/whole317.exec jacoco:report"
+  ],
+  "exitCodes": {"package": 0, "probeCompilation": 0, "systemctlStart": 0, "probeExecMainStatus": 0, "firstJournalCaptureWrapper": 1, "correctedReadOnlyJournalQuery": 0, "systemctlStop": 0, "jacocoReport": 0},
+  "captureCorrection": "First journalctl --since used 2026-09-28 07:25 as guest-local time, while guest was UTC 2026-09-27 22:31; only this post-start grep was nonzero. Read-only system journal --grep found the fixed PASS line. This is not a Production test failure and was not counted as a passing wrapper command.",
+  "coverage": "Native-only JaCoCo report, not 100%: MaintenanceUnitTermination main branch 7 covered/7 missed and method 8 covered/1 missed; host bounded 39PT XML was captured separately. Binary exec retained Git-outside, not committed.",
+  "files": [{"path": "jacoco.xml", "sha256": "c967af9480eb1c8a21e4dc854351440b46d1c79d76270ea34bd054be8c9a3493"}],
+  "sourceHashes": {"tools/quality/vm/NativeMaintenanceUnitTerminationProbe.java": "8c656470f55e4e0adc1b5454af7e270d7513fec792691fdb24dab273581d8a19", "tools/quality/vm/pgpt-native-whole-317.conf": "304a420eb2a10910b8c361736e24ca4e69523d8b5e93cfa5378e652409f4c6e7"},
+  "bug": "BUG-308",
+  "ssc": "SSC-100",
+  "remaining": "Six actual fixed Units uninstalled, Caddy stop policy not approved; whole-eight terminal, stop controller, full parent, external Web/API, CHR remain untested."
+}

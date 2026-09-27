@@ -82,6 +82,8 @@ https://<GLOBAL_IP>:55160 {
 
 ## 4. Systemd dependency・unit設定
 
+SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止へ採用しない。NK専用非起動drop-inで `SendSIGKILL=no` と `TimeoutStopSec=30s` を設定し、daemon-reload後の実効 Id/LoadState/KillMode/SendSIGKILL を親の固定8対象と同じ閉集合で確認する。既定Caddyを実測せずにpolicy合格としない。policy確認はstop client/全cgroup終端/Artemis journalの代用でなく、未配置Unitのfake/alias禁止を維持する。
+
 ### 4.1 Dependency
 
 | Unit | `After` | `Requires` | `Wants`/note |

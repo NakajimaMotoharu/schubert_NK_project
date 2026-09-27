@@ -1,0 +1,29 @@
+{
+  "id": "PT-OPS-NATIVE-030 / PT-OPS-MPOL008",
+  "formal": false,
+  "dateTime": "2026-09-28 07:44-07:48 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, systemd cgroup v2, JDK25.0.4/Maven3.9.12/JaCoCo0.8.15; genuine root Morning unit and continuous M/A during each observation",
+  "branch": "dev-foundation",
+  "sourceCommit": "8ad421d6d plus dirty SSC-101/PG318 Production class, independent PT and drop-in",
+  "commands": [
+    "mvn -pl src/schubert-nk-batch -am -DskipTests package (artifact only; not PT)",
+    "javac actual PG318 Batch/Bootstrap/Storage + annotations jars NativeMaintenanceStopPolicyProbe.java",
+    "guest root: install new PG318 cohort and reject-mode Morning drop-in, daemon-reload, systemctl start/read fixed PASS/stop",
+    "guest root: install new NK Caddy drop-in without stop or restart; daemon-reload, verify effective Id/LoadState/KillMode/SendSIGKILL/TimeoutStopUSec and Caddy PID unchanged",
+    "guest root: install accept-mode Morning drop-in, daemon-reload, systemctl start/read fixed PASS/stop; systemd-analyze verify caddy.service",
+    "mvn -pl src/schubert-nk-batch -DskipTests -Djacoco.dataFile=Git-outside/native-merged.exec jacoco:report; repeat with same-byte host+native merged exec"
+  ],
+  "exitCodes": {"package": 0, "probeCompilation": 0, "rejectProbeStartAndExec": 0, "caddyDropInReloadAndPolicy": 0, "acceptProbeStartAndExec": 0, "bothMorningStops": 0, "systemdAnalyzeVerify": 0, "bothCoverageReports": 0},
+  "input": "same PG318 Batch jar SHA256=85c786814a8ed2ec280aa0072e775a54057d9e1855a5d372a5d67a6bb7747d75; probe class SHA256=150196f045438dc720914a4650da5f3663ad5fdc82ff9de1202d466f0137322b; Caddy package effective SendSIGKILL=yes/TimeoutStopUSec=5s, active PID1090",
+  "expected": "fixed Production policy parser refuses Caddy with automatic SIGKILL; NK drop-in changes only effective timeout to30s and SIGKILL to no; same Production parser accepts; no Caddy stop/restart or full-parent success claim",
+  "actual": "both genuine Morning probes PASS, first caddyPolicySafe=false and second true; systemd show after reload Id=caddy.service/LoadState=loaded/KillMode=control-group/SendSIGKILL=no/TimeoutStopUSec=30s; Caddy active same PID1090; Morning post-stop inactive/PID0/exact leaf absent; pending original three SHA256 unchanged/current remains pgpt-native-301/approval absent",
+  "coverage": "Native-only Production MaintenanceUnitStopPolicy main instruction199covered/10missed, branch18covered/10missed, line33covered/1missed, method7covered/0missed. Same-byte host bounded PT + native merged main instruction209/0, branch28/0, line34/0, method7/0, class1/0. Merge is provisional cumulative host data, not formal allscope coverage. Raw exec retained Git-outside.",
+  "files": [
+    {"path": "jacoco-native.xml", "sha256": "a61e657600a536ef138b7620e292b05f8f53408a5e34c4f2eb7210d226ccaf3e"},
+    {"path": "jacoco-host-native.xml", "sha256": "d5e3949769bad0f485a4013ecc5b45072b41701e2b6d2a37ab69882f6756fd3d"}
+  ],
+  "privateExecHashes": {"reject": "79b1896ac01e3b188ce26abcaa6cf86651982b4fc1fc65970c2d691f44932819", "accept": "12226d428d79e20ba858d855415f1a3ed1ca6951a85f259b7380f810d740c495"},
+  "sourceHashes": {"MaintenanceUnitStopPolicy.java": "b4b7fc677bbe515cd048ba73e673afdd9a24fc0174d97694ed1035c74a9de0ef", "NativeMaintenanceStopPolicyProbe.java": "4d16ccea40ca52ba5306c4fe6b77628a103d610f73e9de06a7e9a29d19df3232", "caddy.service.d/schubert-nk-stop-policy.conf": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"},
+  "relatedSsc": ["SSC-100", "SSC-101"],
+  "remaining": "Production stop client not issued or tested, six actual fixed Units still missing, Artemis clean journal and whole-eight final barrier remain unaccepted."
+}
