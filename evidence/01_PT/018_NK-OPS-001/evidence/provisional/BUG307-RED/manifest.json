@@ -1,0 +1,74 @@
+{
+  "formal": false,
+  "sourceCommit": "c516695bf",
+  "sourceDirty": true,
+  "finished": "2026-09-28T06:59:13+09:00",
+  "exitCode": 1,
+  "tests": 27,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "apiCoverageStatic": "not-run after semantic test failure",
+  "dependencyCoverage": "no-clean cumulative exec, not formal isolated coverage",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "c10603b66b5b591cb6f3dd4131390ad7b880ba1813faeb551a8ae40cf8665f14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/protocol/jacoco.xml",
+      "sha256": "ab0f80aec1365693b642c746f9e82ec4e31c6f60292270ebc87b98206a95f6f0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/protocol/spotbugsXml.xml",
+      "sha256": "0fb916987866e1fc047761e45ee150ea6953bea4b8d4a46e34c7cbbe40033bba"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/storage/jacoco.xml",
+      "sha256": "174280930b38230754ac0aca45278de2d05460a76ffc0619b4aafa5043cf36dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/storage/spotbugsXml.xml",
+      "sha256": "7ede1bcf3c3c5081bd861afcf31e70076ce859acf4f8114eb17be3bf445444ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "6011f735c7249011b20188f24bded6342a3742b173ff801c59bf6ad36d005fa7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "7668019d78b8425928d9f6743bb900a00cc5d9f63e0a82b02f11c0b6d1fe349b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/bootstrap/jacoco.xml",
+      "sha256": "3790f26a0fc689340858449523ec50e8ee53a837ce040bf844ef49acb9611f02"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/bootstrap/spotbugsXml.xml",
+      "sha256": "1361874929b325861dff82bd682c8eb5e0fbacb81154efd78c1aad3b902de865"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-RED/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "8c3bda1114f9e3f5cdb86ab9a69475085ed43270941310b07dd73b27b1dab9bd"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "7b8bf1101f5581b0c2db3a9728f40cb4750c3ff4194ce803672a900e6fdb2ec0"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ApplicationServiceUnitTest.java",
+      "sha256": "8d3c0258c91933313c285b0a1ff6b0d570513d415e3e94dd4e1ac05582c5382c"
+    }
+  ],
+  "formatNotSemanticRed": {
+    "finished": "2026-09-28T06:57:59+09:00",
+    "exitCode": 1,
+    "dependencyTests": 23,
+    "apiTests": "not-run",
+    "logSha256": "0cc8b0d4102ea4085df71f1d750385117b12ffc56acb3c6d3c6129198ea06aac"
+  },
+  "logSha256": "cde683626b6a6fd712a1039292bb96c6b7a9b80ec0a2e1ffb186d1bacea531f5",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api -am -Dtest=MessageCodecTest,ResourceScopeTest,ReleaseApprovalTest,ApplicationServiceUnitTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check > /tmp/BUG307-RED-2.log 2>&1"
+}

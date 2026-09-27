@@ -1,0 +1,83 @@
+{
+  "totals": {
+    "tests": 24,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest",
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/storage/jacoco.xml",
+      "sha256": "565c0e76d11ca8154352ab6558064f55c923f97f92094ea2a1a6ad38713735f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/storage/spotbugsXml.xml",
+      "sha256": "c955fa71f8a35513e0631b3ffda6e81a8283fcab50ca217bf31b7bd0e1afa581"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "76c37d3678a7eb2411556237782a371b47bb9c7f783a4f1a26999a0734ea1f3e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "cc78dc151743f523214f83537cfc8aa0831594187e2f814a798f30e0341d929f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/bootstrap/jacoco.xml",
+      "sha256": "aee2a0a689bcc5a0333581e1b6319f92a4c3657f13bac0b9b096cf596094f106"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/bootstrap/spotbugsXml.xml",
+      "sha256": "71a383d66ffbebd41145c74f064e615a0aa86918beaeb508519775d2794440e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG308-RED/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "bd1546af8bdf7298da491752be5d37069643aeed19037a7abd7f97e1e7689ef5"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+      "sha256": "e144ca502eeec8fdd0e6768114fd81609e05c38cdad9a5008d0ceb1ea449750c"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java",
+      "sha256": "089059194dfff5f59763c3d32d463eb5a6731ba6d3fabc8a82fb13382fcfbf1c"
+    }
+  ],
+  "log": {
+    "path": "/tmp/BUG308-RED.log",
+    "sha256": "cde6b747ed38a33a997f134c2efc07e2468c62032eac57078ad137d9ef724ce1"
+  },
+  "finished": "2026-09-28T07:04:55+09:00",
+  "formal": false,
+  "coverageNote": "Only actually generated report XML copied. No-clean cumulative exec is not formal isolated coverage.",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,BackupUnitTerminationTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check > /tmp/BUG308-RED.log 2>&1",
+  "exitCode": 1,
+  "sourceCommit": "c516695bf",
+  "dirty": true,
+  "batchCoverageStatic": "not-run after semantic assertion failure"
+}

@@ -24,8 +24,10 @@ final class ApplicationServiceUnitTest {
   void apiDependencyCredentialAndResourceContract() throws Exception {
     String unit = read("schubert-nk-api");
     common(unit, "api", "2048M", "60s", "512m", "1024m", "256m", "256m");
-    exact(unit, "After", "expiry-cleanup.service artemis.service postgresql.service");
-    exact(unit, "Requires", "expiry-cleanup.service artemis.service postgresql.service");
+    // SSC099/BUG307: SS341§2 independent complete Unit name, not SS342's old shorthand.
+    exact(unit, "After", "schubert-nk-expiry-cleanup.service artemis.service postgresql.service");
+    exact(
+        unit, "Requires", "schubert-nk-expiry-cleanup.service artemis.service postgresql.service");
     exact(unit, "SupplementaryGroups", "schubert schubert-read schubert-web");
     exact(unit, "ReadWritePaths", "/srv/schubert-nk/data/transfer");
     credentials(
@@ -100,7 +102,7 @@ final class ApplicationServiceUnitTest {
                   "WorkingDirectory=/opt/schubert-nk/current/" + service,
                   "WorkingDirectory=" + directory));
       for (String dependency :
-          List.of("expiry-cleanup", "artemis", "postgresql", "schubert-nk-api")) {
+          List.of("schubert-nk-expiry-cleanup", "artemis", "postgresql", "schubert-nk-api")) {
         Files.writeString(
             directory.resolve(dependency + ".service"),
             "[Service]\nType=oneshot\nExecStart=/bin/true\n");

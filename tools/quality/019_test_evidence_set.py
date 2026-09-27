@@ -1260,9 +1260,9 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 516}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 531}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500, 508):
+        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500, 508, 516):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -2354,6 +2354,10 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest", 1, ("bomProfile001IndependentLiteralClaims", "bomProfile002FixedKeysTypesAndOrder", "bomProfile003ByteUtf8AndDocumentBounds", "bomProfile004StrictNumbersAndBoundaryValues", "bomProfile005ArtifactLexicalAndNullContracts", "bomProfile006DependencyContractsAndCopies", "bomProfile007RequiredPayloadAndOrdering", "bomProfile008ManagementSelfHashAndAncestorConflicts", "bomProfile009RegisteredLibCompleteSetAndCommonBytes", "bomProfile010SharedVersionsAndRequiredRoles", "bomProfile011SqlNamesRanksAndSchemaVersion", "bomProfile012IntegerNullableAndColumnContracts", "bomProfile013DefensiveInputAndCollections", "bomProfile014CollectionCapsAndExactPositiveBoundaries", "bomProfile015AllMetadataScalarContracts", "bomProfile016IndependentConcurrentParsers")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest", 1, ("fullBom001IndependentLiteralAndAllOwners", "fullBom002ByteInventoryAndNullContracts", "fullBom003ReadonlyAndNamespace", "fullBom004AcquisitionNullAndIo", "fullBom005IndependentSqlVectorsAndEmbeddedAgreement", "fullBom006ThinLayoutAndSharedShadow", "fullBom007IndependentConcurrentScopes", "fullBom008EveryRetainedOwnerAndUntrustedDigest")))
         groups.append(("dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest", 1, ("rootBom001ClosedLoaderAndFreshBeforeEverySchema", "rootBom002NoPublicClaimsOrBooleanAuthority", "rootBom003EveryMetadataAndNullField", "rootBom004CloseOrChangedRootCannotMint", "rootBom005ActorAndSchemaFailureBeforeBegin", "rootBom006CurrentReloadAndInterruption", "rootBom007FixedOsVectors", "rootBom008IndependentConcurrentOwners")))
+        groups[60:60] = [
+            ("dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest", 1, ("mstop001FixedNamesAndIndependentTerminalVectors", "mstop002MissingDuplicateUnknownAndSeparators", "mstop003ByteBoundsNullAndOriginalOwnership", "mstop004FixedPlacementAndNonTerminalStates", "mstop005InvocationAndUnsignedTimestampDomains", "mstop006AbaAndAllFieldChangesStayUnmatched", "mstop007IndependentParallelAndNoAmbientAuthorization")),
+            ("dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest", 1, ("mterm001AllFixedColdAndPresentLeaves", "mterm002UnboundBusyAndNestedProcessRefused", "mterm003AbaCurrentNamespaceAndWrongActor", "mterm004EveryIoUnknownAndClosePosition", "mterm005NullContractsAndAllOwnedMaterials", "mterm006InterruptAndIndependentParallel", "mterm007NativeFixedQueriesAndMaterials", "mterm008NativeFactoryAndOrdinaryHostRefusal")),
+        ]
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2387,6 +2391,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest": "PT-OPS-DBCP",
                        "dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest": "PT-OPS-BREQ",
                        "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest": "PT-OPS-BTERM",
+                       "dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest": "PT-OPS-MSTOP",
+                       "dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest": "PT-OPS-MTERM",
                        "dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest": "PT-OPS-RBCR",
                        "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest": "PT-OPS-MDB",
                        "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest": "PT-OPS-BREQFILE",
@@ -2707,7 +2713,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(229, batch_ops)  # PG314: fixed root release admission adds eight PT.
+        self.assertEqual(244, batch_ops)  # PG317: fixed Unit snapshot/termination adds fifteen PT.
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

@@ -1,0 +1,76 @@
+{
+  "totals": {
+    "tests": 27,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "e1cfc5d093b709bcad0a14211c6bccdd6adf358d46cfa24f90b6145f094e1944"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/protocol/jacoco.xml",
+      "sha256": "9abfd7b46176746f43ae2e50b09d08152b27f3650f3ddd9096835b3bae495297"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/protocol/spotbugsXml.xml",
+      "sha256": "01e5e34d4f132bf8c0f29d489cae0750904232574191c6cd044138c886c444c9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/storage/jacoco.xml",
+      "sha256": "727f6808abb1809e7c61be28df9eb514483b49982725c30fd03fc63847864b27"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/storage/spotbugsXml.xml",
+      "sha256": "1ee5979bb823e7a7ab70845b0a9f74836754174bde9c555a687bda032fe201de"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "c61ab5ee1617998865b717aa88a4d88a14e6146a0b48dca2baf3e81e247c8463"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "190428e798b07e12a6c151e250cc5c80b779f321192816cb6cdfc17d64279893"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/bootstrap/jacoco.xml",
+      "sha256": "46f355e0f01550f5176af82ce310eb6fa84e2caeaaf4f3fbfd749110d04affa0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/bootstrap/spotbugsXml.xml",
+      "sha256": "ff6295439b111d76725111906bb6f65668d754e1599234b6ce5033b62e7c88eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "3666a6d38a11ab19633a23b6c1a4c2937b72a7bdcff366d57a4b089db5504e60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/api/jacoco.xml",
+      "sha256": "9f21d744d1510a509ab356df9454216e5e98b1e0efe459ed88a72806f0c7238d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/BUG307-GREEN/api/spotbugsXml.xml",
+      "sha256": "84accd3be2b101652009cb051852763df2ebc33f7ad5ad5bef0865f28385df5e"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "fa25eae261d09075145b418c72f84a6a231d9b635fde1cf914fcdf27bd260c08"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ApplicationServiceUnitTest.java",
+      "sha256": "8d3c0258c91933313c285b0a1ff6b0d570513d415e3e94dd4e1ac05582c5382c"
+    }
+  ],
+  "logHash": "b0e59e5edc8db90a50362a0835cf7b0cd4d77b5dd846d12b786eeb7cff1862c4",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api -am -Dtest=MessageCodecTest,ResourceScopeTest,ReleaseApprovalTest,ApplicationServiceUnitTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check > /tmp/BUG307-GREEN.log 2>&1",
+  "sourceCommit": "c516695bf",
+  "dirty": true,
+  "formal": false,
+  "coverage": "No-clean cumulative execution data, not formal isolated coverage",
+  "finished": "2026-09-28T07:01:02+09:00",
+  "exitCode": 0
+}

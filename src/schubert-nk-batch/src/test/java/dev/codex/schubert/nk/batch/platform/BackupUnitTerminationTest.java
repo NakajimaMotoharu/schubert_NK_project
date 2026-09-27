@@ -37,6 +37,7 @@ final class BackupUnitTerminationTest {
     int next = 10, position, faultPosition, bus, reads, placements, closes;
     long uid;
     boolean present, busEmpty = true, drift, placementDrift, inodeDrift, invalidFd, interrupt;
+    boolean emptyManagerGroup;
     String unit = UNIT, placement = PLACEMENT, badFs = "", badAclRole = "", missingRole = "";
     Throwable fault = new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     BiFunction<String, Map<String, Object>, Map<String, Object>> change = (r, m) -> m;
@@ -139,8 +140,14 @@ final class BackupUnitTerminationTest {
 
     public byte[] placement() {
       placements++;
+      // SSC100: present positive fixtures bind the manager query to the actual fixed leaf.
+      String observed =
+          present && !emptyManagerGroup && placement.equals(PLACEMENT)
+              ? PLACEMENT.replace(
+                  "ControlGroup=\n", "ControlGroup=/system.slice/schubert-nk-backup.service\n")
+              : placement;
       byte[] b =
-          (placementDrift && placements > 1 ? placement + "\n" : placement)
+          (placementDrift && placements > 1 ? observed + "\n" : observed)
               .getBytes(StandardCharsets.US_ASCII);
       materials.add(b);
       return b;
@@ -378,7 +385,10 @@ final class BackupUnitTerminationTest {
           }
 
           public byte[] placement() {
-            return PLACEMENT.getBytes(StandardCharsets.US_ASCII);
+            return PLACEMENT
+                .replace(
+                    "ControlGroup=\n", "ControlGroup=/system.slice/schubert-nk-backup.service\n")
+                .getBytes(StandardCharsets.US_ASCII);
           }
 
           public Optional<InspectorUnitSnapshot> quiescent() {
@@ -390,6 +400,12 @@ final class BackupUnitTerminationTest {
             .quiescent()
             .isEmpty());
     mismatch.released();
+    // BUG308/YKT241: manager's empty query has no binding to a still-present kernel tree.
+    var unbound = new Fixture();
+    unbound.present = true;
+    unbound.emptyManagerGroup = true;
+    rejected(unbound);
+    assertEquals(0, unbound.bus, "reject before querying a manager with no cgroup binding");
   }
 
   @Test

@@ -2,8 +2,8 @@
 # PG269/274, SSC-079, PT-OPS-SVC-001..004. Do not install until ApiProcessMain and full readiness are verified.
 [Unit]
 Description=Schubert NK API
-After=expiry-cleanup.service artemis.service postgresql.service
-Requires=expiry-cleanup.service artemis.service postgresql.service
+After=schubert-nk-expiry-cleanup.service artemis.service postgresql.service
+Requires=schubert-nk-expiry-cleanup.service artemis.service postgresql.service
 StartLimitIntervalSec=600
 StartLimitBurst=5
 

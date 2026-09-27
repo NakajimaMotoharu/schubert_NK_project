@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC100/PG317: 親全8対象・12field・真正host cgroup2全終端・停止方針/worker receiptとの分離はSS341冒頭を正とする。leaf存在時にmanager ControlGroup空の観測から全process不存在を推定しない。固定ControlGroupへのbindingと全nested queryを確認し、全保持能力のclose後だけ限定終端観測を返す。未配置実Unit/unknown client/全親未達ならapproval/permit/業務開始を成功へ補完しない。
+
 SSC093/PG310: root朝controller固定Unitはschubert-nk-morning-controller.service、RootStartupContext.MORNINGで自己由来を認証する。backupのcold/post-stop全終端はSS341 §5の固定Slice/Delegate/ControlGroup＋真正PID1 host view＋NOFOLLOW cgroup2 leaf不存在/存在時全processの厳密条件を適用する。親だけがM/A/原本/current INVALID/DB両step begin commitを所有し、nonsecret backup-requestのprepare/retireは全Unit終端の内側だけ。API/Web child catalogの追加・秘密増配・権限緩和・bus error→emptyは行わない。実接続とPTは018141以降、fullbackup/morning/許可発行未達を省略して受入しない。
 
 SSC093/native026配備検証: root専用前段が固定PID1 exe/rootの由来を検証するには、そのkernelアクセスが実際に許可されるroot Unit設定を必要とする。隔離VMでcapability全空はPID1 exe read拒否を実測、fixed self cgroup/proc/Invocationは一致した。root-only試験Unitのbounding CAP_SYS_PTRACEを最小候補として検証する（一般ptrace操作/任意PID/pathを実装しない）。これはAPI/Web/backup普通主体のzeroCapsを緩める変更ではなく、root前段から最終serviceへは従来どおり全capabilityをdropする。親backup生成に要る別root権限は実用途ごとに検証し、全capability許可を安全条件の代用としない。

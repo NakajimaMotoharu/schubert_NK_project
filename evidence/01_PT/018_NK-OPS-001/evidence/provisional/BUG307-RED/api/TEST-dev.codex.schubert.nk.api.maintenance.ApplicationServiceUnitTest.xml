@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest" time="0.368" tests="4" errors="0" skipped="0" failures="1">
+  <testcase name="apiDependencyCredentialAndResourceContract" classname="dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest" time="0.102">
+    <failure message="After ==&gt; expected: &lt;[schubert-nk-expiry-cleanup.service artemis.service postgresql.service]&gt; but was: &lt;[expiry-cleanup.service artemis.service postgresql.service]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: After ==&gt; expected: &lt;[schubert-nk-expiry-cleanup.service artemis.service postgresql.service]&gt; but was: &lt;[expiry-cleanup.service artemis.service postgresql.service]&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.exact(ApplicationServiceUnitTest.java:145)
+	at dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.apiDependencyCredentialAndResourceContract(ApplicationServiceUnitTest.java:28)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+</failure>
+  </testcase>
+  <testcase name="webDependencyCredentialAndResourceContract" classname="dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest" time="0.009" />
+  <testcase name="noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation" classname="dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest" time="0.006" />
+  <testcase name="renderedSyntaxIsAcceptedWithoutStartingService" classname="dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest" time="0.204" />
+</testsuite>

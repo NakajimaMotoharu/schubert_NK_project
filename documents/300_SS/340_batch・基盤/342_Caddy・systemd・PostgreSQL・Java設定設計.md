@@ -89,7 +89,7 @@ https://<GLOBAL_IP>:55160 {
 | `schubert-nk-backup` | PostgreSQL | PostgreSQL | 失敗はmorning続行 |
 | `schubert-nk-cleanup` | backup | PostgreSQL | Backup成否はDB rowで分岐 |
 | `artemis` | cleanup | cleanup | Cleanup safety failureで起動不可 |
-| `expiry-cleanup` | Artemis | Artemis | API Consumer前に実行 |
+| `schubert-nk-expiry-cleanup.service` | Artemis | Artemis | API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない |
 | `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL, expiry | readiness poll後にWeb |
 | `schubert-nk-web` | API, Artemis, PostgreSQL | API, Artemis, PostgreSQL | technical DBが必要 |
 | `caddy` | Web | Web | Packageの自由先行起動をdisable |
