@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.*;
@@ -164,6 +165,16 @@ final class MorningDatabaseSessionTest {
                     default -> throw new AssertionError(m);
                   };
                 });
+          },
+          connection -> {
+            // Explicit synthetic schema port; this fixture does NOT mint root release authority.
+            try {
+              event("schema");
+            } catch (SQLException | IOException | RuntimeException | Error failure) {
+              throw failure;
+            } catch (Throwable failure) {
+              throw new AssertionError(failure);
+            }
           });
     }
 
@@ -250,6 +261,9 @@ final class MorningDatabaseSessionTest {
 
   @Test
   void fixedUrlRootConstructorAndNullContracts() throws Exception {
+    assertThrows(
+        NullPointerException.class,
+        () -> new MorningDatabaseSession(URL, () -> {}, (url, properties) -> null, null));
     for (String url :
         List.of(
             "",
@@ -273,6 +287,8 @@ final class MorningDatabaseSessionTest {
             RootStartupContext.Service.MORNING, "PUBLIC", "PUBLIC", 2, 1, 1, "PUBLIC");
     assertThrows(NullPointerException.class, () -> new MorningDatabaseSession(URL, null, snapshot));
     assertThrows(NullPointerException.class, () -> new MorningDatabaseSession(URL, context, null));
+    assertThrows(
+        NullPointerException.class, () -> new MorningDatabaseSession(URL, context, snapshot, null));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -506,6 +522,26 @@ final class MorningDatabaseSessionTest {
 
   @Test
   void interruptionAndForeignThreadCannotUseBorrowedSession() throws Exception {
+    for (Throwable failure :
+        List.of(
+            new SQLException("PRIVATE"),
+            new IOException("PRIVATE"),
+            new IllegalStateException("PRIVATE"),
+            new AssertionError("PRIVATE"))) {
+      var blocked = new Probe();
+      blocked.faults.put("schema", failure);
+      Throwable actual =
+          assertThrows(
+              Throwable.class,
+              () -> blocked.subject().execute(credential(), s -> s.beginBackup(RUN, NOW, false)));
+      if (failure instanceof RuntimeException || failure instanceof Error)
+        assertSame(failure, actual);
+      else assertInstanceOf(IOException.class, actual);
+      assertEquals(1, blocked.counts.get("schema"));
+      assertTrue(blocked.events.stream().noneMatch(e -> e.startsWith("HISTORY.")));
+      assertTrue(blocked.events.stream().noneMatch(e -> e.startsWith("connection.commit")));
+      blocked.released();
+    }
     var p = new Probe();
     Thread.currentThread().interrupt();
     try {
@@ -556,7 +592,36 @@ final class MorningDatabaseSessionTest {
 
   @Test
   void actualBothBackupBeginsAreCommittedTogether() throws Exception {
-    var subject = new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection);
+    var unverified = new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection);
+    var absent =
+        new BatchRun(
+            UUID.fromString("31400000-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(1728000));
+    assertThrows(
+        IOException.class,
+        () ->
+            unverified.execute(
+                credential(),
+                session -> session.beginBackup(absent, NOW.plusSeconds(1728000), false)));
+    try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement = connection.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select count(*) from schubert.batch_runs where run_id='31400000-2222-4333-8444-555555555555'")) {
+      assertTrue(rows.next());
+      assertEquals(0, rows.getInt(1));
+      assertFalse(rows.next());
+    }
+    var schemaCalls = new AtomicInteger();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            DriverManager::getConnection,
+            connection -> {
+              assertFalse(connection.isClosed());
+              schemaCalls.incrementAndGet();
+            });
     var begins =
         subject.execute(
             credential(),
@@ -569,6 +634,7 @@ final class MorningDatabaseSessionTest {
     assertEquals(RUN, begins.database().run());
     assertEquals(RUN, begins.configuration().run());
     assertNotEquals(begins.database().id(), begins.configuration().id());
+    assertEquals(1, schemaCalls.get());
     try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var s = c.createStatement();
         var rows =
@@ -610,7 +676,8 @@ final class MorningDatabaseSessionTest {
                         throw e.getCause();
                       }
                     });
-              });
+              },
+              connection -> assertFalse(connection.isClosed()));
       assertThrows(
           IOException.class,
           () ->

@@ -235,8 +235,12 @@ DEPLOYMENT_GROUPS += (
     ("dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest", 1, ("approvalRead001FixedLiteralAndClosedOwners", "approvalRead002NullAndNoFallback", "approvalRead003AllMetadataContracts", "approvalRead004EveryIoFaultAndCompoundIdentity", "approvalRead005ReadProgressAndCanonicalMaterial", "approvalRead006NamespaceAndHeldInodeChanges", "approvalRead007InterruptRootAndParallel", "approvalRead008NativePortAndRealContextRefusal")),
     ("dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest", 1, ("sign001IndependentRfcVectors", "sign002MessageSignatureAndWrongKey", "sign003DerAndNullContracts", "sign004MaterialBoundaries", "sign005SnapshotAndErasedOwnedBuffers", "sign006KnownCryptoFailureIsRedacted", "sign007UnknownFailureIdentityAndErasure", "sign008ConcurrentNativeProviderAndMalformedPoint")),
     ("dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest", 1, ("bomProfile001IndependentLiteralClaims", "bomProfile002FixedKeysTypesAndOrder", "bomProfile003ByteUtf8AndDocumentBounds", "bomProfile004StrictNumbersAndBoundaryValues", "bomProfile005ArtifactLexicalAndNullContracts", "bomProfile006DependencyContractsAndCopies", "bomProfile007RequiredPayloadAndOrdering", "bomProfile008ManagementSelfHashAndAncestorConflicts", "bomProfile009RegisteredLibCompleteSetAndCommonBytes", "bomProfile010SharedVersionsAndRequiredRoles", "bomProfile011SqlNamesRanksAndSchemaVersion", "bomProfile012IntegerNullableAndColumnContracts", "bomProfile013DefensiveInputAndCollections", "bomProfile014CollectionCapsAndExactPositiveBoundaries", "bomProfile015AllMetadataScalarContracts", "bomProfile016IndependentConcurrentParsers")),
+    ("dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest", 1, ("fullBom001IndependentLiteralAndAllOwners", "fullBom002ByteInventoryAndNullContracts", "fullBom003ReadonlyAndNamespace", "fullBom004AcquisitionNullAndIo", "fullBom005IndependentSqlVectorsAndEmbeddedAgreement", "fullBom006ThinLayoutAndSharedShadow", "fullBom007IndependentConcurrentScopes", "fullBom008EveryRetainedOwnerAndUntrustedDigest")),
+    ("dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest", 1, ("rootBom001ClosedLoaderAndFreshBeforeEverySchema", "rootBom002NoPublicClaimsOrBooleanAuthority", "rootBom003EveryMetadataAndNullField", "rootBom004CloseOrChangedRootCannotMint", "rootBom005ActorAndSchemaFailureBeforeBegin", "rootBom006CurrentReloadAndInterruption", "rootBom007FixedOsVectors", "rootBom008IndependentConcurrentOwners")),
 )
 RUNTIME_SUBJECTS = (
+    ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification"),
+    ("batch", "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission"),
     ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleaseApproval"),
     ("batch", "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader"),
     ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier"),
@@ -450,6 +454,8 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest": "PT-OPS-APPROVALREAD",
                    "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest": "PT-OPS-SIGN",
                    "dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest": "PT-OPS-BOMPROFILE",
+                   "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest": "PT-OPS-FULLBOM",
+                   "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest": "PT-OPS-ROOTBOM",
                    "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                    "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",

@@ -52,16 +52,32 @@ public final class StartupReleaseManifest {
 
   /** Actual file agreement only, not root approval authority or a complete startup permit. */
   public record Contents(
-      String version, String sha256, List<SchemaHistoryAdmission.Row> migrations) {
+      String version,
+      String sha256,
+      List<SchemaHistoryAdmission.Row> migrations,
+      Map<String, String> build,
+      Map<String, String> platform) {
     public Contents {
       Objects.requireNonNull(version, "release version");
       Objects.requireNonNull(sha256, "manifest digest");
       migrations = List.copyOf(migrations);
+      build = Map.copyOf(build);
+      platform = Map.copyOf(platform);
     }
 
     @Override
     public List<SchemaHistoryAdmission.Row> migrations() {
       return List.copyOf(migrations);
+    }
+
+    @Override
+    public Map<String, String> build() {
+      return Map.copyOf(build);
+    }
+
+    @Override
+    public Map<String, String> platform() {
+      return Map.copyOf(platform);
     }
   }
 

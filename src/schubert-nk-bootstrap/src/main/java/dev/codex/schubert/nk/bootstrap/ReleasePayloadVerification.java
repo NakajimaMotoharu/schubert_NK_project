@@ -76,7 +76,12 @@ final class ReleasePayloadVerification {
           walk(release, "", tree, expected, original, sumBytes, inventory);
           require(original.equals(checked(held, 0100640)));
           agreement(inventory, expected);
-          return new StartupReleaseManifest.Contents(version, value.hash(), inventory.migrations());
+          return new StartupReleaseManifest.Contents(
+              version,
+              value.hash(),
+              inventory.migrations(),
+              inventory.build(),
+              inventory.platform());
         });
   }
 

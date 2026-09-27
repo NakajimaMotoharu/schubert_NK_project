@@ -1260,9 +1260,9 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 508}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 516}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500):
+        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421, 500, 508):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -2352,6 +2352,8 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest", 1, ("approvalRead001FixedLiteralAndClosedOwners", "approvalRead002NullAndNoFallback", "approvalRead003AllMetadataContracts", "approvalRead004EveryIoFaultAndCompoundIdentity", "approvalRead005ReadProgressAndCanonicalMaterial", "approvalRead006NamespaceAndHeldInodeChanges", "approvalRead007InterruptRootAndParallel", "approvalRead008NativePortAndRealContextRefusal")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest", 1, ("sign001IndependentRfcVectors", "sign002MessageSignatureAndWrongKey", "sign003DerAndNullContracts", "sign004MaterialBoundaries", "sign005SnapshotAndErasedOwnedBuffers", "sign006KnownCryptoFailureIsRedacted", "sign007UnknownFailureIdentityAndErasure", "sign008ConcurrentNativeProviderAndMalformedPoint")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest", 1, ("bomProfile001IndependentLiteralClaims", "bomProfile002FixedKeysTypesAndOrder", "bomProfile003ByteUtf8AndDocumentBounds", "bomProfile004StrictNumbersAndBoundaryValues", "bomProfile005ArtifactLexicalAndNullContracts", "bomProfile006DependencyContractsAndCopies", "bomProfile007RequiredPayloadAndOrdering", "bomProfile008ManagementSelfHashAndAncestorConflicts", "bomProfile009RegisteredLibCompleteSetAndCommonBytes", "bomProfile010SharedVersionsAndRequiredRoles", "bomProfile011SqlNamesRanksAndSchemaVersion", "bomProfile012IntegerNullableAndColumnContracts", "bomProfile013DefensiveInputAndCollections", "bomProfile014CollectionCapsAndExactPositiveBoundaries", "bomProfile015AllMetadataScalarContracts", "bomProfile016IndependentConcurrentParsers")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest", 1, ("fullBom001IndependentLiteralAndAllOwners", "fullBom002ByteInventoryAndNullContracts", "fullBom003ReadonlyAndNamespace", "fullBom004AcquisitionNullAndIo", "fullBom005IndependentSqlVectorsAndEmbeddedAgreement", "fullBom006ThinLayoutAndSharedShadow", "fullBom007IndependentConcurrentScopes", "fullBom008EveryRetainedOwnerAndUntrustedDigest")))
+        groups.append(("dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest", 1, ("rootBom001ClosedLoaderAndFreshBeforeEverySchema", "rootBom002NoPublicClaimsOrBooleanAuthority", "rootBom003EveryMetadataAndNullField", "rootBom004CloseOrChangedRootCannotMint", "rootBom005ActorAndSchemaFailureBeforeBegin", "rootBom006CurrentReloadAndInterruption", "rootBom007FixedOsVectors", "rootBom008IndependentConcurrentOwners")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2436,6 +2438,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest": "PT-OPS-APPROVALREAD",
                        "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest": "PT-OPS-SIGN",
                        "dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest": "PT-OPS-BOMPROFILE",
+                       "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest": "PT-OPS-FULLBOM",
+                       "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest": "PT-OPS-ROOTBOM",
                        "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                        "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                        "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
@@ -2703,7 +2707,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(221, batch_ops)  # PG313: fixed root approval reader adds eight PT.
+        self.assertEqual(229, batch_ops)  # PG314: fixed root release admission adds eight PT.
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)
@@ -2796,7 +2800,7 @@ class EvidenceSetTest(unittest.TestCase):
             "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "bootstrap.SchemaHistoryAdmission", "bootstrap.JdbcAdmissionFailures", "file.ServiceProcessResources"}
         self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main}
                          | {"dev.codex.schubert.nk.bootstrap." + s for s in
-                            ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext", "StartupReleaseManifest", "ServiceStartupAdmission", "ReleaseApproval", "ReleaseSignatureVerifier", "ReleaseInventory")},
+                            ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext", "StartupReleaseManifest", "ServiceStartupAdmission", "ReleaseApproval", "ReleaseSignatureVerifier", "ReleaseInventory", "ReleasePayloadVerification")},
                          set(bootstrap_ownership.BOOTSTRAP_MAIN))
         for name in bootstrap_ownership.BOOTSTRAP_MAIN:
             source = bootstrap_ownership.source(repo, name)

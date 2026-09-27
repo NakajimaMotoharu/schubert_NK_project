@@ -18,6 +18,7 @@ BOOTSTRAP_MAIN = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "dev.codex.schubert.nk.bootstrap.ReleaseApproval",
     "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier",
     "dev.codex.schubert.nk.bootstrap.ReleaseInventory",
+    "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification",
     "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission",))
 BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "maintenance.InspectorAesCredentialTest", "maintenance.InspectorDbCredentialTest",
@@ -33,6 +34,7 @@ BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
     "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
     "dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest",
+    "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest",
     "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest",))
 
 

@@ -186,6 +186,12 @@ final class ReleasePayloadVerificationTest {
     assertEquals(VERSION, result.version());
     assertEquals(f.approval.manifestSha256(), result.sha256());
     assertEquals(2, result.migrations().size());
+    assertEquals("25.0.4", result.build().get("jdkVersion"));
+    assertEquals("PUBLIC VENDOR", result.build().get("jdkVendor"));
+    assertEquals("ubuntu", result.platform().get("osId"));
+    assertEquals("26.04", result.platform().get("osVersion"));
+    assertThrows(UnsupportedOperationException.class, () -> result.build().clear());
+    assertThrows(UnsupportedOperationException.class, () -> result.platform().clear());
     assertEquals(-690524359, result.migrations().get(1).checksum());
     assertThrows(UnsupportedOperationException.class, () -> result.migrations().clear());
     f.released();

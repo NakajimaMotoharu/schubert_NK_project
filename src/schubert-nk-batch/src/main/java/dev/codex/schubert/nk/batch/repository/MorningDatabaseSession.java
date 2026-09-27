@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
+import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
 import java.sql.*;
@@ -12,9 +13,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Dedicated root morning session; no pool/role fallback/arbitrary SQL/connection export. Caller
- * owns continuous M, original run, A and worker lifetimes; schema/BOM admission remains a separate
- * mandatory assembly gate. NK-BAT-001/OPS009/DAT009/UI251/SS341/3436.15/SSC094/PG311;
- * PT-OPS-MDB001..008. Commit ambiguity never returns usable backup handles.
+ * owns continuous M, original run, A and worker lifetimes. Backup begin requires the opaque fixed
+ * root release admission and rechecks current BOM/platform/schema before any begin SQL. The legacy
+ * constructor supports original-reference checks only and refuses backup begin. NK-BAT-001;
+ * OPS009/DAT009/UI251/SS341/3436.15/SSC094095096/PG311314; PT-OPS-MDB001..008. Commit ambiguity
+ * never returns usable backup handles.
  */
 @NullMarked
 public final class MorningDatabaseSession {
@@ -31,6 +34,11 @@ public final class MorningDatabaseSession {
   @FunctionalInterface
   interface Connect {
     Connection open(String url, Properties properties) throws SQLException;
+  }
+
+  @FunctionalInterface
+  interface Schema {
+    void verify(Connection admitted) throws SQLException, IOException;
   }
 
   @FunctionalInterface
@@ -59,10 +67,29 @@ public final class MorningDatabaseSession {
   private final String url;
   private final Gate gate;
   private final Connect connect;
+  private final Schema schema;
 
   public MorningDatabaseSession(
       String url, RootStartupContext context, RootStartupContext.Snapshot expected) {
     this(url, rootGate(context, expected), DriverManager::getConnection);
+  }
+
+  public MorningDatabaseSession(
+      String url,
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      RootReleaseAdmission release) {
+    this(
+        url,
+        rootGate(context, expected),
+        DriverManager::getConnection,
+        releaseGate(release, expected));
+  }
+
+  private static Schema releaseGate(
+      RootReleaseAdmission release, RootStartupContext.Snapshot expected) {
+    Objects.requireNonNull(release, "root release admission");
+    return connection -> release.verifyMorning(connection, expected);
   }
 
   private static Gate rootGate(RootStartupContext context, RootStartupContext.Snapshot expected) {
@@ -74,12 +101,23 @@ public final class MorningDatabaseSession {
   }
 
   MorningDatabaseSession(String url, Gate gate, Connect connect) {
+    this(
+        url,
+        gate,
+        connect,
+        connection -> {
+          throw unavailable();
+        });
+  }
+
+  MorningDatabaseSession(String url, Gate gate, Connect connect, Schema schema) {
     var match = URL.matcher(Objects.requireNonNull(url, "batch database URL"));
     if (!match.matches() || Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535)
       throw new IllegalArgumentException("batch database URL refused");
     this.url = url;
     this.gate = Objects.requireNonNull(gate, "root gate");
     this.connect = Objects.requireNonNull(connect, "fixed batch connector");
+    this.schema = Objects.requireNonNull(schema, "mandatory release/schema admission");
   }
 
   /** Consumes the password owner even on pre-connect rejection. Callback is synchronous only. */
@@ -260,6 +298,8 @@ public final class MorningDatabaseSession {
       Objects.requireNonNull(now, "backup begin time");
       guard();
       try {
+        schema.verify(connection); // BEFORE repository construction or either backup begin.
+        guard();
         var repository = new BatchRunRepository(connection);
         var database = repository.begin(run, BatchStep.BACKUP_DB, now, recoverAbandoned);
         var configuration = repository.begin(run, BatchStep.BACKUP_CONFIG, now, recoverAbandoned);
