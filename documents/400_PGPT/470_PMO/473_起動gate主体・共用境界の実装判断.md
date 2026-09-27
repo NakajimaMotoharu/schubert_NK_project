@@ -1,5 +1,11 @@
 # 起動gate主体・共用境界の実装判断（SSC084）
 
+## PG291着手前：SSC086の同PID privilege phase
+
+VM試験007/008で同OFD/readonly/CLOEXEC/固定group/zeroCapsを実測したが、shell試作品はProductionへ移さない。Java直接root前段→native execve(setpriv固定引数)→Java固定service後段を選び、まずStorage native exec境界と独立argv/env oracle・実外部execをPG/PT並行で作る。次にA/sealed proof/現許可/全root/Ops/schemaを同経路へ追加する。未完成部分は拒否のまま、Unitは受入前に変更しない。
+
+Astra/high限定reviewの採用条件: Mは親全体、Aは起動観測からreadyまで。同PID execでSCM_RIGHTS/ACKは不要。親はA取得後に固定全対象のInvocation/cgroup終端を再確認し、A内で旧許可失効後だけ変更、必要工程後だけ新許可を確定する。旧Expiry成功だけを保守終了としない。全設定/release/root/Broker/鍵変更もAを守る。起動はA取得前に業務資源0、A取得後はread-only。!はSupplementaryGroupsも解除することと、readonly Aはkernel上LOCK_UN可能なtrusted能力であることを明示する。これらはSSC086としてcodeより先にSS正本へ反映済み。RD/UI公開挙動/秘密配布/最終service権限は不変更。
+
 2026-09-27。471の同一受入R1～R3を阻止する内部依存だけを対象とする。Astra/high補助1名の読取reviewを親がSS/code実物で照合。新しい受入分母や進捗加点は作らない。
 
 1. SS321 §10/342 §4の管理readinessには専用Opsが必要だが、SS343/Unit/catalogはAPI/Web各5秘密だけ。普通serviceへmq-opsを加える方式は禁止。SS341のroot起動順controller内で独立管理sessionを所有する。
