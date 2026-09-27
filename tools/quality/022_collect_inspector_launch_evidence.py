@@ -211,6 +211,7 @@ DEPLOYMENT_GROUPS += (
 )
 DEPLOYMENT_GROUPS += (
     ("dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest", 1, ("fixedCommandAndEnvironment", "inputAndNullContracts", "statusDeadlineAndCancellation", "everyStreamFailureAndCompoundOwnership", "encryptedPipelineIsNotPlaintextArtifact", "actorGatesAndDatabaseListFailure", "concurrentIndependentScopes", "actualNativePublicTarAndBuilder")),
+    ("dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest", 1, ("literalAndOwnedCopy", "boundedSource", "fixedNameMissingAndNoFallback", "everyIoFailureClears", "namespaceAndSecurityFailures", "symlinkAndHardLinkRefused", "closeFailureAndNullContracts", "independentConcurrentCopies")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitFilesTest", 1, ("originalsAndPublicationOrder", "missingCorruptAndWrongBindings", "metadataAndSecurityMatrix", "everyOwnedIoFaultAndUncertainPublication", "inodeChangesAndNoRepair", "interruptionNullAndUnknownIdentity", "concurrentSinglePublication", "nativeIoAndBorrowedLifetime")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")),
     ("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")),
@@ -365,6 +366,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest": "PT-OPS-PERMITREC",
                    "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest": "PT-OPS-PERMITFILE",
                    "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest": "PT-OPS-ARCHPROC",
+                   "dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest": "PT-OPS-BACKCRED",
                    "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                    "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                    "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",

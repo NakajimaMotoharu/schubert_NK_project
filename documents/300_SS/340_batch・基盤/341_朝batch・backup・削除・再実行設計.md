@@ -105,6 +105,8 @@ SSC068/PG186: step2の低位0700/new-only保持child能力は333§7.6。既存07
 5. Exit 0、file >0 byte、`pg_restore --list`成功、dump SHA-256を検証。
 6. DB/app/schema/OS/JDK/PG/Artemis version、開始/終了、file size/hashを`MANIFEST.json`へ記録。Secretなし。
 
+SSC090/PG305: systemd runtime credential `backup-pgpass`は固定名で既存保持inode/ACL readerを使い、最大65536byteのcaller-owned raw byteとして読む。配布root/fileの前後属性・同device・closeを検証する。libpqはgroup/world permission bitのあるpassword fileを無視するため、root ACL0440材料を直接PGPASSFILEへ渡さない。専用backup Unitのprivate tmpfs0700内にCREATE_NEW0600の専用コピーを生成し、borrowed original FDを子に保持して渡す。所有byteは全終了で消去し、全子終端確認後のみcopy消去・unlink・directory sync。不確定終端/closeは非成功・保全。password実値をenv/argv/logへ出さず、backup-pgpassをAPI/Web固定5材料へ追加しない。専用OS/DB主体・実archive/manifest/DB両step/世代管理の既定gateは維持する。
+
 ### 6.2 Config・credential backup
 
 - `/etc/schubert-nk`の非秘密configはroot所有のtar、path traversal/symlinkを入れず`config.tar`へ固定。

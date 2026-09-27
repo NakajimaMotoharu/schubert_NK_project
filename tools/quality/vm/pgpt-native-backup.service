@@ -1,0 +1,23 @@
+# PT-OPS-NATIVE-022; isolated probe only, not a Production morning/backup success gate.
+[Unit]
+Description=PGPT dedicated backup database probe
+After=postgresql.service
+[Service]
+Type=oneshot
+User=schubert-backup
+Group=schubert-backup
+LoadCredential=backup-pgpass:/etc/schubert-nk/credentials/backup-pgpass
+RuntimeDirectory=pgpt-backup-305
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+ExecStart=/opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp /opt/pgpt-native/PG305/classes:/opt/pgpt-native/PG304/classes:/opt/pgpt-native/classes:/opt/pgpt-native/lib/* NativeBackupDatabaseProbe
+TimeoutStartSec=30min
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/schubert-nk/backup
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

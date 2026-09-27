@@ -1,0 +1,139 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "predecessor_commit": "7de350501ec46186c659fe3cce1724e109487254",
+  "branch": "dev-foundation",
+  "finished": "2026-09-27T22:41:03+09:00",
+  "command": "Bootstrap test -Dtest=BackupCredentialLoaderTest,InspectorCredentialLoaderTest,InspectorDatabaseCredentialLoaderTest jacoco:report spotbugs:check",
+  "exit_code": 0,
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "jacoco": "0.8.15",
+  "spotbugs": "4.10.4.0",
+  "ssc": [
+    "SSC-090"
+  ],
+  "bugs": [],
+  "source_hashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": "0589ff4fd85c0eb07b5909583c8d6cad2087203ac62ce1b2b62dcc1a8e3c38d7",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/BackupCredentialLoaderTest.java": "7f9beee00339a2429368e6763ac29a0a054e78b19f1814fafdb3579472404a0a",
+    "tools/quality/vm/NativeBackupDatabaseProbe.java": "b4efe008731dffde5402ba8a84a03f1f72353d80cdf36144314f1694c1a361af",
+    "tools/quality/vm/ProvisionBackupDatabase.java": "30563b8d5d5f23113d0ba919fbc218c83c41cf3022ecd1e160d7fff3106e0aef",
+    "tools/quality/vm/pgpt-native-backup.service": "767b7ca9dc701826f970cf744d9e6ca24187b9b7b32e3d9c69a14228e1e721f9",
+    "tools/quality/bootstrap_ownership.py": "496d7616ba6533d0cd9e4e097f48b0367871883bb3fffb55bf0716c4f866660a",
+    "tools/quality/009_collect_media_evidence.py": "b9f2712ce00e2ab2f4bd5aa0645dc4bfd9bd1a35c8d38dc008dae6540b63d6d6",
+    "tools/quality/019_test_evidence_set.py": "6a0cfc69dbf4014694ad1b7cb8b8d1571258a4100d6df3cd761ea2a86136988a",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "16dc2622b7df0aef73f2a5942ec682fc6156c20a7abdbf2678aaef464a215349"
+  },
+  "suites": {
+    "BackupCredentialLoaderTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "55677b5115fd93e77ef3cfbc69a0dc220f2953c603fd39f016238475219d474b"
+    },
+    "InspectorCredentialLoaderTest": {
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "73d0447c1c7d0263609271c3c25dcde81e810cd34f6598706da7fb51a7167692"
+    },
+    "InspectorDatabaseCredentialLoaderTest": {
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "e644abaf3585578632624dac1adbd5a51887074003fd92cbb0c0875e6423cac9"
+    }
+  },
+  "class_counters": {
+    "INSTRUCTION": {
+      "missed": "60",
+      "covered": "561"
+    },
+    "BRANCH": {
+      "missed": "4",
+      "covered": "56"
+    },
+    "LINE": {
+      "missed": "12",
+      "covered": "102"
+    },
+    "COMPLEXITY": {
+      "missed": "3",
+      "covered": "41"
+    },
+    "METHOD": {
+      "missed": "1",
+      "covered": "13"
+    },
+    "CLASS": {
+      "missed": "0",
+      "covered": "1"
+    }
+  },
+  "new_method_counters": {
+    "INSTRUCTION": {
+      "missed": "0",
+      "covered": "43"
+    },
+    "LINE": {
+      "missed": "0",
+      "covered": "10"
+    },
+    "COMPLEXITY": {
+      "missed": "0",
+      "covered": "1"
+    },
+    "METHOD": {
+      "missed": "0",
+      "covered": "1"
+    }
+  },
+  "logs": {
+    "PG305-backup-credential-pt.log": {
+      "sha256": "294d17dd891f059ae9bcbe41774dfa976328fac8ba161b97279dc08b9cd8f596",
+      "size": 6056
+    },
+    "PG305-backup-credential-pt-2.log": {
+      "sha256": "54c27f6cb49dfee49651b0262641bc2370ef08d137ffd9ccc84267045119e101",
+      "size": 4503
+    },
+    "PG305-format.log": {
+      "sha256": "74f3fd7dbbbe919bb52685877e4aada88a7c09845b384a650c4397a90769079b",
+      "size": 1693
+    },
+    "PG305-bootstrap-artifact.log": {
+      "sha256": "f18919f75a0fa4067b13d43e6012f5c9faacf83815a4a4289f81e14889c1a34e",
+      "size": 1999
+    },
+    "PG305-canary.log": {
+      "sha256": "a46f5fca5f6981c6ed67d40f45ff499ecc392fb818a000910b7a1953d1f449f6",
+      "size": 1049
+    },
+    "PG305-canary-2.log": {
+      "sha256": "08c57732d5b2d35880438ff7a77ff09aef1adc0d5d5e989cbaf7695656ee96ac",
+      "size": 205
+    }
+  },
+  "native": {
+    "id": "PT-OPS-NATIVE-022",
+    "sha256": "88a7c18c13c04dad5aaf30cda3bc196bf4fd0e7c12c077ace8353e41a6faccc8",
+    "result": "PASS_COMPONENT_ONLY",
+    "uid": 992,
+    "database_role": "schubert_backup",
+    "dump_copied_to_git_or_host": false,
+    "full_backup": false,
+    "full_gate": false
+  },
+  "not_certified": [
+    "Production copy owner",
+    "full backup controller and total 30min",
+    "manifest and atomic publication and DB steps",
+    "7 generation retention",
+    "R2 business process",
+    "R3 real NK characterization",
+    "whole class/module coverage"
+  ]
+}

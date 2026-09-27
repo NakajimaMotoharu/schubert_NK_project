@@ -88,6 +88,27 @@ public final class InspectorCredentialLoader {
     }
   }
 
+  /**
+   * Fixed backup-only .pgpass source; caller owns/clears raw bytes, never a Web/API catalog entry.
+   * NK-OPS-001/BAK/OPS009/UI251/SS341 6.1/343 6.6/SSC090/PG305/BACKCRED001..008. Caller
+   * authenticates the dedicated Unit/root and stages private tmpfs0600 for libpq.
+   */
+  public byte[] readBackupPgpass() throws InspectorCredentialException {
+    byte[] buffer = new byte[65537];
+    try {
+      Snapshot before = root.atDirectory(this::directory);
+      int length =
+          readOptional("backup-pgpass", false, buffer, true, before.metadata().device())
+              .orElseThrow();
+      require(before.equals(root.atDirectory(this::directory)));
+      return Arrays.copyOf(buffer, length);
+    } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      throw new InspectorCredentialException();
+    } finally {
+      Arrays.fill(buffer, (byte) 0);
+    }
+  }
+
   /** Fixed Web/API ID only; returned raw bytes are exclusively caller-owned and must be cleared. */
   byte[] readService(ServiceCredentialId credential) throws InspectorCredentialException {
     Objects.requireNonNull(credential, "service credential ID");

@@ -270,6 +270,8 @@ InspectorDatabaseConnectionsはloaderから受けたmaterialの独立copyだけ�
 
 返却前にautoCommit=true/readOnly=false、current_user/session_userが両方専用role、current_databaseが設定DBと一致、回復中でないことを固定SELECTで検証する。違反/SQL故障/検証用資源close故障は接続も閉じて固定SQLExceptionだけを返す（原因/suppressed/credential/URL/SQL値を公開しない）。正常返却connectionはcaller所有、provider closeと競合するopenはprivate lockで直列化、既返却connectionを勝手に閉じない。DB role権限と保持・backupは既存SQL/owned cleanupが別途再検証する。専用process main/OS lock/実backup検査/unit起動の成功をこの接続部品だけで保証しない。
 
+SSC090/PG305 backup追補: `backup-pgpass`はbackup固定UnitだけへLoadCredentialし、API/Web5材料やInspector DB材料を流用しない。共用InspectorCredentialLoader.readBackupPgpassは固定名、1～65536byte、systemd root/file ACL・同device・前後属性・closeを検査したcaller-owned raw byteを返す。Root ACL0440 sourceはlibpqで直接使用不可であるため、専用backup UIDのprivate tmpfs0700へCREATE_NEW0600 copyを作り、所有byteを消去してから保持FD経由でPGPASSFILEに渡す。全子終端後だけcopy消去/unlink/dirsync、不確定終端は保全・非成功。tmpfs/mode/source identity/固定Unit・role・全backup controllerの実接続を別gateとし、source読取単体をbackup成功にしない。
+
 ### 6.7 専用検査の操作内resource寿命（SSC-049、PG-D-143）
 
 InspectorSettingsは非秘密のcredential directory path、§6.6 canonical JDBC URL、読取可能fingerprint version集合の不変snapshotを持つ。Pathは絶対・正規化済み・rootそのもの以外、URLは既存専用providerと同じ検証、versionは§6.5の非空集合/1～16byte形式。null/空/未知値はIO前に拒否し、toStringは設定実値を表示しない。既存InspectorProcess/providerの同じ検証をこの設定契約へ共有し、判定を複製しない。ここはenv/file parserではなく、後続launcherが渡す値の型境界である。
