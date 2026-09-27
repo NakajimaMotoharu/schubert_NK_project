@@ -1,0 +1,110 @@
+{
+  "totals": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/storage/jacoco.xml",
+      "sha256": "fcbe065898af1bc5fdd8c715968093d5390e201447a6775b0690ac1e39c227ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/storage/spotbugsXml.xml",
+      "sha256": "316243d2ead0774084f098af3e7d3af455e9663c021337badc4070b5c1909ec9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "787246bab8eafbad52360bc069dd8f8c02d79e7c90e004130b31ea563e27ab98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "6706f9861e28d4df9ffc189ce874ee50ac86e36a41317097c49c13916b5f9215"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/bootstrap/jacoco.xml",
+      "sha256": "8f70b893e86d436c1c28939eb45f1e5dd10a004dbd3bae70689fed7147425afb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/bootstrap/spotbugsXml.xml",
+      "sha256": "673be133a10a7673bba7e63dde917d17cbfd8239ea8f36f5778c408d312ab68f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/batch/jacoco.xml",
+      "sha256": "926fe4f4ee3c939a8c7c87acbed2449b1309f1e24a8018e2cbf39b6674376d03"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/batch/spotbugsXml.xml",
+      "sha256": "a1dedc4b224855bd43519e0b16a57b89c6040075b9a2e3c3e5addda69b0d4896"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG321-artemis-unit-GREEN/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "b08962366d1eda41974223d813f54a6d3191a67bd29b834088bece58f7984c62"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/deployment/systemd/artemis.service",
+      "sha256": "a8a6226176187a70b1034b5a454c78ff199c890bb345817c1a5f0474f120845c"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ArtemisServiceUnitTest.java",
+      "sha256": "f80af6c24e5219ed340ec33c11ec58238ed20fcac4f72b3ae103ecc0f8d491ef"
+    }
+  ],
+  "log": {
+    "path": "Git-outside /tmp/PG321-artemis-limited-1.log",
+    "sha256": "815ba6cc4378b1dbd93b803963ef225af112f9b26411930b3b47d1bcbe7dcb9d"
+  },
+  "finished": "2026-09-28T08:22:39+09:00",
+  "formal": false,
+  "coverageNote": "Only actually generated report XML copied. No-clean cumulative exec is not formal isolated coverage.",
+  "sourceCommit": "50d1dcfa3",
+  "branch": "dev-foundation",
+  "runId": "PG321-artemis-unit-GREEN",
+  "coverage": {
+    "applicable": false,
+    "reason": "New Production artifact is systemd Unit text, not Java bytecode. Existing dependency JaCoCo reports are copied only as actually generated; no claim of all-scope coverage."
+  },
+  "staticAnalysis": {
+    "spotbugsFindings": 0
+  },
+  "command": "mvn -B -o -pl src/schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,ArtemisServiceUnitTest test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "environment": {
+    "os": "Ubuntu 26.04 host",
+    "jdk": "25.0.4",
+    "maven": "3.9.12"
+  },
+  "related": [
+    "SSC-103",
+    "PT-OPS-ARTUNIT-001..004"
+  ],
+  "input": "Production artemis.service fixed text; no credential contents or broker start",
+  "expected": "real fixed cleanup dependency, instance/UID, private hash credential read-only bind, no plaintext or fake unit, exact resource/stop/hardening directives",
+  "actual": "20 selected PT F/E/S0 including 4 Artemis Unit tests; SpotBugs0, independent collector canary105 PASS",
+  "exitCode": 0
+}

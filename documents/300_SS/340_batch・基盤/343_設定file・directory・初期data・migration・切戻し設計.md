@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC103/PG321補足：Artemis JAAS hashed user propertiesのtrusted root配布元は `/etc/schubert-nk/credentials/artemis-users` regular root:root0600、起動前にroot所有で検証する。`artemis.service`の固定`LoadCredential`が作るprivate `/run/credentials/artemis.service/artemis-users`を、Unit mount namespace内だけで既存instance `etc/artemis-users.properties`の期待pathへread-only bindする。host側の秘密property実体を配備手順が勝手に上書き/消去しない。Source欠落、bind/ACL/権限/実Unit不一致は起動失敗とし、broker既存file fallbackを認可しない。実配布・JAAS認証・journal cleanは隔離VMで別実測まで未認定。
+
 SSC100/PG317: 親全8対象・12field・真正host cgroup2全終端・停止方針/worker receiptとの分離はSS341冒頭を正とする。leaf存在時にmanager ControlGroup空の観測から全process不存在を推定しない。固定ControlGroupへのbindingと全nested queryを確認し、全保持能力のclose後だけ限定終端観測を返す。未配置実Unit/unknown client/全親未達ならapproval/permit/業務開始を成功へ補完しない。
 
 SSC093/PG310: root朝controller固定Unitはschubert-nk-morning-controller.service、RootStartupContext.MORNINGで自己由来を認証する。backupのcold/post-stop全終端はSS341 §5の固定Slice/Delegate/ControlGroup＋真正PID1 host view＋NOFOLLOW cgroup2 leaf不存在/存在時全processの厳密条件を適用する。親だけがM/A/原本/current INVALID/DB両step begin commitを所有し、nonsecret backup-requestのprepare/retireは全Unit終端の内側だけ。API/Web child catalogの追加・秘密増配・権限緩和・bus error→emptyは行わない。実接続とPTは018141以降、fullbackup/morning/許可発行未達を省略して受入しない。

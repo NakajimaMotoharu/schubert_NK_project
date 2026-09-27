@@ -1,0 +1,40 @@
+{
+  "id": "PT-OPS-NATIVE-033 / PT-OPS-ARTUNIT001..004",
+  "formal": false,
+  "dateTime": "2026-09-28 08:22-08:26 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, systemd genuine loaded Artemis instance; JDK25.0.4/Maven3.9.12 host tests",
+  "branch": "dev-foundation",
+  "sourceCommit": "50d1dcfa3 plus dirty SSC103/PG321 Unit/test/source hashes",
+  "commands": [
+    "mvn -pl src/schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,ArtemisServiceUnitTest test jacoco:report spotbugs:check (exact versions in host manifest)",
+    "guest root: verify marker, real instance owner/mode, no prior artemis.service; install exact new Unit non-start, daemon-reload, systemctl show fixed state/policy",
+    "guest root: systemd-analyze verify artemis.service (exit1 only for missing real Cleanup dependency; xfs unrelated warnings)",
+    "guest root: read-only no-start/missing credential/current original SHA checks"
+  ],
+  "exitCodes": {
+    "limitedUnitTests": 0,
+    "nonStartingInstall": 0,
+    "fixedStateAndPolicyCheck": 0,
+    "systemdAnalyzeVerify": 1
+  },
+  "input": "real schubert-artemis account and /var/lib/schubert-nk/artemis 0700 instance, no Cleanup Unit, no fixed root credential source; Unit SHA256=a8a6226176187a70b1034b5a454c78ff199c890bb345817c1a5f0474f120845c",
+  "expected": "real artemis.service is loaded/inactive with fixed no-SIGKILL/control-group/60s policy and no broker start; verify cannot resolve mandatory absent Cleanup and must not be bypassed",
+  "actual": "PT-OPS-NATIVE-033 limited PASS: Id=artemis.service LoadState=loaded ActiveState=inactive MainPID=0 User=schubert-artemis KillMode=control-group SendSIGKILL=no TimeoutStopUSec=1min MemoryMax=2147483648 LimitNOFILE=65536. systemd-analyze verify exit1 solely because schubert-nk-cleanup.service is not found; no broker start attempted; root credential source absent.",
+  "coverage": "No new Production Java bytecode; Unit static contract 4 PT in PG321-artemis-unit-GREEN. Native loaded observation is not broker readiness or journal clean proof.",
+  "files": [],
+  "sourceHashes": {
+    "artemis.service": "a8a6226176187a70b1034b5a454c78ff199c890bb345817c1a5f0474f120845c"
+  },
+  "originalSha256": {
+    "active": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "begin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "run": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63"
+  },
+  "relatedSsc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102",
+    "SSC-103"
+  ],
+  "remaining": "Cleanup genuine Unit and credential source must be implemented; no --ignore-dependencies/fake; source-to-private bind, real broker boot/stop, Artemis clean journal and whole parent remain unverified."
+}

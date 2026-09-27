@@ -263,6 +263,8 @@ host   all          all                                   ::/0          reject
 
 ## 7. Artemis process・config
 
+SSC103/PG321：`artemis.service`は実instance `/var/lib/schubert-nk/artemis`を専用`schubert-artemis`で起動する。`After/Requires=schubert-nk-cleanup.service`は必須であり、cleanup未配置を偽Unit/依存無視で補完しない。trusted root側がprivate regular0600の`/etc/schubert-nk/credentials/artemis-users`にJAAS hashed user propertiesを事前配置し、Unitは固定`LoadCredential`でprivate `/run/credentials/artemis.service/artemis-users`を受ける。vendorの`etc/artemis-users.properties`期待場所へはUnit private namespace内のread-only bindを使い、host既存fileを上書き/削除しない。秘密値・raw propertyをargv/env/log/Gitへ出さない。Unit構文・実効policy/credential bind・専用UID・起動/停止・journal cleanはそれぞれ独立判定し、loadedだけをbroker readinessやclean stopへ読み替えない。systemd bind適用順の実測に失敗すれば安全停止し別SSCで再判断する。
+
 - `broker.xml`、Address/Queue/security/JMS値は321を正とする。Acceptors 61616/console 8161はloopbackだけ。
 - Instance root `/var/lib/schubert-nk/artemis`は`schubert-artemis` 0700、journal/paging/large messageは別subdirectory。
 - systemd `MemoryMax=2G`、JVM heap 1G/direct 256M/metaspace 192M、native headroom 576M、`LimitNOFILE=65536`、`Restart=on-failure`、start limit 5/600s、
