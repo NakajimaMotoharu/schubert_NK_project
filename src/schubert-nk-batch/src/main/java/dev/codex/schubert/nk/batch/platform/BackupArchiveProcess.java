@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.LongSupplier;
 import org.jspecify.annotations.*;
 
@@ -275,7 +277,71 @@ public final class BackupArchiveProcess {
   }
 
   private static void terminate(List<Process> processes) throws IOException {
-    terminate(processes, 0);
+    // BUG271/SSC091: request every stop first; never release borrowed parent FDs while alive.
+    ResourceScope.use(
+        () -> holdTerminals(processes),
+        () -> {
+          terminate(processes, 0);
+          return Boolean.TRUE;
+        });
+  }
+
+  private static void holdTerminals(List<Process> processes) throws IOException {
+    var interrupted = new AtomicBoolean(Thread.interrupted());
+    try {
+      holdTerminals(processes, 0, interrupted);
+    } finally {
+      if (interrupted.get()) Thread.currentThread().interrupt();
+    }
+  }
+
+  private static void holdTerminals(List<Process> processes, int index, AtomicBoolean interrupted)
+      throws IOException {
+    if (index == processes.size()) return;
+    ResourceScope.use(
+        () -> holdTerminals(processes, index + 1, interrupted),
+        () -> {
+          Process process = processes.get(index);
+          if (process != null) holdTerminal(process, interrupted);
+          return Boolean.TRUE;
+        });
+  }
+
+  private static void holdTerminal(Process process, AtomicBoolean interrupted) {
+    // Quarantine, not an extension of the successful-work budget. Fixed Unit/cgroup timeout is
+    // mandatory at the caller. Unknown observation is never a reason to free/reuse the capability.
+    while (true) {
+      try {
+        if (!process.isAlive()) break;
+        if (process.waitFor(5, TimeUnit.SECONDS)) break;
+      } catch (InterruptedException failure) {
+        interrupted.set(true);
+        Thread.interrupted();
+      } catch (RuntimeException | Error first) {
+        // Preserve the first unknown primary, as ResourceScope does. Subsequent observations
+        // remain quarantined and cannot turn the pending failure into successful termination.
+        holdAfterUnknown(process, interrupted);
+        throw first;
+      }
+    }
+  }
+
+  private static void holdAfterUnknown(Process process, AtomicBoolean interrupted) {
+    while (true) {
+      try {
+        if (!process.isAlive() || process.waitFor(5, TimeUnit.SECONDS)) return;
+      } catch (InterruptedException failure) {
+        interrupted.set(true);
+        Thread.interrupted();
+      } catch (RuntimeException | Error subsequent) {
+        backoff(interrupted);
+      }
+    }
+  }
+
+  private static void backoff(AtomicBoolean interrupted) {
+    LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(10));
+    if (Thread.interrupted()) interrupted.set(true);
   }
 
   private static void terminate(List<Process> processes, int index) throws IOException {

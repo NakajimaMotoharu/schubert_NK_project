@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -149,6 +150,87 @@ final class BackupArchiveProcessTest {
 
   @Test
   void statusDeadlineAndCancellation() throws Exception {
+    for (String variant : List.of("none", "interrupt", "runtime", "error")) {
+      for (String operation : List.of("dump", "configuration", "credentials")) {
+        var pending = new Fixture();
+        pending.stubborn = true;
+        pending.holdEmptyWait = true;
+        pending.holdInterrupt = variant.equals("interrupt");
+        Throwable expectedUnknown =
+            variant.equals("error")
+                ? new AssertionError("public primary")
+                : new IllegalStateException("public primary");
+        if (variant.equals("runtime") || variant.equals("error")) {
+          pending.holdFaults.add(expectedUnknown);
+          pending.holdFaults.add(new IllegalArgumentException("public secondary"));
+          pending.holdFaults.add(new AssertionError("public secondary fatal"));
+          pending.holdInterrupt = true;
+          pending.interruptOnHoldFault = variant.equals("error");
+        }
+        if (operation.equals("dump")) pending.uid = 992;
+        var borrowedReleased = new AtomicBoolean();
+        var flagObserved = new AtomicBoolean();
+        try (var executor = Executors.newSingleThreadExecutor()) {
+          var result =
+              executor.submit(
+                  () -> {
+                    try {
+                      switch (operation) {
+                        case "dump" -> pending.runner.dump(OUT, KEY, 992);
+                        case "configuration" ->
+                            pending.runner.configuration(DIR, OUT, List.of("public"));
+                        case "credentials" ->
+                            pending.runner.credentials(DIR, OUT, KEY, List.of("public"));
+                        default -> throw new AssertionError("independent fixed operations");
+                      }
+                      return false;
+                    } catch (IOException expected) {
+                      return true;
+                    } finally {
+                      flagObserved.set(Thread.currentThread().isInterrupted());
+                      borrowedReleased.set(true);
+                    }
+                  });
+          try {
+            assertTrue(
+                pending.terminalHoldEntered.await(2, TimeUnit.SECONDS),
+                "unconfirmed terminal must enter retained-capability hold");
+            assertFalse(
+                borrowedReleased.get(),
+                "caller must not release/reuse borrowed FD before terminal");
+            assertTrue(
+                pending.processes.stream().allMatch(p -> p.destroyed),
+                "all pipeline children get TERM before any indefinite hold");
+          } finally {
+            pending.terminalRelease.countDown();
+          }
+          if (variant.equals("runtime") || variant.equals("error")) {
+            var thrown =
+                assertThrows(ExecutionException.class, () -> result.get(5, TimeUnit.SECONDS));
+            assertSame(
+                expectedUnknown,
+                thrown.getCause(),
+                "first unknown identity has ResourceScope precedence");
+          } else
+            assertTrue(
+                result.get(5, TimeUnit.SECONDS), "timeout remains non-success after terminal");
+          assertTrue(borrowedReleased.get());
+          assertEquals(!variant.equals("none"), flagObserved.get());
+          pending.closed();
+        }
+      }
+    }
+    var endedUnknown = new Fixture();
+    endedUnknown.stubborn = true;
+    endedUnknown.exitOnHoldFault = true;
+    var firstUnknown = new IllegalStateException("public terminal observation failure");
+    endedUnknown.holdFaults.add(firstUnknown);
+    assertSame(
+        firstUnknown,
+        assertThrows(
+            IllegalStateException.class,
+            () -> endedUnknown.runner.configuration(DIR, OUT, List.of("public"))));
+    endedUnknown.closed();
     var cumulative = new Fixture();
     cumulative.uid = 992;
     cumulative.timeSequence =
@@ -384,6 +466,12 @@ final class BackupArchiveProcessTest {
     String scenario = "";
     int badProcess;
     boolean beforeTimeout;
+    boolean stubborn;
+    boolean holdInterrupt, interruptOnHoldFault;
+    boolean holdEmptyWait, exitOnHoldFault;
+    final List<Throwable> holdFaults = new ArrayList<>();
+    final CountDownLatch terminalHoldEntered = new CountDownLatch(1);
+    final CountDownLatch terminalRelease = new CountDownLatch(1);
     RuntimeException unknown, cleanupUnknown;
 
     long clock() {
@@ -451,7 +539,8 @@ final class BackupArchiveProcessTest {
     final int index;
     final ByteArrayOutputStream received = new ByteArrayOutputStream();
     int outAcquired, inAcquired, errAcquired, outClosed, inputClosed, errClosed;
-    boolean alive = true, destroyed;
+    volatile boolean alive = true, destroyed;
+    int terminalWaits;
 
     FakeProcess(Fixture f, int index) {
       fixture = f;
@@ -530,6 +619,21 @@ final class BackupArchiveProcessTest {
 
     @Override
     public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
+      if (fixture.stubborn) {
+        if (!destroyed || ++terminalWaits == 1) return false;
+        if (fixture.holdInterrupt && terminalWaits == 2) {
+          Thread.currentThread().interrupt();
+          throw new InterruptedException("public hold interruption");
+        }
+        if (fixture.holdEmptyWait) {
+          fixture.holdEmptyWait = false;
+          return false;
+        }
+        fixture.terminalHoldEntered.countDown();
+        if (!fixture.terminalRelease.await(5, TimeUnit.SECONDS)) return false;
+        alive = false;
+        return true;
+      }
       if (selected("wait") && fixture.unknown != null) throw fixture.unknown;
       if (selected("interrupt") || destroyed && fixture.scenario.equals("terminateInterrupt"))
         throw new InterruptedException("public");
@@ -555,12 +659,20 @@ final class BackupArchiveProcessTest {
 
     @Override
     public boolean isAlive() {
+      if (fixture.stubborn && destroyed && terminalWaits >= 1 && !fixture.holdFaults.isEmpty()) {
+        Throwable failure = fixture.holdFaults.removeFirst();
+        if (fixture.exitOnHoldFault) alive = false;
+        if (fixture.interruptOnHoldFault) Thread.currentThread().interrupt();
+        if (failure instanceof Error fatal) throw fatal;
+        throw (RuntimeException) failure;
+      }
       return alive;
     }
 
     @Override
     public void destroy() {
       destroyed = true;
+      if (fixture.stubborn) return;
       if (selected("destroy") && fixture.unknown != null) throw fixture.unknown;
       alive = false;
     }

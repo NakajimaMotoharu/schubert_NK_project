@@ -1,0 +1,146 @@
+{
+  "program": "NK-OPS-001",
+  "unit": "PG306-known-child-terminal-hold",
+  "branch": "dev-foundation",
+  "baseCommit": "e790affb9d5e1073316f352edc4fe902600a2c00",
+  "sourceState": "PG306 dirty source, saved with this evidence commit",
+  "formalAccepted": false,
+  "PT": "8 primary / 64 related / 105 canaries PASS; failures/errors/skipped=0",
+  "coverage": {
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Start": [],
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdinOwner": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "28"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "2"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "11"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "4"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "3"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "699"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "76"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "161"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "76"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "38"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Work": [],
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "56"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "2"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "13"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "4"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "3"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ]
+  },
+  "static": 0,
+  "BUG": "BUG-271",
+  "SSC": "SSC-091",
+  "remaining": "unconfirmed start/Production worker/parent M+A+cgroup barrier remain; defect not closed",
+  "artifacts": {
+    "/tmp/PG306-BUG271-red.log": "33b3d06b72978514af1b5683bed247d6c849cad485085cda4a11f1f5c732f790",
+    "/tmp/PG306-BUG271-red-2.log": "ebcaeab76b3b13e6e6b68f910166959ad4f35ce4253df380ffbaa741ce3bffb0",
+    "/tmp/PG306-BUG271-positive.log": "6226bf0c910ef6694d41e730ed93235b202bd9f515bfd03e279bb06f327c0595",
+    "/tmp/PG306-BUG271-positive-2.log": "0962ea728dc65906a3cb47d6f3bfaf2a4d144652cb983f3e5336ae4497297d39",
+    "/tmp/PG306-BUG271-positive-3.log": "2bef21090375be6c1ae179f9201571a286d3a2764fafb851c03c46dc1b7dc1f3",
+    "/tmp/PG306-BUG271-positive-4.log": "a839ee6497d0ddc04a53009ccd3bb18ae2252b6e09dbc56cdcaa8903a05eca94",
+    "/tmp/PG306-related-64.log": "66b407e567770b232ff9c621f71c2441880d2e9ea8533ac1ceaf03e31e8423f7",
+    "/tmp/PG306-canary.log": "4f77c57c343044f0d9e82613070d4fc3e3104208d55afa6a28437f365e8e741e",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml": "719c4c8339438f3e70f4600c461b3d983ba1771c6d45e0a67daab65dc2d26f9b",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml": "170cd7c2dfcfa82ec12d2ce20a846eff4515ff1c4b11c90c1875935a3c8a9967",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml": "fd86c1447f50cc469b837ddac4e85c00c316c63b9f68ec9ad597b8de63bd7990",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml": "c098ab27df9b6f816b5ad1728e5397ea19a0c83e508f2a9c1122c7730b80fc9a",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml": "3b399ece87251946607cbc311accc7571751ef2852443aa6e6457b9561cf922a",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml": "7fc4aced23f0141f0f04281529582bc393e644e31c4d85b0c4134f3994a52be7",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml": "b9128b8393cdaf1b71842661f2099976f16c2aa999f178d2985c7ba48782dbd8",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml": "0f7a2f038c813e62ad88d20289505a2200c8f1c7fc4faf2f18703cefca793e1a",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml": "6412f50348c04b71fd8b72a7c14944246d3cdbd1ef1b01b1161e6c9271b2c2d3",
+    "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml": "3c567a9b3865f36bd303c93ca6ee9123a12b37352da86954607268cff9153bf1",
+    "src/schubert-nk-batch/target/site/jacoco/jacoco.xml": "f6c9c8f54da3b3b03a45592863a2738e689ee91886a8f973c2313c93147a1cb9",
+    "src/schubert-nk-batch/target/spotbugsXml.xml": "8d02e18ab81588ed824e227968e00d7e978ed64283956c09bbf5addf155e257b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java": "3bf9736ae0141f1c3b7e50d91b2f40871f6d2ad7da1af239d8f205ea0a33d556",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java": "84fba58876e0889ca70c1eb54ccff13d41d24eb015101ed28198dd0251550656"
+  },
+  "executedAt": "2026-09-27T23:20:30+09:00",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch test -Dtest=BackupArchiveProcessTest,BackupBundlePublisherTest,BackupBundleCompletionTest,BackupManifestPublisherTest,BackupArtifactVerifierTest jacoco:report spotbugs:check",
+  "environment": {
+    "OS": "Linux host, native VM not executed in PG306",
+    "JDK": "25.0.4",
+    "Maven": "wrapper repository toolchain",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4.0"
+  }
+}

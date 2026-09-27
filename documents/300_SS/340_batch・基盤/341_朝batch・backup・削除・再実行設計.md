@@ -107,6 +107,8 @@ SSC068/PG186: step2の低位0700/new-only保持child能力は333§7.6。既存07
 
 SSC090/PG305: systemd runtime credential `backup-pgpass`は固定名で既存保持inode/ACL readerを使い、最大65536byteのcaller-owned raw byteとして読む。配布root/fileの前後属性・同device・closeを検証する。libpqはgroup/world permission bitのあるpassword fileを無視するため、root ACL0440材料を直接PGPASSFILEへ渡さない。専用backup Unitのprivate tmpfs0700内にCREATE_NEW0600の専用コピーを生成し、borrowed original FDを子に保持して渡す。所有byteは全終了で消去し、全子終端確認後のみcopy消去・unlink・directory sync。不確定終端/closeは非成功・保全。password実値をenv/argv/logへ出さず、backup-pgpassをAPI/Web固定5材料へ追加しない。専用OS/DB主体・実archive/manifest/DB両step/世代管理の既定gateは維持する。
 
+SSC091/BUG271: 保持parent FDを子argvから読む工具は、取得済全子へTERMを要求した後で全子の実終端まで待つ2passとする。TERM/5秒timeout/割込/unknownを終端証明へしない。割込は待機中記録し全終端後にflag復元、unknown identityも終端後だけ帰還する。終端不明の間はborrowed callback/FD/M・A/partを保持し、通常例外unwind・FD再利用・次job・copy消去をしない。単調30分は元の非成功判定を確定させるが能力解放の根拠ではなく、固定Unit hard timeoutと全cgroup停止/親再起動barrierは別必須。独自SIGKILLなし。startPipeline不成立は取得されない子の実終端をJDK内部処理で補完せず、filename stdin未送信のまま固定worker callback内隔離・親全cgroup確認へ接続する。このcaller接続が未達なら全例外経路/backup完成とは認定しない。
+
 ### 6.2 Config・credential backup
 
 - `/etc/schubert-nk`の非秘密configはroot所有のtar、path traversal/symlinkを入れず`config.tar`へ固定。
