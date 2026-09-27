@@ -16,4 +16,4 @@ NK-OPS-001、SYS002/004・OPS009・BAK/BKO、UI251、SS341 §5/6・343、SSC093�
 
 親接続PT-OPS-BPARENTはM→原本→停止→A→全終端→INVALID→DB両step begin commit→request→startclient実終端→fresh0→stop/全終端→retireのlatch/unknown反例を独立検証してから追加する。DB/manifest/retention未接続を成功へ補完しない。
 
-CommandはJDK25.0.4/Maven3.9.12、対象Batchと依存Storage/Bootstrap限定suite、report/SpotBugs。changed class全line/method/class/branch100%と必要native same-class-byte mergeを要求し除外しない。対象source/run、日時、OS/tool、branch/command/exit、input/独立expected/actual、全suite/hash、coverage、BUG/SSCと未実行範囲は142結果/manifestへ記録する。秘密/cookie/token/password/dump/private keyをGit証跡へ保存しない。
+CommandはJDK25.0.4/Maven3.9.12、対象Batchと依存Storage/Bootstrap限定suite、report/SpotBugs。changed class全line/method/class/branch100%と必要native same-class-byte mergeを要求し除外しない。対象source/run、日時、OS/tool、branch/command/exit、input/独立expected/actual、全suite/hash、coverage、BUG/SSCと未実行範囲は143結果/manifestへ記録する。秘密/cookie/token/password/dump/private keyをGit証跡へ保存しない。

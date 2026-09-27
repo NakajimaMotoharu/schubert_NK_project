@@ -19,7 +19,8 @@ import org.jspecify.annotations.NullMarked;
 public final class RootStartupContext {
   public enum Service {
     API("schubert-nk-api.service"),
-    WEB("schubert-nk-web.service");
+    WEB("schubert-nk-web.service"),
+    MORNING("schubert-nk-morning-controller.service");
     private final String unit;
 
     Service(String unit) {

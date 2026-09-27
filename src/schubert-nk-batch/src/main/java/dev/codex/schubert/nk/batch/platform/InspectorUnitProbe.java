@@ -152,7 +152,8 @@ public final class InspectorUnitProbe {
           9);
     }
 
-    private byte[] execute(List<String> command, int limit) {
+    // SSC093: package-only reuse for the fixed backup placement projection, no public selector.
+    byte[] execute(List<String> command, int limit) {
       interrupted();
       // Keep the delivered array reachable even when a later scope close fails.
       byte[][] bytes = {new byte[0]};

@@ -1,0 +1,372 @@
+{
+  "run": "PG310-root-termination-limited",
+  "sourceBase": "d006e19f5825dff63e1466211a05b16cd72e10b2",
+  "sourceDirty": true,
+  "branch": "dev-foundation",
+  "formal": false,
+  "finished": "2026-09-28T01:20:46+09:00",
+  "command": "-pl batch -am spotless:apply -Dtest=BackupUnitTerminationTest,RootStartupContextTest,InspectorUnitProbeTest,OwnedTransferDirectoryTest,BackupRequestCredentialLoaderTest test jacoco:report spotbugs:check",
+  "exitCode": 0,
+  "suites": [
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "sha256": "0aa9bdadc92d7e79b423ca42a4e05527b485849940ca8f0a926b3f235432f743",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
+        "a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
+        "f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
+        "bug036CallerMonitorCannotBlockAnyDirectoryOperation",
+        "f02ExistingDateIndependentChildLifetimeAndSafeIoFailures",
+        "med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+        "rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation",
+        "med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+        "a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel",
+        "w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly",
+        "f02RejectsNullRelativeRootDotSegmentsAndInvalidDates",
+        "a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths",
+        "w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite",
+        "rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything",
+        "f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight",
+        "f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest",
+      "sha256": "9e274b726e476bac390fc48f4a662990f3984848b730c61eb485965b1baf63e9",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "namespaceAndSecurityFailures",
+        "boundedSource",
+        "closeFailureAndNullContracts",
+        "literalAndOwnedCopy",
+        "fixedNameMissingAndNoFallback",
+        "independentConcurrentCopies",
+        "symlinkAndHardLinkRefused",
+        "everyIoFailureClears"
+      ]
+    },
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest",
+      "sha256": "e4a4ceae22e9bed077821bf3947234edfec9f3dbaf4b2efe45ef6dd39cfaf785",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "bterm004MissingOnlyAtExactLeafAndDriftRefused",
+        "bterm002EveryPlacementByteAndField",
+        "bterm001ColdAndPresentStableNamespace",
+        "bterm007FixedQueryProjectionAndNioPort",
+        "bterm008MorningContextAndNativeFactoryFailClosed",
+        "bterm006InterruptAndIndependentParallelInstances",
+        "bterm003EveryMetadataAndFilesystemCondition",
+        "bterm005AllAcquisitionIoUnknownAndCloseCompounds"
+      ]
+    },
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "sha256": "c2dd6b7d32d4dd27d4040657600ceb4daaad113864a6bec0d9f8063adfb98465",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "rootctx002RootProcInitBootAndInvocationDomains",
+        "rootctx005AsciiBoundsNullAndObservationDrift",
+        "rootctx003StatStartBoundaryAndPidNamespaceBinding",
+        "rootctx007NativeStreamsFaultsAndUnknownPriority",
+        "rootctx006FixedSystemBusQueryAndAllProcessResults",
+        "rootctx001LiteralContextAndTwoObservations",
+        "rootctx004EveryManagerPropertyAndCgroupRefused",
+        "rootctx008NativeKernelReadsAndOrdinaryUidRefusal"
+      ]
+    },
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+      "sha256": "ead9a1adceb9eb1fb320ca70cfb84759161011a270764a7f3aa7269130cbac67",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "commandFailures",
+        "unstableAndNonempty",
+        "fixedCommands",
+        "boundedOutputAndTimeout",
+        "interruptions",
+        "nativeEnvironmentAndConcurrency",
+        "stableTerminalAndReceipt",
+        "allResourceFailures"
+      ]
+    }
+  ],
+  "newSubjectCounters": {
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "732"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "102"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "110"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "63"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "12"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NioIo": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "13"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "3"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "3"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "3"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NativeObservations": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "47"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "12"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "6"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "6"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Identity": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "18"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Namespace": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "9"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "1"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Owner": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "68"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "4"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "16"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "9"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "7"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ]
+  },
+  "static": {
+    "storage": {
+      "sha256": "f30607b5753006ced82d0234ee54ec29e23b2df43bdcddac780dbb7e9716d0df",
+      "bugs": 0
+    },
+    "bootstrap": {
+      "sha256": "da50e6de0a05461e78657cb11122dcb6cb7f29e93231ad2007ff9e5e33a5acb9",
+      "bugs": 0
+    },
+    "batch": {
+      "sha256": "c9ce32487a70dbe28ad50a1abfa6413f4ee5730573224e31b59bfec24479fe2e",
+      "bugs": 0
+    }
+  },
+  "canaries": 105,
+  "sourceInventoryCount": 1152,
+  "sourceInventorySha256": "af4c3e873e2e9f6e717cd09f48e3fe21feecaa8e552ed25f505626fd7a54d65a",
+  "changedFiles": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java": "e144ca502eeec8fdd0e6768114fd81609e05c38cdad9a5008d0ceb1ea449750c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": "3171281ab4b6e187f7197de775a9cc167cc4f57b8e9d466b4d14fdc22e35ba2f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java": "83f7c4b789b614b59ecee9943e5be795fa924dd24d9a6d970dea71ecda5df4fa",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java": "2f4e685c28ed39dc365f3d25dc741a56a191a4ae99f1884229c84b3c42a1db97",
+    "tools/quality/019_test_evidence_set.py": "4622ea2e40a5fbdfd3c3e518e62fe5cf03c79068e3ad3a7f359dd1f483c64148",
+    "tools/quality/020_collect_batch_evidence.py": "75814646c02085bb3acd835ec6afe2976e2496e676904f5992abefb73cdcfa96",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "c19f96a64943044bbf6c56a95544dd6481d5929370ce1f339109c1da23b4c527",
+    "tools/quality/vm/NativeRootBackupTerminationProbe.java": "9de00315ebf1e06d2283de636f3f6e356b9ba202d12b1aa0399b7eddbdd91258",
+    "tools/quality/vm/pgpt-native-root-backup-310.service": "2c52715b998995416f37ea99a6e016812c568daacdde64839b5a79c6e041a108"
+  },
+  "logs": {
+    "PG310-termination-1.log": "78bfb9dc6267e866b2212ad1a8641687c9173de686376d84a49bfd4ba9d40bde",
+    "PG310-termination-2.log": "9bdabcc59174eec7c6ff759b41c7fb6dabff487a529bbe123a8fed415621319f",
+    "PG310-termination-3.log": "9e7b255a0a519ca0069f8969ed8efa3cdd4930a087304f1ab596c1383c1ee6bc",
+    "PG310-termination-4.log": "830890872d8d0830449e9bea88857fe0beb52ece3107ad44aa581e79f9246e7f",
+    "PG310-canary.log": "c39280bb588dbea1c77ab9809bfeda251ba6839f09b419272d3bdfd91a26983c",
+    "PG310-canary-2.log": "3b4da09b599c90adaa5745363be7c758c78a71916c5882f32da52741f851c157",
+    "PG310-native-root-026-ptrace.log": "1a0ed5817e1432e82e83de0823bcdafe2855a92e7682eb44337831992c5de1c8",
+    "PG310-native-root-026.log": "0ee981140cc51034ddfeb125d7ec24675b76171dfb5d5aecbd277da4657475a1",
+    "PG310-native-root-026-diagnostic.log": "bb6fe517b9be970336fdee8bab4fd075963d8947d27328530d9d0a37e43840af",
+    "PG310-native-root-026-stopped.log": "20df01560543514a9af314cd3171b346ae7f89b8bcb3c97375019a2f1e389d8e",
+    "PG310-native-root-026-lock.log": "5d596a4b47d6f33c9caa08e2b214d661c12b09bfaf14d7b98e701e86dc637ad1"
+  },
+  "tools": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "spotbugs": "4.10.4.0",
+    "vm": "Ubuntu26.04/Linux7.0.0-31/systemd"
+  },
+  "native": {
+    "id": "PT-OPS-NATIVE-026",
+    "productionRootContext": true,
+    "continuousActualMAForObservation": true,
+    "productionHostNoFollowColdBackupTermination": true,
+    "allObserversClosed": true,
+    "unitStopped": true,
+    "sourceJarSha256": "405915a3aa20e7023b8aa46d87b47a3e7ab1389b6e651103beb69acb60dbfbac",
+    "unitSha256": "2c52715b998995416f37ea99a6e016812c568daacdde64839b5a79c6e041a108",
+    "fullParentBackup": false,
+    "fullRunDbGate": false,
+    "fullBusinessGate": false,
+    "releaseBom": false,
+    "initialFailures": [
+      "PID1 unreadable with zero capabilities",
+      "maintenance lock absent; missing-only initial provisioning before success"
+    ],
+    "helperCompileWarnings": "standalone javac lacked optional SpotBugs annotation enum; two warnings, compile exit0; Production Maven static0"
+  },
+  "bugs": [
+    "BUG-277",
+    "BUG-278"
+  ],
+  "ykt": [
+    "YKT-210",
+    "YKT-211"
+  ],
+  "ssc": "SSC-093",
+  "notRun": [
+    "all Batch484",
+    "parent worker begin/fresh/retire",
+    "actual archives/bundle/db-success/retention",
+    "real NK CHR"
+  ],
+  "secretsStored": false
+}

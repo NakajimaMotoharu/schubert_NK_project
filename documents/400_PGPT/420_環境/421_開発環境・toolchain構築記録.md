@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-28 PG310 native026 root M/Aとcold backup終端
+
+既存隔離VMだけで固定朝controller名のread-only試験Unitをnew installし、Production RootStartupContext/BackupUnitTerminationとM/A能力を実測。source/helper/Unit/command/個別hashは018141/143/provisional PG310。capability空ではPID1 exeを読めず拒否、root-only CAP_SYS_PTRACE＋ProtectSystem=full/NoNewPrivileges/PrivateTmp/Devices/ProtectControlGroupsで読み取り成功。実在しなかったmaintenance.lockだけをNoSuchFile確認後`install -m0600 -o root -g root /dev/null /run/schubert-nk/maintenance.lock`で初期配備、既存lockfile/root/資格情報は変更なし。再現は固定VM marker確認→対象Unit停止/MainPID0/cgroup不存在確認→保全hash照合→helperを固定Unitで起動→sanitized結果とUnit終端→明示stop。初期失敗も保全して合格算入しない。host system Unit/権限変更なし、追加packageなし、普通serviceへのcapability増配なし。root-only試験Unitは停止済みだがVM内artifactを保全する。実親backup/全BOM/業務起動済みではない。
+
 ## 2026-09-25 SnakeYAML Engine 3.1.1 Web追加（PG273）
 
 Web moduleにも既存APIと同じ`org.snakeyaml:snakeyaml-engine:3.1.1`を明示依存として追加。入手元・jar SHA-256・Java25/Maven wrapperでの再現手順は直下PG272の記録と同一。追加OS package/daemon/秘密実体はなし。Web15非秘密keyをdefaults→common→Webでmergeし、flat dotted-key、重複/alias/secret/未知/placeholder拒否、16KiB制限を適用。実file属性・env/credential搬送・外部processは未認定。
