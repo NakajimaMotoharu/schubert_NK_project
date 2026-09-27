@@ -111,6 +111,8 @@ SSC091/BUG271: 保持parent FDを子argvから読む工具は、取得済全子�
 
 ### 6.2 Config・credential backup
 
+SSC092/PG309（実装前）: 固定backup Unitの入力はroot親がM/A/原本/停止/current INVALID/backup両step begin commit後に作る非秘密requestだけ。format version/run UUID/内容生成開始時刻から既存manifest規則で出力名を導出し、任意path/command/UID/credential名/DBattemptを受け付けない。new-only root600 requestを専用0700/run namespaceへ公開しLoadCredentialでworkerへ渡す。workerは固定NSS・自己Unit/kernel・runtime・backup root admission後new-only700 part/600dump→Productionコピー/実dump・list→全close/廃棄成功のみexit0。旧part再利用・DB更新なし。親はfresh Invocation/receipt0/全cgroup空/前後安定を確認するまでM/Aと隔離を保持し、起動clientのexitだけを成功にしない。RemainAfterExit=yes/Restart=no/KillMode=control-group/SendSIGKILL=no、親回収後の明示stop/終端再確認まで旧requestをretireしない。
+
 SSC090/091 PG307/308補足: startPipeline呼出のIOException/Runtime/Errorは一部spawn不明なので、固定one-shot Unit内でborrowed callbackを非復帰隔離する。builder生成と開始直前割込はspawn前に拒否できる。隔離中の割込はclearしてparkを継続し、Unit全cgroup停止を親が確認するまでM/A/partを保全する。外部process停止後の元例外rethrowは保証しない。Production copyは新UUID.part0600を保持し、原本namespace照合/readback/heap消去を済ませてから固定dumpへ渡す。全terminal-positive return後のみ全zero書込/force/close/readback/元inode-name再照合/unlink/dirsync。不確定unlink後の復元再作成なし。
 
 - `/etc/schubert-nk`の非秘密configはroot所有のtar、path traversal/symlinkを入れず`config.tar`へ固定。

@@ -48,6 +48,26 @@ final class FixedServiceIdentityTest {
 
   @Test
   void serviceid001BothFixedAccountsExplicitRequiredGroups() {
+    var backup = new Fixture();
+    backup.values.put(
+        "passwd/schubert-backup", "schubert-backup:x:992:977::/nonexistent:/usr/sbin/nologin\n");
+    backup.values.put("group/schubert-backup", "schubert-backup:x:977:\n");
+    assertEquals(
+        new FixedServiceIdentity.Value(992, 977, List.of(977L, 986L)),
+        assertDoesNotThrow(() -> backup.subject().resolveBackup()));
+    assertEquals(
+        List.of(
+            List.of("/usr/bin/getent", "passwd", "schubert-backup"),
+            List.of("/usr/bin/getent", "group", "schubert-backup"),
+            List.of("/usr/bin/getent", "group", "schubert")),
+        backup.commands);
+    backup.values.put("group/schubert-backup", "schubert-backup:x:978:\n");
+    assertThrows(IOException.class, () -> backup.subject().resolveBackup());
+    backup.values.put("group/schubert-backup", "schubert-backup:x:977:\n");
+    backup.values.put("group/schubert", "schubert:x:977:\n");
+    assertThrows(IOException.class, () -> backup.subject().resolveBackup());
+    backup.values.remove("passwd/schubert-backup");
+    assertThrows(IOException.class, () -> backup.subject().resolveBackup());
     var f = new Fixture();
     assertEquals(
         new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L)),

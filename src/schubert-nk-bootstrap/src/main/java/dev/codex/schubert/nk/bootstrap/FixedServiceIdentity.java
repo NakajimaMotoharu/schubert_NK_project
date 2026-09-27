@@ -98,6 +98,25 @@ public final class FixedServiceIdentity {
     }
   }
 
+  /** Backup-only fixed entry; does not extend the API/Web enum or inherit application groups. */
+  public Value resolveBackup() throws IOException {
+    try {
+      String account = "schubert-backup";
+      String[] passwd =
+          fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
+      long uid = id(passwd[2]), gid = id(passwd[3]);
+      var groups = new TreeSet<Long>();
+      for (String name : List.of(account, "schubert")) {
+        long value = id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);
+        if (name.equals(account)) require(value == gid);
+        require(groups.add(value));
+      }
+      return new Value(uid, gid, List.copyOf(groups));
+    } catch (IOException failure) {
+      throw unavailable();
+    }
+  }
+
   private static String[] fields(byte[] bytes, int count, String name) throws IOException {
     Objects.requireNonNull(bytes, "NSS bytes");
     require(bytes.length > 0 && bytes.length <= 1024);

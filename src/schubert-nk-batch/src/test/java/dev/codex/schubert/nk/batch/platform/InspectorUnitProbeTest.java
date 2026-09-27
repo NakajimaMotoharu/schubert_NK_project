@@ -30,6 +30,46 @@ final class InspectorUnitProbeTest {
 
   @Test
   void fixedCommands() {
+    assertThrows(NullPointerException.class, () -> InspectorUnitProbe.forTarget(null));
+    assertThrows(NullPointerException.class, () -> InspectorUnitProbe.NativeReader.forTarget(null));
+    assertThrows(NullPointerException.class, () -> new InspectorUnitProbe(new Script(), null));
+    for (boolean processes : List.of(false, true)) {
+      byte[] bytes =
+          (processes
+                  ? "a(sus) 0\n"
+                  : GOLDEN
+                      .replace(
+                          InspectorUnitSnapshot.UNIT, InspectorUnitSnapshot.Target.BACKUP.unit())
+                      .replace("RemainAfterExit=no", "RemainAfterExit=yes"))
+              .getBytes(StandardCharsets.US_ASCII);
+      var child = new Child(bytes);
+      var reader =
+          new InspectorUnitProbe.NativeReader(
+              command -> {
+                var expected = new ArrayList<>(processes ? processCommand() : stateCommand());
+                expected.set(expected.size() - 1, "schubert-nk-backup.service");
+                assertEquals(expected, command);
+                child.event("start");
+                return child;
+              },
+              InspectorUnitSnapshot.Target.BACKUP);
+      assertArrayEquals(bytes, processes ? reader.readProcesses() : reader.readState());
+      child.allClosed();
+    }
+    var backupScript = new Script();
+    backupScript.states =
+        List.of(
+            GOLDEN
+                .replace(InspectorUnitSnapshot.UNIT, InspectorUnitSnapshot.Target.BACKUP.unit())
+                .replace("RemainAfterExit=no", "RemainAfterExit=yes"));
+    assertTrue(
+        new InspectorUnitProbe(backupScript, InspectorUnitSnapshot.Target.BACKUP)
+            .completionAfter(Optional.empty())
+            .isEmpty());
+    backupScript.wiped();
+    assertThrows(
+        StopGateException.class,
+        () -> InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.BACKUP).read());
     for (boolean processes : new boolean[] {false, true}) {
       byte[] bytes = (processes ? "a(sus) 0\n" : GOLDEN).getBytes(StandardCharsets.US_ASCII);
       var child = new Child(bytes);

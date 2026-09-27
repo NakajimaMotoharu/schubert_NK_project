@@ -19,7 +19,7 @@ BOOTSTRAP_MAIN = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
 BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "maintenance.InspectorAesCredentialTest", "maintenance.InspectorDbCredentialTest",
     "maintenance.InspectorCredentialAccessTest", "file.InspectorCredentialLoaderTest",
-    "file.InspectorDatabaseCredentialLoaderTest", "file.BackupCredentialLoaderTest",
+    "file.InspectorDatabaseCredentialLoaderTest", "file.BackupCredentialLoaderTest", "file.BackupRequestCredentialLoaderTest",
     "file.ServiceCredentialReaderTest", "file.ServiceCredentialSetTest",
     "maintenance.ServiceDatabaseAdmissionTest", "bootstrap.ServiceDatabaseSourceTest",
     "file.ServiceProcessResourcesTest", "logging.ApiLogDatabaseFixture", "maintenance.MaintenanceJdbcProbe")) | frozenset((

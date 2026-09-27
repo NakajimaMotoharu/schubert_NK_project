@@ -1,0 +1,292 @@
+{
+  "status": "LIMITED_NOT_FORMAL",
+  "branch": "dev-foundation",
+  "baseCommit": "c44c9fc3a6c92c18ddb7219f3d5dc484c569babf",
+  "dirtySource": true,
+  "formalUnchanged": {
+    "source": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+    "run": "PT-WEB-20260925-24",
+    "pt": 1964,
+    "progressEstimate": 48.3
+  },
+  "environment": {
+    "os": "Ubuntu Linux host/isolated Ubuntu26.04 systemd VM",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0"
+  },
+  "native": {
+    "id": "PT-OPS-NATIVE-025",
+    "productionMain": true,
+    "fixedUnit": true,
+    "actualDumpAndList": true,
+    "copyRetired": true,
+    "freshReceiptZero": true,
+    "stopFixedKernelCgroupAbsent": true,
+    "sourceRequestRetired": true,
+    "fullBackup": false,
+    "parentMA": false,
+    "releaseBom": false,
+    "businessGate": false,
+    "batchJarSha256": "6cb4af09d802de92b1de36b2e1c4358b033ae88fd4045e78d6135a1ad8a7166a",
+    "bootstrapJarSha256": "a0491abd11555ca47038c07be07237570c0cd9474fa3d8b8c3bca3f85e249372",
+    "workerClassSha256": "1885d1b83afcc066df232fcb2f7a02ada1a59ba629ca261c4cce1409b16778f3",
+    "nativeExecutionSha256": "fa1acc59fe9836e42f05287dd18d59f0f3b8a1d4198f4c0e03020ba847d40251",
+    "mergedExecutionSha256": "2f1bb053e188c4f26320c6bd6e59ac042b6cd0498ca6d970fc70a3d4b01620d0",
+    "rawDumpSecretLocation": "isolated VM only, not Git"
+  },
+  "selectedSuites": [
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "1f1125d29b34c70e523734c4768af0c762b7ca38e29736dcb9e372f888f9c421",
+      "methods": [
+        "nullBoundariesAndSecretOwnerBeforeAcquisition",
+        "newOnlyReplayAndIndependentParallelJobs",
+        "everyAcquisitionIoAndUnknownFailureCloses",
+        "postconditionsAndCompoundCloseFailure",
+        "fixedNativeEntryRefusalAndRedactedDiagnostic",
+        "literalRequestDumpAndFullClose",
+        "rootMetadataAndOutputBinding",
+        "selfAndUnitAdmissionBeforePrivateIo"
+      ]
+    },
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "c91f2ebe85cb4b004ac32673bf80860650e0450bedc9182a476617d68f5f7bd3",
+      "methods": [
+        "everyIoPositionAndProgress",
+        "nativePrivateTmpfsPublicBytes",
+        "literalCreationErasureAndBorrowing",
+        "repeatedCollisionAndConcurrentRoots",
+        "metadataSecurityAndNamespace",
+        "erasureAndNameBindings",
+        "boundaryAndNullContracts",
+        "callbackFailureAndRetainedCapability"
+      ]
+    },
+    {
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "f598e91d8885f0864dcaca4706f3a1976356642849acf0d576a1a9a3cd640993",
+      "methods": [
+        "inputAndNullContracts",
+        "fixedCommandAndEnvironment",
+        "everyStreamFailureAndCompoundOwnership",
+        "statusDeadlineAndCancellation",
+        "actualNativePublicTarAndBuilder",
+        "actorGatesAndDatabaseListFailure",
+        "concurrentIndependentScopes",
+        "encryptedPipelineIsNotPlaintextArtifact"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "c48064ff731105e175df521c288a7c6f3e180546ab97d8000f31d300ba6d1dbb",
+      "methods": [
+        "namespaceAndSecurityFailures",
+        "boundedSource",
+        "closeFailureAndNullContracts",
+        "literalAndOwnedCopy",
+        "fixedNameMissingAndNoFallback",
+        "independentConcurrentCopies",
+        "symlinkAndHardLinkRefused",
+        "everyIoFailureClears"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "65f749f800cd677397eb51472130941f8ac348f633168ee7cdd2a76244a0d0b8",
+      "methods": [
+        "namespaceAndSecurityFailures",
+        "boundedSource",
+        "closeFailureAndNullContracts",
+        "literalAndOwnedCopy",
+        "fixedNameMissingAndNoFallback",
+        "independentConcurrentCopies",
+        "symlinkAndHardLinkRefused",
+        "everyIoFailureClears"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "xmlSha256": "f7b0019bec00f0b19503c8031918183eabf96dfb209632ba0b11ef6a9905996b",
+      "methods": [
+        "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored",
+        "serviceid007EveryOwnedCloseAndUnknownFailurePreserved",
+        "serviceid001BothFixedAccountsExplicitRequiredGroups",
+        "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets",
+        "serviceid003UidGidBoundariesAndCanonicalDecimal",
+        "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker",
+        "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection",
+        "serviceid005ByteNullAndImmutableValueInvariant"
+      ]
+    }
+  ],
+  "additionalSelectedRequestUnitTests": {
+    "tests": 32,
+    "exitCode": 0,
+    "staticBugs": 0,
+    "requestFilesProbeSnapshotCounterMissed": 0,
+    "xmlUnavailableAfterClean": true,
+    "rerunInPlannedSecurityRegression": true
+  },
+  "workerMergedCoverage": [
+    {
+      "class": "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "583"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "64"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "99"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "51"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "19"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker$NativePorts",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "110"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "23"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "13"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "13"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    }
+  ],
+  "canary": {
+    "tests": 105,
+    "exitCode": 0,
+    "initialInventoryFailureNotCounted": true
+  },
+  "bugs": [
+    "BUG-271",
+    "BUG-272",
+    "BUG-273",
+    "BUG-274",
+    "BUG-275"
+  ],
+  "related": [
+    "SSC-092",
+    "YKT-205",
+    "YKT-206",
+    "YKT-207",
+    "YKT-208"
+  ],
+  "sourceInventory": {
+    "src/deployment/systemd/schubert-nk-backup.service.template": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorker.java": "b7fe17a96e18f0e4f5daf6043a538ad2483bf34a6c1c4de10889ebd9deb5080a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java": "446a69ef6261e4b50c02eff7f0a0c285a66387c506a1adde18f5bef52e138dd1",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequest.java": "f6a51902468e36a39b56d0d23b34f430388b980157f17981161a19272059d7fc",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": "5d38b16c533d72fa3907f7b269b19b0abf0367683a4eb0b1c17fa88c5a2d2db6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java": "93b420f24c02cbe698d9efd02985d50ff07412eebde97a75dc5aad2121c887a4",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorkerTest.java": "756f08d50238de81118d50ad8b8f975ac08e6c70333e0b25357d7d94e1afaceb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFilesTest.java": "a74a5d5a52d5c963b428a2cc710da8e555baa4096bf560e1ab14c9f29251f59f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java": "76a61c922ab78ffa37ab7320e29f45efb90d299b0efed11d32db5e78de3b20c0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java": "643d490196d30719d940d1d406b8c01a129333b879613f8c5dd0c85a3a6ca73a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java": "3260cc426536010fc6c75e4e87b869c00ab7355a9e88de2c3ded0e2e5b5fa4ad",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": "2212bcdf2e64e58156843ac72ead010f405a547cb0faacb62dd9be6589979be1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java": "b4ac52b69984feae6561ee8ab404c31e76eb9311199c8fb615844dd0e870cd17",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/BackupRequestCredentialLoaderTest.java": "64162b5914243f9820198517b334e507c0545daec41a60871588da76b6a84534",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentityTest.java": "440df14de17f76466282b19a3f134c1796499d08695d50c004c5e86de0368a71",
+    "tools/quality/009_collect_media_evidence.py": "aaf6e39a34255bc42c0df1e329efb18e834b7cbedc3ca46da881bf715828d3f0",
+    "tools/quality/019_test_evidence_set.py": "e4702c5c0e7d75d597c5ce1ed7fc9103e52c08c9ee983f54ff757b3adb8fde7a",
+    "tools/quality/020_collect_batch_evidence.py": "5556ea95daac6c5b3bf5daff535db2ea4a106493b7e10b346983340bf7778507",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "1301ec51354305fc931683aeef5714dd5794cc81d219804ce4ec91ef853c4e68",
+    "tools/quality/bootstrap_ownership.py": "32ff3aee4a058f3df64a0a76fdf71a36271e5916dcab10b907c0476464e59780",
+    "tools/quality/vm/MergeNativeCoverage.java": "f7e495686d83138e5afad8f7ea1ab1f9980f925cff6f56a9ea653f06ee134c0f",
+    "tools/quality/vm/NativeBackupWorkerProbe.java": "9e94ee8642348d6ec45a1701cc6d35caa417f02cc455a1a0e6c383877f1b1819",
+    "tools/quality/vm/pgpt-native-backup-worker-309.conf": "a8d81bafe0839b263b1c7222e39f5d313397d079cc68ddbe7c14f096a2999178"
+  },
+  "privateOrTemporaryLogHashes": {
+    "/tmp/PG309-request-bootstrap.log": "812570f2bb7a6163c042617584e8a30814ce1f7be81ac7a0c7bf504528cda0b4",
+    "/tmp/PG309-request-unit-2.log": "a61875a2bb904e45b6a391e3038f925e26fd15add09cf6cfa99c686e9babf676",
+    "/tmp/PG309-worker-1.log": "b9a1a8ce47c9713ee7ebe48bd4969caceab94f10186dcb9de8ab986f3b43be93",
+    "/tmp/PG309-worker-2.log": "e6d1068fb2e419794626f5058f6d72965e560dee00c12cb3c9012333188e4a4f",
+    "/tmp/PG309-worker-3.log": "062882eb5b59a34e3199479b7a3de16736aabbca07b029c3ad65f5e821f503dc",
+    "/tmp/PG309-worker-4.log": "5ae9aff9d855af5e5e010859c7d27856a433f22b7474f0ad4e0086f334e63bb5",
+    "/tmp/PG309-worker-5.log": "c400c5bc9e6fdba529ecf072402e4e8abfcddae1a780d9e59ff1c287b0c3cc92",
+    "/tmp/PG309-worker-6.log": "b485fcec7b5a95ff3d48aac29570a1fba6244902f487e1d3e7a5991a979ddb04",
+    "/tmp/PG309-canary-1.log": "c58f4d6909ec297b303a481d9a03e3aab4197c2288d4df50a2ce6d58e90d6b46",
+    "/tmp/PG309-canary-2.log": "05a84bc072898604d03aaa6030a81cfa2cc051cd12c2e8d58e3fa4949cd098ee",
+    "/tmp/PG309-worker-native-report.log": "116ff0a743789d4ad45820764a27bca47117be3e8570da7b6297142c25c0411f",
+    "/home/mini/codex/project1/work/pgpt-vm/private/PG309-native-worker-025-prepare-2.log": "3891b7552e96db08e99fd5545104840a02c088bcf2bfd420ddc1ed72a76574ce",
+    "/home/mini/codex/project1/work/pgpt-vm/private/PG309-native-worker-025-complete.log": "1f44ffd47aa477396be7b752067dd5cf6c2a39de43e2184ca8ef3fe9be1bafa4",
+    "/home/mini/codex/project1/work/pgpt-vm/private/PG309-native-worker-025-start.log": "a1677bb34cb062f1bbfce51aa27a9223e9a6f74e9240adc989ecb3e174aa6b09",
+    "/home/mini/codex/project1/work/pgpt-vm/private/PG309-native-worker-025-prepare.log": "88cac433c939a8e45b8dbbaac7c69fff0f8ca7793a163003266169fafe3d4cce",
+    "/home/mini/codex/project1/work/pgpt-vm/private/PG309-native-worker-025-terminal.log": "0f069466d633461e374977092a68c06d2d7c81e189a876b1a2f17908b0df9958"
+  },
+  "limits": "Full Production security regression pending; R2/R3 not accepted. Initial format/test compile/oracle/static failures and native classpath/GC fixture failures preserved, not PASS."
+}

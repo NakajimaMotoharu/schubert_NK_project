@@ -18,6 +18,74 @@ final class InspectorUnitSnapshotTest {
 
   @Test
   void strictGolden() throws Exception {
+    String backup =
+        GOLDEN
+            .replace(InspectorUnitSnapshot.UNIT, InspectorUnitSnapshot.Target.BACKUP.unit())
+            .replace("RemainAfterExit=no", "RemainAfterExit=yes");
+    assertEquals("schubert-nk-backup.service", InspectorUnitSnapshot.Target.BACKUP.unit());
+    assertEquals(InspectorUnitSnapshot.UNIT, InspectorUnitSnapshot.Target.INSPECTOR.unit());
+    var backupState =
+        InspectorUnitSnapshot.parse(
+            backup.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP);
+    assertTrue(backupState.quiescent());
+    assertTrue(
+        backupState.receiptAfter(Optional.empty()).isEmpty(),
+        "backup status10 must never be successful");
+    assertEquals(
+        OptionalInt.of(0),
+        InspectorUnitSnapshot.parse(
+                backup
+                    .replace("ExecMainStatus=10", "ExecMainStatus=0")
+                    .getBytes(StandardCharsets.US_ASCII),
+                InspectorUnitSnapshot.Target.BACKUP)
+            .receiptAfter(Optional.empty()));
+    assertThrows(
+        StopGateException.class,
+        () ->
+            InspectorUnitSnapshot.parse(
+                backup
+                    .replace("RemainAfterExit=yes", "RemainAfterExit=no")
+                    .getBytes(StandardCharsets.US_ASCII),
+                InspectorUnitSnapshot.Target.BACKUP));
+    assertThrows(NullPointerException.class, () -> InspectorUnitSnapshot.parse(new byte[1], null));
+    String running =
+        backup
+            .replace("MainPID=0", "MainPID=123")
+            .replace("ActiveState=active", "ActiveState=activating")
+            .replace("SubState=exited", "SubState=start");
+    String invocation = "123456789abcdef08123456789abcdef";
+    assertTrue(
+        InspectorUnitSnapshot.parse(
+                running.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP)
+            .running(123, invocation));
+    for (long pid : new long[] {1, 2147483648L, 124})
+      assertFalse(
+          InspectorUnitSnapshot.parse(
+                  running.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP)
+              .running(pid, invocation));
+    assertFalse(
+        InspectorUnitSnapshot.parse(
+                running.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP)
+            .running(123, "public_wrong"));
+    assertThrows(NullPointerException.class, () -> backupState.running(123, null));
+    for (var change :
+        Map.of(
+                "ControlPID=0",
+                "ControlPID=1",
+                "ExecMainStartTimestampMonotonic=1234567",
+                "ExecMainStartTimestampMonotonic=0",
+                "ActiveState=activating",
+                "ActiveState=active",
+                "SubState=start",
+                "SubState=exited")
+            .entrySet())
+      assertFalse(
+          InspectorUnitSnapshot.parse(
+                  running
+                      .replace(change.getKey(), change.getValue())
+                      .getBytes(StandardCharsets.US_ASCII),
+                  InspectorUnitSnapshot.Target.BACKUP)
+              .running(123, invocation));
     byte[] bytes = GOLDEN.getBytes(StandardCharsets.US_ASCII);
     assertEquals(373, bytes.length);
     assertEquals(

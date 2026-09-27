@@ -11,6 +11,21 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorUnitSnapshot {
+  /** Fixed maintenance targets only; no arbitrary Unit string. */
+  public enum Target {
+    INSPECTOR("schubert-nk-inbox-inspector.service"),
+    BACKUP("schubert-nk-backup.service");
+    private final String unit;
+
+    Target(String unit) {
+      this.unit = unit;
+    }
+
+    public String unit() {
+      return unit;
+    }
+  }
+
   static final String UNIT = "schubert-nk-inbox-inspector.service";
   static final String PROPERTIES =
       "Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID,InvocationID,"
@@ -20,12 +35,19 @@ public final class InspectorUnitSnapshot {
   private static final BigInteger U32 = new BigInteger("4294967295");
   private static final BigInteger U64 = new BigInteger("18446744073709551615");
   private final Map<String, String> values;
+  private final Target target;
 
-  private InspectorUnitSnapshot(Map<String, String> values) {
+  private InspectorUnitSnapshot(Map<String, String> values, Target target) {
     this.values = Map.copyOf(values);
+    this.target = target;
   }
 
   public static InspectorUnitSnapshot parse(byte[] input) {
+    return parse(input, Target.INSPECTOR);
+  }
+
+  public static InspectorUnitSnapshot parse(byte[] input, Target target) {
+    Objects.requireNonNull(target, "fixed Unit target");
     Objects.requireNonNull(input, "unit state bytes");
     require(input.length > 0 && input.length <= 2048);
     byte[] copy = input.clone();
@@ -41,8 +63,8 @@ public final class InspectorUnitSnapshot {
         String value = lines[i].substring(separator + 1);
         require(KEYS.contains(key) && fields.putIfAbsent(key, value) == null);
       }
-      var result = new InspectorUnitSnapshot(fields);
-      require(result.value("Id").equals(UNIT));
+      var result = new InspectorUnitSnapshot(fields, target);
+      require(result.value("Id").equals(target.unit()));
       for (var fixed :
           Map.of(
                   "LoadState",
@@ -57,6 +79,7 @@ public final class InspectorUnitSnapshot {
                   "no")
               .entrySet()) require(result.value(fixed.getKey()).equals(fixed.getValue()));
       require(Set.of("yes", "no").contains(result.value("RemainAfterExit")));
+      if (target == Target.BACKUP) require(result.value("RemainAfterExit").equals("yes"));
       for (String token : List.of("ActiveState", "SubState", "Result"))
         require(result.value(token).matches("[a-z][a-z0-9-]{0,63}"));
       String job = result.value("Job");
@@ -111,7 +134,22 @@ public final class InspectorUnitSnapshot {
     String status = value("ExecMainStatus");
     return status.equals("0")
         ? OptionalInt.of(0)
-        : status.equals("10") ? OptionalInt.of(10) : OptionalInt.empty();
+        : status.equals("10") && target == Target.INSPECTOR
+            ? OptionalInt.of(10)
+            : OptionalInt.empty();
+  }
+
+  /** Necessary worker-self binding only; independent kernel/NSS/namespace gates remain required. */
+  public boolean running(long pid, String invocation) {
+    Objects.requireNonNull(invocation, "manager invocation");
+    return pid >= 2
+        && pid <= Integer.MAX_VALUE
+        && value("MainPID").equals(Long.toString(pid))
+        && value("ControlPID").equals("0")
+        && value("InvocationID").equals(invocation)
+        && new BigInteger(value("ExecMainStartTimestampMonotonic")).signum() > 0
+        && value("ActiveState").equals("activating")
+        && value("SubState").equals("start");
   }
 
   public boolean matches(InspectorUnitSnapshot other) {

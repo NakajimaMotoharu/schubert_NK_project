@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG309: NK-OPS-001 BackupWorkerRequest→BREQ001～008、BackupWorkerRequestFiles→BREQFILE001～008、BackupDatabaseWorker.execute/admit/metadata/NativePorts/main→BWORK001～008/native025、InspectorCredentialLoader.readBackupRequest→BREQUESTCRED001～008、FixedServiceIdentity.resolveBackup→SERVICEID001、InspectorUnitSnapshot.Target/running・Probe.forTarget→UNIT001～016。BAK/BKO/OPS009/UI251/SS3416.1/3436.6/SSC092、BUG272～275/YKT206～208、018138/139/provisional PG309。限定＋実固定Unit worker成功、親M/A/fullbackup/security全回帰/業務main/CHR未受入。
+
 PG307/308: NK-OPS-001 BackupArchiveProcess.NativeStart/PendingHold→ARCHPROC008（018135）、BackupDatabaseCopy.dump/metadata/name/IO/erase→DBCP001～008（018136/137）。BAK/BKO/OPS009/UI251/SS3416.1/3436.6、SSC090/091、BUG271/YKT205。新全counter0/静的0、105canary、native023 Production copy実dump・native024不明開始実Unit隔離。Batch452回帰実行中、wholebackup/parentM+A/実業務main/CHR未受入。
 
 PG306/SSC091/BUG271/YKT205: BackupArchiveProcess terminal hold→PT-OPS-ARCHPROC003・001～008、018132/133。主8/関連64PT・新counter0/静的0/105canary。取得済み子の限定修正、partial start/固定Unit/parent/copy未接続。

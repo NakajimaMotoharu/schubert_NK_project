@@ -94,12 +94,23 @@ public final class InspectorCredentialLoader {
    * authenticates the dedicated Unit/root and stages private tmpfs0600 for libpq.
    */
   public byte[] readBackupPgpass() throws InspectorCredentialException {
-    byte[] buffer = new byte[65537];
+    return readBackupMaterial("backup-pgpass", 65536);
+  }
+
+  /**
+   * Fixed nonsecret backup-only request; caller consumes/clears and validates its canonical codec.
+   */
+  public byte[] readBackupRequest() throws InspectorCredentialException {
+    return readBackupMaterial("backup-request", 160);
+  }
+
+  private byte[] readBackupMaterial(String name, int maximum) throws InspectorCredentialException {
+    byte[] buffer = new byte[maximum + 1];
     try {
       Snapshot before = root.atDirectory(this::directory);
       int length =
-          readOptional("backup-pgpass", false, buffer, true, before.metadata().device())
-              .orElseThrow();
+          readOptional(name, false, buffer, true, before.metadata().device()).orElseThrow();
+      require(length <= maximum);
       require(before.equals(root.atDirectory(this::directory)));
       return Arrays.copyOf(buffer, length);
     } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {

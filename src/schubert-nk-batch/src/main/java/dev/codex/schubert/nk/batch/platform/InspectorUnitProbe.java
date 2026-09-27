@@ -18,13 +18,23 @@ public final class InspectorUnitProbe {
   }
 
   private final Reader reader;
+  private final InspectorUnitSnapshot.Target target;
 
   public InspectorUnitProbe() {
-    this(new NativeReader());
+    this(new NativeReader(), InspectorUnitSnapshot.Target.INSPECTOR);
+  }
+
+  public static InspectorUnitProbe forTarget(InspectorUnitSnapshot.Target target) {
+    return new InspectorUnitProbe(NativeReader.forTarget(target), target);
   }
 
   InspectorUnitProbe(Reader reader) {
+    this(reader, InspectorUnitSnapshot.Target.INSPECTOR);
+  }
+
+  InspectorUnitProbe(Reader reader, InspectorUnitSnapshot.Target target) {
     this.reader = Objects.requireNonNull(reader, "unit reader");
+    this.target = Objects.requireNonNull(target, "fixed Unit target");
   }
 
   public InspectorUnitSnapshot read() {
@@ -37,7 +47,7 @@ public final class InspectorUnitProbe {
     }
     try {
       interrupted();
-      return InspectorUnitSnapshot.parse(bytes);
+      return InspectorUnitSnapshot.parse(bytes, target);
     } finally {
       Arrays.fill(bytes, (byte) 0);
     }
@@ -88,13 +98,26 @@ public final class InspectorUnitProbe {
     }
 
     private final Start start;
+    private final InspectorUnitSnapshot.Target target;
 
     NativeReader() {
-      this(command -> SystemctlStateSource.NativeProcess.builder(command).start());
+      this(
+          command -> SystemctlStateSource.NativeProcess.builder(command).start(),
+          InspectorUnitSnapshot.Target.INSPECTOR);
+    }
+
+    static NativeReader forTarget(InspectorUnitSnapshot.Target target) {
+      return new NativeReader(
+          command -> SystemctlStateSource.NativeProcess.builder(command).start(), target);
     }
 
     NativeReader(Start start) {
+      this(start, InspectorUnitSnapshot.Target.INSPECTOR);
+    }
+
+    NativeReader(Start start, InspectorUnitSnapshot.Target target) {
       this.start = Objects.requireNonNull(start, "query start");
+      this.target = Objects.requireNonNull(target, "fixed Unit target");
     }
 
     @Override
@@ -107,7 +130,7 @@ public final class InspectorUnitProbe {
               "--no-ask-password",
               "show",
               "--property=" + InspectorUnitSnapshot.PROPERTIES,
-              InspectorUnitSnapshot.UNIT),
+              target.unit()),
           2048);
     }
 
@@ -125,7 +148,7 @@ public final class InspectorUnitProbe {
               "org.freedesktop.systemd1.Manager",
               "GetUnitProcesses",
               "s",
-              InspectorUnitSnapshot.UNIT),
+              target.unit()),
           9);
     }
 

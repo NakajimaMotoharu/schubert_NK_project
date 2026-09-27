@@ -20,6 +20,7 @@ def shared_file_program(classname):
         prefix + "InspectorCredentialLoaderTest": "NK-DAT-001",
         prefix + "InspectorDatabaseCredentialLoaderTest": "NK-DAT-001",
         prefix + "BackupCredentialLoaderTest": "NK-OPS-001",
+        prefix + "BackupRequestCredentialLoaderTest": "NK-OPS-001",
         prefix + "InspectorApplicationTest": "NK-DAT-001",
         prefix + "ServiceCredentialReaderTest": "NK-OPS-001",
         prefix + "ServiceCredentialSetTest": "NK-OPS-001",
