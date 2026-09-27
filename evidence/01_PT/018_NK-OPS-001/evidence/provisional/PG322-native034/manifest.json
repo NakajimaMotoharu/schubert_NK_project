@@ -1,0 +1,34 @@
+{
+  "id": "PT-OPS-NATIVE-034",
+  "formal": false,
+  "dateTime": "2026-09-28 08:27-08:34 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, systemd259.5, dedicated schubert-artemis UID994",
+  "branch": "dev-foundation",
+  "sourceCommit": "ccc7abe79 (artemis.service fixed Unit), no new Production code",
+  "commands": [
+    "guest root: verify existing instance hashed 4 ENC entries without displaying content; install new root600 fixed source from existing hash properties, preserving original",
+    "guest root: systemd-run --system --wait --pipe --collect test-only units with same User/Group, LoadCredential and BindReadOnlyPaths: stat private target, sha256sum private target, id -u",
+    "guest root: read-only original SHA/current and real artemis.service inactive/cleanup missing checks"
+  ],
+  "exitCodes": {
+    "sourceProvision": 0,
+    "privateMountStatProbe": 0,
+    "privateMountHashProbe": 0,
+    "dedicatedUidProbe": 0,
+    "postStateCheck": 0
+  },
+  "input": "existing four hashed ENC entries, old instance file owner schubert-artemis mode600; no plaintext/password content exposed; root source previously absent",
+  "expected": "new root600 fixed source; systemd private mount exposes same bytes to UID994 via distinct private inode root:root0440; real broker Unit remains inactive until Cleanup genuinely available",
+  "actual": "root source SHA256=e890987596e2fc5a204ff298aba80d3814f90e6cb4b3310b5bccbe5d4945f13d; transient target SHA equal; private inode55:2 root:root0440 differs host old inode64769:503359; UID994; three transient exit0; actual artemis.service inactive/PID0, Cleanup not-found; original three SHA/current unchanged",
+  "files": [],
+  "coverage": "No new Production Java bytecode; OS credential bind proof only. Real broker start/journal/readiness and all-scope coverage not claimed.",
+  "relatedSsc": [
+    "SSC-103"
+  ],
+  "originalSha256": {
+    "active": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "begin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "run": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63"
+  },
+  "remaining": "Transient systemd bind contract is verified, but actual Artemis Unit cannot start with mandatory Cleanup absent; actual Unit binding, broker readiness and clean journal remain unverified."
+}
