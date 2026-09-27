@@ -1,0 +1,2732 @@
+{
+  "status": "FAIL_FORMAL_STARTUP_COVERAGE_PROVISIONAL_REGRESSION_ONLY",
+  "sourceCommit": "c4ec7d9b8",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-09-27T18:52:50+09:00",
+  "formalSourceUnchanged": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+  "trigger": "SSC086/087 shared native security change D04/D05; current same-source six-module regression",
+  "commands": [
+    {
+      "command": "mvnw -o -pl six-production-modules -am clean verify",
+      "exitCode": 1,
+      "logSha256": "c45b1fe4f06e46e784158b2213e9351d72318b88f01449dc96efa44894701723"
+    },
+    {
+      "command": "mvnw -o -pl src/schubert-nk-api spotbugs:check",
+      "exitCode": 0,
+      "logSha256": "4baff1ad90374d7afc2fabc1fb997825780b80836b92cd2bf25073c878121573"
+    },
+    {
+      "command": "mvnw -o -pl src/schubert-nk-web,src/schubert-nk-batch clean test jacoco:report spotbugs:check",
+      "exitCode": 0,
+      "logSha256": "83e9d20bcf14aa1367b42c8f70e3f8bca7d2cb1c3c5548f4055f69237681abaa"
+    }
+  ],
+  "modules": {
+    "protocol": {
+      "results": {
+        "tests": 80,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "coverageSha256": "334c01e4ae6f9f455aeb8481b5b4f3d24425323354fa862cf0d3c2d1f0a58554",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "89de0cd2c34d7f54e1a6bde2fb16155925a92ffb0524efc812b9eb71f09aa798",
+      "sourceInventorySha256": "57fa78dc6c6e8ffec732ebf45db088ca70d66ca0fa888c2133f6eae5153fe399",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+          "sha256": "bec348d2bdfa1831fa0adc76667d40d8ddc3c159fffa474ad0347ce3c66937ca",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "sha256": "df1fa515c13583afb17fae45077c3d05490e517f07141e054e93733ffb583840",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "sha256": "e1da7155586831c49129fab82dade7772c39577920750bae69f1c674ac37c593",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+          "sha256": "2f9e293987c8f96e184138f580f67bd9d2cbc7182000c9017e94ed923867bb18",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+          "sha256": "2353248b40e84621f84f02ca763e1eec79359b44e603e2b9a4eeaef509a98755",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+          "sha256": "1c5f23ca587488974be767fc3285da0e1220035d6b43554d1d10b43ed8fd11d4",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+          "sha256": "088b78c3df445ac58a762ff3c5bf98ed984bb2a443fd1fd9f15c824c0aa83a2d",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+          "sha256": "93b9ba37372c7716a003dcd5828297059bf6fff854894f2ba3ba360dde7c1851",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "sha256": "cf40b497361fd79c916e4c5018eeec90a20d80cb2e36625c31bdcdbca2f8117f",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+          "sha256": "5c7d9ad57455e386f2701eccab2e3a3b884f981d125f44acd9bdab311dc82fce",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "sha256": "242a64ed5af9d512d854c9c8c54cdb5bce91e2c889d099a7f1cdf7a8e563d96a",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+          "sha256": "28192e612e008c01ec4e0a8ca2c88ec1ab9c78bb1856089149c6defee1a468ba",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "sha256": "7aa8ec5297db3c3a887300aae9c05d6a341929de57ba92f458156308fabd52f1",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+          "sha256": "9e786a516a0addbccbb3e7788db31c18acc7f7d7e75a0522f8faac4b1c4d01b5",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "sha256": "a56a9fe9ca990c214f8d8bb9cd693edc30fbaf30df687514af945fea42b5a045",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+          "sha256": "63e646695adcf2323b0559014c0ffdaeb20112e72f6ac144d189738bdb6d0513",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+          "sha256": "094dce45321b9a19f108c64ec289f2a8b8ea6eb1255bc713fde49329a76368f0",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "storage": {
+      "results": {
+        "tests": 141,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5107
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 413
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 988
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 421
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 214
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 29
+        }
+      },
+      "coverageSha256": "6da4307ca5781d1e37c030f76187ec151c429369770926713469be0a2a1f4aeb",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "66116ee3e25af12cd96a6f966dbbe44ddf4c5e3e65564d2e2062a5d7bff560a4",
+      "sourceInventorySha256": "df0830fbfa8bf2efbfb4c26011bd20c892146e57a043fc35f52e4931f43c3789",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
+          "sha256": "e1d894285062bb118a592cf47ad1c3a481113419ab3fadbb4bde51181cbebf73",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.ExistingFileAccessTest",
+          "sha256": "360024f85d1913a297df5ba1ba41baa560e1cf31b6a67ef14dcf0609c5a5599a",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest",
+          "sha256": "7021450f8064068e45d335e2493a9783142ad73008f9b5990c722932b61303cb",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest",
+          "sha256": "2b7dc4e388846a2cc1d6596251d0f90885c69358dcb20a8f2fca949efb4d184c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxFileLockTest",
+          "sha256": "7a7658d0c6531b0d1855308e7660a7d8089a4037007d1af662f46be086a58277",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest",
+          "sha256": "17a2b7887a5ca3d03ccbb37fb98edeb8f8956ad3aee1e8c53ea628282292ee08",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "sha256": "abe8cdedc1224da7d07435a3c42ae2e9ad8c62fa20c0284731cb152373989058",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxProcessExecTest",
+          "sha256": "45649dea2f83cb46d30138aacf59280aa200a3d636f00a8a349c918bea426050",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxSealedProofTest",
+          "sha256": "b4f45d6eca10bceda57dcb08e3870f286d2d4567094173b80cc73f5028a65560",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.LinuxStartupFileLockTest",
+          "sha256": "dcfebcd7ac7a3b5afb6868f92d2bdb5ead3238377c89abae54e816be28f81536",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+          "sha256": "6e05f381fbcf19d757fb6c84dd6527775340fb5e5bd1925e73153215cbd81068",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
+          "sha256": "95bd52a10974c96b319cdb7e09bdf31717108db963ec02dd5781102d30ed2a8b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+          "sha256": "7cbdd70fbf72faaf47cbc4cdb09928b2ed10c15f3a2221705e781b76a26b2a39",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "sha256": "a34923af69530492c01f8ac75295070cf939c41f94474204d6cc6560e27a8899",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest",
+          "sha256": "6acd5ecf1730610fc5322b34d96bf9f3a07ab3a6a55bd46937e768668b42c5de",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.ServiceCredentialIdTest",
+          "sha256": "307adb15ca4e4a68093956048ca09d849ee3a463a808b0adfebc558403278572",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+          "sha256": "a940a179e7f54f6954ccff6c3a260fb7730fa5920a02301aa2baacf8959d0fbb",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+          "sha256": "b6c497172a8cf7702df93c45fdf28546e62c22273bdcd45f8c9ecb34042cf6bc",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.StorageRootInspectionTest",
+          "sha256": "b5e26ffa0f23445deaa26a6918f757fb2fbdda627bcdfb5b582d3f2215b99cc2",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.storage.StorageRootLayoutTest",
+          "sha256": "f4e3495f1b178748dc40f263a6cb38d205f82e352edf2997bf64a41bfce0a1ca",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "bootstrap": {
+      "results": {
+        "tests": 71,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2186
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 210
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 443
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 201
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 96
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 16
+        }
+      },
+      "coverageSha256": "4a5a01f1076e3c7367dc28abc50849dc19330d7541e262072f7cf72f2325b6ca",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "19029678223887b75b97f9cbef6c0dab03db05d61239ba2b96bb5784ca59012b",
+      "sourceInventorySha256": "834359bef2c3b2ee9c6989604b2de57f5e7b4f2a56216f87ff4f2d3ed616b9cc",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest",
+          "sha256": "1983419a3a73eb7c3309d126a1bffd3751550ed97d8da3c6d2e5a17551e942b8",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest",
+          "sha256": "604e746fd63815af6cbfa1fa1f5db8e058d9ebb789de548533ef86ee7e12888e",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest",
+          "sha256": "0acc454cfbe52f46c47dc04763781162e73651d650623ba65a3fba5e7a1d1676",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest",
+          "sha256": "87e1cacea9a6940fa1c2a035d87a14bb9d264e327770f8a6880cdd02cfac33ff",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+          "sha256": "75481f32c11dc8da913c7569ab41c8ab6fdd790e66940b0ca2733b2231ae9ad0",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest",
+          "sha256": "10b743da8199ffb7eb56ce2760f990a41b1d628e35942f3ce387639f25e2c106",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest",
+          "sha256": "4890661e97a8c31d763a5003df444151884c8f8c8450495684aeffade656e6d5",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest",
+          "sha256": "ee5dd17438d49a6546fa49192d92968b1a0eb87a74fe267eaf666082b8b7b986",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "sha256": "3e7b953d291a0b79a4ad91e7417c0785925c4d166442b514f7d251d745202a83",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest",
+          "sha256": "5b090bc0c3e5cc4545a21e755a724660cddafd32cd2c2f70221b467e3341a824",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "api": {
+      "results": {
+        "tests": 734,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 34544
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2788
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 7528
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 2557
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 1115
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        }
+      },
+      "coverageSha256": "3d357734df28a0dc6827647f1326f53f03993604ef64b27417b8b89c3cd1eec0",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "666cbd9172e5fa816c270e1a342e7fc29e06674133f7d01cf228c32ec7483560",
+      "sourceInventorySha256": "c7faa6144171f395e5579ee5d8f99a756d6e2a6744be1f092686ea8a516eef6d",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest",
+          "sha256": "1567d8823aba80ad41c0609ae85b3e68e803fd1a5401700e6ba84c0344649b9f",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest",
+          "sha256": "c62bf92c717a7c47ebdd41cf8d6d179dbea43a447a50921f688b2e55e76dba54",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest",
+          "sha256": "d96e718c5e9f05671723415d761c8b7b3f1896f0c3dd474171c19ed36644c3b6",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest",
+          "sha256": "153fca96c86b9d595a5fb0a89878bf86426e450adc2aacdac1d9821d782c17f7",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest",
+          "sha256": "b8afe876d6fb19041f4e0f37900dbcf9a0c0886f791ae83f0e09da8666bb6442",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest",
+          "sha256": "835fa53300dbd003a3d43dad9cec743d784365d1686f61b1ec4d1311293f77a5",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest",
+          "sha256": "69992a179809f399b0a335e82e3df2115afb54a7be248a99d903df349b8becb5",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest",
+          "sha256": "8713b0c5e1d4ffec57ef834947691d5ddd733633555abf42b5f09bd6a77c6cc3",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest",
+          "sha256": "e2a540482e05518e90a48e829e60a56a99e936db08e8e544b68a813d05318428",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.log.LogRequestTest",
+          "sha256": "f37ddcd050b5ef7ea9c0dba14bb3efab5aaf13c3b22fb092fd6816a6f2d5ce42",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest",
+          "sha256": "94d0d002eab9de7584516b447ed7f7a25be5b67a6b06b5b67cd6247fea12483f",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest",
+          "sha256": "4abdc9e55fd39a6f23fa8dcce106b1afb1e747822a0ef356fb5f92887d8fc578",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.media.MediaRequestTest",
+          "sha256": "8a6265806db42cc0cf399b1b00c810a76a36da1602ffc1716f61e4871f8fb7ba",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest",
+          "sha256": "ae32f16a963afe5d79cbca5a20768c7b57f8ca29e763acc7359685717b6d13bb",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest",
+          "sha256": "32c48104762033e2c71697c3ff4e1f83c12a510df5012ee516646623bd0d6ceb",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest",
+          "sha256": "d98a105bce8b5e4b4c7fde305cbb1bf3e63908dc1270be8004d9a46c50a59770",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest",
+          "sha256": "e8dd1e1863271b7c69c34e852ef08a24a9959687b5c344ae90203912e440c7c3",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+          "sha256": "211d6118d7b9867df6402627dd5aec8be937c5bde9c907e6662bf6c80b3c3d41",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest",
+          "sha256": "eea25981e25e607a9cdb1acf00e93f0b15746dde4df2ad4c57c806a46e81683b",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest",
+          "sha256": "0dc53dd766e2cdaa1eedfa99302f95631167e3cbb6225b9f55c84d643b392828",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest",
+          "sha256": "9af32161ae5fb829a9aab63375af7f651ef5d264faed78fe71a6029b1572ad45",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest",
+          "sha256": "1801fef3465d3072a069af8ff83388608169a176070f5b8ad83d44b48cdab7de",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest",
+          "sha256": "b13989f7c1136c487236bde48434c3995c7593bfd5eefb2a89d6c403e55c28e7",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest",
+          "sha256": "f4efbf1425cf211a8849450a8c22e90d133cec7820e2034516647e93c5c2bb7b",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "sha256": "69c6911901560124d76636f2a40f9079b32a3f943cdefceefbc6266c8826f882",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest",
+          "sha256": "4843a2820cad52de2a2cbf0216fcce08fdd7a4568186035e37cb250dcd85f24e",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest",
+          "sha256": "9a1b6fbf1a685a4c0600c5de7d56efc2fed880b9e847fcd56d9ddeb24a346267",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+          "sha256": "12f4c92bbfbc6d90d351a2461efde0aa6e3c915afefa9ba00e010c350bfa2dcc",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+          "sha256": "566289b232132e071db079ed5627743e11b6588137f0487d55a9a6688230a4e7",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.database.RequiredColumnTest",
+          "sha256": "eafc39b92a0defaab15b09ce79fd4431785e83e56e025fd63774aa15ebca5abb",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+          "sha256": "2d2f4883c2988cd2f5e866d47e185cde78d25cbeefc4122d10accec00eadd563",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest",
+          "sha256": "c25d738cb9c01c6bb4b38488f3eafbc6ab986d723b0fd433d4d05dc818bcd562",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest",
+          "sha256": "2fe796459943a199c76dd168535533384d62dfaf5afbfe8a5e9fc54620c2435b",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+          "sha256": "2af747832d3ecb3a79e97b1ff6785a6adde6e67edc4dbb3e66ee8c973d68c6f8",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest",
+          "sha256": "8f9f3221b7c3f9244b693de7abd3301b015d734672ae2ca764be0b9b7847606b",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest",
+          "sha256": "82f261415197b67a09fd60994b53b4136fb4653ba937b16e39ba2d47d218cfff",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.file.InspectorApplicationTest",
+          "sha256": "bdc120359b6fcddfbb5d808113d485823530c7869ce8f6f789b443f207a22821",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest",
+          "sha256": "2073faeb11249617b74ad3b579380683293eb6af1d5daf303d5d1d9e7718bb94",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest",
+          "sha256": "2c7b53065eccaf56217ccabb770c79fc677edb3b7ccf048ecac429459f78a411",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.InboxModelTest",
+          "sha256": "2eb55020b45db70fc236a6d7530a8cd9f35b0533be2e66ec2cac9bb9ac0210e2",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest",
+          "sha256": "3f4ca5447665d7c5e5543754afdc9d7809b094cfcd2239ac2e6f0db93c7e42dd",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest",
+          "sha256": "15771edd630d8a2f013eb2edf816edf5b60826794dd77b0b7318d3c003425089",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+          "sha256": "7195066eaca2549b5278e96472f32bf8acc35ea9caf3cebfa5299dbfd9576a12",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+          "sha256": "f15ea9ef6f8194ebf42f1dfbbbbae69aaa9797f169f6eeb07e186e78d69d9139",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+          "sha256": "d299b2240bddda1721dec849bc8793469b861ec9ee69f7b579bb3d88710bfa71",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest",
+          "sha256": "df0ef4290ff7dc2a0b8401d8b1470753495ca702d8085fdac8df9777f3f09dce",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest",
+          "sha256": "37f60a9ba59672c7fecdbb41fc73b101a18d5735d52cfa858bf7d079bebc60bd",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+          "sha256": "95b23b5f4237190eeefe479d71c73d35a7c5f060816df59fcff29bee2a0f9a08",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest",
+          "sha256": "79002808735edf3fa370081731c91ce1c6fe4975738c6fdb4e329aeb921984e9",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+          "sha256": "e39d3a039a505909fd03f43f06b76f4a66eea6afb06cfda697ccec38969a8d50",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest",
+          "sha256": "ca12a18bacff511a41eb7b3150d19a9349f7e23e1e48b6af813007e4ed06a4f2",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest",
+          "sha256": "3fe5f345ecd0f31479ec0caea2f34c5048cadda6666387bd8826bc69501b72f7",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest",
+          "sha256": "aed4ae688b0ea50638dc97334e94b945fcac2410f3eb445bf45acd46e811aced",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+          "sha256": "7aacdc615cd42a9151c97c602f62f75fa5b7b54ed94d948733c0c0b171a9b8f4",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest",
+          "sha256": "2661db3f45d42bc1ad77e576e2384ac4dde7a58e67c8d1e6b56c398ed0f4ae83",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest",
+          "sha256": "7c91ae0a450d3a30bfaa42baa451c44caef0561d98b89ccd565f0a4cb8cf871e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest",
+          "sha256": "2132506463d379bcdd9e1f8c60a4d3208b76b0c017622064b207bc15a0e86ce9",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest",
+          "sha256": "23dc9df2a8c06d7e0c6339eee4c79edf9580ce54bdc50f269269597d93dc1015",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest",
+          "sha256": "ece4a541e87685ea3a9d8bae53a0cfab40288a047e36ad7f15d8932f41759931",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest",
+          "sha256": "d9633030bf079b18efc7fdd4f1e46a03e0a2c843302759d477fff701bce93d0c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest",
+          "sha256": "7d4206d77db58a0b9a0dec7b0163ce67bd76da3a3ea83f3ef6a817ad293a661f",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest",
+          "sha256": "e7fa7ae885d8b776b58f0e164221805e49358a8faecf6c7632536b877b52e6ef",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest",
+          "sha256": "223345e72120d70e7ea982e3edcc594ba57f8f56a132ecf224f6f589c3a74ac5",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest",
+          "sha256": "2803c658401e8b871bdaa80cf0bf4dd9bba5feda7f34c2f5da9f8430f529ec98",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest",
+          "sha256": "9b9da20693110d08a2fce9507e32395d1b77f0cb63cc202f63fa11f78ed4c956",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest",
+          "sha256": "0705375c1793dcb6f4fd943b05cde51e94369f251d07d356cd5db62f6108e640",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest",
+          "sha256": "0956164b29f89c0d5e94ba74ff2148a10ad8ca8d0dfcf9770c1eb6aa745cda1f",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest",
+          "sha256": "0ef9b4ba9d15acae3a8ebc2c7cff86a2fffbf2ce487c6c6825a24bbc92feccd0",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest",
+          "sha256": "344e3d384a9220ed1bb5731598bacacf9c32b42c13775f75b1f1ab36a00b0ef1",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest",
+          "sha256": "818a1c1cb10c4e9e4aa3c50924fb1541640ca9a814b0555743115c67f4b24129",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest",
+          "sha256": "ee6f3c3f7c93a7c609a6d9b822d5ab94c6023087ad4f4ab2c55bd10be6975df1",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest",
+          "sha256": "d99d640b41cb79395086e27d0def0c9c43c95f842e34353e81f47572607871c6",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "sha256": "8a46aa15cd2c1e558c79878b652c04c5ee6e0e5c978ba0661b87900cf2b43cac",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest",
+          "sha256": "8bb25001167404b784cffe60d691921c5a779dc123f4abcd4fc20a3d7d59a78b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest",
+          "sha256": "d76801398de2db68f4cc43317760134b9cc5fc922200853b68577a2f773956d7",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest",
+          "sha256": "fba8027624ff2bd1d5a3e08717243a7bd1f594aab01e30f13b35fdc6b129ab7b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+          "sha256": "12598d2e5197968f447b9b4a2dacc1e59073cdf3f863a5d36c3d3db6e14e6366",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest",
+          "sha256": "f4ef1ddc289a5bb8d6d35bccccdd0b36feca6d37cdcdb5b4d50f3eb82bec9949",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest",
+          "sha256": "558e86bab46afec3fc7fdcc0f26a9da6d7013eb6d878d1e78e3fc503b92d6a8f",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest",
+          "sha256": "91da290f196abb4fd2b4f7e65c82d0a35adbe4fa9e79c17ce3ab8002010d7dce",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest",
+          "sha256": "b80e487c4408b63ac0670ec8d99bd19a6f4c7be7a3ac2443b7e851b3db1cb7bc",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "sha256": "d30c50f0589273499320c29726c25a149ef6570177e8ffd21e7d6f25261f8747",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest",
+          "sha256": "a2d341bf4a50d453572b72d7259bea979dde75b5f8e946f50ad0b41c1446fc07",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest",
+          "sha256": "917317f988db22916ab12bc244eac0391f13aaf4abc7b4ce4b9d9164faa5b8b5",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+          "sha256": "6e23f7c1d45d97e88675d3ce1f2251b46e4ebf35655e6e4a464ed2e4e4ee918c",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest",
+          "sha256": "bd33859871b29f634d3a86eddad9d489809c0b2e90dfc13383f41454a1c7893c",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+          "sha256": "d0c7e0ab523aef79df45dc2ce6e78d1dc604d97504440c02105fb625d6a9335f",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest",
+          "sha256": "26a59dfc07011332f7e0bdd2bd1343f806c39db7a013d80d4f642bdf2414a6eb",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest",
+          "sha256": "063a41b0347c459b7c8fc874089553a4439fd1cb31a6df53a98dd5bca0c06458",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+          "sha256": "f7e74bc37c70a08b71adc3a619eb9a8f05fdafa9b139737cf54198900857794d",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest",
+          "sha256": "64aedb9d19e504d0284f14f506fce9496ac0307b283ed6fd158a27aeed73d560",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+          "sha256": "8b4a49c5f98b5bdc9b8f3b28ecd55b34f293d21b754fcd48b3e0f948c80fc136",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest",
+          "sha256": "2fb562509cef4b5951314459759ad16647b6db6c9bcbc5a853f6ec07d67f6b99",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest",
+          "sha256": "f47f5d3c3c83a018e57020d782df03566888f3e1df385b2a730d3e56bf5ba882",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest",
+          "sha256": "07854ab4a95e8e969150e40969da841e25bb0083c494f8ef53f13e93c12a8cbb",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest",
+          "sha256": "5c412585ece22564aa586914ca410904c794f6924f1d0f7faac80b7632291abb",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest",
+          "sha256": "4debcccf0a8d35f60639b37dbf991ecd7400907c790d6a8c5668748dcc856945",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthContextCodecTest",
+          "sha256": "fe98a344761e1e4a7cf3c20fc572ae91a559b7c11b9d03451fb8967aff809915",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest",
+          "sha256": "e8365204d924d1d57d120a88a14dcf7578ceca07b16752a28b39ed641725b1f3",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthSessionServiceTest",
+          "sha256": "cb1ed97716b0c7f66858bb8c4ecd7a89847ac982d89f9e50283f97f381ee459b",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest",
+          "sha256": "ba20a171bfc8890f5620854e88444ab123c1cb7e6fe834c94dfd1571c98dd7a9",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest",
+          "sha256": "41b63bbc8b95ae4269220c332777234665b4c7e77efbeb8d4e8c5fa43ef64373",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest",
+          "sha256": "d985ab164f206d016c38047b58115f1326f29c9a302b43f1d175671243d5671d",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.AuthorizationServiceTest",
+          "sha256": "84d76b9820ca0e3df364b048becca4090cc72b48ac08091c33f1dffeee0d2e4b",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.ContextHashTest",
+          "sha256": "96a94c099bdcd70d141d9885b1a2173bfc535184b412296cc21418926ef48589",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest",
+          "sha256": "fd91ad1fed6b455de010f0a4c831304630d0a37a802fcb5daac5a7e7aaf25d5f",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+          "sha256": "1cc2f6d9dbb0a8dbd402f7d8829ad0db4a9bdf427980e447875615a2bf78e0df",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+          "sha256": "1291784e9a799ec1b8aad25d86ab47954dc440ac46e7fa9f37c436bbcb6e9b93",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LoginReplayServiceTest",
+          "sha256": "24f5aeb62ea567d5e40e1997f68c23548f41e26021a54dfd63901fb2b425b60a",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LoginUsernameTest",
+          "sha256": "8943e7e0d568deeaa2adec3d6d5082b9f4ff1be7126a54d4cc2d810f0ff021a0",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest",
+          "sha256": "262d9ffe404c00aecd2bb97ff461264475be0815a41bdf28391af902bbf5eb6b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.PasswordHasherTest",
+          "sha256": "df2cf839d6ac1487def97f3a39230c19b8014284304717efb733b0454b6f0dc9",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+          "sha256": "cc0134fc39c44448bbdfdec638891bf7ad32311de49be390bd06e87a9c1519be",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest",
+          "sha256": "3e1832685c66a41c1e5cb35373f7333f3f5ff622249e719e3b4641b8ebff50ed",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest",
+          "sha256": "5b679e3b8560409f54d81574727e8a614a0101d8bd69870cc996e1c4dd6c6d0f",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+          "sha256": "cc54965839a021bc10429228aafee856fa5e55e814d7b57c6bce03ecf0396bd8",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferCapacityTest",
+          "sha256": "4ded0ab78a471f76eb9924ff217e452ec684a88518f6f7ec3186598303d1099a",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest",
+          "sha256": "9743a309987a3bb1a1efff16bdeb906b240cae4ba927b52e7a1e8bc6e1e51483",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferRootInspectionTest",
+          "sha256": "f6404127f849dd5dfcab81f927dcd2a1345d2d200284719c777d38b7152e4b10",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest",
+          "sha256": "65839fa06ae7938bbbee49425d68cd05a952b826c63f578260bcf56e09d40e8d",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest",
+          "sha256": "84b9978e571e36b9d4ed68100ffe0a20978d7c17dc042aa59dc35f91fb6b6964",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest",
+          "sha256": "9a64340dbe493e785e446536cb87426dac2c128117494c0ac718b7bc73289894",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "web": {
+      "results": {
+        "tests": 555,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 21045
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1670
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 4763
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 1798
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 949
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 188
+        }
+      },
+      "coverageSha256": "9135c6cedb354465786e745b81a1f45386142f4a02adb25e22f8ad04adf37a6a",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "a9fc85bb8647d218ae4723a059a71c514089cd1a1ba7037af90de5458ba0b3d3",
+      "sourceInventorySha256": "f68a0cc85885c9a8cbb4de8be7f5b60ab79c9dba21dd12a3dbd39473bd11c865",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest",
+          "sha256": "08db5b43eac8d9aa44dc37f232ff802e7faf1407b5599fb1afe6f5adad7753a7",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest",
+          "sha256": "6682bf98f0937596ca7cf0e0e0202168f9940295fd0074c98ce76ee92bae2706",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+          "sha256": "ecedef7c3bdd25b50b23010a41d51f11709b3b95932e68c44b031baf76b99db7",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+          "sha256": "76d55af58bce36bab454dffd1638ad05bafcd463af4f0873a0d3dc66c6dee439",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest",
+          "sha256": "aa207edfbdfcabfd9b09bcd978be7fe12b4dcb7ff036f88e2aa6b52f02081d0a",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+          "sha256": "d82e518c9b00da6055eb926627e6face16e1b731bf8b4aaf201c33a4e9efa0f6",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "sha256": "952bdecfb56e572b3e34f5993353f5fde668031241ced30afe275a6668c40d99",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest",
+          "sha256": "2ccb984115aa34aa7d79398e461a6f07473a3370229dec377cc3752a975f8874",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest",
+          "sha256": "0a2e015bf51eb411b4b7d9db66df0140a2f57cd00d679c60fbcc2b993e06968c",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest",
+          "sha256": "9c4fa894e9f701662938df31ebe226d17e0e84caac7de281381490d20a127352",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.controller.LoginControllerTest",
+          "sha256": "dbe7b08e0bd921466de24681d743300f9182eda70d0cb7bbcdbc2e623d9fa62d",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "sha256": "ea7ed2dedf79f81077895381e18dc4d05699b04bd541e2e3de90c113a5a6d709",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "sha256": "7def4ff5cf77a88f5a3a0f1323e501cf095e92fe767ca8c2da0f5e9a6bd0c467",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+          "sha256": "b23919bef7e124ba0d3482776d5bd382c0347cf169eed387210da5a5a50e97bd",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest",
+          "sha256": "e00289aa11788135a0d11d7459287caaa6fc33c6254195c1a9ab3c3911661725",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+          "sha256": "e37d56097e6e4ed256f004517cb559c16599e605058c8d4aa78a4273e3316fae",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+          "sha256": "d2bdc59d989159077dba051325d4d58ba30b2e9b8861751820acccb50413f7de",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest",
+          "sha256": "027213c539ba6e0c41ec3fd25bca64a515f6dd793e609ccf721d6b929c393480",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+          "sha256": "ba4322b23a37489b55f94a9ad8da4ba70264eac2ded4faaf1ebb07d9efbbd46c",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+          "sha256": "d03eb9d070a962888a8ca18432ead5c5fd49554250dc8bde79227c3d520fcf3e",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+          "sha256": "ef430b9edbafaffe0db33a70cd646b2ce582934594965bce6fdffde124ae08b9",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest",
+          "sha256": "2153c2133cc5a11b3bdd68596354abe8e98ca45ab1b88a4de26201118d9d7f8f",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.DescriptorFileResolverTest",
+          "sha256": "8356a3cb3c8580ea644be2decbcb9d3da3c2d931d51c49985d53dbf5824558b7",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+          "sha256": "3bb79909f9a94e5b8246f80df053de37b2853afae0517a2f4e8aa07c6520b59a",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest",
+          "sha256": "0d34945ef76f353d5bdd3e16905046bc03595c6d6fd16fb04b49bce4d2edb535",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest",
+          "sha256": "2b06edd4bc526895f877e345ca04bfd7aa482c6ede47c43ddb623b7cc9dc073e",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+          "sha256": "5ea05a0619b77fd4285b180f520fb849fee5697268573f3f61ab640dbf0dbea9",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "sha256": "ed257cf55008e0aba61a657b7e38ae7b2113169e887ff8db50dc0510641090c9",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+          "sha256": "7322f9682a960bd472c7485b67043b747008ec3b70f3ebed7b90ad39973fc445",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+          "sha256": "be876149eac3ad1947bf28151d149669e0ef335be8fbbea543901ea294bc0c53",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+          "sha256": "09b8a6d902a4b34c1b8a648b99abd84220df0aef6d1f65ea92bda978684ecfb9",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "sha256": "7fa427daf8464d869111ccef91bfd84d6acade9f5ddc9ace1dec7312c7594992",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "sha256": "187c5071ec24419e38f7d07b4dc06fa782d82cac8ec9efde7266cebdb4f4be7a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "sha256": "e1dd7fba4c0d111dcdea1a286bf8c6e7cd09c6c803fe480b43048e7d5a0c789c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "sha256": "d84a9cd30dba792b427fb76241929285522ed989242c416ddcd01927004c0b8a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "sha256": "784ffac7abb72607074245233cddd996f20cdb9112cfdd3afd643560918fceaa",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "sha256": "1bbace777858bc4056098328d61ec2be61aeffe3c5746aaaf4f9263adcf09a96",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest",
+          "sha256": "89b9abf1fbd7450ef1cb1d2cff2732141e52c19a4e16288820174a6c187daf8c",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest",
+          "sha256": "2a80aea211a5de065f8b84ec293adefb52b82440a24d764f5fdf3e3f39fbadc0",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+          "sha256": "f7e9cf6b6a4e9cfe0eaad963a22dfddfc0368f0e63c7222238e82aab97a79e95",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.MqLoginContextProbeTest",
+          "sha256": "cccf62da7d5639ee919a26977d533bc710a25cf28665e0b28053840eadb4c8e1",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.SavedRequestTargetTest",
+          "sha256": "b7353eb17a2f9b4e3c3fda30ca7db02b7ccaa427c0142457cd2dbff60cb98760",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest",
+          "sha256": "ccd71c7715e3772295649e8ae4506b92c11ef76aa5c9d8d9562880d27d1b0790",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.WebCsrfTokenTest",
+          "sha256": "84044773aaa0b51101b3bff760b9b71d0ffda400fbdd4df6efb661d0503f84df",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.security.WebSecurityHeaderTest",
+          "sha256": "e618ae9b43a9c51f6a996a0052d66431631610df1ef55e6db99d0ceb9412eafe",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.AnimationControllerTest",
+          "sha256": "59e8ea3726312650b0367923f1c5a2b8b45ce69253b5d2ebe550086fef3f4e65",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+          "sha256": "64d471d9d40cd2b9c2ff5e28fbe6f1cde48d179d0eda6fd8401c4382619d4550",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest",
+          "sha256": "ab1cf891c1c0235f7f55ad18d884041afcd0abd35fda918b2e65e063f16460e0",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+          "sha256": "6a343255a1c106dfc7f8f189e6dadcf7742296b8a11f376c387492e77ccf0e61",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+          "sha256": "84858757376b5567666270a4392e1f58bb999dcedfad96aa949441c284a06cae",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.LogControllerTest",
+          "sha256": "da0e59e5ba9de74ddd77ff11fc6ad40d8697d75db6b7d4dfe78cac83183bcc0e",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.MenuMvcTest",
+          "sha256": "cefaa6354ce5a4101aafee173a9413642760f1bfd4e6216c3975ec18bd0f2e89",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.MusicControllerTest",
+          "sha256": "3c0441a95170cc8c9cb48268fcc9ee784ab591fd0e8a0bd6c7d95561b48b2d46",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.ScenarioControllerTest",
+          "sha256": "4c31eec892b2d9f243f1719c14a6d0ce480e3c3c50a6c1539e3e889b2e7cfc2d",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest",
+          "sha256": "d50e6777268568c90360f7d42071c6a313f3706d7db4031a009e902b893f05a9",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionAccessFailureTest",
+          "sha256": "667cd10a9043a96b2bf940daf0b9c9bc1b3beea9350fe5a30f153b4b98a0171e",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionAttributeCodecTest",
+          "sha256": "c370fb3fd6f4563488159e507b105992684f38ee6fffcc05ce35d0799c1f12cd",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionFormLoginTest",
+          "sha256": "5bb8ed9e44afe4ccafdafc09222937089b299c94c054273cbd51d2a14277a04a",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest",
+          "sha256": "a2fd05ffb795498c7e3c968fb7d9c4fc1f042bbb5a007c85b3cfa6dab4b69251",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionPayloadCodecTest",
+          "sha256": "42a6cf730af19c20d1331de21fd675f34792add211684a5e7771d40dfc16347d",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionSavedRequestTest",
+          "sha256": "f0f006040393fe5850e82ffaf2eaad5ba89e1251a1fbce8fc37f19a879c2d641",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SessionSecurityContextTest",
+          "sha256": "f12779318913760f3aadf9830602ad2e4f7780d049b8f769804b928031de447b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+          "sha256": "5a9e735328a071f8131384be3c818cf27d94ad0d36d5ab0e058219a69b926544",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest",
+          "sha256": "081e2f45f0b238b0122aa7263f0f3929c88e67c2a0c3584ae0461c3e6c63a15f",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.WebRequestSecurityTest",
+          "sha256": "d8f766adaccd7e282a7143c34b67339871ac01df5871ae9f2d6a604c014bc367",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.WebSecurityChainTest",
+          "sha256": "0ca735b1418f31d822cc65bb7e090311acd41ec7f7a19053d746dbacec59bbd5",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.session.WebSessionIdTest",
+          "sha256": "1921e804bf1aec8f4ad9a3a7ebce0c5b98b4e3d226902c4bb386a9cdd95d2b51",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.storage.LargeResultReaderTest",
+          "sha256": "53a0de45dc9911159516ed2f9de2ce55d4f185f1a3f36480a597c213e7989a31",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+          "sha256": "d2d220b81f58ccf976cf2322f298eb18a06060683170d51f64357a078b019127",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.AnimationTemplateTest",
+          "sha256": "a300fdb76c905275a2b5eac8dfa5178862b707cf02aeb55d6f46caff79d9c046",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+          "sha256": "51f1e14ef60602adcfbfabe56c1bf61d8e6a0ed680871c0c847cd772373419e5",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "sha256": "8ae15b4d7fceff1c8b88e598b770d55f946690b3739cfd8dd9c2381b193ba72c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.LogSearchScriptTest",
+          "sha256": "f11450e714f3a2d2ef7b842d835fdccd4972f9533fd797b9a6d43d8e907469fa",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.LogSearchTemplateTest",
+          "sha256": "71514f9c4c54fe2d8826cfe912e50a13a64a3fc2e3761960ac2efba90c32d86a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "sha256": "fb2eeb563c0a9cd220da8ffa78b90b0ef4bc94bc83b2866f3629db0e4753f038",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest",
+          "sha256": "673309cdde7102fb610710801e0275f599458b7b624fd4324a45ed5235c24fd2",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "sha256": "88c2c85435d280d18a5069d4cd8b52cd1fa558a97f1289afbeb25085f2b31501",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "sha256": "127d886268b5375579e6063687b0c041872d3df347862c5f54792120a3ce73cd",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest",
+          "sha256": "ff16334f07d522eda576ff5d7cc97664dc71b7791fee9c85da1fb1da28845bed",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "sha256": "b771cd6b1b87e77951911ffefa88340bc77cef5b0e33461661ba91cd8fac63ce",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "sha256": "589534a08649d380e48ec2d3d74e8b935c8e9be1a8f3e926b3bde2c20810718e",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "sha256": "f4f5f7f160bee43f36292b4c62d7f55a6450b30c25a7976511eefff5c164a128",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest",
+          "sha256": "15a55108ff1a2d5a43be14d8addf5b9974dd52545cb1d213d64659531ffbc27b",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest",
+          "sha256": "acfb4a91d1f8307da8d2335750d6ca0188d2b59b335027b54cdd6e89dfa0a0dc",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+          "sha256": "4f826d90a39b982c2ad7df11b482a6cbcee513d8f6255074168cb34ffca1df6c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "batch": {
+      "results": {
+        "tests": 404,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 21928
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2255
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4265
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1818
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 679
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 116
+        }
+      },
+      "coverageSha256": "d6604a133c0086ec8ab4d9277991ef314e50525040aa4ba569da407efc9e2e6a",
+      "spotbugsFindings": 0,
+      "spotbugsSha256": "823e3cdd233218f7abb8ccdc507891c1c40912d8bb7f9eb74d2e90356b6e89f5",
+      "sourceInventorySha256": "5e92b61560048530dd2134388e6d36237692d15f93693f49600cbbeb1a1f114f",
+      "reports": [
+        {
+          "name": "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
+          "sha256": "46bde97f7030a5232d0ee031255e4fe176a4cba2eca1c0c2bbdee93d0fba159b",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
+          "sha256": "df48a6b199a2f1fa0a3c54e15c83614c0bfddd86d42bed5801d1a7e678849eaa",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest",
+          "sha256": "d371f7821ef17859c3f573d9e9c4e32d8ed0bf5e9317e3ec527206fed81ff0f5",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+          "sha256": "263a5c05ab209ffe6b16c56977e02c7716ada6d425eb554a780028fd7b494669",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest",
+          "sha256": "71761ec2188419bb8ac7f84b370414addd7c56ec9f934dd8777ac8a21fd78811",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+          "sha256": "fbb0935e649ea87d7a83cb74638f597ef636f9db837dea25930478932aa5eb2f",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+          "sha256": "a2595f5de6c36c2005d453507511e4eb7f389e9c8c33064fb5a278aeec1ddb5f",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
+          "sha256": "3b1ceaefbb50d292a87bf26012a0c78781ee918c7d86f01a67d9e9097568aa2c",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest",
+          "sha256": "cda7071715c0c3d9d3b1c1e4de577cd19ae002eb27a1de1189c5265ecc4cbda4",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest",
+          "sha256": "ebc3fab3ddb9045d90d6da973adbc1b03220b3129182f182e656dff78173146b",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
+          "sha256": "b66cc195f16e9b0a28ed936b11486e3512e43ba672864dd1d5dc8a3e74f5ec6c",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest",
+          "sha256": "9f833278d66b77a2ff104f438f98dae6f3293179e562124496f06b1e827631da",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest",
+          "sha256": "73e9f23fa2a060dc32c453141d31f0c28206e181729d735deb4c63c23d77a510",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest",
+          "sha256": "127468f46a66b8d519b23446e59e7a7d2d9df56e41edc6b5a2cd3d126aa6ea12",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest",
+          "sha256": "91b5765169c3ad01c7d6e152ea8d96454511f2caafc01b027d3f293f51dc8f94",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
+          "sha256": "d33d6fed7fff4d8bfac3f0dab7c1b588c4b481907380ecdee97c8061e54ab97b",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
+          "sha256": "2f644262dd332e701224e15edc47a05e63663329d93f9c83dfef22b2e814f3f3",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
+          "sha256": "4ddee814eac91402b1965181b1c33f0373c0b20df87ef8fc496c7356d84daaaa",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest",
+          "sha256": "7cca801f693d0ae13e9d2193fe5704ac0bc01e896c3096c4c1133d5ce8264b9e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest",
+          "sha256": "338a03a41892a95db8a5267743222823161c708494636495db13e709d5f34191",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+          "sha256": "cf371f3e2d4b324b485777f88a2e2dea5643e15c8eda3288f21ac4720067f89e",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest",
+          "sha256": "002ef3f218c92c499faa16f23f96006febe2b7c347fc6f6a1231989f5644e799",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
+          "sha256": "2c8d8f8a7b7847411b6b36144aa666ed25e5ab4e4e3d8f0ac4972905dd5dd06e",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
+          "sha256": "63f626b30a89c672f6afda1370ffe878eb5d79f446d309470ab89e3e4164bb79",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest",
+          "sha256": "3425f94effd4cf829b37a2dcd61f049531c6a63944c4e2afec9e894e13a7aead",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+          "sha256": "7c087e34baabf4d9447ab7b6c0fa0d2474395f9267c106b9110d6d17efe766eb",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+          "sha256": "3ed5a773dec55c022cef4175106b80a4de0b0050e985f7f82ee1d769dbbce6ea",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+          "sha256": "47f314d352ecf99ecd42c746682b2e4451ca96ea42447789ee72eb91b8748db4",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+          "sha256": "583d9e3e4a3cc766025b1943a23c03b0ac1daa35cf7bc0a1a932433442cb7acd",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+          "sha256": "4c54a3d9d9ee658e76b3b0ecefbbad0b98d45a0db530789073719076543a4275",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
+          "sha256": "deea95942172d36fc79a81f77fac5e8ef1cb82767c70916edb28d5e6a428993e",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
+          "sha256": "bc4027bf61d1e7be170c4b41fb3a2304b164165a6316cad1818a8a43a80df2ad",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+          "sha256": "bb8089afe9661d0bda3e9eaf05ecb9b0242912fab4b1aa16a5030249871e7846",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
+          "sha256": "fee1500055dfb091046b004bf2a2c74502b132924ebee5b48bf0a10384c11db1",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
+          "sha256": "b7254724153aac269658179e684159e091ec1193776e29e4881423f486cef144",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+          "sha256": "389e3dc7cccd35d7775d8ab01d1a165a84ee83d4a7577354bbc62872562da6e0",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
+          "sha256": "f11c0d83d87b848bf1d14a7c0cb05e8c15cde684f6c408135e5e2d41a99e6bec",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
+          "sha256": "21d66a59c2b51ba3be600911ec82e3c7215180efd4f01756e6666d3e4771653a",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+          "sha256": "509968fca4629ba219b21b1c82b33003f1a82f164b84de1728a7da8af5d32fc0",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+          "sha256": "a5ad5673b8973b156dce6aa3deb7bb51fcece8a10b8d9d28f925a957f769e6f4",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest",
+          "sha256": "08db1f9f4abb0a054648d236f2673f0d60ef6289a97841a0a320953d47b4f259",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
+          "sha256": "f103d2f9e0c88c8e09801051e04612de22710c85e8bc3420746ac23adfb9baf8",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest",
+          "sha256": "8576ed2aa36f40ed8f5428b8b567d771f8696079449db5a22eca369261c49e98",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+          "sha256": "ebeb9f40e409e636b0ba944c0b392641c88d13ac0a18718ff07bf7b880b1d5a4",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest",
+          "sha256": "cbffb01457fec93f78fe0f177a9172aab268cd23efcfe5ca86b412be07f13a0a",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest",
+          "sha256": "ba0b2d669c6f15252d1e7c5adb24f81c2340388497bbb03928503903025bfc2e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest",
+          "sha256": "beb9a626ac727fcc315dbe6dfc5a40fcb0045406dcf3726b9bc875691bd40f7e",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  },
+  "notRun": [
+    "allFormalScopes",
+    "actualProductionStartup",
+    "actualNKCHR"
+  ],
+  "redaction": "Counters/hashes/public fixtures only, no XML properties/output/credential/journals.",
+  "totalTests": 1985,
+  "nativeTools": [
+    {
+      "path": "tools/quality/vm/045_migration_password.sql",
+      "sha256": "28aa08bd4897aa4fd1cdf6c6ee19b3edecebd26792a7e10d4deff14c65a64565"
+    },
+    {
+      "path": "tools/quality/vm/NativeBrokerProbe.java",
+      "sha256": "49f7910b31c29464eb2430b38c9f6df7063fd22c395f122b131ad4ea1ee03a33"
+    },
+    {
+      "path": "tools/quality/vm/ProvisionBroker.java",
+      "sha256": "a5ae0f2da569436ec52c31c0d79178797f951a86f12b469fc7eefa6a206dc07e"
+    },
+    {
+      "path": "tools/quality/vm/ProvisionDatabase.java",
+      "sha256": "0fc68e8e59e8a1a2db8dfa63528f96cdf23b8057cb2db4cfdf59faa4efbe7d95"
+    }
+  ],
+  "nativeResults": [
+    {
+      "testId": "PT-OPS-NATIVE-011",
+      "status": "PASS_PROVISIONAL_OPS_OBSERVATION",
+      "exitCode": 0,
+      "expected": {
+        "sixQueuePressure": "NORMAL",
+        "liveEffectiveChecks": 6
+      },
+      "actual": {
+        "sixQueuePressure": "NORMAL",
+        "liveEffectiveChecks": 6
+      }
+    },
+    {
+      "testId": "PT-OPS-NATIVE-012",
+      "status": "PASS_PROVISIONAL_DEPLOYMENT",
+      "exitCode": 0,
+      "expected": {
+        "sqlVersions": 22,
+        "pending": 0,
+        "validate": true,
+        "secondMigrateApplied": 0
+      },
+      "actual": {
+        "sqlVersions": 22,
+        "pending": 0,
+        "validate": true,
+        "secondMigrateApplied": 0
+      }
+    }
+  ]
+}

@@ -1,5 +1,15 @@
 # 起動gate主体・共用境界の実装判断（SSC084）
 
+## PG294着手前：root/child bindingの最小契約review（SSC086/087）
+
+Astra/high read-only限定reviewを採用する。kernel proc/PID1/system manager/boot/自己PID-startticks/固定Unit MainPID-InvocationはA前の由来確認、A直後のidentity再確認、exec直前の同一性確認に分ける。固定system bus照会のみを使用し、環境由来bus overrideは使わない。
+
+公開packetはversion/固定field名/順序を含むcanonical ASCII LFとし、service・boot・Invocation・同PID/startticks・既知の予約A FD/devino・release/config/root/Broker/current permit bindingを束縛する。proof予約FDはseal後に割り当てられるためpacketへ入れず、番号を128/129と推測しない。子は狭い2FD入力を検査し、両CLOEXEC成功を必須として、rootUID/GID0・regular0600・nlink0・size上限・seal15のproofだけを読む。AはrootUID/GID0・regular0600・link1・empty・readonly FDとpacket devinoを検査する。実flock取得はroot固定発行経路＋同OFD継承の信頼契約であり、属性だけの証明としない。
+
+子の独立再観測は自己boot/Unit/PID/startticks/固定service UID-groups-zeroCaps、読めるrelease/config/app rootだけ。Ops・root私有root・root-only permitは真正なfresh root proofの検査結果として受領し、子への再読権限や秘密を増配しない。root全secret/JDBC/JMS close失敗ではexec0、子失敗時はbusiness cleanup後Aを最後にcloseする。
+
+現在permitにはrun activationと別の現在epoch原本を必要とする。同run resumeや再発行でepochを再利用せず、root現在原本のepoch/digestとpermitを一致させる。変更前失効が未確定ならmutation0、crash/不確定publishは拒否。旧permit復元/古いactivation流用は不合格。現在原本はbackup/切戻しから復元せず、復元・再設定もM/A内で旧許可失効→新世代発行する。この契約と実クラッシュ/古いpermit復元試験を満たすまで全起動を許可しない。実装は未完了、進捗加点なし。
+
 ## PG291着手前：SSC086の同PID privilege phase
 
 PG292/SSC087追補（host adapter code前）: Astra限定reviewはhost FS後発RO remount/古いpermit bind/別A inode/最終service能力の4反例を提示。VMのNativeHostViewProbeをProtectSystem=strict/NoNewPrivileges/PrivateTmp/ProtectHome下で実測した。native保持host `/proc/1/root`→NOFOLLOW runはRO=false、private runはRO=true、devino/owner/mode同一。一方Java FileStore(host held FD)はcanonical pathをprivate namespaceへ解決しRO=trueで、最初の仮説試験は不合格。native statvfsに切替えた009だけ限定成功。この事実からsandboxを緩めず、root専用read-only host DirectoryCallsで現在host状態を検査する。PID1/boot/proc由来・A cross-namespace・permit可視性のadmissionはまだ未実装。root actor以外への能力配布/FS policy緩和はしない。Source/SS変更はSSC087先行、Mは従来RWのまま。
