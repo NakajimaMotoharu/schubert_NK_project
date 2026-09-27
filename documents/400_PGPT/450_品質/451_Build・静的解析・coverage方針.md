@@ -1,5 +1,7 @@
 # Build・静的解析・coverage方針
 
+2026-09-27運用参照: 次回の受入経路と検証の区切りは[471 §4](../470_PMO/471_実行計画_外部起動・実NK受入.md#4-検証の区切りと正式認定)を参照する。本書の品質条件は変更しない。小部品追加だけで全正式認定を繰り返さず、下記の機能受入・変更後停止・PR/工程gate・横断変更では所定の全体検証を実施する。各正式runの前に実際のtriggerと対象受入IDを1行で残す。管理文書だけの今回改定は新規試験認定ではない。
+
 PG201追補（2026-09-20）: Production JavaScriptはNode24.19.0の構文checkと実script/独立DOM event fixtureをJUnitから必須実行する。V8 line/function/branchを各100%へ強制し、対象Production fileがcoverage表に実在することを確認する。検索scriptはclass定義なし（class0/0、除外なし）、定義した全functionをmethod相当として100%・source file inventory1/1を検査する。JavaのJaCoCo4指標100%は従来どおり維持。8Node subcaseは1JUnit内数。Node不存在/異version、構文失敗、対象なし、failed/skipped/todoを合格にしない。実Browser描画・IT/STは別gate。
 
 検索scriptの静的確認はNode構文check＋限定source全体review（document.querySelector/制御されたform event/setCustomValidity/requestSubmit、TextEncoder/Decoder/NFC/固定ASCII trimだけ）。inline handler/eval/innerHTML/network/storage/console/秘密値読取りなし。JavaのNullAway/SpotBugsをJSにも実施したとは記載しない。再現Node path/version/hashは421、実command/coverage/hashは016005/006・manifest。
