@@ -241,6 +241,8 @@ BUG204/YKT160修正前追補: forcePendingとverifyWithinのpackage内返値は�
 
 ## 7. Business/technical cleanup
 
+SSC104/PG324：Cleanupは真正oneshotが成功条件を満たして初めて後続Artemisを許可する。親root MorningはM/Aと原本run/activation/cutoffを連続保持し、子起動前に同runの非秘密固定request（`NKCLEAN1`、UUID2値、UTC µs cutoff、検証済MANIFESTのlowercase SHA256）をroot所有private sourceへ新規公開する。requestは相関材料であり権限ではない。親のsession advisoryは子前に明示解放・fresh子Unit全終端後に再取得し、子は自己専用DB sessionで同advisoryを取得する。子は真正root context/同原本、API/Web全終端、schema/release、当日同run両backup成功と4file現物/hashを自身で照合し、これらが不明なら削除0件で失敗する。既存Step/Log/Inbox/transferの順序・同cutoff・30分全体上限・warning/失敗記録を維持し、0/10だけを後続可能にする。単体codec/Unit loadedやDB row単独をcleanup成功へ読み替えず、未実装入口は起動拒否とする。
+
 ### 7.1 必須gate
 
 SSC-049/PG-D-148: 親OS lock保持下で、削除開始前にAPI/Web各unitのId/LoadState/ActiveState/SubState/Job/MainPID/ControlPIDを固定systemctl showで読み、対象Id一致・loaded/inactive/dead・Job空・PID各0を全件確認する。not-found/masked/failed/active/遷移中/残job・PIDは通さない。7fieldは各1回、ASCIIのみ・末尾LF1つ・1～1024byte、未知/重複/欠落/CR/NULは失敗。unitごと5秒、非zero/IO/close/timeout/interruptは無条件に後続不可、割込flagを保持する。前後の割込確認と再実行時のfresh観測を必須とし、古い結果をcacheしない。これは停止実行やcgroup全検査ではない。親は保守中の再起動を禁止し、通常stop timeout/TERM/復旧の既存設計を維持する。

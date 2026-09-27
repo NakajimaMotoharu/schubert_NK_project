@@ -205,6 +205,8 @@ SSC058/PG165: backupのMANIFEST.json固定値/byte schemaは341 §6.4を正と�
 | `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |
 | Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |
 
+SSC104/PG324：root Cleanup oneshotへ配る`db-batch`は親root Morningと同じ固定batch roleの別systemd private copyであり、親Connection/sessionを共有しない。親M/A保持、子専用advisory、親再取得・同原本と真正Unit終端確認を全て要求する。非秘密`NKCLEAN1` requestはroot-owned private sourceから`LoadCredential`へ渡すが、それ単体を削除権限にしない。requestの既存file上書き・別runへの流用、secret/env/argvへの転記、未実装子Unitの成功扱いは禁止。具体source配置・内容読取/消去・終了時退役と実OS配布は後続PG/PTで検証する。
+
 Symmetric keyは最低32 byte、自動生成passwordは最低32 byte相当のCSPRNG出力とし、ID/versionと有効日だけmanifestに記録。Rotationは「previousを配備→current切替→
 旧ciphertext/HMAC保持期間の読取確認→previous除去」の順。Unknown key versionはdeny closed、運用介入とする。
 

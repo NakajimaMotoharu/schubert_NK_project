@@ -1,0 +1,131 @@
+{
+  "id": "PT-OPS-CREQ001..007",
+  "formal": false,
+  "dateTime": "2026-09-28T08:54:22+09:00",
+  "environment": "Linux host, Java25.0.4, Maven3.9.12, JaCoCo0.8.15, SpotBugs4.10.4.0",
+  "branch": "dev-foundation",
+  "baseCommit": "7073052d2 + dirty PG324 source/test hashes",
+  "command": "mvn -B -o -pl :schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,CleanupWorkerRequestTest,MaintenanceUnitStopClientTest test com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check; then batch jacoco:report",
+  "exitCode": 0,
+  "input": "SS104 literal NKCLEAN1 canonical ASCII vector, null/length/format/UTCµs/UUID/SHA negatives, two virtual-thread owned arrays",
+  "expected": "literal byte equality; all noncanonical refused, owned byte zeros, diagnostics redacted; parser replay has no authority",
+  "actual": "34 selected PT F/E/S0, static 3module0, new request class four counters missed0 in bounded cumulative report; no Cleanup Unit/DB/delete execution",
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 229
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 36
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 38
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 24
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageNote": "Batch JaCoCo XML is no-clean cumulative. New class counters bounded provisional, not formal all-scope coverage.",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.java",
+      "sha256": "291bd84fc891f55c42f2d11c60f0bbef62b1965189e7a326b46abf5d362875ba"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "sha256": "41ab2dca4e7aac6ba22f60dad6567b3e03c1c9d15248285c2aecb1dde7fdc74d"
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "fc7d7c7e7a3ca44f50e7cb733a7caa6910563807a171e17b29f76e04f099f2d5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/storage/jacoco.xml",
+      "sha256": "55f69d6b4297779030145d2dc563de389921daf4e9dce66fa894a38e088b4a0a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/storage/spotbugsXml.xml",
+      "sha256": "6159abc50fc1266362a4a7788c8a2de2c7d00d04cb049cb70775afdc15f9143d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "8aa9e6f90df70977659d976be83c50b5e838990a8fc0733a23ab7d32bbbcb382"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/bootstrap/jacoco.xml",
+      "sha256": "b094bc88338cce353341269f7d74c57a16513d6dd14bd05ffa7eb564afa72d0d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/bootstrap/spotbugsXml.xml",
+      "sha256": "ef1605e93295eb090df77cc7f52bdff6d4088b93299f76b883863f816eaa90bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "24866bddee784552438f7006f4ab1685cb4d5989076dcb8245c24c9efe85be30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "d4cd0277535a84bf3f073cdd14e288242be4ace65df00148b4b47c5237523d85"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/batch/jacoco.xml",
+      "sha256": "b81563e671179080289a7fc9fc3b1a457de7bccf8d9ce83c31206d5efa68babd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG324-cleanup-request/batch/spotbugsXml.xml",
+      "sha256": "298310def69e6f382dea559251ecd8f8b2e29798cdb370a00b82a0f7496c8975"
+    }
+  ],
+  "log": {
+    "path": "Git-outside /tmp/PG324-cleanup-request-final-2.log",
+    "sha256": "275c8f68e680f6bfe7e163f831db407b42d9349959ea8c7e024ee06d37a181eb"
+  },
+  "relatedBug": [],
+  "relatedSsc": [
+    "SSC-104"
+  ],
+  "remaining": "Root request publisher/reader, parent M/A and DB advisory handoff, actual backup/root/schema gates, real Cleanup oneshot, Artemis readiness and R2/R3 remain."
+}
