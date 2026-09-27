@@ -1,5 +1,11 @@
 # 隔離Linux PGPT環境構築記録
 
+## 2026-09-27 PG300 backup crypto環境限定確認（未受入）
+
+既存開発host private recovery agekey（600、親700）からage-keygen1.2.1で公開recipientを抽出し、値をlog/Gitへ出さず隔離VMの`/etc/schubert-nk/credentials/backup-recipient`へroot:root0600 new-only install。既存credentialがあればbyte一致だけ確認し上書きしない。秘密identityはVM/server/backupへ配布0。VM age1.2.1が公開53byte fixtureを暗号化し、cipher SHA256 `ccd903671fd2cd90ad6015da63cdcd29a0604cc07e6343aad149770a2d0ece8a`。開発host age1.2.1でのみ既存private identityを使い復号し、原文/復号 SHA256双方 `05ed26fbce72508865be120e9c236bbcf8242d313ac917e7bb02c44fa46cbaad` とcmp成功。plaintext/cipher/recipient/identityはwork/pgpt-vm/private Git外に保持。これはtool取得/設定/recipient互換だけで、実DB dump/credential archive/backup publication/DBstep成功/retention/fullgateは未実装。
+
+再現: 初回だけ固定private agekeyに`age-keygen -y`を行い公開recipient fileを生成（値非表示、600）。marker pgpt-r2-20260927-01を確認したVMへ公開recipientと非秘密fixtureだけ転送し`age --recipients-file <public-recipient-file> --output <new-cipher> <public-fixture>`。cipherだけ開発hostへ戻し`age --decrypt --identity <host-private-key> --output <new-restored> <cipher>`→cmp/sha256。鍵再生成/既存key overwrite、private key転送、復号実体Git格納を禁止する。本操作中のProduction回帰sourceはb22c7abd3で不変更。
+
 ## 2026-09-27 PG300必須backup準備（未受入）
 
 隔離VM marker pgpt-r2-20260927-01を照合してUbuntu26.04配布APTからageを導入。実dpkgはage1.2.1-1build1、postgresql-client-18 18.6-0ubuntu0.26.04.1、tar1.35+dfsg-4ubuntu0.4、guest kernel7.0.0-31。`sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y age`→`age --version`/`pg_dump --version`/`pg_restore --version`/`tar --version`で再現する。private install logはwork/pgpt-vm/private/PG300-backup-tools-install.log、raw logをGitへ格納しない。
