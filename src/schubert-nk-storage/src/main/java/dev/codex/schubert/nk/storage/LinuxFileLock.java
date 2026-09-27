@@ -13,7 +13,8 @@ import org.jspecify.annotations.NullMarked;
  * Scoped local Linux flock on an already admitted, retained regular inode. NK-OPS-001; OPS-009;
  * UI251; SS311/341/343; SSC-049/PG-D-146; PT-OPS-FLOCK-001..008. File adapters only. The caller
  * owns root/type/UID/ACL/stable-namespace admission and must keep the borrowed procfs capability
- * alive throughout this call. Never return a live path/channel/descriptor from the operation.
+ * alive throughout this call. Ordinary/M operations never return a live path/channel/descriptor.
+ * SSC086's explicitly separate startup method borrows a reserved A FD for same-PID exec only.
  */
 @NullMarked
 public final class LinuxFileLock {
@@ -23,6 +24,7 @@ public final class LinuxFileLock {
   private final OpenCall open;
   private final LockCall flock;
   private final CloseCall close;
+  private final Optional<LinuxExecDescriptors.FcntlCall> duplicate;
 
   /** JDK checked MethodHandle adapter signature; callers never choose the native symbol. */
   public interface OpenCall {
@@ -40,6 +42,12 @@ public final class LinuxFileLock {
   @FunctionalInterface
   public interface Operation<T> {
     T execute() throws IOException;
+  }
+
+  /** Trusted root startup A only; borrowed reserved FD must not escape except same-PID exec. */
+  @FunctionalInterface
+  public interface StartupOperation<T> {
+    T execute(int borrowedDescriptor) throws IOException;
   }
 
   public static LinuxFileLock create() {
@@ -78,13 +86,37 @@ public final class LinuxFileLock {
             "close",
             CloseCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno")));
+            Linker.Option.captureCallState("errno")),
+        bind(
+            symbols,
+            "fcntl",
+            LinuxExecDescriptors.FcntlCall.class,
+            FunctionDescriptor.of(
+                ValueLayout.JAVA_INT,
+                ValueLayout.JAVA_INT,
+                ValueLayout.JAVA_INT,
+                ValueLayout.JAVA_INT),
+            Linker.Option.firstVariadicArg(2)));
   }
 
   LinuxFileLock(OpenCall open, LockCall flock, CloseCall close) {
+    this(open, flock, close, Optional.empty());
+  }
+
+  LinuxFileLock(
+      OpenCall open, LockCall flock, CloseCall close, LinuxExecDescriptors.FcntlCall duplicate) {
+    this(open, flock, close, Optional.of(Objects.requireNonNull(duplicate, "duplicate")));
+  }
+
+  private LinuxFileLock(
+      OpenCall open,
+      LockCall flock,
+      CloseCall close,
+      Optional<LinuxExecDescriptors.FcntlCall> duplicate) {
     this.open = Objects.requireNonNull(open, "open");
     this.flock = Objects.requireNonNull(flock, "flock");
     this.close = Objects.requireNonNull(close, "close");
+    this.duplicate = duplicate;
   }
 
   /**
@@ -104,6 +136,51 @@ public final class LinuxFileLock {
     }
   }
 
+  /**
+   * A-specific short delegation: readonly same-OFD FD128..65535/CLOEXEC, held through the callback.
+   * Caller owns root/path/namespace admission, immutable proof and future privilege-drop checks.
+   * This method must not be used for maintenance M. Normal/failed callback closes all FDs; actual
+   * exec may inherit only the reserved A FD through LinuxExecDescriptors while original is CLOEXEC.
+   */
+  public <T> Optional<T> tryExclusiveForStartup(Path heldFile, StartupOperation<T> operation)
+      throws StorageIoException {
+    Objects.requireNonNull(operation, "operation");
+    String path = heldPath(heldFile);
+    var duplication =
+        duplicate.orElseThrow(
+            () -> new IllegalStateException("native startup locking is unavailable"));
+    try (Arena arena = Arena.ofConfined()) {
+      return acquireStartup(arena, path, duplication, operation);
+    } catch (IOException failure) {
+      throw unavailable();
+    }
+  }
+
+  private <T> Optional<T> acquireStartup(
+      Arena arena,
+      String path,
+      LinuxExecDescriptors.FcntlCall duplication,
+      StartupOperation<T> operation)
+      throws IOException {
+    MemorySegment state = arena.allocate(STATE);
+    int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
+    if (descriptor < 0) throw unavailable();
+    var original = new OwnedDescriptor(descriptor, close);
+    return ResourceScope.use(
+        original::close,
+        () -> {
+          int reserved = duplication.call(descriptor, 1030, 128);
+          if (reserved < 0 || reserved == descriptor) throw unavailable();
+          var owned = new OwnedDescriptor(reserved, close);
+          return ResourceScope.use(
+              owned::close,
+              () -> {
+                if (reserved < 128 || reserved > 65535) throw unavailable();
+                return locked(state, reserved, () -> operation.execute(reserved));
+              });
+        });
+  }
+
   // BUG-140/YKT-110: one return from the Arena owner; this helper only borrows its lifetime.
   private <T> Optional<T> acquire(Arena arena, String path, Operation<T> operation)
       throws IOException {
@@ -112,17 +189,17 @@ public final class LinuxFileLock {
     int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
     if (descriptor < 0) throw unavailable();
     var owned = new OwnedDescriptor(descriptor, close);
-    return ResourceScope.use(
-        owned::close,
-        () -> {
-          int result = flock.call(state, owned.descriptor, 2 | 4);
-          if (result != 0) {
-            if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11)
-              return Optional.empty();
-            throw unavailable();
-          }
-          return Optional.of(operation.execute());
-        });
+    return ResourceScope.use(owned::close, () -> locked(state, owned.descriptor, operation));
+  }
+
+  private <T> Optional<T> locked(MemorySegment state, int descriptor, Operation<T> operation)
+      throws IOException {
+    int result = flock.call(state, descriptor, 2 | 4);
+    if (result != 0) {
+      if (result == -1 && state.get(ValueLayout.JAVA_INT, ERRNO) == 11) return Optional.empty();
+      throw unavailable();
+    }
+    return Optional.of(operation.execute());
   }
 
   private static String heldPath(Path held) {

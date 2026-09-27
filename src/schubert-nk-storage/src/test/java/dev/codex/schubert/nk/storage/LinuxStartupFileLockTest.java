@@ -1,0 +1,314 @@
+package dev.codex.schubert.nk.storage;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.lang.foreign.*;
+import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** PT-OPS-AFD-001..008; A-only borrowed FD, independent syscall/ownership/interop oracles. */
+final class LinuxStartupFileLockTest {
+  @TempDir Path root;
+  private static final StructLayout STATE = Linker.Option.captureStateLayout();
+  private static final long ERRNO =
+      STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
+  private static final Path HELD = Path.of("/proc/self/fd/9");
+
+  @Test
+  void opsAfd001ReservedSameOfdScopeAndReverseClose() throws Exception {
+    var f = new Fixture();
+    assertEquals(
+        Optional.of(42),
+        f.calls()
+            .tryExclusiveForStartup(
+                HELD,
+                fd -> {
+                  assertEquals(128, fd);
+                  f.events.add("body");
+                  return 42;
+                }));
+    assertEquals(
+        List.of("open", "dup:17:1030:128", "flock:128:6", "body", "close:128", "close:17"),
+        f.events);
+  }
+
+  @Test
+  void opsAfd002ContentionAndOtherNativeErrors() {
+    for (int errno : List.of(11, 4, 9, 22, 37)) {
+      var f = new Fixture();
+      f.lockResult = -1;
+      f.errno = errno;
+      if (errno == 11)
+        assertEquals(
+            Optional.empty(),
+            assertDoesNotThrow(() -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
+      else
+        unavailable(
+            assertThrows(
+                StorageIoException.class,
+                () -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
+      assertEquals(
+          List.of("open", "dup:17:1030:128", "flock:128:6", "close:128", "close:17"), f.events);
+    }
+    var f = new Fixture();
+    f.lockResult = 1;
+    f.errno = 11;
+    unavailable(
+        assertThrows(
+            StorageIoException.class, () -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
+  }
+
+  @Test
+  void opsAfd003EveryPartialAcquisitionClosesOnlyOwnedDescriptors() {
+    var f = new Fixture();
+    f.openResult = -1;
+    unavailable(
+        assertThrows(
+            StorageIoException.class, () -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
+    assertEquals(List.of("open"), f.events);
+    for (int reserved : List.of(-1, 17, 127, 65536)) {
+      var fixture = new Fixture();
+      fixture.reserved = reserved;
+      unavailable(
+          assertThrows(
+              StorageIoException.class,
+              () -> fixture.calls().tryExclusiveForStartup(HELD, fd -> fail())));
+      var expected = new ArrayList<>(List.of("open", "dup:17:1030:128"));
+      if (reserved == 127 || reserved == 65536) expected.add("close:" + reserved);
+      expected.add("close:17");
+      assertEquals(expected, fixture.events);
+    }
+    for (int closed : List.of(128, 17)) {
+      var fixture = new Fixture();
+      fixture.failedClose = closed;
+      unavailable(
+          assertThrows(
+              StorageIoException.class,
+              () -> fixture.calls().tryExclusiveForStartup(HELD, fd -> 1)));
+      assertEquals(
+          List.of("close:128", "close:17"),
+          fixture.events.subList(fixture.events.size() - 2, fixture.events.size()));
+    }
+  }
+
+  @Test
+  void opsAfd004UnknownAndCompoundFailurePriority() {
+    for (boolean knownBody : List.of(false, true))
+      for (boolean unknownClose : List.of(false, true))
+        for (Throwable unknown :
+            List.of(
+                new IllegalStateException("public unknown"),
+                new AssertionError("public unknown"))) {
+          var f = new Fixture();
+          f.unknownClose = unknownClose ? unknown : null;
+          Class<? extends Throwable> expected =
+              knownBody && !unknownClose ? StorageIoException.class : unknown.getClass();
+          var actual =
+              assertThrows(
+                  expected,
+                  () ->
+                      f.calls()
+                          .tryExclusiveForStartup(
+                              HELD,
+                              fd -> {
+                                if (knownBody) throw new IOException("private fixture diagnostic");
+                                if (unknown instanceof RuntimeException failure) throw failure;
+                                throw (Error) unknown;
+                              }));
+          if (actual instanceof StorageIoException failure) unavailable(failure);
+          else assertSame(unknown, actual);
+          assertEquals(
+              List.of("close:128", "close:17"),
+              f.events.subList(f.events.size() - 2, f.events.size()));
+        }
+  }
+
+  @Test
+  void opsAfd005InputNullMissingPortAndBindingContracts() {
+    var f = new Fixture();
+    var calls = f.calls();
+    assertThrows(NullPointerException.class, () -> calls.tryExclusiveForStartup(null, fd -> 1));
+    assertThrows(NullPointerException.class, () -> calls.tryExclusiveForStartup(HELD, null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> calls.tryExclusiveForStartup(Path.of("/tmp/lock"), fd -> 1));
+    assertTrue(f.events.isEmpty());
+    LinuxFileLock.OpenCall open = (s, p, flags, m) -> 17;
+    LinuxFileLock.LockCall lock = (s, d, flags) -> 0;
+    LinuxFileLock.CloseCall close = (s, d) -> 0;
+    assertThrows(
+        NullPointerException.class,
+        () -> new LinuxFileLock(open, lock, close, (LinuxExecDescriptors.FcntlCall) null));
+    assertThrows(
+        IllegalStateException.class,
+        () -> new LinuxFileLock(open, lock, close).tryExclusiveForStartup(HELD, fd -> 1));
+    var symbols = Linker.nativeLinker().defaultLookup();
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            LinuxFileLock.create(
+                "Linux",
+                "amd64",
+                name -> name.equals("fcntl") ? Optional.empty() : symbols.find(name)));
+    var fixture = new Fixture();
+    fixture.reserved = 65535;
+    assertEquals(
+        Optional.of(65535),
+        assertDoesNotThrow(
+            () ->
+                fixture
+                    .calls()
+                    .tryExclusiveForStartup(
+                        HELD,
+                        fd -> {
+                          assertEquals(65535, fd);
+                          return 65535;
+                        })));
+  }
+
+  @Test
+  void opsAfd006RealNativeFlockAndSeparateImmutableProof() throws Exception {
+    Files.write(root.resolve("lock"), new byte[0]);
+    try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
+      boolean result =
+          directory.atExistingEntryHandle(
+              "lock",
+              held ->
+                  LinuxFileLock.create()
+                      .tryExclusiveForStartup(
+                          held,
+                          fd -> {
+                            assertTrue(fd >= 128 && fd <= 65535);
+                            assertEquals(
+                                20, assertDoesNotThrow(() -> external(root.resolve("lock"))));
+                            byte[] literal = new byte[] {65, 66, 67};
+                            return LinuxSealedProof.create()
+                                .withProof(
+                                    literal,
+                                    proof -> {
+                                      assertNotEquals(fd, proof);
+                                      assertArrayEquals(
+                                          literal, LinuxSealedProof.create().read(proof));
+                                      LinuxExecDescriptors.create()
+                                          .withInherited(
+                                              fd,
+                                              proof,
+                                              () ->
+                                                  assertEquals(
+                                                      20,
+                                                      assertDoesNotThrow(
+                                                          () -> external(root.resolve("lock")))));
+                                      return true;
+                                    });
+                          })
+                      .orElseThrow());
+      assertTrue(result);
+    }
+    assertEquals(0, external(root.resolve("lock")));
+  }
+
+  @Test
+  void opsAfd007ConcurrentOnlyOneCallbackOwnsA() throws Exception {
+    Files.write(root.resolve("lock"), new byte[0]);
+    try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
+      directory.atExistingEntryHandle(
+          "lock",
+          held -> {
+            var barrier = new CyclicBarrier(16);
+            var losers = new CountDownLatch(15);
+            try (var executor = Executors.newFixedThreadPool(16)) {
+              var work = new ArrayList<Callable<Optional<Boolean>>>();
+              for (int i = 0; i < 16; i++)
+                work.add(
+                    () -> {
+                      barrier.await(10, TimeUnit.SECONDS);
+                      var result =
+                          LinuxFileLock.create()
+                              .tryExclusiveForStartup(
+                                  held,
+                                  fd -> {
+                                    assertTrue(
+                                        assertDoesNotThrow(
+                                            () -> losers.await(10, TimeUnit.SECONDS)));
+                                    return true;
+                                  });
+                      if (result.isEmpty()) losers.countDown();
+                      return result;
+                    });
+              int winners = 0;
+              for (var result : executor.invokeAll(work))
+                if (result.get(15, TimeUnit.SECONDS).isPresent()) winners++;
+              assertEquals(1, winners);
+              assertEquals(0L, losers.getCount());
+            } catch (InterruptedException | ExecutionException | TimeoutException failure) {
+              throw new AssertionError("public parallel fixture failed", failure);
+            }
+            return true;
+          });
+    }
+    assertEquals(0, external(root.resolve("lock")));
+  }
+
+  @Test
+  void opsAfd008ExistingOrdinaryMaintenanceScopeNeverExportsFd() throws Exception {
+    var f = new Fixture();
+    assertEquals(Optional.of(7), f.calls().tryExclusive(HELD, () -> 7));
+    assertEquals(List.of("open", "flock:17:6", "close:17"), f.events);
+    assertFalse(f.events.stream().anyMatch(event -> event.startsWith("dup:")));
+  }
+
+  private int external(Path file) throws Exception {
+    var child =
+        new ProcessBuilder("/usr/bin/flock", "-x", "-n", "-E", "20", file.toString(), "/bin/true")
+            .start();
+    try {
+      assertTrue(child.waitFor(5, TimeUnit.SECONDS));
+      return child.exitValue();
+    } finally {
+      if (child.isAlive()) child.destroy();
+    }
+  }
+
+  private static void unavailable(StorageIoException failure) {
+    assertEquals(StorageIoException.Reason.UNAVAILABLE, failure.reason());
+    assertEquals("transfer storage operation failed", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  private static final class Fixture {
+    final List<String> events = new ArrayList<>();
+    int openResult = 17, reserved = 128, lockResult = 0, errno = 0, failedClose = -1;
+    Throwable unknownClose;
+
+    LinuxFileLock calls() {
+      return new LinuxFileLock(
+          (state, path, flags, mode) -> {
+            assertEquals("/proc/self/fd/9", path.getString(0));
+            assertEquals(0x80000, flags);
+            assertEquals(0, mode);
+            events.add("open");
+            return openResult;
+          },
+          (state, fd, flags) -> {
+            events.add("flock:" + fd + ":" + flags);
+            state.set(ValueLayout.JAVA_INT, ERRNO, errno);
+            return lockResult;
+          },
+          (state, fd) -> {
+            events.add("close:" + fd);
+            if (fd == reserved && unknownClose instanceof RuntimeException failure) throw failure;
+            if (fd == reserved && unknownClose instanceof Error failure) throw failure;
+            return fd == failedClose ? -1 : 0;
+          },
+          (fd, cmd, arg) -> {
+            events.add("dup:" + fd + ":" + cmd + ":" + arg);
+            return reserved;
+          });
+    }
+  }
+}

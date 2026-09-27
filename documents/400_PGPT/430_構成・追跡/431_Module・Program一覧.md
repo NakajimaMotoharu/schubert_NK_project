@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG293限定未認定: NK-OPS-001 Storage LinuxHostDirectoryCalls→PT-OPS-HOST-001～008、LinuxFileLock.tryExclusiveForStartup→PT-OPS-AFD-001～008、強化XFD008、VM NativeHostDirectoryProbe→native010。RD SYS-002/004・OPS-009/UI212・251/SS341～343/SSC086・087、018/102・103/provisional PG293。Storage141PT・全counter0・静的0、root/fullgate/実NK未受入。
+
 2026-09-27 PG292限定未認定: NK-OPS-001、Storage LinuxSealedProof→PT-OPS-SEAL-001～008、VM test-only NativeHostViewProbe→PT-OPS-NATIVE-009（018/100・101/provisional PG292）。RD SYS-002/004/OPS009、UI212/251、SS341/342/343、SSC086/087。Storage125PT/全counter0/静的0、native009 host/private観測だけ限定成功。root由来/現在binding/全起動/実NKは未受入。
 
 2026-09-27 PG291未認定追記: NK-OPS-001、Storage `LinuxProcessExec.create/replace/vector/validate`→PT-OPS-EXEC-001～008（018/097・098/provisional PG291 manifest）。RD SYS-002/004/OPS-009、UI212/251、SS341/342/343、SSC086。test-only `LinuxProcessExecChild`は同PID/envの外部native oracle、業務main/privilege drop/起動許可は未受入。元認定や完成率は加算しない。

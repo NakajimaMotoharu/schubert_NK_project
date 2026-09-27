@@ -1,0 +1,447 @@
+{
+  "status": "PASS_PROVISIONAL_STORAGE_ONLY",
+  "baseCommit": "833f22f9b",
+  "sourceDirty": true,
+  "formalSourceUnchanged": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-09-27T18:27:20+09:00",
+  "command": "JAVA_HOME=<JDK25.0.4> PATH=<JDK25.0.4>/bin:$PATH ./mvnw -o -Dmaven.repo.local=<toolchain>/m2/repository -pl src/schubert-nk-storage spotless:apply clean verify",
+  "exitCode": 0,
+  "versions": {
+    "os": "Linux 7.0.0-34-generic",
+    "jdk": "25.0.4",
+    "jacoco": "0.8.15",
+    "spotbugs": "4.10.4.0"
+  },
+  "testIds": [
+    "PT-OPS-HOST-001",
+    "PT-OPS-HOST-002",
+    "PT-OPS-HOST-003",
+    "PT-OPS-HOST-004",
+    "PT-OPS-HOST-005",
+    "PT-OPS-HOST-006",
+    "PT-OPS-HOST-007",
+    "PT-OPS-HOST-008",
+    "PT-OPS-AFD-001",
+    "PT-OPS-AFD-002",
+    "PT-OPS-AFD-003",
+    "PT-OPS-AFD-004",
+    "PT-OPS-AFD-005",
+    "PT-OPS-AFD-006",
+    "PT-OPS-AFD-007",
+    "PT-OPS-AFD-008",
+    "PT-OPS-XFD-008"
+  ],
+  "nativeTest": {
+    "testId": "PT-OPS-NATIVE-010",
+    "status": "PASS_PROVISIONAL_FEASIBILITY",
+    "command": "systemd-run --unit=pgpt-hostspi-feasibility --wait --collect --pipe -p ProtectSystem=strict -p NoNewPrivileges=yes -p ProtectHome=true -p PrivateTmp=true /opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp <private-VM-fixture-classpath> NativeHostDirectoryProbe",
+    "actual": {
+      "privateReadOnly": true,
+      "hostReadOnly": false,
+      "sameDevInodeOwnerMode": true
+    },
+    "expected": {
+      "privateReadOnly": true,
+      "hostReadOnly": false,
+      "sameDevInodeOwnerMode": true
+    },
+    "exitCode": 0,
+    "scope": "Current Production Storage classes only in private VM test-only payload; not full Production release/startup admission."
+  },
+  "spotbugsFindings": 0,
+  "relatedSSC": [
+    "SSC-086",
+    "SSC-087"
+  ],
+  "relatedBUG": [],
+  "relatedYKT": [],
+  "notRun": [
+    "wholeProduction",
+    "allFormalScopes",
+    "actualProductionServiceStartup",
+    "actualNKCHR",
+    "rootProvenanceAndCurrentPermitAdmission"
+  ],
+  "redaction": "Only hashes/counters and constant synthetic values. No XML properties/output, credentials or raw systemd journals.",
+  "sourceTree": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+      "sha256": "02a20e67227ed461d00634c263c08d3f85f40afe330c7c84f430fbdce8affa7b"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java",
+      "sha256": "a238ea429dbb69c9b93a587b83c7ed4a56813e701b547a4883737c86b1926553"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java",
+      "sha256": "c29504c77d98c9b287cdc1b2e6cd4ffc5e5869af43634da0a8459cef94d46f06"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+      "sha256": "a10fb8d80a9530ca19810985354427f6f7ea302b88d5dbe2efb81c7be4c2a68a"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java",
+      "sha256": "99684be5995f81b3dde254476193b064cd6d2aabc7c4ed3bc1d033495847b2ed"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java",
+      "sha256": "76c9893999837dabba99f54cb24d31cfbdf691812e5dbce7e869bf077ba01ce4"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java",
+      "sha256": "1497db8ff3f4d08405095fbcab4a94bfeead7bce92be58f0d0b7803ef2f0aa50"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java",
+      "sha256": "d842283d2f32926b23e3b31e1735e1138a53664ed0d6f05c5b08b78f1a0f5048"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java",
+      "sha256": "8ce39858d2cf718545dc16ded069bfe71ff82f193c19137b7d512c157600bc62"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+      "sha256": "2d640d464e6d1d2fa548b5f8345eb0d774452ce27271667c8fac540a347ee955"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java",
+      "sha256": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "sha256": "b66cf34b3a7301f2263dddaa73664c8aef14ee910ca8b42b57a9f744818286db"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "sha256": "b8057a7567719839ee9ece3ec8f327c78ad8309d49873bd68a97f868e6d2089c"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+      "sha256": "d73d837484cd47f6181637b6ad107ec04866d88e8c76be726cc1101930bfa96a"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+      "sha256": "485a1a84a5cc6565c479bf85541963b792e83dc6137000267aa4c91e4b8db700"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+      "sha256": "bbe3e280e73126bc835565b3c1b5e6cc2194cdbac6ecfbe5cd7a2009a4846eb6"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java",
+      "sha256": "cad587fbc1fe9aa12e45c28a91f30805606070750aba1142e572444318481201"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java",
+      "sha256": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "4317c4bd049aa18401ca960290e9c1e1f09b55123ceaba57dd47c39c9a330172"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java",
+      "sha256": "c304adcbe75c8d043cc3246459ec5354f17915d0ae20c0a9baa5a16da0712553"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java",
+      "sha256": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "sha256": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ChildDirectoryPublicationTest.java",
+      "sha256": "9ab1dc51d5be70d0a1fd0578159f89a9491db78013f1fc474f6f7f98b5569dfd"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ExistingFileAccessTest.java",
+      "sha256": "6efdbb95e27b6ea68ee094f723d333fa415e425e8442f9c0497f6872a9bca30f"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java",
+      "sha256": "f49f659412f58942577506c71c923f28c09c293a2aeaf7a54f59960b8724f901"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsChild.java",
+      "sha256": "87a31afa8ba85444474fa8d6f0443650c90f665f9486b792fbac313287a02755"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "sha256": "d78bc28db7147df843fcfe0463ccc344f9cda78e76e85a73e67ed403ccaa667c"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "sha256": "9992445892cfd6d2188f7a534d9eea5020096be38405fa87c03214d9f5abea88"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java",
+      "sha256": "0c6c0ac4dd75b53c76cd858291fa161eed8f4a4cb2081b092247f2583e318de9"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java",
+      "sha256": "ed3510a2aa56a6b9bbb1c09e26d485bf73a0a245ceb7a397c17c119eaf303dd9"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecChild.java",
+      "sha256": "c942b861a9b01e457421d731bbf5c8f7f48f6229cca9fe6ec56963c4bb8385d8"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java",
+      "sha256": "5889a18160061854db1122951916511c42764d6e7a4821f779bfe79dfe67d2f9"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java",
+      "sha256": "44109094cbf81ff4c176d397be243a4725a8c382daa1c253ed1db8f462e2cd62"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "sha256": "fe33fbf1f340970873f77c90f1a6d0a2cd84252f2a07bb2a257e674f5d2ecbae"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedTransferDirectoryTest.java",
+      "sha256": "415f7921668cadaee27aef095434fe035b12988fe47895416b497bbf5671a373"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateChildDirectoryTest.java",
+      "sha256": "f21fa6cace37b45276d5bef279f9083fc485bdbb74c1e99a9bc53dc9ceed4d8e"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateDirectoryEntryTest.java",
+      "sha256": "b132400b1c45f0ff34728801f3c10c45b604d352a73168b58076233d27d3e18b"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "sha256": "de437bda96b6e5654ceb6611b12fe4bec0e8bf8d5bcde060a8eea5715002d6d4"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java",
+      "sha256": "ebf36599038fda91f5c4949cd86879bbeef70d6821df51b743178efccafc652f"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialIdTest.java",
+      "sha256": "3e57341d9cc9427e366ea1e91ac5f2d808f87d0f0cc3dc0679e6470776438461"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "sha256": "6472a6b7dac5ced42d2e590c13d276799cb6002ceeb1c15fa8d1d489fb103129"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java",
+      "sha256": "36e17342fe17571ed21131737bb0d76cc2747d89d9be299a45234f4341c5c726"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootInspectionTest.java",
+      "sha256": "b7c6d151c841645fde929516716838c9959abcb316e77ad4e370aa819a646986"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java",
+      "sha256": "5dad5f95160a93dbfb91c321fe4876062773c5a2fef52aa1b0cd59a0e5e931a0"
+    }
+  ],
+  "reports": [
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "94c46a4388cacaef87c4fa57ff2cc13e4c6f45cd0d638f41a20ed632a23c0fe7",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "cd7906e4119fd47535b6da8e2c81e198f0bed9e133cf49e97ff6c2aca69aeb6e",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "1bdfb006cd29a88809cf49b6c753512ab3b340ed7ff917cf0ac6cb7b32aeb00a",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "9e19d716aea0eb7625a8fa172035fc96bdaf83f5cf95c96096226333cc592213",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "09388c10d00f40b0e3bb8d633165ac531b1b380e65a8a8b8e92f3bf579ccb99b",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "f11a802eae30c02195b1196c1679e23ca48746cc903476f7ddf2ee5ef0872dec",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "e25780204fbdeb1d896221471a78bb7de13c11b2a0d87e44e0a29b9485818bf0",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "26fc5f933e74d3bc8a753e381ace610dca1c305f80ebc131765326b00ec186f3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "b4201bf4e113c88f372b284ad1f0bfe52805b3c78b74b0abd9b650bcfdf2d405",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "70af62262c9e2713455dbd2c6fa093c3c911504ca4c1fefd3e7af5ebc435b1e0",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "d9a663ef20b8e3e31a9a70cc358b94b17053264c95a49b02ad72e58450432db6",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "253ed20a5472b35ad6e27a72003c3b30dc306792ea78b394655633e0d5dcaa89",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "cafd9bb635a2d824fde35751084b5f1b3da68d7954fa440ffc60ebde9e8aadd3",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "3015789c13e221b3d5bb33b731ebb07e1a1d31a5e46b33309e79019bc69778db",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "f1664fb62cd108915d867a723b9714689f45d771a3ebf68976b8643b964b0da2",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "78eb16fa0fd98ae4f50d41834901ab74217a5661627bb351d1a184c4a5a11563",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "30ae09b0c56dc1acfda852165145146c20c15ef0de52c8d878aa541f68be7f68",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "506fa6e7fa85b7aef3de017c6955ce4c17d6d4ab1a2198a1801fadcf96ec5579",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "d3ca419d1e093dd066d6a8f33cda60fc16a2af48f33c91950406c767b130c4a8",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "bf641be3171fa504aaa56739f7f58e451e3198c2a63de1832a9fdd3bd6bb007e",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "results": {
+    "tests": 141,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 5107
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 413
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 988
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 421
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 214
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 29
+    }
+  },
+  "coverageEvidence": {
+    "path": "src/schubert-nk-storage/target/site/jacoco/jacoco.xml",
+    "sha256": "23d482fad9c3099caa6a2407abb95fb963a98006a7ab43343e5aa334650f16da"
+  },
+  "nativeProbeSource": {
+    "path": "tools/quality/vm/NativeHostDirectoryProbe.java",
+    "sha256": "e411f3f666d510c6f59bea565f012e35474ab74013f4642455ad31fa6edb1d21"
+  }
+}
