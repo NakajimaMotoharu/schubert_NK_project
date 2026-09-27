@@ -2249,7 +2249,8 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest", 1,
                        ("opsWebCfg001IndependentDefaultsAndCanonicalHash", "opsWebCfg002LayeredRangesAndScalarTypes",
                         "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues", "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
-                        "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults")))
+                        "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults",
+                        "opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries")))
         groups.append(("dev.codex.schubert.nk.storage.ServiceConfigFilesTest", 1,
                        ("opsCfgfile001FixedNamesAndIndependentBytes", "opsCfgfile002MissingSymlinkAndNonRegularAreRejected",
                         "opsCfgfile003LengthEncodingAndModeBoundaries", "opsCfgfile004RootAndFileIdentityPolicy",
@@ -2301,6 +2302,24 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
                         "opsCredset004ConcurrentIndependentLoads",
                         "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose")))
+        groups.append(("dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest", 1,
+                       ("opsApiMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal", "opsApiMain002FailuresAndUnknownRemainNonSuccess",
+                        "opsApiMain003FatalDiagnosticIsFixed", "opsApiMain004ActualExternalMainRejectsMissingConfigAndArgv")))
+        groups.append(("dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest", 1,
+                       ("opsWebMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal", "opsWebMain002FailuresAndUnknownRemainNonSuccess",
+                        "opsWebMain003FatalDiagnosticIsFixed", "opsWebMain004ActualExternalMainRejectsMissingConfigAndArgv")))
+        groups.append(("dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest", 1,
+                       ("opsDbsource001BothFixedRolesAndInputErasure", "opsDbsource002EveryPhysicalPoolConnectionIsAdmitted",
+                        "opsDbsource003NullProviderWrongRoleAndSqlFailuresCloseBeforeRefusal",
+                        "opsDbsource004UnknownAndCompoundFailuresPreserveIdentity",
+                        "opsDbsource005OptionsNullUrlSizeAndConstructorFailureErasure",
+                        "opsDbsource006ConcurrentConnectionsAndPrivateMonitor")))
+        groups.append(("dev.codex.schubert.nk.api.file.ApiProcessResourcesTest", 1,
+                       ("opsApiRes001RealFiveMaterialsAndAdmittedPoolOwnedScope",
+                        "opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess",
+                        "opsApiRes003PartialAcquisitionFailureClearsPasswordAndMaterials",
+                        "opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase",
+                        "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = cls.split(".")[4]
@@ -2356,7 +2375,11 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
                        "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
                        "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
-                       "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET"}.get(cls, "PT-OPS-INBOX")
+                       "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
+                       "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
+                       "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
+                       "dev.codex.schubert.nk.api.file.ApiProcessResourcesTest": "PT-OPS-API-RES",
+                       "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest": "PT-OPS-WEB-MAIN"}.get(cls, "PT-OPS-INBOX")
                       if deployment else "PT-DB-INBOX")
             suite = ET.Element("testsuite", name=cls, tests=str(len(names)), failures="0", errors="0", skipped="0")
             for i, name in enumerate(names, start):

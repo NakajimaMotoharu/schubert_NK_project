@@ -124,7 +124,8 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTe
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest", 1,
     ("opsWebCfg001IndependentDefaultsAndCanonicalHash", "opsWebCfg002LayeredRangesAndScalarTypes",
      "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues", "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
-     "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults")),)
+     "opsWebCfg005NullUnknownAndConcurrentDeterminism", "opsWebCfg006ShippedTemplatesMatchApprovedDefaults",
+     "opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries")),)
 DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.storage.ServiceConfigFilesTest", 1,
     ("opsCfgfile001FixedNamesAndIndependentBytes", "opsCfgfile002MissingSymlinkAndNonRegularAreRejected",
      "opsCfgfile003LengthEncodingAndModeBoundaries", "opsCfgfile004RootAndFileIdentityPolicy",
@@ -176,7 +177,29 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.file.ServiceCredentialSetTest"
      "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
      "opsCredset004ConcurrentIndependentLoads",
      "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose")),)
-RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest", 1,
+    ("opsApiMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal", "opsApiMain002FailuresAndUnknownRemainNonSuccess",
+     "opsApiMain003FatalDiagnosticIsFixed", "opsApiMain004ActualExternalMainRejectsMissingConfigAndArgv")),
+    ("dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest", 1,
+    ("opsWebMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal", "opsWebMain002FailuresAndUnknownRemainNonSuccess",
+     "opsWebMain003FatalDiagnosticIsFixed", "opsWebMain004ActualExternalMainRejectsMissingConfigAndArgv")))
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest", 1,
+    ("opsDbsource001BothFixedRolesAndInputErasure", "opsDbsource002EveryPhysicalPoolConnectionIsAdmitted",
+     "opsDbsource003NullProviderWrongRoleAndSqlFailuresCloseBeforeRefusal",
+     "opsDbsource004UnknownAndCompoundFailuresPreserveIdentity",
+     "opsDbsource005OptionsNullUrlSizeAndConstructorFailureErasure",
+     "opsDbsource006ConcurrentConnectionsAndPrivateMonitor")),
+    ("dev.codex.schubert.nk.api.file.ApiProcessResourcesTest", 1,
+    ("opsApiRes001RealFiveMaterialsAndAdmittedPoolOwnedScope",
+     "opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess",
+     "opsApiRes003PartialAcquisitionFailureClearsPasswordAndMaterials",
+     "opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase",
+     "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes")))
+RUNTIME_SUBJECTS = (("api", "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource"),
+                    ("api", "dev/codex/schubert/nk/api/file/ApiProcessResources"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiProcessMain"),
+                    ("web", "dev/codex/schubert/nk/web/bootstrap/WebProcessMain"),
+                    ("api", "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"),
                     ("api", "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"),
                     ("web", "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig"),
@@ -326,7 +349,11 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
                    "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
                    "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
-                   "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET"}.get(cls, "PT-OPS-INBOX")
+                   "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
+                   "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
+                   "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
+                   "dev.codex.schubert.nk.api.file.ApiProcessResourcesTest": "PT-OPS-API-RES",
+                   "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest": "PT-OPS-WEB-MAIN"}.get(cls, "PT-OPS-INBOX")
                   if deployment else "PT-DB-INBOX")
         methods.update({f"{prefix}-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)})
     return methods

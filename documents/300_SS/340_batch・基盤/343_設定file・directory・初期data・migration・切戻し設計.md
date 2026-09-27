@@ -81,6 +81,10 @@ SSC-021のstorage version/hashもmanifestへ記載し、Web/API（batch使用時
 
 ## 4. Config file・設定sourceの優先順
 
+SSC-083/BUG263補足: Java25標準のinstance mainを用い、native no-arg constructorは固定OS環境/sourceとOS終了要求を束ねる。package内限定constructorは同じmainの終了要求を独立検査するportであり、argvによる代替起動/fixture選択を公開しない。設定検査のIllegalArgument分類をassemblyへ広げず、未知assembly例外のidentityを保持する（BUG262/YKT196）。終了診断・Unit class名・native非成功codeは不変。coverage除外/安全gate迂回なし。
+
+SSC-083/PG285（471 R1/D05）: 両Unitに指定済みの`ApiProcessMain`/`WebProcessMain`は引数0件だけを受け、argvによる設定上書きを拒否する。既存StartupInputsの必須環境位置・保持inode設定を検証してから本番assemblyへ渡す。設定不備は非成功70、既知IO失敗・必須assembly未結線は50。stdoutへreceipt/readyを発行せず、stderrは固定process停止/失敗診断だけとする。未知Runtime/Errorは成功へ変換せず固定uncaught診断で終了する。未結線の入口段階でHTTP/JMSを公開しない。限定smokeは実process受入R2/実NK比較R3の成功ではない。完成時はD01～04を同じ本番assemblyへ接続し、途中失敗と正常停止の全所有資源後条件を検証する。
+
 | 優先 | Source | 用途 |
 |---:|---|---|
 | 1（低） | Jar内default | 上位で確定済みの非環境値、安全なfail-closed default |

@@ -1,0 +1,37 @@
+{
+  "status": "provisional-not-formally-certified",
+  "programId": "NK-OPS-001",
+  "runId": "PG288-selected",
+  "completedAt": "2026-09-27T16:24:16+09:00",
+  "branch": "dev-foundation",
+  "baseCommit": "3790557e6",
+  "target": "uncommitted source hashes recorded below; save commit follows",
+  "os": "Linux 7.0.0-34-generic",
+  "jdk": "OpenJDK 25.0.4+7-1-26.04-Ubuntu",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api -Dtest=ApiProcessResourcesTest,ServiceDatabaseSourceTest,ApiProcessMainTest,ServiceCredentialSetTest --no-transfer-progress test jacoco:report",
+  "exitCode": 0,
+  "tests": {"executed": 21, "failures": 0, "errors": 0, "skipped": 0},
+  "sourceHashes": {
+    "ApiProcessMain.java": "33ff2f811e64fe37965c8dfefc06838cbc4678227c57a1d06e9f04c0af1e9a6e",
+    "ServiceDatabaseSource.java": "661d7372fa682ae575d1cc738a78f0790ce6cc3a64d1df6c702cc27855ebfe87",
+    "ApiProcessResources.java": "bc0646bae131d6c14d2e9ffc3eddf94ffb7f644f38eca3eab7b3d04eb7cebf64"
+  },
+  "coverage": {
+    "ServiceDatabaseSource": {"instruction": [0,250], "branch": [0,24], "line": [0,65], "method": [0,16], "class": [0,1]},
+    "ApiProcessResources": {"instruction": [0,187], "branch": [0,0], "line": [0,37], "method": [0,11], "class": [0,1]},
+    "ApiProcessMain": {"instruction": [7,106], "branch": [0,2], "line": [3,31], "method": [1,7], "class": [0,1]}
+  },
+  "coverageFormat": "[missed,covered]; selected-run counters, not complete module certification",
+  "canaries": {"executed": 103, "failed": 0},
+  "temporaryLogHashes": {
+    "/tmp/PG288-selected.log": "d24347c80ad0eb77ea63cc9a9724a2cc60ba5f485fab07bc3fc83db82349b000",
+    "/tmp/PG288-canary.log": "2a1a0c1827b684454cec44bb05b29f078eb5c69060582cde3d8051809ff998aa"
+  },
+  "input": "Public synthetic credential vectors and isolated PostgreSQL18 trust fixture; actual private values not retained",
+  "expected": "Fixed API/Web roles and 4 JDBC properties; each physical connection admitted; reverse close exactly once; owned copies and IO buffers zeroed; unknown exceptions remain failures",
+  "actual": "All 21 selected assertions passed; actual OS credential positive path and native final callback not exercised",
+  "relatedSSC": ["SSC-082", "SSC-083", "SSC-084"],
+  "relatedBUG": ["BUG-261", "BUG-262", "BUG-263"],
+  "notRun": ["full reactor", "full static analysis", "all 53 evidence scopes", "external successful API/Web startup", "actual systemd credential distribution", "SCRAM", "actual NK CHR-A01/L01"],
+  "redaction": "No raw logs, credential/password/key/session/token or database dump committed"
+}

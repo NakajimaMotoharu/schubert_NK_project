@@ -1,5 +1,11 @@
 # Non-secret Web settings only. Credentials use systemd LoadCredential, never YAML.
 # SS343 §4–5; PG273/PT-OPS-WEB-CFG-006.
+# BUG-261/YKT-195; PG286/PT-OPS-WEB-CFG-007, service-specific connection sources.
+"nk.db.url": "jdbc:postgresql://127.0.0.1:5432/schubert_nk"
+"nk.mq.url": "tcp://127.0.0.1:61616"
+"nk.db.pool.web.max": "2"
+"nk.db.pool.web.min": "1"
+"nk.db.connect-timeout": "3s"
 "nk.web.http.address": "127.0.0.1"
 "nk.web.http.port": "8080"
 "nk.web.management.port": "8081"

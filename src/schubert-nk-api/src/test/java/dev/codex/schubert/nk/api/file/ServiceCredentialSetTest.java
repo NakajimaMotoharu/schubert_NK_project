@@ -222,7 +222,7 @@ final class ServiceCredentialSetTest {
         fixture.held, new InspectorCredentialLoaderTest.TestSecurity(io), service, io);
   }
 
-  private static void install(
+  static void install(
       InspectorCredentialLoaderTest.Fixture fixture, ServiceConfigFiles.Service service)
       throws Exception {
     for (var id : ServiceCredentialId.forService(service))
@@ -241,7 +241,7 @@ final class ServiceCredentialSetTest {
     return result;
   }
 
-  private static void assertCleared(InspectorCredentialLoaderTest.TestIo io) {
+  static void assertCleared(InspectorCredentialLoaderTest.TestIo io) {
     for (byte[] buffer : io.buffers) {
       assertArrayEquals(new byte[buffer.length], buffer);
     }

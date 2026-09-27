@@ -1,0 +1,331 @@
+package dev.codex.schubert.nk.api.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.zaxxer.hikari.HikariDataSource;
+import dev.codex.schubert.nk.api.bootstrap.ApiJdbcPool;
+import dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig;
+import dev.codex.schubert.nk.api.bootstrap.ApiStartupInputs;
+import dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource;
+import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.ServiceCredentialId;
+import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** PT-OPS-API-RES-001..006. Real credential channels/PG/pool, explicitly synthetic OS admission. */
+final class ApiProcessResourcesTest {
+  @TempDir static Path temporary;
+  private static ApiLogDatabaseFixture database;
+  private static String url;
+
+  @BeforeAll
+  static void start() throws Exception {
+    database = new ApiLogDatabaseFixture(Files.createDirectory(temporary.resolve("pg")));
+    try (var admin = database.admin()) {
+      url = admin.getMetaData().getURL();
+    }
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    database.stop();
+  }
+
+  private static ApiStartupInputs.Values inputs(Path root) throws Exception {
+    return new ApiStartupInputs.Values(
+        ApiNonSecretConfig.parse("", "nk.db.url: " + url + "\n"),
+        ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", root.toString())));
+  }
+
+  @Test
+  void opsApiRes001RealFiveMaterialsAndAdmittedPoolOwnedScope() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
+      var io = new InspectorCredentialLoaderTest.TestIo();
+      AtomicReference<HikariDataSource> poolRef = new AtomicReference<>();
+      AtomicReference<ServiceCredentialSet> credentialsRef = new AtomicReference<>();
+      var runtime =
+          new ApiProcessResources(
+              inputs(fixture.root),
+              LinuxDirectoryCalls.create(),
+              new InspectorCredentialLoaderTest.TestSecurity(io),
+              io);
+      runtime.execute(
+          (pool, credentials) -> {
+            poolRef.set((HikariDataSource) pool);
+            credentialsRef.set(credentials);
+            assertEquals(8, poolRef.get().getMaximumPoolSize());
+            assertEquals(2, poolRef.get().getMinimumIdle());
+            try (var connection = pool.getConnection();
+                var statement = connection.createStatement();
+                var rows = statement.executeQuery("select current_user::text")) {
+              assertTrue(rows.next());
+              assertEquals("schubert_app", rows.getString(1));
+              assertFalse(rows.next());
+            } catch (SQLException failure) {
+              throw new IOException("fixture query failed");
+            }
+            byte[] copy = credentials.copyKey(ServiceCredentialId.API_CONTEXT_AES_CURRENT);
+            try {
+              assertArrayEquals(new byte[32], copy);
+            } finally {
+              Arrays.fill(copy, (byte) 0);
+            }
+          });
+      assertTrue(poolRef.get().isClosed());
+      assertThrows(
+          IllegalStateException.class,
+          () -> credentialsRef.get().copyKey(ServiceCredentialId.API_CONTEXT_AES_CURRENT));
+      ServiceCredentialSetTest.assertCleared(io);
+      boolean directoryExists = fixture.held.atDirectory(path -> Files.isDirectory(path));
+      assertTrue(directoryExists);
+    }
+  }
+
+  @Test
+  void opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess() throws Exception {
+    for (Throwable body :
+        List.of(
+            new IOException("UNTRUSTED"),
+            new IllegalStateException("UNTRUSTED"),
+            new AssertionError("UNTRUSTED"))) {
+      for (Throwable cleanup :
+          Arrays.asList(
+              null,
+              new IllegalStateException("UNTRUSTED"),
+              body instanceof IOException ? new AssertionError("UNTRUSTED") : body)) {
+        try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+          ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
+          var io = new InspectorCredentialLoaderTest.TestIo();
+          AtomicReference<ServiceDatabaseSource> sourceRef = new AtomicReference<>();
+          AtomicReference<ClosingPool> poolRef = new AtomicReference<>();
+          AtomicReference<ServiceCredentialSet> credentialsRef = new AtomicReference<>();
+          var runtime =
+              new ApiProcessResources(
+                  inputs(fixture.root),
+                  LinuxDirectoryCalls.create(),
+                  new InspectorCredentialLoaderTest.TestSecurity(io),
+                  io,
+                  (target, password) -> {
+                    var source =
+                        new ServiceDatabaseSource(ServiceConfigFiles.Service.API, target, password);
+                    sourceRef.set(source);
+                    return source;
+                  },
+                  source -> {
+                    var pool = new ClosingPool(new ApiJdbcPool().open(source), cleanup);
+                    poolRef.set(pool);
+                    return pool;
+                  });
+          var operation =
+              (ApiProcessResources.Operation)
+                  (pool, credentials) -> {
+                    credentialsRef.set(credentials);
+                    if (body instanceof IOException known) throw known;
+                    if (body instanceof RuntimeException unknown) throw unknown;
+                    throw (Error) body;
+                  };
+          if (body instanceof IOException) {
+            if (cleanup == null)
+              assertThrows(StorageIoException.class, () -> runtime.execute(operation));
+            else
+              assertSame(
+                  cleanup, assertThrows(cleanup.getClass(), () -> runtime.execute(operation)));
+          } else assertSame(body, assertThrows(body.getClass(), () -> runtime.execute(operation)));
+          assertTrue(poolRef.get().owned.isClosed());
+          assertEquals(1, poolRef.get().closes.get());
+          assertThrows(SQLException.class, sourceRef.get()::getConnection);
+          assertThrows(
+              IllegalStateException.class,
+              () -> credentialsRef.get().copyPassword(ServiceCredentialId.DB_API));
+          for (Throwable secondary : body.getSuppressed())
+            assertFalse(secondary.toString().contains("UNTRUSTED"));
+          ServiceCredentialSetTest.assertCleared(io);
+        }
+      }
+    }
+  }
+
+  @Test
+  void opsApiRes003PartialAcquisitionFailureClearsPasswordAndMaterials() throws Exception {
+    for (int stage = 0; stage < 4; stage++) {
+      try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+        ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
+        var io = new InspectorCredentialLoaderTest.TestIo();
+        AtomicReference<char[]> copied = new AtomicReference<>();
+        AtomicReference<ServiceDatabaseSource> sourceRef = new AtomicReference<>();
+        int failureStage = stage;
+        var runtime =
+            new ApiProcessResources(
+                inputs(fixture.root),
+                LinuxDirectoryCalls.create(),
+                new InspectorCredentialLoaderTest.TestSecurity(io),
+                io,
+                (target, password) -> {
+                  copied.set(password);
+                  if (failureStage == 0) throw new IllegalStateException("UNTRUSTED");
+                  if (failureStage == 1) return null;
+                  var source =
+                      new ServiceDatabaseSource(ServiceConfigFiles.Service.API, target, password);
+                  sourceRef.set(source);
+                  return source;
+                },
+                source -> {
+                  if (failureStage == 2) throw new IllegalStateException("UNTRUSTED");
+                  return null;
+                });
+        Class<? extends RuntimeException> expectedFailure =
+            stage % 2 == 0 ? IllegalStateException.class : NullPointerException.class;
+        assertThrows(
+            expectedFailure, () -> runtime.execute((pool, credentials) -> fail("no callback")));
+        assertArrayEquals(new char[copied.get().length], copied.get());
+        if (stage >= 2) assertThrows(SQLException.class, sourceRef.get()::getConnection);
+        ServiceCredentialSetTest.assertCleared(io);
+      }
+    }
+  }
+
+  @Test
+  void opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase() throws Exception {
+    for (int stage = 0; stage < 3; stage++) {
+      try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+        ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
+        if (stage == 0) Files.delete(fixture.root.resolve("mq-api"));
+        if (stage == 1) Files.writeString(fixture.root.resolve("mq-api"), "\n");
+        var io = new InspectorCredentialLoaderTest.TestIo();
+        if (stage == 2) io.rootChange = attributes -> attributes.put("uid", 2);
+        var runtime =
+            new ApiProcessResources(
+                inputs(fixture.root),
+                LinuxDirectoryCalls.create(),
+                new InspectorCredentialLoaderTest.TestSecurity(io),
+                io,
+                (target, password) -> {
+                  throw new AssertionError("no source");
+                },
+                source -> {
+                  throw new AssertionError("no pool");
+                });
+        assertThrows(
+            StorageIoException.class,
+            () -> runtime.execute((pool, credentials) -> fail("no callback")));
+        ServiceCredentialSetTest.assertCleared(io);
+      }
+    }
+  }
+
+  @Test
+  void opsApiRes005NullAndNativeFactoryBoundaries() throws Exception {
+    assertThrows(NullPointerException.class, () -> new ApiProcessResources(null));
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      var values = inputs(fixture.root);
+      var io = new InspectorCredentialLoaderTest.TestIo();
+      var calls = LinuxDirectoryCalls.create();
+      var security = new InspectorCredentialLoaderTest.TestSecurity(io);
+      var source =
+          (ApiProcessResources.SourceFactory)
+              (target, password) ->
+                  new ServiceDatabaseSource(ServiceConfigFiles.Service.API, target, password);
+      var pool = (ApiProcessResources.PoolFactory) admitted -> new ApiJdbcPool().open(admitted);
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(null, calls, security, io, source, pool));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(values, null, security, io, source, pool));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(values, calls, null, io, source, pool));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(values, calls, security, null, source, pool));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(values, calls, security, io, null, pool));
+      assertThrows(
+          NullPointerException.class,
+          () -> new ApiProcessResources(values, calls, security, io, source, null));
+      assertThrows(NullPointerException.class, () -> new ApiProcessResources(values).execute(null));
+      // Real temp FS does NOT satisfy production credential policy. This proves refusal, not OS
+      // admission.
+      assertThrows(
+          StorageIoException.class,
+          () -> new ApiProcessResources(values).execute((p, c) -> fail("not admitted")));
+    }
+  }
+
+  @Test
+  void opsApiRes006IndependentConcurrentScopes() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary);
+        var workers = Executors.newFixedThreadPool(4)) {
+      ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
+      var values = inputs(fixture.root);
+      var work = new ArrayList<Callable<Boolean>>();
+      for (int i = 0; i < 8; i++)
+        work.add(
+            () -> {
+              var io = new InspectorCredentialLoaderTest.TestIo();
+              new ApiProcessResources(
+                      values,
+                      LinuxDirectoryCalls.create(),
+                      new InspectorCredentialLoaderTest.TestSecurity(io),
+                      io)
+                  .execute(
+                      (pool, credentials) -> {
+                        try (var connection = pool.getConnection()) {
+                          assertFalse(connection.isClosed());
+                        } catch (SQLException failure) {
+                          throw new IOException("fixture connection failed");
+                        }
+                      });
+              ServiceCredentialSetTest.assertCleared(io);
+              return true;
+            });
+      for (var done : workers.invokeAll(work)) assertTrue(done.get(10, TimeUnit.SECONDS));
+    }
+  }
+
+  private static final class ClosingPool extends HikariDataSource {
+    final HikariDataSource owned;
+    final Throwable failure;
+    final AtomicInteger closes = new AtomicInteger();
+
+    ClosingPool(HikariDataSource owned, Throwable failure) {
+      this.owned = owned;
+      this.failure = failure;
+    }
+
+    @Override
+    public Connection getConnection() throws SQLException {
+      return owned.getConnection();
+    }
+
+    @Override
+    public void close() {
+      closes.incrementAndGet();
+      owned.close();
+      if (failure instanceof RuntimeException unknown) throw unknown;
+      if (failure instanceof Error fatal) throw fatal;
+    }
+  }
+}

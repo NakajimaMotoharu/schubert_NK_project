@@ -19,7 +19,12 @@ import org.junit.jupiter.api.Test;
 final class WebNonSecretConfigTest {
   private static final String INVALID = "Web non-secret configuration unavailable";
   private static final String GOLDEN =
-      "nk.monitoring.mode=STANDARD\n"
+      "nk.db.connect-timeout=3s\n"
+          + "nk.db.pool.web.max=2\n"
+          + "nk.db.pool.web.min=1\n"
+          + "nk.db.url=jdbc:postgresql://127.0.0.1:5432/schubert_nk\n"
+          + "nk.monitoring.mode=STANDARD\n"
+          + "nk.mq.url=tcp://127.0.0.1:61616\n"
           + "nk.protocol.version=001\n"
           + "nk.time.display-zone=Asia/Tokyo\n"
           + "nk.web.http.address=127.0.0.1\n"
@@ -40,6 +45,52 @@ final class WebNonSecretConfigTest {
         assertThrows(IllegalArgumentException.class, () -> WebNonSecretConfig.parse(common, web));
     assertEquals(INVALID, failure.getMessage());
     assertEquals(0, failure.getSuppressed().length);
+  }
+
+  @Test
+  void opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries() throws Exception {
+    var config =
+        WebNonSecretConfig.parse(
+            "", "nk.db.url: jdbc:postgresql://127.0.0.1:1/a\nnk.mq.url: tcp://127.0.0.1:65535\n");
+    assertEquals("jdbc:postgresql://127.0.0.1:1/a", config.value("nk.db.url"));
+    assertEquals("tcp://127.0.0.1:65535", config.value("nk.mq.url"));
+    assertEquals(
+        "jdbc:postgresql://127.0.0.1:65535/_" + "a".repeat(62),
+        WebNonSecretConfig.parse(
+                "", "nk.db.url: jdbc:postgresql://127.0.0.1:65535/_" + "a".repeat(62) + "\n")
+            .value("nk.db.url"));
+    assertEquals(
+        "tcp://127.0.0.1:1",
+        WebNonSecretConfig.parse("", "nk.mq.url: tcp://127.0.0.1:1\n").value("nk.mq.url"));
+    for (String bad :
+        List.of(
+            "jdbc:postgresql://localhost:5432/db",
+            "jdbc:postgresql://127.0.0.1:0/db",
+            "jdbc:postgresql://127.0.0.1:65536/db",
+            "jdbc:postgresql://127.0.0.1:05432/db",
+            "jdbc:postgresql://127.0.0.1:5432/DB",
+            "jdbc:postgresql://127.0.0.1:5432/db?user=other",
+            "jdbc:postgresql://u@127.0.0.1:5432/db",
+            "jdbc:postgresql://127.0.0.1:5432/" + "x".repeat(64)))
+      rejected("", "nk.db.url: " + bad + "\n");
+    for (String bad :
+        List.of(
+            "tcp://localhost:61616",
+            "tcp://0.0.0.0:61616",
+            "tcp://127.0.0.1:0",
+            "tcp://127.0.0.1:65536",
+            "tcp://127.0.0.1:061616",
+            "tcp://127.0.0.1:61616?user=other",
+            "tcp://127.0.0.1:61616#x")) rejected("", "nk.mq.url: " + bad + "\n");
+    for (String pair :
+        List.of(
+            "nk.db.pool.web.max: 3",
+            "nk.db.pool.web.min: 2",
+            "nk.db.connect-timeout: 4s",
+            "nk.db.pool.api.max: 8",
+            "nk.db.user: schubert_app")) rejected("", pair + "\n");
+    rejected("nk.db.url: jdbc:postgresql://127.0.0.1:5432/db\n", "");
+    rejected("nk.mq.url: tcp://127.0.0.1:61616\n", "");
   }
 
   @Test

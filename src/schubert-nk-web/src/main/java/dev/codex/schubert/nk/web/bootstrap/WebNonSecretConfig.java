@@ -25,11 +25,20 @@ public final class WebNonSecretConfig {
   private static final Pattern DECIMAL = Pattern.compile("0|[1-9][0-9]{0,4}");
   private static final Pattern MILLIS = Pattern.compile("([1-9][0-9]{0,3})ms");
   private static final Pattern SECONDS = Pattern.compile("([1-9][0-9]?)s");
+  private static final Pattern DB_URL =
+      Pattern.compile(
+          "jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/([a-z_][a-z0-9_]{0,62})");
+  private static final Pattern MQ_URL = Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
   private static final Map<String, String> DEFAULTS =
       Map.ofEntries(
           Map.entry("nk.protocol.version", "001"),
           Map.entry("nk.time.display-zone", "Asia/Tokyo"),
           Map.entry("nk.monitoring.mode", "STANDARD"),
+          Map.entry("nk.db.url", "jdbc:postgresql://127.0.0.1:5432/schubert_nk"),
+          Map.entry("nk.mq.url", "tcp://127.0.0.1:61616"),
+          Map.entry("nk.db.pool.web.max", "2"),
+          Map.entry("nk.db.pool.web.min", "1"),
+          Map.entry("nk.db.connect-timeout", "3s"),
           Map.entry("nk.web.http.address", "127.0.0.1"),
           Map.entry("nk.web.http.port", "8080"),
           Map.entry("nk.web.management.port", "8081"),
@@ -118,9 +127,14 @@ public final class WebNonSecretConfig {
             "nk.web.http.address",
             "nk.web.session.idle-timeout",
             "nk.web.session.max-per-user",
+            "nk.db.pool.web.max",
+            "nk.db.pool.web.min",
+            "nk.db.connect-timeout",
             "nk.web.media.max-range-bytes"))
       if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();
     if (!Set.of("STANDARD", "DEBUG").contains(values.get("nk.monitoring.mode"))) throw invalid();
+    if (!validPort(DB_URL, Objects.requireNonNull(values.get("nk.db.url")))
+        || !validPort(MQ_URL, Objects.requireNonNull(values.get("nk.mq.url")))) throw invalid();
     int http = decimal(Objects.requireNonNull(values.get("nk.web.http.port")), 1, 65_535);
     int management =
         decimal(Objects.requireNonNull(values.get("nk.web.management.port")), 1, 65_535);
@@ -158,6 +172,11 @@ public final class WebNonSecretConfig {
     int number = Integer.parseInt(value);
     if (number < min || number > max) throw invalid();
     return number;
+  }
+
+  private static boolean validPort(Pattern pattern, String url) {
+    var match = pattern.matcher(url);
+    return match.matches() && Integer.parseInt(Objects.requireNonNull(match.group(1))) <= 65_535;
   }
 
   private static IllegalArgumentException invalid() {
