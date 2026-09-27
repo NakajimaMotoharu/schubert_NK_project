@@ -1,0 +1,125 @@
+{
+  "run": "PG313-sign-limited",
+  "branch": "dev-foundation",
+  "sourceBase": "691f661fe7c5e2d8cf13d41b04cd0338f84b1053",
+  "dirtySourceHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java": "5e32a2d096d3df45e88c4dafbd71b43cc068e1d11110435bad9a98eeceb97c4a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "e1018e185a4076fcdcab1f1ef6b367a0a45894b637c2be5c5cd38fe726142366"
+  },
+  "finishedAt": "2026-09-28T03:50:00+09:00",
+  "exitCode": 0,
+  "junit": [
+    {
+      "name": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "static/bootstrap.xml",
+      "sha256": "39a447918921dd918ea8381402a29d4d5bd445364c2f5836277ce515f1498de3",
+      "bytes": 23325
+    },
+    {
+      "path": "coverage/bootstrap.xml",
+      "sha256": "69347459f8ff9b4e62ce2130550a75c0dcfab0bc9ba5cf8c837eac95f8ee412e",
+      "bytes": 151799
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "baf240bb649c2c12d2914ceb2a87b861480935b1a5757220ceb2b224766d29e9",
+      "bytes": 11360
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml",
+      "sha256": "46e0f8f4dbdf2649f954caf04a8f30bb2f9c9ea0af9767df3572a8bc91b72e6d",
+      "bytes": 11475
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "0b8b457e6d168a2cc020dd157346f0df596d79319301aa50e3aca90b16f5babc",
+      "bytes": 8057
+    }
+  ],
+  "subjects": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 117
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 26
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticBugs": 0,
+  "formalAccepted": false,
+  "command": "Maven3.9.12/JDK25.0.4 offline -pl src/schubert-nk-bootstrap -am test jacoco0.8.15:report spotbugs4.10.4.0:check -Dtest=ResourceScopeTest,ReleaseApprovalTest,ReleaseSignatureVerifierTest",
+  "environment": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+  "rawLog": {
+    "path": "/tmp/PG313-sign-limited.log",
+    "sha256": "8f6a6c56f30e3348d36496be37f2f770185114df96cd195050af6babeb95aa1c"
+  },
+  "independentOracle": "RFC8032 7.1 TEST1/2 public key/message/signature; private keys not stored or used",
+  "limitations": [
+    "24 selected PT only; no whole clean module coverage/formal scope acceptance",
+    "Primitive caller supplied public key is not authority; trusted fixed-key deployment/approval publisher/BOM not yet connected",
+    "No R2 business process/R3 real NK CHR"
+  ]
+}

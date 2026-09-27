@@ -230,7 +230,17 @@ DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmis
      "opsSchema003ExpectedRowInvariantBoundaries", "opsSchema004ExpectedProfileOrderingAndDefensiveCopy",
      "opsSchema005NullProviderSqlExceptionsAndAllOwnership", "opsSchema006KnownUnknownCloseMatrixAndSameThrowable",
      "opsSchema007InterruptBeforeAndAfterNeverAccepts", "opsSchema008IndependentConcurrentOwners")),)
+DEPLOYMENT_GROUPS += (
+    ("dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest", 1, ("approval001IndependentLiteral", "approval002VersionBoundaries", "approval003NullAndDigestContracts", "approval004ByteBoundsAndNonAscii", "approval005CanonicalOrderAndKeys", "approval006DefensiveCopies", "approval007ParallelOwners", "approval008HeaderAndFixedProfile")),
+    ("dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest", 1, ("approvalRead001FixedLiteralAndClosedOwners", "approvalRead002NullAndNoFallback", "approvalRead003AllMetadataContracts", "approvalRead004EveryIoFaultAndCompoundIdentity", "approvalRead005ReadProgressAndCanonicalMaterial", "approvalRead006NamespaceAndHeldInodeChanges", "approvalRead007InterruptRootAndParallel", "approvalRead008NativePortAndRealContextRefusal")),
+    ("dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest", 1, ("sign001IndependentRfcVectors", "sign002MessageSignatureAndWrongKey", "sign003DerAndNullContracts", "sign004MaterialBoundaries", "sign005SnapshotAndErasedOwnedBuffers", "sign006KnownCryptoFailureIsRedacted", "sign007UnknownFailureIdentityAndErasure", "sign008ConcurrentNativeProviderAndMalformedPoint")),
+    ("dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest", 1, ("bomProfile001IndependentLiteralClaims", "bomProfile002FixedKeysTypesAndOrder", "bomProfile003ByteUtf8AndDocumentBounds", "bomProfile004StrictNumbersAndBoundaryValues", "bomProfile005ArtifactLexicalAndNullContracts", "bomProfile006DependencyContractsAndCopies", "bomProfile007RequiredPayloadAndOrdering", "bomProfile008ManagementSelfHashAndAncestorConflicts", "bomProfile009RegisteredLibCompleteSetAndCommonBytes", "bomProfile010SharedVersionsAndRequiredRoles", "bomProfile011SqlNamesRanksAndSchemaVersion", "bomProfile012IntegerNullableAndColumnContracts", "bomProfile013DefensiveInputAndCollections", "bomProfile014CollectionCapsAndExactPositiveBoundaries", "bomProfile015AllMetadataScalarContracts", "bomProfile016IndependentConcurrentParsers")),
+)
 RUNTIME_SUBJECTS = (
+    ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleaseApproval"),
+    ("batch", "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader"),
+    ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier"),
+    ("bootstrap", "dev/codex/schubert/nk/bootstrap/ReleaseInventory"),
     ("bootstrap", "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission"),
     ("bootstrap", "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures"),
     ("batch", "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess"),
@@ -436,6 +446,10 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
                    "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
                    "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest": "PT-OPS-SCHEMA",
+                   "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest": "PT-OPS-APPROVAL",
+                   "dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest": "PT-OPS-APPROVALREAD",
+                   "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest": "PT-OPS-SIGN",
+                   "dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest": "PT-OPS-BOMPROFILE",
                    "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                    "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",

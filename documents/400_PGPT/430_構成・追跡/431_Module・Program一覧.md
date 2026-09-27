@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-28 PG313暫定追記（正式加点なし）: NK-OPS-001 Bootstrap ReleaseApproval/ReleaseSignatureVerifier/ReleaseInventory（Artifact/Dependency含む）とBatch RootReleaseApprovalReader→PT-OPS-APPROVAL001～008/APPROVALREAD001～008/SIGN001～008/BOMPROFILE001～016。RD SYS002/004・OPS009・DAT009、UI212/251/253、SS343 §11.1・SSC096・PG-D313。018150152153154155/provisional PG313各manifestがmethod/fixture/hash/commandを追跡。固定署名claims/原本reader/parserの限定成功と全release/DB/業務起動受入は別。4groupを022/019、ownerをbootstrap_ownershipへ明示登録し、不明ownerを許容しない。
+
 PG312（SSC095、限定）: NK-OPS-001 SchemaHistoryAdmission.Row/constructor/verify・JdbcAdmissionFailures.replace・ServiceDatabaseAdmission.verify→DAT009/SYS002/OPS009/UI212253/SS3313.3/3439.1/PT-OPS-SCHEMA001～008・DBADMIT003/018147148。NK-DAT-001 V023 startup_schema_history()→同RD/UI/SS/PT-DB-SCHEMA001～008/004068069。provisional PG312、schemaJava8/DDL8/Service4/105canary、変更4class全counter0、BUG283284/YKT216217。fullBOM/root schema接続・横断全回帰未完、正式認定不変更。
 
 PG311追加（SSC094、限定）: NK-OPS-001 RootBatchCredentialReader.read/inspect/NativeIo→RD DAT009/OPS009・UI251・SS341/3436.15・PT-OPS-RBCR001～008/018144。NK-BAT-001/NK-OPS-001 MorningDatabaseSession.execute/Session.requireUnused/beginBackup/BackupBegins→同RD/UI/SS・PT-OPS-MDB001～008/018145。結果018146/provisional PG311、新16＋関連25PT/static0/new5class4coverage100%（host＋samebyte native027）、独立SQL両RUNNING/commit不明0・2row。native027 rootDB参照→永続原本pendingのみ、schema/BOM/全停止/current/実backup/業務/CHRは未受入。

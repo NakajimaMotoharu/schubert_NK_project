@@ -25,6 +25,8 @@
     <!-- SSC088: compile-only exact fixed-kernel-path portability review; no quality exclusions. -->
     <dependency><groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.10.4</version><scope>provided</scope></dependency>
     <!-- SSC084: shared credentials/JDBC, no business API or HTTP/JMS dependency. -->
+    <!-- SSC096: fixed strict release JSON, same pinned parser as API/Web; no lenient fallback. -->
+    <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>2.14.0</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-storage</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><version>42.7.13</version><scope>runtime</scope></dependency>
     <dependency><groupId>com.zaxxer</groupId><artifactId>HikariCP</artifactId><version>7.1.0</version></dependency>

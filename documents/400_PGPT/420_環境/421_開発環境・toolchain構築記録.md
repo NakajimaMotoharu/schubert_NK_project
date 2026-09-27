@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-09-28 PG313: 既存Gson2.14.0をShared Bootstrapの固定manifest STRICT parserにも明示compile依存として利用。Maven Central `https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/`、隔離repositoryのjar SHA256 `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f`。既存API/Web版と同じでglobal設定不変更。JDK25.0.4 javapでJsonReader.doPeek/checkLenientのinstalled primary bytecodeを照合し、EOF以外はSTRICTが拒否することをPG-D313へ記録。POM共通変更のため全6回帰が必要であり、限定40 PTだけで正式認定しない。
+
 ## 2026-09-28 PG311 native027 root DB/run原本接続
 
 同隔離VM Linux7.0.0-31/JDK25.0.4/PostgreSQL18だけで実M/LoadCredential db-batch/fixed role/session advisory71419602/legacy参照不存在→永続run原本を接続。Root credentialはpublic transient Unitでmode0500/0400/root:root/ro tmpfsを先に観測、secret値は出力しない。db-batch source不存在とbatch role passwordNULLを照合後、ProvisionBatchDatabaseでnew-only600初期配備。namespace maintenance/runs/attempts0700もmissing初期配備のみ。既存PG310 testUnitはhash2c527…/inactive/PID0/cgroup不存在を照合しPG311内へ退避後、固定morning名のPG311 testUnitに置換。追加packageなし。再現tool/Unit/command/hash/failed attempt・02:00前の成功時刻は018144～146/provisional PG311。originalはpending、次は同run/activation/cutoffを明示resumeしfresh startを繰り返さない。native後Unit停止、execはprivateに保全、same-byte coverage補完でありfullPGPT/backup/admissionではない。
