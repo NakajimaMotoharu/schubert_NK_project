@@ -211,6 +211,7 @@ DEPLOYMENT_GROUPS += (
 )
 DEPLOYMENT_GROUPS += (
     ("dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest", 1, ("fixedCommandAndEnvironment", "inputAndNullContracts", "statusDeadlineAndCancellation", "everyStreamFailureAndCompoundOwnership", "encryptedPipelineIsNotPlaintextArtifact", "actorGatesAndDatabaseListFailure", "concurrentIndependentScopes", "actualNativePublicTarAndBuilder")),
+    ("dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest", 1, ("literalCreationErasureAndBorrowing", "boundaryAndNullContracts", "metadataSecurityAndNamespace", "everyIoPositionAndProgress", "callbackFailureAndRetainedCapability", "erasureAndNameBindings", "repeatedCollisionAndConcurrentRoots", "nativePrivateTmpfsPublicBytes")),
     ("dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest", 1, ("literalAndOwnedCopy", "boundedSource", "fixedNameMissingAndNoFallback", "everyIoFailureClears", "namespaceAndSecurityFailures", "symlinkAndHardLinkRefused", "closeFailureAndNullContracts", "independentConcurrentCopies")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitFilesTest", 1, ("originalsAndPublicationOrder", "missingCorruptAndWrongBindings", "metadataAndSecurityMatrix", "everyOwnedIoFaultAndUncertainPublication", "inodeChangesAndNoRepair", "interruptionNullAndUnknownIdentity", "concurrentSinglePublication", "nativeIoAndBorrowedLifetime")),
     ("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")),
@@ -219,6 +220,7 @@ DEPLOYMENT_GROUPS += (
 )
 RUNTIME_SUBJECTS = (
     ("batch", "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess"),
+    ("batch", "dev/codex/schubert/nk/batch/file/BackupDatabaseCopy"),
     ("batch", "dev/codex/schubert/nk/batch/file/StartupPermitFiles"),
     ("batch", "dev/codex/schubert/nk/batch/file/StartupPermitRecords"),
     ("bootstrap", "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest"),
@@ -366,6 +368,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest": "PT-OPS-PERMITREC",
                    "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest": "PT-OPS-PERMITFILE",
                    "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest": "PT-OPS-ARCHPROC",
+                   "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest": "PT-OPS-DBCP",
                    "dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest": "PT-OPS-BACKCRED",
                    "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                    "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",

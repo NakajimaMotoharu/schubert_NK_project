@@ -111,6 +111,8 @@ SSC091/BUG271: 保持parent FDを子argvから読む工具は、取得済全子�
 
 ### 6.2 Config・credential backup
 
+SSC090/091 PG307/308補足: startPipeline呼出のIOException/Runtime/Errorは一部spawn不明なので、固定one-shot Unit内でborrowed callbackを非復帰隔離する。builder生成と開始直前割込はspawn前に拒否できる。隔離中の割込はclearしてparkを継続し、Unit全cgroup停止を親が確認するまでM/A/partを保全する。外部process停止後の元例外rethrowは保証しない。Production copyは新UUID.part0600を保持し、原本namespace照合/readback/heap消去を済ませてから固定dumpへ渡す。全terminal-positive return後のみ全zero書込/force/close/readback/元inode-name再照合/unlink/dirsync。不確定unlink後の復元再作成なし。
+
 - `/etc/schubert-nk`の非秘密configはroot所有のtar、path traversal/symlinkを入れず`config.tar`へ固定。
 - Credential directoryはrootが専用allowlistだけ読み、recovery用公開keyのみをhostに置き、
   `age` recipient暗号化の`credentials.tar.age`へする。復号private keyは当該server/backupに置かない。

@@ -1260,7 +1260,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 444}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 452}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -2334,6 +2334,7 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest", 1, ("serviceid001BothFixedAccountsExplicitRequiredGroups", "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker", "serviceid003UidGidBoundariesAndCanonicalDecimal", "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored", "serviceid005ByteNullAndImmutableValueInvariant", "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets", "serviceid007EveryOwnedCloseAndUnknownFailurePreserved", "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ChildStartupContextTest", 1, ("childctx001IndependentGoldenBindingsAndBothUnits", "childctx002EnvironmentMissingAliasNullAndDescriptorBounds", "childctx003EveryAttestedFieldAndNativeIdentityMismatch", "childctx004KernelBoundariesCapabilitiesAndImmutableSnapshots", "childctx005MalformedKernelStatBootPidAndByteInputs", "childctx006EveryStatusMissingDuplicateBoundsAndMalformedValue", "childctx007NullUnknownFailureAndConcurrency", "childctx008NativeProcOnlyDoesNotGrantAuthority")))
         groups.append(("dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest", 1, ("fixedCommandAndEnvironment", "inputAndNullContracts", "statusDeadlineAndCancellation", "everyStreamFailureAndCompoundOwnership", "encryptedPipelineIsNotPlaintextArtifact", "actorGatesAndDatabaseListFailure", "concurrentIndependentScopes", "actualNativePublicTarAndBuilder")))
+        groups.append(("dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest", 1, ("literalCreationErasureAndBorrowing", "boundaryAndNullContracts", "metadataSecurityAndNamespace", "everyIoPositionAndProgress", "callbackFailureAndRetainedCapability", "erasureAndNameBindings", "repeatedCollisionAndConcurrentRoots", "nativePrivateTmpfsPublicBytes")))
         groups.append(("dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest", 1, ("literalAndOwnedCopy", "boundedSource", "fixedNameMissingAndNoFallback", "everyIoFailureClears", "namespaceAndSecurityFailures", "symlinkAndHardLinkRefused", "closeFailureAndNullContracts", "independentConcurrentCopies")))
         groups.append(("dev.codex.schubert.nk.batch.file.StartupPermitFilesTest", 1, ("originalsAndPublicationOrder", "missingCorruptAndWrongBindings", "metadataAndSecurityMatrix", "everyOwnedIoFaultAndUncertainPublication", "inodeChangesAndNoRepair", "interruptionNullAndUnknownIdentity", "concurrentSinglePublication", "nativeIoAndBorrowedLifetime")))
         groups.append(("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")))
@@ -2369,6 +2370,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest": "PT-OPS-PERMITREC",
                        "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest": "PT-OPS-PERMITFILE",
                        "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest": "PT-OPS-ARCHPROC",
+                       "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest": "PT-OPS-DBCP",
                        "dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest": "PT-OPS-BACKCRED",
                        "dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest": "PT-OPS-RELEASE",
                        "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest": "PT-OPS-STARTADMIT",
@@ -2677,7 +2679,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(157, batch_ops)
+        self.assertEqual(165, batch_ops)  # PG308 DBCP literal eight-method inventory.
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

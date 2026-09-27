@@ -36,6 +36,7 @@ final class BackupPublicationFixture
   boolean track = true, nullMap, nullWriter, nullReader, readonly;
   byte[] acl = new byte[0];
   String writeMode = "", readMode = "";
+  String copyFilesystem = "tmpfs";
   String changedSize = "";
   BiConsumer<String, Integer> hook = (name, n) -> {};
   BiConsumer<String, Map<String, Object>> metadata = (role, values) -> {};
@@ -58,6 +59,7 @@ final class BackupPublicationFixture
                           "openDirectory",
                           "openEntry",
                           "createPrivateFile",
+                          "unlink",
                           "publish",
                           "sync",
                           "close")
@@ -146,7 +148,7 @@ final class BackupPublicationFixture
 
   @Override
   public String filesystem(Path held) {
-    throw new AssertionError("backup FS admission belongs to caller");
+    return copyFilesystem; // DBCP public fixture only; other publishers do not infer admission.
   }
 
   @Override
@@ -267,6 +269,7 @@ final class BackupPublicationFixture
               int n = delegate.read(buffer);
               buffer.limit(limit);
               if (readMode.equals("content") && n > 0) buffer.put(0, (byte) 0);
+              if (readMode.equals("nonzero") && n > 0) buffer.put(0, (byte) 1);
               return n;
             });
   }

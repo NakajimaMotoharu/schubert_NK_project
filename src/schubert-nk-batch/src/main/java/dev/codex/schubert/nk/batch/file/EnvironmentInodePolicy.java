@@ -73,7 +73,7 @@ final class EnvironmentInodePolicy {
     return new Snapshot(m, filesystem, readonly);
   }
 
-  private static Metadata metadata(@Nullable Map<String, Object> values) throws StorageIoException {
+  static Metadata metadata(@Nullable Map<String, Object> values) throws StorageIoException {
     if (values == null
         || !(values.get("mode") instanceof Integer mode)
         || !(values.get("uid") instanceof Integer uid)

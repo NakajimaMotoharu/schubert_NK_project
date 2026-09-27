@@ -1,0 +1,19 @@
+[Unit]
+Description=PGPT public native unknown-start quarantine test only
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp /opt/pgpt-native/PG308/classes:/opt/pgpt-native/classes:/opt/pgpt-native/lib/* NativeBackupStartQuarantineProbe
+TimeoutStartSec=3s
+TimeoutStopSec=5s
+KillMode=control-group
+SendSIGKILL=no
+InaccessiblePaths=/usr/bin/age
+ProtectSystem=strict
+ReadWritePaths=/var/lib/schubert-nk
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes

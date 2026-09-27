@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG307/308: NK-OPS-001 BackupArchiveProcess.NativeStart/PendingHold→ARCHPROC008（018135）、BackupDatabaseCopy.dump/metadata/name/IO/erase→DBCP001～008（018136/137）。BAK/BKO/OPS009/UI251/SS3416.1/3436.6、SSC090/091、BUG271/YKT205。新全counter0/静的0、105canary、native023 Production copy実dump・native024不明開始実Unit隔離。Batch452回帰実行中、wholebackup/parentM+A/実業務main/CHR未受入。
+
 PG306/SSC091/BUG271/YKT205: BackupArchiveProcess terminal hold→PT-OPS-ARCHPROC003・001～008、018132/133。主8/関連64PT・新counter0/静的0/105canary。取得済み子の限定修正、partial start/固定Unit/parent/copy未接続。
 
 PG305/SSC090: NK-OPS-001 shared Bootstrap InspectorCredentialLoader.readBackupPgpass→PT-OPS-BACKCRED001～008（018/130・131）、BAK/BKO/OPS009/UI251/SS341 6.1・343 6.6。25限定PT/新method missed0/静的0/105canary、実専用Unit native022 dump/list成功。Productionコピーowner/親backup bundle/実業務起動は未完了、正式run24/48.3%不変更。

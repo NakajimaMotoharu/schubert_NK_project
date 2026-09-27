@@ -443,6 +443,112 @@ final class BackupArchiveProcessTest {
     check.getErrorStream().close();
     check.getInputStream().close();
     var nativeStart = new BackupArchiveProcess.NativeStart();
+    assertThrows(NullPointerException.class, () -> new BackupArchiveProcess.NativeStart(null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new BackupArchiveProcess.NativeStart(builders -> List.of(), null));
+    assertThrows(
+        NullPointerException.class, () -> new BackupArchiveProcess.NativeStart.PendingHold(null));
+    var started = new AtomicInteger();
+    var quarantined = new AtomicInteger();
+    var guarded =
+        new BackupArchiveProcess.NativeStart(
+            builders -> {
+              started.incrementAndGet();
+              return List.of();
+            },
+            first -> quarantined.incrementAndGet());
+    assertThrows(
+        java.util.NoSuchElementException.class,
+        () -> guarded.execute(List.of(), Map.of(), Optional.empty()));
+    Thread.currentThread().interrupt();
+    try {
+      refused(() -> guarded.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty()));
+      assertTrue(Thread.currentThread().isInterrupted());
+    } finally {
+      Thread.interrupted();
+    }
+    assertEquals(0, started.get());
+    assertEquals(0, quarantined.get());
+    var marker = new AssertionError("public controlled quarantine exit");
+    for (Throwable failure :
+        List.of(
+            new IOException("public"),
+            new IllegalStateException("public"),
+            new AssertionError("public"))) {
+      var pending =
+          new BackupArchiveProcess.NativeStart(
+              builders -> {
+                assertEquals(List.of("/usr/bin/true"), builders.getFirst().command());
+                if (failure instanceof IOException io) throw io;
+                if (failure instanceof Error fatal) throw fatal;
+                throw (RuntimeException) failure;
+              },
+              first -> {
+                assertSame(failure, first);
+                quarantined.incrementAndGet();
+                throw marker;
+              });
+      assertSame(
+          marker,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  pending.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty())));
+    }
+    assertEquals(3, quarantined.get());
+    var returned =
+        new BackupArchiveProcess.NativeStart(
+            builders -> {
+              throw new IOException("public");
+            },
+            first -> {});
+    refused(() -> returned.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty()));
+    var pulses = new AtomicInteger();
+    Thread.currentThread().interrupt();
+    assertSame(
+        marker,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                new BackupArchiveProcess.NativeStart.PendingHold(
+                        () -> {
+                          assertFalse(
+                              Thread.currentThread().isInterrupted(),
+                              "interrupt does not release quarantine or cause park spin");
+                          if (pulses.incrementAndGet() == 2) throw marker;
+                          Thread.currentThread().interrupt();
+                        })
+                    .hold(marker)));
+    assertEquals(2, pulses.get());
+    var beganUnknown = new CountDownLatch(1);
+    var returnedUnknown = new AtomicBoolean();
+    var fixed =
+        new BackupArchiveProcess.NativeStart(
+            builders -> {
+              beganUnknown.countDown();
+              throw new IOException("public isolated spawn failure");
+            });
+    Thread held =
+        new Thread(
+            () -> {
+              try {
+                fixed.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty());
+              } catch (IOException failure) {
+                returnedUnknown.set(true);
+              } finally {
+                returnedUnknown.set(true);
+              }
+            },
+            "public-native-start-quarantine");
+    held.setDaemon(true);
+    held.start();
+    assertTrue(beganUnknown.await(2, TimeUnit.SECONDS));
+    held.interrupt();
+    held.join(50);
+    assertTrue(held.isAlive());
+    assertFalse(
+        returnedUnknown.get(), "fixed Production factory must not unwind borrowed callback");
     var processes =
         nativeStart.execute(
             List.of(List.of("/usr/bin/true")), Map.of("PATH", "/usr/bin:/bin"), Optional.empty());

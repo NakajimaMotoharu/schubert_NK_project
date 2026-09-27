@@ -368,6 +368,56 @@ public final class BackupArchiveProcess {
   }
 
   static final class NativeStart implements Start {
+    @FunctionalInterface
+    interface Pipeline {
+      List<Process> start(List<ProcessBuilder> builders) throws IOException;
+    }
+
+    @FunctionalInterface
+    interface Pending {
+      void hold(Throwable first);
+    }
+
+    private final Pipeline pipeline;
+    private final Pending pending;
+
+    NativeStart() {
+      this(ProcessBuilder::startPipeline);
+    }
+
+    NativeStart(Pipeline pipeline) {
+      this(pipeline, new PendingHold());
+    }
+
+    NativeStart(Pipeline pipeline, Pending pending) {
+      this.pipeline = Objects.requireNonNull(pipeline, "pipeline");
+      this.pending = Objects.requireNonNull(pending, "pending");
+    }
+
+    static final class PendingHold implements Pending {
+      private final Runnable pause;
+
+      PendingHold() {
+        this(() -> LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(10)));
+      }
+
+      PendingHold(Runnable pause) {
+        this.pause = Objects.requireNonNull(pause, "pause");
+      }
+
+      @Override
+      public void hold(Throwable first) {
+        // Fixed one-shot Unit only. No acquired handle proves a partly spawned pipeline terminal.
+        // Keep every borrowed capability alive until the Unit's whole cgroup is externally stopped.
+        // No successful return/rethrow-after-kill claim. Clear interrupts to avoid a busy park
+        // loop.
+        while (true) {
+          Thread.interrupted();
+          pause.run();
+        }
+      }
+    }
+
     @Override
     public List<Process> execute(
         List<List<String>> commands, Map<String, String> environment, Optional<Path> output)
@@ -384,7 +434,14 @@ public final class BackupArchiveProcess {
           output
               .map(path -> ProcessBuilder.Redirect.to(path.toFile()))
               .orElse(ProcessBuilder.Redirect.DISCARD));
-      return ProcessBuilder.startPipeline(builders);
+      if (Thread.currentThread().isInterrupted()) throw invalid();
+      try {
+        return pipeline.start(builders);
+      } catch (IOException | RuntimeException | Error first) {
+        pending.hold(first);
+        // Package PT port may return; Production pending never does. Never report success.
+        throw invalid();
+      }
     }
   }
 }
