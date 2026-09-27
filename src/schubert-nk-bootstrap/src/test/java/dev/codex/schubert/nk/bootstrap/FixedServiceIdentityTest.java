@@ -65,6 +65,13 @@ final class FixedServiceIdentityTest {
         new FixedServiceIdentity.Value(998, 980, List.of(980L, 982L, 986L)),
         assertDoesNotThrow(() -> f.subject().resolve(ServiceConfigFiles.Service.WEB)));
     assertEquals(4, f.commands.size());
+    f.commands.clear();
+    assertEquals(986L, assertDoesNotThrow(() -> f.subject().configurationGroup()));
+    assertEquals(List.of(List.of("/usr/bin/getent", "group", "schubert")), f.commands);
+    f.values.put("group/schubert", "schubert:x:0:\n");
+    assertEquals(
+        "service identity unavailable",
+        assertThrows(IOException.class, () -> f.subject().configurationGroup()).getMessage());
     var v = new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L));
     assertEquals("980,981,982,986", v.groupArgument());
     assertEquals("FixedServiceIdentity.Value[REDACTED]", v.toString());

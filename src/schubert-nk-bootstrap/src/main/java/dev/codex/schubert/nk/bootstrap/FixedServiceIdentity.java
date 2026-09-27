@@ -66,6 +66,16 @@ public final class FixedServiceIdentity {
     this.query = Objects.requireNonNull(query, "fixed NSS query");
   }
 
+  /** SS343/SSC089: the named config group, not the smallest/any service group. */
+  public long configurationGroup() throws IOException {
+    try {
+      return id(
+          fields(query.read(List.of("/usr/bin/getent", "group", "schubert")), 4, "schubert")[2]);
+    } catch (IOException failure) {
+      throw unavailable();
+    }
+  }
+
   public Value resolve(ServiceConfigFiles.Service service) throws IOException {
     Objects.requireNonNull(service, "service");
     try {

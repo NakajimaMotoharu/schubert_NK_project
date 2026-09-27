@@ -5,11 +5,11 @@ import dev.codex.schubert.nk.storage.*;
 import java.nio.file.*;
 import java.util.*;
 
-/** PT-OPS-NATIVE-016/017: actual NSS and canonical root-to-child binding; NOT full gate. */
+/** PT-OPS-NATIVE-018/019: actual release bytes and outer child binding; NOT full gate. */
 public final class NativeCanonicalChildProbe {
   public static void main(String[] args) throws Exception {
     if (!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new AssertionError("isolated fixture required");
-    if (args.length == 1 && args[0].equals("child")) { child(); return; }
+    if (args.length == 2 && args[0].equals("child")) { child(args[1]); return; }
     if (args.length != 1 || !Set.of("API","WEB").contains(args[0]) || LinuxInodeSecurity.create().effectiveUid()!=0) throw new AssertionError("isolated root required");
     var service=ServiceConfigFiles.Service.valueOf(args[0]);
     var context=RootStartupContext.create();
@@ -32,11 +32,11 @@ public final class NativeCanonicalChildProbe {
         fields.put("admission_fd",Integer.toString(a));fields.put("admission_device",Long.toUnsignedString((Long)attrs.get("dev")));fields.put("admission_inode",Long.toUnsignedString((Long)attrs.get("ino")));
         fields.put("service_uid",Long.toString(fixed.uid()));fields.put("service_gid",Long.toString(fixed.gid()));fields.put("service_groups",fixed.groupArgument());
         // Public fixed vectors deliberately do NOT attest current permit/root/Ops/schema acceptance.
-        fields.put("permit_epoch","33333333-3333-3333-3333-333333333333");fields.put("permit_sha256","a".repeat(64));fields.put("release_sha256","b".repeat(64));fields.put("config_sha256","c".repeat(64));fields.put("roots_sha256","d".repeat(64));fields.put("broker_invocation_id","2".repeat(32));
+        fields.put("permit_epoch","33333333-3333-3333-3333-333333333333");fields.put("permit_sha256","a".repeat(64));fields.put("release_sha256","ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");fields.put("config_sha256","c".repeat(64));fields.put("roots_sha256","d".repeat(64));fields.put("broker_invocation_id","2".repeat(32));
         return LinuxSealedProof.create().withProof(StartupProofFrame.fromFields(fields).encode(),proof->{
           context.recheck(captured);
           LinuxExecDescriptors.create().withInherited(a,proof,()->{
-            LinuxProcessExec.create().replace(Path.of("/proc/self/fd/"+executable),List.of("/usr/bin/setpriv","--reuid="+fixed.uid(),"--regid="+fixed.gid(),"--groups="+fixed.groupArgument(),"--bounding-set=-all","--inh-caps=-all","--ambient-caps=-all","--no-new-privs","/usr/bin/java","--enable-native-access=ALL-UNNAMED","-cp","/opt/pgpt-native/classes:/opt/pgpt-native/lib/*","NativeCanonicalChildProbe","child"),Map.of("PATH","/usr/bin:/bin","LANG","C","LC_ALL","C","INVOCATION_ID",captured.invocation(),"SCHUBERT_NK_STARTUP_ADMISSION_FD",Integer.toString(a),"SCHUBERT_NK_STARTUP_PROOF_FD",Integer.toString(proof)));
+            LinuxProcessExec.create().replace(Path.of("/proc/self/fd/"+executable),List.of("/usr/bin/setpriv","--reuid="+fixed.uid(),"--regid="+fixed.gid(),"--groups="+fixed.groupArgument(),"--bounding-set=-all","--inh-caps=-all","--ambient-caps=-all","--no-new-privs","/usr/bin/java","--enable-native-access=ALL-UNNAMED","-javaagent:/opt/pgpt-native/lib/org.jacoco.agent-0.8.15-runtime.jar=destfile=/var/lib/schubert-nk/pgpt-native-"+service.name().toLowerCase(Locale.ROOT)+"/startup.exec,append=false","-cp","/opt/pgpt-native/classes:/opt/pgpt-native/lib/*","NativeCanonicalChildProbe","child",service.name()),Map.of("PATH","/usr/bin:/bin","LANG","C","LC_ALL","C","INVOCATION_ID",captured.invocation(),"SCHUBERT_NK_STARTUP_ADMISSION_FD",Integer.toString(a),"SCHUBERT_NK_STARTUP_PROOF_FD",Integer.toString(proof)));
             throw new AssertionError("exec returned");
           });
           throw new AssertionError("descriptor scope returned without exec");
@@ -45,15 +45,13 @@ public final class NativeCanonicalChildProbe {
       throw new AssertionError("root composition returned");
     } finally {if(elf>=0)calls.close(elf);if(bin>=0)calls.close(bin);if(usr>=0)calls.close(usr);if(root>=0)calls.close(root);}
   }
-  private static void child() throws Exception {
+  private static void child(String serviceName) throws Exception {
     var inputs=ChildStartupContext.inputs(System.getenv());
-    LinuxStartupAdmission.create().withAdmitted(inputs.admissionFd(),inputs.proofFd(),(lease,bytes)->{
-      var frame=StartupProofFrame.parse(bytes);var service=ServiceConfigFiles.Service.valueOf(frame.value("service"));
-      var fixed=new FixedServiceIdentity().resolve(service);
-      ChildStartupContext.verify(service,inputs,frame,lease.identity(),new ChildStartupContext().capture(),fixed,"c".repeat(64),"b".repeat(64));
+    var service=ServiceConfigFiles.Service.valueOf(serviceName);
+    ServiceStartupAdmission.create(service,System.getenv()).execute(()->new ServiceStartupAdmission.Configuration<>(Boolean.TRUE,"c".repeat(64)), (ignored,ready)->{
       if(Files.exists(Path.of("/proc/self/fd/"+inputs.proofFd())))throw new AssertionError("proof still open");
-      lease.close();if(Files.exists(Path.of("/proc/self/fd/"+inputs.admissionFd())))throw new AssertionError("A not released");
-      System.out.println("PT-OPS-NATIVE-016/017 PASS service="+service+" fixedNss=true canonicalRootProof=true samePidBootTicksInvocation=true childKernelReobservation=true fixedGroups=true fiveCapsZero=true noNewPrivs=true twoFdClose=true publicFixtureHashesOnly=true fullGate=false");return 1;
+      ready.release();if(Files.exists(Path.of("/proc/self/fd/"+inputs.admissionFd())))throw new AssertionError("A not released");
+      System.out.println("PT-OPS-NATIVE-018/019 PASS service="+service+" fixedNss=true canonicalRootProof=true samePidBootTicksInvocation=true childKernelReobservation=true actualReleaseBytes=true outerChildGate=true configAfterAdmission=true fixedGroups=true fiveCapsZero=true noNewPrivs=true twoFdClose=true publicFixtureConfigPermitRootsOnly=true fullGate=false");
     });
   }
 }

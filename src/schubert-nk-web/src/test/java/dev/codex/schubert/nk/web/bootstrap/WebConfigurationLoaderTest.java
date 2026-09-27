@@ -124,5 +124,22 @@ final class WebConfigurationLoaderTest {
             .load()
             .value("nk.web.http.port"));
     assertEquals(1, calls.get());
+    // BUG268: fixed names do not certify supplied FD values or readiness.
+    for (String key :
+        java.util.List.of("SCHUBERT_NK_STARTUP_ADMISSION_FD", "SCHUBERT_NK_STARTUP_PROOF_FD")) {
+      var approved = new java.util.HashMap<>(ENV);
+      approved.put(key, "not-an-admitted-descriptor");
+      assertEquals(
+          "8080", new WebConfigurationLoader(source, approved).load().value("nk.web.http.port"));
+      for (String alias :
+          java.util.List.of(key.toLowerCase(java.util.Locale.ROOT), key + "_OTHER")) {
+        var invalid = new java.util.HashMap<>(ENV);
+        invalid.put(alias, "128");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new WebConfigurationLoader(source, invalid).load());
+      }
+    }
+    assertEquals(3, calls.get());
   }
 }

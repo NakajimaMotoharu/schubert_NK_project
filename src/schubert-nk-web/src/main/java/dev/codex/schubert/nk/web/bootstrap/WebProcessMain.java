@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
+import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
@@ -46,7 +47,24 @@ public final class WebProcessMain {
   }
 
   int run(String[] arguments, Map<String, String> environment, NonSecretConfigSource source) {
-    return run(arguments, environment, source, WebProcessMain::startNative);
+    Objects.requireNonNull(arguments, "arguments");
+    Objects.requireNonNull(environment, "environment");
+    Objects.requireNonNull(source, "non-secret source");
+    if (arguments.length != 0) return 70;
+    WebStartupInputs loader;
+    try {
+      loader = new WebStartupInputs(source, environment);
+      loader.validateEnvironment(); // No file IO; keep existing argv/environment 70 contract.
+    } catch (IllegalArgumentException failure) {
+      return 70;
+    }
+    int[] failureCode = {50};
+    try {
+      startNative(loader, environment, failureCode);
+      return 0;
+    } catch (IOException failure) {
+      return failureCode[0];
+    }
   }
 
   int run(
@@ -75,16 +93,31 @@ public final class WebProcessMain {
     }
   }
 
-  private static void startNative(WebStartupInputs.Values inputs) throws IOException {
+  private static void startNative(
+      WebStartupInputs loader, Map<String, String> environment, int[] failureCode)
+      throws IOException {
     // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
     // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
-    new ServiceProcessResources(
-            new ServiceProcessResources.Inputs(
-                ServiceConfigFiles.Service.WEB,
-                inputs.credentials(),
-                inputs.config().value("nk.db.url")),
-            source -> new WebJdbcPool().open(source))
-        .execute(ServiceProcessResources.unassembledStartup());
+    ServiceStartupAdmission.create(ServiceConfigFiles.Service.WEB, environment)
+        .execute(
+            () -> {
+              try {
+                var inputs = loader.load();
+                return new ServiceStartupAdmission.Configuration<>(
+                    inputs, inputs.config().canonicalSha256());
+              } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+                failureCode[0] = 70;
+                throw new IOException("non-secret configuration unavailable");
+              }
+            },
+            (inputs, ready) ->
+                new ServiceProcessResources(
+                        new ServiceProcessResources.Inputs(
+                            ServiceConfigFiles.Service.WEB,
+                            inputs.credentials(),
+                            inputs.config().value("nk.db.url")),
+                        source -> new WebJdbcPool().open(source))
+                    .execute(ServiceProcessResources.unassembledStartup()));
   }
 
   static void fatal(Thread thread, Throwable failure) {

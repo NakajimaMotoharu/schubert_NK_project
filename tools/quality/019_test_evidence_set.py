@@ -2333,6 +2333,8 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.bootstrap.StartupProofFrameTest", 1, ("proof001IndependentGoldenAndExplicitFieldOrdering", "proof002EveryMissingExtraDuplicateAndNoncanonicalRow", "proof003AsciiByteSizeAndEveryNullContract", "proof004NumericLowerUpperOverflowAndCanonicalDecimals", "proof005StrictSortedGroupsAndInvalidGroupBoundary", "proof006ServiceBootEpochInvocationAndDigestDomains", "proof007ImmutableInputSnapshotAndByteOwnership", "proof008ConcurrentIndependentImmutableFrames")))
         groups.append(("dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest", 1, ("serviceid001BothFixedAccountsExplicitRequiredGroups", "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker", "serviceid003UidGidBoundariesAndCanonicalDecimal", "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored", "serviceid005ByteNullAndImmutableValueInvariant", "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets", "serviceid007EveryOwnedCloseAndUnknownFailurePreserved", "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ChildStartupContextTest", 1, ("childctx001IndependentGoldenBindingsAndBothUnits", "childctx002EnvironmentMissingAliasNullAndDescriptorBounds", "childctx003EveryAttestedFieldAndNativeIdentityMismatch", "childctx004KernelBoundariesCapabilitiesAndImmutableSnapshots", "childctx005MalformedKernelStatBootPidAndByteInputs", "childctx006EveryStatusMissingDuplicateBoundsAndMalformedValue", "childctx007NullUnknownFailureAndConcurrency", "childctx008NativeProcOnlyDoesNotGrantAuthority")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest", 1, ("startadmit001MandatoryOrderBeforeBusinessAndReady", "startadmit002MissingInvalidAndUntrustedDescriptorsHaveFactoryZero", "startadmit003MalformedRootProofIsRedactedAndNeverObservesBusiness", "startadmit004IndependentBindingsAndChangedKernelRefuseFactory", "startadmit005EveryObservationFailureAndUnknownIdentity", "startadmit006BusinessFailureCleansBeforeFinalAAndCloseNotSuccess", "startadmit007NullConstructorHashAndDescriptorNames", "startadmit008ConcurrentScopesAndNativeFailureNoBusiness")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2360,6 +2362,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest": "PT-OPS-PROOF",
                        "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest": "PT-OPS-SERVICEID",
                        "dev.codex.schubert.nk.bootstrap.ChildStartupContextTest": "PT-OPS-CHILDCTX",
+                       "dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest": "PT-OPS-RELEASE",
+                       "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest": "PT-OPS-STARTADMIT",
                        "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                        "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
@@ -2758,7 +2762,7 @@ class EvidenceSetTest(unittest.TestCase):
             "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources"}
         self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main}
                          | {"dev.codex.schubert.nk.bootstrap." + s for s in
-                            ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext")},
+                            ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext", "StartupReleaseManifest", "ServiceStartupAdmission")},
                          set(bootstrap_ownership.BOOTSTRAP_MAIN))
         for name in bootstrap_ownership.BOOTSTRAP_MAIN:
             source = bootstrap_ownership.source(repo, name)

@@ -79,6 +79,12 @@ public final class ChildStartupContext {
     this.io = Objects.requireNonNull(io, "child context IO");
   }
 
+  /** BUG268: exact internal names only. Name recognition is never descriptor admission. */
+  public static boolean isDescriptorKey(String key) {
+    Objects.requireNonNull(key, "environment key");
+    return A_KEY.equals(key) || P_KEY.equals(key);
+  }
+
   public static Inputs inputs(Map<String, String> environment) throws IOException {
     Objects.requireNonNull(environment, "environment");
     for (String key : environment.keySet()) {

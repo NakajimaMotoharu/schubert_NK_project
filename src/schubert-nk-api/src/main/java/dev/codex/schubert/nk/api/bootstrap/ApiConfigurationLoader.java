@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
+import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.StorageIoException;
@@ -31,7 +32,8 @@ public final class ApiConfigurationLoader {
             .anyMatch(
                 key ->
                     key.toUpperCase(Locale.ROOT).startsWith("SCHUBERT_NK_")
-                        && !CONFIG_KEY.equals(key));
+                        && !CONFIG_KEY.equals(key)
+                        && !ChildStartupContext.isDescriptorKey(key));
   }
 
   public static ApiConfigurationLoader production() {
@@ -39,10 +41,14 @@ public final class ApiConfigurationLoader {
   }
 
   public ApiNonSecretConfig load() throws StorageIoException, NoSuchAlgorithmException {
-    if (unknownNamespace || !CONFIG_ROOT.equals(configLocation))
-      throw new IllegalArgumentException("API non-secret environment unavailable");
+    validateEnvironment();
     ServiceConfigFiles.Contents contents =
         Objects.requireNonNull(source.read(ServiceConfigFiles.Service.API), "source contents");
     return ApiNonSecretConfig.parse(contents.commonYaml(), contents.serviceYaml());
+  }
+
+  void validateEnvironment() {
+    if (unknownNamespace || !CONFIG_ROOT.equals(configLocation))
+      throw new IllegalArgumentException("API non-secret environment unavailable");
   }
 }

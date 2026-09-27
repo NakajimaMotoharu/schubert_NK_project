@@ -29,6 +29,10 @@ public final class WebStartupInputs {
     return new Values(config.load(), credentials);
   }
 
+  void validateEnvironment() {
+    config.validateEnvironment();
+  }
+
   public record Values(WebNonSecretConfig config, ServiceCredentialLocation credentials) {
     public Values {
       Objects.requireNonNull(config, "Web config");

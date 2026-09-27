@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG300/301未認定: NK-OPS-001 Bootstrap.StartupReleaseManifest→PT-OPS-RELEASE001～008、ServiceStartupAdmission→PT-OPS-STARTADMIT001～008、FixedServiceIdentity.configurationGroup/SERVICEID001追加、API/Web main/loader/inputs→既存MAIN/LOAD/INPUT＋BUG266/268/269。RD SYS002/004・OPS009/UI212・251/SS311・342・343/SSC086～089/D04・05、018/119～122/provisional PG300-301。Bootstrap111PT＋実VM native018/019の同class-byte合成限定coverage100%/静的0、API/Web各13selected/PT・静的0、105canary。fullissuer/現在原本/実morning/業務main/CHRは未達。
+
 2026-09-27 PG298/299未認定: NK-OPS-001 Bootstrap.FixedServiceIdentity→PT-OPS-SERVICEID-001～008/native016、Bootstrap.ChildStartupContext→PT-OPS-CHILDCTX-001～008/native017。RD SYS-002/004・OPS009/UI212・251/SS311・342・343/SSC088/D04・05、018/113～116/provisional PG298-299。Bootstrap95PT/全counter0/静的0・API/Web native公開fixture限定、current permit/fullgate/Production業務/CHR未達。
 
 2026-09-27 PG296/297未認定: NK-OPS-001 Batch.platform.RootStartupContext→PT-OPS-ROOTCTX-001～008/native014、Storage.LinuxStartupAdmission→PT-OPS-CHILDFD-001～008/native015。RD SYS-002/004・OPS009/UI212・251/SS342・343/SSC086・087/D04・05、018/109～112/provisional PG296・297。Batch420/Storage149PT・全counter0/静的0、root currentpermit/全gate/canonical child/実NKは未達。

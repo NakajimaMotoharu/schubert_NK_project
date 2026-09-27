@@ -124,5 +124,22 @@ final class ApiConfigurationLoaderTest {
             .load()
             .value("nk.db.pool.api.max"));
     assertEquals(1, calls.get());
+    // BUG268: recognize names, not authority or descriptor values. Native gate is separate.
+    for (String key :
+        java.util.List.of("SCHUBERT_NK_STARTUP_ADMISSION_FD", "SCHUBERT_NK_STARTUP_PROOF_FD")) {
+      var approved = new java.util.HashMap<>(ENV);
+      approved.put(key, "not-an-admitted-descriptor");
+      assertEquals(
+          "8", new ApiConfigurationLoader(source, approved).load().value("nk.db.pool.api.max"));
+      for (String alias :
+          java.util.List.of(key.toLowerCase(java.util.Locale.ROOT), key + "_OTHER")) {
+        var invalid = new java.util.HashMap<>(ENV);
+        invalid.put(alias, "128");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new ApiConfigurationLoader(source, invalid).load());
+      }
+    }
+    assertEquals(3, calls.get());
   }
 }

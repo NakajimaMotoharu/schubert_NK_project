@@ -29,6 +29,10 @@ public final class ApiStartupInputs {
     return new Values(config.load(), credentials);
   }
 
+  void validateEnvironment() {
+    config.validateEnvironment();
+  }
+
   public record Values(ApiNonSecretConfig config, ServiceCredentialLocation credentials) {
     public Values {
       Objects.requireNonNull(config, "API config");
