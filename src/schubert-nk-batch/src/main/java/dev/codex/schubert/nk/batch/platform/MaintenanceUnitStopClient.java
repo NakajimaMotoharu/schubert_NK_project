@@ -67,6 +67,23 @@ public final class MaintenanceUnitStopClient {
   }
 
   /**
+   * Fail before the first stop if any member of the fixed parent set is not deployable. This is
+   * only a preflight: each individual stop still rechecks its own root and effective policy, and
+   * the parent must retain M/A across preflight, all stops and fresh termination observations.
+   * SS341 §2/SSC101; PT-OPS-MCLIENT009..011.
+   */
+  public void preflightAll() throws IOException {
+    interrupted();
+    context.recheck();
+    for (MaintenanceUnit unit : MaintenanceUnit.values()) {
+      interrupted();
+      policy.requireSafe(unit);
+      context.recheck();
+    }
+    interrupted();
+  }
+
+  /**
    * One fixed Unit only. Policy/root failures issue no stop. Caller must inspect returned status.
    */
   public Attempt stop(MaintenanceUnit unit) throws IOException {

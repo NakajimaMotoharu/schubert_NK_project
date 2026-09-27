@@ -1,0 +1,122 @@
+{
+  "id": "PT-OPS-MCLIENT009..011",
+  "formal": false,
+  "dateTime": "2026-09-28T08:40:14+09:00",
+  "environment": "Linux host, Java25.0.4, Maven3.9.12, JaCoCo0.8.15, SpotBugs4.10.4.0",
+  "branch": "dev-foundation",
+  "baseCommit": "2d8567e04 + source/test dirty hashes",
+  "command": "mvn -B -o -pl :schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,MaintenanceUnitStopClientTest test com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check; then batch jacoco:report",
+  "exitCode": 0,
+  "input": "independent fixed8 name sequence; injected later-unit policy failure, mid-root failure, preexisting interrupt",
+  "expected": "8 policy probes and 17 root checks before any stop; fail-closed with stop0; interrupt flag retained",
+  "actual": "27 selected PT F/E/S0, static 0, changed client class all four counters missed0; actual 8 real-unit preflight not executed",
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 157
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 6
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 40
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 10
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageNote": "Batch report is a no-clean cumulative XML; changed class counters are bounded provisional, not formal all-scope coverage. Storage/Bootstrap report XML from prior bounded runs may be cumulative.",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+      "sha256": "41dd3729be8ecb96371b3963721a7127162c2ac19efc5edef3e487525a659c07"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClientTest.java",
+      "sha256": "37f272234c1b59c7ec1dec97d720231fd50971cb6d9ed38e6f226038ff34ab8d"
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "18e070774706e681cb226013ea8c96c8f66798ed1a4a976c89a94e073d0867c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/storage/jacoco.xml",
+      "sha256": "55f69d6b4297779030145d2dc563de389921daf4e9dce66fa894a38e088b4a0a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/storage/spotbugsXml.xml",
+      "sha256": "624e97d1cb05eee189f8ad62e7e137946f38f83e58d829fb9b641b07a7fba2f0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "85e9a0742b2c0078edd0d15abff5aa3d22e789aa6c8898c592172471e3c1c8e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/bootstrap/jacoco.xml",
+      "sha256": "b094bc88338cce353341269f7d74c57a16513d6dd14bd05ffa7eb564afa72d0d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/bootstrap/spotbugsXml.xml",
+      "sha256": "32604bbbbdb45b7f93b13d9707ee836b0b4a46519f2e8dc91aac3846a25de06f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "6c4f79a6411c1cbb64d42b9dfcf3a6a7d36bdc3986aa95a89805cbf08985f8dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/batch/jacoco.xml",
+      "sha256": "1c6240914cc370d1058e5a32a1226ef165abbc8b0b4dd99a1bdf81080bf0769b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG323-preflight/batch/spotbugsXml.xml",
+      "sha256": "adb36faa5bba9542cda3d20d616cf408d71043f4b9a3fa963445ac60fd5f1953"
+    }
+  ],
+  "log": {
+    "path": "Git-outside /tmp/PG323-preflight-static.log",
+    "sha256": "ddfcbdc9db63e68e6c689e93afae96b5a5e9b60731836a7bbf1a132186a22a8f"
+  },
+  "relatedBug": [],
+  "relatedSsc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "remaining": "No parent stop-all orchestration, real 8-unit preflight, Cleanup, Artemis readiness, or R2/R3 acceptance."
+}

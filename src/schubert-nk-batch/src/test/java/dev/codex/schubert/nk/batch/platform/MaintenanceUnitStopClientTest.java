@@ -333,4 +333,81 @@ final class MaintenanceUnitStopClientTest {
     process.getInputStream().close();
     process.getErrorStream().close();
   }
+
+  @Test
+  void mclient009WholeFixedPolicyPreflightCompletesBeforeAnyStop() throws Exception {
+    var sequence = new java.util.ArrayList<String>();
+    int[] starts = {0};
+    var client =
+        new MaintenanceUnitStopClient(
+            () -> sequence.add("root"),
+            unit -> sequence.add(unit.serviceName()),
+            command -> {
+              starts[0]++;
+              return child();
+            });
+    client.preflightAll();
+    assertEquals(0, starts[0]);
+    assertEquals(17, sequence.size());
+    assertEquals("root", sequence.getFirst());
+    for (int index = 0; index < NAMES.size(); index++) {
+      assertEquals(NAMES.get(index), sequence.get(1 + index * 2));
+      assertEquals("root", sequence.get(2 + index * 2));
+    }
+  }
+
+  @Test
+  void mclient010MissingLaterUnitRefusesWithoutPartialStop() {
+    for (int missing : List.of(0, 3, 7)) {
+      int[] checked = {0};
+      int[] starts = {0};
+      var client =
+          new MaintenanceUnitStopClient(
+              () -> {},
+              unit -> {
+                if (checked[0]++ == missing)
+                  throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+              },
+              command -> {
+                starts[0]++;
+                return child();
+              });
+      assertEquals(
+          StopGateFailure.MALFORMED_STATE,
+          assertThrows(StopGateException.class, client::preflightAll).reason());
+      assertEquals(missing + 1, checked[0]);
+      assertEquals(0, starts[0]);
+    }
+  }
+
+  @Test
+  void mclient011RootFailureAndInterruptRefuseWithoutPolicyOrStop() {
+    int[] roots = {0};
+    int[] policies = {0};
+    int[] starts = {0};
+    var client =
+        new MaintenanceUnitStopClient(
+            () -> {
+              if (++roots[0] == 4) throw new IOException("public root changed");
+            },
+            unit -> policies[0]++,
+            command -> {
+              starts[0]++;
+              return child();
+            });
+    assertThrows(IOException.class, client::preflightAll);
+    assertEquals(4, roots[0]);
+    assertEquals(3, policies[0]);
+    assertEquals(0, starts[0]);
+    try {
+      Thread.currentThread().interrupt();
+      assertEquals(
+          StopGateFailure.INTERRUPTED,
+          assertThrows(StopGateException.class, client::preflightAll).reason());
+      assertEquals(4, roots[0]);
+      assertTrue(Thread.currentThread().isInterrupted());
+    } finally {
+      Thread.interrupted();
+    }
+  }
 }

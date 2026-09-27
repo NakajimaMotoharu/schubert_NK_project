@@ -1,0 +1,40 @@
+{
+  "id": "PT-OPS-NATIVE-035",
+  "formal": false,
+  "dateTime": "2026-09-28 08:42-08:45 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, systemd259.5, root Morning/M+A, JDK25.0.4",
+  "branch": "dev-foundation",
+  "baseCommit": "2d8567e04 plus dirty PG323 Production preflight and test-only probe",
+  "commands": [
+    "host: compile test-only NativeMaintenancePreflightProbe against current Production classes; package current Batch classes without accepting tests by jar goal",
+    "guest root: marker/absent new path/Unit inactive/Cleanup not-found verified before exact new PG323 cohort and 322 drop-in install; daemon-reload",
+    "guest root: systemctl start schubert-nk-morning-controller.service; Production preflightAll under actual root M/A; read only sanitized PASS and fixed Unit state",
+    "guest root: systemctl stop Morning; verify inactive/PID0/exact cgroup leaf absent, fixed Unit states, original three SHA, old current and no approval"
+  ],
+  "exitCodes": {
+    "probeCompilation": 0,
+    "batchJarGoal": 0,
+    "guestInstall": 0,
+    "morningStart": 0,
+    "morningStop": 0,
+    "stateAndOriginalCheck": 0
+  },
+  "input": "Actual Caddy loaded/inactive; actual schubert-nk-web.service not-found; Cleanup not-found; Artemis loaded/inactive. No Unit fabrication or dependency bypass.",
+  "expected": "Whole-eight preflight refuses before first stop under genuine root/M/A; original pending/current remain unchanged.",
+  "actual": "PT-OPS-NATIVE-035 PASS, Morning ExecMainStatus0/Result success, Web not-found detected, stopIssued=false; Caddy/Backup/Artemis inactive/PID0; Morning after explicit stop inactive/PID0/leaf absent; original three SHA and old current unchanged; approval absent.",
+  "sourceHashes": {
+    "batch.jar": "d19632b976fb256e2f5271f22fee2c26bdb1dd971d1c820f4d0cc22a424abe2d",
+    "NativeMaintenancePreflightProbe.java": "60aa82bf85009b4091b9b538120e8c7a42f3d12e40da81e0947131a39ba5e434",
+    "NativeMaintenancePreflightProbe.class": "9c8acd4a98472bf6c2e75a1f88fd092088c1d5163ad3b5f6d81efdcc91824a0b",
+    "322-preflight.conf": "bf889fbadfe380368799e698e402d5cc0bf7b76302e4daa8797d31da6ae62218"
+  },
+  "privateExecHash": "3b5cc82d72d1684a0c92cb310ed33d1a4b74c939576a03f2ea346a9e8ed8828c",
+  "originalSha256": {
+    "active": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "begin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "run": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63"
+  },
+  "coverage": "Native-only preflight refusal is not all-branch or formal coverage. PG323-preflight host bounded cumulative class counters are separate and formal unchanged.",
+  "relatedSsc": ["SSC-100", "SSC-101", "SSC-102"],
+  "remaining": "5 fixed Units not-found; whole-eight preflight success/stop/terminal, Cleanup, broker startup/journal, parent full morning and R2/R3 all unaccepted."
+}
