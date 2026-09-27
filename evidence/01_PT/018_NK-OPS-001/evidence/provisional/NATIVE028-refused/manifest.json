@@ -1,0 +1,23 @@
+{
+  "testId": "PT-OPS-NATIVE-028",
+  "artifactSourceCommit": "2905d7cdaa9490b0ccc048f602c0fa011f097aa1",
+  "branch": "dev-foundation",
+  "os": "Ubuntu 26.04 / Linux 7.0.0-31-generic / systemd 259",
+  "jdk": "Ubuntu 25.0.4",
+  "unit": "schubert-nk-morning-controller.service",
+  "probeClassSha256": "43daf49da1b253af972ed31b0a4a83286238272f568c65a3a13089da7232bbc4",
+  "inputManifestSha256": "a83dcee059ed6d66f74d3801ffafc30c16cc5f924b46a907fa1b66c2a45eb050",
+  "publicFixturePinSha256": "3664698f42d75d702ef98a869241e3ff6cb312bd6d87ee90db0271c3d7a505a1",
+  "signatureSha256": "a0320135cb736d883034f89bf6f2020575053d320d5c2809defc76e664f9db08",
+  "actual": {"rootMorning": true, "M": true, "A": true, "fixturePinOriginalByteSignature": true, "rwExecStatus": 1, "roExecStatus": 1, "fullBom": false, "approvalIssued": false, "dbMutation": false, "currentChanged": false, "mainPidAfter": 0, "fixedKernelLeafAbsentAfterStop": true},
+  "expected": {"crossRoleDuplicateGA": "refused", "validBomReadOnlyRetry": "not-run"},
+  "rwReadOnlyCauseIsolated": false,
+  "BUG": ["BUG-301", "BUG-302", "BUG-303", "BUG-304", "BUG-305"],
+  "SSC": ["SSC-097", "SSC-098"],
+  "formalAcceptance": false,
+  "privateCoverage": [
+    {"path": "/home/mini/codex/project1/work/pgpt-native/PG315/candidate-RW.exec", "sha256": "58dfa5ffbe7e160bede47c14c54dd15e06a71361b9a774818ccd74faf9bff28f"},
+    {"path": "/home/mini/codex/project1/work/pgpt-native/PG315/candidate-RO-REFUSED.exec", "sha256": "5648d4ea0721e954d29288aeb697fb6234c54756995f3aeff92eb0e26d4a443d"}
+  ],
+  "limitations": ["Private fixture key is not Production custody", "RW and RO both contain invalid GA matrix; valid-byte RW/RO comparison is still mandatory", "Root release admission/schema/permit/business/CHR not accepted"]
+}

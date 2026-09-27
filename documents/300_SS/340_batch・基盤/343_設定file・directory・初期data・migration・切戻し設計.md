@@ -543,6 +543,8 @@ Current bookmarkのDB ID互換を新しい要件として暗黙追加しない�
 
 ### 11.1 Deploy
 
+SSC098/BUG305: Commons Logging1.4.0/JSpecify1.0.1（既存Web採用版）を親reactor管理へ統一し、全role同releaseのGA版一意を維持する。Maven局所convergenceに加え実resolved matrixでも検査し、候補外署名の前に複数版を拒否する。これを新しい許容差分やverifier/期待の緩和へ置換しない。
+
 SSC097/PG315: 配備候補の検査はcurrentを変更せず、固定`releases/<既存version token>`を既存保持namespace/fullBOM検査へ渡す。候補/current外の信頼済み配備toolが固定pin・Ed25519で元manifest bytesを認証し、同digest/versionの全payload検査を完了してからだけactivationで原本を発行する。候補検査の公開返値はfile agreementに限りroot起動/permit権限ではない。trusted tool/pinの固定配置・由来・独立検証と発行のforce/close/atomic置換/directory syncをPTへ残す。将来の既存Production更新は旧承認release/旧schemaでbackup実成功→migration→新release/approval/current→再gateの順。新schemaを要求するMorning beginをmigration前backupへ使わない。専用PGPT初期構築だけはmarker・業務行0（既定seed除く）・未受入/未許可・全停止/復元点を確認して専用migration actorによりappend-only適用する。VM snapshotを業務backup成功へ代用せず、保留中の真正run/activation原本を同identityで保持する。
 
 SSC096/PG313（実装前の固定契約）: 既定signature検証を省略しない。配備入力側で固定pinned公開鍵によるdetached signature検証成功後だけ固定root原本 `/etc/schubert-nk/release-approval/current` を発行する。親root:root0700、file root:root0400/single-link/ACL無し。固定ASCII1行列は `NKRELEASEAPPROVAL1\nversion=<既存release token1..64>\nmanifest_sha256=<lowerhex64>\n`、最大192byte、unknown/duplicate/欠落/NULL/CRLF/BOM/escape/末尾追加/非canonicalを拒否する。path/algorithm/keyは原本から選ばせない。原本の更新はM/A・全停止・permit失効・current切替を管理する配備処理内で行い、起動時の実測hashから承認原本を作るfallbackを禁止する。

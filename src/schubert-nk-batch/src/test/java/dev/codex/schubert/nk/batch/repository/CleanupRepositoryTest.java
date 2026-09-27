@@ -451,6 +451,42 @@ final class CleanupRepositoryTest {
   @Test
   void moduleDependencyBoundary() throws Exception {
     var repo = Path.of(System.getProperty("nk.pt.repository"));
+    // SSC098/BUG305: literal parent pins; module-local shared-version overrides are forbidden.
+    var parent =
+        DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .parse(repo.resolve("pom.xml").toFile());
+    var property = parent.getElementsByTagName("jspecify.version");
+    assertEquals(1, property.getLength());
+    assertEquals("1.0.1", property.item(0).getTextContent());
+    var pins = new HashMap<String, String>();
+    var managed = parent.getElementsByTagName("dependency");
+    for (int i = 0; i < managed.getLength(); i++) {
+      var dependency = (org.w3c.dom.Element) managed.item(i);
+      String coordinate =
+          dependency.getElementsByTagName("groupId").item(0).getTextContent()
+              + ":"
+              + dependency.getElementsByTagName("artifactId").item(0).getTextContent();
+      assertNull(
+          pins.put(
+              coordinate, dependency.getElementsByTagName("version").item(0).getTextContent()));
+    }
+    assertEquals(
+        Map.of(
+            "commons-logging:commons-logging",
+            "1.4.0",
+            "org.jspecify:jspecify",
+            "${jspecify.version}",
+            "org.slf4j:slf4j-api",
+            "2.0.18"),
+        pins);
+    for (String module : List.of("protocol", "storage", "bootstrap", "api", "web", "batch")) {
+      var child =
+          DocumentBuilderFactory.newInstance()
+              .newDocumentBuilder()
+              .parse(repo.resolve("src/schubert-nk-" + module + "/pom.xml").toFile());
+      assertEquals(0, child.getElementsByTagName("jspecify.version").getLength(), module);
+    }
     var document =
         DocumentBuilderFactory.newInstance()
             .newDocumentBuilder()

@@ -452,7 +452,8 @@ final class MaintenanceFileLockTest {
         List.of(
             "d! /run/schubert-nk 0755 root root -",
             "d! /run/schubert-nk/maintenance 0700 root root -",
-            "f! /run/schubert-nk/maintenance.lock 0600 root root -"),
+            "f! /run/schubert-nk/maintenance.lock 0600 root root -",
+            "f! /run/schubert-nk/startup-admission.lock 0600 root root -"),
         lines.stream().filter(s -> !s.isBlank() && !s.startsWith("#")).toList());
     var f = fixture();
     assertEquals(Optional.of(1), f.lock().tryExclusive(() -> 1));

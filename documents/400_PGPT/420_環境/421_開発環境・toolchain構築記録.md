@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+2026-09-28 PG316/SSC098/BUG305: 各roleの局所Maven convergenceに加えて実release GAV版matrixを照合。既存Webで既に採用済みCommons Logging1.4.0/JSpecify1.0.1を親reactorへ集約（新規未使用版の選択ではない）。入手元Maven Centralの`commons-logging/commons-logging/1.4.0/`、SHA256 d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc、`org/jspecify/jspecify/1.0.1/`、SHA256 070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66。既存隔離repoをoffline使用、Rootにpinし子property/Web管理上書きを除去。再現はJDK25.0.4/Maven3.9.12の全6 clean test/report/static→package/runtime dependency copy/list→test-only AssembleReleaseFixture（fixed Flyway13.4 coreをbuild-side classpath追加）。API runtimeにFlywayを追加しない。source/GAV/実byte独立oracleと全回帰は後続必須。
+
+PG315候補fixture: 169payload/63GAV/23SQL、38,123byte元manifestとOpenSSL3.5.5（Host既存）Ed25519 detached署名。private testkeyはGit外private700/600、pin DER44byte SHA3664698f42d75d702ef98a869241e3ff6cb312bd6d87ee90db0271c3d7a505a1を候補外root0400へ配布。Production pin custody/issuer完成ではない。専用VMの実root/M/A/pin署名まで到達、RW拒否とROでもcross-role版差のため拒否。旧候補/署名/exec保全、新version0.1.0-PG316を使用する。offline QCOW2 snapshot/boot tmpfiles設置→実boot再生成、M/A空root0600/同tmpfsは実観測済み。snapshotを業務backupとしない。
+
 2026-09-28 PG313: 既存Gson2.14.0をShared Bootstrapの固定manifest STRICT parserにも明示compile依存として利用。Maven Central `https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/`、隔離repositoryのjar SHA256 `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f`。既存API/Web版と同じでglobal設定不変更。JDK25.0.4 javapでJsonReader.doPeek/checkLenientのinstalled primary bytecodeを照合し、EOF以外はSTRICTが拒否することをPG-D313へ記録。POM共通変更のため全6回帰が必要であり、限定40 PTだけで正式認定しない。
 
 ## 2026-09-28 PG311 native027 root DB/run原本接続
