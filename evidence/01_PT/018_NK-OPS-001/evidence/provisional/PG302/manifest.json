@@ -1,0 +1,169 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "predecessor_commit": "29f8a05f2",
+  "branch": "dev-foundation",
+  "finished": "2026-09-27T21:55:51+09:00",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "spotbugs": "4.10.4.0",
+  "jacoco": "0.8.15",
+  "suites": {
+    "StartupPermitRecordsTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "6d2d3b164f34fbade93145ddb516d42571aee03107e941ef6ed1d2d664fe9d86"
+    },
+    "MaintenanceRecordsTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "fe7e4244e6a2c17c81e79993c5dd31d6dd6f777a7ad3c27c64de5c396ab7b2b5"
+    },
+    "BatchRunRepositoryTest": {
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "ce9ab9cd93078616ed179becacf22981461ce3c7f69eba3c7235f67a40103106"
+    }
+  },
+  "new_subject_coverage": [
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$DigestFactory",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$Permit",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "67"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "4"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "14"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "4"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "2"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "73"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "6"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "12"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "6"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "3"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitRecords",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "447"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "20"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "90"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "29"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "19"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$State",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "15"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "3"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "1"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "1"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    }
+  ],
+  "source_hashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitRecords.java": "9cefa5e6b31443b0de40c493e47776f4905cbff928a75597d1404913a36c079f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitRecordsTest.java": "08b086a0a1e195d985a9e412b71603d4d9c946adbcc3914930309bf2430d833d",
+    "tools/quality/019_test_evidence_set.py": "7b579e3793bfe3610e36e65b4448e8c0bb15e25b0be76ccc54c6d07519ee3d15",
+    "tools/quality/020_collect_batch_evidence.py": "68f5eac5c9cfe15a805779c04e6fa38aa648fdd8bb7127c901a5f4f119f11027",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "e6ca82ce187a467ee77a9d148fffb1e2d52a63a1af5e84458f59717ec4610109"
+  },
+  "negative_canaries": 105,
+  "full_module_tests": "not run after PG302; no current whole-module certification",
+  "native_current_original_io": "not implemented",
+  "formal_run": "PT-WEB-20260925-24",
+  "logs": {
+    "PG302-permit-records.log": "c3bd99ea8e559812504711c08fe04e23c1b4fe5a32a05e2df3676248bd75cb67",
+    "PG302-permit-records-dependencies.log": "3e3d22c816ba87a800359341c3434f0efe983fb566dd3fb55206907b26001ddc",
+    "PG302-canary.log": "7d2b1d0da75e2f1f737dd72a2605599117a9a1b6ca97f11def5449c3c1de0e47",
+    "PG302-canary-2.log": "afa7251f5f9555e41b3dbad8190ca340fcecc2018ef8e856e800ba6fb3a3aa22",
+    "PG302-canary-3.log": "d71154e03bf8f805776d1d8e6ac78e820f1d67a41ce64ed7dcc4c263033aa906"
+  }
+}

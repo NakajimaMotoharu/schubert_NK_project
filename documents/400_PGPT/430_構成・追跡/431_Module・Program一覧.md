@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG302暫定追記: NK-OPS-001 Batch.file.StartupPermitRecords/Epoch/Permit/State→PT-OPS-PERMITREC001～008、018/123・125/provisional PG302。RD SYS002/004・OPS009/UI251/SS343 SSC089。codec・value層限定8PT/全counter0/静的0、原本IO・issuer・業務外部起動未達、正式全体進捗加点なし。
+
 2026-09-27 PG300/301未認定: NK-OPS-001 Bootstrap.StartupReleaseManifest→PT-OPS-RELEASE001～008、ServiceStartupAdmission→PT-OPS-STARTADMIT001～008、FixedServiceIdentity.configurationGroup/SERVICEID001追加、API/Web main/loader/inputs→既存MAIN/LOAD/INPUT＋BUG266/268/269。RD SYS002/004・OPS009/UI212・251/SS311・342・343/SSC086～089/D04・05、018/119～122/provisional PG300-301。Bootstrap111PT＋実VM native018/019の同class-byte合成限定coverage100%/静的0、API/Web各13selected/PT・静的0、105canary。fullissuer/現在原本/実morning/業務main/CHRは未達。
 
 2026-09-27 PG298/299未認定: NK-OPS-001 Bootstrap.FixedServiceIdentity→PT-OPS-SERVICEID-001～008/native016、Bootstrap.ChildStartupContext→PT-OPS-CHILDCTX-001～008/native017。RD SYS-002/004・OPS009/UI212・251/SS311・342・343/SSC088/D04・05、018/113～116/provisional PG298-299。Bootstrap95PT/全counter0/静的0・API/Web native公開fixture限定、current permit/fullgate/Production業務/CHR未達。
