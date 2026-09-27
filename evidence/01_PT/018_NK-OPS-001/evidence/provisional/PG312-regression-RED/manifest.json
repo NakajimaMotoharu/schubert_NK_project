@@ -1,0 +1,78 @@
+{
+  "unit": "PG312-regression-RED",
+  "branch": "dev-foundation",
+  "sourceCommit": "1b7d1848eafd6e6f3fa3d47b65215f75c6e55db3",
+  "command": "Maven3.9.12 Java25.0.4 offline -pl protocol,storage,bootstrap,api,web,batch -am clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check (full exact command in checkpoint139)",
+  "exitCode": 1,
+  "completedAt": "2026-09-28T02:47:32+09:00",
+  "formalAcceptance": false,
+  "trigger": "DDL/security shared admission; D02/04/05",
+  "rawLogSha256": "f65bfa8609bdb5c6251c31427dddfed28f6bb6dbaa4572ba459cc2272d387bad",
+  "related": [
+    "SSC-095",
+    "BUG-285",
+    "YKT-218",
+    "BUG-286",
+    "YKT-219"
+  ],
+  "modules": {
+    "protocol": {
+      "counts": {
+        "tests": 80,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source": "full raw log",
+      "staticAndReportExecuted": true
+    },
+    "storage": {
+      "counts": {
+        "tests": 149,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source": "full raw log",
+      "staticAndReportExecuted": true
+    },
+    "bootstrap": {
+      "counts": {
+        "tests": 135,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source": "full raw log",
+      "staticAndReportExecuted": true
+    },
+    "api": {
+      "counts": {
+        "tests": 742,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source": "full raw log + 3 failed suites archived BEFORE retest",
+      "staticAndReportExecuted": false
+    }
+  },
+  "files": [
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "039bf5b31e29776405ae2e45cf3b6052f9f00f8ca3f634cc412b1cd9e0131278",
+      "bytes": 33225
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "e188459078de60570037f5142cc4c74e3fd24aa42ea11fc1a262d0cc232c1698",
+      "bytes": 25732
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "07d870517adc086161de317af266d6ad27c5cd1ad39167bd045ca88218ba1cb8",
+      "bytes": 25725
+    }
+  ],
+  "limitations": "Web/Batch NOT executed in this run. Any existing target XML for them is stale and excluded. API static/report goal not reached after test failures. No full gate/coverage acceptance. BUG286: original manifest draft attempted active-target inventory after preflight started; ALL such suite hashes removed, not used for certification. Only already archived 3 failing JUnit XML files belong to the RED run; other full JUnit XML were not archived before retest."
+}

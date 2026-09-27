@@ -1,0 +1,83 @@
+{
+  "phase": "PT",
+  "baseCommit": "1b7d1848eafd6e6f3fa3d47b65215f75c6e55db3",
+  "source": "same production bytes; test/current oracle dirty hashes below",
+  "branch": "dev-foundation",
+  "completedAt": "2026-09-28T02:51:11+09:00",
+  "exitCode": 0,
+  "selectedTests": 75,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "staticFindings": 0,
+  "canaries": 105,
+  "formalAcceptance": false,
+  "related": [
+    "SSC-095",
+    "BUG-285",
+    "BUG-286",
+    "YKT-218",
+    "YKT-219"
+  ],
+  "expected": "literal current001..023; frozen historicalV001..022 SHA from old commits; historical V021->V022 explicit target022 unchanged expectations",
+  "actual": "all75 selected assertions pass; exact current23 SQL+SCHEMA0; full regression pending",
+  "logs": [
+    {
+      "path": "/tmp/BUG285-inventory-preflight.log",
+      "sha256": "75d84697babc593a76412b6a876dc0300974c63dada418326ff4e59f3b11b188",
+      "exitCode": 1
+    },
+    {
+      "path": "/tmp/BUG285-inventory-preflight-2.log",
+      "sha256": "19376646d270d92252baead41fe99846ced5c169c2ccaf5a649d64fb970065c9",
+      "exitCode": 0
+    },
+    {
+      "path": "/tmp/BUG285-canary.log",
+      "sha256": "713c8db618c902b82ddac2da66f62f7fb7db3d97ac974bcbbeeba287a6884a01",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "884604e1b36b99e6a7604b5ae21b47ef49dbaf47e9415bc5d3e247d9003496c6"
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "933640a2cf2d938e84979cea44b8f09477a54d24bb5f5b8400bdbf994e57b15c"
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "9480d73c5eb905b55982d0dd4f0d1b3d8549f48fbd096a719c4828b3839b3982"
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "6f640bc6dea02860b31fda2d255143006a7756cb7970c68f5a29d55bd2088fd0"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+      "sha256": "74c944d9cac02ba436c92b94c31f88f70b1851ff17848c3acb51addd8006800c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/StepCleanupBoundaryTest.java",
+      "sha256": "fd2b786d45506677c64a263913c35960a2f3b7a3cab604a660f0d7b3afda0e3e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionParentBoundaryTest.java",
+      "sha256": "67e322fbd2639e108788a403d64771a56b34af91cf92a909651da8280aab5d40"
+    },
+    {
+      "path": "tools/quality/037_collect_expiry_audit_database.py",
+      "sha256": "ee32d4b593b9d836edb6ca29f5c4371cb9f6e722eda5307eb142f22bb3f6368e"
+    }
+  ],
+  "redArchivedFailureCounts": {
+    "TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml": 2,
+    "TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml": 1,
+    "TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml": 1
+  },
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api -am spotless:apply test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check -Dtest=DatabaseMigrationTest,StepCleanupBoundaryTest,InspectionParentBoundaryTest,StartupSchemaProjectionTest,SchemaHistoryAdmissionTest,ServiceDatabaseAdmissionTest,OwnedTransferDirectoryTest,FieldCodecTest"
+}

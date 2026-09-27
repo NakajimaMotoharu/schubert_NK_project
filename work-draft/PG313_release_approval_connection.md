@@ -1,0 +1,17 @@
+# PG313 fixed release approval connection draft
+
+2026-09-28、PG312全回帰中のread-only調査から保存。Production source/test/config/toolsは1b7d1848eに固定中。本draftは成果認定/設計承認原本ではない。
+
+採用する限定Astra/high review: SS343§11.1のsignature検証は維持。配備処理が固定pinned公開鍵でdetached signatureを検証した後だけroot承認原本を発行し、起動時はその原本を別信頼anchorとして照合する。実releaseの測定hashだけから承認を生成する起動fallback/caller approved boolean/任意pathやalgorithmは無し。
+
+固定候補 `/etc/schubert-nk/release-approval/current`。親root:root0700、file root:root0400/nlink1/ACL0、固定version/release version/manifest SHA256のみ。全root前段（morning、API/Webの!前段）がRootStartupContext認証後の真正PID1 host-viewで同じ原本を読む。普通5secret catalogを変えない。API/Web Unit User=serviceのLoadCredentialはservice可読となるため、root専用runtime credentialをそのまま配る案は採用しない。配備/切替/原本更新は既存M/A/停止/permit失効手順内、実装前SSC補足必要。
+
+既存StartupReleaseManifestのheld current→release→同一manifest bytes scope内に追加入口を設け、root承認digest/version照合→strict JSON/profile→全artifact path/size/SHA/role/mode/namespace→共有artifact byte一致→同梱SQL/externalSQL一致→releaseSQL固定Flyway13.4 checksum期待profile→immutable結果を全close後だけ返す。sha256()後別pathから再読しない。root schema期待は運用DBから作らない。共用SchemaHistoryAdmissionはこの結果だけから組立て、MorningDatabaseSessionでbackup begin前に全row照合する。
+
+列挙はheld directoryでmanifest具体file＋祖先directory＋固定管理fileの完全一致。未知jar/file/空dir/symlink/duplicate/aliasを拒否。BackupArtifactVerifier.namesの列挙close方式を参照し汎用nativewalkerは作らない。
+
+循環規則: manifest自身はpayload hash列から除外し外部承認digestが拘束。SHA256SUMS自身も除外、manifest＋全payloadのcanonical hash列を独立構成して実bytesと比較、manifestからSHA256SUMSをhashしない。signatureは配備入力側に保全してruntime treeへ入れない（SS§3はfile名指定無し）。runtimeに残すなら実signature検証か承認原本signature digest必須、任意除外リスト禁止。署名検証/原本発行未結線ならfulltrustedBOM=false。
+
+固定Flyway13.4 installed primary bytecodeをjavap確認済: single resourceはBufferedReader.readLine、最初のlineだけ先頭U+FEFFを除去、各lineUTF8 bytesを改行無しでCRC32更新→signed int。artifact SHAとは別。production builderで当該固定版に合わせ、PTは独立CRC固定vectorとactual Flyway13.4照合、NULL/失敗rowを除外しない。
+
+次: PG312全回帰RED2既存inventoryをBUG285/YKT218で是正→全6module再試験保存→SSCを先に起票/SS343固定原本・signature発行具体化→以上を一つのrelease/schema/親DB受入bundleとして実装/独立PT/実VM署名・原本resumeへ結線。class追加ごと全正式runに戻さず、横断security/POM変更はbundle source固定後451全回帰。

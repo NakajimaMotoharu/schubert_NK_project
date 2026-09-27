@@ -329,7 +329,7 @@ final class InspectionParentBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(22, files.size());
+    assertEquals(23, files.size());
     for (int i = 0; i < 18; i++) {
       assertTrue(files.get(i).getFileName().toString().startsWith("V%03d__".formatted(i + 1)));
       assertEquals(
@@ -340,7 +340,7 @@ final class InspectionParentBoundaryTest {
     }
     try (var c = db.admin()) {
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022",
+          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023",
           scalar(
               c,
               "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where version is not null and success"));

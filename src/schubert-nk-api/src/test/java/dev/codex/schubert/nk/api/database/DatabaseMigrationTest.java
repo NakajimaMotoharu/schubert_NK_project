@@ -1075,6 +1075,7 @@ final class DatabaseMigrationTest {
             "migration/V020__atomic_cleanup_step_counts.sql",
             "migration/V021__expiry_batch_run_audit.sql",
             "migration/V022__staged_expiry_batch_run_audit.sql",
+            "migration/V023__startup_schema_history_projection.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1302,7 +1303,15 @@ final class DatabaseMigrationTest {
     }
     assertEquals(
         1,
-        configuredFlyway(stageUrl, false, "classpath:db/migration").migrate().migrationsExecuted);
+        // This historical V021 -> V022 component case deliberately stops at V022.
+        // Current V023 full-profile/security coverage is StartupSchemaProjectionTest001..008.
+        Flyway.configure()
+            .configuration(
+                configuredFlyway(stageUrl, false, "classpath:db/migration").getConfiguration())
+            .target("022")
+            .load()
+            .migrate()
+            .migrationsExecuted);
     assertEquals(
         "SUCCESS|2|1|1|1",
         queryString(
@@ -1381,7 +1390,13 @@ final class DatabaseMigrationTest {
                 + " from schubert.batch_runs where business_date='2031-06-04' and attempt=2"));
     assertEquals(
         0,
-        configuredFlyway(stageUrl, false, "classpath:db/migration").migrate().migrationsExecuted);
+        Flyway.configure()
+            .configuration(
+                configuredFlyway(stageUrl, false, "classpath:db/migration").getConfiguration())
+            .target("022")
+            .load()
+            .migrate()
+            .migrationsExecuted);
   }
 
   private static void writeEvidenceSnapshots() throws Exception {

@@ -14,7 +14,7 @@ METHODS = {
     "PT-DB-018": "stagedExpiryAuditPreservesOldRowsAndUnknownAfter",
 }
 ORACLE = (
-    "PT-DB-016|current V001..022 applied 22/22|expiry three columns timestamptz,bigint,bigint|"
+    "PT-DB-016|current V001..023 applied 23/23|expiry three columns timestamptz,bigint,bigint|"
     "SUCCESS before-after=success=target and failure=0|other step all null|"
     "partial/null/infinity/negative/reverse/mismatched 23514|batch allow; web-session deny\n"
     "PT-DB-017|V001..020 plus synthetic old CLEAN_EXPIRY SUCCESS|V021 abort|"
