@@ -99,6 +99,8 @@ target全体を止めず、cleanupが削除skipを記録した上で後続する
 
 ### 4.2 Java service共通
 
+SSC-087: root前段も共通sandbox内で動き、ProtectSystem=strictを解除する`+`/shell/setnsは使わない。PrivateUsers/PrivatePIDsや固定permit fileの古いbindを追加せず、PID1/system managerが同じhost/bootであることを検証する。root前段のread-only保持host能力だけで現在host FSを観測し、exec前に全closeする。普通serviceにはA短期FDとsealed公開proof以外のhost能力を移さない。private RO観測をhost故障のRO状態と混同しない。
+
 SSC-086: 完成時の直接Java入口は同Unit/same PIDのroot前段`RootServiceLauncher`とする（ExecStartの`!` prefix、shellなし）。前段は既存root起動管理の全root/Ops/schema/現在起動許可をread-only検査し、native execveで固定`/usr/bin/setpriv`→固定`/usr/bin/java`→従来service mainへ置換する。!はSupplementaryGroupsも無効化するので、固定account/groupのNSS解決値を明示`--reuid/--regid/--groups`へ渡す。init-groups/任意account/任意commandは禁止。全bounding/inheritable/ambient capabilityをdropしNoNewPrivilegesを保持、最終UID/GID/groups/5cap fieldを子が再確認する。他のsandbox/ReadWritePaths/5個LoadCredentialは従来値のまま。root前段のprivate sourceはappへ移さず、前段の秘密copy/DB/JMSはexec前にcloseし、成功execでroot JVM全heapを破棄する。Aの短期同OFDとsealed非秘密proof以外を意図的に継承しない。!前段もtrust boundaryの一部としてPT対象、まだ完成していないProduction Unitは現状の拒否mainを維持する。
 
 | Directive | Web/API | 理由 |

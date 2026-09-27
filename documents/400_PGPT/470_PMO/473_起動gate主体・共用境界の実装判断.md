@@ -2,6 +2,8 @@
 
 ## PG291着手前：SSC086の同PID privilege phase
 
+PG292/SSC087追補（host adapter code前）: Astra限定reviewはhost FS後発RO remount/古いpermit bind/別A inode/最終service能力の4反例を提示。VMのNativeHostViewProbeをProtectSystem=strict/NoNewPrivileges/PrivateTmp/ProtectHome下で実測した。native保持host `/proc/1/root`→NOFOLLOW runはRO=false、private runはRO=true、devino/owner/mode同一。一方Java FileStore(host held FD)はcanonical pathをprivate namespaceへ解決しRO=trueで、最初の仮説試験は不合格。native statvfsに切替えた009だけ限定成功。この事実からsandboxを緩めず、root専用read-only host DirectoryCallsで現在host状態を検査する。PID1/boot/proc由来・A cross-namespace・permit可視性のadmissionはまだ未実装。root actor以外への能力配布/FS policy緩和はしない。Source/SS変更はSSC087先行、Mは従来RWのまま。
+
 VM試験007/008で同OFD/readonly/CLOEXEC/固定group/zeroCapsを実測したが、shell試作品はProductionへ移さない。Java直接root前段→native execve(setpriv固定引数)→Java固定service後段を選び、まずStorage native exec境界と独立argv/env oracle・実外部execをPG/PT並行で作る。次にA/sealed proof/現許可/全root/Ops/schemaを同経路へ追加する。未完成部分は拒否のまま、Unitは受入前に変更しない。
 
 Astra/high限定reviewの採用条件: Mは親全体、Aは起動観測からreadyまで。同PID execでSCM_RIGHTS/ACKは不要。親はA取得後に固定全対象のInvocation/cgroup終端を再確認し、A内で旧許可失効後だけ変更、必要工程後だけ新許可を確定する。旧Expiry成功だけを保守終了としない。全設定/release/root/Broker/鍵変更もAを守る。起動はA取得前に業務資源0、A取得後はread-only。!はSupplementaryGroupsも解除することと、readonly Aはkernel上LOCK_UN可能なtrusted能力であることを明示する。これらはSSC086としてcodeより先にSS正本へ反映済み。RD/UI公開挙動/秘密配布/最終service権限は不変更。
