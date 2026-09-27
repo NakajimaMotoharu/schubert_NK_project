@@ -1,0 +1,48 @@
+{
+  "id": "PT-OPS-NATIVE-032 / PT-OPS-MCLIENT008",
+  "formal": false,
+  "dateTime": "2026-09-28 08:11-08:14 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, real root Morning/M+A and active Caddy, JDK25.0.4/Maven3.9.12/JaCoCo0.8.15",
+  "branch": "dev-foundation",
+  "sourceCommit": "c66e5b892 (same immutable Production Batch jar; dirty test-only NATIVE032 probe/drop-in)",
+  "commands": [
+    "javac new test-only NativeMaintenanceActiveStopProbe against PG319 Production jar",
+    "guest root: validate marker, active Caddy PID1090, effective policy no/control-group, install new PG320 test-only cohort and 321 drop-in, daemon-reload/verify",
+    "guest root: systemctl start Morning; fixed Production stop client executes real Caddy stop under root/M/A; read sanitized PASS/Unit states; stop Morning and verify leaves",
+    "mvn -pl src/schubert-nk-batch -DskipTests -Djacoco.dataFile=Git-outside/native.exec jacoco:report"
+  ],
+  "exitCodes": {
+    "probeCompilation": 0,
+    "guestInstallAndVerify": 0,
+    "morningStartAndExec": 0,
+    "morningStopAndLeafCheck": 0,
+    "nativeCoverageReport": 0
+  },
+  "input": "Caddy loaded/active PID1090; NK effective KillMode=control-group, SendSIGKILL=no, TimeoutStopSec=30s; Backup loaded/inactive; Production batch.jar SHA256=478858b97bafc15082a7bd92893dde7d00acb90dc4dd3fd08fcf5b0ddbc8dd6b",
+  "expected": "fixed stop client exits0 only after real active Caddy stop; fresh actual Unit/kernel terminal independently accepted; cold Backup unchanged; parent locks and root context authentic; no all-eight or business claim",
+  "actual": "PT-OPS-NATIVE-032 PASS; Morning ExecMainStatus0; Caddy inactive/PID0/exact cgroup leaf absent; Backup inactive; Morning after explicit stop inactive/PID0/leaf absent; original active/begin/run SHA unchanged, current remains pgpt-native-301, release approval absent",
+  "coverage": "Native-only Production MaintenanceUnitStopClient main branch2/4 line30/32 method6/6, nested Attempt branch11/22 line29/41 method5/6; native-only is not formal 100% and prior bounded host+native merge is not formal allscope.",
+  "files": [
+    {
+      "path": "jacoco-native.xml",
+      "sha256": "e4765c029c22b64d230274236eeda11398cd4090dc4f4e115ee1be71ff32dd76"
+    }
+  ],
+  "privateExecHash": "32f6cf78a9843df59bc2b00033fb62811c544320d5219c2260ed0d43393eaa7e",
+  "sourceHashes": {
+    "NativeMaintenanceActiveStopProbe.java": "6be620c2b8e923d32459331d4ca81b38f254ed483ad62fdee09581827a0b3ab1",
+    "NativeMaintenanceActiveStopProbe.class": "ee33b4c59f09429c3f3ac2f27453c167016a9b28a83c4895b18dd351b7d5eb61",
+    "321-active-stop.conf": "ff91aa985e968be792ea45165c0018d7eafe564c27b603f3ded84ebf4577d71b"
+  },
+  "originalSha256": {
+    "active": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "begin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "run": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63"
+  },
+  "relatedSsc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "remaining": "Only Caddy and Backup genuinely loaded/terminal; Web/API/Cleanup/Inspector/Expiry/Artemis six Units not-found in VM, whole-eight terminal/clean journal/full parent/external business and CHR remain unaccepted."
+}
