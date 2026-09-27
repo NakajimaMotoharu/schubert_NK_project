@@ -59,6 +59,7 @@ final class InspectorUnitProbeFixture {
     final Set<String> ioFailures = new HashSet<>();
     BiConsumer<String, Integer> hook = (name, count) -> {};
     boolean completed = true, waitInterrupt, alive = true;
+    long waitSeconds = 5;
     String missing = "";
     int code, destroyed;
     byte[] delivered = new byte[0];
@@ -104,7 +105,7 @@ final class InspectorUnitProbeFixture {
 
     @Override
     public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
-      assertEquals(5, timeout);
+      assertEquals(waitSeconds, timeout);
       assertEquals(TimeUnit.SECONDS, unit);
       event("wait");
       if (waitInterrupt) throw new InterruptedException("PUBLIC_DIAGNOSTIC_CANARY");

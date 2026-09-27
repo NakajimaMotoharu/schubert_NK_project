@@ -1,0 +1,57 @@
+{
+  "id": "PT-OPS-NATIVE-031 / PT-OPS-MCLIENT008",
+  "formal": false,
+  "dateTime": "2026-09-28 08:04-08:09 JST",
+  "environment": "isolated Ubuntu 26.04 QEMU pgpt-r2-20260927-01, genuine root Morning and continuous M/A, JDK25.0.4/Maven3.9.12/JaCoCo0.8.15",
+  "branch": "dev-foundation",
+  "sourceCommit": "93d769f61 plus dirty SSC-102/PG319 same-byte Production jar",
+  "commands": [
+    "mvn -pl src/schubert-nk-batch -am -DskipTests package (artifact only; PT is separately GREEN-3)",
+    "javac actual Batch/Bootstrap/Storage with annotations for NativeMaintenanceUnitStopClientProbe",
+    "guest root: new PG319 cohort, new 320-stopclient.conf, daemon-reload/verify, systemctl start/read fixed PASS/stop Morning",
+    "mvn -pl src/schubert-nk-batch -DskipTests -Djacoco.dataFile=Git-outside/native.exec jacoco:report; same-byte host+native merge and report"
+  ],
+  "exitCodes": {
+    "package": 0,
+    "probeCompilation": 0,
+    "guestInstallAndVerify": 0,
+    "morningStartAndExec": 0,
+    "morningStopAndLeafCheck": 0,
+    "bothCoverageReports": 0
+  },
+  "input": "cold loaded Backup Unit, policy KillMode=control-group/SendSIGKILL=no; Caddy active PID1090; fixed Production batch.jar SHA256=478858b97bafc15082a7bd92893dde7d00acb90dc4dd3fd08fcf5b0ddbc8dd6b",
+  "expected": "with real root Morning/M+A issue exactly fixed stop of cold Backup; distinguish client exit0 from fresh Backup Unit terminal; Caddy not stopped and eight-Unit claim remains false",
+  "actual": "PT-OPS-NATIVE-031 PASS; client exit0 and fresh Backup terminal separately; Caddy active PID1090 unchanged; Morning post-stop inactive/PID0/leaf absent; old current pgpt-native-301, no release approval; original active/begin/run SHA unchanged",
+  "coverage": "Native-only main MaintenanceUnitStopClient branch2/4 line30/32 method6/6; nested Attempt branch11/22 line29/41 method5/6. Same-byte bounded host+native main branch4/4 line32/32 method6/6; nested Attempt branch22/22 line41/41 method6/6; all nested classes line/method/class missed0. Clean-less cumulative merge is provisional, not formal allscope coverage.",
+  "files": [
+    {
+      "path": "jacoco-native.xml",
+      "sha256": "74ed64dbdbe8f4376b2835f73680d86c3a3ada8f67987a6055e4d18d1a235fc8"
+    },
+    {
+      "path": "jacoco-host-native.xml",
+      "sha256": "9756194e11764ab4b77fd23232b029e37af3bb6eb53992bb7632beabb9512589"
+    }
+  ],
+  "privateExecHashes": {
+    "native": "db1c317261f8b1b4601579bad732e756ca5afeb18132726b8d935c6a61723315",
+    "sameByteHostNative": "323d864a43e6d2a9d85ecece61e89769d7393148e1375d673a414e436b3ed494"
+  },
+  "sourceHashes": {
+    "MaintenanceUnitStopClient.java": "c3ec07db009ff5990b182a01bf297b30992e8cc598f188b909cfabc9b327cec6",
+    "NativeMaintenanceUnitStopClientProbe.java": "64ffeed8b74f6ba13b1b7cc7a1e7a983173230e490b18531f6ad36058cb9de35",
+    "NativeMaintenanceUnitStopClientProbe.class": "687652187aee9ef649753a229ce56d54ffacf20ea96c68ff712f05323d9663f6",
+    "320-stopclient.conf": "3433f6f9fcc2cabaee7f9184c8e9b49770f0a7fff481bd0ed5bab23b217b52b7"
+  },
+  "originalSha256": {
+    "active": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "begin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1",
+    "run": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63"
+  },
+  "relatedSsc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "remaining": "Only cold Backup client and terminal observed. Active Caddy stop and other six real fixed Units, whole-eight terminal, Artemis clean journal, full parent and external business/CHR not accepted."
+}
