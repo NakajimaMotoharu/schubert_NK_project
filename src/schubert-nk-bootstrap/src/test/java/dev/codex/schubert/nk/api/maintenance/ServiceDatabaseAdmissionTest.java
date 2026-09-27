@@ -70,6 +70,104 @@ final class ServiceDatabaseAdmissionTest {
   @Test
   void opsDbadmit003RowsNullMismatchDuplicateAndSqlFaultsFailClosed() throws Exception {
     var admission = new ServiceDatabaseAdmission(ServiceConfigFiles.Service.API, url);
+    // BUG283/YKT216: known body + unknown statement-close must not become fixed success/failure.
+    for (Throwable closeFailure :
+        List.of(new IllegalStateException("PRIVATE"), new SQLException("PRIVATE"))) {
+      int[] statementCloses = {0};
+      var closeProbe =
+          (java.sql.Connection)
+              java.lang.reflect.Proxy.newProxyInstance(
+                  getClass().getClassLoader(),
+                  new Class<?>[] {java.sql.Connection.class},
+                  (p, m, a) ->
+                      switch (m.getName()) {
+                        case "getAutoCommit" -> true;
+                        case "isReadOnly" -> false;
+                        case "prepareStatement" ->
+                            java.lang.reflect.Proxy.newProxyInstance(
+                                getClass().getClassLoader(),
+                                new Class<?>[] {java.sql.PreparedStatement.class},
+                                (sp, sm, sa) -> {
+                                  if (sm.getName().equals("executeQuery"))
+                                    throw new SQLException("PRIVATE");
+                                  if (sm.getName().equals("close")) {
+                                    statementCloses[0]++;
+                                    throw closeFailure;
+                                  }
+                                  throw new AssertionError(sm.getName());
+                                });
+                        default -> throw new AssertionError(m.getName());
+                      });
+      if (closeFailure instanceof SQLException) failure(() -> admission.verify(closeProbe));
+      else
+        org.junit.jupiter.api.Assertions.assertSame(
+            closeFailure,
+            assertThrows(IllegalStateException.class, () -> admission.verify(closeProbe)));
+      assertEquals(1, statementCloses[0]);
+    }
+    org.junit.jupiter.api.Assertions.assertAll(
+        List.of("statement", "rows", "sameThrowable").stream()
+            .map(
+                kind ->
+                    (org.junit.jupiter.api.function.Executable)
+                        () -> {
+                          int[] closed = new int[3];
+                          var primary = new IllegalStateException("PRIVATE");
+                          java.sql.ResultSet rows =
+                              (java.sql.ResultSet)
+                                  java.lang.reflect.Proxy.newProxyInstance(
+                                      getClass().getClassLoader(),
+                                      new Class<?>[] {java.sql.ResultSet.class},
+                                      (p, m, a) -> {
+                                        if (m.getName().equals("close")) {
+                                          closed[0]++;
+                                          throw primary;
+                                        }
+                                        if (m.getName().equals("next")) throw primary;
+                                        throw new AssertionError(m.getName());
+                                      });
+                          var statement =
+                              (java.sql.PreparedStatement)
+                                  java.lang.reflect.Proxy.newProxyInstance(
+                                      getClass().getClassLoader(),
+                                      new Class<?>[] {java.sql.PreparedStatement.class},
+                                      (p, m, a) ->
+                                          switch (m.getName()) {
+                                            case "executeQuery" ->
+                                                kind.equals("rows") ? null : rows;
+                                            case "close" -> {
+                                              closed[1]++;
+                                              yield null;
+                                            }
+                                            default -> throw new AssertionError(m.getName());
+                                          });
+                          var connection =
+                              (java.sql.Connection)
+                                  java.lang.reflect.Proxy.newProxyInstance(
+                                      getClass().getClassLoader(),
+                                      new Class<?>[] {java.sql.Connection.class},
+                                      (p, m, a) ->
+                                          switch (m.getName()) {
+                                            case "getAutoCommit" -> true;
+                                            case "isReadOnly" -> false;
+                                            case "prepareStatement" ->
+                                                kind.equals("statement") ? null : statement;
+                                            case "close" -> {
+                                              closed[2]++;
+                                              yield null;
+                                            }
+                                            default -> throw new AssertionError(m.getName());
+                                          });
+                          if (kind.equals("sameThrowable"))
+                            org.junit.jupiter.api.Assertions.assertSame(
+                                primary,
+                                assertThrows(
+                                    RuntimeException.class, () -> admission.verify(connection)));
+                          else failure(() -> admission.verify(connection));
+                          assertEquals(kind.equals("sameThrowable") ? 1 : 0, closed[0]);
+                          assertEquals(kind.equals("statement") ? 0 : 1, closed[1]);
+                          assertEquals(0, closed[2]);
+                        }));
     for (String column : List.of("effective_role", "login_role", "database_name", "recovery")) {
       for (Object wrong : Arrays.asList(null, column.equals("recovery") ? Boolean.TRUE : "wrong")) {
         var probe = new MaintenanceJdbcProbe();

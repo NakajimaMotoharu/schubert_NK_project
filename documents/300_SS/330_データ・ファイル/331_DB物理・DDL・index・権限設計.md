@@ -52,10 +52,10 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 |---|---:|---|---|
 | `nk_owner` | no | Schema/object owner。Migrationから`SET ROLE` | Service login |
 | `schubert_migration` | yes | `nk_owner`への限定`SET ROLE`、migration時のみcredential配布 | 常時service利用 |
-| `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE | Web schema、DDL、role変更 |
-| `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionのEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
+| `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE、非業務metadataの固定startup投影EXECUTE | Web schema、DDL、role変更、schema history直接SELECT |
+| `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionと非業務metadata固定startup投影のEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
 | `schubert_backup` | yes | Dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
-| `schubert_web_session` | yes | 同名schemaの3 tableだけDML | `schubert`のUSAGE/SELECTを含む全権限 |
+| `schubert_web_session` | yes | 同名schemaの3 tableだけDML、非業務metadata固定startup投影EXECUTE | `schubert`のUSAGE/SELECTを含む全権限、schema history直接SELECT |
 | `schubert_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
 
 - Default privilegeもownerで明示grantし、`PUBLIC`へのtable/sequence/function権限を与えない。
@@ -66,6 +66,8 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
   対話利用をDB権限だけで禁止できるとは記述せず、専用OS user、credential mode、固定unit、監査で補強する。
 
 ### 3.3 Batch maintenance function
+
+SSC095/PG312: 起動schema照合は引数なし `schubert_meta.startup_schema_history()` の六列installed_rank/version/type/script/checksum/successだけとする。SQL STABLE SECURITY DEFINER、owner nk_owner、search_path pg_catalog,pg_temp、history完全修飾、PUBLIC全revoke→app/web/batchへmetaUSAGE＋完全signature EXECUTEのみを同一migration transactionで配備する。失敗行/NULL versionをfilterしない。履歴tableのSELECT/任意metadata function/CREATE/owner追加はしない。V005は変更せずV023 append-only、DB fixtureで許可/禁止権限と全行を独立照合する。
 
 `schubert_batch`の削除権限は、次の定型functionのEXECUTEだけに限定する。
 

@@ -289,16 +289,16 @@ final class InspectionParentBoundaryTest {
 
   @Test
   void appendOnlyMigration() throws Exception {
-    // SSC-078 appends V022; historical V001..018 hashes below remain immutable.
+    // SSC095 appends V023; historical V001..018 hashes below remain immutable.
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022"),
+            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023"),
         MigrationInventory.VERSIONS);
     assertEquals(
-        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022",
+        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023",
         MigrationInventory.CSV);
-    assertEquals("22", MigrationInventory.COUNT_TEXT);
+    assertEquals("23", MigrationInventory.COUNT_TEXT);
     assertNotEquals(MigrationInventory.VERSIONS.subList(0, 18), MigrationInventory.VERSIONS);
     assertThrows(UnsupportedOperationException.class, () -> MigrationInventory.VERSIONS.add("022"));
     Path migrations =

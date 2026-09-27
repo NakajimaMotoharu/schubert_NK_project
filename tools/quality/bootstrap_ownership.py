@@ -10,7 +10,7 @@ BOOTSTRAP_MAIN = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "file.InspectorCredentialException", "file.InspectorCredentialLoader",
     "file.ServiceCredentialException", "file.ServiceCredentialReader",
     "file.ServiceCredentialSet", "bootstrap.ServiceDatabaseAdmission",
-    "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources")) | frozenset((
+    "bootstrap.ServiceDatabaseSource", "bootstrap.SchemaHistoryAdmission", "bootstrap.JdbcAdmissionFailures", "file.ServiceProcessResources")) | frozenset((
     "dev.codex.schubert.nk.bootstrap.StartupProofFrame",
     "dev.codex.schubert.nk.bootstrap.FixedServiceIdentity",
     "dev.codex.schubert.nk.bootstrap.ChildStartupContext",
@@ -21,7 +21,7 @@ BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "maintenance.InspectorCredentialAccessTest", "file.InspectorCredentialLoaderTest",
     "file.InspectorDatabaseCredentialLoaderTest", "file.BackupCredentialLoaderTest", "file.BackupRequestCredentialLoaderTest",
     "file.ServiceCredentialReaderTest", "file.ServiceCredentialSetTest",
-    "maintenance.ServiceDatabaseAdmissionTest", "bootstrap.ServiceDatabaseSourceTest",
+    "maintenance.ServiceDatabaseAdmissionTest", "maintenance.SchemaHistoryAdmissionTest", "bootstrap.ServiceDatabaseSourceTest",
     "file.ServiceProcessResourcesTest", "logging.ApiLogDatabaseFixture", "maintenance.MaintenanceJdbcProbe")) | frozenset((
     "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest",
     "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",

@@ -2347,6 +2347,7 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest", 1, ("literalRecords", "syntaxFailures", "identityAndHashFailures", "stateTransitions", "issuedBinding", "cutoffContract", "nullAndOwnership", "concurrentSnapshots")))
         groups.append(("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")))
         groups.append(("dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest", 1, ("startadmit001MandatoryOrderBeforeBusinessAndReady", "startadmit002MissingInvalidAndUntrustedDescriptorsHaveFactoryZero", "startadmit003MalformedRootProofIsRedactedAndNeverObservesBusiness", "startadmit004IndependentBindingsAndChangedKernelRefuseFactory", "startadmit005EveryObservationFailureAndUnknownIdentity", "startadmit006BusinessFailureCleansBeforeFinalAAndCloseNotSuccess", "startadmit007NullConstructorHashAndDescriptorNames", "startadmit008ConcurrentScopesAndNativeFailureNoBusiness")))
+        groups.append(("dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest", 1, ("opsSchema001ExactFixedQueryAndBorrowedOwner", "opsSchema002EveryColumnMissingExtraAndFailedRow", "opsSchema003ExpectedRowInvariantBoundaries", "opsSchema004ExpectedProfileOrderingAndDefensiveCopy", "opsSchema005NullProviderSqlExceptionsAndAllOwnership", "opsSchema006KnownUnknownCloseMatrixAndSameThrowable", "opsSchema007InterruptBeforeAndAfterNeverAccepts", "opsSchema008IndependentConcurrentOwners")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2426,6 +2427,7 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
                        "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
                        "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
+                       "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest": "PT-OPS-SCHEMA",
                        "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                        "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                        "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",
@@ -2783,7 +2785,7 @@ class EvidenceSetTest(unittest.TestCase):
             "file.InspectorCredentialLoader", "file.ServiceCredentialReader", "file.ServiceCredentialSet",
             "file.ServiceCredentialException", "file.InspectorCredentialException", "file.AesCredentialFile",
             "maintenance.InspectorAesCredential", "maintenance.InspectorDbCredential",
-            "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources"}
+            "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "bootstrap.SchemaHistoryAdmission", "bootstrap.JdbcAdmissionFailures", "file.ServiceProcessResources"}
         self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main}
                          | {"dev.codex.schubert.nk.bootstrap." + s for s in
                             ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext", "StartupReleaseManifest", "ServiceStartupAdmission")},

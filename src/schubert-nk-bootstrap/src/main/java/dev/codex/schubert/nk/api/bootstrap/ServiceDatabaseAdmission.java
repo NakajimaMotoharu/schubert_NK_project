@@ -7,6 +7,7 @@ import java.sql.SQLNonTransientConnectionException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Web/API startup DB identity check. It borrows an already connected JDBC handle and never stores
@@ -42,14 +43,42 @@ public final class ServiceDatabaseAdmission {
     Objects.requireNonNull(connection, "database connection");
     try {
       if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
-      try (var statement = connection.prepareStatement(SQL);
-          var rows = statement.executeQuery()) {
-        if (!rows.next()
-            || !role.equals(required(rows.getString("effective_role")))
-            || !role.equals(required(rows.getString("login_role")))
-            || !database.equals(required(rows.getString("database_name")))
-            || required(rows.getObject("recovery", Boolean.class))
-            || rows.next()) throw unavailable();
+      var statement = connection.prepareStatement(SQL);
+      @Nullable Throwable primary = null;
+      try {
+        var rows = required(statement).executeQuery();
+        @Nullable Throwable rowFailure = null;
+        try {
+          var values = required(rows);
+          if (!values.next()
+              || !role.equals(required(values.getString("effective_role")))
+              || !role.equals(required(values.getString("login_role")))
+              || !database.equals(required(values.getString("database_name")))
+              || required(values.getObject("recovery", Boolean.class))
+              || values.next()) throw unavailable();
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          if (rows != null) {
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcAdmissionFailures.replace(rowFailure, secondary)) throw secondary;
+            }
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        primary = failure;
+        throw failure;
+      } finally {
+        if (statement != null) {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
+          }
+        }
       }
     } catch (SQLException failure) {
       throw unavailable();

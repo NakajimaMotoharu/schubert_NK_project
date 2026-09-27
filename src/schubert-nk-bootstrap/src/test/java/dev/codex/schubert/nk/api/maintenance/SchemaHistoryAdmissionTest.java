@@ -1,0 +1,394 @@
+package dev.codex.schubert.nk.api.maintenance;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
+import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission.Row;
+import java.lang.reflect.Proxy;
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.Executors;
+import org.junit.jupiter.api.Test;
+
+/** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
+final class SchemaHistoryAdmissionTest {
+  private static final Row SCHEMA = new Row(0, null, "SCHEMA", "\"schubert_meta\"", null, true);
+  private static final Row FIRST = new Row(1, "001", "SQL", "V001__first.sql", -170000001, true);
+  private static final List<Row> RELEASE = List.of(SCHEMA, FIRST);
+
+  @Test
+  void opsSchema001ExactFixedQueryAndBorrowedOwner() throws Exception {
+    var probe = new Probe();
+    new SchemaHistoryAdmission(RELEASE).verify(probe.connection());
+    assertEquals(
+        "select installed_rank,version,type,script,checksum,success from schubert_meta.startup_schema_history() order by installed_rank",
+        probe.sql);
+    assertEquals(5, probe.timeout);
+    assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+    new SchemaHistoryAdmission(List.of(SCHEMA)).verify(new Probe(List.of(schema())).connection());
+  }
+
+  @Test
+  void opsSchema002EveryColumnMissingExtraAndFailedRow() {
+    for (String column :
+        List.of("installed_rank", "version", "type", "script", "checksum", "success")) {
+      for (Object wrong :
+          Arrays.asList(
+              null,
+              switch (column) {
+                case "installed_rank" -> 2;
+                case "checksum" -> 42;
+                case "success" -> false;
+                default -> "UNKNOWN";
+              })) {
+        var probe = new Probe();
+        probe.rows.get(1).put(column, wrong);
+        failed(() -> new SchemaHistoryAdmission(RELEASE).verify(probe.connection()));
+        assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+      }
+    }
+    for (String column : List.of("version", "checksum")) {
+      var probe = new Probe();
+      probe.rows.getFirst().put(column, column.equals("version") ? "001" : 42);
+      failed(() -> new SchemaHistoryAdmission(RELEASE).verify(probe.connection()));
+    }
+    for (List<Map<String, Object>> rows :
+        List.of(
+            List.<Map<String, Object>>of(),
+            List.of(schema()),
+            List.of(first(), schema()),
+            List.of(schema(), first(), first()))) {
+      var probe = new Probe(rows);
+      failed(() -> new SchemaHistoryAdmission(RELEASE).verify(probe.connection()));
+    }
+  }
+
+  @Test
+  void opsSchema003ExpectedRowInvariantBoundaries() {
+    assertThrows(NullPointerException.class, () -> new Row(0, null, null, "x", null, true));
+    assertThrows(NullPointerException.class, () -> new Row(0, null, "SCHEMA", null, null, true));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new Row(0, null, "SCHEMA", "\"schubert_meta\"", null, false));
+    assertThrows(
+        IllegalArgumentException.class, () -> new Row(0, null, "UNKNOWN", "x", null, true));
+    for (RowInput input :
+        List.of(
+            new RowInput(1, null, null, "\"schubert_meta\""),
+            new RowInput(0, "001", null, "\"schubert_meta\""),
+            new RowInput(0, null, 1, "\"schubert_meta\""),
+            new RowInput(0, null, null, "schubert_meta")))
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new Row(input.rank, input.version, "SCHEMA", input.script, input.checksum, true));
+    for (RowInput input :
+        List.of(
+            new RowInput(0, "001", 1, "V001__a.sql"),
+            new RowInput(1000, "001", 1, "V001__a.sql"),
+            new RowInput(1, null, 1, "V001__a.sql"),
+            new RowInput(1, "000", 1, "V000__a.sql"),
+            new RowInput(1, "1", 1, "V1__a.sql"),
+            new RowInput(1, "001", null, "V001__a.sql"),
+            new RowInput(1, "001", 1, "V002__a.sql"),
+            new RowInput(1, "001", 1, "V001__A.sql")))
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new Row(input.rank, input.version, "SQL", input.script, input.checksum, true));
+    assertEquals(
+        999,
+        new Row(999, "999", "SQL", "V999__" + "a".repeat(200) + ".sql", Integer.MIN_VALUE, true)
+            .installedRank());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new Row(1, "001", "SQL", "V001__" + "a".repeat(201) + ".sql", 1, true));
+  }
+
+  @Test
+  void opsSchema004ExpectedProfileOrderingAndDefensiveCopy() throws Exception {
+    assertThrows(NullPointerException.class, () -> new SchemaHistoryAdmission(null));
+    assertThrows(
+        NullPointerException.class, () -> new SchemaHistoryAdmission(Arrays.asList(SCHEMA, null)));
+    for (List<Row> invalid :
+        List.of(
+            List.<Row>of(),
+            Collections.nCopies(1001, SCHEMA),
+            List.of(FIRST),
+            List.of(SCHEMA, SCHEMA),
+            List.of(SCHEMA, FIRST, new Row(2, "001", "SQL", "V001__first.sql", 1, true))))
+      assertThrows(IllegalArgumentException.class, () -> new SchemaHistoryAdmission(invalid));
+    var mutable = new ArrayList<>(RELEASE);
+    var admission = new SchemaHistoryAdmission(mutable);
+    mutable.clear();
+    admission.verify(new Probe().connection());
+    var maximal = new ArrayList<Row>();
+    maximal.add(SCHEMA);
+    for (int i = 1; i <= 999; i++) {
+      String version = String.format(Locale.ROOT, "%03d", i);
+      maximal.add(new Row(i, version, "SQL", "V" + version + "__a.sql", 1, true));
+    }
+    new SchemaHistoryAdmission(maximal);
+    assertThrows(NullPointerException.class, () -> admission.verify(null));
+  }
+
+  @Test
+  void opsSchema005NullProviderSqlExceptionsAndAllOwnership() {
+    for (String kind :
+        List.of(
+            "nullStatement",
+            "nullRows",
+            "prepareStatement",
+            "setQueryTimeout",
+            "executeQuery",
+            "next",
+            "getObject",
+            "getString",
+            "rowClose",
+            "statementClose")) {
+      var probe = new Probe();
+      probe.nullStatement = kind.equals("nullStatement");
+      probe.nullRows = kind.equals("nullRows");
+      if (!kind.startsWith("null")) probe.faults.put(kind, new SQLException("PRIVATE", "P0001"));
+      failed(() -> new SchemaHistoryAdmission(RELEASE).verify(probe.connection()));
+      assertEquals(0, probe.closed[2]);
+      assertEquals(
+          kind.equals("nullStatement") || kind.equals("prepareStatement") ? 0 : 1, probe.closed[1]);
+      assertEquals(
+          List.of(
+                      "nullStatement",
+                      "nullRows",
+                      "prepareStatement",
+                      "setQueryTimeout",
+                      "executeQuery")
+                  .contains(kind)
+              ? 0
+              : 1,
+          probe.closed[0]);
+    }
+  }
+
+  @Test
+  void opsSchema006KnownUnknownCloseMatrixAndSameThrowable() {
+    for (int body = 0; body < 4; body++)
+      for (int row = 0; row < 4; row++)
+        for (int statement = 0; statement < 4; statement++) {
+          var probe = new Probe();
+          Throwable primary = fault(body), rowFault = fault(row), statementFault = fault(statement);
+          if (primary != null) probe.faults.put("next", primary);
+          if (rowFault != null) probe.faults.put("rowClose", rowFault);
+          if (statementFault != null) probe.faults.put("statementClose", statementFault);
+          Throwable expected =
+              independentWinner(independentWinner(primary, rowFault), statementFault);
+          var admission = new SchemaHistoryAdmission(RELEASE);
+          if (expected == null) assertDoesNotThrow(() -> admission.verify(probe.connection()));
+          else if (expected instanceof SQLException)
+            failed(() -> admission.verify(probe.connection()));
+          else {
+            Throwable actual =
+                assertThrows(expected.getClass(), () -> admission.verify(probe.connection()));
+            assertSame(expected, actual);
+            for (Throwable suppressed : actual.getSuppressed()) {
+              assertEquals("database admission resource failure", suppressed.getMessage());
+              assertNull(suppressed.getCause());
+            }
+          }
+          assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+        }
+    var probe = new Probe();
+    var same = new IllegalStateException("PRIVATE");
+    probe.faults.put("next", same);
+    probe.faults.put("rowClose", same);
+    probe.faults.put("statementClose", same);
+    assertSame(
+        same,
+        assertThrows(
+            IllegalStateException.class,
+            () -> new SchemaHistoryAdmission(RELEASE).verify(probe.connection())));
+    assertEquals(2, same.getSuppressed().length);
+    assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+  }
+
+  @Test
+  void opsSchema007InterruptBeforeAndAfterNeverAccepts() {
+    var early = new Probe();
+    Thread.currentThread().interrupt();
+    try {
+      failed(() -> new SchemaHistoryAdmission(RELEASE).verify(early.connection()));
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertArrayEquals(new int[3], early.closed);
+    } finally {
+      Thread.interrupted();
+    }
+    var late = new Probe();
+    late.interruptAtEnd = true;
+    try {
+      failed(() -> new SchemaHistoryAdmission(RELEASE).verify(late.connection()));
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertArrayEquals(new int[] {1, 1, 0}, late.closed);
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
+  @Test
+  void opsSchema008IndependentConcurrentOwners() throws Exception {
+    var admission = new SchemaHistoryAdmission(RELEASE);
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      var barrier = new java.util.concurrent.CyclicBarrier(8);
+      var tasks = new ArrayList<java.util.concurrent.Future<int[]>>();
+      for (int i = 0; i < 8; i++)
+        tasks.add(
+            executor.submit(
+                () -> {
+                  var probe = new Probe();
+                  barrier.await();
+                  admission.verify(probe.connection());
+                  return probe.closed;
+                }));
+      for (var task : tasks) assertArrayEquals(new int[] {1, 1, 0}, task.get());
+    }
+  }
+
+  private record RowInput(int rank, String version, Integer checksum, String script) {}
+
+  private static Throwable fault(int kind) {
+    return switch (kind) {
+      case 0 -> null;
+      case 1 -> new SQLException("PRIVATE");
+      case 2 -> new IllegalStateException("PRIVATE");
+      case 3 -> new AssertionError("PRIVATE");
+      default -> throw new AssertionError();
+    };
+  }
+
+  // Independent specification matrix, deliberately does not call the production close helper.
+  private static Throwable independentWinner(Throwable body, Throwable close) {
+    if (close == null) return body;
+    if (body == null) return close;
+    if (body instanceof SQLException && !(close instanceof SQLException)) return close;
+    return body;
+  }
+
+  private static void failed(org.junit.jupiter.api.function.Executable action) {
+    SQLException e = assertThrows(SQLException.class, action);
+    assertEquals("08001", e.getSQLState());
+    assertEquals("schema history unavailable", e.getMessage());
+    assertNull(e.getCause());
+    assertEquals(0, e.getSuppressed().length);
+  }
+
+  private static Map<String, Object> schema() {
+    var row = new HashMap<String, Object>();
+    row.put("installed_rank", 0);
+    row.put("version", null);
+    row.put("type", "SCHEMA");
+    row.put("script", "\"schubert_meta\"");
+    row.put("checksum", null);
+    row.put("success", true);
+    return row;
+  }
+
+  private static Map<String, Object> first() {
+    return new HashMap<>(
+        Map.of(
+            "installed_rank",
+            1,
+            "version",
+            "001",
+            "type",
+            "SQL",
+            "script",
+            "V001__first.sql",
+            "checksum",
+            -170000001,
+            "success",
+            true));
+  }
+
+  private static final class Probe {
+    final List<Map<String, Object>> rows;
+    final Map<String, Throwable> faults = new HashMap<>();
+    final int[] closed = new int[3];
+    boolean nullStatement, nullRows, interruptAtEnd;
+    int index = -1, timeout;
+    String sql;
+
+    Probe() {
+      this(List.of(schema(), first()));
+    }
+
+    Probe(List<Map<String, Object>> rows) {
+      this.rows = rows;
+    }
+
+    Connection connection() {
+      ResultSet values =
+          proxy(
+              ResultSet.class,
+              (p, m, args) -> {
+                String name = m.getName();
+                if (name.equals("close")) {
+                  closed[0]++;
+                  throwIf("rowClose");
+                  return null;
+                }
+                throwIf(name);
+                return switch (name) {
+                  case "next" -> {
+                    boolean next = ++index < rows.size();
+                    if (!next && interruptAtEnd) Thread.currentThread().interrupt();
+                    yield next;
+                  }
+                  case "getObject", "getString" -> rows.get(index).get((String) args[0]);
+                  default -> throw new AssertionError(name);
+                };
+              });
+      PreparedStatement statement =
+          proxy(
+              PreparedStatement.class,
+              (p, m, args) -> {
+                String name = m.getName();
+                if (name.equals("close")) {
+                  closed[1]++;
+                  throwIf("statementClose");
+                  return null;
+                }
+                throwIf(name);
+                return switch (name) {
+                  case "setQueryTimeout" -> {
+                    timeout = (Integer) args[0];
+                    yield null;
+                  }
+                  case "executeQuery" -> nullRows ? null : values;
+                  default -> throw new AssertionError(name);
+                };
+              });
+      return proxy(
+          Connection.class,
+          (p, m, args) -> {
+            String name = m.getName();
+            throwIf(name);
+            return switch (name) {
+              case "prepareStatement" -> {
+                sql = (String) args[0];
+                yield nullStatement ? null : statement;
+              }
+              case "close" -> {
+                closed[2]++;
+                yield null;
+              }
+              default -> throw new AssertionError(name);
+            };
+          });
+    }
+
+    private void throwIf(String method) throws Throwable {
+      Throwable fault = faults.get(method);
+      if (fault != null) throw fault;
+    }
+
+    private static <T> T proxy(Class<T> type, java.lang.reflect.InvocationHandler handler) {
+      return type.cast(
+          Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
+    }
+  }
+}

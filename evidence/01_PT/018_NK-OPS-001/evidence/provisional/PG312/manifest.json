@@ -1,0 +1,302 @@
+{
+  "unit": "PG312",
+  "phase": "PG/PT",
+  "branch": "dev-foundation",
+  "baseCommit": "802e9c26a3f13326b71ed495d56cf0efb6bf6a21",
+  "formalAcceptance": false,
+  "R2": false,
+  "R3": false,
+  "related": [
+    "SSC-095",
+    "BUG-283",
+    "BUG-284",
+    "YKT-216",
+    "YKT-217"
+  ],
+  "environment": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jdbc": "42.7.13",
+    "flyway": "13.4.0",
+    "postgresql": "18 isolated fixture",
+    "spotbugs": "4.10.4.0",
+    "jacoco": "0.8.15"
+  },
+  "runs": [
+    {
+      "log": "/tmp/PG312-schema-admission-5.log",
+      "sha256": "789cce35ae8cdce2408199bdb8d1cbf4a331854cca264e1c3ecd37047b6f6ffd",
+      "exitCode": 0,
+      "finishedAt": "2026-09-28T02:38:00+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-projection-2.log",
+      "sha256": "997c4090737544b0c06d135eac0de5a56f853e811551e9dada9c70b4ccc546f3",
+      "exitCode": 0,
+      "finishedAt": "2026-09-28T02:34:22+09:00"
+    },
+    {
+      "log": "/tmp/PG312-canary-1.log",
+      "sha256": "9bb1f2f973f856aaf5c1290cced67988c997396a6fa6ace11bafe30fdc154907",
+      "exitCode": 0,
+      "finishedAt": null
+    },
+    {
+      "log": "/tmp/BUG283-service-admission-RED.log",
+      "sha256": "2de6b1d28fab9c20a90429aba0cd9de8585a5e2811dfaeafaf5a899a1387bb65",
+      "exitCode": 1,
+      "finishedAt": "2026-09-28T02:15:58+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-admission-3.log",
+      "sha256": "5ef97345fe3667edb2073580bd9a1302062f2dede5852d2be1f927470f4b9daa",
+      "exitCode": 1,
+      "finishedAt": "2026-09-28T02:35:17+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-admission-1.log",
+      "sha256": "a5e122d06687db1a577d3db25fca71ed51ba2ffeb5f5521819357e72e141764d",
+      "exitCode": 1,
+      "finishedAt": "2026-09-28T02:31:03+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-admission-2.log",
+      "sha256": "588b2aec73d03cc53ff60a3fc9bfa16d12d519dfeab546c5b1e296d9d0d5075d",
+      "exitCode": 0,
+      "finishedAt": "2026-09-28T02:31:46+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-admission-4.log",
+      "sha256": "173e274b399eef8b733140718b5c5326ced7c03172db91ebf94f5cd3d618cb78",
+      "exitCode": 0,
+      "finishedAt": "2026-09-28T02:36:44+09:00"
+    },
+    {
+      "log": "/tmp/PG312-schema-projection-1.log",
+      "sha256": "7255f23ce72073574cb05c63b115cd9c69e2dca216cb790d8007f51e0c09c22a",
+      "exitCode": 1,
+      "finishedAt": "2026-09-28T02:33:06+09:00"
+    },
+    {
+      "log": "/tmp/BUG283-service-admission-GREEN-1.log",
+      "sha256": "14f0802d878eebdb07c54357fdeada502103f315a2cde917dfa0f4ca0dfd5155",
+      "exitCode": 1,
+      "finishedAt": "2026-09-28T02:28:57+09:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "coverage/bootstrap-limited.xml",
+      "sha256": "d9852f2bb64a98dab694fcc7abc712269ec31e44d0f07c2c740bc599f662a50d",
+      "bytes": 143227
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "0280c1d907530ce58e37ef99c3d1102029693d5479d41f7c0146fc58a75ec728",
+      "bytes": 25341
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "a9e104fabc3f9ab3e3c2f1cc1fd5d6aece347cc1fa9ffe841a8c8dbe237d51d8",
+      "bytes": 11701
+    },
+    {
+      "path": "junit/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "20dff19095e5624e63e30fb4a69bbe48447b014a21d155f52f81075927928341",
+      "bytes": 16497
+    }
+  ],
+  "coverage": [
+    {
+      "class": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "88"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "26"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "15"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "14"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "1"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "22"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "8"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "5"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "5"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "1"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "171"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "32"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "48"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "21"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "5"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "counters": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "240"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "34"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "61"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "22"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "5"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "1"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql",
+      "sha256": "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/StartupSchemaProjectionTest.java",
+      "sha256": "93cad8570de1a44482936cf14c71ed033f9094fc0b6f68880931270b98988611"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "d980acdaf21c672d354f2261b7d178642b13e15f07ccafed352154255090e291"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "sha256": "94b5c525de0cd421f6cb48c5dbeeda1b242616b472f4ac6c481d25d3180d5fd8"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/ServiceDatabaseAdmissionTest.java",
+      "sha256": "40af0f158280a63fcb0371c6d892fb8ab50fbffbe73fabbffe6f4d81a8994ad0"
+    }
+  ],
+  "commands": {
+    "bootstrap": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-bootstrap -am spotless:apply test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check -Dtest=OwnedTransferDirectoryTest,ServiceDatabaseAdmissionTest,SchemaHistoryAdmissionTest",
+    "projection": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-api -am spotless:apply test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check -Dtest=StartupSchemaProjectionTest,SchemaHistoryAdmissionTest,ServiceDatabaseAdmissionTest,OwnedTransferDirectoryTest,FieldCodecTest",
+    "canary": "python3 tools/quality/019_test_evidence_set.py"
+  },
+  "result": {
+    "newSchemaJavaTests": 8,
+    "newProjectionSqlTests": 8,
+    "relatedServiceTests": 4,
+    "canaries": 105,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticFindings": 0,
+    "wholeCoverageGate": false,
+    "fullRegression": "not yet run",
+    "expected": "OPS147/DAT068 literal independent oracle",
+    "actual": "20 admission/projection PT assertions passed in separate limited runs; changed 4 classes all six counters missed zero",
+    "limitations": "No trusted release BOM/schema assembly/root backup or actual business process/CHR acceptance. Projection run preceded final ServiceDatabaseAdmissionTest close-matrix source; it is not a same-source combined formal run."
+  }
+}

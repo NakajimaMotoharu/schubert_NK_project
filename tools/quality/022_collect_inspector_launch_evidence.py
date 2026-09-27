@@ -225,7 +225,14 @@ DEPLOYMENT_GROUPS += (
     ("dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest", 1, ("release001ActualBytesFixedGoldenAndNoExportedOwner", "release002SelectorCanonicalBoundariesAndNonfollowTargets", "release003EveryTypedAttributeOwnerModeLinkAndAclRejection", "release004NamespaceAndMetadataChangesAtEveryRecheck", "release005ReadLengthEofBoundaryAndIoFailures", "release006EveryAcquisitionCloseFailureAndUnknownPriority", "release007NullInvariantUnsignedMetadataAndConcurrency", "release008NativeReaderDoesNotBypassOwnershipGate")),
     ("dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest", 1, ("startadmit001MandatoryOrderBeforeBusinessAndReady", "startadmit002MissingInvalidAndUntrustedDescriptorsHaveFactoryZero", "startadmit003MalformedRootProofIsRedactedAndNeverObservesBusiness", "startadmit004IndependentBindingsAndChangedKernelRefuseFactory", "startadmit005EveryObservationFailureAndUnknownIdentity", "startadmit006BusinessFailureCleansBeforeFinalAAndCloseNotSuccess", "startadmit007NullConstructorHashAndDescriptorNames", "startadmit008ConcurrentScopesAndNativeFailureNoBusiness")),
 )
+DEPLOYMENT_GROUPS += (("dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest", 1,
+    ("opsSchema001ExactFixedQueryAndBorrowedOwner", "opsSchema002EveryColumnMissingExtraAndFailedRow",
+     "opsSchema003ExpectedRowInvariantBoundaries", "opsSchema004ExpectedProfileOrderingAndDefensiveCopy",
+     "opsSchema005NullProviderSqlExceptionsAndAllOwnership", "opsSchema006KnownUnknownCloseMatrixAndSameThrowable",
+     "opsSchema007InterruptBeforeAndAfterNeverAccepts", "opsSchema008IndependentConcurrentOwners")),)
 RUNTIME_SUBJECTS = (
+    ("bootstrap", "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission"),
+    ("bootstrap", "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures"),
     ("batch", "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess"),
     ("batch", "dev/codex/schubert/nk/batch/platform/BackupWorkerRequest"),
     ("batch", "dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles"),
@@ -428,6 +435,7 @@ def validate_reports(suites, deployment=False):
                    "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest": "PT-OPS-WEB-INPUT",
                    "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest": "PT-OPS-CREDREAD",
                    "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest": "PT-OPS-DBADMIT",
+                   "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest": "PT-OPS-SCHEMA",
                    "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest": "PT-OPS-CREDSET",
                    "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest": "PT-OPS-API-MAIN",
                    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest": "PT-OPS-DBSOURCE",

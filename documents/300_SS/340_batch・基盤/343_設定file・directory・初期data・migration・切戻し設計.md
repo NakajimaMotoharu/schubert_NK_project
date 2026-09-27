@@ -82,11 +82,12 @@ Asset/transfer/backup/log/Artemis/stagingを同一または相互配下、また
 
 ```text
 releases/<version>/
-  web/schubert-nk-web.jar
-  api/schubert-nk-api.jar
-  batch/schubert-nk-batch.jar
-  lib/schubert-nk-protocol.jar
-  lib/schubert-nk-storage.jar
+  web/web.jar
+  web/lib/<具体dependency jar名>
+  api/api.jar
+  api/lib/<具体dependency jar名>
+  operations/batch.jar
+  operations/lib/<具体dependency jar名>
   db/migration/V*.sql
   config/templates/*.yml
   config/caddy/Caddyfile.template
@@ -493,6 +494,8 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 ## 9. Flyway migration
 
 ### 9.1 責務分離
+
+SSC095/PG312: 上記release配置は実Unitが参照する固定正本名へ統一、libをmanifestではwildcard扱いせず全具体fileをsize/SHA付きで列挙し未登録jar/symlink/欠落を拒否する。protocol/storage/bootstrapの複数配置は同版・同hash、jar内同梱SQLは外置きSQLと同byteを要求。既存RELEASE-MANIFEST.jsonにはmigration期待六列も含め、固定Flyway13.4/createSchemas=true profileのSCHEMA行(rank0/versionNULL/typeSCHEMA/script`"schubert_meta"`/checksumNULL/successtrue)とversioned SQLの全rank/version/type/script/checksum/successを明示する。期待値はrelease SQLから固定Flyway版で生成し運用DBの実測を採用しない。共用固定query `select installed_rank,version,type,script,checksum,success from schubert_meta.startup_schema_history() order by installed_rank` を借用connectionで実行し全行全列を照合、失敗/NULL/余剰/欠落/不一致はreadiness false。権限は331の限定投影だけ、migration credential/superuser fallback無し。この六列照合は固定versioned-SQL起動profileでありFlyway validate全機能の代用合格とは呼ばない。root承認digest/immutable release→全BOM→期待schema→親DB backupbeginの最終順を要求する。
 
 - Migration実行は`schubert_migration`が`nk_owner`へ限定SET ROLEするoneshot。API/Web起動時にmigrate/repair/cleanしない。
 - History tableは`schubert_meta.flyway_schema_history`、`validateOnMigrate=true`、`outOfOrder=false`、
