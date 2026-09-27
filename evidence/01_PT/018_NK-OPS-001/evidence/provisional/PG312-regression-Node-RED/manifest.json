@@ -1,0 +1,1536 @@
+{
+  "phase": "PG/PT",
+  "unit": "PG312-regression-Node-RED",
+  "branch": "dev-foundation",
+  "sourceCommit": "092ad15d5",
+  "formalAcceptance": false,
+  "trigger": "same-source DDL/security retest; missing Node PATH",
+  "exitCode": 1,
+  "completedAt": "2026-09-28T03:01:54+09:00",
+  "related": [
+    "SSC-095",
+    "BUG-287",
+    "YKT-220"
+  ],
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch -am clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "modules": {
+    "protocol": {
+      "counts": {
+        "tests": 80,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "17403"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "1008"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "3464"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "1272"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "741"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "157"
+        }
+      ],
+      "staticExecuted": true
+    },
+    "storage": {
+      "counts": {
+        "tests": 149,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "0",
+          "covered": "5688"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "485"
+        },
+        {
+          "type": "LINE",
+          "missed": "0",
+          "covered": "1076"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "0",
+          "covered": "480"
+        },
+        {
+          "type": "METHOD",
+          "missed": "0",
+          "covered": "237"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "35"
+        }
+      ],
+      "staticExecuted": true
+    },
+    "bootstrap": {
+      "counts": {
+        "tests": 135,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "28",
+          "covered": "5782"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "0",
+          "covered": "582"
+        },
+        {
+          "type": "LINE",
+          "missed": "7",
+          "covered": "1063"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "3",
+          "covered": "506"
+        },
+        {
+          "type": "METHOD",
+          "missed": "3",
+          "covered": "215"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "36"
+        }
+      ],
+      "staticExecuted": true
+    },
+    "api": {
+      "counts": {
+        "tests": 742,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "coverage": [
+        {
+          "type": "INSTRUCTION",
+          "missed": "60",
+          "covered": "34573"
+        },
+        {
+          "type": "BRANCH",
+          "missed": "1",
+          "covered": "2791"
+        },
+        {
+          "type": "LINE",
+          "missed": "19",
+          "covered": "7538"
+        },
+        {
+          "type": "COMPLEXITY",
+          "missed": "4",
+          "covered": "2560"
+        },
+        {
+          "type": "METHOD",
+          "missed": "3",
+          "covered": "1117"
+        },
+        {
+          "type": "CLASS",
+          "missed": "0",
+          "covered": "244"
+        }
+      ],
+      "staticExecuted": true
+    },
+    "web": {
+      "counts": {
+        "tests": 555,
+        "failures": 0,
+        "errors": 2,
+        "skipped": 0
+      },
+      "coverage": null,
+      "staticExecuted": false
+    }
+  },
+  "files": [
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "ac9226532363160f00bc93334468cace06d726c00c0c0d0b75e70d9665459f9b",
+      "bytes": 7574
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "ddf36cdce3e43bbf33e727394ca7b7c1578c2ba6623d293620935dec57d05c66",
+      "bytes": 7764
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "01759a73389ad6aeefc00da95bf91468eb2b060ff6fcd00a32cad1d12f250100",
+      "bytes": 8130
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "d57585e51a97b5a970efde0b18120d59021765cd8ded6f272ef388132f605cef",
+      "bytes": 8266
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "41ec9c8536e75caee838c811ffd7151e2f307a8b72423ef08aa4bdf3ca0d6d04",
+      "bytes": 7553
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "97144f488b648b0c5d7d36b310d97efaca425701121e9d123401700e11c633d9",
+      "bytes": 7593
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "c37062127a36b32343adbcdc9691eadb904712682e905523273520dd5da07d6a",
+      "bytes": 8180
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "23db75cee1d2221f1cb461f58af15e556312865d0c11e1318ed1f93c3f0e1e92",
+      "bytes": 7986
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "89d866bf2dfbe1ce75dcd93fd5bd04e4a70fdee11a857feac772b8203a753118",
+      "bytes": 7782
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "9583e7217ff0b6f5b841a8cce50d99bb733f81be1f7c153bdd6b24e0879e0fd9",
+      "bytes": 7518
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "f0d77314b0e772ae3cf50ec6bc3a577fbb0405289d536c281e8833edc6e1c204",
+      "bytes": 7660
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "9fb3427aae1fa9a5b95cbadf60e6e95f25d3714f3fb516cf4e55d20bb731f4cf",
+      "bytes": 8194
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "cb4c8c1ca572a28a3f0d82ced950be60323fdf0afb6677d51810317eb533d618",
+      "bytes": 7894
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "3a630a899e81948c28cc094323c32e286e5d297e7470b90cd0054b8339555df8",
+      "bytes": 7710
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "858b4f23ac6de29f1ec971ea158eaf21e360c2cb31a2080d904b8cf6a8e8ce60",
+      "bytes": 7788
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "6def8f9b082f29df4f26f71fca8fdb1706a025e5cfe1c9dc0f3ec55d6e153942",
+      "bytes": 7677
+    },
+    {
+      "path": "junit/protocol/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "0406eeb59c2f21797ee725d4aec420cbb2cfc1c3a3d8c224870dec71547c150e",
+      "bytes": 7375
+    },
+    {
+      "path": "coverage/protocol.xml",
+      "sha256": "2240a9080bbc46c75bdbbb1bb790d163e9fcd45c3f7b747a4ad18fd72afe9836",
+      "bytes": 500917
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "4aecb5995997a36ef2f3c8e44369848dd38a3e3789ad35eaccfc939996f44a24",
+      "bytes": 8073
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "f6563af8495932653ece5083cc5d26afcd6d98f5b1f8654b2f41d197eab8d5e7",
+      "bytes": 7829
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "29bc0e9ae265c7d704be7394b780087a2ff11487fc865c2a98c76768c5ab8e7e",
+      "bytes": 7689
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "33938ab3c6b4d6fa4969db2c230f685b810a677ed6ed436b9434ed863eb98505",
+      "bytes": 8205
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "a25565eba4833af7488eed478d9c4188038965db8d725d7b9a17dde1c507a3a6",
+      "bytes": 7985
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "131f5167f9200869faa997772da83604c10593726702d7b855562997332b54ca",
+      "bytes": 8260
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "8082b9762638a0e6b7b79f3fca23d0d283e13dc04b64003fa670b538e1f6e84f",
+      "bytes": 8048
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "9dadf10454bcc7006cc4499db81cbeaec6b47772393104a994b1b5cdff0c7df1",
+      "bytes": 8167
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "e48d85f7bd70206bc09120b4e428c27578c64a120bce5c64fd248a56b4258f1f",
+      "bytes": 8176
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "711ac9fb43718bd4d0d8b029739a2c65e8106339bde9ba9d0b63fe12b8703683",
+      "bytes": 8342
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "7dced2aa63343a5e39de53902c099b706838d2df27597aa37edc0a3d1a1ed037",
+      "bytes": 8240
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "390caa3f6745a267e3ba852fed0a11acc21089fc0516a78b9e38247aaac4b01b",
+      "bytes": 9692
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "2e28b53979ef4a837c9b15b78705b73596988c21d12ca91b07c5ef4559f4236b",
+      "bytes": 8030
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "018b5551bf041722a69f4f7385beb36ee0defd6720d1d2ff02364b310de2f2c6",
+      "bytes": 8044
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "4aee33ba11218cb243dd649f469a7d609a3080b27c54b4079e4111c4814bf3ae",
+      "bytes": 7954
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "9f622b6616defc5a57a52c487339de56d1d9d8244143e01a267da51d23053755",
+      "bytes": 8055
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "cba5a1e9bbd66de8d0d67c82b0224033c55f0f93552b9bb1cfa3582e9536503e",
+      "bytes": 7601
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "da935ff283575f1ed43308d09caa9a300f95731ffdc6a2a25a161682ea467ed0",
+      "bytes": 7847
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "4ccf714f70e25d40583a4ed2e48b52e673a1c1420040230623b12b3afb359a2e",
+      "bytes": 8205
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "4ccb4853e75f9a15e4248d3ec0eb9800841bf368c2a3d30566b63da719ba0644",
+      "bytes": 7498
+    },
+    {
+      "path": "junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "a2b1548bf8d0099e020b4114a787149f608b57dc28a613e0c65436640985a033",
+      "bytes": 7371
+    },
+    {
+      "path": "coverage/storage.xml",
+      "sha256": "823e19eb7bef0cc1791ba49f0b384ef9cfb17f063d7beba28f0226762cecdee8",
+      "bytes": 152054
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "0ae9baafe22933e089331e3f560d2929b53d873cadd1f574b1f49ebcda3990fa",
+      "bytes": 16991
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+      "sha256": "7a1e0eb3e482863c02c2dc50a23c1c2a48f5ff6f5fa5b0f628fde60f4a454315",
+      "bytes": 11400
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+      "sha256": "f969999bf3c307197b69ff27dbd45544c98c9909e3e77b6a7fa5b3ba2752ff72",
+      "bytes": 11463
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "74a4aab35d6704f68b7dacb3a4d3a81d011542a79834c11e7f876dd538ed94cd",
+      "bytes": 11944
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "022c1007ae3819797ddc1ff0b65966dcbc411c4b83cbf77ef175496bca0c8158",
+      "bytes": 11071
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "76763a023ff2b547069ca1e32d1834ed638698f016f080767e564d0b29080425",
+      "bytes": 12242
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "8f737def357b3b517d62fc079f7525eefdd5760dd26d4919e274e9e108b2c17e",
+      "bytes": 11138
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "264b46c9cee9967f610bbcfcb11fa6bd926217f03dcad08d122ef2766128a4f3",
+      "bytes": 16899
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "833f42f6037b2011cc043dce70c98df44fe5fd5ac6603d2a5138588a6501f5b4",
+      "bytes": 11429
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "08b7d0f94c82d1b4567e9956c946af0a817ea01508121905e0199c49246d353b",
+      "bytes": 11413
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "e14d8de3b8cb4497c4ecee86214f91558581db79af360344c30f08fffed06daa",
+      "bytes": 10839
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "242ce2e8c5a4339196d3d498600699177924ca1cc6800980c6ef4aab312a054b",
+      "bytes": 11581
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "c23b2a497a8aebef77d3d9f63ab1c2c61434aff16692a2d2ed58e6bd6353921c",
+      "bytes": 16379
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "bbbbf490f008a54f11e9af49f74a0faccbdeb48f6a1dcf63e8077f4acd808e81",
+      "bytes": 11612
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "02bdeb63b96fc3ab95bc5130e3b651c1f64daff6166091f8f51f4f722970d4c4",
+      "bytes": 11661
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+      "sha256": "10c1aa422f8634e2b4c8ec0b48f92e2292fafaa51cbfea4b5b6dfac6edbe74b4",
+      "bytes": 11692
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "69b0d9567b6e0395fecb877e5968632395240ad464fe71e2333aa7baae05ad96",
+      "bytes": 11559
+    },
+    {
+      "path": "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+      "sha256": "b8ebb9c2d217c3f8e9bd83ec7d2c2d1a9604dd7779e4483ab98f7194b48ee9a6",
+      "bytes": 11635
+    },
+    {
+      "path": "coverage/bootstrap.xml",
+      "sha256": "fffcc132005fc71174a95e953a85a4731ea4b52cb55b416356b0af649076bf07",
+      "bytes": 142913
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "5ba2b8ae6769c4eab850f993390ebd0bb73b24bcdad3c7b73134a34bd9954eb1",
+      "bytes": 25312
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "f157089c47b0432ed7b937b57fe246ee7f71829b3f9ef055b9c1aad39d5c93a0",
+      "bytes": 24922
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "a70485f94016628899c49a400ea0760f65b49cc0a86652cf155fea1f70577b6e",
+      "bytes": 24545
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "b16ba41db2485933a1228301848dade3d38bf61c774d30f10c04d62c1c51939a",
+      "bytes": 24331
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "82244a6b08d49c3db70beda45c03f15f774bcd6fca7e5877c3b63fd0b4e379d9",
+      "bytes": 24869
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "d58ff0e3be77ba573ee187f6972847a241caa08f0c0380f4e2313abf9326cd9d",
+      "bytes": 24318
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "a61046f685231264a9cc74b4ff2272a2ab457b3ee7683b51efccee33ed5aac24",
+      "bytes": 24288
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "a38ec60f296c19ae5e7c5a0fe68b53825696aacdb63201ca11b4b6e1cd723853",
+      "bytes": 25188
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "1c78dd9e9cb905f47e01de041de9c0a71229915fcb9b782a528107f19f8e1020",
+      "bytes": 24120
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "5a748f5988d11c27fb3dae62338c9f8e79176dbc47a2029e792f90acc55780ab",
+      "bytes": 24099
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "3d5a64bcaeaceda2bad5a1b2cdab1e933c44d480f4c290b8fac2bb2490d78a16",
+      "bytes": 24863
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "aa892313996c5f5460d436bfd5d9525dc28aea7c31fc64181e57cbd791250d34",
+      "bytes": 24486
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "6e5c914eb472a199059d2a0e32b42616b5dac2dc5c19164a8ba216a8b9096001",
+      "bytes": 24119
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "19e0148cf7aea92e93f38666ee58d3f3ba583894e16b5449dd35c1f0b7e87abc",
+      "bytes": 24710
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "1ecbfe717f71a5e73cebc8546c8259c40b1c186379d608b2728bbbcbbe0ff356",
+      "bytes": 24756
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "70338b5df45e1ce9580802091cde355d320c80aa1118192ae7ee08abd5e0148b",
+      "bytes": 24326
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "5c045c7e81c99dbee268f842c283d7e570631425de2e8140ed8a45f6f8e02551",
+      "bytes": 25147
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "c332040b48d2d6cc90b2981932c4a069829bc72d965175f9d14004371b0c7e36",
+      "bytes": 24188
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "84091d1a69cbb1e918e98f488f2941748625329a08356eb91b1209d84dc0730b",
+      "bytes": 24162
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "36fa7e39f2a5f2bf389d603dc718ea09b1357aaba8ebfcf9f2f94f51cc8d233c",
+      "bytes": 24166
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "5036e9a0522877a1a953aaca27f577890989f8b6b3e1be689fcbb680efc83ede",
+      "bytes": 24701
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "2ed9f8500f19e8ab877ea69e468824a94e807a9be597fab46895765832dae5ca",
+      "bytes": 24143
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "326a2c385f065809e17d52b51920790b67dd45ebe230314f8a9b74aad43f4588",
+      "bytes": 24400
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "704810b6c02c01cc6898a0de068cae453c201c3894e983dbc5fca3aa0435525e",
+      "bytes": 24053
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "743558aa8ef2ba1feb8aa772acee3e03e59c3acc211ebf434b507ec83d7f7fc7",
+      "bytes": 24569
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "39ae230d2716edf5db14caffb7a65e02360e9b6eb28eaac203489c2137cc1adf",
+      "bytes": 24238
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "a912a759dd15dd798054a1cfaffc940594a048ec61fff3c654499409ca0309d9",
+      "bytes": 24233
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "9fd88d70757f04b2196fd439d28a15a10878549516a502d140daa9a44274596d",
+      "bytes": 26380
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "f48d4d1028e80e95825e5b1c48b7f775ae45c6cca61c228881a6daafd3c06ff0",
+      "bytes": 24594
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "e9e3e0b87c1ceaeb26d280a96402ec8c02f2e180dacad17335f756c5007f1351",
+      "bytes": 23784
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "3e64319261a927ad88397a89ffc02d7d649b5c767fa683b49b035fbdcb6c2de4",
+      "bytes": 24937
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "5eb57e442aaa6842e02430843377da4bb62f87efed3127f4be28285a8543cee0",
+      "bytes": 25444
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "b155713feebcc79e7cd43361c30c7347e36e50f282d761e6974653ab963ea166",
+      "bytes": 24130
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "0851a5e976dcf33badf5feb9e7763d7bf02ee929c7af6017b524cfebc68417a7",
+      "bytes": 24456
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "ce538a2f26b4d19d1ff423613eaef1e78cd4297062779428318fed32f2a577c7",
+      "bytes": 24260
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "d74923ddc321be4e2109c73c3d591f127b77121ffa9d0de4522743d8a38fb29b",
+      "bytes": 23935
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "6058b0cae171103b8f3ce1491c69b85675c4af11308223bf8dadd06929d7af8a",
+      "bytes": 24108
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "db0660e534295184315bdd57ec7690c56d1534bafb68ec51059ed1a5807daeaf",
+      "bytes": 24703
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "d940d54d29429a55252e3179927c9ab0e6f25474b20f664ec33fc8bb273bbfe6",
+      "bytes": 24301
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "3df967db75ef04739dc5dc7dc7984e62d063607d6d443a8e9f54914a8c098043",
+      "bytes": 24112
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "ddec005777f141904a7548a0bac2c80a70fdb3f5ed1118a490b0ca8c076d6f26",
+      "bytes": 24376
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "c9cd6a7e722a2c58001cf616061ee315ff9ea8eafc17b52b86b76a78e3d3990f",
+      "bytes": 25512
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "6a7b665f62c80d64091a37c100c38f5e82880a9c008ae76e4dcfa74139da2470",
+      "bytes": 24196
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "96a592c28e50a8b2d4a2a34f59cac6a45bb54bd86412a99df2b47423703ed730",
+      "bytes": 24419
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "cc82748ad24eacd2449fdfde4397b40a682ca4e396ab2a086677ab1922a0e46b",
+      "bytes": 24673
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "4d8491ceae766638be1627c733be5c20e09c346f6bdbc214cc840c6298e32594",
+      "bytes": 24116
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "2e4ded6d98e44b98d84288df2bb31d4fbe34334ab4490cd6d89ad50c84660802",
+      "bytes": 24212
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "dcd4eb64b97bda3a8a2f2a0d7e22bebcce6ae5e98e2b0ddae0d1e5f354a7f3ff",
+      "bytes": 23925
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "203309820e52ac7ae09b869880fad979d9bc2fa4191ed21f3d0265132febffad",
+      "bytes": 24411
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "54736669da77f74cab60e96d5d7168a340a3bba19253a8dfc4da409ff426d8d5",
+      "bytes": 24279
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "d8f0c012308857a8cb5b912b147211faf37ad29731756f7284f622dcae467dd0",
+      "bytes": 24821
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "4c155c3956b42bdb8c2a56e72466be1e5de74bf916b59e807d89606d3717a8dd",
+      "bytes": 24842
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "2aa41792fe1700476b6fee4333512b506cb9b56feae032c00378e518ad63aa85",
+      "bytes": 24728
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "c1b2663c96f6a301d3afcdc08ee6b22aa80d6e1d994a93206e24424972e98213",
+      "bytes": 24737
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "03a6f5d5869bcdf53382e7e9d8a3bc13c47dff2aa3bf6ef9294419e7c0fdba28",
+      "bytes": 24883
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "9e415f7aba8c4b7203a186acc05ea03f0a73f6203d838328c8e9080c18aec6fe",
+      "bytes": 24755
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "221f97a221f5cab1c4bb0346c4969e6d221a254a5346f4d66b03dd1ea69add66",
+      "bytes": 24873
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "b3671639fa5229b9b9213fc6e21e9ec71a3884038168a459b3931c0b6ef86548",
+      "bytes": 24884
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "c3510b58d16f95cc95dfd466b74202863131f2c7235f51e96604c8044033c47d",
+      "bytes": 24803
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "2132abda879c940de05a62f01ee19fc38b7a0432a3ff0801deefec3552eab072",
+      "bytes": 24830
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "38f918d4b58b21c2d7babd2c72f9c78bf2c0d8aa3b05a4e2f55ddda5396b8695",
+      "bytes": 24822
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "30e0d0119acff9bf5e05cb08eac86061169a7db45cef6b84be180f24652589fc",
+      "bytes": 24719
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "ce8a2891a40aa69b16f4aaf8a9e11cc75d5c6045b0a5775449123edee865d099",
+      "bytes": 24756
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "6b66e790d7e14fbfd3fca05872267f5ec38895712b4ee0be7624da72d16d857a",
+      "bytes": 24632
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "74c84769e2a09c9c1a5ed1365c82907567d6272246c415de6fb9997dfc36b7a9",
+      "bytes": 24657
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "c268a7569a5e294ba500a1c92309aeb8dfc8cfa8dac07eaf60cb453a26b77ce0",
+      "bytes": 24207
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "0868841e3fadace23470206801b5ac7cbdc6a934847d327cc61e8b4c2f9be29f",
+      "bytes": 24661
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "6b5f598345396db60859aaa18f5f2269a26cb07e5dae59eeddbba298ceab0633",
+      "bytes": 25263
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "2d79f84e8b58f4f3514cdf178f11dd36384b7d00a6fd176f8b195fecc7666842",
+      "bytes": 24002
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "148a299ee14b93964eb449eff86cc52ff3fa2c17be8ac66c3746cad3bdaa366d",
+      "bytes": 24804
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "be867a08951da8a9c4d294fc42133f16ca2a9f5e12994661f12c0ace196b736d",
+      "bytes": 24873
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "ffe1bdaf211cae60091e12d8245b118b87d211d2e05d5a01bf7c66c1bb6783ae",
+      "bytes": 24779
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "db92219d84d583adcc81a6de85958a8723163cdeea6597fdef32b892c0c7fe9e",
+      "bytes": 25939
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "9934063e7bd539ffe379c7a8c9591aa5f890d21bd058e7be59b625d274208433",
+      "bytes": 24814
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "609fd8c9ec351c1a915929e46ec7bbe3d86cb21245766479d4d668a5bccf2419",
+      "bytes": 24878
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "3f339c8ad3164764e146f84d7d5876a83a0bbd3f8b47f0da026d894f347ed924",
+      "bytes": 24943
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "08712e9fcafd9d564115965f9e2431f9b111df084a4988d62ea81fb35daf1eb7",
+      "bytes": 24714
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "99cbaa3c79f416078c1aef02d9a14e59f9a96c74c7dfb9bca6598f1ef90bda46",
+      "bytes": 24321
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "d2528aca11acd20bfff4e2d69781d0012e181fb640c6f2779f42851afa7d4e4e",
+      "bytes": 24019
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "f68fdce0dfc5606879b1c77fc063dafe52a22882c27c97fe2b3011dc21e0d151",
+      "bytes": 24657
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "e96e0125488fc3432f3c68759946bfc7515aa33bb035fcb5437f19654abd6d6b",
+      "bytes": 23814
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "4cf1a0eb91069b995c1f6b1e340976d01fdbc668b5defafaca23ac7c2b4c7597",
+      "bytes": 24009
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "eb81987c39d7af0de8a523c29a9326d96110712b2df83031604e3dda48b732e8",
+      "bytes": 24615
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "5859cee6ac15b98d33475952ce8e000465e1747d94803d1f18c4a17f56fb4142",
+      "bytes": 24592
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "8ccd51a60ed6d4f7932f71269eeac0c106c37a3dfaa4bca46a9e7477316902a0",
+      "bytes": 24314
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "d50e32a998e9e3152861210149b47328d8a059f986241f96a9aa788180f14d32",
+      "bytes": 24634
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "e8cac6caa67d03b5fef37529b7799294c0f607ad1f37053610816f185b24858b",
+      "bytes": 24671
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "78528ac73e932843d766fb5288ab8fe422a1f1d400ebccad2826ebb80c8a7a70",
+      "bytes": 24444
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "b360686780113a52329c96bd9867dfdff17401dcc8abfbffdec57b7708aae533",
+      "bytes": 24139
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "7ce1c2aff54da08f50ffab2f443c8b4a322bdbbdc872fdf880655c1db546b528",
+      "bytes": 24011
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "a2feaa31846ed9a505f0ca4f2c536c38bf6627733dd1a90183b9103b0cd03c41",
+      "bytes": 26147
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "703ca37097d62a9127e4a184336f52cbd959660d56b8647c3484fb8c29015193",
+      "bytes": 24257
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "48bd11ab13ca7f20cf43a25b0191bf1cafb6553fed71927ef9728db6ec8dde8c",
+      "bytes": 24285
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "1f77f3d1e166552d5b81538fe760b48b40aef400313d58333a19ffc98df3a7c7",
+      "bytes": 24556
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "8ac06e7381e8f932211be6e25aebc708e391ffe2a497c10dc7bdd23e732808fa",
+      "bytes": 25326
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "eceb5579fc3d58ed143ff260649dcaf9b372d07d3cf61bfad2c979f5c89b93e1",
+      "bytes": 26580
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "126d5011de8018c28fd930206c3076e22bba93096342a55a7b35125b28ea2d35",
+      "bytes": 24750
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "41a5ad49c02e26d977379cd1f65003af830bb5567b089ed5fb105f74a3106178",
+      "bytes": 25035
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "3c42419f3e28d6e6ff112b7047c06e324867494aee268ee4d35b9f9a1f231e68",
+      "bytes": 24674
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "150d0d9fb9330f7d56536912871559298ec6f6a9a6cae819def3e985374ad3b8",
+      "bytes": 24658
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "3e370a5d30bf543cdf3a820ecea6862417544d828912d0ffd346b2173850090c",
+      "bytes": 24585
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "3b39e3b61d13f57ec2577e2146e59292a826bdbfa7cb734e19b99182c640be64",
+      "bytes": 25392
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "233f8cef2b08203b79acee770d9880d691ad736e8514b01271151ccaf0db8c94",
+      "bytes": 24146
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "d9cd248bef233c204b76b2fd5ea2458704fcf4623086a2368b7f7c1929bc8a6c",
+      "bytes": 24845
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "50377ffa85e1a0f89d6fe041d5733b096fe20c794e2efd307713f7be56af67da",
+      "bytes": 23955
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "8aeec963eddcf2dca1dfbfebf8284d8b7923d0c6e034a9b1ffd6183c1fbd4d3f",
+      "bytes": 24076
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "1c879b922360fae28cf7b5a8e5a4de729628d3187675aeff92a4cba6dbdcf53b",
+      "bytes": 24642
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "20966c96ffe41031ea35b316e01e71b0328d7bb5d435f4a910ff195b91b7fa4f",
+      "bytes": 24409
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "60fcb2dbb6d67411fb11b7792df3ac4835cb6baf0aef6dc9e685cff81cbd761e",
+      "bytes": 25867
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "05221a2e7740c761b2d7282a2ef5043d7d7e424a7bae110985b886b15da9a598",
+      "bytes": 24419
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "04a8f140a267ed6e31d1b64b8f132a8f48b3badf984f5ba32e1a784fd02231c1",
+      "bytes": 24121
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "97f836bb475d8195b6b5ce89d853406bb15f5a9b3a0e0c2cd9811462c4177c91",
+      "bytes": 24843
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "9cf3139acf2f497150ca8866e3502c73cb7e328f8c725998f11598ee9922bacc",
+      "bytes": 24071
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "7549a8c73a0799ef73119fc3f7c270ab2ae18a3d8d262f77e5d9239acd9385cd",
+      "bytes": 24099
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "24be9cc66f8b1a22271f00ace577904bc4affde1b1c1f0a83fa5933c14aabfdf",
+      "bytes": 24824
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "b6f3d8c597f1fbcee40836bb4df65b9c7597f4ca2c19ce7c4ae2294c2276ed51",
+      "bytes": 24131
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "8d697ec1a84adc8bb6b5b52f6176ba1d813b49c34665d02c6a77cacd33af3144",
+      "bytes": 24494
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "e13c1f59867b7f1a30e62f78b929ea84ae39c7a7d97935fe5f88688f2df79690",
+      "bytes": 24455
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "c270a9407f9f0f081a23b782b191e5749bf01a5ca13a6c51582409b0be562433",
+      "bytes": 24165
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "48eb500f5920283b6e88f1b98eac9cdfe91e0db080bc64cd6b456f61c68ba5e3",
+      "bytes": 24143
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "10471c4b86d9602b42bda79b5ba152066b3b029a7601f8743cd7577e2c1dae3e",
+      "bytes": 24714
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "5e14470145dc81010be137116e3386e7943c3415d9e9c79c4a9aa568c24e16a4",
+      "bytes": 23983
+    },
+    {
+      "path": "junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "974d1f4dd7264c5fdabeb8292a6a3d8d9be960ef201b919b93f854c9597e5ba3",
+      "bytes": 24707
+    },
+    {
+      "path": "coverage/api.xml",
+      "sha256": "29c992c6a489d03cf6688a2fda5bd0cd6ea545a7ea5e4e8dfe5336e74c617a5b",
+      "bytes": 903166
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "13cb375570ac3a55f133f435b1730e6ab779e64adb35265865e91199676d5827",
+      "bytes": 30992
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "b12ab086a1b7e70c73ed7651a858fbdb3a7a80016c7a026b67179b9818dd4e5a",
+      "bytes": 28823
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "bee717290a22bf5b6506fa04bb96d9f8f74149354549827ebbd96eab1c67f5c5",
+      "bytes": 28984
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "daaba31792aaddcacd6ecda79e48fbe6d885c28f1abeac40240258b7b94031aa",
+      "bytes": 65040
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "56733aca9e12dabf242007c74f35cd9b6d29a471235c9da79ad3b1d911e69f11",
+      "bytes": 28503
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "cbad41205c98c21205746c3fc4e5dce77f931ee574b1153e62e9d96f1ae011c1",
+      "bytes": 33277
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "223798652fac16aa75081b2be46e124d817f3ab47f1e173086ca664e46fe4bc8",
+      "bytes": 29140
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "8a3b6bf040576c20984a5f0a8786793151303921bba98ec7dbe9e7e55fa6b89f",
+      "bytes": 28663
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "11405732654fb6acb225f8ae35fedb139f3385386da38fc5c31d9811f4a159c1",
+      "bytes": 28213
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "228daa44fe7bb4560b42f01248d7220bb8662b7ebad53f2e12f2cac72018606e",
+      "bytes": 28659
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "1b14cd67087322cdb40eb2feeeb4e9857b7e3cd871dad55eeac4a4f3937a69fe",
+      "bytes": 28331
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "9331632f40b669b8e7bf40327f97e3109d319a0bfc14e79eb24d4e8878e2b6d6",
+      "bytes": 28691
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "8ab3fcfa581e79f7134ecd826be3cf367a20a185503306535a37c9bb9959c9f7",
+      "bytes": 28764
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "00ad656068267514a16f025ab8e5a7bc0212a4abd58e0915ef46c5c4e9da39f2",
+      "bytes": 29726
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "cb409d0cad38bc3e13c909c3412d13046f5dc588eabee85adeac81a87dad85ec",
+      "bytes": 28229
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "73042c26451f92e7ca894528c6c089bc3e11f7e70c7fc4b1cc841e2270b54c1d",
+      "bytes": 29467
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "94817ad30e5092b3081750fa7d0a5e3513a5d020271a1fb8c65a0a5086bcd22f",
+      "bytes": 28944
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "a9067accdc8dba10dc77068344e0ab9fdbfdd33423b68ee3baf1a09e63f045f2",
+      "bytes": 28763
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "b624c328c2d222229535c2c477e741429890ce99d678e0de126a04e319df9037",
+      "bytes": 29594
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "7af95f06975752a5e8492e6168c56c81016090eb3360889b9d563c4ed85207c6",
+      "bytes": 28954
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "daa1dc9dd1a2ec27b9d89e91e37ab750d985cafe9ea171a627860cacee2d0efc",
+      "bytes": 28956
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "96a6366ef2a49040c460f78540f6bd8e7e8a54e368891784a96d98d814a7547c",
+      "bytes": 27931
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "3b31c892311d12454ac163f4f16ad6fe45de48adda4753408e1b1a598e27e98d",
+      "bytes": 27938
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "c5e3f61325366e3cfcd79f36a3e76df4e2940d2a500ee74659e7fd9ed1590f65",
+      "bytes": 28367
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "c50a6c268c6b174daab6e27b81993d50ba69929876e6a29e1d8820997e48e459",
+      "bytes": 28080
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "c603dd0630ecaf221c3d0f96d39eefb8fde0afca5834c8ce97e55694792456ff",
+      "bytes": 28691
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "0f2b89411c4c2d0415540d272a68903d974364ecf4407f105740bec4c2f44290",
+      "bytes": 28405
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "f3f54dded2b217ca6b66a3c57f9e27a54fe56708fe215783ebd8fb3afe7293b1",
+      "bytes": 29102
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "cfa38d5113858888c374e7aafe10b632ef6b5cc4aa03a4d34424c9edda04dc46",
+      "bytes": 29244
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "852ff391d8ee51cc2baa9f1a2a18b10e0ddf284f726879f909a76bd2358ba641",
+      "bytes": 28876
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "2036fc9de0459d7ce1ad788d7a4906bb6b46e92e6e62bc434e366625ac33f81a",
+      "bytes": 29174
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "ca70e74d68a5892927997d687ef9decf499d7462e9c214ec18c143ac2979bbea",
+      "bytes": 28846
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "cf00fbadba88eab73e5aa9087670ac8799f11b126dde42c17469c8a63fc98511",
+      "bytes": 29347
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "eb03a0914e997557b6495145aba9d2dd7bc37cae34cf09ae3916eb06239d106d",
+      "bytes": 29094
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "a8899ddf3e5f37b9aa2b56d47dbb8dc9216a467e84ac851d77e658550df38474",
+      "bytes": 29058
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "bab492bfda20d88c96154781884e3ac514808a74c93c51120d72450c9ef948de",
+      "bytes": 28888
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "7eb63355f0e89a0334b696b16e7748e21e2f84f04e6879e2e7800733a2f37088",
+      "bytes": 29286
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "655c1fa9d5c8e4690f6a3cba32df8cf0882aea7573dd87c6414dc20711b3d2a6",
+      "bytes": 28445
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "2f65f423655f2685e80c3354f0d7139c1bb5f4e5cf11ce3093a4cca34a1f99f0",
+      "bytes": 28594
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "0654db3ae2b0f410f0e588f5dc8d65d61318cce5f9595328c32d623b27109611",
+      "bytes": 28635
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "0ab5c9ad21a0ecde940d1bb35227d3c205683d9e706e50ad681e3aad7ec8efe4",
+      "bytes": 28244
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "2e6286fd0a55b8cc8c02f2ca9566a02397272c18d83aa35dde5c0c1fc3f4f4bc",
+      "bytes": 28371
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "208d8dabb5f699d30515963d11284ae6842c62578c9c1c793b887d78983c01bc",
+      "bytes": 28631
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "6793b270479149ca28145d4f44a6d0ab3c1e9aaf217991568653bbda718d2a53",
+      "bytes": 28371
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "c337ca1f9090fbf9b3e6716c5949e9138c2b1be8dc2477a70e9e4e3c1ae09610",
+      "bytes": 28406
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "8454ff51df1b3740ba9eebaf7f625426b98805344a0dae84da70c9864bf9ff7c",
+      "bytes": 31113
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "724ec7a7006bda9d95553bfa0cd4eaeae6754e93a4a31a5a6251d3da6f20e667",
+      "bytes": 32955
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "ed9cf17907d5a2fe6016f61a3e289755b57260012bd9146cbf6b0a1aa6c2ef36",
+      "bytes": 31692
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "5ed4e89391757344c2cd55f026f398b981abf73d731215f2e8797ac4c9a0c2ac",
+      "bytes": 29764
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "ebc7820abdea17ab4bb89bb5e8d46ae1d987d3f53175678b13af73a0a2b0ff45",
+      "bytes": 39719
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "42c38a055ded35deb0caaa4f623cc48399d1725bfbe97a437801d00687f1676b",
+      "bytes": 30933
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "c489c134fd4365eddc524ba382fe5579c21996e4ad68e7a790e97c54a2ad9ded",
+      "bytes": 31842
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "ec789eb71ca0b337c1e340d862942260ef326d577ef1a2876ca760ed8526bebc",
+      "bytes": 31015
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "2d47df23fb32662edb1d3d0e604b26b3a378dba3e9e6f084b9e6cba5d4330627",
+      "bytes": 31640
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "eac534b8cd4fd9811cdcf8410d5a6147b726ffbaf2382a84ad504fe354a83848",
+      "bytes": 31180
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "ce55c60a13c50e0ce3dd040164ee9f3380fa32ba43dfd914b84a594946418a97",
+      "bytes": 29033
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "1b79fe403ac827d9cdd97d83c6a68ba4acda6ab44a9e342292f361b543d083f8",
+      "bytes": 29165
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "ac53da2b10c1f2126691864c34662a7ff61878b200ede310dfbffdfa5db2a80a",
+      "bytes": 29259
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "78da62be81b3c138934d668a32fb7cbceaa90236c05e10743bea7c918c1a6584",
+      "bytes": 29279
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "b4cd09e0a389d2d62bf3ffe5cec8798fbc27c66cadf1c2e7713fdd45cd253a56",
+      "bytes": 29285
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "f143144a965e4bd8d5a0b33f5fe068cc42ddd8accc6aacfafaacf43d197bcba9",
+      "bytes": 29002
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "815bd92f3209b4278f966e14f95d751866c2782c6300ea5b721cc70ed4f26380",
+      "bytes": 29369
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "e81d104ec01e20db820fa33cf14d9ea6c3bc5a40590df313488fc3d398437459",
+      "bytes": 28977
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "ddfa230fcbd9d0cda023aa915a905ef4f51c57bbe064a8b4ddf0044a2d257f9c",
+      "bytes": 28689
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "95026777217d4a8bf2f64b7ff94d6191ef971c42d29a50d280710a3dd8118d8d",
+      "bytes": 29363
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "f007009c25ed1861b896d0d2d164dba9cdce33914d666a2e3560f420494dcc23",
+      "bytes": 39772
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "ef5ca177ee520026bce9a6086cad4728f73ede94faa2864b225ef00b3ed08f07",
+      "bytes": 28636
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "6ebd134d237986fafbde954854c34db025785ac5fa11aff50512ed5beaab00af",
+      "bytes": 28957
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "55e02bdb1040b4b52cb6591b5f4f5698b4f023379f41fbe4e71810bc70d89224",
+      "bytes": 28781
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "3f43f1d2753119bb1a724e6bdc1bebbd188b5a7728549e6e129a2ce3cbd0df12",
+      "bytes": 29052
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "b2406cbda00b5ec3a32dbeed3bfb00e035bf43615e66105dc3a63c4bd5556575",
+      "bytes": 29058
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "df78f3577ebbb4711142d62f33e98fdf8ef06b13b51238823bfe4541d6db5fb8",
+      "bytes": 29112
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "b2bf2c6f083a660181b0170ce91ed9a8c1af779726bdf25f5fa03652fb4d8cd7",
+      "bytes": 29333
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "75fe3923a8f3da216cb14549857cd796fbeb2da27e1729a8cdb4b6f02f5c37c5",
+      "bytes": 29022
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "8d6a392f796aae8f0572ceaa449d497fc98d9ee955ea34dd11ef7a0fb398229a",
+      "bytes": 29033
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "463c1013c01c74ee78140fe949bdf2bdc2a4521fdebf74a2f74f903ad7e8ce52",
+      "bytes": 28827
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "240fb8bd3a3bec4386ed75c30110a10a8abfa24cae122fe3b353214e30d5e68d",
+      "bytes": 29104
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "e63aadb8be62465f87c03a4e0899258f53a7507888cbedf1894f1a875e9a4f70",
+      "bytes": 29050
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "fde0fece066ff793e5afa5019754526ec43284968d0e38460f03b627da8825a1",
+      "bytes": 29109
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "fb856126dc5a5be70918da247c2ff992e2d098817c0666b934d38d64e67febb2",
+      "bytes": 29612
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "1af1d115e91590fee19ebe502c55d0f93fe8dfd5630e850013f093622a3b1e8a",
+      "bytes": 29632
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "e3007743deb5650f31a7422b3fcb54568d3e43bc8490fbd2f773b7d734c9ced3",
+      "bytes": 29160
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "36249fdfc1517d0acd89688c386749230a3fb880a901ad804d0d07baabb8fb01",
+      "bytes": 29368
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "50631e969e7395f78832136eb4a752c3abe34a9d4dc30ec0e7083d2f69d4ef54",
+      "bytes": 29125
+    },
+    {
+      "path": "junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "b972a6d5cfea67c809dd35d22fa16d86f41cc933e2fde02de48515b4156c880f",
+      "bytes": 29101
+    }
+  ],
+  "limitations": "Batch not executed; Web static/report not reached. This failed run is not a passing full gate. All copied XML/counters captured BEFORE any next test; no mixed targets.",
+  "rawLogSha256": "8b07432481ea8a27d00a661a8520ab27f26b0a44339b82991cad07b44c515d3a"
+}

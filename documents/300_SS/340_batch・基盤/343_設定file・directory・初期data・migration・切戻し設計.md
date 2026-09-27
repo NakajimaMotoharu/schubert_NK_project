@@ -543,6 +543,12 @@ Current bookmarkのDB ID互換を新しい要件として暗黙追加しない�
 
 ### 11.1 Deploy
 
+SSC096/PG313（実装前の固定契約）: 既定signature検証を省略しない。配備入力側で固定pinned公開鍵によるdetached signature検証成功後だけ固定root原本 `/etc/schubert-nk/release-approval/current` を発行する。親root:root0700、file root:root0400/single-link/ACL無し。固定ASCII1行列は `NKRELEASEAPPROVAL1\nversion=<既存release token1..64>\nmanifest_sha256=<lowerhex64>\n`、最大192byte、unknown/duplicate/欠落/NULL/CRLF/BOM/escape/末尾追加/非canonicalを拒否する。path/algorithm/keyは原本から選ばせない。原本の更新はM/A・全停止・permit失効・current切替を管理する配備処理内で行い、起動時の実測hashから承認原本を作るfallbackを禁止する。
+
+全root前段（API/Webの!前段とmorning）は真正RootStartupContextを認証してからPID1 host-viewのこの同じ固定原本を保持read/recheckする。API/Web UnitはUser=serviceを維持し、root-only原本を通常LoadCredentialへ混ぜない。既存ordinary5secret catalog不変更。root承認version/digest→既存held current/release内の同一manifest bytes/version照合・strict parse→全BOM/共有artifact/同梱SQL・外部SQL/checksum→前後原本/current/namespace一致→全close成功後だけimmutable schema期待を返す。digestだけの既存sha256読取をfullgateへ読み替えない。
+
+Runtime release treeはmanifest具体payload＋祖先directory＋固定RELEASE-MANIFEST.json/SHA256SUMSの完全集合、未知file/jar/空dir/symlink/重複aliasを拒否する。manifest自身はpayload hash列に含めず外部root原本digestで拘束、SHA256SUMS自身も除外してmanifest＋全payloadのcanonicalhash列と実bytesを照合する。detached signatureは配備入力側に保全しruntime treeへ格納しない（未検査の任意管理file除外は設けない）。署名検証/原本発行/全BOM未接続時はschema/backup/permit/Production受入を非成功のままとする。
+
 1. Releaseを新version directoryへ配置、owner/mode/`SHA256SUMS`/manifest/signatureを検証。
 2. Rendered configをstaging pathでschema/secret/path/port検証。Caddy/systemd/Artemis/PostgreSQLのvalidatorを実行。
 3. Backup・停止・Flyway migrate・実効schema/grant検査。
