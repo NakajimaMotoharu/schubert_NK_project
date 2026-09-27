@@ -1260,9 +1260,9 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 404}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 420}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
-        for count in (0, 327, 343, 359, 366, 367, 369):
+        for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
             with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         wrong = copy.deepcopy(verified); wrong["exitCode"] = 1
@@ -2323,6 +2323,16 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsApiRes004MissingMalformedAndAclFailureNeverCreatesDatabase",
                         "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes",
                         "opsWebRes001WebOnlyFiveMaterialsTechnicalRoleAndTwoConnectionCeiling")))
+        groups.append(("dev.codex.schubert.nk.storage.LinuxProcessExecTest", 1, ("opsExec001LiteralVectorsAndArenaLifetime", "opsExec002EveryNativeReturnIsRedactedFailure", "opsExec003InputNullAndPathContracts", "opsExec004VectorAndStringBoundaries", "opsExec005PlatformAndSymbolContracts", "opsExec006UnknownFailureIdentityAndArenaClose", "opsExec007ConcurrentInputsRemainIndependent", "opsExec008ActualReplacementKeepsPidAndOnlyPreparedEnvironment")))
+        groups.append(("dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest", 1, ("opsXfd001ExactlyTwoFlagsRestoredInReverseOrder", "opsXfd002EveryNativeFailureAndPartialTransition", "opsXfd003IoAndUnknownBodyPreserveOwnership", "opsXfd004CompoundCleanupUnknownPriority", "opsXfd005NullDescriptorAndBoundaryContracts", "opsXfd006PlatformAndSymbolContracts", "opsXfd007ConcurrentDisjointCapabilities", "opsXfd008RealExecInheritsSameFlockUntilProcessExit")))
+        groups.append(("dev.codex.schubert.nk.storage.LinuxSealedProofTest", 1, ("opsSeal001LiteralBytesFlagsOrderAndScopedClose", "opsSeal002AllCreationSyscallFailuresAndCleanup", "opsSeal003ReadSealEmptyOversizeAndNativeErrors", "opsSeal004BoundaryAndPartialIoIndependentVector", "opsSeal005NullAndPlatformContracts", "opsSeal006UnknownCompoundAndAllOwnedClose", "opsSeal007RealMemfdModeSealsAndMutationRefusal", "opsSeal008NativeConcurrentProofsNeverMix")))
+        groups.append(("dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest", 1, ("opsHost001FixedKernelAnchorAndNativeFlags", "opsHost002NoFollowChildrenAndOwnedCloseForwardOnly", "opsHost003EveryMutationRefusedWithoutDelegation", "opsHost004UidGateAndNativeFailureNeverFallBack", "opsHost005UnknownFailuresKeepIdentityAndArenaClosed", "opsHost006NullPlatformAndSymbolContracts", "opsHost007ActualOrdinaryUidCannotOpenHostAnchor", "opsHost008ConcurrentScopesKeepOnlyOwnPointers")))
+        groups.append(("dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest", 1, ("childfd001RootSealsImmediateCloexecAndEarlyProofClose", "childfd002EveryDescriptorInputAndNullContractBeforeOwnership", "childfd003BothFdInitialFlagsAllSyscallsAndReadonlyAccess", "childfd004EveryTypedAttributeRootModeLinkSizeAndUnsignedIdentity", "childfd005PayloadNullSizeIoAndProofCloseBeforeCallback", "childfd006UnknownAndCompoundFailurePriorityAndOneClose", "childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce", "childfd008NativeFactoryBindingsAndOrdinaryUidCannotForgeRootMetadata")))
+        groups.append(("dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest", 1, ("admissionLock001TwoViewsSameOfdAndReadonlyPrivate", "admissionLock002ContentionAndCrossViewMismatch", "admissionLock003EveryTypedMetadataAndBoundaryRejected", "admissionLock004PhysicalSymlinkReplacementAndNoRepair", "admissionLock005AllIoAndCloseFaultsReleaseEveryOwner", "admissionLock006CompoundUnknownCleanupIsNeverDowngraded", "admissionLock007ConcurrentSingleWinnerAndReusableAfterRelease", "admissionLock008FactoryNullAndActualNioContracts")))
+        groups.append(("dev.codex.schubert.nk.batch.platform.RootStartupContextTest", 1, ("rootctx001LiteralContextAndTwoObservations", "rootctx002RootProcInitBootAndInvocationDomains", "rootctx003StatStartBoundaryAndPidNamespaceBinding", "rootctx004EveryManagerPropertyAndCgroupRefused", "rootctx005AsciiBoundsNullAndObservationDrift", "rootctx006FixedSystemBusQueryAndAllProcessResults", "rootctx007NativeStreamsFaultsAndUnknownPriority", "rootctx008NativeKernelReadsAndOrdinaryUidRefusal")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.StartupProofFrameTest", 1, ("proof001IndependentGoldenAndExplicitFieldOrdering", "proof002EveryMissingExtraDuplicateAndNoncanonicalRow", "proof003AsciiByteSizeAndEveryNullContract", "proof004NumericLowerUpperOverflowAndCanonicalDecimals", "proof005StrictSortedGroupsAndInvalidGroupBoundary", "proof006ServiceBootEpochInvocationAndDigestDomains", "proof007ImmutableInputSnapshotAndByteOwnership", "proof008ConcurrentIndependentImmutableFrames")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest", 1, ("serviceid001BothFixedAccountsExplicitRequiredGroups", "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker", "serviceid003UidGidBoundariesAndCanonicalDecimal", "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored", "serviceid005ByteNullAndImmutableValueInvariant", "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets", "serviceid007EveryOwnedCloseAndUnknownFailurePreserved", "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection")))
+        groups.append(("dev.codex.schubert.nk.bootstrap.ChildStartupContextTest", 1, ("childctx001IndependentGoldenBindingsAndBothUnits", "childctx002EnvironmentMissingAliasNullAndDescriptorBounds", "childctx003EveryAttestedFieldAndNativeIdentityMismatch", "childctx004KernelBoundariesCapabilitiesAndImmutableSnapshots", "childctx005MalformedKernelStatBootPidAndByteInputs", "childctx006EveryStatusMissingDuplicateBoundsAndMalformedValue", "childctx007NullUnknownFailureAndConcurrency", "childctx008NativeProcOnlyDoesNotGrantAuthority")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
             expected_module = bootstrap_ownership.owner(cls, test=True)
@@ -2340,6 +2350,16 @@ class EvidenceSetTest(unittest.TestCase):
         for cls, start, names in groups:
             prefix = ({"dev.codex.schubert.nk.storage.ResourceScopeTest": "PT-OPS-RSCOPE",
                        "dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",
+                       "dev.codex.schubert.nk.storage.LinuxProcessExecTest": "PT-OPS-EXEC",
+                       "dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest": "PT-OPS-XFD",
+                       "dev.codex.schubert.nk.storage.LinuxSealedProofTest": "PT-OPS-SEAL",
+                       "dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest": "PT-OPS-HOST",
+                       "dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest": "PT-OPS-CHILDFD",
+                       "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest": "PT-OPS-ADMISSIONLOCK",
+                       "dev.codex.schubert.nk.batch.platform.RootStartupContextTest": "PT-OPS-ROOTCTX",
+                       "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest": "PT-OPS-PROOF",
+                       "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest": "PT-OPS-SERVICEID",
+                       "dev.codex.schubert.nk.bootstrap.ChildStartupContextTest": "PT-OPS-CHILDCTX",
                        "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest": "PT-OPS-LOCK",
                        "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest": "PT-OPS-STOP",
                        "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest": "PT-OPS-STOP",
@@ -2645,7 +2665,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(117, batch_ops)
+        self.assertEqual(133, batch_ops)
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)
@@ -2736,7 +2756,9 @@ class EvidenceSetTest(unittest.TestCase):
             "file.ServiceCredentialException", "file.InspectorCredentialException", "file.AesCredentialFile",
             "maintenance.InspectorAesCredential", "maintenance.InspectorDbCredential",
             "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources"}
-        self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main},
+        self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main}
+                         | {"dev.codex.schubert.nk.bootstrap." + s for s in
+                            ("StartupProofFrame", "FixedServiceIdentity", "ChildStartupContext")},
                          set(bootstrap_ownership.BOOTSTRAP_MAIN))
         for name in bootstrap_ownership.BOOTSTRAP_MAIN:
             source = bootstrap_ownership.source(repo, name)

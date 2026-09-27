@@ -1,5 +1,11 @@
 # 起動gate主体・共用境界の実装判断（SSC084）
 
+## PG299継続：現在permitと既存morning接続review
+
+2026-09-27、既存Astra/high補助1名への対象限定read-only review完了。親が採用する順序はM→MaintenanceRunFiles原本start/resume→固定対象停止→A→全Invocation/cgroup終端再確認→新epoch INVALID確定→DB/schema/advisory lock/run原本照合→実backup→成否依存cleanup→独立transfer→Broker→Expiry stage commit確認→実purge/after観測→terminal commit/readback→全root/Ops/schema/Broker/current step照合→permit公開→ISSUED(epoch,digest)確定→A解放→API/Web ready。未実装をFAILED/SKIPPEDへ置換せず、実走査対象0件だけ正当な成功とする。
+
+MaintenanceRunFiles.complete/.doneは後続Caddy/smoke等のmorning終端後なので、permit発行前提にはしない（循環）。当日begin skipped=trueも現在run/boot/BrokerのExpiry証拠ではなく、実成功attemptを特定・再照合する接続が必要。現在原本は/run専用namespaceとし、永続root専用DurableRecordFilesやMaintenanceRunFiles namespaceへ混在しない。再発行ごとに新epoch、INVALID確定前mutation0、ISSUED不確定はA内完全一致readback時だけ確定、欠落/破損からpermit/DBによるISSUED復元は禁止。/run原本はbackup/切戻し対象外で、旧permitだけの復元を拒否する。rootが現在原本まで同時に巻き戻す運用をファイルだけで防げるとは主張しない。R2でtimer/update/reboot全体の受入を残しても、起動前backup/cleanup/transfer省略や初回保守免除は導入しない。全結線・実NK受入は未完了。
+
 ## PG294着手前：root/child bindingの最小契約review（SSC086/087）
 
 Astra/high read-only限定reviewを採用する。kernel proc/PID1/system manager/boot/自己PID-startticks/固定Unit MainPID-InvocationはA前の由来確認、A直後のidentity再確認、exec直前の同一性確認に分ける。固定system bus照会のみを使用し、環境由来bus overrideは使わない。

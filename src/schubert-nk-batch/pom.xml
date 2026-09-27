@@ -23,6 +23,8 @@
   </properties>
 
   <dependencies>
+    <!-- SSC088: root startup uses only shared credentials/public proof/NSS, no business API. -->
+    <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>
     <!-- BUG-142: CLASS-retained, compile-only, exact single-method portability review. -->
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -52,8 +54,8 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</artifactId><version>13.4.0</version><scope>test</scope></dependency>
-    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-database-postgresql</artifactId><version>13.4.0</version><scope>test</scope></dependency>
+    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</artifactId><version>13.4.0</version></dependency>
+    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-database-postgresql</artifactId><version>13.4.0</version><scope>runtime</scope></dependency>
     <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><version>42.7.13</version><scope>runtime</scope></dependency>
     <dependency><groupId>org.apache.artemis</groupId><artifactId>artemis-server</artifactId><version>${artemis.version}</version><scope>test</scope></dependency>
     <dependency><groupId>org.apache.artemis</groupId><artifactId>artemis-jakarta-server</artifactId><version>${artemis.version}</version><scope>test</scope></dependency>

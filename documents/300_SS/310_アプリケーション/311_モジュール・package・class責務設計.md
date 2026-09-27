@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC088: 共用bootstrapへSSC086の非秘密canonical proof/固定service NSS/子自己bindingも収容し、root Batch→bootstrapを許可する。API/Web→bootstrapとbootstrap→Storageだけの内部依存、Web→業務API禁止、Storage native-only/no-JDBC、bootstrapへ業務HTTP/JMS追加禁止を維持する。root Batchのschema read-only validateにはFlyway core compile/PG plugin runtimeを使用する（従来test限定から具体化）。通常serviceへmigration/Ops credentialを配布しない。公開snapshot・native2FDだけで全root/current permit/schema/Ops readinessを代替しない。
+
 SSC084/PG289: `src/schubert-nk-bootstrap`を共用起動libraryとしてStorageの後、API/Webの前へ追加する。固定資格情報のstrict material/保持inode読取と固定role JDBC admission/sourceだけを移動し、HTTP/JMS/業務repository/process entry/DDLは含めない。API/Webはbootstrapを参照でき、bootstrapはStorageだけを内部依存とする（JDBCはJDK、PostgreSQL driverはruntime）。Storageのnative-only/no-JDBCとWeb→業務API依存禁止は維持する。移動対象11classの既存api.* package/binary名は互換名として保持し、artifactのAPI依存を意味しない。対象と試験owner/再検証方針は473、SSC084へ追跡。RequiredColumnは業務APIに残し、bootstrap DB admissionはそのSQL NULL拒否を自身の固定08001契約で扱う。秘密/権限/外部画面仕様は変更しない。
 
 SSC062/PG169: .batch.file.BackupManifestReaderはSS341§6.7のroot MANIFEST保持inode読取りを所有し、constructor/read・metadata/bounded IO/safe close/clockを017046・047/BAT226～241へ追跡する。callerの原本両handle/name照合、root/child/entry前後検査までを担い、任意root侵害、root生成/実3archive/DB成功/7世代/親OS寿命は保証しない。依存は既存Batch/Storage/Java標準、PG168正式12中は設計のみ先行。

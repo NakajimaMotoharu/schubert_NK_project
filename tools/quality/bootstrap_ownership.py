@@ -11,7 +11,9 @@ BOOTSTRAP_MAIN = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "file.ServiceCredentialException", "file.ServiceCredentialReader",
     "file.ServiceCredentialSet", "bootstrap.ServiceDatabaseAdmission",
     "bootstrap.ServiceDatabaseSource", "file.ServiceProcessResources")) | frozenset((
-    "dev.codex.schubert.nk.bootstrap.StartupProofFrame",))
+    "dev.codex.schubert.nk.bootstrap.StartupProofFrame",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentity",
+    "dev.codex.schubert.nk.bootstrap.ChildStartupContext",))
 BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "maintenance.InspectorAesCredentialTest", "maintenance.InspectorDbCredentialTest",
     "maintenance.InspectorCredentialAccessTest", "file.InspectorCredentialLoaderTest",
@@ -19,7 +21,9 @@ BOOTSTRAP_TEST = frozenset("dev.codex.schubert.nk.api." + suffix for suffix in (
     "file.ServiceCredentialReaderTest", "file.ServiceCredentialSetTest",
     "maintenance.ServiceDatabaseAdmissionTest", "bootstrap.ServiceDatabaseSourceTest",
     "file.ServiceProcessResourcesTest", "logging.ApiLogDatabaseFixture", "maintenance.MaintenanceJdbcProbe")) | frozenset((
-    "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest",))
+    "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.bootstrap.ChildStartupContextTest",))
 
 
 def owner(name, *, test=False):

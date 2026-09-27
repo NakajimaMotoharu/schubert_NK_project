@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG298/299未認定: NK-OPS-001 Bootstrap.FixedServiceIdentity→PT-OPS-SERVICEID-001～008/native016、Bootstrap.ChildStartupContext→PT-OPS-CHILDCTX-001～008/native017。RD SYS-002/004・OPS009/UI212・251/SS311・342・343/SSC088/D04・05、018/113～116/provisional PG298-299。Bootstrap95PT/全counter0/静的0・API/Web native公開fixture限定、current permit/fullgate/Production業務/CHR未達。
+
 2026-09-27 PG296/297未認定: NK-OPS-001 Batch.platform.RootStartupContext→PT-OPS-ROOTCTX-001～008/native014、Storage.LinuxStartupAdmission→PT-OPS-CHILDFD-001～008/native015。RD SYS-002/004・OPS009/UI212・251/SS342・343/SSC086・087/D04・05、018/109～112/provisional PG296・297。Batch420/Storage149PT・全counter0/静的0、root currentpermit/全gate/canonical child/実NKは未達。
 
 2026-09-27 PG294/295未認定追記: NK-OPS-001 Batch StartupAdmissionFile→PT-OPS-ADMISSIONLOCK-001～008/VM native013（018/105・106）、Bootstrap StartupProofFrame→PT-OPS-PROOF-001～008（018/107・108）。RD SYS-002/004・OPS009/UI212・251/SS341～343/SSC086・087、D04/05。Batch412/Bootstrap79PT・全counter0/静的0、root issuer/freshness/子admission/fullgate/実NK未達。
