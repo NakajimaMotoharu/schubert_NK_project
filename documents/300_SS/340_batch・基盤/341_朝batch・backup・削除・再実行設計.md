@@ -307,7 +307,7 @@ SSC-076: この保守専用credentialの管理電文はSS321 §10の`nk.expiry.q
    SSC-077: `batch_runs`の`CLEAN_EXPIRY`行には`expiry_cutoff_at`/`expiry_before_count`/`expiry_after_count`をV021以降で保存し、既存target/success/failure/byteに対象/削除/失敗/推定byteを対応させる。既存`started_at`からrun原本開始時刻を推定しない。監査値はstep結果と同一DB transactionで確定し、不確定commitは同run/cutoffの原本とDB行を再読取りして判定する。
    SSC-078: V022以降はpurge前に固定cutoff・実before・対象件数・推定byteを`CLEAN_EXPIRY RUNNING`へ確定し、`expiry_after_count`は未知のままNULLとする。purge後にだけ実afterとstep terminalを同一後続transactionで確定する。crash/通信断/DB commit不明でafterをbeforeや0へ補完しない。同run再実行は元行の観測値を保持したまま、残件を同cutoff selectorで再確認する。旧V021最終監査の正本rowと他stepは変更しない。
 4. 実行後countで削除差分を照合。DLQは対象にしない。
-5. Purge失敗でもExpiryがwarning未満・broker health正常ならWARNING exitでAPI起動。Critical以上またはhealth不正はFAILEDで停止。
+5. SSC-085（UI251 §8/SS321 §12との誤記整合）: Purge失敗はERRORを記録し、ExpiryがCritical未満・broker health正常ならWARNING exitでAPI起動。Critical以上（件数5,000以上または設定済byte Critical以上）またはhealth不正はFAILEDで停止。warning閾値を停止境界に読み替えない。
 
 ## 10. Readiness・smoke
 

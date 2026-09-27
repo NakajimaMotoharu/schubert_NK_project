@@ -11,3 +11,13 @@
 root→service gateの最小契約候補: 固定/run namespace root所有・app書込不可、bounded canonical regular/link1、NOFOLLOW保持inode/ACL前後検査。固定unitとfresh実Invocation/boot/release/config/root identities/Broker invocation/実Expiry outcomeに束縛し、再起動は毎回新規。時刻だけ・static OK・Inspector receiptの流用は禁止。親は既存maintenance排他とconfig/root/broker安定を観測→公開→子admissionまで保持、start不確定なら子の実終端を確認前に排他解除しない。子はgate欠落/古い/不一致/cleanup failureで非acceptingを維持し、独自singletonをshutdownまで保持する。本候補は未実装であり未認定。実runtime healthは別途継続する。
 
 環境確認: host UID1000、systemd system/user running、sudo -nはinteractive認証が必要。unshare -Urは成功したが複数service UID/root所有配備を証明していない。host既存/etc/Unit/権限へ勝手な変更はしない。privileged隔離配備の最小手順を具体化した段階で、必要ならQAを先行起票して利用者へ支援を依頼する。現時点は独立実装・非特権の限定PTを継続できるため全体停止しない。
+
+## 共用artifact具体化（PG289、着手前）
+
+着手後の確定差分: RequiredColumnは移動対象から外し、業務APIへ残す。共有11classと9suite/2fixtureの実ownerは`tools/quality/bootstrap_ownership.py`の固定catalogで管理する。ServiceDatabaseAdmissionは自身のSQL NULLを固定08001へ拒否し、業務API libraryには依存しない。既存Production poolとの結線はAPI側Resource PT、shared sourceの全物理接続は独立Hikari fixtureで試験する。
+
+`schubert-nk-bootstrap`をStorageの後、API/Webの前に置く。資格情報のstrict material/保持inode reader・固定role JDBC admission/sourceだけを移動し、Storageはnative-only/no-JDBC、業務API・HTTP/JMSは各moduleに残す。既存binary/package/Test IDを維持するため移動対象の`dev.codex.schubert.nk.api.file/maintenance/bootstrap/database`名は互換名として保存するが、artifactにAPI業務class/起動entry/DB migrationを含めない。WebのProduction依存はこのbootstrapだけで、業務APIへのtest-only依存は既存PT用途のまま。package名を理由にartifactの実依存を混同しない。
+
+移動対象: InspectorAesCredential/DbCredential/CredentialAccess、AesCredentialFile/InspectorCredentialException/InspectorCredentialLoader、ServiceCredentialException/Reader/Set、ServiceDatabaseAdmission/Source、RequiredColumn。単体suiteと共通試験fixtureも同artifactのtest scopeへ移動し、既存API/Web PTが必要とする公開試験fixtureのみtest-jar経由で参照する。production循環・複製は作らない。内部配置変更でRD/UIの外部仕様/資格情報配布/権限は不変、SSC084範囲内。
+
+POM/common security境界の横断変更に該当するため、移動後は変更moduleの全PT/coverage/静的解析と既存負canary・実owner照合を先に実行し、451全回帰を次の業務結線より先に実施する。正式run triggerは「SSC084 shared artifact/POM横断変更」、対象R1 D01/02/05。歴史証跡のpath/hashは書き換えず、新source/runにのみ新ownerを適用する。

@@ -78,11 +78,7 @@ public final class ApiProcessMain {
   private static void startNative(ApiStartupInputs.Values inputs) throws IOException {
     // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
     // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
-    new ApiProcessResources(inputs)
-        .execute(
-            (pool, credentials) -> {
-              throw new IOException("API mandatory startup assembly unavailable");
-            });
+    new ApiProcessResources(inputs).execute(ApiProcessResources.unassembledStartup());
   }
 
   static void fatal(Thread thread, Throwable failure) {

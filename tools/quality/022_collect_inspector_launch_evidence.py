@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
+import bootstrap_ownership
 
 PREFIX = "dev.codex.schubert.nk.api.maintenance."
 GROUPS = (
@@ -220,6 +221,8 @@ POSTGRES_TRACES = {"PT-OPS-PGCFG-008.txt": b"isolated=true\nhostConfigurationCha
 
 
 def module_for(cls):
+    if cls in bootstrap_ownership.BOOTSTRAP_TEST:
+        return "bootstrap"
     for module in ("api", "web", "batch", "storage"):
         if cls.startswith("dev.codex.schubert.nk." + module + "."):
             return module
@@ -391,7 +394,8 @@ def main():
     if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete launcher coverage")
     if args.deployment:
-        for module, subject in RUNTIME_SUBJECTS:
+        for original_module, subject in RUNTIME_SUBJECTS:
+            module = bootstrap_ownership.owner(subject)
             for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
                 name = cls.get("name")
                 if name == subject or name.startswith(subject + "$"):
@@ -421,10 +425,11 @@ def main():
     sources += [repo / ("src/schubert-nk-" + module_for(g[0])) / "src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml"]
     if args.deployment:
-        sources += [repo / ("src/schubert-nk-" + module) / "src/main/java" / (subject + ".java")
+        sources += [repo / ("src/schubert-nk-" + bootstrap_ownership.owner(subject)) / "src/main/java" / (subject + ".java")
                     for module, subject in RUNTIME_SUBJECTS]
         sources += [repo / "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java"]
-        sources += [repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java"]
+        sources += [bootstrap_ownership.source(repo, "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest", test=True)]
+        sources += [repo / "src/schubert-nk-bootstrap/pom.xml", repo / "tools/quality/bootstrap_ownership.py"]
         sources += [repo / "src/schubert-nk-web/pom.xml"]
         sources += [repo / "src/deployment/config" / name
                     for name in ("common.yml.template", "api.yml.template", "web.yml.template",
@@ -433,8 +438,8 @@ def main():
         sources += [repo / "src/deployment/postgresql" / name for name in ("postgresql.conf.template", "pg_hba.conf.template")]
         validate_postgres_ids((repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java").read_text())
         sources += [repo / "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
-                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
-                    repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe.java"]
+                    bootstrap_ownership.source(repo, "dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture", test=True),
+                    bootstrap_ownership.source(repo, "dev.codex.schubert.nk.api.maintenance.MaintenanceJdbcProbe", test=True)]
         postgres_root = target / "postgres-deployment-traces"
         postgres_traces = {str(p.relative_to(postgres_root)): p.read_bytes() for p in postgres_root.rglob("*") if p.is_file()}
         validate_postgres_traces(postgres_traces)
@@ -518,7 +523,7 @@ def main():
         "sourceFiles": [{"path": str(p.relative_to(repo)), "sha256": digest(p)} for p in sources],
     })
     if args.deployment:
-        manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "storage", "batch")}
+        manifest["staticAnalysisByModule"] = {m: verified["modules"][m]["spotbugs"] for m in ("api", "bootstrap", "web", "storage", "batch")}
         manifest["related"] += ["PG-D-146", "PG-D-147", "PG-D-148", "BUG-140", "YKT-110", "BUG-141", "YKT-111", "BUG-142", "YKT-112", "BUG-143", "YKT-113", "BUG-144", "BUG-145"]
         manifest["reviewedStaticDiagnostics"] = list(REVIEWED_STATIC_DIAGNOSTICS)
         manifest["fixture"] += " FLOCK uses isolated retained regular files, real libc and util-linux2.41.3 with narrow native fault ports. No host lockfile, UID or service mutation."

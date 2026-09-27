@@ -47,6 +47,7 @@ def main():
     for module, directory in (("characterization", "program/characterization"),
                               ("protocol", "src/schubert-nk-protocol"),
                               ("storage", "src/schubert-nk-storage"),
+                              ("bootstrap", "src/schubert-nk-bootstrap"),
                               ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"),
                               ("batch", "src/schubert-nk-batch")):
         target = repo / directory / "target"

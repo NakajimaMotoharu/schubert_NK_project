@@ -1,0 +1,141 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "id": "PG289",
+  "branch": "dev-foundation",
+  "baseCommit": "385b7ccaf5f2e33130dd329b5cf600c3f8602278",
+  "finishedAt": "2026-09-27T16:58:16+09:00",
+  "exitCode": 0,
+  "trigger": "SSC084 POM/security boundary crosscut D01/D02/D05",
+  "java": "25.0.4",
+  "command": "mvnw -o -pl six-production-modules clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "canaries": 105,
+  "bugs": [
+    "BUG-264"
+  ],
+  "ssc": [
+    "SSC-084",
+    "SSC-085"
+  ],
+  "notAccepted": [
+    "API native main coverage",
+    "full scope collection",
+    "OS service deployment",
+    "real NK CHR-A01/L01"
+  ],
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "e33c037398bf1d795ca4ce9999e9047a25f83a896ce8efbcd9982e985492cac0",
+      "junitAggregateSha256": "b51447b90e0932d5bd2b1bdbe709c744155bdf7ad95ecb2a80fa9513359dbfcf"
+    },
+    "storage": {
+      "tests": 101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "c691ea316c7a90cd9f873cbb9977fba1a2d494a6bb70a848d9df9e1071dcf37e",
+      "junitAggregateSha256": "230ca5fc5b2ee4ef6d4d51e57a2a0fc07e4817d5518dd27d5c106bf83df4f321"
+    },
+    "bootstrap": {
+      "tests": 64,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "e1f9e9b5d3a09997272d753c2c88123b5e1210cbe32452b752371866917e19e1",
+      "junitAggregateSha256": "72feaf9a4838c07f6ddd232f847cb2fb220296c09afc2655a38737b25d20929f"
+    },
+    "api": {
+      "tests": 740,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 7,
+        "BRANCH": 0,
+        "LINE": 2,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "db8763300c4a0418bd20aae839cb0ff6b89b4a1c59ba2352daae29d095e4ab99",
+      "junitAggregateSha256": "325cbcfaab6d4f2f01d580513ce0115b52add6619270e732c65586ae715c4c44"
+    },
+    "web": {
+      "tests": 555,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "53c0960cf010d6f4bbb80cc49694554ab9d77d853722786dd81d7f6d44d5f155",
+      "junitAggregateSha256": "bb661abdfc0f430db2f3aa6a5df3e1570e854427cbc8d4a0cc4b4457d4c833cb"
+    },
+    "batch": {
+      "tests": 404,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "coverageMissed": {
+        "INSTRUCTION": 0,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 0,
+        "METHOD": 0,
+        "CLASS": 0
+      },
+      "spotBugs": 0,
+      "sourceTreeSha256": "19b4975989ccedb0939c8408f98df0096faec8d2d992f2ae64ccab5d8f628bf0",
+      "junitAggregateSha256": "8a3d3a1c307e3668e332b834aba6b06b659ce765efb9fbfb0e4910ceb1516bb2"
+    }
+  },
+  "treeHashAlgorithm": "SHA256 of sorted relative path + NUL + per-file SHA256 + LF (Java/POM source)",
+  "sha256": {
+    "src/schubert-nk-protocol/target/site/jacoco/jacoco.xml": "9f6a2e3a16c267b9cc9692c7ea4c5b57b335e699ae7fe7a30f45cd57e60c5455",
+    "src/schubert-nk-storage/target/site/jacoco/jacoco.xml": "8aab7817e8e1f284d292c2910fe27cc5cc12bd828886f00b88f77d7aa966a78b",
+    "src/schubert-nk-bootstrap/target/site/jacoco/jacoco.xml": "5e2101689621bd96961d8b13eba147b617642f5eacf23e84f778bb5363d144fe",
+    "src/schubert-nk-api/target/site/jacoco/jacoco.xml": "1e249d057fc378b6cbd91dfd716e089e01a9486b74852563ee9dfc2ae560edca",
+    "src/schubert-nk-web/target/site/jacoco/jacoco.xml": "73746461fc76c4cb3e7c1a8b7765f0cd3baff9ef80bc5c791a8484e05054b8c7",
+    "src/schubert-nk-batch/target/site/jacoco/jacoco.xml": "ad5b24ce7bbf4f9baed54bb9d51580230c2ee03952cc297856ec4b4c8b32d4c6",
+    "pom.xml": "cc2623f61318995d2d15a55cef8ecf1a250827dc6de7d8b15a10423cbc45d134",
+    "tools/quality/bootstrap_ownership.py": "82e203fa10de1ce5d857be3238c004fc841220cacaea800b0c6d87df249925e1",
+    "tools/quality/019_test_evidence_set.py": "5ec8d0942e6eb0535358a27ad9cac131d6e624d08ddd3bfb49a4935f7766a2be"
+  }
+}

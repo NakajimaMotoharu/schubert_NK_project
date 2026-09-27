@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+import bootstrap_ownership
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -93,7 +94,9 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", base["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"],
                    cwd=repo, check=True, stdout=subprocess.DEVNULL)
-    target = repo / ("src/schubert-nk-storage/target" if args.inode_security else "src/schubert-nk-api/target")
+    shared = args.aes_credential or args.credential_access or args.credential_loader
+    target = repo / ("src/schubert-nk-storage/target" if args.inode_security else
+                     "src/schubert-nk-bootstrap/target" if shared else "src/schubert-nk-api/target")
     subject = "AuthenticationInboxInspector" if args.authentication else "InboxResponseInspector"
     if args.sql:
         subject = "InboxInspectionBoundary"
@@ -361,6 +364,14 @@ def main():
         "related": ["QA-046", "UIC-006", "SSC-049", "BUG-014", "YKT-012", "BUG-075", "YKT-067", "BUG-076", "YKT-068"],
         "files": [{"path": "results.xml", "sha256": hashlib.sha256((out / "results.xml").read_bytes()).hexdigest()}]
     }
+    if shared:
+        owned_sources = [bootstrap_ownership.source(repo, class_name, test=True),
+                         bootstrap_ownership.source(repo, package + subject),
+                         repo / "src/schubert-nk-bootstrap/pom.xml",
+                         repo / "tools/quality/bootstrap_ownership.py"]
+        manifest["sourceFiles"] = [{"path": str(p.relative_to(repo)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+                                   for p in owned_sources]
+        manifest["staticAnalysis"] = base["modules"]["bootstrap"]["spotbugs"]
     if args.authentication:
         manifest["related"] += ["PG-D-120", "BUG-077", "BUG-078", "YKT-069"]
     if args.sql:

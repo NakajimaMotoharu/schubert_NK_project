@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
+import bootstrap_ownership
 
 GROUPS = (
     ("dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest", 193,
@@ -79,14 +80,16 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-api/target"
-    methods = validate_reports([ET.parse(target / "surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
+    methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + bootstrap_ownership.owner(g[0], test=True)) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.application)
     coverage = {}
-    for cls in ET.parse(target / "site/jacoco/jacoco.xml").getroot().iter("class"):
-        name = cls.get("name")
-        if any(name == subject or name.startswith(subject + "$") for subject in subjects):
-            coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                              for c in cls.findall("counter")}
+    for subject in subjects:
+        module = bootstrap_ownership.owner(subject)
+        for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
+            name = cls.get("name")
+            if name == subject or name.startswith(subject + "$"):
+                coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
+                                  for c in cls.findall("counter")}
     if not set(subjects).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete inspector database coverage")
     evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
@@ -95,16 +98,18 @@ def main():
     for test_id, method in methods.items():
         ET.SubElement(sanitized, "testcase", id=test_id, classname=method.split("#")[0], name=method.split("#")[1], result="PASS")
     ET.ElementTree(sanitized).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
-    sources = [repo / "src/schubert-nk-api/src/main/java" / (name + ".java") for name in subjects]
-    sources += [repo / "src/schubert-nk-api/src/test/java" / (g[0].replace(".", "/") + ".java") for g in groups]
+    sources = [bootstrap_ownership.source(repo, name.replace("/", ".")) for name in subjects]
+    sources += [bootstrap_ownership.source(repo, g[0], test=True) for g in groups]
     sources += [repo / "src/schubert-nk-api/pom.xml",
-                repo / "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java"]
+                bootstrap_ownership.source(repo, "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest", test=True),
+                repo / "src/schubert-nk-bootstrap/pom.xml", repo / "tools/quality/bootstrap_ownership.py"]
     manifest = {key: verified[key] for key in ("runId", "targetCommit", "branch", "startedAt", "completedAt",
                  "exitCode", "command", "environment", "rawLogSha256")}
     manifest.update({
         "programId": "NK-DAT-001", "scopeResult": "PASS_DB_CREDENTIAL_AND_CONNECTION_ONLY", "programComplete": False,
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
         "staticAnalysis": verified["modules"]["api"]["spotbugs"],
+        "staticAnalysisByModule": {m: verified["modules"][m]["spotbugs"] for m in ("api", "bootstrap")},
         "fullReactorManifest": "../../../008_NK-SCN-001/evidence/manifest.json", "fullReactorManifestSha256": digest(full),
         "related": ["QA-046", "UIC-006", "SSC-049", "PG-D-142", "BUG-130", "BUG-131", "BUG-132", "BUG-133", "YKT-103", "YKT-104", "BUG-014", "YKT-012"],
         "fixture": "Public UTF8/byte/ACL vectors, retained temporary files and real channels with explicitly synthetic privileged metadata; isolated PostgreSQL18.6 SCRAM role with runtime CSPRNG password; public JDBC fault/ownership probes. No secret content or raw logs saved.",

@@ -101,7 +101,7 @@ final class ServiceDatabaseSourceTest {
     try (var source =
             new ServiceDatabaseSource(
                 ServiceConfigFiles.Service.API, url, fixturePassword(), connector);
-        var pool = new ApiJdbcPool().open(source)) {
+        var pool = physicalPool(source)) {
       var held = new ArrayList<Connection>();
       try {
         for (int i = 0; i < 8; i++) held.add(pool.getConnection());
@@ -113,6 +113,16 @@ final class ServiceDatabaseSourceTest {
       }
     }
     assertEquals(created.get(), admitted.get());
+  }
+
+  private static com.zaxxer.hikari.HikariDataSource physicalPool(javax.sql.DataSource source) {
+    // Independent real pool fixture. The Production API/Web pool configuration is tested there.
+    var config = new com.zaxxer.hikari.HikariConfig();
+    config.setDataSource(source);
+    config.setMaximumPoolSize(8);
+    config.setMinimumIdle(2);
+    config.setConnectionTimeout(3_000);
+    return new com.zaxxer.hikari.HikariDataSource(config);
   }
 
   @Test

@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC084/PG289: `src/schubert-nk-bootstrap`を共用起動libraryとしてStorageの後、API/Webの前へ追加する。固定資格情報のstrict material/保持inode読取と固定role JDBC admission/sourceだけを移動し、HTTP/JMS/業務repository/process entry/DDLは含めない。API/Webはbootstrapを参照でき、bootstrapはStorageだけを内部依存とする（JDBCはJDK、PostgreSQL driverはruntime）。Storageのnative-only/no-JDBCとWeb→業務API依存禁止は維持する。移動対象11classの既存api.* package/binary名は互換名として保持し、artifactのAPI依存を意味しない。対象と試験owner/再検証方針は473、SSC084へ追跡。RequiredColumnは業務APIに残し、bootstrap DB admissionはそのSQL NULL拒否を自身の固定08001契約で扱う。秘密/権限/外部画面仕様は変更しない。
+
 SSC062/PG169: .batch.file.BackupManifestReaderはSS341§6.7のroot MANIFEST保持inode読取りを所有し、constructor/read・metadata/bounded IO/safe close/clockを017046・047/BAT226～241へ追跡する。callerの原本両handle/name照合、root/child/entry前後検査までを担い、任意root侵害、root生成/実3archive/DB成功/7世代/親OS寿命は保証しない。依存は既存Batch/Storage/Java標準、PG168正式12中は設計のみ先行。
 
 SSC060/PG167: Batch .platform.InspectorUnitSnapshot（固定18property/値/必要終端条件/fresh receipt）とInspectorUnitProbe（固定show・GetUnitProcesses・同状態照合/所有stdio/固定例外）を追加予定。既存API/Web停止確認とは用途を分離し、start/stop/親callback/OS lockを所有しない。全public/private method・native helperはOPS009/UI251/SS341 §7.4・343/018021～024・PT-OPS-UNIT-001～016へ対応。依存は既存Batch/Java標準のみ、systemd設定そのものの変更は含まない。

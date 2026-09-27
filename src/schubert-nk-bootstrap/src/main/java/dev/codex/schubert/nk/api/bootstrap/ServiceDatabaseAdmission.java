@@ -1,7 +1,5 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
-
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -47,10 +45,10 @@ public final class ServiceDatabaseAdmission {
       try (var statement = connection.prepareStatement(SQL);
           var rows = statement.executeQuery()) {
         if (!rows.next()
-            || !role.equals(requireValue(rows.getString("effective_role")))
-            || !role.equals(requireValue(rows.getString("login_role")))
-            || !database.equals(requireValue(rows.getString("database_name")))
-            || requireValue(rows.getObject("recovery", Boolean.class))
+            || !role.equals(required(rows.getString("effective_role")))
+            || !role.equals(required(rows.getString("login_role")))
+            || !database.equals(required(rows.getString("database_name")))
+            || required(rows.getObject("recovery", Boolean.class))
             || rows.next()) throw unavailable();
       }
     } catch (SQLException failure) {
@@ -61,5 +59,10 @@ public final class ServiceDatabaseAdmission {
   private static SQLException unavailable() {
     return new SQLNonTransientConnectionException(
         "service database connection unavailable", "08001");
+  }
+
+  private static <T> T required(@org.jspecify.annotations.Nullable T value) throws SQLException {
+    if (value == null) throw unavailable();
+    return value;
   }
 }

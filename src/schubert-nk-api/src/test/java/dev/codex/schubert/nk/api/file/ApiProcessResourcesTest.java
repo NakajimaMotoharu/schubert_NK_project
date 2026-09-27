@@ -76,6 +76,12 @@ final class ApiProcessResourcesTest {
             credentialsRef.set(credentials);
             assertEquals(8, poolRef.get().getMaximumPoolSize());
             assertEquals(2, poolRef.get().getMinimumIdle());
+            assertThrows(
+                NullPointerException.class,
+                () -> ApiProcessResources.unassembledStartup().run(null, credentials));
+            assertThrows(
+                NullPointerException.class,
+                () -> ApiProcessResources.unassembledStartup().run(pool, null));
             try (var connection = pool.getConnection();
                 var statement = connection.createStatement();
                 var rows = statement.executeQuery("select current_user::text")) {
@@ -99,6 +105,12 @@ final class ApiProcessResourcesTest {
       ServiceCredentialSetTest.assertCleared(io);
       boolean directoryExists = fixture.held.atDirectory(path -> Files.isDirectory(path));
       assertTrue(directoryExists);
+      // Valid acquired materials/pool must never make the unfinished native assembly accepting.
+      // This tests the production refusal through the real owned scope, not a readiness fixture.
+      assertThrows(
+          StorageIoException.class,
+          () -> runtime.execute(ApiProcessResources.unassembledStartup()));
+      ServiceCredentialSetTest.assertCleared(io);
     }
   }
 

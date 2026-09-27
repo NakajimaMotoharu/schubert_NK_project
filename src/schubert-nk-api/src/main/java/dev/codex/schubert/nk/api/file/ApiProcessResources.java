@@ -50,6 +50,15 @@ public final class ApiProcessResources {
     void run(DataSource pool, ServiceCredentialSet credentials) throws IOException;
   }
 
+  /** Safe interim production state: all owned acquisitions must still close on this refusal. */
+  public static Operation unassembledStartup() {
+    return (pool, credentials) -> {
+      Objects.requireNonNull(pool, "database pool");
+      Objects.requireNonNull(credentials, "service credentials");
+      throw new IOException("API mandatory startup assembly unavailable");
+    };
+  }
+
   public ApiProcessResources(ApiStartupInputs.Values inputs) {
     this(
         Objects.requireNonNull(inputs, "startup inputs"),

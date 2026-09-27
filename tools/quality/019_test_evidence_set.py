@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """PT-QA-TRACE-002/003 independent inventory/run/failure canaries; no production secrets."""
 import copy
+import ast
 import hashlib
 import importlib.util
 import json
@@ -12,6 +13,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 sys.dont_write_bytecode = True
+import bootstrap_ownership
 
 
 def module(name, file):
@@ -2322,8 +2324,8 @@ class EvidenceSetTest(unittest.TestCase):
                         "opsApiRes005NullAndNativeFactoryBoundaries", "opsApiRes006IndependentConcurrentScopes")))
         self.assertEqual(groups, list(launch.DEPLOYMENT_GROUPS))
         for cls, _, _ in groups:
-            expected_module = cls.split(".")[4]
-            self.assertIn(expected_module, ("api", "web", "batch", "storage"))
+            expected_module = bootstrap_ownership.owner(cls, test=True)
+            self.assertIn(expected_module, ("api", "web", "batch", "storage", "bootstrap"))
             self.assertEqual(expected_module, launch.module_for(cls))
         for cls in ("dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest",
                     "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest"):
@@ -2708,6 +2710,47 @@ class EvidenceSetTest(unittest.TestCase):
                 ET.SubElement(wrong[0], kind)
             with self.assertRaises(ValueError):
                 batch.validate_suite(wrong)
+
+    def test_collector_manifest_is_constructed_before_subscript_metadata_updates(self):
+        def check(source):
+            tree = ast.parse(source)
+            main = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "main")
+            allocations = [n.lineno for n in ast.walk(main) if isinstance(n, ast.Assign)
+                           and any(isinstance(t, ast.Name) and t.id == "manifest" for t in n.targets)]
+            accesses = [n.lineno for n in ast.walk(main) if isinstance(n, ast.Subscript)
+                        and isinstance(n.value, ast.Name) and n.value.id == "manifest"]
+            if not allocations or (accesses and min(accesses) < min(allocations)):
+                raise ValueError("manifest metadata precedes construction")
+        for name in ("006_collect_scenario_evidence.py", "016_collect_inbox_inspection_evidence.py",
+                     "021_collect_inspector_database_evidence.py", "022_collect_inspector_launch_evidence.py"):
+            check(Path(__file__).with_name(name).read_text())
+        check("def main():\n    manifest = {}\n    manifest['owner'] = 'bootstrap'\n")
+        with self.assertRaisesRegex(ValueError, "precedes"):
+            check("def main():\n    manifest['owner'] = 'bootstrap'\n    manifest = {}\n")
+
+    def test_bootstrap_artifact_ownership_is_explicit_and_has_no_duplicate_source(self):
+        repo = Path(__file__).resolve().parents[2]
+        expected_main = {
+            "file.InspectorCredentialLoader", "file.ServiceCredentialReader", "file.ServiceCredentialSet",
+            "file.ServiceCredentialException", "file.InspectorCredentialException", "file.AesCredentialFile",
+            "maintenance.InspectorAesCredential", "maintenance.InspectorDbCredential",
+            "maintenance.InspectorCredentialAccess", "bootstrap.ServiceDatabaseAdmission", "bootstrap.ServiceDatabaseSource"}
+        self.assertEqual({"dev.codex.schubert.nk.api." + s for s in expected_main},
+                         set(bootstrap_ownership.BOOTSTRAP_MAIN))
+        for name in bootstrap_ownership.BOOTSTRAP_MAIN:
+            source = bootstrap_ownership.source(repo, name)
+            self.assertTrue(source.is_file())
+            self.assertEqual("bootstrap", bootstrap_ownership.owner(name.replace(".", "/") + "$Nested"))
+            self.assertFalse((repo / "src/schubert-nk-api/src/main/java" / (name.replace(".", "/") + ".java")).exists())
+        for name in bootstrap_ownership.BOOTSTRAP_TEST:
+            self.assertTrue(bootstrap_ownership.source(repo, name, test=True).is_file())
+            self.assertEqual("bootstrap", launch.module_for(name))
+        for name, expected in (("api.file.ApiProcessResources", "api"), ("api.bootstrap.ApiProcessMain", "api"),
+                               ("web.bootstrap.WebProcessMain", "web"), ("storage.ServiceConfigFiles", "storage")):
+            self.assertEqual(expected, bootstrap_ownership.owner("dev.codex.schubert.nk." + name))
+        for wrong in ("", "InspectorCredentialLoader", "dev.codex.schubert.nk.bootstrap.Unknown"):
+            with self.assertRaises(ValueError):
+                bootstrap_ownership.owner(wrong)
 
     def test_shared_package_and_exact_method_ownership(self):
         prefix = "dev.codex.schubert.nk.api.file."
