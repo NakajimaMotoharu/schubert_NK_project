@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC094/PG311 接続順補足: reboot後morningと05:00 update/rebootを混在させない。新runはM内で専用db-batch admission/session advisory/全3参照不存在確認後に原本startする。resumeは原本照合先行可。固定Caddy→Web→API→Artemis停止と前回backup/Inspector/cleanup/Expiryの全cgroup終端確認、A取得後のfresh再確認、current INVALIDを経て、両backup step beginを同transactionでcommitしてからworker request公開/起動する。PostgreSQLはmorning先頭依存でありこの停止対象ではない。root credential/専用DB契約は343 §6.15。schema/release/BOM未達の限定接続をProduction受入・backup成功・permitへ読み替えない。
+
 ## 1. 目的・追跡
 
 毎日05:00 JSTの計画停止、package update、OS reboot、DB/config backup、条件付き業務data削除、

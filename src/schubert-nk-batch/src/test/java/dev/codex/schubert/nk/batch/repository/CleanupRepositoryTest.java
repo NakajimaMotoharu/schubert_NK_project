@@ -483,13 +483,17 @@ final class CleanupRepositoryTest {
     java.util.function.Predicate<String> allowedImport =
         name ->
             !name.matches("dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*")
-                || (name.equals("dev.codex.schubert.nk.api.file.InspectorCredentialLoader")
+                || (Set.of(
+                            "dev.codex.schubert.nk.api.file.InspectorCredentialLoader",
+                            "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential")
+                        .contains(name)
                     && Files.isRegularFile(
                         repo.resolve(
                             "src/schubert-nk-bootstrap/src/main/java/"
                                 + name.replace('.', '/')
                                 + ".java")));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.file.InspectorCredentialLoader"));
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.api.maintenance.InspectorDbCredential"));
     for (var forbidden :
         List.of(
             "dev.codex.schubert.nk.api.file.AssetResolver",

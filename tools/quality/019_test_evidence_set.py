@@ -1260,7 +1260,7 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): launch.validate_postgres_traces(wrong)
 
     def test_batch_reactor_gate(self):
-        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 484}}}
+        verified = {"runId": "PT-WEB-fixture", "exitCode": 0, "modules": {"batch": {"tests": 500}}}
         batch.validate_reactor(verified, "PT-WEB-fixture")
         for count in (0, 327, 343, 359, 366, 367, 369, 404, 419, 421):
             wrong = copy.deepcopy(verified); wrong["modules"]["batch"]["tests"] = count
@@ -2337,6 +2337,8 @@ class EvidenceSetTest(unittest.TestCase):
         groups.append(("dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest", 1, ("literalCreationErasureAndBorrowing", "boundaryAndNullContracts", "metadataSecurityAndNamespace", "everyIoPositionAndProgress", "callbackFailureAndRetainedCapability", "erasureAndNameBindings", "repeatedCollisionAndConcurrentRoots", "nativePrivateTmpfsPublicBytes")))
         groups.append(("dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest", 1, ("literalCanonicalAndIndependentDirectory", "dateAndMicroBoundaries", "everyNullAndValueInvariant", "missingExtraAndFixedFieldOrder", "asciiAndBoundedBytes", "uuidAndTimestampNoncanonical", "ownedByteMutationDoesNotMutateRecord", "concurrentIndependentConsumption")))
         groups.append(("dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest", 1, ("bterm001ColdAndPresentStableNamespace", "bterm002EveryPlacementByteAndField", "bterm003EveryMetadataAndFilesystemCondition", "bterm004MissingOnlyAtExactLeafAndDriftRefused", "bterm005AllAcquisitionIoUnknownAndCloseCompounds", "bterm006InterruptAndIndependentParallelInstances", "bterm007FixedQueryProjectionAndNioPort", "bterm008MorningContextAndNativeFactoryFailClosed")))
+        groups.append(("dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest", 1, ("literalUtf8AndOwnedBuffers", "nullAndFixedName", "everyMetadataAndPolicyBoundary", "allIoAndUnknownPositionsCloseExactlyOnce", "progressSizeAndIndependentCodecNegatives", "mutationAndInterruption", "sharedOwnerConcurrentIndependentMaterial", "nativePortPublicFileOnlyAndWrongActor")))
+        groups.append(("dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest", 1, ("fixedUrlRootConstructorAndNullContracts", "literalAdmissionAndSessionLifetime", "roleRecoveryNullAndLockRejections", "allAdmissionResourceFailuresAndUnknownIdentity", "compoundUnknownAndNullMethodBoundaries", "interruptionAndForeignThreadCannotUseBorrowedSession", "actualBothBackupBeginsAreCommittedTogether", "actualCommitAmbiguityNeverReturnsHandles")))
         groups.append(("dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest", 1, ("literalPublicationReadAndRetirement", "nullActorAndPrivateMetadata", "collisionMissingAndFixedNameOnly", "allIoPositionsAndProgress", "sourceCanonicalAndOriginalBinding", "unknownCompoundAndInterrupt", "parallelBorrowedScopesAndNoRepair", "namespaceReadAndRetireUncertainty")))
         groups.append(("dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest", 1, ("literalRequestDumpAndFullClose", "selfAndUnitAdmissionBeforePrivateIo", "nullBoundariesAndSecretOwnerBeforeAcquisition", "rootMetadataAndOutputBinding", "everyAcquisitionIoAndUnknownFailureCloses", "postconditionsAndCompoundCloseFailure", "newOnlyReplayAndIndependentParallelJobs", "fixedNativeEntryRefusalAndRedactedDiagnostic")))
         groups.append(("dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest", 1, ("literalAndOwnedCopy", "boundedSource", "fixedNameMissingAndNoFallback", "everyIoFailureClears", "namespaceAndSecurityFailures", "symlinkAndHardLinkRefused", "closeFailureAndNullContracts", "independentConcurrentCopies")))
@@ -2378,6 +2380,8 @@ class EvidenceSetTest(unittest.TestCase):
                        "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest": "PT-OPS-DBCP",
                        "dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest": "PT-OPS-BREQ",
                        "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest": "PT-OPS-BTERM",
+                       "dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest": "PT-OPS-RBCR",
+                       "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest": "PT-OPS-MDB",
                        "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest": "PT-OPS-BREQFILE",
                        "dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest": "PT-OPS-BWORK",
                        "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest": "PT-OPS-BREQUESTCRED",
@@ -2689,7 +2693,7 @@ class EvidenceSetTest(unittest.TestCase):
         self.assertEqual(reader_expected, {k: v for k, v in accepted.items() if k in reader_expected})
         self.assertEqual(287, len(accepted))
         batch_ops = sum(len(names) for cls, _, names in launch.DEPLOYMENT_GROUPS if ".nk.batch." in cls)
-        self.assertEqual(197, batch_ops)  # PG310: eight fixed root backup termination PT.
+        self.assertEqual(213, batch_ops)  # PG311: sixteen root credential / dedicated DB session PT.
         self.assertEqual(batch.BATCH_TEST_COUNT, len(accepted) + batch_ops)
         for service in (False, True):
             _, pair_expected = self.pair_fixture(service)

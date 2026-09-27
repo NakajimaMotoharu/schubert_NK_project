@@ -1,0 +1,447 @@
+{
+  "format": "PGPT-PROVISIONAL1",
+  "unit": "PG311",
+  "acceptedFormal": false,
+  "formalUnchanged": {
+    "source": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+    "run": "PT-WEB-20260925-24",
+    "tests": 1964,
+    "scopes": 53,
+    "progressCenter": 48.3
+  },
+  "source": {
+    "branch": "dev-foundation",
+    "baseCommit": "8c6d665f814cf9f22dda2eb1ed2279af7fff05b2",
+    "dirty": true,
+    "srcToolsPomFiles": 1159,
+    "inventorySha256": "6163aa46a25538e46daecee7ee567caee3c9eae326018e6a26ee7bf474486a2c"
+  },
+  "host": {
+    "os": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "postgresqlFixture": "18",
+    "staticAnalysis": {
+      "NullAwayCompile": 0,
+      "SpotBugs": 0
+    }
+  },
+  "selectedRun": {
+    "exitCode": 0,
+    "finished": "2026-09-28T01:57:50+09:00",
+    "tests": 41,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "module": "storage",
+        "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "xmlSha256": "77d046c671b4616e1acf9cf2bf242b31be8cb45622bcf53d127109af233ea412",
+        "methods": [
+          "f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
+          "a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
+          "f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
+          "bug036CallerMonitorCannotBlockAnyDirectoryOperation",
+          "f02ExistingDateIndependentChildLifetimeAndSafeIoFailures",
+          "med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+          "rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation",
+          "med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+          "a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel",
+          "w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly",
+          "f02RejectsNullRelativeRootDotSegmentsAndInvalidDates",
+          "a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths",
+          "w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite",
+          "rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything",
+          "f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight",
+          "f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd"
+        ]
+      },
+      {
+        "module": "bootstrap",
+        "class": "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "xmlSha256": "abd84dbdf5b18b504ae2f1ab05588260d4e9e95f9f1781622f19a4944c4b5d49",
+        "methods": [
+          "namespaceAndSecurityFailures",
+          "boundedSource",
+          "closeFailureAndNullContracts",
+          "literalAndOwnedCopy",
+          "fixedNameMissingAndNoFallback",
+          "independentConcurrentCopies",
+          "symlinkAndHardLinkRefused",
+          "everyIoFailureClears"
+        ]
+      },
+      {
+        "module": "batch",
+        "class": "dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "xmlSha256": "f6270053956d0b757eba8376338d6b450e8dfa5a746535042f31615e4a5158dc",
+        "methods": [
+          "everyMetadataAndPolicyBoundary",
+          "literalUtf8AndOwnedBuffers",
+          "nullAndFixedName",
+          "allIoAndUnknownPositionsCloseExactlyOnce",
+          "sharedOwnerConcurrentIndependentMaterial",
+          "nativePortPublicFileOnlyAndWrongActor",
+          "mutationAndInterruption",
+          "progressSizeAndIndependentCodecNegatives"
+        ]
+      },
+      {
+        "module": "batch",
+        "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "xmlSha256": "bdd1157ec49e543e163e5e9ff9e4a4d4a2555e5a06ff4fb1034907b8de205ab5",
+        "methods": [
+          "allAdmissionResourceFailuresAndUnknownIdentity",
+          "interruptionAndForeignThreadCannotUseBorrowedSession",
+          "fixedUrlRootConstructorAndNullContracts",
+          "actualBothBackupBeginsAreCommittedTogether",
+          "actualCommitAmbiguityNeverReturnsHandles",
+          "literalAdmissionAndSessionLifetime",
+          "roleRecoveryNullAndLockRejections",
+          "compoundUnknownAndNullMethodBoundaries"
+        ]
+      },
+      {
+        "module": "batch",
+        "class": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "xmlSha256": "ac8a3aea02e28665ca9ad9da4ea9f9954fd2c342977e88b72283ecbeddfc856c",
+        "methods": [
+          "moduleDependencyBoundary"
+        ]
+      }
+    ],
+    "newSubjects": [
+      {
+        "class": "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession",
+        "classByteSha256": "914cee359b5db30a0cad49e1db52ea592dedd5d934ad92ce625613d821a46ff3",
+        "sameNativeJarByte": true,
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "424"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "52"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "110"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "42"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "16"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "1"
+          }
+        ]
+      },
+      {
+        "class": "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$BackupBegins",
+        "classByteSha256": "f9d57a7d7fdc969d223e64ef8646aa90f80bed84f592e781867916c68e8954e5",
+        "sameNativeJarByte": true,
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "17"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "4"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "1"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "1"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "1"
+          }
+        ]
+      },
+      {
+        "class": "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Session",
+        "classByteSha256": "bfb635e89f1a844044f5f8bf766506fc0cac5fb16c0eebc254a716272c530d5b",
+        "sameNativeJarByte": true,
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "100"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "6"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "25"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "7"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "4"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "1"
+          }
+        ]
+      },
+      {
+        "class": "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader$NativeIo",
+        "classByteSha256": "17a38dfe3ef17ff393b2cbfe5b18595133f2993683aa2856119cbda509b0e98a",
+        "sameNativeJarByte": true,
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "22"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "4"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "4"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "4"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "1"
+          }
+        ]
+      },
+      {
+        "class": "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader",
+        "classByteSha256": "f6c5977d7f4e67be210a8c54431928f661fae8f3577db7eb91c097436c932f3c",
+        "sameNativeJarByte": true,
+        "counters": [
+          {
+            "type": "INSTRUCTION",
+            "missed": "0",
+            "covered": "321"
+          },
+          {
+            "type": "BRANCH",
+            "missed": "0",
+            "covered": "56"
+          },
+          {
+            "type": "LINE",
+            "missed": "0",
+            "covered": "48"
+          },
+          {
+            "type": "COMPLEXITY",
+            "missed": "0",
+            "covered": "36"
+          },
+          {
+            "type": "METHOD",
+            "missed": "0",
+            "covered": "8"
+          },
+          {
+            "type": "CLASS",
+            "missed": "0",
+            "covered": "1"
+          }
+        ]
+      }
+    ],
+    "hostXmlSha256": "ef6e62c52bc0a180a27b16e296440f87ca03e1ea8ced90156ec4ab2ef0d7c57f",
+    "nativeMergedXmlSha256": "058d7005d4c75a4641aaf4b835d1d960ff87d302ff35f76cce588acb7e80c727",
+    "hostExecSha256": "e63fb01b96f7fd35521b69fa79ac64e081511c8214144213f822d6c79bc2ed11",
+    "nativeExecSha256": "5bde7ba503efc4642c1caf0f8a15ce2d69e2c2d48e5d17a929bf16651a7c5b54",
+    "mergedExecSha256": "7a64023e6d69354c3aa172e630546701fbf838ba5152ad9dc68c1a66d1575f91"
+  },
+  "native": {
+    "executedAt": "2026-09-27T16:59:42+00:00",
+    "kernel": "Linux 7.0.0-31-generic x86_64",
+    "jdk": "openjdk 25.0.4 2026-07-21",
+    "testId": "PT-OPS-NATIVE-027",
+    "vmOnly": true,
+    "actualRootM": true,
+    "actualRootLoadCredential": true,
+    "fixedRoleAdvisoryLegacyCheck": true,
+    "durablePendingOriginal": true,
+    "dbBackupBegins": false,
+    "fullSchemaBomAdmission": false,
+    "fullParentBackup": false,
+    "fullBusinessGate": false,
+    "stopped": true,
+    "pidAndCgroupAbsent": true,
+    "batchJarSha256": "5716591a73c0c0c6e501556308b14083bbadf74db32a0006e0fa4714ccd15724",
+    "unitSha256": "af2ab922fea9982b282ebc32f1865a9c5529570d38c1fa5321e1ff1a9242bb85",
+    "originalHashes": {
+      "anchor": "d149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63",
+      "activeAndBegin": "934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1"
+    },
+    "secretSourceValuesSavedToGit": false
+  },
+  "executionCommand": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch -am '-Dtest=RootBatchCredentialReaderTest,MorningDatabaseSessionTest,CleanupRepositoryTest#moduleDependencyBoundary,OwnedTransferDirectoryTest,BackupRequestCredentialLoaderTest' clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "nativeCoverageCommand": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch -Djacoco.dataFile=/home/mini/codex/project1/work/pgpt-vm/private/PG311/merged.exec org.jacoco:jacoco-maven-plugin:0.8.15:report",
+  "next": {"resumeRun":"31100027-2222-4333-8444-555555555555","activation":"31100027-6666-4777-8888-999999999999","cutoff":"2026-09-27T15:00:00Z","mode":"explicit resume only; do not start again or invent completion","schemaBomPending":true},
+  "canary": {
+    "count": 105,
+    "exitCode": 0
+  },
+  "bugs": [
+    "BUG-279",
+    "BUG-280",
+    "BUG-281",
+    "BUG-282"
+  ],
+  "crossExpansion": [
+    "YKT-212",
+    "YKT-213",
+    "YKT-214",
+    "YKT-215"
+  ],
+  "ssc": [
+    "SSC-094"
+  ],
+  "logs": [
+    {
+      "path": "/tmp/PG311-root-db-1.log",
+      "sha256": "4ef5f9d0b51bcf0366f6fa04eee1cfce97580fb36668f1859a8d89da2d114843"
+    },
+    {
+      "path": "/tmp/PG311-root-db-2.log",
+      "sha256": "7697febf49c951faf657b1564c8fec5b716e72e422dbd6e883e52bc056f4f407"
+    },
+    {
+      "path": "/tmp/PG311-root-db-3.log",
+      "sha256": "fff7af2e7134a2e8c33ea97a4b3a1a3ed2cdd5767340c2599d4e15ffaa52bb89"
+    },
+    {
+      "path": "/tmp/PG311-root-db-4.log",
+      "sha256": "59645f49a964c85544d58408cd4c9fa81e2f5092303a20f06bd5cf4129d7c102"
+    },
+    {
+      "path": "/tmp/PG311-root-db-5.log",
+      "sha256": "3bd1b4f348620de41ae49f10e8786580fabdc52b3c8b6ce82d0ac1ee20fbc416"
+    },
+    {
+      "path": "/tmp/PG311-canary-1.log",
+      "sha256": "228c88b4509a4b680f560c15278a511aed504f0d487aaf65fe17af703c0a325b"
+    },
+    {
+      "path": "/tmp/PG311-native-merged-report.log",
+      "sha256": "207b79d14c7100f98e974f3efa0a21de28eaccd63a6df0e877beb7a1bc50a200"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-vm/private/PG311-native-root-run-027.log",
+      "sha256": "873c8328ac5707669fde8a507cfa252dcb720814549b1b87ff2d0b2ae04831e1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-vm/private/PG311-native-root-run-027-observed.log",
+      "sha256": "7443da1d11852ad88b05f6b4989dca3f77c2aae2d184b940f179135c3b5e31a2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-vm/private/PG311-native-root-run-027-stopped.log",
+      "sha256": "5f7caf75e0739663ea73acb3c636df4ce78dadbdbef78a1f7729c799f3ed1260"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-vm/private/PG311-native-root-run-027-postconditions.log",
+      "sha256": "5568813d39ab7c6dabf7a8cd520c6bb0806bd63d1d08890b8c0124bb715dfa73"
+    }
+  ],
+  "failedAttempts": [
+    {
+      "run": 1,
+      "stage": "main compile",
+      "exitCode": 1
+    },
+    {
+      "run": 2,
+      "stage": "test compile",
+      "exitCode": 1
+    },
+    {
+      "run": 3,
+      "stage": "test",
+      "failed": 5,
+      "exitCode": 1
+    },
+    {
+      "nativeHelperCompile": 1,
+      "reason": "MaintenanceRunState accessor",
+      "exitCode": 1
+    },
+    {
+      "nativeMetadataSql": 1,
+      "reason": "escaped SQL literal syntax",
+      "accepted": false
+    }
+  ],
+  "notExecuted": [
+    "fullProductionRegression2145",
+    "fullSchemaBOM",
+    "morningAllStopsAndINVALID",
+    "rootBackupBeginsWorkerBundleRetention",
+    "realBusinessR2",
+    "realCHR-R3",
+    "formalAllScopeAcceptance"
+  ]
+}

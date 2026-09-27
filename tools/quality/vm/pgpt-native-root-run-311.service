@@ -1,0 +1,26 @@
+[Unit]
+Description=Isolated PGPT NATIVE027 root M DB and original connection only
+After=postgresql.service
+[Service]
+Type=oneshot
+User=root
+Group=root
+RemainAfterExit=yes
+Restart=no
+UMask=0077
+RuntimeDirectory=schubert-nk-morning-probe
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+KillMode=control-group
+SendSIGKILL=no
+TimeoutStartSec=60
+TimeoutStopSec=60
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_SYS_PTRACE
+ProtectSystem=full
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_UNIX AF_INET
+LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch
+ExecStart=/opt/jdk-25.0.4/bin/java -javaagent:/opt/pgpt-native/PG311/jacoco-agent.jar=destfile=/run/schubert-nk-morning-probe/morning.exec,append=false --enable-native-access=ALL-UNNAMED -cp /opt/pgpt-native/PG311/classes:/opt/pgpt-native/PG311/batch.jar:/opt/pgpt-native/PG309/bootstrap.jar:/opt/pgpt-native/classes:/opt/pgpt-native/lib/* NativeRootMorningRunProbe

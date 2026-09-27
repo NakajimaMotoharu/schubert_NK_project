@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG311追加（SSC094、限定）: NK-OPS-001 RootBatchCredentialReader.read/inspect/NativeIo→RD DAT009/OPS009・UI251・SS341/3436.15・PT-OPS-RBCR001～008/018144。NK-BAT-001/NK-OPS-001 MorningDatabaseSession.execute/Session.requireUnused/beginBackup/BackupBegins→同RD/UI/SS・PT-OPS-MDB001～008/018145。結果018146/provisional PG311、新16＋関連25PT/static0/new5class4coverage100%（host＋samebyte native027）、独立SQL両RUNNING/commit不明0・2row。native027 rootDB参照→永続原本pendingのみ、schema/BOM/全停止/current/実backup/業務/CHRは未受入。
+
 PG310: NK-OPS-001 RootStartupContext.MORNING/capture/recheck→ROOTCTX001/BTERM008、BackupUnitTermination.create/quiescent/check/namespace/identity/placement・全nested owner/native query→PT-OPS-BTERM001～008/native026。SYS002/004・OPS009・BAK/BKO/UI251/SS3415/343/SSC093、BUG277278/YKT210211、018141/143/provisional PG310。新class全counter0/24主関連＋24依存PT・静的0/105canary・実固定root M/A/cold Unit観測限定成功。DB/原本/current/worker controller/全backup/業務R2R3未接続、正式認定不変更。
 
 PG309: NK-OPS-001 BackupWorkerRequest→BREQ001～008、BackupWorkerRequestFiles→BREQFILE001～008、BackupDatabaseWorker.execute/admit/metadata/NativePorts/main→BWORK001～008/native025、InspectorCredentialLoader.readBackupRequest→BREQUESTCRED001～008、FixedServiceIdentity.resolveBackup→SERVICEID001、InspectorUnitSnapshot.Target/running・Probe.forTarget→UNIT001～016。BAK/BKO/OPS009/UI251/SS3416.1/3436.6/SSC092、BUG272～275/YKT206～208、018138/139/provisional PG309。限定＋実固定Unit worker成功、親M/A/fullbackup/security全回帰/業務main/CHR未受入。

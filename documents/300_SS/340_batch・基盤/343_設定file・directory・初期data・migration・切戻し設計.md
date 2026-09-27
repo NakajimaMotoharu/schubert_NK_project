@@ -403,6 +403,8 @@ PT-BAT-046～057/017の009・010はliteral72/109/140/141byteと実隔離inode/na
 
 ### 6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）
 
+SSC094/PG311 root morning接続補足: fresh runはM→専用db-batch接続/実role・RW・ReadCommitted/session advisory71419602→全3参照不存在照会→原本startの順とする。DB不通/不明を不存在として原本を生成しない。resumeは既存原本を先に照合できる。root専用LoadCredentialは固定 `/run/credentials/schubert-nk-morning-controller.service/db-batch`、root:root0500 directory/0400 single-linked file、readonly tmpfs・ACLなし・保持inode前後同一・同device・1～65536byteを必須とし、既存UTF8 password codecへ所有byteを消去付きで渡す。systemd配置の実属性は隔離VMのpublic材料によるmetadata試験で確認、secretを出力しない。既存非root credential policyをroot許容へ変更しない。非pool専用connectionは固定loopback `schubert_nk`、current_user=session_user=`schubert_batch`、非recovery/RW/ReadCommittedを接続ごとに確認し、session advisory排他をcloseまで保持する。BACKUP_DB/CONFIG両beginは同transaction・同runでcommitし、不確定commitではworker0回。callback/row/statement/connection所有と例外合成を明示し、null/未知を正常化しない。schema historyの既存batch読取権限はないのでfallbackを禁止し、限定投影/full release期待値との照合を完成Assembly前提として継続実装する。限定DB接続はschema admission完了ではない。
+
 SSC055/PG159追補（先行4c5dcb85）: 新run start前のDB既存ID確認とresume整合・GC同run参照は331 §3.12/332の限定readを使用する。親がOS/DB排他を維持して全3参照0/identity整合を確認し、DB不通/不明/nullを不存在扱いしない。原本なしlegacyはprogressから復元しない。GCはread成功だけで開始せず、既定400日/全activation完了/marker確定の全条件を別途満たす。RunReferenceRepositoryの実装・単体合格は親/GC実装の完了を意味しない。
 
 BUG159/YKT124（先行12446fed）: 再開は既存byteの可視性だけを成功条件にしない。全graph/対象条件を検証した後、選択runのanchor→対象begin→既done（存在時）→active（存在時）の順に同byte force/dir syncで再確定してから、active再利用結果を返す。activeなしresumeはanchorを再同期し、未完了beginならそれも再同期、新beginなら新規公開し、最後にactiveを公開する。completeはanchor→begin→active（存在時）を再同期した後、同値確認済みdoneを新規公開または再同期し、active退役・不存在を含めた親dir syncを確定する。全force/syncの失敗・null part supplierは非成功とし、前回の未確定commitをsuccessへ変換しない。byte/UUID/cutoff/mtimeは変更せず、全graphの期待値を再照合する。

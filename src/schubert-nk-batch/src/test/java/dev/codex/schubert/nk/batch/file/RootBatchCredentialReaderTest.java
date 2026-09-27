@@ -1,0 +1,325 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** RBCR001..008. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
+final class RootBatchCredentialReaderTest {
+  @TempDir Path temporary;
+
+  private BackupPublicationFixture fixture() throws Exception {
+    var f = new BackupPublicationFixture(temporary);
+    f.readonly = true;
+    f.metadata =
+        (role, m) -> {
+          m.put("uid", 0);
+          m.put("gid", 0);
+          m.put("mode", role.equals("parent") ? 040500 : 0100400);
+        };
+    Files.writeString(f.parent.resolve("db-batch"), "PUBLIC_é\n");
+    return f;
+  }
+
+  private RootBatchCredentialReader reader(BackupPublicationFixture f) {
+    return new RootBatchCredentialReader(
+        f.root,
+        f,
+        new RootBatchCredentialReader.Io() {
+          public Map<String, Object> attributes(Path p) throws IOException {
+            return f.attributes(p);
+          }
+
+          public String filesystem(Path p) {
+            return f.filesystem(p);
+          }
+
+          public java.nio.channels.SeekableByteChannel open(Path p) throws IOException {
+            return f.open(p);
+          }
+        });
+  }
+
+  private void success(BackupPublicationFixture f) throws Exception {
+    try (var c = reader(f).read()) {
+      char[] password = c.copyPassword();
+      try {
+        assertArrayEquals("PUBLIC_é".toCharArray(), password);
+      } finally {
+        Arrays.fill(password, '\0');
+      }
+    }
+    f.released();
+  }
+
+  @Test
+  void literalUtf8AndOwnedBuffers() throws Exception {
+    try (var f = fixture()) {
+      f.chunk = 2;
+      success(f);
+      assertTrue(f.counts.get("read") > 1);
+    }
+    for (int size : List.of(1, 65536))
+      try (var f = fixture()) {
+        Files.write(
+            f.parent.resolve("db-batch"), "P".repeat(size).getBytes(StandardCharsets.UTF_8));
+        try (var c = reader(f).read()) {
+          char[] p = c.copyPassword();
+          assertEquals(size, p.length);
+          assertEquals('P', p[size - 1]);
+          Arrays.fill(p, '\0');
+        }
+        f.released();
+      }
+  }
+
+  @Test
+  void nullAndFixedName() throws Exception {
+    try (var f = fixture()) {
+      assertThrows(NullPointerException.class, () -> new RootBatchCredentialReader(null, f));
+      assertThrows(NullPointerException.class, () -> new RootBatchCredentialReader(f.root, null));
+      assertThrows(
+          NullPointerException.class, () -> new RootBatchCredentialReader(f.root, f, null));
+      f.nullReader = true;
+      assertThrows(NullPointerException.class, () -> reader(f).read());
+      f.released();
+    }
+    try (var f = fixture()) {
+      Files.move(f.parent.resolve("db-batch"), f.parent.resolve("db-api"));
+      assertThrows(IOException.class, () -> reader(f).read());
+      f.released();
+    }
+  }
+
+  @Test
+  void everyMetadataAndPolicyBoundary() throws Exception {
+    for (String role : List.of("parent", "file"))
+      for (String field :
+          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+        for (String kind : List.of("missing", "wrong", "invalid"))
+          try (var f = fixture()) {
+            var valid = f.metadata;
+            f.metadata =
+                (r, m) -> {
+                  valid.accept(r, m);
+                  if (r.equals(role))
+                    switch (kind) {
+                      case "missing" -> m.remove(field);
+                      case "wrong" -> m.put(field, "wrong");
+                      default -> {
+                        if (Set.of("lastModifiedTime", "ctime").contains(field)) m.remove(field);
+                        else if (Set.of("size", "dev", "ino").contains(field)) m.put(field, -1L);
+                        else m.put(field, -1);
+                      }
+                    }
+                };
+            assertThrows(IOException.class, () -> reader(f).read(), role + field + kind);
+            f.released();
+          }
+    for (String kind : List.of("acl", "nullAcl", "readonly", "filesystem", "map", "uid", "device"))
+      try (var f = fixture()) {
+        switch (kind) {
+          case "acl" -> f.acl = new byte[] {1};
+          case "nullAcl" -> f.acl = null;
+          case "readonly" -> f.readonly = false;
+          case "filesystem" -> f.copyFilesystem = "ext4";
+          case "map" -> f.nullMap = true;
+          case "uid" -> f.effective = 1;
+          default -> {
+            var valid = f.metadata;
+            f.metadata =
+                (r, m) -> {
+                  valid.accept(r, m);
+                  if (r.equals("file")) m.put("dev", 123L);
+                };
+          }
+        }
+        assertThrows(IOException.class, () -> reader(f).read(), kind);
+        f.released();
+      }
+  }
+
+  @Test
+  void allIoAndUnknownPositionsCloseExactlyOnce() throws Exception {
+    List<String> events;
+    try (var f = fixture()) {
+      success(f);
+      events = List.copyOf(f.events);
+    }
+    for (String event : new HashSet<>(events))
+      for (Throwable failure :
+          List.of(
+              new IOException("PRIVATE"),
+              new IllegalStateException("PRIVATE"),
+              new AssertionError("PRIVATE")))
+        try (var f = fixture()) {
+          // effectiveUid is a non-throwing native observation; its fixture translates IO to Error.
+          f.faults.put(event + "#1", failure);
+          Throwable actual = assertThrows(Throwable.class, () -> reader(f).read());
+          if (!(failure instanceof IOException)) assertSame(failure, actual);
+          f.released();
+        }
+  }
+
+  @Test
+  void progressSizeAndIndependentCodecNegatives() throws Exception {
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("db-batch"), "P".repeat(65536));
+      f.readMode = "extra";
+      assertThrows(IOException.class, () -> reader(f).read());
+      f.released();
+    }
+    for (String mode : List.of("zero", "short", "large", "position", "content"))
+      try (var f = fixture()) {
+        f.readMode = mode;
+        assertThrows(Exception.class, () -> reader(f).read(), mode);
+        f.released();
+      }
+    for (String size : List.of("size#1", "size#2"))
+      try (var f = fixture()) {
+        f.changedSize = size;
+        assertThrows(IOException.class, () -> reader(f).read());
+        f.released();
+      }
+    for (byte[] bytes :
+        List.of(
+            new byte[0],
+            new byte[65537],
+            new byte[] {(byte) 0xff},
+            new byte[] {'P', 0, 'Q'},
+            new byte[] {'P', '\n', 'Q'}))
+      try (var f = fixture()) {
+        Files.write(f.parent.resolve("db-batch"), bytes);
+        assertThrows(Exception.class, () -> reader(f).read());
+        f.released();
+      }
+  }
+
+  @Test
+  void mutationAndInterruption() throws Exception {
+    for (int occurrence : List.of(2, 3, 4))
+      try (var f = fixture()) {
+        var valid = f.metadata;
+        f.metadata =
+            (r, m) -> {
+              valid.accept(r, m);
+              if (f.counts.getOrDefault("attributes", 0) == occurrence) m.put("ino", 12345L);
+            };
+        assertThrows(IOException.class, () -> reader(f).read());
+        f.released();
+      }
+    try (var f = fixture()) {
+      Thread.currentThread().interrupt();
+      try {
+        assertThrows(IOException.class, () -> reader(f).read());
+      } finally {
+        Thread.interrupted();
+      }
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.hook =
+          (n, i) -> {
+            if (n.equals("closeReader")) Thread.currentThread().interrupt();
+          };
+      try {
+        assertThrows(IOException.class, () -> reader(f).read());
+      } finally {
+        Thread.interrupted();
+      }
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.hook =
+          (n, i) -> {
+            if (n.equals("closeReader")) f.effective = 1;
+          };
+      assertThrows(IOException.class, () -> reader(f).read());
+      f.released();
+    }
+  }
+
+  @Test
+  void sharedOwnerConcurrentIndependentMaterial() throws Exception {
+    // Native IO/Directory owner is real; synthetic root policy is stateless, without fixture
+    // counters.
+    try (var f = fixture();
+        var executor = Executors.newFixedThreadPool(2)) {
+      var nativeIo = new RootBatchCredentialReader.NativeIo();
+      var security =
+          (dev.codex.schubert.nk.storage.InodeSecurityCalls)
+              java.lang.reflect.Proxy.newProxyInstance(
+                  getClass().getClassLoader(),
+                  new Class<?>[] {dev.codex.schubert.nk.storage.InodeSecurityCalls.class},
+                  (p, m, a) ->
+                      switch (m.getName()) {
+                        case "effectiveUid" -> 0L;
+                        case "accessAcl" -> new byte[0];
+                        case "readOnlyFilesystem" -> true;
+                        default -> throw new AssertionError(m.getName());
+                      });
+      var reader =
+          new RootBatchCredentialReader(
+              f.root,
+              security,
+              new RootBatchCredentialReader.Io() {
+                public Map<String, Object> attributes(Path p) throws IOException {
+                  var m = new HashMap<>(nativeIo.attributes(p));
+                  boolean dir = ((Integer) m.get("mode") & 0170000) == 040000;
+                  m.put("mode", dir ? 040500 : 0100400);
+                  m.put("uid", 0);
+                  m.put("gid", 0);
+                  return m;
+                }
+
+                public String filesystem(Path p) {
+                  return "tmpfs";
+                }
+
+                public java.nio.channels.SeekableByteChannel open(Path p) throws IOException {
+                  return nativeIo.open(p);
+                }
+              });
+      var futures = new ArrayList<Future<String>>();
+      for (int i = 0; i < 4; i++)
+        futures.add(
+            executor.submit(
+                () -> {
+                  try (var c = reader.read()) {
+                    char[] p = c.copyPassword();
+                    try {
+                      return new String(p);
+                    } finally {
+                      Arrays.fill(p, '\0');
+                    }
+                  }
+                }));
+      for (var future : futures) assertEquals("PUBLIC_é", future.get(5, TimeUnit.SECONDS));
+      f.released();
+    }
+  }
+
+  @Test
+  void nativePortPublicFileOnlyAndWrongActor() throws Exception {
+    Path p = temporary.resolve("public.txt");
+    Files.writeString(p, "PUBLIC");
+    var io = new RootBatchCredentialReader.NativeIo();
+    assertEquals(6L, io.attributes(p).get("size"));
+    assertFalse(io.filesystem(p).isEmpty());
+    try (var channel = io.open(p)) {
+      var b = java.nio.ByteBuffer.allocate(6);
+      assertEquals(6, channel.read(b));
+      assertArrayEquals("PUBLIC".getBytes(StandardCharsets.US_ASCII), b.array());
+    }
+    try (var f = fixture()) {
+      f.effective = 1;
+      assertThrows(IOException.class, () -> new RootBatchCredentialReader(f.root, f).read());
+    }
+  }
+}

@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-09-28 PG311 native027 root DB/run原本接続
+
+同隔離VM Linux7.0.0-31/JDK25.0.4/PostgreSQL18だけで実M/LoadCredential db-batch/fixed role/session advisory71419602/legacy参照不存在→永続run原本を接続。Root credentialはpublic transient Unitでmode0500/0400/root:root/ro tmpfsを先に観測、secret値は出力しない。db-batch source不存在とbatch role passwordNULLを照合後、ProvisionBatchDatabaseでnew-only600初期配備。namespace maintenance/runs/attempts0700もmissing初期配備のみ。既存PG310 testUnitはhash2c527…/inactive/PID0/cgroup不存在を照合しPG311内へ退避後、固定morning名のPG311 testUnitに置換。追加packageなし。再現tool/Unit/command/hash/failed attempt・02:00前の成功時刻は018144～146/provisional PG311。originalはpending、次は同run/activation/cutoffを明示resumeしfresh startを繰り返さない。native後Unit停止、execはprivateに保全、same-byte coverage補完でありfullPGPT/backup/admissionではない。
+
 ## 2026-09-28 PG310 native026 root M/Aとcold backup終端
 
 既存隔離VMだけで固定朝controller名のread-only試験Unitをnew installし、Production RootStartupContext/BackupUnitTerminationとM/A能力を実測。source/helper/Unit/command/個別hashは018141/143/provisional PG310。capability空ではPID1 exeを読めず拒否、root-only CAP_SYS_PTRACE＋ProtectSystem=full/NoNewPrivileges/PrivateTmp/Devices/ProtectControlGroupsで読み取り成功。実在しなかったmaintenance.lockだけをNoSuchFile確認後`install -m0600 -o root -g root /dev/null /run/schubert-nk/maintenance.lock`で初期配備、既存lockfile/root/資格情報は変更なし。再現は固定VM marker確認→対象Unit停止/MainPID0/cgroup不存在確認→保全hash照合→helperを固定Unitで起動→sanitized結果とUnit終端→明示stop。初期失敗も保全して合格算入しない。host system Unit/権限変更なし、追加packageなし、普通serviceへのcapability増配なし。root-only試験Unitは停止済みだがVM内artifactを保全する。実親backup/全BOM/業務起動済みではない。
