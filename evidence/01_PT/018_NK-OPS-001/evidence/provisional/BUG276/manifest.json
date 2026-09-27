@@ -1,0 +1,76 @@
+{
+  "formal": false,
+  "bug": "BUG-276",
+  "ykt": "YKT-209",
+  "base": "3002ab8f9",
+  "changed": "CleanupRepositoryTest module ownership oracle only",
+  "logs": {
+    "BUG276-boundary-retest.log": "61f3a86b0a6d107b365e1ecbb44bed752d7e85cce4ad05214a6573309d2120bf",
+    "BUG276-boundary-retest-2.log": "9862170d1b2f61e521f3b55c3dfe4cc20085124ead52022ab63e51eefa09446b",
+    "BUG276-boundary-retest-3.log": "dc99ce291ce9a1715c6eb5b7eb0475b51d7959bcb162c090fc8b1f5e34404a35",
+    "BUG276-canary.log": "6320743c8050969b25df244148c5dff514012250dc1c24301e89bc6471f65ca3"
+  },
+  "suites": [
+    {
+      "module": "storage",
+      "suite": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "sha256": "53f44956785e2632d257bf3eca56894f145780ddb628af8758efca9593b8e9fd",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "cases": [
+        "f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
+        "a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
+        "f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
+        "bug036CallerMonitorCannotBlockAnyDirectoryOperation",
+        "f02ExistingDateIndependentChildLifetimeAndSafeIoFailures",
+        "med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+        "rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation",
+        "med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+        "a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel",
+        "w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly",
+        "f02RejectsNullRelativeRootDotSegmentsAndInvalidDates",
+        "a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths",
+        "w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite",
+        "rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything",
+        "f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight",
+        "f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "suite": "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest",
+      "sha256": "4c05f742a9b9f45e608d108b8fa7d180cac5c358d7a6c07629ea8026aae3e0eb",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "cases": [
+        "namespaceAndSecurityFailures",
+        "boundedSource",
+        "closeFailureAndNullContracts",
+        "literalAndOwnedCopy",
+        "fixedNameMissingAndNoFallback",
+        "independentConcurrentCopies",
+        "symlinkAndHardLinkRefused",
+        "everyIoFailureClears"
+      ]
+    },
+    {
+      "module": "batch",
+      "suite": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
+      "sha256": "52a5caf93f15cfd481834c565fdd06956c66cb632dac99ee03800491a3e1c57f",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "cases": [
+        "moduleDependencyBoundary"
+      ]
+    }
+  ],
+  "canaries": 105,
+  "fullBatchRetest": "pending",
+  "initialCommands": "first two -am selections failed in dependency No tests were executed; not counted; third selects actual dependency tests without changing failIfNoTests gate"
+}

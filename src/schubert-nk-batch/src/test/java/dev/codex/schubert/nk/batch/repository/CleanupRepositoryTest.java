@@ -478,12 +478,35 @@ final class CleanupRepositoryTest {
             "org.postgresql:postgresql",
             "com.github.spotbugs:spotbugs-annotations"),
         runtime);
+    // SSC084/088, BUG276/YKT209: compatibility package is not artifact ownership.
+    // Independent literal allowlist, corroborated by the actual Bootstrap source location.
+    java.util.function.Predicate<String> allowedImport =
+        name ->
+            !name.matches("dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*")
+                || (name.equals("dev.codex.schubert.nk.api.file.InspectorCredentialLoader")
+                    && Files.isRegularFile(
+                        repo.resolve(
+                            "src/schubert-nk-bootstrap/src/main/java/"
+                                + name.replace('.', '/')
+                                + ".java")));
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.api.file.InspectorCredentialLoader"));
+    for (var forbidden :
+        List.of(
+            "dev.codex.schubert.nk.api.file.AssetResolver",
+            "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderMissing",
+            "dev.codex.schubert.nk.api.file.*",
+            "dev.codex.schubert.nk.web.LoginController",
+            "dev.codex.schubert.nk.protocol.FixedLengthCodec")) {
+      assertFalse(allowedImport.test(forbidden), forbidden);
+    }
+    var imports = java.util.regex.Pattern.compile("(?m)^import(?: static)? ([^;]+);");
     try (var files = Files.walk(repo.resolve("src/schubert-nk-batch/src/main/java"))) {
       for (var file : files.filter(p -> p.toString().endsWith(".java")).toList()) {
         var content = Files.readString(file);
-        assertFalse(
-            content.matches("(?s).*import dev\\.codex\\.schubert\\.nk\\.(api|web|protocol)\\..*"),
-            file.toString());
+        var matcher = imports.matcher(content);
+        while (matcher.find()) {
+          assertTrue(allowedImport.test(matcher.group(1)), file + ":" + matcher.group(1));
+        }
       }
     }
   }
