@@ -1,0 +1,62 @@
+{
+  "sourceCommit": "db4c6a7c6d8eb2b55af35b334df5b720fa185f49",
+  "branch": "dev-foundation",
+  "testId": "PT-OPS-NATIVE-028",
+  "environment": "Dedicated PGPT VM pgpt-r2-20260927-01 Ubuntu26.04/systemd259/JDK25.0.4",
+  "startRW": "2026-09-28T06:47:28+09:00",
+  "startRO": "2026-09-28T06:48:01+09:00",
+  "RW": {
+    "expected": "RW host candidate refused",
+    "actual": {
+      "chunk_id": "48393d",
+      "wall_time_seconds": 0.000017911,
+      "exit_code": 0,
+      "original_token_count": 322,
+      "output": "Job for schubert-nk-morning-controller.service failed because the control process exited with error code.\nSee \"systemctl status schubert-nk-morning-controller.service\" and \"journalctl -xeu schubert-nk-morning-controller.service\" for details.\nRW_START_RC=1\nActiveState=failed\nSubState=failed\nMainPID=0\nExecMainStartTimestamp=Sun 2026-09-27 21:47:28 UTC\nExecMainExitTimestamp=Sun 2026-09-27 21:47:29 UTC\nExecMainStatus=1\nStarting schubert-nk-morning-controller.service - Isolated PGPT NATIVE027 root M DB and original connection only...\nPT-OPS-NATIVE-028 STAGE rootAuthenticated=true\nPT-OPS-NATIVE-028 STAGE actualM=true actualA=true\nPT-OPS-NATIVE-028 STAGE fixedFixturePinSignature=true\nPT-OPS-NATIVE-028 REFUSED diagnosticsRedacted=true\nschubert-nk-morning-controller.service: Main process exited, code=exited, status=1/FAILURE\nschubert-nk-morning-controller.service: Failed with result 'exit-code'.\nFailed to start schubert-nk-morning-controller.service - Isolated PGPT NATIVE027 root M DB and original connection only.\nschubert-nk-morning-controller.service: Consumed 1.691s CPU time over 735ms wall clock time, 79.2M memory peak.\n791827ed1256c1e62a28dd9f829a37cbe3cf6271f5dd1a72b2154ad1c1c6f36b  /run/schubert-nk-morning-probe/candidate.exec\n/opt/schubert-nk/releases/pgpt-native-301\n"
+    }
+  },
+  "RO": {
+    "expected": "same-bytes host RO candidate accepted; current unchanged",
+    "actual": {
+      "chunk_id": "75a215",
+      "wall_time_seconds": 0.0000125,
+      "exit_code": 1,
+      "original_token_count": 257,
+      "output": "RO_START_RC=0\nActiveState=active\nSubState=exited\nMainPID=0\nExecMainStartTimestamp=Sun 2026-09-27 21:48:01 UTC\nExecMainExitTimestamp=Sun 2026-09-27 21:48:02 UTC\nExecMainStatus=0\nStarting schubert-nk-morning-controller.service - Isolated PGPT NATIVE027 root M DB and original connection only...\nPT-OPS-NATIVE-028 STAGE rootAuthenticated=true\nPT-OPS-NATIVE-028 STAGE actualM=true actualA=true\nPT-OPS-NATIVE-028 STAGE fixedFixturePinSignature=true\nPT-OPS-NATIVE-028 PASS actualRootMorning=true actualM=true actualA=true fixedFixturePin=true originalByteSignature=true actualHostRoFullBom=true migrationsExpected=23 currentUnchanged=true approvalIssued=false rootAdmission=false schemaDbVerified=false backupBegins=false productionActivation=false fullParent=false businessR2R3=false\nFinished schubert-nk-morning-controller.service - Isolated PGPT NATIVE027 root M DB and original connection only.\nFailed to reset failed state of unit schubert-nk-morning-controller.service: Unit schubert-nk-morning-controller.service not loaded.\n"
+    },
+    "limitation": "RO Production verification exit0; preservation shell exited1 at unnecessary reset-failed after stop (BUG306). Separate preservation run confirms inactive/PID0/fixed leaf absence and copies same retained exec; no probe rerun."
+  },
+  "preservation": {
+    "chunk_id": "50b50e",
+    "wall_time_seconds": 0.629194815,
+    "exit_code": 0,
+    "original_token_count": 151,
+    "output": "ActiveState=inactive\nSubState=dead\nMainPID=0\n8ef2e5a8f21e042e17215a29cdd742725c575ff8b4d568f65d3618f3c468d571  /home/ubuntu/pgpt-316-staging/candidate-RO.exec\n934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1  /var/lib/schubert-nk/maintenance/active\nd149a850f996d198c28db6478814a0f19d9688979e8c7131aa613b1c1ba47d63  /var/lib/schubert-nk/maintenance/runs/31100027-2222-4333-8444-555555555555.run\n934b84abaec0dd689839ab6de165b988b21187ecd0fe793f35d6f714da48f1b1  /var/lib/schubert-nk/maintenance/attempts/31100027-6666-4777-8888-999999999999.begin\n/opt/schubert-nk/releases/pgpt-native-301\n"
+  },
+  "artifactHashes": {
+    "manifest": "2154c63c8895c1fa25fe2ed9e6a6abba0c47ebe7127d4e50cfbce2106e0498bd",
+    "signature": "bc0a026f9abdeb8272ad990aa3dd52c71453c0efa5be28a7d6f17e1c14ffb87c",
+    "probeClass": "d876fd275ada7161dc88883c8ded03ae3d18725fbacbf4d6a5200022e9cdec32",
+    "nativeRWExec": "791827ed1256c1e62a28dd9f829a37cbe3cf6271f5dd1a72b2154ad1c1c6f36b",
+    "nativeROExec": "8ef2e5a8f21e042e17215a29cdd742725c575ff8b4d568f65d3618f3c468d571"
+  },
+  "privateArtifacts": "Exec/key/signature/tar remain Git-outside private work; public candidate manifest only copied",
+  "formal": false,
+  "commands": ["systemctl start schubert-nk-morning-controller.service", "systemctl stop schubert-nk-morning-controller.service", "mount --bind /opt/schubert-nk/releases/0.1.0-PG316 /opt/schubert-nk/releases/0.1.0-PG316", "mount -o remount,bind,ro /opt/schubert-nk/releases/0.1.0-PG316"],
+  "unitExecSource": "tools/quality/vm/pgpt-native-candidate-316.conf",
+  "sameClassByteVerification": {"productionClassHashes": 1056, "nativeBootstrapJarAllClassBytesEqual": true, "all341SavedXmlHashesVerified": true},
+  "bootstrapCoverageReport": {"path": "coverage/bootstrap-host-plus-native.xml", "sha256": "532c7d97807f6f3830d36e6faa2ad6ec68353536d9c80b02140cb7885fab1dcc", "missedBranch": 34, "missedLine": 7, "missedMethod": 3, "factoryMissed": 0},
+  "authorityIssued": false,
+  "rootAdmission": false,
+  "schemaVerified": false,
+  "fullParent": false,
+  "businessR2R3": false,
+  "bugs": [
+    "BUG-305",
+    "BUG-306"
+  ],
+  "ssc": [
+    "SSC-097",
+    "SSC-098"
+  ]
+}

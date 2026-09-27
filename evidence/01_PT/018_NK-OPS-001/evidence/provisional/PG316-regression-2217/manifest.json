@@ -1,0 +1,36 @@
+{
+  "sourceCommit": "db4c6a7c6d8eb2b55af35b334df5b720fa185f49",
+  "branch": "dev-foundation",
+  "finished": "2026-09-28T06:40:41+09:00",
+  "exitCode": 0,
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 PATH=/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$PATH /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch -am clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node > /tmp/PG316-regression-2217.log 2>&1",
+  "tests": 2217,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "formal": false,
+  "redaction": "329 generated JUnit XML: properties/system-out/system-err removed mechanically. Original generated SHA and sanitized SHA retained per file; no raw JVM properties/logs saved.",
+  "xmlFiles": 341,
+  "toolchain": {
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4.0",
+    "Node": "24.19.0"
+  },
+  "bugs": [
+    "BUG-298",
+    "BUG-299",
+    "BUG-303",
+    "BUG-305"
+  ],
+  "limitations": [
+    "Production/main/native branches still missed; full PT success is not formal coverage or R2/R3 acceptance"
+  ],
+  "logs": [
+    {
+      "path": "/tmp/PG316-regression-2217.log",
+      "sha256": "2df1dba7ebd7a4212fff2599d02de3b3ceca3eb5e50632e9e7647bde838bf6f3"
+    }
+  ]
+}
