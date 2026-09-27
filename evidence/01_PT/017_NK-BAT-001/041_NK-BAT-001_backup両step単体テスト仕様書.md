@@ -1,5 +1,7 @@
 # NK-BAT-001 backup両step 単体テスト仕様書
 
+PG312/SSC095/BUG288/YKT221: PT-BAT-214のcurrent SQL件数は独立V001～V023の23、SCHEMA0を除く既定queryと旧migration hash/後条件を維持。source092の旧22期待RED後、test-only source b131c5a18の全Batch500＋依存284/static0で再試験済。018151/provisional/BUG288-batch-GREENへcommand/日時/source/hashを対応、別runを全6正式合格へ合成しない。
+
 SSC061先行26fb3bad、PG168。BAK/BKO/OPS009/DAT009/UI251/SS311・3318.3・3416.6・343。13b9931aで仕様先行後、ProductionとPT-BAT-210～217を並行実装。正式12/source2abb30ffの全1391・4coverage/static/38scope/38負canaryで当該8件を認定。独立14列/JDBC全出現位置・実trace・BUG191～194/YKT151～153の全対象は045を参照。
 
 Production BackupStepRepositoryのconstructor/全public/private methodを対象に独立PTを並行実装する。manifestは公開合成fixture（PG165/166の3file bytes26/35/32と同一）。合成run/cutoff/2完全handleをfixtureとして明記し、期待値はProduction methodで生成せずliteral14列/SQL後条件/時刻を使用する。秘密credential/DB dump/実master/実manifest値はGitへ保存しない。

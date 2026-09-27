@@ -22,6 +22,7 @@ final class BackupPublicationFixture
   static final long UID = 2000, GID = 2001;
   final Path parent, child;
   final OwnedTransferDirectory root;
+  final DirectoryCalls calls;
   final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
   final Set<Integer> descriptors = new HashSet<>();
   final Set<byte[]> buffers = Collections.newSetFromMap(new IdentityHashMap<>());
@@ -47,7 +48,7 @@ final class BackupPublicationFixture
     Files.setPosixFilePermissions(parent, PosixFilePermissions.fromString("rwx------"));
     Files.setPosixFilePermissions(child, PosixFilePermissions.fromString("rwx------"));
     DirectoryCalls nativeCalls = LinuxDirectoryCalls.create();
-    DirectoryCalls calls =
+    calls =
         (DirectoryCalls)
             Proxy.newProxyInstance(
                 getClass().getClassLoader(),
@@ -268,6 +269,10 @@ final class BackupPublicationFixture
               buffer.limit(buffer.position() + Math.min(buffer.remaining(), chunk));
               int n = delegate.read(buffer);
               buffer.limit(limit);
+              if (n == -1 && readMode.equals("eof-position-any")) {
+                point("eofPositionInjected");
+                buffer.put((byte) 1);
+              }
               if (readMode.equals("content") && n > 0) buffer.put(0, (byte) 0);
               if (readMode.equals("nonzero") && n > 0) buffer.put(0, (byte) 1);
               return n;

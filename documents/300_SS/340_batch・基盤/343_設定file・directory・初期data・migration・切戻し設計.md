@@ -549,6 +549,10 @@ SSC096/PG313（実装前の固定契約）: 既定signature検証を省略しな
 
 Runtime release treeはmanifest具体payload＋祖先directory＋固定RELEASE-MANIFEST.json/SHA256SUMSの完全集合、未知file/jar/空dir/symlink/重複aliasを拒否する。manifest自身はpayload hash列に含めず外部root原本digestで拘束、SHA256SUMS自身も除外してmanifest＋全payloadのcanonicalhash列と実bytesを照合する。detached signatureは配備入力側に保全しruntime treeへ格納しない（未検査の任意管理file除外は設けない）。署名検証/原本発行/全BOM未接続時はschema/backup/permit/Production受入を非成功のままとする。
 
+SSC096内部具体化: 最初のruntime profileは固定thin-JARだけとし、shading/nested実行jarやJAR Class-Pathによる列挙外依存を受け付けない。manifestはformat/release/versions(app,protocol,storage,bootstrap,schema,config)/source(commit,tag)/build(JDK vendor/version,Maven version)/platform(OS ID/version,architecture,Java feature)/dependencies(coordinateと具体配置path)/artifacts(具体path,size,SHA256)/migrations(六列全行)を持つ。固定key集合/厳密型/duplicate/unknown/欠落/末尾tokenを拒否、path順・coordinate順を固定。相対ASCII pathの空/`.`/`..`/backslash/制御字/file-directory衝突を拒否し、manifest再serializeではなく原byteを署名/hash対象とする。共有coordinateの全配置jarは同size/hash、API jar同梱migrationと外置きSQLは全名前/byte一致、未知/重複ZIP entryを拒否する。VERSIONはrelease＋LF、schemaはSQL最終versionと一致。Build記録と実runtime互換条件を別検査し、未規定patch差を黙認しない。
+
+署名は固定Ed25519/pinned公開鍵とし鍵/algorithm選択を候補releaseに委ねない。検証・承認発行主体は既に信頼された配備側に置く。鍵custody/署名tool/version/入手元/独立公開vectorをPTへ記録し、秘密鍵はGitへ格納しない。activationはM取得→固定全対象停止/全終端→A取得/全終端再確認→新epoch INVALID永続確定→必要backup/migration/config→検証済immutable release・approval/current各atomic切替→再読全gate→新permit順。二つの切替間crashは不一致/INVALIDで拒否し旧承認/旧permitへfallbackしない。署名だけ成功してpayload/BOM未検査の段階では原本を発行しない。
+
 1. Releaseを新version directoryへ配置、owner/mode/`SHA256SUMS`/manifest/signatureを検証。
 2. Rendered configをstaging pathでschema/secret/path/port検証。Caddy/systemd/Artemis/PostgreSQLのvalidatorを実行。
 3. Backup・停止・Flyway migrate・実効schema/grant検査。
