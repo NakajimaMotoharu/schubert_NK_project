@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG296/297未認定: NK-OPS-001 Batch.platform.RootStartupContext→PT-OPS-ROOTCTX-001～008/native014、Storage.LinuxStartupAdmission→PT-OPS-CHILDFD-001～008/native015。RD SYS-002/004・OPS009/UI212・251/SS342・343/SSC086・087/D04・05、018/109～112/provisional PG296・297。Batch420/Storage149PT・全counter0/静的0、root currentpermit/全gate/canonical child/実NKは未達。
+
 2026-09-27 PG294/295未認定追記: NK-OPS-001 Batch StartupAdmissionFile→PT-OPS-ADMISSIONLOCK-001～008/VM native013（018/105・106）、Bootstrap StartupProofFrame→PT-OPS-PROOF-001～008（018/107・108）。RD SYS-002/004・OPS009/UI212・251/SS341～343/SSC086・087、D04/05。Batch412/Bootstrap79PT・全counter0/静的0、root issuer/freshness/子admission/fullgate/実NK未達。
 
 2026-09-27 PG293限定未認定: NK-OPS-001 Storage LinuxHostDirectoryCalls→PT-OPS-HOST-001～008、LinuxFileLock.tryExclusiveForStartup→PT-OPS-AFD-001～008、強化XFD008、VM NativeHostDirectoryProbe→native010。RD SYS-002/004・OPS-009/UI212・251/SS341～343/SSC086・087、018/102・103/provisional PG293。Storage141PT・全counter0・静的0、root/fullgate/実NK未受入。

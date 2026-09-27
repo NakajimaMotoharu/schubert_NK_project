@@ -1,5 +1,7 @@
 # 隔離Linux PGPT環境構築記録
 
+2026-09-27 PG297追補: 同隔離VM /opt/jdk-25.0.4だけをroot:root所有へ変更（chown -R root:root /opt/jdk-25.0.4）。root管理runtimeを通常ubuntu accountが更新可能なままにしない。update-alternatives --install /usr/bin/java java /opt/jdk-25.0.4/bin/java 250004で固定/usr/bin/javaを供給、resolved target/version/root755確認。host /etc/runtime不変更、既存VM DB/Artemis稼働継続。native015 root→samePID→setpriv→専用UID/明示groups/zeroCaps/2FDは試験用公開packetに限る成功、Production全起動未認定。
+
 2026-09-27、471 R1～R3用の専用fixture。ホストUID1000ではsudo非対話不可、user namespace mountもerrno5005で拒否された。一方/dev/kvmのmini ACLはrwであり、ホストの/etc/UID/Unit/権限を変えずKVM VMを構築できた。IT/ST本番serverの確認ではない。
 
 | 対象 | 実version・入手元・確認 |
