@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-27 PG303暫定追記: NK-OPS-001 StartupPermitFiles.invalidate/issue/current/readIssued・内部所有IO→PT-OPS-PERMITFILE001～008、018/126・127/provisional PG303、tools/vm/NativeStartupPermitProbe→PT-OPS-NATIVE-020。RD SYS002/004・OPS009/UI251/SS343 SSC089。関連36PT・新全counter0/静的0/105canary・実root/tmpfsテストnamespace限定、Production原本namespaceの真正入場/fullissuer/業務main未受入。
+
 2026-09-27 PG302暫定追記: NK-OPS-001 Batch.file.StartupPermitRecords/Epoch/Permit/State→PT-OPS-PERMITREC001～008、018/123・125/provisional PG302。RD SYS002/004・OPS009/UI251/SS343 SSC089。codec・value層限定8PT/全counter0/静的0、原本IO・issuer・業務外部起動未達、正式全体進捗加点なし。
 
 2026-09-27 PG300/301未認定: NK-OPS-001 Bootstrap.StartupReleaseManifest→PT-OPS-RELEASE001～008、ServiceStartupAdmission→PT-OPS-STARTADMIT001～008、FixedServiceIdentity.configurationGroup/SERVICEID001追加、API/Web main/loader/inputs→既存MAIN/LOAD/INPUT＋BUG266/268/269。RD SYS002/004・OPS009/UI212・251/SS311・342・343/SSC086～089/D04・05、018/119～122/provisional PG300-301。Bootstrap111PT＋実VM native018/019の同class-byte合成限定coverage100%/静的0、API/Web各13selected/PT・静的0、105canary。fullissuer/現在原本/実morning/業務main/CHRは未達。

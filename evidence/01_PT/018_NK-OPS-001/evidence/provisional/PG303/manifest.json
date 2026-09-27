@@ -1,0 +1,126 @@
+{
+  "status": "PROVISIONAL_NOT_CERTIFIED",
+  "predecessor_commit": "23520c264",
+  "branch": "dev-foundation",
+  "finished": "2026-09-27T22:05:13+09:00",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "spotbugs": "4.10.4.0",
+  "jacoco": "0.8.15",
+  "suites": {
+    "StartupPermitFilesTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "c5ba17e2ab2c843783e2c08dd75f8e5597b6e832f9c3d766d70ce37ee32e5a92"
+    },
+    "StartupPermitRecordsTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "f6863b08b8f80b6c935a08e4ce6005a2be19bc8a7bf8e90f3598acdb0857dd32"
+    },
+    "InspectorEnvironmentPublisherTest": {
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "07a497d08d1563b7c1730ee541fdb7e5dc148792553f7f4c1bb75eec02ec0ada"
+    },
+    "InspectorEnvironmentReaderTest": {
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "a90cc86c29b9e0d72e3d27572fb9b3ed2f54cc5750316945d8567e3d1813bcc9"
+    }
+  },
+  "new_subject_coverage": [
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "46"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "10"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "7"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "7"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitFiles",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": "0",
+          "covered": "797"
+        },
+        "BRANCH": {
+          "missed": "0",
+          "covered": "62"
+        },
+        "LINE": {
+          "missed": "0",
+          "covered": "157"
+        },
+        "COMPLEXITY": {
+          "missed": "0",
+          "covered": "58"
+        },
+        "METHOD": {
+          "missed": "0",
+          "covered": "27"
+        },
+        "CLASS": {
+          "missed": "0",
+          "covered": "1"
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io",
+      "counters": {}
+    }
+  ],
+  "source_hashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java": "80785819d65c728080e1b0b384f9f3bdf28bdae014165afaa4997a007c61352f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitFilesTest.java": "20e33cad23424510e02e168ebfb14746794ec65b097adabd4d92c02b7e6976b6",
+    "tools/quality/vm/NativeStartupPermitProbe.java": "920adc99ac1fd387947fe2fd05b6c60d22aefde88a1c3f748beb2a133a8fd98c",
+    "tools/quality/019_test_evidence_set.py": "75bcf080742f03824e948a2f27d598ef97201f1765d42cb6b705a705c5d30304",
+    "tools/quality/020_collect_batch_evidence.py": "95d245d52716f548f0b54d060bb289762b6a1f11d8c0c5b001d7ca2546dbc514",
+    "tools/quality/022_collect_inspector_launch_evidence.py": "f5571dfd699f8ebe3f9e704b5050d1394652a810e0be993e2fa4a32ba0a58ef2"
+  },
+  "negative_canaries": 105,
+  "native_case": "PT-OPS-NATIVE-020",
+  "native_result": "PASS genuine root/tmpfs IO; test namespace only; fullGate=false businessProcess=false",
+  "native_batch_jar_sha256": "9d079ff8e0e9bf4748b7111e00d2de22a2cfa0e8f3671d1d97ca17db402e4f63",
+  "full_module_tests": "not run after PG303; limited related36 only",
+  "formal_run": "PT-WEB-20260925-24",
+  "logs": {
+    "PG303-permit-files.log": "9c7e5a486804b38b82a301746242db29a12395174d8fe651507f3c1012ebfa78",
+    "PG303-permit-files-2.log": "72255a988889e9326730750b8c5cf9076dcb9a026a1f60c5002627ff6e5e8f2c",
+    "PG303-permit-files-3.log": "acec2deb3f488173c71076e17b302751b49268b253b775395d9fb50d7894d6b9",
+    "PG303-canary.log": "f7e7a93e1ea2213db8999a70a4c9cb2b97eb26fdbff7eb2c29d38fb387165b13",
+    "PG303-batch-jar.log": "7c2ba0a150c2c4a19f7611dd63aa8382848536401c486811927f03eccbaab4bf",
+    "PG303-native-permit-020.log": "2fdb9f4d7dc358aee84a6507b10431ab2c3d6c9d19d2aa91dd49836cd56c645c"
+  }
+}
