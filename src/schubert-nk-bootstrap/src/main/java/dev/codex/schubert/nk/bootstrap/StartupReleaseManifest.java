@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.bootstrap;
 
+import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.storage.*;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
@@ -10,6 +11,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.FileTime;
 import java.security.MessageDigest;
 import java.util.*;
+import java.util.zip.ZipFile;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -33,6 +35,34 @@ public final class StartupReleaseManifest {
     Path selector(Path heldParent) throws IOException;
 
     SeekableByteChannel open(Path held) throws IOException;
+
+    default DirectoryStream<Path> names(Path held) throws IOException {
+      return Files.newDirectoryStream(held);
+    }
+
+    default ZipFile archive(Path held) throws IOException {
+      return new ZipFile(held.toFile());
+    }
+  }
+
+  @FunctionalInterface
+  private interface ReleaseOperation<T> {
+    T read(OwnedTransferDirectory release, String version) throws StorageIoException;
+  }
+
+  /** Actual file agreement only, not root approval authority or a complete startup permit. */
+  public record Contents(
+      String version, String sha256, List<SchemaHistoryAdmission.Row> migrations) {
+    public Contents {
+      Objects.requireNonNull(version, "release version");
+      Objects.requireNonNull(sha256, "manifest digest");
+      migrations = List.copyOf(migrations);
+    }
+
+    @Override
+    public List<SchemaHistoryAdmission.Row> migrations() {
+      return List.copyOf(migrations);
+    }
   }
 
   @SuppressFBWarnings(
@@ -44,6 +74,19 @@ public final class StartupReleaseManifest {
         Path.of("/opt"),
         configurationGroup,
         LinuxDirectoryCalls.create(),
+        LinuxInodeSecurity.create(),
+        new NioIo());
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SS343 SSC096 authenticated root caller uses fixed PID1 host /opt view")
+  public static StartupReleaseManifest createHost(long configurationGroup) {
+    return new StartupReleaseManifest(
+        Path.of("/opt"),
+        configurationGroup,
+        LinuxHostDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
         new NioIo());
   }
@@ -63,6 +106,19 @@ public final class StartupReleaseManifest {
   }
 
   public String sha256() throws IOException {
+    return inspect((release, version) -> manifest(release));
+  }
+
+  /** Borrowed claims: caller must keep the independently authenticated approval scope held. */
+  public Contents verify(ReleaseApproval approval) throws IOException {
+    Objects.requireNonNull(approval, "borrowed release approval");
+    return inspect(
+        (release, version) ->
+            new ReleasePayloadVerification(this, group, io, security)
+                .verify(release, version, approval));
+  }
+
+  private <T> T inspect(ReleaseOperation<T> operation) throws IOException {
     try {
       var root = OwnedTransferDirectory.open(calls, opt);
       return ResourceScope.use(
@@ -74,7 +130,7 @@ public final class StartupReleaseManifest {
                 app::close,
                 () -> {
                   Snapshot appBefore = directory(app, group, 040750);
-                  String digest = selected(app);
+                  T digest = selected(app, operation);
                   require(appBefore.equals(directory(app, group, 040750)));
                   var reopened = root.openExistingChild("schubert-nk");
                   ResourceScope.use(
@@ -99,14 +155,15 @@ public final class StartupReleaseManifest {
     }
   }
 
-  private String selected(OwnedTransferDirectory app) throws StorageIoException {
+  private <T> T selected(OwnedTransferDirectory app, ReleaseOperation<T> operation)
+      throws StorageIoException {
     return app.atExistingEntryHandle(
         "current",
         link -> {
           Snapshot before = checked(link, 0, 0120777, 1, -1);
           String version = version(app.atDirectory(io::selector), opt);
           var releases = app.openExistingChild("releases");
-          String result =
+          T result =
               ResourceScope.use(
                   releases::close,
                   () -> {
@@ -116,7 +173,7 @@ public final class StartupReleaseManifest {
                         release::close,
                         () -> {
                           Snapshot releaseBefore = directory(release, group, 040750);
-                          String digest = manifest(release);
+                          T digest = operation.read(release, version);
                           require(releaseBefore.equals(directory(release, group, 040750)));
                           var reopened = releases.openExistingChild(version);
                           ResourceScope.use(

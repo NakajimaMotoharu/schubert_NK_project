@@ -1,0 +1,26 @@
+{
+  "sourceBase":"6857852fcdf1b054de571f19662f91fade388aaa",
+  "branch":"dev-foundation",
+  "finishedAt":"2026-09-28T04:44:28+09:00",
+  "exitCode":1,
+  "tests":24,
+  "failures":1,
+  "errors":0,
+  "skipped":0,
+  "formalAccepted":false,
+  "bug":"BUG-294",
+  "sourceHashes":{
+    "StartupReleaseManifest.java":"68b79b220b5c348aef65b2ed72323a1370da280630eb0bc85ff7c1beba8cfa5f",
+    "ReleasePayloadVerification.java":"39f47eae71c16324ad5c8c8abec7a76d6abd69b0d881388c0975ce290683530c",
+    "ReleasePayloadVerificationTest.java":"cc44493d4f0f63a82d661e9d0c74df68fb3aec9131ae57bfe17f92e2fc5e545b"
+  },
+  "files":{
+    "junit/TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml":"67d40c6aea16b1487a4a0b1a688b1f6650d07e1def25e159593565df81be29ce",
+    "junit/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml":"9a49cbf2ddf0e014072d46fd212e4464cad9578e6ddefa457be266689030b071"
+  },
+  "rawLog":{"path":"/tmp/PG314-fullBOM-limited-1.log","sha256":"8eb019af695852856117f46614b1c82a300fde211e336bcc78ddb97c55446e7b"},
+  "command":"JDK25.0.4/Maven3.9.12 fixed offline repository -pl src/schubert-nk-bootstrap -am Spotless3.10.2:apply test JaCoCo0.8.15:report SpotBugs4.10.4.0:check -Dtest=ResourceScopeTest,ReleasePayloadVerificationTest,StartupReleaseManifestTest",
+  "expected":"All transferred owners closed, failed open closes its own untransferred FD once",
+  "actual":"Normal fullBOM succeeds; first failOpenAt fault closed internally and owned set empty, but attempted/owned counter assertion mismatched1/0",
+  "limitations":["Only 2 bootstrap XML saved; Storage8 raw-log success not claimed as copied XML","Bootstrap report/static goals not executed after failure; old target coverage not reused","Remaining fault positions not executed after first failure","Synthetic UID/GID/RO policy, not actual root/immutable admission"]
+}
