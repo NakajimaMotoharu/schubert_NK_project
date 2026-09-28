@@ -1,0 +1,131 @@
+{
+  "id": "PG335-selected",
+  "formal": false,
+  "executionTime": "2026-09-28T13:23:29.895157+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "a1898417fb9f03f2863f0e0474a1b7c2e915ab9e",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0; native root Unit not started",
+  "command": "Batch selected MaintenanceUnitTerminationTest,RootStartupContextTest,CleanupNativePreflightTest,CleanupProcessMainTest,CleanupPreflightTest test SpotBugs:check JaCoCo:report (no clean)",
+  "exitCode": 0,
+  "input": "CLEANUP actor + WEB/API only, ordered two-unit stop read, busy/not-found/null/known/unknown, parent regression",
+  "expected": "31 PT F/E/S0, Batch static0, MaintenanceUnitTermination four JaCoCo counters missed0; no successful Cleanup",
+  "actual": "31 PT F/E/S0, Batch static0, whole-Unit observer four counters missed0; Native preflight coverage incomplete",
+  "counts": {
+    "RootStartupContextTest": 9,
+    "MaintenanceUnitTerminationTest": 9,
+    "CleanupProcessMainTest": 4,
+    "CleanupPreflightTest": 5,
+    "CleanupNativePreflightTest": 4
+  },
+  "coverage": {
+    "CleanupNativePreflight": {
+      "BRANCH": {
+        "missed": 2,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 43,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 10,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MaintenanceUnitTermination": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 60
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageSourceSha256": "fda5087c2114850affdd6ea4eb1d1d09ac57a1b875d0812b400f70a8328d9965",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "sha256": "26e2281fe32a1077a7853192ff470c7e8d35fea0426260f08c4213d20648f851"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination.java",
+      "sha256": "cfdc0e04e0d3cf379a202a81f68b17c118df3bf3bd0e3f16827bfce5aa2d0a79"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflightTest.java",
+      "sha256": "a7fdc4d5a76e6c121e109793b8d0f95f52fe0378af7e8eff8a99b7e6a4c2fd65"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTerminationTest.java",
+      "sha256": "398cd4f8fdaee05b6c31ff2283b9c89234511d3837cc1b76d6abff765c6a0723"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg335-final-selected.log",
+      "sha256": "7bd348f190d537513f008292543cfda40339272f6c6eb198c2d6eeac9505f4f7"
+    }
+  ],
+  "bugs": [
+    "BUG-313"
+  ],
+  "ykt": [
+    "YKT-246"
+  ],
+  "ssc": [
+    "SSC-104"
+  ],
+  "limitations": [
+    "No clean/full Production same-source certification; native child Unit/root success unexecuted",
+    "CleanupNativePreflight remains below Java four-metric 100%; no DELETE/parent M/A/transfer",
+    "JUnit XML includes suite/case metadata only; no properties, output, raw state or secret"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/coverage/changed-classes.json",
+      "sha256": "2cd0999463fc846132fde3393321478a21cfa5c7fc2549fe92aa63528189dbb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "fe75e007f0851901e8eeb70aa950ef71c69e40ec3807b9db4c6059a1ac84348d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "574b431982db2e6285c20ed486c7ea41c3a1a73222382949d8d1be6e21db1928"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "7f2f5b2295adea0fb4dcef508ee04d121da489340006b7547a89e7b85e6b8dce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "1368d44975492cf939506603d82dd3edd01211b599b599c432264b7950ab8352"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/junit/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "91b0761f0aa9f322ca1f9261191f4f16ae9a2501c68e263ba708fe728b521b82"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/logs/bug313-red-green.json",
+      "sha256": "683c0b621d1af16234b909efbd961c7ae39274c7203ff60b4e192c708bdeb156"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG335-selected/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}

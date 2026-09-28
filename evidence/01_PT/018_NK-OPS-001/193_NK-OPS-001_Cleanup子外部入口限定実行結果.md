@@ -9,6 +9,7 @@
 | BUG-312/YKT-245 | 初回Batch SpotBugs1でstatic不合格→915/916起票→固定backup openを明示methodへ移動。再試験Batch SpotBugs0、Production6 moduleそれぞれBugInstance0。未修正testを合格に加算しない |
 | 新class Java coverage | `CleanupNativePreflight` line 1/38、branch 0/2、method 1/10、class 1/1。`CleanupProcessMain` line 7/12、branch 2/2、method 1/3、class1/1。全4指標100%未達。JaCoCoはno-clean累積の限定計測で正式全体値ではない |
 | 付帯Batch suite | PG334 Unit候補追加前の依存reactorは618 Batch PT F/E/S0でexit0。その後sourceのBUG-312修正とtest候補追加を行ったので、同一sourceの正式全回帰へ加算しない |
+| 実VMの非起動Unit構文照合 | 候補templateと隔離Ubuntu VMの`/tmp/pgpt-cleanup-334.service`はSHA-256 `ced5a9ec47100eaff74edf5db1585d3c51991f60fd119b5462517d2b3c11962a`で一致。`systemd-analyze verify /tmp/pgpt-cleanup-334.service` exit0。出力は配布元xfs_scrubの`CPUAccounting`非対応警告2件のみ。Unitは正式pathへinstall/enable/startしておらず、`schubert-nk-cleanup.service`はnot-found。構文成功を実効policy/実子成功へ読み替えない |
 
 証跡: `evidence/provisional/PG334-selected/manifest.json` SHA256 `6f2b0c031a725fe54098851bbf970b3b2a7e6f7ded82e4e95b2ee601ce05a8fa`。Sanitized JUnit5/coverage1/static1/BUG結果1/smoke1の9fileを全hash再照合し、properties/output/failure/skippedと秘密値を保存しない。原始logはGit外でSHAだけ記録。
 
