@@ -1,0 +1,153 @@
+{
+  "id": "PT-OPS-CREQFILE001..008",
+  "formal": false,
+  "dateTime": "2026-09-28T09:01:45+09:00",
+  "environment": "Linux host, Java25.0.4, Maven3.9.12, JaCoCo0.8.15, SpotBugs4.10.4.0",
+  "branch": "dev-foundation",
+  "baseCommit": "4a425db62 + dirty PG325 source/test hashes",
+  "command": "mvn -B -o -pl :schubert-nk-batch -am -Dtest=ResourceScopeTest,ReleaseApprovalTest,BackupWorkerRequestFilesTest,CleanupWorkerRequestFilesTest,CleanupWorkerRequestTest,MaintenanceUnitStopClientTest test com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check; then batch jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic fixed root metadata/ACL/FS and independent NKCLEAN1 literal; injected all IO positions, inode swaps, collision, interrupted/unknown close, 16 independent parallel roots",
+  "expected": "new-only exact-byte publish/read and conditional retire; invalid/unknown/uncertain fail closed without repair; owned IO released",
+  "actual": "50 selected PT F/E/S0, static 3module0, new request-files class four counters missed0 in bounded cumulative report; no genuine /run source or systemd credential acceptance",
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 647
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 46
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 116
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 46
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 23
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageNote": "Batch JaCoCo XML is no-clean cumulative. New class counters are bounded provisional, not formal all-scope coverage.",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+      "sha256": "8eaac0847561fc29127036cebe73d85c6b1733756c7d49807ce276dbec725da2"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFilesTest.java",
+      "sha256": "c3ba497e21b29767b6926eb601caebe26cdb68553ac76a2df64bd5ebb27d61da"
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "e33100b324364904e68d8f32c062f8b03341523fa4d28f65e3b2075989aa455e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/storage/jacoco.xml",
+      "sha256": "55f69d6b4297779030145d2dc563de389921daf4e9dce66fa894a38e088b4a0a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/storage/spotbugsXml.xml",
+      "sha256": "f5a62fd837920d44196951f4af32866e27053cfb2627d64ed444ec18e1b7b4e5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "abb6df309c325a860506182bc4651bb24c6375a5d45c683a8ab698a57bd11c47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/bootstrap/jacoco.xml",
+      "sha256": "b094bc88338cce353341269f7d74c57a16513d6dd14bd05ffa7eb564afa72d0d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/bootstrap/spotbugsXml.xml",
+      "sha256": "80a80bb43611512124e0a0c75ef7189ff4ee7a273dbecb98bee9a26985aa5572"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "ea2313ea7ed01537ba47bd26f097fa92d8825988fd829e3467b10ae0b5586131"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "f4558b7e4ff26a29e54b48e9cfb58568d5ace9bf753c2c04bf85ab720d5a1e8c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "4e3152eac972f53e8d32dce1333f01107642e04eaf545afa6416f1f7816f6bfd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "99e4044c9a6153d39daf146fff92aba6e39a42548ba613bf533d54b60a046316"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/jacoco.xml",
+      "sha256": "edc590f1d7f44e86d90be61dd5741bde439d3ac91ea101201d69c4635e942c5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG325-cleanup-request-files/batch/spotbugsXml.xml",
+      "sha256": "6997a1ba2c1bbe520f090b3172403d0141963869e316bfe7ea275c69bb0a75d1"
+    }
+  ],
+  "log": {
+    "path": "Git-outside /tmp/PG325-cleanup-files-final.log",
+    "sha256": "72223f186f3dab1b33034a126deb4e5f1d3c06280528fc524b9ec3f59e2bab78"
+  },
+  "relatedBug": [],
+  "relatedSsc": [
+    "SSC-104"
+  ],
+  "remaining": "Actual root-owned fixed /run publisher, systemd LoadCredential reader, genuine root parent/child M/A/advisory, Backup and Cleanup Unit, Artemis readiness and R2/R3 remain."
+}
