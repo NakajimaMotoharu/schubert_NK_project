@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG367追加追跡（2026-09-29）：NK-WEB-002 `WebNativeCodecs.create/session/log/close`は固定Web credential setからsession/Web Log current key/versionを用途別codecへ借用し、全copyをfinally消去するR1/D01/05/06下位。RD AUT-001/MON-003/SYS-004、UI226/242/253、SS314§7.2.2/324§9/343§6/352§11.2、PT-WEB-NKEY001～004、016/047。previous rotation/revoke、HTTP/実業務runtimeとWebProcessMain結線は未完了。
+
 PG366追加追跡（2026-09-29）：NK-OPS-001 `MorningParentBudget.create/requireWithin`及び`MorningBackupUnitCycle.execute`の親30分期限、RD OPS-009/BAK-001、UI251、SS341/342/343・SSC107/BUG322、PT-OPS-MBUDGET001～002/BUCYCLE006、018/244。実親entryへの同budget結線/VM hard-timeoutは未達。
 
 PG365追加追跡（2026-09-29）：NK-OPS-001 `MorningBackupUnitCycle.execute`のBackup start後不明例外/null保持、PT-OPS-BUCYCLE005、RD OPS-009/BAK-001、UI251、SS341/343/SSC105～107、BUG324/YKT256、018/242・243/PG365 manifest。固定source全6限定回帰済み、native親/全coverage未認定。
