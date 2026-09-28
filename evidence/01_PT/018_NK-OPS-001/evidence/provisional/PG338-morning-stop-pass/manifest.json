@@ -1,0 +1,107 @@
+{
+  "id": "PG338-morning-stop-pass",
+  "formal": false,
+  "executionTime": "2026-09-28T14:17:06.426414+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "d068d94e4a7d3500685360e592a8991da3351ea2",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0; no real fixed-eight stop",
+  "command": "Batch -Dtest=MorningStopPassTest,MorningUnitTerminalsTest,MaintenanceUnitStopClientTest,MaintenanceUnitTerminationTest,MorningRootScopeTest clean test SpotBugs:check JaCoCo:report",
+  "exitCode": 0,
+  "input": "fixed eight ordered stop clients, whole-Unit terminal, UNKNOWN reaping/concurrency/interruption, nonzero and null/wrong actor",
+  "expected": "40 selected PT F/E/S0/static0; UNKNOWN does not return from held parent scope; no startup authority",
+  "actual": "40 PT F/E/S0/static0; stop-pass native factory branch/line/method still uncovered",
+  "testIds": [
+    "PT-OPS-MPASS001",
+    "PT-OPS-MPASS002",
+    "PT-OPS-MPASS003",
+    "PT-OPS-MPASS004",
+    "PT-OPS-MPASS005",
+    "PT-OPS-MPASS006",
+    "PT-OPS-MPASS007",
+    "PT-OPS-MPASS008",
+    "PT-OPS-MPASS009"
+  ],
+  "counts": {
+    "MorningStopPassTest": 9,
+    "MorningUnitTerminalsTest": 5,
+    "MaintenanceUnitStopClientTest": 11,
+    "MaintenanceUnitTerminationTest": 9,
+    "MorningRootScopeTest": 6
+  },
+  "coverage": {
+    "BRANCH": {
+      "missed": 1,
+      "covered": 11
+    },
+    "LINE": {
+      "missed": 6,
+      "covered": 32
+    },
+    "METHOD": {
+      "missed": 1,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageSourceSha256": "c550f4270e6e49c548aa87028f2f406d940ef3b4ff92946c2b8bbfd4b21711d1",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java",
+      "sha256": "01e8030312a35de40cc9ac5dabfcfb788d2e744efdb030570f14435b9377499f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningStopPassTest.java",
+      "sha256": "1730222e807bcae026e883d7d60da884a60f59534bbd9cce5bdfe0a4feb8c7d9"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg338-mpass-clean-fixed.log",
+      "sha256": "eafe75224e8362a783b217a8fd7c798196d19e17d1534ebb39b92da59fac56e2"
+    }
+  ],
+  "bugs": [],
+  "ssc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "limitations": [
+    "ProcessBuilder.start failure before handle and native real Unit stop still unaccepted",
+    "No A/current invalidation, Artemis journal, backup/Cleanup, permit, R2/R3",
+    "JUnit suite/case metadata only; raw properties/output omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/coverage/morning-stop-pass.json",
+      "sha256": "828f5dbd1d54c6f8bc3db6e10c7becd7ae8f68e5cb8401b0a2789c08ad6fe72a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "962bcf7c638f2350355647c1a8e2103480ef424018f3fe8c4a16471975ccd9ce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "153d4a88e3461c6c700c37b5e127cd5af1e718c881a1d459d2ef54fe3c4912e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "11810dccb471892df29b4b2643412e631158e8b9f2241767905d22cae2d44d27"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "d9a8bd953c28826bb3c275ed2187ad995ad2fa7c3cc1ffd855f540f962c1824e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "8ab00d8c21afadb9bceb25530d2f9bb68f40260d7c0ae584d3312e207087c122"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG338-morning-stop-pass/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}
