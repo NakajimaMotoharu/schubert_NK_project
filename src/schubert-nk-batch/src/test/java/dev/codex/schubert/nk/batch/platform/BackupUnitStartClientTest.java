@@ -1,0 +1,313 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Test;
+
+/** SS341/343/SSC092/105 independent fixed-argv and unknown-owner vectors; no real Unit start. */
+final class BackupUnitStartClientTest {
+  private static InspectorUnitProbeFixture.Child child() {
+    var child = new InspectorUnitProbeFixture.Child(new byte[0]);
+    child.waitSeconds = 120;
+    return child;
+  }
+
+  @Test
+  void bstart001FixedCommandAndOwnerOrder() throws Exception {
+    var process = child();
+    var sequence = new ArrayList<String>();
+    var client =
+        new BackupUnitStartClient(
+            () -> sequence.add("root"),
+            () -> sequence.add("policy"),
+            command -> {
+              assertEquals(
+                  List.of(
+                      "/usr/bin/systemctl",
+                      "--system",
+                      "--no-pager",
+                      "--no-ask-password",
+                      "--no-block",
+                      "start",
+                      "schubert-nk-backup.service"),
+                  command);
+              sequence.add("client");
+              return process;
+            });
+    var attempt = client.start();
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
+    assertEquals(List.of("root", "policy", "root", "client", "root", "root"), sequence);
+    process.allClosed();
+    assertEquals(0, process.destroyed);
+    assertEquals(1, process.counts.get("wait"));
+  }
+
+  @Test
+  void bstart002PreStartPolicyRootAndInterruptRefuseWithoutClient() {
+    int[] launched = {0};
+    var policy =
+        new BackupUnitStartClient(
+            () -> {},
+            () -> {
+              throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+            },
+            command -> {
+              launched[0]++;
+              return child();
+            });
+    assertEquals(
+        StopGateFailure.MALFORMED_STATE,
+        assertThrows(StopGateException.class, policy::start).reason());
+    for (int failureAt : List.of(1, 2)) {
+      int[] checks = {0};
+      var changed =
+          new BackupUnitStartClient(
+              () -> {
+                if (++checks[0] == failureAt) throw new IOException("public changed root");
+              },
+              () -> {},
+              command -> {
+                launched[0]++;
+                return child();
+              });
+      assertThrows(IOException.class, changed::start);
+      assertEquals(failureAt, checks[0]);
+    }
+    try {
+      Thread.currentThread().interrupt();
+      assertEquals(
+          StopGateFailure.INTERRUPTED,
+          assertThrows(StopGateException.class, policy::start).reason());
+      assertTrue(Thread.currentThread().isInterrupted());
+    } finally {
+      Thread.interrupted();
+    }
+    assertEquals(0, launched[0]);
+  }
+
+  @Test
+  void bstart003NonzeroIsNotWorkerSuccess() throws Exception {
+    var process = child();
+    process.code = 1;
+    var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> process).start();
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_NONZERO, attempt.status());
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_NONZERO, attempt.awaitClient());
+    process.allClosed();
+    assertEquals(0, process.destroyed);
+  }
+
+  @Test
+  void bstart004TimeoutRetainsSameChildUntilActualReap() throws Exception {
+    var process = child();
+    process.completed = false;
+    int[] starts = {0};
+    var attempt =
+        new BackupUnitStartClient(
+                () -> {},
+                () -> {},
+                command -> {
+                  starts[0]++;
+                  return process;
+                })
+            .start();
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+    assertTrue(process.alive);
+    assertEquals(0, process.destroyed);
+    assertEquals(1, process.input.closed);
+    assertEquals(0, process.output.closed);
+    process.completed = true;
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+    assertEquals(1, starts[0]);
+    assertEquals(2, process.counts.get("wait"));
+    process.allClosed();
+  }
+
+  @Test
+  void bstart005CloseGetterAndSpawnUnknownNeverUpgrade() throws Exception {
+    for (String fault : List.of("stdin.close", "stdout.close", "stderr.close")) {
+      var process = child();
+      process.ioFailures.add(fault);
+      var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> process).start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status(), fault);
+      process.ioFailures.clear();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.awaitClient(), fault);
+      assertEquals(0, process.destroyed);
+    }
+    for (String missing : List.of("stdin", "stdout", "stderr")) {
+      var process = child();
+      process.missing = missing;
+      var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> process).start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status(), missing);
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.awaitClient(), missing);
+      assertEquals(0, process.destroyed);
+    }
+    for (Throwable failure :
+        List.of(
+            new IOException("public uncertain delivery"),
+            new IllegalStateException("public runtime"),
+            new AssertionError("public error"))) {
+      var attempt =
+          new BackupUnitStartClient(
+                  () -> {},
+                  () -> {},
+                  command -> {
+                    if (failure instanceof IOException io) throw io;
+                    if (failure instanceof RuntimeException runtime) throw runtime;
+                    throw (Error) failure;
+                  })
+              .start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.awaitClient());
+    }
+    var nullAttempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> null).start();
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, nullAttempt.awaitClient());
+  }
+
+  @Test
+  void bstart006InterruptAndPostStartContextUnknownRetainOwner() throws Exception {
+    var process = child();
+    process.waitInterrupt = true;
+    try {
+      var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> process).start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertEquals(0, process.destroyed);
+      Thread.interrupted();
+      process.waitInterrupt = false;
+      assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+      process.allClosed();
+    } finally {
+      Thread.interrupted();
+    }
+    var beforeStdin = child();
+    int[] checks = {0};
+    try {
+      var attempt =
+          new BackupUnitStartClient(
+                  () -> {
+                    if (++checks[0] == 3) Thread.currentThread().interrupt();
+                  },
+                  () -> {},
+                  command -> beforeStdin)
+              .start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+      assertEquals(0, beforeStdin.input.closed);
+      Thread.interrupted();
+      assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+      beforeStdin.allClosed();
+    } finally {
+      Thread.interrupted();
+    }
+    var afterWait = child();
+    afterWait.hook =
+        (name, count) -> {
+          if (name.equals("wait") && count == 1) Thread.currentThread().interrupt();
+        };
+    try {
+      var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> afterWait).start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+      assertEquals(0, afterWait.output.closed);
+      Thread.interrupted();
+      assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+      afterWait.allClosed();
+    } finally {
+      Thread.interrupted();
+    }
+    var changed = child();
+    int[] roots = {0};
+    var poisoned =
+        new BackupUnitStartClient(
+                () -> {
+                  if (++roots[0] == 4) throw new IOException("public root drift");
+                },
+                () -> {},
+                command -> changed)
+            .start();
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, poisoned.status());
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, poisoned.awaitClient());
+    changed.allClosed();
+  }
+
+  @Test
+  void bstart007FactoryNullWrongActorAndNativePort() throws Exception {
+    assertThrows(
+        NullPointerException.class, () -> new BackupUnitStartClient(null, () -> {}, c -> child()));
+    assertThrows(
+        NullPointerException.class, () -> new BackupUnitStartClient(() -> {}, null, c -> child()));
+    assertThrows(
+        NullPointerException.class, () -> new BackupUnitStartClient(() -> {}, () -> {}, null));
+    var root = new RootStartupContextTest.Fixture();
+    root.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
+    root.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    var context = root.context();
+    var expected = context.capture(RootStartupContext.Service.MORNING);
+    var safePolicy =
+        new MaintenanceUnitStopPolicy(
+            unit -> {
+              assertSame(MaintenanceUnit.BACKUP, unit);
+              return ("Id=schubert-nk-backup.service\n"
+                      + "LoadState=loaded\nKillMode=control-group\nSendSIGKILL=no\n")
+                  .getBytes(StandardCharsets.US_ASCII);
+            });
+    assertThrows(NullPointerException.class, () -> BackupUnitStartClient.create(null, expected));
+    assertThrows(NullPointerException.class, () -> BackupUnitStartClient.create(context, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> BackupUnitStartClient.create(context, expected, null, c -> child()));
+    assertThrows(
+        NullPointerException.class,
+        () -> BackupUnitStartClient.create(context, expected, safePolicy, null));
+    var wrong =
+        new RootStartupContext.Snapshot(
+            RootStartupContext.Service.API,
+            expected.boot(),
+            expected.invocation(),
+            expected.pid(),
+            expected.startTicks(),
+            expected.initStartTicks(),
+            expected.controlGroup());
+    assertThrows(
+        IOException.class,
+        () -> BackupUnitStartClient.create(context, wrong, safePolicy, c -> child()));
+    assertNotNull(BackupUnitStartClient.create(context, expected));
+    var child = child();
+    var injected = BackupUnitStartClient.create(context, expected, safePolicy, c -> child);
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, injected.start().status());
+    child.allClosed();
+    Process harmless =
+        new MaintenanceUnitStopClient.NativeStart().execute(List.of("/usr/bin/true"));
+    assertTrue(harmless.waitFor(5, TimeUnit.SECONDS));
+    assertEquals(0, harmless.exitValue());
+    harmless.getOutputStream().close();
+    harmless.getInputStream().close();
+    harmless.getErrorStream().close();
+  }
+
+  @Test
+  void bstart008TerminalMonotonicAndNoWorkerReceipt() throws Exception {
+    var child = child();
+    int[] spawns = {0};
+    var attempt =
+        new BackupUnitStartClient(
+                () -> {},
+                () -> {},
+                command -> {
+                  spawns[0]++;
+                  return child;
+                })
+            .start();
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
+    assertEquals(1, spawns[0]);
+    assertEquals(1, child.counts.get("wait"));
+    child.allClosed();
+    // No Unit state or backup artifact is present in this fixture. The client exposes only an
+    // opaque command result, and parent fresh-Invocation/full-process/archive gates remain open.
+  }
+}

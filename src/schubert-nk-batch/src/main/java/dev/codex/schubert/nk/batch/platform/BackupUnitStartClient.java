@@ -1,0 +1,182 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * Fixed root Morning client for queuing the dedicated Backup Unit. Client exit zero is only a
+ * successful systemctl request, not a fresh worker Invocation, receipt, cgroup termination, or
+ * archive proof. The caller must hold M/A, the same run originals and source request through all
+ * those later observations. UNKNOWN must not normally unwind those owners. NK-OPS-001/BAK-001;
+ * UI251/SS341§5-6/343§6.15; SSC092/093/105; PG352/PT-OPS-BSTART001-008.
+ */
+@NullMarked
+public final class BackupUnitStartClient {
+  @FunctionalInterface
+  interface Context {
+    void recheck() throws IOException;
+  }
+
+  @FunctionalInterface
+  interface Policy {
+    void requireSafe();
+  }
+
+  @FunctionalInterface
+  interface Start {
+    Process execute(List<String> command) throws IOException;
+  }
+
+  public enum Status {
+    CLIENT_EXITED_ZERO,
+    CLIENT_EXITED_NONZERO,
+    UNKNOWN
+  }
+
+  private static final List<String> COMMAND =
+      List.of(
+          "/usr/bin/systemctl",
+          "--system",
+          "--no-pager",
+          "--no-ask-password",
+          "--no-block",
+          "start",
+          "schubert-nk-backup.service");
+
+  private final Context context;
+  private final Policy policy;
+  private final Start start;
+
+  public static BackupUnitStartClient create(
+      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    return create(
+        root,
+        expected,
+        MaintenanceUnitStopPolicy.create(),
+        new MaintenanceUnitStopClient.NativeStart()::execute);
+  }
+
+  static BackupUnitStartClient create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      MaintenanceUnitStopPolicy unitPolicy,
+      Start start)
+      throws IOException {
+    Objects.requireNonNull(root, "Morning root context");
+    Objects.requireNonNull(expected, "Morning root snapshot");
+    Objects.requireNonNull(unitPolicy, "fixed Backup policy");
+    Objects.requireNonNull(start, "fixed start port");
+    if (expected.service() != RootStartupContext.Service.MORNING)
+      throw new IOException("backup start unavailable");
+    root.recheck(expected);
+    return new BackupUnitStartClient(
+        () -> root.recheck(expected), () -> unitPolicy.requireSafe(MaintenanceUnit.BACKUP), start);
+  }
+
+  BackupUnitStartClient(Context context, Policy policy, Start start) {
+    this.context = Objects.requireNonNull(context, "Morning root context");
+    this.policy = Objects.requireNonNull(policy, "fixed Backup policy");
+    this.start = Objects.requireNonNull(start, "fixed start port");
+  }
+
+  /**
+   * Only the fixed Backup Unit can be queued. Once the native start call is invoked, any missing
+   * handle or exception has unknown delivery and must remain opaque to the parent.
+   */
+  public Attempt start() throws IOException {
+    interrupted();
+    context.recheck();
+    policy.requireSafe();
+    context.recheck();
+    interrupted();
+    @Nullable Process process;
+    try {
+      process = start.execute(COMMAND);
+    } catch (IOException | RuntimeException | Error uncertainStart) {
+      return new Attempt(context, null);
+    }
+    var attempt = new Attempt(context, process);
+    attempt.awaitClient();
+    return attempt;
+  }
+
+  private static void interrupted() {
+    if (Thread.currentThread().isInterrupted())
+      throw new StopGateException(StopGateFailure.INTERRUPTED);
+  }
+
+  /** Opaque owner of a possibly live start client; never destroys or silently closes it. */
+  public static final class Attempt {
+    private final Context context;
+    private final @Nullable Process process;
+    private Status status = Status.UNKNOWN;
+    private boolean stdinClosed;
+    private boolean streamsClosed;
+    private boolean poisoned;
+
+    private Attempt(Context context, @Nullable Process process) {
+      this.context = context;
+      this.process = process;
+    }
+
+    public synchronized Status status() {
+      return status;
+    }
+
+    /** Reap under still-held parent owners; UNKNOWN is never a worker or unlock receipt. */
+    public synchronized Status awaitClient() {
+      if (status != Status.UNKNOWN || streamsClosed || poisoned) return status;
+      if (process == null) return Status.UNKNOWN;
+      try {
+        context.recheck();
+        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+        if (!stdinClosed) {
+          stdinClosed = true;
+          Objects.requireNonNull(process.getOutputStream(), "start stdin").close();
+        }
+        if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
+        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+        var stdout = Objects.requireNonNull(process.getInputStream(), "start stdout");
+        Closeable stderr;
+        try {
+          stderr = Objects.requireNonNull(process.getErrorStream(), "start stderr");
+        } catch (RuntimeException | Error failure) {
+          closeOne(stdout);
+          throw failure;
+        }
+        boolean closed = closeBoth(stdout, stderr);
+        streamsClosed = true;
+        if (!closed) return Status.UNKNOWN;
+        context.recheck();
+        status =
+            process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
+        return status;
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        return Status.UNKNOWN;
+      } catch (IOException | RuntimeException | Error failure) {
+        poisoned = true;
+        return Status.UNKNOWN;
+      }
+    }
+
+    private static boolean closeBoth(Closeable stdout, Closeable stderr) {
+      boolean clean = closeOne(stdout);
+      return closeOne(stderr) && clean;
+    }
+
+    private static boolean closeOne(Closeable stream) {
+      try {
+        stream.close();
+        return true;
+      } catch (IOException | RuntimeException | Error failure) {
+        return false;
+      }
+    }
+  }
+}
