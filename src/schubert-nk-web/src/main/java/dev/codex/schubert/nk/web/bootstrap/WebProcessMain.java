@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.web.messaging.WebBrokerContexts;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -96,8 +97,9 @@ public final class WebProcessMain {
   private static void startNative(
       WebStartupInputs loader, Map<String, String> environment, int[] failureCode)
       throws IOException {
-    // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
-    // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
+    // R1 incremental entry only. Root admission and DB resource ownership precede the Web-role
+    // JMS probe. Full Broker Ops management, storage and business assembly remain mandatory; HTTP
+    // never starts and A is never released by this incomplete path.
     ServiceStartupAdmission.create(ServiceConfigFiles.Service.WEB, environment)
         .execute(
             () -> {
@@ -117,7 +119,15 @@ public final class WebProcessMain {
                             inputs.credentials(),
                             inputs.config().value("nk.db.url")),
                         source -> new WebJdbcPool().open(source))
-                    .execute(ServiceProcessResources.unassembledStartup()));
+                    .execute(
+                        (pool, credentials) -> {
+                          try (var broker =
+                              WebBrokerContexts.create(
+                                  credentials, inputs.config().value("nk.mq.url"))) {
+                            new WebDependencyReadiness(pool, broker.contexts()).verify();
+                            ServiceProcessResources.unassembledStartup().run(pool, credentials);
+                          }
+                        }));
   }
 
   static void fatal(Thread thread, Throwable failure) {
