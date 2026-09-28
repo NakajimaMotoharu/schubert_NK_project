@@ -1,0 +1,41 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "PG363 limited regression pass; full 100% coverage, real Unit and parent acceptance incomplete",
+  "executedAtJst": "2026-09-29T00:09:19+09:00",
+  "environment": {"os": "Linux x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "6b1c62921",
+  "testIds": ["PT-OPS-BUCYCLE-001..004", "PT-OPS-MUNIT-001..004", "PT-OPS-BFENCE-concurrent-10-repetitions"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "public fixed fixture, synthetic Unit/receipt/terminal ports; no real Backup Unit launch or secret",
+  "expected": "same-parent Backup start, fresh receipt0, explicit stop, whole-Unit terminal, original/request proof, then marker retirement; two owner race has one winner",
+  "actual": "Production6 2476 tests/362 suites, failure/error/skipped zero; SpotBugs six modules zero; 10 race repetitions one winner each; full coverage and real native parent incomplete",
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1395, 30, 304, 120, 15],
+    "morningBackupUnitCycleOuter": [124, 9, 28, 8, 0]
+  },
+  "related": ["BUG-322", "BUG-323", "YKT-254", "YKT-255", "SSC-107"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "c14d93f6adfafc6fc0688960f6c9494f170288165670f6452cdffb9e0c02cb5e",
+    "storageJUnitPathOrderedSha256List": "98605208e698dbb51cd65ccb1df8afaee1e26a945765adc7d78201698ed86095",
+    "bootstrapJUnitPathOrderedSha256List": "98323dd99c4bde51b8688eaba45716c5d7bab93dfe51293665b99e70fbf61a6e",
+    "apiJUnitPathOrderedSha256List": "ea5a00910844e890764aaa2222afb46b58007c5c092b9796fa8de32edaa8b8f8",
+    "webJUnitPathOrderedSha256List": "67d7ca7202d119c883bc629afa6769e467fe8639838cac136127af01de3c5bbd",
+    "batchJUnitPathOrderedSha256List": "1136a309ab0ac620301c74b92a1c9d3790daf668eeae212883de4352c5811d85",
+    "backupCycleJUnitXml": "abbdf2d09e05f5b4df4373e836008d43c5a1cf14f4881af9b2b3227ef32399c0",
+    "backupIntentJUnitXml": "d5434a2a19470ce763976bb67c0b09c17e7a745652b4ebb2286664513cd1c49f",
+    "batchJacocoXml": "3558b924e6349b387d4a1a207c895610f5bb1ee9de064d293b1f46714929e9f6",
+    "sourceMorningBackupUnitCycle": "e229048f06606d3df501b99a0ba0e69a42226f77b6e28c0927dbaf81443ee215",
+    "testMorningBackupUnitCycle": "cc225dc33c243ad495f7a3535501c97f68c97213acae43e20ff82efffb81bcba",
+    "fixtureBackupPublication": "8ccecf166bf8f1feed30e889786412e0ce5cfe8b9d6a00152a8bb6fb5b881d38",
+    "testBackupStartIntent": "0983f2bd80a0cd45ca85d2913c57058c2d65eabe02b21f80bf2db0466c2efd4e",
+    "ptSpecification239": "4bf98064d77d16fee5d18d97b53bece946b948498855822199c172128a090383"
+  },
+  "rawXmlOrSecretsInGit": false
+}
