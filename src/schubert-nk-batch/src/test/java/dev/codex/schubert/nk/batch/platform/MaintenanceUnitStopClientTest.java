@@ -186,9 +186,13 @@ final class MaintenanceUnitStopClientTest {
             command -> {
               throw new IOException("public start failure");
             });
-    assertThrows(IOException.class, () -> refusal.stop(MaintenanceUnit.CADDY));
+    var startUnknown = refusal.stop(MaintenanceUnit.CADDY);
+    assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, startUnknown.status());
+    assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, startUnknown.awaitClient());
     var nullChild = new MaintenanceUnitStopClient(() -> {}, unit -> {}, command -> null);
-    assertThrows(NullPointerException.class, () -> nullChild.stop(MaintenanceUnit.CADDY));
+    var nullUnknown = nullChild.stop(MaintenanceUnit.CADDY);
+    assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, nullUnknown.status());
+    assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, nullUnknown.awaitClient());
     var process = child();
     int[] checks = {0};
     var result =
@@ -202,6 +206,27 @@ final class MaintenanceUnitStopClientTest {
     assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, result.status());
     process.allClosed();
     assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, result.awaitClient());
+  }
+
+  @Test
+  void mclient012EveryPostInvocationStartFailureRemainsOpaqueUnknown() throws Exception {
+    for (Throwable fault :
+        List.of(new IllegalStateException("public runtime"), new AssertionError("public error"))) {
+      int[] starts = {0};
+      var client =
+          new MaintenanceUnitStopClient(
+              () -> {},
+              unit -> {},
+              command -> {
+                starts[0]++;
+                if (fault instanceof RuntimeException runtime) throw runtime;
+                throw (Error) fault;
+              });
+      var result = client.stop(MaintenanceUnit.CADDY);
+      assertEquals(1, starts[0]);
+      assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, result.status());
+      assertEquals(MaintenanceUnitStopClient.Status.UNKNOWN, result.awaitClient());
+    }
   }
 
   @Test

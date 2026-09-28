@@ -1,5 +1,9 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC105/PG340（停止時点とA所有の整合）：SSC086/100の既定順を正とし、親の前段固定8 stopは真正Morning・連続M/同原本/独立start禁止下で発行する。Aは全stop client実終端＋各Unit終端の後で取得し、そのM/A内で全8をfresh再観測する。従前SSC102の「M/A保持中」はA取得後の後段worker停止に適用し、前段でA取得済みと読み替えない。前段で既得stop attemptがUNKNOWNならMを正常unwindさせず保持・reapする。startがhandleを返す前の不確定は別に保全閉鎖を要し、IOExceptionを一般的な未起動証明としてMを解放しない。A取得後の再観測失敗では変更0・未公開で拒否する。これらのread-only結線だけでINVALID/permit・全親完成にはならない。
+
+BUG315/PG340: `MaintenanceUnitStopClient.stop`のstart呼出後IOException/Runtime/Error/null handleは、呼出前root/policy拒否と違ってspawn不存在を証明できない。原因やraw commandを外へ出さずhandleなし`Attempt.UNKNOWN`とし、親`MorningStopPass`は通常帰還・次stop・変更へ進まない。handleがないため同attempt自身ではreap成功へ遷移できず、実親Unit/cgroup全終端とhard timeout時の別保全を設計・実測するまでR2/正式親受入に算入しない。この保守的な限定修正を、永久待機が安全に運用可能と証明したものと解釈しない。
+
 SSC102/PG319: 親停止clientは真正root Morning/M/A/同原本保持中に固定8 Unit順の完全名だけを `systemctl --system --no-pager --no-ask-password stop` へ渡し、直前にSSC101 policyを毎回再取得する。shell/任意env/commandlineは使わず、非秘密allowlist・stdin close・stdout/stderr discard。client exit0・全owner closeが確認できてもfresh SSC100 Unit/kernel終端とArtemis clean journalは別gate。非0/start不明/最大120秒超/割込/close不明はsuccess不可、未終端clientは自動SIGKILL・destroyせず親がM/Aを保持するopaque unknown handleで隔離しreapする。client結果をboolだけにしない。unit側TimeoutStopSec/親30分上限の確認は別に継続。
 
 SSC101/PG318: 停止命令より前に固定8 Unitそれぞれの実効 Id/LoadState/KillMode/SendSIGKILL を固定systemctl showで再観測する。ASCII/LF・512byte以下・各1回の完全key集合を要求し、固定Id/loaded/control-group/no以外を停止0回で拒否する。実効policy読取成功は停止client実終了・真正cgroup終端・clean journalの代用ではない。Caddy package既定の `SendSIGKILL=yes` は不適合であり、NK専用drop-in `SendSIGKILL=no`/`TimeoutStopSec=30s` を非起動配備し実効値を再照合する。初期未配置Unitを偽Unitで補完しない。

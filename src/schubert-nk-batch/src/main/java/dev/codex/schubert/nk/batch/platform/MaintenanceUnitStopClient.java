@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed root Morning stop-client owner. Client exit is not Unit/cgroup termination or Artemis
@@ -93,17 +94,24 @@ public final class MaintenanceUnitStopClient {
     policy.requireSafe(unit);
     context.recheck();
     interrupted();
-    Process process =
-        Objects.requireNonNull(
-            start.execute(
-                List.of(
-                    "/usr/bin/systemctl",
-                    "--system",
-                    "--no-pager",
-                    "--no-ask-password",
-                    "stop",
-                    unit.serviceName())),
-            "fixed stop process");
+    @Nullable Process process;
+    try {
+      process =
+          start.execute(
+              List.of(
+                  "/usr/bin/systemctl",
+                  "--system",
+                  "--no-pager",
+                  "--no-ask-password",
+                  "stop",
+                  unit.serviceName()));
+    } catch (IOException | RuntimeException | Error uncertainStart) {
+      // Once start is invoked, its failure does not prove no client was spawned. Return an opaque
+      // unreapable UNKNOWN; MorningStopPass must not normally unwind M or issue the next stop.
+      // No source exception/cause or command detail crosses this boundary. BUG-315/SSC-105.
+      return new Attempt(unit, context, null);
+    }
+    if (process == null) return new Attempt(unit, context, null);
     var attempt = new Attempt(unit, context, process);
     attempt.awaitClient();
     return attempt;
@@ -118,13 +126,13 @@ public final class MaintenanceUnitStopClient {
   public static final class Attempt {
     private final MaintenanceUnit unit;
     private final Context context;
-    private final Process process;
+    private final @Nullable Process process;
     private Status status = Status.UNKNOWN;
     private boolean stdinClosed;
     private boolean streamsClosed;
     private boolean poisoned;
 
-    private Attempt(MaintenanceUnit unit, Context context, Process process) {
+    private Attempt(MaintenanceUnit unit, Context context, @Nullable Process process) {
       this.unit = unit;
       this.context = context;
       this.process = process;
@@ -141,6 +149,7 @@ public final class MaintenanceUnitStopClient {
     /** Reap under the still-held parent locks; UNKNOWN never grants an unlock or stop success. */
     public synchronized Status awaitClient() {
       if (status != Status.UNKNOWN || streamsClosed || poisoned) return status;
+      if (process == null) return Status.UNKNOWN; // No handle means no reaping proof.
       try {
         context.recheck();
         if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
