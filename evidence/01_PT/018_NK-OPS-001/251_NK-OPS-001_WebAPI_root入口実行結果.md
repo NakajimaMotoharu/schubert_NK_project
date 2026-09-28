@@ -1,0 +1,8 @@
+# NK-OPS-001 Web/API root入口実行結果（PG370・暫定）
+
+- 対象: `PT-OPS-RMAIN001～006`、仕様[250](250_NK-OPS-001_WebAPI_root入口単体テスト仕様書.md)。Production source `101d4fa09a80c7acec1c6255658bfdba2146e44b`/`dev-foundation`、2026-09-29 JST。Linux 7.0.0-34-generic x86_64、JDK25.0.4/Maven3.9.12、SpotBugs4.10.4.0/NullAway0.14.1/JaCoCo0.8.15。
+- 固定WEB/APIだけを受ける合成Admissionの選択6PTはfailure/error/skipped=0、SpotBugs0。既知IOExceptionではexit30、全gate成功でもexit30、無効引数はgateを呼ばずexit70。null・未知programming failureは成功に変換しない。Source reviewでProduction preflight順がroot context→固定NSS→承認release→固定argv→root再確認であることを照合した。これはschema/permit等の実許可ではない。
+- 非root hostで同じcompiled Production classを外部JVMから起動し、`WEB`/`API`は各exit30、`OTHER`はexit70、stdout/stderr空を実測した。real root Unit・release・NSS・permitの正規成功経路は未実行。VMの本番Unitは変更せず、root前段を有効化していない。
+- Security/startup横断triggerのProduction6固定source `clean test spotbugs:check jacoco:report`はexit0、367 suite/2,497 PT、failure/error/skipped=0、SpotBugs6module0。Coverage missed I/B/L/M/CはProtocol/Storage=`0/0/0/0/0`、Bootstrap=`60/37/11/4/0`、API=`95/3/32/4/0`、Web=`80/1/25/4/0`、Batch=`1450/31/324/122/15`。新Launcher outer=`44/2/14/2/0`（実preflight/main未到達）。全4指標100%・正式53scopeは未達。
+- 初回Batch単独test compileは隔離m2に旧Bootstrap jarが残りexit1。`-DskipTests install`はJaCoCo coverage-checkでexit1。`-DskipTests -Djacoco.skip=true install`の技術cache更新exit0後に選択6PTと全6 clean PTを成功させた。skipの2 commandはPT成功件数へ算入しない。
+- 未達: 真正Unit・root許可/全root/Ops/schema/current permit、A/proof、余剰FD/秘密copy、held ELF/同PID execve、Web/API業務ready、R2/R3/実NK CHR。R1/D04/D05の入口限定成果で、D固定ID閉鎖0、正式`PT-WEB-20260925-24`/source`858713c0bf310ae8bf62078b0a1cedbce4e968db`、中心48.3%据置。Result/XML/JaCoCo/source/spec SHAは同階層`evidence/provisional/PG370-root-entry/manifest.json`。Raw XML/credentialなし。

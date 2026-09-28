@@ -1,0 +1,36 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "fail-closed root Web/API external entry and selected PT verified; native root issuer and real Unit unaccepted",
+  "executedAtJst": "2026-09-29T02:39:03+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "101d4fa09a80c7acec1c6255658bfdba2146e44b",
+  "testIds": ["PT-OPS-RMAIN001", "PT-OPS-RMAIN002", "PT-OPS-RMAIN003", "PT-OPS-RMAIN004", "PT-OPS-RMAIN005", "PT-OPS-RMAIN006"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic WEB/API/invalid argv and injected read-only admission; no secrets or Production Unit mutation",
+  "expected": "WEB/API gate called once but non-success 30; invalid argv gate zero and exit70; IOException non-success; nonroot external compiled class WEB/API30 OTHER70",
+  "actual": "selected 6 PT F/E/S0; Production6 2497 PT/367 suites F/E/S0 and SpotBugs6module0; host external JVM WEB30/API30/OTHER70, stdout/stderr empty",
+  "externalHostSmoke": {"classpath": "same Production target/classes for batch/bootstrap/storage/api, not an installed release or Unit", "webExitCode": 30, "apiExitCode": 30, "invalidExitCode": 70, "stdoutStderr": "empty"},
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0], "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0], "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0], "batch": [1450, 31, 324, 122, 15],
+    "rootServiceLauncher": [44, 2, 14, 2, 0]
+  },
+  "related": ["SS342 section 4.2", "SSC-086..089", "471 R1/D04/D05"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "cd76974fcd5ab978dd1b4488d833c92ba5ee111b55e8ea270d3d4fbb43c0d516",
+    "storageJUnitPathOrderedSha256List": "d9a3ec94809aa518519e70d0c2d506107feb892809c0b2857a97bef83b94d9c4",
+    "bootstrapJUnitPathOrderedSha256List": "66f1b07068915682831e33ec2ff83f8d2191858c9bf5d023ad970f50a7dff871",
+    "apiJUnitPathOrderedSha256List": "3b0ab011053067812423d816e87c4dad3219cb028546660bcb417a84aa5e8eb7",
+    "webJUnitPathOrderedSha256List": "267afc87c552e9e9b2303a247a9c571dbe7c0e15be6ed451e4f54ae63b1c74b3",
+    "batchJUnitPathOrderedSha256List": "326a33da812c1d43594b2a4f10a270aa2abee4c439c62d78bed7fb4752c84727",
+    "rootServiceLauncherJUnitXml": "93d6b2cf8884b5af72aff822a6b8c59b0b8fc568a9d152fe405dbca08936c1ee",
+    "batchJacocoXml": "4709bd69803ed26d13063e781a5308d2f09350a6fe3d4128b516ee169654185c",
+    "sourceRootServiceLauncher": "df999bc2d01fdbb7205b5edb7371c93d6243911c4fa124b69b69c78c16e5a999",
+    "testRootServiceLauncher": "b72d5211b0f147ecfd16fc03eaa56683a693d64481d1dff9bdf7da2a496b8c6b",
+    "ptSpecification250": "76a9bb9fffb99776155ea0c637b3b4a23675637d3698f923df9f6dc8f550748e"
+  },
+  "rawXmlOrSecretsInGit": false
+}
