@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG374追加追跡（2026-09-29）：NK-OPS-001 Production Batch `BackupStartIntentFiles.begin/requireClear`と既存`MorningControlScope.withClearIntent`、PGPT専用`NativeBackupTimeoutResidualProbe`を018/258・259/MTIME005～008で対応付ける。RD OPS-009/BAK-001、UI251、SS341/342/343/SSC107、BUG322/YKT254。専用VM実marker公開・timeout・別process拒否は005～007限定PASS、008未実行。外部MorningProcessMainとM/A/原本の実結線は未達。
+
 PG373追加追跡（2026-09-29）：NK-OPS-001 Morning親oneshot候補の実OS期限・test-only marker残存/lock解放・後片付けを`PT-OPS-MTIME001～004`/018/256・257で限定確認。RD OPS-009/BAK-001、UI251、SS341/342/343・SSC107、BUG322/YKT254。Production親のmarker自動公開・次回拒否/全子終端は未受入、source変更なし。
 
 PG372追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceAdmissionScope.execute`→既存`StartupAdmissionFile.tryExclusive`はWeb/API root入口の同一借用A下でroot再確認、NSS/release/current permit/argvを実行するscope。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343・SSC086～089、PT-OPS-RASCOPE001～006、018/254。Aの予約FDはcallback内借用のみ、proof/exec/業務ready未結線、外部入口はexit30のまま。

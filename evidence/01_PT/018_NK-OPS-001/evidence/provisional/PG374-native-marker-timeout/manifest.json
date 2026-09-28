@@ -1,0 +1,27 @@
+{
+  "programId": "NK-OPS-001",
+  "phase": "PG374 isolated OS PT, provisional; not Production parent/R2/R3 acceptance",
+  "testIds": ["PT-OPS-MTIME005", "PT-OPS-MTIME006", "PT-OPS-MTIME007", "PT-OPS-MTIME008"],
+  "status": {"passed": ["PT-OPS-MTIME005", "PT-OPS-MTIME006", "PT-OPS-MTIME007"], "notRun": ["PT-OPS-MTIME008"], "failed": [], "flaky": [], "skipped": []},
+  "executedAtJst": "2026-09-29T03:30:33+09:00",
+  "environment": "isolated QEMU VM instance pgpt-r2-20260927-01, Linux 7.0.0-31-generic x86_64, systemd 259, JDK 25.0.4; host JDK 25.0.4",
+  "branch": "dev-foundation",
+  "sourceCommit": "32bf8ce9fd40545f74aeb2785fdbd03637e9f89f",
+  "command": "host javac --release 25 -Xlint:all -Werror with Batch/Storage/SpotBugs/JSpecify classpath; compile and package isolated PGPT probe and same-source Batch/Storage classes; VM sudo systemd-run --wait --unit=schubert-nk-pgpt-374-marker-timeout.service Type=oneshot TimeoutStartSec=2s TimeoutStopSec=2s KillMode=control-group SendSIGKILL=no java --enable-native-access=ALL-UNNAMED -cp <PG374 probe:batch:storage plus existing dependencies> NativeBackupTimeoutResidualProbe hold; fresh systemctl show/stat; separate sudo java ... NativeBackupTimeoutResidualProbe check; exact test-only cleanup and final show",
+  "input": "dedicated /run/schubert-nk/pgpt-374-backup-intent root:root 0700 empty tmpfs, Production marker root separately empty, Morning controller loaded/inactive/PID0",
+  "expected": "test-only Production marker root0600 empty regular link1 persists after parent timeout and separate requireClear refuses before work; unchanged marker inode; final test-only resources removed and original Unit unchanged",
+  "actual": "systemd-run client exit1, Result=timeout, runtime2.264s, ExecMainCode1/Status143, MainPID0/ControlGroup empty; marker root0600 regular/link1/size0/inode8772; separate check RESIDUAL_REFUSED exit0 and inode8772 unchanged; test Unit not-found and dedicated paths absent after cleanup; original Morning controller loaded/inactive/PID0 and Production backup-request empty",
+  "exitCode": {"initialCompileMissingAnnotationClasspath": 1, "correctedCompile": 0, "systemdRunTimeoutExpectedNonzero": 1, "residualCheck": 0, "cleanupAndFinalCheck": 0},
+  "coverage": "No Production6 rerun and no coverage claim; PG372 fixed-source 2509PT/369suite is separate provisional result. Test-only probe is excluded from Production artifacts, not used to dilute 100 percent requirement.",
+  "related": ["BUG-322", "YKT-254", "SSC-107", "RD OPS-009/BAK-001", "UI251", "SS341/342/343"],
+  "hashesSha256": {
+    "spec258": "153d77df7ea666ade2ccc0c4367e7a5f985992fd671466229ee8e79a7ebb01f0",
+    "result259": "242d282c1842dff6e1fc61b1ea03e137f0ce91dce07c4752eea919bb1cb02d61",
+    "probeSource": "d93e8f383b1e17a778f87845f8e65c2353b819c80afcfec1524b2f7b88e3123b",
+    "probeClass": "d4965bd1bd2373e6b26e2424c9eaf7a63123bb2cacc4f45aaf31ed04b84701d2",
+    "probeJar": "4b435edf4e3d4c7caaebed5f263bfa83a33c55f955202863748a1ae1953067a2",
+    "batchJar": "2c94c0383fe2bb288bb6a2e6a44f00073f20efd39ec5295ab5f2726dba7f6816",
+    "storageJar": "52f5aa6061881ae8bd7205e936d5803a2006a23463e5c5eca8b700007b86a2b7"
+  },
+  "rawJournalInvocationOrSecretsInGit": false
+}
