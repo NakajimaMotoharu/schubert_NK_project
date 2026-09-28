@@ -29,7 +29,10 @@ final class BackupUnitStartClientTest {
               sequence.add("client");
               return process;
             },
-            () -> sequence.add("intent"));
+            () -> {
+              sequence.add("intent");
+              return () -> sequence.add("retire");
+            });
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, success.start().status());
     assertEquals(List.of("root", "policy", "root", "intent", "client", "root", "root"), sequence);
     process.allClosed();
@@ -56,12 +59,132 @@ final class BackupUnitStartClientTest {
               sequence.add("client-unknown");
               throw new IOException("test-only unknown delivery");
             },
-            () -> sequence.add("intent"));
+            () -> {
+              sequence.add("intent");
+              return () -> sequence.add("retire");
+            });
     assertEquals(BackupUnitStartClient.Status.UNKNOWN, uncertainStart.start().status());
     assertEquals(List.of("root", "policy", "root", "intent", "client-unknown"), sequence);
     assertThrows(
         NullPointerException.class,
         () -> new BackupUnitStartClient(() -> {}, () -> {}, command -> child(), null));
+  }
+
+  @Test
+  void bstart010RetainedMarkerRequiresCompleteParentProof() throws Exception {
+    var sequence = new ArrayList<String>();
+    var process = child();
+    var attempt =
+        new BackupUnitStartClient(
+                () -> sequence.add("root"),
+                () -> {},
+                command -> process,
+                () -> {
+                  sequence.add("publish");
+                  return () -> sequence.add("retire");
+                })
+            .start();
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
+    assertEquals(List.of("root", "root", "publish", "root", "root"), sequence);
+    assertThrows(
+        IOException.class,
+        () ->
+            attempt.retireAfter(
+                () -> {
+                  sequence.add("not-complete");
+                  throw new IOException("worker not terminal");
+                }));
+    assertFalse(sequence.contains("retire"));
+    attempt.retireAfter(() -> sequence.add("full-parent-proof"));
+    assertEquals("retire", sequence.getLast());
+    assertEquals(1, sequence.stream().filter("retire"::equals).count());
+    assertThrows(IOException.class, () -> attempt.retireAfter(() -> fail("cannot repeat")));
+    process.allClosed();
+
+    var unknown =
+        new BackupUnitStartClient(
+                () -> {},
+                () -> {},
+                command -> {
+                  throw new IOException("uncertain delivery");
+                },
+                () -> () -> fail("unknown marker must remain"))
+            .start();
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, unknown.status());
+    assertThrows(IOException.class, () -> unknown.retireAfter(() -> fail("no proof on unknown")));
+    var nonzero = child();
+    nonzero.code = 1;
+    var rejected = new BackupUnitStartClient(() -> {}, () -> {}, command -> nonzero).start();
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_NONZERO, rejected.status());
+    assertThrows(IOException.class, () -> rejected.retireAfter(() -> fail("no proof on nonzero")));
+    nonzero.allClosed();
+  }
+
+  @Test
+  void bstart011PostPublicationInterruptRetainsMarkerWithoutClient() throws Exception {
+    int[] starts = {0};
+    int[] retires = {0};
+    try {
+      var attempt =
+          new BackupUnitStartClient(
+                  () -> {},
+                  () -> {},
+                  command -> {
+                    starts[0]++;
+                    return child();
+                  },
+                  () -> {
+                    Thread.currentThread().interrupt();
+                    return () -> retires[0]++;
+                  })
+              .start();
+      assertEquals(BackupUnitStartClient.Status.UNKNOWN, attempt.status());
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertEquals(0, starts[0]);
+      assertEquals(0, retires[0]);
+      assertThrows(
+          IOException.class, () -> attempt.retireAfter(() -> fail("unknown cannot retire")));
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
+  @Test
+  void bstart012ProofDriftReentryAndRetireFailureStayFailClosed() throws Exception {
+    int[] rootChecks = {0};
+    int[] retires = {0};
+    var process = child();
+    var attempt =
+        new BackupUnitStartClient(
+                () -> rootChecks[0]++, () -> {}, command -> process, () -> () -> retires[0]++)
+            .start();
+    assertThrows(NullPointerException.class, () -> attempt.retireAfter(null));
+    assertThrows(
+        IOException.class,
+        () -> attempt.retireAfter(() -> attempt.retireAfter(() -> fail("reentry"))));
+    assertEquals(0, retires[0]);
+    int before = rootChecks[0];
+    attempt.retireAfter(() -> assertEquals(before + 1, rootChecks[0]));
+    assertEquals(1, retires[0]);
+    process.allClosed();
+
+    var failed = child();
+    int[] failedRetires = {0};
+    var failedAttempt =
+        new BackupUnitStartClient(
+                () -> {},
+                () -> {},
+                command -> failed,
+                () ->
+                    () -> {
+                      failedRetires[0]++;
+                      throw new IOException("retire storage uncertainty");
+                    })
+            .start();
+    assertThrows(IOException.class, () -> failedAttempt.retireAfter(() -> {}));
+    assertThrows(IOException.class, () -> failedAttempt.retireAfter(() -> {}));
+    assertEquals(1, failedRetires[0]);
+    failed.allClosed();
   }
 
   @Test

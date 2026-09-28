@@ -35,7 +35,18 @@ public final class BackupUnitStartClient {
 
   @FunctionalInterface
   interface Intent {
-    void begin() throws IOException;
+    MarkerLease begin() throws IOException;
+  }
+
+  @FunctionalInterface
+  interface MarkerLease {
+    void retire() throws IOException;
+  }
+
+  /** Parent-supplied proof, evaluated while its M/A/original/request owners are still held. */
+  @FunctionalInterface
+  public interface RetirementGate {
+    void verify() throws IOException;
   }
 
   public enum Status {
@@ -66,11 +77,27 @@ public final class BackupUnitStartClient {
         expected,
         MaintenanceUnitStopPolicy.create(),
         new MaintenanceUnitStopClient.NativeStart()::execute,
-        () -> {
-          try (var marker = BackupStartIntentFiles.create(root, expected)) {
-            marker.begin();
-          }
-        });
+        () -> beginNative(root, expected));
+  }
+
+  private static MarkerLease beginNative(
+      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    var marker = BackupStartIntentFiles.create(root, expected);
+    try {
+      var token = marker.begin();
+      // This owner and exact token must survive the external start and the whole parent cycle.
+      return () -> {
+        marker.retire(token);
+        marker.close();
+      };
+    } catch (IOException | RuntimeException | Error failure) {
+      try {
+        marker.close();
+      } catch (IOException closeFailure) {
+        failure.addSuppressed(closeFailure);
+      }
+      throw failure;
+    }
   }
 
   static BackupUnitStartClient create(
@@ -79,7 +106,7 @@ public final class BackupUnitStartClient {
       MaintenanceUnitStopPolicy unitPolicy,
       Start start)
       throws IOException {
-    return create(root, expected, unitPolicy, start, () -> {});
+    return create(root, expected, unitPolicy, start, () -> () -> {});
   }
 
   static BackupUnitStartClient create(
@@ -109,7 +136,7 @@ public final class BackupUnitStartClient {
    * marker.
    */
   BackupUnitStartClient(Context context, Policy policy, Start start) {
-    this(context, policy, start, () -> {});
+    this(context, policy, start, () -> () -> {});
   }
 
   BackupUnitStartClient(Context context, Policy policy, Start start, Intent intent) {
@@ -131,15 +158,15 @@ public final class BackupUnitStartClient {
     interrupted();
     // SSC106: a failed or uncertain publication is pre-start and issues no systemctl request.
     // Once published, all unknown delivery paths leave the marker for the next M admission.
-    intent.begin();
-    interrupted();
+    MarkerLease marker = Objects.requireNonNull(intent.begin(), "retained start marker");
+    if (Thread.currentThread().isInterrupted()) return new Attempt(context, null, marker);
     @Nullable Process process;
     try {
       process = start.execute(COMMAND);
     } catch (IOException | RuntimeException | Error uncertainStart) {
-      return new Attempt(context, null);
+      return new Attempt(context, null, marker);
     }
-    var attempt = new Attempt(context, process);
+    var attempt = new Attempt(context, process, marker);
     attempt.awaitClient();
     return attempt;
   }
@@ -153,18 +180,45 @@ public final class BackupUnitStartClient {
   public static final class Attempt {
     private final Context context;
     private final @Nullable Process process;
+    private final MarkerLease marker;
     private Status status = Status.UNKNOWN;
+    private boolean retired;
+    private boolean retiring;
+    private boolean retireUncertain;
     private boolean stdinClosed;
     private boolean streamsClosed;
     private boolean poisoned;
 
-    private Attempt(Context context, @Nullable Process process) {
+    private Attempt(Context context, @Nullable Process process, MarkerLease marker) {
       this.context = context;
       this.process = process;
+      this.marker = marker;
     }
 
     public synchronized Status status() {
       return status;
+    }
+
+    /**
+     * Only the still-owned parent may retire after fresh worker receipt, explicit stop, whole-Unit
+     * termination, and original identity have been checked. Client exit zero alone is insufficient.
+     * An exception leaves the marker unrepaired; UNKNOWN and nonzero cannot retire.
+     */
+    public synchronized void retireAfter(RetirementGate gate) throws IOException {
+      Objects.requireNonNull(gate, "parent completion proof");
+      if (status != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
+        throw new IOException("backup intent retirement unavailable");
+      retiring = true;
+      try {
+        context.recheck();
+        gate.verify();
+        context.recheck();
+        retireUncertain = true;
+        marker.retire();
+        retired = true;
+      } finally {
+        retiring = false;
+      }
     }
 
     /** Reap under still-held parent owners; UNKNOWN is never a worker or unlock receipt. */
