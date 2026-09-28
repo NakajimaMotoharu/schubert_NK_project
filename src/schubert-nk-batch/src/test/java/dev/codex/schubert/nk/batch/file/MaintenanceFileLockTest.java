@@ -452,6 +452,9 @@ final class MaintenanceFileLockTest {
         List.of(
             "d! /run/schubert-nk 0755 root root -",
             "d! /run/schubert-nk/maintenance 0700 root root -",
+            "d! /run/schubert-nk/startup 0700 root root -",
+            "d! /run/schubert-nk/backup-request 0700 root root -",
+            "d! /run/schubert-nk/cleanup-request 0700 root root -",
             "f! /run/schubert-nk/maintenance.lock 0600 root root -",
             "f! /run/schubert-nk/startup-admission.lock 0600 root root -"),
         lines.stream().filter(s -> !s.isBlank() && !s.startsWith("#")).toList());

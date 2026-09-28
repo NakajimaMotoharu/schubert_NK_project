@@ -15,7 +15,7 @@ MaintenanceFileLock / RD OPS-009・AVL / UI251 / SS311・341 §3・343 / SSC-049
 | PT-OPS-LOCK-005 | replacementAndPostconditions | lock/run/app directory交換、処理後mode/ACL/identity変化を拒否し元FDをclose |
 | PT-OPS-LOCK-006 | ioAndCloseFailures | open/属性/ACL/FS/close失敗、callback IOException/runtime/null、固定診断/全所有回収 |
 | PT-OPS-LOCK-007 | constructorAndNativeBoundary | 全dependency/null、固定公開factory・native NIO属性/FS、非root正規拒否 |
-| PT-OPS-LOCK-008 | fixedProvisioningContract | tmpfilesの固定3path/型/mode/root/非truncate/非delete、配置前提・再実行禁止をliteral照合 |
+| PT-OPS-LOCK-008 | fixedProvisioningContract | SS343§6.15の`maintenance`/`startup`/`backup-request`/`cleanup-request`とM/Aを含むtmpfiles固定7pathを独立literalで型/mode/root/boot限定・非truncate/非delete照合。BUG-318/YKT-251の3dir欠落をRED→GREENで確認し、実boot生成は隔離rootで別途検証。現役VM `/run` には再実行しない |
 
 ## 2. Gate・証跡
 
