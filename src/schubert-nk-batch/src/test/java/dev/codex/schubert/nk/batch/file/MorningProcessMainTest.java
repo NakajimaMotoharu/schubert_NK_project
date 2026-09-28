@@ -2,20 +2,22 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.platform.MorningParentBudget;
 import dev.codex.schubert.nk.batch.platform.StopGateException;
 import dev.codex.schubert.nk.batch.platform.StopGateFailure;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/PG339; PT-OPS-MMAIN001-005. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/PG339/368; PT-OPS-MMAIN001-007. */
 final class MorningProcessMainTest {
   @Test
   void mmain001AdmissionSuccessStillCannotClaimMorningSuccess() {
     var calls = new AtomicInteger();
-    assertEquals(30, MorningProcessMain.run(new String[0], calls::incrementAndGet));
+    assertEquals(30, MorningProcessMain.run(new String[0], budget -> calls.incrementAndGet()));
     assertEquals(1, calls.get());
   }
 
@@ -23,8 +25,10 @@ final class MorningProcessMainTest {
   void mmain002ArgumentsCannotSelectRunOrOverrideGate() {
     var calls = new AtomicInteger();
     assertEquals(
-        70, MorningProcessMain.run(new String[] {"--run-id=ignored"}, calls::incrementAndGet));
-    assertEquals(70, MorningProcessMain.run(new String[] {""}, calls::incrementAndGet));
+        70,
+        MorningProcessMain.run(
+            new String[] {"--run-id=ignored"}, budget -> calls.incrementAndGet()));
+    assertEquals(70, MorningProcessMain.run(new String[] {""}, budget -> calls.incrementAndGet()));
     assertEquals(0, calls.get());
   }
 
@@ -34,7 +38,7 @@ final class MorningProcessMainTest {
         30,
         MorningProcessMain.run(
             new String[0],
-            () -> {
+            budget -> {
               throw new IOException("PRIVATE");
             }));
     // A fixed known stop exception is already sanitized by the stop-policy boundary.
@@ -46,7 +50,7 @@ final class MorningProcessMainTest {
         30,
         MorningProcessMain.run(
             new String[0],
-            () -> {
+            budget -> {
               throw known;
             }));
   }
@@ -61,10 +65,10 @@ final class MorningProcessMainTest {
             () ->
                 MorningProcessMain.run(
                     new String[0],
-                    () -> {
+                    budget -> {
                       throw unknown;
                     })));
-    assertThrows(NullPointerException.class, () -> MorningProcessMain.run(null, () -> {}));
+    assertThrows(NullPointerException.class, () -> MorningProcessMain.run(null, budget -> {}));
     assertThrows(NullPointerException.class, () -> MorningProcessMain.run(new String[0], null));
   }
 
@@ -75,5 +79,28 @@ final class MorningProcessMainTest {
     assertTrue(
         Modifier.isPublic(
             MorningProcessMain.class.getMethod("main", String[].class).getModifiers()));
+  }
+
+  @Test
+  void mmain006OneParentBudgetIsBorrowedByAdmissionAndNeverClaimsReady() {
+    var received = new AtomicReference<MorningParentBudget>();
+    assertEquals(
+        30,
+        MorningProcessMain.run(
+            new String[0],
+            budget -> {
+              assertNull(received.getAndSet(budget));
+              budget.requireWithin();
+            }));
+    assertNotNull(received.get());
+    assertDoesNotThrow(received.get()::requireWithin);
+  }
+
+  @Test
+  void mmain007InvalidArgvDoesNotBorrowParentBudget() {
+    var calls = new AtomicInteger();
+    assertEquals(
+        70, MorningProcessMain.run(new String[] {"unexpected"}, budget -> calls.incrementAndGet()));
+    assertEquals(0, calls.get());
   }
 }
