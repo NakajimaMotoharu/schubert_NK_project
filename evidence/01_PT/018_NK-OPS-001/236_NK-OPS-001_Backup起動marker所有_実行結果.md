@@ -1,0 +1,11 @@
+# 236 NK-OPS-001 Backup起動marker所有PT結果（PG357）
+
+状態: `BackupUnitStartClient`のmarker owner/token継続、親証明失敗/未知送達時の非retireを限定実装・PT成功。真正Morning親cycle、実Backup Unit、hard timeout、全4指標100%、R2/R3は未認定。仕様・独立期待は[235](235_NK-OPS-001_Backup起動marker所有_単体テスト仕様書.md)、関連SSC-105/106・BUG-315/YKT-248。
+
+2026-09-28 JST、branch `dev-foundation`、source/test/SS補足/spec commit `c581417ff`。Linux kernel7.0.0-34-generic、JDK25.0.4、Maven3.9.12、SpotBugs4.10.4.0、NullAway0.14.1、JaCoCo0.8.15、Node24.19.0。先行限定 `-Dtest=BackupUnitStartClientTest test spotbugs:check jacoco:report` は12PT/1suite、F/E/S0、static0。最初の試行はformat違反でtest未実行・不合格、formatter後に再実行。post-publication interruptはsystemctl0/retire0、UNKNOWN/非zeroは親proof0/retire0、proof失敗・再入・二重実行とmarker retire IO不明は非成功。正常client exitだけでretireせず、親callback成功後に一度だけretireする。Synthetic `RetirementGate` は真正worker証明ではない。
+
+Security/外部起動owner変更のtriggerを456へ事前記録し、固定sourceでProduction6 `JAVA_HOME=<JDK25> PATH=<JDK25/Node24優先> ./mvnw -o -q -Dmaven.repo.local=<固定toolchain m2> -Dnk.pt.repository=<本tree> -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test spotbugs:check jacoco:report`を実施、exit0。JUnit XML全357suite/2,443PT、failed/error/skipped0、静的6module0。Module別はProtocol80/17、Storage149/21、Bootstrap175/22、API744/123、Web555/85、Batch740/89。
+
+JaCoCo XMLのmissed branch/line/method/classはProtocol0/0/0/0、Storage0/0/0/0、Bootstrap37/11/4/0、API1/19/3/0、Web1/19/3/0、Batch21/269/102/12。変更`BackupUnitStartClient` outerは0/13/5/0、nested Attemptは0/0/0/0。Native factory・実Unit等の未実測を覆うため、全4指標100% gateは未達。Raw XMLはGit外の`target`にのみ保持。全357 XMLのpath順SHA256列SHA256 `c6204603f7110402a3bdb0d655b3bd58fa5eb7dd838be281e5a7d9f13e7de5dc`、対象JUnit XML SHA256 `3f798b273dada3b713b1ebd06ce5b79fad5ade74f08a9fc57582b8af14a31724`、Batch JaCoCo XML SHA256 `6f6e99ed14e6d80774141d5072e28ccb7a40194340b1834a433b6dfccbe21aec`。sanitized manifestは同Programの`evidence/provisional/PG357-backup-marker-owner/manifest.json`。
+
+Production factoryは保持leaseをAttemptに渡すようになったが、現役Morning backup callbackはまだこのAttemptを取得・保持しない。親のfresh Invocation/receipt0、明示stop・全process終端、原本同一性を証明する`RetirementGate`実体とUNKNOWN/hard timeoutのM/A非解放は未接続。SSC-106/BUG-315/YKT-248は対応中。実Backup Unit start0、CHR実測0。正式source `858713c0bf310ae8bf62078b0a1cedbce4e968db`/run `PT-WEB-20260925-24`/1964PT/53scope、全体中心48.3%（42～54）は据置。

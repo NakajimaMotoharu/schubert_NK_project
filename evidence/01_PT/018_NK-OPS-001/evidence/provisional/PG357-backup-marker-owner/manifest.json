@@ -1,0 +1,27 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "PG357 limited pass; full 100% coverage and real parent acceptance incomplete",
+  "executedAtJst": "2026-09-28T21:02:00+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "c581417ff",
+  "testIds": ["PT-OPS-BSTART001-012"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic fixed systemctl process/parent event oracle; no real Backup Unit start or credential",
+  "expected": "same-owner marker retained; UNKNOWN/nonzero/proof failure cannot retire; verified parent callback permits one retirement",
+  "actual": "selected 12/1 and Production6 2443/357, failure/error/skipped zero; static six modules zero; full coverage failed",
+  "coverageMissedBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0], "storage": [0, 0, 0, 0], "bootstrap": [37, 11, 4, 0], "api": [1, 19, 3, 0], "web": [1, 19, 3, 0], "batch": [21, 269, 102, 12], "BackupUnitStartClientOuter": [0, 13, 5, 0], "BackupUnitStartClientAttempt": [0, 0, 0, 0]
+  },
+  "related": ["BUG-315", "YKT-248", "SSC-105", "SSC-106"],
+  "hashesSha256": {
+    "all357JUnitXmlPathOrderedSha256List": "c6204603f7110402a3bdb0d655b3bd58fa5eb7dd838be281e5a7d9f13e7de5dc",
+    "BSTARTJUnitXml": "3f798b273dada3b713b1ebd06ce5b79fad5ade74f08a9fc57582b8af14a31724",
+    "batchJacocoXml": "6f6e99ed14e6d80774141d5072e28ccb7a40194340b1834a433b6dfccbe21aec",
+    "sourceBackupUnitStartClient": "d1aeb38010b25a1a0bac916d02ee5392e635eaab5687c9bb1cae9997562bfcf4",
+    "testBackupUnitStartClient": "bf8757f11aa7ac8259d445e75f23d7b79c1dd3814b8618eded5c34ed710e901c",
+    "ptSpecification235": "46c457258ba8af2b8902d9abd327863fed7d93ffa0147357254b8c781781d099"
+  },
+  "rawXmlOrSecretsInGit": false
+}
