@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/SSC094/105/PG341/343; PT-OPS-MCTRL001-009. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/PG341/343/344; PT-OPS-MCTRL001-011. */
 final class MorningControlScopeTest {
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
@@ -405,5 +405,144 @@ final class MorningControlScopeTest {
     assertEquals(List.of("root", "M-enter", "root", "DB-reference-refused", "M-close"), events);
     assertFalse(m.held.get());
     assertFalse(a.held.get());
+  }
+
+  @Test
+  void mctrl010InvalidatesOnlyAfterFreshEightAndBeforeTrustedWork() throws Exception {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var run =
+        new BatchRun(
+            UUID.fromString("00000000-0000-0000-0000-000000000344"),
+            Instant.parse("2026-09-28T05:00:00Z"));
+    var state =
+        new MaintenanceRunState(
+            new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000345")),
+            Optional.empty());
+    MorningControlScope.Original original =
+        new MorningControlScope.Original() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+              throws IOException {
+            events.add("original-enter");
+            try {
+              return continuation.execute(state);
+            } finally {
+              events.add("original-close");
+            }
+          }
+        };
+    int value =
+        MorningControlScope.execute(
+            () -> events.add("root"),
+            m,
+            original,
+            () -> events.add("stop-eight"),
+            a,
+            () -> events.add("fresh-eight"),
+            observed -> {
+              assertSame(state, observed);
+              assertTrue(m.held.get() && a.held.get());
+              events.add("INVALID");
+            },
+            observed -> {
+              assertSame(state, observed);
+              assertTrue(m.held.get() && a.held.get());
+              events.add("trusted-work");
+              return 7;
+            });
+    assertEquals(7, value);
+    assertEquals(
+        List.of(
+            "root",
+            "M-enter",
+            "root",
+            "original-enter",
+            "root",
+            "stop-eight",
+            "root",
+            "A-enter",
+            "root",
+            "fresh-eight",
+            "root",
+            "INVALID",
+            "trusted-work",
+            "root",
+            "A-close",
+            "original-close",
+            "root",
+            "M-close",
+            "root"),
+        events);
+  }
+
+  @Test
+  void mctrl011InvalidationFailureDoesNotRunDownstreamWork() {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var run =
+        new BatchRun(
+            UUID.fromString("00000000-0000-0000-0000-000000000344"),
+            Instant.parse("2026-09-28T05:00:00Z"));
+    var state =
+        new MaintenanceRunState(
+            new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000345")),
+            Optional.empty());
+    var failure = new IOException("current write unavailable");
+    MorningControlScope.Original original =
+        new MorningControlScope.Original() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+              throws IOException {
+            return continuation.execute(state);
+          }
+        };
+    assertSame(
+        failure,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningControlScope.execute(
+                    () -> events.add("root"),
+                    m,
+                    original,
+                    () -> events.add("stop-eight"),
+                    a,
+                    () -> events.add("fresh-eight"),
+                    observed -> {
+                      events.add("INVALID-fail");
+                      throw failure;
+                    },
+                    observed -> fail("no trusted work after failed INVALID"))));
+    assertEquals(
+        List.of(
+            "root",
+            "M-enter",
+            "root",
+            "root",
+            "stop-eight",
+            "root",
+            "A-enter",
+            "root",
+            "fresh-eight",
+            "root",
+            "INVALID-fail",
+            "A-close",
+            "M-close"),
+        events);
+    assertFalse(m.held.get());
+    assertFalse(a.held.get());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.execute(
+                () -> {}, m, original, () -> {}, a, () -> {}, null, state1 -> 7));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.execute(
+                () -> {}, m, original, () -> {}, a, () -> {}, observed -> {}, null));
   }
 }

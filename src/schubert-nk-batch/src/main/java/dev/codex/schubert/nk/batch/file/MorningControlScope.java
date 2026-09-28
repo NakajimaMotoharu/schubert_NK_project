@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.file;
 import dev.codex.schubert.nk.batch.platform.MorningStopPass;
 import dev.codex.schubert.nk.batch.platform.MorningUnitTerminals;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.storage.LinuxFileLock;
 import java.io.IOException;
 import java.util.Objects;
@@ -11,11 +12,11 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Same-parent Morning M→dedicated DB/advisory→original→fixed-eight stop→A→fresh-eight boundary. The
- * supplied trusted work runs only after A's fresh observation and remains inside M, A, DB and the
- * original scope. This does not invalidate current, prove clean Artemis journal, execute
- * backup/Cleanup or issue a startup permit. An unresolved stop-client must not return from
+ * supplied trusted work runs only after A's fresh observation and durable current INVALID and
+ * remains inside M, A, DB and the original scope. This does not prove clean Artemis journal,
+ * execute backup/Cleanup or issue a startup permit. An unresolved stop-client must not return from
  * MorningStopPass; handle-less UNKNOWN/hard-timeout recovery remain unaccepted. NK-OPS-001;
- * OPS009/UI251/253/SS341§3-5/343/SSC094/100-102/105; PG341/343/PT-OPS-MCTRL001-009.
+ * OPS009/UI251/253/SS341§3-5/343/SSC089/094/100-102/105; PG341/343/344/PT-OPS-MCTRL001-011.
  */
 @NullMarked
 final class MorningControlScope {
@@ -41,6 +42,11 @@ final class MorningControlScope {
 
   interface Original {
     <T> T execute(MorningNewRunAdmission.Continuation<T> continuation) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface Invalidation {
+    void invalidate(MaintenanceRunState state) throws IOException;
   }
 
   @FunctionalInterface
@@ -70,10 +76,49 @@ final class MorningControlScope {
         () -> MorningStopPass.create(root, snapshot).execute(),
         startup::tryExclusive,
         () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
+        state -> MorningCurrentInvalidation.invalidate(root, snapshot, state),
         trustedWork);
   }
 
   static <T> T execute(
+      Gate root,
+      Exclusive maintenance,
+      Original original,
+      StopPass stop,
+      StartupExclusive startup,
+      Terminals terminals,
+      Invalidation invalidation,
+      MorningNewRunAdmission.Continuation<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(invalidation, "durable current invalidation");
+    Objects.requireNonNull(trustedWork, "same-run Morning work");
+    return executeOriginal(
+        root,
+        maintenance,
+        original,
+        stop,
+        startup,
+        terminals,
+        state -> {
+          invalidation.invalidate(state);
+          return trustedWork.execute(state);
+        });
+  }
+
+  static <T> T execute(
+      Gate root,
+      Exclusive maintenance,
+      Original original,
+      StopPass stop,
+      StartupExclusive startup,
+      Terminals terminals,
+      MorningNewRunAdmission.Continuation<T> trustedWork)
+      throws IOException {
+    // Isolated PG343 PT port. The native Production factory uses the invalidating overload.
+    return executeOriginal(root, maintenance, original, stop, startup, terminals, trustedWork);
+  }
+
+  private static <T> T executeOriginal(
       Gate root,
       Exclusive maintenance,
       Original original,
