@@ -1,0 +1,35 @@
+{
+  "id": "PG353-backup-receipt",
+  "program": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-BGATE001", "PT-OPS-BGATE002", "PT-OPS-BGATE003", "PT-OPS-BGATE004",
+    "PT-OPS-BGATE005", "PT-OPS-BGATE006", "PT-OPS-BGATE007", "PT-OPS-BGATE008"
+  ],
+  "dateJst": "2026-09-28",
+  "branch": "dev-foundation",
+  "sourceCommit": "3578716cba2af02543c212f7174d3d2bc01e91ed",
+  "os": "Linux 7.0.0-34-generic x86_64",
+  "jdk": "OpenJDK 25.0.4+7-1-26.04-Ubuntu",
+  "maven": "3.9.12",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -q -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation -pl src/schubert-nk-batch -Dtest=BackupUnitReceiptGateTest spotless:apply test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "independent SS341 fixed 18-field Backup snapshots with old/fresh UUID, injected bus and kernel whole-Unit observations",
+  "expected": "old or unstable receipt rejected; only changed Invocation with status0 and matching bus-kernel-bus all-process terminal observation accepted",
+  "actual": "8 PASS, 1 suite, failures 0, errors 0, skipped 0, no real Unit start/stop",
+  "spotbugs": 0,
+  "coverage": {
+    "newOuterMissed": {"branch": 0, "line": 0, "method": 0, "class": 0},
+    "newBaselineMissed": {"line": 0, "method": 0, "class": 0},
+    "batchOverallMissed": {"branch": 15, "line": 235, "method": 92, "class": 12},
+    "jacocoXmlSha256": "265cbf923b60825a168074d5c1cf2e2ea7ede83581849facf2d826da723969db"
+  },
+  "rawJUnitXmlSha256GitExcluded": "704d722ac818a76e5c9f2f0d630590812fea4209bd1a04ea2ea7f46d53969453",
+  "related": ["BUG-308", "BUG-315", "YKT-248", "SSC-092", "SSC-093", "SSC-105"],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG353-backup-receipt/output/selected-summary.md",
+      "sha256": "acf070eba841bb1898e768fbfaaf7b50ad6f4e6a7eff2544a04aa60ed52ec647"
+    }
+  ],
+  "acceptance": "read-only one-step provisional PT; continuous parent M/A, actual worker, polling budget, archive and stop/retire, R2/R3, global Java 100% and IT/ST not accepted"
+}
