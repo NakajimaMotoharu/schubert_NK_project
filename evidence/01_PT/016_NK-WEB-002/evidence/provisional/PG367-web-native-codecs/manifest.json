@@ -1,0 +1,40 @@
+{
+  "programId": "NK-WEB-002",
+  "status": "candidate native Web current-key codecs verified; full startup and all-scope coverage unaccepted",
+  "executedAtJst": "2026-09-29T01:26:40+09:00",
+  "environment": {"os": "Linux x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "d77450f43",
+  "testIds": ["PT-WEB-NKEY001..004"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic Web five-credential file set and local owned key-copy seam; no real secret, external process, or HTTP request",
+  "expected": "fixed Web IDs, independent session/Web Log codec ownership, owned key-copy zeroing on success and failure, no cross-service fallback",
+  "actual": "selected 5 PT/2 suites F/E/S0; Production6 2485 PT/365 suites F/E/S0; SpotBugs six modules zero",
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1403, 29, 306, 120, 15],
+    "webNativeCodecsOuter": [0, 0, 0, 0, 0]
+  },
+  "related": ["SSC-081", "471 D01/D05/D06"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "05655c2758b6fccabe0b67d095fdb9fa01f85dd9138ced641da9d58ffa0c8248",
+    "storageJUnitPathOrderedSha256List": "60714fbe07b9eb110230e362800c52e58927428387efbb503e1c5597bfd59d2b",
+    "bootstrapJUnitPathOrderedSha256List": "eea0280a535ee4067b33575a4872c093bc7c265e244077736298de01c2ddc50a",
+    "apiJUnitPathOrderedSha256List": "d89dafc6ac28d2be533cf0f5e31c70cf354ee8338ee20dc9ba6e7a86bf504da1",
+    "webJUnitPathOrderedSha256List": "c58498cfddd65728dbd18c540edfa9b991ad61628fca74f98bb5bb89eef8cace",
+    "batchJUnitPathOrderedSha256List": "1a902c75b21488c0df19a0789a8468b92e32d7388cb88e69372c96db2825ddec",
+    "webNativeCodecsJUnitXml": "27ba19fd1a58d37a24ced51820cdaa8c0f2cb0e2a6d2162346abf9cbbcbd7113",
+    "webNativeCodecsCredentialJUnitXml": "3cae8519ecec8d6a8e3496e37b8adaf603e790a8729c27f1b197b0613efc5f58",
+    "webJacocoXml": "5d668a4327d03236d74ca879b4484ec4ba96df3a2db2a2202390d21da23c6020",
+    "sourceWebNativeCodecs": "37684edaf306d78275228ec91616575baab7be462579f24945f36913452da019",
+    "testWebNativeCodecs": "95fd43cc8a57205d6ba71d768e5c948527e8c8e104e9c10b23b0621480fda16b",
+    "testWebNativeCodecsCredential": "5f699525a45aaa2d7fb1f8354c0031b5acde4c35b15283be746cb8d9747e9c52",
+    "ptSpecification047": "638e71151066f71a31e9e0b7cabaf43be9cc69a1876e8cfa10cf6011d2e66696"
+  },
+  "rawXmlOrSecretsInGit": false
+}
