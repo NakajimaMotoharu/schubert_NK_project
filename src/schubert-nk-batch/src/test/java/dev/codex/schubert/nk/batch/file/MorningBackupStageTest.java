@@ -1,0 +1,230 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
+import java.io.IOException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
+import org.junit.jupiter.api.Test;
+
+/** NK-OPS-001/OPS009/BAK001/UI251/SS341/343/SSC089/092/094/104/105; MBSTAGE001-004. */
+final class MorningBackupStageTest {
+  private static final BatchRun RUN =
+      new BatchRun(
+          UUID.fromString("11111111-1111-4111-8111-111111111111"),
+          Instant.parse("2026-09-28T01:00:00Z"));
+  private static final UUID PART = UUID.fromString("33333333-3333-4333-8333-333333333333");
+  private static final Instant NOW = Instant.parse("2026-09-28T01:00:01Z");
+  private static final MaintenanceRunState STATE =
+      new MaintenanceRunState(
+          new MaintenanceActivation(RUN, UUID.fromString("22222222-2222-4222-8222-222222222222")),
+          Optional.empty());
+
+  private static final class OwnedScope implements MorningBackupStage.Scope {
+    final List<String> events;
+    final AtomicBoolean held = new AtomicBoolean();
+    final Db database;
+
+    OwnedScope(List<String> events) {
+      this.events = events;
+      database = new Db(events, held);
+    }
+
+    @Override
+    public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
+        throws IOException {
+      events.add("M/A/DB/original-enter;INVALID");
+      held.set(true);
+      try {
+        return continuation.execute(STATE, database);
+      } finally {
+        held.set(false);
+        events.add("M/A/DB/original-close");
+      }
+    }
+  }
+
+  private static final class Db implements MorningDatabaseSession.Access {
+    final List<String> events;
+    final AtomicBoolean held;
+    boolean recover;
+    IOException error;
+
+    Db(List<String> events, AtomicBoolean held) {
+      this.events = events;
+      this.held = held;
+    }
+
+    @Override
+    public void requireUnused(BatchRun run) {
+      fail("prior original admission owns reference check");
+    }
+
+    @Override
+    public void requireConsistent(BatchRun run) {
+      fail("prior original admission owns reference check");
+    }
+
+    @Override
+    public MorningDatabaseSession.BackupBegins beginBackup(
+        BatchRun run, Instant now, boolean recoverAbandoned) throws IOException {
+      assertTrue(held.get());
+      assertEquals(RUN, run);
+      assertEquals(NOW, now);
+      recover = recoverAbandoned;
+      events.add("both-backup-begins-committed");
+      if (error != null) throw error;
+      return new MorningDatabaseSession.BackupBegins(
+          new BatchStepAttempt(41, RUN, BatchStep.BACKUP_DB, 1, NOW, false),
+          new BatchStepAttempt(42, RUN, BatchStep.BACKUP_CONFIG, 1, NOW, false));
+    }
+
+    @Override
+    public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> operation) {
+      return fail("cleanup is downstream");
+    }
+  }
+
+  @Test
+  void mbstage001RetainsAllParentOwnersThroughRequestAndWork() throws Exception {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    var result =
+        MorningBackupStage.execute(
+            scope,
+            (request, part) -> {
+              assertTrue(scope.held.get());
+              assertEquals(RUN.id(), request.run());
+              assertEquals(PART, part);
+              events.add("request-published");
+            },
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            false,
+            PART,
+            (request, begins) -> {
+              assertTrue(scope.held.get());
+              assertEquals(BatchStep.BACKUP_DB, begins.database().step());
+              assertEquals(BatchStep.BACKUP_CONFIG, begins.configuration().step());
+              events.add("worker-boundary");
+              return "ready-for-worker";
+            });
+    assertEquals("ready-for-worker", result);
+    assertFalse(scope.database.recover);
+    assertFalse(scope.held.get());
+    assertEquals(
+        List.of(
+            "M/A/DB/original-enter;INVALID",
+            "both-backup-begins-committed",
+            "request-published",
+            "worker-boundary",
+            "M/A/DB/original-close"),
+        events);
+  }
+
+  @Test
+  void mbstage002ExplicitResumePreservesOriginalAndRecoveryFlag() throws Exception {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    UUID observed =
+        MorningBackupStage.execute(
+            scope,
+            (request, part) -> {},
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            true,
+            PART,
+            (request, begins) -> request.run());
+    assertEquals(RUN.id(), observed);
+    assertTrue(scope.database.recover);
+  }
+
+  @Test
+  void mbstage003DbOrPublishFailureClosesScopeWithoutWorkerSuccess() {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    scope.database.error = new IOException("raw commit unknown");
+    assertSame(
+        scope.database.error,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningBackupStage.execute(
+                    scope,
+                    (request, part) -> fail("no publication"),
+                    Clock.fixed(NOW, ZoneOffset.UTC),
+                    false,
+                    PART,
+                    (request, begins) -> fail("no worker"))));
+    assertEquals(
+        List.of(
+            "M/A/DB/original-enter;INVALID",
+            "both-backup-begins-committed",
+            "M/A/DB/original-close"),
+        events);
+    events.clear();
+    scope.database.error = null;
+    assertThrows(
+        IOException.class,
+        () ->
+            MorningBackupStage.execute(
+                scope,
+                (request, part) -> {
+                  events.add("publication-refused");
+                  throw new IOException("new-only conflict");
+                },
+                Clock.fixed(NOW, ZoneOffset.UTC),
+                false,
+                PART,
+                (request, begins) -> fail("no worker")));
+    assertEquals(
+        List.of(
+            "M/A/DB/original-enter;INVALID",
+            "both-backup-begins-committed",
+            "publication-refused",
+            "M/A/DB/original-close"),
+        events);
+  }
+
+  @Test
+  void mbstage004NullContractAndNullWorkerResult() {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    MorningBackupPreparation.Publisher publisher = (request, part) -> {};
+    MorningBackupPreparation.Continuation<String> work = (request, begins) -> "ok";
+    var clock = Clock.fixed(NOW, ZoneOffset.UTC);
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.execute(null, publisher, clock, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.execute(scope, null, clock, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.execute(scope, publisher, null, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.execute(scope, publisher, clock, false, null, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.execute(scope, publisher, clock, false, PART, null));
+    assertTrue(events.isEmpty());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningBackupStage.execute(
+                scope, publisher, clock, false, PART, (request, begins) -> null));
+    assertFalse(scope.held.get());
+    assertEquals("M/A/DB/original-close", events.getLast());
+  }
+}
