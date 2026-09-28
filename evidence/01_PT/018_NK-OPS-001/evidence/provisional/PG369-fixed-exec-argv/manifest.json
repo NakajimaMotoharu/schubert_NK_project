@@ -1,0 +1,48 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "fixed Web/API argv and one-shot VM setpriv profile verified; native root service launch unaccepted",
+  "executedAtJst": "2026-09-29T02:18:48+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0", "vm": "isolated Linux PG/PT VM"},
+  "branch": "dev-foundation",
+  "sourceCommit": "b397c766c03698031d1a8590d6bfb8c45f2657dc",
+  "testIds": ["PT-OPS-REXEC001", "PT-OPS-REXEC002", "PT-OPS-REXEC003", "PT-OPS-REXEC004"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic fixed Web 998/980/980,982,986 and API 999/981/980,981,982,986 identities; no credential, release, current data, or business process",
+  "expected": "SS342 fixed immutable argv and distinct Web/API JVM literals; null/invalid identity rejected; no arbitrary shell/options; VM setpriv test has exact UID/GID/groups, all three capability sets zero and NoNewPrivs=1",
+  "actual": "selected 4 PT F/E/S0; Production6 2491 PT/366 suites F/E/S0, SpotBugs six modules zero; VM one-shot Web/API status matched fixed numeric expectation and exit0",
+  "vmOneShot": {
+    "commandPattern": "sudo -n /usr/bin/setpriv --reuid=<fixed> --regid=<fixed> --groups=<fixed-list> --inh-caps=-all --ambient-caps=-all --bounding-set=-all --no-new-privs /usr/bin/cat /proc/self/status",
+    "web": {"exitCode": 0, "uidFourColumns": [998, 998, 998, 998], "gidFourColumns": [980, 980, 980, 980], "groups": [980, 982, 986], "capInh": "0000000000000000", "capBnd": "0000000000000000", "capAmb": "0000000000000000", "noNewPrivs": 1},
+    "api": {"exitCode": 0, "uidFourColumns": [999, 999, 999, 999], "gidFourColumns": [981, 981, 981, 981], "groups": [980, 981, 982, 986], "capInh": "0000000000000000", "capBnd": "0000000000000000", "capAmb": "0000000000000000", "noNewPrivs": 1}
+  },
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1406, 29, 310, 120, 15],
+    "fixedServiceExecArguments": [0, 0, 0, 0, 0]
+  },
+  "related": ["SS342 section 4.2", "SSC-086..089", "BUG-322", "SSC-107", "YKT-254", "471 R1/D04/D05"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "66149f630fd9ba0d389c93ff545771d9ea938340bd35aa100b783e9274a637c2",
+    "storageJUnitPathOrderedSha256List": "0f381ebe7522fd72e48c3fff6ccc329ee4775b30024b8bb83f0655129f565f34",
+    "bootstrapJUnitPathOrderedSha256List": "a80bd6e3cefab68586545622efa6bc0dbc8689dc928cba5a62d083dc0270e11f",
+    "apiJUnitPathOrderedSha256List": "8b6a0f80d91730395e345407000cea1a618a7f67e45b1992fda8845c44970e06",
+    "webJUnitPathOrderedSha256List": "75857e062078cba1e51882341021b5d9457fbd956ef9914849b3ed99a0d07e1f",
+    "batchJUnitPathOrderedSha256List": "dd152466ea6c493830277be62e16fa887eac62d0791761f327dca9404b3562d5",
+    "fixedServiceExecArgumentsJUnitXml": "4c1d667ccfe41f8f466ba85d5db0c73bb5879aff52c009106398484aa9ba849e",
+    "protocolJacocoXml": "b6a7b613955e0bf6eac090d0a04c81a935a2f4c39ddc922cfb5630d5221e6c69",
+    "storageJacocoXml": "83dd67abfb48551a7c8d2ac04c86894a3d4bc4082943dfbfa0570ef6ade49af9",
+    "bootstrapJacocoXml": "e2890d8a61b1c05a3003638a2f14bb6d4e6c7650a2b7091d6f0f126ea6783635",
+    "apiJacocoXml": "857189f0873bd8dcf7893a349acc9736128904c3bf3819e586ea67e6d856cadd",
+    "webJacocoXml": "ed3acb461d1eb832aa43ed07dc99c0ca4faef80a78aaab745e46dfa33e5ceaf6",
+    "batchJacocoXml": "ad5ade103c0def38fceedd31f485cf1ba92224f6fec294d1892df3ba099e9c82",
+    "sourceFixedServiceExecArguments": "afc022291daa7ec1e70bdcf3df7967ccfceb2a88b037fda75d98db89cb3455e8",
+    "testFixedServiceExecArguments": "7b002145431af2494e3314b97fa46448a0c83b8d99921a7af2e4e32cdff14720",
+    "ptSpecification248": "845be3b76b2cada317a94d48beeda6f2d4d744f1b4b13ac92f787b88a3350fa6"
+  },
+  "rawXmlOrSecretsInGit": false
+}

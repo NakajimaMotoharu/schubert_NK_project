@@ -1,0 +1,8 @@
+# NK-OPS-001 固定setpriv→Java引数実行結果（PG369・暫定）
+
+- 対象: `PT-OPS-REXEC001～004`、仕様[248](248_NK-OPS-001_固定setpriv_Java引数単体テスト仕様書.md)。Production source `b397c766c03698031d1a8590d6bfb8c45f2657dc`、branch `dev-foundation`、2026-09-29 JST。Linux 7.0.0-34-generic x86_64、JDK25.0.4、Maven3.9.12、SpotBugs4.10.4.0、NullAway0.14.1、JaCoCo0.8.15、Node24.19.0。
+- 独立literal oracleのWeb/API固定argv、null・不正identity、返却値不変・並行取得の選択4PTはfailure/error/skipped=0。新`FixedServiceExecArguments`のJaCoCo missed instruction/branch/line/method/class=`0/0/0/0/0`。将来のservice enum追加でAPIへ黙示fall-throughしない網羅switchをsourceへ反映してから最終回帰した。
+- Security/bootstrap横断triggerのProduction6固定source `clean test spotbugs:check jacoco:report`はexit0、366 suite/2,491 PT、failure/error/skipped=0、SpotBugs 6 module=0。Protocol/Storage coverage missed I/B/L/M/C=`0/0/0/0/0`、Bootstrap=`60/37/11/4/0`、API=`95/3/32/4/0`、Web=`80/1/25/4/0`、Batch=`1406/29/310/120/15`。全Production4指標100%には未達であり、正式53scope受入へ加算しない。
+- 隔離VMでrootから`/usr/bin/setpriv`を一回ずつ実行し、Web合成固定値UID/GID/groups=`998/980/980,982,986`、API=`999/981/980,981,982,986`で`/proc/self/status`を独立確認。双方の`Uid`/`Gid`は4列とも指定値、`CapInh`/`CapBnd`/`CapAmb`は全0、`NoNewPrivs=1`。CLI exit0。これはUnit・root launcher・held ELF・A/proof FD・Java main・readinessの実受入ではない。VM rootでの単発コマンド以外は変更していない。
+- 未達: 真正NSS照合・現行permit/release/root admission、余剰FDと秘密copyの閉鎖、同PID execve結線、Web/API Unit/業務起動、実NK CHR-A01/L01。`BUG-322`/`SSC-107`/`YKT-254`等の親運用未解決を閉じない。R1/D04/D05の下位検証のみ。正式run `PT-WEB-20260925-24`、正式source `858713c0bf310ae8bf62078b0a1cedbce4e968db`、正式進捗中心48.3%は不変。
+- 実行command、path順JUnit hash、JaCoCo/source/test/spec hash、独立期待/実測、VM sanitized statusは同階層`evidence/provisional/PG369-fixed-exec-argv/manifest.json`。Raw XML/秘密値/credentialはGitへ格納しない。
