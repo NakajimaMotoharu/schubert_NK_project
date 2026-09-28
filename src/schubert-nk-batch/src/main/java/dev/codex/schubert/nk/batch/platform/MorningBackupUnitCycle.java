@@ -82,6 +82,10 @@ public final class MorningBackupUnitCycle {
   private final Wait wait;
   private final Retain retain;
 
+  private static final class Unresolved extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+  }
+
   public static MorningBackupUnitCycle create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
     Objects.requireNonNull(root, "Morning root context");
@@ -162,8 +166,11 @@ public final class MorningBackupUnitCycle {
     gate.recheck();
     Object baseline = Objects.requireNonNull(receipt.capture(), "pre-start Backup baseline");
     gate.recheck();
-    StartAttempt attempt = Objects.requireNonNull(start.execute(), "retained Backup start attempt");
     try {
+      // From this call onward the parent cannot prove that delivery did not occur. Even a null
+      // attempt or an unknown unchecked failure must not unwind M/A and discard the marker.
+      StartAttempt attempt =
+          Objects.requireNonNull(start.execute(), "retained Backup start attempt");
       BackupUnitStartClient.Status started =
           Objects.requireNonNull(attempt.status(), "Backup start status");
       while (started == BackupUnitStartClient.Status.UNKNOWN) {
@@ -172,7 +179,7 @@ public final class MorningBackupUnitCycle {
       }
       if (started != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) {
         while (!terminal.quiescent()) wait.pause();
-        retain();
+        throw new Unresolved();
       }
       gate.recheck();
       while (!receipt.freshZero(baseline)) wait.pause();
@@ -184,9 +191,9 @@ public final class MorningBackupUnitCycle {
         wait.pause();
         stopped = Objects.requireNonNull(stopping.awaitClient(), "reaped Backup stop status");
       }
-      if (stopped != MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO) retain();
+      if (stopped != MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO) throw new Unresolved();
       gate.recheck();
-      if (!terminal.quiescent()) retain();
+      if (!terminal.quiescent()) throw new Unresolved();
       attempt.retireAfter(
           () -> {
             gate.recheck();
@@ -195,8 +202,9 @@ public final class MorningBackupUnitCycle {
             gate.recheck();
           });
       gate.recheck();
-    } catch (IOException | StopGateException unresolved) {
-      // No normal M/A unwind after possible start delivery, including receipt/retire uncertainty.
+    } catch (IOException | RuntimeException | Error unresolved) {
+      // No normal M/A unwind after possible start delivery, including null, unchecked failures,
+      // receipt/retire uncertainty. The native retention does not return.
       retain();
     }
   }

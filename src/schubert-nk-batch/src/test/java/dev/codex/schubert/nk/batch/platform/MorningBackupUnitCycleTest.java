@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-/** PG363; PT-OPS-BUCYCLE-001..004. Synthetic ports never claim real worker/archive admission. */
+/**
+ * PG363/365; PT-OPS-BUCYCLE-001..005. Synthetic ports never claim real worker/archive admission.
+ */
 final class MorningBackupUnitCycleTest {
   private static final class Retained extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -146,17 +148,22 @@ final class MorningBackupUnitCycleTest {
     start.status = BackupUnitStartClient.Status.UNKNOWN;
     stop.status = MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO;
     int before = start.retire;
+    var pendingEvents = new ArrayList<String>();
     var pending =
         cycle(
-            new ArrayList<>(),
+            pendingEvents,
             start,
             stop,
             () -> {
               if (start.await >= 4) throw new Retained();
             },
-            () -> fail("pending client does not enter completion retention port"));
+            () -> {
+              pendingEvents.add("retain");
+              throw new Retained();
+            });
     assertThrows(Retained.class, () -> pending.execute(() -> fail("no proof")));
     assertEquals(before, start.retire);
+    assertEquals("retain", pendingEvents.getLast());
   }
 
   @Test
@@ -256,6 +263,109 @@ final class MorningBackupUnitCycleTest {
         () ->
             new MorningBackupUnitCycle(
                 null, receipt(events), () -> start, () -> stop, () -> true, () -> {}, () -> {}));
+  }
+
+  @Test
+  void bucycle005UnknownStartFailureAndNullAfterStartCannotUnwindParent() {
+    for (Throwable failure :
+        List.of(
+            new IOException("unresolved start delivery"),
+            new StopGateException(StopGateFailure.COMMAND_FAILURE),
+            new IllegalStateException("unresolved start delivery"),
+            new AssertionError("unresolved start delivery"))) {
+      var events = new ArrayList<String>();
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              receipt(events),
+              () -> {
+                events.add("start");
+                if (failure instanceof IOException known) throw known;
+                if (failure instanceof RuntimeException unknown) throw unknown;
+                throw (Error) failure;
+              },
+              () -> {
+                events.add("stop");
+                fail("unknown start cannot stop");
+                return null;
+              },
+              () -> true,
+              () -> {},
+              () -> {
+                events.add("retain");
+                throw new Retained();
+              });
+      assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
+      assertEquals(List.of("baseline", "start", "retain"), events);
+    }
+    for (boolean nullAttempt : List.of(true, false)) {
+      var events = new ArrayList<String>();
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              receipt(events),
+              () -> {
+                events.add("start");
+                if (nullAttempt) return null;
+                return new MorningBackupUnitCycle.StartAttempt() {
+                  public BackupUnitStartClient.Status status() {
+                    return null;
+                  }
+
+                  public BackupUnitStartClient.Status awaitClient() {
+                    fail("null status is not a pending client");
+                    return null;
+                  }
+
+                  public void retireAfter(MorningBackupUnitCycle.ParentProof proof) {
+                    fail("null status cannot retire");
+                  }
+                };
+              },
+              () -> {
+                fail("null start cannot stop");
+                return null;
+              },
+              () -> true,
+              () -> {},
+              () -> {
+                events.add("retain");
+                throw new Retained();
+              });
+      assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
+      assertEquals(List.of("baseline", "start", "retain"), events);
+    }
+    var awaitEvents = new ArrayList<String>();
+    var nullAwait =
+        new MorningBackupUnitCycle(
+            () -> {},
+            receipt(awaitEvents),
+            () ->
+                new MorningBackupUnitCycle.StartAttempt() {
+                  public BackupUnitStartClient.Status status() {
+                    return BackupUnitStartClient.Status.UNKNOWN;
+                  }
+
+                  public BackupUnitStartClient.Status awaitClient() {
+                    return null;
+                  }
+
+                  public void retireAfter(MorningBackupUnitCycle.ParentProof proof) {
+                    fail("null await cannot retire");
+                  }
+                },
+            () -> {
+              fail("null await cannot stop");
+              return null;
+            },
+            () -> true,
+            () -> awaitEvents.add("wait"),
+            () -> {
+              awaitEvents.add("retain");
+              throw new Retained();
+            });
+    assertThrows(Retained.class, () -> nullAwait.execute(() -> fail("no proof")));
+    assertEquals(List.of("baseline", "wait", "retain"), awaitEvents);
   }
 
   private static MorningBackupUnitCycle.Receipt receipt(List<String> events) {
