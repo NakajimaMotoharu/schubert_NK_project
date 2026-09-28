@@ -1,0 +1,39 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "one borrowed startup A scope and fail-closed entry verified by PT; actual root Unit/A/proof/exec unaccepted",
+  "executedAtJst": "2026-09-29T03:18:05+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "fd7982f76c4b2e39b55785b519c46ae9e1da3559",
+  "testIds": ["PT-OPS-RASCOPE001", "PT-OPS-RASCOPE002", "PT-OPS-RASCOPE003", "PT-OPS-RASCOPE004", "PT-OPS-RASCOPE005", "PT-OPS-RASCOPE006"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic A exclusive callback, fixed reserved FD boundary and root event order; no credential, actual issued current or Unit mutation",
+  "expected": "one A callback owns root/work/root in that order; contended A or invalid FD/work failure/false result never grants readiness; external host WEB30/API30/OTHER70",
+  "actual": "selected A6+root6+permit6+existing A8=26 PT F/E/S0; Production6 2509 PT/369 suites F/E/S0 and SpotBugs6module0; host external WEB30/API30/OTHER70 with empty output",
+  "externalHostSmoke": {"classpath": "same Production target/classes, not installed release or Unit", "webExitCode": 30, "apiExitCode": 30, "invalidExitCode": 70, "stdoutStderr": "empty"},
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0], "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0], "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0], "batch": [1539, 31, 350, 129, 15],
+    "rootServiceAdmissionScope": [29, 0, 9, 4, 0]
+  },
+  "related": ["SS342 section 4.2", "SS343 section 6.15", "SSC-086..089", "471 R1/D04/D05"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "d0ce9519e7a3dba919fec71bd0e1a4488ce294d570fa2be39374109be2c8db82",
+    "storageJUnitPathOrderedSha256List": "25459104ac0b3248cdaa0f6be8a5060da527e532478fcf5640443c5fe3540a6c",
+    "bootstrapJUnitPathOrderedSha256List": "02e4e0188e187a3f186a1d14bdd62d67ab19b80baa435c2f59a31936253150fc",
+    "apiJUnitPathOrderedSha256List": "12edcf4f1087087e78ed5c97f7d686cb54580b01646bea05bd34355fab560d29",
+    "webJUnitPathOrderedSha256List": "41f012a2273b6992f9bc7f67ecff2b1996e06584b73073d14e9db17cac35606a",
+    "batchJUnitPathOrderedSha256List": "f12e6ebd0043da8d9ee84936f6e70cd825ad57122aed7b15a61e10f762c3bac3",
+    "rootServiceAdmissionScopeJUnitXml": "a57dc5dba5e859dc88bd412016a46de5330189aff9db2f5593f4eb53a6561f85",
+    "rootServiceLauncherJUnitXml": "5bd423f706d4f834e91cec981368b64615debb7b8c70f461231dc8e20a553171",
+    "startupAdmissionFileJUnitXml": "090de257cd16527bd361e7385bf723b96c230f63ad5b21d9267e867f8b5df450",
+    "batchJacocoXml": "d297f2d6ccd56aea82b2b9b0e4a91e572a8967672e3a40a8c623416ad3063cc4",
+    "sourceRootServiceAdmissionScope": "4575d2e8e24004b2b16224a52275f407d0cd95c9492a4133b958c1786f74adf0",
+    "sourceRootServiceLauncher": "d411d4c33987b6aa7a0460da3683c798d50ed15b645f02907ced1337fe74853a",
+    "testRootServiceAdmissionScope": "e1ab93f75dd03489b0243cfc2fb65df42fc750251fde87629ea9d74a88bb5aa6",
+    "ptSpecification254": "df952577357dba305076162fedb732aca2de0ace14b0a1dff390cbad1cd65270"
+  },
+  "rawXmlOrSecretsInGit": false
+}

@@ -1,0 +1,8 @@
+# NK-OPS-001 root起動A同一scope実行結果（PG372・暫定）
+
+- 対象: `PT-OPS-RASCOPE001～006`、仕様[254](254_NK-OPS-001_root起動A同一scope単体テスト仕様書.md)。Production source `fd7982f76c4b2e39b55785b519c46ae9e1da3559`/`dev-foundation`、2026-09-29 JST。Linux 7.0.0-34-generic x86_64/JDK25.0.4/Maven3.9.12/SpotBugs4.10.4.0/NullAway0.14.1/JaCoCo0.8.15。
+- 新A scope6PT＋既存root入口6PT＋現行permit6PT＋`StartupAdmissionFileTest`8PTの選択26PTはfailure/error/skipped=0、SpotBugs0。独立イベント列でroot再確認→A借用→同一callback内root/work/root→A返却→rootを検証し、A競合、予約外FD、work/内外root故障、偽false/反復/nullを拒否した。新scope outer missed I/B/L/M/C=`29/0/9/4/0`、native root実path未到達。
+- Production `RootServiceLauncher`ではRootStartupContextを最初に取得し、`StartupAdmissionFile.tryExclusive`からの一つの予約A FDを借りたcallback内でNSS・承認release/OS・現行permit/release hash・固定argvを確認する。callback通常returnでAを解放してもexit30を維持し、proof/同PID exec/readyへ渡さない。非root hostの同compiled class外部JVMはWEB/API各exit30、OTHER exit70、stdout/stderr空。真正Unit/実A/issued permitを受入した証拠ではない。
+- Security/lock/startup横断triggerのProduction6固定source `clean test spotbugs:check jacoco:report`はexit0、369suite/2,509PT、failure/error/skipped=0、SpotBugs6module0。Coverage missed I/B/L/M/C: Protocol/Storage=`0/0/0/0/0`、Bootstrap=`60/37/11/4/0`、API=`95/3/32/4/0`、Web=`80/1/25/4/0`、Batch=`1539/31/350/129/15`。全Production4指標100%・正式53scopeは未達。
+- 未達: Production root Unit/同一Aでの実root・現行permit、全root/Ops/schema/実prestart、proof memfd/Aの二FD限定継承、held ELF/余剰FD・秘密copy close、同PID execve、業務readyと実NK CHR。R1/D04/D05下位のみ、D01～07 closed/reopened/new0、R2/R3/実CHR0。正式run/source `PT-WEB-20260925-24`/`858713c0bf310ae8bf62078b0a1cedbce4e968db`・中心48.3%据置。
+- 実行command、独立期待/実測、path順JUnit hash/JaCoCo/source/test/spec SHAは同階層`evidence/provisional/PG372-root-a-scope/manifest.json`。Raw XML/FD原本/credentialはGitへ保存しない。
