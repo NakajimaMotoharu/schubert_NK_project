@@ -65,7 +65,11 @@ public final class FixedServiceExecArguments {
             "-Dfile.encoding=UTF-8",
             "-Duser.timezone=UTC",
             "-XX:+ExitOnOutOfMemoryError"));
-    argv.addAll(service == ServiceConfigFiles.Service.WEB ? WEB_JAVA : API_JAVA);
+    argv.addAll(
+        switch (service) {
+          case WEB -> WEB_JAVA;
+          case API -> API_JAVA;
+        });
     return List.copyOf(argv);
   }
 }
