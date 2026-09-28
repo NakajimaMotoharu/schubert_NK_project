@@ -14,15 +14,25 @@ import org.jspecify.annotations.Nullable;
  * Borrowed DB/JMS connectivity admission before API consumers start. A JMS consumer attachment can
  * be lazy: SS321 management verification of topology, ACL, journal, disk and queue thresholds is a
  * separate mandatory gate. Trace: NK-MSG-001/002; RD MQ-001/003/006/008, SYS-004; UI212/231/252;
- * SS311/312/321/342; PG234/266/268, PT-JMS-019/022/023, BUG-248/249.
+ * SS311/312/321/342; PG234/266/268/361, PT-JMS-019/022/023/025, BUG-248/249/321.
  */
 public final class ApiDependencyReadiness {
   private final DataSource database;
   private final Supplier<JMSContext> broker;
+  private final @Nullable Supplier<JMSContext> webLog;
 
-  public ApiDependencyReadiness(DataSource database, Supplier<JMSContext> broker) {
+  // Compatibility for package-local PT of the original single-context behavior only.
+  ApiDependencyReadiness(DataSource database, Supplier<JMSContext> broker) {
     this.database = Objects.requireNonNull(database, "database");
     this.broker = Objects.requireNonNull(broker, "broker");
+    this.webLog = null;
+  }
+
+  public ApiDependencyReadiness(
+      DataSource database, Supplier<JMSContext> sync, Supplier<JMSContext> webLog) {
+    this.database = Objects.requireNonNull(database, "database");
+    this.broker = Objects.requireNonNull(sync, "sync broker");
+    this.webLog = Objects.requireNonNull(webLog, "Web Log broker");
   }
 
   /** Neither a DB mutation nor JMS message consumption; all borrowed resources close on failure. */
@@ -48,23 +58,29 @@ public final class ApiDependencyReadiness {
     } catch (SQLException | RuntimeException failure) {
       throw new IllegalStateException("API database unavailable");
     }
+    probe(broker, BrokerTopology.SYNC_REQUEST, webLog == null);
+    if (webLog != null) probe(webLog, BrokerTopology.WEB_LOG, false);
+  }
+
+  private static void probe(
+      Supplier<JMSContext> supplier, BrokerTopology topology, boolean legacyWebLog) {
     try {
-      JMSContext context = Objects.requireNonNull(broker.get(), "JMS context");
+      JMSContext context = Objects.requireNonNull(supplier.get(), "JMS context");
       @Nullable Throwable primary = null;
       try {
         if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
           throw new IllegalStateException("non-transacted JMS context");
         }
         Objects.requireNonNull(
-                context.createConsumer(
-                    new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue())),
-                "sync consumer")
+                context.createConsumer(new ActiveMQQueue(topology.fullyQualifiedQueue())),
+                "receive consumer")
             .close();
-        Objects.requireNonNull(
-                context.createConsumer(
-                    new ActiveMQQueue(BrokerTopology.WEB_LOG.fullyQualifiedQueue())),
-                "Web Log consumer")
-            .close();
+        if (legacyWebLog)
+          Objects.requireNonNull(
+                  context.createConsumer(
+                      new ActiveMQQueue(BrokerTopology.WEB_LOG.fullyQualifiedQueue())),
+                  "Web Log consumer")
+              .close();
       } catch (RuntimeException | Error failure) {
         primary = failure;
         throw failure;

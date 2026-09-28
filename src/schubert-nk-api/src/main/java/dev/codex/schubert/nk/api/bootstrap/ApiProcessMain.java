@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
+import dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
+import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -96,8 +98,9 @@ public final class ApiProcessMain {
   private static void startNative(
       ApiStartupInputs loader, Map<String, String> environment, int[] failureCode)
       throws IOException {
-    // R1 incremental entry only. D01-D04 are mandatory and are not yet wired. Never expose an
-    // HTTP/JMS fixture or report readiness until the real process graph satisfies every gate.
+    // R1 incremental entry only. Root admission and DB resource ownership precede the API-role
+    // JMS probes. Full Broker management, storage and business assembly remain mandatory; no
+    // receive group starts and A is never released by this incomplete path.
     ServiceStartupAdmission.create(ServiceConfigFiles.Service.API, environment)
         .execute(
             () -> {
@@ -117,7 +120,16 @@ public final class ApiProcessMain {
                             inputs.credentials(),
                             inputs.config().value("nk.db.url")),
                         source -> new ApiJdbcPool().open(source))
-                    .execute(ServiceProcessResources.unassembledStartup()));
+                    .execute(
+                        (pool, credentials) -> {
+                          try (var broker =
+                              ApiBrokerContexts.create(
+                                  credentials, inputs.config().value("nk.mq.url"))) {
+                            new ApiDependencyReadiness(pool, broker.sync(), broker.webLog())
+                                .verify();
+                            ServiceProcessResources.unassembledStartup().run(pool, credentials);
+                          }
+                        }));
   }
 
   static void fatal(Thread thread, Throwable failure) {

@@ -59,6 +59,39 @@ final class ArtemisConnectionFactoryProviderTest {
         NullPointerException.class, () -> ArtemisConnectionFactoryProvider.INSTANCE.create(null));
   }
 
+  @Test
+  void admittedLoopbackEndpointControlsActualConnectorWithoutFallback() {
+    for (int port : new int[] {1, 61616, 65535}) {
+      try (var factory =
+          ArtemisConnectionFactoryProvider.INSTANCE.create(
+              ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, "tcp://127.0.0.1:" + port)) {
+        assertEquals(port, factory.getStaticConnectors()[0].getParams().get("port"));
+        assertNull(factory.getUser());
+        assertNull(factory.getPassword());
+      }
+    }
+    for (String rejected :
+        new String[] {
+          "tcp://127.0.0.1:0", "tcp://127.0.0.1:65536", "tcp://127.0.0.1:061616",
+          "tcp://localhost:61616", "tcp://0.0.0.0:61616", "tcp://127.0.0.1:61616?ha=true",
+          "vm://0", ""
+        }) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              ArtemisConnectionFactoryProvider.INSTANCE.create(
+                  ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, rejected));
+    }
+    assertThrows(
+        NullPointerException.class,
+        () -> ArtemisConnectionFactoryProvider.INSTANCE.create(null, "tcp://127.0.0.1:61616"));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ArtemisConnectionFactoryProvider.INSTANCE.create(
+                ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, null));
+  }
+
   private static ActiveMQConnectionFactory create(
       ArtemisConnectionFactoryProvider.ConsumerProfile profile) {
     return ArtemisConnectionFactoryProvider.INSTANCE.create(profile);

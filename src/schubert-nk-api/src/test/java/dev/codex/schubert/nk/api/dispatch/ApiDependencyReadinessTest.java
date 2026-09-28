@@ -41,6 +41,13 @@ final class ApiDependencyReadinessTest {
                       source(fixture::api),
                       () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
                   .verify());
+      assertDoesNotThrow(
+          () ->
+              new ApiDependencyReadiness(
+                      source(fixture::api),
+                      () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                      () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
+                  .verify());
       assertEquals(
           0,
           broker
@@ -58,6 +65,50 @@ final class ApiDependencyReadinessTest {
       broker.stop();
       fixture.stop();
     }
+  }
+
+  @Test
+  void separateProfilesProbeOnlyTheirOwnQueuesAndCloseBothContexts() {
+    var syncCloses = new AtomicInteger();
+    var logCloses = new AtomicInteger();
+    var syncAttaches = new AtomicInteger();
+    var logAttaches = new AtomicInteger();
+    var db = source(() -> connection(true, false, false, new AtomicInteger()));
+    var admission =
+        new ApiDependencyReadiness(
+            db,
+            () ->
+                singleQueueContext(
+                    "nk.sync.request::nk.sync.request.q", false, syncAttaches, syncCloses),
+            () -> singleQueueContext("nk.web.log::nk.web.log.q", false, logAttaches, logCloses));
+    assertDoesNotThrow(admission::verify);
+    assertEquals(1, syncAttaches.get());
+    assertEquals(1, logAttaches.get());
+    assertEquals(1, syncCloses.get());
+    assertEquals(1, logCloses.get());
+  }
+
+  @Test
+  void separateWebLogAttachFailureLeavesNoContextAndIsRedacted() {
+    var syncCloses = new AtomicInteger();
+    var logCloses = new AtomicInteger();
+    var syncAttaches = new AtomicInteger();
+    var logAttaches = new AtomicInteger();
+    var db = source(() -> connection(true, false, false, new AtomicInteger()));
+    var admission =
+        new ApiDependencyReadiness(
+            db,
+            () ->
+                singleQueueContext(
+                    "nk.sync.request::nk.sync.request.q", false, syncAttaches, syncCloses),
+            () -> singleQueueContext("nk.web.log::nk.web.log.q", true, logAttaches, logCloses));
+    var failure = assertThrows(IllegalStateException.class, admission::verify);
+    assertEquals("API Artemis receive queues unavailable", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(1, syncAttaches.get());
+    assertEquals(1, logAttaches.get());
+    assertEquals(1, syncCloses.get());
+    assertEquals(1, logCloses.get());
   }
 
   @Test
@@ -347,6 +398,32 @@ final class ApiDependencyReadinessTest {
               case "close" -> {
                 closes.incrementAndGet();
                 if (closeFails) throw new JMSRuntimeException("private-mq-password");
+                yield null;
+              }
+              default -> throw new AssertionError(method.getName());
+            });
+  }
+
+  private static JMSContext singleQueueContext(
+      String expected, boolean attachFails, AtomicInteger attaches, AtomicInteger closes) {
+    return proxy(
+        JMSContext.class,
+        (ignored, method, arguments) ->
+            switch (method.getName()) {
+              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+              case "createConsumer" -> {
+                assertEquals(expected, ((jakarta.jms.Queue) arguments[0]).getQueueName());
+                attaches.incrementAndGet();
+                if (attachFails) throw new JMSRuntimeException("private-mq-password");
+                yield proxy(
+                    JMSConsumer.class,
+                    (consumer, called, args) -> {
+                      if (called.getName().equals("close")) return null;
+                      throw new AssertionError(called.getName());
+                    });
+              }
+              case "close" -> {
+                closes.incrementAndGet();
                 yield null;
               }
               default -> throw new AssertionError(method.getName());

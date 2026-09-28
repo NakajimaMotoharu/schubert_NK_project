@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.config;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
 import org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnectorFactory;
 import org.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants;
@@ -17,10 +18,22 @@ public enum ArtemisConnectionFactoryProvider {
   INSTANCE;
 
   private static final int MIB = 1024 * 1024;
+  private static final Pattern LOOPBACK_CORE =
+      Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
 
   /** Creates a caller-owned factory with the approved reconnect and flow-control policy. */
   public ActiveMQConnectionFactory create(ConsumerProfile profile) {
+    return create(profile, "tcp://127.0.0.1:61616");
+  }
+
+  /** Uses the admitted loopback Core URL verbatim; no provider-selected host or fallback port. */
+  public ActiveMQConnectionFactory create(ConsumerProfile profile, String endpoint) {
     Objects.requireNonNull(profile, "profile");
+    Objects.requireNonNull(endpoint, "endpoint");
+    var match = LOOPBACK_CORE.matcher(endpoint);
+    if (!match.matches()) throw new IllegalArgumentException("Artemis endpoint unavailable");
+    int port = Integer.parseInt(Objects.requireNonNull(match.group(1), "matched port"));
+    if (port > 65_535) throw new IllegalArgumentException("Artemis endpoint unavailable");
     TransportConfiguration connector =
         new TransportConfiguration(
             NettyConnectorFactory.class.getName(),
@@ -28,7 +41,7 @@ public enum ArtemisConnectionFactoryProvider {
                 TransportConstants.HOST_PROP_NAME,
                 "127.0.0.1",
                 TransportConstants.PORT_PROP_NAME,
-                61_616,
+                port,
                 TransportConstants.NETTY_CONNECT_TIMEOUT,
                 3_000),
             "schubert-nk-core");

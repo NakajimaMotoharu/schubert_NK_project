@@ -108,7 +108,8 @@ final class ApiLogPathApplicationRuntimeTest {
               });
       assertTrue(runtime.ready());
       assertEquals(5, syncContexts.get());
-      assertEquals(1, logContexts.get());
+      // SS321: one transient Web Log readiness session plus one live consumer session.
+      assertEquals(2, logContexts.get());
       assertFalse(runtime.terminalFailureObserved());
       assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
       assertEquals(1, consumerCount(broker, "nk.web.log.q"));
