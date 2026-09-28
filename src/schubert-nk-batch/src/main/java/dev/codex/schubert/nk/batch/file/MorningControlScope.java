@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.storage.LinuxFileLock;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -60,11 +61,9 @@ final class MorningControlScope {
     Objects.requireNonNull(trustedWork, "trusted Morning work");
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
-    var maintenance = MaintenanceFileLock.create();
-    var startup = StartupAdmissionFile.create();
-    return execute(
-        () -> root.recheck(snapshot),
-        maintenance::tryExclusive,
+    return executeNative(
+        root,
+        snapshot,
         new Original() {
           @Override
           public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
@@ -73,6 +72,41 @@ final class MorningControlScope {
             return MorningNewRunAdmission.create(root, snapshot).execute(continuation);
           }
         },
+        trustedWork);
+  }
+
+  static <T> T executeResume(UUID runId, MorningNewRunAdmission.Continuation<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(runId, "explicit resume run");
+    Objects.requireNonNull(trustedWork, "trusted Morning work");
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    return executeNative(
+        root,
+        snapshot,
+        new Original() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+              throws IOException {
+            // No selection from DB or current permit: caller supplies exactly the original run ID.
+            return MorningResumeAdmission.create(root, snapshot).execute(runId, continuation);
+          }
+        },
+        trustedWork);
+  }
+
+  private static <T> T executeNative(
+      RootStartupContext root,
+      RootStartupContext.Snapshot snapshot,
+      Original original,
+      MorningNewRunAdmission.Continuation<T> trustedWork)
+      throws IOException {
+    var maintenance = MaintenanceFileLock.create();
+    var startup = StartupAdmissionFile.create();
+    return execute(
+        () -> root.recheck(snapshot),
+        maintenance::tryExclusive,
+        original,
         () -> MorningStopPass.create(root, snapshot).execute(),
         startup::tryExclusive,
         () -> MorningUnitTerminals.requireQuiescent(root, snapshot),

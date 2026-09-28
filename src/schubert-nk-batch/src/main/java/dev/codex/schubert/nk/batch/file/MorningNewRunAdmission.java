@@ -116,7 +116,7 @@ final class MorningNewRunAdmission {
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 6.15 fixes the root Morning systemd private credential namespace")
-  private static OwnedTransferDirectory openCredentials() throws IOException {
+  static OwnedTransferDirectory openCredentials() throws IOException {
     Path path;
     try {
       path = ServiceCredentialLocation.read(System.getenv()).directory();

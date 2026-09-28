@@ -302,6 +302,19 @@ public final class MorningDatabaseSession {
       guard();
     }
 
+    /**
+     * Explicit same-run resume may have references, but every projection must retain the original
+     * cutoff.
+     */
+    public void requireConsistent(BatchRun run) throws IOException {
+      Objects.requireNonNull(run, "resumed fixed run");
+      guard();
+      if (backupCommitted) throw unavailable();
+      if (!new RunReferenceRepository(connection).read(run).identityConsistent())
+        throw unavailable();
+      guard();
+    }
+
     public BackupBegins beginBackup(BatchRun run, Instant now, boolean recoverAbandoned)
         throws IOException {
       Objects.requireNonNull(run, "fixed run");

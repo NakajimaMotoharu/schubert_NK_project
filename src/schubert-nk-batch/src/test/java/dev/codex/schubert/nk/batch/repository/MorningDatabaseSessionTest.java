@@ -94,6 +94,7 @@ final class MorningDatabaseSessionTest {
         nullLock,
         held = true,
         any,
+        identityConsistent = true,
         nullConnection,
         nullStatement,
         nullRows;
@@ -245,7 +246,7 @@ final class MorningDatabaseSessionTest {
                               : kind.equals("HELD")
                                   ? held
                                   : name.equals("identity_consistent")
-                                      ? true
+                                      ? identityConsistent
                                       : name.equals("has_batch_history") ? any : false;
                     }
                     default -> throw new AssertionError(method);
@@ -354,6 +355,104 @@ final class MorningDatabaseSessionTest {
     assertThrows(
         NullPointerException.class, () -> current.subject().execute(credential(), s -> null));
     current.released();
+  }
+
+  @Test
+  void mdb013ResumeKeepsSameCutoffWithExistingReferences() throws Exception {
+    var p = new Probe();
+    p.any = true;
+    var escaped = new AtomicReference<MorningDatabaseSession.Session>();
+    assertEquals(
+        "consistent",
+        p.subject()
+            .execute(
+                credential(),
+                session -> {
+                  escaped.set(session);
+                  session.requireConsistent(RUN);
+                  assertThrows(IOException.class, () -> session.requireUnused(RUN));
+                  return "consistent";
+                }));
+    assertTrue(p.events.stream().anyMatch(event -> event.startsWith("REF.statement.executeQuery")));
+    p.released();
+    assertThrows(IOException.class, () -> escaped.get().requireConsistent(RUN));
+
+    var wrong = new Probe();
+    wrong.any = true;
+    wrong.identityConsistent = false;
+    assertThrows(
+        IOException.class,
+        () ->
+            wrong
+                .subject()
+                .execute(
+                    credential(),
+                    session -> {
+                      session.requireConsistent(RUN);
+                      return true;
+                    }));
+    wrong.released();
+
+    var nullRun = new Probe();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            nullRun
+                .subject()
+                .execute(
+                    credential(),
+                    session -> {
+                      session.requireConsistent(null);
+                      return true;
+                    }));
+    nullRun.released();
+  }
+
+  @Test
+  void mdb014RealResumeReferenceProjectionRejectsDifferentCutoff() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("34500000-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(100L * 86400));
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    subject.execute(
+        credential(),
+        session -> {
+          session.requireUnused(run);
+          session.beginBackup(run, NOW.plusSeconds(100L * 86400), false);
+          return true;
+        });
+    boolean consistent =
+        subject.execute(
+            credential(),
+            session -> {
+              session.requireConsistent(run);
+              return true;
+            });
+    assertTrue(consistent);
+    var sameBusinessDay = new BatchRun(run.id(), run.cutoff().plusSeconds(1));
+    boolean sameDateAccepted =
+        subject.execute(
+            credential(),
+            session -> {
+              session.requireConsistent(sameBusinessDay);
+              return true;
+            });
+    assertTrue(sameDateAccepted);
+    // SS331 §3.12: batch history has only JST business_date, not the original instant.
+    // Exact same-run cutoff is owned by the durable original; this SQL rejects a different day.
+    var wrongCutoff = new BatchRun(run.id(), run.cutoff().plusSeconds(86400));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.execute(
+                credential(),
+                session -> {
+                  session.requireConsistent(wrongCutoff);
+                  return true;
+                }));
   }
 
   @Test
