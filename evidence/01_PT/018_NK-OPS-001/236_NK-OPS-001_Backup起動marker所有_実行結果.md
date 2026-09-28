@@ -1,5 +1,7 @@
 # 236 NK-OPS-001 Backup起動marker所有PT結果（PG357）
 
+PG358限定追補（2026-09-28 21:07 JST、PG357後）：未接続のretire/proof入口をplatform package内へ狭めた。`BackupUnitStartClientTest`12PT/1suite、F/E/S0、`spotbugs:check` exit0、対象JUnit XML SHA256 `0a952d8ef875c046ab15e33e5da88d2a84bb69469b8130f9d9e7d903f5dc98df`。変更はJava可視性だけでruntime判定/固定argv/marker byte不変。PG357の全6 clean runのsourceとは異なるため、その2,443PT/coverageをPG358の正式認定として再利用しない。親bridge/実Unit・全100%は引き続き未達。
+
 状態: `BackupUnitStartClient`のmarker owner/token継続、親証明失敗/未知送達時の非retireを限定実装・PT成功。真正Morning親cycle、実Backup Unit、hard timeout、全4指標100%、R2/R3は未認定。仕様・独立期待は[235](235_NK-OPS-001_Backup起動marker所有_単体テスト仕様書.md)、関連SSC-105/106・BUG-315/YKT-248。
 
 2026-09-28 JST、branch `dev-foundation`、source/test/SS補足/spec commit `c581417ff`。Linux kernel7.0.0-34-generic、JDK25.0.4、Maven3.9.12、SpotBugs4.10.4.0、NullAway0.14.1、JaCoCo0.8.15、Node24.19.0。先行限定 `-Dtest=BackupUnitStartClientTest test spotbugs:check jacoco:report` は12PT/1suite、F/E/S0、static0。最初の試行はformat違反でtest未実行・不合格、formatter後に再実行。post-publication interruptはsystemctl0/retire0、UNKNOWN/非zeroは親proof0/retire0、proof失敗・再入・二重実行とmarker retire IO不明は非成功。正常client exitだけでretireせず、親callback成功後に一度だけretireする。Synthetic `RetirementGate` は真正worker証明ではない。

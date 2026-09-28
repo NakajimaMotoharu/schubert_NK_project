@@ -45,7 +45,7 @@ public final class BackupUnitStartClient {
 
   /** Parent-supplied proof, evaluated while its M/A/original/request owners are still held. */
   @FunctionalInterface
-  public interface RetirementGate {
+  interface RetirementGate {
     void verify() throws IOException;
   }
 
@@ -204,7 +204,7 @@ public final class BackupUnitStartClient {
      * termination, and original identity have been checked. Client exit zero alone is insufficient.
      * An exception leaves the marker unrepaired; UNKNOWN and nonzero cannot retire.
      */
-    public synchronized void retireAfter(RetirementGate gate) throws IOException {
+    synchronized void retireAfter(RetirementGate gate) throws IOException {
       Objects.requireNonNull(gate, "parent completion proof");
       if (status != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
         throw new IOException("backup intent retirement unavailable");
