@@ -772,6 +772,7 @@ class LogQueryApplicationServiceTest {
       try (var runtime =
           dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime.startWithLoginAndLog(
               () -> factory.createContext(jakarta.jms.JMSContext.SESSION_TRANSACTED),
+              () -> factory.createContext(jakarta.jms.JMSContext.SESSION_TRANSACTED),
               f.source,
               f.fingerprints,
               contexts,

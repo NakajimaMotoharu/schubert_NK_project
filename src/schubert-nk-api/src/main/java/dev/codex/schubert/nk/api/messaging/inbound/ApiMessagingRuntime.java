@@ -8,9 +8,10 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Owns the synchronous-request and Web-log receive groups as one API startup unit. It is not the
- * full API process: asynchronous events, broker-management readiness, and process exit remain with
- * the outer owner. Trace: NK-MSG-001/002; RD MQ-003/006/008/010; UI 212/231/251; SS 312/321;
+ * Owns the synchronous-request and Web-log receive groups as one API startup unit. The two
+ * factories are distinct so the SS321 consumer-window profiles cannot be silently shared. It is not
+ * the full API process: asynchronous events, broker-management readiness, and process exit remain
+ * with the outer owner. Trace: NK-MSG-001/002; RD MQ-003/006/008/010; UI 212/231/251; SS 312/321;
  * PG229/PT-JMS-016.
  */
 public final class ApiMessagingRuntime implements AutoCloseable {
@@ -28,12 +29,14 @@ public final class ApiMessagingRuntime implements AutoCloseable {
 
   /** Opens both transacted groups; a failed second group releases the first. */
   public static ApiMessagingRuntime start(
-      Supplier<JMSContext> factory,
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
       SyncRequestProcessor syncProcessor,
       InternalEventProcessor webLogProcessor,
       Clock clock,
       Consumer<CommittedFatalInboundException> onTerminal) {
-    Objects.requireNonNull(factory, "factory");
+    Objects.requireNonNull(syncFactory, "sync factory");
+    Objects.requireNonNull(webLogFactory, "Web Log factory");
     Objects.requireNonNull(syncProcessor, "syncProcessor");
     Objects.requireNonNull(webLogProcessor, "webLogProcessor");
     Objects.requireNonNull(clock, "clock");
@@ -46,10 +49,11 @@ public final class ApiMessagingRuntime implements AutoCloseable {
           }
         };
     SyncRequestConsumers sync =
-        SyncRequestConsumers.start(factory, new SyncRequestListener(syncProcessor, clock), signal);
+        SyncRequestConsumers.start(
+            syncFactory, new SyncRequestListener(syncProcessor, clock), signal);
     try {
       WebLogConsumers webLog =
-          WebLogConsumers.start(factory, new WebLogListener(webLogProcessor, clock), signal);
+          WebLogConsumers.start(webLogFactory, new WebLogListener(webLogProcessor, clock), signal);
       return new ApiMessagingRuntime(sync, webLog, terminal);
     } catch (RuntimeException failure) {
       try {

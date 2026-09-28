@@ -43,7 +43,8 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
    * PT-AUT-INBOX-009; SS311/312/314/324.
    */
   public static ApiLogPathApplicationRuntime startWithLogin(
-      Supplier<JMSContext> factory,
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
       DataSource database,
       FingerprintKeyRing fingerprints,
       AuthContextCodec contexts,
@@ -54,7 +55,15 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
       Consumer<CommittedFatalInboundException> onTerminal)
       throws NoSuchAlgorithmException {
     var login = LoginApplicationAssembly.create(fingerprints, contexts, snapshots, clock);
-    return start(factory, database, login::execute, gameContext, logSearch, clock, onTerminal);
+    return start(
+        syncFactory,
+        webLogFactory,
+        database,
+        login::execute,
+        gameContext,
+        logSearch,
+        clock,
+        onTerminal);
   }
 
   /**
@@ -62,7 +71,8 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
    * must be Production before full readiness. PG256/PT-ADM-075; SS311/312/314/324/352.
    */
   public static ApiLogPathApplicationRuntime startWithLoginAndLog(
-      Supplier<JMSContext> factory,
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
       DataSource database,
       FingerprintKeyRing fingerprints,
       AuthContextCodec contexts,
@@ -73,31 +83,47 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
       throws NoSuchAlgorithmException {
     var log = LogQueryApplicationAssembly.create(database, fingerprints, snapshots, clock);
     return startWithLogin(
-        factory, database, fingerprints, contexts, snapshots, gameContext, log, clock, onTerminal);
+        syncFactory,
+        webLogFactory,
+        database,
+        fingerprints,
+        contexts,
+        snapshots,
+        gameContext,
+        log,
+        clock,
+        onTerminal);
   }
 
   public static ApiLogPathApplicationRuntime start(
-      Supplier<JMSContext> factory,
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
       DataSource database,
       TransactionalRequestHandler login,
       SyncRequestProcessor gameContext,
       SyncRequestProcessor logSearch,
       Clock clock,
       Consumer<CommittedFatalInboundException> onTerminal) {
-    Objects.requireNonNull(factory, "factory");
+    Objects.requireNonNull(syncFactory, "sync factory");
+    Objects.requireNonNull(webLogFactory, "Web Log factory");
     Objects.requireNonNull(database, "database");
     Objects.requireNonNull(login, "login");
     Objects.requireNonNull(gameContext, "gameContext");
     Objects.requireNonNull(logSearch, "logSearch");
     Objects.requireNonNull(clock, "clock");
     Objects.requireNonNull(onTerminal, "onTerminal");
-    new ApiDependencyReadiness(database, factory).verify();
+    new ApiDependencyReadiness(database, syncFactory).verify();
     var processor =
         new LogPathSyncRequestProcessor(
             new JdbcSyncRequestProcessor(database, login, clock), gameContext, logSearch);
     var messaging =
         ApiMessagingRuntime.start(
-            factory, processor, new WebLogIngestService(database), clock, onTerminal);
+            syncFactory,
+            webLogFactory,
+            processor,
+            new WebLogIngestService(database),
+            clock,
+            onTerminal);
     return new ApiLogPathApplicationRuntime(messaging, processor);
   }
 

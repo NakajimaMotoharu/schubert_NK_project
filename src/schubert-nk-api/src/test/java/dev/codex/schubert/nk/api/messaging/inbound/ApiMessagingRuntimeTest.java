@@ -26,6 +26,45 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG229/PT-JMS-016: API receive-group ownership, distinct from full process boot. */
 final class ApiMessagingRuntimeTest {
   @Test
+  void approvedSyncAndWebLogProfilesHaveSeparateRuntimeSuppliers(@TempDir Path root)
+      throws Exception {
+    var syncOpens = new AtomicInteger();
+    var logOpens = new AtomicInteger();
+    EmbeddedActiveMQ broker = startBroker(root);
+    try (var sync = new ActiveMQConnectionFactory("vm://0");
+        var log = new ActiveMQConnectionFactory("vm://0")) {
+      sync.setConsumerWindowSize(1_048_576);
+      log.setConsumerWindowSize(65_536);
+      try (var runtime =
+          ApiMessagingRuntime.start(
+              () -> {
+                syncOpens.incrementAndGet();
+                return sync.createContext(JMSContext.SESSION_TRANSACTED);
+              },
+              () -> {
+                logOpens.incrementAndGet();
+                return log.createContext(JMSContext.SESSION_TRANSACTED);
+              },
+              ignored -> new byte[0],
+              ignored -> {},
+              Clock.systemUTC(),
+              ignored -> {})) {
+        assertEquals(1_048_576, sync.getConsumerWindowSize());
+        assertEquals(65_536, log.getConsumerWindowSize());
+        assertEquals(4, syncOpens.get());
+        assertEquals(1, logOpens.get());
+        assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
+        assertEquals(1, consumerCount(broker, "nk.web.log.q"));
+        assertTrue(runtime.ready());
+      }
+      assertEquals(0, consumerCount(broker, "nk.sync.request.q"));
+      assertEquals(0, consumerCount(broker, "nk.web.log.q"));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
   void opensFiveConsumersAndSignalsOneTerminalAcrossGroups(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
     try (var factory = new ActiveMQConnectionFactory("vm://0");
@@ -35,6 +74,7 @@ final class ApiMessagingRuntimeTest {
       AtomicInteger terminals = new AtomicInteger();
       var runtime =
           ApiMessagingRuntime.start(
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
               ignored -> new byte[0],
               ignored -> {},
@@ -81,19 +121,22 @@ final class ApiMessagingRuntimeTest {
     java.util.function.Consumer<CommittedFatalInboundException> terminal = ignored -> {};
     assertThrows(
         NullPointerException.class,
-        () -> ApiMessagingRuntime.start(null, sync, log, Clock.systemUTC(), terminal));
+        () -> ApiMessagingRuntime.start(null, factory, sync, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
-        () -> ApiMessagingRuntime.start(factory, null, log, Clock.systemUTC(), terminal));
+        () -> ApiMessagingRuntime.start(factory, null, sync, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
-        () -> ApiMessagingRuntime.start(factory, sync, null, Clock.systemUTC(), terminal));
+        () -> ApiMessagingRuntime.start(factory, factory, null, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
-        () -> ApiMessagingRuntime.start(factory, sync, log, null, terminal));
+        () -> ApiMessagingRuntime.start(factory, factory, sync, null, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
-        () -> ApiMessagingRuntime.start(factory, sync, log, Clock.systemUTC(), null));
+        () -> ApiMessagingRuntime.start(factory, factory, sync, log, null, terminal));
+    assertThrows(
+        NullPointerException.class,
+        () -> ApiMessagingRuntime.start(factory, factory, sync, log, Clock.systemUTC(), null));
     assertEquals(0, opened.get());
   }
 
@@ -106,6 +149,7 @@ final class ApiMessagingRuntimeTest {
             IllegalStateException.class,
             () ->
                 ApiMessagingRuntime.start(
+                    () -> opened.incrementAndGet() == 5 ? null : syntheticContext(closed, false),
                     () -> opened.incrementAndGet() == 5 ? null : syntheticContext(closed, false),
                     ignored -> new byte[0],
                     ignored -> {},
@@ -126,6 +170,7 @@ final class ApiMessagingRuntimeTest {
             () ->
                 ApiMessagingRuntime.start(
                     () -> opened.incrementAndGet() == 5 ? null : syntheticContext(closed, true),
+                    () -> opened.incrementAndGet() == 5 ? null : syntheticContext(closed, true),
                     ignored -> new byte[0],
                     ignored -> {},
                     Clock.systemUTC(),
@@ -141,6 +186,7 @@ final class ApiMessagingRuntimeTest {
     AtomicInteger closed = new AtomicInteger();
     ApiMessagingRuntime runtime =
         ApiMessagingRuntime.start(
+            () -> syntheticContext(closed, true),
             () -> syntheticContext(closed, true),
             ignored -> new byte[0],
             ignored -> {},
@@ -163,6 +209,7 @@ final class ApiMessagingRuntimeTest {
     ApiMessagingRuntime runtime =
         ApiMessagingRuntime.start(
             () -> syntheticContext(new AtomicInteger(), opened.incrementAndGet() < 5),
+            () -> syntheticContext(new AtomicInteger(), false),
             ignored -> new byte[0],
             ignored -> {},
             Clock.systemUTC(),

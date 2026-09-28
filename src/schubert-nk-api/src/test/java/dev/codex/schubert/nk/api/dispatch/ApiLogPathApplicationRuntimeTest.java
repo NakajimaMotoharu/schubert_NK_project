@@ -73,9 +73,18 @@ final class ApiLogPathApplicationRuntimeTest {
       var logs = new AtomicInteger();
       var terminal = new AtomicInteger();
       var signal = new CountDownLatch(1);
+      var syncContexts = new AtomicInteger();
+      var logContexts = new AtomicInteger();
       var runtime =
           ApiLogPathApplicationRuntime.start(
-              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+              () -> {
+                syncContexts.incrementAndGet();
+                return factory.createContext(JMSContext.SESSION_TRANSACTED);
+              },
+              () -> {
+                logContexts.incrementAndGet();
+                return factory.createContext(JMSContext.SESSION_TRANSACTED);
+              },
               source,
               (connection, request, receivedAt) -> {
                 assertFalse(connection.getAutoCommit());
@@ -98,6 +107,8 @@ final class ApiLogPathApplicationRuntimeTest {
                 signal.countDown();
               });
       assertTrue(runtime.ready());
+      assertEquals(5, syncContexts.get());
+      assertEquals(1, logContexts.get());
       assertFalse(runtime.terminalFailureObserved());
       assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
       assertEquals(1, consumerCount(broker, "nk.web.log.q"));
@@ -145,37 +156,42 @@ final class ApiLogPathApplicationRuntimeTest {
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                null, database, login, game, log, Clock.systemUTC(), terminal));
+                null, factory, database, login, game, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, null, login, game, log, Clock.systemUTC(), terminal));
+                factory, null, database, login, game, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, database, null, game, log, Clock.systemUTC(), terminal));
+                factory, factory, null, login, game, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, database, login, null, log, Clock.systemUTC(), terminal));
+                factory, factory, database, null, game, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, database, login, game, null, Clock.systemUTC(), terminal));
+                factory, factory, database, login, null, log, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, database, login, game, log, null, terminal));
+                factory, factory, database, login, game, null, Clock.systemUTC(), terminal));
     assertThrows(
         NullPointerException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
-                factory, database, login, game, log, Clock.systemUTC(), null));
+                factory, factory, database, login, game, log, null, terminal));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ApiLogPathApplicationRuntime.start(
+                factory, factory, database, login, game, log, Clock.systemUTC(), null));
     assertEquals(0, opened.get());
   }
 
@@ -206,6 +222,10 @@ final class ApiLogPathApplicationRuntimeTest {
         IllegalStateException.class,
         () ->
             ApiLogPathApplicationRuntime.start(
+                () -> {
+                  opened.incrementAndGet();
+                  return null;
+                },
                 () -> {
                   opened.incrementAndGet();
                   return null;

@@ -220,6 +220,7 @@ final class LoginInboxServiceTest {
         var runtime =
             ApiLogPathApplicationRuntime.startWithLogin(
                 () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
                 source(database::api),
                 keys,
                 contexts,
