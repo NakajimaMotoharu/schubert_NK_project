@@ -86,6 +86,7 @@ final class WebLogApplicationRuntimeTest {
       try (var api =
               ApiLogPathApplicationRuntime.startWithLogin(
                   () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                  () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
                   source(db::api),
                   fingerprints,
                   contexts,
@@ -231,6 +232,7 @@ final class WebLogApplicationRuntimeTest {
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
       try (var api =
               ApiLogPathApplicationRuntime.startWithLoginAndLog(
+                  () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
                   () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
                   source(db::api),
                   fingerprints,
