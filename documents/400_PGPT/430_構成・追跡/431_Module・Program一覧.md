@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG378追加追跡（2026-09-29）：NK-OPS-001 Batch `MorningControlScope.executeOwnedEpoch/executeResumeOwnedEpoch`・`EpochInvalidation/OwnedEpochWork`、既存`executeOwned`委譲、`MorningCurrentInvalidation.invalidate`から同scopeの読戻し済みINVALID Epochを018/266・267/`PT-OPS-MCTRL015～018`へ対応。RD OPS-009/BAK-001、UI251/253、SS341§5/343§6.15、SSC089/094/105/108、471 R1/D04/05。Production6 clean2,517PT/static0は回帰限定、native親・Stage受渡し/Unit/issuer/外部起動/CHR未受入。
+
 PG377追加追跡（2026-09-29）：NK-OPS-001 Batch `MorningBackupStage.executeOwned/OwnedWork`、既存`execute`と`MorningControlScope`/`MorningDatabaseSession.Access`/`MorningBackupPreparation`の同owner境界を018/264・265/`PT-OPS-MBSTAGE005～008`に対応。RD OPS-009/BAK-001、UI251、SS341§5–6/343§6.15、SSC092/094/104/105/107/108、471 R1/D04/05。Production6 clean2,513PT/static0は回帰限定、実Unit・issuer・外部起動/CHR未受入。
 
 PG376追加追跡（2026-09-29）：NK-OPS-001 Production `BackupStartIntentFiles.requireClear`、PGPT-only `NativeBackupTimeoutResidualProbe.clear/check/hold`、PT-OPS-MTIME009/018/262・263。RD OPS-009/BAK-001、UI251、SS341/343・SSC107、BUG322/YKT254。空時成功・marker時拒否・空へ復帰を実OSで限定確認、外部親未受入。

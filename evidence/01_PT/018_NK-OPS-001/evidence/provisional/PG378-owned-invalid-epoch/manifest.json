@@ -1,0 +1,49 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "limited owned INVALID Epoch handoff PT and six-module clean regression passed; full coverage/native startup/CHR unaccepted",
+  "executedAtJst": "2026-09-29T04:36:43+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "node": "24.19.0", "spotbugs": "4.10.4.0", "jacoco": "0.8.15"},
+  "branch": "dev-foundation",
+  "sourceCommit": "1acade420339eb81f79b717036a69f030ee1949e",
+  "testIds": ["PT-OPS-MCTRL015", "PT-OPS-MCTRL016", "PT-OPS-MCTRL017", "PT-OPS-MCTRL018"],
+  "commands": [
+    "JAVA_HOME=<JDK25> ./mvnw -B -ntp -Dmaven.repo.local=<fixed> -pl src/schubert-nk-batch -Dtest=MorningControlScopeTest clean test spotbugs:check jacoco:report",
+    "PATH=<Node24 bin>:<system paths> JAVA_HOME=<JDK25> ./mvnw -B -ntp -Dmaven.repo.local=<fixed> -pl <Production6> -am clean test",
+    "PATH=<Node24 bin>:<system paths> JAVA_HOME=<JDK25> ./mvnw -B -ntp -Dmaven.repo.local=<fixed> -pl <Production6> spotbugs:check jacoco:report"
+  ],
+  "exitCodes": {"selectedCleanTestStaticCoverage": 0, "production6CleanTest": 0, "production6StaticCoverage": 0, "discardedNoncleanSelectedCoverage": 0},
+  "input": "fixed synthetic run/activation/boot/epoch and owner-scoped M/A/original/DB; no real Unit, credential or permit digest",
+  "expected": "INVALID generation from the same activation is borrowed only after fresh eight and durable invalidation, with all owners held; error/null/wrong/ISSUED never calls downstream work; full regression has no failed/error/skipped",
+  "actual": "selected 18 PT F/E/S0, injected handoff branch missed 0; Production6 2517 PT/369 suites F/E/S0, SpotBugs six modules 0; four-metric coverage incomplete",
+  "suiteCounts": {"protocol": 17, "storage": 21, "bootstrap": 23, "api": 125, "web": 89, "batch": 94},
+  "testCounts": {"protocol": 80, "storage": 149, "bootstrap": 181, "api": 756, "web": 565, "batch": 786},
+  "failuresErrorsSkipped": {"protocol": [0, 0, 0], "storage": [0, 0, 0], "bootstrap": [0, 0, 0], "api": [0, 0, 0], "web": [0, 0, 0], "batch": [0, 0, 0]},
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0], "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0], "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0], "batch": [1634, 31, 365, 137, 17],
+    "morningControlScopeOuter": [186, 0, 37, 15, 0], "injectedEpochHandoffBranchMissed": 0
+  },
+  "hashMethod": "orderedReportDigest: SHA-256 of UTF-8 newline-terminated lines src-relative XML path + ':' + raw XML SHA-256, sorted by path",
+  "hashesSha256": {
+    "protocolOrderedReportDigest": "4110e9a912dcdea194d0ffc1e98d8958552c110c2f5d4dc337a46c2921ec4453",
+    "storageOrderedReportDigest": "5483a2b95b58185e492c82ddad800a7e0799b669cfbe188ac6124ddbb5c72844",
+    "bootstrapOrderedReportDigest": "5c628086997c6416349e5c4c32370c8b98072631dcf1185e8fbc9a9f24816820",
+    "apiOrderedReportDigest": "353b5e8f6db0c8946916ac24e70b3d930bb5b0c54e4cd7fec2e718ea6ded5c1f",
+    "webOrderedReportDigest": "27f9af91d5f0557e706538f756d7661b263f38c1a4081c5945048806152237d5",
+    "batchOrderedReportDigest": "5adbdab5422a16bd81b4d6c15d3a5d127c888c467ec861dea97558ca5f91e2a1",
+    "protocolJacocoXml": "a65f16e286e0343dd205b69702d327e7159607d2f80adfb96f0e1b928aef174c",
+    "storageJacocoXml": "4168d040bfc88db6738aec0273547876299f32b646ff782821af9c39ff87b1bf",
+    "bootstrapJacocoXml": "ee32583b3f9b055fd88019ca8b4e24fd5688fad954af3931422ee1f3bc1aebca",
+    "apiJacocoXml": "67e3ab1429a8d6d0e42c1eff5eaecb87d8398695c89ee4b47fd2c073d2f800d6",
+    "webJacocoXml": "82a1ff356885097709d0f8c5533e97ef1b7c499fdd7cc370b2f01203071f0338",
+    "batchJacocoXml": "c1bf267d91b8c854ccc7a734f6495627f18393b61fa4820c5501f7ee73b26b1a",
+    "morningControlScopeJUnitXml": "968824ce0fc64b7b7583b1738950c552beaec62200ec813577008d20e4e30660",
+    "sourceMorningControlScope": "f15c16673c90d3df7b5e72212406b0e9ecacd767a5aeed70b82356db24898538",
+    "testMorningControlScope": "9061e055b0dadbe0aff52c04b881272d4b4a2044506338fabe21d351953a462d",
+    "ptSpecification266": "543c35a59977f75289bcc3dfc6d7fcb1162faa990808f3862b1cf1f7b025014b"
+  },
+  "related": ["RD OPS-009", "RD BAK-001", "UI251", "UI253", "SS341", "SS343", "SSC-089", "SSC-094", "SSC-105", "SSC-108", "471 R1/D04/D05"],
+  "unrun": ["actual parent native M/A/original and fresh Unit terminals", "parent Backup Unit and archive", "SSC-108 canonical permit evidence/issue", "RootLauncher same-PID exec and external Web/API readiness", "actual NK CHR-A01/L01", "formal all-scope collector and 100% coverage gate"],
+  "rawXmlOrSecretsInGit": false
+}
