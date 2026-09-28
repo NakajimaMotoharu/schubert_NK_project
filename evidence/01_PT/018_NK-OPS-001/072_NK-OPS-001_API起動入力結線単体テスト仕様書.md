@@ -1,5 +1,7 @@
 # NK-OPS-001 API起動入力結線単体テスト仕様書
 
+PG361追補（未受入）：`ApiProcessMain.startNative`にAPI借用credential→別profile JMS contextとDB pool事前probeを既存`ServiceProcessResources`所有scope内で結線。関連RD MQ-001/003/006/008・SYS-004、UI231/253、SS311/321§6/342/343、PT-JMS-024/025とPT-OPS-API-MAIN。独立期待は親root/A・設定・credential・DBを先行し、SYNC/Web Log各FQQN接続を検査してから業務runtimeを開始すること。現入口はその後`unassembledStartup`で必ず拒否し、実成功/readiness/停止後条件はまだ試験対象外。root/Unit/正規releaseを迂回したfixture起動を合格にしない。実外部受入時に同classのnative line/method/branch、失敗時全資源close、秘密非出力を追加PT・sanitized証跡で証明する。
+
 Program NK-OPS-001、PG279。Class/method `ApiStartupInputs.<init>/load`、`ApiStartupInputs.Values`。RD SYS-002/004・MQ-001、UI243/253、SS342/343 §4/6、PG-D-276/278/279。Fixtureは公開非秘密YAMLを返す隔離sourceと合成systemd environment Map。実credential内容、DB/JMS・外部main・OS ACLは対象外。
 
 | Test ID | 目的・事前条件/fixture | 入力・操作 | 独立期待値・根拠 |

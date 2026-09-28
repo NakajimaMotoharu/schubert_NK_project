@@ -1,0 +1,63 @@
+{
+  "programId": "NK-MSG-001",
+  "runId": "PG361-api-native-broker-provisional-20260928",
+  "status": "PROVISIONAL_NOT_FORMAL",
+  "recordedAt": "2026-09-28T22:49:54+09:00",
+  "environment": {
+    "os": "Linux 7.0.0-34-generic x86_64",
+    "jdk": "Ubuntu OpenJDK 25.0.4+7",
+    "maven": "Apache Maven Wrapper 3.9.12",
+    "artemisTestDependency": "2.56.0",
+    "branch": "dev-foundation",
+    "sourceCommit": "dcccfa3da"
+  },
+  "command": "JAVA_HOME=<recorded JDK> PATH=<recorded JDK and Node24>:$PATH ./mvnw -o -q -Dmaven.repo.local=<private m2> -Dnk.pt.repository=<this repository> -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "testIds": ["PT-JMS-024-A", "PT-JMS-024-B", "PT-JMS-024-C", "PT-JMS-024-D", "PT-JMS-024-E", "PT-JMS-024-F", "PT-JMS-024-G", "PT-JMS-024-H", "PT-JMS-025-A", "PT-JMS-025-B", "PT-JMS-025-C"],
+  "input": "Only published synthetic API five-ID credential fixture and isolated loopback TCP Artemis broker. Two independent API factories, bad endpoint/null/fault/close vectors, real PostgreSQL/Artemis-dependent existing suites. No real password, raw session, message body or DB dump is retained.",
+  "expected": "SS321 section 6 and SS342: nk_api, transacted Sync and Web Log contexts using distinct 1048576/65536-byte consumer profiles, matching only their own fixed FQQN; Web Log preprobe adds one Log context, not a SYNC-profile attachment. All borrowed contexts/factories close, copies clear, failures are redacted; existing six-module PT remains successful.",
+  "actual": "Synthetic loaded credential opened both real TCP Artemis contexts and closed them. Split readiness attached one SYNC and one Web Log FQQN; dependent LogPath used preprobe SYNC1/Log1 plus active SYNC4/Log1. Six-module JUnit 2457 tests/359 suites, failures 0, errors 0, skipped 0; six SpotBugs BugInstance counts 0; Maven exit 0. API standalone clean 756 tests/125 suites, failures 0, errors 0, skipped 0.",
+  "moduleJUnit": {
+    "protocol": "80 tests/17 suites",
+    "storage": "149 tests/21 suites",
+    "bootstrap": "177 tests/22 suites",
+    "api": "756 tests/125 suites",
+    "web": "555 tests/85 suites",
+    "batch": "740 tests/89 suites"
+  },
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [60, 1, 19, 3, 0],
+    "batch": [1220, 21, 269, 102, 12]
+  },
+  "changedClassCoverage": {
+    "ApiBrokerContexts": "instruction missed 13/covered 209; branch missed 2/covered 18; line missed 6/covered 48; method missed 0/covered 10; class missed 0/covered 1",
+    "ArtemisConnectionFactoryProvider": "instruction/branch/line/method/class missed 0",
+    "ApiDependencyReadiness": "instruction/branch/line/method/class missed 0",
+    "ApiLogPathApplicationRuntime": "instruction/line/method/class missed 0; branch 0",
+    "ApiProcessMain": "instruction missed 82; branch missed 1; line missed 26; method missed 4; class missed 0; native success path intentionally still refused"
+  },
+  "bugs": ["BUG-321"],
+  "horizontal": ["YKT-253"],
+  "ssc": [],
+  "filesNotCommitted": "Raw JUnit XML, JaCoCo XML/exec and local Maven cache remain in ignored target/private directories. The manifest stores sanitized counters and hashes only.",
+  "sha256": {
+    "apiBrokerContextsCredentialJUnitXml": "831ad98eaf7686dd39d3dee01e20a40ccda2cb9815668a3a413ecd57d3352a19",
+    "apiBrokerContextsJUnitXml": "5892d240d281f7bf234c9fec65533bf22d936a2bbe6c3921d6edc742552a8c0b",
+    "apiDependencyReadinessJUnitXml": "22ca66dd7d8f6534194b69eefab0db2d9276359d1223f18babe8a9fa590dc3d1",
+    "apiLogPathJUnitXml": "34ca61372dfa1ca40deba4fd33f7d2e375c70fee53c81ceb8524df65dd216036",
+    "apiProviderJUnitXml": "3acb0f430948d7decc9579bf78fb12ac4ebd6340c668180885b92a4755930ca7",
+    "apiJaCoCoXml": "6e3dc55f56f6c78b5339b59071bf543a78cf7e5ced4085b128240e76bef1cd82",
+    "apiBrokerContextsSource": "339e224fc11cd9ddd39d32edf7b0b6c605f4890c94b66962fa9341a73d5402c1",
+    "protocolJUnitFileList": "f359b74872c44f1c3a904b34d5856ce5e793f9f2fd7589514abbb0ab41581129",
+    "storageJUnitFileList": "37151f7e497a8ba54203fa60e2943f4cc95ccf89ad62719ed68a018578a6dad6",
+    "bootstrapJUnitFileList": "5437df8b47207b76eeda1420a14df51a632388ff54bf1080c3751127dac2084e",
+    "apiJUnitFileList": "58d495474bae8d234d4158584bf4cfb2c3359e5ed53b7777135ea0b8d2833d5e",
+    "webJUnitFileList": "7e59c76732b4712f7b6b32febdb89d3fb5131f302ecd3476bd649dfb818dbe5e",
+    "batchJUnitFileList": "60c23b30c6244cddd89a9f7a87eb9e7ae7caa003eabd3e193bee3fa273cfaf28"
+  },
+  "unmet": ["All Production Java coverage counters 100% including the new API owner/native lines", "Formal full-scope/hash/canary acceptance", "Broker Ops management and real startup journal/ACL/readiness", "Actual Production Web/API external process and business runtime", "Real NK CHR-A01/L01"]
+}

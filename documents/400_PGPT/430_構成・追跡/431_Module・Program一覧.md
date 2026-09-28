@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-28 PG361暫定追記：NK-MSG-001 `ArtemisConnectionFactoryProvider.create(profile,endpoint)` / `ApiBrokerContexts.create/sync/webLog/close` / `ApiDependencyReadiness.verify` / `ApiLogPathApplicationRuntime.start`→PT-JMS-024/025、005仕様・結果とAPI関連JUnit。NK-OPS-001 `ApiProcessMain.startNative`→同起動fail-closed試験、後続真正root/native外部受入PT。RD MQ-001/003/006/008・SYS-004、UI231/253、SS311/321§6/342/343、BUG321/YKT253、PG-D320。Source `dcccfa3da`。API clean756PT/static0、二factory実TCP合成資格情報接続・独立FQQN probeを限定確認。全6/全coverage/R2R3/管理readiness未受入、正式source/run/進捗中心据置。
+
 2026-09-28 PG360暫定追記：NK-MSG-001 `ApiMessagingRuntime.start`→PT-JMS-016 A～G、`ApiLogPathApplicationRuntime.start/startWithLogin/startWithLoginAndLog`→PT-JMS-018と依存Login/Log実Broker回帰。RD MQ-001/003/006/008、UI231、SS311/321§6/342、BUG321/YKT253。Source `d2d475a87`＋Web統合PT追随`bb94ea66f`、005/`api-profile-split/manifest.json`。変更2class coverage missed0/全6 clean2,446PT/static0だが全Production coverage100%・外部API/Web/D03実credential/実NK CHR未達、正式source/run不変。
 
 2026-09-28 PG313暫定追記（正式加点なし）: NK-OPS-001 Bootstrap ReleaseApproval/ReleaseSignatureVerifier/ReleaseInventory（Artifact/Dependency含む）とBatch RootReleaseApprovalReader→PT-OPS-APPROVAL001～008/APPROVALREAD001～008/SIGN001～008/BOMPROFILE001～016。RD SYS002/004・OPS009・DAT009、UI212/251/253、SS343 §11.1・SSC096・PG-D313。018150152153154155/provisional PG313各manifestがmethod/fixture/hash/commandを追跡。固定署名claims/原本reader/parserの限定成功と全release/DB/業務起動受入は別。4groupを022/019、ownerをbootstrap_ownershipへ明示登録し、不明ownerを許容しない。
