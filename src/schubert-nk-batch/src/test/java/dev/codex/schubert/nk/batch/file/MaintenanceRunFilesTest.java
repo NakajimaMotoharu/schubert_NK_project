@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
 import dev.codex.schubert.nk.batch.repository.*;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
@@ -49,6 +50,92 @@ final class MaintenanceRunFilesTest {
   private static Map<String, String> activeFiles() {
     return Map.of(
         "runs/" + RUN_ID + ".run", ANCHOR, "attempts/" + ACT_ID + ".begin", BEGIN, "active", BEGIN);
+  }
+
+  private static CleanupWorkerRequest cleanupRequest() {
+    return new CleanupWorkerRequest(RUN.id(), ACTIVATION.id(), RUN.cutoff(), "0".repeat(64));
+  }
+
+  /** PG330/SSC104/PT-OPS-MRF001: independent literal durable graph, no republish. */
+  @Test
+  void cleanupObservationIsReadOnly() throws Exception {
+    try (var f = fixture()) {
+      f.seed(true, true, false);
+      var original = disk(f);
+      assertEquals(ACTIVATION, f.files.execute(s -> s.observeCleanup(cleanupRequest())));
+      assertEquals(original, disk(f));
+      for (String operation : List.of("create", "write", "force", "publish", "unlink", "sync"))
+        assertEquals(0, f.count(operation), operation);
+      f.released();
+    }
+  }
+
+  /** PG330/SSC104/PT-OPS-MRF002: no mismatched child run, activation or cutoff. */
+  @Test
+  void cleanupObservationRefusesOtherIdentity() throws Exception {
+    try (var f = fixture()) {
+      f.seed(true, true, false);
+      for (var request :
+          List.of(
+              new CleanupWorkerRequest(OTHER, ACTIVATION.id(), RUN.cutoff(), "0".repeat(64)),
+              new CleanupWorkerRequest(RUN.id(), NEXT, RUN.cutoff(), "0".repeat(64)),
+              new CleanupWorkerRequest(
+                  RUN.id(), ACTIVATION.id(), RUN.cutoff().plusSeconds(1), "0".repeat(64))))
+        failure(() -> f.files.execute(s -> s.observeCleanup(request)));
+      assertEquals(activeFiles(), disk(f));
+      assertEquals(0, f.count("publish"));
+      f.released();
+    }
+  }
+
+  /** PG330/SSC104/PT-OPS-MRF003: absent, orphan and completed graphs cannot authorize cleanup. */
+  @Test
+  void cleanupObservationRefusesNonActive() throws Exception {
+    for (boolean begin : List.of(false, true))
+      for (boolean active : List.of(false, true))
+        if (!begin || !active)
+          try (var f = fixture()) {
+            f.seed(begin, active, false);
+            failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
+            assertEquals(0, f.count("publish"));
+            f.released();
+          }
+    try (var f = fixture()) {
+      f.seed(true, true, true);
+      failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
+      assertEquals(0, f.count("publish"));
+      f.released();
+    }
+  }
+
+  /** PG330/SSC104/PT-OPS-MRF004: null/graph drift and owned-close uncertainty fail closed. */
+  @Test
+  void cleanupObservationRefusesDriftAndCloseFault() throws Exception {
+    try (var f = fixture()) {
+      f.seed(true, true, false);
+      assertThrows(NullPointerException.class, () -> f.files.execute(s -> s.observeCleanup(null)));
+      assertEquals(activeFiles(), disk(f));
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.seed(true, true, false);
+      f.on(
+          "namesOpen",
+          4,
+          () ->
+              Files.writeString(
+                  f.maintenance.resolve("active"), BEGIN.replace(ACT_ID, NEXT.toString())));
+      failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
+      assertEquals(0, f.count("publish"));
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.seed(true, true, false);
+      f.rawCloses = true;
+      failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
+      assertEquals(0, f.count("publish"));
+      f.released();
+    }
   }
 
   private static Map<String, String> completedFiles(String done) {

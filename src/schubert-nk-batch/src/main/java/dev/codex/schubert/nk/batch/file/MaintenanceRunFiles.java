@@ -4,6 +4,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailable;
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
+import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
@@ -305,6 +306,27 @@ public final class MaintenanceRunFiles {
                 graph(before.runs(), begins, before.done(), Optional.of(activation))
                     .equals(scan()));
             return new MaintenanceRunState(activation, Optional.empty());
+          });
+    }
+
+    /**
+     * Cleanup child correlation only. This read-only observation is not M/A, backup, DB lock or
+     * DELETE authority. NK-OPS-001/OPS009/UI251/SS343/SSC104/PG330; PT-OPS-MRF001..004.
+     */
+    public MaintenanceActivation observeCleanup(CleanupWorkerRequest request)
+        throws StorageIoException {
+      Objects.requireNonNull(request, "fixed cleanup request");
+      return perform(
+          () -> {
+            Graph first = scan();
+            require(first.equals(scan()));
+            require(first.active().isPresent());
+            MaintenanceActivation active = first.active().orElseThrow();
+            require(active.run().equals(new BatchRun(request.run(), request.cutoff())));
+            require(active.id().equals(request.activation()));
+            // graph() places this run in pending iff its current activation has no done record.
+            require(first.pending().equals(Optional.of(request.run())));
+            return active;
           });
     }
 
