@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.*;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -111,7 +112,7 @@ final class BackupStartIntentFilesTest {
     }
   }
 
-  @Test
+  @RepeatedTest(10)
   void concurrentDistinctOwnersCannotPublishTwoIntents() throws Exception {
     try (var fixture = fixture();
         var executor = Executors.newFixedThreadPool(2)) {
@@ -132,6 +133,7 @@ final class BackupStartIntentFilesTest {
       assertEquals(1, (left.get() ? 1 : 0) + (right.get() ? 1 : 0));
       assertTrue(Files.exists(fixture.parent.resolve("backup-start.intent")));
       assertThrows(IOException.class, files(fixture)::requireClear);
+      fixture.released();
     }
   }
 

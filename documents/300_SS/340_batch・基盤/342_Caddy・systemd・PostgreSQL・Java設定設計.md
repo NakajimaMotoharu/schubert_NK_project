@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC107/BUG322（PG/PT）：親Morning候補の`Type=simple`＋`TimeoutStartSec=30min`はJava親全体の上限でなく、`Before=Backup/Cleanup/...`も親処理完了barrierにならない。親を`Type=oneshot`にし`TimeoutStartSec=30min`を実行中全体に適用する。親から子への`Before=`は外し、親がM/A/原本を所有して固定Unitを明示起動する。morning targetは親だけを`Requires`し`After`で親完了を待つ。旧「全unitをWants」は廃止し、子の並列自動起動を禁止する。`SendSIGKILL=no`と後続保全を維持し、timeout時にOS lock解放/Unit終端/marker修復を推定しない。実効Type/MainPID/timeout、短縮隔離probe、全Unit依存順と親の30分単調budgetはPTで確認する。Web/API/Artemis `Type=simple`の個別readinessは引き続き別pollであり、その`TimeoutStartSec`を長期稼働期限へ転用しない。RD/UI変更なし。
+
 ## 1. 目的・状態
 
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
@@ -99,8 +101,8 @@ SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止
 SSC104/PG324：上表Cleanupはroot MorningがM/A保持中に同期起動する真正oneshotであり、空の成功Unitを置かない。固定非秘密requestはsystemd `LoadCredential`でprivate受渡しし、`db-batch`はroot Cleanup専用processへ固定配布する。Unitの0/10は実削除・skip/警告・transferを記録した親検証済終端だけに対応し、safety failure/起動不明は非成功でArtemis `Requires`を遮断する。root実行権限は現物backup root/原本検証のためだけで、shell/任意argv/env/Secret出力は禁止。service templateの完成・配備は全親/子契約と別PTを経るまで未認定。
 SSC104/PG326：子のroot contextは`schubert-nk-cleanup.service`自身のUID0、固定PID1/boot、自己PID-start/InvocationID/MainPIDと厳密cgroupで認証し、親`schubert-nk-morning-controller.service`のcontextを流用しない。起動時と帰還時に再確認し、異Unit/変更/不明は削除0・非成功。これはM/A/原本・両backup・DB advisoryを証明しない。
 
-`schubert-nk-morning.target`が全unitをWantsし、通常bootの`multi-user.target`からWantsする。BackupのFAILEDは
-target全体を止めず、cleanupが削除skipを記録した上で後続する。
+`schubert-nk-morning.target`は親MorningだけをRequires/Afterし、通常bootの`multi-user.target`からWantsする。親が全子を順序起動・終端照合し、BackupのFAILEDは
+親がその事実を同runへ記録してCleanupの削除skipを選び、後続起動する。子をtargetから並列Wantsしてはならない。
 
 ### 4.2 Java service共通
 

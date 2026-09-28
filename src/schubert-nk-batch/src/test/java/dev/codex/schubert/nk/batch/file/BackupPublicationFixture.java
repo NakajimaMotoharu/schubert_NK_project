@@ -10,6 +10,7 @@ import java.nio.channels.SeekableByteChannel;
 import java.nio.file.*;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.*;
 
 /** Writer-only fixture; real FD/IO, public bytes, synthetic UID. BAT242..257/SS341 6.8. */
@@ -24,17 +25,18 @@ final class BackupPublicationFixture
   final OwnedTransferDirectory root;
   final DirectoryCalls calls;
   final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
-  final Set<Integer> descriptors = new HashSet<>();
-  final Set<byte[]> buffers = Collections.newSetFromMap(new IdentityHashMap<>());
-  final Map<String, Integer> counts = new LinkedHashMap<>();
+  final Set<Integer> descriptors = ConcurrentHashMap.newKeySet();
+  final Set<byte[]> buffers = ConcurrentHashMap.newKeySet();
+  final Map<String, Integer> counts = new ConcurrentHashMap<>();
   final Map<String, Throwable> faults = new HashMap<>();
-  final List<String> events = new ArrayList<>();
+  final List<String> events = Collections.synchronizedList(new ArrayList<>());
   final int rootFd;
   int channels, streams, faultAt, position;
   boolean bundle;
   long effective = 0, time = 100;
   int chunk = Integer.MAX_VALUE;
-  boolean track = true, nullMap, nullWriter, nullReader, readonly;
+  volatile boolean track = true;
+  boolean nullMap, nullWriter, nullReader, readonly;
   byte[] acl = new byte[0];
   String writeMode = "", readMode = "";
   String copyFilesystem = "tmpfs";
@@ -121,14 +123,19 @@ final class BackupPublicationFixture
     if (!track) return;
     int n = counts.merge(name, 1, Integer::sum);
     hook.accept(name, n);
+    int observedPosition;
     if (!name.equals("clock") && !name.equals("effectiveUid")) {
-      position++;
-      events.add(name);
+      synchronized (this) {
+        observedPosition = ++position;
+        events.add(name);
+      }
+    } else {
+      observedPosition = position;
     }
     Throwable failure = faults.get(name + "#" + n);
     if (failure instanceof RuntimeException value) throw value;
     if (failure instanceof Error value) throw value;
-    if (failure != null || (faultAt > 0 && faultAt == position))
+    if (failure != null || (faultAt > 0 && faultAt == observedPosition))
       throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
   }
 
@@ -180,7 +187,9 @@ final class BackupPublicationFixture
     point("openWriter");
     if (nullWriter) return null;
     var delegate = nativeIo.openWriter(held);
-    channels++;
+    synchronized (this) {
+      channels++;
+    }
     return new InspectorEnvironmentPublisher.Writer() {
       @Override
       public int write(ByteBuffer buffer) throws IOException {
@@ -216,7 +225,9 @@ final class BackupPublicationFixture
         try {
           delegate.close();
         } finally {
-          channels--;
+          synchronized (BackupPublicationFixture.this) {
+            channels--;
+          }
         }
         point("closeWriter");
       }
@@ -228,7 +239,9 @@ final class BackupPublicationFixture
     point("openReader");
     if (nullReader) return null;
     var delegate = nativeIo.open(held);
-    channels++;
+    synchronized (this) {
+      channels++;
+    }
     return (SeekableByteChannel)
         Proxy.newProxyInstance(
             getClass().getClassLoader(),
@@ -241,7 +254,9 @@ final class BackupPublicationFixture
                 try {
                   delegate.close();
                 } finally {
-                  channels--;
+                  synchronized (BackupPublicationFixture.this) {
+                    channels--;
+                  }
                 }
                 point("closeReader");
                 return null;
@@ -299,7 +314,9 @@ final class BackupPublicationFixture
   public DirectoryStream<Path> openNames(Path held) throws IOException {
     point("openNames");
     var delegate = Files.newDirectoryStream(held);
-    streams++;
+    synchronized (this) {
+      streams++;
+    }
     return new DirectoryStream<>() {
       @Override
       public Iterator<Path> iterator() {
@@ -325,7 +342,9 @@ final class BackupPublicationFixture
         try {
           delegate.close();
         } finally {
-          streams--;
+          synchronized (BackupPublicationFixture.this) {
+            streams--;
+          }
         }
         point("closeNames");
       }

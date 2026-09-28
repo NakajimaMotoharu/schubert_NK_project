@@ -1,14 +1,13 @@
-# NK-OPS-001; OPS009/UI251; SS341/342/343; SSC094/100-102; PG339/BUG316.
+# NK-OPS-001; OPS009/UI251; SS341/342/343; SSC094/100-102/107; PG339/363/BUG316/322.
 # Read-only fail-closed candidate. Do not install/enable as the operational Morning controller
 # until continuous M/A, fixed-eight stop, backup/Cleanup, journal, permit and exit contracts pass.
 [Unit]
 Description=Schubert NK Morning root controller (fail-closed PGPT candidate)
 After=postgresql.service
 Requires=postgresql.service
-Before=schubert-nk-backup.service schubert-nk-cleanup.service artemis.service schubert-nk-expiry-cleanup.service schubert-nk-api.service schubert-nk-web.service caddy.service
 
 [Service]
-Type=simple
+Type=oneshot
 User=root
 Group=root
 WorkingDirectory=/opt/schubert-nk/current/operations

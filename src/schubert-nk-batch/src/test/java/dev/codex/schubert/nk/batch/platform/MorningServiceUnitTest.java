@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/342/343/PG339/BUG316; PT-OPS-MUNIT001-003. */
+/** NK-OPS-001/OPS009/UI251/SS341/342/343/PG339/363/BUG316/322; PT-OPS-MUNIT001-004. */
 final class MorningServiceUnitTest {
   private static String unit() throws IOException {
     return Files.readString(
@@ -24,7 +24,7 @@ final class MorningServiceUnitTest {
   @Test
   void munit001FixedRootActorAndRealJavaEntrypoint() throws Exception {
     String content = unit();
-    exact(content, "Type", "simple");
+    exact(content, "Type", "oneshot");
     exact(content, "User", "root");
     exact(content, "Group", "root");
     exact(content, "After", "postgresql.service");
@@ -51,10 +51,7 @@ final class MorningServiceUnitTest {
   @Test
   void munit003DependencyAndNoForcedKill() throws Exception {
     String content = unit();
-    exact(
-        content,
-        "Before",
-        "schubert-nk-backup.service schubert-nk-cleanup.service artemis.service schubert-nk-expiry-cleanup.service schubert-nk-api.service schubert-nk-web.service caddy.service");
+    assertFalse(content.lines().anyMatch(line -> line.startsWith("Before=")));
     exact(content, "Restart", "no");
     exact(content, "TimeoutStartSec", "30min");
     exact(content, "TimeoutStopSec", "60s");
@@ -64,5 +61,29 @@ final class MorningServiceUnitTest {
     exact(content, "NoNewPrivileges", "true");
     exact(content, "CapabilityBoundingSet", "");
     exact(content, "AmbientCapabilities", "");
+  }
+
+  @Test
+  void munit004ParentOnlyTargetCannotParallelStartChildren() throws Exception {
+    String content =
+        Files.readString(
+            Path.of(
+                System.getProperty("nk.pt.repository"),
+                "src/deployment/systemd/schubert-nk-morning.target.template"));
+    exact(content, "Requires", "schubert-nk-morning-controller.service");
+    exact(content, "After", "schubert-nk-morning-controller.service");
+    assertFalse(content.lines().anyMatch(line -> line.startsWith("Wants=")));
+    for (String child :
+        new String[] {
+          "schubert-nk-backup.service",
+          "schubert-nk-cleanup.service",
+          "artemis.service",
+          "schubert-nk-expiry-cleanup.service",
+          "schubert-nk-api.service",
+          "schubert-nk-web.service",
+          "caddy.service"
+        }) {
+      assertFalse(content.contains(child));
+    }
   }
 }

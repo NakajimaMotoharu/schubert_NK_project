@@ -1,0 +1,11 @@
+# NK-OPS-001; OPS009/UI251; SS341/342/343; SSC107/BUG322; PG363/PT-OPS-MUNIT004.
+# Parent-only candidate. The root Morning process explicitly starts all child Units in SS341
+# order; this target must not parallel-Wants Backup, Cleanup, Artemis or public services.
+# Do not install/enable before the entire parent, child and permit gate is accepted.
+[Unit]
+Description=Schubert NK Morning parent completion
+Requires=schubert-nk-morning-controller.service
+After=schubert-nk-morning-controller.service
+
+[Install]
+WantedBy=multi-user.target
