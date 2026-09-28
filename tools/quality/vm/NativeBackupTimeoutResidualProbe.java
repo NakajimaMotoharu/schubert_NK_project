@@ -47,6 +47,10 @@ public final class NativeBackupTimeoutResidualProbe {
           }
           throw new IOException("residual marker was accepted");
         }
+        case "clear" -> {
+          intent.requireClear();
+          System.out.println("CLEAR_ACCEPTED");
+        }
         default -> throw new IOException("fixed probe mode unavailable");
       }
     }

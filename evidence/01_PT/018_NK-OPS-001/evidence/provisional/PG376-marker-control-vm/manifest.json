@@ -1,0 +1,27 @@
+{
+  "programId": "NK-OPS-001",
+  "phase": "PG376 isolated OS control PT, provisional",
+  "testIds": ["PT-OPS-MTIME009"],
+  "status": {"limitedPass": ["PT-OPS-MTIME009"], "formalAccepted": false, "relatedNotRun": ["PT-OPS-MTIME008"], "failed": [], "flaky": [], "skipped": []},
+  "executedAtJst": "2026-09-29T03:43:06+09:00",
+  "environment": "isolated QEMU VM pgpt-r2-20260927-01, Linux 7.0.0-31-generic x86_64, systemd 259, JDK 25.0.4; host JDK 25.0.4",
+  "branch": "dev-foundation",
+  "sourceCommit": "38c15df462d9048bf339b29ec1d9be8a883fe3d9",
+  "command": "host javac --release 25 -Xlint:all -Werror with Batch/Storage/SpotBugs/JSpecify classpath; VM sudo java NativeBackupTimeoutResidualProbe clear; sudo systemd-run --wait --unit=schubert-nk-pgpt-376-marker-timeout.service Type=oneshot TimeoutStartSec=2s TimeoutStopSec=2s KillMode=control-group SendSIGKILL=no java NativeBackupTimeoutResidualProbe hold; fresh show/stat; separate sudo java ... check; exact test-only marker unlink; sudo java ... clear; reset-failed and exact stage/path cleanup",
+  "input": "fixed test-only /run/schubert-nk/pgpt-374-backup-intent root:root0700 empty before hold and after exact marker cleanup; same Production BackupStartIntentFiles bytecode; real-root isolated VM",
+  "expected": "empty admission succeeds both before/after; actual Production marker publication survives timeout; only residual interval refuses, inode stable; original Morning controller unchanged",
+  "actual": "CLEAR_ACCEPTED exit0 before; oneshot client exit1/Result=timeout/runtime2.162s/status143/MainPID0/ControlGroup empty; marker root0600 regular/link1/size0/inode8989; RESIDUAL_REFUSED exit0 with inode8989 unchanged; CLEAR_ACCEPTED exit0 after exact unlink; test Unit not-found and test paths absent; Morning controller loaded/inactive/MainPID0, Production backup-request empty",
+  "exitCode": {"compile": 0, "clearBefore": 0, "systemdRunTimeoutExpectedNonzero": 1, "residualCheck": 0, "clearAfter": 0, "cleanupAndFinalCheck": 0},
+  "coverage": "No Production source change or Production6 rerun. PG372 2509PT/369suite is a separate provisional result. Test-only probe is not in Production artifact and cannot substitute for line/method/class/branch 100 percent gate.",
+  "related": ["BUG-322", "YKT-254", "SSC-107", "RD OPS-009/BAK-001", "UI251", "SS341/342/343"],
+  "hashesSha256": {
+    "spec262": "edcebe53babffeee91620e2a7c45e069a29ddca37395c7ca22687a5b5cd42a78",
+    "result263": "5314b39b92e532a5686e25e5c159b177e5679d46a976481703c582b2703f139b",
+    "probeSource": "618f520068e94886607b02776164ed37ad40c0eba09752503a80c51d97013e62",
+    "probeClass": "39eba0268514583d0e0855c40724963a5811862c4d1674d69e30b7103a32ffef",
+    "probeJar": "092221e3bb5c3a227aa2bc040787bd860b63d47db8b38ad369fa80b15b08f16a",
+    "batchJar": "2c94c0383fe2bb288bb6a2e6a44f00073f20efd39ec5295ab5f2726dba7f6816",
+    "storageJar": "52f5aa6061881ae8bd7205e936d5803a2006a23463e5c5eca8b700007b86a2b7"
+  },
+  "rawJournalInvocationOrSecretsInGit": false
+}
