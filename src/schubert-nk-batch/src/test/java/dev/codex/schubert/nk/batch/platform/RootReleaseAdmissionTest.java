@@ -20,8 +20,8 @@ import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** ROOTBOM001..008. Package policy ports are synthetic, NOT actual root/native admission. */
-final class RootReleaseAdmissionTest {
+/** ROOTBOM001..009. Package policy ports are synthetic, NOT actual root/native admission. */
+public final class RootReleaseAdmissionTest {
   @TempDir Path publicOsDirectory;
   static final Map<String, String> PLATFORM =
       Map.of("osId", "ubuntu", "osVersion", "26.04", "architecture", "x86_64", "javaFeature", "25");
@@ -61,10 +61,23 @@ final class RootReleaseAdmissionTest {
     int loads;
 
     Fixture() throws IOException {
-      kernel.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-      kernel.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+      this(RootStartupContext.Service.MORNING);
+    }
+
+    Fixture(RootStartupContext.Service service) throws IOException {
+      if (service == RootStartupContext.Service.CLEANUP) {
+        kernel.group = "0::/system.slice/schubert-nk-cleanup.service\n";
+        kernel.unit =
+            "Id=schubert-nk-cleanup.service\nLoadState=loaded\nActiveState=active\n"
+                + "SubState=running\nMainPID=42\nInvocationID="
+                + RootStartupContextTest.INV
+                + "\nControlGroup=/system.slice/schubert-nk-cleanup.service\n";
+      } else {
+        kernel.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
+        kernel.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+      }
       context = new RootStartupContext(kernel);
-      expected = context.capture(RootStartupContext.Service.MORNING);
+      expected = context.capture(service);
     }
 
     RootReleaseAdmission subject() throws IOException {
@@ -81,6 +94,61 @@ final class RootReleaseAdmissionTest {
             return ACTUAL;
           });
     }
+  }
+
+  /** Test-only closed literal release; its two-row schema intentionally refuses the real DB. */
+  public record CleanupInputs(
+      RootStartupContext context,
+      RootStartupContext.Snapshot snapshot,
+      RootReleaseAdmission release,
+      AtomicInteger reads) {}
+
+  public static CleanupInputs syntheticCleanup() throws IOException {
+    return syntheticCleanup(literal().migrations());
+  }
+
+  public static CleanupInputs syntheticCleanup(List<SchemaHistoryAdmission.Row> migrations)
+      throws IOException {
+    var fixture = new Fixture(RootStartupContext.Service.CLEANUP);
+    var reads = new AtomicInteger();
+    var admission =
+        RootReleaseAdmission.create(
+            fixture.context,
+            fixture.expected,
+            () -> {
+              reads.incrementAndGet();
+              return new StartupReleaseManifest.Contents(
+                  "PG314", "a".repeat(64), migrations, BUILD, PLATFORM);
+            },
+            () -> ACTUAL);
+    return new CleanupInputs(fixture.context, fixture.expected, admission, reads);
+  }
+
+  @Test
+  void rootBom009CleanupMustUseOwnSnapshotAndFreshSchema() throws Exception {
+    var f = new Fixture(RootStartupContext.Service.CLEANUP);
+    var subject = f.subject();
+    assertEquals(1, f.loads);
+    subject.verifyCleanup(connection(f.events, false), f.expected);
+    assertEquals(2, f.loads);
+    assertEquals(1, f.events.stream().filter("query"::equals).count());
+    int events = f.events.size();
+    assertThrows(
+        IOException.class, () -> subject.verifyMorning(connection(f.events, false), f.expected));
+    assertEquals(events, f.events.size());
+    var morning = new Fixture();
+    var morningSubject = morning.subject();
+    assertThrows(
+        IOException.class,
+        () -> morningSubject.verifyCleanup(connection(morning.events, false), morning.expected));
+    assertFalse(morning.events.contains("query"));
+    assertThrows(NullPointerException.class, () -> subject.verifyCleanup(null, f.expected));
+    assertThrows(
+        NullPointerException.class, () -> subject.verifyCleanup(connection(f.events, false), null));
+    f.kernel.unit = f.kernel.unit.replace("MainPID=42", "MainPID=43");
+    assertThrows(
+        IOException.class, () -> subject.verifyCleanup(connection(f.events, false), f.expected));
+    assertEquals(events, f.events.size());
   }
 
   private static <T> T proxy(Class<T> type, InvocationHandler handler) {

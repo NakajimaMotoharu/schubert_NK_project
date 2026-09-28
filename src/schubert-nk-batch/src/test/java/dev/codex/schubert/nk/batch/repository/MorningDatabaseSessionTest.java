@@ -91,6 +91,7 @@ final class MorningDatabaseSessionTest {
     boolean auto = true,
         readonly,
         lock = true,
+        nullLock,
         held = true,
         any,
         nullConnection,
@@ -115,67 +116,80 @@ final class MorningDatabaseSessionTest {
     MorningDatabaseSession subject() {
       return new MorningDatabaseSession(
           URL,
-          () -> {
-            try {
-              event("gate");
-            } catch (IOException | RuntimeException | Error e) {
-              throw e;
-            } catch (Throwable e) {
-              throw new AssertionError(e);
+          this::gate,
+          (url, properties) -> open(url, properties, "schubert-nk-morning-controller"),
+          this::schema);
+    }
+
+    CleanupDatabaseSession cleanupSubject() {
+      return new CleanupDatabaseSession(
+          URL,
+          this::gate,
+          (url, properties) -> open(url, properties, "schubert-nk-cleanup"),
+          this::schema);
+    }
+
+    void gate() throws IOException {
+      try {
+        event("gate");
+      } catch (IOException | RuntimeException | Error failure) {
+        throw failure;
+      } catch (Throwable failure) {
+        throw new AssertionError(failure);
+      }
+    }
+
+    void schema(Connection connection) throws SQLException, IOException {
+      // Explicit synthetic schema port; this fixture does NOT mint root release authority.
+      try {
+        event("schema");
+      } catch (SQLException | IOException | RuntimeException | Error failure) {
+        throw failure;
+      } catch (Throwable failure) {
+        throw new AssertionError(failure);
+      }
+    }
+
+    Connection open(String url, Properties properties, String application) throws SQLException {
+      assertEquals(URL, url);
+      assertEquals(
+          Set.of("user", "password", "connectTimeout", "ApplicationName"),
+          properties.stringPropertyNames());
+      assertEquals("schubert_batch", properties.getProperty("user"));
+      assertEquals("PUBLIC_PASSWORD", properties.getProperty("password"));
+      assertEquals("3", properties.getProperty("connectTimeout"));
+      assertEquals(application, properties.getProperty("ApplicationName"));
+      retained = properties;
+      try {
+        event("connect");
+      } catch (SQLException | RuntimeException | Error e) {
+        throw e;
+      } catch (Throwable e) {
+        throw new AssertionError(e);
+      }
+      if (nullConnection) return null;
+      connections++;
+      return proxy(
+          Connection.class,
+          (m, a) -> {
+            if (m.equals("close")) {
+              connections--;
+              event("connection.close");
+              return null;
             }
-          },
-          (url, properties) -> {
-            assertEquals(URL, url);
-            assertEquals(
-                Set.of("user", "password", "connectTimeout", "ApplicationName"),
-                properties.stringPropertyNames());
-            assertEquals("schubert_batch", properties.getProperty("user"));
-            assertEquals("PUBLIC_PASSWORD", properties.getProperty("password"));
-            assertEquals("3", properties.getProperty("connectTimeout"));
-            assertEquals(
-                "schubert-nk-morning-controller", properties.getProperty("ApplicationName"));
-            retained = properties;
-            try {
-              event("connect");
-            } catch (SQLException | RuntimeException | Error e) {
-              throw e;
-            } catch (Throwable e) {
-              throw new AssertionError(e);
-            }
-            if (nullConnection) return null;
-            connections++;
-            return proxy(
-                Connection.class,
-                (m, a) -> {
-                  if (m.equals("close")) {
-                    connections--;
-                    event("connection.close");
-                    return null;
-                  }
-                  event("connection." + m);
-                  return switch (m) {
-                    case "getAutoCommit" -> auto;
-                    case "isReadOnly" -> readonly;
-                    case "getTransactionIsolation" -> isolation;
-                    case "setAutoCommit" -> {
-                      auto = (boolean) a[0];
-                      yield null;
-                    }
-                    case "prepareStatement" -> statement((String) a[0]);
-                    case "commit", "rollback" -> null;
-                    default -> throw new AssertionError(m);
-                  };
-                });
-          },
-          connection -> {
-            // Explicit synthetic schema port; this fixture does NOT mint root release authority.
-            try {
-              event("schema");
-            } catch (SQLException | IOException | RuntimeException | Error failure) {
-              throw failure;
-            } catch (Throwable failure) {
-              throw new AssertionError(failure);
-            }
+            event("connection." + m);
+            return switch (m) {
+              case "getAutoCommit" -> auto;
+              case "isReadOnly" -> readonly;
+              case "getTransactionIsolation" -> isolation;
+              case "setAutoCommit" -> {
+                auto = (boolean) a[0];
+                yield null;
+              }
+              case "prepareStatement" -> statement((String) a[0]);
+              case "commit", "rollback" -> null;
+              default -> throw new AssertionError(m);
+            };
           });
     }
 
@@ -223,6 +237,7 @@ final class MorningDatabaseSessionTest {
                     case "getString" -> role.get((String) args[0]);
                     case "getObject" -> {
                       String name = (String) args[0];
+                      if (kind.equals("LOCK") && nullLock) yield null;
                       yield kind.equals("ROLE")
                           ? role.get(name)
                           : kind.equals("LOCK")

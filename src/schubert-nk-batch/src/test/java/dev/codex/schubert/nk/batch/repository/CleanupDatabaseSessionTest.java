@@ -1,0 +1,504 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
+import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
+import dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest;
+import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
+
+/** CDB001..009. Literal role/lock vectors, injected JDBC failures and independent actual PG. */
+final class CleanupDatabaseSessionTest {
+  @TempDir static Path directory;
+  static BatchDatabaseFixture db;
+  static String actualUrl;
+
+  @BeforeAll
+  static void database() throws Exception {
+    db = new BatchDatabaseFixture(directory);
+    try (var connection = db.admin();
+        var statement = connection.createStatement()) {
+      actualUrl = connection.getMetaData().getURL().replace("/postgres", "/schubert_nk");
+      statement.execute("create database schubert_nk");
+    }
+    Path sql =
+        Path.of(System.getProperty("nk.pt.repository"))
+            .resolve("src/schubert-nk-api/src/main/resources/db");
+    try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement = connection.createStatement()) {
+      statement.execute(Files.readString(sql.resolve("provisioning/001_roles.sql")));
+    }
+    Flyway.configure()
+        .dataSource(actualUrl, "schubert_migration", "")
+        .defaultSchema("schubert_meta")
+        .schemas("schubert_meta")
+        .createSchemas(true)
+        .initSql("SET ROLE nk_owner")
+        .locations("filesystem:" + sql.resolve("migration"))
+        .validateOnMigrate(true)
+        .cleanDisabled(true)
+        .load()
+        .migrate();
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    if (db != null) db.stop();
+  }
+
+  static InspectorDbCredential credential() {
+    return InspectorDbCredential.consume("PUBLIC_PASSWORD".getBytes(StandardCharsets.US_ASCII));
+  }
+
+  @Test
+  void cdb001FixedUrlNullAndRootActorContract() throws Exception {
+    for (String url :
+        List.of(
+            "",
+            "jdbc:postgresql://localhost:5432/schubert_nk",
+            MorningDatabaseSessionTest.URL + "?user=other",
+            "jdbc:postgresql://127.0.0.1:0/schubert_nk",
+            "jdbc:postgresql://127.0.0.1:65536/schubert_nk",
+            MorningDatabaseSessionTest.URL.replace("schubert_nk", "postgres")))
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupDatabaseSession(url, () -> {}, (u, p) -> null, c -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupDatabaseSession(null, () -> {}, (u, p) -> null, c -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new CleanupDatabaseSession(
+                MorningDatabaseSessionTest.URL, null, (u, p) -> null, c -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupDatabaseSession(MorningDatabaseSessionTest.URL, () -> {}, null, c -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new CleanupDatabaseSession(
+                MorningDatabaseSessionTest.URL, () -> {}, (u, p) -> null, null));
+    var root = RootStartupContext.create();
+    var morning =
+        new RootStartupContext.Snapshot(
+            RootStartupContext.Service.MORNING, "PUBLIC", "PUBLIC", 2, 1, 1, "PUBLIC");
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CleanupDatabaseSession(MorningDatabaseSessionTest.URL, root, morning, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupDatabaseSession(MorningDatabaseSessionTest.URL, null, morning, null));
+    var child = RootReleaseAdmissionTest.syntheticCleanup();
+    assertEquals(1, child.reads().get());
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupDatabaseSession(actualUrl, child.context(), null, child.release()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupDatabaseSession(actualUrl, child.context(), child.snapshot(), null));
+    var actual =
+        new CleanupDatabaseSession(actualUrl, child.context(), child.snapshot(), child.release());
+    assertEquals(1, child.reads().get()); // Construction is not a fresh child admission.
+    var calls = new AtomicInteger();
+    assertEquals(
+        "root cleanup database unavailable",
+        assertThrows(
+                IOException.class,
+                () ->
+                    actual.execute(
+                        credential(),
+                        connection -> {
+                          calls.incrementAndGet();
+                          return true;
+                        }))
+            .getMessage());
+    assertEquals(0, calls.get());
+    assertEquals(2, child.reads().get()); // create + child fresh schema read; no fixture success.
+  }
+
+  @Test
+  void cdb002LiteralRoleSchemaBeforeLockAndAllOwnerClose() throws Exception {
+    var p = new MorningDatabaseSessionTest.Probe();
+    var owner = credential();
+    assertEquals(
+        "OK",
+        p.cleanupSubject()
+            .execute(
+                owner,
+                connection -> {
+                  assertEquals(1, p.connections);
+                  assertTrue(p.auto);
+                  return "OK";
+                }));
+    assertEquals(1, p.counts.get("schema"));
+    assertEquals(1, p.counts.get("LOCK.statement.executeQuery"));
+    assertEquals(2, p.counts.get("HELD.statement.executeQuery"));
+    assertTrue(p.events.indexOf("schema#1") < p.events.indexOf("LOCK.statement.executeQuery#1"));
+    assertThrows(IllegalStateException.class, owner::copyPassword);
+    p.released();
+  }
+
+  @Test
+  void cdb003RoleStateRowsAndNullJdbcObjectsFailClosed() throws Exception {
+    for (String kind :
+        List.of(
+            "auto",
+            "readonly",
+            "isolation",
+            "role",
+            "recovery",
+            "nullRole",
+            "connection",
+            "statement",
+            "rows",
+            "none",
+            "many")) {
+      var p = new MorningDatabaseSessionTest.Probe();
+      switch (kind) {
+        case "auto" -> p.auto = false;
+        case "readonly" -> p.readonly = true;
+        case "isolation" -> p.isolation = Connection.TRANSACTION_SERIALIZABLE;
+        case "role" -> p.role.put("effective_role", "wrong");
+        case "recovery" -> p.role.put("recovery", true);
+        case "nullRole" -> p.role.remove("login_role");
+        case "connection" -> p.nullConnection = true;
+        case "statement" -> p.nullStatement = true;
+        case "rows" -> p.nullRows = true;
+        case "none" -> p.rowCount = 0;
+        default -> p.rowCount = 2;
+      }
+      var calls = new AtomicInteger();
+      assertThrows(
+          IOException.class,
+          () ->
+              p.cleanupSubject()
+                  .execute(
+                      credential(),
+                      c -> {
+                        calls.incrementAndGet();
+                        return true;
+                      }),
+          kind);
+      assertEquals(0, calls.get(), kind);
+      p.released();
+    }
+  }
+
+  @Test
+  void cdb004SchemaAndRootGateMustPrecedeLockAndCallback() throws Exception {
+    for (Throwable failure :
+        List.of(
+            new IOException("PRIVATE"),
+            new SQLException("PRIVATE"),
+            new AssertionError("PRIVATE"))) {
+      var p = new MorningDatabaseSessionTest.Probe();
+      p.faults.put("schema", failure);
+      var calls = new AtomicInteger();
+      Throwable actual =
+          assertThrows(
+              Throwable.class,
+              () ->
+                  p.cleanupSubject()
+                      .execute(
+                          credential(),
+                          c -> {
+                            calls.incrementAndGet();
+                            return true;
+                          }));
+      if (failure instanceof Error) assertSame(failure, actual);
+      else assertEquals("root cleanup database unavailable", actual.getMessage());
+      assertEquals(0, calls.get());
+      assertFalse(p.events.stream().anyMatch(e -> e.startsWith("LOCK.")));
+      p.released();
+    }
+    var blocked = new MorningDatabaseSessionTest.Probe();
+    blocked.faults.put("gate", new IOException("PRIVATE"));
+    assertThrows(
+        IOException.class, () -> blocked.cleanupSubject().execute(credential(), c -> true));
+    assertTrue(blocked.events.stream().noneMatch(e -> e.startsWith("connect")));
+    blocked.released();
+  }
+
+  @Test
+  void cdb005BusyMissingAndAmbiguousAdvisoryNeverCallBody() throws Exception {
+    for (String kind : List.of("lockFalse", "heldFalse", "lockMissing", "heldMany", "lockNull")) {
+      var p = new MorningDatabaseSessionTest.Probe();
+      switch (kind) {
+        case "lockFalse" -> p.lock = false;
+        case "heldFalse" -> p.held = false;
+        case "lockMissing" -> p.rowCounts.put("LOCK", 0);
+        case "heldMany" -> p.rowCounts.put("HELD", 2);
+        default -> p.nullLock = true;
+      }
+      var calls = new AtomicInteger();
+      assertThrows(
+          IOException.class,
+          () ->
+              p.cleanupSubject()
+                  .execute(
+                      credential(),
+                      c -> {
+                        calls.incrementAndGet();
+                        return true;
+                      }),
+          kind);
+      assertEquals(0, calls.get());
+      p.released();
+    }
+  }
+
+  @Test
+  void cdb006CallbackNullKnownUnknownAndPostStateRefusal() throws Exception {
+    var p = new MorningDatabaseSessionTest.Probe();
+    assertThrows(NullPointerException.class, () -> p.cleanupSubject().execute(null, c -> true));
+    var c = credential();
+    assertThrows(NullPointerException.class, () -> p.cleanupSubject().execute(c, null));
+    assertThrows(IllegalStateException.class, c::copyPassword);
+    p.released();
+    for (String kind :
+        List.of("null", "known", "unknown", "auto", "readonly", "isolation", "held")) {
+      var current = new MorningDatabaseSessionTest.Probe();
+      var unknown = new IllegalStateException("PUBLIC unknown");
+      Throwable actual =
+          assertThrows(
+              Throwable.class,
+              () ->
+                  current
+                      .cleanupSubject()
+                      .execute(
+                          credential(),
+                          connection -> {
+                            return switch (kind) {
+                              case "null" -> null;
+                              case "known" -> throw new IOException("PRIVATE");
+                              case "unknown" -> throw unknown;
+                              case "auto" -> {
+                                current.auto = false;
+                                yield true;
+                              }
+                              case "readonly" -> {
+                                current.readonly = true;
+                                yield true;
+                              }
+                              case "isolation" -> {
+                                current.isolation = Connection.TRANSACTION_SERIALIZABLE;
+                                yield true;
+                              }
+                              default -> {
+                                current.held = false;
+                                yield true;
+                              }
+                            };
+                          }));
+      if (kind.equals("unknown")) assertSame(unknown, actual);
+      else if (kind.equals("null")) assertInstanceOf(NullPointerException.class, actual);
+      else assertEquals("root cleanup database unavailable", actual.getMessage());
+      current.released();
+    }
+  }
+
+  @Test
+  void cdb007ActualSeparateRoleConnectionAndParallelLockContention() throws Exception {
+    var subject =
+        new CleanupDatabaseSession(
+            actualUrl,
+            () -> {},
+            DriverManager::getConnection,
+            connection -> assertFalse(connection.isClosed()));
+    var childCalls = new AtomicInteger();
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var executor = Executors.newSingleThreadExecutor()) {
+      assertEquals(
+          "DONE",
+          subject.execute(
+              credential(),
+              child -> {
+                try (var statement = child.createStatement();
+                    var rows = statement.executeQuery("select current_user::text")) {
+                  assertTrue(rows.next());
+                  assertEquals("schubert_batch", rows.getString(1));
+                  assertFalse(rows.next());
+                } catch (SQLException failure) {
+                  throw new IOException("child role observation unavailable");
+                }
+                try {
+                  assertFalse(advisory(observer));
+                  assertEquals(
+                      "root cleanup database unavailable",
+                      executor
+                          .submit(
+                              () ->
+                                  assertThrows(
+                                          IOException.class,
+                                          () ->
+                                              subject.execute(
+                                                  credential(),
+                                                  concurrent -> {
+                                                    childCalls.incrementAndGet();
+                                                    return "WRONG";
+                                                  }))
+                                      .getMessage())
+                          .get(5, TimeUnit.SECONDS));
+                } catch (SQLException
+                    | InterruptedException
+                    | ExecutionException
+                    | TimeoutException failure) {
+                  throw new IOException("parallel advisory observation unavailable");
+                }
+                return "DONE";
+              }));
+      assertEquals(0, childCalls.get());
+      assertTrue(advisory(observer));
+    }
+  }
+
+  @Test
+  void cdb008InterruptAndCloseFailuresDoNotReturnSuccess() throws Exception {
+    var interrupted = new MorningDatabaseSessionTest.Probe();
+    Thread.currentThread().interrupt();
+    try {
+      assertThrows(
+          IOException.class,
+          () -> interrupted.cleanupSubject().execute(credential(), connection -> true));
+    } finally {
+      Thread.interrupted();
+    }
+    assertTrue(interrupted.events.isEmpty());
+    interrupted.released();
+    var close = new MorningDatabaseSessionTest.Probe();
+    close.faults.put("connection.close", new SQLException("PRIVATE close"));
+    assertEquals(
+        "root cleanup database unavailable",
+        assertThrows(
+                IOException.class,
+                () -> close.cleanupSubject().execute(credential(), connection -> true))
+            .getMessage());
+    close.released();
+
+    var good = new MorningDatabaseSessionTest.Probe();
+    good.cleanupSubject().execute(credential(), connection -> true);
+    for (String point : List.copyOf(good.events)) {
+      if (!(point.startsWith("connect")
+          || point.startsWith("connection.")
+          || point.startsWith("ROLE.")
+          || point.startsWith("LOCK.")
+          || point.startsWith("HELD."))) continue;
+      var faulted = new MorningDatabaseSessionTest.Probe();
+      faulted.faultAt = point;
+      faulted.failure = new SQLException("PRIVATE");
+      assertEquals(
+          "root cleanup database unavailable",
+          assertThrows(
+                  IOException.class,
+                  () -> faulted.cleanupSubject().execute(credential(), connection -> true),
+                  point)
+              .getMessage());
+      faulted.released();
+    }
+    good.released();
+
+    for (String first : List.of("success", "known", "batch", "unknown"))
+      for (String second : List.of("sql", "runtime", "error")) {
+        var combined = new MorningDatabaseSessionTest.Probe();
+        Throwable secondary =
+            switch (second) {
+              case "sql" -> new SQLException("PRIVATE close");
+              case "runtime" -> new IllegalStateException("PUBLIC close");
+              default -> new AssertionError("PUBLIC close");
+            };
+        combined.faults.put("connection.close", secondary);
+        var unknown = new IllegalStateException("PUBLIC callback");
+        Throwable actual =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    combined
+                        .cleanupSubject()
+                        .execute(
+                            credential(),
+                            connection -> {
+                              return switch (first) {
+                                case "known" -> throw new IOException("PRIVATE callback");
+                                case "batch" -> throw new BatchRepositoryException();
+                                case "unknown" -> throw unknown;
+                                default -> true;
+                              };
+                            }));
+        if (first.equals("unknown")) {
+          assertSame(unknown, actual);
+          assertEquals(1, unknown.getSuppressed().length);
+          assertEquals(
+              "batch repository operation failed", unknown.getSuppressed()[0].getMessage());
+        } else if (second.equals("sql"))
+          assertEquals("root cleanup database unavailable", actual.getMessage());
+        else assertSame(secondary, actual);
+        combined.released();
+      }
+
+    var nested = new MorningDatabaseSessionTest.Probe();
+    nested.faultAt = "ROLE.row.next#1";
+    nested.failure = new SQLException("PRIVATE primary");
+    nested.faults.put("ROLE.row.close", new SQLException("PRIVATE row close"));
+    nested.faults.put("ROLE.statement.close", new SQLException("PRIVATE statement close"));
+    nested.faults.put("connection.close", new SQLException("PRIVATE connection close"));
+    assertEquals(
+        "root cleanup database unavailable",
+        assertThrows(
+                IOException.class,
+                () -> nested.cleanupSubject().execute(credential(), connection -> true))
+            .getMessage());
+    nested.released();
+  }
+
+  @Test
+  void cdb009PublicChildAdmissionSucceedsOnlyWithFreshMatchingRelease() throws Exception {
+    List<SchemaHistoryAdmission.Row> rows = new ArrayList<>();
+    try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement =
+            connection.prepareStatement(
+                "select installed_rank,version,type,script,checksum,success"
+                    + " from schubert_meta.startup_schema_history() order by installed_rank");
+        var result = statement.executeQuery()) {
+      while (result.next())
+        rows.add(
+            new SchemaHistoryAdmission.Row(
+                result.getInt("installed_rank"),
+                result.getString("version"),
+                result.getString("type"),
+                result.getString("script"),
+                result.getObject("checksum", Integer.class),
+                result.getBoolean("success")));
+    }
+    assertEquals(24, rows.size()); // SCHEMA + independently migrated V001..V023.
+    assertEquals("023", rows.getLast().version());
+    var child = RootReleaseAdmissionTest.syntheticCleanup(rows);
+    assertEquals(1, child.reads().get());
+    var subject =
+        new CleanupDatabaseSession(actualUrl, child.context(), child.snapshot(), child.release());
+    assertEquals(1, child.reads().get());
+    assertEquals("ACCEPTED", subject.execute(credential(), connection -> "ACCEPTED"));
+    assertEquals(2, child.reads().get()); // New read during the child's borrowed DB session.
+  }
+
+  private static boolean advisory(Connection connection) throws SQLException {
+    try (var statement = connection.prepareStatement("select pg_try_advisory_lock(71419602)");
+        var rows = statement.executeQuery()) {
+      assertTrue(rows.next());
+      boolean actual = rows.getBoolean(1);
+      assertFalse(rows.next());
+      return actual;
+    }
+  }
+}

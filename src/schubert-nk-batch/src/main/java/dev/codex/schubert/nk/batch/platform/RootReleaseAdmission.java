@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * Always re-reads the current approval/BOM before schema use; never publishes approval, caches a
  * digest, or substitutes for continuous M/A, terminal units or INVALID. NK-OPS-001/NK-BAT-001;
  * SYS002/004/OPS009/DAT009/UI212/251/253/SS3439.1/11.1/SSC095096/PG-D314/018156;
- * PT-OPS-ROOTBOM001..008.
+ * PT-OPS-ROOTBOM001..009.
  */
 @NullMarked
 public final class RootReleaseAdmission {
@@ -98,9 +98,21 @@ public final class RootReleaseAdmission {
   /** Borrowed fixed-role connection; refuses stale/wrong actor before any schema query. */
   public void verifyMorning(Connection connection, RootStartupContext.Snapshot caller)
       throws SQLException, IOException {
-    Objects.requireNonNull(connection, "admitted morning connection");
-    Objects.requireNonNull(caller, "morning context");
-    require(expected.equals(caller) && caller.service() == RootStartupContext.Service.MORNING);
+    verifyFor(connection, caller, RootStartupContext.Service.MORNING);
+  }
+
+  /** Cleanup child verifies its own fixed root actor and fresh release/schema, not the parent's. */
+  public void verifyCleanup(Connection connection, RootStartupContext.Snapshot caller)
+      throws SQLException, IOException {
+    verifyFor(connection, caller, RootStartupContext.Service.CLEANUP);
+  }
+
+  private void verifyFor(
+      Connection connection, RootStartupContext.Snapshot caller, RootStartupContext.Service service)
+      throws SQLException, IOException {
+    Objects.requireNonNull(connection, "admitted root connection");
+    Objects.requireNonNull(caller, "root context");
+    require(expected.equals(caller) && caller.service() == service);
     context.recheck(expected);
     var current = Objects.requireNonNull(loader.read(), "closed current release result");
     verifyPlatform(current, Objects.requireNonNull(platform.observe(), "runtime platform result"));

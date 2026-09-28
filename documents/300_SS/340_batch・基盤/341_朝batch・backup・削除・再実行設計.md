@@ -8,6 +8,7 @@ SSC100/PG317: 親停止対象を固定8名 caddy.service→schubert-nk-web.servi
 
 SSC094/PG311 接続順補足: reboot後morningと05:00 update/rebootを混在させない。新runはM内で専用db-batch admission/session advisory/全3参照不存在確認後に原本startする。resumeは原本照合先行可。固定Caddy→Web→API→Artemis停止と前回backup/Inspector/cleanup/Expiryの全cgroup終端確認、A取得後のfresh再確認、current INVALIDを経て、両backup step beginを同transactionでcommitしてからworker request公開/起動する。PostgreSQLはmorning先頭依存でありこの停止対象ではない。root credential/専用DB契約は343 §6.15。schema/release/BOM未達の限定接続をProduction受入・backup成功・permitへ読み替えない。
 SSC104/PG326（親DB所有具体化）：親の`MorningDatabaseSession`は両backup begin同transaction commit確定後だけautoCommit=trueへ戻し、同じ単独Connectionのsession advisoryを保持してCleanup子への一回限り同期handoffを許す。handoff開始前に自己lockの厳密1回所有をDB照会し、明示unlock/残余0を確認してから子callbackを呼び、子の真正全終端をcallerが確認した後に同Connectionへ再取得・照会する。親Session APIはcallback中の再入・別thread・未commit・二重handoffを拒否する。commit/状態切替/DB確認/子終端が失敗・不明ならparent Connectionをcloseして非成功とし、原本やM/Aを勝手に解放しない。これはDB lockの貸出だけであり、両backup現物・子専用DB session/Unit/DELETE成功の証明ではない。
+SSC104/PG328（子DB所有具体化）：子Cleanupは自分の固定root Unit contextに結び付く別の非pool `schubert_batch` Connectionを開く。固定loopback `schubert_nk` URL、role/session_user・DB名・nonrecovery・RW/ReadCommitted/autoCommit=trueを照合し、子自身のfresh承認release/BOM/schema検査後にsession advisory71419602を一度取得、同backendの`pg_locks`で所有を確認する。callbackは同期借用Connectionを受け、帰還時も状態/lock/root contextを再確認し、全JDBC owner close完了後にだけ成功値を返す。秘密password copyは消去しJDBC診断を外へ出さない。子Connectionの取得だけでbackup現物・原本・停止Unit・DELETE許可を満たしたとしない。
 
 ## 1. 目的・追跡
 
