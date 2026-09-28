@@ -38,6 +38,41 @@ final class BackupManifestReaderTest {
       assertEquals(
           f.expected, reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
       assertEquals(2, f.counts.get("openNames"));
+      // The new shared claim reader must not weaken the existing bounded publisher contract.
+      assertEquals(
+          f.expected,
+          reader(f)
+              .readWithin(DIR, f.expected.databaseStep(), f.expected.configurationStep(), 100));
+      var database = f.expected.databaseStep();
+      var configuration = f.expected.configurationStep();
+      denied(
+          () ->
+              reader(f)
+                  .readWithin(
+                      DIR,
+                      new BatchStepAttempt(
+                          database.id() + 1,
+                          database.run(),
+                          database.step(),
+                          database.attempt(),
+                          database.startedAt(),
+                          false),
+                      configuration,
+                      100));
+      denied(
+          () ->
+              reader(f)
+                  .readWithin(
+                      DIR,
+                      database,
+                      new BatchStepAttempt(
+                          configuration.id() + 1,
+                          configuration.run(),
+                          configuration.step(),
+                          configuration.attempt(),
+                          configuration.startedAt(),
+                          false),
+                      100));
       f.released();
       f.unchanged();
     }

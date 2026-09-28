@@ -6,7 +6,7 @@ Program ID: NK-OPS-001/NK-BAT-001。Class/method: `BackupManifestReader.findClea
 
 | Test ID | 入力・操作 | 独立期待値 |
 |---|---|---|
-| BMR017 | 固定同run/cutoff/manifest SHAと単一正規directory | 2回root列挙一致＋claim再読後に固定manifest全値一致、borrowed root不変・owned close完了 |
+| BMR017 | 固定同run/cutoff/manifest SHAと単一正規directory。共用`readWithin`へDB/config完全handleの同値・各片方ID違いを入力 | 2回root列挙一致＋claim再読後に固定manifest全値一致、borrowed root不変・owned close完了。既存公開handle一致は成功、どちらか不一致は固定拒否で弱体化なし |
 | BMR018 | `.part`、別run、未知名を追加 | 選択・削除しない。正規同runだけ選ぶ。既存全file不変 |
 | BMR019 | digest/cutoff/runを各1値だけ変える | 全件固定UNAVAILABLE、0件採用。期待値は固定literal SHA/UTCµs/UUID比較 |
 | BMR020 | 同run suffixの短い名、同52byteでも不正区切り | 正規日時＋UUID名以外は固定拒否、fallbackなし |
