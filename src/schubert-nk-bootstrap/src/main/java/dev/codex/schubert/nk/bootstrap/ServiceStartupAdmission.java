@@ -134,8 +134,51 @@ public final class ServiceStartupAdmission {
               service, inputs, frame, identity, before, fixed, config.sha256(), release);
           if (!before.equals(observation.capture()))
             throw new IOException("startup context changed");
-          operation.execute(config.value(), ready);
+          var completion = new ReadyOnce(ready);
+          try {
+            operation.execute(config.value(), completion::release);
+            completion.complete();
+          } finally {
+            completion.finish();
+          }
         });
+  }
+
+  /** Returning without the exact ready handoff cannot turn an incomplete business graph into 0. */
+  private static final class ReadyOnce {
+    private final Ready delegate;
+    private boolean active = true;
+    private boolean attempted;
+    private boolean released;
+    private boolean poisoned;
+
+    private ReadyOnce(Ready delegate) {
+      this.delegate = delegate;
+    }
+
+    private synchronized void release() throws IOException {
+      if (!active || attempted) {
+        poisoned = true;
+        throw new IOException("startup readiness unavailable");
+      }
+      attempted = true;
+      try {
+        delegate.release();
+        released = true;
+      } catch (IOException | RuntimeException | Error failure) {
+        poisoned = true;
+        throw failure;
+      }
+    }
+
+    private synchronized void complete() throws IOException {
+      active = false;
+      if (!released || poisoned) throw new IOException("startup readiness unavailable");
+    }
+
+    private synchronized void finish() {
+      active = false;
+    }
   }
 
   private static String checkedHash(String hash) {

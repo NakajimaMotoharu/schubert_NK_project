@@ -62,6 +62,7 @@ final class ServiceStartupAdmissionTest {
     boolean gateFails, closeFails, changed;
     String ioFault = "";
     RuntimeException unknown;
+    Throwable readyFault;
     int captures, factories, releases, finalCloses;
 
     ServiceStartupAdmission subject() {
@@ -81,6 +82,9 @@ final class ServiceStartupAdmissionTest {
               admission,
               bytes,
               () -> {
+                if (readyFault instanceof IOException io) throw io;
+                if (readyFault instanceof RuntimeException runtime) throw runtime;
+                if (readyFault instanceof Error error) throw error;
                 releases++;
                 order.add("ready-release");
               });
@@ -478,5 +482,110 @@ final class ServiceStartupAdmissionTest {
     assertTrue(nativeIo.capture().pid() > 1);
     assertThrows(IOException.class, () -> nativeIo.identity(ServiceConfigFiles.Service.API));
     assertThrows(IOException.class, nativeIo::releaseHash);
+  }
+
+  @Test
+  void startadmit009NormalReturnWithoutReadyIsNotAcceptance() {
+    var direct = new Fixture();
+    assertThrows(IOException.class, () -> direct.subject().execute(ready -> {}));
+    assertEquals(0, direct.releases);
+    assertEquals(1, direct.finalCloses);
+
+    var configured = new Fixture();
+    assertThrows(
+        IOException.class,
+        () ->
+            configured
+                .subject()
+                .execute(
+                    () ->
+                        new ServiceStartupAdmission.Configuration<>(
+                            Boolean.TRUE, configured.config),
+                    (value, ready) -> assertTrue(value)));
+    assertEquals(0, configured.releases);
+    assertEquals(1, configured.finalCloses);
+
+    var web = new Fixture();
+    web.service = ServiceConfigFiles.Service.WEB;
+    web.proof = GOLDEN.replace("service=API", "service=WEB");
+    web.self =
+        new ChildStartupContext.Observed(
+            web.self.boot(),
+            web.self.pid(),
+            web.self.startTicks(),
+            web.self.uid(),
+            web.self.gid(),
+            web.self.groups(),
+            "0::/system.slice/schubert-nk-web.service\n",
+            true,
+            true);
+    assertThrows(IOException.class, () -> web.subject().execute(ready -> {}));
+    assertEquals(0, web.releases);
+    assertEquals(1, web.finalCloses);
+  }
+
+  @Test
+  void startadmit010ReadyCapabilityCannotBeReusedOrEscaped() {
+    var duplicate = new Fixture();
+    assertThrows(
+        IOException.class,
+        () ->
+            duplicate
+                .subject()
+                .execute(
+                    ready -> {
+                      ready.release();
+                      assertThrows(IOException.class, ready::release);
+                    }));
+    assertEquals(1, duplicate.releases);
+    assertEquals(1, duplicate.finalCloses);
+
+    var late = new Fixture();
+    ServiceStartupAdmission.Ready[] escaped = {null};
+    assertThrows(
+        IOException.class,
+        () ->
+            late.subject()
+                .execute(
+                    ready -> {
+                      escaped[0] = ready;
+                    }));
+    assertNotNull(escaped[0]);
+    assertThrows(IOException.class, escaped[0]::release);
+    assertEquals(0, late.releases);
+    assertEquals(1, late.finalCloses);
+
+    var completed = new Fixture();
+    ServiceStartupAdmission.Ready[] completedCapability = {null};
+    assertDoesNotThrow(
+        () ->
+            completed
+                .subject()
+                .execute(
+                    ready -> {
+                      ready.release();
+                      completedCapability[0] = ready;
+                    }));
+    assertThrows(IOException.class, completedCapability[0]::release);
+    assertEquals(1, completed.releases);
+    assertEquals(1, completed.finalCloses);
+
+    for (Throwable fault :
+        List.of(
+            new IOException("close failed"),
+            new IllegalStateException("runtime"),
+            new AssertionError("error"))) {
+      var failed = new Fixture();
+      failed.readyFault = fault;
+      assertThrows(
+          IOException.class,
+          () ->
+              failed
+                  .subject()
+                  .execute(
+                      ready -> assertSame(fault, assertThrows(Throwable.class, ready::release))));
+      assertEquals(0, failed.releases);
+      assertEquals(1, failed.finalCloses);
+    }
   }
 }
