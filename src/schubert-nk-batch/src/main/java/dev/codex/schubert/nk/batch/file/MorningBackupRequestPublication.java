@@ -59,7 +59,7 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 6.15 fixes the root-only backup request tmpfs namespace")
-  private static Owner openNative() throws IOException {
+  static Owner openNative() throws IOException {
     OwnedTransferDirectory directory =
         OwnedTransferDirectory.open(
             LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/backup-request"));
