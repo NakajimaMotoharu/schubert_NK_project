@@ -1,8 +1,11 @@
 package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.batch.platform.MaintenanceUnit;
+import dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.batch.platform.StopGateException;
 import dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.storage.*;
@@ -20,6 +23,11 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class CleanupNativePreflight {
+  @FunctionalInterface
+  interface StopObservation {
+    boolean quiescent(MaintenanceUnit unit) throws IOException;
+  }
+
   private CleanupNativePreflight() {}
 
   @SuppressFBWarnings(
@@ -29,6 +37,7 @@ final class CleanupNativePreflight {
   static BackupManifest verify() throws IOException {
     RootStartupContext context = RootStartupContext.create();
     var snapshot = context.capture(RootStartupContext.Service.CLEANUP);
+    applicationsStopped(context, snapshot);
     RootReleaseAdmission release = RootReleaseAdmission.create(context, snapshot);
     Path credentialPath;
     try {
@@ -80,7 +89,29 @@ final class CleanupNativePreflight {
                   });
             });
     context.recheck(snapshot); // No result until every borrowed root/DB owner has closed.
+    applicationsStopped(context, snapshot);
     return result;
+  }
+
+  private static void applicationsStopped(
+      RootStartupContext context, RootStartupContext.Snapshot snapshot) throws IOException {
+    requireApplicationsStopped(
+        unit ->
+            MaintenanceUnitTermination.createCleanup(context, snapshot, unit)
+                .quiescent()
+                .isPresent());
+  }
+
+  static void requireApplicationsStopped(StopObservation observation) throws IOException {
+    java.util.Objects.requireNonNull(observation, "fixed child stop observation");
+    try {
+      for (MaintenanceUnit unit :
+          new MaintenanceUnit[] {MaintenanceUnit.WEB, MaintenanceUnit.API}) {
+        if (!observation.quiescent(unit)) throw unavailable();
+      }
+    } catch (StopGateException known) {
+      throw unavailable();
+    }
   }
 
   @SuppressFBWarnings(

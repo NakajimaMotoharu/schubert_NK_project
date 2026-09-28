@@ -6,9 +6,9 @@ import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Root parent's fixed whole-Unit observation, not stop execution, clean stop or startup authority.
- * NK-OPS-001/UI251/253/SS3415/343/SSC100; MSTOP/BTERM; BUG308/YKT241. Caller keeps continuous M/A
- * and forbids independent starts. Parent/client quarantine is separate.
+ * Fixed whole-Unit observation, not stop execution, clean stop or startup authority. Parent keeps
+ * continuous M/A; child observes only WEB/API and cannot inherit the parent's lock authority.
+ * NK-OPS-001/UI251/253/SS3415/343/SSC100104; MSTOP/BTERM; BUG308/YKT241; PG335.
  */
 @NullMarked
 public final class MaintenanceUnitTermination {
@@ -32,6 +32,25 @@ public final class MaintenanceUnitTermination {
     Objects.requireNonNull(unit, "fixed Unit");
     require(expected.service() == RootStartupContext.Service.MORNING);
     context.recheck(expected);
+    return nativeObserver(context, expected, unit);
+  }
+
+  /** Cleanup child may observe only the two application Units under its own fixed root actor. */
+  public static MaintenanceUnitTermination createCleanup(
+      RootStartupContext context, RootStartupContext.Snapshot expected, MaintenanceUnit unit)
+      throws IOException {
+    Objects.requireNonNull(context, "root context");
+    Objects.requireNonNull(expected, "root identity");
+    Objects.requireNonNull(unit, "fixed Unit");
+    require(
+        expected.service() == RootStartupContext.Service.CLEANUP
+            && (unit == MaintenanceUnit.WEB || unit == MaintenanceUnit.API));
+    context.recheck(expected);
+    return nativeObserver(context, expected, unit);
+  }
+
+  private static MaintenanceUnitTermination nativeObserver(
+      RootStartupContext context, RootStartupContext.Snapshot expected, MaintenanceUnit unit) {
     return new MaintenanceUnitTermination(
         () -> context.recheck(expected),
         unit,

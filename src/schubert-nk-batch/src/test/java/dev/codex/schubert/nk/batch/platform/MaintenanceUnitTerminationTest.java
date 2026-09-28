@@ -364,4 +364,47 @@ final class MaintenanceUnitTerminationTest {
     // Literal context port is not genuine root/kernel acceptance; actual native success remains
     // required.
   }
+
+  @Test
+  void mterm009CleanupActorCanObserveOnlyWebAndApi() throws Exception {
+    var root = new RootStartupContextTest.Fixture();
+    root.group = "0::/system.slice/schubert-nk-cleanup.service\n";
+    root.unit = RootStartupContextTest.unit(RootStartupContext.Service.CLEANUP);
+    var context = root.context();
+    var expected = context.capture(RootStartupContext.Service.CLEANUP);
+    int baselineReads = root.reads;
+    assertThrows(
+        NullPointerException.class,
+        () -> MaintenanceUnitTermination.createCleanup(null, expected, MaintenanceUnit.WEB));
+    assertThrows(
+        NullPointerException.class,
+        () -> MaintenanceUnitTermination.createCleanup(context, null, MaintenanceUnit.WEB));
+    assertThrows(
+        NullPointerException.class,
+        () -> MaintenanceUnitTermination.createCleanup(context, expected, null));
+    for (MaintenanceUnit other : MaintenanceUnit.values()) {
+      if (other == MaintenanceUnit.WEB || other == MaintenanceUnit.API) continue;
+      assertThrows(
+          IOException.class,
+          () -> MaintenanceUnitTermination.createCleanup(context, expected, other));
+    }
+    var wrong =
+        new RootStartupContext.Snapshot(
+            RootStartupContext.Service.MORNING,
+            expected.boot(),
+            expected.invocation(),
+            expected.pid(),
+            expected.startTicks(),
+            expected.initStartTicks(),
+            expected.controlGroup());
+    assertThrows(
+        IOException.class,
+        () -> MaintenanceUnitTermination.createCleanup(context, wrong, MaintenanceUnit.WEB));
+    assertEquals(baselineReads, root.reads, "refused targets must not query the manager");
+    for (MaintenanceUnit unit : List.of(MaintenanceUnit.WEB, MaintenanceUnit.API)) {
+      var child = MaintenanceUnitTermination.createCleanup(context, expected, unit);
+      if (LinuxInodeSecurity.create().effectiveUid() != 0)
+        assertThrows(IOException.class, child::quiescent);
+    }
+  }
 }
