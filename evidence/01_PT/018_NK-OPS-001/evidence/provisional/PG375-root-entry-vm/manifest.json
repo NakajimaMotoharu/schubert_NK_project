@@ -1,0 +1,26 @@
+{
+  "programId": "NK-OPS-001",
+  "phase": "PG375 real-root external JVM negative smoke; provisional and not R2/R3 acceptance",
+  "testIds": ["PT-OPS-RMAIN007", "PT-OPS-RMAIN008", "PT-OPS-RMAIN009"],
+  "status": {"limitedPass": ["PT-OPS-RMAIN007", "PT-OPS-RMAIN008", "PT-OPS-RMAIN009"], "formalAccepted": false, "failed": [], "flaky": [], "skipped": []},
+  "executedAtJst": "2026-09-29T03:34:13+09:00",
+  "environment": "isolated QEMU VM pgpt-r2-20260927-01, Linux 7.0.0-31-generic x86_64, JDK 25.0.4; Production Web/API Unit not installed",
+  "branch": "dev-foundation",
+  "sourceCommit": "12db53bb38dcf7fa42ccefaab7dc684a4ac8a52e",
+  "command": "sudo /usr/bin/java --enable-native-access=ALL-UNNAMED -cp <same-source Batch:Storage:Bootstrap:Protocol plus existing fixed dependencies> dev.codex.schubert.nk.batch.file.RootServiceLauncher WEB|API|OTHER; systemctl show fixed Units and find fixed Production backup-request root before/after; remove only four test-stage JARs and empty test-stage directory",
+  "input": "real-root external JVM; fixed WEB/API/OTHER argv; current VM does not have Production Web/API Units or full issued permit/release prerequisites",
+  "expected": "WEB/API fail closed exit30, OTHER argv rejection exit70, stdout/stderr empty, fixed Unit states and Production backup marker unchanged",
+  "actual": "WEB_EXIT=30, API_EXIT=30, OTHER_EXIT=70; stdout/stderr empty; Morning controller loaded/inactive/MainPID0, Web/API Units not-found/inactive/MainPID0, Production backup-request empty before/after; stage removed",
+  "exitCode": {"WEB": 30, "API": 30, "OTHER": 70, "stageCleanup": 0},
+  "coverage": "No Production source change or Production6 rerun. PG372 2509PT/369suite is a separate fixed-source provisional result. Positive root admission, current/permit/DB content hashes, held ELF/FD/same-PID exec and readiness are not measured by this negative smoke.",
+  "related": ["RD SYS-002/004/OPS-009", "UI212/251/253", "SS311/342/343", "SSC-086/087/088/089", "R1/D04/D05"],
+  "hashesSha256": {
+    "spec260": "b61e1244eb2674a8be5115d27e38dc6f07d54ba407fbef4b7ed17034605dc869",
+    "result261": "1104009cf73ef48f3ae1044312d6eb9f73e095ed04eaf78edfb4bd06b6621845",
+    "batchJar": "2c94c0383fe2bb288bb6a2e6a44f00073f20efd39ec5295ab5f2726dba7f6816",
+    "storageJar": "52f5aa6061881ae8bd7205e936d5803a2006a23463e5c5eca8b700007b86a2b7",
+    "bootstrapJar": "9e2fc45835a7bb0a0d97d8f72f9691eb6a2b19d824ff864afc3c96f279f4f291",
+    "protocolJar": "de4e3c34c92767a4476a74c9141f17b9e4b118b15547efa5d893b91e3c651d57"
+  },
+  "rawJournalInvocationOrSecretsInGit": false
+}
