@@ -1,0 +1,41 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "Morning Java entry budget handoff verified; native parent and full coverage unaccepted",
+  "executedAtJst": "2026-09-29T01:45:17+09:00",
+  "environment": {"os": "Linux x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "51dcc4501",
+  "testIds": ["PT-OPS-MMAIN001..007", "PT-OPS-MBUDGET001..002", "PT-OPS-BUCYCLE001..006"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic read-only Morning Admission and monotonic budget; no real parent Unit, backup, credential, or current data",
+  "expected": "one parent budget passed to Admission; invalid argv starts no work; read-only entry never exits success",
+  "actual": "selected 15 PT/3 suites F/E/S0; Production6 2487 PT/365 suites F/E/S0; SpotBugs six modules zero",
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1406, 29, 310, 120, 15],
+    "morningProcessMainOuter": [14, 0, 6, 3, 0],
+    "morningParentBudget": [0, 0, 0, 0, 0]
+  },
+  "related": ["BUG-322", "SSC-107", "YKT-254", "471 D04/D05"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "f9ee4dc4c42f89d210ecc1429553476f110f1a9070853abc89ff865f73530014",
+    "storageJUnitPathOrderedSha256List": "a494f911764c1e371a59ec4c11745eb86f4f0de4013bdac7863b83f4fe266e59",
+    "bootstrapJUnitPathOrderedSha256List": "94c1b16741462dbd77c1900104a3f72cf135196ab98c88f2324a6203d9214ba0",
+    "apiJUnitPathOrderedSha256List": "2ecd35a4d451ff0a33bb29bf6b67683e3b5fec69739eaab4c9d0fcf6223d1a87",
+    "webJUnitPathOrderedSha256List": "7f5eb11b64b22deff3bc787bcba5fcc63be740d72f0d070fdc0336775edc439c",
+    "batchJUnitPathOrderedSha256List": "a288cd9bde0cd9ecb1475f752990f6350c5db24f1a863fe1132c003bb6de2a2a",
+    "morningProcessMainJUnitXml": "40831dfea29ebab871d5e0db99a09dc7f6c1aad5ca922c2071a37096cf2b15e3",
+    "morningParentBudgetJUnitXml": "a49f649f5722ce7f2cbe3d36aacd7692a3d2d32c0ee85522c39a46a6e89093a2",
+    "morningBackupUnitCycleJUnitXml": "93b0aaf188b4b4bb154d187b325603e98cccda160d9f930f22474ef00affe70a",
+    "batchJacocoXml": "10d69d71d388a756ad3b51426f0c3540fb524c9eb4cc64479e62d632df8026d6",
+    "sourceMorningProcessMain": "3b6d0b1ab712203a6852248e0364b1b1ec27f0ecac4aaf640587e69f5328299d",
+    "testMorningProcessMain": "9c45e30700b617dd26bcac006b537cd449c13b3453a0f24875303aad15a20785",
+    "ptSpecification246": "2e7c1d1dd7d052218bd10f56420413425d4902520fc994884d6b45815ef840f9"
+  },
+  "rawXmlOrSecretsInGit": false
+}
