@@ -3,8 +3,11 @@ package dev.codex.schubert.nk.batch.file;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxFileLock;
 import java.io.IOException;
 import java.time.Instant;
@@ -18,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/PG341/343/344; PT-OPS-MCTRL001-011. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/PG341/343/344/346; PT-OPS-MCTRL001-013. */
 final class MorningControlScopeTest {
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
@@ -544,5 +547,136 @@ final class MorningControlScopeTest {
         () ->
             MorningControlScope.execute(
                 () -> {}, m, original, () -> {}, a, () -> {}, observed -> {}, null));
+  }
+
+  @Test
+  void mctrl012OwnedDatabaseReachesPostInvalidationWorkWithinAllOwners() throws Exception {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var dbHeld = new AtomicBoolean();
+    var run =
+        new BatchRun(
+            UUID.fromString("00000000-0000-0000-0000-000000000346"),
+            Instant.parse("2026-09-28T05:00:00Z"));
+    var state =
+        new MaintenanceRunState(
+            new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000347")),
+            Optional.empty());
+    MorningControlScope.OwnedOriginal original =
+        new MorningControlScope.OwnedOriginal() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
+              throws IOException {
+            assertTrue(m.held.get());
+            dbHeld.set(true);
+            events.add("DB-original-enter");
+            try {
+              return continuation.execute(
+                  state,
+                  new MorningDatabaseSession.Access() {
+                    public void requireUnused(BatchRun selected) {
+                      fail("reference admission precedes this callback");
+                    }
+
+                    public void requireConsistent(BatchRun selected) {
+                      fail("reference admission precedes this callback");
+                    }
+
+                    public MorningDatabaseSession.BackupBegins beginBackup(
+                        BatchRun selected, Instant now, boolean recoverAbandoned) {
+                      assertTrue(m.held.get() && a.held.get() && dbHeld.get());
+                      assertEquals(run, selected);
+                      assertEquals(run.cutoff(), now);
+                      assertFalse(recoverAbandoned);
+                      events.add("backup-begin");
+                      return new MorningDatabaseSession.BackupBegins(
+                          new BatchStepAttempt(1, run, BatchStep.BACKUP_DB, 1, now, false),
+                          new BatchStepAttempt(2, run, BatchStep.BACKUP_CONFIG, 1, now, false));
+                    }
+
+                    public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
+                      return fail("cleanup outside this test");
+                    }
+                  });
+            } finally {
+              dbHeld.set(false);
+              events.add("DB-original-close");
+            }
+          }
+        };
+    int value =
+        MorningControlScope.executeOwned(
+            () -> events.add("root"),
+            m,
+            original,
+            () -> events.add("stop-eight"),
+            a,
+            () -> events.add("fresh-eight"),
+            observed -> {
+              assertSame(state, observed);
+              events.add("INVALID");
+            },
+            (observed, database) -> {
+              assertSame(state, observed);
+              var begins = database.beginBackup(run, run.cutoff(), false);
+              assertEquals(BatchStep.BACKUP_DB, begins.database().step());
+              return 7;
+            });
+    assertEquals(7, value);
+    assertTrue(events.indexOf("stop-eight") < events.indexOf("fresh-eight"));
+    assertTrue(events.indexOf("fresh-eight") < events.indexOf("INVALID"));
+    assertTrue(events.indexOf("INVALID") < events.indexOf("backup-begin"));
+    assertTrue(events.indexOf("backup-begin") < events.indexOf("DB-original-close"));
+    assertFalse(m.held.get() || a.held.get() || dbHeld.get());
+  }
+
+  @Test
+  void mctrl013OwnedNullContractsRejectBeforeMaintenanceLock() {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    MorningControlScope.OwnedOriginal original =
+        new MorningControlScope.OwnedOriginal() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation) {
+            return fail("no original should open");
+          }
+        };
+    MorningControlScope.StopPass stop = () -> fail("no stop");
+    MorningControlScope.Terminals terminals = () -> fail("no terminals");
+    MorningControlScope.Invalidation invalidation = state -> fail("no invalidation");
+    MorningNewRunAdmission.OwnedContinuation<Boolean> work = (state, db) -> true;
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, null, stop, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, original, null, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, original, stop, null, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, original, stop, a, null, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, original, stop, a, terminals, null, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {}, m, original, stop, a, terminals, invalidation, null));
+    assertTrue(events.isEmpty());
   }
 }

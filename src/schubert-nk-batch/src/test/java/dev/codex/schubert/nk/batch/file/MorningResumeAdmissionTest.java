@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** OPS009/UI251/SS341§11/343§6.15/SSC055/094/BUG317; PG345/PT-OPS-MRESUME001-009. */
+/** OPS009/UI251/SS341§11/343§6.15/SSC055/094/BUG317; PG345/346/PT-OPS-MRESUME001-010. */
 final class MorningResumeAdmissionTest {
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000345");
   private static final UUID ACTIVE = UUID.fromString("00000000-0000-0000-0000-000000000346");
@@ -49,11 +52,36 @@ final class MorningResumeAdmissionTest {
               dbHeld.set(true);
               try {
                 return work.execute(
-                    run -> {
-                      events.add("references");
-                      assertEquals(RUN, run.id());
-                      assertEquals(CUTOFF, run.cutoff());
-                      if (referencesFailure != null) throw referencesFailure;
+                    new MorningDatabaseSession.Access() {
+                      public void requireUnused(BatchRun run) {
+                        fail("resume must not require absent history");
+                      }
+
+                      public void requireConsistent(BatchRun run) throws IOException {
+                        events.add("references");
+                        assertEquals(RUN, run.id());
+                        assertEquals(CUTOFF, run.cutoff());
+                        if (referencesFailure != null) throw referencesFailure;
+                      }
+
+                      public MorningDatabaseSession.BackupBegins beginBackup(
+                          BatchRun run, Instant now, boolean recoverAbandoned) {
+                        events.add("begin-backup");
+                        assertTrue(dbHeld.get() && fileHeld.get());
+                        assertEquals(RUN, run.id());
+                        assertEquals(CUTOFF, run.cutoff());
+                        assertTrue(recoverAbandoned);
+                        return new MorningDatabaseSession.BackupBegins(
+                            new BatchStepAttempt(1, run, BatchStep.BACKUP_DB, 1, now, false),
+                            new BatchStepAttempt(2, run, BatchStep.BACKUP_CONFIG, 1, now, false));
+                      }
+
+                      public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work)
+                          throws IOException {
+                        events.add("handoff");
+                        assertTrue(dbHeld.get() && fileHeld.get());
+                        return work.execute();
+                      }
                     });
               } finally {
                 dbHeld.set(false);
@@ -272,5 +300,32 @@ final class MorningResumeAdmissionTest {
     assertEquals(List.of("root", "DB-enter"), h.events);
     assertFalse(h.events.contains("file-enter"));
     assertFalse(h.events.contains("resume"));
+  }
+
+  @Test
+  void mresume010BackupCapabilityUsesOriginalCutoffInsideBothOwners() throws Exception {
+    var h = new Harness();
+    boolean completed =
+        h.admission()
+            .executeOwned(
+                RUN,
+                (state, database) -> {
+                  var run = state.activation().run();
+                  var backup = database.beginBackup(run, CUTOFF.plusSeconds(1), true);
+                  assertEquals(BatchStep.BACKUP_DB, backup.database().step());
+                  assertEquals(BatchStep.BACKUP_CONFIG, backup.configuration().step());
+                  return database.handoffCleanup(
+                      () -> {
+                        h.events.add("cleanup-child");
+                        assertTrue(h.dbHeld.get() && h.fileHeld.get());
+                        return true;
+                      });
+                });
+    assertTrue(completed);
+    assertTrue(h.events.indexOf("references") < h.events.indexOf("begin-backup"));
+    assertTrue(h.events.indexOf("begin-backup") < h.events.indexOf("handoff"));
+    assertEquals(
+        List.of("file-close", "DB-close", "root"),
+        h.events.subList(h.events.size() - 3, h.events.size()));
   }
 }

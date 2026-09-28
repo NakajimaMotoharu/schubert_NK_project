@@ -59,6 +59,18 @@ public final class MorningDatabaseSession {
     }
   }
 
+  /** Callback-scoped parent operations. The JDBC handle and lock never escape this capability. */
+  public interface Access {
+    void requireUnused(BatchRun run) throws IOException;
+
+    void requireConsistent(BatchRun run) throws IOException;
+
+    BackupBegins beginBackup(BatchRun run, Instant now, boolean recoverAbandoned)
+        throws IOException;
+
+    <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException;
+  }
+
   private static final Pattern URL =
       Pattern.compile("jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/schubert_nk");
   private static final String ROLE =
@@ -277,7 +289,7 @@ public final class MorningDatabaseSession {
   }
 
   /** No DB handle escapes; methods enforce callback thread/lifetime before any JDBC use. */
-  public final class Session {
+  public final class Session implements Access {
     private final Connection connection;
     private final long thread = Thread.currentThread().threadId();
     private volatile boolean active = true;

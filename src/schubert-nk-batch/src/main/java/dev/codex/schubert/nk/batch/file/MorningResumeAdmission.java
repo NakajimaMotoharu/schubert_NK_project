@@ -2,7 +2,6 @@ package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
-import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
@@ -16,10 +15,10 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Explicit same-run resume under the caller's continuous M. Dedicated DB session/advisory is
  * acquired before the fixed durable graph can be republished; existing references are then checked
- * against that original run/cutoff. Both owners remain held through the continuation. No run is
- * auto-selected and no changed cutoff, stopped Unit, current INVALID, backup result or permit is
- * inferred. NK-BAT-001/NK-OPS-001; OPS009/UI251/SS341§11/343§6.15/SSC055/094;
- * PG345/PT-OPS-MRESUME001 onward.
+ * against that original run/cutoff. Both owners and callback-scoped backup/handoff capability
+ * remain held through the continuation. No run is auto-selected and no changed cutoff, stopped
+ * Unit, current INVALID, backup result or permit is inferred. NK-BAT-001/NK-OPS-001;
+ * OPS009/UI251/SS341§11/343§6.15/SSC055/094; PG345/346/PT-OPS-MRESUME001 onward.
  */
 @NullMarked
 final class MorningResumeAdmission {
@@ -29,13 +28,8 @@ final class MorningResumeAdmission {
   }
 
   @FunctionalInterface
-  interface References {
-    void requireConsistent(BatchRun run) throws IOException;
-  }
-
-  @FunctionalInterface
   interface DatabaseWork<T> {
-    T execute(References references) throws IOException;
+    T execute(MorningDatabaseSession.Access database) throws IOException;
   }
 
   interface Database {
@@ -83,7 +77,7 @@ final class MorningResumeAdmission {
                 () -> {
                   var reader =
                       new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
-                  return session.execute(reader.read(), db -> work.execute(db::requireConsistent));
+                  return session.execute(reader.read(), work::execute);
                 });
           }
         },
@@ -109,12 +103,19 @@ final class MorningResumeAdmission {
       throws IOException {
     Objects.requireNonNull(runId, "explicit resume run");
     Objects.requireNonNull(continuation, "same-run continuation");
+    return executeOwned(runId, (state, ignored) -> continuation.execute(state));
+  }
+
+  <T> T executeOwned(UUID runId, MorningNewRunAdmission.OwnedContinuation<T> continuation)
+      throws IOException {
+    Objects.requireNonNull(runId, "explicit resume run");
+    Objects.requireNonNull(continuation, "owned same-run continuation");
     root.verify();
     UUID nextActivation = Objects.requireNonNull(identities.get(), "next activation identity");
     if (runId.equals(nextActivation)) throw unavailable();
     T result =
         database.execute(
-            references -> {
+            databaseAccess -> {
               root.verify();
               return originals.execute(
                   files -> {
@@ -124,10 +125,11 @@ final class MorningResumeAdmission {
                             files.resume(runId, nextActivation), "resumed durable original");
                     if (!state.activation().run().id().equals(runId)) throw unavailable();
                     root.verify();
-                    references.requireConsistent(state.activation().run());
+                    databaseAccess.requireConsistent(state.activation().run());
                     root.verify();
                     T completed =
-                        Objects.requireNonNull(continuation.execute(state), "Morning continuation");
+                        Objects.requireNonNull(
+                            continuation.execute(state, databaseAccess), "Morning continuation");
                     root.verify();
                     return completed;
                   });

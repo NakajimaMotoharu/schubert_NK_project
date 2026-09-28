@@ -24,10 +24,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Fresh-run admission under the caller's continuous M. A dedicated DB session owns its advisory
  * lock across the three-reference absence check, durable original start and the entire supplied
- * continuation. The run-file scope also remains open until that continuation returns. This class
- * never chooses a resume target, stops Units, acquires A, invalidates current or grants a permit;
- * the external Morning main must remain fail-closed until the full parent is connected. NK-BAT-001
- * /NK-OPS-001; OPS009/UI251/SS341§3-5/343§6.15/SSC055/094; PG343/PT-OPS-MNEW001 onward.
+ * continuation. The callback-scoped DB backup/handoff capability and run-file scope remain owned
+ * until that continuation returns. This class never chooses a resume target, stops Units, acquires
+ * A, invalidates current or grants a permit; the external Morning main must remain fail-closed
+ * until the full parent is connected. NK-BAT-001 /NK-OPS-001;
+ * OPS009/UI251/SS341§3-7/343§6.15/SSC055/094; PG343/346/PT-OPS-MNEW001 onward.
  */
 @NullMarked
 final class MorningNewRunAdmission {
@@ -37,13 +38,8 @@ final class MorningNewRunAdmission {
   }
 
   @FunctionalInterface
-  interface References {
-    void requireUnused(BatchRun run) throws IOException;
-  }
-
-  @FunctionalInterface
   interface DatabaseWork<T> {
-    T execute(References references) throws IOException;
+    T execute(MorningDatabaseSession.Access database) throws IOException;
   }
 
   interface Database {
@@ -67,6 +63,11 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface Continuation<T> {
     T execute(MaintenanceRunState state) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OwnedContinuation<T> {
+    T execute(MaintenanceRunState state, MorningDatabaseSession.Access database) throws IOException;
   }
 
   private final Gate root;
@@ -97,7 +98,7 @@ final class MorningNewRunAdmission {
                 () -> {
                   var reader =
                       new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
-                  return session.execute(reader.read(), db -> work.execute(db::requireUnused));
+                  return session.execute(reader.read(), work::execute);
                 });
           }
         },
@@ -139,6 +140,11 @@ final class MorningNewRunAdmission {
 
   <T> T execute(Continuation<T> continuation) throws IOException {
     Objects.requireNonNull(continuation, "same-run continuation");
+    return executeOwned((state, ignored) -> continuation.execute(state));
+  }
+
+  <T> T executeOwned(OwnedContinuation<T> continuation) throws IOException {
+    Objects.requireNonNull(continuation, "owned same-run continuation");
     root.verify();
     var run =
         new BatchRun(
@@ -148,9 +154,9 @@ final class MorningNewRunAdmission {
     if (run.id().equals(activation)) throw unavailable();
     T result =
         database.execute(
-            references -> {
+            databaseAccess -> {
               root.verify();
-              references.requireUnused(run);
+              databaseAccess.requireUnused(run);
               root.verify();
               return originals.execute(
                   files -> {
@@ -162,7 +168,8 @@ final class MorningNewRunAdmission {
                         || state.completion().isPresent()) throw unavailable();
                     root.verify();
                     T completed =
-                        Objects.requireNonNull(continuation.execute(state), "Morning continuation");
+                        Objects.requireNonNull(
+                            continuation.execute(state, databaseAccess), "Morning continuation");
                     root.verify();
                     return completed;
                   });

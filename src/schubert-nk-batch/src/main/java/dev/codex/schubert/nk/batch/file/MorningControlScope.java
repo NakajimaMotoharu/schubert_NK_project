@@ -14,10 +14,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Same-parent Morning M→dedicated DB/advisory→original→fixed-eight stop→A→fresh-eight boundary. The
  * supplied trusted work runs only after A's fresh observation and durable current INVALID and
- * remains inside M, A, DB and the original scope. This does not prove clean Artemis journal,
- * execute backup/Cleanup or issue a startup permit. An unresolved stop-client must not return from
- * MorningStopPass; handle-less UNKNOWN/hard-timeout recovery remain unaccepted. NK-OPS-001;
- * OPS009/UI251/253/SS341§3-5/343/SSC089/094/100-102/105; PG341/343/344/PT-OPS-MCTRL001-011.
+ * retains callback-scoped DB backup/handoff capability inside M, A, DB and the original scope. This
+ * does not prove clean Artemis journal, execute backup/Cleanup or issue a startup permit. An
+ * unresolved stop-client must not return from MorningStopPass; handle-less UNKNOWN/hard-timeout
+ * recovery remain unaccepted. NK-OPS-001; OPS009/UI251/253/SS341§3-7/343/SSC089/094/100-102/105;
+ * PG341/343/344/346/PT-OPS-MCTRL001-013.
  */
 @NullMarked
 final class MorningControlScope {
@@ -45,6 +46,10 @@ final class MorningControlScope {
     <T> T execute(MorningNewRunAdmission.Continuation<T> continuation) throws IOException;
   }
 
+  interface OwnedOriginal {
+    <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation) throws IOException;
+  }
+
   @FunctionalInterface
   interface Invalidation {
     void invalidate(MaintenanceRunState state) throws IOException;
@@ -59,17 +64,23 @@ final class MorningControlScope {
 
   static <T> T execute(MorningNewRunAdmission.Continuation<T> trustedWork) throws IOException {
     Objects.requireNonNull(trustedWork, "trusted Morning work");
+    return executeOwned((state, ignored) -> trustedWork.execute(state));
+  }
+
+  static <T> T executeOwned(MorningNewRunAdmission.OwnedContinuation<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(trustedWork, "owned trusted Morning work");
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
-    return executeNative(
+    return executeNativeOwned(
         root,
         snapshot,
-        new Original() {
+        new OwnedOriginal() {
           @Override
-          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+          public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
               throws IOException {
             // Fresh release/BOM admission and the dedicated DB owner are constructed only under M.
-            return MorningNewRunAdmission.create(root, snapshot).execute(continuation);
+            return MorningNewRunAdmission.create(root, snapshot).executeOwned(continuation);
           }
         },
         trustedWork);
@@ -79,31 +90,38 @@ final class MorningControlScope {
       throws IOException {
     Objects.requireNonNull(runId, "explicit resume run");
     Objects.requireNonNull(trustedWork, "trusted Morning work");
+    return executeResumeOwned(runId, (state, ignored) -> trustedWork.execute(state));
+  }
+
+  static <T> T executeResumeOwned(
+      UUID runId, MorningNewRunAdmission.OwnedContinuation<T> trustedWork) throws IOException {
+    Objects.requireNonNull(runId, "explicit resume run");
+    Objects.requireNonNull(trustedWork, "owned trusted Morning work");
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
-    return executeNative(
+    return executeNativeOwned(
         root,
         snapshot,
-        new Original() {
+        new OwnedOriginal() {
           @Override
-          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+          public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
               throws IOException {
             // No selection from DB or current permit: caller supplies exactly the original run ID.
-            return MorningResumeAdmission.create(root, snapshot).execute(runId, continuation);
+            return MorningResumeAdmission.create(root, snapshot).executeOwned(runId, continuation);
           }
         },
         trustedWork);
   }
 
-  private static <T> T executeNative(
+  private static <T> T executeNativeOwned(
       RootStartupContext root,
       RootStartupContext.Snapshot snapshot,
-      Original original,
-      MorningNewRunAdmission.Continuation<T> trustedWork)
+      OwnedOriginal original,
+      MorningNewRunAdmission.OwnedContinuation<T> trustedWork)
       throws IOException {
     var maintenance = MaintenanceFileLock.create();
     var startup = StartupAdmissionFile.create();
-    return execute(
+    return executeOwned(
         () -> root.recheck(snapshot),
         maintenance::tryExclusive,
         original,
@@ -112,6 +130,41 @@ final class MorningControlScope {
         () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
         state -> MorningCurrentInvalidation.invalidate(root, snapshot, state),
         trustedWork);
+  }
+
+  static <T> T executeOwned(
+      Gate root,
+      Exclusive maintenance,
+      OwnedOriginal original,
+      StopPass stop,
+      StartupExclusive startup,
+      Terminals terminals,
+      Invalidation invalidation,
+      MorningNewRunAdmission.OwnedContinuation<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(original, "owned original");
+    Objects.requireNonNull(stop, "fixed eight stop pass");
+    Objects.requireNonNull(startup, "fixed A lock");
+    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(invalidation, "durable current invalidation");
+    Objects.requireNonNull(trustedWork, "owned trusted work");
+    return executeStopAndStartup(
+        root,
+        maintenance,
+        () ->
+            original.execute(
+                (state, database) -> {
+                  root.verify();
+                  return afterOriginal(
+                      root,
+                      stop,
+                      startup,
+                      terminals,
+                      () -> {
+                        invalidation.invalidate(state);
+                        return trustedWork.execute(state, database);
+                      });
+                }));
   }
 
   static <T> T execute(
