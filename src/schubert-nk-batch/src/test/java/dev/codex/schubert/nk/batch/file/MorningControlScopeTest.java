@@ -2,18 +2,23 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.storage.LinuxFileLock;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/SSC105/PG341; PT-OPS-MCTRL001-007. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/SSC094/105/PG341/343; PT-OPS-MCTRL001-009. */
 final class MorningControlScopeTest {
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
@@ -287,5 +292,118 @@ final class MorningControlScopeTest {
       assertFalse(m.held.get());
       assertFalse(a.held.get());
     }
+  }
+
+  @Test
+  void mctrl008NewOriginalAndDbStayHeldAcrossStopAAndWork() throws Exception {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var originalHeld = new AtomicBoolean();
+    var run =
+        new BatchRun(
+            UUID.fromString("00000000-0000-0000-0000-000000000341"),
+            Instant.parse("2026-09-28T05:00:00Z"));
+    var state =
+        new MaintenanceRunState(
+            new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000342")),
+            Optional.empty());
+    MorningControlScope.Original original =
+        new MorningControlScope.Original() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+              throws IOException {
+            assertTrue(m.held.get());
+            events.add("DB-original-enter");
+            originalHeld.set(true);
+            try {
+              return continuation.execute(state);
+            } finally {
+              originalHeld.set(false);
+              events.add("DB-original-close");
+            }
+          }
+        };
+    int value =
+        MorningControlScope.execute(
+            () -> events.add("root"),
+            m,
+            original,
+            () -> {
+              assertTrue(m.held.get());
+              assertTrue(originalHeld.get());
+              assertFalse(a.held.get());
+              events.add("stop-eight");
+            },
+            a,
+            () -> {
+              assertTrue(originalHeld.get());
+              events.add("fresh-eight");
+            },
+            observed -> {
+              assertSame(state, observed);
+              assertTrue(m.held.get());
+              assertTrue(a.held.get());
+              assertTrue(originalHeld.get());
+              events.add("same-run-work");
+              return 7;
+            });
+    assertEquals(7, value);
+    assertEquals(
+        List.of(
+            "root",
+            "M-enter",
+            "root",
+            "DB-original-enter",
+            "root",
+            "stop-eight",
+            "root",
+            "A-enter",
+            "root",
+            "fresh-eight",
+            "root",
+            "same-run-work",
+            "root",
+            "A-close",
+            "DB-original-close",
+            "root",
+            "M-close",
+            "root"),
+        events);
+    assertFalse(originalHeld.get());
+  }
+
+  @Test
+  void mctrl009OriginalFailureIssuesNoStopOrA() {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var failure = new IOException("DB reference unavailable");
+    MorningControlScope.Original original =
+        new MorningControlScope.Original() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
+              throws IOException {
+            assertTrue(m.held.get());
+            events.add("DB-reference-refused");
+            throw failure;
+          }
+        };
+    assertSame(
+        failure,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningControlScope.execute(
+                    () -> events.add("root"),
+                    m,
+                    original,
+                    () -> fail("no stop"),
+                    a,
+                    () -> fail("no fresh"),
+                    state -> fail("no work"))));
+    assertEquals(List.of("root", "M-enter", "root", "DB-reference-refused", "M-close"), events);
+    assertFalse(m.held.get());
+    assertFalse(a.held.get());
   }
 }
