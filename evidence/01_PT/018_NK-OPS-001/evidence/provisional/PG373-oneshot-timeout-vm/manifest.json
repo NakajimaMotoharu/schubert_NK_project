@@ -1,0 +1,21 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "test-only systemd hard-timeout/marker/lock behavior observed; Production Morning parent and BUG-322 unresolved",
+  "executedAtJst": "2026-09-29T03:22:15+09:00",
+  "environment": {"vmOs": "Linux 7.0.0-31-generic x86_64", "systemd": "259 (259.5-0ubuntu3.4)", "jdk": "25.0.4", "hostOs": "Linux 7.0.0-34-generic x86_64"},
+  "branch": "dev-foundation",
+  "sourceCommit": "cfb0aca4687dbaa636fea6841b87945234dbbd43",
+  "testIds": ["PT-OPS-MTIME001", "PT-OPS-MTIME002", "PT-OPS-MTIME003", "PT-OPS-MTIME004"],
+  "command": "isolated VM sudo systemd-run --unit=schubert-nk-pgpt-372-hardtimeout.service --wait --property=Type=oneshot --property=TimeoutStartSec=2s --property=TimeoutStopSec=2s --property=KillMode=control-group --property=SendSIGKILL=no --property=RemainAfterExit=no /usr/bin/flock -n <test-only-lock> /usr/bin/sleep 12; separate systemctl show, ls -lni and flock -n observations; reset-failed/test-only cleanup",
+  "exitCode": 1,
+  "input": "test-only root0700 tmpfs directory, root0600 empty precreated marker, test-only flock file and transient Unit; no Production Unit or current material",
+  "expected": "oneshot start exceeds 2s and fails timeout with no main process; precreated marker persists while distinct process can reacquire lock; test fixture removal leaves Production Morning loaded/inactive/PID0",
+  "actual": "systemd-run exit1, Result=timeout at 2.011s with signal TERM; fresh Unit failed/MainPID0/ControlGroup empty, SendSIGKILL=no; marker root0600 persisted; separate flock exit0; cleanup returned transient Unit not-found and original Morning loaded/inactive/PID0",
+  "coverage": "native OS behavior only; Java four-metric coverage and formal 53-scope run unchanged from PG372",
+  "related": ["BUG-322", "SSC-107", "YKT-254", "471 R1/D04/D05"],
+  "hashesSha256": {
+    "ptSpecification256": "aabc5486e5437df73ccaef04414870ac8693eb1cae9fe73e2c03688c48dd337e",
+    "executionResult257": "641938d53f822650d7e738a2b99ed2c759af876bb3039254fe8a163954e84816"
+  },
+  "rawJournalInvocationOrSecretsInGit": false
+}

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG373追加追跡（2026-09-29）：NK-OPS-001 Morning親oneshot候補の実OS期限・test-only marker残存/lock解放・後片付けを`PT-OPS-MTIME001～004`/018/256・257で限定確認。RD OPS-009/BAK-001、UI251、SS341/342/343・SSC107、BUG322/YKT254。Production親のmarker自動公開・次回拒否/全子終端は未受入、source変更なし。
+
 PG372追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceAdmissionScope.execute`→既存`StartupAdmissionFile.tryExclusive`はWeb/API root入口の同一借用A下でroot再確認、NSS/release/current permit/argvを実行するscope。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343・SSC086～089、PT-OPS-RASCOPE001～006、018/254。Aの予約FDはcallback内借用のみ、proof/exec/業務ready未結線、外部入口はexit30のまま。
 
 PG371追加追跡（2026-09-29）：NK-OPS-001 Batch `RootCurrentPermitPreflight.verifyNative/verify`と`RootServiceLauncher.preflight`は固定root-owned`/run/schubert-nk/startup`の既存`StartupPermitFiles.readIssued`をread-onlyで呼び、現在bootと実release SHAの相関を確認する。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343§6.15・SSC086～089、PT-OPS-RPERMIT001～006、018/252。A下での同原本再読・全prestart/root・実Unit/execは別未受入。

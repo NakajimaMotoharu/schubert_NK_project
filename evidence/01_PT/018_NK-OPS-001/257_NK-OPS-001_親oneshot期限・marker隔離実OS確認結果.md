@@ -1,0 +1,8 @@
+# NK-OPS-001 親oneshot期限・marker隔離 実OS確認結果（PG373・限定）
+
+- 仕様[256](256_NK-OPS-001_親oneshot期限・marker隔離実OS確認仕様書.md)、`PT-OPS-MTIME001～004`。2026-09-29 JST、source不変更`cfb0aca4687dbaa636fea6841b87945234dbbd43`/`dev-foundation`。隔離VM Linux 7.0.0-31-generic x86_64、systemd259 (259.5-0ubuntu3.4)、JDK25.0.4。Production Morning Unit開始時/終了時ともloaded/inactive/MainPID0。
+- conflict検査で専用`/run/schubert-nk/pgpt-372-timeout`とtest-only Unitは未存在。root0700専用directoryにroot0600空markerを作り、`systemd-run --wait`のoneshot `flock -n <test-lock> sleep 12`をTimeoutStartSec=2s/TimeoutStopSec=2s/KillMode=control-group/SendSIGKILL=noで実行した。client exit1、約2.011秒、Result=timeout、main process code=killed/status15 TERM。その直後のfresh showはUnit failed/Result=timeout/MainPID0/ControlGroup空、SendSIGKILL=no/KillMode=control-group。
+- markerはroot0600空fileとして残留し、lock fileはroot directory内に残る一方、別短命`flock -n <test-lock> true`はexit0で再取得できた。したがってtest環境ではkernel lockの解放単独を次回許可条件にできず、残留marker/現在原本/Unit終端の同時評価が必要。markerはあくまでtest-only事前作成で、Production `BackupUnitStartIntent`の自動公開・次回拒否はここでは未実測。
+- test-only Unitを`reset-failed`後LoadState=not-foundに戻し、専用marker/lockの2fileと空directoryのみを削除した。最後に専用path不存在、元Morning Unit loaded/inactive/MainPID0を確認。削除物はtest-only tmpfs fixtureで復元不要、Production Unit/原本/credentialは不変更。
+- BUG-322/SSC-107/YKT-254は**対応中**。実Production親での30分hard-timeout、同一M/A・原本・Backup marker、子Unit全終端、次回admission拒否、後続Artemis隔離は未実装/未受入。R1/D04/D05下位のOS挙動確認のみで、R2/R3・D固定ID閉鎖・正式進捗中心48.3%は不変。Source/試験/設定は不変更なのでProduction6再runは行わず、前回PG372固定source2,509PT/369suiteは別runのまま。
+- command/入力/期待/実際/exit/OS tool version/非秘密結果・source/spec/result hashは同階層`evidence/provisional/PG373-oneshot-timeout-vm/manifest.json`。raw journal・Invocation ID/credentialなし。
