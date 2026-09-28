@@ -1,0 +1,117 @@
+{
+  "id": "PG341-morning-control",
+  "formal": false,
+  "executionTime": "2026-09-28T15:17:39.256067+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "bae23ce2090ef70fa9b89b3eb80576aeedd3339e",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0; no real stop or A lock",
+  "command": "Batch -Dtest=MorningControlScopeTest,MorningRootScopeTest,MorningStopPassTest,MaintenanceUnitStopClientTest,MorningUnitTerminalsTest,MaintenanceUnitStopPolicyTest clean test SpotBugs:check JaCoCo:report",
+  "exitCode": 0,
+  "input": "independent event-order/latch/fault fixtures for same-M stop then A fresh-eight and work",
+  "expected": "46 PT F/E/S0/static0; stop under M before A; A-side fresh eight before work; contention/failure no work",
+  "actual": "46 PT F/E/S0/static0; new class branch missed0 but native factory line/method uncovered; external Morning still fail-closed",
+  "testIds": [
+    "PT-OPS-MCTRL001",
+    "PT-OPS-MCTRL002",
+    "PT-OPS-MCTRL003",
+    "PT-OPS-MCTRL004",
+    "PT-OPS-MCTRL005",
+    "PT-OPS-MCTRL006",
+    "PT-OPS-MCTRL007"
+  ],
+  "counts": {
+    "MorningControlScopeTest": 7,
+    "MorningRootScopeTest": 6,
+    "MorningStopPassTest": 9,
+    "MaintenanceUnitStopClientTest": 12,
+    "MorningUnitTerminalsTest": 5,
+    "MaintenanceUnitStopPolicyTest": 7
+  },
+  "coverage": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 4
+    },
+    "LINE": {
+      "missed": 11,
+      "covered": 28
+    },
+    "METHOD": {
+      "missed": 4,
+      "covered": 4
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageSourceSha256": "ccd31993445369413df012ab05a1ab66aedcfa02b1904e03ddf4cbf73bb3bee6",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningControlScope.java",
+      "sha256": "aa1623f5cc5242395a61abd5fbb0ee87ee930a6acb39d1b2f6e106c06d0c3eba"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningControlScopeTest.java",
+      "sha256": "78e2b5334e9a001897540de495f1a089e26943493f87581d59fdb09110f49e4f"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg341-selected.log",
+      "sha256": "dad85d7f884494bfee94adbfa4fcf7d409c38f8397bb5321b2cf9862a5717b32"
+    }
+  ],
+  "bugs": [
+    "BUG-315"
+  ],
+  "ykt": [
+    "YKT-248"
+  ],
+  "ssc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102",
+    "SSC-105"
+  ],
+  "limitations": [
+    "Not wired to external Morning main; no actual M/A/stop/fresh-eight",
+    "Handle-less UNKNOWN/hard timeout still unaccepted",
+    "No original run/current INVALID/journal/backup/Cleanup/permit, R2/R3",
+    "JUnit suite/case metadata only; raw output/properties omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/coverage/morning-control-scope.json",
+      "sha256": "159dd720dd4b3c6e17de00c565fe1234ba62815a83f728e87f1e25259a0d67c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "6209508faa4cf7cdbe8e6f244255451eaa587d2a1ecca67b84c442968d9409a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "e05c440e29999096776942592195ef27a9fe675332a2db5e76290fe271458932"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "4c56cdce1299aa85c00a7475a0486d037410411a873f9fb490c2f5d90b9b7179"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "dcf2e3256c78375103232fd9c5e852acfee352c39e9f9a2209f190950e8bf545"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "a99f542580d3d207221fd8d5e991b05887dbecedcf3f7cbf4dfc1de70a2b2ef4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "7f85885a111ce884f11634ab59a02194b7f85ce64b0b56dbe96fb105ca20bd19"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG341-morning-control/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}
