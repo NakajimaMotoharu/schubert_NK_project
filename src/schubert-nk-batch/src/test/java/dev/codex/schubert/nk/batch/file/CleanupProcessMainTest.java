@@ -1,0 +1,69 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
+
+/** OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334; CMAIN001..004 independent exit oracle. */
+final class CleanupProcessMainTest {
+  @Test
+  void noArgumentsCannotMintSuccessEvenAfterPreflightObservation() { // CMAIN001
+    AtomicInteger checks = new AtomicInteger();
+    int status =
+        CleanupProcessMain.run(
+            new String[0],
+            () -> {
+              checks.incrementAndGet();
+              return BackupArtifactFixture.expected();
+            });
+    assertEquals(30, status); // SS341: only completed DELETE/skip+transfer may yield 0/10.
+    assertEquals(1, checks.get());
+  }
+
+  @Test
+  void argumentNeverReadsRootOrPrivateMaterial() { // CMAIN002
+    AtomicInteger checks = new AtomicInteger();
+    assertEquals(
+        70,
+        CleanupProcessMain.run(
+            new String[] {"--run-id", "123"},
+            () -> {
+              checks.incrementAndGet();
+              return BackupArtifactFixture.expected();
+            }));
+    assertEquals(0, checks.get());
+  }
+
+  @Test
+  void knownPreflightFailureIsFixedNonSuccessAndUnknownIsNotNormalized() { // CMAIN003
+    assertEquals(
+        30,
+        CleanupProcessMain.run(
+            new String[0],
+            () -> {
+              throw new IOException("PRIVATE_CANARY");
+            }));
+    var unexpected = new IllegalStateException("PRIVATE_CANARY");
+    assertSame(
+        unexpected,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                CleanupProcessMain.run(
+                    new String[0],
+                    () -> {
+                      throw unexpected;
+                    })));
+  }
+
+  @Test
+  void nullContractsAndNativeRootlessRefusal() { // CMAIN004/NCLEAN001
+    assertThrows(NullPointerException.class, () -> CleanupProcessMain.run(null, () -> null));
+    assertThrows(NullPointerException.class, () -> CleanupProcessMain.run(new String[0], null));
+    assertThrows(
+        NullPointerException.class, () -> CleanupProcessMain.run(new String[0], () -> null));
+    assertThrows(IOException.class, CleanupNativePreflight::verify);
+  }
+}
