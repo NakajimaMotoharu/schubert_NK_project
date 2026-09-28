@@ -7,6 +7,7 @@ import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import java.sql.*;
+import java.time.Instant;
 import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
@@ -284,38 +285,47 @@ public final class InboxCleanup {
     byte[] body = row.getBytes("response_body_encrypted");
     if (body == null) return Optional.empty();
     try {
-      var identity =
-          new ResponseSnapshotIdentity(
-              message,
-              response,
-              "001",
-              owner == null ? OptionalLong.empty() : OptionalLong.of(owner));
+      // Provider getters are outside the malformed-value catch. A JDBC failure must roll back
+      // the owned inspection step, never advance the durable cursor as PROTECTED. BUG-319/YKT-162.
       Long numeric = row.getObject("result_ref_id", Long.class);
-      var reference =
-          new InboxResultReference(
-              InboxResultReferenceType.valueOf(requireValue(row.getString("result_ref_type"))),
-              numeric == null ? OptionalLong.empty() : OptionalLong.of(numeric),
-              Optional.ofNullable(row.getObject("result_ref_uuid", UUID.class)));
-      var saved =
-          new InboxCompletion(
-              InboxCompletionState.valueOf(requireValue(row.getString("processing_state"))),
-              reference,
-              response,
-              "001",
-              Optional.of(
-                  new EncryptedResponseSnapshot(
-                      requireValue(row.getString("response_key_version")), body)),
-              requireValue(row.getObject("completed_at", java.time.OffsetDateTime.class))
-                  .toInstant());
-      return Optional.of(
-          new Candidate(
-              identity,
-              saved,
-              Optional.ofNullable(token),
-              requireValue(row.getString("inspection_xact")),
-              requireValue(row.getBytes("inspection_hash"))));
-    } catch (IllegalArgumentException inconsistent) {
-      return Optional.empty();
+      String referenceType = requireValue(row.getString("result_ref_type"));
+      UUID referenceId = row.getObject("result_ref_uuid", UUID.class);
+      String completionState = requireValue(row.getString("processing_state"));
+      String responseKeyVersion = requireValue(row.getString("response_key_version"));
+      Instant completed =
+          requireValue(row.getObject("completed_at", java.time.OffsetDateTime.class)).toInstant();
+      String inspectionTransaction = requireValue(row.getString("inspection_xact"));
+      byte[] inspectionHash = requireValue(row.getBytes("inspection_hash"));
+      try {
+        var identity =
+            new ResponseSnapshotIdentity(
+                message,
+                response,
+                "001",
+                owner == null ? OptionalLong.empty() : OptionalLong.of(owner));
+        var reference =
+            new InboxResultReference(
+                InboxResultReferenceType.valueOf(referenceType),
+                numeric == null ? OptionalLong.empty() : OptionalLong.of(numeric),
+                Optional.ofNullable(referenceId));
+        var saved =
+            new InboxCompletion(
+                InboxCompletionState.valueOf(completionState),
+                reference,
+                response,
+                "001",
+                Optional.of(new EncryptedResponseSnapshot(responseKeyVersion, body)),
+                completed);
+        return Optional.of(
+            new Candidate(
+                identity,
+                saved,
+                Optional.ofNullable(token),
+                inspectionTransaction,
+                inspectionHash));
+      } catch (IllegalArgumentException inconsistent) {
+        return Optional.empty();
+      }
     } finally {
       Arrays.fill(body, (byte) 0);
     }

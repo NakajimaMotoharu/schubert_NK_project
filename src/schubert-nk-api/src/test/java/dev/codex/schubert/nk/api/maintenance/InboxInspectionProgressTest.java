@@ -134,6 +134,25 @@ final class InboxInspectionProgressTest {
     }
   }
 
+  /** PT-DB-INBOX-268: an unknown provider getter cannot persist a PROTECTED cursor. */
+  @Test
+  void providerIllegalArgumentCannotAdvanceStoredProgress() throws Exception {
+    try (var f = new Fixture()) {
+      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+      var probe = new MaintenanceJdbcProbe();
+      probe.runtimeColumn = "result_ref_type";
+      redacted(() -> f.service(probe).inspectStoredNext(RUN));
+      assertEquals(0, probe.commits);
+      assertEquals(1, probe.rollbacks);
+      assertEquals(1, probe.closes);
+      assertEquals("1", inboxCount());
+      assertEquals("0", progressCount());
+      assertEquals(progress(1, 1, 1, 0, true), f.service().runChunk(RUN, 10));
+      assertEquals("1|1|0|true", stored());
+      assertEquals("0", inboxCount());
+    }
+  }
+
   @Test
   void progressAndBoundaryContracts() throws Exception {
     assertThrows(

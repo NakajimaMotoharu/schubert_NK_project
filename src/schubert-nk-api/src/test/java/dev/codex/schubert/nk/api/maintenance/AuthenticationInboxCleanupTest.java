@@ -416,6 +416,35 @@ final class AuthenticationInboxCleanupTest {
     }
   }
 
+  /**
+   * PT-DB-INBOX-267: provider failure is not a malformed saved row or a committed PROTECTED step.
+   */
+  @Test
+  void providerIllegalArgumentInCandidateReadCannotCommitProtectedProgress() throws Exception {
+    try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+      for (String column :
+          List.of(
+              "result_ref_id",
+              "result_ref_type",
+              "result_ref_uuid",
+              "processing_state",
+              "response_key_version",
+              "completed_at",
+              "inspection_xact",
+              "inspection_hash")) {
+        reset();
+        seed(f, LOGIN, "0101");
+        var probe = new MaintenanceJdbcProbe();
+        probe.runtimeColumn = column;
+        redacted(() -> probed(f, probe).inspectNext(RUN, Optional.empty()));
+        assertEquals(0, probe.commits, column);
+        assertEquals(1, probe.rollbacks, column);
+        assertEquals(1, probe.closes, column);
+        assertEquals("1", count(), column);
+      }
+    }
+  }
+
   @Test
   void orderedCursorAndFixedRunReplay() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {

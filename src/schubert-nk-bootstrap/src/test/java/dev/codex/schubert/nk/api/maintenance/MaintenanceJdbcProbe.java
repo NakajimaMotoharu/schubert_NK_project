@@ -13,6 +13,7 @@ import java.util.Map;
 final class MaintenanceJdbcProbe {
   final Map<String, Integer> faultOccurrences = new HashMap<>();
   String selectedSql = "maintenance_next_inbox", fault = "none";
+  String runtimeColumn = "none";
   String lastSqlState = "unobserved";
   boolean empty, duplicate, commitAfter, fresh = true;
   int commits, closes, rollbacks, saves, deletes, selectedStatements;
@@ -103,6 +104,12 @@ final class MaintenanceJdbcProbe {
                 Object replacement = columns.get(column);
                 return replacement instanceof byte[] bytes ? bytes.clone() : replacement;
               }
+              if (name.startsWith("get")
+                  && a != null
+                  && a.length > 0
+                  && a[0] instanceof String column
+                  && runtimeColumn.equals(column))
+                throw new IllegalArgumentException("synthetic-private-provider-marker");
               Object value = invoke(r, m, a);
               if (name.equals("next")) {
                 position[0]++;
