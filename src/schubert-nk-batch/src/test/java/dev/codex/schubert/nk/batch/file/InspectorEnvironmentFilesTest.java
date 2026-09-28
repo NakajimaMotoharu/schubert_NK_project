@@ -474,9 +474,9 @@ final class InspectorEnvironmentFilesTest {
     final DirectoryCalls calls;
     final InspectorEnvironmentFiles files;
     final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
-    final Set<Integer> live = new HashSet<>();
+    final Set<Integer> live = ConcurrentHashMap.newKeySet();
     final Map<Long, String> originalRoles = new HashMap<>();
-    final Map<String, Integer> counts = new HashMap<>();
+    final Map<String, Integer> counts = new ConcurrentHashMap<>();
     long uid, group = 2000;
     int readers, writers, callbacks, failAt = 1, hookAt = 1;
     String fail = "", hookName = "", invalid = "", badRole = "";

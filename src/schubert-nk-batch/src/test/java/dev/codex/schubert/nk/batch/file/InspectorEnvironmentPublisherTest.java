@@ -662,8 +662,8 @@ final class InspectorEnvironmentPublisherTest {
     final OwnedTransferDirectory root;
     final InspectorEnvironmentPublisher publisher;
     final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
-    final Map<String, Integer> counts = new HashMap<>();
-    final Set<Integer> entries = new HashSet<>();
+    final Map<String, Integer> counts = new ConcurrentHashMap<>();
+    final Set<Integer> entries = ConcurrentHashMap.newKeySet();
     int writers, readers;
     String fail = "", hookName = "", invalid = "", badRole = "", writeBehavior = "normal";
     int failAt = 1, hookAt = 1, badSizeAt, writeLimit = Integer.MAX_VALUE;
@@ -673,7 +673,7 @@ final class InspectorEnvironmentPublisherTest {
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action hook = () -> {};
     BiConsumer<String, Integer> compound = (name, count) -> {};
-    final List<byte[]> compoundBuffers = new ArrayList<>();
+    final List<byte[]> compoundBuffers = Collections.synchronizedList(new ArrayList<>());
 
     Fixture(Path directory) throws Exception {
       this.directory = directory;

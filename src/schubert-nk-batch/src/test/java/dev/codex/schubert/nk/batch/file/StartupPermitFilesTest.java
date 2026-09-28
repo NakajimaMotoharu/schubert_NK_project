@@ -453,9 +453,9 @@ final class StartupPermitFilesTest {
     final OwnedTransferDirectory root;
     final StartupPermitFiles store;
     final StartupPermitFiles.NioIo nativeIo = new StartupPermitFiles.NioIo();
-    final Map<String, Integer> counts = new HashMap<>();
-    final List<String> events = new ArrayList<>();
-    final Set<Integer> entries = new HashSet<>();
+    final Map<String, Integer> counts = new ConcurrentHashMap<>();
+    final List<String> events = Collections.synchronizedList(new ArrayList<>());
+    final Set<Integer> entries = ConcurrentHashMap.newKeySet();
     int readers, writers, failAt = 1, wrongSizeAt;
     long part, uid;
     String fail = "", bad = "", badRole = "", behavior = "";

@@ -1160,10 +1160,10 @@ final class MaintenanceRunFilesTest {
     final DirectoryCalls calls;
     final MaintenanceRunFiles files;
     final MaintenanceRunFiles.NioIo nativeIo = new MaintenanceRunFiles.NioIo();
-    final Set<Integer> live = new HashSet<>();
+    final Set<Integer> live = ConcurrentHashMap.newKeySet();
     final Map<Long, String> originalRoles = new HashMap<>();
-    final Map<String, Integer> counts = new HashMap<>();
-    final List<String> syncTargets = new ArrayList<>();
+    final Map<String, Integer> counts = new ConcurrentHashMap<>();
+    final List<String> syncTargets = Collections.synchronizedList(new ArrayList<>());
     long uid;
     int readers, writers, listings, failAt = 1, hookAt = 1, partSequence;
     String fail = "", hookName = "", invalid = "", badRole = "", listingFault = "";
