@@ -1,0 +1,27 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "PG356 native limited PASS, not formal PGPT acceptance",
+  "executedAtJst": "2026-09-28T20:37:00+09:00",
+  "environment": {"os": "Ubuntu Linux 7.0.0-31-generic x86_64", "jdk": "25.0.4", "jacoco": "0.8.15", "vmInstance": "pgpt-r2-20260927-01"},
+  "branch": "dev-foundation",
+  "productionSourceCommit": "4005d6704fac645267aedcce53c2a413f9eae95a",
+  "probeCommit": "368d8712c5c1c1be233e8fc44aa91ea83ff2fca4",
+  "testIds": ["PT-OPS-BFNATIVE001", "PT-OPS-BFNATIVE002"],
+  "command": "root JDK25 Java with PGPT-only probe class and fixed Batch JAR; second invocation with JaCoCo 0.8.15 agent; no systemctl start",
+  "exitCode": 0,
+  "input": "empty fixed tmpfs backup-request root; no credential or real Unit start",
+  "expected": "empty root0600 marker publication, residual admission rejection, same-token retirement, empty root afterwards",
+  "actual": "two exit0 executions; fixed output INTENT_CREATED_RESIDUAL_REJECTED_RETIRED; Morning/Backup inactive PID0, marker absent afterwards",
+  "coverageMissedBackupStartIntentBranchLineMethodClass": [6, 14, 3, 0],
+  "coverageStatus": "host/native provisional merge only; full 100% gate failed",
+  "related": ["BUG-315", "YKT-248", "SSC-105", "SSC-106"],
+  "hashesSha256": {
+    "batchJar": "72613cc1d0a67be7c12646c88ee4e904e83981b0fecf7af962882371708b7114",
+    "probeClass": "44028af57c0e3d74c936761b43e5980d680bd67466bc50f3d40747ab6cdf76dd",
+    "nativeExecPrivate": "22b008f0d71a9e93420ab15fc754a55ab9c0565ca1a9f13f01471ced0845d95d",
+    "mergedExecPrivate": "ac7e7b9758ecce59b1a7119e652c093495c81336376bf285af8e425fac298cd4",
+    "mergedXmlPrivate": "ffd0f8689f95ae7198e30e6ba45015731defeec6baa6120e07b5715550e22fb2",
+    "hostXmlRestored": "42cc11cfc54a238772bb0445f69b66240342c694e86b1addabcf31350fafce4c"
+  },
+  "rawLogsOrSecretsInGit": false
+}
