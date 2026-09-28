@@ -1,0 +1,50 @@
+{
+  "programId": "NK-DAT-001",
+  "testIds": ["PT-DB-INBOX-267", "PT-DB-INBOX-268"],
+  "status": "provisional-direct-retest-passed-overall-gate-open",
+  "executedAt": "2026-09-28T19:35:00+09:00/2026-09-28T19:56:15+09:00",
+  "environment": {
+    "os": "Linux host, isolated PostgreSQL 18 fixture",
+    "jdk": "OpenJDK 25.0.4+7",
+    "maven": "wrapper 3.9.12, offline fixed repository",
+    "node": "24.19.0",
+    "jacoco": "0.8.15",
+    "spotbugs": "4.10.4.0"
+  },
+  "branch": "dev-foundation",
+  "sourceCommit": "2cbf70ae2636fec283ff9fa0c25df405a1c259fe",
+  "command": "env JAVA_HOME=<fixed JDK25> PATH=<fixed JDK25>:<fixed Node24>:$PATH ./mvnw -o --no-transfer-progress -q -Dmaven.repo.local=<fixed repository> -Dnk.pt.repository=<worktree> -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check org.jacoco:jacoco-maven-plugin:0.8.15:report",
+  "exitCode": 0,
+  "input": "independent valid Login and Game rows; public JDBC proxy injects unknown IllegalArgumentException at eight getters; no raw row or secret retained",
+  "expected": "fixed cause-free InboxMaintenanceException; zero commit, one rollback and close; Inbox unchanged, stored cursor absent, normal same-run replay processes once",
+  "actual": "PT-DB-INBOX-267 A-H and 268 passed; related two suites 18/18; all six modules 2432 tests in 356 suites with failures/errors/skipped 0; six-module SpotBugs 0",
+  "coverage": {
+    "InboxCleanup": {"instructionMissed": 0, "branchMissed": 0, "lineMissed": 0, "methodMissed": 0, "classMissed": 0},
+    "wholeProductionMissedByModule": {
+      "protocol": {"branch": 0, "line": 0, "method": 0, "class": 0},
+      "storage": {"branch": 0, "line": 0, "method": 0, "class": 0},
+      "bootstrap": {"branch": 37, "line": 11, "method": 4, "class": 0},
+      "api": {"branch": 1, "line": 19, "method": 3, "class": 0},
+      "web": {"branch": 1, "line": 19, "method": 3, "class": 0},
+      "batch": {"branch": 15, "line": 235, "method": 92, "class": 12}
+    }
+  },
+  "related": {"bugs": ["BUG-319"], "horizontal": ["YKT-162", "YKT-154"], "ssc": []},
+  "sha256": {
+    "productionInboxCleanup": "c9c2de885c0e1fcc8792e17624b1e4037fb95e7a539cfcab1f2373dfc4f12193",
+    "testAuthenticationInboxCleanup": "2d88888ec3138381a0b4ec089fcf452b07f9ff398f63d84b90170d27b51c818b",
+    "testInboxInspectionProgress": "789958231909ed52e4e2aa7259f26ed41bcfc677a76209df9d4963931753bf32",
+    "testMaintenanceJdbcProbe": "79cb7e15f0b78c0ecae8524e3e3a1fe677b317dfc665a6d4bca0e071f7021a82",
+    "testSpecification070": "4e815426b8589ab1b6a0913b86a2201b28a304ecfcaa245dd0dc21ced493b695",
+    "rawLocalJUnitAuthentication": "3aaf3d1020af5d57bfd0b90778c657b6f65e3749599bb4cdebf01c2b314d736b",
+    "rawLocalJUnitProgress": "8e51994bc36c59f62dec355b42a9ffc23bcca000176db3bc6f5a502ead44970e",
+    "rawLocalApiJaCoCoXml": "8627afcef9ee58f8a0273b61809650d7a00c5549263f714446a75f088680a171",
+    "sanitizedResultsXml": "881bc08ca3d8dcd37fac40bdbdffa8860166e4ac30fdee97592e4bebf7c5fe6f"
+  },
+  "redaction": "Only Test IDs, suite counts, fixed expectations, coverage counters and hashes; raw JDBC row, ciphertext, credential, session, cookie, token, stack trace and provider marker omitted.",
+  "limitations": [
+    "The first failing test before production fix was RED 1 failure and is excluded from pass counts.",
+    "Whole Production coverage 100 percent is not met; this is not formal PT gate certification.",
+    "YKT-162/154 whole-owner horizontal work remains open; R2 external process and R3 NK CHR are not accepted."
+  ]
+}
