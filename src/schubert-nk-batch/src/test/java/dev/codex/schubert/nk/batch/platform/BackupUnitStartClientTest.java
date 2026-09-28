@@ -9,12 +9,59 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** SS341/343/SSC092/105 independent fixed-argv and unknown-owner vectors; no real Unit start. */
+/** SS341/343/SSC092/105/106 fixed-argv, intent and unknown-owner vectors; no real Unit start. */
 final class BackupUnitStartClientTest {
   private static InspectorUnitProbeFixture.Child child() {
     var child = new InspectorUnitProbeFixture.Child(new byte[0]);
     child.waitSeconds = 120;
     return child;
+  }
+
+  @Test
+  void bstart009IntentPrecedesClientAndUncertainDeliveryPreservesIt() throws Exception {
+    var sequence = new ArrayList<String>();
+    var process = child();
+    var success =
+        new BackupUnitStartClient(
+            () -> sequence.add("root"),
+            () -> sequence.add("policy"),
+            command -> {
+              sequence.add("client");
+              return process;
+            },
+            () -> sequence.add("intent"));
+    assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, success.start().status());
+    assertEquals(List.of("root", "policy", "root", "intent", "client", "root", "root"), sequence);
+    process.allClosed();
+
+    sequence.clear();
+    var failedPublication =
+        new BackupUnitStartClient(
+            () -> sequence.add("root"),
+            () -> sequence.add("policy"),
+            command -> fail("no start after uncertain intent publication"),
+            () -> {
+              sequence.add("intent-unknown");
+              throw new IOException("test-only publication uncertainty");
+            });
+    assertThrows(IOException.class, failedPublication::start);
+    assertEquals(List.of("root", "policy", "root", "intent-unknown"), sequence);
+
+    sequence.clear();
+    var uncertainStart =
+        new BackupUnitStartClient(
+            () -> sequence.add("root"),
+            () -> sequence.add("policy"),
+            command -> {
+              sequence.add("client-unknown");
+              throw new IOException("test-only unknown delivery");
+            },
+            () -> sequence.add("intent"));
+    assertEquals(BackupUnitStartClient.Status.UNKNOWN, uncertainStart.start().status());
+    assertEquals(List.of("root", "policy", "root", "intent", "client-unknown"), sequence);
+    assertThrows(
+        NullPointerException.class,
+        () -> new BackupUnitStartClient(() -> {}, () -> {}, command -> child(), null));
   }
 
   @Test

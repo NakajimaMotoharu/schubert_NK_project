@@ -19,5 +19,6 @@
 | PT-OPS-BSTART006 | 待機中/直前/直後割込 | interrupt flag保全、UNKNOWN・自動kill0、flagを試験fixtureが解消した後だけ同handleで再照会可能 |
 | PT-OPS-BSTART007 | factory null・別service・MORNING正規actorとnative start port | null不変条件、別service拒否。native portは無害な`/usr/bin/true`だけ実行し固定systemctl startを発行しない |
 | PT-OPS-BSTART008 | 同じAttemptを再照会、policyの固定BACKUP target | terminal status単調、再spawn0、起動client exit0をUnit Invocation/全cgroup終端・両archive成功へ読み替えない |
+| PT-OPS-BSTART009 | SSC106の固定intent portを追加し、公開成功/不明/起動client送達不明を注入 | root→policy→root→intent公開→固定clientの順。公開不明ならclient0件、client送達不明なら`UNKNOWN`でintentを自動retireしない。独立期待順序はSS341/343の先行保存契約から作る |
 
 実行環境/command、対象commit、line/method/class/branch coverage、静的解析、実結果、BUG/SSC、sanitized evidence hashは[228](228_NK-OPS-001_Backup起動client_実行結果.md)に記録する。JSpecify `@NullMarked`、null注入負例、例外・close/割込・再照会を網羅する。start後UNKNOWNの親M/A保持とhard-timeout再起動barrierはこのclass単独では証明できず、親接続PT/実VMを別必須gateとする。

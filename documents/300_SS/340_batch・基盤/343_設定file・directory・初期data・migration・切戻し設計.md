@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC106/PG355：固定Backup start intentは既存`/run/schubert-nk/backup-request` root0700/tmpfs内の`backup-start.intent`という空root0600 regular/link1/ACLなしの別fileとする。`backup-request`のcanonical byte・子のLoadCredentialは変更しない。親M/A内で同root保持FD相対CREATE_NEW→file force→directory force→同inode読戻しを行い、失敗/残留を消去修復しない。次回親はM内の最初の永続変更より前にmarker不存在を確認する。同一親のretireだけがfresh worker receipt/全Unit終端/明示stop/原本照合後に同inodeをunlink/dir forceし得る。markerの中身を資格情報や任意commandへ流用しない。
+
 SSC103/PG321補足：Artemis JAAS hashed user propertiesのtrusted root配布元は `/etc/schubert-nk/credentials/artemis-users` regular root:root0600、起動前にroot所有で検証する。`artemis.service`の固定`LoadCredential`が作るprivate `/run/credentials/artemis.service/artemis-users`を、Unit mount namespace内だけで既存instance `etc/artemis-users.properties`の期待pathへread-only bindする。host側の秘密property実体を配備手順が勝手に上書き/消去しない。Source欠落、bind/ACL/権限/実Unit不一致は起動失敗とし、broker既存file fallbackを認可しない。実配布・JAAS認証・journal cleanは隔離VMで別実測まで未認定。
 
 SSC100/PG317: 親全8対象・12field・真正host cgroup2全終端・停止方針/worker receiptとの分離はSS341冒頭を正とする。leaf存在時にmanager ControlGroup空の観測から全process不存在を推定しない。固定ControlGroupへのbindingと全nested queryを確認し、全保持能力のclose後だけ限定終端観測を返す。未配置実Unit/unknown client/全親未達ならapproval/permit/業務開始を成功へ補完しない。

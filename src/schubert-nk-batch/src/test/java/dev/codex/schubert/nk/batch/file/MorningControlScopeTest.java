@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/PG341/343/344/346; PT-OPS-MCTRL001-013. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/106; PT-OPS-MCTRL001-014. */
 final class MorningControlScopeTest {
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
@@ -67,6 +67,69 @@ final class MorningControlScopeTest {
         events.add("A-close");
       }
     }
+  }
+
+  @Test
+  void mctrl014ResidualIntentRefusesBeforeOriginalUnderM() {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    MorningControlScope.OwnedOriginal original =
+        new MorningControlScope.OwnedOriginal() {
+          @Override
+          public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> ignored)
+              throws IOException {
+            assertTrue(m.held.get());
+            events.add("original");
+            throw new IOException("test-only original");
+          }
+        };
+    var blocked =
+        MorningControlScope.withClearIntent(
+            original,
+            () -> {
+              assertTrue(m.held.get());
+              events.add("intent-reject");
+              throw new IOException("test-only residual intent");
+            });
+    assertThrows(
+        IOException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {},
+                m,
+                blocked,
+                () -> fail("no stop"),
+                new HeldA(events),
+                () -> fail("no terminal"),
+                state -> fail("no invalidation"),
+                (state, database) -> fail("no work")));
+    assertEquals(List.of("M-enter", "intent-reject", "M-close"), events);
+
+    events.clear();
+    var clear =
+        MorningControlScope.withClearIntent(
+            original,
+            () -> {
+              assertTrue(m.held.get());
+              events.add("intent-clear");
+            });
+    assertThrows(
+        IOException.class,
+        () ->
+            MorningControlScope.executeOwned(
+                () -> {},
+                m,
+                clear,
+                () -> fail("no stop"),
+                new HeldA(events),
+                () -> fail("no terminal"),
+                state -> fail("no invalidation"),
+                (state, database) -> fail("no work")));
+    assertEquals(List.of("M-enter", "intent-clear", "original", "M-close"), events);
+    assertThrows(
+        NullPointerException.class, () -> MorningControlScope.withClearIntent(null, () -> {}));
+    assertThrows(
+        NullPointerException.class, () -> MorningControlScope.withClearIntent(original, null));
   }
 
   @Test

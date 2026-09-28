@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import dev.codex.schubert.nk.batch.file.BackupStartIntentFiles;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +33,11 @@ public final class BackupUnitStartClient {
     Process execute(List<String> command) throws IOException;
   }
 
+  @FunctionalInterface
+  interface Intent {
+    void begin() throws IOException;
+  }
+
   public enum Status {
     CLIENT_EXITED_ZERO,
     CLIENT_EXITED_NONZERO,
@@ -51,6 +57,7 @@ public final class BackupUnitStartClient {
   private final Context context;
   private final Policy policy;
   private final Start start;
+  private final Intent intent;
 
   public static BackupUnitStartClient create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
@@ -58,7 +65,12 @@ public final class BackupUnitStartClient {
         root,
         expected,
         MaintenanceUnitStopPolicy.create(),
-        new MaintenanceUnitStopClient.NativeStart()::execute);
+        new MaintenanceUnitStopClient.NativeStart()::execute,
+        () -> {
+          try (var marker = BackupStartIntentFiles.create(root, expected)) {
+            marker.begin();
+          }
+        });
   }
 
   static BackupUnitStartClient create(
@@ -67,21 +79,44 @@ public final class BackupUnitStartClient {
       MaintenanceUnitStopPolicy unitPolicy,
       Start start)
       throws IOException {
+    return create(root, expected, unitPolicy, start, () -> {});
+  }
+
+  static BackupUnitStartClient create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      MaintenanceUnitStopPolicy unitPolicy,
+      Start start,
+      Intent intent)
+      throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(unitPolicy, "fixed Backup policy");
     Objects.requireNonNull(start, "fixed start port");
+    Objects.requireNonNull(intent, "same-boot start intent");
     if (expected.service() != RootStartupContext.Service.MORNING)
       throw new IOException("backup start unavailable");
     root.recheck(expected);
     return new BackupUnitStartClient(
-        () -> root.recheck(expected), () -> unitPolicy.requireSafe(MaintenanceUnit.BACKUP), start);
+        () -> root.recheck(expected),
+        () -> unitPolicy.requireSafe(MaintenanceUnit.BACKUP),
+        start,
+        intent);
   }
 
+  /**
+   * Synthetic port used by pre-existing fixed-client PT; Production factory always supplies a
+   * marker.
+   */
   BackupUnitStartClient(Context context, Policy policy, Start start) {
+    this(context, policy, start, () -> {});
+  }
+
+  BackupUnitStartClient(Context context, Policy policy, Start start, Intent intent) {
     this.context = Objects.requireNonNull(context, "Morning root context");
     this.policy = Objects.requireNonNull(policy, "fixed Backup policy");
     this.start = Objects.requireNonNull(start, "fixed start port");
+    this.intent = Objects.requireNonNull(intent, "same-boot start intent");
   }
 
   /**
@@ -93,6 +128,10 @@ public final class BackupUnitStartClient {
     context.recheck();
     policy.requireSafe();
     context.recheck();
+    interrupted();
+    // SSC106: a failed or uncertain publication is pre-start and issues no systemctl request.
+    // Once published, all unknown delivery paths leave the marker for the next M admission.
+    intent.begin();
     interrupted();
     @Nullable Process process;
     try {

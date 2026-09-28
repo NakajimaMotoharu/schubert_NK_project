@@ -60,6 +60,11 @@ final class MorningControlScope {
     void requireAll() throws IOException;
   }
 
+  @FunctionalInterface
+  interface IntentClear {
+    void requireClear() throws IOException;
+  }
+
   private MorningControlScope() {}
 
   static <T> T execute(MorningNewRunAdmission.Continuation<T> trustedWork) throws IOException {
@@ -124,12 +129,32 @@ final class MorningControlScope {
     return executeOwned(
         () -> root.recheck(snapshot),
         maintenance::tryExclusive,
-        original,
+        withClearIntent(
+            original,
+            () -> {
+              try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
+                intent.requireClear();
+              }
+            }),
         () -> MorningStopPass.create(root, snapshot).execute(),
         startup::tryExclusive,
         () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
         state -> MorningCurrentInvalidation.invalidate(root, snapshot, state),
         trustedWork);
+  }
+
+  static OwnedOriginal withClearIntent(OwnedOriginal original, IntentClear intent) {
+    Objects.requireNonNull(original, "dedicated DB/original owner");
+    Objects.requireNonNull(intent, "same-boot start intent admission");
+    return new OwnedOriginal() {
+      @Override
+      public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
+          throws IOException {
+        // Called inside M: no DB/original mutation, fixed stop or new request precedes this gate.
+        intent.requireClear();
+        return original.execute(continuation);
+      }
+    };
   }
 
   static <T> T executeOwned(
