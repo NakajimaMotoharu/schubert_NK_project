@@ -1,0 +1,38 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "BUG-324 direct regression pass; full 100% coverage, native parent and YKT-256 incomplete",
+  "executedAtJst": "2026-09-29T00:37:33+09:00",
+  "environment": {"os": "Linux x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "0eb7df06f",
+  "testIds": ["PT-OPS-BUCYCLE-001..005"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "public synthetic start/stop/receipt ports, post-call IOException/StopGate/Runtime/Error/null; no real Unit or secret",
+  "expected": "post-start uncertainty retains parent M/A and marker, stop/retire zero; pre-start baseline rejection starts zero",
+  "actual": "TDD RED 5 selected tests F1, exit1; GREEN 5 selected F/E/S0; Production6 2477 tests/362 suites F/E/S0, SpotBugs six modules zero",
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1393, 29, 302, 120, 15],
+    "morningBackupUnitCycleOuter": [122, 8, 26, 8, 0]
+  },
+  "related": ["BUG-324", "YKT-256", "BUG-322", "SSC-107"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "f8c6ef600f45e7e03573a792fcdd20515ac0abdba9b0bb769356a64c9b470261",
+    "storageJUnitPathOrderedSha256List": "c363c0afa699b3025fa50d9958611bfc5fec5a7478b5b398e1fc17e14f5afada",
+    "bootstrapJUnitPathOrderedSha256List": "f657b7d10945110a27aa2d958aa90780e7abfc141de8339a10c276fcd8e15717",
+    "apiJUnitPathOrderedSha256List": "104b5334c4feaa5bd9b36c0dba8b7924a2ac8ceb583406df7adf4535070d40e1",
+    "webJUnitPathOrderedSha256List": "62367d4aec99a808a50d31751170375cfaf64566d70e63278ce51c0bce07e228",
+    "batchJUnitPathOrderedSha256List": "7a2843dd2351f22d416cda24bce4f39f53a5585ad92bb62f66d2dcce5b8688f3",
+    "BUCYCLEJUnitXml": "744c1bae38c57a02982b03d7364302819d9dc1b1eb1744e8921c50ffeb54deba",
+    "batchJacocoXml": "f722d00a6b8ba0fe67f082dd8fae81b8fe0fcea14daf536e0d2f8407d3f3b486",
+    "sourceMorningBackupUnitCycle": "a4cfec72fe5bb99fc6fb1935ecd91185c44c5aad026e8288ce54719dbc39fd8f",
+    "testMorningBackupUnitCycle": "a37f4d2172741f645e0e111cb85f38cae091ee3e394a484b4f85a870cb5c50ff",
+    "ptSpecification242": "b3110a1999479bde96e4fdd546fce2c2450be18c360b8bee8199ae36d4c6924e"
+  },
+  "rawXmlOrSecretsInGit": false
+}

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG365追加追跡（2026-09-29）：NK-OPS-001 `MorningBackupUnitCycle.execute`のBackup start後不明例外/null保持、PT-OPS-BUCYCLE005、RD OPS-009/BAK-001、UI251、SS341/343/SSC105～107、BUG324/YKT256、018/242・243/PG365 manifest。固定source全6限定回帰済み、native親/全coverage未認定。
+
 PG363追加追跡（2026-09-29）：NK-OPS-001 `MorningBackupUnitCycle`（Backup parent start/receipt/stop/retire候補）、`schubert-nk-morning-controller.service.template`/`schubert-nk-morning.target.template`、並行fixture `BackupPublicationFixture`。RD OPS-009/BAK-001/BKO-001、UI251/253、SS341/342/343・SSC107、PT-OPS-BUCYCLE001～004/MUNIT001～004/BFENCE並行、018/239・240/PG363 manifest。正式全100%・実親受入未完了。
 
 2026-09-28 PG362暫定追記：NK-MSG-002 `WebBrokerContexts.create/newFactory/contexts/open/close`→PT-JMS-WEB-001～003、006仕様・Web関連JUnit。NK-OPS-001 `WebProcessMain.startNative`→PT-OPS-WEB-MAINと後続真正外部受入。RD MQ-001/002/003/006/008・SYS-004、UI231/243/253、SS311/321§6/342/343、PG-D321。Source `b351d5cdf`、選択4suite15PT F/E/S0/static0、新class4指標missed0。Web Production→API Production依存なし、Bootstrap test-jarはtest-only。POM/security横断の全6 clean2,462PT/361suite F/E/S0/static0、006 sanitized manifest保存。全coverage100%・正式受入/外部Unit/業務readiness/CHRは未達。
