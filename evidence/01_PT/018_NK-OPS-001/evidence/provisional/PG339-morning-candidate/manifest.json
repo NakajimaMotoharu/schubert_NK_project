@@ -1,0 +1,124 @@
+{
+  "id": "PG339-morning-candidate",
+  "formal": false,
+  "executionTime": "2026-09-28T14:35:01.848630+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "3daf286eef649814efbee5d7e9fb3a037b254c12",
+  "environment": "Linux host UID1000; isolated Ubuntu VM; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0",
+  "command": "Batch -Dtest=MorningProcessMainTest,MorningServiceUnitTest,MorningRootScopeTest,MaintenanceUnitStopPolicyTest clean test SpotBugs:check JaCoCo:report",
+  "exitCode": 0,
+  "input": "fail-closed Morning external main; no argv; read-only root admission; candidate unit not installed; existing PG323 test-only unit preserved",
+  "expected": "21 selected PT F/E/S0/static0; external host main exit30 with output0; candidate unit syntax valid; no Production acceptance",
+  "actual": "21 PT F/E/S0/static0; host Java main exit30/output0; isolated VM systemd-analyze verify exit0; exact Morning unit loaded inactive/PID0 but pre-existing PG323 test-only ExecStart, not PG339",
+  "testIds": [
+    "PT-OPS-MMAIN001",
+    "PT-OPS-MMAIN002",
+    "PT-OPS-MMAIN003",
+    "PT-OPS-MMAIN004",
+    "PT-OPS-MMAIN005",
+    "PT-OPS-MUNIT001",
+    "PT-OPS-MUNIT002",
+    "PT-OPS-MUNIT003"
+  ],
+  "counts": {
+    "MorningProcessMainTest": 5,
+    "MorningServiceUnitTest": 3,
+    "MorningRootScopeTest": 6,
+    "MaintenanceUnitStopPolicyTest": 7
+  },
+  "coverage": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 2
+    },
+    "LINE": {
+      "missed": 2,
+      "covered": 7
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 1
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageSourceSha256": "9810aa1330ac557a9b3adcc9f3f1df043dd0d8b10a659e218a50f1b4f2a6f5c8",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "sha256": "78783665255e206dfb0ff93d08e63396148fd570b822776cb361dffae984a206"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningProcessMainTest.java",
+      "sha256": "d1d5ca0fe7c11158c37c04292f5c4ba3fd69355645ffcc379b3cf0aa57c0f4c0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceUnitTest.java",
+      "sha256": "1a5850f001af8d31c787694c92b3298db6386944dadf5cdd2f1cb8b9318c2c20"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "sha256": "5debc9401e3f3db636709f76d5496228130792e1de1f902248d88992cabd31ec"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg339-mmain-clean-fixed.log",
+      "sha256": "20e16654a369bcf1f9fcab75313d3dd645437919addc616b0e36693bf60d8bef"
+    }
+  ],
+  "externalChecks": {
+    "hostExitCode": 30,
+    "hostStdoutBytes": 0,
+    "hostStderrBytes": 0,
+    "vmUnitVerifyExitCode": 0,
+    "vmUnitSha256": "5debc9401e3f3db636709f76d5496228130792e1de1f902248d88992cabd31ec",
+    "vmPackageSha256": "739fd661af6245da8847731685f037d73b244d619beabd812a4167396b02c3fe",
+    "vmExistingUnit": "schubert-nk-morning-controller.service loaded/inactive/MainPID0; PG323 test-only oneshot; untouched"
+  },
+  "bugs": [
+    "BUG-314"
+  ],
+  "ykt": [
+    "YKT-247"
+  ],
+  "ssc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "limitations": [
+    "Unit syntax/host smoke are not genuine root Production Morning startup",
+    "Existing PG323 Unit not overwritten or reconfigured",
+    "No M/A/current invalidation, fixed-eight stop, journal, backup/Cleanup, permit, R2/R3",
+    "JUnit suite/case metadata only; raw properties/output omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/coverage/morning-process-main.json",
+      "sha256": "a217d56ed36918ca2300ec329bc7634cba65ab89683ca9b58c0f4d68c19b26e4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/junit/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "ab2af2df31818d0ddbd638ba2b82c22349d9c5148ad9f7c94a24ef1e6238c444"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "a7500a064709808bf49ae7850abde7b1928127c73b214eefc9e624dc9490cc24"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "de85d335e5d0861c242724631a56a2eaea78a3c82a3a1745c3ef63d88b2554f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "4b8ed4e8b646fa685c3beed84c03ed7223798c751501570c5d4c257d0228c6cc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG339-morning-candidate/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}

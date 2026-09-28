@@ -6,7 +6,7 @@
 
 - 共有週次使用率はcheckpoint158の31%からcheckpoint176の50%へ約19pp増えた。R1のroot/backup/Cleanup下位条件は増えたが、R2 Production外部起動・R3実NK CHRは0、D01～D07のclosed/reopened/newも0/0/0。共有枠の増分をこの作業だけの消費量とは断定しない。
 - 最新source `a1898417f`の6module限定全回帰2,327PT/342suite F/E/S0・SpotBugs0。ただし `clean verify`はBootstrap coverage100% gateで停止し、Batch native新classもcoverage不足。正式run/sourceは2026-09-25の`PT-WEB-20260925-24`/`858713c0bf310ae8bf62078b0a1cedbce4e968db`のまま。
-- 隔離VMでCaddy/Backup/Artemisはloaded inactive/PID0、Web/API/Cleanup/Inspector/Expiry/Morning controllerは正式Unit not-found。PostgreSQLはactive。Cleanup候補Unitは`/tmp`で構文確認しただけで、設計どおりinstall/startしていない。
+- 隔離VMで固定8のCaddy/Backup/Artemisはloaded inactive/PID0、Web/API/Cleanup/Inspector/Expiryは正規Unit not-found。PostgreSQLはactive。Morning controllerはBUG-314で誤照会を訂正：正規`schubert-nk-morning-controller.service`はloaded inactive/PID0、PG323 test-only probeをExecStartに持つ既存oneshotでありProduction資格なし。Cleanup/PG339候補Unitは`/tmp`で構文確認しただけで、設計どおりinstall/startしていない。既存Unitを上書きしない。
 
 ## 最小再現と原因仮説
 
