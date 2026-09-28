@@ -4,12 +4,15 @@ import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.backup.*;
+import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
 import dev.codex.schubert.nk.batch.repository.*;
 import dev.codex.schubert.nk.storage.*;
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
+import java.security.NoSuchAlgorithmException;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -20,6 +23,245 @@ import org.junit.jupiter.api.io.TempDir;
 /** NK-BAT-001/BAK/BKO/UI251/SS341 6.7/343; SSC062/PG169; BAT226..241; independent017046. */
 final class BackupManifestReaderTest {
   @TempDir Path temporary;
+  private static final UUID CLEANUP_ACTIVATION =
+      UUID.fromString("11111111-2222-4333-8444-555555555555");
+
+  private static CleanupWorkerRequest cleanupRequest(BackupManifest manifest, String digest) {
+    return new CleanupWorkerRequest(
+        manifest.run().id(), CLEANUP_ACTIVATION, manifest.run().cutoff(), digest);
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR017: fixed literal digest and read-only 2-scan agreement. */
+  @Test
+  void cleanupClaimSelectsExactCanonicalManifest() throws Exception {
+    try (var f = fixture()) {
+      assertEquals(
+          f.expected, reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      assertEquals(2, f.counts.get("openNames"));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR018: old part/other run/unknown are not adopted or removed. */
+  @Test
+  void cleanupClaimIgnoresUnrelatedNames() throws Exception {
+    try (var f = fixture()) {
+      Files.createDirectory(f.parent.resolve(DIR + ".part"));
+      Files.createDirectory(
+          f.parent.resolve("20260913-000003-aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee"));
+      Files.createDirectory(f.parent.resolve("legacy_unknown"));
+      assertEquals(
+          f.expected, reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      assertTrue(Files.isDirectory(f.parent.resolve(DIR + ".part")));
+      assertEquals(0, f.counts.getOrDefault("create", 0));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR019: digest, run and cutoff each bind the same claim. */
+  @Test
+  void cleanupClaimRefusesOtherCorrelation() throws Exception {
+    try (var f = fixture()) {
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, "0".repeat(64))));
+      denied(
+          () ->
+              reader(f)
+                  .findCleanupClaims(
+                      new CleanupWorkerRequest(
+                          f.expected.run().id(),
+                          CLEANUP_ACTIVATION,
+                          f.expected.run().cutoff().plusSeconds(1),
+                          MANIFEST_HASH)));
+      denied(
+          () ->
+              reader(f)
+                  .findCleanupClaims(
+                      new CleanupWorkerRequest(
+                          UUID.fromString("aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee"),
+                          CLEANUP_ACTIVATION,
+                          f.expected.run().cutoff(),
+                          MANIFEST_HASH)));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR020: a self-run suffix with noncanonical name is unsafe. */
+  @Test
+  void cleanupClaimRefusesMalformedSelfName() throws Exception {
+    try (var f = fixture()) {
+      Files.createDirectory(f.parent.resolve("bad-" + f.expected.run().id()));
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+      f.unchanged();
+    }
+    try (var f = fixture()) {
+      Files.createDirectory(f.parent.resolve("20260913_000002-" + f.expected.run().id()));
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR021: two directory inventories cannot drift. */
+  @Test
+  void cleanupClaimRefusesInventoryDrift() throws Exception {
+    try (var f = fixture()) {
+      AtomicInteger scans = new AtomicInteger();
+      f.listing =
+          held -> {
+            int number = scans.incrementAndGet();
+            return number == 1
+                ? List.of(held.resolve(DIR))
+                : List.of(held.resolve(DIR), held.resolve("legacy_unknown"));
+          };
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      assertEquals(2, scans.get());
+      f.released();
+      f.unchanged();
+    }
+    try (var f = fixture()) {
+      f.hook =
+          (event, number) -> {
+            if (event.equals("openNames") && number == 2)
+              try {
+                Files.setLastModifiedTime(f.parent, FileTime.fromMillis(1_000_000));
+              } catch (IOException failure) {
+                throw new AssertionError(failure);
+              }
+          };
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+      f.unchanged();
+    }
+    for (boolean cutoff : List.of(false, true))
+      try (var f = fixture()) {
+        f.hook =
+            (event, number) -> {
+              if (event.equals("openDirectory") && number == 3)
+                try {
+                  Path manifest = f.child.resolve("MANIFEST.json");
+                  String original = Files.readString(manifest, StandardCharsets.US_ASCII);
+                  String changed =
+                      cutoff
+                          ? original.replace(
+                              "\"cutoff\":\"2026-09-12T15:00:00.000000Z\"",
+                              "\"cutoff\":\"2026-09-12T14:59:59.000000Z\"")
+                          : original.replace(
+                              "\"recipientSha256\":\"" + "0".repeat(64),
+                              "\"recipientSha256\":\"" + "1".repeat(64));
+                  assertNotEquals(original, changed);
+                  Files.writeString(manifest, changed, StandardCharsets.US_ASCII);
+                } catch (IOException failure) {
+                  throw new AssertionError(failure);
+                }
+            };
+        denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        f.released();
+      }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR022: duplicate/oversize listing is not a selection. */
+  @Test
+  void cleanupClaimRefusesDuplicateOrUnboundedInventory() throws Exception {
+    try (var f = fixture()) {
+      f.listing = held -> List.of(held.resolve(DIR), held.resolve(DIR));
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.listing =
+          held -> {
+            List<Path> entries = new ArrayList<>();
+            for (int index = 0; index <= 4096; index++) entries.add(held.resolve("entry-" + index));
+            return entries;
+          };
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+    }
+    for (List<Path> malformed : List.of(Arrays.asList((Path) null), List.of(Path.of("/tmp/else"))))
+      try (var f = fixture()) {
+        f.listing = held -> malformed;
+        denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        f.released();
+      }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR023: list/read/close uncertainty never returns claims. */
+  @Test
+  void cleanupClaimRefusesOwnedIoFailure() throws Exception {
+    for (String event : List.of("openNames#1", "closeNames#1", "openChannel#1"))
+      try (var f = fixture()) {
+        f.extraFaults.add(event);
+        denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        f.released();
+        f.unchanged();
+      }
+    try (var f = fixture()) {
+      f.nullNames = true;
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+    }
+    try (var f = fixture()) {
+      f.effective = 1;
+      denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+    }
+    try (var f = fixture()) {
+      var noDigest =
+          new BackupManifestReader(
+              f.root,
+              f,
+              UID,
+              GID,
+              f,
+              f::clock,
+              () -> {
+                throw new NoSuchAlgorithmException("synthetic provider unavailable");
+              });
+      denied(() -> noDigest.findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+      f.released();
+    }
+  }
+
+  /** PG331/SSC104/PT-OPS-BMR024: null and same-reader parallel replay. */
+  @Test
+  void cleanupClaimNullAndConcurrentReplay() throws Exception {
+    try (var f = fixture()) {
+      BackupManifestReader source = reader(f);
+      assertThrows(NullPointerException.class, () -> source.findCleanupClaims(null));
+      try (var pool = Executors.newFixedThreadPool(2)) {
+        var first =
+            pool.submit(() -> source.findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        var second =
+            pool.submit(() -> source.findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        assertEquals(f.expected, first.get());
+        assertEquals(f.expected, second.get());
+      }
+      f.released();
+      f.unchanged();
+    }
+    try (var f = fixture()) {
+      Thread.currentThread().interrupt();
+      try {
+        denied(() -> reader(f).findCleanupClaims(cleanupRequest(f.expected, MANIFEST_HASH)));
+        assertTrue(Thread.currentThread().isInterrupted());
+      } finally {
+        Thread.interrupted();
+      }
+      f.released();
+    }
+    try (var f = fixture();
+        var names = new BackupManifestReader.NioIo().openNames(f.parent)) {
+      assertTrue(
+          java.util.stream.StreamSupport.stream(names.spliterator(), false)
+              .anyMatch(path -> path.getFileName().toString().equals(DIR)));
+      f.released();
+    }
+  }
+
   static final Map<String, Integer> INVENTORY =
       Map.ofEntries(
           Map.entry("attributes", 8),

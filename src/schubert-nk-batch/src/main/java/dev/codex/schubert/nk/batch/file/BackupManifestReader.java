@@ -5,6 +5,8 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
+import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
@@ -15,7 +17,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.attribute.FileTime;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.function.LongSupplier;
 import org.jspecify.annotations.NullMarked;
@@ -36,11 +42,19 @@ public final class BackupManifestReader {
   private final long uid, gid;
   private final Io io;
   private final LongSupplier clock;
+  private final Digests digests;
+
+  @FunctionalInterface
+  interface Digests {
+    MessageDigest create() throws NoSuchAlgorithmException;
+  }
 
   interface Io {
     @Nullable Map<String, Object> attributes(Path held) throws IOException;
 
     @Nullable SeekableByteChannel open(Path held) throws IOException;
+
+    @Nullable DirectoryStream<Path> openNames(Path held) throws IOException;
   }
 
   public BackupManifestReader(
@@ -55,10 +69,22 @@ public final class BackupManifestReader {
       long gid,
       Io io,
       LongSupplier clock) {
+    this(root, security, uid, gid, io, clock, () -> MessageDigest.getInstance("SHA-256"));
+  }
+
+  BackupManifestReader(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      long uid,
+      long gid,
+      Io io,
+      LongSupplier clock,
+      Digests digests) {
     this.root = Objects.requireNonNull(root, "backup root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "manifest IO");
     this.clock = Objects.requireNonNull(clock, "manifest clock");
+    this.digests = Objects.requireNonNull(digests, "manifest digest provider");
     if (uid < 1 || uid > 0xffffffffL || gid < 1 || gid > 0xffffffffL)
       throw new IllegalArgumentException("invalid backup owner");
     this.uid = uid;
@@ -67,25 +93,106 @@ public final class BackupManifestReader {
 
   public BackupManifest read(String name, BatchStepAttempt database, BatchStepAttempt configuration)
       throws StorageIoException {
-    return readAt(name, database, configuration, null);
+    Objects.requireNonNull(database, "database handle");
+    Objects.requireNonNull(configuration, "configuration handle");
+    BackupManifest result = readAt(name, null);
+    require(
+        result.databaseStep().equals(database) && result.configurationStep().equals(configuration));
+    return result;
   }
 
   /** Same operation-wide monotonic budget supplied by the package publisher. SSC066/BAT258..273. */
   BackupManifest readWithin(
       String name, BatchStepAttempt database, BatchStepAttempt configuration, long started)
       throws StorageIoException {
-    return readAt(name, database, configuration, started);
-  }
-
-  private BackupManifest readAt(
-      String name,
-      BatchStepAttempt database,
-      BatchStepAttempt configuration,
-      @Nullable Long suppliedStart)
-      throws StorageIoException {
-    Objects.requireNonNull(name, "backup directory name");
     Objects.requireNonNull(database, "database handle");
     Objects.requireNonNull(configuration, "configuration handle");
+    BackupManifest result = readAt(name, started);
+    require(
+        result.databaseStep().equals(database) && result.configurationStep().equals(configuration));
+    return result;
+  }
+
+  /**
+   * Selects untrusted claims by the fixed child's nonsecret digest. Caller must independently
+   * verify all four files, both DB success rows and every root/Unit exclusion before DELETE.
+   * NK-OPS-001/BAK001/OPS009/UI251/SS341/343/SSC104/PG331; PT-OPS-BMR017..024.
+   */
+  public BackupManifest findCleanupClaims(CleanupWorkerRequest request) throws StorageIoException {
+    Objects.requireNonNull(request, "fixed cleanup request");
+    synchronized (lock) {
+      long started = clock.getAsLong();
+      try {
+        guard(started);
+        require(security.effectiveUid() == 0);
+        Metadata parent = directory(root, started);
+        List<String> first = names(started);
+        BatchRun fixed = new BatchRun(request.run(), request.cutoff());
+        List<String> matches = new ArrayList<>();
+        for (String name : first) {
+          guard(started);
+          if (!name.endsWith("-" + request.run())) continue;
+          require(
+              name.length() == 52
+                  && name.matches("[0-9]{8}-[0-9]{6}-[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"));
+          BackupManifest candidate = readAt(name, started);
+          if (candidate.run().equals(fixed) && digest(candidate).equals(request.manifestSha256()))
+            matches.add(name);
+        }
+        require(matches.size() == 1);
+        BackupManifest fresh = readAt(matches.getFirst(), started);
+        require(fresh.run().equals(fixed) && digest(fresh).equals(request.manifestSha256()));
+        require(first.equals(names(started)) && parent.equals(directory(root, started)));
+        guard(started);
+        return fresh;
+      } catch (IOException
+          | DirectoryIteratorException
+          | UnsupportedOperationException
+          | NoSuchAlgorithmException failure) {
+        throw unavailable();
+      }
+    }
+  }
+
+  private List<String> names(long started) throws StorageIoException {
+    guard(started);
+    List<String> names =
+        root.atDirectory(
+            held -> {
+              DirectoryStream<Path> stream = io.openNames(held);
+              if (stream == null) throw unavailable();
+              return ResourceScope.use(
+                  stream,
+                  () -> {
+                    Set<String> seen = new HashSet<>();
+                    for (Path entry : stream) {
+                      guard(started);
+                      require(entry != null && held.equals(entry.getParent()));
+                      require(seen.add(held.relativize(entry).toString()) && seen.size() <= 4096);
+                    }
+                    List<String> sorted = new ArrayList<>(seen);
+                    Collections.sort(sorted);
+                    guard(started);
+                    return List.copyOf(sorted);
+                  });
+            });
+    guard(started);
+    return names;
+  }
+
+  private String digest(BackupManifest claim) throws NoSuchAlgorithmException {
+    byte[] canonical = BackupManifestCodec.encode(claim);
+    try {
+      return HexFormat.of()
+          .formatHex(Objects.requireNonNull(digests.create(), "manifest digest").digest(canonical));
+    } finally {
+      Arrays.fill(canonical, (byte) 0);
+    }
+  }
+
+  private BackupManifest readAt(String name, @Nullable Long suppliedStart)
+      throws StorageIoException {
+    Objects.requireNonNull(name, "backup directory name");
     require(
         name.length() == 52
             && name.matches(
@@ -137,10 +244,7 @@ public final class BackupManifestReader {
         guard(started);
         require(parent.equals(directory(root, started)));
         BackupManifest result = decode(bytes, (int) original.size());
-        require(
-            result.directoryName().equals(name)
-                && result.databaseStep().equals(database)
-                && result.configurationStep().equals(configuration));
+        require(result.directoryName().equals(name));
         guard(started);
         require(security.effectiveUid() == 0);
         guard(started);
@@ -260,6 +364,11 @@ public final class BackupManifestReader {
     @Override
     public SeekableByteChannel open(Path held) throws IOException {
       return FileChannel.open(held, StandardOpenOption.READ);
+    }
+
+    @Override
+    public DirectoryStream<Path> openNames(Path held) throws IOException {
+      return Files.newDirectoryStream(held);
     }
   }
 }
