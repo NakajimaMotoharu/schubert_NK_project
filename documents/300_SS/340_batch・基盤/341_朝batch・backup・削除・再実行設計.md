@@ -245,6 +245,8 @@ BUG204/YKT160修正前追補: forcePendingとverifyWithinのpackage内返値は�
 
 SSC104/PG324：Cleanupは真正oneshotが成功条件を満たして初めて後続Artemisを許可する。親root MorningはM/Aと原本run/activation/cutoffを連続保持し、子起動前に同runの非秘密固定request（`NKCLEAN1`、UUID2値、UTC µs cutoff、検証済MANIFESTのlowercase SHA256）をroot所有private sourceへ新規公開する。requestは相関材料であり権限ではない。親のsession advisoryは子前に明示解放・fresh子Unit全終端後に再取得し、子は自己専用DB sessionで同advisoryを取得する。子は真正root context/同原本、API/Web全終端、schema/release、当日同run両backup成功と4file現物/hashを自身で照合し、これらが不明なら削除0件で失敗する。既存Step/Log/Inbox/transferの順序・同cutoff・30分全体上限・warning/失敗記録を維持し、0/10だけを後続可能にする。単体codec/Unit loadedやDB row単独をcleanup成功へ読み替えず、未実装入口は起動拒否とする。
 SSC104/PG331：子のMANIFEST SHA照合は343の固定root read-only候補選択で行い、候補なし/複数/交換/途中失敗は削除0・非成功。MANIFEST一致はfile claimに過ぎず、同bundleの3archiveとMANIFEST自体の4file再hash、両backup成功DB row/handle照合を後続必須gateとして残す。旧`.part`や別runの存在を自動修復・採用・削除しない。
+SSC104/PG332：子の限定backup観測は、同一`CleanupWorkerRequest`を既存`BackupManifestReader.findCleanupClaims`へ渡した後、返った同一manifestを既存`BackupArtifactVerifier.verify`に渡し、実測MANIFEST size/SHAをrequestのcanonical SHAと照合する。全file保持・closeが完了した後だけ、子専用`CleanupDatabaseSession`から同期借用した非pool Connection（既取得advisory・schema済）で、autoCommit=true/RW/READ_COMMITTEDを確認→read-only transaction開始→`BackupStepRepository.inspect`で同run両stepの共通SUCCESS endedを確認→rollback成功→autoCommit復元を要求する。RUNNING/片成功/別handle/実file不一致、rollback/復元不明は削除0・固定非成功、borrowed Connection/backup rootは閉じず、呼出側が失敗Connectionを破棄する。これは当該時点のbackup限定観測で、親連続M/A、同原本、子lock/Unit・全固定actor終端・最終DELETE使用時の再検証を代替しない。RD/UI変更なし。
+PG332実装判断：Readerはcanonical MANIFEST claim SHAとrequestを等値確認して返し、Verifierは同一claimのcanonical MANIFEST byteと実disk 4fileのbyte/hash/ownerを照合してから返す。したがってVerifier戻りSHAとrequestの再比較は既存二条件から必ず導かれ、独立拒否分岐にならない。無意味な到達不能branchを作らず、Reader/Verifier双方の実拒否を別々にPTで確認する。
 
 ### 7.1 必須gate
 
