@@ -1,0 +1,152 @@
+{
+  "id": "PG334-selected",
+  "formal": false,
+  "executionTime": "2026-09-28T13:12:36.906225+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "3d0371698d506ada1a06f6209f5f66d0db8f67ff",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; PostgreSQL18 test fixture; JaCoCo0.8.15; SpotBugs4.10.4.0",
+  "command": "Batch selected CleanupProcessMainTest,CleanupServiceUnitTest,CleanupPreflightTest,CleanupBackupAdmissionTest,CleanupDatabaseSessionTest test spotbugs:check jacoco:report; Production6 explicit SpotBugs check; rootless Java main smoke",
+  "exitCode": 0,
+  "input": "No-argv/argument/null/known-unknown failures; candidate fixed Unit; borrowed preflight/DB/backup; native rootless smoke",
+  "expected": "31 PT F/E/S0, Production6 static0, no 0/10 from incomplete Cleanup entry, rootless exit30",
+  "actual": "31 PT F/E/S0, Production6 static0, rootless exit30; Java class coverage below 100% and genuine Unit not installed",
+  "counts": {
+    "CleanupProcessMainTest": 4,
+    "CleanupServiceUnitTest": 3,
+    "CleanupPreflightTest": 5,
+    "CleanupBackupAdmissionTest": 10,
+    "CleanupDatabaseSessionTest": 9
+  },
+  "coverage": {
+    "CleanupNativePreflight": {
+      "BRANCH": {
+        "missed": 2,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 37,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 9,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "CleanupProcessMain": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 5,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageSourceSha256": "39d15eb86572d8720954c8e71ece71912aec716f0b0022cc21ed4adfff3f42d8",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "sha256": "5c0053aee636dd484a1af8dba1dc8a9dea427a7b863ffbc47489c9c9386346b3"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java",
+      "sha256": "3208443d277be6f263f1957a7022bb46a35b393fb836bc42e1b72eef93e25e6f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupProcessMainTest.java",
+      "sha256": "4257173795e7ad85f9d946077c543b53e8eae9ca5e8e558f80d9a06cec4a22bf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupServiceUnitTest.java",
+      "sha256": "659c7577f906d662108cd22168700ee50651548e3ecc49d7ac0c0ec8fd674348"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "sha256": "ced5a9ec47100eaff74edf5db1585d3c51991f60fd119b5462517d2b3c11962a"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg334-final-selected.log",
+      "sha256": "3f788e517b42b392a0d09c13d0ce0614be8bbe5a05bfc49c47d7cd67e78f43dc"
+    },
+    {
+      "path": "/tmp/pg334-production-six-static.log",
+      "sha256": "c5a84fa4f8e1d39268a78dc2124a9ed4c269452cea40126ec910a769bf1a93ba"
+    },
+    {
+      "path": "/tmp/pg334-static-coverage.log",
+      "sha256": "3d39cd2b0fd735d7575833037f21c27d48e8ed2b157febf33321bcba05aa9f0f"
+    },
+    {
+      "path": "/tmp/pg334-smoke.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "relatedBug": [
+    "BUG-312"
+  ],
+  "relatedYkt": [
+    "YKT-245"
+  ],
+  "relatedSsc": [
+    "SSC-104"
+  ],
+  "limitations": [
+    "Provisional selected test; no same-source Production all-scope formal certification",
+    "Native success path unexecuted; both new classes fail Java line/method coverage 100%",
+    "Candidate Unit not installed; parent M/A/terminal actors/DELETE/transfer and Artemis remain incomplete",
+    "JUnit XML contains only suite/case attributes; no properties, output, failure or secret material"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/coverage/cleanup-classes.json",
+      "sha256": "f4591f217de4f17bb86c21a274a2b49a2f7ed84547ecbc310e617c74b38ccb44"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "f65e7e3b7acf47900bf202a95b878d7c9141fb36c22023df3f33c4a0b07b9b7f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "135b41635c2ab480d7bdbb17e0d716dc52dd41620b261fbaaed94190f5f0ae28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "4e7962b682f99ca9dc1a1b4c6e8b500581e90d7b931461f3e24de2c7ac15ee9f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/junit/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "d1a8756c448ac181be385440122ce4dd4ebc1b4909e74a7da988433bff72e623"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/junit/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "e5892ea452fe972214c91749d4bd67a6fe02b3b68d5bd8b3e3f528be48dd1e0d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/logs/bug312-red-green.json",
+      "sha256": "34b7c68c9bb262bbd9d8efcb23c7968ea763c3eb0ee7e4c8601394f33b659697"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/logs/rootless-external-smoke.json",
+      "sha256": "c113b37c026339fcc2f5ddde8bd8337aaf853eb6cd5d4706e719234c41e418c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG334-selected/static/production-six.json",
+      "sha256": "3925f71a09895c248e9e5e656edb8c03052fa2331b26d7ee5c0ce7f33db10b0e"
+    }
+  ]
+}
