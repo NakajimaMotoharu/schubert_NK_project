@@ -11,10 +11,11 @@ import org.jspecify.annotations.NullMarked;
  * termination and original/request proof can retire the start-intent marker. Once a start was
  * issued, unresolved delivery is retained under the caller's locks instead of normally returning.
  * The native retention is deliberately process-lifetime. The candidate Morning Type=oneshot Unit
- * has not yet proven the 30-minute budget or hard-timeout quarantine (BUG-322/SSC-107); do not
- * connect this cycle to the external parent until those conditions are resolved. Real archives
- * remain a separate unmet gate. NK-OPS-001; OPS009/BAK001/BKO001; UI251/253; SS341§5-6/343§6.15;
- * SSC092/093/105/106; PG363/PT-OPS-BUCYCLE-001..004.
+ * has not yet proven hard-timeout quarantine (BUG-322/SSC-107); the caller must supply one
+ * parent-entry monotonic budget, never a fresh per-Backup clock. Do not connect this cycle to the
+ * external parent until those conditions are resolved. Real archives remain a separate unmet gate.
+ * NK-OPS-001; OPS009/BAK001/BKO001; UI251/253; SS341§5-6/343§6.15; SSC092/093/105/106;
+ * PG363/PT-OPS-BUCYCLE-001..004.
  */
 @NullMarked
 public final class MorningBackupUnitCycle {
@@ -81,17 +82,21 @@ public final class MorningBackupUnitCycle {
   private final Terminal terminal;
   private final Wait wait;
   private final Retain retain;
+  private final MorningParentBudget budget;
 
   private static final class Unresolved extends RuntimeException {
     private static final long serialVersionUID = 1L;
   }
 
   public static MorningBackupUnitCycle create(
-      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+      RootStartupContext root, RootStartupContext.Snapshot expected, MorningParentBudget budget)
+      throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
+    Objects.requireNonNull(budget, "existing parent budget");
     if (expected.service() != RootStartupContext.Service.MORNING)
       throw new IOException("Backup parent unavailable");
+    budget.requireWithin();
     root.recheck(expected);
     var receipt = BackupUnitReceiptGate.create(root, expected);
     var start = BackupUnitStartClient.create(root, expected);
@@ -138,7 +143,8 @@ public final class MorningBackupUnitCycle {
         },
         () -> terminal.quiescent().isPresent(),
         MorningBackupUnitCycle::pausePreservingInterrupt,
-        MorningBackupUnitCycle::retainIndefinitely);
+        MorningBackupUnitCycle::retainIndefinitely,
+        budget);
   }
 
   MorningBackupUnitCycle(
@@ -148,7 +154,8 @@ public final class MorningBackupUnitCycle {
       Stop stop,
       Terminal terminal,
       Wait wait,
-      Retain retain) {
+      Retain retain,
+      MorningParentBudget budget) {
     this.gate = Objects.requireNonNull(gate, "Morning root gate");
     this.receipt = Objects.requireNonNull(receipt, "fresh Backup receipt");
     this.start = Objects.requireNonNull(start, "fixed Backup start");
@@ -156,6 +163,7 @@ public final class MorningBackupUnitCycle {
     this.terminal = Objects.requireNonNull(terminal, "whole Backup terminal");
     this.wait = Objects.requireNonNull(wait, "bounded observation wait");
     this.retain = Objects.requireNonNull(retain, "unresolved parent retention");
+    this.budget = Objects.requireNonNull(budget, "existing parent budget");
   }
 
   /**
@@ -163,44 +171,62 @@ public final class MorningBackupUnitCycle {
    */
   public void execute(ParentProof originalAndRequest) throws IOException {
     Objects.requireNonNull(originalAndRequest, "same original and request proof");
+    budget.requireWithin();
     gate.recheck();
     Object baseline = Objects.requireNonNull(receipt.capture(), "pre-start Backup baseline");
+    budget.requireWithin();
     gate.recheck();
+    budget.requireWithin();
     try {
       // From this call onward the parent cannot prove that delivery did not occur. Even a null
       // attempt or an unknown unchecked failure must not unwind M/A and discard the marker.
       StartAttempt attempt =
           Objects.requireNonNull(start.execute(), "retained Backup start attempt");
+      budget.requireWithin();
       BackupUnitStartClient.Status started =
           Objects.requireNonNull(attempt.status(), "Backup start status");
       while (started == BackupUnitStartClient.Status.UNKNOWN) {
+        budget.requireWithin();
         wait.pause();
         started = Objects.requireNonNull(attempt.awaitClient(), "reaped Backup start status");
       }
       if (started != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) {
-        while (!terminal.quiescent()) wait.pause();
+        while (!terminal.quiescent()) {
+          budget.requireWithin();
+          wait.pause();
+        }
         throw new Unresolved();
       }
+      budget.requireWithin();
       gate.recheck();
-      while (!receipt.freshZero(baseline)) wait.pause();
+      while (!receipt.freshZero(baseline)) {
+        budget.requireWithin();
+        wait.pause();
+      }
+      budget.requireWithin();
       gate.recheck();
       StopAttempt stopping = Objects.requireNonNull(stop.execute(), "retained Backup stop attempt");
       MaintenanceUnitStopClient.Status stopped =
           Objects.requireNonNull(stopping.status(), "Backup stop status");
       while (stopped == MaintenanceUnitStopClient.Status.UNKNOWN) {
+        budget.requireWithin();
         wait.pause();
         stopped = Objects.requireNonNull(stopping.awaitClient(), "reaped Backup stop status");
       }
       if (stopped != MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO) throw new Unresolved();
+      budget.requireWithin();
       gate.recheck();
       if (!terminal.quiescent()) throw new Unresolved();
       attempt.retireAfter(
           () -> {
+            budget.requireWithin();
             gate.recheck();
             originalAndRequest.verify();
             if (!terminal.quiescent()) throw new IOException("Backup terminal unavailable");
+            budget.requireWithin();
             gate.recheck();
           });
+      budget.requireWithin();
       gate.recheck();
     } catch (IOException | RuntimeException | Error unresolved) {
       // No normal M/A unwind after possible start delivery, including null, unchecked failures,

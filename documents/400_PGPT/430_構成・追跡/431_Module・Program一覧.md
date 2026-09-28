@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG366追加追跡（2026-09-29）：NK-OPS-001 `MorningParentBudget.create/requireWithin`及び`MorningBackupUnitCycle.execute`の親30分期限、RD OPS-009/BAK-001、UI251、SS341/342/343・SSC107/BUG322、PT-OPS-MBUDGET001～002/BUCYCLE006、018/244。実親entryへの同budget結線/VM hard-timeoutは未達。
+
 PG365追加追跡（2026-09-29）：NK-OPS-001 `MorningBackupUnitCycle.execute`のBackup start後不明例外/null保持、PT-OPS-BUCYCLE005、RD OPS-009/BAK-001、UI251、SS341/343/SSC105～107、BUG324/YKT256、018/242・243/PG365 manifest。固定source全6限定回帰済み、native親/全coverage未認定。
 
 PG363追加追跡（2026-09-29）：NK-OPS-001 `MorningBackupUnitCycle`（Backup parent start/receipt/stop/retire候補）、`schubert-nk-morning-controller.service.template`/`schubert-nk-morning.target.template`、並行fixture `BackupPublicationFixture`。RD OPS-009/BAK-001/BKO-001、UI251/253、SS341/342/343・SSC107、PT-OPS-BUCYCLE001～004/MUNIT001～004/BFENCE並行、018/239・240/PG363 manifest。正式全100%・実親受入未完了。

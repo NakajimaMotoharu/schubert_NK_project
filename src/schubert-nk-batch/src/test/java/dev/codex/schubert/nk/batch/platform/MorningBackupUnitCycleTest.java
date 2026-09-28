@@ -8,7 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
- * PG363/365; PT-OPS-BUCYCLE-001..005. Synthetic ports never claim real worker/archive admission.
+ * PG363/365/366; PT-OPS-BUCYCLE-001..006. Synthetic ports never claim real worker/archive
+ * admission.
  */
 final class MorningBackupUnitCycleTest {
   private static final class Retained extends RuntimeException {
@@ -85,7 +86,8 @@ final class MorningBackupUnitCycleTest {
               return true;
             },
             () -> events.add("wait"),
-            () -> fail("known complete cycle must not be retained"));
+            () -> fail("known complete cycle must not be retained"),
+            budget());
     cycle.execute(() -> events.add("original-request"));
     assertEquals(
         List.of(
@@ -196,7 +198,8 @@ final class MorningBackupUnitCycleTest {
             () -> {
               events.add("retain");
               throw new Retained();
-            });
+            },
+            budget());
     assertThrows(Retained.class, () -> brokenReceipt.execute(() -> fail("no proof")));
     assertEquals(List.of("start", "retain"), events);
     assertEquals(0, start.retire);
@@ -222,7 +225,8 @@ final class MorningBackupUnitCycleTest {
             () -> stop,
             () -> true,
             () -> {},
-            () -> fail("no retention before start"));
+            () -> fail("no retention before start"),
+            budget());
     assertThrows(IOException.class, () -> beforeStart.execute(() -> {}));
     assertTrue(events.isEmpty());
   }
@@ -262,7 +266,26 @@ final class MorningBackupUnitCycleTest {
         NullPointerException.class,
         () ->
             new MorningBackupUnitCycle(
-                null, receipt(events), () -> start, () -> stop, () -> true, () -> {}, () -> {}));
+                null,
+                receipt(events),
+                () -> start,
+                () -> stop,
+                () -> true,
+                () -> {},
+                () -> {},
+                budget()));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new MorningBackupUnitCycle(
+                () -> {},
+                receipt(events),
+                () -> start,
+                () -> stop,
+                () -> true,
+                () -> {},
+                () -> {},
+                null));
   }
 
   @Test
@@ -294,7 +317,8 @@ final class MorningBackupUnitCycleTest {
               () -> {
                 events.add("retain");
                 throw new Retained();
-              });
+              },
+              budget());
       assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
       assertEquals(List.of("baseline", "start", "retain"), events);
     }
@@ -331,7 +355,8 @@ final class MorningBackupUnitCycleTest {
               () -> {
                 events.add("retain");
                 throw new Retained();
-              });
+              },
+              budget());
       assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
       assertEquals(List.of("baseline", "start", "retain"), events);
     }
@@ -363,9 +388,136 @@ final class MorningBackupUnitCycleTest {
             () -> {
               awaitEvents.add("retain");
               throw new Retained();
-            });
+            },
+            budget());
     assertThrows(Retained.class, () -> nullAwait.execute(() -> fail("no proof")));
     assertEquals(List.of("baseline", "wait", "retain"), awaitEvents);
+  }
+
+  @Test
+  void bucycle006OneParentBudgetRejectsBeforeStartAndRetainsAfterStart() {
+    final long deadline = 1_800_000_000_000L; // SS341: 30 * 60 * 10^9 ns.
+    long[] now = {0};
+    var parentBudget = new MorningParentBudget(() -> now[0]);
+    var events = new ArrayList<String>();
+    var before =
+        new MorningBackupUnitCycle(
+            () -> {},
+            receipt(events),
+            () -> {
+              events.add("start");
+              return new StartAttempt();
+            },
+            StopAttempt::new,
+            () -> true,
+            () -> {},
+            () -> fail("no start, no retention"),
+            parentBudget);
+    now[0] = deadline;
+    assertThrows(IOException.class, () -> before.execute(() -> fail("no proof")));
+    assertTrue(events.isEmpty());
+
+    now[0] = 0;
+    var start = new StartAttempt();
+    var stop = new StopAttempt();
+    events.clear();
+    var afterStart =
+        new MorningBackupUnitCycle(
+            () -> {},
+            receipt(events),
+            () -> {
+              events.add("start");
+              now[0] = deadline;
+              return start;
+            },
+            () -> {
+              fail("expired start cannot stop");
+              return stop;
+            },
+            () -> true,
+            () -> {},
+            () -> {
+              events.add("retain");
+              throw new Retained();
+            },
+            parentBudget);
+    assertThrows(Retained.class, () -> afterStart.execute(() -> fail("no proof")));
+    assertEquals(List.of("baseline", "start", "retain"), events);
+    assertEquals(0, start.retire);
+
+    now[0] = 0;
+    events.clear();
+    var duringReceipt =
+        new MorningBackupUnitCycle(
+            () -> {},
+            new MorningBackupUnitCycle.Receipt() {
+              public Object capture() {
+                events.add("baseline");
+                return "baseline";
+              }
+
+              public boolean freshZero(Object baseline) {
+                assertEquals("baseline", baseline);
+                now[0] = deadline;
+                return false;
+              }
+            },
+            () -> {
+              events.add("start");
+              return start;
+            },
+            () -> {
+              fail("expired receipt cannot stop");
+              return stop;
+            },
+            () -> true,
+            () -> {},
+            () -> {
+              events.add("retain");
+              throw new Retained();
+            },
+            parentBudget);
+    assertThrows(Retained.class, () -> duringReceipt.execute(() -> fail("no proof")));
+    assertEquals(List.of("baseline", "start", "retain"), events);
+    assertEquals(0, start.retire);
+
+    now[0] = 0;
+    stop.status = MaintenanceUnitStopClient.Status.UNKNOWN;
+    var duringStop =
+        new MorningBackupUnitCycle(
+            () -> {},
+            receipt(new ArrayList<>()),
+            () -> start,
+            () -> {
+              now[0] = deadline;
+              return stop;
+            },
+            () -> true,
+            () -> fail("expired stop must not await client"),
+            () -> {
+              throw new Retained();
+            },
+            parentBudget);
+    assertThrows(Retained.class, () -> duringStop.execute(() -> fail("no proof")));
+    assertEquals(0, start.retire);
+
+    now[0] = 0;
+    stop.status = MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO;
+    start.retirement = () -> now[0] = deadline;
+    var beforeRetire =
+        new MorningBackupUnitCycle(
+            () -> {},
+            receipt(new ArrayList<>()),
+            () -> start,
+            () -> stop,
+            () -> true,
+            () -> {},
+            () -> {
+              throw new Retained();
+            },
+            parentBudget);
+    assertThrows(Retained.class, () -> beforeRetire.execute(() -> fail("no proof")));
+    assertEquals(0, start.retire);
   }
 
   private static MorningBackupUnitCycle.Receipt receipt(List<String> events) {
@@ -405,6 +557,11 @@ final class MorningBackupUnitCycleTest {
           return true;
         },
         wait,
-        retain);
+        retain,
+        budget());
+  }
+
+  private static MorningParentBudget budget() {
+    return new MorningParentBudget(() -> 0L);
   }
 }
