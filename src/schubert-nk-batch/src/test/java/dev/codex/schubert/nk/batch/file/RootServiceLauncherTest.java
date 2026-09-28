@@ -1,0 +1,80 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
+
+/** NK-OPS-001/OPS009/UI251/SS342/343/PG370; PT-OPS-RMAIN001..006. */
+final class RootServiceLauncherTest {
+  @Test
+  void rmain001WebOnlyGateReturnsNonSuccess() {
+    var seen = new AtomicReference<ServiceConfigFiles.Service>();
+    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, seen::set));
+    assertEquals(ServiceConfigFiles.Service.WEB, seen.get());
+  }
+
+  @Test
+  void rmain002ApiOnlyGateReturnsNonSuccess() {
+    var seen = new AtomicReference<ServiceConfigFiles.Service>();
+    assertEquals(30, RootServiceLauncher.run(new String[] {"API"}, seen::set));
+    assertEquals(ServiceConfigFiles.Service.API, seen.get());
+  }
+
+  @Test
+  void rmain003ArbitraryArgumentsNeverEnterGate() {
+    var calls = new AtomicInteger();
+    RootServiceLauncher.Admission gate = ignored -> calls.incrementAndGet();
+    for (String[] input :
+        new String[][] {{}, {"WEB", "API"}, {"web"}, {"--service=WEB"}, {""}, {"OTHER"}})
+      assertEquals(70, RootServiceLauncher.run(input, gate));
+    assertEquals(0, calls.get());
+  }
+
+  @Test
+  void rmain004KnownFailureIsNonSuccessAndUnknownPropagates() {
+    assertEquals(
+        30,
+        RootServiceLauncher.run(
+            new String[] {"WEB"},
+            ignored -> {
+              throw new IOException("PRIVATE");
+            }));
+    var unknown = new IllegalStateException("programming failure");
+    assertSame(
+        unknown,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                RootServiceLauncher.run(
+                    new String[] {"API"},
+                    ignored -> {
+                      throw unknown;
+                    })));
+  }
+
+  @Test
+  void rmain005NullContractAndRepeatedCallsHaveNoState() {
+    assertThrows(NullPointerException.class, () -> RootServiceLauncher.run(null, ignored -> {}));
+    assertThrows(
+        NullPointerException.class, () -> RootServiceLauncher.run(new String[] {"WEB"}, null));
+    var calls = new AtomicInteger();
+    RootServiceLauncher.Admission gate = ignored -> calls.incrementAndGet();
+    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, gate));
+    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, gate));
+    assertEquals(2, calls.get());
+  }
+
+  @Test
+  void rmain006OnlyPublicMainNoPublicConstructor() throws Exception {
+    var constructor = RootServiceLauncher.class.getDeclaredConstructor();
+    assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+    assertTrue(
+        Modifier.isPublic(
+            RootServiceLauncher.class.getMethod("main", String[].class).getModifiers()));
+  }
+}

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG370追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceLauncher.main/run/preflight`は固定`WEB`/`API`だけを読取り、既存`RootStartupContext`→`FixedServiceIdentity`→`RootReleaseAdmission`→固定argvのroot read-only入口を作る。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089、PT-OPS-RMAIN001～006、018/250。現行は常に非成功30/argv不正70で、permit/A/proof/余剰FD/同PID exec・Unit/業務readyは別未受入。Batch module実装、Production Unit不変更。
+
 PG369追加追跡（2026-09-29）：NK-OPS-001 Bootstrap `FixedServiceExecArguments.arguments`は固定Web/API NSS値からSS342§4.2のsetpriv→Java argvを不変生成し、既存Storage `LinuxProcessExec`/`LinuxExecDescriptors`へ渡す前段の一部。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089、PT-OPS-REXEC001～004、018/248。root admission/held ELF/環境・余剰FD/実Unitは別未受入。
 
 PG368追加追跡（2026-09-29）：NK-OPS-001 `MorningProcessMain.main/run/Admission.verify`は`MorningParentBudget`を外部Java entryごとに一度作り同instanceを借用callbackへ渡す。RD OPS-009/BAK-001、UI251、SS341§5–6/342§4/343、SSC107/BUG322/YKT254、PT-OPS-MMAIN001～007/MBUDGET001～002/BUCYCLE006、018/246。read-only exit30、真正親/Unit hard-timeoutは未受入。
