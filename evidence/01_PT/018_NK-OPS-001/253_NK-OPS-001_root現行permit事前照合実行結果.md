@@ -1,0 +1,8 @@
+# NK-OPS-001 root現行permit事前照合実行結果（PG371・暫定）
+
+- 対象: `PT-OPS-RPERMIT001～006`、仕様[252](252_NK-OPS-001_root現行permit事前照合単体テスト仕様書.md)。Production source `31d242f1a07e0ffc14cb73d4cc0e0bd8ba086d43`/`dev-foundation`、2026-09-29 JST。Linux 7.0.0-34-generic x86_64/JDK25.0.4/Maven3.9.12/SpotBugs4.10.4.0/NullAway0.14.1/JaCoCo0.8.15。
+- 新root permit比較6PT＋既存root入口6PT＋`StartupPermitFilesTest`8PTの選択20PTはfailure/error/skipped=0、SpotBugs0。独立UUID/hex fixtureで固定WEB/API・同boot/releaseの一致、別boot/別release・他root actor/null・不正hash拒否を確認。新helperのbranch missed0、outer missed I/B/L/M/C=`47/0/13/2/0`。`verifyNative`/mainの実root pathは未到達なので全4指標100%ではない。
+- Web/API root入口のProduction preflightは承認release確認後、既存`StartupPermitFiles.readIssued`で固定tmpfs現在原本/permitをread-only取得し、bootと現物release hashを照合してから固定argvへ進む。照合後も常にexit30で、A所有・全prestart・schema・同PID exec権限を得たとは扱わない。非root host外部JVMはWEB/API各exit30、OTHER exit70、stdout/stderr空。VMでのroot Unit/実permit受理は未実行。
+- Security/startup横断triggerのProduction6固定source `clean test spotbugs:check jacoco:report`はexit0、368suite/2,503PT、failure/error/skipped=0、SpotBugs6module0。Coverage missed I/B/L/M/C: Protocol/Storage=`0/0/0/0/0`、Bootstrap=`60/37/11/4/0`、API=`95/3/32/4/0`、Web=`80/1/25/4/0`、Batch=`1508/31/340/124/15`。全Production coverage100%・正式53scope未達。
+- 未達: 真正root Unitからのissued current実読取、A保持中のfresh再検証、全root/Ops/schema/実prestart、A/proof二FD/余剰FD・held ELF・同PID exec、業務ready、実NK CHR。R1/D04/D05下位のみ、D01～07 closed/reopened/new0、R2/R3/実CHR0。正式run/source `PT-WEB-20260925-24`/`858713c0bf310ae8bf62078b0a1cedbce4e968db`・中心48.3%据置。
+- 実行範囲・独立期待・実測・JUnit path順hash/対象source/test/spec/JaCoCo hashは同階層`evidence/provisional/PG371-root-current-permit/manifest.json`。Raw XML、permit実体、credential/secretはGit格納外。

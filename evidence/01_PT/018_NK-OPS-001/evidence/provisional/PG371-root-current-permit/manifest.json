@@ -1,0 +1,39 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "read-only issued-current boot/release correlation verified; A-held issuer, real Unit and native exec unaccepted",
+  "executedAtJst": "2026-09-29T02:59:00+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "31d242f1a07e0ffc14cb73d4cc0e0bd8ba086d43",
+  "testIds": ["PT-OPS-RPERMIT001", "PT-OPS-RPERMIT002", "PT-OPS-RPERMIT003", "PT-OPS-RPERMIT004", "PT-OPS-RPERMIT005", "PT-OPS-RPERMIT006"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "synthetic current Permit value with independent UUID/hex literals, no real issued Permit, secret, production Unit or host mutation",
+  "expected": "WEB/API same boot and release digest correlate; stale boot/release and other root actor reject; external nonroot JVM stays WEB30/API30/OTHER70",
+  "actual": "selected new6+root6+permitStore8=20 PT F/E/S0; Production6 2503 PT/368 suites F/E/S0 and SpotBugs6module0; external host WEB30/API30/OTHER70, empty output",
+  "externalHostSmoke": {"classpath": "same Production target/classes, not installed release or Unit", "webExitCode": 30, "apiExitCode": 30, "invalidExitCode": 70, "stdoutStderr": "empty"},
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0], "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0], "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0], "batch": [1508, 31, 340, 124, 15],
+    "rootCurrentPermitPreflight": [47, 0, 13, 2, 0]
+  },
+  "related": ["SS343 section 6.15", "SSC-086..089", "471 R1/D04/D05"],
+  "hashesSha256": {
+    "protocolJUnitPathOrderedSha256List": "33432d1791512f919cfc237f145dc2c3acfa585ed4db92037f8f245249bc03eb",
+    "storageJUnitPathOrderedSha256List": "1e9641958655fa2b72fd5e082712d876d7ec47b101ab26547ca7d94796c2f8a6",
+    "bootstrapJUnitPathOrderedSha256List": "ae0f77578b4fb8cecba77a6378ee17e4d9bdd5aa014b56e8d9e39023bdf08c05",
+    "apiJUnitPathOrderedSha256List": "d1cc1abe5cbd7881c9c4e5dde4d9bd43e2b3b67e664b826be4352cd59c8a0307",
+    "webJUnitPathOrderedSha256List": "4f7922ac76391aa94bdb247cebf428bbbee67615fe8766f6e38bfadb8c3351ec",
+    "batchJUnitPathOrderedSha256List": "66c94b26f0cf7b93cc4dce8acdca79508969d485adbf543925c9b13d9c8548b7",
+    "rootCurrentPermitPreflightJUnitXml": "e2e97ff1effa853c4b7a84162389944a0ce256b7913bb8d0c989453b17c1b4cc",
+    "rootServiceLauncherJUnitXml": "006e4aea094fd48974bb6ea2fda6fd7eea94efa44d6ee60e474a2d4e571e8260",
+    "startupPermitFilesJUnitXml": "d133ca19783f2a984160139944e7c31595af9cdedb9be6d57dcd4df2c95e3605",
+    "batchJacocoXml": "348e2fbc2e13b113636b7bd46e124e3dee5b0c05c3a12cb63e8cab069334fde3",
+    "sourceRootCurrentPermitPreflight": "3a69d0951a2fa75d8fbb2e10319079194a2004b42363a7bfaed429766b3a86c6",
+    "sourceRootServiceLauncher": "3a8253439754ceaeeb2e890342d90acf4e9d4bdf5b7b1d0be1743ca9c2c459fa",
+    "testRootCurrentPermitPreflight": "be32858aaf5fb21436cd663c62ebaf6267199e61c5cd255214e614924476ff8b",
+    "ptSpecification252": "1e2cc57c558f6f79c464702932b3c457ed95ed72cda9bc3b6464ff269db60625"
+  },
+  "rawXmlOrSecretsInGit": false
+}
