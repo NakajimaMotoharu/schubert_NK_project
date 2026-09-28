@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/342/343/PG339; PT-OPS-MUNIT001-003. */
+/** NK-OPS-001/OPS009/UI251/SS341/342/343/PG339/BUG316; PT-OPS-MUNIT001-003. */
 final class MorningServiceUnitTest {
   private static String unit() throws IOException {
     return Files.readString(
@@ -39,7 +39,10 @@ final class MorningServiceUnitTest {
     String content = unit();
     assertFalse(content.contains("EnvironmentFile="));
     assertFalse(content.contains("PassEnvironment="));
-    assertFalse(content.contains("LoadCredential=")); // read-only candidate consumes no secret.
+    // SS343 §6.15 requires precisely this systemd-private batch credential even while the
+    // remaining parent path is fail-closed. No ordinary service catalog or env fallback.
+    exact(content, "LoadCredential", "db-batch:/etc/schubert-nk/credentials/db-batch");
+    assertFalse(content.contains("SetCredentialEncrypted="));
     assertFalse(content.contains("SetCredential="));
     assertFalse(content.contains("ExecStartPre="));
     assertFalse(content.contains("ReadWritePaths="));

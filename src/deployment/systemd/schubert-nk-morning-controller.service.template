@@ -1,4 +1,4 @@
-# NK-OPS-001; OPS009/UI251; SS341/342/343; SSC100-102; PG339.
+# NK-OPS-001; OPS009/UI251; SS341/342/343; SSC094/100-102; PG339/BUG316.
 # Read-only fail-closed candidate. Do not install/enable as the operational Morning controller
 # until continuous M/A, fixed-eight stop, backup/Cleanup, journal, permit and exit contracts pass.
 [Unit]
@@ -13,6 +13,7 @@ User=root
 Group=root
 WorkingDirectory=/opt/schubert-nk/current/operations
 UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch
 ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.MorningProcessMain
 Restart=no
 TimeoutStartSec=30min

@@ -1,0 +1,31 @@
+{
+  "id": "PG342-morning-credential",
+  "formal": false,
+  "executionTime": "2026-09-28T06:27:09Z",
+  "os": "Linux 7.0.0-34-generic host; isolated Ubuntu VM",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "branch": "dev-foundation",
+  "baseCommit": "532904b08",
+  "command": "Batch -Dtest=MorningServiceUnitTest -Dnk.pt.repository=<repository> test spotbugs:check; VM systemd-analyze verify /tmp/pgpt-bug316-morning.service; two test-only systemd-run LoadCredential metadata probes",
+  "exitCode": 0,
+  "input": "Production Morning Unit candidate with exactly one fixed db-batch LoadCredential; no secret bytes",
+  "expected": "MUNIT002 one fixed credential and no fallback; 3 PT F/E/S0/static0; VM syntax exit0; private copy file 0400:0:0:1 and dir 0500:0:0:>=2",
+  "actual": "RED 3 PT F1/exit1 then GREEN 3 PT F/E/S0/static0/exit0; related Batch10/API12 PT F/E/S0 and static0; VM syntax exit0; private file 400:0:0:1 and dir 500:0:0:2; actual Morning Unit unchanged",
+  "testIds": ["PT-OPS-MUNIT002", "PT-OPS-MUNIT004", "PT-OPS-MUNIT005"],
+  "coverage": "N/A: systemd template only; no Java Production class changed; whole-project coverage gate still unmet",
+  "bugs": ["BUG-316"],
+  "ykt": ["YKT-249"],
+  "ssc": ["SSC-094"],
+  "sourceHashes": [
+    {"path": "src/deployment/systemd/schubert-nk-morning-controller.service.template", "sha256": "d19b1f06fca7caf54b8061ca6e66ef4324c0db6ad5793a20870a3820357e5ec7"},
+    {"path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceUnitTest.java", "sha256": "39510210660293f093e638337a8852553a2ae33c4a10c0e734bd75a49e858ab4"}
+  ],
+  "externalLogs": [
+    {"path": "/tmp/pgpt-bug316-red.log", "sha256": "d364b0cc39139b6819f58a57e05cd12e8c2f79766d33cb1623ac9aba5048bd88", "accepted": false},
+    {"path": "/tmp/pgpt-bug316-green.log", "sha256": "97d3067cf7d672c6f2b855dede79224bede3e8e9be46b6488ee68f96b45c6434", "accepted": true},
+    {"path": "/tmp/pgpt-bug316-unit-matrix-batch.log", "sha256": "07ae63a98c75927e5129b3488517059a8c1d800fc5dba2e7950f33e44441badc", "accepted": true},
+    {"path": "/tmp/pgpt-bug316-unit-matrix-api.log", "sha256": "2c905d4f6a9e5c6bb92fbdb32d187ef20bd42ee5a9556c40a74a61d20e460daa", "accepted": true}
+  ],
+  "limitations": ["VM check is a syntax and test-only transient private-copy observation, not installed Morning Unit", "Actual DB session/original, fixed eight Units, INVALID, backup/Cleanup, permit and R2/R3 remain unaccepted", "No raw credential, invocation ID or process/session token retained"]
+}
