@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG371追加追跡（2026-09-29）：NK-OPS-001 Batch `RootCurrentPermitPreflight.verifyNative/verify`と`RootServiceLauncher.preflight`は固定root-owned`/run/schubert-nk/startup`の既存`StartupPermitFiles.readIssued`をread-onlyで呼び、現在bootと実release SHAの相関を確認する。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343§6.15・SSC086～089、PT-OPS-RPERMIT001～006、018/252。A下での同原本再読・全prestart/root・実Unit/execは別未受入。
+
 PG370追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceLauncher.main/run/preflight`は固定`WEB`/`API`だけを読取り、既存`RootStartupContext`→`FixedServiceIdentity`→`RootReleaseAdmission`→固定argvのroot read-only入口を作る。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089、PT-OPS-RMAIN001～006、018/250。現行は常に非成功30/argv不正70で、permit/A/proof/余剰FD/同PID exec・Unit/業務readyは別未受入。Batch module実装、Production Unit不変更。
 
 PG369追加追跡（2026-09-29）：NK-OPS-001 Bootstrap `FixedServiceExecArguments.arguments`は固定Web/API NSS値からSS342§4.2のsetpriv→Java argvを不変生成し、既存Storage `LinuxProcessExec`/`LinuxExecDescriptors`へ渡す前段の一部。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089、PT-OPS-REXEC001～004、018/248。root admission/held ELF/環境・余剰FD/実Unitは別未受入。

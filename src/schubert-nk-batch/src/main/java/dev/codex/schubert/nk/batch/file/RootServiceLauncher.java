@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
+import dev.codex.schubert.nk.bootstrap.StartupReleaseManifest;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
 import java.util.Objects;
@@ -60,8 +61,11 @@ public final class RootServiceLauncher {
     root.recheck(snapshot);
     var identity = new FixedServiceIdentity().resolve(service);
     RootReleaseAdmission.create(root, snapshot);
+    var releaseHash =
+        StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).sha256();
+    RootCurrentPermitPreflight.verifyNative(root, snapshot, releaseHash);
     new FixedServiceExecArguments(service, identity).arguments();
     root.recheck(snapshot);
-    // No permission to exec: current permit, all roots/Ops/schema, held ELF and FD proof absent.
+    // No permission to exec: full roots/Ops/schema, A-held recheck, held ELF and FD proof absent.
   }
 }
