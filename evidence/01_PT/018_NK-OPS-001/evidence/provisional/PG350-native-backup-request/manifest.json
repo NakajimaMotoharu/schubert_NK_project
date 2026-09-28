@@ -1,0 +1,124 @@
+{
+  "id": "PG350-native-backup-request",
+  "formal": false,
+  "executionTime": "2026-09-28T18:41:37.377216+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "2453e9dea0f71abac403d48ed83a01fb6c53dd8d",
+  "environment": "isolated Linux VM; JDK25.0.4; root actor probe, not authenticated Morning Unit",
+  "command": "sudo java -javaagent:JaCoCo0.8.15 --enable-native-access=ALL-UNNAMED -cp fixed PG350 probe/batch JAR/PG316 lib NativeMorningBackupRequestProbe present",
+  "exitCode": 0,
+  "input": "fixed nonsecret BackupWorkerRequest vector; new-only part; root700 fixed tmpfs",
+  "expected": "publication/readback/retire; no residual request; no existing Unit or pending run mutation",
+  "actual": "PUBLICATION_READBACK_RETIRED; fixed directory empty; Morning and Backup inactive/PID0",
+  "testIds": [
+    "PT-OPS-MBNATIVE002",
+    "PT-OPS-MBNATIVE003"
+  ],
+  "selectedHostTests": {
+    "tests": 14,
+    "suites": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "mergedChangedClasses": {
+      "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication": {
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 6,
+          "covered": 28
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication$1": {
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "nativeExecSha256": "2c66b12c45b56c054f6046a7197e082eeee31d77075ddb15141a41316b668d97",
+    "mergedExecSha256": "412ff87ae062339dc98da44197970b58d5c30280cbdecb9d27c275064ecee1a6",
+    "fourCounter100": false
+  },
+  "externalLog": {
+    "path": "/tmp/pg350-native-final.log",
+    "sha256": "7a4e25e027d5e90ebced02afd7780ca9f0379ffd18fabd462d43eeb04b637d79"
+  },
+  "externalState": {
+    "path": "/tmp/pg350-native-state.txt",
+    "sha256": "bfa847561e659b7935f2afa47ba819a51a450a2e0234017c23173868b6e6daeb"
+  },
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.java",
+      "sha256": "ac678da285f2708d0bab00b5368f23f2bdf0034e5d5bc574535b400ea70d3259"
+    },
+    {
+      "path": "tools/quality/vm/NativeMorningBackupRequestProbe.java",
+      "sha256": "822f2d05d0be15aa54bd544fc31a3eff45d89368a0e572c75a80e46ee8b97614"
+    }
+  ],
+  "jarSha256": "ec2018fcfdf89471ccc1cd842c9f6b5f00e755d657921b634281d6589d3f0613",
+  "probeClassSha256": "729594f1096270611e1ed4d71f622ffa08533665ece059a40f687817284f4daa",
+  "bugs": [
+    "BUG-315"
+  ],
+  "ykt": [
+    "YKT-248",
+    "YKT-250"
+  ],
+  "ssc": [
+    "SSC-055",
+    "SSC-092",
+    "SSC-094",
+    "SSC-104",
+    "SSC-105"
+  ],
+  "limitations": [
+    "Native actor is a root probe, not Morning Unit/cgroup authentication or continuous M/A/DB ownership",
+    "No backup worker start/terminal proof, archive, DB success, cleanup or startup permit",
+    "JaCoCo host-selected/native merge is provisional and still below four-counter 100%; full six-module run was prior source"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG350-native-backup-request/coverage/merged-host-selected-and-vm-native.json",
+      "sha256": "1f592bde4bf336e4cc0408c01e05f85c4ac11f0142dd57872d572d1062e9fee4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG350-native-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "5e217da3d28eed0bcaa2724b6f046ad97fccb1fe1ea599875dbd66a345ea0f60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG350-native-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest.xml",
+      "sha256": "137e1611918a5342b4cc5c5e786649ec448cd24d8aaf3f1218162f0204eb9dc3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG350-native-backup-request/output/native-result.json",
+      "sha256": "33d47a096b2d93e20a0ade0d2b609a03ad1b1480b046ecb6dcc9716f75370638"
+    }
+  ]
+}

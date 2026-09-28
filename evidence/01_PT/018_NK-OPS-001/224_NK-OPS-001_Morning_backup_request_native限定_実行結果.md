@@ -1,0 +1,9 @@
+# 224 NK-OPS-001 Morning backup request native限定・実行結果
+
+2026-09-28 JST、branch `dev-foundation`、source/probe/spec commit `2453e9dea`、対象Test IDと独立期待は223。隔離VM Linux 7.0.0-31-generic x86_64、JDK25.0.4、JaCoCo0.8.15。Host選択MBPUB6＋既存BackupWorkerRequestFiles8＝14PT F/E/S0・Batch SpotBugs0。Production変更は同package内`openNative`の可視性のみで、固定path・公開byte・分岐は不変更。前source `bca771325`のProduction6 clean2,414PT/354suite F/E/S0/静的6module0を現sourceの正式全回帰と読み替えない。
+
+VMで固定directory不存在時、同byte JARの探索probeは`MISSING_REFUSED`で終了し、公開0。後にroot:root0700/ACL追加なしの固定`/run/schubert-nk/backup-request`を新規作成した。tmpfs上で同byte JAR SHA-256 `ec2018fcfdf89471ccc1cd842c9f6b5f00e755d657921b634281d6589d3f0613`、probe class SHA-256 `729594f1096270611e1ed4d71f622ffa08533665ece059a40f687817284f4daa`をHost/VMで照合し、commit後のnative限定runを実施。実行commandはmanifest、Git外stdout log`/tmp/pg350-native-final.log` SHA-256 `7a4e25e027d5e90ebced02afd7780ca9f0379ffd18fabd462d43eeb04b637d79`。exit0・`PUBLICATION_READBACK_RETIRED`、requestは読戻し後retireし、directoryは空・root0700のまま。既存Morning/Backup Unitは両方inactive/MainPID0、旧Unit定義/保留run/current/credentialは不変更。新規固定directoryだけVM再起動で消えるtmpfs状態として残す。
+
+Host選択＋native実行dataを同class byteで暫定merge（exec SHA-256 `412ff87ae062339dc98da44197970b58d5c30280cbdecb9d27c275064ecee1a6`）。`MorningBackupRequestPublication` outerのmissed（branch/line/method/class）=`2/6/3/2`、匿名Ownerは`0/0/0/0`。4指標100%未達で正式coverageへ加算しない。sanitized JUnit2＋coverage1＋output1＝4file、manifest SHA-256 `e7aab3a88f80b8b4bd6c268126478bc3a08465ce32129520d894c1f702e5778b`、全hash一致・秘密pattern0。raw session/credential/InvocationID・DB値は保存しない。
+
+このprobeはroot file I/Oのみで真正Morning Unit actor/M/A/原本/DB連続所有、backup Unit起動/全終端、実archive/DB成功、Cleanup/permit、Web/API外部起動・実NK CHRは検証しない。R1下位改善のみ、R2/R3・D01～07 closed0、正式source`858713c0bf310ae8bf62078b0a1cedbce4e968db`/run`PT-WEB-20260925-24`/1964PT/53scope・中心48.3%据置。関連BUG-315/YKT-248、YKT-250、SSC-055/092/094/104/105は継続。PG/PT・IT/ST完了を宣言しない。
