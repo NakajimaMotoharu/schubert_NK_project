@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+SSC108依存追跡（2026-09-29）：NK-OPS-001 Batch `StartupPermitRecords.Permit`/`StartupPermitFiles.issue`/`MorningCurrentInvalidation`/`MorningBackupStage`から`RootCurrentPermitPreflight`/`RootServiceLauncher`へ至る許可発行経路。RD OPS-009/SYS-002/004、UI251/253、SS341/342/343、SSC108、471 R1/D03～05。record文字形式PTは既存だが元root/prestart canonical evidence・正規issuer PTは未作成、Production `issue` caller0件。任意64hexを受入証明へ算入しない。
+
 PG375追加追跡（2026-09-29）：NK-OPS-001 `RootServiceLauncher.main/run`を実root外部JVMでWEB/API/OTHER各1回negative smoke、018/260・261/PG375 manifest、PT-OPS-RMAIN007～009。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089。exit30/30/70・出力空は限定合格で、Web/API Unit/permit/同PID exec/業務readyは未受入。
 
 PG374追加追跡（2026-09-29）：NK-OPS-001 Production Batch `BackupStartIntentFiles.begin/requireClear`と既存`MorningControlScope.withClearIntent`、PGPT専用`NativeBackupTimeoutResidualProbe`を018/258・259/MTIME005～008で対応付ける。RD OPS-009/BAK-001、UI251、SS341/342/343/SSC107、BUG322/YKT254。専用VM実marker公開・timeout・別process拒否は005～007限定PASS、008未実行。外部MorningProcessMainとM/A/原本の実結線は未達。
