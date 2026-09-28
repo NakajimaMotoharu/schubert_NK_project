@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG377追加追跡（2026-09-29）：NK-OPS-001 Batch `MorningBackupStage.executeOwned/OwnedWork`、既存`execute`と`MorningControlScope`/`MorningDatabaseSession.Access`/`MorningBackupPreparation`の同owner境界を018/264・265/`PT-OPS-MBSTAGE005～008`に対応。RD OPS-009/BAK-001、UI251、SS341§5–6/343§6.15、SSC092/094/104/105/107/108、471 R1/D04/05。Production6 clean2,513PT/static0は回帰限定、実Unit・issuer・外部起動/CHR未受入。
+
 PG376追加追跡（2026-09-29）：NK-OPS-001 Production `BackupStartIntentFiles.requireClear`、PGPT-only `NativeBackupTimeoutResidualProbe.clear/check/hold`、PT-OPS-MTIME009/018/262・263。RD OPS-009/BAK-001、UI251、SS341/343・SSC107、BUG322/YKT254。空時成功・marker時拒否・空へ復帰を実OSで限定確認、外部親未受入。
 
 SSC108依存追跡（2026-09-29）：NK-OPS-001 Batch `StartupPermitRecords.Permit`/`StartupPermitFiles.issue`/`MorningCurrentInvalidation`/`MorningBackupStage`から`RootCurrentPermitPreflight`/`RootServiceLauncher`へ至る許可発行経路。RD OPS-009/SYS-002/004、UI251/253、SS341/342/343、SSC108、471 R1/D03～05。record文字形式PTは既存だが元root/prestart canonical evidence・正規issuer PTは未作成、Production `issue` caller0件。任意64hexを受入証明へ算入しない。

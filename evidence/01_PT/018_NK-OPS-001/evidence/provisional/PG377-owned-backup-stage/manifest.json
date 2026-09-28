@@ -1,0 +1,49 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "limited PG377 PT and full-six clean regression passed; coverage 100%, native parent, external startup and CHR unaccepted",
+  "executedAtJst": "2026-09-29T04:12:34+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "node": "24.19.0", "spotbugs": "4.10.4.0", "jacoco": "0.8.15"},
+  "branch": "dev-foundation",
+  "sourceCommit": "d9a20b97e21227124384e8db32d40083bbca4e35",
+  "testIds": ["PT-OPS-MBSTAGE005", "PT-OPS-MBSTAGE006", "PT-OPS-MBSTAGE007", "PT-OPS-MBSTAGE008"],
+  "commands": [
+    "PATH=<Node24 bin>:<system paths> JAVA_HOME=<JDK25> ./mvnw -B -ntp -Dmaven.repo.local=<fixed> -pl <Production6> -am clean test",
+    "PATH=<Node24 bin>:<system paths> JAVA_HOME=<JDK25> ./mvnw -B -ntp -Dmaven.repo.local=<fixed> -pl <Production6> spotbugs:check jacoco:report"
+  ],
+  "exitCodes": {"cleanTest": 0, "spotbugsAndJacoco": 0, "discardedFirstRunWithoutNode": 1},
+  "input": "fixed synthetic owner scopes, run/part UUID, UTC clock, DB begin and publication event fixtures; no real root Unit or credential",
+  "expected": "same owner callback values, fresh/recover and failure/null contract; 0 failed/error/skipped in full regression; 100% four-metric coverage required for completion",
+  "actual": "selected MorningBackupStageTest 8 PT F/E/S0; full Production6 2513 PT in 369 suites F/E/S0; SpotBugs 0 in six modules; four-metric coverage incomplete",
+  "suiteCounts": {"protocol": 17, "storage": 21, "bootstrap": 23, "api": 125, "web": 89, "batch": 94},
+  "testCounts": {"protocol": 80, "storage": 149, "bootstrap": 181, "api": 756, "web": 565, "batch": 782},
+  "failuresErrorsSkipped": {"protocol": [0, 0, 0], "storage": [0, 0, 0], "bootstrap": [0, 0, 0], "api": [0, 0, 0], "web": [0, 0, 0], "batch": [0, 0, 0]},
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0], "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0], "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0], "batch": [1539, 31, 350, 129, 15],
+    "morningBackupStageOuter": [49, 0, 16, 2, 0], "morningBackupStageAnonymous": [11, 0, 2, 2, 1],
+    "executeOwnedMethod": [0, 0, 0, 0, 0]
+  },
+  "hashMethod": "orderedReportDigest: SHA-256 of UTF-8 newline-terminated lines src-relative XML path + ':' + raw XML SHA-256, sorted by path",
+  "hashesSha256": {
+    "protocolOrderedReportDigest": "c53c7a405cb4aa5079e663f00b75b7e05c6f471bc271498237197405f8464efa",
+    "storageOrderedReportDigest": "de246cfeb16fe7625baef89461bf4cb0c66616991a83805f0de8a9371adf2286",
+    "bootstrapOrderedReportDigest": "eae9ea300a0326c086d7bf65e1fe691e31d98776e87900eb221083cdcc26da19",
+    "apiOrderedReportDigest": "caeaa31c5452c9fa384a3cb84c2aa24c0e4f5856631cf33999e85fbb42ab6b8b",
+    "webOrderedReportDigest": "649820d57b030366d8a314500fe5e405c51a207df178295d402cf75f2af284e6",
+    "batchOrderedReportDigest": "8552709c4f55a3012f0749eecf674deac90935c6b8e11205ffdde93aba6f7751",
+    "protocolJacocoXml": "48d789702b62ec0d5eb55cc9369c5381415127e441aabd27ed80be6484ab469c",
+    "storageJacocoXml": "960f7c67a2ba5708d9cf61e46407b49c4b922cbd6b7b78c5713c7a3852b5018a",
+    "bootstrapJacocoXml": "4bf969f645c474e1e6ad61c65d282f981821170613ec0841a267c6947913d164",
+    "apiJacocoXml": "9bd1413adbe65a12179e1db27e20795b4273384bb8d7c787ce21303e61d8b417",
+    "webJacocoXml": "84bb381e64f1337b73ef223aadb818f89b1dec2128eee8e5bd20c915d5592d2a",
+    "batchJacocoXml": "a03b54ad6dd88f2a99c9ad9e5592b6bff7370f4701ce9a506e8de3690350de2b",
+    "morningBackupStageJUnitXml": "0e8ef05049818f31b8439bd744566c1c13e35b18acc870148ad1de8cc58f7990",
+    "sourceMorningBackupStage": "be97bf7d7ff54821b8ee0b71efb5c297c54d98c68ff165e34e024377c95ec735",
+    "testMorningBackupStage": "9d2f6d537b437d8ff8bf2882dbef0bfa4148462e5cc4455dc550dbeb21131a87",
+    "ptSpecification264": "c961fd6546fa3083f6e99e5c71e9a57b8c754be9a9b860b44a3605840aec1ed9"
+  },
+  "related": ["RD OPS-009", "RD BAK-001", "UI251", "SS341", "SS343", "SSC-107", "SSC-108", "BUG-322", "YKT-254", "471 R1/D04/D05"],
+  "unrun": ["actual parent M/A/DB/File and child Unit cycle", "canonical permit issue/launcher same PID", "actual external Web/API and NK CHR-A01/L01", "formal collector and 100% coverage gate"],
+  "rawXmlOrSecretsInGit": false
+}
