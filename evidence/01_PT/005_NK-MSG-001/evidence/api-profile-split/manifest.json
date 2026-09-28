@@ -1,0 +1,65 @@
+{
+  "programId": "NK-MSG-001",
+  "runId": "PG360-api-profile-split-provisional-20260928",
+  "status": "PROVISIONAL_NOT_FORMAL",
+  "recordedAt": "2026-09-28T22:05:00+09:00",
+  "executionWindow": "2026-09-28 21:51:02 to before 22:05:00 JST",
+  "environment": {
+    "os": "Linux 7.0.0-34-generic amd64",
+    "jdk": "Ubuntu OpenJDK 25.0.4+7",
+    "maven": "Apache Maven Wrapper 3.9.12",
+    "artemisTestDependency": "2.56.0",
+    "branch": "dev-foundation",
+    "sourceCommit": "bb94ea66f322d61bbaf9dc4c0bb6765c56e9a7e7"
+  },
+  "command": "JAVA_HOME=<recorded JDK> PATH=<recorded JDK and Node24>:$PATH ./mvnw -o -q -Dmaven.repo.local=<private m2> -Dnk.pt.repository=<this repository> -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "testIds": ["PT-JMS-016-A", "PT-JMS-016-B", "PT-JMS-016-C", "PT-JMS-016-D", "PT-JMS-016-E", "PT-JMS-016-F", "PT-JMS-016-G", "PT-JMS-018"],
+  "input": "Two independent non-secret Artemis factories: API Sync window 1048576 bytes and API Web Log window 65536 bytes; existing isolated PostgreSQL/Artemis/JMS fixtures for dependent suites. No credential or wire body retained.",
+  "expected": "SS321 section 6: Sync supplier serves exactly four live sync consumers; Web Log supplier serves exactly one Web Log consumer. ApiLogPath readiness probe adds one Sync open only. Both queues return to zero consumers on close. Existing Login/Log and all six-module PT stay successful, without changing wire/HTTP oracle.",
+  "actual": "API parent Sync opens 4 and Web Log opens 1; ApiLogPath Sync opens 5 including readiness and Web Log opens 1. Isolated broker reports consumer 4/1 and then 0/0. Six-module JUnit 2446 tests/357 suites, failures 0, errors 0, skipped 0; SpotBugs BugInstance 0; Maven exit 0.",
+  "moduleJUnit": {
+    "protocol": "80/17 suites",
+    "storage": "149/21 suites",
+    "bootstrap": "177/22 suites",
+    "api": "745/123 suites",
+    "web": "555/85 suites",
+    "batch": "740/89 suites"
+  },
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [60, 1, 19, 3, 0],
+    "web": [60, 1, 19, 3, 0],
+    "batch": [1220, 21, 269, 102, 12]
+  },
+  "changedClassCoverage": {
+    "ApiMessagingRuntime": "instruction 145/145, branch 12/12, line 46/46, method 6/6, class 1/1",
+    "ApiLogPathApplicationRuntime": "instruction 129/129, branch 0/0, line 27/27, method 8/8, class 1/1"
+  },
+  "bugs": ["BUG-321"],
+  "horizontal": ["YKT-253"],
+  "ssc": [],
+  "filesNotCommitted": "Raw JUnit XML, JaCoCo XML/exec and local Maven cache remain in ignored target/private work directories; only sanitized counters and hashes are committed.",
+  "sha256": {
+    "apiMessagingJUnitXml": "a96d45ebf25567d3e32960a4635046ce33a85df29731564f01535eea2f783dc1",
+    "apiLogPathJUnitXml": "4dbd71f4bdfbb57def129a28bf0003d9e7757149546a159c2b20d4da00b8039f",
+    "webIntegrationJUnitXml": "1ccacdc4a832f7bfe30b034892d20bd3f1499190d2c735e98e5dc4fb664594c0",
+    "protocolJUnitFileList": "7ddfab9d36c2ecb9890df2e56edeef436460163263bbb66a9e50f40cb0fd314c",
+    "storageJUnitFileList": "60b5cf57f73fd826ddba6495859003e02200696c6da2df5a50300f61b93ffbe4",
+    "bootstrapJUnitFileList": "2a7b26f39e78e49bcc581163c3af84d29f0c8fc31ce874712bee78ce64fca281",
+    "apiJUnitFileList": "bb2ac7d33597f9c8da57a4bb4f201244c3a5aa6676cb3353f722eb52f82ae071",
+    "webJUnitFileList": "15ae3e01008181a9ae351b3e28314c7e83c660fefdcc68491eb38716a816d750",
+    "batchJUnitFileList": "36d442656f330b02a2f9d19344e1148717002a95afe5fbf7422cd6d5e5831ae7",
+    "protocolJaCoCoXml": "5d8f153fa50a10fd698d65e9079e7a44c8c413c8ce7a32151d222fda8fe92662",
+    "storageJaCoCoXml": "0cf4e02a305a592f768e08b20afff58ef70bf2bcbc2714e459070edd7fa60883",
+    "bootstrapJaCoCoXml": "9deb617125b262bbb72c5f7cb65ecfa72af4eed8f537ce68be91e9f7219e47f0",
+    "apiJaCoCoXml": "1d4781c50dd4f25de90578a054edb3c44651613271e9c4dd83407fd895b8a87f",
+    "webJaCoCoXml": "97132d50b9b179fdf7248b22622343a11358e2f207ebb926f415390864c5aa78",
+    "batchJaCoCoXml": "7a144308a115cf0205ff6fb896c65a6ea2ae5812189b3ae8b677dc8ada3ba31d",
+    "apiMessagingSource": "231c70138a6814f526d6187159df306b1de985c224b592d0fb80c44af12dcc91",
+    "apiLogPathSource": "a8bcee62ff5898dbbc1b273e4bee86d5c49a50244558f9750917a45d093dd1a6"
+  },
+  "unmet": ["All Production Java four coverage counters 100%", "Credential-bound real native JMS factory and Broker management admission", "Production external Web/API process and full runtime", "Real NK CHR-A01/L01", "Formal full-scope/hash/canary acceptance"]
+}

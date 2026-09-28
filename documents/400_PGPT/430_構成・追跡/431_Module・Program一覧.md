@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-28 PG360暫定追記：NK-MSG-001 `ApiMessagingRuntime.start`→PT-JMS-016 A～G、`ApiLogPathApplicationRuntime.start/startWithLogin/startWithLoginAndLog`→PT-JMS-018と依存Login/Log実Broker回帰。RD MQ-001/003/006/008、UI231、SS311/321§6/342、BUG321/YKT253。Source `d2d475a87`＋Web統合PT追随`bb94ea66f`、005/`api-profile-split/manifest.json`。変更2class coverage missed0/全6 clean2,446PT/static0だが全Production coverage100%・外部API/Web/D03実credential/実NK CHR未達、正式source/run不変。
+
 2026-09-28 PG313暫定追記（正式加点なし）: NK-OPS-001 Bootstrap ReleaseApproval/ReleaseSignatureVerifier/ReleaseInventory（Artifact/Dependency含む）とBatch RootReleaseApprovalReader→PT-OPS-APPROVAL001～008/APPROVALREAD001～008/SIGN001～008/BOMPROFILE001～016。RD SYS002/004・OPS009・DAT009、UI212/251/253、SS343 §11.1・SSC096・PG-D313。018150152153154155/provisional PG313各manifestがmethod/fixture/hash/commandを追跡。固定署名claims/原本reader/parserの限定成功と全release/DB/業務起動受入は別。4groupを022/019、ownerをbootstrap_ownershipへ明示登録し、不明ownerを許容しない。
 
 PG312（SSC095、限定）: NK-OPS-001 SchemaHistoryAdmission.Row/constructor/verify・JdbcAdmissionFailures.replace・ServiceDatabaseAdmission.verify→DAT009/SYS002/OPS009/UI212253/SS3313.3/3439.1/PT-OPS-SCHEMA001～008・DBADMIT003/018147148。NK-DAT-001 V023 startup_schema_history()→同RD/UI/SS/PT-DB-SCHEMA001～008/004068069。provisional PG312、schemaJava8/DDL8/Service4/105canary、変更4class全counter0、BUG283284/YKT216217。fullBOM/root schema接続・横断全回帰未完、正式認定不変更。
