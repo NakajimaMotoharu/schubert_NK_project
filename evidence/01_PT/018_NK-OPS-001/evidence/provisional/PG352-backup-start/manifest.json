@@ -1,0 +1,36 @@
+{
+  "id": "PG352-backup-start",
+  "program": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-BSTART001", "PT-OPS-BSTART002", "PT-OPS-BSTART003", "PT-OPS-BSTART004",
+    "PT-OPS-BSTART005", "PT-OPS-BSTART006", "PT-OPS-BSTART007", "PT-OPS-BSTART008"
+  ],
+  "dateJst": "2026-09-28",
+  "branch": "dev-foundation",
+  "sourceCommit": "84763f857977508c9965ece2bb98ed28f1a146c1",
+  "os": "Linux 7.0.0-34-generic x86_64",
+  "jdk": "OpenJDK 25.0.4+7-1-26.04-Ubuntu",
+  "maven": "3.9.12",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -q -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation -pl src/schubert-nk-batch -Dtest=BackupUnitStartClientTest test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "fixed SS341 Backup Unit command, injected bounded Process fixtures and MORNING root/policy",
+  "expected": "fixed argv, no preflight launch on refusal, opaque UNKNOWN post start, no automatic child kill, client exit never proves worker success",
+  "actual": "8 PASS, 1 suite, failures 0, errors 0, skipped 0, no real systemctl start",
+  "coverage": {
+    "newOuterMissed": {"branch": 0, "line": 0, "method": 0, "class": 0},
+    "newAttemptMissed": {"branch": 0, "line": 0, "method": 0, "class": 0},
+    "newStatusMissed": {"line": 0, "method": 0, "class": 0},
+    "batchOverallMissed": {"branch": 15, "line": 235, "method": 92, "class": 12},
+    "jacocoXmlSha256": "e59e8fc4f1020c78aa0a5888ea4184e82be913657ead22173f035477c9241e5e"
+  },
+  "spotbugs": 0,
+  "rawJUnitXmlSha256GitExcluded": "bfa4563e33bdfe7cde886f199ea1920689e18e4f941d2b329326bb05a936c8dd",
+  "related": ["BUG-315", "YKT-248", "SSC-092", "SSC-093", "SSC-105"],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG352-backup-start/output/selected-summary.md",
+      "sha256": "3f918e97803f33d72f2a4072f91b0a85fb92f8179cc606146759ea1d7c014ade"
+    }
+  ],
+  "acceptance": "client-only provisional PT; actual Backup Unit/worker, same-parent M/A, archive, real boot, R2/R3, Java global 100% and IT/ST not accepted"
+}
