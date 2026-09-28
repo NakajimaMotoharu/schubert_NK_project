@@ -1,5 +1,7 @@
 # PG285/286 限定実行結果（正式未認定）
 
+2026-09-28 PG362追記（現行暫定、上記履歴とは別source）：`b351d5cdf`のWeb native入口は固定DB pool/credential scope内に`nk_web`実Artemis factoryとreply FQQN事前probeを結線した。ただしroot/Broker Ops/業務runtimeが未完成で、HTTP readyを出さず拒否する。全6 `clean test spotbugs:check jacoco:report` exit0・2,462PT/361suite F/E/S0/static0、Web全体coverage missed I/B/L/M/C=80/1/25/4/0。`WebBrokerContexts`だけは4指標+class missed0。独立入力、実Artemis合成資格情報、sanitized結果・hashは006/`evidence/web-native-broker/manifest.json`を正とする。実Production Web Unit起動・Login/Search/Log・CHR-A01/L01は未実行、R2/R3/正式認定を加点しない。
+
 2026-09-27 JST、Linux/JDK25.0.4/Maven wrapper、branch dev-foundation、base3790557e6からの変更。API限定15:58:47終了exit0・19PT、Web限定15:59:47終了exit0・20PT、failure/error/skipped0。API CFG6/LOAD5/INPUT4/MAIN4、Web CFG7/LOAD5/INPUT4/MAIN4。019 collector負canary103/103成功。外部JVMの実際exit70/stdout空/fixed stderrはMAIN004のassertで確認。実業務success/実NK CHRは未実行。
 
 BUG263を経た同日追加再試験: API16:04:49終了exit0・19PT、Web16:06:21終了exit0・20PT。mainをJava25標準instance mainとし、native default constructorはOS exit、限定constructorの終了portは要求codeを独立確認する。本番argv/Unit class名/起動拒否は不変。API/Web mainとWebNonSecretConfigのinstruction/branch/line/method/class missed0を限定reportで照合。除外なし。

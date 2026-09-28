@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-09-28 PG362暫定追記：NK-MSG-002 `WebBrokerContexts.create/newFactory/contexts/open/close`→PT-JMS-WEB-001～003、006仕様・Web関連JUnit。NK-OPS-001 `WebProcessMain.startNative`→PT-OPS-WEB-MAINと後続真正外部受入。RD MQ-001/002/003/006/008・SYS-004、UI231/243/253、SS311/321§6/342/343、PG-D321。Source `b351d5cdf`、選択4suite15PT F/E/S0/static0、新class4指標missed0。Web Production→API Production依存なし、Bootstrap test-jarはtest-only。POM/security横断の全6 clean2,462PT/361suite F/E/S0/static0、006 sanitized manifest保存。全coverage100%・正式受入/外部Unit/業務readiness/CHRは未達。
+
 2026-09-28 PG361暫定追記：NK-MSG-001 `ArtemisConnectionFactoryProvider.create(profile,endpoint)` / `ApiBrokerContexts.create/sync/webLog/close` / `ApiDependencyReadiness.verify` / `ApiLogPathApplicationRuntime.start`→PT-JMS-024/025、005仕様・結果とAPI関連JUnit。NK-OPS-001 `ApiProcessMain.startNative`→同起動fail-closed試験、後続真正root/native外部受入PT。RD MQ-001/003/006/008・SYS-004、UI231/253、SS311/321§6/342/343、BUG321/YKT253、PG-D320。Source `dcccfa3da`。API clean756PT/static0、二factory実TCP合成資格情報接続・独立FQQN probeを限定確認。全6/全coverage/R2R3/管理readiness未受入、正式source/run/進捗中心据置。
 
 2026-09-28 PG360暫定追記：NK-MSG-001 `ApiMessagingRuntime.start`→PT-JMS-016 A～G、`ApiLogPathApplicationRuntime.start/startWithLogin/startWithLoginAndLog`→PT-JMS-018と依存Login/Log実Broker回帰。RD MQ-001/003/006/008、UI231、SS311/321§6/342、BUG321/YKT253。Source `d2d475a87`＋Web統合PT追随`bb94ea66f`、005/`api-profile-split/manifest.json`。変更2class coverage missed0/全6 clean2,446PT/static0だが全Production coverage100%・外部API/Web/D03実credential/実NK CHR未達、正式source/run不変。

@@ -1,0 +1,58 @@
+{
+  "programId": "NK-MSG-002",
+  "runId": "PG362-web-native-broker-provisional-20260928",
+  "status": "PROVISIONAL_NOT_FORMAL",
+  "recordedAt": "2026-09-28T23:13:02+09:00",
+  "environment": {
+    "os": "Linux 7.0.0-34-generic x86_64",
+    "jdk": "Ubuntu OpenJDK 25.0.4+7",
+    "maven": "Apache Maven Wrapper 3.9.12",
+    "artemisTestDependency": "2.56.0",
+    "branch": "dev-foundation",
+    "sourceCommit": "b351d5cdf"
+  },
+  "command": "JAVA_HOME=<recorded JDK> PATH=<recorded JDK and Node24>:$PATH ./mvnw -o -q -Dmaven.repo.local=<private m2> -Dnk.pt.repository=<this repository> -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "testIds": ["PT-JMS-WEB-001", "PT-JMS-WEB-002", "PT-JMS-WEB-003"],
+  "input": "Published synthetic five-ID Web credential fixture, independent Artemis TCP endpoint, invalid loopback/port/null/fault/close vectors, and the existing six-module dependent suites. No real password, session, message body, token or DB dump is saved.",
+  "expected": "SS321 section 6 independently requires an nk_web transacted factory with a 1048576-byte reply window and fixed retry/timeout settings. Borrowed credential copies clear; real Web reply FQQN is attached and closed before business runtime; unassembled root/Ops/business admission does not grant readiness. Six-module tests and static analysis remain clean.",
+  "actual": "The isolated real TCP Artemis context opened with a synthetic loaded Web credential; synthetic boundary and redaction/close tests passed. Six-module JUnit 2462 tests/361 suites, failures 0, errors 0, skipped 0; all six SpotBugs BugInstance counts 0; Maven exit 0. New WebBrokerContexts class has zero missed instructions, branches, lines, methods and classes. Native Web success/real Unit/CHR were not executed.",
+  "moduleJUnit": {
+    "protocol": "80 tests/17 suites",
+    "storage": "149 tests/21 suites",
+    "bootstrap": "177 tests/22 suites",
+    "api": "756 tests/125 suites",
+    "web": "560 tests/87 suites",
+    "batch": "740 tests/89 suites"
+  },
+  "coverageMissedInstructionBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0, 0],
+    "storage": [0, 0, 0, 0, 0],
+    "bootstrap": [60, 37, 11, 4, 0],
+    "api": [95, 3, 32, 4, 0],
+    "web": [80, 1, 25, 4, 0],
+    "batch": [1217, 21, 267, 102, 12]
+  },
+  "changedClassCoverage": {
+    "WebBrokerContexts": "instruction 0/249; branch 0/12; line 0/62; method 0/9; class 0/1",
+    "WebProcessMain": "native success path remains refused; part of module 80/1/25/4/0 missed counters"
+  },
+  "bugs": [],
+  "horizontal": ["YKT-253 remains open for Web business/send paths"],
+  "ssc": [],
+  "filesNotCommitted": "Raw JUnit XML, JaCoCo XML/exec and local Maven cache remain ignored. This manifest contains sanitized counts and hashes only.",
+  "sha256": {
+    "webCredentialJUnitXml": "6ed85a402b8c72232100f2c1d747a3e66de28fd9332890b89d70558f8e323a2b",
+    "webBrokerContextsJUnitXml": "8ebb6b3452912764888e9c61adef6f3f6a199470289ff16829ad786b655baac5",
+    "webDependencyReadinessJUnitXml": "f3806560a0acd5dc3d38b9ff9e92103a95edc8afeb818bbec7f032f3a3ddd8b7",
+    "webJaCoCoXml": "c7dabe56d52dfebecc62a07e974bc01e01aeae1eda1b1bce524ef7c5c9c9da53",
+    "webBrokerContextsSource": "2083a5fb5a798b1a1c9eaaa4bb9b04b13abe33fc322d5b0911c3fa82673e92ae",
+    "protocolJUnitFileList": "71ff424419e632c8574a3c752ba9711925cb97d23f48b4f71816b1452f45508f",
+    "storageJUnitFileList": "b62c561728d0adbe8416544a723e6a19bdc684eaa37553e376a6716b4a51ef33",
+    "bootstrapJUnitFileList": "74bb9c41da9aafa7c3d6d16963ea7607101ed321c98e62a4c0423fbfe5823d90",
+    "apiJUnitFileList": "e973a3cfde3ad195f9c0d6894c61a81e7b40d3f949241783aeef5481d563d88a",
+    "webJUnitFileList": "3be764068c6afbb91ef9c69adb70f6f3464ab175375413bf9447a91384bb6842",
+    "batchJUnitFileList": "03c01e5818f8d017aef2e78be22c9c9ce3274c8366163a2b01171dfe11feadf8"
+  },
+  "unmet": ["All Production Java coverage counters 100%", "Formal 53-scope/hash and negative canary acceptance", "Broker Ops management and true external startup", "Web/API business runtime and Resource contract", "Real NK CHR-A01/L01"]
+}
