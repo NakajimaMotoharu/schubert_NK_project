@@ -4,7 +4,7 @@ Program ID: NK-OPS-001/NK-BAT-001。対象: `MorningNewRunAdmission.create/execu
 
 | Test ID | 事前条件・入力・操作 | 独立期待値・根拠 |
 |---|---|---|
-| PT-OPS-MNEW001 | 固定UTC `2026-09-28T05:00:00.123456789Z`、異なるrun/activation UUID、手書きDB/File ownerとevent列 | cutoffはUTC µs `.123456Z`。`root→DB advisory→3参照不存在→original start→same-run continuation→File close→DB close→root`。callback中はDB/File両owner保持。SS341§3/343§6.15から算出 |
+| PT-OPS-MNEW001 | 固定UTC `2026-09-28T05:00:00.123456789Z`、異なるrun/activation UUID、手書きDB/File ownerとevent列 | cutoffはUTC µs `.123456Z`。`root→DB owner→3参照不存在→original start→same-run continuation→File close→DB close→root`。callback中はDB/File両owner保持。実advisory取得・同backend所有は既存MDB試験が別検証。SS341§3/343§6.15から算出 |
 | PT-OPS-MNEW002 | 3参照照会が既知IOException | original/open/stop相当callback0、DB close、元例外同一。DB不明を不存在へ変換しない |
 | PT-OPS-MNEW003 | original startのdurable IOが失敗 | continuation0、File/DB両close、元例外同一。未確定原本を成功へ補完しない |
 | PT-OPS-MNEW004 | originalのrun ID、activation ID、completionのいずれかが新規runと矛盾 | continuation0、固定非成功、全owner close。異なる原本や既完了runを流用しない |
