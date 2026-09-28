@@ -1,0 +1,5 @@
+# YKT-255 共有file fixture横展開・限定PT結果（PG364）
+
+- 対象: NK-OPS-001関連file/Unitの試験観測器。実装済み機能の製品挙動とoracleは変更せず、並行呼出で共有される fixture の `counts.merge`、FD集合、event/buffer list を並行安全化。対象class: `InspectorEnvironmentFilesTest`、`StartupPermitFilesTest`、`DurableRecordFilesTest`、`InspectorEnvironmentPublisherTest`、`MaintenanceRunFilesTest`。直接原因BUG-323/YKT-255、RD OPS-009/BAK-001、UI251、SS341/343。個々の業務Test IDは既存の該当program仕様書・JUnit suite名を参照。
+- 2026-09-29 JST、branch `dev-foundation`、source/test commit `ba1d00b5f`、Linux x86_64、JDK25.0.4、Maven3.9.12、SpotBugs4.10.4.0、JaCoCo0.8.15。JDK25/Node24 `./mvnw -o -q -Dmaven.repo.local=<固定toolchain> -Dnk.pt.repository=<本tree> -pl src/schubert-nk-batch -Dtest=<共有fixture利用13suite> clean test spotbugs:check jacoco:report`、exit 0。13suite/159PT、failure/error/skipped0、SpotBugs0。入力/期待は既存の公開file fixture、競合時の勝者数/事前事後file/所有FDを各JUnitで独立照合。
+- この実行は変更13suiteの限定再試験であり、全6回帰・100% coverage・実Unit/親受入を更新しない。資源計数のplain `int`、他の共有fixture、race detector及び全対象の非該当根拠は未完了なのでYKT-255は対応中。証跡は`evidence/provisional/PG364-fixture-horizontal/manifest.json`。raw JUnit/coverage XML、秘密情報、private VM値はGitへ格納しない。

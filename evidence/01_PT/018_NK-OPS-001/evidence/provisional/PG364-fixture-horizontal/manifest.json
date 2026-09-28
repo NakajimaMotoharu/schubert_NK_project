@@ -1,0 +1,24 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "YKT-255 partial horizontal retest; 13 affected suites pass, all-target audit incomplete",
+  "executedAtJst": "2026-09-29T00:16:46+09:00",
+  "environment": {"os": "Linux x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "ba1d00b5f",
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl src/schubert-nk-batch -Dtest=<13 affected suites> clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "public test fixture files; concurrent same-fixture owners; no real credential or Unit",
+  "expected": "test recorder cannot corrupt the concurrency oracle; original winner, file and FD conditions remain asserted",
+  "actual": "13 suites / 159 tests, failures 0, errors 0, skipped 0; SpotBugs 0; all-target YKT audit incomplete",
+  "coverage": "Selected-suite report only; not used to assert module-wide 100% or formal gate",
+  "related": ["BUG-323", "YKT-255"],
+  "hashesSha256": {
+    "selectedJUnitPathOrderedSha256List": "238468d7fd0e81c0e63674201898e089b2c4cd512ffbbd520f32894393a9c1bf",
+    "DurableRecordFilesTest": "c390f59ece86b1bd0eeef3c5706185a75bc88865ab195800a5b6afd95aa1c790",
+    "InspectorEnvironmentFilesTest": "8c4274896bd86787a6ad813c753d47b9548ab1bf243cecc13cb72d0a67dd303c",
+    "InspectorEnvironmentPublisherTest": "2c8e404d486ce19cff1177d81ff42312cc40a8068b08147e36a7aedeaec06107",
+    "MaintenanceRunFilesTest": "2496d1c111ecf5a53d889a0c2a12469ee81f7beb43c665c93ca561038799ec85",
+    "StartupPermitFilesTest": "167f8458dfd0d062a421ce61dd171020926797e40e22830fb2d506c5e8daa486"
+  },
+  "rawXmlOrSecretsInGit": false
+}
