@@ -1,0 +1,48 @@
+{
+  "id": "PG351-tmpfiles",
+  "program": "NK-OPS-001",
+  "testIds": ["PT-OPS-LOCK-008", "PT-OPS-TMP001", "PT-OPS-TMP002"],
+  "dateJst": "2026-09-28",
+  "branch": "dev-foundation",
+  "sourceCommit": "71e209d86ec4fb0ba8f30947938b640f54e727e2",
+  "host": {
+    "os": "Linux 7.0.0-34-generic x86_64",
+    "jdk": "OpenJDK 25.0.4+7-1-26.04-Ubuntu",
+    "maven": "3.9.12",
+    "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -q -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation -pl src/schubert-nk-batch test spotbugs:check jacoco:report",
+    "exitCode": 0,
+    "tests": 713,
+    "suites": 86,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "spotbugs": 0,
+    "jacocoMissed": {"instruction": 1108, "branch": 15, "line": 235, "method": 92, "class": 12},
+    "jacocoXmlSha256": "69a776a6b8317a686569a190777ddadf979b0d988db443ae1fed83fe30f6c895"
+  },
+  "vm": {
+    "os": "Ubuntu Linux isolated QEMU VM",
+    "systemdTmpfiles": "259.5-0ubuntu3.4",
+    "inputCandidateSha256": "27ccf8ae530a1ca83c2a8b2e7aa391d739757b2768c2ac76312d7ef834776e95",
+    "bootCommand": "sudo systemd-tmpfiles --create --boot --root=<fresh alternate root> <candidate>",
+    "bootExitCodes": [0, 0],
+    "nonBootCommand": "sudo systemd-tmpfiles --create --root=<different fresh alternate root> <candidate>",
+    "nonBootExitCode": 0,
+    "expected": "seven fixed root-owned paths at SS modes; second pass retains inode; nonboot creates none",
+    "actual": "seven root-owned paths at SS modes, inode unchanged, no-boot root empty; no live /run command",
+    "realRunFilesystem": "tmpfs",
+    "productionUnits": "Morning and Backup inactive; no Production start"
+  },
+  "related": ["BUG-318", "YKT-251", "SS341", "SS343", "SSC-089", "SSC-092", "SSC-104"],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG351-tmpfiles/output/native-summary.md",
+      "sha256": "9fdc2e7cededb9803f609952d4a6bbec5459a07df493ff7121e31c7cf3be56f4"
+    },
+    {
+      "path": "src/deployment/tmpfiles/schubert-nk-maintenance.conf",
+      "sha256": "27ccf8ae530a1ca83c2a8b2e7aa391d739757b2768c2ac76312d7ef834776e95"
+    }
+  ],
+  "acceptance": "limited config/native PT only; Java four-metric 100%, real boot, Production Morning/Backup, R2/R3 and IT/ST not accepted"
+}
