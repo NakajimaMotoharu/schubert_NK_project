@@ -31,6 +31,8 @@ Web/API各Maven moduleへ`com.zaxxer:HikariCP:7.1.0`を明示依存として追�
 
 ## 2026-09-20 Node.js 24.19.0（検索外部JS PT用、導入済・試験組込前）
 
+2026-09-29 PG377再現追補：`ScenarioSearchScriptTest`/`LogSearchScriptTest`は直接`ProcessBuilder("node", …)`を呼ぶため、`-Dnk.pt.node`だけではこの2件を解決しない。Production6の初回clean testはPATHにnodeが無くWebで2 error/Batch not-run、exit1で不認定。固定source `d9a20b97e21227124384e8db32d40083bbca4e35`の再実行では`env PATH=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:/usr/local/bin:/usr/bin:/bin JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -B -ntp -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch -am clean test`で2,513PT/369suite F/E/S0。全6へ同PATH・JDK・Maven repoで`spotbugs:check jacoco:report`もexit0。今後このdirect JS PTを含むrunではNode binをPATHに明示し、fail/skipを合格扱いしない。既設Node binary/OS PATHは変更していない。018/265/PG377 manifest参照。
+
 07:02追補: PG201選択試験で構文check/Node8case/Production1file全line・function・branch100%が成功、Java wrapper1PTとして実行。正式reactorは未実行。full verify wrapperと006 manifest commandへ `-Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` を追加し、次正式runから使用する。以下は導入時記録。
 
 入手元はworkspace dependency bundle `26.905.11957` の `/home/mini/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node`。PATHにはNodeなし。tool案内で所在を取得しversionを実行確認、Linux x86-64 ELFを `/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node` へ新規copy（`install -D -m 0755`、既存targetなし確認）。元/先SHA256はともに `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12`。system Node/apt/service変更なし、binaryはGit外。

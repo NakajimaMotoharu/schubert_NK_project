@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch;
+import dev.codex.schubert.nk.batch.file.StartupPermitRecords.State;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.BatchStep;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
@@ -21,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/106; PT-OPS-MCTRL001-014. */
+/** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/106/108; PT-OPS-MCTRL001-018. */
 final class MorningControlScopeTest {
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
@@ -741,5 +743,276 @@ final class MorningControlScopeTest {
             MorningControlScope.executeOwned(
                 () -> {}, m, original, stop, a, terminals, invalidation, null));
     assertTrue(events.isEmpty());
+  }
+
+  private static MaintenanceRunState epochState() {
+    var run =
+        new BatchRun(
+            UUID.fromString("00000000-0000-0000-0000-000000000378"),
+            Instant.parse("2026-09-29T05:00:00Z"));
+    return new MaintenanceRunState(
+        new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000379")),
+        Optional.empty());
+  }
+
+  private static Epoch invalidEpoch(MaintenanceRunState state) {
+    return new Epoch(
+        State.INVALID,
+        UUID.fromString("00000000-0000-0000-0000-000000000380"),
+        UUID.fromString("00000000-0000-0000-0000-000000000381"),
+        state.activation(),
+        Optional.empty());
+  }
+
+  private static MorningDatabaseSession.Access epochDatabase() {
+    return new MorningDatabaseSession.Access() {
+      public void requireUnused(BatchRun selected) {
+        fail("no unused check after original");
+      }
+
+      public void requireConsistent(BatchRun selected) {
+        fail("no consistency check after original");
+      }
+
+      public MorningDatabaseSession.BackupBegins beginBackup(
+          BatchRun selected, Instant now, boolean recoverAbandoned) {
+        return fail("no backup start in epoch handoff");
+      }
+
+      public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
+        return fail("no cleanup in epoch handoff");
+      }
+    };
+  }
+
+  private static MorningControlScope.OwnedOriginal epochOriginal(
+      List<String> events,
+      HeldM m,
+      HeldA a,
+      AtomicBoolean dbHeld,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database) {
+    return new MorningControlScope.OwnedOriginal() {
+      @Override
+      public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> work) throws IOException {
+        assertTrue(m.held.get());
+        assertFalse(a.held.get());
+        dbHeld.set(true);
+        events.add("original-enter");
+        try {
+          return work.execute(state, database);
+        } finally {
+          dbHeld.set(false);
+          events.add("original-close");
+        }
+      }
+    };
+  }
+
+  @Test
+  void mctrl015BorrowedInvalidEpochIsSameObjectInsideAllOwners() throws Exception {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var dbHeld = new AtomicBoolean();
+    var state = epochState();
+    var database = epochDatabase();
+    var epoch = invalidEpoch(state);
+    int result =
+        MorningControlScope.executeOwnedEpoch(
+            () -> events.add("root"),
+            m,
+            epochOriginal(events, m, a, dbHeld, state, database),
+            () -> events.add("stop-eight"),
+            a,
+            () -> events.add("fresh-eight"),
+            observed -> {
+              assertSame(state, observed);
+              events.add("INVALID");
+              return epoch;
+            },
+            (observed, borrowedDatabase, borrowedEpoch) -> {
+              assertTrue(m.held.get() && a.held.get() && dbHeld.get());
+              assertSame(state, observed);
+              assertSame(database, borrowedDatabase);
+              assertSame(epoch, borrowedEpoch);
+              assertEquals(State.INVALID, borrowedEpoch.state());
+              assertTrue(borrowedEpoch.permitDigest().isEmpty());
+              events.add("work");
+              return 7;
+            });
+    assertEquals(7, result);
+    assertEquals(
+        List.of(
+            "root",
+            "M-enter",
+            "root",
+            "original-enter",
+            "root",
+            "stop-eight",
+            "root",
+            "A-enter",
+            "root",
+            "fresh-eight",
+            "root",
+            "INVALID",
+            "work",
+            "root",
+            "A-close",
+            "original-close",
+            "root",
+            "M-close",
+            "root"),
+        events);
+    assertFalse(m.held.get() || a.held.get() || dbHeld.get());
+  }
+
+  @Test
+  void mctrl016InvalidationFailureOrNullNeverCallsWork() {
+    for (boolean nullResult : new boolean[] {false, true}) {
+      var events = new ArrayList<String>();
+      var m = new HeldM(events);
+      var a = new HeldA(events);
+      var dbHeld = new AtomicBoolean();
+      var state = epochState();
+      var failure = new IOException("fixed INVALID refusal");
+      MorningControlScope.EpochInvalidation invalidation =
+          observed -> {
+            assertSame(state, observed);
+            events.add("INVALID-refused");
+            if (nullResult) return null;
+            throw failure;
+          };
+      if (nullResult) {
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                MorningControlScope.executeOwnedEpoch(
+                    () -> {},
+                    m,
+                    epochOriginal(events, m, a, dbHeld, state, epochDatabase()),
+                    () -> {},
+                    a,
+                    () -> {},
+                    invalidation,
+                    (s, d, e) -> fail("no work")));
+      } else {
+        assertSame(
+            failure,
+            assertThrows(
+                IOException.class,
+                () ->
+                    MorningControlScope.executeOwnedEpoch(
+                        () -> {},
+                        m,
+                        epochOriginal(events, m, a, dbHeld, state, epochDatabase()),
+                        () -> {},
+                        a,
+                        () -> {},
+                        invalidation,
+                        (s, d, e) -> fail("no work"))));
+      }
+      assertEquals(1, events.stream().filter("A-close"::equals).count());
+      assertEquals(1, events.stream().filter("original-close"::equals).count());
+      assertEquals(1, events.stream().filter("M-close"::equals).count());
+      assertFalse(m.held.get() || a.held.get() || dbHeld.get());
+    }
+  }
+
+  @Test
+  void mctrl017WrongOrIssuedEpochCannotBecomeBorrowedAuthority() {
+    var state = epochState();
+    var other =
+        new MaintenanceActivation(
+            state.activation().run(), UUID.fromString("00000000-0000-0000-0000-000000000382"));
+    var invalid = invalidEpoch(state);
+    var wrong = new Epoch(State.INVALID, invalid.boot(), invalid.epoch(), other, Optional.empty());
+    var issued = invalid.issued("a".repeat(64));
+    for (Epoch candidate : List.of(wrong, issued)) {
+      var events = new ArrayList<String>();
+      var m = new HeldM(events);
+      var a = new HeldA(events);
+      var dbHeld = new AtomicBoolean();
+      assertThrows(
+          IOException.class,
+          () ->
+              MorningControlScope.executeOwnedEpoch(
+                  () -> {},
+                  m,
+                  epochOriginal(events, m, a, dbHeld, state, epochDatabase()),
+                  () -> {},
+                  a,
+                  () -> {},
+                  s -> candidate,
+                  (s, d, e) -> fail("no work")));
+      assertEquals(1, events.stream().filter("A-close"::equals).count());
+      assertEquals(1, events.stream().filter("original-close"::equals).count());
+      assertEquals(1, events.stream().filter("M-close"::equals).count());
+      assertFalse(m.held.get() || a.held.get() || dbHeld.get());
+    }
+  }
+
+  @Test
+  void mctrl018NullDependenciesAndWorkResultFailClosed() {
+    var events = new ArrayList<String>();
+    var m = new HeldM(events);
+    var a = new HeldA(events);
+    var dbHeld = new AtomicBoolean();
+    var state = epochState();
+    var original = epochOriginal(events, m, a, dbHeld, state, epochDatabase());
+    MorningControlScope.StopPass stop = () -> {};
+    MorningControlScope.Terminals terminals = () -> {};
+    MorningControlScope.EpochInvalidation invalidation = s -> invalidEpoch(state);
+    MorningControlScope.OwnedEpochWork<Boolean> work = (s, d, e) -> true;
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                null, m, original, stop, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, null, original, stop, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, null, stop, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, null, a, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, stop, null, terminals, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, stop, a, null, invalidation, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, stop, a, terminals, null, work));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, stop, a, terminals, invalidation, null));
+    assertTrue(events.isEmpty());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningControlScope.executeOwnedEpoch(
+                () -> {}, m, original, stop, a, terminals, invalidation, (s, d, e) -> null));
+    assertEquals(1, events.stream().filter("A-close"::equals).count());
+    assertEquals(1, events.stream().filter("original-close"::equals).count());
+    assertEquals(1, events.stream().filter("M-close"::equals).count());
+    assertFalse(m.held.get() || a.held.get() || dbHeld.get());
   }
 }

@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.batch.file;
 
+import dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch;
+import dev.codex.schubert.nk.batch.file.StartupPermitRecords.State;
 import dev.codex.schubert.nk.batch.platform.MorningStopPass;
 import dev.codex.schubert.nk.batch.platform.MorningUnitTerminals;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
@@ -18,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * does not prove clean Artemis journal, execute backup/Cleanup or issue a startup permit. An
  * unresolved stop-client must not return from MorningStopPass; handle-less UNKNOWN/hard-timeout
  * recovery remain unaccepted. NK-OPS-001; OPS009/UI251/253/SS341§3-7/343/SSC089/094/100-102/105;
- * PG341/343/344/346/PT-OPS-MCTRL001-013.
+ * PG341/343/344/346/378/PT-OPS-MCTRL001-018.
  */
 @NullMarked
 final class MorningControlScope {
@@ -53,6 +55,20 @@ final class MorningControlScope {
   @FunctionalInterface
   interface Invalidation {
     void invalidate(MaintenanceRunState state) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface EpochInvalidation {
+    Epoch invalidate(MaintenanceRunState state) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OwnedEpochWork<T> {
+    T execute(
+        MaintenanceRunState state,
+        dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
+        Epoch epoch)
+        throws IOException;
   }
 
   @FunctionalInterface
@@ -91,6 +107,23 @@ final class MorningControlScope {
         trustedWork);
   }
 
+  static <T> T executeOwnedEpoch(OwnedEpochWork<T> trustedWork) throws IOException {
+    Objects.requireNonNull(trustedWork, "owned current-generation work");
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    return executeNativeOwnedEpoch(
+        root,
+        snapshot,
+        new OwnedOriginal() {
+          @Override
+          public <R> R execute(MorningNewRunAdmission.OwnedContinuation<R> continuation)
+              throws IOException {
+            return MorningNewRunAdmission.create(root, snapshot).executeOwned(continuation);
+          }
+        },
+        trustedWork);
+  }
+
   static <T> T executeResume(UUID runId, MorningNewRunAdmission.Continuation<T> trustedWork)
       throws IOException {
     Objects.requireNonNull(runId, "explicit resume run");
@@ -118,15 +151,47 @@ final class MorningControlScope {
         trustedWork);
   }
 
+  static <T> T executeResumeOwnedEpoch(UUID runId, OwnedEpochWork<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(runId, "explicit resume run");
+    Objects.requireNonNull(trustedWork, "owned current-generation work");
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    return executeNativeOwnedEpoch(
+        root,
+        snapshot,
+        new OwnedOriginal() {
+          @Override
+          public <R> R execute(MorningNewRunAdmission.OwnedContinuation<R> continuation)
+              throws IOException {
+            return MorningResumeAdmission.create(root, snapshot).executeOwned(runId, continuation);
+          }
+        },
+        trustedWork);
+  }
+
   private static <T> T executeNativeOwned(
       RootStartupContext root,
       RootStartupContext.Snapshot snapshot,
       OwnedOriginal original,
       MorningNewRunAdmission.OwnedContinuation<T> trustedWork)
       throws IOException {
+    return executeNativeOwnedEpoch(
+        root,
+        snapshot,
+        original,
+        (state, database, ignored) -> trustedWork.execute(state, database));
+  }
+
+  private static <T> T executeNativeOwnedEpoch(
+      RootStartupContext root,
+      RootStartupContext.Snapshot snapshot,
+      OwnedOriginal original,
+      OwnedEpochWork<T> trustedWork)
+      throws IOException {
     var maintenance = MaintenanceFileLock.create();
     var startup = StartupAdmissionFile.create();
-    return executeOwned(
+    return executeOwnedEpoch(
         () -> root.recheck(snapshot),
         maintenance::tryExclusive,
         withClearIntent(
@@ -141,6 +206,46 @@ final class MorningControlScope {
         () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
         state -> MorningCurrentInvalidation.invalidate(root, snapshot, state),
         trustedWork);
+  }
+
+  static <T> T executeOwnedEpoch(
+      Gate root,
+      Exclusive maintenance,
+      OwnedOriginal original,
+      StopPass stop,
+      StartupExclusive startup,
+      Terminals terminals,
+      EpochInvalidation invalidation,
+      OwnedEpochWork<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(original, "owned original");
+    Objects.requireNonNull(stop, "fixed eight stop pass");
+    Objects.requireNonNull(startup, "fixed A lock");
+    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(invalidation, "durable current invalidation");
+    Objects.requireNonNull(trustedWork, "owned current-generation work");
+    return executeStopAndStartup(
+        root,
+        maintenance,
+        () ->
+            original.execute(
+                (state, database) -> {
+                  root.verify();
+                  return afterOriginal(
+                      root,
+                      stop,
+                      startup,
+                      terminals,
+                      () -> {
+                        Epoch epoch =
+                            Objects.requireNonNull(
+                                invalidation.invalidate(state), "durable INVALID epoch");
+                        // Epoch's constructor already makes INVALID imply an absent permit digest.
+                        if (epoch.state() != State.INVALID
+                            || !epoch.activation().equals(state.activation())) throw unavailable();
+                        return trustedWork.execute(state, database, epoch);
+                      });
+                }));
   }
 
   static OwnedOriginal withClearIntent(OwnedOriginal original, IntentClear intent) {
