@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG372追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceAdmissionScope.execute`→既存`StartupAdmissionFile.tryExclusive`はWeb/API root入口の同一借用A下でroot再確認、NSS/release/current permit/argvを実行するscope。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343・SSC086～089、PT-OPS-RASCOPE001～006、018/254。Aの予約FDはcallback内借用のみ、proof/exec/業務ready未結線、外部入口はexit30のまま。
+
 PG371追加追跡（2026-09-29）：NK-OPS-001 Batch `RootCurrentPermitPreflight.verifyNative/verify`と`RootServiceLauncher.preflight`は固定root-owned`/run/schubert-nk/startup`の既存`StartupPermitFiles.readIssued`をread-onlyで呼び、現在bootと実release SHAの相関を確認する。RD SYS-002/004/OPS-009、UI212/251/253、SS341/342/343§6.15・SSC086～089、PT-OPS-RPERMIT001～006、018/252。A下での同原本再読・全prestart/root・実Unit/execは別未受入。
 
 PG370追加追跡（2026-09-29）：NK-OPS-001 Batch `RootServiceLauncher.main/run/preflight`は固定`WEB`/`API`だけを読取り、既存`RootStartupContext`→`FixedServiceIdentity`→`RootReleaseAdmission`→固定argvのroot read-only入口を作る。RD SYS-002/004/OPS-009、UI212/251/253、SS311/342/343・SSC086～089、PT-OPS-RMAIN001～006、018/250。現行は常に非成功30/argv不正70で、permit/A/proof/余剰FD/同PID exec・Unit/業務readyは別未受入。Batch module実装、Production Unit不変更。

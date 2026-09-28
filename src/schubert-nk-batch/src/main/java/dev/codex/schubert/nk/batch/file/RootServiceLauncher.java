@@ -58,14 +58,19 @@ public final class RootServiceLauncher {
           case API -> RootStartupContext.Service.API;
         };
     var snapshot = root.capture(actor);
-    root.recheck(snapshot);
-    var identity = new FixedServiceIdentity().resolve(service);
-    RootReleaseAdmission.create(root, snapshot);
-    var releaseHash =
-        StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).sha256();
-    RootCurrentPermitPreflight.verifyNative(root, snapshot, releaseHash);
-    new FixedServiceExecArguments(service, identity).arguments();
-    root.recheck(snapshot);
-    // No permission to exec: full roots/Ops/schema, A-held recheck, held ELF and FD proof absent.
+    RootServiceAdmissionScope.execute(
+        root,
+        snapshot,
+        borrowedAdmissionFd -> {
+          var identity = new FixedServiceIdentity().resolve(service);
+          RootReleaseAdmission.create(root, snapshot);
+          var releaseHash =
+              StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup())
+                  .sha256();
+          RootCurrentPermitPreflight.verifyNative(root, snapshot, releaseHash);
+          new FixedServiceExecArguments(service, identity).arguments();
+          // A FD is borrowed only inside this callback, never copied into argv/env or returned.
+        });
+    // No permission to exec: full roots/Ops/schema, held ELF and FD proof remain absent.
   }
 }
