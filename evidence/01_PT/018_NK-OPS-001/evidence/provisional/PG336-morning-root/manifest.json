@@ -1,0 +1,104 @@
+{
+  "id": "PG336-morning-root",
+  "formal": false,
+  "executionTime": "2026-09-28T13:57:08.672268+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "587fb88a0894c408710a22ebdf1498f494100569",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0; no genuine Morning Unit",
+  "command": "Batch -Dtest=MorningRootScopeTest,MaintenanceFileLockTest,RootStartupContextTest,MaintenanceUnitStopClientTest,MaintenanceUnitStopPolicyTest clean test SpotBugs:check JaCoCo:report",
+  "exitCode": 0,
+  "input": "fixed MORNING root/M gate, eight-Unit policy, M contention, all root rechecks, null and downstream failure",
+  "expected": "41 selected PT F/E/S0, Batch static0; no continuation before root/M/eight-policy; native parent remains unaccepted",
+  "actual": "41 selected PT F/E/S0, Batch static0; package scope branch/class fully covered, native entry line/method incomplete",
+  "testIds": [
+    "PT-OPS-MROOT001",
+    "PT-OPS-MROOT002",
+    "PT-OPS-MROOT003",
+    "PT-OPS-MROOT004",
+    "PT-OPS-MROOT005",
+    "PT-OPS-MROOT006"
+  ],
+  "counts": {
+    "MorningRootScopeTest": 6,
+    "MaintenanceFileLockTest": 8,
+    "RootStartupContextTest": 9,
+    "MaintenanceUnitStopClientTest": 11,
+    "MaintenanceUnitStopPolicyTest": 7
+  },
+  "coverage": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 2
+    },
+    "LINE": {
+      "missed": 8,
+      "covered": 16
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 2
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "coverageSourceSha256": "c61b95ef19b7cfc39055f1f2f1cc88f40283735852b63fbb245bc4b0cedc5bd2",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java",
+      "sha256": "e7794a891a0b0ccc75e2ff88bc46a910415ab32db7ead600f69c60db0497e91e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningRootScopeTest.java",
+      "sha256": "e619c2beca3043f7e1e2b8ed7ff0d928ad7bbf4584eab2403677941cd2b9da4d"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg336-mroot-clean-selected.log",
+      "sha256": "da1ce406a29d2bf0e742dfa130f64160b8b5e37688c87c6d64f0d1546427f830"
+    }
+  ],
+  "bugs": [],
+  "ssc": [
+    "SSC-100",
+    "SSC-101",
+    "SSC-102"
+  ],
+  "limitations": [
+    "No real root/M/A or fixed eight Unit stop",
+    "No UNKNOWN quarantine, backup, Cleanup success, permit, R2/R3",
+    "JUnit suite/case metadata only; properties/output/raw credentials omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/coverage/morning-root.json",
+      "sha256": "abf72a25380748f407940829b3b0d2f4fddf3af7980a03918bc75a484343f2c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "002c6dcc0adc53d0fcfca9b0516c375172b7e893aaeaf0256b6b61c3a5082934"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "d6b2454782d3df4e3185e6be3526902cec51e74158a75c3f700031b899963b71"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "756936dbe16be9a8d4e33eec14e2cd91fdfb21ca3a2db84b9c16a0634687c0b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "d5fcfd9c1570a04ec65298ecdaea056f257b723f4a1c00ad3811be37f9ed5e00"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/junit/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "aa64a6599c8bc262ef159c751798438ec2e9b776baab26802efbbf06564442f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG336-morning-root/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}
