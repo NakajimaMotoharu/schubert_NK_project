@@ -1,0 +1,121 @@
+{
+  "id": "PG337-morning-terminals",
+  "formal": false,
+  "executionTime": "2026-09-28T14:05:25.224107+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "67e7a817454a60910568ba76ef3a53582e1ab730",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; JaCoCo0.8.15; SpotBugs4.10.4.0; real eight Units not deployed",
+  "command": "Batch -Dtest=MorningUnitTerminalsTest,MaintenanceUnitTerminationTest,MaintenanceUnitStopClientTest,MaintenanceUnitStopPolicyTest,MorningRootScopeTest clean test SpotBugs:check JaCoCo:report",
+  "exitCode": 0,
+  "input": "fixed eight Units; first/last busy, known/unknown/null, API actor, three interrupt boundaries",
+  "expected": "38 selected PT F/E/S0, static0; eight fresh observations required; no actual stop/permit authority",
+  "actual": "38 PT F/E/S0, static0; new parent observer branch1/line5/method1 missed due native success path",
+  "testIds": [
+    "PT-OPS-MTERMS001",
+    "PT-OPS-MTERMS002",
+    "PT-OPS-MTERMS003",
+    "PT-OPS-MTERMS004",
+    "PT-OPS-MTERMS005"
+  ],
+  "counts": {
+    "MorningUnitTerminalsTest": 5,
+    "MaintenanceUnitTerminationTest": 9,
+    "MaintenanceUnitStopClientTest": 11,
+    "MaintenanceUnitStopPolicyTest": 7,
+    "MorningRootScopeTest": 6
+  },
+  "coverage": {
+    "MorningRootScope": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 8,
+        "covered": 16
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningUnitTerminals": {
+      "BRANCH": {
+        "missed": 1,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 5,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageSourceSha256": "c048622475a85c865fd4a645ca6d3ecf4e4901bcab0cb1134ef238af7fdfe524",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java",
+      "sha256": "c242595ff1a95ca905e3527d6495de66172f1233160509e9ec3082d6086084b5"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminalsTest.java",
+      "sha256": "7abd4c8a3e41ba8f24955a3a02384029e1df15cf051d6c262391848f91bfcf3e"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/pg337-mterms-clean-fixed.log",
+      "sha256": "099dd14a6139776cf3353bc23b26ccf4c9ac9f02bc67c04b9f04067a9cf53575"
+    }
+  ],
+  "bugs": [],
+  "ssc": [
+    "SSC-100"
+  ],
+  "limitations": [
+    "No actual eight Unit loaded/stop/kernel termination or M/A continuous ownership",
+    "No Artemis clean journal, backup, Cleanup, permit, R2/R3",
+    "Sanitized JUnit suite/case metadata only; raw properties/output omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/coverage/parent-classes.json",
+      "sha256": "efcfc44d7f41cabe5a6a7e4c8c7a05c60feeb0c5658c8b109c605b072e5cf47c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "75963ec32356f71b6d796e909ea6ae60d44dd1adbf0aaf0249a38aeebdf5295a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "62e45ac6593a1e1d1d7f4fc3849bbb81a48b93bc9d5ce7b2eb875b81adc8f085"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "6a589b0164d7b6ac12e0f0673c254b94167ca6b04244776f3ebe22fd5a197498"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "96ca13bb0384bd332f874ce9dd85e2d6b3a65801420d1d237eed4552fca52a24"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "48b3065a6c18339c050cfc476f9f7a0230c9ef328c931711c9fd5df7b949f867"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG337-morning-terminals/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}
