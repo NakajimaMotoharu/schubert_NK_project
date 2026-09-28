@@ -20,4 +20,6 @@
 | PT-OPS-MCTRL014 | M保持下で残留拒否/markerなしの順序を注入 | intent確認はDB/原本作成、fixed stop、A取得、INVALIDより前。拒否で後続callback0件 |
 | PT-OPS-BSTART009 | 起動clientの前にintent portを注入 | root/policy→intent→client。公開不明ならclient0件、start送達不明時はUNKNOWN・自動retire0 |
 
+Test IDとJUnit methodの一意対応: BFENCE001=`newOnlyMarkerSurvivesOwnerCloseAndRetiresOnlyWithSameToken`、002=`uncertainDurabilityPreservesMarkerAndNextAdmissionRefuses`、003=`existingOrCorruptMarkerIsNeverRepaired`、004=`unsafeRootOrInterruptedActorCannotCreateIntent`、005=`concurrentDistinctOwnersCannotPublishTwoIntents`、006=`nullContractsAreExplicit`（`BackupStartIntentFilesTest`）。MCTRL014=`mctrl014ResidualIntentRefusesBeforeOriginalUnderM`（`MorningControlScopeTest`）、BSTART009=`bstart009IntentPrecedesClientAndUncertainDeliveryPreservesIt`（`BackupUnitStartClientTest`）。既存MCTRL001～013/BSTART001～008は既存spec227と各methodの番号を正とする。
+
 実行環境、commit、command、F/E/S、line/method/class/branch coverage、静的結果、関連BUG/SSC、sanitized証跡とhashは[232](232_NK-OPS-001_Backup起動intent_実行結果.md)に記録する。PTの直接`retire`は親の全終端証明を模したfile adapter操作であり、Production親へ許可を与えない。Native固定root、親M/A・今回fresh receipt/stop、VM Unit起動と再boot後admissionは別途必要。

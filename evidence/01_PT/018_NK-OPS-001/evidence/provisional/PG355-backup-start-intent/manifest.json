@@ -1,0 +1,47 @@
+{
+  "programId": "NK-OPS-001",
+  "phase": "PG355 provisional, not formal PGPT gate",
+  "executedAtJst": "2026-09-28T20:29:30+09:00",
+  "environment": {
+    "os": "Linux 7.0.0-34-generic x86_64",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "spotbugs": "4.10.4.0",
+    "nullaway": "0.14.1",
+    "node": "24.19.0"
+  },
+  "branch": "dev-foundation",
+  "sourceCommit": "4005d6704fac645267aedcce53c2a413f9eae95a",
+  "selectedCommand": "./mvnw -o -Dtest=BackupStartIntentFilesTest,BackupUnitStartClientTest,MorningControlScopeTest test spotbugs:check jacoco:report",
+  "production6Command": "./mvnw -o -q -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean test spotbugs:check jacoco:report",
+  "mavenRepository": "/home/mini/codex/project1/work/toolchain/m2/repository",
+  "exitCode": 0,
+  "testIds": ["PT-OPS-BFENCE001-006", "PT-OPS-BSTART009", "PT-OPS-MCTRL014"],
+  "input": "Synthetic root0/tmpfs metadata and held local FD; fixed empty backup-start.intent; no credential or real Unit start",
+  "expected": "CREATE_NEW marker before start; uncertain publication starts zero clients; residual marker blocks next M admission before DB/original/stop; no implicit retire",
+  "actual": "Selected 29/3 and Production6 2440/357, failures/errors/skipped zero; no real Unit start; coverage gate failed",
+  "coverageMissedBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0],
+    "storage": [0, 0, 0, 0],
+    "bootstrap": [37, 11, 4, 0],
+    "api": [1, 19, 3, 0],
+    "web": [1, 19, 3, 0],
+    "batch": [21, 259, 98, 12],
+    "BackupStartIntentFiles": [6, 16, 4, 0]
+  },
+  "related": ["BUG-315", "YKT-248", "SSC-105", "SSC-106"],
+  "rawXmlInGit": false,
+  "hashesSha256": {
+    "all357JUnitXmlPathOrderedSha256List": "ccb2245f4e5135a7f5b1b2e60ebe54f9d98c20869aa3b91dfbb748cea77c8a42",
+    "BFENCEJUnitXml": "2382062f35e01990923230d44a1c8985f272423eed32825198f161fb36ed3ca6",
+    "BSTARTJUnitXml": "006550312d88ef4bace17b14a64add49ad6e257243bdc8b277748c2d0db1d90d",
+    "MCTRLJUnitXml": "3205aec0c70a4eed31dc208e7389865a0e2a54feaadc71f827c502d43f86ea36",
+    "batchJacocoXml": "42cc11cfc54a238772bb0445f69b66240342c694e86b1addabcf31350fafce4c",
+    "sourceBackupStartIntentFiles": "70865f7791afb2c34c2d00a9706dd0ea82e9944db00421518beb718ca697266d",
+    "testBackupStartIntentFiles": "9b73b4e9fc3cd2c8b16feec97099f8cf25a3196a51b60bd3ed22f0e11720b99a",
+    "ptSpecification231": "1679e464cc5df6335d3826aade93bd4c14f251e55c6ffbcdabd8e5b7fa2b5709",
+    "ptResult232": "bc5583275673acccd247ec789dc6efff95560e1025a1ea7cf96a49960c5793c6",
+    "sanitizedSummary": "e50c4924c7a008699812353f1d2a30a8af569178a2435c5740d51cb19de634b0"
+  }
+}
