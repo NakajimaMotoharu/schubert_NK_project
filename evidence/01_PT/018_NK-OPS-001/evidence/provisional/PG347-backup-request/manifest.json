@@ -1,0 +1,453 @@
+{
+  "id": "PG347-backup-request",
+  "formal": false,
+  "executionTime": "2026-09-28T18:06:22.953440+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "775421d8eef061f2f903581a3d022f68cc061867",
+  "environment": "Linux host UID1000; JDK25.0.4; Maven3.9.12; Node24.19.0; JaCoCo0.8.15; SpotBugs4.10.4.0",
+  "command": "Batch clean test org.jacoco:jacoco-maven-plugin:0.8.15:report com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check",
+  "exitCode": 0,
+  "input": "same-run original, committed backup begins, root nonsecret worker request",
+  "expected": "703 PT F/E/S0; static0; new class four coverage counters missed0",
+  "actual": "703 PT F/E/S0; static0; new class counters missed0; external worker not connected",
+  "testIds": [
+    "PT-OPS-MBPREP001",
+    "PT-OPS-MBPREP002",
+    "PT-OPS-MBPREP003",
+    "PT-OPS-MBPREP004",
+    "PT-OPS-MBPREP005",
+    "PT-OPS-MBPREP006"
+  ],
+  "suites": {
+    "tests": 703,
+    "suites": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "BRANCH": {
+      "missed": 13,
+      "covered": 3616
+    },
+    "LINE": {
+      "missed": 202,
+      "covered": 7002
+    },
+    "METHOD": {
+      "missed": 82,
+      "covered": 1229
+    },
+    "CLASS": {
+      "missed": 10,
+      "covered": 184
+    }
+  },
+  "changedCoverage": {
+    "dev/codex/schubert/nk/batch/file/MorningBackupPreparation": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparation.java",
+      "sha256": "33375542a65e27b2dc40ab5ed20950a27e0e1f12d6eaf6bc6906751b25dd305a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparationTest.java",
+      "sha256": "d70307e61da80b3a01a3d5b604d7a928e4262db47bdfd4fc8e36723ae3356351"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/217_NK-OPS-001_Morning_backup_request_単体テスト仕様書.md",
+      "sha256": "7cef978fabdad5e5849fbeb33cfe5c4fb6405e8932ca92d953865889e97e5f09"
+    }
+  ],
+  "externalLog": {
+    "path": "/tmp/pgpt-pg347-batch.log",
+    "sha256": "2382fc53d13af0c84d29b62d6fac3c4a463d800dab547d7f8a2d751fa2df0f23"
+  },
+  "bugs": [
+    "BUG-315"
+  ],
+  "ykt": [
+    "YKT-248",
+    "YKT-250"
+  ],
+  "ssc": [
+    "SSC-055",
+    "SSC-092",
+    "SSC-094",
+    "SSC-104",
+    "SSC-105"
+  ],
+  "limitations": [
+    "No native parent caller, backup worker, actual Unit, archive or DB success acceptance",
+    "Whole Production four-counter 100% gate remains unmet",
+    "JUnit properties/stdout/stderr/failure payload omitted; no raw secrets or session IDs"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/coverage/batch.json",
+      "sha256": "0b48331b464e8cd95fe50a6474d22f35867fb7acdefeee3e0b75c842c63c44d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/coverage/changed-class.json",
+      "sha256": "2e06e0246ba7c9dca942f917aa473b1634c5ab578cb95fc0533a729830804753"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "0cea10ce4a6cca846e0424629f86046da39060e13d34b713f3613cf591422f49"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "60d57323de5a5b38662d9d48bf79c31c1c3b52c664fde9297281ba76139d4ed7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "f62fbead89b301e31ec18646584379cb9717f8273ab5aa038d268ebe82d817d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "a3581e4ac74694bdc82785c2fa5ec7abfce8f2e764a1a53b12e405fc127c73bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "91fb61276c06dd2729895543a1d3eed56ce555d1f4492ac8010da056de02da71"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "4732f27d92fe38b9a4f87097059e90641a5584b85c66b01ba8cf6fda6ff5111b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "a44b984b924851f0f3f4e4ebeb36ec570928908dc47c044172cc2132a61f4a91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "2f88c26262906791a3991e244af14999a47ba0d8fd4b05e22e047a0c103ed05c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "800ea3a9569e558d79ed5b8da6d1da9b7056675f081a65fd063f153fbdea410a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "a43ed701de11c500d7c744eb20992e7d1dd7b48b7755635b47ffed3d05e33cab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+      "sha256": "85e1f80002d8046703d6a74beac010e4a2edebb464098f7a1c43545c55475bfa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+      "sha256": "d9a64e4455d922aeb420fdd465c45877ea0763790932325653c9b8f7d1a24979"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "82041b0d0d8976083ea8c62a0bf7471d9867a5af773781742035859bd7d23cb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "236edd5fe48d5e341d13cbab74442b28c6fd880f8398314f945e1464692ee192"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "e8464b0a956ae43d197afc47b380ef3000ccbb1274601b862bd85645ac2bed65"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "b51a60766e1bd52cb70bee979231f67d4b79129b7c23a9326cfe702ea812d075"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "689fc14cc130088a143e9a3e920ff495eca73f3d698250dc0ce515033af0a822"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "811b4f770eded8f3a8cb250feabfded98cf2035a8c6eb56103dde847561382a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "1433068f2dae2d45c58fee89c5dbb3055b5221ba5dc17d0f3583f2d9e2c0c463"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "c6dc3dd247099f89e7ab64f9408771446ef0df707bc65e2492e103da9048e1a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "acc2710e8c81023bea070bc3f70aee5d1d7c2cd65ec0325b1aa693224fd941e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "3990b34a1bba144786dd0768182f1246d26d72185ec6a300b98c108f910123b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "f55e95020835a372bdc1e1b27074d92b893d0eba48b921968923d169694ebfb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "e1495b76d644297f914e098ce2e94138df15ed2688fbaa8145919cbf4b1c8d5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "84579fe8bf5716d7a9cf5e2921a0ce9144720b35f7e6ab4cf3219c1eaf88133c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "2e8cba947f751aeba85812b834679201c3cf31ef0bfe8f479dbc64af0aabdcb9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "e97e031b4b1474462cb0029830b2879504120faf7a4ee7e15b92ddffdc2e5c15"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "4569b01e6ad1a12588ff42e8c8fd840bd1c71fa7dde60afb58d768175c00fe35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "2af652226a2d3292fec7b92bac94e46fb80157742a9c65c36cb2664b0929c4b1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "6f4a0355734f50ac7a5d3578b0121eb4bd8ba177369f0a8c726e299b346309c9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest.xml",
+      "sha256": "e1fd64e9ea9956dd2e681d8e566663aaceb9fefdb045cd31e65087a0eb8a2d55"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "c32f47e8c2c79d09a0c35b206ec432c1ff0aca009ffb8bae3a0878bf956eda7e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest.xml",
+      "sha256": "9e95ed416d38cd659fb43096b4d9a0cbe664784c1215cc0547eef95fadcf45b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "2380d310178af4b11360ca2d402be3ff7733d48d310928be1b845f8d8a822865"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "4bea7b069b923facd749e21a98bb8f896ee66666f1e33521a5ec4c8d7dd51f33"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "9d70e403fda40f20659d6ce47078332c54ca8371a9caf44140ed688d32dc4ecc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "7bb9fc01b951114b1b64cf8e66e03aa120e954a94eb369f5b8b1ff6b102634c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest.xml",
+      "sha256": "4902787cd568ea0b8e1cffa7d5dc240ebf64129bed2d4bce3c5b07fdcd79008f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest.xml",
+      "sha256": "a230354aaf82cf3d1619c1a783ed9005c7f3bca0ed89327d56a90b6c3cf070c4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "f715c2bffd16b5ca0caf393a2a15800e490fc4e7fc7b56050bbfcccb8796e8a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+      "sha256": "aba9ab6da6cd86a1addfed208147c071a6879a5abad0d9abad3b7d8836299cd0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+      "sha256": "d9188cfe69946cf201edbf077ee23ed483574c45f8fdbc3b892d7918fbf81bde"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "d2f5ba57dca9a40c6da1b079f5f810f9470c1641d1f85d1320d6764e9f95618f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "fffb85422832bd7f66752e4d668b10a6664bfaa916e3b553feb44611fac7e128"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "ab6a2f5d4c96030b26c927188ee61cdd1664f495ee9b1eac76b30d45e208ee80"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "b33058618e7872fd688ef481dda695ca59ec357bd8b2b527544770b2b3050c81"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "d9b9b7e43456e2266a4963d0540ca5fc486ea1823e115f0ae5b2bb8c5e1b4341"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "e0b579c293ec79ec5a25d073e54038217618bece985816915edd547b42aa1764"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "ef8ee65e2671edf3fb08862360bc2b3821828ade43b36bfdc2293d763851833b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "496e8ea617d7fb70ab3f69441ac69023014f263bcb33dbacb020a60d4193571a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "c03571f96e8152644e4b71d19b54838c5f25befddcd26edcc87a4879eb392c36"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "86f0a945068f46bc1463cf3ed489c395570b3806e071d0ecf3f0e3ab509716f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "745ccb899637a582695b9ca97fd2824617b7bae375f74e9e4f1a41510d69e9db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+      "sha256": "4fd63abf345ea8f85bf504ef93bbcc51a88753f6ef1a89061d4bc5ef23bce60e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "03fcb361f473b328a01b79c666a021651fb8a4a57b1b0c1b2bc679ba63b13a4e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+      "sha256": "06cec87585f2109cea88dbdd5e74452a33a796a7a36e52566319ce5defc8b46a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "e6eea8c0f2c16ffda6b250c9168f1927db7768fcf2399dc7d4ee4922509748fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "f33385dc3a72037ae6212b5aaed0c334da0dfd60ad60b177ee9edf30d29b7575"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "2e10644f3ffab25554ad0c408513829ff1ecc6f7646dc66b5ac2b5753dd81e4d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "cfd848e94309e39388416c57d062e60d4a058707ed3756296681ae51eb245cf4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "9fae56bcfc6ee3766ed2695b65265e38eb00872a35dd9ef62c0b3a4117cfbe0c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "badb78645557be1551f2471e993317cfc42b2113dab127a63c2f359b8113fef2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "c1062ca47098007f4e60190da99873861740d039aa50a8f0b98c117073948be3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest.xml",
+      "sha256": "372eae1b5e31370bcb6263f72a26f929901eaa04e552fb04c4a9a8890b5c5cf9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "785c992639c360b5e75bd19429723b6528c9f68e825da2b4091b9f177f4b170a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "fd31d4f7cb5da95387805f6b668123b02446aa3b526fbedfff9cd5ab7c0322e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "bdd96cc636027dfc10fc48327bc72c082aa4239b047d437dd8d4016e98dda286"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "c2fea3356cbac75e0622a0100df950cca5adcda90ae037fbb27ceb7cd1ce3368"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "3af6bc87a0730a9d944307a15e655c65f819f151eae4c115a289140bb8dc7f5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "cb9f00a5bae4cc74bb11044a3f605c7459a8ef2a163ab47acc620ca5ee379925"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest.xml",
+      "sha256": "5ff7217ca09020455f6cc5853bbb862d47f861c183517e8e65218b78e1d75972"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "385a8a8c768a9199b7328f4580b8e12ec0831f2f8ed41d9d41a4f82db2aad2a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "d0f1871c252aa1ca22026dcd99bfc3c3b6374f78c474d88615ff8b425ee0b2c4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "bfbefc24143fd1ae115a2371fcd24b6f3b715bcf9bbcf6ae249b00cd74687e10"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "6337b64479413fa874c61c8aec824c36e4a790c151e3e81fe368758747938c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "1d5f2b83fd90830933f2e75cfec0aba82157883cbbdc35a1838e52fda29c8b66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "370b2f355befc2b400209e6718d4155f158302fc3afd3d70605fbbe749249e30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "af32dada513ee3a67548742a5e520d3e65ee3537dd25179bb2046b695b6988be"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "9325ed8ef79e0710849c9415d749c8ff0268dbfd5144a129182c716ae3793f8e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "a5e30c41ea5fde7b0a2f5a6d643d7db05b72e1c2c1f5a19bc5f6018ddb96c5f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "9e1eef54b5d0aca1001dd3248b9f87d2fc17cc7c26ae620d24f9b1890682c6b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "b29778d66dcc0edc0499dd587e76df023d4f141cbb09bc9e584378fd7a1f1a39"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml",
+      "sha256": "9a285df38f34b92255fc39fe0924eee2001a34aaf27eb34e6df2752debbe1679"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/junit/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "529b837a725b9dafdd011ae19fbf3a6454561099df9a0761551fd7c9f3805839"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG347-backup-request/static/batch.json",
+      "sha256": "db9a6f3db5f8acb9c456cfbd3af10293cbdc7aba9e8fe699470795319cb78bc5"
+    }
+  ]
+}
