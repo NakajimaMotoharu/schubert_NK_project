@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** PT-OPS-ROOTCTX-001..008; literal kernel/system manager vector, never production expected. */
+/** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
   static final String BOOT = "11111111-1111-1111-1111-111111111111\n";
   static final String INV = "1".repeat(32);
@@ -101,6 +101,29 @@ final class RootStartupContextTest {
         assertThrows(IOException.class, () -> f.context().capture(RootStartupContext.Service.API));
     assertEquals("startup context unavailable", e.getMessage());
     assertNull(e.getCause());
+  }
+
+  @Test
+  void rootctx009CleanupOwnUnitNotMorningOrApi() throws Exception {
+    var f = new Fixture();
+    f.group = "0::/system.slice/schubert-nk-cleanup.service\n";
+    f.unit =
+        "Id=schubert-nk-cleanup.service\nLoadState=loaded\nActiveState=active\n"
+            + "SubState=running\nMainPID=42\nInvocationID="
+            + INV
+            + "\nControlGroup=/system.slice/schubert-nk-cleanup.service\n";
+    var context = f.context();
+    var snapshot = context.capture(RootStartupContext.Service.CLEANUP);
+    assertEquals(RootStartupContext.Service.CLEANUP, snapshot.service());
+    assertEquals("/system.slice/schubert-nk-cleanup.service", snapshot.controlGroup());
+    context.recheck(snapshot);
+    assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.MORNING));
+    assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.API));
+    f.unit = f.unit.replace("MainPID=42", "MainPID=43");
+    assertThrows(IOException.class, () -> context.recheck(snapshot));
+    assertEquals(
+        "startup context unavailable",
+        assertThrows(IOException.class, () -> context.recheck(snapshot)).getMessage());
   }
 
   @Test

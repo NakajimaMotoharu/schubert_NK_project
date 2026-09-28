@@ -12,15 +12,16 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Root emitter's kernel proc / system manager / fixed Unit context, before opening host view.
- * NK-OPS-001; SYS-002/004,OPS-009; UI212/251; SS342/343 SSC086/087; PG296; PT-OPS-ROOTCTX-001..008.
- * This authenticates context only, never the complete startup permit.
+ * NK-OPS-001; SYS-002/004,OPS-009; UI212/251; SS342/343 SSC086/087/104; PG296/326;
+ * PT-OPS-ROOTCTX-001..009. This authenticates context only, never the complete startup permit.
  */
 @NullMarked
 public final class RootStartupContext {
   public enum Service {
     API("schubert-nk-api.service"),
     WEB("schubert-nk-web.service"),
-    MORNING("schubert-nk-morning-controller.service");
+    MORNING("schubert-nk-morning-controller.service"),
+    CLEANUP("schubert-nk-cleanup.service");
     private final String unit;
 
     Service(String unit) {

@@ -97,6 +97,7 @@ SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止
 | `caddy` | Web | Web | Packageの自由先行起動をdisable |
 
 SSC104/PG324：上表Cleanupはroot MorningがM/A保持中に同期起動する真正oneshotであり、空の成功Unitを置かない。固定非秘密requestはsystemd `LoadCredential`でprivate受渡しし、`db-batch`はroot Cleanup専用processへ固定配布する。Unitの0/10は実削除・skip/警告・transferを記録した親検証済終端だけに対応し、safety failure/起動不明は非成功でArtemis `Requires`を遮断する。root実行権限は現物backup root/原本検証のためだけで、shell/任意argv/env/Secret出力は禁止。service templateの完成・配備は全親/子契約と別PTを経るまで未認定。
+SSC104/PG326：子のroot contextは`schubert-nk-cleanup.service`自身のUID0、固定PID1/boot、自己PID-start/InvocationID/MainPIDと厳密cgroupで認証し、親`schubert-nk-morning-controller.service`のcontextを流用しない。起動時と帰還時に再確認し、異Unit/変更/不明は削除0・非成功。これはM/A/原本・両backup・DB advisoryを証明しない。
 
 `schubert-nk-morning.target`が全unitをWantsし、通常bootの`multi-user.target`からWantsする。BackupのFAILEDは
 target全体を止めず、cleanupが削除skipを記録した上で後続する。

@@ -11,13 +11,14 @@ import java.sql.*;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
-/** MDB001..008. Literal role/lock oracle; actual isolated DB transaction in MDB007/008. */
+/** MDB001..011. Literal role/lock oracle; actual isolated DB transaction/lock in MDB007..011. */
 final class MorningDatabaseSessionTest {
   static final String URL = "jdbc:postgresql://127.0.0.1:5432/schubert_nk";
   static final BatchRun RUN =
@@ -695,6 +696,196 @@ final class MorningDatabaseSessionTest {
                   "select count(*) from schubert.batch_runs where run_id='31100001-2222-4333-8444-555555555555'")) {
         assertTrue(rows.next());
         assertEquals(afterCommit ? 2 : 0, rows.getInt(1));
+      }
+    }
+  }
+
+  @Test
+  void mdb009NoHandoffBeforeConfirmedBackupCommit() throws Exception {
+    var p = new Probe();
+    var calls = new AtomicInteger();
+    assertEquals(
+        Boolean.TRUE,
+        p.subject()
+            .execute(
+                credential(),
+                session -> {
+                  assertThrows(NullPointerException.class, () -> session.handoffCleanup(null));
+                  assertEquals(
+                      "root batch database unavailable",
+                      assertThrows(
+                              IOException.class,
+                              () ->
+                                  session.handoffCleanup(
+                                      () -> {
+                                        calls.incrementAndGet();
+                                        return true;
+                                      }))
+                          .getMessage());
+                  return true;
+                }));
+    assertEquals(0, calls.get());
+    p.released();
+  }
+
+  @Test
+  void mdb010RealSeparateChildAdvisoryHandoffAndParentReacquire() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("32600000-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(2592000));
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+      assertEquals(
+          "CHILD",
+          subject.execute(
+              credential(),
+              session -> {
+                session.requireUnused(run);
+                session.beginBackup(run, NOW.plusSeconds(2592000), false);
+                assertThrows(
+                    IOException.class,
+                    () -> session.beginBackup(run, NOW.plusSeconds(2592000), false));
+                try (var otherThread = Executors.newSingleThreadExecutor()) {
+                  assertEquals(
+                      "root batch database unavailable",
+                      otherThread
+                          .submit(
+                              () ->
+                                  assertThrows(
+                                          IOException.class,
+                                          () -> session.handoffCleanup(() -> "WRONG_THREAD"))
+                                      .getMessage())
+                          .get(5, TimeUnit.SECONDS));
+                } catch (InterruptedException failure) {
+                  Thread.currentThread().interrupt();
+                  throw new IOException("thread check interrupted");
+                } catch (ExecutionException | TimeoutException failure) {
+                  throw new IOException("thread check failed");
+                }
+                String result =
+                    session.handoffCleanup(
+                        () -> {
+                          assertThrows(IOException.class, () -> session.requireUnused(run));
+                          assertThrows(
+                              IOException.class, () -> session.handoffCleanup(() -> "REENTER"));
+                          try (var child =
+                              DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+                            assertTrue(advisory(child));
+                            assertFalse(advisory(observer));
+                            return "CHILD";
+                          } catch (SQLException failure) {
+                            throw new IOException("child database unavailable");
+                          }
+                        });
+                try {
+                  assertFalse(advisory(observer));
+                } catch (SQLException failure) {
+                  throw new IOException("observer database unavailable");
+                }
+                assertThrows(IOException.class, () -> session.handoffCleanup(() -> "SECOND"));
+                assertThrows(IOException.class, () -> session.requireUnused(run));
+                return result;
+              }));
+      assertTrue(advisory(observer));
+    }
+  }
+
+  @Test
+  void mdb011ChildFailureCannotBecomeSuccessOrRetainParentConnection() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("32600001-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(2678400));
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    var callback = new AtomicInteger();
+    assertEquals(
+        "root batch database unavailable",
+        assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          session.requireUnused(run);
+                          session.beginBackup(run, NOW.plusSeconds(2678400), false);
+                          return session.handoffCleanup(
+                              () -> {
+                                callback.incrementAndGet();
+                                throw new IOException("PRIVATE child failure");
+                              });
+                        }))
+            .getMessage());
+    assertEquals(1, callback.get());
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+      assertTrue(advisory(observer));
+    }
+  }
+
+  @Test
+  void mdb012AutocommitDriftAfterCommitRefusesChildWithoutCallback() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("32600002-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(2764800));
+    var restored = new AtomicBoolean();
+    var borrowed = new AtomicReference<Connection>();
+    var calls = new AtomicInteger();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            (url, properties) -> {
+              var real = DriverManager.getConnection(url, properties);
+              borrowed.set(real);
+              return proxy(
+                  Connection.class,
+                  (name, args) -> {
+                    if (name.equals("getAutoCommit") && restored.get()) return false;
+                    if (name.equals("setAutoCommit") && Boolean.TRUE.equals(args[0]))
+                      restored.set(true);
+                    try {
+                      return Connection.class
+                          .getMethod(name, parameterTypes(name, args))
+                          .invoke(real, args);
+                    } catch (InvocationTargetException e) {
+                      throw e.getCause();
+                    }
+                  });
+            },
+            connection -> {});
+    assertEquals(
+        "root batch database unavailable",
+        assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          session.requireUnused(run);
+                          session.beginBackup(run, NOW.plusSeconds(2764800), false);
+                          return session.handoffCleanup(
+                              () -> {
+                                calls.incrementAndGet();
+                                return true;
+                              });
+                        }))
+            .getMessage());
+    assertEquals(0, calls.get());
+    assertTrue(borrowed.get().isClosed());
+  }
+
+  private static boolean advisory(Connection connection) throws SQLException {
+    try (var statement = connection.prepareStatement("select pg_try_advisory_lock(71419602)")) {
+      try (var rows = statement.executeQuery()) {
+        assertTrue(rows.next());
+        boolean result = rows.getBoolean(1);
+        assertFalse(rows.next());
+        return result;
       }
     }
   }

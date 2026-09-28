@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
+import dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
@@ -24,6 +25,11 @@ public final class MorningDatabaseSession {
   @FunctionalInterface
   public interface Operation<T> {
     T execute(Session session) throws IOException;
+  }
+
+  @FunctionalInterface
+  public interface CleanupHandoff<T> {
+    T execute() throws IOException;
   }
 
   @FunctionalInterface
@@ -275,19 +281,23 @@ public final class MorningDatabaseSession {
     private final Connection connection;
     private final long thread = Thread.currentThread().threadId();
     private volatile boolean active = true;
+    private volatile boolean backupCommitted;
+    private volatile boolean handoffStarted;
+    private volatile boolean inHandoff;
 
     private Session(Connection connection) {
       this.connection = connection;
     }
 
     private void guard() throws IOException {
-      if (!active || thread != Thread.currentThread().threadId()) throw unavailable();
+      if (!active || inHandoff || thread != Thread.currentThread().threadId()) throw unavailable();
       check();
     }
 
     public void requireUnused(BatchRun run) throws IOException {
       Objects.requireNonNull(run, "new fixed run");
       guard();
+      if (backupCommitted) throw unavailable();
       if (new RunReferenceRepository(connection).read(run).anyReference()) throw unavailable();
       guard();
     }
@@ -297,6 +307,7 @@ public final class MorningDatabaseSession {
       Objects.requireNonNull(run, "fixed run");
       Objects.requireNonNull(now, "backup begin time");
       guard();
+      if (backupCommitted) throw unavailable();
       try {
         schema.verify(connection); // BEFORE repository construction or either backup begin.
         guard();
@@ -306,9 +317,40 @@ public final class MorningDatabaseSession {
         guard();
         connection.commit();
         guard();
+        connection.setAutoCommit(true); // Only a confirmed commit can enter session-lock handoff.
+        guard();
+        backupCommitted = true;
         return new BackupBegins(database, configuration);
       } catch (SQLException failure) {
         throw unavailable();
+      }
+    }
+
+    /**
+     * One synchronous lock transfer; caller still owns M/A, child terminal proof and backup files.
+     */
+    public <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException {
+      Objects.requireNonNull(operation, "cleanup child operation");
+      guard();
+      if (!backupCommitted || handoffStarted) throw unavailable();
+      try {
+        if (!connection.getAutoCommit()) throw unavailable();
+        handoffStarted = true;
+        inHandoff = true;
+        T result =
+            InspectorLockHandoff.execute(
+                connection,
+                () -> {
+                  check();
+                  return operation.execute();
+                });
+        inHandoff = false;
+        guard();
+        return result;
+      } catch (SQLException | InspectorLockHandoff.Failure failure) {
+        throw unavailable();
+      } finally {
+        inHandoff = false;
       }
     }
   }
