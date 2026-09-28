@@ -1,0 +1,27 @@
+{
+  "programId": "NK-OPS-001",
+  "status": "PG359 direct BUG-320 fixed; full PGPT gate incomplete",
+  "executedAtJst": "2026-09-28T21:27:00+09:00",
+  "environment": {"os": "Linux 7.0.0-34-generic x86_64", "jdk": "25.0.4", "maven": "3.9.12", "spotbugs": "4.10.4.0", "nullaway": "0.14.1", "jacoco": "0.8.15", "node": "24.19.0"},
+  "branch": "dev-foundation",
+  "sourceCommit": "081279909",
+  "testIds": ["PT-OPS-STARTADMIT-001-010"],
+  "command": "JDK25/Node24 ./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "input": "independently fixed API/WEB startup packet/child identity and synthetic readiness callbacks; no credentials or actual Web/API process",
+  "expected": "normal return without ready is non-success; A close once; duplicate/late/failing release cannot promote success",
+  "actual": "pre-fix RED 1PT/1failure; post-fix selected 10PT and Production6 2445PT/357suite failure/error/skipped zero, static0; full coverage gate failed",
+  "coverageMissedBranchLineMethodClass": {
+    "protocol": [0, 0, 0, 0], "storage": [0, 0, 0, 0], "bootstrap": [37, 11, 4, 0], "api": [1, 19, 3, 0], "web": [1, 19, 3, 0], "batch": [21, 267, 102, 12], "ReadyOnce": [0, 0, 0, 0]
+  },
+  "related": ["BUG-320", "YKT-252", "SSC-086", "SSC-087"],
+  "hashesSha256": {
+    "all357JUnitXmlPathOrderedSha256List": "8ac5197e66c0fe778f00489ab61d3d7a7fe1c5407163a93f303ae12afd625e2a",
+    "STARTADMITJUnitXml": "39fb1b2d954f480ccaa9107e8d8ec9e71fdb96d5ed5c6430f4c90a65fdf96beb",
+    "bootstrapJacocoXml": "b70d1a6e8f0920c6d3169c27e6c34ec9cf5171d435dd08e7fb6d88b1119e82b3",
+    "sourceServiceStartupAdmission": "fc96f98ea2a507fc4ba6aaf14130fcdc115d97863e948b42f15542c675ff016a",
+    "testServiceStartupAdmission": "7c289bab53ecd3a3e9235ce45d1acf4f559030535f32c20fc9442ea21d4c50c9",
+    "ptSpecification237": "27470a6e13b852aa9a1ef916da7044421fe1450579569deab06b9a1ff2c9919f"
+  },
+  "rawXmlOrSecretsInGit": false
+}
