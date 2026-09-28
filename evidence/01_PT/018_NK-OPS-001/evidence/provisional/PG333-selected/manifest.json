@@ -1,0 +1,113 @@
+{
+  "id": "PG333-selected",
+  "formal": false,
+  "executionTime": "2026-09-28T12:48:56.685271+09:00",
+  "branch": "dev-foundation",
+  "sourceCommit": "cc07715fc3617d873396bad479313a1386ff7e37",
+  "environment": "Linux host; JDK25.0.4; Maven3.9.12; PostgreSQL18 fixture not used by this selected sequence test; JaCoCo0.8.15; SpotBugs4.10.4.0",
+  "command": "./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress -pl :schubert-nk-batch -am -Dtest=LinuxSealedProofTest,ReleaseApprovalTest,CleanupPreflightTest test com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check; then Batch org.jacoco:jacoco-maven-plugin:0.8.15:report (no clean)",
+  "exitCode": 0,
+  "input": "PG333 fixed child preflight ordering, exchange, failure, clock, null, replay and interrupt; selected dependency regression",
+  "expected": "21 selected PT F/E/S0, 3-module static0, changed CleanupPreflight all four JaCoCo counters missed0",
+  "actual": "21 selected PT F/E/S0; 3-module SpotBugs0; changed CleanupPreflight missed0; native port/Unit/DELETE not run",
+  "counts": {
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "changedClassCoverage": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 35
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupPreflight.java",
+      "sha256": "1f182646860d9e15bdc8c539d41698583d3026db01edcc2950f498a66223a8ac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupPreflightTest.java",
+      "sha256": "1d5b0476981ebe7e532d323b63d7f730074bdc07f393428a970c3ebb78ecc240"
+    }
+  ],
+  "externalLogs": [
+    {
+      "path": "/tmp/PG333-selected.log",
+      "sha256": "07fc52e0daa25590ab917e93ad98a20aa06778438a9dbcbcec242cb05f7ac814"
+    },
+    {
+      "path": "/tmp/PG333-coverage-limited.log",
+      "sha256": "c6c42d4e76766123d159957dfada7d36659a68d6b15fdf33f33b1f8d14916bca"
+    }
+  ],
+  "bugs": [],
+  "ssc": [
+    "SSC-104"
+  ],
+  "limitations": [
+    "No clean or all-Production scope; dependency coverage XML omitted, Batch XML is no-clean cumulative",
+    "Injected ordering ports only; no native root context/private credential/DB session or actual Cleanup Unit/DELETE",
+    "JUnit XML regenerated from suite/case attributes only; properties and outputs omitted"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "70b18d19a5d9c718774b8886a40688aa6f758e5a9eae514c0222f28abb6bf5f6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/batch/jacoco.xml",
+      "sha256": "3ed7f2ba1a252000557f94b009c616f005e179267344c8937e1d7ef0ab8e339d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/batch/spotbugs.xml",
+      "sha256": "32319e58e0d81ececd4abe9571f5d43aab47d03a5b9ff54d7cb56b701d2a37c0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "6431107cb5cf9ea04994d7fdcf4e76cb2275fbdfa3d8c6cca6b4da36d41522e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/bootstrap/spotbugs.xml",
+      "sha256": "946b14dfc36e1a42c3d53bf6dd5a5dfd29f45a67ca9663447f88363306140e4d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "bea1a70e4dd85f0578172c6b6a82bec8f20da8a521e4a568f79629d22b904d5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG333-selected/storage/spotbugs.xml",
+      "sha256": "3a87125096148f1c23b6a51991fe4ce8cb7dfc1c4b372ed450d49ca6ecccc928"
+    }
+  ]
+}
