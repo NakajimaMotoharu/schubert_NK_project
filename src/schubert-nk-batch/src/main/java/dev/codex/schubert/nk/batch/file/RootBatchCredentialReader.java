@@ -4,6 +4,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
+import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -13,9 +14,9 @@ import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Borrowed, fixed root morning LoadCredential only; never an ordinary service catalog extension.
- * Caller authenticates root Unit/boot and exact credential namespace before supplying its owner.
- * NK-OPS-001/DAT009/OPS009/UI251/SS341/3436.15/SSC094/PG311; PT-OPS-RBCR001..008.
+ * Borrowed fixed root Morning/Cleanup LoadCredential, never an ordinary service catalog extension.
+ * Caller authenticates its own root Unit/boot and exact private credential namespace first.
+ * NK-OPS-001/DAT009/OPS009/UI251/SS341/3436.15/SSC094104/PG311329; PT-OPS-RBCR001..012.
  */
 @NullMarked
 public final class RootBatchCredentialReader {
@@ -43,15 +44,29 @@ public final class RootBatchCredentialReader {
 
   /** New password owner returned only after every read/close/inode observation succeeds. */
   public InspectorDbCredential read() throws IOException {
-    byte[] material = new byte[65537];
+    return InspectorDbCredential.consume(readBytes("db-batch", 65536));
+  }
+
+  /** Fixed private copy only; canonical nonsecret correlation is not deletion authority. */
+  public CleanupWorkerRequest readCleanupRequest() throws IOException {
+    try {
+      return CleanupWorkerRequest.consume(
+          readBytes("cleanup-request", CleanupWorkerRequest.MAXIMUM_BYTES));
+    } catch (IOException | IllegalArgumentException failure) {
+      throw new IOException("root cleanup request unavailable");
+    }
+  }
+
+  private byte[] readBytes(String name, int maximum) throws IOException {
+    byte[] material = new byte[maximum + 1];
     try {
       require(!Thread.currentThread().isInterrupted() && security.effectiveUid() == 0);
-      Metadata directory = root.atDirectory(p -> inspect(p, true));
+      Metadata directory = root.atDirectory(p -> inspect(p, true, maximum));
       int length =
           root.atExistingEntryHandle(
-              "db-batch",
+              name,
               p -> {
-                Metadata before = inspect(p, false);
+                Metadata before = inspect(p, false, maximum);
                 require(before.device() == directory.device());
                 var channel = Objects.requireNonNull(io.open(p), "root credential channel");
                 int count =
@@ -74,25 +89,25 @@ public final class RootBatchCredentialReader {
                                   && channel.size() == before.size());
                           return buffer.position();
                         });
-                require(before.equals(inspect(p, false)));
+                require(before.equals(inspect(p, false, maximum)));
                 return count;
               });
-      require(directory.equals(root.atDirectory(p -> inspect(p, true))));
+      require(directory.equals(root.atDirectory(p -> inspect(p, true, maximum))));
       require(!Thread.currentThread().isInterrupted() && security.effectiveUid() == 0);
-      return InspectorDbCredential.consume(Arrays.copyOf(material, length));
+      return Arrays.copyOf(material, length);
     } finally {
       Arrays.fill(material, (byte) 0);
     }
   }
 
-  private Metadata inspect(Path held, boolean directory) throws IOException {
+  private Metadata inspect(Path held, boolean directory, int maximum) throws IOException {
     Metadata m = EnvironmentInodePolicy.metadata(io.attributes(held));
     require(m.device() >= 0 && m.inode() > 0);
     require(m.mode() == (directory ? 040500 : 0100400) && m.uid() == 0 && m.gid() == 0);
     require(
         directory
             ? m.links() >= 2 && m.size() >= 0
-            : m.links() == 1 && m.size() >= 1 && m.size() <= 65536);
+            : m.links() == 1 && m.size() >= 1 && m.size() <= maximum);
     byte[] acl = security.accessAcl(held, 44);
     require(acl != null && acl.length == 0 && security.readOnlyFilesystem(held));
     require("tmpfs".equals(io.filesystem(held)));

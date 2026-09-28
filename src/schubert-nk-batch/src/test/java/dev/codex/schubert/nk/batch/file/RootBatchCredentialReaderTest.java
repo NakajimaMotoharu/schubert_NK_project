@@ -10,9 +10,15 @@ import java.util.concurrent.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** RBCR001..008. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
+/** RBCR001..012. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
 final class RootBatchCredentialReaderTest {
   @TempDir Path temporary;
+  private static final String CLEANUP_REQUEST =
+      "NKCLEAN1\n"
+          + "run=31100027-2222-4333-8444-555555555555\n"
+          + "activation=31100027-6666-4777-8888-999999999999\n"
+          + "cutoff=2026-09-27T15:00:00Z\n"
+          + "manifest=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\n";
 
   private BackupPublicationFixture fixture() throws Exception {
     var f = new BackupPublicationFixture(temporary);
@@ -320,6 +326,87 @@ final class RootBatchCredentialReaderTest {
     try (var f = fixture()) {
       f.effective = 1;
       assertThrows(IOException.class, () -> new RootBatchCredentialReader(f.root, f).read());
+    }
+  }
+
+  @Test
+  void rbcr009FixedCleanupCopyCanonicalAndSeparateBatchPassword() throws Exception {
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      var request = reader(f).readCleanupRequest();
+      assertEquals("31100027-2222-4333-8444-555555555555", request.run().toString());
+      assertEquals("31100027-6666-4777-8888-999999999999", request.activation().toString());
+      assertEquals("2026-09-27T15:00:00Z", request.cutoff().toString());
+      assertEquals("0123456789abcdef".repeat(4), request.manifestSha256());
+      success(f);
+      f.released();
+    }
+    try (var f = fixture()) {
+      assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
+      f.released();
+    }
+  }
+
+  @Test
+  void rbcr010CleanupLengthCodecAndUnknownNameFailClosed() throws Exception {
+    for (String invalid :
+        List.of(
+            "",
+            CLEANUP_REQUEST + "\n",
+            CLEANUP_REQUEST.replace("NKCLEAN1", "NKCLEAN2"),
+            CLEANUP_REQUEST.replace("manifest=0", "manifest=A"),
+            "X".repeat(257)))
+      try (var f = fixture()) {
+        Files.write(
+            f.parent.resolve("cleanup-request"), invalid.getBytes(StandardCharsets.US_ASCII));
+        assertEquals(
+            "root cleanup request unavailable",
+            assertThrows(IOException.class, () -> reader(f).readCleanupRequest()).getMessage());
+        f.released();
+      }
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("db-api"), CLEANUP_REQUEST);
+      assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
+      f.released();
+    }
+  }
+
+  @Test
+  void rbcr011CleanupHeldFileFaultAndRootPolicy() throws Exception {
+    for (String mode : List.of("short", "zero", "position"))
+      try (var f = fixture()) {
+        Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+        f.readMode = mode;
+        assertThrows(Exception.class, () -> reader(f).readCleanupRequest());
+        f.released();
+      }
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      f.effective = 1;
+      assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
+      f.released();
+    }
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      f.acl = new byte[] {1};
+      assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
+      f.released();
+    }
+  }
+
+  @Test
+  void rbcr012CleanupReplayAfterBadCopyNeverFallsBackToSource() throws Exception {
+    try (var f = fixture()) {
+      Path copy = f.parent.resolve("cleanup-request");
+      Files.writeString(copy, CLEANUP_REQUEST.replace("NKCLEAN1", "NKCLEAN2"));
+      var subject = reader(f);
+      assertThrows(IOException.class, subject::readCleanupRequest);
+      Files.writeString(copy, CLEANUP_REQUEST);
+      assertEquals(
+          "31100027-2222-4333-8444-555555555555", subject.readCleanupRequest().run().toString());
+      assertEquals(
+          "31100027-2222-4333-8444-555555555555", subject.readCleanupRequest().run().toString());
+      f.released();
     }
   }
 }
