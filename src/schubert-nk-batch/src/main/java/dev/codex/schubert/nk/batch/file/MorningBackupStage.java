@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.batch.file;
 
+import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import java.io.IOException;
 import java.time.Clock;
 import java.util.Objects;
@@ -18,6 +21,17 @@ import org.jspecify.annotations.NullMarked;
 final class MorningBackupStage {
   interface Scope {
     <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OwnedWork<T> {
+    T execute(
+        MaintenanceRunState state,
+        MorningDatabaseSession.Access database,
+        BackupWorkerRequest request,
+        MorningDatabaseSession.BackupBegins begins,
+        UUID part)
+        throws IOException;
   }
 
   private MorningBackupStage() {}
@@ -71,11 +85,43 @@ final class MorningBackupStage {
     Objects.requireNonNull(clock, "UTC backup clock");
     Objects.requireNonNull(part, "new request part");
     Objects.requireNonNull(work, "same-owner backup work");
+    return executeOwned(
+        scope,
+        publisher,
+        clock,
+        recoverAbandoned,
+        part,
+        (state, database, request, begins, ownedPart) -> work.execute(request, begins));
+  }
+
+  /**
+   * Borrow all same-run owners only inside the supplied M/A/DB/original callback. The caller must
+   * separately prove the current original and request before any possible Backup marker retirement.
+   */
+  static <T> T executeOwned(
+      Scope scope,
+      MorningBackupPreparation.Publisher publisher,
+      Clock clock,
+      boolean recoverAbandoned,
+      UUID part,
+      OwnedWork<T> work)
+      throws IOException {
+    Objects.requireNonNull(scope, "owned Morning control scope");
+    Objects.requireNonNull(publisher, "root request publication");
+    Objects.requireNonNull(clock, "UTC backup clock");
+    Objects.requireNonNull(part, "new request part");
+    Objects.requireNonNull(work, "same-owner backup work");
     return Objects.requireNonNull(
         scope.execute(
             (state, database) ->
                 MorningBackupPreparation.execute(
-                    state, database, clock, recoverAbandoned, publisher, part, work)),
+                    state,
+                    database,
+                    clock,
+                    recoverAbandoned,
+                    publisher,
+                    part,
+                    (request, begins) -> work.execute(state, database, request, begins, part))),
         "Morning backup stage result");
   }
 }

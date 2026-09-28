@@ -227,4 +227,156 @@ final class MorningBackupStageTest {
     assertFalse(scope.held.get());
     assertEquals("M/A/DB/original-close", events.getLast());
   }
+
+  @Test
+  void mbstage005PassesExactOwnedValuesOnlyDuringScope() throws Exception {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    String result =
+        MorningBackupStage.executeOwned(
+            scope,
+            (request, part) -> {
+              assertTrue(scope.held.get());
+              assertEquals(RUN.id(), request.run());
+              assertEquals(PART, part);
+              events.add("request-published");
+            },
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            false,
+            PART,
+            (state, database, request, begins, part) -> {
+              assertTrue(scope.held.get());
+              assertSame(STATE, state);
+              assertSame(scope.database, database);
+              assertEquals(RUN.id(), request.run());
+              assertEquals(NOW, request.started());
+              assertEquals(PART, part);
+              assertEquals(BatchStep.BACKUP_DB, begins.database().step());
+              assertEquals(BatchStep.BACKUP_CONFIG, begins.configuration().step());
+              events.add("owned-worker-boundary");
+              return "owned";
+            });
+    assertEquals("owned", result);
+    assertFalse(scope.held.get());
+    assertEquals(
+        List.of(
+            "M/A/DB/original-enter;INVALID",
+            "both-backup-begins-committed",
+            "request-published",
+            "owned-worker-boundary",
+            "M/A/DB/original-close"),
+        events);
+  }
+
+  @Test
+  void mbstage006ResumeFlagAndLegacyWorkRemainStable() throws Exception {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    assertSame(
+        STATE,
+        MorningBackupStage.executeOwned(
+            scope,
+            (request, part) -> assertEquals(PART, part),
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            true,
+            PART,
+            (state, database, request, begins, part) -> {
+              assertTrue(scope.held.get());
+              assertSame(scope.database, database);
+              assertEquals(PART, part);
+              return state;
+            }));
+    assertTrue(scope.database.recover);
+    assertEquals(
+        RUN.id(),
+        MorningBackupStage.execute(
+            scope,
+            (request, part) -> assertEquals(PART, part),
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            false,
+            PART,
+            (request, begins) -> request.run()));
+    assertFalse(scope.database.recover);
+    assertFalse(scope.held.get());
+  }
+
+  @Test
+  void mbstage007PreWorkFailureNeverInvokesBorrowedWork() {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    scope.database.error = new IOException("test-only begin failure");
+    assertSame(
+        scope.database.error,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningBackupStage.executeOwned(
+                    scope,
+                    (request, part) -> fail("no request"),
+                    Clock.fixed(NOW, ZoneOffset.UTC),
+                    false,
+                    PART,
+                    (state, database, request, begins, part) -> fail("no work"))));
+    assertFalse(scope.held.get());
+    events.clear();
+    scope.database.error = null;
+    assertThrows(
+        IOException.class,
+        () ->
+            MorningBackupStage.executeOwned(
+                scope,
+                (request, part) -> {
+                  events.add("publication-refused");
+                  throw new IOException("test-only publication failure");
+                },
+                Clock.fixed(NOW, ZoneOffset.UTC),
+                false,
+                PART,
+                (state, database, request, begins, part) -> fail("no work")));
+    assertFalse(scope.held.get());
+    assertEquals(
+        List.of(
+            "M/A/DB/original-enter;INVALID",
+            "both-backup-begins-committed",
+            "publication-refused",
+            "M/A/DB/original-close"),
+        events);
+  }
+
+  @Test
+  void mbstage008NullContractAndNullResultAreNotSuccess() {
+    var events = new ArrayList<String>();
+    var scope = new OwnedScope(events);
+    MorningBackupPreparation.Publisher publisher = (request, part) -> {};
+    MorningBackupStage.OwnedWork<String> work = (state, database, request, begins, part) -> "ok";
+    var clock = Clock.fixed(NOW, ZoneOffset.UTC);
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.executeOwned(null, publisher, clock, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.executeOwned(scope, null, clock, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.executeOwned(scope, publisher, null, false, PART, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.executeOwned(scope, publisher, clock, false, null, work));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupStage.executeOwned(scope, publisher, clock, false, PART, null));
+    assertTrue(events.isEmpty());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningBackupStage.executeOwned(
+                scope,
+                publisher,
+                clock,
+                false,
+                PART,
+                (state, database, request, begins, part) -> null));
+    assertFalse(scope.held.get());
+    assertEquals("M/A/DB/original-close", events.getLast());
+  }
 }
