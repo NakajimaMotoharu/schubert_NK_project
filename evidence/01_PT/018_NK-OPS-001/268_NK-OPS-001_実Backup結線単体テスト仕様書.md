@@ -16,3 +16,7 @@ RD OPS-009/BAK-001/BKO-001、UI251/253、SS341§5.1/6・342§4・343§6.17、SSC
 接続図：Mainの単一30分budget→ControlScope.executeOwnedEpoch(M→原本DB→固定8stop→A→INVALID)→Stageの同owner preparation→Cycle(start→freshtyped結果→stop→全終端→実bundle/両step完了)→原本/current/request再照合→request退役→marker退役。不足はStage Epoch接続、Session狭い完了port、実親archive assembly/Expiry配備。これらはD04/05の同経路必要依存で、偽Unitや新規同等helperで補わない。
 
 PG379 Production6回帰trigger（2026-09-30、実施前）：同owner Epoch/Backup typed terminal/結果確定/親tool budgetのsecurity・transaction変更群を一単位で固定し全6 clean test/static/coverageを実行する。018/269の途中選択runは正式53scopeや外部受入ではない。未網羅を明示し、続く同じ外部起動経路の結線へ進む。
+
+PT-OPS-CANON001の独立roots byte oracleは`evidence/provisional/PG379-owned-backup/input/roots-golden.txt`。SS343§6.17から手書き固定した13行、SHA-256（独立sha256sum）は`4b08c89315842f33d6eae97a7c650f563987ca795e1793f3481b362c0646e962`。PUBLIC fixtureであり実host/root authority/正規issuer証拠ではない。Production encoderとの比較は未実行。CRLF/順序/一byte/UUID/owner/ino/freshness差の負試験を後続collector接続で追加する。5gateの完全byte oracleは未完了につきSSC108を閉じない。
+
+PT-OPS-MNAMESPACE001（SSC109/BUG327/YKT259）：前提host localRW＋strict privateRO祖先、privateRW固定mutation対象。期待は両view同dev/ino/owner/mode/ACL/FSかつhostRWの祖先のみ許容、hostRO/差替え/ACL/不明は拒否、privateRO mutationは拒否。host注入fixtureと実VM statvfs/同Production Mainの一往復で検証する。先行VM診断はhost5対象RW、strict private4祖先RO/backupRW、exit0。固定Morning受入ではなく設定反例のみ。

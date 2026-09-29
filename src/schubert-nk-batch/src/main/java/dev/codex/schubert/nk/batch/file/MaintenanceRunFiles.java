@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.batch.repository.RunReferenceRepository;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
@@ -58,6 +59,7 @@ public final class MaintenanceRunFiles {
   private final Object scopeLock = new Object();
   private final Path varPath;
   private final DirectoryCalls directories;
+  private final Optional<DirectoryCalls> host;
   private final InodeSecurityCalls security;
   private final Io io;
   private final Supplier<UUID> parts;
@@ -108,7 +110,9 @@ public final class MaintenanceRunFiles {
         LinuxDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
         new NioIo(),
-        UUID::randomUUID);
+        UUID::randomUUID,
+        () -> MessageDigest.getInstance("SHA-256"),
+        Optional.of(LinuxHostDirectoryCalls.create()));
   }
 
   MaintenanceRunFiles(
@@ -127,12 +131,24 @@ public final class MaintenanceRunFiles {
       Io io,
       Supplier<UUID> parts,
       Digests digests) {
+    this(varPath, directories, security, io, parts, digests, Optional.empty());
+  }
+
+  MaintenanceRunFiles(
+      Path varPath,
+      DirectoryCalls directories,
+      InodeSecurityCalls security,
+      Io io,
+      Supplier<UUID> parts,
+      Digests digests,
+      Optional<DirectoryCalls> host) {
     this.varPath = Objects.requireNonNull(varPath, "durable ancestor");
     this.directories = Objects.requireNonNull(directories, "directory operations");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "record IO");
     this.parts = Objects.requireNonNull(parts, "part identities");
     this.digests = Objects.requireNonNull(digests, "plan digests");
+    this.host = Objects.requireNonNull(host, "host ancestor view");
     if (!varPath.isAbsolute()
         || varPath.getNameCount() == 0
         || !varPath.equals(varPath.normalize()))
@@ -221,11 +237,50 @@ public final class MaintenanceRunFiles {
       values.add(
           roots
               .get(index)
-              .atDirectory(p -> shared ? policy.durableAncestor(p) : policy.durable(p, true, 0)));
+              .atDirectory(
+                  p ->
+                      shared
+                          ? policy.durableAncestor(p, host.isPresent())
+                          : policy.durable(p, true, 0)));
     }
+    if (host.isPresent()) verifyHostAncestors(values);
     require(values.get(3).metadata().device() == values.get(4).metadata().device());
     require(values.get(3).metadata().device() == values.get(5).metadata().device());
     return List.copyOf(values);
+  }
+
+  private void verifyHostAncestors(List<Snapshot> privateValues) throws StorageIoException {
+    var var = OwnedTransferDirectory.open(host.orElseThrow(), varPath);
+    ResourceScope.use(
+        var::close,
+        () -> {
+          var lib = var.openExistingChild("lib");
+          return ResourceScope.use(
+              lib::close,
+              () -> {
+                var app = lib.openExistingChild("schubert-nk");
+                return ResourceScope.use(
+                    app::close,
+                    () -> {
+                      var hostRoots = List.of(var, lib, app);
+                      var before = new ArrayList<Snapshot>();
+                      for (int index = 0; index < hostRoots.size(); index++) {
+                        Snapshot actual = hostRoots.get(index).atDirectory(policy::durableAncestor);
+                        Snapshot service = privateValues.get(index);
+                        require(
+                            actual.metadata().equals(service.metadata())
+                                && actual.filesystem().equals(service.filesystem()));
+                        before.add(actual);
+                      }
+                      for (int index = 0; index < hostRoots.size(); index++)
+                        require(
+                            before
+                                .get(index)
+                                .equals(hostRoots.get(index).atDirectory(policy::durableAncestor)));
+                      return Boolean.TRUE;
+                    });
+              });
+        });
   }
 
   /** Scope-bound serialized operations, never an OS lock or completed-parent certificate. */
@@ -316,16 +371,23 @@ public final class MaintenanceRunFiles {
     public MaintenanceActivation observeCleanup(CleanupWorkerRequest request)
         throws StorageIoException {
       Objects.requireNonNull(request, "fixed cleanup request");
+      return observe(
+          new MaintenanceActivation(
+              new BatchRun(request.run(), request.cutoff()), request.activation()));
+    }
+
+    /** Read-only original proof using the SAME retained owner, never a resume or fresh trust. */
+    public MaintenanceActivation observe(MaintenanceActivation expected) throws StorageIoException {
+      Objects.requireNonNull(expected, "expected owned original");
       return perform(
           () -> {
             Graph first = scan();
             require(first.equals(scan()));
             require(first.active().isPresent());
             MaintenanceActivation active = first.active().orElseThrow();
-            require(active.run().equals(new BatchRun(request.run(), request.cutoff())));
-            require(active.id().equals(request.activation()));
+            require(active.equals(expected));
             // graph() places this run in pending iff its current activation has no done record.
-            require(first.pending().equals(Optional.of(request.run())));
+            require(first.pending().equals(Optional.of(expected.run().id())));
             return active;
           });
     }

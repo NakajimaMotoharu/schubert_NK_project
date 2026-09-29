@@ -42,6 +42,97 @@ final class MaintenanceRunFilesTest {
   private static final String DONE0 = DONE_PREFIX + "0\n", DONE10 = DONE_PREFIX + "10\n";
   @TempDir Path temporary;
 
+  /** SSC109/BUG327/PT-OPS-MNAMESPACE002: paired RO ancestors never authorize RO records. */
+  @Test
+  void hostAncestorPairingKeepsDurableWritesPrivate() throws Exception {
+    for (String condition :
+        List.of("shared-ro", "host-ro", "maintenance-ro", "runs-ro", "attempts-ro", "drift")) {
+      try (var f = fixture()) {
+        var hostFds = ConcurrentHashMap.<Integer>newKeySet();
+        var hostCalls =
+            (DirectoryCalls)
+                Proxy.newProxyInstance(
+                    getClass().getClassLoader(),
+                    new Class<?>[] {DirectoryCalls.class},
+                    (proxy, method, args) -> {
+                      try {
+                        Object value = method.invoke(f.calls, args);
+                        if (Set.of("openRoot", "openDirectory", "openEntry")
+                            .contains(method.getName())) assertTrue(hostFds.add((Integer) value));
+                        if (method.getName().equals("close"))
+                          assertTrue(hostFds.remove((Integer) args[0]));
+                        return value;
+                      } catch (InvocationTargetException failure) {
+                        throw failure.getCause();
+                      }
+                    });
+        var io =
+            (MaintenanceRunFiles.Io)
+                Proxy.newProxyInstance(
+                    getClass().getClassLoader(),
+                    new Class<?>[] {MaintenanceRunFiles.Io.class},
+                    (proxy, method, args) -> {
+                      try {
+                        Object result = method.invoke(f, args);
+                        if (method.getName().equals("attributes")
+                            && condition.equals("drift")
+                            && hostFds.contains(
+                                Integer.parseInt(((Path) args[0]).getFileName().toString()))) {
+                          @SuppressWarnings("unchecked")
+                          var values = (Map<String, Object>) result;
+                          values.put("ino", Long.MAX_VALUE);
+                        }
+                        return result;
+                      } catch (InvocationTargetException failure) {
+                        throw failure.getCause();
+                      }
+                    });
+        var security =
+            new InodeSecurityCalls() {
+              public long effectiveUid() {
+                return 0;
+              }
+
+              public byte[] accessAcl(Path held, int maximum) throws StorageIoException {
+                return f.accessAcl(held, maximum);
+              }
+
+              public boolean readOnlyFilesystem(Path held) throws StorageIoException {
+                if (hostFds.contains(Integer.parseInt(held.getFileName().toString())))
+                  return condition.equals("host-ro");
+                try {
+                  String role = f.role(held);
+                  return Set.of("var", "lib", "app").contains(role)
+                      || condition.equals(role + "-ro");
+                } catch (IOException failure) {
+                  throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+                }
+              }
+            };
+        var files =
+            new MaintenanceRunFiles(
+                f.varPath,
+                f.calls,
+                security,
+                io,
+                f::part,
+                () -> java.security.MessageDigest.getInstance("SHA-256"),
+                Optional.of(hostCalls));
+        var invoked = new java.util.concurrent.atomic.AtomicInteger();
+        if (condition.equals("shared-ro"))
+          assertEquals(Integer.valueOf(1), files.execute(s -> invoked.incrementAndGet()));
+        else {
+          failure(() -> files.execute(s -> invoked.incrementAndGet()));
+          assertEquals(0, invoked.get());
+        }
+        assertEquals(0, f.count("publish"));
+        assertEquals(0, f.count("write"));
+        assertTrue(hostFds.isEmpty());
+        f.released();
+      }
+    }
+  }
+
   private static MaintenanceCompletion completion(MaintenanceCompletion.Outcome outcome) {
     return new MaintenanceCompletion(
         ACTIVATION, Instant.parse("2026-09-12T05:06:07.234567Z"), outcome);

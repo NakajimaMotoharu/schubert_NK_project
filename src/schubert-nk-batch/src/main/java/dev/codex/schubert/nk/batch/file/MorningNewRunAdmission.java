@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.file;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
@@ -49,6 +50,10 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface Files {
     MaintenanceRunState start(BatchRun run, UUID activation) throws IOException;
+
+    default void verify(MaintenanceActivation expected) throws IOException {
+      throw unavailable();
+    }
   }
 
   @FunctionalInterface
@@ -68,6 +73,18 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface OwnedContinuation<T> {
     T execute(MaintenanceRunState state, MorningDatabaseSession.Access database) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OriginalProof {
+    void verify() throws IOException;
+  }
+
+  @FunctionalInterface
+  interface VerifiedContinuation<T> {
+    T execute(
+        MaintenanceRunState state, MorningDatabaseSession.Access database, OriginalProof original)
+        throws IOException;
   }
 
   private final Gate root;
@@ -106,7 +123,23 @@ final class MorningNewRunAdmission {
           @Override
           public <T> T execute(FileWork<T> work) throws IOException {
             Objects.requireNonNull(work, "owned run-file work");
-            return MaintenanceRunFiles.create().execute(files -> work.execute(files::start));
+            return MaintenanceRunFiles.create()
+                .execute(
+                    files ->
+                        work.execute(
+                            new Files() {
+                              public MaintenanceRunState start(BatchRun run, UUID activation)
+                                  throws IOException {
+                                return files.start(run, activation);
+                              }
+
+                              public void verify(MaintenanceActivation activation)
+                                  throws IOException {
+                                context.recheck(expected);
+                                files.observe(activation);
+                                context.recheck(expected);
+                              }
+                            }));
           }
         },
         Clock.systemUTC(),
@@ -145,6 +178,11 @@ final class MorningNewRunAdmission {
 
   <T> T executeOwned(OwnedContinuation<T> continuation) throws IOException {
     Objects.requireNonNull(continuation, "owned same-run continuation");
+    return executeVerified((state, database, ignored) -> continuation.execute(state, database));
+  }
+
+  <T> T executeVerified(VerifiedContinuation<T> continuation) throws IOException {
+    Objects.requireNonNull(continuation, "verified same-run continuation");
     root.verify();
     var run =
         new BatchRun(
@@ -167,9 +205,27 @@ final class MorningNewRunAdmission {
                         || !state.activation().id().equals(activation)
                         || state.completion().isPresent()) throw unavailable();
                     root.verify();
-                    T completed =
-                        Objects.requireNonNull(
-                            continuation.execute(state, databaseAccess), "Morning continuation");
+                    long ownerThread = Thread.currentThread().threadId();
+                    var alive = new java.util.concurrent.atomic.AtomicBoolean(true);
+                    T completed;
+                    try {
+                      completed =
+                          Objects.requireNonNull(
+                              continuation.execute(
+                                  state,
+                                  databaseAccess,
+                                  () -> {
+                                    if (!alive.get()
+                                        || Thread.currentThread().threadId() != ownerThread)
+                                      throw unavailable();
+                                    root.verify();
+                                    files.verify(state.activation());
+                                    root.verify();
+                                  }),
+                              "Morning continuation");
+                    } finally {
+                      alive.set(false);
+                    }
                     root.verify();
                     return completed;
                   });

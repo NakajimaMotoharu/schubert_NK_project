@@ -45,7 +45,11 @@ final class MorningServiceUnitTest {
     assertFalse(content.contains("SetCredentialEncrypted="));
     assertFalse(content.contains("SetCredential="));
     assertFalse(content.contains("ExecStartPre="));
-    assertFalse(content.contains("ReadWritePaths="));
+    // SSC109: mutation roots only; shared /run and /var remain private RO.
+    exact(
+        content,
+        "ReadWritePaths",
+        "/run/schubert-nk /var/lib/schubert-nk/maintenance /srv/schubert-nk/backup");
   }
 
   @Test
@@ -59,7 +63,7 @@ final class MorningServiceUnitTest {
     exact(content, "SendSIGKILL", "no");
     exact(content, "ProtectSystem", "strict");
     exact(content, "NoNewPrivileges", "true");
-    exact(content, "CapabilityBoundingSet", "");
+    exact(content, "CapabilityBoundingSet", "CAP_SYS_PTRACE CAP_DAC_OVERRIDE");
     exact(content, "AmbientCapabilities", "");
   }
 

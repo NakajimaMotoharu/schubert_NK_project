@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch;
 import dev.codex.schubert.nk.batch.file.StartupPermitRecords.State;
+import dev.codex.schubert.nk.batch.platform.MorningParentBudget;
 import dev.codex.schubert.nk.batch.platform.MorningStopPass;
 import dev.codex.schubert.nk.batch.platform.MorningUnitTerminals;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
@@ -72,6 +73,16 @@ final class MorningControlScope {
   }
 
   @FunctionalInterface
+  interface VerifiedEpochWork<T> {
+    T execute(
+        MaintenanceRunState state,
+        dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
+        Epoch epoch,
+        MorningNewRunAdmission.OriginalProof original)
+        throws IOException;
+  }
+
+  @FunctionalInterface
   interface Terminals {
     void requireAll() throws IOException;
   }
@@ -82,6 +93,48 @@ final class MorningControlScope {
   }
 
   private MorningControlScope() {}
+
+  /** Actual original owner remains nested inside the SAME M/A/DB/current callback. */
+  static <T> T executeVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> trustedWork)
+      throws IOException {
+    Objects.requireNonNull(budget, "parent Morning budget");
+    Objects.requireNonNull(trustedWork, "verified original work");
+    budget.requireWithin();
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    Gate gate =
+        () -> {
+          budget.requireWithin();
+          root.recheck(snapshot);
+        };
+    var maintenance = MaintenanceFileLock.create();
+    var startup = StartupAdmissionFile.create();
+    return executeStopAndStartup(
+        gate,
+        maintenance::tryExclusive,
+        () -> {
+          try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
+            intent.requireClear();
+          }
+          return MorningNewRunAdmission.create(root, snapshot)
+              .executeVerified(
+                  (state, database, original) ->
+                      afterOriginal(
+                          gate,
+                          () -> MorningStopPass.create(root, snapshot, budget).execute(),
+                          startup::tryExclusive,
+                          () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
+                          () -> {
+                            Epoch epoch =
+                                MorningCurrentInvalidation.invalidate(root, snapshot, state);
+                            if (epoch.state() != State.INVALID
+                                || !epoch.activation().equals(state.activation()))
+                              throw unavailable();
+                            original.verify();
+                            return trustedWork.execute(state, database, epoch, original);
+                          }));
+        });
+  }
 
   static <T> T execute(MorningNewRunAdmission.Continuation<T> trustedWork) throws IOException {
     Objects.requireNonNull(trustedWork, "trusted Morning work");

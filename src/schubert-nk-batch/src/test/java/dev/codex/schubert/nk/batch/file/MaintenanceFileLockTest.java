@@ -439,7 +439,9 @@ final class MaintenanceFileLockTest {
       assertEquals(1, entries.size());
       var options = Set.of(entries.getFirst()[3].split(","));
       assertTrue(options.contains("ro") ^ options.contains("rw"));
-      assertEquals(options.contains("ro"), real.readOnly(Path.of(mount)));
+      try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of(mount))) {
+        assertEquals(options.contains("ro"), held.atDirectory(real::readOnly));
+      }
     }
   }
 
@@ -463,6 +465,54 @@ final class MaintenanceFileLockTest {
     // Probe mutation methods throw, so any create/chmod/delete repair would fail this test.
     assertEquals(0, Files.size(f.file));
     assertEquals(0100600, Files.getAttribute(f.file, "unix:mode"));
+  }
+
+  /** SSC109/BUG327, PT-OPS-MNAMESPACE001: independent private/host mount flags. */
+  @Test
+  void dualViewKeepsMutationWritableAndHostIdentity() throws Exception {
+    for (String condition : List.of("shared-ro", "host-ro", "app-ro", "file-ro", "drift")) {
+      var f = fixture();
+      var host = new Calls();
+      var delegate = f.io();
+      var io =
+          new MaintenanceFileLock.Io() {
+            boolean isHost(Path held) {
+              return host.held.contains(Integer.parseInt(held.getFileName().toString()));
+            }
+
+            public Map<String, Object> attributes(Path held) throws IOException {
+              var result = delegate.attributes(held);
+              if (condition.equals("drift") && isHost(held)) result.put("ino", Long.MAX_VALUE);
+              return result;
+            }
+
+            public String filesystemType(Path held) throws IOException {
+              return delegate.filesystemType(held);
+            }
+
+            public boolean readOnly(Path held) throws IOException {
+              if (isHost(held)) return condition.equals("host-ro");
+              String role = f.role(held);
+              return role.equals("run") || condition.equals(role + "-ro");
+            }
+          };
+      var adapter =
+          new MaintenanceFileLock(
+              f.runtime, f.calls, f.security(), LinuxFileLock.create(), io, Optional.of(host));
+      var invoked = new AtomicInteger();
+      if (condition.equals("shared-ro")) {
+        assertEquals(Optional.of(1), adapter.tryExclusive(invoked::incrementAndGet));
+        assertEquals(1, invoked.get());
+      } else {
+        assertUnavailable(
+            assertThrows(
+                StorageIoException.class, () -> adapter.tryExclusive(invoked::incrementAndGet)));
+        assertEquals(0, invoked.get());
+      }
+      assertEquals(0, host.outstanding.get());
+      assertEquals(0, f.calls.outstanding.get());
+      assertEquals(0, external(f.file));
+    }
   }
 
   private Fixture fixture() throws IOException {
@@ -598,11 +648,13 @@ final class MaintenanceFileLockTest {
         outstanding = new AtomicInteger();
     int openFailure, closeFailure;
     java.util.function.IntConsumer afterClose = count -> {};
+    final Set<Integer> held = ConcurrentHashMap.newKeySet();
 
     private int open(Open action) throws StorageIoException {
       if (opened.incrementAndGet() == openFailure)
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       int fd = action.execute();
+      held.add(fd);
       outstanding.incrementAndGet();
       return fd;
     }
@@ -625,6 +677,7 @@ final class MaintenanceFileLockTest {
     @Override
     public void close(int fd) throws StorageIoException {
       real.close(fd);
+      held.remove(fd);
       outstanding.decrementAndGet();
       int count = closed.incrementAndGet();
       afterClose.accept(count);

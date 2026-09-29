@@ -41,6 +41,19 @@ final class MorningBackupStage {
   }
 
   @FunctionalInterface
+  interface VerifiedEpochWork<T> {
+    T execute(
+        MaintenanceRunState state,
+        MorningDatabaseSession.Access database,
+        StartupPermitRecords.Epoch epoch,
+        BackupWorkerRequest request,
+        MorningDatabaseSession.BackupBegins begins,
+        UUID part,
+        MorningNewRunAdmission.OriginalProof original)
+        throws IOException;
+  }
+
+  @FunctionalInterface
   interface OwnedWork<T> {
     T execute(
         MaintenanceRunState state,
@@ -52,6 +65,35 @@ final class MorningBackupStage {
   }
 
   private MorningBackupStage() {}
+
+  static <T> T freshVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> work)
+      throws IOException {
+    Objects.requireNonNull(budget, "parent Morning budget");
+    Objects.requireNonNull(work, "verified backup work");
+    budget.requireWithin();
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    var publisher = MorningBackupRequestPublication.create(root, snapshot);
+    UUID part = UUID.randomUUID();
+    return MorningControlScope.executeVerifiedEpoch(
+        budget,
+        (state, database, epoch, original) ->
+            MorningBackupPreparation.execute(
+                state,
+                database,
+                Clock.systemUTC(),
+                false,
+                publisher,
+                part,
+                (request, begins) -> {
+                  budget.requireWithin();
+                  original.verify();
+                  T result = work.execute(state, database, epoch, request, begins, part, original);
+                  budget.requireWithin();
+                  original.verify();
+                  return result;
+                }));
+  }
 
   static <T> T freshEpoch(MorningParentBudget budget, OwnedEpochWork<T> work) throws IOException {
     Objects.requireNonNull(budget, "existing parent budget");

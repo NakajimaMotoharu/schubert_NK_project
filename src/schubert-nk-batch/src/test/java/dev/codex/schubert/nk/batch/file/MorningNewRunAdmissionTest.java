@@ -38,6 +38,7 @@ final class MorningNewRunAdmissionTest {
     IOException startFailure;
     int originalVariant;
     int ids;
+    boolean proofAvailable;
 
     MorningNewRunAdmission admission() {
       return new MorningNewRunAdmission(
@@ -88,7 +89,7 @@ final class MorningNewRunAdmissionTest {
               events.add("file-enter");
               fileHeld.set(true);
               try {
-                return work.execute(
+                MorningNewRunAdmission.Files original =
                     (run, activation) -> {
                       events.add("original-start");
                       if (startFailure != null) throw startFailure;
@@ -106,7 +107,26 @@ final class MorningNewRunAdmissionTest {
                                       run.cutoff().plusSeconds(1),
                                       MaintenanceCompletion.Outcome.SUCCESS))
                               : Optional.empty());
-                    });
+                    };
+                if (proofAvailable)
+                  return work.execute(
+                      new MorningNewRunAdmission.Files() {
+                        public MaintenanceRunState start(BatchRun run, UUID activation)
+                            throws IOException {
+                          return original.start(run, activation);
+                        }
+
+                        public void verify(MaintenanceActivation expected) throws IOException {
+                          assertTrue(dbHeld.get() && fileHeld.get());
+                          assertEquals(
+                              new MaintenanceActivation(
+                                  new BatchRun(RUN, Instant.parse("2026-09-28T05:00:00.123456Z")),
+                                  ACTIVATION),
+                              expected);
+                          events.add("original-proof");
+                        }
+                      });
+                return work.execute(original);
               } finally {
                 fileHeld.set(false);
                 events.add("file-close");
@@ -116,6 +136,49 @@ final class MorningNewRunAdmissionTest {
           Clock.fixed(CLOCK, ZoneOffset.UTC),
           () -> ids++ == 0 ? RUN : ACTIVATION);
     }
+  }
+
+  @Test
+  void mnew012OriginalProofIsSameOwnerThreadAndLifetime() throws Exception {
+    var h = new Harness();
+    h.proofAvailable = true;
+    var held =
+        new java.util.concurrent.atomic.AtomicReference<MorningNewRunAdmission.OriginalProof>();
+    assertEquals(
+        "verified",
+        h.admission()
+            .executeVerified(
+                (state, database, original) -> {
+                  original.verify();
+                  held.set(original);
+                  try (var other = Executors.newSingleThreadExecutor()) {
+                    assertEquals(
+                        "Morning new-run admission unavailable",
+                        assertDoesNotThrow(
+                            () ->
+                                other
+                                    .submit(
+                                        () ->
+                                            assertThrows(IOException.class, original::verify)
+                                                .getMessage())
+                                    .get(5, TimeUnit.SECONDS)));
+                  }
+                  assertTrue(h.dbHeld.get() && h.fileHeld.get());
+                  return "verified";
+                }));
+    assertEquals(1, h.events.stream().filter("original-proof"::equals).count());
+    assertThrows(IOException.class, held.get()::verify);
+    var absent = new Harness();
+    assertThrows(
+        IOException.class,
+        () ->
+            absent
+                .admission()
+                .executeVerified(
+                    (state, database, proof) -> {
+                      proof.verify();
+                      return fail("unassembled proof must not pass");
+                    }));
   }
 
   @Test

@@ -106,6 +106,8 @@ SSC104/PG326：子のroot contextは`schubert-nk-cleanup.service`自身のUID0�
 
 SSC108/PG379補足：許可のprestart観測はSS341§5.1/SS343§6.17の固定集合とする。親/各worker/ArtemisのInvocationは真正managerとhost kernelの同一boot観測へ束縛し、command client exitを結果としない。Morning root Unitの保持root書込みとPID1由来確認に必要な最小権限・ReadWritePathsは実配備で照合し、未配置Expiryを空成功Unitで代用しない。API/WebのzeroCaps契約は変更しない。host injected PTと実VM coverageを同一sourceへ束縛し、外部main/namespace/native分岐を除外しない。
 
+SSC109実装前：親候補はstrictを維持して`ReadWritePaths=/run/schubert-nk /var/lib/schubert-nk/maintenance /srv/schubert-nk/backup`の固定mutation対象へ限定する。共有/run,/var,/var/lib,/var/lib/schubert-nkを広域RWへしない。root親CAP_SYS_PTRACEはPID1由来確認、CAP_DAC_OVERRIDEは専用backup0700内のroot-owned archive生成に用途限定し、実VMで最小性を確認する。全CAP許可/ProtectSystem=fullは回避策にしない。API/Web/BackupのzeroCaps及びcredential配布範囲は維持する。単なる設定候補を実Morning受入へ算入しない。
+
 ### 4.2 Java service共通
 
 SSC-087: root前段も共通sandbox内で動き、ProtectSystem=strictを解除する`+`/shell/setnsは使わない。PrivateUsers/PrivatePIDsや固定permit fileの古いbindを追加せず、PID1/system managerが同じhost/bootであることを検証する。root前段のread-only保持host能力だけで現在host FSを観測し、exec前に全closeする。普通serviceにはA短期FDとsealed公開proof以外のhost能力を移さない。private RO観測をhost故障のRO状態と混同しない。

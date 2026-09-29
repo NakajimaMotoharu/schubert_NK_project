@@ -477,6 +477,8 @@ Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一�
 
 ### 6.17 許可根拠canonical観測（SSC108、PG379、実装前）
 
+SSC109実装前補足：固定M/原本のshared祖先は真正PID1 host viewのlocalRWと、private viewの保持同inode/owner/mode/ACL/FSを独立照合する。strict sandboxの祖先だけROであっても拒否理由にしない。M本体の固定private app/lock、原本maintenance/runs/attempts、request/current、backupの実mutation能力にはprivateRWを従来どおり要求する。固定host根からのNOFOLLOW保持能力は読取検査専用で、write/publish/sync/unlinkをhost経由へ切替えてsandboxを迂回しない。host/namespace root由来は固定親RootStartupContextで先に証明し、IO前後に再確認する。HostSnapshot/privateSnapshotのdev/ino・metadata差/hostRO/不明は処理0・非成功。Aは既存StartupAdmissionFileがhost/private同inodeを照合済でありMの代替にしない。
+
 NKPERMIT1の既存field/byteは変更しない。二つの根拠は非秘密ASCII/LF、末尾LF必須、CR/空白/未知/重複/順序変更/未実行のplaceholder拒否。UUIDは非zero小文字canonical、時刻UTC固定6桁microsecond、整数はunsigned canonical decimal（leading zeroなし）、modeは4桁octal、hashは小文字64hex。pathは設定のabsolute normalized値そのもの、ASCII printableで`|`/CR/LFを含まず、全segment NOFOLLOW・実保持root検査済の値だけを採用する。未対応pathを別表記へ自動変換しない。最大65536byte、SHA-256は完成したbyte全体に対して計算する。
 
 両byte列の先頭はそれぞれ`NKROOTS1\n`/`NKPRESTART1\n`、次に共通5行を固定順で置く：`boot_id=<UUID>`、`epoch_id=<UUID>`、`run_id=<UUID>`、`cutoff_utc=<time>`、`activation_id=<UUID>`。同親の読戻し済INVALID Epoch/原本から取得し、run/activation/cutoffを再生成しない。

@@ -51,8 +51,14 @@ final class EnvironmentInodePolicy {
 
   /** Shared durable ancestors retain 0755; NK-BAT-001/SS343 6.15/PT-BAT-070. */
   Snapshot durableAncestor(Path held) throws IOException {
+    return durableAncestor(held, false);
+  }
+
+  /** SSC109: only paired native host admission may allow a private shared ancestor RO. */
+  Snapshot durableAncestor(Path held, boolean allowPrivateReadonly) throws IOException {
     Snapshot result = inspect(held, false, true, 040755, 0, 0, 0);
-    require(!result.filesystem().equals("tmpfs") && !result.readonly());
+    require(!result.filesystem().equals("tmpfs"));
+    if (!allowPrivateReadonly) require(!result.readonly());
     return result;
   }
 

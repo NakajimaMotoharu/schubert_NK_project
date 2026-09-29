@@ -23,6 +23,7 @@ import org.jspecify.annotations.Nullable;
 public final class MaintenanceFileLock {
   private final Path runtime;
   private final DirectoryCalls directories;
+  private final Optional<DirectoryCalls> host;
   private final InodeSecurityCalls security;
   private final LinuxFileLock lock;
   private final Io io;
@@ -48,7 +49,8 @@ public final class MaintenanceFileLock {
         LinuxDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
         LinuxFileLock.create(),
-        new NioIo());
+        new NioIo(),
+        Optional.of(LinuxHostDirectoryCalls.create()));
   }
 
   // Package-only fixture/fault seam; never expose these selections as runtime configuration.
@@ -58,11 +60,23 @@ public final class MaintenanceFileLock {
       InodeSecurityCalls security,
       LinuxFileLock lock,
       Io io) {
+    this(runtime, directories, security, lock, io, Optional.empty());
+  }
+
+  // SSC109/BUG327: host capability is observation-only; M is locked in the private view.
+  MaintenanceFileLock(
+      Path runtime,
+      DirectoryCalls directories,
+      InodeSecurityCalls security,
+      LinuxFileLock lock,
+      Io io,
+      Optional<DirectoryCalls> host) {
     this.runtime = Objects.requireNonNull(runtime, "runtime");
     this.directories = Objects.requireNonNull(directories, "directories");
     this.security = Objects.requireNonNull(security, "security");
     this.lock = Objects.requireNonNull(lock, "lock");
     this.io = Objects.requireNonNull(io, "io");
+    this.host = Objects.requireNonNull(host, "host view");
     if (!runtime.isAbsolute()
         || runtime.getNameCount() == 0
         || !runtime.equals(runtime.normalize()))
@@ -79,84 +93,99 @@ public final class MaintenanceFileLock {
     Objects.requireNonNull(operation, "operation");
     require(security.effectiveUid() == 0);
     try {
-      var run = OwnedTransferDirectory.open(directories, runtime);
-      return ResourceScope.use(
-          run::close,
-          () -> {
-            Identity runIdentity = run.atDirectory(this::directory);
-            {
-              var app = run.openExistingChild("schubert-nk");
-              return ResourceScope.use(
-                  app::close,
-                  () -> {
-                    Identity appIdentity = app.atDirectory(this::directory);
-                    require(runIdentity.device() == appIdentity.device());
-                    return app.atExistingEntryHandle(
-                        "maintenance.lock",
-                        held -> {
-                          Identity fileIdentity = file(held);
-                          require(appIdentity.device() == fileIdentity.device());
-                          var expected = new Snapshot(runIdentity, appIdentity, fileIdentity);
-                          return lock.tryExclusive(
-                              held,
-                              () -> {
-                                verifyCurrent(expected);
-                                T result = operation.execute();
-                                verifyCurrent(expected);
-                                return result;
-                              });
-                        });
-                  });
-            }
-          });
+      if (host.isPresent())
+        return withView(
+            host.orElseThrow(),
+            true,
+            (hostSnapshot, ignored) ->
+                withView(
+                    directories,
+                    false,
+                    (privateSnapshot, held) -> {
+                      require(hostSnapshot.equals(privateSnapshot));
+                      return underLock(privateSnapshot, held, operation);
+                    }));
+      return withView(directories, false, (expected, held) -> underLock(expected, held, operation));
     } catch (IOException failure) {
       // Every owned entry/root has already closed; never leak nested/suppressed physical paths.
       throw unavailable();
     }
   }
 
-  private void verifyCurrent(Snapshot expected) throws StorageIoException {
-    {
-      var run = OwnedTransferDirectory.open(directories, runtime);
-      ResourceScope.use(
-          run::close,
-          () -> {
-            require(expected.run().equals(run.atDirectory(this::directory)));
-            {
-              var app = run.openExistingChild("schubert-nk");
-              ResourceScope.use(
-                  app::close,
-                  () -> {
-                    require(expected.app().equals(app.atDirectory(this::directory)));
-                    require(
-                        app.atExistingEntryHandle(
-                            "maintenance.lock", p -> expected.file().equals(file(p))));
-
-                    return Boolean.TRUE;
-                  });
-            }
-
-            return Boolean.TRUE;
-          });
-    }
+  private <T> Optional<T> underLock(
+      Snapshot expected, Path held, LinuxFileLock.Operation<T> operation) throws IOException {
+    return lock.tryExclusive(
+        held,
+        () -> {
+          verifyCurrent(expected);
+          T result = operation.execute();
+          verifyCurrent(expected);
+          return result;
+        });
   }
 
-  private Identity directory(Path held) throws IOException {
+  private <T> T withView(DirectoryCalls calls, boolean hostView, ViewOperation<T> operation)
+      throws IOException {
+    var run = OwnedTransferDirectory.open(calls, runtime);
+    return ResourceScope.use(
+        run::close,
+        () -> {
+          Identity runIdentity = run.atDirectory(p -> directory(p, hostView || host.isEmpty()));
+          {
+            var app = run.openExistingChild("schubert-nk");
+            return ResourceScope.use(
+                app::close,
+                () -> {
+                  Identity appIdentity = app.atDirectory(p -> directory(p, true));
+                  require(runIdentity.device() == appIdentity.device());
+                  return app.atExistingEntryHandle(
+                      "maintenance.lock",
+                      held -> {
+                        Identity fileIdentity = file(held);
+                        require(appIdentity.device() == fileIdentity.device());
+                        var expected = new Snapshot(runIdentity, appIdentity, fileIdentity);
+                        return operation.execute(expected, held);
+                      });
+                });
+          }
+        });
+  }
+
+  private void verifyCurrent(Snapshot expected) throws IOException {
+    if (host.isPresent())
+      withView(
+          host.orElseThrow(),
+          true,
+          (actual, held) -> {
+            require(expected.equals(actual));
+            return Boolean.TRUE;
+          });
+    withView(
+        directories,
+        false,
+        (actual, held) -> {
+          require(expected.equals(actual));
+          return Boolean.TRUE;
+        });
+  }
+
+  private Identity directory(Path held, boolean requireWritable) throws IOException {
     Metadata m = metadata(io.attributes(held));
     require(m.mode() == 040755 && m.links() >= 2 && m.size() >= 0);
-    return identity(held, m);
+    return identity(held, m, requireWritable);
   }
 
   private Identity file(Path held) throws IOException {
     Metadata m = metadata(io.attributes(held));
     // Validate retained inode's exact type before any path-following FS or xattr operation.
     require(m.mode() == 0100600 && m.links() == 1 && m.size() == 0);
-    return identity(held, m);
+    return identity(held, m, true);
   }
 
-  private Identity identity(Path held, Metadata m) throws IOException {
+  private Identity identity(Path held, Metadata m, boolean requireWritable) throws IOException {
     require(m.uid() == 0 && m.gid() == 0);
-    require("tmpfs".equals(io.filesystemType(held)) && !io.readOnly(held));
+    require("tmpfs".equals(io.filesystemType(held)));
+    if (requireWritable) require(!io.readOnly(held));
     require(security.accessAcl(held, 44).length == 0);
     // Directory size/link count may change when legitimate sibling services create their files;
     // they are validated, but identity includes only stable ownership/type/permission/dev/inode.
@@ -190,6 +219,11 @@ public final class MaintenanceFileLock {
 
   private record Snapshot(Identity run, Identity app, Identity file) {}
 
+  @FunctionalInterface
+  private interface ViewOperation<T> {
+    T execute(Snapshot snapshot, Path heldFile) throws IOException;
+  }
+
   static final class NioIo implements Io {
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
@@ -203,7 +237,7 @@ public final class MaintenanceFileLock {
 
     @Override
     public boolean readOnly(Path held) throws IOException {
-      return Files.getFileStore(held).isReadOnly();
+      return LinuxInodeSecurity.create().readOnlyFilesystem(held);
     }
   }
 }

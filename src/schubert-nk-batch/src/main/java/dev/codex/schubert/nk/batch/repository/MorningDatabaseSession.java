@@ -313,7 +313,7 @@ public final class MorningDatabaseSession {
     private volatile boolean handoffStarted;
     private volatile boolean inHandoff;
     private @Nullable BackupBegins backupBegins;
-    private boolean backupFinished;
+    private volatile boolean backupFinished;
 
     private Session(Connection connection) {
       this.connection = connection;

@@ -92,6 +92,22 @@ public final class MorningStopPass {
     this.terminals = Objects.requireNonNull(terminals, "fixed whole-Unit observer");
   }
 
+  /** One parent deadline, not a new phase budget. UNKNOWN attempts remain retained. */
+  public static MorningStopPass create(
+      RootStartupContext context, RootStartupContext.Snapshot expected, MorningParentBudget budget)
+      throws IOException {
+    Objects.requireNonNull(budget, "existing Morning budget");
+    budget.requireWithin();
+    var nativePass = create(context, expected);
+    return new MorningStopPass(
+        () -> {
+          budget.requireWithin();
+          nativePass.gate.recheck();
+        },
+        nativePass.stop,
+        nativePass.terminals);
+  }
+
   public void execute() throws IOException {
     gate.recheck();
     stop.preflight();

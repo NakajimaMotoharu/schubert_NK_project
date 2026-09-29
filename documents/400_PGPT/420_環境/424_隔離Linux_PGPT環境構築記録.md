@@ -1,5 +1,9 @@
 # 隔離Linux PGPT環境構築記録
 
+2026-09-30 S1再開：既存overlay/seedを保持してQEMU PID11690へ復帰、SSH/PG18online。旧Morning test-only Unit/drop-ins、Backup本体/pgpt309 drop-in、Artemis本体、vendor Caddy本体/NK drop-inはVM private `/var/lib/pgpt-s1-preservation/unit-originals-complete.tar`（root:root0600/親0700、30720byte、SHA256 `1becfb4fca51ee39bc6ac1ab0bf3bfc49614b95468efc2c7d1fbf98534a80eaf`）へ退避。tar一覧exit0、全既存対象を事前FragmentPath/DropInPathsで解決した。初回archiveは未存在artemis.service.dでexit2のpartialとして別fileを0600保全し、完全退避扱いにしない。実Unitの置換・drop-in移動はまだ行わない。復旧は完全archiveの対象だけを元path/owner/modeへ展開しdaemon-reloadし、保存したUnit状態と照合する（原本/credentials/release/DBはarchive対象外・不変更）。
+
+同VMの独立namespace診断（SSC109/BUG327）：host `statvfs`は/run,/var,/var/lib,/var/lib/schubert-nk,/srv/schubert-nk/backup全RW。transient `pgpt-s1-namespace.service`、Typeoneshot/ProtectSystemstrict/ReadWritePaths backup限定/NNP/root限定CAPSYS_PTRACE+DAC_OVERRIDEでprivate前4祖先RO/backupRW、exit0・cgroup終了、--collect済。Production Morning/Backup成功ではなくshared ancestor policyの反例とする。privileged設定を広域RWへ緩めず保持host/private同inode照合へ補正する。
+
 ## 2026-09-27 PG300 backup crypto環境限定確認（未受入）
 
 既存開発host private recovery agekey（600、親700）からage-keygen1.2.1で公開recipientを抽出し、値をlog/Gitへ出さず隔離VMの`/etc/schubert-nk/credentials/backup-recipient`へroot:root0600 new-only install。既存credentialがあればbyte一致だけ確認し上書きしない。秘密identityはVM/server/backupへ配布0。VM age1.2.1が公開53byte fixtureを暗号化し、cipher SHA256 `ccd903671fd2cd90ad6015da63cdcd29a0604cc07e6343aad149770a2d0ece8a`。開発host age1.2.1でのみ既存private identityを使い復号し、原文/復号 SHA256双方 `05ed26fbce72508865be120e9c236bbcf8242d313ac917e7bb02c44fa46cbaad` とcmp成功。plaintext/cipher/recipient/identityはwork/pgpt-vm/private Git外に保持。これはtool取得/設定/recipient互換だけで、実DB dump/credential archive/backup publication/DBstep成功/retention/fullgateは未実装。
