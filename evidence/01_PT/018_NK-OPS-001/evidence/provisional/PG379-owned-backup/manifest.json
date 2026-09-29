@@ -1,0 +1,16 @@
+{
+  "id": "PG379-owned-backup", "formal": false,
+  "branch": "dev-foundation", "sourceCommit": "91c1e8692",
+  "executionTime": "2026-09-30T07:48:42+09:00",
+  "environment": "Linux UID1000; JDK25.0.4; Maven3.9.12; Node24.19.0; JaCoCo0.8.15; SpotBugs4.10.4.0",
+  "command": "fixed JAVA_HOME/Node PATH/m2; ./mvnw -o -pl protocol,storage,bootstrap,api,web,batch clean test spotbugs:check jacoco:report",
+  "exitCode": 1,
+  "input": "BGATE009 independent wire vectors; BUCYCLE008 literal order; MBSTAGE009 epoch; MDB015 independent PostgreSQL postconditions; ARCHPROC009 parent remaining7ns",
+  "expected": "F/E/S0 and static0; actual external worker/archive/marker separately required",
+  "actual": {"tests":2522,"failures":0,"errors":0,"skipped":0,"moduleTests":[80,149,181,756,565,791],"staticFindings":2,"staticRule":"AT_STALE_THREAD_WRITE_OF_PRIMITIVE","externalMorningAccepted":false},
+  "coverage": {"required":"line/method/class/branch100%","status":"NOT_MET","formalCollector":"NOT_RUN","batchReport":"NOT_RUN_AFTER_STATIC_FAILURE"},
+  "bugs": ["BUG-325","BUG-326","BUG-328"], "ssc": ["SSC-108"],
+  "externalLog": {"path":"/home/mini/codex/project1/work/pgpt-runs/PG379/six-provisional.log","sha256":"bb6dcd287fd804f24d9fd9b0de09a0ed93ebe31706aff5868cf9ef34021aa3e2"},
+  "limitations": ["Whole command is not PASS", "No actual external Morning/Backup", "Later PG380 retests do not rewrite this source result", "Roots golden is later preparation, not a Production encoder comparison"],
+  "redaction": "Fixed diagnostic/counts/metadata only; no raw session/token/password/private key/dump/credential archive"
+}
