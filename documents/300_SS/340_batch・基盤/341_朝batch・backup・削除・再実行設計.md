@@ -110,6 +110,14 @@ Backup serviceがFAILEDでもmorning target自体はcleanupへ進み、cleanup�
 BUSINESS/TECHNICALをSKIPPEDにする。Transferは独立実行。Transfer rootの実体/権限/重複異常だけは
 Artemis以降を開始しない。
 
+### 5.1 許可発行の実観測集合（SSC108、PG379、実装前）
+
+`roots_sha256`/`prestart_steps_sha256`はSS343§6.17のcanonical実観測のSHA-256とする。親は同一M/A、原本activation、DB session、現boot、新INVALID Epochを保持し、必要な全10stepの完全attemptとcommit後readbackを収集する。原本・root・currentの安全条件違反、UNKNOWN、欠落、未実行はdigest作成/許可発行を拒否する。
+
+Backupは毎回真正workerのfresh Invocationと全cgroup終端を観測する。正常exit0は実archive/config/credential/manifest/公開後検証・DB両step SUCCESSまで成立して初めてSUCCESS。正常非0 exit-codeは新Invocation/start/exit時刻・前bus/全kernel/後bus一致を確認してFAILEDへ進める。signal/timeout/不明を正常FAILEDへ変換しない。FAILED時は実DB両stepの記録/再読とBUSINESS/TECHNICAL削除のBACKUP_UNAVAILABLE SKIPPEDを要求するが、Transfer/Expiry及び他必須gateは省略しない。起動継続は全必須保守が実際に完了した場合だけ許可する。
+
+Backup固定startの後は同じ親30分budget内でfresh worker結果→明示stop→fresh全終端→実artifact/両step結果確定→原本/current/request再照合→同request退役→最後に同inode marker退役の順とする。いずれか不明ならmarkerを残しM/Aの正常unwindを禁止する。安全不正は親停止、真正workerの業務失敗とは別分類。S1だけ実証しても全Morningのexit0/10、StartupPermitを発行しない。
+
 ## 6. DB backup
 
 ### 6.1 作成

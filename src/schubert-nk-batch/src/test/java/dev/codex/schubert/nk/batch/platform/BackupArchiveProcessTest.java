@@ -97,6 +97,32 @@ final class BackupArchiveProcessTest {
   }
 
   @Test
+  void archproc009ToolWaitBorrowsRemainingParentTime() throws Exception {
+    long[] now = {0};
+    var parent = new MorningParentBudget(() -> now[0]);
+    now[0] = 1_800_000_000_000L - 7;
+    var fixture = new Fixture();
+    var runner = new BackupArchiveProcess(fixture, fixture, fixture::clock, Optional.of(parent));
+    runner.configuration(DIR, OUT, List.of("api.yml"));
+    assertEquals(7L, fixture.waitLimits.getFirst());
+    fixture.closed();
+    now[0]++;
+    assertEquals(6, parent.remainingNanos());
+    now[0] = 1_800_000_000_000L;
+    var expired = new Fixture();
+    var refused = new BackupArchiveProcess(expired, expired, expired::clock, Optional.of(parent));
+    assertThrows(IOException.class, () -> refused.configuration(DIR, OUT, List.of("api.yml")));
+    assertTrue(expired.calls.isEmpty());
+    assertThrows(
+        NullPointerException.class,
+        () -> new BackupArchiveProcess(fixture, (MorningParentBudget) null));
+    var nativeRunner = new BackupArchiveProcess(fixture, MorningParentBudget.create());
+    assertThrows(
+        IOException.class,
+        () -> nativeRunner.configuration(Path.of("/tmp/not-an-fd"), OUT, List.of("api.yml")));
+  }
+
+  @Test
   void inputAndNullContracts() throws Exception {
     for (Path bad :
         List.of(
@@ -565,6 +591,7 @@ final class BackupArchiveProcessTest {
     final List<Map<String, String>> environments = new ArrayList<>();
     final List<Optional<Path>> outputs = new ArrayList<>();
     final List<FakeProcess> processes = new ArrayList<>();
+    final List<Long> waitLimits = new ArrayList<>();
     final AtomicInteger ticks = new AtomicInteger();
     final BackupArchiveProcess runner = new BackupArchiveProcess(this, this, this::clock);
     long uid;
@@ -725,6 +752,7 @@ final class BackupArchiveProcessTest {
 
     @Override
     public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
+      fixture.waitLimits.add(unit.toNanos(timeout));
       if (fixture.stubborn) {
         if (!destroyed || ++terminalWaits == 1) return false;
         if (fixture.holdInterrupt && terminalWaits == 2) {

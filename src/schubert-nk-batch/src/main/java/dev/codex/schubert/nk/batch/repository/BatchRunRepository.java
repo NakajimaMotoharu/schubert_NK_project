@@ -98,6 +98,23 @@ public final class BatchRunRepository {
     }
   }
 
+  /** Independent readback only; never updates a RUNNING row to make a check pass. PG379. */
+  public void verifyFinished(BatchStepAttempt attempt, Instant endedAt, BatchStepResult result) {
+    Objects.requireNonNull(attempt, "step attempt");
+    Objects.requireNonNull(endedAt, "step end");
+    Objects.requireNonNull(result, "step result");
+    BatchStepAttempt.time(attempt.run(), endedAt);
+    if (attempt.skipped() || endedAt.isBefore(attempt.startedAt()))
+      throw new IllegalArgumentException("invalid batch step observation");
+    try {
+      guarded(attempt.run());
+      require(replayed(attempt, endedAt, result));
+      guarded(attempt.run());
+    } catch (SQLException failure) {
+      throw new BatchRepositoryException();
+    }
+  }
+
   private List<History> history(BatchRun run, BatchStep step, LocalDate day, Instant now)
       throws SQLException {
     List<History> result = new ArrayList<>();

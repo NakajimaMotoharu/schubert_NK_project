@@ -25,6 +25,7 @@ public final class BackupArchiveProcess {
   private final InodeSecurityCalls security;
   private final Start start;
   private final LongSupplier clock;
+  private final Optional<MorningParentBudget> parent;
 
   @FunctionalInterface
   interface Start {
@@ -37,10 +38,23 @@ public final class BackupArchiveProcess {
     this(security, new NativeStart(), System::nanoTime);
   }
 
+  public BackupArchiveProcess(InodeSecurityCalls security, MorningParentBudget parent) {
+    this(security, new NativeStart(), System::nanoTime, Optional.of(parent));
+  }
+
   BackupArchiveProcess(InodeSecurityCalls security, Start start, LongSupplier clock) {
+    this(security, start, clock, Optional.empty());
+  }
+
+  BackupArchiveProcess(
+      InodeSecurityCalls security,
+      Start start,
+      LongSupplier clock,
+      Optional<MorningParentBudget> parent) {
     this.security = Objects.requireNonNull(security, "security");
     this.start = Objects.requireNonNull(start, "process start");
     this.clock = Objects.requireNonNull(clock, "clock");
+    this.parent = Objects.requireNonNull(parent, "parent budget");
   }
 
   /**
@@ -221,7 +235,9 @@ public final class BackupArchiveProcess {
   private long remaining(long began) throws IOException {
     long elapsed = clock.getAsLong() - began;
     if (elapsed < 0 || elapsed >= DEADLINE) throw invalid();
-    return DEADLINE - elapsed;
+    return parent.isPresent()
+        ? Math.min(DEADLINE - elapsed, parent.orElseThrow().remainingNanos())
+        : DEADLINE - elapsed;
   }
 
   private static Boolean streams(

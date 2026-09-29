@@ -72,6 +72,78 @@ final class MorningDatabaseSessionTest {
         "PUBLIC_PASSWORD".getBytes(java.nio.charset.StandardCharsets.US_ASCII));
   }
 
+  @Test
+  void mdb015SameConnectionAtomicFailedPairAndReadbackWithoutMutation() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("37900000-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(40L * 86400));
+    Instant started = NOW.plusSeconds(40L * 86400);
+    Instant ended = started.plusSeconds(2);
+    var failed =
+        new BatchStepResult(
+            BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+    var success =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 1, 1, 0, 1, BatchStepResult.Reason.NONE);
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    var held = new AtomicReference<MorningDatabaseSession.Access>();
+    var attempts = new AtomicReference<MorningDatabaseSession.BackupBegins>();
+    subject.execute(
+        credential(),
+        session -> {
+          held.set(session);
+          var begins = session.beginBackup(run, started, false);
+          attempts.set(begins);
+          assertThrows(IOException.class, () -> session.failBackup(begins, ended, success, failed));
+          assertThrows(IOException.class, () -> session.failBackup(begins, ended, failed, success));
+          assertThrows(
+              NullPointerException.class, () -> session.failBackup(null, ended, failed, failed));
+          var wrong =
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(
+                      begins.database().id() + 100, run, BatchStep.BACKUP_DB, 1, started, false),
+                  begins.configuration());
+          assertThrows(IOException.class, () -> session.failBackup(wrong, ended, failed, failed));
+          session.failBackup(begins, ended, failed, failed);
+          assertThrows(IOException.class, () -> session.failBackup(begins, ended, failed, failed));
+          return true;
+        });
+    assertThrows(
+        IOException.class, () -> held.get().failBackup(attempts.get(), ended, failed, failed));
+    try (var observer = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+      assertTrue(advisory(observer));
+      observer.setAutoCommit(false);
+      var repository = new BatchRunRepository(observer);
+      repository.verifyFinished(attempts.get().database(), ended, failed);
+      repository.verifyFinished(attempts.get().configuration(), ended, failed);
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> repository.verifyFinished(attempts.get().database(), ended.plusSeconds(1), failed));
+      try (var statement =
+          observer.prepareStatement(
+              "select step,status,target_count,success_count,failure_count,byte_count,error_code"
+                  + " from schubert.batch_runs where run_id=? order by step")) {
+        statement.setObject(1, run.id());
+        try (var rows = statement.executeQuery()) {
+          for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+            assertTrue(rows.next());
+            assertEquals(step, rows.getString(1));
+            assertEquals("FAILED", rows.getString(2));
+            assertEquals(1, rows.getLong(3));
+            assertEquals(0, rows.getLong(4));
+            assertEquals(1, rows.getLong(5));
+            assertEquals(0, rows.getLong(6));
+            assertEquals("COMMAND_FAILURE", rows.getString(7));
+          }
+          assertFalse(rows.next());
+        }
+      }
+    }
+  }
+
   static final class Probe {
     final List<String> events = new ArrayList<>();
     final Map<String, Integer> counts = new HashMap<>();

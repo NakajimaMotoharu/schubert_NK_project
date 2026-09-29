@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
+import dev.codex.schubert.nk.batch.platform.MorningParentBudget;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
@@ -23,6 +24,22 @@ final class MorningBackupStage {
     <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation) throws IOException;
   }
 
+  interface EpochScope {
+    <T> T execute(MorningControlScope.OwnedEpochWork<T> continuation) throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OwnedEpochWork<T> {
+    T execute(
+        MaintenanceRunState state,
+        MorningDatabaseSession.Access database,
+        StartupPermitRecords.Epoch epoch,
+        BackupWorkerRequest request,
+        MorningDatabaseSession.BackupBegins begins,
+        UUID part)
+        throws IOException;
+  }
+
   @FunctionalInterface
   interface OwnedWork<T> {
     T execute(
@@ -35,6 +52,58 @@ final class MorningBackupStage {
   }
 
   private MorningBackupStage() {}
+
+  static <T> T freshEpoch(MorningParentBudget budget, OwnedEpochWork<T> work) throws IOException {
+    Objects.requireNonNull(budget, "existing parent budget");
+    Objects.requireNonNull(work, "same-generation backup work");
+    budget.requireWithin();
+    var root = RootStartupContext.create();
+    var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    return executeOwnedEpoch(
+        MorningControlScope::executeOwnedEpoch,
+        MorningBackupRequestPublication.create(root, snapshot),
+        Clock.systemUTC(),
+        false,
+        UUID.randomUUID(),
+        (state, database, epoch, request, begins, part) -> {
+          budget.requireWithin();
+          T result = work.execute(state, database, epoch, request, begins, part);
+          budget.requireWithin();
+          return result;
+        });
+  }
+
+  static <T> T executeOwnedEpoch(
+      EpochScope scope,
+      MorningBackupPreparation.Publisher publisher,
+      Clock clock,
+      boolean recoverAbandoned,
+      UUID part,
+      OwnedEpochWork<T> work)
+      throws IOException {
+    Objects.requireNonNull(scope, "same-generation Morning scope");
+    Objects.requireNonNull(publisher, "root request publication");
+    Objects.requireNonNull(clock, "UTC backup clock");
+    Objects.requireNonNull(part, "new request part");
+    Objects.requireNonNull(work, "same-generation backup work");
+    return Objects.requireNonNull(
+        scope.execute(
+            (state, database, epoch) -> {
+              Objects.requireNonNull(epoch, "owned INVALID epoch");
+              if (epoch.state() != StartupPermitRecords.State.INVALID
+                  || !epoch.activation().equals(state.activation()))
+                throw new IOException("Morning backup generation unavailable");
+              return MorningBackupPreparation.execute(
+                  state,
+                  database,
+                  clock,
+                  recoverAbandoned,
+                  publisher,
+                  part,
+                  (request, begins) -> work.execute(state, database, epoch, request, begins, part));
+            }),
+        "Morning backup stage result");
+  }
 
   static <T> T fresh(MorningBackupPreparation.Continuation<T> work) throws IOException {
     Objects.requireNonNull(work, "fresh backup work");

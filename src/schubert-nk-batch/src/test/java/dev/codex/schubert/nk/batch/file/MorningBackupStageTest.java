@@ -32,6 +32,72 @@ final class MorningBackupStageTest {
           new MaintenanceActivation(RUN, UUID.fromString("22222222-2222-4222-8222-222222222222")),
           Optional.empty());
 
+  @Test
+  void mbstage009SameOwnedEpochAndNoPublicationOnWrongGeneration() throws Exception {
+    var epoch =
+        new StartupPermitRecords.Epoch(
+            StartupPermitRecords.State.INVALID,
+            UUID.fromString("44444444-4444-4444-8444-444444444444"),
+            UUID.fromString("55555555-5555-4555-8555-555555555555"),
+            STATE.activation(),
+            Optional.empty());
+    for (var observed :
+        List.of(
+            epoch,
+            epoch.issued("a".repeat(64)),
+            new StartupPermitRecords.Epoch(
+                StartupPermitRecords.State.INVALID,
+                epoch.boot(),
+                epoch.epoch(),
+                new MaintenanceActivation(RUN, PART),
+                Optional.empty()))) {
+      var events = new ArrayList<String>();
+      var owner = new OwnedScope(events);
+      MorningBackupStage.EpochScope scope =
+          new MorningBackupStage.EpochScope() {
+            public <T> T execute(MorningControlScope.OwnedEpochWork<T> work) throws IOException {
+              return owner.execute((state, database) -> work.execute(state, database, observed));
+            }
+          };
+      java.util.concurrent.Callable<Boolean> execute =
+          () ->
+              MorningBackupStage.executeOwnedEpoch(
+                  scope,
+                  (request, part) -> {
+                    assertTrue(owner.held.get());
+                    events.add("request");
+                  },
+                  Clock.fixed(NOW, ZoneOffset.UTC),
+                  false,
+                  PART,
+                  (state, database, current, request, begins, part) -> {
+                    assertTrue(owner.held.get());
+                    assertSame(STATE, state);
+                    assertSame(owner.database, database);
+                    assertSame(epoch, current);
+                    assertEquals(PART, part);
+                    assertEquals(RUN.id(), request.run());
+                    assertEquals(41, begins.database().id());
+                    events.add("same-epoch-work");
+                    return true;
+                  });
+      if (observed == epoch) {
+        assertTrue(execute.call());
+        assertEquals(
+            List.of(
+                "M/A/DB/original-enter;INVALID",
+                "both-backup-begins-committed",
+                "request",
+                "same-epoch-work",
+                "M/A/DB/original-close"),
+            events);
+      } else {
+        assertThrows(IOException.class, execute::call);
+        assertEquals(List.of("M/A/DB/original-enter;INVALID", "M/A/DB/original-close"), events);
+      }
+    }
+  }
+
   private static final class OwnedScope implements MorningBackupStage.Scope {
     final List<String> events;
     final AtomicBoolean held = new AtomicBoolean();

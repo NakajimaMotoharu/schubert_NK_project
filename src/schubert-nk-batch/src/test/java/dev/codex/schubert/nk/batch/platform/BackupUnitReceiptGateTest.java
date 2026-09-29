@@ -71,6 +71,54 @@ final class BackupUnitReceiptGateTest {
     return state(FRESH, "active", "exited", "", "0", "1", "0", "success");
   }
 
+  @Test
+  void bgate009FreshFailureIsTerminalButNeverSuccessOrUnknown() throws Exception {
+    for (String status : List.of("1", "255")) {
+      var failed = state(FRESH, "failed", "failed", "", "0", "1", status, "exit-code");
+      var script = new Script(oldState(), failed);
+      var gate = script.gate();
+      var terminal = gate.observeTerminal(gate.capture()).orElseThrow();
+      assertEquals(
+          Optional.of(MorningBackupUnitCycle.Outcome.FAILED),
+          terminal.backupTerminalAfter(Optional.empty()));
+      assertEquals(2, script.k);
+      var oldApi = new Script(oldState(), failed);
+      var success = oldApi.gate();
+      assertTrue(success.observe(success.capture()).isEmpty());
+      assertEquals(1, oldApi.k);
+    }
+    var success = new Script(oldState(), fresh());
+    var gate = success.gate();
+    assertEquals(
+        Optional.of(MorningBackupUnitCycle.Outcome.SUCCESS),
+        gate.observeTerminal(gate.capture()).orElseThrow().backupTerminalAfter(Optional.empty()));
+    for (var candidate :
+        List.of(
+            oldState(),
+            state("", "inactive", "dead", "", "0", "1", "1", "exit-code"),
+            state(FRESH, "activating", "start", "1", "123", "1", "1", "exit-code"),
+            state(FRESH, "failed", "failed", "", "0", "2", "15", "signal"),
+            state(FRESH, "failed", "failed", "", "0", "1", "1", "timeout"),
+            state(FRESH, "failed", "failed", "", "0", "1", "0", "exit-code"),
+            state(FRESH, "active", "exited", "", "0", "1", "1", "exit-code"),
+            state(FRESH, "failed", "dead", "", "0", "1", "1", "exit-code"))) {
+      var script = new Script(oldState(), candidate);
+      var unknown = script.gate();
+      assertTrue(unknown.observeTerminal(unknown.capture()).isEmpty());
+    }
+    var drift =
+        new Script(oldState(), state(FRESH, "failed", "failed", "", "0", "1", "1", "exit-code"));
+    drift.kernel = List.of(Optional.of(oldState()), Optional.of(fresh()));
+    var changed = drift.gate();
+    assertTrue(changed.observeTerminal(changed.capture()).isEmpty());
+    assertTrue(
+        InspectorUnitSnapshot.parse(
+                InspectorUnitSnapshotTest.GOLDEN.getBytes(StandardCharsets.US_ASCII))
+            .backupTerminalAfter(Optional.empty())
+            .isEmpty());
+    assertThrows(NullPointerException.class, () -> fresh().backupTerminalAfter(null));
+  }
+
   private static final class Script {
     final List<String> calls = new ArrayList<>();
     List<Optional<InspectorUnitSnapshot>> bus;

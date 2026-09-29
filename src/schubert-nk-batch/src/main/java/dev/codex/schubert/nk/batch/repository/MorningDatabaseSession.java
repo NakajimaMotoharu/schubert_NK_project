@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff;
+import dev.codex.schubert.nk.batch.file.BackupBundleCompletion;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
@@ -67,6 +68,21 @@ public final class MorningDatabaseSession {
 
     BackupBegins beginBackup(BatchRun run, Instant now, boolean recoverAbandoned)
         throws IOException;
+
+    /** No connection or arbitrary SQL escapes. Non-native test capabilities fail closed. */
+    default Instant completeBackup(
+        BackupBegins expected, BackupBundleCompletion verified, String name) throws IOException {
+      throw unavailable();
+    }
+
+    default void failBackup(
+        BackupBegins expected,
+        Instant endedAt,
+        BatchStepResult database,
+        BatchStepResult configuration)
+        throws IOException {
+      throw unavailable();
+    }
 
     <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException;
   }
@@ -296,6 +312,8 @@ public final class MorningDatabaseSession {
     private volatile boolean backupCommitted;
     private volatile boolean handoffStarted;
     private volatile boolean inHandoff;
+    private @Nullable BackupBegins backupBegins;
+    private boolean backupFinished;
 
     private Session(Connection connection) {
       this.connection = connection;
@@ -345,7 +363,77 @@ public final class MorningDatabaseSession {
         connection.setAutoCommit(true); // Only a confirmed commit can enter session-lock handoff.
         guard();
         backupCommitted = true;
-        return new BackupBegins(database, configuration);
+        var result = new BackupBegins(database, configuration);
+        backupBegins = result;
+        return result;
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    private void completionGuard(BackupBegins expected) throws IOException, SQLException {
+      guard();
+      if (!backupCommitted
+          || backupFinished
+          || handoffStarted
+          || !expected.equals(backupBegins)
+          || !connection.getAutoCommit()
+          || connection.isReadOnly()
+          || connection.getTransactionIsolation() != Connection.TRANSACTION_READ_COMMITTED
+          || !scalar(connection, HELD)) throw unavailable();
+      guard();
+    }
+
+    @Override
+    public Instant completeBackup(
+        BackupBegins expected, BackupBundleCompletion verified, String name) throws IOException {
+      Objects.requireNonNull(expected, "committed backup handles");
+      Objects.requireNonNull(verified, "root verified backup completion");
+      Objects.requireNonNull(name, "fixed backup name");
+      try {
+        completionGuard(expected);
+        Instant ended =
+            verified.complete(connection, name, expected.database(), expected.configuration());
+        completionGuard(expected);
+        backupFinished = true;
+        return ended;
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    @Override
+    public void failBackup(
+        BackupBegins expected,
+        Instant endedAt,
+        BatchStepResult database,
+        BatchStepResult configuration)
+        throws IOException {
+      Objects.requireNonNull(expected, "committed backup handles");
+      Objects.requireNonNull(endedAt, "actual backup end");
+      Objects.requireNonNull(database, "observed database failure");
+      Objects.requireNonNull(configuration, "observed configuration failure");
+      if (database.status() != BatchStepResult.Status.FAILED
+          || configuration.status() != BatchStepResult.Status.FAILED) throw unavailable();
+      try {
+        completionGuard(expected);
+        connection.setAutoCommit(false);
+        var repository = new BatchRunRepository(connection);
+        repository.finish(expected.database(), endedAt, database);
+        repository.finish(expected.configuration(), endedAt, configuration);
+        guard();
+        connection.commit();
+        guard();
+        connection.setAutoCommit(true);
+        completionGuard(expected);
+        connection.setAutoCommit(false);
+        repository.verifyFinished(expected.database(), endedAt, database);
+        repository.verifyFinished(expected.configuration(), endedAt, configuration);
+        guard();
+        connection.rollback(); // Independent readback has no writes.
+        connection.setAutoCommit(true);
+        completionGuard(expected);
+        backupFinished = true;
       } catch (SQLException failure) {
         throw unavailable();
       }

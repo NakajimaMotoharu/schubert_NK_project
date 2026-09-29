@@ -475,6 +475,24 @@ Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一�
 
 017/015・016/PT-BAT-090～113の独立literal/digest、厳密400日、全8参照組合せ、全crash phase/IO位置/close/並行/nullで検証する。GC成功はこの部品の条件だけであり、親morning/backup/実server/IT/ST完了を意味しない。SSC055は親への実接続まで継続。
 
+### 6.17 許可根拠canonical観測（SSC108、PG379、実装前）
+
+NKPERMIT1の既存field/byteは変更しない。二つの根拠は非秘密ASCII/LF、末尾LF必須、CR/空白/未知/重複/順序変更/未実行のplaceholder拒否。UUIDは非zero小文字canonical、時刻UTC固定6桁microsecond、整数はunsigned canonical decimal（leading zeroなし）、modeは4桁octal、hashは小文字64hex。pathは設定のabsolute normalized値そのもの、ASCII printableで`|`/CR/LFを含まず、全segment NOFOLLOW・実保持root検査済の値だけを採用する。未対応pathを別表記へ自動変換しない。最大65536byte、SHA-256は完成したbyte全体に対して計算する。
+
+両byte列の先頭はそれぞれ`NKROOTS1\n`/`NKPRESTART1\n`、次に共通5行を固定順で置く：`boot_id=<UUID>`、`epoch_id=<UUID>`、`run_id=<UUID>`、`cutoff_utc=<time>`、`activation_id=<UUID>`。同親の読戻し済INVALID Epoch/原本から取得し、run/activation/cutoffを再生成しない。
+
+rootsは次の6行を固定順に続ける：ASSET、TRANSFER、BACKUP、LOG、ARTEMIS、STAGING。各行の文法は`<ID>|<absolute_path>|<dev>|<ino>|<uid>|<gid>|<mode>|<fs_type>|<host_ro>|<acl>\n`。devは0以上、ino/uid/gidは既存各role方針に従う。fs_typeは実hostFSの既存allowlist値、host_roは実hostmountの`0`/`1`、aclは既存方針のACL不存在を実証したときのみliteral `empty`。各rootのowner/mode/ACL/hostFS/相互非重複・dev/ino重複なしを全gateで先に検査する。mtime/ctime/sizeは保守で変化するためdigestには含めず、保持IOの前後・同名再保持中は既存full snapshotの一致を必須とする。identityやpolicy変化は保守後の許可発行前/後再照合で拒否する。
+
+prestartは共通5行の後に`morning_invocation_id=<32hex>`、`broker_invocation_id=<32hex>`を置き、次の10行を固定順に置く：BACKUP_DB、BACKUP_CONFIG、CLEAN_NOTIFICATION、CLEAN_QUESTION、CLEAN_SESSION、CLEAN_INBOX_OUTBOX、CLEAN_LOG、CLEAN_BATCH_RUN、CLEAN_TRANSFER、CLEAN_EXPIRY。各行は`<STEP>|<row_id>|<attempt>|<started_utc>|<ended_utc>|<status>|<target>|<success>|<failure>|<bytes>|<reason>|<producer>|<producer_invocation>|<receipt>|<reference>\n`。row/attempt/run/cutoffは完全DBhandle、terminal結果はcommit後独立再読値、reasonはNONE又は既存閉鎖enumとする。producerはBACKUP/CONFIG/CLEANUP/EXPIRYの固定4値、子は実fresh32hex Invocation、親local CONFIGだけMorning Invocation。receiptは実正常終了の0又は許容警告10、真正Backup正常非0はその実exit code。signal/timeout/unknown/未実行はencode不可。
+
+SUCCESSは実処理/検証済成果に対応、FAILEDは真に試行済の既知失敗/全終端/DB記録、WARNINGは既存SS許容の実警告だけ。SKIPPEDはBACKUP_UNAVAILABLEの削除対象かALREADY_SUCCESSFULの再検証済元成功handleだけ。referenceは通常literal `-`、ALREADY_SUCCESSFUL時だけ元成功row/attempt/開始終了/結果/実artifact digestの全参照を`,`区切りで含む。未実装をFAILED/SKIPPEDへ代用しない。どのstatusでも必要な実producer終端を省略しない。Backup失敗を理由にTransfer/ExpiryをSKIPPEDへしない。
+
+10step行に続いてPOSTGRES、RELEASE_BOM、STOP_SET、BROKER_OPS、BACKUP_RETENTIONの5gate行を固定順で置く。文法は`GATE|<ID>|SUCCESS|<evidence_sha256>\n`、evidenceも非秘密ASCII/LF固定byte：POSTGRESは固定role/DB/RW/isolation/schema version/hash、RELEASE_BOMは保持release manifestと全role artifact/config/hash検証値、STOP_SETは固定8Unitの12field/kernels全終端観測とclean journal確認、BROKER_OPSは現fresh Broker InvocationとSS321固定address/queue/policy/healthの独立管理観測、BACKUP_RETENTIONは今回backup結果と実7世代後条件/保全対象一覧とする。各既存gateの実結果から固定key順で収集し、caller指定の任意digestを受理しない。具体的field codecは当該gateを実接続する前に仕様/独立vectorへ追記し、未定義gateのdigestで発行しない。API/Web/Caddy readyとMorning completionは発行後でありprestartには入れない（循環禁止）。
+
+issuerは同M/A内で発行直前と公開/readback後に現boot/INVALID Epoch/原本activation、全6root identity/policy、Broker Invocation、全完全DBhandle/terminal値、実archive（成功時）を再検査する。不一致/欠落ではISSUEDへ進めずpart/markerを保全する。子へdigestだけで実処理成功を捏造させない。公開vectorはPT仕様へ固定しproduction encoderをexpected生成に使わない。S0の文法確定は実collector/issuer完了の認定ではない。
+
+SSC106/092の「receipt0だけでmarker退役」はSS341§5.1の真正FAILED経路も含めて補正する。正常非0/fresh/全終端/DB実FAILED記録後の同ownerだけが退役し得る。既知失敗への補正はUNKNOWN/signal/timeoutやrawclient成功を許可する変更ではない。
+
 ## 7. 環境差分
 
 

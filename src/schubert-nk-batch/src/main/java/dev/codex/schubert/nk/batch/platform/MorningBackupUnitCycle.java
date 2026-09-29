@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.platform;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
 
@@ -19,6 +20,16 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class MorningBackupUnitCycle {
+  public enum Outcome {
+    SUCCESS,
+    FAILED
+  }
+
+  @FunctionalInterface
+  public interface Completion {
+    void complete(Outcome outcome) throws IOException;
+  }
+
   @FunctionalInterface
   public interface ParentProof {
     void verify() throws IOException;
@@ -33,6 +44,10 @@ public final class MorningBackupUnitCycle {
     Object capture() throws IOException;
 
     boolean freshZero(Object baseline) throws IOException;
+
+    default Optional<Outcome> terminal(Object baseline) throws IOException {
+      return freshZero(baseline) ? Optional.of(Outcome.SUCCESS) : Optional.empty();
+    }
   }
 
   interface StartAttempt {
@@ -112,6 +127,13 @@ public final class MorningBackupUnitCycle {
           public boolean freshZero(Object baseline) throws IOException {
             return receipt.observe((BackupUnitReceiptGate.Baseline) baseline).isPresent();
           }
+
+          public Optional<Outcome> terminal(Object baseline) throws IOException {
+            var before = (BackupUnitReceiptGate.Baseline) baseline;
+            return receipt
+                .observeTerminal(before)
+                .flatMap(value -> value.backupTerminalAfter(Optional.empty()));
+          }
         },
         () -> {
           var attempt = start.start();
@@ -170,7 +192,13 @@ public final class MorningBackupUnitCycle {
    * Caller still owns M/A, original, DB and request for this entire call and its proof callback.
    */
   public void execute(ParentProof originalAndRequest) throws IOException {
+    execute(originalAndRequest, outcome -> {});
+  }
+
+  /** Result completion and request retirement occur under M/A BEFORE marker retirement. */
+  public Outcome execute(ParentProof originalAndRequest, Completion completion) throws IOException {
     Objects.requireNonNull(originalAndRequest, "same original and request proof");
+    Objects.requireNonNull(completion, "same-owner Backup completion");
     budget.requireWithin();
     gate.recheck();
     Object baseline = Objects.requireNonNull(receipt.capture(), "pre-start Backup baseline");
@@ -199,10 +227,14 @@ public final class MorningBackupUnitCycle {
       }
       budget.requireWithin();
       gate.recheck();
-      while (!receipt.freshZero(baseline)) {
+      Optional<Outcome> observed =
+          Objects.requireNonNull(receipt.terminal(baseline), "Backup result");
+      while (observed.isEmpty()) {
         budget.requireWithin();
         wait.pause();
+        observed = Objects.requireNonNull(receipt.terminal(baseline), "Backup result");
       }
+      Outcome outcome = observed.orElseThrow();
       budget.requireWithin();
       gate.recheck();
       StopAttempt stopping = Objects.requireNonNull(stop.execute(), "retained Backup stop attempt");
@@ -217,6 +249,9 @@ public final class MorningBackupUnitCycle {
       budget.requireWithin();
       gate.recheck();
       if (!terminal.quiescent()) throw new Unresolved();
+      completion.complete(outcome);
+      budget.requireWithin();
+      gate.recheck();
       attempt.retireAfter(
           () -> {
             budget.requireWithin();
@@ -228,14 +263,15 @@ public final class MorningBackupUnitCycle {
           });
       budget.requireWithin();
       gate.recheck();
+      return outcome;
     } catch (IOException | RuntimeException | Error unresolved) {
       // No normal M/A unwind after possible start delivery, including null, unchecked failures,
       // receipt/retire uncertainty. The native retention does not return.
-      retain();
+      return retain();
     }
   }
 
-  private void retain() {
+  private Outcome retain() {
     retain.indefinitely();
     throw new AssertionError("unresolved Backup retention returned");
   }

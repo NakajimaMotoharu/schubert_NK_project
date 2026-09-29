@@ -31,8 +31,14 @@ public final class MorningParentBudget {
 
   /** At or beyond 30 minutes (or on an impossible backward observation), refuse further work. */
   public void requireWithin() throws IOException {
+    remainingNanos();
+  }
+
+  /** Blocking tools borrow the parent's remaining time instead of starting a new deadline. */
+  public long remainingNanos() throws IOException {
     long elapsed = monotonic.getAsLong() - began;
     if (elapsed < 0 || elapsed >= LIMIT_NANOS)
       throw new IOException("Morning parent budget unavailable");
+    return LIMIT_NANOS - elapsed;
   }
 }

@@ -139,6 +139,27 @@ public final class InspectorUnitSnapshot {
             : OptionalInt.empty();
   }
 
+  /** Backup only: a fresh normal nonzero exit is failure, never an unknown/signal success. */
+  public Optional<MorningBackupUnitCycle.Outcome> backupTerminalAfter(Optional<UUID> previous) {
+    Objects.requireNonNull(previous, "previous invocation");
+    if (target != Target.BACKUP
+        || !quiescent()
+        || invocationId().isEmpty()
+        || invocationId().equals(previous)
+        || !value("ExecMainCode").equals("1")) return Optional.empty();
+    BigInteger start = new BigInteger(value("ExecMainStartTimestampMonotonic"));
+    BigInteger end = new BigInteger(value("ExecMainExitTimestampMonotonic"));
+    if (start.signum() == 0 || end.compareTo(start) < 0) return Optional.empty();
+    if (receiptAfter(previous).orElse(-1) == 0)
+      return Optional.of(MorningBackupUnitCycle.Outcome.SUCCESS);
+    if (value("ActiveState").equals("failed")
+        && value("SubState").equals("failed")
+        && value("Result").equals("exit-code")
+        && !value("ExecMainStatus").equals("0"))
+      return Optional.of(MorningBackupUnitCycle.Outcome.FAILED);
+    return Optional.empty();
+  }
+
   /** Necessary worker-self binding only; independent kernel/NSS/namespace gates remain required. */
   public boolean running(long pid, String invocation) {
     Objects.requireNonNull(invocation, "manager invocation");

@@ -94,12 +94,25 @@ public final class BackupUnitReceiptGate {
    * Polling, the 30-minute parent budget, and failure quarantine belong to the enclosing cycle.
    */
   public Optional<InspectorUnitSnapshot> observe(Baseline baseline) throws IOException {
+    return observe(baseline, false);
+  }
+
+  /** Genuine fresh normal terminal result; FAILED does not prove valid archives. BUG325. */
+  public Optional<InspectorUnitSnapshot> observeTerminal(Baseline baseline) throws IOException {
+    return observe(baseline, true);
+  }
+
+  private Optional<InspectorUnitSnapshot> observe(Baseline baseline, boolean includeFailure)
+      throws IOException {
     Objects.requireNonNull(baseline, "same-run Backup baseline");
     if (baseline.owner != this) throw unavailable();
     check();
     try {
       Optional<InspectorUnitSnapshot> first = known(probe.quiescent());
-      if (first.isEmpty() || first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0)
+      if (first.isEmpty()
+          || (includeFailure
+              ? first.orElseThrow().backupTerminalAfter(baseline.previous).isEmpty()
+              : first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0))
         return Optional.empty();
       Optional<InspectorUnitSnapshot> whole = known(terminal.quiescent());
       if (whole.isEmpty() || !first.orElseThrow().matches(whole.orElseThrow()))

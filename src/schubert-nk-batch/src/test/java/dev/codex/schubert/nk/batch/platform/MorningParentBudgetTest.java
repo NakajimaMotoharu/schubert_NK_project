@@ -14,8 +14,10 @@ final class MorningParentBudgetTest {
   void mbudget001BoundaryIsFromFirstParentObservation() throws Exception {
     var now = new AtomicLong(7);
     var budget = new MorningParentBudget(now::get);
+    assertEquals(THIRTY_MINUTES, budget.remainingNanos());
     budget.requireWithin();
     now.set(7 + THIRTY_MINUTES - 1);
+    assertEquals(1, budget.remainingNanos());
     budget.requireWithin();
     now.incrementAndGet();
     assertEquals(

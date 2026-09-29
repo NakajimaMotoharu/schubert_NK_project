@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -12,6 +13,77 @@ import org.junit.jupiter.api.Test;
  * admission.
  */
 final class MorningBackupUnitCycleTest {
+  @Test
+  void bucycle008KnownFailureCompletesBeforeProofAndMarkerRetirement() throws Exception {
+    for (boolean completionFails : List.of(false, true)) {
+      var events = new ArrayList<String>();
+      var start = new StartAttempt();
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              new MorningBackupUnitCycle.Receipt() {
+                public Object capture() {
+                  return "baseline";
+                }
+
+                public boolean freshZero(Object baseline) {
+                  fail("typed observation required");
+                  return false;
+                }
+
+                public Optional<MorningBackupUnitCycle.Outcome> terminal(Object baseline) {
+                  assertEquals("baseline", baseline);
+                  events.add("failed-receipt");
+                  return Optional.of(MorningBackupUnitCycle.Outcome.FAILED);
+                }
+              },
+              () -> start,
+              () -> {
+                events.add("stop");
+                return new StopAttempt();
+              },
+              () -> {
+                events.add("terminal");
+                return true;
+              },
+              () -> fail("known terminal needs no wait"),
+              () -> {
+                events.add("retain");
+                throw new Retained();
+              },
+              budget());
+      MorningBackupUnitCycle.Completion completion =
+          result -> {
+            assertEquals(MorningBackupUnitCycle.Outcome.FAILED, result);
+            assertEquals(0, start.retire);
+            events.add("db-failed-request-retired");
+            if (completionFails) throw new IOException("unknown commit");
+          };
+      if (completionFails) {
+        assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof"), completion));
+        assertEquals(0, start.retire);
+        assertEquals(
+            List.of("failed-receipt", "stop", "terminal", "db-failed-request-retired", "retain"),
+            events);
+      } else {
+        assertEquals(
+            MorningBackupUnitCycle.Outcome.FAILED,
+            cycle.execute(() -> events.add("original-current"), completion));
+        assertEquals(1, start.retire);
+        assertEquals(
+            List.of(
+                "failed-receipt",
+                "stop",
+                "terminal",
+                "db-failed-request-retired",
+                "original-current",
+                "terminal"),
+            events);
+      }
+      assertThrows(NullPointerException.class, () -> cycle.execute(() -> {}, null));
+    }
+  }
+
   private static final class Retained extends RuntimeException {
     private static final long serialVersionUID = 1L;
   }
@@ -103,6 +175,7 @@ final class MorningBackupUnitCycleTest {
             "stop",
             "root",
             "terminal",
+            "root",
             "root",
             "original-request",
             "terminal",
