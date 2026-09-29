@@ -1,0 +1,112 @@
+# 477 GPT-6.1 Sol実行計画・再開判定
+
+2026-09-30 JST。対象はSchubert_NKの残PG/PT。利用モデルと実行単位を改訂し、[475の是正要件](475_20260929実績評価・計画見直し判定.md)と[476の工数管理](476_残工数トークン見積・差分監査.md)を適用する。計画作成による実装・正式認定・進捗加点はない。
+
+## 1. 今回の変更と適用順位
+
+**主実行をGPT-6.1 Sol / high（高）へ変更する。PMOはGPT-6.1 Sol / ultra（ウルトラ）を維持し、実行側の難しい統合判断には同モデルultraの対象限定レビューを使う。** 新モデルだけに効率改善を期待せず、最初の完成単位を「外部Morning入口から実Backup一往復」に絞り、実経路・coverage・消費量を同時に点検する。
+
+次回の運用は本書477と[478の実行指示](478_再開プロンプト_GPT61Sol.md)を正とする。471/472の旧モデル・旧開始基準・停滞判定を置き換える。元PGPT依頼、RD/UI/SS、承認済DIF、[451の品質条件](../450_品質/451_Build・静的解析・coverage方針.md)、[473の起動主体](473_起動gate主体・共用境界の実装判断.md)は維持する。実績の正本は456、全残件は460。下位部品が増えたことだけで停滞判定を免除しない。
+
+## 2. モデル選定の根拠と担当
+
+公式の[モデル選択資料](https://developers.openai.com/api/docs/guides/model-selection)はGPT-6.1 Solを、複雑な作業で時間・費用も管理したい場合の選択肢とし、同じ入力で品質を満たす設定を評価するよう説明している。[Work/Codexのモデル説明](https://learn.chatgpt.com/docs/models)では、高い推論ほど時間・tokenを使い、ultraは補助agentを使うモードである。これらは一般的な選定根拠であり、このプロジェクトの改善率を示すベンチマークではない。
+
+9/30の実行環境のmodel metadataで`gpt-6.1-sol`とlow/medium/high/xhigh/max/ultraを確認した。APIの設定範囲とアプリの推論選択は混同しない。親の設定は実施チャットの入力欄で利用者が選択する。指示文だけで変更済みとはしない。
+
+| 担当・対象 | モデル / 推論 | 実行方法と選択理由 |
+|---|---|---|
+| 主実装、試験是正、実VM接続、受入の継続 | **GPT-6.1 Sol / high** | 一つの所有・起動経路を親が完結させる。現在の資源所有、失敗時継続、native/VM試験を軽・中へ一律に下げず、高から実測評価する |
+| 最初のSSC108・接続図・網羅計画、又は同じ原因の停滞 | **GPT-6.1 Sol / ultra** | 論点を限定した読み取りレビュー1名。接続差分案、所有関係、独立試験、決定すべき残事項を返す。全履歴forkや定型作業の再調査を避ける |
+| PMOの進捗評価、受入判定、見積り・計画改訂 | **GPT-6.1 Sol / ultra** | 利用者の現在設定を維持。必要時の監査・介入を担当し、実施側の通常checkpointごとには呼び出さない |
+| 集計、hash、差分、coverage counter、台帳の機械照合 | 既存script / CLI | モデルへ成功ログ全文を返して再集計しない。別の軽量モデル導入・定型agent追加は行わない |
+| 別観点が必要な未解決契約 | **GPT-6 Astra / high**を例外使用可 | 6.1 Solのレビュー後も具体的反例が未解決の場合に限り、同時に走らせずレビュー役を交代する。routine実装・毎段階レビューには使わない |
+
+通常の同時稼働は親＋レビュー1名まで。レビュー役はsource/採番/正式runを編集・実行せず、さらにagentを増やさない。共有枠・親子別tokenを含めて管理する。実行環境にultraの対象限定委任がなければ同モデルxhigh、委任自体が使えなければ親の独立資料に基づく再点検で進め、補助toolの有無だけで停止しない。xhigh→ultra→Astraを機械的に順番投入しない。
+
+**高を選ぶのはPMOの初期判断であり、6.1 Sol高が旧Sol高より何%優れるという測定結果ではない。** 実行親を全時間ultraにすると、直列に所有する接続作業まで多重調査になり得る。まず高で受入までの成果を測り、具体的な設計不足が残る範囲だけ強いレビューを投入する。親設定の途中変更を自己申告だけで行わない。
+
+## 3. 再開基準とreset
+
+| 項目 | 9/30の確認基準 |
+|---|---|
+| 作業tree / branch | `/home/mini/codex/project1/work/pgpt-foundation` / `dev-foundation` |
+| 本改訂前HEAD | `614d8c139`、clean。本書等の管理文書commitが後続する。開始時の最新HEADを使用し巻き戻さない |
+| 実装停止 / 最新限定source | `b05f96c3e` / `1acade420339eb81f79b717036a69f030ee1949e`、PG378 |
+| 最後の正式認定 | `PT-WEB-20260925-24` / `858713c0bf310ae8bf62078b0a1cedbce4e968db`、1,964PT / 53scope |
+| 最新限定結果 | Production6 2,517PT / 369suite、F/E/S各0、SpotBugs6module 0。全coverage・正式collectorは未達 |
+| 完成率 / 外部受入 | 暫定中心48.3%据置。外部API/Web業務起動、実NK CHR-A01/L01未受入 |
+| 枠と券 | 9/30照会は週次used95% / remaining5%、**利用可能Full reset券1枚**。自然reset表示は10/4 05:23:10 JST。利用者が券使用後に再開する予定 |
+
+券は今回PMOでは消費していない。券の存在、期限到来、指示文中の「resetした」だけから残量を推定しない。再開直前に実際の枠を照会し、reset後の開始値を新しい計測期間として保存する。[公式reset説明](https://learn.chatgpt.com/docs/app-server)も、消費後にrate limitsを再取得するよう定める。自動券消費・追加課金は本指示に含めない。
+
+開始時はGit/remote・既存変更・最新source差分・実行中process・未認定stash7件を再確認する。元treeのScenario未追跡3fileはcheckpoint107/219のhashで保全し、stashを適用/削除/合格算入しない。QEMU/Unit/PIDの9/29状態は履歴であり、現在の生存を保証しない。新しい成果があれば実物へ追随し、旧sourceへ復元しない。
+
+現在の枠をtoolで得られなければ利用者の現在UI確認値を使える。両方不明なら読み取り・保全確認まで行い、新規実装は始めない。残10%以下も同様に保全段階へ移る。モデルは指定値と実確認値を別記し、機械確認不能だけで止まらない。信頼できる情報で設定が指定と異なる場合は新規実装前に設定差を報告する。
+
+## 4. 最初の受入経路とWIP制限
+
+最初の着手時に一度、SSC108と以下の接続図を短くレビューする。資料読取・設計説明を成果として終了せず、直ちに同じ経路の実装・検証へ進む。
+
+`MorningProcessMain → MorningControlScope.executeOwnedEpoch → MorningBackupStageのEpoch付きOwnedWork → MorningBackupUnitCycle → 真正Unit/worker → 実artifact・step結果/全終端 → marker/request後条件`
+
+現状はMainがread-only exit30、Stageが旧Epochなし経路、UnitCycleのProduction呼出しが未接続。存在する部品を接続し、同じ機能を別helperとして作り直さない。次表のSは内部の完成区切りで、R/Dや工程完成率の分母を置き換えない。
+
+| 段階 | 必須作業と終了時の観測 |
+|---|---|
+| S0 契約・採取方法を確定 | SSC108の実観測集合、canonical byte/順序、boot/run/activation/Epoch、owner・freshness、成功/失敗/skipの意味をSS341/342/343と独立goldenに確定。既存method、不足値、接続差分、host/VM別のcoverage採取を対応付ける |
+| **S1 外部Morning→実Backup一往復** | 一つの親30分budget、同じM/A/原本DB/Epoch内でStage→Cycleを呼ぶ。隔離PG/PT VMの外部Production入口から真正Unitを試行し、fresh Invocation、worker/Unit全終端、実archive・step/receipt、marker/request後条件を確認。成功とSS所定の失敗・再開・hard-timeoutを独立試験する |
+| S2 必要保守→正規issuer | Cleanup/Transfer、Artemis/Expiry等の当該起動に必須な実結果を接続し、SSC108の実観測に基づくcurrent/permit発行まで通す。`StartupPermitFiles.issue`の正規Production callerと結果束縛を実証 |
+| S3 root→API/Web業務ready | 全preflight、proof/FD、held ELF、SS342 §4.2の同PID権限移行/execを接続。正規permit、A解放と同じ起動経路からProduction API/Webを実起動し、PID/ready/失敗・停止後条件を確認 |
+| S4 実NK互換と起動経路受入 | 同じProduction経路でCHR-A01/L01と必要なLog再送をcapture。承認済DIF以外の差分0、全coverage・正式同一source/run/scope・秘密/trace gateを揃える |
+| R4 後続PG/PT | 460/SS362の残Resource、Logout/User、質問受付/replay/worker/回答/通知、本文/media、残運用・移行/切戻し、最終受入へ依存順で継続する |
+
+**同時に新規着手する未完了経路は一つ。** その経路の所有・起動契約に必要な変更群をまとめ、変更契約の独立試験/網羅を閉じてから無関係な機能へ移る。既存全moduleの不足は消さず追跡し、S1で全部直すと称した無関係な横展開もしない。同じ起動経路に残るnative接続/採取はS2/S3へ継続できるが、S1の実経路検証だけで正式認定にはしない。
+
+追加依存には「接続箇所、根拠SS、この経路への必要性、既存部品で不足する理由、終了試験」を付け、D01～D07の下位条件へ記す。実起動へつながらない拒否probe、read-only wrapper、一般化frameworkを増やすだけの作業は次区間の主対象にしない。新規採番は実台帳の末尾から行う。
+
+SS341のBackup失敗時はBUSINESS/TECHNICAL削除SKIPPED・起動継続の正規分岐を維持する。**Backup成功を全起動の新しい絶対条件にしない。** 実試行と結果の真正性が必要で、未実装/未実行をFAILED/SKIPPEDへ読み替えない。`--no-block` client成功はworker成功ではない。UNKNOWN/hard-timeoutのM/A・残留marker・次回隔離条件はBUG322/SSC107/YKT254等の実仕様と試験で閉じる。gateを迂回した直起動、no-op RetirementGate、ProcessBuilderでの別PIDを同PID execとする代用は認めない。
+
+## 5. 品質を閉じる実行方法
+
+451の品質条件は変更しない。Javaのline/method/class/branch各100%、適用JSのcoverage100%、静的0、独立oracle、境界/null/異常/並行/再送、BUG修正前再現/必要YKT、Current baseline、CHR/DIF、秘密/trace、全scope同一sourceの正式証跡が必要である。
+
+最新PG378の未網羅はBootstrap B/L/M/C=37/11/4/0、API=3/32/4/0、Web=1/25/4/0、Batch=31/365/137/17、Protocol/Storage=0。全体B/L/M/C=72/433/149/17である。これは開始比較基準であり、以後の実数を短い現況に更新する。
+
+- 実装前に変更methodのhost/VM到達方法、独立期待値、採取command・同一source照合方法を決める。native外部mainは実プロセスで採取し、人工的呼出し・対象除外・期待値のProduction生成で100%を作らない。
+- 開発中は変更moduleと依存/影響suiteを選択し、対象と未実行範囲を暫定記録する。未網羅の「既存不足・今回追加・今回解消」を区別し、閉鎖方法不明の面を際限なく増やさない。
+- 全回帰は個々のhelperでなく同じ所有・起動契約の変更群で行う。機能受入、変更後停止、PR/工程gate、POM/共通codec/DDL/security等の横断変更では451所定の全体検証を実施する。横断影響がある変更群は、他機能へ進む前に全回帰する。triggerと対象受入IDを1行で残す。試験回数の上限は設けない。
+- 正式run前にNode/toolchain/PATH、format、collector owner/JUnit引数署名/XML、coverage対象、017/019等の既存負canary、VM採取方法を照合する。新しい大型collectorを作らず、既存scriptを利用する。
+- 正式runではsource/試験/設定/toolsを固定する。Maven exit0、`jacoco:report`成功、部分manifest一致だけで正式合格にしない。F/E/S/flaky/disabled/not-run、未認定stash、別sourceの古い結果は合格へ混ぜない。
+
+source未変更の再開や管理文書だけの改訂は既存結果との照合を行い、再実行を新規成果として数えない。必要な是正・再検証は省略しない。未認定sourceの保存はその状態を明記し、受入済みと区別する。
+
+## 6. 消費管理、停滞への是正、PMO介入
+
+476の**N＝未キャッシュ入力＋出力、T＝全入力＋出力**を使う。Nは週次枠/課金の公式換算単位ではない。推論tokenは出力の内数、cachedは入力の内数として二重加算しない。親子を含め、reset跨ぎは計測期間を分ける。取得できない値は不明とし、共有枠からtokenへ換算しない。
+
+最初のS1はAパッケージの内数で**425～850万N**の仮予算、約**170万N**で自己点検する。これは計画是正/再見積りの契機であり、追加の自動停止上限ではない。全残PG/PTの楽観/標準/悪化は引き続き**4,250万 / 9,350万 / 1億8,700万N**。6.1 Solへの変更を理由に割り引かず、既に見積りに含む集約・重複削減を再控除しない。IT/ST本体は含めない。
+
+開始時と意味ある実装/試験区切りで共有枠を確認し、次を短く保存する。170万Nと約10ppが近い場合は一度の点検で両方を扱う。長大rawログを毎command再集計しない。利用可能なusage記録の増分・既存scriptを使い、機密や内部推論本文を資料へ転載しない。
+
+`S/R段階・D closed/reopened/new | 残接続・次区間で得る外部観測1件 | 実経路source/command/result | coverage既存/追加/解消 | 正式runとtrigger | N/T/共有used/reset | 次command`
+
+| 点検条件 | 自走中に必ず行う是正 |
+|---|---|
+| 約170万N又は共有観測約10pp | 同じ外部経路の接続と実証、網羅残数を確認。実証が増えなければ次区間の外部観測を一つ固定し、作業順/契約変更群を修正する |
+| 約20ppで実経路の証拠が増えない | 下位helperや試験件数が増えても対象限定レビューを必須化。接続図・最小再現・coverage計画から具体的差分案を選び、実装/実測へ反映する。「次は結線」の再記載だけで継続しない |
+| S1上端850万Nまでに経路が閉じない | 未接続の理由と次に得る証拠を再算定。統合設計/残工数を修正して同経路へ継続する。数値到達だけで停止しない |
+| 修正後も同じ因果で停滞 | 同じ材料のレビュー反復を避け、未解決反例を絞ってAstra/highへ交代可。PMO介入要の事実をcheckpointへ残し、独立して進められる承認済み依存は継続する |
+| S1又は後続受入が閉じた時点 | 実N/T、実行回数、初回合格率、やり直し原因、接続/網羅の達成を評価。まずAの残り・最終Gを再見積りし、次回のモデル/推論設定はPMOで改訂する |
+
+PMOは利用者から本チャットで途中確認/停止報告を受けたとき、上表を判定する。必要なら478 Cを具体化した介入指示を提示する。モデルの強化だけを介入策にしない。新しい自動監視・別チャットへの自動送信は設定していない。実施側はPMO返答待ちだけで停止しない。
+
+## 7. 継続・停止・復帰
+
+S1、S4、review、通常報告の終了は停止条件ではない。旧15pp試走上限・約12pp保全・試走後PMO待ちは適用しない。S4後も残PG/PTへ自走する。計画の説明・短い能力試走で今回の実行を終了しない。
+
+残10%以下で新規実装を止め、必要検証・証跡・差分・次手順の保全へ移り、5%付近までに停止する。保全余力が不足しそうなら着手を早めに控える。枠により正式gateを完遂できなければ未認定として保存する。その他はPG/PT全完了、利用者停止指示、実環境の継続不能、不可欠な外部入力がなく独立承認済み作業も尽きた場合に停止する。
+
+内部技術判断・SS補足・採番・必要依存の解消は自走する。QA045/046は回答済み。新たな外部仕様承認が不可欠な範囲だけ保留し、独立作業へ進む。VM作業は隔離PG/PT環境で行い、既存test-only Unit等は状態を確認・退避/復旧可能にしてProduction構成へ接続する。既存UnitをProduction認定済みと誤認しない。
+
+最新の短い現況は456の先頭1か所、依存の変更は460、正式結果は各Program manifestへ保存し、他資料には参照を残す。中断前にbranch/HEAD/dirty、S/R/D、正式/暫定source/run、実行中process・job・log、保全hash、未確定事項、次command、枠・計測期間・モデル確認方法を保存する。メモリ内draftや`/tmp`だけに頼らず、意味ある単位でGit保存する。再開は478 Bを使い、現在地から進み、新しい成果の巻戻し・適用済み処理の二重実行を避ける。
