@@ -1,0 +1,277 @@
+{
+  "id": "PG397-native-owned-expiry-reread-and-six-roots",
+  "formal": false,
+  "sourceCommit": "ed65fbf9f6bba9a55fadde9ea270a849cc43e257",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-09-30T20:48:03.948023+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "signed frozen full-BOM deployment with vendor Unit SuccessExitStatus143; external Morning same-run resume; real parent/backup/cleanup/expiry exec",
+  "exitCode": 0,
+  "applicationParentExit": 30,
+  "wholeStartupAccepted": false,
+  "releaseManifestSha256": "530ebcb517af69334f877befc599f4a34114d1ce517ed1ce6daf0ca8baf7b81a",
+  "fullRegression": {
+    "tests": 2650,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "expected": {
+    "oldRows": 63,
+    "newRows": 10,
+    "brokerFresh": true,
+    "expiryFresh": true,
+    "sameOwnerRootsCollected": true
+  },
+  "actual": {
+    "oldRowsUnchanged": true,
+    "rows": 73,
+    "backupFreshSkip": 2,
+    "backupAttempt": 14,
+    "cleanupFreshSkip": 7,
+    "cleanupAttempt": 6,
+    "expiryFreshSkip": 1,
+    "expiryAttempt": 3,
+    "allFourteenColumnsReadBack": true,
+    "coldBaselineAfterNormalStoppedUnitReload": true,
+    "brokerFresh": true,
+    "fullOpsAndStartupJournalAcceptedByActualParent": true,
+    "expiryFresh": true,
+    "expiryReceiptExit": 0,
+    "sameOwnerRootsCollected": true,
+    "sameOwnerExpiryAndCleanupReferencesReread": true,
+    "parentAndAllChildrenTerminal": true,
+    "requestOwnerIntentEntries": 0,
+    "startupInvalid": true,
+    "permitsIssued": 0,
+    "rootReturnLineCovered": 181
+  },
+  "coverage": {
+    "classByteMismatch": 0,
+    "sameByteActualRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "oldInspectorExecExcluded": true,
+    "moduleUnion": {
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1017,
+          "covered": 11080
+        },
+        "METHOD": {
+          "missed": 178,
+          "covered": 1863
+        },
+        "CLASS": {
+          "missed": 10,
+          "covered": 266
+        },
+        "BRANCH": {
+          "missed": 581,
+          "covered": 5118
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2182
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 380
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1205
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 644,
+      "LINE": 1129,
+      "METHOD": 197,
+      "CLASS": 11
+    },
+    "resolvedFromOwnHost": {
+      "BRANCH": 116,
+      "LINE": 1052,
+      "METHOD": 192,
+      "CLASS": 17
+    }
+  },
+  "toolSources": {
+    "rootsOracle": {"path": "tools/quality/vm/050_s1/pg397_roots_oracle.py", "sha256": "19534f26ffeb9c5937869421576b3cf159870f1218707c3056c529c3ee2e94bc"},
+    "nativeCollector": {"path": "tools/quality/vm/050_s1/pg397_capture_manifest.py", "sha256": "3e4868d192fa331bca6c8c9bc6300fd9fce116f7d74c0f9ecf85d5120b4a2d66"},
+    "initialCollectorRefusal": {"path": "work/pgpt-runs/PG379/pg397-native-collector-rejected.log", "sha256": "1b1e39a6dcdfe0c8792e64c3207af2b0b249a57b0b8b7e0708fd182900b3b5bc", "manifestCreated": false, "externalActions": 0}
+  },
+  "bugs": [
+    "BUG-375",
+    "BUG-376",
+    "BUG-377",
+    "BUG-378"
+  ],
+  "ssc": [
+    "SSC-126",
+    "SSC-127",
+    "SSC-128"
+  ],
+  "ykt": [
+    "YKT-292",
+    "YKT-293",
+    "YKT-294",
+    "YKT-295",
+    "YKT-296",
+    "YKT-297",
+    "YKT-298"
+  ],
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-six.log",
+      "sha256": "b703551c091e2ff42f3a5bf7d4cc2df3def9174d1a95bc6fb548fbff63555576"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-deploy.log",
+      "sha256": "c12c3833142460b56feb01132a9dd00be0182829dab8ca8b7e122b9d76f26dbd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-old-unit-base.log",
+      "sha256": "d1ff882c1ef487d7ac7c5cb2e6a21a6e6a5033be7a6b170c491b606a503f0eec"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-verify.log",
+      "sha256": "f04f92a42a5402d83fdb52f1633de634c6bd9e3234efb3d5b8f18798ad0990ba"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-activate.log",
+      "sha256": "8254645082b8305f45d62fc9958b044af4ccb1dfd9eab47f5a1145684cab35b8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-native-db-before-full.log",
+      "sha256": "14de44540b4453244c1a4945f078317933e627a5f5c469a64b90a49353eed189"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg397-native-db-final-full.log",
+      "sha256": "eccca2391e2b3b2ae20c6f2811dcf13cd92237cd96812618041ead6feab0266d"
+    }
+  ],
+  "nativeExecHashes": {
+    "parent": "1a73050d906bb4de6022e1d0f3a35f37fb6f0928002a4d06e083f8928ddcbaf6",
+    "backup": "7cf8abd0f42c3f6636e6fcbfa97b67cc084300bad9f9351ff356315868823607",
+    "cleanup": "e5ac0b95cc8a8abd8548409b5810e1b97aa13a2aa5f8ea8a5094a7386ced7fc7",
+    "expiry": "d39576ee48f191d0bb37d78711e43493f99e18cc8d0603137465163d332a192e"
+  },
+  "limitations": [
+    "five gates/normal issuer/root API Web/CHR not accepted",
+    "native root canonical hash not emitted/issued yet; independent hash is not actual output",
+    "native negative/hard-timeout and coverage100/formal run24 unchanged"
+  ],
+  "redaction": "no raw journal/Unit identities/exec/credential/password/token/session/key/master/dump in Git",
+  "independentRootOracle": {
+    "formal": false,
+    "independentOracle": true,
+    "roots": [
+      {
+        "id": "ASSET",
+        "device": 64769,
+        "inode": 754302,
+        "uid": 975,
+        "gid": 982,
+        "mode": "0750",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      },
+      {
+        "id": "TRANSFER",
+        "device": 64769,
+        "inode": 753466,
+        "uid": 999,
+        "gid": 980,
+        "mode": "0750",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      },
+      {
+        "id": "BACKUP",
+        "device": 64769,
+        "inode": 503694,
+        "uid": 992,
+        "gid": 977,
+        "mode": "0700",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      },
+      {
+        "id": "LOG",
+        "device": 64769,
+        "inode": 754303,
+        "uid": 0,
+        "gid": 986,
+        "mode": "0750",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      },
+      {
+        "id": "ARTEMIS",
+        "device": 64769,
+        "inode": 503343,
+        "uid": 994,
+        "gid": 979,
+        "mode": "0700",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      },
+      {
+        "id": "STAGING",
+        "device": 64769,
+        "inode": 754304,
+        "uid": 974,
+        "gid": 974,
+        "mode": "0700",
+        "hostFilesystem": "ext4",
+        "hostReadOnly": false,
+        "aclEmpty": true
+      }
+    ],
+    "expectedCanonicalSha256": "7a6b1944280b6a3e01fb62624c04ba7af58289ee2bfa495bc8db7ce4a4713f55",
+    "scope": "host metadata only; native same-owner/private view/capture return-line separately required"
+  },
+  "rootReachabilitySha256": "38229bd5f97accf82ac92510cce34812c78b2419206c3ca00f0d1af2420a6434",
+  "mainReachabilitySha256": "1e48dc155fa7f883c4b3d2c6b0d8e3b6c290a0520e424aadbe447e29de4424f1"
+}

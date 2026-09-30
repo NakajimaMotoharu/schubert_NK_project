@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 05:50 PG397 実Expiry再読→6root閉鎖（issuer未完）
+
+凍結Production ed65fbf9f6bba9a55fadde9ea270a849cc43e257、全6 2,650PT/FES0/static6zero/full1dbdd001…、signed178artifact/61deps/23SQL・manifest530ebcb5…。実同原本Morning1回：旧63行不変＋新10SKIP=73、Backup14/cleanup6/Expiry3、全14列/真正fresh3子receipt0・freshBroker/Ops/journal後、Expiry親独立再読→Cleanup参照再読→実effective config→6root capture/recheck→Main帰還181を同byteparentで確認（root capture24/24line・recheck4/4line、identity/private/hostをactual処理で観測）。全親子kernel終端/4namespace空/INVALIDpermit0、親30は未完成全起動の部分帰還であり成功0/10へ昇格しない。独立6root oracleは実NSS/uid/gid/mode/dev/ino/ACL/ext4RW合格、canonicalのexpectedだけを計算、native Production hash未出力/発行未実装を区別。native4role union B/L/M/C644/1129/197/11・classMismatch0、host760/2181/389/28から116/1052/192/17解消。BUG376直接再試験成功、6bind境界のnative負系/全coverageは残る。独立fixture誤名BUG377とcollector旧labelBUG378を事前起票/初回拒否保全し、tools同byte/hash/再採取をmanifestへ保存。次は5gate実値収集・7世代・正規issue内部3境界/A正規handoff→Root/APIWeb/実CHR、正式run24/48.3%据置、IT/ST未実施。
+
 05:26 PG397選択再試験：Storage16/Bootstrap10/Batch36（Main10/Session18/MutationGuard2/BrokerCycle5/Completion1）＝62PT/FES0/static3module各Bug/Error0、pg397-owner-corrected.log、05:23:08/43.175秒。Main全既知CleanupStopReasonのfresh/resume30、未知NPE/Runtime/Error同一性を追加。真DB timeout/readback/rollback、Session既存advisory/原本負系を再試験。全6/native six-root再試験前、各6bind境界のnative負系・全coverageは未完。
 
 ## 05:18 PG396 実通常143再開成功・Expiry再読の新障害

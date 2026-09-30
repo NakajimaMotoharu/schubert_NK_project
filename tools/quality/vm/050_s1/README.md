@@ -1,5 +1,7 @@
 # 050 隔離PG/PT VMのS1実再現tool
 
+PG397の`pg397_roots_oracle.py`はSS343固定NSS/6rootのhost実stat・NOFOLLOW・ACL無し・ext4RWと共通Epoch keyから独立expected hashを作る読取専用fixture。Production parser/encoderをexpected生成に使わず、private view/同ownerの成功は別の実parent同bytecoverageで証明する。hash単独はissuer/業務readyではない。NSS誤名のBUG377は実行前に起票/補正し、native collectorの旧baseline label BUG378はmanifest作成前拒否を別log保全後に補正した。`pg397_capture_manifest.py`は既存全6manifest、63→73の全14列/旧行不変、新attempt14/6/3、実4exec/classbyte、Main181/root capture/recheck完了をassertしnew-only manifestを出す。raw Unit/journal/native execはprivate Workだけ、Gitにはhash/非秘密集約のみ。実行済みoutへ再実行して上書きしない。元ソースed65fbf9f、Work PG379に実input/logあり、Python3.14、SSH/実vmが必要。toolsは実byte hashでmanifestへ束縛し、資料追記/収録をProduction再試験合格へ加点しない。
+
 最新PG387はsource7ba352d6f・通常resumeの実再検証282。新5toolは実使用byteを保存し、元SUCCESS/今回SKIP・fresh子・成果不変を独立採取する。PG385/386の結果を上書きせず、旧sourceのexecを合算しない。現VMはPG387なので既実行の配備・resumeを二重発行しない。
 
 Source/試験正本はsrc、278/279、SS341/342/343。ここは隔離VM pgpt-r2-20260927-01に固定した配備・独立oracle・sanitized collectorであり、Production main/probe/StartupPermitの代替ではない。再現の実sourceはa6b5c7c8b、Release0.1.0-PG385、実正一往復278。既存結果への再書込みをしない。署名鍵/age private key/SSH key/credential/dump/raw archiveはGit外privateで入手し、Gitへコピーしない。
