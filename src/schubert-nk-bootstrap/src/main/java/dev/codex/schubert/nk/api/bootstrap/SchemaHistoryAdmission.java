@@ -68,7 +68,13 @@ public final class SchemaHistoryAdmission {
   }
 
   public void verify(Connection connection) throws SQLException {
+    inspect(connection);
+  }
+
+  /** SSC129: actual six-column rows, not the expected release vector or admission authority. */
+  public List<Row> inspect(Connection connection) throws SQLException {
     Objects.requireNonNull(connection, "admitted connection");
+    var observed = new ArrayList<Row>();
     try {
       require(!Thread.currentThread().isInterrupted());
       var statement = connection.prepareStatement(SQL);
@@ -82,13 +88,20 @@ public final class SchemaHistoryAdmission {
           var values = required(rows);
           for (Row row : expected) {
             require(values.next());
+            int rank = required(values.getObject("installed_rank", Integer.class));
+            @Nullable String version = values.getString("version");
+            String type = required(values.getString("type"));
+            String script = required(values.getString("script"));
+            @Nullable Integer checksum = values.getObject("checksum", Integer.class);
+            boolean success = required(values.getObject("success", Boolean.class));
             require(
-                row.installedRank() == required(values.getObject("installed_rank", Integer.class)));
-            require(Objects.equals(row.version(), values.getString("version")));
-            require(row.type().equals(values.getString("type")));
-            require(row.script().equals(values.getString("script")));
-            require(Objects.equals(row.checksum(), values.getObject("checksum", Integer.class)));
-            require(required(values.getObject("success", Boolean.class)));
+                row.installedRank() == rank
+                    && Objects.equals(row.version(), version)
+                    && row.type().equals(type)
+                    && row.script().equals(script)
+                    && Objects.equals(row.checksum(), checksum)
+                    && success);
+            observed.add(new Row(rank, version, type, script, checksum, success));
           }
           require(!values.next());
           require(!Thread.currentThread().isInterrupted());
@@ -114,6 +127,7 @@ public final class SchemaHistoryAdmission {
             if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
           }
       }
+      return List.copyOf(observed);
     } catch (SQLException known) {
       throw unavailable();
     }

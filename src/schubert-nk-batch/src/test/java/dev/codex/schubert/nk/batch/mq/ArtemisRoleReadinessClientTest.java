@@ -126,7 +126,8 @@ final class ArtemisRoleReadinessClientTest {
     }
     assertRedacted(
         () -> new ArtemisRoleReadinessClient((session, match) -> null).verify(unusedSession()));
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             new ArtemisRoleReadinessClient(
                     (session, match) -> {
@@ -141,7 +142,8 @@ final class ArtemisRoleReadinessClientTest {
                 (proxy, method, arguments) -> {
                   throw new IllegalStateException("private-management-value");
                 });
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             ArtemisManagementReadinessClient.putRolesOperation(failingMessage, "nk.sync.request"));
   }

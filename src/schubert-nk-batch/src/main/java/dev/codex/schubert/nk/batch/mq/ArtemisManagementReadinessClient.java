@@ -86,7 +86,7 @@ public final class ArtemisManagementReadinessClient {
   /** Fail closed on missing, malformed or inconsistent effective values; borrow, never close. */
   public void verifyBroker(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
-    try {
+    {
       require("schubert-nk-broker".equals(reader.read(session, "name")));
       require(Boolean.TRUE.equals(reader.read(session, "persistenceEnabled")));
       require("NIO".equals(reader.read(session, "journalType")));
@@ -101,8 +101,6 @@ public final class ArtemisManagementReadinessClient {
       require(usage instanceof Number);
       double fraction = ((Number) usage).doubleValue();
       require(fraction >= 0.0 && fraction < 0.9);
-    } catch (RuntimeException failure) {
-      throw new ArtemisManagementReadinessException();
     }
   }
 
@@ -138,7 +136,10 @@ public final class ArtemisManagementReadinessClient {
   static void putAcceptorsOperation(ClientMessage message) {
     try {
       ManagementHelper.putOperationInvocation(message, ResourceNames.BROKER, "getAcceptorsAsJSON");
+    } catch (RuntimeException | Error unknown) {
+      throw unknown;
     } catch (Exception failure) {
+      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
       throw new ArtemisManagementReadinessException();
     }
   }
@@ -166,7 +167,10 @@ public final class ArtemisManagementReadinessClient {
     try {
       ManagementHelper.putOperationInvocation(
           message, ResourceNames.BROKER, "getRolesAsJSON", addressMatch);
+    } catch (RuntimeException | Error unknown) {
+      throw unknown;
     } catch (Exception failure) {
+      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
       throw new ArtemisManagementReadinessException();
     }
   }
@@ -201,7 +205,10 @@ public final class ArtemisManagementReadinessClient {
     try {
       ManagementHelper.putOperationInvocation(
           message, ResourceNames.QUEUE + "nk.expiry.q", operation, selector);
+    } catch (RuntimeException | Error unknown) {
+      throw unknown;
     } catch (Exception failure) {
+      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
       throw new ArtemisManagementReadinessException();
     }
   }
@@ -210,7 +217,10 @@ public final class ArtemisManagementReadinessClient {
     try {
       ManagementHelper.putOperationInvocation(
           message, ResourceNames.BROKER, "getAddressSettingsAsJSON", address);
+    } catch (RuntimeException | Error unknown) {
+      throw unknown;
     } catch (Exception failure) {
+      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
       throw new ArtemisManagementReadinessException();
     }
   }
@@ -220,8 +230,6 @@ public final class ArtemisManagementReadinessClient {
       return exchange.query(session, attribute);
     } catch (InterruptedException failure) {
       Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
-    } catch (RuntimeException failure) {
       throw new ArtemisManagementReadinessException();
     }
   }
@@ -253,7 +261,10 @@ public final class ArtemisManagementReadinessClient {
       }
       checkParentDeadline();
       return result;
+    } catch (RuntimeException | Error unknown) {
+      throw unknown;
     } catch (Exception failure) {
+      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
       throw new ArtemisManagementReadinessException();
     }
   }

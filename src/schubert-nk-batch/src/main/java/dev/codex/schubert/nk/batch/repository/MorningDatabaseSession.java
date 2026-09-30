@@ -47,6 +47,36 @@ public final class MorningDatabaseSession {
   @FunctionalInterface
   interface Schema {
     void verify(Connection admitted) throws SQLException, IOException;
+
+    default RootReleaseAdmission.DatabaseInspection inspect(Connection admitted)
+        throws SQLException, IOException {
+      Objects.requireNonNull(admitted);
+      throw unavailable(); // A legacy/synthetic verification callback cannot mint issuer facts.
+    }
+  }
+
+  /** SSC129 data only; the live Access, original M/A and full prestart proof remain necessary. */
+  public record DatabaseObservation(
+      String loginRole,
+      String effectiveRole,
+      String database,
+      boolean autoCommit,
+      boolean jdbcReadOnly,
+      int isolation,
+      boolean recovery,
+      boolean advisoryHeld,
+      RootReleaseAdmission.DatabaseInspection release) {
+    public DatabaseObservation {
+      Objects.requireNonNull(loginRole);
+      Objects.requireNonNull(effectiveRole);
+      Objects.requireNonNull(database);
+      Objects.requireNonNull(release);
+    }
+
+    @Override
+    public String toString() {
+      return "MorningDatabaseObservation[actual=<redacted>]";
+    }
   }
 
   @FunctionalInterface
@@ -124,6 +154,21 @@ public final class MorningDatabaseSession {
 
   /** Callback-scoped parent operations. The JDBC handle and lock never escape this capability. */
   public interface Access {
+    default DatabaseObservation inspectPermitDatabase(
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) throws IOException {
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
+
+    default void recheckPermitDatabase(
+        DatabaseObservation expected,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(expected);
+      Objects.requireNonNull(owner);
+      if (!expected.equals(inspectPermitDatabase(owner))) throw unavailable();
+    }
+
     void requireUnused(BatchRun run) throws IOException;
 
     void requireConsistent(BatchRun run) throws IOException;
@@ -295,7 +340,18 @@ public final class MorningDatabaseSession {
   private static Schema releaseGate(
       RootReleaseAdmission release, RootStartupContext.Snapshot expected) {
     Objects.requireNonNull(release, "root release admission");
-    return connection -> release.verifyMorning(connection, expected);
+    return new Schema() {
+      @Override
+      public void verify(Connection connection) throws SQLException, IOException {
+        release.verifyMorning(connection, expected);
+      }
+
+      @Override
+      public RootReleaseAdmission.DatabaseInspection inspect(Connection connection)
+          throws SQLException, IOException {
+        return release.inspectMorningDatabase(connection, expected);
+      }
+    };
   }
 
   private static Gate rootGate(RootStartupContext context, RootStartupContext.Snapshot expected) {
@@ -397,22 +453,41 @@ public final class MorningDatabaseSession {
     return false;
   }
 
+  private record RoleObservation(
+      String login,
+      String effective,
+      String database,
+      boolean autoCommit,
+      boolean jdbcReadOnly,
+      int isolation,
+      boolean recovery) {}
+
   private static void admit(Connection connection) throws SQLException {
-    require(
-        connection.getAutoCommit()
-            && !connection.isReadOnly()
-            && connection.getTransactionIsolation() == Connection.TRANSACTION_READ_COMMITTED);
-    query(
+    admitObservation(connection);
+  }
+
+  private static RoleObservation admitObservation(Connection connection) throws SQLException {
+    boolean autoCommit = connection.getAutoCommit();
+    boolean readOnly = connection.isReadOnly();
+    int isolation = connection.getTransactionIsolation();
+    require(autoCommit && !readOnly && isolation == Connection.TRANSACTION_READ_COMMITTED);
+    return query(
         connection,
         ROLE,
         rows -> {
           require(rows.next());
-          require("schubert_batch".equals(present(rows.getString("effective_role"))));
-          require("schubert_batch".equals(present(rows.getString("login_role"))));
-          require("schubert_nk".equals(present(rows.getString("database_name"))));
-          require(!present(rows.getObject("recovery", Boolean.class)));
+          String effective = present(rows.getString("effective_role"));
+          String login = present(rows.getString("login_role"));
+          String database = present(rows.getString("database_name"));
+          boolean recovery = present(rows.getObject("recovery", Boolean.class));
+          require(
+              "schubert_batch".equals(effective)
+                  && "schubert_batch".equals(login)
+                  && "schubert_nk".equals(database)
+                  && !recovery);
           require(!rows.next());
-          return Boolean.TRUE;
+          return new RoleObservation(
+              login, effective, database, autoCommit, readOnly, isolation, recovery);
         });
   }
 
@@ -499,6 +574,40 @@ public final class MorningDatabaseSession {
     private void guard() throws IOException {
       if (!active || inHandoff || thread != Thread.currentThread().threadId()) throw unavailable();
       check();
+    }
+
+    @Override
+    public DatabaseObservation inspectPermitDatabase(
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) throws IOException {
+      Objects.requireNonNull(owner);
+      guard();
+      owner.check();
+      if (!cleanupVerified || !expiryHandoffStarted) throw unavailable();
+      try {
+        var role = admitObservation(connection);
+        boolean held = scalar(connection, HELD);
+        if (!held) throw unavailable();
+        var actual =
+            Objects.requireNonNull(schema.inspect(connection), "actual root schema inspection");
+        guard();
+        owner.check();
+        if (!role.equals(admitObservation(connection)) || !scalar(connection, HELD))
+          throw unavailable();
+        guard();
+        owner.check();
+        return new DatabaseObservation(
+            role.login(),
+            role.effective(),
+            role.database(),
+            role.autoCommit(),
+            role.jdbcReadOnly(),
+            role.isolation(),
+            role.recovery(),
+            held,
+            actual);
+      } catch (SQLException known) {
+        throw unavailable();
+      }
     }
 
     public void requireUnused(BatchRun run) throws IOException {

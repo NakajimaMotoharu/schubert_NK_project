@@ -169,7 +169,9 @@ final class ArtemisExpiryPurgeClientTest {
     assertRedacted(new Fake(2, Long.MAX_VALUE, 2, 2, 0, 0)); // estimated byte overflow
     var fault = new Fake(1, 10, 1, 1, 0, 0);
     fault.failSelected = true;
-    assertRedacted(fault);
+    assertThrows(
+        IllegalStateException.class,
+        () -> new ArtemisExpiryPurgeClient(fault).observe(unusedSession(), run()));
     assertThrows(NullPointerException.class, () -> new ArtemisExpiryPurgeClient(null));
     assertThrows(
         NullPointerException.class, () -> new ArtemisExpiryPurgeClient().observe(null, run()));
@@ -229,7 +231,7 @@ final class ArtemisExpiryPurgeClientTest {
                 });
     var failure =
         assertThrows(
-            ArtemisManagementReadinessException.class,
+            IllegalStateException.class,
             () ->
                 ArtemisManagementReadinessClient.putExpiryOperation(
                     failingMessage, "countMessages", "_AMQ_ACTUAL_EXPIRY < 1"));
@@ -268,7 +270,12 @@ final class ArtemisExpiryPurgeClientTest {
     assertPurgeRejectedBeforeRemove(selectedDrift, validObservation());
     var providerFailure = new Fake(1, 10, 1, 1, 0, 0);
     providerFailure.failSelected = true;
-    assertPurgeRejectedBeforeRemove(providerFailure, validObservation());
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            new ArtemisExpiryPurgeClient(providerFailure)
+                .purgeObserved(unusedSession(), run(), validObservation()));
+    assertEquals(0, providerFailure.removeCalls);
   }
 
   @Test

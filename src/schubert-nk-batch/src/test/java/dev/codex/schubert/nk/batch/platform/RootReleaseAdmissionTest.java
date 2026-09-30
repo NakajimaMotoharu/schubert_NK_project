@@ -53,6 +53,35 @@ public final class RootReleaseAdmissionTest {
         PLATFORM);
   }
 
+  @Test
+  void rootBom010ActualSchemaAndRuntimeSurviveOwnersOnlyAsImmutableData() throws Exception {
+    var fixture = new Fixture();
+    var subject = fixture.subject();
+    var actual =
+        subject.inspectMorningDatabase(connection(fixture.events, false), fixture.expected);
+    assertEquals(
+        List.of(
+            new SchemaHistoryAdmission.Row(0, null, "SCHEMA", "\"schubert_meta\"", null, true),
+            new SchemaHistoryAdmission.Row(1, "001", "SQL", "V001__first.sql", -690524359, true)),
+        actual.schemaRows());
+    assertEquals(ACTUAL, actual.runtime());
+    assertNotSame(actual.contents().migrations().getFirst(), actual.schemaRows().getFirst());
+    assertThrows(UnsupportedOperationException.class, actual.schemaRows()::clear);
+    assertThrows(UnsupportedOperationException.class, () -> actual.runtime().put("osId", "wrong"));
+    assertTrue(fixture.events.contains("rows.close"));
+    assertTrue(fixture.events.contains("statement.close"));
+    assertFalse(actual.toString().contains("PUBLIC VENDOR"));
+    assertThrows(
+        NullPointerException.class,
+        () -> new RootReleaseAdmission.DatabaseInspection(null, List.of(), Map.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new RootReleaseAdmission.DatabaseInspection(literal(), null, Map.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new RootReleaseAdmission.DatabaseInspection(literal(), List.of(), null));
+  }
+
   static final class Fixture {
     final RootStartupContextTest.Fixture kernel = new RootStartupContextTest.Fixture();
     final RootStartupContext context;

@@ -30,7 +30,8 @@ public final class ArtemisReadinessClient {
       for (var addressName : APPROVED_ADDRESSES) {
         var address = SimpleString.of(addressName);
         var queue = SimpleString.of(addressName + ".q");
-        var observedAddress = Objects.requireNonNull(session.addressQuery(address));
+        var observedAddress = session.addressQuery(address);
+        if (observedAddress == null) throw new ArtemisReadinessException();
         if (!observedAddress.isExists()
             || !observedAddress.isSupportsAnycast()
             || observedAddress.isSupportsMulticast()
@@ -39,7 +40,8 @@ public final class ArtemisReadinessClient {
             || !List.of(queue).equals(observedAddress.getQueueNames())) {
           throw new ArtemisReadinessException();
         }
-        var observedQueue = Objects.requireNonNull(session.queueQuery(queue));
+        var observedQueue = session.queueQuery(queue);
+        if (observedQueue == null) throw new ArtemisReadinessException();
         if (!observedQueue.isExists()
             || observedQueue.isTemporary()
             || !observedQueue.isDurable()
@@ -51,7 +53,7 @@ public final class ArtemisReadinessClient {
           throw new ArtemisReadinessException();
         }
       }
-    } catch (ActiveMQException | RuntimeException failure) {
+    } catch (ActiveMQException failure) {
       throw new ArtemisReadinessException();
     }
   }

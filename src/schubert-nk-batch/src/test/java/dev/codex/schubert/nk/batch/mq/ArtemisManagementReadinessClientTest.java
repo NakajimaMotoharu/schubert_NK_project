@@ -173,7 +173,8 @@ final class ArtemisManagementReadinessClientTest {
             new ArtemisManagementReadinessClient((ignored, key) -> observed.get(key))
                 .verifyBroker(session));
     var calls = new AtomicInteger();
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             new ArtemisManagementReadinessClient(
                     (ignored, key) -> {

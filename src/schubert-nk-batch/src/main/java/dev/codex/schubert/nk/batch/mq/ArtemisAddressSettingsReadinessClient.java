@@ -62,19 +62,23 @@ public final class ArtemisAddressSettingsReadinessClient {
   /** Fails closed on any missing, malformed, unknown or drifted effective value. */
   public void verify(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
+    for (var entry : CAPACITIES.entrySet()) {
+      Object response = reader.read(session, entry.getKey());
+      if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
+      verifyResponse(json, entry.getValue());
+    }
+  }
+
+  private static void verifyResponse(String json, Capacity capacity) {
     try {
-      for (var entry : CAPACITIES.entrySet()) {
-        Object response = reader.read(session, entry.getKey());
-        if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
-        JsonObject values = JsonUtil.readJsonObject(json);
-        for (var field : COMMON.entrySet()) expect(values, field.getKey(), field.getValue());
-        Capacity capacity = entry.getValue();
-        expect(values, "maxSizeBytes", Long.toString(capacity.memoryMib() * MIB));
-        expect(values, "maxSizeMessages", Long.toString(capacity.memoryMessages()));
-        expect(values, "pageLimitBytes", Long.toString(capacity.pageMib() * MIB));
-        expect(values, "pageLimitMessages", Long.toString(capacity.pageMessages()));
-      }
-    } catch (RuntimeException failure) {
+      JsonObject values = JsonUtil.readJsonObject(json);
+      for (var field : COMMON.entrySet()) expect(values, field.getKey(), field.getValue());
+      expect(values, "maxSizeBytes", Long.toString(capacity.memoryMib() * MIB));
+      expect(values, "maxSizeMessages", Long.toString(capacity.memoryMessages()));
+      expect(values, "pageLimitBytes", Long.toString(capacity.pageMib() * MIB));
+      expect(values, "pageLimitMessages", Long.toString(capacity.pageMessages()));
+    } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
+        | IllegalStateException malformed) {
       throw new ArtemisManagementReadinessException();
     }
   }

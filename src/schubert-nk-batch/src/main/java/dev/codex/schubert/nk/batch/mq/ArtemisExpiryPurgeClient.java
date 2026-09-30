@@ -63,10 +63,9 @@ public final class ArtemisExpiryPurgeClient {
       long beforeBytes = nonnegative(operations.bytes(session));
       long selected = nonnegative(operations.selected(session, selector(cutoff)));
       if (selected > beforeCount) throw new ArtemisExpiryPurgeException();
-      long estimated =
-          beforeCount == 0 ? 0 : Math.multiplyExact(beforeBytes, selected) / beforeCount;
+      long estimated = beforeCount == 0 ? 0 : product(beforeBytes, selected) / beforeCount;
       return new Observation(cutoff, beforeCount, selected, beforeBytes, estimated);
-    } catch (RuntimeException failure) {
+    } catch (ArtemisManagementReadinessException declaredProvider) {
       throw new ArtemisExpiryPurgeException();
     }
   }
@@ -88,7 +87,7 @@ public final class ArtemisExpiryPurgeClient {
       long expectedEstimate =
           observation.beforeCount() == 0
               ? 0
-              : Math.multiplyExact(observation.beforeBytes(), observation.selectedCount())
+              : product(observation.beforeBytes(), observation.selectedCount())
                   / observation.beforeCount();
       if (observation.estimatedSelectedBytes() != expectedEstimate
           || nonnegative(operations.count(session)) != observation.beforeCount()
@@ -114,7 +113,15 @@ public final class ArtemisExpiryPurgeClient {
           observation.estimatedSelectedBytes(),
           observation.beforeBytes() - afterBytes,
           afterBytes);
-    } catch (RuntimeException failure) {
+    } catch (ArtemisManagementReadinessException declaredProvider) {
+      throw new ArtemisExpiryPurgeException();
+    }
+  }
+
+  private static long product(long left, long right) {
+    try {
+      return Math.multiplyExact(left, right);
+    } catch (ArithmeticException overflow) {
       throw new ArtemisExpiryPurgeException();
     }
   }

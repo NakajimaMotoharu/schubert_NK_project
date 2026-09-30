@@ -127,10 +127,14 @@ final class ArtemisReadinessClientTest {
                 }
                 throw new AssertionError("unexpected method " + method.getName());
               });
-      var failure =
-          assertThrows(ArtemisReadinessException.class, () -> reader.verifyTopology(session));
-      assertEquals("Artemis effective Queue topology is unavailable", failure.getMessage());
-      assertNull(failure.getCause());
+      if (fault instanceof RuntimeException unknown) {
+        assertSame(unknown, assertThrows(unknown.getClass(), () -> reader.verifyTopology(session)));
+      } else {
+        var failure =
+            assertThrows(ArtemisReadinessException.class, () -> reader.verifyTopology(session));
+        assertEquals("Artemis effective Queue topology is unavailable", failure.getMessage());
+        assertNull(failure.getCause());
+      }
       assertEquals(0, closes.get());
     }
     var session = synthetic(null, null, true);

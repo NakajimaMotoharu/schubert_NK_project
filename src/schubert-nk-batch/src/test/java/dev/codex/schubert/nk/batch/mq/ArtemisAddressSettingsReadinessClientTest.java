@@ -181,7 +181,8 @@ final class ArtemisAddressSettingsReadinessClientTest {
           () ->
               new ArtemisAddressSettingsReadinessClient((session, address) -> null)
                   .verify(fixture.session));
-      assertRedacted(
+      assertThrows(
+          IllegalStateException.class,
           () ->
               new ArtemisAddressSettingsReadinessClient(
                       (session, address) -> {
@@ -196,7 +197,8 @@ final class ArtemisAddressSettingsReadinessClientTest {
                   (proxy, method, arguments) -> {
                     throw new IllegalStateException("private-management-value");
                   });
-      assertRedacted(
+      assertThrows(
+          IllegalStateException.class,
           () ->
               ArtemisManagementReadinessClient.putAddressSettingsOperation(
                   failingMessage, "nk.sync.request"));

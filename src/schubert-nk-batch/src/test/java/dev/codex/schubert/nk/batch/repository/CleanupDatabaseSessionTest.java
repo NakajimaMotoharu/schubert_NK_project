@@ -360,7 +360,11 @@ final class CleanupDatabaseSessionTest {
                 return "DONE";
               }));
       assertEquals(0, childCalls.get());
-      assertTrue(advisory(observer));
+      long releaseDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+      while (!advisory(observer)) {
+        if (System.nanoTime() >= releaseDeadline) fail("server advisory release deadline exceeded");
+        TimeUnit.MILLISECONDS.sleep(5);
+      }
     }
   }
 

@@ -17,6 +17,31 @@ final class SchemaHistoryAdmissionTest {
   private static final List<Row> RELEASE = List.of(SCHEMA, FIRST);
 
   @Test
+  void opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()
+      throws Exception {
+    var probe = new Probe();
+    var observed = new SchemaHistoryAdmission(RELEASE).inspect(probe.connection());
+    assertEquals(
+        List.of(
+            new Row(0, null, "SCHEMA", "\"schubert_meta\"", null, true),
+            new Row(1, "001", "SQL", "V001__first.sql", -170000001, true)),
+        observed);
+    assertNotSame(SCHEMA, observed.getFirst());
+    assertNotSame(FIRST, observed.getLast());
+    assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+    assertThrows(UnsupportedOperationException.class, observed::clear);
+    probe.rows.getLast().put("script", "V002__changed.sql");
+    assertEquals(2, observed.size());
+    assertEquals("V001__first.sql", observed.getLast().script());
+    assertThrows(
+        NullPointerException.class, () -> new SchemaHistoryAdmission(RELEASE).inspect(null));
+    var wrong = new Probe();
+    wrong.rows.getLast().put("checksum", 42);
+    failed(() -> new SchemaHistoryAdmission(RELEASE).inspect(wrong.connection()));
+    assertArrayEquals(new int[] {1, 1, 0}, wrong.closed);
+  }
+
+  @Test
   void opsSchema001ExactFixedQueryAndBorrowedOwner() throws Exception {
     var probe = new Probe();
     new SchemaHistoryAdmission(RELEASE).verify(probe.connection());

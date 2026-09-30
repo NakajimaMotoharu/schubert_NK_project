@@ -106,6 +106,28 @@ public final class RootReleaseAdmission {
   /** Actual approved payload observations, freshly bound to the same Morning owner/schema. */
   public StartupReleaseManifest.Contents inspectMorning(
       Connection connection, RootStartupContext.Snapshot caller) throws SQLException, IOException {
+    return verifyFor(connection, caller, RootStartupContext.Service.MORNING).contents();
+  }
+
+  /** SSC129: freshly verified manifest, actual DB rows and independent runtime observations. */
+  public record DatabaseInspection(
+      StartupReleaseManifest.Contents contents,
+      List<SchemaHistoryAdmission.Row> schemaRows,
+      Map<String, String> runtime) {
+    public DatabaseInspection {
+      Objects.requireNonNull(contents);
+      schemaRows = List.copyOf(schemaRows);
+      runtime = Map.copyOf(runtime);
+    }
+
+    @Override
+    public String toString() {
+      return "ReleaseDatabaseInspection[actual=<redacted>]";
+    }
+  }
+
+  public DatabaseInspection inspectMorningDatabase(
+      Connection connection, RootStartupContext.Snapshot caller) throws SQLException, IOException {
     return verifyFor(connection, caller, RootStartupContext.Service.MORNING);
   }
 
@@ -197,7 +219,7 @@ public final class RootReleaseAdmission {
     verifyFor(connection, caller, RootStartupContext.Service.EXPIRY);
   }
 
-  private StartupReleaseManifest.Contents verifyFor(
+  private DatabaseInspection verifyFor(
       Connection connection, RootStartupContext.Snapshot caller, RootStartupContext.Service service)
       throws SQLException, IOException {
     Objects.requireNonNull(connection, "admitted root connection");
@@ -205,10 +227,11 @@ public final class RootReleaseAdmission {
     require(expected.equals(caller) && caller.service() == service);
     context.recheck(expected);
     var current = Objects.requireNonNull(loader.read(), "closed current release result");
-    verifyPlatform(current, Objects.requireNonNull(platform.observe(), "runtime platform result"));
-    new SchemaHistoryAdmission(current.migrations()).verify(connection);
+    var actualRuntime = Objects.requireNonNull(platform.observe(), "runtime platform result");
+    verifyPlatform(current, actualRuntime);
+    var actualRows = new SchemaHistoryAdmission(current.migrations()).inspect(connection);
     context.recheck(expected);
-    return current;
+    return new DatabaseInspection(current, actualRows, actualRuntime);
   }
 
   static void verifyPlatform(StartupReleaseManifest.Contents release, Map<String, String> actual)

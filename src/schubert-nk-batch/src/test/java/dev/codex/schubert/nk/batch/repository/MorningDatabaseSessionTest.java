@@ -31,6 +31,53 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  @Test
+  void mdb019VerificationOnlySchemaCannotMintPermitFactsAndDataCannotEscapeOwner()
+      throws Exception {
+    MorningDatabaseSession.Schema legacy =
+        connection -> fail("inspection must not use a void gate");
+    try (var connection = db.open("schubert_batch")) {
+      assertThrows(IOException.class, () -> legacy.inspect(connection));
+      assertThrows(NullPointerException.class, () -> legacy.inspect(null));
+    }
+    var probe = new Probe();
+    var retained = new AtomicReference<MorningDatabaseSession.Access>();
+    probe
+        .subject()
+        .execute(
+            credential(),
+            session -> {
+              retained.set(session);
+              assertThrows(NullPointerException.class, () -> session.inspectPermitDatabase(null));
+              assertThrows(
+                  IOException.class, () -> session.inspectPermitDatabase(() -> 5_000_000_000L));
+              assertThrows(
+                  NullPointerException.class,
+                  () -> session.recheckPermitDatabase(null, () -> 5_000_000_000L));
+              return true;
+            });
+    assertThrows(
+        IOException.class, () -> retained.get().inspectPermitDatabase(() -> 5_000_000_000L));
+    var failure = new NullPointerException("PUBLIC_PROGRAMMING");
+    var fresh = new Probe();
+    assertSame(
+        failure,
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                fresh
+                    .subject()
+                    .execute(
+                        credential(),
+                        session ->
+                            session.inspectPermitDatabase(
+                                () -> {
+                                  throw failure;
+                                }))));
+    assertEquals(0, fresh.connections);
+    assertEquals(0, fresh.statements);
+  }
+
   @BeforeAll
   static void database() throws Exception {
     db = new BatchDatabaseFixture(directory);
@@ -129,7 +176,7 @@ final class MorningDatabaseSessionTest {
               return skipped;
             });
     try (var connection = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
-      assertTrue(advisory(connection));
+      awaitReleased(connection, TimeUnit.SECONDS.toNanos(5));
       connection.setAutoCommit(false);
       var repository = new BatchRunRepository(connection);
       repository.verifyAlreadySuccessful(current.database());
@@ -205,7 +252,7 @@ final class MorningDatabaseSessionTest {
         IOException.class,
         () -> held.get().failedBackupSnapshot(attempts.get(), () -> 10_000_000_000L));
     try (var observer = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
-      assertTrue(advisory(observer));
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
       observer.setAutoCommit(false);
       var repository = new BatchRunRepository(observer);
       repository.verifyFinished(attempts.get().database(), ended, failed);
@@ -1207,7 +1254,7 @@ final class MorningDatabaseSessionTest {
                 assertThrows(IOException.class, () -> session.requireUnused(run));
                 return result;
               }));
-      assertTrue(advisory(observer));
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
     }
   }
 
@@ -1241,7 +1288,7 @@ final class MorningDatabaseSessionTest {
             .getMessage());
     assertEquals(1, callback.get());
     try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
-      assertTrue(advisory(observer));
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
     }
   }
 
@@ -1297,6 +1344,32 @@ final class MorningDatabaseSessionTest {
             .getMessage());
     assertEquals(0, calls.get());
     assertTrue(borrowed.get().isClosed());
+  }
+
+  @Test
+  void mdb020ReleaseObservationHasFiniteDeadlineAndCannotUnlockAnotherOwner() throws Exception {
+    try (var holder = DriverManager.getConnection(actualUrl, "schubert_batch", "");
+        var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+      assertTrue(advisory(holder));
+      assertThrows(
+          AssertionError.class, () -> awaitReleased(observer, TimeUnit.MILLISECONDS.toNanos(30)));
+      assertFalse(advisory(observer));
+      try (var unlock = holder.prepareStatement("select pg_advisory_unlock(71419602)")) {
+        try (var result = unlock.executeQuery()) {
+          assertTrue(result.next());
+          assertTrue(result.getBoolean(1));
+        }
+      }
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+    }
+  }
+
+  private static void awaitReleased(Connection observer, long budgetNanos) throws Exception {
+    long deadline = System.nanoTime() + budgetNanos;
+    while (!advisory(observer)) {
+      if (System.nanoTime() >= deadline) fail("server advisory release deadline exceeded");
+      TimeUnit.MILLISECONDS.sleep(5);
+    }
   }
 
   private static boolean advisory(Connection connection) throws SQLException {

@@ -56,9 +56,9 @@ final class ArtemisStartupObservationTest {
       var calls = new ArrayList<Integer>();
       var failure =
           assertThrows(
-              ArtemisManagementReadinessException.class,
+              IllegalArgumentException.class,
               () -> assembly(calls, selectedStep, ignored -> pressures()).inspect(session));
-      assertEquals("Artemis effective broker configuration is unavailable", failure.getMessage());
+      assertEquals("synthetic private broker reply", failure.getMessage());
       assertNull(failure.getCause());
       assertEquals(failedStep + 1, calls.size());
       for (int index = 0; index <= failedStep; index++) assertEquals(index, calls.get(index));

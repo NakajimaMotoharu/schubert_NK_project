@@ -1,0 +1,240 @@
+package dev.codex.schubert.nk.batch.file;
+
+import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
+import java.io.IOException;
+import java.nio.CharBuffer;
+import java.nio.charset.*;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.*;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * SSC129 actual POSTGRES/RELEASE_BOM byte frames, data only and never an issuer capability.
+ * NK-OPS-001/NK-BAT-001; SYS004/OPS009/DAT009/UI251/253/SS3436.17; ISSPG001/ISSREL001. Native
+ * caller separately owns M/A/original/current/deadline and rechecks every live observation.
+ */
+@NullMarked
+final class MorningGateEvidence {
+  private static final List<String> VERSIONS =
+      List.of("app", "protocol", "storage", "bootstrap", "schema", "config");
+  private static final List<String> BUILD = List.of("jdkVendor", "jdkVersion", "mavenVersion");
+  private static final List<String> PLATFORM =
+      List.of("osId", "osVersion", "architecture", "javaFeature");
+  private static final List<String> RUNTIME =
+      List.of("osId", "osVersion", "architecture", "javaFeature", "jdkVendor", "jdkVersion");
+
+  private MorningGateEvidence() {}
+
+  static byte[] postgres(
+      StartupPermitRecords.Epoch epoch,
+      String morningInvocation,
+      String brokerInvocation,
+      MorningDatabaseSession.DatabaseObservation actual)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    require(
+        actual.loginRole().equals("schubert_batch")
+            && actual.effectiveRole().equals("schubert_batch")
+            && actual.database().equals("schubert_nk")
+            && actual.autoCommit()
+            && !actual.jdbcReadOnly()
+            && actual.isolation() == java.sql.Connection.TRANSACTION_READ_COMMITTED
+            && !actual.recovery()
+            && actual.advisoryHeld());
+    var text = header("NKPG1", epoch, morningInvocation, brokerInvocation);
+    text.append("login_role=")
+        .append(hex(actual.loginRole()))
+        .append('\n')
+        .append("effective_role=")
+        .append(hex(actual.effectiveRole()))
+        .append('\n')
+        .append("database=")
+        .append(hex(actual.database()))
+        .append('\n')
+        .append("auto_commit=")
+        .append(bit(actual.autoCommit()))
+        .append('\n')
+        .append("read_only=")
+        .append(bit(actual.jdbcReadOnly()))
+        .append('\n')
+        .append("isolation=")
+        .append(actual.isolation())
+        .append('\n')
+        .append("recovery=")
+        .append(bit(actual.recovery()))
+        .append('\n')
+        .append("advisory_lock=")
+        .append(bit(actual.advisoryHeld()))
+        .append('\n');
+    var rows = actual.release().schemaRows();
+    require(
+        !rows.isEmpty()
+            && rows.size() <= 1000
+            && rows.equals(actual.release().contents().migrations()));
+    text.append("schema_rows=").append(rows.size()).append('\n');
+    for (int index = 0; index < rows.size(); index++) {
+      var row = rows.get(index);
+      require(row.installedRank() == index);
+      text.append("SCHEMA|")
+          .append(row.installedRank())
+          .append('|')
+          .append(row.version() == null ? "-" : row.version())
+          .append('|')
+          .append(hex(row.type()))
+          .append('|')
+          .append(hex(row.script()))
+          .append('|')
+          .append(row.checksum() == null ? "-" : row.checksum().toString())
+          .append('|')
+          .append(bit(row.success()))
+          .append('\n');
+    }
+    return bytes(text);
+  }
+
+  static byte[] release(
+      StartupPermitRecords.Epoch epoch,
+      String morningInvocation,
+      String brokerInvocation,
+      RootReleaseAdmission.DatabaseInspection actual,
+      String apiConfiguration,
+      String webConfiguration)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    var contents = actual.contents();
+    var text = header("NKREL1", epoch, morningInvocation, brokerInvocation);
+    text.append("release_version=")
+        .append(hex(contents.version()))
+        .append('\n')
+        .append("manifest_sha256=")
+        .append(hash(contents.sha256()))
+        .append('\n')
+        .append("api_config_sha256=")
+        .append(hash(apiConfiguration))
+        .append('\n')
+        .append("web_config_sha256=")
+        .append(hash(webConfiguration))
+        .append('\n');
+    fields(text, "VERSION", VERSIONS, contents.versions());
+    fields(text, "BUILD", BUILD, contents.build());
+    fields(text, "PLATFORM", PLATFORM, contents.platform());
+    fields(text, "RUNTIME", RUNTIME, actual.runtime());
+    require(
+        contents
+            .artifactHashes()
+            .keySet()
+            .containsAll(Set.of("VERSION", "api/api.jar", "web/web.jar", "operations/batch.jar")));
+    for (var entry : new TreeMap<>(contents.artifactHashes()).entrySet()) {
+      String path = entry.getKey();
+      require(!path.isEmpty() && path.chars().allMatch(c -> c >= 33 && c <= 126));
+      require(
+          !path.startsWith("/")
+              && !path.contains("\\")
+              && Arrays.stream(path.split("/", -1))
+                  .noneMatch(p -> p.isEmpty() || p.equals(".") || p.equals("..")));
+      text.append("ARTIFACT|")
+          .append(hex(path))
+          .append('|')
+          .append(hash(entry.getValue()))
+          .append('\n');
+    }
+    return bytes(text);
+  }
+
+  private static StringBuilder header(
+      String prefix, StartupPermitRecords.Epoch epoch, String morning, String broker)
+      throws IOException {
+    Objects.requireNonNull(epoch);
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(broker);
+    require(
+        epoch.state() == StartupPermitRecords.State.INVALID
+            && morning.matches("[0-9a-f]{32}")
+            && !morning.equals("0".repeat(32))
+            && broker.matches("[0-9a-f]{32}")
+            && !broker.equals("0".repeat(32))
+            && !morning.equals(broker));
+    var activation = epoch.activation();
+    var nil = new UUID(0, 0);
+    require(!activation.id().equals(nil) && !activation.run().id().equals(nil));
+    var time = new DateTimeFormatterBuilder().appendInstant(6).toFormatter();
+    return new StringBuilder(prefix)
+        .append('\n')
+        .append("boot_id=")
+        .append(epoch.boot())
+        .append('\n')
+        .append("epoch_id=")
+        .append(epoch.epoch())
+        .append('\n')
+        .append("run_id=")
+        .append(activation.run().id())
+        .append('\n')
+        .append("cutoff_utc=")
+        .append(time.format(activation.run().cutoff()))
+        .append('\n')
+        .append("activation_id=")
+        .append(activation.id())
+        .append('\n')
+        .append("morning_invocation_id=")
+        .append(morning)
+        .append('\n')
+        .append("broker_invocation_id=")
+        .append(broker)
+        .append('\n');
+  }
+
+  private static void fields(
+      StringBuilder text, String label, List<String> keys, Map<String, String> actual)
+      throws IOException {
+    require(actual.keySet().equals(Set.copyOf(keys)));
+    for (String key : keys)
+      text.append(label)
+          .append('|')
+          .append(key)
+          .append('|')
+          .append(hex(Objects.requireNonNull(actual.get(key))))
+          .append('\n');
+  }
+
+  private static String hex(String actual) throws IOException {
+    Objects.requireNonNull(actual);
+    require(!actual.isEmpty());
+    try {
+      var data =
+          StandardCharsets.UTF_8
+              .newEncoder()
+              .onMalformedInput(CodingErrorAction.REPORT)
+              .onUnmappableCharacter(CodingErrorAction.REPORT)
+              .encode(CharBuffer.wrap(actual));
+      byte[] bytes = new byte[data.remaining()];
+      data.get(bytes);
+      return HexFormat.of().formatHex(bytes);
+    } catch (CharacterCodingException malformed) {
+      throw unavailable();
+    }
+  }
+
+  private static String hash(String actual) throws IOException {
+    Objects.requireNonNull(actual);
+    require(actual.matches("[0-9a-f]{64}"));
+    return actual;
+  }
+
+  private static char bit(boolean actual) {
+    return actual ? '1' : '0';
+  }
+
+  private static byte[] bytes(StringBuilder text) throws IOException {
+    require(text.length() <= 65536);
+    return text.toString().getBytes(StandardCharsets.US_ASCII);
+  }
+
+  private static void require(boolean accepted) throws IOException {
+    if (!accepted) throw unavailable();
+  }
+
+  private static IOException unavailable() {
+    return new IOException("actual gate evidence unavailable");
+  }
+}

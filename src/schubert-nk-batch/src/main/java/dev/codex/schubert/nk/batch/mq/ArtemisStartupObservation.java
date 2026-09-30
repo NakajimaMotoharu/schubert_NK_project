@@ -60,18 +60,26 @@ public final class ArtemisStartupObservation {
   /** Return an immutable six-Queue observation, not a final go/no-go decision. */
   public Map<String, ArtemisQueuePressureClient.Pressure> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
-    try {
-      topology.accept(session);
+    {
+      try {
+        topology.accept(session);
+      } catch (ArtemisReadinessException declaredTopology) {
+        throw new ArtemisManagementReadinessException();
+      }
       broker.accept(session);
       settings.accept(session);
       acceptor.accept(session);
       roles.accept(session);
-      Map<String, ArtemisQueuePressureClient.Pressure> observed =
-          Map.copyOf(Objects.requireNonNull(pressure.apply(session), "pressure"));
+      Map<String, ArtemisQueuePressureClient.Pressure> observed = readPressure(session);
       if (!ADDRESSES.equals(observed.keySet())) throw new ArtemisManagementReadinessException();
       return observed;
-    } catch (RuntimeException failure) {
-      throw new ArtemisManagementReadinessException();
     }
+  }
+
+  private Map<String, ArtemisQueuePressureClient.Pressure> readPressure(ClientSession session) {
+    var actual = pressure.apply(session);
+    if (actual == null || actual.values().stream().anyMatch(Objects::isNull))
+      throw new ArtemisManagementReadinessException();
+    return Map.copyOf(actual);
   }
 }

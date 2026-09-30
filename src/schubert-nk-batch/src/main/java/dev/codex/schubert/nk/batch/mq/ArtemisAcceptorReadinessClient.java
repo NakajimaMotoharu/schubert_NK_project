@@ -44,26 +44,35 @@ public final class ArtemisAcceptorReadinessClient {
   /** Borrow the Ops session; fail closed without disclosing management responses. */
   public void verify(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
+    Object response = acceptors.read(session);
+    if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
+    verifyResponse(json);
+    if (!Boolean.TRUE.equals(started.read(session)))
+      throw new ArtemisManagementReadinessException();
+  }
+
+  private static void verifyResponse(String json) {
     try {
-      Object response = acceptors.read(session);
-      if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
       var values = JsonUtil.readJsonArray(json);
       if (values.size() != 1) throw new ArtemisManagementReadinessException();
-      JsonObject acceptor = values.getJsonObject(0);
+      if (!(values.get(0) instanceof JsonObject acceptor))
+        throw new ArtemisManagementReadinessException();
       if (!ACCEPTOR_FIELDS.equals(acceptor.keySet())
           || !"core".equals(acceptor.getString("name"))
           || !NETTY_FACTORY.equals(acceptor.getString("factoryClassName"))
-          || !acceptor.getJsonObject("extraProps").isEmpty())
+          || !(acceptor.get("extraProps") instanceof JsonObject extra)
+          || !extra.isEmpty()) throw new ArtemisManagementReadinessException();
+      if (!(acceptor.get("params") instanceof JsonObject params))
         throw new ArtemisManagementReadinessException();
-      JsonObject params = acceptor.getJsonObject("params");
       if (!PARAM_FIELDS.equals(params.keySet())
           || !"tcp".equals(params.getString("scheme"))
           || !"127.0.0.1".equals(params.getString("host"))
           || !"61616".equals(params.getString("port"))
-          || !"CORE".equals(params.getString("protocols"))
-          || !Boolean.TRUE.equals(started.read(session)))
+          || !"CORE".equals(params.getString("protocols")))
         throw new ArtemisManagementReadinessException();
-    } catch (RuntimeException failure) {
+    } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
+        | ClassCastException
+        | IllegalStateException malformed) {
       throw new ArtemisManagementReadinessException();
     }
   }

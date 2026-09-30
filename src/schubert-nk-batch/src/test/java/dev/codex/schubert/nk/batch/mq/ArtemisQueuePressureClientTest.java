@@ -104,7 +104,8 @@ final class ArtemisQueuePressureClientTest {
       assertRedacted(() -> new ArtemisQueuePressureClient((s, q, a) -> invalid).inspect(session));
     }
     assertRedacted(() -> new ArtemisQueuePressureClient((s, q, a) -> null).inspect(session));
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             new ArtemisQueuePressureClient(
                     (s, q, a) -> {
@@ -127,7 +128,9 @@ final class ArtemisQueuePressureClientTest {
                 (proxy, method, arguments) -> {
                   throw new IllegalStateException("private-management-value");
                 });
-    assertRedacted(() -> new ArtemisQueuePressureClient().inspect(providerSession));
+    assertThrows(
+        IllegalStateException.class,
+        () -> new ArtemisQueuePressureClient().inspect(providerSession));
   }
 
   private static void assertState(

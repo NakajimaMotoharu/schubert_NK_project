@@ -41,7 +41,7 @@ public final class ArtemisQueuePressureClient {
   /** Returns approved match names; caller owns Ops session and decides startup policy. */
   public Map<String, Pressure> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
-    try {
+    {
       var states = new LinkedHashMap<String, Pressure>();
       for (var entry : LIMITS.entrySet()) {
         String queue = entry.getKey() + ".q";
@@ -63,8 +63,6 @@ public final class ArtemisQueuePressureClient {
         states.put(entry.getKey(), pressure);
       }
       return Map.copyOf(states);
-    } catch (RuntimeException failure) {
-      throw new ArtemisManagementReadinessException();
     }
   }
 

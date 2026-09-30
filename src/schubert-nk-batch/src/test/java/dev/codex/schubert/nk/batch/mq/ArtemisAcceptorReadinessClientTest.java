@@ -89,7 +89,8 @@ final class ArtemisAcceptorReadinessClientTest {
     assertRedacted(() -> candidate(null, true).verify(session));
     assertRedacted(() -> candidate(GOOD_JSON, false).verify(session));
     assertRedacted(() -> candidate(GOOD_JSON, null).verify(session));
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             new ArtemisAcceptorReadinessClient(
                     ignored -> {
@@ -97,7 +98,8 @@ final class ArtemisAcceptorReadinessClientTest {
                     },
                     ignored -> true)
                 .verify(session));
-    assertRedacted(
+    assertThrows(
+        IllegalStateException.class,
         () ->
             new ArtemisAcceptorReadinessClient(
                     ignored -> GOOD_JSON,
@@ -113,7 +115,9 @@ final class ArtemisAcceptorReadinessClientTest {
                 (proxy, method, arguments) -> {
                   throw new IllegalStateException("private-management-value");
                 });
-    assertRedacted(() -> ArtemisManagementReadinessClient.putAcceptorsOperation(failingMessage));
+    assertThrows(
+        IllegalStateException.class,
+        () -> ArtemisManagementReadinessClient.putAcceptorsOperation(failingMessage));
   }
 
   private static ArtemisAcceptorReadinessClient candidate(Object json, Object started) {

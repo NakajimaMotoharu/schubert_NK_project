@@ -178,6 +178,31 @@ public final class MorningProcessMain {
                 budget.requireWithin();
                 original.verify();
                 broker.recheck();
+                // SSC129: derive both gate frames from the owned live DB/BOM read, not
+                // constants or a second connection. Frames alone grant no startup authority.
+                dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard issuerOwner =
+                    () -> {
+                      budget.requireWithin();
+                      root.recheck(snapshot);
+                      original.verify();
+                      broker.recheck();
+                      return budget.remainingNanos();
+                    };
+                var actualDatabase = database.inspectPermitDatabase(issuerOwner);
+                var postgresFrame =
+                    MorningGateEvidence.postgres(
+                        epoch, snapshot.invocation(), broker.invocation(), actualDatabase);
+                var releaseFrame =
+                    MorningGateEvidence.release(
+                        epoch,
+                        snapshot.invocation(),
+                        broker.invocation(),
+                        actualDatabase.release(),
+                        configurations.apiSha256(),
+                        configurations.webSha256());
+                release.recheckConfigurations(configurations);
+                startupRoots.recheck(actualRoots);
+                database.recheckPermitDatabase(actualDatabase, issuerOwner);
                 return backupOutcome;
               });
         };
