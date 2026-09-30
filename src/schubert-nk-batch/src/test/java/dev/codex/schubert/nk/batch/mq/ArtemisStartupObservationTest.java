@@ -51,6 +51,11 @@ final class ArtemisStartupObservationTest {
     assertThrows(
         NullPointerException.class,
         () -> assembly(new ArrayList<>(), -1, ignored -> pressures()).inspect(null));
+    assertThrows(
+        ArtemisManagementReadinessException.class,
+        () -> assembly(new ArrayList<>(), -1, ignored -> pressures()).inspectEvidence(session));
+    assertThrows(
+        NullPointerException.class, () -> new ArtemisStartupObservation().inspectEvidence(null));
     for (int failedStep = 0; failedStep < 6; failedStep++) {
       int selectedStep = failedStep;
       var calls = new ArrayList<Integer>();

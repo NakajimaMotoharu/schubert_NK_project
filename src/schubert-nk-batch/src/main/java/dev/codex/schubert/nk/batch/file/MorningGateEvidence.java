@@ -1,5 +1,8 @@
 package dev.codex.schubert.nk.batch.file;
 
+import dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient;
+import dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation;
+import dev.codex.schubert.nk.batch.platform.BrokerJournalEvidence;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import java.io.IOException;
@@ -16,6 +19,185 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class MorningGateEvidence {
+  private static final List<String> ADDRESSES =
+      List.of(
+          "nk.sync.request",
+          "nk.sync.reply.web",
+          "nk.async.work",
+          "nk.web.log",
+          "nk.dead.letter",
+          "nk.expiry");
+  private static final List<String> BROKER_FIELDS =
+      List.of(
+          "name",
+          "persistenceEnabled",
+          "journalType",
+          "journalFileSize",
+          "journalMinFiles",
+          "journalPoolFiles",
+          "globalMaxSize",
+          "IDCacheSize",
+          "persistIDCache",
+          "maxDiskUsage",
+          "diskStoreUsage");
+  private static final Set<String> TOPOLOGY_FIELDS =
+      Set.of(
+          "address_exists",
+          "anycast",
+          "multicast",
+          "auto_create_queues",
+          "auto_create_addresses",
+          "queue_names",
+          "queue_exists",
+          "temporary",
+          "durable",
+          "auto_created",
+          "queue_auto_create",
+          "routing_type",
+          "queue_address",
+          "queue_name");
+  private static final Set<String> SETTINGS_FIELDS =
+      Set.of(
+          "deadLetterAddress",
+          "expiryAddress",
+          "autoCreateDeadLetterResources",
+          "autoCreateExpiryResources",
+          "autoCreateAddresses",
+          "autoCreateQueues",
+          "autoDeleteAddresses",
+          "autoDeleteQueues",
+          "autoDeleteCreatedQueues",
+          "addressFullMessagePolicy",
+          "pageFullMessagePolicy",
+          "diskFullMessagePolicy",
+          "pageSizeBytes",
+          "maxReadPageBytes",
+          "maxReadPageMessages",
+          "redeliveryCollisionAvoidanceFactor",
+          "redeliveryDelay",
+          "redeliveryMultiplier",
+          "maxRedeliveryDelay",
+          "maxDeliveryAttempts",
+          "enableMetrics",
+          "enableIngressTimestamp",
+          "maxSizeBytes",
+          "maxSizeMessages",
+          "pageLimitBytes",
+          "pageLimitMessages");
+  private static final List<String> PERMISSIONS =
+      List.of(
+          "browse",
+          "consume",
+          "createAddress",
+          "createDurableQueue",
+          "createNonDurableQueue",
+          "deleteAddress",
+          "deleteDurableQueue",
+          "deleteNonDurableQueue",
+          "edit",
+          "manage",
+          "send",
+          "view");
+  private static final Set<String> ROLE_MATCHES =
+      Set.of(
+          "nk.sync.request",
+          "nk.sync.reply.web",
+          "nk.async.work",
+          "nk.web.log",
+          "nk.dead.letter",
+          "nk.expiry",
+          "activemq.management.#",
+          "mops.#",
+          "mops.queue.nk.expiry.q.countMessages",
+          "mops.queue.nk.expiry.q.getMessageCount",
+          "mops.queue.nk.expiry.q.getPersistentSize",
+          "mops.queue.nk.expiry.q.removeMessages");
+
+  static byte[] broker(
+      StartupPermitRecords.Epoch epoch,
+      String morningInvocation,
+      String brokerInvocation,
+      ArtemisStartupObservation.Evidence actual,
+      BrokerJournalEvidence.Summary journal)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    Objects.requireNonNull(journal);
+    var text = header("NKBROKER1", epoch, morningInvocation, brokerInvocation);
+    fields(text, "BROKER", BROKER_FIELDS, actual.broker());
+    addressFields(text, "TOPOLOGY", TOPOLOGY_FIELDS, actual.topology());
+    addressFields(text, "SETTINGS", SETTINGS_FIELDS, actual.settings());
+    fields(
+        text,
+        "ACCEPTOR",
+        List.of("factoryClassName", "host", "name", "port", "protocols", "scheme", "started"),
+        actual.acceptor());
+    require(actual.roles().keySet().equals(ROLE_MATCHES));
+    for (var match : new TreeMap<>(actual.roles()).entrySet()) {
+      require(!match.getValue().isEmpty());
+      for (var role : new TreeMap<>(match.getValue()).entrySet()) {
+        require(Set.of("nk_ops", "nk_web", "nk_api", "nk_mq_maintenance").contains(role.getKey()));
+        require(role.getValue().keySet().equals(Set.copyOf(PERMISSIONS)));
+        text.append("ROLE|")
+            .append(hex(match.getKey()))
+            .append('|')
+            .append(hex(role.getKey()))
+            .append('|');
+        for (String key : PERMISSIONS)
+          text.append(bit(Objects.requireNonNull(role.getValue().get(key))));
+        text.append('\n');
+      }
+    }
+    require(actual.pressure().keySet().equals(Set.copyOf(ADDRESSES)));
+    for (String address : ADDRESSES) {
+      var value = Objects.requireNonNull(actual.pressure().get(address));
+      require(value.state() != ArtemisQueuePressureClient.Pressure.CRITICAL);
+      for (var field :
+          new TreeMap<>(
+                  Map.of(
+                      "count",
+                      Long.toString(value.count()),
+                      "bytes",
+                      Long.toString(value.bytes()),
+                      "state",
+                      value.state().name()))
+              .entrySet())
+        text.append("PRESSURE|")
+            .append(hex(address))
+            .append('|')
+            .append(field.getKey())
+            .append('|')
+            .append(hex(field.getValue()))
+            .append('\n');
+    }
+    require(journal.entries() > 0);
+    text.append("JOURNAL|entries|")
+        .append(journal.entries())
+        .append('\n')
+        .append("JOURNAL|sha256|")
+        .append(hash(journal.sha256()))
+        .append('\n');
+    return bytes(text);
+  }
+
+  private static void addressFields(
+      StringBuilder text, String label, Set<String> fields, Map<String, Map<String, String>> actual)
+      throws IOException {
+    require(actual.keySet().equals(Set.copyOf(ADDRESSES)));
+    for (String address : ADDRESSES) {
+      var values = Objects.requireNonNull(actual.get(address));
+      require(values.keySet().equals(fields));
+      for (var field : new TreeMap<>(values).entrySet())
+        text.append(label)
+            .append('|')
+            .append(hex(address))
+            .append('|')
+            .append(field.getKey())
+            .append('|')
+            .append(hex(field.getValue()))
+            .append('\n');
+    }
+  }
+
   private static final List<String> VERSIONS =
       List.of("app", "protocol", "storage", "bootstrap", "schema", "config");
   private static final List<String> BUILD = List.of("jdkVendor", "jdkVersion", "mavenVersion");

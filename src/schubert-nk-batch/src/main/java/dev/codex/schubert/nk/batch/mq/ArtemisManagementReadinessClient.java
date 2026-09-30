@@ -2,6 +2,9 @@ package dev.codex.schubert.nk.batch.mq;
 
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
@@ -85,6 +88,36 @@ public final class ArtemisManagementReadinessClient {
 
   /** Fail closed on missing, malformed or inconsistent effective values; borrow, never close. */
   public void verifyBroker(ClientSession session) {
+    inspectBroker(session);
+  }
+
+  /** SSC130: same-query verified values, immutable data only, no readiness capability. */
+  public Map<String, String> inspectBroker(ClientSession session) {
+    Objects.requireNonNull(session, "ops session");
+    var canonical = new LinkedHashMap<String, String>();
+    new ArtemisManagementReadinessClient(
+            (borrowed, attribute) -> {
+              Object value = reader.read(borrowed, attribute);
+              // Capture a disk Number once before policy; don't retain a possibly mutable Number.
+              if (attribute.equals("diskStoreUsage") && value instanceof Number number) {
+                double fraction = number.doubleValue();
+                value = fraction;
+                canonical.put(
+                    attribute, HexFormat.of().toHexDigits(Double.doubleToRawLongBits(fraction)));
+              } else if (value instanceof String string) {
+                canonical.put(attribute, string);
+              } else if (value instanceof Boolean bit) {
+                canonical.put(attribute, bit ? "1" : "0");
+              } else if (value instanceof Integer || value instanceof Long) {
+                canonical.put(attribute, Long.toString(((Number) value).longValue()));
+              }
+              return value;
+            })
+        .verifyValues(session);
+    return Map.copyOf(canonical);
+  }
+
+  private void verifyValues(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
     {
       require("schubert-nk-broker".equals(reader.read(session, "name")));

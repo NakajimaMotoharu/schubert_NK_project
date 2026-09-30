@@ -61,32 +61,51 @@ public final class ArtemisAddressSettingsReadinessClient {
 
   /** Fails closed on any missing, malformed, unknown or drifted effective value. */
   public void verify(ClientSession session) {
+    inspect(session);
+  }
+
+  /** SSC130: actual approved fields from each one response, not the expected policy map. */
+  public Map<String, Map<String, String>> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
+    var actual = new LinkedHashMap<String, Map<String, String>>();
     for (var entry : CAPACITIES.entrySet()) {
       Object response = reader.read(session, entry.getKey());
       if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
-      verifyResponse(json, entry.getValue());
+      actual.put(entry.getKey(), verifyResponse(json, entry.getValue()));
     }
+    return Map.copyOf(actual);
   }
 
-  private static void verifyResponse(String json, Capacity capacity) {
+  private static Map<String, String> verifyResponse(String json, Capacity capacity) {
     try {
       JsonObject values = JsonUtil.readJsonObject(json);
-      for (var field : COMMON.entrySet()) expect(values, field.getKey(), field.getValue());
-      expect(values, "maxSizeBytes", Long.toString(capacity.memoryMib() * MIB));
-      expect(values, "maxSizeMessages", Long.toString(capacity.memoryMessages()));
-      expect(values, "pageLimitBytes", Long.toString(capacity.pageMib() * MIB));
-      expect(values, "pageLimitMessages", Long.toString(capacity.pageMessages()));
+      var actual = new LinkedHashMap<String, String>();
+      for (var field : COMMON.entrySet())
+        actual.put(field.getKey(), expect(values, field.getKey(), field.getValue()));
+      actual.put(
+          "maxSizeBytes",
+          expect(values, "maxSizeBytes", Long.toString(capacity.memoryMib() * MIB)));
+      actual.put(
+          "maxSizeMessages",
+          expect(values, "maxSizeMessages", Long.toString(capacity.memoryMessages())));
+      actual.put(
+          "pageLimitBytes",
+          expect(values, "pageLimitBytes", Long.toString(capacity.pageMib() * MIB)));
+      actual.put(
+          "pageLimitMessages",
+          expect(values, "pageLimitMessages", Long.toString(capacity.pageMessages())));
+      return Map.copyOf(actual);
     } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
         | IllegalStateException malformed) {
       throw new ArtemisManagementReadinessException();
     }
   }
 
-  private static void expect(JsonObject values, String field, String literal) {
+  private static String expect(JsonObject values, String field, String literal) {
     var observed = values.get(field);
     if (observed == null || !literal.equals(observed.toString()))
       throw new ArtemisManagementReadinessException();
+    return observed.toString();
   }
 
   private static Map<String, Capacity> capacities() {

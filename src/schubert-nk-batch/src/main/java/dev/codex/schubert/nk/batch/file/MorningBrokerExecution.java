@@ -24,11 +24,89 @@ import org.jspecify.annotations.NullMarked;
 final class MorningBrokerExecution {
   private MorningBrokerExecution() {}
 
+  record Observations(
+      ArtemisStartupObservation.Evidence values, BrokerJournalEvidence.Summary journal) {
+    Observations {
+      Objects.requireNonNull(values);
+      Objects.requireNonNull(journal);
+    }
+
+    @Override
+    public String toString() {
+      return "BrokerObservations[actual=<redacted>]";
+    }
+  }
+
+  /** Same callback owner; Live remains the OS guard, never a recursive DB guard. SSC128/130. */
+  static final class Completion {
+    private final MorningBrokerUnitCycle.Live live;
+    private final Observations initial;
+    private final MaintenanceOwnerFrame.Guard parent;
+    private final MorningBrokerUnitCycle.ParentProof databaseProof;
+    private final Path credentialPath;
+    private final UUID boot;
+
+    private Completion(
+        MorningBrokerUnitCycle.Live live,
+        Observations initial,
+        MaintenanceOwnerFrame.Guard parent,
+        MorningBrokerUnitCycle.ParentProof databaseProof,
+        Path credentialPath,
+        UUID boot) {
+      this.live = Objects.requireNonNull(live);
+      this.initial = Objects.requireNonNull(initial);
+      this.parent = Objects.requireNonNull(parent);
+      this.databaseProof = Objects.requireNonNull(databaseProof);
+      this.credentialPath = Objects.requireNonNull(credentialPath);
+      this.boot = Objects.requireNonNull(boot);
+    }
+
+    MorningBrokerUnitCycle.Live live() throws IOException {
+      live.recheck();
+      return live;
+    }
+
+    String invocation() throws IOException {
+      live.recheck();
+      return live.invocation();
+    }
+
+    void recheck() throws IOException {
+      live.recheck();
+    }
+
+    Observations initial() throws IOException {
+      live.recheck();
+      return initial;
+    }
+
+    Observations observe() throws IOException {
+      parent.check();
+      live.recheck();
+      databaseProof.verify();
+      var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), credentialPath);
+      return ResourceScope.use(
+          credentials::close,
+          () ->
+              readObservations(
+                  new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create()),
+                  parent,
+                  live,
+                  databaseProof,
+                  boot));
+    }
+
+    @Override
+    public String toString() {
+      return "BrokerCompletion[actual=<redacted>]";
+    }
+  }
+
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 fixed same-owner current and Morning private credential copy")
-  static MorningBrokerUnitCycle.Live execute(
+  static Completion execute(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -74,24 +152,39 @@ final class MorningBrokerExecution {
         () -> {
           var reader = new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
           var cycle = MorningBrokerUnitCycle.create(context, expected, budget, parent::check);
-          return cycle.execute(
-              live ->
-                  ArtemisManagementReadinessClient.withParentDeadline(
-                      parent,
-                      () -> {
-                        observeOps(
-                            reader,
-                            parent,
-                            live,
-                            () -> database.recheckConsistent(state.activation().run()));
-                        BrokerJournalEvidence.inspect(live, epoch.boot(), parent);
-                        database.recheckConsistent(state.activation().run());
-                        return true;
-                      }));
+          var observations = new ArrayList<Observations>();
+          MorningBrokerUnitCycle.ParentProof databaseProof =
+              () -> database.recheckConsistent(state.activation().run());
+          var live =
+              cycle.execute(
+                  actual -> {
+                    observations.add(
+                        readObservations(reader, parent, actual, databaseProof, epoch.boot()));
+                  });
+          require(observations.size() == 1);
+          return new Completion(
+              live, observations.getFirst(), parent, databaseProof, credentialPath, epoch.boot());
         });
   }
 
-  private static void observeOps(
+  private static Observations readObservations(
+      RootBatchCredentialReader reader,
+      MaintenanceOwnerFrame.Guard parent,
+      MorningBrokerUnitCycle.Live live,
+      MorningBrokerUnitCycle.ParentProof databaseProof,
+      UUID boot)
+      throws IOException {
+    return ArtemisManagementReadinessClient.withParentDeadline(
+        parent,
+        () -> {
+          var actual = observeOps(reader, parent, live, databaseProof);
+          var journal = BrokerJournalEvidence.inspect(live, boot, parent);
+          databaseProof.verify();
+          return new Observations(actual, journal);
+        });
+  }
+
+  private static ArtemisStartupObservation.Evidence observeOps(
       RootBatchCredentialReader reader,
       MaintenanceOwnerFrame.Guard parent,
       MorningBrokerUnitCycle.Live live,
@@ -134,14 +227,15 @@ final class MorningBrokerExecution {
             parent.check();
             live.recheck();
             session.start();
-            var observed = new ArtemisStartupObservation().inspect(session);
+            var observed = new ArtemisStartupObservation().inspectEvidence(session);
             require(
-                observed.values().stream()
-                    .noneMatch(value -> value == ArtemisQueuePressureClient.Pressure.CRITICAL));
+                observed.pressure().values().stream()
+                    .noneMatch(
+                        value -> value.state() == ArtemisQueuePressureClient.Pressure.CRITICAL));
             parent.check();
             live.recheck();
             databaseProof.verify();
-            return;
+            return observed;
           }
         } catch (ActiveMQException | ArtemisManagementReadinessException actualNotReady) {
           parent.check();

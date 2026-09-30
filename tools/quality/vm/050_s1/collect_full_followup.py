@@ -104,5 +104,11 @@ if int(identifier[2:5]) >= 397:
     manifest['ykt'].append('YKT-296')
     manifest['testIds'].extend(['ISSGATE003', 'MMAIN010'])
     manifest['limitations'] = ['same-source native Expiry reread and six-root collection pending', 'five actual gates and normal issuer publication caller incomplete', 'known guard failure/native negatives/hard-timeout coverage pending', 'issuer/API/Web/CHR and coverage100/formal run24 unchanged']
+if int(identifier[2:5]) >= 399:
+    manifest['ssc'].extend(['SSC-129', 'SSC-130'])
+    manifest['bugs'].extend(['BUG-379', 'BUG-380', 'BUG-381', 'BUG-382', 'BUG-383'])
+    manifest['ykt'].extend(['YKT-299', 'YKT-300', 'YKT-301', 'YKT-302', 'YKT-303'])
+    manifest['testIds'].extend(['ISSPG001..003', 'ISSREL001..002', 'ISSBROKER001..004', 'MQUNKNOWN001..004', 'MDB020'])
+    manifest['limitations'] = ['same-source native DB/release/Broker full observations and gate frames pending', 'STOP_SET/retention/ten steps/full proof/publication/A handoff/API/Web/CHR incomplete', 'native unknown/negative/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

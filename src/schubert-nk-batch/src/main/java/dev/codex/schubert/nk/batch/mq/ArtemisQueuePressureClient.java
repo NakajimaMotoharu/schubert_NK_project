@@ -40,9 +40,24 @@ public final class ArtemisQueuePressureClient {
 
   /** Returns approved match names; caller owns Ops session and decides startup policy. */
   public Map<String, Pressure> inspect(ClientSession session) {
+    var states = new LinkedHashMap<String, Pressure>();
+    inspectValues(session).forEach((address, actual) -> states.put(address, actual.state()));
+    return Map.copyOf(states);
+  }
+
+  public record Value(long count, long bytes, Pressure state) {
+    public Value {
+      Objects.requireNonNull(state);
+      if (count < 0 || bytes < 0)
+        throw new IllegalArgumentException("queue observation unavailable");
+    }
+  }
+
+  /** SSC130: actual count/bytes and derived policy; same two queries per Queue. */
+  public Map<String, Value> inspectValues(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
     {
-      var states = new LinkedHashMap<String, Pressure>();
+      var states = new LinkedHashMap<String, Value>();
       for (var entry : LIMITS.entrySet()) {
         String queue = entry.getKey() + ".q";
         long count = nonNegative(reader.read(session, queue, "messageCount"));
@@ -60,7 +75,7 @@ public final class ArtemisQueuePressureClient {
         } else {
           pressure = Pressure.NORMAL;
         }
-        states.put(entry.getKey(), pressure);
+        states.put(entry.getKey(), new Value(count, bytes, pressure));
       }
       return Map.copyOf(states);
     }

@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.RoutingType;
@@ -25,8 +27,14 @@ public final class ArtemisReadinessClient {
           "nk.expiry");
 
   public void verifyTopology(ClientSession session) {
+    inspectTopology(session);
+  }
+
+  /** SSC130: complete approved Address/Queue fields from the same two actual queries. */
+  public Map<String, Map<String, String>> inspectTopology(ClientSession session) {
     Objects.requireNonNull(session, "session");
     try {
+      var actual = new LinkedHashMap<String, Map<String, String>>();
       for (var addressName : APPROVED_ADDRESSES) {
         var address = SimpleString.of(addressName);
         var queue = SimpleString.of(addressName + ".q");
@@ -52,9 +60,30 @@ public final class ArtemisReadinessClient {
             || !queue.equals(observedQueue.getName())) {
           throw new ArtemisReadinessException();
         }
+        var fields = new LinkedHashMap<String, String>();
+        fields.put("address_exists", bit(observedAddress.isExists()));
+        fields.put("anycast", bit(observedAddress.isSupportsAnycast()));
+        fields.put("multicast", bit(observedAddress.isSupportsMulticast()));
+        fields.put("auto_create_queues", bit(observedAddress.isAutoCreateQueues()));
+        fields.put("auto_create_addresses", bit(observedAddress.isAutoCreateAddresses()));
+        fields.put("queue_names", observedAddress.getQueueNames().getFirst().toString());
+        fields.put("queue_exists", bit(observedQueue.isExists()));
+        fields.put("temporary", bit(observedQueue.isTemporary()));
+        fields.put("durable", bit(observedQueue.isDurable()));
+        fields.put("auto_created", bit(observedQueue.isAutoCreated()));
+        fields.put("queue_auto_create", bit(observedQueue.isAutoCreateQueues()));
+        fields.put("routing_type", observedQueue.getRoutingType().name());
+        fields.put("queue_address", observedQueue.getAddress().toString());
+        fields.put("queue_name", observedQueue.getName().toString());
+        actual.put(addressName, Map.copyOf(fields));
       }
+      return Map.copyOf(actual);
     } catch (ActiveMQException failure) {
       throw new ArtemisReadinessException();
     }
+  }
+
+  private static String bit(boolean actual) {
+    return actual ? "1" : "0";
   }
 }

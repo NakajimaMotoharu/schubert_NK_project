@@ -138,7 +138,7 @@ public final class MorningProcessMain {
                         root, snapshot, budget, state, database, epoch, original);
                 var expiry =
                     MorningExpiryExecution.execute(
-                        root, snapshot, budget, state, database, epoch, original, broker);
+                        root, snapshot, budget, state, database, epoch, original, broker.live());
                 database.recheckConsistent(state.activation().run());
                 database.recheckExpiry(
                     expiry,
@@ -189,6 +189,14 @@ public final class MorningProcessMain {
                       return budget.remainingNanos();
                     };
                 var actualDatabase = database.inspectPermitDatabase(issuerOwner);
+                var actualBroker = broker.observe();
+                var brokerFrame =
+                    MorningGateEvidence.broker(
+                        epoch,
+                        snapshot.invocation(),
+                        broker.invocation(),
+                        actualBroker.values(),
+                        actualBroker.journal());
                 var postgresFrame =
                     MorningGateEvidence.postgres(
                         epoch, snapshot.invocation(), broker.invocation(), actualDatabase);

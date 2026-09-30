@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.apache.activemq.artemis.api.core.JsonUtil;
@@ -43,15 +45,23 @@ public final class ArtemisAcceptorReadinessClient {
 
   /** Borrow the Ops session; fail closed without disclosing management responses. */
   public void verify(ClientSession session) {
+    inspect(session);
+  }
+
+  /** SSC130 actual singleton/config/started values, data only. */
+  public Map<String, String> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
     Object response = acceptors.read(session);
     if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
-    verifyResponse(json);
-    if (!Boolean.TRUE.equals(started.read(session)))
-      throw new ArtemisManagementReadinessException();
+    var actual = new LinkedHashMap<>(verifyResponse(json));
+    Object running = started.read(session);
+    if (!(running instanceof Boolean bit)) throw new ArtemisManagementReadinessException();
+    actual.put("started", bit ? "1" : "0");
+    if (!bit) throw new ArtemisManagementReadinessException();
+    return Map.copyOf(actual);
   }
 
-  private static void verifyResponse(String json) {
+  private static Map<String, String> verifyResponse(String json) {
     try {
       var values = JsonUtil.readJsonArray(json);
       if (values.size() != 1) throw new ArtemisManagementReadinessException();
@@ -70,6 +80,19 @@ public final class ArtemisAcceptorReadinessClient {
           || !"61616".equals(params.getString("port"))
           || !"CORE".equals(params.getString("protocols")))
         throw new ArtemisManagementReadinessException();
+      return Map.of(
+          "name",
+          acceptor.getString("name"),
+          "factoryClassName",
+          acceptor.getString("factoryClassName"),
+          "scheme",
+          params.getString("scheme"),
+          "host",
+          params.getString("host"),
+          "port",
+          params.getString("port"),
+          "protocols",
+          params.getString("protocols"));
     } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
         | ClassCastException
         | IllegalStateException malformed) {

@@ -128,19 +128,28 @@ public final class ArtemisRoleReadinessClient {
 
   /** Borrow one Ops-authenticated session; reject excess as well as missing permissions. */
   public void verify(ClientSession session) {
+    inspect(session);
+  }
+
+  /** SSC130: every actual role and all twelve permission values, one reply per match. */
+  public Map<String, Map<String, Map<String, Boolean>>> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
+    var actual = new HashMap<String, Map<String, Map<String, Boolean>>>();
     for (var entry : APPROVED.entrySet()) {
       Object response = reader.read(session, entry.getKey());
       if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
-      verifyResponse(json, entry.getValue());
+      actual.put(entry.getKey(), verifyResponse(json, entry.getValue()));
     }
+    return Map.copyOf(actual);
   }
 
-  private static void verifyResponse(String json, Map<String, Set<String>> expected) {
+  private static Map<String, Map<String, Boolean>> verifyResponse(
+      String json, Map<String, Set<String>> expected) {
     try {
       var roles = JsonUtil.readJsonArray(json);
       if (roles.size() != expected.size()) throw new ArtemisManagementReadinessException();
       var seen = new HashSet<String>();
+      var observed = new HashMap<String, Map<String, Boolean>>();
       for (int index = 0; index < roles.size(); index++) {
         if (!(roles.get(index) instanceof org.apache.activemq.artemis.json.JsonObject role))
           throw new ArtemisManagementReadinessException();
@@ -148,14 +157,18 @@ public final class ArtemisRoleReadinessClient {
         String name = role.getString("name");
         Set<String> allowed = expected.get(name);
         if (allowed == null || !seen.add(name)) throw new ArtemisManagementReadinessException();
+        var actualPermissions = new HashMap<String, Boolean>();
         for (String permission : PERMISSIONS) {
           JsonValue actual = role.get(permission);
           if (actual != JsonValue.TRUE && actual != JsonValue.FALSE)
             throw new ArtemisManagementReadinessException();
           if ((actual == JsonValue.TRUE) != allowed.contains(permission))
             throw new ArtemisManagementReadinessException();
+          actualPermissions.put(permission, actual == JsonValue.TRUE);
         }
+        observed.put(name, Map.copyOf(actualPermissions));
       }
+      return Map.copyOf(observed);
     } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
         | ClassCastException
         | IllegalStateException malformed) {

@@ -29,6 +29,63 @@ final class ArtemisAcceptorReadinessClientTest {
   void opsMq013RealLoopbackCoreAcceptorAndOpsOnlyManagement() throws Exception {
     try (var fixture = securedTcpBroker()) {
       assertDoesNotThrow(() -> new ArtemisAcceptorReadinessClient().verify(fixture.session));
+      var detailed = new ArtemisStartupObservation().inspectEvidence(fixture.session);
+      assertEquals(
+          Map.of(
+              "name",
+              "core",
+              "factoryClassName",
+              "org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory",
+              "scheme",
+              "tcp",
+              "host",
+              "127.0.0.1",
+              "port",
+              "61616",
+              "protocols",
+              "CORE",
+              "started",
+              "1"),
+          detailed.acceptor());
+      assertEquals("schubert-nk-broker", detailed.broker().get("name"));
+      assertEquals("NIO", detailed.broker().get("journalType"));
+      assertEquals("10485760", detailed.broker().get("journalFileSize"));
+      assertEquals("536870912", detailed.broker().get("globalMaxSize"));
+      assertEquals(11, detailed.broker().size());
+      var addresses =
+          java.util.Set.of(
+              "nk.sync.request",
+              "nk.sync.reply.web",
+              "nk.async.work",
+              "nk.web.log",
+              "nk.dead.letter",
+              "nk.expiry");
+      assertEquals(addresses, detailed.topology().keySet());
+      assertEquals(addresses, detailed.settings().keySet());
+      assertEquals(addresses, detailed.pressure().keySet());
+      for (String address : addresses) {
+        assertEquals(address + ".q", detailed.topology().get(address).get("queue_names"));
+        assertEquals("ANYCAST", detailed.topology().get(address).get("routing_type"));
+        assertEquals("1", detailed.topology().get(address).get("durable"));
+        assertEquals(26, detailed.settings().get(address).size());
+        assertEquals(
+            "\"nk.dead.letter\"", detailed.settings().get(address).get("deadLetterAddress"));
+        assertEquals(
+            new ArtemisQueuePressureClient.Value(0, 0, ArtemisQueuePressureClient.Pressure.NORMAL),
+            detailed.pressure().get(address));
+      }
+      assertEquals(12, detailed.roles().size());
+      assertEquals(Boolean.TRUE, detailed.roles().get("nk.sync.request").get("nk_web").get("send"));
+      assertEquals(
+          Boolean.FALSE, detailed.roles().get("nk.sync.request").get("nk_web").get("consume"));
+      assertEquals(12, detailed.roles().get("nk.sync.request").get("nk_web").size());
+      assertThrows(UnsupportedOperationException.class, () -> detailed.broker().clear());
+      assertThrows(
+          UnsupportedOperationException.class, () -> detailed.settings().get("nk.expiry").clear());
+      assertThrows(
+          UnsupportedOperationException.class,
+          () -> detailed.roles().get("nk.expiry").get("nk_ops").clear());
+      assertEquals("ArtemisEvidence[observations=<redacted>]", detailed.toString());
       assertFalse(fixture.session.isClosed());
       assertEquals(GOOD_JSON, ArtemisManagementReadinessClient.acceptors(fixture.session));
       assertEquals(Boolean.TRUE, ArtemisManagementReadinessClient.acceptorStarted(fixture.session));
