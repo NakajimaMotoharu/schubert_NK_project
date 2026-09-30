@@ -1,0 +1,29 @@
+{
+  "id": "PG392-native-cleanup-success",
+  "formal": false,
+  "sourceCommit": "ffd276e5a86df2d5da077d4f7d1e6f97bdeb73a5",
+  "branch": "dev-foundation",
+  "environment": "isolated Ubuntu26.04/kernel7.0/PostgreSQL18.6/JDK25.0.4/JaCoCo0.8.15",
+  "observedAt": "2026-09-30T21:14:15+09:00",
+  "command": "external systemctl start --no-block schubert-nk-morning-controller.service; independent Unit/kernel/namespaces/SQL/file observations",
+  "clientExitCode": 0,
+  "morning": {"invocation": "9b764a0aebd34286a943f36f279e7228", "exitCode": 30, "allProcessesTerminal": true, "limitation": "Broker/Expiry/issuer/runtime not connected"},
+  "backup": {"invocation": "b1196039419942a48bf546896654d324", "exitCode": 0, "freshVerification": true, "currentRowIds": [17,18], "attempt": 9, "status": "SKIPPED", "reason": "ALREADY_SUCCESSFUL", "counts": [0,0,0,0], "originalSuccessRowIds": [9,10]},
+  "cleanup": {"invocation": "711ddc8de1e34d85ba204256bcc71abe", "exitCode": 0, "state": "active/exited", "allProcessesTerminal": true, "rows": [19,20,21,22,23,24,25], "allSevenStatus": "SUCCESS", "firstSixCounts": [0,0,0,0], "transferCounts": {"target":2,"success":2,"failure":0,"bytes":5}},
+  "inspector": {"invocation": "f8fbadf22f9c488c869f6fb010843ec1", "freshStartJobResult":"done", "explicitStopJobResult":"done", "allProcessesTerminal":true, "summaryComplete":true, "inspected":0, "deleted":0, "protected":0},
+  "independentOracle": {"beforeBusinessAndInboxTablesEmpty":true, "transferInputHex":["010203","0405"], "transferExpectedFiles":2, "transferExpectedBytes":5, "afterTransferFilesAndDateDirectoryAbsent":true, "transferRootUid":999, "transferRootGid":980, "transferRootMode":"0750", "gamesSeedCountBeforeAfter":2},
+  "postconditions": {"parentAdvisoryReacquiredAndSevenRowsReadBack":true, "maintenanceNamespaceEmpty":true, "cleanupRequestOwnerIntentEmpty":true, "backupRequestIntentEmpty":true, "startup":"INVALID", "permitsIssued":0},
+  "hostFull": {"tests":2604,"suites":384,"failures":0,"errors":0,"skipped":0,"staticModulesZero":6,"manifestSha256":"b7f239a47dc8af44d07a7a6eea0a19294a7d06d7b114978868e3f3b9a2681a4d"},
+  "sameByteHostNativeUnion": {"classByteMismatch":0,"batchMissed":{"BRANCH":406,"LINE":830,"METHOD":156,"CLASS":11},"bootstrapMissed":{"BRANCH":42,"LINE":12,"METHOD":6,"CLASS":1},"apiMissed":{"BRANCH":8,"LINE":39,"METHOD":4,"CLASS":0},"allSixMissed":{"BRANCH":457,"LINE":906,"METHOD":170,"CLASS":12},"coverage100":false},
+  "deploymentManifestSha256": "7fccafd3183ea7532c635799a19a2a0c6ca492b1aff99137364e1a5243eaac4a",
+  "bugs":["BUG-365","BUG-367","BUG-368"],"ssc":["SSC-119","SSC-120","SSC-122","SSC-123"],"ykt":["YKT-286","YKT-288","YKT-289"],"testIds":["CEXEC001","CEXEC004","CINSPECT001","COWNER005","CCYCLE005"],
+  "workEvidence": [
+    {"file":"pg392-native-db-before.log","sha256":"9c4ae30046c88aef689623546f69a1f53fdce4542dd901c9ac42692b3c5e8c40"},
+    {"file":"pg392-native-db-final.log","sha256":"46e814e57ee165bce04f8807222ee41e03336bf019dbfc7615cde35bda1eff6d"},
+    {"file":"pg392-native-observation5.log","sha256":"bdd3fcd71fdf700496af9ca6371125d8408be07790d9c0f3661436e7eb3d6ef5"},
+    {"file":"pg392-native-postconditions.log","sha256":"9bbe0178feafbacf43671af42fa7d545fe921dde62faa1043ea32273ab50e75f"},
+    {"file":"pg392-native-inspector-metadata.log","sha256":"380ffa09986ddff4c055aa73a0f392e2bf303e6a464550f26abb5e5963c6e1ef"}
+  ],
+  "limitations":["failed Backup six real SKIP/Transfer not connected", "Broker/Expiry/issuer/API/Web/CHR not accepted", "real common30min/UNKNOWN and all coverage pending", "formal PT-WEB-20260925-24/1964PT/53scope unchanged"],
+  "redaction":"only counters and non-secret execution identities; no credential/password/auth session/token/key/archive/dump; exec files private work only"
+}

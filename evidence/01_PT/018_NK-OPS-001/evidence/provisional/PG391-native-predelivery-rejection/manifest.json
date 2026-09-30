@@ -1,0 +1,33 @@
+{
+  "id": "PG391-native-predelivery-rejection",
+  "formal": false,
+  "sourceCommit": "6ce5bb93ce7497de4ab0f5a5e495782e28e08858",
+  "branch": "dev-foundation",
+  "environment": "isolated Ubuntu26.04/kernel7.0/PostgreSQL18.6/JDK25.0.4/JaCoCo0.8.15",
+  "observedAt": "2026-09-30T20:40:24+09:00",
+  "command": "external systemctl start --no-block schubert-nk-morning-controller.service; separate actual Unit observations and readonly SQL",
+  "clientExitCode": 0,
+  "workerResult": "FAILED",
+  "morningExitCode": 30,
+  "morningInvocation": "8b1de6b715544579bee5524c214b1653",
+  "backupInvocation": "6b40771c067a449aacff2307ef4ef84c",
+  "backupExitCode": 0,
+  "cleanupNewStart": false,
+  "cleanupOldInvocation": "6b41c7f23f124530b65a1a82976f8b85",
+  "inspectorStarted": false,
+  "database": {"currentBackupRowIds": [15, 16], "attempt": 8, "status": "SKIPPED", "reason": "ALREADY_SUCCESSFUL", "target": 0, "success": 0, "failure": 0, "bytes": 0, "cleanupRows": 0},
+  "transferFixture": {"filesRemaining": 2, "bytesRemaining": 5, "deleted": false},
+  "bugs": ["BUG-368"],
+  "ssc": ["SSC-123"],
+  "ykt": ["YKT-289"],
+  "testIds": ["CEXEC001", "CCYCLE005"],
+  "deploymentManifestSha256": "1b42da0f33b80c2e3754ddb351235a61985cfc1520061a0a47c858eeb4e35519",
+  "independentEvidence": [
+    {"workFile": "pg391-native-observation1.log", "sha256": "5edf8020b1ad8e3f373fbfb4b68346871aea1bbe380986b7e7e28536523e764d"},
+    {"workFile": "pg391-native-db.log", "sha256": "10a930d2692959d56d2e4d1f9a5a09bb67e95083d36dbd39e49a39b899da8076"},
+    {"workFile": "pg391-predelivery-retirement-retest.log", "sha256": "d021f91eac463fff25b51a1b6ee8db1befd33401e5e6c4b004cd7ea00dc7ae95"}
+  ],
+  "recovery": {"M_A": true, "actualAllUnitsTerminal": true, "oldParentAbsent": true, "oldCleanupUnchanged": true, "startIntentAbsent": true, "originalInvalidUnchanged": true, "rawClaimPrivatelySaved": true, "typedRetirement": true, "permitsIssued": 0},
+  "limitations": ["native positive Cleanup/Inspector/Transfer not accepted", "not an UNKNOWN recovery", "native coverage union/100% not accepted", "formal PT-WEB-20260925-24 unchanged"],
+  "redaction": "only non-secret execution identity and counters; no credential, password, auth session, token, key, archive or DB dump"
+}
