@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC113固定Backup request補足：新規runは従来CREATE_NEW/part/force/atomic公開を維持。明示resumeだけ、同M/A/原本/DB/current INVALID・intent隔離・全8終端が外側で証明済みのscope内で既存requestの同run/同cutoff・root0600/link1/ACL0/tmpfs/RW・全byte/保持前後namespaceを照合し再使用する。MISSINGだけ新規公開、COLLISION/UNAVAILABLE・foreign/corrupt・途中partの修復や削除はしない。再使用はarchive/step成功の証明ではなく、後続実worker/fresh Invocation/両結果/全終端/退役が別必須。
+
 SSC110/BUG340横断補足：immutable release layoutは `config/effective/backup-profile.json` と `config/effective/backup-age-recipient` のexact2pathだけを追加許容し、両payloadは他dataと同じroot:schubert0640・single-link/ACLなし/全size・hash・namespace照合を受ける。任意effective file・秘密key・alias・追加dirを許容しない。実 `/etc` profile/recipientのmodeは前述0640/0600のまま別gate。署名後layout拒否を迂回して原本発行しない。
 
 SSC111固定Expiry request：source `/run/schubert-nk/expiry-request/expiry-request`（directory root0700、file root0600、tmpfs/ACLなし/new-only/force/readback）。private copyは当該Expiry UnitのCREDENTIALS_DIRECTORYだけ。NKEXPIRY1 ASCII/LFの固定順はrun/activation/cutoff/boot/epoch/broker/step_id/attempt/started/skipped、末尾LF・canonical UUID/UTC Instant/整数/true-or-false、最大1024byte。brokerは当該Artemisのnonzero32lowerhex Invocation、stepは当該runのCLEAN_EXPIRY完全handle。cleanup-request/NKCLEAN1との相互受理禁止。LoadCredentialはexpiry-request/db-batch/mq-maintenance/mq-opsだけ。MQ login名はschubert_maintenance/schubert_opsで、role名をusernameへ読み替えない。秘密byteは既存credential readerの保持inode/全close/消去で扱う。

@@ -55,6 +55,42 @@ final class BackupWorkerRequestFilesTest {
   }
 
   @Test
+  void breqfile009ExplicitSameRequestResumeNeverRewritesOrAcceptsForeign() throws Exception {
+    try (var f = fixture()) {
+      var subject = files(f);
+      subject.prepareResume(REQUEST, PART);
+      Path source = f.parent.resolve("backup-request");
+      var before =
+          Files.readAttributes(
+              source, "unix:ino,ctime,size,lastModifiedTime", LinkOption.NOFOLLOW_LINKS);
+      var counts = new HashMap<>(f.counts);
+      UUID next = UUID.fromString("22222222-3333-4444-8555-666666666666");
+      subject.prepareResume(REQUEST, next);
+      assertEquals(GOLDEN, Files.readString(source));
+      assertEquals(
+          before,
+          Files.readAttributes(
+              source, "unix:ino,ctime,size,lastModifiedTime", LinkOption.NOFOLLOW_LINKS));
+      assertEquals(counts.get("publish"), f.counts.get("publish"));
+      assertFalse(Files.exists(f.parent.resolve(next + ".part")));
+      assertThrows(
+          StorageIoException.class,
+          () -> subject.prepareResume(new BackupWorkerRequest(next, REQUEST.started()), next));
+      assertThrows(
+          StorageIoException.class,
+          () ->
+              subject.prepareResume(
+                  new BackupWorkerRequest(PART, Instant.parse("2026-09-27T15:00:00Z")), next));
+      f.acl = new byte[] {1};
+      assertThrows(StorageIoException.class, () -> subject.prepareResume(REQUEST, next));
+      f.acl = new byte[0];
+      assertThrows(NullPointerException.class, () -> subject.prepareResume(null, next));
+      assertThrows(NullPointerException.class, () -> subject.prepareResume(REQUEST, null));
+      f.released();
+    }
+  }
+
+  @Test
   void nullActorAndPrivateMetadata() throws Exception {
     try (var f = fixture()) {
       assertThrows(NullPointerException.class, () -> new BackupWorkerRequestFiles(null, f));

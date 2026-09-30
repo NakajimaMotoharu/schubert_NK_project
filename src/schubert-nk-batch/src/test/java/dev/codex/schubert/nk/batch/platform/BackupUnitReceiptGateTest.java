@@ -72,6 +72,53 @@ final class BackupUnitReceiptGateTest {
   }
 
   @Test
+  void bgate010ColdProjectionNeverQueriesGcProcessListButKernelStillRequired() throws Exception {
+    assertThrows(NullPointerException.class, () -> BackupUnitReceiptGate.stateProjection(null));
+    String cold =
+        "Id=schubert-nk-backup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nInvocationID=\nExecMainCode=0\nExecMainStatus=0\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=yes\nKillMode=control-group\nSendSIGKILL=no\n";
+    var wire = new java.util.concurrent.atomic.AtomicReference<>(cold);
+    var reads = new java.util.concurrent.atomic.AtomicInteger();
+    var probe =
+        new InspectorUnitProbe(
+            new InspectorUnitProbe.Reader() {
+              public byte[] readState() {
+                reads.incrementAndGet();
+                return wire.get().getBytes(StandardCharsets.US_ASCII);
+              }
+
+              public byte[] readProcesses() {
+                throw new AssertionError("cold GC query must not replace host terminal");
+              }
+            },
+            InspectorUnitSnapshot.Target.BACKUP);
+    var projection = BackupUnitReceiptGate.stateProjection(probe);
+    var state = projection.quiescent().orElseThrow();
+    assertTrue(state.invocationId().isEmpty());
+    var kernelCalls = new java.util.concurrent.atomic.AtomicInteger();
+    var gate =
+        new BackupUnitReceiptGate(
+            () -> {},
+            projection,
+            () -> {
+              kernelCalls.incrementAndGet();
+              return Optional.of(state);
+            });
+    assertNotNull(gate.capture());
+    assertEquals(1, kernelCalls.get());
+    assertEquals(3, reads.get());
+    assertThrows(
+        IOException.class,
+        new BackupUnitReceiptGate(() -> {}, projection, Optional::empty)::capture);
+    wire.set(
+        cold.replace("ActiveState=inactive", "ActiveState=activating")
+            .replace("SubState=dead", "SubState=start")
+            .replace("MainPID=0", "MainPID=123"));
+    assertTrue(projection.quiescent().isEmpty());
+    wire.set(cold.replace("LoadState=loaded", "LoadState=not-found"));
+    assertThrows(StopGateException.class, projection::quiescent);
+  }
+
+  @Test
   void bgate009FreshFailureIsTerminalButNeverSuccessOrUnknown() throws Exception {
     for (String status : List.of("1", "255")) {
       var failed = state(FRESH, "failed", "failed", "", "0", "1", status, "exit-code");

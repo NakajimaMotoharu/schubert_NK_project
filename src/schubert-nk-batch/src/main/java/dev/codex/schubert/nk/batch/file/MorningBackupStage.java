@@ -84,7 +84,7 @@ final class MorningBackupStage {
     budget.requireWithin();
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
-    var publisher = MorningBackupRequestPublication.create(root, snapshot);
+    var publisher = MorningBackupRequestPublication.create(root, snapshot, runId.isPresent());
     UUID part = UUID.randomUUID();
     MorningControlScope.VerifiedEpochWork<T> continuation =
         (state, database, epoch, original) ->

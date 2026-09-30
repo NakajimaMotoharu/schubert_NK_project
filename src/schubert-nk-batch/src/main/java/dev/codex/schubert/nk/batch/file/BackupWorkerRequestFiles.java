@@ -78,6 +78,26 @@ public final class BackupWorkerRequestFiles {
     }
   }
 
+  /** SSC113: caller must hold explicit same-run M/A/original/current/full-terminal proof. */
+  public void prepareResume(BackupWorkerRequest expected, UUID part) throws StorageIoException {
+    Objects.requireNonNull(expected, "same original request");
+    Objects.requireNonNull(part, "new request part");
+    synchronized (lock) {
+      Snapshot before = directory();
+      BackupWorkerRequest previous;
+      try {
+        previous = read();
+      } catch (StorageIoException missing) {
+        if (missing.reason() != StorageIoException.Reason.MISSING) throw missing;
+        require(before.equals(directory()));
+        prepare(expected, part);
+        return;
+      }
+      require(expected.equals(previous) && expected.equals(read()));
+      require(before.equals(directory()));
+    }
+  }
+
   public BackupWorkerRequest read() throws StorageIoException {
     synchronized (lock) {
       byte[] bytes = new byte[BackupWorkerRequest.MAXIMUM_BYTES + 1];

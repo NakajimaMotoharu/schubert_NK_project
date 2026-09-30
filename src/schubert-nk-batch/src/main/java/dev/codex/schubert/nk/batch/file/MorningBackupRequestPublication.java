@@ -47,19 +47,29 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
 
   static MorningBackupRequestPublication create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    return create(root, expected, false);
+  }
+
+  static MorningBackupRequestPublication create(
+      RootStartupContext root, RootStartupContext.Snapshot expected, boolean explicitResume)
+      throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root identity");
     if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
     root.recheck(expected);
     return new MorningBackupRequestPublication(
-        () -> root.recheck(expected), MorningBackupRequestPublication::openNative);
+        () -> root.recheck(expected), () -> openNative(explicitResume));
+  }
+
+  static Owner openNative() throws IOException {
+    return openNative(false);
   }
 
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
-      justification = "SS343 6.15 fixes the root-only backup request tmpfs namespace")
-  static Owner openNative() throws IOException {
+      justification = "SSC113 same fixed root-only request; explicit owned resume only")
+  static Owner openNative(boolean explicitResume) throws IOException {
     OwnedTransferDirectory directory =
         OwnedTransferDirectory.open(
             LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/backup-request"));
@@ -68,7 +78,8 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
     return new Owner() {
       @Override
       public void prepare(BackupWorkerRequest request, UUID part) throws IOException {
-        files.prepare(request, part);
+        if (explicitResume) files.prepareResume(request, part);
+        else files.prepare(request, part);
       }
 
       @Override

@@ -54,8 +54,17 @@ public final class BackupUnitReceiptGate {
     return create(
         root,
         expected,
-        InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.BACKUP)::quiescent,
+        stateProjection(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.BACKUP)),
         BackupUnitTermination.create(root, expected)::quiescent);
+  }
+
+  /** Manager projection only; create/capture/observe always require the separate host terminal. */
+  static Probe stateProjection(InspectorUnitProbe probe) {
+    Objects.requireNonNull(probe, "fixed Backup state projection");
+    return () -> {
+      var state = probe.read();
+      return state.quiescent() ? Optional.of(state) : Optional.empty();
+    };
   }
 
   static BackupUnitReceiptGate create(
