@@ -111,6 +111,16 @@ public final class MorningDatabaseSession {
     }
 
     <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException;
+
+    default CleanupTerminalRepository.Snapshot observeCleanup(
+        BatchRun run,
+        int receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run, "original Cleanup run");
+      Objects.requireNonNull(owner, "same parent deadline");
+      throw unavailable();
+    }
   }
 
   private static final Pattern URL =
@@ -702,6 +712,44 @@ public final class MorningDatabaseSession {
         throw unavailable();
       } finally {
         inHandoff = false;
+      }
+    }
+
+    /** Exact current results only after the sole child handoff has returned/reacquired. */
+    @Override
+    public CleanupTerminalRepository.Snapshot observeCleanup(
+        BatchRun run,
+        int receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run, "original Cleanup run");
+      Objects.requireNonNull(owner, "same parent deadline");
+      guard();
+      if (!backupFinished || !handoffStarted || (receipt != 0 && receipt != 10))
+        throw unavailable();
+      try {
+        owner.check();
+        if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var observed =
+            new CleanupTerminalRepository(connection, owner)
+                .read(run, Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS));
+        if (observed.exitCode() != receipt) throw unavailable();
+        var repository = new BatchRunRepository(connection);
+        for (var row : observed.entries()) {
+          if (row.attempt().skipped()) repository.verifyAlreadySuccessful(row.attempt());
+          else repository.verifyFinished(row.attempt(), row.endedAt(), row.result());
+        }
+        guard();
+        owner.check();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        owner.check();
+        return observed;
+      } catch (SQLException | BatchRepositoryException known) {
+        throw unavailable();
       }
     }
   }

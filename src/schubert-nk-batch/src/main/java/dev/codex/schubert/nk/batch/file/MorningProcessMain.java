@@ -67,46 +67,65 @@ public final class MorningProcessMain {
                 var files = new BackupWorkerRequestFiles(requests, LinuxInodeSecurity.create());
                 EnvironmentInodePolicy.require(files.read().equals(request));
                 var terminal = BackupUnitTermination.create(root, snapshot);
-                return MorningBackupUnitCycle.create(root, snapshot, budget)
-                    .execute(
-                        () -> {
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                          database.recheckConsistent(state.activation().run());
-                          var startup = openCurrent();
-                          ResourceScope.use(
-                              startup::close,
-                              () -> {
-                                EnvironmentInodePolicy.require(
-                                    new StartupPermitFiles(startup, LinuxInodeSecurity.create())
-                                        .current()
-                                        .equals(epoch));
-                                return Boolean.TRUE;
-                              });
-                          EnvironmentInodePolicy.require(
-                              files.read().equals(request) && terminal.quiescent().isPresent());
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                          files.retire(request);
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                        },
-                        outcome -> {
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                          if (request.verification().isPresent()
-                              && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
-                            throw new IOException("Prior backup verification unavailable");
-                          completeObservedBackup(
-                              outcome, begins, database, java.time.Clock.systemUTC(), completion);
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                        });
+                var backupOutcome =
+                    MorningBackupUnitCycle.create(root, snapshot, budget)
+                        .execute(
+                            () -> {
+                              budget.requireWithin();
+                              root.recheck(snapshot);
+                              original.verify();
+                              database.recheckConsistent(state.activation().run());
+                              var startup = openCurrent();
+                              ResourceScope.use(
+                                  startup::close,
+                                  () -> {
+                                    EnvironmentInodePolicy.require(
+                                        new StartupPermitFiles(startup, LinuxInodeSecurity.create())
+                                            .current()
+                                            .equals(epoch));
+                                    return Boolean.TRUE;
+                                  });
+                              EnvironmentInodePolicy.require(
+                                  files.read().equals(request) && terminal.quiescent().isPresent());
+                              budget.requireWithin();
+                              root.recheck(snapshot);
+                              original.verify();
+                              files.retire(request);
+                              budget.requireWithin();
+                              root.recheck(snapshot);
+                              original.verify();
+                            },
+                            outcome -> {
+                              budget.requireWithin();
+                              root.recheck(snapshot);
+                              original.verify();
+                              if (request.verification().isPresent()
+                                  && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
+                                throw new IOException("Prior backup verification unavailable");
+                              completeObservedBackup(
+                                  outcome,
+                                  begins,
+                                  database,
+                                  java.time.Clock.systemUTC(),
+                                  completion);
+                              budget.requireWithin();
+                              root.recheck(snapshot);
+                              original.verify();
+                            });
+                if (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
+                  MorningCleanupExecution.execute(
+                      root,
+                      snapshot,
+                      budget,
+                      state,
+                      database,
+                      epoch,
+                      original,
+                      completion.verifiedManifest());
+                }
+                // Actual FAILED branch retains its durable Backup proof; failed-profile Cleanup
+                // wiring remains a separate mandatory task, never a fabricated successful bundle.
+                return backupOutcome;
               });
         };
     if (runId.isPresent()) {
@@ -119,6 +138,42 @@ public final class MorningProcessMain {
   @FunctionalInterface
   interface Archive {
     void complete() throws IOException;
+
+    default dev.codex.schubert.nk.batch.backup.BackupManifest verifiedManifest()
+        throws IOException {
+      throw new IOException("actual backup completion unavailable");
+    }
+  }
+
+  @FunctionalInterface
+  interface VerifiedArchive {
+    dev.codex.schubert.nk.batch.backup.BackupManifest complete() throws IOException;
+  }
+
+  /** SSC119: retain the actual successful completion value only within the same owner callback. */
+  static Archive archive(VerifiedArchive actual) {
+    Objects.requireNonNull(actual, "actual archive operation");
+    return new Archive() {
+      private final long thread = Thread.currentThread().threadId();
+      private boolean attempted;
+      private Optional<dev.codex.schubert.nk.batch.backup.BackupManifest> manifest =
+          Optional.empty();
+
+      public void complete() throws IOException {
+        if (attempted || Thread.currentThread().threadId() != thread)
+          throw new IOException("actual backup completion unavailable");
+        attempted = true;
+        manifest =
+            Optional.of(Objects.requireNonNull(actual.complete(), "actual verified manifest"));
+      }
+
+      public dev.codex.schubert.nk.batch.backup.BackupManifest verifiedManifest()
+          throws IOException {
+        if (Thread.currentThread().threadId() != thread || manifest.isEmpty())
+          throw new IOException("actual backup completion unavailable");
+        return manifest.orElseThrow();
+      }
+    };
   }
 
   /** SSC115: called only after a fresh normal worker result and explicit whole-Unit stop. */

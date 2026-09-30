@@ -15,6 +15,46 @@ import org.junit.jupiter.api.Test;
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG339/368; PT-OPS-MMAIN001-007. */
 final class MorningProcessMainTest {
   @Test
+  void mmain009OnlyActualSuccessfulArchiveSuppliesSameOwnerManifestOnce() throws Exception {
+    var literal = dev.codex.schubert.nk.batch.repository.BackupStepFixture.manifest();
+    var calls = new AtomicInteger();
+    var archive =
+        MorningProcessMain.archive(
+            () -> {
+              calls.incrementAndGet();
+              return literal;
+            });
+    assertThrows(IOException.class, archive::verifiedManifest);
+    archive.complete();
+    assertEquals(literal, archive.verifiedManifest());
+    assertThrows(IOException.class, archive::complete);
+    assertEquals(1, calls.get());
+    try (var executor = java.util.concurrent.Executors.newSingleThreadExecutor()) {
+      executor
+          .submit(
+              () -> {
+                assertThrows(IOException.class, archive::complete);
+                assertThrows(IOException.class, archive::verifiedManifest);
+              })
+          .get(5, java.util.concurrent.TimeUnit.SECONDS);
+    }
+    assertThrows(NullPointerException.class, () -> MorningProcessMain.archive(null));
+    var failed =
+        MorningProcessMain.archive(
+            () -> {
+              throw new IOException("PRIVATE");
+            });
+    assertThrows(IOException.class, failed::complete);
+    assertThrows(IOException.class, failed::verifiedManifest);
+    assertThrows(IOException.class, failed::complete);
+    var nullResult = MorningProcessMain.archive(() -> null);
+    assertThrows(NullPointerException.class, nullResult::complete);
+    assertThrows(IOException.class, nullResult::verifiedManifest);
+    MorningProcessMain.Archive oldFixture = () -> {};
+    assertThrows(IOException.class, oldFixture::verifiedManifest);
+  }
+
+  @Test
   void mmain008ExplicitCanonicalResumeIsSameBudgetAndCannotOverrideCutoffOrGate() {
     String literal = "31100027-2222-4a33-8444-555555555555";
     var calls = new AtomicInteger();

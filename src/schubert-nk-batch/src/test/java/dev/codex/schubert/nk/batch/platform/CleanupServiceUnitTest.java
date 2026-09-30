@@ -40,7 +40,7 @@ final class CleanupServiceUnitTest {
             .count());
     assertTrue(content.contains("dev.codex.schubert.nk.batch.file.CleanupProcessMain"));
     assertFalse(content.contains("/bin/true"));
-    assertFalse(content.contains("SuccessExitStatus="));
+    exact(content, "SuccessExitStatus", "10");
   }
 
   @Test
@@ -54,7 +54,16 @@ final class CleanupServiceUnitTest {
                 line ->
                     line.equals("LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch"))
             .count());
-    assertEquals(2, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
+    assertEquals(3, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
+    assertEquals(
+        1,
+        content
+            .lines()
+            .filter(
+                line ->
+                    line.equals(
+                        "LoadCredential=maintenance-owner:/run/schubert-nk/cleanup-request/maintenance-owner"))
+            .count());
     assertFalse(content.contains("SetCredential="));
     assertFalse(content.contains("EnvironmentFile="));
     assertFalse(content.contains("ExecStartPre="));
@@ -77,7 +86,10 @@ final class CleanupServiceUnitTest {
     exact(content, "NoNewPrivileges", "true");
     exact(content, "CapabilityBoundingSet", "CAP_SYS_PTRACE CAP_DAC_OVERRIDE");
     exact(content, "AmbientCapabilities", "");
-    assertFalse(content.contains("ReadWritePaths=")); // Provisional preflight is read-only.
+    exact(
+        content,
+        "ReadWritePaths",
+        "/srv/schubert-nk/data/transfer /run/schubert-nk/maintenance /run/schubert-nk/cleanup-request");
   }
 
   @Test

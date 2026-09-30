@@ -6,10 +6,11 @@ import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * External root Cleanup entry. Until the parent-owned M/A, terminal-unit, DELETE, transfer and
- * durable result contract is joined, this entry always refuses 0/10 and blocks Artemis Requires. No
- * caller-supplied path, credential, run, URL or test bypass. NK-OPS-001/NK-BAT-001;
- * OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334; PT-OPS-CMAIN001 onward.
+ * External root Cleanup entry. Native 0/10 requires the genuine parent owner, actual Unit/DB
+ * Inspector, committed deletion/Transfer and independent durable result readback. The legacy
+ * read-only preflight test port never returns 0/10. No caller-supplied path, credential, run, URL
+ * or test bypass. NK-OPS-001/NK-BAT-001; OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334;
+ * PT-OPS-CMAIN001 onward.
  */
 @NullMarked
 public final class CleanupProcessMain {
@@ -30,7 +31,7 @@ public final class CleanupProcessMain {
     System.exit(
         arguments.length == 1 && "--expiry".equals(arguments[0])
             ? runExpiry(arguments, CleanupExpiryExecution::execute)
-            : run(arguments, CleanupNativePreflight::verify));
+            : runNative(arguments, CleanupNativeExecution::execute));
   }
 
   static int runExpiry(String[] arguments, ExpiryWork work) {
@@ -44,6 +45,21 @@ public final class CleanupProcessMain {
         | dev.codex.schubert.nk.batch.repository.BatchRepositoryException
         | dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessException
         | dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeException known) {
+      return 30;
+    }
+  }
+
+  static int runNative(String[] arguments, ExpiryWork work) {
+    Objects.requireNonNull(arguments, "arguments");
+    Objects.requireNonNull(work, "genuine Cleanup work");
+    if (arguments.length != 0) return 70;
+    try {
+      int result = work.execute();
+      return result == 0 || result == 10 || result == 30 ? result : 30;
+    } catch (IOException
+        | dev.codex.schubert.nk.batch.repository.BatchRepositoryException
+        | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException
+        | dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff.Failure known) {
       return 30;
     }
   }

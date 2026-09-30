@@ -84,19 +84,21 @@ final class MorningBackupReuse {
               work.execute(
                   request,
                   current,
-                  () -> {
-                    budget.requireWithin();
-                    context.recheck(expected);
-                    EnvironmentInodePolicy.require(
-                        manifest.equals(
-                            reader.read(name, prior.database(), prior.configuration())));
-                    EnvironmentInodePolicy.require(
-                        held.equals(verifier.verifyWithin(manifest, started)));
-                    database.completeReusedBackup(
-                        current, manifest, Instant.now().truncatedTo(ChronoUnit.MICROS));
-                    budget.requireWithin();
-                    context.recheck(expected);
-                  }),
+                  MorningProcessMain.archive(
+                      () -> {
+                        budget.requireWithin();
+                        context.recheck(expected);
+                        EnvironmentInodePolicy.require(
+                            manifest.equals(
+                                reader.read(name, prior.database(), prior.configuration())));
+                        EnvironmentInodePolicy.require(
+                            held.equals(verifier.verifyWithin(manifest, started)));
+                        database.completeReusedBackup(
+                            current, manifest, Instant.now().truncatedTo(ChronoUnit.MICROS));
+                        budget.requireWithin();
+                        context.recheck(expected);
+                        return manifest;
+                      })),
               "real reuse continuation");
         });
   }

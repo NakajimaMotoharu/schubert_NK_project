@@ -137,9 +137,10 @@ final class MorningBackupStage {
                         begins,
                         part,
                         original,
-                        () ->
-                            new MorningBackupArtifacts(root, snapshot, budget)
-                                .complete(request, begins, part, database));
+                        MorningProcessMain.archive(
+                            () ->
+                                new MorningBackupArtifacts(root, snapshot, budget)
+                                    .complete(request, begins, part, database)));
                 budget.requireWithin();
                 original.verify();
                 return result;

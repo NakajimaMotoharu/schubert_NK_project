@@ -1,0 +1,181 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.nio.file.Path;
+import java.time.Instant;
+import java.util.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
+
+/** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
+final class CleanupTerminalRepositoryTest {
+  @TempDir static Path root;
+  static BatchDatabaseFixture db;
+  private static final Instant OBSERVED = Instant.parse("2026-09-30T00:00:00Z");
+  private static final String[] STEPS = {
+    "CLEAN_NOTIFICATION",
+    "CLEAN_QUESTION",
+    "CLEAN_SESSION",
+    "CLEAN_INBOX_OUTBOX",
+    "CLEAN_LOG",
+    "CLEAN_BATCH_RUN",
+    "CLEAN_TRANSFER"
+  };
+
+  @BeforeAll
+  static void start() throws Exception {
+    db = new BatchDatabaseFixture(root);
+  }
+
+  @AfterAll
+  static void stop() throws Exception {
+    db.stop();
+  }
+
+  @BeforeEach
+  void seed() throws Exception {
+    try (var c = db.admin()) {
+      sql(c, "delete from schubert.batch_runs");
+      for (int index = 0; index < 7; index++)
+        sql(
+            c,
+            "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count) values("
+                + (1000 + index)
+                + ",'"
+                + RUN.id()
+                + "','2026-09-13','"
+                + STEPS[index]
+                + "',1,'2026-09-13T02:00:00Z','2026-09-13T02:00:01Z','SUCCESS',1,1,0,0)");
+    }
+  }
+
+  private CleanupTerminalRepository.Snapshot read() throws Exception {
+    try (var c = locked(db, false)) {
+      var result = new CleanupTerminalRepository(c, () -> 10_000_000_000L).read(RUN, OBSERVED);
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isClosed());
+      c.rollback();
+      return result;
+    }
+  }
+
+  @Test
+  void cterm001FixedSevenFullColumnsWarningAndSkipRemainSeparate() throws Exception {
+    var success = read();
+    assertEquals(0, success.exitCode());
+    assertEquals(7, success.entries().size());
+    for (int index = 0; index < 7; index++) {
+      var entry = success.entries().get(index);
+      assertEquals(1000 + index, entry.attempt().id());
+      assertEquals(STEPS[index], entry.attempt().step().name());
+      assertEquals(RUN, entry.attempt().run());
+      assertEquals(1, entry.attempt().attempt());
+      assertEquals(Instant.parse("2026-09-13T02:00:00Z"), entry.attempt().startedAt());
+      assertEquals(Instant.parse("2026-09-13T02:00:01Z"), entry.endedAt());
+      assertEquals(
+          new BatchStepResult(
+              BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
+          entry.result());
+    }
+    try (var c = db.admin()) {
+      sql(
+          c,
+          "update schubert.batch_runs set status='WARNING',target_count=2,success_count=1,error_code='PROTECTED_RECORDS',error_summary='protected records retained' where id=1001");
+      sql(
+          c,
+          "update schubert.batch_runs set status='SKIPPED',ended_at=started_at,target_count=0,success_count=0,error_code='ALREADY_SUCCESSFUL',error_summary='step already successful for business date' where id=1002");
+    }
+    var changed = read();
+    assertEquals(10, changed.exitCode());
+    assertEquals(0, changed.entries().get(1).result().failure());
+    assertTrue(changed.entries().get(2).attempt().skipped());
+    assertEquals(0, changed.entries().get(2).result().target());
+    assertEquals("CleanupTerminalSnapshot[data=<redacted>]", changed.toString());
+    assertThrows(UnsupportedOperationException.class, () -> changed.entries().clear());
+  }
+
+  @Test
+  void cterm002MissingRunningFailedAndMalformedDiagnosticNeverPass() throws Exception {
+    for (String mutation :
+        List.of(
+            "delete from schubert.batch_runs where id=1002",
+            "update schubert.batch_runs set status='RUNNING',ended_at=null where id=1002",
+            "update schubert.batch_runs set status='FAILED',error_code='SAFETY_FAILURE',error_summary='batch safety check failed' where id=1002",
+            "update schubert.batch_runs set error_code='UNKNOWN',error_summary='PUBLIC' where id=1002",
+            "update schubert.batch_runs set error_summary='PUBLIC_WRONG' where id=1002")) {
+      seed();
+      try (var c = db.admin()) {
+        sql(c, mutation);
+      }
+      var failure = assertThrows(BatchRepositoryException.class, this::read);
+      assertNull(failure.getCause());
+      assertFalse(failure.toString().contains("PUBLIC"));
+    }
+    seed();
+    try (var c = locked(db, false)) {
+      assertThrows(
+          BatchRepositoryException.class,
+          () ->
+              new CleanupTerminalRepository(
+                      c,
+                      () -> {
+                        throw new java.io.IOException("PRIVATE");
+                      })
+                  .read(RUN, OBSERVED));
+      var unknown = new AssertionError("PUBLIC_UNKNOWN");
+      assertSame(
+          unknown,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  new CleanupTerminalRepository(
+                          c,
+                          () -> {
+                            throw unknown;
+                          })
+                      .read(RUN, OBSERVED)));
+      c.rollback();
+    }
+    try (var c = locked(db, true)) {
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> new CleanupTerminalRepository(c, () -> 10_000_000_000L).read(RUN, OBSERVED));
+    }
+  }
+
+  @Test
+  void cterm003ValueInvariantNullAndMissingOwner() throws Exception {
+    var valid = read();
+    assertThrows(NullPointerException.class, () -> new CleanupTerminalRepository(null, () -> 1));
+    try (var c = locked(db, false)) {
+      assertThrows(NullPointerException.class, () -> new CleanupTerminalRepository(c, null));
+      var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      assertThrows(NullPointerException.class, () -> repository.read(null, OBSERVED));
+      assertThrows(NullPointerException.class, () -> repository.read(RUN, null));
+      c.rollback();
+    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new CleanupTerminalRepository.Snapshot(List.of()));
+    var reversed = new ArrayList<>(valid.entries());
+    Collections.reverse(reversed);
+    assertThrows(
+        IllegalArgumentException.class, () -> new CleanupTerminalRepository.Snapshot(reversed));
+    var first = valid.entries().getFirst();
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupTerminalRepository.Entry(null, first.endedAt(), first.result()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupTerminalRepository.Entry(first.attempt(), null, first.result()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupTerminalRepository.Entry(first.attempt(), first.endedAt(), null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.Entry(
+                first.attempt(), first.attempt().startedAt().minusSeconds(1), first.result()));
+  }
+}

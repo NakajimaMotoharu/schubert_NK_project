@@ -1,0 +1,138 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
+
+import dev.codex.schubert.nk.batch.platform.*;
+import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.bootstrap.*;
+import dev.codex.schubert.nk.storage.*;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import edu.umd.cs.findbugs.annotations.SuppressMatchType;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.UUID;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * Genuine Cleanup composition inside its own credential/backup/DB owners. No supplied path, role,
+ * run, key or alternate success entry. NK-OPS-001/NK-BAT-001/OPS009/BAK001/DAT009/UI251/
+ * SS341§7.3/343§6.17/SSC119; PT-OPS-CEXEC001/CINSPECT001..004.
+ */
+@NullMarked
+final class CleanupNativeExecution {
+  private CleanupNativeExecution() {}
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SS343 fixed Cleanup private copy, readonly host backup/current; CEXEC001")
+  static int execute() throws IOException {
+    var context = RootStartupContext.create();
+    var expected = context.capture(RootStartupContext.Service.CLEANUP);
+    var release = RootReleaseAdmission.create(context, expected);
+    Path fixed = Path.of("/run/credentials/schubert-nk-cleanup.service");
+    Path backupPath = Path.of("/srv/schubert-nk/backup");
+    require(ServiceCredentialLocation.read(System.getenv()).directory().equals(fixed));
+    var security = LinuxInodeSecurity.create();
+    var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixed);
+    return ResourceScope.use(
+        credentials::close,
+        () -> {
+          var reader = new RootBatchCredentialReader(credentials, security);
+          var owner = reader.readMaintenanceOwner();
+          require(
+              owner.boot().equals(UUID.fromString(expected.boot())) && owner.cleanup().isEmpty());
+          var parents = owner.parentsGuard();
+          MaintenanceOwnerFrame.Guard environment =
+              () -> {
+                context.recheck(expected);
+                parents.check();
+                verifyOriginalAndCurrent(context, expected, owner);
+                CleanupNativePreflight.requireApplicationsStopped(
+                    unit ->
+                        MaintenanceUnitTermination.createCleanup(context, expected, unit)
+                            .quiescent()
+                            .isPresent());
+                context.recheck(expected);
+                return parents.remainingNanos();
+              };
+          environment.check(); // Before batch password/backup/DB, never just a parsed claim.
+          var request = reader.readCleanupRequest();
+          require(
+              request.run().equals(owner.run())
+                  && request.activation().equals(owner.activation())
+                  && request.cutoff().equals(owner.cutoff()));
+          var identity = new FixedServiceIdentity().resolveBackup();
+          var backup = OwnedTransferDirectory.open(LinuxHostDirectoryCalls.create(), backupPath);
+          return ResourceScope.use(
+              backup::close,
+              () -> {
+                var manifests =
+                    new BackupManifestReader(backup, security, identity.uid(), identity.gid());
+                var artifacts =
+                    new BackupArtifactVerifier(backup, security, identity.uid(), identity.gid());
+                var database =
+                    new CleanupDatabaseSession(
+                        "jdbc:postgresql://127.0.0.1:5432/schubert_nk", context, expected, release);
+                environment.check();
+                return database.execute(
+                    reader.read(),
+                    connection -> {
+                      var manifest =
+                          new CleanupBackupAdmission(manifests, artifacts)
+                              .verify(
+                                  request,
+                                  Instant.now().truncatedTo(ChronoUnit.MICROS),
+                                  connection);
+                      MaintenanceOwnerFrame.Guard mutation =
+                          () -> {
+                            environment.check();
+                            require(manifests.findCleanupClaims(request).equals(manifest));
+                            artifacts.verify(manifest);
+                            require(
+                                reader.readCleanupRequest().equals(request)
+                                    && reader.readMaintenanceOwner().equals(owner));
+                            return environment.remainingNanos();
+                          };
+                      mutation.check();
+                      int result =
+                          new CleanupMaintenanceWork(context, expected, owner, mutation)
+                              .execute(connection);
+                      mutation.check();
+                      return result;
+                    });
+              });
+        });
+  }
+
+  /** Root's read-only host capability cannot publish, repair, retire or bypass private writes. */
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification =
+          "SS343 fixed current INVALID host observation, never an ordinary child capability")
+  private static void verifyOriginalAndCurrent(
+      RootStartupContext context, RootStartupContext.Snapshot expected, MaintenanceOwnerFrame owner)
+      throws IOException {
+    var activation =
+        new MaintenanceActivation(new BatchRun(owner.run(), owner.cutoff()), owner.activation());
+    require(MaintenanceRunFiles.observeHost(context, expected, activation).equals(activation));
+    var startup =
+        OwnedTransferDirectory.open(
+            LinuxHostDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    ResourceScope.use(
+        startup::close,
+        () -> {
+          var current = new StartupPermitFiles(startup, LinuxInodeSecurity.create()).current();
+          require(
+              current.state() == StartupPermitRecords.State.INVALID
+                  && current.boot().equals(owner.boot())
+                  && current.epoch().equals(owner.epoch())
+                  && current.activation().equals(activation));
+          context.recheck(expected);
+          return Boolean.TRUE;
+        });
+  }
+}

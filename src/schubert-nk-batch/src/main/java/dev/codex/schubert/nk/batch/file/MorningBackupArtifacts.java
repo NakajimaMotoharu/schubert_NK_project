@@ -86,7 +86,7 @@ final class MorningBackupArtifacts {
       matchType = SuppressMatchType.EXACT,
       justification =
           "SS343/SSC110 fixed parent archive/config/tool paths; external VM BARCHIVE acceptance required")
-  void complete(
+  BackupManifest complete(
       BackupWorkerRequest request,
       MorningDatabaseSession.BackupBegins begins,
       UUID part,
@@ -311,6 +311,7 @@ final class MorningBackupArtifacts {
           return Boolean.TRUE;
         });
     check();
+    return manifest;
   }
 
   @FunctionalInterface

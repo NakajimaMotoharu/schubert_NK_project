@@ -349,6 +349,20 @@ final class MorningControlScope {
           return Boolean.TRUE;
         });
     root.recheck(expected);
+    var inspector =
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
+            java.nio.file.Path.of("/run/schubert-nk/maintenance"));
+    dev.codex.schubert.nk.storage.ResourceScope.use(
+        inspector::close,
+        () -> {
+          new InspectorEnvironmentPublisher(
+                  inspector, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
+              .requireFresh(); // Only Inspector env/UUID.part; sibling maintenance records are
+          // retained.
+          return Boolean.TRUE;
+        });
+    root.recheck(expected);
   }
 
   static OwnedOriginal withClearIntent(OwnedOriginal original, IntentClear intent) {

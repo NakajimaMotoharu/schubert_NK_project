@@ -9,6 +9,57 @@ import org.junit.jupiter.api.Test;
 /** OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334; CMAIN001..004 independent exit oracle. */
 final class CleanupProcessMainTest {
   @Test
+  void nativeExitIsActualWorkOnlyAndCannotUsePreflightObservation() {
+    for (int actual : new int[] {0, 10, 30})
+      assertEquals(actual, CleanupProcessMain.runNative(new String[0], () -> actual));
+    assertEquals(30, CleanupProcessMain.runNative(new String[0], () -> 50));
+    assertEquals(
+        70,
+        CleanupProcessMain.runNative(
+            new String[] {"--override"},
+            () -> {
+              fail("argument");
+              return 0;
+            }));
+    assertEquals(
+        30,
+        CleanupProcessMain.runNative(
+            new String[0],
+            () -> {
+              throw new IOException("PRIVATE");
+            }));
+    assertEquals(
+        30,
+        CleanupProcessMain.runNative(
+            new String[0],
+            () -> {
+              throw new dev.codex.schubert.nk.batch.repository.BatchRepositoryException();
+            }));
+    assertEquals(
+        30,
+        CleanupProcessMain.runNative(
+            new String[0],
+            () -> {
+              throw new dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException(
+                  dev.codex.schubert.nk.batch.cleanup.CleanupStopReason.TIME_LIMIT);
+            }));
+    var unknown = new AssertionError("PUBLIC");
+    assertSame(
+        unknown,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                CleanupProcessMain.runNative(
+                    new String[0],
+                    () -> {
+                      throw unknown;
+                    })));
+    assertThrows(NullPointerException.class, () -> CleanupProcessMain.runNative(null, () -> 0));
+    assertThrows(
+        NullPointerException.class, () -> CleanupProcessMain.runNative(new String[0], null));
+  }
+
+  @Test
   void expiryLiteralEntryAcceptsOnlyRealOutcomeAndUnknownIsNotNormalized() {
     for (int outcome : new int[] {0, 10, 30})
       assertEquals(outcome, CleanupProcessMain.runExpiry(new String[] {"--expiry"}, () -> outcome));
