@@ -11,3 +11,6 @@ PG383 toolは既存22SQLと唯一のpending023を分類して専用Flywayを一�
 NativeReached/NativeCoverageは標準JaCoCo0.8.15＋ASM9.10.1を使い、全分析classのisNoMatchをcovered filter前に拒否する。未一致byte/他Source結果を混ぜない。coverage unionは暫定の同byte採取で、正式53scope・全4指標100%を代替しない。full six collectorはJUnit properties/stdout/diagnosticsを落としcount/time/Test ID相関を保持する。failed Node実行は別manifestへ保全する。
 
 `check_pg385_artifacts.py`は実tarをprivateで読み、固定run/cutoff/handle/version、全3artifactの独立hash/size、config7/credential16の正確なregular集合、独立age復号を確認する。秘密値を出力しない。dumpの復元一覧224entryはVMの実pg_restore --listで値を捨てcountだけ確認済み。collectorのfile hashはProgram manifestへ保存する。実private入力を持たずに架空の値でPASSを作らない。
+# PG386追補
+
+Pg386TrustedDeployment/pg386_deploy/pg386_place_releaseとBackupFailureFixtureは隔離VM限定の実使用tool。後者はM/A・全8Unit停止・署名/fullBOM・INVALID原本・root0600 inputを検証し、元byteをprivate force保全してから負入力へ変更する。復元済みの現VMへ再実行しない（new-only保全path）。PG386 collectors/oracleはsource d49固定の真正既知失敗と復元後成功を保存する。受入/permit/通常resume正当性の代用ではない。秘密key/input/dumpは同directoryへ置かない。BUG349の値比較修正と実試行結果は280、追加横展開negativeは継続。

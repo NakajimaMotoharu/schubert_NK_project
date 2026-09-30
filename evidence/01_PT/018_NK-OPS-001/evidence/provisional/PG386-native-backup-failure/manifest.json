@@ -1,0 +1,188 @@
+{
+  "id": "PG386-native-backup-failure",
+  "formal": false,
+  "sourceCommit": "d49a3a9fb0876ccf07e3e968df9e961bce215397",
+  "branch": "dev-foundation",
+  "executionTime": "2026-09-30T04:32:24.775658+00:00",
+  "testIds": [
+    "PT-OPS-BFAILED-VM001",
+    "PT-OPS-BFAILED-VM002",
+    "PT-OPS-MMAIN009",
+    "PT-OPS-MMAIN010"
+  ],
+  "input": "genuine source external Morning --resume, preserved original and old rows; isolated incorrect private Backup pgpass then exact restoration; no clock/schema/result fabrication",
+  "expected": "fresh normal nonzero Backup exit -> both exact FAILED/COMMAND_FAILURE -> independent readback -> original/request/intent retirement; no false archive; restored positive new fresh worker",
+  "actual": {
+    "failedParentInvocation": "58161ad0006a4fb6909d4a74d6cd0b62",
+    "failedWorkerInvocation": "98336502bb5f4764b378eccea15979f3",
+    "workerExecMainCode": 1,
+    "workerExecMainStatus": 1,
+    "failedRows": [
+      7,
+      8
+    ],
+    "failedAttempt": 4,
+    "positiveParentInvocation": "90999e2a66954050b835d49a89475c89",
+    "positiveWorkerInvocation": "886b0f0822364c67b09d2be470cbc05b",
+    "positiveRows": [
+      9,
+      10
+    ],
+    "positiveAttempt": 5,
+    "credentialRestoredExact": true,
+    "permitsIssued": 0,
+    "externalMorningExit": 30,
+    "S1Accepted": false,
+    "artifactOracle": "independent literal run/cutoff/attempt5/rows9+10/time+versions; four actual file hash/size; fixed7 config/fixed16 encrypted credential decrypted private; pg_restore-list224"
+  },
+  "commands": {
+    "current-unit-state.txt": {
+      "command": "sudo -n systemctl show schubert-nk-morning-controller.service schubert-nk-backup.service --property=Id,LoadState,ActiveState,SubState,Result,MainPID,ControlPID,InvocationID,ExecMainCode,ExecMainStatus,Job",
+      "exitCode": 0
+    },
+    "deployment-state.txt": {
+      "command": "sudo -n readlink /opt/schubert-nk/current; sudo -n stat -c \"%n %u:%g %a %h %s\" /etc/schubert-nk/release-approval/current; sudo -n findmnt --target /opt/schubert-nk/releases/0.1.0-PG386 --output TARGET,FSTYPE,OPTIONS --noheadings; sudo -n find /run/schubert-nk/startup /run/schubert-nk/backup-request -maxdepth 1 -type f -printf \"%f %s\\n\"",
+      "exitCode": 0
+    },
+    "database.txt": {
+      "command": "sudo -n -u postgres psql -X -A -t -d schubert_nk -c \"SELECT count(*),count(*) FILTER (WHERE NOT success),max(installed_rank) FROM schubert_meta.flyway_schema_history; SELECT id,step,attempt,to_char(started_at AT TIME ZONE 'UTC','YYYY-MM-DD\\\"T\\\"HH24:MI:SS.US\\\"Z\\\"'),to_char(ended_at AT TIME ZONE 'UTC','YYYY-MM-DD\\\"T\\\"HH24:MI:SS.US\\\"Z\\\"'),status,target_count,success_count,failure_count,byte_count,error_code FROM schubert.batch_runs ORDER BY id\"",
+      "exitCode": 0
+    },
+    "failed-part.txt": {
+      "command": "sudo -n find /srv/schubert-nk/backup/20260930-125310-31100027-2222-4333-8444-555555555555.part -maxdepth 1 -printf \"%f %y %s\\n\"",
+      "exitCode": 0
+    },
+    "positive-MANIFEST.json": {
+      "command": "sudo -n cat /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/MANIFEST.json",
+      "exitCode": 0
+    },
+    "restoration.txt": {
+      "command": "sudo -n cmp -s /etc/schubert-nk/credentials/backup-pgpass /var/lib/pgpt-s1-preservation/pg386-original-backup-pgpass && echo EXACT_BYTES_RESTORED; sudo -n stat -c \"%n %u:%g %a %h %s\" /etc/schubert-nk/credentials/backup-pgpass /var/lib/pgpt-s1-preservation/pg386-original-backup-pgpass /var/lib/pgpt-s1-preservation/pg386-failed-backup-pgpass",
+      "exitCode": 0
+    },
+    "preservation-hashes.txt": {
+      "command": "sudo -n sha256sum /var/lib/pgpt-s1-preservation/unit-originals-complete.tar /var/lib/pgpt-s1-preservation/db-pg381/schubert_nk-before-v023.dump /var/lib/schubert-nk/maintenance/runs/31100027-2222-4333-8444-555555555555.run",
+      "exitCode": 0
+    },
+    "environment.txt": {
+      "command": "uname -sr; /usr/bin/java -version 2>&1; /usr/bin/pg_dump --version; /usr/bin/age --version",
+      "exitCode": 0
+    },
+    "worker-pid1-receipts.jsonl": {
+      "command": "sudo -n journalctl --since \"2026-09-30 03:53:00 UTC\" -o json --no-pager | python3 -c 'import sys,json\nfor line in sys.stdin:\n x=json.loads(line)\n if x.get(\"UNIT\")==\"schubert-nk-backup.service\" and x.get(\"INVOCATION_ID\"):\n  print(json.dumps({k:x[k] for k in [\"__REALTIME_TIMESTAMP\",\"UNIT\",\"INVOCATION_ID\",\"JOB_TYPE\",\"JOB_RESULT\",\"_PID\",\"_EXE\"] if k in x}))' ",
+      "exitCode": 0
+    },
+    "restore-list-summary.txt": {
+      "command": "sudo -n pg_restore --list /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/schubert_nk.dump | awk 'BEGIN{n=0} !/^;/&&NF{n++} END{print \"RESTORE_LIST_ENTRIES=\"n}'",
+      "exitCode": 0
+    }
+  },
+  "bugs": [
+    "BUG-325",
+    "BUG-349"
+  ],
+  "ssc": [
+    "SSC-115"
+  ],
+  "coverage": {
+    "allFour100Percent": false,
+    "sameByteUnion": "captured separately; no historical exec merge",
+    "batchHostNativeUnion": {
+      "formal": false,
+      "classByteMismatch": 0,
+      "LINE": {
+        "missed": 459,
+        "covered": 8501
+      },
+      "METHOD": {
+        "missed": 99,
+        "covered": 1523
+      },
+      "CLASS": {
+        "missed": 11,
+        "covered": 217
+      },
+      "BRANCH": {
+        "missed": 178,
+        "covered": 4046
+      }
+    }
+  },
+  "limitations": [
+    "whole S1 and formal53scope not accepted",
+    "normal successful resume SKIP and failure subsequent Cleanup/Transfer/Expiry/issuer pending",
+    "real30min timeout/recovery not executed",
+    "private credential originals/archive/dump/signing and decryption keys stay outside Git"
+  ],
+  "redaction": "only fixed metadata/counters/coverage/manifest; no credential hash/value, raw journal message, token/session/password/private key or dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/artifact-oracle.json.log",
+      "sha256": "e98573fc494217a54bcd424c1dfd56473a5b4301fa65962c124ef1fd42a7ad3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/batch-host-native-union.json",
+      "sha256": "eff3ad403c89871e011e63a55323f710e2f81120a793944fd938df8e2072dbbc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/current-unit-state.txt",
+      "sha256": "f42a70a59bb7852f15cb314822609f6a0ab804efe394a132f96194355a548b43"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/database.txt",
+      "sha256": "8285c5fb9e782237006ebd51a2c5d220b7ece70a4f32746f654f193c07a9faea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/deployment-state.txt",
+      "sha256": "c7639c8facbfe1a89d46236b74a5ad7c34708cbd96101299055a9ae94791cbb0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/environment.txt",
+      "sha256": "66d627e1480380ce51eabd9edf6b6ecd73ca2aa5ecc566f1ac33b801922eff07"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/failed-part.txt",
+      "sha256": "4171f47eeec8e2b286832371d006bb19230a4c3442ccb7e94cce29ca452850a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-failed-backup.exec",
+      "sha256": "c696c2db2f2c390f550027dfbd1b10f2974ad94670d5343bbd41e635b84dbd94"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-failed-parent.exec",
+      "sha256": "fc2d5ca736350a2ef32a6644d3d2fc946264b95116afb7486c27023b374757e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-failed-unit-state.log",
+      "sha256": "2704ed897173dbb324684d1bee81a71332e240262865f70958506476dc1d527f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-positive-backup.exec",
+      "sha256": "ea120e61570e0bb66d7aa088c35e8d65bffeb5c939244ed7c93dadbe1e599dd2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-positive-parent.exec",
+      "sha256": "46e183453cba73352e971def35a6543868e8c9513da415203e15b29433f56b5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/positive-MANIFEST.json",
+      "sha256": "ea01a7506d8912f6c36990c484aeee45f737db66c8ba4f0ea820b17b118e9ec3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/preservation-hashes.txt",
+      "sha256": "b3b8f559d035730fb0794e088bd0b58eb39a5816e61c0c0786a50ce7909be797"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/restoration.txt",
+      "sha256": "bb32f8b9cd913169a926c5c6820adedfef7b4c77f7ae2db300368e71be88108b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/restore-list-summary.txt",
+      "sha256": "c139136e9b2278d8bffffb9eac6e656c1b35cc401c3fb01a158f31d2f2451f9e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/worker-pid1-receipts.jsonl",
+      "sha256": "dac48fa3d9f907386e848b679e68b8dfe94691161da155958118a46b7dbb11d5"
+    }
+  ]
+}

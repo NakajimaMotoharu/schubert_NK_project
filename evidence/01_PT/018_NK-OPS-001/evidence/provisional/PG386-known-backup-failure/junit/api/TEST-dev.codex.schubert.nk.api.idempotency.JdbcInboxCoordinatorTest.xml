@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" tests="11" failures="0" errors="0" skipped="0" time="1.737">
+  <testcase name="readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.108" />
+  <testcase name="anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.035" />
+  <testcase name="readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.1" />
+  <testcase name="handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.067" />
+  <testcase name="completionRetentionStartsAtCompletionAndReplayNeverExtendsIt" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.226" />
+  <testcase name="sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.058" />
+  <testcase name="tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.046" />
+  <testcase name="concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.068" />
+  <testcase name="readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.092" />
+  <testcase name="transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.034" />
+  <testcase name="readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks" classname="dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest" time="0.022" />
+</testsuite>
