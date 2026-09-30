@@ -192,8 +192,8 @@ public final class MorningProcessMain {
       if (runId.equals(new UUID(0, 0)) || !runId.toString().equals(args[1])) return 70;
       selected = Optional.of(runId);
     }
-    var budget = MorningParentBudget.create();
     try {
+      var budget = MorningParentBudget.create();
       budget.requireWithin();
       if (selected.isPresent()) resume.verify(budget, selected.orElseThrow());
       else admission.verify(budget);

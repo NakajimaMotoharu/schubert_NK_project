@@ -47,6 +47,32 @@ final class FixedServiceIdentityTest {
   }
 
   @Test
+  void dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups() throws Exception {
+    var f = new Fixture();
+    f.values.put(
+        "passwd/schubert-inbox-inspector",
+        "schubert-inbox-inspector:x:991:976::/nonexistent:/usr/sbin/nologin\n");
+    f.values.put("group/schubert-inbox-inspector", "schubert-inbox-inspector:x:976:\n");
+    assertEquals(
+        new FixedServiceIdentity.Value(991, 976, List.of(976L, 982L, 986L)),
+        f.subject().resolveInspector());
+    assertEquals(
+        List.of(
+            List.of("/usr/bin/getent", "passwd", "schubert-inbox-inspector"),
+            List.of("/usr/bin/getent", "group", "schubert-inbox-inspector"),
+            List.of("/usr/bin/getent", "group", "schubert"),
+            List.of("/usr/bin/getent", "group", "schubert-read")),
+        f.commands);
+    f.values.put("group/schubert-read", "schubert-read:x:976:\n");
+    assertThrows(IOException.class, () -> f.subject().resolveInspector());
+    f.values.put("group/schubert-read", "schubert-read:x:982:\n");
+    f.values.put("group/schubert-inbox-inspector", "schubert-inbox-inspector:x:975:\n");
+    assertThrows(IOException.class, () -> f.subject().resolveInspector());
+    f.values.remove("passwd/schubert-inbox-inspector");
+    assertThrows(IOException.class, () -> f.subject().resolveInspector());
+  }
+
+  @Test
   void serviceid001BothFixedAccountsExplicitRequiredGroups() {
     var backup = new Fixture();
     backup.values.put(

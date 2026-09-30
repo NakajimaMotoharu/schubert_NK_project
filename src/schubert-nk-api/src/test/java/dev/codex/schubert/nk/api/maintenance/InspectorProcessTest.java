@@ -385,6 +385,31 @@ final class InspectorProcessTest {
   }
 
   @Test
+  void sameParentGuardRejectsBeforeKeysAndClosesKeysAfterLaterFailure() throws Exception {
+    for (int failAt : List.of(1, 3, 6)) {
+      try (var source = new Source()) {
+        int[] reads = {0};
+        var process =
+            new InspectorProcess(
+                source,
+                noDatabase(),
+                Set.of("v1"),
+                () -> 0,
+                Optional.of(
+                    () -> {
+                      if (++reads[0] == failAt) throw new java.io.IOException("private owner");
+                      return 5_000_000_000L;
+                    }));
+        assertCredentialFailure(() -> process.execute(RUN));
+        assertEquals(failAt, reads[0]);
+        assertEquals(failAt == 1 ? 0 : failAt - 2, source.calls);
+        source.assertClosed();
+        assertThrows(IllegalStateException.class, () -> process.execute(RUN));
+      }
+    }
+  }
+
+  @Test
   void publicLoaderFailureAndRedaction() throws Exception {
     Path directory = Files.createDirectory(root.resolve("public-credential-root"));
     try (var owned = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), directory)) {

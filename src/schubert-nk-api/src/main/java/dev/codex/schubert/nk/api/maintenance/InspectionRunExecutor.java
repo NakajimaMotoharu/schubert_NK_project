@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.LongSupplier;
@@ -16,8 +18,17 @@ public final class InspectionRunExecutor {
   private static final long TIME_LIMIT_NANOS = 1_800_000_000_000L;
   private final InboxCleanup cleanup;
   private final LongSupplier monotonicNanos;
+  private final Optional<MaintenanceOwnerFrame.Guard> parentGuard;
 
   public InspectionRunExecutor(InboxCleanup cleanup, LongSupplier monotonicNanos) {
+    this(cleanup, monotonicNanos, Optional.empty());
+  }
+
+  InspectionRunExecutor(
+      InboxCleanup cleanup,
+      LongSupplier monotonicNanos,
+      Optional<MaintenanceOwnerFrame.Guard> parentGuard) {
+    this.parentGuard = Objects.requireNonNull(parentGuard, "parent guard profile");
     this.cleanup = Objects.requireNonNull(cleanup, "cleanup");
     this.monotonicNanos = Objects.requireNonNull(monotonicNanos, "monotonicNanos");
   }
@@ -51,6 +62,12 @@ public final class InspectionRunExecutor {
   private Optional<InspectionExecution.Status> stopReason(long started) {
     if (Thread.currentThread().isInterrupted())
       return Optional.of(InspectionExecution.Status.INTERRUPTED);
+    if (parentGuard.isPresent())
+      try {
+        parentGuard.orElseThrow().check();
+      } catch (IOException unavailable) {
+        return Optional.of(InspectionExecution.Status.TIME_LIMIT);
+      }
     // Signed subtraction tolerates nanoTime's natural wrap; a negative delta is fail-closed.
     long elapsed = monotonicNanos.getAsLong() - started;
     // BUG186/YKT146: also observe interruption at the final clock boundary.

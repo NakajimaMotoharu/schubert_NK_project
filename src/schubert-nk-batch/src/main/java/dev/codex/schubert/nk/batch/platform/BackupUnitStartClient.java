@@ -30,7 +30,12 @@ public final class BackupUnitStartClient {
         MaintenanceUnit.CLEANUP,
         InspectorUnitSnapshot.Target.CLEANUP,
         "/run/schubert-nk/cleanup-request",
-        "cleanup-start.intent");
+        "cleanup-start.intent"),
+    INSPECTOR(
+        MaintenanceUnit.INSPECTOR,
+        InspectorUnitSnapshot.Target.INSPECTOR,
+        "/run/schubert-nk/cleanup-request",
+        "inspector-start.intent");
     private final MaintenanceUnit unit;
     private final InspectorUnitSnapshot.Target observation;
     private final String requestDirectory, marker;
@@ -60,6 +65,14 @@ public final class BackupUnitStartClient {
 
     public String marker() {
       return marker;
+    }
+
+    /** Only Cleanup may control Inspector; Morning controls only Backup and Cleanup. */
+    public boolean ownedBy(RootStartupContext.Service service) {
+      return service
+          == (this == INSPECTOR
+              ? RootStartupContext.Service.CLEANUP
+              : RootStartupContext.Service.MORNING);
     }
   }
 
@@ -147,8 +160,7 @@ public final class BackupUnitStartClient {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(target, "closed phase");
-    if (expected.service() != RootStartupContext.Service.MORNING)
-      throw new IOException("backup start unavailable");
+    if (!target.ownedBy(expected.service())) throw new IOException("backup start unavailable");
     root.recheck(expected);
     var policy = MaintenanceUnitStopPolicy.create();
     return new BackupUnitStartClient(

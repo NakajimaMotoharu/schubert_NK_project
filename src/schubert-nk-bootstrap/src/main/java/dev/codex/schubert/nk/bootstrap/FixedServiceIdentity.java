@@ -100,13 +100,23 @@ public final class FixedServiceIdentity {
 
   /** Backup-only fixed entry; does not extend the API/Web enum or inherit application groups. */
   public Value resolveBackup() throws IOException {
+    return resolveMaintenance("schubert-backup", List.of("schubert-backup", "schubert"));
+  }
+
+  /** SSC119: dedicated Inspector, no API/Web supplementary membership inheritance. */
+  public Value resolveInspector() throws IOException {
+    return resolveMaintenance(
+        "schubert-inbox-inspector",
+        List.of("schubert-inbox-inspector", "schubert", "schubert-read"));
+  }
+
+  private Value resolveMaintenance(String account, List<String> names) throws IOException {
     try {
-      String account = "schubert-backup";
       String[] passwd =
           fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
       long uid = id(passwd[2]), gid = id(passwd[3]);
       var groups = new TreeSet<Long>();
-      for (String name : List.of(account, "schubert")) {
+      for (String name : names) {
         long value = id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);
         if (name.equals(account)) require(value == gid);
         require(groups.add(value));

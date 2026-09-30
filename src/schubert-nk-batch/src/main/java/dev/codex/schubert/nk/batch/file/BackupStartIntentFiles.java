@@ -68,7 +68,7 @@ public final class BackupStartIntentFiles implements AutoCloseable {
     Objects.requireNonNull(context, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(target, "closed phase");
-    if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
+    if (!target.ownedBy(expected.service())) throw unavailable();
     context.recheck(expected);
     var root =
         OwnedTransferDirectory.open(

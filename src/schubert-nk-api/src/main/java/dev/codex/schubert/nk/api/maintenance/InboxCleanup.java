@@ -6,6 +6,8 @@ import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.sql.*;
 import java.time.Instant;
 import java.util.*;
@@ -82,12 +84,38 @@ public final class InboxCleanup {
   private final AuthenticationInboxInspector inspector;
   private final NonAuthenticationInboxInspector nonAuthentication;
   private final Set<String> fingerprintVersions;
+  private final Optional<MaintenanceOwnerFrame.Guard> parentGuard;
 
   public InboxCleanup(
       SqlConnectionProvider connections,
       AuthenticationInboxInspector inspector,
       NonAuthenticationInboxInspector nonAuthentication,
       Set<String> fingerprintVersions) {
+    this(connections, inspector, nonAuthentication, fingerprintVersions, Optional.empty());
+  }
+
+  /** Actual Inspector assembly supplies the same verified parent owner at every mutation. */
+  public InboxCleanup(
+      SqlConnectionProvider connections,
+      AuthenticationInboxInspector inspector,
+      NonAuthenticationInboxInspector nonAuthentication,
+      Set<String> fingerprintVersions,
+      MaintenanceOwnerFrame.Guard parentGuard) {
+    this(
+        connections,
+        inspector,
+        nonAuthentication,
+        fingerprintVersions,
+        Optional.of(Objects.requireNonNull(parentGuard, "same parent guard")));
+  }
+
+  private InboxCleanup(
+      SqlConnectionProvider connections,
+      AuthenticationInboxInspector inspector,
+      NonAuthenticationInboxInspector nonAuthentication,
+      Set<String> fingerprintVersions,
+      Optional<MaintenanceOwnerFrame.Guard> parentGuard) {
+    this.parentGuard = parentGuard;
     this.connections = Objects.requireNonNull(connections, "connections");
     this.inspector = Objects.requireNonNull(inspector, "inspector");
     this.nonAuthentication = Objects.requireNonNull(nonAuthentication, "nonAuthentication");
@@ -141,29 +169,73 @@ public final class InboxCleanup {
 
   // Closures are created only above inside this class; no external transaction callback is exposed.
   private <T> T owned(Work<T> work) {
-    try (Connection connection = requireValue(connections.open())) {
-      if (!connection.getAutoCommit()) {
-        throw new SQLDataException("inspection requires a fresh connection");
-      }
-      connection.setAutoCommit(false);
-      try {
-        T result = work.run(connection);
-        // An inner replay may aggregate a failed SQL read into false. Never commit an aborted TX.
-        verifyTransaction(connection);
-        connection.commit();
-        return result;
-      } catch (SQLException | RuntimeException failure) {
-        try {
-          connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+    try {
+      checkParent(); // Before obtaining any new connection.
+      try (Connection connection = requireValue(connections.open())) {
+        checkParent();
+        if (!connection.getAutoCommit()) {
+          throw new SQLDataException("inspection requires a fresh connection");
         }
-        throw failure;
+        connection.setAutoCommit(false);
+        boolean committed = false;
+        try {
+          boundTransaction(connection);
+          T result = work.run(connection);
+          // An inner replay may aggregate a failed SQL read into false. Never commit an aborted TX.
+          verifyTransaction(connection);
+          checkParent();
+          connection.commit();
+          committed = true;
+          checkParent(); // A late failure is NOT proof that committed mutation was rolled back.
+          return result;
+        } catch (SQLException | RuntimeException failure) {
+          if (!committed)
+            try {
+              connection.rollback();
+            } catch (SQLException rollbackFailure) {
+              failure.addSuppressed(rollbackFailure);
+            }
+          throw failure;
+        }
       }
     } catch (SQLException | RuntimeException failure) {
       // Do not retain bound columns/provider text/cause/suppressed close or uncertain commit data.
       throw new InboxMaintenanceException();
     }
+  }
+
+  private void checkParent() throws SQLException {
+    if (parentGuard.isPresent()) {
+      try {
+        parentGuard.orElseThrow().check();
+      } catch (IOException unavailable) {
+        throw new SQLDataException("maintenance owner unavailable");
+      }
+    }
+  }
+
+  /** Server-side timeout bounds all nested replay/inspection SQL, not just the final DELETE. */
+  private void boundTransaction(Connection connection) throws SQLException {
+    if (parentGuard.isEmpty()) return;
+    int seconds;
+    try {
+      seconds = parentGuard.orElseThrow().queryTimeoutSeconds();
+    } catch (IOException unavailable) {
+      throw new SQLDataException("maintenance owner unavailable");
+    }
+    try (var statement =
+        connection.prepareStatement(
+            "select pg_catalog.set_config('statement_timeout', ?, true) as bound_timeout")) {
+      requireValue(statement);
+      statement.setQueryTimeout(seconds);
+      statement.setString(1, Integer.toString(seconds * 1000));
+      try (var rows = statement.executeQuery()) {
+        requireValue(rows);
+        if (!rows.next() || !(seconds + "s").equals(rows.getString("bound_timeout")) || rows.next())
+          throw new SQLDataException("maintenance SQL bound unavailable");
+      }
+    }
+    checkParent();
   }
 
   private static LoadedProgress loadProgress(Connection connection, InspectionRun run)
@@ -331,8 +403,9 @@ public final class InboxCleanup {
     }
   }
 
-  private static boolean delete(Connection connection, InspectionRun run, Candidate candidate)
+  private boolean delete(Connection connection, InspectionRun run, Candidate candidate)
       throws SQLException {
+    checkParent();
     try (var statement =
         connection.prepareStatement(
             "select schubert.maintenance_delete_inbox(?,?,?,?,?) as deleted")) {
@@ -345,6 +418,7 @@ public final class InboxCleanup {
         if (!row.next()) throw new SQLDataException("inspection deletion result is missing");
         boolean deleted = requireValue(row.getObject("deleted", Boolean.class));
         if (row.next()) throw new SQLDataException("inspection deletion result count is invalid");
+        checkParent();
         return deleted;
       }
     }

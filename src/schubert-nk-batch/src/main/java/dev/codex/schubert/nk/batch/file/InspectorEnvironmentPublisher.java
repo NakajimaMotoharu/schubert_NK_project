@@ -126,6 +126,36 @@ public final class InspectorEnvironmentPublisher {
     }
   }
 
+  /** Native S2 never reuses an old env/part, even if its canonical run happens to match. */
+  public void requireFresh() throws StorageIoException {
+    synchronized (stateLock) {
+      begin();
+      directory();
+      root.atDirectory(
+          path -> {
+            try (var entries = java.nio.file.Files.newDirectoryStream(path)) {
+              for (var entry : entries) {
+                String name =
+                    Objects.requireNonNull(entry.getFileName(), "fixed namespace leaf").toString();
+                require(
+                    !name.equals(NAME)
+                        && !name.matches("[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\.part"));
+              }
+            }
+            return true;
+          });
+      directory();
+    }
+  }
+
+  public void prepareNew(BatchRun run) throws StorageIoException {
+    Objects.requireNonNull(run, "run");
+    synchronized (stateLock) {
+      requireFresh();
+      prepare(run);
+    }
+  }
+
   /** Caller has confirmed the child is terminal. A different run is never retired implicitly. */
   public void retire(BatchRun run) throws StorageIoException {
     Objects.requireNonNull(run, "run");

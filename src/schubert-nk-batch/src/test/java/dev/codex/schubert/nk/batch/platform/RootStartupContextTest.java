@@ -32,7 +32,7 @@ final class RootStartupContextTest {
         + "\n";
   }
 
-  static final class Fixture implements RootStartupContext.Io {
+  static class Fixture implements RootStartupContext.Io {
     long uid = 0, pid = 42;
     String fs = "proc", exe = "/usr/lib/systemd/systemd", boot = BOOT, inv = INV;
     String own = RootStartupContextTest.stat(42, "12345"),
@@ -94,6 +94,80 @@ final class RootStartupContextTest {
     RootStartupContext context() {
       return new RootStartupContext(this);
     }
+  }
+
+  @Test
+  void rootctx010SameInvocationOuterDeadlineIsAnIndependentUpperBound() throws Exception {
+    String literal =
+        "Id=schubert-nk-morning-controller.service\nInvocationID="
+            + INV
+            + "\nMainPID=42\nExecMainStartTimestampMonotonic=12345678\n";
+    String[] selected = {literal};
+    byte[][] owned = {new byte[0]};
+    var f =
+        new Fixture() {
+          @Override
+          public byte[] unitDeadline(RootStartupContext.Service service) throws IOException {
+            assertEquals(RootStartupContext.Service.MORNING, service);
+            if (selected[0].equals("<IO>")) throw new IOException("private manager detail");
+            if (selected[0].equals("<NULL>")) return null;
+            owned[0] = bytes(selected[0]);
+            return owned[0];
+          }
+        };
+    f.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
+    f.unit = unit(RootStartupContext.Service.MORNING);
+    var context = f.context();
+    var morning = context.capture(RootStartupContext.Service.MORNING);
+    assertEquals(1_812_345_678_000L, context.maintenanceDeadline(morning, 1_900_000_000_000L));
+    assertArrayEquals(new byte[owned[0].length], owned[0]);
+    assertEquals(1_800_000_000_000L, context.maintenanceDeadline(morning, 1_800_000_000_000L));
+    for (String wrong :
+        new String[] {
+          "0",
+          "-1",
+          "012345678",
+          "x",
+          "9223372036854775808",
+          "9223372036854775807",
+          "9223372036854775"
+        }) {
+      selected[0] = literal.replace("12345678", wrong);
+      assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
+      assertArrayEquals(new byte[owned[0].length], owned[0]);
+    }
+    for (String wrong :
+        new String[] {
+          literal.replace(
+              "Id=schubert-nk-morning-controller.service", "Id=schubert-nk-cleanup.service"),
+          literal.replace(INV, "2".repeat(32)),
+          literal.replace("MainPID=42", "MainPID=43"),
+          literal + "Unknown=1\n"
+        }) {
+      selected[0] = wrong;
+      assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
+    }
+    selected[0] = literal;
+    selected[0] = "<IO>";
+    var sanitized =
+        assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
+    assertEquals("startup context unavailable", sanitized.getMessage());
+    assertNull(sanitized.getCause());
+    assertEquals(0, sanitized.getSuppressed().length);
+    selected[0] = "<NULL>";
+    assertThrows(
+        NullPointerException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
+    selected[0] = literal;
+    assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, 0));
+    assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, 12_345_678_000L));
+    assertThrows(
+        NullPointerException.class, () -> context.maintenanceDeadline(null, Long.MAX_VALUE));
+    var unavailable = new Fixture();
+    unavailable.group = f.group;
+    unavailable.unit = f.unit;
+    var noPort = unavailable.context();
+    var observed = noPort.capture(RootStartupContext.Service.MORNING);
+    assertThrows(IOException.class, () -> noPort.maintenanceDeadline(observed, Long.MAX_VALUE));
   }
 
   static void rejected(Fixture f) {

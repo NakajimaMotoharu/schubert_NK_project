@@ -16,7 +16,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorLauncher {
-  private static final Factory NATIVE = settings -> new InspectorApplication(settings)::execute;
+  private static final Factory NATIVE =
+      settings -> new InspectorApplication(settings)::executeNative;
 
   @FunctionalInterface
   interface Factory {

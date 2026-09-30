@@ -100,7 +100,8 @@ final class InspectorLauncherTest {
   @Test
   void nativeFactoryFailure() throws Exception {
     var launcher = new InspectorLauncher();
-    assertEquals(70, launcher.run(new String[0], environment())); // RW non-manager root is denied
+    // SSC119/BUG359: no genuine Unit/OS actor, so IO admission50 precedes any credential70.
+    assertEquals(50, launcher.run(new String[0], environment()));
     var missing = environment();
     missing.put("CREDENTIALS_DIRECTORY", root.resolve("missing").toString());
     assertEquals(50, launcher.run(new String[0], missing));

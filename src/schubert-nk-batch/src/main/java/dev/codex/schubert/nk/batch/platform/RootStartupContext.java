@@ -72,6 +72,10 @@ public final class RootStartupContext {
 
     byte[] unit(Service service) throws IOException;
 
+    default byte[] unitDeadline(Service service) throws IOException {
+      throw unavailable();
+    }
+
     String invocation();
   }
 
@@ -99,6 +103,41 @@ public final class RootStartupContext {
   public void recheck(Snapshot expected) throws IOException {
     Objects.requireNonNull(expected, "expected root context");
     require(expected.equals(capture(expected.service())));
+  }
+
+  /** SSC119: systemd's outer start deadline must not be extended by the Java entry clock. */
+  public long maintenanceDeadline(Snapshot morning, long parentDeadline) throws IOException {
+    Objects.requireNonNull(morning, "same Morning context");
+    require(morning.service() == Service.MORNING && parentDeadline > 0);
+    recheck(morning);
+    byte[] first = new byte[0];
+    byte[] second = new byte[0];
+    try {
+      first = Objects.requireNonNull(io.unitDeadline(Service.MORNING), "deadline manager bytes");
+      var values = properties(first);
+      require(
+          values
+              .keySet()
+              .equals(Set.of("Id", "InvocationID", "MainPID", "ExecMainStartTimestampMonotonic")));
+      require(Service.MORNING.unit().equals(values.get("Id")));
+      require(morning.invocation().equals(values.get("InvocationID")));
+      require(Long.toString(morning.pid()).equals(values.get("MainPID")));
+      String start = Objects.requireNonNull(values.get("ExecMainStartTimestampMonotonic"));
+      require(start.matches("[1-9][0-9]{0,19}"));
+      long started = Math.multiplyExact(Long.parseLong(start), 1000L);
+      long unitDeadline = Math.addExact(started, 1_800_000_000_000L);
+      require(parentDeadline > started);
+      recheck(morning);
+      second = Objects.requireNonNull(io.unitDeadline(Service.MORNING), "deadline manager bytes");
+      require(Arrays.equals(first, second));
+      recheck(morning);
+      return Math.min(parentDeadline, unitDeadline);
+    } catch (IOException | IllegalArgumentException | ArithmeticException invalid) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(first, (byte) 0);
+      Arrays.fill(second, (byte) 0);
+    }
   }
 
   private Snapshot observe(Service service) throws IOException {
@@ -282,6 +321,16 @@ public final class RootStartupContext {
 
     @Override
     public byte[] unit(Service service) throws IOException {
+      return queryUnit(
+          service, "Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup");
+    }
+
+    @Override
+    public byte[] unitDeadline(Service service) throws IOException {
+      return queryUnit(service, "Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic");
+    }
+
+    private byte[] queryUnit(Service service, String fields) throws IOException {
       Process process =
           Objects.requireNonNull(
               start.execute(
@@ -291,7 +340,7 @@ public final class RootStartupContext {
                       "--no-pager",
                       "--no-ask-password",
                       "show",
-                      "--property=Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup",
+                      "--property=" + fields,
                       service.unit())),
               "system manager process");
       return dev.codex.schubert.nk.storage.ResourceScope.use(

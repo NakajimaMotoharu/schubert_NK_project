@@ -105,6 +105,11 @@ public final class InspectorCredentialLoader {
     return readBackupMaterial("backup-request", 400);
   }
 
+  /** SSC119: fixed root-issued LoadCredential copy, never a key or startup permit. */
+  public byte[] readMaintenanceOwner() throws InspectorCredentialException {
+    return readBackupMaterial("maintenance-owner", 1024);
+  }
+
   private byte[] readBackupMaterial(String name, int maximum) throws InspectorCredentialException {
     byte[] buffer = new byte[maximum + 1];
     try {

@@ -17,6 +17,17 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ChildStartupContext {
+  /** Maintenance parents only. It grants neither ordinary startup proof nor caller-selected PID. */
+  public enum MaintenanceParent {
+    MORNING("schubert-nk-morning-controller.service"),
+    CLEANUP("schubert-nk-cleanup.service");
+    private final String unit;
+
+    MaintenanceParent(String unit) {
+      this.unit = unit;
+    }
+  }
+
   private static final String A_KEY = "SCHUBERT_NK_STARTUP_ADMISSION_FD";
   private static final String P_KEY = "SCHUBERT_NK_STARTUP_PROOF_FD";
 
@@ -67,6 +78,14 @@ public final class ChildStartupContext {
     byte[] status(long pid) throws IOException;
 
     byte[] cgroup(long pid) throws IOException;
+
+    default byte[] maintenanceUnit(MaintenanceParent parent) throws IOException {
+      throw unavailable();
+    }
+
+    default byte[] inspectorUnit() throws IOException {
+      throw unavailable();
+    }
   }
 
   private final Io io;
@@ -109,9 +128,156 @@ public final class ChildStartupContext {
   }
 
   public Observed capture() throws IOException {
+    return capture(io.pid(), false);
+  }
+
+  /** Nonsecret observations, not transferable authority; rechecked at each mutation. */
+  public record InspectorIdentity(Observed child, Observed wrapper, String invocation) {
+    public InspectorIdentity {
+      Objects.requireNonNull(child, "Inspector child");
+      Objects.requireNonNull(wrapper, "Inspector wrapper");
+      Objects.requireNonNull(invocation, "Inspector Invocation");
+    }
+
+    @Override
+    public String toString() {
+      return "InspectorIdentity[REDACTED]";
+    }
+  }
+
+  /** SSC119: actual shell MainPID and Java child are distinct, independently live actors. */
+  public InspectorIdentity verifyInspector(
+      UUID boot, String invocation, FixedServiceIdentity.Value fixed) throws IOException {
+    Objects.requireNonNull(boot, "same maintenance boot");
+    Objects.requireNonNull(invocation, "manager Invocation");
+    Objects.requireNonNull(fixed, "dedicated Inspector NSS");
+    byte[] first = new byte[0], second = new byte[0];
+    try {
+      require(!Thread.currentThread().isInterrupted());
+      require(invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
+      var child = capture();
+      requireInspectorActor(child, boot, fixed);
+      first = Objects.requireNonNull(io.inspectorUnit(), "Inspector manager bytes");
+      String source = text(first, 4096);
+      require(source.endsWith("\n"));
+      var values = new HashMap<String, String>();
+      for (String line : source.substring(0, source.length() - 1).split("\n", -1)) {
+        int separator = line.indexOf('=');
+        require(separator > 0);
+        require(
+            values.putIfAbsent(line.substring(0, separator), line.substring(separator + 1))
+                == null);
+      }
+      require(
+          values
+              .keySet()
+              .equals(
+                  Set.of(
+                      "Id",
+                      "LoadState",
+                      "ActiveState",
+                      "SubState",
+                      "MainPID",
+                      "InvocationID",
+                      "ControlGroup")));
+      require("schubert-nk-inbox-inspector.service".equals(values.get("Id")));
+      require(
+          "loaded".equals(values.get("LoadState"))
+              && "activating".equals(values.get("ActiveState"))
+              && "start".equals(values.get("SubState")));
+      require(invocation.equals(values.get("InvocationID")));
+      require(
+          "/system.slice/schubert-nk-inbox-inspector.service".equals(values.get("ControlGroup")));
+      long main = positive(Objects.requireNonNull(values.get("MainPID")), Integer.MAX_VALUE, 10);
+      require(main >= 2 && main != child.pid());
+      var wrapper = capture(main, false);
+      requireInspectorActor(wrapper, boot, fixed);
+      require(wrapper.equals(capture(main, false)) && child.equals(capture()));
+      second = Objects.requireNonNull(io.inspectorUnit(), "Inspector manager bytes");
+      require(Arrays.equals(first, second) && !Thread.currentThread().isInterrupted());
+      return new InspectorIdentity(child, wrapper, invocation);
+    } catch (IOException known) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(first, (byte) 0);
+      Arrays.fill(second, (byte) 0);
+    }
+  }
+
+  private static void requireInspectorActor(
+      Observed actor, UUID boot, FixedServiceIdentity.Value fixed) throws IOException {
+    require(
+        actor.boot().equals(boot.toString())
+            && actor.uid() == fixed.uid()
+            && actor.gid() == fixed.gid()
+            && actor.groups().equals(fixed.groups())
+            && actor.zeroCapabilities()
+            && actor.noNewPrivileges()
+            && actor.cgroup().equals("0::/system.slice/schubert-nk-inbox-inspector.service\n"));
+  }
+
+  /** Root-issued claim is checked against manager and kernel twice, never treated as authority. */
+  public void verifyMaintenanceParent(MaintenanceParent kind, MaintenanceOwnerFrame owner)
+      throws IOException {
+    Objects.requireNonNull(kind, "fixed maintenance parent");
+    Objects.requireNonNull(owner, "held owner claim");
+    var claimed =
+        kind == MaintenanceParent.MORNING
+            ? owner.morning()
+            : owner.cleanup().orElseThrow(() -> unavailable());
+    byte[] first = new byte[0];
+    byte[] second = new byte[0];
+    try {
+      require(!Thread.currentThread().isInterrupted());
+      first = Objects.requireNonNull(io.maintenanceUnit(kind), "maintenance manager bytes");
+      String source = text(first, 4096);
+      require(source.endsWith("\n"));
+      var values = new HashMap<String, String>();
+      for (String line : source.substring(0, source.length() - 1).split("\n", -1)) {
+        int separator = line.indexOf('=');
+        require(separator > 0);
+        require(
+            values.putIfAbsent(line.substring(0, separator), line.substring(separator + 1))
+                == null);
+      }
+      require(
+          values
+              .keySet()
+              .equals(
+                  Set.of(
+                      "Id",
+                      "LoadState",
+                      "ActiveState",
+                      "SubState",
+                      "MainPID",
+                      "InvocationID",
+                      "ControlGroup")));
+      require(kind.unit.equals(values.get("Id")) && "loaded".equals(values.get("LoadState")));
+      require(
+          "activating".equals(values.get("ActiveState")) && "start".equals(values.get("SubState")));
+      require(Long.toString(claimed.pid()).equals(values.get("MainPID")));
+      require(claimed.invocation().equals(values.get("InvocationID")));
+      String group = "/system.slice/" + kind.unit;
+      require(group.equals(values.get("ControlGroup")));
+      var observed = capture(claimed.pid(), true);
+      require(owner.boot().toString().equals(observed.boot()));
+      require(claimed.startTicks() == observed.startTicks());
+      require(observed.cgroup().equals("0::" + group + "\n") && observed.noNewPrivileges());
+      require(observed.equals(capture(claimed.pid(), true)));
+      second = Objects.requireNonNull(io.maintenanceUnit(kind), "maintenance manager bytes");
+      require(Arrays.equals(first, second));
+      require(!Thread.currentThread().isInterrupted());
+    } catch (IOException known) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(first, (byte) 0);
+      Arrays.fill(second, (byte) 0);
+    }
+  }
+
+  private Observed capture(long pid, boolean maintenanceParent) throws IOException {
     try {
       require("proc".equals(io.filesystem()));
-      long pid = io.pid();
       require(pid >= 2 && pid <= Integer.MAX_VALUE);
       String boot = text(io.boot(), 37);
       require(
@@ -126,11 +292,21 @@ public final class ChildStartupContext {
       require(columns[0].matches("[RSIDTWtKP]"));
       long ticks = positive(columns[19], Long.MAX_VALUE, 19);
       Map<String, String> status = status(io.status(pid));
-      long uid = ids(required(status, "Uid")), gid = ids(required(status, "Gid"));
-      require(uid == io.uid());
+      long uid, gid;
+      if (maintenanceParent) {
+        require(required(status, "Uid").matches("0\\s+0\\s+0\\s+0"));
+        require(required(status, "Gid").matches("0\\s+0\\s+0\\s+0"));
+        uid = 0;
+        gid = 0;
+      } else {
+        uid = ids(required(status, "Uid"));
+        gid = ids(required(status, "Gid"));
+        require(uid == io.uid());
+      }
       var groups = new TreeSet<Long>();
       for (String id : required(status, "Groups").split("\\s+"))
-        require(groups.add(positive(id, 4294967294L, 10)));
+        require(
+            groups.add(maintenanceParent && id.equals("0") ? 0 : positive(id, 4294967294L, 10)));
       require(groups.size() <= 16);
       boolean zero = true;
       for (String cap : List.of("CapInh", "CapPrm", "CapEff", "CapBnd", "CapAmb")) {
@@ -287,6 +463,27 @@ public final class ChildStartupContext {
 
     public byte[] cgroup(long pid) throws IOException {
       return read(proc(Long.toString(pid), "cgroup"), 4097);
+    }
+
+    public byte[] maintenanceUnit(MaintenanceParent parent) throws IOException {
+      return unit(parent.unit);
+    }
+
+    public byte[] inspectorUnit() throws IOException {
+      return unit("schubert-nk-inbox-inspector.service");
+    }
+
+    private byte[] unit(String fixedUnit) throws IOException {
+      return new FixedServiceIdentity.NativeQuery()
+          .read(
+              List.of(
+                  "/usr/bin/systemctl",
+                  "--system",
+                  "--no-pager",
+                  "--no-ask-password",
+                  "show",
+                  "--property=Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup",
+                  fixedUnit));
     }
 
     @SuppressFBWarnings(

@@ -49,6 +49,16 @@ public final class InspectorEnvironmentFiles {
   }
 
   @FunctionalInterface
+  public interface Retirement {
+    void retire() throws IOException;
+  }
+
+  @FunctionalInterface
+  public interface OwnedOperation<T> {
+    T execute(Retirement retirement) throws IOException;
+  }
+
+  @FunctionalInterface
   interface GroupLookup {
     long resolve() throws IOException;
   }
@@ -91,6 +101,24 @@ public final class InspectorEnvironmentFiles {
 
   /** Publish, execute once, revalidate and retire only on normal nonnull callback completion. */
   public <T> T execute(BatchRun run, Operation<T> operation) throws StorageIoException {
+    Objects.requireNonNull(operation, "environment operation");
+    return execute(
+        run,
+        retirement -> {
+          var result = Objects.requireNonNull(operation.execute(), "environment operation result");
+          retirement.retire();
+          return result;
+        },
+        false);
+  }
+
+  /** Callback-scoped one-shot retirement: after DB reacquire/readback, BEFORE intent removal. */
+  public <T> T executeOwned(BatchRun run, OwnedOperation<T> operation) throws StorageIoException {
+    return execute(run, operation, true);
+  }
+
+  private <T> T execute(BatchRun run, OwnedOperation<T> operation, boolean freshOnly)
+      throws StorageIoException {
     Objects.requireNonNull(run, "run");
     Objects.requireNonNull(operation, "environment operation");
     synchronized (lifecycleLock) {
@@ -139,7 +167,8 @@ public final class InspectorEnvironmentFiles {
                                             var publisher =
                                                 new InspectorEnvironmentPublisher(
                                                     maintenance, security, io);
-                                            publisher.prepare(run);
+                                            if (freshOnly) publisher.prepareNew(run);
+                                            else publisher.prepare(run);
                                             verify(
                                                 roots,
                                                 group,
@@ -147,20 +176,34 @@ public final class InspectorEnvironmentFiles {
                                                 expectedFile,
                                                 reference[0],
                                                 run);
-                                            T completed =
-                                                Objects.requireNonNull(
-                                                    operation.execute(),
-                                                    "environment operation result");
-                                            verify(
-                                                roots,
-                                                group,
-                                                expectedRoots,
-                                                expectedFile,
-                                                reference[0],
-                                                run);
-                                            publisher.retire(run);
-
-                                            return completed;
+                                            boolean[] active = {true}, retired = {false};
+                                            Thread ownerThread = Thread.currentThread();
+                                            try {
+                                              T completed =
+                                                  Objects.requireNonNull(
+                                                      operation.execute(
+                                                          () -> {
+                                                            require(
+                                                                Thread.currentThread()
+                                                                        == ownerThread
+                                                                    && active[0]
+                                                                    && !retired[0]);
+                                                            verify(
+                                                                roots,
+                                                                group,
+                                                                expectedRoots,
+                                                                expectedFile,
+                                                                reference[0],
+                                                                run);
+                                                            publisher.retire(run);
+                                                            retired[0] = true;
+                                                          }),
+                                                      "environment operation result");
+                                              require(retired[0]);
+                                              return completed;
+                                            } finally {
+                                              active[0] = false;
+                                            }
                                           });
                                     });
                               });

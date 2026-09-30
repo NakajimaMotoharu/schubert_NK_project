@@ -98,7 +98,7 @@ public final class BackupUnitReceiptGate {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(target, "closed phase");
-    if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
+    if (!target.ownedBy(expected.service())) throw unavailable();
     root.recheck(expected);
     return new BackupUnitReceiptGate(
         () -> root.recheck(expected),
@@ -146,7 +146,7 @@ public final class BackupUnitReceiptGate {
     try {
       InspectorUnitSnapshot first = present(probe.quiescent());
       if (!first.isTarget(target.observation())
-          || (target == BackupUnitStartClient.Target.CLEANUP && !first.inactiveBaseline()))
+          || (target != BackupUnitStartClient.Target.BACKUP && !first.inactiveBaseline()))
         throw unavailable();
       InspectorUnitSnapshot whole = present(terminal.quiescent());
       if (!first.matches(whole) || !first.matches(present(probe.quiescent()))) throw unavailable();
@@ -190,10 +190,11 @@ public final class BackupUnitReceiptGate {
       Optional<InspectorUnitSnapshot> first = known(probe.quiescent());
       if (first.isEmpty()
           || !first.orElseThrow().isTarget(target.observation())
-          || (target == BackupUnitStartClient.Target.CLEANUP && !first.orElseThrow().heldCleanup())
+          || (target != BackupUnitStartClient.Target.BACKUP
+              && !first.orElseThrow().heldMaintenance())
           || (includeFailure
               ? first.orElseThrow().backupTerminalAfter(baseline.previous).isEmpty()
-              : (target == BackupUnitStartClient.Target.CLEANUP
+              : (target != BackupUnitStartClient.Target.BACKUP
                   ? first.orElseThrow().receiptAfter(baseline.previous).isEmpty()
                   : first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0)))
         return Optional.empty();

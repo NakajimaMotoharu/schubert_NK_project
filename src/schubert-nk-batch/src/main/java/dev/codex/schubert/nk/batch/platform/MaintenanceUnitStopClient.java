@@ -48,6 +48,25 @@ public final class MaintenanceUnitStopClient {
         root, expected, MaintenanceUnitStopPolicy.create()::requireSafe, new NativeStart());
   }
 
+  /** Narrow Cleanup-owned Inspector stop; cannot stop Cleanup, Broker or application Units. */
+  public static MaintenanceUnitStopClient createInspector(
+      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    Objects.requireNonNull(root, "Cleanup root context");
+    Objects.requireNonNull(expected, "Cleanup root identity");
+    if (expected.service() != RootStartupContext.Service.CLEANUP)
+      throw new IOException("fixed stop client unavailable");
+    root.recheck(expected);
+    var policy = MaintenanceUnitStopPolicy.create();
+    return new MaintenanceUnitStopClient(
+        () -> root.recheck(expected),
+        unit -> {
+          if (unit != MaintenanceUnit.INSPECTOR)
+            throw new IllegalArgumentException("fixed stop client unavailable");
+          policy.requireSafe(unit);
+        },
+        new NativeStart());
+  }
+
   static MaintenanceUnitStopClient create(
       RootStartupContext root, RootStartupContext.Snapshot expected, Policy policy, Start start)
       throws IOException {

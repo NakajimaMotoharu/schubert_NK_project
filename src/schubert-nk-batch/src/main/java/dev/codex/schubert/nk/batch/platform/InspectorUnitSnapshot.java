@@ -225,6 +225,13 @@ public final class InspectorUnitSnapshot {
         && quiescent();
   }
 
+  boolean heldMaintenance() {
+    return (target == Target.CLEANUP || target == Target.INSPECTOR)
+        && value("ActiveState").equals("active")
+        && value("SubState").equals("exited")
+        && quiescent();
+  }
+
   boolean isTarget(Target expected) {
     return target == expected;
   }

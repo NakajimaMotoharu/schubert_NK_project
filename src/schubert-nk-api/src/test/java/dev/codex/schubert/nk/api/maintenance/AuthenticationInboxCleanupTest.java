@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.*;
 import java.time.Instant;
@@ -576,6 +578,106 @@ final class AuthenticationInboxCleanupTest {
 
   private static void expectedContention(String sqlState) {
     assertEquals("55P03", sqlState);
+  }
+
+  @Test
+  void inbox269ParentGuardBoundsSqlAndOwnsEveryDeleteCommitBoundary() throws Exception {
+    try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+      seed(f, LOGIN, "0000");
+      var probe = new MaintenanceJdbcProbe();
+      probe.beforeDelete =
+          connection -> {
+            try (var query = connection.createStatement();
+                var row =
+                    query.executeQuery("select current_setting('statement_timeout') as actual")) {
+              assertTrue(row.next());
+              assertEquals("5s", row.getString("actual")); // Independent SQL postcondition.
+              assertFalse(row.next());
+            }
+          };
+      int[] observations = {0};
+      var result =
+          guarded(
+                  f,
+                  probe,
+                  () -> {
+                    observations[0]++;
+                    return 6_123_456_789L;
+                  })
+              .inspectNext(RUN, Optional.empty());
+      assertEquals(InspectionStep.Outcome.DELETED, result.outcome());
+      assertEquals("0", count());
+      assertEquals(8, observations[0]);
+      assertEquals(1, probe.deletes);
+      assertEquals(1, probe.commits);
+      assertEquals(0, probe.rollbacks);
+      assertEquals(1, probe.closes);
+    }
+  }
+
+  @Test
+  void inbox270ExpiredOwnerNeverClaimsRollbackAfterConfirmedCommit() throws Exception {
+    for (int failAt = 1; failAt <= 8; failAt++) {
+      reset();
+      try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+        seed(f, LOGIN, "0000");
+        int position = failAt;
+        int[] calls = {0};
+        var probe = new MaintenanceJdbcProbe();
+        var cleanup =
+            guarded(
+                f,
+                probe,
+                () -> {
+                  if (++calls[0] == position) throw new IOException("PRIVATE owner diagnostic");
+                  return 6_123_456_789L;
+                });
+        assertThrows(
+            InboxMaintenanceException.class, () -> cleanup.inspectNext(RUN, Optional.empty()));
+        assertEquals(failAt, calls[0]);
+        assertEquals(failAt == 8 ? "0" : "1", count());
+        assertEquals(failAt == 8 ? 1 : 0, probe.commits);
+        assertEquals(failAt >= 3 && failAt < 8 ? 1 : 0, probe.rollbacks);
+        assertEquals(failAt == 1 ? 0 : 1, probe.closes);
+        assertEquals(failAt <= 5 ? 0 : 1, probe.deletes);
+      }
+    }
+  }
+
+  @Test
+  void inbox271SqlTimeoutReadbackMustBeExactAndNeverMissing() throws Exception {
+    for (String fault : List.of("wrong", "missing", "extra", "io")) {
+      reset();
+      try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+        seed(f, LOGIN, "0000");
+        var probe = new MaintenanceJdbcProbe();
+        probe.selectedSql = "set_config";
+        if (fault.equals("wrong")) probe.columns.put("bound_timeout", "5001");
+        if (fault.equals("missing")) probe.empty = true;
+        if (fault.equals("extra")) probe.duplicate = true;
+        if (fault.equals("io")) probe.fault = "executeQuery";
+        assertThrows(
+            InboxMaintenanceException.class,
+            () -> guarded(f, probe, () -> 6_123_456_789L).inspectNext(RUN, Optional.empty()));
+        assertEquals("1", count());
+        assertEquals(0, probe.commits);
+        assertEquals(0, probe.deletes);
+        assertEquals(1, probe.rollbacks);
+        assertEquals(1, probe.closes);
+      }
+    }
+  }
+
+  private static InboxCleanup guarded(
+      AuthenticationInboxInspectorTest.Fixture f,
+      MaintenanceJdbcProbe probe,
+      MaintenanceOwnerFrame.Guard guard) {
+    return new InboxCleanup(
+        () -> probe.wrap(connection()),
+        f.inspector,
+        new NonAuthenticationInboxInspector(f.snapshots),
+        Set.of("v1"),
+        guard);
   }
 
   private static InboxCleanup service(AuthenticationInboxInspectorTest.Fixture f) {

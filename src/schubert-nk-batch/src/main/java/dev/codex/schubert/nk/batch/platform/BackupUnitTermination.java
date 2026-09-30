@@ -53,7 +53,7 @@ public final class BackupUnitTermination {
     Objects.requireNonNull(context, "root context");
     Objects.requireNonNull(expected, "root identity");
     Objects.requireNonNull(target, "closed phase");
-    require(expected.service() == RootStartupContext.Service.MORNING);
+    require(target.ownedBy(expected.service()));
     context.recheck(expected);
     return new BackupUnitTermination(
         () -> context.recheck(expected),

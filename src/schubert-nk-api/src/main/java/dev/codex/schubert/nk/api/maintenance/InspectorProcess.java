@@ -9,6 +9,8 @@ import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import dev.codex.schubert.nk.api.security.AuthContextCodec;
 import dev.codex.schubert.nk.api.security.ContextHash;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -33,6 +35,7 @@ public final class InspectorProcess {
   private final SqlConnectionProvider connections;
   private final Set<String> fingerprintVersions;
   private final LongSupplier clock;
+  private final Optional<MaintenanceOwnerFrame.Guard> parentGuard;
   private final AtomicBoolean started = new AtomicBoolean();
 
   public InspectorProcess(
@@ -51,6 +54,30 @@ public final class InspectorProcess {
       SqlConnectionProvider connections,
       Set<String> fingerprintVersions,
       LongSupplier clock) {
+    this(credentials, connections, fingerprintVersions, clock, Optional.empty());
+  }
+
+  /** Native assembly borrows the same authenticated owner throughout keys, SQL and receipts. */
+  public static InspectorProcess withParent(
+      InspectorCredentialLoader credentials,
+      SqlConnectionProvider connections,
+      Set<String> fingerprintVersions,
+      MaintenanceOwnerFrame.Guard guard) {
+    return new InspectorProcess(
+        Objects.requireNonNull(credentials, "credentials")::load,
+        connections,
+        fingerprintVersions,
+        System::nanoTime,
+        Optional.of(Objects.requireNonNull(guard, "parent guard")));
+  }
+
+  InspectorProcess(
+      CredentialSource credentials,
+      SqlConnectionProvider connections,
+      Set<String> fingerprintVersions,
+      LongSupplier clock,
+      Optional<MaintenanceOwnerFrame.Guard> parentGuard) {
+    this.parentGuard = Objects.requireNonNull(parentGuard, "parent guard profile");
     this.credentials = Objects.requireNonNull(credentials, "credentials");
     this.connections = Objects.requireNonNull(connections, "connections");
     this.clock = Objects.requireNonNull(clock, "clock");
@@ -68,8 +95,14 @@ public final class InspectorProcess {
       throw new IllegalStateException("inspector instance has already executed");
     if (Thread.currentThread().isInterrupted())
       return new InspectionExecution(InspectionExecution.Status.INTERRUPTED, Optional.empty());
+    checkParent();
     try (var keys = new OwnedKeys()) {
-      keys.load(credentials);
+      keys.load(
+          id -> {
+            checkParent();
+            return credentials.load(id);
+          });
+      checkParent();
       // Nullable previous values occur only at these existing, explicitly paired codec boundaries.
       try (var contexts =
               new AuthContextCodec(
@@ -82,10 +115,25 @@ public final class InspectorProcess {
                       keys.copies.get(RESPONSE_PREVIOUS))) {
         var auth = new AuthenticationInboxInspector(snapshots, contexts, new ContextHash());
         var queries = new NonAuthenticationInboxInspector(snapshots);
-        var cleanup = new InboxCleanup(connections, auth, queries, fingerprintVersions);
-        return new InspectionRunExecutor(cleanup, clock).run(run);
+        var cleanup =
+            parentGuard.isPresent()
+                ? new InboxCleanup(
+                    connections, auth, queries, fingerprintVersions, parentGuard.orElseThrow())
+                : new InboxCleanup(connections, auth, queries, fingerprintVersions);
+        var result = new InspectionRunExecutor(cleanup, clock, parentGuard).run(run);
+        checkParent();
+        return result;
       }
     }
+  }
+
+  private void checkParent() throws InspectorCredentialException {
+    if (parentGuard.isPresent())
+      try {
+        parentGuard.orElseThrow().check();
+      } catch (IOException unavailable) {
+        throw new InspectorCredentialException();
+      }
   }
 
   @FunctionalInterface

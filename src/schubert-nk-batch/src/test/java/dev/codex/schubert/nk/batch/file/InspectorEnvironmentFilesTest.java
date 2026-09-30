@@ -35,6 +35,49 @@ final class InspectorEnvironmentFilesTest {
   @TempDir Path temporary;
 
   @Test
+  void nativeOwnedRetirementOccursBeforeCallbackIntentAndCannotEscape() throws Exception {
+    InspectorEnvironmentFiles.Retirement[] saved = {null};
+    try (var f = fixture()) {
+      assertEquals(
+          "complete",
+          f.files.executeOwned(
+              RUN,
+              retirement -> {
+                assertEquals(RUNTIME, Files.readString(f.target));
+                saved[0] = retirement;
+                retirement.retire();
+                assertFalse(
+                    Files.exists(f.target)); // The caller's intent may only be retired after this.
+                assertThrows(StorageIoException.class, retirement::retire);
+                return "complete";
+              }));
+      assertThrows(StorageIoException.class, saved[0]::retire);
+      f.released();
+    }
+    for (String existing : List.of(NAME, RUN.id() + ".part"))
+      try (var f = fixture()) {
+        Files.writeString(f.maintenance.resolve(existing), existing.equals(NAME) ? RUNTIME : "old");
+        assertThrows(
+            StorageIoException.class,
+            () ->
+                f.files.executeOwned(
+                    RUN,
+                    retirement -> {
+                      fail("old namespace must not call child");
+                      return "bad";
+                    }));
+        assertTrue(Files.exists(f.maintenance.resolve(existing)));
+        f.released();
+      }
+    try (var f = fixture()) {
+      assertThrows(
+          StorageIoException.class, () -> f.files.executeOwned(RUN, retirement -> "not-retired"));
+      assertEquals(RUNTIME, Files.readString(f.target));
+      f.released();
+    }
+  }
+
+  @Test
   void prepareCallbackRetire() throws Exception {
     try (var f = fixture()) {
       assertEquals(
