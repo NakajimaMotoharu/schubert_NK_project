@@ -1,5 +1,7 @@
 # 290 実Cleanup・内部Inspector接続 実行結果（暫定・未受入）
 
+PG389全6の確定追補：Source8d5994e779bba71bd1e4c3c859241a84ff29e483、2026-09-30 17:48:13 JST、2,581PT/380suite F/E/S0/SpotBugs6各0。manifest `evidence/provisional/PG389-inspector-owner/manifest.json` SHA25695121fedbbbf919073793d0854178a24dd54bc8446d4c1a0e532f0c617b47ac5。host残B/L/M/C=408/1315/292/25、native coverage100%未達。BUG362のnative Inspector yes比較はこのSourceで未修正（汎用projectionはnoも解析する）、次Sourceでbaseline/heldだけを補強し独立no拒否を再試験する。BUG356～361の直接原因は全6の同Sourceで再確認、残nativeは引き続き未受入。installerは内容同hashのまま`tools/quality/vm/050_s1/pg389_provision_inspector.py`へ保管し、既配置VMで再実行しない。
+
 仕様289/SS341§7.3・343§6.17/SSC119。PG389のSource `24ed4e271e6e10d47302103969050f3d3f57e05e`（実装bab5bad44＋全回帰command固定）で、選択203PT/4module static0、2026-09-30 17:16:34 JSTを確認。共通CLOCK_MONOTONIC frame/golden、Root deadline IO/null、2Root親、普通Inspector自己＋別shell MainPIDのkernel/manager二回一致、DB DELETE/commit境界、型付き0/10・Inspector明示stop→全終端→reacquire→DB→env/owner→intentの順序をhost独立fixtureで試験。全6回帰/同byte nativeは実行中又は後続、未網羅100%を認定しない。Source六回帰manifestで結果を確定する。
 
 ## 隔離VMの接続前環境
