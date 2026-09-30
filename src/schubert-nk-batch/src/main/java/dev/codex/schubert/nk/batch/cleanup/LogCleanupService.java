@@ -17,6 +17,7 @@ import org.jspecify.annotations.Nullable;
 public final class LogCleanupService {
   private static final long LIMIT_NANOS = 1_800_000_000_000L;
   private final LongSupplier clock;
+  private final MaintenanceMutationGuard mutation;
 
   public LogCleanupService() {
     this(System::nanoTime);
@@ -24,6 +25,17 @@ public final class LogCleanupService {
 
   LogCleanupService(LongSupplier clock) {
     this.clock = Objects.requireNonNull(clock, "clock");
+    mutation = new MaintenanceMutationGuard();
+  }
+
+  public static LogCleanupService withOwner(
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) {
+    return new LogCleanupService(new MaintenanceMutationGuard(owner));
+  }
+
+  private LogCleanupService(MaintenanceMutationGuard mutation) {
+    clock = System::nanoTime;
+    this.mutation = mutation;
   }
 
   public LogCleanupSummary execute(Connection connection, BatchRun run) {
@@ -58,6 +70,7 @@ public final class LogCleanupService {
   }
 
   private void check(long start) {
+    mutation.check();
     if (Thread.currentThread().isInterrupted())
       throw new CleanupStoppedException(CleanupStopReason.INTERRUPTED);
     long elapsed = clock.getAsLong() - start;
@@ -111,11 +124,15 @@ public final class LogCleanupService {
         || failure instanceof CleanupStoppedException;
   }
 
-  private static ChunkProgress transaction(
+  private ChunkProgress transaction(
       Connection c, BatchRun run, Optional<CleanupCounts> expectedBefore) throws SQLException {
+    mutation.check();
     c.setAutoCommit(false);
     ChunkProgress result;
+    boolean committed = false;
     try {
+      mutation.bind(c);
+      mutation.check();
       var repository = new CleanupRepository(c);
       var chunk = repository.execute(run, CleanupKind.LOGS, 10000);
       if (chunk.reason() == CleanupReason.LOCK_BUSY)
@@ -136,8 +153,12 @@ public final class LogCleanupService {
       if (expectedBefore.isPresent() && !expectedBefore.orElseThrow().equals(before))
         throw new SQLDataException("chunk progress changed unexpectedly");
       result = new ChunkProgress(before, progress);
+      mutation.check();
       c.commit();
+      committed = true;
+      mutation.check();
     } catch (SQLException | RuntimeException failure) {
+      if (committed) throw failure; // Caller disposes the connection; the chunk remains durable.
       try {
         c.rollback();
       } catch (SQLException rollbackFailure) {

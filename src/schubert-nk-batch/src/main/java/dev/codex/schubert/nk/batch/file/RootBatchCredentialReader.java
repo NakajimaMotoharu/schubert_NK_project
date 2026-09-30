@@ -66,6 +66,18 @@ public final class RootBatchCredentialReader {
     }
   }
 
+  public dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame readMaintenanceOwner()
+      throws IOException {
+    try {
+      return dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.consume(
+          readBytes(
+              "maintenance-owner",
+              dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.MAXIMUM_BYTES));
+    } catch (IllegalArgumentException invalid) {
+      throw new IOException("root maintenance owner unavailable");
+    }
+  }
+
   public InspectorDbCredential readMaintenanceMq() throws IOException {
     return InspectorDbCredential.consume(readBytes("mq-maintenance", 65536));
   }

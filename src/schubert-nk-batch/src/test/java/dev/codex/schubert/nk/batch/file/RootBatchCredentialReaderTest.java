@@ -12,6 +12,45 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RBCR001..012. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
 final class RootBatchCredentialReaderTest {
+  @Test
+  void rbcr013FixedOwnerCopyIndependentLiteralAndBoundedFailure() throws Exception {
+    String literal =
+        "NKMAINTOWNER1\nboot=31100027-3333-4333-8444-555555555555\n"
+            + "run=31100027-2222-4333-8444-555555555555\nactivation=31100027-6666-4777-8888-999999999999\n"
+            + "cutoff=2026-09-27T15:00:00Z\nepoch=31100027-4444-4333-8444-555555555555\n"
+            + "morning_invocation=11111111111111111111111111111111\nmorning_pid=200\nmorning_start_ticks=100\n"
+            + "cleanup_invocation=-\ncleanup_pid=-\ncleanup_start_ticks=-\ndeadline_nanos=1800000000001\n";
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("maintenance-owner"), literal);
+      f.chunk = 3;
+      var owner = reader(f).readMaintenanceOwner();
+      assertEquals("31100027-2222-4333-8444-555555555555", owner.run().toString());
+      assertEquals(200L, owner.morning().pid());
+      assertEquals(100L, owner.morning().startTicks());
+      assertEquals(1800000000001L, owner.deadlineNanos());
+      assertTrue(owner.cleanup().isEmpty());
+      success(f);
+      f.released();
+    }
+    for (String invalid :
+        List.of(
+            "",
+            literal.replace("NKMAINTOWNER1", "NKMAINTOWNER2"),
+            literal + "\n",
+            "X".repeat(1025))) {
+      try (var f = fixture()) {
+        Files.writeString(f.parent.resolve("maintenance-owner"), invalid);
+        var failure = assertThrows(IOException.class, () -> reader(f).readMaintenanceOwner());
+        assertFalse(failure.toString().contains("NKMAINTOWNER"));
+        f.released();
+      }
+    }
+    try (var f = fixture()) {
+      assertThrows(IOException.class, () -> reader(f).readMaintenanceOwner());
+      f.released();
+    }
+  }
+
   @TempDir Path temporary;
   private static final String CLEANUP_REQUEST =
       "NKCLEAN1\n"

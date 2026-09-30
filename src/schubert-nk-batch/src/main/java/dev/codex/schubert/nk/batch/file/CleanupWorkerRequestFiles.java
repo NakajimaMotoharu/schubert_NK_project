@@ -5,6 +5,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -23,6 +24,19 @@ public final class CleanupWorkerRequestFiles {
   private final String name;
   private final int maximum;
   private final boolean expiry;
+  private final Optional<OwnerSource> ownerSource;
+
+  /** Closed source names only, not arbitrary paths or root authorization. SSC119. */
+  public enum OwnerSource {
+    PARENT("maintenance-owner"),
+    INSPECTOR("inspector-owner");
+    private final String name;
+
+    OwnerSource(String name) {
+      this.name = name;
+    }
+  }
+
   private final Object lock = new Object();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
@@ -45,14 +59,70 @@ public final class CleanupWorkerRequestFiles {
       InodeSecurityCalls security,
       InspectorEnvironmentPublisher.Io io,
       boolean expiry) {
+    this(root, security, io, expiry, Optional.empty());
+  }
+
+  private CleanupWorkerRequestFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      boolean expiry,
+      Optional<OwnerSource> ownerSource) {
     this.root = Objects.requireNonNull(root, "fixed request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "request IO");
     policy = new EnvironmentInodePolicy(security, io);
     this.expiry = expiry;
-    name = expiry ? "expiry-request" : "cleanup-request";
+    this.ownerSource = ownerSource;
+    name =
+        ownerSource.map(value -> value.name).orElse(expiry ? "expiry-request" : "cleanup-request");
     maximum =
-        expiry ? CleanupWorkerRequest.Expiry.MAXIMUM_BYTES : CleanupWorkerRequest.MAXIMUM_BYTES;
+        ownerSource.isPresent()
+            ? MaintenanceOwnerFrame.MAXIMUM_BYTES
+            : expiry
+                ? CleanupWorkerRequest.Expiry.MAXIMUM_BYTES
+                : CleanupWorkerRequest.MAXIMUM_BYTES;
+  }
+
+  public static CleanupWorkerRequestFiles forOwner(
+      OwnedTransferDirectory root, InodeSecurityCalls security, OwnerSource source) {
+    return forOwner(root, security, new InspectorEnvironmentPublisher.NioIo(), source);
+  }
+
+  static CleanupWorkerRequestFiles forOwner(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      OwnerSource source) {
+    return new CleanupWorkerRequestFiles(
+        root,
+        security,
+        io,
+        false,
+        Optional.of(Objects.requireNonNull(source, "fixed owner source")));
+  }
+
+  public void prepareOwner(MaintenanceOwnerFrame owner, UUID part) throws StorageIoException {
+    requireOwnerProfile(owner);
+    prepareBytes(owner.encode(), part);
+  }
+
+  public MaintenanceOwnerFrame readOwner() throws StorageIoException {
+    require(ownerSource.isPresent());
+    var owner = MaintenanceOwnerFrame.consume(readBytes());
+    requireOwnerProfile(owner);
+    return owner;
+  }
+
+  public void retireOwner(MaintenanceOwnerFrame owner) throws StorageIoException {
+    requireOwnerProfile(owner);
+    retireBytes(owner.encode());
+  }
+
+  private void requireOwnerProfile(MaintenanceOwnerFrame owner) throws StorageIoException {
+    Objects.requireNonNull(owner, "same owner claim");
+    require(ownerSource.isPresent());
+    require(owner.cleanup().isPresent() == (ownerSource.orElseThrow() == OwnerSource.INSPECTOR));
   }
 
   public static CleanupWorkerRequestFiles forExpiry(
@@ -87,7 +157,7 @@ public final class CleanupWorkerRequestFiles {
 
   public void prepare(CleanupWorkerRequest request, UUID part) throws StorageIoException {
     Objects.requireNonNull(request, "root request");
-    require(!expiry);
+    require(!expiry && ownerSource.isEmpty());
     prepareBytes(request.encode(), part);
   }
 
@@ -134,7 +204,7 @@ public final class CleanupWorkerRequestFiles {
   }
 
   public CleanupWorkerRequest read() throws StorageIoException {
-    require(!expiry);
+    require(!expiry && ownerSource.isEmpty());
     return CleanupWorkerRequest.consume(readBytes());
   }
 
@@ -169,7 +239,7 @@ public final class CleanupWorkerRequestFiles {
   /** Only after actual full Unit termination; source equality does not establish that condition. */
   public void retire(CleanupWorkerRequest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "original request");
-    require(!expiry);
+    require(!expiry && ownerSource.isEmpty());
     retireBytes(expected.encode());
   }
 

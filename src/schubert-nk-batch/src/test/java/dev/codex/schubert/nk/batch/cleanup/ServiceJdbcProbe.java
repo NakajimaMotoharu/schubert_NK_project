@@ -34,7 +34,9 @@ final class ServiceJdbcProbe {
                         ? "lock"
                         : sql.contains("pg_advisory_unlock")
                             ? "unlock"
-                            : sql.contains("maintenance_cleanup_logs") ? "cleanup" : "progress";
+                            : sql.contains("set_config('statement_timeout'")
+                                ? "timeout"
+                                : sql.contains("maintenance_cleanup_logs") ? "cleanup" : "progress";
                 check(stage + ".prepareStatement");
                 return statement((PreparedStatement) invoke(connection, m, a), stage);
               }
@@ -85,7 +87,7 @@ final class ServiceJdbcProbe {
             (p, m, a) -> {
               String name = m.getName();
               if (!name.equals("close")) check(stage + "." + name);
-              if (name.equals("getObject")
+              if ((name.equals("getObject") || name.equals("getString"))
                   && a[0] instanceof String column
                   && columns.containsKey(stage + "." + column))
                 return columns.get(stage + "." + column);

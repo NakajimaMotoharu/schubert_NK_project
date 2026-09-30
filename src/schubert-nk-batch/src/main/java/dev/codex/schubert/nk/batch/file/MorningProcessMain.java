@@ -49,8 +49,13 @@ public final class MorningProcessMain {
     executeBackup(budget, Optional.empty());
   }
 
-  private static void executeBackup(MorningParentBudget budget, Optional<UUID> runId)
+  private static void executeBackup(MorningParentBudget entryBudget, Optional<UUID> runId)
       throws IOException {
+    var entryRoot = RootStartupContext.create();
+    var entrySnapshot = entryRoot.capture(RootStartupContext.Service.MORNING);
+    var budget =
+        MorningParentBudget.borrow(
+            entryRoot.maintenanceDeadline(entrySnapshot, entryBudget.deadlineNanos()));
     MorningBackupStage.VerifiedEpochWork<MorningBackupUnitCycle.Outcome> work =
         (state, database, epoch, request, begins, part, original, completion) -> {
           var root = RootStartupContext.create();

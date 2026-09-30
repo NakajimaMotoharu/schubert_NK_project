@@ -1,5 +1,7 @@
 # 289 実Cleanup・内部Inspector接続（実装前）
 
+PG390追加host観点（SSC119）：COWNERFILE001/002は固定NKMAINTOWNER1の手書きliteralから親/Inspector専用file名、profile違反、new-only衝突、異claim退役拒否、全IO故障位置/closeを検証する。RBCR013は専用private copy名/最大1024/不正codec/欠落を独立literalで試験。MGUARD001..003は実PGで残1.999/2.999/5.999/30秒→1/2/5/5sとtransaction-local終了後role元設定30minを検証し、不正返値/null/未知例外も拒否する。Step guardの独立1～10境界（9/10だけ既commit）、Logの1～9境界（8/9だけ既commit）で保存行とcommit/rollbackを確認し、期限後をrollback済と表記しない。BUG363境界3は開始前なのでrollback0、TIME_LIMIT。native共通期限/実Unit/PT全coverageは別未完条件。
+
 Program NK-OPS-001/NK-BAT-001/NK-DAT-001。CleanupProcessMain、CleanupDatabaseSession、InspectorLockHandoff、InspectorEnvironmentFiles、固定Unit engine、InspectionSummaryRepository、InspectionAttempt、StepCleanupService/LogCleanupService/TransferCleanup。RD OPS009/BAK001/DAT009、UI251、SS331/341§7/343、QA046回答済、SSC119/117/118。
 
 PT-OPS-CEXEC001：真正Morning M/A/原本/boot/Epoch/親budget・実Backup成果のfixtureを用い外部Mainから一度Cleanupを起動する。child専用schubert_batch/advisory取得、通知→質問→session→Inbox/Outbox→Log→BatchRun→Transferの固定順。全terminal rowは実DB commit後の独立SQL全列と比較する。BEGIN/未実行をSUCCESS/SKIPPEDとして補完しない。

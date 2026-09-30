@@ -15,6 +15,50 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT170..177. */
 final class StepCleanupServiceTest {
+  @Test
+  void sharedOwnerBoundaryRejectsBeforeCommitButNeverClaimsDurableChunkRollback() throws Exception {
+    assertThrows(NullPointerException.class, () -> StepCleanupService.withOwner(null));
+    for (int rejected = 1; rejected <= 10; rejected++) {
+      reset(db);
+      int boundary = rejected;
+      var calls = new AtomicInteger();
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner =
+          () -> {
+            if (calls.incrementAndGet() == boundary) throw new java.io.IOException("PRIVATE_OWNER");
+            return 10_000_000_000L;
+          };
+      try (var c = locked(db, true);
+          var admin = db.admin()) {
+        var probe = new ServiceJdbcProbe();
+        var failure =
+            assertThrows(
+                CleanupStoppedException.class,
+                () ->
+                    StepCleanupService.withOwner(owner)
+                        .execute(
+                            probe.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
+        assertEquals(CleanupStopReason.TIME_LIMIT, failure.reason(), "owner boundary=" + boundary);
+        assertNull(failure.getCause());
+        assertFalse(failure.toString().contains("PRIVATE_OWNER"));
+        boolean durable = boundary >= 9;
+        assertEquals(
+            durable ? "RUNNING|1|1|0|0|true" : "RUNNING|0|0|0|0|true", totals(admin, 90011));
+        assertEquals(durable ? 1 : 0, probe.commits);
+        if (durable) assertEquals(0, probe.rollbacks);
+        assertEquals(0, probe.closes);
+      }
+    }
+    reset(db);
+    try (var c = locked(db, true);
+        var admin = db.admin()) {
+      var result =
+          StepCleanupService.withOwner(() -> 10_000_000_000L)
+              .execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS);
+      assertEquals(new CleanupCounts(1, 1, 0), result.after());
+      assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
+    }
+  }
+
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final long LIMIT = 1_800_000_000_000L;

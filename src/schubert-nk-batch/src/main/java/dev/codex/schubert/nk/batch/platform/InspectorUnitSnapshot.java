@@ -215,6 +215,7 @@ public final class InspectorUnitSnapshot {
   boolean inactiveBaseline() {
     return value("ActiveState").equals("inactive")
         && value("SubState").equals("dead")
+        && (target != Target.INSPECTOR || value("RemainAfterExit").equals("yes"))
         && quiescent();
   }
 
@@ -227,6 +228,7 @@ public final class InspectorUnitSnapshot {
 
   boolean heldMaintenance() {
     return (target == Target.CLEANUP || target == Target.INSPECTOR)
+        && value("RemainAfterExit").equals("yes")
         && value("ActiveState").equals("active")
         && value("SubState").equals("exited")
         && quiescent();

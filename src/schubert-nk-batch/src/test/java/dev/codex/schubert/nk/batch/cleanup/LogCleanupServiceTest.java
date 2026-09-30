@@ -14,6 +14,45 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS341/SSC-051; PG-D-138; PT-BAT-018..029. */
 final class LogCleanupServiceTest {
+  @Test
+  void sharedOwnerBoundedTransactionAndActualPostcommitDeadline() throws Exception {
+    assertThrows(NullPointerException.class, () -> LogCleanupService.withOwner(null));
+    for (int rejected = 1; rejected <= 9; rejected++) {
+      reset();
+      int boundary = rejected;
+      var calls = new AtomicInteger();
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner =
+          () -> {
+            if (calls.incrementAndGet() == boundary) throw new java.io.IOException("PRIVATE_OWNER");
+            return 10_000_000_000L;
+          };
+      try (var c = batch()) {
+        var probe = new ServiceJdbcProbe();
+        var failure =
+            assertThrows(
+                CleanupStoppedException.class,
+                () -> LogCleanupService.withOwner(owner).execute(probe.wrap(c), RUN));
+        assertEquals(CleanupStopReason.TIME_LIMIT, failure.reason());
+        assertNull(failure.getCause());
+        boolean durable = boundary >= 8;
+        if (durable) assertEquals("0|0|0|true", progress());
+        else
+          try (var admin = db.admin()) {
+            assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+          }
+        assertEquals(durable ? 1 : 0, probe.commits);
+        if (durable) assertEquals(0, probe.rollbacks);
+        assertEquals(0, probe.closes); // The caller, never the service, owns the connection.
+      }
+    }
+    reset();
+    try (var c = batch()) {
+      assertEquals(
+          0, LogCleanupService.withOwner(() -> 10_000_000_000L).execute(c, RUN).exitCode());
+      assertEquals("0|0|0|true", progress());
+    }
+  }
+
   @TempDir static Path root;
   private static BatchDatabaseFixture db;
   private static final BatchRun RUN =

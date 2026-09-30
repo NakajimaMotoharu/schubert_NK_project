@@ -15,6 +15,7 @@ import org.jspecify.annotations.NullMarked;
 public final class StepCleanupService {
   private static final long LIMIT_NANOS = 1_800_000_000_000L;
   private final LongSupplier clock;
+  private final MaintenanceMutationGuard mutation;
 
   public StepCleanupService() {
     this(System::nanoTime);
@@ -22,6 +23,17 @@ public final class StepCleanupService {
 
   StepCleanupService(LongSupplier clock) {
     this.clock = Objects.requireNonNull(clock, "clock");
+    mutation = new MaintenanceMutationGuard();
+  }
+
+  public static StepCleanupService withOwner(
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) {
+    return new StepCleanupService(new MaintenanceMutationGuard(owner));
+  }
+
+  private StepCleanupService(MaintenanceMutationGuard mutation) {
+    clock = System::nanoTime;
+    this.mutation = mutation;
   }
 
   public StepCleanupSummary execute(
@@ -56,12 +68,16 @@ public final class StepCleanupService {
     }
   }
 
-  private static CleanupStepChunk transaction(
+  private CleanupStepChunk transaction(
       Connection c, BatchStepAttempt attempt, CleanupKind kind, Optional<CleanupCounts> expected)
       throws SQLException {
     CleanupStepChunk chunk;
+    boolean committed = false;
+    mutation.check(); // BUG363: no transaction exists yet; refusal must never attempt rollback.
     try {
       c.setAutoCommit(false);
+      mutation.bind(c);
+      mutation.check();
       chunk = new CleanupStepRepository(c).execute(attempt, kind, 1000);
       if (chunk.reason() == CleanupStepChunk.Reason.LOCK_BUSY)
         throw new CleanupStoppedException(CleanupStopReason.LOCK_BUSY);
@@ -69,8 +85,12 @@ public final class StepCleanupService {
         throw new CleanupStoppedException(CleanupStopReason.BACKUP_GATE);
       if (expected.isPresent() && !expected.equals(chunk.beforeCounts()))
         throw new SQLDataException("step cleanup counters changed unexpectedly");
+      mutation.check();
       c.commit();
+      committed = true;
+      mutation.check();
     } catch (SQLException | RuntimeException | Error failure) {
+      if (committed) throw failure; // Durable chunks are NOT represented as rolled back.
       try {
         c.rollback();
         c.setAutoCommit(true);
@@ -96,6 +116,7 @@ public final class StepCleanupService {
   }
 
   private void check(long start) {
+    mutation.check();
     if (Thread.currentThread().isInterrupted())
       throw new CleanupStoppedException(CleanupStopReason.INTERRUPTED);
     long elapsed = clock.getAsLong() - start;

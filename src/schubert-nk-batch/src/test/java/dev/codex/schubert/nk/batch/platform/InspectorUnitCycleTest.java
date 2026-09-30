@@ -34,6 +34,38 @@ final class InspectorUnitCycleTest {
       """;
 
   @Test
+  void nativeReceiptRejectsOldNoRemainButGenericProjectionStillParsesIt() throws Exception {
+    var state =
+        new java.util.concurrent.atomic.AtomicReference<>(
+            parse(BASE.replace("RemainAfterExit=yes", "RemainAfterExit=no")));
+    var gate =
+        new BackupUnitReceiptGate(
+            () -> {},
+            () -> Optional.of(state.get()),
+            () -> Optional.of(state.get()),
+            BackupUnitStartClient.Target.INSPECTOR);
+    assertThrows(IOException.class, gate::capture); // Cold profile fails before any start/intent.
+    state.set(parse(BASE));
+    var before = gate.capture();
+    state.set(
+        parse(
+            BASE.replace("ActiveState=inactive", "ActiveState=active")
+                .replace("SubState=dead", "SubState=exited")
+                .replace("RemainAfterExit=yes", "RemainAfterExit=no")
+                .replace("InvocationID=\n", "InvocationID=" + "1".repeat(32) + "\n")
+                .replace("ExecMainCode=0", "ExecMainCode=1")
+                .replace("ExecMainStatus=0", "ExecMainStatus=10")
+                .replace(
+                    "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=12345")
+                .replace(
+                    "ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=23456")));
+    assertEquals(
+        java.util.OptionalInt.of(10),
+        state.get().receiptAfter(Optional.empty())); // Observation, not native authority.
+    assertEquals(Optional.empty(), gate.observeResult(before));
+  }
+
+  @Test
   void genuineFreshZeroAndWarningSurviveGcOnlyAfterExplicitWholeStop() throws Exception {
     for (int code : List.of(0, 10)) {
       var f = new Fixture(code, "");
