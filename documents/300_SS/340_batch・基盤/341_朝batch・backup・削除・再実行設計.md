@@ -309,6 +309,12 @@ SSC-051/PG-D-136のCLEAN_LOG再開: 331 §3.9の永続cursor/累積を使い、�
 
 ### 7.3 非公開Inbox検査process（SSC-049/QA-046）
 
+SSC119（2026-09-30、S2実caller接続前）：真正Cleanup childは自身のschubert_batch専用connectionを保持する。Inspector開始前に同run summaryを読取り、InspectorEnvironmentFilesのRoot所有同run環境をnew-only公開する。既存固定Unit engineの閉鎖INSPECTOR選択だけをCLEANUP actorへ許可し、任意Unit/pathやMorning全停止権限を渡さない。`/run/schubert-nk/cleanup-request/inspector-start.intent`をRoot0600で先行durable公開する（cleanup-start.intent/cleanup-requestと別entry）。親Morningが保持するM/A・同原本・現boot/Epoch・元の30分deadlineの条件を引き継ぎ、Cleanup/Inspector自身の起動から30分を再計時して延長しない。実削除の前後にも親生存・固定identity/deadlineを検査し、親死亡/期限を正常続行しない。
+
+Inspectorは結果保持のRemainAfterExit=yesとし、開始前inactive/dead・前Invocation、開始後fresh Invocation・正常0/10・開始終了monotonic・全kernel process空を前後再読する。client0や古いDB ENDを子未実行の代替にしない。InspectorLockHandoff callback内で真正Unit終端を待ち、typed receiptを保持して固定Inspectorだけ明示stop/全終端を確認する。子の未知状態はcallback正常復帰を禁止する。子終了後Cleanupの自己advisory再取得が成立してから、同run summaryのEND/全累積とreceipt0/10をInspectionAttemptで独立照合する。環境/Inspector intentは同原本・parent/deadline・DB再読・全終端後だけ退役する。後続のCleanup active/exited保持（Artemis Requiresによる再実行防止）とは停止方針を分ける。未知状態のmarkerを削除・repairして起動可へ戻さない。
+
+Cleanupは固定Backup rootを真正PID1 host-viewのread-only能力で検証できるが、mutation capabilityに昇格しない。UnitのRW許可は固定Transfer rootとInspector環境/intentのruntimeだけとし、Backup/config/credential全体へ書込権限を増やさない。元SUCCESS成果と今回SKIPPEDの参照はSSC116/117のまま分離する。全Cleanup・Artemis・Expiry/issuer接続と実証が閉じるまで、この補足だけでPG/PT完了にしない。
+
 SSC049/PG162（先行d23b1afd）の親summary・attempt照合: 子へのDB引渡し前に331 §3.13の同run summaryをOptionalで読み、未開始0行は「未開始」として保持する。子のfresh起動・実終端・wrapper結果を別途確認してDB lockを再取得した後、同run/cutoffのsummaryを再読する。after不存在/未END/別identity、receiptが0/10以外、保護あり累積とreceipt10の不一致は非成功。beforeが存在すれば同identityで全3累積の非減少が必須。before既ENDならafterのcounts/ENDが完全不変でなければ非成功。attemptはafter累積−before累積（before不存在の差分基準だけ0）、run累積と分けて記録する。既完了再開のattempt0でも累積保護ありならWARNING10を維持する。現在時刻/推測cursor/receiptだけから件数を補完しない。純照合関数は不正を固定IllegalArgumentException、nullは契約違反とし、引数値を診断へ出さない。返却型もattempt各値<=cumulative、0/10と累積保護の整合をconstructorで保持する。実子unit・OS排他・実backup/親step記録の接続は引き続き別必須条件。
 
 UIC-006の検査をbackup成功後のcleanup内部で実施する。通常API/Web inactive条件、固定run/cutoff、backup gateを維持する。検査中はHTTP/JMS Consumerを生成せず、DB snapshot/参照の検査だけを行う。batchのadvisory lockを別connectionから二重取得して自己deadlockさせないよう、検証・削除chunkのconnection/lock所有者を実装前に明示する。検査前後のlock断絶や他runの結果流用を許可しない。異常行は削除せず固定理由・件数だけを返し、暗号文・平文・鍵をbatchへ渡さない。SQL/権限/oneshot wiringのPT完了まで本stepを完了扱いしない。
