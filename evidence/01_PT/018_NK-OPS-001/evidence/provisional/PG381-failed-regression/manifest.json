@@ -1,0 +1,1686 @@
+{
+  "id": "PG381-failed-regression",
+  "formal": false,
+  "sourceCommit": "a3eb64c71ca6a09ecc7c414e14be15aa66a65c8d",
+  "branch": "dev-foundation",
+  "exitCode": 1,
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "fixed JDK/Node/m2; all Production6 clean test spotbugs:check jacoco:report jar:jar dependency:copy-dependencies dependency:list",
+  "logSha256": "c95d036ad60a5c551841ad4ed311481896ba264d4de51b55ce89a3e94f0e16d4",
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 17,
+      "staticFindings": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1272
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      }
+    },
+    "storage": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 21,
+      "staticFindings": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5688
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 485
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1076
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 480
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 237
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 35
+        }
+      }
+    },
+    "bootstrap": {
+      "tests": 181,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 23,
+      "staticFindings": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 70,
+          "covered": 8922
+        },
+        "BRANCH": {
+          "missed": 37,
+          "covered": 859
+        },
+        "LINE": {
+          "missed": 13,
+          "covered": 1671
+        },
+        "COMPLEXITY": {
+          "missed": 42,
+          "covered": 728
+        },
+        "METHOD": {
+          "missed": 5,
+          "covered": 317
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 49
+        }
+      }
+    },
+    "api": {
+      "tests": 756,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 125,
+      "staticFindings": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 95,
+          "covered": 34892
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 2819
+        },
+        "LINE": {
+          "missed": 32,
+          "covered": 7609
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 2587
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 1130
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 245
+        }
+      }
+    },
+    "web": {
+      "tests": 565,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 89,
+      "staticFindings": 0,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 80,
+          "covered": 21489
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1695
+        },
+        "LINE": {
+          "missed": 25,
+          "covered": 4880
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 1831
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 970
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 191
+        }
+      }
+    },
+    "batch": {
+      "tests": 805,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 96,
+      "staticFindings": "NOT-RUN",
+      "coverage": "NOT-RUN"
+    }
+  },
+  "bugs": [
+    "BUG-336"
+  ],
+  "ssc": [
+    "SSC-111"
+  ],
+  "expected": "SSC111 root limited2cap, strict/ambient empty, all F/E/S0/static0; actual native separately required",
+  "actual": "one outdated Cleanup Unit oracle failure; Batch static/coverage/package not run; no formal/VM success",
+  "redaction": "JUnit properties/stdout/stderr/raw assertion/secret omitted; no credential/dump/key",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "12cf77b16ff24339bb1a75a864744c9ff815ec0041d5c1fbf88539493a936826"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "b92aec825238a96b0977d6f9d7cd22d6137bb1946f85818fc14ae352dd9c4d03"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "d6a3d0933159b68c10c8e1872d5d27678729bd753adf80d8cca029c77286ac3b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "ee5726fb652b7d7010c9312a9c1b7d6aca2529d7dd7172d407c30d9dbe09ab96"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "ed8766b2c1e93bfbf5bee10784f7e685a660eb757e352329e2476e7135dbc6f0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "4be5eef4e8c573ce7fdd0e82a613ece788f5ac01ce667644c215ebf52f03c5e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "1f5664e1c38a3691399893d94d2ee3c1ea23af0ba2d831ece7ece6a323410fb3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "e06498af66c1f4e8ee38c556eb08fa878f797a2d532a04d74193aa59f5a2880a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "7840b408fbfa5e6330fdf457fa2da7f839cf4583834ee00c9f71e97d24c47e24"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "e1dbd8c7c14fb72ab17c4c46dbc6cb60da78d299b0c92e09073549eeeda07d29"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "b2d2f449f481335586ade79930cd9fbeb5b9147a5ed9a0795d441917a9fded6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "e4c871895bc26c0e80d638d970fedbd2732170fd5a0908f2b378910ff0ab8625"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "e19fcbe773812e3842bb455a769500e476df0963b7d4fd2c5671845b5e044ceb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "27a8176926dcc390646ad75e3642366867a65a0da6d44a7ed3210789ce3d7372"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "339cb937d1c4ad1a57cce7682c52471eae3b7cab22705389a8711b717cbce86f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "0cb494d370ba03296df9a2d91da8a6fc2cdee5d2494a20db29980d4bcf9db65a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "cf3ce7482e8929a498f9fa7b831ac5677bdd264ca25d08a9686602a421d72d79"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "01b9ca14a87e021b833521dbcc2c4f14ef9cd1868e060f2a38f19f4277a00ac8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "eb88b9de9f0a9f26e0e93caa2b83c329f6fd7103d040f8974d3fc6fa81d83ed8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "ce34e31def288b77e2ffebed9a3191bb378558b16227543a8bd951b4098ea8cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "5a8d0b271e83bdd2e7dca5704db43d6a8537d1a0a7b9fe428458dd0ba69a7928"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "3b93696daf4061d0b3b9a8d55669a2b0449ff47a0619eb4e727acf3c868e4b88"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "75976f78d8335f11c2a18ca4b95d97ea03bb91367be27b5d43228002559b1ffb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "d3dfeb02ff33eb9f545a09fd17d933a4978c99c14ebcae35b8c3b3b3ae537f93"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "50b3754dee8314e8962cc33e49852549e4f39e69db381d278e247db600a2e3e5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "7a70cb9c63312863ec2ebd6ee24bab4c02e7378ac9d79996bc59df0f91ccd147"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "3574598ad208bf1e7b6d26a58c9759e6d12c07e5fcdd648ef95890094167d700"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "b99ce77f1f01a3e73b61abbeaafae9766fa3e2abbedbd6c1b65d695c58c9b42b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "cfb24f66a8309a9a154db588322f329d759140d3c2be70807d990cd8363ddf66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "e552cfa913cd907c1e9f113a237626f6a857776f6873ed90e8880c82c82c1bcf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "096f99ba6fb70bbe10c7ec7416dd15dbafa076ca3c4ff205c55e57e2599e4b72"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "db6eca34d9e68c15caf94d2a6eee2890cd4970aa51332031be441f2ecdc0d806"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "ad09cfdefb30e0767165c8f63f342c8079033fba2ac9aa0046fa569459af9ac2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "7fb2495bf2a1255c4b35a206cff96426f1214d053e28fe87a50bc5e43f990f1b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest.xml",
+      "sha256": "c3553f406a0e78c6f4803d61acd70e2e691703581e8447b8db798564f0e15163"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "df9baace4662cbe01d5bfc5bb5fcb0823725e706fe7c3c89ec37c10e82fa18e4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "8373756c7e8651e4e9d2f04d29cf4b69f9a86d9f67f52ad4adc39acb8d5e7d1e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "dbf3cbda613fe7800ebe89af73f63aff6fae2547b3f38dbe65cfe9f3fed333b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "8f55fb6d80c0c2e137eb4ebf3491e142edfe8b77253e5c1efef1fc8784cee608"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "39befb9fa1b3e54af1a62add8c42dde25015706fcd914b5cb1f72d6b8e02cf20"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "5cc5c46c14423995c2680ed99ef09d43a660f4dd4c9f04fc6a1c5d8c441ab6a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "19a0417a0075e623eff70e2692fd3536ddc7625f06827c6b8a58af974a709dd7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "caa739ee418bbf846579d2e124711303af977c1235b8ba8a985c8e47271c4db1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "c65a0422a80100b36be1e0a7ff7962f61904da00207f185fe81c15b1c2cb320a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "bd04a5a41536f271c04effb77b2ef95476889f1bb3935c294fc4dec8eeafc226"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "d1a55764af28ccb8bf4f66a68e4e8e9fc116e242532c13bad2699e1b31504400"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "3877389bf34d2bbdf4cf3ab8060afcae0f3e7c04aaafa26e81c455538c120b1d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "21d7f5a059a2580654ea67bc5b03e438c2a73cfd3084834f78439badfdcd4696"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "b91cd568a6bf29d27ce4bbe84dc81970949238647d99be6dd2cc89da76353b56"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "29ff24b7da97a440bd27bab7ecb89d527af89d73d927cff675b7a4648bcbc36c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "0606e8a98993095d524ebdae0b6804ed58e092caf1b1c5bf21989ae7d4a2f76e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "b826c9a065de499fffcf97fa7c7c3b060fd6763402326e6f013c3b0f954b420a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "82c0da3d3fdbcde59d6578f73cabdc6c101d4ec2c394ef707f845eb71cd93066"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "b970239d3a0c80f2b142dc1f333268ba8f9114b8010bbe1332276c4991d28553"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "945323d2d28b46cf676b813ab55ec23b90ae787ddd2ea22b812bcc16dcae9497"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "ce9410680791722fabceedea44bef118e919f9c32bb1c76a4c4cb2fbc01d5293"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "efc99139ca499b31f185b410fc6f3da9709a8396b9cd5524992d03f57f8e53e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "8500ef8f076b6aef96c45707b65c82034dc94d0f71b26cc8e51d1408ae6f2151"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "586cb5750821aab36c1dd67a32b6aff68e496e8530ef15cdacc0c4f6b32b4da3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "d0f6e43047337dc43ef6864423e3b4f857f2fe8470b9c53e89ee6ab1cebe9a23"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "3a5ff1370f253f2011d9fed1af1a3f1fd7d70c0c2be52d86c02e64bf80df4d80"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "96d16d0190c931dc9a8eec2f0e2f34d761883a55180d95311a0d24efb774b141"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "5893bf4bc8497f6f47ee0d0e6155cea75b3ddfa9cfa8ba1ddf04d6129ff2cac3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "becaff54810a5717f203694e9b68418a98ba32a52094e549010f0fdd5155a5f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "40bdadcba471e8001a414a438d2019f4780a2a5f4b1220513b04a5268dec2ccc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "295956a502f1d3643f47276d8cf5f5908820505409e0218aa5dac70b2b22c2fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "6d5917e3b96aae59f0a634bf5ca8a2a67b3f66dde94f3dab7c73076807c59b27"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "3330b8d71728ece09497875096a3855ebeb9efa7d5a43f3e6dd64175ff9dbc5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "9e144942cc5cc8f20396a2d94be55e0cead193dcfe37fd6e157f671a411c0284"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "99d4029b8968ba7451c7e079949b1a8c5bdfe6d7b6691e5bf8789773165849b1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "d9efd180b8e8c5d34020d636807194aefa7f535fb00476de2aeefd7bdae0abf1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "1f6302c9f4adddeec11b43eb5d26e12bafdad8c85bf7d53e5e61cc4075a4d842"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "347fc9b8bed1d78188433b91a1a5cac6d6b473b416f7c5863fec5f9beeb913eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "a189adeed8f38c3f6dc2c384dd81a5c256bd323ece7175327d27ccff6d114332"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "b8e03e6e6593ed01a088220075682328fe428b281cda66f416ef38bceb06705d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "862545427c662e124bf6b07a3f07b49ed7824eef9d7479a512e3577f9bd98667"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "df304d126036460d88bf01a7d5b18ffa45766df734638bd51947c6c4926520c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "e11b3c92ad639476db0f144e7835631f0ee205676fca7dfb5d88dc5fe1fea390"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest.xml",
+      "sha256": "9f8e616f52d42737afe0fac701f446a908ef4dd0a465aafd8da0995b5acc89ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "aebb24902c1b8cb1765301fd74a1c31841387232f6ac24a02c883bb309551782"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "36bead4173068f588fcf7d5b2c4b3d999ad447bf2d22b43f30f00e2e1673d03b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "973f612f77fd63971f004831f3aa086e086312532333d5eef1d56ccce75b5bed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "a4d1be36f7ce57d407115ae327241a0c7fa1d95facad371d486febbc20c494c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "dd34728d46992b8ac4b232b8dd6c1355062a57dc861d9e68f81bda116c6dc7db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "b9196983118ce710c78cf3d4ddb45646075b816511c6cb4176a5463ddb82dd86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "b589372f2ebb18967a5e388e7a9fdf1125691a0e0d2c6ddc3bf54ba2380db51a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "4135afd509ae590246b07c00c22b6020670455eebe0603db7d488fb842b963e8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "9be127c5fab816fe98bc3a48ecabbcf5f5e3d51ea86141d54408fe8bdd0f0bf4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "3c819ce1b4df184c86f9ab56920c8120d1f7a21252c57528cd787a80536ea741"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "75b9541e6c447c114011d3d81652ed6247b04ae56d83e4f9dbb421b4df0b2beb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "1b2c6debd00cda1730db62d99eacdea36dfb4d64475b4b2c976264e7dfd81545"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "301e360fa7fd6e3934e040dea2ae8780183804e74e50da7501b47cfa509d566b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "d3191c8a29b7804242c940ba050eb416a9fb463e023e7001a7a1f9dfa72196ed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "001400468d111d1787080d5f751e1d6302ea98129ddbef48b18915c88de92fe9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "4fdb7416b44781138742817ca7b665fae1f87f5813c2d7eec0f20f11633bbe56"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "0935209f2ffae8f7bb824595efebd0a945772a02c95717797272ea4576622107"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "3ea0f2f4bfaf90cc0f1efa535f48f923c69546e2a37752731d5853d158203e53"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "01ffd2192ea75509196fcffd7593ecd7ec7754d0304ef38e7b4c504d31094fd9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "915237d777570273071f1c8e2332f351401432d8d56bc00d144bd82ec9902390"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "e83f360537b874fb30513a7e2e54c1a0b9284eb7e257069dd35b4d68229aa010"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "aeb25869e54f4186b2187f5ef1aba1c0c83f6a433ef7d2b45040cd5ed49117ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "29a9a5c321785e8776ccf6151b4b3ca88d0706caa152c958ffd7aeccb08607af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "f83356c4e765b02145743c4058cd509b517b33ed7218b5bef0bb149c67070832"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "1d35ae5a54aa9efb18c5b0aac367ce9ebc53a999842e7b3997bea08d2093ba07"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "9a21130f7e0cbff580eccd32630edaf9a08480ddec93e982366c165941531896"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "2a8050b880a196b63632c2275e76fdab9c1a36fe7f3f4bf5ee45387b4626db92"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "3065318bd39c2f5c587f15dc2862950ef17c875c6b0be6b1c846028b647ea61d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "3c78ba67a7647739fd3447861f80444f6590bd81b2ef076cb0263f781045696f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "1f327bd413bddcc8eb0e1292e8404c6bbf67580eba08857e95c1aaa2153634f6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "d9a5265f9d7dfeb06494bc18b69e21048f20227e56bb75783290a2c12f3f845f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "aa5d556a7356f404cfd57dee73f0995ecf35688d5f4c0d4967a49263f684d010"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "f7f7841994250be7303d8db71c8b86cdd8f6d334be30bf6edd5b32cbebd6a506"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "ada25b2e9349e7753757231deff2ca6f540421cb18f119a753e47ea86c79e277"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "f2c4d36da59afc31f3c9edf9ee02bc06e7c2baa2abacb455257191bafff2b45d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "3943f8cc6a69d2fdc4642d86f3d18bf2071fa7adeea177f388fc0f383dae405a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "71a9658c14e73e1b0983bcf381a437208a78be5f8998736a907cd66996a698ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "51dec2d9dad857c1be07a9a4a6c8da2af70f530a12885466ccce5b70c7a64a2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "71a1e9a04becf7acdde05ffbcf50621c122b6954c085619ecc9750efd357951c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "15c53ac5bfa9ca9befcaefc81349914ffd345d70f7ddd73fee8e844df51ee834"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "a9f6b1ec61d483b0b28ab8ccaa8ed1a56043c4cfc3a2829fd6a79ef237cbeed6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "fc3d34341535dd1a7b95e18b2e7843c792fc542774d527e27366d8aad5b1d784"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "dcd078a64d4f4fa9e37ee5cbd7ced2e8caaece516cf3fe8797f5e38e3edd970d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "f67b6ab6f4b4d56f0738433c78dcc70994383f749a7fff76cd592eebd03f0a48"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "7f794d2232963dd622cf2f54ceb8146cb38b816d3ebfbefeb95f9b08dfdbf03a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "b3d457101110df499a62678be076b25865f76eb6ee8e799ca7daa7589b0de8c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "a27db72f1af1fca2a7a0d87a5c2260104f694a4cb47c471fcbb1e2f8bcfa44a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "3b708f0c688fe0746531cc7454e421f76b27988822b96fdac78e2d5686b78a2a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupProfileTest.xml",
+      "sha256": "ecacb62287dcde38e870b3471eea9eea1ce86deda9abc57cb272065b5bf430cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "b66c4865c8b75ecf4f99472bcc5023d7667248089daa17958cdc02867dad26a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "40eb4361330e8bf40a144a3f1b63f8fe27e855090c40e3eeeb44ed813bc45260"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "153c665caff046c719b85e1f67b4ee93fb6ce591b60b097c452aa60248e8880e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "b029096de05a7f4f355dfb69398eded7a0f7c4c3427734773e5151354d6556a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "5464bbbfab34ba4f028396db511945f5832b2891fe47953bf0f26db909c7fdbb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "c9efe935d260c5fadca45a6ff0e718ba1769a9ad5260e0d50225ec4c280cfef7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "1a0453ebd5216ed777b53de52e6b6136c3aafe3592102c057c5a72d1b086a233"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "d47f0a8992901b910bfbdc47ad63502ee6d64935226c58b9016a3a4f3a41714d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+      "sha256": "43fe389b557e6b0e088590834aaec7988b46f952138f571df29421a8e4cc46ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+      "sha256": "ebf4f8e76b3b9e12f4f4661bf40f716ba6a8c7a740ffc700ce8ed40c3d80049f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "bb4487c3d99511598da206052cd2a03ab97d43b4aed980db124c233ab28f1eb4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "c1080b2385c5cf6f72e06262bf73c3a83603f8b1da7fe54e96de24884b881d0b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "8b474eee87e306f29d617dd01fb3ec8e74613a9fd866599ec0bf6b1fce9a2aff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest.xml",
+      "sha256": "3c4c2536e4dd2699305a95321ee292f3a80b3cf8c608434c466830294cda6f18"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "17786423b2a501f635281f78e24afda5d9b3992c5e05b9363d9439db45a60cab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "5a36cca35c5bc5015481d1097bdd991f18f59c626874097fa5d9a4acb65a831d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "e60212936d280b91a62ac29af4f4d51eb792bf577d4845fb1a65a856a3193f93"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "c5bdbbf2781bafb92537c65853743f05b72a42190be5ef5cacd58037cb64070d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "4d8003ae830d542a0e02a88fc214351f4028d421c7da6cee365ed087afe3ff9b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "7b62ac15cb7cd67a5459d535423f7dcd43b2cd127c423d5c9774f02f7383b865"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "d1dc70048fa7d35848d1b9d10541b0af92a6b6e97cbb107fc319dd93ce46a42f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "17eb3b0529f9679a624f77345da800a933238e765eecb0f7ec168c1e7ad24231"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "6edf4e5d07b6ab19b973d6e686efd72d94d6c9f6a798e5ff5f17d06167ed0930"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "c88f94d39ce64548cc679d273e7faefc32383288a11d8328d32e7dc613f95543"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "505d5996d76ae5f8c8433605782047e5f9ae50f2f47eda3607c69587762f2f0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "67bf2fbdc7918c30a398d37496a09c59d286efef2362399bf7a6879b21fbc32b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "7f98535739323710a78159e040e2fa11639ebce7e7f80b5223232099f1b86c6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "18e79535c5c77e0283a5f085b8dc48498320f604d2ffe2623427c63262808f3b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "a4279bb875e7c8bb72e44471898ecd60e651f561d05a0cb5c1526594466e2f25"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest.xml",
+      "sha256": "8f69be14429e0f5b1373aa2d95aa57464620f24c6343cf8a76ee48fdc2c4090b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest.xml",
+      "sha256": "729fa8a8b9a1d4db1bb3b4e7fca641c2b1e8098f800f6b11bdbe04580aa1d618"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupStageTest.xml",
+      "sha256": "454965e616faea177103ff19513d90e2ea51f71abc60311dd08977408980b70d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "56c0109b37ecd214eefeb62c1a5d92de79343a3593ccdbd73fa6d6181b658d2d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest.xml",
+      "sha256": "2519970857ba1be54fcfc1a5fa4ed6b6e5cf3982251237b1300c335970a67b41"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "fe0560f47ec3eb491ab2275f8a4be29ae75e31d6eb9ab11b99ab28a00ed51116"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "92a4bae88f2f9580eb01fdafe603fa3727594f2e525a85a06a0616169d964bf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "a09b5629b3bd3e15fe3e81da4ee930cffb30f552653ebfb90a35d3c58c21d3e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "9151561e2f4ef80126abd2056f0f07a825f4f62516dd89523c4f754039dc03bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest.xml",
+      "sha256": "98a618f168483489adddc79cfdfcd91bfd9dc77cb6592d0b5893aee2c452b95b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflightTest.xml",
+      "sha256": "ac8aa888a9f79610e030f046e76246ec0b4835555e6fc6e809bef14d290e9997"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest.xml",
+      "sha256": "14250491b37194be01bd8483cb8569aa305344251abf85c3493630d0805c16c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceAdmissionScopeTest.xml",
+      "sha256": "7bdc82dd8b2d034414eca0d3082b8542fcce0a228be936034e671bf696cd4eac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceLauncherTest.xml",
+      "sha256": "d796ec7dd020031ba867b7e237e230f0de0d5d179c9b7137b671d39ae9b66aef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "0d19e2ec9f67da081d75f786b82688f792551c35adc4fef6a26f6db04ec6ba85"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+      "sha256": "4de880425bd9672fefc5aac2156e26a5e5abd97cfe00530f20e6d07577177fb6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+      "sha256": "6bc28cec24cb28a78ef5e4f879df8e638c4b1bcf983a5569df98a715b2c39511"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "76605873cf2a8b5ec1d0372395758dcd83a4045e7fcf0123211e9faadc1e7c85"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "1a904e9f51a668864926ae1d81b43586117c16dec0a9717c95a2b699fb1fb6ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "d846b3a7f9b76fe72c4604d4ce1c3acea348867576e1f9090b738e08700ba141"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "d2b2a4cc69765c74efbc57dd2e749ea58b922f05043583f216d273991681e781"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "661df2079a5ff3fb548890a60dda1fb65cb9077f4ed36cf42f581f30c8b6e0d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "e35ce4ac4884f02399d079e873e23ea96eb29500e27a8d81f9440b041e10cda1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "d5f9064ad01308bbfde0307a92195ccb1dd76c556b23c584c76e0e8c03205619"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "332404d41b67e6913b2b7aea7239faf129c1b0e037e6865176debb8e8d1aa4bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "e24c826f3d403ea9b7df3b65481ea7d8c5df0bbc3caeb8c2560ea5cf0fe3630b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "9e274e495f96816a1bf75c71628bb855f739af25105365e0ec22d733ae16002f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "f81765ff16e243b08f2c93e251c4450306f6d1cdb25d9980a201c4b357ef3283"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+      "sha256": "af82efcaad9dcae303d81a621d0ddcc0eb33b05fdf7131cffa6777527eccc871"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest.xml",
+      "sha256": "0c18a4669b62ef022f0750fd86c5c0159e936a241e7072a726781a049cda8f04"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml",
+      "sha256": "ebb31d1bc754e6c58c63f5284db298f824ccd48a2e276d79cfb8bdf2738c94d0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "846928e27ec498ae2b0f7e3c92d1cbb6501dec7feae40659516197714b8df059"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+      "sha256": "86e1257301842d868a6d91985b7b24c0ddb25ab19801f82cf8e4da44ada4b0b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "f1c8423a064f4981722133a6edf2cd57a260cd8a4625c99a52c197215a142b7b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "4edc649ac8d66f840e5b8a37adfe80319baa22ab267bd047b2a46f6b70cca136"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "910b24a237526e89cdc7ba6e92fd8c3a38fea038bff73d737a9690312523a767"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest.xml",
+      "sha256": "e8b093773e2041dc41a32e1c6b0e645dc81c962015d2d7179d1c4de0c5b37f68"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "5d20441feaa173cae60cefd20460116883b7f9c648849ebaf3ec040b635de5d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "ad298c793822ab0989f5f05fda93d40d8d62e27041f353f1ee24e446b75898b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "0284c3abd734b4ff7431ea5859242620ceaf8bc3c6888c7c8d8e846833cfd588"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "2c24da62b99375d5d87153abe4abc3438d153e817613abb1b9bc1f3fac1891ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest.xml",
+      "sha256": "4ef12622852be0a4e1c2b474d0f2b79305131afdef8571f796a2561f8009c2c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "e78cdcf20fe78ddaac1cceaaf702715f7b7e6ed982421718c831f54b0aa53b5e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "68d9db235302bf01ca912f498ada3ec82dcde6e5f2fa33b1457177c838755f9c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "6212617d2c15a75cd35eb00e6640f991f4d2802257b8d293361e8b1e2dda420e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest.xml",
+      "sha256": "3728dfeaec58c8e860f704513b428d5ea9cecff2f92c8a22d8dc26937382aad6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml",
+      "sha256": "2f0c99374a5c79b96b537d4d7100ec5ca5b2c43596f941e59d5639433bbd9d0a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "f19cc3fdc7b74ee4549e65bda1d731b7a98ccaf4430d4afd91adec46841c4816"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "341af190207aaa835103c0c21e540c5d5d52405b720420c9b4e4bba60abf19c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "fdad1e3f02d0f89a808a53df64389f9c41b90f9fe5f5373a767979702e7f1038"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest.xml",
+      "sha256": "68a54ac0a8aca3f2c5e93a2e267239e8254fb499852157a0f22a3fe104030d5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "dfd68a03559c73b39fcbaae41d91998b54ae128b5d8c7ca5e205bc29e906d812"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "a7381747edc134fb9decdd081c2fc660d31b5a9907688c5bb7d45fbe4b42952c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "9914cdee2d90540624f7eaa9f6903599f6aa1c13197e564ddc0a57fad38710ba"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "d2059042ff23b3101235a815c5600da6590cb360ea4cc49b6fbe3367bcb59819"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "e7b93f81c48eecece608491f7937761cb32c9f8d6375cceacc3609dc1be1d76e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "a51c64552aa8b1d2779803d267a29d303356dc6a734b35a56170ff47af94d46d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "fd83b983ce4fd5d724d3af9d879c8c31c642a49a96a168ad4e90bff46bfca6e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "30cc9c8da46ad288103d9a0b1e1c702cfe56fff1fb7da5036e79dc98dc3b3afa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "d8a2fe8c6d380398f9f3df0db3ece1de62fa4610582c21273624b9c3167d4386"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "58fb8d2c93626c9eaf667eb490778f753e99d5ae862e698d01dd02c3de75399d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "24fc39563c510e8c5d7514f3199a1a98cd4cea42059a2d6bab0f133bf806f281"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml",
+      "sha256": "101dc31510c521081a3694e6e44bdc734967f3f2eaf59150c52e0d622d56329f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "380d510e3f4d44352fd94f69f73336600c74ab62eae6ee84a750382a33c5ede5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "5d4cda4961494a7952545281b79a1827c0015071112996e7d7c2f78c33aafcea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+      "sha256": "ab461d592ddfef1e0ec14c3dd025e6a17f81db5f138e747276a5a2527aa019e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+      "sha256": "5d75fa86cfe2b5f8a41a2589b49309fe841ac52db48d616ff136f5f7bd2779d5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "0016982fa801f5ec553bb71f5b56b8308b6125ed97f81d2254e2ec0af58b7afa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "d965d30bf54165bf6dcc0be6588571af4347ab175a5231bfcd8a077e3b468fd9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "11517fc92c9d8b41842455f528c6f8d29e423cc1b1fe38c5126f875707a3c5e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "73a8672140bb00d107421fc28dd564d287fb6f4ca970252032e9283275ec5c15"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "f5658cdc22c68795f01c27661901ddbfdb5af5ae60699fabce4a740b5de6adb3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "985896e2f799d863691b47be1f8e64513e6899a20353cab7f600bd6db199d5b0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "eff11669768ba05fceabb458c518e3e935df85e7c3add50446c6a8606e5aebd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "cc1b77138fdc22d8a75288782e5888c462dfae56637d90d5b65b77dd9a30bed3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "ed66edbacee0054166746c8b639e64da9db18bfed10ef3d9cc1783b1711778d9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "a73cf9832428a347900b49d8c31e424f3b9261d673c444e2ecd08b233e84b1fe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "b03ccca50c5adc9b5c4f25baa4daf1ac47b2281f6c59566cd146490938c85c44"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceExecArgumentsTest.xml",
+      "sha256": "c20d93a568665119ec6c41bba060905b1d6a61e316f8c1878b97ac4d990c298a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "009531349647ff322556bd7ad05d898543c8b095fe65656f905b2d1967dbb345"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "af795b9144926adbdb5223d3b5fc403868ab1b3bd08dcb512601968f3f84b6b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml",
+      "sha256": "96d617d0d3b380fbc463010d2f24534c0ac1b17cf7eb92507d42a80efc824673"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml",
+      "sha256": "dfb3c87b816d5709fb38ee97f6f730644740cc2017ef8dca9fe9be75a40e8d8e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml",
+      "sha256": "5ec454f29cdcdaf41d14cf1309dfc156b20f4f338c6537dbe1fc61008f6e845b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+      "sha256": "eb871f56f0d7947a5d82838e032b3d8f87680ed0eb8a29d67558bf44e1a2c1c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "5208a2636fcca927c529a0c5deb8153bfbb6e39d96b7634f598c31b65b8aa7e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+      "sha256": "d327c5749ba599c5d6e08fc2769e1fc06bc1cd1fa7fe735341d5fabf7102de48"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "3997d89d5c4b0d6a1f77dab5aeaceb1e87306f3fb5bdbb631c1ccbc68c0a38a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "150dbb0210dcaaa2ae51ac329e1ce5297ebe44367bd0f9bf0aa0f67dec76e95d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "84d39992f532d08cd2b662f7942fb790bf73815e32eeff123487c01ecce9899a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "40ea69712f64e52987f6749ad2fbbe21894007e31fbd44f5ac01909862810a77"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "61b4cc42c4ab29391c15abd5b457c0d11d03936cd2831685dee0113aff3a7d93"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "1e4ffc38079c88a6eca89b4b664346fcebe0043643670ea22d85c6ddee2c7029"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "c41366dbd5b703beea77ab25f08831aab2f8cab7ea6b01794f5be9837d5a9ac7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "2def34113dbfe2544905498eea45c85bd73b87b8db15b6194ee8920f63a335b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "4f49439ccd945a786b406ea27852396074409976baa06d558f115be3d0a5a64f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "2c88eec305a311290615cd1ff31f2ae9ce765b49edcaaef6c12de6de6b767b30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "838c5f1b81bdbb1a2b1f0b07dfdcae26be1d74a03b876562252742fef93849bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "4ee71dd780363fec874d9fa9aeda3c2b47df2aa8b487203a6741c86d2880ab06"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "55af996856d0ead4c53beccaaddef0d8205ad817465125d9d3da90055f7dc875"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "21466673a190c26e26f000bf393bd2127253963e8043f001967ea0bc244a91fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "4fc499121a585341434de1757575f9495169f888eefae5b3ac5c70dc80f8ee7f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "3fad2f0bfc84d9d65a140b4b3d6c7dfc619f649905019da3e08d57024bb68fef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/protocol/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "0a9bb9e316017302d124e8dc98a4c8233b37a8867281472fb5bc57cc0fbc31a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "97a72551f5543800d04cc0cfffb57d2903747618ac958cad74570628131a50b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "af351c0e75c165ec739cf03990da7d0a3b416aa1b562487d991b5cad8644585e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "53b191810ca8015f72842da6e5c91afaea1970c3360c688808d930918cc57f8b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "408d67878fd8f52821336264c6e2c1533d0c541d2607d8f69230c982822f2e97"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "ef4a3e97f5f2f62a354cba6453c406b7849731415ef3fe318445d449765fa928"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "abb31d2f175bec35fc199001985f5d3944cfded75d479934baa6702387dbcdf2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "8fccbe708ab0d09427d469b0e202d6de63da87683927738c781b6824990e4c61"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "93a378cf0359bb90df29e5fe3f0c9460b7371c7b7a5ef852abf4e8f5b1c0e090"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "2c6dbb45cd5f9a0d7adde67b0e1db0c085c5cc2372a91f7776b8ac94d6b53a4a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "677d8c71e6c6fe4234483e3184b063186269fc405e3f28107468b055a055f12d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "04cda89763639b45a000012aa7d84e9fa3eb3eaced93b7a7f2d486e5f0dedb52"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "8aab81c8a18d8241b989b54108a1004e1ae7ad94b25f80f4666d7ddfcbbeadd0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "b0b70ebeb72f1df81d859d580a23d23591c8772bff929d2aaa0211d6866e1e01"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "c64205ed3e645a0bdb3a06316d9523220f759ccf79842db46d59af62f726a6b0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "24fceb13687d1121649e743a6870d4bee2a795c87829cce827964e4151378d72"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "89fa9da41268d9696fb7e3472a0f29c750316f64dee99746d37bbbc77cd54edd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "ce6e2ffdb07a447a9374328a0667ed5b8fb19f15aa89ae19692a8e81a078d116"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "47feea9be2ecfbe50dad4a4d41fc3f535d39e3bb45de6f445816d75e6c425f36"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "e38118ce7f1f4c90b0eeaca78c802184a7344372d6f77c8afe676f8543802bcd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "9cf0dc4ca2bc9e8b16bd5296273eff5c0cbe30d805c826f25c0576474954eb00"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "8d799fd9332056e3403422f13871f47e3c4efe49ef52ab7aecf01d4bdbcbff50"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest.xml",
+      "sha256": "da47e67480cf57671cb0e400a13af468065f76b1e4af22ea87bc3f9e435858bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.api.file.WebNativeCodecsCredentialTest.xml",
+      "sha256": "5a142fc36b7bd5c4f5a049e52724e5852c86f36fed1cd79f8da1159fc156b979"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "2228c3fdbdf72a192a1198c953c4485f4fdc393bf74a7bc215f511c08162f52d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "8aa8e2a45e9466e412cf89d2da649bb987a67bf3d977d0b9aed4a61537557f40"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "da797278245c73d97fc9427a7b1f0d31549fad30a88c04277031ad081e0dbd5e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "703fe83d63a1820ac2c8b886204b284fff39a034ff7d9be62cb111b343138d91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "8baa087b7ba7dbcd466d83290497b2d803b14b9a8576025333739d0d7604a243"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "dbb17c963354b928a3a6b1bc054d9776d4dd3cb02865712da1bc8745e0b5e378"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest.xml",
+      "sha256": "037843cb1acaf3febd16fb1158bd5e0b085738729adfabd7aa996599871a4108"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "6eb380c50a69d683e47f9dcc875a919d787462c7365ff7094598012490606196"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "cf6c414232662671f7d245042435057f1bc8235be0bfd5c27af3e490de4676ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "f786a86786e756e363e3aee4660c4cdeeafc1ce48f43869a33419f6881ddb13f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "82f8a01b2f38d35c0c94c030be6894a33476d9e5a31d802ddee09549adb22321"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "00670385c17852999c5a808979915cf7558ff3121f0fab75d49ceba31066e4d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "f3bc03e2de08144775746d7c012a6df6e1e616a175e65707246c07e006baa9df"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "a9a8e6a3b7e62d7ba58e40cc4c065484867d4022e3ef39ae9f940c7f618a89b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "b98a70ed1892ea15a6fef26b13c2410165305b5c8b66cc6b7a2e8ab23daf6b8a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "48dbbc935e51b54bb9b5b7208fcab098f8de29cef804ea8fc1a1f66b9e4854e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "27818e86e9e8df18047ae37856164d2ce7160ab4322b2d15c570b6ba6440df50"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "d99a89aa98d6c0236a0f03350a8d54b25da0f8b86d642fd4963348ac1e065598"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "c5c3a276d4921aafc7bb326683330f3b1f1ca606b0e19f9834e79b930dc39e6e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "fa3df7ca83a7b58d7ff0b97595a264adec82c7da0b2fcb130163772728e6f7ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "df66c0ece487452fd0bcdf180e4053f30ba32625e5084d1bc8caab9c46a36628"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "0b693ad8061b32ca17198eaa8d6006965e931a939cc44f34899bc181a50dec48"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "5c74f1008d0a64415cb25520fe30b6f238d1dee305e1e7d31e04c95f551507bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "2210c6e25549d693baed69b7f7c3360e8c39e064872f51db7727ce01031746f7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "934c8c8314fc4c8d953e5c5c27f8188bc27b6a56939d3212ee8b8a417eb28c2e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "b792aaef0362cde735c73da09b0cc2eb7cc0e26e90ac5aac511a7b04c8e8bb58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "ab582818b2ea0b871b2bb70d49f38df3d23887bddb983bafbbf3323d84153afb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "138cbd53b6666a161b9d3310488a81c0f0c0bd051b4f3994046ffdcbdac38dbe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "87b9199fa2483268adfdee6e459b08a3f41dc7f373f1ccf801de0d8e75da0ba0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "a2020b21719c84436987defbbdb0ea0989e8731cf60b7f60bbed9a800524c68e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "7b5dc03c0691b345b384a55e5958e8fa90a03a7fb30de90a04daeaf8f9b2f0a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "f4af53a88c4026d53d00191c5fbe62d6d7879fda956dc002c53fdbd625a22a42"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "60bc6ad1d3fbf99774990c50685ce0210f31bd6f5eeabd92974a3e6bd6a632ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "e27671bfe49e85b54eae3ee2fa6c9573d3d5f899e6838a40c226b7644d5f0db6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "9049a38d4e558973923ed7340bbee12c21869d5669c99979cb01003c89d76127"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "bf32a2507aa24f90ec71a3e3f53e83f7edf3041c5a8f0d396709370aa56afe0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "f0246ccb06f96492e18dfdd46c64776ae3c84d954d2ff1daecae7554cf425c88"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "cee8a7bc773613bde1dbc806c0bd81d90ad58785ff6e7d3d3dd71da32f666553"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "79e405fb6137367822018965402556a436b37f1ae4502db09531c0be2521ac9e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "73eea93e88dcdece890a0585da85a31029fed9b48705ff5da31d37fd9f8df36d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "1a2c9259662e80619abc1ee5e249aa909e0372d51d318a73cf313099fd7b41a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "10c52aebfeb47f68f28f9a0ac8b9113b8084b59a6fb1723a6e141cd7ec9b534c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "e47b2dc7a51a30be71efd9394ed5e544fde7a98cf412966fca281cef64695938"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "0be565c505d6aa86ecb3c4604a1a14a4260ca2ed5962675491d3fc57b555fea1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "020b98eed16e92c074a15e439a4472cbdcacd4bafe5383d74c42c204e7fd17aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "31ad33ebc58a6bf0c7d65a16c3e7e2f421bee6bca8d3109caae00476f0da1ab5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "80c59b489ad97f2d8bc2bb096eaf650ccb855d678a775f5403395644ff693b31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "87cfa57d1deee8aee06e0b134623730dd9cd793bc232c039c624d4129f766725"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "74794b2dc8be3a09a5fac627014e8285242ada4e63be7052fc4a910f37551973"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "54291b20e6f7472e12f82cb5348f04f1c9e775f061b09ec74817b80968db9148"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "5838b6ef3a21837b85c47ba6532e1460d7057d42a679715892ae8b06ea995f46"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "fcc80c0ca3ea2ab9d678cdfcefd716ad39b71391165b6004c55c79fb7ba96936"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "80fb67186f637916feab21ec50fd21895928e4316eeb530c7dbac3e8932208bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "9005c387b8bfb01c4a6bce90fdf558a85e7fda1da4ef8bb142b8ada57d479108"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "9fd2250bb3a56054a609a91b0b39e06d40172632b7017149ab8504a21915fcc3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "664d542d2421277e382bf130e05fcae0c3870423e7ec0cad567129d3981e87da"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "10e94c54c00539be767268e683628bc10a383485b0cc69a042cd680d8772f905"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "9808d16a3dd38a67c1f14b2dc8e9ab3f062ec4d909d2f3b3b4960697fc0d3506"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "7bb69cecd2ff98f617fa607294aae01fe08672ffa0ac70aaa0a34f84b65105f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "28c3669c096c0ffb61625b37927e61194847689b828be118ebbb38b0a84c445c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "579ab0e8d3ef3c4ce7514046bfe7369b53814eff34152d8b128984769d011458"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "fa488831967c88690a987d89b02f4eca7afd9a838103a9728473ee888a87d3c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "e70156264b3cd08504578972e11f84f82e067a1f90475c070baa277e08830130"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "250bfd77fec1a2dbade215ddc3a89e8b64e7dec4d6ad60b20346920e55f77469"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "8969de77cb1c818ba7a355f6620575603975edce141dfd130c73db8f4772329b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "67b38e8326909b3b6daf61c7447324526abe0d857be27be363cb7eff451e235a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "dc3db59d6b1dca00a27c37d3e0f645aa0bb75cda0b4eb006fe0a9b2373dc5a2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "af4cd90988d29e39f43e74bf6610b0ac4acbdf044ae9134ded0a0ced97578173"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "0e551b131b153babe10f52baf0ead534c6ee084d899bb4d38b68383bf3817b8f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "4b6475ed1f585e12dc8e9f4da7c17fcdec6e0f8ab947b8d208efe56b00bcde16"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "743bc71ad6e664a98d6f8d69e3ea14daee6dae3bce18e1124b28422293bda89c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "de54114328ef395d49fb9a8396a7e8aea74f07353bfacf7b8e353133170493f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "a5998b38e83967f2c6e6f8c3d85fecd8b1fe826df4e2e0f53352974f4e40130e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "6fdc5ae2b08d9c4e371f9b9f68a5bad681e74b1fdfe2c21ecb754b2fb221ed38"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "47fba4f82f755f2bdfba54f701a2140a744c12d1f91c1bdd4a0616a1a8c971e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "f6df25c4aee43cffc363e5adb8804463c477e3a42b201bffec41071613366d8b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "dbf02eae4847c1eb0b196bc173f783e70e62a1a065db8a13ee805c88d97d8381"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "41ca4a4ace1b8c8c623626c252fafa32ae50558ac5f86a867b326ef2477e2634"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "9df4f71f8359a13c72077ce2b27649d94b4e322c00bfa520931de788f2c62762"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "df41f0dca2092d3f170dfb478dc7f5d53c462506e27b3f1a8b97c70ec24a8b30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "523e92cbfb931a72ff8d6d63585581369ce17862e1537365f5f073b0ec06c6fe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "52e97dd3385857e1491c0604eb785f61574607ba1ec17538eea61bae38710369"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "a1cb604ada64716cdb241bb9d7df473551694745d26ee7d34d5bceb30d4abd28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "9778c6fbfe5cf5084c6224fb8b0cbcbd557f5f8949057e4545b129b4cb082b9a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "1abd44e9f3703553afa0b37450720c7fe4f8c65663fe40479da4e8807f644c69"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "b65aa88dede1280e576fd09b94cb2768970134013638e1eaaf9bb46ce61147e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG381-failed-regression/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "e28dd3d671ce2f0a3b543c0943948e440b186c83581815997178c880c1115e53"
+    }
+  ]
+}

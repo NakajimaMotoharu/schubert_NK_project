@@ -97,7 +97,7 @@ public final class AssembleReleaseFixture {
     try(var files=Files.list(repo.resolve("src/deployment/systemd"))) {
       for(var file:files.filter(Files::isRegularFile).toList()) {
         String name=file.getFileName().toString().replaceFirst("\\.template$","");
-        if(!name.endsWith(".service"))throw new IllegalStateException("Unit profile");
+        if(!name.endsWith(".service")&&!name.endsWith(".target"))throw new IllegalStateException("Unit profile");
         copy(file,output.resolve("systemd/"+name));
       }
     }

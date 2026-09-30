@@ -75,8 +75,59 @@ final class CleanupServiceUnitTest {
     exact(content, "SendSIGKILL", "no");
     exact(content, "ProtectSystem", "strict");
     exact(content, "NoNewPrivileges", "true");
-    exact(content, "CapabilityBoundingSet", "");
+    exact(content, "CapabilityBoundingSet", "CAP_SYS_PTRACE CAP_DAC_OVERRIDE");
     exact(content, "AmbientCapabilities", "");
     assertFalse(content.contains("ReadWritePaths=")); // Provisional preflight is read-only.
+  }
+
+  @Test
+  void cunit004ExpiryHasFixedGenuineEntryAndSameLimitedRootObservation() throws Exception {
+    String content =
+        Files.readString(
+            Path.of(
+                System.getProperty("nk.pt.repository"),
+                "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template"));
+    exact(content, "Type", "oneshot");
+    exact(content, "User", "root");
+    exact(content, "Group", "root");
+    exact(content, "After", "postgresql.service artemis.service");
+    exact(content, "Requires", "postgresql.service artemis.service");
+    exact(content, "CapabilityBoundingSet", "CAP_SYS_PTRACE CAP_DAC_OVERRIDE");
+    exact(content, "AmbientCapabilities", "");
+    exact(content, "NoNewPrivileges", "true");
+    exact(content, "ProtectSystem", "strict");
+    exact(content, "Restart", "no");
+    exact(content, "RemainAfterExit", "yes");
+    exact(content, "SuccessExitStatus", "10");
+    exact(content, "TimeoutStartSec", "10min");
+    exact(content, "TimeoutStopSec", "60s");
+    exact(content, "KillMode", "control-group");
+    exact(content, "SendSIGKILL", "no");
+    exact(content, "Delegate", "no");
+    assertEquals(4, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
+    for (String credential :
+        java.util.List.of(
+            "expiry-request:/run/schubert-nk/expiry-request/expiry-request",
+            "db-batch:/etc/schubert-nk/credentials/db-batch",
+            "mq-maintenance:/etc/schubert-nk/credentials/mq-maintenance",
+            "mq-ops:/etc/schubert-nk/credentials/mq-ops")) {
+      assertEquals(
+          1, content.lines().filter(line -> line.equals("LoadCredential=" + credential)).count());
+    }
+    assertEquals(
+        1,
+        content
+            .lines()
+            .filter(
+                line ->
+                    line.startsWith("ExecStart=/usr/bin/java ")
+                        && line.endsWith(
+                            "dev.codex.schubert.nk.batch.file.CleanupProcessMain --expiry"))
+            .count());
+    assertFalse(content.contains("/bin/true"));
+    assertFalse(content.contains("SetCredential="));
+    assertFalse(content.contains("PassEnvironment="));
+    assertFalse(content.contains("EnvironmentFile="));
+    assertFalse(content.contains("ReadWritePaths="));
   }
 }
