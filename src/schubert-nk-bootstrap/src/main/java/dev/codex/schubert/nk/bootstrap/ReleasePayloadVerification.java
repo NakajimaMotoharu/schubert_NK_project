@@ -96,6 +96,8 @@ final class ReleasePayloadVerification {
         || path.matches("(?:api|web|operations)/lib/[^/]+\\.jar")
         || path.matches("db/migration/V[0-9]{3}__[a-z0-9_]+\\.sql")
         || path.matches("config/templates/[A-Za-z0-9._-]+\\.yml")
+        || path.equals("config/effective/backup-profile.json")
+        || path.equals("config/effective/backup-age-recipient")
         || path.equals("config/caddy/Caddyfile.template")
         || path.equals("config/artemis/broker.xml.template")
         || path.matches("systemd/[A-Za-z0-9._-]+\\.(?:service|target|timer)")

@@ -19,6 +19,35 @@ import org.junit.jupiter.api.io.TempDir;
  * Independent literal release/ZIP/CRC fixture. Synthetic owner/RO policy is not native admission.
  */
 final class ReleasePayloadVerificationTest {
+  @Test
+  void fullBom009OnlyTwoApprovedPublicEffectiveInputsArePermitted() throws Exception {
+    var f = new Fixture("signed-public-effective");
+    byte[] profile = "PUBLIC CANONICAL PROFILE FIXTURE\n".getBytes(StandardCharsets.US_ASCII);
+    byte[] recipient = "PUBLIC RECIPIENT FIXTURE\n".getBytes(StandardCharsets.US_ASCII);
+    f.payload.put("config/effective/backup-profile.json", profile);
+    f.payload.put("config/effective/backup-age-recipient", recipient);
+    f.publish();
+    var observed = f.subject().verifyCandidate(f.approval);
+    assertEquals(
+        hash(profile), observed.artifactHashes().get("config/effective/backup-profile.json"));
+    assertEquals(
+        hash(recipient), observed.artifactHashes().get("config/effective/backup-age-recipient"));
+    assertEquals(f.payload.size(), observed.artifactHashes().size());
+    f.released();
+    for (String forbidden :
+        List.of(
+            "config/effective/private-key.pem",
+            "config/effective/unapproved.json",
+            "config/effective/backup-profile.json.extra")) {
+      var negative = new Fixture("forbidden-effective-" + Math.abs(forbidden.hashCode()));
+      negative.payload.put(forbidden, new byte[] {1});
+      negative.publish();
+      refused(negative);
+    }
+    Files.writeString(f.release.resolve("config/effective/backup-profile.json"), "TAMPERED");
+    refused(f);
+  }
+
   @TempDir Path temporary;
   private static final String VERSION = "1.2.3-PG313";
   private static final String SQL_PATH = "db/migration/V001__first.sql";
