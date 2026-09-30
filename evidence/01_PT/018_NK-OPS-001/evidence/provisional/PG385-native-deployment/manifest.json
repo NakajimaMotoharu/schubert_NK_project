@@ -1,0 +1,127 @@
+{
+  "id": "PG385-native-deployment",
+  "formal": false,
+  "executionTime": "2026-09-30T03:08:19.681905+00:00",
+  "sourceCommit": "a6b5c7c8b021c4b391b3af90572eab5d0eac8ab1",
+  "branch": "dev-foundation",
+  "input": "fixed separately pinned Ed25519 signature; actual 177 artifact/61 dependencies/23 SQL release; pre-V023 private restore point; preserved original same run",
+  "expected": "signature+full RO BOM verified before approval; dedicated V023 migrate exactly1/post validate; atomic absolute current selector+root400 approval and Production full BOM readback; external Morning actual backup roundtrip",
+  "actual": {
+    "pinnedSignature": "PASS",
+    "hostReadOnlyFullBom": "PASS after BUG342",
+    "dedicatedV023Migration": "PASS after BUG343",
+    "currentAndRootApprovalReadback": "PASS after BUG341",
+    "externalMorning": "Backup SUCCESS roundtrip; final exit30 because S2/S3 are not assembled",
+    "externalInvocation": "68b5e9d1bda54e21b808a7325838a22a",
+    "workerInvocation": "a7d870091a45446fa19aa1506b01783f",
+    "workerInvocations": 1,
+    "databaseBackupBegins": 6,
+    "requestBytes": 0,
+    "parentCoverageBytes": "actual file hash/size below",
+    "permitsIssued": 0,
+    "S1Accepted": false,
+    "workerReceipt": "independent PID1 start done and explicit stop done, fixed fresh Invocation",
+    "artifactOracle": "literal run/cutoff/handles/UTC/version; independently matching hash/size; fixed7 config/fixed16 credential decrypt; pg_restore-list224"
+  },
+  "commands": {
+    "unit-state.txt": {
+      "command": "sudo -n systemctl show schubert-nk-morning-controller.service schubert-nk-backup.service --property=Id,LoadState,ActiveState,SubState,Result,MainPID,ControlPID,InvocationID,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic,Job",
+      "exitCode": 0
+    },
+    "deployment-state.txt": {
+      "command": "sudo -n readlink /opt/schubert-nk/current; sudo -n stat -c \"%n %u:%g %a %h %s\" /etc/schubert-nk/release-approval/current; sudo -n findmnt --target /opt/schubert-nk/releases/0.1.0-PG385 --output TARGET,FSTYPE,OPTIONS --noheadings; sudo -n find /run/schubert-nk/startup /run/schubert-nk/backup-request -maxdepth 1 -type f -printf \"%f %s\\n\"",
+      "exitCode": 0
+    },
+    "schema-and-backup.txt": {
+      "command": "sudo -n -u postgres psql -X -A -t -d schubert_nk -c \"SELECT count(*),count(*) FILTER (WHERE NOT success),max(installed_rank) FROM schubert_meta.flyway_schema_history; SELECT step,attempt,status,error_code,ended_at IS NULL FROM schubert.batch_runs ORDER BY step,attempt\"",
+      "exitCode": 0
+    },
+    "preservation-hashes.txt": {
+      "command": "sudo -n sha256sum /var/lib/pgpt-s1-preservation/unit-originals-complete.tar /var/lib/pgpt-s1-preservation/db-pg381/schubert_nk-before-v023.dump /var/lib/schubert-nk/maintenance/runs/31100027-2222-4333-8444-555555555555.run",
+      "exitCode": 0
+    },
+    "environment.txt": {
+      "command": "uname -sr; /usr/bin/java -version 2>&1; /usr/bin/pg_dump --version; /usr/bin/age --version",
+      "exitCode": 0
+    },
+    "worker-pid1-receipt.jsonl": {
+      "command": "sudo -n journalctl --since \"2026-09-30 03:00:00 UTC\" -o json --no-pager | python3 -c 'import sys,json\nfor line in sys.stdin:\n x=json.loads(line)\n if x.get(\"UNIT\")==\"schubert-nk-backup.service\" and x.get(\"INVOCATION_ID\")==\"a7d870091a45446fa19aa1506b01783f\":\n  print(json.dumps({k:x[k] for k in [\"__REALTIME_TIMESTAMP\",\"UNIT\",\"INVOCATION_ID\",\"JOB_TYPE\",\"JOB_RESULT\",\"_PID\",\"_EXE\"] if k in x}))' ",
+      "exitCode": 0
+    }
+  },
+  "bugs": [
+    "BUG-340",
+    "BUG-341",
+    "BUG-342",
+    "BUG-343",
+    "BUG-344",
+    "BUG-345",
+    "BUG-347",
+    "BUG-348"
+  ],
+  "ssc": [
+    "SSC-110",
+    "SSC-112",
+    "SSC-113",
+    "SSC-114"
+  ],
+  "coverage": {
+    "instrumentation": "JaCoCo0.8.15 genuine Morning classpath/source byte; cold capture reachability only",
+    "allFour100Percent": false
+  },
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/artifact-oracle.json.log",
+      "sha256": "1a2fc12b05d33c19cb92d3d7ac053ad282f5b391a498081064c4ca938ab668b7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/backup-first.exec",
+      "sha256": "a216ab497da0caca691c8f65430d0c7692c5f21dfb510beea3e54510e86d2270"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/batch-host-native-union.json",
+      "sha256": "359d298075fb15ff054a2efe2a634327aedd4b1b522039558c04aeaadb386cc6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/deployment-state.txt",
+      "sha256": "0664402435350d605bd631bc7e73175489849b292a9c03948d60ddbc98daca85"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/environment.txt",
+      "sha256": "66d627e1480380ce51eabd9edf6b6ecd73ca2aa5ecc566f1ac33b801922eff07"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/morning-first.exec",
+      "sha256": "40f18ecde6d3a9debcaa528fcdbfa5f70ddab88b2b61660736784b89f2575254"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/preservation-hashes.txt",
+      "sha256": "b3b8f559d035730fb0794e088bd0b58eb39a5816e61c0c0786a50ce7909be797"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/schema-and-backup.txt",
+      "sha256": "1449ece7bdfe7ff9eb17785a30d447a1db0ff23c653be2e7d77e6b77075316fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/unit-state.txt",
+      "sha256": "77260c7fb81082c4d641d000ff4c39228aaed4438c320e1efa8de79d006460d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/worker-pid1-receipt.jsonl",
+      "sha256": "598fa80d9c0096abf1490958143b7408ca5aeb0d8efcb7fc78483e3dcdc4d91f"
+    }
+  ],
+  "limitations": [
+    "support checks only, no formal PT/IT/ST/whole S1 claim",
+    "worker/dump/archives/MANIFEST/DB bothSUCCESS/request and intent retirement positive; native timeout/failure not accepted",
+    "final Morning exit30 is partial-only, never startup PASS; prior failed attempts retained",
+    "restore dump/signing key/age private key/credential originals remain Git-external private"
+  ],
+  "redaction": "metadata/hash/state only; no journal messages/DB payload/credential/session/token/password/private key/dump; exec contains only coverage probe bitmaps",
+  "testIds": [
+    "PT-OPS-BARCHIVE001/POS",
+    "PT-OPS-BGATE010/VM",
+    "PT-OPS-BREQFILE010/VM",
+    "PT-OPS-MDB016/VM"
+  ]
+}

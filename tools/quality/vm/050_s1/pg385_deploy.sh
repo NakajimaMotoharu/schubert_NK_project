@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Fixed isolated PG/PT operator; no secret values or production main replacement.
+set -euo pipefail
+cd /home/mini/codex/project1/work/pgpt-foundation
+/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac -cp 'src/schubert-nk-batch/target/classes:src/schubert-nk-bootstrap/target/classes:src/schubert-nk-storage/target/classes:src/schubert-nk-api/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar' -d /home/mini/codex/project1/work/pgpt-runs/PG379 /home/mini/codex/project1/work/pgpt-runs/PG379/Pg385TrustedDeployment.java
+scp -i /home/mini/codex/project1/work/pgpt-vm/private/vm-access -P 22222 -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/mini/codex/project1/work/pgpt-vm/private/known_hosts /home/mini/codex/project1/work/pgpt-runs/PG379/Pg385TrustedDeployment*.class ubuntu@127.0.0.1:/home/ubuntu/pg385-stage/
+case "${1:-}" in verify|activate) ;; *) exit 64;; esac
+ssh -i /home/mini/codex/project1/work/pgpt-vm/private/vm-access -p 22222 -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/mini/codex/project1/work/pgpt-vm/private/known_hosts ubuntu@127.0.0.1 "sudo -n /usr/bin/java --enable-native-access=ALL-UNNAMED -cp '/home/ubuntu/pg385-stage:/opt/schubert-nk/releases/0.1.0-PG385/operations/batch.jar:/opt/schubert-nk/releases/0.1.0-PG385/operations/lib/*:/opt/schubert-nk/releases/0.1.0-PG385/api/lib/*' Pg385TrustedDeployment $1"

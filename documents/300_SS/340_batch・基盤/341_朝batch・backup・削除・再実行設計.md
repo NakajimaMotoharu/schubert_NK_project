@@ -120,6 +120,8 @@ Artemis以降を開始しない。
 
 ### 5.1 許可発行の実観測集合（SSC108、PG379、実装前）
 
+SSC115（実装前、2026-09-30）：親の実Backup結果callbackは正常fresh非0/明示stop/全終端の後だけ既存両beginを固定COMMAND_FAILUREで原子的FAILED確定・独立再読する。worker試行済bundle不成立の両開始済stepを記録するのであり未実行featureをFAILEDに代用しない。archive/MANIFEST生成や過去成功の採用は行わない。原本/current/request/終端再証明→request→最後にintent退役の順はSUCCESSと共通。不明/timeout/signal/結果commit不明は隔離を維持。後続未結線の途中Mainは30のままで起動成功/permitを偽装しない。BUSINESS/TECHNICAL SKIPPEDと独立Transfer/Expiryは実後続工程で記録・実行する。
+
 `roots_sha256`/`prestart_steps_sha256`はSS343§6.17のcanonical実観測のSHA-256とする。親は同一M/A、原本activation、DB session、現boot、新INVALID Epochを保持し、必要な全10stepの完全attemptとcommit後readbackを収集する。原本・root・currentの安全条件違反、UNKNOWN、欠落、未実行はdigest作成/許可発行を拒否する。
 
 Backupは毎回真正workerのfresh Invocationと全cgroup終端を観測する。正常exit0は実archive/config/credential/manifest/公開後検証・DB両step SUCCESSまで成立して初めてSUCCESS。正常非0 exit-codeは新Invocation/start/exit時刻・前bus/全kernel/後bus一致を確認してFAILEDへ進める。signal/timeout/不明を正常FAILEDへ変換しない。FAILED時は実DB両stepの記録/再読とBUSINESS/TECHNICAL削除のBACKUP_UNAVAILABLE SKIPPEDを要求するが、Transfer/Expiry及び他必須gateは省略しない。起動継続は全必須保守が実際に完了した場合だけ許可する。

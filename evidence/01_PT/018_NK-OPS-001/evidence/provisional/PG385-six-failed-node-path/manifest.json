@@ -1,0 +1,51 @@
+{
+  "id": "PG385-six-failed-node-path",
+  "formal": false,
+  "result": "FAILED",
+  "sourceCommit": "a6b5c7c8b021c4b391b3af90572eab5d0eac8ab1",
+  "branch": "dev-foundation",
+  "executionTime": "2026-09-30T03:16:20.493340+00:00",
+  "exitCode": 1,
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 182,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 756,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 565,
+      "failures": 0,
+      "errors": 2,
+      "skipped": 0
+    }
+  },
+  "batch": "NOT-RUN in this reactor; old selected target is not full-run evidence",
+  "expected": "all6 F/E/S0 with fixed Node24.19.0",
+  "actual": "Web LogSearchScriptTest/ScenarioSearchScriptTest IOException: node unavailable; operator PATH incorrectly named node-24.19.0 instead of actual node-v24.19.0",
+  "log": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg385-six-provisional.log",
+    "sha256": "e54b262f013597ed7ac450d05323774847ac6c9601d63753e0373865daa8d73e"
+  },
+  "coverage": "incomplete/not accepted",
+  "bugs": "environment command error, no Production oracle/source change",
+  "redaction": "counts and allowlisted environment facts only; no raw XML/log/private values"
+}
