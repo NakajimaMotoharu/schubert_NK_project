@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
 /** Actual parent archives + publication, never owner/receipt authority. SS341/343 SSC110, PG381. */
 @NullMarked
 final class MorningBackupArtifacts {
-  private static final List<String> CONFIG =
+  static final List<String> CONFIG =
       List.of(
           "common.yml",
           "api.yml",
@@ -30,8 +30,9 @@ final class MorningBackupArtifacts {
           "batch.yml",
           "api.env",
           "web.env",
-          "backup-profile.json");
-  private static final List<String> CREDENTIALS =
+          "backup-profile.json",
+          "inbox-inspector.env");
+  static final List<String> CREDENTIALS =
       List.of(
           "db-api",
           "db-web",
@@ -48,7 +49,8 @@ final class MorningBackupArtifacts {
           "web-session-aes-current",
           "web-revoke-aes-current",
           "web-log-aes-current",
-          "artemis-users");
+          "artemis-users",
+          "db-inbox-inspector");
   private static final Map<String, String> TOOLS =
       Map.of(
           "pgDumpWrapperSha256",

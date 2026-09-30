@@ -167,6 +167,23 @@ public final class InspectorUnitSnapshot {
     return Optional.empty();
   }
 
+  /** SSC120: narrow known Cleanup rejection, never a success receipt or UNKNOWN repair. */
+  boolean cleanupRejectedAfter(Optional<UUID> previous) {
+    Objects.requireNonNull(previous, "previous invocation");
+    return target == Target.CLEANUP
+        && value("RemainAfterExit").equals("yes")
+        && quiescent()
+        && invocationId().isPresent()
+        && !invocationId().equals(previous)
+        && value("ActiveState").equals("failed")
+        && value("SubState").equals("failed")
+        && value("Result").equals("exit-code")
+        && value("ExecMainCode").equals("1")
+        && value("ExecMainStatus").equals("30")
+        && executionStart().signum() > 0
+        && executionEnd().compareTo(executionStart()) >= 0;
+  }
+
   /** Necessary worker-self binding only; independent kernel/NSS/namespace gates remain required. */
   public boolean running(long pid, String invocation) {
     Objects.requireNonNull(invocation, "manager invocation");

@@ -26,6 +26,34 @@ final class CleanupWorkerRequestFilesTest {
           + "cleanup_invocation=-\ncleanup_pid=-\ncleanup_start_ticks=-\ndeadline_nanos=1800000000001\n";
 
   @Test
+  void ownedCycleNamespaceAcceptsOnlyThreeNamesAndNeverRepairsResidue() throws Exception {
+    try (var f = emptyExpiryFixture()) {
+      var subject = files(f);
+      assertThrows(IOException.class, subject::requireOwnedCycle);
+      for (String name : List.of("cleanup-request", "maintenance-owner", "cleanup-start.intent"))
+        Files.createFile(f.parent.resolve(name));
+      subject.requireOwnedCycle();
+      for (String residue :
+          List.of("inspector-owner", "inspector-start.intent", "unknown", PART + ".part")) {
+        Files.createFile(f.parent.resolve(residue));
+        assertThrows(IOException.class, subject::requireOwnedCycle);
+        assertTrue(Files.exists(f.parent.resolve(residue)));
+        Files.delete(f.parent.resolve(residue));
+      }
+      assertThrows(
+          IOException.class,
+          () -> CleanupWorkerRequestFiles.forExpiry(f.root, f, f).requireOwnedCycle());
+      assertThrows(
+          IOException.class,
+          () ->
+              CleanupWorkerRequestFiles.forOwner(
+                      f.root, f, f, CleanupWorkerRequestFiles.OwnerSource.PARENT)
+                  .requireOwnedCycle());
+      f.released();
+    }
+  }
+
+  @Test
   void ownerFixedNamesIndependentBytesProfileAndRetirement() throws Exception {
     for (var source : CleanupWorkerRequestFiles.OwnerSource.values()) {
       String literal =

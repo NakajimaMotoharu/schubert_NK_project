@@ -178,4 +178,113 @@ final class CleanupTerminalRepositoryTest {
             new CleanupTerminalRepository.Entry(
                 first.attempt(), first.attempt().startedAt().minusSeconds(1), first.result()));
   }
+
+  @Test
+  void cterm004RejectedPartialRowsRemainExactAndMissingIsNotInvented() throws Exception {
+    try (var c = db.admin()) {
+      sql(c, "delete from schubert.batch_runs where id>=1003");
+      sql(
+          c,
+          "update schubert.batch_runs set status='RUNNING',ended_at=null,target_count=0,success_count=0 where id=1001");
+      sql(
+          c,
+          "update schubert.batch_runs set status='FAILED',error_code='SAFETY_FAILURE',error_summary='batch safety check failed' where id=1002");
+    }
+    try (var c = locked(db, false)) {
+      var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      var actual = repository.readRejected(RUN, OBSERVED);
+      assertEquals(RUN, actual.run());
+      assertEquals(7, actual.entries().size());
+      for (int index = 0; index < 3; index++) {
+        var row = actual.entries().get(index).orElseThrow();
+        assertEquals(1000 + index, row.attempt().id());
+        assertEquals(STEPS[index], row.attempt().step().name());
+        assertEquals(1, row.attempt().attempt());
+        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), row.attempt().startedAt());
+      }
+      assertEquals(
+          BatchStepResult.Status.SUCCESS,
+          actual.entries().get(0).orElseThrow().result().orElseThrow().status());
+      assertTrue(actual.entries().get(1).orElseThrow().result().isEmpty());
+      assertTrue(actual.entries().get(1).orElseThrow().endedAt().isEmpty());
+      var failed = actual.entries().get(2).orElseThrow();
+      assertEquals(Optional.of(Instant.parse("2026-09-13T02:00:01Z")), failed.endedAt());
+      assertEquals(
+          Optional.of(
+              new BatchStepResult(
+                  BatchStepResult.Status.FAILED,
+                  1,
+                  1,
+                  0,
+                  0,
+                  BatchStepResult.Reason.SAFETY_FAILURE)),
+          failed.result());
+      for (int index = 3; index < 7; index++) assertTrue(actual.entries().get(index).isEmpty());
+      assertEquals(actual, repository.readRejected(RUN, OBSERVED));
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isClosed());
+      assertEquals("CleanupRejectedSnapshot[data=<redacted>]", actual.toString());
+      assertThrows(UnsupportedOperationException.class, () -> actual.entries().clear());
+      assertThrows(BatchRepositoryException.class, () -> repository.read(RUN, OBSERVED));
+      c.rollback();
+    }
+    try (var c = db.admin()) {
+      sql(c, "delete from schubert.batch_runs");
+    }
+    try (var c = locked(db, false)) {
+      var empty =
+          new CleanupTerminalRepository(c, () -> 10_000_000_000L).readRejected(RUN, OBSERVED);
+      assertEquals(Collections.nCopies(7, Optional.empty()), empty.entries());
+      try (var s = c.createStatement();
+          var rows = s.executeQuery("select count(*) from schubert.batch_runs")) {
+        assertTrue(rows.next());
+        assertEquals(0, rows.getLong(1));
+      }
+      c.rollback();
+    }
+  }
+
+  @Test
+  void cterm005RejectedMalformedRunningAndNullFailClosed() throws Exception {
+    try (var c = db.admin()) {
+      sql(c, "update schubert.batch_runs set status='RUNNING',ended_at=null where id=1001");
+    }
+    try (var c = locked(db, false)) {
+      var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      assertThrows(BatchRepositoryException.class, () -> repository.readRejected(RUN, OBSERVED));
+      assertThrows(NullPointerException.class, () -> repository.readRejected(null, OBSERVED));
+      assertThrows(NullPointerException.class, () -> repository.readRejected(RUN, null));
+      c.rollback();
+    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CleanupTerminalRepository.RejectedSnapshot(RUN, List.of()));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedSnapshot(
+                null, Collections.nCopies(7, Optional.empty())));
+    var attempt =
+        new BatchStepAttempt(
+            1000,
+            RUN,
+            BatchStep.CLEAN_NOTIFICATION,
+            1,
+            Instant.parse("2026-09-13T02:00:00Z"),
+            false);
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedEntry(
+                attempt, Optional.of(OBSERVED), Optional.empty()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedEntry(
+                attempt,
+                Optional.empty(),
+                Optional.of(
+                    new BatchStepResult(
+                        BatchStepResult.Status.SUCCESS, 0, 0, 0, 0, BatchStepResult.Reason.NONE))));
+  }
 }

@@ -121,6 +121,17 @@ public final class MorningDatabaseSession {
       Objects.requireNonNull(owner, "same parent deadline");
       throw unavailable();
     }
+
+    default CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected(
+        BatchRun run,
+        dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run);
+      Objects.requireNonNull(receipt);
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
   }
 
   private static final Pattern URL =
@@ -712,6 +723,47 @@ public final class MorningDatabaseSession {
         throw unavailable();
       } finally {
         inHandoff = false;
+      }
+    }
+
+    /** Narrow typed30, partial data only, never a successful completion or new DB attempt. */
+    @Override
+    public CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected(
+        BatchRun run,
+        dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run);
+      Objects.requireNonNull(receipt);
+      Objects.requireNonNull(owner);
+      guard();
+      if (!backupFinished
+          || !handoffStarted
+          || receipt.target()
+              != dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.Target.CLEANUP
+          || receipt.exitCode() != 30) throw unavailable();
+      try {
+        owner.check();
+        if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var repository = new CleanupTerminalRepository(connection, owner);
+        var observed =
+            repository.readRejected(
+                run, Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS));
+        if (!observed.equals(
+            repository.readRejected(
+                run, Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS))))
+          throw unavailable();
+        guard();
+        owner.check();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        owner.check();
+        return observed;
+      } catch (SQLException | BatchRepositoryException known) {
+        throw unavailable();
       }
     }
 

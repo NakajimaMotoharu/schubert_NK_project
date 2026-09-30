@@ -166,7 +166,10 @@ public final class BackupUnitReceiptGate {
 
   /** Genuine fresh normal terminal result; FAILED does not prove valid archives. BUG325. */
   public Optional<InspectorUnitSnapshot> observeTerminal(Baseline baseline) throws IOException {
-    return observe(baseline, target == BackupUnitStartClient.Target.BACKUP);
+    return observe(
+        baseline,
+        target == BackupUnitStartClient.Target.BACKUP
+            || target == BackupUnitStartClient.Target.CLEANUP);
   }
 
   public Optional<TerminalReceipt> observeResult(Baseline baseline) throws IOException {
@@ -191,12 +194,9 @@ public final class BackupUnitReceiptGate {
       if (first.isEmpty()
           || !first.orElseThrow().isTarget(target.observation())
           || (target != BackupUnitStartClient.Target.BACKUP
-              && !first.orElseThrow().heldMaintenance())
-          || (includeFailure
-              ? first.orElseThrow().backupTerminalAfter(baseline.previous).isEmpty()
-              : (target != BackupUnitStartClient.Target.BACKUP
-                  ? first.orElseThrow().receiptAfter(baseline.previous).isEmpty()
-                  : first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0)))
+              && !first.orElseThrow().heldMaintenance()
+              && !(includeFailure && first.orElseThrow().cleanupRejectedAfter(baseline.previous)))
+          || !eligible(first.orElseThrow(), baseline.previous, includeFailure))
         return Optional.empty();
       Optional<InspectorUnitSnapshot> whole = known(terminal.quiescent());
       if (whole.isEmpty() || !first.orElseThrow().matches(whole.orElseThrow()))
@@ -208,6 +208,16 @@ public final class BackupUnitReceiptGate {
     } finally {
       check();
     }
+  }
+
+  private boolean eligible(
+      InspectorUnitSnapshot state, Optional<UUID> previous, boolean includeFailure) {
+    if (target == BackupUnitStartClient.Target.BACKUP)
+      return includeFailure
+          ? state.backupTerminalAfter(previous).isPresent()
+          : state.receiptAfter(previous).orElse(-1) == 0;
+    return state.receiptAfter(previous).isPresent()
+        || (includeFailure && state.cleanupRejectedAfter(previous));
   }
 
   private void check() throws IOException {

@@ -62,7 +62,7 @@ final class CleanupUnitCycleTest {
 
   @Test
   void ccycle001FreshNormalZeroAndWarningKeepActiveAndReadDbOnlyAfterReacquire() throws Exception {
-    for (int code : List.of(0, 10)) {
+    for (int code : List.of(0, 10, 30)) {
       var state = new AtomicReference<>(parse(BASELINE));
       var gate =
           new BackupUnitReceiptGate(
@@ -92,7 +92,11 @@ final class CleanupUnitCycleTest {
                     throws IOException {
                   events.add("fresh-terminal");
                   return gate.observeResult((BackupUnitReceiptGate.Baseline) before)
-                      .map(v -> MorningBackupUnitCycle.Outcome.SUCCESS);
+                      .map(
+                          v ->
+                              v.exitCode() == 30
+                                  ? MorningBackupUnitCycle.Outcome.FAILED
+                                  : MorningBackupUnitCycle.Outcome.SUCCESS);
                 }
 
                 public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object before)
@@ -107,7 +111,14 @@ final class CleanupUnitCycleTest {
               },
               () -> {
                 events.add("start");
-                state.set(parse(FRESH.replace("ExecMainStatus=0", "ExecMainStatus=" + code)));
+                String observed = FRESH.replace("ExecMainStatus=0", "ExecMainStatus=" + code);
+                if (code == 30)
+                  observed =
+                      observed
+                          .replace("ActiveState=active", "ActiveState=failed")
+                          .replace("SubState=exited", "SubState=failed")
+                          .replace("Result=success", "Result=exit-code");
+                state.set(parse(observed));
                 return new MorningBackupUnitCycle.StartAttempt() {
                   public BackupUnitStartClient.Status status() {
                     return BackupUnitStartClient.Status.CLIENT_EXITED_ZERO;
@@ -165,6 +176,57 @@ final class CleanupUnitCycleTest {
       state.set(parse(BASELINE));
       assertThrows(IOException.class, () -> gate.requireStillPresent(actual));
     }
+  }
+
+  @Test
+  void ccycle004NarrowRejectedThirtyNeverSuccessOldSignalTimeoutOrUnknown() throws Exception {
+    String failed =
+        FRESH
+            .replace("ActiveState=active", "ActiveState=failed")
+            .replace("SubState=exited", "SubState=failed")
+            .replace("Result=success", "Result=exit-code")
+            .replace("ExecMainStatus=0", "ExecMainStatus=30");
+    var state = new AtomicReference<>(parse(BASELINE));
+    var kernel = new AtomicReference<>(Optional.of(state.get()));
+    var gate =
+        new BackupUnitReceiptGate(
+            () -> {},
+            () -> Optional.of(state.get()),
+            kernel::get,
+            BackupUnitStartClient.Target.CLEANUP);
+    var before = gate.capture();
+    state.set(parse(failed));
+    kernel.set(Optional.of(state.get()));
+    assertTrue(gate.observe(before).isEmpty());
+    assertTrue(state.get().receiptAfter(Optional.empty()).isEmpty());
+    var rejected = gate.observeResult(before).orElseThrow();
+    assertEquals(30, rejected.exitCode());
+    gate.requireStillPresent(rejected);
+    for (String invalid :
+        List.of(
+            failed.replace("ExecMainStatus=30", "ExecMainStatus=70"),
+            failed.replace("ExecMainStatus=30", "ExecMainStatus=1"),
+            failed.replace("ExecMainCode=1", "ExecMainCode=2"),
+            failed.replace("Result=exit-code", "Result=timeout"),
+            failed.replace("MainPID=0", "MainPID=123"),
+            failed.replace(
+                "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0"),
+            failed.replace(
+                "ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=1"))) {
+      state.set(parse(invalid));
+      kernel.set(Optional.of(state.get()));
+      assertTrue(gate.observeResult(before).isEmpty());
+    }
+    assertThrows(
+        StopGateException.class,
+        () -> parse(failed.replace("RemainAfterExit=yes", "RemainAfterExit=no")));
+    state.set(parse(failed));
+    kernel.set(Optional.empty());
+    assertTrue(gate.observeResult(before).isEmpty());
+    kernel.set(Optional.of(parse(BASELINE)));
+    assertTrue(gate.observeResult(before).isEmpty());
+    assertFalse(state.get().cleanupRejectedAfter(state.get().invocationId()));
+    assertThrows(NullPointerException.class, () -> state.get().cleanupRejectedAfter(null));
   }
 
   @Test

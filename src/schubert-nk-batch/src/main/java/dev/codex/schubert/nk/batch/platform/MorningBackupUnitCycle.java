@@ -377,11 +377,14 @@ public final class MorningBackupUnitCycle {
                 try {
                   if (!startedOnce.compareAndSet(false, true)) throw new Unresolved();
                   var child = startAndWait(baseline);
-                  if (child.outcome() != Outcome.SUCCESS) throw new Unresolved();
                   var value =
                       child
                           .receipt()
                           .orElseThrow(() -> new IOException("typed receipt unavailable"));
+                  if (child.outcome() != Outcome.SUCCESS
+                      && !(target == BackupUnitStartClient.Target.CLEANUP
+                          && !stopChild
+                          && value.exitCode() == 30)) throw new Unresolved();
                   receipt.requirePresent(value);
                   if (stopChild) stopAndVerify();
                   budget.requireWithin();

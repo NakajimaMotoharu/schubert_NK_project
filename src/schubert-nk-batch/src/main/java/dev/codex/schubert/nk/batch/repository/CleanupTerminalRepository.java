@@ -77,6 +77,53 @@ public final class CleanupTerminalRepository {
   private final Connection connection;
   private final MaintenanceOwnerFrame.Guard guard;
 
+  /** Actual latest stored row only. Empty terminal means RUNNING with verified all-zero counts. */
+  public record RejectedEntry(
+      BatchStepAttempt attempt, Optional<Instant> endedAt, Optional<BatchStepResult> result) {
+    public RejectedEntry {
+      Objects.requireNonNull(attempt);
+      Objects.requireNonNull(endedAt);
+      Objects.requireNonNull(result);
+      if (!STEPS.contains(attempt.step()) || endedAt.isPresent() != result.isPresent())
+        throw new IllegalArgumentException("Cleanup rejection row invalid");
+      if (endedAt.isPresent()) {
+        BatchStepAttempt.time(attempt.run(), endedAt.orElseThrow());
+        if (endedAt.orElseThrow().isBefore(attempt.startedAt()))
+          throw new IllegalArgumentException("Cleanup rejection time invalid");
+      }
+      if (attempt.skipped()
+          != result
+              .map(value -> value.reason() == BatchStepResult.Reason.ALREADY_SUCCESSFUL)
+              .orElse(false)) throw new IllegalArgumentException("Cleanup rejection skip invalid");
+    }
+  }
+
+  /** Fixed seven slots: absence is not a fabricated FAILED/SKIPPED result or startup proof. */
+  public record RejectedSnapshot(BatchRun run, List<Optional<RejectedEntry>> entries) {
+    public RejectedSnapshot {
+      Objects.requireNonNull(run);
+      entries = List.copyOf(entries);
+      if (entries.size() != STEPS.size())
+        throw new IllegalArgumentException("Cleanup rejection slots invalid");
+      var ids = new HashSet<Long>();
+      for (int index = 0; index < STEPS.size(); index++) {
+        var value = entries.get(index);
+        if (value.isPresent()) {
+          var attempt = value.orElseThrow().attempt();
+          if (attempt.step() != STEPS.get(index)
+              || !attempt.run().equals(run)
+              || !ids.add(attempt.id()))
+            throw new IllegalArgumentException("Cleanup rejection identity invalid");
+        }
+      }
+    }
+
+    @Override
+    public String toString() {
+      return "CleanupRejectedSnapshot[data=<redacted>]";
+    }
+  }
+
   public CleanupTerminalRepository(Connection connection, MaintenanceOwnerFrame.Guard guard) {
     this.connection = Objects.requireNonNull(connection, "reacquired parent transaction");
     this.guard = Objects.requireNonNull(guard, "actual parent deadline");
@@ -138,6 +185,95 @@ public final class CleanupTerminalRepository {
       var ordered = new ArrayList<Entry>();
       for (var step : STEPS) ordered.add(present(values.get(step)));
       var snapshot = new Snapshot(ordered);
+      check(run);
+      return snapshot;
+    } catch (SQLException | IllegalArgumentException known) {
+      throw new BatchRepositoryException();
+    }
+  }
+
+  /**
+   * SSC120/BUG365: same locked run, preserve nonexistent/partial/terminal DB facts without writes.
+   */
+  public RejectedSnapshot readRejected(BatchRun run, Instant observedAt) {
+    Objects.requireNonNull(run, "same rejected run");
+    Objects.requireNonNull(observedAt, "actual rejection observation");
+    BatchStepAttempt.time(run, observedAt);
+    try {
+      check(run);
+      var values = new EnumMap<BatchStep, RejectedEntry>(BatchStep.class);
+      try (var statement = connection.prepareStatement(SQL)) {
+        var query = present(statement);
+        query.setQueryTimeout(seconds());
+        query.setObject(1, run.id());
+        query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+        try (var rows = query.executeQuery()) {
+          var row = present(rows);
+          while (row.next()) {
+            require(values.size() < STEPS.size());
+            var step = BatchStep.valueOf(present(row.getString("step")));
+            require(STEPS.contains(step));
+            var started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
+            require(
+                !started.isAfter(observedAt)
+                    && run.id().equals(row.getObject("run_id", UUID.class))
+                    && run.cutoff()
+                        .atZone(ZoneId.of("Asia/Tokyo"))
+                        .toLocalDate()
+                        .equals(row.getObject("business_date", LocalDate.class)));
+            var ended =
+                Optional.ofNullable(row.getObject("ended_at", OffsetDateTime.class))
+                    .map(OffsetDateTime::toInstant);
+            var status = present(row.getString("status"));
+            long target = present(row.getObject("target_count", Long.class));
+            long success = present(row.getObject("success_count", Long.class));
+            long failure = present(row.getObject("failure_count", Long.class));
+            long bytes = present(row.getObject("byte_count", Long.class));
+            var code = row.getString("error_code");
+            var summary = row.getString("error_summary");
+            Optional<BatchStepResult> result;
+            if (status.equals("RUNNING")) {
+              require(
+                  ended.isEmpty()
+                      && target == 0
+                      && success == 0
+                      && failure == 0
+                      && bytes == 0
+                      && code == null
+                      && summary == null);
+              result = Optional.empty();
+            } else {
+              require(ended.isPresent() && !ended.orElseThrow().isAfter(observedAt));
+              var reason =
+                  code == null ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.valueOf(code);
+              var terminal =
+                  new BatchStepResult(
+                      BatchStepResult.Status.valueOf(status),
+                      target,
+                      success,
+                      failure,
+                      bytes,
+                      reason);
+              require(Objects.equals(reason.summary(), summary));
+              result = Optional.of(terminal);
+            }
+            var attempt =
+                new BatchStepAttempt(
+                    present(row.getObject("id", Long.class)),
+                    run,
+                    step,
+                    present(row.getObject("attempt", Integer.class)),
+                    started,
+                    result
+                        .map(value -> value.reason() == BatchStepResult.Reason.ALREADY_SUCCESSFUL)
+                        .orElse(false));
+            require(values.put(step, new RejectedEntry(attempt, ended, result)) == null);
+          }
+        }
+      }
+      var ordered = new ArrayList<Optional<RejectedEntry>>();
+      for (var step : STEPS) ordered.add(Optional.ofNullable(values.get(step)));
+      var snapshot = new RejectedSnapshot(run, ordered);
       check(run);
       return snapshot;
     } catch (SQLException | IllegalArgumentException known) {

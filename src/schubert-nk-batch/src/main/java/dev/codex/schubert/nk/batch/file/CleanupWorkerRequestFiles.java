@@ -155,6 +155,33 @@ public final class CleanupWorkerRequestFiles {
     }
   }
 
+  /** SSC120: same live cycle only; nested Inspector/part/unknown residue forbids retirement. */
+  public void requireOwnedCycle() throws StorageIoException {
+    require(!expiry && ownerSource.isEmpty());
+    synchronized (lock) {
+      Snapshot before = directory();
+      root.atDirectory(
+          held -> {
+            var observed = new HashSet<String>();
+            try (var names = java.nio.file.Files.newDirectoryStream(held)) {
+              for (var entry : names) {
+                var filename = entry.getFileName();
+                if (filename == null) throw unavailable();
+                require(observed.add(filename.toString()));
+              }
+            } catch (java.nio.file.DirectoryIteratorException failure) {
+              throw unavailable();
+            }
+            require(
+                observed.equals(
+                    Set.of("cleanup-request", "maintenance-owner", "cleanup-start.intent")));
+            guard();
+            return Boolean.TRUE;
+          });
+      require(before.equals(directory()));
+    }
+  }
+
   public void prepare(CleanupWorkerRequest request, UUID part) throws StorageIoException {
     Objects.requireNonNull(request, "root request");
     require(!expiry && ownerSource.isEmpty());

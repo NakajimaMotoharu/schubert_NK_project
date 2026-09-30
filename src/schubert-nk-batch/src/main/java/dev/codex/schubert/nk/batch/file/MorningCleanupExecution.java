@@ -106,23 +106,52 @@ final class MorningCleanupExecution {
           var cycle =
               MorningBackupUnitCycle.create(
                   context, expected, budget, BackupUnitStartClient.Target.CLEANUP);
-          cycle.executeHandoff(
-              operation -> database.handoffCleanup(operation::execute),
-              receipt -> {
-                parent.check();
-                result.set(
-                    database.observeCleanup(state.activation().run(), receipt.exitCode(), parent));
-                parent.check();
-              },
-              () -> {
-                parent.check();
-                require(owners.readOwner().equals(frame) && requests.read().equals(request));
-                requests.retire(request);
-                owners.retireOwner(frame);
-                parent.check();
-              });
+          var terminal =
+              cycle.executeHandoff(
+                  operation -> database.handoffCleanup(operation::execute),
+                  receipt -> {
+                    parent.check();
+                    if (receipt.exitCode() == 30)
+                      database.observeCleanupRejected(state.activation().run(), receipt, parent);
+                    else
+                      result.set(
+                          database.observeCleanup(
+                              state.activation().run(), receipt.exitCode(), parent));
+                    parent.check();
+                  },
+                  () -> {
+                    parent.check();
+                    require(
+                        MaintenanceUnitTermination.create(
+                                context, expected, MaintenanceUnit.INSPECTOR)
+                            .quiescent()
+                            .isPresent());
+                    requireInspectorEnvironmentClear();
+                    requests.requireOwnedCycle();
+                    require(owners.readOwner().equals(frame) && requests.read().equals(request));
+                    requests.retire(request);
+                    owners.retireOwner(frame);
+                    parent.check();
+                  });
           parent.check();
+          if (terminal.exitCode() == 30) throw new IOException("Cleanup rejected");
           return Objects.requireNonNull(result.get(), "actual Cleanup readback");
+        });
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SS343 fixed Inspector environment root, no alternate namespace; CEXEC004")
+  private static void requireInspectorEnvironmentClear() throws IOException {
+    var directory =
+        OwnedTransferDirectory.open(
+            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/maintenance"));
+    ResourceScope.use(
+        directory::close,
+        () -> {
+          new InspectorEnvironmentPublisher(directory, LinuxInodeSecurity.create()).requireFresh();
+          return Boolean.TRUE;
         });
   }
 

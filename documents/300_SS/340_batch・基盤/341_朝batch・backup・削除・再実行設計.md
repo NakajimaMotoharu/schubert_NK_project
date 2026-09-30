@@ -149,6 +149,8 @@ SSC091/BUG271: 保持parent FDを子argvから読む工具は、取得済全子�
 
 ### 6.2 Config・credential backup
 
+SSC121・BUG366：静的復旧config固定allowlistはcommon.yml/api.yml/web.yml/batch.yml/api.env/web.env/backup-profile.json/inbox-inspector.envの8名。暗号credential固定allowlistはdb-api/db-web/db-batch/db-migration/backup-pgpass/mq-api/mq-web/mq-maintenance/mq-ops/api-context-aes-current/api-inbox-response-aes-current/operation-hmac-current/web-session-aes-current/web-revoke-aes-current/web-log-aes-current/artemis-users/db-inbox-inspectorの17名。後者をRootがage暗号化して保存し、普通Backup workerへ生secretを渡さない。runtime同run Inspector env/request/ownerはarchive対象外。過去成功bundleのcatalog/hash/DBを追加名へ書換えず、通常resumeは元成功を実再検証し、新生成時だけ現行全role catalogを採用する。
+
 SSC092/PG309（実装前）: 固定backup Unitの入力はroot親がM/A/原本/停止/current INVALID/backup両step begin commit後に作る非秘密requestだけ。format version/run UUID/内容生成開始時刻から既存manifest規則で出力名を導出し、任意path/command/UID/credential名/DBattemptを受け付けない。new-only root600 requestを専用0700/run namespaceへ公開しLoadCredentialでworkerへ渡す。workerは固定NSS・自己Unit/kernel・runtime・backup root admission後new-only700 part/600dump→Productionコピー/実dump・list→全close/廃棄成功のみexit0。旧part再利用・DB更新なし。親はfresh Invocation/receipt0/全cgroup空/前後安定を確認するまでM/Aと隔離を保持し、起動clientのexitだけを成功にしない。RemainAfterExit=yes/Restart=no/KillMode=control-group/SendSIGKILL=no、親回収後の明示stop/終端再確認まで旧requestをretireしない。
 
 SSC090/091 PG307/308補足: startPipeline呼出のIOException/Runtime/Errorは一部spawn不明なので、固定one-shot Unit内でborrowed callbackを非復帰隔離する。builder生成と開始直前割込はspawn前に拒否できる。隔離中の割込はclearしてparkを継続し、Unit全cgroup停止を親が確認するまでM/A/partを保全する。外部process停止後の元例外rethrowは保証しない。Production copyは新UUID.part0600を保持し、原本namespace照合/readback/heap消去を済ませてから固定dumpへ渡す。全terminal-positive return後のみ全zero書込/force/close/readback/元inode-name再照合/unlink/dirsync。不確定unlink後の復元再作成なし。
@@ -308,6 +310,8 @@ Process kill後は未削除rowだけ残り、同cutoff再実行で0件/残件を
 SSC-051/PG-D-136のCLEAN_LOG再開: 331 §3.9の永続cursor/累積を使い、同run/cutoffで全holdを含む各chunkを一度だけ数える。target0のENDをDBへ記録するまで完了としない。親のattempt件数は開始時と終了時のmaintenance_read_log_cleanup_progress累積差分、run累積は別記録。row lock競合/SQL異常/commit不明は未完了、再開時はDB状態を読取り直す。CLEAN_BATCH_RUNでlog progressの完了400日・調査保護も別chunkで清掃する。持続cursorのない旧関数を親側の無限retryで補わない。親process実装/OS gateは引き続き必須。
 
 ### 7.3 非公開Inbox検査process（SSC-049/QA-046）
+
+SSC120・BUG365：Cleanup fresh正常30は成功0/10でもUNKNOWNでもない既知業務拒否として型付き観測する。failed/failed・exit-code・ExecMainCode1/Status30、fresh Invocation/monotonic、前後busと独立全kernel終端が一致した後だけ親advisoryを再取得する。実7step最新保存行の不存在/RUNNING/terminalと全列を同原本/期限下で独立読取し、未実行をFAILED/SKIPへ埋めない。別Inspector全終端、runtime env/inspector-owner/inspector-start.intent不存在、同request/maintenance-owner/current INVALIDを確認後、request→maintenance-owner→cleanup-start.intentを退役し、cycleが返ってからMain30を伝える。Broker/Expiry/permitは進めない。通常拒否にstop/reset-failedは不要。明示同run resumeは新activation/Epochで既存ABANDONED→次attempt/既成功SKIPを使い、元chunk/成果を保持する。signal/timeout/70/未知1/親期限・再取得・読戻し・退役不明は従来retain/隔離、残留を自動修復しない。
 
 SSC119（2026-09-30、S2実caller接続前）：真正Cleanup childは自身のschubert_batch専用connectionを保持する。Inspector開始前に同run summaryを読取り、InspectorEnvironmentFilesのRoot所有同run環境をnew-only公開する。既存固定Unit engineの閉鎖INSPECTOR選択だけをCLEANUP actorへ許可し、任意Unit/pathやMorning全停止権限を渡さない。`/run/schubert-nk/cleanup-request/inspector-start.intent`をRoot0600で先行durable公開する（cleanup-start.intent/cleanup-requestと別entry）。親Morningが保持するM/A・同原本・現boot/Epoch・元の30分deadlineの条件を引き継ぎ、Cleanup/Inspector自身の起動から30分を再計時して延長しない。実削除の前後にも親生存・固定identity/deadlineを検査し、親死亡/期限を正常続行しない。
 

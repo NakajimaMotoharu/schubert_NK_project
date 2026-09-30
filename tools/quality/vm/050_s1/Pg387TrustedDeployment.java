@@ -13,24 +13,31 @@ import java.util.*;
  * Actual application source must already be built/tested/committed. No clean/repair/baseline.
  */
 public final class Pg387TrustedDeployment {
-  static final Path RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG387");
+  static Path RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG387");
+  static String LABEL="PG387", STEM="pg387", SOURCE="7ba352d6f";
   static final Path PRESERVE=Path.of("/var/lib/pgpt-s1-preservation");
   public static void main(String[] args) throws Exception {
     Thread.currentThread().setUncaughtExceptionHandler((t,e) -> {
-      System.err.println("PG387 DEPLOYMENT_REFUSED diagnosticsRedacted=true type="+e.getClass().getName());
+      System.err.println(LABEL+" DEPLOYMENT_REFUSED diagnosticsRedacted=true type="+e.getClass().getName());
       for(var frame:e.getStackTrace()) {
         if(frame.getClassName().equals("Pg387TrustedDeployment"))
-          System.err.println("PG387 FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
+          System.err.println(LABEL+" FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
       }
     });
-    if(args.length!=1 || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
+    if((args.length!=1 && args.length!=3) || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
+    if(args.length==3) {
+      if(!args[1].matches("0\\.1\\.0-PG[0-9]{3}") || !args[2].matches("[0-9a-f]{40}"))
+        throw new IllegalArgumentException("isolated candidate/source");
+      LABEL=args[1].substring(6); STEM=LABEL.toLowerCase(Locale.ROOT); SOURCE=args[2];
+      RELEASE=Path.of("/opt/schubert-nk/releases",args[1]);
+    }
     if(!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new IllegalStateException("isolated VM only");
     var result=MaintenanceFileLock.create().tryExclusive(() -> {
-      System.out.println("PG387 STAGE M_ACQUIRED");
+      System.out.println(LABEL+" STAGE M_ACQUIRED");
       checked(() -> { stopAll(); return Boolean.TRUE; });
-      System.out.println("PG387 STAGE ALL_STOPPED");
+      System.out.println(LABEL+" STAGE ALL_STOPPED");
       return StartupAdmissionFile.create().tryExclusive(admission -> {
-        System.out.println("PG387 STAGE A_ACQUIRED");
+        System.out.println(LABEL+" STAGE A_ACQUIRED");
         return checked(() -> {
           terminalAll();
           freezeCandidate();
@@ -42,7 +49,7 @@ public final class Pg387TrustedDeployment {
       }).orElseThrow();
     }).orElseThrow();
     if(!result) throw new IllegalStateException("deployment result");
-    System.out.println("PG387 DEPLOYMENT "+args[0]+" completed=true signatureAndBom=true runtimePermitIssued=false");
+    System.out.println(LABEL+" DEPLOYMENT "+args[0]+" source="+SOURCE+" completed=true signatureAndBom=true runtimePermitIssued=false");
   }
   interface Checked<T> { T execute() throws Exception; }
   static <T> T checked(Checked<T> work) throws java.io.IOException {
@@ -53,14 +60,17 @@ public final class Pg387TrustedDeployment {
   }
   static ReleaseApproval verify() throws Exception {
     byte[] pin=material(Path.of("/etc/schubert-nk/deployment-key/pin.der"),44);
-    byte[] signature=material(PRESERVE.resolve("pg387-manifest.sig"),64);
+    byte[] signature=material(PRESERVE.resolve(STEM+"-manifest.sig"),64);
     byte[] original=Files.readAllBytes(RELEASE.resolve("RELEASE-MANIFEST.json"));
     if(original.length==0 || original.length>1048576) throw new IllegalStateException("manifest bounds");
     new ReleaseSignatureVerifier(pin).verify(original,signature);
-    System.out.println("PG387 STAGE PINNED_SIGNATURE_VERIFIED");
-    var approval=new ReleaseApproval("0.1.0-PG387",HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(original)));
+    System.out.println(LABEL+" STAGE PINNED_SIGNATURE_VERIFIED");
+    String observedSource=com.google.gson.JsonParser.parseString(new String(original,StandardCharsets.UTF_8))
+        .getAsJsonObject().getAsJsonObject("source").get("commit").getAsString();
+    if(!observedSource.startsWith(SOURCE))throw new IllegalStateException("signed source mismatch");
+    var approval=new ReleaseApproval("0.1.0-"+LABEL,HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(original)));
     var inspected=StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verifyCandidate(approval);
-    System.out.println("PG387 STAGE FULL_CANDIDATE_BOM_VERIFIED");
+    System.out.println(LABEL+" STAGE FULL_CANDIDATE_BOM_VERIFIED");
     if(!inspected.version().equals(approval.version()) || inspected.migrations().size()!=24) throw new IllegalStateException("BOM mismatch");
     return approval;
   }
@@ -75,7 +85,7 @@ public final class Pg387TrustedDeployment {
     } else if(status!=0) throw new IllegalStateException("candidate mount query failed");
     var freeze=new ProcessBuilder("/usr/bin/mount","-o","remount,bind,ro",RELEASE.toString()).inheritIO().start();
     if(freeze.waitFor()!=0) throw new IllegalStateException("candidate immutable mount failed");
-    System.out.println("PG387 STAGE FIXED_CANDIDATE_HOST_RO");
+    System.out.println(LABEL+" STAGE FIXED_CANDIDATE_HOST_RO");
   }
   static void activate(ReleaseApproval approval) throws Exception {
     invalidatePreservedRun();
@@ -89,21 +99,21 @@ public final class Pg387TrustedDeployment {
     byte[] previous=material(dir.resolve("current"),(int)size);
     var old=ReleaseApproval.parse(previous);
     StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(old);
-    Files.write(PRESERVE.resolve("pg387-previous-approval"),previous,StandardOpenOption.CREATE_NEW);
-    Path part=dir.resolve("pg387.part");
+    Files.write(PRESERVE.resolve(STEM+"-previous-approval"),previous,StandardOpenOption.CREATE_NEW);
+    Path part=dir.resolve(STEM+".part");
     Files.write(part,approval.encode(),StandardOpenOption.CREATE_NEW);
     Files.setPosixFilePermissions(part,java.nio.file.attribute.PosixFilePermissions.fromString("r--------"));
     try(var f=FileChannel.open(part,StandardOpenOption.READ)){f.force(true);}
     Files.move(part,dir.resolve("current"),StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);
     sync(dir);
-    Path current=Path.of("/opt/schubert-nk/current"), next=current.resolveSibling("pg387-current.part");
+    Path current=Path.of("/opt/schubert-nk/current"), next=current.resolveSibling(STEM+"-current.part");
     Path previousLink=Files.readSymbolicLink(current);
-    Files.writeString(PRESERVE.resolve("pg387-previous-current.txt"),previousLink+"\n",StandardOpenOption.CREATE_NEW);
+    Files.writeString(PRESERVE.resolve(STEM+"-previous-current.txt"),previousLink+"\n",StandardOpenOption.CREATE_NEW);
     Files.createSymbolicLink(next,RELEASE);
     Files.move(next,current,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);
     sync(current.getParent());
     var result=StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(ReleaseApproval.parse(Files.readAllBytes(dir.resolve("current"))));
-    if(!result.version().equals("0.1.0-PG387")) throw new IllegalStateException("activation readback");
+    if(!result.version().equals("0.1.0-"+LABEL)) throw new IllegalStateException("activation readback");
   }
   static void invalidatePreservedRun() throws Exception {
     if(Files.exists(Path.of("/run/schubert-nk/backup-request/backup-start.intent"),LinkOption.NOFOLLOW_LINKS))
@@ -119,12 +129,12 @@ public final class Pg387TrustedDeployment {
         throw new IllegalStateException("preserved INVALID only");
       var original=MaintenanceRunFiles.create().execute(session -> session.observe(old.activation()));
       if(!original.equals(old.activation()))throw new IllegalStateException("original mismatch");
-      Files.write(PRESERVE.resolve("pg387-previous-epoch"),StartupPermitRecords.epoch(old),StandardOpenOption.CREATE_NEW);
+      Files.write(PRESERVE.resolve(STEM+"-previous-epoch"),StartupPermitRecords.epoch(old),StandardOpenOption.CREATE_NEW);
       var next=files.invalidate(boot,UUID.randomUUID(),old.activation());
       if(!next.equals(files.current()) || next.state()!=StartupPermitRecords.State.INVALID
           || !next.activation().equals(old.activation()) || next.epoch().equals(old.epoch()))
         throw new IllegalStateException("INVALID readback");
-      System.out.println("PG387 STAGE FRESH_INVALID_PRESERVED_ORIGINAL");
+      System.out.println(LABEL+" STAGE FRESH_INVALID_PRESERVED_ORIGINAL");
     }
   }
   static void stopAll() throws Exception {
