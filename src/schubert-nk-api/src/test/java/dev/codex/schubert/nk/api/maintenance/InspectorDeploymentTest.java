@@ -160,12 +160,17 @@ final class InspectorDeploymentTest {
         Service.Type=oneshot
         Service.User=schubert-inbox-inspector
         Service.Group=schubert-inbox-inspector
+        Service.SupplementaryGroups=schubert schubert-read
+        Service.CapabilityBoundingSet=
+        Service.AmbientCapabilities=
+        Service.RemainAfterExit=yes
         Service.WorkingDirectory=/opt/schubert-nk/current/api
         Service.ExecStart=/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector
         Service.EnvironmentFile=/etc/schubert-nk/inbox-inspector.env
         Service.EnvironmentFile=/run/schubert-nk/maintenance/inbox-inspector.env
         Service.UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
         Service.LoadCredential=db-inbox-inspector:/etc/schubert-nk/credentials/db-inbox-inspector
+        Service.LoadCredential=maintenance-owner:/run/schubert-nk/cleanup-request/inspector-owner
         Service.LoadCredential=api-context-aes-current:/etc/schubert-nk/credentials/api-context-aes-current
         Service.LoadCredential=api-inbox-response-aes-current:/etc/schubert-nk/credentials/api-inbox-response-aes-current
         Service.Restart=no
