@@ -379,6 +379,12 @@ Readinessは認証情報・Queue内容・DBデータをbodyへ返さない。Cad
 
 ## 11. 再実行仕様
 
+SSC116/BUG350（2026-09-30、実装前補足）：通常Morning resumeと手動Backupのportを分離する。通常で同run元SUCCESSがあるBackupは元成功bundle一対（DB/CONFIGの完全handle、同content開始/終了/attempt、実4file）を再読・実再検証し、今回両stepをSKIPPED/ALREADY_SUCCESSFUL、件数/byte全0として保存・commit後独立再読する。元成功と今回skipのhandleは別で、元の保存結果・成果を変更しない。最新の同runbundleを選び、異なる試行の片成功を組み合わせず、片方欠落/未知/不整合は拒否する。
+
+§5.1/SSC108のfresh Backup Invocationは通常成功resumeでも必須だが、その真正子は「既存成果の実再検証」を行い、再生成しない。固定ASCII/LF profile NKBACKUPVERIFY1をNKBACKUP1と相互受理せず、元run・content開始・manifest SHA・dump size/SHAのみ許す（任意path/command/SQL/attempt禁止）。既存規則でdirectoryを導出し、普通Backup UIDが保持inode/owner/ACL/size/hashを確認して実pg_restore --listを実行する。親rootは元4file・元完全DB結果と今回両SKIPを保持前後に照合する。root0600 manifest/config/credential archiveを子のために緩めない。今回真正fresh子/全終端とこれらの証明後だけBackup完了能力/起動根拠とする。再検証失敗はpermit不可、新INVALID・保全対象保持、元SUCCESSをFAILEDへ書換えず、生成失敗経路へ流用しない。手動Backupの再生成・複数SUCCESS例外はSSC054の既存規則のみ。
+
+SSC117/BUG351（2026-09-30、実装前補足）：真正Backup失敗後は成功manifestを捏造せずNKCLEANFAIL1の別固定profileで現run/activation/boot/Epoch・実非0fresh Backup receipt・完全FAILED pairを束縛し、真正Cleanup子が両COMMAND_FAILUREを全列再読する。BUSINESS/TECHNICAL削除6stepのみ実SKIPPED/BACKUP_UNAVAILABLE/全count0をcommit/readbackしDELETE/Inspectorは呼ばず、実Transferと独立Artemis/Expiryは続行する。成功済stepのskipは元terminal/Log進捗/Inbox summary/Expiry auditと今回SKIPを別identityで照合する。Cleanup後の親advisory再取得・全終端の後にExpiryを別一度限りhandoffし、同じ親30分budget/M/A/原本/INVALID ownerを保持する。Expiry auditは元SUCCESS handleだけで読む。今回SKIP handleを元auditへ渡さず、fresh selected0・cutoff/元audit全列・今回terminalを検証する。Transferの実高位callerは固定root・正規日付dir・NOFOLLOW walk・cutoff・集計・保持前後条件を実行し、既存低位unlink/sync能力を再使用する。
+
 | Command | 前提 | 再実行動作 |
 |---|---|---|
 | `morning-run --resume <runId>` | Public/app停止、lock取得 | SUCCESS stepはSKIPPED、FAILED/ABANDONEDの次attemptを同cutoffで実行 |
