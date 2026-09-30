@@ -18,9 +18,10 @@ import org.jspecify.annotations.NullMarked;
 /**
  * External same-owner Morning→Backup wiring. Actual artifacts/DB are completed and request/marker
  * retired only after full termination and original/current proof. S2/S3 are not assembled yet:
- * partial valid invocations still exit30, never0/10. Known worker failure continuation remains
- * isolated under the outer oneshot budget; no unexecuted phase is invented as FAILED. No raw
- * diagnostic is printed. NK-OPS-001; OPS009/UI251/SS341/343/SSC100-102; PG339; PT-OPS-MMAIN001-007.
+ * partial valid invocations still exit30, never0/10. A fresh normal worker failure is recorded and
+ * safely retired, but subsequent cleanup/issuer remains incomplete. UNKNOWN is retained under the
+ * outer oneshot budget; no unexecuted phase is invented as FAILED. No raw diagnostic is printed.
+ * NK-OPS-001; OPS009/UI251/SS341/343/SSC100-102; PG339; PT-OPS-MMAIN001-007.
  */
 @NullMarked
 public final class MorningProcessMain {
@@ -89,13 +90,17 @@ public final class MorningProcessMain {
                           original.verify();
                         },
                         outcome -> {
-                          if (outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
-                            throw new IOException("Backup failure continuation unavailable");
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
-                          new MorningBackupArtifacts(root, snapshot, budget)
-                              .complete(request, begins, part, database);
+                          completeObservedBackup(
+                              outcome,
+                              begins,
+                              database,
+                              java.time.Clock.systemUTC(),
+                              () ->
+                                  new MorningBackupArtifacts(root, snapshot, budget)
+                                      .complete(request, begins, part, database));
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
@@ -106,6 +111,44 @@ public final class MorningProcessMain {
       MorningBackupStage.resumeVerifiedEpoch(budget, runId.orElseThrow(), work);
     } else {
       MorningBackupStage.freshVerifiedEpoch(budget, work);
+    }
+  }
+
+  @FunctionalInterface
+  interface Archive {
+    void complete() throws IOException;
+  }
+
+  /** SSC115: called only after a fresh normal worker result and explicit whole-Unit stop. */
+  static void completeObservedBackup(
+      MorningBackupUnitCycle.Outcome outcome,
+      dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.BackupBegins begins,
+      dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
+      java.time.Clock clock,
+      Archive archive)
+      throws IOException {
+    Objects.requireNonNull(outcome, "actual terminal Backup outcome");
+    Objects.requireNonNull(begins, "same-owner committed Backup begins");
+    Objects.requireNonNull(database, "same-owner session capability");
+    Objects.requireNonNull(clock, "actual UTC completion clock");
+    Objects.requireNonNull(archive, "actual successful archive completion");
+    if (outcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
+      archive.complete();
+    } else {
+      var ended =
+          Objects.requireNonNull(clock.instant(), "actual failed content end")
+              .truncatedTo(java.time.temporal.ChronoUnit.MICROS);
+      if (ended.isBefore(begins.database().startedAt()))
+        throw new IOException("Backup completion clock unavailable");
+      var failed =
+          new dev.codex.schubert.nk.batch.repository.BatchStepResult(
+              dev.codex.schubert.nk.batch.repository.BatchStepResult.Status.FAILED,
+              1,
+              0,
+              1,
+              0,
+              dev.codex.schubert.nk.batch.repository.BatchStepResult.Reason.COMMAND_FAILURE);
+      database.failBackup(begins, ended, failed, failed);
     }
   }
 
