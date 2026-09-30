@@ -50,7 +50,8 @@ final class MorningBrokerExecution {
           budget.requireWithin();
           context.recheck(expected);
           original.verify();
-          database.recheckConsistent(state.activation().run());
+          // SSC128/BUG376: Live is also rechecked inside Session-owned read transactions.
+          // Never start a recursive DB transaction through this borrowed OS/identity guard.
           var startup = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startupPath);
           ResourceScope.use(
               startup::close,
@@ -66,6 +67,7 @@ final class MorningBrokerExecution {
           return budget.remainingNanos();
         };
     parent.check();
+    database.recheckConsistent(state.activation().run());
     var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), credentialPath);
     return ResourceScope.use(
         credentials::close,
@@ -77,8 +79,13 @@ final class MorningBrokerExecution {
                   ArtemisManagementReadinessClient.withParentDeadline(
                       parent,
                       () -> {
-                        observeOps(reader, parent, live);
+                        observeOps(
+                            reader,
+                            parent,
+                            live,
+                            () -> database.recheckConsistent(state.activation().run()));
                         BrokerJournalEvidence.inspect(live, epoch.boot(), parent);
+                        database.recheckConsistent(state.activation().run());
                         return true;
                       }));
         });
@@ -87,13 +94,15 @@ final class MorningBrokerExecution {
   private static void observeOps(
       RootBatchCredentialReader reader,
       MaintenanceOwnerFrame.Guard parent,
-      MorningBrokerUnitCycle.Live live)
+      MorningBrokerUnitCycle.Live live,
+      MorningBrokerUnitCycle.ParentProof databaseProof)
       throws IOException {
     // Startup/readiness may lag systemd Type=simple. Retry only genuine declared provider failure,
     // always under the existing absolute deadline. Unknown RuntimeException is not normal success.
     for (; ; ) {
       parent.check();
       live.recheck();
+      databaseProof.verify();
       try (var secret = reader.readOpsMq()) {
         long timeout = CleanupExpiryExecution.mqTimeoutMillis(parent);
         char[] password = secret.copyPassword();
@@ -131,11 +140,13 @@ final class MorningBrokerExecution {
                     .noneMatch(value -> value == ArtemisQueuePressureClient.Pressure.CRITICAL));
             parent.check();
             live.recheck();
+            databaseProof.verify();
             return;
           }
         } catch (ActiveMQException | ArtemisManagementReadinessException actualNotReady) {
           parent.check();
           live.recheck();
+          databaseProof.verify();
         } finally {
           Arrays.fill(password, '\0');
         }

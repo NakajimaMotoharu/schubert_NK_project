@@ -15,6 +15,61 @@ import org.junit.jupiter.api.Test;
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG339/368; PT-OPS-MMAIN001-007. */
 final class MorningProcessMainTest {
   @Test
+  void mmain010KnownBorrowedOwnerStopIsThirtyButProgrammingFailureIsNotNormalized() {
+    for (var reason : dev.codex.schubert.nk.batch.cleanup.CleanupStopReason.values()) {
+      var stopped = new dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException(reason);
+      assertEquals(
+          30,
+          MorningProcessMain.run(
+              new String[0],
+              budget -> {
+                throw stopped;
+              }));
+      assertEquals(
+          30,
+          MorningProcessMain.run(
+              new String[] {"--resume", "31100027-2222-4333-8444-555555555555"},
+              budget -> fail("fresh selected"),
+              (budget, run) -> {
+                throw stopped;
+              }));
+    }
+    var npe = new NullPointerException("PUBLIC_PROGRAMMING");
+    assertSame(
+        npe,
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                MorningProcessMain.run(
+                    new String[0],
+                    budget -> {
+                      throw npe;
+                    })));
+    var unknown = new IllegalStateException("PUBLIC_PROGRAMMING");
+    assertSame(
+        unknown,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                MorningProcessMain.run(
+                    new String[0],
+                    budget -> {
+                      throw unknown;
+                    })));
+    var fatal = new AssertionError("PUBLIC_PROGRAMMING");
+    assertSame(
+        fatal,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                MorningProcessMain.run(
+                    new String[0],
+                    budget -> {
+                      throw fatal;
+                    })));
+  }
+
+  @Test
   void mmain009OnlyActualSuccessfulArchiveSuppliesSameOwnerManifestOnce() throws Exception {
     var literal = dev.codex.schubert.nk.batch.repository.BackupStepFixture.manifest();
     var calls = new AtomicInteger();

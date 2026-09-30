@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+05:26 PG397選択再試験：Storage16/Bootstrap10/Batch36（Main10/Session18/MutationGuard2/BrokerCycle5/Completion1）＝62PT/FES0/static3module各Bug/Error0、pg397-owner-corrected.log、05:23:08/43.175秒。Main全既知CleanupStopReasonのfresh/resume30、未知NPE/Runtime/Error同一性を追加。真DB timeout/readback/rollback、Session既存advisory/原本負系を再試験。全6/native six-root再試験前、各6bind境界のnative負系・全coverageは未完。
+
+## 05:18 PG396 実通常143再開成功・Expiry再読の新障害
+
+凍結Source6e133d2eaf76f4f46f952b63e47b0c7b18ae430a。全6 2,649PT/FES0/static6zero、manifest93c1898d…、署名release178artifact/61dependency/23SQL・manifest1e13573c…を正規M/A全停止配置。実Morning freshBackup attempt13/SKIP2→Cleanup attempt5/SKIP7→旧failed143/同Invocation全停止journal→freshBroker/全Ops/startup journal→freshExpiry attempt2/SKIP/receipt0まで通過。旧53DB行不変、新10行=63、全14列独立再読、全namespace退役、INVALID/permit0。6root手前のExpiry親再読で同Connectionへの再帰DB確認が拒否されCleanupStoppedException/exit1（BUG376修正前）。native manifest b9b6fb6b…、同byte4role union未網羅B/L/M/C644/1167/205/11、ownhost760/2173/388/28から116/1006/183/17解消。BUG375直接実再試験は成功、YKT295の全native負系/STOP_SET最終発行は未完。BUG376/SSC128/YKT296を修正前起票、6root/issuer/APIWeb/CHR未認定。初回のexit1を正常30・root合格へ書き替えない。
+
 ## 04:48 実Broker旧通常停止の拒否と是正中（SSC127）
 
 PG395 signed release/full178 artifact/61 dependency/23 SQL/hostRO/current pin/旧8base同一/新INVALID同原本で外部1回。旧44rowは全byte不変、今回Backup45/46 attempt12 SKIP全0、Cleanup47～53 attempt4七SKIP全0を全14列独立再読、全request/owner/intent退役。旧BrokerはCode1/status143/failed/failed/result exit-codeの真正終端でinactive-only baselineが拒否した（BUG375/YKT295/SSC127先行登録）。Brokerfresh/Expiryfresh/新6root actual collector/issuerは未実行。oldExpiry active/exited/status0を今回成功に数えず、時刻も16:39の旧execなのでnative unionから除外。旧Inspectorも除外し、新parent/backup/cleanup3execだけを上書き前にprivate Workへ保存した。

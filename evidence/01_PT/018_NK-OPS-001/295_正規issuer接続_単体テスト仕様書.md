@@ -1,5 +1,7 @@
 # 正規issuer接続 単体テスト仕様書
 
+ISSGATE003 / MMAIN010（SSC128/BUG376/YKT296）：実Expiry正常0→独立再読transaction内のbroker.recheckが別DB transactionへ再帰しない。同Root/親PID/期限/原本/INVALID、生Brokerは毎境界で検査、DB原本/HELDはtransaction外前後と所有Session内で検査する。6bind境界の既知停止は固定IOException、Morning既知停止は30、未知Runtime/NPE/Errorは同一throwableを保持。独立oracleはPG396旧53行保持＋新10SKIP全14列、真正fresh Broker/Expiry0、permit0/INVALID、次修正nativeは同原本から6root収集/再確認の実return-line到達。親exit30だけを到達証明にしない。HostはMain typed停止/未知同一性、MutationGuard実PG timeout/rollback、Session全negativeを再試験。Native同source4exec＋actualclassesでclass mismatch0、root返値のline到達を別採取する。未実行/失敗は合格へ加算しない。
+
 NK-OPS-001/NK-BAT-001、RD SYS004/OPS009/MQ/DAT、UI251/253、SS311/321/341/342/343§6.17・SSC108/126。PG394実Broker/Expiry後、同ownerの正規発行→Root/APIWebへ進む一接続変更群。部分parser/PT成功をissuer完成にしない。
 
 | Test ID | 対象/目的・fixture入力/操作 | 独立期待値と根拠 |

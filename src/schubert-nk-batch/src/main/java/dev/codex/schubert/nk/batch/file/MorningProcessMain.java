@@ -139,6 +139,7 @@ public final class MorningProcessMain {
                 var expiry =
                     MorningExpiryExecution.execute(
                         root, snapshot, budget, state, database, epoch, original, broker);
+                database.recheckConsistent(state.activation().run());
                 database.recheckExpiry(
                     expiry,
                     () -> {
@@ -148,6 +149,7 @@ public final class MorningProcessMain {
                       broker.recheck();
                       return budget.remainingNanos();
                     });
+                database.recheckConsistent(state.activation().run());
                 var references =
                     database.cleanupReferences(
                         cleanup.terminal(),
@@ -159,6 +161,7 @@ public final class MorningProcessMain {
                           return budget.remainingNanos();
                         });
                 EnvironmentInodePolicy.require(cleanup.references().equals(references));
+                database.recheckConsistent(state.activation().run());
                 budget.requireWithin();
                 original.verify();
                 var release =
@@ -309,7 +312,9 @@ public final class MorningProcessMain {
       else admission.verify(budget);
       budget.requireWithin();
       return 30;
-    } catch (IOException | StopGateException known) {
+    } catch (IOException
+        | StopGateException
+        | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
       return 30;
     }
   }

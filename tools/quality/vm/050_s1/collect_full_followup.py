@@ -98,5 +98,11 @@ if int(identifier[2:5]) >= 396:
     manifest['ykt'].append('YKT-295')
     manifest['testIds'].append('ISSBROKERSTOP001')
     manifest['limitations'] = ['same-source native prior SIGTERM143/journal/fresh Broker/Expiry/six roots pending', 'five actual gates and normal issuer publication caller incomplete', 'failed Cleanup/hard-timeout/native negative closure pending', 'issuer/API/Web/CHR and coverage100/formal run24 unchanged']
+if int(identifier[2:5]) >= 397:
+    manifest['ssc'].append('SSC-128')
+    manifest['bugs'].append('BUG-376')
+    manifest['ykt'].append('YKT-296')
+    manifest['testIds'].extend(['ISSGATE003', 'MMAIN010'])
+    manifest['limitations'] = ['same-source native Expiry reread and six-root collection pending', 'five actual gates and normal issuer publication caller incomplete', 'known guard failure/native negatives/hard-timeout coverage pending', 'issuer/API/Web/CHR and coverage100/formal run24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

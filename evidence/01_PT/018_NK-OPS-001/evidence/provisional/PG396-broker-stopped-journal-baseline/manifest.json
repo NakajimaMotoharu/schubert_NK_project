@@ -1,0 +1,1867 @@
+{
+  "id": "PG396-broker-stopped-journal-baseline",
+  "formal": false,
+  "sourceCommit": "6e133d2eaf76f4f46f952b63e47b0c7b18ae430a",
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "six modules: clean test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "suites": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 153,
+      "suites": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 208,
+      "suites": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 754,
+      "suites": 124,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 558,
+      "suites": 88,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 896,
+      "suites": 116,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 2649,
+  "coverage": {
+    "protocol": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17403
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1008
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3464
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1272
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 741
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 157
+      }
+    },
+    "storage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 5871
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 497
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1119
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 496
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 247
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 36
+      }
+    },
+    "bootstrap": {
+      "INSTRUCTION": {
+        "missed": 142,
+        "covered": 11738
+      },
+      "BRANCH": {
+        "missed": 53,
+        "covered": 1197
+      },
+      "LINE": {
+        "missed": 30,
+        "covered": 2168
+      },
+      "COMPLEXITY": {
+        "missed": 62,
+        "covered": 952
+      },
+      "METHOD": {
+        "missed": 13,
+        "covered": 376
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 56
+      }
+    },
+    "api": {
+      "INSTRUCTION": {
+        "missed": 278,
+        "covered": 34507
+      },
+      "BRANCH": {
+        "missed": 17,
+        "covered": 2765
+      },
+      "LINE": {
+        "missed": 71,
+        "covered": 7557
+      },
+      "COMPLEXITY": {
+        "missed": 17,
+        "covered": 2554
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 1128
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 244
+      }
+    },
+    "web": {
+      "INSTRUCTION": {
+        "missed": 80,
+        "covered": 20848
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1615
+      },
+      "LINE": {
+        "missed": 25,
+        "covered": 4755
+      },
+      "COMPLEXITY": {
+        "missed": 5,
+        "covered": 1778
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 957
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 190
+      }
+    },
+    "batch": {
+      "INSTRUCTION": {
+        "missed": 8532,
+        "covered": 50657
+      },
+      "BRANCH": {
+        "missed": 689,
+        "covered": 5010
+      },
+      "LINE": {
+        "missed": 2047,
+        "covered": 10042
+      },
+      "COMPLEXITY": {
+        "missed": 874,
+        "covered": 4028
+      },
+      "METHOD": {
+        "missed": 365,
+        "covered": 1675
+      },
+      "CLASS": {
+        "missed": 27,
+        "covered": 249
+      }
+    }
+  },
+  "logSha256": "f07fc7b7ed49e36bd2fe13bbf13097094b5ab370d1e91d2d5f6f374add132fb3",
+  "testIds": [
+    "CEXEC001..004",
+    "CINSPECT001..004",
+    "COWNERFILE001..002",
+    "CTERM001..005",
+    "CCYCLE001..004",
+    "BCATALOG001",
+    "COWNER005",
+    "CCYCLE005",
+    "CFREQ001..006",
+    "CFDB001..004",
+    "CFLOW001..004",
+    "BROKERLIVE001..004",
+    "BROKERSTART001..004",
+    "BROKERQUERY001..003",
+    "EXPARENT001..005",
+    "ISSCFG001..002",
+    "ISSSTEP002..003",
+    "ISSGATE002",
+    "ISSROOT001..003",
+    "ISSBROKERSTOP001"
+  ],
+  "bugs": [
+    "BUG-362",
+    "BUG-363",
+    "BUG-364",
+    "BUG-365",
+    "BUG-366",
+    "BUG-367",
+    "BUG-368",
+    "BUG-369",
+    "BUG-370",
+    "BUG-372",
+    "BUG-373",
+    "BUG-375"
+  ],
+  "ssc": [
+    "SSC-119",
+    "SSC-120",
+    "SSC-121",
+    "SSC-122",
+    "SSC-123",
+    "SSC-124",
+    "SSC-125",
+    "SSC-126",
+    "SSC-127"
+  ],
+  "ykt": [
+    "YKT-284",
+    "YKT-285",
+    "YKT-286",
+    "YKT-287",
+    "YKT-288",
+    "YKT-289",
+    "YKT-290",
+    "YKT-291",
+    "YKT-292",
+    "YKT-293",
+    "YKT-295"
+  ],
+  "limitations": [
+    "same-source native prior SIGTERM143/journal/fresh Broker/Expiry/six roots pending",
+    "five actual gates and normal issuer publication caller incomplete",
+    "failed Cleanup/hard-timeout/native negative closure pending",
+    "issuer/API/Web/CHR and coverage100/formal run24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr/provider diagnostics omitted; no credential/session/token/password/key/dump",
+  "finishedAt": "2026-10-01T05:07:43+09:00",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "9d2dd3f6b5ff5f6d2b8911c9240348b533c80da1c9fc5f6f2ef501a88ed72007"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "095d1811b85d954faec9cf7ad014e93039e55f395e49b8e52d3f0fdbd039c58f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "8cc6e67a56e995837ba4fc3b2c922d7b44bdea795d1febeeeb34f7f94d567783"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "16fe2198b579e6723bfef866b8c02a0eb3424114f1fffb1b45f1ac64b952f6cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "3fe3acc7d67f5dfa19485631004498bbb521aa1c918756d38e372575431c0bdd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "76f675dc8d7a2707f5aee2cf04c4e2cd2456f98963522b444902cf2141d5c29a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "1f254b360e019a254435096f2a36b30fe5cda127002f20c25df0f8f7f53355ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "a1adc25afeed8ecf13a4cd959028ae2b10e6a6ebb34060a89820133ba6aa2527"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "12e2db204ef4ca0423ec38b3a6964fb996bc16aed2d83ab136eef1f2c84c7d7c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "9c2182239d3ffba684ada564f02bb34eb8cbed8ca7a7601269d6aabe5b1e1023"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "653d93e70616b29a5bcf25c394b2957f152b0f312de7122f78d7230d7f3d9bc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "08add2b2a29b0468ead518e986e75d15a1a15aff8edb0f6952122108b98bed98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "82c0cb8e3d633d04774bb88051746dd62d214eb51f681cfc7de2b95f41e06659"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "94ce0749bde27e681e5922b2b583511fbef3d0293aa9e3c04ea6cd061b0c5691"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "ba5e5e12911d856bbdf5f3e5db54f1921b89ffa8dd5084ab1cac90b531c73326"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "6e78b54de48b5e1aea9b2645420e7ee24073cc95e1492be8393576b4aa602ab9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "12bec8690d31890a657ea4659d5ba43d98dd683c3065f48eb5c29db7802e18f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "2e7564b2ebfac8ef776fc06b49dfc19d7d5b732e8168346106b090c7230181c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "d9b0398963fcaac7d4d3a0a35922ed21336a1193052df9f2a9b869d64a3f5056"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "55253784c821161769eedf8f909b60c9ba5cb0c9745152e942c32a5b9eda9b67"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "98c4c5c9b2b7404e3f33a27220254df59a764c3bec82d95708c31e0bb8a20c65"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "44aeb4d480562684d9815c2bb12047b3c876a52ebba1074e31441cec89bf5f47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "1c5e8d3577903cccaf0b3dff707ac9a37b2bf13c61452566b274a77bae64d2dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "44bf8b87824b982676a032ef50eaf40a3737ebb6b6e2903b03551167b6a21352"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "72a4a4c4a7ac2086a04ec2fb8b848b09b626691b323870d158247079ea3cf18b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "06b67087ea838522a70b1f6202d3ec812c8260fb2eb181584a5199e4f3b8b677"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "61dfef9bcb8acae3ad6b0f27fb92e18ad9238a0601c708b086354728235290c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "9881a5a097fd9e5a3e9deadd29550e2854084a80f6c673a57f9fe4d32bb137df"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "e552cfa913cd907c1e9f113a237626f6a857776f6873ed90e8880c82c82c1bcf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "6eb35c0ee38c0fb26671a368a4a4b159eaac5cd025fff8e303e60f4edb64a79d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "eb3713c119c52c336af27f9a8cd1bf189a947f2f4baa0ee543eb8186322a8b1f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "d1dae512f16f718cf3097f2eec7cd5946c74e5a92cb8075574d20b0d582916e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "cdf289dc93bc8ec08dff4ba74ab72ce894fb07ed92e0d6502f6849533db68cb0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest.xml",
+      "sha256": "6ffded9e5a41f461baece39e896ab92774edf7573da1633b558dd6d1879be1be"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "6edc13ba9d8ba298bdc198cabdb7e32a92abc8141e90f20bd13f1e2d3efb1de6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "27605cfdc0825497071bb1d30560e3d1a0db6c7ae6f23f9c99c788e20ba88d43"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "e5f4de455496c5d0c930c010bba57441f907c2ab3abfebadb34a11b94a30a3bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "0fa2fc4e61a3146fc389e270778891ffcb0161ba77e4ee7bfdbfa22d23c57815"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "4369d94a4dfc4c0ebdc289a6ec75e2da33fa6cd7aa9d4bdf277b0c99961c7331"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "2f869c16ad5d7f46060c01b52e654d0fd401a9147ca82cfad4545cad2baf8b47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "b08819fe50249a0f261fbe47f1a9589ca030bf0c2e6e23b7deb301e16d7be93a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "697d695e97cda948a6e6a2a3e90958c9638faad3cdbe1fcc9ec8b06c484bcda4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "c2e322a9ac9a7b61825ffa48219b3d40f712855d95e2fe67ccd163f8f9e1d6a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "5bbe5828a92672f4aa3ebe37931e7bb735b6bd2458c73f4993ec13993b30a792"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "54dba966f5257dd4c8639ed6a44ae32ea955ee7797c8faaa0864ff997e634918"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "8ca7ba9eeb9a17d1afb9e7177f211a650bb38da97ddbce9b721e9b0006349698"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "6d03753fdadb698565bb8b1a64fcce2e662ad9120e51d47c2d8146bc98e22289"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "f553e2c37229b53ad7f67447fd632d5c234c37d6007476f0042ab5a8c0c7f94e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "2134dfff9c0945bff2301725160f3e4b0c45821d026381d56fced7bcdadc58aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "0d317b62678068bbd111deba9ef08c8feef0118d3a4b2bf3a4feb93a8f88369d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "539f50f57a441627700382346b41afb3e89a68242d1724511273bfe6daf88058"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "95b94c69a372a7bd2adf0b4b21d43253d656e3a5c439b9a1f281b6bee3c107c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "91031c00d29b45c095a80d4980e041baeadcfa55ce3a9b25a1fd6bf5072fad32"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "acd27ea379d3fd4f45efd1e53c4b51a1afede249dbff0ec73c3eb15b8cf74f29"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "5dfecb6a2481a60115ab659972613c9d83e375b550db8bfe8dc85694764c0128"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "54ea86aea7c1317fc46afa33631460538f10bae261d3c05db6ebdf04b2af2283"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "9e7556c58c1f736e464ffd51e126d6c0ef0bc33d936ec97002294c894db3b802"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "6ba4d96bbeb1e4889bbb8b82b30bf2fafd2815fe94f9d743a4fed76092f961c5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "076527a10cfd1d75d047ab17d4b53bbb66173e93ba738caea0e3976f1634e321"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "953c97361b93f0f4d10bfdebdc1e08f60bed659f373db8db8c1485fa70d9cd90"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "7029e4311f657bd036e05f8aa10359bc2a301c9c8f4b80d6a5c5a354017633bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "be9a1b1275167d1c990b7a43833edd60dc39f7e963a1794f8744d96e237cf288"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "7ce4aa9785b9495ea37bbbc3ca7b83b0dbdf010ee3345222efd1c8d744dee56e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "45e84ee67a617f9d8c343a91c3eb176c4bea43b4d43069f6b218b3acb9e89bc8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "a025f1278981f05d8fe287176b4f7494be9a67cd2204ad17fe758a24c16399bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "bdcfed2ef516980c5e91f3890ea95c28dea7aeeed183212bd445a077feb6de6b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "062b8ffa15ec601236a6e27d3fc35a9401bbee097ff21b8461dacfa514208154"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "d838dcfab70d736ba9fc1fb565a14e3492189cc84dac1ca55235a7865b96e37f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "9ccc6aa37b06314868eac672c2937702cc66d1a33979796157214c172a9f934b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "4cb381188008492c712b9bc8e46f28de81b07e0c3cbb08d8d5af541a9785c813"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "d1742a3226560fc7ebc267ce2465881179d0e40e0d78ddab13944ffc33d53c6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "9f1f97e0dd3aa089c393aa5e97d02fad0777c56778c3f29b086d69f52dfd3f02"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "08b1fd22b860f9889fce08e8332a5670a597a36c8848c1eee9b038202fd268bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "de1b2f8927930e8e64e60e73e6a42db06847db9513ddb5631d7c9da89b6a02e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "f8c01b919bcdd5579f749ada444c53a80ef8a8756f3442f9b0660dce500eff87"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "2343ae4e23f42f995cfd06c8cf1db229bc4300eca49e4f6913bef31d643e11ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "4ca8ed9a6c1beff323e7af671514b0a2d91bdb258ef2efd81a7dbaa51eb037b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest.xml",
+      "sha256": "edc34864640e12534360af991fe7aa0c6684152766d71ff865be59cef81f9037"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "e3d7c0bf7d9a7c1e4596dcf8473aed82baf1976843a6130b6820db20b0322674"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "b5a3e88c73211c91d6729d413823979b9a8784fd2902b3dd9f47f1cae7c0d9b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "de4ecff13034a3a8969ae9d4a3aa8eca0578c8c7aacf788db8e14f9ec5d86fd6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "9c21776985f770ba1b345811b0d325e81c419e4813cae8ec8ee42f4a6013e774"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "cda93a33660ca3711aeef1e4f65e00caa484fefc1e08c8db62d929991e383356"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "cd3274532b4b43b68e79ff5542a8f88fd7502c508509a23c7b23057400f47166"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "1445499160595bfd558c911778be0aa4a3b156b3c83f28408350f1f56642ca94"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "260eaeb4679d9182fe034e0276db8eea957ebb11f1464d580474aed1eec23685"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "ead02a911f41a013899121a7349ea490efe2e6661ae16d172edfbec3721191b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "c8950408d21dbe106cc73d9b5f3d3783f6fa41ad88cfc71121da6ee22cd486c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "5db219a27f3c741fbdbabf8ee99a02c59bb60e0720d50d2845d89fcb922d1edc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "c5714ed203eb77a497d1da67d64b0a80437281c2e59cda98d1d76b82a76ac1bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "7c434ca36316e218a13358da66a19945026886ddbae48876e78368da263c0306"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "853cb8d9217602959fdee18ab8b90a149697176a3544b0f7d292f2d79fa84550"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "44e6f4ff9afb212ab8328fc1ea2cf5ec9e7d731815d1c2e2b151b647ab7b9a20"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "7ac65474683607ae61789bc5f45639054137865fae0ac40988257c504e343e64"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "38446f5719252425268fe2990a975812776fe32a029c5c8769fba94e46d40064"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "848a536158cb543ddd0547cabe68146cb65f13d35af97440da884593fb840df9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "72983143093f1375ce82fdb9a23cc91ab842b782210e28d386e665e919ac893b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "fb6ca10a1f7ffd52dd6c06b676bd0e251596228bc2109b64dcb5d0b1dcfb80f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "2e94dd9b4926f39bf761608d7ae797acdbd3bfe22fb15816b8d483ae20ddad2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "3b9b5230c649c54acdf35bc05ebb9e90ef11f1b08266d8f8452078329e1e554d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "061bab7bdd955ecbe0c6998622e56eee0d8b6b8af17cd26fe5d2ff0956239df1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "7c4c9980146351b40cd11c58dac37bbb144aaf218fefc527c30d888cfe874d7b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "47649b18dda36e18c599dc7f17817f7e3e5db9da1c310a7ebc42180ed0f22a7d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "c3f43b09bce518528a43434ccc0838b646cc986cbf9d78ab29b285b679ec55c5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "2ca2e1edaafe2859b618710d50946204f2a660d129448eef0c9c677b23cc03ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "ac97fe8b98abcd2a561686330fa56894c722d5ad322a599ad56a7b8c59c9d19d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "23b2a0e0ad89a27c635165a0d94c911ce1fa4087662831d9706fe0802ba3de3f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "9f2821dd526c5f39d647abd0c893f0df01d14636e91edbd27a0f1cc6c23ec813"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "8c46421847d7cbe592914c68b6b15ec892abbc194f8828f050298b801a789025"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "63aaae6f32119be9b2b18e7aac38760c31195cff6c58255b47363fbd0d54d64f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "f0ec5edee67feb87b0ddfbf16fbba2db696f20823c11493173c6581e3810cec7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "54e213dca37a02d77be042e7616fc447e59c07a2cad95e4953ddb5077fc8808a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "4d96aba293ce65956a42bf213c94056938e1ec94472451adcf6148c4df6b7984"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "6d2a7531f5a7c761c1263dcc1ee3ad6de18e381e3387abcfa76a58228e117c2c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "0483f91fa071e310260630b90a03fe121ee20ca88d361135bc2767f77c3ab37f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "c9b06a6b94f297943f63b334e3b0e4d03dc2e8a0927fcdcf97510444a1817f28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "2276d5504749480e667ae51512271ce49bd2c753ad8283a99e18c7820d275d42"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "b3e674b71b24d661f67f6c8360d905dd4e8e0c9056db4160c01e903f1ca57840"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "8d17913c066855876a98902cebd8ce8b023382b5337645532a38932bf0085ffb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "10230698d2dd42226fe2dcd7cc78a6b7d47268ba5755342674dd6fc33562c634"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "57bc6272a350df2d6449e958c8448704ecd1d905d1d139f06e537fbe7cc76dbc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "45b11fcf65193ba25d9ab801a4b461296fadc74025a881faf779435d75831826"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "1036ff38fa496f4e8da8f016803f60677af498077fd78c6ea39e5268edc43946"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "1fa5618fc32abea2a777350e07ca951046341caeb58dd9e2dd50c3565c53e30d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "8a64cb1bec03e0c09fc5f456f2f067aa37b2e2e39760aa53a1e9572c16892d64"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "389c7737fcb8b0083494845d8e83273af0bc0b434de52884411be955240b5690"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupProfileTest.xml",
+      "sha256": "f5752f7a26e20c0f217025e3b5d7bc1cb77cba2e77c76fc44b552c34807698a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "835d8f499a0959f2461c4fd7a822b4f3bfc3415f96475e9ecbfea23dbab201dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "5dd3fdfae8ab7d15d398116c68d3ef710dac09f78e2dd46ad6ec0649e385a0ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "21d6505297e3b965e7dd5ed6c1058d6d4dac93b254f5b041d47794a2fe9460ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "2e3d5e0c370e901a1ebff800fad6b0dbc8b501925ec00e839dd8ade65a70d084"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuardTest.xml",
+      "sha256": "0de4f31046d6b8cb9296174fee873acf2b967f1eff056b95ad335ed28e073f58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "2659494dac02f7d368af5951236edfb27cab65f55fc9bb675086f97ff667f90a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "48f6bc6244ff9092943804f7741689d194b299e082cea8e404c658ded0c2743a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "6e295c86faf29cad2127d57c5f5c82e1661c24c8d77b517c15f7f28f74fb2575"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "5a9e1a2344e45eda67b1c28c2432094f80b27245ef4145c654a078356e53d5ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+      "sha256": "36d0f21f5c4154afc4eca1d8f830bd1ecbd677149169ed66df2aa1071d55e1ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+      "sha256": "400a01fa892e0abfa4df7433175c3d8eabc4f1fa7311b1e4aac635126d8562c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "f0d4d932a6823447cca8c8c111172b52bbf8ebcd929b1f2343b3b74ffc7396aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "7b133dfaf22604cfc58d2020b2b958e0562a8dce3aad782d870a8465370a0f26"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "1ea650d009bd77bf7b5324411ba44f277c9a51d38754a9601adf7fd421a347bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest.xml",
+      "sha256": "04a2fda0017885484a621bc2574275483d29bab87f21f6ed2d482dca69ea70e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "2ed501244b7026a585b328d5d423ea0d745e6ee5f2ecb17426940212791d0e4d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "0d10110f8ba4fbaf69f313ad5b12c634be86e9002fac0b874c6b202fad94a734"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest.xml",
+      "sha256": "edfb61c42f014dd2c9e8f7d1c57ab9ad021e2f35ba1e666f63e7bde32b45468a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupMaintenanceWorkTest.xml",
+      "sha256": "7788e1ec3de54cc8400c3dd2368d4ed5225b53db8844e01976ee3120d0768e4d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "14bd4acc22e5c3b13f60fdf9cdc28decb6cfd83d15233734471969fa66e90959"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "66e84d5a4449a4b3dd9e9b9a26e9913c7333540de3e88ba4566e6ec122095d8c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "5ffca4f9d9ff0b84346451194b9e2e96334375f9dad72867b2e22ed8fc4fca8a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "ec90ab3fe4bac8b0a380f3903c9749bbefa5c172c254ccc51b5cb80a61aa8936"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "05e87fa97fb48cfab7e86ca72f68a4d68d20b3f8bb7ba18f9d605e30aa38c812"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.ExpiryOwnerTest.xml",
+      "sha256": "343c1196e87ca007afb85d59c579d217da43a25578838a20429b2a6e2694218e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "66863e4ac2c03797434612cc4e72102b256803f34065650affd0e8bdf93158b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "2ae50a861e523d346ee599c2b8cb279b9cb445fc6cee5b001119f2a4a11aef1e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "39e65906c264f268416b891f5a495ab0c228efa2aeb30ebe57dbe5a2e5d4ab74"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "318e2154e188ea2b7fb7264d266b197fe4d1e8dd5dd2710a17bd042a3c1a2a54"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "5ef6e8970bfeb82efe1bcd9a2c18f76941188ed89b5e880bd0121cc48cc4b1aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "67619ced414828585df6e509328e66bba2a56064b496d8072d7e7432e03438bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "e23ddde81475d4b2ff9bb6e36da26856b8e979060ef7dcff6f078530700ef027"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "784ba05e9877d6e61d453bfa99bfe47cd2fcb87ed3ecd3a0c9f0c68246fde2ec"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupCatalogTest.xml",
+      "sha256": "a0e14071a2bf07bc82ba958bf1710700b30def5a2d7a9d1875a74b6fcddb4dd6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupObservedCompletionTest.xml",
+      "sha256": "5323a52caea0ee1bddf0d002cedfbf86a8856d0b3de6a83ed8152cfdba5411f7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest.xml",
+      "sha256": "e486c8e09cc6596d887107f2e6d058677985961f34982e440e685bea00ba7db7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest.xml",
+      "sha256": "543a0da0fb00f87087bcc3a49cfbf78bf47c0ec8e32a391ba5d4130a12ab4a5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupStageTest.xml",
+      "sha256": "761f2143456694a0fbb875797ec88d683106afa9af399d1c6481cff6af3c3dee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCleanupCompletionTest.xml",
+      "sha256": "87fc3481497a4b48732d218fef2145bcab8b055d180e2f44e977cdabe776079c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "bcbad2d6d07d731a63b657112fb43c95140d3e8e4956285fd58bf9abb7eec8b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest.xml",
+      "sha256": "e01a8ddd238c083596041f2227c6290d840921ec3250a5f44056e3bc30ef016e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "cfa66a74ccf01caafe1ed960e44a0cf2de767d5e2d391635041bae96e8c9be61"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "cf618dd83704a01b2e0997ee3a9aef2ea6c728acd1e9f72279c56e913003069f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "7dfef9b248fc6afc1fa525d69eaa0d12a2535845c59846feaf29b7ae00f880fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "4afa9b45124d1e1f4ce993e6e39eaf496a4d2841f6f1b75eee504f00bc9f6454"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupRootsTest.xml",
+      "sha256": "2167aa838b525f710c31e80f554773f4fb71697ed7907873f42be82734e29cb9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest.xml",
+      "sha256": "74a933659fef237fd984359093f5ea8712fa29b9b27f5276a6cff0783d02e01a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflightTest.xml",
+      "sha256": "6fafc52eeb98ff8e1f89251d380cc54e94375331940b3904e31123719ebf0119"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest.xml",
+      "sha256": "92e14dcbd59ff4b5ad701c7e0d6c03b69beb9868c600b5e288a47f835488f252"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceAdmissionScopeTest.xml",
+      "sha256": "2bda6616384adba2df81a079ab86c6c87a5f390f27a8c64f0a11a3550ac42674"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceLauncherTest.xml",
+      "sha256": "18d12e6e85357a05db19860a0c999fd4a948a97dbce2a2178f76e8106b1fb60b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "182f82edbd3a71780388b035e1530434b59553a3536af21670a9a1fa5c79be4f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+      "sha256": "4f903922a90d5d06d8611191aad2ba96a0b20b4041963b101e0aa0a98e0081e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+      "sha256": "772d0f15512983755155e0af3bc85166b06d2574aeb096417aa89418d3b06e0b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.TransferCleanupTest.xml",
+      "sha256": "5a981debc7791bf4cc2b046c6c5062f46aa7a2569124e27fc5002baa738a38f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "d0a1e9e0543eb3a5a7bdbf93a036cad6026a44285cce12ef9152f4a6c04c79b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "7ebe7b81a7f4c82e489370eccfaa64c392d05dcc10cbc83f78e98d1915edef96"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "0904a0ac6c3e31d0e5e35e7d44fbcec4accb26e6e7a9653983b3ea7fd4970933"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "f3863022e7d1ba21505a95a0f2ae121ee259717a9bfcf09da57e45142266b33f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "31e686c79341b5f998d34025db29c775794bb82bc2f76196c64653e771deb3ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest.xml",
+      "sha256": "2dbe1482fad70b979de7697d76ce8b117c4a1df10dabc93b70e1410cddf993b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "8d81380de35306c7ad600b204878e4296ba6b86d3099a799559639a85eb16a18"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "653b74b4adf45afe2c61d78654b50b0711c55427499404f7b3594d397fb338d5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "d890cba04471f54d91debdbeaaed47463bbf909cb203c4dd7f9703215cc0372d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "e24c826f3d403ea9b7df3b65481ea7d8c5df0bbc3caeb8c2560ea5cf0fe3630b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "dfb04d3b30e1651236026bf58bed062eb767fc3f88e51d0735e437a257a3ba80"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "b6673a8282d9c3466f9a71dbdc6fcc3d7eb0cf19d223ba2364fdfdf7fb4263f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest.xml",
+      "sha256": "1d4991c046ce364698f5e11dcc59941c02a95000e67376dc1665d86ba9efa314"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+      "sha256": "bac9ee0b7b4c4a3e260a19536774febcff907cdcaf0da506beac595f514dcdf6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest.xml",
+      "sha256": "b5c627ce5235a82d829247efb76c525b8d864187e65472891fc0779bb9590906"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml",
+      "sha256": "7564d1b594948abbcaa3a82df7217db2de7a8be345df447dc884da87a1f4d815"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "9f53f744f92f49e2580a4f344f0cc29529a9a1c19486801d75224ae3d4d5064a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+      "sha256": "b908a765099daf0d5d0e219f9603339b895b3bc3e041e09079abf017d2fd1a04"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest.xml",
+      "sha256": "79978573c9043201c4edbd78325d76828e178f8700c9df4737eeb16314499fa8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalQueryTest.xml",
+      "sha256": "58a0050063a164905dd5f20b98a51de5cb213ab576d755542f54b2b879153626"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequestTest.xml",
+      "sha256": "b0cd7381ba4e80672f71a3025e00ded53af6909527ebb88af841702cdcf7db42"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "c022f88481c9e2942e99e5757af178a0930e84b1675c7dd8c43cc74b6b014c99"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupUnitCycleTest.xml",
+      "sha256": "e05088d0306f31c091d5d7ecad75dd54cf3ab854fc610574f6c12bdd3c0d2c19"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "da47a2f52b0b1a42d5e0e983fcbce70f842300eafc87e35437f17570a49a5c58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "b653f0c4cc82dbc9693300c992ea332fde15094600ec568bdcd1166f29432dd2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest.xml",
+      "sha256": "c4bc3ea171f1e02dda5896d968590fc7a373dbf6a535d28db54f5b620f2c1fb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "ae4cf6d3a35792ea57c35d7b61a89eb984b6e8d6d8d403d5b8de4cc38c3dd4d4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "4702c772ae9ef40b30d432fa3c666d6999c52804a414ac3ca22dff02ecbf0960"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitCycleTest.xml",
+      "sha256": "c45d131c8bec86e119600ff7c01019be07a528076b7b2814a6c4e095118d5d53"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "20384d4f6e6bc4dec5d9ec20abe617fc10db4e3e093a6719684ec833d21e072d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "47a386198de2e723fd995bb442dfba2c9427fdd83dd0b1ae3d251533b5acb1d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest.xml",
+      "sha256": "67ab3cd6da4418ad8d01161acecb7cf122aa09bea370dd41d1e39ed5281b1166"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "cfa0f3f37aaa566261a1568cdd4bf2a835b95eb8e0de595a63247625a8c9c30d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "6a2088acd3e081b5037d18a2c97776f4ac3b065db8a9f43747fd161e0d7bb740"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "79b563ba29249d2ec2d7318d49fb20c4bcf0609a792a4e132a5ca2644ef6e0c4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest.xml",
+      "sha256": "6c486eaa5497ad9e44eb4cd26d3b5d77bc73de2db00ad8447ebdc754e1d75cef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycleTest.xml",
+      "sha256": "bea8aa96f94308bef173e5252620d64d63aca4a64b3abf7c9bb086917915f31a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml",
+      "sha256": "cb29fd396c1ab50da8257dfd1870c82a975bfe7140665fb6444bad385c95bf86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "37f0f711bcdbc6c8f8fa0d827885b40e4607db11f34dfd9833dc746368ae9159"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "62635622a35930d31ae2231d473e596b9ead240607d01f558faab58f2dba00db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "f2b2c114fb41b50658c9070e2853b070b37a01560635659db134d3fe4f1b2f6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest.xml",
+      "sha256": "58d050701170230135d0fb542ed8a5acc4c4e287b9deb70a5e8c61d604cae518"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "cb25866db0bc25fbdff59d59e067bfdd780e3580898201b85f312869c55cc968"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "442567171bc8b35a630f4dc234d9f5430c187d105ddaafc31625fcc76443e022"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupFailureSnapshotTest.xml",
+      "sha256": "447975da3e36bec7cf3af01204ac814f9fc28f5965e5f754caf7b704882259d8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "262493cd207cbc76b67ce0b9e7f7a8b9c2d6218798e4fe4f1514b79f4ffbfba0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "b7e6e930d668a50625d992ef9d63bec5b859e6dfb09631c30bbebef3d954bfbf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "86a68d24d149557969180ddf2b88407e1099886e76e7c72fb4d6a4ded7acd0f7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "f708684f6fc98fad242c5acb2cd996d4a792bc91a328d787eeabfb5dcba5c806"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "d007cc0f157eca4cb791f3b9c6819b2f544ef5554e0858842c1912141c578ec8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "357f5ddfd04764a29eae884cd96f313e83c07fce828008e07eb0d20100ccc483"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "caeed0ec6787948b00247df21b615066088dd7d093fb6f102f710f6ca4a54825"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupTerminalRepositoryTest.xml",
+      "sha256": "4d6b1599ea21bc889137b8c332d2bb4d95010a43e9c371e2e924840105aebe9a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "e915d4d76c0b0e700bb977e84dc36d63c6ec5fe312739413bcdc07f05e991a3d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "60026da986c0a91787920196ec7d68208fa3dc315256a7020c9094f3b6cda330"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml",
+      "sha256": "047841817dd01749c06e69ced128307e617756baf4fdc6a00e11d9bb85fe4bf7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningExpirySessionTest.xml",
+      "sha256": "75cbf1e783e70d46458186beb1bc40285c7e7db94b910f5c0b679a599862329f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "a4102b63bb271ec5d24395435f612803f5abfa49f5283e2ba0cb0d0ebc2abe7b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "d7d4b3504a0030ce4d7cb78290a99914cfe1cc3ba08c3cc463805194ac80faf7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "d0fda3fa1e1aee92dee7d07fa28577a4d895298b37354250ba1a62d3d3ae232a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+      "sha256": "990b745842b8ea83c1540addf5809e19221edbfb7c319ebad671eb8cef88385e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+      "sha256": "04fadc36f800c8b69c0a4685603511153caeeacccca3b7f544d248271026c647"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "2ce1ebde7f2a5c68fddd28513f1aa41f01bbcfbba34facd341d9b2a279b98950"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "d7fa4fb5d38928dc1ed9d538516e36488e5c7e871316bd61b62d9c2f40b2180f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "72e88d4fe007ab40a0f11fe5c6fce007b74b8644ab6255f0b244eba023e8000d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "9000a4798e7438e12aa4be46d315f0d96438c10197629ab9533ff1a6ccbed788"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "8a352e8e39941152aa6f568bf1755eaa93604e9b56946c633b897c44ab8d4363"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "2c979f7aee5899b908ed30d918c0eb11439954c22ca2b9244b7cfd3ee21fac1a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "f7de4961072555b4a788be5dd5b80c5fb474e9021415a8815c2894f72d19fe65"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "1a07558f5245bec98f1b89dc355636e2a94d1257607715a0ffce418faaf1649e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "cfa9046efb988c0bafd14e039d3a1344cbff919cbda6a8dc60258f75ff0d33a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "780254c9aec2f1a08c8d3972fa15931c118ee04a0c5b213caa68891c2718468a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildBrokerTest.xml",
+      "sha256": "e85817d5325083e1e814ee4c8c1c25d45430aec7dfd4b67394ccb264d3810d89"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceInspectorTest.xml",
+      "sha256": "8169bdbbff154934205c246c3f26089732e9c91a1486c6d737075eff2bec3d89"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceParentTest.xml",
+      "sha256": "e99a4cdae52705d722f3112ca768b1e0d14930416cf8710dfac6e57c2a778f6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "79a07a7a3112287e54e82cfae5e017807fed984efe36f0edc7dc5fa9a9b2bb68"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceExecArgumentsTest.xml",
+      "sha256": "534317a2c057e8ec65e21f7de84b801b53f7a005fa5734ef458b5a176b699882"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "74578930e8e53ac31cbaf27d637c53812186b1cffb6acf2b8b7ec08fb0b35c01"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrameTest.xml",
+      "sha256": "a27787fe67e3ca3dc393a97eea0ad6532d7c97fd380eb876181ecdaaaab1c6fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "cab6ff9892c4612027ba71d8402f2528a055f3ad6aa97da6518d15a62abeb0fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml",
+      "sha256": "e8cb1a73a2e42f8db30760177f39376339bec6ea94f37998659f05e48276a83e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml",
+      "sha256": "7cea5d7eb1652ac643965e80657cebbcba8124ce2f14a3827848b3cdf9fa364a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml",
+      "sha256": "8a293db9959d23566950d5e5ca28a185cfdbfe7bf34e0ea654be4c19329c1a81"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+      "sha256": "c7fc8a4dd86a71d3384e48dfe54c7a1685f9fb936249342cd60fdf05679b55b7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "9ffda9aabdb9f26c09e47028cef391ef9e112c048f969eba19c1e0e483b34361"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+      "sha256": "a0da1b676de0e6deba8fa823864c77355267aabc56ab9ba3e7a6bd0aa3ee0cf7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "1f0a0b1e065b52f88a602a35cdc9de5793356d33e521cdbf35835c678bc44924"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "b12ae75e38771842ac92411de9e0b3d9c0aa78a018de6d45a419a20329dc8dba"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "5dc1ad7ae3325dd139f71ab528449f00f9e21cd359fb462aec6d50007dee6e22"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "951fc9b12dd77c9d46f5a426304a34c0d872ee6fa94f4efc769e22829af4b133"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "20c28347242d6dd52aac22b801b8730c81255305f7be78f8787ba5139632ff2d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "8d0ceb7488fd9c60aa930829bf7606539d170718a36fb247d1cd9d8214a1ef51"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "adb59f0b264c4553bd84b5e4d2f02a3540aec3dc24969199344070922b162a7d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "7a50aba0b2124bbad8945f7ffa2bd904a1975a9e3f2a668dfbc1bff9ae2722d6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "022ea6742f88028c120681333964744cb50a33e721b0dae97154fa29b5e13877"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "9bf864fb0d6bc03a918ae0205c643123b9988794089cd3bb5de6a8e7d043861a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "1f1da0db319dfbae826ff3e9475ff5edfd03b1311c9840058490b516b0660dda"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "0e6c4f61d0b23dc08843b4a18506e114da86673b61806d067d39b83ed2466eed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "0f94f2c877cedd985e005420abcadb8f62eabc5a6357a207e62d4d453b32d176"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b1a7a794d461ac91165e7abd7e46bedecff8ed3204b50094edcc4cc25c796e6e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "9a7151894a5793f0853f95356a3f2104abc77e5e7de860cea12b863f2fe89189"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "521b64a3dea11466cdf3bf2ae43a178ffc7520aaa8e981e5171eebe82c5579f0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "87f2f2490cf92bf970931cac41af52b16301ace99f813d7687da767a4ced90db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "43c39fdabe3f5b24cf0fd95d5289f5f3824047ed1b46a0873bdfb847d23f7bae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "d373d61507c607cc3d07d93dbf7db72feedae9d6adbe8c73d3053f982a281adb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "6dc0ab6107c26e4c5a24e9df1a39c95e8bda08b83e6aebcac58194240085a3dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "0037335fce8a17ca4b0cc5d061e3a3753e84d562eeaa7fa52167765758e8984a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "8f4e5a967db354aa51312a010423e993199b57abffbcd0d0a9e2df1a4f42c82f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "3a716995aad2ce9c5005c2e48917510abb5f74322034c5ec7983cf8c360ddcae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "0f3f185a9b0102a0227b91988c0f325e976deac585a3f4f9645b364da07c14b0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "c8239c571101e469c23f97acb72e3c7896a717f9a7167fbdf8a3ecb903927f05"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxMonotonicClockTest.xml",
+      "sha256": "aa7bf6a42ee8e6b8d78bdbd4a456ad3583df75c236c1812dca29f2ea1f3cb933"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "6ec96aabb42f9c2c7d41c8aada374494dd5c69b424722ddfbecc83d5bbe60e4f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "493bf43c04f855b29fa68feb648d1cfae47ac5a6aaad4a39e4f12f4763c2b34c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "b65e25b86c77f7d249c3afb52bf9c403a31499189978cce10bf57953135fc7dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "f33c5645f380bfd1ab91fa13a95537b3cb21e91085a34328e9645ae3226df370"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "b59606572723070ecb2137d1a898037c86a18810089b2c82156f27b104e43cae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "79067eea3ff61b798d4349be3ed4c485c33f1075f088a007d80534468b236e1c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "44deaf91e360c2d380ac4dffcf6b6e4a6a630061081959207fd770e4cf236f29"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "6567f33c804a0c18f17198719cf05becde9613072c3983909a8eae214c45b5bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "7c1a89108549d3be93f7e1536ca0083b5981b9b144e4ca9cb4e3ada5ceb0a528"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "fe582cd0e34d779ec2701cffa5b8281ff1f5b9f81b69ccb60d784b87c099a047"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "041c596a5ab7dfec3d78c56ba4be96a7af26465f811f9b3220e1de1100cbb0fa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "a60e1d4396e467cc1ff1e82d52a73072e6cbf09e1c6b4936dc84e25a1b14b208"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "c47e2edff836dc40db244bf348584ed026596c46ac37a5c06e4e2b29e15a89b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "1380bc64e3fda87aa1f0f2edb4755f817651809055f8e8aaf94fcb8bf44df573"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest.xml",
+      "sha256": "d7b26a4ae11b513971b371d57c1972b7afd761c6cf519503ab88e97a40b0c670"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.api.file.WebNativeCodecsCredentialTest.xml",
+      "sha256": "9505c48b13b8a2242de600e58b87c2d394e33de5285580dc2abd57c57bf5eeb0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "b15347978ed8a31fa588d3938388f440fc91e2fab557a00f72ffbf491e41dbd4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "c6504885972bb37c5ad41c8c9f1519909ebea6ab16ddbad2e8a554a13d7cffd3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "9de9ee47f679c3b69a02d13256c0b5235e1da9ef7fe45b5dd8ad4d3f47e89c6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "1dac9a0cd3d061ef078476fbe0d265b7df33076619528cf73d22ab501da6435a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "c8a046b6656ead3cb20f1982ab9c564c01b1949e8035652b358913d3fbbc5207"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "f4015d415a1d017f1f00be390bde896e424993925a95e76070b641fd99a5cf2f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest.xml",
+      "sha256": "ade2ef157192e75aa8592e6ca2cd0074e14afb92c4a78beb631d9aba9a6d8718"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "ba062c4e83d92654ab8346736492a7acf8303d7d29585dcf49daed38ec37358f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "5798d7fe255e24cc8390737f4469c5114ec2b0af0f7c8cbc955bf4af49984447"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "bd155c06a9aa50199a4f924c28e29a5fef2522d3c8038dbc42200fac3f9f8889"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "f9dd47f99cd9dbdd419f4d8f37f39ad7641dbd2dd3d23bf89dec5695b12b8ca6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "88083529bdd8ffbafb53f56840efe29a164ea853d0977af589a3f374c059d720"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "af09a7682d769873cdb96fdf890bfc5b72a6e11c31d5f33e0e8fc21cf4569b63"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "73f097e8c0ccbe73ea2b545926595f4f1993327931c34aa3ca9d3d33c28bc8eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "ef027e6a18d46f20c4a20a69fc69c0635f887d18e41a3865f34ea9f97b0e3291"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "b6e5026a93a51ab57807e30cd552dc68339f8b69661ddc1a900cd75d6cd32f89"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "d83008d0bd8b6063958e56e403efd5dbf2c0d127938f5612110c484c05c6b32d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "2169a35eb867d04482e1591df5011c2a2c821501851f8e8538d293b0d7c594a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "944db0668b9ff5160ef68e6e01b1369579476755f51a8b50af70563072c2bde6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "30fad432e16f3ce7699973876df8facd156ee3b4302dd37cd111c48a90d220db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "32eb09c7a2655eda08dd6c38a6e0eb7ba1a3aa1a24bf23ac68f4ca4ad8a73fb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "419d2c272d043f8ef7358c5dea0da151088984fe8c8bed61a829d5bca4cf7cd0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "17e352d71b087daf073384c0eef4a68fc3aea063f991e3379076afe1670e93a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "ce172446b55722eedf8c45661a72728358a35cbb6aa3b483ba71c5d6f00b26c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "617085e322d86a3506503919a1f7f8fbfee878b380df6b2fec8aca6c9227312b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "e396469c50bb92bd48a6e0879370581d690fb1bce531a50ee1c6d3cf63a3babe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "d8d26003168563069fb1d44ae6739193d48b00bab54ad79632754663defd92cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "d6934bace9cce236ea068d5fafdca610de79d98cd829ee894852f7bb6d8a0688"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "8545ba1939aab1986cf2ba2f99e664f54b761802f0d4384ea4357f2767c1c0c5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "0485d28614759b2be9a812233e8aed6e8c16eefc452dafeb75d06cae6343c5ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "a347e384995e0ae04b729c8ab154c5c526b230f2ac6a7dc9ca38c273174a59a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "06fa679ff1558107d91e9df74dfb5d734a8a45151ebe4069c139c2dff0c7090e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "66356966feadd218e3f3f979333f7c9f37d7cdadccebc3cbea12f820e6569213"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "5af48243052639cd8f72f05d862c80adc121c606f3590d6cc7202f81fb2b2548"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "9cc387b6a56fa154fbb1e8dff383852ca57b514a95eed2bc806a84636c15f83c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "2b45719ecd32491e182fc975d4a93ace974178638ee8317acf1c35954190b9a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "2fcf291caa6b965308f532213c4fb0359a8314ff65c9b55570eacaf555175aff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "1b2b5fb2b840bf0b87650bb406e19f5ac1527ce4b0652c91a562df8240aa00f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "1dbeb4a2a317301a2444b34ed1f2f607a39a233866061746e36e6a92fac96ce4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "fbfc5551d348a89d8e8a1878223f349a4fc8f68ee77c9c127535a9987b4dac6e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "eada884c2aa236f491d05648d8f7bc3c5c3520afd3d077b695cebba454f65ee0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "5d2b76b7471d0fc23fb46e4501038a148ef3a823da89ab4a654825fcdaf84922"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "16283a63cc86372de6bbfa661f00db7ba7e607a5cd82420926fa86794a9864bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "a8d3ce3cfbdde50459d443e09f283772a320e5123d8d901dab8d42916fc7b08c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "05e994a941dc9908c3c54ae948dde7981a39a73d42078eb79cebbad987af9235"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "aa34f1d5a7c62fd7c607b1ba019d52abeddb011e88c970e74f6cdcfc5da33551"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "09814bdf106f214129272d51e76f29c2ebf4bbb213a4295d18dff0d157fdcded"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "04e8aaa3f230aeb0e1c85daf20e9b2ba3d232d8d8ab418bcc7e2ab0792755639"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "ba3e8d4e6db10d1086b8566a3a24f6f764894c91ec23220b08578dc87b80678c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "7a8982258477e9f4db27662f40c842c8267bfbf791223b881c4ec85be0755df9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "dbe75d42be920aeedeb08463e53a7a445b6417457d4ff52c7e8201af5c0b3734"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "596e41079ae99d2c038b044f1c76b6a6098b55a06681141911f6e37887f6e7f7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "9af4020278f4ca97722a26624dd9a94e42762045f13cc3bd319d610b7e49003a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "ca2a0b31693cda2ae8f4ad6afac5937c258d54464093bd12c4c3854d12295197"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "9e7fd40f245c98e63a73622d80f963bc3b7a9b93c16cbbdcc455cb688a933231"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "fc863c91f8444f45b4ac113e643f0c72d97833f20b04983673cf659fbf3e8d4b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "894c1eb711b032e83b2423f5d0531c661df312ea03ba75e75b7bc4d9ff3ff08f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "482a1484179c39a5150560acf6e287d53d2b8aebad5aabc4dbad2e9a04fffc18"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "133ae77cd51ecec17ab7f48d0619339fdd02aeac1f0fc4c83cdd814b6e9d29c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "34fa3a36f299325b3ed930101c6a24a08239d39aa4bbe406727bec4cef2e3c98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "79f2bb09962109afc266c4fa4528460d7848655e93f040543454b6b03f78178c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "eca1fcbce5ed146f81c7201640c33afa7d80b684d918d0b5798d0bb1d8cd87ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "c7e3c74caf69a4d4e8ba5463d7948b896b98893bf968193a6afea29f326c5da8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "a275000115567ea1bca9ce6ff930bb1442f9a304f45bee90db480b241ca73cb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "2d4ef63be21baba1e9ff86857719efdcce341cfc6f74551382a7a345b44e6dd1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "2d86b02bdf53ab9cc7f64b6bc5617ec4d65f16d504c8e5de6ac2ce408e3ea63a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "143378c9168528ce51ebad56897f8a78e2f29459ef227bd9b868c11fa1c6b1ed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "5e944d63b5e3c35a60ad5811ec4bfa08fb60174622974295f47231ad08ddb286"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "10a367dce8580aa52e65efd1bee56596fee368459926a2dd253b515c5b4fc768"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "47e82e0b26c5bffdde7f00dded2a913dc92551f61eaa47b230a543d5845686a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "f3c49ae3403e953283963e4192a3f663785fadd83242de49c5d97a6dfd38102a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "933040cdd582261a117dd36b8995ea03127a0c1c795a789ab79f87cc1d87300c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "981a7651a92f34ac34b9164323545b00d9d811731522b721ee982e88375f039b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "8c800fc83c9bc87e6e516d57c6308a4954c1f823d4781b9ed8ad25f8c7b76026"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "7e0e6c09f8a97bc59470e3792d43746a410088fa833c49ace05d02385f80f9e4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "eaf0ac76be9a6a1fbdd98788d891faccd99e52a7be611e512dd4b1b6b7269277"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "42662760257ea8930dc6df063b1e2a79cd68563aed17bac5317faea9dea16748"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "b19646116ef220b1418239120c6b26a9c0bed4e2280f980616cb13949db50efc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "253e76c268c0d9e758713c724c12d630dc7ebad520d0c83c5a7d31af7cfcd0e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "1fa7971a1fe0651bb93bc6cf4f3cd02ca102fbf3c03bc435bf84fdf042bf350a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "5ffab8cfbe0aeda073bef5a618fc15de66bcdc4022bfb517954c019c6d116d4c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "7cf06d5bb13101634493d781cc11708829c57bacbb7972d2bcac84176d991060"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "53d0393965d70a94db5327caef403bc5fe527f9a4ca1b4cfad0830faded67d37"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "36103b1691505f00eb023e236534cfefa84456b0b7ba0656199e0d2adde6f380"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "9593bd834d791efe7e96979669d3ed6d50ec95483de33c8f6942c25b6757fc7f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG396-broker-stopped-journal-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "16efbefc2b5b2550bcccbbfabc591eb11104a44a6035dffd0e60ca86b76dfb7a"
+    }
+  ]
+}

@@ -862,7 +862,9 @@ public final class MorningDatabaseSession {
         failedObservationGuard(expected);
         owner.check();
         return snapshot;
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }
@@ -960,7 +962,9 @@ public final class MorningDatabaseSession {
         owner.check();
         expiryBegins = begins;
         return begins;
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }
@@ -1064,7 +1068,9 @@ public final class MorningDatabaseSession {
         guard();
         owner.check();
         return new ExpiryObservation(begins, ended, result, actual, receipt);
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }
@@ -1105,7 +1111,9 @@ public final class MorningDatabaseSession {
         guard();
         owner.check();
         return observed;
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }
@@ -1143,7 +1151,9 @@ public final class MorningDatabaseSession {
         guard();
         owner.check();
         return references;
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }
@@ -1207,7 +1217,9 @@ public final class MorningDatabaseSession {
         owner.check();
         cleanupVerified = true;
         return observed;
-      } catch (SQLException | BatchRepositoryException known) {
+      } catch (SQLException
+          | BatchRepositoryException
+          | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
         throw unavailable();
       }
     }

@@ -1,0 +1,187 @@
+{
+  "id": "PG396-native-broker-stop-resume-and-expiry-reread-refusal",
+  "formal": false,
+  "sourceCommit": "6e133d2eaf76f4f46f952b63e47b0c7b18ae430a",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-09-30T20:18:37.374805+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "signed frozen full-BOM deployment with vendor Unit SuccessExitStatus143; external Morning same-run resume; real parent/backup/cleanup/expiry exec",
+  "exitCode": 0,
+  "applicationParentExit": 1,
+  "wholeStartupAccepted": false,
+  "releaseManifestSha256": "1e13573c6964208219563a5dbb3db4119c35e2d61df6c1312984cd08ed11924d",
+  "fullRegression": {
+    "tests": 2649,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "expected": {
+    "oldRows": 53,
+    "newRows": 10,
+    "brokerFresh": true,
+    "expiryFresh": true,
+    "sameOwnerRootsCollected": true
+  },
+  "actual": {
+    "oldRowsUnchanged": true,
+    "rows": 63,
+    "backupFreshSkip": 2,
+    "backupAttempt": 13,
+    "cleanupFreshSkip": 7,
+    "cleanupAttempt": 5,
+    "expiryFreshSkip": 1,
+    "expiryAttempt": 2,
+    "allFourteenColumnsReadBack": true,
+    "priorNormal143AndFullSameInvocationStopJournalAcceptedByActualParent": true,
+    "brokerFresh": true,
+    "fullOpsAndStartupJournalAcceptedByActualParent": true,
+    "expiryFresh": true,
+    "expiryReceiptExit": 0,
+    "sameOwnerRootsCollected": false,
+    "knownFailure": "BUG376 recursive DB verification through Broker Live guard during actual Expiry reread",
+    "parentAndAllChildrenTerminal": true,
+    "requestOwnerIntentEntries": 0,
+    "startupInvalid": true,
+    "permitsIssued": 0
+  },
+  "coverage": {
+    "classByteMismatch": 0,
+    "sameByteActualRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "oldInspectorExecExcluded": true,
+    "moduleUnion": {
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1055,
+          "covered": 11034
+        },
+        "METHOD": {
+          "missed": 186,
+          "covered": 1854
+        },
+        "CLASS": {
+          "missed": 10,
+          "covered": 266
+        },
+        "BRANCH": {
+          "missed": 581,
+          "covered": 5118
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2182
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 380
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1205
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 644,
+      "LINE": 1167,
+      "METHOD": 205,
+      "CLASS": 11
+    },
+    "resolvedFromOwnHost": {
+      "BRANCH": 116,
+      "LINE": 1006,
+      "METHOD": 183,
+      "CLASS": 17
+    }
+  },
+  "bugs": [
+    "BUG-375",
+    "BUG-376"
+  ],
+  "ssc": [
+    "SSC-127",
+    "SSC-128"
+  ],
+  "ykt": [
+    "YKT-295",
+    "YKT-296"
+  ],
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-six.log",
+      "sha256": "f07fc7b7ed49e36bd2fe13bbf13097094b5ab370d1e91d2d5f6f374add132fb3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-deploy.log",
+      "sha256": "d5e44964967fa9b2a621c5ff9a57465897dac14029e0a05e0865f2c7f1bbbae3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-old-unit-base.log",
+      "sha256": "23f64d847adbc9766624ca013f5111fd2797135022d6ec3ec338dc304372f187"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-verify.log",
+      "sha256": "12ef91c1f2d402016b1410fe530a856341cdf2621f6027129bb3c4b3c4ab5851"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-activate.log",
+      "sha256": "0e1f86cee43502dc64d67051b6ee738c9804b4e5a6425172e07b4d451e1a3af5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-native-db-before-full.log",
+      "sha256": "33b697cabd5999867778c29e311112d423acfc68d0875a47253d16d2c7a09945"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg396-native-db-final-full.log",
+      "sha256": "14de44540b4453244c1a4945f078317933e627a5f5c469a64b90a49353eed189"
+    }
+  ],
+  "nativeExecHashes": {
+    "parent": "9479e5f08bab113a80f9281a62d5cd8cbc78dbf00727f830dfde9844ce8e1747",
+    "backup": "19ba03e562a83195073fab5f9d4bca70511e73c8e11bf24ea29d371410d9f66f",
+    "cleanup": "3c45202aa87327ae5596147217f0af7074e67fc4155586098c43ba430754b672",
+    "expiry": "d46c034d81e041834bf3cba2d67ba60627422391fa4b957e6214b9c3710b4685"
+  },
+  "limitations": [
+    "five gates/normal issuer/root API Web/CHR not accepted",
+    "same-owner six-root collector not reached",
+    "native negative/hard-timeout and coverage100/formal run24 unchanged"
+  ],
+  "redaction": "no raw journal/Unit identities/exec/credential/password/token/session/key/master/dump in Git"
+}
