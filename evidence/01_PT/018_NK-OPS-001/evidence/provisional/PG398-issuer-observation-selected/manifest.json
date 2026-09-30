@@ -1,0 +1,628 @@
+{
+  "id": "PG398-issuer-observation-selected",
+  "formal": false,
+  "sourceCommit": "3aaab1fd2d19cbd6eb4c9a39262e9a439edeb82d",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-10-01T06:47:01+09:00",
+  "environment": "Linux / JDK25.0.4 / Maven3.9.12 / NullAway compiler / SpotBugs4.10.4.0",
+  "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch -Dtest=Artemis*Test,MorningGateEvidenceTest,MorningProcessMainTest,MorningDatabaseSessionTest,CleanupDatabaseSessionTest,SchemaHistoryAdmissionTest,RootReleaseAdmissionTest,OwnedTransferDirectoryTest,FixedServiceIdentityTest -Dsurefire.failIfNoSpecifiedTests=false test spotbugs:check",
+  "exitCode": 0,
+  "tests": 135,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": {
+    "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest": 16,
+    "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest": 9,
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest": 10,
+    "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest": 4,
+    "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest": 11,
+    "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest": 4,
+    "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest": 5,
+    "dev.codex.schubert.nk.batch.file.MorningProcessMainTest": 10,
+    "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest": 3,
+    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest": 6,
+    "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest": 4,
+    "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest": 3,
+    "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest": 3,
+    "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest": 4,
+    "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest": 3,
+    "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest": 2,
+    "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest": 3,
+    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest": 1,
+    "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest": 5,
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest": 9,
+    "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest": 20
+  },
+  "testCases": [
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "bug036CallerMonitorCannotBlockAnyDirectoryOperation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02ExistingDateIndependentChildLifetimeAndSafeIoFailures"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02RejectsNullRelativeRootDotSegmentsAndInvalidDates"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+      "test": "f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema001ExactFixedQueryAndBorrowedOwner"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema002EveryColumnMissingExtraAndFailedRow"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema004ExpectedProfileOrderingAndDefensiveCopy"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema007InterruptBeforeAndAfterNeverAccepts"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema003ExpectedRowInvariantBoundaries"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema008IndependentConcurrentOwners"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "test": "opsSchema005NullProviderSqlExceptionsAndAllOwnership"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid007EveryOwnedCloseAndUnknownFailurePreserved"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid001BothFixedAccountsExplicitRequiredGroups"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid003UidGidBoundariesAndCanonicalDecimal"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "serviceid005ByteNullAndImmutableValueInvariant"
+    },
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "test": "dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "test": "artunit003ExactStopAndResourceLimits"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "test": "artunit001RealFixedDependencyIdentityAndInstance"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "test": "artunit004HardeningAndNoHostSecretMutation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "test": "artunit002PrivateHashedCredentialIsFixedReadOnlyMount"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom010ActualSchemaAndRuntimeSurviveOwnersOnlyAsImmutableData"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom008IndependentConcurrentOwners"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "issuerCfg002UsesSharedStrictEffectiveVectorsAndRawRereadNotBomTemplateHash"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom007FixedOsVectors"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom005ActorAndSchemaFailureBeforeBegin"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom006CurrentReloadAndInterruption"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom002NoPublicClaimsOrBooleanAuthority"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom009CleanupMustUseOwnSnapshotAndFreshSchema"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom001ClosedLoaderAndFreshBeforeEverySchema"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom004CloseOrChangedRootCannotMint"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+      "test": "rootBom003EveryMetadataAndNullField"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest",
+      "test": "brokerlive003EveryWorkerRetainsOneshotNoPolicyAndCannotBeBroker"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest",
+      "test": "brokerlive002EveryLiveConditionAndDaemonContractRejectsIndependentMismatch"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest",
+      "test": "brokerlive001ExactLiveInvocationNeverBecomesOneshotCompletion"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest",
+      "test": "brokerlive004LiteralMatchesSourceUnitAndFixedProbeReadsWithoutProcessAuthority"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+      "test": "issPg002WrongIdentityReadonlyRecoveryIsolationAndOwnerBindingsNeverEncode"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+      "test": "issRel002MalformedHashesMapsAndArtifactPathsAreRejected"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+      "test": "issPg001LiteralSixColumnSignedChecksumGolden"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+      "test": "issRel001FixedMapOrderUnicodeWithoutNormalizationAndSortedArtifacts"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+      "test": "issPg003MissingOrReorderedSchemaAndNilOwnershipNeverEncode"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain001AdmissionSuccessStillCannotClaimMorningSuccess"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain010KnownBorrowedOwnerStopIsThirtyButProgrammingFailureIsNotNormalized"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain006OneParentBudgetIsBorrowedByAdmissionAndNeverClaimsReady"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain003KnownIoAndStopFailureAreFixedNonSuccess"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain002ArgumentsCannotSelectRunOrOverrideGate"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain008ExplicitCanonicalResumeIsSameBudgetAndCannotOverrideCutoffOrGate"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain005NoPublicConstructorForAlternativeLauncher"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain004UnknownIdentityAndNullContractAreNotNormalized"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain009OnlyActualSuccessfulArchiveSuppliesSameOwnerManifestOnce"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+      "test": "mmain007InvalidArgvDoesNotBorrowParentBudget"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+      "test": "opsMq021NullInvalidMetricsAndProviderFaultAreRedacted"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+      "test": "opsMq020EveryCountAndByteBoundaryIncludingDlqAlert"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+      "test": "opsMq019LiveSixEmptyQueueMetricsAndApplicationDenial"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq026RealBrokerRemovesOnlyActualExpiredMessage"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq023FixedCutoffCountAndByteReconciliationWithoutCallerSelector"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq025RejectsMissingMalformedOrUnboundedManagementSelector"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq024RejectsEveryCounterDriftOverflowAndProviderFailure"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+      "test": "opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+      "test": "opsMq004NullProviderFaultAndBorrowedConcurrentSession"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+      "test": "opsMq001ActualBrokerHasSixDurableAnycastPairs"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+      "test": "opsMq002MissingLiveQueueFailsWithoutRecreation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+      "test": "opsMq003EveryAddressAndQueueMismatchFailsClosed"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+      "test": "opsMq018NullMalformedProviderAndEncoderFailuresAreRedacted"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+      "test": "opsMq017RejectsEachPermissionDriftMissingExcessRoleAndMalformedProjection"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+      "test": "opsMq016LiveEffectiveSevenRoleMatchesAndApplicationDenial"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
+      "test": "opsMq030FailClosedAndNoLaterChecks"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
+      "test": "opsMq029OrderedReadOnlyObservation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
+      "test": "opsMq031MalformedPressureAndFatalContracts"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest",
+      "test": "mqUnknown004FatalQueryAndEveryEncoderPreserveIdentity"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest",
+      "test": "mqUnknown002AllSixAssemblyStagesStopImmediatelyWithoutLaterRead"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest",
+      "test": "mqUnknown003ExpiryUnknownNeverRemovesAndKnownProviderRemainsDeclared"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest",
+      "test": "mqUnknown001EveryReaderAndExchangePreservesUnknownIdentity"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
+      "test": "opsMq014RejectsEveryAcceptorFieldDriftAndExtraListener"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
+      "test": "opsMq013RealLoopbackCoreAcceptorAndOpsOnlyManagement"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
+      "test": "opsMq015NullMalformedStartedAndProviderFailuresAreRedacted"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest",
+      "test": "eachExchangeBorrowsActualRemainingAndNeverRoundsUp"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest",
+      "test": "exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
+      "test": "opsMq012RejectsNullMalformedUnknownAndProviderFailures"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
+      "test": "opsMq010ReadsSixEffectiveSettingsWithOpsRole"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
+      "test": "opsMq011RejectsEveryCommonAndCapacityDriftAndMissingValues"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest",
+      "test": "opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+      "test": "opsMq006EveryApprovedValueIsCheckedAndDiskBoundaryIsStrict"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+      "test": "opsMq007NullMalformedAndProviderFailureAreRedactedWithoutSessionOwnership"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+      "test": "opsMq005ReadsActualBrokerWithoutChangingOrClosingBorrowedSession"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+      "test": "opsMq009MissingManagementReplyIsBoundedAndInterruptIsRestored"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+      "test": "opsMq008ProductionOpsRoleCanReadEffectiveManagementValues"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb006CallbackNullKnownUnknownAndPostStateRefusal"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb005BusyMissingAndAmbiguousAdvisoryNeverCallBody"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb007ActualSeparateRoleConnectionAndParallelLockContention"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb001FixedUrlNullAndRootActorContract"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb009PublicChildAdmissionSucceedsOnlyWithFreshMatchingRelease"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb004SchemaAndRootGateMustPrecedeLockAndCallback"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb003RoleStateRowsAndNullJdbcObjectsFailClosed"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb008InterruptAndCloseFailuresDoNotReturnSuccess"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+      "test": "cdb002LiteralRoleSchemaBeforeLockAndAllOwnerClose"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb011ChildFailureCannotBecomeSuccessOrRetainParentConnection"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "allAdmissionResourceFailuresAndUnknownIdentity"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "interruptionAndForeignThreadCannotUseBorrowedSession"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb013ResumeKeepsSameCutoffWithExistingReferences"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb015SameConnectionAtomicFailedPairAndReadbackWithoutMutation"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "fixedUrlRootConstructorAndNullContracts"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "actualBothBackupBeginsAreCommittedTogether"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb016ActualAbandonedPairAndPostBeginOriginalProofAreDistinctFromAdmission"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "actualCommitAmbiguityNeverReturnsHandles"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb014RealResumeReferenceProjectionRejectsDifferentCutoff"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb010RealSeparateChildAdvisoryHandoffAndParentReacquire"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb009NoHandoffBeforeConfirmedBackupCommit"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "literalAdmissionAndSessionLifetime"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb020ReleaseObservationHasFiniteDeadlineAndCannotUnlockAnotherOwner"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "bresume001GenuinePriorPairAndCurrentSkipAreSeparateCommittedRows"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb019VerificationOnlySchemaCannotMintPermitFactsAndDataCannotEscapeOwner"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "bresume002PartialMismatchedAndMissingPriorPairsCannotPublishSkipProof"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "mdb012AutocommitDriftAfterCommitRefusesChildWithoutCallback"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "roleRecoveryNullAndLockRejections"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+      "test": "compoundUnknownAndNullMethodBoundaries"
+    }
+  ],
+  "static": {
+    "storage": {
+      "bugs": 0,
+      "errors": 0
+    },
+    "bootstrap": {
+      "bugs": 0,
+      "errors": 0
+    },
+    "batch": {
+      "bugs": 0,
+      "errors": 0
+    }
+  },
+  "logSha256": "f438abb50788fafc25ab7db498d23e420f2a631b8a62f11d8f50fea0efcca092",
+  "ssc": [
+    "SSC-129",
+    "SSC-130"
+  ],
+  "bugs": [
+    "BUG-379",
+    "BUG-380",
+    "BUG-381",
+    "BUG-382"
+  ],
+  "ykt": [
+    "YKT-299",
+    "YKT-300",
+    "YKT-301",
+    "YKT-302"
+  ],
+  "coverage": {
+    "measuredAsFormal": false,
+    "required": {
+      "LINE": 100,
+      "METHOD": 100,
+      "CLASS": 100,
+      "BRANCH": 100
+    },
+    "status": "Full same-source six-module/native coverage pending. Selected success is not full coverage acceptance."
+  },
+  "oracle": "SS fixed literal NKPG1/NKREL1 frames, independent UTF8 conversion, signed schema CRC literal and real SQL; fixed unknown Throwable identity; real held advisory deadline canary; no production-derived expected.",
+  "redaction": "Only JUnit class/test/count metadata. Properties/stdout/stderr/provider diagnostics and raw sessions/credentials/dumps are omitted. Failed logs retained privately by hash, never counted as success.",
+  "limitations": [
+    "Native PG398 DB/release frame path not yet run",
+    "BROKER_OPS detailed actual values, five gates, ten steps, retention, real issuer/root/API/Web/CHR remain incomplete",
+    "Full regression, same-byte native negative cases, 100% coverage and formal collector pending",
+    "Previous failed/flaky runs are excluded; formal PT-WEB-20260925-24 unchanged"
+  ]
+}

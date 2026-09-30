@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+## 06:47 PG398 issuer DB/release・未知MQ境界（限定、未認定）
+
+Source `3aaab1fd2d19cbd6eb4c9a39262e9a439edeb82d`。選択Storage16/Bootstrap19/Batch100＝135PT、21suite、F/E/S0、NullAway/compile成功、SpotBugs3module各Bug/Error0、47.990s・2026-10-01T06:47:01+09:00。実schema six-column/BOM/runtime/ROLE/JDBC/HELDをowned Sessionで取得する値契約と独立POSTGRES/RELEASE fixed byte、全Ops unknown/NPE/Error同一性・JSON型拒否・宣言provider/interrupt/close・実PG handoff/解放deadline canaryを確認。抑制/coverage除外追加0。manifest `evidence/provisional/PG398-issuer-observation-selected/manifest.json` は全135Test class/methodをmetadataだけ保存、raw properties/provider/session/credentialを含めない。log SHA `f438abb50788fafc25ab7db498d23e420f2a631b8a62f11d8f50fea0efcca092`。
+
+初回new codec NullAway compile拒否、Storage対象未指定のno-tests拒否、旧unknown oracle1F＋close時点仮定MDB010 1F（89PT、BUG381/382、log0eed327…）、次134PT/FES0/static5（190f028…）は不合格としてWorkに別保全。BUG379/380のfixture/namingは直接再試験・横展開完了、BUG381/382は限定positive/negativeまで成功し全回帰/native観測は継続。全6 coverage/同byte native/MQ詳細実値/5gate/10step/7世代/正規発行/A引継ぎ/APIWeb/CHR/正式collectorを未達として追跡する。PG397実経路成果を巻き戻さず、通常限定保存で停止しない。
+
 ## 05:50 PG397 実Expiry再読→6root閉鎖（issuer未完）
 
 凍結Production ed65fbf9f6bba9a55fadde9ea270a849cc43e257、全6 2,650PT/FES0/static6zero/full1dbdd001…、signed178artifact/61deps/23SQL・manifest530ebcb5…。実同原本Morning1回：旧63行不変＋新10SKIP=73、Backup14/cleanup6/Expiry3、全14列/真正fresh3子receipt0・freshBroker/Ops/journal後、Expiry親独立再読→Cleanup参照再読→実effective config→6root capture/recheck→Main帰還181を同byteparentで確認（root capture24/24line・recheck4/4line、identity/private/hostをactual処理で観測）。全親子kernel終端/4namespace空/INVALIDpermit0、親30は未完成全起動の部分帰還であり成功0/10へ昇格しない。独立6root oracleは実NSS/uid/gid/mode/dev/ino/ACL/ext4RW合格、canonicalのexpectedだけを計算、native Production hash未出力/発行未実装を区別。native4role union B/L/M/C644/1129/197/11・classMismatch0、host760/2181/389/28から116/1052/192/17解消。BUG376直接再試験成功、6bind境界のnative負系/全coverageは残る。独立fixture誤名BUG377とcollector旧labelBUG378を事前起票/初回拒否保全し、tools同byte/hash/再採取をmanifestへ保存。次は5gate実値収集・7世代・正規issue内部3境界/A正規handoff→Root/APIWeb/実CHR、正式run24/48.3%据置、IT/ST未実施。

@@ -1,5 +1,13 @@
 # 正規issuer接続 単体テスト仕様書
 
+MQUNKNOWN001～003（BUG381/YKT301）：全6readiness client/組立6stage/Management read/query/put4operation/Expiry observe+purgeへ固定未知NPE・IllegalStateExceptionを投入し、同一throwable・後続query0・mutation0・borrowed close0を検証。宣言ActiveMQ・topology・管理failure/interruptだけは従来固定redacted分類、malformed JSONはpure型parseの局所範囲で拒否。旧未知→readiness oracleはSS343既存unknown契約へ修正し、正常/全drift/並行/response null/malformedと組合せる。Productionは未知を30分retryしない。実callerの全回帰/nativeは選択合格と別に閉じる。
+
+MDB020（BUG382/YKT302）：server側advisory保持中に30msの有限観測を失敗させ、別ownerのforce unlockを一切行わず、その後holderの明示SQL unlockでのみ取得可能になることを実PGで確認。JDBC close後のMDB002/003/010/011/CDB007はbackend Terminate反映を5s以内の実pg_try_advisory_lockで観測し、期限切れは失敗。handoff明示UNLOCK後の即時取得・保持中false assertionは変更しない。初回89PT/2Fは合格へ算入せずSHA0eed327…を保全。Production transaction/close/SQL/grant変更なし。
+
+ISSBROKER001（SSC130、実装前）：同一queryの全実broker/topology/settings/acceptor/ACL/pressure/journal値をimmutableに保持し、旧void verifierはdelegateする。固定SS321/343の独立literal JSON/Queue query fixtureとBOM/Unit bindingから全field/順序/bit/vectorを検査、query重複0と返値改変不可/known失敗/unknown同一性を確認する。未実装codec/JOURNAL field/5gate完成は未認定として追跡する。
+
+ISSPG001 / ISSREL001（SSC129、実装前）：SchemaHistoryAdmissionの実six-column結果を独立SQL/固定rank0-null/SQL-row-checksumで検査、戻り値immutable/NULL/close/順序/未知/欠落/commit無しを既存全negativeと組合せる。RootReleaseAdmissionが実BOM/実runtime/実schemaを同nativeRoot内で保持・再読、Session実JDBC/ROLE/HELDとschemaの返値を同ownerで取得し、合成verify-only Schema portはissuer観測を拒否する。Goldenは固定ASCII LF共通binding＋全field順/UTF8hex/signed CRC/actualhashから独立fixtureで定め、Production encoderでexpectedを生成しない。Nativeは実same-source MainがPOSTGRES/RELEASE_BOM観測まで通り、原本DB/DDL/grant不変/SQL後条件、schema全列/署名全BOM/runtime/sharedconfigを独立再読する。実Root/APIWeb/5gate/発行を単独返値合格へ読み替えない。
+
 ISSROOT004（PG397・BUG377/378）：固定NSS literal/host6rootの全metadataを独立getent/lstat/listxattr/findmntで確認し同原本INVALID5keyと6SS行からhashを計算。Production methodをoracle生成に使わない。actual native capture/recheckは別に同source parent.exec＋全actualclass一致0とMain帰還181/capture24line/recheck4line完了で確認。Productionがnative roots canonical hashを未出力の間はhash一致/許可成功を宣言しない。未知name/欠落/交換/ACL/RO等は既存ISSROOT001～003と併用、独立fixture誤名/labelの初回拒否は合格へ混入しない。spec/実actualmetadata/Source/command/coverage/hashはnative manifestで追跡する。
 
 ISSGATE003 / MMAIN010（SSC128/BUG376/YKT296）：実Expiry正常0→独立再読transaction内のbroker.recheckが別DB transactionへ再帰しない。同Root/親PID/期限/原本/INVALID、生Brokerは毎境界で検査、DB原本/HELDはtransaction外前後と所有Session内で検査する。6bind境界の既知停止は固定IOException、Morning既知停止は30、未知Runtime/NPE/Errorは同一throwableを保持。独立oracleはPG396旧53行保持＋新10SKIP全14列、真正fresh Broker/Expiry0、permit0/INVALID、次修正nativeは同原本から6root収集/再確認の実return-line到達。親exit30だけを到達証明にしない。HostはMain typed停止/未知同一性、MutationGuard実PG timeout/rollback、Session全negativeを再試験。Native同source4exec＋actualclassesでclass mismatch0、root返値のline到達を別採取する。未実行/失敗は合格へ加算しない。
