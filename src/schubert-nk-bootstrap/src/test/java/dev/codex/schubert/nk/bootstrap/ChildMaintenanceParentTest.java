@@ -13,6 +13,32 @@ class ChildMaintenanceParentTest {
   private static final UUID BOOT = UUID.fromString("11111111-1111-4111-8111-111111111111");
 
   @Test
+  void existingEmptySupplementaryRootGroupsAreNotMissingOrInventedPrimaryGroup() throws Exception {
+    for (var kind : ChildStartupContext.MaintenanceParent.values()) {
+      for (String groups : List.of("", "0", "7", "0 7")) {
+        var fixture = new Fixture();
+        fixture.groups = groups;
+        new ChildStartupContext(fixture).verifyMaintenanceParent(kind, owner());
+        assertEquals(2, fixture.owned.size()); // Two manager reads for one parent, not two parents.
+        for (byte[] bytes : fixture.owned) assertArrayEquals(new byte[bytes.length], bytes);
+      }
+      for (String groups :
+          List.of("0 0", "-1", "unknown", "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) {
+        var fixture = new Fixture();
+        fixture.groups = groups;
+        assertThrows(
+            IOException.class,
+            () -> new ChildStartupContext(fixture).verifyMaintenanceParent(kind, owner()));
+      }
+      var missing = new Fixture();
+      missing.missingGroups = true;
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(missing).verifyMaintenanceParent(kind, owner()));
+    }
+  }
+
+  @Test
   void bothFixedLiveRootParentsWithSameKernelGeneration() throws Exception {
     var fixture = new Fixture();
     var context = new ChildStartupContext(fixture);
@@ -125,6 +151,8 @@ class ChildMaintenanceParentTest {
 
   static final class Fixture implements ChildStartupContext.Io {
     String fault = "";
+    String groups = "0";
+    boolean missingGroups;
     final IllegalStateException unknown = new IllegalStateException("PRIVATE unknown");
     final List<byte[]> owned = new ArrayList<>();
     int units, stats;
@@ -166,7 +194,8 @@ class ChildMaintenanceParentTest {
               + (fault.equals("uid") ? "1 1 1 1" : "0 0 0 0")
               + "\nGid:"
               + (fault.equals("gid") ? "1 1 1 1" : "0 0 0 0")
-              + "\nGroups:0\nCapInh:0000000000000000\nCapPrm:0000000000000001\nCapEff:0000000000000001\nCapBnd:0000000000000001\nCapAmb:0000000000000000\nNoNewPrivs:"
+              + (missingGroups ? "\n" : "\nGroups:" + groups + "\n")
+              + "CapInh:0000000000000000\nCapPrm:0000000000000001\nCapEff:0000000000000001\nCapBnd:0000000000000001\nCapAmb:0000000000000000\nNoNewPrivs:"
               + (fault.equals("nnp") ? "0" : "1")
               + "\n");
     }

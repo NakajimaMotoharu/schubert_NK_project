@@ -1,0 +1,1785 @@
+{
+  "id": "PG390-cleanup-owner",
+  "formal": false,
+  "sourceCommit": "20e487193984b3fb9da3c92b4dc6e9918de27fff",
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "six modules: clean test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "suites": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 153,
+      "suites": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 191,
+      "suites": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 760,
+      "suites": 125,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 565,
+      "suites": 89,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 853,
+      "suites": 105,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 2602,
+  "coverage": {
+    "protocol": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17403
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1008
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3464
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1272
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 741
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 157
+      }
+    },
+    "storage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 5871
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 497
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1119
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 496
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 247
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 36
+      }
+    },
+    "bootstrap": {
+      "INSTRUCTION": {
+        "missed": 136,
+        "covered": 10202
+      },
+      "BRANCH": {
+        "missed": 52,
+        "covered": 1002
+      },
+      "LINE": {
+        "missed": 28,
+        "covered": 1883
+      },
+      "COMPLEXITY": {
+        "missed": 59,
+        "covered": 823
+      },
+      "METHOD": {
+        "missed": 11,
+        "covered": 344
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 54
+      }
+    },
+    "api": {
+      "INSTRUCTION": {
+        "missed": 278,
+        "covered": 35102
+      },
+      "BRANCH": {
+        "missed": 17,
+        "covered": 2837
+      },
+      "LINE": {
+        "missed": 71,
+        "covered": 7673
+      },
+      "COMPLEXITY": {
+        "missed": 17,
+        "covered": 2604
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 1140
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 245
+      }
+    },
+    "web": {
+      "INSTRUCTION": {
+        "missed": 80,
+        "covered": 21489
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1695
+      },
+      "LINE": {
+        "missed": 25,
+        "covered": 4880
+      },
+      "COMPLEXITY": {
+        "missed": 5,
+        "covered": 1831
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 970
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 191
+      }
+    },
+    "batch": {
+      "INSTRUCTION": {
+        "missed": 6492,
+        "covered": 45790
+      },
+      "BRANCH": {
+        "missed": 469,
+        "covered": 4489
+      },
+      "LINE": {
+        "missed": 1515,
+        "covered": 9057
+      },
+      "COMPLEXITY": {
+        "missed": 638,
+        "covered": 3707
+      },
+      "METHOD": {
+        "missed": 304,
+        "covered": 1550
+      },
+      "CLASS": {
+        "missed": 25,
+        "covered": 226
+      }
+    }
+  },
+  "logSha256": "6524b959f7658f5f269e87e684fcf30fc8db165df89993f510eaec671e75626b",
+  "testIds": [
+    "CEXEC001..004",
+    "CINSPECT001..004",
+    "COWNERFILE001..002",
+    "CTERM001..005",
+    "CCYCLE001..004",
+    "BCATALOG001"
+  ],
+  "bugs": [
+    "BUG-362",
+    "BUG-363",
+    "BUG-364",
+    "BUG-365",
+    "BUG-366"
+  ],
+  "ssc": [
+    "SSC-119",
+    "SSC-120",
+    "SSC-121"
+  ],
+  "ykt": [
+    "YKT-284",
+    "YKT-285",
+    "YKT-286",
+    "YKT-287"
+  ],
+  "limitations": [
+    "native Cleanup/Inspector/Transfer not accepted",
+    "native refusal/explicit resume pending",
+    "failed Backup six SKIP/Broker/Expiry/issuer/API/Web/CHR pending",
+    "100% coverage and formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr/provider diagnostics omitted; no credential/session/token/password/key/dump",
+  "finishedAt": "2026-09-30T19:53:06+09:00",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "da3a2192d6c36ff7d59d81217dfc39a92db89f16639baceed5ace32aee37e997"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "a782fb1589c73479bf4eb6f669bc2cbcf74b1778d42a768ec4c3712604e341bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "c1da0492026d220d75aed3c7d9d3314c90ebf3a12214ac30af384b0c5e6a01c0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "4d4795e562751131ad9aa27f9ba517af33def7ef6e956c09352f3c2b083579ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "001de8af3e5ab784e44966dd9475a6a63589e709d907ef4400264e9ccaf614c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "47492ee8265c130d00c00106b4a4620d96eb368e6fd9931cd9199d6e25692f57"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "9b9df4482e05e9a22bad8852762b59a5aaca38358f0efb717ecc13db844d0de0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "3a698ff0ba595aad39c647f74a9be4cd9d67cddf5e7df137cce0a50994ccf4fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "d9eebabf003efe84d23969c4b429fef1850e7925edbeb2375fda2b03838f0931"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "d7451d9409ef4593e0a18e9c886c3c06b176ff31152dd0f7a0e77608ac9f7e38"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "f396650469dbefbe28d6a5546cde4efb392f07c3d5159d8f0a41070aff78f1c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "54ab8d8ec8d26b9cceda4e6eff231cce39b3e8431f36a9331238e15181f30849"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "ad019ae0f505711d9233b4f696046ad0792e057efcbd49c47269c40d526f86b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "7409594c4409849b4c7c73d3f9337b66ce681c458f49531d65e8a31219b49061"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "f44b607d46463122a3346fa9566cd36f66d88baac12cdf9fb62269a60b13fcf2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "aca52320315f0a71f468b829ca54e777a0813956d4acf29da118e3a275125010"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "e6d90822783fdf9d5898b1bd47bc0e00f0691b2cd81c1bc2ce3d2dba227b2201"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "24a470bcb5bbe75c96c0826c9dc8477c12b02e089a6bf6441f3f30be0e2be4eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "b219db4b9726676d52c9d300f36d90c97ea9dd20165715a05a1f68b0826a3c6e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "c0b80514d5204955a5ab0d8bdae0ade7644042850163b45a0f6083d2f76146a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "3bff6812b71e8895d9704d91236635d84e908a631e15bf433a04dcd5856f1bb3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "a7c3559a4905fc108a1ff0d0e5e8dcca3eef49c0b48c8395e319a47116e1bd6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "29401cd9fdc460bb1baae843da636588adb2a9ef5507ed74ccdacb1ddbe99f0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "3e97be713d61bb99bfc2e8c74bf13ea6cc761deb83a4ad358ec0f2379a674733"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "22c403d8c1936beade0e527761b77da7799f258a3b8aabb0f37982074384000d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "bf55113756cc6e883603f2e92ada7dd0bb158272f407bed79216cb93972887d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "999c67cbf5005dd6014c06a8f2a916ddae1bc574b1f6d6ea66788ed5d48102ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "b3099e2b5f557f04ff189b63934ff7743a45458fbe8d2a1e50a68b579f6371b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "f2ae537283ff4d1652a878d9a39a950f98a4520a9b3f0a917d6b4ba4bc3cea20"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "6f3957607685a969ee9fb499ab0035b38301bdbbd01252e6b831c35f432f37b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "914946b6af7549a5183721cff4930adcf1ea6ce5a1425f109ccedab1ad67f3e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "8393ef40028f1c27e7da4523cd34002c65c959587235496ec35cce335783d154"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "bca5e640b9a7ad903c3846d4280633f60206c82b1fe68db1e90c83fc885bebc3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "996539381d9f9fb359525da0150834c2db43b3cec2f04a3d817c9acb3f5fe641"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest.xml",
+      "sha256": "37702576a122021d4356a416dfe00e7b2c0b37f40ba9c3075e72223d07d9e8e8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "5f03a459d8ce8748c71c9c24be514b7339bee744b7976501867e7cb3558f4f99"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "069d8187ebef1dca5221f1620f2b90eaa903d971f0ecba3d5eaa47a74d0bece6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "a3297c9a4ca0821b570fad5d6310a9b9b349d59401750b0310a0d48fa4adf73d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "8d985751a205a3c59d01f4415f00ae72646e2171d651182d7dbedda40f67b48a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "d0cd10d3b06a56396b657a9c0d2e6af309c35016bfb3ce98681244581610b185"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "e1c27b3f5078d1d7d7d1faeb5ce1c87b18bbad64d21d7c832abba1140e6307db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "fb3c5bec1ace53adbcfe53dbcf170157219cc6319102433b547661e83af8a253"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "04bb4cf1ae523aa3d04bdd75a20643c621acf09174c8670cd070dfd7069d59ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "bfd26eb7210d55158d4c9600ed4324c80cfdea805f74b3362deed9dfbda3613f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "f557a7f47d80cd8724242fff17176e396854836f3a3974465d2d01891d75d711"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "a80c4f67add9cb1a93fc048a36123b19586d88cc048cafba198de399e6129792"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "1cbf7b23b025d12c8b840c090f00c510d2068ae4e79024d7a2c3495d75aef1fb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "5889e65589416822ecb550caf1eaa3a8bd3468394a3ab5e20532ceef538fcf8c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "71d47443b72ce923b3268c889558daf9c5f069a9932cdd587e23e48acfe2467b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "9a3faebeb8898bf116d2a1db7321d9cf2a045b85e93625043da2ce0ed90afc62"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "9553485e33fbbca70ee2a11be1460d5e2deb55cdc6b532a37f0f96381f6351c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "ed0076ca2ec31478bf1b73a7367326409616b61725f7ad2b9eafaa7b7e9b050b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "747ad414ced690c76c0251bc440210b648de180ab4ffff9c84fc6529acdb0e92"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "a49ebd1e04cfc75d5e2f9cb15a07a5fd511475c78e984be2c1baf3353cbcbbab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "4a576b31998619c091163b2cc19e772b72704f3a1645451c445dd544b900f2f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "ff272fb8f5a2cb155f4eeb9b94fd54ab3a925ae67322f07e776718f62b2535a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "578263693923dcf598f49e5258271279c4b5f0767a67bae9a0ea5d8e226c079f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "78369b9753a3c98afe99af27e22fbb3e6ed46b64a407a352f7521a37e24939d6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "201d4c49ed90235bb08aee22e7f72d992a25ccc27795d9427b7368ac133db85f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "973dcedb523d1bf19d98ee185218957933f5d81739457cee3c325d1ec26ae561"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "a54061236d6fe12e035c9dfd9abb0fd1473ef420a3be36d5f583303ffcb04cb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "ad521d2308781a01e303492b0e81d628add03431d6ae01fe10da926b17f4027d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "4b2db11c73cc45e0f6187c78f7ff313a23d53d5b8c26fca82b96c29de8d92cae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "5826c03e8f7734aafbfd03dbf0e57ae5113f5a3adb498ea7743892b864cafff1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "a2f1a3ab66c2c02a9b28ebdbfd01f18756264a6dc21b8774456b0593662aa3d5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "2c9a13c1458b5d13cf4238bd0fe2849eaa022adeea6df2d13dc5c72d6439afa8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "bdcfed2ef516980c5e91f3890ea95c28dea7aeeed183212bd445a077feb6de6b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "bc65ab0391b8fbef48affcda77443fcc1d389729fe933be9692d895199d5a25f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "9217e533be52cc084b9c851b2962ff38dd0e2cba3f0349515e81e0b0d37643e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "43fec5d6dfae9f5564b790b6211b58278ae2d7cc20708d40c339d5713164c689"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "1e5a3abd21837a794db368864c05ba0275a1c0be3c3e8f440ebfbc1d0a379a21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "6ab54b42f11c6b40ba3ecce52956a2bb21e913126e59f7c777944793cad3eb06"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "a2b138da8a13cc82a6e01fa07ba7a3a4b7cc2371265b4615d4c39c133c996801"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "46af106d35389259860aea800a0e4af035fcd1e7803f6dd961b3349d985204fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "f019eed7067c504981ab4f793ef922617a71ca4de4eb7d4135ea0af361dcd06f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "597f6aed5ac977b30ff655ca9a8a6d9775ad65ad8073d05e3272a054aac87340"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "462e32e2bc66b75db1d1a764d05f9a337c94e0969f8aac38126c92a1b2c39c04"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "a965baffbf7f4b9d5c59f4870eb1949fcb396b7ff2e8a4cb4705d044b43b90c0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest.xml",
+      "sha256": "dfac85d7b6fba6e76bc3be4c2bd693a394885281e4ca7f673c3690461cb95b39"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "868735be83cae0a13d6e8e7b6f4af8dbb6829893f1b4092a422a82de24dd3c26"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "c3a326602c2a07583c3ded9b83af5f5571d6c3f9aeca573486b0c457c59c56bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "0eacbff7baf5a451a0fd32e3c11cfa42fbe8c32d5432eb092f50c6997044d905"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "afbd9e620f05bdb69c158ada6059047ee3c0ccfa78381bf3238de629adc513a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "f6bd1886a93749be1da10670a28cfdce7124732ac37b9399b1fe765c4cad559e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "6bb71c746e9fa07fc94f49d59d7385a62f309e3fc3735a4e742980ea8750d72c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "79445131a96ba40d4fc4a5a7b1b3d3d90d9e3a6b4422ae0ab0d3dcb38603cfd2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "e6b21b0be05be822cf314a2b8e0f2b1b5a0e547539d92ae4a28dd56392d4485f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "244e299beee82ed2c13c597a396993fba6864d780e808967721995ac62831139"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "64de94400b7323ae9da4d6cc4179c18a322961f709f0147a81f461e6d02818b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "343fac9eb2c57f779ab8e589ce954cd70fb022316b5a77936d9fb15aad4e8d5b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "e7cc258d9e818733dcc6b004b46d6bf2fa2b4ec719638f8c8d3b8c3bae41e7ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "028caf1965a579d14ce9ed640031dafaf39cbeb0128cfd04158eda66ab8e5cb9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "235c89d6dadc18a2c08bead7316cad4eae78376f909e65001334760a5be955f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "884622feb960bf42ab20c9c65a7d5bae0de14bee0c8eaa35b030f82da76620b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "4aaae36a59a1287238c8fde7839e3bd47160f2aa1ea6a1a583afd1dd5685f825"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "15fec5f6087bcac4327370c9af113abc01c21495f2217aeba038d183d189629e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "b78e6e9ef8b2a811d3faec115c1692ec827b806d85efcc4950d935ea18180355"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "3cf87e05b62c01a7305bee2d463bd10c55b586e5cd8513c5d331e8bec005cbc9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "8b326743a29c341ca258e8cbd24637fc231166f164c5247347eaeab1a00ee2b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "09079e1a0127873c7ef00c1185e984aadddc7bc6c6cf8a5b9b0ec9153cf71830"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "3f2c86060ac517d6fefdb4390c903fe7911523f45948ff79b03faced08e01876"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "efd186c48fa63813a2ba46502d911cf2ef06802c1f428f9bbd2da6beae74d2a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "c5a171aa280b67da840b56115c9641f71d7e634239e037b823c16efe3186dd98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "8524ed3e1f0a517b46c386376e760f9b74e4c2665decbb4dc3b0436a94edac5b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "cd8fb3bf98cac8a9665a8916e72683ff56c66d03883c0fcb33b31d0f8ea6e34f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "0c51aa04b6995d1391ef9c9d3d1e4a7ea69bf6ac6c892b488c9875f79b0efa66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "bd2fe1e55af62dd4aad08852a344f9ec09e63023ec7c734ff27de7179271a49d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "3b51a3bf1d340008407d338c06874cee16d80ce75a6b5d793abd19a8c8c0542c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "9685c91b02b18c3545df122fcf95f764c480f7c12682ff809854ea89ac3d3658"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "611934d48a066bdd8d3e064b592cac9326bfd441acdbae659a4189183d27ff5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "a22f2a9e7caa2ca35a0931b25b6e6eaea846d22726f88631a28d03e72facd3f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "484f7a3ddac538498d68eeb89a564ab5897561988ba902629861de880d07ecab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "cee79c31a7684376aa4d9e79a0f67bd4782a3ea997915bb73ab3bfa9b8dfe169"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "d12f9228bf2d5c2ae33086a35f891b4115c833da41ef0e2383bb1b37bd1005f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "6d119502961808cce04db1dea4dee78f35c463591f9351c49b26e94bc9a0e16a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "86ecf4129928b14ebef1e5501228de1deeb525abf8876349c4aafa88be1dbe30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "173bfac5e558cf6f011e3349d3cf283f198914caeaddf77949a327f2a55db244"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "2aae6c4896109150a866f97851a672c6fe5d9f9613993a2431b302ea52e5584f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "baf109e8977467faca16e7013ce0751c62f881e3f043c1b30a8513fc0de7940c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "e90aaea2fee7b6a306e722f73f35883f4f132ab02150f97fe84f1f7ab3351e9b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "3402ac01ce7446e7304d3071719c883467db124d4f639fdde68fe069a95ddf06"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "f6e46b7f3fc7f5079a45801462a26d9e506817bcf4db55d187132466d2cbcb31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "7ea35001dc5e42218d927c0161a4983e9358ece08c4654648fa5f1598315ab53"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "f4cde6060eaefc1ccedd52b355cc40dfaa23cc5e879cb1ff5d6a26e07652def9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "cca7fd40080c41a73070ec0af80138e05620f9e9564ec3cc7810d37f1660c1a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "b2b7e86d651138535e26774b06f8ad4fb8bf21e0a74802488748b7834932491d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "3db65a98bcc331f0ab1296ba2912762a4d252ba8383d6cdee34a3b7837b0c70c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupProfileTest.xml",
+      "sha256": "ff660dc96c416e418675fc8bde9aacf9b71be078c22d612ca2f5e1a1e658b943"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "b66c4865c8b75ecf4f99472bcc5023d7667248089daa17958cdc02867dad26a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "90cf244056a63aa42bb8417832bb86889b579fc60df69d3495e3647f22bd7262"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "b2a41223eb949f4d7aa3479150eb39f0eac68a38ed075943f1dcca02aba1e7e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "e1303275e16a0ae37861e0e94d6e4b47f28fd546257b15b9a4e6a96519d5c5e8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuardTest.xml",
+      "sha256": "ef11df32cd0601e9e1c024ee90c1d3efb5f6b2acb76cb6b047d8da5a2c4df580"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "5300f3924c2d8ea68a0ae03bf2c9071879880ce586b70b79c94e97d780a43b3b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "6cb9881929b874e42f0d1e70e64b363da4902d045def7a09ccc06c06371ce0f6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "8e9900b0b065247235845cd36068cacc9ae567e22eb41da09b7af7b2b7fc835b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "2258f3c7fb26d0d04ed19a5b8d29c16ba822b352f97e18d7d31d62ce5fe0a8a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+      "sha256": "a3b3c1c2fbc17dc831a9d6cacf53157142a5b198669a4e47fc9ee6177f61dab2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+      "sha256": "c82a4314a04b36408e32d9b0384dd96faaf1adea3b1c6486fe396f9036b3645b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "c218a919c557e7960f8b6e3fecbae04290d1358d58789536ce64b55b5d6b423f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "c1815d605326938613524daf3af7e431bc23c60ece472a8ab489064940885276"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "49b53660276ca43691b5aae1fae94f2a8e1a295886212b0501ba5a1bee028218"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest.xml",
+      "sha256": "e8e0fe1f0979dc78122f95bd3441ca1490d2838417c1de9cc55cb8c05caa28dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "4acb37e62986067d4d53077a9885a4a2218f69fdc52ba2d458b7ab0c1c177bb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "ca9cada3c8bbd9d99567f4c76d0a40d76c1005fa3f614776f39a401bb8fafd87"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest.xml",
+      "sha256": "64c9228ffc7cb1eaa81d91668f5d83b1ca353a0da7ba1724da349399b08cbbaa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupMaintenanceWorkTest.xml",
+      "sha256": "48a42374c970fbf8352936e99a754f2cf55112b9ea4bdc7944b41c5e1c05aea4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "14bd4acc22e5c3b13f60fdf9cdc28decb6cfd83d15233734471969fa66e90959"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "111fe4cc7b2d272a074f404404fdf281874f55ad3a741ec67e951508f29ae5bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "c00d8fe5ce494afe8902996b318c6f6c1cdd31ed3cc3bd33ea12e87be6a674b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "ed465ed06428cfee16d3beb6df02be25ed8b16925f9a3a7a24668bcba55656a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "fcc1c861993b326ac34d3da7eefb16aa58ee7ce80edebb1012fa83bdcd5d2eff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "ea19372e8f948c04720727bca6f17fbc80cc4f5c3833fe9c71f847e3a7719917"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "0250262f51fd176d89759b1b4b4b74933866ba02df7b50e0e3fe6c75972e5d62"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "e40696acf36ff051f3e7181070d9c07017565a89589f9b813f6eecc9e30e966b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "36d5d321f318c7f1bc9a86036691e74a819c7efc0609ee7e2820c15176236450"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "91108c001b2a936543d95a935a1042c362b5c373351a8d372a464b0bc70dc5df"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "ab793fb0fb29ae3ff8a1ba251cf3c6ecd261d42ad9e3a1f661075df6c049580a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "bd383448a8d6fa5c5a90d9d76a13a67290b4b0293ff6e47c7fe016e60a293b30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "8ed1d47cc90a8d3c27ca9714cba13b2a1410838abdeafa9976cba67f43247f6c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupCatalogTest.xml",
+      "sha256": "968cedb251daa6d5aa79edef5dcdba871e03f53403f6161e972fe0b493db2d62"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupObservedCompletionTest.xml",
+      "sha256": "d21b1943affd73ed4ed7eed8f82cc11a69ba45228b2a4f48887c668ca36e6ff7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest.xml",
+      "sha256": "1c59d66d591d8d48825ac93c7ccf82e586fd393a6b30fbff4920d415639b6897"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest.xml",
+      "sha256": "b7eb725fafe70e2555696cdcdb7754cef4ecc343b86d94011012c938baec5d2f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupStageTest.xml",
+      "sha256": "5c3b401d08637677c93fe6539b5f042bd179be08d99691271c5bc8b68a52b962"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "57345e6947314d97093e51b86278701e7c4a850f9a35959b9f9599ac079cf1ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest.xml",
+      "sha256": "cba6027d358b77e8331c97e0f96cdb5ec7e08eede56c83f74e0179f5c68818e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "cdfbb364d2b47c54264df36c97cb99b9b39de67be51b27a5887aecd311c6e0ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "63daa8a53546d0b7c6f70ba5646a51a6a64e95bceac7ba8fbdb8e58055ce93ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "a32fd3c5ebf539722175e07545e56ea7b29f7cbb682537e3e096932e6ee45a96"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "e4076edcd092d8628ae87c8910aa09ce4ca226ce10cd5d844cfdfda7736ee246"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest.xml",
+      "sha256": "9dd6922c1cddf6dbf8e2094ebab6f32be5786d370a2a2b07aaaa97e35f500dac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflightTest.xml",
+      "sha256": "63b517bb80eac76b8b2239837bbe61e3af9084535a3c1168a6f6fbb6ca763ee6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest.xml",
+      "sha256": "5a780108bb0f8104dc0519a7b173395edcffbc77f8b8fa1bc6af59035935e87a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceAdmissionScopeTest.xml",
+      "sha256": "ff8d3fc3a699cb4b4b637cf03da3fedabb3198e0e90cc6d03a23efd6806d2143"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceLauncherTest.xml",
+      "sha256": "e291f92854c25215a840371553a4944caed789778f4be3506a7dce28e6eed492"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "061a7196b82aa19e0ca369f36fe23f733998c5422a68347998f798e5c01375c5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+      "sha256": "0a601e2405c8e0e855e65174cf335cc4ab9b9b5ea7d7bd0544568978dac71634"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+      "sha256": "9c8c37631a093c1d83cbf3bd51369b5f55230027fe73cfa90824376680ebd16f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.file.TransferCleanupTest.xml",
+      "sha256": "378f1f9d2415619763454468887748c92f2c7fb0137ee7b56f2a06240997d2a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "d50ec0e996c399f4d5d3603d8c0f1c9fd05a4f194107396f669e252d11b495f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "6329696c12115b4f9337b1ff3f71a971850d58ee2ee36759a40113d94d886670"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "55d7519cb2086b64b4076b756c13e1a4953c24aba048e58ad769ea4073391056"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "9527b4feda4de2d964e1c218330434919416ab44988d13d481d567ade10f457a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "228d54db6582dd83045ded3c3e6b1e31b4a8592a0a6798f105610725732a0e32"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "0b12ecf551d3526f4512ff6d07c8ef7baa06067fc258534555c23ed86d219bab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "9e69854a4facc70a91bf2d500eb0d277d424746427e9bc7d94d8102016fd1f2d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "a8b239731213e10e8c2349f9a9fdd780069975ae8bedc0a9164aefa0154ca692"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "da02dc565ba17cea7b8e264cbcc594b82318864da02c0e75a22514c306c7eeff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "2e34d4744d9017ab9c0772eb3c4edbd07b004dad75689b4fcffb18d0897fc92b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "b6673a8282d9c3466f9a71dbdc6fcc3d7eb0cf19d223ba2364fdfdf7fb4263f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+      "sha256": "42224816c412ee092817c9755a3901ac8627cd881ace0eaf7fe560367c22e7ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest.xml",
+      "sha256": "0eb8e80e5ab1d97b191cc200c0d47d4747d1c980ed629896d9a7810e762526a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml",
+      "sha256": "dac56a20cfbc96f9dca009b11af1418b34723ffd7f138417563624d630f08d33"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "3d41ea0ff31481edd74dcf7f1042a7ffdf043c7fa860ed3475c3214dd0f8e7ce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+      "sha256": "c4ed0347e37cb35696351ce7909c0565b9133999df3d5753b14eedcdd5e19a11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "185795eb59edda51cacf17eb36b557c0ed27dc1897fcf39748aef80d572048af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupUnitCycleTest.xml",
+      "sha256": "463407905d4983eeb9d0b9f6b97e7141b639d8a81ac945ce3343ef45bb389fba"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "1adc134bc26aa76d31fa80f1e97e14741d4f4b95c0a11bbf62638aef4ec0cf81"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "8fb54c136e9c5ee1713ba291876ba9cbed4137ee2ddaefd141593a348eee1fd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest.xml",
+      "sha256": "2f064009de700465866892f08aebb5c783c3d09787b49f58f2d8bf8198f0b754"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "3efbde50711d5b08cd8619c32cd9cb9d35d2e6b67c14a43d936eb8facf663230"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "87f7d7d401b4e23f47710a1db5cfa742738aaa14091416ba730384fbbaced914"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitCycleTest.xml",
+      "sha256": "253e65656646c01673d47d1be51bbfdbd444672d8168daf37ad6a01b6783445c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "1f17a24e7d3fc350dab0536c60c7f8d3d07fe41176360c282c59b5dfe3ea1af1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "5a3082943ce19c29f4a71503549020570221488bfac899b1a9c65307f9f1a091"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest.xml",
+      "sha256": "45a6f1c06f716f6ef17490779fe26c60787c37ee3ee65568b3de1d15d8c69442"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "a41e7237f65641ab9b49d73929cdc25eec52e9a5fc2f17c17db1008a9c7027d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "1f21e7fdd95f8bc68fdb71b6f528b3a27f4038b7eb67ee2b1eaa27d7a508829f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "842be6b18a6094823f1178451af1e46991988a6ac00f528ac73d8c9d27740ca0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest.xml",
+      "sha256": "608969d078c6cc8ad878ab7c5b20156c21f96d834b49038eb90c0a18416da788"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml",
+      "sha256": "24bd514de7437281b6747d63767fcfe4b83aa60e0661c4eaf51f263a9d06c3ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "10bacdb775b5491467b8e603b18cd15781514531e4ddabdf5a3b24ea32c7f062"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "9953434d9428714ce37adde564ac6504df37ebb52aec4d1c3fac1d1322ca6d54"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "d400621d8daa19f288ac0cad345f2b06a351feac4c2bdc7aa213d496555c97ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest.xml",
+      "sha256": "d77b6c87d7224c98e35cb642a75a6cd7c03f2ea373ae7267ebd816dc26ee392c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "93a77053ea48fe7a894a683ca04294bfe506fa010f04d7a3d5b36dbcc875c133"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "11d3483df650cd0868982aee506fd39bcb1e5054d77f74ad672c06f9fa1d76e7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "a2af901d1bd3296cccdf037e1fe648bc252d0763eec1fb28c87b5547e06fb50c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "ee444cecf8791bc4510a2a5eb8e830b7608a60be27ad74513e6d73253eda82d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "2ad7a0e7a9f5c4ce605534b7cd3133ac33f66a233137ae4eb87f373922b0c5a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "45608714ac53153384d4c8205c3d9be9c36fd600a753e2ca821b89d5c83a8379"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "441118eed9a978dc40dbb84fb385ed7b81b970d08e0b4a60b48e06d2132c666c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "7a78d9698a2960f085a6f5af01ea853091d7f0d17bcd6f32a428cee942fa0add"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "c4fb00b33088566224ccc67f7f605b7f66869393cb61006c04c283f542b8a1b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupTerminalRepositoryTest.xml",
+      "sha256": "ecd884f170221397d97032a5ac634b379b174a3df4854ee778435add1a6761d0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "94b4be83a0738d653f7b587e7d3da381b1e8a36cd57eba62029b2d8028ab0e12"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "378f7ee6542903cba3f95d9488d9b78fea4c3e7d31d96ae78be669f96d14355d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml",
+      "sha256": "84e3314a9e14c06129a1d8cc9e891066264673c5468404e5239714bb89afa01e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "a34765d7caead326087b250b83b0d42acfe8f1931151f41205ca78b187aa16e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "f03ae260a6aed164cc051faa19c853c4f57ba170a608d6fab8c393864f20b5bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+      "sha256": "71550670ae70f1688f1ffca1f4337ef7d06b03689ab6436c8969a68fcbd7f679"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+      "sha256": "1943d67283592a8dac368de60f8993f96ab6a717a795fb87a848c8f5d47189cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "1e0ee1b0e5b541a7ff0eeff6cb0acddffdfe1ba606b2989e610cd0a8adf0ff4e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "54f942bce01bc17c884eabf20a064030e183dda610e418096b37c4c4377b98a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "4efb17ad4955781cfdce61f9c7e01d346068fc9ece73d3c31e91684f1820a888"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "2419f4cdae021e60432988af50fe5c8c2ad790a0e1b279f26332591c164d402e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "d6176c601cd14e45df18ef426939ac6ab3086e208348d811d0c2c4bbb1f37a93"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "bd755f0d1a927e53b6d23ba7a659fcca637325fae39bc725e5fd7b8993fe2315"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "210fa3a48d65daf2a26dbd03457eb7f3f92003542f94f197f45ad9ad8cb619c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "9fb2b1debd152b56df5b92c2478fc8a3ec847b1d3bfce30296a15fbad1f0605f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "7bd514c4810bc20f1382e6c3c649e5da41cf27ef4e11cc66932f56691b1d81d8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "7edebc644431a755c2e0349935cddb9c162d05c1175c1971ee0de8b6c0f327e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceInspectorTest.xml",
+      "sha256": "87e3b6e34ee483fb9dc1f3d20e73be4064d8958a682d3d8366b76531d752cd31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceParentTest.xml",
+      "sha256": "74952e94fa8285b1ea02f1b0eb13f397028838416ccedfedc06e702e3d808a56"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "59646a3043ce57a1c84088f48365df55fbafabc321de939139d83de1b3f8d34f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceExecArgumentsTest.xml",
+      "sha256": "a3e26a450c8cf8b5ee32e7fbe577797fa136e4b59748b1a1a86c2977c42b8bcb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "d0329f57fb8fb039949fb33c047ddfdc173803021a09c8907db5ce3274e0bfbe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrameTest.xml",
+      "sha256": "6edc620bd99f1c6444a30925b6317ca845a1cc9beace6d577aa4ed001c913414"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "debd7ec6f95cdcbd20bba9f01cb67fe6ac8ef013357d482d19365aeb064b656f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml",
+      "sha256": "4167c69a9748636f4723ed7d473f77c020442bfa7d593a60803a9f1e56319c7a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml",
+      "sha256": "7d8d08ee9d2424ab3fecd686a90b9bb40479010a0b74e65546c2f994105fbce5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml",
+      "sha256": "c3ba737eb8750af4d89efaa23971bff7194ea49b42308b35fcdd41fcfbff0395"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+      "sha256": "afc8c6558fea6849d22f1972d724ed45344f2c76515118d0d92c08f119b4742c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "ababb53c49409f646779c5d1abe083e5d84e1cc5e5e9b40b22959666de845ce5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+      "sha256": "aaa1670a28f68941d393acdc446476cfe6d879bea77c2f49d68595fcd4b3e465"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "58e42835fda0901c0a3688923faf2dbd020ea5b8688bb4dbb5bac375a9fc0ed2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "40d4883b5293cf8e4f0660fd277a3af37676f5ae0f331774c20deb8dd7c6be99"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "5954839a2ca93c8f5c69963c1e3e6139f8910b1126ed0d4e5a3522cfae996cc9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "7cc5cbbadfd33f9572db573c2931d19c795b3b0da7d13377dce17b4570fbffbc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "f75adff59b655d9c84836779ffa18e57845e7b10a591743e14eaa791c95c7b89"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "fbe6d86b345611b91ab996fa069601ad33d790d9c9a6937e639123db6c756c8b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "578e811ce3e24c9120b0952395395d94ac85582a84099def089c5ad302058424"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "aa322e4f321d8e125daa244d71d82fba5b2688f3a56381ba91758cf49fe4ebf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "d685c63fdc58bb19ecb3d0d00de55ee853d5688e3b339ea37beeb621581420b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "3aa695d0fba01b6982838d70afd579cdc3d0fe2b585b171b9cec7bd0a6e068a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "6eb34bec83616339b57a93c98a61b2f5d28cce60f97d1203a4d565d46bc9d397"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "0abbb589bad12ae6f507c0a019c5e7972654b2f9ccb9d4a154f5caecfad82369"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "282293b171ad2fe42bcc37912a66653ca29b34bc5bc1a03cb5dcb1821855c4c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "0298782a3c3a6a32737f2b9e458235d206b25f2292db36abb1e443a1a09b0ce4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "128a9a1d7df87ee5a1104c72558f7ece563627eb198f6b352b80f61643b25809"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "ddc491fc231d60bc24454c60fffd71bfc3ce33bb91d0e47c9a5a927348fd982b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/protocol/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "00e6019d45df7362fafb9eba94f9318d0bdfc476fd4c86756ed7af6e8b939484"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "0311ba8e8ee8da71c3f653310c6353910cbe45973dd9feebf8fc4a5e20b0b25d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "d41b3fcc27a2f606cfb88237e687053d46ad5bf2363396969098041b33b91725"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "62f9fb89d5ba247c888ef1885dc3dd95e08b28cf7069b3fc650caaf059cb2ef7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "205b35baf8cca7dde266a3f5faae9b06ecab0bc4f75c4665a8fe89b21c24df37"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "c95f6e1f5869758911dac512873151a76bb20faa1d8fd7bde97666f674461ff9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "43e7aec854ec3282cb59714c0f2b41a81a1ed929076ad143bc2aad99f5fbff5e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "845410e328d1fcf1201e5be2a31da3b12888665534e8b01b7baa8869facdad0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxMonotonicClockTest.xml",
+      "sha256": "15cee55744acc2261440dfa27307cf7783a5c07b382e28025dd105befe605875"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "72a130d08ef46d2b7129b6f9e205fde5e40c46a6de17eaa97520787b54298321"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "b922de2f93559835571b87d08bb5955b80f6b63cf30dc8be1d3c93127e8774a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "ca7d5d02535bde4b9850d7565736ef2098119e4109df11ec50c36172e25a9305"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "3bdf808305e92625c5dccf2f2738904d07a630e6afdd01dc176df2fa7b6f209f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "a1b37b4f3b41dcbf665570463d7aa2f6898a5ae692f5a9303e3f2c09dc5c3f97"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "9de94c721efd86d08f6b4fae0f76395cf0e7892fe60cb7567eaf73346b344b8f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "cbda494c856bfc5f33f2e640dd3f9864ac248d8156a472c010bec48d5910b7b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "7eab08587e0d1d9e42c0729bd3428cb9b055ddb2c5e9e953026a21aaccae4fd3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "0092237968c4e00bf24cd71266635beeb3a85da41e3ec1d8234e5b8cbeda3fdc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "5398c0d138f735b5ddf21e9c34496f77e9604a03797878a2247e80116a9ea41e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "82820d9323d81db9fb6f177313d4302ffeded155c924ab9d3b358c04063a4a72"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "7ef7e0b4957066fb07f098ff80fb947d89e200d1e7dc2e4c6d90c463a9c93f45"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "92c9ad2090eb36b8a819984110cceaa8bc9253ff47f2640569c2261542dde1fa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "463b32fa1efe5ce1fe860f37835b131746d72dc98324504bd0435c98d9058ee2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest.xml",
+      "sha256": "ce3c26d4cee7b21c3ba78d12d685a9afcd36419b8f96dbb34df501104a2470a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.api.file.WebNativeCodecsCredentialTest.xml",
+      "sha256": "5a142fc36b7bd5c4f5a049e52724e5852c86f36fed1cd79f8da1159fc156b979"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "d02865805622c19ee0fb5eed141a5d87aa9e9688efd7cd403b21c59f2d3d221a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "d2e46932ece982c12ec4718538165271a423a05d8e76b8a1cd77023f96f86dce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "1a78bba2c6f207b8bc5ac6c271d6089fc2af162086c504ee4434806b0eac9713"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "1a6d2544c435469104562312ecea8b189229e1e5d7ce2beaf9d97e5a9015a5f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "be90aa47ecf16ef34bda3420a1853bdb906160282cadfff68b9c3b472d0cb953"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "2564228b771f3f23e90e0d1073036ad63ee95dea836901015f1a50a1ad44db1d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest.xml",
+      "sha256": "40dc4a868d66982105eb411285102d817c2e370ea74bf8d8f62517abebb1a2af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "eaaf3f56db47b7edc39f49ec7e0a77104ebcf35eee07631e732537df0383f073"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "410ad41623344332c019d4e4c8ecf8f2f24df143ad6a0db1eda8a7707b6bbda6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "f786a86786e756e363e3aee4660c4cdeeafc1ce48f43869a33419f6881ddb13f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "0b9e4f33b3825a33d4b8755764a36955c0c767d4a2f0a2f8fbca527b75298dee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "a8dc6ce4569d786fe4f2f4c295113ba86b8f9d2382d384428971a527b25d599c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "88addd3ac4004966fd3c90bbf85fc6a1d79f7d284087ad1adf265b04f4a58fa1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "6df96067b4bb753373c134b8ddc52fd18b670150b5f331acce48470866ef5a4a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "cb90bfbe46549f4180d959e8cb6116d299b6da62cf4a7b512c5844b647dbb5e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "29ddd598430b0e20c1f04617410c1b7ea446a89f87d9d4be4cd6274f3e4fff10"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "ae6a59f14ce6ec7072b40740bef1d97054ef3aa7825802816949aa98b1c5cfd4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "05b652838a7ca88bbb6f32654a714820e0367b590086032e4300c5225ec81eca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "d24f2f5ebc7fb98255e55aca48f595b37d56a2fe3bd3bdac7f9006230270ceea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "2def15cf5b032592d5fb71fab82e38da5cd187fe4b474394695b16e9136424b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "d4deace9136c67db27957e1f63bab691a5b14bdb7708165b2132cbf9c2c10d65"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "50d3d928c2f624055e3e4539072a5b3bea6d34368f24dfc9df0a1145f4927534"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "419d2c272d043f8ef7358c5dea0da151088984fe8c8bed61a829d5bca4cf7cd0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "51ac161dd06674121e2c248e3b3448cf1fe7b97d1bb3db8322a959bb06f08b36"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "a384dcde8db28feecf7499a5ce711da5f238a977422c30e074d2f00b632294c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "a982bab94f8e4f5359b0a12dfcf40d5e32232dc7159cad27cdfd3fadab2a6b28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "cf23ac35ba02212e3e9eb58e077b1dbace73abca3cb397f9843954f2abdba03c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "2515061161e81da1eb5e50861f1f760ae63764a80970a87878cc23aeebb917aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "8aeb9397a215c66e12ad67f5c67bedbe7dc51e6e50a0bfdc2e7f79a499ee4742"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "8ed974e6fdd9d39d52c263be3a24536dcb2276b9a96e858e5c7dc78d336d8e15"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "b5a495e912b5171187326fc543eec668426f2471f6e743362700c4175059b2e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "18a1455a7bb51efe8ee9e5f88262d72fd7785f73d458bbeceaea184e5ef2dba5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "30c70abe0d76e35aa520339d433e6201bfa9d3756a12d95c099082bfbbcc2899"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "845c476d5210814758c93eb2c522899eeb91080af2151d50ad6cf38c39c11914"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "e0afe728516a471ca4b6bd6abf73215f0cda065f9f08ae7c5cacb76b9049fdac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "b67dd966638b88090b01b6f61777a77549f1c29255167a6d6e5e7d9dad451026"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "5ef1d4f62b3904a4a6cc62aa95de07787210d703ca86dacab09aa783eaa6b45a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "431f1a9cd40530d88b211c779198c4bbf5d300299a89324488c2abce8699ac71"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "9aa67188979ca48d5bbb49a71785c9f55e3c377c40041b898f9e112fa8eb5e40"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "a69583219bf415441df8eca9661837d6a8a8be8c1486a6d8687fd874a21022a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "091f6354ace23859f7f0c2623a86a0b4c86bb4792d3d7f0e547ae14bf04fe12c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "4c706e6e01b8299df38354483f75f2c087c9577f0632b2cf728382c2ce78486f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "f89a82ce06603d163d500b609e6305d297acc3af046fa625a1f4318795e1113c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "a8b018cde2d27ddc8dfe66bf23643ed47d645a7523020f4582bdfdc849eee562"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "3a6e4629b8ae8ef2c7c5e67644d88b5ded7112eb41eb6aa82a36f216892b837b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "356f48c12236f68b72d41faab5514151afbbe04d9f11b035585093303523a735"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "c92b3a31e1e8bada49d792ed8fafa72969cdfeaf844ba53e518ecfb21faa1105"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "c6b46ca887a6a048731ca42c2b3a400d8d43a23c992762fb2083bdece4801880"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "9c5368a690b2a226bc78859a1266b82ababb5779709ea347ddecb79fce814d57"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "23e156850891cb4db7437cf47e0de332af107f82e373eb2fd97ce955d7f92741"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "66185c790d84bd51a90d1b29738b480bdd0f2258f81519a76fbaaf0c8feaeb72"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "130a02afd36be0f7408ecf9f8babc71778e18c3671c5fe6b9b5b62ba5baa094e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "983ec528243ce9dbad8e983927dbfce1696c731c50627a3899f5654571deee6c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "90f1f100bc3c079b046d9e4a83d823ec6b317e4704f42f530ad454831ccf3ca2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "e0717ff9ae5c5e2dde4ceaaa9e9616336978e621607b39cd96cdaebc789a14f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "53303850774e15ef9868994d1b6070b54a598a7766d8f1138ee38a5d5468a4f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "f9b983f5c5cf3040d71811ee7e2a1ac52370e5b78f1109ca00b71fa3653f824b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "3d8803dd935e361283ff096e613a35800bf31f1bd04e045698edd3c347cf5ead"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "5ccde148e0552270d6d4cd9ef4958520265bd651a3f5af4f878a3451afa309b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "7fc4536d628fb392199cc8909d5e489d41ea28ca1c702f172b9bbb45090b677e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "ab2adf4ff7f2fa9449fff518247b52dffa3ddff042d65ea331d3d878330a09e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "c149cdbdad8b723648aee5376f89ef38e434b90a8fcde96969affc145d25e0ad"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "01766ef724bd41092deccb74b73f2fa6301ae77e7077c5bba8f64110327b8708"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "4952c411063d2083e6f6cb077d2a73b55c8302fdcb13efd823ea5f2ee6fc31bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "43449cbad144f7a4d74e950186e147e6141b5b25405aed774bb93057fa157935"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "8fab4336b92ef9a4016143846958f39a9e20f3685d22001ba188566229ed7ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "7f85efbaa727c0879300d9b80ae6ec2cd31a92f52442923eb8092a4487ba4733"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "26b8650851f81979506328ebff755e41e93a0d652b96745c4cb968285735c089"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "23cb1dc0420510cee6262eabdc1991af187285574483a62ec3cd5fc441a4f9b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "032cdc776dea96d4e34736c057b31ecf77affc5ff1de85530b71eab97548f0fa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "fd08feead78821e5b004c09e692c74d6a53cbaafb25ccf1702a972497fe6991a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "39db389cacf69ffd82d0879ad777041991b32aca789df7b21b7a2d78322d679b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "d795de3122a396efba9366fdba1223c7eb46cadfa5ec5a9e7ffe4f217ebe090b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "02e7183cdaeba156c1a0e256d9a65b43a6bc208eb3897dac404bf0d13be53fe9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "03156103c545d7e9fbee0e6d10a187260928ad05400c308372453728fe71d9d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "8bea6d1873c815cade5336155e81b1ef5c921fc93c68fa25284f1e0a0c298884"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "46c7d558cfc44cc4126cbb03c86527619a09355960b2ca3e182b9375968796ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "dbe69569c19f5e3db796cbe5e712f7308925cdca3e8b668dc1b85496b7c121ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "c494e015f43d08697dcf8b8d7bd54ba41ac8d5fa578e5218ba652f95048e85bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "96f51d152c66f9c063629ef43a46e2c3f0c0047db87eebf8b4d77031f8fde284"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "de09eca4a34e7bb9e5c87df0cb12830f5195dd878f57b848ee04a4025f1a9689"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "4fd06172c89bda4a1dec8453e200f86cb2ecdeb4ba3bf22a1e1bbe652d025e28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "cad58e7a2adaca24ab2d865c4d4265db708faa419d6a075e9a25163baeaae772"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "7c51ba06721e1d34ee6b3b287954aaa1c324d716122e74cc10fd2500ed6caad1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "28389f72035b265597c396b15ba88aee63aeb90636f94d544ab58b90ec2a5354"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "b191fa4a49719895ae8bd3b7223e645e1c33932fd6d3fe63e1c029499ae2aded"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG390-cleanup-owner/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "c007f8930ee22ebcd6c1f393c50473504528a491747f43f1dd074b79cfeb1002"
+    }
+  ]
+}

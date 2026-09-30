@@ -491,6 +491,8 @@ Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一�
 
 ### 6.17 許可根拠canonical観測（SSC108、PG379、実装前）
 
+SSC122・BUG367：Root親kernel statusのprimary UID/GIDは4値とも0を要求する。Groupsは存在するsupplementary集合をそのまま観測し、空行は空listとして受理、missingは拒否、primary GID0を勝手に補完しない。Root systemd Unitのsupplementary空は異常ではない。ordinary Inspector/API/Web自己/wrapperのNSS全group一致・nonempty契約は従来どおり。親boot/PID/start/cgroup/NoNewPrivs・前後一致・絶対期限条件は不変更。
+
 SSC120：真正Cleanup fresh正常30の閉鎖証明はSS341§7.3とする。部分DB実観測は拒否/正規退役用のdataでありprestart digest/起動許可の根拠へ転用しない。成功0/10 KEEP_ACTIVEと分け、failed stateをresetして成功へ合わせない。全7step不存在/RUNNING/terminalを実保存のまま保持し、request/maintenance-owner/cleanup-start.intent以外がCleanup namespaceに残る場合、又はInspector全Unit終端/環境不存在を証明できない場合、退役/許可発行0。正常退役後の明示resumeだけ新owner/Epoch/requestを発行し、旧claim再使用なし。
 
 SSC119の共有親owner（実装前）：共通Linux64bit `clock_gettime(CLOCK_MONOTONIC=1)`のtimespecを整数nsへ厳密変換する。wall clock/JVMごとのnanoTime始点・子起動時再計時は代替不可、errno/負seconds/範囲外nanos/long overflowは固定非成功。親deadlineは真正Morning UnitのExecMainStartTimestampMonotonic（整数µs）＋30分と既存親budgetのabsolute deadlineの小さい方、同boot/Invocation/PID-startを再照合する。全子は同CLOCK_MONOTONICと現bootで期限前だけ処理する。

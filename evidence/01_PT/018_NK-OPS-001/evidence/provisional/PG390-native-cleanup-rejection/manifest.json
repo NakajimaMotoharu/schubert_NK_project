@@ -1,0 +1,27 @@
+{
+  "id": "PG390-native-cleanup-rejection",
+  "formal": false,
+  "testIds": ["CEXEC001", "CEXEC004", "COWNER005"],
+  "sourceCommit": "20e487193984b3fb9da3c92b4dc6e9918de27fff",
+  "branch": "dev-foundation",
+  "environment": "isolated Ubuntu26.04/kernel7.0.0-34/PostgreSQL18.6/JDK25.0.4+7/JaCoCo0.8.15",
+  "release": "0.1.0-PG390",
+  "releaseManifestSha256": "83db7f31856e2d53e2b4dbb5ec835db2e96861ecab4d53515552f6cbf2a6498b",
+  "command": "systemctl start --no-block schubert-nk-morning-controller.service; genuine Source Morning --resume 31100027-2222-4333-8444-555555555555",
+  "startedAt": "2026-09-30T20:01:44+09:00",
+  "finishedAt": "2026-09-30T20:02:03+09:00",
+  "morning": {"invocation": "ebbfff0c09454ae698267fb6993677b9", "normalExit": 30, "mainPid": 0, "controlPid": 0},
+  "cleanup": {"invocation": "6b41c7f23f124530b65a1a82976f8b85", "normalExit": 30, "state": "failed/failed", "mainPid": 0, "controlPid": 0},
+  "expected": {"successfulCleanup": "all actual seven steps and Inspector END; Transfer target2/success2/failure0/bytes5", "knownRejection": "reacquire DB, preserve actual partial state, retire exact request/owner/intent, Main30, no permit"},
+  "actual": {"backupCurrentRows": [13, 14], "backupAttempt": 7, "backupStatus": "SKIPPED/ALREADY_SUCCESSFUL/all counts0", "priorBackupRowsUnchanged": [9, 10], "cleanupRows": 0, "inspectorStarted": false, "cleanupNamespaceEntries": 0, "maintenanceNamespaceEntries": 0, "backupNamespaceEntries": 0, "permitsIssued": 0},
+  "result": {"CEXEC001": "FAILED BUG-367", "CEXEC004": "normal30 partial-state/retirement observed; other negative cases pending", "COWNER005": "Root supplemental Groups empty rejected by positive-id parsing"},
+  "coverage": {"nativeClassByteMismatch": 0, "acceptance100Percent": false, "note": "frozen Source jars used for reachability, no mixed-source union"},
+  "related": {"bugs": ["BUG-365", "BUG-367"], "ssc": ["SSC-120", "SSC-122"], "ykt": ["YKT-286", "YKT-288"]},
+  "evidence": [
+    {"path": "work/pgpt-runs/PG379/pg390-native-observation1.log", "sha256": "656311b4a3aa40a532fd0c7fb0de770a2a66071b6736027b29a114d7f943426f"},
+    {"path": "work/pgpt-runs/PG379/pg390-native-db1-retest.log", "sha256": "0b707dbcd46357bb1115218603c5e7b68a336644be9ac2629c279230c5bb6244"},
+    {"path": "work/pgpt-runs/PG379/pg390-install-retest.log", "sha256": "7acf102302a249909dbe551893a63385e6a8a9cab472d319b7ae5f4f5d5a23d0"}
+  ],
+  "redaction": "no password/credential/key/auth session/token/dump/master. Unit invocation and run IDs are nonsecret execution metadata. Raw JaCoCo retained only in private work.",
+  "limitations": ["successful Cleanup/Inspector/Transfer not accepted", "failed Backup six SKIP/Broker/Expiry/issuer/API/Web/CHR pending", "PG/PT full completion and IT/ST not declared"]
+}

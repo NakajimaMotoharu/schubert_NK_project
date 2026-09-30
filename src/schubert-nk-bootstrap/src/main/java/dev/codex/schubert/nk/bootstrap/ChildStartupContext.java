@@ -304,7 +304,11 @@ public final class ChildStartupContext {
         require(uid == io.uid());
       }
       var groups = new TreeSet<Long>();
-      for (String id : required(status, "Groups").split("\\s+"))
+      String groupValues = required(status, "Groups");
+      // SSC122/BUG367: Linux supplementary groups may be empty for a genuine GID0 parent.
+      // Missing remains invalid; ordinary child/NSS contracts are not widened or synthesized.
+      for (String id :
+          maintenanceParent && groupValues.isEmpty() ? new String[0] : groupValues.split("\\s+"))
         require(
             groups.add(maintenanceParent && id.equals("0") ? 0 : positive(id, 4294967294L, 10)));
       require(groups.size() <= 16);

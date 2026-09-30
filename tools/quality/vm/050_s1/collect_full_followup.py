@@ -63,5 +63,10 @@ manifest = {
     'finishedAt': next(line.split('Finished at: ', 1)[1] for line in log.splitlines() if 'Finished at: ' in line),
 }
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.rglob('*')) if p.is_file()]
+if int(identifier[2:5]) >= 391:
+    manifest['bugs'].append('BUG-367')
+    manifest['ssc'].append('SSC-122')
+    manifest['ykt'].append('YKT-288')
+    manifest['testIds'].append('COWNER005')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
