@@ -35,7 +35,17 @@ public final class BackupUnitStartClient {
         MaintenanceUnit.INSPECTOR,
         InspectorUnitSnapshot.Target.INSPECTOR,
         "/run/schubert-nk/cleanup-request",
-        "inspector-start.intent");
+        "inspector-start.intent"),
+    EXPIRY(
+        MaintenanceUnit.EXPIRY,
+        InspectorUnitSnapshot.Target.EXPIRY,
+        "/run/schubert-nk/expiry-request",
+        "expiry-start.intent"),
+    BROKER(
+        MaintenanceUnit.ARTEMIS,
+        InspectorUnitSnapshot.Target.ARTEMIS,
+        "/run/schubert-nk/startup",
+        "broker-start.intent");
     private final MaintenanceUnit unit;
     private final InspectorUnitSnapshot.Target observation;
     private final String requestDirectory, marker;
@@ -67,7 +77,7 @@ public final class BackupUnitStartClient {
       return marker;
     }
 
-    /** Only Cleanup may control Inspector; Morning controls only Backup and Cleanup. */
+    /** Only Cleanup controls Inspector; the four other fixed starts are Morning-owned. */
     public boolean ownedBy(RootStartupContext.Service service) {
       return service
           == (this == INSPECTOR

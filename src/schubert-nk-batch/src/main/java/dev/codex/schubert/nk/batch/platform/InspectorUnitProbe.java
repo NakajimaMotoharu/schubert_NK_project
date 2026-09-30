@@ -153,6 +153,101 @@ public final class InspectorUnitProbe {
     }
 
     // SSC093: package-only reuse for the fixed backup placement projection, no public selector.
+    /**
+     * SSC125: bounded journal output is drained concurrently, never wait-before-read a full pipe.
+     */
+    byte[] executeStreaming(List<String> command, int limit, long remainingNanos) {
+      interrupted();
+      if (limit < 1 || remainingNanos <= 0) throw new StopGateException(StopGateFailure.TIMEOUT);
+      byte[][] bytes = {new byte[0]};
+      long began = System.nanoTime();
+      long timeout = Math.min(TimeUnit.SECONDS.toNanos(5), remainingNanos);
+      try {
+        var owned =
+            new QueryProcess(
+                Objects.requireNonNull(start.execute(command), "journal query process"));
+        ProcessResourceScope.use(
+            owned::close,
+            () -> {
+              var output = new SafeStream<>(owned.process.getInputStream());
+              ProcessResourceScope.use(
+                  output::finish,
+                  () -> {
+                    var input = new SafeStream<>(owned.process.getOutputStream());
+                    ProcessResourceScope.use(
+                        input::finish,
+                        () -> {
+                          var error = new SafeStream<>(owned.process.getErrorStream());
+                          ProcessResourceScope.use(
+                              error::finish,
+                              () -> {
+                                input.finish();
+                                error.finish();
+                                var drain =
+                                    new java.util.concurrent.FutureTask<byte[]>(
+                                        () -> {
+                                          bytes[0] =
+                                              Objects.requireNonNull(
+                                                  output.resource.readNBytes(limit + 1),
+                                                  "journal bytes");
+                                          return bytes[0];
+                                        });
+                                var reader = Thread.startVirtualThread(drain);
+                                try {
+                                  long left = timeout - (System.nanoTime() - began);
+                                  if (left <= 0
+                                      || !owned.process.waitFor(left, TimeUnit.NANOSECONDS))
+                                    throw new StopGateException(StopGateFailure.TIMEOUT);
+                                  interrupted();
+                                  if (owned.process.exitValue() != 0)
+                                    throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+                                  left = timeout - (System.nanoTime() - began);
+                                  if (left <= 0)
+                                    throw new StopGateException(StopGateFailure.TIMEOUT);
+                                  try {
+                                    drain.get(left, TimeUnit.NANOSECONDS);
+                                  } catch (java.util.concurrent.TimeoutException timeoutFailure) {
+                                    throw new StopGateException(StopGateFailure.TIMEOUT);
+                                  } catch (java.util.concurrent.ExecutionException readFailure) {
+                                    propagateQueryFailure(readFailure);
+                                  }
+                                  if (bytes[0].length > limit)
+                                    throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+                                } finally {
+                                  drain.cancel(true);
+                                  reader.interrupt();
+                                }
+                              });
+                        });
+                  });
+            });
+        interrupted();
+        return bytes[0];
+      } catch (InterruptedException interruptedFailure) {
+        Arrays.fill(bytes[0], (byte) 0);
+        Thread.currentThread().interrupt();
+        throw new StopGateException(StopGateFailure.INTERRUPTED);
+      } catch (IOException known) {
+        Arrays.fill(bytes[0], (byte) 0);
+        throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+      } catch (RuntimeException | Error failure) {
+        Arrays.fill(bytes[0], (byte) 0);
+        throw failure;
+      }
+    }
+
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+        matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
+        justification =
+            "SSC125: FutureTask wraps actual provider failures; preserve unknown RuntimeException/Error identity, never normalize as ordinary IO or success")
+    private static void propagateQueryFailure(java.util.concurrent.ExecutionException failure) {
+      Throwable cause = failure.getCause();
+      if (cause instanceof RuntimeException unknown) throw unknown;
+      if (cause instanceof Error unknown) throw unknown;
+      throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+    }
+
     byte[] execute(List<String> command, int limit) {
       interrupted();
       // Keep the delivered array reachable even when a later scope close fails.

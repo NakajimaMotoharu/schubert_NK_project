@@ -98,7 +98,8 @@ public final class BackupUnitReceiptGate {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(target, "closed phase");
-    if (!target.ownedBy(expected.service())) throw unavailable();
+    if (!target.ownedBy(expected.service()) || target == BackupUnitStartClient.Target.BROKER)
+      throw unavailable(); // Long-lived daemon has no oneshot completion receipt.
     root.recheck(expected);
     return new BackupUnitReceiptGate(
         () -> root.recheck(expected),
@@ -150,7 +151,9 @@ public final class BackupUnitReceiptGate {
               && !first.inactiveBaseline()
               // SSC123/BUG368: a prior known rejection is only a baseline, never this result.
               && !(target == BackupUnitStartClient.Target.CLEANUP
-                  && first.cleanupRejectedAfter(Optional.empty())))) throw unavailable();
+                  && first.cleanupRejectedAfter(Optional.empty()))
+              && !(target == BackupUnitStartClient.Target.EXPIRY
+                  && first.expiryRejectedAfter(Optional.empty())))) throw unavailable();
       InspectorUnitSnapshot whole = present(terminal.quiescent());
       if (!first.matches(whole) || !first.matches(present(probe.quiescent()))) throw unavailable();
       return new Baseline(this, first.invocationId());
@@ -172,7 +175,8 @@ public final class BackupUnitReceiptGate {
     return observe(
         baseline,
         target == BackupUnitStartClient.Target.BACKUP
-            || target == BackupUnitStartClient.Target.CLEANUP);
+            || target == BackupUnitStartClient.Target.CLEANUP
+            || target == BackupUnitStartClient.Target.EXPIRY);
   }
 
   public Optional<TerminalReceipt> observeResult(Baseline baseline) throws IOException {
@@ -198,7 +202,9 @@ public final class BackupUnitReceiptGate {
           || !first.orElseThrow().isTarget(target.observation())
           || (target != BackupUnitStartClient.Target.BACKUP
               && !first.orElseThrow().heldMaintenance()
-              && !(includeFailure && first.orElseThrow().cleanupRejectedAfter(baseline.previous)))
+              && !(includeFailure
+                  && (first.orElseThrow().cleanupRejectedAfter(baseline.previous)
+                      || first.orElseThrow().expiryRejectedAfter(baseline.previous))))
           || !eligible(first.orElseThrow(), baseline.previous, includeFailure))
         return Optional.empty();
       Optional<InspectorUnitSnapshot> whole = known(terminal.quiescent());
@@ -220,7 +226,8 @@ public final class BackupUnitReceiptGate {
           ? state.backupTerminalAfter(previous).isPresent()
           : state.receiptAfter(previous).orElse(-1) == 0;
     return state.receiptAfter(previous).isPresent()
-        || (includeFailure && state.cleanupRejectedAfter(previous));
+        || (includeFailure
+            && (state.cleanupRejectedAfter(previous) || state.expiryRejectedAfter(previous)));
   }
 
   private void check() throws IOException {

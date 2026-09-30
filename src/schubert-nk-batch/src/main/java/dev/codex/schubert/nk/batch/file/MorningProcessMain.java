@@ -130,6 +130,11 @@ public final class MorningProcessMain {
                       begins,
                       backupCycle.completedReceipt());
                 }
+                var broker =
+                    MorningBrokerExecution.execute(
+                        root, snapshot, budget, state, database, epoch, original);
+                MorningExpiryExecution.execute(
+                    root, snapshot, budget, state, database, epoch, original, broker);
                 return backupOutcome;
               });
         };

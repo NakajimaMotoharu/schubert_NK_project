@@ -1,11 +1,13 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -61,6 +63,65 @@ public final class ExpiryAuditRepository {
   public ExpiryAuditRepository(Connection connection) {
     this.connection = Objects.requireNonNull(connection, "borrowed parent connection");
     references = new RunReferenceRepository(connection);
+  }
+
+  /**
+   * Immutable same-run SUCCESS identity + complete audit, never the current SKIP handle. SSC125.
+   */
+  public record Prior(BatchStepAttempt handle, Snapshot audit) {
+    public Prior {
+      Objects.requireNonNull(handle);
+      Objects.requireNonNull(audit);
+    }
+  }
+
+  public Optional<Prior> successful(
+      BatchRun run,
+      Instant observed,
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+      throws IOException {
+    Objects.requireNonNull(run);
+    Objects.requireNonNull(observed);
+    Objects.requireNonNull(owner);
+    BatchStepAttempt.time(run, observed);
+    owner.check();
+    guarded(run);
+    try (var statement =
+        required(
+            connection.prepareStatement(
+                "select id,attempt,started_at from schubert.batch_runs where run_id=? and business_date=?"
+                    + " and step='CLEAN_EXPIRY' and status='SUCCESS' order by attempt desc limit 2"))) {
+      statement.setQueryTimeout(owner.queryTimeoutSeconds());
+      statement.setObject(1, run.id());
+      statement.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+      try (var rows = required(statement.executeQuery())) {
+        if (!rows.next()) {
+          owner.check();
+          return Optional.empty();
+        }
+        var handle =
+            new BatchStepAttempt(
+                required(rows.getObject("id", Long.class)),
+                run,
+                BatchStep.CLEAN_EXPIRY,
+                required(rows.getObject("attempt", Integer.class)),
+                required(rows.getObject("started_at", OffsetDateTime.class)).toInstant(),
+                false);
+        if (rows.next()) throw new BatchRepositoryException();
+        var audit = read(handle).orElseThrow(BatchRepositoryException::new);
+        @Nullable Instant ended = audit.ended();
+        if (!"SUCCESS".equals(audit.status())
+            || ended == null
+            || ended.isAfter(observed)
+            || audit.errorCode() != null
+            || audit.errorSummary() != null) throw new BatchRepositoryException();
+        owner.check();
+        guarded(run);
+        return Optional.of(new Prior(handle, audit));
+      }
+    } catch (SQLException known) {
+      throw new BatchRepositoryException();
+    }
   }
 
   public Stage stage(BatchStepAttempt attempt, long before, long target, long estimatedBytes) {

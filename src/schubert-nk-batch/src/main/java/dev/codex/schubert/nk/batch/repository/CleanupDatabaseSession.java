@@ -59,6 +59,7 @@ public final class CleanupDatabaseSession {
   private final Gate gate;
   private final Connect connect;
   private final Schema schema;
+  private final Optional<dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard> owner;
 
   public CleanupDatabaseSession(
       String url,
@@ -87,6 +88,22 @@ public final class CleanupDatabaseSession {
         rootGateFor(context, expected, RootStartupContext.Service.EXPIRY),
         DriverManager::getConnection,
         connection -> release.verifyExpiry(connection, expected));
+  }
+
+  /** SSC125: the native Expiry admission borrows the authenticated Morning deadline throughout. */
+  public static CleanupDatabaseSession forExpiry(
+      String url,
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      RootReleaseAdmission release,
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) {
+    Objects.requireNonNull(release, "Expiry release admission");
+    return new CleanupDatabaseSession(
+        url,
+        rootGateFor(context, expected, RootStartupContext.Service.EXPIRY),
+        DriverManager::getConnection,
+        connection -> release.verifyExpiry(connection, expected),
+        Optional.of(Objects.requireNonNull(owner, "actual Morning deadline")));
   }
 
   private static Gate rootGateFor(
@@ -122,6 +139,15 @@ public final class CleanupDatabaseSession {
   }
 
   CleanupDatabaseSession(String url, Gate gate, Connect connect, Schema schema) {
+    this(url, gate, connect, schema, Optional.empty());
+  }
+
+  CleanupDatabaseSession(
+      String url,
+      Gate gate,
+      Connect connect,
+      Schema schema,
+      Optional<dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard> owner) {
     var match = URL.matcher(Objects.requireNonNull(url, "cleanup database URL"));
     if (!match.matches() || Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535)
       throw new IllegalArgumentException("cleanup database URL refused");
@@ -129,6 +155,7 @@ public final class CleanupDatabaseSession {
     this.gate = Objects.requireNonNull(gate, "cleanup root gate");
     this.connect = Objects.requireNonNull(connect, "cleanup fixed connector");
     this.schema = Objects.requireNonNull(schema, "cleanup release/schema gate");
+    this.owner = Objects.requireNonNull(owner, "borrowed parent binding");
   }
 
   /** Consumes password owner, closes every JDBC owner, and never returns an open connection. */
@@ -144,7 +171,9 @@ public final class CleanupDatabaseSession {
       try {
         properties.setProperty("user", "schubert_batch");
         properties.setProperty("password", new String(password));
-        properties.setProperty("connectTimeout", "3");
+        properties.setProperty("connectTimeout", Integer.toString(Math.min(3, queryTimeout())));
+        if (owner.isPresent())
+          properties.setProperty("socketTimeout", Integer.toString(queryTimeout()));
         properties.setProperty("ApplicationName", "schubert-nk-cleanup");
         Arrays.fill(password, '\0');
         connection = present(connect.open(url, properties));
@@ -189,9 +218,14 @@ public final class CleanupDatabaseSession {
   private void check() throws IOException {
     if (Thread.currentThread().isInterrupted()) throw unavailable();
     gate.check();
+    if (owner.isPresent()) owner.orElseThrow().check();
   }
 
-  private static void admit(Connection connection) throws SQLException {
+  private int queryTimeout() throws IOException {
+    return owner.isPresent() ? owner.orElseThrow().queryTimeoutSeconds() : 5;
+  }
+
+  private void admit(Connection connection) throws SQLException, IOException {
     require(
         connection.getAutoCommit()
             && !connection.isReadOnly()
@@ -210,7 +244,7 @@ public final class CleanupDatabaseSession {
         });
   }
 
-  private static boolean scalar(Connection connection, String sql) throws SQLException {
+  private boolean scalar(Connection connection, String sql) throws SQLException, IOException {
     return query(
         connection,
         sql,
@@ -222,18 +256,21 @@ public final class CleanupDatabaseSession {
         });
   }
 
-  private static <T> T query(Connection connection, String sql, Rows<T> operation)
-      throws SQLException {
+  private <T> T query(Connection connection, String sql, Rows<T> operation)
+      throws SQLException, IOException {
+    check();
     var statement = connection.prepareStatement(sql);
     @Nullable Throwable failure = null;
     try {
       var checked = present(statement);
-      checked.setQueryTimeout(5);
+      checked.setQueryTimeout(queryTimeout());
       var rows = checked.executeQuery();
       @Nullable Throwable rowFailure = null;
       try {
-        return operation.read(present(rows));
-      } catch (SQLException | RuntimeException | Error primary) {
+        T result = operation.read(present(rows));
+        check();
+        return result;
+      } catch (SQLException | IOException | RuntimeException | Error primary) {
         rowFailure = primary;
         throw primary;
       } finally {
@@ -244,7 +281,7 @@ public final class CleanupDatabaseSession {
             if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
           }
       }
-    } catch (SQLException | RuntimeException | Error primary) {
+    } catch (SQLException | IOException | RuntimeException | Error primary) {
       failure = primary;
       throw primary;
     } finally {

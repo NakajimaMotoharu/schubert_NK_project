@@ -360,10 +360,10 @@ public final class MorningBackupUnitCycle {
     Objects.requireNonNull(handoff, "one-shot parent advisory handoff");
     Objects.requireNonNull(completion, "post-reacquire DB readback");
     Objects.requireNonNull(originalAndRequest, "same original/request proof");
-    if (target
-        != (stopChild
-            ? BackupUnitStartClient.Target.INSPECTOR
-            : BackupUnitStartClient.Target.CLEANUP))
+    if (stopChild
+        ? target != BackupUnitStartClient.Target.INSPECTOR
+        : target != BackupUnitStartClient.Target.CLEANUP
+            && target != BackupUnitStartClient.Target.EXPIRY)
       throw new IOException("maintenance handoff phase required");
     budget.requireWithin();
     gate.recheck();
@@ -382,7 +382,8 @@ public final class MorningBackupUnitCycle {
                           .receipt()
                           .orElseThrow(() -> new IOException("typed receipt unavailable"));
                   if (child.outcome() != Outcome.SUCCESS
-                      && !(target == BackupUnitStartClient.Target.CLEANUP
+                      && !((target == BackupUnitStartClient.Target.CLEANUP
+                              || target == BackupUnitStartClient.Target.EXPIRY)
                           && !stopChild
                           && value.exitCode() == 30)) throw new Unresolved();
                   receipt.requirePresent(value);

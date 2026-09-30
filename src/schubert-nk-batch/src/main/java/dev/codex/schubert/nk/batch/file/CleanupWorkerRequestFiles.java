@@ -202,6 +202,16 @@ public final class CleanupWorkerRequestFiles {
   /** SSC120: same live cycle only; nested Inspector/part/unknown residue forbids retirement. */
   public void requireOwnedCycle() throws StorageIoException {
     require(!expiry && ownerSource.isEmpty());
+    requireOwnedNames(Set.of("cleanup-request", "maintenance-owner", "cleanup-start.intent"));
+  }
+
+  /** SSC125: exact Expiry names only; nested/part/unknown residues forbid retirement. */
+  public void requireExpiryOwnedCycle() throws StorageIoException {
+    require(expiry && ownerSource.isEmpty());
+    requireOwnedNames(Set.of("expiry-request", "maintenance-owner", "expiry-start.intent"));
+  }
+
+  private void requireOwnedNames(Set<String> expected) throws StorageIoException {
     synchronized (lock) {
       Snapshot before = directory();
       root.atDirectory(
@@ -216,9 +226,7 @@ public final class CleanupWorkerRequestFiles {
             } catch (java.nio.file.DirectoryIteratorException failure) {
               throw unavailable();
             }
-            require(
-                observed.equals(
-                    Set.of("cleanup-request", "maintenance-owner", "cleanup-start.intent")));
+            require(observed.equals(expected));
             guard();
             return Boolean.TRUE;
           });

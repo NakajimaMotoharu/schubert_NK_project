@@ -86,6 +86,10 @@ public final class ChildStartupContext {
     default byte[] inspectorUnit() throws IOException {
       throw unavailable();
     }
+
+    default byte[] brokerUnit() throws IOException {
+      throw unavailable();
+    }
   }
 
   private final Io io;
@@ -216,6 +220,69 @@ public final class ChildStartupContext {
             && actor.cgroup().equals("0::/system.slice/schubert-nk-inbox-inspector.service\n"));
   }
 
+  /** SSC125/BROKERSTART001: Root reads the fixed daemon, never arbitrary process authority. */
+  public Observed verifyBroker(UUID boot, String invocation, FixedServiceIdentity.Value fixed)
+      throws IOException {
+    Objects.requireNonNull(boot, "same broker boot");
+    Objects.requireNonNull(invocation, "fresh broker Invocation");
+    Objects.requireNonNull(fixed, "fixed broker NSS identity");
+    require(io.uid() == 0 && invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
+    byte[] first = new byte[0], second = new byte[0];
+    try {
+      require(!Thread.currentThread().isInterrupted());
+      first = Objects.requireNonNull(io.brokerUnit(), "broker manager bytes");
+      String source = text(first, 4096);
+      require(source.endsWith("\n"));
+      var values = new HashMap<String, String>();
+      for (String line : source.substring(0, source.length() - 1).split("\n", -1)) {
+        int separator = line.indexOf('=');
+        require(separator > 0);
+        require(
+            values.putIfAbsent(line.substring(0, separator), line.substring(separator + 1))
+                == null);
+      }
+      require(
+          values
+              .keySet()
+              .equals(
+                  Set.of(
+                      "Id",
+                      "LoadState",
+                      "ActiveState",
+                      "SubState",
+                      "MainPID",
+                      "InvocationID",
+                      "ControlGroup")));
+      require(
+          "artemis.service".equals(values.get("Id"))
+              && "loaded".equals(values.get("LoadState"))
+              && "active".equals(values.get("ActiveState"))
+              && "running".equals(values.get("SubState"))
+              && invocation.equals(values.get("InvocationID"))
+              && "/system.slice/artemis.service".equals(values.get("ControlGroup")));
+      long pid = positive(Objects.requireNonNull(values.get("MainPID")), Integer.MAX_VALUE, 10);
+      require(pid >= 2);
+      var actual = capture(pid, false, fixed.uid());
+      require(
+          actual.boot().equals(boot.toString())
+              && actual.uid() == fixed.uid()
+              && actual.gid() == fixed.gid()
+              && actual.groups().equals(fixed.groups())
+              && actual.zeroCapabilities()
+              && actual.noNewPrivileges()
+              && actual.cgroup().equals("0::/system.slice/artemis.service\n"));
+      require(actual.equals(capture(pid, false, fixed.uid())));
+      second = Objects.requireNonNull(io.brokerUnit(), "broker manager bytes");
+      require(Arrays.equals(first, second) && !Thread.currentThread().isInterrupted());
+      return actual;
+    } catch (IOException known) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(first, (byte) 0);
+      Arrays.fill(second, (byte) 0);
+    }
+  }
+
   /** Root-issued claim is checked against manager and kernel twice, never treated as authority. */
   public void verifyMaintenanceParent(MaintenanceParent kind, MaintenanceOwnerFrame owner)
       throws IOException {
@@ -276,6 +343,11 @@ public final class ChildStartupContext {
   }
 
   private Observed capture(long pid, boolean maintenanceParent) throws IOException {
+    return capture(pid, maintenanceParent, maintenanceParent ? 0 : io.uid());
+  }
+
+  private Observed capture(long pid, boolean maintenanceParent, long expectedUid)
+      throws IOException {
     try {
       require("proc".equals(io.filesystem()));
       require(pid >= 2 && pid <= Integer.MAX_VALUE);
@@ -301,7 +373,7 @@ public final class ChildStartupContext {
       } else {
         uid = ids(required(status, "Uid"));
         gid = ids(required(status, "Gid"));
-        require(uid == io.uid());
+        require(uid == expectedUid);
       }
       var groups = new TreeSet<Long>();
       String groupValues = required(status, "Groups");
@@ -475,6 +547,10 @@ public final class ChildStartupContext {
 
     public byte[] inspectorUnit() throws IOException {
       return unit("schubert-nk-inbox-inspector.service");
+    }
+
+    public byte[] brokerUnit() throws IOException {
+      return unit("artemis.service");
     }
 
     private byte[] unit(String fixedUnit) throws IOException {

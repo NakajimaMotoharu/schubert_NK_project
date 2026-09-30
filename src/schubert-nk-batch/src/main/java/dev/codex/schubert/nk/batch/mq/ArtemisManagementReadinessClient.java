@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientRequestor;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
@@ -16,6 +19,45 @@ import org.apache.activemq.artemis.api.core.management.ResourceNames;
  * NK-OPS-001; MQ-001/002/009/010,SYS-004; UI231/251; SS321/342; PG235/PT-OPS-MQ-005..007.
  */
 public final class ArtemisManagementReadinessClient {
+  // SSC125: a synchronous borrowed timeout, never a role/credential/parent capability.
+  // All existing fixed Ops/Expiry management exchanges pass through query below.
+  private static final ThreadLocal<Optional<MaintenanceOwnerFrame.Guard>> PARENT_DEADLINE =
+      ThreadLocal.withInitial(Optional::empty);
+
+  @FunctionalInterface
+  public interface OwnedOperation<T> {
+    T execute() throws IOException;
+  }
+
+  public static <T> T withParentDeadline(
+      MaintenanceOwnerFrame.Guard owner, OwnedOperation<T> operation) throws IOException {
+    Objects.requireNonNull(owner, "actual same-parent deadline");
+    Objects.requireNonNull(operation, "synchronous management operation");
+    if (PARENT_DEADLINE.get().isPresent()) throw new IOException("management owner unavailable");
+    owner.check();
+    PARENT_DEADLINE.set(Optional.of(owner));
+    try {
+      T result = Objects.requireNonNull(operation.execute(), "owned management result");
+      owner.check();
+      return result;
+    } finally {
+      PARENT_DEADLINE.remove();
+    }
+  }
+
+  static long requestTimeoutMillis() throws IOException {
+    var owner = PARENT_DEADLINE.get();
+    if (owner.isEmpty()) return 2000L; // Existing standalone read-only/PT contract.
+    long remaining = owner.orElseThrow().remainingNanos();
+    if (remaining < 1_000_000L) throw new IOException("management deadline unavailable");
+    return Math.min(2000L, remaining / 1_000_000L);
+  }
+
+  private static void checkParentDeadline() throws IOException {
+    var owner = PARENT_DEADLINE.get();
+    if (owner.isPresent()) owner.orElseThrow().check();
+  }
+
   @FunctionalInterface
   interface Reader {
     Object read(ClientSession session, String attribute);
@@ -197,15 +239,20 @@ public final class ArtemisManagementReadinessClient {
   @SuppressWarnings("try")
   private static Object query(ClientSession session, MessageWriter writer) {
     try {
+      checkParentDeadline();
       session.start();
+      Object result;
       try (var requestor = new ClientRequestor(session, "activemq.management")) {
         var request = session.createMessage(false);
         writer.write(request);
-        var reply = requestor.request(request, 2_000L);
+        var reply = requestor.request(request, requestTimeoutMillis());
+        checkParentDeadline();
         if (reply == null || !ManagementHelper.hasOperationSucceeded(reply))
           throw new ArtemisManagementReadinessException();
-        return ManagementHelper.getResult(reply);
+        result = ManagementHelper.getResult(reply);
       }
+      checkParentDeadline();
+      return result;
     } catch (Exception failure) {
       throw new ArtemisManagementReadinessException();
     }

@@ -116,10 +116,11 @@ final class CleanupServiceUnitTest {
     exact(content, "KillMode", "control-group");
     exact(content, "SendSIGKILL", "no");
     exact(content, "Delegate", "no");
-    assertEquals(4, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
+    assertEquals(5, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
     for (String credential :
         java.util.List.of(
             "expiry-request:/run/schubert-nk/expiry-request/expiry-request",
+            "maintenance-owner:/run/schubert-nk/expiry-request/maintenance-owner",
             "db-batch:/etc/schubert-nk/credentials/db-batch",
             "mq-maintenance:/etc/schubert-nk/credentials/mq-maintenance",
             "mq-ops:/etc/schubert-nk/credentials/mq-ops")) {

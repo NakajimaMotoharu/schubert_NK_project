@@ -323,6 +323,14 @@ final class MorningControlScope {
   private static void requireNoExpiryRequest(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
     root.recheck(expected);
+    try (var brokerIntent =
+        BackupStartIntentFiles.create(
+            root,
+            expected,
+            dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.Target.BROKER)) {
+      brokerIntent
+          .requireClear(); // Under M, before old run/DB/stop: unknown daemon start stays isolated.
+    }
     var cleanup =
         dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
             dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),

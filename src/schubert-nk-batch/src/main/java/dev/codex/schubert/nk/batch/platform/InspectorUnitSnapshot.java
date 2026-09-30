@@ -73,15 +73,16 @@ public final class InspectorUnitSnapshot {
                   "LoadState",
                   "loaded",
                   "Type",
-                  "oneshot",
+                  target == Target.ARTEMIS ? "simple" : "oneshot",
                   "Restart",
-                  "no",
+                  target == Target.ARTEMIS ? "on-failure" : "no",
                   "KillMode",
                   "control-group",
                   "SendSIGKILL",
                   "no")
               .entrySet()) require(result.value(fixed.getKey()).equals(fixed.getValue()));
       require(Set.of("yes", "no").contains(result.value("RemainAfterExit")));
+      if (target == Target.ARTEMIS) require(result.value("RemainAfterExit").equals("no"));
       if (target == Target.BACKUP || target == Target.CLEANUP)
         require(result.value("RemainAfterExit").equals("yes"));
       for (String token : List.of("ActiveState", "SubState", "Result"))
@@ -125,6 +126,8 @@ public final class InspectorUnitSnapshot {
   /** Values alone never certify that startup was requested by the current parent/run. */
   public OptionalInt receiptAfter(Optional<UUID> previous) {
     Objects.requireNonNull(previous, "previous invocation");
+    if (target == Target.ARTEMIS)
+      return OptionalInt.empty(); // A daemon stop is not worker completion.
     var current = invocationId();
     if (!quiescent()
         || current.isEmpty()
@@ -169,8 +172,16 @@ public final class InspectorUnitSnapshot {
 
   /** SSC120: narrow known Cleanup rejection, never a success receipt or UNKNOWN repair. */
   boolean cleanupRejectedAfter(Optional<UUID> previous) {
+    return normalRejectedAfter(Target.CLEANUP, previous);
+  }
+
+  boolean expiryRejectedAfter(Optional<UUID> previous) {
+    return normalRejectedAfter(Target.EXPIRY, previous);
+  }
+
+  private boolean normalRejectedAfter(Target expected, Optional<UUID> previous) {
     Objects.requireNonNull(previous, "previous invocation");
-    return target == Target.CLEANUP
+    return target == expected
         && value("RemainAfterExit").equals("yes")
         && quiescent()
         && invocationId().isPresent()
@@ -187,6 +198,8 @@ public final class InspectorUnitSnapshot {
   /** Necessary worker-self binding only; independent kernel/NSS/namespace gates remain required. */
   public boolean running(long pid, String invocation) {
     Objects.requireNonNull(invocation, "manager invocation");
+    if (target == Target.ARTEMIS)
+      return value("MainPID").equals(Long.toString(pid)) && brokerRunningInvocation(invocation);
     return pid >= 2
         && pid <= Integer.MAX_VALUE
         && value("MainPID").equals(Long.toString(pid))
@@ -200,6 +213,25 @@ public final class InspectorUnitSnapshot {
   public boolean runningInvocation(String invocation) {
     Objects.requireNonNull(invocation, "expected manager Invocation");
     return running(Long.parseLong(value("MainPID")), invocation);
+  }
+
+  /** SSC125/BROKERLIVE001..004: data only, never Ops/journal/root/permit authority. */
+  public boolean brokerRunningInvocation(String invocation) {
+    Objects.requireNonNull(invocation, "same actual broker invocation");
+    return target == Target.ARTEMIS
+        && value("ActiveState").equals("active")
+        && value("SubState").equals("running")
+        && value("Job").isEmpty()
+        && new BigInteger(value("MainPID")).compareTo(BigInteger.valueOf(2)) >= 0
+        && new BigInteger(value("MainPID")).compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0
+        && value("ControlPID").equals("0")
+        && invocationId().isPresent()
+        && value("InvocationID").equals(invocation)
+        && executionStart().signum() > 0
+        && executionEnd().signum() == 0
+        && value("ExecMainCode").equals("0")
+        && value("ExecMainStatus").equals("0")
+        && value("Result").equals("success");
   }
 
   public boolean matches(InspectorUnitSnapshot other) {
@@ -244,7 +276,7 @@ public final class InspectorUnitSnapshot {
   }
 
   boolean heldMaintenance() {
-    return (target == Target.CLEANUP || target == Target.INSPECTOR)
+    return (target == Target.CLEANUP || target == Target.INSPECTOR || target == Target.EXPIRY)
         && value("RemainAfterExit").equals("yes")
         && value("ActiveState").equals("active")
         && value("SubState").equals("exited")

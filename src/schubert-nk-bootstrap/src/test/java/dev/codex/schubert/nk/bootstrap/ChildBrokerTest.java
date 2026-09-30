@@ -1,0 +1,174 @@
+package dev.codex.schubert.nk.bootstrap;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import org.junit.jupiter.api.Test;
+
+/**
+ * SSC125 BROKERSTART001/002, literal manager/kernel/NSS vectors, never synthetic startup authority.
+ */
+final class ChildBrokerTest {
+  static final UUID BOOT = UUID.fromString("11111111-1111-4111-8111-111111111111");
+  static final String INV = "7".repeat(32);
+  static final FixedServiceIdentity.Value FIXED =
+      new FixedServiceIdentity.Value(200, 201, List.of(201L));
+  static final String UNIT =
+      "Id=artemis.service\nLoadState=loaded\nActiveState=active\nSubState=running\n"
+          + "MainPID=43\nInvocationID="
+          + INV
+          + "\nControlGroup=/system.slice/artemis.service\n";
+  static final String STATUS =
+      "Uid:\t200 200 200 200\nGid:\t201 201 201 201\nGroups:\t201\n"
+          + "CapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\n"
+          + "CapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\n";
+
+  static byte[] bytes(String s) {
+    return s.getBytes(StandardCharsets.US_ASCII);
+  }
+
+  static final class Fixture implements ChildStartupContext.Io {
+    String manager = UNIT,
+        status = STATUS,
+        boot = BOOT + "\n",
+        cgroup = "0::/system.slice/artemis.service\n";
+    String state = "S";
+    long rootUid = 0;
+    boolean managerDrift, kernelDrift;
+    int reads, ticks;
+    final List<byte[]> owned = new ArrayList<>();
+
+    public long pid() {
+      return 44;
+    }
+
+    public long uid() {
+      return rootUid;
+    }
+
+    public String filesystem() {
+      return "proc";
+    }
+
+    public byte[] boot() {
+      return bytes(boot);
+    }
+
+    public byte[] stat(long pid) {
+      assertEquals(43, pid);
+      return bytes(
+          "43 (vendor java) "
+              + state
+              + " "
+              + "0 ".repeat(18)
+              + (kernelDrift && ticks++ > 0 ? 12346 : 12345)
+              + "\n");
+    }
+
+    public byte[] status(long pid) {
+      return bytes(status);
+    }
+
+    public byte[] cgroup(long pid) {
+      return bytes(cgroup);
+    }
+
+    public byte[] brokerUnit() {
+      byte[] b =
+          bytes(managerDrift && reads++ > 0 ? manager.replace(INV, "8".repeat(32)) : manager);
+      owned.add(b);
+      return b;
+    }
+  }
+
+  @Test
+  void rootReadsActualFixedBrokerTwiceWithoutConfusingRootAndBrokerUid() throws Exception {
+    var f = new Fixture();
+    var actual = new ChildStartupContext(f).verifyBroker(BOOT, INV, FIXED);
+    assertEquals(43, actual.pid());
+    assertEquals(12345, actual.startTicks());
+    assertEquals(200, actual.uid());
+    assertEquals(201, actual.gid());
+    assertEquals(List.of(201L), actual.groups());
+    assertTrue(actual.zeroCapabilities());
+    assertTrue(actual.noNewPrivileges());
+    assertEquals("ChildStartupContext.Observed[REDACTED]", actual.toString());
+    assertEquals(2, f.owned.size());
+    for (byte[] b : f.owned) assertArrayEquals(new byte[b.length], b);
+    var nss = new FixedServiceIdentityTest.Fixture();
+    nss.values.put(
+        "passwd/schubert-artemis", "schubert-artemis:x:200:201::/nonexistent:/usr/sbin/nologin\n");
+    nss.values.put("group/schubert-artemis", "schubert-artemis:x:201:\n");
+    assertEquals(FIXED, nss.subject().resolveArtemis());
+    assertEquals(
+        List.of(
+            List.of("/usr/bin/getent", "passwd", "schubert-artemis"),
+            List.of("/usr/bin/getent", "group", "schubert-artemis")),
+        nss.commands);
+  }
+
+  @Test
+  void independentDaemonManagerKernelAndOwnerMismatchesReject() {
+    for (var change :
+        List.of(
+            Map.entry("Id=artemis.service", "Id=other.service"),
+            Map.entry("LoadState=loaded", "LoadState=not-found"),
+            Map.entry("ActiveState=active", "ActiveState=activating"),
+            Map.entry("SubState=running", "SubState=start"),
+            Map.entry("MainPID=43", "MainPID=1"),
+            Map.entry(INV, "8".repeat(32)),
+            Map.entry("ControlGroup=/system.slice/artemis.service", "ControlGroup=/other"),
+            Map.entry("Id=artemis.service\n", "Id=artemis.service\nId=artemis.service\n"),
+            Map.entry("Id=artemis.service\n", "Unknown=x\n"),
+            Map.entry("Id=artemis.service\n", "badline\n"))) {
+      var f = new Fixture();
+      f.manager = UNIT.replace(change.getKey(), change.getValue());
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(f).verifyBroker(BOOT, INV, FIXED),
+          change.toString());
+    }
+    for (var change :
+        List.of(
+            Map.entry("200 200 200 200", "202 202 202 202"),
+            Map.entry("201 201 201 201", "202 202 202 202"),
+            Map.entry("Groups:\t201", "Groups:\t201 202"),
+            Map.entry("CapBnd:\t0000000000000000", "CapBnd:\t0000000000000001"),
+            Map.entry("NoNewPrivs:\t1", "NoNewPrivs:\t0"))) {
+      var f = new Fixture();
+      f.status = STATUS.replace(change.getKey(), change.getValue());
+      assertThrows(
+          IOException.class, () -> new ChildStartupContext(f).verifyBroker(BOOT, INV, FIXED));
+    }
+    for (String fault :
+        List.of("root", "boot", "cgroup", "zombie", "managerDrift", "kernelDrift")) {
+      var f = new Fixture();
+      switch (fault) {
+        case "root" -> f.rootUid = 200;
+        case "boot" -> f.boot = "22222222-2222-4222-8222-222222222222\n";
+        case "cgroup" -> f.cgroup = "0::/other\n";
+        case "zombie" -> f.state = "Z";
+        case "managerDrift" -> f.managerDrift = true;
+        case "kernelDrift" -> f.kernelDrift = true;
+        default -> fail("closed fixture");
+      }
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(f).verifyBroker(BOOT, INV, FIXED),
+          fault);
+    }
+    var c = new ChildStartupContext(new Fixture());
+    assertThrows(IOException.class, () -> c.verifyBroker(BOOT, "0".repeat(32), FIXED));
+    assertThrows(NullPointerException.class, () -> c.verifyBroker(null, INV, FIXED));
+    assertThrows(NullPointerException.class, () -> c.verifyBroker(BOOT, null, FIXED));
+    assertThrows(NullPointerException.class, () -> c.verifyBroker(BOOT, INV, null));
+    Thread.currentThread().interrupt();
+    try {
+      assertThrows(IOException.class, () -> c.verifyBroker(BOOT, INV, FIXED));
+    } finally {
+      Thread.interrupted();
+    }
+  }
+}

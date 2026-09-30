@@ -41,7 +41,21 @@ final class MorningServiceUnitTest {
     assertFalse(content.contains("PassEnvironment="));
     // SS343 §6.15 requires precisely this systemd-private batch credential even while the
     // remaining parent path is fail-closed. No ordinary service catalog or env fallback.
-    exact(content, "LoadCredential", "db-batch:/etc/schubert-nk/credentials/db-batch");
+    for (String credential : java.util.List.of("db-batch", "mq-ops")) {
+      assertEquals(
+          1,
+          content
+              .lines()
+              .filter(
+                  line ->
+                      line.equals(
+                          "LoadCredential="
+                              + credential
+                              + ":/etc/schubert-nk/credentials/"
+                              + credential))
+              .count());
+    }
+    assertEquals(2, content.lines().filter(line -> line.startsWith("LoadCredential=")).count());
     assertFalse(content.contains("SetCredentialEncrypted="));
     assertFalse(content.contains("SetCredential="));
     assertFalse(content.contains("ExecStartPre="));

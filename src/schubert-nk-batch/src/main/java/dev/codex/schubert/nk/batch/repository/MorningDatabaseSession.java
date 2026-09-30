@@ -61,6 +61,17 @@ public final class MorningDatabaseSession {
     }
   }
 
+  /** Current committed attempt and separate original audit. Claims confer no callback authority. */
+  public record ExpiryBegins(
+      BatchStepAttempt current, Optional<ExpiryAuditRepository.Prior> prior) {
+    public ExpiryBegins {
+      Objects.requireNonNull(current);
+      Objects.requireNonNull(prior);
+      if (current.step() != BatchStep.CLEAN_EXPIRY || current.skipped() != prior.isPresent())
+        throw new IllegalArgumentException("invalid current Expiry begin");
+    }
+  }
+
   /** Callback-scoped parent operations. The JDBC handle and lock never escape this capability. */
   public interface Access {
     void requireUnused(BatchRun run) throws IOException;
@@ -111,6 +122,33 @@ public final class MorningDatabaseSession {
     }
 
     <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException;
+
+    default ExpiryBegins beginExpiry(
+        BatchRun run,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run);
+      Objects.requireNonNull(now);
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
+
+    default <T> T handoffExpiry(CleanupHandoff<T> operation) throws IOException {
+      Objects.requireNonNull(operation);
+      throw unavailable();
+    }
+
+    default ExpiryAuditRepository.Snapshot observeExpiry(
+        ExpiryBegins begins,
+        dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(begins);
+      Objects.requireNonNull(receipt);
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
 
     default BackupFailureSnapshot failedBackupSnapshot(
         BackupBegins expected, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
@@ -381,6 +419,9 @@ public final class MorningDatabaseSession {
     private volatile boolean backupFinished;
     private @Nullable Instant backupFailureEnded;
     private @Nullable BackupManifest reusedManifest;
+    private volatile boolean cleanupVerified;
+    private volatile boolean expiryHandoffStarted;
+    private @Nullable ExpiryBegins expiryBegins;
 
     private Session(Connection connection) {
       this.connection = connection;
@@ -796,6 +837,158 @@ public final class MorningDatabaseSession {
       }
     }
 
+    @Override
+    public ExpiryBegins beginExpiry(
+        BatchRun run,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run);
+      Objects.requireNonNull(now);
+      Objects.requireNonNull(owner);
+      guard();
+      if (!cleanupVerified
+          || expiryHandoffStarted
+          || expiryBegins != null
+          || backupBegins == null
+          || !run.equals(backupBegins.database().run())) throw unavailable();
+      try {
+        owner.check();
+        if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var prior = new ExpiryAuditRepository(connection).successful(run, now, owner);
+        var repository = new BatchRunRepository(connection);
+        var current = repository.begin(run, BatchStep.CLEAN_EXPIRY, now, true);
+        if (current.skipped() != prior.isPresent()) throw unavailable();
+        var begins = new ExpiryBegins(current, prior);
+        guard();
+        owner.check();
+        connection.commit();
+        guard();
+        owner.check();
+        connection.setAutoCommit(true);
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        if (current.skipped()) {
+          repository.verifyAlreadySuccessful(current);
+          var original = prior.orElseThrow();
+          if (!new ExpiryAuditRepository(connection)
+              .read(original.handle())
+              .equals(Optional.of(original.audit()))) throw unavailable();
+        } else {
+          var initial =
+              new ExpiryAuditRepository.Snapshot(
+                  "RUNNING", null, null, null, 0, 0, 0, 0, null, null, null);
+          if (!new ExpiryAuditRepository(connection).read(current).equals(Optional.of(initial)))
+            throw unavailable();
+        }
+        guard();
+        owner.check();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        owner.check();
+        expiryBegins = begins;
+        return begins;
+      } catch (SQLException | BatchRepositoryException known) {
+        throw unavailable();
+      }
+    }
+
+    @Override
+    public <T> T handoffExpiry(CleanupHandoff<T> operation) throws IOException {
+      Objects.requireNonNull(operation);
+      guard();
+      if (!cleanupVerified || expiryBegins == null || expiryHandoffStarted) throw unavailable();
+      try {
+        if (!connection.getAutoCommit()) throw unavailable();
+        expiryHandoffStarted = true;
+        inHandoff = true;
+        T result =
+            InspectorLockHandoff.execute(
+                connection,
+                () -> {
+                  check();
+                  return operation.execute();
+                });
+        inHandoff = false;
+        guard();
+        return result;
+      } catch (SQLException | InspectorLockHandoff.Failure known) {
+        throw unavailable();
+      } finally {
+        inHandoff = false;
+      }
+    }
+
+    @Override
+    public ExpiryAuditRepository.Snapshot observeExpiry(
+        ExpiryBegins begins,
+        dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(begins);
+      Objects.requireNonNull(receipt);
+      Objects.requireNonNull(owner);
+      guard();
+      if (!cleanupVerified
+          || !expiryHandoffStarted
+          || !begins.equals(expiryBegins)
+          || receipt.target()
+              != dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.Target.EXPIRY)
+        throw unavailable();
+      try {
+        owner.check();
+        if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var audit = new ExpiryAuditRepository(connection);
+        ExpiryAuditRepository.Snapshot actual;
+        if (begins.current().skipped()) {
+          if (receipt.exitCode() != 0) throw unavailable();
+          new BatchRunRepository(connection).verifyAlreadySuccessful(begins.current());
+          var prior = begins.prior().orElseThrow();
+          actual = audit.read(prior.handle()).orElseThrow(BatchRepositoryException::new);
+          if (!actual.equals(prior.audit())) throw unavailable();
+        } else {
+          actual = audit.read(begins.current()).orElseThrow(BatchRepositoryException::new);
+          int code =
+              "SUCCESS".equals(actual.status())
+                  ? 0
+                  : "WARNING".equals(actual.status())
+                      ? 10
+                      : "FAILED".equals(actual.status()) ? 30 : -1;
+          if (code != receipt.exitCode() || actual.ended() == null) throw unavailable();
+          var ended = Objects.requireNonNull(actual.ended());
+          var result =
+              new BatchStepResult(
+                  BatchStepResult.Status.valueOf(actual.status()),
+                  actual.target(),
+                  actual.success(),
+                  actual.failure(),
+                  actual.estimatedBytes(),
+                  actual.errorCode() == null
+                      ? BatchStepResult.Reason.NONE
+                      : switch (Objects.requireNonNull(actual.errorCode())) {
+                        case "COMMAND_FAILURE" -> BatchStepResult.Reason.COMMAND_FAILURE;
+                        case "SAFETY_FAILURE" -> BatchStepResult.Reason.SAFETY_FAILURE;
+                        default -> throw unavailable();
+                      });
+          new BatchRunRepository(connection).verifyFinished(begins.current(), ended, result);
+        }
+        guard();
+        owner.check();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        owner.check();
+        return actual;
+      } catch (SQLException | BatchRepositoryException known) {
+        throw unavailable();
+      }
+    }
+
     /** Narrow typed30, partial data only, never a successful completion or new DB attempt. */
     @Override
     public CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected(
@@ -894,6 +1087,7 @@ public final class MorningDatabaseSession {
         connection.setAutoCommit(true);
         guard();
         owner.check();
+        cleanupVerified = true;
         return observed;
       } catch (SQLException | BatchRepositoryException known) {
         throw unavailable();

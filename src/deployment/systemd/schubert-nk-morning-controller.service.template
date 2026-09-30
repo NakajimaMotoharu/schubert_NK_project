@@ -13,6 +13,7 @@ Group=root
 WorkingDirectory=/opt/schubert-nk/current/operations
 UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
 LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch
+LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops
 ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.MorningProcessMain
 Restart=no
 TimeoutStartSec=30min

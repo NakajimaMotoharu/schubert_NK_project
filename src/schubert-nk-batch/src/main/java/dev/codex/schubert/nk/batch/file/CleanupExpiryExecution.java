@@ -5,6 +5,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import dev.codex.schubert.nk.batch.mq.*;
 import dev.codex.schubert.nk.batch.platform.*;
 import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import dev.codex.schubert.nk.storage.*;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
@@ -43,25 +44,45 @@ final class CleanupExpiryExecution {
         credentials::close,
         () -> {
           var reader = new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
+          var owner = reader.readMaintenanceOwner();
           var request = reader.readExpiryRequest();
-          verify(context, expected, request);
+          requireOwner(owner, request);
+          var parents = owner.parentsGuard();
+          MaintenanceOwnerFrame.Guard guard =
+              () -> {
+                parents.check();
+                require(reader.readMaintenanceOwner().equals(owner));
+                require(reader.readExpiryRequest().equals(request));
+                verify(context, expected, request);
+                return parents.remainingNanos();
+              };
+          guard.check(); // Before database password, connection or MQ credentials.
           var database =
               CleanupDatabaseSession.forExpiry(
-                  "jdbc:postgresql://127.0.0.1:5432/schubert_nk", context, expected, release);
+                  "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+                  context,
+                  expected,
+                  release,
+                  guard);
           return database.execute(
-              reader.read(), connection -> mq(connection, reader, context, expected, request));
+              reader.read(),
+              connection ->
+                  ArtemisManagementReadinessClient.withParentDeadline(
+                      guard, () -> mq(connection, reader, request, guard)));
         });
   }
 
   private static int mq(
       Connection connection,
       RootBatchCredentialReader reader,
-      RootStartupContext context,
-      RootStartupContext.Snapshot expected,
-      CleanupWorkerRequest.Expiry request)
+      CleanupWorkerRequest.Expiry request,
+      MaintenanceOwnerFrame.Guard guard)
       throws IOException {
+    guard.check();
+    var mutation = new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(guard);
     try (var maintenancePassword = reader.readMaintenanceMq();
         var opsPassword = reader.readOpsMq()) {
+      long timeout = mqTimeoutMillis(guard);
       char[] maintenance = maintenancePassword.copyPassword(), ops = opsPassword.copyPassword();
       try (var locator =
           new org.apache.activemq.artemis.core.client.impl.ServerLocatorImpl(
@@ -69,10 +90,17 @@ final class CleanupExpiryExecution {
               new org.apache.activemq.artemis.api.core.TransportConfiguration(
                   org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnectorFactory.class
                       .getName(),
-                  Map.of("host", "127.0.0.1", "port", 61616)))) {
+                  Map.of(
+                      "host",
+                      "127.0.0.1",
+                      "port",
+                      61616,
+                      org.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants
+                          .NETTY_CONNECT_TIMEOUT,
+                      Math.toIntExact(timeout))))) {
         locator
-            .setCallTimeout(5000)
-            .setCallFailoverTimeout(5000)
+            .setCallTimeout(timeout)
+            .setCallFailoverTimeout(timeout)
             .setInitialConnectAttempts(1)
             .setReconnectAttempts(0);
         // Fixed 2.56 implementation narrows createSessionFactory to ActiveMQException:
@@ -89,33 +117,39 @@ final class CleanupExpiryExecution {
           Arrays.fill(ops, '\0');
           maintenanceSession.start();
           opsSession.start();
+          guard.check();
           var health = new ArtemisStartupObservation();
           health.inspect(opsSession); // Actual authenticated Ops gate before observation/purge.
           var purge = new ArtemisExpiryPurgeClient();
           var observed = purge.observe(maintenanceSession, request.handle().run());
-          verify(context, expected, request);
+          guard.check();
           var audit = new ExpiryAuditRepository(connection);
           if (request.skipped()) {
             connection.setAutoCommit(false);
+            mutation.bind(connection);
             verifyPriorExpiry(connection, request, observed.selectedCount());
             connection.rollback();
             connection.setAutoCommit(true);
-            verify(context, expected, request);
+            guard.check();
             require(
                 health.inspect(opsSession).get("nk.expiry")
                     != ArtemisQueuePressureClient.Pressure.CRITICAL);
             return 0;
           }
           connection.setAutoCommit(false);
+          mutation.bind(connection);
           var stage =
               audit.stage(
                   request.handle(),
                   observed.beforeCount(),
                   observed.selectedCount(),
                   observed.estimatedSelectedBytes());
+          guard.check();
           connection.commit();
+          guard.check();
           connection.setAutoCommit(true);
           connection.setAutoCommit(false);
+          mutation.bind(connection);
           require(
               audit
                   .read(request.handle())
@@ -135,11 +169,13 @@ final class CleanupExpiryExecution {
                               null))));
           connection.rollback();
           connection.setAutoCommit(true);
-          verify(context, expected, request);
+          guard.check();
           @Nullable Long after = null;
           boolean purgeSucceeded = false;
           try {
+            guard.check();
             var actual = purge.purgeObserved(maintenanceSession, request.handle().run(), observed);
+            guard.check();
             after = actual.afterCount();
             purgeSucceeded = true;
           } catch (ArtemisExpiryPurgeException actualFailure) {
@@ -175,12 +211,16 @@ final class CleanupExpiryExecution {
                   stage.estimatedBytes(),
                   reason);
           Instant ended = Instant.now().truncatedTo(ChronoUnit.MICROS);
-          verify(context, expected, request);
+          guard.check();
           connection.setAutoCommit(false);
+          mutation.bind(connection);
           audit.finish(request.handle(), stage, ended, after, result);
+          guard.check();
           connection.commit();
+          guard.check();
           connection.setAutoCommit(true);
           connection.setAutoCommit(false);
+          mutation.bind(connection);
           require(
               audit
                   .read(request.handle())
@@ -200,7 +240,7 @@ final class CleanupExpiryExecution {
                               reason.summary()))));
           connection.rollback();
           connection.setAutoCommit(true);
-          verify(context, expected, request);
+          guard.check();
           return status == BatchStepResult.Status.SUCCESS
               ? 0
               : status == BatchStepResult.Status.WARNING ? 10 : 30;
@@ -212,6 +252,25 @@ final class CleanupExpiryExecution {
     } catch (SQLException | ActiveMQException failure) {
       throw new IOException("Expiry execution unavailable");
     }
+  }
+
+  /** Closed correlation only; actual parent/kernel/current authentication is mandatory outside. */
+  static void requireOwner(MaintenanceOwnerFrame owner, CleanupWorkerRequest.Expiry request)
+      throws IOException {
+    Objects.requireNonNull(owner, "actual Morning owner");
+    Objects.requireNonNull(request, "actual Expiry request");
+    require(
+        owner.cleanup().isEmpty()
+            && owner.boot().equals(request.boot())
+            && owner.run().equals(request.run())
+            && owner.activation().equals(request.activation())
+            && owner.cutoff().equals(request.cutoff())
+            && owner.epoch().equals(request.epoch()));
+  }
+
+  /** Whole seconds are rounded down; never grant a fresh per-phase five-second budget. */
+  static long mqTimeoutMillis(MaintenanceOwnerFrame.Guard owner) throws IOException {
+    return Objects.requireNonNull(owner, "actual parent deadline").queryTimeoutSeconds() * 1000L;
   }
 
   /**
@@ -258,7 +317,7 @@ final class CleanupExpiryExecution {
     MaintenanceRunFiles.observeHost(context, expected, request.original());
     var startup =
         OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+            LinuxHostDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
     ResourceScope.use(
         startup::close,
         () -> {
@@ -273,7 +332,7 @@ final class CleanupExpiryExecution {
     require(
         InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.ARTEMIS)
             .read()
-            .runningInvocation(request.brokerInvocation()));
+            .brokerRunningInvocation(request.brokerInvocation()));
     context.recheck(expected);
   }
 }

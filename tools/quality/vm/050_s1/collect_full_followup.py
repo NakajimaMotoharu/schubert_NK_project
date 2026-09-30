@@ -77,5 +77,11 @@ if int(identifier[2:5]) >= 393:
     manifest['ssc'].append('SSC-124')
     manifest['testIds'].extend(['CFREQ001..006', 'CFDB001..004', 'CFLOW001..004'])
     manifest['limitations'] = ['failed Backup/Cleanup native acceptance pending', 'Broker/Expiry/issuer/API/Web/CHR pending', '100% coverage and formal PT-WEB-20260925-24 unchanged']
+if int(identifier[2:5]) >= 394:
+    manifest['ssc'].append('SSC-125')
+    manifest['bugs'].extend(['BUG-369', 'BUG-370'])
+    manifest['ykt'].extend(['YKT-290', 'YKT-291'])
+    manifest['testIds'].extend(['BROKERLIVE001..004', 'BROKERSTART001..004', 'BROKERQUERY001..003', 'EXPARENT001..005'])
+    manifest['limitations'] = ['same-source native Broker/Expiry acceptance pending', 'failed Backup/Cleanup native and real hard-timeout pending', 'issuer/API/Web/CHR pending', '100% coverage and formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

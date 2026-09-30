@@ -1,5 +1,9 @@
 # Broker・Expiry親接続 単体テスト仕様書
 
+PG394 class/method対応：BROKERLIVE=ArtemisUnitSnapshotTest/ChildBrokerTest（parser/自己actor）、BROKERSTART=MorningBrokerUnitCycleTest/BrokerJournalEvidenceTest（cycle/live/journal）、BROKERQUERY001～003=BrokerJournalQueryTest（executeStreaming normal/limit/timeout/exit/IO/unknown/close/interrupt）、EXPARENT=ExpiryOwnerTest/ArtemisParentDeadlineTest/MorningExpirySessionTest（owner/deadline・実PG fresh→sameRun SKIP）。nativeはMorningBrokerExecution/MorningExpiryExecution/CleanupExpiryExecution/各Mainから同Source execを採取する。管理transportのconnect timeoutも親残秒以下とし、default無期限は使わない。期待値はliteral JSON/Unit fields・手書きaudit SQL/固定2削除対象200byte等で独立算出。
+
+BUG370/YKT291（修正前起票）：既存Expiry native入口/Source Unitの同Morning owner未継承と親期限不使用を是正する。正常単体データやRoot/current値だけでowner生存を代用しない。private credentialの欠落時はDB/MQ前に拒否し、元deadlineの負試験・実外部接続を別々に採取する。
+
 NK-OPS-001/NK-BAT-001、RD SYS004/MQ/OPS009、UI251/253、SS321/341§9/342/343、SSC117/119/125・BUG369/YKT290。既存真正Cleanup後、同Morning所有からBroker→Expiryを接続する。正常parser/live値はsrc/deployment/systemd/artemis.serviceの実3directive＋下表の手書き18property、実DBは独立SQLの全列、MQは固定Queue/selectorと個別管理readbackをoracleにする。Production expected生成禁止。
 
 | Test ID | 目的・入力/操作・fixture | 期待値/根拠 |

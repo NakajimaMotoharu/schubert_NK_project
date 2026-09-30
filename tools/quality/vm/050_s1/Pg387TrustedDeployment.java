@@ -39,6 +39,7 @@ public final class Pg387TrustedDeployment {
     if(!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new IllegalStateException("isolated VM only");
     var result=MaintenanceFileLock.create().tryExclusive(() -> {
       System.out.println(LABEL+" STAGE M_ACQUIRED");
+      checked(() -> { requireNoUndeliveredWork(); return Boolean.TRUE; });
       checked(() -> { stopAll(); return Boolean.TRUE; });
       System.out.println(LABEL+" STAGE ALL_STOPPED");
       return StartupAdmissionFile.create().tryExclusive(admission -> {
@@ -57,6 +58,17 @@ public final class Pg387TrustedDeployment {
     System.out.println(LABEL+" DEPLOYMENT "+args[0]+" source="+SOURCE+" completed=true signatureAndBom=true runtimePermitIssued=false");
   }
   interface Checked<T> { T execute() throws Exception; }
+  static void requireNoUndeliveredWork() throws Exception {
+    for(String name:List.of("backup-request","cleanup-request","expiry-request")) {
+      Path directory=Path.of("/run/schubert-nk",name);
+      if(!Files.isDirectory(directory,LinkOption.NOFOLLOW_LINKS))throw new IllegalStateException("fixed request namespace");
+      try(var entries=Files.list(directory)) {
+        if(entries.findAny().isPresent())throw new IllegalStateException("unresolved work isolated");
+      }
+    }
+    if(Files.exists(Path.of("/run/schubert-nk/startup/broker-start.intent"),LinkOption.NOFOLLOW_LINKS))
+      throw new IllegalStateException("unresolved Broker start isolated");
+  }
   static <T> T checked(Checked<T> work) throws java.io.IOException {
     try { return work.execute(); }
     catch (RuntimeException programming) { throw programming; }
@@ -104,6 +116,7 @@ public final class Pg387TrustedDeployment {
     byte[] previous=material(dir.resolve("current"),(int)size);
     var old=ReleaseApproval.parse(previous);
     StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(old);
+    installOwnedUnitDelta(old);
     Files.write(PRESERVE.resolve(STEM+"-previous-approval"),previous,StandardOpenOption.CREATE_NEW);
     Path part=dir.resolve(STEM+".part");
     Files.write(part,approval.encode(),StandardOpenOption.CREATE_NEW);
@@ -141,6 +154,61 @@ public final class Pg387TrustedDeployment {
         throw new IllegalStateException("INVALID readback");
       System.out.println(LABEL+" STAGE FRESH_INVALID_PRESERVED_ORIGINAL");
     }
+  }
+  /** SSC125 isolated provisioning only: exact old/new signed BOM, M/A and full stop held above.
+   * Never repair UNKNOWN request/intent, change a drop-in, or admit arbitrary Unit differences.
+   */
+  static void installOwnedUnitDelta(ReleaseApproval old) throws Exception {
+    Path installed=Path.of("/etc/systemd/system");
+    Path prior=Path.of("/opt/schubert-nk/releases",old.version(),"systemd");
+    Path next=RELEASE.resolve("systemd");
+    var names=List.of("schubert-nk-morning-controller.service","schubert-nk-backup.service",
+        "schubert-nk-cleanup.service","schubert-nk-inbox-inspector.service",
+        "schubert-nk-expiry-cleanup.service","schubert-nk-api.service",
+        "schubert-nk-web.service","artemis.service");
+    var allowed=Set.of("schubert-nk-morning-controller.service","schubert-nk-expiry-cleanup.service");
+    var changes=new LinkedHashMap<String,byte[]>();
+    for(var name:names) {
+      Path actual=installed.resolve(name);
+      var attributes=Files.readAttributes(actual,"unix:uid,gid,mode,nlink",LinkOption.NOFOLLOW_LINKS);
+      if(!Integer.valueOf(0).equals(attributes.get("uid")) || !Integer.valueOf(0).equals(attributes.get("gid"))
+          || !Integer.valueOf(0100644).equals(attributes.get("mode")) || !Integer.valueOf(1).equals(attributes.get("nlink")))
+        throw new IllegalStateException("fixed Unit metadata");
+      byte[] before=Files.readAllBytes(actual), previous=Files.readAllBytes(prior.resolve(name)), candidate=Files.readAllBytes(next.resolve(name));
+      if(!Arrays.equals(before,previous))throw new IllegalStateException("old signed Unit base mismatch");
+      if(!Arrays.equals(previous,candidate)) {
+        if(!allowed.contains(name))throw new IllegalStateException("unapproved Unit delta");
+        String addition=name.equals("schubert-nk-morning-controller.service")
+            ? "LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops\n"
+            : "LoadCredential=maintenance-owner:/run/schubert-nk/expiry-request/maintenance-owner\n";
+        String text=new String(candidate,StandardCharsets.UTF_8);
+        if(!text.contains(addition) || !Arrays.equals(text.replace(addition,"").getBytes(StandardCharsets.UTF_8),previous))
+          throw new IllegalStateException("closed credential-only Unit delta");
+        changes.put(name,candidate);
+      }
+    }
+    for(var entry:changes.entrySet()) {
+      String name=entry.getKey();
+      Path actual=installed.resolve(name), saved=PRESERVE.resolve(STEM+"-previous-"+name);
+      Files.write(saved,Files.readAllBytes(actual),StandardOpenOption.CREATE_NEW);
+      Files.setPosixFilePermissions(saved,java.nio.file.attribute.PosixFilePermissions.fromString("r--------"));
+      try(var f=FileChannel.open(saved,StandardOpenOption.READ)){f.force(true);}
+      Path part=installed.resolve(STEM+"-"+name+".part");
+      Files.write(part,entry.getValue(),StandardOpenOption.CREATE_NEW);
+      Files.setPosixFilePermissions(part,java.nio.file.attribute.PosixFilePermissions.fromString("rw-r--r--"));
+      try(var f=FileChannel.open(part,StandardOpenOption.READ)){f.force(true);}
+      Files.move(part,actual,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);
+      sync(installed);
+    }
+    if(!changes.isEmpty()) {
+      var reload=new ProcessBuilder("/usr/bin/systemctl","daemon-reload").inheritIO().start();
+      if(!reload.waitFor(20,java.util.concurrent.TimeUnit.SECONDS) || reload.exitValue()!=0)
+        throw new IllegalStateException("Unit reload unavailable; preserved before-image retained");
+    }
+    for(var name:names)if(!Arrays.equals(Files.readAllBytes(installed.resolve(name)),Files.readAllBytes(next.resolve(name))))
+      throw new IllegalStateException("new signed Unit base mismatch");
+    terminalAll();
+    System.out.println(LABEL+" STAGE SIGNED_UNIT_DELTA_VERIFIED count="+changes.size()+" oldSignedBases=true dropInsUnchanged=true beforeImagesPreserved=true");
   }
   static void stopAll() throws Exception {
     for(var unit:MaintenanceUnit.values()) {

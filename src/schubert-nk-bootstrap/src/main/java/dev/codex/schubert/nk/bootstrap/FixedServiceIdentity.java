@@ -110,6 +110,11 @@ public final class FixedServiceIdentity {
         List.of("schubert-inbox-inspector", "schubert", "schubert-read"));
   }
 
+  /** SSC125: vendor daemon has its fixed primary group only, no application groups. */
+  public Value resolveArtemis() throws IOException {
+    return resolveMaintenance("schubert-artemis", List.of("schubert-artemis"));
+  }
+
   private Value resolveMaintenance(String account, List<String> names) throws IOException {
     try {
       String[] passwd =
