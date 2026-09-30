@@ -21,10 +21,6 @@ import org.jspecify.annotations.NullMarked;
 final class MorningCleanupExecution {
   private MorningCleanupExecution() {}
 
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification = "SS343 fixed Cleanup source/current, no alternate run/Unit; CEXEC001")
   static CleanupTerminalRepository.Snapshot execute(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
@@ -35,6 +31,77 @@ final class MorningCleanupExecution {
       MorningNewRunAdmission.OriginalProof original,
       BackupManifest actual)
       throws IOException {
+    Objects.requireNonNull(actual);
+    return execute(
+        context,
+        expected,
+        budget,
+        state,
+        database,
+        epoch,
+        original,
+        new CleanupWorkerRequest(
+            actual.run().id(), state.activation().id(), actual.run().cutoff(), digest(actual)));
+  }
+
+  static CleanupTerminalRepository.Snapshot executeFailed(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      MorningParentBudget budget,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database,
+      StartupPermitRecords.Epoch epoch,
+      MorningNewRunAdmission.OriginalProof original,
+      MorningDatabaseSession.BackupBegins begins,
+      BackupUnitReceiptGate.TerminalReceipt actual)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    require(
+        actual.target() == BackupUnitStartClient.Target.BACKUP
+            && actual.exitCode() >= 1
+            && actual.exitCode() <= 255);
+    MaintenanceOwnerFrame.Guard base =
+        () -> {
+          budget.requireWithin();
+          context.recheck(expected);
+          original.verify();
+          return budget.remainingNanos();
+        };
+    var failed = database.failedBackupSnapshot(begins, base);
+    var request =
+        new CleanupFailedBackupRequest(
+            state.activation().run().id(),
+            state.activation().id(),
+            state.activation().run().cutoff(),
+            epoch.boot(),
+            epoch.epoch(),
+            actual.invocation(),
+            actual.startedMonotonic(),
+            actual.endedMonotonic(),
+            actual.exitCode(),
+            failed);
+    require(
+        request.receiptMatches(
+            BackupUnitTermination.create(context, expected)
+                .quiescent()
+                .orElseThrow(() -> new IOException("Backup failed receipt unavailable"))));
+    return execute(context, expected, budget, state, database, epoch, original, request);
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SS343 fixed Cleanup namespace/current, same parent owner SSC124 CFLOW001")
+  private static CleanupTerminalRepository.Snapshot execute(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      MorningParentBudget budget,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database,
+      StartupPermitRecords.Epoch epoch,
+      MorningNewRunAdmission.OriginalProof original,
+      CleanupProfile request)
+      throws IOException {
     Objects.requireNonNull(context);
     Objects.requireNonNull(expected);
     Objects.requireNonNull(budget);
@@ -42,12 +109,14 @@ final class MorningCleanupExecution {
     Objects.requireNonNull(database);
     Objects.requireNonNull(epoch);
     Objects.requireNonNull(original);
-    Objects.requireNonNull(actual);
+    Objects.requireNonNull(request);
     require(
         expected.service() == RootStartupContext.Service.MORNING
             && state.activation().equals(epoch.activation())
             && epoch.state() == StartupPermitRecords.State.INVALID
-            && actual.run().equals(state.activation().run())
+            && request.run().equals(state.activation().run().id())
+            && request.activation().equals(state.activation().id())
+            && request.cutoff().equals(state.activation().run().cutoff())
             && expected.boot().equals(epoch.boot().toString()));
     Path currentPath = Path.of("/run/schubert-nk/startup");
     MaintenanceOwnerFrame.Guard parent =
@@ -83,9 +152,6 @@ final class MorningCleanupExecution {
                 expected.invocation(), expected.pid(), expected.startTicks()),
             Optional.empty(),
             budget.deadlineNanos());
-    var request =
-        new CleanupWorkerRequest(
-            actual.run().id(), state.activation().id(), actual.run().cutoff(), digest(actual));
     var directory =
         OwnedTransferDirectory.open(
             LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/cleanup-request"));
@@ -96,11 +162,18 @@ final class MorningCleanupExecution {
           var owners =
               CleanupWorkerRequestFiles.forOwner(
                   directory, security, CleanupWorkerRequestFiles.OwnerSource.PARENT);
-          var requests = new CleanupWorkerRequestFiles(directory, security);
+          var requests =
+              request instanceof CleanupFailedBackupRequest
+                  ? CleanupWorkerRequestFiles.forFailure(directory, security)
+                  : new CleanupWorkerRequestFiles(directory, security);
           requests.requireClear();
           parent.check();
           owners.prepareOwner(frame, UUID.randomUUID());
-          requests.prepare(request, UUID.randomUUID());
+          switch (request) {
+            case CleanupWorkerRequest success -> requests.prepare(success, UUID.randomUUID());
+            case CleanupFailedBackupRequest failed ->
+                requests.prepareFailure(failed, UUID.randomUUID());
+          }
           parent.check();
           var result = new AtomicReference<CleanupTerminalRepository.Snapshot>();
           var cycle =
@@ -115,8 +188,11 @@ final class MorningCleanupExecution {
                       database.observeCleanupRejected(state.activation().run(), receipt, parent);
                     else
                       result.set(
-                          database.observeCleanup(
-                              state.activation().run(), receipt.exitCode(), parent));
+                          request instanceof CleanupFailedBackupRequest
+                              ? database.observeCleanupBackupUnavailable(
+                                  state.activation().run(), receipt.exitCode(), parent)
+                              : database.observeCleanup(
+                                  state.activation().run(), receipt.exitCode(), parent));
                     parent.check();
                   },
                   () -> {
@@ -128,8 +204,22 @@ final class MorningCleanupExecution {
                             .isPresent());
                     requireInspectorEnvironmentClear();
                     requests.requireOwnedCycle();
-                    require(owners.readOwner().equals(frame) && requests.read().equals(request));
-                    requests.retire(request);
+                    require(owners.readOwner().equals(frame));
+                    switch (request) {
+                      case CleanupWorkerRequest success -> {
+                        require(requests.read().equals(success));
+                        requests.retire(success);
+                      }
+                      case CleanupFailedBackupRequest failed -> {
+                        require(requests.readFailure().equals(failed));
+                        require(
+                            failed.receiptMatches(
+                                BackupUnitTermination.create(context, expected)
+                                    .quiescent()
+                                    .orElseThrow(() -> new IOException("Backup receipt changed"))));
+                        requests.retireFailure(failed);
+                      }
+                    }
                     owners.retireOwner(frame);
                     parent.check();
                   });

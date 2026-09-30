@@ -4,6 +4,8 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailable;
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
+import dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest;
+import dev.codex.schubert.nk.batch.platform.CleanupProfile;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import dev.codex.schubert.nk.storage.*;
@@ -24,6 +26,7 @@ public final class CleanupWorkerRequestFiles {
   private final String name;
   private final int maximum;
   private final boolean expiry;
+  private final boolean failedBackup;
   private final Optional<OwnerSource> ownerSource;
 
   /** Closed source names only, not arbitrary paths or root authorization. SSC119. */
@@ -68,11 +71,22 @@ public final class CleanupWorkerRequestFiles {
       InspectorEnvironmentPublisher.Io io,
       boolean expiry,
       Optional<OwnerSource> ownerSource) {
+    this(root, security, io, expiry, ownerSource, false);
+  }
+
+  private CleanupWorkerRequestFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      boolean expiry,
+      Optional<OwnerSource> ownerSource,
+      boolean failedBackup) {
     this.root = Objects.requireNonNull(root, "fixed request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "request IO");
     policy = new EnvironmentInodePolicy(security, io);
     this.expiry = expiry;
+    this.failedBackup = failedBackup;
     this.ownerSource = ownerSource;
     name =
         ownerSource.map(value -> value.name).orElse(expiry ? "expiry-request" : "cleanup-request");
@@ -81,7 +95,37 @@ public final class CleanupWorkerRequestFiles {
             ? MaintenanceOwnerFrame.MAXIMUM_BYTES
             : expiry
                 ? CleanupWorkerRequest.Expiry.MAXIMUM_BYTES
-                : CleanupWorkerRequest.MAXIMUM_BYTES;
+                : failedBackup ? CleanupProfile.MAXIMUM_BYTES : CleanupWorkerRequest.MAXIMUM_BYTES;
+  }
+
+  public static CleanupWorkerRequestFiles forFailure(
+      OwnedTransferDirectory root, InodeSecurityCalls security) {
+    return forFailure(root, security, new InspectorEnvironmentPublisher.NioIo());
+  }
+
+  static CleanupWorkerRequestFiles forFailure(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io) {
+    return new CleanupWorkerRequestFiles(root, security, io, false, Optional.empty(), true);
+  }
+
+  public void prepareFailure(CleanupFailedBackupRequest request, UUID part)
+      throws StorageIoException {
+    Objects.requireNonNull(request, "failed Backup request");
+    require(failedBackup);
+    prepareBytes(request.encode(), part);
+  }
+
+  public CleanupFailedBackupRequest readFailure() throws StorageIoException {
+    require(failedBackup);
+    return CleanupFailedBackupRequest.consume(readBytes());
+  }
+
+  public void retireFailure(CleanupFailedBackupRequest request) throws StorageIoException {
+    Objects.requireNonNull(request, "original failed Backup request");
+    require(failedBackup);
+    retireBytes(request.encode());
   }
 
   public static CleanupWorkerRequestFiles forOwner(
@@ -184,7 +228,7 @@ public final class CleanupWorkerRequestFiles {
 
   public void prepare(CleanupWorkerRequest request, UUID part) throws StorageIoException {
     Objects.requireNonNull(request, "root request");
-    require(!expiry && ownerSource.isEmpty());
+    require(!expiry && !failedBackup && ownerSource.isEmpty());
     prepareBytes(request.encode(), part);
   }
 
@@ -231,7 +275,7 @@ public final class CleanupWorkerRequestFiles {
   }
 
   public CleanupWorkerRequest read() throws StorageIoException {
-    require(!expiry && ownerSource.isEmpty());
+    require(!expiry && !failedBackup && ownerSource.isEmpty());
     return CleanupWorkerRequest.consume(readBytes());
   }
 
@@ -266,7 +310,7 @@ public final class CleanupWorkerRequestFiles {
   /** Only after actual full Unit termination; source equality does not establish that condition. */
   public void retire(CleanupWorkerRequest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "original request");
-    require(!expiry && ownerSource.isEmpty());
+    require(!expiry && !failedBackup && ownerSource.isEmpty());
     retireBytes(expected.encode());
   }
 

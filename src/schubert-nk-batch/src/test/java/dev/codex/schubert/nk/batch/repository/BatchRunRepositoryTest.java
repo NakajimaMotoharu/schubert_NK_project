@@ -127,6 +127,66 @@ final class BatchRunRepositoryTest {
   }
 
   @Test
+  void failedBackupCreatesRealSixSkipsEvenWithOldSuccessfulDeletion() throws Exception {
+    try (var c = locked()) {
+      var repository = new BatchRunRepository(c);
+      for (var step :
+          List.of(
+              BatchStep.CLEAN_NOTIFICATION,
+              BatchStep.CLEAN_QUESTION,
+              BatchStep.CLEAN_SESSION,
+              BatchStep.CLEAN_INBOX_OUTBOX,
+              BatchStep.CLEAN_LOG,
+              BatchStep.CLEAN_BATCH_RUN)) {
+        var old = repository.begin(RUN, step, NOW, false);
+        repository.finish(old, END, SUCCESS);
+        c.commit();
+        var saved = terminal(c, old.id());
+        var current = repository.beginBackupUnavailable(RUN, step, END.plusSeconds(1), true);
+        c.commit();
+        assertTrue(current.skipped());
+        assertEquals(2, current.attempt());
+        assertNotEquals(old.id(), current.id());
+        assertEquals(
+            "SKIPPED|0|0|0|0|BACKUP_UNAVAILABLE|verified backup unavailable",
+            terminal(c, current.id()));
+        assertEquals(saved, terminal(c, old.id()));
+        assertEquals(
+            "true",
+            query(
+                c,
+                "select (started_at=ended_at)::text from schubert.batch_runs where id="
+                    + current.id()));
+        repository.verifyBackupUnavailable(current);
+        assertThrows(
+            BatchRepositoryException.class, () -> repository.verifyAlreadySuccessful(current));
+        sql(c, "update schubert.batch_runs set byte_count=1 where id=" + current.id());
+        assertThrows(
+            BatchRepositoryException.class, () -> repository.verifyBackupUnavailable(current));
+        c.rollback();
+      }
+      for (var step :
+          List.of(
+              BatchStep.BACKUP_DB,
+              BatchStep.BACKUP_CONFIG,
+              BatchStep.CLEAN_TRANSFER,
+              BatchStep.CLEAN_EXPIRY))
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> repository.beginBackupUnavailable(RUN, step, NOW, false));
+      assertThrows(
+          NullPointerException.class,
+          () -> repository.beginBackupUnavailable(RUN, null, NOW, false));
+      assertThrows(NullPointerException.class, () -> repository.verifyBackupUnavailable(null));
+      var transfer = repository.begin(RUN, BatchStep.CLEAN_TRANSFER, END.plusSeconds(2), false);
+      assertFalse(transfer.skipped());
+      assertThrows(
+          IllegalArgumentException.class, () -> repository.verifyBackupUnavailable(transfer));
+      c.rollback();
+    }
+  }
+
+  @Test
   void normalBackupResumeSkipsButManualRegeneratesAndReadbackIsIndependent() throws Exception {
     try (var c = locked()) {
       var repository = new BatchRunRepository(c);

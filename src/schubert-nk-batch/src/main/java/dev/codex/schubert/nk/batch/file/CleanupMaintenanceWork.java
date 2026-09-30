@@ -112,6 +112,43 @@ final class CleanupMaintenanceWork {
       var summary = service.execute(borrowed, history, CleanupKind.LOG_PROGRESS);
       finish(borrowed, history, cleanupResult(summary.after(), false));
     }
+    warnings += transferStep(borrowed) ? 1 : 0;
+    guard.check();
+    return warnings == 0 ? 0 : 10;
+  }
+
+  /** SSC124: committed actual six SKIPs, zero destructive operations/Inspector, real Transfer. */
+  int executeFailed(Connection borrowed) throws IOException {
+    Objects.requireNonNull(borrowed, "admitted failed-profile connection");
+    for (var step : CleanupTerminalRepository.STEPS.subList(0, 6)) {
+      try {
+        guard.check();
+        require(borrowed.getAutoCommit());
+        borrowed.setAutoCommit(false);
+        mutation.bind(borrowed);
+        var repository = new BatchRunRepository(borrowed);
+        var attempt = repository.beginBackupUnavailable(run(), step, now(), true);
+        guard.check();
+        borrowed.commit();
+        guard.check();
+        borrowed.setAutoCommit(true);
+        borrowed.setAutoCommit(false);
+        mutation.bind(borrowed);
+        repository.verifyBackupUnavailable(attempt);
+        guard.check();
+        borrowed.rollback();
+        borrowed.setAutoCommit(true);
+        guard.check();
+      } catch (SQLException known) {
+        throw unavailable();
+      }
+    }
+    boolean warning = transferStep(borrowed);
+    guard.check();
+    return warning ? 10 : 0;
+  }
+
+  private boolean transferStep(Connection borrowed) throws IOException {
     var files = begin(borrowed, BatchStep.CLEAN_TRANSFER);
     if (!files.skipped()) {
       guard.check();
@@ -121,10 +158,10 @@ final class CleanupMaintenanceWork {
               || result.status() == BatchStepResult.Status.WARNING);
       guard.check();
       finish(borrowed, files, result);
-      warnings += result.status() == BatchStepResult.Status.WARNING ? 1 : 0;
+      return result.status() == BatchStepResult.Status.WARNING;
     }
     guard.check();
-    return warnings == 0 ? 0 : 10;
+    return false;
   }
 
   private boolean ordinary(Connection c, CleanupKind kind) throws IOException {

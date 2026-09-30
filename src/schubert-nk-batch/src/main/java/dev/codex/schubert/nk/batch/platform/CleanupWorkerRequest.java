@@ -19,8 +19,8 @@ import org.jspecify.annotations.NullMarked;
  * OPS-009/BAK-001; UI251; SS341§2/3/7,342§4,343§6; SSC104; PT-OPS-CREQ001..007.
  */
 @NullMarked
-public record CleanupWorkerRequest(
-    UUID run, UUID activation, Instant cutoff, String manifestSha256) {
+public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, String manifestSha256)
+    implements CleanupProfile {
   public static final int MAXIMUM_BYTES = 256;
   private static final UUID NIL = new UUID(0, 0);
 

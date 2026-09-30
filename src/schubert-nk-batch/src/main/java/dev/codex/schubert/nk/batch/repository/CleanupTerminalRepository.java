@@ -92,9 +92,8 @@ public final class CleanupTerminalRepository {
           throw new IllegalArgumentException("Cleanup rejection time invalid");
       }
       if (attempt.skipped()
-          != result
-              .map(value -> value.reason() == BatchStepResult.Reason.ALREADY_SUCCESSFUL)
-              .orElse(false)) throw new IllegalArgumentException("Cleanup rejection skip invalid");
+          != result.map(value -> value.status() == BatchStepResult.Status.SKIPPED).orElse(false))
+        throw new IllegalArgumentException("Cleanup rejection skip invalid");
     }
   }
 
@@ -130,6 +129,15 @@ public final class CleanupTerminalRepository {
   }
 
   public Snapshot read(BatchRun run, Instant observedAt) {
+    return read(run, observedAt, false);
+  }
+
+  /** Only failed-profile callers may accept the six actual BACKUP_UNAVAILABLE rows. */
+  public Snapshot readBackupUnavailable(BatchRun run, Instant observedAt) {
+    return read(run, observedAt, true);
+  }
+
+  private Snapshot read(BatchRun run, Instant observedAt, boolean failedBackup) {
     Objects.requireNonNull(run, "same original run");
     Objects.requireNonNull(observedAt, "actual UTC readback time");
     BatchStepAttempt.time(run, observedAt);
@@ -169,6 +177,17 @@ public final class CleanupTerminalRepository {
                     present(row.getObject("byte_count", Long.class)),
                     reason);
             require(Objects.equals(result.reason().summary(), row.getString("error_summary")));
+            boolean deletion = step != BatchStep.CLEAN_TRANSFER;
+            if (failedBackup && deletion) {
+              require(
+                  status == BatchStepResult.Status.SKIPPED
+                      && reason == BatchStepResult.Reason.BACKUP_UNAVAILABLE
+                      && started.equals(ended)
+                      && result.target() == 0
+                      && result.success() == 0
+                      && result.failure() == 0
+                      && result.bytes() == 0);
+            } else require(reason != BatchStepResult.Reason.BACKUP_UNAVAILABLE);
             var attempt =
                 new BatchStepAttempt(
                     present(row.getObject("id", Long.class)),
@@ -176,7 +195,7 @@ public final class CleanupTerminalRepository {
                     step,
                     present(row.getObject("attempt", Integer.class)),
                     started,
-                    reason == BatchStepResult.Reason.ALREADY_SUCCESSFUL);
+                    status == BatchStepResult.Status.SKIPPED);
             var entry = new Entry(attempt, ended, result);
             require(values.put(step, entry) == null);
           }
@@ -265,7 +284,7 @@ public final class CleanupTerminalRepository {
                     present(row.getObject("attempt", Integer.class)),
                     started,
                     result
-                        .map(value -> value.reason() == BatchStepResult.Reason.ALREADY_SUCCESSFUL)
+                        .map(value -> value.status() == BatchStepResult.Status.SKIPPED)
                         .orElse(false));
             require(values.put(step, new RejectedEntry(attempt, ended, result)) == null);
           }

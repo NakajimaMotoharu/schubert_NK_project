@@ -13,6 +13,51 @@ import org.junit.jupiter.api.io.TempDir;
 /** RBCR001..012. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
 final class RootBatchCredentialReaderTest {
   @Test
+  void cfreq005PrivateCopyChoosesClosedProfileAndRedactsMalformedFrame() throws Exception {
+    String failed =
+        """
+        NKCLEANFAIL1
+        run=11111111-2222-4333-8444-555555555555
+        activation=21111111-2222-4333-8444-555555555555
+        cutoff=2026-09-27T15:00:00Z
+        boot=31111111-2222-4333-8444-555555555555
+        epoch=41111111-2222-4333-8444-555555555555
+        backup_invocation=51111111-2222-4333-8444-555555555555
+        backup_started_monotonic=1000000000
+        backup_ended_monotonic=2000000000
+        backup_exit=30
+        database=7,4,2026-09-28,2026-09-30T01:02:03Z,2026-09-30T01:02:05Z,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed
+        configuration=8,4,2026-09-28,2026-09-30T01:02:03Z,2026-09-30T01:02:05Z,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed
+        """;
+    try (var f = fixture()) {
+      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      assertInstanceOf(
+          dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest.class,
+          reader(f).readCleanupProfile());
+      Files.writeString(f.parent.resolve("cleanup-request"), failed);
+      var result =
+          assertInstanceOf(
+              dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest.class,
+              reader(f).readCleanupProfile());
+      assertEquals(7, result.failure().database().id());
+      assertEquals(8, result.failure().configuration().id());
+      assertEquals(30, result.backupExit());
+      assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
+      for (String invalid :
+          List.of("", "x".repeat(1025), failed.replace("NKCLEANFAIL1", "NKCLEANFAIL2"))) {
+        Files.writeString(f.parent.resolve("cleanup-request"), invalid);
+        var exception = assertThrows(IOException.class, () -> reader(f).readCleanupProfile());
+        assertFalse(exception.toString().contains("NKCLEANFAIL"));
+      }
+      f.released();
+    }
+    try (var f = fixture()) {
+      assertThrows(IOException.class, () -> reader(f).readCleanupProfile());
+      f.released();
+    }
+  }
+
+  @Test
   void rbcr013FixedOwnerCopyIndependentLiteralAndBoundedFailure() throws Exception {
     String literal =
         "NKMAINTOWNER1\nboot=31100027-3333-4333-8444-555555555555\n"

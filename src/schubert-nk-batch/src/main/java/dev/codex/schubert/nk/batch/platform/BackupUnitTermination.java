@@ -64,6 +64,22 @@ public final class BackupUnitTermination {
         target);
   }
 
+  /** SSC124: Cleanup may READ fixed BACKUP completion, never start/stop it or acquire M/A. */
+  public static BackupUnitTermination forCleanupFailedBackup(
+      RootStartupContext context, RootStartupContext.Snapshot expected) throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(expected);
+    require(expected.service() == RootStartupContext.Service.CLEANUP);
+    context.recheck(expected);
+    return new BackupUnitTermination(
+        () -> context.recheck(expected),
+        NativeObservations.forTarget(BackupUnitStartClient.Target.BACKUP),
+        LinuxHostDirectoryCalls.create(),
+        LinuxInodeSecurity.create(),
+        new NioIo(),
+        BackupUnitStartClient.Target.BACKUP);
+  }
+
   BackupUnitTermination(
       Context context,
       Observations observations,

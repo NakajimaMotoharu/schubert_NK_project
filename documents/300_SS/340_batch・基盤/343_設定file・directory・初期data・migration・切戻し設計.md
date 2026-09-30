@@ -491,6 +491,8 @@ Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一�
 
 ### 6.17 許可根拠canonical観測（SSC108、PG379、実装前）
 
+SSC124/SSC117：Root0700 cleanup-request namespace・同LoadCredential名を成功NKCLEAN1と失敗NKCLEANFAIL1の排他profileへ拡張する。NKCLEANFAIL1は最大1024byte/ASCII/LF/末尾LF、固定順 `run,activation,cutoff,boot,epoch,backup_invocation,backup_started_monotonic,backup_ended_monotonic,backup_exit,database,configuration`。UUID36桁小文字/UTCµs/非先頭0整数、normalexit1～255、monotonic1～U64MAX/開始≦終了。末2値は `id,attempt,business_date,started,ended,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed` の固定12要素。id1～999999999999/attempt1～99/JST business_date、両ID異・同run/開始/終了、cutoff≦開始≦終了。余剰/欠落/未知/非canonicalは拒否、全owned byteを消去する。Field claimsはdataであり許可能力ではない。親は同cycle完了済fresh typed receiptと実DB pairからだけ新規private sourceへ発行、子は同Root親/原本/INVALID/共通deadlineと、固定BACKUPの実全cgroup終端/manager前後一致・同Invocation/正常非0/時刻、最新DB全列一致を毎mutation前後に確認する。CleanupのBACKUP読取factoryはRoot CLEANUPだけ・固定targetで、start/stop/任意Unit能力を与えない。DB秘密/成功archiveは失敗profileへ入れない。UNKNOWNにはsix SKIPも許可せず既定保全。詳細PT291/292、上位外部仕様不変更。
+
 SSC123/BUG368：Cleanupの正規退役済み既知正常30（failed/failed、Remainyes、Code1/status30/exit-code、Invocation存在、start>0/end>=start、PID/Job0）を、独立host全cgroup空とbus/kernel/bus一致を確認して次明示resumeの旧baselineへ保持できる。reset-failedや旧receipt再使用はしない。新Invocationの真正終端を別に要求する。Inspector/Expiry/UNKNOWNへの拡大なし。起動前拒否でrequest/ownerだけが残る場合、M/A・INVALID原本・全終端・元親dead・start.intent不存在・旧CleanupInvocation不変の全証明とprivate原byte保存後に既存typed retireを行う。delivery不明/intent有りには適用しない。
 
 SSC122・BUG367：Root親kernel statusのprimary UID/GIDは4値とも0を要求する。Groupsは存在するsupplementary集合をそのまま観測し、空行は空listとして受理、missingは拒否、primary GID0を勝手に補完しない。Root systemd Unitのsupplementary空は異常ではない。ordinary Inspector/API/Web自己/wrapperのNSS全group一致・nonempty契約は従来どおり。親boot/PID/start/cgroup/NoNewPrivs・前後一致・絶対期限条件は不変更。

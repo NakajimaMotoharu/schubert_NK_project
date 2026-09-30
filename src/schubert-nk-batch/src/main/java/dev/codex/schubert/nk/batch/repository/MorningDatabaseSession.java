@@ -112,6 +112,24 @@ public final class MorningDatabaseSession {
 
     <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException;
 
+    default BackupFailureSnapshot failedBackupSnapshot(
+        BackupBegins expected, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(expected);
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
+
+    default CleanupTerminalRepository.Snapshot observeCleanupBackupUnavailable(
+        BatchRun run,
+        int receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(run);
+      Objects.requireNonNull(owner);
+      throw unavailable();
+    }
+
     default CleanupTerminalRepository.Snapshot observeCleanup(
         BatchRun run,
         int receipt,
@@ -361,6 +379,7 @@ public final class MorningDatabaseSession {
     private volatile boolean inHandoff;
     private @Nullable BackupBegins backupBegins;
     private volatile boolean backupFinished;
+    private @Nullable Instant backupFailureEnded;
     private @Nullable BackupManifest reusedManifest;
 
     private Session(Connection connection) {
@@ -693,6 +712,15 @@ public final class MorningDatabaseSession {
         connection.setAutoCommit(true);
         completionGuard(expected);
         backupFinished = true;
+        if (database.equals(
+                new BatchStepResult(
+                    BatchStepResult.Status.FAILED,
+                    1,
+                    0,
+                    1,
+                    0,
+                    BatchStepResult.Reason.COMMAND_FAILURE))
+            && configuration.equals(database)) backupFailureEnded = endedAt;
       } catch (SQLException failure) {
         throw unavailable();
       }
@@ -701,6 +729,48 @@ public final class MorningDatabaseSession {
     /**
      * One synchronous lock transfer; caller still owns M/A, child terminal proof and backup files.
      */
+    @Override
+    public BackupFailureSnapshot failedBackupSnapshot(
+        BackupBegins expected, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(expected);
+      Objects.requireNonNull(owner);
+      Instant ended = backupFailureEnded;
+      if (!backupFinished || ended == null || handoffStarted) throw unavailable();
+      var snapshot =
+          new BackupFailureSnapshot(expected.database(), expected.configuration(), ended);
+      try {
+        failedObservationGuard(expected);
+        owner.check();
+        if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        snapshot.verifyLatest(connection, owner);
+        guard();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        failedObservationGuard(expected);
+        owner.check();
+        return snapshot;
+      } catch (SQLException | BatchRepositoryException known) {
+        throw unavailable();
+      }
+    }
+
+    private void failedObservationGuard(BackupBegins expected) throws IOException, SQLException {
+      guard();
+      if (!backupCommitted
+          || !backupFinished
+          || backupFailureEnded == null
+          || handoffStarted
+          || !expected.equals(backupBegins)
+          || !connection.getAutoCommit()
+          || connection.isReadOnly()
+          || connection.getTransactionIsolation() != Connection.TRANSACTION_READ_COMMITTED
+          || !scalar(connection, HELD)) throw unavailable();
+      guard();
+    }
+
     public <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException {
       Objects.requireNonNull(operation, "cleanup child operation");
       guard();
@@ -774,23 +844,48 @@ public final class MorningDatabaseSession {
         int receipt,
         dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
         throws IOException {
+      return observeCleanup(run, receipt, owner, false);
+    }
+
+    @Override
+    public CleanupTerminalRepository.Snapshot observeCleanupBackupUnavailable(
+        BatchRun run,
+        int receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      return observeCleanup(run, receipt, owner, true);
+    }
+
+    private CleanupTerminalRepository.Snapshot observeCleanup(
+        BatchRun run,
+        int receipt,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+        boolean failedBackup)
+        throws IOException {
       Objects.requireNonNull(run, "original Cleanup run");
       Objects.requireNonNull(owner, "same parent deadline");
       guard();
-      if (!backupFinished || !handoffStarted || (receipt != 0 && receipt != 10))
-        throw unavailable();
+      if (!backupFinished
+          || !handoffStarted
+          || (receipt != 0 && receipt != 10)
+          || failedBackup != (backupFailureEnded != null)) throw unavailable();
       try {
         owner.check();
         if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
         connection.setAutoCommit(false);
         new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var terminal = new CleanupTerminalRepository(connection, owner);
+        var observedAt = Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS);
         var observed =
-            new CleanupTerminalRepository(connection, owner)
-                .read(run, Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS));
+            failedBackup
+                ? terminal.readBackupUnavailable(run, observedAt)
+                : terminal.read(run, observedAt);
         if (observed.exitCode() != receipt) throw unavailable();
         var repository = new BatchRunRepository(connection);
         for (var row : observed.entries()) {
-          if (row.attempt().skipped()) repository.verifyAlreadySuccessful(row.attempt());
+          if (row.result().reason() == BatchStepResult.Reason.BACKUP_UNAVAILABLE)
+            repository.verifyBackupUnavailable(row.attempt());
+          else if (row.attempt().skipped()) repository.verifyAlreadySuccessful(row.attempt());
           else repository.verifyFinished(row.attempt(), row.endedAt(), row.result());
         }
         guard();

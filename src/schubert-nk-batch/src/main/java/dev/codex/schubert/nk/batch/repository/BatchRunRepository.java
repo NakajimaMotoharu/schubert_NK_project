@@ -29,17 +29,37 @@ public final class BatchRunRepository {
 
   public BatchStepAttempt begin(
       BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned) {
-    return begin(run, step, now, recoverAbandoned, false);
+    return begin(run, step, now, recoverAbandoned, false, false);
   }
 
   /** SSC116: normal resume, not SSC054 manual Backup regeneration. */
   public BatchStepAttempt beginMorningResume(
       BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned) {
-    return begin(run, step, now, recoverAbandoned, true);
+    return begin(run, step, now, recoverAbandoned, true, false);
+  }
+
+  /** SSC124: actual SKIP insertion for six fixed deletions; caller authenticates failed Backup. */
+  public BatchStepAttempt beginBackupUnavailable(
+      BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned) {
+    Objects.requireNonNull(step, "fixed deletion step");
+    if (!Set.of(
+            BatchStep.CLEAN_NOTIFICATION,
+            BatchStep.CLEAN_QUESTION,
+            BatchStep.CLEAN_SESSION,
+            BatchStep.CLEAN_INBOX_OUTBOX,
+            BatchStep.CLEAN_LOG,
+            BatchStep.CLEAN_BATCH_RUN)
+        .contains(step)) throw new IllegalArgumentException("backup-dependent deletion required");
+    return begin(run, step, now, recoverAbandoned, false, true);
   }
 
   private BatchStepAttempt begin(
-      BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned, boolean morningResume) {
+      BatchRun run,
+      BatchStep step,
+      Instant now,
+      boolean recoverAbandoned,
+      boolean morningResume,
+      boolean backupUnavailable) {
     Objects.requireNonNull(run, "fixed run");
     Objects.requireNonNull(step, "step");
     Objects.requireNonNull(now, "step time");
@@ -60,12 +80,25 @@ public final class BatchRunRepository {
       // Backup's multi-SUCCESS manual history is retained. Normal resume may only reuse
       // the exact original run; the caller independently verifies the complete bundle pair.
       boolean skipped =
-          (!step.backup() && successes != 0)
+          backupUnavailable
+              || (!step.backup() && successes != 0)
               || (morningResume
                   && step.backup()
                   && history.stream()
                       .anyMatch(h -> h.status().equals("SUCCESS") && h.runId().equals(run.id())));
-      BatchStepAttempt result = insert(run, step, day, maximum + 1, now, skipped);
+      BatchStepAttempt result =
+          insert(
+              run,
+              step,
+              day,
+              maximum + 1,
+              now,
+              skipped,
+              backupUnavailable
+                  ? BatchStepResult.Reason.BACKUP_UNAVAILABLE
+                  : skipped
+                      ? BatchStepResult.Reason.ALREADY_SUCCESSFUL
+                      : BatchStepResult.Reason.NONE);
       guarded(run);
       return result;
     } catch (SQLException failure) {
@@ -152,6 +185,29 @@ public final class BatchRunRepository {
                   BatchStepResult.Reason.ALREADY_SUCCESSFUL)));
       guarded(attempt.run());
     } catch (SQLException failure) {
+      throw new BatchRepositoryException();
+    }
+  }
+
+  /** Current saved SKIP only; no previous SUCCESS or simulated producer is substituted. */
+  public void verifyBackupUnavailable(BatchStepAttempt attempt) {
+    Objects.requireNonNull(attempt, "actual skipped deletion");
+    if (!attempt.skipped()) throw new IllegalArgumentException("current skip required");
+    try {
+      guarded(attempt.run());
+      require(
+          replayed(
+              attempt,
+              attempt.startedAt(),
+              new BatchStepResult(
+                  BatchStepResult.Status.SKIPPED,
+                  0,
+                  0,
+                  0,
+                  0,
+                  BatchStepResult.Reason.BACKUP_UNAVAILABLE)));
+      guarded(attempt.run());
+    } catch (SQLException invalid) {
       throw new BatchRepositoryException();
     }
   }
@@ -263,7 +319,13 @@ public final class BatchRunRepository {
   }
 
   private BatchStepAttempt insert(
-      BatchRun run, BatchStep step, LocalDate day, int attempt, Instant now, boolean skipped)
+      BatchRun run,
+      BatchStep step,
+      LocalDate day,
+      int attempt,
+      Instant now,
+      boolean skipped,
+      BatchStepResult.Reason reason)
       throws SQLException {
     BatchStepAttempt result;
     var statement =
@@ -282,8 +344,6 @@ public final class BatchRunRepository {
       query.setObject(5, now.atOffset(ZoneOffset.UTC));
       query.setObject(6, skipped ? now.atOffset(ZoneOffset.UTC) : null);
       query.setString(7, skipped ? "SKIPPED" : "RUNNING");
-      var reason =
-          skipped ? BatchStepResult.Reason.ALREADY_SUCCESSFUL : BatchStepResult.Reason.NONE;
       query.setString(8, reason.code());
       query.setString(9, reason.summary());
       var rows = query.executeQuery();

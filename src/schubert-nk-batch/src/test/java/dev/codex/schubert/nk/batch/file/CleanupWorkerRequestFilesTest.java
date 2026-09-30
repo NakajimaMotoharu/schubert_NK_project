@@ -26,6 +26,54 @@ final class CleanupWorkerRequestFilesTest {
           + "cleanup_invocation=-\ncleanup_pid=-\ncleanup_start_ticks=-\ndeadline_nanos=1800000000001\n";
 
   @Test
+  void failedProfileUsesSameNewOnlyNameAndCannotPassSuccessOrExpiryEntry() throws Exception {
+    String literal =
+        """
+        NKCLEANFAIL1
+        run=11111111-2222-4333-8444-555555555555
+        activation=21111111-2222-4333-8444-555555555555
+        cutoff=2026-09-27T15:00:00Z
+        boot=31111111-2222-4333-8444-555555555555
+        epoch=41111111-2222-4333-8444-555555555555
+        backup_invocation=51111111-2222-4333-8444-555555555555
+        backup_started_monotonic=1000000000
+        backup_ended_monotonic=2000000000
+        backup_exit=30
+        database=7,4,2026-09-28,2026-09-30T01:02:03Z,2026-09-30T01:02:05Z,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed
+        configuration=8,4,2026-09-28,2026-09-30T01:02:03Z,2026-09-30T01:02:05Z,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed
+        """;
+    var request =
+        dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest.consume(
+            literal.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+    try (var f = emptyExpiryFixture()) {
+      var subject = CleanupWorkerRequestFiles.forFailure(f.root, f, f);
+      assertNotNull(CleanupWorkerRequestFiles.forFailure(f.root, f));
+      subject.requireClear();
+      subject.prepareFailure(request, PART);
+      assertEquals(literal, Files.readString(f.parent.resolve("cleanup-request")));
+      assertEquals(request, subject.readFailure());
+      assertThrows(IOException.class, subject::read);
+      assertThrows(IOException.class, subject::readExpiry);
+      assertThrows(IOException.class, () -> subject.prepare(REQUEST, PART));
+      assertThrows(IOException.class, () -> subject.retire(REQUEST));
+      assertThrows(IOException.class, () -> subject.prepareFailure(request, PART));
+      assertEquals(literal, Files.readString(f.parent.resolve("cleanup-request")));
+      subject.retireFailure(request);
+      assertThrows(IOException.class, subject::requireClear);
+      assertTrue(Files.exists(f.parent.resolve(PART + ".part")));
+      // Fixture-only teardown: a refused duplicate's part must never be repaired by Production.
+      Files.delete(f.parent.resolve(PART + ".part"));
+      subject.requireClear();
+      assertThrows(IOException.class, () -> files(f).prepareFailure(request, PART));
+      assertThrows(IOException.class, files(f)::readFailure);
+      assertThrows(IOException.class, () -> files(f).retireFailure(request));
+      assertThrows(NullPointerException.class, () -> subject.prepareFailure(null, PART));
+      assertThrows(NullPointerException.class, () -> subject.retireFailure(null));
+      f.released();
+    }
+  }
+
+  @Test
   void ownedCycleNamespaceAcceptsOnlyThreeNamesAndNeverRepairsResidue() throws Exception {
     try (var f = emptyExpiryFixture()) {
       var subject = files(f);

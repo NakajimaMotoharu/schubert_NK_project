@@ -15,6 +15,7 @@ import java.util.*;
 public final class Pg387TrustedDeployment {
   static Path RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG387");
   static String LABEL="PG387", STEM="pg387", SOURCE="7ba352d6f";
+  static UUID ORIGINAL_RUN=UUID.fromString("31100027-2222-4333-8444-555555555555");
   static final Path PRESERVE=Path.of("/var/lib/pgpt-s1-preservation");
   public static void main(String[] args) throws Exception {
     Thread.currentThread().setUncaughtExceptionHandler((t,e) -> {
@@ -24,12 +25,16 @@ public final class Pg387TrustedDeployment {
           System.err.println(LABEL+" FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
       }
     });
-    if((args.length!=1 && args.length!=3) || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
-    if(args.length==3) {
+    if((args.length!=1 && args.length!=3 && args.length!=4) || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
+    if(args.length>=3) {
       if(!args[1].matches("0\\.1\\.0-PG[0-9]{3}") || !args[2].matches("[0-9a-f]{40}"))
         throw new IllegalArgumentException("isolated candidate/source");
       LABEL=args[1].substring(6); STEM=LABEL.toLowerCase(Locale.ROOT); SOURCE=args[2];
       RELEASE=Path.of("/opt/schubert-nk/releases",args[1]);
+      if(args.length==4) {
+        ORIGINAL_RUN=UUID.fromString(args[3]);
+        if(!ORIGINAL_RUN.toString().equals(args[3]) || ORIGINAL_RUN.equals(new UUID(0,0)))throw new IllegalArgumentException("explicit preserved original");
+      }
     }
     if(!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new IllegalStateException("isolated VM only");
     var result=MaintenanceFileLock.create().tryExclusive(() -> {
@@ -125,7 +130,7 @@ public final class Pg387TrustedDeployment {
       UUID boot=UUID.fromString(Files.readString(Path.of("/proc/sys/kernel/random/boot_id")).trim());
       if(old.state()!=StartupPermitRecords.State.INVALID || old.permitDigest().isPresent()
           || !old.boot().equals(boot)
-          || !old.activation().run().id().equals(UUID.fromString("31100027-2222-4333-8444-555555555555")))
+          || !old.activation().run().id().equals(ORIGINAL_RUN))
         throw new IllegalStateException("preserved INVALID only");
       var original=MaintenanceRunFiles.create().execute(session -> session.observe(old.activation()));
       if(!original.equals(old.activation()))throw new IllegalStateException("original mismatch");

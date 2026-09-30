@@ -70,6 +70,75 @@ final class CleanupMaintenanceWorkTest {
   }
 
   @Test
+  void failedBackupPreservesEveryDeletionTableAndExecutesTransferWithActualSixSkips()
+      throws Exception {
+    var transfers = new AtomicInteger();
+    var job =
+        work(
+            (c, completed) -> fail("failed Backup must never launch Inspector"),
+            () -> {
+              transfers.incrementAndGet();
+              return transferResult();
+            });
+    try (var c = locked(db, true);
+        var admin = db.admin()) {
+      var before = new LinkedHashMap<String, String>();
+      for (String table :
+          List.of(
+              "notifications",
+              "questions",
+              "answers",
+              "auth_sessions",
+              "request_inbox",
+              "mq_outbox",
+              "app_logs",
+              "inbox_inspection_progress",
+              "log_cleanup_progress"))
+        before.put(table, query(admin, "select count(*) from schubert." + table));
+      assertEquals(0, job.executeFailed(c));
+      assertEquals(1, transfers.get());
+      for (var entry : before.entrySet())
+        assertEquals(
+            entry.getValue(),
+            query(admin, "select count(*) from schubert." + entry.getKey()),
+            entry.getKey());
+      assertEquals(
+          "6",
+          query(
+              admin,
+              "select count(*) from schubert.batch_runs where id between 90021 and 90026 and status='SKIPPED' and started_at=ended_at and target_count=0 and success_count=0 and failure_count=0 and byte_count=0 and error_code='BACKUP_UNAVAILABLE' and error_summary='verified backup unavailable'"));
+      assertEquals(
+          "SUCCESS|2|2|0|5",
+          query(
+              admin,
+              "select status||'|'||target_count||'|'||success_count||'|'||failure_count||'|'||byte_count from schubert.batch_runs where id=90027"));
+      c.setAutoCommit(false);
+      var terminal = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      var observedAt = java.time.Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS);
+      var observed = terminal.readBackupUnavailable(RUN, observedAt);
+      assertEquals(7, observed.entries().size());
+      assertEquals(0, observed.exitCode());
+      assertThrows(BatchRepositoryException.class, () -> terminal.read(RUN, observedAt));
+      assertEquals(
+          7,
+          terminal.readRejected(RUN, observedAt).entries().stream()
+              .filter(Optional::isPresent)
+              .count());
+      c.rollback();
+      c.setAutoCommit(true);
+      assertEquals(0, job.executeFailed(c));
+      assertEquals(
+          1,
+          transfers.get()); // Previously successful Transfer is genuine current ALREADY_SUCCESSFUL.
+      assertEquals(
+          "6",
+          query(
+              admin,
+              "select count(*) from schubert.batch_runs where id between 90028 and 90033 and error_code='BACKUP_UNAVAILABLE' and status='SKIPPED'"));
+    }
+  }
+
+  @Test
   void actualSqlOrderAllSevenTerminalsThenCurrentSkipIsNotOldSuccess() throws Exception {
     var events = new ArrayList<String>();
     var job =

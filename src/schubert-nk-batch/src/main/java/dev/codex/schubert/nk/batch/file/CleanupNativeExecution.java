@@ -59,11 +59,50 @@ final class CleanupNativeExecution {
                 return parents.remainingNanos();
               };
           environment.check(); // Before batch password/backup/DB, never just a parsed claim.
-          var request = reader.readCleanupRequest();
+          var profile = reader.readCleanupProfile();
           require(
-              request.run().equals(owner.run())
-                  && request.activation().equals(owner.activation())
-                  && request.cutoff().equals(owner.cutoff()));
+              profile.run().equals(owner.run())
+                  && profile.activation().equals(owner.activation())
+                  && profile.cutoff().equals(owner.cutoff()));
+          if (profile instanceof CleanupFailedBackupRequest failed) {
+            require(failed.boot().equals(owner.boot()) && failed.epoch().equals(owner.epoch()));
+            var termination = BackupUnitTermination.forCleanupFailedBackup(context, expected);
+            MaintenanceOwnerFrame.Guard failedGuard =
+                () -> {
+                  environment.check();
+                  require(
+                      failed.receiptMatches(
+                          termination
+                              .quiescent()
+                              .orElseThrow(
+                                  () -> new IOException("Backup failed receipt unavailable"))));
+                  require(
+                      reader.readCleanupProfile().equals(failed)
+                          && reader.readMaintenanceOwner().equals(owner));
+                  return environment.remainingNanos();
+                };
+            failedGuard.check();
+            var database =
+                new CleanupDatabaseSession(
+                    "jdbc:postgresql://127.0.0.1:5432/schubert_nk", context, expected, release);
+            return database.execute(
+                reader.read(),
+                connection -> {
+                  MaintenanceOwnerFrame.Guard mutation =
+                      () -> {
+                        failedGuard.check();
+                        verifyFailedPair(connection, failed.failure(), failedGuard);
+                        return failedGuard.remainingNanos();
+                      };
+                  mutation.check();
+                  int result =
+                      new CleanupMaintenanceWork(context, expected, owner, mutation)
+                          .executeFailed(connection);
+                  mutation.check();
+                  return result;
+                });
+          }
+          var request = (CleanupWorkerRequest) profile;
           var identity = new FixedServiceIdentity().resolveBackup();
           var backup = OwnedTransferDirectory.open(LinuxHostDirectoryCalls.create(), backupPath);
           return ResourceScope.use(
@@ -105,6 +144,27 @@ final class CleanupNativeExecution {
                     });
               });
         });
+  }
+
+  /** Borrowed active transactions are never configured/committed; standalone reads roll back. */
+  private static void verifyFailedPair(
+      java.sql.Connection connection,
+      BackupFailureSnapshot failure,
+      MaintenanceOwnerFrame.Guard base)
+      throws IOException {
+    try {
+      boolean own = connection.getAutoCommit();
+      if (own) connection.setAutoCommit(false);
+      new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(base).bind(connection);
+      failure.verifyLatest(connection, base);
+      if (own) {
+        connection.rollback();
+        connection.setAutoCommit(true);
+      }
+      base.check();
+    } catch (java.sql.SQLException | BatchRepositoryException known) {
+      throw new IOException("failed Backup DB observation unavailable");
+    }
   }
 
   /** Root's read-only host capability cannot publish, repair, retire or bypass private writes. */

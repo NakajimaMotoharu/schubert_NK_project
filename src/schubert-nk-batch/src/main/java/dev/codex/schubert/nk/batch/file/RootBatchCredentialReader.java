@@ -57,6 +57,19 @@ public final class RootBatchCredentialReader {
     }
   }
 
+  /** SSC124: closed success/FAILED data profile, never accepts an arbitrary kind/path. */
+  public dev.codex.schubert.nk.batch.platform.CleanupProfile readCleanupProfile()
+      throws IOException {
+    try {
+      return dev.codex.schubert.nk.batch.platform.CleanupProfile.consume(
+          readBytes(
+              "cleanup-request",
+              dev.codex.schubert.nk.batch.platform.CleanupProfile.MAXIMUM_BYTES));
+    } catch (IOException | IllegalArgumentException invalid) {
+      throw new IOException("root cleanup profile unavailable");
+    }
+  }
+
   public CleanupWorkerRequest.Expiry readExpiryRequest() throws IOException {
     try {
       return CleanupWorkerRequest.Expiry.consume(

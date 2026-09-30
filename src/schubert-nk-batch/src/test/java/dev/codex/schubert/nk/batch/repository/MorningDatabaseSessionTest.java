@@ -187,10 +187,23 @@ final class MorningDatabaseSessionTest {
           assertThrows(IOException.class, () -> session.failBackup(wrong, ended, failed, failed));
           session.failBackup(begins, ended, failed, failed);
           assertThrows(IOException.class, () -> session.failBackup(begins, ended, failed, failed));
+          var observed = session.failedBackupSnapshot(begins, () -> 10_000_000_000L);
+          assertEquals(begins.database(), observed.database());
+          assertEquals(begins.configuration(), observed.configuration());
+          assertEquals(ended, observed.endedAt());
+          assertThrows(
+              IOException.class, () -> session.failedBackupSnapshot(wrong, () -> 10_000_000_000L));
+          assertThrows(
+              NullPointerException.class, () -> session.failedBackupSnapshot(null, () -> 1));
+          assertThrows(
+              NullPointerException.class, () -> session.failedBackupSnapshot(begins, null));
           return true;
         });
     assertThrows(
         IOException.class, () -> held.get().failBackup(attempts.get(), ended, failed, failed));
+    assertThrows(
+        IOException.class,
+        () -> held.get().failedBackupSnapshot(attempts.get(), () -> 10_000_000_000L));
     try (var observer = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
       assertTrue(advisory(observer));
       observer.setAutoCommit(false);

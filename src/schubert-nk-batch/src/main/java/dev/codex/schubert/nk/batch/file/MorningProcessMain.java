@@ -67,51 +67,47 @@ public final class MorningProcessMain {
                 var files = new BackupWorkerRequestFiles(requests, LinuxInodeSecurity.create());
                 EnvironmentInodePolicy.require(files.read().equals(request));
                 var terminal = BackupUnitTermination.create(root, snapshot);
+                var backupCycle = MorningBackupUnitCycle.create(root, snapshot, budget);
                 var backupOutcome =
-                    MorningBackupUnitCycle.create(root, snapshot, budget)
-                        .execute(
-                            () -> {
-                              budget.requireWithin();
-                              root.recheck(snapshot);
-                              original.verify();
-                              database.recheckConsistent(state.activation().run());
-                              var startup = openCurrent();
-                              ResourceScope.use(
-                                  startup::close,
-                                  () -> {
-                                    EnvironmentInodePolicy.require(
-                                        new StartupPermitFiles(startup, LinuxInodeSecurity.create())
-                                            .current()
-                                            .equals(epoch));
-                                    return Boolean.TRUE;
-                                  });
-                              EnvironmentInodePolicy.require(
-                                  files.read().equals(request) && terminal.quiescent().isPresent());
-                              budget.requireWithin();
-                              root.recheck(snapshot);
-                              original.verify();
-                              files.retire(request);
-                              budget.requireWithin();
-                              root.recheck(snapshot);
-                              original.verify();
-                            },
-                            outcome -> {
-                              budget.requireWithin();
-                              root.recheck(snapshot);
-                              original.verify();
-                              if (request.verification().isPresent()
-                                  && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
-                                throw new IOException("Prior backup verification unavailable");
-                              completeObservedBackup(
-                                  outcome,
-                                  begins,
-                                  database,
-                                  java.time.Clock.systemUTC(),
-                                  completion);
-                              budget.requireWithin();
-                              root.recheck(snapshot);
-                              original.verify();
-                            });
+                    backupCycle.execute(
+                        () -> {
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                          database.recheckConsistent(state.activation().run());
+                          var startup = openCurrent();
+                          ResourceScope.use(
+                              startup::close,
+                              () -> {
+                                EnvironmentInodePolicy.require(
+                                    new StartupPermitFiles(startup, LinuxInodeSecurity.create())
+                                        .current()
+                                        .equals(epoch));
+                                return Boolean.TRUE;
+                              });
+                          EnvironmentInodePolicy.require(
+                              files.read().equals(request) && terminal.quiescent().isPresent());
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                          files.retire(request);
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                        },
+                        outcome -> {
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                          if (request.verification().isPresent()
+                              && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
+                            throw new IOException("Prior backup verification unavailable");
+                          completeObservedBackup(
+                              outcome, begins, database, java.time.Clock.systemUTC(), completion);
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                        });
                 if (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
                   MorningCleanupExecution.execute(
                       root,
@@ -122,9 +118,18 @@ public final class MorningProcessMain {
                       epoch,
                       original,
                       completion.verifiedManifest());
+                } else if (backupOutcome == MorningBackupUnitCycle.Outcome.FAILED) {
+                  MorningCleanupExecution.executeFailed(
+                      root,
+                      snapshot,
+                      budget,
+                      state,
+                      database,
+                      epoch,
+                      original,
+                      begins,
+                      backupCycle.completedReceipt());
                 }
-                // Actual FAILED branch retains its durable Backup proof; failed-profile Cleanup
-                // wiring remains a separate mandatory task, never a fabricated successful bundle.
                 return backupOutcome;
               });
         };
