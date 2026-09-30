@@ -1,0 +1,42 @@
+{
+  "id": "PG395-native-initial-roots-and-broker-refusal",
+  "formal": false,
+  "sourceCommit": "6874da9e2dbc276ec3f56675c533e976397fbcbf",
+  "operatorPreservationCommit": "d26f94aef758c04467adf9553db026ce001eb5aa",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-10-01T04:47:00+09:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "trusted new-only initial NSS/root provisioning under existing PG394 signed BOM/M/A/eight-stop; PG395 signed frozen checkout assembly/deployment; external Morning same-run resume",
+  "exitCode": 0,
+  "applicationParentExit": 30,
+  "wholeStartupAccepted": false,
+  "releaseManifestSha256": "a9e5fb5513ce63c2ad3789f37bea1ba54cb9ce077faaf364bbb7dafdddf6baeb",
+  "fullRegression": {"tests": 2646, "failures": 0, "errors": 0, "skipped": 0, "staticModulesZero": 6},
+  "initialProvisioning": {
+    "newAccounts": ["schubert-data", "schubert-migration"],
+    "newRoots": [
+      {"id": "ASSET", "path": "/srv/schubert-nk/data/assets", "uid": 975, "gid": 982, "mode": "0750", "device": 64769, "inode": 754302},
+      {"id": "LOG", "path": "/var/log/schubert-nk", "uid": 0, "gid": 986, "mode": "0750", "device": 64769, "inode": 754303},
+      {"id": "STAGING", "path": "/srv/schubert-nk/staging", "uid": 974, "gid": 974, "mode": "0700", "device": 64769, "inode": 754304}
+    ],
+    "oldThreeRootsUnchanged": true,
+    "originalAndInvalidUnchanged": true,
+    "masterMigrationAccepted": false,
+    "toolSha256": "4f0906f22b96dd8e987468d7684f7072d0d6aba77f6f3d06c86af4d2a7fcae88",
+    "logSha256": "fa1071a087a6ee62448b6159e492cd6569d14c6bef3302f3db6498a19cff57e3"
+  },
+  "expected": {"oldRows": 44, "backupFreshSkip": 2, "cleanupFreshSkip": 7, "brokerFresh": true, "expiryFresh": true, "sameOwnerRootsCollected": true},
+  "actual": {"oldRowsUnchanged": true, "rows": 53, "backupFreshSkip": 2, "backupAttempt": 12, "cleanupFreshSkip": 7, "cleanupAttempt": 4, "allFourteenColumnsReadBack": true, "brokerFresh": false, "expiryFresh": false, "sameOwnerRootsCollected": false, "knownRefusal": "prior Broker normal SIGTERM143 failed baseline", "allParentChildProcessesTerminal": true, "requestOwnerIntentEntries": 0, "startupInvalid": true, "permitsIssued": 0, "originalUnfinishedPreserved": true},
+  "nativeRolesFresh": ["parent", "backup", "cleanup"],
+  "oldExpiryAndInspectorExecExcluded": true,
+  "coverage": {"classByteMismatch": 0, "sourceFrozenCheckout": "work/pg395-frozen-ABPzPn/source", "missedBranch": 675, "missedLine": 1452, "missedMethod": 237, "missedClass": 12, "resolvedFromOwnHostBranch": 76, "resolvedFromOwnHostLine": 691, "resolvedFromOwnHostMethod": 147, "resolvedFromOwnHostClass": 15},
+  "bugs": ["BUG-373", "BUG-374", "BUG-375"],
+  "ssc": ["SSC-126", "SSC-127"],
+  "ykt": ["YKT-292", "YKT-293", "YKT-294", "YKT-295"],
+  "logs": [
+    {"path": "work/pgpt-runs/PG379/pg395-native-db-before-full.log", "sha256": "35f1abf62bb118e22b85981e8c29be53c55083e2f70e794fd9ce35e0206c1c9a"},
+    {"path": "work/pgpt-runs/PG379/pg395-native-db-final-full.log", "sha256": "33b697cabd5999867778c29e311112d423acfc68d0875a47253d16d2c7a09945"}
+  ],
+  "limitations": ["issuer/five gates/root API Web/CHR not accepted", "new root native same-owner collector not reached", "real failed Cleanup/hard-timeout/native negative closure pending", "coverage100 and formal PT-WEB-20260925-24 unchanged"],
+  "redaction": "No credential/password/token/session/cookie/key/master/dump/raw NSS/raw journal/raw Unit identity/native exec in Git"
+}

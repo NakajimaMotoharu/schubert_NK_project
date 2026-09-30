@@ -166,7 +166,7 @@ public final class Pg387TrustedDeployment {
         "schubert-nk-cleanup.service","schubert-nk-inbox-inspector.service",
         "schubert-nk-expiry-cleanup.service","schubert-nk-api.service",
         "schubert-nk-web.service","artemis.service");
-    var allowed=Set.of("schubert-nk-morning-controller.service","schubert-nk-expiry-cleanup.service");
+    var allowed=Set.of("schubert-nk-morning-controller.service","schubert-nk-expiry-cleanup.service", "artemis.service");
     var changes=new LinkedHashMap<String,byte[]>();
     for(var name:names) {
       Path actual=installed.resolve(name);
@@ -180,7 +180,9 @@ public final class Pg387TrustedDeployment {
         if(!allowed.contains(name))throw new IllegalStateException("unapproved Unit delta");
         String addition=name.equals("schubert-nk-morning-controller.service")
             ? "LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops\n"
-            : "LoadCredential=maintenance-owner:/run/schubert-nk/expiry-request/maintenance-owner\n";
+            : name.equals("schubert-nk-expiry-cleanup.service")
+                ? "LoadCredential=maintenance-owner:/run/schubert-nk/expiry-request/maintenance-owner\n"
+                : "SuccessExitStatus=143\n";
         String text=new String(candidate,StandardCharsets.UTF_8);
         if(!text.contains(addition) || !Arrays.equals(text.replace(addition,"").getBytes(StandardCharsets.UTF_8),previous))
           throw new IllegalStateException("closed credential-only Unit delta");

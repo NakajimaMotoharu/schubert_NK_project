@@ -52,6 +52,7 @@ final class ArtemisServiceUnitTest {
     String unit = unit();
     exact(unit, "Type", "simple");
     exact(unit, "Restart", "on-failure");
+    exact(unit, "SuccessExitStatus", "143");
     exact(unit, "RestartSec", "5s");
     exact(unit, "StartLimitIntervalSec", "600");
     exact(unit, "StartLimitBurst", "5");
@@ -64,7 +65,8 @@ final class ArtemisServiceUnitTest {
     exact(
         unit,
         "Environment",
-        "\"JAVA_ARGS=-Xms768m -Xmx1024m -XX:MaxDirectMemorySize=256m -XX:MaxMetaspaceSize=192m -XX:+ExitOnOutOfMemoryError -Dfile.encoding=UTF-8 -Duser.timezone=UTC\"");
+        "\"JAVA_ARGS=-Xms768m -Xmx1024m -XX:MaxDirectMemorySize=256m -XX:MaxMetaspaceSize=192m"
+            + " -XX:+ExitOnOutOfMemoryError -Dfile.encoding=UTF-8 -Duser.timezone=UTC\"");
   }
 
   @Test
@@ -73,7 +75,8 @@ final class ArtemisServiceUnitTest {
     exact(
         unit,
         "ReadWritePaths",
-        "/var/lib/schubert-nk/artemis/data /var/lib/schubert-nk/artemis/log /var/lib/schubert-nk/artemis/tmp /var/lib/schubert-nk/artemis/lock");
+        "/var/lib/schubert-nk/artemis/data /var/lib/schubert-nk/artemis/log"
+            + " /var/lib/schubert-nk/artemis/tmp /var/lib/schubert-nk/artemis/lock");
     exact(unit, "UMask", "0077");
     exact(unit, "NoNewPrivileges", "true");
     exact(unit, "CapabilityBoundingSet", "");

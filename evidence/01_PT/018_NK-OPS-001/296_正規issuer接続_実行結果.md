@@ -1,5 +1,13 @@
 # 正規issuer接続 実行結果
 
+## 04:48 実Broker旧通常停止の拒否と是正中（SSC127）
+
+PG395 signed release/full178 artifact/61 dependency/23 SQL/hostRO/current pin/旧8base同一/新INVALID同原本で外部1回。旧44rowは全byte不変、今回Backup45/46 attempt12 SKIP全0、Cleanup47～53 attempt4七SKIP全0を全14列独立再読、全request/owner/intent退役。旧BrokerはCode1/status143/failed/failed/result exit-codeの真正終端でinactive-only baselineが拒否した（BUG375/YKT295/SSC127先行登録）。Brokerfresh/Expiryfresh/新6root actual collector/issuerは未実行。oldExpiry active/exited/status0を今回成功に数えず、時刻も16:39の旧execなのでnative unionから除外。旧Inspectorも除外し、新parent/backup/cleanup3execだけを上書き前にprivate Workへ保存した。
+
+別detached frozen checkout `work/pg395-frozen-ABPzPn/source` に6874Sourceとそのbuild targetを保持し、AssembleReleaseFixtureのHEAD一致検査を変更せず組立てた。実作業HEADd26f94aefは巻戻し0。rawexec3＋ownhostの厳密同byte unionはmissed B/L/M/C675/1452/237/12、不一致0。ownhost751/2143/384/27から76/691/147/15解消、100%未達。partial native manifestは`evidence/provisional/PG395-native-initial-roots-and-broker-refusal/manifest.json`、旧source/旧Expiry結果と混ぜない。
+
+SS341/342/343補足後、143を単独で成功化せずsame-invocation全console停止journal/厳密JSON/全row旧start～end/AMQ221002/error0/全kernel終端を独立要求。UnitのSuccessExitStatus143はvendorだけ、元失敗state reset0/worker143許可0。手書き失敗profile・停止event・独立SHA・missing/foreign/late/error/dup/receipt0拒否を先行追加し、`pg396-broker-stop-red.log`に未実装method compile失敗保存、Sourceを実装後03module選択33PT成功（04:42:53）。保持した旧完全snapshot/summaryをLiveで別取得する追加試験を含む04:45:54 `pg396-broker-stop-retained.log` はStorage8/Bootstrap10/Batch26＝44PT/FES0/static3zero、SHA256 `99248c69f3db8457758b362b3f138329ce09d1bb4cee234a2e83c1437453b599`。true native既知143 resume、全6/static、後続5gate/RootAPIWebはまだ再試験前。BUG375は対応中、正常単位で停止せず同原本実再開を継続する。
+
 ## PG395凍結全6・実初期配置（04:12 JST、限定証跡）
 
 Production Source `6874da9e2dbc276ec3f56675c533e976397fbcbf` の再全6cleanは2,646PT/FES0/static6各Bug/Error0、04:11:24・12:45。manifest `evidence/provisional/PG395-issuer-roots-baseline/manifest.json` SHA256 `aa556b9fa28432c5d122616e339af00b17ddee9c05eb5b3e0b1a855fc2629ecb`、log `pg395-roots-six.log` SHA256 `f7e10ae6f75c28214c9c8287ac07537ef73792c998acf04ea3a9298efd657e1c`。host missed B/L/M/C＝751/2143/384/27、Protocol/Storageは0。BUG373依存境界は直接再試験と全6成功、BUG372全静的0・YKT292全6collection負系を確認。coverage100/正式run24/全issuer/RootAPIWeb/CHRは未達。

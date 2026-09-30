@@ -11,6 +11,48 @@ import org.junit.jupiter.api.Test;
 
 /** SSC125 BROKERSTART003: hand-written vendor2.56 message oracle + independent JSON/metadata. */
 final class BrokerJournalEvidenceTest {
+  @Test
+  void issbrokerstop001ActualStopEventNeedsSameBootInvocationWholeIntervalAndExactBytes()
+      throws Exception {
+    String stopped =
+        row(
+            "AMQ221002: Apache Artemis Message Broker version 2.56.0 [public-fixture] stopped,"
+                + " uptime 2 hours",
+            4);
+    byte[] bytes = stopped.getBytes(StandardCharsets.UTF_8);
+    var actual =
+        BrokerJournalEvidence.consumeStopped(
+            bytes, BOOT, INV, BigInteger.valueOf(1234567), BigInteger.valueOf(1234568));
+    assertEquals(1, actual.entries());
+    assertEquals(
+        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)),
+        actual.sha256());
+    for (String invalid :
+        List.of(
+            GOLDEN,
+            stopped.replace("AMQ221002", "AMQ221001"),
+            stopped.replace("stopped, uptime", "started, uptime"),
+            stopped.replace("2.56.0", "2.55.0"),
+            stopped.replace("1234567", "1234569"),
+            stopped.replace(INV, "6".repeat(32)),
+            stopped.replace("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"3\""),
+            stopped + stopped))
+      assertThrows(
+          IOException.class,
+          () ->
+              BrokerJournalEvidence.consumeStopped(
+                  invalid.getBytes(StandardCharsets.UTF_8),
+                  BOOT,
+                  INV,
+                  BigInteger.valueOf(1234567),
+                  BigInteger.valueOf(1234568)));
+    assertThrows(
+        IOException.class,
+        () ->
+            BrokerJournalEvidence.consumeStopped(
+                bytes, BOOT, INV, BigInteger.valueOf(1234567), BigInteger.valueOf(1234566)));
+  }
+
   static final UUID BOOT = UUID.fromString("11111111-1111-4111-8111-111111111111");
   static final String INV = "7".repeat(32);
 
@@ -29,7 +71,8 @@ final class BrokerJournalEvidenceTest {
       row("AMQ221013: Using NIO Journal", 1)
           + row("AMQ221007: Server is now active", 2)
           + row(
-              "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker, nodeID=public-fixture]",
+              "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker,"
+                  + " nodeID=public-fixture]",
               3);
 
   static BrokerJournalEvidence.Summary read(String text) throws IOException {

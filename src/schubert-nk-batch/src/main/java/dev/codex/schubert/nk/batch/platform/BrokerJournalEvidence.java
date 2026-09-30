@@ -75,6 +75,55 @@ public final class BrokerJournalEvidence {
   /** Data-only independent parser PT; ownership and native identity stay at inspect's caller. */
   static Summary consume(byte[] bytes, UUID boot, String invocation, BigInteger began)
       throws IOException {
+    return consume(bytes, boot, invocation, began, Optional.empty());
+  }
+
+  /** Same owned stopped target; the native caller independently rechecks all kernels/manager. */
+  static Summary inspectStopped(
+      InspectorUnitSnapshot actual, UUID boot, MaintenanceOwnerFrame.Guard parent)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    Objects.requireNonNull(boot);
+    Objects.requireNonNull(parent);
+    require(actual.brokerStoppedNormally());
+    parent.check();
+    String invocation = actual.invocationId().orElseThrow().toString().replace("-", "");
+    byte[] bytes =
+        InspectorUnitProbe.NativeReader.forTarget(InspectorUnitSnapshot.Target.ARTEMIS)
+            .executeStreaming(
+                List.of(
+                    "/usr/bin/journalctl",
+                    "--no-pager",
+                    "--quiet",
+                    "--all",
+                    "--output=json",
+                    "--output-fields=MESSAGE,PRIORITY,_SYSTEMD_INVOCATION_ID,_BOOT_ID,_SYSTEMD_UNIT",
+                    "_SYSTEMD_UNIT=artemis.service",
+                    "_SYSTEMD_INVOCATION_ID=" + invocation,
+                    "_BOOT_ID=" + boot.toString().replace("-", "")),
+                MAX,
+                parent.remainingNanos());
+    try {
+      var result =
+          consumeStopped(bytes, boot, invocation, actual.executionStart(), actual.executionEnd());
+      parent.check();
+      return result;
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  static Summary consumeStopped(
+      byte[] bytes, UUID boot, String invocation, BigInteger began, BigInteger ended)
+      throws IOException {
+    Objects.requireNonNull(ended);
+    require(ended.compareTo(began) >= 0);
+    return consume(bytes, boot, invocation, began, Optional.of(ended));
+  }
+
+  private static Summary consume(
+      byte[] bytes, UUID boot, String invocation, BigInteger began, Optional<BigInteger> stopEnd)
+      throws IOException {
     Objects.requireNonNull(bytes);
     Objects.requireNonNull(boot);
     Objects.requireNonNull(invocation);
@@ -92,7 +141,7 @@ public final class BrokerJournalEvidence {
     } catch (CharacterCodingException known) {
       throw unavailable();
     }
-    boolean nio = false, active = false, started = false;
+    boolean nio = false, active = false, started = false, stopped = false;
     int count = 0;
     var cursors = new HashSet<String>();
     for (String line : text.substring(0, text.length() - 1).split("\n", -1)) {
@@ -122,6 +171,8 @@ public final class BrokerJournalEvidence {
       String monotonic = Objects.requireNonNull(fields.get("__MONOTONIC_TIMESTAMP"));
       require(
           monotonic.matches("[1-9][0-9]{0,19}") && new BigInteger(monotonic).compareTo(began) >= 0);
+      if (stopEnd.isPresent())
+        require(new BigInteger(monotonic).compareTo(stopEnd.orElseThrow()) <= 0);
       require(
           Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches("[1-9][0-9]{0,19}"));
       String message = Objects.requireNonNull(fields.get("MESSAGE"));
@@ -131,9 +182,13 @@ public final class BrokerJournalEvidence {
       started |=
           message.contains("AMQ221001: Apache Artemis Message Broker version 2.56.0")
               && message.contains("schubert-nk-broker");
+      stopped |=
+          message.contains("AMQ221002: Apache Artemis Message Broker version 2.56.0")
+              && message.contains(" stopped, uptime ");
       count++;
     }
-    require(nio && active && started);
+    if (stopEnd.isPresent()) require(stopped);
+    else require(nio && active && started);
     try {
       return new Summary(
           count, HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)));

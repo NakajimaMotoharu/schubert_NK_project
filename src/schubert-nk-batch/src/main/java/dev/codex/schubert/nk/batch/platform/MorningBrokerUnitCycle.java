@@ -27,6 +27,11 @@ public final class MorningBrokerUnitCycle {
   @FunctionalInterface
   interface Baseline {
     InspectorUnitSnapshot read() throws IOException;
+
+    default Optional<BrokerJournalEvidence.Summary> stoppedProof(InspectorUnitSnapshot actual)
+        throws IOException {
+      return Optional.empty();
+    }
   }
 
   @FunctionalInterface
@@ -49,10 +54,28 @@ public final class MorningBrokerUnitCycle {
   public static final class Live {
     private final MorningBrokerUnitCycle owner;
     private final Observation actual;
+    private final InspectorUnitSnapshot previous;
+    private final Optional<BrokerJournalEvidence.Summary> stoppedJournal;
 
-    private Live(MorningBrokerUnitCycle owner, Observation actual) {
+    private Live(
+        MorningBrokerUnitCycle owner,
+        Observation actual,
+        InspectorUnitSnapshot previous,
+        Optional<BrokerJournalEvidence.Summary> stoppedJournal) {
       this.owner = owner;
       this.actual = actual;
+      this.previous = previous;
+      this.stoppedJournal = stoppedJournal;
+    }
+
+    public InspectorUnitSnapshot previousObservation() throws IOException {
+      owner.check();
+      return previous;
+    }
+
+    public Optional<BrokerJournalEvidence.Summary> stoppedJournal() throws IOException {
+      owner.check();
+      return stoppedJournal;
     }
 
     public String invocation() {
@@ -111,7 +134,30 @@ public final class MorningBrokerUnitCycle {
         BackupUnitStartClient.create(root, expected, BackupUnitStartClient.Target.BROKER, budget);
     return new MorningBrokerUnitCycle(
         guard,
-        () -> before.quiescent().orElseThrow(MorningBrokerUnitCycle::unavailable),
+        new Baseline() {
+          public InspectorUnitSnapshot read() throws IOException {
+            return before.quiescent().orElseThrow(MorningBrokerUnitCycle::unavailable);
+          }
+
+          public Optional<BrokerJournalEvidence.Summary> stoppedProof(InspectorUnitSnapshot actual)
+              throws IOException {
+            if (!actual.brokerStoppedNormally()) return Optional.empty();
+            guard.verify();
+            var observed =
+                BrokerJournalEvidence.inspectStopped(
+                    actual,
+                    UUID.fromString(expected.boot()),
+                    () -> {
+                      guard.verify();
+                      return budget.remainingNanos();
+                    });
+            if (!actual.matches(
+                before.quiescent().orElseThrow(MorningBrokerUnitCycle::unavailable)))
+              throw unavailable();
+            guard.verify();
+            return Optional.of(observed);
+          }
+        },
         () -> {
           guard.verify();
           var first = probe.read();
@@ -150,8 +196,11 @@ public final class MorningBrokerUnitCycle {
     if (attempted) throw unavailable();
     attempted = true;
     var before = baseline.read();
-    if (!before.isTarget(InspectorUnitSnapshot.Target.ARTEMIS) || !before.inactiveBaseline())
-      throw unavailable();
+    if (!before.isTarget(InspectorUnitSnapshot.Target.ARTEMIS)
+        || (!before.inactiveBaseline() && !before.brokerStoppedNormally())) throw unavailable();
+    check();
+    var stopped = Objects.requireNonNull(baseline.stoppedProof(before), "actual stopped journal");
+    if (before.brokerStoppedNormally() && stopped.isEmpty()) throw unavailable();
     check();
     // From this point any exception may leave an intent or delivered start. Never unwind M/A.
     try {
@@ -165,7 +214,7 @@ public final class MorningBrokerUnitCycle {
       } while (observed.isEmpty());
       var actual = observed.orElseThrow();
       if (actual.manager().invocationId().equals(before.invocationId())) throw unavailable();
-      var live = new Live(this, actual);
+      var live = new Live(this, actual, before, stopped);
       live.recheck();
       readiness.verify(live);
       live.recheck();

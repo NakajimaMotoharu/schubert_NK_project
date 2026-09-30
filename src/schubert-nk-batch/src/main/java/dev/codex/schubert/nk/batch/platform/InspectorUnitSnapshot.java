@@ -268,6 +268,23 @@ public final class InspectorUnitSnapshot {
         && quiescent();
   }
 
+  /** SSC127: old normal stop data only, NEVER a fresh worker receipt or journal proof. */
+  boolean brokerStoppedNormally() {
+    return target == Target.ARTEMIS
+        && quiescent()
+        && invocationId().isPresent()
+        && value("ExecMainCode").equals("1")
+        && value("ExecMainStatus").equals("143")
+        && executionStart().signum() > 0
+        && executionEnd().compareTo(executionStart()) >= 0
+        && ((value("ActiveState").equals("failed")
+                && value("SubState").equals("failed")
+                && value("Result").equals("exit-code"))
+            || (value("ActiveState").equals("inactive")
+                && value("SubState").equals("dead")
+                && value("Result").equals("success")));
+  }
+
   boolean heldCleanup() {
     return target == Target.CLEANUP
         && value("ActiveState").equals("active")

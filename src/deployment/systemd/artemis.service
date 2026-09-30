@@ -18,6 +18,7 @@ Environment="JAVA_ARGS=-Xms768m -Xmx1024m -XX:MaxDirectMemorySize=256m -XX:MaxMe
 UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
 ExecStart=/var/lib/schubert-nk/artemis/bin/artemis run
 Restart=on-failure
+SuccessExitStatus=143
 RestartSec=5s
 TimeoutStartSec=120s
 TimeoutStopSec=60s
