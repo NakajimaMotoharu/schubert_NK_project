@@ -37,7 +37,9 @@ final class CleanupRepositoryTest {
       for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG"))
         sql(
             c,
-            "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status) values('"
+            "insert into"
+                + " schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
+                + " values('"
                 + RUN.id()
                 + "','2026-09-17','"
                 + step
@@ -111,7 +113,8 @@ final class CleanupRepositoryTest {
         var probe = new BatchJdbcProbe();
         assertEquals(ZERO, new CleanupRepository(probe.wrap(c)).execute(RUN, kind, 1).counts());
         assertEquals(
-            "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_"
+            "select target_count,deleted_count,skipped_count,reason_code from"
+                + " schubert.maintenance_cleanup_"
                 + names.get(kind.name())
                 + "(?,?,?)",
             probe.lastSql);
@@ -370,14 +373,17 @@ final class CleanupRepositoryTest {
           "false",
           scalar(
               admin,
-              "select (pg_get_functiondef('schubert.maintenance_cleanup_message_stores(uuid,timestamptz,integer)'::regprocedure) like '%request_inbox%')::text"));
+              "select"
+                  + " (pg_get_functiondef('schubert.maintenance_cleanup_message_stores(uuid,timestamptz,integer)'::regprocedure)"
+                  + " like '%request_inbox%')::text"));
       assertEquals(ZERO, new CleanupRepository(c).execute(RUN, CleanupKind.OUTBOX, 1).counts());
       c.rollback();
       assertEquals(
           "false",
           scalar(
               admin,
-              "select has_table_privilege('schubert_batch','schubert.request_inbox','DELETE')::text"));
+              "select"
+                  + " has_table_privilege('schubert_batch','schubert.request_inbox','DELETE')::text"));
     }
   }
 
@@ -429,7 +435,11 @@ final class CleanupRepositoryTest {
     try (var admin = db.admin()) {
       sql(
           admin,
-          "insert into schubert.app_logs(id,logged_at,service,category,level,action,message) values(1,'2026-06-18 23:59:59.999999+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture'),(2,'2026-06-19 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture')");
+          "insert into schubert.app_logs(id,logged_at,service,category,level,action,message)"
+              + " values(1,'2026-06-18"
+              + " 23:59:59.999999+00','API','SECURITY','INFO','PUBLIC_TEST','public"
+              + " fixture'),(2,'2026-06-19"
+              + " 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture')");
     }
     try (var c = transaction();
         var admin = db.admin()) {
@@ -522,7 +532,9 @@ final class CleanupRepositoryTest {
                 || (Set.of(
                             "dev.codex.schubert.nk.api.file.InspectorCredentialLoader",
                             "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential",
-                            "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission")
+                            "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission",
+                            "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig",
+                            "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig")
                         .contains(name)
                     && Files.isRegularFile(
                         repo.resolve(
@@ -532,11 +544,16 @@ final class CleanupRepositoryTest {
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.file.InspectorCredentialLoader"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.maintenance.InspectorDbCredential"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"));
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig"));
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig"));
     for (var forbidden :
         List.of(
             "dev.codex.schubert.nk.api.file.AssetResolver",
             "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderMissing",
             "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmissionMissing",
+            "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigMissing",
+            "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigMissing",
+            "dev.codex.schubert.nk.web.bootstrap.*",
             "dev.codex.schubert.nk.api.bootstrap.*",
             "dev.codex.schubert.nk.api.file.*",
             "dev.codex.schubert.nk.web.LoginController",
@@ -689,9 +706,12 @@ final class CleanupRepositoryTest {
       for (int id = 1; id <= 3; id++)
         sql(
             c,
-            "insert into schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until) values("
+            "insert into"
+                + " schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until)"
+                + " values("
                 + id
-                + ",'2026-01-01 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public fixture',"
+                + ",'2026-01-01 00:00:00+00','API','SECURITY','INFO','PUBLIC_TEST','public"
+                + " fixture',"
                 + (id < 3 ? "'2027-01-01 00:00:00+00'" : "null")
                 + ")");
     }

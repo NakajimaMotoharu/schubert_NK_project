@@ -65,8 +65,30 @@ final class EnvironmentInodePolicy {
   private Snapshot inspect(
       Path held, boolean runtime, boolean directory, int mode, long group, int minimum, int maximum)
       throws IOException {
+    return inspect(held, runtime, directory, mode, 0, group, minimum, maximum);
+  }
+
+  /** SSC126: read-only six-root inspection; never creates or repairs an admitted inode. */
+  Snapshot roleDirectory(Path held, long uid, long gid, int permissions, boolean host)
+      throws IOException {
+    Snapshot result = inspect(held, false, true, 040000 | permissions, uid, gid, 0, 0);
+    require(result.metadata().device() >= 0 && result.metadata().inode() > 0);
+    if (host) require(!result.readonly());
+    return result;
+  }
+
+  private Snapshot inspect(
+      Path held,
+      boolean runtime,
+      boolean directory,
+      int mode,
+      long uid,
+      long group,
+      int minimum,
+      int maximum)
+      throws IOException {
     Metadata m = metadata(source.attributes(held));
-    require(m.mode() == mode && m.uid() == 0 && m.gid() == group);
+    require(m.mode() == mode && m.uid() == uid && m.gid() == group);
     if (directory) require(m.links() >= 2 && m.size() >= 0);
     else require(m.links() == 1 && m.size() >= minimum && m.size() <= maximum);
     byte[] acl = security.accessAcl(held, 44);

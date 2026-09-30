@@ -1,5 +1,15 @@
 # 正規issuer接続 実行結果
 
+## 03:53 同変更群の6root・依存境界・collection再試験（未認定）
+
+最初の凍結Source `6c18b3de827dfb2b9298d848784f3540544bb7e7` の全6cleanは2,641PT中F1/E0/S0で不合格。Batch888PTのCleanupRepositoryTest.moduleDependencyBoundaryが、SSC126でbootstrapへ移した2parserを旧package prefixで禁止した（BUG373/YKT293修正前起票）。他5module静的0、Batchはtest失敗で静的未実行。log `work/pgpt-runs/PG379/pg395-six.log` SHA256 `88cf5e4fe65e69f4ad7da953490584374a59c599f6ca2de921f69612f98f458f`。失敗を合格/coverage100/正式受入に算入しない。
+
+固定2完全class名かつ実bootstrap Source存在だけ許可し、Missing/wildcard/業務class/Protocolの禁止negativeを追加。全test検索で同型境界はこの1methodだけ、API/Webは共通実配置と独立parser試験・POM境界を全6で再確認する。新MorningStartupRootsをMainの同callbackへ接続し、手書きNKROOTS1/独立SHA256・実NOFOLLOW FD/合成mount identity・交換/hostRO/ACL/null/unknown/close・metadata境界・6root重複を検証。privateROだけ許容し、捕捉中full snapshot不変と捕捉後size/time/nlink変化・identity固定を分けた。合成uid/gid/FSをnative root受入とは扱わない。
+
+03:49:34 `pg395-roots-corrected.log` はStorage8/Bootstrap10/Batch40＝58PT/FES0/static3zero、SHA256 `d17d39ed495b64620aa95ca936ad23626d1f80e6f25a7e3e696cc62ebe8d41ef`。追加のCompletion保存list/receipt/別target/null negativeとExpiry/8終端影響を含む03:53:18 `pg395-roots-completion.log` は8/10/59＝77PT/FES0/static3zero、SHA256 `1dd22cc8cc10dd2d8f18926f9f190061e716fcf020b89d8a92afb007c04d4257`。最初の選択commandはStorage対象classを選び忘れてno-testsで失敗し、`pg395-roots-selected.log`を保持、Storage ResourceScopeTestを明示して再実行（未実行scopeをignoreして合格にはしない）。YKT292の6対象collectionは直接mutation/null試験が揃ったが全6再試験前のため未閉鎖。native初期配置工具Pg395InitialRootsはjavac25 `-Xlint:all -Werror` 成功、まだVM配置実行前。署名済PG394/M/A/8停止/原本INVALID保全の固定new-onlyであり、runtime Sourceにprovision/repair能力を与えない。
+
+次は同変更群を再固定し全6→同Source署名release、missing2account/3root初期配置→同未完了runの実root6捕捉。5gate具体codec/実収集・正規issuer/RootAPIWeb/CHR/100%は依然未達、正式run24/48.3%据置。
+
 ## PG395変更群の選択検証（未認定）
 
 JDK25.0.4/Maven wrapper、Linux development host、dev-foundation/HEAD7b0d7f6a3＋明記した未commit差分。実Source/fullrun固定前の限定結果で、PG394 actual execや正式run24とは合算しない。

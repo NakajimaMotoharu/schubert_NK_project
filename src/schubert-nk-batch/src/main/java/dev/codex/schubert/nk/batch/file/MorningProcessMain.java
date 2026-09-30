@@ -165,9 +165,13 @@ public final class MorningProcessMain {
                     dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.create(
                         root, snapshot);
                 var configurations = release.inspectConfigurations();
+                var startupRoots =
+                    MorningStartupRoots.create(root, snapshot, configurations.roots());
+                var actualRoots = startupRoots.capture();
                 budget.requireWithin();
                 original.verify();
                 release.recheckConfigurations(configurations);
+                startupRoots.recheck(actualRoots);
                 budget.requireWithin();
                 original.verify();
                 broker.recheck();

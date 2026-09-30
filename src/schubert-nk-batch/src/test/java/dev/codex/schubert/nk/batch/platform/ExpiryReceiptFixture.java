@@ -9,20 +9,46 @@ public final class ExpiryReceiptFixture {
   private ExpiryReceiptFixture() {}
 
   public static BackupUnitReceiptGate.TerminalReceipt receipt(int code) throws Exception {
+    return receipt(code, BackupUnitStartClient.Target.EXPIRY, InspectorUnitSnapshot.Target.EXPIRY);
+  }
+
+  public static BackupUnitReceiptGate.TerminalReceipt cleanupReceipt(int code) throws Exception {
+    return receipt(
+        code, BackupUnitStartClient.Target.CLEANUP, InspectorUnitSnapshot.Target.CLEANUP);
+  }
+
+  private static BackupUnitReceiptGate.TerminalReceipt receipt(
+      int code, BackupUnitStartClient.Target target, InspectorUnitSnapshot.Target observedTarget)
+      throws Exception {
     String base =
-        "Id=schubert-nk-expiry-cleanup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nInvocationID="
+        "Id=schubert-nk-expiry-cleanup.service\n"
+            + "LoadState=loaded\n"
+            + "ActiveState=inactive\n"
+            + "SubState=dead\n"
+            + "Job=\n"
+            + "MainPID=0\n"
+            + "ControlPID=0\n"
+            + "InvocationID="
             + "6".repeat(32)
-            + "\nExecMainCode=1\nExecMainStatus=0\nExecMainStartTimestampMonotonic=1000000\nExecMainExitTimestampMonotonic=2000000\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=yes\nKillMode=control-group\nSendSIGKILL=no\n";
+            + "\n"
+            + "ExecMainCode=1\n"
+            + "ExecMainStatus=0\n"
+            + "ExecMainStartTimestampMonotonic=1000000\n"
+            + "ExecMainExitTimestampMonotonic=2000000\n"
+            + "Result=success\n"
+            + "Type=oneshot\n"
+            + "Restart=no\n"
+            + "RemainAfterExit=yes\n"
+            + "KillMode=control-group\n"
+            + "SendSIGKILL=no\n";
+    if (target == BackupUnitStartClient.Target.CLEANUP)
+      base = base.replace("schubert-nk-expiry-cleanup.service", "schubert-nk-cleanup.service");
     var state =
         new AtomicReference<>(
-            InspectorUnitSnapshot.parse(
-                base.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.EXPIRY));
+            InspectorUnitSnapshot.parse(base.getBytes(StandardCharsets.US_ASCII), observedTarget));
     var gate =
         new BackupUnitReceiptGate(
-            () -> {},
-            () -> Optional.of(state.get()),
-            () -> Optional.of(state.get()),
-            BackupUnitStartClient.Target.EXPIRY);
+            () -> {}, () -> Optional.of(state.get()), () -> Optional.of(state.get()), target);
     var before = gate.capture();
     String actual =
         base.replace("6".repeat(32), "7".repeat(32))
@@ -32,8 +58,7 @@ public final class ExpiryReceiptFixture {
             .replace("ExecMainStatus=0", "ExecMainStatus=" + code)
             .replace("Result=success", code == 30 ? "Result=exit-code" : "Result=success");
     state.set(
-        InspectorUnitSnapshot.parse(
-            actual.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.EXPIRY));
+        InspectorUnitSnapshot.parse(actual.getBytes(StandardCharsets.US_ASCII), observedTarget));
     return gate.observeResult(before).orElseThrow();
   }
 }
