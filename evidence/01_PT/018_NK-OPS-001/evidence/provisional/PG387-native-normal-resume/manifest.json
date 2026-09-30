@@ -1,0 +1,118 @@
+{
+  "id": "PG387-native-normal-resume",
+  "formal": false,
+  "sourceCommit": "7ba352d6f0b7c08c371e838683fb6c2ba58725af",
+  "branch": "dev-foundation",
+  "executionTime": "2026-09-30T05:29:26.770981+00:00",
+  "environment": "actual Ubuntu26.04/kernel7.0.0-34/JDK25.0.4/PostgreSQL18.6/JaCoCo0.8.15; fixed signed releasePG387/full hostRO BOM177/61/23",
+  "testIds": [
+    "PT-OPS-BRESUME-VM001",
+    "PT-OPS-BVERIFY003"
+  ],
+  "input": "same original run/cutoff, genuine external Morning --resume, prior SUCCESS bundle rows9+10/attempt5; existing coverage-only dropins, no fake worker/result/permit",
+  "expected": "same original four file bytes/hash/inode/metadata and old DB full rows; same directory inventory; fresh actual validation-only worker; separate current rows11+12/attempt6 SKIPPED ALREADY_SUCCESSFUL all0; request/intent retired",
+  "actual": {
+    "originalByteMetadataAndDatabaseUnchanged": true,
+    "directoryInventoryUnchanged": true,
+    "currentRows": [
+      11,
+      12
+    ],
+    "currentAttempt": 6,
+    "workerInvocation": "01cd3703bf834fcfa27dbf1287e8f9ae",
+    "parentInvocation": "2144cbd6195e47cd8d2833576e704372",
+    "requestAndIntentRetired": true,
+    "permitsIssued": 0,
+    "externalMorningExit": 30,
+    "S1Accepted": false
+  },
+  "commands": {
+    "after-original.txt": {
+      "command": "sudo -n stat -c \"%n %d %i %u:%g %a %h %s %y %z\" /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/MANIFEST.json /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/schubert_nk.dump /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/config.tar /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/credentials.tar.age; sudo -n sha256sum /srv/schubert-nk/backup/20260930-130116-31100027-2222-4333-8444-555555555555/{MANIFEST.json,schubert_nk.dump,config.tar,credentials.tar.age}; sudo -n -u postgres psql -X -A -t -d schubert_nk -c \"SELECT id,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary FROM schubert.batch_runs WHERE id IN (9,10) ORDER BY id\"; sudo -n find /srv/schubert-nk/backup -maxdepth 1 -type d -printf \"%f\\n\" | sort",
+      "exitCode": 0
+    },
+    "current-skips.txt": {
+      "command": "sudo -n -u postgres psql -X -A -t -d schubert_nk -c \"SELECT id,run_id,step,attempt,status,target_count,success_count,failure_count,byte_count,error_code,error_summary,ended_at=started_at FROM schubert.batch_runs WHERE attempt=6 ORDER BY id\"",
+      "exitCode": 0
+    },
+    "deployment-and-retirement.txt": {
+      "command": "sudo -n readlink /opt/schubert-nk/current; sudo -n find /run/schubert-nk/backup-request /run/schubert-nk/startup -maxdepth 1 -type f -printf \"%f %s\\n\"; sudo -n systemctl show schubert-nk-morning-controller.service schubert-nk-backup.service --property=Id,MainPID,ControlPID,ActiveState,SubState,Job,Result,ExecMainCode,ExecMainStatus,InvocationID",
+      "exitCode": 0
+    },
+    "fresh-worker.jsonl": {
+      "command": "sudo -n journalctl --since \"2026-09-30 05:15:00 UTC\" -o json --no-pager | python3 -c 'import sys,json\nfor line in sys.stdin:\n x=json.loads(line)\n if x.get(\"UNIT\")==\"schubert-nk-backup.service\" and x.get(\"INVOCATION_ID\")==\"01cd3703bf834fcfa27dbf1287e8f9ae\":\n  print(json.dumps({k:x[k] for k in [\"__REALTIME_TIMESTAMP\",\"UNIT\",\"INVOCATION_ID\",\"JOB_TYPE\",\"JOB_RESULT\",\"_PID\",\"_EXE\"] if k in x}))' ",
+      "exitCode": 0
+    }
+  },
+  "bugs": [
+    "BUG-350"
+  ],
+  "ssc": [
+    "SSC-116"
+  ],
+  "coverage": {
+    "formal": false,
+    "classByteMismatch": 0,
+    "LINE": {
+      "missed": 777,
+      "covered": 8469
+    },
+    "METHOD": {
+      "missed": 148,
+      "covered": 1501
+    },
+    "CLASS": {
+      "missed": 13,
+      "covered": 218
+    },
+    "BRANCH": {
+      "missed": 261,
+      "covered": 4093
+    }
+  },
+  "limitations": [
+    "whole S1/real30min timeout and S2/S3 still incomplete",
+    "allfour coverage100%/formal53scope not accepted",
+    "systemd fixed LoadCredential copy remains; application pgpass read/copy and archive/dump generation are not invoked",
+    "no prior-source exec union"
+  ],
+  "redaction": "fixed unit/PID1 fields, counters, hashes and probe bitmaps only; no private key/password/session/token/dump/plain credential archive/raw journal message",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/after-original.txt",
+      "sha256": "6911a341e526d17d3bc5e1fa7cfc9812bf6110311e93f2a07d83fb427efd3257"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/backup.exec",
+      "sha256": "cc0e30af21680d25c162b4543a6478660315d7b9115fc0e9375c4867d476f5e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/batch-host-native-union.json",
+      "sha256": "0b265cdd5f2cb1ef74c880ac809921cc043792b6c7424ac20e3eb0cab754f9d8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/before-original.txt",
+      "sha256": "6911a341e526d17d3bc5e1fa7cfc9812bf6110311e93f2a07d83fb427efd3257"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/current-skips.txt",
+      "sha256": "ba5f4399e1a708bdec1c07aef5b16ef647d25b07630d5c4443df30c741d7223c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/deployment-and-retirement.txt",
+      "sha256": "fe94b21c91a67c051e913eef1fa0bd4d03f9847ec48a9c18e78f2a724ce66760"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/fresh-worker.jsonl",
+      "sha256": "564d9111b81e7adb8e3447cf0a028e679f7dd10fa77feeb1d473a5611a6b57d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/native-unit-state.txt",
+      "sha256": "b87a023b2500113508ff2a5c20e2a73aa0bc54cf41e8eca93afd5ce3fe3ef2f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/parent.exec",
+      "sha256": "50d3465505487249518045a321c6bc563bbeadbc93f2b72f60eebc4659a913c1"
+    }
+  ]
+}

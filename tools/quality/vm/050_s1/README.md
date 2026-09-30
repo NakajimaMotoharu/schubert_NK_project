@@ -1,5 +1,7 @@
 # 050 隔離PG/PT VMのS1実再現tool
 
+最新PG387はsource7ba352d6f・通常resumeの実再検証282。新5toolは実使用byteを保存し、元SUCCESS/今回SKIP・fresh子・成果不変を独立採取する。PG385/386の結果を上書きせず、旧sourceのexecを合算しない。現VMはPG387なので既実行の配備・resumeを二重発行しない。
+
 Source/試験正本はsrc、278/279、SS341/342/343。ここは隔離VM pgpt-r2-20260927-01に固定した配備・独立oracle・sanitized collectorであり、Production main/probe/StartupPermitの代替ではない。再現の実sourceはa6b5c7c8b、Release0.1.0-PG385、実正一往復278。既存結果への再書込みをしない。署名鍵/age private key/SSH key/credential/dump/raw archiveはGit外privateで入手し、Gitへコピーしない。
 
 PG383 toolは既存22SQLと唯一のpending023を分類して専用Flywayを一度適用した履歴の再現用。現VMでは既に24履歴成功なのでmigrateを再実行しない。Pg384/385は残存INVALID原本を削除せず、同M/A・stop-all・全終端・別pin元byte署名/fullBOM・host RO・新INVALID→root400承認/current絶対selector→全BOM再読でcandidateを切り替えた。permitを発行しない。Release配置はnew-only、既存候補や退避tar/DB復旧点を上書きしない。部分配置衝突をSource gate緩和で回避しない。
