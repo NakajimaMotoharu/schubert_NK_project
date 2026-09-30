@@ -161,9 +161,11 @@ final class MorningBrokerExecution {
                     observations.add(
                         readObservations(reader, parent, actual, databaseProof, epoch.boot()));
                   });
-          require(observations.size() == 1);
+          // BUG385: Cycle verifies readiness after start and again before intent retirement.
+          // Keep both genuine snapshots; only its final verified observation is completion data.
+          require(observations.size() == 2);
           return new Completion(
-              live, observations.getFirst(), parent, databaseProof, credentialPath, epoch.boot());
+              live, observations.getLast(), parent, databaseProof, credentialPath, epoch.boot());
         });
   }
 

@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+## 08:07 PG399 native不合格の保全とPG400直接再試験
+
+PG399 Source6b22f68cの全6 2669PT/FES0/static6zeroは成功（full2eb34b90…）だが外部MorningはBUG385で途中拒否。正規Cycle二readinessを新callbackが一度と誤認。旧73行不変＋今回9SKIP=82、Expiry未実行・三gate未到達、親30/permit0/INVALID/namespace空。native manifest47ed8f64…に実条件/exec/hashを保存、古いExpiryは除外、fresh三roleのsame-byte union701B/1519L/245M/13C。旧成功の流用・合格化なし。BUG384のruntime出力option不足は同Sourceのinventory goalだけ再実行しsigned release a0d1214e…配備成功、partial候補はprivate rejected pathへ保持。
+
+PG400選択56PT（Storage16/Bootstrap13/Batch27）FES0、NullAway/compile成功、SpotBugs3module各0、08:05:16/40.477s。両実観測保存/最終選択を修正しISSBROKER005の二度目失敗→保全/退役0と既存全unknown/deep immutable/goldenを確認。単Batch commandは旧installed依存、-amは親POM plugin prefixで拒否され不合格別log保持。実Source/Oracle変更による成功扱いなし、正規依存3module reactorで再試験。全6・修正同source native・100%・全gate・正規issue/APIWeb/CHRは未認定。次は456の全回帰triggerで実三gate到達を閉じる。
+
 ## 06:47 PG398 issuer DB/release・未知MQ境界（限定、未認定）
 
 Source `3aaab1fd2d19cbd6eb4c9a39262e9a439edeb82d`。選択Storage16/Bootstrap19/Batch100＝135PT、21suite、F/E/S0、NullAway/compile成功、SpotBugs3module各Bug/Error0、47.990s・2026-10-01T06:47:01+09:00。実schema six-column/BOM/runtime/ROLE/JDBC/HELDをowned Sessionで取得する値契約と独立POSTGRES/RELEASE fixed byte、全Ops unknown/NPE/Error同一性・JSON型拒否・宣言provider/interrupt/close・実PG handoff/解放deadline canaryを確認。抑制/coverage除外追加0。manifest `evidence/provisional/PG398-issuer-observation-selected/manifest.json` は全135Test class/methodをmetadataだけ保存、raw properties/provider/session/credentialを含めない。log SHA `f438abb50788fafc25ab7db498d23e420f2a631b8a62f11d8f50fea0efcca092`。

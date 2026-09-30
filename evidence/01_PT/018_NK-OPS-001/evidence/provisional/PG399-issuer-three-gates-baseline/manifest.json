@@ -1,0 +1,1905 @@
+{
+  "id": "PG399-issuer-three-gates-baseline",
+  "formal": false,
+  "sourceCommit": "6b22f68c841c76899a031745cdc401a2d55526f1",
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "six modules: clean test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 80,
+      "suites": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 153,
+      "suites": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 209,
+      "suites": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 754,
+      "suites": 124,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 558,
+      "suites": 88,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 915,
+      "suites": 120,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 2669,
+  "coverage": {
+    "protocol": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17403
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1008
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3464
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1272
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 741
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 157
+      }
+    },
+    "storage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 5871
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 497
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1119
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 496
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 247
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 36
+      }
+    },
+    "bootstrap": {
+      "INSTRUCTION": {
+        "missed": 142,
+        "covered": 11777
+      },
+      "BRANCH": {
+        "missed": 53,
+        "covered": 1207
+      },
+      "LINE": {
+        "missed": 30,
+        "covered": 2176
+      },
+      "COMPLEXITY": {
+        "missed": 62,
+        "covered": 958
+      },
+      "METHOD": {
+        "missed": 13,
+        "covered": 377
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 56
+      }
+    },
+    "api": {
+      "INSTRUCTION": {
+        "missed": 278,
+        "covered": 34507
+      },
+      "BRANCH": {
+        "missed": 17,
+        "covered": 2765
+      },
+      "LINE": {
+        "missed": 71,
+        "covered": 7557
+      },
+      "COMPLEXITY": {
+        "missed": 17,
+        "covered": 2554
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 1128
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 244
+      }
+    },
+    "web": {
+      "INSTRUCTION": {
+        "missed": 80,
+        "covered": 20848
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1615
+      },
+      "LINE": {
+        "missed": 25,
+        "covered": 4755
+      },
+      "COMPLEXITY": {
+        "missed": 5,
+        "covered": 1778
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 957
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 190
+      }
+    },
+    "batch": {
+      "INSTRUCTION": {
+        "missed": 8984,
+        "covered": 52791
+      },
+      "BRANCH": {
+        "missed": 716,
+        "covered": 5157
+      },
+      "LINE": {
+        "missed": 2174,
+        "covered": 10434
+      },
+      "COMPLEXITY": {
+        "missed": 910,
+        "covered": 4148
+      },
+      "METHOD": {
+        "missed": 384,
+        "covered": 1725
+      },
+      "CLASS": {
+        "missed": 30,
+        "covered": 256
+      }
+    }
+  },
+  "logSha256": "34363daccaaac9015652ccbb9c678f2730262c56591e2625e09f66f0f1b7faf7",
+  "testIds": [
+    "CEXEC001..004",
+    "CINSPECT001..004",
+    "COWNERFILE001..002",
+    "CTERM001..005",
+    "CCYCLE001..004",
+    "BCATALOG001",
+    "COWNER005",
+    "CCYCLE005",
+    "CFREQ001..006",
+    "CFDB001..004",
+    "CFLOW001..004",
+    "BROKERLIVE001..004",
+    "BROKERSTART001..004",
+    "BROKERQUERY001..003",
+    "EXPARENT001..005",
+    "ISSCFG001..002",
+    "ISSSTEP002..003",
+    "ISSGATE002",
+    "ISSROOT001..003",
+    "ISSBROKERSTOP001",
+    "ISSGATE003",
+    "MMAIN010",
+    "ISSPG001..003",
+    "ISSREL001..002",
+    "ISSBROKER001..004",
+    "MQUNKNOWN001..004",
+    "MDB020"
+  ],
+  "bugs": [
+    "BUG-362",
+    "BUG-363",
+    "BUG-364",
+    "BUG-365",
+    "BUG-366",
+    "BUG-367",
+    "BUG-368",
+    "BUG-369",
+    "BUG-370",
+    "BUG-372",
+    "BUG-373",
+    "BUG-375",
+    "BUG-376",
+    "BUG-379",
+    "BUG-380",
+    "BUG-381",
+    "BUG-382",
+    "BUG-383"
+  ],
+  "ssc": [
+    "SSC-119",
+    "SSC-120",
+    "SSC-121",
+    "SSC-122",
+    "SSC-123",
+    "SSC-124",
+    "SSC-125",
+    "SSC-126",
+    "SSC-127",
+    "SSC-128",
+    "SSC-129",
+    "SSC-130"
+  ],
+  "ykt": [
+    "YKT-284",
+    "YKT-285",
+    "YKT-286",
+    "YKT-287",
+    "YKT-288",
+    "YKT-289",
+    "YKT-290",
+    "YKT-291",
+    "YKT-292",
+    "YKT-293",
+    "YKT-295",
+    "YKT-296",
+    "YKT-299",
+    "YKT-300",
+    "YKT-301",
+    "YKT-302",
+    "YKT-303"
+  ],
+  "limitations": [
+    "same-source native DB/release/Broker full observations and gate frames pending",
+    "STOP_SET/retention/ten steps/full proof/publication/A handoff/API/Web/CHR incomplete",
+    "native unknown/negative/hard-timeout and coverage100 pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr/provider diagnostics omitted; no credential/session/token/password/key/dump",
+  "finishedAt": "2026-10-01T07:44:58+09:00",
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "ba967e62539f55aebf1ee57349daab2a2a9541459b5ef6cfc3efe155515a60da"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "9609396ed7447ee302ac723a694bff48495847ffc9b5ccaf69197ddd0febd6df"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "01b1308c37ce42a35f02a1b6490f5301abc769b3891ba6b9d9915531ac6d96ec"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "1d6ee2321d7e76f7ffde2c8f0842bf51aec46549e8b719a7e4a6f1e00957df47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "ddf98064774f32fd5ff9f89d6dbddbfd0ce614aedc5c3a0a353824a1e0011be0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "d3350721581933f47a078d867b484aaaa33e116cbb88322e5f9e4888216474f0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "30d2b7eea61bf7832d73c3e554929aa22e64149cb7a58ed08208f2668dc38c7f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest.xml",
+      "sha256": "eac216f52c846ff37941d2e3eb9a20526f29468f863429277ef02c7fa0d0f77d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogReplayServiceTest.xml",
+      "sha256": "ad4590fc2b8c66187e9ea92691e1d0a759c9af8a58d6fbdbbecb8e84e0dd156f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.log.LogRequestTest.xml",
+      "sha256": "91b7db75d68ef6aba9f8e92099932519295fd3bcea51a407e5edf0fc371418fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest.xml",
+      "sha256": "5297f5842df8914f2de521654a83565109a3eda6e5a43b7a8801d000e9bbdd31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest.xml",
+      "sha256": "c8a82b627b7499a143b1101cce255d3ef7be90e5ce9968d3f9ecf114b55b6711"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.media.MediaRequestTest.xml",
+      "sha256": "92c42f90a80937b80da6733c78e017e8508da8d412c4eedb158f27b34c3535d0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest.xml",
+      "sha256": "cbb4818d3eedbde0b44f132c9b53343a6d6d8b81ced2630cb1cde1cc5d70de68"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "73c859a8f451fa2eae1d33c01540ccb3196acc7531b69b2e1ec78ee7fd01f975"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest.xml",
+      "sha256": "db74189ecb5e80149a4efbfc98f24445ac781814d195f1b7911ec3c1a73407c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest.xml",
+      "sha256": "a56c1ee89475df1d278bc3cc855df20d0336738e3f1aa588ba619432a99b492d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest.xml",
+      "sha256": "b2a7c247223f3e37305ea454d0150eca67fc0a84dc6ddced8f72e8e2410d7318"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest.xml",
+      "sha256": "65c8f193cb33f338dcafa2c7f063fc61331cd506516143cd69d0aeb753caa2a4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest.xml",
+      "sha256": "21a971b5a9aa79ffbbbaa44d4eef2354c0b4c3a52fdeb2d1c9b9c5b13294ad6f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest.xml",
+      "sha256": "0bfcf8f8fa5105ac2c3ad612aacb2c923c16c68d9f2a8e398204e181867dbae6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest.xml",
+      "sha256": "255f081368d269435207f62945e6e293d74389db7306a8eca9d22540072e91dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest.xml",
+      "sha256": "ec4ac84bc622fc3f61a54dcd9794715b21b76bd9c33f8ad7c4064d0ef6dad257"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest.xml",
+      "sha256": "e92097e9506ede8f7e8c55bd7bf0849899fef073078ad14a42555688e0dc4ee2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest.xml",
+      "sha256": "c4ccb7188f37877aca500351737284d4489848c62c0f9f17823b17ca0346ed3d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest.xml",
+      "sha256": "224179d5535d48eab69006e6c1b2c1a5e2e8eded509fee60c1ce22b812f12807"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "4e5be5f082ad17e537392604c3611dfd3c485deff0c5303e12b95a970df453f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+      "sha256": "3e47cf73e5661b7adab18923e7daabefa49585792eabac5446689a0ee23cd965"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.RequiredColumnTest.xml",
+      "sha256": "6f3957607685a969ee9fb499ab0035b38301bdbbd01252e6b831c35f432f37b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "ca1b3660e6d76a4617f1b3c54c2c085aea6ebcd86a7d212cc5695252037e95d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest.xml",
+      "sha256": "a195aac6bee4708ed7f99538853126eda1bc80d7f881a33509a007c61cfa0b76"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest.xml",
+      "sha256": "738541552545f98f1c9fc26c52247f01869593d53e5eb34e94bc29a523a4b122"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest.xml",
+      "sha256": "13f9d8974dcbf8f699f777ee4ee4d0daf1840d369540f2e229fff082719a93ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest.xml",
+      "sha256": "3f4ba7f1ecdfd25e43aa500daac4e3d5d7fac91cff370bb3462c31f1f7ac5cec"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.xml",
+      "sha256": "c19103c4cdb1f1457344967e3baac74cc82639dd34effde13c77c5a2d6767576"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.AssetManifestLoaderTest.xml",
+      "sha256": "20f349294773e1e03667af8ffcbb1fca3c9e451b8fdde9ece07bbb0f2bb98c0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest.xml",
+      "sha256": "06ef979329a80e93dc8baf4bff7317a457912733033d45c5bff2b4c2f1cd6934"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml",
+      "sha256": "158425d513816cbbc467797d0f35a4ed7d19f2043801f106c4f8c6daabaae54d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml",
+      "sha256": "4411b164fd614fa74adb090e9029981af727dab3e41c3b7a090e6d8d10d9d41b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest.xml",
+      "sha256": "685b925fa26653258f79d5dac3404ae49090eb5698b2f65a9329651b4968d0ae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.InboxModelTest.xml",
+      "sha256": "5fe955738d1ca367356fc31fd06aae91614828c2a95232cca546efe3e9df5f80"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest.xml",
+      "sha256": "ed4c81e90fa98a06474b5116b9f88894ddf579a7d2b814755dfc8a8a9aefd6c9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml",
+      "sha256": "d9b2cbc020da0323c383e7633f22e8cbf9ea8fc8be0c0425b97bc8cb56e69664"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "0dc21fbe22954d446cf65e58f8b47315f771af50dd1553b1b98c26c83e9d2809"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest.xml",
+      "sha256": "2a88dd0504433ace347d99dbad0a48d0387826047d8b7495dfd6984786554eb1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.SecretBufferTest.xml",
+      "sha256": "519aae98c849d9cb7a9cc93fe3f098e4924b4ecd746a60225899cc48ee24128d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest.xml",
+      "sha256": "51dba5a4fd27c254a49f2013ce4714de12cef9cb9b1e963275485adeab2f0c39"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.RequestLogDetailsTest.xml",
+      "sha256": "ddb180dba97c8e4fb8a7abc310f624bc4ea5a08b2d6e43c3230cc6550c478859"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest.xml",
+      "sha256": "876a9d7a41dd20f34330f4b11d496db42dc3a063d19dea11cb92bc903f6c3967"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest.xml",
+      "sha256": "c5dc5243317f82e503c3629bb27539f8d8fdf25ff3170b98cb7be5acc8c54df1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest.xml",
+      "sha256": "9a35b51eac7a8dfa0a8b1b8ba3c2f947c0f3eed61efa69f447d660f813a6f22a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest.xml",
+      "sha256": "d1a0e29c83aa85c8c7e0f8cd398dce771c4ab1f750024d1fdfccbd4430968fbe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest.xml",
+      "sha256": "c6295678882e3b611a00787fed485bdac9a4032463707ceb2c952bbbe266e8d6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest.xml",
+      "sha256": "e323ed8f0ed022657075197f84ecca89f009fefe03e5d3fc6b2511df4461aae8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest.xml",
+      "sha256": "9804f9bbd1162954f7d9499257a121d91d5332c82cc395e6ed5de21ec48439e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest.xml",
+      "sha256": "0e603327b3f5ff6a0fc6f7dd4014eec4a58d7d62885ad360d25199a42464abeb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest.xml",
+      "sha256": "57960c7eb796d0e57f87d28b3c400e665ed3b528fda94c3f5fd06d05e61a381d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "737ea6c95c316bc373bf9d53e09286a9c00064062f1596a2135cf247078e2627"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest.xml",
+      "sha256": "579f8c072609b3d34de310f1410495c9285e76a9a949e99ea95d00a7b2d7bcc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest.xml",
+      "sha256": "24b178a61b5a3718d23c58eecabb895254900ced5202e7964273b4c8210ec3ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest.xml",
+      "sha256": "59cf5c04ff63bef0fb0ea3ebb07f7bf2f917364783d0dfa805ded69264fe8ee6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "4fa512aa36acfd596ae61e7054fe3df475d5eb28d0f52dcb2a962753bc6d71f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest.xml",
+      "sha256": "9986bb33c2e5347c8a748117725c260bd9b2296ebe09c6561b88be0b9e05d026"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest.xml",
+      "sha256": "81d4275dd1c837531bdbd868248db8e9d9e23b6591fc7d6b87df3665354edc64"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest.xml",
+      "sha256": "375f45d5147744f7bf1b631f667d7732395fe45fbbe22f563760dede5bca1630"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest.xml",
+      "sha256": "cab1a6c4a559b572fd9fbaf4d5d32eabfe2c5eeb3113221219d148ba2e09d509"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml",
+      "sha256": "74bc8655bd95fe58191fb7ddb694707daea327f209ef2a9473cf8a0411e8a2a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml",
+      "sha256": "13bfe56650d57d0913b2f4daa95d36390a1e951b5c52049d980c56afd4f7e2cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest.xml",
+      "sha256": "6efcf0f00f48ada1d93dd94837d37eceee966935ce20bda1ec27e9c1344d1da7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "2f2de43076a2f0a303cef36428673a72d40b91c6e013bd13eece8201db555034"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest.xml",
+      "sha256": "141f928df4d5d43aaad551f871a51035bbd6d50ae873bf93b459cd8aa070bfb3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "a609e9b8b15d0b72532dd60c1c9a33acc70235e7c015551875697dd2c2513fef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest.xml",
+      "sha256": "7a767225dc8dfe1605493d47b62e51e685cec35b1ef05f16836c11502137068c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "42e4addf5f29b8954aae78e0d9089f4b69200ceba9b179a948be95707cc6423f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest.xml",
+      "sha256": "57552b0639142aaebba78de1a9a3a2c2f671b34d278b576a881f576f20c9d8a2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest.xml",
+      "sha256": "ddead83d278eeea782e71a3f161d999d6037b74850939796f53c66a33138765b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "01330554b6d70ed39047dfda3b4f257f3abf06743a5cf44800c1f6eafe1ba8e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest.xml",
+      "sha256": "8760dda7d758078375b3279bbb2729e81652df69705f70783718b1f2028e0a91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest.xml",
+      "sha256": "2c42d4c780df43a2b5982c751c9f6df9f7db676c76d1f9a63cbd220044ea42fa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest.xml",
+      "sha256": "68b56e0106211c60223954c98904f5198b5cc3e3058f709482c92ec912c119d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest.xml",
+      "sha256": "f6d90c043e60297e9a7160b3cbd18a83347fd83891ff9bdcdec2d7bed0a39896"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest.xml",
+      "sha256": "01de8475bf74b04936e9b51819c251eb912fae78675694c3e538b6c28fec3baa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest.xml",
+      "sha256": "067823de8a16de5e7c5dff9fbb90f11f10fef887ab4d13c6654a49cfded40beb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.xml",
+      "sha256": "91f8af5a93de7984ce44445bc4abfa6617dd833c0e123b7371f9e88fe1ae1ad1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest.xml",
+      "sha256": "fb3bd122facd7afae2e21b4d980c52cbab3fc6a058626ad60687eda5d8896e5a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest.xml",
+      "sha256": "70d2b23dbb0c0f2c77f7befd3b4f4d5d7ed20760757f66f0edfc1165b6c0540c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest.xml",
+      "sha256": "f989e728cb661b7c9ab0eeb2da5a71a0be6a9e591be8da5cbaddf85190eb76cc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest.xml",
+      "sha256": "cddebac6578b663d56377f25fe7291da8f0e9ebc701af419e3cbc3a3b1dde978"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest.xml",
+      "sha256": "09e4559075438a462acf1da394e7d92429e7f01ad4d2a57ace4d252c36ceee98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest.xml",
+      "sha256": "c5714ed203eb77a497d1da67d64b0a80437281c2e59cda98d1d76b82a76ac1bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest.xml",
+      "sha256": "3238c5fa1b7a083e6f5ed127b949ccfa0da9931a396300fda3d5681493534785"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest.xml",
+      "sha256": "10fc9e85ec942a1ace9fd5ec29b155766da0753bc6b334a5a848ee4a0c618cab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.xml",
+      "sha256": "f07ac6314fee0630887b95930bdea4fdc35e2db533d680f3d02d2cd37d2bd9ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest.xml",
+      "sha256": "e9f25e0eb795d75ba74ba5c704e1c8a797a524c0c514ca70207347a8680c4c9c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest.xml",
+      "sha256": "8c1d66a420b236865682a951865769bdb6cc1e020ac2595fec9c93d985de1dca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.MediaRepositoryTest.xml",
+      "sha256": "798c966ae3e947d09495d3ff7a9bb387b859670a3cffd1fe599b4ea9f283f392"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest.xml",
+      "sha256": "19e8d4972cfd0dc4b6396ec4702c29c3fd31a9762a3a5db2412ed691331c7867"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "b79aacc3dde72c6d859f0ab5d6204e6acfe1e6ee877bbd3ed71fd28fdbf33f2f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "99370ab0337406fa0dfc1036704cdd155718830ca90edf36542c5fbe1697e8d4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthContextCodecTest.xml",
+      "sha256": "28eccb54749f09fa8a80aeb564cc43eca379b7c557245cadbaf8dd527901c640"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "5ee70fc1503e2577d76465fd19de0d11cc1dea894a9e6730712469e9bba3a521"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "9e109857253d8f061a2f16f0b01c6496b62c7286896c830a5a918c7325f39a60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "16ab31fabb4fc986c9f815dc9b8c791a08970ba441a74b3b9a264ff83f98d389"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest.xml",
+      "sha256": "8d7bb8c1aa01b4549ab1a0c47265560ad23affebc69b0b9f8946e3a586809b94"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationServiceTest.xml",
+      "sha256": "3abac2d25ec5f81b8d31e33527322831370fb67e452e8b7a4cdd1c3ce5d81830"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthorizationServiceTest.xml",
+      "sha256": "48dca4f726be31158e833368dd0b4fe7f6164b708dd832af4195faff346636ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.ContextHashTest.xml",
+      "sha256": "b92b9df61abcf23b413f01df15e9ba92679a22cc9daa358e5fc927d56296a912"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest.xml",
+      "sha256": "1e11c53e4403e3444e1425ed38b3569e707077368b5edd615c2b6da21b6197ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginAttemptStateTest.xml",
+      "sha256": "095473a9b48a530b36e095cf45f68d8eb9c0d82dfaf15666fad2043f3a6e3263"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginInboxServiceTest.xml",
+      "sha256": "b4d5c94abb1b4e99784725c314610f3f81e8e612c7d56e9d7f72f29b27b1b74d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginReplayServiceTest.xml",
+      "sha256": "199efcb03cac7bb07c4f9fadbeea12cbc6f894348775ac88e00b751510168dd9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LoginUsernameTest.xml",
+      "sha256": "b5f703c822c91a28e017f5c41492142012b9aef8c979f6dacfaacb991a5624cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "41eddf243739a83aaaecb3ab96b9f033f6cf5dcf3ee56303b4079c80daa0abfc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml",
+      "sha256": "aac6a0418b779ba38fc7831cffa3585ce453da919038a48dfc1093e6b0f24a75"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "7d15139c6522eacb38e70d044933e0ff25b6390684061c83c6f654f971ecf7d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest.xml",
+      "sha256": "ddf965b489d66ef050382f475ef07ed7d36f99f2b2d5bfe933cb5786a22907f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest.xml",
+      "sha256": "f60939284c7af79d07ff9e8b1b00e4824fe01222b10af5043aed6335305c5181"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest.xml",
+      "sha256": "ca0acdf3846dcd9cc7bea398e0cbaf053e533fa9c33a33712fe9c5c9f751070a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferCapacityTest.xml",
+      "sha256": "e90aaea2fee7b6a306e722f73f35883f4f132ab02150f97fe84f1f7ab3351e9b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferContentVerifierTest.xml",
+      "sha256": "b94a1f87b7bc20274e967c292f90e1f1caca1fa325d9dcd550a55d1ac509b903"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferRootInspectionTest.xml",
+      "sha256": "19e449b60d55c96e65254166d78ecc102cfe068f5b53aac6664e3aa417409f7e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStartupProbeTest.xml",
+      "sha256": "b5f5ecb844c95eceac0185b631a6a3630117d17ba6b986b40995f3bd2cd226fa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest.xml",
+      "sha256": "f4e615d0c7cb4b05a6cf96832262892fe9f2855611aba83f64841b51d91c0287"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/api/TEST-dev.codex.schubert.nk.api.storage.TransferUsageScannerTest.xml",
+      "sha256": "c5df7b7e97f4e378462afc2e229181843f33abf3a0675afbcf5b7fcdc9504a35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest.xml",
+      "sha256": "a41b3e449ab36263491762f8758385a305fbffb7addd0f214649ef720ab4f779"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest.xml",
+      "sha256": "c73e41047a655000ba8307c7f3fbfc29acffb4bbc68560bd6a690aa588d4bf9d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.backup.BackupProfileTest.xml",
+      "sha256": "5c0dfc0600199697ab57c5eb5365603c7dcfa07a72050b1d18199b007283c58b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest.xml",
+      "sha256": "63df0b33392c9e1cae3185f180ffb9daaf4dd50f73a45b7681c86116bf12366c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest.xml",
+      "sha256": "2c4c87777256c31c0d468dbe6aac59dcfb22ddb10315d2cfd626583f7464bab6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest.xml",
+      "sha256": "fa80ccf1fd6e3d09c70e61a8f34957bc29876c135bb9999490d6b3c07dc3097d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest.xml",
+      "sha256": "23647199c197b0a7696351693f4ce283202be6672db88060c73f49a7b5211797"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuardTest.xml",
+      "sha256": "00fe9c4d51faac875bffbcac6070e1462b5c0d92d7483b304c4652e544320b96"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest.xml",
+      "sha256": "3a0cc438c85ba37b923433e403180a0985823caf53e49884a85f3e662ff4048c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest.xml",
+      "sha256": "bb21ed1eef56380a6cdff6f9de88358db67f7a0fab7747ea167869ce67486f6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest.xml",
+      "sha256": "60e5f4d327ae096c28878060ef64fe770a1675ff678ec6261bf1adb7f23150f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest.xml",
+      "sha256": "4a99395181a8cfb7da7a2ed7c1edc1660481af6c6004b528f57552ff1df2f125"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest.xml",
+      "sha256": "538a55ed294de56d10c70df95135948f5bc2f5de0c696c517f2dbb49a8ca12b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest.xml",
+      "sha256": "18dbaefe3bfa8d3fcc6ec91d71405c666ae9a45418e2df415e9fd5438ffd0177"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestCodecTest.xml",
+      "sha256": "fd2ff1460b7e5e2ba2b0b16e10d556b8ca23a592ceeb0a1411d8eb4ffff39c55"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest.xml",
+      "sha256": "d50ab2f0dd1edd41d4b3f318aed505d20746a0b5ab675ed5760151701831bfe9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupManifestReaderTest.xml",
+      "sha256": "1a254fe30d44caaf0614c2b778ea79a2bcbbc3cc79ec03e0253c207c79006247"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest.xml",
+      "sha256": "73eb9e7abd796e3d7b99a050ce866d8abc94a0a34c9fc7bc338b4e35511b4c44"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest.xml",
+      "sha256": "b8ff4d16ce7f1e0f28a21da4c6f37335e86058096fd485dc6efada7be858f233"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest.xml",
+      "sha256": "9540052a309e901786c688d069d5a103cc34f4ca91720ddbaaee313bbc36eae3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest.xml",
+      "sha256": "984020fc1a59f42de5b3dae2d99ced228012afa8ab7686095a2411394813e89b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupMaintenanceWorkTest.xml",
+      "sha256": "47623239fbb04eca7052ad14e29d5d0cb6764499945f00c431f63ccb33f869ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest.xml",
+      "sha256": "27c64c72b165927bcf1abf9d5eb6df0c5b9bbdadd3aa11656cb7abe72a66521c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupPreflightTest.xml",
+      "sha256": "34640a07b8fa2cc72c4419135638aee29be8fa7c139bc6c1242651b05f89c675"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupProcessMainTest.xml",
+      "sha256": "04da74fac72f306e7736e3fa0ca243027507e4183cc6f7371cc8bfeecc043036"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest.xml",
+      "sha256": "0b0441f5d80d4631cdb5ffd1d764742ff9291c91c58964890d15f2ccccb6b34e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.DurableRecordFilesTest.xml",
+      "sha256": "28189dd05a702a477c1cb01976e1a536f1ca6df67947f7eae01753b66023462c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.ExpiryOwnerTest.xml",
+      "sha256": "23f31559ac2bbc96b64b49add18feaca660cec4ef2facc3aef310609ad5a9313"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml",
+      "sha256": "b413875965e50ee67a87e3f2f70bfafd690a70d39b179699ee3216166f6e0a60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml",
+      "sha256": "fa07342cc601be1980921d67ac25f960ec19a25a9c31b6880db1bcad731fce42"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml",
+      "sha256": "b45c7566aa1b313e15c17d8666076806a3d63805a87e76bcbf75b594132774b0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+      "sha256": "ff47ddd09c7a83202d46a27a72591aa4d5e5af9257306b008359d5dd40a0dc87"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest.xml",
+      "sha256": "ac028c469d5e13d228181dc0d4e2846f187664bcb477c7e6513c42454aed1fff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.xml",
+      "sha256": "9ff11722545f07373f90d81273ef6af347efdf404f9eb3298f360648fd2dcd4d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest.xml",
+      "sha256": "9904bcda48b4f9caeaa6a222621147e70750b1df6ef3c7395bf41eab2700e01a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest.xml",
+      "sha256": "382a99ab90a0a8d3370b7f37efba111c9340d9ea9a0acc14a54d484cbfab97cc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupCatalogTest.xml",
+      "sha256": "9e49bab74e86c0d5924cd6d04f19184c905847b9e4e284c7f1e1fb3525b9c83f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupObservedCompletionTest.xml",
+      "sha256": "d21b1943affd73ed4ed7eed8f82cc11a69ba45228b2a4f48887c668ca36e6ff7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest.xml",
+      "sha256": "2aaa12ee84c3d5df870a97d15db635f8fe3189be4a7e5758ee8264e1707e31af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest.xml",
+      "sha256": "48274533ae84a9e9fecc62e75261fafdf37f024e9ef47706f0abe4e73935adff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupStageTest.xml",
+      "sha256": "9e8c3782dc47818465e4662f32d9676695fb116c47d6a13b15bdd6f7def17583"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCleanupCompletionTest.xml",
+      "sha256": "28953c85684b0d2be8e3a2b1065c632df7198a8400bcd3bbbed0df66d8cf53cf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "54870f100bf58861ca24e9c7eec19fe22f781db16fed3914288ca88c8dfd2f5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest.xml",
+      "sha256": "dec47efa9cbae5920c72b1d0e9f8b1483b5afe36fd2423e7267eb5ebd872535c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningGateEvidenceBrokerTest.xml",
+      "sha256": "f688652ddd42de90eb1f5a3194bff24273643d307b6433ffd1bebe443f30cae6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest.xml",
+      "sha256": "399764e5ee00400c381edf9e03b54e083af28938d1a9d4ca844a2cbcbed37a60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "bd6fb41396071babcedd89c58347bf594b8858f97270a9d0b3f3677ce0154446"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "9e4ecd8bdf9412bc78ec93e2dee8c3080a9fa39cb461fc3c54b1bd05d906f7ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "4afc5ad69803157e0ed711ee55d8f5b5f79584d36efb7fba44b864b2c74cecb8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningRootScopeTest.xml",
+      "sha256": "bd5202a0bef41804031df061befa0f29f4d85650f7d31d46e4a34369b40049c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupRootsTest.xml",
+      "sha256": "ee514ddacd0a3e4cea8b0f5e720852478a52c58f5da14839322236f4fabb66b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest.xml",
+      "sha256": "d42e4fc8abed77743c8ac1836f643a2316c7f3def382fb7f1d2ce832f41df95a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflightTest.xml",
+      "sha256": "435615edd64ec2bd32d32491896e24f831562b9de9b5c79ccd7229a1735034aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest.xml",
+      "sha256": "7881cc5325e1b0e5f1543b108299ec5817b8e117d71a70d4e440cd08418cd150"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceAdmissionScopeTest.xml",
+      "sha256": "e3829a3c570fd7539bd9cb22f65c57552b045315c32ae551b66dadeaa8a50c86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootServiceLauncherTest.xml",
+      "sha256": "c0d6979943e24245e49b5f856c02adc45be861f7723dac2beead192ad1ec807a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest.xml",
+      "sha256": "4b1ca7812e8ae6599804e5f8b978be871c91bc70018c133f27a2a371ee8adece"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml",
+      "sha256": "a679fc69fda270bfb01bf4d859b8910b48e41e41c0d5b9dd0efae539b4513077"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest.xml",
+      "sha256": "7022496ea86877b0881a815602aba5ea031613d9c508f8ae8d69110bb01e0c8c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.file.TransferCleanupTest.xml",
+      "sha256": "d1b7571c920284be0443c7013dfca7293453b3fda801ed4b26fcc85cb8d54383"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest.xml",
+      "sha256": "ea79cf66237e07645145a88a33c50d48164dada13c7109e7592bcf6681d562d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest.xml",
+      "sha256": "21114a4863b6ad31921cf8f262e10e13bea1208f334d9d40cd0ac298790cb46b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest.xml",
+      "sha256": "0bd31d6a342670ececcbf4cf2445570bdc84d38478c154337c17f2b90ef85d50"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest.xml",
+      "sha256": "2e9e87a62f62bbcba32b55b31984c2366e8b4f8f12648f27f8baca0963316440"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest.xml",
+      "sha256": "e2a65f0d1598b8b85a21ec259ab2c4a3a50b43c7c1c58f7799107a8f4301f76f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest.xml",
+      "sha256": "fb695f8de1824e49c75b04ba3433884fb17f0db2c179418360691ca286314b26"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest.xml",
+      "sha256": "cb0c92ab349e226f62d61fcedf85f99762e8bbab046e8c367ce6ac396b09d017"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest.xml",
+      "sha256": "d912c8d71c7f6c0f0828474a938130f2154fb93712318fe10faef6a69afea3e5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest.xml",
+      "sha256": "5a77c92003dc367aadce7f6c45357a2f57e88e4ecfa4eeef46c373c79ebbb93b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest.xml",
+      "sha256": "995e4ccb7bf87bbce166b7993f446590ca295b2ad22c7d7393b07571d49fcea6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest.xml",
+      "sha256": "c6fc47172bda1077b6849928b07f1447773eeef7048e6877034aca0597588ba5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest.xml",
+      "sha256": "f3cd2ae8e504454ef79289597b202fcc0b48b7ef699aec7f675cb67ac2db1419"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest.xml",
+      "sha256": "91ed0525fb9fe2ec579eeee717949fa7c7841398e8d7fa87ed0bd75623e3b0da"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest.xml",
+      "sha256": "20a9787c22524d6b43756c02777456351af4c5865106e28f5f407c01e4946fb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest.xml",
+      "sha256": "af8aa2970e3ce76b39fb1bb89a3c31e381f49af8c17f771bdf0ab619fe7bb6bb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest.xml",
+      "sha256": "2fe265baff41630e3b925d99bf647cf1eca3c8a833a2679df92127e4bede999f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest.xml",
+      "sha256": "43a1cd67b7895595eb7a9cd157512507b63c9d23f53161570df5f90744da327c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml",
+      "sha256": "0779fc15965c1799a6842429755da75d792e2202b53568fa0e7fd1d2b90977b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "fc82ba43b00812b485ec774a19e31374e30ce521aaf24aa6155ec1b764cf98dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest.xml",
+      "sha256": "ff4362418e76e764d94c67bcde31655441ed188b692093a44d491d2c39326748"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest.xml",
+      "sha256": "00518f84a77c099ae9c6cae741da5f19aec3e198d84508b803dfc845d6d266ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalQueryTest.xml",
+      "sha256": "9d2dfec4875687e8096ddee9ee3480a8c41cc068dac1b4f8a4f40efa20df38fb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequestTest.xml",
+      "sha256": "f563c0944eb581e1cbe7a07715da56194d3451e95f0875403347a71d2a592490"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest.xml",
+      "sha256": "1001e2a1e76269d483faa18ce77fb2151ba6fedc37d534707fe6065fb40e1d1c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupUnitCycleTest.xml",
+      "sha256": "2f9cfe1cfca2473408875c17d3480a97d2e86212f6d239393c1b5dc89e25a6a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest.xml",
+      "sha256": "b36e459b0ce92d86fe71a438451c14868da1b04fbbf5a294aa536ba182fa43d6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest.xml",
+      "sha256": "2b952738f60bc1d09cee2592a64358def8321a2ea78466619eda8860d2e56816"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest.xml",
+      "sha256": "e8e6ec3d358c4243d486e4c4dee28a651dad69af6c5c111f62af7a9aad5f0bc1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest.xml",
+      "sha256": "e78acc8065bd2249f4b56cfe0704ced0b875023e23c9910f165b81ec51fe9bc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest.xml",
+      "sha256": "2a9ae95611dd3d2783e39c98d64d73561bd7e36730bf37ac063fd7f248be1b63"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitCycleTest.xml",
+      "sha256": "cefe982bed5f54b9b53ca2e6a9377effc2dea910674c3a992972edff0ecaf203"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml",
+      "sha256": "263fef0a9a1cd3c5dcd83da683ed574db602384221e37836b9478f7d556b99ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml",
+      "sha256": "483d09497c34b7489e238100584c8c06d360148f48727cd6777b2f5d64cfbd98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest.xml",
+      "sha256": "a876866cfc8d103de26010fbf31aef9a1d4cfc43deccf34aa19aa6cbdfaec85c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "fa7b7cf928b06f57cbdd09687c64ef9210681970f742eff0bc1846b3e447d9dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest.xml",
+      "sha256": "ad23335679dbeb0ea1875eab009dc9bf94b5b2adb92cf1203b5940f6f531d215"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest.xml",
+      "sha256": "5fcbacd1ab1af9fe1bf23b765d1a8c665376f177cf8dad9e1fca0e2187b29a4c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest.xml",
+      "sha256": "882d084d36e3ff8ef571aabe08f4bf554f544a8f61efbc2f7d75a5206d385211"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycleTest.xml",
+      "sha256": "1c9300517015e505fab2025e63d5ff09423d1dca74a0e1c4fda4d97fc709d016"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml",
+      "sha256": "919ce02694e0893af4acee2a12bc36f974bda08d3f472f2d66adfb3e7bc38472"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest.xml",
+      "sha256": "8de8dc907d418ef9d77878034bb527843beb45de016a8bd36f941e729ca5556a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningStopPassTest.xml",
+      "sha256": "b866ee11918359d2eb22c0cdad4233be8c888b469adb5185d57b3c05603388f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest.xml",
+      "sha256": "8a69a0180e3337e42ade93dac6f80a2229d714e58395db8bc3388da9b4941191"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest.xml",
+      "sha256": "26590f9df285fcc66ab7653e4cb14a9eefe68ea6cc89d1580966d3ebc811369a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.RootStartupContextTest.xml",
+      "sha256": "85dbc61a04f71202bc62280ace01cdc01f5c2b840f4d9a815cd5a5b6e80bd6a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest.xml",
+      "sha256": "0a8516d03d133ea8a129a69b093c1f105ce0118359f41833cc5748a877144115"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupFailureSnapshotTest.xml",
+      "sha256": "e02e193871a115567c5553084a50eb6699e68095ed2d9ae378ed380bcf6957b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "e1a1cf86e88771a640e4750d18523b2b1f2ab77be6b867dfc75798b67b1ff8dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "9c3fc37f6ce2bbb4da2874ced36a1c259500f6cc6ce9d49d114aaac6d158b301"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchStepValuesTest.xml",
+      "sha256": "532a6ed1c150a50f07bd44ce1dab634bd92570a814e73d4f556115f177dd424f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "462776d5750cb426f20e579f0dc899c4b615703464ae1dbbc8cad129af5abe6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest.xml",
+      "sha256": "cd2bc6509e3603ebb0aa785c39a282f016e14eb9e57547cffc4dd79365964eaa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest.xml",
+      "sha256": "be73935c1ee462af043dd53d607b821dffe627b4f882cfe08bf309f4a469b727"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "0549fc075d38979a051e3c120d1a79e37767fb939a02341db9cb5fec5ed990f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupTerminalRepositoryTest.xml",
+      "sha256": "290a124fc3124bdeda691ccb39c1e79efc14c4d9456968bb43a9da9ba86de089"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml",
+      "sha256": "9d24389c65145ff2e2089e663cc2de49340f1bf4f7ef12f5b277686876261a7b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest.xml",
+      "sha256": "4b342e70f9be3885c8427969e3c05da1c778399fad3e33843018acfe6400bf9e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml",
+      "sha256": "39fcc750a819e10890e369614a72b3b520320332efaf79df160e439f1706e62e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningExpirySessionTest.xml",
+      "sha256": "eaadbaeadd5434b76f5386ec38253695744969a8e1b8192b7ca76833ac30b97f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest.xml",
+      "sha256": "4a5940d067fd56d86bf0cdf0ed78be3e9b85d36aa98fb5e793f648ae30ceff6b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest.xml",
+      "sha256": "843368ffbd64b0810fd12d6841c899c7b3e13ddb385915fe5613a27402e86279"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest.xml",
+      "sha256": "603d7712a0ff81a1ba17aa4346ef4e03a8af61707914738b60b6b0385eff9d85"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest.xml",
+      "sha256": "7bb079f37bb147c9eabe54b4ddca7f1d7e7fff3a63eaea5b37b6ab6f18601f0e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest.xml",
+      "sha256": "631803ef362217d63f69531fff4b483cde30238195d8fdc9aa9a7c36c529c71e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml",
+      "sha256": "5db947453b1e41f2e5971aaa10952c68a900e27d9ca37d1d75fec6c827d2777f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest.xml",
+      "sha256": "532b8373f8187ea5b72fba36d39b78a8362487eb0e5eea82a3cd038928074609"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml",
+      "sha256": "12eecbcd493eff49bac35c60b0309f45c9dc7fc1f737b09674fcc95cf24e65e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialSetTest.xml",
+      "sha256": "78278c86c578346d44085362ea5a449e301f1f37bf977a8c423591cfb44b47c5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "1b271b9a2f891a350ad4ff25fd5941231b63561f91bc4b5965f4188b2357207b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest.xml",
+      "sha256": "1efcfe442ffbfa1fc6925634c69586bc6467e0991d2319204519aa4dc1045cce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest.xml",
+      "sha256": "ac1b956d0bb1839264d910515e48dc85a7079dd02f1e6c988ed16a228c842af0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest.xml",
+      "sha256": "79812c8324de38817eac9f0ae15b6bca42260e963732c15f0b3daad50856fe6f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest.xml",
+      "sha256": "71cf0ff562e4905e4de7da019e1977cd86993346c1420368063755ce5ff64b09"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest.xml",
+      "sha256": "9d21c1f688bfca654e3a6587dcdae0adfb3151b0b9774ec4a8695a11deb13a0e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildBrokerTest.xml",
+      "sha256": "c32f564c3c59dd98c51fcb09f69a643cccaa5ddf9555796a3931d76955c06be3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceInspectorTest.xml",
+      "sha256": "ab5c322cd48b4a9ef95912c43a8e41e5db02f0705dd0011935fb24434a702d53"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildMaintenanceParentTest.xml",
+      "sha256": "9fad5a2aac1d293f61a352bb26f301b3f70a0fb851ecdd88a2fe96d2b6a61874"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml",
+      "sha256": "9ff5c39177540be2088f71a93780414864b3134d94fa483dc649745a8fb213ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceExecArgumentsTest.xml",
+      "sha256": "8752196307c6bc17778b7cac28058673fc87f047c5876613a497bdca94be606c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "8fde7109608f067c031cf428d415956e5b3863f3ab23c1a4eb1ea86b9f17d0b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrameTest.xml",
+      "sha256": "8b80be2137df2dd0707baf8ce54c535fb1c1c8f825b766e2d9842e2a7026cc66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest.xml",
+      "sha256": "8948b0b15c912ec9e9d06c473abfadadd93f3e143fc965e96e364baef4af56fe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest.xml",
+      "sha256": "eac6982aa1d7ddf7956c07bea0919ab90dd01c1e7922544c7f267c9e585ce148"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml",
+      "sha256": "93e019900f253cedb71af9263e83c210265c8a2fbad24f5d769a22530378a2ec"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest.xml",
+      "sha256": "a80fc5c902ea85505682a7065899855b43a10167083368d5b1710c0e67476d51"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest.xml",
+      "sha256": "e7c0a99861b6d2301630b20e928af08c7cd48fb8d9d1e8209256be39e895f44b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupProofFrameTest.xml",
+      "sha256": "5c0a6dea0a4f8a4084396a8660f1c2934111f1491d6cfee15b4366ad34e20838"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest.xml",
+      "sha256": "a82371e64a65a2a0c7cc8b9e357298c6e4b80ef60ba6a171806d919001be2037"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "0eb2922cc8a18b973b07b1e905cadae6d83c96b312cd1c56a6138fe6c959c295"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "sha256": "478959426f661c513e503b6aaeb0b5353ef5c175d08b4b97bceb58a08b380165"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "3e77c6debe2b1f8cd3c3a59c22092fef56b757d7e15ffa102af5b5f47fa2919c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "0f31399a54fe8338ffe09fe91c666ae54929b8ffb83c1a48e47d09b38e1bdda3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "6b245bf5346fbdf952d3ab1ec1764f7e0eddd099b118ee40cf78fcd2cde4b858"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "sha256": "7d92fa8e560188c273adaf62b0a0e3575bff552dd630a2a8d80fec3d202fdb77"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "5d65a39f84147f451042b5b0b587963be332f54c9534fd1e20f0870154f2bfd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "fbebde6688e1628b22958d8c1b8947898e73e8408a94f702a7978b29e70c27f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "d0d8c6da228a1bc24bf865e68b5cbdf2f433a3187bf874305f6f59bbe5b324ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "5009b61beb7b29320ef2befd4df48059860ed7415545269285b07df6980414aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "c22f82e9f3c1d4815267cfc42d21c411e5d61de5ddb6a05f55d05ebe27c2fece"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "4d426cce2f22b882b0a19795c8325a625d14a439f495fc6dcd70a371a94f8bf9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "932e3ebcf8b819092d904c86d4ca18087aab7c9dc5362ac96da616209425e1e6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b47f6e4116a2eada3a07244a264758b9cff12dc7e14a9473e1592741db6e421e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "sha256": "1c5a728521e10a0e8387cc0de8c37abf9f6526d12052f2b3365bc7b3ffaad70b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "sha256": "7db45060691748d145222613dbf6a06f4c9e57eb07139f3fd98b483f1e641cd7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "sha256": "c0ab70cf2c6601f545ba801438db37a8d00a95243f4035f7d9de6c4d64eb10c4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/protocol/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "sha256": "a0c2046ad30bea23fdf0c8448495416b6209c1b28bddc8ce5e702933d468f110"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest.xml",
+      "sha256": "7be6f4a87a18f88afab696aa755725d6e61de02a5a5e963c194bca682627e29a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ExistingFileAccessTest.xml",
+      "sha256": "ebb5ba574d2f2be6a0b680a448f6e6df5d6a0bda041cb4f5925a35e0f8676557"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest.xml",
+      "sha256": "70d67d6bec4389c83d57346276a4fcb5f50fb9001c2c0d78d1a1c856361b4d0c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest.xml",
+      "sha256": "0c55e6449224ea420a3203c6dc85029e8fe15d65ae8faadc25fef9e69ec91d30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxFileLockTest.xml",
+      "sha256": "f741310bbc32561a1f21418c38348aa2d8fb34033072874508c637b14491f0f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest.xml",
+      "sha256": "c1502562585fec9c26c6d8b0f7c128cc0b867b8034404d310607553f8768de08"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml",
+      "sha256": "b7d1326b3075437ddca5e8468fcfde20ac3c9a20f92b36c67bd2757b72be13eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxMonotonicClockTest.xml",
+      "sha256": "69f341e095b053d97263b879a820d28e137d19f6ca641844b929441052dcd020"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxProcessExecTest.xml",
+      "sha256": "9342664aaaae7fa837384f96450e3d0753c67acae6ef5f582e8e2a10ea794b16"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxSealedProofTest.xml",
+      "sha256": "3222de723b7d0ab897d46ca3a5c167eeab50eddc7ab64b3c29d79c3e459da5bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest.xml",
+      "sha256": "2ad6f63989a25c542a5f02e5cd50fcd17cb235b88d897bbcd5634428c5ac5988"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.LinuxStartupFileLockTest.xml",
+      "sha256": "7d54c1b74bd6f382b1421ef4868529e20f504c4455684a6d9539699208dd0cc3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest.xml",
+      "sha256": "8a20532f8e3c6e6fe8d99b99e0ae1a8a53a97a38dd37d67f511f02144fbb6c04"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateChildDirectoryTest.xml",
+      "sha256": "bbaa1d14c1c828dbc98e1c4eca4fecd53b19e4e92bf91746548503a5cb90aaf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest.xml",
+      "sha256": "46da3fe8f6d9424e272627ea38d06f4a5674fe91a4ec9115bda47b9dd7358672"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "0009d922eaca734bf511dd2abfd50df69d701b14bfc03ab29c17ebf6a040b8dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceConfigFilesTest.xml",
+      "sha256": "299b5a1d3787e087def3b193872c65ce3d9885ff13dc25db7bc51f6dd1842c55"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialIdTest.xml",
+      "sha256": "b29a66cc80b5ecf34be0abfb21e21106464a30b4656d98aceb2bd6cfd16d062d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.ServiceCredentialLocationTest.xml",
+      "sha256": "5339dfd1c8baf8fe2310c48e89e3f14240817c8eb0ab6259204851de289f81da"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "c4f92bcfd6011c59f4c8130f0462d876ed66ba52d44040d3773c7c6eb84417a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootInspectionTest.xml",
+      "sha256": "5d86c7ed80fb5fea423b75b5405bfc223a98a56ddb607ddbd283260ca55eb8e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageRootLayoutTest.xml",
+      "sha256": "1d121a9164f1ad62325677881403ea7051530d1f4460af641eabe6354ce81190"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest.xml",
+      "sha256": "99ebc5c0b291791ac88fc7f76eb8e0c674a5e48ebf371aadd174260155238f02"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.api.file.WebNativeCodecsCredentialTest.xml",
+      "sha256": "0d1d5a28f252d8538b3b797f26d4160426ff6431b6bc0bb223ccaf79cb1b23d6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "7341fd223dc7b9766663d42df5ad19170acfafbfe63842f6e2134cd89435113c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest.xml",
+      "sha256": "c96b58f9964c055cdb98f50bd5b8c29bb43af9c6561f1e62b9cfc201b8f3abf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest.xml",
+      "sha256": "689317a0171d58e3a0ca836d37d3dac55b9f33912693fe61b938154368f15a6c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "d816e858c2bb223654de1dc860421629b101b0884740068214675bf25d471071"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest.xml",
+      "sha256": "76199b956e523e7b438baaa14688e4362425c9654aa9e031dafc4c9b4ea89288"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "66247e55c5efde9148ecd1b9f87556c05e0098327aad86c623c514257ef67f6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest.xml",
+      "sha256": "da98e9beb9ef7414d67a81b636dce1dc8dfde48df803bc29d5f74430f74203f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "a816912b561befaff02aa833b1cdad8779fead76fdad57830f5af08428f24aa9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest.xml",
+      "sha256": "5798d7fe255e24cc8390737f4469c5114ec2b0af0f7c8cbc955bf4af49984447"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest.xml",
+      "sha256": "bd155c06a9aa50199a4f924c28e29a5fef2522d3c8038dbc42200fac3f9f8889"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.controller.LoginControllerTest.xml",
+      "sha256": "1d5c163fad631c951e5adc46a35f181b1cff16cfcdc7c95dc3b0683b0a352f13"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.form.LogSearchFormTest.xml",
+      "sha256": "e01553aea187acf9af69cd78155682ec280509cb076a014be3bbb6d6d347f09a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.form.ScenarioSearchFormTest.xml",
+      "sha256": "59fb08c1b00951c319947a70a340903ce624671fc3d7318bb1e0c1d1896e32ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "8af347752849fb6d9c317d8078df25c5028e395fefe8cd20117d72ad563f2654"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest.xml",
+      "sha256": "77bf58aaf22c76d5a4b4df131789e063c8d96d8e9a9e1aca651e4661fa9122f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDispatcherTest.xml",
+      "sha256": "26a5f6ebfd2b8646647fe54d1d15ecf6e76f338a15757d027a47ee8355b85f01"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest.xml",
+      "sha256": "2652a9738a7cd1b13be3a145fecf465a28742579ddd5f3c4788b1fc3c3a4f679"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest.xml",
+      "sha256": "f3f66e56b233f98fd4a172e2312a2234d3b0e1650dffaf580e79e65d98c92c05"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest.xml",
+      "sha256": "4ea279d95c72bb7bd83126b8805ba9ebe185afa94d8ef4a253b109c1dc2d8f1f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "54b22bd56a0d13b0c58d5d1a81f7bf0421cad987d5838cb24309b689683896bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "b3d472bb14959a356ec75ab02945a3734632fa0c33f86ff2b0d22c7008ea86a2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest.xml",
+      "sha256": "da1cd8e469c36c907dce33e061d4753ea8ed62901a1fd1848bc9111a6887eebc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.DescriptorFileResolverTest.xml",
+      "sha256": "54e2ba13cc72f6ac89805f76b89b6b8834bacc003216254ea58935112469b747"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "f6b6ad3e29d80069c51cb33be8c7d2345d7d53397df501a62d917368e40df945"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "a982bab94f8e4f5359b0a12dfcf40d5e32232dc7159cad27cdfd3fadab2a6b28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "7815879d1a3c40c0675895e3ee506ebf314f60db50cf03c6ec86adc42f8ea8f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "0d8b8f1e39a7e3132781f879d2e71b50b37f8445aefb4a996b6ba98c5e8b7e10"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "a1c212c712bc63c365b337387af69a66e0647ef247dd74ca985c03370d0cd8bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest.xml",
+      "sha256": "2392b20086bd8b0211184330ae677aa38406f187f4dad53a0cb2ebbac1858e36"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "ea0e7fddb618897c193c4c8f52a351db78cd7efb140997f7d1295e166c328527"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest.xml",
+      "sha256": "b006e9bee118c358b44b38b2187eacec467546f35a602a2d16c53f71a9c63362"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+      "sha256": "b69b6a6f40d3e2862a8a74ed821c2ae434e38c3c33149b04aae5f68266c98950"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "bcb5c88a0ebb70ae4362e36fa70224ff3bd064b920c7b38f581da76691ee15ec"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest.xml",
+      "sha256": "5729dc3fa810ae3870f5175dea6266bbbf83ce4dccad75922f063aa4d9a63e5e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "654e9ebcef67af3fcc13e58a724e25a0bdc3312a8a677337536ba602c09bcce9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest.xml",
+      "sha256": "4bed26087db674168385c045d6ec0fa4bc10530ec6a620b24d68977cfa74366f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "ba1a97cf636366a464bfad22efc152cceb3d8bc3e7403a569c6490fafd68798b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "1af1b143b57ec0c3d663f86afd6f6e3945523ac7791fa59562042aba78580f31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest.xml",
+      "sha256": "2b90169748b90849bd4b1fe3a69da6845f0f3d56677fe3c293379916c6af4c96"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest.xml",
+      "sha256": "89a2d075a587c7248337bbbcdc04dc8d04cc7cbbcdeec12b91d4c85873ca3718"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginClientTest.xml",
+      "sha256": "53ecffcd4b3c4375fffa9a710f9c6f4be700a969f51127b7d28ced0b4d3964b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.MqLoginContextProbeTest.xml",
+      "sha256": "e9f9fe83d77cf112e7bea2094316844abd50c7b6096135174e1b49aff998f336"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.SavedRequestTargetTest.xml",
+      "sha256": "f7123d10f2a20f8703196c8c5ea28731fb0164f11f46dc6ce1077ebcbf3de8f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest.xml",
+      "sha256": "87a22739c6a34bf3596d7a6f846fd65338426d35e8c4e363f2363e75ed455988"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebCsrfTokenTest.xml",
+      "sha256": "0c4aafdcf82bff5e503a98df4e35dd383815711e962f6422053f1ee5c179276f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml",
+      "sha256": "86d9d80d75faf0189a883e231e7086cccea095f146ee381f3831eef3fd5d76f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "445205a1581ea428c297296a764a7888716a75879a64a201b07f9a56363e1645"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "f8145f8ad731fd49fdebb7cc62f0ec0e0200082844cc57e672ece922a3d6f1ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml",
+      "sha256": "c165980813a75886e87b0cc76a66b2868d31cc605ff3ffe3b83f5be995bb0c15"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "a0b9fc3508837c5a5fece9e54bbf3edcd0e6442f2ccf1828485ae78fee4455ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ErrorMvcTest.xml",
+      "sha256": "e9bb346a8d07b815cdd2bbe529630b7045708f8b0e80ba42f2932dcb3d404fcc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "467252d63070df2f82f144aff26988aac5012d90ef72d34e61ed05407b067c6e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.MenuMvcTest.xml",
+      "sha256": "13296b652e962d9b9ce6295fc79c95825b38900ede640bd4ae9b07646308b6b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "8d10632b344da0b2d947584efc15649cae9f6c07090bf15dd96e765b36711550"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "b5ed5cb13f4f541c32747fe6167e0ae16de378a2e4b08ebd57e0df0c6464fdf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest.xml",
+      "sha256": "289a8446293c3fa280c768816978eed61c7d101922e0a9570ff645cc4014f42e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAccessFailureTest.xml",
+      "sha256": "71b3320a14612682d88e4023673f7344b860e9c66bcfe8b562c276d1c5bda2e8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionAttributeCodecTest.xml",
+      "sha256": "883fc350029cf22c884ead981b0de4534e4bea3e21abea0d5352b8bfc3a3f887"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionFormLoginTest.xml",
+      "sha256": "be157e7ddef117775b6000b3fd004ee2af8dba39afac60d1e1ebb654539a6679"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionLoginHandlerTest.xml",
+      "sha256": "bc6ec5c0874fc4ee8bbe7e10f66676d8b708ebbadf21f208e17e05b5ca4547a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionPayloadCodecTest.xml",
+      "sha256": "9ce1bbd7690e5ce03c47f36bfc9efe3d4573c94b27594419c417748afd6c33d8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSavedRequestTest.xml",
+      "sha256": "33f4b1989c3de2b457e893016ec09dabe93a6f220acffea1214bd59e73c02142"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionSecurityContextTest.xml",
+      "sha256": "6478e43aa422fa84514059ccd39f01162175b2e9869604c69b19f59e4649dd58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "80b36ec3d2dff82521cadd8b2ba37d40d5bbfe08356d1883aa597d648b7be05d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "f7bcb3b122b110b2ce6b5e80ce6c267f753611692c92f3ab88c3b60f8af22b3e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebRequestSecurityTest.xml",
+      "sha256": "2d6e7e8252557166bb94d302eb619a4aef397e5c0bd23a2ad37fbc3c8beeba45"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "844ea1593378a3b54960716f6f4967065adbb0c5427532f3f83ea13eb5833963"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSessionIdTest.xml",
+      "sha256": "23cb1dc0420510cee6262eabdc1991af187285574483a62ec3cd5fc441a4f9b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "5e9570349f6860a426127ed0e83734823c6682aeaedac1d1135332936542a1e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "d7b0519920ffb7e0af6e4a0aff73a64cd03ba8db30aba164290bf67427de59f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "c296a31d3e5ef01038c6e94ff93447611e4ed1c12d5a91559f79a882360463c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "e51e4c85d780fa4501f9d7e27e5ad1e8e38b9e243a71f5309878355afa0550e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest.xml",
+      "sha256": "d94ade4751f3b35ccff8327f88eb07a0ede1474761ca53d99a78985dbeb12720"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+      "sha256": "181532f73c1f89bf809e7ddebeeac8be5e2ef900522c1ef62dcb84ed51562680"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchTemplateTest.xml",
+      "sha256": "4d238fb699bde31c6d52b98121eedd18c2d44a69a89118f9ce549f98f4727e3c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.LogSearchViewModelTest.xml",
+      "sha256": "7d42f6f87349732883b6a1c229edbf95aae0d9e149e04fed0dd84d4a5d9a1d71"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "5a13d95368fd5e00da99a0b0b55aa2dc9c7915eb48fdf826b506075d1cc9d22a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "8485e3d85c587547eadb3ee19a82189d87dc9555797faf7acda16e39b83edf2a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml",
+      "sha256": "d9739b89d019ec9651a5552fd9dd2d157b72c8e91a0e2a3a54a8011e8ba77522"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "48637f96585922c629ef89275094a7c5c4fbe5c86450cee434df685d8cdfe5d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "df0d4b719e0a37efbcba327dae74ceaceb0d9acfdf856cfcdda502557481db98"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest.xml",
+      "sha256": "0b704c518e513817816ed786290c29e3d969d2db75012a4c07bcd9bd0b8417aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest.xml",
+      "sha256": "9831b569a9dc21854defcfe50e4f21921dc6fe0ee679b46a486f7c6a0e470c27"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+      "sha256": "002f4ecbaf3e969107067e2dcecc9e075ff6da21f7d7d0fa6ab80c8c0c96d0dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest.xml",
+      "sha256": "6e163e7ec00a2fd66057b13431f421969f158dae1c506cb480302f4c6f8759ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG399-issuer-three-gates-baseline/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest.xml",
+      "sha256": "01d802de9b138bb078e276173ef0e9e6d74329635c885dc9b628d6c03de391b6"
+    }
+  ]
+}

@@ -267,6 +267,44 @@ final class MorningBrokerUnitCycleTest {
   }
 
   @Test
+  void issbroker005FinalReadinessIsFreshAndSecondFailureCannotReuseFirst() throws Exception {
+    for (boolean secondFails : List.of(false, true)) {
+      var events = new ArrayList<String>();
+      var observations = new ArrayList<String>();
+      var cycle =
+          new MorningBrokerUnitCycle(
+              () -> {},
+              MorningBrokerUnitCycleTest::baseline,
+              () -> Optional.of(observation()),
+              () -> start(events, 0),
+              () -> {
+                events.add("retained");
+                throw new Retained();
+              });
+      MorningBrokerUnitCycle.Readiness capture =
+          actual -> {
+            actual.recheck();
+            if (secondFails && !observations.isEmpty())
+              throw new IOException("independent second observation unavailable");
+            observations.add(observations.isEmpty() ? "first-actual" : "final-actual");
+          };
+      if (secondFails) {
+        assertThrows(Retained.class, () -> cycle.execute(capture));
+        assertEquals(List.of("first-actual"), observations);
+        assertFalse(events.contains("retire"));
+        assertTrue(events.contains("retained"));
+      } else {
+        var live = cycle.execute(capture);
+        live.recheck();
+        assertEquals(List.of("first-actual", "final-actual"), observations);
+        assertEquals("final-actual", observations.getLast());
+        assertEquals(1, events.stream().filter("retire"::equals).count());
+        assertFalse(events.contains("retained"));
+      }
+    }
+  }
+
+  @Test
   void beforeStartRefusalDoesNotIssueStartAndDetachedThreadCannotUseLive() throws Exception {
     var events = new ArrayList<String>();
     var cycle =
