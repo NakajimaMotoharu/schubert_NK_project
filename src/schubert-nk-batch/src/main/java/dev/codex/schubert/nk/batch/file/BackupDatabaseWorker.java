@@ -42,6 +42,10 @@ public final class BackupDatabaseWorker {
 
     void dump(Path output, Path pgpass, long uid) throws IOException;
 
+    default void verifyDump(Path output, long uid) throws IOException {
+      throw new IOException("backup verification unavailable");
+    }
+
     InspectorEnvironmentPublisher.Io io();
 
     InodeSecurityCalls security();
@@ -77,6 +81,10 @@ public final class BackupDatabaseWorker {
         credentials::close,
         () -> {
           var request = BackupWorkerRequest.consume(ports.request(credentials));
+          if (request.verification().isPresent()) {
+            verifyExisting(request, fixed, before);
+            return Boolean.TRUE;
+          }
           var runtime = Objects.requireNonNull(ports.runtime(), "runtime owner");
           return ResourceScope.use(
               runtime::close,
@@ -149,6 +157,86 @@ public final class BackupDatabaseWorker {
                     });
               });
         });
+  }
+
+  private void verifyExisting(
+      BackupWorkerRequest request,
+      FixedServiceIdentity.Value fixed,
+      ChildStartupContext.Observed before)
+      throws IOException {
+    var claim = request.verification().orElseThrow();
+    var backup = Objects.requireNonNull(ports.backup(), "retained backup owner");
+    ResourceScope.use(
+        backup::close,
+        () -> {
+          var parent = directory(backup, fixed, false);
+          var child = backup.openExistingChild(request.directoryName());
+          return ResourceScope.use(
+              child::close,
+              () -> {
+                var original = directory(child, fixed, false);
+                require(original.device() == parent.device());
+                var captured =
+                    child.atExistingEntryHandle(
+                        "schubert_nk.dump",
+                        output -> {
+                          Metadata initial = file(output, fixed);
+                          require(
+                              initial.device() == original.device()
+                                  && initial.size() == claim.dumpSize());
+                          var digest = digest();
+                          byte[] buffer = new byte[65536];
+                          try {
+                            var opened =
+                                Objects.requireNonNull(
+                                    ports.io().open(output), "held dump channel");
+                            ResourceScope.use(
+                                opened::close,
+                                () -> {
+                                  var bytes = java.nio.ByteBuffer.wrap(buffer);
+                                  long total = 0;
+                                  while (total < claim.dumpSize()) {
+                                    require(!Thread.currentThread().isInterrupted());
+                                    bytes.clear();
+                                    bytes.limit(
+                                        (int) Math.min(buffer.length, claim.dumpSize() - total));
+                                    int read = opened.read(bytes);
+                                    require(read > 0);
+                                    digest.update(buffer, 0, read);
+                                    total += read;
+                                  }
+                                  bytes.clear();
+                                  require(opened.read(bytes) == -1);
+                                  return Boolean.TRUE;
+                                });
+                          } finally {
+                            Arrays.fill(buffer, (byte) 0);
+                          }
+                          require(
+                              HexFormat.of().formatHex(digest.digest()).equals(claim.dumpSha256()));
+                          require(initial.equals(file(output, fixed)));
+                          ports.verifyDump(output, fixed.uid());
+                          require(initial.equals(file(output, fixed)));
+                          return initial;
+                        });
+                require(
+                    captured.equals(
+                        child.atExistingEntryHandle("schubert_nk.dump", p -> file(p, fixed))));
+                require(original.equals(directory(child, fixed, false)));
+                require(parent.equals(directory(backup, fixed, false)));
+                require(fixed.equals(ports.identity()) && before.equals(ports.self()));
+                admit(fixed, before);
+                return Boolean.TRUE;
+              });
+        });
+  }
+
+  private static java.security.MessageDigest digest() throws IOException {
+    try {
+      return java.security.MessageDigest.getInstance("SHA-256");
+    } catch (java.security.NoSuchAlgorithmException unavailable) {
+      throw new IOException("backup digest unavailable");
+    }
   }
 
   private void admit(FixedServiceIdentity.Value fixed, ChildStartupContext.Observed own)
@@ -263,6 +351,10 @@ public final class BackupDatabaseWorker {
 
     public void dump(Path out, Path pass, long uid) throws IOException {
       new BackupArchiveProcess(security).dump(out, pass, uid);
+    }
+
+    public void verifyDump(Path out, long uid) throws IOException {
+      new BackupArchiveProcess(security).verifyDump(out, uid);
     }
 
     public InspectorEnvironmentPublisher.Io io() {

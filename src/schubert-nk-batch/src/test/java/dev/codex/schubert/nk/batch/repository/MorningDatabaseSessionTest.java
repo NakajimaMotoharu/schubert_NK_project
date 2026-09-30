@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
+import dev.codex.schubert.nk.batch.backup.*;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
 import java.lang.reflect.*;
@@ -73,6 +74,83 @@ final class MorningDatabaseSessionTest {
   }
 
   @Test
+  void bresume001GenuinePriorPairAndCurrentSkipAreSeparateCommittedRows() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("38700000-2222-4333-8444-555555555555"),
+            Instant.parse("2026-11-27T15:00:00Z"));
+    var started = Instant.parse("2026-11-28T02:00:00Z");
+    var observed = Instant.parse("2026-11-28T03:00:00Z");
+    try (var admin = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s = admin.createStatement()) {
+      s.execute(
+          "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count) values"
+              + "(670001,'38700000-2222-4333-8444-555555555555','2026-11-28','BACKUP_DB',1,'2026-11-28T02:00:00Z','2026-11-28T02:00:03Z','SUCCESS',1,1,26),"
+              + "(670002,'38700000-2222-4333-8444-555555555555','2026-11-28','BACKUP_CONFIG',1,'2026-11-28T02:00:00Z','2026-11-28T02:00:03Z','SUCCESS',2,2,67)");
+    }
+    var prior =
+        new MorningDatabaseSession.BackupBegins(
+            new BatchStepAttempt(670001, run, BatchStep.BACKUP_DB, 1, started, false),
+            new BatchStepAttempt(670002, run, BatchStep.BACKUP_CONFIG, 1, started, false));
+    var manifest =
+        new BackupManifest(
+            prior.database(),
+            prior.configuration(),
+            started,
+            started.plusSeconds(2),
+            new BackupVersions(
+                "public-host", "1.0", "023", "ubuntu-26.04", "25.0.4", "18.6", "2.56.0", "1.2.1"),
+            "0".repeat(64),
+            new BackupFileDigest(26, "1".repeat(64)),
+            new BackupFileDigest(35, "2".repeat(64)),
+            new BackupFileDigest(32, "3".repeat(64)));
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    var current =
+        subject.execute(
+            credential(),
+            session -> {
+              assertEquals(Optional.of(prior), session.successfulBackup(run, observed));
+              var skipped = session.beginResumeBackup(manifest, observed);
+              assertTrue(skipped.database().skipped());
+              assertTrue(skipped.configuration().skipped());
+              assertNotEquals(prior.database().id(), skipped.database().id());
+              assertEquals(2, skipped.database().attempt());
+              assertEquals(2, skipped.configuration().attempt());
+              assertThrows(
+                  IOException.class, () -> session.completeReusedBackup(prior, manifest, observed));
+              session.completeReusedBackup(skipped, manifest, observed.plusSeconds(1));
+              session.recheckConsistent(run);
+              assertThrows(
+                  IOException.class,
+                  () -> session.completeReusedBackup(skipped, manifest, observed.plusSeconds(1)));
+              assertThrows(IOException.class, () -> session.successfulBackup(run, observed));
+              return skipped;
+            });
+    try (var connection = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+      assertTrue(advisory(connection));
+      connection.setAutoCommit(false);
+      var repository = new BatchRunRepository(connection);
+      repository.verifyAlreadySuccessful(current.database());
+      repository.verifyAlreadySuccessful(current.configuration());
+      assertEquals(
+          Optional.of(started.plusSeconds(3)),
+          new BackupStepRepository(connection).inspect(manifest, observed));
+      try (var s = connection.createStatement();
+          var rows =
+              s.executeQuery(
+                  "select string_agg(step||':'||attempt||':'||status||':'||target_count||':'||success_count||':'||failure_count||':'||byte_count,',' order by step,attempt) from schubert.batch_runs where run_id='38700000-2222-4333-8444-555555555555'")) {
+        assertTrue(rows.next());
+        assertEquals(
+            "BACKUP_CONFIG:1:SUCCESS:2:2:0:67,BACKUP_CONFIG:2:SKIPPED:0:0:0:0,BACKUP_DB:1:SUCCESS:1:1:0:26,BACKUP_DB:2:SKIPPED:0:0:0:0",
+            rows.getString(1));
+        assertFalse(rows.next());
+      }
+    }
+  }
+
+  @Test
   void mdb015SameConnectionAtomicFailedPairAndReadbackWithoutMutation() throws Exception {
     var run =
         new BatchRun(
@@ -140,6 +218,70 @@ final class MorningDatabaseSessionTest {
           }
           assertFalse(rows.next());
         }
+      }
+    }
+  }
+
+  @Test
+  void bresume002PartialMismatchedAndMissingPriorPairsCannotPublishSkipProof() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("38710000-2222-4333-8444-555555555555"),
+            Instant.parse("2026-11-29T15:00:00Z"));
+    var observed = Instant.parse("2026-11-30T03:00:00Z");
+    var subject =
+        new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+    assertTrue(subject.execute(credential(), s -> s.successfulBackup(run, observed)).isEmpty());
+    try (var admin = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement = admin.createStatement()) {
+      String row =
+          "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count) values";
+      statement.execute(
+          row
+              + "(670101,'38710000-2222-4333-8444-555555555555','2026-11-30','BACKUP_DB',1,'2026-11-30T02:00:00Z','2026-11-30T02:00:03Z','SUCCESS',1,1,26)");
+      assertThrows(
+          IOException.class,
+          () -> subject.execute(credential(), s -> s.successfulBackup(run, observed)));
+      statement.execute(
+          row
+              + "(670102,'38710000-2222-4333-8444-555555555555','2026-11-30','BACKUP_CONFIG',1,'2026-11-30T02:00:00Z','2026-11-30T02:00:03Z','SUCCESS',2,2,67)");
+      for (String change :
+          List.of(
+              "started_at='2026-11-30T02:00:01Z'",
+              "ended_at='2026-11-30T02:00:04Z'",
+              "attempt=2",
+              "target_count=3",
+              "success_count=1",
+              "byte_count=0")) {
+        statement.execute("update schubert.batch_runs set " + change + " where id=670102");
+        assertThrows(
+            IOException.class,
+            () -> subject.execute(credential(), s -> s.successfulBackup(run, observed)));
+        statement.execute(
+            "update schubert.batch_runs set started_at='2026-11-30T02:00:00Z',ended_at='2026-11-30T02:00:03Z',attempt=1,target_count=2,success_count=2,byte_count=67 where id=670102");
+      }
+      assertTrue(subject.execute(credential(), s -> s.successfulBackup(run, observed)).isPresent());
+      assertThrows(
+          IOException.class,
+          () ->
+              subject.execute(
+                  credential(),
+                  s -> s.successfulBackup(run, Instant.parse("2026-11-30T02:00:02Z"))));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.execute(credential(), s -> s.successfulBackup(null, observed)));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.execute(credential(), s -> s.successfulBackup(run, null)));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.execute(credential(), s -> s.beginResumeBackup(null, observed)));
+      try (var rows =
+          statement.executeQuery(
+              "select count(*) from schubert.batch_runs where run_id='38710000-2222-4333-8444-555555555555' and status='SKIPPED'")) {
+        assertTrue(rows.next());
+        assertEquals(0, rows.getInt(1));
+        assertFalse(rows.next());
       }
     }
   }

@@ -29,6 +29,17 @@ public final class BatchRunRepository {
 
   public BatchStepAttempt begin(
       BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned) {
+    return begin(run, step, now, recoverAbandoned, false);
+  }
+
+  /** SSC116: normal resume, not SSC054 manual Backup regeneration. */
+  public BatchStepAttempt beginMorningResume(
+      BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned) {
+    return begin(run, step, now, recoverAbandoned, true);
+  }
+
+  private BatchStepAttempt begin(
+      BatchRun run, BatchStep step, Instant now, boolean recoverAbandoned, boolean morningResume) {
     Objects.requireNonNull(run, "fixed run");
     Objects.requireNonNull(step, "step");
     Objects.requireNonNull(now, "step time");
@@ -46,7 +57,14 @@ public final class BatchRunRepository {
       require(step.backup() || successes <= 1);
       // Validate the whole set before changing any old attempt.
       for (History row : running) abandon(row, now);
-      boolean skipped = !step.backup() && successes != 0;
+      // Backup's multi-SUCCESS manual history is retained. Normal resume may only reuse
+      // the exact original run; the caller independently verifies the complete bundle pair.
+      boolean skipped =
+          (!step.backup() && successes != 0)
+              || (morningResume
+                  && step.backup()
+                  && history.stream()
+                      .anyMatch(h -> h.status().equals("SUCCESS") && h.runId().equals(run.id())));
       BatchStepAttempt result = insert(run, step, day, maximum + 1, now, skipped);
       guarded(run);
       return result;
@@ -109,6 +127,29 @@ public final class BatchRunRepository {
     try {
       guarded(attempt.run());
       require(replayed(attempt, endedAt, result));
+      guarded(attempt.run());
+    } catch (SQLException failure) {
+      throw new BatchRepositoryException();
+    }
+  }
+
+  /** Exact independent current SKIP readback; never reads the prior SUCCESS as this result. */
+  public void verifyAlreadySuccessful(BatchStepAttempt attempt) {
+    Objects.requireNonNull(attempt, "current skipped attempt");
+    if (!attempt.skipped()) throw new IllegalArgumentException("current skip required");
+    try {
+      guarded(attempt.run());
+      require(
+          replayed(
+              attempt,
+              attempt.startedAt(),
+              new BatchStepResult(
+                  BatchStepResult.Status.SKIPPED,
+                  0,
+                  0,
+                  0,
+                  0,
+                  BatchStepResult.Reason.ALREADY_SUCCESSFUL)));
       guarded(attempt.run());
     } catch (SQLException failure) {
       throw new BatchRepositoryException();

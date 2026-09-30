@@ -60,6 +60,7 @@ final class BackupDatabaseWorkerTest {
     final Map<String, Integer> counts = new HashMap<>();
     final Map<String, Throwable> failures = new HashMap<>();
     final InspectorEnvironmentPublisher.NioIo nio = new InspectorEnvironmentPublisher.NioIo();
+    String requestText = REQUEST;
     final DirectoryCalls calls;
     FixedServiceIdentity.Value identity = FIXED;
     ChildStartupContext.Observed own = SELF;
@@ -153,7 +154,7 @@ final class BackupDatabaseWorkerTest {
     public byte[] request(OwnedTransferDirectory root) throws IOException {
       point("request");
       if (nullPort.equals("request")) return null;
-      request = REQUEST.getBytes(StandardCharsets.US_ASCII);
+      request = requestText.getBytes(StandardCharsets.US_ASCII);
       return request;
     }
 
@@ -176,6 +177,21 @@ final class BackupDatabaseWorkerTest {
         Path name = backup.resolve(DIRECTORY).resolve("schubert_nk.dump");
         Files.move(name, name.resolveSibling("kept-original"));
         Files.writeString(name, "PUBLIC replacement\n");
+        Files.setPosixFilePermissions(name, PosixFilePermissions.fromString("rw-------"));
+      }
+    }
+
+    public void verifyDump(Path output, long uid) throws IOException {
+      point("verifyDump");
+      assertEquals(992, uid);
+      assertEquals("abc", Files.readString(output));
+      if (replaceDump) {
+        Path name =
+            backup
+                .resolve(DIRECTORY.substring(0, DIRECTORY.length() - 5))
+                .resolve("schubert_nk.dump");
+        Files.move(name, name.resolveSibling("kept-original"));
+        Files.writeString(name, "abc");
         Files.setPosixFilePermissions(name, PosixFilePermissions.fromString("rw-------"));
       }
     }
@@ -238,6 +254,67 @@ final class BackupDatabaseWorkerTest {
     public void close() {
       released();
     }
+  }
+
+  @Test
+  void bverify003ActualHeldDumpReadAndValidationOnlyNoNewPartOrSecret() throws Exception {
+    try (var f = new Fixture()) {
+      prepareVerification(f);
+      new BackupDatabaseWorker(f).execute();
+      assertEquals(1, f.counts.get("verifyDump"));
+      assertFalse(f.counts.containsKey("dump"));
+      assertFalse(f.counts.containsKey("pgpass"));
+      assertFalse(f.counts.containsKey("runtime"));
+      assertFalse(f.counts.containsKey("createPrivateFile"));
+      assertEquals(
+          "abc",
+          Files.readString(
+              f.backup
+                  .resolve(DIRECTORY.substring(0, DIRECTORY.length() - 5))
+                  .resolve("schubert_nk.dump")));
+      assertArrayEquals(new byte[f.request.length], f.request);
+      assertTrue(f.fds.isEmpty());
+    }
+  }
+
+  @Test
+  void bverify004CorruptionReplacementProcessFailureAndUnknownNeverRegenerate() throws Exception {
+    for (String failure : List.of("hash", "size", "replace", "process", "unknown", "missing")) {
+      try (var f = new Fixture()) {
+        prepareVerification(f);
+        if (failure.equals("hash")) f.requestText = f.requestText.replace("ba7816bf", "ca7816bf");
+        if (failure.equals("size"))
+          f.requestText = f.requestText.replace("dump_size=3", "dump_size=4");
+        if (failure.equals("replace")) f.replaceDump = true;
+        if (failure.equals("process")) f.failures.put("verifyDump", new IOException("fixture"));
+        if (failure.equals("missing"))
+          f.requestText = f.requestText.replace("2026-09-27T15:00:00Z", "2026-09-27T15:00:01Z");
+        var unknown = new IllegalStateException("fixture unknown");
+        if (failure.equals("unknown")) f.failures.put("verifyDump", unknown);
+        if (failure.equals("unknown"))
+          assertSame(
+              unknown,
+              assertThrows(
+                  IllegalStateException.class, () -> new BackupDatabaseWorker(f).execute()));
+        else assertThrows(IOException.class, () -> new BackupDatabaseWorker(f).execute());
+        assertFalse(f.counts.containsKey("dump"));
+        assertFalse(f.counts.containsKey("pgpass"));
+        assertTrue(f.fds.isEmpty());
+      }
+    }
+  }
+
+  private void prepareVerification(Fixture f) throws Exception {
+    String name = DIRECTORY.substring(0, DIRECTORY.length() - 5);
+    Path directory = f.privateDirectory("existing-");
+    Files.move(directory, f.backup.resolve(name));
+    Path dump = f.backup.resolve(name).resolve("schubert_nk.dump");
+    Files.writeString(dump, "abc");
+    Files.setPosixFilePermissions(dump, PosixFilePermissions.fromString("rw-------"));
+    f.requestText =
+        "NKBACKUPVERIFY1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T15:00:00Z\n"
+            + "manifest_sha256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndump_size=3\n"
+            + "dump_sha256=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\n";
   }
 
   @Test

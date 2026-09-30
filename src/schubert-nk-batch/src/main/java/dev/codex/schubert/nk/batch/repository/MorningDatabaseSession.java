@@ -1,13 +1,14 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
+import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff;
 import dev.codex.schubert.nk.batch.file.BackupBundleCompletion;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
 import java.sql.*;
-import java.time.Instant;
+import java.time.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.NullMarked;
@@ -79,6 +80,20 @@ public final class MorningDatabaseSession {
 
     BackupBegins beginBackup(BatchRun run, Instant now, boolean recoverAbandoned)
         throws IOException;
+
+    default Optional<BackupBegins> successfulBackup(BatchRun run, Instant now) throws IOException {
+      throw unavailable();
+    }
+
+    default BackupBegins beginResumeBackup(BackupManifest original, Instant now)
+        throws IOException {
+      throw unavailable();
+    }
+
+    default void completeReusedBackup(BackupBegins expected, BackupManifest original, Instant now)
+        throws IOException {
+      throw unavailable();
+    }
 
     /** No connection or arbitrary SQL escapes. Non-native test capabilities fail closed. */
     default Instant completeBackup(
@@ -325,6 +340,7 @@ public final class MorningDatabaseSession {
     private volatile boolean inHandoff;
     private @Nullable BackupBegins backupBegins;
     private volatile boolean backupFinished;
+    private @Nullable BackupManifest reusedManifest;
 
     private Session(Connection connection) {
       this.connection = connection;
@@ -377,6 +393,138 @@ public final class MorningDatabaseSession {
         var result = new BackupBegins(database, configuration);
         backupBegins = result;
         return result;
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    /** Latest two SUCCESS rows must be one genuine bundle, never two independent successes. */
+    @Override
+    public Optional<BackupBegins> successfulBackup(BatchRun run, Instant now) throws IOException {
+      Objects.requireNonNull(run, "original run");
+      Objects.requireNonNull(now, "observation time");
+      BatchStepAttempt.time(run, now);
+      guard();
+      if (backupCommitted) throw unavailable();
+      try {
+        schema.verify(connection);
+        if (!new RunReferenceRepository(connection).read(run).identityConsistent())
+          throw unavailable();
+        String sql =
+            "select id,business_date,step,attempt,started_at,ended_at,target_count,"
+                + "success_count,failure_count,byte_count,error_code,error_summary from schubert.batch_runs "
+                + "where run_id=? and step in ('BACKUP_DB','BACKUP_CONFIG') and status='SUCCESS' "
+                + "order by started_at desc,id desc limit 2 for update";
+        try (var statement = connection.prepareStatement(sql)) {
+          statement.setQueryTimeout(5);
+          statement.setObject(1, run.id());
+          try (var rows = statement.executeQuery()) {
+            if (!rows.next()) {
+              guard();
+              return Optional.empty();
+            }
+            var first = successfulHandle(rows, run, now);
+            var ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+            if (!rows.next()) throw unavailable();
+            var second = successfulHandle(rows, run, now);
+            var secondEnd = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+            if (rows.next()
+                || first.step() == second.step()
+                || first.attempt() != second.attempt()
+                || !first.startedAt().equals(second.startedAt())
+                || !ended.equals(secondEnd)) throw unavailable();
+            guard();
+            var pair =
+                first.step() == BatchStep.BACKUP_DB
+                    ? new BackupBegins(first, second)
+                    : new BackupBegins(second, first);
+            guard();
+            return Optional.of(pair);
+          }
+        }
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    private BatchStepAttempt successfulHandle(ResultSet rows, BatchRun run, Instant now)
+        throws SQLException, IOException {
+      var step = BatchStep.valueOf(present(rows.getString("step")));
+      if (!step.backup()) throw unavailable();
+      Instant started = present(rows.getObject("started_at", OffsetDateTime.class)).toInstant();
+      Instant ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+      long count = step == BatchStep.BACKUP_DB ? 1 : 2;
+      if (!present(rows.getObject("business_date", LocalDate.class))
+              .equals(run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate())
+          || started.isAfter(ended)
+          || ended.isAfter(now)
+          || ended.getNano() % 1000 != 0
+          || present(rows.getObject("target_count", Long.class)) != count
+          || present(rows.getObject("success_count", Long.class)) != count
+          || present(rows.getObject("failure_count", Long.class)) != 0
+          || present(rows.getObject("byte_count", Long.class)) <= 0
+          || rows.getString("error_code") != null
+          || rows.getString("error_summary") != null) throw unavailable();
+      return new BatchStepAttempt(
+          present(rows.getObject("id", Long.class)),
+          run,
+          step,
+          present(rows.getObject("attempt", Integer.class)),
+          started,
+          false);
+    }
+
+    @Override
+    public BackupBegins beginResumeBackup(BackupManifest original, Instant now) throws IOException {
+      Objects.requireNonNull(original, "root verified prior manifest");
+      Objects.requireNonNull(now, "current skip time");
+      var prior = new BackupBegins(original.databaseStep(), original.configurationStep());
+      if (!successfulBackup(original.run(), now).equals(Optional.of(prior))) throw unavailable();
+      try {
+        if (new BackupStepRepository(connection).inspect(original, now).isEmpty())
+          throw unavailable();
+        var repository = new BatchRunRepository(connection);
+        var db = repository.beginMorningResume(original.run(), BatchStep.BACKUP_DB, now, true);
+        var config =
+            repository.beginMorningResume(original.run(), BatchStep.BACKUP_CONFIG, now, true);
+        if (!db.skipped() || !config.skipped()) throw unavailable();
+        guard();
+        connection.commit();
+        guard();
+        connection.setAutoCommit(true);
+        guard();
+        var result = new BackupBegins(db, config);
+        backupBegins = result;
+        reusedManifest = original;
+        backupCommitted = true;
+        return result;
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    @Override
+    public void completeReusedBackup(BackupBegins expected, BackupManifest original, Instant now)
+        throws IOException {
+      Objects.requireNonNull(expected, "current skipped pair");
+      Objects.requireNonNull(original, "same reverified original manifest");
+      Objects.requireNonNull(now, "fresh observation time");
+      if (!original.equals(reusedManifest)
+          || !expected.database().skipped()
+          || !expected.configuration().skipped()) throw unavailable();
+      try {
+        completionGuard(expected);
+        connection.setAutoCommit(false);
+        var repository = new BatchRunRepository(connection);
+        repository.verifyAlreadySuccessful(expected.database());
+        repository.verifyAlreadySuccessful(expected.configuration());
+        if (new BackupStepRepository(connection).inspect(original, now).isEmpty())
+          throw unavailable();
+        guard();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        completionGuard(expected);
+        backupFinished = true;
       } catch (SQLException failure) {
         throw unavailable();
       }

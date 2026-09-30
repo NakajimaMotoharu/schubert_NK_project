@@ -49,7 +49,8 @@ final class MorningBackupStage {
         BackupWorkerRequest request,
         MorningDatabaseSession.BackupBegins begins,
         UUID part,
-        MorningNewRunAdmission.OriginalProof original)
+        MorningNewRunAdmission.OriginalProof original,
+        MorningProcessMain.Archive completion)
         throws IOException;
   }
 
@@ -87,6 +88,31 @@ final class MorningBackupStage {
     UUID part = UUID.randomUUID();
     MorningControlScope.VerifiedEpochWork<T> continuation =
         (state, database, epoch, original) -> {
+          if (runId.isPresent()) {
+            var prior =
+                database.successfulBackup(
+                    state.activation().run(),
+                    java.time.Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS));
+            if (prior.isPresent()) {
+              return MorningBackupReuse.execute(
+                  root,
+                  snapshot,
+                  budget,
+                  database,
+                  prior.orElseThrow(),
+                  (request, begins, completion) -> {
+                    original.verify();
+                    budget.requireWithin();
+                    MorningBackupRequestPublication.create(root, snapshot).publish(request, part);
+                    T result =
+                        work.execute(
+                            state, database, epoch, request, begins, part, original, completion);
+                    budget.requireWithin();
+                    original.verify();
+                    return result;
+                  });
+            }
+          }
           java.util.Optional<BackupWorkerRequestFiles.ResumeProof> resumeProof =
               runId.isPresent()
                   ? java.util.Optional.of(database::requireAbandonedRequest)
@@ -102,7 +128,18 @@ final class MorningBackupStage {
               (request, begins) -> {
                 budget.requireWithin();
                 original.verify();
-                T result = work.execute(state, database, epoch, request, begins, part, original);
+                T result =
+                    work.execute(
+                        state,
+                        database,
+                        epoch,
+                        request,
+                        begins,
+                        part,
+                        original,
+                        () ->
+                            new MorningBackupArtifacts(root, snapshot, budget)
+                                .complete(request, begins, part, database));
                 budget.requireWithin();
                 original.verify();
                 return result;

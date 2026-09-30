@@ -101,7 +101,8 @@ public final class InspectorCredentialLoader {
    * Fixed nonsecret backup-only request; caller consumes/clears and validates its canonical codec.
    */
   public byte[] readBackupRequest() throws InspectorCredentialException {
-    return readBackupMaterial("backup-request", 160);
+    // SSC116: closed NKBACKUP1 or NKBACKUPVERIFY1, consumed by the typed worker codec.
+    return readBackupMaterial("backup-request", 400);
   }
 
   private byte[] readBackupMaterial(String name, int maximum) throws InspectorCredentialException {

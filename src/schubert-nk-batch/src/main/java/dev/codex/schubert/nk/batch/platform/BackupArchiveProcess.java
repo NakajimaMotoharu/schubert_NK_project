@@ -116,6 +116,20 @@ public final class BackupArchiveProcess {
     }
   }
 
+  /**
+   * SSC116: genuine ordinary-UID validation only; no dump, output, password or archive creation.
+   */
+  public void verifyDump(Path dump, long backupUid) throws IOException {
+    if (backupUid < 1 || backupUid > 0xffff_ffffL || security.effectiveUid() != backupUid)
+      throw invalid();
+    execute(
+        List.of(List.of("/usr/bin/pg_restore", "--list", childPath(dump))),
+        environment(),
+        Optional.empty(),
+        new byte[0],
+        clock.getAsLong());
+  }
+
   /** No plaintext credential archive on disk: tar stdout is a kernel pipe straight to age. */
   public void credentials(Path directory, Path output, Path recipient, List<String> allowlist)
       throws IOException {

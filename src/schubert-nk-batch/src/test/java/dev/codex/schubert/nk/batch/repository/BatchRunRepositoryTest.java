@@ -127,6 +127,44 @@ final class BatchRunRepositoryTest {
   }
 
   @Test
+  void normalBackupResumeSkipsButManualRegeneratesAndReadbackIsIndependent() throws Exception {
+    try (var c = locked()) {
+      var repository = new BatchRunRepository(c);
+      for (var step : List.of(BatchStep.BACKUP_DB, BatchStep.BACKUP_CONFIG)) {
+        var old = repository.begin(RUN, step, NOW, false);
+        repository.finish(old, END, SUCCESS);
+        c.commit();
+        String saved = terminal(c, old.id());
+        var skipped = repository.beginMorningResume(RUN, step, END.plusSeconds(1), true);
+        c.commit();
+        assertTrue(skipped.skipped());
+        assertEquals(2, skipped.attempt());
+        assertEquals(
+            "SKIPPED|0|0|0|0|ALREADY_SUCCESSFUL|step already successful for business date",
+            terminal(c, skipped.id()));
+        assertEquals(saved, terminal(c, old.id()));
+        repository.verifyAlreadySuccessful(skipped);
+        sql(c, "update schubert.batch_runs set byte_count=1 where id=" + skipped.id());
+        assertThrows(
+            BatchRepositoryException.class, () -> repository.verifyAlreadySuccessful(skipped));
+        c.rollback();
+        var manual = repository.begin(RUN, step, END.plusSeconds(2), false);
+        assertFalse(manual.skipped());
+        assertEquals(3, manual.attempt());
+        assertEquals("RUNNING|0|0|0|0|NULL|NULL", terminal(c, manual.id()));
+        assertThrows(
+            IllegalArgumentException.class, () -> repository.verifyAlreadySuccessful(manual));
+        c.rollback();
+        var other = new BatchRun(new UUID(0, 77), RUN.cutoff());
+        assertFalse(
+            repository.beginMorningResume(other, step, END.plusSeconds(3), false).skipped());
+        c.rollback();
+      }
+      assertThrows(NullPointerException.class, () -> repository.verifyAlreadySuccessful(null));
+    }
+  }
+
+  @Test
   void ordinarySuccessSkipsByBusinessDate() throws Exception {
     try (var c = locked()) {
       var repo = new BatchRunRepository(c);

@@ -30,23 +30,23 @@ final class BackupRequestCredentialLoaderTest {
       assertArrayEquals(GOLDEN, Files.readAllBytes(f.root.resolve(NAME)));
       assertEquals(1, io.opens);
       assertEquals(1, io.closes);
-      io.assertCleared(161);
+      io.assertCleared(401);
     }
   }
 
   @Test
   void boundedSource() throws Exception {
     try (var f = new Fixture(temporary)) {
-      for (int length : new int[] {1, 160}) {
+      for (int length : new int[] {1, 160, 400}) {
         byte[] expected = new byte[length];
         Arrays.fill(expected, (byte) 'A');
         Files.write(f.root.resolve(NAME), expected);
         var io = new TestIo();
         io.maxRead = 17;
         assertArrayEquals(expected, f.loader(io).readBackupRequest());
-        io.assertCleared(161);
+        io.assertCleared(401);
       }
-      for (int length : new int[] {0, 161}) {
+      for (int length : new int[] {0, 401}) {
         Files.write(f.root.resolve(NAME), new byte[length]);
         assertThrows(
             InspectorCredentialException.class, () -> f.loader(new TestIo()).readBackupRequest());
@@ -83,7 +83,7 @@ final class BackupRequestCredentialLoaderTest {
         var io = new TestIo();
         io.fault = fault;
         assertThrows(InspectorCredentialException.class, () -> f.loader(io).readBackupRequest());
-        io.assertCleared(161);
+        io.assertCleared(401);
         assertEquals(io.opens, io.closes);
       }
     }
@@ -105,7 +105,7 @@ final class BackupRequestCredentialLoaderTest {
       var changed = new TestIo();
       changed.lateRootChange = a -> a.put("ino", -1L);
       assertThrows(InspectorCredentialException.class, () -> f.loader(changed).readBackupRequest());
-      changed.assertCleared(161);
+      changed.assertCleared(401);
     }
   }
 
@@ -153,7 +153,7 @@ final class BackupRequestCredentialLoaderTest {
               byte[] value = f.loader(io).readBackupRequest();
               assertArrayEquals(GOLDEN, value);
               Arrays.fill(value, (byte) 0);
-              io.assertCleared(161);
+              io.assertCleared(401);
               return true;
             });
       for (var done : pool.invokeAll(tasks)) assertTrue(done.get(5, TimeUnit.SECONDS));

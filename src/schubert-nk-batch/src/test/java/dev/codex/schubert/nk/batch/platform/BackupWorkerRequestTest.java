@@ -25,6 +25,46 @@ final class BackupWorkerRequestTest {
   }
 
   @Test
+  void genuineVerificationProfileLiteralAndClosedInvariants() {
+    String golden =
+        "NKBACKUPVERIFY1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T14:59:59.123456Z\n"
+            + "manifest_sha256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndump_size=3\n"
+            + "dump_sha256=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\n";
+    byte[] input = bytes(golden);
+    var request = BackupWorkerRequest.consume(input);
+    assertArrayEquals(new byte[input.length], input);
+    assertEquals(RUN, request.run());
+    assertEquals(START, request.started());
+    assertEquals(3, request.verification().orElseThrow().dumpSize());
+    assertArrayEquals(bytes(golden), request.encode());
+    assertEquals("20260927-235959-11111111-2222-4333-8444-555555555555", request.directoryName());
+    assertTrue(new BackupWorkerRequest(RUN, START).verification().isEmpty());
+    for (String bad :
+        List.of(
+            golden.replace("NKBACKUPVERIFY1", "NKBACKUP1"),
+            GOLDEN.replace("NKBACKUP1", "NKBACKUPVERIFY1"),
+            golden.replace("dump_size=3", "dump_size=03"),
+            golden.replace("dump_size=3", "dump_size=0"),
+            golden.replace("dump_size=3", "dump_size=-1"),
+            golden.replace("dump_size=3", "dump_size=9223372036854775808"),
+            golden.replace("manifest_sha256=", "manifest="),
+            golden.replace("dump_sha256=", "command="),
+            golden.replace("dump_size=", "path="),
+            golden.replace("aaaaaaaa", "AAAAAAAA"),
+            golden.replace("ba7816bf", "zz7816bf"),
+            golden + "extra\n",
+            golden.replace("dump_size=3\n", ""))) refused(bytes(bad));
+    assertThrows(NullPointerException.class, () -> new BackupWorkerRequest(RUN, START, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> new BackupWorkerRequest.Verification(null, 3, "b".repeat(64)));
+    assertThrows(
+        NullPointerException.class,
+        () -> new BackupWorkerRequest.Verification("a".repeat(64), 3, null));
+    refused(new byte[401]);
+  }
+
+  @Test
   void literalCanonicalAndIndependentDirectory() {
     var expected = new BackupWorkerRequest(RUN, START);
     byte[] owned = bytes(GOLDEN);

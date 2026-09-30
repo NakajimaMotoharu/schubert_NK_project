@@ -123,6 +123,30 @@ final class BackupArchiveProcessTest {
   }
 
   @Test
+  void verificationUsesOnlyActualRestoreListUnderOrdinaryIdentity() throws Exception {
+    var f = new Fixture();
+    f.uid = 992;
+    f.runner.verifyDump(OUT, 992);
+    assertEquals(List.of(List.of("/usr/bin/pg_restore", "--list", child(102))), f.calls.getFirst());
+    assertEquals(1, f.calls.size());
+    assertEquals(Optional.empty(), f.outputs.getFirst());
+    assertEquals(
+        Map.of("PATH", "/usr/bin:/bin", "LANG", "C", "LC_ALL", "C"), f.environments.getFirst());
+    assertEquals(0, f.processes.getFirst().received.size());
+    f.closed();
+    for (long uid : new long[] {0, -1, 4294967296L, 991}) {
+      var denied = new Fixture();
+      denied.uid = 992;
+      refused(() -> denied.runner.verifyDump(OUT, uid));
+      assertTrue(denied.calls.isEmpty());
+    }
+    var noIdentity = new Fixture();
+    noIdentity.uid = 0;
+    refused(() -> noIdentity.runner.verifyDump(OUT, 992));
+    assertTrue(noIdentity.calls.isEmpty());
+  }
+
+  @Test
   void inputAndNullContracts() throws Exception {
     for (Path bad :
         List.of(

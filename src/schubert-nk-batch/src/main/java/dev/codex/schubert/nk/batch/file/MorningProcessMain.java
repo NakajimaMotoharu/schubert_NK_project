@@ -52,7 +52,7 @@ public final class MorningProcessMain {
   private static void executeBackup(MorningParentBudget budget, Optional<UUID> runId)
       throws IOException {
     MorningBackupStage.VerifiedEpochWork<MorningBackupUnitCycle.Outcome> work =
-        (state, database, epoch, request, begins, part, original) -> {
+        (state, database, epoch, request, begins, part, original, completion) -> {
           var root = RootStartupContext.create();
           var snapshot = root.capture(RootStartupContext.Service.MORNING);
           var requests = openRequests();
@@ -93,14 +93,11 @@ public final class MorningProcessMain {
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
+                          if (request.verification().isPresent()
+                              && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
+                            throw new IOException("Prior backup verification unavailable");
                           completeObservedBackup(
-                              outcome,
-                              begins,
-                              database,
-                              java.time.Clock.systemUTC(),
-                              () ->
-                                  new MorningBackupArtifacts(root, snapshot, budget)
-                                      .complete(request, begins, part, database));
+                              outcome, begins, database, java.time.Clock.systemUTC(), completion);
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
