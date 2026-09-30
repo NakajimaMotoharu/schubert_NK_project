@@ -155,48 +155,21 @@ public final class CleanupTerminalRepository {
             require(values.size() < STEPS.size());
             var step = BatchStep.valueOf(present(row.getString("step")));
             require(STEPS.contains(step));
-            var started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
-            var ended = present(row.getObject("ended_at", OffsetDateTime.class)).toInstant();
-            require(
-                !ended.isAfter(observedAt)
-                    && run.id().equals(row.getObject("run_id", UUID.class))
-                    && run.cutoff()
-                        .atZone(ZoneId.of("Asia/Tokyo"))
-                        .toLocalDate()
-                        .equals(row.getObject("business_date", LocalDate.class)));
-            var status = BatchStepResult.Status.valueOf(present(row.getString("status")));
-            var code = row.getString("error_code");
-            var reason =
-                code == null ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.valueOf(code);
-            var result =
-                new BatchStepResult(
-                    status,
-                    present(row.getObject("target_count", Long.class)),
-                    present(row.getObject("success_count", Long.class)),
-                    present(row.getObject("failure_count", Long.class)),
-                    present(row.getObject("byte_count", Long.class)),
-                    reason);
-            require(Objects.equals(result.reason().summary(), row.getString("error_summary")));
+            var entry = entry(row, run, observedAt);
+            var result = entry.result();
+            var reason = result.reason();
+            var status = result.status();
             boolean deletion = step != BatchStep.CLEAN_TRANSFER;
             if (failedBackup && deletion) {
               require(
                   status == BatchStepResult.Status.SKIPPED
                       && reason == BatchStepResult.Reason.BACKUP_UNAVAILABLE
-                      && started.equals(ended)
+                      && entry.attempt().startedAt().equals(entry.endedAt())
                       && result.target() == 0
                       && result.success() == 0
                       && result.failure() == 0
                       && result.bytes() == 0);
             } else require(reason != BatchStepResult.Reason.BACKUP_UNAVAILABLE);
-            var attempt =
-                new BatchStepAttempt(
-                    present(row.getObject("id", Long.class)),
-                    run,
-                    step,
-                    present(row.getObject("attempt", Integer.class)),
-                    started,
-                    status == BatchStepResult.Status.SKIPPED);
-            var entry = new Entry(attempt, ended, result);
             require(values.put(step, entry) == null);
           }
         }
@@ -209,6 +182,89 @@ public final class CleanupTerminalRepository {
     } catch (SQLException | IllegalArgumentException known) {
       throw new BatchRepositoryException();
     }
+  }
+
+  /** SSC126/ISSSTEP003: separate same-run complete SUCCESS references, never current SKIP data. */
+  public List<Optional<Entry>> references(Snapshot current) {
+    Objects.requireNonNull(current, "current complete Cleanup results");
+    var run = current.entries().getFirst().attempt().run();
+    try {
+      check(run);
+      var references = new ArrayList<Optional<Entry>>();
+      for (var currentRow : current.entries()) {
+        if (currentRow.result().reason() != BatchStepResult.Reason.ALREADY_SUCCESSFUL) {
+          references.add(Optional.empty());
+          continue;
+        }
+        var handle = currentRow.attempt();
+        require(handle.skipped() && currentRow.endedAt().equals(handle.startedAt()));
+        try (var statement =
+            present(
+                connection.prepareStatement(
+                    "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
+                        + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
+                        + " from schubert.batch_runs where run_id=? and business_date=? and step=?"
+                        + " and status='SUCCESS' and attempt<? order by attempt desc limit 2"))) {
+          statement.setQueryTimeout(seconds());
+          statement.setObject(1, run.id());
+          statement.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+          statement.setString(3, handle.step().name());
+          statement.setInt(4, handle.attempt());
+          try (var rows = present(statement.executeQuery())) {
+            require(rows.next());
+            var prior = entry(rows, run, handle.startedAt());
+            require(
+                prior.attempt().step() == handle.step()
+                    && prior.attempt().id() != handle.id()
+                    && prior.attempt().attempt() < handle.attempt()
+                    && prior.result().status() == BatchStepResult.Status.SUCCESS
+                    && prior.result().reason() == BatchStepResult.Reason.NONE
+                    && !rows.next());
+            references.add(Optional.of(prior));
+          }
+        }
+        check(run);
+      }
+      check(run);
+      return List.copyOf(references);
+    } catch (SQLException | IllegalArgumentException known) {
+      throw new BatchRepositoryException();
+    }
+  }
+
+  private static Entry entry(ResultSet row, BatchRun run, Instant observedAt) throws SQLException {
+    var step = BatchStep.valueOf(present(row.getString("step")));
+    var started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
+    var ended = present(row.getObject("ended_at", OffsetDateTime.class)).toInstant();
+    require(
+        !ended.isAfter(observedAt)
+            && run.id().equals(row.getObject("run_id", UUID.class))
+            && run.cutoff()
+                .atZone(ZoneId.of("Asia/Tokyo"))
+                .toLocalDate()
+                .equals(row.getObject("business_date", LocalDate.class)));
+    var status = BatchStepResult.Status.valueOf(present(row.getString("status")));
+    var code = row.getString("error_code");
+    var reason = code == null ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.valueOf(code);
+    var result =
+        new BatchStepResult(
+            status,
+            present(row.getObject("target_count", Long.class)),
+            present(row.getObject("success_count", Long.class)),
+            present(row.getObject("failure_count", Long.class)),
+            present(row.getObject("byte_count", Long.class)),
+            reason);
+    require(Objects.equals(reason.summary(), row.getString("error_summary")));
+    return new Entry(
+        new BatchStepAttempt(
+            present(row.getObject("id", Long.class)),
+            run,
+            step,
+            present(row.getObject("attempt", Integer.class)),
+            started,
+            status == BatchStepResult.Status.SKIPPED),
+        ended,
+        result);
   }
 
   /**

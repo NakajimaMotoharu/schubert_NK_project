@@ -68,9 +68,17 @@ public final class FixedServiceIdentity {
 
   /** SS343/SSC089: the named config group, not the smallest/any service group. */
   public long configurationGroup() throws IOException {
+    return namedGroup("schubert");
+  }
+
+  /** SSC126/ISSROOT001: exact shared asset reader group, never an arbitrary NSS membership. */
+  public long dataReadGroup() throws IOException {
+    return namedGroup("schubert-read");
+  }
+
+  private long namedGroup(String name) throws IOException {
     try {
-      return id(
-          fields(query.read(List.of("/usr/bin/getent", "group", "schubert")), 4, "schubert")[2]);
+      return id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);
     } catch (IOException failure) {
       throw unavailable();
     }
@@ -113,6 +121,16 @@ public final class FixedServiceIdentity {
   /** SSC125: vendor daemon has its fixed primary group only, no application groups. */
   public Value resolveArtemis() throws IOException {
     return resolveMaintenance("schubert-artemis", List.of("schubert-artemis"));
+  }
+
+  /** SSC126: fixed asset owner, not an application service or an issuer capability. */
+  public Value resolveDataOwner() throws IOException {
+    return resolveMaintenance("schubert-data", List.of("schubert-data", "schubert-read"));
+  }
+
+  /** SSC126: fixed staging owner with its primary group only. */
+  public Value resolveMigration() throws IOException {
+    return resolveMaintenance("schubert-migration", List.of("schubert-migration"));
   }
 
   private Value resolveMaintenance(String account, List<String> names) throws IOException {

@@ -28,7 +28,7 @@ final class MorningExpiryExecution {
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 fixed same-owner expiry-request/current namespaces, no path selector")
-  static ExpiryAuditRepository.Snapshot execute(
+  static MorningDatabaseSession.ExpiryObservation execute(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -129,7 +129,7 @@ final class MorningExpiryExecution {
           owners.prepareOwner(owner, UUID.randomUUID());
           requests.prepareExpiry(request, UUID.randomUUID());
           parent.check();
-          var result = new AtomicReference<ExpiryAuditRepository.Snapshot>();
+          var result = new AtomicReference<MorningDatabaseSession.ExpiryObservation>();
           var cycle =
               MorningBackupUnitCycle.create(
                   context, expected, budget, BackupUnitStartClient.Target.EXPIRY);
@@ -152,7 +152,8 @@ final class MorningExpiryExecution {
                   });
           parent.check();
           if (actual.exitCode() == 30) throw new IOException("Expiry rejected");
-          return Objects.requireNonNull(result.get(), "actual Expiry audit readback");
+          return Objects.requireNonNull(
+              result.get(), "actual Expiry terminal/receipt/audit readback");
         });
   }
 }

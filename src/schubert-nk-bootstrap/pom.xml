@@ -21,6 +21,8 @@
   </properties>
 
   <dependencies>
+    <!-- SSC126: existing strict non-secret scalar parsers shared with the trusted issuer. -->
+    <dependency><groupId>org.snakeyaml</groupId><artifactId>snakeyaml-engine</artifactId><version>3.1.1</version></dependency>
     <!-- SSC088: compile-only exact fixed-kernel-path portability review; no quality exclusions. -->
     <dependency><groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.10.4</version><scope>provided</scope></dependency>
     <!-- SSC084: shared credentials/JDBC, no business API or HTTP/JMS dependency. -->

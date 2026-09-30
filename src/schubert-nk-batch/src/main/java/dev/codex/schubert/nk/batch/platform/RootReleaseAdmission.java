@@ -1,10 +1,12 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig;
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.bootstrap.StartupReleaseManifest;
 import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -105,6 +107,83 @@ public final class RootReleaseAdmission {
   public StartupReleaseManifest.Contents inspectMorning(
       Connection connection, RootStartupContext.Snapshot caller) throws SQLException, IOException {
     return verifyFor(connection, caller, RootStartupContext.Service.MORNING);
+  }
+
+  /** Non-secret data only; effective parser result is not release/root/permit authority. SSC126. */
+  public record EffectiveConfigurations(
+      String apiSha256,
+      String webSha256,
+      StorageRootLayout roots,
+      ServiceConfigFiles.Contents apiYaml,
+      ServiceConfigFiles.Contents webYaml) {
+    public EffectiveConfigurations {
+      Objects.requireNonNull(apiSha256);
+      Objects.requireNonNull(webSha256);
+      Objects.requireNonNull(roots);
+      Objects.requireNonNull(apiYaml);
+      Objects.requireNonNull(webYaml);
+    }
+
+    @Override
+    public String toString() {
+      return "EffectiveConfigurations[non-secret=<redacted>]";
+    }
+  }
+
+  public EffectiveConfigurations inspectConfigurations() throws IOException {
+    return inspectConfigurations(ServiceConfigFiles.production());
+  }
+
+  /** Package port for independent fixed YAML vectors, not a native root admission factory. */
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification =
+          "SS343 SSC126 fixes the four non-configurable deployment roots; parsed API/Web paths remain separately checked")
+  EffectiveConfigurations inspectConfigurations(NonSecretConfigSource source) throws IOException {
+    Objects.requireNonNull(source, "actual non-secret fixed YAML reader");
+    require(expected.service() == RootStartupContext.Service.MORNING);
+    context.recheck(expected);
+    var apiYaml = Objects.requireNonNull(source.read(ServiceConfigFiles.Service.API));
+    var webYaml = Objects.requireNonNull(source.read(ServiceConfigFiles.Service.WEB));
+    require(apiYaml.commonYaml().equals(webYaml.commonYaml()));
+    EffectiveConfigurations observed;
+    try {
+      var api = ApiNonSecretConfig.parse(apiYaml.commonYaml(), apiYaml.serviceYaml());
+      var web = WebNonSecretConfig.parse(webYaml.commonYaml(), webYaml.serviceYaml());
+      require(
+          api.value("nk.api.storage.asset-root").equals(web.value("nk.web.storage.asset-root"))
+              && api.value("nk.api.storage.transfer-root")
+                  .equals(web.value("nk.web.storage.transfer-root")));
+      observed =
+          new EffectiveConfigurations(
+              api.canonicalSha256(),
+              web.canonicalSha256(),
+              new StorageRootLayout(
+                  Path.of(api.value("nk.api.storage.asset-root")),
+                  Path.of(api.value("nk.api.storage.transfer-root")),
+                  Path.of("/srv/schubert-nk/backup"),
+                  Path.of("/var/log/schubert-nk"),
+                  Path.of("/var/lib/schubert-nk/artemis"),
+                  Path.of("/srv/schubert-nk/staging")),
+              apiYaml,
+              webYaml);
+    } catch (IllegalArgumentException | java.security.NoSuchAlgorithmException invalid) {
+      throw new IOException("root effective configuration unavailable");
+    }
+    context.recheck(expected);
+    return observed;
+  }
+
+  public void recheckConfigurations(EffectiveConfigurations observed) throws IOException {
+    recheckConfigurations(observed, ServiceConfigFiles.production());
+  }
+
+  void recheckConfigurations(EffectiveConfigurations observed, NonSecretConfigSource source)
+      throws IOException {
+    Objects.requireNonNull(observed);
+    require(observed.equals(inspectConfigurations(source)));
+    context.recheck(expected);
   }
 
   /** Cleanup child verifies its own fixed root actor and fresh release/schema, not the parent's. */

@@ -104,6 +104,48 @@ final class MaintenanceUnitTerminationTest {
   }
 
   @Test
+  void issuerGate002PreservesActualTwelveFieldsAndSeparateKernelIdentities() throws Exception {
+    for (boolean present : List.of(false, true)) {
+      var f = new Fixture();
+      f.kernel.present = present;
+      var actual = f.adapter().quiescentObservation().orElseThrow();
+      assertEquals(
+          List.of(
+              "schubert-nk-backup.service",
+              "loaded",
+              "inactive",
+              "dead",
+              "",
+              "0",
+              "0",
+              "system.slice",
+              "no",
+              present ? "/system.slice/schubert-nk-backup.service" : "",
+              "",
+              "0"),
+          actual.manager().observedValues());
+      assertEquals(present, actual.leafPresent());
+      assertEquals(
+          List.of(
+              new MaintenanceUnitTermination.KernelDirectory(040755, 0, 0, 1, 10),
+              new MaintenanceUnitTermination.KernelDirectory(040555, 0, 0, 2, 11),
+              new MaintenanceUnitTermination.KernelDirectory(040755, 0, 0, 2, 12),
+              new MaintenanceUnitTermination.KernelDirectory(040555, 0, 0, 3, 13),
+              new MaintenanceUnitTermination.KernelDirectory(040755, 0, 0, 3, 14)),
+          actual.directories().subList(0, 5));
+      if (present)
+        assertEquals(
+            new MaintenanceUnitTermination.KernelDirectory(040755, 0, 0, 3, 15),
+            actual.directories().get(5));
+      assertThrows(UnsupportedOperationException.class, () -> actual.directories().clear());
+      assertThrows(
+          UnsupportedOperationException.class, () -> actual.manager().observedValues().clear());
+      assertEquals("MaintenanceTerminationObservation[actual=<redacted>]", actual.toString());
+      f.closed();
+    }
+  }
+
+  @Test
   void mterm001AllFixedColdAndPresentLeaves() throws Exception {
     for (int index = 0; index < 8; index++) {
       for (boolean present : List.of(false, true)) {

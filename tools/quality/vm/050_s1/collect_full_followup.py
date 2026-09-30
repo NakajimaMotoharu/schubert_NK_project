@@ -83,5 +83,11 @@ if int(identifier[2:5]) >= 394:
     manifest['ykt'].extend(['YKT-290', 'YKT-291'])
     manifest['testIds'].extend(['BROKERLIVE001..004', 'BROKERSTART001..004', 'BROKERQUERY001..003', 'EXPARENT001..005'])
     manifest['limitations'] = ['same-source native Broker/Expiry acceptance pending', 'failed Backup/Cleanup native and real hard-timeout pending', 'issuer/API/Web/CHR pending', '100% coverage and formal PT-WEB-20260925-24 unchanged']
+if int(identifier[2:5]) >= 395:
+    manifest['ssc'].append('SSC-126')
+    manifest['bugs'].append('BUG-372')
+    manifest['ykt'].append('YKT-292')
+    manifest['testIds'].extend(['ISSCFG001..002', 'ISSSTEP002..003', 'ISSGATE002'])
+    manifest['limitations'] = ['same-source native preserved terminal/reference/config handoff pending', 'six roots and five concrete gate collection/publication caller incomplete', 'failed Backup/Cleanup native and real hard-timeout pending', 'issuer/API/Web/CHR pending', '100% coverage and formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

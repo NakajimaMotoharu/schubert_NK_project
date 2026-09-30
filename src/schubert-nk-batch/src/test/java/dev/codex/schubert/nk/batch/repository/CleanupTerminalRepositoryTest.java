@@ -145,6 +145,93 @@ final class CleanupTerminalRepositoryTest {
     }
   }
 
+  private void insertCurrentSkips() throws Exception {
+    try (var c = db.admin()) {
+      for (int index = 0; index < 7; index++)
+        sql(
+            c,
+            "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values("
+                + (2000 + index)
+                + ",'"
+                + RUN.id()
+                + "','2026-09-13','"
+                + STEPS[index]
+                + "',2,'2026-09-13T02:00:02Z','2026-09-13T02:00:02Z','SKIPPED',0,0,0,0,'ALREADY_SUCCESSFUL','step already successful for business date')");
+    }
+  }
+
+  @Test
+  void issuerStep003CurrentSkipAndPriorSuccessAreSeparateCompleteRows() throws Exception {
+    try (var c = locked(db, false)) {
+      var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      assertEquals(
+          Collections.nCopies(7, Optional.empty()),
+          repository.references(repository.read(RUN, OBSERVED)));
+      c.rollback();
+    }
+    insertCurrentSkips();
+    try (var c = locked(db, false)) {
+      var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      var current = repository.read(RUN, OBSERVED);
+      var references = repository.references(current);
+      assertEquals(7, references.size());
+      for (int index = 0; index < 7; index++) {
+        var now = current.entries().get(index);
+        var original = references.get(index).orElseThrow();
+        assertEquals(2000 + index, now.attempt().id());
+        assertEquals(2, now.attempt().attempt());
+        assertEquals(Instant.parse("2026-09-13T02:00:02Z"), now.endedAt());
+        assertEquals(
+            new BatchStepResult(
+                BatchStepResult.Status.SKIPPED,
+                0,
+                0,
+                0,
+                0,
+                BatchStepResult.Reason.ALREADY_SUCCESSFUL),
+            now.result());
+        assertEquals(1000 + index, original.attempt().id());
+        assertEquals(RUN, original.attempt().run());
+        assertEquals(STEPS[index], original.attempt().step().name());
+        assertEquals(1, original.attempt().attempt());
+        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), original.attempt().startedAt());
+        assertEquals(Instant.parse("2026-09-13T02:00:01Z"), original.endedAt());
+        assertEquals(
+            new BatchStepResult(
+                BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
+            original.result());
+      }
+      assertThrows(UnsupportedOperationException.class, () -> references.clear());
+      assertThrows(NullPointerException.class, () -> repository.references(null));
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isClosed());
+      c.rollback();
+    }
+  }
+
+  @Test
+  void issuerStep003MissingForeignLateAndMalformedOriginalCannotBecomeReference() throws Exception {
+    for (String mutation :
+        List.of(
+            "delete from schubert.batch_runs where id=1002",
+            "update schubert.batch_runs set run_id='47700000-2222-4333-8444-555555555555' where id=1002",
+            "update schubert.batch_runs set attempt=3 where id=1002",
+            "update schubert.batch_runs set ended_at='2026-09-13T02:00:03Z' where id=1002",
+            "update schubert.batch_runs set error_summary='PUBLIC_WRONG' where id=1002")) {
+      seed();
+      insertCurrentSkips();
+      try (var c = locked(db, false)) {
+        var repository = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+        var current = repository.read(RUN, OBSERVED);
+        try (var admin = db.admin()) {
+          sql(admin, mutation);
+        }
+        assertThrows(BatchRepositoryException.class, () -> repository.references(current));
+        c.rollback();
+      }
+    }
+  }
+
   @Test
   void cterm003ValueInvariantNullAndMissingOwner() throws Exception {
     var valid = read();

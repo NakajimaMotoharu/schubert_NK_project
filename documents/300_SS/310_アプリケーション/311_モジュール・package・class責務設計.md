@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC126（PG395、正規issuer接続の内部依存）：ApiNonSecretConfig/WebNonSecretConfigの純粋scalar parser・独立PTをbootstrapへ移す。既存api/web.* binary名は互換名で、業務moduleへのartifact依存を意味しない。固定defaults/strict YAML/role別許容key/正確effective canonical SHAは保持し、Root Morningと各appが同じ実装を利用する。APIの6Queue名はSS321/343の固定default集合だけを照合しProtocol enum依存を持ち込まない。SnakeYAML3.1.1は既存API/Webと同version、sharedはStorageだけへの内部依存・HTTP/JMS/業務repositoryなし。通常API/Web/Rootへのcredential配布は変えない。新共用framework/設定fallback/業務profileを追加しない。
+
 SSC088: 共用bootstrapへSSC086の非秘密canonical proof/固定service NSS/子自己bindingも収容し、root Batch→bootstrapを許可する。API/Web→bootstrapとbootstrap→Storageだけの内部依存、Web→業務API禁止、Storage native-only/no-JDBC、bootstrapへ業務HTTP/JMS追加禁止を維持する。root Batchのschema read-only validateにはFlyway core compile/PG plugin runtimeを使用する（従来test限定から具体化）。通常serviceへmigration/Ops credentialを配布しない。公開snapshot・native2FDだけで全root/current permit/schema/Ops readinessを代替しない。
 
 SSC084/PG289: `src/schubert-nk-bootstrap`を共用起動libraryとしてStorageの後、API/Webの前へ追加する。固定資格情報のstrict material/保持inode読取と固定role JDBC admission/sourceだけを移動し、HTTP/JMS/業務repository/process entry/DDLは含めない。API/Webはbootstrapを参照でき、bootstrapはStorageだけを内部依存とする（JDBCはJDK、PostgreSQL driverはruntime）。Storageのnative-only/no-JDBCとWeb→業務API依存禁止は維持する。移動対象11classの既存api.* package/binary名は互換名として保持し、artifactのAPI依存を意味しない。対象と試験owner/再検証方針は473、SSC084へ追跡。RequiredColumnは業務APIに残し、bootstrap DB admissionはそのSQL NULL拒否を自身の固定08001契約で扱う。秘密/権限/外部画面仕様は変更しない。

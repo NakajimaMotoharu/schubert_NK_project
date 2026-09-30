@@ -106,7 +106,7 @@ final class FixedUnitCgroupNamespace {
     return new Identity(mode, uid, gid, device, inode);
   }
 
-  private record Identity(int mode, int uid, int gid, long device, long inode) {}
+  record Identity(int mode, int uid, int gid, long device, long inode) {}
 
   record Snapshot(List<Identity> identities, boolean present) {}
 

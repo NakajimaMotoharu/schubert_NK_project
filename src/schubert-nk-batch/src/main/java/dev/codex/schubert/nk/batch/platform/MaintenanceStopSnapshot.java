@@ -75,6 +75,13 @@ public final class MaintenanceStopSnapshot {
     return value("ControlGroup");
   }
 
+  /**
+   * SSC126: original twelve observed values in the SS fixed property order, never claimed state.
+   */
+  public List<String> observedValues() {
+    return Arrays.stream(PROPERTIES.split(",")).map(this::value).toList();
+  }
+
   /** Necessary state only; active/exited is not an explicit parent stop completion. */
   public boolean quiescent() {
     return value("Job").isEmpty()

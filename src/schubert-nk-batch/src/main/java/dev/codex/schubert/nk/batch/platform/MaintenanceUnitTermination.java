@@ -74,6 +74,46 @@ public final class MaintenanceUnitTermination {
   }
 
   public Optional<MaintenanceStopSnapshot> quiescent() throws IOException {
+    return quiescentObservation().map(Observation::manager);
+  }
+
+  /** SSC126: retained actual verified data; not a stop request or detached startup authority. */
+  public record KernelDirectory(int mode, int uid, int gid, long device, long inode) {}
+
+  public static final class Observation {
+    private final MaintenanceStopSnapshot manager;
+    private final List<KernelDirectory> directories;
+    private final boolean present;
+
+    private Observation(MaintenanceStopSnapshot manager, FixedUnitCgroupNamespace.Snapshot kernel) {
+      this.manager = manager;
+      directories =
+          List.copyOf(
+              kernel.identities().stream()
+                  .map(i -> new KernelDirectory(i.mode(), i.uid(), i.gid(), i.device(), i.inode()))
+                  .toList());
+      present = kernel.present();
+    }
+
+    public MaintenanceStopSnapshot manager() {
+      return manager;
+    }
+
+    public List<KernelDirectory> directories() {
+      return directories;
+    }
+
+    public boolean leafPresent() {
+      return present;
+    }
+
+    @Override
+    public String toString() {
+      return "MaintenanceTerminationObservation[actual=<redacted>]";
+    }
+  }
+
+  public Optional<Observation> quiescentObservation() throws IOException {
     synchronized (stateLock) {
       try {
         check();
@@ -103,7 +143,7 @@ public final class MaintenanceUnitTermination {
         require(first.equals(namespace.observe(unit)));
         require(before.matches(read()));
         check();
-        return Optional.of(before);
+        return Optional.of(new Observation(before, first));
       } catch (IOException failure) {
         throw unavailable();
       }

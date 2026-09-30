@@ -218,7 +218,37 @@ final class MorningExpirySessionTest {
                         NOW.plusSeconds(15),
                         null,
                         null),
-                    observed);
+                    observed.audit());
+                assertEquals(begins, observed.begins());
+                assertSame(receipt, observed.receipt());
+                assertEquals(
+                    current == 1 ? NOW.plusSeconds(15) : NOW.plusSeconds(24), observed.ended());
+                assertEquals(
+                    current == 1
+                        ? new BatchStepResult(
+                            BatchStepResult.Status.SUCCESS,
+                            2,
+                            2,
+                            0,
+                            200,
+                            BatchStepResult.Reason.NONE)
+                        : new BatchStepResult(
+                            BatchStepResult.Status.SKIPPED,
+                            0,
+                            0,
+                            0,
+                            0,
+                            BatchStepResult.Reason.ALREADY_SUCCESSFUL),
+                    observed.result());
+                if (current == 2) {
+                  var prior = observed.begins().prior().orElseThrow();
+                  assertNotEquals(begins.current().id(), prior.handle().id());
+                  assertEquals(1, prior.handle().attempt());
+                  assertEquals(NOW.plusSeconds(14), prior.handle().startedAt());
+                  assertEquals(prior.audit(), observed.audit());
+                }
+                s.recheckExpiry(observed, OWNER);
+                assertThrows(IOException.class, () -> s.recheckExpiry(observed, () -> 0));
                 assertThrows(
                     IOException.class,
                     () -> s.handoffExpiry(() -> fail("cannot reacquire a second handoff")));

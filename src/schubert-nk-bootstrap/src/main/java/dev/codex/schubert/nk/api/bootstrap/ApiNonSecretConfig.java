@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -142,17 +141,16 @@ public final class ApiNonSecretConfig {
             "nk.outbox.sent-retention")) {
       if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();
     }
-    for (BrokerTopology address : BrokerTopology.values()) {
-      String key =
-          switch (address) {
-            case SYNC_REQUEST -> "nk.mq.sync-request";
-            case SYNC_REPLY_WEB -> "nk.mq.sync-reply";
-            case ASYNC_WORK -> "nk.mq.async-work";
-            case WEB_LOG -> "nk.mq.web-log";
-            case DEAD_LETTER -> "nk.mq.dlq";
-            case EXPIRY -> "nk.mq.expiry";
-          };
-      if (!address.address().equals(values.get(key))) throw invalid();
+    // SS321/343 fixed scalar policy; no business/protocol dependency in shared bootstrap.
+    for (String key :
+        Set.of(
+            "nk.mq.sync-request",
+            "nk.mq.sync-reply",
+            "nk.mq.async-work",
+            "nk.mq.web-log",
+            "nk.mq.dlq",
+            "nk.mq.expiry")) {
+      if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();
     }
     if (!Set.of("STANDARD", "DEBUG").contains(values.get("nk.monitoring.mode"))) throw invalid();
     if (!validPort(DB_URL, Objects.requireNonNull(values.get("nk.db.url")))

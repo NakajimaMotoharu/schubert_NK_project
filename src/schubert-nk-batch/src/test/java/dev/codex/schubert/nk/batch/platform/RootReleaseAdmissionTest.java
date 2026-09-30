@@ -151,6 +151,96 @@ public final class RootReleaseAdmissionTest {
     assertEquals(events, f.events.size());
   }
 
+  @Test
+  void issuerCfg002UsesSharedStrictEffectiveVectorsAndRawRereadNotBomTemplateHash()
+      throws Exception {
+    var f = new Fixture();
+    var subject = f.subject();
+    var yaml =
+        new java.util.concurrent.atomic.AtomicReference<>(new ServiceConfigFiles.Contents("", ""));
+    NonSecretConfigSource source = service -> yaml.get();
+    var actual = subject.inspectConfigurations(source);
+    // Independent hand-written default vectors in the existing shared parser PT; SHA256 computed
+    // independently with Node crypto, not by either production parser or a production encoder.
+    assertEquals(
+        "6d083b3bf0f610d8b33913234c3d38aa64f203fc5ea469bb4c236bc79f21bfa3", actual.apiSha256());
+    assertEquals(
+        "98cfeb71e1c4cb5a0805975b3efa3cb52ec89ca48f739b5a15c73a24a1fc22b8", actual.webSha256());
+    assertEquals(
+        new StorageRootLayout(
+            Path.of("/srv/schubert-nk/data/assets"),
+            Path.of("/srv/schubert-nk/data/transfer"),
+            Path.of("/srv/schubert-nk/backup"),
+            Path.of("/var/log/schubert-nk"),
+            Path.of("/var/lib/schubert-nk/artemis"),
+            Path.of("/srv/schubert-nk/staging")),
+        actual.roots());
+    assertEquals("EffectiveConfigurations[non-secret=<redacted>]", actual.toString());
+    subject.recheckConfigurations(actual, source);
+    yaml.set(new ServiceConfigFiles.Contents("# public comment\nnk.protocol.version: '001'\n", ""));
+    var sameEffective = subject.inspectConfigurations(source);
+    assertEquals(actual.apiSha256(), sameEffective.apiSha256());
+    assertEquals(actual.webSha256(), sameEffective.webSha256());
+    assertThrows(IOException.class, () -> subject.recheckConfigurations(actual, source));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.inspectConfigurations(
+                service -> new ServiceConfigFiles.Contents(service.name(), "")));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.inspectConfigurations(
+                service -> new ServiceConfigFiles.Contents("unknown: value\n", "")));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.inspectConfigurations(
+                service ->
+                    new ServiceConfigFiles.Contents(
+                        "",
+                        service == ServiceConfigFiles.Service.API
+                            ? "nk.api.storage.asset-root: /var/log/schubert-nk\n"
+                            : "nk.web.storage.asset-root: /var/log/schubert-nk\n")));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.inspectConfigurations(
+                service ->
+                    new ServiceConfigFiles.Contents(
+                        "",
+                        service == ServiceConfigFiles.Service.API
+                            ? "nk.api.storage.asset-root: /srv/a\n"
+                            : "nk.web.storage.asset-root: /srv/b\n")));
+    assertThrows(
+        IOException.class,
+        () ->
+            subject.inspectConfigurations(
+                service ->
+                    new ServiceConfigFiles.Contents(
+                        "",
+                        service == ServiceConfigFiles.Service.API
+                            ? "nk.api.storage.transfer-root: /srv/a\n"
+                            : "nk.web.storage.transfer-root: /srv/b\n")));
+    assertThrows(NullPointerException.class, () -> subject.inspectConfigurations(null));
+    assertThrows(NullPointerException.class, () -> subject.inspectConfigurations(service -> null));
+    assertThrows(NullPointerException.class, () -> subject.recheckConfigurations(null, source));
+    var unknown = new IllegalStateException("PUBLIC UNKNOWN");
+    assertSame(
+        unknown,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                subject.inspectConfigurations(
+                    service -> {
+                      throw unknown;
+                    })));
+    var wrong = new Fixture(RootStartupContext.Service.CLEANUP).subject();
+    assertThrows(
+        IOException.class,
+        () -> wrong.inspectConfigurations(service -> fail("actor before file IO")));
+  }
+
   private static <T> T proxy(Class<T> type, InvocationHandler handler) {
     return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
   }

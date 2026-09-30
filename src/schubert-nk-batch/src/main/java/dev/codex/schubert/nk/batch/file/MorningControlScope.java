@@ -78,7 +78,8 @@ final class MorningControlScope {
         MaintenanceRunState state,
         dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
         Epoch epoch,
-        MorningNewRunAdmission.OriginalProof original)
+        MorningNewRunAdmission.OriginalProof original,
+        MorningUnitTerminals.Snapshot initialStop)
         throws IOException;
   }
 
@@ -120,6 +121,8 @@ final class MorningControlScope {
         };
     var maintenance = MaintenanceFileLock.create();
     var startup = StartupAdmissionFile.create();
+    var initialStop =
+        new java.util.concurrent.atomic.AtomicReference<MorningUnitTerminals.Snapshot>();
     return executeStopAndStartup(
         gate,
         maintenance::tryExclusive,
@@ -134,13 +137,18 @@ final class MorningControlScope {
                       gate,
                       () -> MorningStopPass.create(root, snapshot, budget).execute(),
                       startup::tryExclusive,
-                      () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
+                      () -> initialStop.set(MorningUnitTerminals.capture(root, snapshot)),
                       () -> {
                         Epoch epoch = MorningCurrentInvalidation.invalidate(root, snapshot, state);
                         if (epoch.state() != State.INVALID
                             || !epoch.activation().equals(state.activation())) throw unavailable();
                         original.verify();
-                        return trustedWork.execute(state, database, epoch, original);
+                        return trustedWork.execute(
+                            state,
+                            database,
+                            epoch,
+                            original,
+                            Objects.requireNonNull(initialStop.get(), "actual A-after-stop set"));
                       });
           if (runId.isPresent()) {
             return MorningResumeAdmission.create(root, snapshot)

@@ -21,7 +21,28 @@ import org.jspecify.annotations.NullMarked;
 final class MorningCleanupExecution {
   private MorningCleanupExecution() {}
 
-  static CleanupTerminalRepository.Snapshot execute(
+  /** Data only: genuine current receipt and seven separate optional original references. SSC126. */
+  record Completion(
+      CleanupTerminalRepository.Snapshot terminal,
+      BackupUnitReceiptGate.TerminalReceipt receipt,
+      List<Optional<CleanupTerminalRepository.Entry>> references) {
+    Completion {
+      Objects.requireNonNull(terminal);
+      Objects.requireNonNull(receipt);
+      references = List.copyOf(references);
+      if (receipt.target() != BackupUnitStartClient.Target.CLEANUP
+          || receipt.exitCode() != terminal.exitCode()
+          || references.size() != CleanupTerminalRepository.STEPS.size())
+        throw new IllegalArgumentException("invalid actual Cleanup completion");
+    }
+
+    @Override
+    public String toString() {
+      return "CleanupCompletion[actual=<redacted>]";
+    }
+  }
+
+  static Completion execute(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -44,7 +65,7 @@ final class MorningCleanupExecution {
             actual.run().id(), state.activation().id(), actual.run().cutoff(), digest(actual)));
   }
 
-  static CleanupTerminalRepository.Snapshot executeFailed(
+  static Completion executeFailed(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -92,7 +113,7 @@ final class MorningCleanupExecution {
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 fixed Cleanup namespace/current, same parent owner SSC124 CFLOW001")
-  private static CleanupTerminalRepository.Snapshot execute(
+  private static Completion execute(
       RootStartupContext context,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -225,7 +246,9 @@ final class MorningCleanupExecution {
                   });
           parent.check();
           if (terminal.exitCode() == 30) throw new IOException("Cleanup rejected");
-          return Objects.requireNonNull(result.get(), "actual Cleanup readback");
+          var observed = Objects.requireNonNull(result.get(), "actual Cleanup readback");
+          return new Completion(
+              observed, cycle.completedReceipt(), database.cleanupReferences(observed, parent));
         });
   }
 

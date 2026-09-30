@@ -50,7 +50,8 @@ final class MorningBackupStage {
         MorningDatabaseSession.BackupBegins begins,
         UUID part,
         MorningNewRunAdmission.OriginalProof original,
-        MorningProcessMain.Archive completion)
+        MorningProcessMain.Archive completion,
+        dev.codex.schubert.nk.batch.platform.MorningUnitTerminals.Snapshot initialStop)
         throws IOException;
   }
 
@@ -87,7 +88,7 @@ final class MorningBackupStage {
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
     UUID part = UUID.randomUUID();
     MorningControlScope.VerifiedEpochWork<T> continuation =
-        (state, database, epoch, original) -> {
+        (state, database, epoch, original, initialStop) -> {
           if (runId.isPresent()) {
             var prior =
                 database.successfulBackup(
@@ -106,7 +107,15 @@ final class MorningBackupStage {
                     MorningBackupRequestPublication.create(root, snapshot).publish(request, part);
                     T result =
                         work.execute(
-                            state, database, epoch, request, begins, part, original, completion);
+                            state,
+                            database,
+                            epoch,
+                            request,
+                            begins,
+                            part,
+                            original,
+                            completion,
+                            initialStop);
                     budget.requireWithin();
                     original.verify();
                     return result;
@@ -140,7 +149,8 @@ final class MorningBackupStage {
                         MorningProcessMain.archive(
                             () ->
                                 new MorningBackupArtifacts(root, snapshot, budget)
-                                    .complete(request, begins, part, database)));
+                                    .complete(request, begins, part, database)),
+                        initialStop);
                 budget.requireWithin();
                 original.verify();
                 return result;

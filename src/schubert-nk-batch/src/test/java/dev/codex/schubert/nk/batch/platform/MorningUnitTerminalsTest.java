@@ -11,6 +11,55 @@ import org.junit.jupiter.api.Test;
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG337; PT-OPS-MTERMS001-005. */
 final class MorningUnitTerminalsTest {
   @Test
+  void issuerGate002CapturesOrderedEightUnderSameMorningActor() throws Exception {
+    var f = new RootStartupContextTest.Fixture();
+    f.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
+    f.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    var context = f.context();
+    var parent = context.capture(RootStartupContext.Service.MORNING);
+    var seen = new ArrayList<MaintenanceUnit>();
+    var actual =
+        MorningUnitTerminals.capture(
+            context,
+            parent,
+            unit -> {
+              seen.add(unit);
+              var terminal = new MaintenanceUnitTerminationTest.Fixture();
+              terminal.target = unit;
+              terminal.name = unit.serviceName();
+              var value = terminal.adapter().quiescentObservation();
+              terminal.closed();
+              return value;
+            });
+    assertSame(parent, actual.parent());
+    assertEquals(
+        List.of(
+            MaintenanceUnit.CADDY,
+            MaintenanceUnit.WEB,
+            MaintenanceUnit.API,
+            MaintenanceUnit.CLEANUP,
+            MaintenanceUnit.INSPECTOR,
+            MaintenanceUnit.EXPIRY,
+            MaintenanceUnit.BACKUP,
+            MaintenanceUnit.ARTEMIS),
+        seen);
+    assertEquals(seen, actual.units().stream().map(row -> row.manager().unit()).toList());
+    assertThrows(UnsupportedOperationException.class, () -> actual.units().clear());
+    assertEquals("MorningStopSet[actual=<redacted>]", actual.toString());
+    assertThrows(
+        IOException.class,
+        () -> MorningUnitTerminals.capture(context, parent, unit -> java.util.Optional.empty()));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningUnitTerminals.capture(context, parent, unit -> null));
+    assertThrows(
+        NullPointerException.class, () -> MorningUnitTerminals.capture(context, parent, null));
+    var wrong = new MaintenanceUnitTerminationTest.Fixture().adapter().quiescentObservation();
+    assertThrows(
+        IOException.class, () -> MorningUnitTerminals.capture(context, parent, unit -> wrong));
+  }
+
+  @Test
   void mterms001AllEightOrderedAndFresh() throws Exception {
     var seen = new ArrayList<MaintenanceUnit>();
     MorningUnitTerminals.requireQuiescent(

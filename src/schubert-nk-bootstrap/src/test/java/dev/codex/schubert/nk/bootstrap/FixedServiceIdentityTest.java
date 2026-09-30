@@ -73,6 +73,46 @@ final class FixedServiceIdentityTest {
   }
 
   @Test
+  void issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority() throws Exception {
+    var f = new Fixture();
+    f.values.put(
+        "passwd/schubert-data", "schubert-data:x:990:975::/nonexistent:/usr/sbin/nologin\n");
+    f.values.put("group/schubert-data", "schubert-data:x:975:\n");
+    f.values.put(
+        "passwd/schubert-migration",
+        "schubert-migration:x:989:974::/nonexistent:/usr/sbin/nologin\n");
+    f.values.put("group/schubert-migration", "schubert-migration:x:974:\n");
+    assertEquals(
+        new FixedServiceIdentity.Value(990, 975, List.of(975L, 982L)),
+        f.subject().resolveDataOwner());
+    assertEquals(
+        new FixedServiceIdentity.Value(989, 974, List.of(974L)), f.subject().resolveMigration());
+    assertEquals(982L, f.subject().dataReadGroup());
+    assertEquals(
+        List.of(
+            List.of("/usr/bin/getent", "passwd", "schubert-data"),
+            List.of("/usr/bin/getent", "group", "schubert-data"),
+            List.of("/usr/bin/getent", "group", "schubert-read"),
+            List.of("/usr/bin/getent", "passwd", "schubert-migration"),
+            List.of("/usr/bin/getent", "group", "schubert-migration"),
+            List.of("/usr/bin/getent", "group", "schubert-read")),
+        f.commands);
+    f.values.put("group/schubert-data", "schubert-data:x:982:\n");
+    assertThrows(IOException.class, () -> f.subject().resolveDataOwner());
+    f.values.put("group/schubert-data", "schubert-data:x:975:\n");
+    f.values.put("group/schubert-read", "schubert-read:x:975:\n");
+    assertThrows(IOException.class, () -> f.subject().resolveDataOwner());
+    f.values.remove("passwd/schubert-migration");
+    assertThrows(IOException.class, () -> f.subject().resolveMigration());
+    f.values.put("group/schubert-read", "schubert-read:x:0:\n");
+    assertEquals(
+        "service identity unavailable",
+        assertThrows(IOException.class, () -> f.subject().dataReadGroup()).getMessage());
+    f.values.remove("group/schubert-read");
+    assertThrows(IOException.class, () -> f.subject().dataReadGroup());
+  }
+
+  @Test
   void serviceid001BothFixedAccountsExplicitRequiredGroups() {
     var backup = new Fixture();
     backup.values.put(

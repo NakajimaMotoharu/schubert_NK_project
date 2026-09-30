@@ -57,7 +57,7 @@ public final class MorningProcessMain {
         MorningParentBudget.borrow(
             entryRoot.maintenanceDeadline(entrySnapshot, entryBudget.deadlineNanos()));
     MorningBackupStage.VerifiedEpochWork<MorningBackupUnitCycle.Outcome> work =
-        (state, database, epoch, request, begins, part, original, completion) -> {
+        (state, database, epoch, request, begins, part, original, completion, initialStop) -> {
           var root = RootStartupContext.create();
           var snapshot = root.capture(RootStartupContext.Service.MORNING);
           var requests = openRequests();
@@ -108,33 +108,69 @@ public final class MorningProcessMain {
                           root.recheck(snapshot);
                           original.verify();
                         });
+                MorningCleanupExecution.Completion cleanup;
                 if (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
-                  MorningCleanupExecution.execute(
-                      root,
-                      snapshot,
-                      budget,
-                      state,
-                      database,
-                      epoch,
-                      original,
-                      completion.verifiedManifest());
+                  cleanup =
+                      MorningCleanupExecution.execute(
+                          root,
+                          snapshot,
+                          budget,
+                          state,
+                          database,
+                          epoch,
+                          original,
+                          completion.verifiedManifest());
                 } else if (backupOutcome == MorningBackupUnitCycle.Outcome.FAILED) {
-                  MorningCleanupExecution.executeFailed(
-                      root,
-                      snapshot,
-                      budget,
-                      state,
-                      database,
-                      epoch,
-                      original,
-                      begins,
-                      backupCycle.completedReceipt());
-                }
+                  cleanup =
+                      MorningCleanupExecution.executeFailed(
+                          root,
+                          snapshot,
+                          budget,
+                          state,
+                          database,
+                          epoch,
+                          original,
+                          begins,
+                          backupCycle.completedReceipt());
+                } else throw new IOException("Actual Backup completion unavailable");
                 var broker =
                     MorningBrokerExecution.execute(
                         root, snapshot, budget, state, database, epoch, original);
-                MorningExpiryExecution.execute(
-                    root, snapshot, budget, state, database, epoch, original, broker);
+                var expiry =
+                    MorningExpiryExecution.execute(
+                        root, snapshot, budget, state, database, epoch, original, broker);
+                database.recheckExpiry(
+                    expiry,
+                    () -> {
+                      budget.requireWithin();
+                      root.recheck(snapshot);
+                      original.verify();
+                      broker.recheck();
+                      return budget.remainingNanos();
+                    });
+                var references =
+                    database.cleanupReferences(
+                        cleanup.terminal(),
+                        () -> {
+                          budget.requireWithin();
+                          root.recheck(snapshot);
+                          original.verify();
+                          broker.recheck();
+                          return budget.remainingNanos();
+                        });
+                EnvironmentInodePolicy.require(cleanup.references().equals(references));
+                budget.requireWithin();
+                original.verify();
+                var release =
+                    dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.create(
+                        root, snapshot);
+                var configurations = release.inspectConfigurations();
+                budget.requireWithin();
+                original.verify();
+                release.recheckConfigurations(configurations);
+                budget.requireWithin();
+                original.verify();
+                broker.recheck();
                 return backupOutcome;
               });
         };
