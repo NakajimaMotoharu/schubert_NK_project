@@ -232,10 +232,19 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
 
   @Override
   public void unlink(int directory, String name) throws StorageIoException {
+    unlink(directory, name, 0);
+  }
+
+  @Override
+  public void removeEmptyDirectory(int directory, String name) throws StorageIoException {
+    unlink(directory, name, 0x200); // Linux AT_REMOVEDIR, not recursive deletion.
+  }
+
+  private void unlink(int directory, String name, int flags) throws StorageIoException {
     segment(name);
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      check(unlink.call(state, directory, arena.allocateFrom(name), 0), state);
+      check(unlink.call(state, directory, arena.allocateFrom(name), flags), state);
     }
   }
 

@@ -5,6 +5,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -18,6 +19,50 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class BackupUnitStartClient {
+  /** Closed phase selection, never an arbitrary Unit/path. SSC117. */
+  public enum Target {
+    BACKUP(
+        MaintenanceUnit.BACKUP,
+        InspectorUnitSnapshot.Target.BACKUP,
+        "/run/schubert-nk/backup-request",
+        "backup-start.intent"),
+    CLEANUP(
+        MaintenanceUnit.CLEANUP,
+        InspectorUnitSnapshot.Target.CLEANUP,
+        "/run/schubert-nk/cleanup-request",
+        "cleanup-start.intent");
+    private final MaintenanceUnit unit;
+    private final InspectorUnitSnapshot.Target observation;
+    private final String requestDirectory, marker;
+
+    Target(
+        MaintenanceUnit unit,
+        InspectorUnitSnapshot.Target observation,
+        String directory,
+        String marker) {
+      this.unit = unit;
+      this.observation = observation;
+      this.requestDirectory = directory;
+      this.marker = marker;
+    }
+
+    public MaintenanceUnit unit() {
+      return unit;
+    }
+
+    public InspectorUnitSnapshot.Target observation() {
+      return observation;
+    }
+
+    public String requestDirectory() {
+      return requestDirectory;
+    }
+
+    public String marker() {
+      return marker;
+    }
+  }
+
   @FunctionalInterface
   interface Context {
     void recheck() throws IOException;
@@ -69,20 +114,56 @@ public final class BackupUnitStartClient {
   private final Policy policy;
   private final Start start;
   private final Intent intent;
+  private final Target target;
+  private final Optional<MorningParentBudget> budget;
 
   public static BackupUnitStartClient create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
-    return create(
-        root,
-        expected,
-        MaintenanceUnitStopPolicy.create(),
+    return create(root, expected, Target.BACKUP);
+  }
+
+  public static BackupUnitStartClient create(
+      RootStartupContext root, RootStartupContext.Snapshot expected, Target target)
+      throws IOException {
+    return createWithBudget(root, expected, target, Optional.empty());
+  }
+
+  public static BackupUnitStartClient create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      Target target,
+      MorningParentBudget budget)
+      throws IOException {
+    return createWithBudget(
+        root, expected, target, Optional.of(Objects.requireNonNull(budget, "same parent budget")));
+  }
+
+  private static BackupUnitStartClient createWithBudget(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      Target target,
+      Optional<MorningParentBudget> budget)
+      throws IOException {
+    Objects.requireNonNull(root, "Morning root context");
+    Objects.requireNonNull(expected, "Morning root snapshot");
+    Objects.requireNonNull(target, "closed phase");
+    if (expected.service() != RootStartupContext.Service.MORNING)
+      throw new IOException("backup start unavailable");
+    root.recheck(expected);
+    var policy = MaintenanceUnitStopPolicy.create();
+    return new BackupUnitStartClient(
+        () -> root.recheck(expected),
+        () -> policy.requireSafe(target.unit()),
         new MaintenanceUnitStopClient.NativeStart()::execute,
-        () -> beginNative(root, expected));
+        () -> beginNative(root, expected, target),
+        target,
+        budget);
   }
 
   private static MarkerLease beginNative(
-      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
-    var marker = BackupStartIntentFiles.create(root, expected);
+      RootStartupContext root, RootStartupContext.Snapshot expected, Target target)
+      throws IOException {
+    var marker = BackupStartIntentFiles.create(root, expected, target);
     try {
       var token = marker.begin();
       // This owner and exact token must survive the external start and the whole parent cycle.
@@ -140,10 +221,26 @@ public final class BackupUnitStartClient {
   }
 
   BackupUnitStartClient(Context context, Policy policy, Start start, Intent intent) {
+    this(context, policy, start, intent, Target.BACKUP);
+  }
+
+  BackupUnitStartClient(Context context, Policy policy, Start start, Intent intent, Target target) {
+    this(context, policy, start, intent, target, Optional.empty());
+  }
+
+  BackupUnitStartClient(
+      Context context,
+      Policy policy,
+      Start start,
+      Intent intent,
+      Target target,
+      Optional<MorningParentBudget> budget) {
     this.context = Objects.requireNonNull(context, "Morning root context");
     this.policy = Objects.requireNonNull(policy, "fixed Backup policy");
     this.start = Objects.requireNonNull(start, "fixed start port");
     this.intent = Objects.requireNonNull(intent, "same-boot start intent");
+    this.target = Objects.requireNonNull(target, "closed phase");
+    this.budget = Objects.requireNonNull(budget, "parent budget binding");
   }
 
   /**
@@ -151,6 +248,7 @@ public final class BackupUnitStartClient {
    * handle or exception has unknown delivery and must remain opaque to the parent.
    */
   public Attempt start() throws IOException {
+    if (budget.isPresent()) budget.orElseThrow().requireWithin();
     interrupted();
     context.recheck();
     policy.requireSafe();
@@ -159,14 +257,16 @@ public final class BackupUnitStartClient {
     // SSC106: a failed or uncertain publication is pre-start and issues no systemctl request.
     // Once published, all unknown delivery paths leave the marker for the next M admission.
     MarkerLease marker = Objects.requireNonNull(intent.begin(), "retained start marker");
-    if (Thread.currentThread().isInterrupted()) return new Attempt(context, null, marker);
+    if (Thread.currentThread().isInterrupted()) return new Attempt(context, null, marker, budget);
     @Nullable Process process;
     try {
-      process = start.execute(COMMAND);
+      var command = new java.util.ArrayList<>(COMMAND);
+      command.set(command.size() - 1, target.unit().serviceName());
+      process = start.execute(List.copyOf(command));
     } catch (IOException | RuntimeException | Error uncertainStart) {
-      return new Attempt(context, null, marker);
+      return new Attempt(context, null, marker, budget);
     }
-    var attempt = new Attempt(context, process, marker);
+    var attempt = new Attempt(context, process, marker, budget);
     attempt.awaitClient();
     return attempt;
   }
@@ -181,6 +281,7 @@ public final class BackupUnitStartClient {
     private final Context context;
     private final @Nullable Process process;
     private final MarkerLease marker;
+    private final Optional<MorningParentBudget> budget;
     private Status status = Status.UNKNOWN;
     private boolean retired;
     private boolean retiring;
@@ -189,10 +290,15 @@ public final class BackupUnitStartClient {
     private boolean streamsClosed;
     private boolean poisoned;
 
-    private Attempt(Context context, @Nullable Process process, MarkerLease marker) {
+    private Attempt(
+        Context context,
+        @Nullable Process process,
+        MarkerLease marker,
+        Optional<MorningParentBudget> budget) {
       this.context = context;
       this.process = process;
       this.marker = marker;
+      this.budget = budget;
     }
 
     public synchronized Status status() {
@@ -232,7 +338,13 @@ public final class BackupUnitStartClient {
           stdinClosed = true;
           Objects.requireNonNull(process.getOutputStream(), "start stdin").close();
         }
-        if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
+        if (budget.isPresent()) {
+          long remaining = budget.orElseThrow().remainingNanos();
+          if (!process.waitFor(
+              Math.min(TimeUnit.SECONDS.toNanos(120), remaining), TimeUnit.NANOSECONDS))
+            return Status.UNKNOWN;
+          budget.orElseThrow().requireWithin();
+        } else if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
         if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
         var stdout = Objects.requireNonNull(process.getInputStream(), "start stdout");
         Closeable stderr;

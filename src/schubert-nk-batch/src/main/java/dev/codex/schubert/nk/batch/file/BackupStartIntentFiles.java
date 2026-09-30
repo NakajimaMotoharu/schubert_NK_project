@@ -4,14 +4,13 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailable;
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
+import dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.Target;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageIoException;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.FileAlreadyExistsException;
@@ -56,22 +55,30 @@ public final class BackupStartIntentFiles implements AutoCloseable {
   private final Gate gate;
   private final Object lock = new Object();
   private boolean begun;
+  private final String name;
 
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification = "SSC106 fixes the root-only same-boot Backup intent namespace")
   public static BackupStartIntentFiles create(
       RootStartupContext context, RootStartupContext.Snapshot expected) throws IOException {
+    return create(context, expected, Target.BACKUP);
+  }
+
+  public static BackupStartIntentFiles create(
+      RootStartupContext context, RootStartupContext.Snapshot expected, Target target)
+      throws IOException {
     Objects.requireNonNull(context, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
+    Objects.requireNonNull(target, "closed phase");
     if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
     context.recheck(expected);
     var root =
         OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/backup-request"));
+            LinuxDirectoryCalls.create(), Path.of(target.requestDirectory()));
     return new BackupStartIntentFiles(
-        root, LinuxInodeSecurity.create(), () -> context.recheck(expected));
+        root,
+        LinuxInodeSecurity.create(),
+        new InspectorEnvironmentPublisher.NioIo(),
+        () -> context.recheck(expected),
+        target);
   }
 
   BackupStartIntentFiles(OwnedTransferDirectory root, InodeSecurityCalls security, Gate gate) {
@@ -83,11 +90,21 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       InodeSecurityCalls security,
       EnvironmentInodePolicy.Source source,
       Gate gate) {
+    this(root, security, source, gate, Target.BACKUP);
+  }
+
+  BackupStartIntentFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      EnvironmentInodePolicy.Source source,
+      Gate gate,
+      Target target) {
     this.root = Objects.requireNonNull(root, "fixed Backup request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.policy =
         new EnvironmentInodePolicy(security, Objects.requireNonNull(source, "inode source"));
     this.gate = Objects.requireNonNull(gate, "Morning root recheck");
+    this.name = Objects.requireNonNull(target, "closed phase").marker();
   }
 
   /** Must run after M acquisition, before any new original, stop, or Backup start. */
@@ -96,7 +113,7 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       gate.verify();
       Snapshot directory = directory();
       try {
-        root.atExistingEntryHandle(NAME, held -> file(held, directory));
+        root.atExistingEntryHandle(name, held -> file(held, directory));
       } catch (StorageIoException missing) {
         if (missing.reason() != StorageIoException.Reason.MISSING) throw unavailable();
         require(directory.sameIdentity(directory()));
@@ -114,7 +131,7 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       Snapshot directory = directory();
       root.atDirectory(
           held -> {
-            Path marker = held.resolve(NAME);
+            Path marker = held.resolve(name);
             try (FileChannel channel =
                 FileChannel.open(
                     marker,
@@ -132,7 +149,7 @@ public final class BackupStartIntentFiles implements AutoCloseable {
           });
       // Failure from here onward leaves the marker behind and forbids a start request.
       root.sync();
-      Snapshot created = root.atExistingEntryHandle(NAME, held -> file(held, directory));
+      Snapshot created = root.atExistingEntryHandle(name, held -> file(held, directory));
       require(directory.sameIdentity(directory()));
       gate.verify();
       begun = true;
@@ -150,9 +167,9 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       if (!begun || intent.owner != this) throw unavailable();
       gate.verify();
       Snapshot directory = directory();
-      Snapshot actual = root.atExistingEntryHandle(NAME, held -> file(held, directory));
+      Snapshot actual = root.atExistingEntryHandle(name, held -> file(held, directory));
       require(intent.marker.equals(actual));
-      root.unlinkEntry(NAME);
+      root.unlinkEntry(name);
       require(directory.sameIdentity(directory()));
       begun = false;
       requireClear();

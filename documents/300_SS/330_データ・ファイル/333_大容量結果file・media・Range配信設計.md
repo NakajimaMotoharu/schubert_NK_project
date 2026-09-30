@@ -279,6 +279,8 @@ response完了/例外の`finally`で必ず解放する。
 Web取得成否、HTTP転送完了、descriptor replayの有無で日中削除しない。
 File完了ACK・新規MQ layoutを追加しない。
 
+SSC118実装補足：日付は実在するcanonical yyyyMMdd、UUIDは小文字canonicalを要求する。mtimeがcutoffと等しいentryは境界保全し、strictly-beforeだけ対象。保持root/日付はAPI UID・schubert-web GID・0750、fileは同UID/GID・0640/regular/nlink1・同device・ACLなし/localRWを前後実再観測する。内容sizeが0又は48MB以上でも古い正規regularの清掃を妨げず、生成側のrecord-length制約は清掃へ流用しない。不明entryは保全件数としてWARNING（個別path出力なし）。根本gate/親guard不明は全体非成功、確認不能をemptyへ補完しない。空の正規日付だけ親FD＋single-segment unlinkat(AT_REMOVEDIR)/fsyncで削除し、host read-only adapter・recursive API・configured root削除は使用しない。既存batch_runsのtarget/success/failure/byteと固定reasonを保存し、保全件数は独立集計証跡へ残す（新DDLなし）。
+
 ## 13. Capacity・metric・alert
 
 | Metric | Warning | Critical/処置 |

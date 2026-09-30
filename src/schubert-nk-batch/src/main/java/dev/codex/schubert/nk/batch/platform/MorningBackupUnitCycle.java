@@ -31,6 +31,21 @@ public final class MorningBackupUnitCycle {
   }
 
   @FunctionalInterface
+  public interface ObservedWork {
+    BackupUnitReceiptGate.TerminalReceipt execute() throws IOException;
+  }
+
+  @FunctionalInterface
+  public interface Handoff {
+    BackupUnitReceiptGate.TerminalReceipt execute(ObservedWork work) throws IOException;
+  }
+
+  @FunctionalInterface
+  public interface ObservedCompletion {
+    void complete(BackupUnitReceiptGate.TerminalReceipt receipt) throws IOException;
+  }
+
+  @FunctionalInterface
   public interface ParentProof {
     void verify() throws IOException;
   }
@@ -47,6 +62,15 @@ public final class MorningBackupUnitCycle {
 
     default Optional<Outcome> terminal(Object baseline) throws IOException {
       return freshZero(baseline) ? Optional.of(Outcome.SUCCESS) : Optional.empty();
+    }
+
+    default Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object baseline)
+        throws IOException {
+      return Optional.empty();
+    }
+
+    default void requirePresent(BackupUnitReceiptGate.TerminalReceipt receipt) throws IOException {
+      throw new IOException("typed receipt unavailable");
     }
   }
 
@@ -98,6 +122,9 @@ public final class MorningBackupUnitCycle {
   private final Wait wait;
   private final Retain retain;
   private final MorningParentBudget budget;
+  private final BackupUnitStartClient.Target target;
+  private Optional<StartAttempt> outstanding = Optional.empty();
+  private Optional<BackupUnitReceiptGate.TerminalReceipt> completed = Optional.empty();
 
   private static final class Unresolved extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -106,21 +133,34 @@ public final class MorningBackupUnitCycle {
   public static MorningBackupUnitCycle create(
       RootStartupContext root, RootStartupContext.Snapshot expected, MorningParentBudget budget)
       throws IOException {
+    return create(root, expected, budget, BackupUnitStartClient.Target.BACKUP);
+  }
+
+  public static MorningBackupUnitCycle create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      MorningParentBudget budget,
+      BackupUnitStartClient.Target target)
+      throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
     Objects.requireNonNull(budget, "existing parent budget");
+    Objects.requireNonNull(target, "closed phase");
     if (expected.service() != RootStartupContext.Service.MORNING)
       throw new IOException("Backup parent unavailable");
     budget.requireWithin();
     root.recheck(expected);
-    var receipt = BackupUnitReceiptGate.create(root, expected);
-    var start = BackupUnitStartClient.create(root, expected);
+    var receipt = BackupUnitReceiptGate.create(root, expected, target);
+    var start = BackupUnitStartClient.create(root, expected, target, budget);
     var stop = MaintenanceUnitStopClient.create(root, expected);
-    var terminal = BackupUnitTermination.create(root, expected);
+    var terminal = BackupUnitTermination.create(root, expected, target);
     return new MorningBackupUnitCycle(
         () -> root.recheck(expected),
         new Receipt() {
+          private Optional<BackupUnitReceiptGate.TerminalReceipt> latest = Optional.empty();
+
           public Object capture() throws IOException {
+            latest = Optional.empty();
             return receipt.capture();
           }
 
@@ -130,9 +170,25 @@ public final class MorningBackupUnitCycle {
 
           public Optional<Outcome> terminal(Object baseline) throws IOException {
             var before = (BackupUnitReceiptGate.Baseline) baseline;
-            return receipt
-                .observeTerminal(before)
-                .flatMap(value -> value.backupTerminalAfter(Optional.empty()));
+            latest = receipt.observeResult(before);
+            return latest.map(
+                value ->
+                    value.exitCode() == 0
+                            || (target == BackupUnitStartClient.Target.CLEANUP
+                                && value.exitCode() == 10)
+                        ? Outcome.SUCCESS
+                        : Outcome.FAILED);
+          }
+
+          public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object baseline)
+              throws IOException {
+            if (latest.isPresent()) receipt.requireStillPresent(latest.orElseThrow());
+            return latest;
+          }
+
+          public void requirePresent(BackupUnitReceiptGate.TerminalReceipt value)
+              throws IOException {
+            receipt.requireStillPresent(value);
           }
         },
         () -> {
@@ -166,7 +222,8 @@ public final class MorningBackupUnitCycle {
         () -> terminal.quiescent().isPresent(),
         MorningBackupUnitCycle::pausePreservingInterrupt,
         MorningBackupUnitCycle::retainIndefinitely,
-        budget);
+        budget,
+        target);
   }
 
   MorningBackupUnitCycle(
@@ -178,6 +235,28 @@ public final class MorningBackupUnitCycle {
       Wait wait,
       Retain retain,
       MorningParentBudget budget) {
+    this(
+        gate,
+        receipt,
+        start,
+        stop,
+        terminal,
+        wait,
+        retain,
+        budget,
+        BackupUnitStartClient.Target.BACKUP);
+  }
+
+  MorningBackupUnitCycle(
+      Gate gate,
+      Receipt receipt,
+      Start start,
+      Stop stop,
+      Terminal terminal,
+      Wait wait,
+      Retain retain,
+      MorningParentBudget budget,
+      BackupUnitStartClient.Target target) {
     this.gate = Objects.requireNonNull(gate, "Morning root gate");
     this.receipt = Objects.requireNonNull(receipt, "fresh Backup receipt");
     this.start = Objects.requireNonNull(start, "fixed Backup start");
@@ -186,6 +265,7 @@ public final class MorningBackupUnitCycle {
     this.wait = Objects.requireNonNull(wait, "bounded observation wait");
     this.retain = Objects.requireNonNull(retain, "unresolved parent retention");
     this.budget = Objects.requireNonNull(budget, "existing parent budget");
+    this.target = Objects.requireNonNull(target, "closed phase");
   }
 
   /**
@@ -199,6 +279,8 @@ public final class MorningBackupUnitCycle {
   public Outcome execute(ParentProof originalAndRequest, Completion completion) throws IOException {
     Objects.requireNonNull(originalAndRequest, "same original and request proof");
     Objects.requireNonNull(completion, "same-owner Backup completion");
+    if (target != BackupUnitStartClient.Target.BACKUP)
+      throw new IOException("Cleanup handoff required");
     budget.requireWithin();
     gate.recheck();
     Object baseline = Objects.requireNonNull(receipt.capture(), "pre-start Backup baseline");
@@ -208,35 +290,11 @@ public final class MorningBackupUnitCycle {
     try {
       // From this call onward the parent cannot prove that delivery did not occur. Even a null
       // attempt or an unknown unchecked failure must not unwind M/A and discard the marker.
-      StartAttempt attempt =
-          Objects.requireNonNull(start.execute(), "retained Backup start attempt");
-      budget.requireWithin();
-      BackupUnitStartClient.Status started =
-          Objects.requireNonNull(attempt.status(), "Backup start status");
-      while (started == BackupUnitStartClient.Status.UNKNOWN) {
-        budget.requireWithin();
-        wait.pause();
-        started = Objects.requireNonNull(attempt.awaitClient(), "reaped Backup start status");
-      }
-      if (started != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) {
-        while (!terminal.quiescent()) {
-          budget.requireWithin();
-          wait.pause();
-        }
-        throw new Unresolved();
-      }
-      budget.requireWithin();
-      gate.recheck();
-      Optional<Outcome> observed =
-          Objects.requireNonNull(receipt.terminal(baseline), "Backup result");
-      while (observed.isEmpty()) {
-        budget.requireWithin();
-        wait.pause();
-        observed = Objects.requireNonNull(receipt.terminal(baseline), "Backup result");
-      }
-      Outcome outcome = observed.orElseThrow();
-      budget.requireWithin();
-      gate.recheck();
+      Started observed = startAndWait(baseline);
+      StartAttempt attempt = observed.attempt();
+      Outcome outcome = observed.outcome();
+      // startAndWait has just rechecked the same parent budget/root after the terminal receipt.
+      // Keep that one proof immediately adjacent to stop, not two indistinguishable observations.
       StopAttempt stopping = Objects.requireNonNull(stop.execute(), "retained Backup stop attempt");
       MaintenanceUnitStopClient.Status stopped =
           Objects.requireNonNull(stopping.status(), "Backup stop status");
@@ -263,6 +321,8 @@ public final class MorningBackupUnitCycle {
           });
       budget.requireWithin();
       gate.recheck();
+      completed = observed.receipt();
+      outstanding = Optional.empty();
       return outcome;
     } catch (IOException | RuntimeException | Error unresolved) {
       // No normal M/A unwind after possible start delivery, including null, unchecked failures,
@@ -271,7 +331,107 @@ public final class MorningBackupUnitCycle {
     }
   }
 
-  private Outcome retain() {
+  /** Same controller engine, but Cleanup's handoff returns only after fresh whole termination. */
+  public BackupUnitReceiptGate.TerminalReceipt executeHandoff(
+      Handoff handoff, ObservedCompletion completion, ParentProof originalAndRequest)
+      throws IOException {
+    Objects.requireNonNull(handoff, "one-shot parent advisory handoff");
+    Objects.requireNonNull(completion, "post-reacquire DB readback");
+    Objects.requireNonNull(originalAndRequest, "same original/request proof");
+    if (target != BackupUnitStartClient.Target.CLEANUP)
+      throw new IOException("Cleanup phase required");
+    budget.requireWithin();
+    gate.recheck();
+    Object baseline = Objects.requireNonNull(receipt.capture(), "pre-start Cleanup baseline");
+    try {
+      var actual =
+          handoff.execute(
+              () -> {
+                try {
+                  var child = startAndWait(baseline);
+                  if (child.outcome() != Outcome.SUCCESS) throw new Unresolved();
+                  var value =
+                      child
+                          .receipt()
+                          .orElseThrow(() -> new IOException("typed receipt unavailable"));
+                  receipt.requirePresent(value);
+                  budget.requireWithin();
+                  gate.recheck();
+                  return value;
+                } catch (IOException | RuntimeException | Error unknownChild) {
+                  return retain();
+                }
+              });
+      Objects.requireNonNull(actual, "same child terminal receipt");
+      budget.requireWithin();
+      gate.recheck();
+      receipt.requirePresent(actual);
+      completion.complete(actual); // Parent advisory has been reacquired, never inside handoff.
+      budget.requireWithin();
+      gate.recheck();
+      var attempt =
+          outstanding.orElseThrow(() -> new IOException("retained Cleanup attempt unavailable"));
+      attempt.retireAfter(
+          () -> {
+            budget.requireWithin();
+            gate.recheck();
+            receipt.requirePresent(actual);
+            originalAndRequest.verify();
+            receipt.requirePresent(actual);
+            budget.requireWithin();
+            gate.recheck();
+          });
+      completed = Optional.of(actual);
+      outstanding = Optional.empty();
+      return actual;
+    } catch (IOException | RuntimeException | Error unknownCompletion) {
+      return retain();
+    }
+  }
+
+  /** Claims are available only after this controller's verified completion/retirement. */
+  public BackupUnitReceiptGate.TerminalReceipt completedReceipt() throws IOException {
+    return completed.orElseThrow(() -> new IOException("completed typed receipt unavailable"));
+  }
+
+  private record Started(
+      StartAttempt attempt,
+      Outcome outcome,
+      Optional<BackupUnitReceiptGate.TerminalReceipt> receipt) {}
+
+  private Started startAndWait(Object baseline) throws IOException {
+    StartAttempt attempt = Objects.requireNonNull(start.execute(), "retained phase start attempt");
+    outstanding = Optional.of(attempt);
+    budget.requireWithin();
+    var started = Objects.requireNonNull(attempt.status(), "phase start status");
+    while (started == BackupUnitStartClient.Status.UNKNOWN) {
+      budget.requireWithin();
+      wait.pause();
+      started = Objects.requireNonNull(attempt.awaitClient(), "reaped phase start status");
+    }
+    if (started != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) {
+      while (!terminal.quiescent()) {
+        budget.requireWithin();
+        wait.pause();
+      }
+      throw new Unresolved();
+    }
+    budget.requireWithin();
+    gate.recheck();
+    var observed = Objects.requireNonNull(receipt.terminal(baseline), "phase terminal");
+    while (observed.isEmpty()) {
+      budget.requireWithin();
+      wait.pause();
+      observed = Objects.requireNonNull(receipt.terminal(baseline), "phase terminal");
+    }
+    var actual = Objects.requireNonNull(receipt.observed(baseline), "typed phase receipt");
+    if (actual.isPresent() && actual.orElseThrow().target() != target) throw new Unresolved();
+    budget.requireWithin();
+    gate.recheck();
+    return new Started(attempt, observed.orElseThrow(), actual);
+  }
+
+  private <T> T retain() {
     retain.indefinitely();
     throw new AssertionError("unresolved Backup retention returned");
   }

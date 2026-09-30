@@ -683,7 +683,7 @@ public final class MorningDatabaseSession {
     public <T> T handoffCleanup(CleanupHandoff<T> operation) throws IOException {
       Objects.requireNonNull(operation, "cleanup child operation");
       guard();
-      if (!backupCommitted || handoffStarted) throw unavailable();
+      if (!backupFinished || handoffStarted) throw unavailable();
       try {
         if (!connection.getAutoCommit()) throw unavailable();
         handoffStarted = true;

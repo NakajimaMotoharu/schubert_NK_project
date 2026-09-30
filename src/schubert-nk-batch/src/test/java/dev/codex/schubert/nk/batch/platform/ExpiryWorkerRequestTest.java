@@ -23,6 +23,24 @@ final class ExpiryWorkerRequestTest {
       started=2026-09-30T00:00:01Z
       skipped=false
       """;
+  static final String SKIP_GOLDEN =
+      """
+      NKEXPIRYSKIP1
+      run=38100000-2222-4333-8444-555555555555
+      activation=38100000-6666-4777-8888-999999999999
+      cutoff=2026-09-30T00:00:00Z
+      boot=38100000-3333-4333-8444-555555555555
+      epoch=38100000-4444-4333-8444-555555555555
+      broker=11111111111111111111111111111111
+      step_id=43
+      attempt=2
+      started=2026-09-30T00:00:03Z
+      skipped=true
+      prior_step_id=42
+      prior_attempt=1
+      prior_started=2026-09-30T00:00:01Z
+      prior_ended=2026-09-30T00:00:02Z
+      """;
 
   @Test
   void independentGoldenFullHandleAndInputErasure() {
@@ -39,9 +57,13 @@ final class ExpiryWorkerRequestTest {
     assertFalse(value.handle().skipped());
     assertEquals("ExpiryWorkerRequest[claims=<redacted>]", value.toString());
     var skipped =
-        CleanupWorkerRequest.Expiry.consume(
-            GOLDEN.replace("skipped=false", "skipped=true").getBytes(StandardCharsets.US_ASCII));
+        CleanupWorkerRequest.Expiry.consume(SKIP_GOLDEN.getBytes(StandardCharsets.US_ASCII));
     assertTrue(skipped.handle().skipped());
+    assertFalse(skipped.priorHandle().skipped());
+    assertEquals(42, skipped.priorHandle().id());
+    assertEquals(43, skipped.handle().id());
+    assertArrayEquals(SKIP_GOLDEN.getBytes(StandardCharsets.US_ASCII), skipped.encode());
+    assertEquals(Instant.parse("2026-09-30T00:00:02Z"), skipped.prior().orElseThrow().ended());
   }
 
   @Test
@@ -105,5 +127,44 @@ final class ExpiryWorkerRequestTest {
                 v.attempt(),
                 v.started(),
                 false));
+  }
+
+  @Test
+  void ereq005SkipRequiresSeparateCompleteCanonicalOriginalAndErasesEveryRejectedInput() {
+    for (String bad :
+        List.of(
+            GOLDEN.replace("skipped=false", "skipped=true"),
+            SKIP_GOLDEN.replace("NKEXPIRYSKIP1", "NKEXPIRY1"),
+            SKIP_GOLDEN.replace("skipped=true", "skipped=false"),
+            SKIP_GOLDEN.replace("prior_step_id=42", "prior_step_id=43"),
+            SKIP_GOLDEN.replace("prior_step_id=42", "prior_step_id=042"),
+            SKIP_GOLDEN.replace("prior_attempt=1", "prior_attempt=2"),
+            SKIP_GOLDEN.replace("prior_attempt=1", "prior_attempt=0"),
+            SKIP_GOLDEN.replace(
+                "prior_started=2026-09-30T00:00:01Z", "prior_started=2026-09-29T00:00:01Z"),
+            SKIP_GOLDEN.replace(
+                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:04Z"),
+            SKIP_GOLDEN.replace(
+                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:00Z"),
+            SKIP_GOLDEN.replace("prior_started=", "unknown="),
+            SKIP_GOLDEN.replace("prior_attempt=1\n", ""),
+            SKIP_GOLDEN + "\n",
+            SKIP_GOLDEN.replace("\n", "\r\n"))) {
+      byte[] bytes = bad.getBytes(StandardCharsets.US_ASCII);
+      assertThrows(
+          IllegalArgumentException.class, () -> CleanupWorkerRequest.Expiry.consume(bytes));
+      assertArrayEquals(new byte[bytes.length], bytes);
+    }
+    var ordinary = CleanupWorkerRequest.Expiry.consume(GOLDEN.getBytes(StandardCharsets.US_ASCII));
+    assertThrows(IllegalArgumentException.class, ordinary::priorHandle);
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(1, 1, null, Instant.EPOCH));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(1, 1, Instant.EPOCH, null));
+    assertEquals(
+        "PriorExpiry[identity/time=<redacted>]",
+        new CleanupWorkerRequest.Expiry.PriorExpiry(1, 1, Instant.EPOCH, Instant.EPOCH).toString());
   }
 }

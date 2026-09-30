@@ -97,20 +97,7 @@ final class CleanupExpiryExecution {
           var audit = new ExpiryAuditRepository(connection);
           if (request.skipped()) {
             connection.setAutoCommit(false);
-            var existing = audit.read(request.handle()).orElseThrow(BatchRepositoryException::new);
-            Instant priorCutoff = existing.cutoff();
-            require(
-                existing.status().equals("SUCCESS")
-                    && existing.ended() != null
-                    && priorCutoff != null
-                    && priorCutoff.equals(request.cutoff().minus(7, ChronoUnit.DAYS))
-                    && existing.before() != null
-                    && existing.after() != null
-                    && existing.success() == existing.target()
-                    && existing.failure() == 0
-                    && existing.errorCode() == null
-                    && existing.errorSummary() == null
-                    && observed.selectedCount() == 0);
+            verifyPriorExpiry(connection, request, observed.selectedCount());
             connection.rollback();
             connection.setAutoCommit(true);
             verify(context, expected, request);
@@ -225,6 +212,36 @@ final class CleanupExpiryExecution {
     } catch (SQLException | ActiveMQException failure) {
       throw new IOException("Expiry execution unavailable");
     }
+  }
+
+  /**
+   * SSC117/BUG351: current SKIP and immutable original audit are separately read in the caller tx.
+   */
+  static void verifyPriorExpiry(
+      Connection connection, CleanupWorkerRequest.Expiry request, long selectedCount)
+      throws IOException {
+    Objects.requireNonNull(connection, "owned Expiry connection");
+    Objects.requireNonNull(request, "bound Expiry request");
+    require(request.skipped() && selectedCount == 0);
+    new BatchRunRepository(connection).verifyAlreadySuccessful(request.handle());
+    var existing =
+        new ExpiryAuditRepository(connection)
+            .read(request.priorHandle())
+            .orElseThrow(BatchRepositoryException::new);
+    var reference = request.prior().orElseThrow();
+    @Nullable Long before = existing.before(), after = existing.after();
+    require(
+        "SUCCESS".equals(existing.status())
+            && reference.ended().equals(existing.ended())
+            && request.cutoff().minus(7, ChronoUnit.DAYS).equals(existing.cutoff())
+            && before != null
+            && after != null
+            && before >= after
+            && before - after == existing.success()
+            && existing.success() == existing.target()
+            && existing.failure() == 0
+            && existing.errorCode() == null
+            && existing.errorSummary() == null);
   }
 
   @SuppressFBWarnings(

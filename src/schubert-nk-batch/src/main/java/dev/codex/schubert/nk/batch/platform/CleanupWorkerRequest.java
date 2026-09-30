@@ -9,6 +9,7 @@ import java.time.DateTimeException;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
@@ -101,8 +102,56 @@ public record CleanupWorkerRequest(
       long stepId,
       int attempt,
       Instant started,
-      boolean skipped) {
+      boolean skipped,
+      Optional<PriorExpiry> prior) {
     public static final int MAXIMUM_BYTES = 1024;
+
+    /** Ordinary execution only; a skipped claim without an independent prior identity fails. */
+    public Expiry(
+        UUID run,
+        UUID activation,
+        Instant cutoff,
+        UUID boot,
+        UUID epoch,
+        String brokerInvocation,
+        long stepId,
+        int attempt,
+        Instant started,
+        boolean skipped) {
+      this(
+          run,
+          activation,
+          cutoff,
+          boot,
+          epoch,
+          brokerInvocation,
+          stepId,
+          attempt,
+          started,
+          skipped,
+          Optional.empty());
+    }
+
+    /** Complete original identity; never substitute this handle for the current SKIP. SSC117. */
+    public record PriorExpiry(long id, int attempt, Instant started, Instant ended) {
+      public PriorExpiry {
+        Objects.requireNonNull(started, "prior start");
+        Objects.requireNonNull(ended, "prior end");
+        if (id < 1
+            || id > 999999999999L
+            || attempt < 1
+            || attempt > 99
+            || ended.isBefore(started)
+            || started.getNano() % 1000 != 0
+            || ended.getNano() % 1000 != 0
+            || ended.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))) throw invalid();
+      }
+
+      @Override
+      public String toString() {
+        return "PriorExpiry[identity/time=<redacted>]";
+      }
+    }
 
     public Expiry {
       Objects.requireNonNull(run);
@@ -112,6 +161,7 @@ public record CleanupWorkerRequest(
       Objects.requireNonNull(epoch);
       Objects.requireNonNull(brokerInvocation);
       Objects.requireNonNull(started);
+      Objects.requireNonNull(prior, "prior Expiry identity");
       if (run.equals(NIL)
           || activation.equals(NIL)
           || run.equals(activation)
@@ -121,6 +171,14 @@ public record CleanupWorkerRequest(
           || brokerInvocation.equals("0".repeat(32))) throw invalid();
       new BatchStepAttempt(
           stepId, new BatchRun(run, cutoff), BatchStep.CLEAN_EXPIRY, attempt, started, skipped);
+      if (skipped != prior.isPresent()) throw invalid();
+      if (prior.isPresent()) {
+        var previous = prior.orElseThrow();
+        if (previous.id() == stepId
+            || previous.attempt() >= attempt
+            || previous.started().isBefore(cutoff)
+            || previous.ended().isAfter(started)) throw invalid();
+      }
     }
 
     public BatchStepAttempt handle() {
@@ -132,8 +190,33 @@ public record CleanupWorkerRequest(
       return new MaintenanceActivation(new BatchRun(run, cutoff), activation);
     }
 
+    public BatchStepAttempt priorHandle() {
+      var previous = prior.orElseThrow(() -> invalid());
+      return new BatchStepAttempt(
+          previous.id(),
+          new BatchRun(run, cutoff),
+          BatchStep.CLEAN_EXPIRY,
+          previous.attempt(),
+          previous.started(),
+          false);
+    }
+
     public byte[] encode() {
-      return ("NKEXPIRY1\nrun="
+      String original =
+          prior
+              .map(
+                  p ->
+                      "prior_step_id="
+                          + p.id()
+                          + "\nprior_attempt="
+                          + p.attempt()
+                          + "\nprior_started="
+                          + p.started()
+                          + "\nprior_ended="
+                          + p.ended()
+                          + "\n")
+              .orElse("");
+      return ((skipped ? "NKEXPIRYSKIP1\nrun=" : "NKEXPIRY1\nrun=")
               + run
               + "\nactivation="
               + activation
@@ -153,7 +236,8 @@ public record CleanupWorkerRequest(
               + started
               + "\nskipped="
               + skipped
-              + "\n")
+              + "\n"
+              + original)
           .getBytes(StandardCharsets.US_ASCII);
     }
 
@@ -176,14 +260,34 @@ public record CleanupWorkerRequest(
                 "attempt=",
                 "started=",
                 "skipped=");
-        if (rows.length != 12 || !rows[0].equals("NKEXPIRY1") || !rows[11].isEmpty())
-          throw invalid();
+        boolean reuse = rows[0].equals("NKEXPIRYSKIP1");
+        if ((!reuse && !rows[0].equals("NKEXPIRY1"))
+            || rows.length != (reuse ? 16 : 12)
+            || !rows[rows.length - 1].isEmpty()) throw invalid();
         String[] values = new String[10];
         for (int i = 0; i < 10; i++) {
           if (!rows[i + 1].startsWith(keys.get(i))) throw invalid();
           values[i] = rows[i + 1].substring(keys.get(i).length());
         }
         if (!values[9].equals("true") && !values[9].equals("false")) throw invalid();
+        Optional<PriorExpiry> previous = Optional.empty();
+        if (reuse) {
+          var priorKeys =
+              java.util.List.of(
+                  "prior_step_id=", "prior_attempt=", "prior_started=", "prior_ended=");
+          String[] fields = new String[4];
+          for (int i = 0; i < 4; i++) {
+            if (!rows[i + 11].startsWith(priorKeys.get(i))) throw invalid();
+            fields[i] = rows[i + 11].substring(priorKeys.get(i).length());
+          }
+          previous =
+              Optional.of(
+                  new PriorExpiry(
+                      Long.parseLong(fields[0]),
+                      Integer.parseInt(fields[1]),
+                      Instant.parse(fields[2]),
+                      Instant.parse(fields[3])));
+        }
         var request =
             new Expiry(
                 UUID.fromString(values[0]),
@@ -195,7 +299,8 @@ public record CleanupWorkerRequest(
                 Long.parseLong(values[6]),
                 Integer.parseInt(values[7]),
                 Instant.parse(values[8]),
-                Boolean.parseBoolean(values[9]));
+                Boolean.parseBoolean(values[9]),
+                previous);
         canonical = request.encode();
         if (!Arrays.equals(owned, canonical)) throw invalid();
         return request;

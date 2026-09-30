@@ -323,6 +323,19 @@ final class MorningControlScope {
   private static void requireNoExpiryRequest(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
     root.recheck(expected);
+    var cleanup =
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
+            java.nio.file.Path.of("/run/schubert-nk/cleanup-request"));
+    dev.codex.schubert.nk.storage.ResourceScope.use(
+        cleanup::close,
+        () -> {
+          new CleanupWorkerRequestFiles(
+                  cleanup, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
+              .requireClear();
+          return Boolean.TRUE;
+        });
+    root.recheck(expected);
     var directory =
         dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
             dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),

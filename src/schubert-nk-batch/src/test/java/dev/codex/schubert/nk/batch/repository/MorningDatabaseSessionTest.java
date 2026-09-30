@@ -1147,7 +1147,9 @@ final class MorningDatabaseSessionTest {
               credential(),
               session -> {
                 session.requireUnused(run);
-                session.beginBackup(run, NOW.plusSeconds(2592000), false);
+                var begins = session.beginBackup(run, NOW.plusSeconds(2592000), false);
+                assertThrows(IOException.class, () -> session.handoffCleanup(() -> "PREMATURE"));
+                confirmActualFailedPair(session, begins);
                 assertThrows(
                     IOException.class,
                     () -> session.beginBackup(run, NOW.plusSeconds(2592000), false));
@@ -1215,7 +1217,8 @@ final class MorningDatabaseSessionTest {
                         credential(),
                         session -> {
                           session.requireUnused(run);
-                          session.beginBackup(run, NOW.plusSeconds(2678400), false);
+                          var begins = session.beginBackup(run, NOW.plusSeconds(2678400), false);
+                          confirmActualFailedPair(session, begins);
                           return session.handoffCleanup(
                               () -> {
                                 callback.incrementAndGet();
@@ -1249,8 +1252,6 @@ final class MorningDatabaseSessionTest {
                   Connection.class,
                   (name, args) -> {
                     if (name.equals("getAutoCommit") && restored.get()) return false;
-                    if (name.equals("setAutoCommit") && Boolean.TRUE.equals(args[0]))
-                      restored.set(true);
                     try {
                       return Connection.class
                           .getMethod(name, parameterTypes(name, args))
@@ -1270,7 +1271,10 @@ final class MorningDatabaseSessionTest {
                         credential(),
                         session -> {
                           session.requireUnused(run);
-                          session.beginBackup(run, NOW.plusSeconds(2764800), false);
+                          var begins = session.beginBackup(run, NOW.plusSeconds(2764800), false);
+                          confirmActualFailedPair(session, begins);
+                          restored.set(
+                              true); // Inject drift only after genuine terminal completion.
                           return session.handoffCleanup(
                               () -> {
                                 calls.incrementAndGet();
@@ -1291,6 +1295,15 @@ final class MorningDatabaseSessionTest {
         return result;
       }
     }
+  }
+
+  private static void confirmActualFailedPair(
+      MorningDatabaseSession.Access session, MorningDatabaseSession.BackupBegins begins)
+      throws IOException {
+    var failed =
+        new BatchStepResult(
+            BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+    session.failBackup(begins, begins.database().startedAt().plusSeconds(1), failed, failed);
   }
 
   private static Class<?>[] parameterTypes(String name, Object[] args) {

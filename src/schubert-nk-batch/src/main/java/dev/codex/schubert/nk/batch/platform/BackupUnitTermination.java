@@ -38,19 +38,30 @@ public final class BackupUnitTermination {
   private final DirectoryCalls host;
   private final InodeSecurityCalls security;
   private final Io io;
+  private final BackupUnitStartClient.Target target;
 
   public static BackupUnitTermination create(
       RootStartupContext context, RootStartupContext.Snapshot expected) throws IOException {
+    return create(context, expected, BackupUnitStartClient.Target.BACKUP);
+  }
+
+  public static BackupUnitTermination create(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      BackupUnitStartClient.Target target)
+      throws IOException {
     Objects.requireNonNull(context, "root context");
     Objects.requireNonNull(expected, "root identity");
+    Objects.requireNonNull(target, "closed phase");
     require(expected.service() == RootStartupContext.Service.MORNING);
     context.recheck(expected);
     return new BackupUnitTermination(
         () -> context.recheck(expected),
-        new NativeObservations(),
+        NativeObservations.forTarget(target),
         LinuxHostDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
-        new NioIo());
+        new NioIo(),
+        target);
   }
 
   BackupUnitTermination(
@@ -59,11 +70,22 @@ public final class BackupUnitTermination {
       DirectoryCalls host,
       InodeSecurityCalls security,
       Io io) {
+    this(context, observations, host, security, io, BackupUnitStartClient.Target.BACKUP);
+  }
+
+  BackupUnitTermination(
+      Context context,
+      Observations observations,
+      DirectoryCalls host,
+      InodeSecurityCalls security,
+      Io io,
+      BackupUnitStartClient.Target target) {
     this.context = Objects.requireNonNull(context, "root context");
     this.observations = Objects.requireNonNull(observations, "fixed observations");
     this.host = Objects.requireNonNull(host, "host view");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "inode IO");
+    this.target = Objects.requireNonNull(target, "closed phase");
   }
 
   public Optional<InspectorUnitSnapshot> quiescent() throws IOException {
@@ -79,7 +101,7 @@ public final class BackupUnitTermination {
         FixedUnitCgroupNamespace.Snapshot first = namespace();
         if (first.present()) {
           // SSC100/BUG308: a manager with no group cannot attest this present kernel tree.
-          require(GROUP.equals(placement.get("ControlGroup")));
+          require(target.unit().controlGroup().equals(placement.get("ControlGroup")));
           var all = Objects.requireNonNull(observations.quiescent(), "whole Unit observation");
           if (all.isEmpty() || !before.matches(all.orElseThrow())) {
             check();
@@ -108,11 +130,10 @@ public final class BackupUnitTermination {
   }
 
   private FixedUnitCgroupNamespace.Snapshot namespace() throws IOException {
-    return new FixedUnitCgroupNamespace(context, host, security, io)
-        .observe(MaintenanceUnit.BACKUP);
+    return new FixedUnitCgroupNamespace(context, host, security, io).observe(target.unit());
   }
 
-  private static Map<String, String> placement(byte[] bytes) throws IOException {
+  private Map<String, String> placement(byte[] bytes) throws IOException {
     Objects.requireNonNull(bytes, "fixed placement");
     try {
       require(bytes.length > 0 && bytes.length <= 1024);
@@ -129,11 +150,11 @@ public final class BackupUnitTermination {
       }
       require(fields.keySet().equals(Set.of("Id", "Slice", "Delegate", "ControlGroup")));
       require(
-          UNIT.equals(fields.get("Id"))
+          target.unit().serviceName().equals(fields.get("Id"))
               && "system.slice".equals(fields.get("Slice"))
               && "no".equals(fields.get("Delegate")));
       String group = Objects.requireNonNull(fields.get("ControlGroup"), "fixed group field");
-      require(group.isEmpty() || GROUP.equals(group));
+      require(group.isEmpty() || target.unit().controlGroup().equals(group));
       return Map.copyOf(fields);
     } finally {
       Arrays.fill(bytes, (byte) 0);
@@ -151,9 +172,18 @@ public final class BackupUnitTermination {
   static final class NativeObservations implements Observations {
     private final InspectorUnitProbe probe;
     private final InspectorUnitProbe.NativeReader reader;
+    private final String unit;
 
     NativeObservations() {
       this(InspectorUnitProbe.NativeReader.forTarget(InspectorUnitSnapshot.Target.BACKUP));
+    }
+
+    static NativeObservations forTarget(BackupUnitStartClient.Target target) {
+      Objects.requireNonNull(target, "closed phase");
+      return new NativeObservations(
+          InspectorUnitProbe.NativeReader.forTarget(target.observation()),
+          InspectorUnitProbe.forTarget(target.observation()),
+          target.unit().serviceName());
     }
 
     NativeObservations(InspectorUnitProbe.NativeReader reader) {
@@ -161,8 +191,14 @@ public final class BackupUnitTermination {
     }
 
     NativeObservations(InspectorUnitProbe.NativeReader reader, InspectorUnitProbe probe) {
+      this(reader, probe, UNIT);
+    }
+
+    private NativeObservations(
+        InspectorUnitProbe.NativeReader reader, InspectorUnitProbe probe, String unit) {
       this.reader = Objects.requireNonNull(reader, "fixed reader");
       this.probe = Objects.requireNonNull(probe, "fixed backup probe");
+      this.unit = Objects.requireNonNull(unit, "closed unit");
     }
 
     public InspectorUnitSnapshot read() {
@@ -182,7 +218,7 @@ public final class BackupUnitTermination {
               "--no-ask-password",
               "show",
               "--property=Id,Slice,Delegate,ControlGroup",
-              UNIT),
+              unit),
           1024);
     }
   }

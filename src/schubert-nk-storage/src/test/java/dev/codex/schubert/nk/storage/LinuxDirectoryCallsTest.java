@@ -21,6 +21,29 @@ class LinuxDirectoryCallsTest {
   @TempDir Path root;
 
   @Test
+  void transfer003EmptyDirectoryOnlyNeverRecursesOrFollowsSymlink() throws Exception {
+    var calls = LinuxDirectoryCalls.create();
+    try (var parent = OwnedTransferDirectory.open(calls, root)) {
+      Files.createDirectory(root.resolve("empty"));
+      parent.removeEmptyChild("empty");
+      assertFalse(Files.exists(root.resolve("empty")));
+      Files.createDirectory(root.resolve("nonempty"));
+      Files.write(root.resolve("nonempty/file"), new byte[] {1, 2});
+      assertThrows(StorageIoException.class, () -> parent.removeEmptyChild("nonempty"));
+      assertArrayEquals(new byte[] {1, 2}, Files.readAllBytes(root.resolve("nonempty/file")));
+      Files.createSymbolicLink(root.resolve("link"), root.resolve("nonempty"));
+      assertThrows(StorageIoException.class, () -> parent.removeEmptyChild("link"));
+      assertTrue(Files.isSymbolicLink(root.resolve("link")));
+      for (String bad : List.of("", ".", "..", "a/b", "a\0b"))
+        assertThrows(IllegalArgumentException.class, () -> parent.removeEmptyChild(bad));
+      assertThrows(NullPointerException.class, () -> parent.removeEmptyChild(null));
+      assertThrows(
+          StorageIoException.class,
+          () -> LinuxHostDirectoryCalls.create().removeEmptyDirectory(-1, "empty"));
+    }
+  }
+
+  @Test
   void w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets() throws Exception {
     DirectoryCalls calls = LinuxDirectoryCalls.create();
     int parent = open(calls, root);

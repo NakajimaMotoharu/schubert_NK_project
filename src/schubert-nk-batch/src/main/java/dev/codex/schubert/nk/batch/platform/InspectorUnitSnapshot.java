@@ -15,6 +15,7 @@ public final class InspectorUnitSnapshot {
   public enum Target {
     INSPECTOR("schubert-nk-inbox-inspector.service"),
     BACKUP("schubert-nk-backup.service"),
+    CLEANUP("schubert-nk-cleanup.service"),
     EXPIRY("schubert-nk-expiry-cleanup.service"),
     ARTEMIS("artemis.service");
     private final String unit;
@@ -81,7 +82,8 @@ public final class InspectorUnitSnapshot {
                   "no")
               .entrySet()) require(result.value(fixed.getKey()).equals(fixed.getValue()));
       require(Set.of("yes", "no").contains(result.value("RemainAfterExit")));
-      if (target == Target.BACKUP) require(result.value("RemainAfterExit").equals("yes"));
+      if (target == Target.BACKUP || target == Target.CLEANUP)
+        require(result.value("RemainAfterExit").equals("yes"));
       for (String token : List.of("ActiveState", "SubState", "Result"))
         require(result.value(token).matches("[a-z][a-z0-9-]{0,63}"));
       String job = result.value("Job");
@@ -136,7 +138,10 @@ public final class InspectorUnitSnapshot {
     String status = value("ExecMainStatus");
     return status.equals("0")
         ? OptionalInt.of(0)
-        : status.equals("10") && target == Target.INSPECTOR
+        : status.equals("10")
+                && (target == Target.INSPECTOR
+                    || target == Target.CLEANUP
+                    || target == Target.EXPIRY)
             ? OptionalInt.of(10)
             : OptionalInt.empty();
   }
@@ -191,6 +196,37 @@ public final class InspectorUnitSnapshot {
 
   private String value(String name) {
     return Objects.requireNonNull(values.get(name));
+  }
+
+  /** Package claims only; genuine gate/owner/freshness remain mandatory. */
+  int normalExitCode() {
+    require(value("ExecMainCode").equals("1"));
+    return Integer.parseInt(value("ExecMainStatus"));
+  }
+
+  BigInteger executionStart() {
+    return new BigInteger(value("ExecMainStartTimestampMonotonic"));
+  }
+
+  BigInteger executionEnd() {
+    return new BigInteger(value("ExecMainExitTimestampMonotonic"));
+  }
+
+  boolean inactiveBaseline() {
+    return value("ActiveState").equals("inactive")
+        && value("SubState").equals("dead")
+        && quiescent();
+  }
+
+  boolean heldCleanup() {
+    return target == Target.CLEANUP
+        && value("ActiveState").equals("active")
+        && value("SubState").equals("exited")
+        && quiescent();
+  }
+
+  boolean isTarget(Target expected) {
+    return target == expected;
   }
 
   private static BigInteger number(String text, BigInteger maximum) {

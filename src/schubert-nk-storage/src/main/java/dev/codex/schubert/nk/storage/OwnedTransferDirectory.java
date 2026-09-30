@@ -337,6 +337,16 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /** Admitted empty child only; Root/M+A/identity gates belong to the cleanup caller. SSC118. */
+  public void removeEmptyChild(String name) throws StorageIoException {
+    synchronized (stateLock) {
+      requireSegment(name);
+      requireOpen();
+      calls.removeEmptyDirectory(descriptor, name);
+      calls.sync(descriptor);
+    }
+  }
+
   /**
    * Publish one existing directory under the same retained parent, never replacing a target.
    * NK-OPS-001; BAK/BKO/OPS009/UI251/SS333 7.5/341 6.9; SSC065/PG176; PDIR001..008. Caller retains

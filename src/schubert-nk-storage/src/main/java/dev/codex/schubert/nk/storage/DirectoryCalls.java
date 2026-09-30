@@ -30,6 +30,11 @@ public interface DirectoryCalls {
 
   void unlink(int directory, String name) throws StorageIoException;
 
+  /** Empty child only, never recursive or configured root. SS333§12/SSC118/TRANSFER003. */
+  default void removeEmptyDirectory(int directory, String name) throws StorageIoException {
+    throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+  }
+
   void sync(int directory) throws StorageIoException;
 
   /** Consumes the FD even on failure; callers must not retry close after possible FD reuse. */

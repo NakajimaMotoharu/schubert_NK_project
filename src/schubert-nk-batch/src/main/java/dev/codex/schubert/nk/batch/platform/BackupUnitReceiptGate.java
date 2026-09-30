@@ -44,18 +44,67 @@ public final class BackupUnitReceiptGate {
   private final Context context;
   private final Probe probe;
   private final Terminal terminal;
+  private final BackupUnitStartClient.Target target;
+
+  /** Only this gate constructs a fresh, kernel-checked receipt; claim parsers cannot forge it. */
+  public static final class TerminalReceipt {
+    private final BackupUnitReceiptGate owner;
+    private final Baseline baseline;
+    private final InspectorUnitSnapshot snapshot;
+
+    private TerminalReceipt(
+        BackupUnitReceiptGate owner, Baseline baseline, InspectorUnitSnapshot snapshot) {
+      this.owner = owner;
+      this.baseline = baseline;
+      this.snapshot = snapshot;
+    }
+
+    public BackupUnitStartClient.Target target() {
+      return owner.target;
+    }
+
+    public UUID invocation() {
+      return snapshot.invocationId().orElseThrow();
+    }
+
+    public int exitCode() {
+      return snapshot.normalExitCode();
+    }
+
+    public java.math.BigInteger startedMonotonic() {
+      return snapshot.executionStart();
+    }
+
+    public java.math.BigInteger endedMonotonic() {
+      return snapshot.executionEnd();
+    }
+
+    @Override
+    public String toString() {
+      return "TerminalReceipt[observations=<redacted>]";
+    }
+  }
 
   public static BackupUnitReceiptGate create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    return create(root, expected, BackupUnitStartClient.Target.BACKUP);
+  }
+
+  public static BackupUnitReceiptGate create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      BackupUnitStartClient.Target target)
+      throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root snapshot");
+    Objects.requireNonNull(target, "closed phase");
     if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
     root.recheck(expected);
-    return create(
-        root,
-        expected,
-        stateProjection(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.BACKUP)),
-        BackupUnitTermination.create(root, expected)::quiescent);
+    return new BackupUnitReceiptGate(
+        () -> root.recheck(expected),
+        stateProjection(InspectorUnitProbe.forTarget(target.observation())),
+        BackupUnitTermination.create(root, expected, target)::quiescent,
+        target);
   }
 
   /** Manager projection only; create/capture/observe always require the separate host terminal. */
@@ -80,9 +129,15 @@ public final class BackupUnitReceiptGate {
   }
 
   BackupUnitReceiptGate(Context context, Probe probe, Terminal terminal) {
+    this(context, probe, terminal, BackupUnitStartClient.Target.BACKUP);
+  }
+
+  BackupUnitReceiptGate(
+      Context context, Probe probe, Terminal terminal, BackupUnitStartClient.Target target) {
     this.context = Objects.requireNonNull(context, "Morning root recheck");
     this.probe = Objects.requireNonNull(probe, "fixed Backup Unit projection");
     this.terminal = Objects.requireNonNull(terminal, "kernel whole-Unit terminal");
+    this.target = Objects.requireNonNull(target, "closed phase");
   }
 
   /** Capture before issuing the fixed start client, while the parent still owns M/A. */
@@ -90,6 +145,9 @@ public final class BackupUnitReceiptGate {
     check();
     try {
       InspectorUnitSnapshot first = present(probe.quiescent());
+      if (!first.isTarget(target.observation())
+          || (target == BackupUnitStartClient.Target.CLEANUP && !first.inactiveBaseline()))
+        throw unavailable();
       InspectorUnitSnapshot whole = present(terminal.quiescent());
       if (!first.matches(whole) || !first.matches(present(probe.quiescent()))) throw unavailable();
       return new Baseline(this, first.invocationId());
@@ -108,7 +166,19 @@ public final class BackupUnitReceiptGate {
 
   /** Genuine fresh normal terminal result; FAILED does not prove valid archives. BUG325. */
   public Optional<InspectorUnitSnapshot> observeTerminal(Baseline baseline) throws IOException {
-    return observe(baseline, true);
+    return observe(baseline, target == BackupUnitStartClient.Target.BACKUP);
+  }
+
+  public Optional<TerminalReceipt> observeResult(Baseline baseline) throws IOException {
+    return observeTerminal(baseline).map(snapshot -> new TerminalReceipt(this, baseline, snapshot));
+  }
+
+  /** KEEP_ACTIVE only: same fresh receipt, full kernel empty and same owner, not cached success. */
+  public void requireStillPresent(TerminalReceipt receipt) throws IOException {
+    Objects.requireNonNull(receipt, "same-owner receipt");
+    if (receipt.owner != this
+        || !receipt.snapshot.matches(present(observeTerminal(receipt.baseline))))
+      throw unavailable();
   }
 
   private Optional<InspectorUnitSnapshot> observe(Baseline baseline, boolean includeFailure)
@@ -119,9 +189,13 @@ public final class BackupUnitReceiptGate {
     try {
       Optional<InspectorUnitSnapshot> first = known(probe.quiescent());
       if (first.isEmpty()
+          || !first.orElseThrow().isTarget(target.observation())
+          || (target == BackupUnitStartClient.Target.CLEANUP && !first.orElseThrow().heldCleanup())
           || (includeFailure
               ? first.orElseThrow().backupTerminalAfter(baseline.previous).isEmpty()
-              : first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0))
+              : (target == BackupUnitStartClient.Target.CLEANUP
+                  ? first.orElseThrow().receiptAfter(baseline.previous).isEmpty()
+                  : first.orElseThrow().receiptAfter(baseline.previous).orElse(-1) != 0)))
         return Optional.empty();
       Optional<InspectorUnitSnapshot> whole = known(terminal.quiescent());
       if (whole.isEmpty() || !first.orElseThrow().matches(whole.orElseThrow()))
