@@ -42,12 +42,12 @@ for name, expected in [('protocol', 80), ('storage', 153), ('bootstrap', 191), (
 manifest = {
     'id': 'PG389-inspector-owner', 'formal': False, 'sourceCommit': source, 'branch': 'dev-foundation',
     'environment': 'Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0',
-    'command': 'explicit six modules: clean test spotbugs:check jacoco:report jar:jar dependency:copy-dependencies dependency:list -o',
+    'command': 'explicit six modules: clean test spotbugs:check jacoco:report jar:jar org.apache.maven.plugins:maven-dependency-plugin:3.9.0:copy-dependencies org.apache.maven.plugins:maven-dependency-plugin:3.9.0:list -DincludeScope=runtime -o',
     'exitCode': 0, 'modules': modules, 'tests': sum(m['tests'] for m in modules.values()), 'coverage': coverage,
     'testIds': ['PT-DB-INBOX-269..271', 'PT-OPS-COWNER001..004', 'PT-OPS-CINSPECT001..004', 'ROOTCTX010', 'MBUDGET003'],
     'bugs': ['BUG-356', 'BUG-357', 'BUG-358', 'BUG-359', 'BUG-360'], 'ssc': ['SSC-119'], 'ykt': ['YKT-282'],
     'limitations': ['native Cleanup assembler/root owner issuance not connected', 'VM still PG387', 'native common deadline/Inspector/100% coverage not accepted', 'formal PT-WEB-20260925-24 unchanged'],
-    'priorFailures': ['initial API F1/E1 timeout representation BUG357', 'API12 pass/static1 resource expression BUG358', 'native non-manager fixture old credential-stage oracle F1 BUG359', 'Batch compile nullable leaf BUG360', 'new constructor TDD ambiguity before factory selection'],
+    'priorFailures': ['initial API F1/E1 timeout representation BUG357', 'API12 pass/static1 resource expression BUG358', 'native non-manager fixture old credential-stage oracle F1 BUG359', 'Batch compile nullable leaf BUG360', 'new constructor TDD ambiguity before factory selection', 'first six command unqualified dependency prefix selected uncached3.7.0; stopped at protocol, nonaccepted'],
     'redaction': 'JUnit properties/stdout/stderr/provider diagnostics omitted; no credentials/session/token/password/key/dump',
 }
 manifest['finishedAt'] = next(line.split('Finished at: ', 1)[1] for line in log.splitlines() if 'Finished at: ' in line)
