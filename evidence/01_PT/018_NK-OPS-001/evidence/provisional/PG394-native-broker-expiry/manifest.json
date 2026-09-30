@@ -1,0 +1,230 @@
+{
+  "id": "PG394-native-broker-expiry",
+  "formal": false,
+  "sourceCommit": "a7cc8309ea498c645dd98115c4c6eb068ab0db74",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-09-30T16:46:16.297873+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7.0/PostgreSQL18.6/JDK25.0.4/Artemis2.56.0/JaCoCo0.8.15",
+  "command": "signed full-BOM deployment under M/A/full stop; external systemctl --no-block start schubert-nk-morning-controller.service; original same-run resume; actual native four exec",
+  "exitCode": 0,
+  "applicationParentExit": 30,
+  "releaseManifestSha256": "a957db499484973639beb4395cd9880edff3d81c8c96abb64c6ec8e66fb0cbee",
+  "expected": {
+    "oldRows": 34,
+    "newRows": 10,
+    "newBackupSkip": 2,
+    "newCleanupSkip": 7,
+    "expirySuccess": 1,
+    "expiryCutoffUtc": "2026-09-20T15:00:00.000000Z",
+    "expiryAllCounts": 0,
+    "brokerLive": true,
+    "requestOwnerIntentEntries": 0,
+    "permitsIssued": 0
+  },
+  "actual": {
+    "rows": 44,
+    "oldRowsUnchanged": true,
+    "newBackupSkip": 2,
+    "newCleanupSkip": 7,
+    "expirySuccess": 1,
+    "all14ColumnsReadBack": true,
+    "expiryAuditIndependentReadBack": true,
+    "brokerLive": true,
+    "fullOpsAndFreshJournalAcceptedByActualParent": true,
+    "brokerJournal": {
+      "bytes": 255694,
+      "sha256": "e19b0e5137a4a15ab53bfcf58a32a21994cb089de5988719693b49d95457b767",
+      "entries": 395,
+      "requiredVendorCodes": {
+        "AMQ221013": true,
+        "AMQ221007": true,
+        "AMQ221001": true
+      },
+      "errorEntries": 0
+    },
+    "parentBackupCleanupExpiryTerminated": true,
+    "inspectorNotStarted": true,
+    "namespacesEmpty": true,
+    "transferEmptyAndRootPreserved": true,
+    "oldSignedUnitBeforeImagesPreserved": 2,
+    "permitsIssued": 0
+  },
+  "coverage": {
+    "sameByteActualRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "oldInspectorExecExcluded": true,
+    "moduleUnion": {
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 911,
+          "covered": 10737
+        },
+        "METHOD": {
+          "missed": 175,
+          "covered": 1799
+        },
+        "CLASS": {
+          "missed": 11,
+          "covered": 253
+        },
+        "BRANCH": {
+          "missed": 538,
+          "covered": 4989
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 1945
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 351
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 54
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1059
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7673
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1140
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 245
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2837
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 601,
+      "LINE": 1023,
+      "METHOD": 194,
+      "CLASS": 12
+    },
+    "resolvedFromOwnHost": {
+      "BRANCH": 110,
+      "LINE": 1021,
+      "METHOD": 178,
+      "CLASS": 16
+    }
+  },
+  "fullRegression": {
+    "tests": 2635,
+    "suites": 394,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "testIds": [
+    "BROKERLIVE004",
+    "BROKERSTART003",
+    "BROKERSTART004",
+    "EXPARENT001",
+    "EXPARENT002",
+    "EXPARENT003"
+  ],
+  "ssc": [
+    "SSC-125"
+  ],
+  "bugs": [
+    "BUG-369",
+    "BUG-370",
+    "BUG-371"
+  ],
+  "ykt": [
+    "YKT-290",
+    "YKT-291"
+  ],
+  "fixtureCorrection": {
+    "bug": "BUG-371",
+    "firstRefusalBeforeWritesAndStart": true,
+    "canonicalBytesMatchRetry": true,
+    "sourceSha256": "f02453c70afaff1f783d584b37aaef3981331cf7c21afca754cf085f07153800"
+  },
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-preconditions.log",
+      "sha256": "ee57e0fb37493163b5fa12b70fa5ff471955af98d894ed35bdea3dbec4eae41b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-db-before-full.log",
+      "sha256": "906e7145fbb22639d1adb343de50efc5cddf9f50fe5b4d5448ce4674793b38d8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-db-final-full.log",
+      "sha256": "35f1abf62bb118e22b85981e8c29be53c55083e2f70e794fd9ce35e0206c1c9a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-observation6.json",
+      "sha256": "1fb7668cb7db89a9e6866c4e273bfa1e105944b625b27fc1f8d6cf70d4daef24"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-audit.log",
+      "sha256": "49d10d316cb085d15120e74693328b5e7723d8f1507e79d5c871ceb5c659e102"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-native-postconditions.log",
+      "sha256": "84355762a3fddcb0d76f1aa486e9564c48a9017d1d7c37c6b689db617d0bba6b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-deploy.log",
+      "sha256": "4105bcd6e901d2d06ffb6514ae55995a73adbed8881e2ba0b6465b39cd8fc77f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-place.log",
+      "sha256": "a3a7217afa9d8b8cdb8f601936bcbeee9c30df768e48d35cfd2f23795a17375e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-old-unit-base.log",
+      "sha256": "595bc21de7f33c08c717a100093a4a97df534a1813621021d468706e7fe180c3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-verify.log",
+      "sha256": "c1ab19c1a762c78db5c42cb09ddcae691eeed1f0d5b3251a51a00c514af65ebb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-activate.log",
+      "sha256": "9b1b95eb096dbad8d63b631e0b7294d4822825b24cedd56b61d26a265162a9f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-expiry-coverage-fixture.log",
+      "sha256": "26c0fc790becd91cb9cad24b4f409adf53a4658c82bbdc3f70ffcd07dfd7a693"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg394-expiry-coverage-fixture-corrected.log",
+      "sha256": "e26b9d3b349c411d881c20ceecb655da23a16b265ba8bc04415fe2e8160b8420"
+    }
+  ],
+  "limitations": [
+    "issuer/API/Web/real CHR pending; Morning remains30/INVALID",
+    "true failed Cleanup external/hard-timeout and native negative closure pending",
+    "100% coverage and formal run24 unchanged",
+    "unfinished original prohibits unrelated fresh"
+  ],
+  "redaction": "no raw journal message/credential/password/token/session/cookie/key/dump/native exec/raw Unit identity Git storage"
+}
