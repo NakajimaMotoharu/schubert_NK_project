@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC125/BUG369（実装前）：ARTEMISの固定read-only18propertyはsrc/deployment/systemd/artemis.serviceのsimple/on-failure/Remain=noと一致させる。active/running/Job空/MainPID非0/Control0・fresh Invocation/start>0/end0のデータ判定をworker oneshotと区別し、元Source Unitをoneshotへ変えない。Morningだけが同原本/M/A/INVALID/共通deadlineでBrokerを開始し、実Ops/recovery・fresh生存の独立証明なしにpermitやExpiry成功へ進まない。EXPIRY start対象追加はRoot Morningだけ・既存固定expiry-request namespace/expiry-start.intentに限定する。Expiry専用LoadCredential maintenance-ownerは同親frameのprivate readonly copyで、親生存/元deadlineとbindし任意起動能力を与えない。初期namespace/Unit変更はM/A/全停止/pin署名fullBOM/既存private退避を先行し、既存旧active/原本/DB/Backupを保全する。293/294、SSC117/119下位。
+
 SSC114固定request補正：SSC113のsame request再使用は同一実試行の場合だけ。新実開始時刻resumeは旧file保持/全byte・metadata/namespace前後照合とDB両ABANDONED完全根拠を得てから既存retire/force→新part/CREATE_NEW/force/readbackで置き換える。Root old/new run/cutoff一致・新INVALID・M/A・全8終端・intent無しが必須。旧fileの存在だけを復旧許可にせず、ctime/size/型/ACL/FS異常/未知DBは保持拒否。公開前crashは次回strict隔離/明示再実行で扱い、旧DB成功や旧epochへfallbackしない。
 
 SSC113固定Backup request補足：新規runは従来CREATE_NEW/part/force/atomic公開を維持。明示resumeだけ、同M/A/原本/DB/current INVALID・intent隔離・全8終端が外側で証明済みのscope内で既存requestの同run/同cutoff・root0600/link1/ACL0/tmpfs/RW・全byte/保持前後namespaceを照合し再使用する。MISSINGだけ新規公開、COLLISION/UNAVAILABLE・foreign/corrupt・途中partの修復や削除はしない。再使用はarchive/step成功の証明ではなく、後続実worker/fresh Invocation/両結果/全終端/退役が別必須。

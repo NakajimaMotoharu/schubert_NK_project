@@ -1,0 +1,181 @@
+{
+  "id": "PG393-native-success-resume",
+  "formal": false,
+  "sourceCommit": "7bb8b1b45fdc0af60a50b8d0a972878a203e61d3",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-09-30T14:28:21.319273+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7.0/PostgreSQL18.6/JDK25.0.4/Artemis2.56.0/JaCoCo0.8.15",
+  "command": "trusted fixed-source signed deployment; external systemctl --no-block start schubert-nk-morning-controller.service; original same-run --resume",
+  "releaseManifestSha256": "9ae29b220ea02a6f38d0bb7750a307046bee9e0519fdaeeef640dc47fece9c5c",
+  "expected": {
+    "oldBatchRows": 25,
+    "oldRowsUnchanged": true,
+    "newBackupSkip": 2,
+    "newCleanupSkip": 7,
+    "newSkipReason": "ALREADY_SUCCESSFUL",
+    "allNewCounts": 0,
+    "businessDate": "2026-09-28",
+    "allNewStartEqualsEnd": true,
+    "cleanupExit": 0,
+    "parentExit": 30,
+    "namespaceEntries": 0,
+    "permitsIssued": 0
+  },
+  "actual": {
+    "batchRows": 34,
+    "oldRowsUnchanged": true,
+    "newBackupSkip": 2,
+    "newCleanupSkip": 7,
+    "full14ColumnReadback": true,
+    "cleanupExit": 0,
+    "parentExit": 30,
+    "allKernelProcessesTerminal": true,
+    "namespacesEmpty": true,
+    "transferEmptyAndRootPreserved": true,
+    "permitsIssued": 0
+  },
+  "coverage": {
+    "sameByteNativeRoles": [
+      "parent",
+      "backup",
+      "cleanup"
+    ],
+    "inspectorNotStarted": true,
+    "oldInspectorExecExcluded": true,
+    "moduleUnion": {
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1000,
+          "covered": 9953
+        },
+        "METHOD": {
+          "missed": 181,
+          "covered": 1719
+        },
+        "CLASS": {
+          "missed": 11,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 476,
+          "covered": 4742
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 15,
+          "covered": 1897
+        },
+        "METHOD": {
+          "missed": 8,
+          "covered": 347
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 54
+        },
+        "BRANCH": {
+          "missed": 43,
+          "covered": 1015
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7673
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1140
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 245
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2837
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 537,
+      "LINE": 1111,
+      "METHOD": 199,
+      "CLASS": 12
+    }
+  },
+  "fullRegression": {
+    "tests": 2615,
+    "suites": 386,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "testIds": [
+    "CFLOW002",
+    "CFLOW004",
+    "CEXEC001",
+    "CCYCLE005"
+  ],
+  "ssc": [
+    "SSC-124"
+  ],
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-native-db-before-confirmed.log",
+      "sha256": "46e814e57ee165bce04f8807222ee41e03336bf019dbfc7615cde35bda1eff6d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-native-db-final.log",
+      "sha256": "75a6048d8c371161c7460e17d5244bec73706ab1553f618e7951b3d5698bc80d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-native-db-full.log",
+      "sha256": "906e7145fbb22639d1adb343de50efc5cddf9f50fe5b4d5448ce4674793b38d8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-native-observation2.log",
+      "sha256": "e1610fc7e3452c10270985d7aa7d8197a73c57a16dc64e6ab97071f52f188653"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-native-postconditions.log",
+      "sha256": "0e5c71f2538ed593095ed452dfc09168ddee6ba59673ec8cf53974d433924527"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-deploy.log",
+      "sha256": "84abe40cbca875ae4631c5053dc32a366d3c0ec2661a0b87d758dde86d4e30d7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-place.log",
+      "sha256": "b1108b192dd0b3e009f7d9e5b9b15df066707298eb0778eb30f66b5a20b80684"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-unit-base.log",
+      "sha256": "ace70f54cda7aa03ebb2323d78aa0ee625520c54a68f5af10b1fbed51f39c2be"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-verify.log",
+      "sha256": "21a908ad8246dd8be2eddace044e0937b85a1bc37f411e6cb440be99775c667f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg393-activate.log",
+      "sha256": "0f80716047ccdd9e185e993c1e1ea2b2427a6e91487f32ece264812ba6c812c8"
+    }
+  ],
+  "limitations": [
+    "failed Backup profile actual Unit not run: unfinished original forbids unrelated fresh",
+    "Broker/Expiry/issuer/APIWeb/CHR pending",
+    "BUG369 independently found; no S2 whole acceptance",
+    "100% coverage/formal run24 unchanged",
+    "initial psql -f permission-denied command not accepted; no start was delivered"
+  ],
+  "redaction": "no credential/password/session/token/key/dump/raw provider fields/raw Unit identities/native exec Git storage"
+}

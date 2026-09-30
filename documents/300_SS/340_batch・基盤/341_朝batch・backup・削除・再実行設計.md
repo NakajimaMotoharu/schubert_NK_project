@@ -370,6 +370,8 @@ SSC-049/PG-D-130: run executorは324 §12.7の単調時計30分とinterruptを�
 
 ## 9. Artemis Expiry cleanup
 
+SSC125/BUG369（実装前）：実Artemisはsimple/on-failure/Remain=noで、worker oneshotのType/Restart/activating-start判定を流用しない。固定daemon18propertyのlive観測はactive/running・Job空・MainPID>0/ControlPID0・fresh非nilInvocation・start>0/end0等のmanager前後一致を照合する。これだけでreadiness/復旧/許可にせず、同Morning所有と実start、SS321全Ops/journal recoveryの実証を必要とする。Expiryは親の元30分deadline/真正Root Morning生存・同原本/INVALIDをprivate maintenance-ownerへ束縛し、現行実Expiry入口のDB/MQ/purge/commit前後へguardを継承する。親Cleanup handoff終了/全7step readback後にExpiry用の一度限りの別handoffを認める。実0/10/既知30と全kernel終端・元runの完全監査を戻ってから照合し、未知結果をFAILED/SKIPへ埋めない。正規issuerと原本完了が閉じるまでS2完了としない。293/294、SSC117/119下位。
+
 1. Broker readinessと`nk.expiry.q` healthを確認。`nk_mq_maintenance`のLoadCredentialで管理APIへloopback接続。
 
 SSC-076: この保守専用credentialの管理電文はSS321 §10の`nk.expiry.q`個別RBACに限定する。`countMessages`/`removeMessages`へ渡すselectorは固定`_AMQ_ACTUAL_EXPIRY`と数値cutoffから組み立て、null/空を送らない。DLQ/他Queue/Broker全操作の管理権限は付与しない。権限の実Broker正負試験だけで本節の削除/再実行/永続記録を完了扱いにしない。
