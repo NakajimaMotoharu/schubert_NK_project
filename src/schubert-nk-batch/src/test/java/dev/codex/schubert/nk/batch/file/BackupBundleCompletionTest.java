@@ -73,6 +73,8 @@ final class BackupBundleCompletionTest {
       assertEquals(INVENTORY, f.counts);
       assertEquals(161, f.position);
       assertEquals(1, p.seen.get("connection.commit"));
+      assertEquals(1, p.seen.get("connection.rollback"));
+      assertEquals(4, p.seen.get("connection.setAutoCommit"));
       succeeded(END);
       p.released();
       f.released();
@@ -84,6 +86,46 @@ final class BackupBundleCompletionTest {
       assertFalse(c.isClosed());
       f.released();
       f.unchanged();
+    }
+  }
+
+  @Test
+  void postCommitReadbackFailureNeverClaimsRollbackOfCommittedPair() throws Exception {
+    // Literal operation positions: write transaction false/true, then readback false/true.
+    // Every injected failure occurs AFTER the real write commit; independent SQL must still
+    // show the two genuine SUCCESS rows, while the public completion does not return success.
+    for (String fault :
+        List.of(
+            "connection.setAutoCommit#3",
+            "readback.query",
+            "connection.rollback#1",
+            "connection.setAutoCommit#4")) {
+      reset();
+      try (var f = fixture();
+          var c = owned()) {
+        var p = new CompletionJdbcProbe();
+        var hits = new AtomicInteger();
+        var committed = new AtomicBoolean();
+        p.before =
+            (key, n) -> {
+              if (key.equals("connection.commit")) committed.set(true);
+              if ((key + "#" + n).equals(fault)
+                  || (fault.equals("readback.query")
+                      && committed.get()
+                      && key.equals("statement.executeQuery")
+                      && hits.get() == 0)) {
+                hits.incrementAndGet();
+                throw new SQLException("public readback fault");
+              }
+            };
+        repositoryFailure(() -> complete(completion(f, () -> WALL), p.wrap(c), f));
+        assertEquals(1, hits.get(), fault);
+        assertEquals(1, p.seen.get("connection.commit"), fault);
+        succeeded(END);
+        p.released();
+        f.released();
+        f.unchanged();
+      }
     }
   }
 

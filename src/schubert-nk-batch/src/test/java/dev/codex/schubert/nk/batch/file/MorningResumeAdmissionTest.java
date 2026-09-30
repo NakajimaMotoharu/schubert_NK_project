@@ -24,6 +24,53 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/UI251/SS341§11/343§6.15/SSC055/094/BUG317; PG345/346/PT-OPS-MRESUME001-010. */
 final class MorningResumeAdmissionTest {
+  @Test
+  void mresume011VerifiedOriginalIsBoundToSameHeldOwnerThreadAndLifetime() throws Exception {
+    var h = new Harness();
+    var leaked =
+        new java.util.concurrent.atomic.AtomicReference<MorningNewRunAdmission.OriginalProof>();
+    assertEquals(
+        "verified",
+        h.admission()
+            .executeVerified(
+                RUN,
+                (state, database, proof) -> {
+                  assertTrue(h.dbHeld.get() && h.fileHeld.get());
+                  assertEquals(CUTOFF, state.activation().run().cutoff());
+                  proof.verify();
+                  leaked.set(proof);
+                  try (var threads = Executors.newSingleThreadExecutor()) {
+                    assertInstanceOf(
+                        IOException.class,
+                        threads
+                            .submit(
+                                () -> {
+                                  try {
+                                    proof.verify();
+                                    return new AssertionError("foreign thread accepted");
+                                  } catch (IOException rejected) {
+                                    return rejected;
+                                  }
+                                })
+                            .get());
+                  } catch (InterruptedException interrupted) {
+                    Thread.currentThread().interrupt();
+                    throw new IOException("test interrupted");
+                  } catch (java.util.concurrent.ExecutionException failure) {
+                    throw new IOException("test execution failed");
+                  }
+                  proof.verify();
+                  return "verified";
+                }));
+    assertFalse(h.dbHeld.get() || h.fileHeld.get());
+    assertThrows(IOException.class, leaked.get()::verify);
+    assertEquals(2, h.events.stream().filter("original-proof"::equals).count());
+    assertThrows(
+        NullPointerException.class,
+        () -> h.admission().executeVerified(null, (s, d, p) -> "unused"));
+    assertThrows(NullPointerException.class, () -> h.admission().executeVerified(RUN, null));
+  }
+
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000345");
   private static final UUID ACTIVE = UUID.fromString("00000000-0000-0000-0000-000000000346");
   private static final UUID NEXT = UUID.fromString("00000000-0000-0000-0000-000000000347");
@@ -96,13 +143,21 @@ final class MorningResumeAdmissionTest {
               fileHeld.set(true);
               try {
                 return work.execute(
-                    (run, next) -> {
-                      events.add("resume");
-                      assertTrue(dbHeld.get(), "DB advisory must be owned before durable resume");
-                      assertEquals(RUN, run);
-                      assertEquals(NEXT, next);
-                      if (originalFailure != null) throw originalFailure;
-                      return returned;
+                    new MorningResumeAdmission.Files() {
+                      public MaintenanceRunState resume(UUID run, UUID next) throws IOException {
+                        events.add("resume");
+                        assertTrue(dbHeld.get(), "DB advisory must be owned before durable resume");
+                        assertEquals(RUN, run);
+                        assertEquals(NEXT, next);
+                        if (originalFailure != null) throw originalFailure;
+                        return returned;
+                      }
+
+                      public void verify(MaintenanceActivation activation) {
+                        assertTrue(dbHeld.get() && fileHeld.get());
+                        assertEquals(returned.activation(), activation);
+                        events.add("original-proof");
+                      }
                     });
               } finally {
                 fileHeld.set(false);

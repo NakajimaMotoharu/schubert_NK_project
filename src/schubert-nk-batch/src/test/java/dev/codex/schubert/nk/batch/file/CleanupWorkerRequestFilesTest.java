@@ -16,6 +16,56 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-CREQFILE001..008 source-only; fixture root/tmpfs is explicitly synthetic. */
 final class CleanupWorkerRequestFilesTest {
+  @Test
+  void expiryFixedProfileNewOnlyReadRetireAndAllResidueIsolation() throws Exception {
+    String literal =
+        "NKEXPIRY1\nrun=38100000-2222-4333-8444-555555555555\nactivation=38100000-6666-4777-8888-999999999999\ncutoff=2026-09-30T00:00:00Z\nboot=38100000-3333-4333-8444-555555555555\nepoch=38100000-4444-4333-8444-555555555555\nbroker=11111111111111111111111111111111\nstep_id=42\nattempt=1\nstarted=2026-09-30T00:00:01Z\nskipped=false\n";
+    var expected =
+        dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest.Expiry.consume(
+            literal.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+    try (var f = emptyExpiryFixture()) {
+      var expiry = CleanupWorkerRequestFiles.forExpiry(f.root, f, f);
+      expiry.requireClear();
+      expiry.prepareExpiry(expected, PART);
+      assertEquals(literal, Files.readString(f.parent.resolve("expiry-request")));
+      assertEquals(expected, expiry.readExpiry());
+      assertThrows(IOException.class, expiry::requireClear);
+      assertThrows(IOException.class, expiry::read);
+      assertThrows(IOException.class, () -> expiry.prepare(REQUEST, PART));
+      assertThrows(IOException.class, () -> expiry.retire(REQUEST));
+      assertThrows(IOException.class, () -> files(f).readExpiry());
+      assertThrows(IOException.class, () -> files(f).prepareExpiry(expected, PART));
+      assertThrows(IOException.class, () -> files(f).retireExpiry(expected));
+      expiry.retireExpiry(expected);
+      expiry.requireClear();
+      assertFalse(Files.exists(f.parent.resolve("expiry-request")));
+      f.released();
+    }
+    for (String residue : java.util.List.of("expiry-request", "orphan.part", "unknown")) {
+      try (var f = emptyExpiryFixture()) {
+        Files.writeString(f.parent.resolve(residue), "public residue");
+        try (var entries = Files.list(f.parent)) {
+          assertEquals(
+              java.util.List.of(residue), entries.map(p -> p.getFileName().toString()).toList());
+        }
+        assertThrows(
+            IOException.class,
+            () -> CleanupWorkerRequestFiles.forExpiry(f.root, f, f).requireClear());
+        assertEquals("public residue", Files.readString(f.parent.resolve(residue)));
+        f.released();
+      }
+    }
+    try (var f = fixture()) {
+      assertThrows(
+          NullPointerException.class,
+          () -> CleanupWorkerRequestFiles.forExpiry(f.root, f, f).prepareExpiry(null, PART));
+      assertThrows(
+          NullPointerException.class,
+          () -> CleanupWorkerRequestFiles.forExpiry(f.root, f, f).retireExpiry(null));
+      assertNotNull(CleanupWorkerRequestFiles.forExpiry(f.root, f));
+    }
+  }
+
   @TempDir Path temporary;
   private static final UUID ACTIVATION = UUID.fromString("31100027-6666-4777-8888-999999999999");
   private static final String DIGEST = "0123456789abcdef".repeat(4);
@@ -32,6 +82,16 @@ final class CleanupWorkerRequestFilesTest {
           m.put("uid", 0);
           m.put("gid", 0);
         };
+    return f;
+  }
+
+  private BackupPublicationFixture emptyExpiryFixture() throws Exception {
+    var f = fixture();
+    Files.delete(
+        f.child); // This test's own empty Backup-only fixture child, never Production residue.
+    try (var entries = Files.list(f.parent)) {
+      assertEquals(0, entries.count());
+    }
     return f;
   }
 

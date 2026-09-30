@@ -20,6 +20,65 @@ final class BackupArtifactVerifierTest {
   @TempDir Path temporary;
 
   @Test
+  void pendingContentUsesIndependentLiteralHashesWithoutGrantingSuccess() throws Exception {
+    var request =
+        new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+            UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
+            java.time.Instant.parse("2026-09-12T15:00:02Z"));
+    try (var f = fixture()) {
+      Files.delete(f.child.resolve("MANIFEST.json"));
+      Files.move(f.child, f.parent.resolve(DIR + ".part"));
+      var actual = f.verifier().observePending(request);
+      assertEquals(new BackupFileDigest(26, DUMP_HASH), actual.dump());
+      assertEquals(new BackupFileDigest(35, CONFIG_HASH), actual.configuration());
+      assertEquals(new BackupFileDigest(32, CREDS_HASH), actual.credentials());
+      assertFalse(Files.exists(f.parent.resolve(DIR + ".part/MANIFEST.json")));
+      f.released();
+    }
+    for (String bad :
+        List.of("manifest", "missing", "extra", "wrongRequest", "owner", "drift", "read")) {
+      try (var f = fixture()) {
+        Files.delete(f.child.resolve("MANIFEST.json"));
+        Path pending = f.parent.resolve(DIR + ".part");
+        Files.move(f.child, pending);
+        switch (bad) {
+          case "manifest" -> Files.writeString(pending.resolve("MANIFEST.json"), "{}\n");
+          case "missing" -> Files.delete(pending.resolve("config.tar"));
+          case "extra" -> Files.writeString(pending.resolve("extra"), "public");
+          case "owner" ->
+              f.metadata =
+                  (role, values) -> {
+                    if (role.equals("config.tar")) values.put("uid", 1);
+                  };
+          case "drift" ->
+              f.metadata =
+                  (role, values) -> {
+                    if (role.equals("config.tar") && f.counts.getOrDefault("read", 0) >= 4)
+                      values.put("ino", ((Long) values.get("ino")) + 1);
+                  };
+          case "read" -> f.nullChannel = true;
+          default -> {}
+        }
+        var chosen =
+            bad.equals("wrongRequest")
+                ? new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                    request.run(), request.started().plusSeconds(1))
+                : request;
+        failure(() -> f.verifier().observePending(chosen));
+        assertTrue(Files.isDirectory(pending), bad);
+        f.released();
+      }
+    }
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          try (var f = fixture()) {
+            f.verifier().observePending(null);
+          }
+        });
+  }
+
+  @Test
   void trustedBundleAndManifestDigest() throws Exception {
     try (var f = fixture()) {
       BackupFileDigest actual = f.verifier().verify(f.expected);

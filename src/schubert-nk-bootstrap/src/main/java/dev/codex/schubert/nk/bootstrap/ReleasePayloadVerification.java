@@ -81,7 +81,12 @@ final class ReleasePayloadVerification {
               value.hash(),
               inventory.migrations(),
               inventory.build(),
-              inventory.platform());
+              inventory.platform(),
+              inventory.versions(),
+              inventory.artifacts().stream()
+                  .collect(
+                      java.util.stream.Collectors.toUnmodifiableMap(
+                          ReleaseInventory.Artifact::path, ReleaseInventory.Artifact::sha256)));
         });
   }
 

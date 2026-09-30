@@ -14,7 +14,9 @@ public final class InspectorUnitSnapshot {
   /** Fixed maintenance targets only; no arbitrary Unit string. */
   public enum Target {
     INSPECTOR("schubert-nk-inbox-inspector.service"),
-    BACKUP("schubert-nk-backup.service");
+    BACKUP("schubert-nk-backup.service"),
+    EXPIRY("schubert-nk-expiry-cleanup.service"),
+    ARTEMIS("artemis.service");
     private final String unit;
 
     Target(String unit) {
@@ -171,6 +173,11 @@ public final class InspectorUnitSnapshot {
         && new BigInteger(value("ExecMainStartTimestampMonotonic")).signum() > 0
         && value("ActiveState").equals("activating")
         && value("SubState").equals("start");
+  }
+
+  public boolean runningInvocation(String invocation) {
+    Objects.requireNonNull(invocation, "expected manager Invocation");
+    return running(Long.parseLong(value("MainPID")), invocation);
   }
 
   public boolean matches(InspectorUnitSnapshot other) {

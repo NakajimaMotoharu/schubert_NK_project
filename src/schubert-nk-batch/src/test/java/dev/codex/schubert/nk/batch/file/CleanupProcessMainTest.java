@@ -9,6 +9,61 @@ import org.junit.jupiter.api.Test;
 /** OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334; CMAIN001..004 independent exit oracle. */
 final class CleanupProcessMainTest {
   @Test
+  void expiryLiteralEntryAcceptsOnlyRealOutcomeAndUnknownIsNotNormalized() {
+    for (int outcome : new int[] {0, 10, 30})
+      assertEquals(outcome, CleanupProcessMain.runExpiry(new String[] {"--expiry"}, () -> outcome));
+    assertEquals(30, CleanupProcessMain.runExpiry(new String[] {"--expiry"}, () -> 70));
+    assertEquals(
+        30,
+        CleanupProcessMain.runExpiry(
+            new String[] {"--expiry"},
+            () -> {
+              throw new IOException("PRIVATE_CANARY");
+            }));
+    for (String[] args :
+        new String[][] {
+          new String[0],
+          new String[] {"--EXPIRY"},
+          new String[] {"--expiry", "extra"},
+          new String[] {null}
+        })
+      assertEquals(
+          70,
+          CleanupProcessMain.runExpiry(
+              args,
+              () -> {
+                fail("unexpected work");
+                return 0;
+              }));
+    var unknown = new NullPointerException("PRIVATE_CANARY");
+    assertSame(
+        unknown,
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                CleanupProcessMain.runExpiry(
+                    new String[] {"--expiry"},
+                    () -> {
+                      throw unknown;
+                    })));
+    var fatal = new AssertionError("PRIVATE_CANARY");
+    assertSame(
+        fatal,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                CleanupProcessMain.runExpiry(
+                    new String[] {"--expiry"},
+                    () -> {
+                      throw fatal;
+                    })));
+    assertThrows(NullPointerException.class, () -> CleanupProcessMain.runExpiry(null, () -> 0));
+    assertThrows(
+        NullPointerException.class,
+        () -> CleanupProcessMain.runExpiry(new String[] {"--expiry"}, null));
+  }
+
+  @Test
   void noArgumentsCannotMintSuccessEvenAfterPreflightObservation() { // CMAIN001
     AtomicInteger checks = new AtomicInteger();
     int status =

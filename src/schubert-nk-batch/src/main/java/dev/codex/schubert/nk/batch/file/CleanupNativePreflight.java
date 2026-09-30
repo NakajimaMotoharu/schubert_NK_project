@@ -77,8 +77,14 @@ final class CleanupNativePreflight {
                             () -> context.recheck(snapshot),
                             reader::readCleanupRequest,
                             request ->
-                                MaintenanceRunFiles.create()
-                                    .execute(session -> session.observeCleanup(request)),
+                                MaintenanceRunFiles.observeHost(
+                                    context,
+                                    snapshot,
+                                    new dev.codex.schubert.nk.batch.repository
+                                        .MaintenanceActivation(
+                                        new dev.codex.schubert.nk.batch.repository.BatchRun(
+                                            request.run(), request.cutoff()),
+                                        request.activation())),
                             (request, observedAt) ->
                                 database.execute(
                                     reader.read(),

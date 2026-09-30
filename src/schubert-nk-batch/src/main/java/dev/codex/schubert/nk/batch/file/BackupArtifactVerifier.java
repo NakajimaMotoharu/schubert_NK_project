@@ -6,6 +6,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
+import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
@@ -131,6 +132,103 @@ public final class BackupArtifactVerifier {
   public BackupFileDigest verify(BackupManifest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "trusted manifest");
     return verifyAt(expected, expected.directoryName(), null, null).manifest();
+  }
+
+  /**
+   * Actual content observations only: caller still must publish/verify the manifest and DB pair.
+   */
+  public record PendingDigests(
+      BackupFileDigest dump, BackupFileDigest configuration, BackupFileDigest credentials) {
+    public PendingDigests {
+      Objects.requireNonNull(dump, "observed dump");
+      Objects.requireNonNull(configuration, "observed configuration");
+      Objects.requireNonNull(credentials, "observed encrypted credentials");
+    }
+  }
+
+  /** Fixed request-derived pending bundle, reusing the exact verifier inode/read policy. SSC110. */
+  public PendingDigests observePending(BackupWorkerRequest request) throws StorageIoException {
+    Objects.requireNonNull(request, "owned backup request");
+    synchronized (lock) {
+      long started = clock.getAsLong();
+      byte[] buffer = new byte[65536];
+      var pendingNames = List.of("schubert_nk.dump", "config.tar", "credentials.tar.age");
+      try {
+        require(security.effectiveUid() == 0);
+        Metadata parent = directory(root, started);
+        var child = root.openExistingChild(request.directoryName() + ".part");
+        var result =
+            ResourceScope.use(
+                child::close,
+                () -> {
+                  Metadata initial = directory(child, started);
+                  require(initial.device() == parent.device());
+                  names(child, started, Set.copyOf(pendingNames));
+                  Map<String, Metadata> snapshots = new HashMap<>();
+                  Map<String, BackupFileDigest> observed = new HashMap<>();
+                  for (String name : pendingNames) {
+                    guard(started);
+                    child.atExistingEntryHandle(
+                        name,
+                        held -> {
+                          guard(started);
+                          Metadata value = metadata(io.attributes(held));
+                          require(value.size() >= 0);
+                          long owner = name.equals("schubert_nk.dump") ? uid : 0;
+                          long group = name.equals("schubert_nk.dump") ? gid : 0;
+                          var claim = new FileClaim(value.size(), "", owner, group);
+                          Metadata before =
+                              capture(held, false, owner, group, value.size(), started);
+                          require(value.equals(before) && before.device() == initial.device());
+                          snapshots.put(name, before);
+                          observed.put(
+                              name, read(held, name, claim, new byte[0], buffer, started, false));
+                          require(
+                              before.equals(
+                                  capture(held, false, owner, group, value.size(), started)));
+                          return Boolean.TRUE;
+                        });
+                  }
+                  for (String name : pendingNames) {
+                    child.atExistingEntryHandle(
+                        name,
+                        held -> {
+                          Metadata before = Objects.requireNonNull(snapshots.get(name));
+                          require(
+                              before.equals(
+                                  capture(
+                                      held,
+                                      false,
+                                      before.uid(),
+                                      before.gid(),
+                                      before.size(),
+                                      started)));
+                          return Boolean.TRUE;
+                        });
+                  }
+                  names(child, started, Set.copyOf(pendingNames));
+                  require(initial.equals(directory(child, started)));
+                  var rebound = root.openExistingChild(request.directoryName() + ".part");
+                  ResourceScope.use(
+                      rebound::close,
+                      () -> {
+                        require(initial.equals(directory(rebound, started)));
+                        return Boolean.TRUE;
+                      });
+                  return new PendingDigests(
+                      Objects.requireNonNull(observed.get("schubert_nk.dump")),
+                      Objects.requireNonNull(observed.get("config.tar")),
+                      Objects.requireNonNull(observed.get("credentials.tar.age")));
+                });
+        require(parent.equals(directory(root, started)) && security.effectiveUid() == 0);
+        guard(started);
+        return result;
+      } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+        throw unavailable();
+      } finally {
+        Arrays.fill(buffer, (byte) 0);
+      }
+    }
   }
 
   BundleSnapshot verifyWithin(BackupManifest expected, long started) throws StorageIoException {
@@ -325,6 +423,11 @@ public final class BackupArtifactVerifier {
   }
 
   private void names(OwnedTransferDirectory directory, long started) throws StorageIoException {
+    names(directory, started, REQUIRED);
+  }
+
+  private void names(OwnedTransferDirectory directory, long started, Set<String> required)
+      throws StorageIoException {
     guard(started);
     directory.atDirectory(
         held -> {
@@ -342,7 +445,7 @@ public final class BackupArtifactVerifier {
                   require(names.add(held.relativize(child).toString()) && names.size() <= 4);
                   guard(started);
                 }
-                require(names.equals(REQUIRED));
+                require(names.equals(required));
                 guard(started);
                 return Boolean.TRUE;
               });
@@ -354,6 +457,18 @@ public final class BackupArtifactVerifier {
 
   private BackupFileDigest read(
       Path held, String name, FileClaim claim, byte[] canonical, byte[] bytes, long started)
+      throws IOException, NoSuchAlgorithmException {
+    return read(held, name, claim, canonical, bytes, started, true);
+  }
+
+  private BackupFileDigest read(
+      Path held,
+      String name,
+      FileClaim claim,
+      byte[] canonical,
+      byte[] bytes,
+      long started,
+      boolean compareClaims)
       throws IOException, NoSuchAlgorithmException {
     guard(started);
     MessageDigest hash = Objects.requireNonNull(digests.create(), "backup digest");
@@ -394,7 +509,7 @@ public final class BackupArtifactVerifier {
           byte[] digest = hash.digest();
           require(digest != null && digest.length == 32);
           String actual = HexFormat.of().formatHex(digest);
-          if (!name.equals(MANIFEST)) require(actual.equals(claim.hash()));
+          if (compareClaims && !name.equals(MANIFEST)) require(actual.equals(claim.hash()));
           guard(started);
           return new BackupFileDigest(claim.size(), actual);
         });

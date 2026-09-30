@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
@@ -39,6 +40,10 @@ final class MorningResumeAdmission {
   @FunctionalInterface
   interface Files {
     MaintenanceRunState resume(UUID runId, UUID nextActivation) throws IOException;
+
+    default void verify(MaintenanceActivation activation) throws IOException {
+      throw unavailable();
+    }
   }
 
   @FunctionalInterface
@@ -85,7 +90,23 @@ final class MorningResumeAdmission {
           @Override
           public <T> T execute(FileWork<T> work) throws IOException {
             Objects.requireNonNull(work, "owned run-file work");
-            return MaintenanceRunFiles.create().execute(files -> work.execute(files::resume));
+            return MaintenanceRunFiles.create()
+                .execute(
+                    files ->
+                        work.execute(
+                            new Files() {
+                              public MaintenanceRunState resume(UUID runId, UUID activation)
+                                  throws IOException {
+                                return files.resume(runId, activation);
+                              }
+
+                              public void verify(MaintenanceActivation activation)
+                                  throws IOException {
+                                context.recheck(expected);
+                                files.observe(activation);
+                                context.recheck(expected);
+                              }
+                            }));
           }
         },
         UUID::randomUUID);
@@ -108,6 +129,13 @@ final class MorningResumeAdmission {
 
   <T> T executeOwned(UUID runId, MorningNewRunAdmission.OwnedContinuation<T> continuation)
       throws IOException {
+    Objects.requireNonNull(continuation, "owned same-run continuation");
+    return executeVerified(
+        runId, (state, database, ignored) -> continuation.execute(state, database));
+  }
+
+  <T> T executeVerified(UUID runId, MorningNewRunAdmission.VerifiedContinuation<T> continuation)
+      throws IOException {
     Objects.requireNonNull(runId, "explicit resume run");
     Objects.requireNonNull(continuation, "owned same-run continuation");
     root.verify();
@@ -127,9 +155,27 @@ final class MorningResumeAdmission {
                     root.verify();
                     databaseAccess.requireConsistent(state.activation().run());
                     root.verify();
-                    T completed =
-                        Objects.requireNonNull(
-                            continuation.execute(state, databaseAccess), "Morning continuation");
+                    long ownerThread = Thread.currentThread().threadId();
+                    var alive = new java.util.concurrent.atomic.AtomicBoolean(true);
+                    T completed;
+                    try {
+                      completed =
+                          Objects.requireNonNull(
+                              continuation.execute(
+                                  state,
+                                  databaseAccess,
+                                  () -> {
+                                    if (!alive.get()
+                                        || Thread.currentThread().threadId() != ownerThread)
+                                      throw unavailable();
+                                    root.verify();
+                                    files.verify(state.activation());
+                                    root.verify();
+                                  }),
+                              "Morning continuation");
+                    } finally {
+                      alive.set(false);
+                    }
                     root.verify();
                     return completed;
                   });

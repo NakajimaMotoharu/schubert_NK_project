@@ -192,6 +192,13 @@ final class ReleasePayloadVerificationTest {
     assertEquals("26.04", result.platform().get("osVersion"));
     assertThrows(UnsupportedOperationException.class, () -> result.build().clear());
     assertThrows(UnsupportedOperationException.class, () -> result.platform().clear());
+    assertEquals("001", result.versions().get("schema"));
+    assertEquals(
+        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(SQL)),
+        result.artifactHashes().get(SQL_PATH));
+    assertEquals(f.payload.size(), result.artifactHashes().size());
+    assertThrows(UnsupportedOperationException.class, () -> result.versions().clear());
+    assertThrows(UnsupportedOperationException.class, () -> result.artifactHashes().clear());
     assertEquals(-690524359, result.migrations().get(1).checksum());
     assertThrows(UnsupportedOperationException.class, () -> result.migrations().clear());
     f.released();

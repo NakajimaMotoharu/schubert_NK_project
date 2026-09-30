@@ -73,10 +73,29 @@ public final class CleanupDatabaseSession {
   }
 
   private static Gate rootGate(RootStartupContext context, RootStartupContext.Snapshot expected) {
+    return rootGateFor(context, expected, RootStartupContext.Service.CLEANUP);
+  }
+
+  public static CleanupDatabaseSession forExpiry(
+      String url,
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      RootReleaseAdmission release) {
+    Objects.requireNonNull(release, "Expiry release admission");
+    return new CleanupDatabaseSession(
+        url,
+        rootGateFor(context, expected, RootStartupContext.Service.EXPIRY),
+        DriverManager::getConnection,
+        connection -> release.verifyExpiry(connection, expected));
+  }
+
+  private static Gate rootGateFor(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      RootStartupContext.Service service) {
     Objects.requireNonNull(context, "cleanup root context");
     Objects.requireNonNull(expected, "cleanup root snapshot");
-    if (expected.service() != RootStartupContext.Service.CLEANUP)
-      throw new IllegalArgumentException("cleanup root required");
+    if (expected.service() != service) throw new IllegalArgumentException("cleanup root required");
     return () -> context.recheck(expected);
   }
 

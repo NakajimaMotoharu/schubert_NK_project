@@ -57,6 +57,23 @@ public final class RootBatchCredentialReader {
     }
   }
 
+  public CleanupWorkerRequest.Expiry readExpiryRequest() throws IOException {
+    try {
+      return CleanupWorkerRequest.Expiry.consume(
+          readBytes("expiry-request", CleanupWorkerRequest.Expiry.MAXIMUM_BYTES));
+    } catch (IllegalArgumentException invalid) {
+      throw new IOException("root Expiry request unavailable");
+    }
+  }
+
+  public InspectorDbCredential readMaintenanceMq() throws IOException {
+    return InspectorDbCredential.consume(readBytes("mq-maintenance", 65536));
+  }
+
+  public InspectorDbCredential readOpsMq() throws IOException {
+    return InspectorDbCredential.consume(readBytes("mq-ops", 65536));
+  }
+
   private byte[] readBytes(String name, int maximum) throws IOException {
     byte[] material = new byte[maximum + 1];
     try {

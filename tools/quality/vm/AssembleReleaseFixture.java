@@ -15,7 +15,7 @@ import org.flywaydb.core.internal.resource.StringResource;
 public final class AssembleReleaseFixture {
   private static final String APP = "0.1.0-SNAPSHOT";
   public static void main(String[] args) throws Exception {
-    if (args.length != 4 || !args[2].matches("[0-9a-f]{40}")
+    if ((args.length != 4 && args.length != 6) || !args[2].matches("[0-9a-f]{40}")
         || !args[3].matches("[A-Za-z0-9][A-Za-z0-9._-]{0,63}"))
       throw new IllegalArgumentException("fixture arguments");
     Path repo=Path.of(args[0]).toAbsolutePath().normalize();
@@ -79,8 +79,21 @@ public final class AssembleReleaseFixture {
       }
       if(rank!=23)throw new IllegalStateException("23 approved migrations required");
     }
-    for(String name:List.of("common","api","web"))
+    for(String name:List.of("common","api","web","batch"))
       copy(repo.resolve("src/deployment/config/"+name+".yml.template"),output.resolve("config/templates/"+name+".yml"));
+    // SSC110: only the public, already operator-observed fixed profile and public recipient.
+    // No private key/credential enters the release. This assembler still grants NO authority.
+    if (args.length == 6) {
+      byte[] profile=Files.readAllBytes(Path.of(args[4]));
+      var claims=dev.codex.schubert.nk.batch.backup.BackupProfile.consume(profile);
+      if(!claims.versions().app().equals(APP)||!claims.versions().schema().equals("023"))
+        throw new IllegalStateException("effective backup profile version mismatch");
+      byte[] recipient=Files.readAllBytes(Path.of(args[5]));
+      if(!new String(recipient,StandardCharsets.US_ASCII).matches("age1[023456789acdefghjklmnpqrstuvwxyz]{58}\\n"))
+        throw new IllegalStateException("public recipient required");
+      copy(Path.of(args[4]),output.resolve("config/effective/backup-profile.json"));
+      copy(Path.of(args[5]),output.resolve("config/effective/backup-age-recipient"));
+    }
     try(var files=Files.list(repo.resolve("src/deployment/systemd"))) {
       for(var file:files.filter(Files::isRegularFile).toList()) {
         String name=file.getFileName().toString().replaceFirst("\\.template$","");
@@ -106,7 +119,7 @@ public final class AssembleReleaseFixture {
     dependencies.forEach((coordinate,paths)->deps.add(map("coordinate",coordinate,"paths",List.copyOf(paths))));
     var manifest=map("format","NKRELEASE1","release",args[3],
         "versions",map("app",APP,"protocol",APP,"storage",APP,"bootstrap",APP,"schema","023","config","1"),
-        "source",map("commit",args[2],"tag","PG315-private-fixture"),
+        "source",map("commit",args[2],"tag",args.length==6?"untagged-PGPT-candidate":"PG315-private-fixture"),
         "build",map("jdkVendor",System.getProperty("java.vendor"),"jdkVersion",System.getProperty("java.version"),"mavenVersion","3.9.12"),
         "platform",map("osId","ubuntu","osVersion","26.04","architecture",System.getProperty("os.arch"),"javaFeature",25),
         "dependencies",deps,"artifacts",artifacts,"migrations",migrations);

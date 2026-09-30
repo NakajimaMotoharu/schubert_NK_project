@@ -20,7 +20,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class CleanupWorkerRequestFiles {
-  private static final String NAME = "cleanup-request";
+  private final String name;
+  private final int maximum;
+  private final boolean expiry;
   private final Object lock = new Object();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
@@ -35,17 +37,70 @@ public final class CleanupWorkerRequestFiles {
       OwnedTransferDirectory root,
       InodeSecurityCalls security,
       InspectorEnvironmentPublisher.Io io) {
+    this(root, security, io, false);
+  }
+
+  private CleanupWorkerRequestFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      boolean expiry) {
     this.root = Objects.requireNonNull(root, "fixed request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "request IO");
     policy = new EnvironmentInodePolicy(security, io);
+    this.expiry = expiry;
+    name = expiry ? "expiry-request" : "cleanup-request";
+    maximum =
+        expiry ? CleanupWorkerRequest.Expiry.MAXIMUM_BYTES : CleanupWorkerRequest.MAXIMUM_BYTES;
+  }
+
+  public static CleanupWorkerRequestFiles forExpiry(
+      OwnedTransferDirectory root, InodeSecurityCalls security) {
+    return forExpiry(root, security, new InspectorEnvironmentPublisher.NioIo());
+  }
+
+  static CleanupWorkerRequestFiles forExpiry(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io) {
+    return new CleanupWorkerRequestFiles(root, security, io, true);
+  }
+
+  /** Any old request/part/unknown entry isolates the next Morning BEFORE DB/original/stop. */
+  public void requireClear() throws StorageIoException {
+    synchronized (lock) {
+      Snapshot before = directory();
+      root.atDirectory(
+          held -> {
+            try (var names = java.nio.file.Files.newDirectoryStream(held)) {
+              require(!names.iterator().hasNext());
+            } catch (java.nio.file.DirectoryIteratorException failure) {
+              throw unavailable();
+            }
+            guard();
+            return Boolean.TRUE;
+          });
+      require(before.equals(directory()));
+    }
   }
 
   public void prepare(CleanupWorkerRequest request, UUID part) throws StorageIoException {
     Objects.requireNonNull(request, "root request");
+    require(!expiry);
+    prepareBytes(request.encode(), part);
+  }
+
+  public void prepareExpiry(CleanupWorkerRequest.Expiry request, UUID part)
+      throws StorageIoException {
+    Objects.requireNonNull(request, "root Expiry request");
+    require(expiry);
+    prepareBytes(request.encode(), part);
+  }
+
+  private void prepareBytes(byte[] content, UUID part) throws StorageIoException {
     Objects.requireNonNull(part, "new part");
     synchronized (lock) {
-      byte[] content = request.encode();
       try {
         Snapshot directory = directory();
         Snapshot written =
@@ -61,16 +116,16 @@ public final class CleanupWorkerRequestFiles {
                   return result;
                 });
         require(written.equals(root.atPartHandle(part, p -> file(p, 1, directory))));
-        root.publishAs(part, NAME);
-        Snapshot published = root.atExistingEntryHandle(NAME, p -> file(p, 1, directory));
+        root.publishAs(part, name);
+        Snapshot published = root.atExistingEntryHandle(name, p -> file(p, 1, directory));
         require(written.samePublishedFile(published));
         root.atExistingEntryHandle(
-            NAME,
+            name,
             p -> {
               verify(p, published, content);
               return true;
             });
-        require(published.equals(root.atExistingEntryHandle(NAME, p -> file(p, 1, directory))));
+        require(published.equals(root.atExistingEntryHandle(name, p -> file(p, 1, directory))));
         require(directory.sameIdentity(directory()));
       } finally {
         Arrays.fill(content, (byte) 0);
@@ -79,22 +134,32 @@ public final class CleanupWorkerRequestFiles {
   }
 
   public CleanupWorkerRequest read() throws StorageIoException {
+    require(!expiry);
+    return CleanupWorkerRequest.consume(readBytes());
+  }
+
+  public CleanupWorkerRequest.Expiry readExpiry() throws StorageIoException {
+    require(expiry);
+    return CleanupWorkerRequest.Expiry.consume(readBytes());
+  }
+
+  private byte[] readBytes() throws StorageIoException {
     synchronized (lock) {
-      byte[] bytes = new byte[CleanupWorkerRequest.MAXIMUM_BYTES + 1];
+      byte[] bytes = new byte[maximum + 1];
       try {
         Snapshot directory = directory();
         Snapshot original =
             root.atExistingEntryHandle(
-                NAME,
+                name,
                 p -> {
                   Snapshot before = file(p, 1, directory);
                   read(p, before.metadata().size(), bytes);
                   require(before.equals(file(p, 1, directory)));
                   return before;
                 });
-        require(original.equals(root.atExistingEntryHandle(NAME, p -> file(p, 1, directory))));
+        require(original.equals(root.atExistingEntryHandle(name, p -> file(p, 1, directory))));
         require(directory.equals(directory()));
-        return CleanupWorkerRequest.consume(Arrays.copyOf(bytes, (int) original.metadata().size()));
+        return Arrays.copyOf(bytes, (int) original.metadata().size());
       } finally {
         Arrays.fill(bytes, (byte) 0);
       }
@@ -104,27 +169,43 @@ public final class CleanupWorkerRequestFiles {
   /** Only after actual full Unit termination; source equality does not establish that condition. */
   public void retire(CleanupWorkerRequest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "original request");
+    require(!expiry);
+    retireBytes(expected.encode());
+  }
+
+  public void retireExpiry(CleanupWorkerRequest.Expiry expected) throws StorageIoException {
+    Objects.requireNonNull(expected, "original Expiry request");
+    require(expiry);
+    retireBytes(expected.encode());
+  }
+
+  private void retireBytes(byte[] expected) throws StorageIoException {
     synchronized (lock) {
-      Snapshot directory = directory();
-      Snapshot before = root.atExistingEntryHandle(NAME, p -> file(p, 1, directory));
-      require(expected.equals(read()));
-      require(before.equals(root.atExistingEntryHandle(NAME, p -> file(p, 1, directory))));
-      root.unlinkEntry(NAME);
-      root.sync();
-      require(directory.sameIdentity(directory()));
+      byte[] actual = new byte[0];
+      try {
+        Snapshot directory = directory();
+        Snapshot before = root.atExistingEntryHandle(name, p -> file(p, 1, directory));
+        actual = readBytes();
+        require(Arrays.equals(expected, actual));
+        require(before.equals(root.atExistingEntryHandle(name, p -> file(p, 1, directory))));
+        root.unlinkEntry(name);
+        root.sync();
+        require(directory.sameIdentity(directory()));
+      } finally {
+        Arrays.fill(expected, (byte) 0);
+        Arrays.fill(actual, (byte) 0);
+      }
     }
   }
 
   private Snapshot directory() throws StorageIoException {
     guard();
-    return root.atDirectory(
-        p -> policy.snapshot(p, true, true, CleanupWorkerRequest.MAXIMUM_BYTES, 0, 0));
+    return root.atDirectory(p -> policy.snapshot(p, true, true, maximum, 0, 0));
   }
 
   private Snapshot file(Path held, int minimum, Snapshot directory) throws IOException {
     guard();
-    Snapshot result =
-        policy.snapshot(held, true, false, CleanupWorkerRequest.MAXIMUM_BYTES, minimum, 0);
+    Snapshot result = policy.snapshot(held, true, false, maximum, minimum, 0);
     require(result.metadata().device() == directory.metadata().device());
     return result;
   }
@@ -162,9 +243,7 @@ public final class CleanupWorkerRequestFiles {
     try {
       read(held, content.length, buffer);
       require(Arrays.equals(content, 0, content.length, buffer, 0, content.length));
-      require(
-          expected.equals(
-              policy.snapshot(held, true, false, CleanupWorkerRequest.MAXIMUM_BYTES, 1, 0)));
+      require(expected.equals(policy.snapshot(held, true, false, maximum, 1, 0)));
     } finally {
       Arrays.fill(buffer, (byte) 0);
     }

@@ -4,11 +4,14 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailable;
 
 import dev.codex.schubert.nk.batch.backup.BackupCommitService;
+import dev.codex.schubert.nk.batch.repository.BackupStepRepository;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -74,6 +77,18 @@ public final class BackupBundleCompletion {
               .truncatedTo(ChronoUnit.MICROS);
       guard(started);
       Instant stored = commits.complete(parent, manifest, ended);
+      // Read in a new transaction on the SAME owner connection after commit. A failure here
+      // does not undo the committed pair: the caller must dispose/isolate, never claim SUCCESS.
+      try {
+        parent.setAutoCommit(false);
+        if (!new BackupStepRepository(parent)
+            .inspect(manifest, ended)
+            .equals(java.util.Optional.of(stored))) throw new BatchRepositoryException();
+        parent.rollback(); // Readback only; never a rollback claim for the prior write commit.
+        parent.setAutoCommit(true);
+      } catch (SQLException failure) {
+        throw new BatchRepositoryException();
+      }
       // This can fail after commit. Never claim rollback; a retry must revalidate the files.
       guard(started);
       return stored;

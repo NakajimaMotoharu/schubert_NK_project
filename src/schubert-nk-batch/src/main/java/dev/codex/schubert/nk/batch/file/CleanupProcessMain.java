@@ -18,11 +18,34 @@ public final class CleanupProcessMain {
     BackupManifest verify() throws IOException;
   }
 
+  @FunctionalInterface
+  interface ExpiryWork {
+    int execute() throws IOException;
+  }
+
   private CleanupProcessMain() {}
 
   public static void main(String[] arguments) {
     Thread.currentThread().setUncaughtExceptionHandler(CleanupProcessMain::fatal);
-    System.exit(run(arguments, CleanupNativePreflight::verify));
+    System.exit(
+        arguments.length == 1 && "--expiry".equals(arguments[0])
+            ? runExpiry(arguments, CleanupExpiryExecution::execute)
+            : run(arguments, CleanupNativePreflight::verify));
+  }
+
+  static int runExpiry(String[] arguments, ExpiryWork work) {
+    Objects.requireNonNull(arguments, "arguments");
+    Objects.requireNonNull(work, "genuine Expiry work");
+    if (arguments.length != 1 || !"--expiry".equals(arguments[0])) return 70;
+    try {
+      int result = work.execute();
+      return result == 0 || result == 10 || result == 30 ? result : 30;
+    } catch (IOException
+        | dev.codex.schubert.nk.batch.repository.BatchRepositoryException
+        | dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessException
+        | dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeException known) {
+      return 30;
+    }
   }
 
   static int run(String[] arguments, Preflight preflight) {

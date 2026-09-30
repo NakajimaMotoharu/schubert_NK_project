@@ -21,7 +21,8 @@ public final class RootStartupContext {
     API("schubert-nk-api.service"),
     WEB("schubert-nk-web.service"),
     MORNING("schubert-nk-morning-controller.service"),
-    CLEANUP("schubert-nk-cleanup.service");
+    CLEANUP("schubert-nk-cleanup.service"),
+    EXPIRY("schubert-nk-expiry-cleanup.service");
     private final String unit;
 
     Service(String unit) {

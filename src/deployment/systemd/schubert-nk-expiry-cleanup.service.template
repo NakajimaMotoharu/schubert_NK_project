@@ -1,0 +1,49 @@
+# NK-OPS-001/NK-BAT-001; SS341§9/342/343; SSC111. Isolated PGPT candidate, not formally accepted.
+[Unit]
+Description=Schubert NK fixed Expiry maintenance child
+After=postgresql.service artemis.service
+Requires=postgresql.service artemis.service
+Before=schubert-nk-api.service schubert-nk-web.service caddy.service
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/opt/schubert-nk/current/operations
+UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=expiry-request:/run/schubert-nk/expiry-request/expiry-request
+LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch
+LoadCredential=mq-maintenance:/etc/schubert-nk/credentials/mq-maintenance
+LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops
+ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.CleanupProcessMain --expiry
+Restart=no
+RemainAfterExit=yes
+SuccessExitStatus=10
+TimeoutStartSec=10min
+TimeoutStopSec=60s
+KillMode=control-group
+SendSIGKILL=no
+Delegate=no
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_SYS_PTRACE CAP_DAC_OVERRIDE
+AmbientCapabilities=
+MemoryMax=1024M
+LimitNOFILE=65536
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

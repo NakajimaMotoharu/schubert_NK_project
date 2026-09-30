@@ -5,6 +5,7 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
+import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
@@ -113,6 +114,36 @@ public final class MaintenanceRunFiles {
         UUID::randomUUID,
         () -> MessageDigest.getInstance("SHA-256"),
         Optional.of(LinuxHostDirectoryCalls.create()));
+  }
+
+  /** Fixed child observer only. Host RW is policy, not a child mutation capability. SSC109/111. */
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SS343 fixed authoritative host /var, readonly child observation")
+  static MaintenanceActivation observeHost(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      MaintenanceActivation activation)
+      throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(activation);
+    require(
+        expected.service() == RootStartupContext.Service.CLEANUP
+            || expected.service() == RootStartupContext.Service.EXPIRY);
+    context.recheck(expected);
+    var files =
+        new MaintenanceRunFiles(
+            Path.of("/var"),
+            LinuxHostDirectoryCalls.create(),
+            LinuxInodeSecurity.create(),
+            new NioIo(),
+            UUID::randomUUID,
+            () -> MessageDigest.getInstance("SHA-256"));
+    MaintenanceActivation observed = files.execute(session -> session.observe(activation));
+    context.recheck(expected);
+    return observed;
   }
 
   MaintenanceRunFiles(

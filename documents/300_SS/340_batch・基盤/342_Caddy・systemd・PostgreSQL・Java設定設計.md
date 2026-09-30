@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC111/SSC109補足：root Cleanup/Expiryも署名release原本をPID1 host viewで読むためroot prestartに限りCAP_SYS_PTRACE/CAP_DAC_OVERRIDEをbounding setに残す。Ambientは空、NoNewPrivileges/ProtectSystem=strictを維持し、API/Web/Backupの最終worker zeroCapsを変更しない。Expiryはoneshot/Restart=no/RemainAfterExit=yes/SuccessExitStatus=10/TimeoutStart=10min/TimeoutStop=60s/KillMode=control-group/SendSIGKILL=no/Delegate=no、Artemis After/Requires、親の明示startと同残budgetで管理する。private残留requestをRuntimeDirectory自動消去で隠さない。未完成PGPT candidateの配置は隔離VMで保全後だけ行い、production enable/正式合格としない。
+
 SSC107/BUG322（PG/PT）：親Morning候補の`Type=simple`＋`TimeoutStartSec=30min`はJava親全体の上限でなく、`Before=Backup/Cleanup/...`も親処理完了barrierにならない。親を`Type=oneshot`にし`TimeoutStartSec=30min`を実行中全体に適用する。親から子への`Before=`は外し、親がM/A/原本を所有して固定Unitを明示起動する。morning targetは親だけを`Requires`し`After`で親完了を待つ。旧「全unitをWants」は廃止し、子の並列自動起動を禁止する。`SendSIGKILL=no`と後続保全を維持し、timeout時にOS lock解放/Unit終端/marker修復を推定しない。実効Type/MainPID/timeout、短縮隔離probe、全Unit依存順と親の30分単調budgetはPTで確認する。Web/API/Artemis `Type=simple`の個別readinessは引き続き別pollであり、その`TimeoutStartSec`を長期稼働期限へ転用しない。RD/UI変更なし。
 
 ## 1. 目的・状態

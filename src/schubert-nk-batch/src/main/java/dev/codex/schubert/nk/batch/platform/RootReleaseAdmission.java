@@ -101,13 +101,24 @@ public final class RootReleaseAdmission {
     verifyFor(connection, caller, RootStartupContext.Service.MORNING);
   }
 
+  /** Actual approved payload observations, freshly bound to the same Morning owner/schema. */
+  public StartupReleaseManifest.Contents inspectMorning(
+      Connection connection, RootStartupContext.Snapshot caller) throws SQLException, IOException {
+    return verifyFor(connection, caller, RootStartupContext.Service.MORNING);
+  }
+
   /** Cleanup child verifies its own fixed root actor and fresh release/schema, not the parent's. */
   public void verifyCleanup(Connection connection, RootStartupContext.Snapshot caller)
       throws SQLException, IOException {
     verifyFor(connection, caller, RootStartupContext.Service.CLEANUP);
   }
 
-  private void verifyFor(
+  public void verifyExpiry(Connection connection, RootStartupContext.Snapshot caller)
+      throws SQLException, IOException {
+    verifyFor(connection, caller, RootStartupContext.Service.EXPIRY);
+  }
+
+  private StartupReleaseManifest.Contents verifyFor(
       Connection connection, RootStartupContext.Snapshot caller, RootStartupContext.Service service)
       throws SQLException, IOException {
     Objects.requireNonNull(connection, "admitted root connection");
@@ -118,6 +129,7 @@ public final class RootReleaseAdmission {
     verifyPlatform(current, Objects.requireNonNull(platform.observe(), "runtime platform result"));
     new SchemaHistoryAdmission(current.migrations()).verify(connection);
     context.recheck(expected);
+    return current;
   }
 
   static void verifyPlatform(StartupReleaseManifest.Contents release, Map<String, String> actual)

@@ -61,13 +61,26 @@ public final class StartupReleaseManifest {
       String sha256,
       List<SchemaHistoryAdmission.Row> migrations,
       Map<String, String> build,
-      Map<String, String> platform) {
+      Map<String, String> platform,
+      Map<String, String> versions,
+      Map<String, String> artifactHashes) {
+    public Contents(
+        String version,
+        String sha256,
+        List<SchemaHistoryAdmission.Row> migrations,
+        Map<String, String> build,
+        Map<String, String> platform) {
+      this(version, sha256, migrations, build, platform, Map.of(), Map.of());
+    }
+
     public Contents {
       Objects.requireNonNull(version, "release version");
       Objects.requireNonNull(sha256, "manifest digest");
       migrations = List.copyOf(migrations);
       build = Map.copyOf(build);
       platform = Map.copyOf(platform);
+      versions = Map.copyOf(versions);
+      artifactHashes = Map.copyOf(artifactHashes);
     }
 
     @Override
@@ -83,6 +96,16 @@ public final class StartupReleaseManifest {
     @Override
     public Map<String, String> platform() {
       return Map.copyOf(platform);
+    }
+
+    @Override
+    public Map<String, String> versions() {
+      return Map.copyOf(versions);
+    }
+
+    @Override
+    public Map<String, String> artifactHashes() {
+      return Map.copyOf(artifactHashes);
     }
   }
 

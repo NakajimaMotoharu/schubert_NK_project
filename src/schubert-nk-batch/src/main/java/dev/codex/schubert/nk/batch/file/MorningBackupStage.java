@@ -68,6 +68,17 @@ final class MorningBackupStage {
 
   static <T> T freshVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> work)
       throws IOException {
+    return verifiedEpoch(budget, java.util.Optional.empty(), work);
+  }
+
+  static <T> T resumeVerifiedEpoch(
+      MorningParentBudget budget, UUID runId, VerifiedEpochWork<T> work) throws IOException {
+    return verifiedEpoch(budget, java.util.Optional.of(runId), work);
+  }
+
+  private static <T> T verifiedEpoch(
+      MorningParentBudget budget, java.util.Optional<UUID> runId, VerifiedEpochWork<T> work)
+      throws IOException {
     Objects.requireNonNull(budget, "parent Morning budget");
     Objects.requireNonNull(work, "verified backup work");
     budget.requireWithin();
@@ -75,14 +86,13 @@ final class MorningBackupStage {
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
     var publisher = MorningBackupRequestPublication.create(root, snapshot);
     UUID part = UUID.randomUUID();
-    return MorningControlScope.executeVerifiedEpoch(
-        budget,
+    MorningControlScope.VerifiedEpochWork<T> continuation =
         (state, database, epoch, original) ->
             MorningBackupPreparation.execute(
                 state,
                 database,
                 Clock.systemUTC(),
-                false,
+                runId.isPresent(),
                 publisher,
                 part,
                 (request, begins) -> {
@@ -92,7 +102,12 @@ final class MorningBackupStage {
                   budget.requireWithin();
                   original.verify();
                   return result;
-                }));
+                });
+    if (runId.isPresent()) {
+      return MorningControlScope.executeResumeVerifiedEpoch(
+          budget, runId.orElseThrow(), continuation);
+    }
+    return MorningControlScope.executeVerifiedEpoch(budget, continuation);
   }
 
   static <T> T freshEpoch(MorningParentBudget budget, OwnedEpochWork<T> work) throws IOException {

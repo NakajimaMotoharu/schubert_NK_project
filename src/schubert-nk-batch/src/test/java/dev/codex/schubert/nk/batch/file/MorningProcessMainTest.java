@@ -15,6 +15,61 @@ import org.junit.jupiter.api.Test;
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG339/368; PT-OPS-MMAIN001-007. */
 final class MorningProcessMainTest {
   @Test
+  void mmain008ExplicitCanonicalResumeIsSameBudgetAndCannotOverrideCutoffOrGate() {
+    String literal = "31100027-2222-4a33-8444-555555555555";
+    var calls = new AtomicInteger();
+    assertEquals(
+        30,
+        MorningProcessMain.run(
+            new String[] {"--resume", literal},
+            b -> fail("fresh selected"),
+            (b, run) -> {
+              b.requireWithin();
+              assertEquals(java.util.UUID.fromString(literal), run);
+              calls.incrementAndGet();
+            }));
+    assertEquals(1, calls.get());
+    for (String[] args :
+        new String[][] {
+          {"--resume"},
+          {"--resume", ""},
+          {"--resume", "00000000-0000-0000-0000-000000000000"},
+          {"--resume", literal.toUpperCase(java.util.Locale.ROOT)},
+          {"--resume", "1-2-3-4-5"},
+          {"--resume", null},
+          {"--resume", literal, "--cutoff=now"},
+          {null, literal}
+        }) {
+      assertEquals(
+          70,
+          MorningProcessMain.run(
+              args, b -> fail("fresh selected"), (b, run) -> fail("resume selected")));
+    }
+    var unknown = new NullPointerException("programming failure");
+    assertSame(
+        unknown,
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                MorningProcessMain.run(
+                    new String[] {"--resume", literal},
+                    b -> {},
+                    (b, run) -> {
+                      throw unknown;
+                    })));
+    assertEquals(
+        30,
+        MorningProcessMain.run(
+            new String[] {"--resume", literal},
+            b -> {},
+            (b, run) -> {
+              throw new IOException("private");
+            }));
+    assertThrows(
+        NullPointerException.class, () -> MorningProcessMain.run(new String[0], b -> {}, null));
+  }
+
+  @Test
   void mmain001AdmissionSuccessStillCannotClaimMorningSuccess() {
     var calls = new AtomicInteger();
     assertEquals(30, MorningProcessMain.run(new String[0], budget -> calls.incrementAndGet()));

@@ -97,6 +97,17 @@ final class MorningControlScope {
   /** Actual original owner remains nested inside the SAME M/A/DB/current callback. */
   static <T> T executeVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> trustedWork)
       throws IOException {
+    return executeVerifiedEpoch(budget, java.util.Optional.empty(), trustedWork);
+  }
+
+  static <T> T executeResumeVerifiedEpoch(
+      MorningParentBudget budget, UUID runId, VerifiedEpochWork<T> trustedWork) throws IOException {
+    return executeVerifiedEpoch(budget, java.util.Optional.of(runId), trustedWork);
+  }
+
+  private static <T> T executeVerifiedEpoch(
+      MorningParentBudget budget, java.util.Optional<UUID> runId, VerifiedEpochWork<T> trustedWork)
+      throws IOException {
     Objects.requireNonNull(budget, "parent Morning budget");
     Objects.requireNonNull(trustedWork, "verified original work");
     budget.requireWithin();
@@ -116,23 +127,26 @@ final class MorningControlScope {
           try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
             intent.requireClear();
           }
-          return MorningNewRunAdmission.create(root, snapshot)
-              .executeVerified(
-                  (state, database, original) ->
-                      afterOriginal(
-                          gate,
-                          () -> MorningStopPass.create(root, snapshot, budget).execute(),
-                          startup::tryExclusive,
-                          () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
-                          () -> {
-                            Epoch epoch =
-                                MorningCurrentInvalidation.invalidate(root, snapshot, state);
-                            if (epoch.state() != State.INVALID
-                                || !epoch.activation().equals(state.activation()))
-                              throw unavailable();
-                            original.verify();
-                            return trustedWork.execute(state, database, epoch, original);
-                          }));
+          requireNoExpiryRequest(root, snapshot);
+          MorningNewRunAdmission.VerifiedContinuation<T> continuation =
+              (state, database, original) ->
+                  afterOriginal(
+                      gate,
+                      () -> MorningStopPass.create(root, snapshot, budget).execute(),
+                      startup::tryExclusive,
+                      () -> MorningUnitTerminals.requireQuiescent(root, snapshot),
+                      () -> {
+                        Epoch epoch = MorningCurrentInvalidation.invalidate(root, snapshot, state);
+                        if (epoch.state() != State.INVALID
+                            || !epoch.activation().equals(state.activation())) throw unavailable();
+                        original.verify();
+                        return trustedWork.execute(state, database, epoch, original);
+                      });
+          if (runId.isPresent()) {
+            return MorningResumeAdmission.create(root, snapshot)
+                .executeVerified(runId.orElseThrow(), continuation);
+          }
+          return MorningNewRunAdmission.create(root, snapshot).executeVerified(continuation);
         });
   }
 
@@ -253,6 +267,7 @@ final class MorningControlScope {
               try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
                 intent.requireClear();
               }
+              requireNoExpiryRequest(root, snapshot);
             }),
         () -> MorningStopPass.create(root, snapshot).execute(),
         startup::tryExclusive,
@@ -299,6 +314,28 @@ final class MorningControlScope {
                         return trustedWork.execute(state, database, epoch);
                       });
                 }));
+  }
+
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
+      justification = "SS343/SSC111 fixed root-owned residue gate, before original/DB/stop under M")
+  private static void requireNoExpiryRequest(
+      RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
+    root.recheck(expected);
+    var directory =
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
+            java.nio.file.Path.of("/run/schubert-nk/expiry-request"));
+    dev.codex.schubert.nk.storage.ResourceScope.use(
+        directory::close,
+        () -> {
+          CleanupWorkerRequestFiles.forExpiry(
+                  directory, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
+              .requireClear();
+          return Boolean.TRUE;
+        });
+    root.recheck(expected);
   }
 
   static OwnedOriginal withClearIntent(OwnedOriginal original, IntentClear intent) {
