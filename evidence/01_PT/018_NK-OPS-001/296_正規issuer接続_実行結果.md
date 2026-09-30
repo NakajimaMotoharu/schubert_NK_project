@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 08:31 PG400 同原本実三gate帰還（5gate/issuer未完）
+
+Sourcebb003f2b8、全6 2670PT/FES0/static6zero、full fa25fe6633276476437f46d98d130c8b06ba045926fbed80e032b24646fc0e82。signed178artifact/61deps/23SQL/fca81afc…をM/A/全停止/署名/BOM/hostRO/元原本保全下で配備、外部Morning一度。旧82行全14列不変、新Backup16二SKIP/Cleanup8七SKIP/Expiry4一SKIP=92、真正worker0/全kernel終端・Broker同生generation・全Ops/journal二度＋末段再読・6root・実ownedDB/BOM/runtimeからPOSTGRES/RELEASE_BOM/BROKER_OPS encoder全正常line（58/58・38/38・51/51）を実行しMain214帰還。原本BEGIN/current INVALID/permit0・namespace空を保持。三byteをnativeでemit/issuedした証拠ではなく、同byteの実到達とhost独立goldenを区別する。native f37de3a1118f6b3ab57e8590154d36a566a54bfca7be763631bea409fefddcb0、4role fresh時刻検査/classMismatch0、union664B/1155L/202M/11C、ownhost比123/1145/205/20解消。BUG385直接再試験成功、BUG384全runtime出力/signed deployment成功。402新XML/manifestのclosed構造/秘密pattern検査0、全project秘密gate未認定。全5gate/retention/tenstep/正規issue/Ahandoff/APIWeb/CHR/100%は456/460の同WIP残件、正式run24/48.3%据置。旧PG399不合格47ed8f64…は変更しない。再現toolはtools/quality/vm/050_s1/pg400_*、raw native exec/Unit/journal/DB/秘密材料はWork privateだけ。
+
 ## 08:07 PG399 native不合格の保全とPG400直接再試験
 
 PG399 Source6b22f68cの全6 2669PT/FES0/static6zeroは成功（full2eb34b90…）だが外部MorningはBUG385で途中拒否。正規Cycle二readinessを新callbackが一度と誤認。旧73行不変＋今回9SKIP=82、Expiry未実行・三gate未到達、親30/permit0/INVALID/namespace空。native manifest47ed8f64…に実条件/exec/hashを保存、古いExpiryは除外、fresh三roleのsame-byte union701B/1519L/245M/13C。旧成功の流用・合格化なし。BUG384のruntime出力option不足は同Sourceのinventory goalだけ再実行しsigned release a0d1214e…配備成功、partial候補はprivate rejected pathへ保持。
