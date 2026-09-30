@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+## PG395凍結全6・実初期配置（04:12 JST、限定証跡）
+
+Production Source `6874da9e2dbc276ec3f56675c533e976397fbcbf` の再全6cleanは2,646PT/FES0/static6各Bug/Error0、04:11:24・12:45。manifest `evidence/provisional/PG395-issuer-roots-baseline/manifest.json` SHA256 `aa556b9fa28432c5d122616e339af00b17ddee9c05eb5b3e0b1a855fc2629ecb`、log `pg395-roots-six.log` SHA256 `f7e10ae6f75c28214c9c8287ac07537ef73792c998acf04ea3a9298efd657e1c`。host missed B/L/M/C＝751/2143/384/27、Protocol/Storageは0。BUG373依存境界は直接再試験と全6成功、BUG372全静的0・YKT292全6collection負系を確認。coverage100/正式run24/全issuer/RootAPIWeb/CHRは未達。
+
+初期配置工具のOLD Transfer誤pathは全6実行中にread-only statで検出（BUG374/YKT294先行登録、工具未実行/変更0）、全6採取後に工具1literalだけdata/transferへ修正。Production src/pom/classbyteは凍結6874から変更0。修正工具SHA256 `4f0906f22b96dd8e987468d7684f7072d0d6aba77f6f3d06c86af4d2a7fcae88`、javac-Werror→既存署名PG394完全BOM/pin/M/A/全8停止/currentリンク/approval実byte/同原本/INVALID/namespace空を保持し、実systemd-sysusersの固定2account＋3root新規配置成功。旧3root metadata不変・原本/INVALID/current approval不変・permit発行0を工具内で独立再読。NSS before-imageはVM root専用private保存、Gitには秘密/実NSS原byteを入れない。新bootstrap NSS parserだけoperator classpathへ配置し、PG394 application releaseは不変、工具実行をapplication native coverageへ合算しない。`pg395_initial_roots.sh`/`pg395-initial-roots.log` をWorkに保存。空ASSET rootはmaster移行/業務起動/ITST未認定。
+
 ## 03:53 同変更群の6root・依存境界・collection再試験（未認定）
 
 最初の凍結Source `6c18b3de827dfb2b9298d848784f3540544bb7e7` の全6cleanは2,641PT中F1/E0/S0で不合格。Batch888PTのCleanupRepositoryTest.moduleDependencyBoundaryが、SSC126でbootstrapへ移した2parserを旧package prefixで禁止した（BUG373/YKT293修正前起票）。他5module静的0、Batchはtest失敗で静的未実行。log `work/pgpt-runs/PG379/pg395-six.log` SHA256 `88cf5e4fe65e69f4ad7da953490584374a59c599f6ca2de921f69612f98f458f`。失敗を合格/coverage100/正式受入に算入しない。

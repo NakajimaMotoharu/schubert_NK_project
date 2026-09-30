@@ -16,7 +16,7 @@ public final class Pg395InitialRoots {
   private static final Path SAVE = Path.of("/var/lib/pgpt-s1-preservation");
   private static final List<Path> NEW = List.of(Path.of("/srv/schubert-nk/data/assets"),
       Path.of("/var/log/schubert-nk"), Path.of("/srv/schubert-nk/staging"));
-  private static final List<Path> OLD = List.of(Path.of("/srv/schubert-nk/transfer"),
+  private static final List<Path> OLD = List.of(Path.of("/srv/schubert-nk/data/transfer"),
       Path.of("/srv/schubert-nk/backup"), Path.of("/var/lib/schubert-nk/artemis"));
   private static final String SOURCE = "a7cc8309ea498c645dd98115c4c6eb068ab0db74";
   public static void main(String[] args) throws Exception {
