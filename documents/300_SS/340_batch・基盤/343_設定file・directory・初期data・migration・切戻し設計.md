@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC114固定request補正：SSC113のsame request再使用は同一実試行の場合だけ。新実開始時刻resumeは旧file保持/全byte・metadata/namespace前後照合とDB両ABANDONED完全根拠を得てから既存retire/force→新part/CREATE_NEW/force/readbackで置き換える。Root old/new run/cutoff一致・新INVALID・M/A・全8終端・intent無しが必須。旧fileの存在だけを復旧許可にせず、ctime/size/型/ACL/FS異常/未知DBは保持拒否。公開前crashは次回strict隔離/明示再実行で扱い、旧DB成功や旧epochへfallbackしない。
+
 SSC113固定Backup request補足：新規runは従来CREATE_NEW/part/force/atomic公開を維持。明示resumeだけ、同M/A/原本/DB/current INVALID・intent隔離・全8終端が外側で証明済みのscope内で既存requestの同run/同cutoff・root0600/link1/ACL0/tmpfs/RW・全byte/保持前後namespaceを照合し再使用する。MISSINGだけ新規公開、COLLISION/UNAVAILABLE・foreign/corrupt・途中partの修復や削除はしない。再使用はarchive/step成功の証明ではなく、後続実worker/fresh Invocation/両結果/全終端/退役が別必須。
 
 SSC110/BUG340横断補足：immutable release layoutは `config/effective/backup-profile.json` と `config/effective/backup-age-recipient` のexact2pathだけを追加許容し、両payloadは他dataと同じroot:schubert0640・single-link/ACLなし/全size・hash・namespace照合を受ける。任意effective file・秘密key・alias・追加dirを許容しない。実 `/etc` profile/recipientのmodeは前述0640/0600のまま別gate。署名後layout拒否を迂回して原本発行しない。

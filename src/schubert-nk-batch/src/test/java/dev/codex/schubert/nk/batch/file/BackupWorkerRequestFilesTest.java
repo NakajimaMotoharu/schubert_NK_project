@@ -91,6 +91,69 @@ final class BackupWorkerRequestFilesTest {
   }
 
   @Test
+  void breqfile010NewRealStartRequiresIndependentPriorPairProofBeforeRetirement() throws Exception {
+    UUID next = UUID.fromString("22222222-3333-4444-8555-666666666666");
+    var later = new BackupWorkerRequest(PART, Instant.parse("2026-09-27T15:00:00Z"));
+    try (var f = fixture()) {
+      var subject = files(f);
+      subject.prepare(REQUEST, PART);
+      assertThrows(
+          java.io.IOException.class,
+          () ->
+              subject.prepareResumeReplacement(
+                  later,
+                  next,
+                  old -> {
+                    throw new java.io.IOException("actual DB unknown");
+                  }));
+      assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
+      assertFalse(Files.exists(f.parent.resolve(next + ".part")));
+      var proof = new AtomicInteger();
+      subject.prepareResumeReplacement(
+          later,
+          next,
+          old -> {
+            assertEquals(PART, old.run());
+            assertEquals(Instant.parse("2026-09-27T14:59:59.123456Z"), old.started());
+            assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
+            proof.incrementAndGet();
+          });
+      assertEquals(1, proof.get());
+      assertEquals(
+          "NKBACKUP1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T15:00:00Z\n",
+          Files.readString(f.parent.resolve("backup-request")));
+      subject.prepareResumeReplacement(
+          later, next, old -> fail("same-byte is not a prior generation"));
+      assertThrows(
+          StorageIoException.class,
+          () ->
+              subject.prepareResumeReplacement(
+                  REQUEST, next, old -> fail("clock reversal must be refused first")));
+      assertThrows(
+          StorageIoException.class,
+          () ->
+              subject.prepareResumeReplacement(
+                  new BackupWorkerRequest(next, Instant.parse("2026-09-27T15:01:00Z")),
+                  next,
+                  old -> fail("foreign run")));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.prepareResumeReplacement(null, next, old -> {}));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.prepareResumeReplacement(later, null, old -> {}));
+      assertThrows(
+          NullPointerException.class, () -> subject.prepareResumeReplacement(later, next, null));
+      f.released();
+    }
+    try (var f = fixture()) {
+      files(f).prepareResumeReplacement(later, next, old -> fail("no prior file exists"));
+      assertEquals(later, files(f).read());
+      f.released();
+    }
+  }
+
+  @Test
   void nullActorAndPrivateMetadata() throws Exception {
     try (var f = fixture()) {
       assertThrows(NullPointerException.class, () -> new BackupWorkerRequestFiles(null, f));

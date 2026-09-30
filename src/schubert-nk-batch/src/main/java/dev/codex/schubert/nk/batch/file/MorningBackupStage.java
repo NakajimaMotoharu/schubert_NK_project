@@ -84,25 +84,30 @@ final class MorningBackupStage {
     budget.requireWithin();
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
-    var publisher = MorningBackupRequestPublication.create(root, snapshot, runId.isPresent());
     UUID part = UUID.randomUUID();
     MorningControlScope.VerifiedEpochWork<T> continuation =
-        (state, database, epoch, original) ->
-            MorningBackupPreparation.execute(
-                state,
-                database,
-                Clock.systemUTC(),
-                runId.isPresent(),
-                publisher,
-                part,
-                (request, begins) -> {
-                  budget.requireWithin();
-                  original.verify();
-                  T result = work.execute(state, database, epoch, request, begins, part, original);
-                  budget.requireWithin();
-                  original.verify();
-                  return result;
-                });
+        (state, database, epoch, original) -> {
+          java.util.Optional<BackupWorkerRequestFiles.ResumeProof> resumeProof =
+              runId.isPresent()
+                  ? java.util.Optional.of(database::requireAbandonedRequest)
+                  : java.util.Optional.empty();
+          var publisher = MorningBackupRequestPublication.create(root, snapshot, resumeProof);
+          return MorningBackupPreparation.execute(
+              state,
+              database,
+              Clock.systemUTC(),
+              runId.isPresent(),
+              publisher,
+              part,
+              (request, begins) -> {
+                budget.requireWithin();
+                original.verify();
+                T result = work.execute(state, database, epoch, request, begins, part, original);
+                budget.requireWithin();
+                original.verify();
+                return result;
+              });
+        };
     if (runId.isPresent()) {
       return MorningControlScope.executeResumeVerifiedEpoch(
           budget, runId.orElseThrow(), continuation);

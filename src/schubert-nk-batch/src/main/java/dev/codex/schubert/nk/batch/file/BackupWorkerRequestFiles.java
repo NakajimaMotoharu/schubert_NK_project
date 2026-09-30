@@ -98,6 +98,43 @@ public final class BackupWorkerRequestFiles {
     }
   }
 
+  @FunctionalInterface
+  public interface ResumeProof {
+    void verify(BackupWorkerRequest previous) throws java.io.IOException;
+  }
+
+  /**
+   * SSC114: new real content start; only a same-owner actual DB proof may retire the old request.
+   */
+  public void prepareResumeReplacement(BackupWorkerRequest expected, UUID part, ResumeProof proof)
+      throws java.io.IOException {
+    Objects.requireNonNull(expected, "new real backup request");
+    Objects.requireNonNull(part, "new-only request part");
+    Objects.requireNonNull(proof, "same-owner abandoned DB pair proof");
+    synchronized (lock) {
+      Snapshot before = directory();
+      BackupWorkerRequest previous;
+      try {
+        previous = read();
+      } catch (StorageIoException missing) {
+        if (missing.reason() != StorageIoException.Reason.MISSING) throw missing;
+        require(before.equals(directory()));
+        prepare(expected, part);
+        return;
+      }
+      if (expected.equals(previous)) {
+        prepareResume(expected, part);
+        return;
+      }
+      require(
+          expected.run().equals(previous.run()) && previous.started().isBefore(expected.started()));
+      proof.verify(previous);
+      require(previous.equals(read()) && before.equals(directory()));
+      retire(previous);
+      prepare(expected, part);
+    }
+  }
+
   public BackupWorkerRequest read() throws StorageIoException {
     synchronized (lock) {
       byte[] bytes = new byte[BackupWorkerRequest.MAXIMUM_BYTES + 1];

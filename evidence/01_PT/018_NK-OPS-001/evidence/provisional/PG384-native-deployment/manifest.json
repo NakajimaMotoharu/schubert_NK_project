@@ -1,0 +1,96 @@
+{
+  "id": "PG384-native-deployment",
+  "formal": false,
+  "executionTime": "2026-09-30T02:29:57.269406+00:00",
+  "sourceCommit": "ba126a25b64ec120845a929fb94f4144bd7790be",
+  "branch": "dev-foundation",
+  "input": "fixed separately pinned Ed25519 signature; actual 177 artifact/61 dependencies/23 SQL release; pre-V023 private restore point; preserved original same run",
+  "expected": "signature+full RO BOM verified before approval; dedicated V023 migrate exactly1/post validate; atomic absolute current selector+root400 approval and Production full BOM readback; external Morning actual backup roundtrip",
+  "actual": {
+    "pinnedSignature": "PASS",
+    "hostReadOnlyFullBom": "PASS after BUG342",
+    "dedicatedV023Migration": "PASS after BUG343",
+    "currentAndRootApprovalReadback": "PASS after BUG341",
+    "externalMorning": "FAIL exit30 retained old request content-start differs from new actual attempt before worker",
+    "externalInvocation": "bfa3d9e4d4d4408f948d4198e431276e",
+    "workerInvocations": 0,
+    "databaseBackupBegins": 4,
+    "requestBytes": 87,
+    "parentCoverageBytes": "actual file hash/size below",
+    "permitsIssued": 0,
+    "S1Accepted": false
+  },
+  "commands": {
+    "unit-state.txt": {
+      "command": "sudo -n systemctl show schubert-nk-morning-controller.service schubert-nk-backup.service --property=Id,LoadState,ActiveState,SubState,Result,MainPID,ControlPID,InvocationID,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic,Job",
+      "exitCode": 0
+    },
+    "deployment-state.txt": {
+      "command": "sudo -n readlink /opt/schubert-nk/current; sudo -n stat -c \"%n %u:%g %a %h %s\" /etc/schubert-nk/release-approval/current; sudo -n findmnt --target /opt/schubert-nk/releases/0.1.0-PG384 --output TARGET,FSTYPE,OPTIONS --noheadings; sudo -n find /run/schubert-nk/startup /run/schubert-nk/backup-request -maxdepth 1 -type f -printf \"%f %s\\n\"",
+      "exitCode": 0
+    },
+    "schema-and-backup.txt": {
+      "command": "sudo -n -u postgres psql -X -A -t -d schubert_nk -c \"SELECT count(*),count(*) FILTER (WHERE NOT success),max(installed_rank) FROM schubert_meta.flyway_schema_history; SELECT step,attempt,status,ended_at IS NULL FROM schubert.batch_runs ORDER BY step,attempt\"",
+      "exitCode": 0
+    },
+    "preservation-hashes.txt": {
+      "command": "sudo -n sha256sum /var/lib/pgpt-s1-preservation/unit-originals-complete.tar /var/lib/pgpt-s1-preservation/db-pg381/schubert_nk-before-v023.dump /var/lib/schubert-nk/maintenance/runs/31100027-2222-4333-8444-555555555555.run",
+      "exitCode": 0
+    },
+    "environment.txt": {
+      "command": "uname -sr; /usr/bin/java -version 2>&1; /usr/bin/pg_dump --version; /usr/bin/age --version",
+      "exitCode": 0
+    }
+  },
+  "bugs": [
+    "BUG-340",
+    "BUG-341",
+    "BUG-342",
+    "BUG-343",
+    "BUG-344",
+    "BUG-345",
+    "BUG-347"
+  ],
+  "ssc": [
+    "SSC-110",
+    "SSC-112",
+    "SSC-113"
+  ],
+  "coverage": {
+    "instrumentation": "JaCoCo0.8.15 genuine Morning classpath/source byte; cold capture reachability only",
+    "allFour100Percent": false
+  },
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/deployment-state.txt",
+      "sha256": "f666a891b3fbddec9842858aea56ec95020d00a04d4bfce3c0d80715dadc96c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/environment.txt",
+      "sha256": "66d627e1480380ce51eabd9edf6b6ecd73ca2aa5ecc566f1ac33b801922eff07"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/morning-first.exec",
+      "sha256": "723aae99ec447f483653ff9538ff078ea94f70089e09b801a33cb04cdb66d6d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/preservation-hashes.txt",
+      "sha256": "b3b8f559d035730fb0794e088bd0b58eb39a5816e61c0c0786a50ce7909be797"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/schema-and-backup.txt",
+      "sha256": "e1b2b3eaae8b62d38ba2015156bb195f07694df8843857b9025348da123a62b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/unit-state.txt",
+      "sha256": "9d349a28155168f3494f18d0bc6a58a396d8ccbc0140a85a4e694cb9eae3a89a"
+    }
+  ],
+  "limitations": [
+    "support checks only, no formal PT/IT/ST/whole S1 claim",
+    "worker/dump/archives/MANIFEST/SUCCESS/native timeout/failure not executed",
+    "failed operation retained and never counted PASS",
+    "restore dump/signing key/age private key/credential originals remain Git-external private"
+  ],
+  "redaction": "metadata/hash/state only; no journal messages/DB payload/credential/session/token/password/private key/dump; exec contains only coverage probe bitmaps"
+}

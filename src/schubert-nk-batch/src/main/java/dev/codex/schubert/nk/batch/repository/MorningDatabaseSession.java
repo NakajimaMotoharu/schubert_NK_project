@@ -66,6 +66,17 @@ public final class MorningDatabaseSession {
 
     void requireConsistent(BatchRun run) throws IOException;
 
+    default void recheckConsistent(BatchRun run) throws IOException {
+      Objects.requireNonNull(run, "same original run after begin");
+      throw unavailable();
+    }
+
+    default void requireAbandonedRequest(
+        dev.codex.schubert.nk.batch.platform.BackupWorkerRequest previous) throws IOException {
+      Objects.requireNonNull(previous, "held retained request");
+      throw unavailable();
+    }
+
     BackupBegins beginBackup(BatchRun run, Instant now, boolean recoverAbandoned)
         throws IOException;
 
@@ -382,6 +393,85 @@ public final class MorningDatabaseSession {
           || connection.getTransactionIsolation() != Connection.TRANSACTION_READ_COMMITTED
           || !scalar(connection, HELD)) throw unavailable();
       guard();
+    }
+
+    @Override
+    public void recheckConsistent(BatchRun run) throws IOException {
+      Objects.requireNonNull(run, "same original run after begin");
+      guard();
+      var expected = backupBegins;
+      if (!backupCommitted || expected == null || !run.equals(expected.database().run()))
+        throw unavailable();
+      try {
+        if (!connection.getAutoCommit() || connection.isReadOnly() || !scalar(connection, HELD))
+          throw unavailable();
+        connection.setAutoCommit(false);
+        // The repository requires a borrowed RW-configured connection. The server transaction
+        // itself is explicitly READ ONLY; no JDBC configured-readOnly flag is lied about/reset.
+        try (var statement = connection.createStatement()) {
+          statement.execute("SET TRANSACTION READ ONLY");
+        }
+        boolean consistent = new RunReferenceRepository(connection).read(run).identityConsistent();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        if (!consistent) throw unavailable();
+        guard();
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
+    }
+
+    @Override
+    public void requireAbandonedRequest(
+        dev.codex.schubert.nk.batch.platform.BackupWorkerRequest previous) throws IOException {
+      Objects.requireNonNull(previous, "held retained request");
+      var expected = backupBegins;
+      if (expected == null) throw unavailable();
+      try {
+        completionGuard(expected);
+        BatchRun run = expected.database().run();
+        if (!run.id().equals(previous.run())
+            || previous.started().isBefore(run.cutoff())
+            || !previous.started().isBefore(expected.database().startedAt())
+            || !expected.database().startedAt().equals(expected.configuration().startedAt()))
+          throw unavailable();
+        connection.setReadOnly(true);
+        connection.setAutoCommit(false);
+        String sql =
+            "select step,attempt,status,error_code,ended_at,business_date from schubert.batch_runs "
+                + "where run_id=? and started_at=? and step in ('BACKUP_DB','BACKUP_CONFIG') order by step";
+        try (var statement = connection.prepareStatement(sql)) {
+          statement.setObject(1, previous.run());
+          statement.setObject(
+              2, java.time.OffsetDateTime.ofInstant(previous.started(), java.time.ZoneOffset.UTC));
+          try (var rows = statement.executeQuery()) {
+            for (var current : java.util.List.of(expected.configuration(), expected.database())) {
+              if (!rows.next()) throw unavailable();
+              var ended =
+                  present(rows.getObject("ended_at", java.time.OffsetDateTime.class)).toInstant();
+              if (!current.step().name().equals(present(rows.getString("step")))
+                  || present(rows.getObject("attempt", Integer.class)) >= current.attempt()
+                  || !"FAILED".equals(present(rows.getString("status")))
+                  || !"ABANDONED".equals(present(rows.getString("error_code")))
+                  || ended.isBefore(previous.started())
+                  || ended.isAfter(current.startedAt())
+                  || !run.cutoff()
+                      .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                      .toLocalDate()
+                      .equals(present(rows.getObject("business_date", java.time.LocalDate.class))))
+                throw unavailable();
+            }
+            if (rows.next()) throw unavailable();
+          }
+        }
+        connection.rollback();
+        connection.setAutoCommit(true);
+        connection.setReadOnly(false);
+        completionGuard(expected);
+        recheckConsistent(run);
+      } catch (SQLException failure) {
+        throw unavailable();
+      }
     }
 
     @Override

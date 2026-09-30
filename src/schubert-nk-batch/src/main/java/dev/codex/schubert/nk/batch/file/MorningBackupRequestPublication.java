@@ -47,29 +47,34 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
 
   static MorningBackupRequestPublication create(
       RootStartupContext root, RootStartupContext.Snapshot expected) throws IOException {
-    return create(root, expected, false);
+    return create(root, expected, java.util.Optional.empty());
   }
 
   static MorningBackupRequestPublication create(
-      RootStartupContext root, RootStartupContext.Snapshot expected, boolean explicitResume)
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      java.util.Optional<BackupWorkerRequestFiles.ResumeProof> resumeProof)
       throws IOException {
     Objects.requireNonNull(root, "Morning root context");
     Objects.requireNonNull(expected, "Morning root identity");
+    Objects.requireNonNull(resumeProof, "explicit resume proof selection");
     if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
     root.recheck(expected);
     return new MorningBackupRequestPublication(
-        () -> root.recheck(expected), () -> openNative(explicitResume));
+        () -> root.recheck(expected), () -> openNative(resumeProof));
   }
 
   static Owner openNative() throws IOException {
-    return openNative(false);
+    return openNative(java.util.Optional.empty());
   }
 
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SSC113 same fixed root-only request; explicit owned resume only")
-  static Owner openNative(boolean explicitResume) throws IOException {
+  static Owner openNative(java.util.Optional<BackupWorkerRequestFiles.ResumeProof> resumeProof)
+      throws IOException {
+    Objects.requireNonNull(resumeProof, "explicit resume proof selection");
     OwnedTransferDirectory directory =
         OwnedTransferDirectory.open(
             LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/backup-request"));
@@ -78,7 +83,8 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
     return new Owner() {
       @Override
       public void prepare(BackupWorkerRequest request, UUID part) throws IOException {
-        if (explicitResume) files.prepareResume(request, part);
+        if (resumeProof.isPresent())
+          files.prepareResumeReplacement(request, part, resumeProof.orElseThrow());
         else files.prepare(request, part);
       }
 

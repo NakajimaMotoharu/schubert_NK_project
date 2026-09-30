@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC114（code前、SSC113の時刻具体化を補正）：Backup request.startedは各実Backup試行content開始時刻で、run.cutoffではない。明示resumeでは旧requestのDB両試行が同run/cutoff・旧開始時刻・ABANDONEDへ確定し、新両beginが同run/cutoffの新実時刻RUNNINGであることを同advisory/read-only新transactionで完全照合する。その後だけ旧request正規退役→新時刻new-only公開を同M/A/原本/新INVALID・全8終端/intent隔離scope内で許す。異run/未知/片不一致は旧file変更0、旧DBを消去/時刻上書きしない。結果後の参照再証明はpre-begin専用gateとは別で、同owner/thread/advisory/原本のcutoff一致を再読する。
+
 SSC113（code前）：cold inactive BackupのGCで補助GetUnitProcessesが失敗するため、receiptは固定18field manager projectionの前後同値と既存BackupUnitTerminationの真正host cgroup2全終端を組み合わせる。kernel tree存在時は全nested/process照会を維持、不存在は固定host namespaceの前後再保持で証明し、query失敗をemptyにしない。明示同run resumeはM/A・原本・DB・新INVALID・残留intent拒否・全8終端の後だけ、同run/cutoffの固定request保持読取と前後metadata/namespace一致による再利用を許す。freshはnew-only、他request/異run/cutoff/不明は拒否。worker未実行をFAILED/SKIPPEDにしない。
 
 SSC112実装前補足：root Morning外部入口の引数はnoargs（新規）又は厳密な `--resume <canonical非zero UUID>`（明示同run）だけ。runはDBやpermitから自動選択せず、cutoff指定/変更を認めない。既存durable原本を同run/cutoffでresumeし、新activationと同M/A/DB/advisory/current INVALIDを保つ。原本proofは同保持file ownerとcallback thread/lifetimeだけに束縛、終了後/別threadで無効。残留Backup marker/Expiry requestはresumeでもDB/原本変更/stop前に拒否。recoverAbandonedは明示resume時だけ許容し、実未実行をFAILED/SKIPPEDで代用しない。

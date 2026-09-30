@@ -67,7 +67,7 @@ public final class MorningProcessMain {
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
-                          database.requireConsistent(state.activation().run());
+                          database.recheckConsistent(state.activation().run());
                           var startup = openCurrent();
                           ResourceScope.use(
                               startup::close,

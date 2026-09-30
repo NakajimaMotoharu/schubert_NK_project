@@ -144,6 +144,81 @@ final class MorningDatabaseSessionTest {
     }
   }
 
+  @Test
+  void mdb016ActualAbandonedPairAndPostBeginOriginalProofAreDistinctFromAdmission()
+      throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("38500000-2222-4333-8444-555555555555"),
+            RUN.cutoff().plusSeconds(85L * 86400));
+    Instant oldStart = NOW.plusSeconds(85L * 86400);
+    Instant newStart = oldStart.plusSeconds(10);
+    var previous = new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(run.id(), oldStart);
+    var subject =
+        new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+    subject.execute(
+        credential(),
+        s -> {
+          assertThrows(IOException.class, () -> s.recheckConsistent(run));
+          assertThrows(IOException.class, () -> s.requireAbandonedRequest(previous));
+          s.beginBackup(run, oldStart, false);
+          s.recheckConsistent(run);
+          return true;
+        });
+    var held = new AtomicReference<MorningDatabaseSession.Access>();
+    subject.execute(
+        credential(),
+        s -> {
+          held.set(s);
+          s.requireConsistent(run);
+          var begins = s.beginBackup(run, newStart, true);
+          assertEquals(2, begins.database().attempt());
+          assertEquals(2, begins.configuration().attempt());
+          assertThrows(IOException.class, () -> s.requireConsistent(run));
+          assertThrows(NullPointerException.class, () -> s.recheckConsistent(null));
+          assertThrows(NullPointerException.class, () -> s.requireAbandonedRequest(null));
+          assertThrows(
+              IOException.class,
+              () ->
+                  s.requireAbandonedRequest(
+                      new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                          UUID.fromString("38500001-2222-4333-8444-555555555555"), oldStart)));
+          assertThrows(
+              IOException.class,
+              () ->
+                  s.requireAbandonedRequest(
+                      new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                          run.id(), newStart)));
+          s.requireAbandonedRequest(previous);
+          s.recheckConsistent(run);
+          var failed =
+              new BatchStepResult(
+                  BatchStepResult.Status.FAILED,
+                  1,
+                  0,
+                  1,
+                  0,
+                  BatchStepResult.Reason.COMMAND_FAILURE);
+          s.failBackup(begins, newStart.plusSeconds(2), failed, failed);
+          s.recheckConsistent(run);
+          assertThrows(IOException.class, () -> s.requireAbandonedRequest(previous));
+          return true;
+        });
+    assertThrows(IOException.class, () -> held.get().recheckConsistent(run));
+    assertThrows(IOException.class, () -> held.get().requireAbandonedRequest(previous));
+    try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s = c.createStatement();
+        var rows =
+            s.executeQuery(
+                "select string_agg(step||':'||attempt||':'||status||':'||error_code,',' order by step,attempt) from schubert.batch_runs where run_id='38500000-2222-4333-8444-555555555555'")) {
+      assertTrue(rows.next());
+      assertEquals(
+          "BACKUP_CONFIG:1:FAILED:ABANDONED,BACKUP_CONFIG:2:FAILED:COMMAND_FAILURE,BACKUP_DB:1:FAILED:ABANDONED,BACKUP_DB:2:FAILED:COMMAND_FAILURE",
+          rows.getString(1));
+      assertFalse(rows.next());
+    }
+  }
+
   static final class Probe {
     final List<String> events = new ArrayList<>();
     final Map<String, Integer> counts = new HashMap<>();
