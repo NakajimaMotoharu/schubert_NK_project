@@ -68,5 +68,10 @@ if int(identifier[2:5]) >= 391:
     manifest['ssc'].append('SSC-122')
     manifest['ykt'].append('YKT-288')
     manifest['testIds'].append('COWNER005')
+if int(identifier[2:5]) >= 392:
+    manifest['bugs'].append('BUG-368')
+    manifest['ssc'].append('SSC-123')
+    manifest['ykt'].append('YKT-289')
+    manifest['testIds'].append('CCYCLE005')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

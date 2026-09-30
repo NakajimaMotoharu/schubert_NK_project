@@ -25,3 +25,6 @@ PT-OPS-CEXEC002：Backup実FAILED両handle/固定COMMAND_FAILURE全列/正常非
 PT-OPS-CEXEC003：Cleanup正常0/10/active-exited・全kernel空を保持したまま真正Artemisを起動する。CleanupのInvocation/開始終了時刻/step row全列/試行数が不変で、Requiresにより2回実行されない。次回Morningでは正規停止後に新Invocationとなる。
 
 実行環境：隔離Ubuntu26.04/PostgreSQL18.6/Artemis2.56/JDK25.0.4のPG/PT VM及びhost。Source固定commit/full6回帰/同byte JaCoCo native採取、Test IDとmanifest hashを290の結果へ記録予定。現時点NOT-RUN、未実装/未検証を工程合格に算入しない。全4coverage100%、negative/static0、親hard-timeout実証は別未完条件として明示する。
+# CCYCLE005追補（SSC123/BUG368、2026-09-30）
+
+対象 `BackupUnitReceiptGate.capture` / `CleanupUnitCycleTest.ccycle005`。独立18行Unit literalを入力：前回Cleanup failed/failed・Code1/status30/exit-code・Remainyes・PID/Job0・Invocation111…・start1234567/end2345678をbus/kernel/bus一致で観測する。期待は旧baseline受理のみ、同Invocationの旧30/0は今回receipt0、別Invocation222…の真正正常0だけreceipt0。未知1/70・Code2・timeout・PID/Job残・Invocation欠落・start0/end逆転・kernel不存在/異projectionはcapture拒否。Inspector/Expiryへの一般化なし、Backup既存契約の回帰を実施。全条件を試験assertで確認しProduction methodでexpected生成しない。nativeは同Source外部Morningで旧30→fresh Cleanup/Inspector→全終端を別観測する。

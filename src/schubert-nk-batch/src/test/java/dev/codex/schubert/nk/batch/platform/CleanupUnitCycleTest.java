@@ -61,6 +61,57 @@ final class CleanupUnitCycleTest {
   }
 
   @Test
+  void ccycle005PriorKnownThirtyIsBaselineOnlyWithWholeKernelAndFreshNewInvocation()
+      throws Exception {
+    String prior =
+        FRESH
+            .replace("ActiveState=active", "ActiveState=failed")
+            .replace("SubState=exited", "SubState=failed")
+            .replace("Result=success", "Result=exit-code")
+            .replace("ExecMainStatus=0", "ExecMainStatus=30");
+    var state = new AtomicReference<>(parse(prior));
+    var kernel = new AtomicReference<>(Optional.of(state.get()));
+    var gate =
+        new BackupUnitReceiptGate(
+            () -> {},
+            () -> Optional.of(state.get()),
+            kernel::get,
+            BackupUnitStartClient.Target.CLEANUP);
+    var before = gate.capture();
+    assertTrue(gate.observeResult(before).isEmpty()); // Old30 is NOT this attempt's failure.
+    state.set(parse(FRESH));
+    kernel.set(Optional.of(state.get()));
+    assertTrue(gate.observeResult(before).isEmpty()); // Even old0 cannot be reused.
+    state.set(
+        parse(
+            FRESH.replace("11111111111111111111111111111111", "22222222222222222222222222222222")));
+    kernel.set(Optional.of(state.get()));
+    assertEquals(0, gate.observeResult(before).orElseThrow().exitCode());
+    for (String invalid :
+        List.of(
+            prior.replace("ExecMainStatus=30", "ExecMainStatus=1"),
+            prior.replace("ExecMainStatus=30", "ExecMainStatus=70"),
+            prior.replace("ExecMainCode=1", "ExecMainCode=2"),
+            prior.replace("Result=exit-code", "Result=timeout"),
+            prior.replace("MainPID=0", "MainPID=123"),
+            prior.replace("Job=\n", "Job=1\n"),
+            prior.replace("InvocationID=11111111111111111111111111111111", "InvocationID="),
+            prior.replace(
+                "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0"),
+            prior.replace(
+                "ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=1"))) {
+      state.set(parse(invalid));
+      kernel.set(Optional.of(state.get()));
+      assertThrows(IOException.class, gate::capture);
+    }
+    state.set(parse(prior));
+    kernel.set(Optional.empty());
+    assertThrows(IOException.class, gate::capture);
+    kernel.set(Optional.of(parse(BASELINE)));
+    assertThrows(IOException.class, gate::capture);
+  }
+
+  @Test
   void ccycle001FreshNormalZeroAndWarningKeepActiveAndReadDbOnlyAfterReacquire() throws Exception {
     for (int code : List.of(0, 10, 30)) {
       var state = new AtomicReference<>(parse(BASELINE));

@@ -146,8 +146,11 @@ public final class BackupUnitReceiptGate {
     try {
       InspectorUnitSnapshot first = present(probe.quiescent());
       if (!first.isTarget(target.observation())
-          || (target != BackupUnitStartClient.Target.BACKUP && !first.inactiveBaseline()))
-        throw unavailable();
+          || (target != BackupUnitStartClient.Target.BACKUP
+              && !first.inactiveBaseline()
+              // SSC123/BUG368: a prior known rejection is only a baseline, never this result.
+              && !(target == BackupUnitStartClient.Target.CLEANUP
+                  && first.cleanupRejectedAfter(Optional.empty())))) throw unavailable();
       InspectorUnitSnapshot whole = present(terminal.quiescent());
       if (!first.matches(whole) || !first.matches(present(probe.quiescent()))) throw unavailable();
       return new Baseline(this, first.invocationId());

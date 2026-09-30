@@ -32,3 +32,10 @@ provision固定receipt SHA256 `b5d47c480ca49062030b582d9413943f226bd0d0ec82c6035
 ## 残る実受入
 
 CEXEC001～003/CINSPECT001～004の真正外部経路はNOT-RUN。Root request publisherの閉鎖owner型→同Cleanup DB/advisory内の6step→実Inspector→Transfer→親再取得/独立全DB再読→request/owner/intent退役を結線する。Backup真FAILED時の6SKIP・Inspector/DELETE0とTransfer実行、Artemis Requires下Cleanup再実行0、Expiry/prior監査・正規issuerは別残件。S1実30分UNKNOWN、native100%・API/Web業務起動/CHR・正式全scopeは未完のまま、工程完了を宣言しない。
+# PG391実拒否／PG392直接再試験（2026-09-30 20:50 JST）
+
+PG391 Source6ce5bb93ce7497de4ab0f5a5e495782e28e08858全6：2603PT/384suite F/E/S0・static6各0、20:38:38、manifest449d59a36e2c0027a03117ade9f03a325ec0b04dafa87bace54fe071a6a7b163。host残B/L/M/C=538/1639/325/26（PG390からB1解消、他不変）。正式100%ではない。同Source署名177artifact/61依存/23SQL、manifest1b42da0f33b80c2e3754ddb351235a61985cfc1520061a0a47c858eeb4e35519、8Unitbase完全byte一致・M/A/fullBOM/hostRO/INVALID/current activation成功。
+
+真正Morning8b1de6b715544579bee5524c214b1653→fresh Backup6b40771c067a449aacff2307ef4ef84c正常0→Cleanupは旧6b41c7f23f124530b65a1a82976f8b85のままstart前拒否（BUG368）。観測hash5edf8020b1ad8e3f373fbfb4b68346871aea1bbe380986b7e7e28536523e764d。親30/PID0、Cleanup未新起動/Inspector未開始、Transfer2file5byte不変。正規M/A・全終端・pin/fullBOM・INVALID原本/旧親dead/旧Cleanup不変・intent不存在を再照合し、request/owner原byteをVM Root700 private新規保存後typed retire。証跡hashd021f91eac463fff25b51a1b6ee8db1befd33401e5e6c4b004cd7ea00dc7ae95、permit0、復帰は UNKNOWNには適用不可。初回operatorのReleaseApprovalオブジェクトidentity比較拒否はmutation前、version/hash明示比較へ補正した再実行だけ採用。toolは050_s1/Pg391PredeliveryRetirement.java。
+
+PG392修正後選択LinuxMonotonicClock3/ChildMaintenanceParent17/Batch24＝44PT、F/E/S0、static3各0、20:50:08。command `-pl storage,bootstrap,batch -Dtest=LinuxMonotonicClockTest,ChildMaintenanceParentTest,CleanupUnitCycleTest,BackupUnitReceiptGateTest,InspectorUnitCycleTest,MorningBackupUnitCycleTest test spotbugs:check`（JDK25.0.4/Maven3.9.12/offline固定M2）。log pg392-known-baseline-retest3.log SHAaa6d4c5b9355c16238841cbaec19836ed4d234f1d610dbfeb51548870afef696。初回-am prefix未解決・対象Storage0/format拒否は非合格に保全、Source実再試験だけ採用。全6固定・PG392実positive/coverageは未実行。関連BUG368/SSC123/YKT289、正式認定run24/1964PT/53scope不変。

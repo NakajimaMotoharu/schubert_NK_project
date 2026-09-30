@@ -491,6 +491,8 @@ Session.retirementCandidates()はimmutableなrun UUID文字列順のBatchRun一�
 
 ### 6.17 許可根拠canonical観測（SSC108、PG379、実装前）
 
+SSC123/BUG368：Cleanupの正規退役済み既知正常30（failed/failed、Remainyes、Code1/status30/exit-code、Invocation存在、start>0/end>=start、PID/Job0）を、独立host全cgroup空とbus/kernel/bus一致を確認して次明示resumeの旧baselineへ保持できる。reset-failedや旧receipt再使用はしない。新Invocationの真正終端を別に要求する。Inspector/Expiry/UNKNOWNへの拡大なし。起動前拒否でrequest/ownerだけが残る場合、M/A・INVALID原本・全終端・元親dead・start.intent不存在・旧CleanupInvocation不変の全証明とprivate原byte保存後に既存typed retireを行う。delivery不明/intent有りには適用しない。
+
 SSC122・BUG367：Root親kernel statusのprimary UID/GIDは4値とも0を要求する。Groupsは存在するsupplementary集合をそのまま観測し、空行は空listとして受理、missingは拒否、primary GID0を勝手に補完しない。Root systemd Unitのsupplementary空は異常ではない。ordinary Inspector/API/Web自己/wrapperのNSS全group一致・nonempty契約は従来どおり。親boot/PID/start/cgroup/NoNewPrivs・前後一致・絶対期限条件は不変更。
 
 SSC120：真正Cleanup fresh正常30の閉鎖証明はSS341§7.3とする。部分DB実観測は拒否/正規退役用のdataでありprestart digest/起動許可の根拠へ転用しない。成功0/10 KEEP_ACTIVEと分け、failed stateをresetして成功へ合わせない。全7step不存在/RUNNING/terminalを実保存のまま保持し、request/maintenance-owner/cleanup-start.intent以外がCleanup namespaceに残る場合、又はInspector全Unit終端/環境不存在を証明できない場合、退役/許可発行0。正常退役後の明示resumeだけ新owner/Epoch/requestを発行し、旧claim再使用なし。
