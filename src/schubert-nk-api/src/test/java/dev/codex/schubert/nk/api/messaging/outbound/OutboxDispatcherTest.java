@@ -687,6 +687,10 @@ final class OutboxDispatcherTest {
             largeWire(),
             OutboxDestination.ASYNC_WORK));
     byte[] syncRequest = smallRequestWire();
+    assertIntegrity(
+        sender,
+        withIdentity(
+            valid, MESSAGE, MESSAGE, "LOGREQ01", "001", syncRequest, OutboxDestination.ASYNC_WORK));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -1199,6 +1203,29 @@ final class OutboxDispatcherTest {
                       return invoke(result, method, args);
                     });
         assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(malformed));
+        List<String> dlqColumns =
+            List.of(
+                "dlq_original_transport_id",
+                "dlq_delivery_count",
+                "dlq_error_code",
+                "dlq_detected_at");
+        for (int visible = 0; visible <= dlqColumns.size(); visible++) {
+          String visibleColumn = visible < dlqColumns.size() ? dlqColumns.get(visible) : "";
+          ResultSet partial =
+              (ResultSet)
+                  Proxy.newProxyInstance(
+                      ResultSet.class.getClassLoader(),
+                      new Class<?>[] {ResultSet.class},
+                      (proxy, method, args) -> {
+                        if (method.getName().equals("getObject")
+                            && args != null
+                            && ("dlq_original_message_id".equals(args[0])
+                                || dlqColumns.contains(args[0]) && !visibleColumn.equals(args[0])))
+                          return null;
+                        return invoke(result, method, args);
+                      });
+          assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(partial));
+        }
       }
     }
   }

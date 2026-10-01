@@ -32,7 +32,7 @@ final class OutboxDlqMetadataTest {
         }
       }
     }
-    for (String id : List.of("", " ", "x".repeat(129), "\n", "\u007f", "日"))
+    for (String id : List.of("", " ", "x".repeat(129), "\n", "ID:\n", "\u007f", "日"))
       assertThrows(IllegalArgumentException.class, () -> metadata(id, 4, TIME));
     for (int count : List.of(0, -1, Integer.MIN_VALUE))
       assertThrows(IllegalArgumentException.class, () -> metadata("ID:original", count, TIME));
