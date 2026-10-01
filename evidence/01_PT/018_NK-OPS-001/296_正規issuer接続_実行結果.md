@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## PG403直接試験（2026-10-01 11:55、全/native未認定）
+
+pg403-stop-three-v3.logはStorage16/Bootstrap4/Batch58=78PT、F/E/S0・静的3zero、37.841秒/11:55:38終了。独立BUG388再現前のpg403-stop-gc-repro-v2.logはRetained一件で不合格、修正後のISSCOMP008～010は停止前真正0/30→明示stop→GC完全cold、別target/部分zero/旧世代/停止後証明差替を確認した。新規Terminal/BackupObservation/BackupCompletion/PrestartEvidenceのline/method/class/branchは全100%。この選択結果をnative-only Main/全module coverageへ流用しない。旧106PT選択も成功、追加後のv2は依存module対象指定不備による未実行で算入0。手goldenは不変更、全6/signed同Source native/許可発行/正式は次工程の検証対象で未合格。
+
 ## 10:48 PG402 同Source実5gate帰還（限定、正式未認定）
 
 Source930afcc377907783042620d84ea977c08d3014bc、全6 clean 2685PT FES0/static6zero/403suite、10:40:54、full manifest6cfc9be08aacde859d6f34cfb415e648a3b8f963bd4951afbd9cc656eb53235c。signed178artifact/61dependency/23SQL manifestfe3017a312cae3671d2dfe5c9176e1d144318aea3028a21914eabaebb9d9bd29。外部Morning一回で真正Backup再用→Cleanup→fresh Broker→Expiry→実retainer末段再読/5frame/Main260帰還、親全体exit30/INVALID/permit0（起動成功ではない）。旧102全14列不変、今回10SKIP/Backup18・Cleanup10・Expiry6→112行、4worker全kernel終端/4request namespace空、backup inventory全metadata/4file内容hashの前後byte一致。全native class mismatch0、same-source host+4exec unionmiss B/L/M/C726/1179/203/11、ownhost858/2409/416/31から132/1230/213/20解消。前PG401 union689/1160/202/11に対する残+37/+19/+1/0、ownhost追加40/57/5/0を別表示。native manifest1eba560a4510c2a3b77e82ccd750d76c8da9282d34462ca039a37953d0952cd6。405個の当回sanitized証跡だけ構造/秘密pattern0、全project正式gateではない。

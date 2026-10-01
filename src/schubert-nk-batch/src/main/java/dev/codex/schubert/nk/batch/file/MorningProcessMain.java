@@ -68,8 +68,10 @@ public final class MorningProcessMain {
                 EnvironmentInodePolicy.require(files.read().equals(request));
                 var terminal = BackupUnitTermination.create(root, snapshot);
                 var backupCycle = MorningBackupUnitCycle.create(root, snapshot, budget);
+                var configCompletion =
+                    new java.util.concurrent.atomic.AtomicReference<MorningBackupCompletion>();
                 var backupOutcome =
-                    backupCycle.execute(
+                    backupCycle.executeObserved(
                         () -> {
                           budget.requireWithin();
                           root.recheck(snapshot);
@@ -95,15 +97,29 @@ public final class MorningProcessMain {
                           root.recheck(snapshot);
                           original.verify();
                         },
-                        outcome -> {
+                        (outcome, actualReceipt) -> {
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
                           if (request.verification().isPresent()
                               && outcome != MorningBackupUnitCycle.Outcome.SUCCESS)
                             throw new IOException("Prior backup verification unavailable");
-                          completeObservedBackup(
-                              outcome, begins, database, java.time.Clock.systemUTC(), completion);
+                          EnvironmentInodePolicy.require(files.read().equals(request));
+                          configCompletion.set(
+                              MorningBackupCompletion.complete(
+                                  outcome,
+                                  actualReceipt,
+                                  begins,
+                                  database,
+                                  java.time.Clock.systemUTC(),
+                                  completion,
+                                  snapshot.invocation(),
+                                  () -> {
+                                    budget.requireWithin();
+                                    root.recheck(snapshot);
+                                    original.verify();
+                                    return budget.remainingNanos();
+                                  }));
                           budget.requireWithin();
                           root.recheck(snapshot);
                           original.verify();
@@ -114,6 +130,9 @@ public final class MorningProcessMain {
                         : begins.database().skipped()
                             ? MorningBackupRetention.Mode.REUSED_SUCCESS
                             : MorningBackupRetention.Mode.NEW_SUCCESS;
+                var backupCompleted =
+                    Objects.requireNonNull(
+                        configCompletion.get(), "actual parent CONFIG completion");
                 return MorningBackupRetention.use(
                     retentionMode,
                     backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS
@@ -248,12 +267,32 @@ public final class MorningProcessMain {
                               initialStop,
                               previousBroker);
                       retention.recheck();
+                      backupCompleted.recheck();
                       var retentionFrame =
                           MorningGateEvidence.retention(
                               epoch,
                               snapshot.invocation(),
                               broker.invocation(),
                               retention.result());
+                      var prestartFrame =
+                          MorningPrestartEvidence.encode(
+                              epoch,
+                              broker.invocation(),
+                              backupCompleted,
+                              cleanup,
+                              expiry,
+                              retention.result().currentSha256,
+                              java.util.Map.of(
+                                  "POSTGRES",
+                                  postgresFrame,
+                                  "RELEASE_BOM",
+                                  releaseFrame,
+                                  "STOP_SET",
+                                  stopFrame,
+                                  "BROKER_OPS",
+                                  brokerFrame,
+                                  "BACKUP_RETENTION",
+                                  retentionFrame));
                       release.recheckConfigurations(configurations);
                       startupRoots.recheck(actualRoots);
                       database.recheckPermitDatabase(actualDatabase, issuerOwner);

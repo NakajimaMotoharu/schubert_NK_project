@@ -14,6 +14,258 @@ import org.junit.jupiter.api.Test;
  */
 final class MorningBackupUnitCycleTest {
   @Test
+  void isscomp010ChangedStoppedProofBeforeRetirementRetainsOwnership() throws Exception {
+    var actual = ExpiryReceiptFixture.backupReceipt(0);
+    var changed = ExpiryReceiptFixture.backupReceipt(0, "8".repeat(32));
+    var checks = new java.util.concurrent.atomic.AtomicInteger();
+    var completed = new java.util.concurrent.atomic.AtomicInteger();
+    var start = new StartAttempt();
+    var cycle =
+        new MorningBackupUnitCycle(
+            () -> {},
+            new MorningBackupUnitCycle.Receipt() {
+              public Object capture() {
+                return "baseline";
+              }
+
+              public boolean freshZero(Object baseline) {
+                return true;
+              }
+
+              public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object baseline) {
+                return Optional.of(actual);
+              }
+
+              public BackupUnitReceiptGate.TerminalReceipt stopped(
+                  Object baseline, BackupUnitReceiptGate.TerminalReceipt before) {
+                assertSame(actual, before);
+                return checks.incrementAndGet() == 1 ? actual : changed;
+              }
+            },
+            () -> start,
+            StopAttempt::new,
+            () -> true,
+            () -> fail("no wait"),
+            () -> {
+              throw new Retained();
+            },
+            budget());
+    assertThrows(
+        Retained.class,
+        () ->
+            cycle.executeObserved(
+                () -> fail("changed proof cannot retire"),
+                (outcome, receipt) -> {
+                  assertSame(actual, receipt);
+                  completed.incrementAndGet();
+                }));
+    assertEquals(1, completed.get());
+    assertEquals(2, checks.get());
+    assertEquals(0, start.retire);
+  }
+
+  @Test
+  void isscomp008ActualGcAfterExplicitStopDoesNotEraseTheObservedResult() throws Exception {
+    for (int code : List.of(0, 30)) {
+      String cold =
+          "Id=schubert-nk-backup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nInvocationID=\nExecMainCode=0\nExecMainStatus=0\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=yes\nKillMode=control-group\nSendSIGKILL=no\n";
+      var wire = new java.util.concurrent.atomic.AtomicReference<>(cold);
+      var state =
+          new java.util.concurrent.atomic.AtomicReference<>(
+              InspectorUnitSnapshot.parse(
+                  cold.getBytes(java.nio.charset.StandardCharsets.US_ASCII),
+                  InspectorUnitSnapshot.Target.BACKUP));
+      var gate =
+          new BackupUnitReceiptGate(
+              () -> {}, () -> Optional.of(state.get()), () -> Optional.of(state.get()));
+      var start = new StartAttempt();
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              new MorningBackupUnitCycle.Receipt() {
+                public Object capture() throws IOException {
+                  return gate.capture();
+                }
+
+                public boolean freshZero(Object b) {
+                  throw new AssertionError();
+                }
+
+                public Optional<MorningBackupUnitCycle.Outcome> terminal(Object b) {
+                  String actual =
+                      cold.replace("InvocationID=\n", "InvocationID=" + "9".repeat(32) + "\n")
+                          .replace("ExecMainCode=0", "ExecMainCode=1")
+                          .replace("ExecMainStatus=0", "ExecMainStatus=" + code)
+                          .replace(
+                              "ExecMainStartTimestampMonotonic=0",
+                              "ExecMainStartTimestampMonotonic=1000000")
+                          .replace(
+                              "ExecMainExitTimestampMonotonic=0",
+                              "ExecMainExitTimestampMonotonic=2000000");
+                  if (code != 0)
+                    actual =
+                        actual
+                            .replace("ActiveState=inactive", "ActiveState=failed")
+                            .replace("SubState=dead", "SubState=failed")
+                            .replace("Result=success", "Result=exit-code");
+                  wire.set(actual);
+                  state.set(
+                      InspectorUnitSnapshot.parse(
+                          actual.getBytes(java.nio.charset.StandardCharsets.US_ASCII),
+                          InspectorUnitSnapshot.Target.BACKUP));
+                  return Optional.of(
+                      code == 0
+                          ? MorningBackupUnitCycle.Outcome.SUCCESS
+                          : MorningBackupUnitCycle.Outcome.FAILED);
+                }
+
+                public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object b)
+                    throws IOException {
+                  return gate.observeResult((BackupUnitReceiptGate.Baseline) b);
+                }
+
+                public BackupUnitReceiptGate.TerminalReceipt stopped(
+                    Object b, BackupUnitReceiptGate.TerminalReceipt before) throws IOException {
+                  gate.requireStoppedResult((BackupUnitReceiptGate.Baseline) b, before);
+                  return before;
+                }
+              },
+              () -> start,
+              () -> {
+                wire.set(cold);
+                state.set(
+                    InspectorUnitSnapshot.parse(
+                        cold.getBytes(java.nio.charset.StandardCharsets.US_ASCII),
+                        InspectorUnitSnapshot.Target.BACKUP));
+                return new StopAttempt();
+              },
+              () -> true,
+              () -> fail("no wait"),
+              () -> {
+                throw new Retained();
+              },
+              budget());
+      var calls = new java.util.concurrent.atomic.AtomicInteger();
+      assertEquals(
+          code == 0
+              ? MorningBackupUnitCycle.Outcome.SUCCESS
+              : MorningBackupUnitCycle.Outcome.FAILED,
+          cycle.executeObserved(
+              () -> {},
+              (outcome, receipt) -> {
+                assertEquals(code, receipt.exitCode());
+                calls.incrementAndGet();
+              }));
+      assertEquals(1, calls.get());
+      assertEquals(1, start.retire);
+      assertEquals(code, cycle.completedReceipt().exitCode());
+    }
+  }
+
+  @Test
+  void isscomp006StoppedObservedReceiptReachesCompletionBeforeRetirement() throws Exception {
+    for (int code : List.of(0, 30)) {
+      var actual = ExpiryReceiptFixture.backupReceipt(code);
+      var start = new StartAttempt();
+      var events = new ArrayList<String>();
+      var outcome =
+          code == 0
+              ? MorningBackupUnitCycle.Outcome.SUCCESS
+              : MorningBackupUnitCycle.Outcome.FAILED;
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              new MorningBackupUnitCycle.Receipt() {
+                public Object capture() {
+                  return "actual-baseline";
+                }
+
+                public boolean freshZero(Object b) {
+                  throw new AssertionError();
+                }
+
+                public Optional<MorningBackupUnitCycle.Outcome> terminal(Object b) {
+                  return Optional.of(outcome);
+                }
+
+                public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object b) {
+                  return Optional.of(actual);
+                }
+
+                public BackupUnitReceiptGate.TerminalReceipt stopped(
+                    Object b, BackupUnitReceiptGate.TerminalReceipt before) {
+                  assertEquals("actual-baseline", b);
+                  assertSame(actual, before);
+                  events.add("post-stop-actual");
+                  return actual;
+                }
+              },
+              () -> start,
+              () -> {
+                events.add("stop");
+                return new StopAttempt();
+              },
+              () -> true,
+              () -> fail("no wait"),
+              () -> {
+                throw new Retained();
+              },
+              budget());
+      assertEquals(
+          outcome,
+          cycle.executeObserved(
+              () -> events.add("retire-proof"),
+              (value, receipt) -> {
+                assertEquals(outcome, value);
+                assertSame(actual, receipt);
+                assertEquals(0, start.retire);
+                events.add("parent-config");
+              }));
+      assertEquals(
+          List.of("stop", "post-stop-actual", "parent-config", "post-stop-actual", "retire-proof"),
+          events);
+      assertSame(actual, cycle.completedReceipt());
+      assertEquals(1, start.retire);
+      assertThrows(NullPointerException.class, () -> cycle.executeObserved(() -> {}, null));
+    }
+    for (boolean missing : List.of(true, false)) {
+      var start = new StartAttempt();
+      var actual = ExpiryReceiptFixture.backupReceipt(0);
+      var cycle =
+          new MorningBackupUnitCycle(
+              () -> {},
+              new MorningBackupUnitCycle.Receipt() {
+                public Object capture() {
+                  return "baseline";
+                }
+
+                public boolean freshZero(Object b) {
+                  return true;
+                }
+
+                public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object b) {
+                  return missing ? Optional.empty() : Optional.of(actual);
+                }
+              },
+              () -> start,
+              StopAttempt::new,
+              () -> true,
+              () -> fail("no wait"),
+              () -> {
+                throw new Retained();
+              },
+              budget());
+      assertThrows(
+          Retained.class,
+          () ->
+              cycle.executeObserved(
+                  () -> fail("no retire"),
+                  (value, receipt) -> fail("missing actual stopped receipt")));
+      assertEquals(0, start.retire);
+    }
+  }
+
+  @Test
   void bucycle008KnownFailureCompletesBeforeProofAndMarkerRetirement() throws Exception {
     for (boolean completionFails : List.of(false, true)) {
       var events = new ArrayList<String>();

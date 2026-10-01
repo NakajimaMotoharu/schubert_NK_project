@@ -168,6 +168,33 @@ final class MorningDatabaseSessionTest {
               assertThrows(
                   IOException.class, () -> session.completeReusedBackup(prior, manifest, observed));
               session.completeReusedBackup(skipped, manifest, observed.plusSeconds(1));
+              var observedPair =
+                  session.observeBackup(
+                      skipped,
+                      Optional.of(manifest),
+                      observed.plusSeconds(1),
+                      () -> 10_000_000_000L);
+              assertEquals(
+                  List.of(skipped.database(), skipped.configuration()),
+                  observedPair.current().stream()
+                      .map(BackupStepRepository.Terminal::attempt)
+                      .toList());
+              assertEquals(
+                  List.of(prior.database(), prior.configuration()),
+                  observedPair.prior().stream()
+                      .map(BackupStepRepository.Terminal::attempt)
+                      .toList());
+              assertEquals(26, observedPair.prior().get(0).result().bytes());
+              assertEquals(67, observedPair.prior().get(1).result().bytes());
+              assertEquals(Optional.empty(), observedPair.prior().get(0).errorCode());
+              assertThrows(
+                  IOException.class,
+                  () ->
+                      session.observeBackup(
+                          prior,
+                          Optional.of(manifest),
+                          observed.plusSeconds(1),
+                          () -> 10_000_000_000L));
               assertTrue(session.retainedBackupSuccessful(manifest, observed.plusSeconds(1)));
               assertThrows(
                   NullPointerException.class,
@@ -239,6 +266,30 @@ final class MorningDatabaseSessionTest {
                   begins.configuration());
           assertThrows(IOException.class, () -> session.failBackup(wrong, ended, failed, failed));
           session.failBackup(begins, ended, failed, failed);
+          var pair = session.observeBackup(begins, Optional.empty(), ended, () -> 10_000_000_000L);
+          assertTrue(pair.prior().isEmpty());
+          assertEquals(2, pair.current().size());
+          for (var row : pair.current()) {
+            assertEquals(ended, row.ended());
+            assertEquals(failed, row.result());
+            assertEquals(Optional.of("COMMAND_FAILURE"), row.errorCode());
+            assertEquals(Optional.of("batch command failed"), row.errorSummary());
+          }
+          assertThrows(
+              IOException.class,
+              () -> session.observeBackup(wrong, Optional.empty(), ended, () -> 10_000_000_000L));
+          assertThrows(
+              NullPointerException.class,
+              () -> session.observeBackup(null, Optional.empty(), ended, () -> 10_000_000_000L));
+          assertThrows(
+              NullPointerException.class,
+              () -> session.observeBackup(begins, null, ended, () -> 10_000_000_000L));
+          assertThrows(
+              NullPointerException.class,
+              () -> session.observeBackup(begins, Optional.empty(), null, () -> 10_000_000_000L));
+          assertThrows(
+              NullPointerException.class,
+              () -> session.observeBackup(begins, Optional.empty(), ended, null));
           assertThrows(IOException.class, () -> session.failBackup(begins, ended, failed, failed));
           var observed = session.failedBackupSnapshot(begins, () -> 10_000_000_000L);
           assertEquals(begins.database(), observed.database());

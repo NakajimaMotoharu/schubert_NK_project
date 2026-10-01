@@ -21,6 +21,86 @@ public final class BackupStepRepository {
   private final RunReferenceRepository references;
   private final BatchRunRepository steps;
 
+  /** SSC134: complete observed terminal row, data only; never a producer/owner capability. */
+  public record Terminal(
+      BatchStepAttempt attempt,
+      Instant ended,
+      BatchStepResult result,
+      Optional<String> errorCode,
+      Optional<String> errorSummary) {
+    public Terminal {
+      Objects.requireNonNull(attempt);
+      Objects.requireNonNull(ended);
+      Objects.requireNonNull(result);
+      Objects.requireNonNull(errorCode);
+      Objects.requireNonNull(errorSummary);
+      BatchStepAttempt.time(attempt.run(), ended);
+      if (!attempt.step().backup()
+          || ended.isBefore(attempt.startedAt())
+          || attempt.skipped() != (result.status() == BatchStepResult.Status.SKIPPED)
+          || !errorCode.equals(Optional.ofNullable(result.reason().code()))
+          || !errorSummary.equals(Optional.ofNullable(result.reason().summary())))
+        throw new IllegalArgumentException("invalid observed Backup terminal");
+    }
+
+    @Override
+    public String toString() {
+      return "BackupTerminal[actual=<redacted>]";
+    }
+  }
+
+  /** Read all fourteen columns before parsing; unknown JDBC failures are not data errors. */
+  public static Terminal readTerminal(ResultSet row, BatchStepAttempt expected, Instant now)
+      throws SQLException {
+    Objects.requireNonNull(row);
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(now);
+    long id = present(row.getObject("id", Long.class));
+    UUID run = present(row.getObject("run_id", UUID.class));
+    LocalDate date = present(row.getObject("business_date", LocalDate.class));
+    String step = present(row.getString("step"));
+    int number = present(row.getObject("attempt", Integer.class));
+    Instant started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
+    Instant ended = present(row.getObject("ended_at", OffsetDateTime.class)).toInstant();
+    String status = present(row.getString("status"));
+    long target = present(row.getObject("target_count", Long.class));
+    long success = present(row.getObject("success_count", Long.class));
+    long failure = present(row.getObject("failure_count", Long.class));
+    long bytes = present(row.getObject("byte_count", Long.class));
+    var code = Optional.ofNullable(row.getString("error_code"));
+    var summary = Optional.ofNullable(row.getString("error_summary"));
+    require(
+        id == expected.id()
+            && run.equals(expected.run().id())
+            && date.equals(expected.businessDate())
+            && step.equals(expected.step().name())
+            && number == expected.attempt()
+            && started.equals(expected.startedAt())
+            && !ended.isAfter(now));
+    try {
+      var result =
+          new BatchStepResult(
+              BatchStepResult.Status.valueOf(status),
+              target,
+              success,
+              failure,
+              bytes,
+              code.map(BatchStepResult.Reason::valueOf).orElse(BatchStepResult.Reason.NONE));
+      var actual =
+          new BatchStepAttempt(
+              id,
+              expected.run(),
+              expected.step(),
+              number,
+              started,
+              result.status() == BatchStepResult.Status.SKIPPED);
+      require(actual.equals(expected));
+      return new Terminal(actual, ended, result, code, summary);
+    } catch (IllegalArgumentException invalidData) {
+      throw new SQLDataException("Backup terminal data invalid");
+    }
+  }
+
   public BackupStepRepository(Connection connection) {
     this.connection = Objects.requireNonNull(connection, "parent connection");
     references = new RunReferenceRepository(connection);

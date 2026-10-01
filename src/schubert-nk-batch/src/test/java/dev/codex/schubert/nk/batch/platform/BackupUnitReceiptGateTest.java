@@ -11,6 +11,153 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343 fixed 18-field vectors; no real Unit start or fabricated kernel acceptance. */
 final class BackupUnitReceiptGateTest {
+  @Test
+  void isscomp009StoppedGcRetainsRealZeroAndNonZeroButRejectsPartialAndForeignState()
+      throws Exception {
+    String cold =
+        "Id=schubert-nk-backup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nInvocationID=\nExecMainCode=0\nExecMainStatus=0\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=yes\nKillMode=control-group\nSendSIGKILL=no\n";
+    for (int code : List.of(0, 30)) {
+      var actual = new java.util.concurrent.atomic.AtomicReference<>(oldState());
+      var kernel =
+          new java.util.concurrent.atomic.AtomicReference<Optional<InspectorUnitSnapshot>>();
+      var drift = new java.util.concurrent.atomic.AtomicBoolean();
+      var reads = new java.util.concurrent.atomic.AtomicInteger();
+      var unknown = new java.util.concurrent.atomic.AtomicReference<RuntimeException>();
+      var gate =
+          new BackupUnitReceiptGate(
+              () -> {},
+              () -> {
+                if (unknown.get() != null) throw unknown.get();
+                return Optional.of(
+                    drift.get() && reads.incrementAndGet() > 1 ? oldState() : actual.get());
+              },
+              () -> kernel.get() == null ? Optional.of(actual.get()) : kernel.get());
+      var baseline = gate.capture();
+      actual.set(
+          state(
+              FRESH,
+              code == 0 ? "active" : "failed",
+              code == 0 ? "exited" : "failed",
+              "",
+              "0",
+              "1",
+              Integer.toString(code),
+              code == 0 ? "success" : "exit-code"));
+      var receipt = gate.observeResult(baseline).orElseThrow();
+      actual.set(
+          InspectorUnitSnapshot.parse(
+              cold.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP));
+      gate.requireStoppedResult(baseline, receipt);
+      assertEquals(code, receipt.exitCode());
+      assertEquals(FRESH, receipt.invocation().toString().replace("-", ""));
+      actual.set(
+          state(
+              FRESH,
+              "inactive",
+              "dead",
+              "",
+              "0",
+              "1",
+              Integer.toString(code),
+              code == 0 ? "success" : "exit-code"));
+      gate.requireStoppedResult(baseline, receipt);
+      List<String> corrupt =
+          List.of(
+              cold.replace(
+                  "ActiveState=inactive\nSubState=dead", "ActiveState=active\nSubState=exited"),
+              cold.replace("InvocationID=\n", "InvocationID=" + OTHER + "\n"),
+              cold.replace("ExecMainCode=0", "ExecMainCode=1"),
+              cold.replace("ExecMainStatus=0", "ExecMainStatus=1"),
+              cold.replace(
+                  "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1"),
+              cold.replace("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=1"),
+              cold.replace("Result=success", "Result=timeout"),
+              cold.replace("MainPID=0", "MainPID=99"),
+              cold.replace("Job=\n", "Job=99\n"));
+      for (String wire : corrupt) {
+        actual.set(
+            InspectorUnitSnapshot.parse(
+                wire.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP));
+        assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      }
+      String retained =
+          cold.replace("InvocationID=\n", "InvocationID=" + FRESH + "\n")
+              .replace("ExecMainCode=0", "ExecMainCode=1")
+              .replace("ExecMainStatus=0", "ExecMainStatus=" + code)
+              .replace(
+                  "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1234567")
+              .replace(
+                  "ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=2345678");
+      for (String wire :
+          List.of(
+              retained.replace(FRESH, OTHER),
+              retained.replace("ExecMainCode=1", "ExecMainCode=2"),
+              retained.replace("ExecMainStatus=" + code, "ExecMainStatus=" + (code + 1)),
+              retained.replace(
+                  "ExecMainStartTimestampMonotonic=1234567",
+                  "ExecMainStartTimestampMonotonic=1234568"),
+              retained.replace(
+                  "ExecMainExitTimestampMonotonic=2345678",
+                  "ExecMainExitTimestampMonotonic=2345679"),
+              retained.replace("Result=success", "Result=signal"),
+              retained.replace(
+                  "ActiveState=inactive\nSubState=dead", "ActiveState=active\nSubState=exited"))) {
+        actual.set(
+            InspectorUnitSnapshot.parse(
+                wire.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP));
+        assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      }
+      actual.set(
+          InspectorUnitSnapshot.parse(
+              cold.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP));
+      String foreignTarget =
+          cold.replace("schubert-nk-backup.service", "schubert-nk-expiry-cleanup.service");
+      actual.set(
+          InspectorUnitSnapshot.parse(
+              foreignTarget.getBytes(StandardCharsets.US_ASCII),
+              InspectorUnitSnapshot.Target.EXPIRY));
+      assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      actual.set(
+          InspectorUnitSnapshot.parse(
+              cold.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP));
+      kernel.set(Optional.empty());
+      assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      kernel.set(Optional.of(oldState()));
+      assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      kernel.set(null);
+      drift.set(true);
+      reads.set(0);
+      assertThrows(IOException.class, () -> gate.requireStoppedResult(baseline, receipt));
+      drift.set(false);
+      var changedBaseline = gate.capture();
+      assertThrows(IOException.class, () -> gate.requireStoppedResult(changedBaseline, receipt));
+      var otherGate =
+          new BackupUnitReceiptGate(
+              () -> {}, () -> Optional.of(oldState()), () -> Optional.of(oldState()));
+      assertThrows(
+          IOException.class, () -> gate.requireStoppedResult(otherGate.capture(), receipt));
+      assertThrows(IOException.class, () -> otherGate.requireStoppedResult(baseline, receipt));
+      var cleanupGate =
+          new BackupUnitReceiptGate(
+              () -> {},
+              () -> Optional.of(oldState()),
+              () -> Optional.of(oldState()),
+              BackupUnitStartClient.Target.CLEANUP);
+      assertThrows(IOException.class, () -> cleanupGate.requireStoppedResult(baseline, receipt));
+      assertThrows(
+          IOException.class,
+          () -> gate.requireStoppedResult(baseline, ExpiryReceiptFixture.receipt(0)));
+      assertThrows(NullPointerException.class, () -> gate.requireStoppedResult(null, receipt));
+      assertThrows(NullPointerException.class, () -> gate.requireStoppedResult(baseline, null));
+      var failure = new NullPointerException("PRIVATE_PROGRAMMING");
+      unknown.set(failure);
+      assertSame(
+          failure,
+          assertThrows(
+              NullPointerException.class, () -> gate.requireStoppedResult(baseline, receipt)));
+    }
+  }
+
   private static final String OLD = "123456789abcdef08123456789abcdef";
   private static final String FRESH = "fedcba98765432100123456789abcdef";
   private static final String OTHER = "102030405060708090a0b0c0d0e0f001";

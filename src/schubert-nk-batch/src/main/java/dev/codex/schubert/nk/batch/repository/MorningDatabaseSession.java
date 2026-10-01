@@ -91,6 +91,46 @@ public final class MorningDatabaseSession {
     }
   }
 
+  /** SSC134 data only: current full rows and separately retained original SUCCESS rows. */
+  public record BackupObservation(
+      List<BackupStepRepository.Terminal> current, List<BackupStepRepository.Terminal> prior) {
+    public BackupObservation {
+      current = List.copyOf(current);
+      prior = List.copyOf(prior);
+      if (current.size() != 2 || (!prior.isEmpty() && prior.size() != 2))
+        throw new IllegalArgumentException("Backup observation pair incomplete");
+      if (current.get(0).attempt().id() == current.get(1).attempt().id()
+          || !current.get(0).attempt().startedAt().equals(current.get(1).attempt().startedAt())
+          || !current.get(0).ended().equals(current.get(1).ended())
+          || current.get(0).result().status() != current.get(1).result().status())
+        throw new IllegalArgumentException("Backup observation pair inconsistent");
+      for (int index = 0; index < 2; index++) {
+        var row = current.get(index);
+        if (row.attempt().step() != (index == 0 ? BatchStep.BACKUP_DB : BatchStep.BACKUP_CONFIG)
+            || !row.attempt().run().equals(current.getFirst().attempt().run())
+            || row.attempt().skipped() != !prior.isEmpty())
+          throw new IllegalArgumentException("Backup observation binding invalid");
+        if (!prior.isEmpty()) {
+          var original = prior.get(index);
+          if (row.result().reason() != BatchStepResult.Reason.ALREADY_SUCCESSFUL
+              || !row.ended().equals(row.attempt().startedAt())
+              || original.result().status() != BatchStepResult.Status.SUCCESS
+              || original.attempt().step() != row.attempt().step()
+              || !original.attempt().run().equals(row.attempt().run())
+              || original.attempt().id() == row.attempt().id()
+              || original.attempt().attempt() >= row.attempt().attempt()
+              || original.ended().isAfter(row.attempt().startedAt()))
+            throw new IllegalArgumentException("Backup original reference invalid");
+        }
+      }
+    }
+
+    @Override
+    public String toString() {
+      return "BackupObservation[actual=<redacted>]";
+    }
+  }
+
   /** Current committed attempt and separate original audit. Claims confer no callback authority. */
   public record ExpiryBegins(
       BatchStepAttempt current, Optional<ExpiryAuditRepository.Prior> prior) {
@@ -218,6 +258,15 @@ public final class MorningDatabaseSession {
         Instant endedAt,
         BatchStepResult database,
         BatchStepResult configuration)
+        throws IOException {
+      throw unavailable();
+    }
+
+    default BackupObservation observeBackup(
+        BackupBegins expected,
+        Optional<BackupManifest> actual,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
         throws IOException {
       throw unavailable();
     }
@@ -583,6 +632,95 @@ public final class MorningDatabaseSession {
     private volatile boolean cleanupVerified;
     private volatile boolean expiryHandoffStarted;
     private @Nullable ExpiryBegins expiryBegins;
+
+    @Override
+    public BackupObservation observeBackup(
+        BackupBegins expected,
+        Optional<BackupManifest> actual,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+        throws IOException {
+      Objects.requireNonNull(expected);
+      Objects.requireNonNull(actual);
+      Objects.requireNonNull(now);
+      Objects.requireNonNull(owner);
+      guard();
+      if (!backupFinished || !expected.equals(backupBegins) || inHandoff) throw unavailable();
+      try {
+        if (!connection.getAutoCommit() || connection.isReadOnly() || !scalar(connection, HELD))
+          throw unavailable();
+        connection.setAutoCommit(false);
+        new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
+        var current = observeBackupPair(expected, now);
+        List<BackupStepRepository.Terminal> prior = List.of();
+        if (expected.database().skipped()) {
+          var manifest = actual.orElseThrow(() -> unavailable());
+          if (!manifest.equals(reusedManifest)
+              || new BackupStepRepository(connection).inspect(manifest, now).isEmpty())
+            throw unavailable();
+          prior =
+              observeBackupPair(
+                  new BackupBegins(manifest.databaseStep(), manifest.configurationStep()), now);
+        } else if (actual.isPresent()) {
+          var manifest = actual.orElseThrow();
+          if (!manifest.databaseStep().equals(expected.database())
+              || !manifest.configurationStep().equals(expected.configuration())
+              || new BackupStepRepository(connection).inspect(manifest, now).isEmpty())
+            throw unavailable();
+        } else {
+          var failed =
+              new BatchStepResult(
+                  BatchStepResult.Status.FAILED,
+                  1,
+                  0,
+                  1,
+                  0,
+                  BatchStepResult.Reason.COMMAND_FAILURE);
+          if (backupFailureEnded == null
+              || current.stream()
+                  .anyMatch(
+                      row ->
+                          !row.result().equals(failed) || !row.ended().equals(backupFailureEnded)))
+            throw unavailable();
+        }
+        var observed = new BackupObservation(current, prior);
+        guard();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        if (!scalar(connection, HELD)) throw unavailable();
+        return observed;
+      } catch (SQLException | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        throw unavailable();
+      }
+    }
+
+    private List<BackupStepRepository.Terminal> observeBackupPair(
+        BackupBegins expected, Instant now) throws SQLException {
+      require(expected.database().id() != expected.configuration().id());
+      boolean databaseFirst = expected.database().id() < expected.configuration().id();
+      return query(
+          connection,
+          "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
+              + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
+              + " from schubert.batch_runs where id in (?,?) order by id for update",
+          statement -> {
+            statement.setLong(1, expected.database().id());
+            statement.setLong(2, expected.configuration().id());
+          },
+          rows -> {
+            require(rows.next());
+            var first =
+                BackupStepRepository.readTerminal(
+                    rows, databaseFirst ? expected.database() : expected.configuration(), now);
+            require(rows.next());
+            var second =
+                BackupStepRepository.readTerminal(
+                    rows, databaseFirst ? expected.configuration() : expected.database(), now);
+            require(!rows.next());
+            return databaseFirst ? List.of(first, second) : List.of(second, first);
+          });
+    }
 
     private Session(Connection connection) {
       this.connection = connection;

@@ -126,6 +126,8 @@ Artemis以降を開始しない。
 
 ### 5.1 許可発行の実観測集合（SSC108、PG379、実装前）
 
+SSC134：十段CONFIG根拠は親の実bundle完成判定の終端とする。新規成功・実成功再用・真正worker非0のすべてで親操作を呼び、非0時は同owner/同begin/request/原本/INVALID/元期限/明示stop/全終端を確認して完成拒否と両FAILED記録を確定、archive公開なし。commit後の独立現在pair全14列、再用時元SUCCESS全14列を保持する。未知/未呼出し/読戻し不明はCONFIG closureを作れずpermit不可。local0は完成判定操作が正常終端した事実だけを表し、business FAILEDを成功化しない。具体byte/参照/hash/非任意証拠の契約はSS343§6.17。六実削除SKIP・Transfer/Expiry実続行・全必須工程後の起動継続は不変更。
+
 SSC115（実装前、2026-09-30）：親の実Backup結果callbackは正常fresh非0/明示stop/全終端の後だけ既存両beginを固定COMMAND_FAILUREで原子的FAILED確定・独立再読する。worker試行済bundle不成立の両開始済stepを記録するのであり未実行featureをFAILEDに代用しない。archive/MANIFEST生成や過去成功の採用は行わない。原本/current/request/終端再証明→request→最後にintent退役の順はSUCCESSと共通。不明/timeout/signal/結果commit不明は隔離を維持。後続未結線の途中Mainは30のままで起動成功/permitを偽装しない。BUSINESS/TECHNICAL SKIPPEDと独立Transfer/Expiryは実後続工程で記録・実行する。
 
 `roots_sha256`/`prestart_steps_sha256`はSS343§6.17のcanonical実観測のSHA-256とする。親は同一M/A、原本activation、DB session、現boot、新INVALID Epochを保持し、必要な全10stepの完全attemptとcommit後readbackを収集する。原本・root・currentの安全条件違反、UNKNOWN、欠落、未実行はdigest作成/許可発行を拒否する。

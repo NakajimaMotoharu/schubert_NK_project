@@ -261,6 +261,31 @@ public final class InspectorUnitSnapshot {
     return new BigInteger(value("ExecMainExitTimestampMonotonic"));
   }
 
+  /** SSC135: complete manager GC only, never an execution result or receipt zero. */
+  boolean coldStopped() {
+    return inactiveBaseline()
+        && value("InvocationID").isEmpty()
+        && value("ExecMainCode").equals("0")
+        && value("ExecMainStatus").equals("0")
+        && value("ExecMainStartTimestampMonotonic").equals("0")
+        && value("ExecMainExitTimestampMonotonic").equals("0")
+        && value("Result").equals("success");
+  }
+
+  /** Same five real execution values despite the legitimate stop state transition. */
+  boolean sameStoppedExecution(InspectorUnitSnapshot before) {
+    return Set.of("inactive/dead", "failed/failed")
+            .contains(value("ActiveState") + "/" + value("SubState"))
+        && Set.of("success", "exit-code").contains(value("Result"))
+        && value("ExecMainCode").equals("1")
+        && value("InvocationID").equals(before.value("InvocationID"))
+        && value("ExecMainStatus").equals(before.value("ExecMainStatus"))
+        && value("ExecMainStartTimestampMonotonic")
+            .equals(before.value("ExecMainStartTimestampMonotonic"))
+        && value("ExecMainExitTimestampMonotonic")
+            .equals(before.value("ExecMainExitTimestampMonotonic"));
+  }
+
   boolean inactiveBaseline() {
     return value("ActiveState").equals("inactive")
         && value("SubState").equals("dead")

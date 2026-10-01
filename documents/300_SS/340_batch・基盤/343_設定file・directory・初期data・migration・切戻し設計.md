@@ -569,6 +569,8 @@ SSC106/092の「receipt0だけでmarker退役」はSS341§5.1の真正FAILED経�
 
 SSC134実装前補足：CONFIGは親の実config/credential bundle完成判定である。成功では既存archive/publish/DB確定、再用では実bundle/元成功pair再検証、真正worker非0では同ownerの実子receipt・明示stop・全終端・同request/begin/原本/INVALID/元期限を照合して上流失敗による完成拒否を確定する。失敗時archive/MANIFESTを生成しない。両開始済stepのFAILED記録はSSC115のbundle不成立として維持するが、この親操作を実呼出しせずCONFIG終端0を捏造しない。commit後の別transactionで現在pair全14列（id/run_id/business_date/step/attempt/started_at/ended_at/status/target_count/success_count/failure_count/byte_count/error_code/error_summary）を実読戻しし、再用は元SUCCESS pair全14列も独立保持する。操作・照合・readbackの全正常完了だけが同Morning Invocationの非任意CONFIG closure/local0を作れる。business FAILEDと完成判定操作の正常終端は別で、子非0をCONFIGへ転載しない。未知IO/close/SQL/期限/未実行/旧receiptではclosure不可。ALREADY_SUCCESSFULのBackup referenceのartifact_sha256は同実検証bundleのMANIFEST raw byte SHA-256、今回SKIPと元SUCCESSのrow/attemptを別保持する。六実SKIP/実Transfer/Expiry/全必須工程後の起動継続は不変更。
 
+SSC135/BUG388：明示停止後は保持した停止前fresh真正Backup receiptに、同ownerのstop client正常終了・固定Unit全kernel終端・manager/kernel/manager一致を束縛する。全18fieldの完全GC cold（inactive/dead/Resultsuccess/Invocation空/code・status・start・end0/PID・Job空）は実結果未観測で、当回receiptを0で再生成しない。残存managerは同Invocation/normalCode1/実exit/start/endと全終端を再照合する。部分cold/別世代/変質/未知/signal/未stopは受理しない。M/A/原本/intent/同budget保持を途切れさせず、KEEP_ACTIVEは従来同fresh receiptの厳密再読を維持する。SS341§5.1の真正非0後の両FAILED/六SKIP/実後続とCONFIG完成判定もこの別停止証明を用いる。
+
 ## 7. 環境差分
 
 

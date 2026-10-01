@@ -47,6 +47,13 @@ public final class MorningBackupUnitCycle {
     void complete(BackupUnitReceiptGate.TerminalReceipt receipt) throws IOException;
   }
 
+  /** Same stopped child, delivered inside M/A before any request/intent retirement. SSC134. */
+  @FunctionalInterface
+  public interface BackupCompletion {
+    void complete(Outcome outcome, BackupUnitReceiptGate.TerminalReceipt receipt)
+        throws IOException;
+  }
+
   @FunctionalInterface
   public interface ParentProof {
     void verify() throws IOException;
@@ -73,6 +80,11 @@ public final class MorningBackupUnitCycle {
 
     default void requirePresent(BackupUnitReceiptGate.TerminalReceipt receipt) throws IOException {
       throw new IOException("typed receipt unavailable");
+    }
+
+    default BackupUnitReceiptGate.TerminalReceipt stopped(
+        Object baseline, BackupUnitReceiptGate.TerminalReceipt before) throws IOException {
+      throw new IOException("stopped Backup receipt unavailable");
     }
   }
 
@@ -194,6 +206,12 @@ public final class MorningBackupUnitCycle {
               throws IOException {
             receipt.requireStillPresent(value);
           }
+
+          public BackupUnitReceiptGate.TerminalReceipt stopped(
+              Object baseline, BackupUnitReceiptGate.TerminalReceipt before) throws IOException {
+            receipt.requireStoppedResult((BackupUnitReceiptGate.Baseline) baseline, before);
+            return before;
+          }
         },
         () -> {
           var attempt = start.start();
@@ -281,6 +299,32 @@ public final class MorningBackupUnitCycle {
 
   /** Result completion and request retirement occur under M/A BEFORE marker retirement. */
   public Outcome execute(ParentProof originalAndRequest, Completion completion) throws IOException {
+    Objects.requireNonNull(completion, "same-owner Backup completion");
+    return executeBackup(
+        originalAndRequest, (outcome, actual) -> completion.complete(outcome), false);
+  }
+
+  public Outcome executeObserved(ParentProof originalAndRequest, BackupCompletion completion)
+      throws IOException {
+    Objects.requireNonNull(completion, "actual Backup completion");
+    return executeBackup(
+        originalAndRequest,
+        (outcome, actual) ->
+            completion.complete(
+                outcome,
+                actual.orElseThrow(() -> new IOException("actual Backup receipt unavailable"))),
+        true);
+  }
+
+  @FunctionalInterface
+  private interface BackupResult {
+    void complete(Outcome outcome, Optional<BackupUnitReceiptGate.TerminalReceipt> actual)
+        throws IOException;
+  }
+
+  private Outcome executeBackup(
+      ParentProof originalAndRequest, BackupResult completion, boolean requireObserved)
+      throws IOException {
     if (target != BackupUnitStartClient.Target.BACKUP)
       throw new IOException("Backup phase required");
     Objects.requireNonNull(originalAndRequest, "same original and request proof");
@@ -313,13 +357,27 @@ public final class MorningBackupUnitCycle {
       budget.requireWithin();
       gate.recheck();
       if (!terminal.quiescent()) throw new Unresolved();
-      completion.complete(outcome);
+      var actual = observed.receipt();
+      if (requireObserved) {
+        var stoppedReceipt =
+            receipt.stopped(
+                baseline,
+                actual.orElseThrow(() -> new IOException("actual Backup receipt unavailable")));
+        actual = Optional.of(Objects.requireNonNull(stoppedReceipt, "stopped Backup receipt"));
+      }
+      final var completedActual = actual;
+      completion.complete(outcome, actual);
       budget.requireWithin();
       gate.recheck();
       attempt.retireAfter(
           () -> {
             budget.requireWithin();
             gate.recheck();
+            if (requireObserved) {
+              var held = completedActual.orElseThrow();
+              if (receipt.stopped(baseline, held) != held)
+                throw new IOException("actual stopped receipt changed");
+            }
             originalAndRequest.verify();
             if (!terminal.quiescent()) throw new IOException("Backup terminal unavailable");
             budget.requireWithin();
@@ -327,7 +385,7 @@ public final class MorningBackupUnitCycle {
           });
       budget.requireWithin();
       gate.recheck();
-      completed = observed.receipt();
+      completed = actual;
       outstanding = Optional.empty();
       return outcome;
     } catch (IOException | RuntimeException | Error unresolved) {

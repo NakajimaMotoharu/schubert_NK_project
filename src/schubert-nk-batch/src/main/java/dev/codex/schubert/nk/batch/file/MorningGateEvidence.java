@@ -505,7 +505,7 @@ public final class MorningGateEvidence {
     return encoded;
   }
 
-  private static StringBuilder header(
+  static StringBuilder header(
       String prefix, StartupPermitRecords.Epoch epoch, String morning, String broker)
       throws IOException {
     Objects.requireNonNull(epoch);

@@ -191,6 +191,31 @@ public final class BackupUnitReceiptGate {
       throw unavailable();
   }
 
+  /**
+   * SSC135: only the enclosing controller's confirmed explicit stop uses this path. The private
+   * before receipt already proved a fresh normal result; cold GC is a separate stopped condition,
+   * never a new zero result. No arbitrary target or earlier baseline can reuse that capability.
+   */
+  public void requireStoppedResult(Baseline baseline, TerminalReceipt before) throws IOException {
+    Objects.requireNonNull(baseline, "actual cycle baseline");
+    Objects.requireNonNull(before, "fresh result before explicit stop");
+    check();
+    if (target != BackupUnitStartClient.Target.BACKUP
+        || baseline.owner != this
+        || before.owner != this
+        || before.baseline != baseline) throw unavailable();
+    var first = present(known(probe.quiescent()));
+    var whole = present(known(terminal.quiescent()));
+    var after = present(known(probe.quiescent()));
+    check();
+    if (!first.isTarget(target.observation())
+        || !first.quiescent()
+        || !first.matches(whole)
+        || !first.matches(after)
+        || (!first.coldStopped() && !first.sameStoppedExecution(before.snapshot)))
+      throw unavailable();
+  }
+
   private Optional<InspectorUnitSnapshot> observe(Baseline baseline, boolean includeFailure)
       throws IOException {
     Objects.requireNonNull(baseline, "same-run Backup baseline");
