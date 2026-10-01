@@ -1,5 +1,13 @@
 # 処理sequence・method・例外・transaction設計
 
+PG/PT内部接続補足（SSC153154155、2026-10-01、実装前）：普通APIは31 requestとQWK/WebLog、全3consumer、専用Outbox lifecycleを実接続するまでready/A releaseを許さない。共通event portはguard検証済みactual delivery count・bounded transport ID・UTC受信時刻をQuestionへ渡す。Questionのcount-less呼出しをdelivery1と推測しない。
+
+QSBの元request ID M0はInbox source/async_job message_id/correlationであり、内部QWKの新UUID Wとは別。受付transactionはquestion/job/notification(type ACCEPTED/state RECEIVED)/PENDING work/QUESTION-bound NKREF1 success snapshotを一度だけcommitする。再送snapshot AADはM0、返信は新UUID/今request correlation、payload/受付時刻は保存値。応答成功は当該workの真正SENT確認後だけ。単調budgetはheader.sentAt+2秒と受信clock+2秒の早い期限の残量を受信時に固定し、既に遅い要求は受付前9000。commit後timeoutもfresh9000で既存COMPLETED/保存期間を変更しない。専用dispatcherへwakeし、DB connection/lockなしで残時間内に対象SENTを短い再観測する。共通processorをrequest thread内のJMS sendへ変えない。
+
+7日mutation Inbox保持後、retained question owner/tokenは永久重複防止を維持する。decoded canonical本文が異なる場合0105、同じでも元認証snapshotとSENT根拠がない場合9000とし、新question/job/work、Inbox alias、推測完了時刻を作らない。通常8時間tokenの再送契約は変更しない。Workerはanswer作成transaction内でquestion rowをlockし削除flag/時刻/actor三点をanswerへ継承する。
+
+最終一時失敗4回以降の業務DLQはdispatch UUID Dを新Outbox rowへ保存し、元QWK W/body/correlationを保持する。固定SS321 metadataをimmutable専用列へ保存、DB ERROR＋DLQ row commit→DのSENT→元ACK。ERROR再配送でDLQ PENDINGならACKせず確認を継続する。既存work SENT rowの書換え、duplicate W INSERT、未送信を成功化する代用を禁止する。STUB業務ERRORとprotocol fatalの既存別経路は維持する。UI213のFIFOは内部Queueの到着順であり、資料にない全利用者の受付timestamp順保証は追加しない。
+
 ## 1. 目的・追跡
 
 主要処理の呼出順、method契約、引数・戻り値、例外、PostgreSQL/JMS transaction境界とcrash pointを定める。

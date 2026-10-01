@@ -1,5 +1,7 @@
 # Artemis物理構成・JMS設定設計
 
+SSC151153155（PG/PT、2026-10-01）：既存物理SYNC_REQUEST/SYNC_REPLY_WEBはregistry-valid QSBREQ01 Q/A、QSBRSP01 S/Aも運ぶ（応答kindはUI232のSでありRではない）。他通常S/内部IとProtocolValidatorのexact profile/transport/route一致は維持、他layoutの偽Aや内部eventを許さない。全4API/Web送受信境界を同契約でPTする。内部QWKはguard済みactual delivery metadataをbusiness portへ渡す。業務最終QWK DLQだけは新Outbox dispatch UUID Dを_AMQ_DUPL_IDへ使い、body/header/NKMessageIDは元Wを保持する。元transport ID/count/error/detectedAtは不変列、元async address/queue/API_WORKは固定で§11 bounded propertyを構成する。通常workのduplicate ID＝Wは不変更。DB最終ERRORだけでは元ACKせず、対応DのSENTまで確認する。consumer/元body/秘密redaction/role/TTL/local transactionは緩めない。
+
 SSC146（BUG411/YKT328、PG/PT隔離認証fixture）：app login usernameはAPI=`nk_api`、Web=`nk_web`とし、それぞれ同名ACL roleへ一対一で対応付ける。roleは認可、username/passwordは認証の別概念であり、role名だけが正しくても別userのcredentialでは接続を許可しない。固定mq-api/mq-webを通常LoadCredentialで受領し、管理login/roleをappへ転用しない。既存Ops login schubert_ops→nk_ops、保守login schubert_maintenance→nk_mq_maintenanceは維持。ユーザ名aliasやpassword fallbackをProductionへ追加しない。fixtureの旧private設定を保存して限定配置/readback/実認証/誤user・誤credential・cross-role負系をPT297298に記録する。UI231のACL表・6Address/Queue・電文互換・秘密保管契約は不変更。
 
 ## 1. 目的・追跡・状態

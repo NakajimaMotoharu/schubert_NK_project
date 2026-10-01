@@ -1,5 +1,7 @@
 # DB物理・DDL・index・権限設計
 
+SSC152/155（PG/PT、2026-10-01、実装前）：notifications.stateはUI242のJob stateと同じRECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLEDであり、notification_type ACCEPTEDとは別。V003履歴byte/checksumは不変更、append-only V024で旧state ACCEPTEDをRECEIVEDへ整合しcheckを置換、type/row identity/owner/body/time/version/grantは不変更。mq_outbox業務QWK最終DLQの追加profileは後続append-only V025に限定する。専用nullable列dlq_original_message_id uuid、dlq_original_transport_id varchar(128)、dlq_delivery_count integer、dlq_error_code varchar(32)、dlq_detected_at timestamptzを持ち、ordinary全NULL、DLQ QWK001/320byte全有値・元W!=dispatch message_id・count>=1・ASCII printable ID1～128・closed uppercase code・finiteUTCをcheck、元W partial unique indexを設ける。既存incompatible DLQ QWK rowを推測補完せずmigration失敗として保護。既存message_id UKと一般Outbox、role最小grantを維持し、DLQ送信retryでは専用列を変更しない。実SQL/check/旧履歴・原本・role・crash独立PT前は未完。
+
 ## 1. 目的・適用範囲
 
 PostgreSQLの物理object、column型、default、PK/FK/UK/CHECK、index、schema/role/grantをPG工程で
@@ -357,7 +359,7 @@ Message IDであり、redelivery時の同一work識別に使う。
 
 `id bigint identity PK`、`job_id bigint NN UK FK async_jobs RESTRICT`、`question_id bigint NN FK questions RESTRICT`、
 `owner_user_id bigint NN FK app_users RESTRICT`、`notification_type varchar(12) NN check ACCEPTED/COMPLETED/ERROR`、
-`state varchar(12) NN check (ACCEPTED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(512)`、
+`state varchar(12) NN check (RECEIVED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(512)`、
 `created_at/updated_at timestamptz NN`。
 
 `error_code`は351 §5.3の5値だけ、ERROR時はcode/messageともNN、他stateでは両方NULLのCHECKとする。

@@ -1,5 +1,9 @@
 # Outbox・Inbox・冪等性・再送設計
 
+SSC154155（PG/PT、2026-10-01、実装前）：QSB受付は元Inbox source M0へQUESTION-bound暗号snapshotを受付transaction内で保存し、commit後に専用dispatcherをwake、対象QWK WのSENTを短DB観測する。request threadはJMS送信せず待機中connection/row lockを保持しない。SS312の総2秒単調budget超過はfresh9000としCOMPLETEDを書換えない。元proofが揃ったsame-token再送だけ0200。Inbox正常保持後のretained owner/token questionは重複防止だけであり、同canonical本文でも認証済snapshot/SENT根拠を失った場合は9000、異payload0105、新acceptance/alias/推測歴史時刻を生成しない。
+
+通常Outboxのrow message_id＝body header＝NKMessageID＝_AMQ_DUPL_IDは維持。業務最終QWK DLQのみrow dispatch D／duplicate ID Dと、body/header/NKMessageID元Wを分ける。元correlation/320byte bodyとSS331不変metadata5列を保持、partial UKで元WにつきDLQ dispatchを一つにする。JMS senderはdestination-specific profileを再検証し、その他row/header不一致を拒否する。DB ERROR＋DのPENDING確定後DのSENTまで元ACKをしない。再配送は同Dを確認し、send後mark前crashもDで重複排除する。元work SENTの受付証明を変更しない。
+
 ## 1. 目的・追跡
 
 Message ID、operation token、HMAC fingerprint、request inbox、API/Web outbox、response replay、Artemis duplicate detection、再送と保持を定める。
