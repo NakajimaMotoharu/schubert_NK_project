@@ -279,7 +279,20 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
       } finally {
         Arrays.fill(wire, (byte) 0);
       }
-      audit(connection, Optional.of(actor), request, "QUESTION_SUBMITTED", "0000", at);
+      audit(
+          connection,
+          Optional.of(actor),
+          request,
+          "QUESTION_SUBMITTED",
+          "0000",
+          at,
+          ",\"receiptId\":\""
+              + data.receiptId()
+              + "\",\"jobId\":"
+              + job
+              + ",\"questionId\":"
+              + data.questionId().value()
+              + ",\"state\":\"RECEIVED\"");
       var reference =
           InboxResultReference.numeric(
               InboxResultReferenceType.QUESTION, data.questionId().value());
@@ -603,6 +616,19 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
       String result,
       Instant at)
       throws SQLException {
+    audit(connection, actor, request, action, result, at, "");
+  }
+
+  /** Suffix is constructed only at NEW acceptance from validated receipt/numeric IDs. */
+  private static void audit(
+      Connection connection,
+      Optional<AuthenticatedActor> actor,
+      QuestionSubmitRequest request,
+      String action,
+      String result,
+      Instant at,
+      String detailsSuffix)
+      throws SQLException {
     try (var statement =
         connection.prepareStatement(
             """
@@ -639,7 +665,9 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
               + (action.equals("PROTOCOL_REJECTED") ? "step" : "resultCode")
               + "\":\""
               + result
-              + "\"}");
+              + "\""
+              + detailsSuffix
+              + "}");
       requireOne(statement.executeUpdate());
     }
   }

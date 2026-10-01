@@ -789,8 +789,9 @@ class QuestionWorkerServiceTest {
                 () -> {},
                 () -> false,
                 h.clock);
+        var input = fault.equals("job-source-work") ? event(W, W) : event();
         assertThrows(
-            PermanentProtocolException.class, () -> worker.process(event(), delivery(1)), fault);
+            PermanentProtocolException.class, () -> worker.process(input, delivery(1)), fault);
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
         assertNotEquals("COMPLETED", h.text("select state from schubert.async_jobs"));
         assertEquals(
@@ -829,6 +830,146 @@ class QuestionWorkerServiceTest {
     }
   }
 
+  @Test
+  void awork012FinalErrorAndSentProfilesRejectEachIndependentContradiction() throws Exception {
+    for (String fault :
+        List.of(
+            "error-dispatch",
+            "error-count",
+            "error-extra",
+            "error-null-statement",
+            "error-null-result",
+            "sent-status",
+            "sent-sending",
+            "sent-before",
+            "sent-owner",
+            "sent-until",
+            "sent-extra")) {
+      try (var h = accepted()) {
+        finalError(h);
+        h.sql(
+            "update schubert.mq_outbox set status='SENT',sent_at='2026-10-01T00:00:00.123456Z' where destination='nk.dead.letter'"); // proof-negative fixture, not MQ-positive.
+        h.signal = () -> {};
+        AtomicInteger providers = new AtomicInteger();
+        var worker =
+            new QuestionWorkerService(
+                tampered(h.source, fault),
+                text -> {
+                  providers.incrementAndGet();
+                  return new AnswerResult("", NOW);
+                },
+                () -> {},
+                () -> false,
+                h.clock);
+        assertThrows(
+            TemporaryInfrastructureException.class,
+            () -> worker.process(event(), delivery(5)),
+            fault);
+        assertEquals(0, providers.get());
+        assertEquals(
+            1,
+            h.scalar("select count(*) from schubert.mq_outbox where destination='nk.dead.letter'"));
+        assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
+        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+      }
+    }
+    for (String state : List.of("PENDING", "LEASED", "ERROR")) {
+      try (var h = accepted()) {
+        finalError(h);
+        if (state.equals("LEASED"))
+          h.sql(
+              "update schubert.mq_outbox set lease_owner='independent',lease_until='2026-10-01T00:00:30Z' where destination='nk.dead.letter'");
+        if (state.equals("ERROR"))
+          h.sql(
+              "update schubert.mq_outbox set status='ERROR',last_error_code='JMS_SEND_FAILURE',last_error_detail='independent synthetic failure' where destination='nk.dead.letter'");
+        AtomicInteger checks = new AtomicInteger();
+        var worker =
+            new QuestionWorkerService(
+                h.source,
+                text -> {
+                  fail("ERROR provider");
+                  return new AnswerResult("", NOW);
+                },
+                () -> {
+                  assertEquals(0, h.live.get());
+                },
+                () -> checks.incrementAndGet() > 3,
+                h.clock);
+        assertThrows(
+            TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(5)));
+        assertEquals(
+            state.equals("LEASED") ? "PENDING" : state,
+            h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+        assertEquals(0, h.live.get());
+      }
+    }
+  }
+
+  @Test
+  void awork013ExtraAnswerAndUncertainRollbackDoNotCommitCompletion() throws Exception {
+    for (String fault : List.of("answer-extra", "completed-extra", "update-zero")) {
+      try (var h = accepted()) {
+        if (fault.equals("answer-extra"))
+          h.sql(
+              "insert into schubert.answers(question_id,body,answered_at,provider_type,created_at,updated_at) values(1,'','2026-10-01T00:00:00.123456Z','STUB','2026-10-01T00:00:00.123456Z','2026-10-01T00:00:00.123456Z')");
+        if (fault.equals("completed-extra"))
+          worker(h, text -> new AnswerResult("", NOW), () -> false).process(event(), delivery(1));
+        var worker =
+            new QuestionWorkerService(
+                tampered(h.source, fault),
+                text -> new AnswerResult("", NOW),
+                () -> {},
+                () -> false,
+                h.clock);
+        long before =
+            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'");
+        assertThrows(PermanentProtocolException.class, () -> worker.process(event(), delivery(2)));
+        assertEquals(
+            before,
+            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
+        assertEquals(
+            fault.equals("completed-extra")
+                ? "COMPLETED"
+                : fault.equals("update-zero") ? "RECEIVED" : "PROCESSING",
+            h.text("select state from schubert.async_jobs"));
+      }
+    }
+    try (var h = accepted()) {
+      h.fault = "rollback";
+      var worker =
+          new QuestionWorkerService(
+              tampered(h.source, "job-question"),
+              text -> new AnswerResult("", NOW),
+              () -> {},
+              () -> false,
+              h.clock);
+      assertThrows(
+          TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
+      assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+    }
+  }
+
+  static void finalError(Fixture h) throws SQLException {
+    AtomicBoolean stop = new AtomicBoolean();
+    h.signal = () -> stop.set(true);
+    var worker =
+        worker(
+            h,
+            text -> {
+              throw new IllegalStateException("private-provider");
+            },
+            stop::get);
+    assertThrows(
+        TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(4)));
+    assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
+    assertEquals(
+        1,
+        h.scalar(
+            "select count(*) from schubert.app_logs where action='QUESTION_FAILED' and details->>'state'='ERROR' and details->>'errorCode'='SYSTEM_UNAVAIL' and details->>'receiptId'='"
+                + RECEIPT
+                + "' and details->>'jobId'='1' and details->>'questionId'='1'"));
+  }
+
   // Real SQL result with one driver projection fault, never an expected generated by production.
   static DataSource tampered(DataSource actual, String fault) {
     return (DataSource)
@@ -854,17 +995,41 @@ class QuestionWorkerServiceTest {
                                     ? "notice"
                                     : sql.contains("from schubert.questions where id=? for update")
                                         ? "deletion"
-                                        : sql.contains("status,sent_at") ? "sent" : "other";
+                                        : sql.contains("status,sent_at")
+                                            ? "sent"
+                                            : sql.contains("where destination='nk.dead.letter'")
+                                                ? "error"
+                                                : sql.contains(
+                                                        "select body,provider_type,answered_at")
+                                                    ? "answer"
+                                                    : sql.contains(
+                                                            "select provider_type,answered_at")
+                                                        ? "completed"
+                                                        : sql.stripLeading()
+                                                                .startsWith(
+                                                                    "update schubert.async_jobs")
+                                                            ? "update"
+                                                            : "other";
                     if (!fault.startsWith(profile + "-")
                         && !(profile.equals("sent") && fault.equals("dlq-original")))
                       return statement;
+                    if (fault.equals("error-null-statement")) {
+                      ((PreparedStatement) statement).close();
+                      return null;
+                    }
                     AtomicInteger next = new AtomicInteger();
                     return Proxy.newProxyInstance(
                         PreparedStatement.class.getClassLoader(),
                         new Class<?>[] {PreparedStatement.class},
                         (sp, sm, sa) -> {
                           Object rows = invoke(statement, sm, sa);
+                          if (fault.equals("update-zero") && sm.getName().equals("executeUpdate"))
+                            return 0;
                           if (!sm.getName().equals("executeQuery")) return rows;
+                          if (fault.equals("error-null-result")) {
+                            ((ResultSet) rows).close();
+                            return null;
+                          }
                           return Proxy.newProxyInstance(
                               ResultSet.class.getClassLoader(),
                               new Class<?>[] {ResultSet.class},
@@ -875,6 +1040,10 @@ class QuestionWorkerServiceTest {
                                 if (rm.getName().equals("getString")) {
                                   if (fault.equals("job-receipt") && ra[0].equals("receipt_id"))
                                     return "1".repeat(26);
+                                  if (fault.equals("sent-status") && ra[0].equals("status"))
+                                    return "UNKNOWN";
+                                  if (fault.equals("sent-sending") && ra[0].equals("status"))
+                                    return "SENDING";
                                 }
                                 if (rm.getName().equals("getObject")) {
                                   String column = ra[0].toString();
@@ -896,6 +1065,16 @@ class QuestionWorkerServiceTest {
                                     return NOW.atOffset(ZoneOffset.UTC);
                                   if (fault.equals("deletion-by") && column.equals("deleted_by"))
                                     return null;
+                                  if (fault.equals("error-dispatch") && column.equals("message_id"))
+                                    return W;
+                                  if (fault.equals("error-count")
+                                      && column.equals("dlq_delivery_count")) return 3;
+                                  if (fault.equals("sent-before") && column.equals("sent_at"))
+                                    return NOW.minusNanos(1000).atOffset(ZoneOffset.UTC);
+                                  if (fault.equals("sent-owner") && column.equals("lease_owner"))
+                                    return "unexpected-lease";
+                                  if (fault.equals("sent-until") && column.equals("lease_until"))
+                                    return NOW.plusSeconds(1).atOffset(ZoneOffset.UTC);
                                 }
                                 if (fault.equals("dlq-original")
                                     && rm.getName().equals("getObject")
@@ -939,7 +1118,11 @@ class QuestionWorkerServiceTest {
   }
 
   static WireMessage<FixedPayload> event(UUID id) {
-    byte[] literal = work(id, M0, RECEIPT, 1, 1, NOW);
+    return event(id, M0);
+  }
+
+  static WireMessage<FixedPayload> event(UUID id, UUID correlation) {
+    byte[] literal = work(id, correlation, RECEIPT, 1, 1, NOW);
     return new WireMessage<>(
         HeaderCodec.standard().peek(literal),
         new FixedPayload(Arrays.copyOfRange(literal, 256, 320), 0, List.of()));

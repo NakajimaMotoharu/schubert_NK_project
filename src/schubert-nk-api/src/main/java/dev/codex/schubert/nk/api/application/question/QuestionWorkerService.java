@@ -28,7 +28,7 @@ import javax.sql.DataSource;
  * retry ERROR owns a new immutable DLQ dispatch and returns only after its real SENT.
  * Pool/provider/dispatcher/stop flag are borrowed; listener owns original JMS transaction.
  * NK-QST-001/NK-ASY-001; QST003/ASY001..009/MQ006..010; UI213224236242;
- * SS312§8/9,324,331,332§8,351,353§7.2; SSC153..156; AWORK001..011.
+ * SS312§8/9,324,331,332§8,351,353§7.2; SSC153..156; AWORK001..013.
  */
 public final class QuestionWorkerService implements InternalEventProcessor {
   private static final Instant MIN = Instant.parse("0001-01-01T00:00:00Z");
@@ -304,6 +304,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
   }
 
   private Stage errorStage(Connection c, CommonHeader h, byte[] wire, Job job) throws SQLException {
+    Stage result;
     try (var s =
         c.prepareStatement(
             """
@@ -317,29 +318,32 @@ public final class QuestionWorkerService implements InternalEventProcessor {
           require(
               job.errorCode.orElseThrow().equals("PROCESS_FAILED")
                   || job.errorCode.orElseThrow().equals("DATA_INTEGRITY"));
-          return Terminal.INSTANCE;
+          result = Terminal.INSTANCE;
+        } else {
+          UUID dispatch = requireValue(r.getObject("message_id", UUID.class));
+          require(!dispatch.equals(h.messageId()));
+          require(
+              requireValue(r.getObject("correlation_id", UUID.class)).equals(h.correlationId()));
+          require(Arrays.equals(requireValue(r.getBytes("body")), wire));
+          var metadata =
+              new OutboxDlqMetadata(
+                  h.messageId(),
+                  requireValue(r.getString("dlq_original_transport_id")),
+                  requireValue(r.getObject("dlq_delivery_count", Integer.class)),
+                  requireValue(r.getString("dlq_error_code")),
+                  time(r, "dlq_detected_at"));
+          require(metadata.deliveryCount() >= 4);
+          require(metadata.detectedAt().equals(job.errorAt.orElseThrow()));
+          require(job.errorCode.orElseThrow().equals("SYSTEM_UNAVAIL"));
+          require(!r.next());
+          result = new PendingDlq(dispatch, metadata);
         }
-        UUID dispatch = requireValue(r.getObject("message_id", UUID.class));
-        require(!dispatch.equals(h.messageId()));
-        require(requireValue(r.getObject("correlation_id", UUID.class)).equals(h.correlationId()));
-        require(Arrays.equals(requireValue(r.getBytes("body")), wire));
-        var metadata =
-            new OutboxDlqMetadata(
-                h.messageId(),
-                requireValue(r.getString("dlq_original_transport_id")),
-                requireValue(r.getObject("dlq_delivery_count", Integer.class)),
-                requireValue(r.getString("dlq_error_code")),
-                time(r, "dlq_detected_at"));
-        require(metadata.deliveryCount() >= 4);
-        require(metadata.detectedAt().equals(job.errorAt.orElseThrow()));
-        require(job.errorCode.orElseThrow().equals("SYSTEM_UNAVAIL"));
-        require(!r.next());
-        return new PendingDlq(dispatch, metadata);
       }
     } catch (PermanentProtocolException inconsistentProof) {
       // This is durable ERROR/send proof, not invalid inbound wire: never fatal-ACK it.
       throw new TemporaryInfrastructureException();
     }
+    return result;
   }
 
   private void awaitSent(CommonHeader h, byte[] wire, PendingDlq pending) throws SQLException {
@@ -382,8 +386,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         require(time(r, "created_at").equals(metadata.detectedAt()));
         String status = requireValue(r.getString("status"));
         boolean sent = status.equals("SENT");
-        require(
-            sent || status.equals("PENDING") || status.equals("SENDING") || status.equals("ERROR"));
+        require(sent || status.equals("PENDING") || status.equals("ERROR"));
         if (sent) {
           require(!time(r, "sent_at").isBefore(metadata.detectedAt()));
           require(r.getObject("lease_owner") == null && r.getObject("lease_until") == null);
@@ -591,8 +594,10 @@ public final class QuestionWorkerService implements InternalEventProcessor {
               + ",\"questionId\":"
               + job.questionId
               + ",\"state\":\""
-              + state
-              + "\"}");
+              + (action.equals("QUESTION_FAILED") ? "ERROR" : state)
+              + "\""
+              + (action.equals("QUESTION_FAILED") ? ",\"errorCode\":\"" + state + "\"" : "")
+              + "}");
       one(s.executeUpdate());
     }
   }

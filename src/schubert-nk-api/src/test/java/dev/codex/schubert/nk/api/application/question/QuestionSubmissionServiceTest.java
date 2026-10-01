@@ -124,6 +124,12 @@ class QuestionSubmissionServiceTest {
                 "select extract(epoch from expires_at-completed_at)::bigint from schubert.request_inbox"));
         assertEquals("Public fixture", h.text("select body from schubert.questions"));
         assertEquals(
+            1,
+            h.scalar(
+                "select count(*) from schubert.app_logs where action='QUESTION_SUBMITTED' and details->>'resultCode'='0000' and details->>'state'='RECEIVED' and details->>'receiptId'='"
+                    + RECEIPT
+                    + "' and details->>'jobId'='1' and details->>'questionId'='1'"));
+        assertEquals(
             2, h.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
         assertEquals(
             0,

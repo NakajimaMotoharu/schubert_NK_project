@@ -1,5 +1,7 @@
 # NK-ASY-001 空回答provider単体テスト仕様書
 
+PG420補足（2026-10-02、暫定・正式provider認定は不変更）：実`QuestionWorkerService`/固定`AnswerBusinessException`のDB/JMS/元ACK接続は011_NK-QST-001の005受付・再送・Worker仕様と006実績へ追跡する。AWORK001～013で本STUB5を再使用し、実PG18・Artemis・削除三点・再配送/最終DLQ・監査を確認中。本文/provider/時刻の単独契約を本書のSTB001～005で維持し、外部AI/ordinary native ready/全100%/IT/STは未受入。
+
 計測対象は実行codeを持つAnswerResult/StubAnswerProvider全体。AnswerProviderは抽象method宣言のみで実行命令がなく、JaCoCo除外設定は追加しない。分岐命令が生成されない場合のbranchは0/0としてmanifestへ明示し、missed branchのあるclassを0/0へ置換しない。
 
 AnswerResultのrecord生成accessor/equals/hashCodeはJaCoCo0.8.15のXMLでは独立method counterに現れず、手書きconstructor/toStringの2methodが記録される。恣意的なexcludes/Generated付与ではない。生成methodの動作もSTB001/004/005のgetter・等値/不等値/hash assertionで確認し、計測上の非表示を未試験扱いの免除に使わない。

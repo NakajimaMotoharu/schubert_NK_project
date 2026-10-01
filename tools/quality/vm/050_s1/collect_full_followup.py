@@ -210,5 +210,12 @@ if int(identifier[2:5]) >= 419:
     manifest['ykt'].extend(['YKT-341', 'YKT-342', 'YKT-343'])
     manifest['testIds'].extend(['ASUB001..007', 'OUTBOX001..004'])
     manifest['limitations'].append('Question acceptance/owned Outbox exercised with real PostgreSQL18 and embedded Artemis; Worker/read/cancel/delete and third consumer not assembled')
+if int(identifier[2:5]) >= 420:
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(447, 457) if n != 453)
+    manifest['ssc'].append('SSC-156')
+    manifest['ykt'].extend(['YKT-344', 'YKT-345', 'YKT-346'])
+    manifest['testIds'].extend(['AWORK001..013'])
+    manifest['limitations'].append('Real host PG18/Artemis Worker completion and fourth-rollback two physical DLQ copies exercised; hard process/connection-loss/native lifecycle and read/cancel/delete/31-handler registration remain pending')
+    manifest['toolOnlyBug'] = 'BUG-453: Work usage allowlist/de-dup, not Production PT numerator'
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

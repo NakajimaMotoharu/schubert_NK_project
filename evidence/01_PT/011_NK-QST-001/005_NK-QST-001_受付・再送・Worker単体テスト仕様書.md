@@ -1,4 +1,4 @@
-# NK-QST-001 受付・再送・Worker PT（受付実装・直接PT中、Worker等未実行）
+# NK-QST-001 受付・再送・Worker PT（直接PT実施、全体・実起動受入は未完）
 
 2026-10-02実装対応：`QuestionSubmissionService.process/transaction/create/insertQuestion/read/proof`がASUB001～006を実装、`OwnedOutboxDispatcher.start/wake/run/close`が専用寿命を所有する。PG419 v6は4module選択29PT/FES0/static4zero、実Artemis persistent送信・元W/correlation M0/独立320byte・再送0200・SQLµs/電文msを確認。line/method/branchは残りあり、実API全31登録・Worker/普通起動・正式品質は未認定。実績は006へ集約する。
 
@@ -26,5 +26,9 @@ S3/D04/05の既存24＋質問関連7を実31processorへ結線する同一WIP。
 | PT-QST-AWORK-007 | pending短いpoll、stop/interrupt、既存同answer、同W in-flight再配送で先着完了/業務ERROR | pending成功0・DB資源はwake/provider/待機解除後0、finallyでfixture停止。回答UK1/audit1、COMPLETED先着は上書き0、PROCESS_FAILED先着で外側一時失敗でも新D0 |
 | PT-QST-AWORK-008 | actual原QWK＋ERROR/SYSTEM_UNAVAILのD欠落、SQL driver projection fault | 固定Temporary→実listener rollback→同transport count1→2、fatal ACK/DLQ送信0、Provider再実行0、原proof不変、欠落SENTを推測0（BUG450/YKT344） |
 | PT-QST-AWORK-009 | constructor/API null・4096byte/NFC/不正UTF8/time・各完了DML故障 | null契約reject、Provider欠落は再配送型、境界DB独立値、全完了DML rollbackでPROCESSING/答案0/完了audit0 |
+| PT-QST-AWORK-010 | 内部Clock有限外/受信前/開始前、rollback failure、既存answer/provider/time/削除三点矛盾 | clockはTemporary・元ACK0で原本保全、Provider不正timeはDATA_INTEGRITY、矛盾answer上書き0。SQLUTCµsをwiremsへ変更0 |
+| PT-QST-AWORK-011 | 実SQL＋driver単一projection故障：job/body/owner/correlation/通知/削除/extra row、異常65byte header | 最終完了/audit追加0・answer0、入力identity/protocol恒久拒否、cleanup不確定は別012013でTemporary。fixtureの期待は独立field/SQL、不正値をProductionから作成しない |
+| PT-QST-AWORK-012 | ERROR既存Dのdispatch/count/extra、SENT state/time/lease/extra、PENDING/lease付きPENDING/ERROR、unknown SENDING | 全DLQ proof不整合はTemporary・元ACK0、Provider追加0/D1/既存answer不変。3状態DDL維持、SENDINGを新許容しない（BUG454/YKT345）。SQL-only SENTはproof-negative fixtureでMQ positiveではない |
+| PT-QST-AWORK-013 | answer/COMPLETED extra row、UPDATE結果0、恒久拒否時rollback failure | 完了上書き/audit追加0、処理前0件はRECEIVED維持、完了txn失敗はPROCESSING保持、先着COMPLETED保持。cleanup不確定はTemporaryでfatal ACKしない |
 
 未実行を合格に算入しない。現行full Source・選択command/日時/各FES/static/coverage B/L/M/C、BUG/SSCとsanitized evidence/hashは006/018と本Programの006結果へ保存する。期待wireはSSのoffset/lengthからliteralを独立作成し、DBは独立SQL後条件、暗号は独立key/vector＋AAD/参照改竄negative。Production codecをexpected作成に使わない。署名同Source普通起動・31登録/3consumer・専用Outbox lifetime・実NK CHR・全100%は別gateであり本仕様の作成/下位選択成功だけで受入としない。
