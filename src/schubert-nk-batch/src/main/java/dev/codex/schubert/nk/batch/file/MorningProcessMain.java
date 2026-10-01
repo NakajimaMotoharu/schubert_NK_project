@@ -57,7 +57,16 @@ public final class MorningProcessMain {
         MorningParentBudget.borrow(
             entryRoot.maintenanceDeadline(entrySnapshot, entryBudget.deadlineNanos()));
     MorningBackupStage.VerifiedEpochWork<MorningBackupUnitCycle.Outcome> work =
-        (state, database, epoch, request, begins, part, original, completion, initialStop) -> {
+        (state,
+            database,
+            epoch,
+            request,
+            begins,
+            part,
+            original,
+            completion,
+            initialStop,
+            publication) -> {
           var root = RootStartupContext.create();
           var snapshot = root.capture(RootStartupContext.Service.MORNING);
           var requests = openRequests();
@@ -178,7 +187,14 @@ public final class MorningProcessMain {
                       database.recheckConsistent(state.activation().run());
                       var broker =
                           MorningBrokerExecution.execute(
-                              root, snapshot, budget, state, database, epoch, original);
+                              root,
+                              snapshot,
+                              budget,
+                              state,
+                              database,
+                              epoch,
+                              original,
+                              publication::expected);
                       var expiry =
                           MorningExpiryExecution.execute(
                               root,
@@ -296,6 +312,62 @@ public final class MorningProcessMain {
                       release.recheckConfigurations(configurations);
                       startupRoots.recheck(actualRoots);
                       database.recheckPermitDatabase(actualDatabase, issuerOwner);
+                      var permit =
+                          new StartupPermitRecords.Permit(
+                              epoch.boot(),
+                              epoch.epoch(),
+                              epoch.activation(),
+                              broker.invocation(),
+                              actualDatabase.release().contents().sha256(),
+                              configurations.apiSha256(),
+                              configurations.webSha256(),
+                              actualRoots.sha256(epoch),
+                              prestartFrame);
+                      StartupPermitFiles.IssueProof actualProof =
+                          (phase, expectedCurrent) -> {
+                            budget.requireWithin();
+                            root.recheck(snapshot);
+                            original.verify();
+                            EnvironmentInodePolicy.require(
+                                publication.expected().equals(expectedCurrent));
+                            release.recheckConfigurations(configurations);
+                            startupRoots.recheck(actualRoots);
+                            database.recheckPermitDatabase(actualDatabase, issuerOwner);
+                            backupCompleted.recheck();
+                            backupCycle.recheckCompletedBackup();
+                            cleanup.receipt().requireStillPresent();
+                            expiry.receipt().requireStillPresent();
+                            EnvironmentInodePolicy.require(
+                                cleanup
+                                    .references()
+                                    .equals(
+                                        database.cleanupReferences(
+                                            cleanup.terminal(), issuerOwner)));
+                            database.recheckExpiry(expiry, issuerOwner);
+                            retention.recheck();
+                            previousBroker.recheck();
+                            broker
+                                .observe(); // mutable pressure/log size is independently validated,
+                            // not frozen
+                            EnvironmentInodePolicy.require(
+                                broker.invocation().equals(permit.brokerInvocation()));
+                            for (var unit :
+                                java.util.List.of(
+                                    dev.codex.schubert.nk.batch.platform.MaintenanceUnit.CADDY,
+                                    dev.codex.schubert.nk.batch.platform.MaintenanceUnit.WEB,
+                                    dev.codex.schubert.nk.batch.platform.MaintenanceUnit.API,
+                                    dev.codex.schubert.nk.batch.platform.MaintenanceUnit.INSPECTOR))
+                              EnvironmentInodePolicy.require(
+                                  dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination
+                                      .create(root, snapshot, unit)
+                                      .quiescent()
+                                      .isPresent());
+                            budget.requireWithin();
+                            root.recheck(snapshot);
+                            original.verify();
+                          };
+                      var issued = publication.issue(permit, actualProof);
+                      actualProof.verify(StartupPermitFiles.IssuePhase.AFTER_READBACK, issued);
                       return backupOutcome;
                     });
               });

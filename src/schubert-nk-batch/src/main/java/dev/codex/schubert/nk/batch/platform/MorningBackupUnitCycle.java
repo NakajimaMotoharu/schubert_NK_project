@@ -139,6 +139,7 @@ public final class MorningBackupUnitCycle {
   private final BackupUnitStartClient.Target target;
   private Optional<StartAttempt> outstanding = Optional.empty();
   private Optional<BackupUnitReceiptGate.TerminalReceipt> completed = Optional.empty();
+  private Optional<Object> completedBaseline = Optional.empty();
 
   private static final class Unresolved extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -386,6 +387,7 @@ public final class MorningBackupUnitCycle {
       budget.requireWithin();
       gate.recheck();
       completed = actual;
+      if (requireObserved) completedBaseline = Optional.of(baseline);
       outstanding = Optional.empty();
       return outcome;
     } catch (IOException | RuntimeException | Error unresolved) {
@@ -393,6 +395,25 @@ public final class MorningBackupUnitCycle {
       // receipt/retire uncertainty. The native retention does not return.
       return retain();
     }
+  }
+
+  /** SSC136: re-observe the completed Backup's same baseline and actual stopped receipt. */
+  public void recheckCompletedBackup() throws IOException {
+    budget.requireWithin();
+    gate.recheck();
+    var before =
+        completed.orElseThrow(() -> new IOException("actual completed Backup unavailable"));
+    var baseline =
+        completedBaseline.orElseThrow(() -> new IOException("same Backup baseline unavailable"));
+    if (receipt.stopped(baseline, before) != before || !terminal.quiescent())
+      throw new IOException("completed Backup stop proof changed");
+    budget.requireWithin();
+    gate.recheck();
+  }
+
+  /** SSC136: publication/revoke uncertainty must not normally unwind the same parent's M/A. */
+  public void retainUnresolvedOwner() {
+    retain();
   }
 
   /** Same controller engine, but Cleanup's handoff returns only after fresh whole termination. */

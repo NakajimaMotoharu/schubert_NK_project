@@ -571,6 +571,14 @@ SSC134実装前補足：CONFIGは親の実config/credential bundle完成判定�
 
 SSC135/BUG388：明示停止後は保持した停止前fresh真正Backup receiptに、同ownerのstop client正常終了・固定Unit全kernel終端・manager/kernel/manager一致を束縛する。全18fieldの完全GC cold（inactive/dead/Resultsuccess/Invocation空/code・status・start・end0/PID・Job空）は実結果未観測で、当回receiptを0で再生成しない。残存managerは同Invocation/normalCode1/実exit/start/endと全終端を再照合する。部分cold/別世代/変質/未知/signal/未stopは受理しない。M/A/原本/intent/同budget保持を途切れさせず、KEEP_ACTIVEは従来同fresh receiptの厳密再読を維持する。SS341§5.1の真正非0後の両FAILED/六SKIP/実後続とCONFIG完成判定もこの別停止証明を用いる。
 
+SSC136正規発行接続補足：既存part force/readback・no-replace公開・ISSUED atomic置換・全byte再読の順序は不変更。permit公開直前とISSUED化直前に同原本INVALID/全実根拠を確認し、最終issued readback後は当回permit全byteのSHAで導出した厳密ISSUEDを期待して全実根拠を再確認する。どの三境界でも現boot/epoch/run/activation/Morning・Broker実世代/同M/A/元budget、6root identity/policy、現在/元DB全値、子結果/役割別全終端、release/config/実archive・retentionを確認する。Broker guardは当回正常readback結果だけで期待値を切替え、currentから任意値を追認しない。発行開始後の失敗では同bindingの固定revokeを行い、INVALID currentのdurable置換・全byte読戻しをM/A内で確定する。revokeは同Epochを失効する限定操作で、fresh invalidateの再発行ではない。既知INVALIDはそのまま再同期できるが、別binding/破損/不明currentを修復しない。旧permit/partは残して次回厳密gateで隔離する。失効/close/readback不明では所有保持・非成功を維持し、旧permitや別新epochへfallbackしない。発行完了はAPI/Web readyやMorning DONEと別である。
+
+SSC136発行intent補足：固定 `/run/schubert-nk/startup/permit-start.intent` はroot:root0600・single-link・空file・ACL無し/tmpfs RW、同Morning M/A/原本/元期限内で発行前CREATE_NEW/force/readback/directory syncを確定する。既存intentは旧試行の隔離対象でreuse/repair/自動削除しない。Root向けpermit受理は当該intent残留を必ず拒否し、publisher内のissued readbackは同ownerのintent保持下で行う。全subordinate proof/publisher closeと最終実検証後だけ同inodeを退役する。退役後close不明にも外側M/A監督が固定namespaceでintent復旧と同attempt厳密revokeを行い、未確定は所有保持/隔離とする。Current/permit読取成功だけを実Root起動許可にしない。Root側の不完了原本/同Morning生存・M境界はS3の全gateに含めて閉じる。
+
+SSC136所有scope補足：監督ownerは同原本continuation内・A取得前に固定directoryを保持する。Main/Stage内では借用し、発行rootと全nested資源を正常closeした後、A callback/lock closeを完了する。同M/専用DB/原本/元期限の後段でissued原byteを再読・publisher close・全gateを確認し、最後だけintent退役とcloseを行う。この区間の例外は同原本continuation内で固定intent復旧/同attempt失効/readbackを監督し、再open/close/原本不明なら正常unwindせずretainする。未完了activeのRoot受理は同boot/epoch/run/cutoff/activationの完全原本graph・真正Morning Invocation/PID/startTicks/元deadline内の生存と、正常A後の同親実S3 launch世代が必要である。死親/期限超/A-close不明/launch未接続はvalid permit・intent無しでも拒否する。完成後restart枝は同activationの真正done0/10・完全graph・active不存在を別検査する。RootServiceLauncherの現30拒否は全gate/同PID exec接続まで維持する。
+
+SSC136/BUG391：intent退役後の原本owner/DB/credential closeとM内最後root検査も、同M callbackの当回abort専用監督で保護する。scope外からDB/原本証明を再利用せず、保存した同attempt invalid/permitとfresh固定namespaceだけでquarantine・厳密失効/readbackを行う。既に失効監督を完了した経路へ二重復旧を行わない。M自身の最終close不明とRootの正常S3 launch束縛は別gateであり、この監督だけでRoot起動受入にしない。
+
 ## 7. 環境差分
 
 

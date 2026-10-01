@@ -30,11 +30,47 @@ final class BackupStartIntentFilesTest {
   }
 
   @Test
+  void isspub007PublicationRecoveryNeverRetiresAnOldQuarantine() throws Exception {
+    try (var fixture = fixture()) {
+      var files =
+          new BackupStartIntentFiles(
+              fixture.root, fixture, fixture, () -> {}, "permit-start.intent");
+      var token = files.begin();
+      Path marker = fixture.parent.resolve("permit-start.intent");
+      files.requirePresent(token);
+      assertThrows(
+          IOException.class,
+          () ->
+              new BackupStartIntentFiles(
+                      fixture.root, fixture, fixture, () -> {}, "permit-start.intent")
+                  .requirePresent(token));
+      assertThrows(NullPointerException.class, () -> files.requirePresent(null));
+      long inode = (Long) Files.getAttribute(marker, "unix:ino");
+      files.quarantinePublication();
+      assertEquals(inode, Files.getAttribute(marker, "unix:ino"));
+      files.retire(token);
+      assertThrows(IOException.class, () -> files.requirePresent(token));
+      files.quarantinePublication();
+      assertArrayEquals(new byte[0], Files.readAllBytes(marker));
+      assertThrows(IOException.class, files::requireClear);
+      assertThrows(IOException.class, () -> files.retire(token));
+      Files.writeString(marker, "corrupt");
+      assertThrows(IOException.class, files::quarantinePublication);
+      assertEquals("corrupt", Files.readString(marker));
+      assertThrows(
+          IOException.class,
+          () -> BackupStartIntentFilesTest.files(fixture).quarantinePublication());
+      fixture.released();
+    }
+  }
+
+  @Test
   void newOnlyMarkerSurvivesOwnerCloseAndRetiresOnlyWithSameToken() throws Exception {
     try (var fixture = fixture()) {
       var first = files(fixture);
       first.requireClear();
       var token = first.begin();
+      first.requirePresent(token);
       Path marker = fixture.parent.resolve("backup-start.intent");
       assertTrue(Files.isRegularFile(marker));
       assertArrayEquals(new byte[0], Files.readAllBytes(marker));

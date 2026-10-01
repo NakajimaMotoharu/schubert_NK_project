@@ -79,7 +79,8 @@ final class MorningControlScope {
         dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
         Epoch epoch,
         MorningNewRunAdmission.OriginalProof original,
-        MorningUnitTerminals.Snapshot initialStop)
+        MorningUnitTerminals.Snapshot initialStop,
+        MorningPermitPublication publication)
         throws IOException;
   }
 
@@ -114,11 +115,18 @@ final class MorningControlScope {
     budget.requireWithin();
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
+    // BUG391: after original/DB scope closure, only abort may use this owner, never issue/DB/proof.
+    var publicationOwner =
+        new java.util.concurrent.atomic.AtomicReference<MorningPermitPublication>();
     Gate gate =
-        () -> {
-          budget.requireWithin();
-          root.recheck(snapshot);
-        };
+        () ->
+            protectPublication(
+                publicationOwner,
+                () -> {
+                  budget.requireWithin();
+                  root.recheck(snapshot);
+                  return Boolean.TRUE;
+                });
     var maintenance = MaintenanceFileLock.create();
     var startup = StartupAdmissionFile.create();
     var initialStop =
@@ -126,36 +134,82 @@ final class MorningControlScope {
     return executeStopAndStartup(
         gate,
         maintenance::tryExclusive,
-        () -> {
-          try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
-            intent.requireClear();
-          }
-          requireNoExpiryRequest(root, snapshot);
-          MorningNewRunAdmission.VerifiedContinuation<T> continuation =
-              (state, database, original) ->
-                  afterOriginal(
-                      gate,
-                      () -> MorningStopPass.create(root, snapshot, budget).execute(),
-                      startup::tryExclusive,
-                      () -> initialStop.set(MorningUnitTerminals.capture(root, snapshot)),
-                      () -> {
-                        Epoch epoch = MorningCurrentInvalidation.invalidate(root, snapshot, state);
-                        if (epoch.state() != State.INVALID
-                            || !epoch.activation().equals(state.activation())) throw unavailable();
-                        original.verify();
-                        return trustedWork.execute(
-                            state,
-                            database,
-                            epoch,
-                            original,
-                            Objects.requireNonNull(initialStop.get(), "actual A-after-stop set"));
-                      });
-          if (runId.isPresent()) {
-            return MorningResumeAdmission.create(root, snapshot)
-                .executeVerified(runId.orElseThrow(), continuation);
-          }
-          return MorningNewRunAdmission.create(root, snapshot).executeVerified(continuation);
-        });
+        () ->
+            protectPublication(
+                publicationOwner,
+                () -> {
+                  try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
+                    intent.requireClear();
+                  }
+                  try (var intent = BackupStartIntentFiles.createPublication(root, snapshot)) {
+                    intent.requireClear();
+                  }
+                  requireNoExpiryRequest(root, snapshot);
+                  MorningNewRunAdmission.VerifiedContinuation<T> continuation =
+                      (state, database, original) -> {
+                        var publication =
+                            MorningPermitPublication.create(
+                                root, snapshot, budget, state, database, original);
+                        publicationOwner.set(publication);
+                        try {
+                          T result =
+                              afterOriginal(
+                                  gate,
+                                  () -> MorningStopPass.create(root, snapshot, budget).execute(),
+                                  startup::tryExclusive,
+                                  () ->
+                                      initialStop.set(MorningUnitTerminals.capture(root, snapshot)),
+                                  () -> {
+                                    Epoch epoch =
+                                        MorningCurrentInvalidation.invalidate(
+                                            root, snapshot, state);
+                                    if (epoch.state() != State.INVALID
+                                        || !epoch.activation().equals(state.activation()))
+                                      throw unavailable();
+                                    publication.bind(epoch);
+                                    original.verify();
+                                    return trustedWork.execute(
+                                        state,
+                                        database,
+                                        epoch,
+                                        original,
+                                        Objects.requireNonNull(
+                                            initialStop.get(), "actual A-after-stop set"),
+                                        publication);
+                                  });
+                          gate.verify();
+                          original.verify();
+                          database.recheckConsistent(state.activation().run());
+                          publication.commit();
+                          return result;
+                        } catch (IOException | RuntimeException | Error failure) {
+                          publication.abort();
+                          throw failure;
+                        }
+                      };
+                  if (runId.isPresent()) {
+                    return MorningResumeAdmission.create(root, snapshot)
+                        .executeVerified(runId.orElseThrow(), continuation);
+                  }
+                  return MorningNewRunAdmission.create(root, snapshot)
+                      .executeVerified(continuation);
+                }));
+  }
+
+  /** BUG391: invoked under M; retained owner prevents this operation returning to M's close. */
+  static <T> T protectPublication(
+      java.util.concurrent.atomic.AtomicReference<MorningPermitPublication> owner,
+      LinuxFileLock.Operation<T> operation)
+      throws IOException {
+    Objects.requireNonNull(owner);
+    Objects.requireNonNull(operation);
+    try {
+      return operation.execute();
+    } catch (IOException | RuntimeException | Error failure) {
+      var publication = owner.get();
+      if (publication != null) publication.abort();
+      throw failure;
+    }
   }
 
   static <T> T execute(MorningNewRunAdmission.Continuation<T> trustedWork) throws IOException {

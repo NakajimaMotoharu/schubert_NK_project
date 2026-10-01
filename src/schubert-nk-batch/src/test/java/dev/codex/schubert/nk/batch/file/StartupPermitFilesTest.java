@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.file.StartupPermitFiles.IssuePhase;
 import dev.codex.schubert.nk.batch.file.StartupPermitRecords.*;
 import dev.codex.schubert.nk.batch.repository.*;
 import dev.codex.schubert.nk.storage.*;
@@ -80,6 +81,182 @@ final class StartupPermitFilesTest {
     assertNull(error.getCause());
     assertEquals(0, error.getSuppressed().length);
     assertEquals("transfer storage operation failed", error.getMessage());
+  }
+
+  @Test
+  void isspub001ThreeActualProofBoundariesAndSameEpochRevoke() throws Exception {
+    try (var f = fixture()) {
+      f.seed(INVALID);
+      var phases = new ArrayList<StartupPermitFiles.IssuePhase>();
+      Epoch issued =
+          f.store.issue(
+              invalid(),
+              permit(),
+              (phase, expected) -> {
+                phases.add(phase);
+                assertEquals(expected, f.store.current());
+                if (phase == StartupPermitFiles.IssuePhase.BEFORE_PUBLICATION) {
+                  assertFalse(Files.exists(f.permit));
+                  assertEquals(INVALID, Files.readString(f.current));
+                } else {
+                  assertEquals(GOLD, Files.readString(f.permit));
+                  assertEquals(
+                      phase == StartupPermitFiles.IssuePhase.AFTER_READBACK,
+                      expected.state() == State.ISSUED);
+                }
+              });
+      assertEquals(
+          List.of(
+              StartupPermitFiles.IssuePhase.BEFORE_PUBLICATION,
+              StartupPermitFiles.IssuePhase.BEFORE_ISSUED,
+              StartupPermitFiles.IssuePhase.AFTER_READBACK),
+          phases);
+      assertEquals(issued, f.store.current());
+      assertEquals(invalid(), f.store.revoke(invalid(), permit()));
+      assertEquals(INVALID, Files.readString(f.current));
+      assertEquals(GOLD, Files.readString(f.permit));
+      fail(f.store::readIssued);
+      assertEquals(invalid(), f.store.revoke(invalid(), permit()));
+      assertEquals(GOLD, Files.readString(f.permit));
+    }
+  }
+
+  @Test
+  void isspub002EachProofFailurePreservesFilesAndUnknownIdentity() throws Exception {
+    for (var stop : StartupPermitFiles.IssuePhase.values()) {
+      for (boolean unknown : List.of(false, true)) {
+        try (var f = fixture()) {
+          f.seed(INVALID);
+          var failure = new IllegalStateException("PRIVATE_PROOF");
+          Executable action =
+              () ->
+                  f.store.issue(
+                      invalid(),
+                      permit(),
+                      (phase, expected) -> {
+                        if (phase == stop) {
+                          if (unknown) throw failure;
+                          throw new IOException("PRIVATE_PROOF");
+                        }
+                      });
+          if (unknown) assertSame(failure, assertThrows(IllegalStateException.class, action));
+          else fail(action);
+          boolean published = stop != StartupPermitFiles.IssuePhase.BEFORE_PUBLICATION;
+          assertEquals(published, Files.exists(f.permit));
+          if (published) assertEquals(GOLD, Files.readString(f.permit));
+          else {
+            try (var entries = Files.list(f.directory)) {
+              assertEquals(
+                  1, entries.filter(p -> p.getFileName().toString().endsWith(".part")).count());
+            }
+          }
+          assertEquals(invalid(), f.store.revoke(invalid(), permit()));
+          assertEquals(INVALID, Files.readString(f.current));
+          assertEquals(published, Files.exists(f.permit));
+        }
+      }
+    }
+  }
+
+  @Test
+  void isspub003ProofDriftAndForeignRevokeNeverRepairOriginal() throws Exception {
+    for (var stop : StartupPermitFiles.IssuePhase.values()) {
+      try (var f = fixture()) {
+        f.seed(INVALID);
+        fail(
+            () ->
+                f.store.issue(
+                    invalid(),
+                    permit(),
+                    (phase, expected) -> {
+                      if (phase == stop) Files.writeString(f.current, "CORRUPTED\n");
+                    }));
+        assertEquals("CORRUPTED\n", Files.readString(f.current));
+        fail(() -> f.store.revoke(invalid(), permit()));
+        assertEquals("CORRUPTED\n", Files.readString(f.current));
+      }
+    }
+    try (var f = fixture()) {
+      f.seed(INVALID);
+      Epoch issued = f.store.issue(invalid(), permit());
+      String before = Files.readString(f.current);
+      fail(() -> f.store.revoke(issued, permit()));
+      var other =
+          new Permit(
+              BOOT,
+              ACT,
+              ACTIVE,
+              "2".repeat(32),
+              "b".repeat(64),
+              "c".repeat(64),
+              "d".repeat(64),
+              "e".repeat(64),
+              "f".repeat(64));
+      fail(() -> f.store.revoke(invalid(), other));
+      var changed =
+          new Permit(
+              BOOT,
+              EPOCH,
+              ACTIVE,
+              "3".repeat(32),
+              "b".repeat(64),
+              "c".repeat(64),
+              "d".repeat(64),
+              "e".repeat(64),
+              "f".repeat(64));
+      fail(() -> f.store.revoke(invalid(), changed));
+      assertEquals(before, Files.readString(f.current));
+      assertEquals(GOLD, Files.readString(f.permit));
+      for (var foreign :
+          List.of(
+              new Permit(
+                  ACT,
+                  EPOCH,
+                  ACTIVE,
+                  "2".repeat(32),
+                  "b".repeat(64),
+                  "c".repeat(64),
+                  "d".repeat(64),
+                  "e".repeat(64),
+                  "f".repeat(64)),
+              new Permit(
+                  BOOT,
+                  EPOCH,
+                  new MaintenanceActivation(ACTIVE.run(), EPOCH),
+                  "2".repeat(32),
+                  "b".repeat(64),
+                  "c".repeat(64),
+                  "d".repeat(64),
+                  "e".repeat(64),
+                  "f".repeat(64)))) fail(() -> f.store.revoke(invalid(), foreign));
+      assertThrows(NullPointerException.class, () -> f.store.revoke(null, permit()));
+      assertThrows(NullPointerException.class, () -> f.store.revoke(invalid(), null));
+      assertThrows(NullPointerException.class, () -> f.store.issue(invalid(), permit(), null));
+    }
+  }
+
+  @Test
+  void isspub004PendingPublicationIsNotAReadableRootPermit() throws Exception {
+    try (var f = fixture()) {
+      f.seed(INVALID);
+      Path marker = f.directory.resolve("permit-start.intent");
+      Files.createFile(marker);
+      f.store.issue(
+          invalid(),
+          permit(),
+          (phase, expected) -> {
+            if (phase == StartupPermitFiles.IssuePhase.AFTER_READBACK) {
+              assertEquals(State.ISSUED, f.store.current().state());
+              fail(f.store::readIssued);
+            }
+          });
+      fail(f.store::readIssued);
+      assertTrue(Files.exists(marker));
+      assertEquals(GOLD, Files.readString(f.permit));
+      f.store.revoke(invalid(), permit());
+      assertEquals(INVALID, Files.readString(f.current));
+      assertTrue(Files.exists(marker));
+    }
   }
 
   @Test
@@ -441,6 +618,259 @@ final class StartupPermitFilesTest {
       f.root.close();
       fail(f.store::current);
       fail(() -> f.store.invalidate(BOOT, EPOCH, ACTIVE));
+    }
+  }
+
+  /** ISSPUB005: owner commit occurs only after all subordinate/A closes, not issue return. */
+  @Test
+  void isspub005SupervisedPublicationCommitAndStrictOwner() throws Exception {
+    try (var f = fixture();
+        var worker = Executors.newSingleThreadExecutor()) {
+      f.seed(INVALID);
+      var h = new PublicationHarness(f);
+      var owner = h.owner();
+      assertThrows(IOException.class, owner::expected);
+      assertThrows(IOException.class, owner::commit);
+      owner.bind(invalid());
+      assertThrows(IOException.class, () -> owner.bind(invalid()));
+      assertEquals(invalid(), owner.expected());
+      assertThrows(ExecutionException.class, () -> worker.submit(owner::expected).get());
+      var phases = new ArrayList<IssuePhase>();
+      var issued =
+          owner.issue(
+              permit(),
+              (phase, expected) -> {
+                phases.add(phase);
+                assertEquals(expected, owner.expected());
+                assertTrue(Files.exists(h.marker));
+                assertThrows(StorageIoException.class, f.store::readIssued);
+              });
+      assertEquals(
+          List.of(
+              IssuePhase.BEFORE_PUBLICATION, IssuePhase.BEFORE_ISSUED, IssuePhase.AFTER_READBACK),
+          phases);
+      assertEquals(GOLD, Files.readString(f.permit));
+      assertEquals(issued, owner.expected());
+      assertTrue(Files.exists(h.marker));
+      assertEquals(1, h.storeCloses);
+      h.events.add("nested-close");
+      h.events.add("A-close");
+      owner.commit();
+      assertFalse(Files.exists(h.marker));
+      assertEquals(permit(), f.store.readIssued());
+      assertEquals(2, h.storeCloses);
+      assertTrue(h.events.indexOf("A-close") < h.events.indexOf("retire"));
+      assertTrue(h.events.indexOf("retire") < h.events.indexOf("intent-close"));
+      assertThrows(IOException.class, owner::commit);
+      assertThrows(IOException.class, () -> owner.issue(permit(), (p, e) -> {}));
+      f.released();
+    }
+  }
+
+  /** ISSPUB006: independent faults at actual publication and post-A close boundaries. */
+  @Test
+  void isspub006FaultsRevokeWithoutDeletingEvidenceAndUnknownRetains() throws Exception {
+    for (String failure :
+        List.of("begin", "proof", "store-close", "A-close", "retire", "intent-close")) {
+      for (boolean unknown : List.of(false, true)) {
+        try (var f = fixture()) {
+          f.seed(INVALID);
+          var h = new PublicationHarness(f);
+          h.fail = failure;
+          h.unknown = unknown ? new IllegalArgumentException("independent fault") : null;
+          var owner = h.owner();
+          owner.bind(invalid());
+          Throwable thrown =
+              assertThrows(
+                  Exception.class,
+                  () -> {
+                    owner.issue(
+                        permit(),
+                        (p, e) -> {
+                          if (p == IssuePhase.AFTER_READBACK) h.point("proof");
+                        });
+                    h.point("A-close");
+                    owner.commit();
+                  });
+          if (unknown) assertSame(h.unknown, thrown);
+          else assertInstanceOf(IOException.class, thrown);
+          owner.abort();
+          assertEquals(INVALID, Files.readString(f.current));
+          assertEquals(invalid(), owner.expected());
+          assertTrue(Files.exists(h.marker));
+          assertEquals(0, h.retains);
+          if (!failure.equals("begin")) assertEquals(GOLD, Files.readString(f.permit));
+          f.released();
+        }
+      }
+    }
+    for (String uncertainty :
+        List.of("quarantine", "recovery-close", "revoke", "corrupt", "open")) {
+      try (var f = fixture()) {
+        f.seed(INVALID);
+        var h = new PublicationHarness(f);
+        var owner = h.owner();
+        owner.bind(invalid());
+        owner.issue(permit(), (p, e) -> {});
+        if (uncertainty.equals("corrupt")) Files.writeString(f.current, "CORRUPTED\n");
+        else if (uncertainty.equals("revoke")) {
+          f.fail = "replace";
+          f.failAt = f.count("replace") + 1;
+        } else h.fail = uncertainty;
+        assertThrows(PublicationRetained.class, owner::abort);
+        assertEquals(1, h.retains);
+        assertTrue(Files.exists(h.marker));
+        assertEquals(GOLD, Files.readString(f.permit));
+        assertThrows(StorageIoException.class, f.store::readIssued);
+      }
+    }
+    try (var f = fixture()) {
+      f.seed(INVALID);
+      var h = new PublicationHarness(f);
+      h.owner().abort();
+      assertEquals(List.of("intent-close"), h.events);
+      assertEquals(0, h.retains);
+      h.fail = "intent-close";
+      assertThrows(PublicationRetained.class, h.owner()::abort);
+    }
+  }
+
+  private static final class PublicationRetained extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+  }
+
+  @Test
+  void isspub008AfterAdmissionAndLastMGuardFaultsAreSupervisedWithoutScopeExport()
+      throws Exception {
+    for (Throwable fault :
+        List.of(
+            new IOException("after DB close"),
+            new IllegalStateException("after original close"),
+            new AssertionError("last M gate"))) {
+      try (var f = fixture()) {
+        f.seed(INVALID);
+        var h = new PublicationHarness(f);
+        var owner = h.owner();
+        owner.bind(invalid());
+        owner.issue(permit(), (p, e) -> {});
+        owner.commit();
+        assertFalse(Files.exists(h.marker));
+        var reference = new java.util.concurrent.atomic.AtomicReference<>(owner);
+        Throwable actual =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    MorningControlScope.protectPublication(
+                        reference,
+                        () -> {
+                          if (fault instanceof IOException io) throw io;
+                          if (fault instanceof RuntimeException runtime) throw runtime;
+                          throw (Error) fault;
+                        }));
+        assertSame(fault, actual);
+        assertEquals(INVALID, Files.readString(f.current));
+        assertTrue(Files.exists(h.marker));
+        assertEquals(GOLD, Files.readString(f.permit));
+        int mutations = f.count("replace");
+        int closes = h.storeCloses;
+        owner.abort();
+        assertEquals(mutations, f.count("replace"));
+        assertEquals(closes, h.storeCloses);
+        assertEquals(0, h.retains);
+        assertThrows(IOException.class, () -> owner.issue(permit(), (p, e) -> {}));
+        assertEquals("normal", MorningControlScope.protectPublication(reference, () -> "normal"));
+      }
+    }
+    var absent = new java.util.concurrent.atomic.AtomicReference<MorningPermitPublication>();
+    var original = new IOException("pre-creation failure");
+    assertSame(
+        original,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningControlScope.protectPublication(
+                    absent,
+                    () -> {
+                      throw original;
+                    })));
+    assertThrows(
+        NullPointerException.class, () -> MorningControlScope.protectPublication(null, () -> true));
+    assertThrows(
+        NullPointerException.class, () -> MorningControlScope.protectPublication(absent, null));
+  }
+
+  /** Real current/permit IO, marker/lifetime counters are PT-only seams, never native authority. */
+  private static final class PublicationHarness {
+    final Fixture fixture;
+    final Path marker;
+    final List<String> events = new ArrayList<>();
+    String fail = "";
+    RuntimeException unknown;
+    int storeCloses, retains;
+
+    PublicationHarness(Fixture fixture) {
+      this.fixture = fixture;
+      marker = fixture.directory.resolve("permit-start.intent");
+    }
+
+    void point(String value) throws IOException {
+      events.add(value);
+      if (fail.equals(value)) {
+        fail = ""; // single injected fault, not a repaired production operation
+        if (unknown != null) throw unknown;
+        throw new IOException("independent fault");
+      }
+    }
+
+    MorningPermitPublication.Intents intents(boolean recovery) {
+      return new MorningPermitPublication.Intents() {
+        public void begin() throws IOException {
+          Files.createFile(marker);
+          point("begin");
+        }
+
+        public void verify() {
+          assertTrue(Files.exists(marker));
+        }
+
+        public void retire() throws IOException {
+          Files.delete(marker);
+          point("retire");
+        }
+
+        public void quarantine() throws IOException {
+          point("quarantine");
+          if (!Files.exists(marker)) Files.createFile(marker);
+        }
+
+        public void close() throws IOException {
+          point(recovery ? "recovery-close" : "intent-close");
+        }
+      };
+    }
+
+    MorningPermitPublication owner() {
+      return new MorningPermitPublication(
+          intents(false),
+          () -> {
+            point("open");
+            return new MorningPermitPublication.Store() {
+              public StartupPermitFiles files() {
+                return fixture.store;
+              }
+
+              public void close() throws IOException {
+                storeCloses++;
+                point("store-close");
+              }
+            };
+          },
+          () -> intents(true),
+          () -> {},
+          () -> {
+            retains++;
+            throw new PublicationRetained();
+          });
     }
   }
 

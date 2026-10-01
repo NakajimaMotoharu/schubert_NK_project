@@ -51,7 +51,8 @@ final class MorningBackupStage {
         UUID part,
         MorningNewRunAdmission.OriginalProof original,
         MorningProcessMain.Archive completion,
-        dev.codex.schubert.nk.batch.platform.MorningUnitTerminals.Snapshot initialStop)
+        dev.codex.schubert.nk.batch.platform.MorningUnitTerminals.Snapshot initialStop,
+        MorningPermitPublication publication)
         throws IOException;
   }
 
@@ -88,7 +89,7 @@ final class MorningBackupStage {
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
     UUID part = UUID.randomUUID();
     MorningControlScope.VerifiedEpochWork<T> continuation =
-        (state, database, epoch, original, initialStop) -> {
+        (state, database, epoch, original, initialStop, publication) -> {
           if (runId.isPresent()) {
             var prior =
                 database.successfulBackup(
@@ -115,7 +116,8 @@ final class MorningBackupStage {
                             part,
                             original,
                             completion,
-                            initialStop);
+                            initialStop,
+                            publication);
                     budget.requireWithin();
                     original.verify();
                     return result;
@@ -150,7 +152,8 @@ final class MorningBackupStage {
                             () ->
                                 new MorningBackupArtifacts(root, snapshot, budget)
                                     .complete(request, begins, part, database)),
-                        initialStop);
+                        initialStop,
+                        publication);
                 budget.requireWithin();
                 original.verify();
                 return result;

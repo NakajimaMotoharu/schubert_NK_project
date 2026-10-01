@@ -24,6 +24,11 @@ import org.jspecify.annotations.NullMarked;
 final class MorningBrokerExecution {
   private MorningBrokerExecution() {}
 
+  @FunctionalInterface
+  interface ExpectedCurrent {
+    StartupPermitRecords.Epoch get() throws IOException;
+  }
+
   record Observations(
       ArtemisStartupObservation.Evidence values, BrokerJournalEvidence.Summary journal) {
     Observations {
@@ -102,6 +107,19 @@ final class MorningBrokerExecution {
     }
   }
 
+  static Completion execute(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      MorningParentBudget budget,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database,
+      StartupPermitRecords.Epoch epoch,
+      MorningNewRunAdmission.OriginalProof original)
+      throws IOException {
+    return execute(context, expected, budget, state, database, epoch, original, () -> epoch);
+  }
+
+  /** Same private Morning scope: only its actual publication result advances expected current. */
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
@@ -113,8 +131,10 @@ final class MorningBrokerExecution {
       MaintenanceRunState state,
       MorningDatabaseSession.Access database,
       StartupPermitRecords.Epoch epoch,
-      MorningNewRunAdmission.OriginalProof original)
+      MorningNewRunAdmission.OriginalProof original,
+      ExpectedCurrent expectedCurrent)
       throws IOException {
+    Objects.requireNonNull(expectedCurrent, "same-owner expected current");
     require(
         expected.service() == RootStartupContext.Service.MORNING
             && epoch.state() == StartupPermitRecords.State.INVALID
@@ -130,6 +150,11 @@ final class MorningBrokerExecution {
           original.verify();
           // SSC128/BUG376: Live is also rechecked inside Session-owned read transactions.
           // Never start a recursive DB transaction through this borrowed OS/identity guard.
+          var current = Objects.requireNonNull(expectedCurrent.get(), "expected current epoch");
+          require(
+              current.boot().equals(epoch.boot())
+                  && current.epoch().equals(epoch.epoch())
+                  && current.activation().equals(epoch.activation()));
           var startup = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startupPath);
           ResourceScope.use(
               startup::close,
@@ -137,7 +162,7 @@ final class MorningBrokerExecution {
                 require(
                     new StartupPermitFiles(startup, LinuxInodeSecurity.create())
                         .current()
-                        .equals(epoch));
+                        .equals(current));
                 return true;
               });
           context.recheck(expected);

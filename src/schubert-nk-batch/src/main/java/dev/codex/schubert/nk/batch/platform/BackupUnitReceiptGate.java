@@ -79,6 +79,11 @@ public final class BackupUnitReceiptGate {
       return snapshot.executionEnd();
     }
 
+    /** SSC136: retain the producing gate, never rebuild an owner from receipt fields. */
+    public void requireStillPresent() throws IOException {
+      owner.requireStillPresent(this);
+    }
+
     @Override
     public String toString() {
       return "TerminalReceipt[observations=<redacted>]";

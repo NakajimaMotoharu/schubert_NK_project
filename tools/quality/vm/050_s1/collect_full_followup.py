@@ -133,5 +133,11 @@ if int(identifier[2:5]) >= 403:
     manifest['ykt'].append('YKT-308')
     manifest['testIds'].extend(['ISSCOMP001..010', 'ISSSTEP004..007'])
     manifest['limitations'] = ['same-source native ten actual steps/five gate frames and stopped GC proof pending', 'regular issuer/full proofs/revoke/A handoff/API/Web/CHR incomplete', 'fresh retention/failed Backup/native negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
+if int(identifier[2:5]) >= 404:
+    manifest['ssc'].append('SSC-136')
+    manifest['bugs'].extend(['BUG-389', 'BUG-390', 'BUG-391'])
+    manifest['ykt'].extend(['YKT-309', 'YKT-310', 'YKT-311'])
+    manifest['testIds'].append('ISSPUB001..008')
+    manifest['limitations'] = ['same-source actual regular issuer/three proofs/after-A commit pending', 'Root full admission/same-parent launch/same-PID exec/API/Web/CHR incomplete', 'fresh retention/failed Backup/native negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

@@ -226,6 +226,9 @@ final class MorningBackupUnitCycleTest {
           events);
       assertSame(actual, cycle.completedReceipt());
       assertEquals(1, start.retire);
+      cycle.recheckCompletedBackup();
+      assertEquals("post-stop-actual", events.getLast());
+      assertThrows(Retained.class, cycle::retainUnresolvedOwner);
       assertThrows(NullPointerException.class, () -> cycle.executeObserved(() -> {}, null));
     }
     for (boolean missing : List.of(true, false)) {

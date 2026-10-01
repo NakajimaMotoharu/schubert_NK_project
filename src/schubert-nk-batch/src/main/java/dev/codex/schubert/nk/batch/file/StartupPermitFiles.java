@@ -45,6 +45,18 @@ public final class StartupPermitFiles {
     UUID next();
   }
 
+  /** SSC136: caller's actual same-owner observations, inside the three publication boundaries. */
+  public enum IssuePhase {
+    BEFORE_PUBLICATION,
+    BEFORE_ISSUED,
+    AFTER_READBACK
+  }
+
+  @FunctionalInterface
+  public interface IssueProof {
+    void verify(IssuePhase phase, Epoch expectedCurrent) throws IOException;
+  }
+
   public StartupPermitFiles(OwnedTransferDirectory root, InodeSecurityCalls security) {
     this(root, security, new NioIo(), UUID::randomUUID);
   }
@@ -77,6 +89,17 @@ public final class StartupPermitFiles {
 
   /** Caller has independently confirmed every required actual prestart step and current binding. */
   public Epoch issue(Epoch expected, Permit permit) throws StorageIoException {
+    return issue(expected, permit, Optional.empty());
+  }
+
+  /** Production Morning uses this entry; the existing low-level entry retains its precondition. */
+  public Epoch issue(Epoch expected, Permit permit, IssueProof proof) throws StorageIoException {
+    return issue(
+        expected, permit, Optional.of(Objects.requireNonNull(proof, "actual issue proof")));
+  }
+
+  private Epoch issue(Epoch expected, Permit permit, Optional<IssueProof> proof)
+      throws StorageIoException {
     Objects.requireNonNull(expected, "expected epoch");
     Objects.requireNonNull(permit, "permit");
     synchronized (stateLock) {
@@ -91,6 +114,11 @@ public final class StartupPermitFiles {
                 && expected.activation().equals(permit.activation()));
         UUID part = parts.next();
         Snapshot original = writePart(part, content, before);
+        verify(proof, IssuePhase.BEFORE_PUBLICATION, expected);
+        require(expected.equals(current(before)));
+        require(
+            original.equals(root.atExistingEntryHandle(part + ".part", p -> file(p, 1, before))));
+        checkBytes(part + ".part", content, before);
         String name = permit.epoch() + ".permit";
         root.publishAs(part, name);
         require(
@@ -99,7 +127,12 @@ public final class StartupPermitFiles {
         require(expected.equals(current(before)));
         String digest = HexFormat.of().formatHex(io.digest().digest(content));
         Epoch issued = expected.issued(digest);
+        verify(proof, IssuePhase.BEFORE_ISSUED, expected);
+        require(expected.equals(current(before)));
         replaceCurrent(issued, before);
+        require(permit.equals(readIssuedAt(before)));
+        verify(proof, IssuePhase.AFTER_READBACK, issued);
+        require(issued.equals(current(before)));
         require(permit.equals(readIssuedAt(before)));
         finish(before);
         return issued;
@@ -109,6 +142,44 @@ public final class StartupPermitFiles {
         Arrays.fill(content, (byte) 0);
       }
     }
+  }
+
+  /**
+   * SSC136: only this attempted publication's exact INVALID/derived ISSUED may be revoked. Keep
+   * every permit/part; do not repair a foreign or undecodable current. Caller retains M/A.
+   */
+  public Epoch revoke(Epoch expected, Permit attempted) throws StorageIoException {
+    Objects.requireNonNull(expected, "same INVALID epoch");
+    Objects.requireNonNull(attempted, "attempted permit");
+    synchronized (stateLock) {
+      byte[] content = StartupPermitRecords.permit(attempted);
+      try {
+        Snapshot before = begin();
+        require(expected.state() == State.INVALID);
+        require(
+            expected.boot().equals(attempted.boot())
+                && expected.epoch().equals(attempted.epoch())
+                && expected.activation().equals(attempted.activation()));
+        Epoch actual = current(before);
+        if (!actual.equals(expected)) {
+          String digest = HexFormat.of().formatHex(io.digest().digest(content));
+          require(actual.equals(expected.issued(digest)));
+        }
+        replaceCurrent(expected, before);
+        require(expected.equals(current(before)));
+        finish(before);
+        return expected;
+      } catch (IOException | NoSuchAlgorithmException failure) {
+        throw unavailable();
+      } finally {
+        Arrays.fill(content, (byte) 0);
+      }
+    }
+  }
+
+  private static void verify(Optional<IssueProof> proof, IssuePhase phase, Epoch expected)
+      throws IOException {
+    if (proof.isPresent()) proof.orElseThrow().verify(phase, expected);
   }
 
   public Epoch current() throws StorageIoException {
@@ -131,13 +202,32 @@ public final class StartupPermitFiles {
     synchronized (stateLock) {
       try {
         Snapshot before = begin();
+        requireNoPublicationIntent(before);
         Permit result = readIssuedAt(before);
+        requireNoPublicationIntent(before);
         finish(before);
         return result;
       } catch (IOException failure) {
         throw unavailable();
       }
     }
+  }
+
+  private void requireNoPublicationIntent(Snapshot directory) throws IOException {
+    boolean[] entered = {false};
+    try {
+      root.atExistingEntryHandle(
+          "permit-start.intent",
+          p -> {
+            entered[0] = true;
+            file(p, 0, directory);
+            return Boolean.TRUE;
+          });
+    } catch (StorageIoException missing) {
+      if (!entered[0] && missing.reason() == StorageIoException.Reason.MISSING) return;
+      throw unavailable();
+    }
+    throw unavailable();
   }
 
   private Permit readIssuedAt(Snapshot directory) throws IOException {
@@ -150,6 +240,22 @@ public final class StartupPermitFiles {
       return result;
     } finally {
       Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  /** Package-only issuer owner readback while its fixed intent remains held; not Root admission. */
+  void verifyPublication(Epoch expected, Permit attempted) throws StorageIoException {
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(attempted);
+    synchronized (stateLock) {
+      try {
+        var before = begin();
+        require(expected.state() == State.ISSUED && current(before).equals(expected));
+        require(readIssuedAt(before).equals(attempted));
+        finish(before);
+      } catch (IOException failure) {
+        throw unavailable();
+      }
     }
   }
 

@@ -81,6 +81,29 @@ public final class BackupStartIntentFiles implements AutoCloseable {
         target);
   }
 
+  /** SSC136: the same strict marker primitive, fixed publication namespace, not a Unit selector. */
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
+      justification =
+          "SS343 SSC136 fixes the root-only publication intent namespace; no configurable path")
+  public static BackupStartIntentFiles createPublication(
+      RootStartupContext context, RootStartupContext.Snapshot expected) throws IOException {
+    Objects.requireNonNull(context, "Morning publication context");
+    Objects.requireNonNull(expected, "Morning publication identity");
+    require(expected.service() == RootStartupContext.Service.MORNING);
+    context.recheck(expected);
+    var root =
+        OwnedTransferDirectory.open(
+            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    return new BackupStartIntentFiles(
+        root,
+        LinuxInodeSecurity.create(),
+        new InspectorEnvironmentPublisher.NioIo(),
+        () -> context.recheck(expected),
+        "permit-start.intent");
+  }
+
   BackupStartIntentFiles(OwnedTransferDirectory root, InodeSecurityCalls security, Gate gate) {
     this(root, security, new InspectorEnvironmentPublisher.NioIo(), gate);
   }
@@ -99,12 +122,22 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       EnvironmentInodePolicy.Source source,
       Gate gate,
       Target target) {
+    this(root, security, source, gate, Objects.requireNonNull(target, "closed phase").marker());
+  }
+
+  // Package-only inode/fault port; the public native factory still fixes its one marker name.
+  BackupStartIntentFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      EnvironmentInodePolicy.Source source,
+      Gate gate,
+      String name) {
     this.root = Objects.requireNonNull(root, "fixed Backup request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.policy =
         new EnvironmentInodePolicy(security, Objects.requireNonNull(source, "inode source"));
     this.gate = Objects.requireNonNull(gate, "Morning root recheck");
-    this.name = Objects.requireNonNull(target, "closed phase").marker();
+    this.name = Objects.requireNonNull(name, "fixed marker");
   }
 
   /** Must run after M acquisition, before any new original, stop, or Backup start. */
@@ -173,6 +206,42 @@ public final class BackupStartIntentFiles implements AutoCloseable {
       require(directory.sameIdentity(directory()));
       begun = false;
       requireClear();
+    }
+  }
+
+  /** Same owner token; re-read before any publication boundary. SSC136. */
+  public void requirePresent(Intent intent) throws IOException {
+    synchronized (lock) {
+      Objects.requireNonNull(intent, "same publication marker");
+      require(begun && intent.owner == this);
+      gate.verify();
+      var directory = directory();
+      require(intent.marker.equals(root.atExistingEntryHandle(name, p -> file(p, directory))));
+      require(directory.sameIdentity(directory()));
+      gate.verify();
+    }
+  }
+
+  /** Recovery only: preserve a strict existing quarantine, or create one. Never retire/reuse it. */
+  void quarantinePublication() throws IOException {
+    synchronized (lock) {
+      require(name.equals("permit-start.intent"));
+      gate.verify();
+      var directory = directory();
+      boolean[] entered = {false};
+      try {
+        root.atExistingEntryHandle(
+            name,
+            p -> {
+              entered[0] = true;
+              return file(p, directory);
+            });
+        require(directory.sameIdentity(directory()));
+        gate.verify();
+      } catch (StorageIoException missing) {
+        require(!entered[0] && missing.reason() == StorageIoException.Reason.MISSING);
+        begin();
+      }
     }
   }
 
