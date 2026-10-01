@@ -379,6 +379,7 @@ class QuestionSubmissionServiceTest {
   }
 
   static final class Fixture implements AutoCloseable {
+    final ApiLogDatabaseFixture database;
     final AtomicInteger live = new AtomicInteger(), ids = new AtomicInteger();
     final AtomicLong nanos = new AtomicLong();
     long nanoStep;
@@ -394,14 +395,19 @@ class QuestionSubmissionServiceTest {
     final QuestionSubmissionService service;
 
     Fixture() throws Exception {
-      try (var c = db.admin();
+      this(db);
+    }
+
+    Fixture(ApiLogDatabaseFixture database) throws Exception {
+      this.database = Objects.requireNonNull(database);
+      try (var c = database.admin();
           var s = c.createStatement()) {
         s.execute(
             "truncate schubert.app_users,schubert.mq_outbox,schubert.app_logs restart identity cascade");
       }
       sql(
           "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) select i,'u'||i,'u'||i,'unusable-synthetic','USER','ACTIVE','2026-10-01T00:00:00Z','2026-10-01T00:00:00Z','2026-10-01T00:00:00Z' from (values(1),(2))n(i)");
-      try (var c = db.api();
+      try (var c = database.api();
           var s =
               c.prepareStatement(
                   """
@@ -429,7 +435,7 @@ class QuestionSubmissionServiceTest {
                     assertEquals("getConnection", m.getName());
                     if (fault.equals("open")) throw new SQLException("private-provider");
                     if (fault.equals("null")) return null;
-                    Connection actual = db.api();
+                    Connection actual = database.api();
                     live.incrementAndGet();
                     return Proxy.newProxyInstance(
                         Connection.class.getClassLoader(),
@@ -476,7 +482,7 @@ class QuestionSubmissionServiceTest {
     }
 
     void sql(String query) {
-      try (var c = db.api();
+      try (var c = database.api();
           var s = c.createStatement()) {
         s.executeUpdate(query);
       } catch (SQLException e) {
@@ -485,7 +491,7 @@ class QuestionSubmissionServiceTest {
     }
 
     long scalar(String query) throws SQLException {
-      try (var c = db.api();
+      try (var c = database.api();
           var s = c.createStatement();
           var r = s.executeQuery(query)) {
         assertTrue(r.next());
@@ -494,7 +500,7 @@ class QuestionSubmissionServiceTest {
     }
 
     String text(String query) throws SQLException {
-      try (var c = db.api();
+      try (var c = database.api();
           var s = c.createStatement();
           var r = s.executeQuery(query)) {
         assertTrue(r.next());
