@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+## PG403同Source実十段prestart帰還（2026-10-01 12:17、限定）
+
+Source f376bb543cc3e9528f03e382862e1791372fea8b、全6 clean 2698PT/406suite/FES0/静的6zero、12:09:28終了、full manifest c5440eb426df19ce7ac5f363411111ebcf0e5eaa71b58b6015a44d01ecdcbdda。署名178artifact/61dependency/23SQL manifest8fca38cc7b626ecee62f9043c9f72bdc896b2a0b06dccbe7499fcb505d117766を同原本/INVALID/全停止/M/Aで配備。外部Morning一回は真正Backup再用/停止後GC proof→親CONFIG実完成判定/全14列保持→Cleanup→fresh Broker→Expiry→実retainer/10step5gate/Main299帰還。旧112全14列不変＋10SKIP=122、Backup19/Cleanup11/Expiry7、4worker全kernel終端/全request空、原本BEGIN/INVALID/permit0、backup inventory全metadata/4file内容hash前後byte一致。親全体30を起動成功にしない。
+
+同byte4実exec/host unionmiss B/L/M/C750/1191/206/11、ownhost882/2440/421/31より132/1249/215/20解消。前PG402 union726/1179/203/11に対する残増24/12/3/0、ownhost追加24/31/5/0を別表示する。native manifest9119e6e1b6588a3dfb7f854a215919ccdcc5e25b13b3ee19e033a474e44d033b、class mismatch0。新408sanitized証跡だけ構造/秘密pattern0、全project正式gateではない。BUG388/YKT308は直接修正/既存周期/実GCを再試験して完了。新規SUCCESS/真FAILED/native負系/timeout/許可発行/Root/APIWeb/CHR/100%は残件、formal run24/1964PT/53scope/中心48.3%は据置。actual canonical byteをnative emit/hash比較した証拠ではなく、host独立whole goldenと実到達を分ける。全command/hash/環境は2manifest・tools/quality/vm/050_s1/pg403_*、raw DB/Invocation/native exec/成果物はWork privateだけ。
+
 ## PG403直接試験（2026-10-01 11:55、全/native未認定）
 
 pg403-stop-three-v3.logはStorage16/Bootstrap4/Batch58=78PT、F/E/S0・静的3zero、37.841秒/11:55:38終了。独立BUG388再現前のpg403-stop-gc-repro-v2.logはRetained一件で不合格、修正後のISSCOMP008～010は停止前真正0/30→明示stop→GC完全cold、別target/部分zero/旧世代/停止後証明差替を確認した。新規Terminal/BackupObservation/BackupCompletion/PrestartEvidenceのline/method/class/branchは全100%。この選択結果をnative-only Main/全module coverageへ流用しない。旧106PT選択も成功、追加後のv2は依存module対象指定不備による未実行で算入0。手goldenは不変更、全6/signed同Source native/許可発行/正式は次工程の検証対象で未合格。
