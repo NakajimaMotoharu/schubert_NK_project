@@ -1,0 +1,225 @@
+{
+  "id": "PG410-native-effective-auth-exit50",
+  "formal": false,
+  "sourceCommit": "32c6a7b1e79abf114901003c4a8f1300b33bf0c0",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-10-01T12:03:25.236609+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "Pg410KnownAuthRecovery fixed source; pg410_native.sh one external Morning; pg410_collect_native.sh frozen classes",
+  "collectorExit": 0,
+  "applicationParentExit": 30,
+  "applicationApiExit": 50,
+  "wholeStartupAccepted": false,
+  "bugs": [
+    "BUG-411",
+    "BUG-412",
+    "BUG-415"
+  ],
+  "ssc": [
+    "SSC-148"
+  ],
+  "horizontal": [
+    "YKT-328",
+    "YKT-330"
+  ],
+  "actual": {
+    "old172RowsAll14ColumnsUnchanged": true,
+    "rows": 182,
+    "freshSkippedSteps": 10,
+    "backupInventoryUnchanged": true,
+    "genuineRootEntry": true,
+    "samePidOrdinaryApi": true,
+    "sameInvocation": true,
+    "ordinaryUid": 999,
+    "ordinaryGid": 981,
+    "ordinaryAllFiveCapabilitySetsZero": true,
+    "ordinaryNoNewPrivileges": true,
+    "brokerAuthenticationRejectionObserved": false,
+    "rootExecDumpEmpty": true,
+    "rootPositiveCoverageCollected": false,
+    "webStarted": false,
+    "businessReady": false
+  },
+  "coverage": {
+    "classByteMismatch": 0,
+    "sameRunRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "moduleUnion": {
+      "protocol": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        }
+      },
+      "storage": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 1129
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 248
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 36
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 501
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2190
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 381
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1215
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      },
+      "web": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 25,
+          "covered": 4755
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 957
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 190
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1615
+        }
+      },
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1640,
+          "covered": 13764
+        },
+        "METHOD": {
+          "missed": 284,
+          "covered": 2191
+        },
+        "CLASS": {
+          "missed": 14,
+          "covered": 305
+        },
+        "BRANCH": {
+          "missed": 885,
+          "covered": 6202
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 948,
+      "LINE": 1752,
+      "METHOD": 303,
+      "CLASS": 15
+    }
+  },
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-known-auth-recovery.log",
+      "sha256": "23b8ccb096b77e8feff2ff0f99e32ec9f2d70ba5b78ede86c83771c93e1c7fb2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-auth-readback.log",
+      "sha256": "ddadf41515a6337bf2a1e8e5727cc09383bf7bc0120d1c0c8cd833cd7fdbd980"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-native-driver.log",
+      "sha256": "6a014c149cda934be36a8a020b70eb17a7f67128083d510b7028ba531bdb7fff"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-native-db-before-full.log",
+      "sha256": "10e33d475f5750bb51e17c9de8d3955ab347f8056aa87df325cdf514dc4634f3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-native-db-final-full.log",
+      "sha256": "088e54f4f0d6c8ec69f1917aac8b530ea02c3cf2042551823debbed64c9878f9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-native-full18-private.txt",
+      "sha256": "ca3eb18daa132c8a7b5a3bcac5de4fe3cb24e8c2d55f0dc5f38cde8cd95a9d8d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-root-watch-private.jsonl",
+      "sha256": "61a3b5d67144913f92f7b09ff927a9c8fa779b5bc74652736605931344590315"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-broker-journal-private.txt",
+      "sha256": "9f1e6c50f413dfce6b20b932f3fad3a9ad5310dc83a35bf6b0102f09a1e84870"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg410-backup-after-private.json",
+      "sha256": "8de752ceb16a754a5673cb1d4e412c940f75cdc502bdb2c4ded859b81536726c"
+    }
+  ],
+  "limitations": [
+    "Exit50 alone does not prove every IO path or full dependency/ready success",
+    "PG411 working-tree source was not deployed or mixed into frozen coverage",
+    "API full business registration/Web readiness/actual CHR/Root positive coverage remain pending",
+    "Formal run24 and48.3% unchanged"
+  ],
+  "redaction": "No raw DB/receipt/journal/native exec/credential/session/key/master/dump exported to Git"
+}

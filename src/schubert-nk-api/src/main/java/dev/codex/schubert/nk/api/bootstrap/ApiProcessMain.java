@@ -1,8 +1,10 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness;
+import dev.codex.schubert.nk.api.dispatch.ApiSyncRequestDispatcher;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
+import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -127,7 +129,19 @@ public final class ApiProcessMain {
                                   credentials, inputs.config().value("nk.mq.url"))) {
                             new ApiDependencyReadiness(pool, broker.sync(), broker.webLog())
                                 .verify();
-                            ServiceProcessResources.unassembledStartup().run(pool, credentials);
+                            ApiApplicationPreparation.execute(
+                                pool,
+                                credentials,
+                                java.nio.file.Path.of(
+                                    inputs.config().value("nk.api.storage.transfer-root")),
+                                java.time.Clock.systemUTC(),
+                                processors -> {
+                                  // SSC149: exact registration fails before consumer exposure until
+                                  // the remaining real business processors are connected. No dummy
+                                  // registration, partial ready or admission release is permitted.
+                                  new ApiSyncRequestDispatcher(processors);
+                                  throw new IOException("mandatory API runtime unavailable");
+                                });
                           }
                         }));
   }
