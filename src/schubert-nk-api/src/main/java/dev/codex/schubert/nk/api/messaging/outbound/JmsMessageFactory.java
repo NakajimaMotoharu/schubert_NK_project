@@ -2,7 +2,6 @@ package dev.codex.schubert.nk.api.messaging.outbound;
 
 import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
-import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
@@ -18,14 +17,13 @@ import java.util.Objects;
 public enum JmsMessageFactory {
   INSTANCE;
 
-  /** Creates one synchronous reply with the identity properties required by SS 321 section 8. */
+  /** Creates a registry-valid S/S or QSB S/A reply (SS321/SSC151/BUG421). */
   public BytesMessage createReply(JMSContext context, byte[] encodedBody) throws JMSException {
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(encodedBody, "encodedBody");
     CommonHeader header = HeaderCodec.standard().peek(encodedBody);
     if (encodedBody.length > BrokerTopology.SYNC_REPLY_WEB.maximumBodyLength()
         || header.messageKind() != MessageKind.RESPONSE
-        || header.interactionKind() != InteractionKind.SYNCHRONOUS
         || header.totalLength() != encodedBody.length) {
       throw new IllegalArgumentException("encoded outbound reply identity is inconsistent");
     }

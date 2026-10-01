@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
@@ -37,6 +38,44 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-JMS-005/006 production request sender transaction and transport tests. */
 final class ArtemisRequestSenderTest {
   private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
+  @Test
+  @DisplayName("PT-JMS-QSB-A-WEB-SEND: valid QSB Q/A, not arbitrary asynchronous wire")
+  void questionAcceptanceSendUsesSameApprovedQueue(@TempDir Path root) throws Exception {
+    var broker = start(root);
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var receiving = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var requests =
+            receiving.createConsumer(
+                new org.apache.activemq.artemis.jms.client.ActiveMQQueue(
+                    "nk.sync.request::nk.sync.request.q"))) {
+      var sender =
+          new ArtemisRequestSender(() -> factory.createContext(JMSContext.SESSION_TRANSACTED));
+      byte[] expected = independentAsyncRequestWire();
+      ascii(expected, 256, "independent question");
+      ascii(expected, 4352, "00000000-0000-0000-0000-000000000004");
+      long before = System.currentTimeMillis();
+      sender.send(MESSAGE_ID, expected);
+      var actual = (BytesMessage) requests.receive(5000);
+      assertNotNull(actual);
+      assertArrayEquals(expected, actual.getBody(byte[].class));
+      assertEquals("QSBREQ01", actual.getStringProperty("NKLayoutID"));
+      assertEquals(MESSAGE_ID.toString(), actual.getStringProperty("NKMessageID"));
+      assertEquals(MESSAGE_ID.toString(), actual.getJMSCorrelationID());
+      assertEquals("001", actual.getStringProperty("NKProtocolVersion"));
+      assertEquals(
+          "nk.sync.reply.web", ((ActiveMQDestination) actual.getJMSReplyTo()).getAddress());
+      assertEquals(DeliveryMode.PERSISTENT, actual.getJMSDeliveryMode());
+      assertTrue(actual.getJMSExpiration() >= before + 4500);
+      assertTrue(actual.getJMSExpiration() <= before + 7000);
+      byte[] wrong = expected.clone();
+      wrong[23] = 'S';
+      assertThrows(PermanentProtocolException.class, () -> sender.send(MESSAGE_ID, wrong));
+      assertEquals(null, requests.receive(100));
+    } finally {
+      broker.stop();
+    }
+  }
 
   @Test
   @DisplayName("PT-JMS-005 production sender commits exact persistent request properties")
@@ -100,8 +139,9 @@ final class ArtemisRequestSenderTest {
     assertThrows(
         IllegalArgumentException.class, () -> unopened.send(MESSAGE_ID, independentResponseWire()));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> unopened.send(MESSAGE_ID, independentAsyncRequestWire()));
+        PermanentProtocolException.class,
+        () ->
+            unopened.send(MESSAGE_ID, independentWire('Q', 'A', "LOGREQ01", MESSAGE_ID, 0, false)));
     assertFalse(opened.get());
 
     ArtemisRequestSender nullContext = new ArtemisRequestSender(() -> null);

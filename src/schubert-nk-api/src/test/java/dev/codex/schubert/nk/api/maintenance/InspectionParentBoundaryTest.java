@@ -289,16 +289,16 @@ final class InspectionParentBoundaryTest {
 
   @Test
   void appendOnlyMigration() throws Exception {
-    // SSC095 appends V023; historical V001..018 hashes below remain immutable.
+    // SSC095/152 append V023/024; historical V001..018 hashes below remain immutable.
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023"),
+            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024"),
         MigrationInventory.VERSIONS);
     assertEquals(
-        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023",
+        "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024",
         MigrationInventory.CSV);
-    assertEquals("23", MigrationInventory.COUNT_TEXT);
+    assertEquals("24", MigrationInventory.COUNT_TEXT);
     assertNotEquals(MigrationInventory.VERSIONS.subList(0, 18), MigrationInventory.VERSIONS);
     assertThrows(UnsupportedOperationException.class, () -> MigrationInventory.VERSIONS.add("022"));
     Path migrations =
@@ -329,7 +329,7 @@ final class InspectionParentBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(23, files.size());
+    assertEquals(24, files.size());
     for (int i = 0; i < 18; i++) {
       assertTrue(files.get(i).getFileName().toString().startsWith("V%03d__".formatted(i + 1)));
       assertEquals(
@@ -340,7 +340,7 @@ final class InspectionParentBoundaryTest {
     }
     try (var c = db.admin()) {
       assertEquals(
-          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023",
+          "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024",
           scalar(
               c,
               "select string_agg(version,',' order by installed_rank) from schubert_meta.flyway_schema_history where version is not null and success"));

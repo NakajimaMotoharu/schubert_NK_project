@@ -6,7 +6,6 @@ import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
-
 root = pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation')
 runroot = pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 assert len(sys.argv) == 4
@@ -188,5 +187,15 @@ if int(identifier[2:5]) >= 413:
     manifest['ykt'].append('YKT-335')
     manifest['testIds'].extend(['ROOTCFG002', 'ISSUERCFG002'])
     manifest['command'] = 'six modules: clean test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o; verified Node24.19.0 PATH'
+if int(identifier[2:5]) >= 415:
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(421, 431) if n != 424)
+    manifest['ssc'].extend(['SSC-151', 'SSC-152', 'SSC-153'])
+    manifest['ykt'].extend(['YKT-332', 'YKT-333', 'YKT-334', 'YKT-336', 'YKT-337', 'YKT-338'])
+    manifest['testIds'].extend(['PT-JMS-QSB-A-API', 'PT-JMS-QSB-A-WEB-SEND',
+        'PT-JMS-QSB-A-WEB-REPLY', 'PT-JMS-EVENT-DELIVERY', 'PT-QST-STATE-001..003'])
+    manifest['ddl'] = {'versionedMigrations': 24, 'appendOnly': 'V024 notification RECEIVED state',
+        'v003Sha256': '85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e',
+        'legacyMismatch': 'V024 transaction fails without guessed job state', 'nativeMigration': 'not deployed'}
+    manifest['command'] += '; outputFile=target/runtime-dependencies.txt appendOutput=false'
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

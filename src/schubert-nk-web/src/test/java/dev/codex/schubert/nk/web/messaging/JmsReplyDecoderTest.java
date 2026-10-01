@@ -28,6 +28,40 @@ final class JmsReplyDecoderTest {
   private static final JmsReplyDecoder DECODER = new JmsReplyDecoder();
 
   @Test
+  void acceptanceReplyUsesExactRegisteredAsyncProfile() throws Exception {
+    byte[] expected = Arrays.copyOf(responseWire(), 320);
+    Arrays.fill(expected, 256, 320, (byte) ' ');
+    ascii(expected, 11, "QSBRSP01");
+    expected[23] = 'A';
+    ascii(expected, 181, "000064");
+    ascii(expected, 199, "000000320");
+    ascii(expected, 256, "0".repeat(26));
+    ascii(expected, 282, "000000000001");
+    ascii(expected, 294, "20260903120000000");
+    var valid =
+        with(
+            with(with(validReply(), "body", expected), "bodyLength", 320L),
+            "NKLayoutID",
+            "QSBRSP01");
+    assertArrayEquals(expected, DECODER.decode(bytesMessage(valid)).body());
+    assertEquals(UUID.fromString(REQUEST_ID), DECODER.decode(bytesMessage(valid)).correlationId());
+    for (char wrong : new char[] {'S', 'I'}) {
+      byte[] invalid = expected.clone();
+      invalid[23] = (byte) wrong;
+      assertRejected(bytesMessage(with(valid, "body", invalid)));
+    }
+    byte[] requestKind = expected.clone();
+    requestKind[22] = 'Q';
+    assertRejected(bytesMessage(with(valid, "body", requestKind)));
+    assertRejected(bytesMessage(with(valid, "NKLayoutID", "LOGRSP01")));
+    assertRejected(bytesMessage(with(valid, "NKMessageID", REQUEST_ID)));
+    assertRejected(bytesMessage(with(valid, "destination", new ActiveMQQueue("nk.async.work"))));
+    byte[] wrongA = responseWire();
+    wrongA[23] = 'A';
+    assertRejected(bytesMessage(with(validReply(), "body", wrongA)));
+  }
+
+  @Test
   void validReplyProducesAnImmutableRedactedResult() throws Exception {
     Map<String, Object> values = validReply();
     byte[] providerBody = (byte[]) values.get("body");

@@ -27,10 +27,13 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
@@ -47,6 +50,116 @@ final class InternalEventListenerTest {
       UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
+
+  @Test
+  @DisplayName("PT-JMS-EVENT-DELIVERY: actual guarded broker redeliveries 1 through 4")
+  void deliveryAwareWorkerReceivesActualCountAndOriginalTransport(@TempDir Path root)
+      throws Exception {
+    var broker = start(root);
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
+        var work = receiving.createConsumer(queue(BrokerTopology.ASYNC_WORK))) {
+      var observed = new ArrayList<DeliveryMetadata>();
+      var lastEvent =
+          new AtomicReference<
+              dev.codex.schubert.nk.protocol.layout.WireMessage<
+                  dev.codex.schubert.nk.protocol.layout.FixedPayload>>();
+      var failure = new IllegalStateException("synthetic temporary worker failure");
+      InternalEventProcessor processor =
+          new InternalEventProcessor() {
+            @Override
+            public void process(
+                dev.codex.schubert.nk.protocol.layout.WireMessage<
+                        dev.codex.schubert.nk.protocol.layout.FixedPayload>
+                    event) {
+              throw new AssertionError("delivery-aware entry was bypassed");
+            }
+
+            @Override
+            public void process(
+                dev.codex.schubert.nk.protocol.layout.WireMessage<
+                        dev.codex.schubert.nk.protocol.layout.FixedPayload>
+                    event,
+                DeliveryMetadata delivery) {
+              assertEquals("QWKREQ01", event.header().layoutId().value());
+              lastEvent.set(event);
+              observed.add(delivery);
+              if (delivery.deliveryCount() < 4) throw failure;
+            }
+          };
+      var listener = new QuestionWorkListener(processor, CLOCK);
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      String transport = null;
+      for (int count = 1; count <= 4; count++) {
+        // SS321/QA041: actual delays are 1s, 5s, 25s. Keep the approved broker profile.
+        Message actual = required(work.receive(35000));
+        assertEquals(count, actual.getIntProperty("JMSXDeliveryCount"));
+        if (transport == null) transport = actual.getJMSMessageID();
+        assertEquals(transport, actual.getJMSMessageID());
+        if (count < 4)
+          assertSame(
+              failure,
+              assertThrows(
+                  IllegalStateException.class, () -> listener.onMessage(receiving, actual)));
+        else listener.onMessage(receiving, actual);
+        assertEquals(count, observed.size());
+        assertEquals(count, observed.get(count - 1).deliveryCount());
+        assertEquals(transport, observed.get(count - 1).transportMessageId());
+        assertEquals(NOW, observed.get(count - 1).receivedAt());
+      }
+      assertEquals(
+          List.of(1, 2, 3, 4), observed.stream().map(DeliveryMetadata::deliveryCount).toList());
+      assertNull(work.receive(100));
+      InternalEventProcessor legacy =
+          event -> {
+            throw new AssertionError("null reached legacy");
+          };
+      assertThrows(NullPointerException.class, () -> legacy.process(null, observed.getFirst()));
+      assertThrows(NullPointerException.class, () -> legacy.process(lastEvent.get(), null));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  @DisplayName("PT-JMS-EVENT-DELIVERY: unbounded transport metadata is isolated before business")
+  void invalidDeliveryMetadataCannotReachBusiness(@TempDir Path root) throws Exception {
+    var broker = start(root);
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
+        var observing = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var work = receiving.createConsumer(queue(BrokerTopology.ASYNC_WORK));
+        var dlq = observing.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
+      var calls = new AtomicInteger();
+      var listener = new QuestionWorkListener(event -> calls.incrementAndGet(), CLOCK);
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      var original = required(work.receive(5000));
+      var malformed =
+          (BytesMessage)
+              Proxy.newProxyInstance(
+                  BytesMessage.class.getClassLoader(),
+                  new Class<?>[] {BytesMessage.class},
+                  (proxy, method, args) -> {
+                    if (method.getName().equals("getJMSMessageID")) return "!".repeat(129);
+                    try {
+                      return method.invoke(original, args);
+                    } catch (java.lang.reflect.InvocationTargetException failure) {
+                      throw failure.getCause();
+                    }
+                  });
+      assertThrows(
+          CommittedFatalInboundException.class, () -> listener.onMessage(receiving, malformed));
+      assertEquals(0, calls.get());
+      var isolated = required(dlq.receive(5000));
+      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKOriginalTransportID"));
+      assertEquals("PROTOCOL_INVALID", isolated.getStringProperty("NKErrorCode"));
+      assertNull(work.receive(100));
+    } finally {
+      broker.stop();
+    }
+  }
 
   @Test
   @DisplayName("PT-JMS-005/007 work and Web-log events validate and commit on exact queues")

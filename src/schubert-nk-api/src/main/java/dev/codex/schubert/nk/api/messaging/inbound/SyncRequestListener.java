@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.api.messaging.outbound.ReplySender;
 import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
 import dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder;
+import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
@@ -54,8 +55,17 @@ public final class SyncRequestListener {
     }
     try {
       GuardedJmsMessage guarded = guard.read(message, REQUEST_ROUTE);
+      // SSC151/BUG421: the closed registry admits QSB Q/A, not arbitrary A layouts.
+      // Physical queue/reply-to/kind remain fixed; exact transport equality is unchanged.
+      ExpectedRoute registeredRoute =
+          new ExpectedRoute(
+              REQUEST_ROUTE.messageKind(),
+              HeaderCodec.standard().peek(guarded.body()).interactionKind(),
+              REQUEST_ROUTE.destinationAddress(),
+              REQUEST_ROUTE.requiredReplyToAddress(),
+              REQUEST_ROUTE.expirationRequired());
       WireMessage<FixedPayload> request =
-          decoder.decode(guarded.body(), guarded.metadata(), REQUEST_ROUTE);
+          decoder.decode(guarded.body(), guarded.metadata(), registeredRoute);
       byte[] encodedReply = Objects.requireNonNull(processor.process(request), "encoded reply");
       replies.send(context, encodedReply);
       context.commit();

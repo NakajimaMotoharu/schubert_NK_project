@@ -497,7 +497,7 @@ final class DatabaseMigrationTest {
       execute(
           connection,
           "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) "
-              + "values(1,1,20,'ACCEPTED','ACCEPTED','"
+              + "values(1,1,20,'ACCEPTED','RECEIVED','"
               + FIXED_TIME
               + "','"
               + FIXED_TIME
@@ -825,7 +825,7 @@ final class DatabaseMigrationTest {
     execute(
         connection,
         "insert into schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,"
-            + "accepted_at,state_changed_at,created_at,updated_at) values(912,912,912,801,'ACCEPTED','ACCEPTED',"
+            + "accepted_at,state_changed_at,created_at,updated_at) values(912,912,912,801,'ACCEPTED','RECEIVED',"
             + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00',"
             + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00')");
     execute(connection, "set role schubert_batch");
@@ -1076,6 +1076,7 @@ final class DatabaseMigrationTest {
             "migration/V021__expiry_batch_run_audit.sql",
             "migration/V022__staged_expiry_batch_run_audit.sql",
             "migration/V023__startup_schema_history_projection.sql",
+            "migration/V024__notification_received_state.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

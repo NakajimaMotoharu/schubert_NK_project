@@ -57,6 +57,77 @@ final class SyncRequestListenerTest {
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
 
   @Test
+  @DisplayName("PT-JMS-QSB-A-API: independent Q/A and S/A golden bytes on actual sync queues")
+  void questionAcceptanceUsesExistingPhysicalSyncQueues(@TempDir Path root) throws Exception {
+    var broker = start(root);
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
+        var observing = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var requests = receiving.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
+        var replies = observing.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
+        var dlq = observing.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
+      byte[] input = wire('Q', "QSBREQ01", REQUEST_ID, REQUEST_ID, 4144, false);
+      input[23] = 'A';
+      ascii(input, 256, "independent question");
+      ascii(input, 4352, "00000000-0000-0000-0000-000000000004");
+      byte[] expected = wire('S', "QSBRSP01", RESPONSE_ID, REQUEST_ID, 64, true);
+      expected[23] = 'A';
+      ascii(expected, 256, "0".repeat(26));
+      ascii(expected, 282, "000000000001");
+      ascii(expected, 294, "20260903120000000");
+      var calls = new AtomicInteger();
+      var listener =
+          new SyncRequestListener(
+              request -> {
+                calls.incrementAndGet();
+                assertEquals("QSBREQ01", request.header().layoutId().value());
+                assertEquals(InteractionKind.ASYNC_ACCEPTANCE, request.header().interactionKind());
+                assertArrayEquals(
+                    Arrays.copyOfRange(input, 256, 4400), request.payload().copyData());
+                return expected;
+              },
+              CLOCK);
+      sendRequest(producer, input, "QSBREQ01");
+      listener.onMessage(receiving, required(requests.receive(5000)));
+      var reply = assertInstanceOf(BytesMessage.class, replies.receive(5000));
+      assertArrayEquals(expected, body(reply));
+      assertEquals("QSBRSP01", reply.getStringProperty("NKLayoutID"));
+      assertEquals(RESPONSE_ID.toString(), reply.getStringProperty("NKMessageID"));
+      assertEquals(REQUEST_ID.toString(), reply.getJMSCorrelationID());
+      assertEquals(DeliveryMode.PERSISTENT, reply.getJMSDeliveryMode());
+      assertTrue(reply.getJMSExpiration() > System.currentTimeMillis());
+      assertNull(requests.receive(100));
+      assertEquals(1, calls.get());
+      for (char wrong : new char[] {'S', 'I'}) {
+        byte[] invalid = input.clone();
+        invalid[23] = (byte) wrong;
+        sendRequest(producer, invalid, "QSBREQ01");
+        assertThrows(
+            CommittedFatalInboundException.class,
+            () -> listener.onMessage(receiving, required(requests.receive(5000))));
+        assertNotNull(dlq.receive(5000));
+      }
+      sendRequest(producer, input, "LOGREQ01");
+      assertThrows(
+          CommittedFatalInboundException.class,
+          () -> listener.onMessage(receiving, required(requests.receive(5000))));
+      assertNotNull(dlq.receive(5000));
+      byte[] wrongA = requestWire();
+      wrongA[23] = 'A';
+      sendRequest(producer, wrongA);
+      assertThrows(
+          CommittedFatalInboundException.class,
+          () -> listener.onMessage(receiving, required(requests.receive(5000))));
+      assertNotNull(dlq.receive(5000));
+      assertEquals(1, calls.get());
+      assertNull(replies.receive(100));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
   @DisplayName("PT-JMS-005/007 request ACK and reply become visible in one caller commit")
   void validRequestDispatchesAndCommitsReplyWithOriginalAck(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
@@ -357,12 +428,16 @@ final class SyncRequestListenerTest {
   }
 
   private static void sendRequest(JMSContext context, byte[] body) throws Exception {
+    sendRequest(context, body, "LOGREQ01");
+  }
+
+  private static void sendRequest(JMSContext context, byte[] body, String layout) throws Exception {
     BytesMessage request = context.createBytesMessage();
     request.writeBytes(body);
     request.setJMSCorrelationID(REQUEST_ID.toString());
     request.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.address()));
     request.setStringProperty("NKMessageID", REQUEST_ID.toString());
-    request.setStringProperty("NKLayoutID", "LOGREQ01");
+    request.setStringProperty("NKLayoutID", layout);
     request.setStringProperty("NKProtocolVersion", "001");
     context
         .createProducer()

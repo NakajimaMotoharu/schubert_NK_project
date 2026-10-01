@@ -21,6 +21,12 @@ public final class ApiLogDatabaseFixture {
   private final String url;
 
   public ApiLogDatabaseFixture(Path root) throws Exception {
+    this(root, "latest");
+  }
+
+  /** Test-only real upgrade starting point; no deployed database or production config override. */
+  public ApiLogDatabaseFixture(Path root, String targetVersion) throws Exception {
+    java.util.Objects.requireNonNull(targetVersion, "targetVersion");
     this.root = root;
     String configured = System.getenv("SCHUBERT_PG_ROOT");
     pg =
@@ -72,6 +78,7 @@ public final class ApiLogDatabaseFixture {
         .locations("filesystem:" + resources.resolve("migration"))
         .validateOnMigrate(true)
         .cleanDisabled(true)
+        .target(targetVersion)
         .load()
         .migrate();
   }

@@ -162,7 +162,11 @@ final class ApiSyncRequestDispatcherTest {
             new LayoutId(id),
             1,
             kind,
-            event ? InteractionKind.INTERNAL : InteractionKind.SYNCHRONOUS,
+            event
+                ? InteractionKind.INTERNAL
+                : id.equals("QSBREQ01")
+                    ? InteractionKind.ASYNC_ACCEPTANCE
+                    : InteractionKind.SYNCHRONOUS,
             message,
             message,
             Instant.parse("2026-09-24T00:00:00Z"),

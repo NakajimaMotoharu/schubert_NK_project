@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
 import dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder;
+import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.codec.TransportBodyType;
 import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
@@ -75,7 +76,15 @@ public final class JmsReplyDecoder {
               new LayoutId(requiredProperty(message, PROPERTY_LAYOUT_ID)),
               requiredProperty(message, PROPERTY_PROTOCOL_VERSION),
               destinationAddress);
-      WireMessage<?> decoded = FixedWidthDecoder.standard().decode(body, metadata, REPLY_ROUTE);
+      // SSC151/BUG421: registry-valid QSB S/A shares this physical reply route.
+      ExpectedRoute registeredRoute =
+          new ExpectedRoute(
+              REPLY_ROUTE.messageKind(),
+              HeaderCodec.standard().peek(body).interactionKind(),
+              REPLY_ROUTE.destinationAddress(),
+              REPLY_ROUTE.requiredReplyToAddress(),
+              REPLY_ROUTE.expirationRequired());
+      WireMessage<?> decoded = FixedWidthDecoder.standard().decode(body, metadata, registeredRoute);
       return new ValidatedReply(decoded.header().correlationId(), body);
     } catch (IllegalArgumentException exception) {
       throw rejection("reply transport identity is malformed", exception);

@@ -1,5 +1,7 @@
 # DB物理・DDL・index・権限設計
 
+SSC152の旧state変換前検査：ACCEPTED notificationに対応するjobがRECEIVED以外なら、状態を推測修復せずV024全transactionを失敗させる。元row/constraint/Flyway履歴を保持して整合調査へ回す。正常legacy RECEIVEDだけRECEIVEDへstate-only変換する。新Job/通知mutationは同じtransactionで双方stateを確定する。
+
 SSC152/155（PG/PT、2026-10-01、実装前）：notifications.stateはUI242のJob stateと同じRECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLEDであり、notification_type ACCEPTEDとは別。V003履歴byte/checksumは不変更、append-only V024で旧state ACCEPTEDをRECEIVEDへ整合しcheckを置換、type/row identity/owner/body/time/version/grantは不変更。mq_outbox業務QWK最終DLQの追加profileは後続append-only V025に限定する。専用nullable列dlq_original_message_id uuid、dlq_original_transport_id varchar(128)、dlq_delivery_count integer、dlq_error_code varchar(32)、dlq_detected_at timestamptzを持ち、ordinary全NULL、DLQ QWK001/320byte全有値・元W!=dispatch message_id・count>=1・ASCII printable ID1～128・closed uppercase code・finiteUTCをcheck、元W partial unique indexを設ける。既存incompatible DLQ QWK rowを推測補完せずmigration失敗として保護。既存message_id UKと一般Outbox、role最小grantを維持し、DLQ送信retryでは専用列を変更しない。実SQL/check/旧履歴・原本・role・crash独立PT前は未完。
 
 ## 1. 目的・適用範囲

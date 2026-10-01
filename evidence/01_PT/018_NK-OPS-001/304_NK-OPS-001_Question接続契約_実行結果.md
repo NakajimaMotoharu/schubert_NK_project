@@ -1,0 +1,13 @@
+# Question接続前提の実行結果（暫定・継続）
+
+PG415選択v3：2026-10-01 22:50:16 JST終了0。Protocol7/Storage9/Bootstrap7/API39/Web14/Batch35＝111PT、F/E/S各0、6module SpotBugs各0。YKT337の8classの実migration件数・version・file名・旧hash・schema履歴を再試験し、前v2のBatch literal23失敗（BUG430）を是正。V024実upgrade/rollback/permissions、A profile境界も同runで成功。selected/cumulative coverageで正式認定・全回帰・native配備・全業務受入を代用しない。原本logはWork PG379/pg415-selected-v3.log。次は固定Sourceの同security/DDL変更群の全6cleanであり、他機能への移行前に横断回帰する。
+
+YKT337横展開の分類（PG415v2のBUG430修正前）：実24version履歴／25schema+SQL row／最新024／24fileの対象はMigrationInventory、DatabaseMigrationTest、StartupSchemaProjectionTest、StepCleanupBoundaryTest、InspectionParentBoundaryTest、BatchRunRepositoryTest、BackupStepRepositoryTest、CleanupDatabaseSessionTest。独立literal/count/latest/file名を一貫して反映し、既存V001～023 byte/hashは保持、V023旧hashf604fc…も追加固定、V024批准済みSQLの独立sha256sum d4f206…をgoldenにする。QuestionMutationInboxInspectorTest／QuestionQueryInboxCleanupTest／StepCleanupBoundaryの23はtable数でありV024はtable追加0なので非該当。NotificationStateMigrationTestの023/23は意図した旧upgrade開始点、StartupSchemaProjectionのrank23 corruptionは既存V023負probe、BackupProfile/MorningProfile等の023はsynthetic profile値で最新schema実測ではなく非該当。画面ID23・232などはmigrationではない。次選択v3で全直接対象のchanged assertionを実行し、検索だけでは横展開完了としない。
+
+2026-10-01、dev-foundation。303仕様／SSC151～155。全業務登録、ordinary ready、native起動、CHR、coverage100%、formal run24/48.3%は未達。通常選択試験／文書commitだけで終了しない。
+
+- PG414選択v4：22:27:36終了0、Protocol7/Storage9/Bootstrap7/API21/Web14＝58PT、F/E/S各0、5module静的0。独立QSB4400 Q/A→実API listener→QSBRSP320 S/A／Web sender／Web reply decoder、偽S/I/A/layout/JMS identity、旧S非回帰を確認。actual Broker再配送1/2/3/4、元transport同一・UTC、legacy SAM、128byte/null/control/不正count、oversized metadataの業務未到達／DLQを確認。通常QSB業務受付や最終DLQのSENT・元ACKはまだ未実装で合格0。
+- v1は新test data accessor誤りでcompile失敗（BUG425）、v2は第4回25秒に対してreceive10秒で1F（BUG426）、v3はmalformed profileの例外期待型誤りでWeb2F（BUG427/YKT336）。全失敗runはWork PG379、Productionのapproved profile/delay/期待byteを緩めず、直接再試験v4成功。coverageは開発中累積であり正式同Source同run coverage受入へ算入しない。
+- PG415初回：実V023 legacy→V024不整合拒否／DDL・data・history rollback、正常upgrade／再実行0／旧23checksums・V003hash保持、全5state CHECKは成功。新permissions SQL boolのraw t/true投影混同と独立file名allowlist024欠落でAPI29中2F（BUG428429/YKT337338先行）。typed/text契約と批准されたliteral24inventoryを是正して選択v2→全6cleanへ進む。原本VM旧Source32c/23SQLは更新していない。
+
+環境：Linux/JDK25.0.4/Maven3.9.12/Node24.19.0、offline M2、実PG18/Artemis2.56.0の隔離fixture。原本command/終了code/logはWork `pg414-selected-v*.log`／`pg415-selected*.log`。全回帰前にSource/tests/config/tools固定し、既存collectorでsanitized JUnit／manifest／module coverage／hashを追加する。実credential/context/token/DBdump/provider rawログをGitへ入れない。

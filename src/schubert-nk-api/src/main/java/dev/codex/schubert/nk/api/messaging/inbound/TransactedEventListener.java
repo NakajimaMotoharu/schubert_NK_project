@@ -63,7 +63,18 @@ final class TransactedEventListener {
     try {
       GuardedJmsMessage guarded = guard.read(message, route);
       WireMessage<FixedPayload> event = decoder.decode(guarded.body(), guarded.metadata(), route);
-      processor.process(event);
+      var receivedAt = clock.instant(); // Clock failure is infrastructure, not bad inbound wire.
+      DeliveryMetadata delivery;
+      try {
+        delivery =
+            new DeliveryMetadata(
+                guarded.metadata().deliveryCount(),
+                guarded.metadata().transportMessageId(),
+                receivedAt);
+      } catch (IllegalArgumentException malformed) {
+        throw new PermanentProtocolException("event delivery metadata is invalid", malformed);
+      }
+      processor.process(event, delivery);
       context.commit();
     } catch (PermanentProtocolException protocolFailure) {
       InboundTransactions.isolateFatal(

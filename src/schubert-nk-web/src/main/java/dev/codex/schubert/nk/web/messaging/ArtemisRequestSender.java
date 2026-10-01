@@ -2,7 +2,6 @@ package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
-import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
@@ -31,8 +30,9 @@ public final class ArtemisRequestSender implements JmsRequestSender {
     Objects.requireNonNull(correlationId, "correlationId");
     Objects.requireNonNull(encodedBody, "encodedBody");
     CommonHeader header = HeaderCodec.standard().peek(encodedBody);
+    // SSC151/BUG421: HeaderCodec validates the closed layout profile, including QSB Q/A.
+    // Internal E/I and falsified A profiles fail the registry/kind boundary, not a S-only gate.
     if (header.messageKind() != MessageKind.REQUEST
-        || header.interactionKind() != InteractionKind.SYNCHRONOUS
         || !header.correlationId().equals(correlationId)
         || header.totalLength() != encodedBody.length) {
       throw new IllegalArgumentException("encoded outbound request identity is inconsistent");

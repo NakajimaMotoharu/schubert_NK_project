@@ -341,7 +341,7 @@ final class CleanupSafetyBoundaryTest {
   void businessAndSessionBoundaries() throws Exception {
     try (var c = db.admin()) {
       c.setAutoCommit(false);
-      List<String> states = List.of("ACCEPTED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED");
+      List<String> states = List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED");
       int id = 0;
       var expected = new ArrayList<String>();
       for (String state : states)
