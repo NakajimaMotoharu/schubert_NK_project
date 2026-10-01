@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -416,7 +417,7 @@ final class OutboxDispatcherTest {
           repository,
           request(MESSAGE, OutboxDestination.ASYNC_WORK, eventWire(MESSAGE, CORRELATION)));
       UUID dlqId = uuid(700);
-      enqueue(repository, request(dlqId, OutboxDestination.DLQ, eventWire(dlqId, CORRELATION)));
+      enqueue(repository, dlqRequest(dlqId));
       OutboxDispatcher dispatcher =
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
       OutboxDispatchReport report = dispatcher.dispatch("worker-send", 100);
@@ -426,7 +427,7 @@ final class OutboxDispatcherTest {
       BytesMessage workMessage = assertInstanceOf(BytesMessage.class, work.receive(5_000));
       BytesMessage dlqMessage = assertInstanceOf(BytesMessage.class, dlq.receive(5_000));
       assertMessage(workMessage, MESSAGE, eventWire(MESSAGE, CORRELATION));
-      assertMessage(dlqMessage, dlqId, eventWire(dlqId, CORRELATION));
+      assertDlqMessage(dlqMessage, dlqId);
       assertNull(work.receive(250));
       assertNull(dlq.receive(250));
 
@@ -686,10 +687,11 @@ final class OutboxDispatcherTest {
             largeWire(),
             OutboxDestination.ASYNC_WORK));
     byte[] syncRequest = smallRequestWire();
-    assertIntegrity(
-        sender,
-        withIdentity(
-            valid, MESSAGE, MESSAGE, "LOGREQ01", "001", syncRequest, OutboxDestination.DLQ));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            withIdentity(
+                valid, MESSAGE, MESSAGE, "LOGREQ01", "001", syncRequest, OutboxDestination.DLQ));
 
     OutboxSendException sendFailure =
         assertThrows(
@@ -1023,7 +1025,22 @@ final class OutboxDispatcherTest {
       for (byte[] body : invalid) {
         assertIntegrity(
             new OutboxJmsSender(),
-            withIdentity(valid, MESSAGE, CORRELATION, "QWKREQ01", "001", body, destination));
+            destination == OutboxDestination.DLQ
+                ? new OutboxEntry(
+                    1,
+                    uuid(801),
+                    CORRELATION,
+                    destination,
+                    "QWKREQ01",
+                    "001",
+                    body,
+                    0,
+                    NOW,
+                    NOW.minusSeconds(30),
+                    "worker",
+                    NOW.plusSeconds(10),
+                    dlqRequest(uuid(801)).dlqMetadata())
+                : withIdentity(valid, MESSAGE, CORRELATION, "QWKREQ01", "001", body, destination));
       }
     }
   }
@@ -1089,6 +1106,137 @@ final class OutboxDispatcherTest {
         NOW.minusSeconds(30),
         "worker",
         NOW.plusSeconds(10));
+  }
+
+  private static OutboxRequest dlqRequest(UUID dispatchId) {
+    return new OutboxRequest(
+        dispatchId,
+        CORRELATION,
+        OutboxDestination.DLQ,
+        "QWKREQ01",
+        "001",
+        eventWire(MESSAGE, CORRELATION),
+        NOW,
+        NOW.minusSeconds(30),
+        Optional.of(
+            new OutboxDlqMetadata(
+                MESSAGE, "ID:independent-original", 4, "QUESTION_RETRY_EXHAUSTED", NOW)));
+  }
+
+  private static void assertDlqMessage(BytesMessage message, UUID dispatchId) throws Exception {
+    assertArrayEquals(eventWire(MESSAGE, CORRELATION), body(message));
+    assertEquals(MESSAGE.toString(), message.getStringProperty("NKMessageID"));
+    assertEquals(dispatchId.toString(), message.getStringProperty("_AMQ_DUPL_ID"));
+    assertEquals(CORRELATION.toString(), message.getJMSCorrelationID());
+    assertEquals(CORRELATION.toString(), message.getStringProperty("NKCorrelationID"));
+    assertEquals("QWKREQ01", message.getStringProperty("NKLayoutID"));
+    assertEquals("001", message.getStringProperty("NKProtocolVersion"));
+    assertEquals("nk.async.work", message.getStringProperty("_AMQ_ORIG_ADDRESS"));
+    assertEquals("nk.async.work.q", message.getStringProperty("_AMQ_ORIG_QUEUE"));
+    assertEquals("ID:independent-original", message.getStringProperty("NKOriginalTransportID"));
+    assertEquals(4, message.getIntProperty("NKDeliveryCount"));
+    assertEquals("QUESTION_RETRY_EXHAUSTED", message.getStringProperty("NKErrorCode"));
+    assertEquals("API_WORK", message.getStringProperty("NKDetectedBy"));
+    assertEquals("2026-09-05T00:00:00Z", message.getStringProperty("NKDetectedAt"));
+    assertEquals(DeliveryMode.PERSISTENT, message.getJMSDeliveryMode());
+    assertEquals(0L, message.getJMSExpiration());
+  }
+
+  @Test
+  void dbResultBoundaryRejectsIncompleteOrMalformedDlqMetadataRatherThanDefaulting()
+      throws Exception {
+    var repository = new JdbcOutboxRepository(() -> 0);
+    long id = enqueue(repository, dlqRequest(uuid(802)));
+    lease(id, "worker", NOW.plusSeconds(10));
+    try (var connection = appConnection();
+        var statement =
+            connection.prepareStatement(
+                "select id,message_id,correlation_id,destination,layout_id,layout_version,body,attempt_count,"
+                    + "next_attempt_at,created_at,lease_owner,lease_until,dlq_original_message_id,"
+                    + "dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at "
+                    + "from schubert.mq_outbox where id=?")) {
+      statement.setLong(1, id);
+      try (var result = statement.executeQuery()) {
+        assertTrue(result.next());
+        assertEquals(
+            4, JdbcOutboxRepository.read(result).dlqMetadata().orElseThrow().deliveryCount());
+        for (String column :
+            List.of(
+                "dlq_original_message_id",
+                "dlq_original_transport_id",
+                "dlq_delivery_count",
+                "dlq_error_code",
+                "dlq_detected_at")) {
+          ResultSet absent =
+              (ResultSet)
+                  Proxy.newProxyInstance(
+                      ResultSet.class.getClassLoader(),
+                      new Class<?>[] {ResultSet.class},
+                      (proxy, method, args) -> {
+                        if ((method.getName().equals("getObject")
+                                || method.getName().equals("getString"))
+                            && args != null
+                            && column.equals(args[0])) return null;
+                        return invoke(result, method, args);
+                      });
+          if (column.equals("dlq_original_message_id"))
+            assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(absent));
+          else
+            assertEquals(
+                "22004",
+                assertThrows(SQLException.class, () -> JdbcOutboxRepository.read(absent))
+                    .getSQLState());
+        }
+        ResultSet malformed =
+            (ResultSet)
+                Proxy.newProxyInstance(
+                    ResultSet.class.getClassLoader(),
+                    new Class<?>[] {ResultSet.class},
+                    (proxy, method, args) -> {
+                      if (method.getName().equals("getObject")
+                          && args != null
+                          && "dlq_delivery_count".equals(args[0])) return 0;
+                      return invoke(result, method, args);
+                    });
+        assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(malformed));
+      }
+    }
+  }
+
+  @Test
+  void dlqDispatchCrashUsesNewStableDuplicateIdWithoutChangingOriginalWork(@TempDir Path root)
+      throws Exception {
+    EmbeddedActiveMQ broker = startBroker(root);
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+        JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        JMSConsumer dlq = observer.createConsumer(queue("nk.dead.letter"))) {
+      JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
+      UUID dispatchId = uuid(800);
+      long row = enqueue(repository, dlqRequest(dispatchId));
+      AtomicInteger commits = new AtomicInteger();
+      var crashing =
+          dispatcher(
+              repository,
+              () ->
+                  afterCommit(
+                      factory.createContext(JMSContext.SESSION_TRANSACTED),
+                      () -> lease(row, "dlq-recovery", NOW.minusSeconds(1)),
+                      commits));
+      assertEquals(new OutboxDispatchReport(1, 0, 0, 1), crashing.dispatch("dlq-crash", 1));
+      assertEquals(1, commits.get());
+      assertEquals(
+          new OutboxDispatchReport(1, 1, 0, 0),
+          dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
+              .dispatch("dlq-recovery", 1));
+      assertDlqMessage(assertInstanceOf(BytesMessage.class, dlq.receive(5000)), dispatchId);
+      assertNull(dlq.receive(500));
+      assertEquals("SENT", text(row, "status"));
+      assertEquals("ID:independent-original", text(row, "dlq_original_transport_id"));
+      assertEquals("4", text(row, "dlq_delivery_count"));
+      assertEquals(MESSAGE.toString(), text(row, "dlq_original_message_id"));
+    } finally {
+      broker.stop();
+    }
   }
 
   private static OutboxEntry withWorker(OutboxEntry entry, String worker) {
@@ -1284,7 +1432,7 @@ final class OutboxDispatcherTest {
                     new Class<?>[] {PreparedStatement.class},
                     (statementProxy, statementMethod, statementArguments) ->
                         switch (statementMethod.getName()) {
-                          case "setObject", "setString", "setBytes", "close" -> null;
+                          case "setObject", "setString", "setBytes", "setNull", "close" -> null;
                           case "executeQuery" -> empty;
                           case "toString" -> "EmptyInsert";
                           case "hashCode" -> System.identityHashCode(statementProxy);

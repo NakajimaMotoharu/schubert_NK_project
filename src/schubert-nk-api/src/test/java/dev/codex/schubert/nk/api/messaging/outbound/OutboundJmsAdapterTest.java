@@ -146,9 +146,9 @@ final class OutboundJmsAdapterTest {
         IllegalArgumentException.class,
         () -> JmsMessageFactory.INSTANCE.createReply(transacted, requestWire()));
     assertThrows(
-        IllegalArgumentException.class,
+        PermanentProtocolException.class,
         () ->
-            JmsMessageFactory.INSTANCE.createReply(transacted, responseWire('A', "QSBRSP01", 64)));
+            JmsMessageFactory.INSTANCE.createReply(transacted, responseWire('S', "QSBRSP01", 64)));
     assertThrows(
         IllegalArgumentException.class,
         () ->

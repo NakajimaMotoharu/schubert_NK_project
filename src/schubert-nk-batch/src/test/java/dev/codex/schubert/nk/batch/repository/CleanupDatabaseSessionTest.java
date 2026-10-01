@@ -485,8 +485,8 @@ final class CleanupDatabaseSessionTest {
                 result.getObject("checksum", Integer.class),
                 result.getBoolean("success")));
     }
-    assertEquals(25, rows.size()); // SCHEMA + independently approved V001..V024 (SSC152).
-    assertEquals("024", rows.getLast().version());
+    assertEquals(26, rows.size()); // SCHEMA + independently approved V001..V025 (SSC155).
+    assertEquals("025", rows.getLast().version());
     var child = RootReleaseAdmissionTest.syntheticCleanup(rows);
     assertEquals(1, child.reads().get());
     var subject =

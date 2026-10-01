@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntSupplier;
@@ -44,15 +45,17 @@ public final class JdbcOutboxRepository {
           + "set lease_owner=?,lease_until=? from due where o.id=due.id "
           + "returning o.id,o.message_id,o.correlation_id,o.destination,o.layout_id,"
           + "o.layout_version,o.body,o.attempt_count,o.next_attempt_at,o.created_at,"
-          + "o.lease_owner,o.lease_until";
+          + "o.lease_owner,o.lease_until,o.dlq_original_message_id,o.dlq_original_transport_id,"
+          + "o.dlq_delivery_count,o.dlq_error_code,o.dlq_detected_at";
 
   public long enqueue(Connection connection, OutboxRequest request) throws SQLException {
     requireTransaction(connection);
     Objects.requireNonNull(request, "request");
     String sql =
         "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,"
-            + "layout_version,body,status,attempt_count,next_attempt_at,created_at) "
-            + "values(?,?,?,?,?,?,'PENDING',0,?,?) returning id";
+            + "layout_version,body,status,attempt_count,next_attempt_at,created_at,"
+            + "dlq_original_message_id,dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at) "
+            + "values(?,?,?,?,?,?,'PENDING',0,?,?,?,?,?,?,?) returning id";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setObject(1, request.messageId());
       statement.setObject(2, request.correlationId());
@@ -62,6 +65,20 @@ public final class JdbcOutboxRepository {
       statement.setBytes(6, request.body());
       statement.setObject(7, request.nextAttemptAt().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(8, request.createdAt().atOffset(java.time.ZoneOffset.UTC));
+      if (request.dlqMetadata().isPresent()) {
+        OutboxDlqMetadata metadata = request.dlqMetadata().orElseThrow();
+        statement.setObject(9, metadata.originalMessageId());
+        statement.setString(10, metadata.originalTransportId());
+        statement.setInt(11, metadata.deliveryCount());
+        statement.setString(12, metadata.errorCode());
+        statement.setObject(13, metadata.detectedAt().atOffset(java.time.ZoneOffset.UTC));
+      } else {
+        statement.setNull(9, java.sql.Types.OTHER);
+        statement.setNull(10, java.sql.Types.VARCHAR);
+        statement.setNull(11, java.sql.Types.INTEGER);
+        statement.setNull(12, java.sql.Types.VARCHAR);
+        statement.setNull(13, java.sql.Types.TIMESTAMP_WITH_TIMEZONE);
+      }
       try (ResultSet result = statement.executeQuery()) {
         if (!result.next()) {
           throw new OutboxIntegrityException("outbox insert returned no identifier");
@@ -163,12 +180,32 @@ public final class JdbcOutboxRepository {
               .toInstant(),
           requireValue(result.getObject("created_at", java.time.OffsetDateTime.class)).toInstant(),
           requireValue(result.getString("lease_owner")),
-          requireValue(result.getObject("lease_until", java.time.OffsetDateTime.class))
-              .toInstant());
+          requireValue(result.getObject("lease_until", java.time.OffsetDateTime.class)).toInstant(),
+          readDlqMetadata(result));
     } catch (IllegalArgumentException exception) {
       throw new OutboxIntegrityException(
           "outbox row violates its bounded storage contract", exception);
     }
+  }
+
+  private static Optional<OutboxDlqMetadata> readDlqMetadata(ResultSet result) throws SQLException {
+    UUID original = result.getObject("dlq_original_message_id", UUID.class);
+    if (original == null) {
+      if (result.getObject("dlq_original_transport_id") != null
+          || result.getObject("dlq_delivery_count") != null
+          || result.getObject("dlq_error_code") != null
+          || result.getObject("dlq_detected_at") != null)
+        throw new OutboxIntegrityException("outbox DLQ metadata is incomplete");
+      return Optional.empty();
+    }
+    return Optional.of(
+        new OutboxDlqMetadata(
+            original,
+            requireValue(result.getString("dlq_original_transport_id")),
+            requireValue(result.getObject("dlq_delivery_count", Integer.class)),
+            requireValue(result.getString("dlq_error_code")),
+            requireValue(result.getObject("dlq_detected_at", java.time.OffsetDateTime.class))
+                .toInstant()));
   }
 
   private static void requireTransaction(Connection connection) throws SQLException {

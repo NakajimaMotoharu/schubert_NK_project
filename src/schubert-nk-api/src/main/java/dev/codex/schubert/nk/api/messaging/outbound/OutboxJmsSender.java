@@ -88,10 +88,21 @@ public final class OutboxJmsSender {
     BytesMessage message = context.createBytesMessage();
     message.writeBytes(entry.body());
     message.setJMSCorrelationID(entry.correlationId().toString());
-    message.setStringProperty("NKMessageID", entry.messageId().toString());
+    message.setStringProperty("NKMessageID", wireMessageId(entry).toString());
     message.setStringProperty("NKLayoutID", entry.layoutId());
     message.setStringProperty("NKProtocolVersion", entry.layoutVersion());
     message.setStringProperty("_AMQ_DUPL_ID", entry.messageId().toString());
+    if (entry.dlqMetadata().isPresent()) {
+      OutboxDlqMetadata metadata = entry.dlqMetadata().orElseThrow();
+      message.setStringProperty("_AMQ_ORIG_ADDRESS", BrokerTopology.ASYNC_WORK.address());
+      message.setStringProperty("_AMQ_ORIG_QUEUE", BrokerTopology.ASYNC_WORK.queue());
+      message.setStringProperty("NKOriginalTransportID", metadata.originalTransportId());
+      message.setStringProperty("NKCorrelationID", entry.correlationId().toString());
+      message.setIntProperty("NKDeliveryCount", metadata.deliveryCount());
+      message.setStringProperty("NKErrorCode", metadata.errorCode());
+      message.setStringProperty("NKDetectedBy", "API_WORK");
+      message.setStringProperty("NKDetectedAt", metadata.detectedAt().toString());
+    }
     BrokerTopology target = target(entry.destination());
     context
         .createProducer()
@@ -110,7 +121,7 @@ public final class OutboxJmsSender {
           "outbox wire body failed fixed-width validation", exception);
     }
     BrokerTopology target = target(entry.destination());
-    if (!header.messageId().equals(entry.messageId())
+    if (!header.messageId().equals(wireMessageId(entry))
         || !header.correlationId().equals(entry.correlationId())
         || !header.layoutId().value().equals(entry.layoutId())
         || !String.format(Locale.ROOT, "%03d", header.layoutVersion()).equals(entry.layoutVersion())
@@ -133,6 +144,10 @@ public final class OutboxJmsSender {
     } catch (RuntimeException exception) {
       throw new OutboxIntegrityException("outbox payload failed fixed-width validation", exception);
     }
+  }
+
+  private static java.util.UUID wireMessageId(OutboxEntry entry) {
+    return entry.dlqMetadata().map(OutboxDlqMetadata::originalMessageId).orElse(entry.messageId());
   }
 
   private static BrokerTopology target(OutboxDestination destination) {

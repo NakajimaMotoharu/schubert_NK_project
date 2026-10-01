@@ -672,13 +672,14 @@ final class StepCleanupBoundaryTest {
             // Frozen from pre-V023 commit 802e9c26a, not current production expected generation.
             "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735",
             // Approved V023 before SSC152/V024; independent sha256sum, old bytes unmodified.
-            "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492");
+            "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492",
+            "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b");
     List<Path> files;
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(24, files.size());
-    for (int i = 0; i < 23; i++)
+    assertEquals(25, files.size());
+    for (int i = 0; i < 24; i++)
       assertEquals(
           expected.get(i),
           HexFormat.of()
@@ -686,20 +687,22 @@ final class StepCleanupBoundaryTest {
                   MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.get(i)))));
     assertEquals(
         "V023__startup_schema_history_projection.sql", files.get(22).getFileName().toString());
-    assertEquals("V024__notification_received_state.sql", files.getLast().getFileName().toString());
     assertEquals(
-        "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b",
+        "V025__question_dlq_outbox_identity.sql", files.getLast().getFileName().toString());
+    assertEquals(
+        "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
         HexFormat.of()
             .formatHex(
                 MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.getLast()))));
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024"),
+            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024",
+            "025"),
         MigrationInventory.VERSIONS);
     try (var c = db.admin()) {
       assertEquals(
-          "24|1",
+          "25|1",
           scalar(
               c,
               "select (select count(*) from schubert_meta.flyway_schema_history where success and type='SQL' and version is not null)||'|'||(select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null)"));

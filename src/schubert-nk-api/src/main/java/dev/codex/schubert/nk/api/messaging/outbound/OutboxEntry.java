@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.outbound;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /** Immutable claimed application-outbox row with defensive wire-body ownership. */
@@ -20,6 +21,7 @@ public final class OutboxEntry {
   private final Instant createdAt;
   private final String leaseOwner;
   private final Instant leaseUntil;
+  private final Optional<OutboxDlqMetadata> dlqMetadata;
 
   public OutboxEntry(
       long id,
@@ -34,6 +36,36 @@ public final class OutboxEntry {
       Instant createdAt,
       String leaseOwner,
       Instant leaseUntil) {
+    this(
+        id,
+        messageId,
+        correlationId,
+        destination,
+        layoutId,
+        layoutVersion,
+        body,
+        attemptCount,
+        nextAttemptAt,
+        createdAt,
+        leaseOwner,
+        leaseUntil,
+        Optional.empty());
+  }
+
+  public OutboxEntry(
+      long id,
+      UUID messageId,
+      UUID correlationId,
+      OutboxDestination destination,
+      String layoutId,
+      String layoutVersion,
+      byte[] body,
+      int attemptCount,
+      Instant nextAttemptAt,
+      Instant createdAt,
+      String leaseOwner,
+      Instant leaseUntil,
+      Optional<OutboxDlqMetadata> dlqMetadata) {
     if (id < 1 || id > MAXIMUM_ID) {
       throw new IllegalArgumentException("outbox id is outside N12");
     }
@@ -55,6 +87,14 @@ public final class OutboxEntry {
     this.createdAt = Objects.requireNonNull(createdAt, "createdAt");
     this.leaseOwner = requireLeaseOwner(leaseOwner);
     this.leaseUntil = Objects.requireNonNull(leaseUntil, "leaseUntil");
+    this.dlqMetadata =
+        OutboxDlqMetadata.requireProfile(
+            this.messageId,
+            this.destination,
+            this.layoutId,
+            this.layoutVersion,
+            this.body.length,
+            dlqMetadata);
   }
 
   public long id() {
@@ -103,6 +143,10 @@ public final class OutboxEntry {
 
   public Instant leaseUntil() {
     return leaseUntil;
+  }
+
+  public Optional<OutboxDlqMetadata> dlqMetadata() {
+    return dlqMetadata;
   }
 
   @Override

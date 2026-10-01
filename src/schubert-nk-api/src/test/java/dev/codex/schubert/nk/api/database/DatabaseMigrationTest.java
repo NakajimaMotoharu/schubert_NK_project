@@ -220,7 +220,7 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
   void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
     assertEquals(
-        "155|23|30|23|1",
+        "156|23|30|23|1",
         queryString(
             ADMIN,
             "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
@@ -1077,6 +1077,7 @@ final class DatabaseMigrationTest {
             "migration/V022__staged_expiry_batch_run_audit.sql",
             "migration/V023__startup_schema_history_projection.sql",
             "migration/V024__notification_received_state.sql",
+            "migration/V025__question_dlq_outbox_identity.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -2034,7 +2035,7 @@ final class DatabaseMigrationTest {
     columns.put(
         "schubert.mq_outbox",
         set(
-            "id message_id correlation_id destination layout_id layout_version body status attempt_count next_attempt_at lease_owner lease_until created_at sent_at last_error_code last_error_detail"));
+            "id message_id correlation_id destination layout_id layout_version body status attempt_count next_attempt_at lease_owner lease_until created_at sent_at last_error_code last_error_detail dlq_original_message_id dlq_original_transport_id dlq_delivery_count dlq_error_code dlq_detected_at"));
     columns.put(
         "schubert.app_logs",
         set(

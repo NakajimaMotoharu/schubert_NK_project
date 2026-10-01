@@ -197,5 +197,13 @@ if int(identifier[2:5]) >= 415:
         'v003Sha256': '85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e',
         'legacyMismatch': 'V024 transaction fails without guessed job state', 'nativeMigration': 'not deployed'}
     manifest['command'] += '; outputFile=target/runtime-dependencies.txt appendOutput=false'
+if int(identifier[2:5]) >= 417:
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(431, 435))
+    manifest['ssc'].append('SSC-155')
+    manifest['ykt'].append('YKT-339')
+    manifest['testIds'].extend(['PT-QST-DLQ-MODEL', 'PT-QST-DLQ-DB', 'PT-QST-DLQ-JMS'])
+    manifest['ddl'].update({'versionedMigrations': 25,
+        'appendOnly': 'V024 notification state; V025 immutable Question DLQ profile',
+        'legacyDlq': 'migration refuses missing original metadata; no inferred repair'})
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
