@@ -171,6 +171,8 @@ backup/restore手順の変更・rehearsalなしに行わない。
 
 ### 6.3 確定・7世代
 
+SSC133補足（PG/PT内部具体化、2026-10-01、実装前）：Morningは真正backup完了後/Cleanup前に、保持backup root、同Root/M/A/原本/借用DB/元30分の下で世代を観測する。新規両SUCCESS時だけ正規directory名のmanifest/全4file inode・hash・ACL・完全DB成功pairを検証し古い名前順の超過分を削除、現在bundleが最新保持集合に入らなければ拒否する。既存成功再利用/FAILEDは削除呼出し0、一覧を前後比較し未観測成功数は未観測と記録。未知名/.part/通常directoryでないもの/manifest・archive不整合/既知非成功pairは保護理由を保存する。SQL/close/owner/未知Throwableは不確定を正常warningへ変換せず保全。削除直前に全bundle/DBを再照合し保持childとnameのdev/ino/所有/policyを確認、固定3archive→MANIFESTの順に各保持entry属性を再確認してunlink+sync、実emptyとname同inode確認後に既存removeEmptyChild+親sync。partial削除/再読失敗は完了にせず、後続で同世代を自動的に再削除しない。末段まで借用rootを閉じず、一覧・全保持bundle・root identity・原本を再照合する。外部仕様/7世代/失敗保護/既存低位APIを変更しない。
+
 1. 全fileのfsync、directory fsync後、`.part`をsuffixなし確定directoryへatomic rename。
 2. 確定後にSHA-256を再照合し、`batch_runs`のDB/config両stepをSUCCESS。一方失敗は当日backup不成立。
 3. 新規backup成功後だけ、正規名・通常directoryの成功backupを古い順に並べ、8世代目以降を削除。

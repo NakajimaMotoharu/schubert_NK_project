@@ -168,6 +168,12 @@ final class MorningDatabaseSessionTest {
               assertThrows(
                   IOException.class, () -> session.completeReusedBackup(prior, manifest, observed));
               session.completeReusedBackup(skipped, manifest, observed.plusSeconds(1));
+              assertTrue(session.retainedBackupSuccessful(manifest, observed.plusSeconds(1)));
+              assertThrows(
+                  NullPointerException.class,
+                  () -> session.retainedBackupSuccessful(null, observed));
+              assertThrows(
+                  IOException.class, () -> session.retainedBackupSuccessful(manifest, started));
               session.recheckConsistent(run);
               assertThrows(
                   IOException.class,

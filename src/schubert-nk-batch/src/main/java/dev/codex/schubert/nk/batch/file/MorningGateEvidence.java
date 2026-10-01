@@ -418,6 +418,93 @@ public final class MorningGateEvidence {
     return bytes(text);
   }
 
+  /** SSC133/ISSRET: pure rendering of actual bounded observations, never retention authority. */
+  static byte[] retention(
+      StartupPermitRecords.Epoch epoch,
+      String morning,
+      String broker,
+      MorningBackupRetention.Result actual)
+      throws IOException {
+    Objects.requireNonNull(actual);
+    var text = header("NKBRET1", epoch, morning, broker);
+    if (actual.current.isPresent())
+      require(actual.current.orElseThrow().run().equals(epoch.activation().run()));
+    var root = actual.root;
+    text.append("MODE|")
+        .append(actual.mode)
+        .append('\n')
+        .append("CURRENT|")
+        .append(
+            actual.current.isPresent()
+                ? retentionName(actual.current.orElseThrow().directoryName())
+                : "-")
+        .append('|')
+        .append(actual.currentSha256.isPresent() ? hash(actual.currentSha256.orElseThrow()) : "-")
+        .append('\n')
+        .append("ROOT|")
+        .append(root.mode())
+        .append('|')
+        .append(root.uid())
+        .append('|')
+        .append(root.gid())
+        .append('|')
+        .append(root.device())
+        .append('|')
+        .append(root.inode())
+        .append('\n')
+        .append("COUNTS|")
+        .append(actual.before.size())
+        .append('|')
+        .append(actual.after.size())
+        .append('|')
+        .append(
+            actual.mode == MorningBackupRetention.Mode.NEW_SUCCESS
+                ? Integer.toString(actual.kept.size())
+                : "-")
+        .append('|')
+        .append(actual.deleted.size())
+        .append('|')
+        .append(actual.protectedNames.size())
+        .append('\n');
+    for (String name : actual.before)
+      text.append("BEFORE|").append(retentionName(name)).append('\n');
+    for (String name : actual.after) text.append("AFTER|").append(retentionName(name)).append('\n');
+    for (String name : actual.deleted)
+      text.append("DELETE|")
+          .append(retentionName(name))
+          .append('|')
+          .append(hash(Objects.requireNonNull(actual.deletedSha256.get(name))))
+          .append('\n');
+    for (var entry : actual.kept.entrySet()) {
+      var manifest = entry.getValue();
+      text.append("RETAIN|")
+          .append(retentionName(entry.getKey()))
+          .append('|')
+          .append(
+              hash(Objects.requireNonNull(actual.files.get(entry.getKey())).manifest().sha256()));
+      for (var file : List.of(manifest.dump(), manifest.configuration(), manifest.credentials()))
+        text.append('|').append(file.size()).append('|').append(hash(file.sha256()));
+      text.append('\n');
+    }
+    for (var entry : actual.protectedNames.entrySet()) {
+      // Private Result factory emits only the eight SS133 reasons; no external reason input.
+      text.append("PROTECT|")
+          .append(retentionName(entry.getKey()))
+          .append('|')
+          .append(entry.getValue())
+          .append('\n');
+    }
+    // Private Result factory: <=4096 names, <=7 retained bundles, <=255 UTF8 bytes/name.
+    // The complete fixed layout is <16MiB; do not add an impossible duplicate shape branch.
+    return text.toString().getBytes(StandardCharsets.US_ASCII);
+  }
+
+  private static String retentionName(String name) throws IOException {
+    String encoded = hex(name);
+    require(encoded.length() <= 510);
+    return encoded;
+  }
+
   private static StringBuilder header(
       String prefix, StartupPermitRecords.Epoch epoch, String morning, String broker)
       throws IOException {

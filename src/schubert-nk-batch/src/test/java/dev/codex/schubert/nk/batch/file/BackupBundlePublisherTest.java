@@ -532,22 +532,45 @@ final class BackupBundlePublisherTest {
       assertEquals(new HashSet<>(BackupArtifactFixture.NAMES), proof.files().keySet());
       assertThrows(UnsupportedOperationException.class, () -> proof.files().clear());
       var source = new HashMap<>(proof.files());
+      var contents = new HashMap<>(proof.contents());
       var copied =
-          new BackupArtifactVerifier.BundleSnapshot(proof.manifest(), proof.directory(), source);
+          new BackupArtifactVerifier.BundleSnapshot(
+              proof.manifest(), proof.directory(), source, contents);
       source.clear();
+      contents.clear();
       assertEquals(4, copied.files().size());
+      assertEquals(4, copied.contents().size());
+      assertThrows(UnsupportedOperationException.class, () -> copied.contents().clear());
       assertTrue(proof.samePublished(copied));
+      var changedContents = new HashMap<>(copied.contents());
+      changedContents.put(
+          "schubert_nk.dump",
+          new dev.codex.schubert.nk.batch.backup.BackupFileDigest(26, "0".repeat(64)));
+      assertFalse(
+          proof.samePublished(
+              new BackupArtifactVerifier.BundleSnapshot(
+                  copied.manifest(), copied.directory(), copied.files(), changedContents)));
       assertThrows(NullPointerException.class, () -> proof.samePublished(null));
       assertThrows(
           NullPointerException.class,
-          () -> new BackupArtifactVerifier.BundleSnapshot(null, proof.directory(), proof.files()));
-      assertThrows(
-          NullPointerException.class,
-          () -> new BackupArtifactVerifier.BundleSnapshot(proof.manifest(), null, proof.files()));
+          () ->
+              new BackupArtifactVerifier.BundleSnapshot(
+                  null, proof.directory(), proof.files(), proof.contents()));
       assertThrows(
           NullPointerException.class,
           () ->
-              new BackupArtifactVerifier.BundleSnapshot(proof.manifest(), proof.directory(), null));
+              new BackupArtifactVerifier.BundleSnapshot(
+                  proof.manifest(), null, proof.files(), proof.contents()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new BackupArtifactVerifier.BundleSnapshot(
+                  proof.manifest(), proof.directory(), null, proof.contents()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new BackupArtifactVerifier.BundleSnapshot(
+                  proof.manifest(), proof.directory(), proof.files(), null));
       var reader = new BackupManifestReader(f.root, f, UID, GID, f, f::clock);
       assertThrows(
           NullPointerException.class,

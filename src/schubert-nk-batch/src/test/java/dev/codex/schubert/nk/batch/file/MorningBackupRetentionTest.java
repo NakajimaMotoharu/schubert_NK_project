@@ -1,0 +1,415 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.batch.backup.*;
+import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.storage.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.time.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** SS341§6.3/SSC133/ISSRET001..008: hand JSON + real FD/postconditions, no production expected. */
+final class MorningBackupRetentionTest {
+  @TempDir Path temporary;
+
+  @Test
+  void issret001SevenEightNineUseExactOldestSet() throws Exception {
+    for (int generations : List.of(7, 8, 9)) {
+      try (var f = new BackupArtifactFixture(temporary);
+          var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
+        var names = generations(f, generations - 1);
+        var subject = subject(f, root, acceptsAll());
+        var result =
+            subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected));
+        int removed = generations - 7;
+        assertEquals(names.subList(0, removed), result.deleted);
+        assertEquals(names.subList(removed, names.size()), new ArrayList<>(result.kept.keySet()));
+        assertEquals(generations, result.before.size());
+        assertEquals(7, result.after.size());
+        for (String name : names.subList(0, removed))
+          assertFalse(Files.exists(f.parent.resolve(name), LinkOption.NOFOLLOW_LINKS));
+        assertTrue(Files.isDirectory(f.child));
+        f.unchanged();
+        subject.recheck();
+        assertThrows(
+            IOException.class,
+            () ->
+                subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected)));
+        assertThrows(UnsupportedOperationException.class, () -> result.kept.clear());
+        assertFalse(result.toString().contains(DIR));
+        f.released();
+      }
+    }
+  }
+
+  @Test
+  void issret002FailedAndReuseNeverDelete() throws Exception {
+    for (var mode :
+        List.of(MorningBackupRetention.Mode.FAILED, MorningBackupRetention.Mode.REUSED_SUCCESS)) {
+      try (var f = new BackupArtifactFixture(temporary)) {
+        List<String> names = generations(f, 8);
+        // Existing fixture rejects any mutation syscall: both modes must work with that port.
+        var subject = subject(f, f.root, acceptsAll());
+        var result =
+            subject.collect(
+                mode,
+                mode == MorningBackupRetention.Mode.FAILED
+                    ? Optional.empty()
+                    : Optional.of(f.expected));
+        assertEquals(names, result.before);
+        assertEquals(names, result.after);
+        assertEquals(List.of(), result.deleted);
+        assertEquals(mode == MorningBackupRetention.Mode.FAILED ? 0 : 1, result.kept.size());
+        subject.recheck();
+        f.unchanged();
+        f.released();
+      }
+    }
+  }
+
+  @Test
+  void issret003UnknownPartSymlinkMalformedAndNonSuccessRemain() throws Exception {
+    try (var f = new BackupArtifactFixture(temporary);
+        var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
+      var names = generations(f, 7);
+      String notSuccessful = names.getFirst();
+      String malformed = oldName(9),
+          symbolic = oldName(10),
+          corrupt = oldName(11),
+          empty = oldName(12);
+      cloneGeneration(f, 9);
+      Files.writeString(f.parent.resolve(malformed).resolve("MANIFEST.json"), "{}\n");
+      Files.createSymbolicLink(f.parent.resolve(symbolic), f.child);
+      cloneGeneration(f, 11);
+      Files.writeString(
+          f.parent.resolve(corrupt).resolve("schubert_nk.dump"), "PG166 public dump fixturE\n");
+      cloneGeneration(f, 12);
+      Files.writeString(f.parent.resolve(empty).resolve("config.tar"), "");
+      Files.writeString(f.parent.resolve("public-note"), "public\n");
+      Files.createDirectory(f.parent.resolve("uncommitted.part"));
+      var subject =
+          subject(
+              f,
+              root,
+              new ReadOnlyAccess() {
+                @Override
+                public boolean retainedBackupSuccessful(BackupManifest m, Instant now) {
+                  return !m.directoryName().equals(notSuccessful);
+                }
+
+                @Override
+                public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
+                  throw new AssertionError("no cleanup authority");
+                }
+              });
+      var result =
+          subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected));
+      assertEquals(List.of(), result.deleted);
+      assertEquals(
+          Map.of(
+              notSuccessful,
+              "NON_SUCCESS_PAIR",
+              malformed,
+              "MALFORMED_MANIFEST",
+              symbolic,
+              "NOT_DIRECTORY",
+              corrupt,
+              "CONTENT_MISMATCH",
+              empty,
+              "CONTENT_MISMATCH",
+              "public-note",
+              "UNKNOWN_NAME",
+              "uncommitted.part",
+              "PART"),
+          result.protectedNames);
+      assertEquals(result.before, result.after);
+      assertTrue(Files.isSymbolicLink(f.parent.resolve(symbolic)));
+      assertEquals("{}\n", Files.readString(f.parent.resolve(malformed).resolve("MANIFEST.json")));
+      subject.recheck();
+      f.unchanged();
+      f.released();
+    }
+  }
+
+  @Test
+  void issret004CurrentNotNewestOrMissingNeverDeletes() throws Exception {
+    try (var f = new BackupArtifactFixture(temporary);
+        var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
+      for (int offset = -8; offset < 0; offset++) cloneGeneration(f, offset);
+      var subject = subject(f, root, acceptsAll());
+      assertThrows(
+          IOException.class,
+          () -> subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected)));
+      try (var names = Files.list(f.parent)) {
+        assertEquals(9, names.count());
+      }
+      f.unchanged();
+      f.released();
+    }
+  }
+
+  @Test
+  void issret005UnknownSqlCloseOwnerAndPostReadDriftFailClosed() throws Exception {
+    try (var f = new BackupArtifactFixture(temporary)) {
+      var unknown = new AssertionError("synthetic unknown");
+      var db =
+          new ReadOnlyAccess() {
+            @Override
+            public boolean retainedBackupSuccessful(BackupManifest m, Instant now) {
+              throw unknown;
+            }
+
+            @Override
+            public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
+              throw unknown;
+            }
+          };
+      assertSame(
+          unknown,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  subject(f, f.root, db)
+                      .collect(
+                          MorningBackupRetention.Mode.REUSED_SUCCESS, Optional.of(f.expected))));
+      f.unchanged();
+      f.released();
+    }
+    try (var f = new BackupArtifactFixture(temporary)) {
+      f.extraFaults.add("closeNames#1");
+      assertThrows(
+          IOException.class,
+          () ->
+              subject(f, f.root, acceptsAll())
+                  .collect(MorningBackupRetention.Mode.FAILED, Optional.empty()));
+      f.unchanged();
+      f.released();
+    }
+    try (var f = new BackupArtifactFixture(temporary)) {
+      var subject = subject(f, f.root, acceptsAll());
+      subject.collect(MorningBackupRetention.Mode.REUSED_SUCCESS, Optional.of(f.expected));
+      Files.writeString(f.parent.resolve("foreign-change"), "public\n");
+      assertThrows(IOException.class, subject::recheck);
+      f.released();
+    }
+  }
+
+  @Test
+  void issret006NullMissingResultAndThreadCannotGrantAuthority() throws Exception {
+    try (var f = new BackupArtifactFixture(temporary)) {
+      var subject = subject(f, f.root, acceptsAll());
+      assertThrows(IOException.class, subject::result);
+      assertThrows(IOException.class, subject::recheck);
+      assertThrows(NullPointerException.class, () -> subject.collect(null, Optional.empty()));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.collect(MorningBackupRetention.Mode.FAILED, null));
+      assertThrows(
+          IOException.class,
+          () -> subject.collect(MorningBackupRetention.Mode.FAILED, Optional.of(f.expected)));
+      assertThrows(
+          IOException.class,
+          () -> subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.empty()));
+      subject.collect(MorningBackupRetention.Mode.FAILED, Optional.empty());
+      try (var pool = Executors.newSingleThreadExecutor()) {
+        pool.submit(() -> assertThrows(IOException.class, subject::recheck))
+            .get(5, TimeUnit.SECONDS);
+      }
+      f.unchanged();
+      f.released();
+    }
+  }
+
+  static MorningBackupRetention subject(
+      BackupArtifactFixture f, OwnedTransferDirectory root, MorningDatabaseSession.Access db) {
+    return new MorningBackupRetention(
+        new BackupManifestReader(root, f, UID, GID, f, f::clock),
+        new BackupArtifactVerifier(root, f, UID, GID, f, f::clock),
+        db,
+        () -> 1_000_000,
+        100);
+  }
+
+  static MorningDatabaseSession.Access acceptsAll() {
+    return new ReadOnlyAccess() {
+      @Override
+      public boolean retainedBackupSuccessful(BackupManifest m, Instant now) {
+        assertEquals(new BackupFileDigest(26, DUMP_HASH), m.dump());
+        assertEquals(new BackupFileDigest(35, CONFIG_HASH), m.configuration());
+        assertEquals(new BackupFileDigest(32, CREDS_HASH), m.credentials());
+        return true;
+      }
+
+      @Override
+      public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
+        throw new AssertionError("no cleanup authority");
+      }
+    };
+  }
+
+  @Test
+  void issret007ThreePersistedWholeByteFramesAndBindings() throws Exception {
+    for (var mode : MorningBackupRetention.Mode.values()) {
+      try (var f = new BackupArtifactFixture(temporary)) {
+        f.metadata =
+            (role, fields) -> {
+              fields.put("dev", 11L);
+              if (role.equals("parent")) fields.put("ino", 12L);
+            };
+        var result =
+            subject(f, f.root, acceptsAll())
+                .collect(
+                    mode,
+                    mode == MorningBackupRetention.Mode.FAILED
+                        ? Optional.empty()
+                        : Optional.of(f.expected));
+        var epoch =
+            new StartupPermitRecords.Epoch(
+                StartupPermitRecords.State.INVALID,
+                UUID.fromString("11111111-1111-4111-8111-111111111111"),
+                UUID.fromString("22222222-2222-4333-8444-555555555555"),
+                new MaintenanceActivation(
+                    f.expected.run(), UUID.fromString("44444444-2222-4333-8444-555555555555")),
+                Optional.empty());
+        String name =
+            switch (mode) {
+              case NEW_SUCCESS -> "new";
+              case REUSED_SUCCESS -> "reused";
+              case FAILED -> "failed";
+            };
+        try (var input =
+            Objects.requireNonNull(
+                getClass().getResourceAsStream("/ops/issuer-retention-" + name + "-golden.txt"))) {
+          assertArrayEquals(
+              input.readAllBytes(),
+              MorningGateEvidence.retention(epoch, "a".repeat(32), "b".repeat(32), result));
+        }
+        assertThrows(
+            NullPointerException.class,
+            () -> MorningGateEvidence.retention(epoch, "a".repeat(32), "b".repeat(32), null));
+        assertThrows(
+            IOException.class,
+            () -> MorningGateEvidence.retention(epoch, "a".repeat(32), "a".repeat(32), result));
+        f.unchanged();
+        f.released();
+      }
+    }
+  }
+
+  @Test
+  void issret008PartialDeleteSyncFailureAndUnknownRootNeverBecomeProof() throws Exception {
+    for (String fault : List.of("unlink", "sync", "removeEmptyDirectory")) {
+      try (var f = new BackupArtifactFixture(temporary)) {
+        var names = generations(f, 7);
+        var nativeCalls = LinuxDirectoryCalls.create();
+        var count = new AtomicInteger();
+        var calls =
+            (DirectoryCalls)
+                java.lang.reflect.Proxy.newProxyInstance(
+                    getClass().getClassLoader(),
+                    new Class<?>[] {DirectoryCalls.class},
+                    (proxy, method, args) -> {
+                      boolean fail = method.getName().equals(fault) && count.incrementAndGet() == 1;
+                      if (fail && !fault.equals("sync"))
+                        throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+                      Object value;
+                      try {
+                        value = method.invoke(nativeCalls, args);
+                      } catch (java.lang.reflect.InvocationTargetException failure) {
+                        throw failure.getCause();
+                      }
+                      if (fail) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+                      return value;
+                    });
+        try (var root = OwnedTransferDirectory.open(calls, f.parent)) {
+          var subject = subject(f, root, acceptsAll());
+          assertThrows(
+              IOException.class,
+              () ->
+                  subject.collect(
+                      MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected)));
+          assertThrows(IOException.class, subject::result);
+          assertTrue(Files.isDirectory(f.parent.resolve(names.getFirst())));
+          f.unchanged();
+          f.released();
+        }
+      }
+    }
+    for (String field : List.of("dev", "ino")) {
+      try (var f = new BackupArtifactFixture(temporary)) {
+        f.metadata =
+            (role, fields) -> {
+              if (role.equals("parent")) fields.put(field, field.equals("dev") ? -1L : 0L);
+            };
+        assertThrows(
+            IOException.class,
+            () ->
+                subject(f, f.root, acceptsAll())
+                    .collect(MorningBackupRetention.Mode.FAILED, Optional.empty()));
+        f.unchanged();
+        f.released();
+      }
+    }
+  }
+
+  abstract static class ReadOnlyAccess implements MorningDatabaseSession.Access {
+    @Override
+    public void requireUnused(BatchRun run) {
+      throw new AssertionError("not caller authority");
+    }
+
+    @Override
+    public void requireConsistent(BatchRun run) {
+      throw new AssertionError("not caller authority");
+    }
+
+    @Override
+    public MorningDatabaseSession.BackupBegins beginBackup(
+        BatchRun run, Instant now, boolean recoverAbandoned) {
+      throw new AssertionError("no begin authority");
+    }
+  }
+
+  static List<String> generations(BackupArtifactFixture f, int old) throws Exception {
+    var names = new ArrayList<String>();
+    names.add(DIR);
+    for (int n = 1; n <= old; n++) {
+      cloneGeneration(f, n);
+      names.add(oldName(n));
+    }
+    Collections.sort(names);
+    return List.copyOf(names);
+  }
+
+  static String oldName(int offset) {
+    return LocalDate.of(2026, 9, 13).minusDays(offset).toString().replace("-", "")
+        + "-000002-"
+        + oldUuid(offset);
+  }
+
+  static String oldUuid(int offset) {
+    return "12345678-9abc-def0-8123-" + String.format(Locale.ROOT, "%012x", offset + 100);
+  }
+
+  static void cloneGeneration(BackupArtifactFixture f, int offset) throws Exception {
+    Path child = Files.createDirectory(f.parent.resolve(oldName(offset)));
+    Files.setPosixFilePermissions(
+        child, java.nio.file.attribute.PosixFilePermissions.fromString("rwx------"));
+    for (String name : NAMES) Files.copy(f.child.resolve(name), child.resolve(name));
+    String raw =
+        new String(golden(), StandardCharsets.US_ASCII)
+            .replace("12345678-9abc-def0-8123-456789abcdef", oldUuid(offset))
+            .replace("2026-09-12", LocalDate.of(2026, 9, 12).minusDays(offset).toString())
+            .replace("\"id\":90000", "\"id\":" + (90000 + (offset + 100) * 2))
+            .replace("\"id\":90001", "\"id\":" + (90001 + (offset + 100) * 2));
+    Files.writeString(child.resolve("MANIFEST.json"), raw, StandardCharsets.US_ASCII);
+  }
+}

@@ -30,6 +30,7 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.LongSupplier;
 import org.jspecify.annotations.NullMarked;
@@ -76,11 +77,15 @@ public final class BackupArtifactVerifier {
 
   /** Internal immutable durability proof, never a public file capability. BUG204/YKT160. */
   record BundleSnapshot(
-      BackupFileDigest manifest, Metadata directory, Map<String, Metadata> files) {
+      BackupFileDigest manifest,
+      Metadata directory,
+      Map<String, Metadata> files,
+      Map<String, BackupFileDigest> contents) {
     BundleSnapshot {
       Objects.requireNonNull(manifest, "manifest digest");
       Objects.requireNonNull(directory, "directory snapshot");
       files = Map.copyOf(files);
+      contents = Map.copyOf(contents);
     }
 
     boolean samePublished(BundleSnapshot other) {
@@ -91,7 +96,8 @@ public final class BackupArtifactVerifier {
           && directory.links() == other.directory.links()
           && directory.size() == other.directory.size()
           && directory.modified().equals(other.directory.modified())
-          && files.equals(other.files);
+          && files.equals(other.files)
+          && contents.equals(other.contents);
     }
   }
 
@@ -236,6 +242,166 @@ public final class BackupArtifactVerifier {
     return verifyAt(expected, expected.directoryName(), null, started);
   }
 
+  /** Known digest disagreement only after all normal IO/close/identity checks have completed. */
+  Optional<BundleSnapshot> inspectRetention(BackupManifest expected, long started)
+      throws StorageIoException {
+    Objects.requireNonNull(expected);
+    if (!retentionSizesAgree(expected, started)) return Optional.empty();
+    BundleSnapshot actual = verifyAt(expected, expected.directoryName(), null, started, false);
+    return Objects.requireNonNull(actual.contents().get("schubert_nk.dump")).equals(expected.dump())
+            && Objects.requireNonNull(actual.contents().get("config.tar"))
+                .equals(expected.configuration())
+            && Objects.requireNonNull(actual.contents().get("credentials.tar.age"))
+                .equals(expected.credentials())
+        ? Optional.of(actual)
+        : Optional.empty();
+  }
+
+  private boolean retentionSizesAgree(BackupManifest expected, long started)
+      throws StorageIoException {
+    byte[] canonical = BackupManifestCodec.encode(expected);
+    try {
+      require(security.effectiveUid() == 0);
+      Metadata parent = directory(root, started);
+      Map<String, Long> sizes =
+          Map.of(
+              MANIFEST,
+              (long) canonical.length,
+              "schubert_nk.dump",
+              expected.dump().size(),
+              "config.tar",
+              expected.configuration().size(),
+              "credentials.tar.age",
+              expected.credentials().size());
+      var child = root.openExistingChild(expected.directoryName());
+      boolean same =
+          ResourceScope.use(
+              child::close,
+              () -> {
+                Metadata initial = directory(child, started);
+                require(initial.device() == parent.device());
+                boolean matching = true;
+                for (String name : NAMES) {
+                  boolean actual =
+                      child.atExistingEntryHandle(
+                          name,
+                          held -> {
+                            guard(started);
+                            Metadata raw = metadata(io.attributes(held));
+                            require(
+                                raw.size() >= 0
+                                    && raw.device() == initial.device()
+                                    && raw.inode() > 0);
+                            if ((raw.mode() & 0170000) != 0100000) {
+                              require(raw.equals(metadata(io.attributes(held))));
+                              guard(started);
+                              return false;
+                            }
+                            long fileUid = name.equals("schubert_nk.dump") ? uid : 0;
+                            long fileGid = name.equals("schubert_nk.dump") ? gid : 0;
+                            require(
+                                raw.equals(
+                                    capture(held, false, fileUid, fileGid, raw.size(), started)));
+                            guard(started);
+                            return raw.size() == Objects.requireNonNull(sizes.get(name));
+                          });
+                  matching &= actual;
+                }
+                require(initial.equals(directory(child, started)));
+                return matching;
+              });
+      require(parent.equals(directory(root, started)));
+      require(security.effectiveUid() == 0);
+      guard(started);
+      return same;
+    } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(canonical, (byte) 0);
+    }
+  }
+
+  /** SSC133/ISSRET: fixed files, retained inode and empty-child removal, never recursive delete. */
+  void removeRetained(
+      BackupManifest expected,
+      BundleSnapshot admitted,
+      long started,
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
+      throws IOException {
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(admitted);
+    Objects.requireNonNull(owner);
+    synchronized (lock) {
+      owner.check();
+      require(admitted.equals(verifyWithin(expected, started)));
+      var child = root.openExistingChild(expected.directoryName());
+      ResourceScope.use(
+          child::close,
+          () -> {
+            require(admitted.directory().equals(directory(child, started)));
+            for (String name :
+                List.of("schubert_nk.dump", "config.tar", "credentials.tar.age", MANIFEST)) {
+              owner.check();
+              guard(started);
+              Metadata original = Objects.requireNonNull(admitted.files().get(name));
+              child.atExistingEntryHandle(
+                  name,
+                  held -> {
+                    require(
+                        original.equals(
+                            capture(
+                                held,
+                                false,
+                                original.uid(),
+                                original.gid(),
+                                original.size(),
+                                started)));
+                    return Boolean.TRUE;
+                  });
+              owner.check();
+              require(sameDirectoryInode(admitted.directory(), directory(child, started)));
+              child.unlinkEntry(name);
+              guard(started);
+            }
+            owner.check();
+            require(sameDirectoryInode(admitted.directory(), directory(child, started)));
+            child.atDirectory(
+                held -> {
+                  var stream = io.openNames(held);
+                  if (stream == null) throw unavailable();
+                  return ResourceScope.use(
+                      stream,
+                      () -> {
+                        guard(started);
+                        require(!stream.iterator().hasNext());
+                        guard(started);
+                        return Boolean.TRUE;
+                      });
+                });
+            var rebound = root.openExistingChild(expected.directoryName());
+            ResourceScope.use(
+                rebound::close,
+                () -> {
+                  require(sameDirectoryInode(admitted.directory(), directory(rebound, started)));
+                  return Boolean.TRUE;
+                });
+            owner.check();
+            root.removeEmptyChild(expected.directoryName());
+            guard(started);
+            owner.check();
+            return Boolean.TRUE;
+          });
+    }
+  }
+
+  static boolean sameDirectoryInode(Metadata before, Metadata after) {
+    return before.device() == after.device()
+        && before.inode() == after.inode()
+        && before.mode() == after.mode()
+        && before.uid() == after.uid()
+        && before.gid() == after.gid();
+  }
+
   BundleSnapshot forcePending(BackupManifest expected, Force force, long started)
       throws StorageIoException {
     Objects.requireNonNull(expected, "trusted manifest");
@@ -248,6 +414,16 @@ public final class BackupArtifactVerifier {
       String directoryName,
       @Nullable Force force,
       @Nullable Long suppliedStart)
+      throws StorageIoException {
+    return verifyAt(expected, directoryName, force, suppliedStart, true);
+  }
+
+  private BundleSnapshot verifyAt(
+      BackupManifest expected,
+      String directoryName,
+      @Nullable Force force,
+      @Nullable Long suppliedStart,
+      boolean compareClaims)
       throws StorageIoException {
     synchronized (lock) {
       long started = suppliedStart == null ? clock.getAsLong() : suppliedStart;
@@ -296,7 +472,9 @@ public final class BackupArtifactVerifier {
                               capture(held, false, claim.uid(), claim.gid(), claim.size(), started);
                           require(before.device() == initial.device());
                           snapshots.put(name, before);
-                          observed.put(name, read(held, name, claim, canonical, buffer, started));
+                          observed.put(
+                              name,
+                              read(held, name, claim, canonical, buffer, started, compareClaims));
                           if (force != null) {
                             guard(started);
                             force.apply(held, claim.size());
@@ -351,7 +529,7 @@ public final class BackupArtifactVerifier {
                     guard(started);
                   }
                   return new BundleSnapshot(
-                      Objects.requireNonNull(observed.get(MANIFEST)), initial, snapshots);
+                      Objects.requireNonNull(observed.get(MANIFEST)), initial, snapshots, observed);
                 });
         guard(started);
         require(parent.equals(directory(root, started)));
@@ -453,12 +631,6 @@ public final class BackupArtifactVerifier {
           return Boolean.TRUE;
         });
     guard(started);
-  }
-
-  private BackupFileDigest read(
-      Path held, String name, FileClaim claim, byte[] canonical, byte[] bytes, long started)
-      throws IOException, NoSuchAlgorithmException {
-    return read(held, name, claim, canonical, bytes, started, true);
   }
 
   private BackupFileDigest read(

@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 10:25 PG402 retainer直接試験（全/native未認定）
+
+選択Storage16/Bootstrap4/Batch95=115PT FES0、静的3zero、pg402-retention-three-v6.log/10:24:12。ISSRET001..008は7/8/9世代の実FD/固定4file削除・7保持・各Root後条件、FAILED/REUSED mutation拒否port、未commit/unknown/symlink/malformed/knownsizehash/DB非成功保護、partial unlink/sync/remove失敗→Result0、未知DB/close/thread/null/Rootdevino、固定3mode全byteを確認。golden SHA：failed a2b8f7ff…/new2d6ae932…/reuseddf95cfe3…。初回Storage not-run/fixture Access未実装/BUG387旧Snapshot constructor/未読データstatic7/Rootfixture parent名誤記/追加AtomicInteger import欠落は各logを保全し不合格・未実行を加算0、golden期待値は変更していない。Source dirty/同Source full/native未実施、旧PG401 native成功を新Sourceへ混ぜない。
+
 ## 09:29 PG401 同Source実STOP_SETまで4gate帰還
 
 Source f429d973a4711307a65be2868cefd00e62321e77、全2677PT/static6zero、full cbc6f3749c77976f120f98e8696713a27d4ad900279c42468e96d50a0fd65fa4。signed178artifact/61deps/23SQL manifest c12f8bcab436868735b6b26950404787a4a82e7cfd7842686f71b8f8391c670d、外部Morning一度。旧92行全14列不変＋Backup17二SKIP/Cleanup9七SKIP/Expiry5一SKIP=102、fresh Broker・同owner old capture30/30L/recheck14/14L/STOP64/64L/末段Main227帰還。native def356ea31a1fefafa1edce16d6a65de49b1c8e291e1193e57fac0599d1995ad、fresh4role/classMismatch0、unionmiss689B/1160L/202M/11C、ownhost818/2352/411/31から129/1192/209/20解消。PG400旧union664/1155/202/11と比べ残+25/+5/+0/+0、追加host31/52/4/0と区別する。全kernel終端/4namespace空/原本BEGIN/INVALID/permit0、Brokerだけ新生世代維持。404sanitized evidence構造/秘密pattern0は当回限定scope。BUG386/YKT306直接閉鎖、frame自体のnative emit/hash比較・retention/tenstep/正規issue/A/APIWeb/CHR/負native/100%/正式run24/48.3%は未完。通常保存で停止せず次はretention接続。

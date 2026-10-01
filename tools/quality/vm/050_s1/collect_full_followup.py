@@ -121,5 +121,11 @@ if int(identifier[2:5]) >= 401:
     manifest['ykt'].append('YKT-306')
     manifest['testIds'].append('ISSSTOP001..007')
     manifest['limitations'] = ['same-source actual STOP_SET and journal-content reread pending', 'retention/ten steps/full proof/publication/A handoff/API/Web/CHR incomplete', 'native negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
+if int(identifier[2:5]) >= 402:
+    manifest['ssc'].append('SSC-133')
+    manifest['bugs'].append('BUG-387')
+    manifest['ykt'].append('YKT-307')
+    manifest['testIds'].append('ISSRET001..008')
+    manifest['limitations'] = ['same-source actual BACKUP_RETENTION and five-frame return pending', 'ten steps/full proof/publication/A handoff/API/Web/CHR incomplete', 'native fresh retention/negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

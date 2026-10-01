@@ -154,10 +154,64 @@ public final class BackupManifestReader {
     }
   }
 
+  /** SSC133/ISSRET001..008: actual bounded names under the borrowed backup root. */
+  List<String> retentionNames(long started) throws StorageIoException {
+    synchronized (lock) {
+      require(security.effectiveUid() == 0);
+      Metadata before = directory(root, started);
+      List<String> result = names(started);
+      require(before.equals(directory(root, started)));
+      require(security.effectiveUid() == 0);
+      guard(started);
+      return result;
+    }
+  }
+
+  Metadata retentionRoot(long started) throws StorageIoException {
+    require(security.effectiveUid() == 0);
+    return directory(root, started);
+  }
+
+  boolean retentionDirectory(String name, long started) throws StorageIoException {
+    guard(started);
+    require(security.effectiveUid() == 0);
+    return root.atExistingEntryHandle(
+        name,
+        held -> {
+          Metadata before = metadata(io.attributes(held));
+          guard(started);
+          require(before.equals(metadata(io.attributes(held))));
+          guard(started);
+          return (before.mode() & 0170000) == 040000;
+        });
+  }
+
+  List<String> retentionFiles(String name, long started) throws StorageIoException {
+    var child = root.openExistingChild(name);
+    return ResourceScope.use(
+        child::close,
+        () -> {
+          Metadata before = directory(child, started);
+          List<String> result = names(child, started);
+          require(before.equals(directory(child, started)));
+          return result;
+        });
+  }
+
+  /** Untrusted claim only; verifier and actual complete DB pair must separately agree. */
+  Optional<BackupManifest> retentionClaim(String name, long started) throws StorageIoException {
+    return readClaimAt(name, started, true);
+  }
+
   private List<String> names(long started) throws StorageIoException {
+    return names(root, started);
+  }
+
+  private List<String> names(OwnedTransferDirectory directory, long started)
+      throws StorageIoException {
     guard(started);
     List<String> names =
-        root.atDirectory(
+        directory.atDirectory(
             held -> {
               DirectoryStream<Path> stream = io.openNames(held);
               if (stream == null) throw unavailable();
@@ -191,6 +245,12 @@ public final class BackupManifestReader {
   }
 
   private BackupManifest readAt(String name, @Nullable Long suppliedStart)
+      throws StorageIoException {
+    return readClaimAt(name, suppliedStart, false).orElseThrow(EnvironmentInodePolicy::unavailable);
+  }
+
+  private Optional<BackupManifest> readClaimAt(
+      String name, @Nullable Long suppliedStart, boolean permitKnownMalformed)
       throws StorageIoException {
     Objects.requireNonNull(name, "backup directory name");
     require(
@@ -243,8 +303,10 @@ public final class BackupManifestReader {
                 });
         guard(started);
         require(parent.equals(directory(root, started)));
-        BackupManifest result = decode(bytes, (int) original.size());
-        require(result.directoryName().equals(name));
+        Optional<BackupManifest> result = decode(bytes, (int) original.size());
+        if (result.isPresent() && !result.orElseThrow().directoryName().equals(name))
+          result = Optional.empty();
+        require(permitKnownMalformed || result.isPresent());
         guard(started);
         require(security.effectiveUid() == 0);
         guard(started);
@@ -313,12 +375,12 @@ public final class BackupManifestReader {
     guard(started);
   }
 
-  private static BackupManifest decode(byte[] bytes, int size) throws StorageIoException {
+  private static Optional<BackupManifest> decode(byte[] bytes, int size) {
     byte[] content = Arrays.copyOf(bytes, size);
     try {
-      return BackupManifestCodec.decode(content);
+      return Optional.of(BackupManifestCodec.decode(content));
     } catch (IllegalArgumentException malformed) {
-      throw unavailable();
+      return Optional.empty();
     } finally {
       Arrays.fill(content, (byte) 0);
     }

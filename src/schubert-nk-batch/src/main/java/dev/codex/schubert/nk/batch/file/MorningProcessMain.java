@@ -108,123 +108,157 @@ public final class MorningProcessMain {
                           root.recheck(snapshot);
                           original.verify();
                         });
-                MorningCleanupExecution.Completion cleanup;
-                if (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
-                  cleanup =
-                      MorningCleanupExecution.execute(
-                          root,
-                          snapshot,
-                          budget,
-                          state,
-                          database,
-                          epoch,
-                          original,
-                          completion.verifiedManifest());
-                } else if (backupOutcome == MorningBackupUnitCycle.Outcome.FAILED) {
-                  cleanup =
-                      MorningCleanupExecution.executeFailed(
-                          root,
-                          snapshot,
-                          budget,
-                          state,
-                          database,
-                          epoch,
-                          original,
-                          begins,
-                          backupCycle.completedReceipt());
-                } else throw new IOException("Actual Backup completion unavailable");
-                database.recheckConsistent(state.activation().run());
-                var previousBroker =
-                    dev.codex.schubert.nk.batch.platform.MorningPreviousBroker.capture(
-                        root, snapshot, budget, initialStop, original::verify);
-                database.recheckConsistent(state.activation().run());
-                var broker =
-                    MorningBrokerExecution.execute(
-                        root, snapshot, budget, state, database, epoch, original);
-                var expiry =
-                    MorningExpiryExecution.execute(
-                        root, snapshot, budget, state, database, epoch, original, broker.live());
-                database.recheckConsistent(state.activation().run());
-                database.recheckExpiry(
-                    expiry,
+                var retentionMode =
+                    backupOutcome == MorningBackupUnitCycle.Outcome.FAILED
+                        ? MorningBackupRetention.Mode.FAILED
+                        : begins.database().skipped()
+                            ? MorningBackupRetention.Mode.REUSED_SUCCESS
+                            : MorningBackupRetention.Mode.NEW_SUCCESS;
+                return MorningBackupRetention.use(
+                    retentionMode,
+                    backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS
+                        ? Optional.of(completion.verifiedManifest())
+                        : Optional.empty(),
+                    database,
                     () -> {
                       budget.requireWithin();
                       root.recheck(snapshot);
                       original.verify();
-                      broker.recheck();
                       return budget.remainingNanos();
+                    },
+                    retention -> {
+                      MorningCleanupExecution.Completion cleanup;
+                      if (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS) {
+                        cleanup =
+                            MorningCleanupExecution.execute(
+                                root,
+                                snapshot,
+                                budget,
+                                state,
+                                database,
+                                epoch,
+                                original,
+                                completion.verifiedManifest());
+                      } else if (backupOutcome == MorningBackupUnitCycle.Outcome.FAILED) {
+                        cleanup =
+                            MorningCleanupExecution.executeFailed(
+                                root,
+                                snapshot,
+                                budget,
+                                state,
+                                database,
+                                epoch,
+                                original,
+                                begins,
+                                backupCycle.completedReceipt());
+                      } else throw new IOException("Actual Backup completion unavailable");
+                      database.recheckConsistent(state.activation().run());
+                      var previousBroker =
+                          dev.codex.schubert.nk.batch.platform.MorningPreviousBroker.capture(
+                              root, snapshot, budget, initialStop, original::verify);
+                      database.recheckConsistent(state.activation().run());
+                      var broker =
+                          MorningBrokerExecution.execute(
+                              root, snapshot, budget, state, database, epoch, original);
+                      var expiry =
+                          MorningExpiryExecution.execute(
+                              root,
+                              snapshot,
+                              budget,
+                              state,
+                              database,
+                              epoch,
+                              original,
+                              broker.live());
+                      database.recheckConsistent(state.activation().run());
+                      database.recheckExpiry(
+                          expiry,
+                          () -> {
+                            budget.requireWithin();
+                            root.recheck(snapshot);
+                            original.verify();
+                            broker.recheck();
+                            return budget.remainingNanos();
+                          });
+                      database.recheckConsistent(state.activation().run());
+                      var references =
+                          database.cleanupReferences(
+                              cleanup.terminal(),
+                              () -> {
+                                budget.requireWithin();
+                                root.recheck(snapshot);
+                                original.verify();
+                                broker.recheck();
+                                return budget.remainingNanos();
+                              });
+                      EnvironmentInodePolicy.require(cleanup.references().equals(references));
+                      database.recheckConsistent(state.activation().run());
+                      budget.requireWithin();
+                      original.verify();
+                      var release =
+                          dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.create(
+                              root, snapshot);
+                      var configurations = release.inspectConfigurations();
+                      var startupRoots =
+                          MorningStartupRoots.create(root, snapshot, configurations.roots());
+                      var actualRoots = startupRoots.capture();
+                      budget.requireWithin();
+                      original.verify();
+                      release.recheckConfigurations(configurations);
+                      startupRoots.recheck(actualRoots);
+                      budget.requireWithin();
+                      original.verify();
+                      broker.recheck();
+                      // SSC129: derive both gate frames from the owned live DB/BOM read, not
+                      // constants or a second connection. Frames alone grant no startup authority.
+                      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard issuerOwner =
+                          () -> {
+                            budget.requireWithin();
+                            root.recheck(snapshot);
+                            original.verify();
+                            broker.recheck();
+                            return budget.remainingNanos();
+                          };
+                      var actualDatabase = database.inspectPermitDatabase(issuerOwner);
+                      var actualBroker = broker.observe();
+                      var brokerFrame =
+                          MorningGateEvidence.broker(
+                              epoch,
+                              snapshot.invocation(),
+                              broker.invocation(),
+                              actualBroker.values(),
+                              actualBroker.journal());
+                      var postgresFrame =
+                          MorningGateEvidence.postgres(
+                              epoch, snapshot.invocation(), broker.invocation(), actualDatabase);
+                      var releaseFrame =
+                          MorningGateEvidence.release(
+                              epoch,
+                              snapshot.invocation(),
+                              broker.invocation(),
+                              actualDatabase.release(),
+                              configurations.apiSha256(),
+                              configurations.webSha256());
+                      previousBroker.recheck();
+                      var stopFrame =
+                          MorningGateEvidence.stop(
+                              epoch,
+                              snapshot.invocation(),
+                              broker.invocation(),
+                              initialStop,
+                              previousBroker);
+                      retention.recheck();
+                      var retentionFrame =
+                          MorningGateEvidence.retention(
+                              epoch,
+                              snapshot.invocation(),
+                              broker.invocation(),
+                              retention.result());
+                      release.recheckConfigurations(configurations);
+                      startupRoots.recheck(actualRoots);
+                      database.recheckPermitDatabase(actualDatabase, issuerOwner);
+                      return backupOutcome;
                     });
-                database.recheckConsistent(state.activation().run());
-                var references =
-                    database.cleanupReferences(
-                        cleanup.terminal(),
-                        () -> {
-                          budget.requireWithin();
-                          root.recheck(snapshot);
-                          original.verify();
-                          broker.recheck();
-                          return budget.remainingNanos();
-                        });
-                EnvironmentInodePolicy.require(cleanup.references().equals(references));
-                database.recheckConsistent(state.activation().run());
-                budget.requireWithin();
-                original.verify();
-                var release =
-                    dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.create(
-                        root, snapshot);
-                var configurations = release.inspectConfigurations();
-                var startupRoots =
-                    MorningStartupRoots.create(root, snapshot, configurations.roots());
-                var actualRoots = startupRoots.capture();
-                budget.requireWithin();
-                original.verify();
-                release.recheckConfigurations(configurations);
-                startupRoots.recheck(actualRoots);
-                budget.requireWithin();
-                original.verify();
-                broker.recheck();
-                // SSC129: derive both gate frames from the owned live DB/BOM read, not
-                // constants or a second connection. Frames alone grant no startup authority.
-                dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard issuerOwner =
-                    () -> {
-                      budget.requireWithin();
-                      root.recheck(snapshot);
-                      original.verify();
-                      broker.recheck();
-                      return budget.remainingNanos();
-                    };
-                var actualDatabase = database.inspectPermitDatabase(issuerOwner);
-                var actualBroker = broker.observe();
-                var brokerFrame =
-                    MorningGateEvidence.broker(
-                        epoch,
-                        snapshot.invocation(),
-                        broker.invocation(),
-                        actualBroker.values(),
-                        actualBroker.journal());
-                var postgresFrame =
-                    MorningGateEvidence.postgres(
-                        epoch, snapshot.invocation(), broker.invocation(), actualDatabase);
-                var releaseFrame =
-                    MorningGateEvidence.release(
-                        epoch,
-                        snapshot.invocation(),
-                        broker.invocation(),
-                        actualDatabase.release(),
-                        configurations.apiSha256(),
-                        configurations.webSha256());
-                previousBroker.recheck();
-                var stopFrame =
-                    MorningGateEvidence.stop(
-                        epoch,
-                        snapshot.invocation(),
-                        broker.invocation(),
-                        initialStop,
-                        previousBroker);
-                release.recheckConfigurations(configurations);
-                startupRoots.recheck(actualRoots);
-                database.recheckPermitDatabase(actualDatabase, issuerOwner);
-                return backupOutcome;
               });
         };
     if (runId.isPresent()) {

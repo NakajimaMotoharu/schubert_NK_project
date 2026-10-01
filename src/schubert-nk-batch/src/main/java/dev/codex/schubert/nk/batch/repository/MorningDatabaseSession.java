@@ -154,6 +154,12 @@ public final class MorningDatabaseSession {
 
   /** Callback-scoped parent operations. The JDBC handle and lock never escape this capability. */
   public interface Access {
+    /** SSC133: actual pair admission, never a Connection/SQL/claim authority export. */
+    default boolean retainedBackupSuccessful(BackupManifest manifest, Instant now)
+        throws IOException {
+      throw unavailable();
+    }
+
     default DatabaseObservation inspectPermitDatabase(
         dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner) throws IOException {
       Objects.requireNonNull(owner);
@@ -503,13 +509,24 @@ public final class MorningDatabaseSession {
         });
   }
 
+  @FunctionalInterface
+  private interface Bind {
+    void apply(PreparedStatement statement) throws SQLException;
+  }
+
   private static <T> T query(Connection connection, String sql, Rows<T> operation)
+      throws SQLException {
+    return query(connection, sql, statement -> {}, operation);
+  }
+
+  private static <T> T query(Connection connection, String sql, Bind bind, Rows<T> operation)
       throws SQLException {
     var statement = connection.prepareStatement(sql);
     @Nullable Throwable failure = null;
     try {
       var checked = present(statement);
       checked.setQueryTimeout(5);
+      bind.apply(checked);
       var rows = checked.executeQuery();
       @Nullable Throwable rowFailure = null;
       try {
@@ -569,6 +586,55 @@ public final class MorningDatabaseSession {
 
     private Session(Connection connection) {
       this.connection = connection;
+    }
+
+    @Override
+    public boolean retainedBackupSuccessful(BackupManifest manifest, Instant now)
+        throws IOException {
+      Objects.requireNonNull(manifest, "retained backup claim");
+      Objects.requireNonNull(now, "retention observation time");
+      guard();
+      if (!backupFinished || now.isBefore(manifest.contentFinishedAt())) throw unavailable();
+      try {
+        if (!connection.getAutoCommit() || connection.isReadOnly() || !scalar(connection, HELD))
+          throw unavailable();
+        schema.verify(connection);
+        connection.setAutoCommit(false);
+        boolean eligible =
+            query(
+                connection,
+                "select id,status from schubert.batch_runs where id in (?,?) order by id for update",
+                statement -> {
+                  statement.setLong(1, manifest.databaseStep().id());
+                  statement.setLong(2, manifest.configurationStep().id());
+                },
+                rows -> {
+                  Set<Long> seen = new HashSet<>();
+                  boolean successful = true;
+                  while (rows.next()) {
+                    long id = present(rows.getObject("id", Long.class));
+                    String status = present(rows.getString("status"));
+                    require(
+                        (id == manifest.databaseStep().id()
+                                || id == manifest.configurationStep().id())
+                            && seen.add(id));
+                    require(
+                        Set.of("RUNNING", "SUCCESS", "FAILED", "WARNING", "SKIPPED")
+                            .contains(status));
+                    successful &= status.equals("SUCCESS");
+                  }
+                  return seen.size() == 2 && successful;
+                });
+        if (eligible && new BackupStepRepository(connection).inspect(manifest, now).isEmpty())
+          throw unavailable();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        guard();
+        if (!scalar(connection, HELD)) throw unavailable();
+        return eligible;
+      } catch (SQLException | BatchRepositoryException failure) {
+        throw unavailable();
+      }
     }
 
     private void guard() throws IOException {
