@@ -676,14 +676,21 @@ class MediaApplicationServiceTest {
       assertEquals(0, h.opens.get());
       h.seed();
       var publicService =
-          new MediaApplicationService(
-              h.source,
-              h.verifier,
-              new MediaRepository(),
-              h.inbox,
-              h.responses,
-              h.inspector,
-              h.clock);
+          MediaApplicationAssembly.create(h.source, h.keys, h.snapshots, h.inspector, h.clock);
+      // PT-MED-ASSEMBLY-001/002: real staged SQL/golden path below uses production assembly.
+      for (Executable missing :
+          List.<Executable>of(
+              () ->
+                  MediaApplicationAssembly.create(null, h.keys, h.snapshots, h.inspector, h.clock),
+              () ->
+                  MediaApplicationAssembly.create(
+                      h.source, null, h.snapshots, h.inspector, h.clock),
+              () -> MediaApplicationAssembly.create(h.source, h.keys, null, h.inspector, h.clock),
+              () -> MediaApplicationAssembly.create(h.source, h.keys, h.snapshots, null, h.clock),
+              () ->
+                  MediaApplicationAssembly.create(
+                      h.source, h.keys, h.snapshots, h.inspector, null)))
+        assertThrows(NullPointerException.class, missing);
       var request = input("ANM");
       byte[] actual = publicService.process(request);
       assertEquals("0000", ascii(actual, 208, 4));

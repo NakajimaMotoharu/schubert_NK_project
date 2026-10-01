@@ -134,6 +134,10 @@ public final class ApiProcessMain {
                                 credentials,
                                 java.nio.file.Path.of(
                                     inputs.config().value("nk.api.storage.transfer-root")),
+                                java.nio.file.Path.of(
+                                    inputs.config().value("nk.api.storage.asset-root")),
+                                Integer.parseInt(
+                                    inputs.config().value("nk.api.storage.asset-manifest-entries")),
                                 java.time.Clock.systemUTC(),
                                 processors -> {
                                   // SSC149: exact registration fails before consumer exposure until

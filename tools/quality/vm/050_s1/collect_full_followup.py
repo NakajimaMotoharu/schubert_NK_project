@@ -171,5 +171,17 @@ if int(identifier[2:5]) >= 408:
     manifest['bugs'].extend(['BUG-409', 'BUG-410'])
     manifest['ykt'].append('YKT-327')
     manifest['testIds'].extend(['ROOTREC006', 'ROOTREC007'])
+if int(identifier[2:5]) >= 412:
+    manifest['ssc'].extend(['SSC-149', 'SSC-150'])
+    manifest['bugs'].extend(['BUG-416', 'BUG-417', 'BUG-418', 'BUG-419'])
+    manifest['ykt'].append('YKT-331')
+    manifest['testIds'].extend(['PT-JMS-DISPATCH-026-A..F', 'PT-OPS-API-KEY-001..006',
+        'PT-OPS-API-PREP-001..004', 'PT-AUT-LOGOUT-ASSEMBLY-001..003',
+        'PT-MED-ASSEMBLY-001..003', 'PT-ADM-ASSEMBLY-001..003', 'PT-OPS-API-CFG-007'])
+    manifest['limitations'] = ['Ordinary API24/31 real registration only; Question7/async/outbox/Web lifecycle incomplete',
+        'Host retained-FD component and real PostgreSQL factory tests do not prove native Root/full ready',
+        'Current VM still signed PG408/source32c6a7b1e; PG410 old-source exit50 is not mixed into this source coverage',
+        'API/Web ordinary ready, completed Morning receipt, CHR-A01/L01 pending',
+        '100% coverage and formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

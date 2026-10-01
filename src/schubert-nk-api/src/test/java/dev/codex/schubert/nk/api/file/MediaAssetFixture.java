@@ -16,14 +16,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Synthetic abc assets only. Counts actual native FD ownership and prohibits mutation calls. */
-final class MediaAssetFixture implements AutoCloseable {
+public final class MediaAssetFixture implements AutoCloseable {
   final Path root;
   final Path manifest;
-  final StorageIdentity identity;
+  public final StorageIdentity identity;
   final Calls calls = new Calls();
-  final OwnedTransferDirectory held;
+  public final OwnedTransferDirectory held;
 
-  MediaAssetFixture(Path path) throws IOException {
+  public MediaAssetFixture(Path path) throws IOException {
     root = Files.createDirectory(path);
     mode(root, "rwxr-x---");
     var attrs = Files.readAttributes(root, PosixFileAttributes.class);

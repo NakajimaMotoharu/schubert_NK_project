@@ -560,6 +560,9 @@ final class LogoutInboxServiceTest {
     var clock = Clock.fixed(NOW, ZoneOffset.UTC);
     for (Executable input :
         List.<Executable>of(
+            () -> LogoutApplicationAssembly.create(null, snapshots, clock),
+            () -> LogoutApplicationAssembly.create(keys, null, clock),
+            () -> LogoutApplicationAssembly.create(keys, snapshots, null),
             () -> new LogoutInboxService(null, revocations, responses, hashes, clock),
             () -> new LogoutInboxService(inbox, null, responses, hashes, clock),
             () -> new LogoutInboxService(inbox, revocations, null, hashes, clock),
@@ -634,6 +637,27 @@ final class LogoutInboxServiceTest {
     var closed = database.api();
     closed.close();
     assertInfrastructure(() -> service.execute(closed, input, NOW));
+  }
+
+  @Test
+  void assemblyUsesRealRevocationInboxReplayWithoutTakingKeyOwnership() throws Exception {
+    // PT-AUT-LOGOUT-ASSEMBLY-001..003. Only generated UUID is read; expected body is UI234 literal.
+    var application =
+        LogoutApplicationAssembly.create(keys, snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
+    var input = request(RAW, REQUEST);
+    byte[] initial = call(application, input, NOW);
+    var firstId = UUID.fromString(text(initial, 24, 36));
+    assertEquals(4, firstId.version());
+    assertNotEquals(REQUEST, firstId);
+    assertArrayEquals(golden("0000", RAW, REQUEST, firstId, STAMP), initial);
+    effects(1, 1, 1);
+    byte[] repeated = call(application, input, NOW);
+    var secondId = UUID.fromString(text(repeated, 24, 36));
+    assertNotEquals(firstId, secondId);
+    assertArrayEquals(golden("0200", RAW, REQUEST, secondId, STAMP), repeated);
+    effects(1, 1, 1);
+    assertEquals(
+        1, count("select count(*) from schubert.request_inbox where fingerprint_key_version='f1'"));
   }
 
   private static byte[] restore(Connection c, InboxCompletion saved, long owner) {

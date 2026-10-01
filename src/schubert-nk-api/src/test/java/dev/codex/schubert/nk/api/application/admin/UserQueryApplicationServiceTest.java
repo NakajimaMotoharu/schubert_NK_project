@@ -234,8 +234,16 @@ class UserQueryApplicationServiceTest {
       assertArrayEquals(expected(request, "0000", 2, 3, 0), tracked.process(request));
       seed(f);
       byte[] random =
-          new UserQueryApplicationService(f.source, auth, query, f.inbox, replay, clock)
+          UserApplicationAssembly.queries(f.source, f.fingerprints, f.snapshots, clock)
               .process(request);
+      // PT-ADM-ASSEMBLY-001: literal response/SQL stage oracle remains independent below.
+      for (var missing :
+          List.<org.junit.jupiter.api.function.Executable>of(
+              () -> UserApplicationAssembly.queries(null, f.fingerprints, f.snapshots, clock),
+              () -> UserApplicationAssembly.queries(f.source, null, f.snapshots, clock),
+              () -> UserApplicationAssembly.queries(f.source, f.fingerprints, null, clock),
+              () -> UserApplicationAssembly.queries(f.source, f.fingerprints, f.snapshots, null)))
+        assertThrows(NullPointerException.class, missing);
       UUID response = UUID.fromString(new String(random, 24, 36, StandardCharsets.US_ASCII));
       assertEquals(4, response.version());
       byte[] expected = expected(request, "0000", 2, 3, 0);

@@ -1,9 +1,13 @@
 package dev.codex.schubert.nk.api.storage;
 
+import dev.codex.schubert.nk.api.application.admin.UserApplicationAssembly;
 import dev.codex.schubert.nk.api.application.log.LogQueryApplicationAssembly;
+import dev.codex.schubert.nk.api.application.media.MediaApplicationAssembly;
 import dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationAssembly;
 import dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecs;
 import dev.codex.schubert.nk.api.dispatch.JdbcSyncRequestProcessor;
+import dev.codex.schubert.nk.api.file.AssetManifestLoader;
+import dev.codex.schubert.nk.api.file.HeldMediaFileInspector;
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor;
 import dev.codex.schubert.nk.api.security.LoginApplicationAssembly;
@@ -40,19 +44,59 @@ public final class ApiApplicationPreparation {
       DataSource pool,
       ServiceCredentialSet credentials,
       Path transfer,
+      Path assets,
+      int manifestEntries,
       Clock clock,
       Operation operation)
       throws IOException {
     Objects.requireNonNull(pool, "database");
     Objects.requireNonNull(credentials, "credentials");
     Objects.requireNonNull(transfer, "transfer root");
+    Objects.requireNonNull(assets, "asset root");
     Objects.requireNonNull(clock, "clock");
     Objects.requireNonNull(operation, "application operation");
     try (var codecs = ApiNativeCodecs.create(credentials);
-        var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), transfer)) {
-      var prepared =
-          TransferStoragePreparation.prepare(
-              root, new StorageIdentity("schubert-api", "schubert-web"), clock.instant());
+        var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), transfer);
+        var asset = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), assets)) {
+      executeBorrowed(
+          pool,
+          codecs,
+          root,
+          new StorageIdentity("schubert-api", "schubert-web"),
+          asset,
+          new StorageIdentity("schubert-data", "schubert-read"),
+          manifestEntries,
+          clock,
+          operation);
+    }
+  }
+
+  // Package-local component boundary, not Root admission. Native caller above fixes NSS identities
+  // and retains all owners. Host PT uses real filesystem identities, never a native admission
+  // claim.
+  static void executeBorrowed(
+      DataSource pool,
+      ApiNativeCodecs codecs,
+      OwnedTransferDirectory root,
+      StorageIdentity transferIdentity,
+      OwnedTransferDirectory asset,
+      StorageIdentity assetIdentity,
+      int manifestEntries,
+      Clock clock,
+      Operation operation)
+      throws IOException {
+    Objects.requireNonNull(pool, "database");
+    Objects.requireNonNull(codecs, "codecs");
+    Objects.requireNonNull(root, "transfer");
+    Objects.requireNonNull(transferIdentity, "transfer identity");
+    Objects.requireNonNull(asset, "assets");
+    Objects.requireNonNull(assetIdentity, "asset identity");
+    Objects.requireNonNull(clock, "clock");
+    Objects.requireNonNull(operation, "operation");
+    try {
+      var manifest = new AssetManifestLoader(asset, assetIdentity).load(manifestEntries);
+      var mediaInspector = new HeldMediaFileInspector(asset, assetIdentity, manifest);
+      var prepared = TransferStoragePreparation.prepare(root, transferIdentity, clock.instant());
       var login =
           LoginApplicationAssembly.create(
               codecs.fingerprints(), codecs.contexts(), codecs.snapshots(), clock);
@@ -76,6 +120,27 @@ public final class ApiApplicationPreparation {
           java.util.List.of("GAMREQ01", "SPKREQ01", "SRCREQ01", "RTEREQ01", "SCFREQ01", "SCNREQ01"))
         processors.put(id, scenario);
       processors.put("LGSREQ01", log);
+      var media =
+          MediaApplicationAssembly.create(
+              pool, codecs.fingerprints(), codecs.snapshots(), mediaInspector, clock);
+      for (String id :
+          java.util.List.of(
+              "AUDREQ01",
+              "ANMREQ01",
+              "ANLREQ01",
+              "VIDREQ01",
+              "MCTREQ01",
+              "MCSREQ01",
+              "MTRREQ01",
+              "MEDREQ01")) processors.put(id, media);
+      var userQueries =
+          UserApplicationAssembly.queries(pool, codecs.fingerprints(), codecs.snapshots(), clock);
+      for (String id : java.util.List.of("USRREQ01", "UDTREQ01")) processors.put(id, userQueries);
+      var userMutations =
+          UserApplicationAssembly.mutations(pool, codecs.fingerprints(), codecs.snapshots(), clock);
+      for (String id :
+          java.util.List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01"))
+        processors.put(id, userMutations);
       operation.run(Map.copyOf(processors));
     } catch (NoSuchAlgorithmException failure) {
       throw new IOException("API cryptography unavailable");

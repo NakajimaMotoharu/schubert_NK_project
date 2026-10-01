@@ -47,6 +47,7 @@ public final class ApiNonSecretConfig {
           Map.entry("nk.api.sync-consumers.max", "8"),
           Map.entry("nk.api.async-consumers", "1"),
           Map.entry("nk.api.storage.asset-root", "/srv/schubert-nk/data/assets"),
+          Map.entry("nk.api.storage.asset-manifest-entries", "59627"),
           Map.entry("nk.api.storage.transfer-root", "/srv/schubert-nk/data/transfer"),
           Map.entry("nk.inbox.reference-retention", "24h"),
           Map.entry("nk.inbox.update-retention", "7d"),
@@ -153,6 +154,9 @@ public final class ApiNonSecretConfig {
       if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();
     }
     if (!Set.of("STANDARD", "DEBUG").contains(values.get("nk.monitoring.mode"))) throw invalid();
+    // SSC150: independently configured migrated inventory, not the observed manifest's own count.
+    String entries = Objects.requireNonNull(values.get("nk.api.storage.asset-manifest-entries"));
+    if (!entries.matches("[1-9][0-9]{0,4}") || Integer.parseInt(entries) > 59_627) throw invalid();
     if (!validPort(DB_URL, Objects.requireNonNull(values.get("nk.db.url")))
         || !validPort(MQ_URL, Objects.requireNonNull(values.get("nk.mq.url")))) throw invalid();
     try {

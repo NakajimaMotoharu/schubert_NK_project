@@ -20,6 +20,7 @@ final class ApiNonSecretConfigTest {
   private static final String INVALID = "API non-secret configuration unavailable";
   private static final String GOLDEN =
       "nk.api.async-consumers=1\n"
+          + "nk.api.storage.asset-manifest-entries=59627\n"
           + "nk.api.storage.asset-root=/srv/schubert-nk/data/assets\n"
           + "nk.api.storage.transfer-root=/srv/schubert-nk/data/transfer\n"
           + "nk.api.sync-consumers.initial=4\n"
@@ -48,6 +49,29 @@ final class ApiNonSecretConfigTest {
     assertEquals(INVALID, failure.getMessage());
     assertEquals(0, failure.getSuppressed().length);
     return failure;
+  }
+
+  @Test
+  void opsApiCfg007IndependentManifestCountAndCanonicalHash() throws Exception {
+    for (String value : List.of("1", "7", "59627")) {
+      var actual =
+          ApiNonSecretConfig.parse(
+              "", "nk.api.storage.asset-manifest-entries: \"" + value + "\"\n");
+      assertEquals(value, actual.value("nk.api.storage.asset-manifest-entries"));
+      var expected =
+          GOLDEN.replace("asset-manifest-entries=59627", "asset-manifest-entries=" + value);
+      assertEquals(
+          HexFormat.of()
+              .formatHex(
+                  MessageDigest.getInstance("SHA-256")
+                      .digest(expected.getBytes(StandardCharsets.UTF_8))),
+          actual.canonicalSha256());
+    }
+    for (String value :
+        List.of(
+            "", "0", "-1", "01", "+1", "1.0", " 7 ", "59628", "99999", "100000", "2147483648", "a"))
+      rejected("", "nk.api.storage.asset-manifest-entries: \"" + value + "\"\n");
+    rejected("nk.api.storage.asset-manifest-entries: 7\n", "");
   }
 
   @Test

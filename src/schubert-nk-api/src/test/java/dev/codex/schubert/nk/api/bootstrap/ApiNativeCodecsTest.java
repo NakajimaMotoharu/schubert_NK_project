@@ -19,6 +19,34 @@ import org.junit.jupiter.api.Test;
  * independent LP/HMAC oracle; not native key/rotation readiness acceptance.
  */
 final class ApiNativeCodecsTest {
+  @org.junit.jupiter.api.io.TempDir java.nio.file.Path directory;
+
+  @Test
+  void actualServiceCredentialReaderSuppliesPublicPurposesAndBorrowedOwnerSurvives()
+      throws Exception {
+    // PT-OPS-API-KEY-006: synthetic metadata, actual reader bytes and retained FD.
+    try (var fixture = new dev.codex.schubert.nk.api.file.PublicApiCredentialFixture(directory)) {
+      var credentials = fixture.credentials();
+      try (var codecs = ApiNativeCodecs.create(credentials)) {
+        var auth =
+            codecs
+                .contexts()
+                .encrypt(
+                    new AuthContextIdentity(new UUID(0, 1), 7),
+                    AuthenticationContext.of("a".repeat(64)));
+        assertEquals("ctx1", auth.keyVersion());
+      }
+      byte[] borrowed = credentials.copyKey(ServiceCredentialId.OPERATION_HMAC_CURRENT);
+      byte[] expected = new byte[32];
+      Arrays.fill(expected, (byte) 67);
+      assertArrayEquals(expected, borrowed);
+      Arrays.fill(borrowed, (byte) 0);
+      assertEquals("fp1", credentials.version(ServiceCredentialId.OPERATION_HMAC_CURRENT));
+      credentials.close();
+      assertThrows(IllegalStateException.class, () -> ApiNativeCodecs.create(credentials));
+    }
+  }
+
   static final List<ServiceCredentialId> IDS =
       List.of(
           ServiceCredentialId.API_CONTEXT_AES_CURRENT,

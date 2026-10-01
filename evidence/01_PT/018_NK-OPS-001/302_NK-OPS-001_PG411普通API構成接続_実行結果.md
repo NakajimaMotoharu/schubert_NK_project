@@ -1,5 +1,7 @@
 # PG409～411 実行結果（未認定・継続）
 
+PG412更新：2026-10-01 21:21:43、4module選択v3終了0、API52/FES0・4module静的0。実root/probe/全usage・用途別current実reader・Logout組立初回/再送・Media/User組立実DBのPTを301へ反映。普通API map24/31、Question7の不足を開始前拒否、async/outbox/lifecycle/Web未接続、ready0。BUG417はsource-reviewで未定義Asset ownerをSS343固定schubert-data:schubert-readへ修正前登録して訂正、Transfer既定を同SSと照合。BUG418419のcompile2失敗も不合格別保存、source/品質条件の緩和0。shared security/所有/config変更群をSource固定commit/push後に全6cleanで検証する（PG412-full-application-preparation、全coverage100%・正式認定は別）。VM署名runtimeはPG408/source32cで保持し、全登録未実装の拒否probeを繰返すための配備/startは行わない。
+
 2026-10-01、branch dev-foundation。正式run24/source858713c/1964PT/53scope/48.3%不変更。
 
 - PG409：Source32c6a7b1e、API1/親30、Broker AMQ229031。BUG415を修正前起票。失敗manifest `evidence/provisional/PG409-native-source-bind-auth-refused/manifest.json` SHA256 `8963547c60792dd893aa364feb535ac8ba3e32f3076fb081547393f44aac2fd9`。旧162全14列/Backup保持、10SKIP追加。失敗を合格化しない。

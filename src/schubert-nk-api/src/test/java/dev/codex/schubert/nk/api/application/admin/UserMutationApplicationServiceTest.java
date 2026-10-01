@@ -650,9 +650,15 @@ class UserMutationApplicationServiceTest {
       reply(h.service.process(request), request, "0000", 3, 1, 2);
       assertEquals(1, h.commits.get());
       h.seed();
-      var normal =
-          new UserMutationApplicationService(
-              h.source, h.authentication, h.inbox, h.commands, h.responses, clock);
+      var normal = UserApplicationAssembly.mutations(h.source, h.fingerprints, h.snapshots, clock);
+      // PT-ADM-ASSEMBLY-002/003: production authentication/Inbox/User/audit graph.
+      for (Executable missing :
+          List.<Executable>of(
+              () -> UserApplicationAssembly.mutations(null, h.fingerprints, h.snapshots, clock),
+              () -> UserApplicationAssembly.mutations(h.source, null, h.snapshots, clock),
+              () -> UserApplicationAssembly.mutations(h.source, h.fingerprints, null, clock),
+              () -> UserApplicationAssembly.mutations(h.source, h.fingerprints, h.snapshots, null)))
+        assertThrows(NullPointerException.class, missing);
       byte[] result = normal.process(request);
       assertEquals("0000", ascii(result, 208, 4));
       assertEquals(MESSAGE.toString(), ascii(result, 60, 36));
