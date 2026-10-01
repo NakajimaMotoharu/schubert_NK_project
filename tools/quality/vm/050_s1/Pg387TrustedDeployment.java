@@ -68,6 +68,13 @@ public final class Pg387TrustedDeployment {
     }
     if(Files.exists(Path.of("/run/schubert-nk/startup/broker-start.intent"),LinkOption.NOFOLLOW_LINKS))
       throw new IllegalStateException("unresolved Broker start isolated");
+    try(var entries=Files.list(Path.of("/run/schubert-nk/startup"))) {
+      for(var entry:entries.toList()) {
+        String name=entry.getFileName().toString();
+        if(!name.equals("epoch.current") && !name.matches("(?!00000000-0000-0000-0000-000000000000\\.)[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\.(permit|owner|API\\.launch|WEB\\.launch)"))
+          throw new IllegalStateException("unresolved startup namespace isolated");
+      }
+    }
   }
   static <T> T checked(Checked<T> work) throws java.io.IOException {
     try { return work.execute(); }
@@ -141,13 +148,22 @@ public final class Pg387TrustedDeployment {
       var files=new StartupPermitFiles(root,dev.codex.schubert.nk.storage.LinuxInodeSecurity.create());
       var old=files.current();
       UUID boot=UUID.fromString(Files.readString(Path.of("/proc/sys/kernel/random/boot_id")).trim());
-      if(old.state()!=StartupPermitRecords.State.INVALID || old.permitDigest().isPresent()
-          || !old.boot().equals(boot)
+      if(!old.boot().equals(boot)
           || !old.activation().run().id().equals(ORIGINAL_RUN))
-        throw new IllegalStateException("preserved INVALID only");
+        throw new IllegalStateException("preserved startup binding");
+      if(old.state()==StartupPermitRecords.State.ISSUED) {
+        var permit=files.readIssued();
+        var prior=ReleaseApproval.parse(Files.readAllBytes(Path.of("/etc/schubert-nk/release-approval/current")));
+        var oldRelease=StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(prior);
+        if(!permit.releaseDigest().equals(oldRelease.sha256())) throw new IllegalStateException("prior issued release binding");
+      }
       var original=MaintenanceRunFiles.create().execute(session -> session.observe(old.activation()));
       if(!original.equals(old.activation()))throw new IllegalStateException("original mismatch");
-      Files.write(PRESERVE.resolve(STEM+"-previous-epoch"),StartupPermitRecords.epoch(old),StandardOpenOption.CREATE_NEW);
+      byte[] actual=Files.readAllBytes(Path.of("/run/schubert-nk/startup/epoch.current"));
+      if(!old.equals(StartupPermitRecords.readEpoch(actual)) || !old.equals(files.current()))
+        throw new IllegalStateException("prior raw epoch drift");
+      Files.write(PRESERVE.resolve(STEM+"-previous-epoch"),actual,StandardOpenOption.CREATE_NEW);
+      Files.setPosixFilePermissions(PRESERVE.resolve(STEM+"-previous-epoch"),java.nio.file.attribute.PosixFilePermissions.fromString("r--------"));
       var next=files.invalidate(boot,UUID.randomUUID(),old.activation());
       if(!next.equals(files.current()) || next.state()!=StartupPermitRecords.State.INVALID
           || !next.activation().equals(old.activation()) || next.epoch().equals(old.epoch()))
@@ -166,7 +182,7 @@ public final class Pg387TrustedDeployment {
         "schubert-nk-cleanup.service","schubert-nk-inbox-inspector.service",
         "schubert-nk-expiry-cleanup.service","schubert-nk-api.service",
         "schubert-nk-web.service","artemis.service");
-    var allowed=Set.of("schubert-nk-morning-controller.service","schubert-nk-expiry-cleanup.service", "artemis.service");
+    var allowed=Set.of("schubert-nk-morning-controller.service","schubert-nk-expiry-cleanup.service", "artemis.service","schubert-nk-api.service","schubert-nk-web.service");
     var changes=new LinkedHashMap<String,byte[]>();
     for(var name:names) {
       Path actual=installed.resolve(name);
@@ -178,6 +194,11 @@ public final class Pg387TrustedDeployment {
       if(!Arrays.equals(before,previous))throw new IllegalStateException("old signed Unit base mismatch");
       if(!Arrays.equals(previous,candidate)) {
         if(!allowed.contains(name))throw new IllegalStateException("unapproved Unit delta");
+        if(name.equals("schubert-nk-api.service") || name.equals("schubert-nk-web.service")) {
+          validateRootDelta(name,previous,candidate);
+          changes.put(name,candidate);
+          continue;
+        }
         String addition=name.equals("schubert-nk-morning-controller.service")
             ? "LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops\n"
             : name.equals("schubert-nk-expiry-cleanup.service")
@@ -211,6 +232,38 @@ public final class Pg387TrustedDeployment {
       throw new IllegalStateException("new signed Unit base mismatch");
     terminalAll();
     System.out.println(LABEL+" STAGE SIGNED_UNIT_DELTA_VERIFIED count="+changes.size()+" oldSignedBases=true dropInsUnchanged=true beforeImagesPreserved=true");
+  }
+
+  /** SSC141: one exact signed old-to-Root transform; other directives remain byte-identical. */
+  static void validateRootDelta(String name,byte[] previous,byte[] candidate) {
+    String role=switch(name) {
+      case "schubert-nk-api.service" -> "api";
+      case "schubert-nk-web.service" -> "web";
+      default -> throw new IllegalArgumentException("closed Root Unit");
+    };
+    String before=new String(previous,StandardCharsets.UTF_8);
+    String after=new String(candidate,StandardCharsets.UTF_8);
+    if(!Arrays.equals(before.getBytes(StandardCharsets.UTF_8),previous)
+        || !Arrays.equals(after.getBytes(StandardCharsets.UTF_8),candidate)
+        || !before.endsWith("\n") || !after.endsWith("\n") || before.contains("\r") || after.contains("\r"))
+      throw new IllegalStateException("canonical Unit bytes");
+    String oldMain="-cp /opt/schubert-nk/current/"+role+"/"+role+".jar:/opt/schubert-nk/current/"+role+"/lib/* dev.codex.schubert.nk."+role+".bootstrap."+(role.equals("api")?"Api":"Web")+"ProcessMain";
+    var expected=new ArrayList<String>(); int transformed=0;
+    for(String line:before.split("\n",-1)) {
+      if(line.startsWith("#")) continue;
+      if(line.startsWith("ExecStart=")) {
+        if(!line.startsWith("ExecStart=/usr/bin/java ") || !line.endsWith(oldMain))
+          throw new IllegalStateException("prior fixed ordinary entry");
+        expected.add(line.replace("ExecStart=/","ExecStart=!/").replace(oldMain,
+            "-cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.RootServiceLauncher "+role.toUpperCase(Locale.ROOT)));
+        expected.add("CapabilityBoundingSet=CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH");
+        transformed++;
+      } else if(role.equals("api") && line.equals("Requires=schubert-nk-expiry-cleanup.service artemis.service postgresql.service"))
+        expected.add("Requires=artemis.service postgresql.service");
+      else expected.add(line);
+    }
+    List<String> actual=Arrays.stream(after.split("\n",-1)).filter(line -> !line.startsWith("#")).toList();
+    if(transformed!=1 || !expected.equals(actual)) throw new IllegalStateException("closed Root Unit delta");
   }
   static void stopAll() throws Exception {
     for(var unit:MaintenanceUnit.values()) {

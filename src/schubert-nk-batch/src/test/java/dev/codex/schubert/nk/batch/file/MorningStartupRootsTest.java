@@ -55,6 +55,23 @@ final class MorningStartupRootsTest {
       golden = golden.replace("@" + index, f.paths.get(index).toString());
     byte[] expected = golden.getBytes(StandardCharsets.US_ASCII);
     assertArrayEquals(expected, actual.canonical(EPOCH));
+    var permit =
+        new StartupPermitRecords.Permit(
+            EPOCH.boot(),
+            EPOCH.epoch(),
+            EPOCH.activation(),
+            "1".repeat(32),
+            "a".repeat(64),
+            "b".repeat(64),
+            "c".repeat(64),
+            "d".repeat(64),
+            "e".repeat(64));
+    assertArrayEquals(expected, actual.canonicalIssued(permit));
+    assertEquals(
+        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(expected)),
+        actual.sha256Issued(permit));
+    assertThrows(NullPointerException.class, () -> actual.canonicalIssued(null));
+    assertThrows(NullPointerException.class, () -> actual.sha256Issued(null));
     assertEquals(
         HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(expected)),
         actual.sha256(EPOCH));

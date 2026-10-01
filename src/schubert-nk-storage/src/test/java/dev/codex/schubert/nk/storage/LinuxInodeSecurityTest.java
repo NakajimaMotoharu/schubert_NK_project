@@ -83,6 +83,40 @@ final class LinuxInodeSecurityTest {
   }
 
   @Test
+  void heldElfCapabilityAbsenceRequiresExactEnodataAndNativeHeldFile() throws Exception {
+    for (int errno : new int[] {61, 95, 1, 5, 34}) {
+      var calls =
+          new LinuxInodeSecurity(
+              (state, path, name, value, limit) -> {
+                assertEquals("security.capability", name.getString(0));
+                assertEquals(24, limit);
+                state.set(ValueLayout.JAVA_INT, ERRNO, errno);
+                return -1;
+              },
+              (s, p, v) -> 0,
+              () -> 0);
+      if (errno == 61) calls.requireNoFileCapabilities(CAPABILITY);
+      else failure(() -> calls.requireNoFileCapabilities(CAPABILITY));
+    }
+    for (int returned : new int[] {0, 1, 24, 25, -2}) {
+      var calls = new LinuxInodeSecurity((s, p, n, v, l) -> returned, (s, p, v) -> 0, () -> 0);
+      failure(() -> calls.requireNoFileCapabilities(CAPABILITY));
+    }
+    var actual = LinuxInodeSecurity.create();
+    assertThrows(NullPointerException.class, () -> actual.requireNoFileCapabilities(null));
+    assertThrows(IllegalArgumentException.class, () -> actual.requireNoFileCapabilities(root));
+    Files.writeString(root.resolve("public-elf-fixture"), "PUBLIC");
+    try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
+      held.atExistingEntryHandle(
+          "public-elf-fixture",
+          path -> {
+            actual.requireNoFileCapabilities(path);
+            return Boolean.TRUE;
+          });
+    }
+  }
+
+  @Test
   void aclReturnAndErrnoBoundaries() throws Exception {
     for (int size : new int[] {1, 44, 65536}) {
       var calls =

@@ -28,6 +28,7 @@ public final class CleanupWorkerRequestFiles {
   private final boolean expiry;
   private final boolean failedBackup;
   private final Optional<OwnerSource> ownerSource;
+  private final boolean startup;
 
   /** Closed source names only, not arbitrary paths or root authorization. SSC119. */
   public enum OwnerSource {
@@ -81,6 +82,17 @@ public final class CleanupWorkerRequestFiles {
       boolean expiry,
       Optional<OwnerSource> ownerSource,
       boolean failedBackup) {
+    this(root, security, io, expiry, ownerSource, failedBackup, Optional.empty());
+  }
+
+  private CleanupWorkerRequestFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      boolean expiry,
+      Optional<OwnerSource> ownerSource,
+      boolean failedBackup,
+      Optional<StartupName> startupName) {
     this.root = Objects.requireNonNull(root, "fixed request root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.io = Objects.requireNonNull(io, "request IO");
@@ -88,14 +100,69 @@ public final class CleanupWorkerRequestFiles {
     this.expiry = expiry;
     this.failedBackup = failedBackup;
     this.ownerSource = ownerSource;
+    startup = startupName.isPresent();
     name =
-        ownerSource.map(value -> value.name).orElse(expiry ? "expiry-request" : "cleanup-request");
+        startupName.isPresent()
+            ? startupName.orElseThrow().name()
+            : ownerSource.isPresent()
+                ? ownerSource.orElseThrow().name
+                : expiry ? "expiry-request" : "cleanup-request";
     maximum =
-        ownerSource.isPresent()
+        startup || ownerSource.isPresent()
             ? MaintenanceOwnerFrame.MAXIMUM_BYTES
             : expiry
                 ? CleanupWorkerRequest.Expiry.MAXIMUM_BYTES
                 : failedBackup ? CleanupProfile.MAXIMUM_BYTES : CleanupWorkerRequest.MAXIMUM_BYTES;
+  }
+
+  /** SSC137: package-only, name derives solely from an expected ISSUED epoch and closed profile. */
+  enum StartupSource {
+    OWNER,
+    API,
+    WEB
+  }
+
+  private record StartupName(String name) {}
+
+  static CleanupWorkerRequestFiles forStartup(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      StartupPermitRecords.Epoch issued,
+      StartupSource source)
+      throws StorageIoException {
+    return forStartup(root, security, new InspectorEnvironmentPublisher.NioIo(), issued, source);
+  }
+
+  static CleanupWorkerRequestFiles forStartup(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      StartupPermitRecords.Epoch issued,
+      StartupSource source)
+      throws StorageIoException {
+    Objects.requireNonNull(issued, "actual issued epoch");
+    Objects.requireNonNull(source, "closed startup source");
+    require(issued.state() == StartupPermitRecords.State.ISSUED);
+    String suffix = source == StartupSource.OWNER ? ".owner" : "." + source.name() + ".launch";
+    return new CleanupWorkerRequestFiles(
+        root,
+        security,
+        io,
+        false,
+        Optional.empty(),
+        false,
+        Optional.of(new StartupName(issued.epoch() + suffix)));
+  }
+
+  void prepareStartup(byte[] bytes, UUID part) throws StorageIoException {
+    Objects.requireNonNull(bytes, "actual startup bytes");
+    require(startup && bytes.length > 0 && bytes.length <= maximum);
+    prepareBytes(bytes.clone(), part);
+  }
+
+  byte[] readStartup() throws StorageIoException {
+    require(startup);
+    return readBytes();
   }
 
   public static CleanupWorkerRequestFiles forFailure(
@@ -113,7 +180,7 @@ public final class CleanupWorkerRequestFiles {
   public void prepareFailure(CleanupFailedBackupRequest request, UUID part)
       throws StorageIoException {
     Objects.requireNonNull(request, "failed Backup request");
-    require(failedBackup);
+    require(failedBackup && !startup);
     prepareBytes(request.encode(), part);
   }
 
@@ -201,7 +268,7 @@ public final class CleanupWorkerRequestFiles {
 
   /** SSC120: same live cycle only; nested Inspector/part/unknown residue forbids retirement. */
   public void requireOwnedCycle() throws StorageIoException {
-    require(!expiry && ownerSource.isEmpty());
+    require(!startup && !expiry && ownerSource.isEmpty());
     requireOwnedNames(Set.of("cleanup-request", "maintenance-owner", "cleanup-start.intent"));
   }
 
@@ -236,7 +303,7 @@ public final class CleanupWorkerRequestFiles {
 
   public void prepare(CleanupWorkerRequest request, UUID part) throws StorageIoException {
     Objects.requireNonNull(request, "root request");
-    require(!expiry && !failedBackup && ownerSource.isEmpty());
+    require(!startup && !expiry && !failedBackup && ownerSource.isEmpty());
     prepareBytes(request.encode(), part);
   }
 
@@ -283,7 +350,7 @@ public final class CleanupWorkerRequestFiles {
   }
 
   public CleanupWorkerRequest read() throws StorageIoException {
-    require(!expiry && !failedBackup && ownerSource.isEmpty());
+    require(!startup && !expiry && !failedBackup && ownerSource.isEmpty());
     return CleanupWorkerRequest.consume(readBytes());
   }
 
@@ -318,7 +385,7 @@ public final class CleanupWorkerRequestFiles {
   /** Only after actual full Unit termination; source equality does not establish that condition. */
   public void retire(CleanupWorkerRequest expected) throws StorageIoException {
     Objects.requireNonNull(expected, "original request");
-    require(!expiry && !failedBackup && ownerSource.isEmpty());
+    require(!startup && !expiry && !failedBackup && ownerSource.isEmpty());
     retireBytes(expected.encode());
   }
 

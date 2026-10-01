@@ -131,6 +131,16 @@ public final class RootReleaseAdmission {
     return verifyFor(connection, caller, RootStartupContext.Service.MORNING);
   }
 
+  /** SSC137: an independently admitted fixed app-role connection, not Morning's advisory owner. */
+  public DatabaseInspection inspectServiceDatabase(
+      Connection connection, RootStartupContext.Snapshot caller) throws SQLException, IOException {
+    Objects.requireNonNull(caller);
+    require(
+        caller.service() == RootStartupContext.Service.API
+            || caller.service() == RootStartupContext.Service.WEB);
+    return verifyFor(connection, caller, caller.service());
+  }
+
   /** Non-secret data only; effective parser result is not release/root/permit authority. SSC126. */
   public record EffectiveConfigurations(
       String apiSha256,
@@ -157,14 +167,31 @@ public final class RootReleaseAdmission {
   }
 
   /** Package port for independent fixed YAML vectors, not a native root admission factory. */
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification =
-          "SS343 SSC126 fixes the four non-configurable deployment roots; parsed API/Web paths remain separately checked")
   EffectiveConfigurations inspectConfigurations(NonSecretConfigSource source) throws IOException {
     Objects.requireNonNull(source, "actual non-secret fixed YAML reader");
     require(expected.service() == RootStartupContext.Service.MORNING);
+    return readConfigurations(source);
+  }
+
+  public EffectiveConfigurations inspectServiceConfigurations() throws IOException {
+    return inspectServiceConfigurations(ServiceConfigFiles.production());
+  }
+
+  EffectiveConfigurations inspectServiceConfigurations(NonSecretConfigSource source)
+      throws IOException {
+    Objects.requireNonNull(source);
+    require(
+        expected.service() == RootStartupContext.Service.API
+            || expected.service() == RootStartupContext.Service.WEB);
+    return readConfigurations(source);
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SSC126/137 fixed four deployment roots, shared strict parser unchanged")
+  private EffectiveConfigurations readConfigurations(NonSecretConfigSource source)
+      throws IOException {
     context.recheck(expected);
     var apiYaml = Objects.requireNonNull(source.read(ServiceConfigFiles.Service.API));
     var webYaml = Objects.requireNonNull(source.read(ServiceConfigFiles.Service.WEB));
@@ -199,6 +226,12 @@ public final class RootReleaseAdmission {
 
   public void recheckConfigurations(EffectiveConfigurations observed) throws IOException {
     recheckConfigurations(observed, ServiceConfigFiles.production());
+  }
+
+  public void recheckServiceConfigurations(EffectiveConfigurations observed) throws IOException {
+    Objects.requireNonNull(observed);
+    require(observed.equals(inspectServiceConfigurations()));
+    context.recheck(expected);
   }
 
   void recheckConfigurations(EffectiveConfigurations observed, NonSecretConfigSource source)

@@ -284,6 +284,11 @@ final class BackupPublicationFixture
               buffer.limit(buffer.position() + Math.min(buffer.remaining(), chunk));
               int n = delegate.read(buffer);
               buffer.limit(limit);
+              if (n == -1 && readMode.equals("extra-any")) {
+                point("extraInjected");
+                buffer.put((byte) 1);
+                return 1;
+              }
               if (n == -1 && readMode.equals("eof-position-any")) {
                 point("eofPositionInjected");
                 buffer.put((byte) 1);

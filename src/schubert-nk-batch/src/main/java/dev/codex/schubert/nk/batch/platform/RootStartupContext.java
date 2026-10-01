@@ -72,6 +72,10 @@ public final class RootStartupContext {
 
     byte[] unit(Service service) throws IOException;
 
+    default long serviceRootUid(long pid) throws IOException {
+      throw unavailable();
+    }
+
     default byte[] unitDeadline(Service service) throws IOException {
       throw unavailable();
     }
@@ -105,30 +109,142 @@ public final class RootStartupContext {
     require(expected.equals(capture(expected.service())));
   }
 
+  /** SSC137: Morning observes only the two fixed Root phases, never a caller-provided PID/Unit. */
+  public Snapshot captureServiceRoot(Snapshot morning, Service target) throws IOException {
+    Objects.requireNonNull(morning, "same Morning parent");
+    Objects.requireNonNull(target, "fixed service Root");
+    require(
+        morning.service() == Service.MORNING && (target == Service.API || target == Service.WEB));
+    recheck(morning);
+    Snapshot first = observeServiceRoot(morning, target);
+    require(first.equals(observeServiceRoot(morning, target)));
+    recheck(morning);
+    return first;
+  }
+
+  /** Captured Root PID disappearance only, never a receipt or whole-Unit-empty claim. */
+  public boolean serviceGenerationExited(Snapshot morning, Snapshot captured) throws IOException {
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(captured);
+    require(
+        morning.service() == Service.MORNING
+            && (captured.service() == Service.API || captured.service() == Service.WEB)
+            && morning.boot().equals(captured.boot())
+            && captured.pid() > 1
+            && captured.pid() != morning.pid()
+            && captured.controlGroup().equals("/system.slice/" + captured.service().unit()));
+    recheck(morning);
+    boolean first = missingGeneration(captured);
+    recheck(morning);
+    boolean second = missingGeneration(captured);
+    require(!first || second);
+    recheck(morning);
+    return first && second;
+  }
+
+  private boolean missingGeneration(Snapshot captured) throws IOException {
+    byte[] bytes = new byte[0];
+    try {
+      bytes = Objects.requireNonNull(io.stat(captured.pid()));
+      require(start(bytes, captured.pid()) == captured.startTicks());
+      return false;
+    } catch (java.nio.file.NoSuchFileException gone) {
+      return true;
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  private Snapshot observeServiceRoot(Snapshot morning, Service target) throws IOException {
+    require(io.effectiveUid() == 0);
+    require(
+        "proc".equals(io.procFilesystem())
+            && "/usr/lib/systemd/systemd".equals(io.initExecutable()));
+    require(ascii(io.boot(), 37).equals(morning.boot() + "\n"));
+    require(start(io.stat(1), 1) == morning.initStartTicks());
+    byte[] first = Objects.requireNonNull(io.unit(target));
+    try {
+      var unit = properties(first);
+      require(
+          unit.keySet()
+              .equals(
+                  Set.of(
+                      "Id",
+                      "LoadState",
+                      "ActiveState",
+                      "SubState",
+                      "MainPID",
+                      "InvocationID",
+                      "ControlGroup")));
+      String group = "/system.slice/" + target.unit();
+      require(
+          target.unit().equals(unit.get("Id"))
+              && "loaded".equals(unit.get("LoadState"))
+              && Set.of("activating", "active").contains(unit.get("ActiveState"))
+              && Set.of("start", "running").contains(unit.get("SubState"))
+              && group.equals(unit.get("ControlGroup")));
+      String pidText = Objects.requireNonNull(unit.get("MainPID"));
+      String invocation = Objects.requireNonNull(unit.get("InvocationID"));
+      require(pidText.matches("[1-9][0-9]{0,9}") && invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
+      long pid = Long.parseLong(pidText); // The preceding 1..10 decimal digits always fit a long.
+      require(
+          pid >= 2
+              && pid <= Integer.MAX_VALUE
+              && pid != morning.pid()
+              && !invocation.equals(morning.invocation()));
+      long ticks = start(io.stat(pid), pid);
+      require(ascii(io.cgroup(pid), 4096).equals("0::" + group + "\n"));
+      require(io.serviceRootUid(pid) == 0);
+      long afterTicks = start(io.stat(pid), pid);
+      byte[] second = Objects.requireNonNull(io.unit(target));
+      try {
+        require(ticks == afterTicks && Arrays.equals(first, second));
+      } finally {
+        Arrays.fill(second, (byte) 0);
+      }
+      return new Snapshot(
+          target, morning.boot(), invocation, pid, ticks, morning.initStartTicks(), group);
+    } finally {
+      Arrays.fill(first, (byte) 0);
+    }
+  }
+
   /** SSC119: systemd's outer start deadline must not be extended by the Java entry clock. */
   public long maintenanceDeadline(Snapshot morning, long parentDeadline) throws IOException {
     Objects.requireNonNull(morning, "same Morning context");
     require(morning.service() == Service.MORNING && parentDeadline > 0);
+    return fixedDeadline(morning, parentDeadline, 1_800_000_000_000L);
+  }
+
+  /** Actual service Root Unit start clock, never a freshly restarted 120s budget. SSC137. */
+  public long serviceRootDeadline(Snapshot self, long parentDeadline) throws IOException {
+    Objects.requireNonNull(self);
+    require((self.service() == Service.API || self.service() == Service.WEB) && parentDeadline > 0);
+    return fixedDeadline(self, parentDeadline, 120_000_000_000L);
+  }
+
+  private long fixedDeadline(Snapshot morning, long parentDeadline, long duration)
+      throws IOException {
     recheck(morning);
     byte[] first = new byte[0];
     byte[] second = new byte[0];
     try {
-      first = Objects.requireNonNull(io.unitDeadline(Service.MORNING), "deadline manager bytes");
+      first = Objects.requireNonNull(io.unitDeadline(morning.service()), "deadline manager bytes");
       var values = properties(first);
       require(
           values
               .keySet()
               .equals(Set.of("Id", "InvocationID", "MainPID", "ExecMainStartTimestampMonotonic")));
-      require(Service.MORNING.unit().equals(values.get("Id")));
+      require(morning.service().unit().equals(values.get("Id")));
       require(morning.invocation().equals(values.get("InvocationID")));
       require(Long.toString(morning.pid()).equals(values.get("MainPID")));
       String start = Objects.requireNonNull(values.get("ExecMainStartTimestampMonotonic"));
       require(start.matches("[1-9][0-9]{0,19}"));
       long started = Math.multiplyExact(Long.parseLong(start), 1000L);
-      long unitDeadline = Math.addExact(started, 1_800_000_000_000L);
+      long unitDeadline = Math.addExact(started, duration);
       require(parentDeadline > started);
       recheck(morning);
-      second = Objects.requireNonNull(io.unitDeadline(Service.MORNING), "deadline manager bytes");
+      second = Objects.requireNonNull(io.unitDeadline(morning.service()), "deadline manager bytes");
       require(Arrays.equals(first, second));
       recheck(morning);
       return Math.min(parentDeadline, unitDeadline);
@@ -213,6 +329,23 @@ public final class RootStartupContext {
     require(bytes.length > 0 && bytes.length <= maximum);
     for (byte b : bytes) require(b == 10 || (b >= 32 && b <= 126));
     return new String(bytes, StandardCharsets.US_ASCII);
+  }
+
+  static long rootUid(byte[] bytes) throws IOException {
+    Objects.requireNonNull(bytes, "kernel status");
+    require(bytes.length > 0 && bytes.length <= 16384);
+    for (byte value : bytes) require(value == 9 || value == 10 || (value >= 32 && value <= 126));
+    String status = new String(bytes, StandardCharsets.US_ASCII);
+    require(status.endsWith("\n"));
+    String found = "";
+    for (String line : status.split("\n", -1)) {
+      if (line.startsWith("Uid:")) {
+        require(found.isEmpty());
+        found = line;
+      }
+    }
+    require(found.matches("Uid:[ \\t]+0[ \\t]+0[ \\t]+0[ \\t]+0"));
+    return 0;
   }
 
   private static void require(boolean valid) throws IOException {
@@ -306,6 +439,21 @@ public final class RootStartupContext {
             "SSC086/087 fixed kernel proc cgroup, validated PID and NOFOLLOW leaf; ROOTCTX004/008/native014")
     public byte[] cgroup(long pid) throws IOException {
       return read(Path.of("/", "proc", Long.toString(pid), "cgroup"), 4097);
+    }
+
+    @Override
+    @SuppressFBWarnings(
+        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        matchType = SuppressMatchType.EXACT,
+        justification = "SSC137 fixed service Root kernel status, positive validated PID only")
+    public long serviceRootUid(long pid) throws IOException {
+      require(pid >= 2 && pid <= Integer.MAX_VALUE);
+      byte[] bytes = read(Path.of("/", "proc", Long.toString(pid), "status"), 16385);
+      try {
+        return rootUid(bytes);
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
     }
 
     @Override

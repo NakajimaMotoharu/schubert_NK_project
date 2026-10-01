@@ -143,5 +143,17 @@ if int(identifier[2:5]) >= 405:
     manifest['bugs'].append('BUG-393')
     manifest['ykt'].append('YKT-313')
     manifest['testIds'].append('ISSPUB009')
+if int(identifier[2:5]) >= 406:
+    manifest['ssc'].extend(f'SSC-{n:03d}' for n in range(137, 142))
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(395, 401))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(315, 321))
+    manifest['testIds'].extend(['ROOTLAUNCH001..006', 'ROOTELF001..006', 'ROOTPROOF001..004',
+                               'ROOTTICKET001..004', 'ROOTUNIT001', 'ROOTOWNERFD001..002'])
+    manifest['limitations'] = [
+        'same-source native Root actual gates/launch/held ELF/same-PID privilege transition pending',
+        'API/Web ordinary ready, completed Morning receipt, CHR-A01/L01 pending',
+        'FAILED cleanup classification BUG392, UNKNOWN/hard-timeout/native negative closure pending',
+        '100% coverage and formal PT-WEB-20260925-24 unchanged',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

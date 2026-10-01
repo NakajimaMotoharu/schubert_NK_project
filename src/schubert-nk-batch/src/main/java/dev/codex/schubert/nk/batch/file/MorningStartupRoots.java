@@ -64,15 +64,27 @@ final class MorningStartupRoots {
     byte[] canonical(StartupPermitRecords.Epoch epoch) throws IOException {
       Objects.requireNonNull(epoch);
       require(epoch.state() == StartupPermitRecords.State.INVALID);
-      var activation = epoch.activation();
+      return canonicalBinding(epoch.boot(), epoch.epoch(), epoch.activation());
+    }
+
+    byte[] canonicalIssued(StartupPermitRecords.Permit actualPermit) throws IOException {
+      Objects.requireNonNull(actualPermit);
+      return canonicalBinding(actualPermit.boot(), actualPermit.epoch(), actualPermit.activation());
+    }
+
+    private byte[] canonicalBinding(
+        UUID boot,
+        UUID epoch,
+        dev.codex.schubert.nk.batch.repository.MaintenanceActivation activation)
+        throws IOException {
       var time = new DateTimeFormatterBuilder().appendInstant(6).toFormatter();
       var text =
           new StringBuilder("NKROOTS1\n")
               .append("boot_id=")
-              .append(epoch.boot())
+              .append(boot)
               .append('\n')
               .append("epoch_id=")
-              .append(epoch.epoch())
+              .append(epoch)
               .append('\n')
               .append("run_id=")
               .append(activation.run().id())
@@ -106,6 +118,14 @@ final class MorningStartupRoots {
 
     String sha256(StartupPermitRecords.Epoch epoch) throws IOException {
       byte[] actual = canonical(epoch);
+      return digest(actual);
+    }
+
+    String sha256Issued(StartupPermitRecords.Permit actualPermit) throws IOException {
+      return digest(canonicalIssued(actualPermit));
+    }
+
+    private static String digest(byte[] actual) throws IOException {
       try {
         return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(actual));
       } catch (NoSuchAlgorithmException failure) {
@@ -134,6 +154,23 @@ final class MorningStartupRoots {
     Objects.requireNonNull(context);
     Objects.requireNonNull(expected);
     require(expected.service() == RootStartupContext.Service.MORNING);
+    return createForRoot(context, expected, layout);
+  }
+
+  static MorningStartupRoots createService(
+      RootStartupContext context, RootStartupContext.Snapshot expected, StorageRootLayout layout)
+      throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(expected);
+    require(
+        expected.service() == RootStartupContext.Service.API
+            || expected.service() == RootStartupContext.Service.WEB);
+    return createForRoot(context, expected, layout);
+  }
+
+  private static MorningStartupRoots createForRoot(
+      RootStartupContext context, RootStartupContext.Snapshot expected, StorageRootLayout layout)
+      throws IOException {
     context.recheck(expected);
     return new MorningStartupRoots(
         () -> context.recheck(expected),

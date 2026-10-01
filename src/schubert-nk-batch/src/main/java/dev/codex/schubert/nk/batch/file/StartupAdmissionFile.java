@@ -70,6 +70,20 @@ public final class StartupAdmissionFile {
   public <T> Optional<T> tryExclusive(LinuxFileLock.StartupOperation<T> operation)
       throws StorageIoException {
     Objects.requireNonNull(operation, "startup operation");
+    return tryExclusiveObserved(admission -> operation.execute(admission.descriptor()));
+  }
+
+  /** Actual admitted held A identity, borrowed only while this owner's native OFD lock lives. */
+  public record Admission(int descriptor, long device, long inode) {}
+
+  @FunctionalInterface
+  public interface AdmittedOperation<T> {
+    T execute(Admission admission) throws IOException;
+  }
+
+  public <T> Optional<T> tryExclusiveObserved(AdmittedOperation<T> operation)
+      throws StorageIoException {
+    Objects.requireNonNull(operation, "startup operation");
     require(security.effectiveUid() == 0);
     try {
       return withView(
@@ -92,7 +106,12 @@ public final class StartupAdmissionFile {
                           // callback may replace this root JVM. Only the A lock owner survives.
                           serviceOwner.close();
                           hostOwner.close();
-                          T result = operation.execute(reserved);
+                          T result =
+                              operation.execute(
+                                  new Admission(
+                                      reserved,
+                                      hostSnapshot.file().device(),
+                                      hostSnapshot.file().inode()));
                           verify(hostSnapshot);
                           return result;
                         });

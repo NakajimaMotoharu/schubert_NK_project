@@ -1,5 +1,5 @@
 # NK-OPS-001; RD SYS-002/004, AUT-001, OPS-009; UI212/225/251/253; SS311/313/342/343.
-# PG269/274, SSC-079, PT-OPS-SVC-001..004. Do not install until WebProcessMain and full readiness are verified.
+# SSC137 Root candidate; PT297/ROOTUNIT001. Full ordinary readiness remains unaccepted.
 [Unit]
 Description=Schubert NK Web
 After=schubert-nk-api.service artemis.service postgresql.service
@@ -20,7 +20,8 @@ LoadCredential=mq-web:/etc/schubert-nk/credentials/mq-web
 LoadCredential=web-session-aes-current:/etc/schubert-nk/credentials/web-session-aes-current
 LoadCredential=web-revoke-aes-current:/etc/schubert-nk/credentials/web-revoke-aes-current
 LoadCredential=web-log-aes-current:/etc/schubert-nk/credentials/web-log-aes-current
-ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=128m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -Xms384m -Xmx768m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/web/web.jar:/opt/schubert-nk/current/web/lib/* dev.codex.schubert.nk.web.bootstrap.WebProcessMain
+ExecStart=!/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=128m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -Xms384m -Xmx768m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.RootServiceLauncher WEB
+CapabilityBoundingSet=CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH
 Restart=on-failure
 RestartSec=5s
 TimeoutStartSec=120s

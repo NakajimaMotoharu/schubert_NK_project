@@ -181,6 +181,14 @@ final class MorningControlScope {
                           original.verify();
                           database.recheckConsistent(state.activation().run());
                           publication.commit();
+                          MorningStartupLaunchOwner.publish(
+                              root,
+                              snapshot,
+                              budget,
+                              state,
+                              database,
+                              original,
+                              publication.expected());
                           return result;
                         } catch (IOException | RuntimeException | Error failure) {
                           publication.abort();
@@ -393,6 +401,17 @@ final class MorningControlScope {
       brokerIntent
           .requireClear(); // Under M, before old run/DB/stop: unknown daemon start stays isolated.
     }
+    var startup =
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
+            java.nio.file.Path.of("/run/schubert-nk/startup"));
+    dev.codex.schubert.nk.storage.ResourceScope.use(
+        startup::close,
+        () -> {
+          StartupLaunchFiles.requireNoServiceResidue(
+              startup, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create());
+          return Boolean.TRUE;
+        });
     var cleanup =
         dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
             dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),

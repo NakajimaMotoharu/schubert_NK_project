@@ -1,0 +1,136 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
+
+import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import dev.codex.schubert.nk.storage.*;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import edu.umd.cs.findbugs.annotations.SuppressMatchType;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.Optional;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * Pending original + actual live parent only; ticket/full preflight/exec remain additional gates.
+ */
+@NullMarked
+final class RootStartupPending {
+  private RootStartupPending() {}
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SSC137 fixed current epoch launch, no arbitrary request file")
+  static void awaitLaunch(
+      RootStartupContext root,
+      RootStartupContext.Snapshot self,
+      RootCurrentPermitPreflight.Observed issued,
+      MaintenanceOwnerFrame owner)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(self);
+    Objects.requireNonNull(issued);
+    Objects.requireNonNull(owner);
+    long deadline = root.serviceRootDeadline(self, owner.deadlineNanos());
+    var clock = LinuxMonotonicClock.create();
+    var service =
+        self.service() == RootStartupContext.Service.API
+            ? ServiceConfigFiles.Service.API
+            : ServiceConfigFiles.Service.WEB;
+    while (true) {
+      require(clock.nowNanos() < deadline);
+      require(owner.equals(observe(root, self, issued)));
+      var directory =
+          OwnedTransferDirectory.open(
+              LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+      Optional<StartupLaunchRecord> launch =
+          ResourceScope.use(
+              directory::close,
+              () -> {
+                var files =
+                    new StartupLaunchFiles(
+                        directory, LinuxInodeSecurity.create(), issued.current());
+                files.requireStartIntent(service);
+                try {
+                  return Optional.of(files.readLaunch(service));
+                } catch (StorageIoException absent) {
+                  if (absent.reason() != StorageIoException.Reason.MISSING) throw absent;
+                  return Optional.empty();
+                }
+              });
+      if (launch.isPresent()) {
+        verifySelf(launch.orElseThrow(), self);
+        require(owner.equals(observe(root, self, issued)));
+        require(clock.nowNanos() < deadline);
+        return;
+      }
+      try {
+        Thread.sleep(25);
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new IOException("root launch unavailable");
+      }
+    }
+  }
+
+  static void verifySelf(StartupLaunchRecord launch, RootStartupContext.Snapshot self)
+      throws IOException {
+    Objects.requireNonNull(launch);
+    Objects.requireNonNull(self);
+    require(
+        (self.service() == RootStartupContext.Service.API
+                || self.service() == RootStartupContext.Service.WEB)
+            && launch.service().name().equals(self.service().name())
+            && launch.boot().toString().equals(self.boot())
+            && launch.child().invocation().equals(self.invocation())
+            && launch.child().pid() == self.pid()
+            && launch.child().startTicks() == self.startTicks());
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "SSC137 fixed startup root, actual issued epoch only")
+  static MaintenanceOwnerFrame observe(
+      RootStartupContext root,
+      RootStartupContext.Snapshot self,
+      RootCurrentPermitPreflight.Observed issued)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(self);
+    Objects.requireNonNull(issued);
+    require(
+        self.service() == RootStartupContext.Service.API
+            || self.service() == RootStartupContext.Service.WEB);
+    root.recheck(self);
+    var directory =
+        OwnedTransferDirectory.open(
+            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    var owner =
+        ResourceScope.use(
+            directory::close,
+            () -> {
+              var current = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
+              require(
+                  issued.current().equals(current.current())
+                      && issued.permit().equals(current.readIssued()));
+              var value =
+                  new StartupLaunchFiles(directory, LinuxInodeSecurity.create(), issued.current())
+                      .readOwner();
+              value.parentsGuard().check();
+              require(
+                  issued.current().equals(current.current())
+                      && issued.permit().equals(current.readIssued()));
+              return value;
+            });
+    var original = MaintenanceRunFiles.observeStartup(root, self, issued.current().activation());
+    // Completed restart needs a true normal Morning receipt; until connected it fails closed.
+    require(original.completed().isEmpty());
+    owner.parentsGuard().check();
+    root.recheck(self);
+    return owner;
+  }
+}

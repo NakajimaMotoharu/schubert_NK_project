@@ -1,5 +1,9 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC137/S3失敗停止追補（実装前）：pending起動のAPI/Web slotは同M/原本/正常A後の親が、真正cold全Unit確認→durable intent→正常start client→実Root世代二読→launch公開まで所有する。未完成ordinaryが50等で退出してもRestart=on-failureを成功又は別起動のreadyへ読み替えない。捕捉した元PID/startTicksの真正proc消滅を同boot/root/Morningの下で二読後、固定slotを通常stop clientで停止し全Unit/kernel空を確認する。UNKNOWN/未捕捉/stop不明/終端不明では元M/DB/原本を保有して外側期限まで隔離。全停止した失敗は当回permit revoke＋残intent保全で非成功終了し、GC/coldから成功receiptを生成しない。これは境界接続の失敗枝でありready/completed/M最終close保証は別未受入。
+
+SSC137/S3内部接続（2026-10-01、実装前）：API/Web RootはA取得後、当回実ISSUED・原本・ownerと自己Invocation/PID/startTicksを検査する。pending枝では同Morning真正生存/元単調期限に加え、A正常close・発行commit後にその親が真正start client正常帰還/対象Root manager-kernel-manager二読後公開した自己launchが必須。completed枝は同activation真正done0/10・全graph/active/pending無し・同Morning正常0/10/fullkernel終端receiptが必須、旧pending ticket/GC/空Invocationで代用不可。全release/config/六root/schema/BrokerOpsの正常close後、actual A FD/dev/inoと実17field sealed proof、保持setpriv ELFを既存native execへ接続する。固定Java唯一link /usr/bin/java→/opt/jdk-25.0.4/bin/javaのroot管理chain/version/ELF/前後一致を検証、A期間の管理者変更は禁止。別PID fork/第三継承FD/shell/任意argv/秘密envは禁止。Root候補capは用途限定で実測、ordinary childは五cap全部0。API/Web全業務ready後だけA解放/次service/Caddy/DONEへ進む。Morning全0/10は全resource/M正常close後だけ。M最終close未知後の既ready停止競合は別未受入、成功扱いしない。現未完成Rootやunassembled ordinary50は限定境界観測でありUnit完成認定ではない。
+
 SSC127/BUG375：vendor Artemis Unitだけに`SuccessExitStatus=143`を指定し、Javaの正規SIGTERM/Shutdown hook完了後の通常exitをinactive/deadとする。143をworker成功へ流用しない。旧Unitのfailed143はreset-failedせず、SS343§6.17のsame-invocation全停止journal・全kernel終端・Code1/時刻を独立確認したときだけ次fresh起動のbaseline dataへ使う。SIGKILL/timeout/signal/unknown/不正journalは拒否。固定Stop policy/control-group/SendSIGKILL=no/Restart=on-failure/zeroCapsは不変更。未起動trusted候補配備は旧/new署名BOM・実旧8Unit byte・M/A/全終端を保持し、Artemis固定1directiveだけを追加する（既存drop-in/設定/失敗stateを修復しない）。
 
 SSC111/SSC109補足：root Cleanup/Expiryも署名release原本をPID1 host viewで読むためroot prestartに限りCAP_SYS_PTRACE/CAP_DAC_OVERRIDEをbounding setに残す。Ambientは空、NoNewPrivileges/ProtectSystem=strictを維持し、API/Web/Backupの最終worker zeroCapsを変更しない。Expiryはoneshot/Restart=no/RemainAfterExit=yes/SuccessExitStatus=10/TimeoutStart=10min/TimeoutStop=60s/KillMode=control-group/SendSIGKILL=no/Delegate=no、Artemis After/Requires、親の明示startと同残budgetで管理する。private残留requestをRuntimeDirectory自動消去で隠さない。未完成PGPT candidateの配置は隔離VMで保全後だけ行い、production enable/正式合格としない。
@@ -98,7 +102,7 @@ SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止
 | `schubert-nk-cleanup` | backup | PostgreSQL | Backup成否はDB rowで分岐 |
 | `artemis` | cleanup | cleanup | Cleanup safety failureで起動不可 |
 | `schubert-nk-expiry-cleanup.service` | Artemis | Artemis | API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない |
-| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL, expiry | readiness poll後にWeb |
+| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL | SSC139: expiryの実前処理は正規issuer/Root許可で必須、API dependencyによる保守子再実行は禁止。readiness poll後にWeb |
 | `schubert-nk-web` | API, Artemis, PostgreSQL | API, Artemis, PostgreSQL | technical DBが必要 |
 | `caddy` | Web | Web | Packageの自由先行起動をdisable |
 

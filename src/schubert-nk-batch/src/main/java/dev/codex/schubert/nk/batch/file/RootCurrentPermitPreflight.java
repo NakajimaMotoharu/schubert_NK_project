@@ -23,11 +23,29 @@ import org.jspecify.annotations.NullMarked;
 final class RootCurrentPermitPreflight {
   private RootCurrentPermitPreflight() {}
 
+  record Observed(StartupPermitRecords.Epoch current, StartupPermitRecords.Permit permit) {
+    Observed {
+      Objects.requireNonNull(current);
+      Objects.requireNonNull(permit);
+    }
+
+    @Override
+    public String toString() {
+      return "RootIssued[identity=<redacted>]";
+    }
+  }
+
+  static void verifyNative(
+      RootStartupContext root, RootStartupContext.Snapshot expected, String releaseHash)
+      throws IOException {
+    readNative(root, expected, releaseHash);
+  }
+
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
-      justification = "SS343 §6.15 fixes root-owned /run/schubert-nk/startup; no caller path")
-  static void verifyNative(
+      justification = "SSC137 fixed root-owned startup namespace, no caller path")
+  static Observed readNative(
       RootStartupContext root, RootStartupContext.Snapshot expected, String releaseHash)
       throws IOException {
     Objects.requireNonNull(root, "root context");
@@ -37,12 +55,23 @@ final class RootCurrentPermitPreflight {
     var directory =
         OwnedTransferDirectory.open(
             LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    var permit =
+    var observed =
         ResourceScope.use(
             directory::close,
-            () -> new StartupPermitFiles(directory, LinuxInodeSecurity.create()).readIssued());
-    verify(expected, releaseHash, permit);
+            () -> {
+              var files = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
+              var before = files.current();
+              var permit = files.readIssued();
+              if (!before.equals(files.current())
+                  || !before.boot().equals(permit.boot())
+                  || !before.epoch().equals(permit.epoch())
+                  || !before.activation().equals(permit.activation()))
+                throw new IOException("root current permit unavailable");
+              return new Observed(before, permit);
+            });
+    verify(expected, releaseHash, observed.permit());
     root.recheck(expected);
+    return observed;
   }
 
   static void verify(

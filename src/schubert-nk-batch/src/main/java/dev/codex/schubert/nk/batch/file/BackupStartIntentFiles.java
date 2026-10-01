@@ -108,6 +108,60 @@ public final class BackupStartIntentFiles implements AutoCloseable {
     this(root, security, new InspectorEnvironmentPublisher.NioIo(), gate);
   }
 
+  /** SSC137: closed service/actual issued epoch only; not a new worker target. */
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
+      justification = "SSC137 fixed startup root; actual epoch selects one of two service intents")
+  public static BackupStartIntentFiles createService(
+      RootStartupContext context,
+      RootStartupContext.Snapshot morning,
+      dev.codex.schubert.nk.storage.ServiceConfigFiles.Service service,
+      StartupPermitRecords.Epoch issued)
+      throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(service);
+    Objects.requireNonNull(issued);
+    require(
+        morning.service() == RootStartupContext.Service.MORNING
+            && issued.state() == StartupPermitRecords.State.ISSUED);
+    context.recheck(morning);
+    var directory =
+        OwnedTransferDirectory.open(
+            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    try {
+      var security = LinuxInodeSecurity.create();
+      var permits = new StartupPermitFiles(directory, security);
+      require(issued.equals(permits.current()));
+      permits.readIssued();
+      var owner = new StartupLaunchFiles(directory, security, issued).readOwner();
+      require(
+          owner.morning().invocation().equals(morning.invocation())
+              && owner.morning().pid() == morning.pid()
+              && owner.morning().startTicks() == morning.startTicks());
+      owner.parentsGuard().check();
+      return new BackupStartIntentFiles(
+          directory,
+          security,
+          new InspectorEnvironmentPublisher.NioIo(),
+          () -> {
+            context.recheck(morning);
+            owner.parentsGuard().check();
+            require(issued.equals(permits.current()));
+            permits.readIssued();
+          },
+          issued.epoch() + "." + service.name() + ".start.intent");
+    } catch (IOException | RuntimeException | Error failure) {
+      try {
+        directory.close();
+      } catch (IOException closeFailure) {
+        failure.addSuppressed(closeFailure);
+      }
+      throw failure;
+    }
+  }
+
   BackupStartIntentFiles(
       OwnedTransferDirectory root,
       InodeSecurityCalls security,

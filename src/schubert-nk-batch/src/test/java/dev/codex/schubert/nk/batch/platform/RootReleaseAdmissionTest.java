@@ -94,17 +94,8 @@ public final class RootReleaseAdmissionTest {
     }
 
     Fixture(RootStartupContext.Service service) throws IOException {
-      if (service == RootStartupContext.Service.CLEANUP) {
-        kernel.group = "0::/system.slice/schubert-nk-cleanup.service\n";
-        kernel.unit =
-            "Id=schubert-nk-cleanup.service\nLoadState=loaded\nActiveState=active\n"
-                + "SubState=running\nMainPID=42\nInvocationID="
-                + RootStartupContextTest.INV
-                + "\nControlGroup=/system.slice/schubert-nk-cleanup.service\n";
-      } else {
-        kernel.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-        kernel.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
-      }
+      kernel.group = "0::/system.slice/" + service.unit() + "\n";
+      kernel.unit = RootStartupContextTest.unit(service);
       context = new RootStartupContext(kernel);
       expected = context.capture(service);
     }
@@ -122,6 +113,60 @@ public final class RootReleaseAdmissionTest {
             events.add("platform");
             return ACTUAL;
           });
+    }
+  }
+
+  @Test
+  void rootServiceInputsRemainFixedActorAndUseIndependentSchemaYamlVectors() throws Exception {
+    for (var actor : List.of(RootStartupContext.Service.API, RootStartupContext.Service.WEB)) {
+      var f = new Fixture(actor);
+      var subject = f.subject();
+      var database = subject.inspectServiceDatabase(connection(f.events, false), f.expected);
+      assertEquals(literal().migrations(), database.schemaRows());
+      assertEquals(ACTUAL, database.runtime());
+      assertTrue(f.events.contains("statement.close") && f.events.contains("rows.close"));
+      var config =
+          subject.inspectServiceConfigurations(service -> new ServiceConfigFiles.Contents("", ""));
+      assertEquals(
+          "6d083b3bf0f610d8b33913234c3d38aa64f203fc5ea469bb4c236bc79f21bfa3", config.apiSha256());
+      assertEquals(
+          "98cfeb71e1c4cb5a0805975b3efa3cb52ec89ca48f739b5a15c73a24a1fc22b8", config.webSha256());
+      assertThrows(
+          IOException.class,
+          () -> subject.inspectConfigurations(service -> fail("Morning-only before file IO")));
+      assertThrows(
+          IOException.class,
+          () -> subject.inspectMorningDatabase(connection(f.events, false), f.expected));
+      var other =
+          new Fixture(
+              actor == RootStartupContext.Service.API
+                  ? RootStartupContext.Service.WEB
+                  : RootStartupContext.Service.API);
+      assertThrows(
+          IOException.class,
+          () -> subject.inspectServiceDatabase(connection(f.events, false), other.expected));
+      assertThrows(
+          NullPointerException.class, () -> subject.inspectServiceDatabase(null, f.expected));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.inspectServiceDatabase(connection(f.events, false), null));
+      assertThrows(NullPointerException.class, () -> subject.inspectServiceConfigurations(null));
+      assertThrows(NullPointerException.class, () -> subject.recheckServiceConfigurations(null));
+    }
+    for (var actor :
+        List.of(
+            RootStartupContext.Service.MORNING,
+            RootStartupContext.Service.CLEANUP,
+            RootStartupContext.Service.EXPIRY)) {
+      var f = new Fixture(actor);
+      var subject = f.subject();
+      assertThrows(
+          IOException.class,
+          () -> subject.inspectServiceConfigurations(service -> fail("actor before file IO")));
+      assertThrows(
+          IOException.class,
+          () -> subject.inspectServiceDatabase(connection(f.events, false), f.expected));
+      assertFalse(f.events.contains("query"));
     }
   }
 

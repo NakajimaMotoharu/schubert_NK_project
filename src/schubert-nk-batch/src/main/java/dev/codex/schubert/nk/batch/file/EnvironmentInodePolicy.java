@@ -77,6 +77,22 @@ final class EnvironmentInodePolicy {
     return result;
   }
 
+  /** SSC137 host root credential source, deliberately distinct from LoadCredential tmpfs copies. */
+  Snapshot hostCredentialSource(Path held, boolean directory, long group) throws IOException {
+    Snapshot result =
+        inspect(
+            held,
+            false,
+            directory,
+            directory ? 040700 : 0100600,
+            0,
+            directory ? 0 : group,
+            directory ? 0 : 1,
+            directory ? 0 : 65536);
+    require(!result.readonly());
+    return result;
+  }
+
   private Snapshot inspect(
       Path held,
       boolean runtime,

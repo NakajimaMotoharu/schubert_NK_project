@@ -10,6 +10,196 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
+  // ROOTLAUNCH001..006: the fixed other-Root query is authenticated by the same Morning self.
+  static final class LaunchFixture extends Fixture {
+    RootStartupContext.Service target = RootStartupContext.Service.API;
+    String targetUnit;
+    String targetGroup;
+    String targetStat = RootStartupContextTest.stat(200, "999");
+    long rootUid;
+    int targetReads;
+    boolean targetDrift;
+
+    LaunchFixture() {
+      group = "0::/system.slice/schubert-nk-morning-controller.service\n";
+      unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+      targetUnit =
+          RootStartupContextTest.unit(target)
+              .replace("MainPID=42", "MainPID=200")
+              .replace(INV, "2".repeat(32));
+      targetGroup = "0::/system.slice/" + target.unit() + "\n";
+    }
+
+    @Override
+    public byte[] unit(RootStartupContext.Service service) throws IOException {
+      if (service == RootStartupContext.Service.MORNING) return super.unit(service);
+      assertEquals(target, service);
+      targetReads++;
+      return bytes(
+          targetDrift && targetReads > 1
+              ? targetUnit.replace("MainPID=200", "MainPID=201")
+              : targetUnit);
+    }
+
+    @Override
+    public byte[] stat(long value) throws IOException {
+      if (value == 200 && targetStat.equals("<MISSING>"))
+        throw new java.nio.file.NoSuchFileException("PUBLIC_FIXED_PROC");
+      if (value == 200 && targetStat.equals("<IO>")) throw new IOException("PUBLIC_FIXED_IO");
+      return value == 200 ? bytes(targetStat) : super.stat(value);
+    }
+
+    @Override
+    public byte[] cgroup(long value) throws IOException {
+      return value == 200 ? bytes(targetGroup) : super.cgroup(value);
+    }
+
+    @Override
+    public long serviceRootUid(long value) {
+      assertEquals(200, value);
+      return rootUid;
+    }
+  }
+
+  @Test
+  void rootServiceDeadlineUsesActualUnitStartNotNewBudget() throws Exception {
+    String literal =
+        "Id=schubert-nk-api.service\nInvocationID="
+            + INV
+            + "\nMainPID=42\nExecMainStartTimestampMonotonic=1000000\n";
+    var f =
+        new Fixture() {
+          public byte[] unitDeadline(RootStartupContext.Service service) {
+            assertEquals(RootStartupContext.Service.API, service);
+            return bytes(literal);
+          }
+        };
+    var root = f.context();
+    var self = root.capture(RootStartupContext.Service.API);
+    assertEquals(121_000_000_000L, root.serviceRootDeadline(self, 200_000_000_000L));
+    assertEquals(120_000_000_000L, root.serviceRootDeadline(self, 120_000_000_000L));
+    assertThrows(IOException.class, () -> root.serviceRootDeadline(self, 1_000_000_000L));
+    assertThrows(IOException.class, () -> root.serviceRootDeadline(self, 0));
+    assertThrows(NullPointerException.class, () -> root.serviceRootDeadline(null, Long.MAX_VALUE));
+  }
+
+  @Test
+  void capturedServicePidMustReallyDisappearAndIoOrReuseNeverBecomesTerminal() throws Exception {
+    var f = new LaunchFixture();
+    var root = f.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    assertFalse(root.serviceGenerationExited(morning, child));
+    f.targetStat = "<MISSING>";
+    assertTrue(root.serviceGenerationExited(morning, child));
+    f.targetStat = "<IO>";
+    assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
+    f.targetStat = stat(200, "1000");
+    assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
+    assertThrows(NullPointerException.class, () -> root.serviceGenerationExited(null, child));
+    assertThrows(NullPointerException.class, () -> root.serviceGenerationExited(morning, null));
+    assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, morning));
+  }
+
+  @Test
+  void morningCapturesOnlyActualFixedServiceRootGeneration() throws Exception {
+    for (var target : List.of(RootStartupContext.Service.API, RootStartupContext.Service.WEB)) {
+      var f = new LaunchFixture();
+      f.target = target;
+      f.targetUnit = unit(target).replace("MainPID=42", "MainPID=200").replace(INV, "2".repeat(32));
+      f.targetGroup = "0::/system.slice/" + target.unit() + "\n";
+      var context = f.context();
+      var morning = context.capture(RootStartupContext.Service.MORNING);
+      var actual = context.captureServiceRoot(morning, target);
+      assertEquals(target, actual.service());
+      assertEquals(BOOT.trim(), actual.boot());
+      assertEquals("2".repeat(32), actual.invocation());
+      assertEquals(200, actual.pid());
+      assertEquals(999, actual.startTicks());
+      assertEquals(5, actual.initStartTicks());
+      assertEquals("/system.slice/" + target.unit(), actual.controlGroup());
+      assertEquals(4, f.targetReads);
+      assertThrows(
+          IOException.class,
+          () -> context.captureServiceRoot(morning, RootStartupContext.Service.CLEANUP));
+      assertThrows(NullPointerException.class, () -> context.captureServiceRoot(null, target));
+      assertThrows(NullPointerException.class, () -> context.captureServiceRoot(morning, null));
+    }
+    var wrong = new Fixture();
+    var context = wrong.context();
+    var api = context.capture(RootStartupContext.Service.API);
+    assertThrows(
+        IOException.class, () -> context.captureServiceRoot(api, RootStartupContext.Service.WEB));
+  }
+
+  @Test
+  void rootGenerationNeverNormalizesUidCgroupBootManagerAndPidDrift() throws Exception {
+    for (String fault :
+        List.of(
+            "uid",
+            "cgroup",
+            "stat",
+            "manager",
+            "zeroPid",
+            "largePid",
+            "parentPid",
+            "parentInvocation",
+            "missing",
+            "duplicate",
+            "load",
+            "active",
+            "sub",
+            "id",
+            "group")) {
+      var f = new LaunchFixture();
+      var context = f.context();
+      var morning = context.capture(RootStartupContext.Service.MORNING);
+      switch (fault) {
+        case "uid" -> f.rootUid = 1;
+        case "cgroup" -> f.targetGroup = "0::/system.slice/other.service\n";
+        case "stat" -> f.targetStat = stat(200, "0");
+        case "manager" -> f.targetDrift = true;
+        case "zeroPid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=0");
+        case "largePid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=2147483648");
+        case "parentPid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=42");
+        case "parentInvocation" -> f.targetUnit = f.targetUnit.replace("2".repeat(32), INV);
+        case "missing" -> f.targetUnit = f.targetUnit.replace("LoadState=loaded\n", "");
+        case "duplicate" -> f.targetUnit += "LoadState=loaded\n";
+        case "load" ->
+            f.targetUnit = f.targetUnit.replace("LoadState=loaded", "LoadState=not-found");
+        case "active" ->
+            f.targetUnit = f.targetUnit.replace("ActiveState=active", "ActiveState=failed");
+        case "sub" -> f.targetUnit = f.targetUnit.replace("SubState=running", "SubState=exited");
+        case "id" -> f.targetUnit = f.targetUnit.replace("Id=schubert-nk-api", "Id=wrong");
+        default ->
+            f.targetUnit =
+                f.targetUnit.replace("ControlGroup=/system.slice", "ControlGroup=/wrong");
+      }
+      assertThrows(IOException.class, () -> context.captureServiceRoot(morning, f.target), fault);
+    }
+  }
+
+  @Test
+  void kernelStatusRequiresAllFourRootUidValuesAndWholeBytes() throws Exception {
+    assertEquals(
+        0, RootStartupContext.rootUid(bytes("Name:\tjava\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\n")));
+    assertEquals(0, RootStartupContext.rootUid(bytes("Uid: 0 0 0 0\n")));
+    for (String text :
+        List.of(
+            "",
+            "Uid: 0 0 0 0",
+            "Gid: 0 0 0 0\n",
+            "Uid: 0 0 0\n",
+            "Uid: 0 1 0 0\n",
+            "Uid: 00 0 0 0\n",
+            "Uid: 0 0 0 0\nUid: 0 0 0 0\n",
+            "Uid: 0 0 0 0\r\n"))
+      assertThrows(IOException.class, () -> RootStartupContext.rootUid(bytes(text)));
+    assertThrows(IOException.class, () -> RootStartupContext.rootUid(new byte[16385]));
+    assertThrows(IOException.class, () -> RootStartupContext.rootUid(new byte[] {(byte) 255}));
+    assertThrows(NullPointerException.class, () -> RootStartupContext.rootUid(null));
+  }
+
   static final String BOOT = "11111111-1111-1111-1111-111111111111\n";
   static final String INV = "1".repeat(32);
 

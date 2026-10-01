@@ -138,6 +138,23 @@ public final class LinuxInodeSecurity implements InodeSecurityCalls {
     return value.asSlice(0, size).toArray(ValueLayout.JAVA_BYTE);
   }
 
+  /** SSC137: only ENODATA proves this held ELF has no file capability; unsupported is unknown. */
+  public void requireNoFileCapabilities(Path held) throws StorageIoException {
+    String path = capability(held);
+    try (Arena arena = Arena.ofConfined()) {
+      MemorySegment state = arena.allocate(STATE);
+      MemorySegment value = arena.allocate(24);
+      long size =
+          getxattr.call(
+              state,
+              arena.allocateFrom(path),
+              arena.allocateFrom("security.capability"),
+              value,
+              24);
+      if (size != -1 || state.get(ValueLayout.JAVA_INT, ERRNO_OFFSET) != 61) throw failure();
+    }
+  }
+
   @Override
   public boolean readOnlyFilesystem(Path held) throws StorageIoException {
     String path = capability(held);

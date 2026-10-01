@@ -146,6 +146,59 @@ public final class MaintenanceRunFiles {
     return observed;
   }
 
+  /** SSC137: fixed service Root reads the whole original graph; never resumes or mutates it. */
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification =
+          "SSC137 fixed host/private /var original observation, no caller path or M capability")
+  static StartupOriginal observeStartup(
+      RootStartupContext context,
+      RootStartupContext.Snapshot self,
+      MaintenanceActivation activation)
+      throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(self);
+    Objects.requireNonNull(activation);
+    require(
+        self.service() == RootStartupContext.Service.API
+            || self.service() == RootStartupContext.Service.WEB);
+    context.recheck(self);
+    var files =
+        new MaintenanceRunFiles(
+            Path.of("/var"),
+            LinuxHostDirectoryCalls.create(),
+            LinuxInodeSecurity.create(),
+            new NioIo(),
+            UUID::randomUUID);
+    var observed =
+        files.execute(
+            session -> {
+              session.verifyStartupPrivate(LinuxDirectoryCalls.create());
+              var value = session.observeStartup(activation);
+              session.verifyStartupPrivate(LinuxDirectoryCalls.create());
+              require(value.equals(session.observeStartup(activation)));
+              return value;
+            });
+    context.recheck(self);
+    return observed;
+  }
+
+  public record StartupOriginal(
+      MaintenanceActivation activation, Optional<MaintenanceCompletion> completed) {
+    public StartupOriginal {
+      Objects.requireNonNull(activation);
+      Objects.requireNonNull(completed);
+      if (completed.isPresent() && !completed.orElseThrow().activation().equals(activation))
+        throw new IllegalArgumentException("startup original binding");
+    }
+
+    @Override
+    public String toString() {
+      return "StartupOriginal[identity=<redacted>]";
+    }
+  }
+
   MaintenanceRunFiles(
       Path varPath,
       DirectoryCalls directories,
@@ -421,6 +474,70 @@ public final class MaintenanceRunFiles {
             require(first.pending().equals(Optional.of(expected.run().id())));
             return active;
           });
+    }
+
+    /** Pending and completed are disjoint whole-graph observations, not parent terminal proof. */
+    public StartupOriginal observeStartup(MaintenanceActivation expected)
+        throws StorageIoException {
+      Objects.requireNonNull(expected);
+      return perform(
+          () -> {
+            Graph first = scan();
+            require(first.equals(scan()));
+            require(
+                expected.run().equals(first.runs().get(expected.run().id()))
+                    && expected.equals(first.begins().get(expected.id())));
+            var completion = Optional.ofNullable(first.done().get(expected.id()));
+            if (completion.isEmpty()) {
+              require(
+                  first.active().equals(Optional.of(expected))
+                      && first.pending().equals(Optional.of(expected.run().id())));
+            } else {
+              require(first.active().isEmpty() && first.pending().isEmpty());
+            }
+            return new StartupOriginal(expected, completion);
+          });
+    }
+
+    private void verifyStartupPrivate(DirectoryCalls privateCalls) throws IOException {
+      var var = OwnedTransferDirectory.open(privateCalls, varPath);
+      ResourceScope.use(var::close, () -> verifyStartupPrivate(List.of(var), 0));
+    }
+
+    private Boolean verifyStartupPrivate(List<OwnedTransferDirectory> views, int index)
+        throws IOException {
+      var current = views.get(index);
+      var observed =
+          current.atDirectory(
+              p ->
+                  index < 3
+                      ? policy.durableAncestor(p, true)
+                      : policy.roleDirectory(p, 0, 0, 0700, false));
+      var actual = expectedRoots.get(index);
+      require(
+          !observed.filesystem().equals("tmpfs")
+              && observed.metadata().equals(actual.metadata())
+              && observed.filesystem().equals(actual.filesystem()));
+      if (index < 5) {
+        String[] names = {"lib", "schubert-nk", "maintenance", "runs", "attempts"};
+        var parent = index == 4 ? views.get(3) : current;
+        var next = parent.openExistingChild(names[index]);
+        ResourceScope.use(
+            next::close,
+            () -> {
+              var added = new ArrayList<>(views);
+              added.add(next);
+              return verifyStartupPrivate(List.copyOf(added), index + 1);
+            });
+      }
+      require(
+          observed.equals(
+              current.atDirectory(
+                  p ->
+                      index < 3
+                          ? policy.durableAncestor(p, true)
+                          : policy.roleDirectory(p, 0, 0, 0700, false))));
+      return Boolean.TRUE;
     }
 
     public MaintenanceCompletion complete(MaintenanceCompletion completion)

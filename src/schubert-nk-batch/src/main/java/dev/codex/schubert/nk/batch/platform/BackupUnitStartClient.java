@@ -109,6 +109,10 @@ public final class BackupUnitStartClient {
   @FunctionalInterface
   interface MarkerLease {
     void retire() throws IOException;
+
+    default void closeObservation() throws IOException {
+      throw new IOException("service observation close unavailable");
+    }
   }
 
   /** Parent-supplied proof, evaluated while its M/A/original/request owners are still held. */
@@ -137,7 +141,7 @@ public final class BackupUnitStartClient {
   private final Policy policy;
   private final Start start;
   private final Intent intent;
-  private final Target target;
+  private final MaintenanceUnit unit;
   private final Optional<MorningParentBudget> budget;
 
   public static BackupUnitStartClient create(
@@ -257,12 +261,81 @@ public final class BackupUnitStartClient {
       Intent intent,
       Target target,
       Optional<MorningParentBudget> budget) {
+    this(
+        context,
+        policy,
+        start,
+        intent,
+        Objects.requireNonNull(target, "closed phase").unit(),
+        budget);
+  }
+
+  BackupUnitStartClient(
+      Context context,
+      Policy policy,
+      Start start,
+      Intent intent,
+      MaintenanceUnit unit,
+      Optional<MorningParentBudget> budget) {
     this.context = Objects.requireNonNull(context, "Morning root context");
     this.policy = Objects.requireNonNull(policy, "fixed Backup policy");
     this.start = Objects.requireNonNull(start, "fixed start port");
     this.intent = Objects.requireNonNull(intent, "same-boot start intent");
-    this.target = Objects.requireNonNull(target, "closed phase");
+    this.unit = Objects.requireNonNull(unit, "closed Unit");
     this.budget = Objects.requireNonNull(budget, "parent budget binding");
+  }
+
+  /** Same client/UNKNOWN rules; only Morning's two fixed service starts. SSC137. */
+  public static BackupUnitStartClient createService(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      dev.codex.schubert.nk.storage.ServiceConfigFiles.Service service,
+      dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch issued,
+      MorningParentBudget budget)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(service);
+    Objects.requireNonNull(issued);
+    Objects.requireNonNull(budget);
+    if (morning.service() != RootStartupContext.Service.MORNING)
+      throw new IOException("service start unavailable");
+    root.recheck(morning);
+    budget.requireWithin();
+    var unit =
+        service == dev.codex.schubert.nk.storage.ServiceConfigFiles.Service.API
+            ? MaintenanceUnit.API
+            : MaintenanceUnit.WEB;
+    var policy = MaintenanceUnitStopPolicy.create();
+    return new BackupUnitStartClient(
+        () -> root.recheck(morning),
+        () -> policy.requireSafe(unit),
+        new MaintenanceUnitStopClient.NativeStart()::execute,
+        () -> {
+          var marker = BackupStartIntentFiles.createService(root, morning, service, issued);
+          try {
+            var token = marker.begin();
+            return new MarkerLease() {
+              public void retire() throws IOException {
+                marker.retire(token);
+                marker.close();
+              }
+
+              public void closeObservation() throws IOException {
+                marker.close();
+              }
+            };
+          } catch (IOException | RuntimeException | Error failure) {
+            try {
+              marker.close();
+            } catch (IOException closeFailure) {
+              failure.addSuppressed(closeFailure);
+            }
+            throw failure;
+          }
+        },
+        unit,
+        Optional.of(budget));
   }
 
   /**
@@ -279,16 +352,17 @@ public final class BackupUnitStartClient {
     // SSC106: a failed or uncertain publication is pre-start and issues no systemctl request.
     // Once published, all unknown delivery paths leave the marker for the next M admission.
     MarkerLease marker = Objects.requireNonNull(intent.begin(), "retained start marker");
-    if (Thread.currentThread().isInterrupted()) return new Attempt(context, null, marker, budget);
+    if (Thread.currentThread().isInterrupted())
+      return new Attempt(context, null, marker, budget, unit);
     @Nullable Process process;
     try {
       var command = new java.util.ArrayList<>(COMMAND);
-      command.set(command.size() - 1, target.unit().serviceName());
+      command.set(command.size() - 1, unit.serviceName());
       process = start.execute(List.copyOf(command));
     } catch (IOException | RuntimeException | Error uncertainStart) {
-      return new Attempt(context, null, marker, budget);
+      return new Attempt(context, null, marker, budget, unit);
     }
-    var attempt = new Attempt(context, process, marker, budget);
+    var attempt = new Attempt(context, process, marker, budget, unit);
     attempt.awaitClient();
     return attempt;
   }
@@ -304,6 +378,7 @@ public final class BackupUnitStartClient {
     private final @Nullable Process process;
     private final MarkerLease marker;
     private final Optional<MorningParentBudget> budget;
+    private final MaintenanceUnit unit;
     private Status status = Status.UNKNOWN;
     private boolean retired;
     private boolean retiring;
@@ -316,15 +391,27 @@ public final class BackupUnitStartClient {
         Context context,
         @Nullable Process process,
         MarkerLease marker,
-        Optional<MorningParentBudget> budget) {
+        Optional<MorningParentBudget> budget,
+        MaintenanceUnit unit) {
       this.context = context;
       this.process = process;
       this.marker = marker;
       this.budget = budget;
+      this.unit = unit;
     }
 
     public synchronized Status status() {
       return status;
+    }
+
+    /** Close-only: marker stays durable, no receipt/retirement/unlock authority is granted. */
+    public synchronized void preserveObservation() throws IOException {
+      if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
+          || retired
+          || retiring
+          || retireUncertain) throw new IOException("service observation close unavailable");
+      retireUncertain = true;
+      marker.closeObservation();
     }
 
     /**

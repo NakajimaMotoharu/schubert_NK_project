@@ -18,6 +18,28 @@ final class StartupAdmissionFileTest {
   @TempDir Path base;
 
   @Test
+  void actualBorrowedAdmissionCarriesItsVerifiedFileIdentityNotAClaim() throws Exception {
+    var f = fixture();
+    long device = (Long) Files.getAttribute(f.file, "unix:dev");
+    long inode = (Long) Files.getAttribute(f.file, "unix:ino");
+    assertEquals(
+        Optional.of(19),
+        f.adapter()
+            .tryExclusiveObserved(
+                admission -> {
+                  assertTrue(admission.descriptor() >= 128 && admission.descriptor() <= 65535);
+                  assertEquals(device, admission.device());
+                  assertEquals(inode, admission.inode());
+                  assertTrue(f.owned.isEmpty());
+                  assertEquals(20, assertDoesNotThrow(() -> external(f.file)));
+                  return 19;
+                }));
+    assertEquals(0, external(f.file));
+    assertTrue(f.owned.isEmpty());
+    assertThrows(NullPointerException.class, () -> f.adapter().tryExclusiveObserved(null));
+  }
+
+  @Test
   void admissionLock001TwoViewsSameOfdAndReadonlyPrivate() throws Exception {
     var f = fixture();
     assertEquals(

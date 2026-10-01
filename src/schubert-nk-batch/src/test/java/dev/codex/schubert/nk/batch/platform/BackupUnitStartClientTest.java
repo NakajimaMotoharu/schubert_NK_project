@@ -18,6 +18,85 @@ final class BackupUnitStartClientTest {
   }
 
   @Test
+  void rootownerfd001CloseOnlyPreservesIntentAndCannotGrantRetirement() throws Exception {
+    for (var unit : List.of(MaintenanceUnit.API, MaintenanceUnit.WEB)) {
+      var closes = new java.util.concurrent.atomic.AtomicInteger();
+      var retires = new java.util.concurrent.atomic.AtomicInteger();
+      var process = child();
+      var starter =
+          new BackupUnitStartClient(
+              () -> {},
+              () -> {},
+              command -> {
+                assertEquals(unit.serviceName(), command.getLast());
+                return process;
+              },
+              () ->
+                  new BackupUnitStartClient.MarkerLease() {
+                    public void retire() {
+                      retires.incrementAndGet();
+                    }
+
+                    public void closeObservation() {
+                      closes.incrementAndGet();
+                    }
+                  },
+              unit,
+              java.util.Optional.empty());
+      var attempt = starter.start();
+      assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
+      attempt.preserveObservation();
+      assertEquals(1, closes.get());
+      assertEquals(0, retires.get());
+      assertThrows(IOException.class, attempt::preserveObservation);
+      assertThrows(
+          IOException.class, () -> attempt.retireAfter(() -> fail("close-only is not retirement")));
+      assertEquals(1, closes.get());
+      assertEquals(0, retires.get());
+      process.allClosed();
+    }
+  }
+
+  @Test
+  void rootownerfd002UnknownCloseKeepsIdentityAndNeverRetriesConsumedOwner() throws Exception {
+    for (Throwable failure :
+        List.of(
+            new IOException("PUBLIC_IO"),
+            new IllegalStateException("PUBLIC_UNKNOWN"),
+            new AssertionError("PUBLIC_FATAL"))) {
+      var closes = new java.util.concurrent.atomic.AtomicInteger();
+      var process = child();
+      var starter =
+          new BackupUnitStartClient(
+              () -> {},
+              () -> {},
+              command -> process,
+              () ->
+                  new BackupUnitStartClient.MarkerLease() {
+                    public void retire() {
+                      fail("preservation never removes marker");
+                    }
+
+                    public void closeObservation() throws IOException {
+                      closes.incrementAndGet();
+                      if (failure instanceof IOException io) throw io;
+                      if (failure instanceof RuntimeException unknown) throw unknown;
+                      throw (Error) failure;
+                    }
+                  },
+              MaintenanceUnit.API,
+              java.util.Optional.empty());
+      var attempt = starter.start();
+      assertSame(failure, assertThrows(failure.getClass(), attempt::preserveObservation));
+      assertThrows(IOException.class, attempt::preserveObservation);
+      assertEquals(1, closes.get());
+      process.allClosed();
+    }
+    var ordinary = new BackupUnitStartClient(() -> {}, () -> {}, command -> child()).start();
+    assertThrows(IOException.class, ordinary::preserveObservation);
+  }
+
+  @Test
   void bstart009IntentPrecedesClientAndUncertainDeliveryPreservesIt() throws Exception {
     var sequence = new ArrayList<String>();
     var process = child();

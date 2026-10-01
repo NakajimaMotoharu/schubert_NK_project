@@ -42,6 +42,40 @@ final class MaintenanceRunFilesTest {
   private static final String DONE0 = DONE_PREFIX + "0\n", DONE10 = DONE_PREFIX + "10\n";
   @TempDir Path temporary;
 
+  @Test
+  void startupOriginalWholeGraphPendingCompletedAndForeignNeverAuthorizeMutation()
+      throws Exception {
+    try (var f = fixture()) {
+      assertThrows(IOException.class, () -> f.files.execute(s -> s.observeStartup(ACTIVATION)));
+      f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
+      var pending = f.files.execute(s -> s.observeStartup(ACTIVATION));
+      assertEquals(ACTIVATION, pending.activation());
+      assertTrue(pending.completed().isEmpty());
+      var completion = completion(MaintenanceCompletion.Outcome.SUCCESS);
+      f.files.execute(s -> s.complete(completion));
+      var completed = f.files.execute(s -> s.observeStartup(ACTIVATION));
+      assertEquals(ACTIVATION, completed.activation());
+      assertEquals(Optional.of(completion), completed.completed());
+      assertEquals("StartupOriginal[identity=<redacted>]", completed.toString());
+      assertThrows(
+          IOException.class,
+          () -> f.files.execute(s -> s.observeStartup(new MaintenanceActivation(RUN, OTHER))));
+      assertThrows(NullPointerException.class, () -> f.files.execute(s -> s.observeStartup(null)));
+      assertThrows(
+          NullPointerException.class,
+          () -> new MaintenanceRunFiles.StartupOriginal(null, Optional.empty()));
+      assertThrows(
+          NullPointerException.class,
+          () -> new MaintenanceRunFiles.StartupOriginal(ACTIVATION, null));
+      var wrong =
+          new MaintenanceCompletion(
+              new MaintenanceActivation(RUN, OTHER), completion.endedAt(), completion.outcome());
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new MaintenanceRunFiles.StartupOriginal(ACTIVATION, Optional.of(wrong)));
+    }
+  }
+
   /** SSC109/BUG327/PT-OPS-MNAMESPACE002: paired RO ancestors never authorize RO records. */
   @Test
   void hostAncestorPairingKeepsDurableWritesPrivate() throws Exception {
