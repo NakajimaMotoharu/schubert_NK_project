@@ -1,5 +1,15 @@
 # 正規issuer接続 実行結果
 
+## PG405 正規発行・独立読み戻し（2026-10-01 14:30、限定）
+
+Production Source a16cc0c97fccaecd40736d89dfdbe49d0394c1e1。選択128PT F/E/S0・静的3zero（13:55）、全6 clean 2707PT/406suite F/E/S0・静的6zero（14:09:14）。full manifest SHA256 42303a27609980b71ea18ac4568b64601aed7dca3284c42e9fac012ed8de9d38。署名release e4641cb685627c48750eeff019abb7e63a0c5bd8683df57bcd1329358a771946、178artifact/61dependency/23SQL。実外部Morning一回で真正Backup再用→Cleanup→fresh Broker→Expiry→実retention/10step5gate→発行三proof→A正常close後commitへ到達。current ISSUED、permit1、startupは当回current/permitの2entry、発行intent0、四owner/request namespace空。旧132行全14列不変＋10SKIP=142、Backup/Cleanup/Expiry attempt21/13/9、全四worker kernel終端、元Backup inventory全metadata/4file hash不変。親全体exit30は未完成起動の部分帰還で、0/10の成功に読み替えない。
+
+native manifest SHA256 fffbf3297057da7d409953f331ee851a24166afda1a1c641d5a102dfb86a8cd7（PG405-native-regular-issuer）。実permit/currentの全byte再読・順序・binding・boot・Broker世代・release BOM、独立六root canonical SHA、厳密root600/link1/ACL0/安定inodeを検証。実prestart canonical全文をnative emitして独立照合した証拠ではなく、hostの三固定golden/実Main digest/実発行到達と区別する。classByteMismatch0、ownhost未網羅B/L/M/C909/2574/448/33、host＋当回四exec union771/1211/214/11、当回解消138/1363/234/22。PG404失敗union比残-2/-82/-15/-1、PG403正常比+21/+20/+8/0で、新設security面と区別する。新408sanitized証跡の構造/secret pattern0は限定scanであり全project gateではない。
+
+初回独立読戻しはatimeだけの正規read更新を変質扱いして拒否（BUG394/YKT314）。初回log/空結果/VM旧工具をWork privateに保持し、Production・実許可・原本を変更せず工具だけ修正。同じ実発行結果を再採取した。COLLECTATIME001はVM rootの専用public fixtureでactual atime更新、九安定属性、mode/content変質拒否、自己fixture退役を検証しPASS。工具SHA: pg404_read_permit.py=7334d0d43897ae01e21f9c8f3e18a7457e434aa517ae6f961f86943547e6937f、pg405_test_collector_atime.py=6b63e77e62cf1e5f14fc0ca42956167578ca34f3362ce2ad59240f70d94b88b2、log=cc48feaeee569db0df17e545413a18d5c8e0788c87b4d3f48ce25ab4bb11f0a6。Production Source不変更のため外部Morning再配送/全6再実行は行わない。
+
+BUG389/390/391/393/394とYKT309/310/311/313/314は直接対象を再試験して限定閉鎖。BUG392/YKT312 FAILED-GC、M最終close、Root launch/同PID/API/Web/CHR、native負系/timeout、coverage100%と正式runは未完。formal PT-WEB-20260925-24/1964PT/53scope/中心48.3%は不変更。command/環境/input・expected・actual・coverageは上記二manifestと固定toolsを参照し、raw DB/Invocation/秘密はGit非格納。
+
 ## 13:41 PG404実許可構築失敗（BUG393、未受入）
 
 Source edd1d7569/全2706PT・406suite FES0/static6zero、full manifest3acd70ba…。同署名178artifact/61deps/23SQL c1201209…。外部Morning一回は真正Backup再用/親CONFIG/Cleanup/fresh Broker/Expiry/retention/10step5gate構築後、Main324のPermit constructorへcanonical全文を渡しIllegalArgumentExceptionとなった。親exit1/INVALID/permit0、旧122全14列不変＋10SKIP=132、全四worker kernel終端/owner-request namespace空・元backup inventory不変。失敗manifest c2bbc567db806d119733e14d4ae3ac325bd76ebd8183e19b407d6196621e5f00、PG404-native-permit-construction-failed。classByteMismatch0、sameSource host+四exec unionmiss773B/1293L/229M/12C（host909/2573/448/33から136/1280/219/21解消）。発行三proof/after-Aは未到達で成功加算0。独立golden→Main実digest契約試験を欠落していたためBUG393/YKT313を修正前登録し次Source PG405へ進む。formal run24/48.3%不変。

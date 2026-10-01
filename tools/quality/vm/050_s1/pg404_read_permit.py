@@ -3,6 +3,10 @@ import hashlib, json, os, pathlib, re, stat, subprocess
 
 root = pathlib.Path('/run/schubert-nk/startup')
 def sha(value): return hashlib.sha256(value).hexdigest()
+def stable(value):
+    # BUG394: our read may update atime; security and mutation timestamps remain fixed.
+    return tuple(getattr(value,k) for k in ['st_mode','st_uid','st_gid','st_nlink','st_size',
+                                          'st_dev','st_ino','st_mtime_ns','st_ctime_ns'])
 def read(name):
     fd = os.open(root/name, os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
     try:
@@ -11,7 +15,7 @@ def read(name):
         assert before.st_uid == before.st_gid == 0 and before.st_nlink == 1 and before.st_size <= 65536
         content = b''
         while block := os.read(fd,65536): content += block
-        assert before == os.fstat(fd) and len(content) == before.st_size
+        assert stable(before) == stable(os.fstat(fd)) and len(content) == before.st_size
         # getfacl's access entries must have no named user/group/mask/default additions.
         acl = subprocess.check_output(['/usr/bin/getfacl','-cp',str(root/name)],text=True)
         assert [v for v in acl.splitlines() if v] == ['user::rw-','group::---','other::---']

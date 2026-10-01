@@ -1,5 +1,7 @@
 # 正規issuer接続 単体テスト仕様書
 
+COLLECTATIME001（BUG394/YKT314、採取工具限定）：root600/link1/ACL0のpublic固定text fixtureに古いatimeを設定→実helper.readを一回実行する。期待値はfixture明示byteの一致、実atimeだけの変更許容、mode/uid/gid/nlink/size/dev/ino/mtime_ns/ctime_ns九属性の不変。640へのmode変更と読み中content変更は拒否、自己fixtureだけ退役する。独立期待値は手書きtext/属性一覧/実statとしProductionをexpected生成に使わない。VM commandはroot python3 pg405_test_collector_atime.py、結果・工具/log SHAは296参照。既存許可・原本・Production class不変更、全coverage/正式gateへの加算0。
+
 ISSPUB009（BUG393/YKT313、修正前仕様）：Main実callerが使用するprestartDigestへ変更していない3全文goldenを入力し、独立sha256sum literal（new84190122…/failedabfb4ec5…/reused87275edf…）と一致させる。全byte各1文字改変・末尾LF除去で元digestとの差、旧全文Permit constructor拒否、新digest欄一致、null/algorithm unavailable/未知例外identityを検証。Productionをexpected生成に使わない。ISSNATIVE002は次Source PG405の同原本外部一回で三proof/after-A/全byte独立permit binding・旧132行不変/次10SKIP/実全終端を採取し、PG404失敗exit1/INVALID/permit0（manifest c2bbc567…）とは別Source/runで記録する。設計/Current oracle/64hex要求は不変更。
 
 ISSPUB007=固定発行intentの同inode保持/退役後復旧・旧token退役拒否/変造保護。ISSPUB008（BUG391、実装前）=同M内Admission全帰還・原本/DB/credential close・最後root gateでIO/Runtime/Errorを入力し、scope外DB/原本使用0、当回INVALID/permit保全/intent復旧又はretain、未知元identity、二重abort mutation0を確認。元goldenは不変更。M自身の最終close不明・S3 launch/Root全gateは別未受入。
