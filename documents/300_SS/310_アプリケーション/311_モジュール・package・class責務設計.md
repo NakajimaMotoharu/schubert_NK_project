@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC142（PG406、BUG402/YKT322）：SSC137のAPI/Web Rootは、SSC084で既に共用Bootstrapへ置いた固定role `api.bootstrap.ServiceDatabaseSource` をown roleの単独物理JDBC sourceとして再利用する。互換binary名はAPI artifact依存を意味しない。Batchの閉鎖import検査はこの一型と既存ApiNonSecretConfigを明示参照し、実Bootstrap source所属と既定POM依存集合を独立照合する。wildcard・API業務class・任意Source/role・BootstrapへのHTTP/JMS追加は許可しない。普通API/Web private credential reader・role契約は不変更、RootのDB/秘密/resource寿命はSS342/343・PT297で別検証する。
+
 SSC126（PG395、正規issuer接続の内部依存）：ApiNonSecretConfig/WebNonSecretConfigの純粋scalar parser・独立PTをbootstrapへ移す。既存api/web.* binary名は互換名で、業務moduleへのartifact依存を意味しない。固定defaults/strict YAML/role別許容key/正確effective canonical SHAは保持し、Root Morningと各appが同じ実装を利用する。APIの6Queue名はSS321/343の固定default集合だけを照合しProtocol enum依存を持ち込まない。SnakeYAML3.1.1は既存API/Webと同version、sharedはStorageだけへの内部依存・HTTP/JMS/業務repositoryなし。通常API/Web/Rootへのcredential配布は変えない。新共用framework/設定fallback/業務profileを追加しない。
 
 SSC088: 共用bootstrapへSSC086の非秘密canonical proof/固定service NSS/子自己bindingも収容し、root Batch→bootstrapを許可する。API/Web→bootstrapとbootstrap→Storageだけの内部依存、Web→業務API禁止、Storage native-only/no-JDBC、bootstrapへ業務HTTP/JMS追加禁止を維持する。root Batchのschema read-only validateにはFlyway core compile/PG plugin runtimeを使用する（従来test限定から具体化）。通常serviceへmigration/Ops credentialを配布しない。公開snapshot・native2FDだけで全root/current permit/schema/Ops readinessを代替しない。

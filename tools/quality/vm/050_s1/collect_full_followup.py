@@ -144,9 +144,9 @@ if int(identifier[2:5]) >= 405:
     manifest['ykt'].append('YKT-313')
     manifest['testIds'].append('ISSPUB009')
 if int(identifier[2:5]) >= 406:
-    manifest['ssc'].extend(f'SSC-{n:03d}' for n in range(137, 142))
-    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(395, 402))
-    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(315, 322))
+    manifest['ssc'].extend(f'SSC-{n:03d}' for n in range(137, 143))
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(395, 403))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(315, 323))
     manifest['testIds'].extend(['ROOTLAUNCH001..006', 'ROOTELF001..006', 'ROOTPROOF001..004',
                                'ROOTTICKET001..004', 'ROOTUNIT001', 'ROOTOWNERFD001..002'])
     manifest['limitations'] = [

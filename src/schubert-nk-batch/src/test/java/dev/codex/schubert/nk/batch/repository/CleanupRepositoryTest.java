@@ -534,6 +534,7 @@ final class CleanupRepositoryTest {
                             "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential",
                             "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission",
                             "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig",
+                            "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
                             "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig")
                         .contains(name)
                     && Files.isRegularFile(
@@ -545,6 +546,8 @@ final class CleanupRepositoryTest {
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.maintenance.InspectorDbCredential"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig"));
+    // SSC142: pre-existing shared Bootstrap physical source, not an API artifact dependency.
+    assertTrue(allowedImport.test("dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource"));
     assertTrue(allowedImport.test("dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig"));
     for (var forbidden :
         List.of(
@@ -552,6 +555,8 @@ final class CleanupRepositoryTest {
             "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderMissing",
             "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmissionMissing",
             "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigMissing",
+            "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceMissing",
+            "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission",
             "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigMissing",
             "dev.codex.schubert.nk.web.bootstrap.*",
             "dev.codex.schubert.nk.api.bootstrap.*",
