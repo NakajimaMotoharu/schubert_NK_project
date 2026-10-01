@@ -139,5 +139,9 @@ if int(identifier[2:5]) >= 404:
     manifest['ykt'].extend(['YKT-309', 'YKT-310', 'YKT-311'])
     manifest['testIds'].append('ISSPUB001..008')
     manifest['limitations'] = ['same-source actual regular issuer/three proofs/after-A commit pending', 'Root full admission/same-parent launch/same-PID exec/API/Web/CHR incomplete', 'fresh retention/failed Backup/native negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
+if int(identifier[2:5]) >= 405:
+    manifest['bugs'].append('BUG-393')
+    manifest['ykt'].append('YKT-313')
+    manifest['testIds'].append('ISSPUB009')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 13:41 PG404実許可構築失敗（BUG393、未受入）
+
+Source edd1d7569/全2706PT・406suite FES0/static6zero、full manifest3acd70ba…。同署名178artifact/61deps/23SQL c1201209…。外部Morning一回は真正Backup再用/親CONFIG/Cleanup/fresh Broker/Expiry/retention/10step5gate構築後、Main324のPermit constructorへcanonical全文を渡しIllegalArgumentExceptionとなった。親exit1/INVALID/permit0、旧122全14列不変＋10SKIP=132、全四worker kernel終端/owner-request namespace空・元backup inventory不変。失敗manifest c2bbc567db806d119733e14d4ae3ac325bd76ebd8183e19b407d6196621e5f00、PG404-native-permit-construction-failed。classByteMismatch0、sameSource host+四exec unionmiss773B/1293L/229M/12C（host909/2573/448/33から136/1280/219/21解消）。発行三proof/after-Aは未到達で成功加算0。独立golden→Main実digest契約試験を欠落していたためBUG393/YKT313を修正前登録し次Source PG405へ進む。formal run24/48.3%不変。
+
 ## PG403同Source実十段prestart帰還（2026-10-01 12:17、限定）
 
 Source f376bb543cc3e9528f03e382862e1791372fea8b、全6 clean 2698PT/406suite/FES0/静的6zero、12:09:28終了、full manifest c5440eb426df19ce7ac5f363411111ebcf0e5eaa71b58b6015a44d01ecdcbdda。署名178artifact/61dependency/23SQL manifest8fca38cc7b626ecee62f9043c9f72bdc896b2a0b06dccbe7499fcb505d117766を同原本/INVALID/全停止/M/Aで配備。外部Morning一回は真正Backup再用/停止後GC proof→親CONFIG実完成判定/全14列保持→Cleanup→fresh Broker→Expiry→実retainer/10step5gate/Main299帰還。旧112全14列不変＋10SKIP=122、Backup19/Cleanup11/Expiry7、4worker全kernel終端/全request空、原本BEGIN/INVALID/permit0、backup inventory全metadata/4file内容hash前後byte一致。親全体30を起動成功にしない。

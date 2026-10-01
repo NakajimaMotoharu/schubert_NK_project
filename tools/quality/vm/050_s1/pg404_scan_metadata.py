@@ -3,7 +3,7 @@ import json, pathlib, re, xml.etree.ElementTree as ET
 root = pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional')
 files = []
 source = None
-for name in ['PG404-regular-issuer-baseline','PG404-native-regular-issuer']:
+for name in ['PG404-regular-issuer-baseline','PG404-native-permit-construction-failed']:
     files.extend(p for p in (root/name).rglob('*') if p.is_file())
 for path in files:
     assert path.suffix in ['.xml','.json']

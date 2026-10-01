@@ -1,5 +1,7 @@
 # 正規issuer接続 単体テスト仕様書
 
+ISSPUB009（BUG393/YKT313、修正前仕様）：Main実callerが使用するprestartDigestへ変更していない3全文goldenを入力し、独立sha256sum literal（new84190122…/failedabfb4ec5…/reused87275edf…）と一致させる。全byte各1文字改変・末尾LF除去で元digestとの差、旧全文Permit constructor拒否、新digest欄一致、null/algorithm unavailable/未知例外identityを検証。Productionをexpected生成に使わない。ISSNATIVE002は次Source PG405の同原本外部一回で三proof/after-A/全byte独立permit binding・旧132行不変/次10SKIP/実全終端を採取し、PG404失敗exit1/INVALID/permit0（manifest c2bbc567…）とは別Source/runで記録する。設計/Current oracle/64hex要求は不変更。
+
 ISSPUB007=固定発行intentの同inode保持/退役後復旧・旧token退役拒否/変造保護。ISSPUB008（BUG391、実装前）=同M内Admission全帰還・原本/DB/credential close・最後root gateでIO/Runtime/Errorを入力し、scope外DB/原本使用0、当回INVALID/permit保全/intent復旧又はretain、未知元identity、二重abort mutation0を確認。元goldenは不変更。M自身の最終close不明・S3 launch/Root全gateは別未受入。
 
 ISSPUB005/006（SSC136、追加実装前）：発行ownerは原本内でA前に構築し、固定intent保持下の三phase発行→publisher close→nested close→A close→同M/DB/原本再確認→intent退役/closeを確認する。各close/後段gate IO/Runtime/Errorの元identityと発行0/失効INVALID/permit保全、intent退役後失敗の復旧、失効又は復旧close不明でrelease0/retainを独立counter・手byteで検査。phase重複/順序違反・別thread・別binding/current追認・未発行commitを拒否。全正常は実issued全byte/intent不存在だけを発行結果とし、Root業務ready/DONEを要求値に混在させない。

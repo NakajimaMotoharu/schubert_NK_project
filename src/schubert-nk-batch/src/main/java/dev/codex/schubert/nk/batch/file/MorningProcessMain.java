@@ -322,7 +322,7 @@ public final class MorningProcessMain {
                               configurations.apiSha256(),
                               configurations.webSha256(),
                               actualRoots.sha256(epoch),
-                              prestartFrame);
+                              prestartDigest(prestartFrame));
                       StartupPermitFiles.IssueProof actualProof =
                           (phase, expectedCurrent) -> {
                             budget.requireWithin();
@@ -376,6 +376,22 @@ public final class MorningProcessMain {
       MorningBackupStage.resumeVerifiedEpoch(budget, runId.orElseThrow(), work);
     } else {
       MorningBackupStage.freshVerifiedEpoch(budget, work);
+    }
+  }
+
+  /** SSC108/136, BUG393: the permit binds SHA-256 of the complete canonical frame, not its text. */
+  static String prestartDigest(String frame) throws IOException {
+    return prestartDigest(frame, () -> java.security.MessageDigest.getInstance("SHA-256"));
+  }
+
+  static String prestartDigest(String frame, StartupPermitRecords.DigestFactory factory)
+      throws IOException {
+    var bytes = Objects.requireNonNull(frame).getBytes(java.nio.charset.StandardCharsets.US_ASCII);
+    Objects.requireNonNull(factory);
+    try {
+      return java.util.HexFormat.of().formatHex(factory.create().digest(bytes));
+    } catch (java.security.NoSuchAlgorithmException failure) {
+      throw new IOException("prestart digest unavailable");
     }
   }
 
