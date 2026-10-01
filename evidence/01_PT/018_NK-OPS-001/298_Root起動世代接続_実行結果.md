@@ -4,6 +4,8 @@
 
 ## 暫定選択検証（PG406、未commit Source）
 
+凍結Source `dc81ba72039f0c88b4a68779095b8a4408f0018a` の最初の全6はexit1（16:32:36/5分51秒、log SHA256 `f1d102dadffbce9480f377a049369f22d5bb7f31ae81e065d7100d6d210fd812`）。API754PT中2F・E/S0、Web/Batch未実行、BUG401/YKT321を修正前登録。API内の旧Unit oracleのみSS342/SSC137139へ整合、普通MainのFixedServiceExecArguments oracleは保持。限定v1/v2はProtocolに指定test無しで試験開始前拒否、合格0・Work保存。v3は各moduleで実在testを指定し全5module/static各0/exit0（16:37:17/50.335秒）、ApplicationServiceUnitTest4/RootServiceUnitTest2/FixedServiceExecArgumentsTest4/LinuxInodeSecurityTest9とProtocolを確認。全6再回帰/nativeは未実行。Production codeはdc81ba720から不変更。
+
 2026-10-01 16:12 JST: s3-selected-v5 全89PT（Storage9/Bootstrap4/Batch76）F/E/S0、SpotBugs3module 0、44.602秒/exit0。ログSHA256 `5ee5d6a8daf23b24583078392797bbb3b5a225b76cee3b145698d503ce90b14e`。当回epoch.current/intent namespace・Root proof/ELF/A観測・親API/WEB観測FD close-onlyを確認。v4全87PT/FES0/static3zero（16:01:51/41.896秒、SHA256 `4d7e09ddfb7b00a7578139afe7fbbec770761d268cc7cf59761d2b39d27e4d14`）もWork保全。BUG399/400・YKT319/320の直接範囲は成功、全6/実native/100%の横展開閉鎖は未実行。
 
 SSC141/ROOTDEPLOY001: 固定旧commit485e3daのAPI/Webテンプレート→候補Rootテンプレートと、独立最小literal/11種負変更/未知Unitを検証、全27assertion成功・VM書込0。工具javac `-Xlint:all -Werror`成功（compile-only annotation classpath不足による初回28warning/exit1をWork保全し、既存annotationsを明示後に再試験、警告抑制追加0）。Sourceの正式PT件数には工具27assertionを加算しない。

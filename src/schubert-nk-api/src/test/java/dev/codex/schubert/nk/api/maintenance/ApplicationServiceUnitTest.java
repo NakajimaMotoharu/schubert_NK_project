@@ -26,8 +26,8 @@ final class ApplicationServiceUnitTest {
     common(unit, "api", "2048M", "60s", "512m", "1024m", "256m", "256m");
     // SSC099/BUG307: SS341§2 independent complete Unit name, not SS342's old shorthand.
     exact(unit, "After", "schubert-nk-expiry-cleanup.service artemis.service postgresql.service");
-    exact(
-        unit, "Requires", "schubert-nk-expiry-cleanup.service artemis.service postgresql.service");
+    // SSC139/BUG398: ordering is retained; the parent alone starts owned maintenance.
+    exact(unit, "Requires", "artemis.service postgresql.service");
     exact(unit, "SupplementaryGroups", "schubert schubert-read schubert-web");
     exact(unit, "ReadWritePaths", "/srv/schubert-nk/data/transfer");
     credentials(
@@ -37,7 +37,8 @@ final class ApplicationServiceUnitTest {
         "api-context-aes-current",
         "api-inbox-response-aes-current",
         "operation-hmac-current");
-    assertTrue(unit.contains("dev.codex.schubert.nk.api.bootstrap.ApiProcessMain"));
+    assertTrue(unit.contains("dev.codex.schubert.nk.batch.file.RootServiceLauncher API"));
+    assertFalse(unit.contains("dev.codex.schubert.nk.api.bootstrap.ApiProcessMain"));
     assertFalse(unit.contains("LoadCredential=web-session-aes"));
     assertFalse(unit.contains("ReadWritePaths=/srv/schubert-nk/data/assets"));
     exactEnvTemplate("api");
@@ -58,7 +59,8 @@ final class ApplicationServiceUnitTest {
         "web-session-aes-current",
         "web-revoke-aes-current",
         "web-log-aes-current");
-    assertTrue(unit.contains("dev.codex.schubert.nk.web.bootstrap.WebProcessMain"));
+    assertTrue(unit.contains("dev.codex.schubert.nk.batch.file.RootServiceLauncher WEB"));
+    assertFalse(unit.contains("dev.codex.schubert.nk.web.bootstrap.WebProcessMain"));
     assertFalse(unit.contains("LoadCredential=api-context-aes"));
     assertFalse(unit.contains("LoadCredential=operation-hmac"));
     exactEnvTemplate("web");
@@ -178,6 +180,18 @@ final class ApplicationServiceUnitTest {
     exact(unit, "LimitNOFILE", "65536");
     exact(unit, "RuntimeDirectory", "schubert-nk/" + service);
     exact(unit, "UMask", "0027");
+    // SS342/SSC137: ! keeps only this Root entry privileged; ordinary exec vectors are
+    // independently fixed in FixedServiceExecArgumentsTest and drop every capability.
+    exact(
+        unit,
+        "CapabilityBoundingSet",
+        "CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH");
+    assertTrue(
+        unit.lines()
+            .filter(line -> line.startsWith("ExecStart="))
+            .findFirst()
+            .orElseThrow()
+            .startsWith("ExecStart=!/usr/bin/java "));
     String command =
         unit.lines().filter(line -> line.startsWith("ExecStart=")).findFirst().orElseThrow();
     for (String fixed :

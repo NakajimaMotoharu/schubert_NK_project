@@ -29,7 +29,7 @@ tar -C "$private/pg406-release" -cf "$private/pg406-release.tar" .
 digest=$(sha256sum "$private/pg406-release/RELEASE-MANIFEST.json")
 digest=${digest%% *}
 ssh "${ssh_options[@]}" ubuntu@127.0.0.1 'test ! -e /home/ubuntu/pg406-stage && mkdir -m 700 /home/ubuntu/pg406-stage'
-scp "${scp_options[@]}" "$private/pg406-release.tar" "$private/pg406-manifest.sig" tools/quality/vm/050_s1/place_followup.py tools/quality/vm/050_s1/pg404_read_permit.py "$run/pg406-tools/Pg387TrustedDeployment.class" "$run/pg406-tools/Pg387TrustedDeployment\$Checked.class" ubuntu@127.0.0.1:/home/ubuntu/pg406-stage/
+scp "${scp_options[@]}" "$private/pg406-release.tar" "$private/pg406-manifest.sig" tools/quality/vm/050_s1/place_followup.py tools/quality/vm/050_s1/pg404_read_permit.py tools/quality/vm/050_s1/pg406_watch_root.py "$run/pg406-tools/Pg406RootCoverage.class" "$run/pg406-tools/Pg387TrustedDeployment.class" "$run/pg406-tools/Pg387TrustedDeployment\$Checked.class" ubuntu@127.0.0.1:/home/ubuntu/pg406-stage/
 ssh "${ssh_options[@]}" ubuntu@127.0.0.1 "sudo -n python3 /home/ubuntu/pg406-stage/place_followup.py PG406 $digest" > "$run/pg406-place.log" 2>&1
 # Before deployment: exact prior signed Source bases, not the two new definitions yet.
 ssh "${ssh_options[@]}" ubuntu@127.0.0.1 'sudo -n python3 -' > "$run/pg406-old-unit-base.log" 2>&1 <<'PY'
