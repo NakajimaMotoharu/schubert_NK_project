@@ -567,6 +567,8 @@ issuerは同M/A内で発行直前と公開/readback後に現boot/INVALID Epoch/�
 
 SSC106/092の「receipt0だけでmarker退役」はSS341§5.1の真正FAILED経路も含めて補正する。正常非0/fresh/全終端/DB実FAILED記録後の同ownerだけが退役し得る。既知失敗への補正はUNKNOWN/signal/timeoutやrawclient成功を許可する変更ではない。
 
+SSC134実装前補足：CONFIGは親の実config/credential bundle完成判定である。成功では既存archive/publish/DB確定、再用では実bundle/元成功pair再検証、真正worker非0では同ownerの実子receipt・明示stop・全終端・同request/begin/原本/INVALID/元期限を照合して上流失敗による完成拒否を確定する。失敗時archive/MANIFESTを生成しない。両開始済stepのFAILED記録はSSC115のbundle不成立として維持するが、この親操作を実呼出しせずCONFIG終端0を捏造しない。commit後の別transactionで現在pair全14列（id/run_id/business_date/step/attempt/started_at/ended_at/status/target_count/success_count/failure_count/byte_count/error_code/error_summary）を実読戻しし、再用は元SUCCESS pair全14列も独立保持する。操作・照合・readbackの全正常完了だけが同Morning Invocationの非任意CONFIG closure/local0を作れる。business FAILEDと完成判定操作の正常終端は別で、子非0をCONFIGへ転載しない。未知IO/close/SQL/期限/未実行/旧receiptではclosure不可。ALREADY_SUCCESSFULのBackup referenceのartifact_sha256は同実検証bundleのMANIFEST raw byte SHA-256、今回SKIPと元SUCCESSのrow/attemptを別保持する。六実SKIP/実Transfer/Expiry/全必須工程後の起動継続は不変更。
+
 ## 7. 環境差分
 
 

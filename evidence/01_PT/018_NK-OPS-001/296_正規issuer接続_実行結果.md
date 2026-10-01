@@ -1,5 +1,11 @@
 # 正規issuer接続 実行結果
 
+## 10:48 PG402 同Source実5gate帰還（限定、正式未認定）
+
+Source930afcc377907783042620d84ea977c08d3014bc、全6 clean 2685PT FES0/static6zero/403suite、10:40:54、full manifest6cfc9be08aacde859d6f34cfb415e648a3b8f963bd4951afbd9cc656eb53235c。signed178artifact/61dependency/23SQL manifestfe3017a312cae3671d2dfe5c9176e1d144318aea3028a21914eabaebb9d9bd29。外部Morning一回で真正Backup再用→Cleanup→fresh Broker→Expiry→実retainer末段再読/5frame/Main260帰還、親全体exit30/INVALID/permit0（起動成功ではない）。旧102全14列不変、今回10SKIP/Backup18・Cleanup10・Expiry6→112行、4worker全kernel終端/4request namespace空、backup inventory全metadata/4file内容hashの前後byte一致。全native class mismatch0、same-source host+4exec unionmiss B/L/M/C726/1179/203/11、ownhost858/2409/416/31から132/1230/213/20解消。前PG401 union689/1160/202/11に対する残+37/+19/+1/0、ownhost追加40/57/5/0を別表示。native manifest1eba560a4510c2a3b77e82ccd750d76c8da9282d34462ca039a37953d0952cd6。405個の当回sanitized証跡だけ構造/秘密pattern0、全project正式gateではない。
+
+BUG387/YKT307の既存PT constructor影響は選択115・全2685と同Source実retainerで直接完了。native新規8→7/FAILED/負系・初回journal欠落・完全10step/CONFIG producer/許可3proof/A引継ぎ/APIWeb/CHR/100%は未完。SSC134は具体CONFIG反例の内部設計補修を先行起票・SS/PTへ反映、次接続へ進む。実command/tools/hash/環境/branchは上記2manifest、private DB/raw Invocation/native exec/archive bytesはGit非格納。
+
 ## 10:25 PG402 retainer直接試験（全/native未認定）
 
 選択Storage16/Bootstrap4/Batch95=115PT FES0、静的3zero、pg402-retention-three-v6.log/10:24:12。ISSRET001..008は7/8/9世代の実FD/固定4file削除・7保持・各Root後条件、FAILED/REUSED mutation拒否port、未commit/unknown/symlink/malformed/knownsizehash/DB非成功保護、partial unlink/sync/remove失敗→Result0、未知DB/close/thread/null/Rootdevino、固定3mode全byteを確認。golden SHA：failed a2b8f7ff…/new2d6ae932…/reuseddf95cfe3…。初回Storage not-run/fixture Access未実装/BUG387旧Snapshot constructor/未読データstatic7/Rootfixture parent名誤記/追加AtomicInteger import欠落は各logを保全し不合格・未実行を加算0、golden期待値は変更していない。Source dirty/同Source full/native未実施、旧PG401 native成功を新Sourceへ混ぜない。
