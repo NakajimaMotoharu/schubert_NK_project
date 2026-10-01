@@ -1,5 +1,9 @@
 # NK-QST-001 受付・Worker接続 実行結果（暫定）
 
+PG419選択v9（01:04:12）42PT（7/9/7/API19）F/E/S0/static4zero/exit0。BUG446/YKT343のInspector全8＋ASUB7/OUTBOX4を同reactorで直接再試験。POMは42.7.13 compile明示、Deployment XPath/固定JVM flags/禁則/versionを全件保持。次Source固定の全6再回帰が必要、選択成功を全正式gateに置換しない。
+
+PG419全6 Source31bf758db初回は00:59:01 exit1、Protocol80/Storage154/Bootstrap210成功、API798中旧Inspector scope XPath1F（BUG446/YKT343先行登録）。API静的/Web/Batchは未実行、full合格加算0。Work pg419-six.log SHA256 **fa51c6f7bda70c9d022d6051c83ea54233158675ceecdf84fb393cb400900930**。PG-D-328の明示compile scope/version/runtime unchangedを独立deployment oracleへ追跡し、選択再試験→新Source全6へ進む。
+
 PG419 v8（00:47:22）：34PT（7/9/7/API11）F/E/S0/static4zero/exit0、log SHA256 **35b83b41c9f19e6b17216104884ef606cd8aae7e120881f8a33e1acc780d4dea**。同変更mainの選択exec累積でSubmission残B/L/M/C33/5/0/0、Owned0/0/0/0。Owned全20 branch/57 line/7 methodはinflight close割込と終了前依存保全を含む。ASUB007 public ctor/Random UUIDv4/late9000/config null、ASUB005 PROCESSING/ERROR/response layout/versionを追加。fresh同source全scope/VM/formalではない。実装file SHA256：Submission **0ed3a8a5202ffa172ac1e5d8937627d277b3d6ea3d0fa37319325eeade69869b**、Owned **95d8d7182e062445c2b9dc0b24af4fe25167d7b424670307da2379bb3b845159**。BUG437～445の直接再試験は成功したが横断full/Worker/既存main負系/YKT341342全閉鎖は保留。
 
 PG419 v7追記（00:42:29）：33PT（7/9/7/API10）F/E/S0/static4zero/exit0、log SHA256 **b2b22c6db037ae68ed9fc2d365eb85ad45c055a8f7d673740a6c44b3e53c3181**。OUTBOX001～004は実専用threadの一時SQL/Runtime再試行、inflight join/二重close/close後wake拒否、Error健康失敗＋固定stderr、割込/自己join拒否を確認。B/L/M/C residualはSubmission35/8/1/0、Owned1/2/0/0。close callerのinflight interruptとpublic ctor/初期化null、Inbox PROCESSING/ERROR/layout/versionの追加probeをv8へ進め、未実行の上積みは合格0。

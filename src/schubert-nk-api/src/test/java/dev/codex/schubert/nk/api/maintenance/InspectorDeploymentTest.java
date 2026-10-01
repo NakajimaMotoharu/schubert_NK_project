@@ -268,7 +268,7 @@ final class InspectorDeploymentTest {
     assertEquals("25", xpath.evaluate("/project/properties/maven.compiler.release", pom));
     assertEquals("42.7.13", xpath.evaluate("/project/properties/postgresql.jdbc.version", pom));
     assertEquals(
-        "runtime",
+        "compile",
         xpath.evaluate("/project/dependencies/dependency[artifactId='postgresql']/scope", pom));
     assertEquals(
         "${postgresql.jdbc.version}",
