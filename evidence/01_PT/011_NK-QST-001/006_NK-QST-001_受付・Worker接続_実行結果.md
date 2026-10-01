@@ -1,5 +1,7 @@
 # NK-QST-001 受付・Worker接続 実行結果（暫定）
 
+PG419全6-v2（2026-10-02 01:28:49 JST、exit0）：Source1d3f06e1e83a04d9ed9e0300dd69f9b1351c0b81、全2790PT/FES0/static6zero（80/154/210/798/560/988）。commandはNode24.19.0/JDK25.0.4 PATH・Maven3.9.12 offline、全6 clean/test-compile/test-jar/test/SpotBugs/JaCoCo/JAR/dependency3.9.0 runtime inventory、詳細は018 provisional/PG419-full-question-acceptance/manifest.json（SHA b08a4b54d940d50141b4c7ffebc55a3cc2cd65f00ae8f3603fc070949de303e7）。JUnit stdout/stderr/propertiesを除去、raw logはWorkだけ、同Source host exec/classesもWorkpg419-*へ凍結。ASUB001～007/OUTBOX001～004および既存Inspector scope/JVM flagsの再試験を含む。全host残B/L/M/C1140/3296/551/39、QuestionSubmissionService33/5/0/0、OwnedOutboxDispatcher0/0/0/0。BUG437～446は直接選択＋全回帰で閉鎖、YKT341/342の後続Worker/lifetimeは未完。SS補足SSC156とAWORK006は実装前、Worker/実31起動/3consumer/native/実CHR/全coverage正式認定には加算しない。
+
 PG419選択v9（01:04:12）42PT（7/9/7/API19）F/E/S0/static4zero/exit0。BUG446/YKT343のInspector全8＋ASUB7/OUTBOX4を同reactorで直接再試験。POMは42.7.13 compile明示、Deployment XPath/固定JVM flags/禁則/versionを全件保持。次Source固定の全6再回帰が必要、選択成功を全正式gateに置換しない。
 
 PG419全6 Source31bf758db初回は00:59:01 exit1、Protocol80/Storage154/Bootstrap210成功、API798中旧Inspector scope XPath1F（BUG446/YKT343先行登録）。API静的/Web/Batchは未実行、full合格加算0。Work pg419-six.log SHA256 **fa51c6f7bda70c9d022d6051c83ea54233158675ceecdf84fb393cb400900930**。PG-D-328の明示compile scope/version/runtime unchangedを独立deployment oracleへ追跡し、選択再試験→新Source全6へ進む。

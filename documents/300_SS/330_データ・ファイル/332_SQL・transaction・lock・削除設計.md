@@ -199,13 +199,14 @@ Web log/revocation outboxも同じclaim形とし、schema/table名と保持仕�
 update schubert.async_jobs
    set state='PROCESSING', started_at=:now, state_changed_at=:now,
        processing_message_id=:message_id,
-       retry_count=:delivery_count - 1,
+       retry_count=least(:delivery_count - 1, 3),
        version=version+1
  where id=:job_id and state='RECEIVED';
 ```
 
-0件の場合はjobを`FOR UPDATE`で再読し、COMPLETED/ERROR/CANCELLEDは冪等ACK、PROCESSINGは
+0件の場合はjobを`FOR UPDATE`で再読し、COMPLETED/CANCELLEDおよび確定済み業務ERRORは冪等ACK、最終retry ERRORは既存DLQ dispatch DのSENT確認後だけACK（SSC156、SS312 §9/SS353 §7.2）。PROCESSINGは
 `processing_message_id`一致のみcrash recovery、不一致は整合errorとする。
+実delivery countはmetadataへ非capで保存する。retry_countだけDDL上限3に制限し、actual countを捏造しない。
 
 ### 8.2 取消
 
@@ -224,8 +225,8 @@ PROCESSING/COMPLETED/ERRORはrollbackではなく業務error`0107`をInbox ERROR
 ### 8.3 Answer完了
 
 1. Jobを`FOR UPDATE`しPROCESSINGとmessage IDを再検証。
-2. `answers(question_id UK)`へINSERT。Unique violation時はexisting answer/provider/timeを検証し、同一なら冪等完了。
-3. Job/notificationをCOMPLETED、同じ`:now`でstate_changed/completed/answered_atを更新。
+2. Questionをlockし削除flag/時刻/actor三点を継承して`answers(question_id UK)`へINSERT。既存answer/provider/time/削除三点を検証し、同一なら冪等完了、矛盾は整合errorとし上書きしない。
+3. Providerの`AnswerResult.answeredAt`を有限UTC microsecondへ正規化し、job started_at/received_at以前を拒否する。同じ値でanswer answered_at、Job/notification state_changed/completed/answered_atを更新する（SSC156）。STUBは現在時刻・空本文。wire projectionだけmillisecondへ切詰め、DB時刻をwire精度に合わせて変更しない。
 4. Critical auditをINSERTしcommit。
 
 ## 9. 所有者・role scopeのSQL強制

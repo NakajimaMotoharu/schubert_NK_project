@@ -22,5 +22,6 @@ S3/D04/05の既存24＋質問関連7を実31processorへ結線する同一WIP。
 | PT-QST-AWORK-003 | answer作成中に質問を論理削除 | 新Answerはquestionのis_deleted/deleted_at/deleted_by三点を継承、未削除false/NULL保持、矛盾errorと全rollback、Notification本文projectionは別query受入で確認 |
 | PT-QST-AWORK-004 | delivery1/2/3一時failure／4以上最終failure／DB不能／DLQ pending | 実countをcapせず、retry_countだけ3上限。1～3JMSrollback、最終ERROR＋immutable D/W DLQ同DBtxn→D SENT後だけACK。ERROR再配送もpendingならACK0。DLQ各crashは018/303の下位実証と業務txnを接続 |
 | PT-QST-AWORK-005 | count-less／null/unknown、STUB業務ERROR、permanent protocol | metadata欠落は成功禁止、予期した業務ERRORはDBcommit/ACKでDLQ0、不正wireは既存JMS同tx fatalで業務0、Provider/質問/回答/credential/tokenのlog漏れ0 |
+| PT-QST-AWORK-006 | SSC156・第4配送でERROR+D commit直後／D SENT直後／mark前に元session rollback/接続断、dispatcher再開 | work0/DLQ2 physical・同W logical・D row1・Provider追加0・ordinary proof不変。各transport/body/property/D不変metadataを独立照合、Broker欠落propertyを推測0、D再送第三コピー0。停止要求のpending解除はACK0・rollbackで保全。host実Artemisの局所再現は後続Linux IT/ST完了を意味しない |
 
 未実行を合格に算入しない。現行full Source・選択command/日時/各FES/static/coverage B/L/M/C、BUG/SSCとsanitized evidence/hashは006/018と本Programの006結果へ保存する。期待wireはSSのoffset/lengthからliteralを独立作成し、DBは独立SQL後条件、暗号は独立key/vector＋AAD/参照改竄negative。Production codecをexpected作成に使わない。署名同Source普通起動・31登録/3consumer・専用Outbox lifetime・実NK CHR・全100%は別gateであり本仕様の作成/下位選択成功だけで受入としない。

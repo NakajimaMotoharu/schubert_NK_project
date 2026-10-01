@@ -1,5 +1,7 @@
 # 処理sequence・method・例外・transaction設計
 
+SSC156（2026-10-02、Worker実装前）：retry_countはmin(actual count-1,3)、実delivery metadataは非cap。AnswerResult.answeredAtの有限UTCµsをstarted/received以上で検査し、answer/job/notificationの同完了stampへ使用、wireだけms。通常最終ERRORは既存DのSENT後だけ元ACK。ERROR+D commit～元ACKにhard crash/session rollbackが起きると、固定Broker max4が元WをDLQ移動し、startup dispatcherのD送信と2物理コピーになり得る。双方を同Wの論理隔離として保全し、353 §7.2で個別照合/承認整理する。ERROR時のprovider再実行、新D生成、ordinary W proof変更は禁止。停止要求でD未確認の待機を解く場合は正常復帰せずrollbackする。shared stop→consumer drain/close→Outbox join→DB/factory/key/root closeの所有順を守り、待機中DB/JMSを保持しない。
+
 PG/PT内部接続補足（SSC153154155、2026-10-01、実装前）：普通APIは31 requestとQWK/WebLog、全3consumer、専用Outbox lifecycleを実接続するまでready/A releaseを許さない。共通event portはguard検証済みactual delivery count・bounded transport ID・UTC受信時刻をQuestionへ渡す。Questionのcount-less呼出しをdelivery1と推測しない。
 
 QSBの元request ID M0はInbox source/async_job message_id/correlationであり、内部QWKの新UUID Wとは別。受付transactionはquestion/job/notification(type ACCEPTED/state RECEIVED)/PENDING work/QUESTION-bound NKREF1 success snapshotを一度だけcommitする。再送snapshot AADはM0、返信は新UUID/今request correlation、payload/受付時刻は保存値。応答成功は当該workの真正SENT確認後だけ。単調budgetはheader.sentAt+2秒と受信clock+2秒の早い期限の残量を受信時に固定し、既に遅い要求は受付前9000。commit後timeoutもfresh9000で既存COMPLETED/保存期間を変更しない。専用dispatcherへwakeし、DB connection/lockなしで残時間内に対象SENTを短い再観測する。共通processorをrequest thread内のJMS sendへ変えない。

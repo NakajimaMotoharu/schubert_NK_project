@@ -1,5 +1,7 @@
 # Outbox・Inbox・冪等性・再送設計
 
+SSC156（2026-10-02）：最終retry ERROR＋新D commit後は元Wを再処理せず、同Dの実SENTを短いDB観測で確認してから元ACK。通常送信/mark前crashはD duplicate IDで再送する。元JMS sessionのhard crash/rollbackではBroker max4によるWコピーとDコピーがDLQに併存し得るため、exact-one物理コピーを仮定しない。元ordinary W proof/D metadataを不変で保全し、353 §7.2の同W論理隔離・個別承認整理を適用する。Broker生成コピーの欠落propertyをDから書換え/補完しない。停止時SENT未確認は非成功rollback。max4、no-XA、D!=W、body/header/correlation W保持、application ACK前SENTは不変更。
+
 SSC154155（PG/PT、2026-10-01、実装前）：QSB受付は元Inbox source M0へQUESTION-bound暗号snapshotを受付transaction内で保存し、commit後に専用dispatcherをwake、対象QWK WのSENTを短DB観測する。request threadはJMS送信せず待機中connection/row lockを保持しない。SS312の総2秒単調budget超過はfresh9000としCOMPLETEDを書換えない。元proofが揃ったsame-token再送だけ0200。Inbox正常保持後のretained owner/token questionは重複防止だけであり、同canonical本文でも認証済snapshot/SENT根拠を失った場合は9000、異payload0105、新acceptance/alias/推測歴史時刻を生成しない。
 
 通常Outboxのrow message_id＝body header＝NKMessageID＝_AMQ_DUPL_IDは維持。業務最終QWK DLQのみrow dispatch D／duplicate ID Dと、body/header/NKMessageID元Wを分ける。元correlation/320byte bodyとSS331不変metadata5列を保持、partial UKで元WにつきDLQ dispatchを一つにする。JMS senderはdestination-specific profileを再検証し、その他row/header不一致を拒否する。DB ERROR＋DのPENDING確定後DのSENTまで元ACKをしない。再配送は同Dを確認し、send後mark前crashもDで重複排除する。元work SENTの受付証明を変更しない。
@@ -228,7 +230,7 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 | ERROR | 冪等ACK。運用承認なしに再処理しない |
 | CANCELLED | 業務処理せずACK |
 
-`answers.question_id` UK、`async_jobs.message_id` UKが二重回答を防ぐ。再配送countを`retry_count=JMSXDeliveryCount-1`へbounded更新する。
+`answers.question_id` UK、`async_jobs.message_id` UKが二重回答を防ぐ。再配送countを`retry_count=min(JMSXDeliveryCount-1,3)`へbounded更新する。実delivery metadataは非cap（SSC156）。
 
 ## 11. Operation token lifecycle
 
