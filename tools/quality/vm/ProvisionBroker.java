@@ -27,7 +27,9 @@ public final class ProvisionBroker {
     var roles = new Properties();
     for (var identity : Map.of("api", "nk_api", "web", "nk_web", "ops", "nk_ops",
         "maintenance", "nk_mq_maintenance").entrySet()) {
-      String name = "schubert_" + identity.getKey();
+      // SSC146/BUG411: app login identities are fixed by Production, not ACL role aliases.
+      String name = identity.getKey().equals("api") || identity.getKey().equals("web")
+          ? identity.getValue() : "schubert_" + identity.getKey();
       String password = random();
       Path credential = CREDENTIALS.resolve("mq-" + identity.getKey());
       Files.writeString(credential, password + "\n", StandardOpenOption.CREATE,

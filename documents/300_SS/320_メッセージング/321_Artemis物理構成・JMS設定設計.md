@@ -1,5 +1,7 @@
 # Artemis物理構成・JMS設定設計
 
+SSC146（BUG411/YKT328、PG/PT隔離認証fixture）：app login usernameはAPI=`nk_api`、Web=`nk_web`とし、それぞれ同名ACL roleへ一対一で対応付ける。roleは認可、username/passwordは認証の別概念であり、role名だけが正しくても別userのcredentialでは接続を許可しない。固定mq-api/mq-webを通常LoadCredentialで受領し、管理login/roleをappへ転用しない。既存Ops login schubert_ops→nk_ops、保守login schubert_maintenance→nk_mq_maintenanceは維持。ユーザ名aliasやpassword fallbackをProductionへ追加しない。fixtureの旧private設定を保存して限定配置/readback/実認証/誤user・誤credential・cross-role負系をPT297298に記録する。UI231のACL表・6Address/Queue・電文互換・秘密保管契約は不変更。
+
 ## 1. 目的・追跡・状態
 
 Apache ActiveMQ ArtemisのBroker物理設定、Address/Queue、security、journal/paging、JMS transaction、consumer、DLQ/Expiry、再配送を定める。

@@ -1,0 +1,239 @@
+{
+  "id": "PG408-native-same-pid-auth-refused",
+  "formal": false,
+  "sourceCommit": "32c6a7b1e79abf114901003c4a8f1300b33bf0c0",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-10-01T11:26:52.998131+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "pg408_deploy.sh signed same source; pg408_native.sh one external Morning; pg408_collect_union.py preserved four exec",
+  "collectorExit": 0,
+  "applicationParentExit": 30,
+  "applicationApiExit": 1,
+  "wholeStartupAccepted": false,
+  "bugs": [
+    "BUG-403",
+    "BUG-409",
+    "BUG-410",
+    "BUG-411",
+    "BUG-412"
+  ],
+  "ssc": [
+    "SSC-143",
+    "SSC-144",
+    "SSC-145",
+    "SSC-146",
+    "SSC-147"
+  ],
+  "actual": {
+    "old152RowsAll14ColumnsUnchanged": true,
+    "rows": 162,
+    "freshSkippedSteps": 10,
+    "backupInventoryUnchanged": true,
+    "genuineRootEntry": true,
+    "samePidOrdinaryApi": true,
+    "sameInvocation": true,
+    "ordinaryUid": 999,
+    "ordinaryGid": 981,
+    "ordinaryAllFiveCapabilitySetsZero": true,
+    "ordinaryNoNewPrivileges": true,
+    "apiAuthenticationRefused": true,
+    "rootExecDumpEmpty": true,
+    "rootPositiveCoverageCollected": false,
+    "webStarted": false,
+    "businessReady": false
+  },
+  "coverage": {
+    "classByteMismatch": 0,
+    "sameRunRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "moduleUnion": {
+      "protocol": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        }
+      },
+      "storage": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 1129
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 248
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 36
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 501
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2190
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 381
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1215
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      },
+      "web": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 25,
+          "covered": 4755
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 957
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 190
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1615
+        }
+      },
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1640,
+          "covered": 13764
+        },
+        "METHOD": {
+          "missed": 284,
+          "covered": 2191
+        },
+        "CLASS": {
+          "missed": 14,
+          "covered": 305
+        },
+        "BRANCH": {
+          "missed": 885,
+          "covered": 6202
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 948,
+      "LINE": 1752,
+      "METHOD": 303,
+      "CLASS": 15
+    },
+    "resolvedFromOwnHost": {
+      "BRANCH": 159,
+      "LINE": 1525,
+      "METHOD": 247,
+      "CLASS": 24
+    }
+  },
+  "nativeExecHashes": {
+    "parent": "e72a4dc8bcddb798322ed2bd7655b8f8c4b44837b1f1344085fdb6d1a0bec6ec",
+    "backup": "9a407cea83fec3dc4f302f27d08f348cf04aed994c5779dab9f3dd5513c3f740",
+    "cleanup": "f168030a89e16e56c445df05b4d43fae3135cd620a970a558150b0a68fd2ca3d",
+    "expiry": "58a77c11a94a4d46886742cedce4fc2e40d6d69cc24ea0e8e066327ac906f2d7"
+  },
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-six.log",
+      "sha256": "c64949a1f0f40dd711d20481e5e3865b9737f22aec67efbb8544c6bbd7353c22"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-deploy.log",
+      "sha256": "d782cbd3e061f9d640d3067be4e2c9c71401e49a32f1e4a9e40652351b90bfa8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-native-driver.log",
+      "sha256": "28aca29dc69ef37ca1341d7d05cf0753642cebe62ac2ed1c52f2e8e4ffbcc265"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-native-db-before-full.log",
+      "sha256": "129bcaa8855f7ec9ac1ff161221d639cebf9a5b4726f5d6cfc00a7da6705ece2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-native-db-final-full.log",
+      "sha256": "97f95546519343e44b8f528ff43b7106cbd4d3f5edd5833d7d3e831b60229b05"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-native-full18-private.txt",
+      "sha256": "64667dfde53ad9681dc25ed5c74ea78d2d0cbf1888b6e66609764e9b33ab5c12"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-root-watch-private.jsonl",
+      "sha256": "cc79f902a244f65179828d2eeeda4b2ecb29a9de18b0dfe4fc2d498cb6d8b7ec"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-broker-journal-private.txt",
+      "sha256": "bb18056dc7e0551df7e4a02eec0dc9c1865e45465f21bb77114e2459cf11fd99"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg408-backup-after-private.json",
+      "sha256": "8de752ceb16a754a5673cb1d4e412c940f75cdc502bdb2c4ded859b81536726c"
+    }
+  ],
+  "limitations": [
+    "S1/S2/S3 full negative coverage pending",
+    "Root positive exec has no shutdown-hook coverage dump",
+    "Api unassembled runtime/full layout registration, Web readiness and actual CHR pending",
+    "formal run24 and 48.3% unchanged"
+  ],
+  "redaction": "No raw DB/receipts/journal/native exec/credentials/session/key/master/dump exported to Git"
+}
