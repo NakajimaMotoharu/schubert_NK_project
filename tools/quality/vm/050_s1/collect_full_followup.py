@@ -198,9 +198,9 @@ if int(identifier[2:5]) >= 415:
         'legacyMismatch': 'V024 transaction fails without guessed job state', 'nativeMigration': 'not deployed'}
     manifest['command'] += '; outputFile=target/runtime-dependencies.txt appendOutput=false'
 if int(identifier[2:5]) >= 417:
-    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(431, 435))
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(431, 437))
     manifest['ssc'].append('SSC-155')
-    manifest['ykt'].append('YKT-339')
+    manifest['ykt'].extend(['YKT-339', 'YKT-340'])
     manifest['testIds'].extend(['PT-QST-DLQ-MODEL', 'PT-QST-DLQ-DB', 'PT-QST-DLQ-JMS'])
     manifest['ddl'].update({'versionedMigrations': 25,
         'appendOnly': 'V024 notification state; V025 immutable Question DLQ profile',

@@ -528,7 +528,7 @@ final class QuestionQueryInboxCleanupTest {
         scalar(
             "select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('schubert','schubert_web_session') and c.relkind='r'"));
     assertEquals(
-        "155",
+        "156",
         scalar(
             "select count(*) from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname in ('schubert','schubert_web_session') and c.contype='c'"));
     Path migrations =

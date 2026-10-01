@@ -713,7 +713,13 @@ final class QuestionMutationInboxInspectorTest {
                         "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at) select '00000000-0000-0000-0000-000000000999',correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at from schubert.mq_outbox"))
             .getSQLState());
     sql(
-        "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at) select '00000000-0000-0000-0000-000000000999',correlation_id,'nk.dead.letter',layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at from schubert.mq_outbox");
+        "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at,dlq_original_message_id,dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at) select '00000000-0000-0000-0000-000000000999',correlation_id,'nk.dead.letter',layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at,message_id,'ID:independent-original',4,'QUESTION_RETRY_EXHAUSTED',created_at from schubert.mq_outbox");
+    assertEquals(
+        "23514",
+        assertThrows(
+                SQLException.class,
+                () -> sql("update schubert.mq_outbox set destination='nk.dead.letter' where id=14"))
+            .getSQLState());
     try (var c = connection();
         var s = c.createStatement()) {
       assertEquals(
@@ -724,11 +730,7 @@ final class QuestionMutationInboxInspectorTest {
                       s.executeQuery("select * from schubert.maintenance_read_question_work(null)"))
               .getSQLState());
       for (String change :
-          List.of(
-              "layout_id='GAMREQ01'",
-              "layout_version='002'",
-              "destination='nk.dead.letter'",
-              "body=decode('00','hex')")) {
+          List.of("layout_id='GAMREQ01'", "layout_version='002'", "body=decode('00','hex')")) {
         sql("update schubert.mq_outbox set " + change + " where id=14");
         try (var r =
             s.executeQuery(
@@ -966,7 +968,7 @@ final class QuestionMutationInboxInspectorTest {
         scalar(
             "select count(*) from information_schema.tables where table_schema in ('schubert','schubert_web_session') and table_type='BASE TABLE'"));
     assertEquals(
-        "155",
+        "156",
         scalar(
             "select count(*) from pg_constraint where contype='c' and connamespace in ('schubert'::regnamespace,'schubert_web_session'::regnamespace)"));
     assertEquals(

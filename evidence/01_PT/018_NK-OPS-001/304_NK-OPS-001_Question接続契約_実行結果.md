@@ -1,5 +1,7 @@
 # Question接続前提の実行結果（暫定・継続）
 
+PG417再試験前保全：Source7e978d7ddの全6初回はAPI787中4F/1E・終了1（BUG435/436/YKT340）、未実行Web/Batch/後続静的を合格化0。log sha256 `520d7a9d9093bf98b3aca231a06e023486a1eb3986363f16191ebf08ae3fd9e8`、PG415初回失敗log `0576b3bfd86cdd16e84d4fdf6c83d18afd0c50cca6108d39cf33323638c1193d`、どちらもWork PG379のみ。承認CHECK追加1だけを4classの独立156へ反映、旧table23等/DDL/hash不変更。保守のDLQ counterpartにも元W/dispatchD/5metadataを与え、通常work→DLQを23514で拒否する負probeに精密化。PG417選択v2は23:32:48終了0、Protocol7/Storage9/Bootstrap7/API92/Web14/Batch35＝164PT/FES0/static6zero。全横展開対象を実行して再試験成功、次はSource固定全6clean。worker ERROR/DLQ元ACK・全31・ordinary readyは未実装のままで合格加算しない。
+
 PG416 DLQ選択v3：2026-10-01 23:20:54 JST終了0、Protocol7/Storage9/Bootstrap7/API52＝75PT/FES0、4module SpotBugs0。V024→V025のlegacy DLQ存在時の全DDL/history rollback・ordinary SENT原本保存、31個のmissing metadata組合せ、UTC/transport/count/error/layout/version/body境界、元W partial UK、全metadata/body/dispatch不変、ordinary→DLQ付替拒否、許可status/retry更新、API invoker trigger／Batch function拒否を実PGで検証。独立320byte QWK元Wとdispatch Dによる実Artemis全metadata/TTL/persistent、sendcommit→mark前crash→1配送/SENT、旧ordinary非回帰、DB結果の欠落22004／不完全・malformed整合拒否を確認。最終worker ERROR txn→SENT→元ACKはまだ未結線で合格0。
 
 PG415全6初回は23:04:12終了1、API OutboundJmsAdapterTest旧valid A negative1F（BUG431/YKT336）・後module/静的未実行、正式合格0。PG416初回は50API中1F/2E（BUG432～434/YKT339）、23:15:32終了1。修正前台帳登録後、v2 73PT/static4zero、v3追加境界75PT/static4zeroで直接再試験済み。Provider rawログ/DBdump/鍵/tokenはWorkのみ。選択の累積coverageを100%や正式collectorへ流用しない。次全6clean triggerはSSC151～155共用profile/metadata/append-only24・25/security変更群の受入であり、個々helperの反復runではない。
