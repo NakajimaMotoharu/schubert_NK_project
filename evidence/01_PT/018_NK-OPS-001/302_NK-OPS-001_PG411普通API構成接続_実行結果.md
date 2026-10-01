@@ -1,5 +1,7 @@
 # PG409～411 実行結果（未認定・継続）
 
+PG413全6再回帰trigger（2026-10-01、実行前）：PG412/source8bf全6-v1は誤Node PATHでWeb2E（BUG420）、v2はBatch988中Root/issuer canonical hash旧vector2F（BUG424/YKT335）。失敗原本Workに保持、合格算入0。SSC150の新非秘密keyを独立sorted literal/JCA vectorへ追加し、Production hashからexpectedを生成しない。選択6module各1class以上→source/test/tools固定→全6clean/PT/static/coverageを再採取する。同じsecurity/config所有群の是正であり、失敗を無視してQuestion実装へ先行しない。正式run24/48.3%不変更。
+
 PG412更新：2026-10-01 21:21:43、4module選択v3終了0、API52/FES0・4module静的0。実root/probe/全usage・用途別current実reader・Logout組立初回/再送・Media/User組立実DBのPTを301へ反映。普通API map24/31、Question7の不足を開始前拒否、async/outbox/lifecycle/Web未接続、ready0。BUG417はsource-reviewで未定義Asset ownerをSS343固定schubert-data:schubert-readへ修正前登録して訂正、Transfer既定を同SSと照合。BUG418419のcompile2失敗も不合格別保存、source/品質条件の緩和0。shared security/所有/config変更群をSource固定commit/push後に全6cleanで検証する（PG412-full-application-preparation、全coverage100%・正式認定は別）。VM署名runtimeはPG408/source32cで保持し、全登録未実装の拒否probeを繰返すための配備/startは行わない。
 
 2026-10-01、branch dev-foundation。正式run24/source858713c/1964PT/53scope/48.3%不変更。

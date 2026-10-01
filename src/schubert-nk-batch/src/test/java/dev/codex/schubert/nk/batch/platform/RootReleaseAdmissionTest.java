@@ -22,6 +22,39 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** ROOTBOM001..009. Package policy ports are synthetic, NOT actual root/native admission. */
 public final class RootReleaseAdmissionTest {
+  // ROOTCFG002/ISSUERCFG002: independently written SS343 default canonical bytes.
+  // No production parser, map or encoder generates this expected value (BUG424/YKT335).
+  private static String independentApiDefaultHash() throws Exception {
+    String canonical =
+        "nk.api.async-consumers=1\n"
+            + "nk.api.storage.asset-manifest-entries=59627\n"
+            + "nk.api.storage.asset-root=/srv/schubert-nk/data/assets\n"
+            + "nk.api.storage.transfer-root=/srv/schubert-nk/data/transfer\n"
+            + "nk.api.sync-consumers.initial=4\n"
+            + "nk.api.sync-consumers.max=8\n"
+            + "nk.db.connect-timeout=3s\n"
+            + "nk.db.pool.api.max=8\n"
+            + "nk.db.pool.api.min=2\n"
+            + "nk.db.url=jdbc:postgresql://127.0.0.1:5432/schubert_nk\n"
+            + "nk.inbox.reference-retention=24h\n"
+            + "nk.inbox.update-retention=7d\n"
+            + "nk.monitoring.mode=STANDARD\n"
+            + "nk.mq.async-work=nk.async.work\n"
+            + "nk.mq.dlq=nk.dead.letter\n"
+            + "nk.mq.expiry=nk.expiry\n"
+            + "nk.mq.sync-reply=nk.sync.reply.web\n"
+            + "nk.mq.sync-request=nk.sync.request\n"
+            + "nk.mq.url=tcp://127.0.0.1:61616\n"
+            + "nk.mq.web-log=nk.web.log\n"
+            + "nk.outbox.sent-retention=7d\n"
+            + "nk.protocol.version=001\n"
+            + "nk.time.display-zone=Asia/Tokyo\n";
+    return HexFormat.of()
+        .formatHex(
+            java.security.MessageDigest.getInstance("SHA-256")
+                .digest(canonical.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+  }
+
   @TempDir Path publicOsDirectory;
   static final Map<String, String> PLATFORM =
       Map.of("osId", "ubuntu", "osVersion", "26.04", "architecture", "x86_64", "javaFeature", "25");
@@ -127,8 +160,7 @@ public final class RootReleaseAdmissionTest {
       assertTrue(f.events.contains("statement.close") && f.events.contains("rows.close"));
       var config =
           subject.inspectServiceConfigurations(service -> new ServiceConfigFiles.Contents("", ""));
-      assertEquals(
-          "6d083b3bf0f610d8b33913234c3d38aa64f203fc5ea469bb4c236bc79f21bfa3", config.apiSha256());
+      assertEquals(independentApiDefaultHash(), config.apiSha256());
       assertEquals(
           "98cfeb71e1c4cb5a0805975b3efa3cb52ec89ca48f739b5a15c73a24a1fc22b8", config.webSha256());
       assertThrows(
@@ -234,10 +266,8 @@ public final class RootReleaseAdmissionTest {
         new java.util.concurrent.atomic.AtomicReference<>(new ServiceConfigFiles.Contents("", ""));
     NonSecretConfigSource source = service -> yaml.get();
     var actual = subject.inspectConfigurations(source);
-    // Independent hand-written default vectors in the existing shared parser PT; SHA256 computed
-    // independently with Node crypto, not by either production parser or a production encoder.
-    assertEquals(
-        "6d083b3bf0f610d8b33913234c3d38aa64f203fc5ea469bb4c236bc79f21bfa3", actual.apiSha256());
+    // Independent literal/JCA vector, not a production parser/encoder output.
+    assertEquals(independentApiDefaultHash(), actual.apiSha256());
     assertEquals(
         "98cfeb71e1c4cb5a0805975b3efa3cb52ec89ca48f739b5a15c73a24a1fc22b8", actual.webSha256());
     assertEquals(

@@ -183,5 +183,10 @@ if int(identifier[2:5]) >= 412:
         'Current VM still signed PG408/source32c6a7b1e; PG410 old-source exit50 is not mixed into this source coverage',
         'API/Web ordinary ready, completed Morning receipt, CHR-A01/L01 pending',
         '100% coverage and formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 413:
+    manifest['bugs'].extend(['BUG-420', 'BUG-424'])
+    manifest['ykt'].append('YKT-335')
+    manifest['testIds'].extend(['ROOTCFG002', 'ISSUERCFG002'])
+    manifest['command'] = 'six modules: clean test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o; verified Node24.19.0 PATH'
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
