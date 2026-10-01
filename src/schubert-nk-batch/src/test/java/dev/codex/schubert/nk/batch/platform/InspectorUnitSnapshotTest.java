@@ -45,6 +45,33 @@ final class InspectorUnitSnapshotTest {
                   .getBytes(StandardCharsets.US_ASCII),
               target);
       assertTrue(stopped.failedRootStillStoppedAfter(before));
+      String cold =
+          text.replace("ActiveState=failed", "ActiveState=inactive")
+              .replace("SubState=failed", "SubState=dead")
+              .replace("Result=exit-code", "Result=success")
+              .replace("ExecMainCode=1", "ExecMainCode=0")
+              .replace("ExecMainStatus=30", "ExecMainStatus=0")
+              .replace(
+                  "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0")
+              .replace("ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=0")
+              .replace("InvocationID=123456789abcdef08123456789abcdef", "InvocationID=");
+      var collected = InspectorUnitSnapshot.parse(cold.getBytes(StandardCharsets.US_ASCII), target);
+      assertTrue(
+          collected.failedRootStillStoppedAfter(before),
+          "actual previously captured receipt required");
+      assertFalse(collected.failedRootStillStoppedAfter(collected), "GC alone is no receipt");
+      for (String partial :
+          List.of(
+              cold.replace("ExecMainStatus=0", "ExecMainStatus=30"),
+              cold.replace(
+                  "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1"),
+              cold.replace("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=1"),
+              cold.replace("ExecMainCode=0", "ExecMainCode=1"),
+              cold.replace("Result=success", "Result=exit-code"),
+              cold.replace("InvocationID=\n", "InvocationID=123456789abcdef08123456789abcdef\n")))
+        assertFalse(
+            InspectorUnitSnapshot.parse(partial.getBytes(StandardCharsets.US_ASCII), target)
+                .failedRootStillStoppedAfter(before));
       assertFalse(stopped.failedRootGeneration("123456789abcdef08123456789abcdef"));
       for (var change :
           Map.ofEntries(

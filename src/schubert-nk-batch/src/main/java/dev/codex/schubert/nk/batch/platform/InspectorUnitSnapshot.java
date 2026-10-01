@@ -182,7 +182,7 @@ public final class InspectorUnitSnapshot {
     return target == before.target
         && before.failedRootGeneration(before.value("InvocationID"))
         && quiescent()
-        && sameStoppedExecution(before);
+        && (sameStoppedExecution(before) || coldStopped());
   }
 
   /** Backup only: a fresh normal nonzero exit is failure, never an unknown/signal success. */

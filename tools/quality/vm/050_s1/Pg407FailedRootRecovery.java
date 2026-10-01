@@ -18,6 +18,7 @@ import java.util.*;
 public final class Pg407FailedRootRecovery {
   static final Path STARTUP=Path.of("/run/schubert-nk/startup");
   static final Path SAVED=Path.of("/var/lib/pgpt-s1-preservation/pg407-failed-root");
+  static final Path PRIOR=Path.of("/var/lib/pgpt-s1-preservation/pg407-prior-receipts");
   static final String EPOCH="2f5f22a6-76dd-4e3e-a063-5f14b37c67ac";
   static final String OLD_PERMIT="5ae82ba7-bda0-442a-882a-29f94b5b286e.permit";
   static final UUID RUN=UUID.fromString("31100027-2222-4333-8444-555555555555");
@@ -33,7 +34,7 @@ public final class Pg407FailedRootRecovery {
   }
   static Pg407FailedRootRecovery captureIfPresent() throws Exception {
     if(!Files.exists(STARTUP.resolve("permit-start.intent"),LinkOption.NOFOLLOW_LINKS))return null;
-    if(!Pg387TrustedDeployment.LABEL.equals("PG407"))throw new IllegalStateException("fixed recovery candidate only");
+    if(!Set.of("PG407","PG408").contains(Pg387TrustedDeployment.LABEL))throw new IllegalStateException("fixed recovery candidate only");
     var bytes=captureBytes();
     try(var directory=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)) {
       var e=RootFailedStartRecovery.observe(directory,LinuxInodeSecurity.create());
@@ -47,10 +48,20 @@ public final class Pg407FailedRootRecovery {
           || e.service()!=ServiceConfigFiles.Service.API)throw new IllegalStateException("fixed old generation");
       var m=InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.MORNING).read();
       var a=InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.API).read();
+      var actualM=m; var actualA=a;
+      // Genuine prior independent full manager observation, never reconstruct30 from cold.
+      if(Files.exists(PRIOR,LinkOption.NOFOLLOW_LINKS)) {
+        m=prior("morning-before.properties",InspectorUnitSnapshot.Target.MORNING,
+            "3a672d61d862a243e8856b80920ba54b03426879845d9a5de47b345627e2b4f0");
+        a=prior("api-before.properties",InspectorUnitSnapshot.Target.API,
+            "e074f719c9b6bb1f4c9a4e2b6e718ac816c622746440516781f8d2806c1891fd");
+      }
       if(!m.failedRootGeneration(e.owner().morning().invocation()) || !a.failedRootGeneration(e.child().invocation())
-          || !m.matches(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.MORNING).read())
-          || !a.matches(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.API).read()))
+          || !actualM.failedRootStillStoppedAfter(m) || !actualA.failedRootStillStoppedAfter(a)
+          || !actualM.matches(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.MORNING).read())
+          || !actualA.matches(InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.API).read()))
         throw new IllegalStateException("old normal30 receipts required");
+      if(!Files.exists(PRIOR,LinkOption.NOFOLLOW_LINKS))persistObserved(m,a);
       return new Pg407FailedRootRecovery(e,m,a,bytes);
     }
   }
@@ -179,13 +190,54 @@ public final class Pg407FailedRootRecovery {
       try(var r=s.executeQuery("select id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary from schubert.batch_runs order by id")) {
         while(r.next()) {
           var row=new ArrayList<Object>();for(int index=1;index<=14;index++)row.add(r.getObject(index));
-          if(!RUN.equals(row.get(1)) || row.get(6)==null || !Set.of("SUCCESS","SKIPPED").contains(row.get(7)))
+          if(!terminalRow(row))
             throw new IllegalStateException("complete same-run terminal rows required");
           result.add(Collections.unmodifiableList(row));
         }
       }
     }
     return List.copyOf(result);
+  }
+  static boolean terminalRow(List<Object> row) {
+    if(row==null || row.size()!=14 || !RUN.equals(row.get(1)))return false;
+    for(int index=0;index<12;index++)if(row.get(index)==null)return false;
+    return Set.of("SUCCESS","WARNING","FAILED","SKIPPED").contains(row.get(7));
+  }
+  static InspectorUnitSnapshot prior(String name,InspectorUnitSnapshot.Target target,String expectedHash) throws Exception {
+    var dir=Files.readAttributes(PRIOR,"unix:uid,gid,mode",LinkOption.NOFOLLOW_LINKS);
+    if(!Integer.valueOf(0).equals(dir.get("uid")) || !Integer.valueOf(0).equals(dir.get("gid"))
+        || !Integer.valueOf(0040700).equals(dir.get("mode")))throw new IllegalStateException("fixed prior private directory");
+    var p=PRIOR.resolve(name);
+    var before=Files.readAttributes(p,"unix:uid,gid,mode,nlink,size,dev,ino,ctime,lastModifiedTime",LinkOption.NOFOLLOW_LINKS);
+    if(!Integer.valueOf(0).equals(before.get("uid")) || !Integer.valueOf(0).equals(before.get("gid"))
+        || !Integer.valueOf(0100600).equals(before.get("mode")) || !Integer.valueOf(1).equals(before.get("nlink"))
+        || (Long)before.get("size")<1 || (Long)before.get("size")>2048)throw new IllegalStateException("fixed prior material");
+    var bytes=Files.readAllBytes(p);
+    if(!expectedHash.equals(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)))
+        || !before.equals(Files.readAttributes(p,"unix:uid,gid,mode,nlink,size,dev,ino,ctime,lastModifiedTime",LinkOption.NOFOLLOW_LINKS)))
+      throw new IllegalStateException("actual prior byte drift");
+    return InspectorUnitSnapshot.parse(bytes,target);
+  }
+  static void persistObserved(InspectorUnitSnapshot morning,InspectorUnitSnapshot api) throws Exception {
+    // This fixed PG406 recovery ordinarily imports the authentic pre-stop tool observation.
+    // A fresh caller may capture and preserve matching genuine manager bytes, never serialize
+    // claims into receipt evidence. Same fixed expected hashes remain independently required.
+    Files.createDirectory(PRIOR,java.nio.file.attribute.PosixFilePermissions.asFileAttribute(
+        java.nio.file.attribute.PosixFilePermissions.fromString("rwx------")));
+    for(var entry:Map.of("morning-before.properties",InspectorUnitSnapshot.Target.MORNING,
+        "api-before.properties",InspectorUnitSnapshot.Target.API).entrySet()) {
+      var process=new ProcessBuilder("/usr/bin/systemctl","show",entry.getValue().unit(),
+          "--property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID,InvocationID,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic,Result,Type,Restart,RemainAfterExit,KillMode,SendSIGKILL").start();
+      byte[] raw=process.getInputStream().readNBytes(2049);
+      if(!process.waitFor(5,java.util.concurrent.TimeUnit.SECONDS) || process.exitValue()!=0
+          || raw.length>2048 || !(entry.getValue()==InspectorUnitSnapshot.Target.MORNING ? morning : api)
+              .matches(InspectorUnitSnapshot.parse(raw,entry.getValue())))throw new IllegalStateException("capture changed");
+      var p=PRIOR.resolve(entry.getKey());Files.write(p,raw,StandardOpenOption.CREATE_NEW);
+      Files.setPosixFilePermissions(p,java.nio.file.attribute.PosixFilePermissions.fromString("rw-------"));
+      try(var channel=FileChannel.open(p,StandardOpenOption.READ)){channel.force(true);}
+      if(!Arrays.equals(raw,Files.readAllBytes(p)))throw new IllegalStateException("capture private readback");
+    }
+    Pg387TrustedDeployment.sync(PRIOR);Pg387TrustedDeployment.sync(PRIOR.getParent());
   }
   static Map<String,byte[]> captureBytes() throws Exception {
     try(var paths=Files.list(STARTUP)) {

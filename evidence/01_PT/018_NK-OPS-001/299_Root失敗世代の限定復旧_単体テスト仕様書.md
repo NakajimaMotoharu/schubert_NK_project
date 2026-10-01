@@ -1,5 +1,7 @@
 # NK-OPS-001 Root失敗世代の限定復旧 PT仕様
 
+PG408/SSC145補足: ROOTREC006は実捕捉した正常30の完全18propertyと、その後の完全GC cold・全kernel終端を別証拠として認証する。GC単独/部分GC/別target/未知/生存PID/Jobは拒否し、過去30を現在GCから生成しない。ROOTREC007は旧DBの14列を独立fixtureで確認し、SUCCESS/WARNING/FAILED/SKIPPEDの終端を全て保全、前12列null/RUNNING/未知/別run/列不足・過多を拒否する。運用工具77assertionはProduction PTへ加算しない。receiptはstop前にprivate force/readback/sync保存し、今回だけは実Tool観測2026-10-01T08:47:05.933Zを元byte/hashのまま再保全する。観測日と保存日を分離し、raw InvocationやDB内容はGitへ保存しない。
+
 対象: StartupPermitFiles/readRevoked、StartupLaunchFiles、BackupStartIntentFiles、InspectorUnitSnapshot、trusted配備 caller。RD OPS-009/SYS-002/004、UI251/253、SS342§4・343§6.15～17、SSC144。PG407、正式未認定。
 
 - ROOTREC001: INVALID同Epochの旧permit全byteから独立SHA-256を算出、派生ISSUEDへverifyする。実currentをISSUED化せず、通常readIssuedが拒否を維持する。正常/root metadata/欠落/別binding/改変/null/IO/closeを区別する。

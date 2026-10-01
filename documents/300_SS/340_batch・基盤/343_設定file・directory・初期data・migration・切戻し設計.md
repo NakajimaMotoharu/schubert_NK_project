@@ -591,6 +591,8 @@ SSC136/BUG391：intent退役後の原本owner/DB/credential closeとM内最後ro
 
 SSC144（PG407、実装前）：全停止したRoot正常30後の管理者復旧は旧処理の成功ではない。trusted operatorのM取得後・stop前に旧Morning/固定API又はWEBの真正18propertyと正常Code1/status30・実Invocation/start/endを保存する。A取得後、旧世代PID/start消滅と旧Morningを含む全kernel終端、boot/同run/cutoff/active/INVALID同Epoch、旧signed BOM/pinと全DB結果、raw permitのSHA/派生ISSUEDへの全byte照合、旧owner/launchの親子全bindingを再検証する。INVALIDから読む旧permit/owner/launchは相関資料だけでありRoot受理/起動権限ではない。候補署名/full BOM、旧原byteのprivate durable保存、全物理状態再照合の正常完了後だけ、保持した当回service intent→publication intentを型付き退役・sync・不存在再読する。旧処理close成功へ遡及せず、現在の所有解消を独立証明する。GC/部分cold/UNKNOWN/signal/timeout/別世代/残process/DB不通/IO/closeでは保全、旧done/SUCCESS/DB更新・任意unlinkは禁止。退役後にだけ既存fresh INVALIDの配備と通常明示同run resumeへ進み、新Invocationを旧receiptに混ぜない。PT299/300、SSC144/SS342§4・SS343§6.15～17。
 
+SSC145/BUG410：SSC144の旧18propertyはstop前に二読し、旧実観測日時/元Source・全byte hashとともにroot private領域へforce/sync/readback保存してから停止する。次再試行でも真正同boot/元同Source/同旧owner/launch/原本を再照合し、旧receiptを新Invocationへ流用しない。停止後はSSC135と同じ捕捉済normal30＋完全GC cold＋全kernel/旧PID消滅を限定受理する。GCだけからreceipt30を補完せず、部分cold/unknown/別Source・別世代は拒否。今回既に独立toolで得た全18propertyを後刻保存する場合は観測時刻と保存時刻/原観測根拠を区別し、合成fixtureや現在のcold値を旧実結果へ変換しない。過去全DBのFAILED/WARNINGは履歴として不変保存し、退役・起動成功へ変換しない。
+
 ## 7. 環境差分
 
 
