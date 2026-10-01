@@ -205,5 +205,10 @@ if int(identifier[2:5]) >= 417:
     manifest['ddl'].update({'versionedMigrations': 25,
         'appendOnly': 'V024 notification state; V025 immutable Question DLQ profile',
         'legacyDlq': 'migration refuses missing original metadata; no inferred repair'})
+if int(identifier[2:5]) >= 419:
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(437, 447))
+    manifest['ykt'].extend(['YKT-341', 'YKT-342', 'YKT-343'])
+    manifest['testIds'].extend(['ASUB001..007', 'OUTBOX001..004'])
+    manifest['limitations'].append('Question acceptance/owned Outbox exercised with real PostgreSQL18 and embedded Artemis; Worker/read/cancel/delete and third consumer not assembled')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
