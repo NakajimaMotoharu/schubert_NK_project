@@ -133,6 +133,11 @@ public final class MorningProcessMain {
                           begins,
                           backupCycle.completedReceipt());
                 } else throw new IOException("Actual Backup completion unavailable");
+                database.recheckConsistent(state.activation().run());
+                var previousBroker =
+                    dev.codex.schubert.nk.batch.platform.MorningPreviousBroker.capture(
+                        root, snapshot, budget, initialStop, original::verify);
+                database.recheckConsistent(state.activation().run());
                 var broker =
                     MorningBrokerExecution.execute(
                         root, snapshot, budget, state, database, epoch, original);
@@ -208,6 +213,14 @@ public final class MorningProcessMain {
                         actualDatabase.release(),
                         configurations.apiSha256(),
                         configurations.webSha256());
+                previousBroker.recheck();
+                var stopFrame =
+                    MorningGateEvidence.stop(
+                        epoch,
+                        snapshot.invocation(),
+                        broker.invocation(),
+                        initialStop,
+                        previousBroker);
                 release.recheckConfigurations(configurations);
                 startupRoots.recheck(actualRoots);
                 database.recheckPermitDatabase(actualDatabase, issuerOwner);

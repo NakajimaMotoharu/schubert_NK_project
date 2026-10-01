@@ -1,0 +1,296 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.*;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * NK-OPS-001 old closed generation, not a cold-success placeholder or startup authority. RD
+ * operational safety; UI operations; SS343 §6.17/SSC131/132; PT ISSSTOP001..007.
+ */
+@NullMarked
+public final class MorningPreviousBroker {
+  private static final int MAX = 4 * 1024 * 1024;
+
+  @FunctionalInterface
+  interface Query {
+    byte[] read(List<String> command, int limit, long remainingNanos) throws IOException;
+  }
+
+  public static final class Closed {
+    private final UUID boot;
+    private final String source;
+    private final String invocation;
+    private final Optional<BigInteger> nativeStart;
+    private final Optional<BigInteger> nativeEnd;
+    private final BigInteger upper;
+    private final BrokerJournalEvidence.Summary journal;
+    private final String contentSha256;
+    private final Query query;
+    private final MaintenanceOwnerFrame.Guard parent;
+    private final long thread = Thread.currentThread().threadId();
+
+    private Closed(
+        UUID boot,
+        String source,
+        String invocation,
+        Optional<BigInteger> nativeStart,
+        Optional<BigInteger> nativeEnd,
+        BigInteger upper,
+        BrokerJournalEvidence.Summary journal,
+        String contentSha256,
+        Query query,
+        MaintenanceOwnerFrame.Guard parent) {
+      this.boot = boot;
+      this.source = source;
+      this.invocation = invocation;
+      this.nativeStart = nativeStart;
+      this.nativeEnd = nativeEnd;
+      this.upper = upper;
+      this.journal = journal;
+      this.contentSha256 = contentSha256;
+      this.query = query;
+      this.parent = parent;
+    }
+
+    public UUID boot() {
+      return boot;
+    }
+
+    public String source() {
+      return source;
+    }
+
+    public String invocation() {
+      return invocation;
+    }
+
+    public Optional<BigInteger> nativeStart() {
+      return nativeStart;
+    }
+
+    public Optional<BigInteger> nativeEnd() {
+      return nativeEnd;
+    }
+
+    public BigInteger upper() {
+      return upper;
+    }
+
+    public BrokerJournalEvidence.Summary journal() {
+      return journal;
+    }
+
+    public String contentSha256() {
+      return contentSha256;
+    }
+
+    /** After fresh start, reread only the saved old generation, not the new latest anchor. */
+    public void recheck() throws IOException {
+      require(thread == Thread.currentThread().threadId());
+      parent.check();
+      byte[] bytes = read(query, full(boot, invocation), MAX, parent);
+      try {
+        var actual =
+            BrokerJournalEvidence.consumeStopped(
+                bytes, boot, invocation, nativeStart.orElse(BigInteger.ONE), upper);
+        if (nativeStart.isEmpty())
+          BrokerJournalEvidence.consume(bytes, boot, invocation, BigInteger.ONE);
+        require(
+            journal.entries() == actual.entries()
+                && contentSha256.equals(BrokerJournalEvidence.contentSha256(bytes)));
+        parent.check();
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
+    }
+
+    @Override
+    public String toString() {
+      return "PreviousBroker[actual=<redacted>]";
+    }
+  }
+
+  private MorningPreviousBroker() {}
+
+  public static Closed capture(
+      RootStartupContext root,
+      RootStartupContext.Snapshot expected,
+      MorningParentBudget budget,
+      MorningUnitTerminals.Snapshot initial,
+      MorningBrokerUnitCycle.ParentProof original)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(budget);
+    Objects.requireNonNull(initial);
+    Objects.requireNonNull(original);
+    require(
+        expected.service() == RootStartupContext.Service.MORNING
+            && expected.equals(initial.parent()));
+    var recorded =
+        initial.units().stream()
+            .filter(row -> row.manager().unit() == MaintenanceUnit.ARTEMIS)
+            .findFirst()
+            .orElseThrow(MorningPreviousBroker::unavailable);
+    var terminal = MaintenanceUnitTermination.create(root, expected, MaintenanceUnit.ARTEMIS);
+    MaintenanceOwnerFrame.Guard guard =
+        () -> {
+          budget.requireWithin();
+          root.recheck(expected);
+          original.verify();
+          return budget.remainingNanos();
+        };
+    guard.check();
+    require(
+        same(
+            recorded,
+            terminal.quiescentObservation().orElseThrow(MorningPreviousBroker::unavailable)));
+    var probe = InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.ARTEMIS);
+    var before = probe.read();
+    Query query =
+        InspectorUnitProbe.NativeReader.forTarget(InspectorUnitSnapshot.Target.ARTEMIS)
+            ::executeStreaming;
+    var result = collect(UUID.fromString(expected.boot()), before, query, guard);
+    require(before.matches(probe.read()));
+    require(
+        same(
+            recorded,
+            terminal.quiescentObservation().orElseThrow(MorningPreviousBroker::unavailable)));
+    guard.check();
+    return result;
+  }
+
+  static Closed collect(
+      UUID boot, InspectorUnitSnapshot previous, Query query, MaintenanceOwnerFrame.Guard parent)
+      throws IOException {
+    Objects.requireNonNull(boot);
+    Objects.requireNonNull(previous);
+    Objects.requireNonNull(query);
+    Objects.requireNonNull(parent);
+    parent.check();
+    require(previous.isTarget(InspectorUnitSnapshot.Target.ARTEMIS));
+    if (previous.brokerStoppedNormally()) {
+      String invocation = previous.invocationId().orElseThrow().toString().replace("-", "");
+      byte[] bytes = read(query, full(boot, invocation), MAX, parent);
+      try {
+        var actual =
+            BrokerJournalEvidence.consumeStopped(
+                bytes, boot, invocation, previous.executionStart(), previous.executionEnd());
+        parent.check();
+        return new Closed(
+            boot,
+            "NATIVE_TERMINAL",
+            invocation,
+            Optional.of(previous.executionStart()),
+            Optional.of(previous.executionEnd()),
+            previous.executionEnd(),
+            actual,
+            BrokerJournalEvidence.contentSha256(bytes),
+            query,
+            parent);
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
+    }
+    require(
+        previous.inactiveBaseline()
+            && previous.invocationId().isEmpty()
+            && previous.executionStart().signum() == 0
+            && previous.executionEnd().signum() == 0);
+    var latest = anchor(query, boot, false, parent);
+    var started = anchor(query, boot, true, parent);
+    require(
+        latest.invocation().equals(started.invocation())
+            && latest.monotonic().compareTo(started.monotonic()) >= 0);
+    byte[] bytes = read(query, full(boot, latest.invocation()), MAX, parent);
+    try {
+      var actual = BrokerJournalEvidence.consumeClosedHistory(bytes, boot, latest);
+      require(
+          latest.equals(anchor(query, boot, false, parent))
+              && started.equals(anchor(query, boot, true, parent)));
+      parent.check();
+      return new Closed(
+          boot,
+          "BOOT_JOURNAL",
+          latest.invocation(),
+          Optional.empty(),
+          Optional.empty(),
+          latest.monotonic(),
+          actual,
+          BrokerJournalEvidence.contentSha256(bytes),
+          query,
+          parent);
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  private static BrokerJournalEvidence.Anchor anchor(
+      Query query, UUID boot, boolean started, MaintenanceOwnerFrame.Guard parent)
+      throws IOException {
+    var command = new ArrayList<>(base(boot));
+    command.add("--reverse");
+    command.add("--lines=1");
+    if (started)
+      command.add(
+          "--grep=AMQ221001: Apache Artemis Message Broker version 2[.]56[.]0.*schubert-nk-broker");
+    byte[] bytes = read(query, List.copyOf(command), 65536, parent);
+    try {
+      return BrokerJournalEvidence.anchor(bytes, boot, started);
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  private static List<String> base(UUID boot) {
+    return List.of(
+        "/usr/bin/journalctl",
+        "--no-pager",
+        "--quiet",
+        "--all",
+        "--output=json",
+        "--output-fields=MESSAGE,PRIORITY,_SYSTEMD_INVOCATION_ID,_BOOT_ID,_SYSTEMD_UNIT",
+        "_SYSTEMD_UNIT=artemis.service",
+        "_BOOT_ID=" + boot.toString().replace("-", ""));
+  }
+
+  private static List<String> full(UUID boot, String invocation) {
+    var command = new ArrayList<>(base(boot));
+    command.add("_SYSTEMD_INVOCATION_ID=" + invocation);
+    return List.copyOf(command);
+  }
+
+  private static byte[] read(
+      Query query, List<String> command, int limit, MaintenanceOwnerFrame.Guard parent)
+      throws IOException {
+    byte[] bytes =
+        Objects.requireNonNull(
+            query.read(command, limit, parent.remainingNanos()), "owned previous journal bytes");
+    try {
+      require(bytes.length <= limit);
+      parent.check();
+      return bytes;
+    } catch (IOException | RuntimeException | Error failure) {
+      Arrays.fill(bytes, (byte) 0);
+      throw failure;
+    }
+  }
+
+  private static boolean same(
+      MaintenanceUnitTermination.Observation left, MaintenanceUnitTermination.Observation right) {
+    return left.manager().matches(right.manager())
+        && left.leafPresent() == right.leafPresent()
+        && left.directories().equals(right.directories());
+  }
+
+  private static void require(boolean ok) throws IOException {
+    if (!ok) throw unavailable();
+  }
+
+  private static IOException unavailable() {
+    return new IOException("Previous Broker unavailable");
+  }
+}

@@ -39,6 +39,109 @@ public final class BrokerJournalEvidence {
 
   private BrokerJournalEvidence() {}
 
+  /** SSC132 complete decoded content, independent of journalctl JSON object member order. */
+  static String contentSha256(byte[] bytes) throws IOException {
+    Objects.requireNonNull(bytes);
+    require(bytes.length > 0 && bytes.length <= MAX && bytes[bytes.length - 1] == '\n');
+    var canonical = new StringBuilder("NKJOURNAL1\n");
+    int ordinal = 0;
+    String text = decode(bytes);
+    for (String line : text.substring(0, text.length() - 1).split("\n", -1)) {
+      for (var entry : new TreeMap<>(fields(line)).entrySet()) {
+        byte[] encoded;
+        try {
+          var buffer =
+              StandardCharsets.UTF_8
+                  .newEncoder()
+                  .onMalformedInput(CodingErrorAction.REPORT)
+                  .onUnmappableCharacter(CodingErrorAction.REPORT)
+                  .encode(java.nio.CharBuffer.wrap(entry.getValue()));
+          encoded = new byte[buffer.remaining()];
+          buffer.get(encoded);
+        } catch (CharacterCodingException malformed) {
+          throw unavailable();
+        }
+        try {
+          canonical
+              .append("ROW|")
+              .append(ordinal)
+              .append('|')
+              .append(entry.getKey())
+              .append('|')
+              .append(HexFormat.of().formatHex(encoded))
+              .append('\n');
+        } finally {
+          Arrays.fill(encoded, (byte) 0);
+        }
+      }
+      ordinal++;
+    }
+    byte[] actual = canonical.toString().getBytes(StandardCharsets.US_ASCII);
+    try {
+      return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(actual));
+    } catch (NoSuchAlgorithmException known) {
+      throw unavailable();
+    } finally {
+      Arrays.fill(actual, (byte) 0);
+    }
+  }
+
+  /** SSC131 bounded metadata selector; raw journal fields never become public diagnostics. */
+  record Anchor(String invocation, BigInteger monotonic, String cursor, String contentSha256) {
+    @Override
+    public String toString() {
+      return "BrokerJournalAnchor[redacted]";
+    }
+  }
+
+  static Anchor anchor(byte[] bytes, UUID boot, boolean requireStarted) throws IOException {
+    Objects.requireNonNull(bytes);
+    Objects.requireNonNull(boot);
+    require(bytes.length > 0 && bytes.length <= 65536 && bytes[bytes.length - 1] == '\n');
+    String text = decode(bytes);
+    require(text.indexOf('\n') == text.length() - 1);
+    var fields = fields(text.substring(0, text.length() - 1));
+    require(boot.toString().replace("-", "").equals(fields.get("_BOOT_ID")));
+    require("artemis.service".equals(fields.get("_SYSTEMD_UNIT")));
+    String invocation = Objects.requireNonNull(fields.get("_SYSTEMD_INVOCATION_ID"));
+    require(invocation.matches("[0-9a-f]{32}") && !invocation.equals("0".repeat(32)));
+    String mono = Objects.requireNonNull(fields.get("__MONOTONIC_TIMESTAMP"));
+    require(mono.matches("[1-9][0-9]{0,19}"));
+    require(Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches("[1-9][0-9]{0,19}"));
+    String cursor = Objects.requireNonNull(fields.get("__CURSOR"));
+    require(!cursor.isEmpty());
+    String message = Objects.requireNonNull(fields.get("MESSAGE"));
+    require(Objects.requireNonNull(fields.get("PRIORITY")).matches("[4-7]"));
+    require(!message.contains("AMQ224") && !message.matches("(?s).*\\b(ERROR|FATAL)\\b.*"));
+    if (requireStarted)
+      require(
+          message.contains("AMQ221001: Apache Artemis Message Broker version 2.56.0")
+              && message.contains("schubert-nk-broker"));
+    return new Anchor(invocation, new BigInteger(mono), cursor, contentSha256(bytes));
+  }
+
+  static Summary consumeClosedHistory(byte[] bytes, UUID boot, Anchor latest) throws IOException {
+    Objects.requireNonNull(latest);
+    // There is no retained native ExecStart for a GC'd Unit. Check actual positive journal times,
+    // not a fabricated native timestamp; the upper bound is the actual latest entry.
+    var result =
+        consume(bytes, boot, latest.invocation(), BigInteger.ONE, Optional.of(latest.monotonic()));
+    consume(bytes, boot, latest.invocation(), BigInteger.ONE, Optional.empty());
+    String text = decode(bytes);
+    String lastLine = text.substring(0, text.length() - 1).split("\n", -1)[result.entries() - 1];
+    var last = fields(lastLine);
+    require(
+        latest.cursor().equals(last.get("__CURSOR"))
+            && latest.monotonic().toString().equals(last.get("__MONOTONIC_TIMESTAMP")));
+    byte[] lastBytes = (lastLine + "\n").getBytes(StandardCharsets.UTF_8);
+    try {
+      require(latest.contentSha256().equals(contentSha256(lastBytes)));
+    } finally {
+      Arrays.fill(lastBytes, (byte) 0);
+    }
+    return result;
+  }
+
   public static Summary inspect(
       MorningBrokerUnitCycle.Live actual, UUID boot, MaintenanceOwnerFrame.Guard parent)
       throws IOException {
@@ -129,38 +232,12 @@ public final class BrokerJournalEvidence {
     Objects.requireNonNull(invocation);
     Objects.requireNonNull(began);
     require(bytes.length > 0 && bytes.length <= MAX && bytes[bytes.length - 1] == '\n');
-    String text;
-    try {
-      text =
-          StandardCharsets.UTF_8
-              .newDecoder()
-              .onMalformedInput(CodingErrorAction.REPORT)
-              .onUnmappableCharacter(CodingErrorAction.REPORT)
-              .decode(java.nio.ByteBuffer.wrap(bytes))
-              .toString();
-    } catch (CharacterCodingException known) {
-      throw unavailable();
-    }
+    String text = decode(bytes);
     boolean nio = false, active = false, started = false, stopped = false;
     int count = 0;
     var cursors = new HashSet<String>();
     for (String line : text.substring(0, text.length() - 1).split("\n", -1)) {
-      var fields = new HashMap<String, String>();
-      try (var reader = new JsonReader(new StringReader(line))) {
-        reader.setStrictness(Strictness.STRICT);
-        reader.beginObject();
-        while (reader.hasNext()) {
-          String key = reader.nextName();
-          require(REQUIRED.contains(key) || OPTIONAL.contains(key));
-          require(reader.peek() == JsonToken.STRING);
-          require(fields.putIfAbsent(key, reader.nextString()) == null);
-        }
-        reader.endObject();
-        require(reader.peek() == JsonToken.END_DOCUMENT);
-      } catch (IllegalStateException known) {
-        throw unavailable();
-      }
-      require(fields.keySet().containsAll(REQUIRED));
+      var fields = fields(line);
       require(
           boot.toString().replace("-", "").equals(fields.get("_BOOT_ID"))
               && invocation.equals(fields.get("_SYSTEMD_INVOCATION_ID"))
@@ -199,6 +276,39 @@ public final class BrokerJournalEvidence {
 
   private static void require(boolean accepted) throws IOException {
     if (!accepted) throw unavailable();
+  }
+
+  private static String decode(byte[] bytes) throws IOException {
+    try {
+      return StandardCharsets.UTF_8
+          .newDecoder()
+          .onMalformedInput(CodingErrorAction.REPORT)
+          .onUnmappableCharacter(CodingErrorAction.REPORT)
+          .decode(java.nio.ByteBuffer.wrap(bytes))
+          .toString();
+    } catch (CharacterCodingException known) {
+      throw unavailable();
+    }
+  }
+
+  private static Map<String, String> fields(String line) throws IOException {
+    var fields = new HashMap<String, String>();
+    try (var reader = new JsonReader(new StringReader(line))) {
+      reader.setStrictness(Strictness.STRICT);
+      reader.beginObject();
+      while (reader.hasNext()) {
+        String key = reader.nextName();
+        require(REQUIRED.contains(key) || OPTIONAL.contains(key));
+        require(reader.peek() == JsonToken.STRING);
+        require(fields.putIfAbsent(key, reader.nextString()) == null);
+      }
+      reader.endObject();
+      require(reader.peek() == JsonToken.END_DOCUMENT);
+    } catch (IllegalStateException known) {
+      throw unavailable();
+    }
+    require(fields.keySet().containsAll(REQUIRED));
+    return fields;
   }
 
   private static IOException unavailable() {

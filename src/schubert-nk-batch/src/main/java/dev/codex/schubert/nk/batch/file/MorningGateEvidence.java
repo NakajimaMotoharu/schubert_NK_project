@@ -3,6 +3,9 @@ package dev.codex.schubert.nk.batch.file;
 import dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient;
 import dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation;
 import dev.codex.schubert.nk.batch.platform.BrokerJournalEvidence;
+import dev.codex.schubert.nk.batch.platform.MaintenanceUnit;
+import dev.codex.schubert.nk.batch.platform.MorningPreviousBroker;
+import dev.codex.schubert.nk.batch.platform.MorningUnitTerminals;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import java.io.IOException;
@@ -18,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
  * caller separately owns M/A/original/current/deadline and rechecks every live observation.
  */
 @NullMarked
-final class MorningGateEvidence {
+public final class MorningGateEvidence {
   private static final List<String> ADDRESSES =
       List.of(
           "nk.sync.request",
@@ -207,6 +210,97 @@ final class MorningGateEvidence {
       List.of("osId", "osVersion", "architecture", "javaFeature", "jdkVendor", "jdkVersion");
 
   private MorningGateEvidence() {}
+
+  /** SSC131 pure formatter over actual snapshots; this method confers no issuer authority. */
+  public static byte[] stop(
+      StartupPermitRecords.Epoch epoch,
+      String morning,
+      String broker,
+      MorningUnitTerminals.Snapshot initial,
+      MorningPreviousBroker.Closed old)
+      throws IOException {
+    Objects.requireNonNull(epoch);
+    Objects.requireNonNull(initial);
+    Objects.requireNonNull(old);
+    // Snapshot and Closed have private constructors and validated immutable shapes. Do not
+    // duplicate impossible shape checks here; factory negative tests own those invariants.
+    require(
+        initial.parent().boot().equals(epoch.boot().toString())
+            && old.boot().equals(epoch.boot())
+            && initial.parent().invocation().equals(morning));
+    var text = header("NKSTOP1", epoch, morning, broker);
+    var properties =
+        List.of(
+            "Id",
+            "LoadState",
+            "ActiveState",
+            "SubState",
+            "Job",
+            "MainPID",
+            "ControlPID",
+            "Slice",
+            "Delegate",
+            "ControlGroup",
+            "InvocationID",
+            "StateChangeTimestampMonotonic");
+    var units = MaintenanceUnit.values();
+    for (int index = 0; index < units.length; index++) {
+      var row = initial.units().get(index);
+      var values = row.manager().observedValues();
+      for (int field = 0; field < properties.size(); field++) {
+        var value = values.get(field);
+        text.append("UNIT|")
+            .append(units[index].serviceName())
+            .append('|')
+            .append(properties.get(field))
+            .append('|')
+            .append(value.isEmpty() ? "" : hex(value))
+            .append('\n');
+      }
+      text.append("LEAF|")
+          .append(units[index].serviceName())
+          .append('|')
+          .append(bit(row.leafPresent()))
+          .append('\n');
+      for (int segment = 0; segment < row.directories().size(); segment++) {
+        var actual = row.directories().get(segment);
+        text.append("KERNEL|")
+            .append(units[index].serviceName())
+            .append('|')
+            .append(segment)
+            .append('|')
+            .append(actual.mode())
+            .append('|')
+            .append(actual.uid())
+            .append('|')
+            .append(actual.gid())
+            .append('|')
+            .append(actual.device())
+            .append('|')
+            .append(actual.inode())
+            .append('\n');
+      }
+    }
+    require(!old.invocation().equals(broker));
+    text.append("CLEAN|")
+        .append(old.source())
+        .append('|')
+        .append(old.invocation())
+        .append('|')
+        .append(old.nativeStart().map(Object::toString).orElse("-"))
+        .append('|')
+        .append(old.nativeEnd().map(Object::toString).orElse("-"))
+        .append('|')
+        .append(old.upper())
+        .append('|')
+        .append(old.journal().entries())
+        .append('|')
+        .append(hash(old.journal().sha256()))
+        .append('|')
+        .append(hash(old.contentSha256()))
+        .append('\n');
+    return bytes(text);
+  }
 
   static byte[] postgres(
       StartupPermitRecords.Epoch epoch,

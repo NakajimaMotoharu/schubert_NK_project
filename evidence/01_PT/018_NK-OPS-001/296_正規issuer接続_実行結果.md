@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 09:10 PG401 STOP_SET / journal順序差の直接再試験（全/native未認定）
+
+SSC131/132・BUG386/YKT306。pg401-stop-canonical-selected.log：Storage16/Bootstrap4/Batch32=52PT、F/E/S各0、SpotBugs3module 0、09:02:33終了。ISSSTOP001..007は8Unit固定12field/5～6kernel属性、BOOT/NATIVE旧journal、raw/content二hashの4独立golden、null/binding/foreign/ERROR/未知Throwable/JSON順序差と内容差を検証。rawは最初の実byte根拠を維持し、全field・全row順のcanonical SHAで再読同一性を検証する。実journal二読208entry/133516byteのobject同値・raw異byteはwork/pgpt-runs/PG379/pg401-journal-byte-order-repro.jsonにmetadataのみ保存。BROKER fresh raw digestは観測snapshotであり旧世代恒久一致要求と別、release/設定/原本/permit厳密byte契約は不変更。全6回帰/同byte native STOP_SET到達/100%/正式認定は未実施で合格に加算しない。
+
 ## 08:31 PG400 同原本実三gate帰還（5gate/issuer未完）
 
 Sourcebb003f2b8、全6 2670PT/FES0/static6zero、full fa25fe6633276476437f46d98d130c8b06ba045926fbed80e032b24646fc0e82。signed178artifact/61deps/23SQL/fca81afc…をM/A/全停止/署名/BOM/hostRO/元原本保全下で配備、外部Morning一度。旧82行全14列不変、新Backup16二SKIP/Cleanup8七SKIP/Expiry4一SKIP=92、真正worker0/全kernel終端・Broker同生generation・全Ops/journal二度＋末段再読・6root・実ownedDB/BOM/runtimeからPOSTGRES/RELEASE_BOM/BROKER_OPS encoder全正常line（58/58・38/38・51/51）を実行しMain214帰還。原本BEGIN/current INVALID/permit0・namespace空を保持。三byteをnativeでemit/issuedした証拠ではなく、同byteの実到達とhost独立goldenを区別する。native f37de3a1118f6b3ab57e8590154d36a566a54bfca7be763631bea409fefddcb0、4role fresh時刻検査/classMismatch0、union664B/1155L/202M/11C、ownhost比123/1145/205/20解消。BUG385直接再試験成功、BUG384全runtime出力/signed deployment成功。402新XML/manifestのclosed構造/秘密pattern検査0、全project秘密gate未認定。全5gate/retention/tenstep/正規issue/Ahandoff/APIWeb/CHR/100%は456/460の同WIP残件、正式run24/48.3%据置。旧PG399不合格47ed8f64…は変更しない。再現toolはtools/quality/vm/050_s1/pg400_*、raw native exec/Unit/journal/DB/秘密材料はWork privateだけ。

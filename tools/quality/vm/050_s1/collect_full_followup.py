@@ -115,5 +115,11 @@ if int(identifier[2:5]) >= 400:
     manifest['ykt'].extend(['YKT-304', 'YKT-305'])
     manifest['testIds'].append('ISSBROKER005')
     manifest['command'] += ' outputFile=target/runtime-dependencies.txt appendOutput=false'
+if int(identifier[2:5]) >= 401:
+    manifest['ssc'].extend(['SSC-131', 'SSC-132'])
+    manifest['bugs'].append('BUG-386')
+    manifest['ykt'].append('YKT-306')
+    manifest['testIds'].append('ISSSTOP001..007')
+    manifest['limitations'] = ['same-source actual STOP_SET and journal-content reread pending', 'retention/ten steps/full proof/publication/A handoff/API/Web/CHR incomplete', 'native negatives/hard-timeout and coverage100 pending', 'formal PT-WEB-20260925-24 unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
