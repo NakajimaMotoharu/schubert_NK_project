@@ -21,3 +21,6 @@ YKT337横展開の分類（PG415v2のBUG430修正前）：実24version履歴／2
 - PG415初回：実V023 legacy→V024不整合拒否／DDL・data・history rollback、正常upgrade／再実行0／旧23checksums・V003hash保持、全5state CHECKは成功。新permissions SQL boolのraw t/true投影混同と独立file名allowlist024欠落でAPI29中2F（BUG428429/YKT337338先行）。typed/text契約と批准されたliteral24inventoryを是正して選択v2→全6cleanへ進む。原本VM旧Source32c/23SQLは更新していない。
 
 環境：Linux/JDK25.0.4/Maven3.9.12/Node24.19.0、offline M2、実PG18/Artemis2.56.0の隔離fixture。原本command/終了code/logはWork `pg414-selected-v*.log`／`pg415-selected*.log`。全回帰前にSource/tests/config/tools固定し、既存collectorでsanitized JUnit／manifest／module coverage／hashを追加する。実credential/context/token/DBdump/provider rawログをGitへ入れない。
+# PG418 fresh契約再検証（2026-10-02 00:01:46 JST）
+
+Source531409a28c80b11aef94f67320c298de592f881d、dev-foundation。`clean test-compile jar:test-jar test spotbugs:check jacoco:report`、4 module選択66PT（Protocol7/Storage9/Bootstrap7/API43）、F/E/S0、静的4zero、exit0。Workログ `PG379/pg418-contract-fresh.log`。変更API9class（DeliveryMetadata、InternalEventProcessor、TransactedEventListener、SyncRequestListener、OutboxDlqMetadata、OutboxEntry、OutboxRequest、JdbcOutboxRepository、OutboxJmsSender）B/L/M/C全0を空から採取したexec/XMLで確認。部分選択であり全scope同source正式受入/業務worker完成を主張しない。旧PG417 full execはWork pg417-host/classesへ凍結済、混合しない。

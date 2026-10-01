@@ -1,4 +1,8 @@
-# NK-QST-001 受付・再送・Worker PT（実装前・未実行）
+# NK-QST-001 受付・再送・Worker PT（受付実装・直接PT中、Worker等未実行）
+
+2026-10-02実装対応：`QuestionSubmissionService.process/transaction/create/insertQuestion/read/proof`がASUB001～006を実装、`OwnedOutboxDispatcher.start/wake/run/close`が専用寿命を所有する。PG419 v6は4module選択29PT/FES0/static4zero、実Artemis persistent送信・元W/correlation M0/独立320byte・再送0200・SQLµs/電文msを確認。line/method/branchは残りあり、実API全31登録・Worker/普通起動・正式品質は未認定。実績は006へ集約する。
+
+OUTBOX001～004は実worker threadのDB open境界で一時SQL/Runtime、Error固定stderr/health失敗、interrupt/自己join拒否、inflight join・close後wake拒否・null/不正ownerを検証する。JMS未開始の負境界はDB claim未成功のためJMS openがないことをassertする。ASUB001で本物DB→JMS positiveを補完し、fake SENTのSQL-only proof fixtureを実MQ送信証明と混同しない。
 
 S3/D04/05の既存24＋質問関連7を実31processorへ結線する同一WIP。RD QST001～003/ASY001～009/AUT/MQ006～010、UI213/224/232/236/241/242、SS312§7～10/321/323/324/331/332/351/352、SSC151～155。ProductionのQuestionSubmitRequest/ReceiptIdGenerator、認証、JdbcInboxCoordinator、NKREF1、既存Outbox/typed protocolを再使用し、保守専用QuestionMutationInboxInspectorは業務/replayへ呼ばない。
 
