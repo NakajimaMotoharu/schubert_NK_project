@@ -1,5 +1,7 @@
 # Security・credential・監査実装設計
 
+SSC157（2026-10-02）：未実装QSS/QSD新writer限定の取得scope frame `NKQRY1` を追加する。暗号平文offset0～6はhex `4e4b5152593100`、offset7はUSER=`55`/ADMIN=`41`、offset8以降は従来fixed response wireをそのまま置く。成功と確定error双方、scopeは取得時roleで固定する。外部fixed wire/error filler/NONE、NKENC1暗号外側・AAD message/layout/version/owner、鍵/圧縮/保持期限は変更しない。既存認証・Scenario/Media/User/Log・更新NKREF1とNTS/NTDの平文profileは完全不変。保守は新frameをQSSRSP01/QSDRSP01/version001にだけ許容し、scope字節/短縮/別layout/固定wire/相関/保存codeを独立検査、既存rawの保守検査も維持する。通常replayは無scopeを拒否し、scope=ADMINからUSERへの降格では元保存を変更せずQSS0103/QSD0104を非保存で返す。User→Adminは元の狭いsnapshotのみ返す。平文frame/wireの一時owned bufferはfinally zero-fill、scopeや本文をraw logへ出さない。SS324§6/12.8・SSC157/013001/014001、内部frame golden・独立JCE・旧profile非回帰で検証する。
+
 SSC056/PG160（先行8002b28b・3cf06b00、BUG167/YKT128）: session期限・revoke・認証retry・監査・Inbox/OutboxのDB時刻を332のJDBC4.2 UTC境界へ統一する。歴史暦ずれで期限/参照一致/署名に使うInstantを変えない。NULL/不正/範囲外は既存error契約を維持し、日時補完・許容年縮小・保存暗号/Current期待値の変更をしない。SQL原本と独立epoch/vectorで両方向を照合し、raw session/token/秘密を診断へ出さない。
 
 ## 1. 目的・追跡
