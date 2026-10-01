@@ -589,6 +589,8 @@ SSC136所有scope補足：監督ownerは同原本continuation内・A取得前に
 
 SSC136/BUG391：intent退役後の原本owner/DB/credential closeとM内最後root検査も、同M callbackの当回abort専用監督で保護する。scope外からDB/原本証明を再利用せず、保存した同attempt invalid/permitとfresh固定namespaceだけでquarantine・厳密失効/readbackを行う。既に失効監督を完了した経路へ二重復旧を行わない。M自身の最終close不明とRootの正常S3 launch束縛は別gateであり、この監督だけでRoot起動受入にしない。
 
+SSC144（PG407、実装前）：全停止したRoot正常30後の管理者復旧は旧処理の成功ではない。trusted operatorのM取得後・stop前に旧Morning/固定API又はWEBの真正18propertyと正常Code1/status30・実Invocation/start/endを保存する。A取得後、旧世代PID/start消滅と旧Morningを含む全kernel終端、boot/同run/cutoff/active/INVALID同Epoch、旧signed BOM/pinと全DB結果、raw permitのSHA/派生ISSUEDへの全byte照合、旧owner/launchの親子全bindingを再検証する。INVALIDから読む旧permit/owner/launchは相関資料だけでありRoot受理/起動権限ではない。候補署名/full BOM、旧原byteのprivate durable保存、全物理状態再照合の正常完了後だけ、保持した当回service intent→publication intentを型付き退役・sync・不存在再読する。旧処理close成功へ遡及せず、現在の所有解消を独立証明する。GC/部分cold/UNKNOWN/signal/timeout/別世代/残process/DB不通/IO/closeでは保全、旧done/SUCCESS/DB更新・任意unlinkは禁止。退役後にだけ既存fresh INVALIDの配備と通常明示同run resumeへ進み、新Invocationを旧receiptに混ぜない。PT299/300、SSC144/SS342§4・SS343§6.15～17。
+
 ## 7. 環境差分
 
 

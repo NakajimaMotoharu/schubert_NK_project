@@ -155,5 +155,16 @@ if int(identifier[2:5]) >= 406:
         'FAILED cleanup classification BUG392, UNKNOWN/hard-timeout/native negative closure pending',
         '100% coverage and formal PT-WEB-20260925-24 unchanged',
     ]
+if int(identifier[2:5]) >= 407:
+    manifest['ssc'].extend(['SSC-143', 'SSC-144'])
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(403, 409))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(323, 327))
+    manifest['testIds'].extend(['ROOTSELECTOR001', 'ROOTREC001..005'])
+    manifest['limitations'] = [
+        'same-source native strict failed-generation recovery and Root selector admission pending',
+        'API/Web ordinary ready, completed Morning receipt, CHR-A01/L01 pending',
+        'FAILED cleanup classification BUG392, UNKNOWN/hard-timeout/native negative closure pending',
+        '100% coverage and formal PT-WEB-20260925-24 unchanged',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

@@ -104,58 +104,110 @@ final class RootServiceExecutableAdmission {
   private static void verifyJava(OwnedTransferDirectory bin, LinuxInodeSecurity security)
       throws IOException {
     Path target = Path.of(TARGET);
+    Path firstTarget = Path.of("/etc/alternatives/java");
+    Path etcPath = Path.of("/etc");
     Path optPath = Path.of("/opt");
     bin.atExistingEntryHandle(
         "java",
         link -> {
           var before = checked(link, 0120777, security);
-          require(target.equals(bin.atDirectory(p -> Files.readSymbolicLink(p.resolve("java")))));
-          var opt = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath);
+          requireSelector(bin, before, firstTarget, security);
+          var etc = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), etcPath);
           ResourceScope.use(
-              opt::close,
+              etc::close,
               () -> {
-                var optBefore = opt.atDirectory(p -> checked(p, 040755, security));
-                var jdk = opt.openExistingChild("jdk-25.0.4");
+                var etcBefore = etc.atDirectory(p -> checked(p, 040755, security));
+                var alternatives = etc.openExistingChild("alternatives");
                 ResourceScope.use(
-                    jdk::close,
+                    alternatives::close,
                     () -> {
-                      var jdkBefore = jdk.atDirectory(p -> checked(p, 040755, security));
-                      var javaBin = jdk.openExistingChild("bin");
-                      ResourceScope.use(
-                          javaBin::close,
-                          () -> {
-                            var binBefore = javaBin.atDirectory(p -> checked(p, 040755, security));
-                            javaBin.atExistingEntryHandle(
-                                "java",
-                                held -> {
-                                  var admitted =
-                                      admit(
-                                          held,
-                                          JAVA,
-                                          security,
-                                          security::requireNoFileCapabilities);
-                                  javaBin.atExistingEntryHandle(
-                                      "java",
-                                      reopened -> {
+                      var alternativesBefore =
+                          alternatives.atDirectory(p -> checked(p, 040755, security));
+                      alternatives.atExistingEntryHandle(
+                          "java",
+                          alternative -> {
+                            var alternateBefore = checked(alternative, 0120777, security);
+                            requireSelector(alternatives, alternateBefore, target, security);
+                            var opt =
+                                OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath);
+                            ResourceScope.use(
+                                opt::close,
+                                () -> {
+                                  var optBefore =
+                                      opt.atDirectory(p -> checked(p, 040755, security));
+                                  var jdk = opt.openExistingChild("jdk-25.0.4");
+                                  ResourceScope.use(
+                                      jdk::close,
+                                      () -> {
+                                        var jdkBefore =
+                                            jdk.atDirectory(p -> checked(p, 040755, security));
+                                        var javaBin = jdk.openExistingChild("bin");
+                                        ResourceScope.use(
+                                            javaBin::close,
+                                            () -> {
+                                              var binBefore =
+                                                  javaBin.atDirectory(
+                                                      p -> checked(p, 040755, security));
+                                              javaBin.atExistingEntryHandle(
+                                                  "java",
+                                                  held -> {
+                                                    var admitted =
+                                                        admit(
+                                                            held,
+                                                            JAVA,
+                                                            security,
+                                                            security::requireNoFileCapabilities);
+                                                    javaBin.atExistingEntryHandle(
+                                                        "java",
+                                                        reopened -> {
+                                                          require(
+                                                              admitted.equals(
+                                                                  checked(
+                                                                      reopened, 0100755,
+                                                                      security)));
+                                                          return Boolean.TRUE;
+                                                        });
+                                                    return Boolean.TRUE;
+                                                  });
+                                              require(
+                                                  binBefore.equals(
+                                                      javaBin.atDirectory(
+                                                          p -> checked(p, 040755, security))));
+                                              return Boolean.TRUE;
+                                            });
                                         require(
-                                            admitted.equals(checked(reopened, 0100755, security)));
+                                            jdkBefore.equals(
+                                                jdk.atDirectory(
+                                                    p -> checked(p, 040755, security))));
                                         return Boolean.TRUE;
                                       });
+                                  require(
+                                      optBefore.equals(
+                                          opt.atDirectory(p -> checked(p, 040755, security))));
                                   return Boolean.TRUE;
                                 });
                             require(
-                                binBefore.equals(
-                                    javaBin.atDirectory(p -> checked(p, 040755, security))));
+                                alternateBefore.equals(checked(alternative, 0120777, security)));
+                            requireSelector(alternatives, alternateBefore, target, security);
+                            alternatives.atExistingEntryHandle(
+                                "java",
+                                reopened -> {
+                                  require(
+                                      alternateBefore.equals(checked(reopened, 0120777, security)));
+                                  return Boolean.TRUE;
+                                });
                             return Boolean.TRUE;
                           });
-                      require(jdkBefore.equals(jdk.atDirectory(p -> checked(p, 040755, security))));
+                      require(
+                          alternativesBefore.equals(
+                              alternatives.atDirectory(p -> checked(p, 040755, security))));
                       return Boolean.TRUE;
                     });
-                require(optBefore.equals(opt.atDirectory(p -> checked(p, 040755, security))));
+                require(etcBefore.equals(etc.atDirectory(p -> checked(p, 040755, security))));
                 return Boolean.TRUE;
               });
           require(before.equals(checked(link, 0120777, security)));
-          require(target.equals(bin.atDirectory(p -> Files.readSymbolicLink(p.resolve("java")))));
+          requireSelector(bin, before, firstTarget, security);
           bin.atExistingEntryHandle(
               "java",
               reopened -> {
@@ -164,6 +216,33 @@ final class RootServiceExecutableAdmission {
               });
           return Boolean.TRUE;
         });
+  }
+
+  /** SSC143: same fixed named Java link and retained link inode; no arbitrary chain. */
+  private static void requireSelector(
+      OwnedTransferDirectory parent,
+      Map<String, Object> held,
+      Path expected,
+      InodeSecurityCalls security)
+      throws IOException {
+    parent.atDirectory(
+        p -> {
+          Path name = p.resolve("java");
+          var named =
+              Files.readAttributes(
+                  name,
+                  "unix:uid,gid,mode,nlink,dev,ino,size,lastModifiedTime,ctime",
+                  LinkOption.NOFOLLOW_LINKS);
+          require(held.equals(checkedAttributes(name, 0120777, named, security)));
+          requireSelectorTarget(expected, Files.readSymbolicLink(name));
+          return Boolean.TRUE;
+        });
+  }
+
+  static void requireSelectorTarget(Path expected, Path actual) throws IOException {
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(actual);
+    require(expected.equals(actual));
   }
 
   static Map<String, Object> checked(Path held, int mode, InodeSecurityCalls security)

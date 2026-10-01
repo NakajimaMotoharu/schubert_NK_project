@@ -230,6 +230,30 @@ public final class StartupPermitFiles {
     throw unavailable();
   }
 
+  /** SSC144: correlation only under trusted M/A, never an admission from INVALID. */
+  record Revoked(Epoch formerIssued, Permit permit) {}
+
+  Revoked readRevoked(Epoch expected) throws StorageIoException {
+    Objects.requireNonNull(expected);
+    synchronized (stateLock) {
+      byte[] bytes = new byte[0];
+      try {
+        var before = begin();
+        require(expected.state() == State.INVALID && expected.equals(current(before)));
+        bytes = read(expected.epoch() + ".permit", before);
+        var former = expected.issued(HexFormat.of().formatHex(io.digest().digest(bytes)));
+        var permit = StartupPermitRecords.verifyIssued(former, bytes);
+        require(expected.equals(current(before)));
+        finish(before);
+        return new Revoked(former, permit);
+      } catch (IOException | NoSuchAlgorithmException failure) {
+        throw unavailable();
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
+    }
+  }
+
   private Permit readIssuedAt(Snapshot directory) throws IOException {
     Epoch before = current(directory);
     require(before.state() == State.ISSUED);

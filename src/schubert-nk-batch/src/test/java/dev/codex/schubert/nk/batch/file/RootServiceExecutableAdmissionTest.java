@@ -13,6 +13,33 @@ import org.junit.jupiter.api.Test;
 
 /** ROOTELF001..006: independent public ELF literal/hash/typed metadata, no native authority. */
 final class RootServiceExecutableAdmissionTest {
+  @Test
+  void exactIndependentAlternativesTargetsAndNoRelativeOrExtraChain() throws Exception {
+    for (String literal : List.of("/etc/alternatives/java", "/opt/jdk-25.0.4/bin/java")) {
+      Path expected = Path.of(literal);
+      RootServiceExecutableAdmission.requireSelectorTarget(expected, Path.of(literal));
+      for (String wrong :
+          List.of(
+              "java",
+              "../java",
+              "/etc/alternatives/other",
+              "/opt/other/bin/java",
+              literal + ".part")) {
+        assertThrows(
+            IOException.class,
+            () -> RootServiceExecutableAdmission.requireSelectorTarget(expected, Path.of(wrong)));
+      }
+      assertThrows(
+          NullPointerException.class,
+          () -> RootServiceExecutableAdmission.requireSelectorTarget(expected, null));
+    }
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            RootServiceExecutableAdmission.requireSelectorTarget(
+                null, Path.of("/etc/alternatives/java")));
+  }
+
   static byte[] elf() {
     byte[] bytes = new byte[64];
     byte[] prefix = {127, 69, 76, 70, 2, 1, 1};

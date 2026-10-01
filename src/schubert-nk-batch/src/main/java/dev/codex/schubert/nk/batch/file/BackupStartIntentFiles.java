@@ -244,6 +244,20 @@ public final class BackupStartIntentFiles implements AutoCloseable {
     }
   }
 
+  /** SSC144 package-only strict capture. Caller proves failed generation before retirement. */
+  Intent observeQuarantine() throws IOException {
+    synchronized (lock) {
+      require(!begun);
+      gate.verify();
+      var directory = directory();
+      var captured = root.atExistingEntryHandle(name, p -> file(p, directory));
+      require(directory.sameIdentity(directory()));
+      gate.verify();
+      begun = true;
+      return new Intent(this, captured);
+    }
+  }
+
   /**
    * Only the enclosing verified parent may call this after fresh worker receipt, explicit stop,
    * whole-Unit termination and same-original verification. Failure is never repaired in place.

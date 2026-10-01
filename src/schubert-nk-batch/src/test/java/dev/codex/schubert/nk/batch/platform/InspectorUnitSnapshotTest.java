@@ -17,6 +17,71 @@ final class InspectorUnitSnapshotTest {
   static final UUID ID = UUID.fromString("12345678-9abc-def0-8123-456789abcdef");
 
   @Test
+  void rootrec002KnownThirtyIsDataNotSuccessfulReceiptAndUnknownNeverReconciles() {
+    for (var target :
+        List.of(
+            InspectorUnitSnapshot.Target.MORNING,
+            InspectorUnitSnapshot.Target.API,
+            InspectorUnitSnapshot.Target.WEB)) {
+      String text =
+          GOLDEN
+              .replace(InspectorUnitSnapshot.UNIT, target.unit())
+              .replace("ActiveState=active", "ActiveState=failed")
+              .replace("SubState=exited", "SubState=failed")
+              .replace("Result=success", "Result=exit-code")
+              .replace("ExecMainStatus=10", "ExecMainStatus=30");
+      if (target != InspectorUnitSnapshot.Target.MORNING)
+        text =
+            text.replace("Type=oneshot", "Type=simple").replace("Restart=no", "Restart=on-failure");
+      var before = InspectorUnitSnapshot.parse(text.getBytes(StandardCharsets.US_ASCII), target);
+      assertTrue(before.failedRootGeneration("123456789abcdef08123456789abcdef"));
+      assertTrue(before.receiptAfter(Optional.empty()).isEmpty());
+      assertTrue(before.failedRootStillStoppedAfter(before));
+      var stopped =
+          InspectorUnitSnapshot.parse(
+              text.replace("ActiveState=failed", "ActiveState=inactive")
+                  .replace("SubState=failed", "SubState=dead")
+                  .replace("Result=exit-code", "Result=success")
+                  .getBytes(StandardCharsets.US_ASCII),
+              target);
+      assertTrue(stopped.failedRootStillStoppedAfter(before));
+      assertFalse(stopped.failedRootGeneration("123456789abcdef08123456789abcdef"));
+      for (var change :
+          Map.ofEntries(
+                  Map.entry("ExecMainStatus=30", "ExecMainStatus=0"),
+                  Map.entry("ExecMainCode=1", "ExecMainCode=2"),
+                  Map.entry("Result=exit-code", "Result=timeout"),
+                  Map.entry("MainPID=0", "MainPID=200"),
+                  Map.entry("ControlPID=0", "ControlPID=200"),
+                  Map.entry("Job=\n", "Job=1\n"),
+                  Map.entry("InvocationID=123456789abcdef08123456789abcdef", "InvocationID="),
+                  Map.entry(
+                      "ExecMainStartTimestampMonotonic=1234567",
+                      "ExecMainStartTimestampMonotonic=0"),
+                  Map.entry(
+                      "ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=1"))
+              .entrySet()) {
+        var bad =
+            InspectorUnitSnapshot.parse(
+                text.replace(change.getKey(), change.getValue())
+                    .getBytes(StandardCharsets.US_ASCII),
+                target);
+        assertFalse(bad.failedRootGeneration("123456789abcdef08123456789abcdef"));
+        assertFalse(bad.failedRootStillStoppedAfter(before));
+      }
+      assertFalse(before.failedRootGeneration("wrong"));
+      assertFalse(
+          before.failedRootStillStoppedAfter(
+              InspectorUnitSnapshot.parse(GOLDEN.getBytes(StandardCharsets.US_ASCII))));
+      assertThrows(NullPointerException.class, () -> before.failedRootGeneration(null));
+      assertThrows(NullPointerException.class, () -> before.failedRootStillStoppedAfter(null));
+    }
+    assertFalse(
+        InspectorUnitSnapshot.parse(GOLDEN.getBytes(StandardCharsets.US_ASCII))
+            .failedRootGeneration("123456789abcdef08123456789abcdef"));
+  }
+
+  @Test
   void strictGolden() throws Exception {
     String backup =
         GOLDEN

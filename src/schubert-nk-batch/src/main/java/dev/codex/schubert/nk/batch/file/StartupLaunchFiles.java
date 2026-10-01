@@ -20,6 +20,7 @@ final class StartupLaunchFiles {
   private final InodeSecurityCalls security;
   private final InspectorEnvironmentPublisher.Io io;
   private final StartupPermitRecords.Epoch expected;
+  private final boolean recovery;
 
   StartupLaunchFiles(
       OwnedTransferDirectory root, InodeSecurityCalls security, StartupPermitRecords.Epoch expected)
@@ -33,10 +34,21 @@ final class StartupLaunchFiles {
       InspectorEnvironmentPublisher.Io io,
       StartupPermitRecords.Epoch expected)
       throws IOException {
+    this(root, security, io, expected, false);
+  }
+
+  StartupLaunchFiles(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      InspectorEnvironmentPublisher.Io io,
+      StartupPermitRecords.Epoch expected,
+      boolean recovery)
+      throws IOException {
     this.root = Objects.requireNonNull(root);
     this.security = Objects.requireNonNull(security);
     this.io = Objects.requireNonNull(io);
     this.expected = Objects.requireNonNull(expected);
+    this.recovery = recovery;
     require(expected.state() == StartupPermitRecords.State.ISSUED);
   }
 
@@ -54,6 +66,7 @@ final class StartupLaunchFiles {
               String name = leaf.toString();
               require(names.add(name));
               if (name.equals("epoch.current")) continue;
+              if (recovery && name.equals("permit-start.intent")) continue;
               if (name.equals(expected.epoch() + ".API.start.intent")
                   || name.equals(expected.epoch() + ".WEB.start.intent")) continue;
               require(
@@ -116,6 +129,8 @@ final class StartupLaunchFiles {
       var owner = MaintenanceOwnerFrame.consume(bytes);
       verifyOwner(owner);
       return owner;
+    } catch (IllegalArgumentException invalidClaim) {
+      throw new IOException("startup owner unavailable");
     } finally {
       Arrays.fill(bytes, (byte) 0);
     }

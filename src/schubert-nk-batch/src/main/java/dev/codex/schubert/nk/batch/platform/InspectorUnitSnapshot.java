@@ -17,7 +17,10 @@ public final class InspectorUnitSnapshot {
     BACKUP("schubert-nk-backup.service"),
     CLEANUP("schubert-nk-cleanup.service"),
     EXPIRY("schubert-nk-expiry-cleanup.service"),
-    ARTEMIS("artemis.service");
+    ARTEMIS("artemis.service"),
+    MORNING("schubert-nk-morning-controller.service"),
+    API("schubert-nk-api.service"),
+    WEB("schubert-nk-web.service");
     private final String unit;
 
     Target(String unit) {
@@ -73,16 +76,23 @@ public final class InspectorUnitSnapshot {
                   "LoadState",
                   "loaded",
                   "Type",
-                  target == Target.ARTEMIS ? "simple" : "oneshot",
+                  target == Target.ARTEMIS || target == Target.API || target == Target.WEB
+                      ? "simple"
+                      : "oneshot",
                   "Restart",
-                  target == Target.ARTEMIS ? "on-failure" : "no",
+                  target == Target.ARTEMIS || target == Target.API || target == Target.WEB
+                      ? "on-failure"
+                      : "no",
                   "KillMode",
                   "control-group",
                   "SendSIGKILL",
                   "no")
               .entrySet()) require(result.value(fixed.getKey()).equals(fixed.getValue()));
       require(Set.of("yes", "no").contains(result.value("RemainAfterExit")));
-      if (target == Target.ARTEMIS) require(result.value("RemainAfterExit").equals("no"));
+      if (target == Target.ARTEMIS
+          || target == Target.MORNING
+          || target == Target.API
+          || target == Target.WEB) require(result.value("RemainAfterExit").equals("no"));
       if (target == Target.BACKUP || target == Target.CLEANUP)
         require(result.value("RemainAfterExit").equals("yes"));
       for (String token : List.of("ActiveState", "SubState", "Result"))
@@ -126,7 +136,10 @@ public final class InspectorUnitSnapshot {
   /** Values alone never certify that startup was requested by the current parent/run. */
   public OptionalInt receiptAfter(Optional<UUID> previous) {
     Objects.requireNonNull(previous, "previous invocation");
-    if (target == Target.ARTEMIS)
+    if (target == Target.ARTEMIS
+        || target == Target.MORNING
+        || target == Target.API
+        || target == Target.WEB)
       return OptionalInt.empty(); // A daemon stop is not worker completion.
     var current = invocationId();
     if (!quiescent()
@@ -147,6 +160,29 @@ public final class InspectorUnitSnapshot {
                     || target == Target.EXPIRY)
             ? OptionalInt.of(10)
             : OptionalInt.empty();
+  }
+
+  /** SSC144 failed generation data only; independently requires full kernel/M/A/original proof. */
+  public boolean failedRootGeneration(String invocation) {
+    Objects.requireNonNull(invocation);
+    return (target == Target.MORNING || target == Target.API || target == Target.WEB)
+        && quiescent()
+        && value("InvocationID").equals(invocation)
+        && invocationId().isPresent()
+        && value("Result").equals("exit-code")
+        && value("ExecMainCode").equals("1")
+        && value("ExecMainStatus").equals("30")
+        && executionStart().signum() > 0
+        && executionEnd().compareTo(executionStart()) >= 0;
+  }
+
+  /** Current normal stop recheck of a captured failed Root/parent, never success authority. */
+  public boolean failedRootStillStoppedAfter(InspectorUnitSnapshot before) {
+    Objects.requireNonNull(before);
+    return target == before.target
+        && before.failedRootGeneration(before.value("InvocationID"))
+        && quiescent()
+        && sameStoppedExecution(before);
   }
 
   /** Backup only: a fresh normal nonzero exit is failure, never an unknown/signal success. */

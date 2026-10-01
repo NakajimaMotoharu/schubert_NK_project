@@ -1,5 +1,7 @@
 # NK-OPS-001 Root起動世代接続 単体テスト仕様書
 
+SSC143/ROOTSELECTOR001（PG407、実装前台帳/SS先行）：実Ubuntu selector二段を独立readlink/lstat/fstat/proc魔法statで確認。first `/etc/alternatives/java`、second `/opt/jdk-25.0.4/bin/java` の手書きliteralと保持parent/両held link typed full metadata・named NOFOLLOW照合を期待値とする。relative/未知/別JDK/chain増加/part/null、各UID/GID/mode/link/ctime/ino/name変質、未知IO/closeと全観測closeを負検証する。実Root再試験はPG406の保存した当回intentから正規same-original保全再開を経ることを必要条件とし、手消去/別freshで代用しない。普通samePIDexec/Root120s/真ready/全coverageは別観測でありhost literal成功だけで受入しない。
+
 関連: RD SYS002/004・OPS009、UI212/251/253、SS342§4.2/343§6.15/6.17、SSC137・D04/05。全試験は未実行から開始し、先行TDD失敗を障害扱いしない。Production同Sourceのhost/native coverageを採取、除外追加なし、四指標100%未達を明記する。
 
 追加依存/採取計画（S3同接続、実装前）：ROOTELF001～006はpublic ELF64/LE/x86_64固定hexと独立CLI SHA、typed Unix全field/ACL・security.capabilityのENODATAのみ不存在、EOF/無進捗/例外/byte寿命/unknownをhost検証。ROOTPROOF001～004は17fieldの手書き全frame/固定NSS/A三値を期待値とし、service/binding/nullを負検証。ROOTTICKET001～004は実Root三値の全相違・当回intent/旧intent拒否・欠落待機期限を検証。ROOTUNIT001はAPI RequiresにExpiry無し・After順有り、普通5credentials不変更を固定text oracleで確認。Root実gate/native→held setpriv→同PID API50と全通常cap0/2FD再消費を次外部観測とする。Root成功execは旧JVMのshutdown hookを実行しないためdumponexitだけでRoot全coverageを採取できない。部分agent dumpを成功全coverageへ混ぜず、同Sourceの真正kernel execve拒否の負系（候補strace -Dの当回Root第2execveへEACCES、Unit MainPID/自己gate/全kernelを維持できた場合のみ）で全Root実gate/FDと失敗closeを採取する。未成立ならnative fault/coverage未達を保持し、Productionをtest hookで置換・除外しない。ordinary側は自role本来のJVM/own config/private5 credential/DB/JMS/ready契約を別検証する。

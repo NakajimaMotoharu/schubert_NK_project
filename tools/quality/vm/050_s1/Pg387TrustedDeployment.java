@@ -39,7 +39,11 @@ public final class Pg387TrustedDeployment {
     if(!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new IllegalStateException("isolated VM only");
     var result=MaintenanceFileLock.create().tryExclusive(() -> {
       System.out.println(LABEL+" STAGE M_ACQUIRED");
-      checked(() -> { requireNoUndeliveredWork(); return Boolean.TRUE; });
+      var failedRoot=checked(() -> {
+        var recovery=Pg407FailedRootRecovery.captureIfPresent();
+        if(recovery==null)requireNoUndeliveredWork();
+        return java.util.Optional.ofNullable(recovery);
+      });
       checked(() -> { stopAll(); return Boolean.TRUE; });
       System.out.println(LABEL+" STAGE ALL_STOPPED");
       return StartupAdmissionFile.create().tryExclusive(admission -> {
@@ -48,7 +52,11 @@ public final class Pg387TrustedDeployment {
           terminalAll();
           freezeCandidate();
           var approval=verify();
-          if(args[0].equals("activate")) activate(approval);
+          if(args[0].equals("activate")) {
+            if(failedRoot.isPresent()) failedRoot.orElseThrow().retire();
+            requireNoUndeliveredWork();
+            activate(approval);
+          }
           terminalAll();
           return Boolean.TRUE;
         });
