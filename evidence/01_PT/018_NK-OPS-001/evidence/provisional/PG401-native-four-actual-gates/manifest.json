@@ -1,0 +1,236 @@
+{
+  "id": "PG401-native-four-actual-gates",
+  "formal": false,
+  "sourceCommit": "f429d973a4711307a65be2868cefd00e62321e77",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-10-01T00:28:36.378085+00:00",
+  "environment": "isolated Ubuntu26.04/kernel7/PostgreSQL18.6/JDK25.0.4/Artemis2.56/JaCoCo0.8.15",
+  "command": "pg401_deploy.sh signed exact source; pg401_native.sh once; pg401_collect_native.sh same-byte actual four exec; private full DB readback",
+  "applicationParentExit": 30,
+  "wholeStartupAccepted": false,
+  "bugs": [
+    "BUG-386"
+  ],
+  "ssc": [
+    "SSC-131",
+    "SSC-132"
+  ],
+  "ykt": [
+    "YKT-306"
+  ],
+  "fullRegression": {
+    "tests": 2677,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "releaseManifestSha256": "c12f8bcab436868735b6b26950404787a4a82e7cfd7842686f71b8f8391c670d",
+  "actual": {
+    "old92RowsUnchanged": true,
+    "rows": 102,
+    "backupAttempt": 17,
+    "backupFreshSkip": 2,
+    "cleanupAttempt": 9,
+    "cleanupFreshSkip": 7,
+    "expiryAttempt": 5,
+    "expiryFreshSkip": 1,
+    "actualOwnedDatabaseReleaseBrokerFramesConstructed": true,
+    "mainReturnLineCovered": 227,
+    "startupInvalid": true,
+    "permitsIssued": 0,
+    "requestOwnerIntentEntries": 0,
+    "actualInitialStoppedUnitsAndOldJournalFrameConstructed": true,
+    "actualOldJournalCapturedAndRechecked": true,
+    "oldJournalRawRetainedAndCompleteCanonicalContentCompared": true
+  },
+  "coverage": {
+    "classByteMismatch": 0,
+    "sameRunRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry"
+    ],
+    "oldInspectorExecExcluded": true,
+    "moduleUnion": {
+      "protocol": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        }
+      },
+      "storage": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 1119
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 247
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 36
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 497
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2190
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 381
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1215
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      },
+      "web": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 25,
+          "covered": 4755
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 957
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 190
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1615
+        }
+      },
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1048,
+          "covered": 11848
+        },
+        "METHOD": {
+          "missed": 183,
+          "covered": 1956
+        },
+        "CLASS": {
+          "missed": 10,
+          "covered": 279
+        },
+        "BRANCH": {
+          "missed": 626,
+          "covered": 5345
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 689,
+      "LINE": 1160,
+      "METHOD": 202,
+      "CLASS": 11
+    },
+    "resolvedFromOwnHost": {
+      "BRANCH": 129,
+      "LINE": 1192,
+      "METHOD": 209,
+      "CLASS": 20
+    }
+  },
+  "nativeExecHashes": {
+    "parent": "324276fc327ead5bce5b338652470c473e74344a1bd515924fd1d3a7168384f1",
+    "backup": "3e682e8ee21dd47af828c871669c7d60665fd0e373bf624cfcaa5b12ad847d7c",
+    "cleanup": "cdca133ad651eaec8040cd8148dac3ab3a04fdbeeec91b396047701073c5f337",
+    "expiry": "56acd37c13f6fd313df504e695b9d1a58be1d68645177dc72dc10483e70269e6"
+  },
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-six.log",
+      "sha256": "c86655bd19bb90e926e397e77e59c276a5928f482b70011b93147b7c12357616"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-deploy.log",
+      "sha256": "7121c3e593010dc42c5ea2eecc0b66487c14f9b4827888d9e0d59ad78df90ae6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-native-delivery.log",
+      "sha256": "4ffbcbb80a644befba8bb606f7fcb0e1d6b31e183ae4cfb8dcbf78aae51ae3dc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-native-db-before-full.log",
+      "sha256": "40f694b06d56df9c536d322c0e700153a048342bb824dcc32c56aa07fa589a2d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-native-db-final-full.log",
+      "sha256": "77f201d880c95b2e84a2ecf74fdfe690ed13eab72bc7be131bd439022aae02c3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg401-native-exec-times.log",
+      "sha256": "b64b7d6a21effb274dce8018fd6ce4a6bf147d54c6aa28fb0815c952947b3d79"
+    }
+  ],
+  "reachabilityHashes": {
+    "MorningProcessMain": "dfec2fadabe1d3aa8b398399fdffaea6820889f4582af826294b93646b432029",
+    "MorningBrokerExecution": "6720f6ee0084a46c36d37b4e602ebfe577cb8b018f94f3fe50123c667bbf4e72",
+    "MorningGateEvidence": "58f740bf88c3c5f7865243bcdb21ca3f1a1f8998988ef914ba4280909f9fdf62",
+    "MorningDatabaseSession": "cf2f2f6f89da4849f320e5113c408994a57e9a9654f590be18edc08785d2003a",
+    "MorningPreviousBroker": "51ef0bacde90e34993b121f6acad3d2673d1760e792071b09525575b14f5e4b7"
+  },
+  "limitations": [
+    "actual four gate bytes are not emitted or issued; independent golden comparison is host only",
+    "first-bootstrap journal-absent route/retention/ten-step full proof/publication/A handoff/API/Web/CHR incomplete",
+    "native negatives/hard-timeout/coverage100/formal run24 unchanged"
+  ],
+  "redaction": "No raw journal/InvocationIDs/native exec/credentials/tokens/session/master/dump in Git"
+}

@@ -1,5 +1,9 @@
 # 正規issuer接続 実行結果
 
+## 09:29 PG401 同Source実STOP_SETまで4gate帰還
+
+Source f429d973a4711307a65be2868cefd00e62321e77、全2677PT/static6zero、full cbc6f3749c77976f120f98e8696713a27d4ad900279c42468e96d50a0fd65fa4。signed178artifact/61deps/23SQL manifest c12f8bcab436868735b6b26950404787a4a82e7cfd7842686f71b8f8391c670d、外部Morning一度。旧92行全14列不変＋Backup17二SKIP/Cleanup9七SKIP/Expiry5一SKIP=102、fresh Broker・同owner old capture30/30L/recheck14/14L/STOP64/64L/末段Main227帰還。native def356ea31a1fefafa1edce16d6a65de49b1c8e291e1193e57fac0599d1995ad、fresh4role/classMismatch0、unionmiss689B/1160L/202M/11C、ownhost818/2352/411/31から129/1192/209/20解消。PG400旧union664/1155/202/11と比べ残+25/+5/+0/+0、追加host31/52/4/0と区別する。全kernel終端/4namespace空/原本BEGIN/INVALID/permit0、Brokerだけ新生世代維持。404sanitized evidence構造/秘密pattern0は当回限定scope。BUG386/YKT306直接閉鎖、frame自体のnative emit/hash比較・retention/tenstep/正規issue/A/APIWeb/CHR/負native/100%/正式run24/48.3%は未完。通常保存で停止せず次はretention接続。
+
 ## 09:10 PG401 STOP_SET / journal順序差の直接再試験（全/native未認定）
 
 SSC131/132・BUG386/YKT306。pg401-stop-canonical-selected.log：Storage16/Bootstrap4/Batch32=52PT、F/E/S各0、SpotBugs3module 0、09:02:33終了。ISSSTOP001..007は8Unit固定12field/5～6kernel属性、BOOT/NATIVE旧journal、raw/content二hashの4独立golden、null/binding/foreign/ERROR/未知Throwable/JSON順序差と内容差を検証。rawは最初の実byte根拠を維持し、全field・全row順のcanonical SHAで再読同一性を検証する。実journal二読208entry/133516byteのobject同値・raw異byteはwork/pgpt-runs/PG379/pg401-journal-byte-order-repro.jsonにmetadataのみ保存。BROKER fresh raw digestは観測snapshotであり旧世代恒久一致要求と別、release/設定/原本/permit厳密byte契約は不変更。全6回帰/同byte native STOP_SET到達/100%/正式認定は未実施で合格に加算しない。
