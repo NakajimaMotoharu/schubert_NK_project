@@ -4,6 +4,12 @@
 
 ## 暫定選択検証（PG406、未commit Source）
 
+PG406保存結果（2026-10-01 17:35 JST）：凍結/push `9b2efe4bb06b269c79fcaa20f27dc3002bfff379` 全6-v3 **2737PT/FES0/static6zero**（17:08:56/12分46秒、full manifest SHA `8d39feae5b93463b3387ee9027b92ea8495020c54dbe1da7090619273bd74785`）。host miss B/L/M/C=1102/3223/539/39。signed178artifact/61dep/23SQL・BOM SHA `8743de9ca76f124b0c574b0417fdc81598905faa2c9714b47b6508089b458417` を旧ISSUED/pin/旧完全BOM/M/A/全8終端条件で新規配備、旧Epoch/Unit byteを保存。Root計測設定はM/A/全停止下のnew-only、Production gate置換0。
+
+実外部Morning一回→正規issuer/正常A後owner→真正API Root世代→当回ticket/readbackまで成功、同親/Root世代/owner SHAを独立file/watchで照合。Root UID0・5cap `000801c4`、Root全launch/current gate通過→Java固定selector112行で拒否30、Facts/通常API/権限移行/ready未到達。Ubuntu二段selectorの直link仮定違反をBUG403/SSC143へ先行登録。最初のmetadata111拒否/通常stat追従という診断は独立lstat/fstat/proc魔法stat同inodeで否定し、112部分到達/113未到達へ訂正（BUG404/YKT324、初回collector失敗保持）。親/API30、全親・worker/API/WEB終端、Broker生、current INVALID、startup7entryのowner/launch/旧2permit・当回API.start.intent/permit-start.intent保全、request4namespace空。元142全14列不変＋10正規ALREADY_SUCCESSFUL SKIP=152、Backup inventory全byte/metadata/hash不変。intent自動消去/二重delivery0、正規same-original保全再開は次の必要契約。
+
+同Sourceの実5exec（parent/backup/cleanup/expiry/root-api、旧Inspector除外）union miss=914/1511/262/15、classByteMismatch0。hostから188/1712/277/24解消、100%未達。failure native manifest SHA `fe39a0d3c232575a2a1985fc85eb6cc128f3c8c257e95d9b2b7f432aad99e6d7`。formal run24/1964PT/53scope/48.3%据置、実Root partial/拒否をready/正式受入へ加算しない。
+
 全6-v2（Source `d7c7c52efc440b302379930bb9bd3d5809683cb6`）は全2737PT中Batch1F、E/S0（80/154/209/754/558/982、16:50:54/12分34秒/exit1、SHA256 `72615e5b7e1ab1279afb4cacba42d58e012ac71bbee1b2fc11f11d4554b1fc85`）。APIの旧Unit2Fは解消、新RootServiceFacts wildcardとclosed import型表の不整合がBUG402/YKT322。SSC142を先行し、実Bootstrap所属の既存ServiceDatabaseSourceを明示再利用・型表はこの一型のみ所属file確認付きで追加、業務/未知/wildcard禁止を維持。限定Storage9/Bootstrap6/Batch6=21PT/FES0/static3zero（16:55:00/44.520秒/exit0）、固定role Source・Root proof・Unit・module boundaryを再検証。全6-v3/native/100%は未実行。
 
 凍結Source `dc81ba72039f0c88b4a68779095b8a4408f0018a` の最初の全6はexit1（16:32:36/5分51秒、log SHA256 `f1d102dadffbce9480f377a049369f22d5bb7f31ae81e065d7100d6d210fd812`）。API754PT中2F・E/S0、Web/Batch未実行、BUG401/YKT321を修正前登録。API内の旧Unit oracleのみSS342/SSC137139へ整合、普通MainのFixedServiceExecArguments oracleは保持。限定v1/v2はProtocolに指定test無しで試験開始前拒否、合格0・Work保存。v3は各moduleで実在testを指定し全5module/static各0/exit0（16:37:17/50.335秒）、ApplicationServiceUnitTest4/RootServiceUnitTest2/FixedServiceExecArgumentsTest4/LinuxInodeSecurityTest9とProtocolを確認。全6再回帰/nativeは未実行。Production codeはdc81ba720から不変更。

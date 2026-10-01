@@ -1,0 +1,231 @@
+{
+  "id": "PG406-native-root-refused",
+  "formal": false,
+  "sourceCommit": "9b2efe4bb06b269c79fcaa20f27dc3002bfff379",
+  "branch": "dev-foundation",
+  "recordedAt": "2026-10-01T08:35:06.212715+00:00",
+  "environment": "isolated Ubuntu26.04/JDK25.0.4/PostgreSQL18.6/Artemis2.56/JaCoCo0.8.15",
+  "command": "pg406_deploy.sh; Pg406RootCoverage; pg406_native.sh exactly once; five actual execs same-byte union",
+  "exitCode": 30,
+  "rootExit": 30,
+  "wholeStartupAccepted": false,
+  "bugs": [
+    "BUG-403"
+  ],
+  "ssc": [
+    "SSC-137",
+    "SSC-138",
+    "SSC-139",
+    "SSC-140",
+    "SSC-141",
+    "SSC-142",
+    "SSC-143"
+  ],
+  "ykt": [
+    "YKT-323"
+  ],
+  "releaseManifestSha256": "8743de9ca76f124b0c574b0417fdc81598905faa2c9714b47b6508089b458417",
+  "actual": {
+    "old142RowsUnchanged": true,
+    "rows": 152,
+    "newSkippedSteps": 10,
+    "backupInventoryUnchanged": true,
+    "realRootAndParentTicketBinding": true,
+    "rootUidZero": true,
+    "rootFiveCaps": true,
+    "ordinaryApiObserved": false,
+    "rootJavaSelectorRefusalLine": 112,
+    "factsNotReached": true,
+    "currentInvalid": true,
+    "startupEntries": 7,
+    "intentsPreserved": true,
+    "requestsEmpty": true,
+    "ownerHash": "c9f2bf6fc672b6637af59b833631d7c0a11ef6bac0b843517c5d9edf22b03096",
+    "launchHash": "3d51e8091e6f51937ba8f8628cb1e002efb7267fa5ef317e16c46ee096fc7678"
+  },
+  "coverage": {
+    "moduleUnion": {
+      "protocol": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1008
+        }
+      },
+      "storage": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 0,
+          "covered": 1129
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 248
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 36
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 501
+        }
+      },
+      "bootstrap": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 16,
+          "covered": 2190
+        },
+        "METHOD": {
+          "missed": 9,
+          "covered": 381
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 45,
+          "covered": 1215
+        }
+      },
+      "api": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 71,
+          "covered": 7557
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 1128
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 244
+        },
+        "BRANCH": {
+          "missed": 17,
+          "covered": 2765
+        }
+      },
+      "web": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 25,
+          "covered": 4755
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 957
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 190
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1615
+        }
+      },
+      "batch": {
+        "formal": false,
+        "classByteMismatch": 0,
+        "LINE": {
+          "missed": 1399,
+          "covered": 13827
+        },
+        "METHOD": {
+          "missed": 243,
+          "covered": 2204
+        },
+        "CLASS": {
+          "missed": 14,
+          "covered": 302
+        },
+        "BRANCH": {
+          "missed": 851,
+          "covered": 6164
+        }
+      }
+    },
+    "totalMissed": {
+      "BRANCH": 914,
+      "LINE": 1511,
+      "METHOD": 262,
+      "CLASS": 15
+    },
+    "classByteMismatch": 0,
+    "sameRunRoles": [
+      "parent",
+      "backup",
+      "cleanup",
+      "expiry",
+      "root-api"
+    ]
+  },
+  "nativeExecHashes": {
+    "parent": "077cd0940c4a990b06415c3a4f62c8a66046c8c265835123a869272fdf580415",
+    "backup": "1c936bf97ee5d2a59820e97126745e946b6e44f77d59d4f7c4332e4c440ca721",
+    "cleanup": "de918d9b38d1a568bf5306fcb2ed323ff144e057cd7054d3679c54d7910d54ef",
+    "expiry": "112f487c7066c5cb848fd52a61665527150152bf3aaf3258ad525f7c00ec3be8",
+    "root-api": "37a53558821d53ff550a2d67dbcd522f0f24be4c70f78729197a5b5c6573486d"
+  },
+  "fullRegression": {
+    "tests": 2737,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6
+  },
+  "logs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-six-v3.log",
+      "sha256": "8f37b46bc68425f378e0d68163a31c67ad645db9a171d41f02eb0d66d9b1eeda"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-deploy.log",
+      "sha256": "a9ac11389691283f7ddff7bc8b0e49f20c6f8b7d4aaa22fbf0d2981354f77a93"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-root-coverage-prepare.log",
+      "sha256": "ed497d2d693b9e65b74418b88678cbf8dbf3790f2c90f1d71ddfd3aa07298951"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-native-db-before-full.log",
+      "sha256": "6247721ecfa6084bb855c6eb2bed2b9cebafe73d9833e5d2e7dcec4f1048687e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-native-db-final-full.log",
+      "sha256": "129bcaa8855f7ec9ac1ff161221d639cebf9a5b4726f5d6cfc00a7da6705ece2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg406-root-watch-private.jsonl",
+      "sha256": "059a846a9eebda5359e7c3fb4161468c82ad3b5ca7f1e43f1163f72d4093522d"
+    }
+  ],
+  "limitations": [
+    "BUG403 Root selector open; same-PID ordinary exec/ready/CHR not reached",
+    "failed startup intents remain isolated; exact normal resume required",
+    "native UNKNOWN/hard-timeout/completed receipt/M-final-close/BUG392 pending",
+    "100% coverage and formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "No raw journal/InvocationIDs/owner/launch/native exec/credentials/password/session/token/master/dump in Git"
+}
