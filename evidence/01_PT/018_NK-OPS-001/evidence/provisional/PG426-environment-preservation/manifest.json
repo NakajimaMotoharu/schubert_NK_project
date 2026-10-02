@@ -1,0 +1,43 @@
+{
+  "id": "PG426-environment-preservation",
+  "formal": false,
+  "sourceCommit": "a3c86daf3ea1ac7ea9f6a3ae50dc45ead68c3fd2",
+  "branch": "dev-foundation",
+  "environment": "isolated Linux7.0.0-34-generic/JDK25.0.4/glibc2.43-2ubuntu2.4/systemd259.5-0ubuntu3.4/PostgreSQL18.6/OpenSSL3.5.5-1ubuntu3.7",
+  "environmentInterference": "captured apt-daily-upgrade at 2026-10-02T06:35:01Z requested PID1 reexec and service restarts; old Expiry lacked retired owner credentials, normal manager243; actual PG425 API not started",
+  "independentToolAssertions": 87,
+  "toolCompile": "javac25 -Xlint:all -Werror with same-source role classes/API runtime plus compile-only SpotBugs annotations",
+  "command": "isolated root-private Pg426EnvironmentRecovery, M then stop8 then A, dedicated batchDB/advisory and private fixed capture pins",
+  "exitCode": 0,
+  "expected": "only this captured undelivered request may retire; historical failure remains preserved, no worker result inferred",
+  "actual": {
+    "all222RowsUnchanged": true,
+    "backupOriginalAssetsConfigEmptyTransferAndNamespaceUnchanged": true,
+    "privateDurablePreservation": true,
+    "currentWholeKernelTerminal": true,
+    "ownedUndeliveredRequestFilesRetired": 2,
+    "runtimeTimerPauseCount": 2,
+    "timerInstalledEnablementUnchanged": true,
+    "old243Preserved": true,
+    "expiryResetFailedIsManagerGcOnly": true,
+    "workerSuccessClaimed": false,
+    "permitIssued": false,
+    "productionSourceChanged": false,
+    "fullRegressionRepeated": false
+  },
+  "nativeLogSha256": "361ec0571b2c5205639e91b9b026908f806e7458a6b0e19c91aaf31eb3233c7b",
+  "privateCaptureHashes": {
+    "full18": "4e9e3835b34c4afccd9100b4e0f7afd5b18770e5f3f1445e0fd35f06e767caf2",
+    "all14ColumnSql": "f0663f67b63abb09739f61a12b9e08ba2a71332a588e061bee3923dc27c681f8",
+    "owner": "7346d5225fb557d2c14d025dd5cfd8cdf0838edcaeacf6d06660d6f965e1b719",
+    "request": "fec758df85686ae22d1c35e81c1727b60e2deb61ee1adef1294028b3911369c5",
+    "packageRestartContext": "144376e1ed84d16e8675640f430f5568d28268e09b1c36cc20f0d76231bd8172"
+  },
+  "productionTestCount": 0,
+  "testIds": ["ENV222001", "ENV222002", "ENV222003"],
+  "bugs": ["BUG-522"],
+  "ssc": ["SSC-163"],
+  "ykt": ["YKT-374"],
+  "limitations": ["same-source new normal Morning in progress; API/Web/CHR unaccepted", "100% native/host coverage and formal run24 unchanged", "no IT/ST complete"],
+  "redaction": "safe counts/fixed facts/hashes only; raw DB/config/owner/request/backup/timer capture remain root-private outside Git"
+}
