@@ -19,6 +19,8 @@ MorningPreviousBroker.capture/collectForStartup/NoPrior.recheck/Closed.recheck�
 
 ## 実行・認定
 
+PG429初回full（Source075a864d8）は2026-10-03 01:28:04 JST/exit1、Batchの追跡Javadoc改行をspotlessが拒否。5module成功を新Source合格へ流用しない（BUG535/YKT378）。新Sourceの実結果はfresh全6後manifestを正とする。BUG533 negative/BUG534 sealed cast是正は新7PT・旧golden・static0で再試験し、BUG526全callerをYKT379で横断確認する。
+
 開発選択v4：2026-10-03 01:16:02 JST、89PT/14suite/FES0、SpotBugs6module0、strict compile/format成功、終了0。logSHA `07e4b820173743003d685436b1c86fc24e81f501bd3c19307c5ef260500f184c`。後続追跡commentだけ更新後、全6 fixed-sourceで改めて確認する。v1 exit1 no-tests、v2 1failure、v3 PT成功/static1は合格扱いしない。
 
 開発選択は実在6module suite群（FieldCodec/LinuxSealedProof/FixedServiceIdentity/TransferRootInspection/WebProcessMain/RootStartupContext/MorningServiceReadiness/MorningStartupLaunchOwner）へ上記群とMorningPreviousBroker/StopEvidence/BrokerUnitCycle/MaintenanceFileLockを追加する。`failIfNoTests`は無効化しない。v1 no-testsとv2 wrong-negative失敗logはprivate保存し合格算入しない。source固定後451所定の全6 clean/format/testCompile/PT/静的6/coverage/jar/runtime BOMを実施し、同source署名候補を正規配備後に通常Morningを一度実行する。

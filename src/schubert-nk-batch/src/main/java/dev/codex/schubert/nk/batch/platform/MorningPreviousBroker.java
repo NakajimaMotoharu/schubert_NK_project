@@ -8,7 +8,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * NK-OPS-001 old closed generation, not a cold-success placeholder or startup authority. RD
- * operational safety; UI operations; SS343 §6.17/SSC131/132/166; PT ISSSTOP001..007, ISSCOLD001..007.
+ * operational safety; UI operations; SS343 §6.17/SSC131/132/166; PT ISSSTOP001..007,
+ * ISSCOLD001..007.
  */
 @NullMarked
 public final class MorningPreviousBroker {

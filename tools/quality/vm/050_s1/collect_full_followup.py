@@ -262,8 +262,8 @@ if int(identifier[2:5]) >= 428:
         'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 if int(identifier[2:5]) >= 429:
     manifest['ssc'].extend(['SSC-165', 'SSC-166'])
-    manifest['bugs'].extend(['BUG-527', 'BUG-531', 'BUG-532'])
-    manifest['ykt'].extend(['YKT-376', 'YKT-377'])
+    manifest['bugs'].extend(['BUG-527', 'BUG-531', 'BUG-532', 'BUG-533', 'BUG-534', 'BUG-535'])
+    manifest['ykt'].extend(['YKT-376', 'YKT-377', 'YKT-378', 'YKT-379'])
     manifest['testIds'].extend(['ISSCOLD001..007', 'MAINTENANCE-TMPFILES-FIXED-NAMESPACE'])
     manifest['trigger'] = 'SSC165/166 same cold-boot owner/STOP_SET/fresh Broker intent contract: full six frozen-source regression before signed ordinary parent candidate'
     manifest['limitations'] = [
