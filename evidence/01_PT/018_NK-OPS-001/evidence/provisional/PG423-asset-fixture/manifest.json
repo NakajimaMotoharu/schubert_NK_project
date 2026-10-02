@@ -1,0 +1,24 @@
+{
+  "runId": "PG423-asset-fixture",
+  "classification": "PROVISIONAL_NOT_FORMAL",
+  "at": "2026-10-02T14:14:00+09:00",
+  "branch": "dev-foundation",
+  "productionSourceCommit": "995d3c5386f09b89bc4af4a2e7c9d3fdb9f603e3",
+  "operatorSourceCommit": "fb8d191d1",
+  "candidate": "0.1.0-PG421",
+  "candidateManifestSha256": "2348f978fafc1cdd521e1d866ca8fa3ae13d220668b266e0d989d0087cfa7979",
+  "environment": {"vm": "isolated Ubuntu26.04 amd64", "jdk": "25.0.4", "maven": "3.9.12", "jacoco": "0.8.15", "flyway": "13.4.0"},
+  "testIds": ["REC50-001..003", "MIG025-001..002", "FIXTURE1-001..005", "NATIVE421-003", "READY004"],
+  "related": {"bugs": [508, 509, 510, 511, 512, 513, 514], "ssc": [150, 159, 160], "ykt": [368, 369, 370]},
+  "lowerDependencies": {
+    "oldPG408UniqueRecovery": {"exitCode": 0, "independentAssertions": 83, "all182RowsAndBackupUnchanged": true, "typedIntentsRetired": 2, "phaseInferred": false, "logSha256": "c8767debfece41cb27d180abeab8526a72c2cd8371887dd5c1161be1e23f6e1a"},
+    "signedMigration": {"exitCode": 0, "independentAssertions": 14, "appliedMigrations": ["024", "025"], "historyEntries": 26, "old182RowsAndBusinessAndBackupUnchanged": true, "profileSchema": "025", "permitsIssued": 0, "logSha256": "8092d080049429fc374d747ea59c0425fd6a3d3942600074eb50f5f966727f2c"},
+    "new995UniqueFixtureRecovery": {"exitCode": 0, "independentAssertions": 89, "toolTestLogSha256": "a79ee9fb6edc604f65ce9dfc3270facc876469a2a41275f4498c77dc81532f31", "all192RowsAndBackupUnchanged": true, "typedIntentsRetired": 2, "phaseInferred": false, "historicalCloseClaimed": false, "fixtureExpectedEntries": 1, "productionDefaultEntries": 59627, "logSha256": "3c581b9f6c705a69012e4946d770cf4ffcb9b9ffe3acc16bee4851fe7e5e37c8"}
+  },
+  "selectedHost": {"tests": 28, "byModule": [7, 9, 7, 5], "failures": 0, "errors": 0, "skipped": 0, "staticAnalysisFindings": [0, 0, 0, 0], "exitCode": 0, "managementClassOriginal995BytesEqual": true, "managementClassMissed": {"branch": 0, "line": 0, "method": 0, "class": 0}, "logSha256": "1ca9db46774a3dd2dd95713abfb56b5ec932455b42c71ecb50351aede3e8e5c9", "limitations": "selected incremental host only, not all-scope frozen fresh execution"},
+  "command": "Pg423AssetFixtureRecovery on root-private stage + signed operations/batch.jar, api/api.jar and fixed vendor libs; ordinary production Unit command unchanged. Host selected four modules, independent listed Test names, explicit offline plugin versions.",
+  "native": {"startRequests": 1, "currentMorningPid": 1157365, "observation": "in progress; attached same generation after old240s watcher expired; original30min deadline unchanged", "actualApiReady": false, "wholeMorningAccepted": false},
+  "productionTestCountFromTools": 0,
+  "formal": {"run": "PT-WEB-20260925-24", "tests": 1964, "scopes": 53, "completionPercent": 48.3, "unchanged": true},
+  "redaction": "only fixed public metadata, counts, result/hash; raw watches, effective config, DB rows, backup and all credential material remain private outside Git"
+}

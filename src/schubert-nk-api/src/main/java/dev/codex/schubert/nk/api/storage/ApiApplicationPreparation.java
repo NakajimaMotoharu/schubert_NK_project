@@ -35,7 +35,7 @@ import javax.sql.DataSource;
  * all-root/producer-stop/proof verification precedes this operation. Borrowed processors must not
  * escape or outlive their codec/root owners; caller stops consumers before returning. No consumer/A
  * release is performed here. NK-OPS-001/NK-SCN-001/NK-AUT-001; FIL001..009/AUT001..004/MQ006;
- * UI226237243; SS311312333342343/SSC149; PT-OPS-API-PREP-001..004. Full registration/lifecycle
+ * UI226237243; SS311312333342343/SSC149161; PG-D336; PT-OPS-API-PREP-001..004. Full registration/lifecycle
  * remains mandatory.
  */
 public final class ApiApplicationPreparation {
@@ -64,6 +64,7 @@ public final class ApiApplicationPreparation {
     Objects.requireNonNull(clock, "clock");
     Objects.requireNonNull(dispatchContexts, "Outbox context source");
     Objects.requireNonNull(operation, "application operation");
+    System.err.println("API startup entered CODECS_AND_ROOTS");
     try (var codecs = ApiNativeCodecs.create(credentials);
         var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), transfer);
         var asset = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), assets)) {
@@ -106,8 +107,10 @@ public final class ApiApplicationPreparation {
     Objects.requireNonNull(dispatchContexts, "Outbox context source");
     Objects.requireNonNull(operation, "operation");
     try {
+      System.err.println("API startup entered MANIFEST");
       var manifest = new AssetManifestLoader(asset, assetIdentity).load(manifestEntries);
       var mediaInspector = new HeldMediaFileInspector(asset, assetIdentity, manifest);
+      System.err.println("API startup entered TRANSFER");
       var prepared = TransferStoragePreparation.prepare(root, transferIdentity, clock.instant());
       try (var outbox =
           OwnedOutboxDispatcher.create(

@@ -166,6 +166,33 @@ final class ApiManagementServerTest {
   }
 
   @Test
+  void ready004OwnerClosedDuringAdmissionReleaseCannotPublishUp() throws Exception {
+    var releases = new AtomicInteger();
+    var server = ApiManagementServer.open(INFO, () -> true, 0);
+    int port = server.port();
+    try {
+      assertThrows(
+          IOException.class,
+          () ->
+              server.promote(
+                  () -> {
+                    releases.incrementAndGet();
+                    server.close();
+                  }));
+      assertEquals(1, releases.get());
+      assertFalse(server.ready());
+      assertThrows(IOException.class, () -> server.promote(releases::incrementAndGet));
+      assertEquals(1, releases.get());
+      try (var replacement = ApiManagementServer.open(INFO, () -> true, port)) {
+        assertEquals(503, get(replacement, "/actuator/health/readiness").statusCode());
+        assertEquals("{\"status\":\"DOWN\"}", get(replacement, "/actuator/health").body());
+      }
+    } finally {
+      server.close();
+    }
+  }
+
+  @Test
   void ready003InformationNullUnknownInvalidAndRealBindCollision() throws Exception {
     assertThrows(NullPointerException.class, () -> ApiManagementServer.open(null, () -> true, 0));
     assertThrows(NullPointerException.class, () -> ApiManagementServer.open(INFO, null, 0));

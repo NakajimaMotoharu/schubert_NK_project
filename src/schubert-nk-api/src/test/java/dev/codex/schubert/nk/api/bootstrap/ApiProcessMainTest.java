@@ -151,7 +151,7 @@ final class ApiProcessMainTest {
         }
       }
       assertEquals(
-          "API process stopped\nAPI process stopped\nAPI process failed\n",
+          "API startup entered ADMISSION\nAPI process stopped\nAPI process stopped\nAPI process failed\n",
           bytes.toString(StandardCharsets.UTF_8));
     }
   }
