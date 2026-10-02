@@ -68,8 +68,8 @@ public final class Pg422KnownIncompleteRecovery {
       if(entry.equals("dev.codex.schubert.nk.batch.file.RootServiceLauncher"))root=true;
       if(entry.equals("dev.codex.schubert.nk.api.bootstrap.ApiProcessMain")) {
         var process=api.getAsJsonObject("process");
-        if(!"999 999 999 999".equals(process.get("Uid").getAsString())
-            || !"981 981 981 981".equals(process.get("Gid").getAsString())
+        if(!fourIds(process.get("Uid").getAsString(),"999")
+            || !fourIds(process.get("Gid").getAsString(),"981")
             || !"1".equals(process.get("NoNewPrivs").getAsString()))throw new IllegalStateException("captured ordinary identity differs");
         for(String cap:List.of("CapInh","CapPrm","CapEff","CapBnd","CapAmb"))
           if(!"0000000000000000".equals(process.get(cap).getAsString()))throw new IllegalStateException("captured capability differs");
@@ -77,6 +77,9 @@ public final class Pg422KnownIncompleteRecovery {
       }
     }
     if(!root || !ordinary)throw new IllegalStateException("genuine Root/ordinary observation required");
+  }
+  static boolean fourIds(String raw,String expected) {
+    return raw!=null && Arrays.equals(raw.strip().split("\\s+"),new String[]{expected,expected,expected,expected});
   }
   static Map<String,byte[]> startup() throws Exception {
     var path=Pg410KnownAuthRecovery.STARTUP;
@@ -109,7 +112,12 @@ public final class Pg422KnownIncompleteRecovery {
     return bytes;
   }
   public static void main(String[] args) throws Exception {
-    Thread.currentThread().setUncaughtExceptionHandler((t,e)->System.err.println("PG422_RECOVERY_REFUSED diagnosticsRedacted=true type="+e.getClass().getName()));
+    Thread.currentThread().setUncaughtExceptionHandler((t,e)-> {
+      System.err.println("PG422_RECOVERY_REFUSED diagnosticsRedacted=true type="+e.getClass().getName());
+      for(var frame:e.getStackTrace())if(frame.getClassName().equals("Pg422KnownIncompleteRecovery")
+          || frame.getClassName().equals("Pg410KnownAuthRecovery") || frame.getClassName().equals("Pg387TrustedDeployment"))
+        System.err.println("PG422_FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
+    });
     if(args.length!=0 || !Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01"))
       throw new IllegalStateException("isolated operator only");
     Pg410KnownAuthRecovery.configureVerifier();

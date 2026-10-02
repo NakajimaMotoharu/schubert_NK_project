@@ -32,6 +32,17 @@ public final class Pg422KnownIncompleteRecoveryTest {
         .equals("7d7acfaff4787c3651386cd9a155eba1db2038955544b4e2b0332504096273c6"))throw new AssertionError("independent SQL whole bytes");assertions++;
     if(Pg422KnownIncompleteRecovery.NAMES.size()!=16 || !Pg422KnownIncompleteRecovery.NAMES.contains("adc7cb94-b23d-45ea-824a-3ae6c293b09d.API.start.intent")
         || Pg422KnownIncompleteRecovery.NAMES.contains("5689f481-b4e3-4d8f-b450-74b980f5c15c.API.start.intent"))throw new AssertionError("independent fixed namespace");assertions++;
+    if(args.length==1) {
+      byte[] actual=java.nio.file.Files.readAllBytes(java.nio.file.Path.of(args[0]));
+      if(!HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(actual)).equals("61a3b5d67144913f92f7b09ff927a9c8fa779b5bc74652736605931344590315"))throw new AssertionError("independent captured watch SHA");
+      Pg422KnownIncompleteRecovery.watch(actual);assertions++;
+    }
+    for(String valid:List.of("999 999 999 999","999\t999\t999\t999"," 999   999\t999 999 ")) {
+      if(!Pg422KnownIncompleteRecovery.fourIds(valid,"999"))throw new AssertionError("actual four numeric ID token form");assertions++;
+    }
+    for(String invalid:Arrays.asList(null,"","999 999 999","999 999 999 999 999","0 999 999 999","999x 999 999 999")) {
+      if(Pg422KnownIncompleteRecovery.fourIds(invalid,"999"))throw new AssertionError("closed four numeric ID token form");assertions++;
+    }
     System.out.println("PG422_RECOVERY_TOOL independentAssertions="+assertions+" success=true productionTestCount=0");
   }
 }
