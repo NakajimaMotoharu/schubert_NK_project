@@ -1,3 +1,9 @@
 # SCR015 User一覧HTTP実行結果
 
-2026-10-03、PG-D344/016053。実装・試験は未実行。PG434のmedia成功をこの仕様の成功へ流用しない。対象source/command/coverage/証跡hash/BUGは実測後に記入する。User作成/更新/詳細、native full Web ready、CHR、正式認定は未完了。
+2026-10-03 06:17:48 JST、PG-D344/016053、dev-foundation HEAD85733c5936026dcf2e4fecfb76fd29598a22cdbf＋WIP。対象7Source/test/template SHAは[選択manifest](evidence/provisional/PG435-user-selected-v4/manifest.json)、SHA4130dca2a2de2d629f873b6a323ba9887dec2e00c8fadd2ebe8a2d8e5d7196ec。Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0。全6選択108PT/15suite/FES0、Spotless/strict compile・NullAway/静的6module0/1:58 exit0。5対象class（UserSearchForm/UserListViewModel/Row/UserAdminController/UserMvcConfiguration）は現reportのline/method/class/branch全missed0。cumulative execを新Source全回帰へ流用しない。
+
+新10JUnit PT-USER-HTTP001～010：UI236 data96/record168/PAGED48手作成byte oracle、0/1/50・0000/0200、NFC/64byte/ASCII整数負値補正、未知/複数/null/control/surrogate/65byte/enum/overflow、ADMIN/USER/null/wrong principal、全error/JMS/timeout/correlation/context/reserved不正、record数/重複ID/C-byte並び/同名stable ID、page末尾補正、actualMVC/Thymeleaf escape/共通nav/追加・詳細・前後link/Logout CSRF、real暗号session/Jetty HTTP・GETHEAD/no-store/API0102 Cookie終端、8thread100 distinct context/UUID/filter・pending0/全元buffer0を確認。UTF8 C順はBMP private use→補助文字の独立順を使い、UTF16 orderでは代用しない。Template/admin routeはこのpartial compositionで確認、全Web native readyの成功ではない。
+
+初v1は推測suite名でProtocol NoTests/exit1（BUG553/YKT397、未実行合格0）。v2は広いnav first selectorが共通Menuを選び新User10中1F（BUG554/YKT398）、実UIは正しくProduction変更なし、独立追加link一意と共通navを分離。v3新10/FES0・Web54/FES0だがStream.toList snapshotにSpotBugs EI_EXPOSE_REP Medium1/exit1（BUG555/YKT399）、実返却listのclear拒否は既に確認済み。修正前起票後、既存Logと同じ明示List.copyOfでimmutable解析契約を確立、suppression/exclusion追加0。v4の再試験で全関連対象を確認したが、commit/固定Source全回帰前なのでBUG553～555/YKT397～399はまだ対応中。失敗log/SpotBugs XMLはWorkPG379のpg435-user-selected-v1～v3.log/pg435-v3-spotbugs.xmlへ保持。
+
+Command/終了code/全15safeJUnit/各hashはmanifest、rawlogはWorkPG379/pg435-user-selected-v4.log。properties/stdout/stderr/private診断を除去、実credential/password/context/session/token/key/dumpなし。User作成/更新/詳細、native full Web ready/Caddy/DONE/intent/実CHR、全scope同Source100%、正式run24/1964PT/53scope/48.3%は未完了・未更新。

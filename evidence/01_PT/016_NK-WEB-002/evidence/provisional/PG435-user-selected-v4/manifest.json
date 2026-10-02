@@ -1,0 +1,254 @@
+{
+  "id": "PG435-user-selected-v4",
+  "formal": false,
+  "sourceCommit": "85733c5936026dcf2e4fecfb76fd29598a22cdbf",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+      "sha256": "387811acd96bcac4ed374c61dcd903368ed9fb02f050221026be08bc202f125f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+      "sha256": "f5ae165a0d59a0f2a7ff4d91d9aafc924b9e4791170d5a7946157d7f4743a44f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+      "sha256": "b7405b14bb7b13cbb9c420da3e96316efec1020aaeaf30c29e2869546d705c37"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java",
+      "sha256": "b7f00a8a6a8ffa84b4d756e25d985e0b516571d11635fe22e96ff4872ba19d24"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java",
+      "sha256": "a148b707d6f71602135d09bc9ed69fdcc2b3d0b205a3e4587c1d070520d80a28"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java",
+      "sha256": "b79b86da4c7b3ab6497e99ce654b63a14fff84c88ac36d4e070f2f9a666a2639"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T06:17:48+09:00",
+  "exitCode": 0,
+  "tests": 108,
+  "suites": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-USER-HTTP001..010"
+  ],
+  "bugs": [
+    "BUG-553",
+    "BUG-554",
+    "BUG-555"
+  ],
+  "ykt": [
+    "YKT-397",
+    "YKT-398",
+    "YKT-399"
+  ],
+  "command": "six reactor spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,UserQueryApplicationServiceTest,UserQueryRepositoryTest,UserQueryReplayServiceTest,UserQueryRequestTest,UserAdminControllerTest,LogControllerTest,MediaControllerTest,WebBusinessWireClientsTest,WebApplicationTest,ApiSessionInvalidTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "UserAdminController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 161
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserSearchForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 308
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 34
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserListViewModel$Row": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 92
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserListViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 257
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 14
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "d90e57fe0a3325239c047a057ffa4a7fb088b8890592c1e4426c121b68917977",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "five target classes missed0, cumulative exec not formal coverage100",
+    "User detail/create/mutations and full Web business assembly/native ready/Caddy/CHR pending",
+    "QA047 native owner and QA048 receipt reference remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "888963324f7babef3611f4032b5e51a805ebe3a0874396d9a09de4ef1f49d9f1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "295333e6428745cadd7fe71152bdcfda5d1eae7c72683079b412942ca185718d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "be100c8d461393919d7d677f773f21dc9bdf47ce30931054f29f1010b0790841"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "f0b027d00a823342ac146bd77f53a546d38bff648e7bd7c68516c95abc4a04ec"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "a6a9ce90e95622418610047a56a12153ef30fcdba23c2f7d97e36cda54eb2628"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "498cd2ad8359205f0c52e9c46f254f7a5ee9bcb1b2a7cf0a89d82657b4d8b08d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "1cda2a8be78388b331795da6b848c46c40d5d7734e06b79d4128f0f0b4a4c7f6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "da279faef23e2926d5e3ff1e2180d2c0657a0849d33e225ae5dea96d85008da8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "a9e3c882be882341e6b7c052c34b47db86401042577984eeb73952447dffe98b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "b40aca08b4ba321ec3aca4e4e2a7afd84b05ff216ee715fd21538d005b0f8406"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "6faf8b90c8d3a79a13c975decbd606ad440f30cff6965f4fa9cdce91ca128cee"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "96c6857ad7eb3f4c176fd0a0e67e37998c6cde6709db8178a225fc5394fb91f3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.LogControllerTest.xml",
+      "sha256": "0b098febd362c8040f816bf38cfe7477c6013fba1cf380642963350b5b7b05e6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.MediaControllerTest.xml",
+      "sha256": "2a239016e7abbf0ae106ada65b51de381733dc2f77a747707204b1c1d08fc793"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG435-user-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "980f09cc0b8d64589234de5ba80b414f037655f9552bab1dd3ef2555621b0036"
+    }
+  ]
+}

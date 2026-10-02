@@ -86,6 +86,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
           "music",
           "music-sections",
           "logs",
+          "admin/user-list",
           "error/error",
           "scenarios",
           "scenario-routes",

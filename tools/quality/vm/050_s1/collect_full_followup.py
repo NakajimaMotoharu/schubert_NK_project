@@ -329,5 +329,19 @@ if int(identifier[2:5]) >= 434:
         'Receipt reference fourth technical table proposed in QA048/UIC007/SSC169; no unapproved schema/oracle change',
         'Owned native FileSource/full Web business assembly/Caddy/original DONE/normal retirement/real CHR-A01/L01 remain pending',
         'Full-scope/native coverage100 and formal PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
+if int(identifier[2:5]) >= 435:
+    manifest['bugs'].extend(['BUG-553', 'BUG-554', 'BUG-555'])
+    manifest['ykt'].extend(['YKT-397', 'YKT-398', 'YKT-399'])
+    manifest['testIds'].append('PT-USER-HTTP001..010')
+    manifest['trigger'] = 'PG-D344 ADMIN SCR015 fixed HTTP/HEAD query/form/PAGED48/C-byte ordered rows/template, common MVC view allowlist and immutable snapshot: source-frozen six-module regression'
+    names = {'UserSearchForm', 'UserListViewModel', 'UserListViewModel$Row', 'UserAdminController', 'UserMvcConfiguration'}
+    user_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(user_coverage) == names
+    assert all(k['missed'] == 0 for value in user_coverage.values() for k in value.values())
+    manifest['userListScopeCoverage'] = user_coverage
+    manifest['limitations'].extend([
+        'PG434 source7caaa full2930 and PG435 dirty selected108 are preserved, not reused as this source full acceptance',
+        'SCR015 User list HTTP is connected; detail/create/mutation screens and full ordinary Web business ready remain pending'])
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
