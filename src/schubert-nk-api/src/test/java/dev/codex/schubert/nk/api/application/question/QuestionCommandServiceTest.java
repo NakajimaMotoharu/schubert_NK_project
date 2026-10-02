@@ -588,7 +588,13 @@ final class QuestionCommandServiceTest {
                   PreparedStatement.class.getClassLoader(),
                   new Class<?>[] {PreparedStatement.class},
                   (sp, sm, sa) -> {
-                    if (sm.getName().equals("executeUpdate") && kind.equals("zero-update")) {
+                    if (sm.getName().equals("close") && kind.equals("zero-update-close")) {
+                      QuestionSubmissionServiceTest.invoke(result, sm, sa);
+                      hit.incrementAndGet();
+                      throw new SQLException("private-close");
+                    }
+                    if (sm.getName().equals("executeUpdate")
+                        && (kind.equals("zero-update") || kind.equals("zero-update-close"))) {
                       hit.incrementAndGet();
                       return 0;
                     }
@@ -600,6 +606,10 @@ final class QuestionCommandServiceTest {
                         new Class<?>[] {ResultSet.class},
                         (rp, rm, ra) -> {
                           Object value = QuestionSubmissionServiceTest.invoke(rows, rm, ra);
+                          if (rm.getName().equals("close") && kind.equals("unknown-close")) {
+                            hit.incrementAndGet();
+                            throw new SQLException("private-close");
+                          }
                           if (rm.getName().equals("next")) {
                             int n = next.incrementAndGet();
                             if (kind.equals("missing") && n == 1) {
@@ -619,7 +629,7 @@ final class QuestionCommandServiceTest {
                               case "zero" -> 0L;
                               case "overflow" -> 1_000_000_000_000L;
                               case "wrong" -> 99L;
-                              case "unknown" -> "UNKNOWN";
+                              case "unknown", "unknown-close" -> "UNKNOWN";
                               case "true" -> true;
                               case "time" ->
                                   java.time.OffsetDateTime.parse("2026-10-01T00:00:00.999999Z");
