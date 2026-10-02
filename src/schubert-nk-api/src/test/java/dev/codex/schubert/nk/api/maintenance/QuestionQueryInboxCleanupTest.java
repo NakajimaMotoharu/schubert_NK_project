@@ -67,6 +67,47 @@ final class QuestionQueryInboxCleanupTest {
   }
 
   @Test
+  void scope004ScopedQuestionWireAndOldRawAreBothMaintenanceOnlyProfiles() throws Exception {
+    try (var f = new Fixture();
+        var c = connection()) {
+      c.setAutoCommit(false);
+      var structural = new InboxResponseInspector(f.base.codec);
+      for (String layout : LAYOUTS) {
+        for (String code : List.of("0000", list(layout) ? "9001" : "0104")) {
+          byte[] wire = golden(layout, code, 0, "RECEIVED", false, "UNANSWERED", "");
+          var legacy = snapshot(f, layout, code, wire.clone(), NONE);
+          assertTrue(structural.isStructurallyValid(identity(layout), legacy));
+          assertTrue(f.inspector.isConsistent(c, identity(layout), legacy));
+          for (dev.codex.schubert.nk.api.domain.Role role :
+              dev.codex.schubert.nk.api.domain.Role.values()) {
+            byte[] frame = new byte[wire.length + 8];
+            System.arraycopy(
+                java.util.HexFormat.of()
+                    .parseHex(role.name().equals("USER") ? "4e4b515259310055" : "4e4b515259310041"),
+                0,
+                frame,
+                0,
+                8);
+            System.arraycopy(wire, 0, frame, 8, wire.length);
+            boolean expected = layout.startsWith("QS");
+            var scoped = snapshot(f, layout, code, frame.clone(), NONE);
+            assertEquals(expected, structural.isStructurallyValid(identity(layout), scoped));
+            assertEquals(expected, f.inspector.isConsistent(c, identity(layout), scoped));
+            frame[7] = 'X';
+            var corrupt = snapshot(f, layout, code, frame, NONE);
+            assertFalse(structural.isStructurallyValid(identity(layout), corrupt));
+            assertFalse(f.inspector.isConsistent(c, identity(layout), corrupt));
+          }
+          Arrays.fill(wire, (byte) 0);
+        }
+      }
+      assertFalse(c.isClosed());
+      assertEquals("0", count());
+      c.rollback();
+    }
+  }
+
+  @Test
   void queryProfilesAndFrozenSnapshots() throws Exception {
     try (var f = new Fixture();
         var c = connection()) {

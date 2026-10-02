@@ -36,6 +36,37 @@ final class ResponseSnapshotCodecTest {
   private static final byte[] NONCE = new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
   @Test
+  void scope002QuestionScopeFrameMatchesIndependentCompressionAadAndJceCiphertext()
+      throws Exception {
+    byte[] wire = new byte[304];
+    Arrays.fill(wire, (byte) ' ');
+    byte[] literal = new byte[312];
+    System.arraycopy(java.util.HexFormat.of().parseHex("4e4b515259310041"), 0, literal, 0, 8);
+    Arrays.fill(literal, 8, literal.length, (byte) ' ');
+    var identity = ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSSRSP01", "001", 7);
+    byte[] frame = QuestionQueryScopeFrame.wrap(dev.codex.schubert.nk.api.domain.Role.ADMIN, wire);
+    try (var codec = fixedCodec("k2", CURRENT_KEY, null, null)) {
+      var actual = codec.encrypt(identity, frame);
+      assertArrayEquals(literal, frame);
+      assertArrayEquals(
+          storedCiphertext(
+              "k2",
+              CURRENT_KEY,
+              NONCE,
+              independentAad(identity, "k2"),
+              independentCompress(literal)),
+          actual.ciphertext());
+      assertArrayEquals(literal, codec.decrypt(identity, actual));
+      assertEquals("k2", actual.keyVersion());
+      assertArrayEquals(
+          "NKENC1".getBytes(StandardCharsets.US_ASCII), Arrays.copyOf(actual.ciphertext(), 6));
+    } finally {
+      Arrays.fill(frame, (byte) 0);
+      Arrays.fill(literal, (byte) 0);
+    }
+  }
+
+  @Test
   void fixedNonceCiphertextMatchesIndependentCompressionAndAadVector() throws Exception {
     byte[] plaintext = "public synthetic snapshot".getBytes(StandardCharsets.UTF_8);
     byte[] callerKey = CURRENT_KEY.clone();

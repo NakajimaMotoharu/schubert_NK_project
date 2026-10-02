@@ -86,55 +86,61 @@ public final class NonAuthenticationInboxInspector {
     if (!structure.isStructurallyValid(identity, completion)) return false;
     try {
       if (connection.getAutoCommit()) return false;
-      byte[] wire = snapshots.decrypt(identity, completion.responseSnapshot().orElseThrow());
+      byte[] plaintext = snapshots.decrypt(identity, completion.responseSnapshot().orElseThrow());
       try {
-        var header = HeaderCodec.standard().peek(wire);
-        var code = header.resultCode().orElseThrow();
-        if (!codes.contains(code.wireValue())) return false;
-        var reference = completion.resultReference();
-        if (!code.usesSuccessProfile()) return reference.equals(InboxResultReference.none());
-        String layout = identity.responseLayoutId();
-        if (MUTATIONS.contains(layout)) {
-          var data = (UserMutationResponseData) decode(header, wire);
-          long version = data.updatedVersion();
-          if (layout.equals("UCRRSP01")) {
-            if (version != 0) return false;
-          } else if (code.wireValue().equals("0000") && version == 0) return false;
-          return reference.equals(
-                  InboxResultReference.numeric(
-                      InboxResultReferenceType.USER, data.userId().value()))
-              && referenceValueWithin(
-                  connection,
-                  "select version as reference_value from schubert.app_users where id = ?",
-                  data.userId().value(),
-                  version,
-                  999_999_999L);
+        byte[] wire = QuestionQueryScopeFrame.wireForInspection(identity, plaintext);
+        try {
+          var header = HeaderCodec.standard().peek(wire);
+          var code = header.resultCode().orElseThrow();
+          if (!codes.contains(code.wireValue())) return false;
+          var reference = completion.resultReference();
+          if (!code.usesSuccessProfile()) return reference.equals(InboxResultReference.none());
+          String layout = identity.responseLayoutId();
+          if (MUTATIONS.contains(layout)) {
+            var data = (UserMutationResponseData) decode(header, wire);
+            long version = data.updatedVersion();
+            if (layout.equals("UCRRSP01")) {
+              if (version != 0) return false;
+            } else if (code.wireValue().equals("0000") && version == 0) return false;
+            return reference.equals(
+                    InboxResultReference.numeric(
+                        InboxResultReferenceType.USER, data.userId().value()))
+                && referenceValueWithin(
+                    connection,
+                    "select version as reference_value from schubert.app_users where id = ?",
+                    data.userId().value(),
+                    version,
+                    999_999_999L);
+          }
+          if (layout.equals("SCNRSP01")) {
+            var data = (ScenarioDetailResponseData) decode(header, wire);
+            if (data.deliveryMode() == DeliveryMode.INLINE)
+              return reference.equals(InboxResultReference.none());
+            // Generated record-file hash is not the raw master hash. Physical .ready expiry is
+            // valid.
+            new LargeResultDescriptor(
+                data.fileId().orElseThrow(),
+                data.fileRelativePath().orElseThrow().wireValue(),
+                data.fileByteLength(),
+                data.fileSha256().orElseThrow().wireValue(),
+                Math.toIntExact(data.fileRecordCount()));
+            long game = data.gameCode() == GameCode.NUKITASHI_1 ? 1 : 2;
+            return reference.equals(
+                    InboxResultReference.numeric(
+                        InboxResultReferenceType.SCENARIO_FILE, data.scriptFileId().value()))
+                && referenceValueWithin(
+                    connection,
+                    "select cast(game_id as bigint) as reference_value from schubert.script_files where id = ?",
+                    data.scriptFileId().value(),
+                    game,
+                    game);
+          }
+          return reference.equals(InboxResultReference.none());
+        } finally {
+          Arrays.fill(wire, (byte) 0);
         }
-        if (layout.equals("SCNRSP01")) {
-          var data = (ScenarioDetailResponseData) decode(header, wire);
-          if (data.deliveryMode() == DeliveryMode.INLINE)
-            return reference.equals(InboxResultReference.none());
-          // Generated record-file hash is not the raw master hash. Physical .ready expiry is valid.
-          new LargeResultDescriptor(
-              data.fileId().orElseThrow(),
-              data.fileRelativePath().orElseThrow().wireValue(),
-              data.fileByteLength(),
-              data.fileSha256().orElseThrow().wireValue(),
-              Math.toIntExact(data.fileRecordCount()));
-          long game = data.gameCode() == GameCode.NUKITASHI_1 ? 1 : 2;
-          return reference.equals(
-                  InboxResultReference.numeric(
-                      InboxResultReferenceType.SCENARIO_FILE, data.scriptFileId().value()))
-              && referenceValueWithin(
-                  connection,
-                  "select cast(game_id as bigint) as reference_value from schubert.script_files where id = ?",
-                  data.scriptFileId().value(),
-                  game,
-                  game);
-        }
-        return reference.equals(InboxResultReference.none());
       } finally {
-        Arrays.fill(wire, (byte) 0);
+        Arrays.fill(plaintext, (byte) 0);
       }
     } catch (SQLException
         | ResponseSnapshotException

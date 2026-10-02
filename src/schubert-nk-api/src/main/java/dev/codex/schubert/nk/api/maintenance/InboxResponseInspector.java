@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrame;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotException;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
@@ -43,11 +44,16 @@ public final class InboxResponseInspector {
         || !identity.responseVersion().equals(completion.responseVersion())
         || completion.responseSnapshot().isEmpty()) return false;
     try {
-      byte[] wire = snapshots.decrypt(identity, completion.responseSnapshot().orElseThrow());
+      byte[] plaintext = snapshots.decrypt(identity, completion.responseSnapshot().orElseThrow());
       try {
-        return inspect(identity, completion, wire);
+        byte[] wire = QuestionQueryScopeFrame.wireForInspection(identity, plaintext);
+        try {
+          return inspect(identity, completion, wire);
+        } finally {
+          Arrays.fill(wire, (byte) 0);
+        }
       } finally {
-        Arrays.fill(wire, (byte) 0);
+        Arrays.fill(plaintext, (byte) 0);
       }
     } catch (ResponseSnapshotException
         | PermanentProtocolException
