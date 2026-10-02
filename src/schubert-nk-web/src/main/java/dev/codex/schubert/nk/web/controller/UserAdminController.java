@@ -3,8 +3,11 @@ package dev.codex.schubert.nk.web.controller;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.admin.UserRecord;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.form.UserSearchForm;
@@ -14,6 +17,7 @@ import dev.codex.schubert.nk.web.messaging.UserAdministrationWireClient;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
+import dev.codex.schubert.nk.web.view.UserDetailViewModel;
 import dev.codex.schubert.nk.web.view.UserListViewModel;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -43,6 +48,64 @@ public final class UserAdminController {
       UserAdministrationWireClient client, ApiSessionInvalidHandler invalid) {
     this.client = Objects.requireNonNull(client, "client");
     this.invalid = Objects.requireNonNull(invalid, "invalid");
+  }
+
+  /** SCR017 reference only; mutations remain a separate session-token contract. */
+  @GetMapping("/admin/users/{id:[0-9]{1,12}}")
+  public @Nullable String detail(
+      @PathVariable("id") long id,
+      Principal principal,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response)
+      throws IOException {
+    Objects.requireNonNull(model, "model");
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(response, "response");
+    if (!(Objects.requireNonNull(principal, "principal") instanceof SessionPrincipal actor))
+      throw new SessionStoreException();
+    if (actor.role() != UserRole.ADMIN) {
+      response.sendError(403);
+      return null;
+    }
+    final UserId target;
+    try {
+      target = new UserId(id);
+    } catch (IllegalArgumentException failure) {
+      response.sendError(404);
+      return null;
+    }
+    final ProtectedReadWireClient.Result result;
+    try {
+      result =
+          client.exchange(
+              new TypedPayloadValues(
+                  new LayoutId("UDTREQ01"), new UserDetailRequestData(target), List.of()),
+              actor.authenticationContext());
+    } catch (ProtectedReadWireException failure) {
+      response.sendError(503);
+      return null;
+    }
+    if (result.resultCode() == ResultCode.SESSION_INVALID) {
+      invalid.handle(request, response);
+      return null;
+    }
+    int status = mapper.httpStatus(result.resultCode());
+    if (status != 200) {
+      response.sendError(status);
+      return null;
+    }
+    final UserDetailViewModel page;
+    try {
+      page =
+          UserDetailViewModel.from(
+              actor, target, (UserDetailResponseData) result.payload().orElseThrow().data());
+    } catch (IllegalArgumentException | ClassCastException | NoSuchElementException failure) {
+      response.sendError(503);
+      return null;
+    }
+    model.addAttribute("page", page);
+    return "admin/user-detail";
   }
 
   @GetMapping("/admin/users")

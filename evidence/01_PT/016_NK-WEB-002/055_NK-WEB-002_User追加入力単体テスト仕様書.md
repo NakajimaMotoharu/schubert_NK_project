@@ -1,6 +1,6 @@
 # User追加入力単体テスト仕様書
 
-2026-10-03、PG-D345/NK-WEB-002/SCR016。RD FUN009/AUT002、UI222/225 §4/236 §4、SS313/314/323。対象UserCreateFormと必要なCreationPassword契約、後続POST UserAdminController.createの入力前提。未実装/未実行仕様でありWeb成功POST/完成token処理を認定しない。
+2026-10-03、PG-D345/NK-WEB-002/SCR016。RD FUN009/AUT002、UI222/225 §4/236 §4、SS313/314/323。対象UserCreateFormのcreation password契約、後続POST UserAdminController.createの入力前提。初版は実装前、実績は016056を参照しWeb成功POST/完成token処理を認定しない。
 
 | Test ID | 入力/操作・fixture | 独立期待値/観点 |
 |---|---|---|

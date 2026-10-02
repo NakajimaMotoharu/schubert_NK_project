@@ -343,5 +343,23 @@ if int(identifier[2:5]) >= 435:
     manifest['limitations'].extend([
         'PG434 source7caaa full2930 and PG435 dirty selected108 are preserved, not reused as this source full acceptance',
         'SCR015 User list HTTP is connected; detail/create/mutation screens and full ordinary Web business ready remain pending'])
+if int(identifier[2:5]) >= 436:
+    manifest['bugs'].extend(['BUG-557', 'BUG-558', 'BUG-559'])
+    manifest['ykt'].extend(['YKT-401', 'YKT-402', 'YKT-403'])
+    manifest['testIds'].extend(['PT-USER-CREATE001..008', 'PT-USER-DETAIL001..008'])
+    manifest['trigger'] = 'PG-D345/346 User creation input and ADMIN SCR017 reference, common MVC template allowlist, immutable safe projection: source-frozen six-module regression'
+    names = {'UserCreateForm', 'UserDetailViewModel', 'UserAdminController'}
+    detail_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(detail_coverage) == names
+    assert all(k['missed'] == 0 for value in detail_coverage.values() for k in value.values())
+    manifest['userCreateDetailScopeCoverage'] = detail_coverage
+    manifest['limitations'] = [
+        'PG435 sourcefe4ea full2940 and PG436 selected83/91 are preserved, not mixed into this fresh source full regression',
+        'User list/detail GET/HEAD and creation input connected; create GET/POST and User mutation forms/controllers remain incomplete',
+        'QA047 fixed native owner remains UNKNOWN/M-A held; no repeated stop/deploy/start',
+        'QA048 receipt reference and QA049 completed-token retention are unapproved; no proposed schema/session JSON/oracle mutation',
+        'Full ordinary Web business ready/Caddy/original DONE/normal intent retirement/real CHR-A01/L01/native100 remain pending',
+        'Full formal scope/100percent and PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

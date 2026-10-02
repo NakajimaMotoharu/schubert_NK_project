@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR017/UI225,236/SS313,314/PG-D346/PT-USER-DETAIL001..008. Read-only composition. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('User詳細')}"></head>
+<body><main class="page user-detail">
+  <header class="topbar"><h1>User詳細</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <nav><a th:href="@{/admin/users}">User一覧</a></nav>
+  <dl>
+    <dt>Username</dt><dd class="username" th:text="${page.values.username}"></dd>
+    <dt>Role</dt><dd class="role" th:text="${page.values.role}"></dd>
+    <dt>状態</dt><dd class="state" th:text="${page.values.state}"></dd>
+    <dt>Lock理由</dt><dd class="lock-reason" th:text="${page.values.lockReason}"></dd>
+    <dt>Lock終了日時</dt><dd class="locked-until" th:text="${page.values.lockedUntil}"></dd>
+    <dt>最終Login日時</dt><dd class="last-login" th:text="${page.values.lastLogin}"></dd>
+    <dt>Active session数</dt><dd class="active-sessions" th:text="${page.values.activeSessionCount}"></dd>
+    <dt>最終Password変更日時</dt><dd class="password-changed-at" th:text="${page.values.passwordChangedAt}"></dd>
+    <dt>作成日時</dt><dd class="created-at" th:text="${page.values.createdAt}"></dd>
+    <dt>更新日時</dt><dd class="updated-at" th:text="${page.values.updatedAt}"></dd>
+    <dt>作成actor</dt><dd class="created-by" th:text="${page.values.createdBy}"></dd>
+    <dt>更新actor</dt><dd class="updated-by" th:text="${page.values.updatedBy}"></dd>
+  </dl>
+</main></body></html>

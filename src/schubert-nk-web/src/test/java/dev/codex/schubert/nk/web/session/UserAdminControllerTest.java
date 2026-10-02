@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.admin.UserRecord;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.*;
@@ -13,6 +14,7 @@ import dev.codex.schubert.nk.web.form.UserSearchForm;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
+import dev.codex.schubert.nk.web.view.UserDetailViewModel;
 import dev.codex.schubert.nk.web.view.UserListViewModel;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
@@ -695,6 +697,401 @@ class UserAdminControllerTest {
         1);
   }
 
+  @Test
+  void detail001IndependentWireAndSafeDisplay() throws Exception {
+    for (String code : List.of("0000", "0200"))
+      try (var f = new Fixture()) {
+        f.code = code;
+        var model = new ExtendedModelMap();
+        var response = new MockHttpServletResponse();
+        assertEquals(
+            "admin/user-detail",
+            f.controller.detail(42, actor(UserRole.ADMIN), model, raw(), response));
+        assertEquals(200, response.getStatus());
+        var page = assertInstanceOf(UserDetailViewModel.class, model.get("page"));
+        assertEquals("reader", page.getValues().get("username"));
+        assertEquals("ログイン失敗によるロック", page.getValues().get("lockReason"));
+        assertEquals("2026-10-03 09:00:00.000", page.getValues().get("passwordChangedAt"));
+        assertEquals(2, page.getValues().get("activeSessionCount"));
+        assertEquals(7L, page.getValues().get("version"));
+        assertEquals("SYSTEM", page.getValues().get("createdBy"));
+        assertEquals("admin", page.getValues().get("updatedBy"));
+        var sent = f.requests.getFirst();
+        assertEquals(268, sent.length);
+        assertEquals("UDTREQ01", ascii(sent, 11, 8));
+        assertArrayEquals(
+            "000000000042".getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(sent, 256, 268));
+        assertEquals("a".repeat(64), ascii(sent, 113, 64));
+        assertEquals(Boolean.TRUE, page.getValues().get("self"));
+        f.erased();
+      }
+  }
+
+  @Test
+  void detail002MvcEscapingAndFixedRoutes() throws Exception {
+    try (var f = new Fixture();
+        var context = f.mvc()) {
+      f.detailName = "<img src=x onerror=alert(1)>";
+      var mvc = MockMvcBuilders.webAppContextSetup(context).build();
+      var result =
+          mvc.perform(
+                  get("/admin/users/42")
+                      .principal(actor(UserRole.ADMIN))
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
+              .andReturn();
+      assertEquals(200, result.getResponse().getStatus());
+      var dom = Jsoup.parse(result.getResponse().getContentAsString());
+      assertEquals("User詳細", dom.title());
+      assertEquals(f.detailName, dom.select(".user-detail > dl .username").text());
+      assertTrue(dom.select("dl img,dl script").isEmpty());
+      assertEquals("LOCKED", dom.select(".state").text());
+      assertEquals("2", dom.select(".active-sessions").text());
+      assertEquals("/admin/users", dom.select("a[href='/admin/users']").attr("href"));
+      assertEquals(
+          List.of("/", "/notifications"), dom.select(".topbar .nav-links a").eachAttr("href"));
+      assertEquals(1, dom.select("input[name=_csrf]").size());
+      assertTrue(dom.select("input[type=password],input[name=operation_token]").isEmpty());
+      assertFalse(result.getResponse().getContentAsString().contains("a".repeat(64)));
+      assertEquals(
+          200,
+          mvc.perform(
+                  head("/admin/users/42")
+                      .principal(actor(UserRole.ADMIN))
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
+              .andReturn()
+              .getResponse()
+              .getStatus());
+      int count = f.requests.size();
+      for (String path : List.of("0", "1000000000000", "bad", "４２"))
+        assertEquals(
+            404,
+            mvc.perform(get("/admin/users/" + path).principal(actor(UserRole.ADMIN)))
+                .andReturn()
+                .getResponse()
+                .getStatus());
+      assertEquals(
+          405,
+          mvc.perform(post("/admin/users/42").principal(actor(UserRole.ADMIN)))
+              .andReturn()
+              .getResponse()
+              .getStatus());
+      assertEquals(count, f.requests.size());
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail003RolesInvalidTargetsAndNullBoundaries() throws Exception {
+    try (var f = new Fixture()) {
+      var response = new MockHttpServletResponse();
+      assertNull(
+          f.controller.detail(42, actor(UserRole.USER), new ExtendedModelMap(), raw(), response));
+      assertEquals(403, response.getStatus());
+      for (long id : List.of(0L, -1L, 1_000_000_000_000L)) {
+        response = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail(
+                id, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), response));
+        assertEquals(404, response.getStatus());
+      }
+      assertThrows(
+          SessionStoreException.class,
+          () ->
+              f.controller.detail(
+                  42,
+                  () -> "reader",
+                  new ExtendedModelMap(),
+                  raw(),
+                  new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  42, null, new ExtendedModelMap(), raw(), new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  42, actor(UserRole.ADMIN), null, raw(), new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  42,
+                  actor(UserRole.ADMIN),
+                  new ExtendedModelMap(),
+                  null,
+                  new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), null));
+      assertTrue(f.requests.isEmpty());
+    }
+  }
+
+  @Test
+  void detail004ErrorsAndMalformedWire() throws Exception {
+    var codes = List.of("0100", "0101", "0103", "0104", "0105", "0106", "0107", "9000", "9001");
+    var statuses = List.of(400, 401, 403, 404, 409, 429, 409, 503, 503);
+    for (int i = 0; i < codes.size(); i++)
+      try (var f = new Fixture()) {
+        f.code = codes.get(i);
+        var r = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
+        assertEquals(statuses.get(i), r.getStatus());
+        f.erased();
+      }
+    for (int offset : List.of(60, 113, 212, 570))
+      try (var f = new Fixture()) {
+        f.responder =
+            (id, bytes) -> {
+              byte[] result = f.standard(id, bytes);
+              result[offset] = (byte) 'x';
+              return result;
+            };
+        var r = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
+        assertEquals(503, r.getStatus());
+        f.erased();
+      }
+    try (var f = new Fixture()) {
+      f.responder =
+          (id, bytes) -> {
+            throw new JMSRuntimeException("synthetic secret canary");
+          };
+      var r = new MockHttpServletResponse();
+      assertNull(f.controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
+      assertEquals(503, r.getStatus());
+      assertFalse(r.getContentAsString().contains("canary"));
+      f.erased();
+      f.responder =
+          (id, bytes) -> {
+            throw new AssertionError("explicit error propagation");
+          };
+      assertThrows(
+          AssertionError.class,
+          () ->
+              f.controller.detail(
+                  42,
+                  actor(UserRole.ADMIN),
+                  new ExtendedModelMap(),
+                  raw(),
+                  new MockHttpServletResponse()));
+      f.erased();
+    }
+    try (var f = new Fixture()) {
+      var client =
+          new UserAdministrationWireClient(
+              f.wire,
+              (id, bytes) -> f.buffers.add(bytes),
+              CLOCK,
+              () -> new UUID(0, 999),
+              Duration.ofMillis(10));
+      var controller = new UserAdminController(client, f.security.handler);
+      var r = new MockHttpServletResponse();
+      assertNull(controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
+      assertEquals(503, r.getStatus());
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail005ProjectionRejectionsDoNotRepairResponse() throws Exception {
+    for (int kind = 0; kind < 4; kind++)
+      try (var f = new Fixture()) {
+        if (kind == 0) f.detailId = 43;
+        if (kind == 1) f.detailSessions = 3;
+        if (kind == 2) f.detailVersion = 0;
+        if (kind == 3)
+          f.responder =
+              (id, bytes) -> {
+                var reply = f.standard(id, bytes);
+                Arrays.fill(reply, 379, 396, (byte) ' ');
+                return reply;
+              };
+        var r = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail(42, actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
+        assertEquals(503, r.getStatus());
+        f.erased();
+      }
+  }
+
+  @Test
+  void detail006AllSafeValuesAndFactoryInvariants() throws Exception {
+    for (String state : List.of("ACTIVE", "DISABLED", "LOCKED"))
+      for (boolean optional : List.of(true, false))
+        for (int count : List.of(0, 1, 2))
+          try (var f = new Fixture()) {
+            f.detailState = state;
+            f.detailOptional = optional;
+            f.detailSessions = count;
+            f.detailName = "other";
+            var model = new ExtendedModelMap();
+            assertEquals(
+                "admin/user-detail",
+                f.controller.detail(
+                    42, actor(UserRole.ADMIN), model, raw(), new MockHttpServletResponse()));
+            var page = (UserDetailViewModel) model.get("page");
+            assertEquals("reader", page.getTopBar().getUsername());
+            assertEquals("ADMIN", page.getValues().get("role"));
+            assertEquals(state, page.getValues().get("state"));
+            assertEquals(
+                state.equals("LOCKED") ? "ログイン失敗によるロック" : "", page.getValues().get("lockReason"));
+            assertEquals(
+                optional ? "2026-10-03 09:00:00.000" : "", page.getValues().get("lockedUntil"));
+            assertEquals(
+                optional ? "2026-10-03 09:00:00.000" : "", page.getValues().get("lastLogin"));
+            assertEquals("2026-10-03 09:00:00.000", page.getValues().get("createdAt"));
+            assertEquals("2026-10-03 09:00:00.000", page.getValues().get("updatedAt"));
+            assertEquals(count, page.getValues().get("activeSessionCount"));
+            assertEquals(42L, page.getValues().get("id"));
+            assertEquals(Boolean.FALSE, page.getValues().get("self"));
+            assertEquals("UserDetailViewModel[REDACTED]", page.toString());
+            assertThrows(UnsupportedOperationException.class, () -> page.getValues().clear());
+            assertFalse(page.getValues().toString().contains("a".repeat(64)));
+            f.erased();
+          }
+    var detail =
+        new UserDetailResponseData(
+            new UserId(42),
+            "reader",
+            UserRole.ADMIN,
+            UserState.ACTIVE,
+            Optional.empty(),
+            Optional.empty(),
+            CLOCK.instant(),
+            CLOCK.instant(),
+            CLOCK.instant(),
+            0,
+            1,
+            "SYSTEM",
+            "admin");
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> UserDetailViewModel.from(actor(UserRole.USER), new UserId(42), detail));
+    // Wire validation rejects count3 first; the public projection factory must also reject it.
+    var tooManySessions =
+        new UserDetailResponseData(
+            new UserId(42),
+            "reader",
+            UserRole.ADMIN,
+            UserState.ACTIVE,
+            Optional.empty(),
+            Optional.empty(),
+            CLOCK.instant(),
+            CLOCK.instant(),
+            CLOCK.instant(),
+            3,
+            1,
+            "SYSTEM",
+            "admin");
+    var failure =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> UserDetailViewModel.from(actor(UserRole.ADMIN), new UserId(42), tooManySessions));
+    assertEquals("invalid user detail projection", failure.getMessage());
+    assertThrows(
+        NullPointerException.class, () -> UserDetailViewModel.from(null, new UserId(42), detail));
+    assertThrows(
+        NullPointerException.class,
+        () -> UserDetailViewModel.from(actor(UserRole.ADMIN), null, detail));
+    assertThrows(
+        NullPointerException.class,
+        () -> UserDetailViewModel.from(actor(UserRole.ADMIN), new UserId(42), null));
+  }
+
+  @Test
+  void detail007ConcurrentActorIsolation() throws Exception {
+    try (var f = new Fixture();
+        var executor = Executors.newFixedThreadPool(8)) {
+      var futures = new ArrayList<Future<?>>();
+      for (int i = 0; i < 100; i++) {
+        int n = i;
+        futures.add(
+            executor.submit(
+                () -> {
+                  var actor =
+                      new SessionPrincipal(
+                          "reader" + n,
+                          UserRole.ADMIN,
+                          AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
+                          Instant.EPOCH);
+                  var model = new ExtendedModelMap();
+                  assertEquals(
+                      "admin/user-detail",
+                      f.controller.detail(42, actor, model, raw(), new MockHttpServletResponse()));
+                  assertEquals(
+                      "reader" + n,
+                      ((UserDetailViewModel) model.get("page")).getTopBar().getUsername());
+                  return null;
+                }));
+      }
+      for (var future : futures) future.get(15, TimeUnit.SECONDS);
+      assertEquals(100, f.requests.size());
+      assertEquals(100, f.requests.stream().map(bytes -> ascii(bytes, 24, 36)).distinct().count());
+      assertEquals(100, f.requests.stream().map(bytes -> ascii(bytes, 113, 64)).distinct().count());
+      for (var bytes : f.requests) assertEquals("000000000042", ascii(bytes, 256, 12));
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail008RealSecurityAndApiInvalidTermination() throws Exception {
+    for (String role : List.of("USER", "ADMIN")) {
+      reset();
+      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      try (var f = new Fixture();
+          var server =
+              new EmbeddedWebSecurityTest.Server(
+                  Files.createTempDirectory(root, "user-detail-http-"),
+                  false,
+                  db,
+                  Optional.of(api.provider),
+                  true,
+                  true,
+                  (mvc, invalid) -> configure(mvc, f.client, invalid))) {
+        assertEquals(302, server.send("GET", "/admin/users/42", null, null, true).statusCode());
+        assertTrue(f.requests.isEmpty());
+        var first = server.send("GET", "/login", null, null, true);
+        String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var login =
+            server.send(
+                "POST",
+                "/login",
+                initial,
+                "_csrf=" + first.body().substring(6) + "&username=reader&password=p",
+                true);
+        assertEquals(302, login.statusCode());
+        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var response = server.send("GET", "/admin/users/42", cookie, null, true);
+        assertEquals(role.equals("ADMIN") ? 200 : 403, response.statusCode());
+        if (role.equals("ADMIN")) {
+          assertTrue(
+              response.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
+          var head = server.send("HEAD", "/admin/users/42", cookie, null, true);
+          assertEquals(200, head.statusCode());
+          assertEquals("", head.body());
+          f.code = "0102";
+          var expired = server.send("GET", "/admin/users/42", cookie, null, true);
+          assertEquals(302, expired.statusCode());
+          assertEquals(
+              "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
+          assertTrue(
+              expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+          int before = f.requests.size();
+          assertEquals(302, server.send("GET", "/admin/users/42", cookie, null, true).statusCode());
+          assertEquals(before, f.requests.size());
+        } else assertTrue(f.requests.isEmpty());
+        f.erased();
+        api.erased();
+      }
+    }
+  }
+
   private static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final AtomicLong ids = new AtomicLong();
@@ -704,6 +1101,10 @@ class UserAdminControllerTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     volatile String code = "0000", firstName = "user000";
     volatile int count = 1, total = 1, replyPage = 1;
+    volatile long detailId = 42, detailVersion = 7;
+    volatile int detailSessions = 2;
+    volatile String detailName = "reader", detailState = "LOCKED";
+    volatile boolean detailOptional = true;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final UserAdministrationWireClient client =
         new UserAdministrationWireClient(
@@ -719,6 +1120,17 @@ class UserAdminControllerTest {
     final UserAdminController controller = new UserAdminController(client, security.handler);
 
     byte[] standard(UUID id, byte[] request) {
+      if (ascii(request, 11, 8).equals("UDTREQ01"))
+        return detailResponse(
+            id,
+            ascii(request, 113, 64),
+            code,
+            detailId,
+            detailName,
+            detailState,
+            detailSessions,
+            detailVersion,
+            detailOptional);
       return response(id, ascii(request, 113, 64), code, replyPage, count, total, firstName);
     }
 
@@ -743,6 +1155,54 @@ class UserAdminControllerTest {
   }
 
   // Independent UI232/236 fixed positions, no production codec or method generates expected.
+  private static byte[] detailResponse(
+      UUID id,
+      String context,
+      String code,
+      long target,
+      String username,
+      String state,
+      int sessions,
+      long version,
+      boolean optional) {
+    boolean success = code.equals("0000") || code.equals("0200");
+    byte[] bytes = new byte[576];
+    Arrays.fill(bytes, (byte) ' ');
+    put(bytes, 0, 8, "SCHBNK01");
+    put(bytes, 8, 3, "001");
+    put(bytes, 11, 8, "UDTRSP01");
+    put(bytes, 19, 3, "001");
+    put(bytes, 22, 1, "S");
+    put(bytes, 23, 1, "S");
+    put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
+    put(bytes, 60, 36, id.toString());
+    put(bytes, 96, 17, "20261003090000000");
+    put(bytes, 113, 64, context);
+    number(bytes, 177, 4, 256);
+    number(bytes, 181, 6, 320);
+    number(bytes, 187, 6, 0);
+    number(bytes, 193, 6, 0);
+    number(bytes, 199, 9, 576);
+    put(bytes, 208, 4, code);
+    number(bytes, 256, 12, success ? target : 0);
+    for (int offset : List.of(379, 396, 413))
+      number(bytes, offset, 17, success ? 20261003090000000L : 0);
+    number(bytes, 430, 3, success ? sessions : 0);
+    number(bytes, 433, 9, success ? version : 0);
+    if (success) {
+      put(bytes, 268, 64, username);
+      put(bytes, 332, 5, "ADMIN");
+      put(bytes, 337, 8, state);
+      if (optional) {
+        put(bytes, 345, 17, "20261003090000000");
+        put(bytes, 362, 17, "20261003090000000");
+      }
+      put(bytes, 442, 64, "SYSTEM");
+      put(bytes, 506, 64, "admin");
+    }
+    return bytes;
+  }
+
   private static byte[] response(
       UUID id, String context, String code, int page, int rows, int total, String firstName) {
     boolean success = code.equals("0000") || code.equals("0200");

@@ -1,0 +1,316 @@
+{
+  "id": "PG436-user-detail-selected-v3",
+  "formal": false,
+  "sourceCommit": "5a984217db72dbe63d05de9c9c58dce4ac4c73d3",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+      "sha256": "387811acd96bcac4ed374c61dcd903368ed9fb02f050221026be08bc202f125f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+      "sha256": "f5ae165a0d59a0f2a7ff4d91d9aafc924b9e4791170d5a7946157d7f4743a44f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+      "sha256": "e098ef8a6ffbcfda58d7e58c61317aed69830377f8ff452c52a22c13d43d55e5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java",
+      "sha256": "b7f00a8a6a8ffa84b4d756e25d985e0b516571d11635fe22e96ff4872ba19d24"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java",
+      "sha256": "9af5c02ea660c7670dfbf6fb4fcd011e3aafc595d2a5d67f1ce1bf8555364ac7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java",
+      "sha256": "104ff8a3017a15315b44f9c4d56703def3e3740394df5e0822a3e7beb133f40c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserDetailViewModel.java",
+      "sha256": "044663216dcf29b3900a92ca5def5ea7b54961b9f9b83f75101d6826791b2ff4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "sha256": "bbeb4764b0203ae46c341f3c4af502f5ee7f3d1d95b0cb5d8321c86d761d75bf"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java",
+      "sha256": "2f4a159dee7f931cff577ca46eef4f5290d040e625b3f9424ec47a8eb9de7ea7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "sha256": "c994ee131dcf0d449ec68f393c6a1606ddb8f336e2fb300aea99ff18fc240116"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T07:07:28+09:00",
+  "exitCode": 0,
+  "tests": 91,
+  "suites": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-USER-HTTP001..010",
+    "PT-USER-CREATE001..008",
+    "PT-USER-DETAIL001..008"
+  ],
+  "bugs": [
+    "BUG-557",
+    "BUG-558",
+    "BUG-559"
+  ],
+  "ykt": [
+    "YKT-401",
+    "YKT-402",
+    "YKT-403"
+  ],
+  "command": "six reactor spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,UserQueryApplicationServiceTest,UserQueryRepositoryTest,UserQueryReplayServiceTest,UserQueryRequestTest,PasswordPolicyTest,UserAdminControllerTest,UserCreateFormTest,WebBusinessWireClientsTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "UserAdminController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 283
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 82
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserSearchForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 308
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 34
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserCreateForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 402
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 48
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 74
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserListViewModel$Row": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 92
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserListViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 257
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 14
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 207
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "2c6ef334c2bae73bf2cd6aca48f00a14a210b6d1b7f7c6bc87bfcc056b51f34a",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "seven target classes missed0, cumulative exec not formal coverage100",
+    "User create GET/POST and mutations/full Web business assembly/native ready/Caddy/CHR pending",
+    "QA047 native owner, QA048 receipt reference and QA049 completed-token lifecycle remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "800f28b192fd67eb88bce554cfef27d2517612912bd3e5c8f1251218a02f9978"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "4fb69d0e0b190da51da4430cae10191b63b722234c7bb314ca8ba53ad4bb2710"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "c8118ba324d98bcaf05509909b3bc8a8c1f54ef2695fc7c3f538e9bb49c97d2f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "fbdc96a1487ca4ba7c59e824cd8879161d01158fabe99807a9909a2998f60553"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "2f1f0b03364d285f03c22b2a6b3ebcdf63facda98b77420ba85da7021867099a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "05a8c6e8faf13491c30cb4a94a15a6d7824051c5514e395a2f1aaa2abcba0e2f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "85e97b16ff6cc7f5d92f6e0c5397b152b26ed6153b3599b0e408566374ce241f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "cc14c98c438826a7595e4326279377767135f4c3ef8ad6ef0074ee3e096f95fa"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "fe50b71d1a5e2ab328a4dcff454d08d8cb459c5c9304a64580a64c72f77a5554"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "ec814c714d702d24ef4dcec99f70decab0b64143f142f527cdb0d54234251712"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "05b3f042045797437df2be5879d5d16fa1bdb9b0dae6558ce866554e6a6dcab4"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "eae1acc4ea97978d95fdd68345956bfef4dbf1472e3c7e089d17c516944861dc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-detail-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "687266f81c5694e32875f582464055d60d32e34e2d0833203eb9b4608d406ed1"
+    }
+  ]
+}
