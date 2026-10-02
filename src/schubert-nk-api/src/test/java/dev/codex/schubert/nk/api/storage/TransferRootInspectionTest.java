@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageIdentity;
@@ -16,6 +17,7 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.AnnotatedElementContext;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -131,6 +133,63 @@ class TransferRootInspectionTest {
   private static StorageIdentity identity(Path root) throws IOException {
     PosixFileAttributes attributes = Files.readAttributes(root, PosixFileAttributes.class);
     return new StorageIdentity(attributes.owner().getName(), attributes.group().getName());
+  }
+
+  @Test
+  void a06Mount001CurrentHeldMountFlagsAreMandatoryAndReadOnlyIsRejected() throws Exception {
+    Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+    var identity = identity(fixture);
+    var calls = new AtomicInteger();
+    try (var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixture)) {
+      reject(() -> TransferRootInspection.inspect(root, identity, mount(true, false, calls)));
+      assertEquals(1, calls.get());
+      TransferRootInspection.inspect(root, identity, mount(false, false, calls));
+      assertEquals(2, calls.get());
+      assertEquals(040750, Files.getAttribute(fixture, "unix:mode"));
+      try (var entries = Files.list(fixture)) {
+        assertEquals(0, entries.count());
+      }
+    }
+  }
+
+  @Test
+  void a06Mount002UnknownMountAndNullNeverFallBackToWritablePath() throws Exception {
+    Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+    var identity = identity(fixture);
+    var calls = new AtomicInteger();
+    try (var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixture)) {
+      reject(() -> TransferRootInspection.inspect(root, identity, mount(false, true, calls)));
+      assertEquals(1, calls.get());
+      assertThrows(
+          NullPointerException.class, () -> TransferRootInspection.inspect(root, identity, null));
+      assertEquals(1, calls.get());
+      assertEquals(040750, Files.getAttribute(fixture, "unix:mode"));
+      try (var entries = Files.list(fixture)) {
+        assertEquals(0, entries.count());
+      }
+    }
+  }
+
+  private static InodeSecurityCalls mount(boolean readOnly, boolean fail, AtomicInteger calls) {
+    return new InodeSecurityCalls() {
+      @Override
+      public boolean readOnlyFilesystem(Path held) throws StorageIoException {
+        assertTrue(held.toString().matches("/proc/self/fd/[1-9][0-9]*"));
+        calls.incrementAndGet();
+        if (fail) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+        return readOnly;
+      }
+
+      @Override
+      public byte[] accessAcl(Path held, int maximumBytes) {
+        throw new AssertionError("not an ACL probe");
+      }
+
+      @Override
+      public long effectiveUid() {
+        throw new AssertionError("not an identity probe");
+      }
+    };
   }
 
   private static void reject(org.junit.jupiter.api.function.Executable action) {

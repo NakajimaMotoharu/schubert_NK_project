@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.storage;
 
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageAttributeGuard;
 import dev.codex.schubert.nk.storage.StorageIdentity;
@@ -19,15 +21,24 @@ final class TransferRootInspection {
 
   static void inspect(OwnedTransferDirectory directory, StorageIdentity identity)
       throws StorageIoException {
+    inspect(directory, identity, LinuxInodeSecurity.create());
+  }
+
+  // SSC162/BUG519: FileStore canonical mount flags do not describe a retained RW bind mount.
+  // Native statvfs observes this capability in the current namespace; unknown remains rejected.
+  static void inspect(
+      OwnedTransferDirectory directory, StorageIdentity identity, InodeSecurityCalls security)
+      throws StorageIoException {
     Objects.requireNonNull(directory, "directory");
     Objects.requireNonNull(identity, "identity");
+    Objects.requireNonNull(security, "security");
     directory.atDirectory(
         handle -> {
           try {
             StorageAttributeGuard.directory(
                 Files.readAttributes(handle, "unix:owner,group,mode,nlink"), identity);
             var store = Files.getFileStore(handle);
-            requireFileStore(store.type(), store.isReadOnly());
+            requireFileStore(store.type(), security.readOnlyFilesystem(handle));
             try (DirectoryStream<java.nio.file.Path> entries = Files.newDirectoryStream(handle)) {
               requireSecureDirectoryStream(entries);
             }

@@ -230,5 +230,22 @@ if int(identifier[2:5]) >= 421:
         'VM remains signed PG408/source32c6a7b1e; old182 rows/Backup/INVALID/intents retained, new migration and signed deployment pending',
         'New lifecycle/fatal contract remaining host/native coverage explicitly pending; no exclusion or synthetic Main invocation',
         '100% coverage/full scope/formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 424:
+    manifest['ssc'].append('SSC-161')
+    manifest['testIds'].extend(['READY004-CLOSED', 'MAIN003', 'NATIVEPHASE-001'])
+    manifest['limitations'] = [
+        'Full31 API assembly and true Root-to-same-PID exec observed; actual readiness and whole Morning remain unaccepted',
+        'VM signed PG424/sourcefa30 diagnostic actual ordinary API reached TRANSFER then normal exit50; no UP',
+        'Old failed captured generations physically retired only after full private preservation, not historical close/phase success',
+        'Web actual assembly, ordinary native coverage, CHR, full coverage/formal scope remain pending',
+        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 425:
+    manifest['ssc'].append('SSC-162')
+    manifest['bugs'].append('BUG-519')
+    manifest['ykt'].append('YKT-373')
+    manifest['testIds'].extend(['A06-MOUNT001', 'A06-MOUNT002'])
+    manifest['toolOnlyBugs'] = ['BUG-520: stale M2 when API-only selected command',
+        'BUG-521: operator compile/runtime classpath; not Production PT numerator']
+    manifest['trigger'] = 'Same S3 native Transfer held-mount contract: SSC162/BUG519, readonly/unknown negatives and full six regression before signed candidate'
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

@@ -141,6 +141,8 @@ SSC-019/PG-D-059補足: partの初回作成もopenatのO_CREAT/O_EXCL/O_WRONLY/O
 
 ### 7.4 起動時の診断専用probe（SSC-022）
 
+SSC-162/BUG519：RW検査は保持FDの現在mountについて既存LinuxInodeSecurity/statvfs ST_RDONLYで確認する。ProtectSystem=strict内のTransfer限定RW bindをcanonical FileStore readonlyで誤拒否しない。ext4/SDS・所有/modeと以下の実probeは必須のまま。保持mount readonly/観測失敗は起動拒否し、Files.isWritableだけの代用やsandbox緩和はしない。A06-MOUNT001/002と実通常API経路で検証する。
+
 業務producer/HTTP受付前かつ他writer/batch停止のexclusive startup区間で、実Transfer filesystemの新規group/mode設定、file force、directory fsync、atomic no-replaceを検査する。Rootは自動作成/chmodしない。診断日付はJST正規date、新規dateだけをSSC-020の属性へ確定し、既存dateは検査だけとする。
 
 CSPRNG UUIDの診断partをCREATE_NEWで保持し、秘密を含まない4800byte固定pattern Aを書いてforce/属性/独立hashを検証、readyへnative no-replace公開する。同UUIDの新しい診断partに異なるpattern Bを書き、readyへの二度目の公開がCOLLISIONとなりA/B双方のbyteが保たれることを検査する。通常rename/置換へのfallbackはない。Probeのfileは業務結果ではなく、descriptor/Inbox/業務message/HTTPへ返さない。
