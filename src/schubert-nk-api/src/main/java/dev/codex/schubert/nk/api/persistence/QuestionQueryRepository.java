@@ -61,13 +61,14 @@ public final class QuestionQueryRepository {
   private static final String PAGE =
       ",totals as (select count(*) as total from filtered),page as (select total,"
           + "greatest(1,(total+49)/50) as pages,least(cast(? as bigint),greatest(1,(total+49)/50)) as effective from totals)";
-  private static final String QUESTION_PAGE =
+  private static final String QUESTION_START =
       "with projected as ("
           + QUESTION
           + "),filtered as materialized (select "
           + QUESTION_COLUMNS
-          + " from projected where not question_deleted"
-          + " and (? or owner_user_id=?) and (cast(? as text) is null or username=?)"
+          + " from projected where not question_deleted";
+  private static final String QUESTION_FILTER =
+      " and (cast(? as text) is null or username=?)"
           + " and (cast(? as text) is null or answer_state=?)"
           + " and (cast(? as text) is null or question_body ilike ? escape '\\' or answer_body ilike ? escape '\\')"
           + " and (cast(? as timestamptz) is null or submitted_at>=?)"
@@ -79,6 +80,10 @@ public final class QuestionQueryRepository {
           + QUESTION_COLUMNS
           + " from filtered order by submitted_at desc,id desc limit 50 offset (p.effective-1)*50) x"
           + " on true order by x.submitted_at desc,x.id desc";
+  // SS332§9/BUG469: USER and ADMIN have distinct query IDs, no SQL authorization OR.
+  private static final String QUESTION_USER_PAGE =
+      QUESTION_START + " and owner_user_id=?" + QUESTION_FILTER;
+  private static final String QUESTION_ADMIN_PAGE = QUESTION_START + QUESTION_FILTER;
   private static final String NOTICE_PAGE =
       "with projected as ("
           + NOTICE
@@ -96,12 +101,13 @@ public final class QuestionQueryRepository {
           + NOTICE_COLUMNS
           + " from filtered order by updated_at desc,id desc limit 50 offset (p.effective-1)*50) x"
           + " on true order by x.updated_at desc,x.id desc";
-  private static final String QUESTION_DETAIL =
+  private static final String QUESTION_ADMIN_DETAIL =
       "with projected as ("
           + QUESTION
           + ") select "
           + QUESTION_COLUMNS
-          + " from projected where id=? and not question_deleted and (? or owner_user_id=?)";
+          + " from projected where id=? and not question_deleted";
+  private static final String QUESTION_USER_DETAIL = QUESTION_ADMIN_DETAIL + " and owner_user_id=?";
   private static final String NOTICE_DETAIL =
       "with projected as ("
           + NOTICE
@@ -123,23 +129,15 @@ public final class QuestionQueryRepository {
             .map(v -> "%" + v.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%");
     var from = request.submittedFrom().map(v -> v.atOffset(ZoneOffset.UTC));
     var to = request.submittedTo().map(v -> v.atOffset(ZoneOffset.UTC));
+    var parameters = new ArrayList<Optional<?>>();
+    if (actor.role() == Role.USER) parameters.add(Optional.of(actor.userId()));
+    parameters.addAll(
+        List.of(username, username, state, state, pattern, pattern, pattern, from, from, to, to));
     return paged(
         c,
         true,
-        List.of(
-            Optional.of(actor.role() == Role.ADMIN),
-            Optional.of(actor.userId()),
-            username,
-            username,
-            state,
-            state,
-            pattern,
-            pattern,
-            pattern,
-            from,
-            from,
-            to,
-            to),
+        actor.role() == Role.ADMIN,
+        parameters,
         request.page(),
         "QSSRSP01",
         QuestionQueryRepository::questionRecord);
@@ -155,6 +153,7 @@ public final class QuestionQueryRepository {
     return paged(
         c,
         false,
+        false,
         List.of(Optional.of(actor.userId()), type, type, from, from, to, to),
         request.page(),
         "NTSRSP01",
@@ -165,13 +164,14 @@ public final class QuestionQueryRepository {
       Connection c, AuthenticatedActor actor, QuestionDetailRequestData request) {
     boundary(c, actor, request);
     validateRequest("QSDREQ01", request);
+    var parameters = new ArrayList<Optional<?>>();
+    parameters.add(Optional.of(request.questionId().value()));
+    if (actor.role() == Role.USER) parameters.add(Optional.of(actor.userId()));
     return detail(
         c,
         true,
-        List.of(
-            Optional.of(request.questionId().value()),
-            Optional.of(actor.role() == Role.ADMIN),
-            Optional.of(actor.userId())),
+        actor.role() == Role.ADMIN,
+        parameters,
         "QSDRSP01",
         r -> {
           var record = questionRecord(r);
@@ -193,6 +193,7 @@ public final class QuestionQueryRepository {
     validateRequest("NTDREQ01", request);
     return detail(
         c,
+        false,
         false,
         List.of(Optional.of(request.notificationId().value()), Optional.of(actor.userId())),
         "NTDRSP01",
@@ -230,13 +231,19 @@ public final class QuestionQueryRepository {
   private static TypedPayloadValues paged(
       Connection c,
       boolean question,
+      boolean admin,
       List<? extends Optional<?>> parameters,
       int requested,
       String layout,
       RowMapper<PayloadRecord> mapper) {
     try {
       requireRead(c);
-      try (var s = question ? c.prepareStatement(QUESTION_PAGE) : c.prepareStatement(NOTICE_PAGE)) {
+      try (var s =
+          question
+              ? (admin
+                  ? c.prepareStatement(QUESTION_ADMIN_PAGE)
+                  : c.prepareStatement(QUESTION_USER_PAGE))
+              : c.prepareStatement(NOTICE_PAGE)) {
         bind(s, parameters);
         s.setInt(parameters.size() + 1, requested);
         try (var r = s.executeQuery()) {
@@ -278,13 +285,18 @@ public final class QuestionQueryRepository {
   private static Optional<TypedPayloadValues> detail(
       Connection c,
       boolean question,
+      boolean admin,
       List<? extends Optional<?>> parameters,
       String layout,
       RowMapper<PayloadData> mapper) {
     try {
       requireRead(c);
       try (var s =
-          question ? c.prepareStatement(QUESTION_DETAIL) : c.prepareStatement(NOTICE_DETAIL)) {
+          question
+              ? (admin
+                  ? c.prepareStatement(QUESTION_ADMIN_DETAIL)
+                  : c.prepareStatement(QUESTION_USER_DETAIL))
+              : c.prepareStatement(NOTICE_DETAIL)) {
         bind(s, parameters);
         try (var r = s.executeQuery()) {
           Optional<TypedPayloadValues> result = Optional.empty();

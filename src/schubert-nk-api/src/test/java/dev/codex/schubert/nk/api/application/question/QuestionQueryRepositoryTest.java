@@ -401,6 +401,39 @@ final class QuestionQueryRepositoryTest {
   }
 
   @Test
+  void qry027UserAndAdminHaveSeparateSqlQueryIdsWithoutRoleOrPredicate() throws Exception {
+    try (var f = fixture();
+        var c = read()) {
+      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      var sql = new ArrayList<String>();
+      var observed =
+          (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (p, m, a) -> {
+                    if (m.getName().equals("prepareStatement")) sql.add(a[0].toString());
+                    return QuestionSubmissionServiceTest.invoke(c, m, a);
+                  });
+      for (boolean detail : List.of(false, true)) {
+        sql.clear();
+        for (var actor : List.of(USER, ADMIN)) {
+          if (detail)
+            repository.questionDetail(
+                observed, actor, new QuestionDetailRequestData(new QuestionId(3)));
+          else repository.questionSearch(observed, actor, questions(1));
+        }
+        assertEquals(2, sql.size());
+        assertNotEquals(sql.get(0), sql.get(1));
+        assertTrue(sql.get(0).contains("and owner_user_id=?"));
+        assertFalse(sql.get(1).contains("owner_user_id=?"));
+        for (String statement : sql) assertFalse(statement.contains("? or owner_user_id"));
+      }
+      c.rollback();
+    }
+  }
+
+  @Test
   void qry011AllDecodedRoutesBindOriginalValuesAndBorrowReadOnlyConnection() throws Exception {
     try (var f = fixture();
         var c = read()) {
