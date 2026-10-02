@@ -19,6 +19,10 @@ MorningPreviousBroker.capture/collectForStartup/NoPrior.recheck/Closed.recheck�
 
 ## 実行・認定
 
+PG429修正版full：Source `c3d9a3bdd5f5d3ad3ba8d0ed96e6816f7ca40bfd`、2026-10-03 01:46:37 JST/15m54/exit0、2898PT/438suite/FES0/static6zero。全6manifestSHA `98e810528f10f7c7f61299e73ee1e55f9df3150e48683e7927ccdfddf412eaed`、logSHA `c7138c12c409a16e340e08de92b64799135b94b503cb32ba387a728eaf839bb2`。host miss B1230/L3467/M564/C39、Source352比+2/-1/-1/0。NoPrior型本体のmiss全0、collectForStartupの3guard分岐とClosedの2branchは下記追加8で確認する（旧capture/nativeは別未達）。署名PG429181artifact/manifest39983 SHAade367a4は原署名成功後fullBOMが新tmpfiles layoutを拒否、BUG536/SSC167へ先行起票、currentPG428/permit0不変。実NoPrior/freshBroker/親ready/Webは未実行。
+
+ISSCOLD008追加（PG430同契約）：独立18field literalの部分cold Invocation/start/endを新旧collect双方で拒否しquery0、保存Closedの別thread/query0と追加の有効旧entryによるentries相違を拒否・buffer消去確認。旧golden/期待値は変更しない。
+
 PG429初回full（Source075a864d8）は2026-10-03 01:28:04 JST/exit1、Batchの追跡Javadoc改行をspotlessが拒否。5module成功を新Source合格へ流用しない（BUG535/YKT378）。新Sourceの実結果はfresh全6後manifestを正とする。BUG533 negative/BUG534 sealed cast是正は新7PT・旧golden・static0で再試験し、BUG526全callerをYKT379で横断確認する。
 
 開発選択v4：2026-10-03 01:16:02 JST、89PT/14suite/FES0、SpotBugs6module0、strict compile/format成功、終了0。logSHA `07e4b820173743003d685436b1c86fc24e81f501bd3c19307c5ef260500f184c`。後続追跡commentだけ更新後、全6 fixed-sourceで改めて確認する。v1 exit1 no-tests、v2 1failure、v3 PT成功/static1は合格扱いしない。

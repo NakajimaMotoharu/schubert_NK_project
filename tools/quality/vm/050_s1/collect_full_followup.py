@@ -272,5 +272,12 @@ if int(identifier[2:5]) >= 429:
         'Web full business assembly, Caddy, held original DONE and normal intent retirement remain pending',
         'Native ordinary coverage, CHR-A01/L01 and full scope coverage100 remain pending',
         'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 430:
+    manifest['ssc'].append('SSC-167')
+    manifest['bugs'].append('BUG-536')
+    manifest['ykt'].append('YKT-380')
+    manifest['testIds'].extend(['FULLBOM010', 'ISSCOLD008'])
+    manifest['trigger'] = 'SSC167 fixed signed boot-config payload path and same cold-owner oracle boundary closure: full shared six regression before new signed native candidate'
+    manifest['limitations'].insert(0, 'PG429/sourcec3 full2898 is preserved; PG429 signed signature passed but full BOM refused tmpfiles layout; current/approval/permits were unchanged')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

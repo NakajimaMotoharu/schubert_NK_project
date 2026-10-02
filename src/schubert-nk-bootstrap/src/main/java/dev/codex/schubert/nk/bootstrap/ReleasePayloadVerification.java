@@ -100,6 +100,7 @@ final class ReleasePayloadVerification {
         || path.equals("config/effective/backup-age-recipient")
         || path.equals("config/caddy/Caddyfile.template")
         || path.equals("config/artemis/broker.xml.template")
+        || path.equals("config/tmpfiles/schubert-nk-maintenance.conf")
         || path.matches("systemd/[A-Za-z0-9._-]+\\.(?:service|target|timer)")
         || executable(path)
         || path.matches("operations/runbooks/[A-Za-z0-9._-]+");

@@ -290,4 +290,61 @@ final class MorningNoPriorBrokerTest {
     assertThrows(IOException.class, () -> proof.recheck(live));
     old.erased();
   }
+
+  @Test
+  void isscold008PartialBaselineAndClosedThreadOrExtraRetainedEntryRefuse() throws Exception {
+    String cold =
+        MorningBrokerUnitCycleTest.LIVE
+            .replace("ActiveState=active", "ActiveState=inactive")
+            .replace("SubState=running", "SubState=dead")
+            .replace("MainPID=43", "MainPID=0")
+            .replace("InvocationID=" + "7".repeat(32), "InvocationID=")
+            .replace(
+                "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0");
+    for (String bad :
+        List.of(
+            cold.replace("InvocationID=\n", "InvocationID=" + "6".repeat(32) + "\n"),
+            cold.replace(
+                "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1234567"),
+            cold.replace(
+                "ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=1234568"))) {
+      var q = new Query();
+      var previous = MorningBrokerUnitCycleTest.parse(bad);
+      assertThrows(
+          IOException.class,
+          () ->
+              MorningPreviousBroker.collectForStartup(
+                  BrokerJournalEvidenceTest.BOOT, previous, q, () -> 1_000_000_000L));
+      assertThrows(
+          IOException.class,
+          () ->
+              MorningPreviousBroker.collect(
+                  BrokerJournalEvidenceTest.BOOT, previous, q, () -> 1_000_000_000L));
+      assertEquals(0, q.calls);
+    }
+    var old = new MorningPreviousBrokerTest.Fixture();
+    var proof =
+        MorningPreviousBroker.collect(
+            BrokerJournalEvidenceTest.BOOT,
+            MorningPreviousBrokerTest.cold(),
+            old,
+            () -> 1_000_000_000L);
+    var failure = new AtomicReference<Throwable>();
+    Thread other =
+        new Thread(
+            () -> {
+              try {
+                proof.recheck();
+              } catch (Throwable actual) {
+                failure.set(actual);
+              }
+            });
+    other.start();
+    other.join();
+    assertInstanceOf(IOException.class, failure.get());
+    assertEquals(5, old.calls);
+    old.full += BrokerJournalEvidenceTest.row("AMQ221031: Ready", 5).replace("1234567", "1234568");
+    assertThrows(IOException.class, proof::recheck);
+    old.erased();
+  }
 }

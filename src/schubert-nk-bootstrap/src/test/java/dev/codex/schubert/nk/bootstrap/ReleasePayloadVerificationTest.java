@@ -20,6 +20,37 @@ import org.junit.jupiter.api.io.TempDir;
  */
 final class ReleasePayloadVerificationTest {
   @Test
+  void fullBom010OnlyFixedSignedBootProvisioningFileIsPermittedAndTamperRefuses() throws Exception {
+    var f = new Fixture("signed-fixed-tmpfiles");
+    byte[] bytes =
+        ("# PUBLIC FIXED BOOT PROVISIONING\n"
+                + "d! /run/schubert-nk/expiry-request 0700 root root -\n"
+                + "f! /run/schubert-nk/maintenance.lock 0600 root root -\n")
+            .getBytes(StandardCharsets.US_ASCII);
+    f.payload.put("config/tmpfiles/schubert-nk-maintenance.conf", bytes);
+    f.publish();
+    var observed = f.subject().verifyCandidate(f.approval);
+    assertEquals(
+        hash(bytes), observed.artifactHashes().get("config/tmpfiles/schubert-nk-maintenance.conf"));
+    assertEquals(f.payload.size(), observed.artifactHashes().size());
+    f.released();
+    for (String forbidden :
+        List.of(
+            "config/tmpfiles/other.conf",
+            "config/tmpfiles/schubert-nk-maintenance.conf.extra",
+            "config/tmpfiles/private-key.pem",
+            "config/tmpfiles/schubert-nk-maintenance.service")) {
+      var negative = new Fixture("forbidden-tmpfiles-" + Math.abs(forbidden.hashCode()));
+      negative.payload.put(forbidden, bytes);
+      negative.publish();
+      refused(negative);
+    }
+    Files.writeString(
+        f.release.resolve("config/tmpfiles/schubert-nk-maintenance.conf"), "TAMPERED");
+    refused(f);
+  }
+
+  @Test
   void fullBom009OnlyTwoApprovedPublicEffectiveInputsArePermitted() throws Exception {
     var f = new Fixture("signed-public-effective");
     byte[] profile = "PUBLIC CANONICAL PROFILE FIXTURE\n".getBytes(StandardCharsets.US_ASCII);
