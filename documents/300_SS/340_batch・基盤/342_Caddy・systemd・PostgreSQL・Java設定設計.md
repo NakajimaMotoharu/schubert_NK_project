@@ -1,5 +1,15 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC137/S3失敗停止追補（実装前）：pending起動のAPI/Web slotは同M/原本/正常A後の親が、真正cold全Unit確認→durable intent→正常start client→実Root世代二読→launch公開まで所有する。未完成ordinaryが50等で退出してもRestart=on-failureを成功又は別起動のreadyへ読み替えない。捕捉した元PID/startTicksの真正proc消滅を同boot/root/Morningの下で二読後、固定slotを通常stop clientで停止し全Unit/kernel空を確認する。UNKNOWN/未捕捉/stop不明/終端不明では元M/DB/原本を保有して外側期限まで隔離。全停止した失敗は当回permit revoke＋残intent保全で非成功終了し、GC/coldから成功receiptを生成しない。これは境界接続の失敗枝でありready/completed/M最終close保証は別未受入。
+
+SSC137/S3内部接続（2026-10-01、実装前）：API/Web RootはA取得後、当回実ISSUED・原本・ownerと自己Invocation/PID/startTicksを検査する。pending枝では同Morning真正生存/元単調期限に加え、A正常close・発行commit後にその親が真正start client正常帰還/対象Root manager-kernel-manager二読後公開した自己launchが必須。completed枝は同activation真正done0/10・全graph/active/pending無し・同Morning正常0/10/fullkernel終端receiptが必須、旧pending ticket/GC/空Invocationで代用不可。全release/config/六root/schema/BrokerOpsの正常close後、actual A FD/dev/inoと実17field sealed proof、保持setpriv ELFを既存native execへ接続する。固定Java唯一link /usr/bin/java→/opt/jdk-25.0.4/bin/javaのroot管理chain/version/ELF/前後一致を検証、A期間の管理者変更は禁止。別PID fork/第三継承FD/shell/任意argv/秘密envは禁止。Root候補capは用途限定で実測、ordinary childは五cap全部0。API/Web全業務ready後だけA解放/次service/Caddy/DONEへ進む。Morning全0/10は全resource/M正常close後だけ。M最終close未知後の既ready停止競合は別未受入、成功扱いしない。現未完成Rootやunassembled ordinary50は限定境界観測でありUnit完成認定ではない。
+
+SSC127/BUG375：vendor Artemis Unitだけに`SuccessExitStatus=143`を指定し、Javaの正規SIGTERM/Shutdown hook完了後の通常exitをinactive/deadとする。143をworker成功へ流用しない。旧Unitのfailed143はreset-failedせず、SS343§6.17のsame-invocation全停止journal・全kernel終端・Code1/時刻を独立確認したときだけ次fresh起動のbaseline dataへ使う。SIGKILL/timeout/signal/unknown/不正journalは拒否。固定Stop policy/control-group/SendSIGKILL=no/Restart=on-failure/zeroCapsは不変更。未起動trusted候補配備は旧/new署名BOM・実旧8Unit byte・M/A/全終端を保持し、Artemis固定1directiveだけを追加する（既存drop-in/設定/失敗stateを修復しない）。
+
+SSC111/SSC109補足：root Cleanup/Expiryも署名release原本をPID1 host viewで読むためroot prestartに限りCAP_SYS_PTRACE/CAP_DAC_OVERRIDEをbounding setに残す。Ambientは空、NoNewPrivileges/ProtectSystem=strictを維持し、API/Web/Backupの最終worker zeroCapsを変更しない。Expiryはoneshot/Restart=no/RemainAfterExit=yes/SuccessExitStatus=10/TimeoutStart=10min/TimeoutStop=60s/KillMode=control-group/SendSIGKILL=no/Delegate=no、Artemis After/Requires、親の明示startと同残budgetで管理する。private残留requestをRuntimeDirectory自動消去で隠さない。未完成PGPT candidateの配置は隔離VMで保全後だけ行い、production enable/正式合格としない。
+
+SSC107/BUG322（PG/PT）：親Morning候補の`Type=simple`＋`TimeoutStartSec=30min`はJava親全体の上限でなく、`Before=Backup/Cleanup/...`も親処理完了barrierにならない。親を`Type=oneshot`にし`TimeoutStartSec=30min`を実行中全体に適用する。親から子への`Before=`は外し、親がM/A/原本を所有して固定Unitを明示起動する。morning targetは親だけを`Requires`し`After`で親完了を待つ。旧「全unitをWants」は廃止し、子の並列自動起動を禁止する。`SendSIGKILL=no`と後続保全を維持し、timeout時にOS lock解放/Unit終端/marker修復を推定しない。実効Type/MainPID/timeout、短縮隔離probe、全Unit依存順と親の30分単調budgetはPTで確認する。Web/API/Artemis `Type=simple`の個別readinessは引き続き別pollであり、その`TimeoutStartSec`を長期稼働期限へ転用しない。RD/UI変更なし。
+
 ## 1. 目的・状態
 
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
@@ -82,6 +92,8 @@ https://<GLOBAL_IP>:55160 {
 
 ## 4. Systemd dependency・unit設定
 
+SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止へ採用しない。NK専用非起動drop-inで `SendSIGKILL=no` と `TimeoutStopSec=30s` を設定し、daemon-reload後の実効 Id/LoadState/KillMode/SendSIGKILL を親の固定8対象と同じ閉集合で確認する。既定Caddyを実測せずにpolicy合格としない。policy確認はstop client/全cgroup終端/Artemis journalの代用でなく、未配置Unitのfake/alias禁止を維持する。
+
 ### 4.1 Dependency
 
 | Unit | `After` | `Requires` | `Wants`/note |
@@ -89,15 +101,26 @@ https://<GLOBAL_IP>:55160 {
 | `schubert-nk-backup` | PostgreSQL | PostgreSQL | 失敗はmorning続行 |
 | `schubert-nk-cleanup` | backup | PostgreSQL | Backup成否はDB rowで分岐 |
 | `artemis` | cleanup | cleanup | Cleanup safety failureで起動不可 |
-| `expiry-cleanup` | Artemis | Artemis | API Consumer前に実行 |
-| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL, expiry | readiness poll後にWeb |
+| `schubert-nk-expiry-cleanup.service` | Artemis | Artemis | API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない |
+| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL | SSC139: expiryの実前処理は正規issuer/Root許可で必須、API dependencyによる保守子再実行は禁止。readiness poll後にWeb |
 | `schubert-nk-web` | API, Artemis, PostgreSQL | API, Artemis, PostgreSQL | technical DBが必要 |
 | `caddy` | Web | Web | Packageの自由先行起動をdisable |
 
-`schubert-nk-morning.target`が全unitをWantsし、通常bootの`multi-user.target`からWantsする。BackupのFAILEDは
-target全体を止めず、cleanupが削除skipを記録した上で後続する。
+SSC104/PG324：上表Cleanupはroot MorningがM/A保持中に同期起動する真正oneshotであり、空の成功Unitを置かない。固定非秘密requestはsystemd `LoadCredential`でprivate受渡しし、`db-batch`はroot Cleanup専用processへ固定配布する。Unitの0/10は実削除・skip/警告・transferを記録した親検証済終端だけに対応し、safety failure/起動不明は非成功でArtemis `Requires`を遮断する。root実行権限は現物backup root/原本検証のためだけで、shell/任意argv/env/Secret出力は禁止。service templateの完成・配備は全親/子契約と別PTを経るまで未認定。
+SSC104/PG326：子のroot contextは`schubert-nk-cleanup.service`自身のUID0、固定PID1/boot、自己PID-start/InvocationID/MainPIDと厳密cgroupで認証し、親`schubert-nk-morning-controller.service`のcontextを流用しない。起動時と帰還時に再確認し、異Unit/変更/不明は削除0・非成功。これはM/A/原本・両backup・DB advisoryを証明しない。
+
+`schubert-nk-morning.target`は親MorningだけをRequires/Afterし、通常bootの`multi-user.target`からWantsする。親が全子を順序起動・終端照合し、BackupのFAILEDは
+親がその事実を同runへ記録してCleanupの削除skipを選び、後続起動する。子をtargetから並列Wantsしてはならない。
+
+SSC108/PG379補足：許可のprestart観測はSS341§5.1/SS343§6.17の固定集合とする。親/各worker/ArtemisのInvocationは真正managerとhost kernelの同一boot観測へ束縛し、command client exitを結果としない。Morning root Unitの保持root書込みとPID1由来確認に必要な最小権限・ReadWritePathsは実配備で照合し、未配置Expiryを空成功Unitで代用しない。API/WebのzeroCaps契約は変更しない。host injected PTと実VM coverageを同一sourceへ束縛し、外部main/namespace/native分岐を除外しない。
+
+SSC109実装前：親候補はstrictを維持して`ReadWritePaths=/run/schubert-nk /var/lib/schubert-nk/maintenance /srv/schubert-nk/backup`の固定mutation対象へ限定する。共有/run,/var,/var/lib,/var/lib/schubert-nkを広域RWへしない。root親CAP_SYS_PTRACEはPID1由来確認、CAP_DAC_OVERRIDEは専用backup0700内のroot-owned archive生成に用途限定し、実VMで最小性を確認する。全CAP許可/ProtectSystem=fullは回避策にしない。API/Web/BackupのzeroCaps及びcredential配布範囲は維持する。単なる設定候補を実Morning受入へ算入しない。
 
 ### 4.2 Java service共通
+
+SSC-087: root前段も共通sandbox内で動き、ProtectSystem=strictを解除する`+`/shell/setnsは使わない。PrivateUsers/PrivatePIDsや固定permit fileの古いbindを追加せず、PID1/system managerが同じhost/bootであることを検証する。root前段のread-only保持host能力だけで現在host FSを観測し、exec前に全closeする。普通serviceにはA短期FDとsealed公開proof以外のhost能力を移さない。private RO観測をhost故障のRO状態と混同しない。
+
+SSC-086: 完成時の直接Java入口は同Unit/same PIDのroot前段`RootServiceLauncher`とする（ExecStartの`!` prefix、shellなし）。前段は既存root起動管理の全root/Ops/schema/現在起動許可をread-only検査し、native execveで固定`/usr/bin/setpriv`→固定`/usr/bin/java`→従来service mainへ置換する。!はSupplementaryGroupsも無効化するので、固定account/groupのNSS解決値を明示`--reuid/--regid/--groups`へ渡す。init-groups/任意account/任意commandは禁止。全bounding/inheritable/ambient capabilityをdropしNoNewPrivilegesを保持、最終UID/GID/groups/5cap fieldを子が再確認する。他のsandbox/ReadWritePaths/5個LoadCredentialは従来値のまま。root前段のprivate sourceはappへ移さず、前段の秘密copy/DB/JMSはexec前にcloseし、成功execでroot JVM全heapを破棄する。Aの短期同OFDとsealed非秘密proof以外を意図的に継承しない。!前段もtrust boundaryの一部としてPT対象、まだ完成していないProduction Unitは現状の拒否mainを維持する。
 
 | Directive | Web/API | 理由 |
 |---|---|---|
@@ -113,6 +136,14 @@ target全体を止めず、cleanupが削除skipを記録した上で後続する
 | `TimeoutStopSec` | Web 30s/API 60s | UI 251のgraceful上限 |
 | `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |
 | `LimitNOFILE` | 65536 | MQ/DB/media FD、leak監視 |
+
+SSC-080/BUG-256/YKT-192: Web/APIの必須EnvironmentFileは各々`src/deployment/config/<service>.env.template`から固定1行`SCHUBERT_NK_CONFIG_DIR=/etc/schubert-nk`＋LFをrenderし、root:service0600で配布する。systemd managerが読み、serviceは値だけを起動前検査する。重複・未知/secret/alias・JVM option・placeholder・CRLFを含むfileは配布前拒否し、Java側も受領した値が固定rootと一致しなければ設定file読取前に停止。実root/manager配布はLinux ITで確認する。JVM optionは引続きUnit固定、秘密はLoadCredentialのみであり、envへ追加しない。
+
+SSC-075: 起動前のOps Core management属性照会はSS321 §10の管理namespace限定一時reply Address/Queue権限を用い、各request 2秒で打ち切る。systemdの120秒上限を個々の無期限broker応答待ちの代用にしない。Ops credentialはWeb/API application roleへ流用せず、management一時Address/Queueの作成/削除失敗・close失敗はreadiness falseとして残す。
+
+SSC-020: APIのUser/primary Groupはschubert-api専用を維持し、Transfer読取group schubert-webをSupplementaryGroupsへ追加する。Asset用のschubert-readと同様、共有対象は承認済みdataだけであり、Web/APIのcredentialやprivate runtime fileをgroup-readableへ変更しない。APIが作った新規日付directory/partに限り、保持inodeへgroup=schubert-webと0750/0640を明示設定して検証する。既存root/childの所有者・mode不一致は起動/処理失敗とし、applicationが修正しない。Provisioningと起動probeでgroup membership・新規作成権限を検証する。
+
+SSC-079/BUG-253/YKT-191: Web/APIのreleaseとconfigはUI243/SS343の`root:schubert` directory0750・非秘密file0640なので、両unitの`SupplementaryGroups`へ`schubert`を明示し、OS accountの暗黙の補助groupに依存しない。APIは既存`schubert-read schubert-web`、Webは既存`schubert-read`を維持する。`schubert`は非秘密release/configの読取にだけ用い、`/etc/schubert-nk/credentials`のroot:root0700、private runtime、service別LoadCredentialの秘密権限は緩和しない。PTではmode/groupの独立固定oracleと両unitのdirectiveを照合し、実Linuxでのgroup provisioning/credential分離と起動後の実読取はIT開始条件へ残す。
 
 ### 4.3 Hardening
 
@@ -135,6 +166,14 @@ Missした05:00をboot時に即実行してreboot loopを起こさない。Miss�
 
 ## 5. Java/JVM・Spring process
 
+### Private Inspector unit補足（SSC-049、PG-D-144）
+
+`schubert-nk-inbox-inspector.service`はUser/Group=`schubert-inbox-inspector`の固定非root専用identity、Type=oneshot、Restart=no、SuccessExitStatus=10、TimeoutStartSec=30min/TimeoutStopSec=60s、KillMode=control-group/SendSIGKILL=no。ExecStartはrelease内の固定receipt wrapper、Java main直接起動を親の成功判定に使わない。DB/current2の必須LoadCredentialとprevious2の選択profileは343 §6.8。EnvironmentFileはroot所有静的設定とroot所有per-run2値だけ。Java option/classpath/commandをbatchが任意上書きする仕組みを作らない。
+
+§4.3のNoNewPrivileges/PrivateTmp/PrivateDevices/ProtectSystem=strict/ProtectHome等の共通hardeningを維持し、asset/transfer/backupへのwriteを与えない。readonly release/configとprivate runtime credentialだけを利用しHTTP/JMS listenerを起動しない。After/RequiresはPostgreSQL、Beforeは通常Artemis/API/Web/Caddy、通常起動順を変えず親cleanupの内部で同期起動する。既に動いているAPI/Webを子unitが勝手に停止するConflictsは追加しない。親のinactive確認・OS lock・backup照合は別gate。
+
+検査中は通常API/Web停止のため、その未使用枠内でInspector heap Xms128m/Xmx512m、Direct64m/Metaspace192m、ReservedCodeCache128m、MemoryMax1024Mを上限とする。UTF-8/UTC/ExitOnOutOfMemoryError/enable-native-access=ALL-UNNAMEDを固定し、heap dump自動出力は無効。実RSS/GC/timeout/TERM/権限配布は後続Linux IT。PTはmain・wrapperの全終了分岐、template/directive/profileの独立matrixとShellCheck/systemd-analyze検証を記録し、実unit起動成功と混同しない。
+
 ### 5.1 Resource
 
 | Process | Heap | Direct/Metaspace上限 | systemd `MemoryMax` | Native headroom | Thread/pool |
@@ -153,6 +192,12 @@ Heap dump自動出力は無効のままとし、機密値を含むdumpを通常l
 ITはRSS/heap/direct/metaspace/thread/GC pauseを実測し、上位16GB配分内だけで調整する。メモリ上限を広げる場合、
 PostgreSQL/Artemis/OS/headroomの合計16GB以内を同時更新する。
 
+SSC-019/021によりTransfer writer/Readerはshared storageのJava25公開FFM限定native portを使用する。Classpath起動のAPI/Web（storageを使用するbatchも）へ`--enable-native-access=ALL-UNNAMED`を明示し、JPMS化する場合は該当module名へ限定する。Native accessはOS権限分離の代替ではない。Linux/glibc・procfs self FD・必要attributeを共通readinessで、renameat2 no-replace・directory fsyncをwriterのreadinessで検証し、不成立時は起動成功としない。Systemdの既存hardeningを外さず、実機ITでWeb read-only/API限定writeのFD相対操作を確認する。
+
+SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前のexclusive startupで所有済診断fileだけを検査・清掃し、失敗/不確定公開/cleanup failureでreadinessを成功にしない。通常業務ready非削除、Web read-only、hardeningは維持する。
+
+SSC164（内部接続補足）：Morningのready判定は捕捉Rootと同一のboot/PID1/Invocation/MainPID/startTicks/cgroupを、ordinary移行後もmanager/kernel前後で照合する。UID0 Root認証を流用せず、固定NSS ordinary identity/全groups/五cap0/NNP1/固定mainを独立確認する。管理socketは本人FD inodeのexact127.0.0.1（IPv4及びIPv4-mapped IPv6）のみで、wildcard/::1/他inodeを拒否。HTTP200UPと発行permitのreleaseDigestに一致する保持manifest由来の5値を、同じsocket inode及び同親/API世代の前後検査で認定する。API ready→Web真正Root→Web全業務ready→Caddy/原本完了の既存順序は維持、ready単独を親成功にしない。同M/DB/原本/epoch・元30分budgetを維持、unknown/停止不確定は保全する。詳細PTと各scopeの採取不足は018/311及び456に記録する。
+
 ### 5.2 Spring主要値
 
 | Key | Web | API |
@@ -169,6 +214,8 @@ PostgreSQL/Artemis/OS/headroomの合計16GB以内を同時更新する。
 
 Actuatorはloopbackのみで、environment/configprops/heapdump/loggers/shutdownをexposeしない。`info`はrelease commit、
 app/config/schema/protocol versionだけ。Secret/path/account/Queue bodyを出さない。
+
+SSC158（API内部実現補足）：普通APIの管理HTTPだけはJDK HTTP serverで上記閉鎖契約を実現する。固定127.0.0.1:8091、GET `/actuator/health`・`/actuator/health/readiness`はstatusのみ、DOWNは503/UPは200。`/actuator/info`はstartup proofのactual release hashと一致する保持manifestから検証した5値のみ、`/actuator/prometheus`は秘密を含まないready gauge。その他path/methodは拒否。全31登録検証・DB/JMS/storage probe・Outbox開始・SYNC4/WebLog1/ASYNC1が揃い、同ownerがReady.releaseを正常完了した後のみUP。解放失敗又は停止競合は非成功、Aが空いたことやsystemd activeだけはready証拠ではない。stop/fatal/Outbox不健康でDOWNとし、新業務guard→consumer drain→Outbox join→codec/root→factory→pool/credentialを外側所有の順序で閉じる。hookはstop通知＋owner完了待ちだけ、callback threadから資源close/System.exitしない。取得中TERM/uncertain closeも成功receiptを作らない。Morning側のsame-PID socket/Invocation/startTicks前後照合と原本完了は後続実装であり、当HTTPのUP単独では親完了を認定しない。
 
 ## 6. PostgreSQL 18
 
@@ -201,6 +248,10 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 
 ### 6.2 Roleごとのtimeout
 
+SSC-069/PG-D-187（2026-09-20）: §6.1の運用eventを`log_connections=on`、`log_disconnections=on`、`log_checkpoints=on`、`log_lock_waits=on`、`log_autovacuum_min_duration=0`で具体化する。slow SQL本文は`log_min_duration_statement=-1`、`log_min_duration_sample=-1`、`log_transaction_sample_rate=0`で無効にし、失敗SQL本文は`log_min_error_statement=panic`、DETAIL/HINT/QUERY/CONTEXTは`log_error_verbosity=terse`で抑止する。error severityは既定の記録を維持する。PostgreSQL自身のprimary error MESSAGEには不正入力値を含む場合があるため、これだけで任意入力の秘密非出力を保証しない。型付きbind/入力検証・実配備のOS log/redaction確認は別gateとし、raw DB logをPTエビデンスへコピーしない。
+
+根拠: [PostgreSQL18 logging](https://www.postgresql.org/docs/18/runtime-config-logging.html)。配備雛形は`src/deployment/postgresql/`、全directiveとHBA16規則をPT-OPS-PGCFG-001～008で独立照合する。log保存先/rotationは配備環境とSS351で管理し、雛形だけで全運用完成としない。
+
 `schubert_backup`行と後続hba entryはQA-043/UIC-003承認済みのrelease値である。
 
 | Role | `statement_timeout` | `lock_timeout` | `idle_in_transaction_session_timeout` |
@@ -211,6 +262,7 @@ error severityは記録するが、slow queryの本文はapplicationのquery ID/
 | `schubert_backup` | 30min | 5s | 60s |
 | `schubert_migration` | 30min | 5s | 60s |
 | `schubert_ops_ro` | 10s | 1s | 15s |
+| `schubert_inbox_inspector`（SSC-049） | 30s | 5s | 専用単発transaction、process上限30min。既存provisioningに未設定のidle値を設定済みとしない |
 
 Long-running migrationは個別migrationで`SET LOCAL`し、roleの無制限化をしない。
 
@@ -222,6 +274,7 @@ host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_ba
 host   schubert_nk  schubert_app,schubert_web_session,schubert_batch,schubert_backup,schubert_ops_ro  ::1/128       scram-sha-256
 host   schubert_nk  schubert_migration                    127.0.0.1/32  scram-sha-256
 host   schubert_nk  schubert_migration                    ::1/128       scram-sha-256
+host   schubert_nk  schubert_inbox_inspector              127.0.0.1/32  scram-sha-256
 host   all          all                                   0.0.0.0/0     reject
 host   all          all                                   ::/0          reject
 ```
@@ -230,6 +283,8 @@ host   all          all                                   ::/0          reject
 331のgrantで業務schemaは不可。Remote CIDR、trust、password、md5を追加しない。
 
 ## 7. Artemis process・config
+
+SSC103/PG321：`artemis.service`は実instance `/var/lib/schubert-nk/artemis`を専用`schubert-artemis`で起動する。`After/Requires=schubert-nk-cleanup.service`は必須であり、cleanup未配置を偽Unit/依存無視で補完しない。trusted root側がprivate regular0600の`/etc/schubert-nk/credentials/artemis-users`にJAAS hashed user propertiesを事前配置し、Unitは固定`LoadCredential`でprivate `/run/credentials/artemis.service/artemis-users`を受ける。vendorの`etc/artemis-users.properties`期待場所へはUnit private namespace内のread-only bindを使い、host既存fileを上書き/削除しない。秘密値・raw propertyをargv/env/log/Gitへ出さない。Unit構文・実効policy/credential bind・専用UID・起動/停止・journal cleanはそれぞれ独立判定し、loadedだけをbroker readinessやclean stopへ読み替えない。systemd bind適用順の実測に失敗すれば安全停止し別SSCで再判断する。
 
 - `broker.xml`、Address/Queue/security/JMS値は321を正とする。Acceptors 61616/console 8161はloopbackだけ。
 - Instance root `/var/lib/schubert-nk/artemis`は`schubert-artemis` 0700、journal/paging/large messageは別subdirectory。

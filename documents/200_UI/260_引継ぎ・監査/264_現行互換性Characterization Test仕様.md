@@ -77,7 +77,7 @@ program/characterization/
 
 | 差異ID | Current | NK | 理由・関連RD | 利用者影響 | 比較case | 状態 |
 |---|---|---|---|---|---|---|
-| DIF-001 | Brand `schubert` | `schubert NK` | 再構築識別、SYS-001 | Header/title変更 | CHR-U01/U02 | UI設計決定 |
+| DIF-001 | Brand `schubert` | `schubert NK` | 再構築識別、SYS-001 | Header/title変更。Login titleはCurrent `schubert - ログイン`→NK `schubert NK - ログイン`だけ | CHR-A01/U01/U02 | QA-045/UIC-005承認、SSC-074 |
 | DIF-002 | 全利用者がLog閲覧 | ADMINだけ | AUT-002、FUN-008 | USER menuからLog消去 | CHR-L01 | RD確定 |
 | DIF-003 | 現行4機能menu | 質問・通知・回答、ADMIN User管理追加 | FUN-009～013 | Card追加 | CHR-U01/N01 | RD確定 |
 | DIF-004 | File account、Web内認証 | PostgreSQL account、MQ API認証、USER/ADMIN | FUN-001、AUT-001～004 | Account再作成、role表示 | CHR-A01～03 | RD確定 |

@@ -1,6 +1,58 @@
 # モジュール・package・class責務設計
 
+SSC142（PG406、BUG402/YKT322）：SSC137のAPI/Web Rootは、SSC084で既に共用Bootstrapへ置いた固定role `api.bootstrap.ServiceDatabaseSource` をown roleの単独物理JDBC sourceとして再利用する。互換binary名はAPI artifact依存を意味しない。Batchの閉鎖import検査はこの一型と既存ApiNonSecretConfigを明示参照し、実Bootstrap source所属と既定POM依存集合を独立照合する。wildcard・API業務class・任意Source/role・BootstrapへのHTTP/JMS追加は許可しない。普通API/Web private credential reader・role契約は不変更、RootのDB/秘密/resource寿命はSS342/343・PT297で別検証する。
+
+SSC126（PG395、正規issuer接続の内部依存）：ApiNonSecretConfig/WebNonSecretConfigの純粋scalar parser・独立PTをbootstrapへ移す。既存api/web.* binary名は互換名で、業務moduleへのartifact依存を意味しない。固定defaults/strict YAML/role別許容key/正確effective canonical SHAは保持し、Root Morningと各appが同じ実装を利用する。APIの6Queue名はSS321/343の固定default集合だけを照合しProtocol enum依存を持ち込まない。SnakeYAML3.1.1は既存API/Webと同version、sharedはStorageだけへの内部依存・HTTP/JMS/業務repositoryなし。通常API/Web/Rootへのcredential配布は変えない。新共用framework/設定fallback/業務profileを追加しない。
+
+SSC088: 共用bootstrapへSSC086の非秘密canonical proof/固定service NSS/子自己bindingも収容し、root Batch→bootstrapを許可する。API/Web→bootstrapとbootstrap→Storageだけの内部依存、Web→業務API禁止、Storage native-only/no-JDBC、bootstrapへ業務HTTP/JMS追加禁止を維持する。root Batchのschema read-only validateにはFlyway core compile/PG plugin runtimeを使用する（従来test限定から具体化）。通常serviceへmigration/Ops credentialを配布しない。公開snapshot・native2FDだけで全root/current permit/schema/Ops readinessを代替しない。
+
+SSC084/PG289: `src/schubert-nk-bootstrap`を共用起動libraryとしてStorageの後、API/Webの前へ追加する。固定資格情報のstrict material/保持inode読取と固定role JDBC admission/sourceだけを移動し、HTTP/JMS/業務repository/process entry/DDLは含めない。API/Webはbootstrapを参照でき、bootstrapはStorageだけを内部依存とする（JDBCはJDK、PostgreSQL driverはruntime）。Storageのnative-only/no-JDBCとWeb→業務API依存禁止は維持する。移動対象11classの既存api.* package/binary名は互換名として保持し、artifactのAPI依存を意味しない。対象と試験owner/再検証方針は473、SSC084へ追跡。RequiredColumnは業務APIに残し、bootstrap DB admissionはそのSQL NULL拒否を自身の固定08001契約で扱う。秘密/権限/外部画面仕様は変更しない。
+
+SSC062/PG169: .batch.file.BackupManifestReaderはSS341§6.7のroot MANIFEST保持inode読取りを所有し、constructor/read・metadata/bounded IO/safe close/clockを017046・047/BAT226～241へ追跡する。callerの原本両handle/name照合、root/child/entry前後検査までを担い、任意root侵害、root生成/実3archive/DB成功/7世代/親OS寿命は保証しない。依存は既存Batch/Storage/Java標準、PG168正式12中は設計のみ先行。
+
+SSC060/PG167: Batch .platform.InspectorUnitSnapshot（固定18property/値/必要終端条件/fresh receipt）とInspectorUnitProbe（固定show・GetUnitProcesses・同状態照合/所有stdio/固定例外）を追加予定。既存API/Web停止確認とは用途を分離し、start/stop/親callback/OS lockを所有しない。全public/private method・native helperはOPS009/UI251/SS341 §7.4・343/018021～024・PT-OPS-UNIT-001～016へ対応。依存は既存Batch/Java標準のみ、systemd設定そのものの変更は含まない。
+
+SSC059/PG166: .batch.file.BackupArtifactVerifierは341 §6.5の信頼manifestと実4fileのread-only一致・保持inode/metadata/ACL/size/hash/byte/再binding・owned closeだけを担う。BAK/BKO/UI251/SS341・343、017038/039/BAT194～209でconstructor/verify・全内部port/snapshot/safe-close/streaming/時計のmethodを追跡する。実backup生成/DB信頼binding/世代管理やroot/OS authorityをこの結果から発明しない。
+
+SSC058/PG165の追加責務: .batch.backup.BackupFileDigest/BackupVersions/BackupManifestは341 §6.4の申告観測値・3file/両完全handle/時刻/version/正size/hashの不変条件。.batch.file.BackupManifestCodecは固定順ASCII JSON/末尾LFとcanonical roundtrip。BAK001～008/BKO001～008/UI251/SS341・343、BAT178～193/017033～036へ全methodを追跡。実artifact I/O/worker/root/DB binding/世代管理は別未完了。module依存を追加せず既存BatchStepAttempt/BatchRunを共用する。
+
+SSC057/PG164の追加責務: .batch.repository.CleanupKind.stepは既定step対応、CleanupStepChunk/Reasonは今回chunk・明示optional step保存累積・未完了/deferredの型契約、CleanupStepRepositoryは331 §3.14のV020固定7bind/7列/前後run identityとborrowed資源境界。.batch.cleanup.StepCleanupSummary/StepCleanupServiceは同step累積と今回呼出差分・30分/割込・chunk commit/rollback/restoration・END/deferredを扱う。OPS009/DAT009/UI251/SS331・332・341/SSC057、DB259～266・BAT154～177を追跡。親main/実unit/backup/他cleanupは別未完了。
+
+SSC049/PG162（先行d23b1afd）: batch.repository.InspectionSummaryRepositoryは331 §3.13のborrowed read、InspectionSummaryはBatchRun/CleanupCounts/completeの非秘密不変projectionを所有する。batch.cleanup.InspectionAttempt.reconcile(expectedRun,before Optional summary,after summary,receipt int)は341 §7.3の保存END/identity/非減少/既完了不変/0・10とattempt差分を照合し、run/cumulative/attempt/Outcomeの不変値を返す。Outcome SUCCESS0/WARNING10。各constructor/factoryはnull/非負/相互不変条件を確立し、identityはtoStringでredact。API moduleのclassへ依存/複製せず、既存CleanupCountsを共用する。NULL/未知値を成功に変換しない。OPS009/DAT009/MQ008/UI212/241/251、SS331/332/341、DB251～258/BAT114～129。値だけでfresh unit起動/実子終端/OS lock/backup/親step記録を完了としない。
+
+SSC055/PG161（先行4d534ba9→SS/PT b572baa5）: MaintenanceRunFiles.SessionへretirementCandidates/retireを追加し、固定6root・借用RunReferenceRepository照会・完全plan/marker・限定原本退役をSS343 §6.16で所有する。MaintenanceRetirementはrun/latest/prepared/count/digestの不変型、MaintenanceRecordsはNKRET1 codec、DurableRecordFilesは.plan/.retireのcanonical内容ID束縛、EnvironmentInodePolicyはdurable最大204byte（BUG171/YKT132）。private Inventory/graph/digest・全mutation前後照会は上記Session責務。Digest factoryはchecked失敗/nullを試験可能にするpackage内portで、外部設定や任意algorithm選択を提供しない。BUG172/YKT133でoriginal不在の3root barrierをplan消去前に要求。OPS009/DAT009/UI251/SS331・332・341・343、017/015・016/BAT090～113。OS flock/親終端/backup/IT/STを部品成功から推測しない。
+
+SSC-055/PG-D-159（先行4c5dcb85）: batch.repository.RunReferenceRepositoryは親Connectionを借用し、explicit READ COMMITTED/read-write transactionと前後割込を検査、331 §3.12の固定PreparedStatementへBatchRunをbindする。queryTimeout5秒、statement/result/null4列/1行だけ、全close成功後にimmutable RunReferences（history/inbox/log/identityConsistent）を返す。全参照なしでinconsistentは不正projection。anyReferenceは3flag OR、値toStringはredacted。Connection commit/rollback/close/config変更/新接続をしない。SQLException/不正projectionは全資源close後の固定BatchRepositoryException、未知Runtime/NPEは正常化しない。null constructor/runはprogramming契約。OPS-009/DAT-009/UI251/SS331・332・343、017の013/014・PT-BAT-082～089。
+
+SSC-055/PG-D-158（先行36b5f85b）: batch.file.MaintenanceRunFilesは固定6rootの操作scope・Session寿命・全record scan/graph・start/resume/completeを所有し、PG157のDurableRecordFilesへ限定IOを委譲する。返却のrun再開状態はimmutable activationとOptional completion。SS343 §6.15、OPS-009/UI251/SS341、NK-BAT-001/017の011・012/PT058～081。OS lock/実親/DB legacy照合/GCを本file scopeへ完了扱いで混入しない。
+
+SSC-055/PG-D-157（先行19e22eb4）: batch.file.DurableRecordFilesは借用private永続rootの限定read/publish/remove、EnvironmentInodePolicy.durableはlocal RW/root0700・file0600検証を共有する。SS343 §6.14、NK-BAT-001/OPS-009/UI251、017の009/010・PT-BAT-046～057へ追跡。固定namespace/graph/OS lock/親終端/GCを低位IO成功で代替しない。
+
+SSC-055/PG-D-156（先行b6b5f0f6）: batch.repository.MaintenanceActivation/MaintenanceCompletionは固定BatchRunと起動単位・完了単位のimmutable契約。batch.file.MaintenanceRecordsはSS343 §6.13の3種canonical ASCII encode/decodeだけを担う。原本からの同run照合・OS lock・private永続file・active/完了/crash/GCは親と後続file storeの責務でありparserに成功保証を混入しない。NK-BAT-001、OPS-009/UI251/SS331・341・343、PT-BAT-038～045へ追跡する。
+
+SSC-049/PG-D-155（先行023017b2）: batch.platform.ConfigurationGroupResolverは固定OS NSS group照会のbounded process/byte検査だけを担当する。batch.file.InspectorEnvironmentFilesは固定/etc・/run祖先からrootを保持し、static reader・runtime publisherと同期callbackを全close込みで結線する。任意path/account/commandの公開入口はなく、親OS lock/実子終端/backup/run原本はcaller必須契約。OPS-009/UI251/SS343 §6.12、PT-OPS-GID-001～008/NS-001～008。
+
+SSC-049/PG-D-154（先行aa2baa3a）: batch.file.InspectorEnvironmentPublisherはroot保持run fileの新規原子公開/同run再同期/停止確認後retireを担当する。EnvironmentInodePolicyは既存readerとpublisherが共用するpackage限定Unix/ACL/FS検査。公開factoryで任意path/UID/commandを受けず、借用capabilityのadmission/OS lock/子終端は親の責務。OPS-009/UI251/SS343 §6.11、PT-OPS-PUB-001～012。
+
+SSC-049/PG-D-153: storageのDirectoryCalls/LinuxDirectoryCalls/OwnedTransferDirectoryへprivate0600 create・同directory単一名のno-replace publish・検証済みentry unlinkを追加する。file adapter専用で設定/DB/認証/run modelへ依存しない。通常Transfer writerとWeb readerの許可操作は変更せず、保守側のpolicyはbatch.fileへ置く。NK-OPS-001、OPS-009/UI251/SS333 §7.3/343、PT-OPS-PFILE-001～008。
+
+SSC-049/PG-D-152: batch.file.InspectorEnvironmentReaderがstatic/runtimeの既存環境fileを保持inodeからbounded readし、属性・同名再取得・close後にplatformのCFG/ENV byte検査へ渡す。借用rootの選択/寿命とOS排他は親、読取り専用で公開/修復しない。NK-OPS-001、OPS-009/UI251/SS343 §6.9、PT-OPS-EFILE-001～008。
+
+SSC-049/PG-D-151: batch.platform.InspectorStaticEnvironmentはSS343 §6.8の静的2行fileをMap化前に検証する非秘密byte境界。DB connectorや秘密鍵をbatchへ持込まず、子API launcherの値検証と両側で同じSSを満たす。file属性/読取/公開の責務はbatch.file、子起動と同run確認は親platformへ分離する。NK-OPS-001、OPS-009/UI251、PT-OPS-CFG-001～006。
+
+SSC-049/PG-D-150（先行0797b369）: batch.cleanup.InspectorLockHandoffはSS341 §7.3の親Connectionのadvisory解放・同期callback・finally再取得だけを担う。借用transaction/connectionのcommit/rollback/close、実process/OS lock/backup/run原本には責務を広げない。NK-BAT-001、OPS-009、UI251、PT-BAT-030～037。JDBC scalar/資源終了の固定診断と未知programming failureの非成功を検証する。
+
+SSC-049/PG-D-149（2026-09-09、先行17b06c0c）: batch.platform.InspectorRunEnvironmentはSS343 §6.8のrun専用EnvironmentFileのcanonical ASCII生成・期待runとの全byte照合だけを担う。BatchRunの検証契約を再利用し、時刻取得・file IO・root/lock/backup/起動・永続原本の確定を行わない。NK-OPS-001、OPS-009、UI251、PT-OPS-ENV-001～004へ追跡する。
+
+SSC-049/PG-D-148: batch.platform.ApplicationStopGateはAPI/Webの固定2unitをread-only照会し、UnitStateParserの厳密な7property契約で停止を確認する。SystemctlStateSourceだけが固定systemctl show・制限環境・5秒/1024byte境界を所有する。停止/起動や任意unit/commandの実行入口を追加しない。親OS lock/再起動禁止/実backup/DB引渡しは別責務で、観測結果を永続的な停止leaseとして扱わない。
+
+SSC-049/PG-D-147: batch.file.MaintenanceFileLockはroot controller内部だけの固定runtime admission adapterとする。storageの保持directory/inode/実Linux flockを借用し、固定/run配下の所有・型・mode・ACL・local tmpfs・identityを確認した保守callbackをOS lock下で実行する。公開factoryにpath/UID/commandを渡す入口を作らない。batch→storage依存を追加しAPI/Webへの逆依存は禁止。停止/backup/DB排他引渡しを低位lock取得結果だけで代替しない。
+
+SSC-028: Shared storageの既存保持directory/inodeへ、Asset adapter向け既存child/entryのread-only能力と正サイズfile属性照合を追加する。Transfer専用UUID/date/48MB入口は維持し、API/Webのnative実装複製やProtocolからfile I/Oを行わない。詳細はSS333 §7.2、PG-D-073/PT-MED-018～020。
+
 ## 1. 目的・追跡
+
+SSC-027具体化: `.api.application.scenario.ScenarioApplicationService`がSyncRequestProcessorとして内部段階処理を所有する。process/decode/guard→inspect（非更新認証/Inbox/query）→prepare（DB外file）→complete（再認証/通常Inbox/必要時descriptor暗号置換）→commit/close後replyの順。Private sealed Work/Preparedで新規query・確定error・既存snapshotを区別し、repository/storage実装を同classへ複製しない。JMS send/ACKは既存SyncRequestListener、root/鍵closeは起動所有者。single-instance/full root/readinessを実装するまで本番dispatcherへ登録しない。PT-SCN-009-T01～T07。
 
 Web Java、API Java、batch、固定長共通部品のMaven module、package、主要class、責務および依存禁止を定める。
 
@@ -13,8 +65,9 @@ Web Java、API Java、batch、固定長共通部品のMaven module、package、�
 | Module/artifact | 実行形態 | 責務 | 依存可能 | 依存禁止 |
 |---|---|---|---|---|
 | `schubert-nk-protocol` | Library jar | 256 byte header、64 layout record、codec、NFC/byte検査、共通result/error、descriptor model | Java標準API、test時だけJUnit | Spring MVC、JMS、JDBC、DB entity、HTTP model |
-| `schubert-nk-web` | Executable jar | MVC/Thymeleaf、HTTP validation、Spring Security、暗号化HTTP session、JMS request/reply、file配信、Web log outbox | protocol、Spring Web/Security/JMS/JDBC | 業務schema repository、業務状態更新、API module |
-| `schubert-nk-api` | Executable jar | 固定長request Consumer、認証・認可、application service、PostgreSQL業務schema、outbox/inbox、async worker | protocol、Spring JMS/JDBC/Security crypto | MVC/Thymeleaf、Browser response、Web technical table更新 |
+| `schubert-nk-storage`（SSC-021） | Library jar | Linux保持directory/inode、NOFOLLOW・非上書き公開、OS属性/root配置の低位契約 | Java25標準NIO/FFM、null annotation、testだけJUnit | Protocol業務model、Spring/JMS/JDBC、HTTP/DB model、認証・Inbox・quota業務 |
+| `schubert-nk-web` | Executable jar | MVC/Thymeleaf、HTTP validation、Spring Security、暗号化HTTP session、JMS request/reply、file配信、Web log outbox | protocol/storage、Spring Web/Security/JMS/JDBC | 業務schema repository、業務状態更新、API module |
+| `schubert-nk-api` | Executable jar | 固定長request Consumer、認証・認可、application service、PostgreSQL業務schema、outbox/inbox、async worker | protocol/storage、Spring JMS/JDBC/Security crypto | MVC/Thymeleaf、Browser response、Web technical table更新 |
 | `schubert-nk-batch` | Executable jar/oneshot | Backup検証、business/technical cleanup、transfer cleanup、Expiry保守、run記録 | Spring JDBC、PostgreSQL/Artemis管理client | HTTP公開、業務Consumer、任意table/Queue操作 |
 | Root project | Aggregator | Maven Wrapper、Java 25 toolchain、dependency/version、品質plugin | 上記module | Production sourceの直置き |
 
@@ -33,13 +86,22 @@ schubert-nk-batch      （protocolへ依存しない。Expiry message本文をde
 ```
 
 - WebとAPIは互いにcompile/runtime依存しない。
+- SSC-021: Web/API/batchのfile adapterだけがstorage libraryへ依存可能。Controller、application/domain、Protocolからstorageへの依存を禁止する。API/Web間のclass複製やProtocolへfilesystem実装を移す方法は採らない。既存API `.api.storage`から純粋な低位7classを`.storage`へ移し、業務writer/record codec接続/quota/readiness wiringはAPIへ残す。Native SPIのFD整数を公開service/HTTP/DB/電文/ログへ渡さない。
 - Protocolは外部frameworkから独立させ、同一jar hashをWeb/APIで使用する。
 - HTTP form/view model、DB row/entity、固定長layout recordは別classとし、mapperで変換する。
 - `controller -> web application facade -> messaging adapter -> protocol`の向きだけを許可する。
 - APIは`messaging adapter -> application service -> domain/persistence/file adapter`の向きとし、repositoryから上位層を呼ばない。
 - Batchはallowlist済みrepository/functionとOS command adapterだけを使用し、API serviceを流用して公開処理を起動しない。
 
+SSC-021の依存補足: Web/APIはprotocolとstorageをそれぞれ参照し、両libraryは互いにも依存しない。Batchは承認済み保守file操作に限りstorageを使用できる。Executable process数、HTTP/JMS経路、業務DB権限は変更しない。
+
+Storage package `.storage`はDirectoryCalls/LinuxDirectoryCalls、OwnedTransferDirectory、StorageIoException、StorageIdentity、StorageAttributeGuard、StorageRootLayoutを持つ。Class/operationはfile adapterから使える公開契約へ限定して可視化し、native symbol binding・entry FD実装・状態lockをprivateに保つ。必要なnative accessは利用processへ明示設定し、起動時にfail closedで検証する。
+
 ## 4. `schubert-nk-protocol`
+
+SSC-049/PG-D-133: storageへ低位InodeSecurityCalls/LinuxInodeSecurityを追加し、保持inode callback内のaccess ACL/readonly filesystem flag/effective UIDだけを公開する。業務認証やkey内容を扱わず、APIのcredential file adapterがSS343 §6.2のpolicyと組み合わせる。任意path・symbol・attribute名を受けず、native実装をAPIへ複製しない。検査processも明示native-accessを必須とする。PT-DB-INBOX-121～128。
+
+SSC-049/PG-D-146: storageのLinuxFileLockは保持済みregular inodeへの低位scoped flockだけを担当し、batch file adapterから利用する。呼出しは保持callback中の固定/proc/self/fd能力と閉じた業務callbackに限定。任意pathや生FDをserviceへ公開せず、OS user/ACL/root/実backup/DB transactionはbatch側の別責務。FFM bindingはshared storageへ集約、FileChannel.lock/fcntlをflockの代用にしない。PT-OPS-FLOCK-001～008。
 
 ### 4.1 Package
 
@@ -67,7 +129,7 @@ encode後byte長は`FieldCodec`を正とする。`LayoutRegistry`は64 layoutを
 | Class.method | 引数 | 戻り値 | 例外 |
 |---|---|---|---|
 | `FixedWidthEncoder.encode` | `WireMessage<? extends LayoutPayload>` | `byte[]` | `MessageEncodingException` |
-| `FixedWidthDecoder.decode` | `byte[]`, expected direction | `WireMessage<?>` | `PermanentProtocolException` |
+| `FixedWidthDecoder.decode` | `byte[]`, `TransportMetadata`, `ExpectedRoute` | `WireMessage<?>` | `PermanentProtocolException` |
 | `HeaderCodec.peek` | 256 byte以上のbody | `CommonHeader` | `PermanentProtocolException` |
 | `FieldCodec.encodeText` | value、field definition | 規定長`byte[]` | `FieldEncodingException` |
 | `FieldCodec.decodeText` | field slice、definition | `String`/empty | `PermanentProtocolException` |
@@ -120,6 +182,7 @@ ControllerはJDBC、JMS template、filesystem APIを直接呼ばない。Control
 | `.api.domain` | `AsyncJobState`, `Role`, `AccountStatus`, `NotificationType`, domain result | 業務状態・遷移。Framework annotationを含めない |
 | `.api.persistence` | 画面/aggregate別`*Repository`、`*RowMapper` | Parameterized SQL、row mapping、lock |
 | `.api.file` | `AssetResolver`, `MediaDescriptorFactory`, `LargeResultWriter`, `FileIntegrityVerifier` | Logical IDから許可root内fileを解決 |
+| `.api.storage` | `LinuxDirectoryCalls`, `OwnedTransferDirectory`, `StorageAttributeGuard`, `TransferCapacity` | SSC-019のAPI内部filesystem capability/属性/予約会計。`.api.file`の下位技術部品で、Controller/DB/JMS/HTTPへ依存しない |
 | `.api.error` | `ApiExceptionMapper`, `RetryClassifier`, `FatalProtocolHandler` | Result code、一時/恒久分類、DLQ後exit |
 
 ### 6.2 Handler規約
@@ -131,6 +194,8 @@ Dispatcherは認証・inbox処理後にhandlerを呼ぶ。HandlerはJMS ACK/send
 password、全bodyを保持・`toString`出力しない。
 
 ## 7. `schubert-nk-batch`
+
+SSC055/PG163: .batch.repository.BatchStepは既定10stepとbackup例外、BatchStepAttemptは原本BatchRun/日別attempt/開始時刻・skipのimmutable handle、BatchStepResultはterminal状態/件数/固定診断、BatchRunRepositoryは331 §8.3の借用transaction・全履歴検査・明示回復・CAS/replay。内部History rowは非秘密12列だけで原本cutoffを推測せず、全helperをBAT130～153へ追跡する。親bootstrap/OS/unit/実backupは別の未完了責務。
 
 | Package | 主要class | 責務 |
 |---|---|---|
@@ -182,3 +247,5 @@ password、全bodyを保持・`toString`出力しない。
 | 日付 | 内容 |
 |---|---|
 | 2026-08-31 | Module、package、主要class、依存規則を初版作成。 |
+| 2026-09-01 | SSC-002により`FixedWidthDecoder.decode`を322 §5の完全なtransport/route検査署名へ統一。 |
+SSC061/PG168: .batch.repository.BackupStepRepositoryと.backup.BackupCommitServiceは341 §6.6/331 §8.3の同一真正manifest両完全stepのread/transaction確定・不明commit再読を担当する。BAK/BKO/OPS009/UI251、017041～044/BAT210～225へconstructor/inspect/complete/helperを追跡。manifest生成/信頼reader/実artifact/root/OS/最新選択/7世代は別必須。DDLやmodule依存は変更しない。

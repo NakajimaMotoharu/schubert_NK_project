@@ -1,5 +1,9 @@
 # Security・credential・監査実装設計
 
+SSC157（2026-10-02）：未実装QSS/QSD新writer限定の取得scope frame `NKQRY1` を追加する。暗号平文offset0～6はhex `4e4b5152593100`、offset7はUSER=`55`/ADMIN=`41`、offset8以降は従来fixed response wireをそのまま置く。成功と確定error双方、scopeは取得時roleで固定する。外部fixed wire/error filler/NONE、NKENC1暗号外側・AAD message/layout/version/owner、鍵/圧縮/保持期限は変更しない。既存認証・Scenario/Media/User/Log・更新NKREF1とNTS/NTDの平文profileは完全不変。保守は新frameをQSSRSP01/QSDRSP01/version001にだけ許容し、scope字節/短縮/別layout/固定wire/相関/保存codeを独立検査、既存rawの保守検査も維持する。通常replayは無scopeを拒否し、scope=ADMINからUSERへの降格では元保存を変更せずQSS0103/QSD0104を非保存で返す。User→Adminは元の狭いsnapshotのみ返す。平文frame/wireの一時owned bufferはfinally zero-fill、scopeや本文をraw logへ出さない。SS324§6/12.8・SSC157/013001/014001、内部frame golden・独立JCE・旧profile非回帰で検証する。
+
+SSC056/PG160（先行8002b28b・3cf06b00、BUG167/YKT128）: session期限・revoke・認証retry・監査・Inbox/OutboxのDB時刻を332のJDBC4.2 UTC境界へ統一する。歴史暦ずれで期限/参照一致/署名に使うInstantを変えない。NULL/不正/範囲外は既存error契約を維持し、日時補完・許容年縮小・保存暗号/Current期待値の変更をしない。SQL原本と独立epoch/vectorで両方向を照合し、raw session/token/秘密を診断へ出さない。
+
 ## 1. 目的・追跡
 
 Browser/Caddy/Web/Artemis/API/PostgreSQL/file/systemdの信頼境界ごとに、認証・認可、CSRF/session、
@@ -51,6 +55,8 @@ Static CSS/JS/fontもextensionではなく正規resource path allowlist。他は
 - Attributeはusername、role、raw API context、login/last access、CSRF、safe GET SavedRequest、用途/時刻付きoperation token最大10件。
 - Java serialization、request/form/body/password、任意class名を保存しない。Deserializeはversion付きの固定JSON/CBOR schemaへbound。
 - Idle 8時間、同一account 2 session。Web/APIのどちらか一方が無効・復号不能なら両方を無効扱いしLoginへ。
+
+SSC-047/BUG-074: 314 §3.2の内部ERROR+/error専用非業務branchは表示だけで、外部REQUEST/ASYNC/FORWARDや別pathの認証除外に使用しない。Caddy/header/server UUIDは共通必須、通常要求の単一business FilterChainProxy/StrictHttpFirewallは維持する。元method/headerのfirewall拒否を内部errorへ反復せず、DB/JMS/sessionを再読しない。表示snapshotは要求内のみの閉TopBar＋解決済CSRF、失効時clear、秘密値のDOM data属性/診断出力禁止を維持する。通常POST/login/logout/管理/媒体の認証・CSRF・API最新role/owner検証を緩和しない。
 
 ## 4. Authentication・Password
 
@@ -133,6 +139,10 @@ HTTP content-type/size/method
 - 数値はASCII digitだけ、先頭+/minus/小数/指数なし。日時はstrict parser、JST wire→`Instant`の一義変換。
 - Validation messageへraw入力を反射しない。
 
+SSC-073: LogSearchFormのCurrent検索文字列trimとUI222§6の0以下page補正は上記一般規則の限定例外とする。処理順・8field allowlist・DIF010日時のstrict JST/millisecond/31日境界はSS313§5.2追補に従う。trim前のCR/LF/TAB/NUL・不正surrogateは拒否し、未知/複数field・byte超過・enum未知は引き続き拒否する。他の数値やPassword/質問の末尾space禁止を緩和しない。
+
+SSC-072: 上記一般規則よりUI222§5/6・223§3の検索固有規則を優先する。ScenarioSearchFormの検索文字列はcontrol検査後NFC/trimするため前後ASCII spaceをerrorにしない。pageのみ負ASCII整数を1へ補正する（int範囲内）。その他の数値のminus禁止、Password/質問の末尾space禁止は変えない。詳細はSS313§5.2追補。未知・複数parameter、plus、非ASCII数字、overflow、正数上限超過は引き続き拒否する。
+
 ## 9. Fixed protocol・JMS security
 
 - `BytesMessage`以外、body 1,000,000 byte超過、property/header/layout/version/length/UTF-8/padding不整合は業務handler前に拒否。
@@ -175,6 +185,29 @@ authentication tag 16 bytes
 - Current keyでwrite、current/previousでread。Unknown versionを自動推測しない。Rotationは343に従う。
 
 Operation fingerprintのHMACは324 `NKOP1`を正とし、AES keyとHMAC key、Web session/API inbox/Web logのkeyを共用しない。
+
+### 11.2.1 更新対象の暗号認証binding（SSC-052、PG-D-140）
+
+取消/削除成功wireに対象IDが無いため、確定日時だけでresult refを照合してはならない。新たに実装するQSB/NTC/QDLの成功0000/0200 snapshotは、fixed response wireの前に次の内部metadataを連結し、全体を従来のDeflater3→NKENC1/AES-256-GCMへ渡す。外側magic/version1/AAD/nonce/tag/key配布は変更せず、新たなHMAC keyも配布しない。HTTP/JMS電文へこの内部prefixを送信しない。
+
+| 0開始offset | byte長 | 形式 |
+|---:|---:|---|
+| 0 | 6 | ASCII NKREF1 |
+| 6 | 1 | 参照kind: QUESTION=1、JOB=2、他は禁止 |
+| 7 | 8 | unsignedではなく正のbig-endian int64、ID1..999999999999 |
+| 15 | 16 | operation token UUIDのMSB64/LSB64 big-endian |
+| 31 | 4 | 後続wire byte長、big-endian int32 |
+| 35 | wire長 | UI236のfixed response wire、header256を含む |
+
+対応はQSBRSP01/QUESTION/320byte、NTCRSP01/JOB/288byte、QDLRSP01/QUESTION/280byte、version001・ownerありだけ。ResultBoundResponseSnapshotCodecは既存ResponseSnapshotCodecを借用し、encodeで内部prefixとwireをcopy、decodeで復号後の全長と期待prefix35byteをMessageDigest.isEqualで比較した後だけwire copyを返す。prefixはcallerのlock済DB ref/tokenから構成し、暗号内の値を正しい参照として逆採用しない。unknown magic/kind/ID/token/length、legacy unbound body、末尾追加/欠落は拒否。
+
+この部品は固定長header/semanticや実DB参照・業務UKの正しさを単独では保証しない。後続のreplay/保守検査は返却wireを既存構造検査相当と実参照検査へ渡し、全検査後にだけ利用/削除する。入力wireはcaller所有、作業prefix/復号包絡はfinally消去、返却wireもcallerが使用後消去。基礎codec/鍵を本wrapperからcloseしない。null/不適切route/長さは境界契約違反、暗号不正は固定ResponseSnapshotException、raw値を例外/log/toStringへ出さない。
+
+既存認証・照会・User更新snapshotの平文profileとNKENC1 goldenは完全不変。確定errorのNONE/fixed-error profileも変更しない。新3成功にunbound旧bodyを見つけてもtargetを推測して再暗号化せず保護し、運用調査へ回す。未実装更新Programの初回保存とreplay/DB照合への結線は別gate。043/PT169～176で独立binary/JCE vector、3route/全metadata変造/同時刻別target・token、旧形式不変、鍵世代/100並行/所有消去/NULLを確認する。
+
+### 11.3 Inbox保守検査のcredential境界（SSC-049/QA-046）
+
+UIC-006で承認された非公開検査processだけに、必要なAPI Inbox response/contextのcurrent/previous keyを限定配布する。batch/backup/Webへは配布しない。専用OS identity、外部credential、読取り専用mount/限定DB roleを用い、argv/環境平文/ログ/Gitへ鍵を出さない。unknown key/復号不能/参照不整合は削除許可へ補完しない。保存応答の構造検査はbooleanのみ返し、平文bufferとDATA/record copyを全経路で消去する。DB参照検証・停止/lock条件を別途必須とし、構造検査だけで削除を承認しない。
 
 ## 12. Audit・redaction
 

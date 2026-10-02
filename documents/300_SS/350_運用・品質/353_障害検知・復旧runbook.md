@@ -81,6 +81,8 @@ Journal破損の自動初期化をしない。新broker instanceへ移す場合�
 
 ### 7.2 再投入/整合
 
+SSC156（2026-10-02）：Question最終ERROR+D commit～元ACKのhard crash/session rollbackでは、固定Broker max4の元Wコピーとstartup OutboxのDコピーがDLQへ併存し得る。両方を保全し、同Wの論理隔離としてread-onlyでbody/header/W/correlation/receipt/job、元ordinary Outbox proof、D rowと不変metadata/実SENTを照合する。transport IDごとに実propertyを記録し、Brokerコピーにないerror/time/count等は未観測のまま、D参照による照合補足と区別する。ERROR provider再実行・新D生成・元proof変更・自動再投入/削除・queue purgeは禁止。照合根拠とincident/対象transport ID/操作者/承認を揃えた後だけ個別整理し、D再送で第三コピーを増やさないことを確認する。正常停止時もD未確認の待機解除を成功ACKにせずrollbackする。新crash-window実試験は未実行であり、既存第4rollback試験を代用して閉鎖しない。
+
 - 原因修正、codec test、承認された対象business Message ID・件数・操作者・incident IDなしに再投入しない。
 - RequestがDB完了済みなら同Message IDでreplay。未処理なら同ID/bodyをoriginal Addressへ1件ずつ。Bodyを手編集しない。
 - Internal workでDBがERROR確定済みなら自動再処理しない。RECEIVED/PROCESSINGでBrokerだけDLQなら、

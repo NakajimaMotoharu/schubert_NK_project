@@ -1,5 +1,17 @@
 # 大容量結果file・media・Range配信設計
 
+SSC063継続/PG171・BUG195/YKT154: 同じIO close優先順位をDurableRecordFiles.readFile/write/force、InspectorEnvironmentReader.readFile、InspectorEnvironmentPublisher.writeNew/forceExisting、ExistingFileAccess.walkのchannel/childへ適用する。nullable IO resourceは従来の固定IO拒否（ExistingFileAccessのnonnull channelは境界NPE拒否）を所有受領前に実施し、callbackの値/IO順/サイズ/metadata/partial保全/借用root・非公開能力を変更しない。8所有scopeを既知IO＋未知cleanup/同一未知body＋cleanupの各Runtime/NPE/Error3型で独立再試験する。Directory/Process/JDBC等の残候補は別段で未完了を維持する。IO型と回復責務を変える一般frameworkや追加coverage除外は採用しない。
+
+SSC063/PG170・BUG195/YKT154（先行6e59c153）: resource bodyとcloseの複合は標準TWR self-suppressionへ依存せず明示的に解決する。Storage.ResourceScope.use(Closeable,Action<T>)は受領したcloseを全経路で1回だけ実施し、body成功後のclose成功まで返さない。close/action nullは所有受領前に拒否。generic callbackの明示nullable結果は透過し、呼出側の既存null契約を変えない。
+
+bodyが未知Runtime/Errorの場合は同じprimaryを保持し、closeがIO/Runtime/Errorで失敗しても新しい固定StorageIoExceptionをsuppressed1件だけ追加する（同一throwable再送を含む）。bodyが既知IOExceptionでcloseが未知Runtime/Errorならcloseの元unknownを優先する。既知IO同士なら非成功UNAVAILABLE、bodyだけのStorageIoExceptionはsuppressedなしのreasonを保ちraw causeを除去、それ以外のIOはUNAVAILABLE。成功bodyのunknown closeはそのまま非正常伝播、IO closeは固定失敗。catch NPEによる正常復帰、close再試行、resource以外の所有物のcloseを禁止する。nested scopeも内側から順に全closeを行い、この同じ規則でprimaryを保つ。
+
+直接適用はOwnedTransferDirectoryのopen/openDate/withEntry、LinuxFileLockのowned descriptor、BackupArtifactVerifierのchild/rebound/entry経由/channel/names、BackupManifestReaderのchild/rebound/entry経由/channel。根元ArenaはJDK実体で外部close portがなく、既存所有・close回帰を維持する。これらのI/O順・file/DB/OS操作と正常結果は変更しない。未知provider自身の例外は元identityを保持するが、そこからraw messageを監査/UIへ出してよいという意味ではない。
+
+InspectorUnitProbeは専用の同等scopeでstdio/QueryProcessを管理し、既知StopGate/IOException/InterruptedExceptionとunknown Runtime/Errorを区別する。primary unknown＋cleanup失敗は固定StopGate(COMMAND_FAILURE) secondary、primary既知＋cleanup unknownは元unknown、既知同士は元停止理由を外側でredact。早期stdin/stderr closeは既存once状態を維持し、未取得streamをcloseしない。取得済output byteはclose失敗を含む全異常終了で消去し、途中配列を正常結果へ返さない。systemctl command/timeout/TERM/環境と既存Test oracleを不変更。
+
+018027/028・PT-OPS-RSCOPE-001～008が共通scope単体（NULL/nullable/全IO理由・未知3型/同一・別例外/close1回/並行・nested）。既存BAT204/235、UNIT015、Storage保持inode/lockの追加反例と正式全reactorで各呼出箇所を検証する。全line/method/class/branch100%、新たな解析抑制/coverage除外なし。未修正箇所を検索済みだけで横展開完了にしない。
+
 ## 1. 目的・適用範囲
 
 Scenario大容量結果fileの生成・descriptor・完全性検証・朝削除と、audio/video/musicの認証済み
@@ -29,9 +41,9 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | `LargeResultWriter.writeScenario` | immutable record list、`Instant`、`UUID` | `LargeResultDescriptor` | 4,800 byte record、part/ready、hash/fsync/atomic move |
 | `LargeResultReader.readScenario` | descriptor | `List<ScenarioRecord>` | descriptor/path/size/hash/record完全検証、最大10,000件 |
 | `StoragePathPolicy.parseRelative` | root kind、wire relative path | `ValidatedRelativePath` | NFC、segment、suffix、depth、UUID検証 |
-| `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | `SecureDirectoryStream`でNOFOLLOW segment walk、通常file検証 |
-| `MediaDescriptorService.issue` | actor context、media type/logical ID、mode | signed descriptor | API側のrole/DB metadata/manifest検証 |
-| `MediaDeliveryService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の署名・path・size・MIME再検証、stream |
+| `SecureFileResolver.openReadOnly` | real root、validated relative path | `VerifiedFileChannel` | SSC-021の共有native保持root/inodeでNOFOLLOW segment walk、同一inodeの通常file/nlink等を検証後read |
+| `MediaQueryService.describeAudio/describeVideo/describeMusic` | actor context、media type/logical ID、mode | 検証済metadata descriptor | API側のrole/DB metadata/manifest検証。311/323のAPI責務名へ統一 |
+| `MediaRangeService.deliver` | HTTP Range、descriptor、response | void/HTTP status | Web側の要求対応・path・size・MIME再検証、stream。311のWeb責務名へ統一 |
 | `HttpByteRangeParser.parseFirst` | Range header、file size | `Full/Partial/Unsatisfiable` | 最初のrangeだけ解析、1MiB cap |
 | `TransferCleanupService.clean` | run cutoff | `CleanupResult` | app停止/batch lock必須、非follow walk、対象別計数 |
 
@@ -50,16 +62,16 @@ permission、Transferのatomic move対応を検査する。検査不合格はrea
 | Path | `yyyyMMdd/<lowercase UUID>.ready`、wire上256 byte以下 |
 
 Record数取得とsnapshot取得は332のread-only transaction内、file I/Oはcommit後。Record順は
-`script_entries.display_order,id`、同entryのaudioはlink `display_order,audio_file_id`で固定する。
+SSC-017によりUI223/234に合わせ`entry_index,display_order,id`から採番したEntry sequence、同entryのaudioはlink `display_order,audio_file_id`から採番したAudio sequenceで固定する。閾値は音声展開後record数であり、DB IDの大小を表示順と取り違えない。
 
 ## 5. Large-result生成algorithm
 
 1. Record listを最大10,000件へboundし、codecで1件ずつ4,800 byteにencodeできることをI/O前に検証する。
-2. JSTの生成日`yyyyMMdd`をdirectory名とし、設定root直下の日付directoryだけをpermission 0750で作る。
-3. CSPRNG UUIDで`<uuid>.part`を`CREATE_NEW,WRITE,NOFOLLOW_LINKS`でopen。Collision時は最大3回新UUID、超過は異常。
+2. JSTの生成日`yyyyMMdd`をdirectory名とし、設定root直下の日付directoryだけをpermission 0750で作る。SSC-020: 新規作成した保持inodeだけへschubert-web group/modeを確定しdirectory fsync。既存dateは所有者/group/modeを検査するだけで修正しない。
+3. CSPRNG UUIDで`<uuid>.part`を`CREATE_NEW,WRITE,NOFOLLOW_LINKS`でopen。Collision時は最大3回新UUID（初回＋再試行3回まで）、超過は異常。新規保持partだけへschubert-web group/0640を確定してからwriteする。
 4. 64KiB以下のbufferでrecordを順番writeし、同時にSHA-256とwritten byte数を更新する。
 5. `FileChannel.force(true)`、close、実size、`recordLength * count`、digestを照合する。
-6. 同directoryの`<uuid>.ready`へ`ATOMIC_MOVE`。Overwrite optionを付けない。Directoryもfsync可能な実装でsyncする。
+6. 同directoryの`<uuid>.ready`へatomic・no-replace公開する。SSC-019により保持済みdirectory FD相対のLinux `renameat2(RENAME_NOREPLACE)`を使用する。Java `Files.move(ATOMIC_MOVE)`は既存target置換が実装依存なので代替しない。Directoryもfsyncする。
 7. Ready fileをNOFOLLOWで開き直し、file ID/path/size/hash/record length/countからdescriptorを生成する。
 
 Encode/write/moveの失敗は`.part`を即時best-effort削除するが、削除失敗を元例外で隠さない。
@@ -75,10 +87,18 @@ Webは電文decode後、以下の順を変えずに検証する。最初の不�
 4. Secure resolverによるroot配下の通常file、symlink/hard-link攻撃の防止、設定root外でないこと。
 5. Open後attributeのsizeとdescriptor size、SHA-256。
 6. 4,800 byteごとに完全readし、各recordの固定長・NFC・充填・項目上限をcodecでdecode。末尾余り0。
-7. Decode数=count、Entry/display orderが非減少、record重複がないこと。
+7. Decode数=count、Entry sequence/Audio sequenceの組が正順、record重複がないこと。同Entry sequenceのEntry ID/本文等は一致し、IDの大小自体は順序条件にしない（SSC-017）。
 
 Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model相当へboundし、file全byteを1配列へ読まない。
 不合格は`FILE_DESCRIPTOR_INVALID` / `FILE_INTEGRITY_MISMATCH`の分類で503、request ID/file ID/検証stepだけlogへ出す。
+
+### 6.1 APIの再送file確認と再生成（SSC-027）
+
+APIはcaller所有の保持Transfer rootを検査後、既存dateとready inodeをNOFOLLOWで開き、通常file/owner/group/mode/nlink/size、4800byteずつのexact EOF/hash、読取後属性を照合する。ここでの確認は物理完全性であり、record decode/View Model生成はWeb readerの責務として維持する。通常の検証はfile/directoryを作成・初期化・変更・削除しない。
+
+MISSINGを返せるのはroot検査成功後の既存date open、またはdate属性成功後でready inode取得前のnative ENOENTだけ。保持inode callback内のNoSuchFile、root/属性/hash/crypto/権限/close/不明I/OはUNAVAILABLEとし、不在へ補完しない。Close失敗を伴う不在は再生成候補にしない。FD番号の再利用と所有を混同せず、callbackのresource所有範囲を字句的に限定する。
+
+不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。
 
 ## 7. Path検証の実装規約
 
@@ -92,25 +112,95 @@ Hashはconstant-time比較。検証中の最大memoryをrecord listのView Model
 
 ### 7.2 OS・TOCTOU対策
 
-Linuxの`SecureDirectoryStream<Path>`を必須前提とし、root directory handleから各segmentを
-`NOFOLLOW_LINKS`で相対openする。最終entryは`BasicFileAttributes` namespaceでregular file、size、file keyを検査し、
-同じdirectory handleからchannelをopenする。SecureDirectoryStream非対応filesystemは起動不可とし、
-`normalize().startsWith(root)`だけのfallbackを実装しない。
+SSC-028: Asset adapterは共通`OwnedTransferDirectory`の既存保持能力へ追加する`openExistingChild(singleSegment)`と`atExistingEntryHandle(singleSegment, callback)`を用い、事前に検証済みRelativePathをsegmentごとに辿る。これらはopenだけでmkdir/属性変更/rename/deleteをしない。名称は単一segment、空/`.`/`..`/slash/NULを能力境界でも拒否する。Native実装の複製や元path再解決を行わない。Childは独立FDを所有し親の名前差替え/closeに影響されず、entry callback完了時だけ所有FDをcloseする。Read channelをcallback外へ持ち出さない。
+
+保持Unix通常file/owner/group/mode0640/nlink1/size一致の共通`existingFile`照合は正のlong sizeを扱う。Media callerは先にMEDIA1024のN12上限を検証し、Transfer専用`file`入口は従来の1～48,000,000byteを検査した上で共通照合へ委譲する。MediaをTransferの48MB上限に誤って制限せず、逆にTransferの上限を緩和しない。属性照合はmanifest/hash/readiness/認証の代替ではない。
+
+SSC-021: Readerも共有storage libraryの保持rootから全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、最終entryをO_PATH/O_NOFOLLOW/O_CLOEXECで保持する。自分が保持しているinodeのprocfs handleでUnix通常file/owner/group/mode/nlink/sizeを確認した後にだけ、その同じinodeからread channelを開く。SDSの名前属性検査と後のchannel openを同一inodeと推測しない。公開FileChannel/PosixFileAttributesはnlink取得APIを持たないため、private FD reflectionや元pathの再解決へfallbackしない。
+
+SDS利用可能性の既存起動検査も維持し、unknown filesystem/providerは拒否する。実file openは上記native inode保持へ統一する。Readerは既存childのread-only openだけを呼び、mkdir/CREATE_NEW/chmod/chgrp/rename/deleteは呼ばない。OSのWeb read-only mount/permissionも別に必須とし、共通libraryの存在をwrite権限付与と解釈しない。`normalize().startsWith(root)`だけのfallbackは禁止する。
 
 Hard link対策としてasset/transfer filesystemの書込権限を専用accountに限定し、Unix `nlink=1`を対応環境で検査する。
 不明なfile store/attributeはdeny closed。
+
+### 7.3 API writerのdirectory capability（SSC-019）
+
+SSC-049/PG-D-153（先行67148c13）: shared storageへ保守file adapter専用のprivate能力を追加する。DirectoryCalls.createPrivateFileは同じopenat CREATE_NEW/NOFOLLOW/CLOEXECでmode0600を要求し、既存createFile0640は不変。未対応実装のdefaultは無操作UNAVAILABLEで拒否する。OwnedTransferDirectory.createPrivatePart(UUID,callback)は生成時点のinodeを保持し全終了close。publishAs(UUID,単一名)はUUID.partから同directoryの単一targetへ既存RENAME_NOREPLACE、その後directory fsync。unlinkEntry(単一名)はcallerが証明済みのentryだけをunlinkat→directory fsync。空/`.`/`..`/slash/NUL/null・closed rootは無操作拒否。root/階層の削除はなく、既存target衝突時はpart/targetを保持する。rename/unlink後のfsync/close失敗は不確定な非成功で、逆操作や他file削除で隠さない。
+
+上記能力自体はfileのowner/ACL/expected runのpolicyではない。callerが保持inode属性/同run byte・namespace/OS排他・子停止を確認してから使う。通常Transferの0640/.readyとWeb read-only、従来no-replaceの契約は変更しない。作成した0600 fileもumask/ACL/所有を上位で再検証し、不明既存fileの自動chmod・truncate・削除をしない。実nativeと公開SPI faultのPT-OPS-PFILE-001～008で確認し、runtime publisher完了とは分離する。
+
+SSC-021でReaderも同じ低位能力を共有する。Writerのmkdir/非上書きatomic公開はJava25の公開FFMからLinux libcのopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ぶ限定portで実現する。Preview、JDK internal API、private FDのreflection、shell subprocessを使用しない。Rootは`/`から全segmentをO_DIRECTORY/O_NOFOLLOW/O_CLOEXECで相対openし、起動時の所有者/permission/非重複検査後も自分で取得したdirectory FDを保持する。
+
+日付directory作成とUUID entry操作はそのFD相対だけで行う。FileChannelでのCREATE_NEW/read/attribute取得に必要なpathは、自processが保持中のFDを指すkernel procfs `/proc/self/fd/<owned fd>/<validated generated name>`に限定する。利用者pathや置換可能な元root pathを再解決しない。FDは操作中close/reuseされない寿命管理を行い、close失敗時に同じ番号を再closeしない。File名の最終symlinkは常にNOFOLLOWで拒否し、nlink=1等の既存検査を省略しない。
+
+Linux/glibc、native access、procfs、必要attribute、directory fsync、同filesystemのRENAME_NOREPLACEが揃わない場合はreadiness false。未検証network filesystemは使用しない。Root作成/chmod、check-then-move、hard-link公開、通常renameへのfallbackは禁止する。JVM設定と実機適合試験は342/354へ追跡する。
+
+Writerのsize/hash再検証では、名前の事前検査とFileChannel openの間の差替えを避けるため、FD相対openat(O_PATH/O_NOFOLLOW/O_CLOEXEC)でentry inodeを先に保持する。O_PATHはsymlink自身も保持できるので、own FDのprocfs magic link経由で得たUnix属性の通常file0640・owner/group・nlink=1・sizeを確認するまでread channelを開かない。確認後も同じ保持inodeのprocfs handleからだけreadし、元entry名は再解決しない。Symlink/device/socketは属性段階で拒否する。Scoped entry FDはcallback完了/例外で必ずcloseし、複合I/O/close故障は外部pathを含まない一時障害へ再構成する。
+
+SSC-019/PG-D-059補足: partの初回作成もopenatのO_CREAT/O_EXCL/O_WRONLY/O_NOFOLLOW/O_CLOEXEC・0640で行い、CREATE_NEW時点からそのinode FDを保持する。生成後の名前再解決からmode/groupの変更先や書込み先を決めない。FileChannelは保持FDのprocfs capabilityから開き、channel/native FDの双方を明示closeする。全件byte配列を準備せず、PayloadCodecの単一record encodeを共用し、全件sequence検証と1件ずつの事前byte検査後、4,800byteずつ再encode/writeする。Data/headerを捏造してfile recordをencodeしない。
+
+### 7.4 起動時の診断専用probe（SSC-022）
+
+SSC-162/BUG519：RW検査は保持FDの現在mountについて既存LinuxInodeSecurity/statvfs ST_RDONLYで確認する。ProtectSystem=strict内のTransfer限定RW bindをcanonical FileStore readonlyで誤拒否しない。ext4/SDS・所有/modeと以下の実probeは必須のまま。保持mount readonly/観測失敗は起動拒否し、Files.isWritableだけの代用やsandbox緩和はしない。A06-MOUNT001/002と実通常API経路で検証する。
+
+業務producer/HTTP受付前かつ他writer/batch停止のexclusive startup区間で、実Transfer filesystemの新規group/mode設定、file force、directory fsync、atomic no-replaceを検査する。Rootは自動作成/chmodしない。診断日付はJST正規date、新規dateだけをSSC-020の属性へ確定し、既存dateは検査だけとする。
+
+CSPRNG UUIDの診断partをCREATE_NEWで保持し、秘密を含まない4800byte固定pattern Aを書いてforce/属性/独立hashを検証、readyへnative no-replace公開する。同UUIDの新しい診断partに異なるpattern Bを書き、readyへの二度目の公開がCOLLISIONとなりA/B双方のbyteが保たれることを検査する。通常rename/置換へのfallbackはない。Probeのfileは業務結果ではなく、descriptor/Inbox/業務message/HTTPへ返さない。
+
+ProbeはCREATE_NEW成功で所有を確認したpartと、公開成功を確認した**自分の診断readyだけ**をその保持dateから清掃し、directory fsyncする。Ready清掃前に保持inodeの属性とdiagnostic A hashを再確認し、変質/検査不能なら保全する。既存衝突先、所有不明entry、公開結果不確定のreadyは削除しない。清掃失敗/close失敗/不確定公開は起動不合格とし、全体scan/ready成功へ算入しない。残った診断entryは既存の次回朝清掃/運用調査対象とする。新規empty dateは無断削除しない。
+
+この限定された起動診断の清掃を、通常writer/readerや業務ready削除へ流用しない。通常のlarge-result lifecycleは従来どおり次回朝batchへ委ねる。Probe成功後の完全scanだけで容量を初期化し、single-instance/exclusive保証・full root検査・service readinessへの結線を別途検証する。
+
+### 7.5 既存子directoryの非上書き公開（SSC065/PG176）
+
+先行d744fb57。OwnedTransferDirectory.publishChild(String pending,String ready)は借用した単一親capability内の既存directoryだけを公開する。両名を既存単一segment規則で検証し、同名はIllegalArgumentException、NULLは境界NPE、closed親はUNAVAILABLE。入力検査前のnative操作はしない。backup正規名/owner/ACL/device/内容のpolicyはbatch caller側に残し、Storageへ業務型依存を入れない。
+
+親のprivate lock内でpendingを既存O_DIRECTORY/NOFOLLOW/CLOEXECで保持し、既存DirectoryCalls.publish（renameat2 RENAME_NOREPLACE）→親sync→所有child closeの順で終了する。mkdir/file作成/通常renameへのfallback/chmod/chown/unlinkはしない。parentはcloseせず、child closeは成功・失敗とも一度だけ。資源複合はResourceScope/SSC063の安全なprimary優先順位を使用する。
+
+missing source、非directory/symlink sourceは非成功、targetがdirectory/file/symlinkのいずれでも衝突は保全。rename後のsync/close失敗では公開済targetを巻き戻さず、失敗前のpart/targetも自動削除しない。借用親の元pathが置換されても保持FD側だけを操作する。
+
+この操作はcallerの連続排他・actor停止・元inode/確定後inode照合の代替ではない。openしたsourceとrename時のnamespaceが敵対actorによって差替えられないことはcaller責務で、openDirectory成功だけで真正なbundleやbackup完了を認定しない。batchの全file force/子sync/確定後Reader＋ArtifactVerifier/DB pair確定はSS341の別必須段。
+
+PT-OPS-PDIR-001～008/018029で実Linux inode/no-replace/sync、入力全不正・close/不確定結果・compound・並行とborrowed ownershipを検証する。既存0640file/0600private file/Transfer公開のoracleは変更しない。
+
+### 7.6 private子directoryの新規作成（SSC068/PG186）
+
+backup pending用に既存0750日付directoryとは別の0700/new-only能力を設ける。DirectoryCalls.createPrivateDirectoryは未対応adapterではmutationせずUNAVAILABLE、Linuxは保持parent FDに対するmkdirat(mode0700)を使用する。umaskは権限を縮小し得るためcallerがmetadataを確認し、chmod/chownで補修しない。既存nameはdirectory/file/symlinkを問わずcollision、既存openへfallbackしない。
+
+OwnedTransferDirectory.createPrivateChildは単一segment/null/closed検査後、private lock内でmkdir→NOFOLLOW child open→child fsync→parent fsyncを行い、全成功時だけ独立所有child FDを返す。失敗時は取得済child FDを一度だけ消費し、部分生成directoryは消さず保全する。rootは借用のまま。既知/未知close複合の順位はResourceScopeに従いself-suppressionを作らない。
+
+この低位能力はmkdir/open間のnamespace真正性、backup owner、root admissionを証明しない。callerが専用backup OS UID/GID、親排他/他actor停止、parent/rootとの同device、inode/owner/mode/ACL前後一致を確認する。rootで生成してbackup所有を装うこと、既存directory修復、partialの無条件再利用は禁止。archive生成・backup確定・7世代・NAS durabilityは別の上位責務であり、ここだけのPT成功で完了としない。関連RD BAK/BKO/OPS009、UI251、SS341§6.1/343§5.3、018031/032・PT-OPS-CDIR-001～008。
 
 ## 8. Media認可・descriptor
 
 1. Browser requestごとにWeb HTTP session、CSRF不要のGET、認証contextの有効性をAPIで検証。
 2. APIはIF-009/012/016でlogical ID、media type、inline/download modeを受け、DB metadataとmanifestを参照。
-3. Descriptorにlogical ID、storage relative path、safe file name、byte size、SHA-256、allowlisted MIME、mode、
-   message/correlation IDを入れ、MQ HMAC検証済みresponseとしてWebへ返す。
+3. Descriptor DATAにlogical ID、storage relative path、safe file name、byte size、SHA-256、allowlisted MIME、modeを設定する。
+   Message/correlation IDは共通headerに設定し、承認済みMQ経路でWebへ返す。
 4. Webはdescriptorと要求URLのlogical ID/type/modeを再照合、secure open後のsize、必要時hashを検証。
 5. Authorization済みchannelだけをstreamし、pathはBrowser/HTML/HTTP header/logへ出さない。
 
 DescriptorはHTTP session cacheの権限正本にせず、各GETでAPIへ照会する。ID不存在・非scopeは404、
 API/MQ/file integrity障害は503。内部理由をBrowserへ区別表示しない。
+
+SSC-030: 旧記載のsigned/署名/MQ HMAC検証済responseは要求Inbox fingerprintと応答検証の混同であり、独立した応答MAC/signatureを意味しない。RD MQ-020、UI231 §5/10、232 header、235 MEDIA1024、237 §8を正本とする。Operation HMAC keyはSS343どおりAPIだけが保持し、Webへ配布しない。Wire/property/credentialへ未定義の署名field/keyを追加しない。APIの全Request HMAC・暗号化snapshotの完全性検査はSS324の既存契約を維持する。
+
+Webはloopback Brokerの認証・Address別role（reply送信はAPI）、JMS/body属性一致と共通codec検証、待機correlation/deadlineを既存MQ層で保証する。その上でMediaResponseDecoderが元の3 descriptor要求を検証し、対応response layout、request Message IDへのcorrelation、同一認証context（constant-time比較）、全body長・result profile、成功時のtype/logical ID/disposition・path/MIMEを再照合する。Error profileはdescriptorを生成せず元result codeを維持する。不一致はfileを開かず503相当の安全な検証失敗とする。これらは各GETのAPI認証/manifest確認、Web物理検証・起動権限の代替ではない。
+
+MEDIA1024の許可MIMEとstorage file拡張子は次の完全一致allowlistとする。大文字小文字や別名を推測して受理せず、DB/manifest、descriptor、
+拡張子の組合せが不一致なら配信しない。これはSSC-004により、UI 221/223/235/237の現行互換規則を実装可能な値へ具体化したものである。
+
+| 種別 | Storage拡張子 | Descriptor MIME | Disposition |
+|---|---|---|---|
+| Audio（IF-009） | `.ogg` | `audio/ogg` | `I` / `A` |
+| Video（IF-012） | `.mp4` | `video/mp4` | `I`のみ |
+| Music（IF-016） | `.m4a` | `audio/mp4` | `I` / `A` |
+| Music（IF-016） | `.mp3` | `audio/mpeg` | `I` / `A` |
+| Music（IF-016） | `.ogg` | `audio/ogg` | `I` / `A` |
+| Music（IF-016） | `.wav` | `audio/wav` | `I` / `A` |
+| Music（IF-016） | `.flac` | `audio/flac` | `I` / `A` |
+
+Attachment時もdescriptorには実体の上表MIMEを設定し、HTTP応答だけを`application/octet-stream`へ固定する。
 
 ## 9. Endpoint・HTTP header
 
@@ -191,6 +281,8 @@ response完了/例外の`finally`で必ず解放する。
 Web取得成否、HTTP転送完了、descriptor replayの有無で日中削除しない。
 File完了ACK・新規MQ layoutを追加しない。
 
+SSC118実装補足：日付は実在するcanonical yyyyMMdd、UUIDは小文字canonicalを要求する。mtimeがcutoffと等しいentryは境界保全し、strictly-beforeだけ対象。保持root/日付はAPI UID・schubert-web GID・0750、fileは同UID/GID・0640/regular/nlink1・同device・ACLなし/localRWを前後実再観測する。内容sizeが0又は48MB以上でも古い正規regularの清掃を妨げず、生成側のrecord-length制約は清掃へ流用しない。不明entryは保全件数としてWARNING（個別path出力なし）。根本gate/親guard不明は全体非成功、確認不能をemptyへ補完しない。空の正規日付だけ親FD＋single-segment unlinkat(AT_REMOVEDIR)/fsyncで削除し、host read-only adapter・recursive API・configured root削除は使用しない。既存batch_runsのtarget/success/failure/byteと固定reasonを保存し、保全件数は独立集計証跡へ残す（新DDLなし）。
+
 ## 13. Capacity・metric・alert
 
 | Metric | Warning | Critical/処置 |
@@ -244,3 +336,5 @@ Metric labelにpath、file名、user ID、media IDを設定しない。Type、st
 | 2026-08-31 | Large-result、secure path、media認可、Range、朝削除の詳細を作成。 |
 | 2026-08-31 | 横断監査でmedia endpoint pathをUI 221/SS 313と同一の外部URLへ統一。 |
 | 2026-08-31 | 横断監査でAsset 512/Transfer 256 byteのpath上限と、wire表示file name 256 byteをUI 235/237に統一。 |
+| 2026-09-01 | SSC-003によりAPI descriptor発行を`MediaQueryService`、Web Range配信を`MediaRangeService`へ統一し、311/323との委譲関係を明確化。 |
+| 2026-09-02 | SSC-004によりmedia descriptorの7拡張子/MIME組合せとHTTP attachment専用`application/octet-stream`を固定。 |

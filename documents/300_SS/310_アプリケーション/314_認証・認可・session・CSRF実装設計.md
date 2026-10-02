@@ -28,7 +28,7 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 
 ## 3. Spring Security filter chain
 
-初期構成は単一`SecurityFilterChain`とし、順序を固定する。
+通常要求は単一business `SecurityFilterChain`とし、順序を固定する。SSC-047として、container内部の`DispatcherType.ERROR`かつ`/error`だけは、その手前の非業務error chainへ限定分離する（§3.2）。
 
 1. Forwarded headerはCaddyからのloopback接続だけを採用し、外部値を上書き済みとする。
 2. Request ID/filter、security header、session repositoryを適用する。
@@ -40,6 +40,20 @@ roleを検証する。Header/HTML/cookieへ認証contextを出さない。
 8. 401/403はHTML/media/POSTごとのhandlerでUI 221の遷移へ変換する。
 
 `ROLE_` prefixはWeb framework内部だけとし、wire/DBのroleは`USER`/`ADMIN`を正とする。
+
+### 3.1 Login providerと再送時の現在認証（SSC-043）
+
+SSC-043（§3のprovider詳細）: MqAuthenticationProviderは未認証のusername/消費char[]/trusted Caddy由来numeric IPだけを入力とし、IF-001の0000または現在context確認済み0200だけからROLE_USER/ROLE_ADMINと閉SessionPrincipalを返す。0101/入力不正、0106、9000を混同しない。0106の後段表示へ渡す追加値は0..900秒のみ。失敗例外へpassword/元cause/wire本文を保存しない。全終了でchar[]をzeroしinput tokenのcredentials参照を外す。Session保存はcustom fixation strategyの短transactionへ分離する。
+
+Login replay0200の現在context確認は324 §6.1を具体化し、新UUIDの既存IF-003 GAMREQ01を1回実行する。APIの通常context検証とgame readが成功した応答だけを認め、0102は未認証、その他error/timeout/不正応答は一時障害にする。Responseの相関/context/layout/総長/DATA/record全検査を必須とし、取得したgame内容を画面やcacheへ流用しない。これはLogin再送/新session発行ではなく、既存保護readによる最新認証確認である。role/status/password変更の既定全session失効を維持し、以後の業務API再認証も省略しない。元snapshotの初回expiresAtを現在idle期限と混同せず、現在有効性はAPIを正とする。Wire/DDL/外部画面仕様は不変更。
+
+### 3.2 内部error dispatchと依存障害（SSC-047）
+
+UI221/222のMQ/DB一時障害503共通errorを、失敗したsession/DB/keyへ再依存せず表示する。BUG-074/YKT-066の是正として、InternalErrorDispatchRouterを単一business FilterChainProxyの手前へ置く。実containerのDispatcherType.ERRORかつrequest URI exact `/error`だけを、UTF8と解決済表示snapshot/CSRF再投影の非業務filterへ渡す。外側Caddy検証・server request UUID・security headerは共通必須。StrictHttpFirewallは通常business要求の必須検査として維持し、拒否済み元method/headerを内部error表示へ再適用しない。通常REQUESTの`/error`、外部POST/PUT、ASYNC/FORWARD、ERRORの別URLはbusiness chainを通り、認証・CSRF・URL roleを省略しない。HTTP header/query/attributeの偽dispatcher値を許可条件へ使わない。両分岐の終了でSecurityContextをclearし、内部error branchの表示以外のhandler/JMS/DB/更新への利用を禁止する。
+
+通常chainで閉principalを復元した後、要求内の表示用TopBar（brand/username/roleだけ）と解決済CSRFのimmutable snapshotを取得できる。これはrequest scopeだけ、閉session JSON/DBへ属性を追加しない。Error chainはこの表示snapshotだけを使い、HttpSession/getUserPrincipal/SecurityContextの再読、DB/JMS、CSRF再生成を行わない。取得前に障害となった要求は匿名error表示とし、認証済みと推測しない。API0102等の明示失効時にはsnapshot/CSRF表示をclearする責務を後続handlerへ持たせる。raw認証context/password/session IDはsnapshot/modelへ入れず、CSRFは正規POST formのhidden inputだけに使用する。
+
+session repositoryの固定SessionStoreExceptionは外側境界で未commit応答を503 sendErrorへ変換する。すでにcommit済み、またはerror dispatch自体の失敗は再dispatchせず不成功として伝播する。NPE/任意RuntimeExceptionをcatchして成功へ変換せず、containerが未commitの未知障害をerror dispatchした場合は安全な503画面へ分類する。Proxy不正は既存BUG070方針どおり403空bodyで終端しerror chainへ入れない。
 
 ## 4. Password
 
@@ -65,6 +79,10 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 
 ## 5. Login失敗・lock
 
+SSC-014: Usernameの表示入力はNFC/trim後1..64 UTF-8 byte、比較keyはLocale.ROOT lowercaseで生成しDB上限96byteとする（331）。U+0130×32は表示64byte/key96byteとなるため、比較keyのbyte数を表示制約へ代用しない。Login照合はkey、監査は元の正規化表示入力を使用し、wire/auditの64byteを維持する。User作成も同じ正規化factoryを使用する。JDK更新時はUnicode scalarの最大増幅3/2と文脈依存lowercaseを回帰する。
+
+SSC-013: 同Message ID再送は324 §6.1の匿名Inbox保存結果を返し、以下のpassword照合/counter/発行を再実行しない。成功は初回応答snapshotとAUTH_SESSION参照の整合検査後0200、失敗は初回result/retryを維持。Replayはactive認証・権限付与・idle延長ではない。
+
 ### 5.1 API transaction
 
 | Step | 処理 |
@@ -79,10 +97,18 @@ Web/API境界では固定長上の制約により一時`String`が生じるが�
 
 User不存在でもIP制御と同程度の処理経路を取り、timing/responseで存在を開示しない。DB/MQ timeoutは`9000`であり失敗counterを増やさない。
 
+#### 5.1.1 失敗窓とlockの境界（SSC-009）
+
+現行互換を維持し、USER/IPとも`now > window_started_at + 15分`のstrict超過で窓外resetする。終了時刻の一致は旧窓へ加算する。窓の開始が未設定なら初回count=1とする。これは`locked_until > now`のlock有効性とは別条件であり、lock終了一致では照合を許可する。その照合が失敗して旧窓の閾値へ到達した場合は新たな15分lockを設定する。失敗回数が閾値へ到達した当該要求から`0106`を返し、次の要求までlock表示を遅らせない。
+
+根拠はUI226/234の15分窓・閾値と未承認差分禁止、現行`LoginAttemptService.isExpired/recordFailure`および`LoginAuthenticationFailureHandler`。BUG-021/YKT-018の固定Clock比較で終了±1ns/一致を検証する。DB精度では±1μs/一致を検証し、Current baselineとDIF allowlistは変更しない。
+
 ### 5.2 Retry-After
 
 APIは`retry_after_seconds = ceil(locked_until-now)`を0～900で返す。WebはHTTP `Retry-After`を設定し待機messageを表示する。
 Remaining attemptsは存在推測を避け通常認証失敗では0とし、運用logだけ内部counterを保持する。
+
+SSC-046: Form Loginの失敗/lockは351 §5.1の補足どおり現行302 `/login?error`または`/login?locked`を維持し、lockのRetry-AfterはAPI確定値だけを使用する。Webで失敗counter/lock時刻を再計算しない。成功handlerはcustom fixation後の永続principal同値を検査し、閉SavedRequestまたは`/`へ302する。汎用Spring認証例外のsession保存やURL session rewritingを使用しない。Login画面の残時間表示への引渡しはUI226の表示条件を満たす別controller接続gateであり、handler単体のRetry-After成功だけで画面完了としない。
 
 ## 6. API認証context
 
@@ -114,6 +140,12 @@ QA-044/UIC-004で確定したとおり、現行は設定と異なり3 sessionが
 
 失効・期限切れは`0102`、DB障害はdeny closedで`9000`。Raw/hash/ciphertextをlogしない。
 
+### 6.3 Logout・管理失効（SSC-011）
+
+LOGREQ01だけは312 §4.2の失効専用lookupとし、通常のactive verifierによる先行拒否をしない。User→session lock、既失効なら元のrevoked_at/0200、未失効の有効contextだけLOGOUT/0000。idleを延長せず、既失効への再要求は時刻/reasonを上書きしない。管理の全失効はADMIN認可済みのcaller transaction内でtarget Userをlock後、未失効sessionを全件対象とし、DISABLED/PASSWORD_RESET/ADMINの閉じたreasonを保存する。更新数0でも既失効rowの時刻は維持する。更新と監査の途中失敗はcallerが全rollbackする。
+
+SSC-015: Logoutのowner付きInboxと保存snapshot/元失効参照は324 §6.2を正とする。Wireにclient IPがないLogout/管理失効ではAPI監査remote_addressをSQL NULLとし、Login時の過去IPやloopbackを現在のremoteとして捏造しない。Loginとそれに伴うREPLACEDは当該Loginの検証済みIPを保存する。remoteは351 §3.1の任意項目であり、HTTP側の現在IPはWeb REQUEST/SECURITY logの責務とする。いずれもsession識別子を監査へ出さない。
+
 ## 7. HTTP session
 
 ### 7.1 Cookie/session ID
@@ -139,6 +171,92 @@ Spring Sessionの汎用Java serializationは使用せず、version付きJSON all
 
 Password、質問/回答本文、検索結果、固定長body、DB rowをsessionへ保存しない。Envelopeは`formatVersion`、`keyVersion`、12 byte nonce、
 ciphertext/tagを保持し、AADはsession ID hash＋created_at。復号後の未知field/type/上限超過はdeny closedでsession失効。
+
+#### 7.2.1 保存JSON version 1（SSC-038）
+
+UTF-8 JSON objectとし、`formatVersion`（数値の整数表記1）と`operationTokens`（配列、0～10件）を必須にする。その他の許可keyは下表だけ。任意Spring Security/Session objectやclass名をJSONへ保存しない。Encoderの順序はformatVersion、認証4field、csrfToken、savedRequest、operationTokens。Decoderはkey順序/通常JSON whitespaceを許可するが、重複key（nested含む）、unknown key、JSON null、型違い、末尾別document、不正UTF-8/BOMを拒否する。
+
+| key | JSON型 | 欠落・制約 |
+|---|---|---|
+| username | String | 以下4項目が全部欠落なら匿名session。存在時NFC/1～64 UTF-8 byte、control/不正Unicode/末尾ASCII space不可 |
+| role | String | 認証4項目all-or-none、USER/ADMIN |
+| authenticationContext | String | 認証4項目all-or-none、64 lowercase hex |
+| loginAt | String | 認証4項目all-or-none、Instantのcanonical UTC ISO表記。現在権限やexpiry判断は外側責務 |
+| csrfToken | String | 未発行は欠落、存在時64～128 ASCII base64url文字。標準発行は32 random byteの64 hexで満たす |
+| savedRequest | String | 未保存は欠落、同一originの安全なGET path/query合計2048 UTF-8 byte。PG-D-093 value検証＋後段route allowlist |
+| operationTokens | Array of Object | 各要素はpurpose/token/issuedAtだけを全件必須。purposeはUCRREQ01/USTREQ01/URLREQ01/UPWREQ01/ULKREQ01/QSBREQ01/NTCREQ01/QDLREQ01、tokenはcanonical UUID、issuedAtはcanonical UTC Instant。最大10件、同用途複数可、同UUID重複不可。順序を保持 |
+
+未認証sessionにもLogin前CSRFとsafe SavedRequestを保存できる。認証4項目の部分存在は不正とし、role/contextだけの偽principalを作らない。Cookie ID、password、request body、検索結果、tokenに対応する入力本文は保存しない。last_accessed_at/expiry/versionは331のrow metadataを正とし、このJSONへ二重保存しない。
+
+Plaintextは16KiB以下・JSON nesting最大3（root→array→token object）とする。この内部上限は許可field全最大値を包含することをPTで証明し、上位input上限を狭めない。復号/schema不正は外側repositoryが失効させる。平文codec部品はDB保存・認証・CSRF照合を行わず、永続化は必ず352のNKENC1/AES-GCM、session ID hash＋created_atに結合したAADを通す。
+
+#### 7.2.2 Session NKENC1のAAD（SSC-039）
+
+352 §11.2の共通NKENC1を使い、JSONは圧縮しない。AADは下記7fieldへ各々unsigned lengthの32bit big-endian prefixを付けて連結する。Callerはcreated_atをDBのmicrosecond精度へ事前確定し、codecはsub-microsecond入力を拒否して暗黙丸めをしない。
+
+| 順序 | field | byte表現 |
+|---:|---|---|
+| 1 | purpose | ASCII `web-session` |
+| 2 | table | ASCII `schubert_web_session.web_http_sessions` |
+| 3 | id | UUIDのmost/least significant longをbig-endianで16byte |
+| 4 | session_id_hash | lowercase hex ASCII64byte、raw Cookie IDではない |
+| 5 | created_at | signed epoch seconds 64bit＋nano-of-second 32bitをbig-endian、計12byte |
+| 6 | format | byte1個の値1 |
+| 7 | key ID | 1～16 ASCII、DB key_versionとenvelope内IDに一致 |
+
+PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaintext16384byte、最大envelope16436byte。Currentだけwrite、current/previousだけread。復号後は7.2.1閉schemaを検査して属性valueだけを返す。異常時の失効/監査はrepository/HTTP接続側、暗号部品は固定理由codeの例外で平文を返さない。暗号鍵はWeb session専用で、API context/Web log/revoke keyと共用しない。
+
+#### 7.2.3 Technical rowの低位store（SSC-040）
+
+`JdbcWebSessionStore`は331 §9.1の9列だけへaccessし、callerの非autoCommit/readOnly=false Connectionを借用する。Connectionのcommit/rollback/closeを所有しない。Statement/ResultSetは各methodで必ずcloseし、SQL/型/NULL/不正row/resource失敗は診断内容を保持しない固定例外。Raw Cookie ID/属性JSONを保存するmethodは作らず、暗号文/key ID型だけをbindする。
+
+- `findLocked(hash)`: explicit9列＋`WHERE session_id_hash=? FOR UPDATE`。0件はOptional.empty、重複/SQL NULL/DDL値不整合は拒否。期限や暗号正当性をこの低位readで認可しない。
+- `insert(row)`: 新規version0、更新数1だけ。UPSERTしない。
+- `replace(original,replacement)`: identity(PK/hash/created_at)同一、versionが正確に+1。PK/hash/created_at/元versionをWHEREへbindし、ciphertext/key ID/last access/expiry/max inactive/versionだけ更新。0件はfalse、1件true、その他拒否。
+- `delete(identity,version)`: PK/hash/created_at/元versionに一致するrowだけ削除。0件false/1件true、その他拒否。
+
+不変rowはcreated/last access/expiryがmicrosecond精度、created<=last<=expiry、max inactive1..28800、version0..999999999、ciphertextの許可範囲を検証する。上限versionへの+1は拒否する。外側lifecycleがlock下で期限/暗号を検証し、8h idle延長とdirty属性mergeを行う。削除済rowへの古いHTTP saveを新規INSERTへ置換しない。Fixation旧削除＋新INSERTは同一短transaction、JMS/HTTP処理はDB lockを保持せず実行する。低位storeの合格はSpring Session/失効/並行merge完了ではない。
+
+#### 7.2.4 暗号lifecycle service（SSC-041）
+
+`EncryptedWebSessionRepository`はSpring Session adapterの委譲先として、DataSource/Clock/CSPRNG/UUID供給と専用SessionPayloadCodecを使用し、以下を短いWeb technical transactionだけで行う。JMS/HTTPやAPI password照合をtransactionへ入れない。
+
+| operation | 契約 |
+|---|---|
+| create | 匿名principal・新CSRF・空SavedRequest/tokenで即時暗号化保存。新Cookie ID/DB UUID、idle8h |
+| find | hash row lock後、現時刻をmicrosecond化してexpiry確認。一致/超過は削除、復号/schema不正も削除して不在。正常だけidle延長/current再暗号化して返す |
+| mutate | 現在rowをlock/復号/期限検証後、現在属性へのpure callbackを適用。principal/CSRF変更は禁止、null結果/不変制約違反はrollback。SavedRequest/tokenの古い全snapshot上書きを行わない |
+| authenticate | API認証済principalを受け、new Cookie/DB UUID/CSRFへfixation。UI226どおりSavedRequest/未完了tokenを含むallowlistを保持、旧削除＋新INSERTをatomic化。発行値衝突はrollback |
+| invalidate | hash限定DELETEをcommit。破損rowでもlocal失効可能。API revoke/queue/監査・HTTP Cookie失効は外側 |
+
+構造/NULL/型不正rowを表す`InvalidSessionRowException`を固定`SessionStoreException`のsubtypeとして区別し、失効用hash限定DELETEをstoreへ追加する。Row不正・復号不正・期限切れは削除commit後だけ不在を返す。DB接続/SQL/resource/暗号write故障はcommit前ならrollbackを試み固定障害、cause/suppressed診断を利用者へ返さない。commit成功後のclose故障は既に確定したDBをrollbackできないため、呼出側へ固定障害を返し、次のhash lookupで実状態を確認する。commit応答不明も未確定結果として扱い、成功を推定しない。
+
+Idle延長はmax(現在時刻,既存last access)＋row max inactiveを用い、Clock後退で期限を縮めず絶対lifetimeを追加しない。新規/認証時は8h固定。version上限999999999の次はCookie/CSRF/created_at/属性を維持し、DB UUIDだけ新規発行して同hashの新row/version0へatomic置換、新PK AADで再暗号化する。旧PKのCASを成功させずABAを防ぐ。UUID衝突・想定外0件・commit/close故障は不成功で、呼出側が未確定成功を利用者へ表示しない。
+
+本serviceはframework/監査handlerの実装完了ではない。Operation tokenの用途/完了/timeout handlerは最大10件を保ち、未完了tokenを実装都合で破棄しない。
+
+#### 7.2.5 Spring Session adapter（SSC-042）
+
+SpringEncryptedSessionRepositoryはSpring Session4.1.1 SessionRepository、SpringWebSessionはSessionを実装し、標準SessionRepositoryFilterへ接続する。汎用Jdbc repository/Java serializationは使わない。HttpSession属性は次の閉projectionだけ。JSONへ新field/class名を追加しない。
+
+| 属性 | Java公開型 | 更新契約 |
+|---|---|---|
+| principal | SessionPrincipal（認証4fieldの集合） | API認証済み結果だけを内部handlerがsetし、authenticateで即時fixation。HTTP parameter binding禁止。存在するprincipalのnull除去は不可、Logoutはsession invalidate |
+| csrfToken | String | 同値setだけ許可。再発行はcreate/fixation/changeSessionId。存在する値のnull除去は禁止 |
+| savedRequest | Stringのsafe GET path/query | safe GET validation後にこの属性だけ短transactionで更新。nullは除去 |
+| operationTokens | immutable List of SessionOperationToken | request snapshotに対する追加/削除deltaを現在DB listへ適用、別requestの変更保持。同UUIDの用途/時刻変更拒否、最大10、nullはsnapshot上の項目の削除 |
+
+未知readはnull、未知write/型不正は固定診断で拒否。標準SecurityContext/DefaultSavedRequest/例外objectは保存しない。後続SecurityContextRepository/RequestCache/CSRF handlerを閉projectionへ接続する。generic getAttributeの型castはframework contractに必要なmethod一箇所だけのunchecked抑止とし、理由・Test IDを隣接記録する。
+
+create/find/setはlifecycleへ即時委譲、saveも現在hashを再検査し、削除/期限切れは固定障害で新規INSERTしない。Session objectは発行元repositoryにだけsaveできる。private lockで同wrapper snapshotを保護する。setLastAccessedTimeはserver内のInstantをµs化し、lock下のexpiry判定後、現在Clock/既存last/指定時刻の最大へtouchする。外部HTTPから日時をbindしない。setMaxInactiveIntervalは既存確定値と同値だけ許可する。
+
+changeSessionIdは既存principalを維持したrotateとして、fresh Cookie/DB UUID/CSRF、SavedRequest/token移管、旧削除＋新作成を短atomic TXで行う。API認証済み新principalを受けるauthenticateと分け、匿名sessionを認証済みにしない。CookieのSecure/HttpOnly/SameSite=Lax/Path=/、URL ID非使用、8h idleはUI226のまま。Mock Servlet＋実DBのfilter PTはHTTP adapter単体であり、全Security chain/画面/起動/実NK CHRとは別gate。
+
+#### 7.2.6 SecurityContext projectionとfixation専用保存（SSC-044）
+
+EncryptedSessionSecurityContextRepositoryは、先行SessionRepositoryFilterの公開SESSION_REPOSITORY_ATTRが設定済みSpringEncryptedSessionRepositoryと同じinstanceであることを検査し、欠落/別repositoryではnative HttpSessionへfallbackしない。永続化は7.2.1/7.2.5の閉principalだけ。request単位のlazy一回loadから、credential/detailなし・ROLE_USER/ROLE_ADMINのどちらか1個だけの標準認証tokenを作る。未知型/属性/権限・未認証tokenのgrantを拒否し、汎用SecurityContext/認証例外を保存しない。
+
+EncryptedSessionAuthenticationStrategyは既存CSRF sessionとAPI検証済み標準認証を必須にし、principal setで既存authenticateの短transactionを1回実行する。新Cookie/UUID/CSRF、SavedRequest/未完了token移管を保持し、標準CsrfAuthenticationStrategyのnull-save/追加rotateを重ねない。DB/key/状態故障は固定SessionAuthenticationException、成功HTTPへ進めない。通常saveContextは永続principalと閉認証projectionの一致検査だけで、追加writeや任意grantをしない。空/anonymous保存は匿名/不在sessionでのみno-op、既存認証を黙って消さず不一致として拒否する。LogoutはAPI revoke/queue後の明示session invalidateを先に行う。復元後も毎業務のAPI最新認証と失効済rowの非再生成を維持する。
 
 ### 7.3 Lifecycle
 
@@ -180,6 +298,8 @@ Web sessionで関連付けて保存せず、APIのHMAC fingerprintを正とす�
 
 ### 9.2 Matrix
 
+SSC-031: User管理更新では312 §6/332 §12の認証前lock preludeを適用する。非lockingで見つけたcontext ownerは候補に過ぎず、User群昇順lock後にsession ownerをlock下で再照合し、通常verifyと最新ADMIN認可を必ず行う。Raw context/候補IDをログや利用者応答へ出さない。単一transactionの通常verifyによるidle延長とcommand/critical audit/Inboxのatomicityを維持し、事前lookupやWeb roleで認可を代替しない。
+
 | 操作 | USER | ADMIN | API条件 |
 |---|:---:|:---:|---|
 | Scenario/audio/video/music | ○ | ○ | 有効context |
@@ -189,6 +309,10 @@ Web sessionで関連付けて保存せず、APIのHMAC fingerprintを正とす�
 | User管理 | × | ○ | role=ADMIN＋自己/active ADMIN保護 |
 
 他人IDはUSERへ404を返し、存在を開示しない。ADMIN URLをUSERが要求した場合は対象に関係なく403。Web表示非表示だけで許可しない。
+
+### 9.3 業務API0102のlocal失効（SSC-048）
+
+検証済API0102を受けたcontrollerはApiSessionInvalidHandlerで終端する。構成済暗号repository marker同一性を確認し、閉actorの表示用投影だけを監査へ使用、WebDisplayContext/CSRF属性とSecurityContextをclearし既存getSession(false)だけinvalidateする。新session/SavedRequest/operation tokenやAPI Logout再送rowは作らない。通常GETは固定302 `/login?session-expired`、POST/HEAD/その他・AJAX・mediaは401共通error、bodyの自動再送は禁止。local DB削除とSESSION_EXPIRED監査後にだけ応答を確定する。DB/属性/監査/response故障は成功扱いせず、既存503境界へ連携する。commit済でもlocal破棄を行うが応答書換不能を伝播する。古いrequestの失効で新Loginの別rowを削除しないことを試験する。業務全controller接続は各program gateで確認する。
 
 ## 10. Logout失効再試行
 
@@ -213,11 +337,13 @@ next attempt/expiry、error codeだけを保存する。Backoffは5秒、30秒�
 | Event | 必須field | 禁止field |
 |---|---|---|
 | Login success/failure/lock | request ID、username入力のbounded識別、remote、reason code、result | Password、hash、context |
-| Session issue/revoke/expiry | actor、session internal UUID、reason、時刻 | raw/hash/ciphertext |
+| Session issue/revoke/expiry | actor/対象user、message/correlation、reason、時刻 | session ID/internal UUID/raw/hash/ciphertext |
 | CSRF/authorization deny | actor optional、method/path、request ID、rule ID | CSRF token、query値 |
 | User status/role/password | actor/target、before/after（password除外）、token fingerprint ID | Password/hash/token raw |
 
 Username不存在は内部reason codeを権限制限logへ記録できるが、利用者messageとmetric labelでは区別しない。
+
+SSC-010: Session識別子の機密除外は351 §4を正とする。Login発行はLOGIN_SUCCEEDED、最大2件制御の各REPLACEDはSESSION_REVOKEDを同じtransactionで保存する。Logout/管理全失効もSESSION_REVOKEDと閉じたreason、結果codeで記録し、失効日時はDB列に保持する。新規失効1行につき監査1行、冪等Logout要求は0200監査1行（Inbox再送は元結果のみで重複監査しない）。監査失敗時にsessionだけcommitすることは禁止する。
 
 ## 13. SS設計判断
 

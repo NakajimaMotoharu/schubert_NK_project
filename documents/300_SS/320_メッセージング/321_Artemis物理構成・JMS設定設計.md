@@ -1,5 +1,9 @@
 # Artemis物理構成・JMS設定設計
 
+SSC151153155（PG/PT、2026-10-01）：既存物理SYNC_REQUEST/SYNC_REPLY_WEBはregistry-valid QSBREQ01 Q/A、QSBRSP01 S/Aも運ぶ（応答kindはUI232のSでありRではない）。他通常S/内部IとProtocolValidatorのexact profile/transport/route一致は維持、他layoutの偽Aや内部eventを許さない。全4API/Web送受信境界を同契約でPTする。内部QWKはguard済みactual delivery metadataをbusiness portへ渡す。業務最終QWK DLQだけは新Outbox dispatch UUID Dを_AMQ_DUPL_IDへ使い、body/header/NKMessageIDは元Wを保持する。元transport ID/count/error/detectedAtは不変列、元async address/queue/API_WORKは固定で§11 bounded propertyを構成する。通常workのduplicate ID＝Wは不変更。DB最終ERRORだけでは元ACKせず、対応DのSENTまで確認する。consumer/元body/秘密redaction/role/TTL/local transactionは緩めない。
+
+SSC146（BUG411/YKT328、PG/PT隔離認証fixture）：app login usernameはAPI=`nk_api`、Web=`nk_web`とし、それぞれ同名ACL roleへ一対一で対応付ける。roleは認可、username/passwordは認証の別概念であり、role名だけが正しくても別userのcredentialでは接続を許可しない。固定mq-api/mq-webを通常LoadCredentialで受領し、管理login/roleをappへ転用しない。既存Ops login schubert_ops→nk_ops、保守login schubert_maintenance→nk_mq_maintenanceは維持。ユーザ名aliasやpassword fallbackをProductionへ追加しない。fixtureの旧private設定を保存して限定配置/readback/実認証/誤user・誤credential・cross-role負系をPT297298に記録する。UI231のACL表・6Address/Queue・電文互換・秘密保管契約は不変更。
+
 ## 1. 目的・追跡・状態
 
 Apache ActiveMQ ArtemisのBroker物理設定、Address/Queue、security、journal/paging、JMS transaction、consumer、DLQ/Expiry、再配送を定める。
@@ -201,6 +205,10 @@ Registry上限はWeb同期待機20、初期semaphore 12。上限時はMQ送信�
 
 Application roleはAddress/Queue create/delete、management、browse、arbitrary sendを禁止する。Management console/Jolokiaはloopback＋
 OS tunnel、strong credential、ADMIN app accountと別管理accountとする。Credentialをapplication log/command lineへ出さない。
+
+SSC-075: Ops専用Core management照会はArtemis `ClientRequestor`が`activemq.management.<UUID>`の一時・非durable reply Address/Queueを明示作成し、完了時に削除する。`nk_ops`に`activemq.management.#`内の`createAddress`/`deleteAddress`/`createNonDurableQueue`/`deleteNonDurableQueue`を許す。業務6 Address、`nk_web`/`nk_api`には付与しない。`nk_mq_maintenance`の例外はSSC-076に限定する。恒久Queue作成/削除と管理namespace外のAddress作成/削除は許さず、global auto-create=falseを維持する。管理応答待ちは各request 2秒上限、null/失敗/cleanup不完了は固定redacted失敗でAPI起動へ進めない。実認証BrokerでOps正系とapp role拒否、2秒境界/一時Address/Queue cleanupをPTする。これは管理値照会の限定契約であり、§13全項目のreadiness完了を意味しない。
+
+SSC-076: Expiry保守専用`nk_mq_maintenance`だけは上記Ops管理照会の例外として、`activemq.management.#`内の一時・非durable reply Address/Queueの作成/削除・送受信を許し、管理電文RBACを有効にする。`mops.#`の全管理操作は`nk_ops`に限定し、保守roleには`nk.expiry.q`の`countMessages`、属性の実RBAC名`getMessageCount`/`getPersistentSize`読取、`removeMessages`だけを個別許可する。業務Addressの作成/削除・他Queue/DLQの管理・アプリroleの管理は禁止し、空/null selectorを全件削除として渡さない。`nk_ops`の既存管理照会はRBACを有効化しても維持する。実Brokerで保守role正系、他Queue/アプリ拒否、一時reply cleanupを確認するまで本修正を完了扱いにしない。
 
 ## 11. DLQ metadata
 

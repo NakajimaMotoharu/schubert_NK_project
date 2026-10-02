@@ -1,5 +1,23 @@
 # SQL・transaction・lock・削除設計
 
+SSC063/PG183（修正前）: BatchRunRepositoryのhistory/insert/replayed各Statement/ResultSet、abandon/finish Statement計8scopeへPG179のdirect finally close/SQL対unknown優先順位を適用する。begin/finishはSQLだけ固定化し、insertのid getterとpure BatchStepAttempt構築を分離して不正id等の値だけSQL不正へ変換する。SS331§8.3の未知Runtime非正常化と不正投影固定をこの境界で具体化し、旧BAT151のprovider IAE固定期待はBUG206/YKT162影響として訂正する。public不正入力、DB不正投影、全SQL/順序/件数/lock/borrowed transaction/terminal replayは不変更。017068・BAT151と既存BAT138～153へ追跡する。
+
+SSC063/PG182（修正前）: BackupStepRepository.inspectのpair Statement/ResultSet2scopeへPG179のdirect finally close/SQLとunknownの例外順位を適用する。元のSQL-only catchとpresentのNULL固定拒否、14列/fullhandle/時刻/2状態一致/前後guard/borrowed transactionは変更しない。017066・BAT216/既存BAT210～225で68複合とpair/commit/replayの元期待を再確認する。BackupStep自体のprovider IAEは従来も未知であり維持、completeから呼ぶBatchRun.finishは別の横展開対象。
+
+SSC063/PG181（修正前）: CleanupStepRepository.executeの2 owned JDBC scopeへPG179のdirect finally close/例外順位を適用する。counts/nullable累積/complete/reasonのJDBC取得とpure値構築を分離し、CleanupCounts/Reason/CleanupStepChunkの検査IAEだけをSQL不正に変換する。provider未知IAEは同一性を保持する。元presentによるNULL resource/NULL列の固定SQL拒否、7kind・limit・run guard・SQL/bind順・borrowed transactionは維持する。017064・BAT168と既存BAT162～169で68複合/独立rollback後条件を検証し、未確認Repositoryは未完了に保つ。
+
+PG180のJDBC resource null契約: CleanupRepositoryのprepare/executeQuery結果はJDBCのnonnull resource契約を取得境界のObjects.requireNonNullで確立する。違反時は固定messageのNPEとして非正常拒否し、SQL column NULLの固定DB不正とは区別する。NPE正常化、未取得resourceのclose、borrowed Connectionの所有移転を行わない。062の4 null反例で既存の非正常性と解放責務を確認する。
+
+SSC063/PG180（修正前）: 下記PG179のdirect JDBC close/SQLとunknownの優先順位をCleanupRepository.execute/readLogProgressの4scopeにも適用する。JdbcResourceFailuresは例外順位だけ共有する。countsの3getter、reason_code/completeの取得をprovider呼出としてconstructor/enum変換catchの外へ置き、CleanupCounts/CleanupChunk/CleanupReason変換の不正値だけSQL不正へ固定する。8kind allowlist、引数・limit・呼出SQL・元projection/NULL・取得後のborrowed未commit結果は変更しない。owned Statement/ResultSetのみcloseし、Connectionのcommit/rollback/config/closeはcaller専用。017062/063・BAT012と既存17件へ追跡し、全136複合と独立rollback後条件を確認する。BUG195/206・YKT154/162の他Repository分類は残す。
+
+SSC063/PG179・BUG195/YKT154・BUG206/YKT162（修正前）: RunReferenceRepository/InspectionSummaryRepositoryは4 owned JDBC scopeをdirect finally closeで一度ずつ解放する。SQL primaryとSQL secondaryは固定BatchRepositoryException、未知Runtime/NPE/Error primaryは同一性を保ちsecondaryは新しい固定BatchRepositoryExceptionだけsuppressedへ追加する。同一Throwable再送を自身へ追加しない。既知SQL primary＋未知cleanupはcleanup同一性を優先する。body成功後もclose成功まで結果を返さない。借用Connectionはclose/config/commit/rollbackしない。不正DB投影はRunReferences/CleanupCounts/InspectionSummary構築だけを狭いIllegalArgumentException catchで固定SQL不正へ変換し、JDBC providerの未知IllegalArgumentExceptionを巻き込まない。既存null projectionはSQL不正、constructor/API nullは契約違反を維持する。private packageのJdbcResourceFailuresは例外順位だけを共有しJDBC closeやtransactionを代行しない。017060/061・BAT087/121、既存全16 PTで追跡する。他Repositoryと外部Infrastructure変換境界は別に分類する。
+
+SSC055/PG163（先行898cc267）: 親BatchRunRepositoryの全仕様は331 §8.3。親がexplicit transaction/RW/READ_COMMITTEDを所有し、前後の同run参照/自己DB排他、日別stepの最大99行FOR UPDATE、明示同run RUNNING recovery、通常成功skip/backup例外、全identity CASと同値terminal replayを実施する。Connection commit/rollback/close/config変更を行わず、返却後commitの成否はcallerが判定する。全bindは型付き・UTC4.2、同date/step内の過去別runを現在原本cutoffへ再束縛せず、legacy診断を投影しない。失敗時の一部DMLは未確定でrollback必須、単なるexecuteUpdate成功をstep完了にしない。
+
+SSC049/PG162（先行d23b1afd）: 親Inspector summaryは331 §3.13の固定4列readだけを借用Connectionで実施する。InspectorLockHandoffと同じparent autoCommit=true/readOnly=false/READ COMMITTED、queryTimeout5秒、UUID＋JDBC4.2 UTC OffsetDateTimeの固定bind。開始時/返却直前割込を拒否し、statement/result全close後だけ0/1行のOptional値を返す。null4列/複数行/不正counts/SQL・close故障は原因/suppressedなし固定BatchRepositoryException。constructor/run nullや未知runtime/NPEは成功化しない。connection commit/rollback/close/config変更/新接続・progress補完を行わない。子引渡し前後の独立fresh queryであり、関数が実子状態やOS lockを認証するものではない。
+
+SSC-055/PG-D-159（先行4c5dcb85）: 331 §3.12のrun参照readは新規collision/resume整合/GC保全の共通非秘密観測。親は単独所有Connectionのexplicit transaction・READ COMMITTED・readOnly=falseで実行し、固定OS/DB lockを対象file mutationまで保持する。single snapshotの存在と整合を返し、rollback/commit/lock解放後の結果を再利用しない。service停止やDB不通時は補完せず保全する。SQL readはrow更新/lock取得/backup成功を行わず、通常step/進捗writerも既存保守排他規約を守る。管理者の手動DMLや別connection共有を検査済みとして許可しない。
+
 ## 1. 目的・追跡
 
 RepositoryのSQL、page/count、所有者scope、transaction isolation、optimistic/pessimistic/advisory lock、
@@ -14,12 +32,16 @@ Outbox lease、論理・物理削除の順序を定める。SQL文の実装は�
 
 ## 2. Transaction共通規則
 
+SSC056/PG160（先行8002b28b・3cf06b00）: Java InstantとPostgreSQL timestamptzの境界はJDBC4.2を使い、setObject(index, instant.atOffset(ZoneOffset.UTC))、getObject(column,OffsetDateTime.class)→null契約確認→toInstantに統一する。java.sql.Timestamp/getTimestamp/setTimestampで歴史暦やdefault timezoneを経由しない。SQL NULLは既存Optional/必須列検査を維持し、値0やepochへ補完しない。PG-D-159もこの規則を適用する。年月日だけのLocalDateは時刻へ変換せず既存date型対応を維持する。既存SQL/parameter番号/transaction/lock/µs範囲・wire表示は不変、新DB columnや推測backfillを追加しない。
+
+独立PTは明示UTCのSQL literal/extract(epoch)と原本Instantで期待値を決め、同じJDBC変換でfixtureとexpectedを生成しない。UTC0001・1582前後・1900・現代µs・UTC9999とUTC/JST/NewYork session、両方向bind/projection、NULL/欠落/未知、全JDBC fault/close所有を対象classへ横展開する。元Timestampの年0001反例を固定記録し、同じ方式へ戻ることをstatic/architecture canaryで拒否する。現在の23 classと既存OffsetDateTime classの全回帰が完了するまでYKT128/SSC056を閉じない。
+
 | 項目 | 設計 |
 |---|---|
 | Isolation | 既定`READ COMMITTED`。個別の一貫性はrow/advisory lock、CAS、UKで保護 |
 | Read-only | 参照serviceは`readOnly=true`。大容量file出力へDB transactionを持ち出さない |
 | Command | Inbox INSERT～業務更新～critical audit～Inbox完了を1 transactionで確定 |
-| 時刻 | Service入口で`Clock.instant()`を1回取得し、同一transactionの全日時にbind |
+| 時刻 | SSC-016: 単一業務操作のservice入口で`Clock.instant()`を1回取得し、その業務状態更新とcritical auditへ同じInstantをbind。受信時刻、Inbox完了（324の保持起点）、response header構築、transaction外Outbox送信確認/失敗は別stageの時刻として区別する |
 | Timeout | API同期command 1,500ms、query 1,500ms、batch step 30min、lock timeout API 500ms/batch 5s |
 | Retry | DB deadlock/serializationをlistener内で自動loopしない。RollbackしJMS redelivery/inboxへ委ねる |
 | Rollback | Checked business errorは予期responseをInbox ERRORでcommit、DB/MQ/I/O例外はtransaction rollback |
@@ -35,41 +57,45 @@ API requestごとに`SET LOCAL application_name`を変更せず、pool設定のs
 - 画面互換のためpage番号式を使い、`offset = (page - 1) * pageSize`。同一主sort keyの末尾にstable IDを必ず付ける。
 - Count SQLとlist SQLは同じpredicate builder/parameter objectから生成し、所有者・論理削除条件の漏れを防ぐ。
 - Dynamic sort columnはenum→SQL fragmentのallowlistだけ。利用者入力のcolumn/directionをそのまま挿入しない。
-- `ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
+- Scenario以外の新規queryでは`ILIKE` patternは`\`、`%`、`_`をescapeし`ESCAPE '\'`を付与する。検索入力はNFC後のUTF-8 byte上限を先に検査する。
 
 ## 4. Scenario・Speaker・Media query
 
+SSC-036、Log query SQL補足: UI225 §2/235 §11のLog検索・LGSRSP01の許可levelはINFO/WARN/ERRORである。app_logsに診断TRACE/DEBUGが存在してもwire enumの拡張・INFOへの置換をせず、表示用count/listの共通predicateへ`level IN ('INFO','WARN','ERROR')`を必ず適用する。明示Level条件はこの集合内で追加する。診断rowを削除・改変しない。空filterは画面が扱う全3levelを意味し、診断だけなら0件/page1となる。表示対象とtotal/pageの不一致、診断rowによる応答全体9000を起こさない。UI235のFrom/Toはoptionalのまま。§13の「日付条件必須」は計測caseであり、未指定/片側指定をAPIで拒否・期間補完する意味ではない。PG-D-090/PT-ADM-055～060で実DB混在・診断のみ・全filter・wire/count/list・無更新を確認する。
+
 ### 4.1 Scenario search（IF-005）
 
-```sql
-select e.id, e.display_order, e.entry_type, e.speaker_label, e.body,
-       f.id as script_file_id, f.display_path, f.chapter_title,
-       exists (
-         select 1 from schubert.entry_audio_links l
-          where l.entry_id = e.id and l.link_type = 'voice'
-       ) as has_voice
-  from schubert.script_entries e
-  join schubert.script_files f on f.id = e.script_file_id
- where (:game_id is null or e.game_id = :game_id)
-   and (:keyword = '' or e.body_search like :escaped_pattern escape '\\')
-   and (:speaker_id is null or e.speaker_id = :speaker_id)
-   and (:script_file_id is null or e.script_file_id = :script_file_id)
- order by e.display_order asc, e.id asc
- limit 100 offset :offset;
-```
+SSC-017: UI223/234の実際の要求は本文/game/話者名/章/type/voice/pageであり、speaker ID/file IDへ置換しない。下記predicateの必要なものだけをallowlist fragmentから構築し、値は全てprepared statementへbindする。Countとlistは同じfilterから一つのSQL statement snapshotで得る（CTE＋lateral等）。通常READ COMMITTEDの別statement間でcount/listをずらさない。
 
-Countは同predicateの`count(*)`。Keyword空の場合は`OR`をSQLに残さずnamed-query branchでpredicateそのものを除く。
-Game、speaker、fileの不整合組合せは0件とし、別gameのspeaker/fileへ広がらない。
+| 条件 | Predicate・bind |
+|---|---|
+| 本文 | `e.body_search LIKE ?`、NFC/trim後の`%keyword.toLowerCase(Locale.ROOT)%` |
+| Game | `g.code = ?`、指定code |
+| Speaker | `s.name = ?`、名前完全一致。任意gameとの不一致は0件 |
+| 章 | `f.chapter_title ILIKE ?`、`%chapter%` |
+| Type | `e.entry_type = ?`、dialogue/narration |
+| Voice | `EXISTS/NOT EXISTS`したvoice link。se/bgm/otherは対象外 |
+
+本文/章の`%/_/backslash`はCurrent RepositoryのPostgreSQL LIKE pattern解釈を維持する。literal化は未承認の検索結果変更になるため行わない。値bindによるSQL injection防御とpattern解釈は別問題である。空条件はpredicate自体を除く。
+
+Listは`e.display_order,e.id`順、100件。複数voiceは最小link `display_order,audio_file_id`の1件だけを代表音声にし、countはentry単位。UI234 PAGED48の99,999,900件を超えれば9001。必須line NULL/0、未知enum等は架空値へ補完せず一時整合異常9000、移行検証でも検出する。
+
+SSC-018: 検索/明細で表示するSpeaker名はCurrentと同じFK先`speakers.name`（地の文は未設定）とし、保持用`script_entries.speaker_label`へ置換しない。File/current/前後の表示titleはCurrent `ScriptFileSummary.displayTitle`と同じくchapter、section、file名の順にJava `isBlank()`でない最初の値を使う。NULL/空文字だけをSQL `coalesce/nullif`で処理するとASCII/Unicode空白で結果が変わるため、snapshot row mappingで明示判定する。選んだ非blank値を勝手にtrim/加工せずwire不適合metadataは移行検証へ返す。
 
 ### 4.2 Scenario file/detail（IF-003/004）
 
-- File/detailは`script_file_id`/`entry_id`によるPK lookup後、`display_order,id`順で一括取得。
-- 200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
+- File一覧はgame/prefixで絞り`f.display_order,f.id`順、titleはchapter/section/file名の最初の非空値。前後fileは全gameの`g.display_order,f.display_order,f.id`順。
+- Detailはfile PK lookup後、UI223に従い`entry_index,display_order,id`順へ1開始Entry sequenceを割当て、同entryのvoice linkを`display_order,audio_file_id`順へ1開始Audio sequenceで展開する。音声なしはAudio sequence0の1record。
+- 閾値はentry数ではなく音声展開後のrecord数。200件以下はMQ反復record、201件以上はdescriptor mode。Threshold判定と行取得は同一read-only transaction。
 - 最大10,000件をJavaのimmutable snapshotへ取得しcommitした後、`.part`へ固定長recordを書く。超過は`9001`。
+
+SSC-023: snapshot前の認証事前確認は312 §3.3.1のread-only JOIN SELECTで行い、User/sessionをlockせずidleも更新しない。READ COMMITTEDの参照結果を将来の認証保証にせず、file I/O後の最終write transactionで現在の認証/認可を再確認する。既存の通常認証verifyをread-onlyへ置換しない。
+
+SSC-027補足（4.2のScenario再生成）: 最終write transactionで324 §7.1のrow lock/owner/HMAC/旧snapshot一致を確認してから、`update schubert.request_inbox set response_body_encrypted=?,response_key_version=? where message_id=? and processing_state='COMPLETED'`を実行する。SQL後条件は更新1件、他17列（初回completed_at/expires_atを含む）不変。失敗はcaller rollback、commit確認後にのみ応答する。PT-IDEM-SR01～SR03で本番DDL/限定app roleの実PostgreSQLにより検査する。
 
 ### 4.3 Speaker/Media
 
-- Speaker一覧はgame scopeのentry数`count(e.id)` desc、`normalized_name`、`s.id`順。Narration用NULLは一覧に出さない。
+- Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。
 - Audioはentry→link `display_order`→audio ID順、Video/MusicはUI 223のdefined category/section/display orderを維持。
 - Descriptor queryは`storage_relative_path`をWeb画面に返さず、署名対象のlogical ID/size/hash/MIME/file nameだけ投影する。
 
@@ -173,13 +199,14 @@ Web log/revocation outboxも同じclaim形とし、schema/table名と保持仕�
 update schubert.async_jobs
    set state='PROCESSING', started_at=:now, state_changed_at=:now,
        processing_message_id=:message_id,
-       retry_count=:delivery_count - 1,
+       retry_count=least(:delivery_count - 1, 3),
        version=version+1
  where id=:job_id and state='RECEIVED';
 ```
 
-0件の場合はjobを`FOR UPDATE`で再読し、COMPLETED/ERROR/CANCELLEDは冪等ACK、PROCESSINGは
+0件の場合はjobを`FOR UPDATE`で再読し、COMPLETED/CANCELLEDおよび確定済み業務ERRORは冪等ACK、最終retry ERRORは既存DLQ dispatch DのSENT確認後だけACK（SSC156、SS312 §9/SS353 §7.2）。PROCESSINGは
 `processing_message_id`一致のみcrash recovery、不一致は整合errorとする。
+実delivery countはmetadataへ非capで保存する。retry_countだけDDL上限3に制限し、actual countを捏造しない。
 
 ### 8.2 取消
 
@@ -198,8 +225,8 @@ PROCESSING/COMPLETED/ERRORはrollbackではなく業務error`0107`をInbox ERROR
 ### 8.3 Answer完了
 
 1. Jobを`FOR UPDATE`しPROCESSINGとmessage IDを再検証。
-2. `answers(question_id UK)`へINSERT。Unique violation時はexisting answer/provider/timeを検証し、同一なら冪等完了。
-3. Job/notificationをCOMPLETED、同じ`:now`でstate_changed/completed/answered_atを更新。
+2. Questionをlockし削除flag/時刻/actor三点を継承して`answers(question_id UK)`へINSERT。既存answer/provider/time/削除三点を検証し、同一なら冪等完了、矛盾は整合errorとし上書きしない。
+3. Providerの`AnswerResult.answeredAt`を有限UTC microsecondへ正規化し、job started_at/received_at以前を拒否する。同じ値でanswer answered_at、Job/notification state_changed/completed/answered_atを更新する（SSC156）。STUBは現在時刻・空本文。wire projectionだけmillisecondへ切詰め、DB時刻をwire精度に合わせて変更しない。
 4. Critical auditをINSERTしcommit。
 
 ## 9. 所有者・role scopeのSQL強制
@@ -242,8 +269,12 @@ update schubert.answers
 
 ### 11.1 Cutoff・事前条件
 
+SSC057/PG164: 非Log/非秘密Inboxの7cleanup callerは331 §3.14のV020を用い、既存DELETEとRUNNING stepの件数加算を同transactionで確定する。backup→full step NOWAIT→候補のlock順、既存predicate/1,000/SKIP LOCKEDは不変。0件は候補非lock EXISTSで0を確認した場合だけ終端、残行はLOCK_BUSY非成功。FK23503はQUESTIONSだけ保全deferredで上位へ返し、全削除済みにしない。詳細optional累積/型/rollback/30分は331 §3.14、PG163のbegin/finish・親OS/実backup/全kind順序を代行しない。
+
 Batch開始時の`:run_started_at`を全stepで固定する。当日`BACKUP_DB`/`BACKUP_CONFIG`がSUCCESSでなければ
 業務data/inbox/outbox物理削除をSKIPPEDとし、application起動はQA-029に従い続行する。
+
+SSC-050/PG-D-129: SQLへ渡すcutoffは全cleanupでrun_started_atに統一する。log_cutoffはその2160時間前、batch_run_cutoffは9600時間前を関数内で計算する。有限値だけを許可し、331 §3.3.1のlock済backup2件判定を全cleanupへ適用する。Log holdの比較相手は従来どおりlog_cutoffでありrun_started_atへ変えない。Batch履歴の400日はstarted_atでなくended_atから計測し、同runのRUNNING/FAILED調査を保護する。
 
 ### 11.2 Notification
 
@@ -280,14 +311,20 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
 1. Expired/revoked `auth_sessions`、expired `login_ip_attempts`、expired Web HTTP session。
 2. SENTかつsent_atから7日超のAPI/Web outbox。PENDING/ERROR/lease中は対象外。
 3. 参照Inboxはcompleted後24時間、更新Inboxは7日。PROCESSING、decrypt/error中、result ref不整合は対象外。
-4. App logは90日の保持別定義に従いchunk削除。Security保全中の対象は除外。
+4. App logは90日の保持別定義に従い、`logged_at < :log_cutoff`の行を時刻/ID順に最大10,000件lockする。
+   `security_hold_until > :log_cutoff`は保全中としてskip、NULLまたは`<= :log_cutoff`は期限到達として削除する。
+   target/deleted/skippedは同lock対象chunkで集計し、保全行の存在を成功件数に隠さない。
+
+SSC-049/PG-D-126補足: V011以降のmaintenance_cleanup_message_storesは上記2のOutboxだけを処理し、3のInboxを読み書きしない。通常batchのOKをInbox検査完了の証明にしない。Inboxは専用processの候補lock→暗号/参照検査→条件付き削除という同transactionの経路だけで処理する。全件検査の未起動/失敗は親stepで非成功として記録・警告し、検査しない削除へfallbackしない。通常batchの直接Inbox権限は追加しない。
 
 ## 12. Deadlock・競合防止
+
+SSC-051/PG-D-136（BUG-104）: §11.4 Log chunkは331 §3.9の永続(logged_at,id) cursorでholdも走査済みへ進め、DELETEと累積countを同commitする。limitを満たすholdだけのchunkでも次のeligibleへ進み、target0/END前に完了としない。同run後続の保全行再計上はしない。Log候補だけNOWAITを採り、競合時は全chunk rollback・LOCK_BUSYで進捗不変。SKIP LOCKEDで未取得行より先のcursorを確定する方式は使わない。[PostgreSQL 18 SELECT lock](https://www.postgresql.org/docs/18/sql-select.html)と[PL/pgSQL例外blockのrollback](https://www.postgresql.org/docs/18/plpgsql-control-structures.html)を根拠に実DBで検証する。他cleanupの既定SKIP LOCKED/保持値は不変。
 
 | 処理 | Lock順 |
 |---|---|
 | Login | User → IP attempt → auth sessionsの時刻/ID順 |
-| User管理 | ADMIN advisory lock（必要時）→ target user ID → auth sessions ID順 |
+| User管理更新（SSC-031） | context owner候補の非locking lookup → ADMIN advisory lock（減員し得る時だけ）→ actor/target/必要active ADMINのUser ID昇順 → context session owner再照合lock＋通常verify/ADMIN認可 → Inbox → command対象session ID順/監査 |
 | Question submit | Inbox/token → question → job → notification → outbox（新規INSERTのみ） |
 | Cancel/worker | job ID → notification ID → answer（完了時） |
 | Logical delete | Inbox/token → question ID → answer question ID → audit |
@@ -295,6 +332,8 @@ QuestionをDELETEすればanswer/async_jobはCASCADEする。Notificationは先s
 
 DB deadlockが発生した場合は一時障害としtransaction全体をrollbackする。UI更新を内部で再試行せず、
 operation tokenによる再操作またはJMS redeliveryで整合を保つ。
+
+SSC-031のUser集合はactor候補/targetと、減員時だけrole=ADMINかつstatus=ACTIVEの全rowをORで選び、ORDER BY id FOR UPDATEで同時に取得する。通常verifyでactorを先に単独lockしてからadvisory/別targetへ進むことは禁止する。Session ownerを再照合する前の候補lookupは許可判定ではない。preludeとverify/Inbox/commandの間でcommit/closeしない。ADMIN減員以外へ71419601を無条件適用せず、固定keyの用途を拡大しない。直接command部品PTはcallerがこの順序を満たすfixtureとし、本番登録は実preludeとの接続・相互更新/再送PT後だけ許可する。
 
 ## 13. Query plan・性能確認
 
@@ -343,3 +382,4 @@ operation tokenによる再操作またはJMS redeliveryで整合を保つ。
 |---|---|
 | 2026-08-31 | Query、scope、transaction、lock、outbox lease、朝の削除SQLを具体化。 |
 | 2026-08-31 | 横断監査でpage sizeをUIの100/50件に機能別統一し、offsetを`pageSize`基準へ是正。 |
+| 2026-09-03 | SSC-005を反映し、Security log holdのcutoff判定とtarget/deleted/skipped集計を具体化。 |

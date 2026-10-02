@@ -1,5 +1,11 @@
 # DB物理・DDL・index・権限設計
 
+SSC155具体化（PG/PT、2026-10-01、V025実装前）：業務最終QWKのerror閉集合は`QUESTION_RETRY_EXHAUSTED`のみ（provider本文/例外文字列は保存しない）。detectedAtはUTC/PG µs、0001～9999の有限値をworkerで採取する。通常ASYNC rowはDLQ metadata5列すべてNULL、DLQ rowは全有値・QWKREQ01/001/320byte・dispatch D!=元Wとする。`uq_mq_outbox_dlq_original`は元Wのpartial UK。UPDATE triggerは既存DLQの5metadata/dispatch identity/correlation/destination/layout/body/created_atを不変にし、status/lease/retry/last_error/sent_at更新だけ許す。triggerはinvoker、search_path固定、PUBLIC実行権限をREVOKEし、既存role/grantを増やさない。旧DLQに真正metadataが無ければV025全体を拒否し、推測補完しない。既存workのUK/受付SENT証明・既存V001～024・既存table数23は不変更。
+
+SSC152の旧state変換前検査：ACCEPTED notificationに対応するjobがRECEIVED以外なら、状態を推測修復せずV024全transactionを失敗させる。元row/constraint/Flyway履歴を保持して整合調査へ回す。正常legacy RECEIVEDだけRECEIVEDへstate-only変換する。新Job/通知mutationは同じtransactionで双方stateを確定する。
+
+SSC152/155（PG/PT、2026-10-01、実装前）：notifications.stateはUI242のJob stateと同じRECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLEDであり、notification_type ACCEPTEDとは別。V003履歴byte/checksumは不変更、append-only V024で旧state ACCEPTEDをRECEIVEDへ整合しcheckを置換、type/row identity/owner/body/time/version/grantは不変更。mq_outbox業務QWK最終DLQの追加profileは後続append-only V025に限定する。専用nullable列dlq_original_message_id uuid、dlq_original_transport_id varchar(128)、dlq_delivery_count integer、dlq_error_code varchar(32)、dlq_detected_at timestamptzを持ち、ordinary全NULL、DLQ QWK001/320byte全有値・元W!=dispatch message_id・count>=1・ASCII printable ID1～128・closed uppercase code・finiteUTCをcheck、元W partial unique indexを設ける。既存incompatible DLQ QWK rowを推測補完せずmigration失敗として保護。既存message_id UKと一般Outbox、role最小grantを維持し、DLQ送信retryでは専用列を変更しない。実SQL/check/旧履歴・原本・role・crash独立PT前は未完。
+
 ## 1. 目的・適用範囲
 
 PostgreSQLの物理object、column型、default、PK/FK/UK/CHECK、index、schema/role/grantをPG工程で
@@ -52,10 +58,10 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 |---|---:|---|---|
 | `nk_owner` | no | Schema/object owner。Migrationから`SET ROLE` | Service login |
 | `schubert_migration` | yes | `nk_owner`への限定`SET ROLE`、migration時のみcredential配布 | 常時service利用 |
-| `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE | Web schema、DDL、role変更 |
-| `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionのEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
+| `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE、非業務metadataの固定startup投影EXECUTE | Web schema、DDL、role変更、schema history直接SELECT |
+| `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionと非業務metadata固定startup投影のEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
 | `schubert_backup` | yes | Dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
-| `schubert_web_session` | yes | 同名schemaの3 tableだけDML | `schubert`のUSAGE/SELECTを含む全権限 |
+| `schubert_web_session` | yes | 同名schemaの3 tableだけDML、非業務metadata固定startup投影EXECUTE | `schubert`のUSAGE/SELECTを含む全権限、schema history直接SELECT |
 | `schubert_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
 
 - Default privilegeもownerで明示grantし、`PUBLIC`へのtable/sequence/function権限を与えない。
@@ -66,6 +72,8 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
   対話利用をDB権限だけで禁止できるとは記述せず、専用OS user、credential mode、固定unit、監査で補強する。
 
 ### 3.3 Batch maintenance function
+
+SSC095/PG312: 起動schema照合は引数なし `schubert_meta.startup_schema_history()` の六列installed_rank/version/type/script/checksum/successだけとする。SQL STABLE SECURITY DEFINER、owner nk_owner、search_path pg_catalog,pg_temp、history完全修飾、PUBLIC全revoke→app/web/batchへmetaUSAGE＋完全signature EXECUTEのみを同一migration transactionで配備する。失敗行/NULL versionをfilterしない。履歴tableのSELECT/任意metadata function/CREATE/owner追加はしない。V005は変更せずV023 append-only、DB fixtureで許可/禁止権限と全行を独立照合する。
 
 `schubert_batch`の削除権限は、次の定型functionのEXECUTEだけに限定する。
 
@@ -83,6 +91,165 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 `REVOKE ALL ON FUNCTION ... FROM PUBLIC`後、完全signature単位で`schubert_batch`にEXECUTEをgrantする。返却は件数と理由codeだけとし、
 本文・ciphertext・pathを返さない。`batch_runs`記録とchunk transactionは341/332に従い、その他tableの直接DML grantは0とする。
 
+### 3.3.1 共通cutoff契約（SSC-050、PG-D-129）
+
+上表の全functionのcutoffは固定run_started_atであり、保持日数を差し引いた値ではない。内部でlog_cutoff = cutoff - 2160 hours、batch_run_cutoff = cutoff - 9600 hoursを導出する。signature/roleの追加・任意保持値引数はない。V013で旧5関数をappend-only置換し、全7 cleanupを既存maintenance_lock_inbox_backupへ統一する（名前は互換のため維持、owner内部helper）。
+
+NULL/非有限cutoff・limit範囲外は22023。advisory競合は0/0/0/LOCK_BUSY、同run/JST当日/ended_at非NULL/SUCCESSのBACKUP_DB・BACKUP_CONFIGがlock済単一snapshotで揃わなければ0/0/0/BACKUP_GATE。他のSQL障害は伝播し全chunk rollback。全7関数は固定search_pathとTimeZone=UTCを持ち、所有者nk_owner/PUBLIC非許可/batchだけEXECUTEを維持する。DB gateだけでbackup実体・OS lock・通常API/Web停止確認が済んだとはしない。
+
+Logはlogged_at < log_cutoffだけcandidate、hold > log_cutoffはskip（SS332/SSC-005維持）。Batch履歴はended_at < batch_run_cutoffかつ終了SUCCESS/WARNING/SKIPPEDで、現在run・終了NULL・同runにRUNNING/FAILEDがある調査対象は保持し、ended_at/id順でlockする。開始から400日でも終了400日未満は削除しない。保持値はUI251 §6に一致し変更しない。旧3引数を使う既存未実装callerもrun開始で呼ぶ。DB-011の旧閾値混用oracleを上位仕様に合わせて修正し、独立±1μs matrixを追加する。
+
+### 3.4 Inbox検査用最小権限（SSC-049/QA-046）
+
+UIC-006の保守検査主体はbatchとは別の専用DB roleを使用する。必要なInbox snapshot/参照先の読取りと固定保守functionだけを許可し、任意DML/DDL、他roleへのSET ROLE、Web session/schema、password hashの読取りを許可しない。batchの現行権限は増やさない。既存migrationは変更せずappend-onlyで反映する。暗号検査部品のtrueだけでSQL DELETEしてはならない。参照・期限・backup・競合保護の検査も必要である。
+
+最初の認証参照検査用DB境界はPG-D-121/PT-DB-INBOX-017～024に対応する。`schubert_inbox_inspector`はLOGIN、NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS、owner membershipなし。CONNECT/USAGE schubertと次の権限だけを追加する。credentialは検査process専用で、本番値はGitへ置かない。
+
+| Object | 検査roleの許可 | 禁止/限定 |
+|---|---|---|
+| `maintenance_next_auth_inbox(uuid,timestamptz,uuid)` | EXECUTE。run_id、固定cutoff、after_message_id（最初はNULL） | PUBLIC/app/batch/Web/backup/opsへEXECUTEしない。最大1行、LGN/LOG応答だけ |
+| `auth_sessions` | SELECT列: id,user_id,created_message_id,context_hash,context_ciphertext,key_version,issued_at,revoked,revoked_at | 任意DML/DDLなし。expires_at/last_accessed_at/client_address等の不要列を追加しない |
+| `request_inbox`基底table、app_users/password、Web schema | V008時点は直接権限なし。追加は3.6のid/version列だけ | Inboxは候補functionだけから読む。認証user/password queryは呼ばない |
+
+候補functionはnk_owner所有/SECURITY DEFINER、固定search_pathとUTCを設定。run_id/cutoff必須、無限cutoff拒否、advisory xact lock 71419602取得、同run・cutoffのJST business_dateのDB/config backup SUCCESS（ended_at必須）を確認してbackup行をID昇順FOR SHARE。未達は固定SQLSTATE 22023/55P03/55000で失敗し秘密値を例外へ出さない。
+`processing_state IN (COMPLETED,ERROR)`、LGN/LOG response、`expires_at < cutoff`、`message_id > after`の候補をMessage PK昇順で1行だけFOR UPDATEし、AUTH_SESSION参照があれば当該auth_sessionsをFOR SHAREする。全Inbox列は既存composite型で検査processだけへ返す（SQLは明示列）。snapshot/参照欠落はJava検査で保持し、SQL単体で復号・整合合格としない。直接base table SELECTも不要。
+callerの明示transaction中に構造/認証参照検査を行い、終了までlockを保持する。autocommit呼出しで返った行を将来のlock保証に使わない。最終DELETE/非認証候補/固定runの再実行状態/oneshotは別の未完了gateで、候補取得functionの実装だけでBUG-014を完了にしない。
+
+BUG-080/YKT-071: backup判定はFOR SHAREした同一query結果のstep集合だけを使う。別statementのEXISTSで新しいSUCCESSを追加採用しない。lock待ち中に別backupが完了した場合は当該snapshotでは55000として保持し、次transactionで両行を取得し直す。[PostgreSQL 18 row locks](https://www.postgresql.org/docs/18/explicit-locking.html)のtransaction寿命とREAD COMMITTEDを前提に、PT021で実DBのlock待ちを観測してsnapshot境界を固定する。単に存在検索が成功しただけでlock取得とみなさない。
+
+### 3.5 認証Inboxの条件付き削除（SSC-049/QA-046、PG-D-122）
+
+V009をappend-only追加し、`maintenance_delete_auth_inbox(run_id uuid, cutoff timestamptz, message_id uuid, expected_xact text, expected_response_sha256 bytea) RETURNS boolean`だけを検査roleへEXECUTE許可する。nk_owner/SECURITY DEFINER、固定search_path/UTC、PUBLIC・他service roleのEXECUTE禁止、直接DML禁止を維持する。
+
+callerは3.4の候補取得時に同じSQLから`pg_current_xact_id()::text`と`sha256(response_body_encrypted)`を内部に保持する。検査成功後、同一所有transaction・同じrun/cutoffでだけ削除関数を呼ぶ。関数はNULL/非有限cutoff/非decimal transaction ID/32byte以外のhashを22023、transaction ID不一致をfalseとして拒否する。その後71419602と同一locked queryによるbackup gateを再確認し、Message一致・暗号文SHA-256一致・完了state・LGNREQ01/LGNRSP01またはLOGREQ01/LOGRSP01・両version001・tokenなし・owner形態・NONE/AUTH_SESSION参照形態・有限日時・created<=completed・expires>=completed+168時間・expires<cutoffを全て満たす1行だけ削除する。実削除1=true、非該当/既削除=false。固定run/cutoffはprocessの不変run recordを使用し、関数へ別日時を差替えない。
+
+SQL自体はAES/HMAC検証器ではない。専用processが検証前にこの関数を呼ばないこと、候補/参照/backupのlockを検証開始からcommitまで保持することをJavaの所有境界とPTで保証する。transaction IDはtop-level IDでSAVEPOINT rollbackの証明にはならないため、所有serviceは新規connectionを外へ公開せずSAVEPOINT/外部callback/途中commitを使用しない。検査credentialを奪った任意SQL主体への暗号証明をこの関数が提供するとは主張しない。V001～008は変更しない。V006の汎用Inbox削除の置換と全layout結線は別の残件であり本追加だけでBUG-014を完了にしない。
+
+対応PT-DB-INBOX-025～032はSQLの全引数/条件/権限/lock/再実行・正常削除のmatrix。Javaの検査接続は別PTで認証の正常/不整合/故障/並行を検証する。
+
+### 3.6 全候補走査と24応答の限定削除（SSC-049、PG-D-124、V010）
+
+V010で`maintenance_next_inbox(uuid,timestamptz,uuid)`と`maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)`を追加し、検査roleだけへEXECUTEする。所有/固定search_path/UTC/SQLSTATE・1行/固定run/cutoff/top-level transaction/hash・SAVEPOINT禁止・SQLだけでは暗号証明にならない制約は3.4/3.5を継承する。V008/V009は認証限定の既存contractとして変更せず維持する。
+
+共通内部`maintenance_lock_inbox_backup(uuid,timestamptz)`はSECURITY INVOKER、PUBLIC/検査role/他serviceへEXECUTEを与えずnk_ownerのdefiner関数からだけ呼ぶ。NULL/有限cutoff、71419602、同run/JST日付/ended_at付きDB/CONFIG SUCCESSを単一locked queryで確認する。失敗22023/55P03/55000、backup snapshot途中追加を採用しない。外から共通helperを呼べたことを削除前検証とみなさない。
+
+候補はlayoutを限定せずCOMPLETED/ERRORかつexpires<cutoffをUUID昇順1行FOR UPDATEする。未知/未実装layoutもJavaで保護WARNINGとして数えられるよう返す。PROCESSING・未期限は候補外。参照type AUTH_SESSION/USER/SCENARIO_FILEだけ、それぞれauth_sessions.id/app_users.id/script_files.idをFOR SHAREして返す。不在参照はJavaがfalseとする。Question/JOB等は参照検査未実装として保持し、この段階では削除許可しない。
+
+追加SELECT列はapp_users(id,version)、script_files(id,game_id)だけ。任意DML/DDL、password/username/role/status、master本文・path/hash、base Inbox、Web schema、SET ROLE禁止を維持する。User/Scenario参照の明示CASTはJava projection用でありDDL型を変えない。
+
+条件付き削除の許可routeはLGN/LOGとSS324 §12.4の22種、計24 canonical REQ01/RSP01対応だけ。LGN ownerなし、その他owner必須。LGN/LOGとquery17種はoperation_tokenなし、User更新5種はtoken必須。両version001、同Message/ciphertext hash、完了state、有限created/completed/expires、created<=completed、expires<cutoffを要求する。最短保持はLGN/LOG/User更新5種168時間、query17種24時間。NONE/型付き参照の形態はDDLとSQLで検査し、実応答codeとの参照整合は同transactionのJava検査を必須とする。認証はNONE/AUTH_SESSION、User更新はNONE/USER、SCNはNONE/SCENARIO_FILE、他queryはNONEだけ。対象外/再削除=false。
+
+PT049～056で実SQL全引数/分岐/各24route/token/owner/ref/期限境界、最小列権限/禁止42501、参照とbackup/advisory競合、rollback/同run再走、未知候補保持・PROCESSING除外を検証する。migration inventory期待値は承認された追加に合わせ10へ更新し、旧1～9のhashを保全する。SQL matrixをJava coverageと偽らない。Java全候補の原子的検査接続・oneshot・V006置換は後続gateでありV010だけでBUG-014を閉じない。
+
+### 3.7 通常batchからのInbox削除迂回を廃止（SSC-049、PG-D-126、V011）
+
+QA-046承認済みの実行主体分離をV011で具体化する。V001～010は不変とし、既存signatureのmaintenance_cleanup_message_stores(uuid,timestamptz,integer)をOutbox専用に置換する。schubert_batchのEXECUTEは維持するが、本関数はrequest_inboxを読み書きせず、全state/layout/暗号/参照のInboxをそのまま残す。Inbox件数をOutbox chunk件数へ合算しない。検査processの未起動/失敗を本関数のOKで代替せず、341の親processが必須の検査stepを別途実行・確認する。
+
+API mq_outbox→Web web_log_outboxの順にID昇順FOR UPDATE SKIP LOCKED、合計limit 1～1000。SENTかつsent_at < cutoff−168時間、lease_until IS NULLまたは<cutoffだけを削除する。期限同値/未来/lease中/PENDING/ERRORを保持。NULL/非有限cutoff/不正limitは22023。V010内部helperのadvisory/同run/JST日付/成功backup単一locked snapshotを共用し、55P03は従来の0/0/0/LOCK_BUSY、55000は0/0/0/BACKUP_GATEへ閉じたcodeだけ変換する。他例外は伝播しtransaction rollback。返却target/deletedは実Outbox削除件数、skipped0、OKはOutboxの本呼出し成功だけを表す。行lock待ちをSKIPした候補を成功件数へ加算しない。
+
+owner nk_owner、SECURITY DEFINER、固定search_path/UTC、PUBLIC/他service EXECUTEなし、通常batchのInbox/base table権限追加なし。動的SQL/汎用table引数/任意検査済flagを設けない。V008～010の専用検査関数はそのまま。PT065～072と旧DB/Outbox回帰で、Inbox全保持、Outbox境界/chunk/rollback、backup集合の途中追加/競合、権限・全DELETE経路の役割を確認する。旧PT-DB-011の不正Inbox削除期待は、承認済みBUG-014修正として保持2行/Outbox0削除へ変更し根拠を残す。全run/oneshot/参照未対応が残るためBUG-014/YKT-012を閉じない。
+
+### 3.8 Inbox検査の永続checkpoint（SSC-049、PG-D-127、V012）
+
+run単位の再開状態をDBの非秘密tableに置き、各候補の削除/保護判定とcheckpoint更新を同じ所有transactionでcommitする。OS runtime fileや別transactionの件数保存を削除確定の証明にしない。通常業務tableの仕様は変えず、同run/cutoffの再開と別attempt記録の責務を分離する。
+
+| inbox_inspection_progress列 | 型・制約 |
+|---|---|
+| run_id | uuid PK。batchの固定run ID。任意の公開session/tokenではない |
+| cutoff | timestamptz NOT NULL、finite。初回値不変 |
+| after_message_id | uuid nullable。DBのUUID順cursor、最初NULL |
+| inspected_count | bigint NOT NULL default0、>=0 |
+| deleted_count | bigint NOT NULL default0、0..inspected_count |
+| protected_count | bigint NOT NULL default0、inspected_count−deleted_count |
+| completed_at | timestamptz nullable、非NULLならfinite。ENDだけで設定 |
+
+PK名pk_inbox_inspection_progress。CHECK名ck_inbox_inspection_progress_cutoff/counts/cursor/completed。inspected_count=0とcursor=NULLを同値にする。部分index ix_inbox_inspection_progress_completed(completed_at,run_id) WHERE completed_at IS NOT NULL。base tableの通常API/Web/batch/検査roleのSELECT/DMLは全0。V005 defaultで継承されるschubert_app権限は新tableだけ明示REVOKEする。owner nk_ownerと既存全schema backup用schubert_backupのSELECTだけを維持し、backup復元に進捗を含める。backupへのDML/検査EXECUTEは許可しない。秘密・ciphertext・復元応答・参照id・理由詳細を保存しない。DDL増分は22table、PK22、CHECK149、既存FK23/UK30/trigger1は不変として独立inventoryへ明記する。
+
+- maintenance_open_inbox_inspection(run_id,cutoff)は検査roleだけのSECURITY DEFINER。V010 helperで固定backup/advisoryを確認し、初回INSERT ON CONFLICT DO NOTHING後に当該progressをFOR UPDATE。保存cutoffとの不一致は55000。既完了なら状態を返すだけで再走・件数初期化しない。current transaction IDはJavaが同じSELECTから保持する。
+- maintenance_record_inbox_inspection(run_id,cutoff,expected_after uuid,expected_count bigint,message_id uuid,outcome text,expected_xact text)は検査roleだけ。同run/backup/lock/transaction、cursor/count一致を再確認。NULL/不正count/非decimalxact/未知outcome・message形態は22023、stale状態/cutoff/xact/既完了は55000。許可outcomeはDELETED/PROTECTED/ENDだけ。DELETED/PROTECTEDはDB UUID順でcursorより後、count+1、対応countだけ+1。DELETEDは当該Message不在、PROTECTEDは期限済完了行の存在を追加確認する。ENDはmessage=NULLかつcursor以後に期限済完了候補なしだけを許可し、completed_atをDB時刻で記録する。算術overflow/SQL障害は削除もcheckpointもrollback。これら条件は暗号証明ではなく専用Java所有transactionを必須とする。
+- maintenance_cleanup_inbox_progress(run_id,run_cutoff,limit)は通常batchだけ。backup/advisoryを共用、finite cutoff/1～1000を検査。completed_atがrun_cutoff−400日より古く、別run、同runのRUNNING/FAILED batch_runsがない完了状態だけ、completed_at/run_id順FOR UPDATE SKIP LOCKEDで最大limit削除。未完了/調査中/期限同値・未来を保持。返却count/OK、0/LOCK_BUSY、0/BACKUP_GATEの閉形式をV011と共通にする。他例外は伝播。親のCLEAN_BATCH_RUN内で従来履歴清掃と別のbounded chunkとして呼び、件数を混同しない。
+
+全3関数は固定search_path/UTC、PUBLIC/他service EXECUTEなし、任意table/path/SQL引数なし。V001～011はappend-only不変。通常batchの検査・Inboxアクセス権限を増やさない。全runの状態は再起動後もDBから取得し、親batchのattempt件数は起動時と終了時の累積差分、run累積値は別項目として二重計上しない。commit結果不明時は同runで再読取りするまで成否/件数を推測しない。
+
+PT073～080はSQLの全状態遷移・制約・権限・atomic rollback/lock・保持400日・migrationを検証する。Java接続は別PT081～088、oneshot/親processは後続gate。完了progressだけで正常API停止・backup実file検証・鍵配布・IT/STが完了したとは判定しない。
+
+### 3.9 Log保全行を含む永続走査（SSC-051、PG-D-136、V014）
+
+BUG-104の先頭hold反復を解消するため、V001～013は変更せず非秘密table log_cleanup_progressを追加する。業務log内容/保持値/hold条件は変更しない。
+
+| 列 | 型・条件 |
+|---|---|
+| run_id | uuid NOT NULL PK pk_log_cleanup_progress |
+| cutoff | timestamptz NOT NULL、finite。初回固定run_started_at |
+| after_logged_at / after_id | timestamptz / bigint、初回ともNULL、以降走査済み最後の(logged_at,id) |
+| target_count / deleted_count / skipped_count | bigint NOT NULL default0、非負、deleted<=target、skipped=target−deleted |
+| completed_at | timestamptz nullable、END時だけfinite値 |
+
+CHECKはck_log_cleanup_progress_cutoff/counts/cursor/position/completedの5個。cursorは日時/IDのNULL同値かつtarget=0と両NULLを同値、positionは非NULL時finite日時・logged_at<cutoff−2160時間・id1..999999999999。完了日時finite。部分index ix_log_cleanup_progress_completed(completed_at,run_id) WHERE completed_at IS NOT NULL。owner nk_owner、PUBLICとdefault継承app権限はREVOKE、backup SELECTだけ維持、通常API/Web/batch/検査roleの基底SELECT/DMLなし。独立inventoryは23table/PK23/CHECK154、FK23/UK30/trigger1不変。
+
+- maintenance_cleanup_logs(uuid,timestamptz,integer)の4出力signatureを維持。入力finite/limit1..10000、既存同run/JSTbackup/advisory gateの後に同run progressを初回INSERTしFOR UPDATE、cutoff不一致55000。既完了は0/0/0/OK。以後(logged_at,id)>cursorの保持期限済行を昇順最大limit選び、hold込みtarget・削除・skipのdeltaと最後のcursorを同transactionで保存する。target0でだけcompleted_atを確定。holdを削除せず一度だけ数え、同run再開時に再集計しない。既完了後の再検査は新runを使う。
+- 永続cursorが未取得行を飛び越えないよう、Log候補だけFOR UPDATE NOWAITとする。row lock競合は当chunkのINSERT/DELETE/checkpointを例外blockでrollbackし0/0/0/LOCK_BUSY、cursor/累積不変、完了扱い禁止。通常削除候補を消すだけの他cleanupのSKIP LOCKEDは変更しない。任意privileged writerによる過去logged_at差替え/過去行追加が並行する状況を全件保証しない。通常API/Web停止・親OS lock条件は必須。
+- maintenance_read_log_cleanup_progress(uuid,timestamptz)は同backup/advisory、finite入力、cutoff一致を確認し、累積target/deleted/skippedとcomplete booleanだけを返す。未開始は0/0/0/false。cursor/log ID/本文/秘密を返さずtable自体のgrantを追加しない。親はattempt前後の累積差分で記録し、commit成否不明時は同runで再読取りする。
+- maintenance_cleanup_log_progress(uuid,timestamptz,integer)はlimit1..1000、既存gate、400日超の完了行だけをcompleted_at/run_id順SKIP LOCKEDで削除する。現在run、未完了、同runにRUNNING/FAILEDの調査対象、期限同値/未来は保持。既存inbox progressと同条件・別bounded呼出し。全8 cleanupのgateをPTで照合する。
+
+3関数はnk_owner/SECURITY DEFINER/固定search_path=pg_catalog,schubert,schubert_web_session/UTC、PUBLIC非許可・batchだけEXECUTE。新2関数も完全signatureでgrant。算術overflow/他SQL異常は伝播し削除と進捗をrollback、NPE/null/未開始を完了へ変換しない。旧functionのhold再計上を期待したPT095/DB011は本修正の承認済み独立oracleへ更新し、旧V013反例はrollback-onlyで別検証する。
+
+### 3.10 照会4routeの条件付き削除追加（SSC-049、PG-D-139、V015）
+
+V001～014を不変としmaintenance_delete_inboxの既存signature/owner/SECURITY DEFINER/search_path/UTC/EXECUTE権限を維持してNTSREQ01/NTDREQ01/QSSREQ01/QSDREQ01だけ追加する。合計28 route。4種はowner必須・operation_tokenなし・REQ/RSP両version001・NONE参照のみ、最短24時間・expires<cutoff。既存認証2/更新5の168時間と参照条件は不変。任意table/SQL引数、新table/列/role/grantなし。
+
+Javaの同transaction内snapshot検査はSS324 §12.8を正とし、SQLだけで暗号完全性を主張しない。未検証QSB/NTC/QDL、誤route/version/owner/token/ref/hash/transaction、未backup/lockは削除不可。既存V010の全引数/WHERE/SQLSTATE回帰に加え041/PT161～168で4種のactual deleted/protected/ENDと独立時刻/role/rollback後条件を確認する。
+
+### 3.11 質問更新の最小参照・限定削除（SSC-049/052、PG-D-141）
+
+9535086fで変更前登録。V016 append-onlyで324 §12.9の参照検査を支える。V001～015を変更せず、通常batch/他serviceへのInbox鍵・本文・DML権限は追加しない。
+
+- `maintenance_next_inbox`のQUESTION参照はquestionsをFOR UPDATE、存在するanswers/async_jobsをPK順FOR SHAREする。JOB参照はasync_jobsをFOR UPDATE、存在するnotificationsをPK順FOR SHAREする。親rowのFOR UPDATEはFKによる子INSERTも阻止し、Answer/Notification不存在確認のphantomを削除まで防ぐ。見つからない親を補完しない。
+- 検査roleへの列SELECTはquestions `(id,owner_user_id,operation_token,receipt_id,submitted_at,is_deleted,deleted_at,deleted_by,version)`、async_jobs `(id,question_id,owner_user_id,message_id,correlation_id,received_at,state,state_changed_at,cancelled_at,version)`、answers `(question_id,is_deleted,deleted_at,deleted_by)`、notifications `(job_id,question_id,owner_user_id,state,state_changed_at)` に限定。本文・password・Userの現在roleは不要で追加しない。
+- `maintenance_read_question_work(uuid)`は検査roleだけEXECUTE可能なnk_owner/SECURITY DEFINER、固定search_path/UTC、NULL拒否の限定projection。元受付Correlation・nk.async.work・QWKREQ01/001・実body長320に絞ってrowをFOR SHAREし、Message/Correlation/body/status/sent_at/lease有無だけ返す。任意Outbox/DLQ本文へのbase SELECTは付与しない。通常app/batch/Web/backup/ops/PUBLICは実行不可。戻り値は暗号検査成功flagではない。
+- `uq_mq_outbox_question_work`は`correlation_id`のpartial unique index、predicate `destination='nk.async.work' AND layout_id='QWKREQ01'`。UI231の受付ごとwork一通を実現し、読取row lock中の同相関差替えを防ぐ。既存重複はmigration失敗として保全し、削除や勝手な統合をしない。DLQ用outboxとは別scope。
+- `maintenance_delete_inbox`へQSB/NTC/QDLの3 canonical routeを追加。owner/token必須、最短168h、成功QSB/QDLはQUESTION・NTCはJOBの正N12参照、ERRORはNONE。既存の同transaction ID/response hash/backup/有限時刻/strict expiryを維持し、SQL単体を暗号認証の代替にしない。
+
+045/046 PT177以降で実PG18、最小role、partial UK/不正projection/全route、親子lock/並行INSERT阻止、exact168h、失敗rollback/commit不明/永続再開を検査する。未完了の業務writer/replayや親OS/backup実体を本SQL合格へ含めない。
+
+### 3.12 原本runの限定DB参照照会（SSC-055/PG-D-159）
+
+先行4c5dcb85。V018は`schubert.maintenance_read_run_references(uuid,timestamptz)`だけを追加する。nk_owner所有/SECURITY DEFINER、search_path=pg_catalog,schubert・timezone=UTC、PUBLIC実行を剥奪しschubert_batchだけEXECUTEする。app/Web/backup/ops/inspector/PUBLICに許可しない。基底progress SELECT/DML、新table/column/index、既存V001～017の変更はない。run_id検索は既存batch(run_id,step) indexと2progress PKを利用する。
+
+引数NULL・非有限cutoff・UTC0001～9999外を22023で拒否。自己backend/現在DBのbigint namespace（classid0/objid71419602/objsubid1）・granted ExclusiveLockがないと55000。shared/two-int/別backendでは不足。関数が自動取得/解放せず、観測だけではsession/xact lockの保持寿命を証明しない。親はOS flockとDB排他をfile mutation/参照再確認まで連続保持する。backup前の新run採番にも使うため本関数はbackup gateを要求しない。
+
+同じRETURN QUERYのsnapshotで非NULL Boolean4列を必ず1行返す: `has_batch_history`、`has_inbox_progress`、`has_log_progress`はstatus/完了/年齢によらず同run存在、`identity_consistent`は同run全batch.business_dateがcutoffのAsia/Tokyo日付に一致し、同run両progress.cutoffが完全一致する場合true。不存在はconsistent=true。step.started_at/ended_atを原本cutoffとして比較/補完せず、無関係runは結果へ混ぜない。SQL失敗/permission不明は非成功で保全。新runは3flag全false必須、resumeは原本が別途存在しconsistent=true、GCは3flag全falseに加えて343の全file/400日/active/未完了条件が必須。read結果だけで親/GC完了を証明しない。
+
+004の055/056・PT-DB-INBOX-241～248で3存在flag全8組合せ、全status/日付/µs/UTC-JST/上限、違うrun、cutoff不一致、権限・lock namespace/並行/rollback、catalogと旧migration不変を独立期待値で検証する。通常API/wire/Current oracle変更なし。
+
+### 3.13 親用Inbox検査summary照会（SSC049/PG162、先行d23b1afd）
+
+V019は`schubert.maintenance_read_inbox_summary(uuid,timestamptz)`をappend-only追加する。nk_owner/SECURITY DEFINER、固定search_path=pg_catalog,schubert/TimeZone=UTC、PUBLICを剥奪しschubert_batchだけEXECUTE。基表SELECT/DML、専用検査open/record/delete、cursor/応答本文/参照ID/秘密への権限は増やさない。他app/Web/ops/backup/inspector/PUBLICは拒否。新table/column/indexなし、V001～018不変。
+
+NULL/非有限/UTC0001～9999外の引数は22023。§3.12と同じ現在DB・自己backend・bigint71419602/Exclusive/granted保持がなければ55000。関数はlock取得/解放をしない。progress PKの同runを一度readし、存在してcutoffが完全一致しなければ55000、存在しなければ0行。返却は`inspected_count bigint, deleted_count bigint, protected_count bigint, complete boolean`の4非NULL列だけで、completeは保存completed_at IS NOT NULL。rowを作成/lock/更新/補完せず、年齢/status/現在時刻で絞らない。0行を0件完了へ変更しない。戻り値は保存済みENDの観測であり、実子のfresh起動・終端/OS排他/backupの証明ではない。backup失敗時の状態調査にも使えるreadなので本関数自体ではbackupを要求せず、削除/子起動の既存backup gateは別に必須。
+
+親は341 §7.3の連続OS lock下で、前段transactionを終了して親session advisoryを保持し、autoCommit=true/readOnly=false/READ COMMITTEDで開始前を読む。子終了後にDB lockを再取得してからfresh readする。途中結果を別run/cutoffへ流用せず、DB不通・不明・identity不一致は非成功。関数内の自己lock観測だけでOSやsession/xactの連続保持を推測しない。
+
+004/059・060、DB251～258で未開始/未完了/完了・累積long境界・UTC/JST/歴史時刻・違うrun/µs・全role・自己lock namespace・fresh snapshot/rollback/並行・no-DML/旧migration/catalogを独立SQL後条件で検証する。
+
+### 3.14 非Log/非Inbox cleanupの原子件数・終端照合
+
+精度補足: PostgreSQLのtimestamptz引数は型変換後すでにµs精度であり、元のtext/JDBC nanosを復元して検査できない。Java入口は非µsを拒否し、SQLは型が保持する有限UTC範囲/大小関係を検査する。nanosecondをSQLで黙示roundした結果だけでJava境界の合格とはしない。Repositoryは返却chunk件数<=指定limitも独立検査する。
+
+SSC057/PG164（先行78bde51a）。非Log/非秘密Inboxの7種類を、既存の削除predicate/保持期間/最大1,000/既定SKIP LOCKEDを変えず、同一RUNNING stepへの原子件数記録と組み合わせる。
+
+- V020のmaintenance_execute_cleanup_step(p_run_id uuid,p_cutoff timestamptz,p_step_id bigint,p_attempt integer,p_started timestamptz,p_kind text,p_limit integer)をnk_owner/SECURITY DEFINER、search_path=pg_catalog,schubert,schubert_web_session、timezone=UTC、PUBLIC revoke/batchだけEXECUTEで追加する。任意SQL/基表権限/table/columnを追加せず、V001～019は不変。
+- run/cutoff/started/id/attempt/kind/limitのNULLは22023。UTC0001～9999有限µs、cutoff<=started、id1..999999999999/attempt1..99/limit1..1000を検査する。kindはNOTIFICATIONS/QUESTIONS/SESSIONS/OUTBOX/BATCH_RUNS/INBOX_PROGRESS/LOG_PROGRESSだけ。LOGS/unknown/aliasは禁止。kindからstepをCLEAN_NOTIFICATION/CLEAN_QUESTION/CLEAN_SESSION/CLEAN_INBOX_OUTBOX/CLEAN_BATCH_RUNへ固定対応し、progress2種はCLEAN_BATCH_RUNへ属する。
+- 既存maintenance_lock_inbox_backup(run,cutoff)で自己DB advisory/同run・当日backupの固定row lockを先に取得し、次にmaintenance_read_run_referencesのidentity_consistentを確認、最後にbatch_runsのfull handle(id/run/business_date=JST cutoff/step/attempt/started)をFOR UPDATE NOWAITで取得する。RUNNING/ended NULLとtarget=success>=0/failure=0/bytes=0を必須とし、欠落/別identity/terminal/不整合は55000で保全拒否する。これは普通の削除件数だけを積むstep用であり、Log/Inspector/backup/transferの件数を混入しない。
+- 戻り7列はtarget_count/deleted_count/skipped_count（今回chunk）、step_target_count/step_success_count（既知のstep保存累積、または明示NULL）、complete boolean、reason_code text。全行必ず1行。OKは今回target=deleted/skip0と非NULL step累積(target=success)、completeは今回chunk0のときだけtrue。LOCK_BUSY/BACKUP_GATEは今回chunk0・両step累積NULL・completefalse（未読を0にしない）。QUESTIONSのDELETE内23503だけはnested blockをrollbackし、FOREIGN_KEY_CONFLICT/chunk0/既lock済みstep累積/completefalseを返す。他SQL異常/他kindのFKは伝播して全chunk rollbackする。理由/件数にraw constraint名/SQL/値を含めない。
+- 7種類の既存maintenance_cleanup_*関数を固定CASEで呼ぶ。返却の1行/非NULL/limit/target=deleted/skip0/reasonを検証する。guard拒否は上記unknown累積形式で返す。正chunkの削除とstep target_count/success_countへの加算は同transactionでUPDATEする。bigint overflow、件数相違、0/複数updateは失敗しDELETEを含めrollback。status/end/旧error/failure/bytesは変更しない。parent callerだけがcommitする。
+- target0のOKをそのまま全件完了としない。同transaction内で現行7関数の削除候補条件を使い、lockで除外しないEXISTSを新snapshotで照会する。通知/質問/3session表/2Outbox表/履歴/2progress表の全構成が候補0ならcompletetrue。候補ありならLOCK_BUSY/chunk0/unknown累積として停止し、成功の補完や無限loopをしない。保護条件を満たす行（active/期限内/通知あり/調査中等）は候補に含めず、保護行を失敗・削除件数へ加算しない。通常app停止/OS排他は依然callerの前提。
+- Java .batch.repository.CleanupKind.step()は8kindの既定step対応を持つ（LOGS=CLEAN_LOGも対応）。CleanupStepRepository.execute(attempt,kind,limit)はLOGS/skipped handle/step不一致をDB操作前に拒否、nullは契約違反とする。borrowed autoCommit=false/RW/READ_COMMITTED、RunReferenceRepositoryで前後自己DB/identity/割込を確認し、timeout5秒/7typed bind/JDBC4.2 UTCで固定関数だけ呼ぶ。7列全NULL契約・0/複数行・type/bounds/理由整合を検証し、owned close完了後だけ返す。Connection取得/config/commit/rollback/closeなし。SQL/不正投影/owned closeはcause/suppressedなしBatchRepositoryException、unknownRuntime/NPE/Errorは正常化しない。
+- CleanupStepChunk(attempt,kind,CleanupCounts chunk,Optional<CleanupCounts> stepCounts,boolean complete,Reason reason)は上記4reason/optional累積規則をconstructorで確立する。既知累積は今回chunk以上、各count非負/target=deleted/skip0。identity/toStringはredact、unknownをemptyで表し0に変換しない。FKは既知保存累積だが非completeであり、未削除aggregateを成功件数へ算入しない。
+- .batch.cleanup.StepCleanupServiceはcallerの単独borrowed Connection（開始autoCommit=true/RW/READ_COMMITTED、親が既取得session advisory/OS排他・停止・実backup）を使い、run/step/kindを固定して最大1000ずつtransaction化する。SQL内でDELETE＋件数を確定してからcommit→autoCommit復元→割込/単調時計30分未満を確認する。0件completetrueまで続ける。LOCK_BUSY/BACKUP_GATEは既存CleanupStoppedExceptionの固定reasonで停止し未完了。FKだけはrollback済み0件/保存累積を確定し、deferred=trueの結果で呼出側へ返す（親のWARNING/次回保持判断と全親step finishは別責務、全削除完了とはしない）。
+- 正常chunkの保存累積−今回chunkを初回beforeとし、後続は直前committed累積と一致必須。step保存累積は以前の同step構成kind/同handle再開を含み、今回service呼出し差分と区別する。commit応答不明/rollback不明は結果を返さず、次回同handleでDB保存状態を再読する。rollback成功前にautoCommitへ復元して暗黙commitしない。未知runtime/Errorでも失敗transactionをrollbackして再throwし、SQL/close診断はredactする。
+- StepCleanupSummaryはattempt/kind/before/after/deferredを保持し、非負単調/同対象・0skipを検証する。afterは保存済step全体、after-beforeは今回呼出しで確認できた差分であり、中断前の件数を推測しない。deferred時は全削除済み/ENDと表示しない。serviceはBatchRunRepository.finishやOS/子/backup生成を代行しない。親の全kind順序/失敗規則・通常Question/pending revoke・実Log/Inspector結線は残る。
+
 ## 4. Account・Session
 
 ### 4.1 `schubert.app_users`
@@ -91,7 +258,7 @@ Schema/table名を引数にせず動的SQLを禁止し、`cutoff`/`limit`と当�
 |---|---|---:|---|
 | `id` | bigint identity | yes | PK、1..999999999999 |
 | `username` | text | yes | `octet_length` 1..64 |
-| `username_key` | text | yes | UK、`octet_length` 1..64 |
+| `username_key` | text | yes | UK、`octet_length` 1..96。表示usernameのNFC/trim/Locale.ROOT lowercase比較keyはbyte増幅し得る（SSC-014） |
 | `password_hash` | text | yes | 1..255 byte |
 | `role` | varchar(5) | yes | CHECK USER/ADMIN |
 | `status` | varchar(8) | yes | CHECK ACTIVE/DISABLED |
@@ -196,7 +363,7 @@ Message IDであり、redelivery時の同一work識別に使う。
 
 `id bigint identity PK`、`job_id bigint NN UK FK async_jobs RESTRICT`、`question_id bigint NN FK questions RESTRICT`、
 `owner_user_id bigint NN FK app_users RESTRICT`、`notification_type varchar(12) NN check ACCEPTED/COMPLETED/ERROR`、
-`state varchar(12) NN check (ACCEPTED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(512)`、
+`state varchar(12) NN check (RECEIVED,PROCESSING,COMPLETED,ERROR,CANCELLED)`、`accepted_at/state_changed_at timestamptz NN`、`error_code varchar(16)`、`error_message varchar(512)`、
 `created_at/updated_at timestamptz NN`。
 
 `error_code`は351 §5.3の5値だけ、ERROR時はcode/messageともNN、他stateでは両方NULLのCHECKとする。
@@ -236,6 +403,8 @@ Index: partial UK `uq_request_inbox_operation(owner_user_id,operation_token) whe
   `USER/QUESTION/JOB/SCENARIO_FILE`はbigint IDだけNNとする排他的CHECKを設ける。SCENARIO_FILEのIDは再生成元`script_files.id`である。
 - Response snapshotは`response_body_encrypted`/`response_key_version`の両方NULLまたは両方NN。Password/context等を含む再構成不可結果はsnapshotを必須とし、平文保存しない。
 
+SSC-052/PG-D-140: 新3更新QSB/NTC/QDLの成功はresponse_body_encryptedへ352 §11.2.1の参照/token付き内部profileを必須保存する。別列result_ref/tokenは復号後に照合する期待値であり、暗号内targetから上書きしない。新列/table/grantや既存migration変更なし。NONEの確定errorと既存認証/query/User更新は従来profile。unbound成功を推測変換するmigrationは行わず保護し、後続のDB検査/writer/replay接続を別途確認する。
+
 ### 7.2 `schubert.mq_outbox`
 
 `id bigint identity PK`、`message_id uuid NN UK`、`correlation_id uuid NN`、`destination varchar(32) NN`、
@@ -256,11 +425,14 @@ Lease pairは両方NULLまたは両方NNとする。
 `level varchar(5) NN`、`action varchar(64) NN`、`message varchar(512) NN`、`request_id uuid`、`message_id uuid`、
 `correlation_id uuid`、`source_message_id uuid UK null`、`actor_user_id bigint null FK app_users RESTRICT`、`actor_username varchar(64)`、
 `http_method varchar(8)`、`request_uri varchar(256)`、`status_code smallint check 100..599`、`remote_address inet`、
-`duration_ms bigint check >=0`、`details jsonb NN default '{}'::jsonb`。
+`duration_ms bigint check >=0`、`security_hold_until timestamptz null`、`details jsonb NN default '{}'::jsonb`。
 
 `service`は`WEB/API/BATCH/BROKER/DB/CADDY`、`category`は`REQUEST/ACTION/SECURITY/MQ/SYSTEM/BATCH`、
 `level`は`TRACE/DEBUG/INFO/WARN/ERROR`のCHECKとする。
 `details` top-level keyも351のevent catalogで定義した値だけをapplication validatorで受け付ける。
+`security_hold_until`は`category='SECURITY'`の行だけに設定可能とするCHECKで保護し、
+Security holdの対象IDは`app_logs.id`、保全中は`security_hold_until > cleanup cutoff`とする。
+期限未設定または期限到達後は通常の90日削除対象とし、ops viewへは同列を投影しない。
 
 `request_uri`は`octet_length <= 256`、`details`はserialized UTF-8 1,024 byte以内をCHECK/投影前validatorで保護し、
 WLGEVT01およびLGSRSP01へ暗黙truncateなしで変換可能にする。
@@ -270,13 +442,35 @@ GIN `message gin_trgm_ops`に限定する。容量実測がthresholdを超えた
 
 ### 8.2 `schubert.batch_runs`
 
+SSC-055/PG-D-156（先行b6b5f0f6）: このtableのstarted_atは各stepの時刻でありrun原本ではない。親は343 §6.13のimmutable root永続anchorからrun_id/cutoffを復元し、business_dateを既存SQLと同じAsia/Tokyo日付で導出する。最小step時刻・progress・現在日時による原本backfillをしない。原本/active/activation/completionの状態とstep状態は異なる。run原本不明legacyは保持してresumeを拒否する。原本GCは完了400日超・active/未完了activationなしに加え、batch_runs/Inbox progress/log progressの同run参照0をOS/DB lock下で検査する。原本fileを追加するために旧V001～017へ列/tableを後書きしない。具体的な参照照会の限定DB入口と親step Repositoryは別PG/PTで必須。
+
 `id bigint identity PK`、`run_id uuid NN`、`business_date date NN`、`step varchar(32) NN`、`attempt smallint NN check 1..99`、
 `started_at timestamptz NN`、`ended_at timestamptz`、`status varchar(10) NN check RUNNING/SUCCESS/WARNING/FAILED/SKIPPED`、
 `target_count/success_count/failure_count bigint NN default 0 check >=0`、`byte_count bigint NN default 0 check >=0`、
 `error_code varchar(64)`、`error_summary varchar(512)`。
 
-UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS'`、index `(run_id,step)`、
-`(status,started_at desc)`。同一stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
+SSC-077/BUG-237: V001～020を不変とし、V021で`CLEAN_EXPIRY`監査専用のnullable `expiry_cutoff_at timestamptz`、`expiry_before_count bigint`、`expiry_after_count bigint`を追記する。他stepでは3列すべてNULL。Expiry stepは3列すべてNULL（未観測/失敗/skip）または3列すべて非NULL（観測済み）とし、有限cutoff・非負count・after<=beforeをCHECKする。SUCCESSは3列必須、`expiry_before_count-expiry_after_count=success_count=target_count`、`failure_count=0`。既存`byte_count`をこのstepの削除対象推定byte数、既存`target_count/success_count/failure_count`を対象/削除/失敗数として使う。旧SUCCESS行はcutoff/前後値を推測できないため、V021は事前検出して安全停止し、自動backfillしない。親はimmutable run原本の開始cutoffから7日を引いた値とDB監査cutoffを照合し、借用同transactionで監査列とstep結果を確定する。既存他step計数、索引、role/grantを無断変更しない。V005の`schubert_app`に対する既存table-level DMLは新列にも継承されるので、V021でapp専用の追加grantを行わないという意味であり、appから新列へのアクセスを拒否する意味ではない。PostgreSQL catalog/制約/権限/旧migration hashと実再実行PTが揃うまで完了扱いにしない。
+
+SSC-078/BUG-238: V021の3列同時CHECKではSS341 §9のpurge前durable観測を記録できないため、V001～021を不変としてV022で同名CHECKをtransaction内置換する。Expiryの未観測rowは3列全NULLでSUCCESS不可。purge前に確定した観測rowは有限cutoff・非負beforeを必須、`expiry_after_count=NULL`、`target_count<=expiry_before_count`、`success_count=0`、statusはRUNNINGまたは非成功とする。失敗・中断でafter不明ならNULLを維持し、仮のafter=beforeや削除成功数を作らない。purge後に実測afterを得たrowだけ3列非NULLとし、`0<=after<=before`。SUCCESSはafter必須、`before-after=success_count=target_count`かつfailure0を保つ。非Expiryは常に3列全NULL。親は固定runから導いたcutoff、before/target/推定byteをpurge前にDB確定し、purge後の実測結果・terminal stepを同一後続transactionで確定する。commit不明・再実行では原本と保存済みrowを再読取し、未知afterを推測しない。V022はrole/grant/indexや既存SUCCESS rowを変更しない。PT-DB-018以降・PT-BAT-284以降で旧V021拒否/V022許容・失敗・rollback・同runを検証するまで親清掃は未完了。
+
+UK `(business_date,step,attempt)`、partial UK `(business_date,step) where status='SUCCESS' AND step NOT IN ('BACKUP_DB','BACKUP_CONFIG')`、index `(run_id,step)`、
+`(status,started_at desc)`。通常stepの成功済み再実行はSKIPPEDとして別attemptを記録する。
+
+SSC-054/BUG-138/PG-D-145: UI251 §11のbackup例外に従い、BACKUP_DB/CONFIGだけ同日複数SUCCESSを許容し、再実行前の成功履歴をSKIPPED等へ書換えない。同日stepのattempt1～99・UKは維持し、99超は繰返し/上書きせず停止。V017で既存success indexのpredicateだけappend-only修正し、旧migrationは不変。他index/role/grant/保持期限は不変。最新成功backupの実directory/manifest/hash選択・DB/configの同一成果物照合は親backup/cleanup実装の別必須責務であり、本制約修正だけでは配備・backup完了を意味しない。
+
+### 8.3 親step履歴の借用Repository
+
+SSC055/PG163（先行898cc267）の親step Repository契約:
+
+- ProductionはBatchStep（BACKUP_DB、BACKUP_CONFIG、CLEAN_NOTIFICATION、CLEAN_QUESTION、CLEAN_SESSION、CLEAN_INBOX_OUTBOX、CLEAN_LOG、CLEAN_BATCH_RUN、CLEAN_TRANSFER、CLEAN_EXPIRY）、BatchStepAttempt、BatchStepResult、BatchRunRepository。原本由来BatchRunを受け取り、business_dateだけcutoffのAsia/Tokyo日付から導出する。step.started_atは呼出側が一度取得した別のnow。新now/終了timeはUTC0001～9999・µs、run.cutoff以上。原本backfillやclock丸め/補完はしない。
+- Repositoryは単独所有の借用Connection、autoCommit=false/readOnly=false/READ_COMMITTED。各操作前後にRunReferenceRepositoryの自己DB排他/同run identity整合を確認する。OS lock/原本正本/fresh子終端を代行しない。全PreparedStatementはtimeout5秒。Connection生成/config変更/commit/rollback/closeなし、callerが成功後commit・失敗後rollback/破棄する。途中のINSERT/UPDATEだけで確定済みとしない。
+- begin(run,step,now,recoverAbandoned)は同business_date/stepをattempt昇順LIMIT100 FOR UPDATEで全読取。12非秘密列id/run_id/business_date/step/attempt/started_at/ended_at/status/target_count/success_count/failure_count/byte_countだけを投影し、error_code/summaryを返さない。最大99行、id1～999999999999/一意、attempt1～99/厳密昇順、同date/step・UUID必須、全非負counts、µs/UTC時刻、RUNNINGだけended=NULL・terminalはended>=started、全時刻<=nowを検証。同run行のstartedは原本cutoff以上。未知status/null/不整合は保全拒否。既存別runのcutoffをstep時刻から推測しない。
+- 次attemptはその日/stepの最大値+1（初回1）、99超では一切更新しない。既RUNNINGはrecoverAbandoned=trueかつ全件同runの場合だけ、保持した各id/run/started/RUNNING/endedNULLをCASしFAILED・ended=now・固定ABANDONED診断へ更新、件数は保存する。false/別run RUNNINGは失敗。明示recoveryのcallerは子全終端/同run原本/OS排他を事前確認する。過去SUCCESS/WARNING/FAILED/SKIPPEDや別run診断を書換えない。
+- 非backupは同日/stepの既SUCCESSがあれば新attemptをSKIPPED（started=ended=now、4counts0、ALREADY_SUCCESSFUL）としてINSERT。backup2stepは毎回RUNNINGをINSERTし、既SUCCESSを保持する。他の新規もRUNNING/endedNULL/4counts0/診断NULL。RETURNING idは1行必須・有効id・全close後だけimmutable BatchStepAttempt(id,run,step,attempt,startedAt,skipped)を返す。日をまたいでresumeしても原本business_dateを使う。
+- finish(attempt,endedAt,result)はskipped handleを拒否し、全handle identity（id/run/date/step/attempt/started）かつRUNNING/endedNULLに対してterminal値をCASする。更新1件だけ新終了、0件は同identityとended/status/4counts/error_code/error_summaryが全て同値の場合だけ冪等成功（IS NOT DISTINCT FROMでNULL比較）。それ以外/複数件は失敗。過去終了を新timeや異なるresultで上書きしない。DB全資源と最終排他/割込確認後だけ返却する。成否不明commitは同じfinish値の再試行か新beginの既SUCCESS skipで扱い、未観測件数を補完しない。
+- BatchStepResultはStatus SUCCESS/WARNING/FAILED/SKIPPEDとtarget/success/failure/bytes各非負long、Reasonの固定組。SUCCESSはfailure0・NONEのみ。SKIPPEDは4counts0・ALREADY_SUCCESSFULまたはBACKUP_UNAVAILABLE。PROTECTED_RECORDSはWARNING、ABANDONEDはFAILED。DATABASE_FAILURE/COMMAND_FAILURE/SAFETY_FAILURE/IO_FAILURE/TIMEOUT/INTERRUPTEDはWARNINGまたはFAILED。保存codeはNONEだけSQL NULL、それ以外はenum名、summaryは対応する固定文だけ。任意exception/SQL/path/body/credentialを保存しない。保護skipをfailureへ勝手に置換せず、累積/今回差分はcallerが別責務として正しく分類する。
+- public型のnullは契約違反、不正value/timeは固定IllegalArgumentException。不正DB投影/SQL/owned closeはcause/suppressedなしBatchRepositoryException、開始/最終割込はflag保持で非成功。未知Runtime/NPE/Errorを正常化しない。全recordのtoStringはidentity/診断実体をredact。nullや未知値を0/SUCCESSへ補完しない。
+- V001～019/DDL/grant/保持期限・外部動作は変更しない。原本と実親全stepの結線/実backup/子unit/全cleanup loop/ITSTは本Repositoryだけでは完了にならない。017/021～024・BAT130～153、411/451の独立SQL/golden/全JDBC位置・4coverage100へ追跡する。
 
 ## 9. Web technical schema
 
@@ -356,3 +550,5 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 2026-08-31 | 横断監査でLoginのUUID sessionとbigint業務参照を分離し、Inbox result referenceの型別排他的CHECKを追加。 |
 | 2026-08-31 | 横断監査で`pg_dump`のSELECT要件とbatchのciphertext閲覧禁止が両立しないため、専用`schubert_backup` role案をQA-043/UIC-003として保留。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用`schubert_backup`と通常保守用`schubert_batch`のrole/grantを確定。 |
+| 2026-09-03 | SSC-005を反映し、`app_logs.security_hold_until`とcategory制約、cutoff判定、ops非公開を確定。 |
+SSC061/PG168: backup両完全handleの同一transaction確定/照合を341 §6.6で具体化する。BackupStepRepositoryは既存batch_runsの14列を2id昇順FOR UPDATEで全値検査し、両RUNNING/同一end両SUCCESS以外を保全拒否。BackupCommitServiceがborrowed Connectionのrollback/commit/再読を所有。新table/FK/DDL/grantなし、V001～020と400日保持を変更しない。root manifestの生成/保持inode信頼・実体/OS前提はcaller未完了gateとして明示する。

@@ -57,13 +57,13 @@ Protocol recordは`dev.codex.schubert.nk.protocol.layout.*`、handlerは`dev.cod
 | Layout (data/record/max/total) | Java data / record | API handler・service | DB source/target・型要点 | Validation/trace |
 |---|---|---|---|---|
 | `AUDREQ01` 16/0/0/272 | `AudioDescriptorRequestData` | `AudioDescriptorHandler` | `audio_files.id` | disposition I/A |
-| `AUDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeAudio` | audio path/name/size/hash/container | Root/size/hash/MIME、UI 235 §2～3/FUN-005 |
+| `AUDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeAudio` | audio path/name/size/hash/container | Root/size/hash、`.ogg`=`audio/ogg`、UI 235 §2～3/FUN-005、SSC-004 |
 | `ANMREQ01` 0/0/0/256 | `AnimationMenuRequestData` | `AnimationMenuHandler` | — | Context必須 |
 | `ANMRSP01` 16/0/0/272 | `AnimationMenuResponseData` | `MediaQueryService.animationCounts` | `media_assets` aggregate | 15/4/1/20 current baseline、UI 235 §4 |
 | `ANLREQ01` 16/0/0/272 | `AnimationListRequestData` | `AnimationListHandler` | media category | MAIN/OVA |
 | `ANLRSP01` 8/928/50/46,664 | `AnimationListResponseData` / `AnimationRecord` | `MediaQueryService.findAnimation` | `media_assets`: logical_id/text/size/parent/order | Parent/category整合、UI 235 §5 |
 | `VIDREQ01` 64/0/0/320 | `VideoDescriptorRequestData` | `VideoDescriptorHandler` | logical_id | 223の20 ID allowlist/DB存在 |
-| `VIDRSP01` 1,808/0/0/2,064 | `VideoDescriptorResponseData` | `MediaQueryService.describeVideo` | `media_assets`＋file metadata | MEDIA1024＋title/category/display path、UI 235 §6/FUN-006 |
+| `VIDRSP01` 1,808/0/0/2,064 | `VideoDescriptorResponseData` | `MediaQueryService.describeVideo` | `media_assets`＋file metadata | MEDIA1024 `.mp4`=`video/mp4`＋title/category/display path、UI 235 §6/FUN-006、SSC-004 |
 | `MCTREQ01` 0/0/0/256 | `MusicCategoryRequestData` | `MusicCategoryHandler` | — | Context必須 |
 | `MCTRSP01` 8/72/20/1,704 | `MusicCategoryResponseData` / `MusicCategoryRecord` | `MediaQueryService.findMusicCategories` | media_assets aggregate | 曲/BGM/名称順、UI 235 §7 |
 | `MCSREQ01` 64/0/0/320 | `MusicSectionRequestData` | `MusicSectionHandler` | category text | 返却master値と一致 |
@@ -71,7 +71,7 @@ Protocol recordは`dev.codex.schubert.nk.protocol.layout.*`、handlerは`dev.cod
 | `MTRREQ01` 192/0/0/448 | `MusicTrackRequestData` | `MusicTrackHandler` | category/section text | DB存在・組合せ |
 | `MTRRSP01` 16/1,312/200/262,672 | `MusicTrackResponseData` / `MusicTrackRecord` | `MediaQueryService.findMusicTracks` | `media_assets`: pair_key/role/order | Pair role M/I/N、順序、UI 235 §9/FUN-007 |
 | `MEDREQ01` 72/0/0/328 | `MusicDescriptorRequestData` | `MusicDescriptorHandler` | logical_id/disposition | I/A |
-| `MEDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeMusic` | media_assets metadata | MIME allowlist、UI 235 §10 |
+| `MEDRSP01` 1,024/0/0/1,280 | `MediaDescriptorData` | `MediaQueryService.describeMusic` | media_assets metadata | `.m4a/.mp3/.ogg/.wav/.flac`と`audio/mp4,mpeg,ogg,wav,flac`の完全一致、UI 235 §10、SSC-004 |
 | `LGSREQ01` 656/0/0/912 | `LogSearchRequestData` | `LogSearchHandler` | app_logs query | ADMIN、31日、size100、UI 235 §11/FUN-008 |
 | `LGSRSP01` 48/2,088/100/209,104 | `PagedResponseData` / `LogRecord` | `LogQueryService.search` | `app_logs`: bigint/timestamptz/jsonb/inet text projection | 日時/id desc、秘密値なし |
 
@@ -153,6 +153,88 @@ Total countがpage size別のUI上限を超える場合はrecordを一部返さ�
 Fingerprintは324のlength-prefixed canonical HMACを使用する。LGNREQ01はoperation tokenなしでMessage ID再配送の同一性検査に使う。
 Password/質問本文の平文・単純hashをDBへ保存しない。
 
+### 9.1 Scenario参照要求canonical（SSC-025）
+
+OwnerはAPI認証actorのuser ID十進、targetは`REQUEST:<request layout ID>`、versionは001、operation tokenなし。decode済みの全有効fieldを次の順でNKOP1へ格納する。`X1`はNFC UTF-8（enumはwire値）、`N1`はpadding/signなしASCII十進。Optional未設定はLP length 0xFFFFFFFF、空byteとは区別する。検索実行用のtrim/lowercaseやpage補正をHMAC入力へ先取りせず、受けた有効field自体を拘束する。Header/context/message/correlation/sentAt、reserved、paddingはfieldに含めない。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| GAMREQ01 | 0 fields |
+| SPKREQ01 | gameCode/X1（optional） |
+| RTEREQ01 | gameCode/X1 |
+| SCFREQ01 | gameCode/X1、prefix/N1 |
+| SCNREQ01 | scriptFileId/N1 |
+| SRCREQ01 | bodyKeyword/X1、gameCode/X1、speakerName/X1、chapterTitle/X1、entryType/X1、voiceCondition/X1（以上optional）、page/N1、pageSize/N1 |
+
+`ScenarioRequest.decode`は6 request layoutをallowlistし、共通header/layoutとfixed DATA/semanticを検証した後だけ内部値を生成する。これを同じrequestのcanonicalとread-only Repository振分けへ用い、別modelのfield落ち/順序ずれを防ぐ。Detailはimmutable snapshot（不在Optionalを含む）を返し、file I/Oは行わない。Response作成、認証、Inbox確定、JMS、transaction所有は外側serviceの責務。GAM/SPK/RTE/SCF/SRCは即時projection、SCNはdetail候補を区別する。
+
+### 9.2 Media参照要求canonical（SSC-029）
+
+OwnerはAPI認証actor user ID十進、targetは`REQUEST:<request layout ID>`、version001、operation tokenなし。`X1`はNFC UTF-8（enumはwire値）、`N1`はpadding/signなしASCII十進。次の全有効fieldを順序どおりNKOP1へ格納する。全field必須で、header/context/message/correlation/sentAt/reserved/paddingを混入しない。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| AUDREQ01 | audioId/N1、disposition/X1 |
+| ANMREQ01 | 0 fields |
+| ANLREQ01 | category/X1 |
+| VIDREQ01 | videoId/X1 |
+| MCTREQ01 | 0 fields |
+| MCSREQ01 | category/X1 |
+| MTRREQ01 | category/X1、section/X1 |
+| MEDREQ01 | trackId/X1、disposition/X1 |
+
+`MediaRequest.decode`は8 requestをallowlistし共通header/固定DATA/semanticを検証。同じ内部値からcanonicalとMediaRepositoryの8 read-only queryへ振り分ける。通常一覧は存在するTypedPayload、3 descriptorだけ実ID不在をOptional.emptyとし、DB整合/上限/基盤障害を不存在へ補完しない。DB descriptorはまだmanifest/物理確認を通しておらず配信許可ではない。認証・Inbox/response snapshot、transaction/物理I/O/JMS所有は外側serviceに残す。
+
+### 9.3 User管理更新要求canonical（SSC-032）
+
+Ownerは現在API認証actor user IDの十進、version001。Targetは§9どおりUCRだけ`NEW_USER:<username_key>`、他は`USER:<id>`。Username keyは既存LoginUsernameのNFC/trim/Locale.ROOT lowercase規則。Payloadのusernameはdecode後NFC原値を拘束し、業務検索・作成用trimを先取りしない。`X1`はNFC UTF-8、`N1`はpadding/signなしASCII十進、`B1`はASCII `0`または`1`の1byte。
+
+| Layout | ASCII field名/type-version（順序固定） |
+|---|---|
+| UCRREQ01 | username/X1、usernameKey/X1、password/X1、role/X1、enabled/B1 |
+| USTREQ01 | enabled/B1、expectedVersion/N1 |
+| URLREQ01 | role/X1、expectedVersion/N1 |
+| UPWREQ01 | password/X1、expectedVersion/N1 |
+| ULKREQ01 | expectedVersion/N1 |
+
+User IDはtargetへ含まれ、§9のpayload表どおり重複fieldを追加しない。Operation tokenはInboxの別keyとして返し、header ID/time/context/CSRF/reserved/paddingとともにcanonical fieldへ混入しない。全5layoutをallowlistし、headerのlayout/version/direction/body長、actual DATA/records、typed semanticを検証してから内部値を作る。同じ内部値からSSC-031 preludeのmutation/targetとUserCommandServiceの入力を生成する。これは認証許可・Inbox NEW判定ではなく、callerが先にそれらを実行する。
+
+Passwordは操作scope内だけの所有char bufferに切り離す。業務commandへは消費される別配列を渡す。CanonicalRequestも独立の所有bufferとして返し、callerが全照合後にcloseする。Request.closeで自分のpasswordをzero fillし、close後のcanonical/command等の再利用を拒否する。wire decodeの一時byteもfinallyで消去、Password/raw token/contextをtoString/log/例外に含めない。
+
+BUG-048/YKT-043の境界明確化: 有効UCR wireのUsernameはUI236 §4.1のASCII allowlistに従い、先頭spaceやslashを許可しない。原値/keyの区別は`New`/`NEW`など有効なcase差で検証する。NFC・byte幅・文字/Password長等のwire semantic不正は既存Protocolの恒久拒否規則を維持する。Web/formと内部commandの防御validationをwireへそのまま持ち込まない。DB依存のUPW target username/password一致はwireだけで判定不能なのでcommand0100、Username重複は0105（UI236 §4.2）。この区別は既存外部仕様/codecを変更するものではない。PG-D-084/PT-ADM-024～027で独立LP/JCE-HMAC/手組byte/実PG dispatch/negative/100独立操作を検証し、外側replay/JMS/HTTPは別gateとして継続する。
+
+### 9.4 User照会2layoutのNKOP1 mapping（SSC-035）
+
+Ownerは現在認証actor user IDの十進、version001、targetは`REQUEST:<layout-id>`。USRはusernamePrefix/X1、role/X1、state/X1、page/N1、pageSize/N1の順、UDTはuserId/N1。X1はdecodeしたNFC UTF-8原値、N1はpadding/signなし十進。USRのoptional3項目はwire全spaceの欠落をNULL LP（FFFFFFFF）として表す。検索repositoryのtrim/lowercaseやページ最終補正をHMACへ先取りせず、受信した有効値そのものを拘束する。
+
+Message ID/context/時刻/reserved/paddingをfieldへ含めず、operation tokenは参照layoutなので持たない。Strict wireのlayout/version/Q/S/固定長/record0/semanticを通過した同じtyped値をread-only ADMIN queryへ渡す。canonicalはcallerがcloseし、request自体を認証・query実行許可にしない。UDT responseは要求target IDと一致、USR responseは固定50件page-size/最終補正/total/page/record件数の整合を確認する。Snapshotは当該query時点の結果であり、replayに現在DBの内容/版を混ぜない。PG-D-088/PT-ADM-040～047。
+
+### 9.5 Log検索要求のNKOP1 mapping（SSC-037）
+
+LGSREQ01は一度だけstrict decodeし、同じ不変値をcanonicalとread-only queryへ渡す。ownerは現在認証したactorのUser ID十進表記、versionは`001`、targetは`REQUEST:LGSREQ01`。fieldの順序・ASCII名・型は次に固定する。
+
+| 順序 | field名 | type-version | 値 |
+|---|---|---|---|
+| 1 | keyword | X1 | NFC UTF-8原値 |
+| 2 | logType | X1 | wire enum値 |
+| 3 | action | X1 | NFC UTF-8原値 |
+| 4 | path | X1 | NFC UTF-8原値 |
+| 5 | level | X1 | wire enum値 |
+| 6 | fromAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |
+| 7 | toAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |
+| 8 | page | N1 | 要求page十進表記 |
+| 9 | pageSize | N1 | 要求pageSize十進表記（100） |
+
+先頭7 optional fieldの欠落はNULL LP（FFFFFFFF）とし、空文字との同一視、検索用trim、実効page補正、暗黙日時範囲をcanonicalへ先取りしない。header ID/context/sentAt/reserved/paddingはcanonicalへ含めない。operation tokenはない。T1はwireのms精度を維持し、default timezoneや現在時刻へ依存しない。
+
+LGSRSP01保存結果はrequest/owner/layout/versionへ拘束した暗号化全電文とする。初回0000はCOMPLETED/NONE、確定9001だけERROR/NONE。保存時headerはms、completed_atはμs、retentionは後段Inboxが完了時刻から24時間を所有する。再送成功だけ0200へ変更し、保存record・9001は不変、応答ID/context/correlation/timeは現在要求から再構成する。現在ADMIN認証、HMAC、transaction、JMSは後段application責務であり、このvalue/replay部品だけで認可済みとみなさない。
+
+### 9.6 QSBREQ01のNKOP1 fieldと入力所有（SSC-070）
+
+Ownerは検証済actor.userId十進、layout QSBREQ01/version001、target `QUESTION:NEW`、field count1、field名`question`/type`X1`/値はwire decode後のNFC UTF-8本文とする。本文以外のtoken/header ID/time/context/reserved/paddingはcanonicalへ混入しない。既存§9の対象/意味を変更せずfield名/typeを具体化する。
+
+`QuestionSubmitRequest.decode`はQSBREQ01のQ/A・DATA4144・record0・reservedとUUID/本文を既存共通codecで検証してからowned char[]へ切離し、decode用byteコピーはfinally消去する。`copyQuestion`はcaller-owned clone、canonicalの各bufferは返却後callerが別途closeする。request.closeは本文を消去してterminal、冪等close可・close後の業務access不可。private lockによりcopy/canonicalとcloseの途中状態を公開しない。String型wire DTOや呼出元のFixedPayloadは別所有であり、このcloseで他所有者の全メモリを消去したと主張しない。利用者認証/owner照合、Inbox NEW、DB受付/Outbox送達、保持期限後再送は上位service責務として別gateに残す。PG189/011003～004へ追跡。
+
 ## 10. DB rowとwire recordの分離
 
 - RepositoryはDB rowを返し、Application mapperがenum/日時/nullable/owner/deleted状態をdomainへ変換する。
@@ -185,3 +267,4 @@ Password/質問本文の平文・単純hashをDBへ保存しない。
 |---|---|
 | 2026-08-31 | 全64 layoutのJava class、handler/service、DB型・table、validation対応を初版作成。 |
 | 2026-08-31 | 横断監査でLGNREQ01の匿名Inbox HMAC対象を追加し、失敗counterの再配送二重更新を防止。 |
+| 2026-09-02 | SSC-004によりMEDIA1024のAudio/Video/Music拡張子・MIME完全一致allowlistを固定。 |

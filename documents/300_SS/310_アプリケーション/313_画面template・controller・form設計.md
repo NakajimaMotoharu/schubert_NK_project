@@ -49,6 +49,8 @@ static/
 現行14 templateのファイル名は互換性追跡を容易にするため維持する。新規画面だけsubdirectoryへ配置する。Inline JavaScript、
 inline event handler、外部CDNを使用しない。TemplateはView Modelだけを参照し、protocol record、DB row、認証context raw、storage pathを参照しない。
 
+SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみを返し、認証処理は既存POST `/login` filterへ委ねる。Login templateの可視brandは`schubert NK`、document titleは`schubert NK - ログイン`。Username autofocus/autocomplete、Passwordの空再表示、CSRF、既存error/locked/logout表示・操作はUI226とCurrent互換を維持する。title差分だけをDIF-001/CHR-A01に帰属し、他の比較項目を除外しない。
+
 ## 3. Controller共通規約
 
 - Controller packageは`dev.codex.schubert.nk.web.controller`、classは`@Controller`、constructor injectionとする。
@@ -60,6 +62,17 @@ inline event handler、外部CDNを使用しない。TemplateはView Modelだけ
 - Request IDはfilterが生成し、error画面・監査へ渡す。物理path、Queue名、exception messageをModelへ入れない。
 
 ## 4. 画面・class対応
+
+### 4.0 Scenario階層のHTTP binding・終端具体化（SSC-071/PG-D-194）
+
+- SCR005は`/scenarios/{game:NUKITASHI[12]}`、SCR006は`/scenarios/{game:NUKITASHI[12]}/{prefix:[0-9]{2}}`とし、SCR007の数値ID segmentと衝突させない。Current SearchControllerのgame/prefix/numeric区別を維持し、未知game・非ASCII/桁不一致prefixはhandlerへ入れない。数値IDは後続明細controllerで別routeとして扱う。
+- GAM/RTE/SCF要求は既存ScenarioWireClientへ1回だけ委譲する。保護pathの認証済SessionPrincipalだけからcontextを取得し、request parameterでrole/contextを上書きしない。WebResultMapperで承認済resultをHTTP分類、0102は既存ApiSessionInvalidHandlerへ委譲した後に即終端する。
+- SCR004の0件は一覧として空結果文言を表示する。SCR005/006の0件はCurrent SearchController同様404とし、成功コードの空recordを200画面へ変換しない。§6.1のPageViewModelの0件規則はpaged一覧の規則で、この階層404を変更しない。
+- SCF応答のgame/prefixを要求値へ照合し、不一致は503で終端、正常時はAPIのrouteName/title/順序をそのまま閉modelへcopyする。DTOや認証contextをHTML Modelへ入れない。
+- HTTP送信済みのMVC endpoint戻り値だけはSpring ServletInvocableHandlerMethodのrequestHandled契約に従う`@Nullable String`とする。HttpServletResponse引数を持ち、sendErrorまたは0102 handler完了直後だけnullを返す。成功は固定template名。業務helperはOptional/non-null契約、nullを成功値・欠落補正へ使わない。MVC/実HTTP PTで二重render/後続MQがないことを確認する。
+- ScenarioMvcConfigurationで依存を明示注入し、WebMvcConfigurationのview名allowlistへ3templateだけを追加する。これだけで本番bootstrap/全画面登録/実brokerの完了とはしない。共通layoutのuser操作fragmentを共有し、Currentの見出し/業務nav/card/list順を維持する。
+
+追跡: NK-WEB-002、FUN004/AUT001～003/SYS006/TST001～005、UI221～223/234/264、016001/002・PT-SCR-001～016。実NK CHR-S05/S06/U02/E01と本番REQUEST log結線は別gateで未完了を明示する。
 
 | SCR | Method/URL | Template | Controller.method | Form / View Model | Fixed IF | Role・追跡 |
 |---|---|---|---|---|---|---|
@@ -134,6 +147,14 @@ Client-side `maxlength`は補助であり、UTF-8 byte validatorをWeb/API双方
 
 ## 6. View Model・表示制御
 
+SSC-073（LogSearchForm限定）: HTTP fieldはq/log_type/action/path/level/from/to/pageの8個、未知名・同名複数値は400相当でMQ前に拒否する。既存5文字列はCurrent LogSearchFiltersのtrimを維持し、制御文字/不正Unicode検査→NFC→前後ASCII trim→byte/enum検査とする。q256/action64/path256byte、種別空/ACTION/REQUEST/SECURITY/MQ/SYSTEM/BATCH、level空/INFO/WARN/ERROR。pageは欠落/空1、ASCII int範囲内の0以下を1へ補正、正数999999超過・plus・小数・指数・非ASCII数字・overflowは拒否する（UI222§6優先）。
+
+From/ToはDIF010の新条件をdatetime-localで入力し、JST（固定+09:00）のyyyy-MM-ddTHH:mm、任意の:ssと1～3桁小数秒を受ける。秒がない場合は00、毫秒未満は受けない。4桁年0001～9999・実在日付/時刻のstrict検査、timezone suffix/offset/24時/うるう秒は拒否する。空は未指定、片側だけは許可、両側指定時はFrom≦Toかつ差が31日以下（境界含む）。wireへInstantとして渡し既存JST17桁codecで再検査、丸め/切捨てなし。文字列の再表示は閉snapshotとescape、失敗理由は固定field/codeでraw入力を診断へ出さない。ADMIN認可は既存security chainとAPIに維持する。
+
+SSC-072（ScenarioSearchForm限定）: UI222§5/6・223§3とCurrent SearchFiltersの優先規則を明示する。HTTPの7field `q/game/speaker/chapter/entry_type/voice/page` だけを受け、未知名・同名複数値は拒否する。欠落文字列は空、欠落/空pageは1。入力Unicode・制御文字を検査してからNFC/trimし、検索文字列の前後ASCII spaceはtrim対象（Password/質問の末尾space禁止を適用しない）。CR/LF/TAB/NULをtrimで消して受け入れない。byte上限・enum検査は正規化後で、超過切捨てなし。pageはASCII整数、先頭plus/小数/指数/非ASCII数字は拒否する。ただしUI222§6の明示例外として先頭minusの負整数と0は1へ補正する。Currentのint範囲を超える値、正数999999超過はfield error。leading zeroは数値として解釈する。最終pageへの補正は結果総件数を持つAPI側に残す。
+
+内部formは不変snapshotとclosed field/error-code集合を返す。raw入力を例外/診断へ反射しない。文字入力値は画面再表示のためだけに保持しtemplateで必ずescapeする。検証失敗時はtyped検索要求を生成せずMQを送らない。正常時の空文字はwire mapperでOptional.empty（設計上のnull条件）へ写像する。候補取得/HTTP binding/field error描画は別接続試験で確認する。
+
 ### 6.1 共通
 
 `PageViewModel`はeffective page、page size、total count/pages、first/last、previous/nextを持つ。0件でもtotal pages=1、first/last=0。
@@ -185,13 +206,15 @@ Templateは0件時に`該当するデータはありません`を表示し、pag
 | 未認証保護GET | 302 Login | Safe same-origin GETだけSavedRequest |
 | 未認証POST/media | 401/403 | Login案内、body再送なし |
 | Field error | 400相当、同一画面 | Field＋summary、秘密値なし |
-| `0102` | Web session破棄、302 Login | `session-expired` message |
+| `0102` | Web session破棄、通常GETは302 Login、POST/AJAX/media等は401 | `session-expired` message、更新body再送なし（SSC-048/UI221） |
 | `0103` | 403 | 権限なし。対象存在を開示しない |
 | `0104` | 404 | 対象なし |
 | `0105` | 409 | 最新GETを取得して再表示、新token |
 | `0107` | 409相当、通知明細 | 最新stateと取消不可message |
 | `9000/9001` | 503 | 再操作案内、request ID |
 | Invalid Range | 416 | bodyに内部pathなし |
+
+SSC-047（SCR-090具体化）: ErrorController/ProblemViewFactoryはserver Request ID、containerのERROR_STATUS_CODE、要求内の表示専用snapshotだけからErrorViewModelを作る。ERROR_EXCEPTION、ERROR_MESSAGE、ERROR_REQUEST_URI、query、raw request/session/DBを参照しない。400/401/403/404/405/409/416/429/503は固定表示、500/未知statusは503へ分類、error属性なしの直接GET /errorは404とする。response statusとModelを一致させ、利用者文言はUI222の既定403/404/409/503を維持する。認証済みsnapshotがある場合だけusername/role/Logout＋解決済hidden CSRF、ない場合はMenu/Login案内を表示する。通常画面から使う認証失効handlerはsnapshotの破棄も行う。 外部/errorはGET/HEADだけを表示用として受け、他methodは405＋Allow: GET, HEADとする。内部ERRORでは元methodを業務実行せずerror statusだけ表示する。
 
 ## 10. Accessibility・security
 

@@ -61,6 +61,23 @@ StringはNFC、CR/LF/TAB/Unicode line separatorをASCII spaceへ変換、上限�
 `path`はquery/fragmentを除いたroute templateまたは正規pathで、任意query値を保存しない。
 Cookie/Authorization/CSRF/Referer全文/request・response bodyをdetailsへ入れない。
 
+### 3.3 REQUEST投影の内部正規化（SSC-008）
+
+WLGEVT01はUI235のREQUEST専用eventであり、Web producerはAction=`HTTP_REQUEST_COMPLETED`を設定する。Wireで任意Actionが省略された場合も、APIは既知のREQUEST種別から同値を補ってDBの必須Actionへ保存する。他categoryのactionをREQUESTとして受理しない。これはlayout/必須区分の変更ではなく取込み時の正規化である。
+
+Detailsのwire入力は省略またはstrict JSON objectとし、次のkeyだけを許可する。重複key、未知key、null、末尾別document、コメント、型不一致を恒久不正としてDB接続前に拒否する。空objectは有効。Wire最大1,024 byteとDB JSONB表示最大1,024 byteの両方を維持する。
+
+| Key | 型・値 | 根拠 |
+|---|---|---|
+| responseBytes | 整数0～999999999999（指数・小数・符号なし） | §3.2 HTTP byte数 |
+| userAgentFamily | 1～32 ASCIIの英数/space/`.`/`_`/`-`によるfamily名 | §3.2。Producerは解析済みfamilyを生成しraw User-Agentを複製しない |
+| truncated | boolean | §3.1の安全な上限処理の有無 |
+| projectionStatus | `PENDING`または`FAILED` | 312 §11のlocal/outbox投影状態。MQ送信の確定を意味しない |
+
+API保存時はwire Roleがある場合だけdetailsに`actorRole=USER/ADMIN`を追加する。このkeyをwire Detailsから受け付けず、独立Role fieldを正とする。Usernameは`actor_username`、HTTP request IDは`request_id`、event Message IDは`message_id/source_message_id`、Correlation IDは`correlation_id`へ保存する。表示metadataから業務user IDを逆引きせず、`actor_user_id`はNULLとする。Webによるmetadataを認証・認可の根拠にしない。
+
+DB INSERTとsource UKの重複判定を同じ短transactionで確定し、その後にJMS ACKをcommitする。DB失敗時はJMS rollback、DB確定後ACK前の停止は再配送でINSERT 0/既存行不変を確認してACKする。Broker duplicate cacheのhit/missにかかわらずDB UKを最終正本とする。
+
 ## 4. Action catalog
 
 | Action | Category | 発火・必須context |
@@ -105,6 +122,10 @@ Action名追加は351とLog画面filter/testを同時更新する。フリーテ
 | `0200` | 200/302 | 冪等成功、保存済み結果 | INFO/ACTION |
 | `9000` | 503 | 一時障害、再操作案内 | ERROR/SYSTEMまたはMQ |
 | `9001` | 503 | 容量/resource上限、新規受付停止 | ERROR/SYSTEM、alert |
+
+SSC-046: 上表は汎用HTTP分類であり、form POST `/login`の0101は現行互換の302 `/login?error`、0106は302 `/login?locked`＋API応答の0..900秒 `Retry-After`を使用する。UI226のquery別表示と313のredirect/再表示を優先し、401/429の直接応答へ置換しない。不存在/不一致/disabledは同じ失敗遷移。API timeout/9000・session保存障害は503で、認証失敗counterをWebで加算せず、LOGIN_FAILEDへ誤分類しない。正常はsafe SavedRequestのGETへ302、なければ`/`。Header/body/sessionへ例外やpasswordを保存しない。根拠はCurrent LoginAuthenticationFailureHandler/SuccessHandlerとCHR-A02のlockedRedirectであり、Current baselineは不変更。
+
+SSC-048: 業務API0102の401はPOST/HEAD/その他・AJAX・media向けとし、通常GETだけ313/UI221に従い302 `/login?session-expired`へ戻す。いずれもlocal HTTP sessionと表示snapshot/CSRFを消去し、既存action SESSION_EXPIRED/reason API_SESSION_INVALIDをINFO/SECURITYで記録する。API context/session ID/hash/元response/秘密値は記録しない。WebResultMapperの全result汎用分類だけでは失効/競合/field再表示等の副作用を完了扱いしない。
 
 Permanent protocol errorは信頼できるresponseを返さずDLQとprocess exitのためwire resultなし。
 
@@ -217,7 +238,9 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 ## 9. Retention・rotation・access
 
 - Journald/file log: 100MB＋14世代を目安、service合計5GB、file 0640、ops read。OS journald合計もUI 253の10GB内。
-- `app_logs`: 90日、backup成功後chunk削除。Security hold対象は明示ID/期限で除外。
+- `app_logs`: 90日、backup成功後chunk削除。Security holdの明示IDは`app_logs.id`、期限は
+  `security_hold_until`とし、`category='SECURITY' and security_hold_until > cleanup cutoff`だけを除外する。
+  期限未設定/到達後は通常保持に戻し、保持期限自体はLog画面/ops viewに表示しない。
 - `batch_runs`: 400日、RUNNING/FAILED調査中は削除禁止。DEBUG metric: 15日/5GB。
 - Log画面はADMINだけ、ops read viewは本文/ciphertext/hash/IP等を除外。OS logはservice group/運用者だけ。
 
@@ -252,3 +275,4 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 | 2026-08-31 | Structured log、action/error/metric catalog、alert、mode、retentionを詳細化。 |
 | 2026-08-31 | 横断監査でQA-042/UIC-002のpaging/address memory metricと、容量率alertのpending oracleを追加。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Queue容量率、paging開始、page-full、disk-fullのalert分母と動作を確定。 |
+| 2026-09-03 | SSC-005を反映し、Security holdのID/期限、対象category、非公開条件を具体化。 |
