@@ -8,7 +8,7 @@
 |---|---|---|
 | PT-MED-HTTP001 | 5固定URL/USER・ADMIN、GET/HEAD、0000/0200 | IF009 I/A・IF012 I・IF016 I/Aの全request byte、fresh UUID/context、200/Content-Type/Length/Disposition/nosniff/private no-store。HEAD body0、GET固定file全文、API各1回 |
 | 002 | inlineなし/0-0/開始末尾/suffix/複数先頭/不正/overflow、attachment Range | SS333と固定file長から200/206/416、Content-Rangeとsliceを手で算出。download200全長、HEAD body0。ETag/Last-Modified無し |
-| 003 | 不正Audio ID/0/13桁/符号/未知文字、logical ID空/過長/制御/末尾space、不正parameter | 400/send0/file0。constructor/null/別Principalはinvariant拒否で成功扱いしない |
+| 003 | 不正Audio ID/0/13桁/符号/未知文字、logical ID空/過長/UTF8超過/制御/末尾space、e＋combining accent | 不正は400/send0/file0。SS313 NfcByteLengthで正規éを独立期待値とし電文・descriptor・Range照合一致/200。constructor/null/別Principalはinvariant拒否で成功扱いしない。未使用queryは既存互換どおり無視し権限/ログへ使用しない |
 | 004 | API各error code/timeout/JMS、不正header/correlation/context/予約byte/descriptor | SS351分類、0103=403/0104=404/9000=503等。decode失敗503/file0、raw例外/pathをHTTPへ出さない |
 | 005 | 正常wireで別logical ID/type/path/disposition/MIME応答 | 要求/descriptor再照合で503/file0。projectionがAPI認証・secure open代替にならない |
 | 006 | API0102、GET/HEAD、encrypted sessionとsecurity context | 401/session/context/表示snapshot失効、mediaへ302しない、file0/再送0 |

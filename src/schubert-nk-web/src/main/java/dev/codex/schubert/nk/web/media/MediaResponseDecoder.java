@@ -10,8 +10,10 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -89,25 +91,7 @@ public final class MediaResponseDecoder {
         var payload = PayloadCodec.standard().decode(header.layoutId(), data, List.of(), code);
         if (!code.usesSuccessProfile()) return new Result(code, Optional.empty(), Optional.empty());
         var typed = PayloadTypeCatalog.decode(payload);
-        // Both response records expose exactly the same named MEDIA1024 prefix fields.
-        var media = MediaDescriptorData.from(typed.data().fields());
-        var descriptor =
-            new MediaDescriptor(
-                binding.type,
-                media.mediaLogicalId(),
-                media.storageRelativePath().wireValue(),
-                media.fileName(),
-                media.fileByteLength(),
-                media.sha256().wireValue(),
-                media.mimeType().wireValue(),
-                ContentDisposition.valueOf(media.contentDisposition().name()));
-        require(descriptor.logicalId().equals(binding.id));
-        require(descriptor.disposition() == binding.disposition);
-        var video =
-            typed.data() instanceof VideoDescriptorResponseData metadata
-                ? Optional.of(metadata)
-                : Optional.<VideoDescriptorResponseData>empty();
-        return new Result(code, Optional.of(descriptor), video);
+        return project(binding, typed, code);
       } finally {
         Arrays.fill(data, (byte) 0);
       }
@@ -118,6 +102,50 @@ public final class MediaResponseDecoder {
     } finally {
       Arrays.fill(body, (byte) 0);
     }
+  }
+
+  /**
+   * PG-D-343/PT-MED-HTTP010: the caller owns this exact request and private wire Result from its
+   * exchange. Header/context/correlation/deadline/profile checks occurred in the trusted facade;
+   * this is only request-bound descriptor projection, not a new authentication or file-access
+   * grant.
+   */
+  public static Result decodeVerified(
+      TypedPayloadValues request, ProtectedReadWireClient.Result response)
+      throws MediaDeliveryException {
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(response, "response");
+    try {
+      var bound = binding(request);
+      var code = response.resultCode();
+      if (!code.usesSuccessProfile()) return new Result(code, Optional.empty(), Optional.empty());
+      var typed = response.payload().orElseThrow(IllegalArgumentException::new);
+      require(typed.layoutId().value().equals(request.layoutId().value().replace("REQ", "RSP")));
+      return project(bound, typed, code);
+    } catch (IllegalArgumentException | IllegalStateException failure) {
+      throw new MediaDeliveryException(MediaDeliveryException.Reason.INVALID_DESCRIPTOR);
+    }
+  }
+
+  private static Result project(Binding binding, TypedPayloadValues typed, ResultCode code) {
+    var media = MediaDescriptorData.from(typed.data().fields());
+    var descriptor =
+        new MediaDescriptor(
+            binding.type,
+            media.mediaLogicalId(),
+            media.storageRelativePath().wireValue(),
+            media.fileName(),
+            media.fileByteLength(),
+            media.sha256().wireValue(),
+            media.mimeType().wireValue(),
+            ContentDisposition.valueOf(media.contentDisposition().name()));
+    require(descriptor.logicalId().equals(binding.id));
+    require(descriptor.disposition() == binding.disposition);
+    var video =
+        typed.data() instanceof VideoDescriptorResponseData metadata
+            ? Optional.of(metadata)
+            : Optional.<VideoDescriptorResponseData>empty();
+    return new Result(code, Optional.of(descriptor), video);
   }
 
   private static Binding binding(WireMessage<FixedPayload> request) {
@@ -131,30 +159,41 @@ public final class MediaResponseDecoder {
       var typed =
           PayloadTypeCatalog.decode(
               PayloadCodec.standard().decode(request.header().layoutId(), data, List.of(), false));
-      return switch (layout) {
-        case "AUDREQ01" -> {
-          var audio = (AudioDescriptorRequestData) typed.data();
-          yield new Binding(
-              MediaType.AUDIO,
-              Long.toString(audio.audioId().value()),
-              ContentDisposition.valueOf(audio.disposition().name()));
-        }
-        case "VIDREQ01" ->
-            new Binding(
-                MediaType.VIDEO,
-                ((VideoDescriptorRequestData) typed.data()).videoId(),
-                ContentDisposition.INLINE);
-        default -> {
-          var music = (MusicDescriptorRequestData) typed.data();
-          yield new Binding(
-              MediaType.MUSIC,
-              music.trackId(),
-              ContentDisposition.valueOf(music.disposition().name()));
-        }
-      };
+      return binding(typed);
     } finally {
       Arrays.fill(data, (byte) 0);
     }
+  }
+
+  private static Binding binding(TypedPayloadValues typed) {
+    require(typed.records().isEmpty());
+    String layout = typed.layoutId().value();
+    require(layout.equals("AUDREQ01") || layout.equals("VIDREQ01") || layout.equals("MEDREQ01"));
+    return switch (layout) {
+      case "AUDREQ01" -> {
+        require(typed.data() instanceof AudioDescriptorRequestData);
+        var audio = (AudioDescriptorRequestData) typed.data();
+        yield new Binding(
+            MediaType.AUDIO,
+            Long.toString(audio.audioId().value()),
+            ContentDisposition.valueOf(audio.disposition().name()));
+      }
+      case "VIDREQ01" -> {
+        require(typed.data() instanceof VideoDescriptorRequestData);
+        yield new Binding(
+            MediaType.VIDEO,
+            ((VideoDescriptorRequestData) typed.data()).videoId(),
+            ContentDisposition.INLINE);
+      }
+      default -> {
+        require(typed.data() instanceof MusicDescriptorRequestData);
+        var music = (MusicDescriptorRequestData) typed.data();
+        yield new Binding(
+            MediaType.MUSIC,
+            music.trackId(),
+            ContentDisposition.valueOf(music.disposition().name()));
+      }
+    };
   }
 
   private static boolean sameContext(AuthenticationContext first, AuthenticationContext second) {
@@ -179,7 +218,7 @@ public final class MediaResponseDecoder {
 
     private Binding(MediaType type, String id, ContentDisposition disposition) {
       this.type = type;
-      this.id = id;
+      this.id = Normalizer.normalize(id, Normalizer.Form.NFC);
       this.disposition = disposition;
     }
   }

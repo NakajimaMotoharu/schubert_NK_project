@@ -1,0 +1,363 @@
+{
+  "id": "PG434-media-selected-v7",
+  "formal": false,
+  "sourceCommit": "8d7ba2a89332f675514cbadcfa33c455b7b7a06e",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java",
+      "sha256": "5ba0e67823583d910e12efc0ab2c8cd1b02f5775bbb1cf353f3bfbe973c677e1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java",
+      "sha256": "b0191e75e5de3aed6703fc1c633b32bf5496eb364c5574c7dccfcc0ef36631ba"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java",
+      "sha256": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java",
+      "sha256": "a2750f139c8d533300b0b3f38aa6dce0ac3338d0cbb895b36623715c37e9bd0c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MediaControllerTest.java",
+      "sha256": "f0987dd1007aacea4f411f8e4ff74f55f58c58974979791a0d3cddd94c787623"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "sha256": "9325eea2624232010b1fccd7a226a46cc6fd9142c4f59e9d35087bfec0370682"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixtureTest.java",
+      "sha256": "b24ce9b5306c69384879a28514b8a7ec6ead69d84d052f132884e32cd5ed114d"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T05:38:59+09:00",
+  "exitCode": 0,
+  "tests": 77,
+  "suites": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-MED-HTTP001..010",
+    "PT-WEB-DBFIX001..003"
+  ],
+  "bugs": [
+    "BUG-547",
+    "BUG-548",
+    "BUG-549",
+    "BUG-550",
+    "BUG-551",
+    "BUG-552"
+  ],
+  "ykt": [
+    "YKT-391",
+    "YKT-392",
+    "YKT-393",
+    "YKT-394",
+    "YKT-395",
+    "YKT-396"
+  ],
+  "command": "six reactor spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,MediaControllerTest,MediaResponseDecoderTest,MediaRangeServiceTest,HttpByteRangeParserTest,MediaBodyStreamerTest,WebBusinessWireClientsTest,ApiSessionInvalidTest,WebLogDatabaseFixtureTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "diagnostic": {
+    "formal": false,
+    "id": "BUG548-before-original-binding-correct-UTF8-fixture",
+    "exitCode": 1,
+    "marker": "PG434_BUG548_RED_CANONICAL_UTF8_RESPONSE_REJECTED_BY_ORIGINAL_BINDING",
+    "rawLogSha256": "08820b64f7ddb88c53fe8fa42c7f2673220d7923831f63d2c6b3d7f495bba475",
+    "classes": "isolated original noncanonical Binding only; current worktree preserved",
+    "command": "JDK25 java --enable-native-access=ALL-UNNAMED -Dnk.pt.repository=current-tree -Duser.timezone=Asia/Tokyo BeforeNfcProof new-only runtime-v2",
+    "normalCleanup": true
+  },
+  "logSha256": "6cc82a10eb2eafc15be867116246d03c6e107da077ebc8f8788ab3bf108b8747",
+  "coverage": {
+    "MediaController$ServletResponse": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 337
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 80
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaController$ServletResponse$1": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 33
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebMediaAudit$Failure": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebMediaAudit": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 250
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 51
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 22
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaResponseDecoder$Result": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 23
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaResponseDecoder$Binding": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaResponseDecoder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 423
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 31
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 87
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "c38cb208a1875102aa60f26c48a5eadf2a47ecf5ef0532932d32d1bb10bbec6d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "e66e83f7e1df8c1d2768107602df4eb55407e0bdddb75b2326a30fac75014459"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "dacf87f97c53ceb0071569057bf2a26b3aa6bd3645b8b59d7e371b27a9f6d7e7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "fd23b144107d7d85b28471b24d62b80b2b746781735c64017d10719df08e984f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "0ac098e5a7af76b13aba8b02e2e532f9d3f72493c4aa3a7e9d6bb82fff5e91ba"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.session.MediaControllerTest.xml",
+      "sha256": "5ea89952784712735c47e8364237e841a5d3321c52467f971994a539830697c2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "b9cd7e3d39446013afd8501a4101cbd8d12930092d3398b12c69c29ccfa5d776"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "fadd9b1970a50ebdc0f803c4f14b19437eb8a7aea1f335fce4453a6ee835d847"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.media.HttpByteRangeParserTest.xml",
+      "sha256": "d0562346341524bc60a0b2fa7620b726d0724d4937c3ca45bfbd2ce00cfbf9c5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaBodyStreamerTest.xml",
+      "sha256": "7da9433842cd20fd6ea7ed452b8f8b6d4c20d2d0712733673ef9e41df2f08514"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "9bb13c94173bf5114a31c2fe9e9a4f4b195d4ab9c0657357cbc3a9556e2d51d3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogDatabaseFixtureTest.xml",
+      "sha256": "b5f67448f4cf336da2be83634a74bc80533d4aef9345bb1de41db83d19898335"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG434-media-selected-v7/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "1c28233bfbf6e2d68aa562e263313b3e1054b5b6af15e13395a3ba50a52cf3d5"
+    },
+    {
+      "path": "diagnostic/BeforeNfcProof.java.txt",
+      "sha256": "54405f50146deba186d7ea9e1479eecd684a04fcf2af17764722d87fc48abede"
+    },
+    {
+      "path": "diagnostic/MediaResponseDecoder.java.txt",
+      "sha256": "0fd81d70d624d43bc38aecf44c2fc03085294bdf49451cecd7e829a3288414a8"
+    },
+    {
+      "path": "diagnostic/nfc-before-marker.txt",
+      "sha256": "670a78d6481cb4cbbe039375dc9780539055d4bc0dce6dad9ed3862bb4607c2e"
+    }
+  ],
+  "limitations": [
+    "selected WIP/source-file hashes, not full reactor acceptance",
+    "target nine classes missed0, other Production scopes remain denominator",
+    "existing cumulative exec not full frozen-source acceptance",
+    "owned native FileSource/full Web/CHR/coverage100/full53scope pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic fixture source only; no actual credential/session/token/password/key/dump"
+}

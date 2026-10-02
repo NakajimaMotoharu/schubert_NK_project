@@ -1,0 +1,32 @@
+package dev.codex.schubert.nk.web.session;
+
+import dev.codex.schubert.nk.web.media.MediaDeliveryException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/** Diagnostic only: isolated original binding + corrected independent UTF8 fixture, not acceptance. */
+public final class BeforeNfcProof {
+  private BeforeNfcProof() {}
+  public static void main(String[] arguments) throws Exception {
+    Path root = Path.of(arguments[0]);
+    MediaControllerTest.start(Files.createDirectory(root.resolve("database")));
+    boolean reproduced = false;
+    try {
+      var test = new MediaControllerTest();
+      test.root = Files.createDirectory(root.resolve("media"));
+      try {
+        test.http010VerifiedProjectionAndClosedAuditContracts();
+        throw new AssertionError("original noncanonical binding unexpectedly passed");
+      } catch (MediaDeliveryException failure) {
+        if (failure.reason() != MediaDeliveryException.Reason.INVALID_DESCRIPTOR) throw failure;
+        reproduced = true;
+        System.out.println("PG434_BUG548_RED_CANONICAL_UTF8_RESPONSE_REJECTED_BY_ORIGINAL_BINDING");
+      } finally {
+        test.clear();
+      }
+    } finally {
+      MediaControllerTest.stop();
+    }
+    if (reproduced) System.exit(1);
+  }
+}

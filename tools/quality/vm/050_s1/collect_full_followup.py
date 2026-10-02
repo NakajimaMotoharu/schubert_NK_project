@@ -306,5 +306,28 @@ if int(identifier[2:5]) >= 433:
         'Five fixed Web wire facades do not prove full HTTP business assembly or ordinary native readiness',
         'Caddy/original DONE/normal retirement/real CHR-A01/L01/native coverage/full-scope 100% remain pending',
         'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 434:
+    manifest['bugs'].extend(['BUG-547', 'BUG-548', 'BUG-549', 'BUG-550', 'BUG-551', 'BUG-552'])
+    manifest['ykt'].extend(['YKT-391', 'YKT-392', 'YKT-393', 'YKT-394', 'YKT-395', 'YKT-396'])
+    manifest['testIds'].extend(['PT-MED-HTTP001..010', 'PT-WEB-DBFIX001..003'])
+    manifest['trigger'] = 'PG-D343 fixed five media GET/HEAD/controller/descriptor binding and local audit contract plus test-only DB setup ownership: fresh source-frozen six-module security regression'
+    media_names = {'MediaController', 'MediaController$ServletResponse', 'MediaController$ServletResponse$1',
+        'WebMediaAudit', 'WebMediaAudit$Failure', 'MediaMvcConfiguration', 'MediaResponseDecoder',
+        'MediaResponseDecoder$Binding', 'MediaResponseDecoder$Result'}
+    media = {}
+    for cls in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class'):
+        short = cls.get('name').split('/')[-1]
+        if short in media_names:
+            media[short] = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))}
+                for c in cls.findall('counter')}
+    assert set(media) == media_names
+    assert all(c['missed'] == 0 for counters in media.values() for c in counters.values())
+    manifest['mediaScopeCoverage'] = media
+    manifest['limitations'] = [
+        'PG433 source8bead full2917 and PG434 dirty selected74/77 are preserved, not reused as this source full acceptance',
+        'PG432 native Pair operator remains UNKNOWN/M-A held; QA047 pending, no stop/deploy/start repeated',
+        'Receipt reference fourth technical table proposed in QA048/UIC007/SSC169; no unapproved schema/oracle change',
+        'Owned native FileSource/full Web business assembly/Caddy/original DONE/normal retirement/real CHR-A01/L01 remain pending',
+        'Full-scope/native coverage100 and formal PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

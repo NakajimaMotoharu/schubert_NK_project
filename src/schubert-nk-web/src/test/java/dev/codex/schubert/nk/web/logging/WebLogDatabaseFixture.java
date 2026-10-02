@@ -22,6 +22,11 @@ public final class WebLogDatabaseFixture {
 
   public WebLogDatabaseFixture(Path root) throws Exception {
     this.root = root;
+    // BUG-552: validate configuration before creating an external PostgreSQL owner.
+    String repository = System.getProperty("nk.pt.repository");
+    if (repository == null || repository.isBlank())
+      throw new IllegalArgumentException("PT repository property is required");
+    Path resources = Path.of(repository).resolve("src/schubert-nk-api/src/main/resources/db");
     String configured = System.getenv("SCHUBERT_PG_ROOT");
     pg =
         configured == null || configured.isBlank()
@@ -56,24 +61,32 @@ public final class WebLogDatabaseFixture {
             + pg.resolve("lib/postgresql/18/lib"),
         "start");
     url = "jdbc:postgresql://127.0.0.1:" + port + "/postgres";
-    Path resources =
-        Path.of(System.getProperty("nk.pt.repository"))
-            .resolve("src/schubert-nk-api/src/main/resources/db");
-    try (Connection connection = admin();
-        var statement = connection.createStatement()) {
-      statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
+    try {
+      try (Connection connection = admin();
+          var statement = connection.createStatement()) {
+        statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
+      }
+      Flyway.configure()
+          .dataSource(url, "schubert_migration", "")
+          .defaultSchema("schubert_meta")
+          .schemas("schubert_meta")
+          .createSchemas(true)
+          .initSql("SET ROLE nk_owner")
+          .locations("filesystem:" + resources.resolve("migration"))
+          .validateOnMigrate(true)
+          .cleanDisabled(true)
+          .load()
+          .migrate();
+    } catch (Throwable failure) {
+      // Only a confirmed successful start is owned here. Preserve the original failed outcome.
+      try {
+        stop();
+      } catch (Throwable closeFailure) {
+        failure.addSuppressed(closeFailure);
+        if (closeFailure instanceof InterruptedException) Thread.currentThread().interrupt();
+      }
+      throw failure;
     }
-    Flyway.configure()
-        .dataSource(url, "schubert_migration", "")
-        .defaultSchema("schubert_meta")
-        .schemas("schubert_meta")
-        .createSchemas(true)
-        .initSql("SET ROLE nk_owner")
-        .locations("filesystem:" + resources.resolve("migration"))
-        .validateOnMigrate(true)
-        .cleanDisabled(true)
-        .load()
-        .migrate();
   }
 
   public Connection web() throws SQLException {

@@ -1,0 +1,13 @@
+# Media固定HTTP接続 実行結果（限定、未正式）
+
+2026-10-03 05:38:59 JST、dev-foundation HEAD `8d7ba2a89332f675514cbadcfa33c455b7b7a06e`＋WIP。対象7source/test file SHAは[選択manifest](evidence/provisional/PG434-media-selected-v7/manifest.json)に記録、未commitをHEAD試験済みと偽装しない。JDK25.0.4/Maven3.9.12/Node24.19.0/Linux/JaCoCo0.8.15/SpotBugs4.10.4.0。選択77PT/13suite/FES0・strict compile/null/Spotless・全6静的0・exit0/1:23。command/各JUnitとhashはmanifest、logはWorkPG379/pg434-media-selected-v7.log。
+
+新PT-MED-HTTP001～010（10JUnit）とPT-WEB-DBFIX001～003（3JUnit）、既存MediaResponseDecoder4/Range6/Parser4/Streamer2/API0102 8/18wire 8を含む。全5routeのGET/HEAD/role/0000・0200、全request byte/UUID/context、literalRange/slice、real encrypted session失効401、匿名403/未送信、20stream保持時503 Retry-After1、owned fileの終了/permit解放、100並行distinct context・UUID/request ID/全buffer0を確認した。local監査はpath/name/hash/body/password/contextを持たず、client abortはINFO/error alert除外。物理descriptor resolver/正規native root/全Web組立は既存部品の後続接続であり、このhost FileSource fixtureをnative受入にしない。
+
+対象9class（Controller内2class/Audit enum/MVC/Decoder内2classを含む）は現在reportのline/method/class/branch未網羅0。既存cumulative execはsource固定後fresh fullへ流用せず、他moduleの未網羅を消さない。manifest SHA256 `91d7fc8eb9e2337be39fc5b70af495f08d4fcdfab65175e6fa5a8bb4dc5c18da`。full回帰はPG434 fixed sourceで別に採取する。
+
+失敗保全と分類：v1 fixture後方参照compile2（BUG547）、v2匿名media401誤期待（BUG549）とNFC fixtureの誤invalid分類、NFC専用before-fix1failure/1error、v4 fixtureX項目ASCII変換（BUG550）。NFC actual contractはBUG548/YKT392としてsource修正前起票し、正しいUTF8 fixtureで隔離した元Bindingの再現を補った。WorkPG379/pg434-nfc-beforeの原binding source SHA `0fd81d70d624d43bc38aecf44c2fc03085294bdf49451cecd7e829a3288414a8`、診断main SHA `54405f50146deba186d7ea9e1479eecd684a04fcf2af17764722d87fc48abede`、v2の明示red marker/exit1/正常DB closeを確認。診断はProduction PT成功へ加算せず、現在Sourceを巻き戻していない。是正済UTF8 fixture＋新NFC binding/HTTPはv5～v7で合格。旧混在red logだけから単独原因を断定しない。
+
+診断初回property欠落（BUG551）は原因実証に未到達で合格0。既存DB fixtureがproperty解決をDB start後に置きsetup失敗のowned stopを持たない問題（BUG552）を先行登録し、この作業だけのホスト試験DB PID520185/port35719/正確な私有dataの現在所有を確認してpg_ctl fast正常停止、PID/postmaster.pid不在を確認した。data/logは削除せずWorkへ保持、原本/Backup/VMには触れていない。fixtureのconfig前検証、confirmed start後のsetup Throwableに対するowned stop＋元例外/suppressed不成功維持を追加し、missing/blank開始0・独立SELECT1/0のSQL失敗後PIDfile無し・通常成功/停止の3追加PTで再発防止を検証した。
+
+BUG547～552/YKT391～396は固定source fresh fullとcommit/hash追跡まで未完了。QA047 native保持/QA048 receipt参照承認待ち・正式run24/1964PT/53scope・全100%/Caddy/DONE/CHRは未更新。未実行/failed/flaky/skipped/別sourceを合格に算入しない。sanitized XMLはproperties/stdout/stderr/secretを除き、実credential/session/password/token/key/DB dumpはGitへ保存していない。
