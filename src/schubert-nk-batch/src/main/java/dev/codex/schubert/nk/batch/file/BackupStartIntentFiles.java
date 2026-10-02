@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -292,8 +293,22 @@ public final class BackupStartIntentFiles implements AutoCloseable {
 
   /** Recovery only: preserve a strict existing quarantine, or create one. Never retire/reuse it. */
   void quarantinePublication() throws IOException {
+    require(name.equals("permit-start.intent"));
+    quarantineFixed();
+  }
+
+  /** SSC168: fixed same-epoch child quarantine only; never arbitrary namespace repair. */
+  void quarantineService(StartupPermitRecords.Epoch invalid, ServiceConfigFiles.Service service)
+      throws IOException {
+    Objects.requireNonNull(invalid);
+    Objects.requireNonNull(service);
+    require(invalid.state() == StartupPermitRecords.State.INVALID);
+    require(name.equals(invalid.epoch() + "." + service.name() + ".start.intent"));
+    quarantineFixed();
+  }
+
+  private void quarantineFixed() throws IOException {
     synchronized (lock) {
-      require(name.equals("permit-start.intent"));
       gate.verify();
       var directory = directory();
       boolean[] entered = {false};

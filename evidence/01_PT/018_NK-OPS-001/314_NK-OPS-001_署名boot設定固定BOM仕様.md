@@ -1,5 +1,7 @@
 # 314 NK-OPS-001 署名boot設定固定BOM
 
+固定Source実測：91b010509e715e2b097c955d04f21c23f3529966、PG430-full-boot-bom、2900PT/438suite/FES0/static6zero、2026-10-03 02:30:41/16m13/exit0。manifest56c8dde9f05ca784718424cc78e2e4539a9cf3812a7d892945cb3dbfc79ecf24、log73048e3a56c4cd929f2f6bb48acb85229f6dc5a0af238c6a3857f5c15d2bff04。host未網羅B1222/L3467/M564/C39、正式100%非認定。実候補PG430は181artifact/61deps/25SQL、原署名+全BOMverify実exit0（8620b156fc5e8dd7c239534723c207470b1329d84b2be04efd56fb0e20db35cf）、activate実exit0（1472d99385176efcd88aff7e6b095957b9a7e9ea8162a40bf88e7e760752ceb5）、Unit差分0/既存PTdrop-in不変更。新署名manifest ecef234624ece66c69d81383f722aee046da7b0dcab8cf10ec4df3b3d2dd1375。signed templateの同梱と実BOM検証まで実証、installed tmpfiles/次boot/Web/CHR/native coverageは未受入。
+
 選択実測：2026-10-03 01:59:36 JST、pg430-boot-bom-selected.log、exit0、100PT/15suite/FES0、SpotBugs6module各0。FULLBOM010とISSCOLD008を含む最終Source固定前の暫定試験。最終全6spotless:checkは02:12:45 exit0。全6freshとnativeの証拠を代替しない。
 
 2026-10-03、RD SYS004/OPS009、UI251/253、SS343 SSC165/167、BUG536/YKT380。対象ReleasePayloadVerification.layout/全tree/file、AssembleReleaseFixtureの固定tmpfiles copy。既存署名/readonly/inventory/所有/再open/全jar/sql/未知path拒否は不変更。

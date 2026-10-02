@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
@@ -46,7 +47,172 @@ public final class RootFailedStartRecovery {
     void verify(Evidence expected) throws IOException;
   }
 
+  /** Fixed two-child correlation, not physical closure or historical success authority. */
+  public record PairEvidence(Evidence api, Evidence web) {
+    public PairEvidence {
+      Objects.requireNonNull(api);
+      Objects.requireNonNull(web);
+      if (api.service() != ServiceConfigFiles.Service.API
+          || web.service() != ServiceConfigFiles.Service.WEB
+          || api.invalid().state() != StartupPermitRecords.State.INVALID
+          || !api.invalid().equals(web.invalid())
+          || !api.permit().equals(web.permit())
+          || !api.permitSha256().equals(web.permitSha256())
+          || !api.owner().equals(web.owner())
+          || api.child().pid() == web.child().pid()
+          || api.child().invocation().equals(web.child().invocation()))
+        throw new IllegalArgumentException("failed startup pair unavailable");
+    }
+
+    @Override
+    public String toString() {
+      return "FailedRootPair[actual=<redacted>]";
+    }
+  }
+
+  @FunctionalInterface
+  public interface PairProof {
+    void verify(PairEvidence expected) throws IOException;
+  }
+
   private RootFailedStartRecovery() {}
+
+  /** SSC168/ROOTPAIR001: both fixed child intents, under continuously owned M. */
+  public static PairEvidence observePair(OwnedTransferDirectory root, InodeSecurityCalls security)
+      throws IOException {
+    return observePair(root, security, new StartupPermitFiles.NioIo());
+  }
+
+  static PairEvidence observePair(
+      OwnedTransferDirectory root, InodeSecurityCalls security, StartupPermitFiles.Io io)
+      throws IOException {
+    var expected = readPair(root, security, io);
+    for (String name : pairNames(expected))
+      new BackupStartIntentFiles(
+              root,
+              security,
+              io,
+              () -> require(expected.equals(readPair(root, security, io))),
+              name)
+          .observeQuarantine();
+    require(expected.equals(readPair(root, security, io)));
+    return expected;
+  }
+
+  private static PairEvidence readPair(
+      OwnedTransferDirectory root, InodeSecurityCalls security, StartupPermitFiles.Io io)
+      throws IOException {
+    var api = read(root, security, io, ServiceConfigFiles.Service.API);
+    var web = read(root, security, io, ServiceConfigFiles.Service.WEB);
+    try {
+      var pair = new PairEvidence(api, web);
+      require(api.equals(read(root, security, io, ServiceConfigFiles.Service.API)));
+      require(web.equals(read(root, security, io, ServiceConfigFiles.Service.WEB)));
+      return pair;
+    } catch (IllegalArgumentException invalid) {
+      throw new IOException("failed startup pair unavailable");
+    }
+  }
+
+  private static List<String> pairNames(PairEvidence expected) {
+    String epoch = expected.api().invalid().epoch().toString();
+    return List.of(epoch + ".WEB.start.intent", epoch + ".API.start.intent", "permit-start.intent");
+  }
+
+  /** All three inodes captured before unlink; fixed reverse start order under trusted proof. */
+  public static void retirePair(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      PairEvidence expected,
+      PairProof proof)
+      throws IOException {
+    retirePair(root, security, new StartupPermitFiles.NioIo(), expected, proof);
+  }
+
+  static void retirePair(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      StartupPermitFiles.Io io,
+      PairEvidence expected,
+      PairProof proof)
+      throws IOException {
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(proof);
+    require(expected.equals(observePair(root, security, io)));
+    BackupStartIntentFiles.Gate gate =
+        () -> {
+          require(expected.equals(readPair(root, security, io)));
+          proof.verify(expected);
+        };
+    var markers =
+        pairNames(expected).stream()
+            .map(name -> new BackupStartIntentFiles(root, security, io, gate, name))
+            .toList();
+    try {
+      var intents = new java.util.ArrayList<BackupStartIntentFiles.Intent>();
+      for (var marker : markers) intents.add(marker.observeQuarantine());
+      for (int index = 0; index < markers.size(); index++) {
+        markers.get(index).retire(intents.get(index));
+        root.sync();
+        gate.verify();
+      }
+      StartupLaunchFiles.requireNoServiceResidue(root, security, io);
+      gate.verify();
+    } catch (IOException | RuntimeException | Error failure) {
+      try {
+        quarantinePair(root, security, io, expected);
+      } catch (IOException | RuntimeException | Error uncertain) {
+        failure.addSuppressed(uncertain);
+      }
+      throw failure;
+    }
+  }
+
+  /**
+   * Restore publication first, then independently try both children; uncertainty is never success.
+   */
+  public static void quarantinePair(
+      OwnedTransferDirectory root, InodeSecurityCalls security, PairEvidence expected)
+      throws IOException {
+    quarantinePair(root, security, new StartupPermitFiles.NioIo(), expected);
+  }
+
+  static void quarantinePair(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      StartupPermitFiles.Io io,
+      PairEvidence expected)
+      throws IOException {
+    Objects.requireNonNull(expected);
+    var failure = new IOException("failed startup pair quarantine uncertain");
+    for (String name :
+        List.of(
+            "permit-start.intent",
+            expected.api().invalid().epoch() + ".API.start.intent",
+            expected.api().invalid().epoch() + ".WEB.start.intent")) {
+      try {
+        var marker =
+            new BackupStartIntentFiles(
+                root,
+                security,
+                io,
+                () -> require(expected.equals(readPair(root, security, io))),
+                name);
+        if (name.equals("permit-start.intent")) marker.quarantinePublication();
+        else
+          marker.quarantineService(
+              expected.api().invalid(),
+              name.endsWith(".API.start.intent")
+                  ? ServiceConfigFiles.Service.API
+                  : ServiceConfigFiles.Service.WEB);
+        root.sync();
+      } catch (IOException | RuntimeException | Error uncertain) {
+        failure.addSuppressed(uncertain);
+      }
+    }
+    if (failure.getSuppressed().length != 0) throw failure;
+    require(expected.equals(observePair(root, security, io)));
+  }
 
   /** Read-only pre-stop capture under M. Does not retire, invalidate, issue, stop or resume. */
   public static Evidence observe(OwnedTransferDirectory root, InodeSecurityCalls security)

@@ -279,5 +279,16 @@ if int(identifier[2:5]) >= 430:
     manifest['testIds'].extend(['FULLBOM010', 'ISSCOLD008'])
     manifest['trigger'] = 'SSC167 fixed signed boot-config payload path and same cold-owner oracle boundary closure: full shared six regression before new signed native candidate'
     manifest['limitations'].insert(0, 'PG429/sourcec3 full2898 is preserved; PG429 signed signature passed but full BOM refused tmpfiles layout; current/approval/permits were unchanged')
+if int(identifier[2:5]) >= 431:
+    manifest['ssc'].append('SSC-168')
+    manifest['bugs'].extend(['BUG-539', 'BUG-540', 'BUG-541', 'BUG-542'])
+    manifest['ykt'].extend(['YKT-383', 'YKT-384', 'YKT-385', 'YKT-386'])
+    manifest['testIds'].extend(['ROOTPAIR001..010'])
+    manifest['trigger'] = 'SSC168 fixed same-owner two-child failure recovery/quarantine contract: frozen six-module full regression before typed PG430 native retirement and next Web assembly'
+    manifest['limitations'] = ['PG430/source91 parent API200/Root-ordinary Web50 is historical, not reused as new-source acceptance',
+        'PG430 old-generation typed pair native retirement must be independently preserved/verified',
+        'Web full business assembly/Caddy/original DONE/normal retirement/real CHR-A01/L01 remain pending',
+        'Native positive coverage and full-scope 100% formal acceptance remain pending',
+        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
