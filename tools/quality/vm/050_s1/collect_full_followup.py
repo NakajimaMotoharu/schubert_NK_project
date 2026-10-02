@@ -361,5 +361,19 @@ if int(identifier[2:5]) >= 436:
         'QA048 receipt reference and QA049 completed-token retention are unapproved; no proposed schema/session JSON/oracle mutation',
         'Full ordinary Web business ready/Caddy/original DONE/normal intent retirement/real CHR-A01/L01/native100 remain pending',
         'Full formal scope/100percent and PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
+if int(identifier[2:5]) >= 437:
+    manifest['bugs'].extend(['BUG-560', 'BUG-561'])
+    manifest['ykt'].extend(['YKT-404', 'YKT-405'])
+    manifest['testIds'].extend(['PT-NTF-HTTP001..010', 'PT-WEB-050..053', 'PT-WEB-CSRF054'])
+    manifest['trigger'] = 'PG-D347/348 Notification owner-only HTTP/query/DOM and CSRF rotation postconditions, common MVC/CSS/security: source-frozen six-module regression'
+    names = {'NotificationSearchForm', 'NotificationListViewModel', 'NotificationController', 'NotificationMvcConfiguration', 'EncryptedSessionCsrfTokenRepository'}
+    notification_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(notification_coverage) == names
+    assert all(k['missed'] == 0 for value in notification_coverage.values() for k in value.values())
+    manifest['notificationSecurityScopeCoverage'] = notification_coverage
+    manifest['limitations'].extend([
+        'PG436 source22b95 full2956 and PG437 selected WIP results are not reused as this fresh source full acceptance',
+        'SCR020 Notification GET/HEAD is connected; SCR021 detail/cancel and full business/native Web assembly remain incomplete'])
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

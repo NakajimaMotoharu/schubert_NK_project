@@ -88,6 +88,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
           "logs",
           "admin/user-list",
           "admin/user-detail",
+          "notifications/list",
           "error/error",
           "scenarios",
           "scenario-routes",

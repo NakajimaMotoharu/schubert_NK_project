@@ -16,3 +16,5 @@
 | PT-NTF-HTTP010 | 8thread100独立context/UUID/filter、null/全例外/境界 | 混線0/100別MessageID/全buffer0/pending0、line/method/class/branch100%・静的6zero・strict compile/NullAway/秘密/trace。正式native/fullScopeは別未受入 |
 
 Productionでexpectedを生成しない。scope/実行Source/日時/OS/JDK/Maven/command/終了code/FES/counter/BUG/YKT・証跡path/hashは016060/manifestへ実測後記録。質問受付第4table QA048・完成token履歴QA049/取消・native fullReadyは本参照仕様の合格へ算入しない。
+
+BUG560/YKT404：成功fixtureの全rowはUI byteで既知のtype/date条件に整合し、異なる質問のreceiptは独立Crockford文字列で一意。全byte request expectedはProductionを呼ばずliteralのまま。type-state不一致等のnegative故障は明示overrideとして分離する。PG-D348/BUG561/YKT405の共通CSRF変更はPT-WEB-050～053の実DB/filter/ID/CookieとPT-WEB-CSRF054のno-op/null返却/観測session消失/返却ID不一致/unknown伝播を関連選択へ追加し、4指標網羅と同Source全6回帰を他機能前に要求する。正式認定・native readinessをこれらの選択成功へ混同しない。

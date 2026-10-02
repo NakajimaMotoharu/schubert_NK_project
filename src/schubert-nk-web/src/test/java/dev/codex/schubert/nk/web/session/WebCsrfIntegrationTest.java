@@ -175,6 +175,51 @@ class WebCsrfIntegrationTest {
   }
 
   @Test
+  void web054RotationResultMustMatchNewObservedSession() {
+    var csrf = new EncryptedSessionCsrfTokenRepository();
+    for (int variant = 0; variant < 4; variant++) {
+      int fault = variant;
+      var original = new MockHttpSession(null, "independent-old-id");
+      original.setAttribute("csrfToken", TOKEN);
+      var rotated = new MockHttpSession(null, "independent-new-id");
+      rotated.setAttribute("csrfToken", TOKEN);
+      var request =
+          new MockHttpServletRequest() {
+            private boolean called;
+
+            @Override
+            public HttpSession getSession(boolean create) {
+              if (!called) return original;
+              return fault == 1 ? null : fault == 3 ? original : rotated;
+            }
+
+            @Override
+            public String changeSessionId() {
+              called = true;
+              return fault == 0
+                  ? null
+                  : fault == 2
+                      ? "independent-other-id"
+                      : fault == 3 ? "independent-old-id" : "independent-new-id";
+            }
+          };
+      unavailable(() -> csrf.generateToken(request));
+      assertEquals(TOKEN, original.getAttribute("csrfToken"));
+      assertEquals(TOKEN, rotated.getAttribute("csrfToken"));
+    }
+    var unknown = new AssertionError("rotation unknown");
+    var request =
+        new MockHttpServletRequest() {
+          @Override
+          public String changeSessionId() {
+            throw unknown;
+          }
+        };
+    request.getSession().setAttribute("csrfToken", TOKEN);
+    assertSame(unknown, assertThrows(AssertionError.class, () -> csrf.generateToken(request)));
+  }
+
+  @Test
   void web052EveryPostRejectsBeforeBusinessWithoutCsrf() throws Exception {
     try (var f = fixture()) {
       var repo = adapter(f);

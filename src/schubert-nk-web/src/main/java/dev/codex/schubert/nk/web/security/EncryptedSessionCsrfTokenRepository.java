@@ -21,7 +21,16 @@ public final class EncryptedSessionCsrfTokenRepository implements CsrfTokenRepos
   public CsrfToken generateToken(HttpServletRequest request) {
     Objects.requireNonNull(request, "request");
     HttpSession existing = request.getSession(false);
-    if (existing != null) request.changeSessionId();
+    if (existing != null) {
+      // PG-D348/SS314: prove fixation protection, not merely a successful adapter call.
+      String previousId = existing.getId();
+      String rotatedId = request.changeSessionId();
+      HttpSession rotated = request.getSession(false);
+      if (rotatedId == null
+          || rotated == null
+          || !rotatedId.equals(rotated.getId())
+          || rotatedId.equals(previousId)) throw new SessionStoreException();
+    }
     return materialize(Objects.requireNonNull(request.getSession(true), "session"));
   }
 

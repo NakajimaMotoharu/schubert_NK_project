@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR020/NTF/UI224,236/SS313,332/PG-D347/PT-NTF-HTTP001..010. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('通知')}"></head>
+<body><main class="page notification-page">
+  <header class="topbar"><h1>通知</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <div id="notification-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}" th:text="${issue.value}"></li></ul></div>
+  <form method="get" th:action="@{/notifications}">
+    <label>通知区分<select name="type" aria-describedby="notification-errors">
+      <option value="" th:selected="${page.filters.values.type.empty}">すべて</option>
+      <option value="ACCEPTED" th:selected="${page.filters.values.type == 'ACCEPTED'}">受付通知</option>
+      <option value="COMPLETED" th:selected="${page.filters.values.type == 'COMPLETED'}">処理済通知</option>
+      <option value="ERROR" th:selected="${page.filters.values.type == 'ERROR'}">エラー通知</option>
+    </select></label>
+    <label>受付日From<input type="date" name="from" th:value="${page.filters.values.from}" aria-describedby="notification-errors"></label>
+    <label>受付日To<input type="date" name="to" th:value="${page.filters.values.to}" aria-describedby="notification-errors"></label>
+    <button type="submit">検索</button>
+  </form>
+  <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' notifications / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
+  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <section th:if="${page.page.present}">
+    <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
+    <table th:if="${!page.rows.empty}"><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
+    <tbody><tr class="notification-row" th:each="notification : ${page.rows}">
+      <td class="type" th:text="${notification.type}"></td><td class="receipt" th:text="${notification.receiptId}"></td>
+      <td class="submitted-at" th:text="${notification.submittedAt}"></td><td class="updated-at" th:text="${notification.lastUpdatedAt}"></td>
+      <td class="notification-summary" th:text="${notification.summary}"></td><td><a class="detail" th:href="${notification.detailHref}">明細</a></td>
+    </tr></tbody></table>
+  </section>
+</main></body></html>

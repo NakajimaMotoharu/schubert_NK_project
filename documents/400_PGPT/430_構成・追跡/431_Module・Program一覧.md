@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D347/348追跡：NK-WEB-002/SCR020 NotificationSearchForm.bind/toRequest/values/issues・NotificationListViewModel.success/invalid/rows/links・NotificationController.list・NotificationMvcConfiguration.notificationController・notifications/list.html/css → RD FUN010/NTF001～012/AUT → UI222/224 §4/236 §8 → SS313/314/323/332 → PT-NTF-HTTP001～010/NotificationControllerTest/016059・060。共通CSRF EncryptedSessionCsrfTokenRepository.generateTokenのID変更後条件 → RD AUT001～004/UI226/SS314 → PT-WEB-050～053/CSRF054/WebCsrfIntegrationTest/015001。選択113PT/static6zero/対象5class全4counter0は暫定であり、同Source全6回帰・native fullReady・CHR・正式認定は別。BUG560561/YKT404405へ修正前登録、QA047048049の未承認範囲を実装しない。
+
 PG-D346追跡：NK-WEB-002/SCR017 UserAdminController.detail/UserDetailViewModel.from/getValues/getTopBar/admin/user-detail.html → RD FUN009/AUT002 → UI222/225 §5/236 §5 → SS313/314/323/332 → PT-USER-DETAIL001～008/UserAdminControllerTest.detail001～008/016057・058。参照GET/HEAD・ADMIN/現在API認証・要求target照合・最大2session/安全表示・独立wire/DOMを検証、User更新form/成功POST/完成token履歴QA049/全native readyは別未受入。
 
 PG-D345追跡：NK-WEB-002/SCR016 UserCreateForm.bind/displayValues/getIssues/isValid/toRequest/close → RD FUN009/AUT002 → UI225 §4/236 §4 → SS313/314/323 → PT-USER-CREATE001～008/UserCreateFormTest/016055・056。独立372byte wire/password Unicode境界/閉binding/null/並行/再表示secret排除を選択83PT/static6zero・対象4coverage0で確認（限定、未認定）。User成功POST/完成token履歴QA049/全Web native readyは別未完了。

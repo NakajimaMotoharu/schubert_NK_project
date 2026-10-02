@@ -1,0 +1,270 @@
+{
+  "id": "PG437-notification-selected-v2",
+  "formal": false,
+  "sourceCommit": "02beb735b6599a2bb829d2e34ff30d18919f0ba5",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/NotificationSearchForm.java",
+      "sha256": "353b5b143bc5011893086dbcd166b4be154b227782b97e76eb504ff7fac19667"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java",
+      "sha256": "83910a8ea083ba93c7e47e83e2ac5e12002cc8ccb3a915742aaf7056c68a9227"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+      "sha256": "7a5bf8c0335d4b005c06e8b78ddfa15ecf1817c2ae21d03dbfbae1e116b82d71"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java",
+      "sha256": "e2797452f0e87d7358e16753b2eaa27361e6a0dfe66e5d172fe334e9ca1982b6"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java",
+      "sha256": "6aaac6b9c4fef76502a88af522a3d29c9022cb2531926b79f14cbbb492fae381"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+      "sha256": "a6635c9d50282a5e9b7cbe318c51bddcea3334a5ec8f543768aa0e64106efcc9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/notifications/list.html",
+      "sha256": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+      "sha256": "453aeff2f537e8b1bf07de7467c923f2bf5e15d3ef7b66ae2c95f11caf1757d4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java",
+      "sha256": "9ca1ed282d66c13df7b9f650ea62d72dbe78a764cb253cd3d74cdea2aba35739"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebCsrfIntegrationTest.java",
+      "sha256": "88bfb4a9aee29ad94a59c2372772aca1bedc0e7fa5ea7faed7497ac7f813dc4b"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T07:51:16+09:00",
+  "exitCode": 0,
+  "tests": 113,
+  "suites": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-NTF-HTTP001..010",
+    "PT-WEB-050..053",
+    "PT-WEB-CSRF054"
+  ],
+  "bugs": [
+    "BUG-560",
+    "BUG-561"
+  ],
+  "ykt": [
+    "YKT-404",
+    "YKT-405"
+  ],
+  "command": "six reactor spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,QuestionQueryApplicationServiceTest,QuestionQueryRepositoryTest,QuestionQueryReplayServiceTest,QuestionQueryRequestTest,NotificationControllerTest,UserAdminControllerTest,WebBusinessWireClientsTest,WebApplicationTest,ApiSessionInvalidTest,WebCsrfIntegrationTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "NotificationController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 152
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 42
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "NotificationSearchForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 360
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 44
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 68
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 34
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "NotificationMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "NotificationListViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 389
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 40
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 77
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 37
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "EncryptedSessionCsrfTokenRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 146
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "54eefb30fc24a6ed25d1e3f1da4a17ba719995910b905405325b9c77ff5dbb16",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "five target classes missed0, cumulative exec not formal coverage100",
+    "Notification detail/cancel and full Web business assembly/native ready/Caddy/CHR pending",
+    "QA047 native owner, QA048 receipt reference and QA049 completed-token lifecycle remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest.xml",
+      "sha256": "e7d85fc0debf8774a1187db78a2f7800218864583d7841272c5b6dea5f0c5637"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest.xml",
+      "sha256": "af34b0cb22ebaabe6b6b6c980ee15d0f2ce061b9b8b54ecab38b0ab92775748b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest.xml",
+      "sha256": "382a3cfa188fd4bea370dbd2cec12f884f9769f5f2fc522d7367126874f3e8c9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml",
+      "sha256": "36223f18d26e6efb609e726f9445ad4ac0773bd350e9159d71347dee998ee528"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "74a5551e9803648bd164acef384f0039ba55f7fa08284a2b34bb6052677ebf1d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "ec11f36fdf708265cefe07cec546d82e28284953cc0a9dc8487ef715723cf1f8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "5137540035c24a7fbc65368e557e3061421a2f71b2855e1ad7a0f777df88e82f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "bc53343129d046d1a8fb412c3327a4cebbe26f5344628728f8f90b25fb37a1d5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "e6e08d1d6083caa8ef0d0cec2850a8f13765bfd26c5e758593f72c6e27dcc9df"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "f62c3b2ee6d25faefc1581d39eaf08eb96e4dcab91569d32d4613328f075b8e6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "1f99284e7f7e869b4c81008ff7f5be82d3e8590478e7d3185a9e9e0482d288df"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "317c18a4b21f1157c62304ba16a61608a8cbdbab88d938d820d2d1046682db48"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.NotificationControllerTest.xml",
+      "sha256": "ec06cd2244b372b960c7f02bc3d56cd1fb738f32b6b9d864ed5b21bb35568f77"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "55faa080a71692f6db0d6fcc3cf9eb3e547bd4c0f001a06d1394d7e0a8cac90d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG437-notification-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest.xml",
+      "sha256": "7ae2b57e224bbffa177b22fb4609834113012b27f6a8d716a6a579581bb20f78"
+    }
+  ]
+}
