@@ -64,7 +64,7 @@ public final class ProtectedReadWireClient {
               input.layoutId(),
               1,
               MessageKind.REQUEST,
-              InteractionKind.SYNCHRONOUS,
+              layout.interactionKind(),
               id,
               id,
               Objects.requireNonNull(clock.instant(), "instant").truncatedTo(ChronoUnit.MILLIS),
