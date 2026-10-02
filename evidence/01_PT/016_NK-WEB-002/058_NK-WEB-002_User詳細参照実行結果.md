@@ -1,5 +1,7 @@
 # User詳細参照実行結果
 
+同Source全回帰確定（2026-10-03 07:25:34 JST）：source22b95ae86c1e19116d4d2dbc918c30e730b18b33、PG436-full-user-create-detail、全6 2,956PT/444suite/FES0/static6zero/16:18exit0、User一覧/詳細/作成入力7class全4counter miss0。UserDetailViewModel B10/L37/M7/C1、UserAdminController B18/L82/M4/C1 covered・miss0、新未網羅0。BUG559/YKT403は同Source再試験で完了。018manifest SHAd700b910c99d73795b7100c8d38fdad4b466af3b2a5f69f1d7238f5e9f0f5cb6、WorkPG379/pg436-hostの全6 classes/jacoco.exec/XML同byte退避。全host残1221/3474/567/39はPG435同値、User POST/QA049/fullWeb native/Caddy/DONE/CHR/native100/正式run24は未完了。
+
 2026-10-03 07:07:28 JST、PG-D346/016057、HEAD5a984217db72dbe63d05de9c9c58dce4ac4c73d3＋WIP。PG436-user-detail-selected-v3全6選択91PT/13suite/FES0/静的6module0・Spotless/strict compile/NullAway/1:36 exit0、User一覧＋新詳細＋作成入力の7対象classはline/method/class/branch missed0（全counter missed0）。safe manifest SHA032b19ee2426b48696cea083436ba5c83443e7d2e5a16ef2f4ae539578389bbe、source11file/hash/command/環境/13safeJUnit/終了code・日時はevidence/provisional/PG436-user-detail-selected-v3/manifest.json。限定cumulative execを正式全回帰へ流用しない。
 
 詳細新8JUnit PT-USER-DETAIL001～008はUI236のUDT data12/response320独立literal、0000/0200/全9error/0102、要求ID再検査/0..2session/version1以上、ADMIN/USER/null/wrongprincipal/不存在・数値route、MVC/Thymeleaf全表示escape・common nav/LogoutCSRF/GETHEAD、8thread100 context/MessageID isolation/元buffer0/pending0、実Jetty暗号session/no-store/USER403/匿名302/API0102 Cookie終端を確認した。更新form・成功POST・完成token履歴QA049、native full Web ready/Caddy/DONE/intent退役/実CHR/全scope同Source100%、正式run24/1964PT/53scope/48.3%は未完了。
