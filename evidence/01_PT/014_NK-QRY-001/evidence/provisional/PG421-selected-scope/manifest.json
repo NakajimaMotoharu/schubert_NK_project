@@ -1,0 +1,726 @@
+{
+  "run": "PG421-SELECTED-v14",
+  "source": "39b0b90dc73ab6ab5a7656940e5dde591f36de8a",
+  "branch": "dev-foundation",
+  "status": "provisional-not-formally-certified",
+  "finished_at": "2026-10-02T09:37:24+09:00",
+  "exit_code": 0,
+  "environment": {
+    "OS": "Linux7.0.0-34-generic",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "database": "isolated PostgreSQL18"
+  },
+  "command_reference": "evidence/01_PT/014_NK-QRY-001/002_NK-QRY-001_実行結果.md",
+  "log_sha256": "7847ce96c304a04f11746bfcb99abb1703b60ee358e710429715d101e9f264f8",
+  "counts": {
+    "tests": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "module": "protocol",
+      "name": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "headerEncodingMatchesIndependentUi232GoldenVector",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "responseAndEventHeadersRoundTripWithoutLeakingContext",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "method": "transportAndRouteContractsRejectEveryMismatch",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "storage",
+      "name": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "filesystemFlagsAndFailures",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "platformAndSymbolAdmission",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "heldInodeSurvivesReplacement",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "concurrentReadsStayIndependent",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "interfacesAndRedaction",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "actualAclAndUid",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "aclReturnAndErrnoBoundaries",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "heldElfCapabilityAbsenceRequiresExactEnodataAndNativeHeldFile",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "method": "canonicalCapabilityAndBounds",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "name": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg006ShippedTemplatesMatchApprovedDefaults",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg001IndependentDefaultsAndCanonicalHash",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg007IndependentManifestCountAndCanonicalHash",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg005NullUnknownAndConcurrentDeterminism",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "validRowsDeleteAndRetainExactMetadata",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "retentionBackupAndSqlAuthority",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "concurrentAndDurableMixedRuns",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "queryProfilesAndFrozenSnapshots",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "scope004ScopedQuestionWireAndOldRawAreBothMaintenanceOnlyProfiles",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "canonicalIdentityReferencesAndNulls",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "failuresRollbackAndResume",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "goldenBoundsAndSemanticDamage",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "method": "appendOnlyInventoryAndClosedRoutes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+          "method": "scope001LiteralFramesAndInspectionOnlyLegacyAreCallerOwned",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+          "method": "scope003NullUnknownScopeTruncationMagicAndCrossRouteAreNeverGranted",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest",
+          "method": "qry009CanonicalFieldsNullAndAllLayoutsUseIndependentJce",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest",
+          "method": "qry010MalformedNullAndRequestDependentPageAreRejected",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry011AllDecodedRoutesBindOriginalValuesAndBorrowReadOnlyConnection",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry001ScopeSortPagingAndLiteralKeywordAreIndependent",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "ntf003AllFiveStatesAndDeletedProjectionPreserveNotificationRows",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "ntf001AdminStillOnlySelfAndUpdatedAtIdOrderUsesFixedFifty",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry003Ntf002NullInvalidPageAndNonReadTransactionsAreRejected",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry004DetailOwnerAdminDeletedAndAbsenceNeverLeak",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry002StatesUnicodeSnippetAndUtcMicrosecondProjectionNeverUpdateDb",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "method": "qry005DriverProjectionShapeAndCloseFaultsCannotProduceSuccess",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "method": "qry016PublicNullContractsInvalidTimesAndClosedKeysFailWithoutSecretDiagnostics",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "method": "qry017OptionalIdMinimumUsesXLeftPaddingNotNumericZeroPadding",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "method": "qry014DefiniteErrorsRetainScopeAndNonstoredDenialsHaveIndependentFiller",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "method": "qry013FrozenFourRoutesScopeAndRepliesMatchIndependentWholeBytes",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "method": "qry015LegacyMalformedEncryptedAndMetadataCannotGrantReplay",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "module": "api",
+      "name": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry020NarrowUserStageStaysUserAndFinalInboxWinnerIsRechecked",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry018AllRoutesCommitFrozenResultsAndIndependentWireWithTwentyFourHourRetention",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry022MismatchAndDatabaseFailuresNeverReturnSuccessOrModifySavedResult",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry023DefiniteFailureCapacityAndInitialInvalidContextKeepOriginalRows",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry025SqlAuditCountSuppressedCloseRollbackAndFinalResourceFailureAreAtomic",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry026PublicAssemblyConstructorNullInvariantAndFreshUuidHaveIndependentPayload",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry019AdminSnapshotCannotLeakToUserIncludingEmptyPageAndNewStage",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry024ReadSavedRowsCannotDisappearChangeOrBeRepaired",
+          "status": "pass"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "method": "qry021LatestRevokedOrChangedOwnerIsNonstoredAndValidationCannotAuthorize",
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "static_analysis": [
+    {
+      "module": "protocol",
+      "bugs": 0
+    },
+    {
+      "module": "storage",
+      "bugs": 0
+    },
+    {
+      "module": "bootstrap",
+      "bugs": 0
+    },
+    {
+      "module": "api",
+      "bugs": 0
+    }
+  ],
+  "coverage": {
+    "type": "current-byte cumulative development exec; fresh full regression not run",
+    "classes": {
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryException": {
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryRepository": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 56
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 156
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 30
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 21
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 27
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Failure": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Rejected": {
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 53
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 144
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 16
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Saved": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 46
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 113
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 25
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 44
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService$Snapshot": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Completed": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Mismatch": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Ready": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter$Event": {
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Rejection": {
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$Success": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRequest": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 32
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 102
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 16
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "independent_fixture_hashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationServiceTest.java": "23efc4611c9bf2cdf1381e14021d3f9d464067d22fd9686ab08d7c23f34d9200",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayServiceTest.java": "7404e5c3b7cec23ec65fc27410ee7b222957a54f8470f3a39d1d5480af93ac2c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest.java": "4e5868f1ddff22b40a52d75d57331b95205f97adaeb1d1165a74882c46e738da",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java": "723691babb62957daf76e2b62a4bb26c08040d8f5d29059599b06c9249dbb7e3",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java": "c0d1528c2607495aed6729abcdca217c737453c23a13da09e61d10ee92e2e22f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java": "2150e5a52c9dc8f4374f2edfd39ce1b56bb6d9f0bd7f5025ff75d0ad483810a2"
+  },
+  "test_spec": "evidence/01_PT/014_NK-QRY-001/001_NK-QRY-001_質問回答照会・削除単体テスト仕様書.md",
+  "bugs": [
+    "BUG-457",
+    "BUG-458",
+    "BUG-459",
+    "BUG-460",
+    "BUG-461",
+    "BUG-462",
+    "BUG-463",
+    "BUG-464",
+    "BUG-465",
+    "BUG-466",
+    "BUG-467",
+    "BUG-468"
+  ],
+  "ssc": [
+    "SSC-157"
+  ],
+  "limitations": [
+    "cancellation/deletion runtime not implemented",
+    "24-of-31 ordinary registration unchanged",
+    "native deployment/ready/CHR not accepted",
+    "fresh six-module/formal all-scope 100 percent pending"
+  ],
+  "redaction": "JUnit properties/stdout/stderr/provider diagnostics omitted; no credentials/password/session/token/key/db dump"
+}
