@@ -290,5 +290,10 @@ if int(identifier[2:5]) >= 431:
         'Web full business assembly/Caddy/original DONE/normal retirement/real CHR-A01/L01 remain pending',
         'Native positive coverage and full-scope 100% formal acceptance remain pending',
         'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 432:
+    manifest['bugs'].append('BUG-543')
+    manifest['ykt'].append('YKT-387')
+    manifest['trigger'] = 'BUG543 fixed same-M/A candidate host-read-only preparation before Pair native retirement: new frozen source six regression; source329 results retained but not reused'
+    manifest['limitations'].insert(0, 'PG431/source329 signed candidate placement only; missing host-RO preflight detected before native recovery, no intent/current change')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

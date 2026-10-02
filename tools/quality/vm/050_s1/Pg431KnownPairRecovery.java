@@ -11,7 +11,7 @@ import java.util.*;
 public final class Pg431KnownPairRecovery {
   static final Path STARTUP=Path.of("/run/schubert-nk/startup");
   static final Path STAGED=Path.of("/var/lib/pgpt-s1-preservation/pg431-pair-input");
-  static final Path SAVED=Path.of("/var/lib/pgpt-s1-preservation/pg431-pair-recovery");
+  static final Path SAVED=Path.of("/var/lib/pgpt-s1-preservation/pg432-pair-recovery");
   static final String OLD_SOURCE="91b010509e715e2b097c955d04f21c23f3529966";
   static final String OLD_DIGEST="ecef234624ece66c69d81383f722aee046da7b0dcab8cf10ec4df3b3d2dd1375";
   static final String EPOCH="e603398b-c164-4709-afc1-25117eac9995";
@@ -85,7 +85,7 @@ public final class Pg431KnownPairRecovery {
     if(!old.manifestSha256().equals(OLD_DIGEST)
         || !Arrays.equals(old.encode(),Pg410KnownAuthRecovery.material(Path.of("/etc/schubert-nk/release-approval/current"),1024))
         || !Files.readSymbolicLink(Path.of("/opt/schubert-nk/current")).equals(Pg387TrustedDeployment.RELEASE))throw new IllegalStateException("same old approval/current required");
-    configure("PG431",candidateSource);Pg387TrustedDeployment.verify();configure("PG430",OLD_SOURCE);
+    configure("PG432",candidateSource);Pg387TrustedDeployment.verify();configure("PG430",OLD_SOURCE);
   }
   static void physical(List<Pg410KnownAuthRecovery.Receipt> old,RootFailedStartRecovery.PairEvidence pair) throws Exception {
     if(!Files.readString(Path.of("/proc/sys/kernel/random/boot_id")).trim().equals(BOOT) || !known(pair))throw new IllegalStateException("same boot/generation required");
@@ -181,7 +181,12 @@ public final class Pg431KnownPairRecovery {
           var backup=Pg407FailedRootRecovery.backupSnapshot();save("backup-before.log",backup.toString().getBytes(StandardCharsets.UTF_8));
           var bytes=startup();for(var item:bytes.entrySet())save(item.getKey(),item.getValue());
           var fixture=Pg425KnownApiRecovery.fixtureSnapshot();save("fixture-before.log",fixture.getBytes(StandardCharsets.UTF_8));
-          physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);Pg387TrustedDeployment.sync(SAVED);
+          physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());
+          // BUG543/YKT387: full host BOM requires an immutable candidate, not just file modes.
+          // Freeze only here, inside the same M/A and authenticated complete terminal set.
+          // The rejected-preflight PG431/source329 candidate stays unchanged and unactivated.
+          configure("PG432",args[0]);Pg387TrustedDeployment.freezeCandidate();configure("PG430",OLD_SOURCE);
+          signed(args[0]);Pg387TrustedDeployment.sync(SAVED);
           RootFailedStartRecovery.retirePair(root,LinuxInodeSecurity.create(),pair,expected->Pg387TrustedDeployment.checked(()-> {
             if(!pair.equals(expected))throw new IllegalStateException("same borrowed pair required");
             physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);
