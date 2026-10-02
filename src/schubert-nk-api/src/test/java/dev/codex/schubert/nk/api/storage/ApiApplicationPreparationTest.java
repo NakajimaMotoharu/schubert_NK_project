@@ -59,7 +59,14 @@ final class ApiApplicationPreparationTest {
           "USTREQ01",
           "URLREQ01",
           "UPWREQ01",
-          "ULKREQ01");
+          "ULKREQ01",
+          "QSBREQ01",
+          "QSSREQ01",
+          "QSDREQ01",
+          "NTSREQ01",
+          "NTDREQ01",
+          "NTCREQ01",
+          "QDLREQ01");
 
   private DataSource unusedDatabase() {
     return (DataSource)
@@ -72,7 +79,7 @@ final class ApiApplicationPreparationTest {
   }
 
   @Test
-  void prep001RealProbeFullScanAndExisting24GraphAreBorrowedNotReady() throws Exception {
+  void prep001RealProbeFullScanAndAll31GraphAreBorrowedNotProcessReady() throws Exception {
     Path transfer = transfer();
     var identity = identity(transfer);
     var observed = new java.util.concurrent.atomic.AtomicReference<Set<String>>();
@@ -89,11 +96,27 @@ final class ApiApplicationPreparationTest {
           assets.identity,
           7,
           CLOCK,
-          processors -> {
+          () -> {
+            throw new AssertionError("no dispatch before request");
+          },
+          (processors, outbox) -> {
             assertEquals(EXPECTED, processors.keySet());
-            assertEquals(24, processors.size());
+            assertEquals(31, processors.size());
             assertThrows(UnsupportedOperationException.class, () -> processors.clear());
-            assertThrows(IOException.class, () -> new ApiSyncRequestDispatcher(processors));
+            assertNotNull(new ApiSyncRequestDispatcher(processors));
+            assertInstanceOf(
+                dev.codex.schubert.nk.api.application.question.QuestionSubmissionService.class,
+                processors.get("QSBREQ01"));
+            assertInstanceOf(
+                dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService
+                    .class,
+                processors.get("QSSREQ01"));
+            assertSame(processors.get("QSSREQ01"), processors.get("NTDREQ01"));
+            assertInstanceOf(
+                dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService
+                    .class,
+                processors.get("QDLREQ01"));
+            assertSame(processors.get("QDLREQ01"), processors.get("NTCREQ01"));
             assertTrue(Files.isDirectory(transfer.resolve("20260908")));
             try (var names = Files.list(transfer.resolve("20260908"))) {
               assertEquals(0, names.count());
@@ -132,7 +155,10 @@ final class ApiApplicationPreparationTest {
                     assets.identity,
                     count,
                     CLOCK,
-                    ignored -> calls.incrementAndGet()));
+                    () -> {
+                      throw new AssertionError("dispatch before exposure");
+                    },
+                    (ignored, outbox) -> calls.incrementAndGet()));
       assertThrows(
           MediaIntegrityException.class,
           () ->
@@ -145,7 +171,10 @@ final class ApiApplicationPreparationTest {
                   new StorageIdentity("unknown", assets.identity.group()),
                   7,
                   CLOCK,
-                  ignored -> calls.incrementAndGet()));
+                  () -> {
+                    throw new AssertionError("dispatch before exposure");
+                  },
+                  (ignored, outbox) -> calls.incrementAndGet()));
       Files.setPosixFilePermissions(transfer, PosixFilePermissions.fromString("rwx------"));
       assertThrows(
           IOException.class,
@@ -159,7 +188,10 @@ final class ApiApplicationPreparationTest {
                   assets.identity,
                   7,
                   CLOCK,
-                  ignored -> calls.incrementAndGet()));
+                  () -> {
+                    throw new AssertionError("dispatch before exposure");
+                  },
+                  (ignored, outbox) -> calls.incrementAndGet()));
       assertEquals(0, calls.get());
     }
   }
@@ -189,7 +221,10 @@ final class ApiApplicationPreparationTest {
                         assets.identity,
                         7,
                         CLOCK,
-                        ignored -> {
+                        () -> {
+                          throw new AssertionError("dispatch before exposure");
+                        },
+                        (ignored, outbox) -> {
                           if (failure instanceof IOException io) throw io;
                           if (failure instanceof RuntimeException runtime) throw runtime;
                           throw (Error) failure;
@@ -206,7 +241,7 @@ final class ApiApplicationPreparationTest {
     var database = unusedDatabase();
     var operation =
         (ApiApplicationPreparation.Operation)
-            ignored -> {
+            (ignored, outbox) -> {
               throw new AssertionError("must not expose");
             };
     Path transfer = transfer();
@@ -216,32 +251,91 @@ final class ApiApplicationPreparationTest {
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  null, credentials, transfer, directory, 7, CLOCK, operation));
+                  null,
+                  credentials,
+                  transfer,
+                  directory,
+                  7,
+                  CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  operation));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  database, null, transfer, directory, 7, CLOCK, operation));
+                  database,
+                  null,
+                  transfer,
+                  directory,
+                  7,
+                  CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  operation));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  database, credentials, null, directory, 7, CLOCK, operation));
+                  database,
+                  credentials,
+                  null,
+                  directory,
+                  7,
+                  CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  operation));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  database, credentials, transfer, null, 7, CLOCK, operation));
+                  database,
+                  credentials,
+                  transfer,
+                  null,
+                  7,
+                  CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  operation));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  database, credentials, transfer, directory, 7, null, operation));
+                  database,
+                  credentials,
+                  transfer,
+                  directory,
+                  7,
+                  null,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  operation));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiApplicationPreparation.execute(
-                  database, credentials, transfer, directory, 7, CLOCK, null));
+                  database,
+                  credentials,
+                  transfer,
+                  directory,
+                  7,
+                  CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
+                  null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ApiApplicationPreparation.execute(
+                  database, credentials, transfer, directory, 7, CLOCK, null, operation));
       assertThrows(
           IOException.class,
           () ->
@@ -252,6 +346,9 @@ final class ApiApplicationPreparationTest {
                   directory.resolve("missing"),
                   7,
                   CLOCK,
+                  () -> {
+                    throw new AssertionError("no JMS during assembly");
+                  },
                   operation));
       assertEquals(
           "fp1",

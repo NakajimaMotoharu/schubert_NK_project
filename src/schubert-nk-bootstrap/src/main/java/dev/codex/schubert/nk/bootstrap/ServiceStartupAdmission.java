@@ -18,6 +18,10 @@ public final class ServiceStartupAdmission {
   @FunctionalInterface
   public interface Ready {
     void release() throws IOException;
+
+    default Map<String, String> information() throws IOException {
+      throw new IOException("release information unavailable");
+    }
   }
 
   @FunctionalInterface
@@ -59,6 +63,10 @@ public final class ServiceStartupAdmission {
     FixedServiceIdentity.Value identity(ServiceConfigFiles.Service service) throws IOException;
 
     String releaseHash() throws IOException;
+
+    default Map<String, String> information(String releaseHash) throws IOException {
+      throw new IOException("release information unavailable");
+    }
   }
 
   private final ServiceConfigFiles.Service service;
@@ -134,9 +142,9 @@ public final class ServiceStartupAdmission {
               service, inputs, frame, identity, before, fixed, config.sha256(), release);
           if (!before.equals(observation.capture()))
             throw new IOException("startup context changed");
-          var completion = new ReadyOnce(ready);
+          var completion = new ReadyOnce(ready, () -> observation.information(release));
           try {
-            operation.execute(config.value(), completion::release);
+            operation.execute(config.value(), completion);
             completion.complete();
           } finally {
             completion.finish();
@@ -145,18 +153,25 @@ public final class ServiceStartupAdmission {
   }
 
   /** Returning without the exact ready handoff cannot turn an incomplete business graph into 0. */
-  private static final class ReadyOnce {
+  @FunctionalInterface
+  private interface Information {
+    Map<String, String> read() throws IOException;
+  }
+
+  private static final class ReadyOnce implements Ready {
     private final Ready delegate;
+    private final Information information;
     private boolean active = true;
     private boolean attempted;
     private boolean released;
     private boolean poisoned;
 
-    private ReadyOnce(Ready delegate) {
+    private ReadyOnce(Ready delegate, Information information) {
       this.delegate = delegate;
+      this.information = information;
     }
 
-    private synchronized void release() throws IOException {
+    public synchronized void release() throws IOException {
       if (!active || attempted) {
         poisoned = true;
         throw new IOException("startup readiness unavailable");
@@ -169,6 +184,11 @@ public final class ServiceStartupAdmission {
         poisoned = true;
         throw failure;
       }
+    }
+
+    public synchronized Map<String, String> information() throws IOException {
+      if (!active || attempted) throw new IOException("release information unavailable");
+      return Map.copyOf(information.read());
     }
 
     private synchronized void complete() throws IOException {
@@ -201,6 +221,11 @@ public final class ServiceStartupAdmission {
   }
 
   static final class NativeObservation implements Observation {
+    public Map<String, String> information(String releaseHash) throws IOException {
+      return StartupReleaseManifest.create(new FixedServiceIdentity().configurationGroup())
+          .publicInformation(releaseHash);
+    }
+
     public ChildStartupContext.Observed capture() throws IOException {
       return new ChildStartupContext().capture();
     }

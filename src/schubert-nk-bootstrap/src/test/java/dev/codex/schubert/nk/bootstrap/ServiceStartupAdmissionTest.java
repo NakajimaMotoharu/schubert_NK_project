@@ -135,6 +135,12 @@ final class ServiceStartupAdmissionTest {
       return release;
     }
 
+    public Map<String, String> information(String releaseHash) throws IOException {
+      assertEquals("b".repeat(64), releaseHash);
+      failure("information");
+      return Map.of("commit", "a".repeat(40));
+    }
+
     void run() throws IOException {
       subject()
           .execute(
@@ -151,6 +157,55 @@ final class ServiceStartupAdmissionTest {
     assertThrows(IOException.class, f::run);
     assertEquals(0, f.factories);
     assertEquals(0, f.releases);
+  }
+
+  @Test
+  void startadmit009PublicInfoLivesOnlyBeforeHandoff() throws Exception {
+    var f = new Fixture();
+    var borrowed = new java.util.concurrent.atomic.AtomicReference<ServiceStartupAdmission.Ready>();
+    f.subject()
+        .execute(
+            ready -> {
+              borrowed.set(ready);
+              assertEquals(Map.of("commit", "a".repeat(40)), ready.information());
+              assertThrows(
+                  UnsupportedOperationException.class, () -> ready.information().put("extra", "x"));
+              ready.release();
+              assertThrows(IOException.class, ready::information);
+            });
+    assertThrows(IOException.class, borrowed.get()::information);
+    var fault = new Fixture();
+    fault.ioFault = "information";
+    assertThrows(
+        IOException.class,
+        () ->
+            fault
+                .subject()
+                .execute(
+                    ready -> {
+                      ready.information();
+                      ready.release();
+                    }));
+    assertEquals(0, fault.releases);
+    assertEquals(1, fault.finalCloses);
+    ServiceStartupAdmission.Ready legacy = () -> {};
+    assertThrows(IOException.class, legacy::information);
+    assertThrows(
+        IOException.class,
+        () ->
+            new ServiceStartupAdmission.Observation() {
+              public ChildStartupContext.Observed capture() {
+                return f.self;
+              }
+
+              public FixedServiceIdentity.Value identity(ServiceConfigFiles.Service ignored) {
+                return new FixedServiceIdentity.Value(200, 201, List.of(200L, 201L, 202L));
+              }
+
+              public String releaseHash() {
+                return f.release;
+              }
+            }.information(f.release));
   }
 
   @Test

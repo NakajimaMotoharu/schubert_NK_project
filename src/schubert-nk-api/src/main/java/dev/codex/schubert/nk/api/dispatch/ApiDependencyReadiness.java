@@ -20,12 +20,14 @@ public final class ApiDependencyReadiness {
   private final DataSource database;
   private final Supplier<JMSContext> broker;
   private final @Nullable Supplier<JMSContext> webLog;
+  private final @Nullable Supplier<JMSContext> async;
 
   // Compatibility for package-local PT of the original single-context behavior only.
   ApiDependencyReadiness(DataSource database, Supplier<JMSContext> broker) {
     this.database = Objects.requireNonNull(database, "database");
     this.broker = Objects.requireNonNull(broker, "broker");
     this.webLog = null;
+    this.async = null;
   }
 
   public ApiDependencyReadiness(
@@ -33,6 +35,18 @@ public final class ApiDependencyReadiness {
     this.database = Objects.requireNonNull(database, "database");
     this.broker = Objects.requireNonNull(sync, "sync broker");
     this.webLog = Objects.requireNonNull(webLog, "Web Log broker");
+    this.async = null;
+  }
+
+  public ApiDependencyReadiness(
+      DataSource database,
+      Supplier<JMSContext> sync,
+      Supplier<JMSContext> webLog,
+      Supplier<JMSContext> async) {
+    this.database = Objects.requireNonNull(database, "database");
+    this.broker = Objects.requireNonNull(sync, "sync broker");
+    this.webLog = Objects.requireNonNull(webLog, "Web Log broker");
+    this.async = Objects.requireNonNull(async, "async broker");
   }
 
   /** Neither a DB mutation nor JMS message consumption; all borrowed resources close on failure. */
@@ -60,6 +74,7 @@ public final class ApiDependencyReadiness {
     }
     probe(broker, BrokerTopology.SYNC_REQUEST, webLog == null);
     if (webLog != null) probe(webLog, BrokerTopology.WEB_LOG, false);
+    if (async != null) probe(async, BrokerTopology.ASYNC_WORK, false);
   }
 
   private static void probe(

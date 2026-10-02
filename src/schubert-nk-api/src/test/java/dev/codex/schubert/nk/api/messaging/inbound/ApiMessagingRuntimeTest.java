@@ -26,6 +26,151 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG229/PT-JMS-016: API receive-group ownership, distinct from full process boot. */
 final class ApiMessagingRuntimeTest {
   @Test
+  void core001ActualSixContextsThirdFifoProfileAndOneFatalAcrossThreeQueues(@TempDir Path root)
+      throws Exception {
+    var broker = startBroker(root);
+    try (var sync = new ActiveMQConnectionFactory("vm://0");
+        var log = new ActiveMQConnectionFactory("vm://0");
+        var async = new ActiveMQConnectionFactory("vm://0");
+        var sending = new ActiveMQConnectionFactory("vm://0");
+        var producer = sending.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var observation = sending.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        var dlq =
+            observation.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
+      sync.setConsumerWindowSize(1_048_576);
+      log.setConsumerWindowSize(65_536);
+      async.setConsumerWindowSize(0);
+      var terminal = new AtomicInteger();
+      var fatal = new AtomicInteger();
+      try (var runtime =
+          ApiMessagingRuntime.start(
+              () -> sync.createContext(JMSContext.SESSION_TRANSACTED),
+              () -> log.createContext(JMSContext.SESSION_TRANSACTED),
+              () -> async.createContext(JMSContext.SESSION_TRANSACTED),
+              ignored -> new byte[0],
+              ignored -> {},
+              ignored -> {},
+              Clock.systemUTC(),
+              ignored -> terminal.incrementAndGet(),
+              fatal::incrementAndGet)) {
+        assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
+        assertEquals(1, consumerCount(broker, "nk.web.log.q"));
+        assertEquals(1, consumerCount(broker, "nk.async.work.q"));
+        assertEquals(0, async.getConsumerWindowSize());
+        assertTrue(runtime.ready());
+        for (String queue :
+            java.util.List.of(
+                "nk.async.work::nk.async.work.q",
+                "nk.web.log::nk.web.log.q",
+                "nk.sync.request::nk.sync.request.q")) {
+          producer
+              .createProducer()
+              .send(new ActiveMQQueue(queue), producer.createTextMessage("invalid"));
+          assertNotNull(dlq.receive(5_000));
+        }
+        assertEquals(1, terminal.get());
+        assertEquals(0, fatal.get());
+        assertTrue(runtime.terminalFailureObserved());
+        assertFalse(runtime.ready());
+      }
+      assertEquals(0, consumerCount(broker, "nk.sync.request.q"));
+      assertEquals(0, consumerCount(broker, "nk.web.log.q"));
+      assertEquals(0, consumerCount(broker, "nk.async.work.q"));
+    } finally {
+      broker.stop();
+    }
+  }
+
+  @Test
+  void core002EveryPartialFactoryRuntimeOrFatalReleasesAllEarlierContexts() {
+    for (int failAt = 1; failAt <= 6; failAt++) {
+      for (boolean fatal : new boolean[] {false, true}) {
+        var opened = new AtomicInteger();
+        var closed = new AtomicInteger();
+        int point = failAt;
+        Error error = new AssertionError("synthetic-private");
+        java.util.function.Supplier<JMSContext> supplier =
+            () -> {
+              if (opened.incrementAndGet() == point) {
+                if (fatal) throw error;
+                throw new IllegalStateException("synthetic-private");
+              }
+              return syntheticContext(closed, false);
+            };
+        Class<? extends Throwable> expectedType =
+            fatal ? AssertionError.class : IllegalStateException.class;
+        var failure =
+            assertThrows(
+                expectedType,
+                () ->
+                    ApiMessagingRuntime.start(
+                        supplier,
+                        supplier,
+                        supplier,
+                        ignored -> new byte[0],
+                        ignored -> {},
+                        ignored -> {},
+                        Clock.systemUTC(),
+                        ignored -> {},
+                        () -> {}));
+        if (fatal) org.junit.jupiter.api.Assertions.assertSame(error, failure);
+        assertEquals(point, opened.get());
+        assertEquals(point - 1, closed.get());
+      }
+    }
+  }
+
+  @Test
+  void core003CompleteNullPortsFailBeforeOpeningAnyContext() {
+    var count = new AtomicInteger();
+    java.util.function.Supplier<JMSContext> factory =
+        () -> {
+          count.incrementAndGet();
+          return null;
+        };
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ApiMessagingRuntime.start(
+                factory,
+                factory,
+                null,
+                ignored -> new byte[0],
+                ignored -> {},
+                ignored -> {},
+                Clock.systemUTC(),
+                ignored -> {},
+                () -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ApiMessagingRuntime.start(
+                factory,
+                factory,
+                factory,
+                ignored -> new byte[0],
+                ignored -> {},
+                null,
+                Clock.systemUTC(),
+                ignored -> {},
+                () -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ApiMessagingRuntime.start(
+                factory,
+                factory,
+                factory,
+                ignored -> new byte[0],
+                ignored -> {},
+                ignored -> {},
+                Clock.systemUTC(),
+                ignored -> {},
+                null));
+    assertEquals(0, count.get());
+  }
+
+  @Test
   void approvedSyncAndWebLogProfilesHaveSeparateRuntimeSuppliers(@TempDir Path root)
       throws Exception {
     var syncOpens = new AtomicInteger();

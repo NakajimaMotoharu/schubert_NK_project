@@ -1,0 +1,297 @@
+{
+  "run_id": "PG421-mutation-app-selected-v7",
+  "status": "PROVISIONAL_NOT_FORMAL",
+  "branch": "dev-foundation",
+  "source": "22cb732ca389d362d92ce8e7cb7e55ccf952a524",
+  "completed_at": "2026-10-02T11:11:24+09:00",
+  "os": "Linux 7.0.0-34-generic",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "node": "24.19.0",
+  "command": "./mvnw -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api -Dtest=MessageCodecTest,LinuxInodeSecurityTest,ApiNonSecretConfigTest,QuestionCommandServiceTest,QuestionQueryRepositoryTest,QuestionMutationReplayServiceTest,QuestionMutationApplicationServiceTest spotless:apply test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exit_code": 0,
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "9f93574ba82698fd7e89f54c97138910088beffbc945afd3b73409114fbb4d72"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "9eb701a66094c9673451a28e824096c0d844d0c59b9e96bc9b92f40c1197e8fe"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "2525a500fd7e4e91c15607eeceff3f4afae981d60a48ac02ef86853c7516fce8"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCommandServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "6c07502ef268f874a1362585747d4912135f2b276a354b82334b15b5ba559300"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "200566768e1649c1a7737fe8c907f97a184b9dcf9eca5c9c304388cc0b927302"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionMutationReplayServiceTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "933b2d0130c2dd5eb42f9b410061fec4baead94cf1b1804306fed83f75d477c6"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "4afc5fc54fbff3afd7d14478ed242ba96d0f6223cb43e6091d5ecbaa9b6ee71c"
+    }
+  ],
+  "total_tests": 54,
+  "static_modules": 4,
+  "static_errors": 0,
+  "coverage_scope": "current-byte incremental development only; full/native not executed",
+  "coverage": [
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService$Snapshot",
+      "counters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 43
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 124
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter$Event",
+      "counters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$Completed",
+      "counters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$Denied",
+      "counters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationRequest",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 30
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 76
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$Outcome",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$InvalidMessage",
+      "counters": {}
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationRequest$Result",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 18
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 25
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 44
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 42
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 110
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "log_work_path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg421-mutation-app-selected-v7.log",
+  "log_sha256": "ce4b5fde8e6495710402aaef1a4f48ecf322bf46a56bae619efc3f4135174941",
+  "test_ids": [
+    "PT-QRY036..048",
+    "PT-NTF016"
+  ],
+  "bugs": [
+    "BUG-474",
+    "BUG-475",
+    "BUG-476",
+    "BUG-477",
+    "BUG-478",
+    "BUG-479",
+    "BUG-480",
+    "BUG-481",
+    "BUG-482",
+    "BUG-483",
+    "BUG-484",
+    "BUG-485",
+    "BUG-486",
+    "BUG-487"
+  ],
+  "source_sha256": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java": "e2bcaf6a3bb7e90c361063b0545d55ba6e7e97d60dbf39785f2faaa84819b263",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java": "865df56069ab7bd50e5122eedf05be16fe145b60ba93d98b25d48daef60788ff",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java": "1d961167bdc53060f88dee6a43c6d0b0110fba8f6468b9bbda2c32008b09b991",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java": "76a8a72bfb1bdcaa33bb62a660e8da8fbc88e97074b5fb12d3069ba301a5fbb3",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java": "330ac2ae389d2243c7a0cffa45038fd5909740f2c9e5152fbe24d288ba2a5a5a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java": "a707bdc4290bbd6bbaa37fa6ed98a90e09f8750eaf08eade645d40f5cf4535bc",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java": "9f2fc9dbfee31ac8042c566dedb52674fce0da4e5ce721c61ba8a42d65371de6",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java": "8631dc823c4dd52cc53081c78149a3c37895c3c2fb3594e6458f7fa8da9a4f44"
+  },
+  "oracle": "synthetic fixture only; independent UI236 literal wire, JCE/HMAC, SQL postconditions; no raw production/session/key data",
+  "unexecuted": [
+    "same-source clean full regression",
+    "ordinary native all31/third consumer lifecycle",
+    "real NK CHR",
+    "formal coverage/phase acceptance"
+  ]
+}

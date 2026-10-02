@@ -14,6 +14,35 @@ import org.junit.jupiter.api.Test;
 /** PT-JMS-024 A-F: synthetic public credential only; no real password or session is retained. */
 final class ApiBrokerContextsTest {
   @Test
+  void completeThirdProfileOwnsDistinctFactoryErasesCopyAndClosesAllOnFault() {
+    var sync = new FakeFactory();
+    var log = new FakeFactory();
+    var async = new FakeFactory();
+    var copy = new char[] {'P', 'T'};
+    var owner = new ApiBrokerContexts(() -> copy, sync, log, async, sync, log, async);
+    assertSame(async.context, owner.async().get());
+    assertEquals(1, async.opens);
+    assertEquals(0, sync.opens);
+    assertEquals(0, log.opens);
+    assertArrayEquals(new char[] {0, 0}, copy);
+    async.closeFault = new IllegalStateException("private");
+    assertThrows(IllegalStateException.class, owner::close);
+    assertEquals(1, async.closes);
+    assertEquals(1, log.closes);
+    assertEquals(1, sync.closes);
+    assertThrows(IllegalStateException.class, owner.async()::get);
+    assertThrows(
+        NullPointerException.class,
+        () -> new ApiBrokerContexts(() -> new char[] {'P'}, sync, log, null, sync, log, async));
+    assertThrows(
+        NullPointerException.class,
+        () -> new ApiBrokerContexts(() -> new char[] {'P'}, sync, log, async, sync, log, null));
+    var legacy = new ApiBrokerContexts(() -> new char[] {'P'}, sync, log, sync, log);
+    assertThrows(NullPointerException.class, legacy::async);
+    legacy.close();
+  }
+
+  @Test
   void distinctSyncAndLogFactoriesUseFixedRoleAndEraseEveryCopy() {
     var first = new char[] {'P', 'T'};
     var second = new char[] {'P', 'T'};

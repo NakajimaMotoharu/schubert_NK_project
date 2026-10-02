@@ -14,6 +14,34 @@ import org.junit.jupiter.api.Test;
 /** Owned thread lifecycle at real dispatch/open boundary, not a synthetic covered run method. */
 class OwnedOutboxDispatcherTest {
   @Test
+  void outbox005AssemblyStartsNoClaimsAndStartCloseAreSingleOwner() throws Exception {
+    var attempts = new CountDownLatch(1);
+    var d =
+        dispatcher(
+            () -> {
+              attempts.countDown();
+              throw new SQLException("fixture");
+            });
+    var owned = OwnedOutboxDispatcher.create(d, "pt");
+    try {
+      assertFalse(owned.healthy());
+      assertEquals(1, attempts.getCount());
+      assertThrows(IllegalStateException.class, owned::wake);
+      owned.start();
+      assertThrows(IllegalStateException.class, owned::start);
+      assertTrue(attempts.await(3, TimeUnit.SECONDS));
+    } finally {
+      owned.close();
+    }
+    assertThrows(IllegalStateException.class, owned::start);
+    var unstarted = OwnedOutboxDispatcher.create(d, "pt");
+    unstarted.close();
+    unstarted.close();
+    assertThrows(IllegalStateException.class, unstarted::start);
+    assertFalse(unstarted.healthy());
+  }
+
+  @Test
   void outbox001TemporaryDbAndRuntimeFailureRetryClosedAndNullBoundaries() throws Exception {
     for (boolean sql : new boolean[] {true, false}) {
       CountDownLatch attempts = new CountDownLatch(2);

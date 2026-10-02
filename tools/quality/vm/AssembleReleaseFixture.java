@@ -45,14 +45,14 @@ public final class AssembleReleaseFixture {
         String filename=fields[1]+"-"+version+classifier+".jar";
         if(!declared.add(filename))throw new IllegalStateException("duplicate artifact filename");
         String path=role+"/lib/"+filename;
-        copy(target.resolve("dependency/"+filename),output.resolve(path));
+        copy(target.resolve("runtime-dependencies/"+filename),output.resolve(path));
         dependencies.computeIfAbsent(fields[0]+":"+fields[1]+":"+version,k->new TreeSet<>()).add(path);
         if(fields[0].equals("dev.codex.schubert")) {
           Path built=repo.resolve("src/"+fields[1]+"/target/"+filename);
           if(!hash(built).equals(hash(output.resolve(path))))throw new IllegalStateException("stale shared artifact");
         }
       }
-      try(var files=Files.list(target.resolve("dependency"))) {
+      try(var files=Files.list(target.resolve("runtime-dependencies"))) {
         var actualNames=new TreeSet<String>();
         for(var file:files.toList())actualNames.add(file.getFileName().toString());
         if(!declared.equals(actualNames))throw new IllegalStateException("resolved dependency directory mismatch");
@@ -77,7 +77,7 @@ public final class AssembleReleaseFixture {
         migrations.add(row(rank,version,"SQL",name,
             ChecksumCalculator.calculate(new StringResource(Files.readString(file,StandardCharsets.UTF_8)))));
       }
-      if(rank!=23)throw new IllegalStateException("23 approved migrations required");
+      if(rank!=25)throw new IllegalStateException("25 approved migrations required");
     }
     for(String name:List.of("common","api","web","batch"))
       copy(repo.resolve("src/deployment/config/"+name+".yml.template"),output.resolve("config/templates/"+name+".yml"));
@@ -86,7 +86,7 @@ public final class AssembleReleaseFixture {
     if (args.length == 6) {
       byte[] profile=Files.readAllBytes(Path.of(args[4]));
       var claims=dev.codex.schubert.nk.batch.backup.BackupProfile.consume(profile);
-      if(!claims.versions().app().equals(APP)||!claims.versions().schema().equals("023"))
+      if(!claims.versions().app().equals(APP)||!claims.versions().schema().equals("025"))
         throw new IllegalStateException("effective backup profile version mismatch");
       byte[] recipient=Files.readAllBytes(Path.of(args[5]));
       if(!new String(recipient,StandardCharsets.US_ASCII).matches("age1[023456789acdefghjklmnpqrstuvwxyz]{58}\\n"))
@@ -118,7 +118,7 @@ public final class AssembleReleaseFixture {
     var deps=new ArrayList<Map<String,Object>>();
     dependencies.forEach((coordinate,paths)->deps.add(map("coordinate",coordinate,"paths",List.copyOf(paths))));
     var manifest=map("format","NKRELEASE1","release",args[3],
-        "versions",map("app",APP,"protocol",APP,"storage",APP,"bootstrap",APP,"schema","023","config","1"),
+        "versions",map("app",APP,"protocol",APP,"storage",APP,"bootstrap",APP,"schema","025","config","1"),
         "source",map("commit",args[2],"tag",args.length==6?"untagged-PGPT-candidate":"PG315-private-fixture"),
         "build",map("jdkVendor",System.getProperty("java.vendor"),"jdkVersion",System.getProperty("java.version"),"mavenVersion","3.9.12"),
         "platform",map("osId","ubuntu","osVersion","26.04","architecture",System.getProperty("os.arch"),"javaFeature",25),
@@ -130,7 +130,7 @@ public final class AssembleReleaseFixture {
     var sums=new StringBuilder();hashes.forEach((path,sha)->sums.append(sha).append("  ").append(path).append('\n'));
     write(output.resolve("SHA256SUMS"),sums.toString().getBytes(StandardCharsets.US_ASCII));
     System.out.println("PT-OPS-NATIVE-028 ASSEMBLED artifacts="+artifacts.size()+" dependencies="+deps.size()
-        +" migrations=23 manifestBytes="+original.length+" manifestSha256="+hash(output.resolve("RELEASE-MANIFEST.json"))
+        +" migrations=25 manifestBytes="+original.length+" manifestSha256="+hash(output.resolve("RELEASE-MANIFEST.json"))
         +" authorityIssued=false productionActivation=false");
   }
   private static Map<String,Object> row(int rank,String version,String type,String script,Integer checksum) {

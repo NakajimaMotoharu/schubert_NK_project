@@ -5,12 +5,14 @@ import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
- * API-only borrowed credential boundary for the two admitted consumer profiles. A context is
+ * API-only borrowed credential boundary for the three admitted consumer profiles. A context is
  * caller-owned; this owner closes its factories before the outer credential set and DB scope.
  * Password copies are erased after each createContext call; Jakarta's immutable String boundary
  * cannot promise physical erasure and must never be logged. It is not Broker management readiness.
@@ -24,8 +26,8 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private final Supplier<char[]> passwords;
   private final ConnectionFactory sync;
   private final ConnectionFactory webLog;
-  private final AutoCloseable syncOwner;
-  private final AutoCloseable webLogOwner;
+  private final @Nullable ConnectionFactory async;
+  private final List<AutoCloseable> owners;
   private boolean closed;
 
   public static ApiBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
@@ -35,8 +37,25 @@ public final class ApiBrokerContexts implements AutoCloseable {
     try {
       var webLog =
           provider.create(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, endpoint);
-      return new ApiBrokerContexts(
-          () -> credentials.copyPassword(ServiceCredentialId.MQ_API), sync, webLog, sync, webLog);
+      try {
+        var async =
+            provider.create(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, endpoint);
+        return new ApiBrokerContexts(
+            () -> credentials.copyPassword(ServiceCredentialId.MQ_API),
+            sync,
+            webLog,
+            async,
+            sync,
+            webLog,
+            async);
+      } catch (RuntimeException | Error failure) {
+        try {
+          webLog.close();
+        } catch (RuntimeException | Error closing) {
+          if (closing != failure) failure.addSuppressed(closing);
+        }
+        throw failure;
+      }
     } catch (RuntimeException | Error failure) {
       try {
         sync.close();
@@ -53,11 +72,36 @@ public final class ApiBrokerContexts implements AutoCloseable {
       ConnectionFactory webLog,
       AutoCloseable syncOwner,
       AutoCloseable webLogOwner) {
+    this(passwords, sync, webLog, null, List.of(syncOwner, webLogOwner));
+  }
+
+  ApiBrokerContexts(
+      Supplier<char[]> passwords,
+      ConnectionFactory sync,
+      ConnectionFactory webLog,
+      ConnectionFactory async,
+      AutoCloseable syncOwner,
+      AutoCloseable webLogOwner,
+      AutoCloseable asyncOwner) {
+    this(
+        passwords,
+        sync,
+        webLog,
+        Objects.requireNonNull(async, "async factory"),
+        List.of(syncOwner, webLogOwner, asyncOwner));
+  }
+
+  private ApiBrokerContexts(
+      Supplier<char[]> passwords,
+      ConnectionFactory sync,
+      ConnectionFactory webLog,
+      @Nullable ConnectionFactory async,
+      List<AutoCloseable> owners) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
     this.sync = Objects.requireNonNull(sync, "sync factory");
     this.webLog = Objects.requireNonNull(webLog, "Web Log factory");
-    this.syncOwner = Objects.requireNonNull(syncOwner, "sync factory owner");
-    this.webLogOwner = Objects.requireNonNull(webLogOwner, "Web Log factory owner");
+    this.async = async;
+    this.owners = owners;
   }
 
   public Supplier<JMSContext> sync() {
@@ -66,6 +110,12 @@ public final class ApiBrokerContexts implements AutoCloseable {
 
   public Supplier<JMSContext> webLog() {
     return () -> open(webLog);
+  }
+
+  /** Ordinary runtime must use the complete create() profile, never legacy package-local PT. */
+  public Supplier<JMSContext> async() {
+    var factory = Objects.requireNonNull(async, "async profile unavailable");
+    return () -> open(factory);
   }
 
   private JMSContext open(ConnectionFactory factory) {
@@ -97,16 +147,13 @@ public final class ApiBrokerContexts implements AutoCloseable {
       if (closed) return;
       closed = true;
       Throwable failure = null;
-      try {
-        webLogOwner.close();
-      } catch (Exception | Error closing) {
-        failure = closing;
-      }
-      try {
-        syncOwner.close();
-      } catch (Exception | Error closing) {
-        if (failure == null || closing instanceof Error && !(failure instanceof Error))
-          failure = closing;
+      for (int index = owners.size() - 1; index >= 0; index--) {
+        try {
+          owners.get(index).close();
+        } catch (Exception | Error closing) {
+          if (failure == null || closing instanceof Error && !(failure instanceof Error))
+            failure = closing;
+        }
       }
       if (failure instanceof Error fatal) throw fatal;
       if (failure != null) throw new IllegalStateException("API broker factory close failed");

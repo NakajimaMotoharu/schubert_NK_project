@@ -19,6 +19,48 @@ import org.junit.jupiter.api.io.TempDir;
 final class StartupReleaseManifestTest {
   @TempDir Path temporary;
 
+  @Test
+  void release009PublicInfoOnlyFromSameHeldAdmittedBytes() throws Exception {
+    var f = new Fixture("public-info");
+    String json = new ReleaseInventoryTest.Fixture().text().replace("1.2.3-PG313", "v1");
+    Files.writeString(f.manifest, json);
+    String expectedDigest =
+        HexFormat.of()
+            .formatHex(
+                java.security.MessageDigest.getInstance("SHA-256")
+                    .digest(json.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+    var expected =
+        Map.of(
+            "commit",
+            "a".repeat(40),
+            "app",
+            "0.1.0",
+            "config",
+            "1",
+            "schema",
+            "001",
+            "protocol",
+            "0.1.0");
+    var actual = f.subject().publicInformation(expectedDigest);
+    assertEquals(expected, actual);
+    assertThrows(UnsupportedOperationException.class, () -> actual.put("secret", "PRIVATE"));
+    assertTrue(f.calls.owned.isEmpty());
+    assertEquals(f.calls.opened, f.calls.closed);
+    assertThrows(IOException.class, () -> f.subject().publicInformation("0".repeat(64)));
+    assertThrows(NullPointerException.class, () -> f.subject().publicInformation(null));
+    Files.writeString(f.manifest, json.replace("\"release\":\"v1\"", "\"release\":\"v2\""));
+    String changed = f.subject().sha256();
+    assertThrows(IOException.class, () -> f.subject().publicInformation(changed));
+    Files.writeString(f.manifest, "abc");
+    assertThrows(
+        IOException.class,
+        () ->
+            f.subject()
+                .publicInformation(
+                    "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"));
+    assertTrue(f.calls.owned.isEmpty());
+  }
+
   static class Calls implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> owned = new HashSet<>();

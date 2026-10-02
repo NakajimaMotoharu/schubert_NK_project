@@ -23,6 +23,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
 
   private final List<JMSContext> contexts;
   private final AtomicBoolean terminal = new AtomicBoolean();
+  private final AtomicBoolean halted = new AtomicBoolean();
   private volatile boolean closed;
 
   private SyncRequestConsumers(List<JMSContext> contexts) {
@@ -34,9 +35,18 @@ public final class SyncRequestConsumers implements AutoCloseable {
       Supplier<JMSContext> factory,
       SyncRequestListener listener,
       Consumer<CommittedFatalInboundException> onTerminal) {
+    return start(factory, listener, onTerminal, () -> {});
+  }
+
+  public static SyncRequestConsumers start(
+      Supplier<JMSContext> factory,
+      SyncRequestListener listener,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal) {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(listener, "listener");
     Objects.requireNonNull(onTerminal, "onTerminal");
+    Objects.requireNonNull(onFatal, "fatal signal");
     List<JMSContext> opened = new ArrayList<>(CONCURRENCY);
     SyncRequestConsumers runtime = new SyncRequestConsumers(opened);
     try {
@@ -54,6 +64,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
                 "JMS consumer");
         consumer.setMessageListener(
             message -> {
+              if (runtime.halted.get()) return;
               try {
                 listener.onMessage(context, message);
               } catch (CommittedFatalInboundException fatal) {
@@ -62,6 +73,16 @@ public final class SyncRequestConsumers implements AutoCloseable {
                 }
               } catch (JMSException | RuntimeException retryable) {
                 // SyncRequestListener has rolled back. Broker redelivery owns the retry schedule.
+              } catch (Error fatal) {
+                runtime.halted.set(true);
+                if (runtime.terminal.compareAndSet(false, true)) {
+                  try {
+                    context.rollback();
+                  } catch (RuntimeException | Error unconfirmed) {
+                    // Fatal/unconfirmed remains nonzero; owner closes the context, never ACKs.
+                  }
+                  onFatal.run();
+                }
               }
             });
       }
@@ -69,9 +90,19 @@ public final class SyncRequestConsumers implements AutoCloseable {
         context.start();
       }
       return runtime;
-    } catch (RuntimeException failure) {
-      runtime.closeAfterFailure(failure);
-      throw new IllegalStateException("API sync consumer startup failed", failure);
+    } catch (RuntimeException | Error failure) {
+      Throwable retained = failure;
+      try {
+        onFatal.run();
+      } catch (RuntimeException | Error notification) {
+        if (notification instanceof Error && !(failure instanceof Error)) {
+          retained = notification;
+          if (notification != failure) notification.addSuppressed(failure);
+        } else if (notification != failure) failure.addSuppressed(notification);
+      }
+      runtime.closeAfterFailure(retained);
+      if (retained instanceof Error fatal) throw fatal;
+      throw new IllegalStateException("API sync consumer startup failed", retained);
     }
   }
 
@@ -90,27 +121,30 @@ public final class SyncRequestConsumers implements AutoCloseable {
       return;
     }
     closed = true;
-    RuntimeException failure = null;
+    Throwable failure = null;
     for (JMSContext context : contexts) {
       try {
         context.close();
-      } catch (RuntimeException closing) {
-        if (failure == null) {
+      } catch (RuntimeException | Error closing) {
+        if (failure == null || closing instanceof Error && !(failure instanceof Error)) {
           failure = closing;
-        } else {
+        } else if (closing != failure) {
           failure.addSuppressed(closing);
         }
       }
     }
+    if (failure instanceof Error fatal) throw fatal;
     if (failure != null) {
       throw new IllegalStateException("API sync consumer close failed", failure);
     }
   }
 
-  private void closeAfterFailure(RuntimeException startupFailure) {
+  private void closeAfterFailure(Throwable startupFailure) {
     try {
       close();
-    } catch (RuntimeException closing) {
+    } catch (RuntimeException | Error closing) {
+      if (closing instanceof Error fatal && !(startupFailure instanceof Error)) throw fatal;
+      if (closing == startupFailure) return;
       startupFailure.addSuppressed(closing);
     }
   }

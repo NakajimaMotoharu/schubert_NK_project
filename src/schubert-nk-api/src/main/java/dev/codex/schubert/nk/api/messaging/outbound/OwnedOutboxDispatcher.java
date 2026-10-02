@@ -17,6 +17,7 @@ public final class OwnedOutboxDispatcher implements AutoCloseable {
   private boolean stopping;
   private boolean signalled;
   private boolean failed;
+  private boolean started;
 
   private OwnedOutboxDispatcher(OutboxDispatcher dispatcher, String owner) {
     this.dispatcher = Objects.requireNonNull(dispatcher, "dispatcher");
@@ -28,14 +29,28 @@ public final class OwnedOutboxDispatcher implements AutoCloseable {
   }
 
   public static OwnedOutboxDispatcher start(OutboxDispatcher dispatcher, String owner) {
-    var result = new OwnedOutboxDispatcher(dispatcher, owner);
-    result.worker.start();
+    var result = create(dispatcher, owner);
+    result.start();
     return result;
+  }
+
+  /** Own an unstarted dispatcher during graph assembly; no claims until exact registration. */
+  public static OwnedOutboxDispatcher create(OutboxDispatcher dispatcher, String owner) {
+    return new OwnedOutboxDispatcher(dispatcher, owner);
+  }
+
+  public void start() {
+    synchronized (lock) {
+      if (started || stopping) throw new IllegalStateException("outbox dispatcher unavailable");
+      started = true;
+      worker.start();
+    }
   }
 
   public void wake() {
     synchronized (lock) {
-      if (stopping || failed) throw new IllegalStateException("outbox dispatcher unavailable");
+      if (!started || stopping || failed)
+        throw new IllegalStateException("outbox dispatcher unavailable");
       signalled = true;
       lock.notifyAll();
     }
@@ -43,7 +58,7 @@ public final class OwnedOutboxDispatcher implements AutoCloseable {
 
   public boolean healthy() {
     synchronized (lock) {
-      return !stopping && !failed;
+      return started && !stopping && !failed;
     }
   }
 

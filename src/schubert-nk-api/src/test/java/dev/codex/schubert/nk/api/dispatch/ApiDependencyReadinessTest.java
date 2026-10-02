@@ -28,6 +28,45 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG234/266/PT-JMS-019/022: borrowed API DB/JMS admission, not broker management readiness. */
 final class ApiDependencyReadinessTest {
+  @Test
+  void thirdProfileProbesOnlyFixedAsyncQueueAndEveryNullPortIsRejected() {
+    var closes = new AtomicInteger();
+    var attaches = new AtomicInteger();
+    var db = source(() -> connection(true, false, false, new AtomicInteger()));
+    java.util.function.Supplier<JMSContext> sync =
+        () ->
+            singleQueueContext(
+                "nk.sync.request::nk.sync.request.q",
+                false,
+                new AtomicInteger(),
+                new AtomicInteger());
+    java.util.function.Supplier<JMSContext> log =
+        () ->
+            singleQueueContext(
+                "nk.web.log::nk.web.log.q", false, new AtomicInteger(), new AtomicInteger());
+    java.util.function.Supplier<JMSContext> async =
+        () -> singleQueueContext("nk.async.work::nk.async.work.q", false, attaches, closes);
+    new ApiDependencyReadiness(db, sync, log, async).verify();
+    assertEquals(1, attaches.get());
+    assertEquals(1, closes.get());
+    assertThrows(
+        NullPointerException.class, () -> new ApiDependencyReadiness(null, sync, log, async));
+    assertThrows(
+        NullPointerException.class, () -> new ApiDependencyReadiness(db, null, log, async));
+    assertThrows(
+        NullPointerException.class, () -> new ApiDependencyReadiness(db, sync, null, async));
+    assertThrows(NullPointerException.class, () -> new ApiDependencyReadiness(db, sync, log, null));
+    var rejected =
+        new ApiDependencyReadiness(
+            db,
+            sync,
+            log,
+            () -> singleQueueContext("nk.async.work::nk.async.work.q", true, attaches, closes));
+    assertThrows(IllegalStateException.class, rejected::verify);
+    assertEquals(2, attaches.get());
+    assertEquals(2, closes.get());
+  }
+
   @TempDir Path root;
 
   @Test

@@ -19,6 +19,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 public final class WebLogConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
+  private final AtomicBoolean halted = new AtomicBoolean();
   private volatile boolean closed;
 
   private WebLogConsumers(JMSContext context) {
@@ -30,9 +31,18 @@ public final class WebLogConsumers implements AutoCloseable {
       Supplier<JMSContext> factory,
       WebLogListener listener,
       Consumer<CommittedFatalInboundException> onTerminal) {
+    return start(factory, listener, onTerminal, () -> {});
+  }
+
+  public static WebLogConsumers start(
+      Supplier<JMSContext> factory,
+      WebLogListener listener,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal) {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(listener, "listener");
     Objects.requireNonNull(onTerminal, "onTerminal");
+    Objects.requireNonNull(onFatal, "fatal signal");
     JMSContext opened = Objects.requireNonNull(factory.get(), "JMS context");
     WebLogConsumers runtime = new WebLogConsumers(opened);
     try {
@@ -47,6 +57,7 @@ public final class WebLogConsumers implements AutoCloseable {
               "JMS consumer");
       consumer.setMessageListener(
           message -> {
+            if (runtime.halted.get()) return;
             try {
               listener.onMessage(opened, message);
             } catch (CommittedFatalInboundException fatal) {
@@ -55,17 +66,38 @@ public final class WebLogConsumers implements AutoCloseable {
               }
             } catch (JMSException | RuntimeException retryable) {
               // WebLogListener rolled back; Artemis owns redelivery and delivery-count policy.
+            } catch (Error fatal) {
+              runtime.halted.set(true);
+              if (runtime.terminal.compareAndSet(false, true)) {
+                try {
+                  opened.rollback();
+                } catch (RuntimeException | Error unconfirmed) {
+                  // Stop remains fatal/unconfirmed; no ACK and no provider text escapes.
+                }
+                onFatal.run();
+              }
             }
           });
       opened.start();
       return runtime;
-    } catch (RuntimeException failure) {
+    } catch (RuntimeException | Error failure) {
+      Throwable retained = failure;
+      try {
+        onFatal.run();
+      } catch (RuntimeException | Error notification) {
+        if (notification instanceof Error && !(failure instanceof Error)) {
+          retained = notification;
+          if (notification != failure) notification.addSuppressed(failure);
+        } else if (notification != failure) failure.addSuppressed(notification);
+      }
       try {
         runtime.close();
-      } catch (RuntimeException closing) {
-        failure.addSuppressed(closing);
+      } catch (RuntimeException | Error closing) {
+        if (closing instanceof Error fatal && !(retained instanceof Error)) throw fatal;
+        if (closing != retained) retained.addSuppressed(closing);
       }
-      throw new IllegalStateException("API Web log consumer startup failed", failure);
+      if (retained instanceof Error fatal) throw fatal;
+      throw new IllegalStateException("API Web log consumer startup failed", retained);
     }
   }
 

@@ -103,8 +103,13 @@ public final class Pg387TrustedDeployment {
     var approval=new ReleaseApproval("0.1.0-"+LABEL,HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(original)));
     var inspected=StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verifyCandidate(approval);
     System.out.println(LABEL+" STAGE FULL_CANDIDATE_BOM_VERIFIED");
-    if(!inspected.version().equals(approval.version()) || inspected.migrations().size()!=24) throw new IllegalStateException("BOM mismatch");
+    if(!inspected.version().equals(approval.version()) || inspected.migrations().size()!=expectedHistoryCount()) throw new IllegalStateException("BOM mismatch");
     return approval;
+  }
+  static int expectedHistoryCount() {
+    // The one still-installed preservation source has V001..023. Never derive expectations
+    // from observed DB/manifest counts; new candidates require the approved V001..025.
+    return LABEL.equals("PG408") && SOURCE.equals("32c6a7b1e79abf114901003c4a8f1300b33bf0c0") ? 24 : 26;
   }
   static void freezeCandidate() throws Exception {
     // BUG342: host immutable payload, not merely ProtectSystem's private RO view.

@@ -322,7 +322,7 @@ final class InternalEventListenerTest {
     return new ActiveMQQueue(destination.fullyQualifiedQueue());
   }
 
-  private static void sendEvent(JMSContext context, BrokerTopology destination, byte[] body)
+  static void sendEvent(JMSContext context, BrokerTopology destination, byte[] body)
       throws Exception {
     BytesMessage event = context.createBytesMessage();
     event.writeBytes(body);
@@ -368,7 +368,7 @@ final class InternalEventListenerTest {
     };
   }
 
-  private static byte[] eventWire(String layout, int dataLength) {
+  static byte[] eventWire(String layout, int dataLength) {
     int totalLength = 256 + dataLength;
     byte[] body = new byte[totalLength];
     Arrays.fill(body, (byte) ' ');
@@ -394,7 +394,7 @@ final class InternalEventListenerTest {
     System.arraycopy(source, 0, target, offset, source.length);
   }
 
-  private static EmbeddedActiveMQ start(Path root) throws Exception {
+  static EmbeddedActiveMQ start(Path root) throws Exception {
     Configuration configuration;
     try (InputStream input = Files.newInputStream(Path.of(System.getProperty("broker.template")))) {
       configuration = new FileConfigurationParser().parseMainConfig(input);

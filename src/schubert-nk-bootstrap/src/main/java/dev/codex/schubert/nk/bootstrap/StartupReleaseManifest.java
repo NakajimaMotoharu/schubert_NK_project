@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.storage.*;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
@@ -47,7 +48,7 @@ public final class StartupReleaseManifest {
 
   @FunctionalInterface
   private interface ReleaseOperation<T> {
-    T read(OwnedTransferDirectory release, String version) throws StorageIoException;
+    T read(OwnedTransferDirectory release, String version) throws IOException;
   }
 
   @FunctionalInterface
@@ -150,7 +151,25 @@ public final class StartupReleaseManifest {
   }
 
   public String sha256() throws IOException {
-    return inspect((release, version) -> manifest(release));
+    return inspect((release, version) -> manifest(release).sha256());
+  }
+
+  /** Only public metadata from the already admitted digest, never approval/issuer authority. */
+  public Map<String, String> publicInformation(String admittedSha256) throws IOException {
+    Objects.requireNonNull(admittedSha256, "admitted release digest");
+    return inspect(
+        (release, version) -> {
+          var value = manifest(release);
+          require(value.sha256().equals(admittedSha256));
+          var inventory = ReleaseInventory.parse(value.bytes());
+          require(version.equals(inventory.release()));
+          return Map.of(
+              "commit", Objects.requireNonNull(inventory.source().get("commit")),
+              "app", Objects.requireNonNull(inventory.versions().get("app")),
+              "config", Objects.requireNonNull(inventory.versions().get("config")),
+              "schema", Objects.requireNonNull(inventory.versions().get("schema")),
+              "protocol", Objects.requireNonNull(inventory.versions().get("protocol")));
+        });
   }
 
   /** Borrowed claims: caller must keep the independently authenticated approval scope held. */
@@ -274,14 +293,17 @@ public final class StartupReleaseManifest {
         });
   }
 
-  private String manifest(OwnedTransferDirectory release) throws StorageIoException {
+  private record ManifestValue(String sha256, byte[] bytes) {}
+
+  private ManifestValue manifest(OwnedTransferDirectory release) throws StorageIoException {
     return release.atExistingEntryHandle(
         "RELEASE-MANIFEST.json",
         held -> {
           Snapshot before = checked(held, group, 0100640, 1, MAX_BYTES);
           MessageDigest hash = MessageDigest.getInstance("SHA-256");
+          var material = new ByteArrayOutputStream();
           var channel = Objects.requireNonNull(io.open(held), "manifest channel");
-          String digest =
+          ManifestValue digest =
               ResourceScope.use(
                   channel::close,
                   () -> {
@@ -295,12 +317,14 @@ public final class StartupReleaseManifest {
                       total += count;
                       require(total <= MAX_BYTES);
                       buffer.flip();
+                      material.write(buffer.array(), 0, count);
                       hash.update(buffer);
                       buffer.clear();
                     }
                     require(total == before.size() && channel.size() == before.size());
                     require(before.equals(checked(held, group, 0100640, 1, MAX_BYTES)));
-                    return HexFormat.of().formatHex(hash.digest());
+                    return new ManifestValue(
+                        HexFormat.of().formatHex(hash.digest()), material.toByteArray());
                   });
           release.atExistingEntryHandle(
               "RELEASE-MANIFEST.json",

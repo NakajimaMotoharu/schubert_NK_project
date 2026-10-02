@@ -213,6 +213,8 @@ SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前�
 Actuatorはloopbackのみで、environment/configprops/heapdump/loggers/shutdownをexposeしない。`info`はrelease commit、
 app/config/schema/protocol versionだけ。Secret/path/account/Queue bodyを出さない。
 
+SSC158（API内部実現補足）：普通APIの管理HTTPだけはJDK HTTP serverで上記閉鎖契約を実現する。固定127.0.0.1:8091、GET `/actuator/health`・`/actuator/health/readiness`はstatusのみ、DOWNは503/UPは200。`/actuator/info`はstartup proofのactual release hashと一致する保持manifestから検証した5値のみ、`/actuator/prometheus`は秘密を含まないready gauge。その他path/methodは拒否。全31登録検証・DB/JMS/storage probe・Outbox開始・SYNC4/WebLog1/ASYNC1が揃い、同ownerがReady.releaseを正常完了した後のみUP。解放失敗又は停止競合は非成功、Aが空いたことやsystemd activeだけはready証拠ではない。stop/fatal/Outbox不健康でDOWNとし、新業務guard→consumer drain→Outbox join→codec/root→factory→pool/credentialを外側所有の順序で閉じる。hookはstop通知＋owner完了待ちだけ、callback threadから資源close/System.exitしない。取得中TERM/uncertain closeも成功receiptを作らない。Morning側のsame-PID socket/Invocation/startTicks前後照合と原本完了は後続実装であり、当HTTPのUP単独では親完了を認定しない。
+
 ## 6. PostgreSQL 18
 
 ### 6.1 `postgresql.conf`初期値
