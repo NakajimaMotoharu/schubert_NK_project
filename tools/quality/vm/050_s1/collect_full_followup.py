@@ -295,5 +295,16 @@ if int(identifier[2:5]) >= 432:
     manifest['ykt'].append('YKT-387')
     manifest['trigger'] = 'BUG543 fixed same-M/A candidate host-read-only preparation before Pair native retirement: new frozen source six regression; source329 results retained but not reused'
     manifest['limitations'].insert(0, 'PG431/source329 signed candidate placement only; missing host-RO preflight detected before native recovery, no intent/current change')
+if int(identifier[2:5]) >= 433:
+    manifest['bugs'].extend(['BUG-545', 'BUG-546'])
+    manifest['ykt'].extend(['YKT-389', 'YKT-390'])
+    manifest['testIds'].append('PT-WEB-S3WIRE001..008')
+    manifest['trigger'] = 'PG-D342 shared protected wire interaction and eighteen fixed Web request capabilities: frozen six-module full security regression after independent byte/vector PT'
+    manifest['limitations'] = [
+        'PG432/source d90 full2909 and dirty selected72 are preserved, not reused as this source full acceptance',
+        'PG432 native Pair operator is UNKNOWN with M/A held after obsolete empty-Transfer fixture refusal; QA047 pending; no native success or historical close inferred',
+        'Five fixed Web wire facades do not prove full HTTP business assembly or ordinary native readiness',
+        'Caddy/original DONE/normal retirement/real CHR-A01/L01/native coverage/full-scope 100% remain pending',
+        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
