@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC168（BUG539/YKT383、SSC164の2子既知失敗再開）：旧SSC144単一子のxor入口を維持し、固定API+WEBだけの別Pair観測/退役入口を追加する。共通INVALID/current/permit全byteとdigest/boot/activation/ownerが一致し、2childのpid/Invocationが異なること、親/各childの真正捕捉世代と同source・署名BOMを要求する。捕捉Root→ordinaryとAPI本人/親readyの後にWeb普通50/親30/API通常TERM143・cleanupとなった場合も全親成功へ読み替えず、M下で実18field/全namespace/原本/全DB列/Backupをprivate保全→全8停止→A/専用DB/advisory/全kernel/全原本/BOM不変を独立再確認してからtyped退役する。3intentを先に捕捉、WEB→API→publicationの順で退役/sync/再検証し、current/原本を完成化・別Epoch発行しない。例外時はpublicationを先に再隔離しAPI/WEB両方の再隔離を個別に試み、不明はM/A保持して次起動を拒否する。intent有無の初期Pair確認と、半退役後も共通sourceを再読するgateを分離し、自分自身の正規unlinkを未知にしない。unknown boot/role/親/第三child/foreign markerやGCだけの終了code復元は不許可。
+
 SSC167（BUG536/YKT380）：SSC165のboot-only namespace設定を署名payloadへ含める固定pathは `config/tmpfiles/schubert-nk-maintenance.conf` だけ。既存payload型の厳密集合へこの1件を追加し、全inventory・原署名・実file size/hash・Root/config group/0750dir・0640file・RO保持・再openは同じ検証を適用する。他tmpfiles名/拡張suffix/未登録file/secretを一般許可しない。配置先 `/usr/lib/tmpfiles.d/schubert-nk-maintenance.conf` はRoot管理の初期boot設定であり、signed template存在を導入済み・boot済みへ読み替えない。既存lock/holder稼働中のtmpfiles再実行・lock再作成/置換は禁止のまま、導入及び次bootの実確認は別後条件。
 
 SSC166（BUG532/YKT377、同S3初回cold経路）：SSC131の旧正常143及び非空BOOT_JOURNAL契約は不変更。初期18field/kernel前後同値・全cold（Result success、code/status/start/end 0、Invocation空）を保持し、同boot/固定Artemis Unitの全journalをInvocation/time/cursor/grep/linesフィルタなし・最大4MiB/既存5s/親元期限内で2回取得する。成功した両readが厳密0byteの場合だけ別型NoPriorを作る。IO/timeout/overflow/null/unknown/空白/非空を無履歴へ読み替えず、最初の非空は既存厳格Closed収集へ戻す。STOP_SETの末尾は既存CLEANを捏造せず `NO_PRIOR|BOOT_JOURNAL_EMPTY|2|0|0\n`（実read回数/実byte数）を出す。これは現boot旧console証拠の不在であり、旧boot正常停止・GC成功・削除済journalの復元ではない。fresh typed Liveの実previous baseline一致及び前後Live/親/原本再検査の中で、同boot全journalを再取得し既存consume/contentSha256で全rowのfresh Invocation/実start以後、required startup3event、error/重複/foreign/surrogate拒否を検査する。Broker cycleの既存2readiness callback内（intent退役前）とMain末段・issuer再検査の両箇所に接続する。後から現れた旧rowを無視・成功fallbackしない。独立旧4goldenは不変更、新present/absent goldenと遅延旧row/失敗時intent保持をPTへ追跡する。
@@ -257,6 +259,8 @@ SSC058/PG165: backupのMANIFEST.json固定値/byte schemaは341 §6.4を正と�
 | `nk.batch.chunk-size` | notification/question 1000、log 10000 | 1..defined max |
 
 ## 6. Credential catalog・rotation
+
+SSC168再隔離の終端補足（BUG541/YKT385）：publication→API→WEBの各sync後、全対象の不明が無い場合にも全3strict marker存在・共通INVALID/permit/owner/両launchを再観測して同Pair一致を必須とする。最後sync中の先行marker消失/共通source改変を復旧成功へ見せない。再隔離不明は同ownerのM/A保全、工具のA正常close自体が不明の場合はMを解放せず固定Aを再認証し、再隔離後に両lockを保持して次起動を隔離する。
 
 | Credential ID | Consumer | 形式・rotation |
 |---|---|---|
