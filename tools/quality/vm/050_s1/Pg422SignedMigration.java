@@ -146,6 +146,42 @@ public final class Pg422SignedMigration {
       } finally {Arrays.fill(secret,'\0');}
     }
   }
+  static Connection openSchema() throws Exception {
+    Path path=Path.of("/etc/schubert-nk/credentials/db-migration");var metadata=Pg410KnownAuthRecovery.metadata(path);
+    if(!Integer.valueOf(0).equals(metadata.get("uid")) || !Integer.valueOf(0).equals(metadata.get("gid"))
+        || !Integer.valueOf(0100600).equals(metadata.get("mode")))throw new IllegalStateException("fixed migration source required");
+    try(var credential=InspectorDbCredential.consume(Pg410KnownAuthRecovery.material(path,65536))) {
+      char[] secret=credential.copyPassword();var properties=new Properties();
+      properties.setProperty("user","schubert_migration");properties.setProperty("connectTimeout","3");properties.setProperty("socketTimeout","5");
+      try {
+        properties.setProperty("password",new String(secret));
+        var connection=DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/schubert_nk",properties);
+        try {
+          connection.setAutoCommit(true);
+          try(var statement=connection.createStatement()) {
+            statement.setQueryTimeout(5);statement.execute("SET ROLE nk_owner");
+            try(var result=statement.executeQuery("select current_user,session_user,current_database(),pg_is_in_recovery()")) {
+              if(!result.next() || !"nk_owner".equals(result.getString(1)) || !"schubert_migration".equals(result.getString(2))
+                  || !"schubert_nk".equals(result.getString(3)) || !Boolean.FALSE.equals(result.getObject(4,Boolean.class)) || result.next())
+                throw new IllegalStateException("dedicated migration role/db required");
+            }
+          }
+          connection.setReadOnly(true);return connection;
+        } catch(Exception | Error failure) {connection.close();throw failure;}
+      } finally {Arrays.fill(secret,'\0');properties.clear();}
+    }
+  }
+  static <T> T checked(Pg387TrustedDeployment.Checked<T> work) throws java.io.IOException {
+    return Pg387TrustedDeployment.checked(()-> {
+      try {return work.execute();}
+      catch(Exception | Error failure) {
+        System.err.println("PG422_INNER_REFUSED type="+failure.getClass().getName()+" diagnosticsRedacted=true");
+        for(var frame:failure.getStackTrace())if(frame.getClassName().equals("Pg422SignedMigration"))
+          System.err.println("PG422_INNER_FRAME "+frame.getMethodName()+":"+frame.getLineNumber());
+        throw failure;
+      }
+    });
+  }
   static void profile(byte[] next,Map<String,Object> oldMetadata) throws Exception {
     Path part=PROFILE.resolveSibling("backup-profile.json.pg422.part");
     Files.write(part,next,StandardOpenOption.CREATE_NEW);
@@ -165,9 +201,9 @@ public final class Pg422SignedMigration {
         System.err.println("PG422_FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
     });
     if(args.length!=0 || !Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01"))throw new IllegalStateException("isolated operator only");
-    MaintenanceFileLock.create().tryExclusive(()->Pg387TrustedDeployment.checked(()-> {
+    MaintenanceFileLock.create().tryExclusive(()->checked(()-> {
       Pg387TrustedDeployment.requireNoUndeliveredWork();Pg387TrustedDeployment.stopAll();
-      return StartupAdmissionFile.create().tryExclusive(fd->Pg387TrustedDeployment.checked(()-> {
+      return StartupAdmissionFile.create().tryExclusive(fd->checked(()-> {
         Pg387TrustedDeployment.terminalAll();
         if(!Pg410KnownAuthRecovery.show(dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshot.Target.MORNING).snapshot().quiescent())
           throw new IllegalStateException("Morning manager not quiescent");
@@ -177,14 +213,14 @@ public final class Pg422SignedMigration {
         if(!approval.manifestSha256().equals("2348f978fafc1cdd521e1d866ca8fa3ae13d220668b266e0d989d0087cfa7979"))throw new IllegalStateException("one fixed candidate required");
         if(Files.exists(SAVED,LinkOption.NOFOLLOW_LINKS))throw new IllegalStateException("partial preservation exists, not auto repair");
         Files.createDirectory(SAVED,java.nio.file.attribute.PosixFilePermissions.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rwx------")));
-        try(var db=Pg407FailedRootRecovery.openDatabase()) {
+        try(var db=Pg407FailedRootRecovery.openDatabase();var schema=openSchema()) {
           db.setAutoCommit(false);
           try(var s=db.createStatement();var row=s.executeQuery("select pg_catalog.pg_try_advisory_lock(71419602)")) {
             if(!row.next() || !Boolean.TRUE.equals(row.getObject(1,Boolean.class)) || row.next())throw new IllegalStateException("dedicated advisory required");
           }
           original(db);var rows=Pg407FailedRootRecovery.databaseRows(db);if(rows.size()!=182)throw new IllegalStateException("all old182 required");
-          var backup=Pg407FailedRootRecovery.backupSnapshot();var data=business(db);
-          if(!history(db).equals(expected(23)))throw new IllegalStateException("independent old24 history differs");
+          var backup=Pg407FailedRootRecovery.backupSnapshot();var data=business(schema);
+          if(!history(schema).equals(expected(23)))throw new IllegalStateException("independent old24 history differs");
           byte[] oldProfile=Pg410KnownAuthRecovery.material(PROFILE,4096),nextProfile=Files.readAllBytes(CANDIDATE.resolve("config/effective/backup-profile.json"));
           var metadata=Pg410KnownAuthRecovery.metadata(PROFILE);
           if(!Integer.valueOf(0).equals(metadata.get("uid")) || !Long.valueOf(new FixedServiceIdentity().configurationGroup()).equals(((Integer)metadata.get("gid")).longValue())
@@ -193,11 +229,11 @@ public final class Pg422SignedMigration {
           save("backup-profile-before.json",oldProfile);restorePoint();
           System.out.println("PG422_STAGE PRIVATE_RESTORE_POINT_OLD24_VERIFIED");
           migrate();
-          if(!history(db).equals(expected(25)) || !rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(db))
+          if(!history(schema).equals(expected(25)) || !rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(schema))
               || !backup.equals(Pg407FailedRootRecovery.backupSnapshot()))throw new IllegalStateException("migration independent preservation differs");
           original(db);Pg387TrustedDeployment.terminalAll();
           profile(nextProfile,metadata);Pg387TrustedDeployment.activate(approval);
-          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(db)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot()))throw new IllegalStateException("activation preservation differs");
+          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(schema)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot()))throw new IllegalStateException("activation preservation differs");
           original(db);Pg387TrustedDeployment.terminalAll();db.rollback();
         }
         System.out.println("PG422_DEPLOYED source="+SOURCE+" signatureAndBom=true migrations=2 history=26 all182AndBusinessAndBackupUnchanged=true profileSchema025=true permitsIssued=0 businessReady=false");
