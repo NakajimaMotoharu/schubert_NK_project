@@ -114,9 +114,11 @@ final class MorningBrokerExecution {
       MaintenanceRunState state,
       MorningDatabaseSession.Access database,
       StartupPermitRecords.Epoch epoch,
-      MorningNewRunAdmission.OriginalProof original)
+      MorningNewRunAdmission.OriginalProof original,
+      MorningPreviousBroker.Evidence previous)
       throws IOException {
-    return execute(context, expected, budget, state, database, epoch, original, () -> epoch);
+    return execute(
+        context, expected, budget, state, database, epoch, original, () -> epoch, previous);
   }
 
   /** Same private Morning scope: only its actual publication result advances expected current. */
@@ -132,9 +134,11 @@ final class MorningBrokerExecution {
       MorningDatabaseSession.Access database,
       StartupPermitRecords.Epoch epoch,
       MorningNewRunAdmission.OriginalProof original,
-      ExpectedCurrent expectedCurrent)
+      ExpectedCurrent expectedCurrent,
+      MorningPreviousBroker.Evidence previous)
       throws IOException {
     Objects.requireNonNull(expectedCurrent, "same-owner expected current");
+    Objects.requireNonNull(previous, "actual previous broker evidence");
     require(
         expected.service() == RootStartupContext.Service.MORNING
             && epoch.state() == StartupPermitRecords.State.INVALID
@@ -185,6 +189,7 @@ final class MorningBrokerExecution {
                   actual -> {
                     observations.add(
                         readObservations(reader, parent, actual, databaseProof, epoch.boot()));
+                    previous.recheck(actual);
                   });
           // BUG385: Cycle verifies readiness after start and again before intent retirement.
           // Keep both genuine snapshots; only its final verified observation is completion data.

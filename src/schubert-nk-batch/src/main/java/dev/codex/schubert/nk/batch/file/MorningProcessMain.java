@@ -194,7 +194,8 @@ public final class MorningProcessMain {
                               database,
                               epoch,
                               original,
-                              publication::expected);
+                              publication::expected,
+                              previousBroker);
                       var expiry =
                           MorningExpiryExecution.execute(
                               root,
@@ -274,7 +275,7 @@ public final class MorningProcessMain {
                               actualDatabase.release(),
                               configurations.apiSha256(),
                               configurations.webSha256());
-                      previousBroker.recheck();
+                      previousBroker.recheck(broker.live());
                       var stopFrame =
                           MorningGateEvidence.stop(
                               epoch,
@@ -345,7 +346,7 @@ public final class MorningProcessMain {
                                             cleanup.terminal(), issuerOwner)));
                             database.recheckExpiry(expiry, issuerOwner);
                             retention.recheck();
-                            previousBroker.recheck();
+                            previousBroker.recheck(broker.live());
                             broker
                                 .observe(); // mutable pressure/log size is independently validated,
                             // not frozen

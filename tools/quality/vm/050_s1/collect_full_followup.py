@@ -260,5 +260,17 @@ if int(identifier[2:5]) >= 428:
         'New VM boot requires fresh observations; old PID/Invocation and terminal receipts are historical only',
         'Native ordinary coverage, CHR-A01/L01 and full scope coverage100 remain pending',
         'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
+if int(identifier[2:5]) >= 429:
+    manifest['ssc'].extend(['SSC-165', 'SSC-166'])
+    manifest['bugs'].extend(['BUG-527', 'BUG-531', 'BUG-532'])
+    manifest['ykt'].extend(['YKT-376', 'YKT-377'])
+    manifest['testIds'].extend(['ISSCOLD001..007', 'MAINTENANCE-TMPFILES-FIXED-NAMESPACE'])
+    manifest['trigger'] = 'SSC165/166 same cold-boot owner/STOP_SET/fresh Broker intent contract: full six frozen-source regression before signed ordinary parent candidate'
+    manifest['limitations'] = [
+        'PG428/source352 full2891 is historical and not reused for this changed source',
+        'Actual same-source NoPrior/fresh Broker and issuer/API/Web parent observation pending',
+        'Web full business assembly, Caddy, held original DONE and normal intent retirement remain pending',
+        'Native ordinary coverage, CHR-A01/L01 and full scope coverage100 remain pending',
+        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

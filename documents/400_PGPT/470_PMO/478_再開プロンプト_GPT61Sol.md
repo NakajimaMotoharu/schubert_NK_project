@@ -35,7 +35,7 @@ S1の後はS2必要Cleanup/Transfer/Artemis/Expiry実結果→SSC108根拠の正
 開発中は変更module/依存・影響suiteを検証し暫定保存します。同じ所有・起動契約の変更群で検証をまとめ、変更契約の独立試験/網羅を閉じてから無関係な機能へ進みます。必要な同じ起動経路のnative接続/採取はS2/S3へ継続できますが、S1の実経路検証だけで正式受入としません。
 機能受入、変更後停止、PR/工程gate、POM/共通codec/DDL/security等の横断変更では451所定の全回帰を実施し、横断変更群は他機能へ進む前に全回帰します。全run前にtriggerと受入IDを1行で記録します。個々のhelper/class/commitだけを理由に全正式scopeを毎回再生成せず、必要な試験回数に上限も設けません。
 正式run前にNode/toolchain/PATH/format、collector owner/JUnit署名/XML、対象coverage、既存負canary、VM採取を照合し、source/試験/設定/toolsを固定してください。Maven exit0・jacoco:report・限定manifestを正式合格と混同せず、未実行/failed/skipped/flaky/disabled、別source結果、未認定stashを加算しません。
-意味ある単位でcommit/pushし、未認定状態を明記します。既存変更破棄・force push・branch protection迂回はせず、PR/mergeは元依頼の権限と完了条件に従います。source等未変更の再開や管理文書だけの今回改訂を理由に全試験を二重実行しません。
+意味ある単位でcommit/pushし、未認定状態を明記します。設計書の閲覧用正本はorigin/mainです。README/AGENTS.mdのルールに従い、設計修正の記述確定・必要承認・横断反映・文書整合確認が終わったら、設計書と必要な台帳を同じ作業の中でmainへ反映しremoteを確認してください。PG/PT全体の完了まで先送りせず、未受入コード/設定/工具/証跡は設計差分だけの反映へ混ぜません。このmain反映は利用者の継続指示であり毎回の再承認は不要です。既存変更破棄・force push・branch protection迂回はせず、実装のPR/mergeは元依頼の権限と完了条件に従います。source等未変更の再開や管理文書だけの今回改訂を理由に全試験を二重実行しません。
 
 【消費・停滞の自己点検】
 476のN=未キャッシュ入力＋出力、T=全入力＋出力を親子込みで計測し、推論/cachedを二重加算しません。N/Tは共有枠/料金の公式換算ではなく、不明値は推定で埋めません。既存script/usage増分で集計し、長大rawログを毎command再読・再集計しません。

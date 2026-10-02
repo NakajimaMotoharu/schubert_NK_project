@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * NK-OPS-001 old closed generation, not a cold-success placeholder or startup authority. RD
- * operational safety; UI operations; SS343 §6.17/SSC131/132; PT ISSSTOP001..007.
+ * operational safety; UI operations; SS343 §6.17/SSC131/132/166; PT ISSSTOP001..007, ISSCOLD001..007.
  */
 @NullMarked
 public final class MorningPreviousBroker {
@@ -19,7 +19,60 @@ public final class MorningPreviousBroker {
     byte[] read(List<String> command, int limit, long remainingNanos) throws IOException;
   }
 
-  public static final class Closed {
+  public sealed interface Evidence permits Closed, NoPrior {
+    UUID boot();
+
+    void recheck(MorningBrokerUnitCycle.Live fresh) throws IOException;
+  }
+
+  /** SSC166: actual current-boot absence, never an invented old clean-stop Summary. */
+  public static final class NoPrior implements Evidence {
+    private final UUID boot;
+    private final InspectorUnitSnapshot baseline;
+    private final Query query;
+    private final MaintenanceOwnerFrame.Guard parent;
+    private final long thread = Thread.currentThread().threadId();
+
+    private NoPrior(
+        UUID boot,
+        InspectorUnitSnapshot baseline,
+        Query query,
+        MaintenanceOwnerFrame.Guard parent) {
+      this.boot = boot;
+      this.baseline = baseline;
+      this.query = query;
+      this.parent = parent;
+    }
+
+    public UUID boot() {
+      return boot;
+    }
+
+    public void recheck(MorningBrokerUnitCycle.Live fresh) throws IOException {
+      Objects.requireNonNull(fresh);
+      require(thread == Thread.currentThread().threadId());
+      parent.check();
+      fresh.recheck();
+      require(baseline.matches(fresh.previousObservation()));
+      byte[] bytes = read(query, base(boot), MAX, parent);
+      try {
+        BrokerJournalEvidence.consume(
+            bytes, boot, fresh.invocation(), fresh.startedMonotonicMicros());
+        BrokerJournalEvidence.contentSha256(bytes);
+        fresh.recheck();
+        parent.check();
+      } finally {
+        Arrays.fill(bytes, (byte) 0);
+      }
+    }
+
+    @Override
+    public String toString() {
+      return "PreviousBroker[no-prior-current-boot]";
+    }
+  }
+
+  public static final class Closed implements Evidence {
     private final UUID boot;
     private final String source;
     private final String invocation;
@@ -87,6 +140,13 @@ public final class MorningPreviousBroker {
       return contentSha256;
     }
 
+    public void recheck(MorningBrokerUnitCycle.Live fresh) throws IOException {
+      Objects.requireNonNull(fresh);
+      fresh.recheck();
+      recheck();
+      fresh.recheck();
+    }
+
     /** After fresh start, reread only the saved old generation, not the new latest anchor. */
     public void recheck() throws IOException {
       require(thread == Thread.currentThread().threadId());
@@ -115,7 +175,7 @@ public final class MorningPreviousBroker {
 
   private MorningPreviousBroker() {}
 
-  public static Closed capture(
+  public static Evidence capture(
       RootStartupContext root,
       RootStartupContext.Snapshot expected,
       MorningParentBudget budget,
@@ -153,7 +213,7 @@ public final class MorningPreviousBroker {
     Query query =
         InspectorUnitProbe.NativeReader.forTarget(InspectorUnitSnapshot.Target.ARTEMIS)
             ::executeStreaming;
-    var result = collect(UUID.fromString(expected.boot()), before, query, guard);
+    var result = collectForStartup(UUID.fromString(expected.boot()), before, query, guard);
     require(before.matches(probe.read()));
     require(
         same(
@@ -161,6 +221,38 @@ public final class MorningPreviousBroker {
             terminal.quiescentObservation().orElseThrow(MorningPreviousBroker::unavailable)));
     guard.check();
     return result;
+  }
+
+  static Evidence collectForStartup(
+      UUID boot, InspectorUnitSnapshot previous, Query query, MaintenanceOwnerFrame.Guard parent)
+      throws IOException {
+    Objects.requireNonNull(boot);
+    Objects.requireNonNull(previous);
+    Objects.requireNonNull(query);
+    Objects.requireNonNull(parent);
+    parent.check();
+    require(previous.isTarget(InspectorUnitSnapshot.Target.ARTEMIS));
+    if (previous.brokerStoppedNormally()) return collect(boot, previous, query, parent);
+    require(
+        previous.inactiveBaseline()
+            && previous.invocationId().isEmpty()
+            && previous.executionStart().signum() == 0
+            && previous.executionEnd().signum() == 0);
+    byte[] first = read(query, base(boot), MAX, parent);
+    try {
+      if (first.length != 0) return collect(boot, previous, query, parent);
+      require(previous.coldStopped());
+      byte[] second = read(query, base(boot), MAX, parent);
+      try {
+        require(second.length == 0);
+        parent.check();
+        return new NoPrior(boot, previous, query, parent);
+      } finally {
+        Arrays.fill(second, (byte) 0);
+      }
+    } finally {
+      Arrays.fill(first, (byte) 0);
+    }
   }
 
   static Closed collect(

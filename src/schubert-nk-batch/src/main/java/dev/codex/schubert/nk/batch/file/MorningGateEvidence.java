@@ -217,16 +217,16 @@ public final class MorningGateEvidence {
       String morning,
       String broker,
       MorningUnitTerminals.Snapshot initial,
-      MorningPreviousBroker.Closed old)
+      MorningPreviousBroker.Evidence previous)
       throws IOException {
     Objects.requireNonNull(epoch);
     Objects.requireNonNull(initial);
-    Objects.requireNonNull(old);
+    Objects.requireNonNull(previous);
     // Snapshot and Closed have private constructors and validated immutable shapes. Do not
     // duplicate impossible shape checks here; factory negative tests own those invariants.
     require(
         initial.parent().boot().equals(epoch.boot().toString())
-            && old.boot().equals(epoch.boot())
+            && previous.boot().equals(epoch.boot())
             && initial.parent().invocation().equals(morning));
     var text = header("NKSTOP1", epoch, morning, broker);
     var properties =
@@ -281,24 +281,30 @@ public final class MorningGateEvidence {
             .append('\n');
       }
     }
-    require(!old.invocation().equals(broker));
-    text.append("CLEAN|")
-        .append(old.source())
-        .append('|')
-        .append(old.invocation())
-        .append('|')
-        .append(old.nativeStart().map(Object::toString).orElse("-"))
-        .append('|')
-        .append(old.nativeEnd().map(Object::toString).orElse("-"))
-        .append('|')
-        .append(old.upper())
-        .append('|')
-        .append(old.journal().entries())
-        .append('|')
-        .append(hash(old.journal().sha256()))
-        .append('|')
-        .append(hash(old.contentSha256()))
-        .append('\n');
+    switch (previous) {
+      case MorningPreviousBroker.NoPrior ignored ->
+          text.append("NO_PRIOR|BOOT_JOURNAL_EMPTY|2|0|0\n");
+      case MorningPreviousBroker.Closed old -> {
+        require(!old.invocation().equals(broker));
+        text.append("CLEAN|")
+            .append(old.source())
+            .append('|')
+            .append(old.invocation())
+            .append('|')
+            .append(old.nativeStart().map(Object::toString).orElse("-"))
+            .append('|')
+            .append(old.nativeEnd().map(Object::toString).orElse("-"))
+            .append('|')
+            .append(old.upper())
+            .append('|')
+            .append(old.journal().entries())
+            .append('|')
+            .append(hash(old.journal().sha256()))
+            .append('|')
+            .append(hash(old.contentSha256()))
+            .append('\n');
+      }
+    }
     return bytes(text);
   }
 

@@ -102,6 +102,9 @@ public final class AssembleReleaseFixture {
       }
     }
     copy(repo.resolve("src/deployment/artemis/etc/broker.xml"),output.resolve("config/artemis/broker.xml.template"));
+    // SSC165: signed deployment input; installation remains a separate root-owned operation.
+    copy(repo.resolve("src/deployment/tmpfiles/schubert-nk-maintenance.conf"),
+        output.resolve("config/tmpfiles/schubert-nk-maintenance.conf"));
     String wrapper=Files.readString(repo.resolve("src/deployment/operations/inbox-inspector.sh.template"),StandardCharsets.UTF_8)
         .replace("@JAVA_BIN@","/usr/bin/java").replace("@API_JAR@","/opt/schubert-nk/current/api/api.jar")
         .replace("@LIB_DIR@","/opt/schubert-nk/current/api/lib");
