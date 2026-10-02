@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D345追跡：NK-WEB-002/SCR016 UserCreateForm.bind/displayValues/getIssues/isValid/toRequest/close → RD FUN009/AUT002 → UI225 §4/236 §4 → SS313/314/323 → PT-USER-CREATE001～008/UserCreateFormTest/016055・056。独立372byte wire/password Unicode境界/閉binding/null/並行/再表示secret排除を選択83PT/static6zero・対象4coverage0で確認（限定、未認定）。User成功POST/完成token履歴QA049/全Web native readyは別未完了。
+
 PG-D344追跡：NK-WEB-002/SCR015/UserSearchForm/UserListViewModel/UserAdminController.list/UserMvcConfiguration/admin/user-list.html → RD FUN009/AUT002 → UI221/222/225 §3/232/236 §3 → SS313/314/323/332 → PT-USER-HTTP001～010/016053・054。実装前仕様でありUser管理全体・native Web ready未完了。Media固定5経路のPG434/source7caaa full2,930/9class未網羅0は016052へ記録、正式認定を更新していない。
 
 PG-D-343（2026-10-03、NK-WEB-002/NK-MED-001、S3/D05）：Web MediaController.audio/audioDownload/video/music/musicDownload・MediaMvcConfiguration.mediaController・MediaResponseDecoder.decodeVerified/binding/project・WebMediaAudit.constructor/recordはRD FUN005～007/FIL/AUT/MON/PER、UI221223232235237252、SS313314323333351352へ追跡する。PT-MED-HTTP001～010/MediaControllerTest＋既存MED037～040/Range/ApiSessionInvalid、spec016051/result016052。fixture所有のWebLogDatabaseFixtureTest fixture001～003はPT-WEB-DBFIX001～003/BUG552/YKT396へ対応、test helperはProduction class分母へ算入しない。各GET/HEADのfresh wire→descriptor→単一RangeのHTTP接続、native同owner FileSource/全Web assembly/CHRは別未受入で460を維持する。

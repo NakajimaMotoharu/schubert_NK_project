@@ -1,0 +1,128 @@
+{
+  "id": "PG436-user-create-selected-v1",
+  "formal": false,
+  "sourceCommit": "a325749c3792b9cb6bd4cfb641c0b5788599292f",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java",
+      "sha256": "104ff8a3017a15315b44f9c4d56703def3e3740394df5e0822a3e7beb133f40c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "sha256": "c994ee131dcf0d449ec68f393c6a1606ddb8f336e2fb300aea99ff18fc240116"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T06:51:34+09:00",
+  "exitCode": 0,
+  "tests": 83,
+  "suites": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-USER-CREATE001..008",
+    "PT-USER-HTTP001..010",
+    "PT-WEB-S3WIRE001..008"
+  ],
+  "bugs": [
+    "BUG-557"
+  ],
+  "ykt": [
+    "YKT-401"
+  ],
+  "command": "six reactor spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,UserQueryApplicationServiceTest,UserQueryRepositoryTest,UserQueryReplayServiceTest,UserQueryRequestTest,PasswordPolicyTest,UserAdminControllerTest,UserCreateFormTest,WebBusinessWireClientsTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "UserCreateForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 402
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 48
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 74
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "cfcb8bd8fb36f3e91adc21a7cd592318d9c50e8288fa12a21daa91f037a89138",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "one target class missed0, cumulative exec not formal coverage100",
+    "User detail/create/mutations and full Web business assembly/native ready/Caddy/CHR pending",
+    "QA047 native owner, QA048 receipt reference and QA049 completed-token lifecycle remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "0202f09e6e6a7ffc865fe8cb36b21a35fa84bcdf10376fc39fd829a8b1257ad1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest.xml",
+      "sha256": "ef16f5581bc6bc06a4f3fbb49bd18acf85b490f0d45dc89fbab78510f4929660"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.xml",
+      "sha256": "8b2e7a6f8b6f427a42f0755603c6e0b1a00f57fe8c66acb329fbdb7f921f0ad0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "697997c677f54142ffe2f6322cde816307e143ac75cc5f6b6c1beeae2937f2d1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "a5cf780709fec3738ef05d87bce9d29a1222650310baed0b5618846d3c6b775d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml",
+      "sha256": "a55a7d04062545cd499485d0daa048e4e6bde8ee52d05f72285258b333a12bd1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "e7e02024807eaba335abe0d8cb8275f897fde3a7c80fadc6861c8b28dd210405"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "ddb777a5287f99196c32e85c400910268aeb78fc74d38fc27cda799355be74ab"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "1062d9f34ecd2e8bfc205e149d416788c9a38d680051770cd99f226d02fe6d88"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "70faf78ba70fa38b28bbd130241fa7bb91f89789540dd18a94cffade0887e4b3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "544b6b1028481928d123299c5f6e01787d679e4a733477fc583d777ee047ae93"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "e723c122e35fde901ce7969cd5579882c4ccf7ceaa76cfff1ec34b831295454e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG436-user-create-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "e11c68c5ca4db2d74e26d20b730cb0681b73a1fecf887a3b28a9eb346c37c639"
+    }
+  ]
+}
