@@ -35,8 +35,8 @@ import javax.sql.DataSource;
  * all-root/producer-stop/proof verification precedes this operation. Borrowed processors must not
  * escape or outlive their codec/root owners; caller stops consumers before returning. No consumer/A
  * release is performed here. NK-OPS-001/NK-SCN-001/NK-AUT-001; FIL001..009/AUT001..004/MQ006;
- * UI226237243; SS311312333342343/SSC149161; PG-D336; PT-OPS-API-PREP-001..004. Full registration/lifecycle
- * remains mandatory.
+ * UI226237243; SS311312333342343/SSC149161; PG-D336; PT-OPS-API-PREP-001..004. Full
+ * registration/lifecycle remains mandatory.
  */
 public final class ApiApplicationPreparation {
   private ApiApplicationPreparation() {}
