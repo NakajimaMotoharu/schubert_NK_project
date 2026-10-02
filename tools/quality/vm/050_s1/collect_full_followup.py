@@ -375,5 +375,17 @@ if int(identifier[2:5]) >= 437:
     manifest['limitations'].extend([
         'PG436 source22b95 full2956 and PG437 selected WIP results are not reused as this fresh source full acceptance',
         'SCR020 Notification GET/HEAD is connected; SCR021 detail/cancel and full business/native Web assembly remain incomplete'])
+if int(identifier[2:5]) >= 438:
+    manifest['bugs'].extend(['BUG-562', 'BUG-563', 'BUG-564', 'BUG-565'])
+    manifest['ykt'].extend(['YKT-406', 'YKT-407', 'YKT-408', 'YKT-409'])
+    manifest['testIds'].extend(['PT-NTF-DETAIL001..008', 'deletedNotificationNeverContainsAnswer', 'PT-OPS-EVIDENCE-GIT001'])
+    manifest['trigger'] = 'PG-D349 SCR021 reference and deleted-answer typed semantic rejection, common protocol/MVC/CSS and evidence tooling corrections: source-frozen six-module regression'
+    web = ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml')
+    detail = next(c for c in web.findall('.//class') if c.get('name').endswith('/NotificationDetailViewModel'))
+    manifest['notificationDetailCoverage'] = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))} for c in detail.findall('counter')}
+    assert all(c['missed'] == 0 for c in manifest['notificationDetailCoverage'].values())
+    protocol = ET.parse(root / 'src/schubert-nk-protocol/target/site/jacoco/jacoco.xml')
+    assert all(int(c.get('missed')) == 0 for c in protocol.getroot().findall('counter'))
+    manifest['limitations'].append('SCR021 reference is connected, cancellation/token/Question forms and full native ordinary Web remain incomplete')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

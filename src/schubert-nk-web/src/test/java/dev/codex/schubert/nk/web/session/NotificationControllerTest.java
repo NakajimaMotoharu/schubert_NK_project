@@ -3,8 +3,12 @@ package dev.codex.schubert.nk.web.session;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.*;
 import dev.codex.schubert.nk.web.config.NotificationMvcConfiguration;
@@ -13,6 +17,7 @@ import dev.codex.schubert.nk.web.form.NotificationSearchForm;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
+import dev.codex.schubert.nk.web.view.NotificationDetailViewModel;
 import dev.codex.schubert.nk.web.view.NotificationListViewModel;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
@@ -791,6 +796,453 @@ class NotificationControllerTest {
     }
   }
 
+  @Test
+  void detail001BothRolesStatesAndIndependentWholeRequest() throws Exception {
+    for (UserRole role : UserRole.values())
+      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
+        for (long target : List.of(1L, 999999999999L))
+          try (var f = new Fixture()) {
+            f.detailState = state;
+            var model = new ExtendedModelMap();
+            var reply = new MockHttpServletResponse();
+            assertEquals(
+                "notifications/detail",
+                f.controller.detail(Long.toString(target), actor(role), model, raw(), reply));
+            assertEquals(200, reply.getStatus());
+            var page = assertInstanceOf(NotificationDetailViewModel.class, model.get("page"));
+            assertEquals(target, page.getValues().get("id"));
+            assertEquals(state, page.getValues().get("state"));
+            assertEquals(role.wireValue(), page.getTopBar().getRole());
+            byte[] expected = new byte[268];
+            Arrays.fill(expected, (byte) ' ');
+            put(expected, 0, 8, "SCHBNK01");
+            put(expected, 8, 3, "001");
+            put(expected, 11, 8, "NTDREQ01");
+            put(expected, 19, 3, "001");
+            put(expected, 22, 1, "Q");
+            put(expected, 23, 1, "S");
+            put(expected, 24, 36, "00000000-0000-0000-0000-000000000001");
+            put(expected, 60, 36, "00000000-0000-0000-0000-000000000001");
+            put(expected, 96, 17, "20261003090000000");
+            put(expected, 113, 64, "a".repeat(64));
+            number(expected, 177, 4, 256);
+            number(expected, 181, 6, 12);
+            number(expected, 187, 6, 0);
+            number(expected, 193, 6, 0);
+            number(expected, 199, 9, 268);
+            number(expected, 256, 12, target);
+            assertArrayEquals(expected, f.requests.getFirst());
+            f.erased();
+          }
+    try (var f = new Fixture()) {
+      f.code = "0200";
+      assertEquals(
+          "notifications/detail",
+          f.controller.detail(
+              "1",
+              actor(UserRole.USER),
+              new ExtendedModelMap(),
+              raw(),
+              new MockHttpServletResponse()));
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail002StateDatesDeletedAndEmptyAnswerProjection() {
+    var labels =
+        Map.of(
+            "RECEIVED",
+            "受付中",
+            "PROCESSING",
+            "処理中",
+            "COMPLETED",
+            "処理完了",
+            "ERROR",
+            "エラー",
+            "CANCELLED",
+            "取消済み");
+    for (NotificationState state : NotificationState.values())
+      for (boolean deleted : List.of(false, true)) {
+        var page =
+            NotificationDetailViewModel.from(
+                actor(UserRole.USER), new NotificationId(1), detailData(1, state, deleted, ""));
+        var values = page.getValues();
+        assertEquals(labels.get(state.wireValue()), values.get("stateLabel"));
+        assertEquals("2026-10-03 08:58:00", values.get("submittedAt"));
+        assertEquals(deleted, values.get("deleted"));
+        assertEquals(deleted ? "" : "question", values.get("question"));
+        assertEquals(
+            state == NotificationState.COMPLETED && !deleted, values.get("answerAvailable"));
+        assertEquals(
+            state == NotificationState.COMPLETED && !deleted ? "/questions/1" : "",
+            values.get("questionHref"));
+        assertEquals("", values.get("answer"));
+        assertEquals(
+            state == NotificationState.ERROR ? "PROCESS_FAILED" : "", values.get("errorCode"));
+        assertEquals("NotificationDetailViewModel[REDACTED]", page.toString());
+        assertThrows(UnsupportedOperationException.class, () -> values.put("id", 2L));
+      }
+    var answered =
+        NotificationDetailViewModel.from(
+            actor(UserRole.ADMIN),
+            new NotificationId(1),
+            detailData(1, NotificationState.COMPLETED, false, "answer"));
+    assertEquals("answer", answered.getValues().get("answer"));
+  }
+
+  @Test
+  void detail003NullTargetsAndProjectionDisagreement() throws Exception {
+    var data = detailData(1, NotificationState.RECEIVED, false, "");
+    assertThrows(
+        NullPointerException.class,
+        () -> NotificationDetailViewModel.from(null, new NotificationId(1), data));
+    assertThrows(
+        NullPointerException.class,
+        () -> NotificationDetailViewModel.from(actor(UserRole.USER), null, data));
+    assertThrows(
+        NullPointerException.class,
+        () -> NotificationDetailViewModel.from(actor(UserRole.USER), new NotificationId(1), null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NotificationDetailViewModel.from(actor(UserRole.USER), new NotificationId(2), data));
+    try (var f = new Fixture()) {
+      for (String bad : List.of("0", "-1", "1000000000000", "abc", "99999999999999999999")) {
+        var reply = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail(bad, actor(UserRole.USER), new ExtendedModelMap(), raw(), reply));
+        assertEquals(404, reply.getStatus());
+      }
+      assertTrue(f.requests.isEmpty());
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  null,
+                  actor(UserRole.USER),
+                  new ExtendedModelMap(),
+                  raw(),
+                  new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  "1", null, new ExtendedModelMap(), raw(), new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  "1", actor(UserRole.USER), null, raw(), new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail(
+                  "1",
+                  actor(UserRole.USER),
+                  new ExtendedModelMap(),
+                  null,
+                  new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.controller.detail("1", actor(UserRole.USER), new ExtendedModelMap(), raw(), null));
+      assertThrows(
+          SessionStoreException.class,
+          () ->
+              f.controller.detail(
+                  "1",
+                  () -> "foreign",
+                  new ExtendedModelMap(),
+                  raw(),
+                  new MockHttpServletResponse()));
+      f.detailReplyId = 2;
+      var reply = new MockHttpServletResponse();
+      assertNull(
+          f.controller.detail("1", actor(UserRole.USER), new ExtendedModelMap(), raw(), reply));
+      assertEquals(503, reply.getStatus());
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail004ErrorsMalformedAndUnknownTransport() throws Exception {
+    var codes = List.of("0100", "0101", "0103", "0104", "0105", "0106", "0107", "9000", "9001");
+    var statuses = List.of(400, 401, 403, 404, 409, 429, 409, 503, 503);
+    for (int i = 0; i < codes.size(); i++)
+      try (var f = new Fixture()) {
+        f.code = codes.get(i);
+        var reply = new MockHttpServletResponse();
+        assertNull(
+            f.controller.detail("1", actor(UserRole.USER), new ExtendedModelMap(), raw(), reply));
+        assertEquals(statuses.get(i), reply.getStatus());
+        f.erased();
+      }
+    try (var f = new Fixture()) {
+      f.responder =
+          (id, input) -> {
+            var bytes = f.standard(id, input);
+            put(bytes, 60, 36, new UUID(2, 2).toString());
+            return bytes;
+          };
+      var reply = new MockHttpServletResponse();
+      assertNull(
+          f.controller.detail("1", actor(UserRole.USER), new ExtendedModelMap(), raw(), reply));
+      assertEquals(503, reply.getStatus());
+      f.erased();
+      var unknown = new AssertionError("unknown detail transport");
+      f.responder =
+          (id, input) -> {
+            throw unknown;
+          };
+      assertSame(
+          unknown,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  f.controller.detail(
+                      "1",
+                      actor(UserRole.USER),
+                      new ExtendedModelMap(),
+                      raw(),
+                      new MockHttpServletResponse())));
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail005SafeStateDomAndHead() throws Exception {
+    for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
+      for (boolean deleted : List.of(false, true))
+        try (var f = new Fixture();
+            var context = f.mvc()) {
+          f.detailState = state;
+          f.deleted = deleted;
+          f.summary = "<script>alert(1)</script> question";
+          var mvc = MockMvcBuilders.webAppContextSetup(context).build();
+          var result =
+              mvc.perform(
+                      get("/notifications/1")
+                          .principal(actor(UserRole.USER))
+                          .requestAttr(CsrfToken.class.getName(), csrf()))
+                  .andReturn();
+          assertEquals(200, result.getResponse().getStatus());
+          var dom = Jsoup.parse(result.getResponse().getContentAsString());
+          assertEquals("通知明細", dom.title());
+          assertEquals("2026-10-03 08:58:00", dom.select(".submitted-at").text());
+          assertTrue(dom.select(".question-body script,.answer-body script").isEmpty());
+          assertEquals(deleted ? "" : f.summary, dom.select(".question-body").text());
+          assertEquals(deleted ? "質問・回答は削除済みです。" : "", dom.select(".deleted").text());
+          boolean answer = state.equals("COMPLETED") && !deleted;
+          assertEquals(answer ? "（空の回答）" : "", dom.select(".answer-body").text());
+          assertEquals(answer ? "/questions/1" : "", dom.select(".question-detail").attr("href"));
+          assertEquals(
+              state.equals("ERROR") ? "PROCESS_FAILED" : "", dom.select(".error-code").text());
+          assertEquals(
+              state.equals("CANCELLED") ? "2026-10-03 08:59:00" : "",
+              dom.select(".cancelled-at").text());
+          assertTrue(dom.select("form[method=post] input[name=operation_token]").isEmpty());
+          assertEquals(
+              200,
+              mvc.perform(
+                      head("/notifications/1")
+                          .principal(actor(UserRole.USER))
+                          .requestAttr(CsrfToken.class.getName(), csrf()))
+                  .andReturn()
+                  .getResponse()
+                  .getStatus());
+          assertEquals(
+              405,
+              mvc.perform(post("/notifications/1").principal(actor(UserRole.USER)))
+                  .andReturn()
+                  .getResponse()
+                  .getStatus());
+          assertEquals(
+              404,
+              mvc.perform(get("/notifications/abc").principal(actor(UserRole.USER)))
+                  .andReturn()
+                  .getResponse()
+                  .getStatus());
+          f.erased();
+        }
+  }
+
+  @Test
+  void detail006RealSecurityAnd0102() throws Exception {
+    for (String role : List.of("USER", "ADMIN")) {
+      reset();
+      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      try (var f = new Fixture();
+          var web =
+              new EmbeddedWebSecurityTest.Server(
+                  Files.createTempDirectory(root, "notification-detail-http-"),
+                  false,
+                  db,
+                  Optional.of(api.provider),
+                  true,
+                  true,
+                  (mvc, invalid) -> configure(mvc, f.client, invalid))) {
+        var loginPage = web.send("GET", "/login", null, null, true);
+        String initial =
+            loginPage.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        String csrf = loginPage.body().substring(6);
+        var login =
+            web.send("POST", "/login", initial, "username=reader&password=p&_csrf=" + csrf, true);
+        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var page = web.send("GET", "/notifications/1", cookie, null, true);
+        assertEquals(200, page.statusCode());
+        assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
+        assertEquals("通知明細", Jsoup.parse(page.body()).title());
+        var head = web.send("HEAD", "/notifications/1", cookie, null, true);
+        assertEquals(200, head.statusCode());
+        assertEquals("", head.body());
+        assertEquals(302, web.send("GET", "/notifications/1", null, null, true).statusCode());
+        f.code = "0102";
+        var expired = web.send("GET", "/notifications/1", cookie, null, true);
+        assertEquals(302, expired.statusCode());
+        assertEquals(
+            "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
+        assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+        int count = f.requests.size();
+        assertEquals(302, web.send("GET", "/notifications/1", cookie, null, true).statusCode());
+        assertEquals(count, f.requests.size());
+        f.erased();
+        api.erased();
+      }
+    }
+  }
+
+  @Test
+  void detail007ConcurrentIndependentTargetsAndContexts() throws Exception {
+    try (var f = new Fixture();
+        var executor = Executors.newFixedThreadPool(8)) {
+      var tasks = new ArrayList<Callable<Void>>();
+      for (int i = 1; i <= 100; i++) {
+        int n = i;
+        tasks.add(
+            () -> {
+              var actor =
+                  new SessionPrincipal(
+                      "reader" + n,
+                      n % 2 == 0 ? UserRole.USER : UserRole.ADMIN,
+                      AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n)),
+                      Instant.EPOCH);
+              var model = new ExtendedModelMap();
+              assertEquals(
+                  "notifications/detail",
+                  f.controller.detail(
+                      Integer.toString(n), actor, model, raw(), new MockHttpServletResponse()));
+              var page = (NotificationDetailViewModel) model.get("page");
+              assertEquals((long) n, page.getValues().get("id"));
+              assertEquals("reader" + n, page.getTopBar().getUsername());
+              return null;
+            });
+      }
+      for (var future : executor.invokeAll(tasks)) future.get(15, TimeUnit.SECONDS);
+      assertEquals(100, f.requests.size());
+      assertEquals(100, f.requests.stream().map(b -> ascii(b, 24, 36)).distinct().count());
+      for (var bytes : f.requests)
+        assertEquals(
+            Long.parseLong(ascii(bytes, 256, 12)),
+            Long.parseUnsignedLong(ascii(bytes, 113, 64), 16));
+      f.erased();
+    }
+  }
+
+  @Test
+  void detail008DeletedAnswerRejectedAtAllBoundaries() throws Exception {
+    var invalid =
+        new NotificationDetailResponseData(
+            new NotificationId(1),
+            RECEIPT,
+            NotificationType.COMPLETED,
+            NotificationState.COMPLETED,
+            Instant.EPOCH,
+            Optional.of(Instant.EPOCH),
+            Optional.of(Instant.EPOCH),
+            Optional.empty(),
+            Optional.empty(),
+            true,
+            Optional.empty(),
+            Optional.of("must not survive deletion"),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty());
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            PayloadSemanticValidator.validate(
+                new TypedPayloadValues(new LayoutId("NTDRSP01"), invalid, List.of())));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            PayloadCodec.standard()
+                .encode(
+                    PayloadTypeCatalog.encode(
+                        new TypedPayloadValues(new LayoutId("NTDRSP01"), invalid, List.of())),
+                    ResultCode.SUCCESS));
+    try (var f = new Fixture()) {
+      f.detailState = "COMPLETED";
+      f.deleted = true;
+      f.answer = "must not survive deletion";
+      f.deletedAnswer = true;
+      var reply = new MockHttpServletResponse();
+      assertNull(
+          f.controller.detail("1", actor(UserRole.USER), new ExtendedModelMap(), raw(), reply));
+      assertEquals(503, reply.getStatus());
+      f.erased();
+      var request = f.requests.getFirst();
+      var bytes = f.standard(new UUID(0, 1), request);
+      assertThrows(
+          LayoutValidationException.class,
+          () ->
+              PayloadTypeCatalog.decode(
+                  PayloadCodec.standard()
+                      .decode(
+                          new LayoutId("NTDRSP01"),
+                          Arrays.copyOfRange(bytes, 256, bytes.length),
+                          List.of(),
+                          ResultCode.SUCCESS)));
+      f.deletedAnswer = false;
+      assertEquals(
+          "notifications/detail",
+          f.controller.detail(
+              "1",
+              actor(UserRole.USER),
+              new ExtendedModelMap(),
+              raw(),
+              new MockHttpServletResponse()));
+      f.erased();
+    }
+  }
+
+  private static NotificationDetailResponseData detailData(
+      long id, NotificationState state, boolean deleted, String answer) {
+    var at = Instant.parse("2026-10-02T23:58:00Z");
+    boolean started =
+        Set.of(NotificationState.PROCESSING, NotificationState.COMPLETED, NotificationState.ERROR)
+            .contains(state);
+    return new NotificationDetailResponseData(
+        new NotificationId(id),
+        RECEIPT,
+        state == NotificationState.COMPLETED
+            ? NotificationType.COMPLETED
+            : state == NotificationState.ERROR ? NotificationType.ERROR : NotificationType.ACCEPTED,
+        state,
+        at,
+        started ? Optional.of(at.plusSeconds(60)) : Optional.empty(),
+        state == NotificationState.COMPLETED ? Optional.of(at.plusSeconds(90)) : Optional.empty(),
+        state == NotificationState.ERROR ? Optional.of(at.plusSeconds(90)) : Optional.empty(),
+        state == NotificationState.CANCELLED ? Optional.of(at.plusSeconds(60)) : Optional.empty(),
+        deleted,
+        deleted ? Optional.empty() : Optional.of("question"),
+        state == NotificationState.COMPLETED && !deleted ? Optional.of(answer) : Optional.empty(),
+        state == NotificationState.ERROR
+            ? Optional.of(NotificationErrorCode.PROCESS_FAILED)
+            : Optional.empty(),
+        state == NotificationState.ERROR ? Optional.of("処理を完了できませんでした。") : Optional.empty(),
+        deleted ? Optional.empty() : Optional.of(new QuestionId(id)));
+  }
+
   private static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final AtomicLong ids = new AtomicLong();
@@ -801,6 +1253,9 @@ class NotificationControllerTest {
     volatile String code = "0000", type = "ACCEPTED", state = "RECEIVED", summary = "question";
     volatile int count = 1, total = 1, replyPage = 1;
     volatile boolean deleted;
+    volatile String detailState = "RECEIVED", answer = "";
+    volatile long detailReplyId;
+    volatile boolean deletedAnswer;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final NotificationWireClient client =
         new NotificationWireClient(
@@ -816,6 +1271,7 @@ class NotificationControllerTest {
     final NotificationController controller = new NotificationController(client, security.handler);
 
     byte[] standard(UUID id, byte[] request) {
+      if (ascii(request, 11, 8).equals("NTDREQ01")) return detailResponse(id, request);
       // BUG560: only successful normal fixtures follow literal UI query conditions.
       // Explicit type/state overrides below remain intentional inconsistent negative replies.
       String requestedType = ascii(request, 256, 12).stripTrailing();
@@ -839,6 +1295,63 @@ class NotificationControllerTest {
           submitted,
           summary,
           deleted);
+    }
+
+    byte[] detailResponse(UUID id, byte[] request) {
+      boolean success = code.equals("0000") || code.equals("0200");
+      byte[] bytes = new byte[9152];
+      Arrays.fill(bytes, (byte) ' ');
+      put(bytes, 0, 8, "SCHBNK01");
+      put(bytes, 8, 3, "001");
+      put(bytes, 11, 8, "NTDRSP01");
+      put(bytes, 19, 3, "001");
+      put(bytes, 22, 1, "S");
+      put(bytes, 23, 1, "S");
+      put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
+      put(bytes, 60, 36, id.toString());
+      put(bytes, 96, 17, "20261003090000000");
+      put(bytes, 113, 64, ascii(request, 113, 64));
+      number(bytes, 177, 4, 256);
+      number(bytes, 181, 6, 8896);
+      number(bytes, 187, 6, 0);
+      number(bytes, 193, 6, 0);
+      number(bytes, 199, 9, 9152);
+      put(bytes, 208, 4, code);
+      if (!success) {
+        // SS322: N is all zero; B error filler is space, not false.
+        number(bytes, 256, 12, 0);
+        number(bytes, 318, 17, 0);
+        return bytes;
+      }
+      long target = detailReplyId == 0 ? Long.parseLong(ascii(request, 256, 12)) : detailReplyId;
+      number(bytes, 256, 12, target);
+      put(bytes, 268, 26, target == 1 ? RECEIPT : String.format(Locale.ROOT, "%026d", target));
+      put(
+          bytes,
+          294,
+          12,
+          detailState.equals("COMPLETED")
+              ? "COMPLETED"
+              : detailState.equals("ERROR") ? "ERROR" : "ACCEPTED");
+      put(bytes, 306, 12, detailState);
+      put(bytes, 318, 17, "20261003085800000");
+      if (Set.of("PROCESSING", "COMPLETED", "ERROR").contains(detailState))
+        put(bytes, 335, 17, "20261003085900000");
+      if (detailState.equals("COMPLETED")) put(bytes, 352, 17, "20261003085930000");
+      if (detailState.equals("ERROR")) {
+        put(bytes, 369, 17, "20261003085930000");
+        put(bytes, 8596, 16, "PROCESS_FAILED");
+        put(bytes, 8612, 512, "処理を完了できませんでした。");
+      }
+      if (detailState.equals("CANCELLED")) put(bytes, 386, 17, "20261003085900000");
+      put(bytes, 403, 1, deleted ? "1" : "0");
+      if (!deleted) {
+        put(bytes, 404, 4096, summary);
+        number(bytes, 9124, 12, target);
+      }
+      if (detailState.equals("COMPLETED") && (!deleted || deletedAnswer))
+        put(bytes, 4500, 4096, answer);
+      return bytes;
     }
 
     AnnotationConfigWebApplicationContext mvc() {

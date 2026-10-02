@@ -14,3 +14,5 @@
 | PT-NTF-DETAIL008 | BUG562破損deleted=true＋質問/IDspace＋回答あり、同vector encode/decode/semantic | UI224削除仕様から独立拒否oracle。正常deleted/COMPLETED空回答はPASS、不正回答はcodec拒否＋HTTP503。API実DB NOTICE SQLはdeleted時両本文NULL、QSS/QDT削除対象外/404、YKT406全対象の根拠・再発防止testを確認 |
 
 公開factoryは既存PayloadSemanticValidatorを再利用してcross-field契約を検証し、Production methodをexpected生成へ使わない。取消form/token/POST・質問受付参照QA048・完成token履歴QA049は別未承認、RECEIVEDを含むSCR021全機能完了/全Web readyを参照部分の合格へ混同しない。line/method/class/branch100%、null/negative/並行、strict compile/静的6zero、codec共通変更後は他機能前に同Source全6回帰。実行環境/日時/command/source/exit/FES/coverage/BUG/YKT/証跡hashは016062/manifestへ実測後保存する。
+
+BUG564/565の試験境界補足：NTD error profileのN12 ID/N17受付日時は全0、B flagはSS322 §4.3どおりspace（false0へ変えない）。DETAIL008の意味拒否はCatalog.encode→raw Codec.encode、raw Codec.decode→Catalog.decodeというProduction既存のvalidated pipelineとHTTPで確認する。raw Codecだけのfield container返却をcross-field業務受入とは扱わず、誤った単体層oracleを直す。期待する削除回答拒否・正常deleted/空回答の意味は変更しない。

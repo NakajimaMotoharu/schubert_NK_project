@@ -3,12 +3,16 @@ package dev.codex.schubert.nk.web.controller;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.form.NotificationSearchForm;
 import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.session.*;
+import dev.codex.schubert.nk.web.view.NotificationDetailViewModel;
 import dev.codex.schubert.nk.web.view.NotificationListViewModel;
 import jakarta.servlet.http.*;
 import java.io.IOException;
@@ -87,5 +91,60 @@ public final class NotificationController {
     }
     model.addAttribute("page", page);
     return "notifications/list";
+  }
+
+  /** SCR021 reference only; cancellation/token lifecycle remains QA049, not fullReady. */
+  @GetMapping("/notifications/{id:[0-9]{1,12}}")
+  public @Nullable String detail(
+      @PathVariable("id") String target,
+      Principal principal,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response)
+      throws IOException {
+    Objects.requireNonNull(target, "target");
+    Objects.requireNonNull(model, "model");
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(response, "response");
+    if (!(Objects.requireNonNull(principal, "principal") instanceof SessionPrincipal actor))
+      throw new SessionStoreException();
+    final NotificationId id;
+    try {
+      id = new NotificationId(Long.parseLong(target));
+    } catch (IllegalArgumentException invalidId) {
+      response.sendError(404);
+      return null;
+    }
+    final ProtectedReadWireClient.Result result;
+    try {
+      result =
+          client.exchange(
+              new TypedPayloadValues(
+                  new LayoutId("NTDREQ01"), new NotificationDetailRequestData(id), List.of()),
+              actor.authenticationContext());
+    } catch (ProtectedReadWireException failure) {
+      response.sendError(503);
+      return null;
+    }
+    if (result.resultCode() == ResultCode.SESSION_INVALID) {
+      invalid.handle(request, response);
+      return null;
+    }
+    int status = mapper.httpStatus(result.resultCode());
+    if (status != 200) {
+      response.sendError(status);
+      return null;
+    }
+    final NotificationDetailViewModel page;
+    try {
+      page =
+          NotificationDetailViewModel.from(
+              actor, id, (NotificationDetailResponseData) result.payload().orElseThrow().data());
+    } catch (IllegalArgumentException | ClassCastException | NoSuchElementException failure) {
+      response.sendError(503);
+      return null;
+    }
+    model.addAttribute("page", page);
+    return "notifications/detail";
   }
 }

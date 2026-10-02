@@ -440,6 +440,25 @@ class PayloadSemanticValidatorTest {
     assertDoesNotThrow(() -> PayloadTypeCatalog.decode(values));
   }
 
+  @Test
+  void deletedNotificationNeverContainsAnswer() {
+    var completed =
+        withData(
+            valid("NTDRSP01", 0),
+            "内部状態",
+            t("COMPLETED"),
+            "通知区分",
+            t("COMPLETED"),
+            "処理開始日時",
+            t(TIME),
+            "処理完了日時",
+            t(LATER));
+    assertValid(withData(completed, "回答本文", t("independent answer")));
+    var deleted = withData(completed, "質問削除済み", b(true), "質問本文", u(), "Question ID", u());
+    assertValid(deleted);
+    assertInvalid(withData(deleted, "回答本文", t("independent answer must not survive deletion")));
+  }
+
   private static void assertInvalid(PayloadValues values) {
     assertThrows(LayoutValidationException.class, () -> PayloadTypeCatalog.decode(values));
   }

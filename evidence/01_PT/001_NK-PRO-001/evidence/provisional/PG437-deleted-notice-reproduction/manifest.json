@@ -10,8 +10,8 @@
   "exitCode": 0,
   "result": "CONFIRMED_DEFECT_NOT_PASS",
   "input": "synthetic completed deleted Notification, no question/id, nonempty answer; independent-input.java",
-  "expected": "UI224 section5: reject deleted answer at semantic/encode/decode",
-  "actual": "all three boundaries accepted invalid deleted answer",
+  "expected": "UI224 section5: reject deleted answer at typed semantic validation and validated encode/decode pipelines",
+  "actual": "semantic validator accepted invalid deleted answer; raw codec observations are field-container operations, not independent semantic rejection gates",
   "coverage": "diagnostic only; not attached to JaCoCo, not accepted PT or coverage evidence",
   "bugs": ["BUG-562"],
   "ykt": ["YKT-406"],
@@ -23,5 +23,5 @@
     {"path": "packaging-check.py", "sha256": "44dc6f29a9aab4e978123c3d5241a2de5c9ab69ef70733dbaeab461305b20882"}
   ],
   "packagingCorrection": {"bug": "BUG-563", "ykt": "YKT-407", "testId": "PT-OPS-EVIDENCE-GIT001", "command": "python3 packaging-check.py at correction commit", "exitCode": 0, "references": 237, "untracked": 0, "hashMismatch": 0, "negativeCanary": "PASS", "nativeOperation": false},
-  "limitations": ["v1/v2 probe compile failures preserved in Work, not reproduction", "PG437 full source unchanged; fix and same-source PT/full regression pending", "formal PT-WEB-20260925-24 unchanged"]
+  "limitations": ["v1/v2 probe compile failures preserved in Work, not reproduction", "BUG565: original log/input retained; its raw encode/decode expected-rejection captions are not semantic violation oracles; validated pipelines are tested by PT-NTF-DETAIL008", "PG437 full source unchanged; fix and same-source PT/full regression pending", "formal PT-WEB-20260925-24 unchanged"]
 }

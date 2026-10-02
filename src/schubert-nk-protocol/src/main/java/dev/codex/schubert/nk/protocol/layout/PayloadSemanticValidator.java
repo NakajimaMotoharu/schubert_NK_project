@@ -342,7 +342,8 @@ public final class PayloadSemanticValidator {
     require(
         present(data, "質問本文") != deleted && present(data, "Question ID") != deleted,
         "question deletion flag disagrees with question fields");
-    if (!state.equals("COMPLETED")) {
+    // BUG562/UI224/SS323: a deleted question also retires its answer, even when completed.
+    if (deleted || !state.equals("COMPLETED")) {
       requireAbsent(data, "回答本文");
     }
   }

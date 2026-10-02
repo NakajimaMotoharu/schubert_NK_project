@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- SCR021 reference-only/UI224236/SS313323/PG-D349/PT-NTF-DETAIL001..008; cancellation QA049 pending. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('通知明細')}"></head>
+<body><main class="page notification-detail-page">
+  <header class="topbar"><h1>通知明細</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <dl class="notification-detail">
+    <dt>受付ID</dt><dd class="receipt" th:text="${page.values.receiptId}"></dd>
+    <dt>状態</dt><dd class="state" th:text="${page.values.stateLabel}"></dd>
+    <dt>受付日時</dt><dd class="submitted-at" th:text="${page.values.submittedAt}"></dd>
+    <dt th:if="${!page.values.startedAt.empty}">処理開始日時</dt><dd class="started-at" th:if="${!page.values.startedAt.empty}" th:text="${page.values.startedAt}"></dd>
+    <dt th:if="${!page.values.completedAt.empty}">回答日時</dt><dd class="completed-at" th:if="${!page.values.completedAt.empty}" th:text="${page.values.completedAt}"></dd>
+    <dt th:if="${!page.values.errorAt.empty}">発生日時</dt><dd class="error-at" th:if="${!page.values.errorAt.empty}" th:text="${page.values.errorAt}"></dd>
+    <dt th:if="${!page.values.cancelledAt.empty}">取消日時</dt><dd class="cancelled-at" th:if="${!page.values.cancelledAt.empty}" th:text="${page.values.cancelledAt}"></dd>
+  </dl>
+  <p class="deleted" th:if="${page.values.deleted}">質問・回答は削除済みです。</p>
+  <section th:unless="${page.values.deleted}"><h2>質問</h2><p class="question-body" th:text="${page.values.question}"></p></section>
+  <section th:if="${page.values.answerAvailable}"><h2>回答</h2><p class="answer-body" th:text="${page.values.answer.empty ? '（空の回答）' : page.values.answer}"></p><a class="question-detail" th:href="${page.values.questionHref}">質問回答明細</a></section>
+  <section class="error-detail" th:if="${page.values.state == 'ERROR'}"><p class="error-code" th:text="${page.values.errorCode}"></p><p class="user-facing-error" th:text="${page.values.userFacingError}"></p></section>
+  <a class="back" href="/notifications">通知一覧へ戻る</a>
+</main></body></html>
