@@ -1,0 +1,25 @@
+{
+  "id": "PG437-deleted-notice-reproduction",
+  "formal": false,
+  "sourceCommit": "f4a0b2390de7b2acd680697225710021f8b8d19d",
+  "sourceDirty": false,
+  "branch": "dev-foundation",
+  "observedAt": "2026-10-03T08:03:00+09:00",
+  "environment": "Linux7.0.0-38-generic/OpenJDK25.0.4",
+  "command": "JDK25 java -cp src/schubert-nk-protocol/target/classes WorkPG379/Pg437DeletedNoticeProbe.java",
+  "exitCode": 0,
+  "result": "CONFIRMED_DEFECT_NOT_PASS",
+  "input": "synthetic completed deleted Notification, no question/id, nonempty answer; independent-input.java",
+  "expected": "UI224 section5: reject deleted answer at semantic/encode/decode",
+  "actual": "all three boundaries accepted invalid deleted answer",
+  "coverage": "diagnostic only; not attached to JaCoCo, not accepted PT or coverage evidence",
+  "bugs": ["BUG-562"],
+  "ykt": ["YKT-406"],
+  "ssc": [],
+  "redaction": "no real account/password/credential/session/token/cookie/key/body/DB dump; synthetic input only",
+  "files": [
+    {"path": "independent-input.java", "sha256": "640b8004159033404c0014e11ffd49568147f9f90c5562d0358c07d261c3433d"},
+    {"path": "result.log", "sha256": "e097f7916e65659076a727f089995f4ef4a007e49f253775269e339f607888a1"}
+  ],
+  "limitations": ["v1/v2 probe compile failures preserved in Work, not reproduction", "PG437 full source unchanged; fix and same-source PT/full regression pending", "formal PT-WEB-20260925-24 unchanged"]
+}
