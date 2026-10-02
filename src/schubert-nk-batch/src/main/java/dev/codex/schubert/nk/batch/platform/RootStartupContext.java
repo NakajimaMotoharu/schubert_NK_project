@@ -156,6 +156,26 @@ public final class RootStartupContext {
   }
 
   private Snapshot observeServiceRoot(Snapshot morning, Service target) throws IOException {
+    return observeService(morning, target, true);
+  }
+
+  /** SSC164: generation data only; ordinary identity/readiness is separately mandatory. */
+  public void recheckServiceGeneration(Snapshot morning, Snapshot captured) throws IOException {
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(captured);
+    require(
+        morning.service() == Service.MORNING
+            && (captured.service() == Service.API || captured.service() == Service.WEB)
+            && morning.boot().equals(captured.boot())
+            && morning.initStartTicks() == captured.initStartTicks());
+    recheck(morning);
+    require(captured.equals(observeService(morning, captured.service(), false)));
+    require(captured.equals(observeService(morning, captured.service(), false)));
+    recheck(morning);
+  }
+
+  private Snapshot observeService(Snapshot morning, Service target, boolean rootPhase)
+      throws IOException {
     require(io.effectiveUid() == 0);
     require(
         "proc".equals(io.procFilesystem())
@@ -194,7 +214,7 @@ public final class RootStartupContext {
               && !invocation.equals(morning.invocation()));
       long ticks = start(io.stat(pid), pid);
       require(ascii(io.cgroup(pid), 4096).equals("0::" + group + "\n"));
-      require(io.serviceRootUid(pid) == 0);
+      if (rootPhase) require(io.serviceRootUid(pid) == 0);
       long afterTicks = start(io.stat(pid), pid);
       byte[] second = Objects.requireNonNull(io.unit(target));
       try {
@@ -223,9 +243,30 @@ public final class RootStartupContext {
     return fixedDeadline(self, parentDeadline, 120_000_000_000L);
   }
 
+  /** Parent-side fixed service budget; never reinterprets the child as the calling Root. */
+  public long serviceGenerationDeadline(Snapshot morning, Snapshot captured, long parentDeadline)
+      throws IOException {
+    require(parentDeadline > 0);
+    return fixedDeadline(
+        captured,
+        parentDeadline,
+        120_000_000_000L,
+        () -> recheckServiceGeneration(morning, captured));
+  }
+
+  @FunctionalInterface
+  private interface Verification {
+    void check() throws IOException;
+  }
+
   private long fixedDeadline(Snapshot morning, long parentDeadline, long duration)
       throws IOException {
-    recheck(morning);
+    return fixedDeadline(morning, parentDeadline, duration, () -> recheck(morning));
+  }
+
+  private long fixedDeadline(
+      Snapshot morning, long parentDeadline, long duration, Verification guard) throws IOException {
+    guard.check();
     byte[] first = new byte[0];
     byte[] second = new byte[0];
     try {
@@ -243,10 +284,10 @@ public final class RootStartupContext {
       long started = Math.multiplyExact(Long.parseLong(start), 1000L);
       long unitDeadline = Math.addExact(started, duration);
       require(parentDeadline > started);
-      recheck(morning);
+      guard.check();
       second = Objects.requireNonNull(io.unitDeadline(morning.service()), "deadline manager bytes");
       require(Arrays.equals(first, second));
-      recheck(morning);
+      guard.check();
       return Math.min(parentDeadline, unitDeadline);
     } catch (IOException | IllegalArgumentException | ArithmeticException invalid) {
       throw unavailable();

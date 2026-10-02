@@ -1,0 +1,22 @@
+{
+  "id":"PG427-owned-api-ready", "formal":false,
+  "sourceCommit":"a3c86daf3ea1ac7ea9f6a3ae50dc45ead68c3fd2", "branch":"dev-foundation",
+  "observedAt":"2026-10-02T07:51:27Z", "release":"0.1.0-PG425",
+  "manifestSha256":"55353381ea39d2ddda0c3a195dea05cffda1ad880974693a72095811cd122fd1",
+  "environment":"isolated Ubuntu26.04/kernel7.0.0-34/JDK25.0.4/PostgreSQL18.6/Artemis2.56",
+  "command":"pg427_watch_owned_api.py reattaches same already-started Morning/API without start or budget renewal; actual same-peer readiness/info; one owned API stop; full18/SQL capture",
+  "observerExit":0, "toolIndependentAssertions":26, "productionTestsAdded":0,
+  "testIds":["A06-MOUNT004","PT-OPS-API-SAMEPEER-427"],
+  "bugs":["BUG-519","BUG-522","BUG-523"], "ssc":["SSC-158","SSC-162","SSC-163"],
+  "actual":{"all14EnteredStages":true,"transferProbeAndUsageScan":true,"uid":999,"gid":981,"fiveCapsZero":true,"noNewPrivileges":true,"sameMorningAndApiGenerationBeforeAfter":true,"ownedExactLoopbackSocketBeforeAfter":true,"socketForm":"IPv4-mapped IPv6 127.0.0.1:8091","readinessStatus":200,"readinessBody":"{\"status\":\"UP\"}","information":{"commit":"a3c86daf3ea1ac7ea9f6a3ae50dc45ead68c3fd2","app":"0.1.0-SNAPSHOT","config":"1","schema":"025","protocol":"0.1.0-SNAPSHOT"},"ownedStop":true,"apiCleanupCompleteJournal":true,"apiExit":143,"morningExit":30,"managerMainControlPidAndJobsEmpty":true,"all14ColumnRowsCaptured":232},
+  "privateEvidence":[
+    {"name":"pg427-api-watch-private.log","sha256":"f487e1ff51585d5b5721f1fb967deb99696db5ebbe90bb167bcb374d321f214d"},
+    {"name":"pg427-api-final-private.log","sha256":"80386e1331dcada52a2d0e982dd42b53884d7b34c4c05abfa232b25500866b57"},
+    {"name":"pg427-terminal-full18-private.log","sha256":"c0850f1cee08f33dc70ab4a992ce9fff17ab5ad219c5a1f0526bbd723aac0ce8"},
+    {"name":"pg427-db-full-private.log","sha256":"75601476d31a4925f55ec2dad9a45fc7bf6ed7f45b86fde0424e575f192c7fe9"}
+  ],
+  "privateDirectory":"/home/mini/codex/project1/work/pgpt-runs/PG379",
+  "coverage":{"hostTests":2878,"missedBranch":1190,"missedLine":3366,"missedMethod":555,"missedClass":39,"ordinaryNativeCollected":false},
+  "limitations":["SIGTERM143 plus cleanup is not normal exit0","Morning readiness-to-Web still unconnected; parent30","Whole Morning/Web/CHR and100% not accepted","Formal PT-WEB-20260925-24/1964PT/53scope unchanged","No IT/ST completion"],
+  "redaction":"Raw DB/journal/process IDs/credentials/session/token/key/master/dump not exported; safe outcomes/private hashes only"
+}

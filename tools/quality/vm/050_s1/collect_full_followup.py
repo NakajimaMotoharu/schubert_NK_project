@@ -247,5 +247,18 @@ if int(identifier[2:5]) >= 425:
     manifest['toolOnlyBugs'] = ['BUG-520: stale M2 when API-only selected command',
         'BUG-521: operator compile/runtime classpath; not Production PT numerator']
     manifest['trigger'] = 'Same S3 native Transfer held-mount contract: SSC162/BUG519, readonly/unknown negatives and full six regression before signed candidate'
+if int(identifier[2:5]) >= 428:
+    manifest['ssc'].append('SSC-164')
+    manifest['bugs'].extend(['BUG-523', 'BUG-524', 'BUG-525', 'BUG-526'])
+    manifest['ykt'].append('YKT-375')
+    manifest['testIds'].extend(['READY428001..012', 'ROOTCTX-ORDINARY-GENERATION-DEADLINE'])
+    manifest['trigger'] = 'SSC164 same captured Root-to-ordinary readiness and API-to-Web owned sequence: source-frozen full six regression before signed native candidate'
+    manifest['limitations'] = [
+        'Selected 60PT preceded this full run; neither is actual parent/API/Web native acceptance',
+        'Prior PG427 API200/owned TERM uses sourcea3c86daf, not this source; no cross-source coverage/result reuse',
+        'API-to-Web parent connection is implemented; Web business assembly, Caddy, held original DONE and intent retirement remain pending',
+        'New VM boot requires fresh observations; old PID/Invocation and terminal receipts are historical only',
+        'Native ordinary coverage, CHR-A01/L01 and full scope coverage100 remain pending',
+        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged']
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

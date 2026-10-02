@@ -7,7 +7,7 @@ assert pathlib.Path('/opt/schubert-nk/current').readlink() == pathlib.Path('/opt
 assert hashlib.sha256(pathlib.Path('/opt/schubert-nk/current/RELEASE-MANIFEST.json').read_bytes()).hexdigest() == sys.argv[2]
 FIELDS = 'Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID,InvocationID,Type,Restart,RemainAfterExit,Result,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic,KillMode,SendSIGKILL'
 MORNING, API = 'schubert-nk-morning-controller.service', 'schubert-nk-api.service'
-INFO = {'commit': sys.argv[1], 'app': '0.1.0-SNAPSHOT', 'config': '001', 'schema': '025', 'protocol': '001'}
+INFO = {'commit': sys.argv[1], 'app': '0.1.0-SNAPSHOT', 'config': '1', 'schema': '025', 'protocol': '0.1.0-SNAPSHOT'}
 
 def show(unit):
     raw = subprocess.check_output(['/usr/bin/systemctl', 'show', unit, '--property=' + FIELDS], text=True, timeout=5)
@@ -42,8 +42,15 @@ def owns_socket(a):
             target = str(descriptor.readlink())
             if target.startswith('socket:['): targets.add(target[8:-1])
         except FileNotFoundError: pass
-    return any(len(row.split()) >= 10 and row.split()[1] == '0100007F:1F9B' and row.split()[3] == '0A'
-               and row.split()[9] in targets for row in (proc / 'net/tcp').read_text().splitlines()[1:])
+    return listens((proc / 'net/tcp').read_text().splitlines()[1:], targets, '0100007F:1F9B') or listens(
+        (proc / 'net/tcp6').read_text().splitlines()[1:], targets, '0000000000000000FFFF00000100007F:1F9B')
+
+def listens(rows, targets, address):
+    for row in rows:
+        fields = row.split()
+        if len(fields) >= 10 and fields[1] == address and fields[3] == '0A' and fields[9] in targets:
+            return True
+    return False
 
 def get(path):
     connection = http.client.HTTPConnection('127.0.0.1', 8091, timeout=.5)

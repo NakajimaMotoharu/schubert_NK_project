@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
   // ROOTLAUNCH001..006: the fixed other-Root query is authenticated by the same Morning self.
-  static final class LaunchFixture extends Fixture {
+  static class LaunchFixture extends Fixture {
     RootStartupContext.Service target = RootStartupContext.Service.API;
     String targetUnit;
     String targetGroup;
@@ -81,6 +81,42 @@ final class RootStartupContextTest {
     assertThrows(IOException.class, () -> root.serviceRootDeadline(self, 1_000_000_000L));
     assertThrows(IOException.class, () -> root.serviceRootDeadline(self, 0));
     assertThrows(NullPointerException.class, () -> root.serviceRootDeadline(null, Long.MAX_VALUE));
+  }
+
+  @Test
+  void ordinaryGenerationKeepsRootUidCaptureStrictAndBorrowsOriginalDeadline() throws Exception {
+    var f =
+        new LaunchFixture() {
+          public byte[] unitDeadline(RootStartupContext.Service service) {
+            assertEquals(RootStartupContext.Service.API, service);
+            return bytes(
+                "Id=schubert-nk-api.service\nInvocationID="
+                    + "2".repeat(32)
+                    + "\nMainPID=200\nExecMainStartTimestampMonotonic=1000000\n");
+          }
+        };
+    var root = f.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    f.rootUid = 999;
+    assertThrows(
+        IOException.class, () -> root.captureServiceRoot(morning, RootStartupContext.Service.API));
+    root.recheckServiceGeneration(morning, child);
+    assertEquals(
+        121_000_000_000L, root.serviceGenerationDeadline(morning, child, 200_000_000_000L));
+    assertEquals(
+        120_000_000_000L, root.serviceGenerationDeadline(morning, child, 120_000_000_000L));
+    assertThrows(
+        IOException.class, () -> root.serviceGenerationDeadline(morning, child, 1_000_000_000L));
+    assertThrows(IOException.class, () -> root.serviceGenerationDeadline(morning, child, 0));
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, morning));
+    assertThrows(NullPointerException.class, () -> root.recheckServiceGeneration(null, child));
+    assertThrows(NullPointerException.class, () -> root.recheckServiceGeneration(morning, null));
+    f.targetStat = stat(200, "1000");
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+    f.targetStat = stat(200, "999");
+    f.targetDrift = true;
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
   }
 
   @Test

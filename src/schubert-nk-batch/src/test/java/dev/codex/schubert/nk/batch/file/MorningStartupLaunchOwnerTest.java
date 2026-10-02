@@ -1,0 +1,97 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import java.io.IOException;
+import java.util.*;
+import org.junit.jupiter.api.Test;
+
+/** READY428007..009: literal owner order, no native ready or fake completed graph. */
+final class MorningStartupLaunchOwnerTest {
+  @Test
+  void sequence428007ApiThenWebBorrowSameApiAndNeverStopOnTrueCompletion() throws Exception {
+    var events = new ArrayList<String>();
+    MorningStartupLaunchOwner.sequence(
+        (service, earlier) -> {
+          assertEquals(
+              service == ServiceConfigFiles.Service.API ? List.of() : List.of("API"), earlier);
+          assertThrows(UnsupportedOperationException.class, () -> earlier.add("extra"));
+          events.add("start:" + service);
+          return service.name();
+        },
+        slot -> fail("success must retain live service"),
+        started -> {
+          assertEquals(List.of("API", "WEB"), started);
+          assertThrows(UnsupportedOperationException.class, () -> started.add("extra"));
+          events.add("complete");
+        });
+    assertEquals(List.of("start:API", "start:WEB", "complete"), events);
+  }
+
+  @Test
+  void sequence428008FailedStageClosesOnlyReturnedOwnersInReverseOrder() {
+    for (int stage : List.of(0, 1, 2))
+      for (Throwable failure :
+          List.of(
+              new IOException("golden"),
+              new IllegalStateException("golden"),
+              new AssertionError("golden"))) {
+        var events = new ArrayList<String>();
+        int failAt = stage;
+        Throwable actual =
+            assertThrows(
+                failure.getClass(),
+                () ->
+                    MorningStartupLaunchOwner.sequence(
+                        (service, earlier) -> {
+                          events.add("start:" + service);
+                          if (earlier.size() == failAt) raise(failure);
+                          return service.name();
+                        },
+                        slot -> events.add("stop:" + slot),
+                        started -> {
+                          events.add("complete");
+                          raise(failure);
+                        }));
+        assertSame(failure, actual);
+        assertEquals(
+            switch (stage) {
+              case 0 -> List.of("start:API");
+              case 1 -> List.of("start:API", "start:WEB", "stop:API");
+              default -> List.of("start:API", "start:WEB", "complete", "stop:WEB", "stop:API");
+            },
+            events);
+      }
+  }
+
+  @Test
+  void sequence428009NullContractsCannotMintReturnedOwnership() {
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningStartupLaunchOwner.sequence(null, ignored -> {}, ignored -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningStartupLaunchOwner.sequence((s, e) -> s, null, ignored -> {}));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningStartupLaunchOwner.sequence((s, e) -> s, ignored -> {}, null));
+    var closed = new ArrayList<String>();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningStartupLaunchOwner.<String>sequence(
+                (service, earlier) -> service == ServiceConfigFiles.Service.API ? "API" : null,
+                closed::add,
+                ignored -> {
+                  fail("not complete");
+                }));
+    assertEquals(List.of("API"), closed);
+  }
+
+  private static void raise(Throwable failure) throws IOException {
+    if (failure instanceof IOException checked) throw checked;
+    if (failure instanceof RuntimeException unchecked) throw unchecked;
+    throw (Error) failure;
+  }
+}

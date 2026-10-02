@@ -7,7 +7,7 @@ Program NK-SCN-001/API TransferRootInspection.inspect、LinuxInodeSecurity.readO
 | A06-MOUNT001 | 0750実ext4 rootをnative FDで保持。SPIのST_RDONLY=true/falseを各1回観測 | trueはUNAVAILABLE・固定message/causeなし、falseはSDS検査まで成功。能力pathだけを観測、root mode/empty不変。Linux ST_RDONLY bit1とSS333のAPI RW契約 | TransferRootInspectionTest、次選択run |
 | A06-MOUNT002 | 保持mount観測失敗/null | 不明はUNAVAILABLE、nullは境界違反、writable path fallbackなし。観測1回/root不変 | 同Test |
 | A06-MOUNT003 | 隔離VM/API UID999 GID981+980/982/986、cap0、ProtectSystem=strict/Transfer限定RWのread-only診断 | 保持属性/SDS/ext4合格。Java FileStore readonly=trueでも保持statvfs readonly=false。診断成功はready代用でない | Work PG379/pg424-transfer-inspection-v2-private.log、source修正前実観測 |
-| A06-MOUNT004 | 同Source固定全6・署名BOM配備後に外部Morning→通常API | sandbox不変更、TRANSFERを実probe/scanして次境界へ。UP/全終端/cleanupは別実証、client0を合格にしない | 未実行 |
+| A06-MOUNT004 | 同Source固定全6・署名BOM配備後に外部Morning→通常API | sandbox不変更、TRANSFERを実probe/scanして次境界へ。UP/全終端/cleanupは別実証、client0を合格にしない | PG427-owned-api-ready/manifest.json、16:51 JST API境界合格 |
 
 期待値はLinux mount flags/SSから独立作成し、productionでexpectedを生成しない。実負read-only mountの拒否、native statvfs errno/invalid capability/null/ABI境界は既存LinuxInodeSecurityTestと合わせて検証する。source/branch/command/日時/OS/JDK/終了/coverage/BUG・SSC/hashは実行後safe manifestへ固定し、raw path/credential/sessionをGitへ入れない。変更APIの選択回帰後、同起動契約群固定Sourceの全6で既存不足/追加/解消を別記する。現時点未実行を合格にしない。
 

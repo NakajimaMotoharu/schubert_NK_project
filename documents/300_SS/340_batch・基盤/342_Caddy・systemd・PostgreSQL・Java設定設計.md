@@ -196,6 +196,8 @@ SSC-019/021によりTransfer writer/Readerはshared storageのJava25公開FFM限
 
 SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前のexclusive startupで所有済診断fileだけを検査・清掃し、失敗/不確定公開/cleanup failureでreadinessを成功にしない。通常業務ready非削除、Web read-only、hardeningは維持する。
 
+SSC164（内部接続補足）：Morningのready判定は捕捉Rootと同一のboot/PID1/Invocation/MainPID/startTicks/cgroupを、ordinary移行後もmanager/kernel前後で照合する。UID0 Root認証を流用せず、固定NSS ordinary identity/全groups/五cap0/NNP1/固定mainを独立確認する。管理socketは本人FD inodeのexact127.0.0.1（IPv4及びIPv4-mapped IPv6）のみで、wildcard/::1/他inodeを拒否。HTTP200UPと発行permitのreleaseDigestに一致する保持manifest由来の5値を、同じsocket inode及び同親/API世代の前後検査で認定する。API ready→Web真正Root→Web全業務ready→Caddy/原本完了の既存順序は維持、ready単独を親成功にしない。同M/DB/原本/epoch・元30分budgetを維持、unknown/停止不確定は保全する。詳細PTと各scopeの採取不足は018/311及び456に記録する。
+
 ### 5.2 Spring主要値
 
 | Key | Web | API |
