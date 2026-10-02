@@ -1,5 +1,5 @@
 """Finite isolated PG/PT actual peer observation + one owned Unit stop, never a ready oracle override."""
-import datetime, hashlib, http.client, json, pathlib, subprocess, time
+import datetime, hashlib, http.client, json, pathlib, subprocess, sys, time
 
 assert pathlib.Path('/var/lib/cloud/data/instance-id').read_text().strip() == 'pgpt-r2-20260927-01'
 assert pathlib.Path('/opt/schubert-nk/current').readlink() == pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG421')
@@ -54,8 +54,15 @@ def get(path):
         return response.status, body
     finally: connection.close()
 
+assert sys.argv[1:] in ([], ['--existing'])
+initial = actor(MORNING)
+if sys.argv[1:]:
+    assert initial['MainPID'] == '1060939' and initial['InvocationID'] == '04a7b1f712284e6693f2e6b6532c5dcb' and initial['startTicks'] == 19562146
+# Observation only: never refresh or extend the Production 30-minute budget.
 seen, stopped, ready, prior = False, False, False, None
-deadline = time.monotonic() + 240
+deadline = time.monotonic() + 1900
+if int(initial['MainPID']):
+    deadline = min(deadline, int(initial['ExecMainStartTimestampMonotonic']) / 1_000_000 + 1860)
 while time.monotonic() < deadline:
     m, a = actor(MORNING), actor(API)
     if int(m['MainPID']): seen = True
