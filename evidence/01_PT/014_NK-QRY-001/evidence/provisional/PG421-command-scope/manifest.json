@@ -1,0 +1,203 @@
+{
+  "run_id": "PG421-command-selected-v6",
+  "status": "PROVISIONAL_NOT_FORMAL",
+  "branch": "dev-foundation",
+  "source": "f20f9122214a15261107217e3349af636ccffaa2",
+  "completed_at": "2026-10-02T10:14:28+09:00",
+  "os": "Linux 7.0.0-34-generic",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "node": "24.19.0",
+  "command": "./mvnw -B -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api -Dtest=MessageCodecTest,LinuxInodeSecurityTest,ApiNonSecretConfigTest,QuestionCommandServiceTest,QuestionQueryRepositoryTest spotless:apply test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exit_code": 0,
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "e09b1e0d45be3236e54a4939f2f3fd4827d47a6a1b200d7f716b22aa8944b5b2"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "7219a40f440e5c907dbb9b5c92278c05c799e1a2083432f5ea23a810821f7c10"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "f17e778cedc4b8f966d8ff01710e7f149c72a8edd5f49b399eee4720471fd123"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCommandServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "62697b93e46065a7daf092e9d70dbd19fa67b0cc5dee03237ccab3f2452a48f1"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "ffe304ebddda320936d47fff02dc4dc2227bfc8b827f824984f78666073e9455"
+    }
+  ],
+  "total_tests": 41,
+  "static_modules": 4,
+  "static_errors": 0,
+  "coverage_scope": "current-byte incremental development only; full/native not executed",
+  "coverage": [
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionCommandService$DeleteResult",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionCommandService$QuestionRow",
+      "counters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionCommandService$CancelResult",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 36
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 27
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/application/question/QuestionCommandService",
+      "counters": {
+        "BRANCH": {
+          "missed": 0,
+          "covered": 98
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 174
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "fixture_hashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java": "66351a93fb8d4bf19a6cd3a998a9c60f8e0575fa0ee3af8707d2907b693628f7",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandServiceTest.java": "cf4c172ff1bba969f790c8bb0ffe8f6c15d66cd093e8f3cb4733a3b82f53c0ff"
+  },
+  "test_ids": [
+    "PT-NTF012",
+    "PT-NTF013",
+    "PT-NTF014",
+    "PT-NTF015",
+    "PT-QRY028",
+    "PT-QRY029",
+    "PT-QRY030",
+    "PT-QRY031",
+    "PT-QRY032",
+    "PT-QRY034",
+    "PT-QRY035",
+    "PT-QRY027"
+  ],
+  "bugs": [
+    "BUG-469",
+    "BUG-470",
+    "BUG-471",
+    "BUG-472",
+    "BUG-473"
+  ],
+  "ykt": [
+    "YKT-354",
+    "YKT-355",
+    "YKT-356"
+  ],
+  "log_sha256": "ff49d0d2bb85ef1dc6f671bd3359185131d5e6b6bccadc2c8790c95128bf0fd2",
+  "log_path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg421-command-selected-v6.log",
+  "input_expected_actual": "PT specs and hashed synthetic test sources contain literal SQL, UTC microseconds, closed profiles, both commit orders, failure-point assertions; raw outputs and secrets excluded",
+  "not_completed": [
+    "mutation Inbox replay",
+    "all31 registration",
+    "native ready",
+    "same-source full6",
+    "formal gates"
+  ]
+}
