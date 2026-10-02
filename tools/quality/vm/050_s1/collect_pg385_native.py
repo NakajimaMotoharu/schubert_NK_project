@@ -20,7 +20,7 @@ for name,command in commands.items():
  actual[name]={'command':command,'exitCode':p.returncode}
 shutil.copyfile('/home/mini/codex/project1/work/pgpt-runs/PG379/pg385-morning-first.exec',out/'morning-first.exec')
 shutil.copyfile('/home/mini/codex/project1/work/pgpt-runs/PG379/pg385-backup-first.exec',out/'backup-first.exec')
-shutil.copyfile('/home/mini/codex/project1/work/pgpt-runs/PG379/pg385-artifact-oracle.json.log',out/'artifact-oracle.json.log')
+shutil.copyfile('/home/mini/codex/project1/work/pgpt-runs/PG379/pg385-artifact-oracle.json.log',out/'artifact-oracle.txt')
 hashes=[{'path':str(p.relative_to(repo)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.iterdir()) if p.is_file()]
 manifest={
  'id':'PG385-native-deployment','formal':False,'executionTime':datetime.datetime.now(datetime.timezone.utc).isoformat(),

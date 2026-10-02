@@ -1,5 +1,7 @@
 # 280 実Backup既知失敗・入力復元後成功（PG386、暫定）
 
+2026-10-03 BUG563/YKT407証跡packaging補正：ignored `.log`のoracle/failed-unit metadataを同byteのtracked `.txt`へ保存、既存実行Source/結果/時刻/coverage/原本・Backup現物は変更せず外部再実行0。PG385補正manifest SHA037b65cf95afa6bd68242761c77908b99eec58a9c93c2912403c70dea3e5721f、PG386補正manifest SHAc76c0c050544a06fa2acf8ed2cfbad0dcef9f1a2254fa48c62520a925c994c69。旧087bf6a…/30f3ce8…manifest revisionはGit履歴に保持、下記旧hashは当時記録として有効。714manifest中233既存log参照＋4補正txtの237件は登録/存在/SHA一致、陰性ignore canary PASS、001provisional PG437 reproduction packaging-check.py/915916を参照。formal/S1の認定更新はない。
+
 Source `d49a3a9fb0876ccf07e3e968df9e961bce215397`、dev-foundation、SS341/343・SSC115・BUG325/YKT257・仕様279。実Ubuntu26.04 VM、kernel7.0.0-34、JDK25.0.4、PostgreSQL18.6、age1.2.1、JaCoCo0.8.15。IT/STや正式認定ではない。
 
 | Test ID | 実入力・操作／独立期待値 | 実際結果 |

@@ -31,7 +31,7 @@ for name,command in commands.items():
  (out/name).write_text(p.stdout)
  actual[name]={'command':command,'exitCode':0}
 for name in ['pg386-failed-unit-state.log','pg386-failed-parent.exec','pg386-failed-backup.exec','pg386-positive-parent.exec','pg386-positive-backup.exec']:
- shutil.copyfile(base/name,out/name)
+ shutil.copyfile(base/name,out/(name.replace('.log','.txt') if name.endswith('.log') else name))
 rows=[json.loads(s) for s in (out/'worker-pid1-receipts.jsonl').read_text().splitlines()]
 assert all(x['_PID']=='1' and x['_EXE']=='/usr/lib/systemd/systemd' for x in rows)
 positive={x['INVOCATION_ID'] for x in rows if x.get('JOB_TYPE')=='start' and x.get('JOB_RESULT')=='done' and x['INVOCATION_ID']!='98336502bb5f4764b378eccea15979f3'}

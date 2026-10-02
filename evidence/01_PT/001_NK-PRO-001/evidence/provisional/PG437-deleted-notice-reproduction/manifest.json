@@ -19,7 +19,9 @@
   "redaction": "no real account/password/credential/session/token/cookie/key/body/DB dump; synthetic input only",
   "files": [
     {"path": "independent-input.java", "sha256": "640b8004159033404c0014e11ffd49568147f9f90c5562d0358c07d261c3433d"},
-    {"path": "result.log", "sha256": "e097f7916e65659076a727f089995f4ef4a007e49f253775269e339f607888a1"}
+    {"path": "result.txt", "sha256": "e097f7916e65659076a727f089995f4ef4a007e49f253775269e339f607888a1"},
+    {"path": "packaging-check.py", "sha256": "44dc6f29a9aab4e978123c3d5241a2de5c9ab69ef70733dbaeab461305b20882"}
   ],
+  "packagingCorrection": {"bug": "BUG-563", "ykt": "YKT-407", "testId": "PT-OPS-EVIDENCE-GIT001", "command": "python3 packaging-check.py at correction commit", "exitCode": 0, "references": 237, "untracked": 0, "hashMismatch": 0, "negativeCanary": "PASS", "nativeOperation": false},
   "limitations": ["v1/v2 probe compile failures preserved in Work, not reproduction", "PG437 full source unchanged; fix and same-source PT/full regression pending", "formal PT-WEB-20260925-24 unchanged"]
 }
