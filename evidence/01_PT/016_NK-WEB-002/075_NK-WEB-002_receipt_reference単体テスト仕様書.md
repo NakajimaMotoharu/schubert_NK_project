@@ -2,6 +2,8 @@
 
 PG447/PG-D357、QA048/SSC169/175。RD FUN001/AUT004/DAT009/OPS009、UI226/236/241/242/251、SS313/331§9.4/332/341/343。製造と独立PTを同変更群で進め、未実行は合格にしない。
 
+RCPT006/REQ004横断（BUG619620/YKT438）：UI224236の正規GET new/POST new/GET acceptedは3mapping/2safe pattern。既存24mappingへ追加して27method/25unique＋CSS/JS2を独立literal集合で確認する。registered `/questions/new`・`/questions/accepted/{receiptId}`だけを投影し、raw locator/query/body/未実装Logout/任意patternは`/**`、後続error dispatchが先行正規routeを上書きしない。actual HandlerMapping属性から捕捉する独立PTを追加し、RequestTrace/Scope/Producer/Valve/Interceptor/MVCの既存REQUEST回帰を同選択と同source全6へ含める。Production sourceからexpected集合を生成しない。
+
 RCPT006資源契約補足：フォームbindは非null final constructor/不変char[]、closeは例外を投げず本文を消去する。HTTPの全return/既知・未知例外を明示finallyへ収束させ、SQL/JMSの未知closeとは混同しない。lost-responseの未知例外は伝播し、完成印/locatorを保持して同UUID再操作を検証する。accepted/detailの空M4096本文はtyped API結果を使っても拒否し、escape・200codepoint/現在owner/3値を正常oracleから独立検査する。生成分岐のcoverage除外や人工的null資源への差替えを行わない。
 
 | Test ID | Program/class/method | 独立期待値・fixture・操作 |

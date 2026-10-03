@@ -532,7 +532,10 @@ if int(identifier[2:5]) >= 447:
         'receiptOracle': '075 RCPT001..005: literal SQL, independent role/catalog, physical orphan, bounded/locked/backup/run/rollback and fault matrix'})
     manifest['testIds'].extend(['RCPT001..005', 'RCPT006A..H'])
     manifest['bugs'].extend('BUG-' + str(n) for n in range(608, 618))
+    manifest['bugs'].extend(['BUG-619', 'BUG-620'])
     manifest['ykt'].extend('YKT-' + str(n) for n in range(428, 437))
+    manifest['ykt'].append('YKT-438')
+    manifest['testIds'].append('REQ004 receipt safe registered pattern, actual27methods/25unique and CSS-JS2, raw locator/query rejection')
     manifest['ssc'].append('SSC-175')
     names = {'QuestionController', 'QuestionSubmitViewModel', 'QuestionAcceptedViewModel',
              'QuestionAcceptanceMvcConfiguration', 'QuestionSubmitForm', 'QuestionDetailViewModel'}

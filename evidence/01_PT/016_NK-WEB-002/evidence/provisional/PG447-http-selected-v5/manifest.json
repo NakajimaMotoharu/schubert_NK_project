@@ -1,0 +1,642 @@
+{
+  "id": "PG447-http-selected-v5",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "4be6d85a9adc953ac07df474766f9633088ad660",
+  "sourceDirty": "Approved receipt HTTP plus exact registered REQUEST patterns and independent inventory/unknown/raw-locator rejection; full file hashes captured before execution",
+  "sourceFilesSha256": "84183889c363e5214017228cd5239c3b8ba9593e211cbcbc2d7126d4aeac67e1",
+  "sourceDiffSha256": "8bba47ac2f1b7623cf21c382d252d3ac976e666741d84a3f50c514086b188cbe",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-10-04T06:59:26+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg447_http_selected_v4.sh; six explicit modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report; selected 16 named suites, failIfNoTests=true",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 68,
+      "suites": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 138,
+  "suites": 16,
+  "coverage": {
+    "QuestionController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 766
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 204
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RequestLogMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 13
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionAcceptanceMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReferenceException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReference": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 11
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReferenceRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 297
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 88
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionSubmitForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 280
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 54
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "HttpRequestLoggingValve": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 130
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 16
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 39
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 14
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestRouteInterceptor": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 40
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace$Scope": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 53
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestLogProducer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 645
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 48
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 142
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 41
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 354
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 58
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 24
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionSubmitViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 85
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 20
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 204
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 38
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionAcceptedViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 124
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 31
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "javascript": {
+    "testId": "PT-QST-JS001",
+    "nodeVersion": "v24.19.0",
+    "subcases": 8,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "syntaxExit": 0,
+    "testExit": 0,
+    "lineCoverage": 100,
+    "functionCoverage": 100,
+    "branchCoverage": 100,
+    "productionFiles": 1,
+    "scriptSha256": "f181b9920dc95b580764a5266dcdc2294b678181dd20165b6cfde495d0a9709e",
+    "browserDom": "deterministic-event-double",
+    "actualNkGate": false
+  },
+  "testCases": [
+    {
+      "testId": "RCPT006F",
+      "method": "rcpt006FRealSecuredHttpPostCsrfRefreshAndNoAnonymousSubmission",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006G",
+      "method": "rcpt006GNegativeNullReadonlySqlAndResultStatusMatrix",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006A",
+      "method": "rcpt006ANewFormCapacityRetirementAndMissingToken",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006E",
+      "method": "rcpt006EFreshGetTupleOwnerDeletionAndNoFallback",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006C",
+      "method": "rcpt006CUnknownResponseAndLocatorGapKeepTheOriginalToken",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006F",
+      "method": "rcpt006FExplicitMvcDomEscaping200CodepointsAndCsrf",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006D",
+      "method": "rcpt006DMissingWrongPurposeExpiredAndInFlightInvalidation",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006G",
+      "method": "rcpt006GCurrentCompletionFailureAndInputContracts",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006B",
+      "method": "rcpt006BIndependentSubmitWireAndSameTokenReplay",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006C",
+      "method": "rcpt006CLostRedirectAndBlankWireCannotInventANewQuestion",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006H",
+      "method": "rcpt006HConcurrentSameTokenAndImmutableLocator",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    }
+  ],
+  "qa": [
+    "QA-048",
+    "QA-049"
+  ],
+  "ssc": [
+    "SSC-175"
+  ],
+  "bugs": [
+    "BUG-611",
+    "BUG-612",
+    "BUG-613",
+    "BUG-614",
+    "BUG-615",
+    "BUG-616",
+    "BUG-617",
+    "BUG-619",
+    "BUG-620"
+  ],
+  "ykt": [
+    "YKT-431",
+    "YKT-432",
+    "YKT-433",
+    "YKT-434",
+    "YKT-435",
+    "YKT-436",
+    "YKT-438"
+  ],
+  "requestTraceTests": [
+    "REQ004 actual27methods/25unique+CSSJS2",
+    "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator",
+    "REQ001..016 existing native terminal/producer/trace"
+  ],
+  "before": {
+    "id": "PG447-route-before-v1",
+    "webTests": 10,
+    "failures": 2,
+    "exitCode": 1,
+    "logSha256": "ceab5625a429d72411db1d03c931d8e2e0bf564faac1edfc46fac796521ac02d"
+  },
+  "expected": "UI236 independent QSB4400/320 and QSD268/8608; SS331 SQL postconditions; explicit HTTP302 fixed Location, CSRF403/API0, current owner/tuple and escaped200-codepoint DOM; no DB held during wire",
+  "actual": "All independent SQL/wire/DOM/security/negative/lost-response/100-concurrent assertions passed",
+  "logSha256": "5193477247b815a2bbb88101f8e7e7110616722b5d1392e8a66de82e58653570",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg447-http-selected-v5-frozen: all six actual classes/test-classes/XML/exec/site/static copied and diff/cmp verified",
+  "redaction": "No JUnit properties/stdout/stderr, cookie/session/context/token/password/key/runtime body/dump/raw log included",
+  "limitations": [
+    "Fresh same-source full-six receipt ownership regression required; prior failed full runs remain failed",
+    "V026 signed native migration/Backup/full ordinary Web/Caddy/DONE/CHR/native100/formal pending",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "154e76eaf2e1495cc1b7976b61dcc65bc9506d0515da54fe0d264bad864a51fd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "4189dd8f058f87d3aa85aa29ab6ab545f9424bd1756fc838be0e05569c5fa416"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "4a5d0e1d330265c3e2523cc00723a3e6ccd364462bfecd563da7777fe474cebb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "4ad038085da2b0e710ec9e304b65755752c13b469dbb97f9b8010c9f8bb5cec8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "f8e6f027544bd318d2d04399f00cec8da7f57881f9708f3fc0dff9ee0319e3d8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "a0e4f16940958521906f10cf92584ce56d87a2853bcb575cf9b1e4ccabf25aac"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "80ef20e30ee1381732d669f123d219a30df9929238fe0c4c70e356e9392fe1da"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "37bec0fad60af933d73dc5b8042999eaef0469d18f2f9f12af2e7934b1259f20"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.form.QuestionSubmitFormTest.xml",
+      "sha256": "c7bd06d2c5a61a4f7cb476a9f00bfc6523d75eb5baabf4ece595d22b7ae438b5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.logging.HttpRequestLoggingValveTest.xml",
+      "sha256": "7946f2d421b6cbbdc9ed9d2029fef6fbb632ab5966c23afc6799415ac776ea7c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest.xml",
+      "sha256": "22ac654eab02771be6e613f0bf70f2411646b78245d6762bc1ec04eae0e6f3bd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "feb2bb0aa0db31ae4fba2d61a1fdd0046cca643fd146276bc6466e3d4fd3e721"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest.xml",
+      "sha256": "1d0e128d3eba6706588bcfe2375889cb71998bab7586cc465f9d95f176cc9193"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest.xml",
+      "sha256": "f799842faa30f05c49b281db963b24bd3f09d951c1875b033fdc38984c81dc28"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml",
+      "sha256": "eee6a6b97c8c43bfd8d259d0bbb1cdbc3d32b5d660f7de59fc588253e372da9e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.view.QuestionInputScriptTest.xml",
+      "sha256": "1105edb772f55730498ec337300efbb789fae5456b3dd13ef8d640eefc500423"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/logs/byte-counter.json",
+      "sha256": "be5b174b70f761983c1b45b5f8068e39d080554881b6c7c528a011c5e6dfa4bc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v5/logs/byte-counter.txt",
+      "sha256": "4f3d58e75d8706a3399f46de2100fd9ee0eab6700079c1d40c941615fa820f90"
+    }
+  ]
+}

@@ -44,6 +44,8 @@ final class WebRequestTraceTest {
           "/admin/users",
           "/admin/users/{id:[0-9]{1,12}}",
           "/questions",
+          "/questions/new",
+          "/questions/accepted/{receiptId}",
           "/questions/{id:[0-9]{1,12}}",
           "/notifications",
           "/notifications/{id:[0-9]{1,12}}",
@@ -67,7 +69,9 @@ final class WebRequestTraceTest {
         }
       }
     }
-    assertEquals(24, annotations);
+    // UI224/236 SCR018/019: GET new, POST new and GET accepted are three mappings,
+    // but the two /questions/new methods share one safe registered pattern.
+    assertEquals(27, annotations);
     var mapped = new HashSet<>(ROUTES);
     mapped.removeAll(Set.of("/css/**", "/js/**"));
     assertEquals(mapped, actual);
@@ -84,7 +88,7 @@ final class WebRequestTraceTest {
     for (String unknown :
         List.of(
             "",
-            "/questions/new",
+            "/questions/new?question=canary",
             "/logout",
             "/questions/accepted",
             "/music/secret-id",
@@ -95,6 +99,22 @@ final class WebRequestTraceTest {
       var trace = trace(new MockHttpServletRequest(), 2);
       trace.captureRoute(unknown);
       assertEquals("/**", trace.route());
+    }
+  }
+
+  @Test
+  void req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator() {
+    var interceptor = new WebRequestRouteInterceptor();
+    for (String pattern : List.of("/questions/new", "/questions/accepted/{receiptId}")) {
+      var request = new MockHttpServletRequest("GET", "/questions/accepted/canary-private-locator");
+      request.setQueryString("question=canary-body");
+      var trace = trace(request, 1);
+      request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, pattern);
+      assertTrue(interceptor.preHandle(request, new MockHttpServletResponse(), this));
+      assertEquals(pattern, trace.route());
+      assertFalse(trace.route().contains("canary"));
+      trace.captureRoute("/error");
+      assertEquals(pattern, trace.route());
     }
   }
 

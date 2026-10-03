@@ -43,6 +43,8 @@ public final class WebRequestTrace {
           "/admin/users",
           "/admin/users/{id:[0-9]{1,12}}",
           "/questions",
+          "/questions/new",
+          "/questions/accepted/{receiptId}",
           "/questions/{id:[0-9]{1,12}}",
           "/notifications",
           "/notifications/{id:[0-9]{1,12}}",
