@@ -19,8 +19,8 @@ final class StartupSchemaProjectionTest {
   private static final List<String> VERSIONS =
       List.of(
           "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
-          "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025",
-          "026");
+          "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026",
+          "027");
 
   @BeforeAll
   static void start() throws Exception {
@@ -59,8 +59,8 @@ final class StartupSchemaProjectionTest {
         assertTrue(rows.getBoolean("success"));
       }
       assertFalse(rows.next());
-      // SSC175: 26 versioned rows plus the unchanged schema-creation row.
-      assertEquals(27, rank + 1);
+      // QA050: 27 versioned rows plus the unchanged schema-creation row.
+      assertEquals(28, rank + 1);
     }
   }
 
@@ -102,7 +102,7 @@ final class StartupSchemaProjectionTest {
           var r = s.executeQuery(QUERY)) {
         int count = 0;
         while (r.next()) count++;
-        assertEquals(27, count);
+        assertEquals(28, count); // 27 approved versioned rows and one SCHEMA row.
       }
     for (String name : List.of("schubert_backup", "schubert_inbox_inspector", "schubert_ops_ro"))
       try (var c = role(name)) {
@@ -168,7 +168,7 @@ final class StartupSchemaProjectionTest {
               assertEquals("SQL", r.getString("type"));
             }
           }
-          assertEquals(27, count);
+          assertEquals(28, count);
         }
       } finally {
         c.rollback();
@@ -196,7 +196,7 @@ final class StartupSchemaProjectionTest {
         assertEquals(0, r.getInt(1));
         int count = 1;
         while (r.next()) count++;
-        assertEquals(27, count);
+        assertEquals(28, count);
       }
     }
   }
@@ -210,7 +210,7 @@ final class StartupSchemaProjectionTest {
           var r = s.executeQuery(QUERY)) {
         int count = 0;
         while (r.next()) count++;
-        assertEquals(27, count);
+        assertEquals(28, count);
       }
       c.rollback();
     }
@@ -241,7 +241,7 @@ final class StartupSchemaProjectionTest {
                     }
                   }
                 }));
-      for (var task : tasks) assertEquals(27, task.get().intValue());
+      for (var task : tasks) assertEquals(28, task.get().intValue());
     }
   }
 

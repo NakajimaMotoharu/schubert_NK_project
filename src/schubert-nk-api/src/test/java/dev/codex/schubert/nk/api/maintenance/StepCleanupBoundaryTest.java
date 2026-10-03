@@ -678,7 +678,7 @@ final class StepCleanupBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(26, files.size());
+    assertEquals(27, files.size());
     for (int i = 0; i < 24; i++)
       assertEquals(
           expected.get(i),
@@ -693,16 +693,17 @@ final class StepCleanupBoundaryTest {
         HexFormat.of()
             .formatHex(
                 MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.get(24)))));
-    assertEquals("V026__web_receipt_references.sql", files.getLast().getFileName().toString());
+    assertEquals(
+        "V027__pending_revocation_unknown_expiry.sql", files.getLast().getFileName().toString());
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
             "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024",
-            "025", "026"),
+            "025", "026", "027"),
         MigrationInventory.VERSIONS);
     try (var c = db.admin()) {
       assertEquals(
-          "26|1",
+          "27|1",
           scalar(
               c,
               "select (select count(*) from schubert_meta.flyway_schema_history where success and type='SQL' and version is not null)||'|'||(select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null)"));

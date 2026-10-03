@@ -138,8 +138,10 @@ public final class AuthSessionRevocationService {
           result);
       return new RevokedContext(identity, revokedAt, result);
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();
       throw new AuthenticationContextException();
     }
@@ -200,8 +202,10 @@ public final class AuthSessionRevocationService {
       }
       return ids.size();
     } catch (SQLException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } catch (AuthorizationException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();
       throw new AuthorizationException(ResultCode.NOT_FOUND);
     }

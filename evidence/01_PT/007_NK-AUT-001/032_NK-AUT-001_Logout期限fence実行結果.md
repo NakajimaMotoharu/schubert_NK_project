@@ -1,5 +1,11 @@
 # 032 NK-AUT-001 Logout期限fence実行結果
 
+## PG449例外横展開の独立確認
+
+fatal-before-v1（2026-10-04 08:01:11、HEAD d35bbcd29＋独立AuthRevocationTest dirty）：actual1/01:11/API1PT1F/E/S0、expected Error/actualInfrastructure、Web/Batch未実行。log6568f8b554624c250f331cf67ce568511fbb7e323f7e0b46e227e8f235606f72、filehash不変/実4byte pg449-fatal-before-v1-frozen保存後にBUG622/YKT440先行・6markerとSQL-primaryの同normalizeを修正。
+
+fatal-selected-v1（08:08:33、HEAD d35bbcd29＋API5source/独立Test dirty）：actual0/02:52、84PT10suite（5/7/10/44/10/8）FES0/static6zero、AuthRevocation/AuthSessionService/Verifier/AdminAuthenticator/InfrastructureException/LogoutInboxの6class B145/L389/M29/C6全miss0。6public marker/error identity・nestedSQL fatal/cyclic非fatal有界・全rollback/固定redactionと既存100再送/認可を確認。log43cc96ec5943160e0ef80e1f213295948054f162734de4e142acff069cc5da1f、sourcefilehash前後一致/全6byte pg449-fatal-selected-v1-frozen、safe007 PG449-fatal-selected-v1 manifest17528c71a96b6458a02db31d7cbac9fd9c3f89979e39479432e2e82cd9e4b092。限定是正であり、当sourcefull/承認V027/同Web再送・native/正式は未完了。既存c601 full3082は別sourceとして保持し補完に使わない。
+
 ## 同source全体 PG448 full-v1
 
 2026-10-04 07:56:25 JST、source c601c43b0c9a48906d153e87b23db943dfc29550、actual0/16:46、3082PT/FES0（81/154/213/888/724/1022）、6module XML件数一致・SpotBugs6zero・execution-data mismatchなし。safe018 PG448-logout-fence-full/manifest SHA256 62a80e0ef24b371862b4183952eac2bb7aa17843a8b33a3b0a91d6c56261d3c5、対象Auth3class全4counter0。WorkPG379/pg448-host全6actual classes/testclasses/XML/exec/site/static/JAR/runtime dependencyをbyte一致保全、source固定解除。BUG618/YKT437の当該境界/currentClock/fence/rollback/既存再送host再試験を完了。既存host残B1222/L3477/M567/C39、一般0102 proof化0・別source結果合算0、WebNULL期限/retry/native/CHR/正式run24は未完了。

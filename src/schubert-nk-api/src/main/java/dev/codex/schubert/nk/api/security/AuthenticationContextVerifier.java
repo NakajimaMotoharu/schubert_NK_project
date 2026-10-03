@@ -66,8 +66,10 @@ public final class AuthenticationContextVerifier {
       }
       return session.actor();
     } catch (SQLException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       // JDBC close errors suppressed by try-with-resources must not carry provider text outward.
       if (failure.getSuppressed().length != 0) {
         throw new AuthenticationInfrastructureException();
@@ -93,8 +95,10 @@ public final class AuthenticationContextVerifier {
       }
       return readSession(connection, READ_SESSION, hashes.calculate(raw), now).actor();
     } catch (SQLException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) {
         throw new AuthenticationInfrastructureException();
       }

@@ -1,0 +1,300 @@
+{
+  "id": "PG449-fatal-selected-v1",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "d35bbcd29f559343483cdc93b94cf24bc0112d08",
+  "sourceDirty": "Five API security classes and independent AuthSessionRevocationServiceTest",
+  "sourceFilesSha256": "5656fb4652b44ab2a9feb13e269716f70b17ee7f30e5d997e196c9ff15fe477b",
+  "sourceDiffSha256": "4393db25ea2867b39a88ae494ca68e00ed5d1485bdcddbaa34c17c6702a3bd67",
+  "finishedAt": "2026-10-04T08:08:33+09:00",
+  "branch": "dev-foundation",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg449_selected.sh fatal-selected-v1 d35bbcd29f559343483cdc93b94cf24bc0112d08 FieldCodecTest,StorageAttributeGuardTest,FixedServiceIdentityTest,AuthSessionRevocationServiceTest,AuthSessionServiceTest,AuthenticationContextVerifierTest,AdminCommandAuthenticatorTest,LogoutInboxServiceTest,WebRequestTraceTest,CleanupStepValuesTest; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 84,
+  "suites": 10,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 44,
+      "suites": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "LogoutInboxService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 298
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 67
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthSessionService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 334
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 69
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthenticationContextVerifier": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 285
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 25
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 65
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AdminCommandAuthenticator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 306
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 44
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 66
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthSessionRevocationService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 468
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 110
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthenticationInfrastructureException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 59
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "bugs": [
+    "BUG-622"
+  ],
+  "ykt": [
+    "YKT-440"
+  ],
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "testIds": [
+    "RERUN001-F",
+    "RERUN001-A..E",
+    "PT-AUT-008-R01..05",
+    "PT-AUT-007",
+    "PT-ADM-034/036/039"
+  ],
+  "before": {
+    "id": "PG449-fatal-before-v1",
+    "tests": 1,
+    "failures": 1,
+    "exitCode": 1,
+    "logSha256": "6568f8b554624c250f331cf67ce568511fbb7e323f7e0b46e227e8f235606f72"
+  },
+  "expected": "Original fatal Error identity across six denial public boundaries, nested SQL-primary fatal close and bounded cyclic suppressed graph; rollback SQL0. Ordinary SQLException redacted fixed infrastructure, wire/session authority unchanged.",
+  "actual": "All real isolated JDBC/proxy fault, identity, rollback and existing authority/Inbox/100-replay assertions passed",
+  "logSha256": "43cc96ec5943160e0ef80e1f213295948054f162734de4e142acff069cc5da1f",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg449-fatal-selected-v1-frozen",
+  "redaction": "JUnit properties/stdout/stderr/provider text omitted; no runtime credential/context/token/session/cookie/key/dump/raw log",
+  "limitations": [
+    "Same-source QA050 ownership group full regression required",
+    "V027/revoke retry/key/local destruction/full Web native/CHR/formal run24 pending"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "530e0b942f8539e58dd8e1ecf098b6b2c60f9cfd89403a793a2557af9c7b5b20"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "3af09965b4a3bae94e47cb9425bc22a66960826eb2de69fae9d6b299a8cbb641"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "edc70dd2c022d537d2f0ddd9fa16fea03915c762595b4385040465a6eb0509b1"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "f1ffe5ce9a8c017f512df30b9d54a3acbf236c3d7162c4cce01c70ab7d78a81e"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "ae72b40784c8aac5e28d3c7848865a6b0f717b8593d9bef7af2f6165a837cfa7"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "edfc696c411f7e3a21ec3db2d5db3b8e547ac54c1b5c553f012bf50b5aa8bf43"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "dad215611ada576d3e1d18744b07fcb54cec0a0c25a0333f7c9afc527e9b6767"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "afabaaf1aa67961af53fdf70a3e20608c30c1f78706e4653d052dd98d085b6ea"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "f88684a227aae5003767d86a75b3f86e90aab89e83231722107cfade2549ec35"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG449-fatal-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "45d5d32bf8b5fae354dc94ed6c43e3c5a605be3b89546fcd233dd291d54e9c9e"
+    }
+  ]
+}

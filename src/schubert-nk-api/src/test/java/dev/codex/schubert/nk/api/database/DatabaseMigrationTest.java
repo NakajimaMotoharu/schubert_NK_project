@@ -60,6 +60,7 @@ final class DatabaseMigrationTest {
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
+  private static final String WEB_ROLE = "schubert_web_session";
   private static final String FIXED_TIME = "2026-09-02 00:00:00+00";
   private static final String HASH = "a".repeat(64);
   private static final String CIPHER = "decode('" + "00".repeat(29) + "','hex')";
@@ -1081,6 +1082,7 @@ final class DatabaseMigrationTest {
             "migration/V024__notification_received_state.sql",
             "migration/V025__question_dlq_outbox_identity.sql",
             "migration/V026__web_receipt_references.sql",
+            "migration/V027__pending_revocation_unknown_expiry.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1551,6 +1553,77 @@ final class DatabaseMigrationTest {
 
   private static Connection connection(String role, String url) throws SQLException {
     return DriverManager.getConnection(url, role, "");
+  }
+
+  @Test
+  @Order(16)
+  @DisplayName("RERUN002 unknown pending Logout expiry is nullable and retained")
+  void qa050PendingRevocationUnknownExpiryIsNullableAndRetained() throws Exception {
+    String id = "00000000-0000-0000-0000-000000007777";
+    String table = "schubert_web_session.pending_context_revocations";
+    try {
+      execute(
+          WEB_ROLE,
+          jdbcUrl,
+          "insert into "
+              + table
+              + "(id,context_ciphertext,key_version,requested_at,next_attempt_at,expires_at) values('"
+              + id
+              + "',"
+              + CIPHER
+              + ",'test','2026-09-08T01:00:00Z','2026-09-08T01:00:05Z',null)");
+      assertEquals(
+          1,
+          queryLong(
+              WEB_ROLE,
+              "select count(*) from "
+                  + table
+                  + " where id='"
+                  + id
+                  + "' and expires_at is null and attempt_count=0 and lease_owner is null and lease_until is null"));
+      assertEquals(
+          "YES",
+          queryString(
+              ADMIN,
+              "select is_nullable from information_schema.columns"
+                  + " where table_schema='schubert_web_session' and table_name='pending_context_revocations' and column_name='expires_at'"));
+      execute(
+          WEB_ROLE,
+          jdbcUrl,
+          "update "
+              + table
+              + " set attempt_count=100,next_attempt_at='2031-01-01T00:00:00Z',last_error_code='SESSION_INVALID' where id='"
+              + id
+              + "'");
+      assertEquals(
+          1,
+          queryLong(
+              WEB_ROLE,
+              "select count(*) from "
+                  + table
+                  + " where id='"
+                  + id
+                  + "' and expires_at is null and attempt_count=100 and last_error_code='SESSION_INVALID'"));
+      for (String mutation :
+          List.of(
+              "attempt_count=101",
+              "attempt_count=-1",
+              "expires_at='2026-09-08T00:59:59Z'",
+              "next_attempt_at='2026-09-08T00:59:59Z'",
+              "lease_owner='fixed-worker',lease_until=null")) {
+        SQLException failure =
+            assertThrows(
+                SQLException.class,
+                () ->
+                    execute(
+                        WEB_ROLE,
+                        jdbcUrl,
+                        "update " + table + " set " + mutation + " where id='" + id + "'"));
+        assertEquals("23514", failure.getSQLState());
+      }
+    } finally {
+      execute(WEB_ROLE, jdbcUrl, "delete from " + table + " where id='" + id + "'");
+    }
   }
 
   private static void executeResourceAsAdmin(String resource) throws Exception {

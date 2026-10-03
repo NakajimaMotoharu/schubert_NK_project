@@ -486,11 +486,173 @@ final class AuthSessionRevocationServiceTest {
     assertEquals(0, count("select count(*) from schubert.app_logs"));
   }
 
+  @Test
+  void rerun001FatalCloseOfExpiredRowIsNotAnInfrastructureResponse() throws Exception {
+    execute(
+        "update schubert.auth_sessions set expires_at='2026-09-08T01:00:00Z' where id='"
+            + SESSION
+            + "'");
+    try (Connection connection = database.transaction()) {
+      try {
+        var fatal =
+            assertThrows(
+                AssertionError.class,
+                () ->
+                    service.logoutCurrent(
+                        intercept(connection, "fatalSessionClose"),
+                        RAW,
+                        client,
+                        MESSAGE,
+                        CORRELATION,
+                        java.time.Clock.fixed(NOW, java.time.ZoneOffset.UTC)));
+        assertEquals("fatal-close-canary", fatal.getMessage());
+      } finally {
+        connection.rollback();
+      }
+    }
+    assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
+    assertEquals(0, count("select count(*) from schubert.app_logs"));
+  }
+
   private static int revokeAll(Connection connection, long target, SessionRevocationReason reason) {
     return service.revokeAll(connection, ADMIN, target, reason, client, MESSAGE, CORRELATION, NOW);
   }
 
+  @Test
+  void rerun001FatalMarkerMatrixKeepsIdentityAndSqlPrimaryCyclesAreBounded() throws Exception {
+    try (var codec = new AuthContextCodec("test", new byte[32], null, null)) {
+      var issuer = new AuthSessionService(new ContextHash(), codec);
+      var verifier = new AuthenticationContextVerifier(new ContextHash());
+      var administrator = new AdminCommandAuthenticator(new ContextHash());
+      for (int index = 0; index < 6; index++) {
+        final int mode = index;
+        seed();
+        execute("update schubert.app_users set status='DISABLED' where id=7");
+        execute(
+            "update schubert.auth_sessions set expires_at='2026-09-08T01:00:00Z' where id='"
+                + SESSION
+                + "'");
+        try (Connection connection = database.transaction()) {
+          if (mode == 2) connection.setReadOnly(true);
+          Error fatal = new AssertionError("fatal-marker-canary");
+          String query =
+              switch (mode) {
+                case 3 -> "select id from schubert.app_users";
+                case 4 -> "select status from schubert.app_users";
+                case 5 -> "select user_id from schubert.auth_sessions";
+                default -> "select s.id";
+              };
+          Connection wrapped = closeFault(connection, query, fatal, null);
+          try {
+            assertSame(
+                fatal,
+                assertThrows(
+                    Error.class,
+                    () -> {
+                      switch (mode) {
+                        case 0 ->
+                            service.logoutCurrent(
+                                wrapped,
+                                RAW,
+                                client,
+                                MESSAGE,
+                                CORRELATION,
+                                java.time.Clock.fixed(NOW, java.time.ZoneOffset.UTC));
+                        case 1 -> verifier.verify(wrapped, RAW, NOW);
+                        case 2 -> verifier.inspectReadOnly(wrapped, RAW, NOW);
+                        case 3 ->
+                            service.revokeAll(
+                                wrapped,
+                                ADMIN,
+                                99,
+                                SessionRevocationReason.ADMIN,
+                                client,
+                                MESSAGE,
+                                CORRELATION,
+                                NOW);
+                        case 4 ->
+                            issuer.issue(
+                                wrapped, 7, client.orElseThrow(), MESSAGE, CORRELATION, NOW);
+                        case 5 ->
+                            administrator.verifyIdentity(
+                                wrapped,
+                                AuthenticationContext.of("f".repeat(64)),
+                                AdminCommandAuthenticator.Mutation.CREATE,
+                                java.util.OptionalLong.empty(),
+                                NOW);
+                        default -> fail("unknown fixture mode");
+                      }
+                    }));
+          } finally {
+            connection.rollback();
+          }
+        }
+        assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
+        assertEquals(0, count("select count(*) from schubert.app_logs"));
+      }
+    }
+    seed();
+    for (boolean fatalPresent : new boolean[] {false, true}) {
+      var primary = new SQLException("sensitive-primary-canary");
+      var nested = new SQLException("sensitive-nested-canary");
+      primary.addSuppressed(nested);
+      nested.addSuppressed(primary);
+      Error fatal = new AssertionError("nested-fatal-canary");
+      if (fatalPresent) nested.addSuppressed(fatal);
+      try (var connection = database.transaction()) {
+        try {
+          Connection wrapped = closeFault(connection, "select s.id", null, primary);
+          org.junit.jupiter.api.function.Executable operation =
+              () ->
+                  service.logoutCurrent(
+                      wrapped,
+                      RAW,
+                      client,
+                      MESSAGE,
+                      CORRELATION,
+                      java.time.Clock.fixed(NOW, java.time.ZoneOffset.UTC));
+          if (fatalPresent) assertSame(fatal, assertThrows(Error.class, operation));
+          else assertInfrastructure(operation);
+        } finally {
+          connection.rollback();
+        }
+      }
+      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
+      assertEquals(0, count("select count(*) from schubert.app_logs"));
+    }
+  }
+
+  private static Connection closeFault(
+      Connection real, String match, Error fatal, SQLException primary) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (p, m, a) -> {
+              Object statement = invoke(real, m, a);
+              if (!m.getName().equals("prepareStatement") || !((String) a[0]).startsWith(match))
+                return statement;
+              return Proxy.newProxyInstance(
+                  PreparedStatement.class.getClassLoader(),
+                  new Class<?>[] {PreparedStatement.class},
+                  (sp, sm, sa) -> {
+                    Object result = invoke(statement, sm, sa);
+                    if (!sm.getName().equals("executeQuery")) return result;
+                    return Proxy.newProxyInstance(
+                        ResultSet.class.getClassLoader(),
+                        new Class<?>[] {ResultSet.class},
+                        (rp, rm, ra) -> {
+                          if (primary != null && rm.getName().startsWith("get")) throw primary;
+                          Object actual = invoke(result, rm, ra);
+                          if (fatal != null && rm.getName().equals("close")) throw fatal;
+                          return actual;
+                        });
+                  });
+            });
+  }
+
   private static RevokedContext logout(Instant now) throws Exception {
+
     try (Connection connection = database.transaction()) {
       var result = service.logout(connection, RAW, client, UUID.randomUUID(), CORRELATION, now);
       connection.commit();
@@ -603,6 +765,10 @@ final class AuthSessionRevocationServiceTest {
                             if (fault.equals("badOwner") && field.equals("user_id")) return 0L;
                           }
                           Object rr = invoke(sr, rm, ra);
+                          if (step == 2
+                              && rm.getName().equals("close")
+                              && fault.equals("fatalSessionClose"))
+                            throw new AssertionError("fatal-close-canary");
                           if (rm.getName().equals("close")
                               && (fault.equals("rowClose")
                                   || (step == 2 && fault.equals("providerIaeReadAndRowClose"))))

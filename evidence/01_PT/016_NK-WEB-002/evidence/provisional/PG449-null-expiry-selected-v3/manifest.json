@@ -1,0 +1,361 @@
+{
+  "id": "PG449-null-expiry-selected-v3",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "d35bbcd29f559343483cdc93b94cf24bc0112d08",
+  "sourceDirty": "Five API security classes, independent auth/migration/inventory API and Batch tests, append-only V027",
+  "sourceFilesSha256": "ef61d1ec30a80297945620469ed3effb7425de69bef8e6f3db844f4bc19ca097",
+  "sourceDiffSha256": "aa144d13098eb4f6deae34416a544e6b7dfbb3ddfa8162d613136f016dabfa6c",
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T08:29:42+09:00",
+  "finishedAt": "2026-10-04T08:33:04+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg449_selected.sh null-expiry-selected-v3 d35bbcd29f559343483cdc93b94cf24bc0112d08 FieldCodecTest,StorageAttributeGuardTest,FixedServiceIdentityTest,DatabaseMigrationTest,StartupSchemaProjectionTest,InboxInspectionProgressBoundaryTest,LogCleanupProgressBoundaryTest,InspectionParentBoundaryTest,OutboxCleanupBoundaryTest,StepCleanupBoundaryTest,AuthSessionRevocationServiceTest,AuthSessionServiceTest,AuthenticationContextVerifierTest,AdminCommandAuthenticatorTest,LogoutInboxServiceTest,WebRequestTraceTest,BackupStepRepositoryTest,BatchRunRepositoryTest,CleanupDatabaseSessionTest,CleanupStepValuesTest; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 186,
+  "suites": 20,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 111,
+      "suites": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "LogoutInboxService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 298
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 67
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthSessionService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 334
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 69
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthenticationContextVerifier": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 285
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 25
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 65
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AdminCommandAuthenticator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 306
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 44
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 66
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthSessionRevocationService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 468
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 110
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthenticationInfrastructureException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 59
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "bugs": [
+    "BUG-622",
+    "BUG-623",
+    "BUG-624"
+  ],
+  "ykt": [
+    "YKT-440",
+    "YKT-441"
+  ],
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "testIds": [
+    "RERUN002",
+    "RERUN001-F",
+    "PT-DB-SCHEMA001..008",
+    "BCATALOG001",
+    "PT-AUT-007/008"
+  ],
+  "expected": "NULL expiry retained under exact WEB role; constraints, grants and old migrations unchanged; independent 27-version/28-history inventories; fatal identity and rollback across six denial boundaries",
+  "actual": "All independent SQL/catalog/NULL/constraint/auth-fault and API/Batch inventory assertions passed",
+  "before": [
+    {
+      "id": "PG449-null-expiry-before-v1",
+      "exitCode": 1,
+      "error": "Wrong fixture role; BUG623"
+    },
+    {
+      "id": "PG449-null-expiry-before-v2",
+      "exitCode": 1,
+      "error": "Unimplemented NULL TDD; not BUG"
+    },
+    {
+      "id": "PG449-null-expiry-selected-v1",
+      "exitCode": 1,
+      "failures": 1,
+      "error": "CSV inventory; BUG624"
+    },
+    {
+      "id": "PG449-null-expiry-selected-v2",
+      "exitCode": 1,
+      "failures": 5,
+      "error": "Total history inventory; BUG624"
+    }
+  ],
+  "logSha256": "87936f6d0c6b6d6ab734003d25669c9cfe2633b766b994f421f00c6ec2c59be5",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg449-null-expiry-selected-v3-frozen",
+  "redaction": "JUnit properties/stdout/stderr/provider text omitted; no credential/raw session/context/cookie/token/key/dump/raw log",
+  "limitations": [
+    "Same-source security/DDL/Logout ownership full regression pending",
+    "Dedicated revoke codec/claim/retry/key retention/local Logout/native full Web/CHR/formal run24 pending"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "570c64590ad36e7b9d225028966bdb4eea19bb891498a3dd76fd289cf053f07f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "e0547ebfd34b00f188eda630458b7c93a3828a500be32bba892535e60d45c94f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "d8d237dbec2ff69d2ca276473e26477cb924d5557c521389c27548ec81b60227"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "58159948441598eb24afa571067228042c6fe85c53aa8026a47b1dde38e447cd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "1c50157a76a20d0c58402674448607271de052eb8d9a5355d705dc6954d8ae4f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "dc9498ac34d88378993795f15483c99ac679f6f43e3f04b69b2d44f83b8660a2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "8c4313bb7e920d46c12eed1e443a0deac8d2fd24061d9651249312eb66d085cd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "428d0813a72cf9081c72faa54ab63bbceaab8148e62c162d7cb4c2dca2eed047"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "aad89d4e987f1685baa9dfa2c4f63f3a4db562f14cbf09e19f5e98cdc5e205e9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "5ed46daea5541c3475dd1f1cbd63814613590f3012cb17dd4b5e2b87ee07d849"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "6843de871dc63781caece6a849707d19df7e58c68e828d925dbf6da129fe68dc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "9d55569652f58c3dd314598dd8f7e8b0c7f034896524a4bd360662d083b5c88c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "bce18144fe6ed20e0b874b50e006e517926138283865eb0637a9e7f4b72ee350"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "83fc7e91cd51ddfa82c55f9fa49dce8610bda0a30edebe712b7e9600b2f91937"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "7b2a70ad6bc26bb6fa5945cc4b088c38576f7fc9854032eb1aa35d72685afd60"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "06024eee5584b432540cefd56293532fce256aab182c44ee935a5c4d1abf133a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "99b850b5d8793074ea3a7b239359f98deb5d84de9906a794a72e6f589949c62f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "8cbdbdc0114e0ff13ba483983268f54a790bfbd4fd67efa0048b1440eb357611"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "24d8a96c0c1242dac3e13e232b24b1a72303ed7e77c4a78d454447bc9a16dff9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-null-expiry-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "fa8467b4bdffcaf1905d6fddb4794269741f3ea147528a02b2a7b05144e3b89f"
+    }
+  ]
+}

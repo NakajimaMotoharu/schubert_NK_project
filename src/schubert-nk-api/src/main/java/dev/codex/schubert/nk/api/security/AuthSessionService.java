@@ -142,8 +142,10 @@ public final class AuthSessionService {
       }
       return new IssuedContext(identity, raw, issuedAt, expiresAt);
     } catch (SQLException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } catch (AuthenticationContextException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) {
         throw new AuthenticationInfrastructureException();
       }

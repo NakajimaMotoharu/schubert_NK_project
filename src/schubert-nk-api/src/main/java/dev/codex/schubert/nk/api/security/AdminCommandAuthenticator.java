@@ -85,9 +85,11 @@ public final class AdminCommandAuthenticator {
       require(actor.userId() == candidate);
       return actor;
     } catch (AuthenticationContextException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();
       throw new AuthenticationContextException();
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     }
   }
