@@ -101,7 +101,7 @@ SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみ�
 | 017 | POST `/admin/users/{id}` + `operation=UNLOCK` | redirect/409 | `UserAdminController.unlock(...)` | `UserUnlockForm` | IF-024 | ADMIN、token/version |
 | 018 | GET `/questions/new` | `questions/new.html` | `QuestionController.newForm(Model)` | `QuestionSubmitForm` | なし | USER/ADMIN、QST-001 |
 | 018 | POST `/questions/new` | redirect/再表示 | `QuestionController.submit(...)` | `QuestionSubmitForm` | IF-025 | USER/ADMIN、token |
-| 019 | GET `/questions/accepted/{receiptId}` | `questions/accepted.html` | `QuestionController.accepted(ReceiptId,Model)` | `QuestionAcceptedViewModel` | 保存済みIF-025結果 | Owner、QST-002 |
+| 019 | GET `/questions/accepted/{receiptId}` | `questions/accepted.html` | `QuestionController.accepted(ReceiptId,Model)` | `QuestionAcceptedViewModel` | Web受付参照＋毎GET fresh IF-030照合結果 | 現在API Owner/受付照合、QST-002、QA048 |
 | 020 | GET `/notifications` | `notifications/list.html` | `NotificationController.list(NotificationSearchForm,Model)` | `NotificationSearchForm` / `NotificationListViewModel` | IF-026 | 本人だけ、NTF-001 |
 | 021 | GET `/notifications/{id}` | `notifications/detail.html` | `NotificationController.detail(long,Model)` | `NotificationDetailViewModel`＋`CancelForm` | IF-027 | 本人だけ |
 | 021 | POST `/notifications/{id}` + `operation=CANCEL` | redirect/最新表示 | `NotificationController.cancel(...)` | `CancelForm` | IF-028 | 本人、RECEIVED、token |
@@ -238,3 +238,15 @@ SSC-047（SCR-090具体化）: ErrorController/ProblemViewFactoryはserver Reque
 |---|---|
 | 2026-08-31 | 全画面・endpointのtemplate/controller/form/validation/表示制御を初版作成。 |
 | 2026-08-31 | 横断監査でUI 221のPOST URL維持とhidden operation分岐へ是正。 |
+
+## QA-048承認反映：SCR019 locatorと業務照合（2026-10-03）
+
+業務側DB（APIが管理するquestions/関連業務data）が正である。`schubert_web_session.web_receipt_references`はreceiptIdからquestionIdを解決するためのtechnical locatorだけとし、検証済IF025のreceiptId/questionId/submittedAtの3値以外を保存しない。本文・回答・password・認証context・operation token・owner・結果snapshot・検証済flagを蓄積しない。
+
+SCR019のGETごとにlocatorを読む短Web transactionを終了してからfresh MessageIDのIF030を現在API認証で呼び、API側の現在owner認可に加えてquestionId/receiptId/submittedAtを照合する。日時比較は既存wireのUTC millisecond精度へ揃え、DBの追加microsecondを誤不一致にしない。表示はこの要求で取得したAPI結果だけをHTML escapeし、request scopeへ置く。不一致・他人・削除済み・locator欠落・API確認不能は既存error処理へ進め、古いlocatorやsessionから受付成功/本文を補わない。
+
+IF025成功後のWeb保存は3値をimmutableに登録する。同receiptの同値再登録は冪等、異なる値の競合は上書きせず非成功・診断とする。業務commitとWeb保存は別transactionなので一時欠落が起こり得る。その際、業務受付を取り消したと仮定せず、新operation tokenで質問を再生成しない。保持中の同token/同入力の正規再操作からAPIの既存確定受付結果を取得し、Web参照登録を再試行する。参照欠落のURLだけからquestionIdを推測して復元する保証はしない。
+
+Backup/restore後もWeb値は信頼せず毎GETのAPI検証を省略しない。修復は正規APIの検証済み結果を根拠にWeb参照を合わせる片方向とし、Web参照を正として業務DBを書き換えない。Webから業務schemaへの直接接続/FK/権限は追加しない。cleanupは当日backup gateの下、業務質問が物理削除されたlocatorだけを固定保守functionで削除し、存続する質問のlocatorへ独自TTLを設定しない。実装・DDL適用・独立PTは未完了であり、QA048承認による設計条件である。
+
+独立PTは本人正常/他人/別受付/時刻不一致/欠落/論理・物理削除/API障害/HTML escape、IF025業務成功後Web保存失敗→同token再操作、同値再登録/競合、backup復元の古いlocatorを含む。Web参照だけから成功を返したり、API本文をsessionへ保存した場合は不合格とする。

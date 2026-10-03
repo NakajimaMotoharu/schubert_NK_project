@@ -152,7 +152,7 @@ JMS classはprotocol moduleへ渡さず、Web/API adapterが必要propertyを`Tr
 | `.web.messaging` | `JmsRequestReplyClient`, `ReplyCorrelationRegistry`, `WireMessageFactory`, `ResponseMapper` | Persistent送信、2秒待機、相関、response検証 |
 | `.web.security` | `MqAuthenticationProvider`, `AuthenticationContext`, `ApiAuthorizationFailureHandler`, `TrustedClientAddressResolver` | Login MQ認証、context保持、Web側role/owner gate |
 | `.web.session` | `EncryptedWebSessionRepository`, `SessionAttributeCodec`, `PendingRevocationRepository`, `ContextRevocationRetrier` | Technical schemaだけを使う暗号化session/Logout再試行 |
-| `.web.operation` | `OperationTokenService`, `OperationTokenStore` | UUID発行、用途別最大10件、PRG/timeout時のtoken保持 |
+| `.web.operation` | `OperationTokenService`, `OperationTokenStore` | UUID発行、session全用途pending＋consumed合計10件、初回完成印・consumed退役・PRG/timeout時の保持（QA049/SS314・324） |
 | `.web.media` | `DescriptorFileResolver`, `MediaRangeService`, `LargeResultReader`, `ContentDispositionFactory` | Root/path/hash/Range/file配信 |
 | `.web.logging` | `HttpRequestLoggingFilter`, `WebLogOutboxRepository`, `WebLogDispatcher`, `RedactionPolicy` | Local JSON＋WLGEVT01 outbox |
 | `.web.error` | `GlobalWebExceptionHandler`, `ProblemViewFactory` | 400/401/403/404/409/416/503の共通表示 |

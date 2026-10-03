@@ -234,3 +234,15 @@ Address容量/paging/full-policyはQA-042承認oracleを必須実行し、`skipp
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Address別memory/page上限、page-full FAIL、disk-full BLOCKの容量oracleを確定。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、backup/batch role相互権限、3 schema dump/restore、復号key非配布oracleを確定。 |
 | 2026-09-01 | QA-044/UIC-004を反映。Currentの3 session継続とNKの最大2・最古revokeを分離し、NK PTの3件競合oracleを固定。 |
+
+## QA-050承認反映：再試行のPT・IT/STと間隔調整（2026-10-03）
+
+独立PTは期限NULL/推測期限非採用/遅延TOUCH、0000/0200のみ削除、一般0102と物理session削除後も保全、復号不能、100飽和後の継続、expiry±1µs、唯一claim/lease takeover、JMS待機中DB解放、鍵rotation/borrower、登録/commit/close不明とlocal破棄、実DB・Clock/latch/JMS競合を含む。API expired fence補足は既定User→session lock・監査・0102 ERROR snapshot不変と遅延認証拒否を確認する。
+
+QA050承認に基づき、初期5秒/30秒/5分後の継続再試行を15分で実装する。ITおよびSTの性能試験で、再試行なしの通常業務を基準に同じ通常業務負荷へ再試行を重ね、問題が確認された場合に間隔を変更する。初期短間隔の挙動を15分定常平均だけで評価しない。
+
+試験条件は正常Logout、API/Broker停止→復帰、既存session/物理削除済み0102/復号不能、due集中と分散、複数workerのlease競合、残件100/1,000/10,000の計画容量点と想定運用ピークを含む（件数は試験点であり実運用の残件予測ではない）。実時間の15分運転・反復滞留をIT/STで確認し、仮想ClockのPTだけを性能実測に代用しない。
+
+既定性能基準（STANDARD同時10名×同期request、end-to-end p95<=2.5秒、MQ待ち<=2.0秒）と既定資源予算を維持し、timeout/error率・API/DB CPU・lock待ち/pool・Inbox増加/WAL・MQ/journal/disk・再試行残件/最古時間と解消までの時間を同条件で記録する。基準未達や再試行起因の資源逼迫があれば因果を確認し、DB/lease/送信制御等の不具合を単に間隔変更で隠さない。
+
+間隔による負荷が原因なら継続間隔を調整し、同条件の通常業務性能・障害復帰・失効確認遅延/残件解消を再測定して採用値を決める。変更前後の設定値/source/環境/負荷件数/測定期間/比較結果/判断者を残し、UI226/242/253・SS314/343/354と変更台帳を整合してmainへ反映する。保持/削除proof・鍵保全・8h idle・wire/認可条件は間隔調整で変えない。IT/STの合格と実装/配備の完了は実証まで未完了とする。

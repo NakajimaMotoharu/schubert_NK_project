@@ -1,0 +1,111 @@
+{
+  "id": "PG442-request-selected-v4-failed",
+  "formal": false,
+  "result": "FAILED",
+  "acceptedRunCount": 0,
+  "sourceCommit": "e3183cfa8563345e0cf59cbb052b412b015b793f",
+  "sourceDirtyAtExecution": true,
+  "sourceHashes": "not recorded at launch; no frozen or later-source result is claimed",
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0",
+  "exitCode": 1,
+  "modules": {
+    "protocol": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 113,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "batch": "NOT-RUN; old target not accepted",
+  "failedCases": [
+    {
+      "class": "dev.codex.schubert.nk.web.logging.HttpRequestLoggingValveTest",
+      "method": "req003ActualClientResetNeverClaimsTheUnwrittenStreamAsFullBody",
+      "result": "failure",
+      "type": "org.opentest4j.AssertionFailedError"
+    }
+  ],
+  "expected": "all selected suites compile/PT/static successful with F/E/S0 and independent oracle",
+  "actual": "reset initial header200 wrongly assumed identical to native CoyoteAdapter terminal500; source severity supplement defect recorded for next source",
+  "bugs": [
+    "BUG-573",
+    "BUG-574",
+    "BUG-575",
+    "BUG-576",
+    "BUG-577",
+    "BUG-578",
+    "BUG-579",
+    "BUG-580",
+    "BUG-581",
+    "BUG-582",
+    "BUG-583",
+    "BUG-584",
+    "BUG-585",
+    "BUG-586",
+    "BUG-587",
+    "BUG-588",
+    "BUG-589",
+    "BUG-590",
+    "BUG-591",
+    "BUG-592"
+  ],
+  "ykt": [
+    "YKT-414",
+    "YKT-415",
+    "YKT-416",
+    "YKT-417"
+  ],
+  "ssc": [
+    "SSC-172"
+  ],
+  "finishedAt": "2026-10-03T13:07:12+09:00",
+  "command": "six reactor clean spotless:check test-compile jar:test-jar test -Dtest=26 specified actual suites spotbugs:check jacoco:report -o",
+  "logSha256": "546aad414d6bec804b2ba6bc118916eb80fb976c42e2cde9f497996d6b39535c",
+  "compileAttempts": {
+    "pg442-request-compile-v1.log": {
+      "exitCode": 1,
+      "pt": "NOT-RUN",
+      "sha256": "3377ba8dfe531bf50c9b85d4acd80f5852fa0657e3e024017f943ea12afd09fa",
+      "finishedAt": "2026-10-03T12:19:37+09:00"
+    },
+    "pg442-request-compile-v2.log": {
+      "exitCode": 1,
+      "pt": "NOT-RUN",
+      "sha256": "ab4a7fbdf114e9d42296ca3db47e15b8cf018a04ddead34fe66e5154f6fea19e",
+      "finishedAt": "2026-10-03T12:20:41+09:00"
+    },
+    "pg442-request-compile-v3.log": {
+      "exitCode": 0,
+      "pt": "NOT-RUN",
+      "sha256": "d8c8e8378b5b397031bf9db0e8b79dfb573678a52332d3471f42f83ea343f704",
+      "finishedAt": "2026-10-03T12:22:00+09:00"
+    }
+  },
+  "coverage": "NOT-ACCEPTED; tests failed, static/Batch not reached",
+  "redaction": "only fixed counts, class/method, failure type, time/hash; all failure messages/stack/stdout/credential/session/token/password/key/dump omitted"
+}

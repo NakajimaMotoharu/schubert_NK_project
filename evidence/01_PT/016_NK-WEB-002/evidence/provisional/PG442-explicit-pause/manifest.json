@@ -1,0 +1,94 @@
+{
+  "id": "PG442-explicit-pause",
+  "formal": false,
+  "result": "INTERRUPTED_BY_EXPLICIT_USER_PAUSE",
+  "acceptedRunCount": 0,
+  "sourceCommit": "e06916a6a5134be025790a5b2fa7446a4c470b28",
+  "branch": "dev-foundation",
+  "timeUtc": "2026-10-03T04:53:54.547511+00:00",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "exitCode": 143,
+  "modules": {
+    "protocol": {
+      "finishedXmlSuites": 17,
+      "tests": 81,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    },
+    "storage": {
+      "finishedXmlSuites": 22,
+      "tests": 154,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    },
+    "bootstrap": {
+      "finishedXmlSuites": 29,
+      "tests": 213,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    },
+    "api": {
+      "finishedXmlSuites": 145,
+      "tests": 884,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    },
+    "web": {
+      "finishedXmlSuites": 101,
+      "tests": 691,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    },
+    "batch": {
+      "finishedXmlSuites": 68,
+      "tests": 471,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "accepted": false,
+      "limitation": "finished XML counts only; interrupted six-module run, not a passing or coverage100 run"
+    }
+  },
+  "logSha256": "2b129494d2ada67702c61c59a84b00e330d0ff8b7a58da01c80d3620331c53de",
+  "trigger": "PG-D354355 REQUEST common security/terminal/outbox/replay contract same-source regression",
+  "command": "six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar dependency-plugin3.9.0:copy-dependencies/list runtime -o",
+  "stoppedOwner": {
+    "id": "PG442-explicit-pause",
+    "pid": 1275463,
+    "parent": 1275402,
+    "startTicks": 4814627,
+    "signal": "TERM",
+    "stablePidfd": true,
+    "childrenBeforeSignal": [
+      {
+        "pid": 1334295,
+        "startTicks": 4881617
+      }
+    ],
+    "accepted": false,
+    "reason": "user requested machine shutdown preparation; current full run interrupted, not a passing run"
+  },
+  "limitations": [
+    "Batch MaintenanceRunRetirementTest interrupted; unreported/unexecuted suites not accepted",
+    "same-source full six regression, binary freeze and formal all scopes/native/CHR not completed",
+    "selected-v7 179PT/26suite/new6class4coverage proof remains independently preserved",
+    "PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged; no PGPT or IT/ST completion"
+  ],
+  "redaction": "counts/time/hash/process ownership only; no raw XML/log/DB/Backup/epoch bytes/credential/session/token/key",
+  "files": []
+}

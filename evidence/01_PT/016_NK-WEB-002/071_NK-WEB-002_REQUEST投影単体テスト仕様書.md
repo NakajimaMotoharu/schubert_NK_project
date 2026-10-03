@@ -1,5 +1,14 @@
 # REQUEST投影単体テスト仕様書
 
+SSC173/PG-D355追補：responseBytesはorigin charset変換後のsuccessful content write、headers/transfer chunk framing/Servlet char混在/Caddy後段/clientACK保証は対象外。独立実UTF8本文・HEAD0・ASYNC固定6で確認し、production counterからexpectedを算出しない。BUG573～586/YKT414～418の再試験も同Sourceで実施。新対象はlogging.WebRequestTrace/Scope、WebRequestLogProducer、HttpRequestLoggingValve、WebRequestRouteInterceptor、config.RequestLogMvcConfiguration、既存bootstrap.WebHttpServer/security Context・Caddy・ClosedServlet・LoginSuccess hooks。class/method単位Test IDは下記3新suiteと既存REQ015 integrationへ対応、署名・command/source/全4counter/manifest hashは072に確定する。
+
+| suite/method群 | Test ID | 独立oracle |
+|---|---|---|
+| WebRequestTraceTest req004/006/007/008 | REQ004/006/007/008 | UI/actual24 mapping＋static2のfixed inventory、literal UUID/role、cross-request/null/unknown・100並行/nested/誤thread・framework redaction |
+| WebRequestLogProducerTest req005/007/009/010/011/012/013/014 | REQ005/007/009～014 | literal JSON/手書き全2336/JCE-AAD、DDL後条件、独立SQL/runtime/fatal/同fatal/close fault、numeric/IPv4IPv6 boundary |
+| HttpRequestLoggingValveTest req001/002/003/004/005/006/008/016 | REQ001～006/008/016 | actualTomcat11.0.25 HTTP応答値・独立UTF8 body/N0/HEAD/ASYNC/terminal一回、malformed/override拒否/lexical解除/外側資源所有 |
+| WebApiLogReplayIntegrationTest.req015NewProducerUsesExistingWorkerRetryBrokerAndApiUk | REQ012/015 | 新producer→実Web18 technical row→既存worker/Artemis→API UK、同期queue0/初回故障/固定due再送/二配送row1・明示eventUUID SQL |
+
 2026-10-03、NK-WEB-002/NK-MSG-002、MON001～013/FUN008/AUT/MQ、UI235 §12/252 §2/242、SS312 §11/351 §3.4/324/352/342、SSC172/PG-D354。対象HttpRequestLoggingValve・request-scoped trace/producerのconstructor/invoke/log/format/投影、既存WebLogPayloadCodec/Repository/Dispatcher/Replay/API ingestとの実接続。詳細class/methodと実command/対象source・hashは072へ確定時に記録する。
 
 | Test ID | 条件・入力・操作 | 独立期待値と算出根拠 |
