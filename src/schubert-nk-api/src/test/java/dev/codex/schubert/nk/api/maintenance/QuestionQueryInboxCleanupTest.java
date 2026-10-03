@@ -178,10 +178,19 @@ final class QuestionQueryInboxCleanupTest {
                   state,
                   deleted,
                   "UNANSWERED",
-                  state.equals("COMPLETED") ? "A".repeat(4096) : ""),
+                  state.equals("COMPLETED") && !deleted ? "A".repeat(4096) : ""),
               true,
               state + "/deleted=" + deleted);
       }
+      // BUG567/YKT410: UI224 deletion suppresses BOTH bodies. Never call a corrupted
+      // completed/deleted answer a valid historical snapshot (the old BUG562 gap).
+      valid(
+          f,
+          c,
+          "NTDRSP01",
+          golden("NTDRSP01", "0000", 0, "COMPLETED", true, "UNANSWERED", "A".repeat(4096)),
+          false,
+          "deleted completed answer must be rejected by Inbox inspector");
       valid(
           f,
           c,

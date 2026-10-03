@@ -1,5 +1,9 @@
 # 通知明細参照HTTP実行結果
 
+v3選択（09:03:30 JST終了、3:07、session12640 actual exit0）：cleanで旧execを消し、Protocol16/Storage8/Bootstrap7/API39/Web64/Batch4＝138PT/17suite/FES0/static6zero/format・strict compile成功。API追加9はQuestionQueryInboxCleanupTest、元不正goldenの正常空回答＋不正4096回答falseを実暗号snapshot/Inspectorで再試験。Notification6class全4counter miss0、validateNotificationDetail method B39/L33/M1 miss0。safe manifest `evidence/provisional/PG438-notification-detail-selected-v3/manifest.json` SHA `b5c712e3ae7e841d0987473b213f7b74a361af80f3f1ec74e626f365150dac4b`、WIP Source81942＋file hash、Git外v3 log/失敗v1保全。BUG562564565567/YKT406408409410はSource固定全6再回帰待ち・まだ完了でない。
+
+PG438全6 v1（Source81942b292adee80edce46b77f4bedfdc8fd5187e、08:58:14 JST、actual exit1）はProtocol81/Storage154/Bootstrap213成功、API884のうちInbox golden 1F/E0/S0、Web/Batch未実行で全体合格0。BUG567/YKT410を修正前登録し、UI224の削除済み両本文spaceに従う正常入力と、旧4096byte回答を残した破損入力falseを分離した。Production validator/Inspector/SQL期待意味は変更0。WorkPG379 pg438-six-full-v1.log SHA e0a8938c1816c5941c8d50ed453b31b5426767b1513cc232dda710e4af14ac1e、旧失敗を保持し、新Sourceの全回帰へ流用しない。v3選択はQuestionQueryInboxCleanupTest9PTを追加して同変更群を検証中、未合格。
+
 2026-10-03、PG-D349/016061。新NotificationDetailViewModel/Controller.detail/templateと既存typed semantic削除回答拒否を製造、SourceはHEAD55fe2ae3c＋WIPで各file hashを保存。v1はWeb64PT F3/E0/S0/exit1・Batch未実行、BUG564 NTD error N filler不足とBUG565 raw/typed oracle境界の取り違えを修正前登録。SS322 B errorはspaceを維持、N12/N17だけ0、Catalog＋Codecのvalidated encode/decodeとHTTPを拒否oracleに接続した。外部業務期待/SS変更0、旧失敗log/inputを保全。
 
 v2は08:39:50 JST終了/1:39/actual exit0、Protocol16/Storage8/Bootstrap7/API30/Web64/Batch4＝129PT/16suite、F/E/S0/static6zero/strict compile/format成功。Notification6class（一覧4・CSRF・明細VM）の全4counter未網羅0、変更validateNotificationDetail method B39/L33/M1・miss0、protocol他method未選択分は全Source回帰待ちで100%へ算入しない。独立UI byte/5state×deleted/空回答/実HTTP GET HEAD/0102 Cookie/100 target-context/破損削除答を確認。

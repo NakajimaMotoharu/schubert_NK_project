@@ -376,9 +376,9 @@ if int(identifier[2:5]) >= 437:
         'PG436 source22b95 full2956 and PG437 selected WIP results are not reused as this fresh source full acceptance',
         'SCR020 Notification GET/HEAD is connected; SCR021 detail/cancel and full business/native Web assembly remain incomplete'])
 if int(identifier[2:5]) >= 438:
-    manifest['bugs'].extend(['BUG-562', 'BUG-563', 'BUG-564', 'BUG-565'])
-    manifest['ykt'].extend(['YKT-406', 'YKT-407', 'YKT-408', 'YKT-409'])
-    manifest['testIds'].extend(['PT-NTF-DETAIL001..008', 'deletedNotificationNeverContainsAnswer', 'PT-OPS-EVIDENCE-GIT001'])
+    manifest['bugs'].extend(['BUG-562', 'BUG-563', 'BUG-564', 'BUG-565', 'BUG-567'])
+    manifest['ykt'].extend(['YKT-406', 'YKT-407', 'YKT-408', 'YKT-409', 'YKT-410'])
+    manifest['testIds'].extend(['PT-NTF-DETAIL001..008', 'deletedNotificationNeverContainsAnswer', 'PT-OPS-EVIDENCE-GIT001', 'PT-DB-INBOX-161..168'])
     manifest['trigger'] = 'PG-D349 SCR021 reference and deleted-answer typed semantic rejection, common protocol/MVC/CSS and evidence tooling corrections: source-frozen six-module regression'
     web = ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml')
     detail = next(c for c in web.findall('.//class') if c.get('name').endswith('/NotificationDetailViewModel'))

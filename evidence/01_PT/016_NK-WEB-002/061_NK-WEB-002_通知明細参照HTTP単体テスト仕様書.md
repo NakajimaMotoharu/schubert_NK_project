@@ -1,5 +1,7 @@
 # 通知明細参照HTTP単体テスト仕様書
 
+BUG567/YKT410追加観点：QuestionQueryInboxCleanupTest.goldenBoundsAndSemanticDamage（PT-DB-INBOX-161～168）は実暗号response snapshot/Inspector整合を使い、全5state×削除有無の正常controlに加え、COMPLETED＋deleted＋4096byte回答の不正snapshotを独立false期待で検証する。正常削除時に本文を入れてtrueを期待しない。UI224の固定削除oracle/既存API SQLに従いfixtureを修正し、Production拒否を緩めない。
+
 2026-10-03、NK-WEB-002/SCR021参照部分/PG-D349、RD FUN010/NTF001～012/QST/AUT、UI222/224 §5/236 §9、SS313/314/323/332。NotificationController.detail/NotificationDetailViewModel/notifications/detail、NotificationMvcConfiguration/WebMvcConfiguration明示構成、既存固定NotificationWireClient NTDREQ01と独立NotificationControllerTestを対象とする。PG437 sourcef4a0全回帰・classes/exec/XML保存後に実装を開始し、旧source結果を流用しない。
 
 | Test ID | 入力・事前条件・操作 | 独立期待値と観点 |
