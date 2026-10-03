@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D353実装追跡（2026-10-03、未受入）：SCR017 UserStatusForm/UserRoleForm/PasswordResetForm/UserUnlockFormのbind/isValid/getIssues/displayValues/toRequest/close/toString、package-private UserMutationInputのclosed bind/requireUsable/password/displayValues/close → RD FUN009/AUT002003 → UI225 §5/236 §6 → SS313314323332 → PT-USER-CHANGE001～016/UserMutationFormTest/016069070。STATUS60/ROLE68/PASSWORD324/UNLOCK60byteは仕様offsetの独立golden、path-hidden ID一致・N9 version・確認true・canonical UUID・操作別closed field、Passwordはfresh API対象username/既存policy/NFC確認・char[]所有・secret表示0。POST/session用途token/自己保護・最後ADMIN・version/全失効は既存APIへ別結線し、入力PTを全Webready・認可成功へ代用しない。選択15suite実行中、coverage/静的/合格は未確定。
+
 PG-D351/352実装追跡：QuestionSubmitForm全12methodとquestion-input-validation.js validate/initial/input/submit/IIFE→016065066/PT-QST-FORM001～008、016067068/PT-QST-JS001-A～H・QuestionInputScriptTest/Javascript event fixture。UI224 §2/236 §7/SS313314323352、133選択→同JS含む134PT/19suite/static6zero、form4counter0/JS3counter100%まで限定検証。5SourceFiles hash保全、未接続template/token/POST/受付PRG/native全Web/正式gateは未受入、同入力Source固定全6へ進む。下の未実装記録は起案時点履歴。
 
 PG-D351追跡（仕様先行・未実装）：NK-WEB-002/NK-QST-001/SCR018、QuestionSubmitForm.bind/isValid/getIssues/displayValues/toRequest/close/toString→PT-QST-FORM001～008/016065066。RD QST001～003/FUN010/AUT、UI224 §2/236 §7、SS313/314/323。HTTP閉入力→既存QSBREQ01・QuestionWireClient/API受付の必須依存。PG439全体固定終了後だけ実装、正規token/POST/受付PRG/JS残量表示/native/正式品質は未完了。

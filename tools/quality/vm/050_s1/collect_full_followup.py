@@ -423,5 +423,17 @@ if int(identifier[2:5]) >= 440:
     manifest['javascript'] = proof
     manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.rglob('*')) if p.is_file()]
     manifest['limitations'].append('Question input/byte counter only; token issuance/POST/receipt/template/live Browser/native acceptance remain incomplete')
+if int(identifier[2:5]) >= 441:
+    manifest['bugs'].extend(['BUG-571', 'BUG-572'])
+    manifest['ykt'].append('YKT-413')
+    manifest['testIds'].append('PT-USER-CHANGE001..016')
+    manifest['trigger'] = 'PG-D353 SCR017 four closed User mutation inputs, password lifetime and independent wire oracles: source-frozen six-module regression'
+    names = {'UserMutationInput', 'UserStatusForm', 'UserRoleForm', 'PasswordResetForm', 'UserUnlockForm'}
+    mutation_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(mutation_coverage) == names
+    assert all(k['missed'] == 0 for value in mutation_coverage.values() for k in value.values())
+    manifest['userMutationInputCoverage'] = mutation_coverage
+    manifest['limitations'].append('User mutation forms only; API self/last-admin/version/revocation remain authoritative; QA047/048/049/050, POST/token/Logout/native full Web ready remain pending')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

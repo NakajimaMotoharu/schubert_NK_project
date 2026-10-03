@@ -1,0 +1,239 @@
+{
+  "id": "PG441-user-change-selected-v3",
+  "formal": false,
+  "sourceCommit": "87293ff64c79a986b5d3c56241d8145ed1c0ef3f",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+      "sha256": "aaaa0d572f380d073ccd14da14d03ad1c57a18c9c8b6f6fc6431a4b115afb734"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+      "sha256": "c1b6f1e449b8c988086c73b199b0387cae985453b90932b2753411276a5b970f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+      "sha256": "7a904fda4471fecddd4b349ca655b84bca4827a4e368af74f47c65036bb82931"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+      "sha256": "b3772018733f8d8d34c8b360c67cc70956b3d83e336b0ab4e4da7e032a24225b"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java",
+      "sha256": "8f6f928035f5f0c43293e8de844270fec7d124217f64c4fc2f8235c3e8b04633"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "sha256": "418ee24ba7b21a20979ca1f5cfce3fb93b46312a06b093409329130d84d047d8"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T11:22:41+09:00",
+  "exitCode": 0,
+  "tests": 113,
+  "suites": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-USER-CHANGE001..016"
+  ],
+  "bugs": [
+    "BUG-571",
+    "BUG-572"
+  ],
+  "ykt": [
+    "YKT-413"
+  ],
+  "command": "six reactor clean spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,PayloadSemanticValidatorTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,UserCommandServiceTest,UserMutationReplayServiceTest,UserMutationApplicationServiceTest,UserMutationRequestTest,UserMutationFormTest,UserCreateFormTest,WebBusinessWireClientsTest,WebApplicationTest,ApiSessionInvalidTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "UserUnlockForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserMutationInput": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 495
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 70
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 98
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 47
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserRoleForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 69
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserStatusForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 69
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "PasswordResetForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 55
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "b76a6b6fba6427f2338b12e3fe72a1e8085424a15366762df1a93d832cb319a7",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "five User mutation input classes missed0; selected is not formal coverage100",
+    "Input forms only; API authorization remains separate; POST/full Web/native/Caddy/CHR pending",
+    "QA047 native owner, QA048 receipt, QA049 token and QA050 Logout expiry remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "0ca2cacf849f16b28273cff46253a188c7ff527874e4a8a18ecec347bbab04f6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "24e36264d64d5c1fadb501de172d13567eddee77088bc7e81318b6beebc5167a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest.xml",
+      "sha256": "8b6c4c0198c46728bb56ea163b6ecb5518be12b4bec4adf4866adee3ed0b0610"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.xml",
+      "sha256": "06c44d1caea1f5a6c5f0b2d2b396ed68e30ec8a9c70c0e74c15556f9a375ea7d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "b1a64b6c7b8d2d30952461546b8ccc82f2d21eb5554298b2cbd53582e6cca657"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "7c862f0eb2dee72d0e87c7de55f6abb9b110bdce9101e26d95eb81ad8946450a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "0441a8ce0977b32bb54e7352cfcd8ed6349d6e5b45e3cd6625b92764d83d606f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "2c7b835cc0e530eba739c35596cc74764d06a56c0acb95afea22a0e45744aca8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "ced2fb1d56be4bfefbdf2d7d1eccf86edc841c45595bc97fcbeca61f4aefde79"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "615a998a2d84c72fb29b833df8f0a7dea4ed567b11a1c018bc317c433d16f954"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "ee8d3026c8f71293f362845eb9a67283e581d218f286be48b23457d7dc46799f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "60bcfd144ecbed50f8431a8dd7a0c8670bd75610494b33c89276d7f0a43b4c53"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.form.UserMutationFormTest.xml",
+      "sha256": "a8f56924ecbb9b44d8cc3dfc3bd9126ece28aa5cf2f4fc3705d6fcb1acc22df0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "dfa7badd75cc7bf6739415a207d2ef6eea55598c3bd30b9328e56788f5ac039c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG441-user-change-selected-v3/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "e8a8183cb0e49d59d52c46dff87bf96344d2440bee506b4c738c6fcab2d4c220"
+    }
+  ]
+}
