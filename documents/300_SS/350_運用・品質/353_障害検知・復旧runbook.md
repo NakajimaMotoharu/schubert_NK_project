@@ -209,3 +209,32 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 | 2026-09-01 | QA-041/UIC-001承認を反映し、Broker再配送の正常時系列を1秒、5秒、25秒へ固定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、memory high-water、paging、page-full FAIL、disk-full BLOCKの切り分けを確定。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、backup専用roleのgrant/credential障害復旧とbatch roleへのSELECT追加禁止を確定。 |
+
+## 20. QA-047：隔離PG/PT工具の限定復旧・原因究明・再発防止（2026-10-03）
+
+利用者は2026-10-03、固定Pair工具の限定復旧を承認し、障害であれば発生原因の究明・対策・再発防止計画を要求した。BUG544/YKT388として既に障害管理中であり、復旧許可を修正/PT/完了認定としない。対象は当該隔離PG/PT工具に限る。通常service起動・手intent削除・新Epoch/新permitの発行を許可しない。
+
+### 20.1 確認済みの事象と未解明範囲
+
+起票時、固定Pair退役工具がUNKNOWNでM/A所有を保持し、loaded工具にresume/abort入口がなかった。通常APIが生成した正規Transfer日付directoryに、旧診断工具fixtureSnapshotの「Transfer空」という条件が流用された。診断世代の前提を通常業務後の不変条件として扱ったことは是正対象である。元例外/secondary close詳細はredactionで失われており、例外発生からUNKNOWN停留に至る全経路と資源close結果は未解明。原本/DB/Backup保全は観測証跡を再確認し、現在の資源解放を過去の推測で証明しない。
+
+### 20.2 限定復旧の実行条件
+
+1. 履歴PIDをそのまま使わず、現在boot/PID/startTicks・実loaded世代・M/A/DB advisory・全kernelと全固定Unit停止、3intent/INVALID、同旧Pair/原本/全DB/Backup/BOM/全byteを別の観測で同定し、証跡を保全する。
+2. 同定した固定工具だけを明示停止する。対象不明/所有競合/原本変異なら停止操作を進めず保全・介入とする。停止そのものを旧退役の成功やclose正常として扱わない。
+3. 新しい正規M/A所有下で同旧Pairと全資源の現在状態を再認証し、既存SS343/SSC168のtyped退役・再隔離契約に従う。未知の資源を安全/成功に補完せず、条件が揃うまでINVALIDを維持する。
+4. 実施者は旧観測→停止→新所有→全後条件の証拠を記録する。旧操作の成功終了を捏造せず、障害管理を継続する。
+
+### 20.3 原因究明と是正の計画
+
+| 対象 | 実施内容 | 完了根拠 |
+|---|---|---|
+| fixture世代混同 | Pg425/426旧工具、Pg428 snapshot、Pg431 Pair工具/独立PTの空Transfer条件流用を検索。通常世代は正規directory/fileを消さずNOFOLLOW・owner/mode・全tree metadata/size/hash前後一致へ修正 | 修正前再現、修正差分、正規非空fixtureの独立再試験 |
+| UNKNOWNへの遷移 | 元の失敗stageとprimary/secondary closeの分岐を隔離再現し、観測可能な事実と未確定を分ける。秘密を含む元例外の無差別公開は禁止 | 固定非秘密diagnostic codeと失敗注入の照合。元事象を復元不能なら未解明範囲/理由を明記し原因確定としない |
+| 診断欠落 | stage/cause/primary failure/close結果known・unknownを固定codeで区別し、redactionで識別子まで失わない | 原文secret0を保つ独立検査、primary＋close同時失敗の証拠 |
+| resume/abort不足 | owner/budget/状態が不明でも成功を推測しないbounded resume/abortと、新所有での独立再認証手順を具体化。通常自動再起動の回避策にしない | owner競合・未知close・停止失敗・再開失敗の非成功/隔離PT |
+| 横断再発防止 | 旧成功証跡を上書きせず、全工具の空fixture世代条件とUNKNOWN/park処理を点検し該当箇所をYKT388で追跡 | 対象一覧、非該当根拠/修正commit・再試験への追跡。検索のみで完了にしない |
+
+### 20.4 再試験・完了判定
+
+正規非空Transfer directory/file、実行中変異、symlink、読取り失敗、primary/secondary close失敗、owner/budget不明、再開/停止失敗を独立PTする。工具修正と同sourceのnative Pair退役・全後条件の検証、原因分析報告（確定/未確定/封じ込め理由を区別）、対策/横断再発防止の根拠が揃うまでBUG544/YKT388は対応中を維持する。限定復旧と原因究明は実行chatが担当し、PMOは根拠をレビューして不足時に対象範囲・順序を調整する。本書更新時点では復旧・工具修正・再試験を実施済みとは扱わない。

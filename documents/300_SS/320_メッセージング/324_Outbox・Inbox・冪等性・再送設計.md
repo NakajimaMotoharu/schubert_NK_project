@@ -236,10 +236,10 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 
 ## 11. Operation token lifecycle
 
-- Webはform GETでtokenを発行し、sessionに用途/発行日時だけ最大10件保持する。
-- Token有効期間は8時間idle session内。成功確定後に消費済みmarkし、同結果画面refreshでは再送しない。
+- Webはform GETでtokenを発行し、session全用途でpending＋consumed合計最大10件、用途/UUID/発行日時/任意の初回完成時刻を暗号保持する（QA049、SS314）。
+- Token有効期間は8時間idle session内。検証済0000/0200の初回時刻をconsumed markとして保持し、同結果GET refreshでは再送しない。保持中の同token/同入力POSTは現在API認証と既存HMAC/保存済み結果を検証してreplayする。
 - Timeout/503だけ同tokenをformへ戻す。Validation errorでAPI未送信の場合は同tokenを維持する。
-- 409 payload不一致/optimistic conflictでは旧tokenを破棄し、最新GETで新tokenを発行する。
+- 409 payload不一致/optimistic conflictでは旧formで自動再操作せず、明示最新GETへ誘導する。容量による退役は新formの枠が必要な場合だけ最古consumed1件、pendingは捨てない。全pending10件は新form拒否。退役/不在token POSTは409、API送信/新UUID/自動再操作0。
 - APIはsession内token状態を信用せず、owner/token/HMAC/業務UKを正とする。
 
 ## 12. 保持・cleanup

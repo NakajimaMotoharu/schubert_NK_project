@@ -167,14 +167,14 @@ Spring Sessionの汎用Java serializationは使用せず、version付きJSON all
 | loginAt | Instant | 監査/表示外 |
 | csrfToken | String 64～128 | Synchronizer token |
 | savedRequest | path/query合計2,048 byte | Same-origin safe GETだけ |
-| operationTokens | 最大10件の用途、UUID、発行時刻 | 更新timeout/PRG |
+| operationTokens | pending＋consumed合計10件の用途、UUID、発行時刻、任意の初回完成時刻 | 更新timeout/PRG・QA049保持窓 |
 
 Password、質問/回答本文、検索結果、固定長body、DB rowをsessionへ保存しない。Envelopeは`formatVersion`、`keyVersion`、12 byte nonce、
 ciphertext/tagを保持し、AADはsession ID hash＋created_at。復号後の未知field/type/上限超過はdeny closedでsession失効。
 
-#### 7.2.1 保存JSON version 1（SSC-038）
+#### 7.2.1 保存JSON version 1（SSC-038、QA-049後はlegacy readのみ）
 
-UTF-8 JSON objectとし、`formatVersion`（数値の整数表記1）と`operationTokens`（配列、0～10件）を必須にする。その他の許可keyは下表だけ。任意Spring Security/Session objectやclass名をJSONへ保存しない。Encoderの順序はformatVersion、認証4field、csrfToken、savedRequest、operationTokens。Decoderはkey順序/通常JSON whitespaceを許可するが、重複key（nested含む）、unknown key、JSON null、型違い、末尾別document、不正UTF-8/BOMを拒否する。
+以下は旧version 1の厳密read互換契約であり、現writeは末尾QA-049補足のversion 2へ移す。UTF-8 JSON objectとし、`formatVersion`（数値の整数表記1）と`operationTokens`（配列、0～10件）を必須にする。その他の許可keyは下表だけ。任意Spring Security/Session objectやclass名をJSONへ保存しない。Encoderの順序はformatVersion、認証4field、csrfToken、savedRequest、operationTokens。Decoderはkey順序/通常JSON whitespaceを許可するが、重複key（nested含む）、unknown key、JSON null、型違い、末尾別document、不正UTF-8/BOMを拒否する。
 
 | key | JSON型 | 欠落・制約 |
 |---|---|---|
@@ -226,25 +226,25 @@ PK/hash/created_at/format/key IDの変更は認証失敗にする。最大plaint
 | create | 匿名principal・新CSRF・空SavedRequest/tokenで即時暗号化保存。新Cookie ID/DB UUID、idle8h |
 | find | hash row lock後、現時刻をmicrosecond化してexpiry確認。一致/超過は削除、復号/schema不正も削除して不在。正常だけidle延長/current再暗号化して返す |
 | mutate | 現在rowをlock/復号/期限検証後、現在属性へのpure callbackを適用。principal/CSRF変更は禁止、null結果/不変制約違反はrollback。SavedRequest/tokenの古い全snapshot上書きを行わない |
-| authenticate | API認証済principalを受け、new Cookie/DB UUID/CSRFへfixation。UI226どおりSavedRequest/未完了tokenを含むallowlistを保持、旧削除＋新INSERTをatomic化。発行値衝突はrollback |
+| authenticate | API認証済principalを受け、new Cookie/DB UUID/CSRFへfixation。UI226どおりSavedRequest/pending＋consumed tokenを含むallowlistを保持、旧削除＋新INSERTをatomic化。発行値衝突はrollback |
 | invalidate | hash限定DELETEをcommit。破損rowでもlocal失効可能。API revoke/queue/監査・HTTP Cookie失効は外側 |
 
 構造/NULL/型不正rowを表す`InvalidSessionRowException`を固定`SessionStoreException`のsubtypeとして区別し、失効用hash限定DELETEをstoreへ追加する。Row不正・復号不正・期限切れは削除commit後だけ不在を返す。DB接続/SQL/resource/暗号write故障はcommit前ならrollbackを試み固定障害、cause/suppressed診断を利用者へ返さない。commit成功後のclose故障は既に確定したDBをrollbackできないため、呼出側へ固定障害を返し、次のhash lookupで実状態を確認する。commit応答不明も未確定結果として扱い、成功を推定しない。
 
 Idle延長はmax(現在時刻,既存last access)＋row max inactiveを用い、Clock後退で期限を縮めず絶対lifetimeを追加しない。新規/認証時は8h固定。version上限999999999の次はCookie/CSRF/created_at/属性を維持し、DB UUIDだけ新規発行して同hashの新row/version0へatomic置換、新PK AADで再暗号化する。旧PKのCASを成功させずABAを防ぐ。UUID衝突・想定外0件・commit/close故障は不成功で、呼出側が未確定成功を利用者へ表示しない。
 
-本serviceはframework/監査handlerの実装完了ではない。Operation tokenの用途/完了/timeout handlerは最大10件を保ち、未完了tokenを実装都合で破棄しない。
+本serviceはframework/監査handlerの実装完了ではない。Operation tokenの用途/完了/timeout handlerはsession全用途pending＋consumed合計10件を保ち、pendingを実装都合で破棄しない。QA049の完成first-write/退役条件は末尾補足に従う。
 
 #### 7.2.5 Spring Session adapter（SSC-042）
 
-SpringEncryptedSessionRepositoryはSpring Session4.1.1 SessionRepository、SpringWebSessionはSessionを実装し、標準SessionRepositoryFilterへ接続する。汎用Jdbc repository/Java serializationは使わない。HttpSession属性は次の閉projectionだけ。JSONへ新field/class名を追加しない。
+SpringEncryptedSessionRepositoryはSpring Session4.1.1 SessionRepository、SpringWebSessionはSessionを実装し、標準SessionRepositoryFilterへ接続する。汎用Jdbc repository/Java serializationは使わない。HttpSession属性は次の閉projectionだけ。任意field/class名は追加しない。QA049で承認されたversion 2のcompletedAtだけを末尾補足に従って追加する。
 
 | 属性 | Java公開型 | 更新契約 |
 |---|---|---|
 | principal | SessionPrincipal（認証4fieldの集合） | API認証済み結果だけを内部handlerがsetし、authenticateで即時fixation。HTTP parameter binding禁止。存在するprincipalのnull除去は不可、Logoutはsession invalidate |
 | csrfToken | String | 同値setだけ許可。再発行はcreate/fixation/changeSessionId。存在する値のnull除去は禁止 |
 | savedRequest | Stringのsafe GET path/query | safe GET validation後にこの属性だけ短transactionで更新。nullは除去 |
-| operationTokens | immutable List of SessionOperationToken | request snapshotに対する追加/削除deltaを現在DB listへ適用、別requestの変更保持。同UUIDの用途/時刻変更拒否、最大10、nullはsnapshot上の項目の削除 |
+| operationTokens | immutable List of SessionOperationToken | 従来snapshot deltaの対象。QA049のissue/require/complete/容量退役は専用current-row短mutateで扱い、完成更新・retired再挿入を旧deltaへ流さない。同UUIDの用途/発行時刻変更拒否、全体最大10、別request変更保持 |
 
 未知readはnull、未知write/型不正は固定診断で拒否。標準SecurityContext/DefaultSavedRequest/例外objectは保存しない。後続SecurityContextRepository/RequestCache/CSRF handlerを閉projectionへ接続する。generic getAttributeの型castはframework contractに必要なmethod一箇所だけのunchecked抑止とし、理由・Test IDを隣接記録する。
 
@@ -256,7 +256,7 @@ changeSessionIdは既存principalを維持したrotateとして、fresh Cookie/D
 
 EncryptedSessionSecurityContextRepositoryは、先行SessionRepositoryFilterの公開SESSION_REPOSITORY_ATTRが設定済みSpringEncryptedSessionRepositoryと同じinstanceであることを検査し、欠落/別repositoryではnative HttpSessionへfallbackしない。永続化は7.2.1/7.2.5の閉principalだけ。request単位のlazy一回loadから、credential/detailなし・ROLE_USER/ROLE_ADMINのどちらか1個だけの標準認証tokenを作る。未知型/属性/権限・未認証tokenのgrantを拒否し、汎用SecurityContext/認証例外を保存しない。
 
-EncryptedSessionAuthenticationStrategyは既存CSRF sessionとAPI検証済み標準認証を必須にし、principal setで既存authenticateの短transactionを1回実行する。新Cookie/UUID/CSRF、SavedRequest/未完了token移管を保持し、標準CsrfAuthenticationStrategyのnull-save/追加rotateを重ねない。DB/key/状態故障は固定SessionAuthenticationException、成功HTTPへ進めない。通常saveContextは永続principalと閉認証projectionの一致検査だけで、追加writeや任意grantをしない。空/anonymous保存は匿名/不在sessionでのみno-op、既存認証を黙って消さず不一致として拒否する。LogoutはAPI revoke/queue後の明示session invalidateを先に行う。復元後も毎業務のAPI最新認証と失効済rowの非再生成を維持する。
+EncryptedSessionAuthenticationStrategyは既存CSRF sessionとAPI検証済み標準認証を必須にし、principal setで既存authenticateの短transactionを1回実行する。新Cookie/UUID/CSRF、SavedRequest/pending＋consumed token移管を保持し、標準CsrfAuthenticationStrategyのnull-save/追加rotateを重ねない。DB/key/状態故障は固定SessionAuthenticationException、成功HTTPへ進めない。通常saveContextは永続principalと閉認証projectionの一致検査だけで、追加writeや任意grantをしない。空/anonymous保存は匿名/不在sessionでのみno-op、既存認証を黙って消さず不一致として拒否する。LogoutはAPI revoke/queue後の明示session invalidateを先に行う。復元後も毎業務のAPI最新認証と失効済rowの非再生成を維持する。
 
 ### 7.3 Lifecycle
 
@@ -369,3 +369,17 @@ SSC-010: Session識別子の機密除外は351 §4を正とする。Login発行�
 | 2026-08-31 | 認証、session、CSRF、認可、暗号・rotationを初版作成。 |
 | 2026-08-31 | 横断監査でLogin lock順をUser→IPに統一し、UIにない絶対24時間上限を削除。Idle更新を毎requestに統一。 |
 | 2026-09-01 | QA-044/UIC-004を反映。現行の3 session継続を`DIF-016`とし、NKはtransactionで最大2 session・最古revokeを必須とするoracleを固定。 |
+
+## QA-049承認反映：JSON v2・current-row lifecycle（2026-10-03）
+
+同HTTP session内の全用途を合計してpending＋consumedを最大10件とする。用途/UUID/issuedAtは不変で、completedAt欠落はpending、検証済0000/0200を初めて確認した時刻だけを完成印として保存する。完成印を業務結果・認可・API成功proofの代用としない。入力本文・password・payload/HMAC対応入力・業務result snapshotをsessionへ保存しない。
+
+保持中の同token/同入力POSTは現在API認証と既存owner/layout/target/payload HMAC・保存済み結果の検証を経て再操作する。結果GETのrefreshではAPI更新再送を行わない。新formで枠が必要になった場合だけcompletedAtが最古のconsumedを1件退役し、同時刻は保存list順で決定する。pendingを退役しない。全10件pendingなら新form発行を拒否する。退役済み/不在tokenのPOSTは409と明示再GETを要求し、API送信・新UUID発行・自動再操作は0とする。
+
+8時間idleのsession上限、API Inbox7日の保持起点、wire/HMAC/DDL/Current baselineは変更しない。完成時刻から8時間/7日を新たに延長する保証も追加しない。実装・独立PT・nativeの完成認定は別に行う。
+
+current encoderはformatVersion=2を書く。既存認証/CSRF/SavedRequestのallowlist・順序・16KiB/深さ3・strict parserは維持し、operationTokens各要素はpurpose/token/issuedAt必須＋completedAt任意だけとする。completedAt欠落はpending、存在するならcanonical UTC InstantかつissuedAt以上の初回完成時刻。JSON null・未知key・重複key・不正型/UTF-8等は拒否する。v1 decoderは旧3fieldを厳密に読むlegacy pending互換でありcompletedAt混入を許さない。旧3引数constructorもpendingとする。任意object/class名や結果snapshotを追加しない。NKENC1・AES-GCM・AAD・session row DDLは不変更。
+
+issue/require/completeはfresh current-rowを既存短mutateで読み、現在listへ原子的に適用する。完成は検証済0000/0200の受信後、DB/JMSを同時に保持せず、初回だけcompletedAtを書き同tuple/既完成時刻を変更しない。不在/退役tokenをcompleted処理で再挿入せず、古いrequest snapshotで完成をpendingへ巻き戻したり別tokenを消したりしない。issueだけが必要時に最古consumedを1件退役する。現在rowが失効・削除済みなら再生成しない。commit/close不明は成功化せず、次回の現在row再読で確認する。
+
+独立PTは全pending10拒否、pending不退役、consumedのみ必要時1件退役、同時刻順、完成時刻first-write、302応答喪失後同token再操作、退役409/API0/新UUID0、100並行とstale snapshot、v1/v2独立golden・null/未知/破損、commit/close不明、失効row非再生成を含む。旧reader切戻し時のv2失効・再LoginはSS343補足に従う。QA050のpending logout期限NULL/無期限retry案は別の回答待ちであり、このv2承認へ含めない。

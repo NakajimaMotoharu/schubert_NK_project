@@ -16,5 +16,41 @@
   ],
   "meaning": "Latest committed design descriptions and design-change records; implementation/PT completion states remain unchanged",
   "ssc_included": "SSC-001 through SSC-166; retain open implementation/PT statuses",
-  "excluded": "Uncommitted changes and unaccepted implementation/configuration/tools/evidence"
+  "excluded": "Uncommitted changes and unaccepted implementation/configuration/tools/evidence",
+  "pmo_qa_update": {
+    "date_jst": "2026-10-03",
+    "base_main_commit": "63da074623aea961413acc8534888fb0b42d4286",
+    "read_only_implementation_context_commit": "e3183cfa8563345e0cf59cbb052b412b015b793f",
+    "authority": "Direct user PMO answers QA047-049 and continuing authorization to publish finalized design documents to main",
+    "approved": [
+      "QA-047: limited recovery with RCA/corrective/preventive actions; execution not certified",
+      "QA-048: business DB authoritative; Web locator revalidated by API on every GET",
+      "QA-049: combined 10 pending/consumed tokens and versioned completion state"
+    ],
+    "still_pending": [
+      "QA-050/UIC009/SSC171: user requested load estimate; no approval inferred"
+    ],
+    "scope": [
+      "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "documents/200_UI/240_データ/241_DB論理構成設計.md",
+      "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+      "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+      "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "completion": "Design descriptions only; native recovery, implementation, DDL deployment, independent PT and related incidents remain open",
+    "publication_commit_message": "docs(pmo): record QA047-049 decisions and quantify QA050 retry load",
+    "verification_receipt": "Outside the repository: PMO/20261003/qa047_050_publication.json; remote commit verified after push"
+  }
 }

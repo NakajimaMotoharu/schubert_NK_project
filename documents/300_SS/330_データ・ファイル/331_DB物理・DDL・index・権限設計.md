@@ -61,7 +61,7 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 | `schubert_app` | yes | `schubert`のtableに必要なSELECT/INSERT/UPDATE/DELETE、sequence USAGE、非業務metadataの固定startup投影EXECUTE | Web schema、DDL、role変更、schema history直接SELECT |
 | `schubert_batch` | yes | `batch_runs`の直接DML、allowlist済みmaintenance functionと非業務metadata固定startup投影のEXECUTE | その他tableの直接SELECT/DML、DDL、Web session/API Inboxのciphertext・復号key |
 | `schubert_backup` | yes | Dump対象schema/table/sequenceのUSAGE/SELECTだけ | DML、maintenance function、DDL、SET ROLE、復号key、backup unit以外からのcredential利用 |
-| `schubert_web_session` | yes | 同名schemaの3 tableだけDML、非業務metadata固定startup投影EXECUTE | `schubert`のUSAGE/SELECTを含む全権限、schema history直接SELECT |
+| `schubert_web_session` | yes | 同名schemaの既存3 tableだけDML＋QA048受付参照tableのSELECT/INSERT/DELETE、非業務metadata固定startup投影EXECUTE | `schubert`のUSAGE/SELECTを含む全権限、schema history直接SELECT |
 | `schubert_ops_ro` | yes | 監視viewと非機密columnのSELECT | password/token/ciphertext/body、DML |
 
 - Default privilegeもownerで明示grantし、`PUBLIC`へのtable/sequence/function権限を与えない。
@@ -494,6 +494,26 @@ SSC055/PG163（先行898cc267）の親step Repository契約:
 `created_at timestamptz NN`、`sent_at timestamptz`、`last_error_code varchar(64)`、`lease_owner varchar(64)`、`lease_until timestamptz`。
 Index `(status,next_attempt_at,id)`、SENT cleanup用`sent_at where status='SENT'`。
 
+### 9.4 `schubert_web_session.web_receipt_references`（QA-048、2026-10-03）
+
+| Column | 型 / 制約 | 内容 |
+|---|---|---|
+| receipt_id | char(26) PK、`^[0-9A-HJKMNP-TV-Z]{26}$` | 検証済IF025公開受付ID |
+| question_id | bigint NN CHECK 1..999999999999 | 同結果の既存N12質問ID。業務FKなし |
+| submitted_at | timestamptz NN、finite、millisecond整合 | 検証済IF025 UTC受付時刻 |
+
+列はこの3個だけで、PK indexによるreceipt検索とcleanup用`ix_web_receipt_references_question_id(question_id)`を設ける。Web roleへこのtableのSELECT/INSERT/DELETEだけを明示grantし、UPDATE/任意schema grantや業務schema権限は追加しない。INSERTの同PK同値は冪等、競合値のUPDATEは許可しない。nk_ownerが所有しPUBLICをREVOKE、schubert_backupへSELECTを明示grantする。
+
+孤児cleanup用の固定`schubert.maintenance_cleanup_web_receipt_references(run_id uuid, cutoff timestamptz, limit integer)`をappend-only migrationで追加する。既存保守契約と同じrun開始cutoff・当日両backup成功・advisory gate・bounded chunkを検証し、owner内部の固定SQLで業務questionsにquestion_idが実在しないrowだけを削除する。table/schema引数・動的SQL・任意TTLを禁止する。SECURITY DEFINER/固定search_path/UTC/PUBLIC EXECUTEなし、schubert_batchへ完全signatureのEXECUTEだけをgrantし、直接Web/business table DML/SELECTをbatchへ追加しない。件数・skip/理由codeだけを返し、本文/受付tupleは返さない。通常API/Web停止・実backup確認と内部孤児照合/削除を結び、別世代restore・並行更新は当該証明が揃うまで保持する。grant・backup inventory・migration末尾採番・独立DDL/権限/cleanup PTは実装時に一貫更新し、旧migration/hashは変更しない。
+
+業務側DB（APIが管理するquestions/関連業務data）が正である。`schubert_web_session.web_receipt_references`はreceiptIdからquestionIdを解決するためのtechnical locatorだけとし、検証済IF025のreceiptId/questionId/submittedAtの3値以外を保存しない。本文・回答・password・認証context・operation token・owner・結果snapshot・検証済flagを蓄積しない。
+
+SCR019のGETごとにlocatorを読む短Web transactionを終了してからfresh MessageIDのIF030を現在API認証で呼び、API側の現在owner認可に加えてquestionId/receiptId/submittedAtを照合する。日時比較は既存wireのUTC millisecond精度へ揃え、DBの追加microsecondを誤不一致にしない。表示はこの要求で取得したAPI結果だけをHTML escapeし、request scopeへ置く。不一致・他人・削除済み・locator欠落・API確認不能は既存error処理へ進め、古いlocatorやsessionから受付成功/本文を補わない。
+
+IF025成功後のWeb保存は3値をimmutableに登録する。同receiptの同値再登録は冪等、異なる値の競合は上書きせず非成功・診断とする。業務commitとWeb保存は別transactionなので一時欠落が起こり得る。その際、業務受付を取り消したと仮定せず、新operation tokenで質問を再生成しない。保持中の同token/同入力の正規再操作からAPIの既存確定受付結果を取得し、Web参照登録を再試行する。参照欠落のURLだけからquestionIdを推測して復元する保証はしない。
+
+Backup/restore後もWeb値は信頼せず毎GETのAPI検証を省略しない。修復は正規APIの検証済み結果を根拠にWeb参照を合わせる片方向とし、Web参照を正として業務DBを書き換えない。Webから業務schemaへの直接接続/FK/権限は追加しない。cleanupは当日backup gateの下、業務質問が物理削除されたlocatorだけを固定保守functionで削除し、存続する質問のlocatorへ独自TTLを設定しない。実装・DDL適用・独立PTは未完了であり、QA048承認による設計条件である。
+
 ## 10. FK・ON DELETE・constraint名
 
 | Parent -> Child | ON DELETE | 理由 |
@@ -524,7 +544,7 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | ID | 判断 | 根拠・理由 | 後続影響 |
 |---|---|---|---|
 | SS-D-024 | Application IDを`bigint identity`、公開/相関IDを`uuid`/ULID系charに分離し、電文N12/N9の上限をDDLでも保護する | UI 242の上限をDB正常値とcodec例外の不整合にしない | DDL/PTでsequence上限とCHECK境界を検証 |
-| SS-D-025 | Web用roleに業務schemaの`USAGE`さえgrantせず、専用schemaの3 tableのみ許可する | UI 211/241の「Webは業務DBを読まない」をcredential層で強制 | Security ITで権限負のtest必須 |
+| SS-D-025 | Web用roleに業務schemaの`USAGE`さえgrantせず、専用schemaの4 technical tableだけを列挙許可する（QA048受付参照はSELECT/INSERT/DELETE） | UI 211/241の「Webは業務DBを読まない」をcredential層で強制 | Security ITで権限負のtest必須 |
 | SS-D-026 | Outbox/revocationに`lease_owner`/`lease_until`を追加し、同時dispatcherとprocess異常時の回復をDB上で保護する | UIの責務・外部仕様を変えず、SKIP LOCKED取得後の長時間JMS I/O中にDB lockを保持しない | 324/332のlease転移、競合PTに反映 |
 
 ## 13. PG・PT・ITへの引継ぎ

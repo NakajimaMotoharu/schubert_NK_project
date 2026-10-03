@@ -483,3 +483,7 @@ Package名/versionと非秘密config hashは記録可。
 | 2026-08-31 | `pg_dump`用SELECTとbatch保守権限を分離する`schubert_backup`案をQA-043/UIC-003として保留。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、専用backup OS/DB role・credential・固定dump commandを確定。 |
 | 2026-09-03 | SSC-005を反映し、CLEAN_LOGのSecurity hold期限判定とskipped記録を確定。 |
+
+## QA-048承認反映：業務質問削除後の受付参照cleanup（2026-10-03）
+
+業務DBを正とし、既存question/answerの条件付き物理削除が確定した後に、SS331 §9.4の固定maintenance_cleanup_web_receipt_referencesを既存cleanupの同run/当日backup gate/通常API・Web停止の下でbounded chunk実行する。質問が物理削除済みの孤児だけを対象にし、論理削除flag、Web session期限、独自経過日数やAPI0102だけではlocatorを消さない。復元した孤児も同じ条件で照合し、件数/skip/失敗はbusiness削除件数と分けて記録する。batchへ直接業務/Web table read/delete権限は増やさず、owner内部固定SQLの判定と実削除を同transactionで行う。API/Web稼働中GETはcleanup待ちの古いlocatorを成功根拠とせず毎回IF030で拒否する。独立PTは存続questionの保全・物理削除済み孤児・別受付tuple・backup失敗・restore/途中rollback・limit/cutoff/lock・権限負試験と件数照合を含む。新functionの適用/実caller/証跡が揃うまで実装完了としない。
