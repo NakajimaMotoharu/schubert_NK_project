@@ -1,5 +1,9 @@
 # 032 NK-AUT-001 Logout期限fence実行結果
 
+## 同source全体 PG448 full-v1
+
+2026-10-04 07:56:25 JST、source c601c43b0c9a48906d153e87b23db943dfc29550、actual0/16:46、3082PT/FES0（81/154/213/888/724/1022）、6module XML件数一致・SpotBugs6zero・execution-data mismatchなし。safe018 PG448-logout-fence-full/manifest SHA256 62a80e0ef24b371862b4183952eac2bb7aa17843a8b33a3b0a91d6c56261d3c5、対象Auth3class全4counter0。WorkPG379/pg448-host全6actual classes/testclasses/XML/exec/site/static/JAR/runtime dependencyをbyte一致保全、source固定解除。BUG618/YKT437の当該境界/currentClock/fence/rollback/既存再送host再試験を完了。既存host残B1222/L3477/M567/C39、一般0102 proof化0・別source結果合算0、WebNULL期限/retry/native/CHR/正式run24は未完了。
+
 ## 修正後選択 PG448 expiry-selected-v2
 
 2026-10-04 07:35:08 JST、actual0/02:46、69PT8suite（5/7/10/29/10/8）FES0/static6zero。AuthSessionRevocationService/LogoutInboxService/AuthenticationContextVerifierの3class B73/L234/M17/C3全miss0。独立4method＋既存null/fault/100再送/ADMIN、expiry±1µs/audit EXPIRED0102/ERROR同TX、同Message immutable0102・新Message0200、lock後Clock、先行TOUCH延長と保持User lock下の遅延認証拒否/TOUCH0、7 expired update/audit/Inbox/close faultrollbackを実証。修正sourceはHEAD c560e5f8＋API2source/2Test dirty、全filehash実行前後一致。log cf4de11bc7ea2fb289374869c2136b9c84c81f9ba65f75f87020fb72488cddee、全6actual byte pg448-expiry-selected-v2-frozen。safe007 PG448-expiry-selected-v2/manifest SHA256 cebb1a27d701b113301aa910279e33211b85394e62384ce90029a6300ad527a2、metadata-only XML（provider/秘密情報なし）。BUG618/YKT437限定是正確認、fresh同source全6/native/Web retry/正式未認定。
