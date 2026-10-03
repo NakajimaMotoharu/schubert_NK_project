@@ -1,0 +1,115 @@
+{
+  "id": "PG444-cold-native-v3",
+  "actualExecutionId": "PG444-cold-native-v2",
+  "formal": false,
+  "businessStartupAccepted": false,
+  "sourceCommit": "fcc3f5eb4918661751a79e48789463aa4241df56",
+  "branch": "dev-foundation",
+  "exitCode": 0,
+  "startedAt": "2026-10-03T17:24:48Z",
+  "finishedAt": "2026-10-03T17:24:51Z",
+  "command": "WorkPG379/pg444_cold_native_v2.sh; root sealed cold tool PG444-V2",
+  "environment": "host Linux/JDK25.0.4; guest Linux7.0.0-34-generic/OpenJDK25.0.4+7-1-26.04-Ubuntu/PostgreSQL18.6 (Ubuntu18.6-0ubuntu0.26.04.1); QEMU10.2.1 (Debian1:10.2.1+ds-1ubuntu3.2)",
+  "environmentCommands": [
+    "guest uname -r",
+    "guest /opt/jdk-25.0.4/bin/java -version",
+    "guest sudo -u postgres psql -X -A -t -c SHOW server_version",
+    "host bundled qemu-system-x86_64 --version"
+  ],
+  "metadataCorrection": {
+    "bug": "BUG-598",
+    "field": "environment PostgreSQL17 -> actual18.6",
+    "priorManifest": "PG444-cold-native-v2/manifest.json",
+    "priorSha256": "6bb790b28d0c9aa0d44d55dcb2b2bfe5ee0e58d395cdea1f2056675541ab9fb3",
+    "priorFieldInvalid": true,
+    "nativeReexecuted": false
+  },
+  "runtimeProductionSource": "91b010509e715e2b097c955d04f21c23f3529966",
+  "runtimeProductionLabel": "PG430 signed fullBOM/hostRO/current approval reauthenticated; cold only",
+  "testIds": [
+    "PG444-COLD-NATIVE-001"
+  ],
+  "actual": [
+    "PG430 STAGE FIXED_CANDIDATE_HOST_RO",
+    "PG430 STAGE PINNED_SIGNATURE_VERIFIED",
+    "PG430 STAGE FULL_CANDIDATE_BOM_VERIFIED",
+    "PG428 COLD_BOOT_PREPARED completed=true ownedUnwindReturned=true oldOwnerClose=UNKNOWN oldBootSuccessInferred=false oldIntentRetired=0 originalRows=251 backupFixturePreserved=true locksSameInode=true freshInvalidOnly=true workersStarted=0 migrationApplied=0"
+  ],
+  "logSha256": "1609f5f0bba843b2656b5ac808cf405a7f18b82e89b196c381df61027020b169",
+  "independentPostcondition": {
+    "id": "PG444-post-cold-independent",
+    "success": true,
+    "boot": "e07aa706-1acd-4e65-b309-d7f330f79d54",
+    "currentRelease": "PG430",
+    "unitsCold": 9,
+    "startupNames": [
+      "backup-request",
+      "cleanup-request",
+      "expiry-request",
+      "maintenance",
+      "maintenance.lock",
+      "pt-coverage",
+      "startup",
+      "startup-admission.lock"
+    ],
+    "newInvalidOnly": true,
+    "originalEqual": true,
+    "databaseEqual": true,
+    "backupEqual": true,
+    "backupEntries": 20,
+    "transferEntries": 3,
+    "dedicatedAdvisoryOwners": 0,
+    "currentColdToolProcesses": 0,
+    "flockOwners": 0,
+    "oldIntentRetired": 0,
+    "oldOwnerClose": "UNKNOWN",
+    "privateRecordSha256": "f65f45c2b3dec788d99296ba3f09c9bfe537064e34f031771c1d89287377bfc0",
+    "limits": "independent postcondition only; native source/run separate; old intent retirement0 and old close UNKNOWN"
+  },
+  "productionTestCount": 0,
+  "bugs": [
+    "BUG-544",
+    "BUG-595",
+    "BUG-596",
+    "BUG-597"
+  ],
+  "ssc": [
+    "SSC-174"
+  ],
+  "ykt": [
+    "YKT-388",
+    "YKT-419",
+    "YKT-420",
+    "YKT-421"
+  ],
+  "operatorHostTests": "PG444-cold-tools-v7; cold414/transfer21/ownership25; independent literals/negative FD",
+  "sourceFiles": [
+    {
+      "path": "tools/quality/vm/050_s1/Pg428ColdBootPreparation.java",
+      "sha256": "2a56d89a554b3fc7ebd3e3a406b405f51ce53c9753c885998a24680aeac975e6"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg444_stage_cold_tools.py",
+      "sha256": "313427b72579c7d9040324e52fc0dd780a537eb9bc129d869aa96df4a5923e5e"
+    }
+  ],
+  "rootPlacement": {
+    "classes": 26,
+    "closedMode": "root500/file400",
+    "logSha256": "cd36579a7fa09ad62e3655c65c2bb9b764d7def9d0224ca943e571c1c5c6c4c0",
+    "old21ClassUnchanged": true
+  },
+  "beforeNativeFailure": {
+    "sourceCommit": "883f2e6de926593fc6e6a541c127cd972e73d9de",
+    "exitCode": 1,
+    "logSha256": "65af1d05f145e847141e3ea6fc47404c73d3b3bcf63c30404e032953a8363f44",
+    "stage": "PRESERVATION_READ",
+    "cause": "wrong fixed Transfer group BUG597"
+  },
+  "limits": [
+    "old UNKNOWN/close remains UNKNOWN, old intent retired0",
+    "signed new manufacture/API/Web/Caddy/DONE/CHR/native coverage/formal pending",
+    "formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "redaction": "no raw epoch/session/permit/credential/DB/original/backup/dump bytes; fixed safe lines/hash only"
+}
