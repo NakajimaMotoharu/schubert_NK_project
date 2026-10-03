@@ -37,9 +37,10 @@ final class CleanupStepValuesTest {
       "CLEAN_LOG",
       "CLEAN_BATCH_RUN",
       "CLEAN_BATCH_RUN",
+      "CLEAN_BATCH_RUN",
       "CLEAN_BATCH_RUN"
     };
-    assertEquals(8, CleanupKind.values().length);
+    assertEquals(9, CleanupKind.values().length);
     for (int i = 0; i < expected.length; i++)
       assertEquals(expected[i], CleanupKind.values()[i].step().name());
     for (var k : CleanupKind.values()) {
