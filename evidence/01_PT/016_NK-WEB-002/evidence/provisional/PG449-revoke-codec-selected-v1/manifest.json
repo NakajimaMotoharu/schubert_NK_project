@@ -1,0 +1,297 @@
+{
+  "id": "PG449-revoke-codec-selected-v1",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "c230694c0f4ec4a7cf2f3e26cb1cd65678293c52",
+  "sourceDirty": "Dedicated web.revocation four classes/package and independent RevocationPayloadCodecTest",
+  "sourceFilesSha256": "cc40c80a07e7288aa5e78bc8e1725ad317126096112df8a05d7bdb8ec872f197",
+  "sourceDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T08:41:30+09:00",
+  "finishedAt": "2026-10-04T08:44:44+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg449_selected.sh revoke-codec-selected-v1 c230694c0f4ec4a7cf2f3e26cb1cd65678293c52 FieldCodecTest,StorageAttributeGuardTest,FixedServiceIdentityTest,DatabaseMigrationTest,StartupSchemaProjectionTest,InboxInspectionProgressBoundaryTest,LogCleanupProgressBoundaryTest,InspectionParentBoundaryTest,OutboxCleanupBoundaryTest,StepCleanupBoundaryTest,AuthSessionRevocationServiceTest,AuthSessionServiceTest,AuthenticationContextVerifierTest,AdminCommandAuthenticatorTest,LogoutInboxServiceTest,WebRequestTraceTest,RevocationPayloadCodecTest,BackupStepRepositoryTest,BatchRunRepositoryTest,CleanupDatabaseSessionTest,CleanupStepValuesTest; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 193,
+  "suites": 21,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 111,
+      "suites": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 17,
+      "suites": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "RevocationPayloadException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadException$Reason": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 21
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadIdentity": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 163
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadCodec": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 455
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 95
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "EncryptedRevocationPayload": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 55
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "implementationDecision": "PG-D359",
+  "testIds": [
+    "RERUN003A..G",
+    "RERUN002",
+    "RERUN001-F"
+  ],
+  "expected": "Independent JCA envelope/6-field DataOutputStream AAD, 64 lowercase-hex context, current/previous key isolation, all mutations fail closed, owned nonce/copy/close and 100 fresh parallel nonces; no authorization/expiry/delete proof",
+  "actual": "All seven dedicated codec tests and inherited 186-test selection passed",
+  "logSha256": "b489d16c3df1e90fcb6d2b2be90d83d7214c89c1381811a8ba7835c174176779",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg449-revoke-codec-selected-v1-frozen",
+  "redaction": "JUnit properties/stdout/stderr/provider text omitted; only synthetic public crypto fixtures in source; no runtime secret/session/context/token/key/dump/raw log",
+  "limitations": [
+    "Same-source QA050 security/DDL/ownership full regression pending",
+    "Pending claim/retry/key retirement/local Logout/full Web native/CHR/formal run24 pending"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "72d01218434be24404fdbb9bbe2d1ac0e4dc8d88d30e8a1e67ac38efc3f43a95"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "de00f9ff3f19c190f0a47bdbe610f4e43ef0570e0222683d6456e646750cf948"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "48cfbb73084c4950970adb1f1f0f790990147f088bde2faff38f92848fb1a231"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "9ecaef685d0c218a8fe568bd381063259d6de5b619bf6b673d16fa28fb0b07c0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "ea6b0bb7ae60091918c3cd650a439db2020a9497b38ad96004a9bb5b23408d76"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "d9bf11567872049844655fcfd2828ddc5960d1f4cc5957e77a55627a7867bdaf"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "f9e71a81de11754bc2e5ccd6efd84303e79d00613cc9b33108855bbce26ae96f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "487a28ca4fb7723bc7d3c53bf33b412ca5ba50c4bbe53d14e7325174cdba84f5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "4a3570377ed823f62e9c2c4dfa3100be0e2e14dede427a52b58b07be579352cc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "53212d96f701def3baec4c88a1a9d109d201e0b26474020c04e093589aa60d7a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "b966d1d6f0c18b1973025d2774a7f70ef2c1ad0a5a81363b2937969148d1c708"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "e170e2b126af758e07f476087ba24e09c2dcc5196b1efb1eda11d51d626870dd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "aa345aba225b58c9bbd52d192766460de5455cb1cb0458aa66f0f5d4692f38c9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "acf1bb578dc5fab81b14cc5d8b6e3f44d10627cdaa104407178bd85695bf068d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "f8f6b0efad85a31e9f14494ef0be869ea1c2fe1df35b00b7149c4955ae6c8d86"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "e97cd30cf3f1675d31e04799fc49573853bbbf6d150d5b1344b5feef0d9e03db"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "3a84274c1ea799585b51d747157200dbad1f47ca62449c78ecd3d22243b6b311"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "0bc8113de12ef50f0296c6e8f32667e839c6a361434c79bba5d0a7679fcf4989"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "157b3847cfb6d5ef7998a098ef300297ceff96aef23b78c7d49266c6a0bd8e0f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "6902749bb8274aa41ee1ba812d871ba58a1113de76571f06cd481eefd845adca"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-revoke-codec-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationPayloadCodecTest.xml",
+      "sha256": "45e8084489b0c12f325d386c5cc50862396fd37ebb150bdd620cbb763a7ec40e"
+    }
+  ]
+}

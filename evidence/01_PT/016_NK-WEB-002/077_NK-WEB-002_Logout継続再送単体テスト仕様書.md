@@ -1,5 +1,7 @@
 # 077 NK-WEB-002 Logout継続再送単体テスト仕様書
 
+RERUN003実装対象確定（PG-D359）：web.revocation四classの全constructor/accessor/encrypt/decrypt/key-select/ensure-open/close・6field AADとfixed reason。独立public vectorはKEY000102..1f/OLD202122..3f、noncea0a1..ab、UUID00112233-4455-6677-8899-aabbccddeeff、requested epochSecond1788825600/nano123456000、context0123456789abcdef×4。A～Gは golden/防御copy・version1/16、unknown/wrong/old keyと全AAD/session-purpose移植拒否、header/nonce/tag/63・64・65byte/invalidhex、NULL/constructor境界、provider/random固定redaction/nonce消去、100並行nonce非重複/所有close、in-flight close待機/再起動previous read。外部実秘密をvectorへ使用しない。期待はDataOutputStream+独立JCAから算出し、Production encoder/AAD/decryptをexpected生成へ使用0。採取source/run/結果/coverageは078へ保存するまで未完了。
+
 未実装・未実行。S3/D05の既存全Web起動経路に必要なQA050依存。RD AUT004/MQ/MON004、UI226232234242、SS314§10/QA050補足・331§9.2/332/343/352/354、QA050/SSC171、API前提007031032/BUG618/YKT437。最新source/processは456を正とし、API固定fullの終了/capture前にProduction sourceを変更しない。
 
 対象予定：末尾V027（既存V001..026不変更、pending expires_at NNだけ解除）、revoke専用NKENC1 codec/row identity/payload、pending repository/claim・retry service、local Logout coordinator/HTTP、既存WebNativeCodecs/runtime ownerへの接続。既存SessionPayloadCodec・WebLogOutboxRepositoryをpurpose違いのまま流用せず、既存JmsRequestReplyClient/LogoutWireClient・JdbcWebSessionStore/EncryptedWebSessionRepositoryを必要な境界に接続する。内部名・補足確定は441/431へ記録する。
