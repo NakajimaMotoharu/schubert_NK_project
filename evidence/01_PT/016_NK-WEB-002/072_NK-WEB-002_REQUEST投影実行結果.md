@@ -1,5 +1,7 @@
 # REQUEST投影実行結果
 
+2026-10-04再開追補：Source2b41817ca98f4cbd40171ffa459743e5e943fc45のfresh全6 PG443 actual exit0/01:21:18/16:45、3041PT/452suite/FES0/static6zero。新REQUEST6class全4counter0・独立REQ010 JSON/2336byte/goldenを既存collectorで再照合。018/evidence/provisional/PG443-resumed-request-full/manifest.json SHA `0b61a8f6e87f1edccef5a3fd8609e7bd1740e6daa99e6f311dc420631b46e306`、全6binary/exec/XMLはWorkPG379/pg443-hostへbyte一致保全。PG442中断143/途中2494を加算せず原証跡を保持。全体coverage/native/Web ordinary/CHR/formalは未達。collectorのQA050未承認の文言は過去の工具記述であり現在main c47の承認済みQA050を優先、実装/PTが完了した意味ではない。BUG573～593/YKT414～418のhost再試験根拠を本fullへ追加し、必要native受入は継続する。
+
 保存時検査：REQ010-wire.expected/actual.bin はUI235の固定長2336byteと末尾X項目space paddingをそのまま保持する。`git diff --cached --check` の当該2file末尾空白警告は仕様上のデータであり、trimや除外による改変を行わない。src/tools/documentsおよび証跡md/json/xmlの同検査はexit0。wireのbyte一致とhashは上記selected-v7 manifestに記録する。
 
 2026-10-03 13:56停止追補：Source e06916a6a5134be025790a5b2fa7446a4c470b28 commit/push、selected-v7 actual exit0/13:33:34/3:26、179PT/26suite/FES0/static6zero、新6class line266/method47/class6/branch90全miss0。safe `evidence/provisional/PG442-request-selected-v7/manifest.json` SHA d46724733e2f1c033f76e0368ebab3a52ef97d0f4bcefdece84781ac0d085c33。REQ010公開synthetic input/JSON expected+actual/手書き2336wire expected+実独立JCE復号actual5fileは既存checked collectorでexact inventory・独立offset・literal JSONを照合保全。
