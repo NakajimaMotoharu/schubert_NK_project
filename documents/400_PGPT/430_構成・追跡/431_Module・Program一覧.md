@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D351/352実装追跡：QuestionSubmitForm全12methodとquestion-input-validation.js validate/initial/input/submit/IIFE→016065066/PT-QST-FORM001～008、016067068/PT-QST-JS001-A～H・QuestionInputScriptTest/Javascript event fixture。UI224 §2/236 §7/SS313314323352、133選択→同JS含む134PT/19suite/static6zero、form4counter0/JS3counter100%まで限定検証。5SourceFiles hash保全、未接続template/token/POST/受付PRG/native全Web/正式gateは未受入、同入力Source固定全6へ進む。下の未実装記録は起案時点履歴。
+
 PG-D351追跡（仕様先行・未実装）：NK-WEB-002/NK-QST-001/SCR018、QuestionSubmitForm.bind/isValid/getIssues/displayValues/toRequest/close/toString→PT-QST-FORM001～008/016065066。RD QST001～003/FUN010/AUT、UI224 §2/236 §7、SS313/314/323。HTTP閉入力→既存QSBREQ01・QuestionWireClient/API受付の必須依存。PG439全体固定終了後だけ実装、正規token/POST/受付PRG/JS残量表示/native/正式品質は未完了。
 
 PG-D350追跡：NK-WEB-002/NK-QRY-001/SCR022023参照 QuestionSearchForm.bind/toRequest/values/issues/admin/page、QuestionListViewModel.success/invalid/row/link/previous/next、QuestionDetailViewModel.from/label/getValues、QuestionController.list/detail、QuestionMvcConfiguration.questionController、questions/list・detail/template allowlist/CSS → RD FUN012～013/QST005～010/AUT → UI224 §6～8/236 §11～12 → SS313/314/323/332 → QuestionControllerTest.qry001～012/PT-QRY-HTTP001～012/016063064。既存QuestionWireClient/QSSQSD codec/API queryを再利用、USER owner/ADMIN列/固定384・672・8352/JST/空回答/HTML escape/実HTTP/100並行・独立wholebyte。BUG568はgeneric immutable copyのcompile契約是正、外部仕様変更0。現在選択v1実行中・未合格、削除POST/完成tokenQA049・ordinary全Web ready/CHR/正式品質は未完。

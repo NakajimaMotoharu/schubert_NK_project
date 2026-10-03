@@ -1,0 +1,146 @@
+{
+  "id": "PG440-question-input-selected-v2",
+  "formal": false,
+  "sourceCommit": "6200cb4ada30c6343e58287e6653ae5e1075c019",
+  "sourceDirty": true,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java",
+      "sha256": "0c7f9a3f76bc1d1cdba3a55a224ce338eb372840cceca75408d0442e36698c1a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "sha256": "c08ec3aa5a21c5846c268a99fa159f770cc6a8af73384c6cf5fa3ea8570ba425"
+    }
+  ],
+  "branch": "dev-foundation",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "finishedAt": "2026-10-03T10:28:35+09:00",
+  "exitCode": 0,
+  "tests": 133,
+  "suites": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": [
+    "PT-QST-FORM001..008"
+  ],
+  "bugs": [
+    "BUG-570"
+  ],
+  "ykt": [
+    "YKT-412"
+  ],
+  "command": "six reactor clean spotless:check test-compile jar:test-jar test -Dtest=PayloadCodecTest,PayloadSemanticValidatorTest,ResourceScopeTest,WebNonSecretConfigTest,ApiManagementServerTest,QuestionQueryApplicationServiceTest,QuestionQueryRepositoryTest,QuestionQueryReplayServiceTest,QuestionQueryRequestTest,QuestionQueryInboxCleanupTest,QuestionSubmitRequestTest,QuestionSubmitFormTest,UserCreateFormTest,QuestionControllerTest,WebBusinessWireClientsTest,WebApplicationTest,ApiSessionInvalidTest,RootFailedStartRecoveryTest spotbugs:check jacoco:report -o",
+  "coverage": {
+    "QuestionSubmitForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 275
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "fd60403d2b6572c07f3d6c4a4af9f7d08902801a6dcb6d57cc580290b80cb9bb",
+  "limitations": [
+    "selected WIP source hashes, not source-frozen full regression",
+    "QuestionSubmitForm target missed0; selected not formal coverage100",
+    "Question input form only; POST/client byte display/receipt/token/native assembly pending",
+    "QA047 native owner, QA048 receipt and QA049 completed-token remain pending",
+    "formal PT-WEB-20260925-24 unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted; synthetic byte/DOM oracle source only, no real credential/session/token/password/key/dump",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest.xml",
+      "sha256": "79a23619bfced61379f1cb14ae5735c27cb79eac51ef3a2b16dbb8967d9a9ebb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest.xml",
+      "sha256": "2d73901cfafb8928a55ed61dec2dea45e7feaa72c1ade04231e13f9bd918bbdc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest.xml",
+      "sha256": "2c30b6a007b2895dec4b480418a1151ebe29676c13c1550a8c50c380b1ddf030"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml",
+      "sha256": "537d37fabb816e8be6d1a67129a1348610701b4fb078b2325fdfa1fadd582379"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest.xml",
+      "sha256": "34db05e8fbb36266df274fc1779f69db592f712366cf4267960d1047f644b9f8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "a74ba39334da976cb636cf1fcc9e0f87d51d0596f38331d1977902e3565ebd3c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest.xml",
+      "sha256": "067e6a741b2a791062afe538170f6b24019aeebaee29b5391d2b7a2455481ce6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest.xml",
+      "sha256": "aa289647771ca4aa7cf23bb9e6379d16fab5783e9944e6d574502f9b59775668"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "af586d37e7ac3c0253ca266dcd396b797efa6fb1038f9b4c66b2b2076c2b7381"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "sha256": "3de54bc108875174af9f90a706a027f3adda12e390e80b98ff9ed6e8290ed83c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "sha256": "73a019e9b78e0e1379eb94f2e89031cea538769a84c6b196789797408881e0ba"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml",
+      "sha256": "fd8c8b0d5f3e07f5eee56b15b559c13952737ff356af5069fc5ca14e0f981e10"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "73449ce44df666753877fad1566bbbee37b8bf449d56e75b7d1dc635908e6051"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.form.QuestionSubmitFormTest.xml",
+      "sha256": "f4874d07e29a5c2b5ff16346f767dcf2c722a5b6bb70cce5c60d661dd8869bea"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "29b4398152aa98eb4807ac6d22aa308b5edc29d51d8fa41e52287a13809c4c59"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest.xml",
+      "sha256": "36b81a11a35724e48ab431343d32a13857c1743a3d97b3e28d5602579a8d35cb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "4c716a315066ba80412be2190513d993829aeecedb8410a37d1088169cea6a76"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG440-question-input-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml",
+      "sha256": "44b77b427729caa9c5f1bdef7ed9bea00aeaf31cdffdb44bd2b6f36167cf8358"
+    }
+  ]
+}

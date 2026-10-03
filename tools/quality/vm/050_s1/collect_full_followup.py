@@ -399,5 +399,29 @@ if int(identifier[2:5]) >= 439:
     assert all(k['missed'] == 0 for value in query_coverage.values() for k in value.values())
     manifest['questionReadScopeCoverage'] = query_coverage
     manifest['limitations'].append('SCR022/023 references connected only; delete and completed-token approval QA049, acceptance receipt QA048, native owner recovery QA047/full ordinary Web ready remain pending')
+if int(identifier[2:5]) >= 440:
+    manifest['bugs'].append('BUG-570')
+    manifest['ykt'].append('YKT-412')
+    manifest['testIds'].extend(['PT-QST-FORM001..008', 'PT-QST-JS001-A..H'])
+    manifest['trigger'] = 'PG-D351/352 SCR018 closed Question input and independent byte-counter JS: source-frozen six-module regression'
+    form_classes = [c for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').endswith('/QuestionSubmitForm')]
+    assert len(form_classes) == 1
+    form_coverage = {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in form_classes[0].findall('counter')}
+    assert all(k['missed'] == 0 for k in form_coverage.values())
+    manifest['questionSubmitFormCoverage'] = form_coverage
+    jsdir = root / 'src/schubert-nk-web/target/pt-question-script'
+    tap = (jsdir / 'node.tap').read_text()
+    assert all(line in tap.splitlines() for line in ['# tests 8', '# pass 8', '# fail 0', '# cancelled 0', '# skipped 0', '# todo 0'])
+    assert re.search(r'question-input-validation\.js\s*\|\s*100\.00\s*\|\s*100\.00\s*\|\s*100\.00', tap)
+    proof = json.loads((jsdir / 'PT-QST-JS001-node.json').read_text())
+    assert proof['scriptSha256'] == hashlib.sha256((root / 'src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js').read_bytes()).hexdigest()
+    assert proof['subcases'] == 8 and proof['productionFiles'] == 1
+    assert proof['testExit'] == proof['syntaxExit'] == proof['failed'] == proof['skipped'] == proof['todo'] == 0
+    (out / 'logs').mkdir()
+    (out / 'logs/byte-counter.txt').write_text(tap)
+    (out / 'logs/byte-counter.json').write_text(json.dumps(proof, indent=2) + '\n')
+    manifest['javascript'] = proof
+    manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.rglob('*')) if p.is_file()]
+    manifest['limitations'].append('Question input/byte counter only; token issuance/POST/receipt/template/live Browser/native acceptance remain incomplete')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
