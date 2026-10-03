@@ -494,5 +494,28 @@ if int(identifier[2:5]) >= 442:
         'root clean verify/full formal scopes and PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
     manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.rglob('*')) if p.is_file()]
 # End PG442 REQUEST proof.
+if int(identifier[2:5]) >= 446:
+    names = {'SessionOperationToken', 'SessionAttributeCodec', 'SessionOperationTokenLifecycle',
+             'OperationTokenConflictException', 'SpringWebSession'}
+    token_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').rsplit('/', 1)[-1] in names}
+    assert set(token_coverage) == names
+    assert all(k['missed'] == 0 for value in token_coverage.values() for k in value.values())
+    manifest['operationTokenCoverage'] = token_coverage
+    manifest['testIds'].extend(['TOKV201..208'])
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(600, 606))
+    manifest['ykt'].extend(['YKT-424', 'YKT-425'])
+    manifest['qa'] = ['QA-047', 'QA-048', 'QA-049', 'QA-050']
+    manifest['trigger'] = 'PG-D356/QA049 session JSON v2 legacy strict read, current-row token lifecycle and Spring delta: fresh source-frozen full-six regression'
+    manifest['limitations'] = [
+        'QA047..050 are approved; no repeated approval request or stale QA050-unapproved classification',
+        'Host token data/short transaction/retirement/delta tests only; genuine business POST reply verification and receipt/Logout/Web assembly remain pending',
+        'current PG444 cold boot native acceptance applies only to fcc source; future diagnostics and new token source not native accepted',
+        'source-identical ordinary Morning/API/Web/Caddy/original DONE/intent retirement/native CHR-A01/L01 and native coverage100/formal recognition remain pending',
+        'interrupted PG442 exit143 and other-source PG441/PG443 success not reused as this full-run result',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

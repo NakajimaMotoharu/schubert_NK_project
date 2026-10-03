@@ -127,9 +127,10 @@ class SpringWebSessionTest {
       assertEquals(Duration.ofHours(8), session.getMaxInactiveInterval());
       assertEquals("SpringWebSession[REDACTED]", session.toString());
       session.removeAttribute("savedRequest");
-      session.setAttribute("operationTokens", null);
+      // QA049 supersedes legacy pending deletion; only dedicated issue retires consumed.
+      unavailable(() -> session.setAttribute("operationTokens", null));
       assertNull(session.getAttribute("savedRequest"));
-      assertEquals(List.of(), session.getAttribute("operationTokens"));
+      assertEquals(SessionAttributeCodecTest.tokens(2), session.getAttribute("operationTokens"));
       assertThrows(UnsupportedOperationException.class, () -> session.getAttributeNames().clear());
       List<SessionOperationToken> tokens = session.getAttribute("operationTokens");
       assertThrows(
@@ -194,14 +195,16 @@ class SpringWebSessionTest {
       initial.setAttribute("operationTokens", List.of(tokenA));
       var staleDeletion = Objects.requireNonNull(repo.findById(initial.getId()));
       var alreadyRemoved = Objects.requireNonNull(repo.findById(initial.getId()));
-      initial.setAttribute("operationTokens", List.of());
-      alreadyRemoved.removeAttribute("operationTokens");
-      assertEquals(List.of(), alreadyRemoved.getAttribute("operationTokens"));
+      unavailable(() -> initial.setAttribute("operationTokens", List.of()));
+      unavailable(() -> alreadyRemoved.removeAttribute("operationTokens"));
+      assertEquals(List.of(tokenA), alreadyRemoved.getAttribute("operationTokens"));
       var tokenB = new SessionOperationToken("QDLREQ01", tokenA.token(), tokenA.issuedAt());
-      initial.setAttribute("operationTokens", List.of(tokenB));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> initial.setAttribute("operationTokens", List.of(tokenB)));
       unavailable(() -> staleDeletion.removeAttribute("operationTokens"));
       assertEquals(
-          List.of(tokenB),
+          List.of(tokenA),
           Objects.requireNonNull(repo.findById(initial.getId())).getAttribute("operationTokens"));
       repo.deleteById(initial.getId());
     }
@@ -214,29 +217,33 @@ class SpringWebSessionTest {
       var values = SessionAttributeCodecTest.tokens(10);
       for (boolean add : new boolean[] {true, false}) {
         var jobs = new ArrayList<Callable<Void>>();
-        for (var token : values) {
+        for (int iteration = 0; iteration < 100; iteration++) {
+          var token = values.get(iteration % values.size());
           var session = Objects.requireNonNull(repo.findById(id));
           var desired = add ? new ArrayList<SessionOperationToken>() : new ArrayList<>(values);
           if (add) desired.add(token);
           else assertTrue(desired.remove(token));
           jobs.add(
               () -> {
-                session.setAttribute("operationTokens", desired);
+                if (add) session.setAttribute("operationTokens", desired);
+                else unavailable(() -> session.setAttribute("operationTokens", desired));
                 return null;
               });
         }
         for (var future : pool.invokeAll(jobs)) future.get(30, TimeUnit.SECONDS);
         var current = Objects.requireNonNull(repo.findById(id));
         List<SessionOperationToken> actual = current.getAttribute("operationTokens");
-        assertEquals(add ? new HashSet<>(values) : Set.of(), new HashSet<>(actual));
+        assertEquals(new HashSet<>(values), new HashSet<>(actual));
         assertEquals("/logs", current.getAttribute("savedRequest"));
         assertEquals("02".repeat(32), current.getAttribute("csrfToken"));
       }
       var a = Objects.requireNonNull(repo.findById(id));
       var b = Objects.requireNonNull(repo.findById(id));
-      a.setAttribute("operationTokens", List.of(values.getFirst()));
-      b.setAttribute("operationTokens", List.of(values.getFirst()));
-      assertEquals(List.of(values.getFirst()), b.getAttribute("operationTokens"));
+      unavailable(() -> a.setAttribute("operationTokens", List.of(values.getFirst())));
+      unavailable(() -> b.setAttribute("operationTokens", List.of(values.getFirst())));
+      List<SessionOperationToken> preserved = b.getAttribute("operationTokens");
+      assertEquals(10, preserved.size());
+      assertEquals(new HashSet<>(values), new HashSet<>(preserved));
       var changed =
           new SessionOperationToken(
               "QDLREQ01", values.getFirst().token(), values.getFirst().issuedAt());
@@ -255,6 +262,68 @@ class SpringWebSessionTest {
       repo.deleteById(id);
       unavailable(() -> full.setAttribute("operationTokens", List.of()));
       assertEquals(0, count());
+    }
+  }
+
+  @Test
+  void tokv208LegacyDeltaCannotCompleteRollbackOrResurrectRetiredToken() throws Exception {
+    try (var f = new Fixture(db)) {
+      var repo = adapter(f);
+      var initial = repo.createSession();
+      var values = SessionAttributeCodecTest.tokens(10);
+      initial.setAttribute("operationTokens", values);
+      var stale = Objects.requireNonNull(repo.findById(initial.getId()));
+      var retiredStale = Objects.requireNonNull(repo.findById(initial.getId()));
+      var id = WebSessionId.parse(initial.getId());
+      var first = values.getFirst();
+      var lifecycle =
+          new SessionOperationTokenLifecycle(f.repository, f.clock, () -> new UUID(0, 99));
+      var completed =
+          lifecycle.completeVerified(
+              id,
+              first.purpose(),
+              first.token(),
+              dev.codex.schubert.nk.protocol.header.ResultCode.SUCCESS);
+      assertEquals(Optional.of(NOW), completed.completedAt());
+      stale.setAttribute("operationTokens", values);
+      assertEquals(
+          completed, f.repository.find(id).orElseThrow().attributes().operationTokens().getFirst());
+      var completedSnapshot = Objects.requireNonNull(repo.findById(initial.getId()));
+      var completedValues = new ArrayList<>(values);
+      completedValues.set(0, completed);
+      completedSnapshot.setAttribute("operationTokens", completedValues);
+      unavailable(() -> completedSnapshot.removeAttribute("operationTokens"));
+      var newToken = lifecycle.issue(id, "QDLREQ01");
+      assertEquals(new UUID(0, 99), newToken.token());
+      assertThrows(
+          IllegalArgumentException.class, () -> stale.setAttribute("operationTokens", values));
+      retiredStale.setAttribute("operationTokens", values);
+      assertEquals(
+          List.of(
+              new UUID(0, 2),
+              new UUID(0, 3),
+              new UUID(0, 4),
+              new UUID(0, 5),
+              new UUID(0, 6),
+              new UUID(0, 7),
+              new UUID(0, 8),
+              new UUID(0, 9),
+              new UUID(0, 10),
+              new UUID(0, 99)),
+          f.repository.find(id).orElseThrow().attributes().operationTokens().stream()
+              .map(SessionOperationToken::token)
+              .toList());
+      // Removing an already retired stale entry is a no-op; retaining it never re-inserts it.
+      // Fresh retiredStale now contains current token99, so use the untouched initial snapshot
+      // to omit only the already-retired UUID1 without omitting any current row tuple.
+      initial.setAttribute("operationTokens", values.subList(1, 10));
+      assertEquals(10, f.repository.find(id).orElseThrow().attributes().operationTokens().size());
+      var forgedCompletion =
+          new SessionOperationToken("QSBREQ01", new UUID(0, 200), NOW, Optional.of(NOW));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> stale.setAttribute("operationTokens", List.of(forgedCompletion)));
+      assertEquals(0, f.live.get());
     }
   }
 

@@ -128,6 +128,9 @@ public final class SpringWebSession implements Session {
         case OPERATION_TOKENS -> {
           var desired = tokenList(value);
           var previous = attributes.operationTokens();
+          // QA049/BUG602/TOKV208: completion requires a verified reply and dedicated lifecycle.
+          for (var next : desired)
+            if (next.completedAt().isPresent() && !previous.contains(next)) throw invalid();
           for (var old : previous)
             for (var next : desired)
               if (old.token().equals(next.token()) && !old.equals(next)) throw invalid();
@@ -232,8 +235,9 @@ public final class SpringWebSession implements Session {
     for (var token : previous) {
       if (!desired.contains(token)) {
         var existing = merged.get(token.token());
-        if (existing != null && !existing.equals(token)) throw invalid();
-        merged.remove(token.token());
+        // QA049: only an explicit new-form issue may retire a consumed token.
+        // An already retired entry from a stale snapshot stays absent, never resurrected.
+        if (existing != null) throw invalid();
       }
     }
     for (var token : desired) {
