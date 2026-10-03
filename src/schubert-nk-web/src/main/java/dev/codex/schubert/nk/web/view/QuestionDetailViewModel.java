@@ -41,6 +41,9 @@ public final class QuestionDetailViewModel {
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(target, "target");
     Objects.requireNonNull(data, "data");
+    // UI236 QSDRSP01 active-question M field; semantic relationships alone do not check X presence.
+    if (data.questionText().isEmpty())
+      throw new IllegalArgumentException("question projection body is absent");
     if (!target.equals(data.questionId())
         || (actor.role() == UserRole.USER && !actor.username().equals(data.username())))
       throw new IllegalArgumentException("invalid question detail projection");

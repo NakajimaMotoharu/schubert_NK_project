@@ -1,0 +1,12 @@
+<!doctype html>
+<!-- SCR019/UI224236/SS313/QA048/PG-D357/RCPT006E,F. Every GET uses current API result. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('質問受付完了')}"></head>
+<body><main class="page question-accepted-page">
+  <header class="topbar"><h1>質問受付完了</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <p class="accepted-message">質問を受け付けました。</p>
+  <dl><dt>受付ID</dt><dd class="receipt" th:text="${page.values.receiptId}"></dd>
+    <dt>受付日時</dt><dd class="submitted-at" th:text="${page.values.submittedAt}"></dd>
+    <dt>質問</dt><dd class="question-body" th:text="${page.values.question}"></dd></dl>
+  <nav><a href="/notifications">通知を確認</a><a href="/questions/new">続けて質問</a><a href="/menu">メニュー</a></nav>
+</main></body></html>

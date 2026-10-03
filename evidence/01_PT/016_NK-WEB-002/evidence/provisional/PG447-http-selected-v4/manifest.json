@@ -1,0 +1,463 @@
+{
+  "id": "PG447-http-selected-v4",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "eb270c1407f677291e2d0229b128c3f0e92f7c36",
+  "sourceDirty": "QA048049 receipt HTTP source and independent QuestionControllerTest; full file hashes captured before execution",
+  "sourceFilesSha256": "c24107b0166f4c7292e5d424d030c711cac6c58344970651610ceb70a3e7b5b1",
+  "sourceDiffSha256": "64ecba1ff1bcf2cbce10e70017b646cf6d5eefc579587c8c856427f1a0ffa1f6",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-10-04T06:36:27+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg447_http_selected_v4.sh; six explicit modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report; selected 13 named suites, failIfNoTests=true",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 40,
+      "suites": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 110,
+  "suites": 13,
+  "coverage": {
+    "QuestionController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 766
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 204
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionAcceptanceMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReferenceException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReference": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 11
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReferenceRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 297
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 88
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionSubmitForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 280
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 54
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionSubmitViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 85
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 20
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 204
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 38
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionAcceptedViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 124
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 31
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "javascript": {
+    "testId": "PT-QST-JS001",
+    "nodeVersion": "v24.19.0",
+    "subcases": 8,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "syntaxExit": 0,
+    "testExit": 0,
+    "lineCoverage": 100,
+    "functionCoverage": 100,
+    "branchCoverage": 100,
+    "productionFiles": 1,
+    "scriptSha256": "f181b9920dc95b580764a5266dcdc2294b678181dd20165b6cfde495d0a9709e",
+    "browserDom": "deterministic-event-double",
+    "actualNkGate": false
+  },
+  "testCases": [
+    {
+      "testId": "RCPT006F",
+      "method": "rcpt006FRealSecuredHttpPostCsrfRefreshAndNoAnonymousSubmission",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006G",
+      "method": "rcpt006GNegativeNullReadonlySqlAndResultStatusMatrix",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006A",
+      "method": "rcpt006ANewFormCapacityRetirementAndMissingToken",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006E",
+      "method": "rcpt006EFreshGetTupleOwnerDeletionAndNoFallback",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006C",
+      "method": "rcpt006CUnknownResponseAndLocatorGapKeepTheOriginalToken",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006F",
+      "method": "rcpt006FExplicitMvcDomEscaping200CodepointsAndCsrf",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006D",
+      "method": "rcpt006DMissingWrongPurposeExpiredAndInFlightInvalidation",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006G",
+      "method": "rcpt006GCurrentCompletionFailureAndInputContracts",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006B",
+      "method": "rcpt006BIndependentSubmitWireAndSameTokenReplay",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006C",
+      "method": "rcpt006CLostRedirectAndBlankWireCannotInventANewQuestion",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    },
+    {
+      "testId": "RCPT006H",
+      "method": "rcpt006HConcurrentSameTokenAndImmutableLocator",
+      "junit": "junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml"
+    }
+  ],
+  "qa": [
+    "QA-048",
+    "QA-049"
+  ],
+  "ssc": [
+    "SSC-175"
+  ],
+  "bugs": [
+    "BUG-611",
+    "BUG-612",
+    "BUG-613",
+    "BUG-614",
+    "BUG-615",
+    "BUG-616",
+    "BUG-617"
+  ],
+  "ykt": [
+    "YKT-431",
+    "YKT-432",
+    "YKT-433",
+    "YKT-434",
+    "YKT-435",
+    "YKT-436"
+  ],
+  "expected": "UI236 independent QSB4400/320 and QSD268/8608; SS331 SQL postconditions; explicit HTTP302 fixed Location, CSRF403/API0, current owner/tuple and escaped200-codepoint DOM; no DB held during wire",
+  "actual": "All independent SQL/wire/DOM/security/negative/lost-response/100-concurrent assertions passed",
+  "logSha256": "e1e9035a05f9f2d68a3801cc25ee3d90284b6f345dafabd5d94a7308f8940e41",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg447-http-selected-v4-frozen: all six actual classes/test-classes/XML/exec/site/static copied and diff/cmp verified",
+  "redaction": "No JUnit properties/stdout/stderr, cookie/session/context/token/password/key/runtime body/dump/raw log included",
+  "limitations": [
+    "Fresh same-source full-six receipt ownership regression required; prior failed full runs remain failed",
+    "V026 signed native migration/Backup/full ordinary Web/Caddy/DONE/CHR/native100/formal pending",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest.xml",
+      "sha256": "e182301df9e27a0a0a9939f347d8fbc913cd532ad6fc9939cf4252aad13f5ef6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "fe5bcecfc8d38a2b0ac7c1eb59037ae2708964d40f8ce7cdb60b211e99202101"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "66619488a244fb08b29aac428a188ecd5998673efc4bb304e25d042ee472474a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "0f8e8059e163462e5164bb1cc9fc5a970ad609db29a766e8575ce58e8faa83ca"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "075f761f0f61b5567ad36e402dc508be8c4d036b9ac23b5b535faacfdee4d40a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "3153f80c73f53568a4576f7e62f8e6d0b94e0e64ca5301d16d7787819f2da3b0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "daf9ba98a02c16596f629fc78d5fd7848931fc19e02974a6aacf3fb6b69b540a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "99b863cb9d050e639d9a991939e667e736f57e3bbe4361488aea927a24cf61c8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.form.QuestionSubmitFormTest.xml",
+      "sha256": "c970c21335f5002a8874f5c2865e18d02c10a08491d255ddb8f087c1485f50e7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest.xml",
+      "sha256": "fda1b2b7afcae5e784c88cf9ad0b7e650959d87454a07d5a4dadac3bb9ca724f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest.xml",
+      "sha256": "3eaeb48f1f0a9a0800820204cac53a10754dd99003bcfb2fd5a8bc005cd2c21a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml",
+      "sha256": "eae74bfe15397eab2b2be9ae612dcfcf997f4b0b8e1b6a4cb6f34f2aad87b6a9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.view.QuestionInputScriptTest.xml",
+      "sha256": "94b9b79d3bdedbb05e9ca57380b3299760cca6896c15a2da51cebb964afa39d5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/logs/byte-counter.json",
+      "sha256": "be5b174b70f761983c1b45b5f8068e39d080554881b6c7c528a011c5e6dfa4bc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG447-http-selected-v4/logs/byte-counter.txt",
+      "sha256": "9e9b9d44e217d003bee978ad6e8ff15d2b6a18b8d6d347ed57501e57b5456270"
+    }
+  ]
+}

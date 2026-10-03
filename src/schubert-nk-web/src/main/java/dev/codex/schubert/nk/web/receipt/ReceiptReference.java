@@ -17,7 +17,8 @@ public record ReceiptReference(String receiptId, long questionId, Instant submit
       throw new IllegalArgumentException("receipt reference is invalid");
   }
 
-  static void requireReceiptId(String value) {
+  /** HTTP path validation only; this never authenticates an owner or proves acceptance. */
+  public static void requireReceiptId(String value) {
     Objects.requireNonNull(value, "receiptId");
     if (!value.matches("[0-9A-HJKMNP-TV-Z]{26}"))
       throw new IllegalArgumentException("receipt identifier is invalid");

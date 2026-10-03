@@ -530,13 +530,25 @@ if int(identifier[2:5]) >= 447:
     manifest['ddl'].update({'versionedMigrations': 26,
         'appendOnly': 'V001..025 unchanged; V026 QA048 technical three-value locator and SSC175 atomic shared cleanup',
         'receiptOracle': '075 RCPT001..005: literal SQL, independent role/catalog, physical orphan, bounded/locked/backup/run/rollback and fault matrix'})
-    manifest['testIds'].append('RCPT001..005')
-    manifest['bugs'].extend(['BUG-608', 'BUG-609', 'BUG-610', 'BUG-611'])
-    manifest['ykt'].extend(['YKT-428', 'YKT-429', 'YKT-430', 'YKT-431'])
+    manifest['testIds'].extend(['RCPT001..005', 'RCPT006A..H'])
+    manifest['bugs'].extend('BUG-' + str(n) for n in range(608, 618))
+    manifest['ykt'].extend('YKT-' + str(n) for n in range(428, 437))
     manifest['ssc'].append('SSC-175')
-    manifest['trigger'] = 'PG-D357/QA048/SSC175 V026 immutable locator, JDBC unknown-close precedence, atomic shared cleanup and approved inventory: fresh full-six regression'
+    names = {'QuestionController', 'QuestionSubmitViewModel', 'QuestionAcceptedViewModel',
+             'QuestionAcceptanceMvcConfiguration', 'QuestionSubmitForm', 'QuestionDetailViewModel'}
+    http_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').rsplit('/', 1)[-1] in names}
+    assert set(http_coverage) == names
+    assert all(k['missed'] == 0 for value in http_coverage.values() for k in value.values())
+    manifest['receiptHttpCoverage'] = http_coverage
+    manifest['receiptHttpOracle'] = '075 RCPT006A..H: independent QSB4400/320, QSD268/8608; immutable current SQL, real security HTTP302/CSRF403/API0 and DOM200-codepoint escape; same-token unknown/lost-response replay, owner/tuple/100 concurrent and per-request DB release'
+    manifest['trigger'] = 'PG-D357/QA048049/SSC175 receipt ownership group: V026 immutable locator/atomic shared cleanup, inventory propagation and retained-token POST/fresh IF030 receipt HTTP: fresh full-six regression'
     manifest['limitations'] = [
-        'Three-value locator and cleanup/JDBC host scope only; SCR018 retained-token POST and SCR019 fresh IF030 HTTP wiring still pending',
+        'Host receipt SQL/JDBC and real embedded secured HTTP only; full native ordinary Web assembly is not accepted',
+        'QA050 nullable pending revocation/retry/API expired fence and remaining business POST wiring not yet implemented',
         'V026 native signed migration and new schema Backup/restore not yet executed; old successful bundles remain immutable',
         'ordinary Morning/API/full Web/Caddy/DONE/intent/native CHR-A01/L01 and native coverage100/formal acceptance pending',
         'formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; failed/partial/other-source results not reused',

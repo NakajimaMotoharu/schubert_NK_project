@@ -78,6 +78,12 @@ public final class QuestionSubmitForm implements AutoCloseable {
     return issues;
   }
 
+  /** Request-scoped hidden field, not an authorization or API result proof. */
+  public UUID operationToken() {
+    ensureOpen();
+    return operationToken;
+  }
+
   /** Only the caller's request/template receives this body copy; never put it in session/flash. */
   public Map<String, Object> displayValues() {
     ensureOpen();

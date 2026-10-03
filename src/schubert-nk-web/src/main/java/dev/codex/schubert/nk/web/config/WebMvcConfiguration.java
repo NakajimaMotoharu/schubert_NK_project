@@ -92,6 +92,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
           "notifications/detail",
           "questions/list",
           "questions/detail",
+          "questions/new",
+          "questions/accepted",
           "error/error",
           "scenarios",
           "scenario-routes",

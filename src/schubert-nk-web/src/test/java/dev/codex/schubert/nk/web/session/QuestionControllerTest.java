@@ -8,21 +8,30 @@ import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.*;
 import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.web.config.QuestionAcceptanceMvcConfiguration;
 import dev.codex.schubert.nk.web.config.QuestionMvcConfiguration;
 import dev.codex.schubert.nk.web.controller.QuestionController;
 import dev.codex.schubert.nk.web.form.QuestionSearchForm;
+import dev.codex.schubert.nk.web.form.QuestionSubmitForm;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.receipt.*;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.view.*;
 import jakarta.jms.JMSRuntimeException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
+import javax.sql.DataSource;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
@@ -59,6 +68,7 @@ class QuestionControllerTest {
     try (var c = db.web();
         var s = c.createStatement()) {
       s.executeUpdate("DELETE FROM schubert_web_session.web_http_sessions");
+      s.executeUpdate("DELETE FROM schubert_web_session.web_receipt_references");
     }
   }
 
@@ -1009,9 +1019,807 @@ class QuestionControllerTest {
     }
   }
 
+  @Test
+  void rcpt006ANewFormCapacityRetirementAndMissingToken() throws Exception {
+    try (var f = new Fixture()) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "GET");
+      var id = WebSessionId.parse(request.getSession(false).getId());
+      for (int n = 1; n <= 10; n++) {
+        var page = new ExtendedModelMap();
+        var response = new MockHttpServletResponse();
+        assertEquals("questions/new", f.accepting().newForm(actor, page, request, response));
+        var view = (QuestionSubmitViewModel) page.get("page");
+        assertEquals("", view.getValues().get("question"));
+        assertEquals(new UUID(9, n).toString(), view.getValues().get("operationToken"));
+        assertTrue(view.getIssues().isEmpty());
+        assertEquals("", view.getNotice());
+        assertEquals("reader", view.getTopBar().getUsername());
+        assertEquals("QuestionSubmitViewModel[REDACTED]", view.toString());
+      }
+      var full = new MockHttpServletResponse();
+      assertNull(f.accepting().newForm(actor, new ExtendedModelMap(), request, full));
+      assertEquals(409, full.getStatus());
+      assertEquals(10, f.tokenIds.get());
+      assertTrue(f.requests.isEmpty());
+      f.tokens.completeVerified(
+          id, "QSBREQ01", new UUID(9, 1), dev.codex.schubert.nk.protocol.header.ResultCode.SUCCESS);
+      assertEquals(
+          "questions/new",
+          f.accepting()
+              .newForm(actor, new ExtendedModelMap(), request, new MockHttpServletResponse()));
+      assertEquals(11, f.tokenIds.get());
+      var retired = new MockHttpServletResponse();
+      assertNull(
+          f.accepting()
+              .submit(
+                  params("question", "literal", "operation_token", new UUID(9, 1).toString()),
+                  actor,
+                  new ExtendedModelMap(),
+                  request,
+                  retired));
+      assertEquals(409, retired.getStatus());
+      assertEquals(11, f.tokenIds.get());
+      assertTrue(f.requests.isEmpty());
+      assertEquals(
+          10, f.security.f.repository.find(id).orElseThrow().attributes().operationTokens().size());
+    }
+  }
+
+  @Test
+  void rcpt006BIndependentSubmitWireAndSameTokenReplay() throws Exception {
+    for (UserRole role : UserRole.values()) {
+      reset();
+      try (var f = new Fixture()) {
+        var actor = actor(role);
+        var request = f.authenticatedRequest(actor, "POST");
+        var session = WebSessionId.parse(request.getSession(false).getId());
+        var token = f.tokens.issue(session, "QSBREQ01");
+        var input =
+            params(
+                "question",
+                "e\u0301 <script>x</script>",
+                "operation_token",
+                token.token().toString());
+        var firstTime = f.security.f.clock.value;
+        for (int n = 1; n <= 2; n++) {
+          f.code = n == 1 ? "0000" : "0200";
+          f.security.f.clock.value = firstTime.plusSeconds(n - 1);
+          var success = new MockHttpServletResponse();
+          assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
+          assertEquals(302, success.getStatus());
+          assertEquals("/questions/accepted/" + RECEIPT, success.getHeader("Location"));
+          byte[] expected = request("QSBREQ01", 4144, "a".repeat(64), new UUID(0, n));
+          put(expected, 23, 1, "A");
+          put(expected, 256, 4096, "é <script>x</script>");
+          put(expected, 4352, 36, token.token().toString());
+          assertArrayEquals(expected, f.requests.get(n - 1));
+          Arrays.fill(expected, (byte) 0);
+          var reference = f.receipts.find(RECEIPT).orElseThrow();
+          assertEquals(1, reference.questionId());
+          assertEquals(SUBMITTED, reference.submittedAt());
+          var retained =
+              f.security.f.repository.find(session).orElseThrow().attributes().operationTokens();
+          assertEquals(1, retained.size());
+          assertEquals(firstTime, retained.getFirst().completedAt().orElseThrow());
+          assertEquals(1, f.tokenIds.get());
+          f.erased();
+        }
+      }
+    }
+  }
+
+  @Test
+  void rcpt006CUnknownResponseAndLocatorGapKeepTheOriginalToken() throws Exception {
+    for (boolean gap : List.of(false, true)) {
+      reset();
+      try (var f = new Fixture()) {
+        var actor = actor(UserRole.USER);
+        var request = f.authenticatedRequest(actor, "POST");
+        var session = WebSessionId.parse(request.getSession(false).getId());
+        var token = f.tokens.issue(session, "QSBREQ01");
+        var input =
+            params("question", "public retry body", "operation_token", token.token().toString());
+        if (gap) f.failReceipt = true;
+        else f.responder = (id, bytes) -> new byte[1];
+        var model = new ExtendedModelMap();
+        var response = new MockHttpServletResponse();
+        assertEquals("questions/new", f.accepting().submit(input, actor, model, request, response));
+        assertEquals(503, response.getStatus());
+        var display = (QuestionSubmitViewModel) model.get("page");
+        assertEquals("public retry body", display.getValues().get("question"));
+        assertEquals(token.token().toString(), display.getValues().get("operationToken"));
+        assertFalse(display.getNotice().isEmpty());
+        var completion =
+            f.security
+                .f
+                .repository
+                .find(session)
+                .orElseThrow()
+                .attributes()
+                .operationTokens()
+                .getFirst()
+                .completedAt();
+        assertEquals(gap, completion.isPresent());
+        f.failReceipt = false;
+        assertTrue(f.receipts.find(RECEIPT).isEmpty());
+        f.responder = f::standard;
+        f.code = "0200";
+        var success = new MockHttpServletResponse();
+        assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
+        assertEquals(302, success.getStatus());
+        assertEquals("/questions/accepted/" + RECEIPT, success.getHeader("Location"));
+        assertEquals(1, f.tokenIds.get());
+        assertEquals(2, f.requests.size());
+        assertEquals(SUBMITTED, f.receipts.find(RECEIPT).orElseThrow().submittedAt());
+        if (gap)
+          assertEquals(
+              completion,
+              f.security
+                  .f
+                  .repository
+                  .find(session)
+                  .orElseThrow()
+                  .attributes()
+                  .operationTokens()
+                  .getFirst()
+                  .completedAt());
+        f.erased();
+      }
+    }
+  }
+
+  @Test
+  void rcpt006DMissingWrongPurposeExpiredAndInFlightInvalidation() throws Exception {
+    for (String mode :
+        List.of("missing", "purpose", "no-session", "malformed-session", "expired")) {
+      reset();
+      try (var f = new Fixture()) {
+        var actor = actor(UserRole.USER);
+        var request = f.authenticatedRequest(actor, "POST");
+        var session = WebSessionId.parse(request.getSession(false).getId());
+        var token = f.tokens.issue(session, mode.equals("purpose") ? "QDLREQ01" : "QSBREQ01");
+        UUID input = mode.equals("missing") ? new UUID(6, 7) : token.token();
+        if (mode.equals("no-session")) request.setSession(null);
+        if (mode.equals("malformed-session")) request.setSession(new MockHttpSession(null, "bad"));
+        if (mode.equals("expired"))
+          f.security.f.clock.value = f.security.f.clock.value.plusSeconds(28801);
+        var response = new MockHttpServletResponse();
+        assertNull(
+            f.accepting()
+                .submit(
+                    params("question", "literal", "operation_token", input.toString()),
+                    actor,
+                    new ExtendedModelMap(),
+                    request,
+                    response));
+        assertEquals(409, response.getStatus());
+        assertTrue(f.requests.isEmpty());
+        assertEquals(1, f.tokenIds.get());
+        assertEquals(0, f.security.f.live.get());
+      }
+    }
+    reset();
+    try (var f = new Fixture()) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "POST");
+      var session = WebSessionId.parse(request.getSession(false).getId());
+      var token = f.tokens.issue(session, "QSBREQ01");
+      f.afterReply = () -> f.security.f.repository.invalidate(session);
+      var response = new MockHttpServletResponse();
+      assertNull(
+          f.accepting()
+              .submit(
+                  params("question", "literal", "operation_token", token.token().toString()),
+                  actor,
+                  new ExtendedModelMap(),
+                  request,
+                  response));
+      assertEquals(409, response.getStatus());
+      assertEquals(1, f.requests.size());
+      assertTrue(f.receipts.find(RECEIPT).isEmpty());
+    }
+  }
+
+  @Test
+  void rcpt006EFreshGetTupleOwnerDeletionAndNoFallback() throws Exception {
+    for (UserRole role : UserRole.values())
+      try (var f = new Fixture()) {
+        f.receipts.register(new ReceiptReference(RECEIPT, 1, SUBMITTED));
+        var actor = actor(role);
+        var request = f.security.mock("GET", "/questions/accepted/" + RECEIPT);
+        for (int n = 1; n <= 2; n++) {
+          f.summary = "current API body " + n;
+          var model = new ExtendedModelMap();
+          assertEquals(
+              "questions/accepted",
+              f.accepting()
+                  .accepted(RECEIPT, actor, model, request, new MockHttpServletResponse()));
+          var page = (QuestionAcceptedViewModel) model.get("page");
+          assertEquals("current API body " + n, page.getValues().get("question"));
+          assertEquals("2026-10-03 08:58:00", page.getValues().get("submittedAt"));
+          assertEquals(RECEIPT, page.getValues().get("receiptId"));
+          assertEquals("reader", page.getTopBar().getUsername());
+          assertEquals("QuestionAcceptedViewModel[REDACTED]", page.toString());
+          var expected = request("QSDREQ01", 12, "a".repeat(64), new UUID(0, n));
+          number(expected, 256, 12, 1);
+          assertArrayEquals(expected, f.requests.get(n - 1));
+          Arrays.fill(expected, (byte) 0);
+        }
+        for (String field : List.of("id", "receipt", "time", "owner")) {
+          f.responder =
+              (id, bytes) -> {
+                var reply = f.standard(id, bytes);
+                switch (field) {
+                  case "id" -> number(reply, 256, 12, 2);
+                  case "receipt" -> put(reply, 268, 26, "0".repeat(26));
+                  case "time" -> put(reply, 8562, 17, "20261003085700000");
+                  default -> put(reply, 294, 64, "someone-else");
+                }
+                return reply;
+              };
+          var response = new MockHttpServletResponse();
+          assertNull(
+              f.accepting().accepted(RECEIPT, actor, new ExtendedModelMap(), request, response));
+          assertEquals(503, response.getStatus());
+        }
+        f.responder = f::standard;
+        f.code = "0104";
+        var deleted = new MockHttpServletResponse();
+        assertNull(
+            f.accepting().accepted(RECEIPT, actor, new ExtendedModelMap(), request, deleted));
+        assertEquals(404, deleted.getStatus());
+        int before = f.requests.size();
+        for (String target : List.of("0".repeat(26), "not-a-receipt")) {
+          var missing = new MockHttpServletResponse();
+          assertNull(
+              f.accepting().accepted(target, actor, new ExtendedModelMap(), request, missing));
+          assertEquals(404, missing.getStatus());
+        }
+        assertEquals(before, f.requests.size());
+        f.erased();
+      }
+  }
+
+  @Test
+  void rcpt006FExplicitMvcDomEscaping200CodepointsAndCsrf() throws Exception {
+    try (var f = new Fixture();
+        var context = f.acceptanceMvc()) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "GET");
+      var mvc = MockMvcBuilders.webAppContextSetup(context).build();
+      var newForm =
+          mvc.perform(
+                  get("/questions/new")
+                      .principal(actor)
+                      .session((MockHttpSession) request.getSession(false))
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
+              .andReturn()
+              .getResponse();
+      assertEquals(200, newForm.getStatus());
+      var dom = Jsoup.parse(newForm.getContentAsString());
+      assertEquals("質問要求", dom.title());
+      assertEquals("/questions/new", dom.select("form.question-input").attr("action"));
+      assertEquals("post", dom.select("form.question-input").attr("method"));
+      assertEquals(new UUID(9, 1).toString(), dom.select("input[name=operation_token]").val());
+      assertEquals("b".repeat(64), dom.select("input[name=_csrf]").val());
+      assertEquals("/js/question-input-validation.js", dom.select("script[src]").attr("src"));
+      assertEquals("", dom.select("textarea[name=question]").val());
+      f.receipts.register(new ReceiptReference(RECEIPT, 1, SUBMITTED));
+      f.summary = "<script>alert(1)</script>" + "😀".repeat(201);
+      var accepted =
+          mvc.perform(
+                  get("/questions/accepted/" + RECEIPT)
+                      .principal(actor)
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
+              .andReturn()
+              .getResponse();
+      assertEquals(200, accepted.getStatus());
+      var page = Jsoup.parse(accepted.getContentAsString());
+      assertEquals("質問受付完了", page.title());
+      assertEquals("質問を受け付けました。", page.select(".accepted-message").text());
+      assertEquals(
+          "<script>alert(1)</script>" + "😀".repeat(175), page.select(".question-body").text());
+      assertTrue(page.select(".question-body script,.question-body img").isEmpty());
+      assertEquals(
+          List.of("/notifications", "/questions/new", "/menu"),
+          page.select("main.question-accepted-page > nav a").eachAttr("href"));
+      assertTrue(page.select("input[name=question],form.question-input").isEmpty());
+      assertEquals(1, f.requests.size());
+      f.erased();
+    }
+  }
+
+  @Test
+  void rcpt006GNegativeNullReadonlySqlAndResultStatusMatrix() throws Exception {
+    try (var f = new Fixture()) {
+      var actor = actor(UserRole.USER);
+      for (int kind = 0; kind < 3; kind++) {
+        var response = new MockHttpServletResponse();
+        String result =
+            switch (kind) {
+              case 0 -> f.controller.newForm(actor, new ExtendedModelMap(), raw(), response);
+              case 1 ->
+                  f.controller.submit(params(), actor, new ExtendedModelMap(), raw(), response);
+              default ->
+                  f.controller.accepted(RECEIPT, actor, new ExtendedModelMap(), raw(), response);
+            };
+        assertNull(result);
+        assertEquals(503, response.getStatus());
+      }
+      var request = f.authenticatedRequest(actor, "POST");
+      var session = WebSessionId.parse(request.getSession(false).getId());
+      var token = f.tokens.issue(session, "QSBREQ01");
+      var good = params("question", "literal", "operation_token", token.token().toString());
+      var invalid = new MockHttpServletResponse();
+      assertEquals(
+          "questions/new",
+          f.accepting()
+              .submit(
+                  params("question", "x\n", "operation_token", token.token().toString()),
+                  actor,
+                  new ExtendedModelMap(),
+                  request,
+                  invalid));
+      assertEquals(400, invalid.getStatus());
+      assertTrue(f.requests.isEmpty());
+      for (var item :
+          Map.of(
+                  "0100", 400, "0101", 401, "0103", 403, "0104", 404, "0105", 409, "0106", 429,
+                  "0107", 409, "9000", 503, "9001", 503)
+              .entrySet()) {
+        f.code = item.getKey();
+        var response = new MockHttpServletResponse();
+        var result = f.accepting().submit(good, actor, new ExtendedModelMap(), request, response);
+        assertEquals(item.getValue(), response.getStatus());
+        if (item.getValue() == 400 || item.getValue() == 503) assertEquals("questions/new", result);
+        else assertNull(result);
+      }
+      f.code = "0000";
+      f.security.f.failure = "open";
+      var failed = new MockHttpServletResponse();
+      assertEquals(
+          "questions/new",
+          f.accepting().submit(good, actor, new ExtendedModelMap(), request, failed));
+      assertEquals(503, failed.getStatus());
+      var getFailed = new MockHttpServletResponse();
+      assertNull(f.accepting().newForm(actor, new ExtendedModelMap(), request, getFailed));
+      assertEquals(503, getFailed.getStatus());
+      f.security.f.failure = "";
+      f.receipts.register(new ReceiptReference(RECEIPT, 1, SUBMITTED));
+      f.failReceipt = true;
+      var receiptFailed = new MockHttpServletResponse();
+      assertNull(
+          f.accepting().accepted(RECEIPT, actor, new ExtendedModelMap(), request, receiptFailed));
+      assertEquals(503, receiptFailed.getStatus());
+      f.failReceipt = false;
+      f.responder = (id, bytes) -> new byte[1];
+      var invalidWire = new MockHttpServletResponse();
+      assertNull(
+          f.accepting().accepted(RECEIPT, actor, new ExtendedModelMap(), request, invalidWire));
+      assertEquals(503, invalidWire.getStatus());
+      f.responder = f::standard;
+      f.code = "0102";
+      var expired = new MockHttpServletResponse();
+      assertNull(f.accepting().submit(good, actor, new ExtendedModelMap(), request, expired));
+      assertEquals(401, expired.getStatus());
+      var expiredGet = new MockHttpServletResponse();
+      assertNull(
+          f.accepting()
+              .accepted(
+                  RECEIPT,
+                  actor,
+                  new ExtendedModelMap(),
+                  f.security.mock("GET", "/questions/accepted/" + RECEIPT),
+                  expiredGet));
+      assertEquals(302, expiredGet.getStatus());
+      assertEquals("/login?session-expired", expiredGet.getRedirectedUrl());
+      f.erased();
+    }
+  }
+
+  @Test
+  void rcpt006HConcurrentSameTokenAndImmutableLocator() throws Exception {
+    try (var f = new Fixture();
+        var pool = Executors.newFixedThreadPool(8)) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "POST");
+      var rawSession = request.getSession(false).getId();
+      var token = f.tokens.issue(WebSessionId.parse(rawSession), "QSBREQ01");
+      f.code = "0200";
+      var jobs = new ArrayList<Future<String>>();
+      for (int n = 0; n < 100; n++)
+        jobs.add(
+            pool.submit(
+                () -> {
+                  var current = f.security.mock("POST", "/questions/new");
+                  current.setSession(new MockHttpSession(null, rawSession));
+                  var reply = new MockHttpServletResponse();
+                  assertNull(
+                      f.accepting()
+                          .submit(
+                              params(
+                                  "question",
+                                  "same current body",
+                                  "operation_token",
+                                  token.token().toString()),
+                              actor,
+                              new ExtendedModelMap(),
+                              current,
+                              reply));
+                  assertEquals(302, reply.getStatus());
+                  return reply.getHeader("Location");
+                }));
+      for (var job : jobs) assertEquals("/questions/accepted/" + RECEIPT, job.get());
+      assertEquals(100, f.requests.size());
+      var ids = new HashSet<String>();
+      for (var bytes : f.requests) {
+        assertEquals("same current body", text(bytes, 256, 4096));
+        assertEquals(token.token().toString(), ascii(bytes, 4352, 36));
+        assertTrue(ids.add(ascii(bytes, 24, 36)));
+      }
+      assertEquals(1, f.tokenIds.get());
+      assertEquals(
+          1,
+          f.security
+              .f
+              .repository
+              .find(WebSessionId.parse(rawSession))
+              .orElseThrow()
+              .attributes()
+              .operationTokens()
+              .size());
+      assertEquals(
+          new ReceiptReference(RECEIPT, 1, SUBMITTED), f.receipts.find(RECEIPT).orElseThrow());
+      f.erased();
+    }
+  }
+
+  @Test
+  void rcpt006GCurrentCompletionFailureAndInputContracts() throws Exception {
+    try (var f = new Fixture()) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "POST");
+      var id = WebSessionId.parse(request.getSession(false).getId());
+      var token = f.tokens.issue(id, "QSBREQ01");
+      f.afterReply = () -> f.security.f.failure = "open";
+      var response = new MockHttpServletResponse();
+      assertEquals(
+          "questions/new",
+          f.accepting()
+              .submit(
+                  params("question", "literal", "operation_token", token.token().toString()),
+                  actor,
+                  new ExtendedModelMap(),
+                  request,
+                  response));
+      assertEquals(503, response.getStatus());
+      f.security.f.failure = "";
+      assertTrue(
+          f.security
+              .f
+              .repository
+              .find(id)
+              .orElseThrow()
+              .attributes()
+              .operationTokens()
+              .getFirst()
+              .completedAt()
+              .isEmpty());
+      assertTrue(f.receipts.find(RECEIPT).isEmpty());
+      assertThrows(
+          NullPointerException.class,
+          () -> new QuestionController(null, f.security.handler, f.receipts, f.tokens));
+      assertThrows(
+          NullPointerException.class,
+          () -> new QuestionController(f.client, null, f.receipts, f.tokens));
+      assertThrows(
+          NullPointerException.class,
+          () -> new QuestionController(f.client, f.security.handler, null, f.tokens));
+      assertThrows(
+          NullPointerException.class,
+          () -> new QuestionController(f.client, f.security.handler, f.receipts, null));
+      assertThrows(
+          SessionStoreException.class,
+          () ->
+              f.accepting()
+                  .newForm(
+                      () -> "reader",
+                      new ExtendedModelMap(),
+                      request,
+                      new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.accepting()
+                  .newForm(null, new ExtendedModelMap(), request, new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () -> f.accepting().newForm(actor, null, request, new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.accepting()
+                  .newForm(actor, new ExtendedModelMap(), null, new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () -> f.accepting().newForm(actor, new ExtendedModelMap(), request, null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.accepting()
+                  .submit(
+                      null, actor, new ExtendedModelMap(), request, new MockHttpServletResponse()));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              f.accepting()
+                  .accepted(
+                      null, actor, new ExtendedModelMap(), request, new MockHttpServletResponse()));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              QuestionSubmitViewModel.newForm(
+                  actor, new SessionOperationToken("QDLREQ01", new UUID(1, 2), CLOCK.instant())));
+      assertThrows(NullPointerException.class, () -> QuestionSubmitViewModel.newForm(actor, null));
+      assertThrows(NullPointerException.class, () -> QuestionSubmitViewModel.newForm(null, token));
+      assertThrows(
+          NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, null, ""));
+      var form =
+          QuestionSubmitForm.bind(
+              params("question", "literal", "operation_token", token.token().toString()));
+      assertThrows(
+          NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, form, null));
+      form.close();
+      assertThrows(IllegalStateException.class, form::operationToken);
+      var reference = new ReceiptReference(RECEIPT, 1, SUBMITTED);
+      var data =
+          new QuestionDetailResponseData(
+              new QuestionId(1),
+              RECEIPT,
+              "reader",
+              AnswerState.UNANSWERED,
+              "literal",
+              Optional.empty(),
+              SUBMITTED,
+              Optional.empty());
+      assertThrows(
+          NullPointerException.class, () -> QuestionAcceptedViewModel.from(null, reference, data));
+      assertThrows(
+          NullPointerException.class, () -> QuestionAcceptedViewModel.from(actor, null, data));
+      assertThrows(
+          NullPointerException.class, () -> QuestionAcceptedViewModel.from(actor, reference, null));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              QuestionAcceptedViewModel.from(
+                  actor,
+                  reference,
+                  new QuestionDetailResponseData(
+                      new QuestionId(1),
+                      RECEIPT,
+                      "reader",
+                      AnswerState.UNANSWERED,
+                      "",
+                      Optional.empty(),
+                      SUBMITTED,
+                      Optional.empty())));
+    }
+  }
+
+  @Test
+  void rcpt006FRealSecuredHttpPostCsrfRefreshAndNoAnonymousSubmission() throws Exception {
+    for (String role : List.of("USER", "ADMIN")) {
+      reset();
+      try (var c = db.web();
+          var s = c.createStatement()) {
+        s.executeUpdate("delete from schubert_web_session.web_receipt_references");
+      }
+      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      try (var f = new Fixture();
+          var web =
+              new EmbeddedWebSecurityTest.Server(
+                  Files.createTempDirectory(root, "acceptance-http-"),
+                  false,
+                  db,
+                  Optional.of(api.provider),
+                  true,
+                  true,
+                  (mvc, invalid) -> {
+                    mvc.register(QuestionAcceptanceMvcConfiguration.class);
+                    mvc.addBeanFactoryPostProcessor(
+                        factory -> {
+                          factory.registerSingleton("questionWireClient", f.client);
+                          factory.registerSingleton("apiSessionInvalidHandler", invalid);
+                          factory.registerSingleton("receipts", f.receipts);
+                          factory.registerSingleton("tokens", f.tokens);
+                        });
+                  })) {
+        f.verifyNoTransaction = true;
+        f.security.f.clock.value = web.f.clock.value;
+        var loginPage = web.send("GET", "/login", null, null, true);
+        var initial = loginPage.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var csrf = loginPage.body().substring(6);
+        var login =
+            web.send("POST", "/login", initial, "username=reader&password=p&_csrf=" + csrf, true);
+        assertEquals(302, login.statusCode());
+        var cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var newForm = web.send("GET", "/questions/new", cookie, null, true);
+        assertEquals(200, newForm.statusCode());
+        assertTrue(
+            newForm.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
+        var dom = Jsoup.parse(newForm.body());
+        var operation = dom.select("input[name=operation_token]").val();
+        var protectedToken = dom.select("input[name=_csrf]").val();
+        assertFalse(protectedToken.isEmpty());
+        assertEquals(
+            403,
+            web.send(
+                    "POST",
+                    "/questions/new",
+                    cookie,
+                    "question=public&operation_token=" + operation,
+                    true)
+                .statusCode());
+        assertTrue(f.requests.isEmpty());
+        var body = "question=public&operation_token=" + operation + "&_csrf=" + protectedToken;
+        var submitted = web.send("POST", "/questions/new", cookie, body, true);
+        assertEquals(302, submitted.statusCode());
+        assertEquals(
+            "/questions/accepted/" + RECEIPT,
+            submitted.headers().firstValue("location").orElseThrow());
+        assertEquals(1, f.requests.size());
+        for (int n = 0; n < 2; n++) {
+          var result = web.send("GET", "/questions/accepted/" + RECEIPT, cookie, null, true);
+          assertEquals(200, result.statusCode());
+          assertEquals("質問受付完了", Jsoup.parse(result.body()).title());
+          assertEquals("QSDREQ01", ascii(f.requests.get(n + 1), 11, 8));
+        }
+        int sent = f.requests.size();
+        assertEquals(302, web.send("GET", "/questions/new", null, null, true).statusCode());
+        assertNotEquals(302, web.send("POST", "/questions/new", null, body, true).statusCode());
+        assertEquals(sent, f.requests.size());
+        f.erased();
+      }
+    }
+  }
+
+  @Test
+  void rcpt006CLostRedirectAndBlankWireCannotInventANewQuestion() throws Exception {
+    try (var f = new Fixture()) {
+      var actor = actor(UserRole.USER);
+      var request = f.authenticatedRequest(actor, "POST");
+      var session = WebSessionId.parse(request.getSession(false).getId());
+      var token = f.tokens.issue(session, "QSBREQ01");
+      var input = params("question", "literal", "operation_token", token.token().toString());
+      var lost =
+          new MockHttpServletResponse() {
+            @Override
+            public void setHeader(String name, String value) {
+              throw new IllegalStateException("synthetic lost response");
+            }
+          };
+      assertThrows(
+          IllegalStateException.class,
+          () -> f.accepting().submit(input, actor, new ExtendedModelMap(), request, lost));
+      var completed =
+          f.security
+              .f
+              .repository
+              .find(session)
+              .orElseThrow()
+              .attributes()
+              .operationTokens()
+              .getFirst()
+              .completedAt();
+      assertTrue(completed.isPresent());
+      assertEquals(
+          new ReceiptReference(RECEIPT, 1, SUBMITTED), f.receipts.find(RECEIPT).orElseThrow());
+      f.code = "0200";
+      f.security.f.clock.value = f.security.f.clock.value.plusSeconds(30);
+      var delivered = new MockHttpServletResponse();
+      assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, delivered));
+      assertEquals(302, delivered.getStatus());
+      assertEquals("/questions/accepted/" + RECEIPT, delivered.getHeader("Location"));
+      assertEquals(
+          completed,
+          f.security
+              .f
+              .repository
+              .find(session)
+              .orElseThrow()
+              .attributes()
+              .operationTokens()
+              .getFirst()
+              .completedAt());
+      assertEquals(1, f.tokenIds.get());
+      f.responder =
+          (id, bytes) -> {
+            var result = f.standard(id, bytes);
+            put(result, 370, 4096, "");
+            return result;
+          };
+      var blank = new MockHttpServletResponse();
+      assertNull(
+          f.accepting()
+              .accepted(
+                  RECEIPT,
+                  actor,
+                  new ExtendedModelMap(),
+                  f.security.mock("GET", "/questions/accepted/" + RECEIPT),
+                  blank));
+      assertEquals(503, blank.getStatus());
+      var empty =
+          new QuestionDetailResponseData(
+              new QuestionId(1),
+              RECEIPT,
+              "reader",
+              AnswerState.UNANSWERED,
+              "",
+              Optional.empty(),
+              SUBMITTED,
+              Optional.empty());
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> QuestionDetailViewModel.from(actor, new QuestionId(1), empty));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              QuestionAcceptedViewModel.from(
+                  actor, new ReceiptReference(RECEIPT, 1, SUBMITTED), empty));
+      f.erased();
+    }
+  }
+
   private static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final AtomicLong ids = new AtomicLong();
+    final AtomicLong tokenIds = new AtomicLong();
+    final ThreadLocal<AtomicInteger> ownedConnections = ThreadLocal.withInitial(AtomicInteger::new);
+    final DataSource ownedSource =
+        DataSource.class.cast(
+            Proxy.newProxyInstance(
+                DataSource.class.getClassLoader(),
+                new Class<?>[] {DataSource.class},
+                (proxy, method, args) -> {
+                  if (!method.getName().equals("getConnection"))
+                    throw new AssertionError("unexpected owned source call");
+                  var connection = security.f.source.getConnection();
+                  var current = ownedConnections.get();
+                  current.incrementAndGet();
+                  return Connection.class.cast(
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (p, operation, values) -> {
+                            try {
+                              return operation.invoke(connection, values);
+                            } catch (InvocationTargetException failure) {
+                              throw failure.getCause();
+                            } finally {
+                              if (operation.getName().equals("close")) current.decrementAndGet();
+                            }
+                          }));
+                }));
+    final SessionOperationTokenLifecycle tokens =
+        new SessionOperationTokenLifecycle(
+            new EncryptedWebSessionRepository(ownedSource, security.f.codec, security.f.clock),
+            security.f.clock,
+            () -> new UUID(9, tokenIds.incrementAndGet()));
+    volatile boolean failReceipt, verifyNoTransaction;
+    volatile Runnable afterReply = () -> {};
+    final ReceiptReferenceRepository receipts =
+        new ReceiptReferenceRepository(
+            DataSource.class.cast(
+                Proxy.newProxyInstance(
+                    DataSource.class.getClassLoader(),
+                    new Class<?>[] {DataSource.class},
+                    (proxy, method, args) -> {
+                      if (!method.getName().equals("getConnection"))
+                        throw new AssertionError("unexpected receipt source operation");
+                      if (failReceipt) throw new SQLException("synthetic receipt failure");
+                      return ownedSource.getConnection();
+                    })));
     final List<byte[]> requests = new CopyOnWriteArrayList<>(),
         buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
@@ -1024,16 +1832,48 @@ class QuestionControllerTest {
         new QuestionWireClient(
             wire,
             (id, bytes) -> {
+              if (verifyNoTransaction) assertEquals(0, ownedConnections.get().get());
               requests.add(bytes.clone());
               buffers.add(bytes);
               assertTrue(wire.onReply(id, responder.apply(id, bytes)));
+              afterReply.run();
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             Duration.ofSeconds(1));
     final QuestionController controller = new QuestionController(client, security.handler);
 
+    QuestionController accepting() {
+      verifyNoTransaction = true;
+      return new QuestionController(client, security.handler, receipts, tokens);
+    }
+
+    MockHttpServletRequest authenticatedRequest(SessionPrincipal actor, String method)
+        throws Exception {
+      var snapshot = security.authenticated(actor);
+      var request = security.mock(method, "/questions/new");
+      request.setSession(new MockHttpSession(null, snapshot.sessionId().cookieValue()));
+      return request;
+    }
+
+    AnnotationConfigWebApplicationContext acceptanceMvc() {
+      verifyNoTransaction = true;
+      var context = new AnnotationConfigWebApplicationContext();
+      context.setServletContext(new MockServletContext());
+      context.register(QuestionAcceptanceMvcConfiguration.class);
+      context.addBeanFactoryPostProcessor(
+          factory -> {
+            factory.registerSingleton("questionWireClient", client);
+            factory.registerSingleton("apiSessionInvalidHandler", security.handler);
+            factory.registerSingleton("receipts", receipts);
+            factory.registerSingleton("tokens", tokens);
+          });
+      context.refresh();
+      return context;
+    }
+
     byte[] standard(UUID id, byte[] request) {
+      if (ascii(request, 11, 8).equals("QSBREQ01")) return submitReply(id, request);
       boolean detail = ascii(request, 11, 8).equals("QSDREQ01"),
           success = code.equals("0000") || code.equals("0200");
       String selected = detail ? "" : text(request, 576, 12);
@@ -1103,6 +1943,33 @@ class QuestionControllerTest {
           if (normalState.equals("ANSWERED")) put(bytes, at + 643, 17, "20261003085900000");
         }
       }
+      return bytes;
+    }
+
+    byte[] submitReply(UUID id, byte[] request) {
+      // UI236 §7 independent 320-byte reply, never the Production encoder for expected values.
+      byte[] bytes = new byte[320];
+      Arrays.fill(bytes, (byte) ' ');
+      put(bytes, 0, 8, "SCHBNK01");
+      put(bytes, 8, 3, "001");
+      put(bytes, 11, 8, "QSBRSP01");
+      put(bytes, 19, 3, "001");
+      put(bytes, 22, 1, "S");
+      put(bytes, 23, 1, "A");
+      put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
+      put(bytes, 60, 36, id.toString());
+      put(bytes, 96, 17, "20261003090000000");
+      put(bytes, 113, 64, ascii(request, 113, 64));
+      number(bytes, 177, 4, 256);
+      number(bytes, 181, 6, 64);
+      number(bytes, 187, 6, 0);
+      number(bytes, 193, 6, 0);
+      number(bytes, 199, 9, 320);
+      put(bytes, 208, 4, code);
+      boolean success = code.equals("0000") || code.equals("0200");
+      if (success) put(bytes, 256, 26, RECEIPT);
+      number(bytes, 282, 12, success ? 1 : 0);
+      number(bytes, 294, 17, success ? 20261003085800000L : 0);
       return bytes;
     }
 

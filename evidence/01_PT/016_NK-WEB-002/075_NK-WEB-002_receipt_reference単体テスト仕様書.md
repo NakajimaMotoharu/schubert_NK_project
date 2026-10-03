@@ -2,6 +2,8 @@
 
 PG447/PG-D357、QA048/SSC169/175。RD FUN001/AUT004/DAT009/OPS009、UI226/236/241/242/251、SS313/331§9.4/332/341/343。製造と独立PTを同変更群で進め、未実行は合格にしない。
 
+RCPT006資源契約補足：フォームbindは非null final constructor/不変char[]、closeは例外を投げず本文を消去する。HTTPの全return/既知・未知例外を明示finallyへ収束させ、SQL/JMSの未知closeとは混同しない。lost-responseの未知例外は伝播し、完成印/locatorを保持して同UUID再操作を検証する。accepted/detailの空M4096本文はtyped API結果を使っても拒否し、escape・200codepoint/現在owner/3値を正常oracleから独立検査する。生成分岐のcoverage除外や人工的null資源への差替えを行わない。
+
 | Test ID | Program/class/method | 独立期待値・fixture・操作 |
 |---|---|---|
 | RCPT001 | ReceiptReference constructor | literal26文字Crockford ID・N12境界1/999999999999・UTC millisecond。null/未知文字/長さ25,27/0/上限+1/submillisecondを拒否、秘密toStringなし |
