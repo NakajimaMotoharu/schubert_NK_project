@@ -479,7 +479,7 @@ final class LogCleanupProgressBoundaryTest {
               "select string_agg(version,',' order by installed_rank) from"
                   + " schubert_meta.flyway_schema_history where success and version is not null"));
       assertEquals(
-          "156|23|30|23|1",
+          "159|23|30|24|1",
           scalar(
               c,
               "select count(*) filter(where contype='c')||'|'||count(*) filter(where"

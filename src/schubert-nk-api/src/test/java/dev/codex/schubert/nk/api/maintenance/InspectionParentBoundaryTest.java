@@ -330,7 +330,7 @@ final class InspectionParentBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(25, files.size());
+    assertEquals(26, files.size());
     for (int i = 0; i < 18; i++) {
       assertTrue(files.get(i).getFileName().toString().startsWith("V%03d__".formatted(i + 1)));
       assertEquals(

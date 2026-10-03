@@ -678,7 +678,7 @@ final class StepCleanupBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(25, files.size());
+    assertEquals(26, files.size());
     for (int i = 0; i < 24; i++)
       assertEquals(
           expected.get(i),
@@ -687,27 +687,27 @@ final class StepCleanupBoundaryTest {
                   MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.get(i)))));
     assertEquals(
         "V023__startup_schema_history_projection.sql", files.get(22).getFileName().toString());
-    assertEquals(
-        "V025__question_dlq_outbox_identity.sql", files.getLast().getFileName().toString());
+    assertEquals("V025__question_dlq_outbox_identity.sql", files.get(24).getFileName().toString());
     assertEquals(
         "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
         HexFormat.of()
             .formatHex(
-                MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.getLast()))));
+                MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(files.get(24)))));
+    assertEquals("V026__web_receipt_references.sql", files.getLast().getFileName().toString());
     assertEquals(
         List.of(
             "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
             "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024",
-            "025"),
+            "025", "026"),
         MigrationInventory.VERSIONS);
     try (var c = db.admin()) {
       assertEquals(
-          "25|1",
+          "26|1",
           scalar(
               c,
               "select (select count(*) from schubert_meta.flyway_schema_history where success and type='SQL' and version is not null)||'|'||(select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null)"));
       assertEquals(
-          "23",
+          "24",
           scalar(
               c,
               "select count(*) from information_schema.tables where table_schema in ('schubert','schubert_web_session') and table_type='BASE TABLE'"));

@@ -531,8 +531,8 @@ if int(identifier[2:5]) >= 447:
         'appendOnly': 'V001..025 unchanged; V026 QA048 technical three-value locator and SSC175 atomic shared cleanup',
         'receiptOracle': '075 RCPT001..005: literal SQL, independent role/catalog, physical orphan, bounded/locked/backup/run/rollback and fault matrix'})
     manifest['testIds'].append('RCPT001..005')
-    manifest['bugs'].extend(['BUG-608', 'BUG-609', 'BUG-610'])
-    manifest['ykt'].extend(['YKT-428', 'YKT-429', 'YKT-430'])
+    manifest['bugs'].extend(['BUG-608', 'BUG-609', 'BUG-610', 'BUG-611'])
+    manifest['ykt'].extend(['YKT-428', 'YKT-429', 'YKT-430', 'YKT-431'])
     manifest['ssc'].append('SSC-175')
     manifest['trigger'] = 'PG-D357/QA048/SSC175 V026 immutable locator, JDBC unknown-close precedence, atomic shared cleanup and approved inventory: fresh full-six regression'
     manifest['limitations'] = [

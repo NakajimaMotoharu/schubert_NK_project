@@ -74,7 +74,8 @@ final class DatabaseMigrationTest {
           "maintenance_cleanup_inbox_progress", 1000,
           "maintenance_cleanup_log_progress", 1000,
           "maintenance_cleanup_logs", 10000,
-          "maintenance_cleanup_batch_runs", 1000);
+          "maintenance_cleanup_batch_runs", 1000,
+          "maintenance_cleanup_web_receipt_references", 1000);
   private static final Path MODULE = Path.of("").toAbsolutePath().normalize();
 
   private static Path pgRoot;
@@ -164,7 +165,7 @@ final class DatabaseMigrationTest {
 
   @Test
   @Order(2)
-  @DisplayName("PT-DB-002 schemas, pg_trgm and 22 tables")
+  @DisplayName("PT-DB-002 schemas, pg_trgm and 24 tables (SSC175)")
   void schemasExtensionAndTablesMatchTheIndependentCatalog() throws SQLException {
     assertEquals(
         Set.of("schubert", "schubert_meta", "schubert_web_session"),
@@ -220,7 +221,8 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-004 named constraints, FK delete actions and deferred trigger")
   void constraintsForeignKeysAndDeferredTriggerAreComplete() throws SQLException {
     assertEquals(
-        "156|23|30|23|1",
+        // SS331 §9.4 adds three checks and one PK, not a business FK or unique constraint.
+        "159|23|30|24|1",
         queryString(
             ADMIN,
             "select count(*) filter(where contype='c')||'|'||count(*) filter(where contype='f')||'|'||"
@@ -1078,6 +1080,7 @@ final class DatabaseMigrationTest {
             "migration/V023__startup_schema_history_projection.sql",
             "migration/V024__notification_received_state.sql",
             "migration/V025__question_dlq_outbox_identity.sql",
+            "migration/V026__web_receipt_references.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1904,7 +1907,8 @@ final class DatabaseMigrationTest {
         "schubert_web_session.web_http_sessions",
         "schubert.log_cleanup_progress",
         "schubert_web_session.pending_context_revocations",
-        "schubert_web_session.web_log_outbox");
+        "schubert_web_session.web_log_outbox",
+        "schubert_web_session.web_receipt_references");
   }
 
   private static Set<String> expectedIdentityColumns() {
@@ -1969,6 +1973,7 @@ final class DatabaseMigrationTest {
         "ix_pending_context_revocations_expires",
         "ix_web_log_outbox_dispatch",
         "ix_web_log_outbox_sent_cleanup",
+        "ix_web_receipt_references_question_id",
         "ix_script_files_chapter_title_trgm",
         "ix_speakers_name_trgm",
         "ix_script_entries_body_search_trgm",
@@ -2064,6 +2069,9 @@ final class DatabaseMigrationTest {
         "schubert_web_session.web_log_outbox",
         set(
             "id message_id correlation_id layout_id layout_version payload_ciphertext key_version status attempt_count next_attempt_at created_at sent_at last_error_code lease_owner lease_until"));
+    // QA048/SS331 §9.4: locator only; no owner, body, token, snapshot or identity sequence.
+    columns.put(
+        "schubert_web_session.web_receipt_references", set("receipt_id question_id submitted_at"));
     return columns;
   }
 

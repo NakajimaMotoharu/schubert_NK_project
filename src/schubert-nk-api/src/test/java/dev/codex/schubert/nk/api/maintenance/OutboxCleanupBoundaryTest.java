@@ -348,7 +348,8 @@ final class OutboxCleanupBoundaryTest {
           s.execute("alter function " + SIGNATURE + " set " + setting);
         }
         assertEquals(
-            "7",
+            // SSC175 adds one fixed function; one deliberately altered function is excluded.
+            "8",
             scalar(
                 c,
                 "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
