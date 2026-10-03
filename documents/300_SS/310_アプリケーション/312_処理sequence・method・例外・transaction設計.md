@@ -119,7 +119,7 @@ Password `char[]`はencode照合直後にzero fillする。Login Message ID重�
 3. API成功/冪等成功後、WebはHTTP session rowとcookieを破棄する。
 4. MQ/API障害時もWeb sessionを破棄し、暗号化contextを`pending_context_revocations`へ保存してrecovery taskが再送する。
 
-`ContextRevocationRetrier.retryDue(Instant now, int limit)`はdue rowを`FOR UPDATE SKIP LOCKED`で最大100件取得し、成功またはAPI expiry確認後だけ削除する。
+`ContextRevocationRetrier.retryDue(Instant now, int limit)`はdue rowを`FOR UPDATE SKIP LOCKED`で最大100件claimし、唯一lease UUID/期限を確定して短DB transactionを閉じてからJMSへ送信する。更新/削除は自分の現在leaseをCASし、検証済0000/0200だけを自動削除根拠とする。expires_at=NULL/推測期限/一般0102/不明/復号不能は保持・警告。初期5秒/30秒/5分後は15分、attempt_count=100飽和後も継続し、IT/ST性能問題時に間隔を見直す（QA050、SS314 §10）。JMS待機中にDB接続/lockを保持しない。
 
 SSC-011: LOGREQ01は通常のactive context verifierを前置しない。失効専用serviceが同じraw hashでUser→sessionの順にlockし、既失効ならaccount状態/期限に関係なく元の失効時刻と0200だけを返す。この経路からactorを業務認可へ渡さず、idle延長もしない。未失効はaccount ACTIVEかつexpires_at>nowだけをLOGOUTへ更新し0000、未知/期限切れ/無効accountは0102、DB障害は9000。初回・冪等成功の監査もcaller transactionに参加する。
 

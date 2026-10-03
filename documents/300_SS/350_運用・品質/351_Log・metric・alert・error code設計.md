@@ -286,3 +286,7 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 | 2026-08-31 | 横断監査でQA-042/UIC-002のpaging/address memory metricと、容量率alertのpending oracleを追加。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Queue容量率、paging開始、page-full、disk-fullのalert分母と動作を確定。 |
 | 2026-09-03 | SSC-005を反映し、Security holdのID/期限、対象category、非公開条件を具体化。 |
+
+## QA-050承認反映：Logout継続再試行の観測（2026-10-03）
+
+15分継続再試行の送信件数/秒・残件数・最古滞留時間・claim/lease競合・結果code/復号不能・解消件数・Logout要求から確定失効までの時間を観測する。IT/STでは同期画面p95/MQ待ち、API/DB CPU・lock待ち・接続pool、Inbox件数/容量・WAL、Broker pending/journal/diskを同じ負荷条件で測定する。raw/hash/contextや暗号本文をmetric/logへ含めない。滞留と鍵保持は警告・正規復旧へ引継ぎ、attempt100を解消扱いにしない。間隔の変更判定・再試験はSS354のQA050節に従う。

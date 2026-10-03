@@ -483,8 +483,9 @@ SSC055/PG163（先行898cc267）の親step Repository契約:
 ### 9.2 `schubert_web_session.pending_context_revocations`
 
 `id uuid PK`、`context_ciphertext bytea NN`、`key_version varchar(16) NN`、`requested_at timestamptz NN`、
-`attempt_count integer NN default 0 check 0..100`、`next_attempt_at/expires_at timestamptz NN`、`last_error_code varchar(64)`、
+`attempt_count integer NN default 0 check 0..100`、`next_attempt_at timestamptz NN`、`expires_at timestamptz NULL`（NULL=現在API期限未確認）、`last_error_code varchar(64)`、
 `lease_owner varchar(64)`、`lease_until timestamptz`。Index `(next_attempt_at,requested_at)`、`expires_at`。
+QA050承認によりexpires_at NNだけを実末尾のappend-only migrationで解除し、旧V003等は変更しない。既存値を自動削除proofにせず、未知をLogin/requested_at+8hで補完しない。既定列/lease/index/権限を維持し、attempt_countは100飽和後も継続する。row削除は自分のlease CAS＋検証済0000/0200だけとし、期限NULL/経過・一般0102・復号不能をcleanupで削除しない。初期backoff後15分の継続再試行とIT/ST性能問題時の間隔調整はSS314/354に従う。
 
 ### 9.3 `schubert_web_session.web_log_outbox`
 

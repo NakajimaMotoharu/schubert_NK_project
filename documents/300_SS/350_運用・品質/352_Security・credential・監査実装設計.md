@@ -267,3 +267,7 @@ Critical DB audit INSERT失敗は対応業務transactionをrollback。Web REQUES
 | 2026-08-31 | Password hashを最大256 byte全長に対応する`{pbkdf2-v1}`へ是正し、世代IDとparameterを固定。 |
 | 2026-08-31 | Dump用DB role/credential分離案と権限負testをQA-043/UIC-003回答待ちで追加。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用role/credentialとbatch roleの相互権限拒否を確定。 |
+
+## QA-050承認反映：revoke鍵の退役条件（2026-10-03）
+
+期限不明/一般0102/復号不能の失効再試行rowを保持するため、当該rowの復号に必要な旧revoke keyは参照rowとborrowerがともに0と確認できるまで退役しない。100回飽和や推測期限経過を退役proofにしない。正常復号時のcurrent再暗号化は既存NKENC1/AAD契約と短transactionを守り、復号不能時に別contextを生成/送信しない。有限自動鍵退役は保証せず正規復旧・運用確認を行う。Web session/API contextの鍵と混用しない。独立rotation/lease/close/停止順/restore試験まで完了認定しない。

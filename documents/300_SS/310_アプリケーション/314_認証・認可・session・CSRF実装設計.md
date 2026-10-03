@@ -317,8 +317,9 @@ SSC-031: User管理更新では312 §6/332 §12の認証前lock preludeを適用
 ## 10. Logout失効再試行
 
 `pending_context_revocations`にはcontext rawをWeb session keyとは別のrevoke queue keyでAES-GCM暗号化し、key version、requested/
-next attempt/expiry、error codeだけを保存する。Backoffは5秒、30秒、5分、その後15分上限でAPI session expiryまで継続する。
-成功または保存済みAPI session expiry経過確認後にrowを削除する。Table/outbox/logへraw/hashを出さない。
+next attempt/任意expiry、error codeとSS331既定claim/lease metadataだけを保存する。現在API期限を取得できない場合expires_at=NULLとし、初回Login時刻やrequested_at+8hで補わない。Backoffは5秒、30秒、5分、その後の継続再試行は15分とし、attempt_countは100で飽和するが再試行を打切らない（QA050）。
+自動削除は検証済0000/0200の確定失効応答だけとする。一般0102/未知/期限経過/復号不能は保持・固定警告し、有限自動回収を保証しない。復号不能なcontextを捏造して送信せず、正規鍵/状態復旧後の再試行へ引継ぐ。fresh MessageID・元context不変、唯一claim/lease CASとJMS待機中DB解放を守る。残row/borrowerが0になるまで必要な旧revoke鍵を保持する。Table/outbox/logへraw/hashを出さない。
+queue登録とlocal row破棄を既存短transactionへ結線し、登録/commit/close失敗でも独立local破棄を試みる。永続再試行または必要なDB削除が未成立なら成功表示せず既定503へ連携する。停止はHTTP drain→retry worker join→replies→外側DB/JMS/keyの順。IT/STで通常業務との混在/残件増大/集中/復帰性能を検証し、問題があれば間隔を変更して同条件で再試験する。試験・調整の記録はSS354のQA050節に従う。
 
 ## 11. Key・credential rotation
 
@@ -382,4 +383,8 @@ current encoderはformatVersion=2を書く。既存認証/CSRF/SavedRequestのal
 
 issue/require/completeはfresh current-rowを既存短mutateで読み、現在listへ原子的に適用する。完成は検証済0000/0200の受信後、DB/JMSを同時に保持せず、初回だけcompletedAtを書き同tuple/既完成時刻を変更しない。不在/退役tokenをcompleted処理で再挿入せず、古いrequest snapshotで完成をpendingへ巻き戻したり別tokenを消したりしない。issueだけが必要時に最古consumedを1件退役する。現在rowが失効・削除済みなら再生成しない。commit/close不明は成功化せず、次回の現在row再読で確認する。
 
-独立PTは全pending10拒否、pending不退役、consumedのみ必要時1件退役、同時刻順、完成時刻first-write、302応答喪失後同token再操作、退役409/API0/新UUID0、100並行とstale snapshot、v1/v2独立golden・null/未知/破損、commit/close不明、失効row非再生成を含む。旧reader切戻し時のv2失効・再LoginはSS343補足に従う。QA050のpending logout期限NULL/無期限retry案は別の回答待ちであり、このv2承認へ含めない。
+独立PTは全pending10拒否、pending不退役、consumedのみ必要時1件退役、同時刻順、完成時刻first-write、302応答喪失後同token再操作、退役409/API0/新UUID0、100並行とstale snapshot、v1/v2独立golden・null/未知/破損、commit/close不明、失効row非再生成を含む。旧reader切戻し時のv2失効・再LoginはSS343補足に従う。QA050のpending logout期限NULL/継続retryは別途2026-10-03承認され§10へ反映した。JSON v2のQA049とは独立した実装/PT/IT/ST確認を必要とする。
+
+## QA-050承認反映：API expired rowの内部fence（2026-10-03）
+
+API Logoutで既存の未失効sessionが期限切れの場合、User→sessionの既定lock順で取得した現在状態と取得後の現在時刻を再検証し、EXPIRED/revoked fenceと監査・既定0102 ERROR snapshotを同transactionで確定する。古いnowによる遅延認証の許可や、wireの一般0102を永久失効proofにする変更は行わない。既失効0200は真正保存状態/日時を検証して返す既存経路を守り、Web rowの自動削除は実際に検証済0000/0200を受けた場合だけとする。User lock/業務TOUCH/Logout/cleanup競合、rollback/commit-close不明、expiry±1µs、監査・ERROR snapshotと応答不変更を独立PTし、未実証を実装済みとしない。

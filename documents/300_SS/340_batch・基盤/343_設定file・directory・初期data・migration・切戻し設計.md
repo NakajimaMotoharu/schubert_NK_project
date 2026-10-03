@@ -817,4 +817,8 @@ QA048のweb_receipt_references、固定cleanup function、明示Web/backup/batch
 
 QA049はsession暗号化内部JSON current write v2/legacy read v1とし、NKENC1/AAD/DDLを変更しない。v2書込み後にv1専用旧readerへ切戻すと、そのreaderはv2を正常復元できず既存fail-closed処理で失効し、利用者の再Loginが必要となる。切戻し前に影響session件数・reader/writer version・残るoperation tokenと業務側既存確定結果を確認し、v2からv1への完成印抹消やpending偽装で回避しない。業務Inbox/UKを削除せず、自動新token再操作をしない。混在reader/writerによる完成印喪失がない配備/切戻しを隔離PTで検証する。
 
-QA050の期限NULL・無期限Logout再試行/key保持は別回答待ち。この設計確定とmain公開を、その案の承認/DDL適用やWeb full readinessと読み替えない。
+QA050は2026-10-03に15分継続再試行とIT/ST性能問題時の間隔変更を利用者が承認した。期限NULL・保持/警告・旧revoke鍵保持はSS314/331の確定条件へ反映し、実装/DDL適用/PT/IT/STとWeb full readinessは未完了として管理する。
+
+## QA-050承認反映：期限NULL migration・間隔調整（2026-10-03）
+
+pending_context_revocations.expires_atのNN解除は旧migration不変・実末尾の次versionでappend-only導入する。既存暗号row/attempt/claim/lease/index/grantを保全し、未確認期限を8h等で補完せず期限だけの自動DELETEを停止する。nullable未対応の旧reader/cleanupへ切戻す場合は互換性と残row保全を事前確認し、NULLを推測値へ変えたりrow削除/旧鍵廃棄で回避しない。初期5秒/30秒/5分と継続15分で実装し、IT/STで性能問題が確認されたら利用者の承認方針内で間隔を調整する。変更値・測定根拠・対象設定/source・反映/切戻し手順、失効確認遅延への影響を記録し、同条件再試験後にUI/SS/台帳とmainの確定設計を更新する。試験前に根拠なく初期15分を別値へ変更しない。
