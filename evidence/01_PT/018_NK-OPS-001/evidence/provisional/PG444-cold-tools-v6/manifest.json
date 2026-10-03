@@ -1,0 +1,145 @@
+{
+  "id": "PG444-cold-tools-v6",
+  "formal": false,
+  "nativeAccepted": false,
+  "sourceCommit": "32b0b4fd6cc8421bb96197fb4bd4d961aa30e581",
+  "sourceDirty": true,
+  "branch": "dev-foundation",
+  "timeUtc": "2026-10-03T17:10:44.159351+00:00",
+  "environment": "Linux/JDK25.0.4; javac -Xlint:all -Werror; native FD allowed",
+  "command": "WorkPG379/pg444_tools_v6.sh (cold3) and pg444_tools_v4.sh (pair1)",
+  "runtimeProductionSource": "91b010509e715e2b097c955d04f21c23f3529966",
+  "runtimeProductionLabel": "cold3: PG430 archived actual classes; pair1: PG443 fixed2b418 classes; no common formal source claim",
+  "tests": [
+    {
+      "testId": "PG444-COLD-001",
+      "exitCode": 0,
+      "independentAssertions": 412,
+      "actual": "PG428_COLD_BOOT_TOOL independentAssertions=412 success=true productionTestCount=0",
+      "logSha256": "96c88f3bd2b06ac1d125139fda1d666a4a34c805dfb050cf3867180ad3652b07"
+    },
+    {
+      "testId": "PG444-TRANSFER-001",
+      "exitCode": 0,
+      "independentAssertions": 21,
+      "actual": "PG444_TRANSFER_PRESERVATION success=true independentAssertions=21 productionTestCount=0",
+      "logSha256": "3d35199629c3054e0ca2bae1a14bdd55339b48d759e003a4c760c42b0f770227"
+    },
+    {
+      "testId": "PG444-OWNERSHIP-001",
+      "exitCode": 0,
+      "independentAssertions": 25,
+      "actual": "PG444_COLD_OWNERSHIP success=true independentAssertions=25 productionTestCount=0",
+      "logSha256": "a65710311ff2f3c38b2149a46bf9cecd4e8921f3207505751d6de9978d47fa51"
+    },
+    {
+      "testId": "ROOTPAIR008-TOOL",
+      "exitCode": 0,
+      "independentAssertions": 94,
+      "actual": "PG431_PAIR_TOOL success=true independentAssertions=94 productionTestCount=0 nativeAuthorityClaimed=false",
+      "logSha256": "e3100f4f52002543285340f459e9799f7590f15f3e60417750264cddf2f54215"
+    }
+  ],
+  "productionTestCount": 0,
+  "compileWarnings": 0,
+  "exitCode": 0,
+  "sourceFiles": [
+    {
+      "path": "tools/quality/vm/050_s1/Pg428ColdBootPreparation.java",
+      "sha256": "3e66fd2d102610e946844a8422dd1d3c0aed10633a07823273e8274fc80634ac"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg428ColdBootPreparationTest.java",
+      "sha256": "be5d53e24f9c052cac92f3c6a6288c996408c5a429965f644a502682e68fc2b7"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg431KnownPairRecovery.java",
+      "sha256": "0383234cc89cc066645a76e3d4645b0c0921d347d15ee905e53432fd7363fa2b"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg431KnownPairRecoveryTest.java",
+      "sha256": "eaddbd51225fbe46a587b8f28b8ed93691a5bfab09ee20d3c2d3097a8e8538c8"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg444TransferPreservationTest.java",
+      "sha256": "ef314e9d8f8a06eeb3f636d0025f8e5b9c94ef01378415d2f9b385585831924a"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg444ColdOwnershipTest.java",
+      "sha256": "377de4cb15d3293faa9f674436e9c674bb80360677441e545424a4b2d25416be"
+    }
+  ],
+  "classes": [
+    {
+      "name": "Pg428ColdBootPreparation.class",
+      "sha256": "428a85e0f9137937059e843ebc0e25c7eef07b42b2e4976645fd16fe7682549a"
+    },
+    {
+      "name": "Pg428ColdBootPreparationTest.class",
+      "sha256": "04f548bccf70eaf3fe55fb793b00f29c7b244cb35fc49253094ca7302a9df874"
+    },
+    {
+      "name": "Pg444ColdOwnershipTest$Work.class",
+      "sha256": "75619a6c55d41f376fbeaa3ed10407dd8f88eee464a64bc341dbaf230ca53b41"
+    },
+    {
+      "name": "Pg444ColdOwnershipTest.class",
+      "sha256": "616e7e6438de8505c9f39daee322b713603bb4ef4d4477d6ee49d0053ae61d19"
+    },
+    {
+      "name": "Pg444TransferPreservationTest$Faults.class",
+      "sha256": "141ef3c6d93b764c70be9a9e9362466bbe558c1ef8c3134977c4c3d8065319d0"
+    },
+    {
+      "name": "Pg444TransferPreservationTest$Work.class",
+      "sha256": "0ec378bc13d0ad52ac9c3195a602e84f7c735837cb81daae8310320045347cfd"
+    },
+    {
+      "name": "Pg444TransferPreservationTest.class",
+      "sha256": "eda7792171c43e3759816d600a605aa92d81bb1f50c66b6013716f11bbdafdfb"
+    }
+  ],
+  "bugs": [
+    "BUG-544",
+    "BUG-595"
+  ],
+  "ykt": [
+    "YKT-388",
+    "YKT-419"
+  ],
+  "ssc": [
+    "SSC-174"
+  ],
+  "independentOracle": "literal full18 values/role policies, empty and abc known SHA vectors, 4800 public spaces JCE independent hash, held inode replacement, exact exception identity/interrupt, actual historical watch hash only for correlation",
+  "beforeFailure": {
+    "exitCode": 1,
+    "path": "WorkPG379/pg444-cold-before-repro.log",
+    "sha256": "f67acf0786c40b60afd935c2d1d47c914c9cbd5fafbbe79bafbf9686189c70fe"
+  },
+  "otherNonpassingRuns": [
+    {
+      "command": "initial javac omitted provided annotations",
+      "result": "compile failed, PT not run"
+    },
+    {
+      "command": "pair v3 runtime omitted API classes",
+      "result": "NoClassDefFoundError, not accepted"
+    },
+    {
+      "command": "v5 compiled later PairEvidence tool against PG430 old ABI",
+      "result": "compile failed, PT not run; cold-only v6 explicitly excludes later Pair tool"
+    },
+    {
+      "command": "Transfer v2 invalid calendar negative omitted DateTimeException catch",
+      "result": "exit1, test corrected; production rejection was correct",
+      "sha256": "d2e13e620409c1ad28d690a97ea3966a9caa416f5cdd40d1209ef860465aefa5"
+    }
+  ],
+  "coverage": "operator assertions only; no Production/native coverage-100 claim",
+  "limitations": [
+    "native M/A/advisory/new INVALID-only preparation not yet run",
+    "old UNKNOWN/close remains unknown; no old intent reconstructed or retired",
+    "whole PG/PT/CHR/formal1964PT53scope unchanged"
+  ],
+  "redaction": "public test result and hash only; private watch/DB/epoch/backup bytes omitted"
+}

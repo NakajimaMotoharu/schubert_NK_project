@@ -180,7 +180,8 @@ public final class Pg431KnownPairRecovery {
           byte[] dbRaw=Pg425KnownApiRecovery.command(Pg425KnownApiRecovery.READBACK_SQL.getBytes(StandardCharsets.US_ASCII),"/usr/bin/sudo","-n","-u","postgres","/usr/bin/psql","-X","-v","ON_ERROR_STOP=1","-d","schubert_nk","-f","-");save("all14-db-before.log",dbRaw);
           var backup=Pg407FailedRootRecovery.backupSnapshot();save("backup-before.log",backup.toString().getBytes(StandardCharsets.UTF_8));
           var bytes=startup();for(var item:bytes.entrySet())save(item.getKey(),item.getValue());
-          var fixture=Pg425KnownApiRecovery.fixtureSnapshot();save("fixture-before.log",fixture.getBytes(StandardCharsets.UTF_8));
+          // BUG544/SSC174: preserve valid normal nonempty Transfer, not the old diagnostic empty fixture.
+          var fixture=Pg428ColdBootPreparation.fixtureSnapshot();save("fixture-before.log",fixture.getBytes(StandardCharsets.UTF_8));
           physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());
           // BUG543/YKT387: full host BOM requires an immutable candidate, not just file modes.
           // Freeze only here, inside the same M/A and authenticated complete terminal set.
@@ -191,14 +192,14 @@ public final class Pg431KnownPairRecovery {
             if(!pair.equals(expected))throw new IllegalStateException("same borrowed pair required");
             physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);
             if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot())
-                || !fixture.equals(Pg425KnownApiRecovery.fixtureSnapshot()))throw new IllegalStateException("preservation drift");
+                || !fixture.equals(Pg428ColdBootPreparation.fixtureSnapshot()))throw new IllegalStateException("preservation drift");
             for(var item:bytes.entrySet())if(!item.getKey().endsWith(".start.intent") && !item.getKey().equals("permit-start.intent")
                 && !Arrays.equals(item.getValue(),Pg410KnownAuthRecovery.material(STARTUP.resolve(item.getKey()),1024)))throw new IllegalStateException("old artifact changed");
             return Boolean.TRUE;
           }));
           physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);
           if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot())
-              || !fixture.equals(Pg425KnownApiRecovery.fixtureSnapshot()) || !Arrays.equals(dbRaw,Pg425KnownApiRecovery.command(Pg425KnownApiRecovery.READBACK_SQL.getBytes(StandardCharsets.US_ASCII),"/usr/bin/sudo","-n","-u","postgres","/usr/bin/psql","-X","-v","ON_ERROR_STOP=1","-d","schubert_nk","-f","-")))throw new IllegalStateException("post preservation drift");db.rollback();
+              || !fixture.equals(Pg428ColdBootPreparation.fixtureSnapshot()) || !Arrays.equals(dbRaw,Pg425KnownApiRecovery.command(Pg425KnownApiRecovery.READBACK_SQL.getBytes(StandardCharsets.US_ASCII),"/usr/bin/sudo","-n","-u","postgres","/usr/bin/psql","-X","-v","ON_ERROR_STOP=1","-d","schubert_nk","-f","-")))throw new IllegalStateException("post preservation drift");db.rollback();
         } catch(Exception | Error failure) {
           try(var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)){RootFailedStartRecovery.quarantinePair(root,LinuxInodeSecurity.create(),pair);}
           catch(Exception | Error unknown){failure.addSuppressed(unknown);}
