@@ -144,7 +144,8 @@ class SessionAttributeCodecTest {
             ANONYMOUS.replace("[]", "[{\"purpose\":\"QSBREQ01\"}]"),
             ANONYMOUS.replace("[]", "[{\"purpose\":\"QSBREQ01\",\"purpose\":\"QSBREQ01\"}]"),
             ANONYMOUS.replace("[]", "[{\"class\":\"arbitrary.type\"}]"))) invalid(text);
-    for (String version : List.of("0", "2", "1.0", "1e0", "\"1\"", "null", "true", "[]"))
+    // QA049 permits integer v2; legacy v1 malformed/unknown versions still reject.
+    for (String version : List.of("0", "3", "1.0", "1e0", "\"1\"", "null", "true", "[]"))
       invalid(ANONYMOUS.replace(":1,", ":" + version + ","));
     for (String key :
         List.of("password", "class", "requestBody", "lastAccessedAt", "rawSessionId", "unknown"))
@@ -359,7 +360,8 @@ class SessionAttributeCodecTest {
 
   static String json(
       boolean authenticated, String name, String role, String csrf, String saved, int count) {
-    var s = new StringBuilder("{\"formatVersion\":1");
+    // QA049 current-write oracle is v2; ANONYMOUS/reverse legacy decode fixtures remain v1.
+    var s = new StringBuilder("{\"formatVersion\":2");
     if (authenticated)
       s.append(",\"username\":")
           .append(quote(name))

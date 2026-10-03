@@ -19,7 +19,8 @@ import java.util.*;
 /**
  * Stateless strict JSON schema, not encryption, persistence or authorization.
  * NK-WEB-001/NK-AUT-001; FUN-001/AUT-001..004; UI226; SS314 §7.2.1/352;
- * SSC-038/PG-D-094/PT-WEB-009..015. Caller erases encoded plaintext after encryption.
+ * SSC-038/QA049/PG-D356/PT-WEB-009..015/TOKV202..206. Writes v2, strictly reads legacy v1. Caller
+ * erases encoded plaintext after encryption; completion metadata grants no business success.
  */
 public final class SessionAttributeCodec {
   public static final int MAXIMUM_PLAINTEXT_BYTES = 16384;
@@ -30,7 +31,7 @@ public final class SessionAttributeCodec {
   public byte[] encode(SessionAttributes attributes) {
     Objects.requireNonNull(attributes, "attributes");
     var json = new JsonObject();
-    json.addProperty("formatVersion", 1);
+    json.addProperty("formatVersion", 2);
     attributes
         .principal()
         .ifPresent(
@@ -51,6 +52,7 @@ public final class SessionAttributeCodec {
       item.addProperty("purpose", token.purpose());
       item.addProperty("token", token.token().toString());
       item.addProperty("issuedAt", token.issuedAt().toString());
+      token.completedAt().ifPresent(value -> item.addProperty("completedAt", value.toString()));
       tokens.add(item);
     }
     json.add("operationTokens", tokens);
@@ -73,15 +75,16 @@ public final class SessionAttributeCodec {
         var keys = new HashSet<String>();
         var fields = new HashMap<String, String>();
         Optional<List<SessionOperationToken>> tokens = Optional.empty();
-        boolean version = false;
+        int version = 0;
         while (reader.hasNext()) {
           String key = reader.nextName();
           require(keys.add(key));
           switch (key) {
             case "formatVersion" -> {
               require(reader.peek() == JsonToken.NUMBER);
-              require(reader.nextString().equals("1"));
-              version = true;
+              String rawVersion = reader.nextString();
+              require(rawVersion.equals("1") || rawVersion.equals("2"));
+              version = rawVersion.equals("1") ? 1 : 2;
             }
             case "username",
                 "role",
@@ -96,7 +99,12 @@ public final class SessionAttributeCodec {
         }
         reader.endObject();
         reader.peek(); // Strict parser permits only END_DOCUMENT after root.
-        require(version);
+        require(version != 0);
+        var operationTokens = tokens.orElseThrow(SessionAttributeException::new);
+        // Version may occur after tokens; completedAt remains forbidden under legacy v1.
+        require(
+            version != 1
+                || operationTokens.stream().allMatch(value -> value.completedAt().isEmpty()));
         Optional<SessionPrincipal> principal = Optional.empty();
         if (fields.keySet().stream().anyMatch(AUTH_FIELDS::contains)) {
           require(fields.keySet().containsAll(AUTH_FIELDS));
@@ -113,7 +121,7 @@ public final class SessionAttributeCodec {
             Optional.ofNullable(fields.get("csrfToken")),
             Optional.ofNullable(fields.get("savedRequest"))
                 .map(value -> SavedRequestTarget.fromGet("GET", value)),
-            tokens.orElseThrow(SessionAttributeException::new));
+            operationTokens);
       }
     } catch (IOException
         | IllegalArgumentException
@@ -135,17 +143,20 @@ public final class SessionAttributeCodec {
       while (reader.hasNext()) {
         String key = reader.nextName();
         require(!fields.containsKey(key));
-        require(Set.of("purpose", "token", "issuedAt").contains(key));
+        require(Set.of("purpose", "token", "issuedAt", "completedAt").contains(key));
         fields.put(key, string(reader));
       }
       reader.endObject();
-      require(fields.size() == 3);
+      require(fields.keySet().containsAll(Set.of("purpose", "token", "issuedAt")));
       String raw = required(fields, "token");
       UUID token = UUID.fromString(raw);
       require(token.toString().equals(raw));
       tokens.add(
           new SessionOperationToken(
-              required(fields, "purpose"), token, instant(required(fields, "issuedAt"))));
+              required(fields, "purpose"),
+              token,
+              instant(required(fields, "issuedAt")),
+              Optional.ofNullable(fields.get("completedAt")).map(SessionAttributeCodec::instant)));
     }
     reader.endArray();
     return tokens;

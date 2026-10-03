@@ -94,6 +94,24 @@ class SessionPayloadCodecTest {
   }
 
   @Test
+  void tokv206IndependentLegacyPlaintextStillDecryptsUnderEitherKey() throws Exception {
+    // JSON oracle is the independent literal builder, never production encode().
+    byte[] legacy =
+        bytes(
+            new String(plain(true), StandardCharsets.UTF_8)
+                .replace("\"formatVersion\":2", "\"formatVersion\":1"));
+    try (var codec = fixed("v2", KEY, "v1", OLD)) {
+      for (String version : List.of("v1", "v2")) {
+        var value =
+            codec.decrypt(IDENTITY, independent(version, version.equals("v1") ? OLD : KEY, legacy));
+        checkSample(value, true);
+        assertTrue(value.operationTokens().getFirst().completedAt().isEmpty());
+        assertEquals("v2", codec.encrypt(IDENTITY, value).keyVersion());
+      }
+    }
+  }
+
+  @Test
   void web018EnvelopeAndEveryAadFieldMutationReject() throws Exception {
     byte[] valid = envelope("v2", KEY, aad("v2"), plain(true));
     try (var codec = fixed("v2", KEY, null, null)) {
