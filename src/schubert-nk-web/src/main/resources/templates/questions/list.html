@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- SCR022 read only/UI224236/SS313/PG-D350/PT-QRY-HTTP008; deletion QA049 pending. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('質問回答')}"></head>
+<body><main class="page question-list-page">
+  <header class="topbar"><h1>質問回答</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <div id="question-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}" th:text="${issue.value}"></li></ul></div>
+  <form method="get" th:action="@{/questions}">
+    <label for="question-keyword">Keyword</label><input id="question-keyword" name="keyword" th:value="${page.filters.values.keyword}" aria-describedby="question-errors">
+    <label for="question-from">受付日From</label><input id="question-from" type="date" name="from" th:value="${page.filters.values.from}" aria-describedby="question-errors">
+    <label for="question-to">受付日To</label><input id="question-to" type="date" name="to" th:value="${page.filters.values.to}" aria-describedby="question-errors">
+    <div th:if="${page.filters.admin}"><label for="question-owner">利用者名</label><input id="question-owner" name="username" th:value="${page.filters.values.username}" aria-describedby="question-errors"></div>
+    <label for="question-state">回答状態</label><select id="question-state" name="state" aria-describedby="question-errors">
+      <option value="" th:selected="${page.filters.values.state.empty}">すべて</option>
+      <option value="ANSWERED" th:selected="${page.filters.values.state == 'ANSWERED'}">回答済み</option>
+      <option value="UNANSWERED" th:selected="${page.filters.values.state == 'UNANSWERED'}">未回答</option>
+      <option value="ERROR" th:selected="${page.filters.values.state == 'ERROR'}">エラー</option>
+    </select><button type="submit">検索</button>
+  </form>
+  <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' questions / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
+  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <section th:if="${page.page.present}">
+    <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
+    <table th:if="${!page.rows.empty}"><thead><tr><th>受付日時</th><th class="owner-heading" th:if="${page.filters.admin}">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
+    <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a></td></tr></tbody></table>
+  </section>
+</main></body></html>

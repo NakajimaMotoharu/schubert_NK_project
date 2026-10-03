@@ -12,7 +12,7 @@
 | PT-NTF-HTTP006 | PAGED48不整合/件数/ID重複/updatedAt逆順・同時ID逆順/type-state・summary削除矛盾 | wire個別成立でも表示不整合503/要求へ修復なし、public factory各negativeも独立確認、未網羅を層の手前拒否で隠さない |
 | PT-NTF-HTTP007 | 全5内部state/全3type/質問概要100 codepoint・Unicode補助/削除済み/日付JST秒 | UI224の受付通知・処理済通知・エラー通知、PROCESSINGも受付、削除済みcaption、固定明細linkだけ/手動削除0。body・response・contextをsessionへ保持しない |
 | PT-NTF-HTTP008 | MVC/Thymeleaf GET HEAD/空結果・50件・末尾page補正/特殊summary | title/共通nav/Logout CSRF、escape/ownerinputなし、date/type filter保持・前後link/count・empty表示、POST未実装405/unknown owner400/API0 |
-| PT-NTF-HTTP009 | 実Jetty/encrypted session両role・匿名/API0102 | 両role200/current context/GET HEAD body0/no-store、匿名302・0102後Cookie/DB終端、ADMIN他owner指定400/API0 |
+| PT-NTF-HTTP009 | 実Tomcat 11.0.25/encrypted session両role・匿名/API0102 | 両role200/current context/GET HEAD body0/no-store、匿名302・0102後Cookie/DB終端、ADMIN他owner指定400/API0 |
 | PT-NTF-HTTP010 | 8thread100独立context/UUID/filter、null/全例外/境界 | 混線0/100別MessageID/全buffer0/pending0、line/method/class/branch100%・静的6zero・strict compile/NullAway/秘密/trace。正式native/fullScopeは別未受入 |
 
 Productionでexpectedを生成しない。scope/実行Source/日時/OS/JDK/Maven/command/終了code/FES/counter/BUG/YKT・証跡path/hashは016060/manifestへ実測後記録。質問受付第4table QA048・完成token履歴QA049/取消・native fullReadyは本参照仕様の合格へ算入しない。

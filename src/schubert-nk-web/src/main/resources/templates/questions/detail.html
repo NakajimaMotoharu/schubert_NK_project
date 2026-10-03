@@ -1,0 +1,15 @@
+<!doctype html>
+<!-- SCR023 read only/UI224236/SS313/PG-D350/PT-QRY-HTTP008; deletion QA049 pending. -->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('質問回答明細')}"></head>
+<body><main class="page question-detail-page">
+  <header class="topbar"><h1>質問回答明細</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
+  <dl><dt>受付ID</dt><dd class="receipt" th:text="${page.values.receiptId}"></dd>
+    <dt th:if="${page.values.admin}">利用者</dt><dd class="owner" th:if="${page.values.admin}" th:text="${page.values.username}"></dd>
+    <dt>受付日時</dt><dd class="submitted-at" th:text="${page.values.submittedAt}"></dd>
+    <dt>回答状態</dt><dd class="state" th:text="${page.values.stateLabel}"></dd>
+    <dt>質問</dt><dd class="question-body" th:text="${page.values.question}"></dd>
+    <dt th:if="${page.values.answerAvailable}">回答</dt><dd class="answer-body" th:if="${page.values.answerAvailable}" th:text="${page.values.answer.empty ? '（空の回答）' : page.values.answer}"></dd>
+    <dt th:if="${page.values.answerAvailable}">回答日時</dt><dd class="answered-at" th:if="${page.values.answerAvailable}" th:text="${page.values.answeredAt}"></dd>
+  </dl><a class="back" href="/questions">質問回答一覧</a>
+</main></body></html>

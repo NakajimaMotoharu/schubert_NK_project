@@ -11,7 +11,7 @@ BUG567/YKT410追加観点：QuestionQueryInboxCleanupTest.goldenBoundsAndSemanti
 | PT-NTF-DETAIL003 | 異なるtarget/0/N12超/null actor/id/data/unknown principal・immutable表示 | 同ID不一致を503またはfactory拒否、入力nullは契約fail-fast、表示Map変更拒否/TopBar current actor/診断redacted、owner/context/bodyをsessionへ保持しない |
 | PT-NTF-DETAIL004 | 全承認error code/JMS/timeout/correlation/context/layout/Reserved破損 | API0102 terminal Cookie/session、不存在/他owner404、固定HTTP分類/503、wire buffer0/pending0、unknown Error原identity、test timeoutを正常扱いしない |
 | PT-NTF-DETAIL005 | 全5state×削除有無/Unicode特殊本文/空回答、MVC GET HEAD/POST | title/明示safe DOM/escape/JST/state別時刻、両削除本文非返却、非削除完了のみ固定question link、HEAD body0。取消未承認部分は実装しないため本参照PTはPOST機能完了を主張しない |
-| PT-NTF-DETAIL006 | 実Jetty/encrypted session USER/ADMIN/匿名・API0102 | 各GET HEAD再API/current context、両role本人参照、匿名302/no-store/0102 Cookie失効・DB後条件、Native ordinary Web fullReadyとは別scope |
+| PT-NTF-DETAIL006 | 実Tomcat 11.0.25/encrypted session USER/ADMIN/匿名・API0102 | 各GET HEAD再API/current context、両role本人参照、匿名302/no-store/0102 Cookie失効・DB後条件、Native ordinary Web fullReadyとは別scope |
 | PT-NTF-DETAIL007 | 8thread100要求target/context/UUIDを独立設定 | 100別MessageID/target/contextと応答を照合、混線0・元buffer0/pending0、shared mutable viewなし |
 | PT-NTF-DETAIL008 | BUG562破損deleted=true＋質問/IDspace＋回答あり、同vector encode/decode/semantic | UI224削除仕様から独立拒否oracle。正常deleted/COMPLETED空回答はPASS、不正回答はcodec拒否＋HTTP503。API実DB NOTICE SQLはdeleted時両本文NULL、QSS/QDT削除対象外/404、YKT406全対象の根拠・再発防止testを確認 |
 

@@ -387,5 +387,17 @@ if int(identifier[2:5]) >= 438:
     protocol = ET.parse(root / 'src/schubert-nk-protocol/target/site/jacoco/jacoco.xml')
     assert all(int(c.get('missed')) == 0 for c in protocol.getroot().findall('counter'))
     manifest['limitations'].append('SCR021 reference is connected, cancellation/token/Question forms and full native ordinary Web remain incomplete')
+if int(identifier[2:5]) >= 439:
+    manifest['bugs'].extend(['BUG-568', 'BUG-569'])
+    manifest['ykt'].append('YKT-411')
+    manifest['testIds'].extend(['PT-QRY-HTTP001..012'])
+    manifest['trigger'] = 'PG-D350 SCR022/023 reference: closed role-aware QSS/QSD HTTP forms, owner and response checks, immutable projection, MVC/templates/CSS: source-frozen six-module regression'
+    names = {'QuestionSearchForm', 'QuestionListViewModel', 'QuestionDetailViewModel', 'QuestionController', 'QuestionMvcConfiguration'}
+    query_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(query_coverage) == names
+    assert all(k['missed'] == 0 for value in query_coverage.values() for k in value.values())
+    manifest['questionReadScopeCoverage'] = query_coverage
+    manifest['limitations'].append('SCR022/023 references connected only; delete and completed-token approval QA049, acceptance receipt QA048, native owner recovery QA047/full ordinary Web ready remain pending')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

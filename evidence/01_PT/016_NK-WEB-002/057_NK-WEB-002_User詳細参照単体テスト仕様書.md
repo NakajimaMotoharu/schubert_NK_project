@@ -11,6 +11,6 @@
 | PT-USER-DETAIL005 | 応答target不一致/count3/version0/欠落日時 | 正規payloadでも表示invariant違反503、wire mandatory破損503、要求値へ修復しない |
 | PT-USER-DETAIL006 | LOCKED/ACTIVE/DISABLED/Optionalありなし/session count0..2/self・他人 | UI225全表示/固定Login失敗lock理由・他空、日時JST millisecond、immutable display-only Map・role/ID/version/context非混線 |
 | PT-USER-DETAIL007 | 8thread100 current context/UUID/target固定 | request毎API照会/100別Message ID/actor表示一致/全buffer消去/pending0、sessionへresponse body保存なし |
-| PT-USER-DETAIL008 | real encrypted session/Jetty ADMIN USER/匿名/API0102 | 独立HTTP200/403/302・GET HEAD/no-store、API失効後Cookie/DB終端、対象4coverage/static6/strict null |
+| PT-USER-DETAIL008 | real encrypted session/Tomcat 11.0.25 ADMIN USER/匿名/API0102 | 独立HTTP200/403/302・GET HEAD/no-store、API失効後Cookie/DB終端、対象4coverage/static6/strict null |
 
 期待値はProduction codec/ViewModelを呼んで生成しない。実行Source/環境/command/日時/FES/coverage/BUG/YKT/証跡hashは016058/manifestに実測後記入、選択結果を正式全scope/native100へ算入しない。

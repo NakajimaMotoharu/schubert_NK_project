@@ -12,7 +12,7 @@
 | PT-QRY-HTTP006 | target1/N12最大/0/超過/null、ANSWERED空/本文・UNANSWERED・ERROR | QSDREQ12固定ID、QSDRSP8352はID0/12・receipt12/26・owner38/64・state102/12・question114/4096・answer4210/4096・submitted8306/17・answered8323/17・Reserved8340/12。全byte/header期待はliteral、USER owner/target mismatch拒否、空回答captionと未回答区別 |
 | PT-QRY-HTTP007 | 全error code/0102、JMS timeout/correlation/context/layout/reserved/unknown | 0104/他owner/削除済404、0102 terminal Cookie/session、HTTP mapper固定分類・503、unknown identity保持、wire zero/pending0、未実行成功化なし |
 | PT-QRY-HTTP008 | MVC GET/HEAD/POST、両role・HTML特殊本文/条件/空回答 | explicit template/title/escaped DOM/ADMIN限定列・field/HEAD body0・POST未接続405、削除button/POST機能完了は本参照scope外 |
-| PT-QRY-HTTP009 | 実Jetty/encrypted session・匿名/両role/0102再GET | current actor認証、匿名302/no-store、GET/HEAD毎fresh wire、0102 DB/Cookie失効と後続API0、ordinary native fullReadyとは別 |
+| PT-QRY-HTTP009 | 実Tomcat 11.0.25/encrypted session・匿名/両role/0102再GET | current actor認証、匿名302/no-store、GET/HEAD毎fresh wire、0102 DB/Cookie失効と後続API0、ordinary native fullReadyとは別 |
 | PT-QRY-HTTP010 | 8thread100別target/context/UUID/条件 | 独立request/response対応・100別MessageID/混線0/zeroing/pending0、shared表示可変なし |
 | PT-QRY-HTTP011 | factory境界/immutable snapshot・正常3stateとtimestamp/answer異常 | whole lifecycle class/method/line/branch100、null/空/欠落/未知negative、API実DB検索/delete除外/ownerは既存QuestionQueryRepositoryTestを関連実行 |
 | PT-QRY-HTTP012 | keyword特殊query/ADMIN username・前/次/空・page clamp | UTF8 query encoding、USER hrefにowner無し、ADMINのみ検索条件保持、URLからcontext/token/body復元なし、独立文字列比較 |
