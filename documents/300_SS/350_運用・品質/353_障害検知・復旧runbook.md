@@ -227,6 +227,8 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 
 ### 20.3 原因究明と是正の計画
 
+SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失していれば20.2の現物typed退役を実行したとは扱わず、SS343 SSC165/174の新boot冷停止・完全原本/全DB/Backup・現承認再認証に分岐する。旧/run raw復元、消失intentの成功退役推定、OS停止を旧工具正常closeとする扱いは禁止。管理session/自動更新抑止は隔離環境の起動前提でありProduction start gate代用ではない。現在9Unit/full18・全kernel・現boot M/A inode・専用DB所有を別証明し、限定新INVALIDと旧UNKNOWN未解明を別結果として記録する。QA047の原因究明・対策・独立再発防止/native検証の未完了状態は維持する。
+
 | 対象 | 実施内容 | 完了根拠 |
 |---|---|---|
 | fixture世代混同 | Pg425/426旧工具、Pg428 snapshot、Pg431 Pair工具/独立PTの空Transfer条件流用を検索。通常世代は正規directory/fileを消さずNOFOLLOW・owner/mode・全tree metadata/size/hash前後一致へ修正 | 修正前再現、修正差分、正規非空fixtureの独立再試験 |
