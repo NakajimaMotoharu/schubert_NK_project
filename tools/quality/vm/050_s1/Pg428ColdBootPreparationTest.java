@@ -40,6 +40,10 @@ public final class Pg428ColdBootPreparationTest {
     if(!Pg428ColdBootPreparation.newBoot("e07aa706-1acd-4e65-b309-d7f330f79d54")
         || Pg428ColdBootPreparation.newBoot("58006280-5301-4a1b-a0c2-66bce4a8a38e")
         || Pg428ColdBootPreparation.activeRows!=251 || !Pg428ColdBootPreparation.activeLabel.equals("PG430"))throw new AssertionError("independent resumed profile");count++;
+    Pg428ColdBootPreparation.profile(new String[]{"PG444-V2"});
+    if(!Pg428ColdBootPreparation.SAVE.toString().equals("/var/lib/pgpt-s1-preservation/pg444-cold-e07-v2"))throw new AssertionError("new-only corrective output");count++;
+    var identity=Pg428ColdBootPreparation.transferIdentity();
+    if(!identity.owner().equals("schubert-api") || !identity.group().equals("schubert-web"))throw new AssertionError("SS343 independent Transfer identity");count++;
     System.out.println("PG428_COLD_BOOT_TOOL independentAssertions="+count+" success=true productionTestCount=0");
   }
 }

@@ -12,9 +12,10 @@ options = ['-i', str(private / 'vm-access'), '-o', 'BatchMode=yes', '-o', 'Ident
            '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(private / 'known_hosts')]
 ssh = ['ssh', '-p', '22222'] + options + ['ubuntu@127.0.0.1']
 scp = ['scp', '-P', '22222'] + options
-assert sys.argv[1:] in ([], ['--resume-staged'])
-resume = bool(sys.argv[1:])
-log = work / ('pg444-root-placement-v2.log' if resume else 'pg444-root-placement.log')
+assert sys.argv[1:] in ([], ['--resume-staged'], ['--corrected-v2'])
+resume = sys.argv[1:] == ['--resume-staged']
+corrected = sys.argv[1:] == ['--corrected-v2']
+log = work / ('pg444-root-placement-v3.log' if corrected else 'pg444-root-placement-v2.log' if resume else 'pg444-root-placement.log')
 assert not log.exists()
 subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--', 'tools'], cwd=root, check=True)
 assert not subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard', '--', 'tools'], cwd=root).strip()
@@ -27,17 +28,18 @@ assert len(old) == 21
 for path in (work / 'pg432-frozen-tools-W26ZJ4').glob('*.class'):
     assert path.name in old
     old[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
-compiled = work / 'pg444-tools-v6'
+compiled = work / ('pg444-tools-v7' if corrected else 'pg444-tools-v6')
 new = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in compiled.glob('*.class')}
 assert len(new) == 7 and 'Pg431KnownPairRecovery.class' not in new
-manifest = json.loads((root / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG444-cold-tools-v6/manifest.json').read_text())
+manifest = json.loads((root / ('evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG444-cold-tools-' + ('v7' if corrected else 'v6')) / 'manifest.json').read_text())
 assert new == {v['name']: v['sha256'] for v in manifest['classes']}
 for entry in manifest['sourceFiles']:
     assert hashlib.sha256((root / entry['path']).read_bytes()).hexdigest() == entry['sha256']
 if not resume:
-    subprocess.run(ssh + ['umask 077; test ! -e /home/ubuntu/pg444-cold-stage && mkdir /home/ubuntu/pg444-cold-stage'], check=True)
+    stage = '/home/ubuntu/pg444-cold-v2-stage' if corrected else '/home/ubuntu/pg444-cold-stage'
+    subprocess.run(ssh + ['umask 077; test ! -e ' + stage + ' && mkdir ' + stage], check=True)
     for name in sorted(new):
-        subprocess.run(scp + [str(compiled / name), 'ubuntu@127.0.0.1:/home/ubuntu/pg444-cold-stage/' + name], check=True)
+        subprocess.run(scp + [str(compiled / name), 'ubuntu@127.0.0.1:' + stage + '/' + name], check=True)
 payload = r'''import hashlib,os,pathlib,stat
 assert os.geteuid()==0
 assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='e07aa706-1acd-4e65-b309-d7f330f79d54'
@@ -73,11 +75,14 @@ for p in [target,base]:
 for n,d in OLD.items():info(prior/n,0o100400);content(prior/n,d)
 print('PG444_ROOT_PLACEMENT classes=26 shaMatches=true rootClosed=true priorUnchanged=true coldOnly=true serviceActions=0 authorityIssued=false')
 '''
+if corrected:
+    payload = payload.replace("base/'pg444-deploy-tools'", "base/'pg444-v2-deploy-tools'")
+    payload = payload.replace("'/home/ubuntu/pg444-cold-stage'", "'/home/ubuntu/pg444-cold-v2-stage'")
 result = subprocess.run(ssh + ['sudo -n /usr/bin/python3 -'],
                         input=('OLD=' + repr(old) + '\nNEW=' + repr(new) + '\n' + payload).encode(),
                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 if result.returncode:
-    secret = work / ('pg444-root-placement-v2-failure-private.log' if resume else 'pg444-root-placement-failure-private.log')
+    secret = work / ('pg444-root-placement-v3-failure-private.log' if corrected else 'pg444-root-placement-v2-failure-private.log' if resume else 'pg444-root-placement-failure-private.log')
     secret.touch(mode=0o600)
     secret.write_bytes(result.stderr)
     log.write_text('PG444_ROOT_PLACEMENT_FAILED diagnosticsRedacted=true exit=' + str(result.returncode) + '\n')

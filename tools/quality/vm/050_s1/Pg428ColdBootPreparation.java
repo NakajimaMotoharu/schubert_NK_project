@@ -39,7 +39,7 @@ public final class Pg428ColdBootPreparation {
   }
   // SSC174: fixed independently observed saved-guest profile, not arbitrary paths/permits.
   static void profile(String[] args) {
-    if(args==null || args.length>1 || (args.length==1 && !"PG444".equals(args[0])))
+    if(args==null || args.length>1 || (args.length==1 && (args[0]==null || !Set.of("PG444","PG444-V2").contains(args[0]))))
       throw new IllegalArgumentException("fixed cold profile required");
     if(args.length==0)return;
     activeBoot="e07aa706-1acd-4e65-b309-d7f330f79d54";activePriorBoot=BOOT;
@@ -47,7 +47,7 @@ public final class Pg428ColdBootPreparation {
     activeSource="91b010509e715e2b097c955d04f21c23f3529966";activeLabel="PG430";
     activeDigest="ecef234624ece66c69d81383f722aee046da7b0dcab8cf10ec4df3b3d2dd1375";activeRows=251;
     activeSqlHash="9efa45bf3b61ca8a5d368449533ec28d35e9b04d810fd4fe6143796f78b9b45f";
-    SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg444-cold-e07");
+    SAVE=Path.of("/var/lib/pgpt-s1-preservation/"+("PG444-V2".equals(args[0])?"pg444-cold-e07-v2":"pg444-cold-e07"));
   }
   static void require(boolean value) {if(!value)throw new IllegalStateException("cold boot preparation unavailable");}
   static boolean cold(Map<String,String> f) {
@@ -112,6 +112,7 @@ public final class Pg428ColdBootPreparation {
     return Map.copyOf(result);
   }
   static String fixtureSnapshot() throws Exception {
+    stage="FIXED_ASSET_CONFIG";
     var result=new TreeMap<String,Object>();
     for(var entry:Map.of("/srv/schubert-nk/data/assets/audio/pgpt-fixture.wav","114448ce435018eda5f4a8df39689d79fb4ff3dbfb5cc521002a42e8a6f625bb",
         "/srv/schubert-nk/data/assets/manifests/master.sha256","44f2bff22f62d9f4ae4c49bcc554e9a189427e7fe6f2bd3b24604bfdd4141bbc",
@@ -121,9 +122,11 @@ public final class Pg428ColdBootPreparation {
     }
     var common=Path.of("/etc/schubert-nk/common.yml");result.put(common.toString(),metadata(common).toString()+"/"+Pg410KnownAuthRecovery.hash(Pg410KnownAuthRecovery.material(common,65536)));
     result.put("assets",snapshot(Path.of("/srv/schubert-nk/data/assets")));
-    result.put("transfer",transferSnapshot(Path.of("/srv/schubert-nk/data/transfer"),new StorageIdentity("schubert-api","schubert-data")));
+    stage="TRANSFER_TREE";
+    result.put("transfer",transferSnapshot(Path.of("/srv/schubert-nk/data/transfer"),transferIdentity()));
     return result.toString();
   }
+  static StorageIdentity transferIdentity(){return new StorageIdentity("schubert-api","schubert-web");}
   static void newDirectory(Path path,int uid,int gid) throws Exception {
     require(!Files.exists(path,LinkOption.NOFOLLOW_LINKS));
     Files.createDirectory(path,PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------")));
@@ -194,6 +197,7 @@ public final class Pg428ColdBootPreparation {
     return Map.copyOf(result);
   }
   static Map<String,String> backupSnapshot() throws Exception {
+    stage="BACKUP_TREE";
     // Read all files, not only the four canonical bundle artifacts; preserve unknown fixtures too.
     var base=Path.of("/srv/schubert-nk/backup");
     var first=backupPass(base);var second=backupPass(base);require(first.equals(second));
