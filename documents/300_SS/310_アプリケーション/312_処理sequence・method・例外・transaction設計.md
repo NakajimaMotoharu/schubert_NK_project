@@ -259,14 +259,20 @@ WorkerのRECEIVED->PROCESSINGも同じjob rowの条件付きUPDATEで競合さ�
 
 ## 11. Web REQUEST log投影
 
-1. `HttpRequestLoggingFilter`はrequest開始時にrequest IDとnano timeを設定する。
-2. Response commit直前にstatus/elapsedを確定し、まずlocal JSONへ1行記録する。
+1. SSC-172: `HttpRequestLoggingValve`を実Tomcatの`AccessLog` terminal hookへ接続し、request開始時にserver UUIDだけのidentityをCaddy検証前に確立する。HTTP header/form/queryからidentityを採用しない。verified Caddy transportと認証済actorの安全なusername/roleだけを別にrequest lifetimeへ投影し、raw context/principal/session/token/passwordは保持しない。
+2. UI252 §2/UI235 §12.1/351 §2どおり、通常/HEAD/ERROR/ASYNCの応答終端で最終status/elapsed/送信body byte数を確定し、同event Message IDでまずlocal JSONへPENDING観測を記録する。commit直前やServlet finallyだけで後続ERROR/ASYNC・stream総byteを推測しない。導入Tomcat11.0.25のterminal callbackとnano-time差を使用し、byte読取による強制flush/response変更を行わない。
 3. Technical DB transactionで暗号化済みWLGEVT01 payloadを`web_log_outbox`へINSERTする。
 4. `WebLogDispatcher`がpersistent sendしSENTへ更新する。
 5. `WebLogIngestService.ingest`は`app_logs.source_message_id` UKを用いてINSERTし、重複は更新せずACKする。
 
 Web technical DB障害でoutbox INSERTできない場合も利用者responseを置換せず、local JSONに`projectionStatus=FAILED`を記録してalertする。
 Critical auditはAPI transaction内のDB logを正とし、このbest-effort HTTP投影に依存しない。
+
+SSC-172: FAILED補足は最初のlocal PENDING観測と同event IDで結合する投影失敗の記録であり、別の業務HTTP eventや再送UUIDを生成しない。SQL/codec/commit/closeの未知結果も成功へ変更せず、provider文面・Throwable・秘密をlocal/alertへ渡さない。local出力自体の失敗は正常記録として扱わず、固定terminal signalで同Web ownerへ知らせる。投影failureでHTTP status/body/headerを書き換えたり、HTTP threadでJMS再送・業務DB操作を行わない。
+
+処理中の最初の業務MQ Message IDだけを既存fixed wire clientのidentifier supplierからrequest-scoped traceへ結合し、後続probeで上書きしない。MQ呼出なしはUI235の規則どおりCorrelation ID=event Message IDとする。lexical request scopeはnested/ASYNC/並行で混線せず終了時に解除し、background送信・別requestへidentityを継承しない。unknown routeは固定`/**`、ログpathへraw URI/query/fragmentを複写しない。未知transport/null/malformed callbackはsafe local UNKNOWN/固定alertとし、WLGEVT01必須のverified IPや成功statusを捏造しない。NPEをcatchして正常化しない。
+
+既存WebLogPayloadCodec/OutboxRepository/Dispatcher/ReplayWorkerとAPI DB UKを再利用し、鍵/DB/JMSは外側ownerの所有を維持する。HTTP drain→worker join→reply consumer→外側DB/JMS/鍵という停止順、SS342のfull business readinessを省略しない。REQUEST producer単独成功で全Web ready/CHR/native coverage・正式品質を完了にしない。独立JSON/2336-byte golden/AAD/JCE、実HTTP正常・HEAD・ERROR・ASYNC・拒否・切断、SQL/codec/local失敗時のHTTP不変、100並行/再送、静的/全対象4coverage・同Source nativeを検証する。
 
 ## 12. Error mapping
 

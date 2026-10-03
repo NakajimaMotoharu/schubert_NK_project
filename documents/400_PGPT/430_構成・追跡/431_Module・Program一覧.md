@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG-D353同Source検証確定：de6c63ba188506b5fbee15dbfc8cab8ca692d2a5/PG441全6fresh3013PT/449suite/FES0/static6zero、更新入力5class B70L153M44C5全miss0、全method→CHANGE001～016/016069070＋既存API UserCommand/Mutation実SQLへ追跡。BUG571572/YKT413再試験完了、source6file/安全JUnit/manifest hash/独立golden・null/close/100並行を保全。これはform入力の閉鎖であり、token目的/完成QA049、更新POST、ordinary全Web/native/CHR/工程の正式閉鎖とは別。以降はSSC172 REQUEST producerを同Web起動経路の必須依存として継続する。
+
 PG-D353実装追跡（2026-10-03、未受入）：SCR017 UserStatusForm/UserRoleForm/PasswordResetForm/UserUnlockFormのbind/isValid/getIssues/displayValues/toRequest/close/toString、package-private UserMutationInputのclosed bind/requireUsable/password/displayValues/close → RD FUN009/AUT002003 → UI225 §5/236 §6 → SS313314323332 → PT-USER-CHANGE001～016/UserMutationFormTest/016069070。STATUS60/ROLE68/PASSWORD324/UNLOCK60byteは仕様offsetの独立golden、path-hidden ID一致・N9 version・確認true・canonical UUID・操作別closed field、Passwordはfresh API対象username/既存policy/NFC確認・char[]所有・secret表示0。POST/session用途token/自己保護・最後ADMIN・version/全失効は既存APIへ別結線し、入力PTを全Webready・認可成功へ代用しない。選択15suite実行中、coverage/静的/合格は未確定。
 
 PG-D351/352実装追跡：QuestionSubmitForm全12methodとquestion-input-validation.js validate/initial/input/submit/IIFE→016065066/PT-QST-FORM001～008、016067068/PT-QST-JS001-A～H・QuestionInputScriptTest/Javascript event fixture。UI224 §2/236 §7/SS313314323352、133選択→同JS含む134PT/19suite/static6zero、form4counter0/JS3counter100%まで限定検証。5SourceFiles hash保全、未接続template/token/POST/受付PRG/native全Web/正式gateは未受入、同入力Source固定全6へ進む。下の未実装記録は起案時点履歴。

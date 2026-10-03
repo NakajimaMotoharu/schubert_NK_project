@@ -78,6 +78,14 @@ API保存時はwire Roleがある場合だけdetailsに`actorRole=USER/ADMIN`を
 
 DB INSERTとsource UKの重複判定を同じ短transactionで確定し、その後にJMS ACKをcommitする。DB失敗時はJMS rollback、DB確定後ACK前の停止は再配送でINSERT 0/既存行不変を確認してACKする。Broker duplicate cacheのhit/missにかかわらずDB UKを最終正本とする。
 
+### 3.4 REQUEST終端hook・投影故障（SSC-172）
+
+具体producerと所有は312 §11。導入Tomcat11.0.25のAccessLog terminal callbackを使用し、通常・ERROR・ASYNC終端の最終status/elapsed/body byteを一度確定する。callback timeの単位はnanoseconds、local N12とWLGEVT01 X9の各上限を区別し、上限処理が必要なfieldはtruncated=trueで明示する。未知/負の観測を無根拠な成功へ補正しない。
+
+server UUIDはpretrust identity、client addressはCaddy検証済値であり混同しない。actorは検証済username/roleだけ、pathはregistered routeの閉allowlist（unknownは固定/**）、raw URI/query/header/body/cookie/context/token/passwordは除外する。既存fixed business wireの最初のMessage IDだけをrequest lifetimeへ関連付け、対応MQなしはCorrelation ID=event自身とする。初回local PENDINGと故障時FAILED補足は同event IDで結合し、DB source UKの別eventを生成しない。
+
+projection/local/metadata故障の固定internal codeは`WEB_REQUEST_LOG_PROJECTION_FAILED`、`WEB_REQUEST_LOG_LOCAL_FAILURE`、`WEB_REQUEST_LOG_METADATA_INVALID`（64 ASCII以内）。既存SYSTEM action INTEGRITY_FAILED/UNKNOWNまたは失敗alertへ使用し、新しいactionや業務resultを追加しない。null/malformed・未検証transportでwire必須のverified IP/statusを捏造せず、local安全故障を記録する。local logger失敗もownerへ固定terminal signal、例外原文・NPE正常化・HTTP結果変更0。critical API監査、wire layout/envelope/DDL、再送/保持/認可、Current/DIFは不変更。
+
 ## 4. Action catalog
 
 | Action | Category | 発火・必須context |
