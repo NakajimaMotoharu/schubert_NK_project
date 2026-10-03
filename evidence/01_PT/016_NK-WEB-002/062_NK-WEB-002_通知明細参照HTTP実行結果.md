@@ -1,5 +1,9 @@
 # 通知明細参照HTTP実行結果
 
+PG438同Source全6 v2：16f81febe7bd9c7b6e035950a113db6411b3745f、session4985 actual exit0/09:21:59 JST/16:23。Protocol81/Storage154/Bootstrap213/API884/Web626/Batch1018＝2976PT/445suite/FES0/static6zero/format・strict compile成功。Protocol/Storage全4counter0、Notification6class4counter0、全host残B/L/M/C1221/3474/567/39（PG437同数、新miss0/解消0、native外部経路等未受入）。BUG562564565567/YKT406408409410は同Source再試験で完了、BUG566 manual command是正も全6起動終了で確認。
+
+Safe `018_NK-OPS-001/evidence/provisional/PG438-full-notification-detail/manifest.json` SHA0003b8344a84fb60645838a9d49f12faaf27a10cbb7dd4d0b4820e0d772c41f1、WorkPG379/pg438-host全6classes/exec/XMLはbyte一致freeze。旧v1/選択成功を流用0、全scope正式100%/ordinary native Web ready/Caddy/原本DONE/intent退役/実NK CHRは未完了。QA047048049保留、正式run24/1964PT/53scope/48.3%不更新。次はPG-D350/016063064の同Web質問検索・明細参照、通常全回帰/commitで停止しない。
+
 v3選択（09:03:30 JST終了、3:07、session12640 actual exit0）：cleanで旧execを消し、Protocol16/Storage8/Bootstrap7/API39/Web64/Batch4＝138PT/17suite/FES0/static6zero/format・strict compile成功。API追加9はQuestionQueryInboxCleanupTest、元不正goldenの正常空回答＋不正4096回答falseを実暗号snapshot/Inspectorで再試験。Notification6class全4counter miss0、validateNotificationDetail method B39/L33/M1 miss0。safe manifest `evidence/provisional/PG438-notification-detail-selected-v3/manifest.json` SHA `b5c712e3ae7e841d0987473b213f7b74a361af80f3f1ec74e626f365150dac4b`、WIP Source81942＋file hash、Git外v3 log/失敗v1保全。BUG562564565567/YKT406408409410はSource固定全6再回帰待ち・まだ完了でない。
 
 PG438全6 v1（Source81942b292adee80edce46b77f4bedfdc8fd5187e、08:58:14 JST、actual exit1）はProtocol81/Storage154/Bootstrap213成功、API884のうちInbox golden 1F/E0/S0、Web/Batch未実行で全体合格0。BUG567/YKT410を修正前登録し、UI224の削除済み両本文spaceに従う正常入力と、旧4096byte回答を残した破損入力falseを分離した。Production validator/Inspector/SQL期待意味は変更0。WorkPG379 pg438-six-full-v1.log SHA e0a8938c1816c5941c8d50ed453b31b5426767b1513cc232dda710e4af14ac1e、旧失敗を保持し、新Sourceの全回帰へ流用しない。v3選択はQuestionQueryInboxCleanupTest9PTを追加して同変更群を検証中、未合格。
