@@ -13,6 +13,7 @@ public enum CleanupKind {
   SESSIONS("sessions", 1000),
   OUTBOX("message_stores", 1000),
   LOGS("logs", 10000),
+  WEB_RECEIPTS("web_receipt_references", 1000),
   BATCH_RUNS("batch_runs", 1000),
   INBOX_PROGRESS("inbox_progress", 1000),
   LOG_PROGRESS("log_progress", 1000);
@@ -43,7 +44,7 @@ public enum CleanupKind {
       case SESSIONS -> BatchStep.CLEAN_SESSION;
       case OUTBOX -> BatchStep.CLEAN_INBOX_OUTBOX;
       case LOGS -> BatchStep.CLEAN_LOG;
-      case BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> BatchStep.CLEAN_BATCH_RUN;
+      case WEB_RECEIPTS, BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> BatchStep.CLEAN_BATCH_RUN;
     };
   }
 }

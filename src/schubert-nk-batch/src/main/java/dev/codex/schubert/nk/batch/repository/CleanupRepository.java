@@ -137,6 +137,9 @@ public final class CleanupRepository {
       case LOGS ->
           connection.prepareStatement(
               "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_logs(?,?,?)");
+      case WEB_RECEIPTS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_web_receipt_references(?,?,?)");
       case BATCH_RUNS ->
           connection.prepareStatement(
               "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_batch_runs(?,?,?)");

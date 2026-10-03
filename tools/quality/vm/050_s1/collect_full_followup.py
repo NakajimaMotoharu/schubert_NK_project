@@ -517,5 +517,29 @@ if int(identifier[2:5]) >= 446:
         'source-identical ordinary Morning/API/Web/Caddy/original DONE/intent retirement/native CHR-A01/L01 and native coverage100/formal recognition remain pending',
         'interrupted PG442 exit143 and other-source PG441/PG443 success not reused as this full-run result',
     ]
+if int(identifier[2:5]) >= 447:
+    names = {'ReceiptReference', 'ReceiptReferenceRepository', 'ReceiptReferenceException'}
+    receipt_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').rsplit('/', 1)[-1] in names}
+    assert set(receipt_coverage) == names
+    assert all(k['missed'] == 0 for value in receipt_coverage.values() for k in value.values())
+    manifest['receiptReferenceCoverage'] = receipt_coverage
+    manifest['ddl'].update({'versionedMigrations': 26,
+        'appendOnly': 'V001..025 unchanged; V026 QA048 technical three-value locator and SSC175 atomic shared cleanup',
+        'receiptOracle': '075 RCPT001..005: literal SQL, independent role/catalog, physical orphan, bounded/locked/backup/run/rollback and fault matrix'})
+    manifest['testIds'].append('RCPT001..005')
+    manifest['bugs'].extend(['BUG-608', 'BUG-609', 'BUG-610'])
+    manifest['ykt'].extend(['YKT-428', 'YKT-429', 'YKT-430'])
+    manifest['ssc'].append('SSC-175')
+    manifest['trigger'] = 'PG-D357/QA048/SSC175 V026 immutable locator, JDBC unknown-close precedence, atomic shared cleanup and approved inventory: fresh full-six regression'
+    manifest['limitations'] = [
+        'Three-value locator and cleanup/JDBC host scope only; SCR018 retained-token POST and SCR019 fresh IF030 HTTP wiring still pending',
+        'V026 native signed migration and new schema Backup/restore not yet executed; old successful bundles remain immutable',
+        'ordinary Morning/API/full Web/Caddy/DONE/intent/native CHR-A01/L01 and native coverage100/formal acceptance pending',
+        'formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; failed/partial/other-source results not reused',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

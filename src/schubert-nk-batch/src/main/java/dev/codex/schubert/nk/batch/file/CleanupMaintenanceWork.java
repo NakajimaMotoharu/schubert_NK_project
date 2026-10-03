@@ -107,6 +107,8 @@ final class CleanupMaintenanceWork {
     var history = begin(borrowed, BatchStep.CLEAN_BATCH_RUN);
     if (!history.skipped()) {
       var service = StepCleanupService.withOwner(guard);
+      // QA048/SSC175/RCPT004: one existing shared step, locators before retained history.
+      service.execute(borrowed, history, CleanupKind.WEB_RECEIPTS);
       service.execute(borrowed, history, CleanupKind.BATCH_RUNS);
       service.execute(borrowed, history, CleanupKind.INBOX_PROGRESS);
       var summary = service.execute(borrowed, history, CleanupKind.LOG_PROGRESS);

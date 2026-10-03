@@ -97,6 +97,8 @@ final class CleanupRepositoryTest {
             "message_stores",
             "LOGS",
             "logs",
+            "WEB_RECEIPTS",
+            "web_receipt_references",
             "BATCH_RUNS",
             "batch_runs",
             "INBOX_PROGRESS",

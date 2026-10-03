@@ -43,7 +43,7 @@ public final class CleanupStepFixture {
           case QUESTIONS -> 90011;
           case SESSIONS -> 90012;
           case OUTBOX -> 90013;
-          case BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> 90014;
+          case WEB_RECEIPTS, BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> 90014;
           case LOGS -> 90015;
         };
     return new BatchStepAttempt(id, RUN, k.step(), 1, START, false);

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG447/PG-D357/S3-D05（製造・PT中、未受入）：NK-WEB-002 receipt.ReceiptReference/ReceiptReferenceRepository/ReceiptReferenceException constructor/register/find/read/transaction/required、NK-DAT-001 V026__web_receipt_references.sql DDL/grant/fixed orphan/atomic kind、NK-BAT-001 CleanupKind/Repository/StepRepository/MaintenanceWork既存共有step。RD FUN001/AUT004/DAT009/OPS009、UI226236241242251、SS313/331§9.4/332/341/343、QA048/SSC169175、016075076 RCPT001～006/既存BAT162～177へ追跡。fresh IF030/保持tokenPOST/全Webnative接続は後続未完了、既存別source成功を加算0。
+
 PG-D356追加（QA049、PG446）：`SessionOperationTokenLifecycle.issue/require/completeVerified`→既存EncryptedWebSessionRepository.mutate→fresh current-row短TX、`OperationTokenConflictException.httpStatus`→409/明示GET、`SpringWebSession` generic delta→専用完成/退役以外の変更拒否。RD FUN001/AUT004/MQ021、UI226236、SS314、016073/TOKV207208・SessionOperationTokenLifecycleTest/SpringWebSessionTestへ対応。HTTP業務POST/API proofの接続、fresh全6/native/正式は未受入。
 
 PG-D356/PG446（S3/D05、製造/PT中）：NK-WEB-001/NK-WEB-002のSessionOperationToken（3arg pending/4arg completed invariant/getters/redacted）、SessionAttributeCodec.encode/decode/tokens/instantへQA049のJSON2 write＋strict1/2 readを接続する。後続current-row issue/require/completeとSpring deltaの完成巻戻/退役再挿入防止は同契約の未完依存。RD FUN001/AUT001～004/MQ021/UI226236/SS3147.2.1・QA049補足/SS343rollback、016073074/TOKV201～208・既存WEB009～044から追跡する。target4counter/静的/選択＋同Sourcefresh全6/SQL並行/native/CHRを閉じるまで正式認定へ加算しない。現在checkpointとsourceは456を正とする。

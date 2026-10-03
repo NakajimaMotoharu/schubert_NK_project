@@ -1,0 +1,153 @@
+{
+  "id": "PG447-receipt-selected-v6",
+  "formal": false,
+  "scope": "Selected same receipt production/fixture files; not whole source/full/native acceptance",
+  "branch": "dev-foundation",
+  "baseHead": "1090b714a611f949485990a83900dce0cd10106e",
+  "sourceDirty": true,
+  "finishedAt": "2026-10-04T04:59:58+09:00",
+  "exitCode": 0,
+  "modules": [
+    5,
+    7,
+    10,
+    5,
+    8,
+    41
+  ],
+  "tests": 76,
+  "receiptCoverage": {
+    "ReceiptReferenceException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReference": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 11
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ReceiptReferenceRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 297
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 88
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "logSha256": "82809efbc5383acfd4ecf412aaa9d9873d2efd6426fc12825a1604eb941e85ce",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceException.java",
+      "sha256": "da9b11facf9c66b91e19f8a5dce97509cc759c9d88aab63704419cc3e9777cd9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "sha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReference.java",
+      "sha256": "ce08fd60b83843b513e53e7057ff0ee27bd0a3c48b48e0db8285e3a645e069fe"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceFaultTest.java",
+      "sha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java",
+      "sha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/WebReceiptCleanupTest.java",
+      "sha256": "d3b21a8dbf936682dac63276886a5a26aa6476994e743380c9c475522a182d3f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql",
+      "sha256": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "staticModules": 6,
+  "staticFindings": 0,
+  "environment": "Linux/JDK25.0.4/Maven3.9.12/PostgreSQL18; child umask0027",
+  "testIds": [
+    "RCPT001..005",
+    "BAT162..177",
+    "existing CleanupRepository/MaintenanceWork/Field/Storage/identity/fingerprint"
+  ],
+  "bugs": [
+    "BUG-608",
+    "BUG-609",
+    "BUG-610"
+  ],
+  "ykt": [
+    "YKT-428",
+    "YKT-429",
+    "YKT-430"
+  ],
+  "oracle": "literal three values and SQL/catalog/roles; independent UTC boundary difference -32400; compound SQLException/Runtime/Error precedence and actual owned JDBC live0; 100 parallel same tuple; physical orphan, 1000+1 chunks, backup/lock/identity, same shared counter/rollback",
+  "limits": [
+    "No HTTP receipt API proof, native migration/Backup/whole Web or formal acceptance",
+    "API migration inventory test oracle updated after this selected run; this result is not that updated test source acceptance",
+    "old v1 static failure/v3 compound failure/v4-v5 fixture failure remain nonpassing"
+  ]
+}
