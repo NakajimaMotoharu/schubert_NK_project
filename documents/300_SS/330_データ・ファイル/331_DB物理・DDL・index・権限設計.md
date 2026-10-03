@@ -497,6 +497,8 @@ Index `(status,next_attempt_at,id)`、SENT cleanup用`sent_at where status='SENT
 
 ### 9.4 `schubert_web_session.web_receipt_references`（QA-048、2026-10-03）
 
+SSC175（2026-10-04、QA048内部接続）：孤児削除の固定kindは`WEB_RECEIPTS`、既存`CLEAN_BATCH_RUN`のtechnical共有stepへ割り当てる。新BatchStep/table引数/業務質問counter変更はない。1,000件以下のchunkで、全3列・PK/id index・明示grantを追加する末尾migrationと同時に、既存atomic `maintenance_execute_cleanup_step`の閉じたkind集合へ追加する。固定孤児functionの返却は既存と同じtarget/deleted/skipped/reason、削除対象は`NOT EXISTS questions(id=question_id)`だけで、logical deletion・age・tuple不一致・API検証不能を孤児へ読み替えない。同run開始cutoff/当日両backup/自己advisory/現在run identity/完全RUNNING step handleを検証し、DELETEと累積countを同TXで確定する。SKIP LOCKEDの0件は非lock eligible照会で不存在の場合だけ完了、残対象があればLOCK_BUSY/非成功・count不変。rollback/commit-close不明は成功化しない。詳細はSS332/341、backup/migrationはSS343。新table/function/役割・indexの独立SQL/PTと実適用は未完了。
+
 | Column | 型 / 制約 | 内容 |
 |---|---|---|
 | receipt_id | char(26) PK、`^[0-9A-HJKMNP-TV-Z]{26}$` | 検証済IF025公開受付ID |

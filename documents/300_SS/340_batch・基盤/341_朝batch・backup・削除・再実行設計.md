@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC175（2026-10-04、QA048の受付参照保守）：既存business cleanup/SESSION/INBOX-OUTBOX/LOGの順序とBackup失敗時六SKIPは不変更。既存`CLEAN_BATCH_RUN`のtechnical共有stepを一度だけbeginし、固定`WEB_RECEIPTS`→既存`BATCH_RUNS`→`INBOX_PROGRESS`→`LOG_PROGRESS`の順に処理する（既存3kind間の順は保持）。各chunkは現在原本run開始cutoff/親OS・DB排他/30分deadline/実両backup成功と完全step handleを保持し、1,000件以内のDELETE/累積を同TXでcommitする。全4kindが実完了した後だけ合算累積でfinishし、SKIP LOCKED残・rollback/commit不明/子失敗を0件完了にしない。孤児条件は物理questions不存在のみ、存続質問locator独自TTL0、Web/業務復元の片方向原則はSS313/331。新BatchStep・questions件数へのlocator加算・既存削除predicate変更はない。Backup失敗ならlocator削除も0、既存完全成功stepの通常skip/resume契約は保持する。新technical tableは両schemaを含む同一custom dumpに収め、旧成功bundleへのtable/hash追加はしない（SS343）。Production/DDL/独立PT/nativeは未受入。
+
 SSC127/BUG375：同未完了原本の通常resumeで、旧Brokerの真正正常SIGTERM143を非成功UNKNOWNと混同しない。次Broker開始前にSS343§6.17の旧same-invocation停止journalと全終端を確認し、その実snapshot/summaryを保持する。143単独・client0・reset-failed・旧receiptから起動成功を作らず、次fresh Live/Ops/新journal/真正Expiry/全issuer gateを別に検証する。旧step/Backup/原本は不変、今回SKIP・producer receiptは新規とする。
 
 SSC124（SSC117下位、実装前）：Backup失敗profileは成功manifestと排他的なNKCLEANFAIL1を用いる。実nonzero fresh Backup receipt＋実COMMAND_FAILURE/FAILED両stepの全14列を親子で独立再読し、同run/activation/boot/Epoch・同親deadlineへ束縛する。6削除stepの実SKIP/BACKUP_UNAVAILABLE/all0をbegin/commit/readbackし、DELETEやInspector不実行を確認する。Transfer/Artemis/Expiryを失敗理由で省略しない。Profileの完全byte契約・Root子の固定BACKUP readonly観測はSS343 SSC124。旧SUCCESS/既検証SKIPの値は改変しない。独立PTは018/291・292。
