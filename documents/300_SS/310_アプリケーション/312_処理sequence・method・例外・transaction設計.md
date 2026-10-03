@@ -259,6 +259,8 @@ WorkerのRECEIVED->PROCESSINGも同じjob rowの条件付きUPDATEで競合さ�
 
 ## 11. Web REQUEST log投影
 
+SSC-173: 送信body byteはWeb originのcharset変換後に成功したcontent writeを終端で観測し、HTTP headers/transfer chunk framingは除外する。実Tomcat11.0.25は`response.getCoyoteResponse().getContentWritten()`（Coyote doWriteのByteBuffer消費byte）を使い、transport framing込み`getBytesWritten(false)`やServlet char混在counterを使わない。読取によるforce flush/応答変更なし。切断時も既知のsuccessful origin writeを記録するだけでclient受信ACKを保証せず、Caddy後段変換もorigin値へ混入しない。
+
 1. SSC-172: `HttpRequestLoggingValve`を実Tomcatの`AccessLog` terminal hookへ接続し、request開始時にserver UUIDだけのidentityをCaddy検証前に確立する。HTTP header/form/queryからidentityを採用しない。verified Caddy transportと認証済actorの安全なusername/roleだけを別にrequest lifetimeへ投影し、raw context/principal/session/token/passwordは保持しない。
 2. UI252 §2/UI235 §12.1/351 §2どおり、通常/HEAD/ERROR/ASYNCの応答終端で最終status/elapsed/送信body byte数を確定し、同event Message IDでまずlocal JSONへPENDING観測を記録する。commit直前やServlet finallyだけで後続ERROR/ASYNC・stream総byteを推測しない。導入Tomcat11.0.25のterminal callbackとnano-time差を使用し、byte読取による強制flush/response変更を行わない。
 3. Technical DB transactionで暗号化済みWLGEVT01 payloadを`web_log_outbox`へINSERTする。

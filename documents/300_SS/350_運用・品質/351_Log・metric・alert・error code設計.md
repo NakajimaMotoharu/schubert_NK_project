@@ -80,6 +80,8 @@ DB INSERTとsource UKの重複判定を同じ短transactionで確定し、その
 
 ### 3.4 REQUEST終端hook・投影故障（SSC-172）
 
+SSC-173: `responseBytes`はWeb originのcharset後successful content write byte。HTTP header/transfer chunk framingを除き、導入Tomcat11.0.25のterminal callbackからCoyote Response.getContentWritten（ByteBuffer消費byte）を読取る。transport込みResponse.getBytesWritten、Servlet char数、Caddy後段変換を混同しない。強制flushなし・HTTP不変更、切断時の既知write観測はclient受信ACKの保証ではない。独立UTF8/固定body/HEAD0とchunked実HTTPを比較する。
+
 具体producerと所有は312 §11。導入Tomcat11.0.25のAccessLog terminal callbackを使用し、通常・ERROR・ASYNC終端の最終status/elapsed/body byteを一度確定する。callback timeの単位はnanoseconds、local N12とWLGEVT01 X9の各上限を区別し、上限処理が必要なfieldはtruncated=trueで明示する。未知/負の観測を無根拠な成功へ補正しない。
 
 server UUIDはpretrust identity、client addressはCaddy検証済値であり混同しない。actorは検証済username/roleだけ、pathはregistered routeの閉allowlist（unknownは固定/**）、raw URI/query/header/body/cookie/context/token/passwordは除外する。既存fixed business wireの最初のMessage IDだけをrequest lifetimeへ関連付け、対応MQなしはCorrelation ID=event自身とする。初回local PENDINGと故障時FAILED補足は同event IDで結合し、DB source UKの別eventを生成しない。
