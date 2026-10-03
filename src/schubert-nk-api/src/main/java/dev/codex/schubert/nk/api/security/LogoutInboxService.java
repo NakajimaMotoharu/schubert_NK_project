@@ -99,13 +99,13 @@ public final class LogoutInboxService {
                 transaction -> {
                   try {
                     var result =
-                        revocations.logout(
+                        revocations.logoutCurrent(
                             transaction,
                             raw,
                             Optional.empty(),
                             message,
                             request.header().correlationId(),
-                            clock.instant());
+                            clock);
                     return responses.captureSuccess(
                         result, raw, message, response, clock.instant());
                   } catch (AuthenticationContextException denied) {

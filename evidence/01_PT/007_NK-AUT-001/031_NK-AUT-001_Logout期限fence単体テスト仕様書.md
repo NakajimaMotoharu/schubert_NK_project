@@ -12,4 +12,6 @@ PG-D358/QA050/SSC171/BUG618/YKT437、S3/D05同Web起動経路の必要依存。R
 
 FixtureはApiLogDatabaseFixture隔離PG18.6（運用DB/VM原本でない）、public literal時刻/UUID/contextだけを使う。expected wireはUI232234 header offsetと独立golden、hashはJCA独立SHA256、DB後条件はliteral SQL/µs UTC。Production methodからexpected生成を禁止する。
 
+実method対応：A/B=`rerun001ExpiryBoundaryFencesAtomicallyAndPreservesErrorReplay`（3境界・audit JSON reason/code・immutable replay/fresh0200）、C=`rerun001CurrentClockIsReadAfterSessionLock`/`rerun001PriorTouchIsCurrentAndLateVerifierCannotUndoFence`（実row lock後Clock更新・先行TOUCHの現在expiry・User lock保持中の別transaction遅延認証拒否/TOUCH0）、D=`rerun001ExpiryFaultsRollbackFenceAuditAndInboxTogether`（7 update/audit/Inbox/statement-close faultとrollback SQL）。EはAuthSessionRevocationServiceTestの既存null/fault/旧Instant/ADMIN/unknown/既失効と新logoutCurrent全6null境界、LogoutInboxServiceTestのexisting owner/identity/fingerprint/snapshot-fault/100再送を併せる。副作用期待は独立literal SQL、wire280byteは固定offsetから作る。branch除外/無意味assert/実行中の別source借用なし。
+
 実行はsource固定前の影響選択JUnit/strict compile/SpotBugs/JaCoCo全4counterと、変更契約群の同source fresh全6を組合せる。APIExpired単独をWeb retry/null期限/worker・native full readinessの受入としない。実行command/OS/JDK/tool/日時/source/終了code/XML/coverageとhashは032の実結果/manifestへ保存し、独立試験追加時にcase/対象methodを追記する。現時点は未実行・coverage未認定・関連障害対応中。

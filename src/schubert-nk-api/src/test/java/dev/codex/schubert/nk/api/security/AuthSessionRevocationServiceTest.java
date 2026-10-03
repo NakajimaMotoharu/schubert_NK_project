@@ -393,6 +393,22 @@ final class AuthSessionRevocationServiceTest {
               () -> service.logout(connection, RAW, client, MESSAGE, null, NOW),
               () -> service.logout(connection, RAW, client, MESSAGE, CORRELATION, null),
               () ->
+                  service.logoutCurrent(
+                      null, RAW, client, MESSAGE, CORRELATION, java.time.Clock.systemUTC()),
+              () ->
+                  service.logoutCurrent(
+                      connection, null, client, MESSAGE, CORRELATION, java.time.Clock.systemUTC()),
+              () ->
+                  service.logoutCurrent(
+                      connection, RAW, null, MESSAGE, CORRELATION, java.time.Clock.systemUTC()),
+              () ->
+                  service.logoutCurrent(
+                      connection, RAW, client, null, CORRELATION, java.time.Clock.systemUTC()),
+              () ->
+                  service.logoutCurrent(
+                      connection, RAW, client, MESSAGE, null, java.time.Clock.systemUTC()),
+              () -> service.logoutCurrent(connection, RAW, client, MESSAGE, CORRELATION, null),
+              () ->
                   service.revokeAll(
                       connection,
                       null,

@@ -9,7 +9,9 @@ import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Clock;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,6 +44,26 @@ public final class AuthSessionRevocationService {
       Instant now) {
     Objects.requireNonNull(raw, "raw");
     Instant at = arguments(connection, client, messageId, correlationId, now);
+    return logoutCurrent(
+        connection, raw, client, messageId, correlationId, Clock.fixed(at, ZoneOffset.UTC));
+  }
+
+  /**
+   * PG-D358/QA050/SS314: clock is sampled after User/session locks; caller owns atomic Inbox TX.
+   */
+  public RevokedContext logoutCurrent(
+      Connection connection,
+      AuthenticationContext raw,
+      Optional<InetAddress> client,
+      UUID messageId,
+      UUID correlationId,
+      Clock clock) {
+    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(raw, "raw");
+    Objects.requireNonNull(client, "client");
+    Objects.requireNonNull(messageId, "messageId");
+    Objects.requireNonNull(correlationId, "correlationId");
+    Objects.requireNonNull(clock, "clock");
     try {
       requireTransaction(connection);
       String hash = hashes.calculate(raw);
@@ -55,6 +77,7 @@ public final class AuthSessionRevocationService {
         }
       }
       AuthContextIdentity identity;
+      Instant at;
       Instant revokedAt;
       ResultCode result;
       try (var statement =
@@ -65,6 +88,7 @@ public final class AuthSessionRevocationService {
         statement.setString(1, hash);
         try (var row = statement.executeQuery()) {
           if (!row.next()) throw new AuthenticationContextException();
+          at = clock.instant().truncatedTo(ChronoUnit.MICROS);
           identity =
               new AuthContextIdentity(
                   requireValue(row.getObject("id", UUID.class)),
@@ -80,8 +104,21 @@ public final class AuthSessionRevocationService {
                 requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class))
                     .toInstant();
             String status = requireValue(row.getString("status"));
-            if (!expiry.isAfter(at) || !status.equals("ACTIVE"))
+            if (!expiry.isAfter(at)) {
+              update(connection, identity.sessionId(), at, SessionRevocationReason.EXPIRED);
+              audit.write(
+                  connection,
+                  identity.userId(),
+                  identity.userId(),
+                  client,
+                  messageId,
+                  correlationId,
+                  at,
+                  SessionRevocationReason.EXPIRED,
+                  ResultCode.SESSION_INVALID);
               throw new AuthenticationContextException();
+            }
+            if (!status.equals("ACTIVE")) throw new AuthenticationContextException();
             revokedAt = at;
             result = ResultCode.SUCCESS;
           }

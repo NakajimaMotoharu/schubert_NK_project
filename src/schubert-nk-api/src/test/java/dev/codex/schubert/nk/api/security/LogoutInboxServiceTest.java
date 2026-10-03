@@ -160,10 +160,11 @@ final class LogoutInboxServiceTest {
             "update schubert.auth_sessions set expires_at='2026-09-08T01:00:00.123455Z'")) {
       seed();
       sql(mutation);
+      boolean expired = mutation.contains("expires_at");
       assertArrayEquals(
           golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
-      effects(1, 0, 0);
+      effects(1, expired ? 1 : 0, expired ? 1 : 0);
       assertEquals(
           1,
           count(
@@ -173,19 +174,19 @@ final class LogoutInboxServiceTest {
       assertArrayEquals(
           golden("0102", RAW, REQUEST, new UUID(0, 1001), STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
-      effects(1, 0, 0);
+      effects(1, expired ? 1 : 0, expired ? 1 : 0);
       UUID next = new UUID(0, 103);
       assertArrayEquals(
-          golden("0000", RAW, next, new UUID(0, 1002), STAMP),
+          golden(expired ? "0200" : "0000", RAW, next, new UUID(0, 1002), STAMP),
           call(service(NOW), request(RAW, next), NOW));
-      effects(2, 1, 1);
+      effects(2, 1, expired ? 2 : 1);
       sql("update schubert.app_users set status='DISABLED' where id=7");
       sql("update schubert.auth_sessions set expires_at='2026-09-08T00:00:01Z'");
       assertEquals(
           "0200",
           text(
               call(service(NOW.plusSeconds(60)), request(RAW, next), NOW.plusSeconds(60)), 208, 4));
-      effects(2, 1, 1);
+      effects(2, 1, expired ? 2 : 1);
     }
   }
 
@@ -216,6 +217,229 @@ final class LogoutInboxServiceTest {
         1,
         count(
             "select count(*) from schubert.app_logs where remote_address is null and actor_user_id=7"));
+  }
+
+  @Test
+  void rerun001ExpiryFaultsRollbackFenceAuditAndInboxTogether() throws Exception {
+    for (String point :
+        List.of(
+            "update schubert.auth_sessions",
+            "insert into schubert.app_logs",
+            "update schubert.request_inbox",
+            "close:select s.id",
+            "close:update schubert.auth_sessions",
+            "close:insert into schubert.app_logs",
+            "close:update schubert.request_inbox")) {
+      seed();
+      sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+      try (var connection = database.transaction()) {
+        assertInfrastructure(
+            () -> service(NOW).execute(fault(connection, point), request(RAW, REQUEST), NOW));
+        assertFalse(connection.isClosed());
+        connection.rollback();
+      }
+      effects(0, 0, 0);
+      assertEquals(
+          1,
+          count(
+              "select count(*) from schubert.auth_sessions where id='"
+                  + SESSION
+                  + "' and not revoked and revoked_at is null and revoke_reason is null"));
+    }
+  }
+
+  @Test
+  void rerun001PriorTouchIsCurrentAndLateVerifierCannotUndoFence() throws Exception {
+    sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+    var verifier = new AuthenticationContextVerifier(hashes);
+    try (var connection = database.transaction()) {
+      assertEquals(7, verifier.verify(connection, RAW, NOW.minusSeconds(1)).userId());
+      connection.commit();
+    }
+    assertArrayEquals(
+        golden("0000", RAW, REQUEST, new UUID(0, 1000), STAMP),
+        call(service(NOW), request(RAW, REQUEST), NOW));
+    effects(1, 1, 1);
+    assertEquals(
+        1,
+        count(
+            "select count(*) from schubert.auth_sessions where id='"
+                + SESSION
+                + "' and revoke_reason='LOGOUT' and expires_at='2026-09-08T08:59:59.123456Z'"));
+
+    seed();
+    sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+    var waiting = new CountDownLatch(1);
+    try (var connection = database.transaction();
+        var pool = Executors.newSingleThreadExecutor()) {
+      assertArrayEquals(
+          golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          service(NOW).execute(connection, request(RAW, REQUEST), NOW));
+      var delayed =
+          pool.submit(
+              () -> {
+                try (var other = database.transaction()) {
+                  Connection wrapped =
+                      (Connection)
+                          Proxy.newProxyInstance(
+                              getClass().getClassLoader(),
+                              new Class<?>[] {Connection.class},
+                              (p, m, a) -> {
+                                if (m.getName().equals("prepareStatement")
+                                    && a[0] instanceof String query
+                                    && query.startsWith("select u.id")) waiting.countDown();
+                                return invoke(other, m, a);
+                              });
+                  assertThrows(
+                      AuthenticationContextException.class,
+                      () -> verifier.verify(wrapped, RAW, NOW.minusSeconds(1)));
+                  other.rollback();
+                  return true;
+                }
+              });
+      try {
+        assertTrue(waiting.await(10, TimeUnit.SECONDS));
+        assertFalse(delayed.isDone());
+      } finally {
+        connection.commit();
+      }
+      assertTrue(delayed.get(10, TimeUnit.SECONDS));
+    }
+    effects(1, 1, 1);
+    assertEquals(
+        1,
+        count(
+            "select count(*) from schubert.auth_sessions where id='"
+                + SESSION
+                + "' and revoke_reason='EXPIRED' and expires_at='"
+                + NOW
+                + "' and last_accessed_at='2026-09-08T00:00:00Z'"));
+  }
+
+  @Test
+  void rerun001ExpiryBoundaryFencesAtomicallyAndPreservesErrorReplay() throws Exception {
+    for (int micros : new int[] {-1, 0, 1}) {
+      seed();
+      Instant expiry = NOW.plusNanos(micros * 1000L);
+      sql(
+          "update schubert.auth_sessions set expires_at='"
+              + expiry
+              + "' where id='"
+              + SESSION
+              + "'");
+      boolean expired = micros <= 0;
+      assertArrayEquals(
+          golden(expired ? "0102" : "0000", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          call(service(NOW), request(RAW, REQUEST), NOW));
+      effects(1, 1, 1);
+      assertEquals(
+          1,
+          count(
+              "select count(*) from schubert.app_logs where action='SESSION_REVOKED'"
+                  + " and details->>'reason'='"
+                  + (expired ? "EXPIRED" : "LOGOUT")
+                  + "' and details->>'resultCode'='"
+                  + (expired ? "0102" : "0000")
+                  + "'"));
+      assertEquals(
+          1,
+          count(
+              "select count(*) from schubert.auth_sessions where id='"
+                  + SESSION
+                  + "' and revoked and revoked_at='"
+                  + NOW
+                  + "' and revoke_reason='"
+                  + (expired ? "EXPIRED" : "LOGOUT")
+                  + "'"));
+      assertEquals(
+          1,
+          count(
+              "select count(*) from schubert.request_inbox where processing_state='"
+                  + (expired ? "ERROR" : "COMPLETED")
+                  + "'"));
+      assertArrayEquals(
+          golden(expired ? "0102" : "0200", RAW, REQUEST, new UUID(0, 1001), STAMP),
+          call(service(NOW), request(RAW, REQUEST), NOW));
+      effects(1, 1, 1);
+      UUID fresh = new UUID(0, 102);
+      assertArrayEquals(
+          golden("0200", RAW, fresh, new UUID(0, 1002), STAMP),
+          call(service(NOW), request(RAW, fresh), NOW));
+      effects(2, 1, 2);
+    }
+  }
+
+  @Test
+  void rerun001CurrentClockIsReadAfterSessionLock() throws Exception {
+    var now = new java.util.concurrent.atomic.AtomicReference<>(NOW);
+    var locks = new java.util.concurrent.atomic.AtomicInteger();
+    Clock clock =
+        new Clock() {
+          @Override
+          public ZoneId getZone() {
+            return ZoneOffset.UTC;
+          }
+
+          @Override
+          public Clock withZone(ZoneId zone) {
+            return Clock.fixed(now.get(), zone);
+          }
+
+          @Override
+          public Instant instant() {
+            return now.get();
+          }
+        };
+    var service =
+        new LogoutInboxService(
+            new JdbcInboxCoordinator(keys),
+            revocations,
+            responses,
+            hashes,
+            clock,
+            () -> new UUID(0, ids.getAndIncrement()));
+    sql(
+        "update schubert.auth_sessions set expires_at='2026-09-08T01:00:00.123457Z' where id='"
+            + SESSION
+            + "'");
+    try (var connection = database.transaction()) {
+      Connection wrapped =
+          (Connection)
+              Proxy.newProxyInstance(
+                  getClass().getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (p, m, a) -> {
+                    Object value = invoke(connection, m, a);
+                    if (m.getName().equals("prepareStatement")
+                        && a[0] instanceof String query
+                        && query.startsWith("select s.id,s.user_id,s.revoked")) {
+                      return Proxy.newProxyInstance(
+                          getClass().getClassLoader(),
+                          new Class<?>[] {PreparedStatement.class},
+                          (sp, sm, sa) -> {
+                            Object result = invoke(value, sm, sa);
+                            if (sm.getName().equals("executeQuery")) {
+                              locks.incrementAndGet();
+                              now.set(Instant.parse("2026-09-08T01:00:00.123458Z"));
+                            }
+                            return result;
+                          });
+                    }
+                    return value;
+                  });
+      assertArrayEquals(
+          golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          service.execute(wrapped, request(RAW, REQUEST), NOW));
+      connection.commit();
+    }
+    assertEquals(1, locks.get());
+    effects(1, 1, 1);
+    assertEquals(
+        1,
+        count(
+            "select count(*) from schubert.auth_sessions where id='"
+                + SESSION
+                + "' and revoked_at='2026-09-08T01:00:00.123458Z' and revoke_reason='EXPIRED'"));
   }
 
   @Test

@@ -1,0 +1,232 @@
+{
+  "id": "PG448-expiry-selected-v2",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "c560e5f8e7deb67af6c5c9feca37fc3962b3d91c",
+  "sourceDirty": "API revocation/Logout caller and two independent SQL/wire/fault test classes",
+  "sourceFilesSha256": "ae76eb7d9460870ccdc0b0839532f7acb672340b8049a34cae59c3541311c088",
+  "sourceDiffSha256": "23716b3dcc68bea48f8171f1b5ff668f6b9fdeb6b71172a9d1ace5eb0e11b272",
+  "branch": "dev-foundation",
+  "finishedAt": "2026-10-04T07:35:08+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg448_expiry_selected_v1.sh v2; six explicit modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report; eight named suites; failIfNoTests=true",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 29,
+      "suites": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 69,
+  "suites": 8,
+  "coverage": {
+    "LogoutInboxService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 298
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 67
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthenticationContextVerifier": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 277
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 25
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 61
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AuthSessionRevocationService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 460
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 106
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "testCases": [
+    {
+      "method": "rerun001ExpiryFaultsRollbackFenceAuditAndInboxTogether",
+      "junit": "junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml"
+    },
+    {
+      "method": "rerun001PriorTouchIsCurrentAndLateVerifierCannotUndoFence",
+      "junit": "junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml"
+    },
+    {
+      "method": "rerun001CurrentClockIsReadAfterSessionLock",
+      "junit": "junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml"
+    },
+    {
+      "method": "rerun001ExpiryBoundaryFencesAtomicallyAndPreservesErrorReplay",
+      "junit": "junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml"
+    }
+  ],
+  "testIds": [
+    "RERUN001-A..E",
+    "PT-AUT-008-R01..05",
+    "PT-AUT-LOGOUT-INBOX-001..007",
+    "PT-AUT-007"
+  ],
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "bugs": [
+    "BUG-618"
+  ],
+  "ykt": [
+    "YKT-437"
+  ],
+  "before": {
+    "id": "PG448-expiry-before-v1",
+    "tests": 2,
+    "failures": 2,
+    "exitCode": 1,
+    "logSha256": "dbda036d301df589d4721474e466c3e14cf42846b89ee2a268719e8fd4e3c133"
+  },
+  "expected": "Independent UI232/234 literal 280byte/SQL at expiry +/-1us; EXPIRED reason/0102 audit/ERROR atomic; immutable old-message0102/new-message0200; clock moves during lock; prior TOUCH extension and delayed verification rejected after current fence; all seven update/audit/Inbox/close faults rollback; current null boundaries",
+  "actual": "All independent wire/SQL/fault/lock/concurrency and legacy/ADMIN assertions passed; no provider exception data retained",
+  "logSha256": "cf4de11bc7ea2fb289374869c2136b9c84c81f9ba65f75f87020fb72488cddee",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg448-expiry-selected-v2-frozen",
+  "redaction": "JUnit properties/stdout/stderr/provider text omitted; no key/token/session/cookie/password/raw log/dump",
+  "limitations": [
+    "Same-source security full regression required",
+    "Web nullable pending/retry/revoke key/local destruction and native full business assembly pending",
+    "Formal run24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "f9dd597be5c210eb01798e5776653513cb8baae50c751cf1f7761f862138c188"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "91f8ae2e8797425514ad1c9460ab2ad16401a2ba18ac40b1bbae65836c174bcb"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "bc43d4d47c5781ccd2bd788ec785aa68b527fe3656d4c87e38e40438432e92cd"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "d6fb0da8cfea688239356bf1974e4f8f3380d6607fd0b3f27428c4366ed5425f"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "d9df01309983a5191928128561580c4ffd8354fd8541c3a8f56f3d1e105c4711"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "4efe7d11726b268efd1d1244d2f2b0799783ac7f2c8b59ec75e4d0829763b687"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "47f1c42c97e78cd4beec19ecdf13361c47baeae7ea319b150e6a2d169b57f78a"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/provisional/PG448-expiry-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "b1b38bf467fa1ef6c74d1bc130e3ab3cf9e1830ea6e04f9ba57f096ee9624386"
+    }
+  ]
+}

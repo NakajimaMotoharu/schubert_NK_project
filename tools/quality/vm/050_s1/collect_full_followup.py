@@ -556,5 +556,25 @@ if int(identifier[2:5]) >= 447:
         'ordinary Morning/API/full Web/Caddy/DONE/intent/native CHR-A01/L01 and native coverage100/formal acceptance pending',
         'formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; failed/partial/other-source results not reused',
     ]
+if int(identifier[2:5]) >= 448:
+    names = {'AuthSessionRevocationService', 'LogoutInboxService', 'AuthenticationContextVerifier'}
+    fence_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-api/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').rsplit('/', 1)[-1] in names}
+    assert set(fence_coverage) == names
+    assert all(k['missed'] == 0 for value in fence_coverage.values() for k in value.values())
+    manifest['logoutFenceCoverage'] = fence_coverage
+    manifest['bugs'].append('BUG-618')
+    manifest['ykt'].append('YKT-437')
+    manifest['ssc'].append('SSC-171')
+    manifest['testIds'].append('RERUN001-A..E')
+    manifest['trigger'] = 'PG-D358/QA050/SSC171: lock-current Logout Clock, atomic EXPIRED fence/audit/Inbox ERROR, immutable replay and TOUCH/delayed-verifier competition: security ownership full-six regression'
+    manifest['limitations'] = [
+        'API expired fence host regression only; QA050 nullable pending row/15-minute retry/revoke key retention/local destruction and full Web assembly remain pending',
+        'V026 native signed migration/Backup, ordinary Morning/API/full Web/Caddy/DONE/intent/native CHR-A01/L01 and native coverage100/formal acceptance pending',
+        'formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; failed/partial/other-source results not reused',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

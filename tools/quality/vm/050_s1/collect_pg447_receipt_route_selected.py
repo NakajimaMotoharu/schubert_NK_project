@@ -73,7 +73,7 @@ manifest = {
     'sourceDiffSha256': sha(prefix.with_suffix('.source-diff')), 'branch': 'dev-foundation',
     'finishedAt': prefix.with_suffix('.completed').read_text().strip(),
     'environment': 'Linux7.0.0-38/JDK25.0.4/Maven3.9.12/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0',
-    'command': 'bash WorkPG379/pg447_http_selected_v4.sh; six explicit modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report; selected 16 named suites, failIfNoTests=true',
+    'command': 'bash WorkPG379/pg447_http_selected_v5.sh; six explicit modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report; selected 16 named suites, failIfNoTests=true',
     'exitCode': 0, 'modules': modules, 'tests': 138, 'suites': 16,
     'coverage': coverage, 'staticAnalysis': {'modules': 6, 'findings': 0}, 'javascript': proof,
     'testCases': cases, 'qa': ['QA-048', 'QA-049'], 'ssc': ['SSC-175'],
@@ -95,4 +95,3 @@ manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p 
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'id': manifest['id'], 'tests': 138, 'coverageClasses': len(coverage),
                   'manifestSha256': sha(out / 'manifest.json')}))
-
