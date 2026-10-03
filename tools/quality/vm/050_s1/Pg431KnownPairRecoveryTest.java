@@ -24,14 +24,25 @@ public final class Pg431KnownPairRecoveryTest {
     var good=receipts();expect(true,good);expect(false,null);expect(false,List.of());expect(false,good.subList(0,2));
     for(int index=0;index<3;index++) {
       var base=good.get(index);
+      var missing=new ArrayList<>(good);missing.set(index,null);expect(false,missing);
+      for(var absent:List.of(new Pg410KnownAuthRecovery.Receipt(null,base.values(),base.snapshot()),
+          new Pg410KnownAuthRecovery.Receipt(base.raw(),null,base.snapshot()),
+          new Pg410KnownAuthRecovery.Receipt(base.raw(),base.values(),null))) {
+        var changed=new ArrayList<>(good);changed.set(index,absent);expect(false,changed);
+      }
       for(String field:base.values().keySet()) {
         var values=new HashMap<>(base.values());values.remove(field);var changed=new ArrayList<>(good);
         changed.set(index,new Pg410KnownAuthRecovery.Receipt(base.raw(),values,base.snapshot()));expect(false,changed);
       }
-      for(String field:List.of("Id","InvocationID","ExecMainCode","ExecMainStatus","Result","LoadState","MainPID","ControlPID","Job")) {
-        var values=new HashMap<>(base.values());values.put(field,"unknown");var changed=new ArrayList<>(good);
+      for(String field:base.values().keySet())for(String value:Arrays.asList(null,"unknown")) {
+        var values=new HashMap<>(base.values());values.put(field,value);var changed=new ArrayList<>(good);
         changed.set(index,new Pg410KnownAuthRecovery.Receipt(base.raw(),values,base.snapshot()));expect(false,changed);
       }
+      for(byte[] raw:List.of(new byte[0],"invalid\n".getBytes(StandardCharsets.US_ASCII),good.get((index+1)%3).raw())) {
+        var changed=new ArrayList<>(good);changed.set(index,new Pg410KnownAuthRecovery.Receipt(raw,base.values(),base.snapshot()));expect(false,changed);
+      }
+      var otherSnapshot=new ArrayList<>(good);
+      otherSnapshot.set(index,new Pg410KnownAuthRecovery.Receipt(base.raw(),base.values(),good.get((index+1)%3).snapshot()));expect(false,otherSnapshot);
     }
     if(args.length==1) {
       byte[] actual=Files.readAllBytes(Path.of(args[0]));

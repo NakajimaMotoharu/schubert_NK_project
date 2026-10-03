@@ -1,0 +1,157 @@
+{
+  "id": "PG445-recovery-tools-v2",
+  "formal": false,
+  "nativeAccepted": false,
+  "sourceCommit": "059ca87c4fe153dd18b79cb3f9dac1037c63f4ac",
+  "sourceDirty": true,
+  "branch": "dev-foundation",
+  "timeUtc": "2026-10-03T17:46:32.744608+00:00",
+  "environment": "Linux/JDK25.0.4; javac -Xlint:all -Werror; fixed PG443 source2b418 runtime classes",
+  "runtimeProductionSource": "2b41817ca98f4cbd40171ffa459743e5e943fc45",
+  "command": "WorkPG379/pg445_tools_v2.sh",
+  "exitCode": 0,
+  "compileWarnings": 0,
+  "operatorAssertions": 675,
+  "productionTestCount": 0,
+  "tests": [
+    {
+      "testId": "PG444-COLD-001",
+      "exitCode": 0,
+      "assertions": 414,
+      "actual": "PG428_COLD_BOOT_TOOL independentAssertions=414 success=true productionTestCount=0",
+      "logSha256": "e2afa7505ba112bea53fe382021a8a0e79c6799aee39d030646967c1f2d2f28b"
+    },
+    {
+      "testId": "PG444-TRANSFER-001",
+      "exitCode": 0,
+      "assertions": 21,
+      "actual": "PG444_TRANSFER_PRESERVATION success=true independentAssertions=21 productionTestCount=0",
+      "logSha256": "3d35199629c3054e0ca2bae1a14bdd55339b48d759e003a4c760c42b0f770227"
+    },
+    {
+      "testId": "PG444-OWNERSHIP-001",
+      "exitCode": 0,
+      "assertions": 25,
+      "actual": "PG444_COLD_OWNERSHIP success=true independentAssertions=25 productionTestCount=0",
+      "logSha256": "a65710311ff2f3c38b2149a46bf9cecd4e8921f3207505751d6de9978d47fa51"
+    },
+    {
+      "testId": "PG445-DIAG001..016",
+      "exitCode": 0,
+      "assertions": 16,
+      "actual": "PG445_RECOVERY_DIAGNOSTICS success=true independentAssertions=16 productionTestCount=0 secretFindings=0",
+      "logSha256": "827cffb877769a5068b231deabbbf5eecdb2545913d001e4b91ac2f880529c9a"
+    },
+    {
+      "testId": "ROOTPAIR008-TOOL",
+      "exitCode": 0,
+      "assertions": 199,
+      "actual": "PG431_PAIR_TOOL success=true independentAssertions=199 productionTestCount=0 nativeAuthorityClaimed=false",
+      "logSha256": "46e851edcd7365fcc1fa55da5de751c371339d89b00d4b59ed4b8ffc2f6f544d"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "tools/quality/vm/050_s1/Pg428ColdBootPreparation.java",
+      "sha256": "a81f007570cb539d5791ad482b905d26494f783befac0dabbc42fa04a0d25e6a"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg428ColdBootPreparationTest.java",
+      "sha256": "6a7e0892f68ca6e3df4a3831a7d7e45f1dd7cd9270702c04b9c2bd62a086bdea"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg431KnownPairRecovery.java",
+      "sha256": "af285afa6a055ed0b614d4bcf1c5fe437c7ceca69710ff794eafb293100f0baa"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg431KnownPairRecoveryTest.java",
+      "sha256": "0e814301101c911b481aef21f7172e95f9b565c0d2e83405797ccb6e9e1b4cca"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg444TransferPreservationTest.java",
+      "sha256": "ef314e9d8f8a06eeb3f636d0025f8e5b9c94ef01378415d2f9b385585831924a"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg444ColdOwnershipTest.java",
+      "sha256": "377de4cb15d3293faa9f674436e9c674bb80360677441e545424a4b2d25416be"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg445RecoveryDiagnosticsTest.java",
+      "sha256": "bf20b50acb7f9b784d89e6f6d018b72811ee8eba1a84a723f117517e8861985f"
+    }
+  ],
+  "classes": [
+    {
+      "name": "Pg428ColdBootPreparation$1Node.class",
+      "sha256": "ae23e7d52e14541edc4ed3d3f2c6ac192642690cb9bd466273cfce379c68de0e"
+    },
+    {
+      "name": "Pg428ColdBootPreparation.class",
+      "sha256": "bc076f9ae248ef9cb4d1c7a42e48ee3efc1db6ddc2401314082c901eca3d97fc"
+    },
+    {
+      "name": "Pg428ColdBootPreparationTest.class",
+      "sha256": "11e9e71989c269c8c508a159d92ff1b3f38c8b6b62cc6778043074f7c11049a4"
+    },
+    {
+      "name": "Pg431KnownPairRecovery.class",
+      "sha256": "0b8c70e60dec95e8f72fd0aea8c0d8e6848dc9724f589b519604702a70650503"
+    },
+    {
+      "name": "Pg431KnownPairRecoveryTest.class",
+      "sha256": "30ae0494a1a715efa93df4c7943033f2c1fec93638f3b573043210f6bc233b83"
+    },
+    {
+      "name": "Pg444ColdOwnershipTest$Work.class",
+      "sha256": "75619a6c55d41f376fbeaa3ed10407dd8f88eee464a64bc341dbaf230ca53b41"
+    },
+    {
+      "name": "Pg444ColdOwnershipTest.class",
+      "sha256": "616e7e6438de8505c9f39daee322b713603bb4ef4d4477d6ee49d0053ae61d19"
+    },
+    {
+      "name": "Pg444TransferPreservationTest$Faults.class",
+      "sha256": "141ef3c6d93b764c70be9a9e9362466bbe558c1ef8c3134977c4c3d8065319d0"
+    },
+    {
+      "name": "Pg444TransferPreservationTest$Work.class",
+      "sha256": "0ec378bc13d0ad52ac9c3195a602e84f7c735837cb81daae8310320045347cfd"
+    },
+    {
+      "name": "Pg444TransferPreservationTest.class",
+      "sha256": "eda7792171c43e3759816d600a605aa92d81bb1f50c66b6013716f11bbdafdfb"
+    },
+    {
+      "name": "Pg445RecoveryDiagnosticsTest.class",
+      "sha256": "37392e68136e6de5838076770a9eed031c4645fc43531d4211f67e57c23443db"
+    }
+  ],
+  "before": {
+    "bug": "BUG-599",
+    "exitCode": 1,
+    "sha256": "1ba7e26dffa6cf9d8914990bf6e248eb0b37f0baed34dcfed38c8b7ed930e34b",
+    "npeCaughtAsNormal": false
+  },
+  "independentOracle": "literal fixed redacted topology, primary/cause/secondary exact order/type, literal no-message/unknown/16node bounds, all18/receipt null/raw/snapshot divergence plus public Transfer/SHA/inode fixtures",
+  "bugs": [
+    "BUG-544",
+    "BUG-599"
+  ],
+  "ykt": [
+    "YKT-388",
+    "YKT-423"
+  ],
+  "ssc": [
+    "SSC-174"
+  ],
+  "qa": [
+    "QA-047"
+  ],
+  "limits": [
+    "new diagnostic source has not been run as native recovery",
+    "old boot intents not reconstructed/retired and old close remains UNKNOWN",
+    "previous PG444 native applies only fcc cold source; no success reuse to this modified tool",
+    "Production source unchanged; formal1964PT53scope/wholePGPT/ITST not accepted"
+  ],
+  "redaction": "no messages/raw epoch/credential/private watch/DB/backup; public stdout and source/class hashes only"
+}

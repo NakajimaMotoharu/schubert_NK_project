@@ -40,9 +40,18 @@ public final class Pg431KnownPairRecovery {
   }
   static boolean known(List<Pg410KnownAuthRecovery.Receipt> receipts) {
     if(receipts==null || receipts.size()!=3)return false;
+    var targets=List.of(InspectorUnitSnapshot.Target.MORNING,InspectorUnitSnapshot.Target.API,InspectorUnitSnapshot.Target.WEB);
     String[] names={"morning-controller","api","web"}, invocations={MORNING,API,WEB}, exits={"30","143","50"};
     for(int i=0;i<3;i++) {
-      var v=receipts.get(i).values();
+      var receipt=receipts.get(i);
+      if(receipt==null || receipt.raw()==null || receipt.values()==null || receipt.snapshot()==null
+          || receipt.raw().length==0 || receipt.raw().length>2048)return false;
+      var v=receipt.values();
+      if(!v.keySet().equals(Pg410KnownAuthRecovery.FIELDS) || v.values().stream().anyMatch(Objects::isNull))return false;
+      try {
+        var parsed=Pg410KnownAuthRecovery.parsed(receipt.raw(),targets.get(i));
+        if(!v.equals(parsed.values()) || !receipt.snapshot().matches(parsed.snapshot()))return false;
+      }catch(IllegalArgumentException | StopGateException malformed){return false;}
       if(!v.keySet().equals(Pg410KnownAuthRecovery.FIELDS) || !v.get("Id").equals("schubert-nk-"+names[i]+".service")
           || !v.get("InvocationID").equals(invocations[i]) || !v.get("ExecMainCode").equals("1")
           || !v.get("ExecMainStatus").equals(exits[i]) || !v.get("Result").equals("exit-code")
@@ -147,9 +156,11 @@ public final class Pg431KnownPairRecovery {
     if(!apiRoot || !apiOrdinary || !webRoot || !webOrdinary || !ready)throw new IllegalStateException("genuine complete pair observation required");
   }
   public static void main(String[] args) throws Exception {
-    Thread.currentThread().setUncaughtExceptionHandler((t,e)->System.err.println("PG431_PAIR_REFUSED diagnosticsRedacted=true type="+e.getClass().getName()));
+    Thread.currentThread().setUncaughtExceptionHandler((t,e)->System.err.print(Pg428ColdBootPreparation.fixedFailure("PG431",e)));
     if(args.length!=1 || !args[0].matches("[0-9a-f]{40}") || !Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01"))throw new IllegalStateException("isolated fixed candidate only");
-    MaintenanceFileLock.create().tryExclusive(()->Pg387TrustedDeployment.checked(()-> {
+    Pg428ColdBootPreparation.stage="M_ADMISSION";
+    MaintenanceFileLock.create().tryExclusive(()->Pg428ColdBootPreparation.checked(()-> {
+      Pg428ColdBootPreparation.stage="PAIR_INPUT";
       byte[] full=pinned("full18.properties",RECEIPT_SHA), captured=pinned("watch.jsonl",WATCH_SHA);watch(captured);
       var blocks=new String(full,StandardCharsets.US_ASCII).stripTrailing().split("\n\n");if(blocks.length!=3)throw new IllegalStateException("full actual receipts required");
       var targets=List.of(InspectorUnitSnapshot.Target.MORNING,InspectorUnitSnapshot.Target.API,InspectorUnitSnapshot.Target.WEB);
@@ -167,10 +178,13 @@ public final class Pg431KnownPairRecovery {
       if(!known(capturedPair))throw new IllegalStateException("exact pre-stop pair required");
       configure("PG430",OLD_SOURCE);Pg387TrustedDeployment.stopAll();
       try {
-      return StartupAdmissionFile.create().tryExclusive(fd->Pg387TrustedDeployment.checked(()-> {
+      Pg428ColdBootPreparation.stage="A_ADMISSION";
+      return StartupAdmissionFile.create().tryExclusive(fd->Pg428ColdBootPreparation.checked(()-> {
+        Pg428ColdBootPreparation.stage="PAIR_OBSERVE";
         RootFailedStartRecovery.PairEvidence pair;
         try(var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)){pair=RootFailedStartRecovery.observePair(root,LinuxInodeSecurity.create());}
         if(!known(pair))throw new IllegalStateException("exact pair required");
+        Pg428ColdBootPreparation.stage="DB_ADVISORY";
         try(var db=Pg407FailedRootRecovery.openDatabase();var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)) {
           db.setAutoCommit(false);
           try(var s=db.createStatement();var rows=s.executeQuery("select pg_catalog.pg_try_advisory_lock(71419602)")) {
@@ -178,31 +192,38 @@ public final class Pg431KnownPairRecovery {
           }
           var rows=Pg407FailedRootRecovery.databaseRows(db);if(rows.size()!=251)throw new IllegalStateException("all251 required");
           byte[] dbRaw=Pg425KnownApiRecovery.command(Pg425KnownApiRecovery.READBACK_SQL.getBytes(StandardCharsets.US_ASCII),"/usr/bin/sudo","-n","-u","postgres","/usr/bin/psql","-X","-v","ON_ERROR_STOP=1","-d","schubert_nk","-f","-");save("all14-db-before.log",dbRaw);
-          var backup=Pg407FailedRootRecovery.backupSnapshot();save("backup-before.log",backup.toString().getBytes(StandardCharsets.UTF_8));
+          var backup=Pg428ColdBootPreparation.backupSnapshot();save("backup-before.log",backup.toString().getBytes(StandardCharsets.UTF_8));
           var bytes=startup();for(var item:bytes.entrySet())save(item.getKey(),item.getValue());
           // BUG544/SSC174: preserve valid normal nonempty Transfer, not the old diagnostic empty fixture.
           var fixture=Pg428ColdBootPreparation.fixtureSnapshot();save("fixture-before.log",fixture.getBytes(StandardCharsets.UTF_8));
+          Pg428ColdBootPreparation.stage="PAIR_PHYSICAL";
           physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());
           // BUG543/YKT387: full host BOM requires an immutable candidate, not just file modes.
           // Freeze only here, inside the same M/A and authenticated complete terminal set.
           // The rejected-preflight PG431/source329 candidate stays unchanged and unactivated.
           configure("PG432",args[0]);Pg387TrustedDeployment.freezeCandidate();configure("PG430",OLD_SOURCE);
+          Pg428ColdBootPreparation.stage="PAIR_SIGNED";
           signed(args[0]);Pg387TrustedDeployment.sync(SAVED);
-          RootFailedStartRecovery.retirePair(root,LinuxInodeSecurity.create(),pair,expected->Pg387TrustedDeployment.checked(()-> {
+          Pg428ColdBootPreparation.stage="PAIR_RETIRE";
+          RootFailedStartRecovery.retirePair(root,LinuxInodeSecurity.create(),pair,expected->Pg428ColdBootPreparation.checked(()-> {
             if(!pair.equals(expected))throw new IllegalStateException("same borrowed pair required");
             physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);
-            if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot())
+            if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg428ColdBootPreparation.backupSnapshot())
                 || !fixture.equals(Pg428ColdBootPreparation.fixtureSnapshot()))throw new IllegalStateException("preservation drift");
             for(var item:bytes.entrySet())if(!item.getKey().endsWith(".start.intent") && !item.getKey().equals("permit-start.intent")
                 && !Arrays.equals(item.getValue(),Pg410KnownAuthRecovery.material(STARTUP.resolve(item.getKey()),1024)))throw new IllegalStateException("old artifact changed");
             return Boolean.TRUE;
           }));
           physical(receipts,pair);Pg410KnownAuthRecovery.original(db,pair.api());signed(args[0]);
-          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot())
+          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !backup.equals(Pg428ColdBootPreparation.backupSnapshot())
               || !fixture.equals(Pg428ColdBootPreparation.fixtureSnapshot()) || !Arrays.equals(dbRaw,Pg425KnownApiRecovery.command(Pg425KnownApiRecovery.READBACK_SQL.getBytes(StandardCharsets.US_ASCII),"/usr/bin/sudo","-n","-u","postgres","/usr/bin/psql","-X","-v","ON_ERROR_STOP=1","-d","schubert_nk","-f","-")))throw new IllegalStateException("post preservation drift");db.rollback();
         } catch(Exception | Error failure) {
+          // Preserve the original stage/type/secondary shape before quarantine can replace it.
+          System.err.print(Pg428ColdBootPreparation.fixedFailure("PG431",failure));
+          Pg428ColdBootPreparation.stage="PAIR_QUARANTINE";
           try(var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)){RootFailedStartRecovery.quarantinePair(root,LinuxInodeSecurity.create(),pair);}
           catch(Exception | Error unknown){failure.addSuppressed(unknown);}
+          System.err.print(Pg428ColdBootPreparation.fixedFailure("PG431",failure));
           // Do not unwind the enclosing admission/M on uncertain retirement or owned close.
           System.err.println("PG431_PAIR_UNKNOWN M_A_RETAINED=true diagnosticsRedacted=true");
           for(;;)java.util.concurrent.locks.LockSupport.parkNanos(1000000000L);
@@ -210,17 +231,26 @@ public final class Pg431KnownPairRecovery {
         System.out.println("PG431_PAIR_RECOVERED fixedNormalGeneration=true typedThreeIntentsRetired=true all251AndBackupUnchanged=true currentInvalidUnchanged=true historicalCloseInferred=false newPermitIssued=false");return Boolean.TRUE;
       })).orElseThrow();
       } catch(Exception | Error admissionUnknown) {
+        System.err.print(Pg428ColdBootPreparation.fixedFailure("PG431",admissionUnknown));
+        Pg428ColdBootPreparation.stage="PAIR_ADMISSION_QUARANTINE";
         // A may have closed or become uncertain after the callback. M still excludes a new
         // parent. Reauthenticate the fixed A inode before quarantine, then retain both locks.
         System.err.println("PG431_PAIR_ADMISSION_UNKNOWN M_RETAINED=true diagnosticsRedacted=true");
+        String lastDiagnostic=null;int diagnosticChanges=0;
         for(;;) {
           try {
-            StartupAdmissionFile.create().tryExclusive(fd->Pg387TrustedDeployment.checked(()-> {
+            StartupAdmissionFile.create().tryExclusive(fd->Pg428ColdBootPreparation.checked(()-> {
               try(var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),STARTUP)){RootFailedStartRecovery.quarantinePair(root,LinuxInodeSecurity.create(),capturedPair);}
               System.err.println("PG431_PAIR_UNKNOWN M_A_RETAINED=true diagnosticsRedacted=true");
               for(;;)java.util.concurrent.locks.LockSupport.parkNanos(1000000000L);
             }));
-          } catch(Exception | Error stillUnknown) { /* No return while M owns this uncertainty. */ }
+          } catch(Exception | Error stillUnknown) {
+            String diagnostic=Pg428ColdBootPreparation.fixedFailure("PG431",stillUnknown);
+            if(diagnosticChanges<16 && !diagnostic.equals(lastDiagnostic)) {
+              System.err.print(diagnostic);lastDiagnostic=diagnostic;diagnosticChanges++;
+            }
+            // No return while M owns this uncertainty. No lost cause/secret error message.
+          }
           java.util.concurrent.locks.LockSupport.parkNanos(1000000000L);
         }
       }

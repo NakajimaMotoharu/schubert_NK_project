@@ -23,6 +23,26 @@ public final class Pg428ColdBootPreparation {
   static String activeLabel="PG425", activeDigest="55353381ea39d2ddda0c3a195dea05cffda1ad880974693a72095811cd122fd1";
   static int activeRows=232;
   static String stage="ENTRY";
+  static String fixedFailure(String tag,Throwable failure) {
+    if(tag==null || failure==null || !Set.of("PG428","PG431").contains(tag))throw new IllegalArgumentException("fixed failure contract");
+    var allowed=Set.of("ENTRY","M_ADMISSION","A_ADMISSION","DB_ADVISORY","PRESERVATION_READ","FIXED_ASSET_CONFIG",
+        "TRANSFER_TREE","BACKUP_TREE","SIGNED_BOM","NEW_NAMESPACE","INVALID_ONLY","OWNED_UNWIND","OWNED_CLOSED",
+        "PAIR_INPUT","PAIR_OBSERVE","PAIR_PHYSICAL","PAIR_SIGNED","PAIR_RETIRE","PAIR_QUARANTINE","PAIR_ADMISSION_QUARANTINE");
+    String fixedStage=stage!=null && allowed.contains(stage)?stage:"UNKNOWN_STAGE";
+    var result=new StringBuilder(tag+"_FIXED_FAILURE stage="+fixedStage+" oldOwnerClose=UNKNOWN currentOwnerClose=UNKNOWN diagnosticsRedacted=true\n");
+    record Node(Throwable value,String edge){}
+    var nodes=new ArrayDeque<Node>();nodes.add(new Node(failure,"PRIMARY"));
+    var seen=Collections.newSetFromMap(new IdentityHashMap<Throwable,Boolean>());
+    while(!nodes.isEmpty() && seen.size()<16) {
+      var node=nodes.remove();var value=node.value();if(!seen.add(value))continue;
+      result.append(tag).append("_FAILURE_NODE ordinal=").append(seen.size()-1).append(" edge=").append(node.edge())
+          .append(" type=").append(value.getClass().getName()).append(" knownIo=").append(value instanceof java.io.IOException)
+          .append(" secondaryCount=").append(value.getSuppressed().length).append('\n');
+      if(value.getCause()!=null && nodes.size()<32)nodes.add(new Node(value.getCause(),"CAUSE"));
+      for(var secondary:value.getSuppressed())if(nodes.size()<32)nodes.add(new Node(secondary,"SECONDARY"));
+    }
+    return result.toString();
+  }
   static <T> T checked(Pg387TrustedDeployment.Checked<T> work) throws java.io.IOException {
     try {return work.execute();}
     catch(java.io.IOException known){throw known;}
@@ -253,11 +273,8 @@ public final class Pg428ColdBootPreparation {
   }
   public static void main(String[] args) throws Exception {
     Thread.currentThread().setUncaughtExceptionHandler((t,e)-> {
-      System.err.println("PG428_COLD_BOOT_REFUSED stage="+stage+" type="+e.getClass().getName()+" diagnosticsRedacted=true oldOwnerClose=UNKNOWN");
-      // Type/shape only: do not print exception messages, DB results or epoch bytes.
-      var seen=Collections.newSetFromMap(new IdentityHashMap<Throwable,Boolean>());
-      for(Throwable cause=e;cause!=null && seen.size()<16 && seen.add(cause);cause=cause.getCause())
-        System.err.println("PG428_CAUSE type="+cause.getClass().getName()+" suppressedCount="+cause.getSuppressed().length);
+      // Fixed stage/exception shape only; no messages, DB results, epoch or private paths.
+      System.err.print(fixedFailure("PG428",e));
       for(var f:e.getStackTrace())if(f.getClassName().equals("Pg428ColdBootPreparation"))System.err.println("PG428 FRAME "+f.getMethodName()+":"+f.getLineNumber());
     });
     profile(args);
