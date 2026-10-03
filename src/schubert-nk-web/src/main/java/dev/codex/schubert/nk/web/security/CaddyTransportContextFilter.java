@@ -44,10 +44,7 @@ public final class CaddyTransportContextFilter implements Filter {
         || !(response instanceof HttpServletResponse result))
       throw new ServletException("HTTP transport is required");
     var existing = WebRequestContext.existing(http);
-    UUID requestId =
-        existing.isPresent()
-            ? existing.orElseThrow().requestId()
-            : Objects.requireNonNull(ids.get(), "requestId");
+    UUID requestId = WebRequestContext.identify(http, ids);
     LoginClientAddress address;
     try {
       address = addresses.resolve(http);

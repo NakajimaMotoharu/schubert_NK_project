@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -32,6 +33,7 @@ public final class ClosedServletSecurityFilter implements Filter {
       throw new ServletException("HTTP security boundary required");
     var principal =
         ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());
+    WebRequestTrace.captureActor(http, principal);
     chain.doFilter(new ClosedServletRequest(http, principal), response);
   }
 

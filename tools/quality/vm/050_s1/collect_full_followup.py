@@ -435,5 +435,64 @@ if int(identifier[2:5]) >= 441:
     assert all(k['missed'] == 0 for value in mutation_coverage.values() for k in value.values())
     manifest['userMutationInputCoverage'] = mutation_coverage
     manifest['limitations'].append('User mutation forms only; API self/last-admin/version/revocation remain authoritative; QA047/048/049/050, POST/token/Logout/native full Web ready remain pending')
+# PG442 REQUEST proof: this block is also reused by the checked selected-run profile.
+if int(identifier[2:5]) >= 442:
+    names = {'WebRequestTrace', 'WebRequestTrace$Scope', 'WebRequestLogProducer',
+             'HttpRequestLoggingValve', 'WebRequestRouteInterceptor', 'RequestLogMvcConfiguration'}
+    request_coverage = {c.get('name').split('/')[-1]: {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class') if c.get('name').split('/')[-1] in names}
+    assert set(request_coverage) == names
+    assert all(k['missed'] == 0 for value in request_coverage.values() for k in value.values())
+    manifest['requestTerminalScopeCoverage'] = request_coverage
+    proofdir = root / 'src/schubert-nk-web/target/request-log-proof'
+    proofnames = {'REQ010-wire.expected.bin', 'REQ010-wire.actual.bin', 'REQ010-json.expected.json',
+                  'REQ010-json.actual.json', 'REQ010-input.json'}
+    assert {p.name for p in proofdir.iterdir()} == proofnames
+    fixture = json.loads((proofdir / 'REQ010-input.json').read_text())
+    assert fixture == {'testId': 'PT-REQ-LOG010', 'clock': '2026-10-03T01:00:00.123987Z',
+        'requestUuid': '00000000-0000-0000-0000-000000000001',
+        'eventUuid': '00000000-0000-0001-0000-000000000001', 'route': '/login', 'method': 'GET',
+        'status': 200, 'elapsedNs': 12999999, 'responseBytes': 3, 'verifiedIp': '203.0.113.7', 'actor': None}
+    expected_json = {'timestamp': '2026-10-03T01:00:00.123Z', 'service': 'WEB', 'appVersion': 'pt-1',
+        'configVersion': 'cfg-1', 'level': 'INFO', 'category': 'REQUEST', 'action': 'HTTP_REQUEST_COMPLETED',
+        'outcome': 'SUCCESS', 'messageId': fixture['eventUuid'], 'correlationId': fixture['eventUuid'],
+        'requestId': fixture['requestUuid'], 'message': 'HTTP request completed', 'httpMethod': 'GET',
+        'path': '/login', 'status': 200, 'elapsedMs': 12, 'remoteAddress': '203.0.113.7',
+        'details': {'responseBytes': 3, 'projectionStatus': 'PENDING'}}
+    for kind in ('expected', 'actual'):
+        assert json.loads((proofdir / f'REQ010-json.{kind}.json').read_text()) == expected_json
+    # Independent UI235 offset/length vector; no Production codec is called here.
+    vector = bytearray(b' ' * 2336)
+    fields = {0: 'SCHBNK01001WLGEVT01001EI', 24: fixture['eventUuid'], 60: fixture['eventUuid'],
+        96: '20261003100000123', 177: '0256002080000000000000000002336',
+        256: '20261003100000123', 273: 'REQUEST', 289: 'INFO', 297: 'HTTP_REQUEST_COMPLETED',
+        361: 'HTTP request completed', 873: fixture['requestUuid'], 909: 'GET', 917: '/login',
+        1173: '200', 1176: '12', 1185: '203.0.113.7',
+        1299: '{"responseBytes":3,"projectionStatus":"PENDING"}'}
+    for offset, value in fields.items():
+        encoded = value.encode('ascii')
+        vector[offset:offset + len(encoded)] = encoded
+    for kind in ('expected', 'actual'):
+        assert (proofdir / f'REQ010-wire.{kind}.bin').read_bytes() == vector
+    destination = out / 'request-proof'
+    destination.mkdir()
+    for name in sorted(proofnames):
+        (destination / name).write_bytes((proofdir / name).read_bytes())
+    manifest['testIds'].extend(['PT-REQ-LOG001..016'])
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(573, 594))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(414, 419))
+    manifest['ssc'].extend(['SSC-172', 'SSC-173'])
+    manifest['trigger'] = 'PG-D354/355 REQUEST native terminal, safe identity/actor, encrypted outbox and existing retry/Artemis/API UK: same-source six-module regression'
+    manifest['requestProof'] = {'testId': 'PT-REQ-LOG010', 'wireBytes': 2336,
+        'oracle': 'UI235 independent byte offsets; literal JSON; independent JCE decrypt; DDL/SQL postconditions',
+        'fixture': 'public synthetic only; no key/ciphertext/session/token/runtime user'}
+    manifest['limitations'] = [
+        'REQUEST native Tomcat component and actual existing replay/Artemis/API path only; full ordinary Production Web assembly is not accepted',
+        'QA047/048/049 design approval now recorded; fixed owner recovery, receipt persistence and completed-token implementation/PT remain pending',
+        'QA050 Logout expiry/retention remains unapproved; its proposed DDL/API oracle is not implemented',
+        'same-source full production Morning/API/Web/Caddy/original DONE/normal intent retirement/native CHR-A01/L01/coverage100 remain pending',
+        'root clean verify/full formal scopes and PT-WEB-20260925-24/1964PT/53scope/48.3% remain unchanged']
+    manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(out.rglob('*')) if p.is_file()]
+# End PG442 REQUEST proof.
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

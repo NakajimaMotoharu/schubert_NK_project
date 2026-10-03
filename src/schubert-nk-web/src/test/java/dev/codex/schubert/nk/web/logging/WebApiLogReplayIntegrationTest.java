@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -30,6 +31,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 /** PT-IDEM-016: real Web retry → Artemis → API projection, not a full NK process/CHR capture. */
 final class WebApiLogReplayIntegrationTest {
@@ -37,6 +39,137 @@ final class WebApiLogReplayIntegrationTest {
   private static final UUID MESSAGE = UUID.fromString("00000000-0000-0000-0000-000000000012");
   private static final UUID CORRELATION = UUID.fromString("00000000-0000-0000-0000-000000000015");
   @TempDir Path root;
+
+  @Test
+  void req015NewProducerUsesExistingWorkerRetryBrokerAndApiUk() throws Exception {
+    var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("database")));
+    var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var fixture = new WebRequestLogProducerTest.Fixture(source(database::web))) {
+      var request = new MockHttpServletRequest();
+      var trace = WebRequestTraceTest.trace(request, 77);
+      trace.captureRoute("/login");
+      var contexts = new AtomicInteger();
+      fixture.producer.complete(
+          trace, 200, 12999999, 3, "GET", java.util.Optional.of("203.0.113.7"));
+      assertEquals(0, contexts.get());
+      assertEquals(0, appLogCount(database, trace.eventId()));
+      assertEquals(
+          0,
+          broker
+              .getActiveMQServer()
+              .locateQueue(org.apache.activemq.artemis.api.core.SimpleString.of("nk.web.log.q"))
+              .getMessageCount());
+      byte[] envelope;
+      try (var connection = database.web();
+          var statement = connection.createStatement();
+          var rows =
+              statement.executeQuery(
+                  "select payload_ciphertext from schubert_web_session.web_log_outbox")) {
+        assertTrue(rows.next());
+        envelope = rows.getBytes(1);
+        assertFalse(rows.next());
+      }
+      byte[] wire =
+          WebRequestLogProducerTest.independentDecrypt(trace.eventId(), trace.eventId(), envelope);
+      var time =
+          new AtomicReference<>(
+              WebRequestLogProducerTest.NOW.truncatedTo(java.time.temporal.ChronoUnit.MILLIS));
+      Clock clock = clock(time);
+      var received = new AtomicInteger();
+      var terminals = new AtomicInteger();
+      var processed = new CountDownLatch(2);
+      var ingest = new WebLogIngestService(source(database::api));
+      var dispatcher =
+          new WebLogDispatcher(
+              source(database::web),
+              new WebLogOutboxRepository(() -> 0),
+              new WebLogMessageSender(
+                  fixture.codec,
+                  () -> {
+                    if (contexts.getAndIncrement() == 0)
+                      throw new JMSRuntimeException("synthetic-first-send");
+                    return factory.createContext(JMSContext.SESSION_TRANSACTED);
+                  }),
+              clock);
+      try (var consumer =
+              WebLogConsumers.start(
+                  () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+                  new WebLogListener(
+                      event -> {
+                        ingest.process(event);
+                        received.incrementAndGet();
+                        processed.countDown();
+                      },
+                      clock),
+                  ignored -> terminals.incrementAndGet());
+          var worker =
+              WebLogReplayWorker.start(
+                  dispatcher, "request-log-worker", 100, Duration.ofMillis(10))) {
+        assertTrue(consumer.ready());
+        assertTrue(worker.running());
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+        while (contexts.get() == 0 && System.nanoTime() < deadline) Thread.sleep(5);
+        // First send has already opened its isolated JMS attempt; await persisted retry state.
+        boolean retry = false;
+        while (!retry && System.nanoTime() < deadline) {
+          try (var connection = database.web();
+              var statement = connection.createStatement();
+              var rows =
+                  statement.executeQuery(
+                      "select status,attempt_count from schubert_web_session.web_log_outbox")) {
+            assertTrue(rows.next());
+            retry = rows.getString(1).equals("ERROR") && rows.getInt(2) == 1;
+          }
+          if (!retry) Thread.sleep(5);
+        }
+        assertTrue(retry);
+        time.set(time.get().plusSeconds(1));
+        while (received.get() < 1 && System.nanoTime() < deadline) Thread.sleep(5);
+        assertEquals(1, received.get());
+        try (JMSContext context = factory.createContext(JMSContext.SESSION_TRANSACTED)) {
+          var duplicate = context.createBytesMessage();
+          duplicate.writeBytes(wire);
+          duplicate.setJMSCorrelationID(trace.eventId().toString());
+          duplicate.setStringProperty("NKMessageID", trace.eventId().toString());
+          duplicate.setStringProperty("NKLayoutID", "WLGEVT01");
+          duplicate.setStringProperty("NKProtocolVersion", "001");
+          context.createProducer().send(new ActiveMQQueue("nk.web.log::nk.web.log.q"), duplicate);
+          context.commit();
+        }
+        assertTrue(processed.await(5, TimeUnit.SECONDS));
+        assertEquals(2, received.get());
+        assertEquals(0, terminals.get());
+        assertFalse(consumer.terminalFailureObserved());
+        assertEquals(1, appLogCount(database, trace.eventId()));
+        try (var connection = database.api();
+            var statement = connection.createStatement();
+            var rows =
+                statement.executeQuery(
+                    "select service,category,action,http_method,request_uri,status_code,duration_ms,details,source_message_id,correlation_id from schubert.app_logs")) {
+          assertTrue(rows.next());
+          assertEquals("WEB", rows.getString(1));
+          assertEquals("REQUEST", rows.getString(2));
+          assertEquals("HTTP_REQUEST_COMPLETED", rows.getString(3));
+          assertEquals("GET", rows.getString(4));
+          assertEquals("/login", rows.getString(5));
+          assertEquals(200, rows.getInt(6));
+          assertEquals(12, rows.getLong(7));
+          assertEquals(
+              com.google.gson.JsonParser.parseString(
+                  "{\"responseBytes\":3,\"projectionStatus\":\"PENDING\"}"),
+              com.google.gson.JsonParser.parseString(rows.getString(8)));
+          assertEquals(trace.eventId(), rows.getObject(9, UUID.class));
+          assertEquals(trace.eventId(), rows.getObject(10, UUID.class));
+          assertFalse(rows.next());
+        }
+      }
+      assertEquals(2, contexts.get());
+    } finally {
+      broker.stop();
+      database.stop();
+    }
+  }
 
   @Test
   void idem016WebOutboxRetriesIntoApiProjectionExactlyOnce() throws Exception {
@@ -169,11 +302,15 @@ final class WebApiLogReplayIntegrationTest {
   }
 
   private static int appLogCount(WebLogDatabaseFixture db) throws SQLException {
+    return appLogCount(db, MESSAGE);
+  }
+
+  private static int appLogCount(WebLogDatabaseFixture db, UUID sourceMessage) throws SQLException {
     try (Connection connection = db.api();
         var statement =
             connection.prepareStatement(
                 "select count(*) from schubert.app_logs where source_message_id=?")) {
-      statement.setObject(1, MESSAGE);
+      statement.setObject(1, sourceMessage);
       try (var rows = statement.executeQuery()) {
         assertTrue(rows.next());
         return rows.getInt(1);

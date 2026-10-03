@@ -6,6 +6,7 @@ import com.google.gson.*;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
+import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
 import dev.codex.schubert.nk.web.security.*;
 import dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.Fixture;
@@ -70,6 +71,7 @@ class SessionLoginHandlerTest {
           h.log.events.clear();
           var p = principal("reader", role);
           var r = h.request(p, saved);
+          var trace = WebRequestTrace.ensure(r, UUID::randomUUID);
           r.addParameter("target", "//untrusted.invalid/");
           r.addHeader("Referer", "https://untrusted.invalid/");
           var s = new MockHttpServletResponse();
@@ -85,6 +87,9 @@ class SessionLoginHandlerTest {
           assertEquals("LOGIN_SUCCEEDED", event.get("action").getAsString());
           assertEquals("reader", event.get("actorUsername").getAsString());
           assertEquals(role, event.get("actorRole").getAsString());
+          assertEquals("reader", trace.actor().orElseThrow().getUsername());
+          assertEquals(role, trace.actor().orElseThrow().getRole());
+          assertEquals(WebRequestContext.require(r).requestId(), trace.requestId());
           assertEquals("203.0.113.1", event.get("remoteAddress").getAsString());
           assertEquals(
               WebRequestContext.require(r).requestId().toString(),

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.*;
@@ -39,7 +40,14 @@ class ClosedServletSecurityFilterTest {
         p = principal("reader", role);
         set(p);
       }
-      var request = capture(filter, hostile());
+      var nativeRequest = hostile();
+      var trace = WebRequestTrace.ensure(nativeRequest, UUID::randomUUID);
+      var request = capture(filter, nativeRequest);
+      assertEquals(p == null, trace.actor().isEmpty());
+      if (p != null) {
+        assertEquals("reader", trace.actor().orElseThrow().getUsername());
+        assertEquals(role, trace.actor().orElseThrow().getRole());
+      }
       assertSame(p, request.getUserPrincipal());
       assertEquals(p == null ? null : "reader", request.getRemoteUser());
       assertEquals(p == null ? null : "FORM", request.getAuthType());

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Event;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Route;
@@ -42,6 +43,7 @@ public final class MqLoginSuccessHandler implements AuthenticationSuccessHandler
         ClosedWebAuthentication.principal(authentication).orElseThrow(SessionStoreException::new);
     // This repository's save is a read-only equality guard, not a write or fixation.
     contexts.saveContext(new SecurityContextImpl(authentication), request, response);
+    WebRequestTrace.captureActor(request, Optional.of(principal));
     var saved = cache.getRequest(request, response);
     String location = saved == null ? "/" : saved.getRedirectUrl();
     audit.record(

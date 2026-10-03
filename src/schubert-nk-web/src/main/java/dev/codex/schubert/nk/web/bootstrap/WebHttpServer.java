@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
+import dev.codex.schubert.nk.web.config.RequestLogMvcConfiguration;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
+import dev.codex.schubert.nk.web.logging.HttpRequestLoggingValve;
+import dev.codex.schubert.nk.web.logging.WebRequestLogProducer;
 import jakarta.servlet.Filter;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -113,6 +116,14 @@ public final class WebHttpServer implements AutoCloseable {
               registeredDependencies.forEach(
                   (type, instance) -> factory.registerSingleton(type.getName(), instance)));
       mvc.register(WebMvcConfiguration.class);
+      // SSC172: this observer never creates/owns DB, JMS, key or authentication dependencies.
+      Object requestLog = registeredDependencies.get(WebRequestLogProducer.class);
+      if (requestLog != null) {
+        context
+            .getPipeline()
+            .addValve(new HttpRequestLoggingValve((WebRequestLogProducer) requestLog));
+        mvc.register(RequestLogMvcConfiguration.class);
+      }
       if (featureConfigurations.length > 0) mvc.register(featureConfigurations);
       var servlet = Tomcat.addServlet(context, "nk-mvc", new DispatcherServlet(mvc));
       servlet.setLoadOnStartup(1);
